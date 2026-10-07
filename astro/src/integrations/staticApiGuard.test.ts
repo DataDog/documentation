@@ -3,7 +3,9 @@ import {
   findUnprerenderedApiRoutes,
   findUncontainedPaths,
   countCategoryPages,
+  findApiRouteShadowers,
   toRouteLike,
+  type OrderedRouteLike,
 } from "./staticApiGuard";
 
 describe("findUnprerenderedApiRoutes", () => {
@@ -119,5 +121,90 @@ describe("countCategoryPages", () => {
 
   it("is zero when nothing matches", () => {
     expect(countCategoryPages(["dd_e2e/index.html"])).toBe(0);
+  });
+});
+
+describe("findApiRouteShadowers", () => {
+  // Mirrors the real route table: the `.md` endpoints and their HTML twins,
+  // nested under `[...lang]`.
+  const apiRoutes: OrderedRouteLike[] = [
+    {
+      pattern: "/[...lang]/api/latest/[category]/[operation].md",
+      patternRegex: /^(?:\/(.*?))?\/api\/latest\/([^/]+?)\/([^/]+?)\.md$/,
+      entrypoint: "src/pages/[...lang]/api/latest/[category]/[operation].md.ts",
+    },
+    {
+      pattern: "/[...lang]/api/latest/[category].md",
+      patternRegex: /^(?:\/(.*?))?\/api\/latest\/([^/]+?)\.md$/,
+      entrypoint: "src/pages/[...lang]/api/latest/[category].md.ts",
+    },
+    {
+      pattern: "/[...lang]/api/latest.md",
+      patternRegex: /^(?:\/(.*?))?\/api\/latest\.md$/,
+      entrypoint: "src/pages/[...lang]/api/latest.md.ts",
+    },
+    {
+      pattern: "/[...lang]/api/latest/[category]/[operation]",
+      patternRegex: /^(?:\/(.*?))?\/api\/latest\/([^/]+?)\/([^/]+?)\/?$/,
+      entrypoint: "src/pages/[...lang]/api/latest/[category]/[operation].astro",
+    },
+    {
+      pattern: "/[...lang]/api/latest/[category]",
+      patternRegex: /^(?:\/(.*?))?\/api\/latest\/([^/]+?)\/?$/,
+      entrypoint: "src/pages/[...lang]/api/latest/[category].astro",
+    },
+    {
+      pattern: "/[...lang]/api/latest",
+      patternRegex: /^(?:\/(.*?))?\/api\/latest\/?$/,
+      entrypoint: "src/pages/[...lang]/api/latest.astro",
+    },
+  ];
+  // The route the `.md` tree regressed behind.
+  const catchAll: OrderedRouteLike = {
+    pattern: "/[...lang]/[...slug].md",
+    patternRegex: /^(?:\/(.*?))?\/(.*?)\.md$/,
+    entrypoint: "src/pages/[...lang]/[...slug].md.ts",
+  };
+
+  it("passes when the /api routes are ordered ahead of the catch-all", () => {
+    expect(findApiRouteShadowers([...apiRoutes, catchAll])).toEqual([]);
+  });
+
+  it("flags the /api paths a catch-all claims first", () => {
+    const shadowers = findApiRouteShadowers([catchAll, ...apiRoutes]);
+    // The HTML probes are unaffected: this catch-all only matches `.md`.
+    expect(shadowers.map((shadower) => shadower.path)).toEqual([
+      "/api/latest.md",
+      "/api/latest/dashboards.md",
+      "/api/latest/dashboards/get-a-dashboard.md",
+    ]);
+    for (const shadower of shadowers) {
+      expect(shadower.pattern).toBe("/[...lang]/[...slug].md");
+      expect(shadower.entrypoint).toBe("src/pages/[...lang]/[...slug].md.ts");
+    }
+  });
+
+  it("flags a probe path that no route matches at all", () => {
+    const shadowers = findApiRouteShadowers([]);
+    expect(shadowers).toHaveLength(6);
+    for (const shadower of shadowers) {
+      expect(shadower.pattern).toBe(null);
+      expect(shadower.entrypoint).toBe(null);
+    }
+  });
+
+  it("accepts an /api route that is not nested under [...lang]", () => {
+    const [, ...rest] = apiRoutes;
+    expect(
+      findApiRouteShadowers([
+        {
+          pattern: "/api/latest/[category]/[operation].md",
+          patternRegex: /^\/api\/latest\/([^/]+?)\/([^/]+?)\.md$/,
+          entrypoint: "src/pages/api/latest/[category]/[operation].md.ts",
+        },
+        ...rest,
+        catchAll,
+      ]),
+    ).toEqual([]);
   });
 });

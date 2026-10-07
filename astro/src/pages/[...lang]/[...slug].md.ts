@@ -6,6 +6,16 @@
 // Either way the frontmatter title is prepended as an H1, mirroring the HTML
 // page. A path with no matching entry 404s.
 //
+// It lives under `[...lang]/` only to keep Astro's route comparator honest.
+// A `.md` filename suffix attaches a literal part to the route's first
+// segment, which the comparator rewards over a purely dynamic one, so at the
+// root this route out-ranked every `/api/**.md` route and swallowed the whole
+// statically rendered API tree in dev. Nesting it makes the first segment tie
+// with the `/api` routes' `[...lang]`, so the comparator goes on to compare
+// specificity and the literal `api` segment wins. `staticApiGuard`'s shadow
+// guard pins that ordering. Translated content is not served here yet: the
+// captured locale is used to 404, not to pick a collection.
+//
 // Filters resolve identically to the HTML page even without query params: the
 // HTML route sets the `cdocs_prefs` cookie on load, and this same-origin fetch
 // carries it.
@@ -13,6 +23,7 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getEntry } from "astro:content";
+import { resolveUnprefixedSlug } from "@lib/i18n/locale";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
 import { COOKIE_NAME } from "@lib/cdocs/cookiePrefs";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
@@ -46,9 +57,14 @@ function insertAfterTitle(text: string, block: string): string {
 }
 
 export const GET: APIRoute = async ({ params, url, cookies, site }) => {
-  // `[...slug]` yields the path without the `.md` extension, which is exactly an
-  // `en` entry id.
-  const slug = params.slug ?? "";
+  // Two adjacent rest params are ambiguous, so the leading path segment is
+  // captured as `lang` whether or not it is a locale; `resolveUnprefixedSlug`
+  // puts it back and 404s a real locale prefix. The result is the path without
+  // the `.md` extension, which is exactly an `en` entry id.
+  const slug = resolveUnprefixedSlug(params.lang, params.slug);
+  if (slug === undefined) {
+    return new Response(null, { status: 404 });
+  }
 
   // dd_e2e/* are test pages; hidden in the live build like the HTML route.
   if (slug.startsWith("dd_e2e/") && __CI_ENV__ === "live") {

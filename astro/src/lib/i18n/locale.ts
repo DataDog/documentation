@@ -26,6 +26,21 @@ export function isLocale(value: unknown): value is Locale {
 }
 
 /**
+ * Is this a locale this site can have? Unlike `isLocale`, the answer does not
+ * depend on `SKIP_TRANSLATIONS`.
+ *
+ * Use this for questions about URL *shape* — "is this path segment a locale
+ * prefix?" — so dev and a full build agree on the URL space. Use `isLocale`
+ * for questions about what the current build actually emits.
+ */
+export function isLocaleCode(value: unknown): value is Locale {
+  return (
+    typeof value === "string" &&
+    (ALL_LOCALES as readonly string[]).includes(value)
+  );
+}
+
+/**
  * Narrow `Astro.currentLocale` to our `Locale` union.
  *
  * Astro derives `currentLocale` from the URL using the `i18n` block in
@@ -61,6 +76,40 @@ export function parseLangParam(
     return param;
   }
   return undefined;
+}
+
+/**
+ * Resolve the slug of a route whose path is captured by two adjacent rest
+ * params, `[...lang]/[...slug]`. Returns the slug with no locale prefix, or
+ * `undefined` when the path does carry one (the caller 404s).
+ *
+ * Two adjacent rest params make an ambiguous pattern, and the optional group
+ * Astro compiles `[...lang]` to is greedy, so the first path segment lands in
+ * `lang` whether or not it is a locale — `/dd_e2e/components/tabs` arrives as
+ * `lang: "dd_e2e"`, `slug: "components/tabs"`. Reassembling it here is the
+ * cost of nesting a root-level catch-all under `[...lang]`, which is what
+ * keeps the `/api` routes ahead of it in Astro's route priority.
+ *
+ * A first segment that *is* a locale returns `undefined`: translated content
+ * is not wired up, and English is served at the root, so `/en/...` is not a
+ * second address for it either.
+ *
+ * One ambiguity is unavoidable: a top-level section named after a locale
+ * (`/fr/...`) is indistinguishable from a locale prefix.
+ */
+export function resolveUnprefixedSlug(
+  langParam: string | number | undefined,
+  slugParam: string | number | undefined,
+): string | undefined {
+  const rawLang = langParam === undefined ? "" : String(langParam);
+  const rawSlug = slugParam === undefined ? "" : String(slugParam);
+  if (rawLang === "") {
+    return rawSlug;
+  }
+  if (isLocaleCode(rawLang)) {
+    return undefined;
+  }
+  return `${rawLang}/${rawSlug}`;
 }
 
 /** `''` for English, `/{lang}` for everything else. */
