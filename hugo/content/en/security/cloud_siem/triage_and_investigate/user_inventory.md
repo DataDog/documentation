@@ -28,24 +28,6 @@ further_reading:
   text: Open Cybersecurity Schema Framework (OCSF)
 ---
 
-<!-- ============================================================================
-PRE-PUBLISH CHECKLIST — delete this block before merging.
-
-1. LINKS. Five entries marked {{TODO-LINK}} need real paths:
-   Entity Risks, Entity Packs Overview, and the three Entity Pack provider pages.
-   Also resolves the two in-body references in Overview and Review risks.
-
-2. IMAGES. Three placeholders marked {{TODO-IMAGE}}, each with draft alt text.
-   The Entity changes screenshot must be captured AFTER lastLoginTime is removed,
-   or it will document an attribute that no longer exists.
-
-3. SHORTCODES. Notes are written as "**Note:**" paragraphs and images as HTML
-   comments. Convert both to the repo's shortcode syntax at commit time.
-
-4. FURTHER READING. If this repo generates the Further reading section from a
-   further_reading front matter key, move the list below into front matter.
-============================================================================ -->
-
 ## Overview
 
 [Cloud SIEM's User Inventory][6] is a synced, normalized copy of your user directory inside Cloud SIEM. It lists every user identity that Cloud SIEM has synced from your identity providers, regardless of whether that user has any associated activity, signals, or risks. When you need to know who a user is, what their account looks like, and how it has changed, you can answer the question in Cloud SIEM instead of having to switch to your identity provider.
