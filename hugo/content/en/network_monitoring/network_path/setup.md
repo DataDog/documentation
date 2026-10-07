@@ -568,6 +568,124 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Basic dynamic tests
+
+##### Prerequisites
+ - [CNM][1] is enabled.
+ - Agent `v7.84+` is installed
+
+Basic dynamic tests provide hop-by-hop [Network Path][7] visibility into your highest-traffic connections, without configuring individual destinations. Basic dynamic tests are included with CNM at no additional cost.
+
+Every hour, each Agent selects up to five of its highest-traffic paths and runs one Network Path test on each. 
+
+Basic dynamic tests provide representative coverage of your busiest paths, but don't guarantee that a specific connection is tested. For broader coverage of the paths that CNM observes, use [dynamic tests](#dynamic-tests).
+
+##### Setup
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+1. Add the following to `/etc/datadog-agent/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       basic_tests_enabled: true
+   ```
+
+1. Restart the Agent.
+
+{{% /tab %}}
+{{% tab "macOS" %}}
+
+1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+1. Add the following to `/opt/datadog-agent/etc/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       basic_tests_enabled: true
+   ```
+
+1. Restart the Agent.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+1. Add the following to `%ProgramData%\Datadog\datadog.yaml`:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       basic_tests_enabled: true
+   ```
+
+1. Restart the Agent.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Agent `v7.84+` and Helm chart `v3.124.0+` are required.
+
+Add the following to your `values.yaml` file, then upgrade your Helm release:
+
+```yaml
+datadog:
+  ## Enable Cloud Network Monitoring, which is required for basic dynamic tests.
+  networkMonitoring:
+    enabled: true
+
+  ## Enable the traceroute module of the system-probe.
+  traceroute:
+    enabled: true
+
+  ## Enable basic dynamic tests.
+  env:
+    - name: DD_NETWORK_PATH_CONNECTIONS_MONITORING_BASIC_TESTS_ENABLED
+      value: "true"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To disable basic dynamic tests, set `basic_tests_enabled` to `false` and restart the Agent.
+
+##### View results
+
+About five minutes after restarting the Agent, open [Network Path][4] and filter for `test_run_type:dynamic`. This filter shows paths from all dynamic tests, including standard dynamic tests and Dynamic Tests for NetFlow.
+
+Basic dynamic tests only select destinations allowed by your [filters][8].
+
+##### Troubleshooting {#troubleshooting-basic-dynamic-tests}
+
+If no paths with `test_run_type:dynamic` appear in [Network Path][4], verify the following:
+
+ - The [prerequisites](#prerequisites) are met, `basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
+ - CNM shows connections from the host on the [CNM Analytics][9] page.
+ - `traceroute.enabled` is not set to `false` in `system-probe.yaml`. For Helm, `datadog.traceroute.enabled` is set to `true`.
+ - The host has outgoing connections to destinations with a domain name. By default, dynamic tests skip destinations without a domain name. To include these destinations, set `network_path.collector.monitor_ip_without_domain` to `true`.
+ - Your [filters][8] don't exclude the destinations you expect to see.
+
 ### Dynamic Tests for NetFlow (Experimental)
 
 <div class="alert alert-info">Dynamic Tests for NetFlow are experimental and require Agent <code>v7.81+</code>. To enable this feature, contact Datadog Support or your account team.</div>
@@ -771,4 +889,7 @@ If you encounter an error like the following:
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
 [6]: /network_monitoring/netflow/
+[7]: /network_monitoring/network_path/
+[8]: /network_monitoring/network_path/setup/#filter-syntax
+[9]: https://app.datadoghq.com/network
 [15]: /synthetics/network_path_tests/
