@@ -172,7 +172,7 @@ An unprivileged Agent account cannot read the full command line or owner of ever
 * `exact_match` set to `false`
 * `user` filters for processes owned by other accounts
 
-Select `LocalSystem` as the Agent account when these process details are required and the broader local privileges meet the host's security policy.
+To collect command line and process owner details for processes running as other users, use [Live Process Monitoring][18]. If you need these details in the Process check itself, select `LocalSystem` as the Agent account, provided the broader local privileges meet the host's security policy.
 
 ### Cassandra Nodetool integration
 
@@ -208,3 +208,4 @@ If you use Chef and the official `datadog` cookbook to deploy the Agent on Windo
 [15]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/storing-private-data
 [16]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/private-data-object
 [17]: /integrations/windows-service/#service-permissions
+[18]: /infrastructure/process/
