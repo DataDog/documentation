@@ -41,10 +41,12 @@ data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
 }
 
 resource "datadog_sensitive_data_scanner_rule" "aws_access_key" {
-  name                = "AWS Access Key ID Scanner"
+  name                = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.name
   group_id            = datadog_sensitive_data_scanner_group.mygroup.id
   standard_pattern_id = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.id
+  
   is_enabled          = true
+  tags                = datadog_sensitive_data_scanner_group.mygroup.tags
 }
 ```
 
