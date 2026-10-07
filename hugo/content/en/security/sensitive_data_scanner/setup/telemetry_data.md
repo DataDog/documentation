@@ -149,7 +149,17 @@ Keyword matching follows these rules for both library rules and custom rules:
   }
   ```
 
-- **Camel case is not a word boundary in the text around a match.** When keywords are matched against the characters before a matched value, camel case words are not split. For example, in the message `clientSecret=abc123`, the keyword `secret` does not match `clientSecret`.
+- **Camel case is not a word boundary in the text around a match.** When keywords are matched against the characters before a matched value, including the value of an attribute in a structured event, camel case words are not split. For example, the following event does not match a rule whose pattern is `secret` and whose keyword is `bank`, because `anotherBank` in the value is not split into `another` and `bank`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "anotherBank secret"
+      }
+    }
+  }
+  ```
 
 #### Add suppressions
 
