@@ -25,7 +25,7 @@
 {{ $curURL := trim $currentPage.RelPermalink "/" }}
 
 {{/* Precompute, once per render of this partial (which is itself partialCached per unique
-     current-top-section combination -- see nav/current-top-section.html), the set of
+     current-top-section/open-path combination -- see nav/current-nav-match.html), the set of
      top-level identifiers whose subtree matches the current page. Built from
      nav/flattened-menu.html's build-wide-cached flat list via one non-recursive loop,
      instead of a recursive `partial` call per top-level entry -- see that file for why. */}}
@@ -51,7 +51,7 @@
                      page front matter), so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent never match
                      -- comparing URLs directly is what works. The match covers this entry's whole subtree, not
                      just its own URL -- see nav/flattened-menu.html for why. Keep in sync with
-                     nav/current-top-section.html, which computes the same matches for this partial's cache key.
+                     nav/current-nav-match.html, which computes the same matches for this partial's cache key.
 
                      Omitting Level 2 for other sections is visually a no-op: the sidenav CSS already hides
                      `ul li > ul` by default and only shows it via the `.open`/`.active` classes set on the

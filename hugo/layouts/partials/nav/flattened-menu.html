@@ -6,15 +6,15 @@
   descendants) is tagged with "action_catalog", since Private Actions is a menu-child of
   Action Catalog. "identifier" is the entry's own .Identifier, at whatever level it's at.
 
-  This lets nav/current-top-section.html and nav/current-open-path.html each decide "does
-  the current page fall under X" (a top-level section, or a specific deeper entry) with a
-  single flat, non-recursive loop, instead of a recursive `partial` call per menu subtree.
-  The flattening walk itself is still recursive (see nav/flatten-subtree-entries.html), but
-  it only runs ONCE per language and is cached build-wide via hugo.Store, since the menu
-  structure never changes during a build. Before this, current-top-section.html (which runs
-  uncached on every page) re-walked the whole ~2,000-entry menu via nested `partial` calls
-  on every one of ~30k pages -- the recursive `partial`-call overhead, not the matching
-  logic itself, was what made that expensive. See WEB-9804 follow-up.
+  This lets nav/current-nav-match.html decide "does the current page fall under X" (a
+  top-level section, or a specific deeper entry) with a single flat, non-recursive loop,
+  instead of a recursive `partial` call per menu subtree. The flattening walk itself is
+  still recursive (see nav/flatten-subtree-entries.html), but it only runs ONCE per
+  language and is cached build-wide via hugo.Store, since the menu structure never changes
+  during a build. Before this, the matching (which runs uncached on every page) re-walked
+  the whole ~2,000-entry menu via nested `partial` calls on every one of ~30k pages -- the
+  recursive `partial`-call overhead, not the matching logic itself, was what made that
+  expensive. See WEB-9804 follow-up.
 */ -}}
 {{- $dot := . -}}
 {{- $store := hugo.Store -}}
