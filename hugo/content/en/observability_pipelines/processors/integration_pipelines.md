@@ -54,6 +54,8 @@ This follows the reserved-field approach described in [Datadog log preprocessing
 6. Validate the output with representative logs, including logs that do not match an enabled integration pipeline. Check downstream processors and destinations that use fields now nested under `attributes`.
 7. Deploy the pipeline and monitor Worker CPU usage and the processor's [health metrics](#health-metrics).
 
+{{< img src="observability_pipelines/processors/integration_pipelines.png" alt="Manage Integration Pipelines panel showing the catalog version, pipeline search, Enabled and Disabled sections, and a table of integration names, source filters, and processor counts." style="width:100%;" >}}
+
 ### Preprocessing options
 
 Each option is an ordered list of candidate field paths. The first matching candidate supplies the reserved field. Paths refer to the incoming log's attributes; do not add the output's `attributes` prefix.
