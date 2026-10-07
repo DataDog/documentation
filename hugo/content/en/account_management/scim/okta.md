@@ -83,7 +83,7 @@ Datadog's SCIM role support follows the SCIM multi-valued attribute convention d
 2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
 3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.
 
-If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. Unmatched roles are logged to Audit Trail. If none match, the user gets the role set in {{< ui >}}Assign Role to auto-created users{{< /ui >}} on the [SAML login methods][10] page. If that setting is empty, the user gets no role. For more details, see [SCIM][1].
+If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. Unmatched roles are logged to Audit Trail. Users with no role matches are assigned the role set in {{< ui >}}Assign Role to auto-created users{{< /ui >}} on the [SAML login methods][10] page. If that setting is empty, the user gets no role. For more details, see [SCIM][1].
 
 #### Assign multiple roles to a user
 
