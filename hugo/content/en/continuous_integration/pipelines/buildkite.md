@@ -26,6 +26,7 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 |---|---|---|
 | [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
 | [Logs Analysis][22] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage][20]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
 | [Manual steps][12] | Manual steps | View manually triggered pipelines. |
 | [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -33,7 +34,6 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [Logs Storage][20]. |
 
 
 ### Terminology

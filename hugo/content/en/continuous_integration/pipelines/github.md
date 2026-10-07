@@ -30,9 +30,9 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Running jobs][28] | Running jobs | View job executions that are currently running. |
 | [Logs Analysis][23] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | [Automatic job retries][27] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [Logs Storage](#logs-storage). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 | [Queue time][8] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -101,7 +101,9 @@ For a full explanation, see the guide on [using Logs Analysis][23].
 
 Logs Analysis is enabled by default in Datadog. To manage Logs Analysis settings, go to [CI/CD Repository settings][29], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
+You can also add Logs Analysis to a PR comment. See the guide on [using PR comments][26].
+
+Logs Analysis being enabled is also a prerequisite for [automatic job retries][27].
 
 #### Logs Storage
 

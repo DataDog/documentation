@@ -1,5 +1,5 @@
 ---
-title: Use Logs Analysis to identify root causes in failed jobs
+title: Use Logs Analysis to identify root causes in failed CI jobs
 description: Learn how to use Logs Analysis to identify the most common root causes of failure in CI pipelines.
 further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
@@ -37,18 +37,6 @@ Each log line is pre-scanned to redact any potentially sensitive information bef
 <div class="alert alert-info">
 The LLM model can classify errors with similar messages into distinct yet related subdomains. For example, if the error message is <code>Cannot connect to docker daemon</code>, it is usually categorized under <code>domain:platform</code> and <code>subdomain:network</code>. However, the LLM model may sometimes classify it under <code>subdomain:infrastructure</code> instead.
 </div>
-
-#### Logs requirements for jobs failure analysis
-
-Jobs failure analysis requires the following logs to be indexed:
-* All logs from the **failing job** being analyzed.
-* All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
-
-The following [exclusion filter][9] is compatible with jobs failure analysis:
-* Query: `datadog.product:cipipeline @ci.is_failure:false`
-* Sampling rule: exclude 90% of `@ci.job.id`
-
-This setup reduces log volume while still supporting jobs failure analysis, as long as your CI pipeline runs enough successful jobs to ensure logs are indexed for at least one of them.
 
 #### Domains and Subdomains
 
@@ -112,7 +100,7 @@ Logs Analysis is available for the following CI providers:
 * [GitHub Actions][1]
 * [GitLab][2]
 
-**Note:** Logs Analysis may require CI provider specific configuration. Check the **Manage job logs** section on the [Pipeline Visibility setup page][6] for your provider.
+**Note:** Logs Analysis may require CI provider specific configuration. Check the **Logs Analysis** section on the [Pipeline Visibility setup page][6] for your provider.
 
 <div class="alert alert-info">If you are interested in Logs Analysis but your CI provider is not supported yet, fill out <a href="https://forms.gle/vSrqS5QwitgHf9wG6" target="_blank">this form</a>.</div>
 
@@ -147,9 +135,9 @@ You can import the {{< ui >}}CI Visibility - CI Jobs Failure Analysis{{< /ui >}}
 
 ### Using PR comments
 
-You can add jobs failure analysis in your PR comments.
+You can add Logs Analysis in your PR comments.
 
-{{< img src="continuous_integration/pr_comment.png" alt="PR comment with included jobs failure analysis" width="90%">}}
+{{< img src="continuous_integration/pr_comment.png" alt="PR comment with included Logs Analysis" width="90%">}}
 
 For PR Comments to be posted, your repositories must be integrated with Datadog. To learn more, see [Connect your Git repositories to Datadog][7].
 
@@ -173,7 +161,6 @@ Enable PR Comments from [**CI/CD Optimization** > **Settings** > **Repositories*
 [6]:/continuous_integration/pipelines/#setup
 [7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
 [8]:/continuous_integration/pipelines/azure/
-[9]:/logs/log_configuration/indexes#exclusion-filters
 [10]:/continuous_integration/pipelines/automatic_retries/
 [11]:https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [12]:/continuous_integration/pipelines/buildkite/

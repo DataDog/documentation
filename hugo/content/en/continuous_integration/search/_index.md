@@ -71,7 +71,7 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 ### Explore connections to logs
 
-If Logs Storage is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
+If Logs Storage is enabled for your CI provider, you can view the related log events for a given pipeline execution in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution slide-out panel.
 
 Logs Storage is supported for the following providers:
 
@@ -96,10 +96,10 @@ Use [Logs Analysis][12] to identify the most common root causes of failure for y
 [1]: https://app.datadoghq.com/ci/pipelines
 [3]: /continuous_integration/pipelines/github/#logs-storage
 [4]: /continuous_integration/pipelines/gitlab/#logs-storage
-[5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
+[5]: /continuous_integration/pipelines/jenkins#logs-storage
 [6]: /account_management/teams/
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /continuous_integration/pipelines/awscodepipeline/#collect-job-logs
+[8]: /continuous_integration/pipelines/awscodepipeline/#logs-storage
 [9]: /continuous_integration/pipelines/azure/#logs-storage
 [10]: /continuous_integration/pipelines/circleci/#logs-storage
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

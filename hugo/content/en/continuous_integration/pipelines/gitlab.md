@@ -27,12 +27,12 @@ Set up CI Visibility for GitLab to collect data on your pipeline executions, ana
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Running jobs][32] | Running jobs | View job executions that are currently running. |
 | [Logs Analysis][28] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs. Requires [Logs Storage][12]. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Automatic job retries][31] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [Logs Storage][12]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
@@ -393,7 +393,9 @@ For a full explanation, see the guide on [using Logs Analysis][28].
 
 Logs Analysis is enabled by default in Datadog, but requires job log forwarding to be configured, as described below.
 
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+You can also add Logs Analysis to a PR comment. See the guide on [using PR comments][30].
+
+Logs Analysis being enabled is also a prerequisite for [automatic job retries][31].
 
 The following GitLab versions support forwarding job logs to Datadog:
 

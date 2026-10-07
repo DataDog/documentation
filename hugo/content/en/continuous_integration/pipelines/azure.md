@@ -168,7 +168,7 @@ For a full explanation, see the guide on [using Logs Analysis][21].
 
 Logs Analysis is enabled by default in Datadog. To receive Azure Pipelines job logs for analysis, set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14]. To manage Logs Analysis settings, go to [CI/CD Repository settings][23], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][22].
+You can also add Logs Analysis to a PR comment. See the guide on [using PR comments][22].
 
 #### Logs Storage
 

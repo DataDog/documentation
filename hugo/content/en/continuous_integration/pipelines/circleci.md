@@ -29,7 +29,7 @@ Set up CI Visibility for CircleCI to optimize the performance of your pipelines,
 |---|---|---|
 | [Partial retries][12] | Partial pipelines | View partially retried pipeline executions. |
 | [Logs Analysis][20] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [Logs Storage][10]. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage][10]. |
 | [Custom spans][13] | Custom spans | Configure custom spans for your pipelines. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][6] to all generated pipeline and job spans. |
 | [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
