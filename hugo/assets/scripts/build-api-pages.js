@@ -625,9 +625,9 @@ const getJsonWrapChars = (data) => {
 
 
 /**
- * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * Returns required property names for a top-level object or array item.
  * @param {object} data - object schema
- * returns initial data
+ * returns required property names
  */
 const getInitialJsonData = (data) => {
   let initialData;
@@ -1113,7 +1113,7 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, getInitialRequiredData(data), 0, '', skipAnyKeys) : emptyRow}</div>`;
 };
 
 /**
