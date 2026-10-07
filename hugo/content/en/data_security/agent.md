@@ -246,6 +246,11 @@ agent diagnose show-metadata agent-telemetry
 | cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
 | cluster_checks.configs_info                 | Names of dispatched cluster checks                                                                             |
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
+| cluster_checks.nodes_reporting              | Number of node agents reporting to the Cluster Agent                                                                   |
+| cluster_checks.rebalancing_decisions        | Number of cluster check rebalancing decisions                                                                          |
+| cluster_checks.successful_rebalancing_moves | Number of successful cluster check rebalancing moves                                                                   |
+| cluster_checks.failed_stats_collection      | Number of failed Cluster Check Runner stats collection attempts                                                        |
+| endpoint_checks.configs_dispatched          | Number of endpoint check configurations dispatched                                                                     |
 | instrumentation_controller.resources        | Number of `DatadogInstrumentation` resources tracked by the controller                                                 |
 | instrumentation_controller.reconciliations  | Number of `DatadogInstrumentation` section reconciliation attempts, tagged by section and status                       |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
