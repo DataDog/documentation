@@ -137,12 +137,12 @@ Keyword matching follows these rules for both library rules and custom rules:
 
 - **Matching is case-insensitive.** The keyword `secret` matches `secret`, `Secret`, and `SECRET`.
 - **Spaces, underscores, and hyphens are interchangeable.** The keyword `secret access key` matches `secret access key`, `secret_access_key`, and `secret-access-key`. It also matches an attribute named `AWS_SECRET_ACCESS_KEY`.
-- **Attribute names in structured events are split into words.** For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number` and `card-type` match. With the keyword `keyword`, the following event matches a rule whose pattern is `secret`, because `sneakyKeyword` is split into `sneaky` and `keyword`:
+- **Attribute names in structured events are split into words.** For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number`, `card-type`, and `creditCardNumber` match. The following event matches a rule whose pattern is `secret` and whose keyword is `card`, because `creditCardNumber` is split into `credit`, `card`, and `number`:
 
   ```json
   {
     "some": {
-      "sneakyKeyword": {
+      "creditCardNumber": {
         "value": "secret"
       }
     }
