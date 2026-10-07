@@ -152,50 +152,30 @@ After synchronization is in place, confirm that:
 
 {{% collapse-content title="1\. Optimize DNS-related configurations across Agents and other data sources" level="h4" id="optimize-dns-configurations" %}}
 
-Failover speed depends on your DNS record's TTL and on how quickly your Agents and other telemetry sources pick up the DNS change once you make it. Tune your DNS settings and your telemetry source settings together, not in isolation; this is the single biggest lever you control over your realistic recovery time objective (RTO).
+Failover speed depends on your DNS record's TTL and on how quickly your Agents and other telemetry sources pick up the DNS change after you make it. Tune your DNS settings and your telemetry source settings together, not in isolation; this is the single biggest lever you control over your realistic recovery time objective (RTO).
 
-See [Required settings for optimal Recovery Time Objective (RTO)][tk] for the specific DNS, Agent, and application-level settings to configure, and why each one matters.
+See [Required settings for optimal Recovery Time Objective (RTO)][20] for the specific DNS, Agent, and application-level settings to configure, and why each one matters.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="2\. Set up customer-initiated DNS failover" level="h4" %}}
 
+Customer-initiated DNS failover gives you direct control over when and where failover happens, using a DNS record you own. This is the recommended path for triggering a DDR failover, because it requires no coordination with Datadog at failover time. If customer-initiated DNS failover is not suitable for your organization, contact your Datadog account team for alternatives.
+
 Customer-initiated DNS failover works through a two-step DNS delegation:
 
 - Datadog's delegation to your domain: `<CUSTOMER>.mrf.datadoghq.com` → `CNAME` → `datadog.<CUSTOMER_DOMAIN>.com`
-- Your domain's record, pointing to the active datacenter: `datadog.<CUSTOMER_DOMAIN>.com` → `CNAME` → `mrf.<DATACENTER>.datadoghq.com`
+- Your domain's record, pointing to the active data center: `datadog.<CUSTOMER_DOMAIN>.com` → `CNAME` → `mrf.<DATA_CENTER>.datadoghq.com`
 
 To set up the two-step DNS delegation:
 
 1. Create a DNS record (for example, `datadog.<CUSTOMER_DOMAIN>.com`) with your DNS provider.
 1. Point this record to your current active Datadog data center endpoint. Your Datadog account team provides the list of available data center endpoints for your organization.
 1. Communicate your chosen domain to your Datadog account team, so Datadog can configure the initial `CNAME` delegation on its side.
-1. Configure your Agents and other telemetry sources to use your Datadog-delegated domain (`<CUSTOMER>.mrf.datadoghq.com`) as the intake URL, following the [Optimize DNS-related configurations across Agents and other data sources](#optimize-dns-configurations) section, instead of a Datadog-provided URL directly.
-1. Jointly validate the end-to-end DNS chain with your Datadog account team before relying on this path in a real failover.
+1. Configure your Agents and other telemetry sources to use your Datadog-delegated domain (`<CUSTOMER>.mrf.datadoghq.com`) as the intake URL, following the [Optimize DNS-related configurations across Agents and other data sources](#optimize-dns-configurations) section, instead of a standard Datadog [site URL][17].
+1. Jointly validate the end-to-end DNS chain with your Datadog account team.
 
 {{% /collapse-content %}}
-
-
----
-
-
-
-
-
-DNS-based failover is a complementary approach to Agent-based failover. Instead of configuring Agents with a secondary site endpoint, you configure all your data sources to send telemetry to a single Datadog-provided custom intake URL. During a failover event, Datadog updates the DNS record for that URL to redirect traffic from your primary site to your DDR site.
-
-<div class="alert alert-info">DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously.</div>
-
-#### Receive your custom DNS endpoint
-
-If you choose to use DNS-based failover, Datadog provisions a custom intake URL for your organization (for example, `<your-org>.intake.datadoghq.com`). Configure all your data sources (such as Agents, log shippers, and custom instrumentation) to send telemetry to this endpoint instead of to the default Datadog intake URL. This is a one-time configuration change.
-
-#### Trigger a DNS failover
-
-Contact your [Customer Success Manager][14] or [Datadog Support][15] to initiate a DNS failover. Datadog updates the DNS record to redirect traffic from your primary site to your DDR site. The target Recovery Time Objective (RTO) is 2 hours from the time failover is initiated.
-
-<div class="alert alert-info">A customer-controlled way to trigger DNS failover directly from the DDR org is in Preview. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> to learn more.</div>
-
 
 ### 3. Run failover tests in various environments
 
@@ -304,3 +284,4 @@ During testing, integration telemetry is spread over both organizations. If you 
 [17]: /getting_started/site#access-the-datadog-site
 [18]: /account_management/guide/secure-configuration/#audit-and-compliance
 [19]: /account_management/api-app-keys#application-keys
+[20]: /disaster_recovery/required_settings
