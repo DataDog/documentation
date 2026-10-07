@@ -98,27 +98,25 @@ These are the available processors:
 Pre-processors is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
-When you have multiple sources for a pipeline, you can add pre-processors for:
-- Logs from a specific source
-- Logs from all sources
+When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches. Each branch has its own processor groups. By using pre-processors, you can avoid adding the same processors to each processor group.
 
-After pre-processing, the Worker sends logs to the processor groups for specific destinations.
+{{< img src="observability_pipelines/processors/pre-processors_diagram.png" alt="A diagram showing logs from the Datadog Agent and Amazon Data Firehose going through source-specific pre-processors, then logs from all three sources going through pre-processors for all sources before being sent to the processor groups for branch 1 and branch 2 and then to their destinations." style="width:100%;" >}}
 
-For example, in this image, the pipeline has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
+For example, in this image, the log pipeline has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
 
 {{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources sending logs to two processor groups, one for pipeline branch 1 and one for pipeline branch 2. Branch 1 sends logs to Datadog and Datadog Archives, and branch 2 sends logs to CrowdStrike NG-SIEM." style="width:100%;" >}}
 
-The Worker sends all logs in this pipeline to two different branches: branch 1 and branch 2. Each branch has its own processor groups and destinations. After the logs are processed, the Worker sends logs in branch 1 to Datadog and Datadog Archives and logs in branch 2 to CrowdStrike NG-SIEM.
+The Worker sends all logs in this pipeline to two different branches: branch 1 and branch 2. Each branch has its own processor group and destinations.
 
-You can use pre-processors in this example to:
-- Process only logs from the Datadog Agent, Amazon Data Firehose, or HTTP/S Client
-- Process logs from all three sources
+If you want to do the following in this example:
+- Sample all logs from the Datadog Agent source
+- Deduplicate logs from all sources
+
+Instead of having to add duplicate processors in branch 1 and 2's processor groups.
 
 {{< img src="observability_pipelines/processors/pre-processor_tab.png" alt="The Pre-Processor tab for the Datadog Agent source, showing a Datadog Agent only group with Sample and Tags processors and an All sources group with a Dedupe processor." style="width:50%;" >}}
 
 When you add pre-processing for individual sources and all sources, logs are sent through processors for individual sources first and then to processors for all sources.
-
-{{< img src="observability_pipelines/processors/pre-processors_diagram.png" alt="A diagram showing logs from the Datadog Agent and Amazon Data Firehose going through source-specific pre-processors, then logs from all three sources going through pre-processors for all sources before being sent to the processor groups for branch 1 and branch 2 and then to their destinations." style="width:100%;" >}}
 
 The following are not available for pre-processing:
 
@@ -126,7 +124,7 @@ The following are not available for pre-processing:
 - Quota processor with an overflow destination
 - Packs
 
-**Note**: Processor groups for specific sources and for all sources count toward the 25 processor group limit per canvas.
+**Note**: Processor groups for specific sources and all sources count toward the 25 processor group limit per canvas.
 
 ## Processor groups
 
