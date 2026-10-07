@@ -39,6 +39,8 @@ To use the Capacity Planning page, you must meet the following criteria:
 
 ## Explore the Capacity Planning page
 
+To get started, navigate to the [Capacity Planning page][5] in GPU Monitoring.
+
 ### Filter by team and queue
 
 Use the filters at the top of the page to scope the view. You can filter by {{< ui >}}Team{{< /ui >}}, {{< ui >}}Cluster Name{{< /ui >}}, {{< ui >}}Cluster Queue{{< /ui >}}, {{< ui >}}Resource Flavor{{< /ui >}}, {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Datacenter{{< /ui >}}, and {{< ui >}}Environment{{< /ui >}}. Save a filtered view to return to it later.
@@ -75,3 +77,4 @@ Use the {{< ui >}}Workloads{{< /ui >}} tab to check the current state of a workl
 [2]: /agent/guide/upgrade_agent_fleet_automation/
 [3]: https://app.datadoghq.com/integrations?search=kueue
 [4]: /integrations/kueue/
+[5]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=capacity-planning
