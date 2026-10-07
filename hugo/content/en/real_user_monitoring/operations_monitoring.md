@@ -39,7 +39,7 @@ For example, the checkout experience of an ecommerce platform is a journey. Its 
 
 The table lists additional example journeys and their associated operations by industry.
 
-| Industry       | Journey  |  Operations                                                                                                               |
+| Industry       | Journey  | Operations                                                                                                               |
 |----------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
 | Social network | Profile  | Users can load their profile <br> Users can upload a picture <br> Users can update their status                                  |
 | Ecommerce      | Checkout | Users can enter payment details <br> Users can save their payment method <br> Users can pay                                      |
@@ -70,9 +70,9 @@ Datadog retains both metrics for 15 months. The metrics include these dimensions
 
 - `operation.name`, defined on the client side
 - `operation.status`, either success or failure
-- `operation.failure_reason`, either error, abandoned, or other
+- `operation.failure_reason`, error, abandoned, or other
 
-Use these metrics to create [metric monitors][22] and availability or latency SLOs for RUM operations. For recommended queries, thresholds, and examples, see [Best Practices for Creating SLOs for RUM Operations][23].
+Use these metrics to create [metric monitors][22] and availability or latency Service Level Objectives (SLO) for RUM operations. For recommended queries, thresholds, and examples, see [Best Practices for Creating SLOs for RUM Operations][23].
 
 To view operation metrics, navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}. The Operations catalog groups together all operations with the same name.
 
