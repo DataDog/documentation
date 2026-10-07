@@ -4355,7 +4355,7 @@ span, ctx := llmobs.StartWorkflowSpan(ctx, "process-message",
 defer span.Finish()
 {{< /code-block >}}
 
-### Force flushing before exit
+### Force flushing in serverless environments
 
 The tracer flushes spans in the background. Call `tracer.Stop()` before your process exits so buffered spans are submitted. In short-lived processes and serverless handlers, use `defer tracer.Stop()` in `main` to guarantee this.
 
