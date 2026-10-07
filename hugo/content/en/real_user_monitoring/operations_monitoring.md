@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-2.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
 A RUM operation is a critical step in a [journey][9] that must be available and fast for users to complete the journey. A journey represents a major user-facing area of your application, such as checkout, login, or search. You can map RUM operations to the steps that matter to your application. A RUM operation typically starts with a user action and ends when a related technical event completes, such as when an API call resolves.
 
@@ -35,7 +35,7 @@ Grouping RUM operations into journeys connects technical performance with busine
 - Engineering teams use **operations** to monitor and minimize technical failures that affect key moments in a journey.
 - Business teams use **journeys** to track and improve user conversion.
 
-For example, the checkout experience of an ecommerce platform is a journey. Its operations might include entering payment details, saving a payment method, and completing a purchase. Monitoring the health of these operations helps you identify when and why users do not complete the checkout journey.
+For example, the checkout experience of an ecommerce platform is a journey. Its operations might include loading the checkout form, saving a payment method, and completing a purchase. Monitoring the health of these operations helps you identify when and why users do not complete the checkout journey.
 
 The table lists additional example journeys and their associated operations by industry.
 
@@ -76,13 +76,13 @@ Use these metrics to create [metric monitors][22] and availability or latency Se
 
 To view operation metrics, navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}. The Operations catalog groups together all operations with the same name.
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="RUM Operations catalog showing operation volume, completion rate, and failure rate" style="width:100%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-2.png" alt="RUM Operations catalog showing operation volume, completion rate, and failure rate" style="width:100%;" >}}
 
 ## Use RUM operation events for investigation and retention
 
 Each RUM operation generates a RUM event within its associated RUM session. An operation event can span multiple RUM views.
 
-Query operation events from retained sessions in the [RUM Session Explorer][20] to investigate operation performance and failures. Operation events include these attributes:
+Query operation events from retained sessions in the [RUM Session Explorer][20] to investigate operation performance and failures. Along with standard RUM event attributes such as country, browser, and service, operation events include these operation-specific attributes:
 
 - `@operation.name`
 - `@operation.status`
@@ -93,7 +93,7 @@ Query operation events from retained sessions in the [RUM Session Explorer][20] 
 
 Use the same attributes in retention filters to retain sessions based on operation activity. For example, retain sessions that contain a failed operation or an operation whose duration exceeds a threshold.
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-3-temp.png" alt="RUM retention filter configured with operation event attributes" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-retention-filter.png" alt="RUM retention filter configured with operation event attributes" style="width:80%;" >}}
 
 ## Create operations with the SDK APIs
 
