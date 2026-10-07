@@ -26,6 +26,7 @@ Set up CI Visibility for TeamCity to collect data about your pipeline executions
 | [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+| [Job log collection][19] | Build logs | View job logs in the Logs tab of a pipeline execution. |
 
 The following TeamCity versions are supported:
 
@@ -69,6 +70,25 @@ To set up the integration:
 
 4. To enable the plugin, click on {{< ui >}}Enable uploaded plugins{{< /ui >}} in the {{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Plugins{{< /ui >}} page.
 Alternatively, restart the TeamCity server.
+
+## Collect job logs
+
+When the plugin is enabled (`datadog.ci.enabled` is set to `true`), it automatically sends logs for each build
+reported as a job in a completed build chain. The logs appear in the {{< ui >}}Logs{{< /ui >}} tab for the job.
+
+To disable job log collection for a project, add the `datadog.ci.logs.disabled` project configuration parameter
+with any value (for example, `true`). Setting it to `false` also disables collection; remove the parameter where
+it is defined to re-enable it. Add it to the Root project to disable job log collection for all subprojects.
+
+The plugin sends job logs after the final composite build finishes and before sending each completed job event.
+When available, it includes TeamCity log severity and the innermost log block name in the `status` and
+`section_name` attributes. For build chains that run longer than 18 hours, earlier log lines may appear with their
+ingestion time instead of their original TeamCity timestamp. Pending uploads are held in memory, so an abrupt
+TeamCity server stop or an upload that fails after retries can leave a job's logs incomplete. Check the
+[TeamCity server log](#troubleshooting) if expected logs are missing.
+
+Logs are billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in
+[Log Management][20]. To find TeamCity job logs, filter on `datadog.product:cipipeline` and `source:teamcity`.
 
 ## Advanced configuration
 
@@ -119,3 +139,5 @@ Check these logs to get additional context on any issues with the plugin.
 [16]: /glossary/#pipeline-failure
 [17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [18]: /glossary/#pipeline-execution-time
+[19]: #collect-job-logs
+[20]: /logs/guide/best-practices-for-log-management/

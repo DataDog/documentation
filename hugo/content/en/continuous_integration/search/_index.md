@@ -81,6 +81,7 @@ Job log collection is supported for the following providers:
 - [GitHub Actions][3]
 - [GitLab][4]
 - [Jenkins][5]
+- [TeamCity][14]
 - [Other CI providers][13]
 
 ### CI jobs failure analysis based on relevant logs
@@ -105,3 +106,4 @@ Use [CI jobs failure analysis][12] to identify the most common root causes of fa
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
 [12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [13]: /continuous_integration/pipelines/custom/#collect-job-logs
+[14]: /continuous_integration/pipelines/teamcity/#collect-job-logs
