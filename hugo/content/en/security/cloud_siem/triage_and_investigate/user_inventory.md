@@ -51,7 +51,7 @@ The following Cloud SIEM permissions apply to User Inventory:
 
 | Permission | What it grants |
 | ---------- | -------------- |
-| **SIEM Entities Notifications** | Users with this permission can modify Entity Risk notifications. |
+| **SIEM Entities Notification** | Users with this permission can modify Entity Risk notifications. |
 | **SIEM Entities Read** | View the User Inventory Explorer and search it, open the user side panel, and see the correlated-user pill in the Signals side panel. Also grants read access to Entity Pack side panels in the Content Packs explorer. |
 | **SIEM Entities Admin** | Everything SIEM Entities Read grants, plus the ability to configure Entity Packs and other Entity Risks settings. Required to complete the Entity Packs prerequisite below. |
 
