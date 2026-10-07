@@ -146,6 +146,45 @@ test.describe("Header — Hugo-identical dimensions and behavior", () => {
     });
   });
 
+  test("Security category banner is a styled link with a hover state", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState("networkidle");
+    await page.locator(".product-dropdown a.dropdown").first().hover();
+    await page.locator(".product-menu__category-toggle--security").hover();
+    await page.waitForTimeout(250);
+
+    const banner = page.locator(
+      "#security-detail .product-menu__category-description--cta",
+    );
+    await expect(banner).toBeVisible();
+    await expect(banner).toHaveAttribute(
+      "href",
+      "https://www.datadoghq.com/products/security/",
+    );
+    // `.header__dropdown-menu a` must not restyle the banner.
+    await expect(banner).toHaveCSS("display", "flex");
+    await expect(banner).toHaveCSS("text-transform", "none");
+    await expect(banner).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(banner.locator(".product-menu__category-cta-label")).toHaveCSS(
+      "text-transform",
+      "uppercase",
+    );
+
+    const restingBackground = await banner.evaluate(
+      (element) => getComputedStyle(element).backgroundImage,
+    );
+    await banner.hover();
+    await expect(banner).toHaveCSS("outline-color", "rgb(139, 208, 255)");
+    await expect(banner).toHaveCSS("color", "rgb(255, 255, 255)");
+    const hoverBackground = await banner.evaluate(
+      (element) => getComputedStyle(element).backgroundImage,
+    );
+    expect(hoverBackground).not.toBe(restingBackground);
+  });
+
   test("GET STARTED FREE opens the free trial modal with the signup form", async ({
     page,
   }) => {

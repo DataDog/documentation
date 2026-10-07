@@ -342,3 +342,28 @@ describe("header link URLs", () => {
     expect(docsOriginUrls).toEqual([]);
   });
 });
+
+describe("mega-menu category CTA", () => {
+  const category = (identifier: string) =>
+    getHeaderData("en").product?.megaCategories.find(
+      (cat) => cat.identifier === identifier,
+    );
+
+  it("exposes the category's cta_url as a corporate-site link", () => {
+    expect(category("security")?.ctaHref).toBe(
+      "https://www.datadoghq.com/products/security/",
+    );
+  });
+
+  it("exposes the optional 3-stop hover gradient", () => {
+    expect(category("security")?.ctaHoverGradient).toEqual([
+      "#0060FF",
+      "#0032A0",
+      "#001B58",
+    ]);
+  });
+
+  it("leaves categories without a cta_url unlinked", () => {
+    expect(category("observability")?.ctaHref).toBeUndefined();
+  });
+});

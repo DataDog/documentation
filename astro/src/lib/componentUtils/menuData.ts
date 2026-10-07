@@ -87,6 +87,8 @@ const ProductCategorySchema = z.object({
   lang_key: z.string(),
   description_key: z.string().optional(),
   gradient: z.tuple([z.string(), z.string()]).optional(),
+  cta_url: z.string().optional(),
+  cta_hover_gradient: z.tuple([z.string(), z.string(), z.string()]).optional(),
   icon: z.string(),
   mobile: z.boolean().optional(),
   mobile_products: z.array(z.string()).optional(),
@@ -141,6 +143,10 @@ export type MegaCategory = {
   label: string;
   descriptionLabel: string;
   gradient: [string, string];
+  /** Makes the banner a link (Hugo's `cta_url`). */
+  ctaHref?: string;
+  /** 3-stop banner gradient on hover; falls back to `gradient`. */
+  ctaHoverGradient?: [string, string, string];
   iconHtml: string;
   subcategories: MegaSubcategory[];
 };
@@ -303,6 +309,8 @@ function buildMegaCategories(
         label: translate(cat.lang_key),
         descriptionLabel: translate(cat.description_key ?? ""),
         gradient: cat.gradient ?? ["#000000", "#333333"],
+        ctaHref: cat.cta_url ? resolveUrl(cat.cta_url, lang) : undefined,
+        ctaHoverGradient: cat.cta_hover_gradient,
         iconHtml: iconHtml(cat.icon),
         subcategories,
       };

@@ -591,6 +591,80 @@
   display: flex;
   margin-bottom: 40px;
   color: #ffffff;
+  /* Set inline per category by CategoryBanner. */
+  background: var(--cta-bg);
+}
+
+/* Banner as a link (category has a `cta_url`). Ported from Hugo's
+   `.category-description-cta` in websites-modules `_main-nav.scss`. Two
+   classes so these outrank `.header__dropdown-menu a`, which would otherwise
+   restyle the banner as a plain dropdown item. */
+.product-menu .product-menu__category-description--cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 27px 28px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+  font-weight: inherit;
+  cursor: pointer;
+  transition:
+    outline-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Three classes to outrank `.header__dropdown-menu a:hover`. The outline and
+   shadow values are Hugo's. */
+.product-menu .product-menu__category-description--cta:hover,
+.product-menu .product-menu__category-description--cta:focus-visible {
+  color: #ffffff;
+  background: var(--cta-bg-hover, var(--cta-bg));
+  outline: 2px solid #8bd0ff;
+  outline-offset: -1px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-menu__category-main {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center;
+}
+
+.product-menu__category-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 6px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: gap 0.2s ease;
+}
+
+.product-menu__category-description--cta:hover .product-menu__category-cta {
+  gap: 12px;
+}
+
+.product-menu__category-cta-label {
+  text-transform: uppercase;
+}
+
+.product-menu__category-cta-carrot {
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+}
+
+.product-menu__category-cta-carrot svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .product-menu__category-header {
