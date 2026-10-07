@@ -119,7 +119,7 @@ Trace exporter to be used<br>
         2. Value of `service` key in `DD_TAGS` <br>
         3. Value of `OTEL_SERVICE_NAME` <br>
         4. Value of `service.name` key in `OTEL_RESOURCE_ATTRIBUTES`
-    - `deployment.environment.name` (maps to `DD_ENV`): The SDK resolves the value with the following precedence: <br>
+    - `deployment.environment.name` (maps to `DD_ENV`): Set `OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=<value>`. Use this stable attribute; `deployment.environment` is deprecated and supported only for backward compatibility. The SDK resolves the value with the following precedence: <br>
         1. Value of `DD_ENV` <br>
         2. Value of `env` key in `DD_TAGS` <br>
         3. Value of `deployment.environment.name` key in `OTEL_RESOURCE_ATTRIBUTES` <br>
