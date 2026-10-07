@@ -3,6 +3,9 @@ title: Entity Risks
 aliases:
 - /security/cloud_siem/entities_and_risk_scoring
 further_reading:
+    - link: "/security/cloud_siem/ingest_and_enrich/entity_packs/"
+      tag: "Documentation"
+      text: "Sync user identities into Cloud SIEM with Entity Packs"
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog
       text: "Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics"
@@ -35,7 +38,7 @@ With Entity Risks, you can:
   - **Sources that provide identity and resource entities** (such as users, service identities, assumed roles, compute instances, and storage containers): AWS, Azure, GCP, GitHub, Microsoft 365, and Okta.
   - **Sources that provide user entities identified by email address**: 1Password, Cisco Duo, Cloudflare, CrowdStrike, Google Workspace, JumpCloud, LastPass, Salesforce, Slack, and Zscaler Internet Access (ZIA).
 - Many supported sources use an [out-of-the-box OCSF pipeline][8] that requires no additional configuration. If a supported source is not producing entities, confirm that its out-of-the-box OCSF pipeline is active. Pipelines that predate OCSF support, and customized pipelines, may not include the required OCSF processing.
-- Datadog recommends configuring an Entity Pack for your identity provider (Okta, Google Workspace, or Microsoft Entra ID) on the [Content Packs][9] page. When user identities sync, Entity Risks resolves each person's accounts into a single user identity and rolls up their risk. User identity notifications also become available. Without an Entity Pack, entities are only ever scored and alerted on individually. See [Risk grouped by user identity](#risk-grouped-by-user-identity).
+- Datadog recommends configuring an [Entity Pack][9] for your identity provider (Okta, Google Workspace, or Microsoft Entra ID) on the [Content Packs][10] page. When user identities sync, Entity Risks resolves each person's accounts into a single user identity and rolls up their risk. User identity notifications also become available. Without an Entity Pack, entities are only ever scored and alerted on individually. See [Risk grouped by user identity](#risk-grouped-by-user-identity).
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
@@ -51,7 +54,7 @@ On the [Entity Risks][4] page, you can view all entities that have a non-zero ri
 
 In a federated environment, one person typically acts through many separate entities, such as several email aliases, an IAM user, assumed roles, and a code repository account. Viewed individually, none of these entities shows that person's total risk.
 
-When you configure an Entity Pack on the [Content Packs][9] page, Cloud SIEM syncs user identities from your identity provider. It then resolves the entities that belong to each one. Entities that resolve to one person are grouped under a single user identity row, named for that person. That row's risk score is the sum of the risk scores of the entities beneath it. Grouping is applied automatically whenever an identity provider is connected.
+When you configure an [Entity Pack][9] for your identity provider, Cloud SIEM syncs user identities from that provider. It then resolves the entities that belong to each one. Entities that resolve to one person are grouped under a single user identity row, named for that person. That row's risk score is the sum of the risk scores of the entities beneath it. Grouping is applied automatically whenever an identity provider is connected.
 
 To investigate a user identity:
 
@@ -155,4 +158,5 @@ The severity threshold of an entity is calculated by adding up the score impact 
 [4]: https://app.datadoghq.com/security/siem/entity-risks
 [7]: https://app.datadoghq.com/security/configuration/siem/entity-risks
 [8]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/#supported-out-of-the-box-ocsf-pipelines
-[9]: /security/cloud_siem/ingest_and_enrich/content_packs
+[9]: /security/cloud_siem/ingest_and_enrich/entity_packs
+[10]: /security/cloud_siem/ingest_and_enrich/content_packs
