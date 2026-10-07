@@ -406,6 +406,7 @@ unsupported_sites:
   roku_error_tracking: [gov,gov2]
   roku_log_collection: [gov,gov2]
   rum_cpp: [gov,gov2]
+  rum_remote_configuration: [gov,gov2]
   rum_roku: [gov,gov2]
   rum_server_auto_instrumentation: [gov,gov2]
   rum_server_apache: [gov,gov2]

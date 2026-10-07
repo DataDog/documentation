@@ -1,6 +1,7 @@
 ---
 title: RUM Remote Configuration
 description: Configure RUM SDK settings remotely for Browser, iOS, and Android applications.
+site_support_id: rum_remote_configuration
 aliases:
 - /real_user_monitoring/guide/remote-config-launchdarkly/
 - /real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
