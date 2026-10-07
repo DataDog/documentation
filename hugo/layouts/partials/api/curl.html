@@ -34,8 +34,6 @@
 {{- end }}
 <br/>
 {{- end -}}
-{{- if ne $contentEncoding "deflate" -}}
-
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
     {{- range . -}}
@@ -84,10 +82,10 @@
 <span class="n">EOF</span>
 <span class="n">) | gzip | </span>
 {{- else if eq $contentEncoding "deflate" -}}
-<span class="o">echo $(cat <<</span> <span class="n">EOF</span>
+<span class="o">printf '%s' "$(cat <<'EOF'</span>
 <span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
-<span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8 | </span>
+<span class="o">)" |</span> <span class="n">python3 -c 'import sys, zlib; sys.stdout.buffer.write(zlib.compress(sys.stdin.buffer.read()))' | </span>
 {{- end -}}
 {{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
@@ -172,6 +170,3 @@
 <span class="n">EOF</span>
 {{- end -}}
 <br/>
-{{- else -}}
-<span class="c1">See one of the other client libraries for an example of sending deflate-compressed data.</span><br/><br/>
-{{- end -}}
