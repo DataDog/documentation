@@ -30,6 +30,13 @@ With the Capacity Planning page, you can answer questions such as:
 
 {{< img src="gpu_monitoring/capacity-planning-page.png" alt="Capacity Planning page in GPU Monitoring showing GPU quota, idle allocated GPU, preemption, and fleet coverage graphs above a list of workloads." style="width:100%;" >}}
 
+## Prerequisites
+
+To use the Capacity Planning page, you must meet the following criteria:
+- You are running Datadog Agent version 7.84.1 or later with [GPU Monitoring enabled][1]. To upgrade, see [Upgrade the Agent with Fleet Automation][2].
+- Your GPU workloads run on Kubernetes.
+- You have enabled the [Kueue integration][3] in Datadog. For details, see the [Kueue integration documentation][4].
+
 ## Explore the Capacity Planning page
 
 ### Filter by team and queue
@@ -59,15 +66,6 @@ The table at the bottom of the page has two tabs:
 - {{< ui >}}Workloads{{< /ui >}}: Lists each workload with its team, cluster, ClusterQueue, GPU usage by resource flavor, and latest status, such as {{< ui >}}Admitted{{< /ui >}}.
 
 Use the {{< ui >}}Workloads{{< /ui >}} tab to check the current state of a workload and to investigate workloads that are pending or were evicted.
-
-## Setup
-
-### Prerequisites
-
-To use the Capacity Planning page, you must meet the following criteria:
-- You are running Datadog Agent version 7.84.1 or later with [GPU Monitoring enabled][1]. To upgrade, see [Upgrade the Agent with Fleet Automation][2].
-- Your GPU workloads run on Kubernetes.
-- You have enabled the [Kueue integration][3] in Datadog. For details, see the [Kueue integration documentation][4].
 
 ## Further reading
 
