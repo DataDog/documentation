@@ -85,7 +85,7 @@ This overview highlights the topics to consider when planning an installation. D
 
 5. **Choose [Agent features](#configure-additional-features).**
 
-   Decide which Agent features to enable during installation. Use the in-app workflow to select features and generate the installation command, or use [Fleet Automation][33] to enable supported features on installed Agents.
+   Decide which Agent features to enable and select an [infrastructure mode][38] during installation. Infrastructure mode determines which infrastructure monitoring capabilities the Agent enables and can affect billing. Use the in-app workflow to select features and generate the installation command, or use [Fleet Automation][33] to enable supported features on installed Agents.
 
 ### Installation methods
 
@@ -224,7 +224,7 @@ Set initial Agent configuration as environment variables before running the exec
 | `DD_HOSTNAME` | String | Sets the hostname reported by the Agent. |
 | `DD_LOG_LEVEL` | String | Sets the Agent log level. |
 | `DD_LOGS_ENABLED` | Boolean | Enables or disables log collection. Default: `false`. |
-| `DD_INFRASTRUCTURE_MODE` | String | The monitoring mode the Agent is configured in. Each mode offers a different set of features. |
+| `DD_INFRASTRUCTURE_MODE` | String | Sets the Agent's infrastructure mode. See [Infrastructure Modes][38] for guidance on selecting a mode. |
 | `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Boolean | Enables or disables [Live Process collection][21]. |
 | `DD_REMOTE_UPDATES` | Boolean | Enables or disables remote Agent upgrades through Fleet Automation. |
 | `DD_URL` | URL | Overrides the metrics intake URL. |
@@ -233,6 +233,7 @@ Set initial Agent configuration as environment variables before running the exec
 | `DD_PROXY_NO_PROXY` | String | Sets a comma- or space-separated list of hosts that bypass the proxy. |
 
 [21]: /infrastructure/process/
+[38]: /agent/configuration/infrastructure-modes/
 
 {{% /tab %}}
 {{% tab "MSI" %}}
@@ -249,7 +250,7 @@ Pass initial Agent configuration as public properties on the `msiexec` command l
 | `LOGS_ENABLED` | Boolean | Enables or disables log collection. Default: `false`. |
 | `APM_ENABLED` | Boolean | Enables or disables the Trace Agent. Default: `true`. |
 | `PROCESS_ENABLED` | Boolean | Enables or disables [Live Process collection][21]. |
-| `DD_INFRASTRUCTURE_MODE` | String | The monitoring mode the Agent is configured in. Each mode offers a different set of features. |
+| `DD_INFRASTRUCTURE_MODE` | String | Sets the Agent's infrastructure mode. See [Infrastructure Modes][38] for guidance on selecting a mode. |
 | `HOSTNAME_FQDN_ENABLED` | Boolean | Enables or disables using the fully qualified domain name as the Agent hostname. Default: `false`. |
 | `CMD_PORT` | Number | Sets the Agent command API port. Default: `5001`. |
 | `PROXY_HOST` | String | Sets the proxy host. |
@@ -259,6 +260,7 @@ Pass initial Agent configuration as public properties on the `msiexec` command l
 | `EC2_USE_WINDOWS_PREFIX_DETECTION` | Boolean | Uses the EC2 instance ID for Windows hosts on EC2. |
 
 [21]: /infrastructure/process/
+[38]: /agent/configuration/infrastructure-modes/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -462,6 +464,7 @@ After configuration is complete, [restart the Agent][11].
 [32]: https://github.com/DataDog/datadog-agent/releases
 [33]: /agent/fleet_automation/configure_agents/
 [34]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[38]: /agent/configuration/infrastructure-modes/
 [35]: https://install.datadoghq.com/datadog-installer-x86_64.exe
 [36]: https://install.datadoghq.com/datadog-installer-7.84.0-1-x86_64.exe
 [37]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.84.0.msi
