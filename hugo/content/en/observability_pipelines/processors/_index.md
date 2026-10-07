@@ -41,6 +41,7 @@ These are the available processors:
 - [Filter Processor][7]
 - [Generate Metrics Processor][8]
 - [Grok Parser Processor][9]
+- [Integration Pipelines Processor (Preview)][20]
 - [Parse JSON Processor][10]
 - [Parse XML Processor][11]
 - [Quota Processor][12]
@@ -71,6 +72,7 @@ These are the available processors:
 [17]: /observability_pipelines/processors/split_array/
 [18]: /observability_pipelines/processors/tags/
 [19]: /observability_pipelines/processors/throttle/
+[20]: /observability_pipelines/processors/integration_pipelines/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
