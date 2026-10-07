@@ -17,7 +17,7 @@ further_reading:
 AI Impact is available to all Datadog customers in Preview.
 {{< /callout >}}
 
-[AI Impact][1] classifies each pull request as AI-assisted or non-AI based on the sources it detects for your AI coding tools. A source is a signal that an AI coding tool contributed to a commit. 
+[AI Impact][1] classifies each pull request as {{< ui >}}AI-assisted{{< /ui >}} or {{< ui >}}non-AI{{< /ui >}} based on the sources it detects for your AI coding tools. A source is a signal that an AI coding tool contributed to a commit. 
 
 Configure your AI coding tools and sources at [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}AI Impact{{< /ui >}}][2]. Datadog points you to the recommended source for the most accurate classification for each tool.
 
@@ -51,7 +51,7 @@ Two attribution modes are available, depending on the signal your tools provide:
 
 Direct attribution is more precise, because the signal is attached to the change itself. Inferred attribution covers tools that report usage without per-commit detail, and classifies every commit an active author made that day as AI-assisted. A user is active only on days the tool reports lines of code created by that user.
 
-By default, Datadog selects the most precise attribution mode that all [integrated tools](#supported-ai-coding-assistants-and-sources) have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics use direct attribution because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are inferred from user activity because direct attribution is not available for Claude Code.
+By default, the AI Impact dashboard displays metrics using the most precise attribution mode that all [integrated tools](#supported-ai-coding-assistants-and-sources) have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics use direct attribution because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are inferred from user activity because direct attribution is not available for Claude Code.
 
 To select which attribution mode your metrics use in the [AI Impact dashboard][1], set the {{< ui >}}Default AI attribution UI filter{{< /ui >}} in AI Impact settings. The setting affects only how data is displayed in the AI Impact UI, not what Datadog ingests. Both modes continue to collect data regardless of which mode you select.
 

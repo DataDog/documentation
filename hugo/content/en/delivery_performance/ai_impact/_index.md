@@ -38,7 +38,7 @@ AI Impact measures how AI coding tools—including coding assistants, review age
 
 ## Getting started
 
-Datadog detects some AI activity automatically after [DORA Metrics][1] is set up with deployment, commit, and pull request data. To measure your coding tools more fully, see [Set Up AI Impact][2] to configure tools and sources for AI Impact.
+Datadog detects AI activity from co-author signatures automatically after [DORA Metrics][1] is set up with deployment, commit, and pull request data. To more completely capture your AI coding tools' activity, see [Set Up AI Impact][2] to configure tools and sources for AI Impact.
 
 ## Impact metrics
 
