@@ -59,7 +59,7 @@ To investigate a user identity:
 1. Click the arrow to expand the row and see each entity resolved to that user identity, along with its own risk score, type, source, and signal count.
 1. Click an entity to open its side panel and continue investigating, as described in [Quickly build context on an entity](#quickly-build-context-on-an-entity).
 
-<div class="alert alert-info">Only entities that resolve unambiguously to a user identity are grouped. Entities that cannot be resolved continue to appear as individual rows, so the same person may still appear more than once.</div>
+<div class="alert alert-info">Entity Risks only groups entities that resolve unambiguously to a user identity. Entities that cannot resolve to a single identity continue to appear as individual rows, so the same person may still appear more than once.</div>
 
 ### Quickly build context on an entity
 
