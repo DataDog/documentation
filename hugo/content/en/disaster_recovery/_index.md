@@ -175,13 +175,16 @@ To set up the two-step DNS delegation:
 
 ### 4. Run a failover test
 
-Datadog recommends validating your failover setup with a scheduled drill before you need it in a real incident.
+Datadog recommends validating your DNS failover setup with a scheduled drill before you need it in a real incident.
 
-1. Update your own DNS record to point to your target Datadog data center endpoint (for example, switching from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`), then mark the time for the start of the test window. Failover initiation begins at the moment you complete the DNS record change. No coordination with Datadog is required.
-1. As soon as data begins to appear in your secondary organization, mark the time for the end of the test window. If the duration of the test does not meet your Required Time Objective, see [Required settings for optimal Recovery Time Objective (RTO)][20].
-1. Reverse the DNS change to roll back.
+1. Update your DNS record to point to the secondary Datadog data center endpoint (for example, from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`). Record when you complete the change. No coordination with Datadog is required to initiate DNS failover.
+1. Confirm that new telemetry appears in your secondary organization, and record when you observe it. If the observed recovery time exceeds your recovery time objective (RTO), review the [Required settings for optimal Recovery Time Objective (RTO)][20].
+1. Restore your DNS record's original value to roll back.
+1. Confirm that new telemetry resumes in your primary organization.
 
-Datadog recommends running this drill at least annually, and after any material change to your DNS provider or telemetry pipeline.
+These observations help you evaluate the drill. Datadog's formal RTO measurement uses DNS monitoring and intake records. The time you observe telemetry in the UI can differ from the recorded intake time.
+
+Datadog recommends running this drill at least annually and after any material change to your DNS provider or telemetry pipeline.
 
 ## Further reading
 
