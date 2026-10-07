@@ -20,6 +20,11 @@
   border: none;
   outline: none;
   font: inherit;
+  /* Both after `font: inherit`, which resets them to the body's Light 200 at
+     the base size. Hugo's search input is heavier and a step smaller than its
+     body text; the weight here matches the result titles. */
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-sm);
   color: var(--color-text);
   background: transparent;
 }
@@ -30,7 +35,6 @@
 
 .search-bar__input--mobile::placeholder {
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
 }
 
 /* Hide the browser-default clear button (Hugo strips it the same way in
@@ -241,7 +245,7 @@
   padding: 0 0 var(--space-2xs);
   font-size: var(--font-size-base);
   font-weight: 400;
-  color: var(--color-text-muted);
+  color: var(--color-brand);
   border-bottom: var(--border-width) solid var(--color-surface-border);
 }
 
