@@ -58,7 +58,7 @@ To create a PR Gates rule in Datadog:
 
 ### Manage PR checks
 
-PR Gates automatically create PR checks in [GitHub][4], [GitLab][11], [Azure DevOps][5], or [Bitbucket Cloud][12] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. In GitLab, PR Gates will also use your Datadog Service Account to approve a merge request.
+PR Gates automatically create PR checks in [GitHub][4], [GitLab][11], [Azure DevOps][5], or [Bitbucket Cloud][12] pull requests (merge requests in GitLab) for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. In GitLab, PR Gates also use a Datadog Service Account to approve merge requests when all your PR Gate rules' conditions are passing. The service account is the same one you created when you installed the GitLab Source Code integration.
 
 <div class="alert alert-info"><strong>Note</strong>: Re-running a check in the pull request UI does not re-run the corresponding PR Gates rule.</div>
 
