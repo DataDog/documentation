@@ -499,6 +499,8 @@ Under {{< ui >}}Email Address{{< /ui >}}, choose:
 
 A test can use one email address variable. Persistent email requires the feature to be enabled for your organization and access to the selected global variable. For setup, permissions, and concurrent-run considerations, see [Test email OTP login flows with a persistent email address][17].
 
+Tests using the same persistent address share an inbox. Broad extraction patterns can select another parallel test's OTP and cause login failures. Use temporary email addresses or different persistent addresses to isolate tests. See [Persistent email limitations][18].
+
 ### Subtests
 
 You can run browser tests within other browser tests to reuse existing workflows up to two levels of nesting.
@@ -593,3 +595,4 @@ To edit a browser recording after it's saved:
 [15]: /synthetics/guide/export-tests-to-terraform
 [16]: https://json-schema.org/
 [17]: /synthetics/guide/persistent-email-otp/
+[18]: /synthetics/guide/persistent-email-otp/#limitations

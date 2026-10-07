@@ -82,11 +82,29 @@ Scheduled, on-demand, and CI-triggered executions reuse the saved address. The a
 
 Select the same global variable in other tests that use the same account. Changes to the account's application data persist between those tests, so reset any data that a journey needs in a known state.
 
+## Limitations
+
+### Shared inbox and email matching
+
+All tests that use the same persistent email address share its inbox. Emails are not isolated by test or execution.
+
+OTP extraction searches the available emails and returns the first value that matches the extraction step's regular expression or XPath. If no email yields a match, the extraction step fails. A matching value does not guarantee that the OTP belongs to the current test or can authenticate its session.
+
+Each email step applies its own criteria. An email assertion on the subject or body does not restrict which email a later extraction step reads.
+
 ### Concurrent executions
 
-Persistent email does not coordinate concurrent logins to the same account. Overlapping runs can receive each other's authentication emails, and your application might invalidate an earlier OTP or session when another login starts.
+Tests running in parallel with the same persistent inbox can interfere with each other if their matching criteria are too broad. For example, `\b[0-9]{6}\b` can match another test's six-digit OTP. The extraction step can succeed with that code, but the subsequent login can fail because the code belongs to another authentication attempt.
 
-Use separate persistent email variables and application accounts for tests that run concurrently. Alternatively, arrange runs so that authentication attempts for the same account do not overlap. Consider overlap across locations, browser configurations, scheduled runs, and CI jobs.
+Persistent email does not coordinate concurrent logins. Your application might also invalidate an earlier OTP or session when another login starts.
+
+To avoid interference:
+
+- Use temporary email addresses when the workflow can use a different address for each execution.
+- Use different persistent email variables and application accounts for tests that need existing accounts and run in parallel.
+- Make each step's matching criteria specific to the expected email. A pattern that matches any OTP is insufficient when several tests send similar emails to the same inbox.
+
+If tests must share an inbox, arrange runs so that authentication attempts do not overlap. Consider overlap across locations, browser configurations, scheduled runs, and CI jobs.
 
 ### Email selection and limits
 
@@ -103,7 +121,7 @@ Use separate persistent email variables and application accounts for tests that 
 | The variable is missing from the recorder's list. | Save it as an **Email address** global variable, check its access permissions, and refresh the list. |
 | The application says the account does not exist. | Register the generated address in your application before running the login test. Creating the Datadog variable does not create an application account. |
 | No OTP is found. | Check that the test requests a new email, sends it to the selected address, and uses a parser that matches the message body. |
-| The code is expired or invalid. | Check for overlapping runs, additional OTP requests, and application-specific expiration rules. |
+| The code is expired or invalid. | Check whether a broad extraction pattern matched another test's email in the shared inbox. Use temporary addresses or separate persistent inboxes for parallel tests. Also check additional OTP requests and application-specific expiration rules. |
 
 ## Further reading
 

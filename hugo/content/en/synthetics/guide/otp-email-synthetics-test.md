@@ -88,6 +88,8 @@ The following are example regex patterns to parse the OTP token from the email b
 
 The OTP will be stored in the variable for use in your Browser Test.
 
+Extraction uses the first value that matches the configured pattern and fails if no email yields a match. Tests using the same persistent address share an inbox, so broad patterns like these can extract another parallel test's OTP and cause login failures. Use temporary email addresses or different persistent addresses to isolate tests. See [Persistent email limitations][13].
+
 ### Step 4 - Use a JavaScript assertion to insert the OTP
 
 JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element. You can use a Javascript assertion to add the saved OTP from the email and insert it into your application.
@@ -152,3 +154,4 @@ From here, you can continue [recording the rest of your Browser Test][9] and the
 [10]: /synthetics/browser_tests/test_results
 [11]: /synthetics/browser_tests/test_steps?tab=testanelementontheactivepage#automatically-recorded-steps
 [12]: /synthetics/guide/persistent-email-otp/
+[13]: /synthetics/guide/persistent-email-otp/#limitations

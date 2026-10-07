@@ -335,7 +335,7 @@ To record the login flow:
 3. Add a variable extracted from the email body. Use a regular expression or XPath to extract the OTP and store it in a variable such as `LOGIN_OTP`.
 4. Enter `{{ LOGIN_OTP }}` in a {{< ui >}}Type text{{< /ui >}} step, submit the code, and assert that login succeeds.
 
-Request a new code during every run. When multiple tests share a persistent address, [avoid overlapping authentication attempts][10] that could invalidate each other's OTPs or sessions.
+Request a new code during every run. Tests using the same persistent address share an inbox. Broad extraction patterns can select another parallel test's OTP and cause login failures. Use temporary email addresses or different persistent addresses to isolate tests. See [Persistent email limitations][10].
 
 ## Manage step order
 
@@ -371,7 +371,7 @@ To edit a mobile recording after it's saved:
 [7]: https://app.datadoghq.com/synthetics/tests
 [8]: /synthetics/mobile_app_testing/mobile_app_tests/restricted_networks/
 [9]: /synthetics/guide/persistent-email-otp/
-[10]: /synthetics/guide/persistent-email-otp/#concurrent-executions
+[10]: /synthetics/guide/persistent-email-otp/#limitations
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
