@@ -77,9 +77,7 @@ An active Open Cybersecurity Schema Framework (OCSF) pipeline is optional. Cloud
 
 To open User Inventory, go to **Cloud SIEM** > **Investigate** > [**User Inventory**][6].
 
-<!-- {{TODO-IMAGE}}
-     Full-page User Inventory Explorer showing the filter bar, entity count, and user list.
-     alt: "The User Inventory Explorer listing synced user identities with their principal ID, user type, account status, and provider" -->
+{{< img src="security/cloud_siem/user_inventory_explorer.png" alt="The User Inventory Explorer listing synced user identities with their principal ID, user type, account status, and provider" style="width:100%;" >}}
 
 ### Search and filter users
 
@@ -120,9 +118,7 @@ The panel header shows the user's account status, display name, and the time ran
 
 Relative times are shown throughout the panel. To see the exact timestamp behind a relative time, hover over it.
 
-<!-- {{TODO-IMAGE}}
-     User side panel showing the header, Current state, and Risks sections.
-     alt: "The user side panel for a single user identity, showing current state and associated risks" -->
+{{< img src="security/cloud_siem/user_inventory_side_panel.png" alt="The user side panel for a single user identity, showing current state and associated risks" style="width:100%;" >}}
 
 ### Review current state
 
@@ -190,10 +186,7 @@ The tab header shows the number of changes made during the selected time period.
 - **JSON**: A side-by-side diff of two versions. Removed values are marked in red; added values are marked in green.
 - **Timeline**: A chronological view of the changes.
 
-<!-- {{TODO-IMAGE}}
-     Entity changes tab in JSON view, showing a side-by-side diff of two user identity versions.
-     Capture AFTER lastLoginTime is removed from the tracked attributes.
-     alt: "A side-by-side JSON diff comparing two versions of a user identity, highlighting changes to MFA enforcement" -->
+{{< img src="security/cloud_siem/user_inventory_entity_changes.png" alt="A side-by-side JSON diff comparing two versions of a user identity, highlighting changes to MFA enforcement" style="width:100%;" >}}
 
 In the JSON view, select the versions to compare using the version dropdown above each pane. The number of changes between the two selected versions appears beside the second pane. To reduce noise, unchanged attributes are collapsed; click the hidden lines indicator to expand them.
 
