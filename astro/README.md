@@ -108,7 +108,7 @@ The API reference pages are generated at build time from the v1 and v2 OpenAPI s
 
 ### Plaintext rendering (`.md`)
 
-Every cdoc has a plaintext twin at the same path with a `.md` extension (for example `/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python`), returning `text/markdown`. Like the API docs' `.md` pages, this is what the **Copy page** button copies and what LLM/agent consumers can fetch. It is served by a second catch-all, the endpoint [src/pages/[...slug].md.ts](src/pages/%5B...slug%5D.md.ts) (a literal `.md` segment makes it win over the HTML catch-all; the same-named slug 404s if it isn't a cdoc).
+Every cdoc has a plaintext twin at the same path with a `.md` extension (for example `/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python`), returning `text/markdown`. Like the API docs' `.md` pages, this is what the **Copy page** button copies and what LLM/agent consumers can fetch. It is served by a second catch-all, the endpoint [src/pages/[...lang]/[...slug].md.ts](src/pages/%5B...lang%5D/%5B...slug%5D.md.ts) (a literal `.md` segment makes it win over the HTML catch-all; the same-named slug 404s if it isn't a cdoc). It sits under `[...lang]/` so that it cannot out-rank the `/api/**.md` routes — see the comment at the top of the file.
 
 Unlike the API docs — which hand-build a Markdoc AST per component — a cdoc is _already_ Markdoc, so we render it directly. The pipeline (all under [src/lib/cdocs/plaintext/](src/lib/cdocs/plaintext/)) is:
 
