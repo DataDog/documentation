@@ -1451,6 +1451,8 @@ components:
           description: Description of the dashboard.
           nullable: true
           type: string
+        experience_type:
+          $ref: "#/components/schemas/DashboardExperienceType"
         id:
           description: ID of the dashboard.
           example: "123-abc-456"
@@ -1573,6 +1575,17 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardExperienceType:
+      description: The experience type of the dashboard.
+      enum:
+        - default
+        - product_analytics
+      example: default
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - PRODUCT_ANALYTICS
     DashboardFixedTimeframe:
       description: A fixed dashboard timeframe.
       properties:
@@ -6250,6 +6263,7 @@ components:
         - security_runtime_stream
         - security_signals_stream
         - incidents_stream
+        - case_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6270,6 +6284,7 @@ components:
         - SECURITY_RUNTIME_STREAM
         - SECURITY_SIGNALS_STREAM
         - INCIDENTS_STREAM
+        - CASE_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that

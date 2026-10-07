@@ -126,7 +126,7 @@ response = client.chat.completions.create(
 
 If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
 
-Managed prompts cannot reference other managed prompts in their templates. To compose prompts, combine them in application code or manage the final provider-facing prompt as a single prompt.
+Without prompt composition, combine prompts in application code or manage the final provider-facing prompt as a single prompt. To include one managed prompt in another, see [Reuse prompts with composition](#reuse-prompts-with-composition). Prompt composition is in Preview.
 
 ### Select a version
 
@@ -534,6 +534,90 @@ Pass these values to your model client along with the messages returned by `prom
 
 **API authoring:** You can also create prompts and versions with the [Prompt Management API][8]. Omitting `config` creates an empty configuration for a new prompt or inherits the latest configuration for a new version. Send `{}` to clear it.
 
+## Reuse prompts with composition
+
+<div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Prompt composition lets one prompt include another, so you can reuse shared instructions without copying them. For example, a support assistant and a billing assistant can include the same response policy. You can include another prompt in two ways:
+
+- **Chat messages**: Include some or all messages from a chat prompt.
+- **Text**: Insert a text prompt's content inside a message.
+
+Each include points to one exact version. Publishing a new version of the included prompt doesn't change prompts that already include it.
+
+### Include chat messages
+
+#### In the UI
+
+The following example adds a shared response policy to a support assistant prompt.
+
+1. Save a prompt with the ID `response-policy` and one {{< ui >}}System{{< /ui >}} message: `Answer concisely. If you do not know the answer, say so.`
+2. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}New Prompt{{< /ui >}}. In the Prompt Editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
+3. After the included prompt, add a {{< ui >}}User{{< /ui >}} message containing `{{question}}`. If the editor added empty messages, remove them.
+4. Click {{< ui >}}Save{{< /ui >}}, enter `support-assistant-composed` as the prompt ID, and click {{< ui >}}Create prompt{{< /ui >}}.
+
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
+
+Your prompt now contains:
+
+```text
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
+```
+
+Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual. The retrieved prompt already contains the included messages, so you don't need to fetch `response-policy` separately.
+
+By default, an include adds every message from the included prompt, in order. To include only some messages, reorder them, or repeat one, click {{< ui >}}Included Prompt{{< /ui >}} in the Prompt Editor and select {{< ui >}}Customize messages{{< /ui >}}. Customizing doesn't change the included prompt.
+
+#### With the API
+
+Use an `include` object in `template.messages` to reference a specific version of a chat prompt. This example assumes a chat prompt `response-policy` with a version 1. To create a prompt that includes it, send this JSON body to `POST /api/v2/llm-obs/v1/prompts`:
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-assistant-composed",
+      "template": {
+        "messages": [
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+For authentication and message-selection options, see [Create an Agent Observability prompt][11].
+
+### Include text in a message
+
+To reuse a phrase instead of complete messages, click {{< ui >}}Include Prompt{{< /ui >}}, select a text prompt and version, and click {{< ui >}}Insert text{{< /ui >}}. The reference is added to the end of the last editable message. Move it where you need it.
+
+For example, if `response-style` version 1 contains `Answer concisely.`, write:
+
+```text
+{{>response-style version=1}} Answer {{question}}.
+```
+
+The resolved template is:
+
+```text
+Answer concisely. Answer {{question}}.
+```
+
+The reference resolves to the included text exactly, with no added spaces or line breaks. Always specify a version. Without one, `{{>response-style}}` stays literal text, not an include. When creating a prompt without Preview access, inline references remain literal text. Previously saved composed versions remain usable.
+
+In API requests, use the same syntax in a text `template` or a chat message's `content`.
+
+### Review and update includes
+
+On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the references you authored. {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded messages, before runtime variables are filled in.
+
+When a shared policy changes, use its {{< ui >}}Used By{{< /ui >}} tab to find prompts that reference it. Open a consuming prompt, replace the include with the new source version, then test, save, and deploy the updated prompt. Existing versions keep their original content, even if the source is later deleted.
+
 ## Advanced usage
 
 ### Serve multiple versions from one environment
@@ -582,3 +666,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
+[11]: /api/latest/agent-observability/create-an-agent-observability-prompt/
