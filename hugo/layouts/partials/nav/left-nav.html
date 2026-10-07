@@ -33,8 +33,8 @@
 {{ $currentTopSectionIDs := slice }}
 {{ range $flatMenu }}
     {{ if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) }}
-        {{ if not (in $currentTopSectionIDs .identifier) }}
-            {{ $currentTopSectionIDs = $currentTopSectionIDs | append .identifier }}
+        {{ if not (in $currentTopSectionIDs .topLevelIdentifier) }}
+            {{ $currentTopSectionIDs = $currentTopSectionIDs | append .topLevelIdentifier }}
         {{ end }}
     {{ end }}
 {{ end }}
@@ -56,10 +56,16 @@
                      Omitting Level 2 for other sections is visually a no-op: the sidenav CSS already hides
                      `ul li > ul` by default and only shows it via the `.open`/`.active` classes set on the
                      current section, and clicking any nav item navigates (pjax) rather than expanding in place
-                     -- so another section's Level 2 was never visible without navigating into it first. */}}
+                     -- so another section's Level 2 was never visible without navigating into it first.
+
+                     `open` is what the CSS actually keys display on (`ul li.open > ul { display: block }`);
+                     it's baked in here so the current section's nav renders already-expanded on first paint,
+                     instead of sitting visually collapsed until datadog-docs.js's window.onload handler adds
+                     it. That JS still runs (and still owns a few URL patterns that don't match by simple
+                     prefix, e.g. billing, security anchors) -- this only covers the common case server-side. */}}
                 {{ $isCurrentTopSection := in $currentTopSectionIDs .Identifier }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
-                {{ if $isCurrentTopSection }}active{{ end }}">
+                {{ if $isCurrentTopSection }}active open{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
                     <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                         {{ if .Pre }}
@@ -73,7 +79,11 @@
                     <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                         {{/*  LEVEL 2  */}}
                         {{ range .Children }}
-                            <li class="{{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }} {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                            {{/* `open` here reveals only this item's own Level 3, not every Level 2 sibling's
+                                 -- see the Level 1 comment above for why `open` is baked in at all. */}}
+                            {{ $l2URL := trim (.URL | relLangURL) "/" }}
+                            {{ $l2IsOpen := and (ne $l2URL "") (or (eq $curURL $l2URL) (strings.HasPrefix $curURL (printf "%s/" $l2URL))) }}
+                            <li class="{{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }} {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if $l2IsOpen }}open{{ end }}">
                                 {{ $url_without_anchor = (index (split .URL "#") 0) }}
                                 <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                                     {{ if .Pre }}
@@ -86,7 +96,11 @@
                                 <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                                 {{/*  LEVEL 3  */}}
                                 {{ range .Children }}
-                                    <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
+                                    {{/* `open` here reveals only this item's own Level 4 -- see the Level 1
+                                         comment above for why `open` is baked in at all. */}}
+                                    {{ $l3URL := trim (.URL | relLangURL) "/" }}
+                                    {{ $l3IsOpen := and (ne $l3URL "") (or (eq $curURL $l3URL) (strings.HasPrefix $curURL (printf "%s/" $l3URL))) }}
+                                    <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if $l3IsOpen }}open{{ end }} {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
                                         {{ $url_without_anchor = (index (split .URL "#") 0) }}
                                         <a href="{{ .URL | relLangURL }}" data-type="{{- with site.GetPage .URL -}}{{- .Type -}}{{- end -}}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                                             {{ if .Pre }}

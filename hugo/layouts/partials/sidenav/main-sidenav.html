@@ -17,9 +17,12 @@
 
             <div class="sidenav-nav sidenav-nav-js-load">
                 {{/* Cache key must reflect which top-level menu entries match the page, not
-                     .Section -- see nav/current-top-section.html for why. */}}
+                     .Section -- see nav/current-top-section.html for why. It must also reflect
+                     the specific deeper (Level 2-4) entries that match, not just the top-level
+                     section -- see nav/current-open-path.html for why. */}}
                 {{ $currentTopSection := partial "nav/current-top-section.html" . }}
-                {{ partialCached "nav/left-nav.html" . $currentTopSection .Site.Language.Lang }}
+                {{ $currentOpenPath := partial "nav/current-open-path.html" . }}
+                {{ partialCached "nav/left-nav.html" . $currentTopSection $currentOpenPath .Site.Language.Lang }}
             </div>
         </div>
     </div>

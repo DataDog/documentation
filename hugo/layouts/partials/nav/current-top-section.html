@@ -23,8 +23,8 @@
 {{- $matchedIDs := slice -}}
 {{- range $flatMenu -}}
     {{- if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) -}}
-        {{- if not (in $matchedIDs .identifier) -}}
-            {{- $matchedIDs = $matchedIDs | append .identifier -}}
+        {{- if not (in $matchedIDs .topLevelIdentifier) -}}
+            {{- $matchedIDs = $matchedIDs | append .topLevelIdentifier -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}

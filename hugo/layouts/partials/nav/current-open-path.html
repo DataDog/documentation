@@ -1,0 +1,37 @@
+{{- /*
+  Returns a pipe-delimited list of every menu entry's OWN identifier, at any level (L1-L4),
+  whose URL equals or is a path-ancestor of the current page -- the full "open" chain down
+  to (and including) whichever entry exactly matches the current page, if any.
+
+  Used as an additional nav/left-nav.html partialCached key segment, alongside
+  nav/current-top-section.html's top-level identifiers. Without this, every page sharing
+  the same top-level section reuses ONE cached render of left-nav.html, so Levels 2-4's
+  `active`/`open` state would be baked in from whichever page happened to render that cache
+  entry first -- silently wrong for every other page sharing the key. This was already true
+  of the `active` class before this file existed; it was invisible because client JS
+  (datadog-docs.js's getPathElement, on window.onload) unconditionally recomputes
+  active/open from the real browser URL, overwriting whatever the server sent. Baking
+  `open` in server-side (see nav/left-nav.html) makes that staleness visible before JS runs,
+  which is what this key fixes.
+
+  This necessarily caches less than nav/current-top-section.html alone (closer to one
+  render per distinct menu entry than per top-level section), but still far less than one
+  render per page: most actual content pages aren't themselves individual menu entries, so
+  they collapse into a shared "no deeper match" bucket for their section.
+*/ -}}
+{{- $currentPage := . -}}
+{{- $curURL := trim $currentPage.RelPermalink "/" -}}
+{{- $flatMenu := partial "nav/flattened-menu.html" $currentPage -}}
+{{- $matchedIDs := slice -}}
+{{- range $flatMenu -}}
+    {{- if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) -}}
+        {{- if not (in $matchedIDs .identifier) -}}
+            {{- $matchedIDs = $matchedIDs | append .identifier -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $result := "" -}}
+{{- range $matchedIDs -}}
+    {{- $result = print $result "|" . -}}
+{{- end -}}
+{{- $result -}}

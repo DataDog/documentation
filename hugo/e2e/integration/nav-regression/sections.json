@@ -1,0 +1,507 @@
+[
+  {
+    "identifier": "getting_started",
+    "url": "getting_started/",
+    "name": "Getting Started"
+  },
+  {
+    "identifier": "glossary",
+    "url": "glossary/",
+    "name": "Glossary"
+  },
+  {
+    "identifier": "agent_standard_attributes",
+    "url": "standard-attributes",
+    "name": "Standard Attributes"
+  },
+  {
+    "identifier": "guides",
+    "url": "all_guides/",
+    "name": "Guides"
+  },
+  {
+    "identifier": "agent",
+    "url": "agent/",
+    "name": "Agent"
+  },
+  {
+    "identifier": "integrations_top_level",
+    "url": "integrations/",
+    "name": "Integrations"
+  },
+  {
+    "identifier": "opentelemetry_top_level",
+    "url": "opentelemetry/",
+    "name": "OpenTelemetry"
+  },
+  {
+    "identifier": "sdk",
+    "url": "client_sdks/",
+    "name": "Client SDKs"
+  },
+  {
+    "identifier": "dev_tools",
+    "url": "extend/",
+    "name": "Extend Datadog"
+  },
+  {
+    "identifier": "administrators_guide",
+    "url": "administrators_guide/",
+    "name": "Administrator's Guide"
+  },
+  {
+    "identifier": "api",
+    "url": "api/",
+    "name": "API"
+  },
+  {
+    "identifier": "cli",
+    "url": "cli/",
+    "name": "Command Line"
+  },
+  {
+    "identifier": "mcp_server",
+    "url": "mcp_server",
+    "name": "MCP Server"
+  },
+  {
+    "identifier": "partners",
+    "url": "partners/",
+    "name": "Partners"
+  },
+  {
+    "identifier": "mobile",
+    "url": "mobile/",
+    "name": "Datadog Mobile App"
+  },
+  {
+    "identifier": "ddsql_reference",
+    "url": "ddsql_reference/",
+    "name": "DDSQL Reference"
+  },
+  {
+    "identifier": "coterm",
+    "url": "coterm/",
+    "name": "CoTerm"
+  },
+  {
+    "identifier": "remote_configuration",
+    "url": "remote_configuration",
+    "name": "Remote Configuration"
+  },
+  {
+    "identifier": "cloudcraft",
+    "url": "cloudcraft/",
+    "name": "Cloudcraft (Standalone)"
+  },
+  {
+    "identifier": "bits_ai",
+    "url": "bits_ai/",
+    "name": "Bits AI"
+  },
+  {
+    "identifier": "dashboards",
+    "url": "dashboards/",
+    "name": "Dashboards"
+  },
+  {
+    "identifier": "notebooks",
+    "url": "notebooks/",
+    "name": "Notebooks"
+  },
+  {
+    "identifier": "ddsql_editor",
+    "url": "ddsql_editor/",
+    "name": "DDSQL Editor"
+  },
+  {
+    "identifier": "reference_tables",
+    "url": "reference_tables/",
+    "name": "Reference Tables"
+  },
+  {
+    "identifier": "sheets",
+    "url": "sheets/",
+    "name": "Sheets"
+  },
+  {
+    "identifier": "alerting",
+    "url": "monitors/",
+    "name": "Monitors and Alerting"
+  },
+  {
+    "identifier": "slos",
+    "url": "service_level_objectives/",
+    "name": "Service Level Objectives"
+  },
+  {
+    "identifier": "metrics_top_level",
+    "url": "metrics/",
+    "name": "Metrics"
+  },
+  {
+    "identifier": "watchdog_top_level",
+    "url": "watchdog/",
+    "name": "Watchdog"
+  },
+  {
+    "identifier": "internal_developer_portal",
+    "url": "internal_developer_portal/",
+    "name": "Internal Developer Portal"
+  },
+  {
+    "identifier": "error_tracking",
+    "url": "error_tracking/",
+    "name": "Error Tracking"
+  },
+  {
+    "identifier": "change_tracking",
+    "url": "change_tracking/",
+    "name": "Change Tracking"
+  },
+  {
+    "identifier": "events",
+    "url": "events/",
+    "name": "Event Management"
+  },
+  {
+    "identifier": "incidents",
+    "url": "incident_response/incident_management/",
+    "name": "Incident Management"
+  },
+  {
+    "identifier": "oncall",
+    "url": "incident_response/on-call/",
+    "name": "On-Call"
+  },
+  {
+    "identifier": "status_pages",
+    "url": "incident_response/status_pages/",
+    "name": "Status Pages"
+  },
+  {
+    "identifier": "case_management",
+    "url": "incident_response/work_management/",
+    "name": "Work Management"
+  },
+  {
+    "identifier": "agents",
+    "url": "actions/agents/",
+    "name": "Bits Agent Builder"
+  },
+  {
+    "identifier": "workflows",
+    "url": "actions/workflows/",
+    "name": "Workflow Automation"
+  },
+  {
+    "identifier": "datadog_apps",
+    "url": "actions/datadog_apps/",
+    "name": "Apps"
+  },
+  {
+    "identifier": "app_builder",
+    "url": "actions/app_builder/",
+    "name": "App Builder"
+  },
+  {
+    "identifier": "datastores",
+    "url": "actions/datastores/",
+    "name": "Datastores"
+  },
+  {
+    "identifier": "forms",
+    "url": "actions/forms/",
+    "name": "Forms"
+  },
+  {
+    "identifier": "action_catalog",
+    "url": "actions/actions_catalog/",
+    "name": "Action Catalog"
+  },
+  {
+    "identifier": "datadog_cloudcraft",
+    "url": "datadog_cloudcraft/",
+    "name": "Cloudcraft"
+  },
+  {
+    "identifier": "infrastructure_resource_catalog",
+    "url": "infrastructure/resource_catalog/",
+    "name": "Resource Catalog"
+  },
+  {
+    "identifier": "usm_parent",
+    "url": "universal_service_monitoring/",
+    "name": "Universal Service Monitoring"
+  },
+  {
+    "identifier": "end_user_device_monitoring",
+    "url": "infrastructure/end_user_device_monitoring/",
+    "name": "End User Device Monitoring"
+  },
+  {
+    "identifier": "hosts",
+    "url": "infrastructure/hostmap/",
+    "name": "Hosts"
+  },
+  {
+    "identifier": "containers",
+    "url": "containers/",
+    "name": "Containers"
+  },
+  {
+    "identifier": "process",
+    "url": "infrastructure/process",
+    "name": "Processes"
+  },
+  {
+    "identifier": "serverless",
+    "url": "serverless",
+    "name": "Serverless"
+  },
+  {
+    "identifier": "nm_parent",
+    "url": "network_monitoring/",
+    "name": "Network Monitoring"
+  },
+  {
+    "identifier": "storage_management",
+    "url": "infrastructure/storage_management/",
+    "name": "Storage Management"
+  },
+  {
+    "identifier": "cloud_cost",
+    "url": "cloud_cost_management/",
+    "name": "Cloud Cost"
+  },
+  {
+    "identifier": "tracing",
+    "url": "tracing/",
+    "name": "APM"
+  },
+  {
+    "identifier": "profiler",
+    "url": "profiler/",
+    "name": "Continuous Profiler"
+  },
+  {
+    "identifier": "dbm",
+    "url": "database_monitoring/",
+    "name": "Database Monitoring"
+  },
+  {
+    "identifier": "data_streams",
+    "url": "data_streams/",
+    "name": "Data Streams Monitoring"
+  },
+  {
+    "identifier": "data_observability",
+    "url": "data_observability/",
+    "name": "Data Observability Overview"
+  },
+  {
+    "identifier": "data_catalog",
+    "url": "data_observability/data_catalog",
+    "name": "Data Catalog"
+  },
+  {
+    "identifier": "data_lineage",
+    "url": "data_observability/lineage",
+    "name": "Lineage"
+  },
+  {
+    "identifier": "quality_monitoring",
+    "url": "data_observability/quality_monitoring/",
+    "name": "Quality Monitoring"
+  },
+  {
+    "identifier": "data_jobs",
+    "url": "data_observability/jobs_monitoring/",
+    "name": "Jobs Monitoring"
+  },
+  {
+    "identifier": "data_observability_cicd",
+    "url": "data_observability/cicd",
+    "name": "CI/CD"
+  },
+  {
+    "identifier": "data_observability_integration_overhead",
+    "url": "data_observability/integration_overhead",
+    "name": "Integration Overhead"
+  },
+  {
+    "identifier": "llm_obs",
+    "url": "llm_observability/",
+    "name": "Agent Observability"
+  },
+  {
+    "identifier": "gpu_monitoring",
+    "url": "gpu_monitoring/",
+    "name": "GPU Monitoring"
+  },
+  {
+    "identifier": "ai_agents_console",
+    "url": "ai_agents_console/",
+    "name": "Agent Console"
+  },
+  {
+    "identifier": "ci",
+    "url": "continuous_integration/",
+    "name": "CI Visibility"
+  },
+  {
+    "identifier": "cd",
+    "url": "continuous_delivery/",
+    "name": "CD Visibility"
+  },
+  {
+    "identifier": "deployment_gates",
+    "url": "deployment_gates/",
+    "name": "Deployment Gates"
+  },
+  {
+    "identifier": "tests",
+    "url": "tests/",
+    "name": "Test Optimization"
+  },
+  {
+    "identifier": "code_coverage",
+    "url": "code_coverage/",
+    "name": "Code Coverage"
+  },
+  {
+    "identifier": "pr_gates",
+    "url": "pr_gates/",
+    "name": "PR Gates"
+  },
+  {
+    "identifier": "delivery_performance",
+    "url": "delivery_performance/",
+    "name": "Delivery Performance"
+  },
+  {
+    "identifier": "feature_flags",
+    "url": "feature_flags/",
+    "name": "Feature Flags"
+  },
+  {
+    "identifier": "source_code_integration",
+    "url": "source_code/",
+    "name": "Source Code Integration"
+  },
+  {
+    "identifier": "ide_plugins",
+    "url": "ide_plugins/",
+    "name": "IDE Plugins"
+  },
+  {
+    "identifier": "observability_pipelines",
+    "url": "observability_pipelines/",
+    "name": "Observability Pipelines"
+  },
+  {
+    "identifier": "log_management",
+    "url": "logs/",
+    "name": "Log Management"
+  },
+  {
+    "identifier": "cloudprem",
+    "url": "byoc-logs/",
+    "name": "BYOC Logs"
+  },
+  {
+    "identifier": "security_platform",
+    "url": "security/",
+    "name": "Security Overview"
+  },
+  {
+    "identifier": "cloud_siem",
+    "url": "security/cloud_siem/",
+    "name": "Cloud SIEM"
+  },
+  {
+    "identifier": "code_security",
+    "url": "security/code_security/",
+    "name": "Code Security"
+  },
+  {
+    "identifier": "csm",
+    "url": "security/cloud_security_management",
+    "name": "Cloud Security"
+  },
+  {
+    "identifier": "application_security",
+    "url": "security/application_security/",
+    "name": "App and API Protection"
+  },
+  {
+    "identifier": "ai_guard",
+    "url": "security/ai_guard/",
+    "name": "AI Guard"
+  },
+  {
+    "identifier": "workload_protection",
+    "url": "security/workload_protection/",
+    "name": "Workload Protection"
+  },
+  {
+    "identifier": "sensitive_data_scanner",
+    "url": "security/sensitive_data_scanner/",
+    "name": "Sensitive Data Scanner"
+  },
+  {
+    "identifier": "synthetics",
+    "url": "synthetics/",
+    "name": "Synthetic Testing and Monitoring"
+  },
+  {
+    "identifier": "continuous_testing",
+    "url": "continuous_testing/",
+    "name": "Continuous Testing"
+  },
+  {
+    "identifier": "journey_monitoring",
+    "url": "journey_monitoring/",
+    "name": "Journey Monitoring"
+  },
+  {
+    "identifier": "rum",
+    "url": "real_user_monitoring/",
+    "name": "Real User Monitoring"
+  },
+  {
+    "identifier": "product_analytics",
+    "url": "product_analytics/",
+    "name": "Product Analytics"
+  },
+  {
+    "identifier": "pa_experiments",
+    "url": "experiments/",
+    "name": "Experiments"
+  },
+  {
+    "identifier": "session_replay",
+    "url": "session_replay/",
+    "name": "Session Replay"
+  },
+  {
+    "identifier": "account_management",
+    "url": "account_management/",
+    "name": "Account Management"
+  },
+  {
+    "identifier": "disaster_recovery",
+    "url": "disaster_recovery/",
+    "name": "Disaster Recovery"
+  },
+  {
+    "identifier": "data_security",
+    "url": "data_security/",
+    "name": "Data Security"
+  },
+  {
+    "identifier": "help_top_level",
+    "url": "help/",
+    "name": "Help"
+  }
+]
