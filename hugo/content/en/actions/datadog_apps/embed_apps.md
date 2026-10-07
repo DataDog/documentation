@@ -46,7 +46,8 @@ You can embed an app from the app itself, or from the surface where you want it 
 {{% tab "Dashboard" %}}
 
 1. Open the dashboard where you want to add the app.
-1. In the widget tray, find the **Apps** widget under **Actions and Remediations**, and drag it onto the dashboard.
+1. Click **Add Widgets** to open the widget tray.
+1. Select the **Apps** tab, then drag the **Apps** widget onto the dashboard.
 1. In the editor, choose the app from the **Select app** dropdown. To limit the list to apps you own, enable **My Apps Only**.
 1. Resize the widget, then save the dashboard.
 
