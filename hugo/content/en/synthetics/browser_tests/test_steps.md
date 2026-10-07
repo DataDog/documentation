@@ -494,12 +494,12 @@ Use a Datadog-managed email address in test steps. You can [assert if an email w
 
 Under {{< ui >}}Email Address{{< /ui >}}, choose:
 
-- {{< ui >}}Temporary{{< /ui >}}: Generate a unique address and mailbox for each execution. Use this for sign-up flows that register a different account each run.
-- {{< ui >}}Persistent{{< /ui >}}: Select an email global variable created in Synthetic Monitoring settings. Its address stays the same across runs, so you can create an application account once and reuse it for OTP login. Select the variable and click {{< ui >}}Done{{< /ui >}}.
+- {{< ui >}}Temporary{{< /ui >}}: Generate a unique address and mailbox for each execution to avoid email conflicts between test runs. Use this for sign-up flows that register a different account each run.
+- {{< ui >}}Persistent{{< /ui >}}: Select an email global variable created in Synthetic Monitoring settings. Its address stays the same across runs, so you can create an application account once and reuse it for email workflows, such as OTP login. Select the variable and click {{< ui >}}Done{{< /ui >}}.
 
-A test can use one email address variable. Persistent email requires the feature to be enabled for your organization and access to the selected global variable. For setup, permissions, and concurrent-run considerations, see [Test email OTP login flows with a persistent email address][17].
+A test can use one email address variable. Persistent email requires the feature to be enabled for your organization and access to the selected global variable. For setup, permissions, and concurrent-run considerations, see [Use persistent email addresses in browser tests][17].
 
-Tests using the same persistent address share an inbox. Broad extraction patterns can select another parallel test's OTP and cause login failures. Use temporary email addresses or different persistent addresses to isolate tests. See [Persistent email limitations][18].
+<div class="alert alert-warning">Tests using the same persistent address share an inbox. Broad matching criteria can cause a test to use another parallel test's email. For example, extracting another test's OTP can cause a login failure. Use temporary email addresses or different persistent addresses to isolate tests. See <a href="/synthetics/guide/persistent-email-otp/#limitations">Persistent email limitations</a>.</div>
 
 ### Subtests
 
@@ -595,4 +595,3 @@ To edit a browser recording after it's saved:
 [15]: /synthetics/guide/export-tests-to-terraform
 [16]: https://json-schema.org/
 [17]: /synthetics/guide/persistent-email-otp/
-[18]: /synthetics/guide/persistent-email-otp/#limitations

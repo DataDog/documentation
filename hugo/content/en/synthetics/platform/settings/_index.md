@@ -126,7 +126,7 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 ## Global variables
 
-Global variables let you reuse values across your Synthetic test suite. Supported variable types depend on the test type: [single][4] and [multistep API tests][5], [browser tests][6], or [mobile app tests][17]. Email address variables provide a persistent mailbox for browser and mobile app tests.
+Global variables let you reuse values across your Synthetic test suite. Supported variable types depend on the test type: [single][4] and [multistep API tests][5], [browser tests][6], or [mobile app tests][17]. Email address variables provide a persistent mailbox for browser tests.
 
 To create a global variable, navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} page][7] and click {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
@@ -245,7 +245,7 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 {{% /tab %}}
 {{% tab "Email Address" %}}
 
-Create an email global variable to receive authentication emails at the same Datadog-managed address across browser and mobile app test runs. Register an application account with this address once, then reuse it to test OTP login and journeys after login.
+Create an email global variable to receive emails at the same Datadog-managed address across browser test runs. Register an application account with this address once, then reuse it for email workflows, such as password resets, order confirmations, or OTP login. Mobile app tests do not support email address variables.
 
 1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email address{{< /ui >}}. This option requires persistent email to be enabled for your organization.
 2. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
@@ -254,7 +254,7 @@ Create an email global variable to receive authentication emails at the same Dat
 
 Datadog generates the address when you create the variable. The saved address is read-only: you cannot supply a custom mailbox or change the address. Editing the name, description, or tags preserves the address.
 
-In the recorder, select {{< ui >}}Email Address{{< /ui >}} > {{< ui >}}Persistent{{< /ui >}} and choose the saved variable. A test can use one email address variable. For setup instructions and the differences from temporary email, see [Test email OTP login flows with a persistent email address][1].
+In the browser recorder, select {{< ui >}}Email Address{{< /ui >}} > {{< ui >}}Persistent{{< /ui >}} and choose the saved variable. A test can use one email address variable. For setup instructions and the differences from temporary email, see [Use persistent email addresses in browser tests][1].
 
 [1]: /synthetics/guide/persistent-email-otp/
 {{% /tab %}}
