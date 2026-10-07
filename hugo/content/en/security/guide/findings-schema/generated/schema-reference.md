@@ -929,44 +929,39 @@ Terraform module that declares the affected resource.
     <tr>
       <td><code>code_location</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.code_location</code><br>Location of the affected resource relative to the leaf module root.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location</code><br>Location of the affected resource relative to the root of <code>source</code>, or to the scanned repository when <code>source_type</code> is <code>local</code>.</td>
     </tr>
     <tr>
       <td><code>dependency_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.dependency_type</code><br>Indicates how the root module reaches the leaf module. Valid values: <code>direct</code>, <code>transitive</code>.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.dependency_type</code><br>Indicates how the repository reaches the module holding the affected resource. Valid values: <code>direct</code> for one module call, <code>transitive</code> for two or more.</td>
     </tr>
     <tr>
       <td><code>module_path</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.module_path</code><br>Ordered module call chain from the declaration in your repository to the leaf module. Omitted for directly called modules.</td>
-    </tr>
-    <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.name</code><br>Terraform label of the leaf module.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path</code><br>Ordered module calls from the repository declaration to the module holding the affected resource.</td>
     </tr>
     <tr>
       <td><code>source</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.source</code><br>Normalized source address of the leaf module, with credentials removed.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.source</code><br>Normalized, credential-free source of the repository or package holding <code>code_location</code>, without its subdirectory. Not set when <code>source_type</code> is <code>local</code>.</td>
     </tr>
     <tr>
       <td><code>source_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.source_type</code><br>Type of source used by the leaf module. Valid values: <code>registry</code>, <code>git</code>, <code>local</code>.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.source_type</code><br>Type of source holding <code>code_location</code>. Valid values: <code>registry</code>, <code>git</code>, <code>local</code>.</td>
     </tr>
     <tr>
       <td><code>version</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.version</code><br>Resolved registry version or Git reference of the leaf module.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.version</code><br>Resolved registry version or Git reference of <code>source</code>. Not set when <code>source_type</code> is <code>local</code>.</td>
     </tr>
   </tbody>
 </table>
 
 ### Code Location
 
-Location of the affected resource relative to the leaf module root.
+Location of the affected resource relative to the root of `source`, or to the scanned repository when `source_type` is `local`.
 
 <table>
   <thead>
@@ -1022,7 +1017,7 @@ Location of the affected resource relative to the leaf module root.
 
 ### Module Path
 
-Ordered module call chain from the declaration in your repository to the leaf module. Omitted for directly called modules.
+Ordered module calls from the repository declaration to the module holding the affected resource.
 
 <table>
   <thead>
@@ -1467,7 +1462,7 @@ Version declared for the root parent.
 
 ### Disk Locations
 
-Contains the on-disk locations where this package was found.
+On-disk locations where the package was found.
 
 <table>
   <thead>
@@ -5281,9 +5276,9 @@ Information specific to vulnerabilities.
   </tbody>
 </table>
 
-### CISA
+### Cisa
 
-Cybersecurity and Infrastructure Security Agency (CISA) metadata related to this vulnerability.
+Cybersecurity and Infrastructure Security Agency (CISA) metadata for the vulnerability.
 
 <table>
   <thead>
