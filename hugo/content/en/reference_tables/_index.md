@@ -72,7 +72,7 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name t
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
-After creating a table, [edit its rows in the UI][12] without uploading another CSV file.
+After creating a table, [edit its rows in the UI](#edit-rows-in-the-ui) without uploading another CSV file.
 
 {{% /tab %}}
 {{% tab "Cloud storage" %}}
@@ -339,5 +339,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
-[12]: /reference_tables/#edit-rows-in-the-ui
 [13]: /reference_tables/#permissions
