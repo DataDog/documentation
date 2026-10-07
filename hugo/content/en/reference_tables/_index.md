@@ -241,8 +241,6 @@ Changes remain in a draft until you save. Saving applies changes made across pag
 
 For tables with 10,000 or more rows, the preview displays the first 100 rows. Use the search field to look up and edit other rows by their primary key.
 
-Each save supports up to 100 added or updated rows and 100 removed rows.
-
 ### Replace data with a CSV file
 
 To modify an existing Reference Table with new data, select a table and click {{< ui >}}Update Config{{< /ui >}} on the top right corner.
