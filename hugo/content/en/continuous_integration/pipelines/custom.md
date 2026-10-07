@@ -116,15 +116,15 @@ A running job event does not require an `end` time. The `end` time is set when t
 ## Collect job logs
 
 Send log lines for a custom CI job to the [CI job logs intake API][19]. Use identifiers that match the pipeline and
-job events you send through the [CI Visibility Pipelines API][1]. Each log object requires a non-empty `message` and
-these fields:
+job events you send through the [CI Visibility Pipelines API][1]. Each log object has three required fields:
 
+- `message`: The non-empty text of the log line.
 - `pipeline_unique_id`: Must match the pipeline event's `resource.unique_id` and the job event's
   `resource.pipeline_unique_id`.
 - `job_id`: Must match the job event's `resource.id`.
 
-If provided, `provider_name` must match the pipeline event's `provider_name`. Datadog uses `custom` when the field is
-omitted from both the pipeline event and the log lines.
+All other log fields are optional. If provided, `provider_name` must match the pipeline event's `provider_name`.
+Datadog uses `custom` when the field is omitted from both the pipeline event and the log lines.
 
 You can stream log lines while the job runs or send them as a batch when it finishes. We recommend sending every line
 before submitting the completed job event. After you submit that event, Datadog closes the job log after 20 seconds
