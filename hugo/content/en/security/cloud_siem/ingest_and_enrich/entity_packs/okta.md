@@ -22,29 +22,6 @@ further_reading:
   text: "Collect Okta logs with the Okta integration"
 ---
 
-<!-- ===========================================================================
-PRE-PUBLISH CHECKLIST — DELETE THIS BLOCK BEFORE COMMITTING
-Finalized 2026-10-04. The page body below is complete and needs no further
-drafting. The items under BLOCKERS and VERIFY are the only things outstanding.
-
-
-VERIFY WITH ENGINEERING — currently asserted
-  [ ] Two rows of "The connection test fails" are inferences, not observed
-      failures: the SSWS-prefix row and the scheme-in-domain row. The SSWS row
-      comes from the dialog placeholder showing a bare token value, plus the
-      fact that raw Okta calls use an "Authorization: SSWS <token>" header, so
-      readers will assume the prefix belongs in the field. The scheme row comes
-      from the "e.g., mycompany.okta.com" placeholder. Neither was tested
-      against Test Connection. A table that lists a non-cause sends readers to
-      re-paste a token that was never the problem.
-  [ ] Sync Duration by Credential units, and the Users Synced definition.
-      entity_pack_okta_pre-activation.png labels the y-axis "Minutes" while
-      google_workspace.md documents the same widget in milliseconds; one is
-      wrong, or the widget auto-scales, and this page deliberately states no
-      unit.
-
-=========================================================================== -->
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Entity Packs are not available for the US1-FED Datadog site.</div>
 {{< /site-region >}}
@@ -70,6 +47,10 @@ Before you begin, make sure you have:
 - An Okta admin role that can create an API token and read users. **Read-only Administrator** is enough, and broader admin roles work too. See Okta's [standard administrator roles and permissions][5].
 - The **SIEM Entities Admin** permission in Datadog, which is required to connect a directory. Analysts who need the identity context it provides need at least **SIEM Entities Read**. See [Entity Packs][10].
 
+## Setup
+
+You can configure one set of credentials per Okta org. To sync more than one, see [Connect additional Okta orgs](#connect-additional-okta-orgs).
+
 ### Create the API token
 
 1. In the Okta Admin Console, go to **Security** > **API**.
@@ -82,11 +63,11 @@ For the full procedure and the other network zone options, see Okta's [Manage Ok
 
 <div class="alert alert-info">Create the token from a dedicated service account, such as <code>datadog-integration@example.com</code>, rather than from a person's account. A token inherits the permissions of the account that created it, and Okta rejects tokens from accounts that have been deactivated. If that account belongs to someone who leaves or loses their admin role, the sync stops, and the cause is hard to trace.</div>
 
-### Token expiration
+#### Token expiration
 
 Okta API tokens are valid for 30 days, and every API request renews the token. An active Entity Pack therefore keeps its own token alive. A token left unused for more than 30 days is revoked permanently and cannot be reinstated.
 
-### Network restrictions
+#### Network restrictions
 
 Selecting **Any IP** is the simplest option. If your organization requires a restricted token, scope it to an Okta IP zone containing Datadog's published IP ranges.
 
@@ -94,13 +75,9 @@ Datadog publishes those ranges as JSON at a per-site endpoint. For the US1 site,
 
 Two Okta constraints apply if you take this route. SSWS tokens work only with IP-based zones, not dynamic ones, and they cannot be used with blocklist zones.
 
-### Okta domain
+#### Okta domain
 
 Enter the host you sign in to, without a scheme or path (for example, `example.okta.com`).
-
-## Setup
-
-You can configure one set of credentials per Okta org. To sync more than one, see [Connect additional Okta orgs](#connect-additional-okta-orgs).
 
 ### Add credentials in Datadog
 

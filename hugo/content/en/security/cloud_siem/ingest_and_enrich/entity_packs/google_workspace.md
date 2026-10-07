@@ -100,7 +100,7 @@ For more detail, see Google's [Delegate domain-wide authority to a service accou
 ### Add credentials in Datadog
 
 1. In Datadog, go to **Cloud SIEM** > [**Content Packs**][6].
-1. Filter by **Entity Pack**, then open the **Google Workspace Identity** Entity Pack. It is marked **Available** until you connect a directory.
+1. Filter by **Entity Pack**, then open the **Google Workspace Identity** Entity Pack. It is marked **AVAILABLE** until you connect a directory.
 1. Click **Add Credentials**.
 1. In the **Add credentials and activate content pack** dialog, click **Browse files** and select the service account JSON key file you downloaded. Datadog extracts the `client_email`, `private_key`, and `project_id` values from the file.
 1. Complete the remaining fields:
@@ -118,7 +118,7 @@ Datadog stores the service account private key encrypted and does not return it 
 
 Synchronization is continuous. The first sync begins as soon as Datadog validates the credential, and each subsequent sync starts when the previous one finishes, so you never schedule or trigger a sync yourself. A **Last synced** time that is much older than usual for your account is worth investigating.
 
-After Datadog validates a credential, the Entity Pack is marked **Active**. From **Cloud SIEM** > [**Content Packs**][6], open the **Google Workspace Identity** tile to view its side panel, then check the following:
+After Datadog validates a credential, the Entity Pack is marked **ACTIVE**. From **Cloud SIEM** > [**Content Packs**][6], open the **Google Workspace Identity** tile to view its side panel, then check the following:
 
 ### Credentials
 
@@ -161,7 +161,7 @@ To confirm that identity context is reaching your signals, open a signal attribu
 
 ## Connect additional domains
 
-Each set of credentials syncs one Google Workspace domain. After the Entity Pack is **Active**, use **Add account** in the **Credentials** section to connect each additional domain.
+Each set of credentials syncs one Google Workspace domain. After the Entity Pack is **ACTIVE**, use **Add account** in the **Credentials** section to connect each additional domain.
 
 For each additional domain:
 
