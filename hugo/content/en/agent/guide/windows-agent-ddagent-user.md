@@ -77,12 +77,12 @@ Pass these public properties to `msiexec`:
 DDAGENTUSER_NAME="<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"
 ```
 
-The `DDAGENTUSER_PASSWORD` property cannot contain a semicolon (`;`).
-
 {{% /tab %}}
 {{< /tabs >}}
 
 The username portion must contain 20 characters or fewer to comply with the Microsoft [sAMAccountName attribute requirements][1].
+
+The Agent account password cannot contain a semicolon (`;`).
 
 ### Agent account password handling
 
