@@ -12,7 +12,7 @@ import type {
   GenerateCurlOptions,
 } from "./schemas/curl";
 
-type SecurityRequirement = OpenAPIV3.SecurityRequirementObject;
+export type SecurityRequirement = OpenAPIV3.SecurityRequirementObject;
 
 /** Auth to render: shell exports, `-H` flags, and URL query parts. */
 interface CurlAuth {
@@ -22,10 +22,10 @@ interface CurlAuth {
 }
 
 /** Used when the caller doesn't supply the spec's security data. */
-const DEFAULT_SECURITY: SecurityRequirement[] = [
+export const DEFAULT_SECURITY: SecurityRequirement[] = [
   { apiKeyAuth: [], appKeyAuth: [] },
 ];
-const DEFAULT_SECURITY_SCHEMES: Record<string, CurlSecurityScheme> = {
+export const DEFAULT_SECURITY_SCHEMES: Record<string, CurlSecurityScheme> = {
   apiKeyAuth: {
     type: "apiKey",
     in: "header",
@@ -172,7 +172,7 @@ function resolveCurlAuth(
 }
 
 /** True when some requirement is the OAuth scheme on its own. */
-function acceptsBearerToken(security: SecurityRequirement[]): boolean {
+export function acceptsBearerToken(security: SecurityRequirement[]): boolean {
   return security.some((requirement) => {
     const schemeNames = Object.keys(requirement);
     return schemeNames.length === 1 && schemeNames[0] === OAUTH_SCHEME_NAME;
@@ -191,7 +191,7 @@ function bearerTokenAuth(): CurlAuth {
 }
 
 /** The first requirement without the OAuth scheme, else the first one. */
-function pickKeyRequirement(
+export function pickKeyRequirement(
   security: SecurityRequirement[],
 ): SecurityRequirement {
   return (

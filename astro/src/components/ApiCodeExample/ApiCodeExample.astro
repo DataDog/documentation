@@ -6,23 +6,16 @@ import ExpandChevron from "@components/ExpandChevron/ExpandChevron.astro";
 import styles from "./ApiCodeExample.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
+import ApiCodeInstructions from "@components/ApiCodeInstructions/ApiCodeInstructions.astro";
 import { useTranslations } from "@lib/i18n/i18n";
+import type { CodeExampleSet } from "@lib/api/schemas/codeExamples";
+
+export type {
+  CodeExampleEntry,
+  CodeExampleSet,
+} from "@lib/api/schemas/codeExamples";
 
 const cl = classListFactory(styles);
-
-export interface CodeExampleEntry {
-  description: string;
-  code: string;
-  syntax: string;
-  /** If present, render one code block per region. Only the variant matching the active region is visible. */
-  regionVariants?: Record<string, { code: string }>;
-}
-
-export interface CodeExampleSet {
-  language: string;
-  label: string;
-  entries: CodeExampleEntry[];
-}
 
 interface Props {
   examples: CodeExampleSet[];
@@ -112,6 +105,13 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
                   )}
                 </details>
               ))
+            )}
+            {ex.instructions && (
+              <ApiCodeInstructions
+                language={ex.language}
+                exampleFile={ex.instructions.exampleFile}
+                runCommandByRegion={ex.instructions.runCommandByRegion}
+              />
             )}
           </TabPanel>
         ))}
