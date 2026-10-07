@@ -625,9 +625,9 @@ const getJsonWrapChars = (data) => {
 
 
 /**
- * Returns required property names for a top-level object or array item.
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
  * @param {object} data - object schema
- * returns required property names
+ * returns initial data
  */
 const getInitialJsonData = (data) => {
   let initialData;
