@@ -56,6 +56,6 @@ making data-driven decisions to improve your store
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method/
+[1]: /real_user_monitoring/setup/install/?platform=browser
 [2]: /session_replay/
 [3]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/

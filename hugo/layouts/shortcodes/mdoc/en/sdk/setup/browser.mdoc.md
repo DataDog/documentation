@@ -460,7 +460,7 @@ To request support for a web server that is not listed here, [fill out this form
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/browser
-[3]: /session_replay/browser/
+[3]: /session_replay/
 [4]: /product_analytics/
 [5]: https://www.npmjs.com/package/@datadog/browser-rum
 [6]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html

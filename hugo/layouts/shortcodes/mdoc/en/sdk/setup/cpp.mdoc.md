@@ -283,6 +283,8 @@ The SDK requires an application storage path, which must be an existing director
 
 For information on other SDK configuration options, see [Advanced Configuration][5].
 
+You can adjust the session sample rate with `SetSessionSampleRate`, but Datadog recommends using [retention filters][8] to control retained volume. For details, see [Manage Sessions][9].
+
 {% /step %}
 
 {% step title="Configure tracking consent (GDPR compliance)" %}
@@ -325,3 +327,5 @@ After the core is configured, register the RUM feature and start the core. See [
 [5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp
 [6]: /error_tracking/
 [7]: /product_analytics/
+[8]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[9]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=cpp

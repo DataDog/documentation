@@ -121,5 +121,19 @@ public void onPause() {
 
 For the attributes collected, see [Data Collected][2].
 
+## Views instrumentation versus app life cycle
+
+The Android RUM SDK offers various strategies to [automatically track views](#automatically-track-views) like Activities, Fragments, or Navigation destinations. You can also track views manually by directly calling the RUM APIs. The precise moment a view starts or stops depends on the chosen tracking strategy or manual instrumentation:
+
+- Activities (`ActivityViewTrackingStrategy`): When you rely on this strategy, the SDK automatically starts a RUM view when the Activity enters the foreground (`onResume`) and stops it when the Activity leaves the foreground (`onPause`).
+- Fragments (`FragmentViewTrackingStrategy`): Each `Fragment` in your application is tracked as a separate RUM view. The SDK starts the view in the Fragment's `onResume` life cycle method and stops it in `onPause`.
+- Mixed (`MixedViewTrackingStrategy`): Activities and Fragments each become distinct RUM views based on their respective life cycle events (`onResume` and `onPause`).
+- Navigation (`NavigationViewTrackingStrategy`): Each navigation destination is treated as a distinct RUM view, so view boundaries align with navigation events in your graph.
+- Manual View Tracking: When [tracking views manually](#manually-track-views) using `GlobalRumMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
+
+When the application goes into the background (for example, the user presses the home button or switches apps), RUM automatically stops the current view. Consequently, there is no active view while the app remains in the background. Since RUM's data model requires an active view to correlate and capture events, any events generated in the background are skipped by default. To capture these events instead, see the [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/?platform=android) page.
+
+**Note**: If you're tracking views manually, you need to configure whether the view should be stopped when the app leaves the foreground.
+
 [1]: /real_user_monitoring/setup/enable_rum/?platform=android
 [2]: /real_user_monitoring/setup/data_collected/?platform=android#view-attributes

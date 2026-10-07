@@ -454,6 +454,9 @@ public class SampleApplication extends Application {
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see [Upload debug symbols][11].
+
+You can adjust the session sample rate with `setSessionSampleRate`, but Datadog recommends using [retention filters][13] to control retained volume. For details, see [Manage Sessions][14].
+
 {% /step %}
 
 {% step title="Configure tracking consent (GDPR compliance)" %}
@@ -500,3 +503,5 @@ This means that even if users open your application while offline, no data is lo
 [10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
 [11]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=android#upload-debug-symbols-to-get-deobfuscated-stack-traces
 [12]: /real_user_monitoring/setup/enable_rum/?platform=android
+[13]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[14]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android

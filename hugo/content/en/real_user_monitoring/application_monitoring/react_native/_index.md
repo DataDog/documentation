@@ -24,11 +24,11 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 To get started with RUM for React Native, create an application and configure the React Native SDK.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/setup">}}<u>Setup</u>: Learn how to set up the React Native SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/install/?platform=react_native">}}<u>Setup</u>: Learn how to set up the React Native SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/error_tracking/">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your React Native application.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=react_native">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your React Native application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=react_native">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/reference/integrated_libraries/?platform=react_native">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your React Native applications.{{< /nextlink >}}

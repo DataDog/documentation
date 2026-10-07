@@ -442,7 +442,7 @@ const configuration = {
 To add global attributes, track users and accounts, or modify and drop events, see [Enrich RUM Data][30].
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/react_native
+[2]: /real_user_monitoring/setup/install/?platform=react_native
 [3]: https://jestjs.io/
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /getting_started/tagging/#define-tags

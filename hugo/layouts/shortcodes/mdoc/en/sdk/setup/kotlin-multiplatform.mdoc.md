@@ -104,6 +104,9 @@ fun initializeDatadog(context: Any? = null) {
     Datadog.initialize(context, configuration, trackingConsent)
 }
 ```
+
+You can adjust the session sample rate with `setSessionSampleRate`, but Datadog recommends using [retention filters][10] to control retained volume. For details, see [Manage Sessions][11].
+
 {% /step %}
 
 {% step title="Configure tracking consent (GDPR compliance)" %}
@@ -147,3 +150,5 @@ This means that even if users open your application while offline, no data is lo
 [7]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
 [8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
 [9]: /real_user_monitoring/setup/enable_rum/?platform=kotlin_multiplatform
+[10]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[11]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform

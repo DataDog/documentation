@@ -59,7 +59,7 @@ To create a metric for your experiment:
 [4]: /real_user_monitoring/setup/install/?platform=android
 [5]: /real_user_monitoring/setup/install/?platform=ios
 [6]: /real_user_monitoring/setup/install/?platform=browser
-[7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
+[7]: /real_user_monitoring/setup/install/?platform=react_native
 
 ### Add filters
 

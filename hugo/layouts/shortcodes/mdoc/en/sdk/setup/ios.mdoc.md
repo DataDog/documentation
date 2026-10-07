@@ -441,6 +441,9 @@ configuration.site = [DDSite uk1];
 {% /site-region %}
 
 The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. For other [initialization parameters][10], see Advanced Configuration.
+
+You can adjust the session sample rate with the `sessionSampleRate` parameter, but Datadog recommends using [retention filters][18] to control retained volume. For details, see [Manage Sessions][19].
+
 {% /step %}
 
 {% step title="Configure tracking consent (GDPR compliance)" %}
@@ -568,3 +571,5 @@ The Datadog RUM SDK depends on the following third-party library:
 [15]: /real_user_monitoring/setup/additional_plugins/?platform=ios#sdwebimage
 [16]: /real_user_monitoring/setup/additional_plugins/?platform=ios#openapi-generator
 [17]: https://github.com/kstenerud/KSCrash
+[18]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[19]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios

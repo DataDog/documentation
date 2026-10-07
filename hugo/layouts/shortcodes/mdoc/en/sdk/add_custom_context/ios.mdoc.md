@@ -27,7 +27,7 @@ View attributes are attached to the active view and automatically propagated to 
 
 For bulk operations, use `.addViewAttributes(_:)` and `.removeViewAttributes(forKeys:)`.
 
-## Add attributes to specific events
+## Add attributes to individual events
 
 To attach attributes to a single event, pass them when you track the event. For details, see [Track Navigation][2], [Track User Interactions][3], [Track Errors][4], and [Track Network Requests][5].
 

@@ -19,6 +19,12 @@ further_reading:
   text: 'Learn about Session Replay'
 aliases:
   - /real_user_monitoring/application_monitoring/browser/frustration_signals/
+  - /real_user_monitoring/application_monitoring/android/frustration_signals/
+  - /real_user_monitoring/application_monitoring/ios/frustration_signals/
+  - /real_user_monitoring/application_monitoring/flutter/frustration_signals/
+  - /real_user_monitoring/application_monitoring/react_native/frustration_signals/
+  - /real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals/
+  - /real_user_monitoring/application_monitoring/maui/frustration_signals/
   - /real_user_monitoring/frustration_signals
   - /real_user_monitoring/browser/frustration_signals/
 ---

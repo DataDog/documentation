@@ -24,21 +24,9 @@ The following diagram illustrates the RUM event hierarchy:
 
 {% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
-## Views instrumentation versus app lifecycle
-
-RUM integrates with `UIKit` and `SwiftUI` views and also provides APIs for manual view tracking. The timing of when a view starts and ends depends on the type of instrumentation used:
-
-**UIKit Views**: When [automatically tracking UIKit views][3] using `UIKitRUMViewsPredicate`, RUM starts the view at the `viewDidAppear(animated:)` event of the `UIViewController` lifecycle. The view is stopped at `viewDidDisappear(animated:)`.
-**SwiftUI Views**: When [tracking SwiftUI views][4] with the `.trackRUMView(name:)` view modifier, RUM starts the view at the `onAppear(perform:)` callback and stops it at `onDisappear(perform:)`.
-**Manual View Tracking**: When tracking views manually using `RUMMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
-
-When the application leaves the foreground, RUM automatically stops the current view, leaving no active view. Since RUM's data model requires an active view to track other events, by default, all events tracked in the background are skipped due to the absence of a view. To capture these events instead, see the [Track Background Events][5].
-
-**Note**: If you're tracking views manually, you need to decide on your own whether the view should be stopped when the app leaves the foreground.
-
 ## Default attributes
 
-By default, RUM collects common attributes for all events and event-specific attributes listed below. You can also choose to enrich your user session data with [additional events][6] to default events specific to your application monitoring and business analytics needs.
+By default, RUM collects common attributes for all events and event-specific attributes listed below. You can also choose to enrich your user session data with [additional events][2] to default events specific to your application monitoring and business analytics needs.
 
 ### Common core attributes
 
@@ -46,7 +34,7 @@ By default, RUM collects common attributes for all events and event-specific att
 |------------------|---------|------------------------------------------------------------------------------------|
 | `date`           | integer | Start of the event in milliseconds from epoch.                                               |
 | `type`           | string  | The type of the event (for example, `view` or `resource`).                         |
-| `service`        | string  | The [unified service name][11] for this application used to correlate user sessions. |
+| `service`        | string  | The [unified service name][7] for this application used to correlate user sessions. |
 | `application.id` | string  | The Datadog application ID.                                                        |
 | `application.name` | string  | The Datadog application name.                                                        |
 
@@ -96,7 +84,7 @@ The following attributes are related to the geolocation of IP addresses. Datadog
 
 **Note**: On mobile networks, the IP address resolves to the carrier's gateway rather than the device's physical location.
 
-**Note:** If you want to stop collecting geolocation attributes, change the setting in your [application details][8].
+**Note:** If you want to stop collecting geolocation attributes, change the setting in your [application details][4].
 
 | Attribute name                     | Type   | Description                                                                                                                               |
 |------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -109,7 +97,7 @@ The following attributes are related to the geolocation of IP addresses. Datadog
 
 ### Global user attributes
 
-You can enable [tracking user info][7] globally to collect and apply user attributes to all RUM events.
+You can enable [tracking user info][3] globally to collect and apply user attributes to all RUM events.
 
 | Attribute name | Type   | Description             |
 |----------------|--------|-------------------------|
@@ -130,7 +118,7 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `session.id`                 | string | Unique ID of the session.                                                  |
 | `session.initial_view.url`   | string | URL of the initial view of the session.                                     |
 | `session.initial_view.name` | string | Name of the initial view of the session.                                    |
-| `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][9]. |
+| `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][5]. |
 | `session.is_active`          | Boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.                               |
 | `session.last_view.url`      | string | URL of the last view of the session.                                        |
 | `session.last_view.name`     | string | Name of the last view of the session.                                       |
@@ -167,7 +155,7 @@ The iOS SDK reads the `phys_footprint` value from the process's `task_vm_info` s
 
 Each view tracks the exact running mean and maximum of successful samples. Calculations reset when the view starts, so they reflect only the samples collected during that view, not a rolling average carried over from previous views.
 
-By default, the SDK samples memory every 500 ms (`.average`). Use [`vitalsUpdateFrequency`][11] to change the frequency (`.frequent` for every 100 ms or `.rare` for every 1 s) or disable vitals collection by setting it to `nil`. If the SDK cannot read `task_vm_info`, it skips that sample without reporting an error.
+By default, the SDK samples memory every 500 ms (`.average`). Use [`vitalsUpdateFrequency`][7] to change the frequency (`.frequent` for every 100 ms or `.rare` for every 1 s) or disable vitals collection by setting it to `nil`. If the SDK cannot read `task_vm_info`, it skips that sample without reporting an error.
 
 ### View accessibility attributes
 
@@ -271,15 +259,12 @@ Network errors include information about failing HTTP requests. The following fa
 
 ## Data storage
 
-Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6], which can't be read by any other app installed on the device.
 
 [1]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios#manually-track-actions-and-send-custom-events
-[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#automatically-track-views
-[4]: /real_user_monitoring/setup/install/?platform=ios
-[5]: /real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios
-[6]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=ios
-[7]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
-[8]: /data_security/real_user_monitoring/#geolocation
-[9]: /data_security/real_user_monitoring/#ip-address
-[10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[11]: /getting_started/tagging/unified_service_tagging/
+[2]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=ios
+[3]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
+[4]: /data_security/real_user_monitoring/#geolocation
+[5]: /data_security/real_user_monitoring/#ip-address
+[6]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[7]: /getting_started/tagging/unified_service_tagging/

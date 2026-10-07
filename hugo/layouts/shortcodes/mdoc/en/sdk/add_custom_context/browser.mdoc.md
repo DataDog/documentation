@@ -329,7 +329,7 @@ window.DD_RUM &&
 ```
 {% /if %}
 
-## Add event attributes
+## Add attributes to individual events
 
 Attributes for individual events are covered on each tracking page: [views][7], [actions][8], [errors][9], and [resources][10].
 

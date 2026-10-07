@@ -133,7 +133,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
 
 ## Understanding performance timings
 
-All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/setup/data_collected/?platform=android#views-instrumentation-versus-app-lifecycle).
+All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#views-instrumentation-versus-app-life-cycle).
 
 ## Troubleshooting
 

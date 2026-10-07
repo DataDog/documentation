@@ -267,4 +267,16 @@ The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view
 
 For the attributes collected, see [Data Collected](/real_user_monitoring/setup/data_collected/?platform=ios#view-attributes).
 
+## Views instrumentation versus app life cycle
+
+RUM integrates with `UIKit` and `SwiftUI` views and also provides APIs for manual view tracking. The timing of when a view starts and ends depends on the type of instrumentation used:
+
+**UIKit Views**: When [automatically tracking UIKit views](#uikit) using `UIKitRUMViewsPredicate`, RUM starts the view at the `viewDidAppear(animated:)` event of the `UIViewController` life cycle. The view is stopped at `viewDidDisappear(animated:)`.
+**SwiftUI Views**: When [tracking SwiftUI views](#swiftui) with the `.trackRUMView(name:)` view modifier, RUM starts the view at the `onAppear(perform:)` callback and stops it at `onDisappear(perform:)`.
+**Manual View Tracking**: When tracking views manually using `RUMMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
+
+When the application leaves the foreground, RUM automatically stops the current view, leaving no active view. Since RUM's data model requires an active view to track other events, by default, all events tracked in the background are skipped due to the absence of a view. To capture these events instead, see [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios).
+
+**Note**: If you're tracking views manually, you need to decide on your own whether the view should be stopped when the app leaves the foreground.
+
 [1]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift

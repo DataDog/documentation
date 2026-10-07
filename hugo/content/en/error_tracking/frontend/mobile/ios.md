@@ -966,7 +966,7 @@ To disable watchdog terminations reporting, update the initialization snippet an
 [12]: https://appstoreconnect.apple.com/
 [13]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [14]: https://github.com/DataDog/dd-sdk-ios
-[15]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[15]: /real_user_monitoring/setup/install/?platform=ios#supported-versions
 [16]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
 [17]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [18]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#facets

@@ -237,7 +237,7 @@ Continue to [RUM Terms and Concepts](/real_user_monitoring/rum_terms_and_concept
 [9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
 [10]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=ios
 [11]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android
-[12]: /session_replay/browser/
+[12]: /session_replay/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools
 [15]: /real_user_monitoring/setup/

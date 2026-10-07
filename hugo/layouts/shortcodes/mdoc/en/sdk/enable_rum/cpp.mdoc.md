@@ -36,7 +36,7 @@ dd_core_destroy(core);
 {% /tab %}
 {% /tabs %}
 
-The C++ SDK doesn't instrument your application automatically. After RUM is registered, record views, actions, resources, and errors with the RUM API. See [Track Navigation][1] to start tracking views.
+The C++ SDK doesn't instrument your application automatically. After RUM is registered, record views, actions, resources, and errors with the RUM API.
 
 ### Check diagnostic output
 
@@ -64,7 +64,6 @@ After the SDK is correctly configured and tracking consent is granted, you shoul
 [DATADOG DEBUG] Scheduled next upload cycle for feature
 ```
 
-**Note**: Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][2].
+**Note**: Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][1].
 
-[1]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp
-[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#diagnostic-logging
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#diagnostic-logging

@@ -37,4 +37,4 @@ configuration.trackBackgroundEvents = YES;
 
 When the application leaves the foreground, RUM stops the current view. Without background event tracking, events tracked while no view is active are skipped. For details, see [Data Collected][1].
 
-[1]: /real_user_monitoring/setup/data_collected/?platform=ios#views-instrumentation-versus-app-lifecycle
+[1]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#views-instrumentation-versus-app-life-cycle

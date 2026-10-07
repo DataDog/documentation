@@ -56,7 +56,7 @@ making data-driven decisions to improve your store
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method/
+[1]: /real_user_monitoring/setup/install/?platform=browser
 [2]: https://support.squarespace.com/hc/en-us/articles/205815908-Using-code-injection
 [3]: /session_replay/
 [4]: /product_analytics/journeys/funnel_analysis/

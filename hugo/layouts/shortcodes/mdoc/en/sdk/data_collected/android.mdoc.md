@@ -24,23 +24,9 @@ The following diagram illustrates the RUM event hierarchy:
 
 {% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
-## Views instrumentation versus app lifecycle
-
-The Android RUM SDK offers various strategies to [automatically track views][2] like Activities, Fragments, or Navigation destinations. You can also track views manually by directly calling the RUM APIs. The precise moment a view starts or stops depends on the chosen tracking strategy or manual instrumentation:
-
-- Activities (`ActivityViewTrackingStrategy`): When you rely on this strategy, the SDK automatically starts a RUM view when the Activity enters the foreground (`onResume`) and stops it when the Activity leaves the foreground (`onPause`).
-- Fragments (`FragmentViewTrackingStrategy`): Each `Fragment` in your application is tracked as a separate RUM view. The SDK starts the view in the Fragment's `onResume` lifecycle method and stops it in `onPause`.
-- Mixed (`MixedViewTrackingStrategy`): Activities and Fragments each become distinct RUM views based on their respective lifecycle events (`onResume` and `onPause`).
-- Navigation (`NavigationViewTrackingStrategy`): Each navigation destination is treated as a distinct RUM view, so view boundaries align with navigation events in your graph.
-- Manual View Tracking: When [tracking views manually][3] using `GlobalRumMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
-
-When the application goes into the background (for example, the user presses the home button or switches apps), RUM automatically stops the current view. Consequently, there is no active view while the app remains in the background. Since RUM's data model requires an active view to correlate and capture events, any events generated in the background are skipped by default. To capture these events instead, see the [Track Background Events][4] section.
-
-**Note**: If you're tracking views manually, you need to configure whether the view should be stopped when the app leaves the foreground.
-
 ## Default attributes
 
-RUM collects common attributes for all events and attributes specific to each event listed below [automatically][5]. You can also choose to enrich your user session data by tracking [additional events][6] or by [adding custom attributes][7] to default events specific to your application monitoring and business analytics needs.
+RUM collects common attributes for all events and attributes specific to each event listed below [automatically][2]. You can also choose to enrich your user session data by tracking [additional events][3] or by [adding custom attributes][4] to default events specific to your application monitoring and business analytics needs.
 
 ### Common core attributes
 
@@ -49,7 +35,7 @@ RUM collects common attributes for all events and attributes specific to each ev
 | `application.id` | string | The Datadog application ID. |
 | `application.name` | string | The Datadog application name. |
 | `date` | integer  | Start of the event in milliseconds from epoch. |
-| `service` | string | The [unified service name][8] for this application used to correlate user sessions. |
+| `service` | string | The [unified service name][5] for this application used to correlate user sessions. |
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
 
 ### Device
@@ -91,7 +77,7 @@ The following attributes are related to the geolocation of IP addresses. Datadog
 
 **Note**: On mobile networks, the IP address resolves to the carrier's gateway rather than the device's physical location.
 
-**Note:** If you want to stop collecting geolocation attributes, change the setting in your [application details][9].
+**Note:** If you want to stop collecting geolocation attributes, change the setting in your [application details][6].
 
 | Attribute name                              | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
@@ -104,7 +90,7 @@ The following attributes are related to the geolocation of IP addresses. Datadog
 
 ### Global user attributes
 
-You can enable [tracking user info][10] globally to collect and apply user attributes to all RUM events.
+You can enable [tracking user info][7] globally to collect and apply user attributes to all RUM events.
 
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
@@ -124,7 +110,7 @@ Telemetry are quantifiable values that can be used for measurements related to t
 | `session.error.count`      | number      | Count of all errors collected for this session.  |
 | `session.has_replay` | Boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 | `session.id` | string | Unique ID of the session. |
-| `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][11]. |
+| `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8]. |
 | `session.is_active` | Boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the application, and expires after 4 hours of activity or 15 minutes of inactivity. |
 | `session.initial_view.name` | string | Name of the initial view of the session. |
 | `session.initial_view.url` | string | URL of the initial view of the session. |
@@ -164,7 +150,7 @@ The Android SDK reads the `VmRSS` value from `/proc/self/status`. This value mea
 
 Each view tracks the exact running mean and maximum of successful samples. Calculations reset when the view starts, so they reflect only the samples collected during that view, not a rolling average carried over from previous views.
 
-By default, the SDK samples memory every 500 ms (`VitalsUpdateFrequency.AVERAGE`) while the view is in the foreground. Use [`RumConfiguration.setVitalsUpdateFrequency`][14] to change the frequency or disable collection with `VitalsUpdateFrequency.NEVER`. If the SDK cannot read `/proc/self/status`, it skips that sample without reporting an error.
+By default, the SDK samples memory every 500 ms (`VitalsUpdateFrequency.AVERAGE`) while the view is in the foreground. Use [`RumConfiguration.setVitalsUpdateFrequency`][11] to change the frequency or disable collection with `VitalsUpdateFrequency.NEVER`. If the SDK cannot read `/proc/self/status`, it skips that sample without reporting an error.
 
 ### View accessibility attributes
 
@@ -260,7 +246,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 ## Data storage
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][12], meaning that on most devices, this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][9], meaning that on most devices, this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
 
 ## Data upload
 
@@ -275,19 +261,16 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 ## Direct Boot mode support
 
-**Note:** If your application supports [Direct Boot mode][13], data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
+**Note:** If your application supports [Direct Boot mode][10], data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
 [1]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android#manually-track-actions-and-send-custom-events
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
-[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views
-[4]: /real_user_monitoring/setup/install/?platform=android
-[5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
-[6]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android
-[7]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android#add-global-attributes
-[8]: /getting_started/tagging/unified_service_tagging/
-[9]: /data_security/real_user_monitoring/#geolocation
-[10]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android
-[11]: /data_security/real_user_monitoring/#ip-address
-[12]: https://source.android.com/security/app-sandbox
-[13]: https://developer.android.com/training/articles/direct-boot
-[14]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
+[3]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android
+[4]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android#add-global-attributes
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /data_security/real_user_monitoring/#geolocation
+[7]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android
+[8]: /data_security/real_user_monitoring/#ip-address
+[9]: https://source.android.com/security/app-sandbox
+[10]: https://developer.android.com/training/articles/direct-boot
+[11]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters

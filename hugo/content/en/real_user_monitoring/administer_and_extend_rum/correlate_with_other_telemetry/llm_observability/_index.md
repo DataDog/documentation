@@ -64,7 +64,7 @@ Update your web application to include the RUM Session ID in every call to your 
 
 ### Step 3: Update your backend handler
 
-Modify your server-side code to extract the session ID and pass it to the Agent Observability SDK. For detailed Agent Observability setup, see the [Agent Observability Setup Guide][5].
+Modify your server-side code to extract the session ID and pass it to the Agent Observability SDK. For detailed Agent Observability setup, see the [Agent Observability Setup Guide][2].
 
 ```python
 import json
@@ -86,7 +86,7 @@ Use the Agent Observability SDK to instrument your agent and tools, and pass it 
 
 ### Step 4: Instrument your AI agent
 
-Use the Agent Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [Agent Observability SDK documentation][6].
+Use the Agent Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [Agent Observability SDK documentation][5].
 
 ```python
 async def agent_loop(
@@ -119,5 +119,4 @@ Continue to [Correlate RUM and Frontend Logs](/real_user_monitoring/administer_a
 [2]: /llm_observability/instrument/
 [3]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser
 [4]: /llm_observability/
-[5]: /llm_observability/instrument/
-[6]: /llm_observability/instrument/sdk/
+[5]: /llm_observability/instrument/sdk/

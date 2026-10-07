@@ -16,6 +16,10 @@ RUM SDKs automatically track attributes such as user activity, views, errors, an
     <h3>Add custom context</h3>
     Add custom attributes to your RUM events.
     {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_user_ids/" >}}
+    <h3>Track users and accounts</h3>
+    Add user and account information to your RUM sessions.
+    {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/" >}}
     <h3>Modify or drop RUM events client-side</h3>
     Modify attributes on RUM events or drop them entirely before they're sent to Datadog.

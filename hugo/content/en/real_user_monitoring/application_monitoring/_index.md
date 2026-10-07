@@ -37,7 +37,7 @@ Select a platform to start collecting RUM data on your application:
   {{< image-card href="/real_user_monitoring/setup/install/?platform=ios" src="integrations_logos/tv_os_large.svg" alt="tv OS" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="kotlin-multiplatform" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=maui" src="integrations_logos/maui_large.svg" alt=".NET MAUI" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup/" src="integrations_logos/react-native_large.svg" alt="react-native" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=react_native" src="integrations_logos/react-native_large.svg" alt="react-native" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup/codepush/" src="integrations_logos/react-codepush_large.svg" alt="react-codepush" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup/expo/" src="integrations_logos/rum-expo_large.svg" alt="rum-expo" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=roku" src="integrations_logos/roku_large.svg" alt="Roku" >}}

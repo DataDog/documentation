@@ -38,6 +38,24 @@ aliases:
   - /real_user_monitoring/browser/setup/client
   - /real_user_monitoring/kotlin-multiplatform
   - /real_user_monitoring/kotlin_multiplatform
+  - /real_user_monitoring/application_monitoring/browser/setup/
+  - /real_user_monitoring/browser/setup/
+  - /real_user_monitoring/application_monitoring/react_native/setup/
+  - /real_user_monitoring/react-native/
+  - /real_user_monitoring/reactnative/
+  - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
+  - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+  - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/
+  - /real_user_monitoring/application_monitoring/react_native/setup/expo/
+  - /real_user_monitoring/reactnative/expo/
+  - /real_user_monitoring/reactnative-expo/
+  - /real_user_monitoring/mobile_and_tv_monitoring/setup/expo
+  - /real_user_monitoring/mobile_and_tv_monitoring/expo/setup
+  - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/
+  - /real_user_monitoring/application_monitoring/ios/supported_versions/
+  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
+  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions
 further_reading:
 - link: '/real_user_monitoring/setup/create_application/'
   tag: 'Documentation'

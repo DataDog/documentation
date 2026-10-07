@@ -5,6 +5,12 @@ content_filters:
   - trait_id: platform
     option_group_id: rum_sdk_profiling_options
     label: "SDK"
+aliases:
+  - /real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling
+  - /real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling
+  - /real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling
+  - /real_user_monitoring/correlate_with_other_telemetry/profiling/
+  - /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

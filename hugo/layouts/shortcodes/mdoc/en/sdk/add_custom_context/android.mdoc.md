@@ -18,7 +18,7 @@ GlobalRumMonitor.get().removeAttribute(key)
 
 **Note**: Avoid spaces or special characters in attribute key names. For example, use `"account_tier"` instead of `"Account Tier"`. Keys with spaces or special characters cannot be used as facets in the Datadog UI.
 
-## Add attributes to specific events
+## Add attributes to individual events
 
 To add attributes to a single view, action, resource, or error, pass them when you track that event. See:
 
