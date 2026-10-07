@@ -35,7 +35,7 @@ Choose a group Managed Service Account (gMSA) when the Agent needs a domain iden
 
 Do not provide a password for a gMSA. The installer verifies that Windows recognizes the account as a managed service account.
 
-For Active Directory configuration steps, see [Getting started with group Managed Service Accounts][4].
+For Active Directory configuration steps, see [Getting started with group Managed Service Accounts][11].
 
 {{% /tab %}}
 {{% tab "Domain account" %}}
@@ -84,7 +84,7 @@ The username portion must contain 20 characters or fewer to comply with the Micr
 
 ### Agent account password handling
 
-Beginning with [Agent 7.66][7], the installer stores the provided Agent account password as an encrypted Local Security Authority (LSA) private data object. Only local administrators can access it. For more information, see Microsoft's documentation on [storing private data][8] and [private data objects][9]. The installer uses the stored password for later manual or Fleet Automation upgrades, so you do not need to provide the password again. Uninstalling the Agent removes the stored password.
+Beginning with [Agent 7.66][14], the installer stores the provided Agent account password as an encrypted Local Security Authority (LSA) private data object. Only local administrators can access it. For more information, see Microsoft's documentation on [storing private data][15] and [private data objects][16]. The installer uses the stored password for later manual or Fleet Automation upgrades, so you do not need to provide the password again. Uninstalling the Agent removes the stored password.
 
 When upgrading a host that uses a custom domain account from Agent 7.65 or earlier, provide the account password during the upgrade to store it for subsequent Fleet Automation upgrades.
 
@@ -127,7 +127,11 @@ On a read-only domain controller, use an existing domain account or gMSA. The in
 
 ## Change the Agent account or password
 
-To change the Agent account or its password, rerun the executable or MSI installer and pass the Agent username and password install-time options. Do not change the Windows service configuration manually. The installer updates the Agent services, account rights, access to Agent files and services, and the password stored for subsequent upgrades.
+To change the Agent account or its password, rerun the executable or MSI installer and pass the Agent username and password install-time options.
+
+Do not change the Windows service configuration manually. Editing the account in the Windows Services app or with `sc.exe` updates only the logon identity, not the group memberships, user rights, file and service ACLs, or stored password, which can leave the Agent unable to start or collect data.
+
+Use a gMSA to avoid manual password rotation. If you use a standard domain account and its password changes in Active Directory, the Agent's stored credentials become stale, which can leave the Agent unable to start or collect data. Restore access by rerunning the installer with the new password.
 
 ## Upgrades
 
@@ -143,7 +147,7 @@ The installer configures the [group memberships and user rights](#permissions-co
 
 Integrations run as the Agent account, but some integrations support separate credentials for monitored resources. Without explicit credentials, the integration accesses the resource as the Agent account.
 
-For example, the [SQL Server integration][5] can use the Agent account for Windows Authentication or use configured credentials. The [Disk integration][6] can access network shares as the Agent account or use configured credentials. See each integration's documentation for supported authentication options and configuration steps.
+For example, the [SQL Server integration][12] can use the Agent account for Windows Authentication or use configured credentials. The [Disk integration][13] can access network shares as the Agent account or use configured credentials. See each integration's documentation for supported authentication options and configuration steps.
 
 ### Files, directories, and logs
 
@@ -151,13 +155,13 @@ Grant the Agent account read access to files and directories monitored by integr
 
 ### Windows services
 
-The Windows Service integration cannot report the status of a service when its access control list prevents the Agent account from querying it. This can occur with services such as DHCP Server (`DHCPServer`) and Active Directory Domain Services (`NTDS`). Grant the Agent account `Read` access to each restricted service you want to monitor. For configuration and troubleshooting steps, see [Windows Service permissions][10].
+The Windows Service integration cannot report the status of a service when its access control list prevents the Agent account from querying it. This can occur with services such as DHCP Server (`DHCPServer`) and Active Directory Domain Services (`NTDS`). Grant the Agent account `Read` access to each restricted service you want to monitor. For configuration and troubleshooting steps, see [Windows Service permissions][17].
 
 ### JMX-based integrations
 
-JMXFetch runs as the Agent account. When a JMX integration uses `process_name_regex`, JMXFetch uses the Attach API and can attach only to JVMs running as the same account.
+JMX-based integrations, such as [ActiveMQ][2], [ActiveMQ XML][3], [Cassandra][4], [JMX][5], [Presto][6], [Solr][7], [Tomcat][8], and [Kafka][9], use JMXFetch, which runs as the Agent account. When an integration uses `process_name_regex`, JMXFetch uses the Attach API and can attach only to JVMs running as the same account.
 
-To monitor a JVM running as another account, enable JMX Remote on the JVM and configure the integration with `host` and `port`. This applies to integrations such as ActiveMQ, Cassandra, Kafka, Presto, Solr, and Tomcat. For configuration details, see [JMX integration management][2].
+Use JMX Remote by configuring the integration with `host` and `port` instead. For configuration details, see [JMX integration management][5].
 
 ### Process check
 
@@ -170,28 +174,35 @@ Select `LocalSystem` as the Agent account when these process details are require
 
 ### Cassandra Nodetool integration
 
-For the Cassandra Nodetool integration:
+For the [Cassandra Nodetool integration][4]:
 
 * Grant the Agent account access to the Nodetool installation directory.
-* Define `CASSANDRA_HOME` and `DSCINSTALLDIR` as system-wide environment variables.
+* Set the environment variables of the Nodetool installation directory (`CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables.
 
 ### Windows Security event log
 
 The Agent account must belong to the {{< ui >}}Event Log Readers{{< /ui >}} group to collect the Security event log. The installer adds this membership except on a read-only domain controller, where you must configure it before installation.
 
-If Group Policy removes the membership, update the policy or add the account to an allowed domain group that has access to the Security event log. For configuration details, see the [Win32 Event Log integration][3].
+If Group Policy removes the membership, update the policy or add the account to an allowed domain group that has access to the Security event log. For configuration details, see the [Win32 Event Log integration][10].
 
 ## Configuration management
 
 If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, use cookbook version 2.18.0 or later so the Agent configuration files receive the correct permissions.
 
 [1]: https://learn.microsoft.com/en-us/windows/win32/adschema/a-samaccountname
-[2]: /integrations/java/
-[3]: /integrations/win32_event_log/
-[4]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
-[5]: /integrations/sqlserver/
-[6]: /integrations/disk/
-[7]: https://github.com/DataDog/datadog-agent/releases/tag/7.66.0
-[8]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/storing-private-data
-[9]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/private-data-object
-[10]: /integrations/windows-service/#service-permissions
+[2]: /integrations/activemq/
+[3]: /integrations/activemq/#activemq-xml-integration
+[4]: /integrations/cassandra/
+[5]: /integrations/java/
+[6]: /integrations/presto/
+[7]: /integrations/solr/
+[8]: /integrations/tomcat/
+[9]: /integrations/kafka/
+[10]: /integrations/win32_event_log/
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
+[12]: /integrations/sqlserver/
+[13]: /integrations/disk/
+[14]: https://github.com/DataDog/datadog-agent/releases/tag/7.66.0
+[15]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/storing-private-data
+[16]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/private-data-object
+[17]: /integrations/windows-service/#service-permissions
