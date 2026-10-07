@@ -11897,6 +11897,18 @@ menu:
         unstable:
           - v2
         order: 55
+    - name: List Cloud Cost Management cloud accounts
+      url: /api/latest/cloud-cost-management/list-cloud-cost-management-cloud-accounts/
+      identifier: cloud-cost-management-list-cloud-cost-management-cloud-accounts
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostCloudAccountsV2
+        unstable: []
+        order: 77
     - name: List budgets
       url: /api/latest/cloud-cost-management/list-budgets/
       identifier: cloud-cost-management-list-budgets

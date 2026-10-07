@@ -23,13 +23,14 @@ When you have Datadog App Builder apps embedded in your dashboards, you can take
 
 ## Add apps to your dashboard
 
-Add a previously published app to your dashboard by dragging the {{< ui >}}App{{< /ui >}} widget type out of the dashboard's widget tray:
+To add a previously published app to your dashboard:
 
-{{< img src="/actions/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:30%;">}}
+1. Open the dashboard where you want to add the app.
+1. Click {{< ui >}}Add Widgets{{< /ui >}} to open the widget tray.
+1. Select the {{< ui >}}Apps{{< /ui >}} tab, then drag the {{< ui >}}App{{< /ui >}} widget onto the dashboard.
+1. In the App Editor modal, select an app and provide it with a title.
 
-The App Editor modal appears, allowing you to select an app and provide it with a title:
-
-{{< img src="/actions/app_builder/embedded_apps/app-editor.png" alt="The App Editor modal with an app selected and a widget title" style="width:80%;">}}
+The {{< ui >}}Apps{{< /ui >}} tab also includes a **Created by Datadog** section with ready-made apps for common tasks, such as managing AWS or Azure resources and PagerDuty or LaunchDarkly configurations. Drag one of these apps onto your dashboard to add a working app without building one yourself.
 
 ## Sync your app with dashboard template and time frame variables
 
