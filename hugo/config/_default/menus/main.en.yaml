@@ -655,6 +655,11 @@ menu:
       url: agent/troubleshooting/high_memory_usage/
       weight: 1012
       parent: agent_troubleshooting
+    - name: Missing Log Bytes
+      identifier: agent_troubleshooting_missing_log_bytes
+      url: agent/troubleshooting/missing_log_bytes/
+      weight: 1013
+      parent: agent_troubleshooting
     - name: Guides
       url: agent/guide/
       identifier: agent_guides
@@ -3062,6 +3067,11 @@ menu:
       identifier: datadog_apps
       parent: actions_heading
       weight: 35000
+    - name: Embed Apps
+      url: actions/datadog_apps/embed_apps/
+      parent: datadog_apps
+      identifier: datadog_apps_embed_apps
+      weight: 1
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
@@ -3123,7 +3133,7 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: Embedded Apps
+    - name: Embed App Builder Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
@@ -5425,16 +5435,21 @@ menu:
       parent: dbm
       identifier: dbm_bits_database_optimization
       weight: 22
+    - name: Database Monitoring Workbench
+      url: database_monitoring/database_monitoring_workbench/
+      parent: dbm
+      identifier: dbm_workbench
+      weight: 23
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 23
+      weight: 24
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 24
+      weight: 25
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5456,11 +5471,6 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
-    - name: Data Collection
-      url: data_streams/kafka/data_collection
-      identifier: data_streams_kafka_data_collection
-      parent: data_streams_kafka
-      weight: 2
     - name: Monitors and Automation
       url: data_streams/kafka/monitors_and_automation
       identifier: data_streams_kafka_monitors_and_automation
@@ -10206,25 +10216,25 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
-    - name: AI Investigations
-      url: real_user_monitoring/ai_investigations/
+    - name: Bits in RUM
+      url: real_user_monitoring/bits_ai/
       parent: rum
-      identifier: rum_ai_investigations
+      identifier: rum_bits_ai
       weight: 9
-    - name: Single-View AI Investigation
-      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_single_view
+    - name: Optimize Performance
+      url: real_user_monitoring/bits_ai/optimize_performance/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_optimize_performance
       weight: 901
-    - name: Multi-View AI Investigation
-      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_multi_view
+    - name: Investigate Regressions
+      url: real_user_monitoring/bits_ai/investigate_regressions/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_investigate_regressions
       weight: 902
-    - name: Operation AI Investigation
-      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_operation
+    - name: Bits Chat in RUM
+      url: real_user_monitoring/bits_ai/bits_chat/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_bits_chat
       weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/

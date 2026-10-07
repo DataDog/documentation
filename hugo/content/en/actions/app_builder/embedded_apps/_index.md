@@ -1,5 +1,5 @@
 ---
-title: Embedded Apps
+title: Embed App Builder Apps
 description: Embed published apps in dashboards and sync them with template variables and time frames for dynamic, contextual actions.
 disable_toc: false
 aliases:
@@ -16,7 +16,10 @@ App Builder is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
+
 When you have Datadog App Builder apps embedded in your dashboards, you can take direct actions on your resources, and all of the relevant data and context is immediately available. Link your app with the dashboard's time frame and template variables to dynamically set the scope of the app's actions, which allows you to carry out actions in your environment at any needed scope.
+
+<div class="alert alert-info">This page describes embedding App Builder apps, which you build in Datadog with a low-code, drag-and-drop editor. To embed an app built with <a href="/actions/datadog_apps/">Datadog Apps</a>, which you write locally as code in React and TypeScript, see <a href="/actions/datadog_apps/embed_apps/">Embed Apps</a>.</div>
 
 ## Add apps to your dashboard
 
