@@ -226,7 +226,7 @@ Reference Table names and column headers are validated using the following namin
 
 ### Edit rows in the UI
 
-Edit rows in Reference Tables with a **Local File** or **API** source without uploading another CSV file. Editing requires the `reference_tables_write` permission and edit access to the table. See [Permissions][13]. Inline editing is not available for cloud storage or integration-backed tables.
+Edit rows in Reference Tables with a **Local File** source without uploading another CSV file. Editing requires the `reference_tables_write` permission and edit access to the table. See [Permissions][13]. Inline editing is not available for cloud storage or integration-backed tables.
 
 1. Open the Reference Table's detail page.
 2. In **Table Preview**, click {{< ui >}}Edit Table{{< /ui >}}.
