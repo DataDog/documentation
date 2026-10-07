@@ -337,7 +337,7 @@ unsupported_sites:
   configuration_at_runtime: [gov,gov2]
   confluence: [gov,gov2]
   confluent_cloud_integration: [gov,gov2]
-  containers_autoscaling: [gov,gov2]
+  containers_autoscaling_cluster: [gov,gov2] # docs (content/en/containers/autoscaling/cluster.md) — workload autoscaling is GA on gov/gov2, cluster autoscaling is still LA and not available there
   containers_kubernetes_appsec: [gov,gov2]
   continuous_delivery: [gov,gov2]
   continuous_integration: [gov,gov2]
