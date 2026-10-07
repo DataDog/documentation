@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Every Wednesday at midnight UTC, Datadog analyzes the previous 30 days of [pageviews and clicks][3] from frontend applications. Based on this activity, Datadog generates suggested journeys that include:
+Every Wednesday at midnight UTC, Datadog analyzes the previous 30 days of [page views and clicks][3] from frontend applications. Based on this activity, Datadog generates suggested journeys that include:
 
 - A journey name
 - A journey description

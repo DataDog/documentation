@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about the journey details report"
 ---
 
-<div class="alert alert-info">Journey variants are available only with an active <a href="/product_analytics/">Product Analytics</a> trial or paid subscription.</div>
+<div class="alert alert-info">Journey variants require an active trial or paid subscription to <a href="/product_analytics/">Product Analytics</a>.</div>
 
 ## Overview
 

@@ -1,5 +1,5 @@
 ---
-title: Roles and Permissions
+title: Journey Roles and Permissions
 description: "Review the roles, permissions, and restriction policies that control access to journeys and their linked assets."
 further_reading:
 - link: '/journey_monitoring/'

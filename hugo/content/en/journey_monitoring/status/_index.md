@@ -1,5 +1,5 @@
 ---
-title: Status
+title: Journey Status
 description: Understand how Datadog determines the status of a journey.
 further_reading:
 - link: '/journey_monitoring/'
@@ -36,7 +36,7 @@ Journey status does not require both input types. A single high-burn SLO from ei
 
 ### RUM operation SLOs
 
-<div class="alert alert-info">RUM operation SLOs contribute to journey status only with an active trial or paid subscription to <a href="/real_user_monitoring/rum_without_limits/">RUM without Limits&trade;</a>.</div>
+<div class="alert alert-info">Creating RUM operations requires an active trial or paid subscription to <a href="/real_user_monitoring/rum_without_limits/">RUM without Limits&trade;</a>. After you link an operation to a journey, its SLOs can contribute to journey status.</div>
 
 The RUM operation input has a high burn rate when at least one SLO on a linked operation has a high burn rate. It is healthy when at least one operation SLO is included and every included SLO has a low burn rate or is OK.
 
@@ -48,7 +48,7 @@ Manage links from the operation details report, the journey [details report][5],
 
 ### Test suite uptime SLO
 
-<div class="alert alert-info">The Synthetic test suite SLO contributes to journey status only with an active trial or paid subscription to <a href="/synthetics/browser_tests/">Synthetic Browser Tests</a> or <a href="/synthetics/mobile_app_testing/">Synthetic Mobile Tests</a>.</div>
+<div class="alert alert-info">Creating or managing the test suite and tests that provide this status input requires an active trial or paid subscription to <a href="/synthetics/browser_tests/">Synthetic Browser Tests</a> or <a href="/synthetics/mobile_app_testing/">Synthetic Mobile Tests</a>.</div>
 
 The test suite has a time-slice uptime SLO that evaluates its critical tests. Tests are critical by default. Mark a test as non-critical to exclude it from the uptime SLO while keeping it in the suite.
 
@@ -68,7 +68,7 @@ Changes to the journey's inputs affect its status automatically. This includes l
 
 View journey status in the [catalog][12], [map][13], and details report:
 
-- For a **Degraded** journey, review **Critical** operations and failing Synthetic tests in the details report.
+- For a **Degraded** journey, Datadog links to the **Critical** operations or in **Alert** Synthetic tests that contribute to the state. If Bits AI is enabled for your organization, launch a [Bits Investigation][14] from the operation or test to identify the root cause.
 - For a journey with **Missing coverage**, [link an operation with an SLO][8] or [add a covering test][9]. If coverage is configured, confirm that its SLO inputs report data.
 
 ## Further reading
@@ -82,8 +82,9 @@ View journey status in the [catalog][12], [map][13], and details report:
 [5]: /journey_monitoring/details_report/
 [7]: /api/latest/rum-operations/
 [8]: /journey_monitoring/configuring_journeys/#review-matching-operations
-[9]: /journey_monitoring/configuring_journeys/#add-tests-to-a-journey
+[9]: /journey_monitoring/configuring_journeys/#manage-tests
 [10]: /service_level_objectives/
 [11]: /synthetics/test_suites/#service-level-objectives
 [12]: /journey_monitoring/overview/#journey-catalog
 [13]: /journey_monitoring/map/
+[14]: /bits_ai/bits_investigation/

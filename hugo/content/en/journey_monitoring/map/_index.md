@@ -1,5 +1,5 @@
 ---
-title: Map
+title: Journey Map
 description: Visualize and monitor the performance of your journeys in the Journey Monitoring map.
 further_reading:
 - link: "/journey_monitoring"
@@ -20,7 +20,7 @@ further_reading:
 
 The Journey Monitoring map displays created and [suggested journeys][5] for a frontend application. Each created journey tile displays the metrics available for that journey. [Event-based journeys][8] display [starts volume and conversion rate][9]. If the journey has [Synthetic coverage][6], the tile also displays [uptime][7] from its [Synthetic test suite][1].
 
-{{< img src="journey_monitoring/journey-monitoring-map-zoom-1.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-map-zoom-2.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 ## Explore and manage journeys
 

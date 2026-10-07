@@ -16,12 +16,11 @@ further_reading:
 
 ## What is Journey Monitoring?
 
-Journey Monitoring combines user behavior and technical performance data for critical user flows, such as sign-in, product browsing, and checkout. Use it to:
+Journey Monitoring lets you track the health of critical user flows, such as sign-in, checkout, or media streaming, from a single place. For any flow, you can answer:
 
-- Identify where users abandon a flow
-- Measure [traffic and conversion KPIs][10] and [journey uptime][15]
-- Investigate [frontend errors][17] and the performance of critical [RUM operations][11]
-- Compare real user behavior with [Synthetic test coverage][16]
+- Are users experiencing friction?
+- How fast and reliable is performance?
+- Are issues coming from the frontend, network, or backend?
 
 A *journey* represents a user flow from a defined start to a defined end. Journey Monitoring combines data from [Real User Monitoring (RUM)][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] in a shared view for engineering, product, and operations teams.
 
@@ -32,10 +31,10 @@ A *journey* represents a user flow from a defined start to a defined end. Journe
 Journey Monitoring requires an active trial or paid subscription to at least one of the following products:
 
 - **Product Analytics**: Provides starts volume, conversion volume, conversion rate, and average time to convert.
-- **[RUM without Limits™][5]**: Provides frontend errors and performance data from RUM operations.
+- **[RUM without Limits™][5]**: Provides [frontend errors][17] and performance data from [RUM operations][11].
 - **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Provides uptime data from a [Synthetic test suite][12].
 
-<div class="alert alert-info">RUM-enabled applications receive Product Analytics Preview by default. Preview retains Product Analytics events for a rolling 30-day window. Disabling Product Analytics also disables Product Analytics Preview. For questions, contact Datadog Support at <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</div>
+<div class="alert alert-info">RUM-enabled applications have a Product Analytics Preview enabled by default. The Preview retains events Product Analytics events for a rolling 30-day window. Disabling Product Analytics also disables Product Analytics Preview. For questions, contact Datadog Support at <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</div>
 
 ## How journeys are structured
 
@@ -51,11 +50,11 @@ If RUM and Product Analytics are not enabled, Synthetic test suites appear autom
 
 ## Get started
 
-Follow [Configure journeys][13] to define an event-based journey, add variants, link RUM operations, and add Synthetic test coverage. Create a journey manually or start from a [suggested journey][9].
+Follow [Configure journeys][13] to define an event-based journey, add variants, link RUM operations, and add [Synthetic test coverage][16]. Create a journey manually or start from a [suggested journey][9].
 
 ## Key performance indicators
 
-Event-based journeys report starts volume, conversion volume, conversion rate, and time to convert. Journeys with Synthetic coverage also report uptime. Product access determines each KPI's data source, retention period, and calculation.
+Event-based journeys report [starts volume, conversion volume, conversion rate, and time to convert][10]. Journeys with Synthetic coverage also report [uptime][15]. Product access determines each KPI's data source, retention period, and calculation.
 
 ## API
 

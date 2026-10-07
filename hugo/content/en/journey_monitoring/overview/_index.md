@@ -19,7 +19,7 @@ The Journey Overview focuses on one journey and displays its [status][2], [key p
 
 Click the focused journey tile to open its [details report][1]. Click an upstream or downstream journey tile to open that journey's report.
 
-{{< img src="journey_monitoring/journey-monitoring-map-3.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-overview.png" alt="Overview of a single journey displaying its key performance indicators, status, definition, upstream, and downstream journeys." style="width:100%;" >}}
 
 ## Upstream and downstream journeys
 
@@ -33,8 +33,6 @@ Use these relationships to investigate whether an upstream journey affects the f
 ## Journey catalog
 
 The journey catalog lists created and [suggested journeys][3]. Each created journey displays its KPIs and a **Healthy**, **Degraded**, or **Missing coverage** status. Suggested journeys are labeled **Suggested**.
-
-{{< img src="journey_monitoring/journey-monitoring-map-3.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 Use the catalog to:
 

@@ -16,7 +16,33 @@ further_reading:
 
 ## Overview
 
-Use this page to define an [event-based journey][28], add [variants][3], link [RUM operations][21], and add [Synthetic test coverage][24]. In a [Synthetics-only configuration][29], [test suites][14] appear automatically as journeys.
+Use this page to configure journeys that represent important user flows and reveal their health.
+
+Configuring an [event-based journey][28] has three steps:
+
+1. Create a journey and define its user flow.
+2. Add [Real User Monitoring (RUM) operations][21] that represent critical technical steps.
+3. Add [Synthetic tests][24] that cover the journey.
+
+After completing these steps, validate the journey's [key performance indicators (KPIs)][26], operations, [service level objectives (SLOs)][25], tests, and [variants][3].
+
+In a [Synthetics-only configuration][29], [test suites][14] appear automatically as journeys.
+
+## When to use Journey Monitoring
+
+Journey Monitoring combines user behavior and technical health for an end-to-end flow. It can serve as the primary place to monitor and troubleshoot a flow that would otherwise require separate configurations across several products.
+
+Common alternatives include:
+
+- **RUM**:
+  - [Funnels in the RUM Session Explorer][30] or funnel widgets based on RUM events
+  - Widgets that track user activity, such as button clicks or pageviews
+  - Custom metrics or actions that measure flow volume, time to completion, or completed journeys
+  - [Custom vitals][31] that represent key technical steps, which RUM operations can represent within a journey
+- **Synthetic Monitoring & Testing**: Multiple tests that cover the same flow but are not organized into a journey's test suite
+- **[Product Analytics][22]**: Funnels, journey paths, or other visualizations that track behavior across an end-to-end flow
+
+Journey Monitoring uses Product Analytics to understand user behavior and experience, RUM to evaluate performance and availability, and Synthetic tests to detect regressions and measure [journey uptime][17].
 
 ## Before you begin
 
@@ -24,7 +50,7 @@ Review the [Journey Monitoring prerequisites][1]. Journey Monitoring requires an
 
 Different configuration steps require different products:
 
-- Defining a journey with action or view events requires [Real User Monitoring (RUM)][23] and [Product Analytics][22] Preview, trial, or paid access.
+- Defining a journey with action or view events requires RUM and Product Analytics Preview, trial, or paid access.
 - Adding RUM operation data requires an active trial or paid subscription to [RUM without Limits™][4].
 - Adding Synthetic coverage requires an active trial or paid subscription to [Synthetic Browser Tests][12] or [Synthetic Mobile Tests][13].
 
@@ -86,7 +112,7 @@ Select action events, view events, or both. The [funnel][27] updates based on th
 
 Multiple start events can represent several entry points into the same user flow. Multiple end events can represent several valid conclusions.
 
-Each additional event broadens the journey definition. A large number of start or end events can make the journey's scope unclear and its [key performance indicators (KPIs)][26] less precise.
+Each additional event broadens the journey definition. A large number of start or end events can make the journey's scope unclear and its KPIs less precise.
 
 ##### Attribute filters
 
@@ -133,32 +159,36 @@ With only Synthetic Monitoring & Testing, test suites appear automatically as jo
 
 ## Step 2: Add RUM operations
 
-<div class="alert alert-info">RUM operation data is available in journeys only with an active trial or paid subscription to RUM without Limits.</div>
-
 RUM operations measure the availability and latency of critical actions in the journey. Use them to investigate whether technical performance contributes to user drop-off.
 
-[Service level objectives (SLOs)][25] on linked operations contribute to [journey status][6].
+SLOs on linked operations contribute to [journey status][6].
 
 ### Review matching operations
 
-Datadog uses time correlation to identify existing RUM operations that may be part of the journey. These operations appear as **Matching** in the details report. Link an operation only if users encounter it while completing the journey.
+Datadog uses time correlation to identify existing RUM operations that may be part of the journey. These operations appear as **Matching** in the details report.
 
-{{< img src="journey_monitoring/journey-monitoring-correlated-operations.png" alt="The Journey Monitoring details report showing time-based correlated RUM operations with executions, success rate, latency, and SLO creation options." style="width:100%;" >}}
+Link an operation only if users encounter it while completing the journey.
+
+{{< img src="journey_monitoring/journey-monitoring-matching-operations.png" alt="The Journey Monitoring details report showing time-based matching RUM operations with executions, success rate, latency, and SLO creation options." style="width:100%;" >}}
+
+### Create operations
+
+If no matching operation represents a critical action, choose an instrumentation method:
+
+- **RUM SDK APIs**: [Instrument the operation in your frontend application code][10] and explicitly report when it starts, succeeds, or fails. This method provides precise control over the operation's lifecycle, but requires code changes.
+- **Datadog UI**: [Create the operation in Datadog][8] by selecting start, success, and failure conditions from ingested RUM events. You can create it from the operations catalog or the Operations table in the journey details report. This method requires no code changes, but captures failures less precisely because it depends on events Datadog already collects.
+
+The [`create_rum_operation` tool in the Datadog MCP Server][32] and the [RUM Operations API][9] also create UI-configured operations from RUM event conditions. Datadog automatically links operations created from a journey details report. For operations created elsewhere, link the operation to the journey after creating it.
+
+### Manage operations
+
+Select **Manage Operations** to add or remove operations from the journey.
 
 Linking an operation:
 
 - Identifies the operation as part of the journey's critical path
 - Adds the operation's SLOs to the journey status
-- Creates an availability SLO with a 99% objective if the operation does not have an SLO
-
-### Create operations
-
-If no matching operation represents a critical action, create an operation by using one of these methods:
-
-- Create it from the Operations table in the journey details report. Datadog links the operation to the journey and creates its availability SLO.
-- [Create the operation in Datadog][8], then link it to the journey.
-- [Create the operation with the RUM Operations API][9], then use the API to link it to the journey.
-- [Create the operation with the RUM SDK APIs][10], then use the RUM Operations API to link it to the journey.
+- Creates an availability SLO with a 99% objective if the operation does not already have at least one SLO
 
 ### Manage operation SLOs
 
@@ -174,9 +204,7 @@ Start with the operation that has the greatest effect on journey conversion. Add
 
 ## Step 3: Add Synthetic test coverage
 
-<div class="alert alert-info">Synthetic test data is available in journeys only with an active trial or paid subscription to Synthetic Browser Tests or Synthetic Mobile Tests.</div>
-
-Synthetic tests provide technical coverage for critical journey paths. Test failures can indicate regressions that affect users, and covering tests determine [journey uptime][17].
+Synthetic tests provide technical coverage for critical journey paths. Test failures can indicate regressions that affect users, and covering tests determine journey uptime.
 
 When you create an event-based journey with Synthetic Monitoring write access, Datadog creates a test suite and adds existing tests that cover the journey. The suite includes an editable uptime SLO with a default objective of 99.9%. Without Synthetic Monitoring write access, Datadog creates the journey without a test suite.
 
@@ -189,16 +217,17 @@ For event-based journeys, Datadog uses RUM data to identify Synthetic tests that
 - Review each matching test.
 - Add tests that cover a critical journey path.
 
-### Add tests to a journey
+{{< img src="journey_monitoring/journey-monitoring-matching-tests.png" alt="The Journey Monitoring details report showing matching Synthetics tests with alert status and uptime." style="width:100%;" >}}
 
-Add covering tests when the suite is empty or when Datadog identifies new matching tests:
+### Create tests
 
-- To add existing tests, select **Manage journey coverage**, then select the tests to add.
-- To create coverage, create a browser test or mobile application test, then add it to the journey's suite.
-
-{{< img src="journey_monitoring/journey-monitoring-covering-tests.png" alt="The Manage Tests in Suite panel showing Synthetic browser tests that cover a journey." style="width:100%;" >}}
+To create coverage, create a browser test or mobile application test, then add it to the journey's suite.
 
 **Preview**: When no Synthetic test covers a journey, [Bits Testing][18] can generate a covering browser test. [Sign up for the Bits Testing preview][19].
+
+### Manage tests
+
+Select **Manage Tests** to add or remove tests from the journey's test suite. Add covering tests when the suite is empty or when Datadog identifies new matching tests.
 
 ### Maintain coverage
 
@@ -221,13 +250,13 @@ After you configure a journey, verify that:
 
 ## Maintain a journey
 
-After you change a journey's start or end events, review its variants, matching operations, Synthetic coverage, and KPIs. Use the journey catalog to find and edit journeys. The Journey status page explains how to investigate **Degraded** and **Missing coverage** states.
+After you change a journey's start or end events, review its variants, matching operations, Synthetic coverage, and KPIs. Use the journey catalog to find and edit journeys. The [Journey status page][6] explains how to investigate **Degraded** and **Missing coverage** states.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /journey_monitoring/
+[1]: /journey_monitoring/#prerequisites
 [2]: /journey_monitoring/suggested_journeys/
 [3]: /journey_monitoring/details_report/variants/
 [4]: /real_user_monitoring/rum_without_limits/
@@ -248,10 +277,12 @@ After you change a journey's start or end events, review its variants, matching 
 [20]: /journey_monitoring/overview/#journey-catalog
 [21]: /real_user_monitoring/operations_monitoring/
 [22]: /product_analytics/
-[23]: /real_user_monitoring/
 [24]: /journey_monitoring/configuring_journeys/#step-3-add-synthetic-test-coverage
 [25]: /service_level_objectives/
 [26]: /journey_monitoring/details_report/#traffic-and-conversion-trends
 [27]: /product_analytics/charts/funnel_analysis/
 [28]: /journey_monitoring/#rum-and-product-analytics
 [29]: /journey_monitoring/#synthetics-only
+[30]: /real_user_monitoring/explorer/visualize/#funnels
+[31]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#measure-component-level-performance-with-custom-vitals
+[32]: /mcp_server/tools/#create_rum_operation
