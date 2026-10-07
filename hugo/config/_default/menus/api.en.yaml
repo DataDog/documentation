@@ -12857,9 +12857,9 @@ menu:
           - CreateDORAFailure
         unstable: []
         order: 2
-    - name: Patch a deployment event
-      url: /api/latest/dora-metrics/patch-a-deployment-event/
-      identifier: dora-metrics-patch-a-deployment-event
+    - name: Mark a deployment as failed by ID
+      url: /api/latest/dora-metrics/mark-a-deployment-as-failed-by-id/
+      identifier: dora-metrics-mark-a-deployment-as-failed-by-id
       parent: dora-metrics
       generated: true
       params:
