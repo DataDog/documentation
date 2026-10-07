@@ -80387,6 +80387,67 @@ components:
       type: string
       x-enum-varnames:
         - MONITOR_ALERT_TRIGGER
+    MonitorAutomationAttributes:
+      description: Automatic investigation settings for a monitor.
+      properties:
+        enabled:
+          description: Whether Bits automatically investigates alerts from this monitor.
+          example: true
+          type: boolean
+      required:
+        - enabled
+      type: object
+    MonitorAutomationData:
+      description: Automatic investigation configuration identified by monitor ID.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MonitorAutomationAttributes"
+        id:
+          description: The monitor ID.
+          example: "12345678"
+          type: string
+        type:
+          $ref: "#/components/schemas/MonitorAutomationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    MonitorAutomationRequest:
+      description: Set whether Bits automatically investigates alerts from a monitor.
+      properties:
+        data:
+          $ref: "#/components/schemas/MonitorAutomationRequestData"
+      required:
+        - data
+      type: object
+    MonitorAutomationRequestData:
+      description: The automatic investigation settings to apply.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MonitorAutomationAttributes"
+        type:
+          $ref: "#/components/schemas/MonitorAutomationType"
+      required:
+        - type
+        - attributes
+      type: object
+    MonitorAutomationResponse:
+      description: Automatic investigation settings for a monitor.
+      properties:
+        data:
+          $ref: "#/components/schemas/MonitorAutomationData"
+      required:
+        - data
+      type: object
+    MonitorAutomationType:
+      description: The resource type for monitor automation settings.
+      enum:
+        - monitor_automation
+      example: monitor_automation
+      type: string
+      x-enum-varnames:
+        - MONITOR_AUTOMATION
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
       properties:
@@ -146677,6 +146738,160 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/bits-ai/monitors/{monitor_id}/automation:
+    get:
+      description: Manage the Bits automatic investigation setting independently of the monitor definition. Requires access to the monitor and the specified permissions. A newly created monitor and updated settings can take time to appear in reads.
+      operationId: GetMonitorAutomation
+      parameters:
+        - description: The monitor ID.
+          in: path
+          name: monitor_id
+          required: true
+          schema:
+            format: int64
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                      id: "12345678"
+                      type: monitor_automation
+              schema:
+                $ref: "#/components/schemas/MonitorAutomationResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Invalid request or unsupported monitor type.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Missing permission or automatic investigation API access is not enabled.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Monitor not found or not visible to the caller.
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The monitor setting could not be updated.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - monitors_read
+            - bits_investigations_read
+      summary: Get automatic investigation settings for a monitor
+      tags:
+        - Bits AI
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+          - monitors_read
+          - bits_investigations_read
+      x-unstable: This endpoint is in preview and is subject to change.
+    put:
+      description: Manage the Bits automatic investigation setting independently of the monitor definition. Requires access to the monitor and the specified permissions. A newly created monitor and updated settings can take time to appear in reads. The enabled attribute is required; false disables automatic investigations. Repeated requests set the same desired state. This operation does not create or delete the monitor.
+      operationId: UpdateMonitorAutomation
+      parameters:
+        - description: The monitor ID.
+          in: path
+          name: monitor_id
+          required: true
+          schema:
+            format: int64
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  enabled: true
+                type: monitor_automation
+            schema:
+              $ref: "#/components/schemas/MonitorAutomationRequest"
+        description: Automatic investigation settings to apply.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                      id: "12345678"
+                      type: monitor_automation
+              schema:
+                $ref: "#/components/schemas/MonitorAutomationResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Invalid request or unsupported monitor type.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Missing permission or automatic investigation API access is not enabled.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Monitor not found or not visible to the caller.
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The monitor setting could not be updated.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - monitors_read
+            - monitors_write
+            - bits_investigations_write
+      summary: Update monitor automatic investigation settings
+      tags:
+        - Bits AI
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+          - monitors_read
+          - monitors_write
+          - bits_investigations_write
+      x-unstable: This endpoint is in preview and is subject to change.
   /api/v2/cases:
     get:
       description: >-

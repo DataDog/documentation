@@ -546,6 +546,16 @@
     "description": "Get a specific Bits AI investigation by ID.",
     "summary": "Get a Bits AI investigation"
   },
+  "GetMonitorAutomation": {
+    "description": "Manage the Bits automatic investigation setting independently of the monitor definition. Requires access to the monitor and the specified permissions. A newly created monitor and updated settings can take time to appear in reads.",
+    "summary": "Get automatic investigation settings for a monitor"
+  },
+  "UpdateMonitorAutomation": {
+    "description": "Manage the Bits automatic investigation setting independently of the monitor definition. Requires access to the monitor and the specified permissions. A newly created monitor and updated settings can take time to appear in reads. The enabled attribute is required; false disables automatic investigations. Repeated requests set the same desired state. This operation does not create or delete the monitor.",
+    "summary": "Update monitor automatic investigation settings",
+    "request_description": "Automatic investigation settings to apply.",
+    "request_schema_description": "Set whether Bits automatically investigates alerts from a monitor."
+  },
   "SearchCases": {
     "description": "Search cases.",
     "summary": "Search cases"
