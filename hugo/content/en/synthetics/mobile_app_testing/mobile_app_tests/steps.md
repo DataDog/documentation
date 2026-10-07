@@ -319,6 +319,24 @@ Make sure to define the variables you want to use in the user journey before you
 
 You can inject available variables directly into the test steps while recording.
 
+### Email variables and OTP extraction
+
+Use an email address variable to test authentication that sends a one-time passcode (OTP) by email. Under {{< ui >}}Variables{{< /ui >}}, add an {{< ui >}}Email Address{{< /ui >}} variable and choose:
+
+- {{< ui >}}Temporary{{< /ui >}} for a new address on every execution, such as a sign-up test.
+- {{< ui >}}Persistent{{< /ui >}} to select an email global variable and reuse its address across executions. Create the application account once, then use it for recurring login tests.
+
+Persistent email requires the feature to be enabled for your organization and access to the selected global variable. A test can use one email address variable. For account setup and permissions, see [Test email OTP login flows with a persistent email address][9].
+
+To record the login flow:
+
+1. Inject the email variable into the application's email field and record the action that requests an OTP.
+2. Optionally, add an email assertion to check the received email's subject or body.
+3. Add a variable extracted from the email body. Use a regular expression or XPath to extract the OTP and store it in a variable such as `LOGIN_OTP`.
+4. Enter `{{ LOGIN_OTP }}` in a {{< ui >}}Type text{{< /ui >}} step, submit the code, and assert that login succeeds.
+
+Request a new code during every run. When multiple tests share a persistent address, [avoid overlapping authentication attempts][10] that could invalidate each other's OTPs or sessions.
+
 ## Manage step order
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
@@ -352,6 +370,8 @@ To edit a mobile recording after it's saved:
 [6]: /synthetics/guide/reusing-browser-test-journeys/
 [7]: https://app.datadoghq.com/synthetics/tests
 [8]: /synthetics/mobile_app_testing/mobile_app_tests/restricted_networks/
+[9]: /synthetics/guide/persistent-email-otp/
+[10]: /synthetics/guide/persistent-email-otp/#concurrent-executions
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

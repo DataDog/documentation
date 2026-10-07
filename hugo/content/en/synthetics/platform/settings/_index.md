@@ -126,7 +126,7 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 ## Global variables
 
-Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4], [multistep API tests][5], [browser tests][6], and [mobile app tests][17] of your test suite.
+Global variables let you reuse values across your Synthetic test suite. Supported variable types depend on the test type: [single][4] and [multistep API tests][5], [browser tests][6], or [mobile app tests][17]. Email address variables provide a persistent mailbox for browser and mobile app tests.
 
 To create a global variable, navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} page][7] and click {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
@@ -243,9 +243,24 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 [1]: /synthetics/guide/browser-tests-passkeys
 [2]: /account_management/rbac/?tab=datadogapplication#custom-roles
 {{% /tab %}}
+{{% tab "Email Address" %}}
+
+Create an email global variable to receive authentication emails at the same Datadog-managed address across browser and mobile app test runs. Register an application account with this address once, then reuse it to test OTP login and journeys after login.
+
+1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email address{{< /ui >}}. This option requires persistent email to be enabled for your organization.
+2. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
+3. Configure access in the permissions section and save the variable.
+4. Copy the generated address from the saved variable to register the account in your application. The address displayed before creation is an example.
+
+Datadog generates the address when you create the variable. The saved address is read-only: you cannot supply a custom mailbox or change the address. Editing the name, description, or tags preserves the address.
+
+In the recorder, select {{< ui >}}Email Address{{< /ui >}} > {{< ui >}}Persistent{{< /ui >}} and choose the saved variable. A test can use one email address variable. For setup instructions and the differences from temporary email, see [Test email OTP login flows with a persistent email address][1].
+
+[1]: /synthetics/guide/persistent-email-otp/
+{{% /tab %}}
 {{< /tabs >}}
 
-Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click {{< ui >}}\+ Variables{{< /ui >}}, type `{{` in a field you want to add the variable, and select your global variable.
+To import a global variable supported by your test type, click {{< ui >}}\+ Variables{{< /ui >}}. Type `{{` in the desired field and select your global variable. For email address variables, use the recorder's {{< ui >}}Email Address{{< /ui >}} > {{< ui >}}Persistent{{< /ui >}} selector.
 
 
 For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test][10], [Mobile app test][19], and [Browser Test Steps documentation][16].
@@ -276,6 +291,8 @@ Use [granular access control][22] to limit who has access to your test based on 
 | No access    |               |                  |                |                         |
 | Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
 | Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
+
+For email address variables, Editors can update metadata, but the generated address remains read-only.
 
 **Note**: Restricting a variable prevents other users from adding it to a test and using it; it does not hide the name of the variable if it is already used in an existing test.
 
