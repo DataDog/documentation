@@ -121,9 +121,11 @@ If your Collector forwards to a gateway, also follow the [gateway recommendation
 
 ## Diagnose hostname issues
 
-Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems. It does not affect billing.
+Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. It does not affect billing.
 
-A trace has at most one `issue_type`. Use the following table to find the cause and the fix:
+Use this metric when you investigate a hostname problem you have observed, such as one node appearing as two hosts, broken correlation, or missing host tags. An `issue_type` tag doesn't always indicate a problem. The tags come from heuristics, and a correct configuration can produce them.
+
+A trace has at most one `issue_type`. Use the following table to find the likely cause and the fix:
 
 | `issue_type` | What it indicates | Recommended action |
 |---|---|---|
@@ -134,7 +136,7 @@ A trace has at most one `issue_type`. Use the following table to find the cause 
 
 Available metric tags include `issue_type`, `host`, `env`, `service`, `version`, and `span_source`. Affected spans receive the same `issue_type` tag, which you can use to find example traces and inspect their resource attributes.
 
-The pod-like issue types use common Kubernetes pod naming patterns as a heuristic. After updating your configuration, inspect new traces to confirm that they no longer have the issue type.
+The pod-like issue types match common Kubernetes pod naming patterns, so a correct hostname that follows those patterns can still receive the tag. After updating your configuration, inspect new traces to confirm that they no longer have the issue type.
 
 ## Configure hostname processors in the Collector {#collector-configuration}
 
