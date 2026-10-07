@@ -9,13 +9,14 @@ further_reading:
 - link: /security/sensitive_data_scanner/
   tag: ドキュメント
   text: Sensitive Data Scanner
+- link: https://www.datadoghq.com/blog/runtime-prioritization-engine/
+  tag: ブログ
+  text: Datadog Runtime Prioritization Engineを使用して、Datadogでのセキュリティ上の検出結果に優先順位を付けます。
+- link: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/
+  tag: ブログ
+  text: CISAのBOD 26-04は、脆弱性の優先順位付けをどのように変えるのでしょうか
 title: Crown Jewels
 ---
-{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
- btn_hidden="false" header="プレビューに参加しましょう">}}
-Crown Jewels はプレビュー中です。今すぐこのフォームからリクエストを送信してください。
-{{< /callout >}}
-
 ## 概要 {#overview}
 
 Crown Jewels は最も重要なクラウドリソースのインベントリです。これは、Datadog にすでに送信されているテレメトリから自動的に検出されます。このリストは、Cloud Security 全体での修正作業の優先順位を付けるための出発点になります。Crown Jewels に関連する脆弱性、誤設定、アイデンティティリスクを、他の所見とは異なる方法でソート、フィルタリング、ルーティングできます。

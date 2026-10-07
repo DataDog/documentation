@@ -132,6 +132,7 @@ You can target the following Kubernetes resources:
 | Deployment | `apps/v1/deployments` | 7.82.0 | |
 | DaemonSet | `apps/v1/daemonsets` | 7.82.0 | |
 | StatefulSet | `apps/v1/statefulsets` | 7.82.0 | |
+| StrimziPodSet | `apps.strimzi.io/v1beta2/strimzipodsets` | 7.84.0 | |
 | CronJob | `batch/v1/cronjobs` | 7.82.0 | |
 | Job | `batch/v1/jobs` | 7.82.0 | |
 | Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |

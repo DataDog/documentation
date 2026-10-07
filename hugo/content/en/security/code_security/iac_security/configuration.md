@@ -190,6 +190,7 @@ Use `ignore-categories` to ignore findings with specific rule types. Use `only-c
 - `Encryption`
 - `Insecure Configurations`
 - `Insecure Defaults`
+- `Least Privilege`
 - `Networking and Firewall`
 - `Observability`
 - `Resource Management`

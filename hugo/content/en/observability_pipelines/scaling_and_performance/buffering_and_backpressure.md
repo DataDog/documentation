@@ -18,6 +18,9 @@ further_reading:
 - link: "observability_pipelines/destinations"
   tag: "Documentation"
   text: "Destinations"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 ---
 
 ## Overview

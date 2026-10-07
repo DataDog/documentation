@@ -1,210 +1,214 @@
 ---
-description: Un inventaire de tous vos hôtes accélérés par GPU qui vous aide à diagnostiquer
+description: Un inventaire de tous vos hosts accélérés par GPU qui vous aide à diagnostiquer
   les problèmes de performance.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-gpu-monitoring/
   tag: Blog
-  text: Optimisez et résolvez les problèmes de l'infrastructure IA avec la surveillance
-    GPU de Datadog.
-private: true
-title: Page de la Flotte GPU.
+  text: Optimisez et dépannez votre infrastructure IA avec Datadog GPU Monitoring
+title: Page du parc GPU
 ---
-## Aperçu
+## Présentation {#overview}
 
-La [page de la flotte GPU][0] fournit un inventaire détaillé de tous vos hôtes accélérés par GPU pour une période spécifiée. Utilisez cette vue pour découvrir les inefficacités grâce à la télémétrie des ressources, allant des performances et des métriques d'utilisation aux coûts. Cette page présente également les recommandations de provisionnement et d'optimisation des performances prêtes à l'emploi de Datadog pour vos appareils, afin de vous aider à maximiser la valeur de vos dépenses en GPU. 
+[GPU Fleet Explorer][0] fournit une ventilation détaillée de l'infrastructure IA (telle que les périphériques GPU, les hosts ou les clusters Ray) et des charges de travail IA (telles que les Pods, les conteneurs Kube ou les exécutions d'entraînement) pour une période donnée. Cette page vous aide à découvrir les inefficacités de provisionnement et les optimisations de performance des charges de travail grâce à la télémétrie des ressources, y compris l'utilisation du GPU, les métriques au niveau du host et les coûts. Elle met également en évidence la détection en temps réel par Datadog des problèmes affectant votre parc et vos charges de travail, avec des conseils sur la manière d'y remédier.
 
-## Décomposez votre infrastructure par cluster, hôte ou appareil.
+## Détectez les problèmes avec des monitors prêts à l'emploi {#detect-issues-with-out-of-the-box-monitors}
 
-Tout d'abord, sélectionnez comment vous souhaitez comprendre votre flotte GPU en utilisant le commutateur qui regroupe votre flotte par cluster Kubernetes (disponible uniquement pour les utilisateurs de Kubernetes), Hôte (Nœud) ou appareil GPU :
+Datadog fournit plusieurs modèles de monitors prêts à l'emploi (OOTB) qui détectent les problèmes GPU courants en temps réel, notamment :
 
-{{< img src="gpu_monitoring/fleet-toggle-2.png" alt="Commutateur pour la page de la flotte GPU qui regroupe les résultats du tableau par Cluster Kubernetes, Hôte ou Appareil." style="width:90%;" >}}
+- Pointes de température
+- Bridage de la puissance
+- Requêtes GPU non satisfaites
+- Erreurs XID
+- Erreurs ECC
+- Charges de travail par rafales
+- Appareils inactifs
 
-Votre sélection est utilisée pour remplir le tableau résultant. Si vous sélectionnez _Cluster_ ou _Hôte_, vous pouvez cliquer sur le bouton **`>`** à côté de chaque entrée du tableau pour voir les hôtes d'un cluster ou les appareils d'un hôte, respectivement. 
+Vous pouvez personnaliser les seuils de n'importe quel monitor pour répondre aux besoins de votre organisation.
 
-{{< img src="gpu_monitoring/host_row_expansion.png" alt="Une entrée d'hôte dans le tableau." style="width:90%;" >}}
+Pour accéder à ces modèles, cliquez sur le menu déroulant {{< ui >}}Monitors{{< /ui >}} dans le coin supérieur droit de la page.
 
-**Remarque** : Le tableau des clusters n'est rempli que si vous utilisez Kubernetes.
+{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Menu déroulant Monitors dans le coin supérieur droit de la page GPU Fleet, affichant les modèles de monitors prêts à l'emploi pour la température, la limitation de la puissance, les requêtes GPU non satisfaites, les erreurs XID critiques, les erreurs XID générales, les erreurs ECC, les charges de travail par rafales et les appareils inactifs" style="width:40%;" >}}
 
-### Explorez votre flotte GPU avec des filtres et des regroupements.
+## Décomposez votre parc par n'importe quel tag {#break-down-your-fleet-by-any-tag}
 
-Utilisez les menus déroulants de filtre rapide en haut de la page pour filtrer par un **Fournisseur**, **Type d'Appareil**, **Cluster**, **Région**, **Service**, **Centre de Données**, **Environnement** ou **Équipe**.
+GPU Fleet Explorer vous offre une visibilité depuis vos charges de travail IA jusqu'à l'infrastructure IA sous-jacente. Vous pouvez basculer entre des entités de charge de travail telles que des pods et des exécutions d'entraînement, et des entités d'infrastructure telles que des périphériques, des hosts et des clusters.
 
-Vous pouvez également **Rechercher** ou **Grouper** par d'autres étiquettes dans les champs montrés ci-dessous. Par exemple, vous pouvez sélectionner le commutateur pour Hôte et ensuite grouper par `Team` pour voir une entrée de tableau pour chaque équipe unique. Cliquez sur le bouton **`>`** à côté de n'importe quelle entrée pour voir les hôtes utilisés par cette équipe et les appareils GPU qui accélèrent ces hôtes. 
+{{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Barre de navigation latérale affichant les entités d'infrastructure IA (Devices, Hosts, Kube Clusters, Ray Clusters) et les entités de charges de travail IA (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
 
-**Remarque** : Vous ne pouvez grouper qu'une seule balise supplémentaire.
+**Remarque** : Les options Kube Clusters, Pods et Kube Containers dans la navigation latérale ne sont disponibles que si vous utilisez Kubernetes.
 
-{{< img src="gpu_monitoring/filters_and_groupings-2.png" alt="Le menu pour filtrer et regrouper dans la page GPU Fleet" style="width:90%;" >}}
+Utilisez les menus déroulants de filtrage en haut de la page pour filtrer par un {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}} ou {{< ui >}}Team{{< /ui >}} spécifique.
 
-## Vues axées sur les cas d'utilisation
-Datadog vous guide à travers vos flux de travail de provisionnement et d'optimisation des performances en fournissant deux vues dédiées axées sur les cas d'utilisation. 
+Vous pouvez également {{< ui >}}Search{{< /ui >}} ou {{< ui >}}Group{{< /ui >}} à l'aide d'autres tags en utilisant les champs de recherche et de regroupement. Par exemple, vous pouvez regrouper par {{< ui >}}Service{{< /ui >}} pour afficher une ligne dans le tableau pour chaque service unique. Cliquez sur le bouton {{< ui >}}\>{{< /ui >}} à côté de n'importe quelle entrée pour voir les périphériques de ce service.
 
-### Provisionnement
-L'onglet Provisionnement montre des recommandations clés et des aperçus de métriques pour allouer et gérer votre capacité. 
+{{< img src="gpu_monitoring/host_row_expansion-2.png" alt="Tableau du parc GPU affichant les services avec leurs types de périphériques, avec le bouton d'extension de ligne mis en surbrillance" style="width:90%;" >}}
 
-{{< img src="gpu_monitoring/provisioning-tab.png" alt="La vue axée sur les cas d'utilisation du provisionnement" style="width:90%;" >}}
+{{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Menus déroulants de filtrage et sélecteur de regroupement en haut de la page Parc GPU" style="width:90%;" >}}
 
-Recommandations OOTB : 
-- Datadog détecte de manière proactive le throttling thermique ou les défauts matériels et recommande instantanément des remédiations basées sur des erreurs matérielles telles que les erreurs ECC/XID.
-- Datadog détecte si des appareils inactifs doivent être provisionnés pour éviter que des appareils ne restent inactifs.
+## Vues et recommandations axées sur les cas d'utilisation {#use-case-driven-views-and-recommendations}
+La page Fleet Explorer de GPU Monitoring propose deux vues dédiées axées sur les cas d'utilisation :
 
-Métriques pertinentes pour votre flux de travail de provisionnement : 
-- Compte d'erreurs ECC et XID
-- Activité graphique
-- Activité SM
-- Mémoire GPU
-- Appareils alloués (disponible uniquement pour les utilisateurs de Kubernetes) 
-- Appareils actifs
-- Coût inactif
+- **Provisionnement** : Allouez de la capacité et gérez les quotas.
+- **Performance** : Optimisez l'efficacité et le débit de la charge de travail.
 
-### Performance
-L'onglet Performance vous aide à comprendre l'exécution des charges de travail et à optimiser l'utilisation du GPU pour utiliser vos appareils plus efficacement.
+### Provisionnement {#provisioning}
+L'onglet {{< ui >}}Provisioning{{< /ui >}} détecte tout problème de santé du matériel ayant un impact sur l'allocation de vos périphériques aux charges de travail et fournit des conseils sur la façon d'y remédier.
 
-{{< img src="gpu_monitoring/performance-tab.png" alt="La vue axée sur les cas d'utilisation de la performance" style="width:90%;" >}}
+{{< img src="gpu_monitoring/provisioning-tab-3.jpg" alt="La vue axée sur le cas d'utilisation Provisionnement" style="width:90%;" >}}
 
-Recommandations OOTB : 
-- Si vos charges de travail sont intensives en CPU, Datadog signale les hôtes avec saturation du CPU et recommande des solutions.
-- Si vos charges de travail n'utilisent pas efficacement leurs appareils GPU alloués, Datadog fournit des recommandations pour ajuster les charges de travail afin d'obtenir plus de valeur de leur capacité.
+Pour chaque problème détecté, Datadog recommande des actions de remédiation étape par étape pour vous aider à le résoudre.
 
-Métriques pertinentes pour votre flux de travail de performance : 
-- Compte d'erreurs ECC et XID
-- Activité graphique
-- Activité SM
-- Mémoire GPU
-- Appareils efficaces
-- Puissance
-- Température
-- PCIe RX
-- PCIe Tx
-- Utilisation du CPU
+{{< img src="gpu_monitoring/critical-xid-recommendation.jpg" alt="Actions de remédiation recommandées pour une erreur XID critique" style="width:60%;" >}}
 
-## Graphique Résumé
+#### Graphique récapitulatif du provisionnement {#provisioning-summary-graph}
 
-Après avoir basculé entre Cluster, Hôte ou Appareil, le **Graphique Résumé** affiche les principales télémétries de ressources à travers toute votre infrastructure GPU regroupées par cette valeur de basculement. Développez la section ci-dessous pour voir un tableau des métriques disponibles et ce qu'elles représentent. 
+Le graphique récapitulatif fournit des visualisations prêtes à l'emploi (OOTB) pour la télémétrie clé liée à votre vue axée sur le cas d'utilisation sélectionné. Pour le cas d'utilisation Provisioning, cela décompose vos appareils provisionnés, alloués et actifs afin que vous puissiez récupérer les dépenses inutiles liées à l'inactivité et redécouvrir les appareils disponibles pouvant être alloués aux charges de travail.
 
-{{% collapse-content title="Voir la liste complète des métriques GPU" level="h4" expanded=false id="gpu-metrics-table" %}}
-| Métrique                | Définition                                                              | Nom de la Métrique                                    |
-| ----------------------| ------------------------------------------------------------------------| --------------------------------------------- |
-| Utilisation du Cœur      | (Disponible uniquement avec le Système Probe activé pour des métriques eBPF avancées) `Cores Used/Cores Limit` pour les processus GPU. Mesure de l'Utilisation Temporelle du Cœur.| `gpu_core_utilization`  
-| Utilisation de la Mémoire    | Mémoire GPU utilisée / Limite de Mémoire GPU pour les processus GPU. | `gpu_memory_utilization`
-| Débit PCIe       | Octets reçus et octets transmis via PCI depuis le périphérique GPU par seconde. | `gpu.pci.throughput.rx`,`gpu.pci.throughput.tx` 
-| Activité graphique     | Pourcentage de temps pendant lequel le moteur graphique était actif. | `gpu.gr_engine_active`
-| Activité SM           | Pourcentage de temps pendant lequel le multiprocesseur de flux était actif. | `gpu.sm_active`
-| Puissance                 | Utilisation de la puissance pour le périphérique GPU.<br>**Remarque** : Sur les architectures GA100 et précédentes, cela représente la puissance instantanée à ce moment-là.<br>Pour les architectures plus récentes, cela représente la consommation moyenne de puissance (Watts) sur une seconde. | `gpu.power.usage`
-| Température           | Température d'un périphérique GPU. | `gpu.temperature`
-| Cœurs utilisés            | (Émis uniquement si des processus sont actifs) Nombre moyen de cœurs GPU qu'un processus utilisait dans l'intervalle.  | `gpu.core.usage`
-| Mémoire utilisée           | (Émis uniquement si des processus sont actifs) La mémoire utilisée par ce processus au moment où la métrique a été interrogée. | `gpu.memory.usage`
-| Total des dispositifs          | Nombre de tous les dispositifs envoyant des données pendant cette période. | `gpu.device.total`
+{{< img src="gpu_monitoring/summary-graph.jpg" alt="Graphique récapitulatif montrant les répartitions des appareils provisionnés, des appareils alloués et des appareils actifs" style="width:90%;" >}}
+
+Développez cette section ci-dessous pour voir un tableau des options disponibles et ce qu'elles représentent.
+
+{{% collapse-content title="Voir la liste complète des options du graphique récapitulatif de provisionnement" level="h5" expanded=false id="provisioning-summary-graph-table" %}}
+| Option              | Définition                                                |
+| -------------------- | ---------------------------------------------------------- |
+| Appareils provisionnés  | Répartition des appareils provisionnés et des appareils actifs.       |
+| Appareils alloués    | Répartition des appareils disponibles par alloués vs non alloués. |
+| Appareils actifs       | Répartition des appareils alloués par actifs vs inactifs.          |
+{{% /collapse-content %}}
+
+### Performance {#performance}
+L'onglet {{< ui >}}Performance{{< /ui >}} détecte tout problème de santé du matériel ou de charge de travail qui ralentit les charges de travail s'exécutant sur vos appareils GPU. Cela fournit une source unique de vérité et des conseils aux ingénieurs de plateforme et aux équipes IA/ML sur la manière de remédier à ces problèmes.
+
+{{< img src="gpu_monitoring/performance-tab-3.jpg" alt="La vue axée sur le cas d'utilisation Performance" style="width:90%;" >}}
+
+Pour chaque problème détecté, Datadog recommande des actions de remédiation étape par étape pour vous aider à le résoudre.
+
+{{< img src="gpu_monitoring/power-cap-recommendation.jpg" alt="Actions de remédiation recommandées pour un problème de bridage de la puissance du GPU" style="width:60%;" >}}
+
+#### Graphique récapitulatif des performances {#performance-summary-graph}
+
+Le graphique récapitulatif fournit des visualisations prêtes à l'emploi (OOTB) pour la télémétrie clé liée à votre vue axée sur le cas d'utilisation sélectionné. Pour le cas d'utilisation Performance, cela décompose les métriques clés d'utilisation des ressources telles que l'utilisation du GPU ou la saturation du GPU, ainsi que les métriques de la structure réseau, de l'alimentation, de la température, et plus encore.
+
+{{< img src="gpu_monitoring/summary-graph-performance.jpg" alt="Graphique récapitulatif montrant les répartitions de l'utilisation du GPU, de la saturation du GPU et de la mémoire GPU" style="width:90%;" >}}
+
+Développez la section ci-dessous pour voir un tableau des options disponibles et ce qu'elles représentent.
+
+{{% collapse-content title="Voir la liste complète des options du graphique récapitulatif des performances" level="h5" expanded=false id="performance-summary-graph-table" %}}
+| Option              | Définition                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Utilisation CPU            | Pourcentage de temps que le processeur a passé à exécuter des processus en espace utilisateur.                                                                                                                                                        |
+| Mémoire du host         | Pourcentage de mémoire utilisable en cours d'utilisation.                                                                                                                                                                                    |
+| Utilisation GPU            | Pourcentage moyen de temps pendant lequel chaque multiprocesseur de flux était actif (des valeurs plus faibles indiquent un temps d'inactivité).                                                                                                                |
+| Saturation GPU      | Mesure dans quelle mesure la capacité d'exécution parallèle du GPU est utilisée pendant la période donnée (rapport moyen des warps actifs par rapport au nombre maximal de warps pris en charge par multiprocesseur de flux sur l'ensemble des SM).            |
+| Mémoire GPU          | Pourcentage de mémoire GPU utilisée par rapport à la limite totale de mémoire GPU.                                                                                                                                                               |
+| PCIe RX             | Octets reçus via PCI depuis le périphérique GPU par seconde.                                                                                                                                                             |
+| PCIe TX             | Octets transmis via PCI vers le périphérique GPU par seconde.                                                                                                                                                            |
+| NVLink RX           | Total RX de tous les liens NVLINK.                                                                                                                                                                                          |
+| NVLink TX           | Total TX de tous les liens NVLINK.                                                                                                                                                                                          |
+| Activité graphique   | Fraction de temps pendant laquelle le GPU effectuait un travail de calcul au cours de l'intervalle. Un signal approximatif indiquant si le GPU est occupé ou inactif.                                                                                     |
+| Puissance               | Consommation électrique du périphérique GPU. Sur les architectures GA100 et antérieures, cela représente la puissance instantanée à ce moment précis. Pour les architectures plus récentes, cela représente la consommation électrique moyenne (en Watts) sur une seconde. |
+| Température         | Température d'un périphérique GPU.                                                                                                                                                                                            |
+| Horloge SM            | Fréquence d'horloge SM en MHz.                                                                                                                                                                                             |
+| Liens NVLINK actifs | Nombre de liens NVLINK actifs pour le périphérique.                                                                                                                                                                          |
+| Erreurs ECC          | Nombre total d'erreurs ECC non corrigées.                                                                                                                                                                                 |
+| Erreurs XID          | Nombre d'erreurs NVIDIA XID, indiquant des problèmes matériels ou au niveau du pilote.                                                                                                                                                |
+{{% /collapse-content %}}
+
+## Inventaire de votre infrastructure basée sur GPU {#inventory-of-your-gpu-powered-infrastructure}
+
+Ce tableau détaille votre infrastructure basée sur GPU selon le tag de votre choix. Si vous n'avez pas spécifié de tag supplémentaire dans le champ {{< ui >}}Group by{{< /ui >}}, les résultats sont regroupés selon la vue sélectionnée : {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Host{{< /ui >}} ou {{< ui >}}Device{{< /ui >}}.
+
+Vous pouvez cliquer sur l'icône en forme d'engrenage pour personnaliser les métriques affichées dans le tableau. Développez la section ci-dessous pour voir la liste complète des métriques disponibles. 
+
+{{% collapse-content title="Voir la liste complète des métriques disponibles" level="h3" expanded=false id="metric-full-list" %}}
+| Métrique                   | Définition                                                                                                                                                                                                              | Nom de la métrique                                        | Onglet Provisionnement | Onglet Performance |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ---------------- | --------------- |
+| Coût d'inactivité                | (Uniquement non nul pour des périodes supérieures à 2 jours) Le coût des ressources GPU réservées et allouées, mais non utilisées.                                                                                              | `gpu_monitoring.estimated_idle_cost`               | ✓                 | ✓               |
+| Nombre total de périphériques            | Périphériques GPU avec Datadog GPU Monitoring correctement configuré et rapportant des métriques.                                                                                                                                    | `kubernetes_state.node.gpu_capacity`               | ✓                 | —               |
+| Kubernetes disponible     | Périphériques GPU sains qui sont sous tension et disponibles pour l'allocation, selon l'orchestrateur Kubernetes.                                                                                                          | `kubernetes_state.node.gpu_allocatable`            | ✓                 | —               |
+| Périphériques alloués        | (Uniquement disponible si vous utilisez Kubernetes) Nombre de périphériques ayant été alloués à une charge de travail.                                                                                                                           | `gpu.device.total`                                 | ✓                 | —               |
+| Périphériques non alloués      | Nombre de périphériques non alloués et disponibles pour une utilisation pendant la période donnée.                                                                                                                                                 |                                                    | ✓                 | —               |
+| Périphériques actifs           | Nombre de périphériques activement utilisés pour une charge de travail ou occupés. Si vous utilisez Kubernetes : nombre de périphériques alloués activement utilisés pour une charge de travail.                                                                   | `gpu.gr_engine_active`                             | ✓                 | —               |
+| Périphériques inactifs             | Périphériques GPU alloués à des charges de travail mais n'effectuant aucun travail pendant la période donnée. Un périphérique est considéré comme inactif si `gpu.gr_engine_active` est égal à 0.                                                                        | `gpu.gr_engine_active`                             | ✓                 | —               |
+| Utilisation du processeur          | Pourcentage de temps que le processeur a passé à exécuter des processus en espace utilisateur.                                                                                                                                       | `system.cpu.user`                                  | —                 | ✓               |
+| Mémoire du host              | Pourcentage de mémoire utilisable en cours d'utilisation.                                                                                                                                                                                    | `system.mem.pct_usable`                            | —                 | ✓               |
+| Utilisation du GPU          | Pourcentage moyen de temps pendant lequel chaque multiprocesseur de flux était actif (les valeurs inférieures indiquent un temps d'inactivité).                                                                                                                           | `gpu.sm_active`                                    | —                 | ✓               |
+| Saturation du GPU           | Mesure à quel point la capacité d'exécution parallèle du GPU est utilisée pendant la période donnée (ratio moyen des warps actifs par rapport au nombre maximal de warps pris en charge par multiprocesseur de flux sur l'ensemble des SM).                 | `gpu.sm_occupancy`                                 | —                 | ✓               |
+| Mémoire GPU               | Pourcentage de mémoire GPU utilisée par rapport à la limite totale de mémoire GPU.                                                                                                                                                                 | `100 - (gpu.memory.free / gpu.memory.limit * 100)` | —                 | ✓               |
+| Débit de réception PCIe       | Octets reçus via PCI depuis le périphérique GPU par seconde.                                                                                                                                                              | `gpu.pci.throughput.rx`                            | —                 | ✓               |
+| Débit de transmission PCIe       | Octets transmis via PCI vers le périphérique GPU par seconde.                                                                                                                                                             | `gpu.pci.throughput.tx`                            | —                 | ✓               |
+| Réception NVLink                | Réception totale de tous les liens NVLINK.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.rx`                     | —                 | ✓               |
+| Transmission NVLink                | Transmission totale de tous les liens NVLINK.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.tx`                     | —                 | ✓               |
+| Puissance                    | Puissance du périphérique GPU.<br>**Remarque** : Sur les architectures GA100 et antérieures, cela représente la puissance instantanée à ce moment-là.<br>Pour les architectures plus récentes, cela représente la puissance moyenne (Watts) sur une seconde. | `gpu.power.usage`                                  | —                 | ✓               |
+| Température              | Température d'un périphérique GPU.                                                                                                                                                                                            | `gpu.temperature`                                  | —                 | ✓               |
 {{% /collapse-content %}} 
 
-Si vous avez sélectionné une étiquette supplémentaire pour regrouper---par exemple, _équipe_---chaque série temporelle unique dans le graphique de synthèse correspond à la valeur d'une équipe pour la métrique sélectionnée.
+## Panneau latéral des détails {#details-side-panel}
 
-## Inventaire de votre infrastructure équipée de GPU
+Cliquer sur n'importe quelle ligne du tableau Fleet permet d'ouvrir un panneau latéral contenant plus de détails sur le cluster, le host ou le périphérique sélectionné.
 
-Ce tableau décompose votre infrastructure équipée de GPU selon l'étiquette de votre choix. Si vous n'avez pas spécifié d'étiquette supplémentaire dans le champ **Grouper par**, les résultats sont regroupés par votre vue sélectionnée : Cluster, hôte ou dispositif.
+### Entités connectées {#connected-entities}
 
-Par défaut, le tableau des résultats affiche les colonnes suivantes : 
+Le GPU Monitoring de Datadog n'a pas besoin de s'appuyer sur le DCGM Exporter de NVIDIA. Il utilise le Datadog Agent pour observer directement les GPU, offrant un aperçu de l'utilisation des GPU et de leurs coûts pour les pods et les processus. Dans la section {{< ui >}}Connected Entities{{< /ui >}} de n'importe quelle vue détaillée, vous pouvez voir l'activité des SM, l'utilisation des cœurs GPU (uniquement si System Probe est activé) et l'utilisation de la mémoire des pods, des processus et des travaux Slurm. Cela vous aide à identifier les charges de travail à réduire ou à optimiser pour diminuer les dépenses totales. 
 
-- Type de dispositif 
-- Activité du moteur graphique 
-- Activité SM (uniquement si la sonde système est activée) 
-- Utilisation du cœur 
-- Utilisation de la mémoire 
-- Coût d'inactivité
-- Recommandation
-
-Vous pouvez cliquer sur l'icône en forme de roue dentée pour personnaliser les métriques affichées dans le tableau. Développez la section ci-dessous pour voir la liste complète des métriques disponibles. 
-
-{{% collapse-content title="Voir la liste complète des métriques disponibles" level="h4" expanded=false id="metric-full-list" %}}
-| Métrique                | Définition                                                              | Nom de la métrique                                    |
-| ----------------------| ------------------------------------------------------------------------| ---------------------------------------------  |
-| Utilisation du CPU       | Le pourcentage de temps que le CPU a passé à exécuter des processus en espace utilisateur. Affiché en pourcentage. | `system.cpu.user`
-| Type d'appareil           | Type d'appareil GPU. | `gpu_device`
-| Total des appareils         | Nombre total d'appareils envoyant des données pendant cette période. | `gpu.device.total`
-| Appareils alloués     | (uniquement disponible si vous utilisez Kubernetes) Nombre d'appareils ayant été alloués à une charge de travail. | `gpu.device.total`
-| Appareils actifs        | Nombre d'appareils utilisés activement pour une charge de travail / occupés. Si vous utilisez Kubernetes : nombre de dispositifs alloués qui sont activement utilisés pour une charge de travail. | `gpu.gr_engine_active`
-| Appareils efficaces     | Nombre d'appareils utilisés et fonctionnant pendant plus de 50 % de leur durée de vie. | `gpu.sm_active`
-| Activité du moteur graphique| Pourcentage de temps pendant lequel le moteur graphique était actif. | `gpu.gr_engine_active`
-| Activité du SM           | Pourcentage de temps pendant lequel le multiprocesseur de streaming était actif. | `gpu.sm_active`
-| Horloge SM              | Fréquence de l'horloge SM en MHz. | `gpu.clock_speed.sm`
-| Débit RX PCIe          | Octets reçus via PCI depuis l'appareil GPU par seconde. | `gpu.pci.throughput.rx`
-| Débit TX PCIe          | Octets transmis via PCI à l'appareil GPU par seconde. | `gpu.pci.throughput.tx`
-| Puissance               | Utilisation de la puissance pour l'appareil GPU.<br>**Remarque** : Sur les architectures GA100 et précédentes, cela représente la puissance instantanée à ce moment-là.<br>Pour les architectures plus récentes, cela représente la consommation moyenne de puissance (Watts) sur une seconde. | `gpu.power.usage`
-| Température             | Température d’un appareil GPU. | `gpu.temperature`
-| Cœurs Utilisés          | (Émis uniquement si des processus sont actifs) Nombre moyen de cœurs GPU qu'un processus utilisait dans l'intervalle.  | `gpu.core.usage`
-| Limite de cœurs           | Nombre de cœurs GPU que le processus, le conteneur ou l’appareil a à disposition. | `gpu.core.limit`
-| Mémoire Utilisée           | (Émis uniquement si des processus sont actifs) La mémoire utilisée par ce processus au moment où la métrique a été soumise. | `gpu.memory.usage`
-| Limite de mémoire          | La quantité maximale de mémoire qu'un processus, un conteneur ou un appareil peut allouer. | `gpu.memory.limit`
-| Tonnes métriques CO2       | Les tonnes métriques d'équivalent dioxyde de carbone (MTCO2e) sont une unité de mesure qui compare les émissions de gaz à effet de serre en fonction de leur potentiel de réchauffement global (PRG). Elle est calculée en multipliant la quantité d'un gaz par son PRG. Par exemple, si le méthane a un PRG de 21, alors 1 million de tonnes métriques de méthane équivaut à 21 millions de tonnes métriques de dioxyde de carbone. | Formule basée sur `gpu.power.usage`
-| Utilisation des cœurs      | (Disponible uniquement si System Probe est activé) `Cores Used/Cores Limit` pour les processus GPU. Mesure de l'utilisation temporelle des cœurs. | `gpu_core_utilization`  
-| Utilisation de la mémoire    | Mémoire GPU utilisée / Limite de mémoire GPU pour les processus GPU. | `gpu_memory_utilization`
-| Coût inactif             | (Non nul uniquement pour des périodes de temps supérieures à 2 jours) Le coût des ressources GPU qui sont réservées et allouées, mais non utilisées.
-{{% /collapse-content %}} 
-
-## Panneau latéral des détails 
-
-Cliquer sur n'importe quelle ligne dans le tableau de la Flotte ouvre un panneau latéral avec plus de détails pour le cluster, l'hôte ou l'appareil sélectionné.
-
-### Entités connectées 
-
-La surveillance GPU de Datadog n'a pas besoin de s'appuyer sur l'exportateur DCGM de NVIDIA. Il utilise l'Agent Datadog pour observer directement les GPU, fournissant des informations sur l'utilisation des GPU et les coûts pour les pods et les processus. Dans la section **Entités Connectées** de toute vue détaillée, vous pouvez voir l'activité SM, l'utilisation des cœurs GPU (uniquement si le Système Probe est activé) et l'utilisation de la mémoire des pods, des processus et des travaux Slurm. Cela vous aide à identifier quelles charges de travail réduire ou optimiser afin de diminuer les dépenses totales. 
-
-**Remarque** : L'onglet **Pods** n'est disponible que si vous utilisez Kubernetes.
+**Remarque** : L'onglet {{< ui >}}Pods{{< /ui >}} n'est disponible que si vous utilisez Kubernetes.
 
 {{< tabs >}}
 {{% tab "Panneau latéral du cluster" %}}
 
-Dans ce panneau latéral, vous avez un entonnoir spécifique au cluster qui identifie :
+Dans ce panneau latéral, vous disposez d'un entonnoir spécifique au cluster qui identifie :
 
-- Nombre total, alloué (uniquement pour les utilisateurs de Kubernetes), actif et efficace de dispositifs au sein de ce cluster particulier
-- Coût total estimé et coût inactif de ce cluster
-- Entités connectées de ce cluster : pods, processus et travaux Slurm
-- Quatre indicateurs clés (personnalisables) pour ce cluster : Utilisation des cœurs (Core Utilization) (uniquement si System Probe est activé), Utilisation de la mémoire, Débit PCIe et Activité graphique
-- Tableau des hôtes associés à ce cluster
+- Nombre total, alloué (utilisateurs Kubernetes uniquement), actif et effectif de périphériques au sein de ce cluster particulier
+- Coût total et coût inactif estimés de ce cluster
+- Entités connectées à ce cluster : pods, processus et travaux Slurm
+- Quatre métriques clés (personnalisables) pour ce cluster : utilisation du cœur (uniquement si System Probe est activé), utilisation de la mémoire, débit PCIe et activité graphique.
+- Tableau des hosts associés à ce cluster
 
-{{< img src="gpu_monitoring/cluster_sidepanel.png" alt="Panneau latéral spécifique au cluster qui décompose les dispositifs inactifs, les coûts et les entités connectées" style="width:100%;" >}}
-
-{{% /tab %}}
-
-{{% tab "Panneau latéral de l'hôte" %}}
-
-Dans ce panneau latéral, vous avez une vue spécifique à l'hôte qui identifie :
-
-- Métadonnées liées à l'hôte telles que le fournisseur, le type d'instance, l'utilisation du CPU, la mémoire système utilisée, la mémoire système totale, l'utilisation du système IO, l'activité SM et la température
-- (uniquement disponible pour les utilisateurs de Kubernetes) Les dispositifs GPU spécifiques alloués à cet hôte triés par Activité du moteur graphique
-- Entités connectées de cet hôte : pods, processus et travaux Slurm
-
-{{< img src="gpu_monitoring/host_sidepanel.png" alt="Panneau latéral spécifique à l'hôte qui affiche les dispositifs GPU liés à cet hôte et les Entités Connectées" style="width:100%;" >}}
+{{< img src="gpu_monitoring/cluster_sidepanel.png" alt="Panneau latéral spécifique au cluster qui détaille les périphériques inactifs, les coûts et les entités connectées" style="width:100%;" >}}
 
 {{% /tab %}}
 
-{{% tab "Panneau latéral du dispositif" %}}
+{{% tab "Panneau latéral du host" %}}
 
-Dans ce panneau latéral, vous avez une vue spécifique au dispositif qui identifie :
+Dans ce panneau latéral, vous disposez d'une vue spécifique au host qui identifie :
 
-- Recommandations (le cas échéant) sur la manière d'utiliser cet appareil plus efficacement 
-- Détails liés à l'appareil : type d'appareil, activité SM et température
-- Quatre indicateurs clés liés aux GPU : Activité SM, Utilisation de la mémoire, Puissance et Activité du moteur graphique 
-- Entités connectées de ce cluster : pods et processus
+- Métadonnées relatives au host telles que le fournisseur, le type d'instance, l'utilisation du CPU, la mémoire système utilisée, la mémoire système totale, l'utilisation des E/S système, l'activité SM et la température
+- (disponible uniquement pour les utilisateurs Kubernetes) Les périphériques GPU spécifiques alloués à ce host, triés par activité du moteur graphique
+- Entités connectées à ce host : pods, processus et travaux Slurm
 
-{{< img src="gpu_monitoring/device_sidepanel.png" alt="Panneau latéral spécifique à l'appareil qui affiche des recommandations sur la manière d'utiliser l'appareil plus efficacement et d'autres données clés de télémétrie." style="width:100%;" >}}
+{{< img src="gpu_monitoring/host_sidepanel.png" alt="Panneau latéral spécifique au host qui affiche les périphériques GPU liés à ce host et les entités connectées" style="width:100%;" >}}
+
+{{% /tab %}}
+
+{{% tab "Panneau latéral du périphérique" %}}
+
+Dans ce panneau latéral, vous disposez d'une vue spécifique au périphérique qui identifie :
+
+- Recommandations (le cas échéant) sur la manière d'utiliser ce périphérique plus efficacement 
+- Détails relatifs au périphérique : type de périphérique, activité SM et température
+- Quatre métriques clés liées aux GPU : activité SM, utilisation de la mémoire, puissance et activité du moteur graphique 
+- Entités connectées à ce cluster : pods et processus
+
+{{< img src="gpu_monitoring/device_sidepanel.png" alt="Panneau latéral spécifique au périphérique qui affiche des recommandations sur la manière d'utiliser le périphérique plus efficacement et d'autres télémétries clés." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Recommandations d'installation
+## Recommandations d'installation {#installation-recommendations}
 
-Datadog surveille activement votre infrastructure et détecte les lacunes d'installation qui peuvent diminuer la valeur que vous tirez de la surveillance des GPU. Dans cette fenêtre modale, vous pouvez trouver des recommandations de mise à jour d'installation pour obtenir la valeur optimale de la surveillance des GPU. Par exemple, assurez-vous que vos hôtes ont la [dernière version][1] de l'Agent Datadog installé, installez la dernière version du pilote NVIDIA et vérifiez les hôtes mal configurés.
+Datadog surveille activement votre infrastructure et détecte les lacunes d'installation susceptibles de réduire la valeur que vous tirez de GPU Monitoring. Dans cette fenêtre modale, vous trouverez des recommandations de mise à jour de l'installation pour obtenir une valeur optimale de GPU Monitoring. Par exemple, s'assurer que vos hosts disposent de la [dernière version][1] du Datadog Agent installée, que la dernière version du pilote NVIDIA est installée, et vérifier qu'il n'y a pas de hosts mal configurés.
 
-Pour voir les fonctionnalités avancées de surveillance des GPU telles que l'attribution des ressources GPU par les processus ou les travaux SLURM associés, vous devez activer [Processus en direct][3] et l'intégration [Slurm][4], respectivement.
+<div class="alert alert-danger">N'utilisez pas Datadog Agent v7.82.0, qui peut provoquer des paniques du noyau inattendues.</div>
 
-{{< img src="gpu_monitoring/installation.png" alt="Fenêtre modale contenant des conseils d'installation pour une expérience utilisateur de surveillance des GPU plus fluide." style="width:90%;" >}}
+Pour afficher les fonctionnalités avancées de GPU Monitoring, telles que l'attribution des ressources GPU par processus associés ou par travaux SLURM, vous devez activer respectivement [Live Processes][3] et l'intégration [Slurm][4].
 
-## Lectures complémentaires
+{{< img src="gpu_monitoring/installation.png" alt="Fenêtre modale contenant des conseils d'installation pour une expérience utilisateur de GPU Monitoring plus fluide." style="width:90%;" >}}
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [0]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=fleet
 [1]: https://github.com/DataDog/datadog-agent/releases
-[2]: https://www.nvidia.com/drivers/
 [3]: /fr/infrastructure/process/
 [4]: /fr/integrations/slurm/

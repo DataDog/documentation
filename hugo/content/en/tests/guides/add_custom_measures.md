@@ -129,7 +129,7 @@ DD_MEASURES="test.memory.usage:1000" datadog-ci junit upload --service my-servic
 
 ## Create a facet
 
-Create a facet for the custom measure you added to the test by navigating to the [{{< ui >}}Test Runs{{< /ui >}} page][2] and clicking {{< ui >}}+ Add{{< /ui >}} on the facet list.
+Create a facet for the custom measure you added to the test by navigating to the [{{< ui >}}Test Runs{{< /ui >}} page][2] and clicking {{< ui >}}\+ Add{{< /ui >}} on the facet list.
 
 {{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 

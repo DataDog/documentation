@@ -35,6 +35,15 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
       tag: "Blog"
       text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
+    - link: "https://www.datadoghq.com/blog/kafka-console/"
+      tag: "Blog"
+      text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
+    - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
+      tag: 'Architecture Center'
+      text: 'Monitoring Financial Data Mesh on AWS using Datadog'
+    - link: 'https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/'
+      tag: 'Architecture Center'
+      text: 'Observability in Event-Driven Architectures'
 cascade:
     algolia:
         rank: 70
@@ -149,6 +158,14 @@ Datadog automatically links the infrastructure powering your services and relate
 
 Datadog can automatically detect your managed [Confluent Cloud][8] connectors and visualize them in the Data Streams Monitoring topology map. Install and configure the [Confluent Cloud integration][9] to collect information from your Confluent Cloud connectors—including throughput, status, and topic dependencies.
 
+## Troubleshooting
+
+### End-to-end latency metric doesn't look accurate
+
+Latency calculations for a pathway require single-threaded message processing. If messages in your pipeline use multiple threads, add manual instrumentation. Manual instrumentation is available for [Go][12] and [Java][13] applications. For other languages, see the [manual instrumentation guide][14]. For .NET manual instrumentation, contact [Support][15].
+
+In the Pathways tab, the message **latency values may be approximate for these pathways** appears for pathways that need manual instrumentation for accurate latency values.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -164,3 +181,7 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 [9]: /integrations/confluent_cloud/
 [10]: https://app.datadoghq.com/data-streams/map
 [11]: /opentelemetry/compatibility
+[12]: /data_streams/go#manual-instrumentation
+[13]: /data_streams/java#manual-instrumentation
+[14]: /data_streams/manual_instrumentation/
+[15]: /help/

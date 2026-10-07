@@ -5,29 +5,32 @@ further_reading:
   text: Configuración de Postgres
 - link: /database_monitoring/setup_postgres/rds
   tag: Documentación
-  text: Configuración de Database Monitoring para Postgres gestionado por Amazon RDS
+  text: Configuración de Database Monitoring para Postgres administrado en Amazon
+    RDS
+- link: https://www.datadoghq.com/architecture/dbm-quick-install-aws-rds-postgres/
+  tag: Centro de arquitectura
+  text: Instalación rápida de Datadog DBM para AWS RDS
 title: Instalación rápida de Database Monitoring para Postgres RDS
 ---
+La instalación rápida de Database Monitoring para RDS le permite configurar rápidamente Agents para hacer un seguimiento de sus instancias de Postgres en RDS. Después de especificar algunas opciones, Datadog genera una plantilla de CloudFormation que configura su instancia para hacer un seguimiento y utiliza Amazon ECS para implementar el Agent en la instancia de RDS con las configuraciones de DBM recomendadas.
 
-La instalación rápida de Database Monitoring para Postgres RDS te permite configurar rápidamente Agents para monitorizar tus instancias RDS Postgres. Luego de especificar algunas opciones, Datadog genera una plantilla de CloudFormation que configura tu instancia para la monitorización y utiliza Amazon ECS para desplegar el Agent en la instancia RDS con las configuraciones de monitorización de bases de datos recomendadas.
+## Requisitos previos {#prerequisites}
 
-## Requisitos previos
+- Se debe configurar un grupo de seguridad en la instancia para permitir conexiones entrantes desde la VPC de la instancia y conexiones salientes a Internet.
+- El nombre de usuario y la contraseña de acceso de administrador de la instancia de RDS deben almacenarse en un AWS Secret dentro de AWS Secrets Manager. Asegúrese de anotar el Amazon Resource Name (ARN) de este secreto, ya que Datadog lo utiliza para acceder a las credenciales durante la configuración y el funcionamiento.
 
-- Debe configurarse un grupo de seguridad en la instancia para permitir conexiones entrantes desde la VPC de la instancia y conexiones salientes a Internet.
-- El nombre de usuario y la contraseña de acceso de administrador a la instancia RDS deben almacenarse en un secreto AWS dentro de AWS Secrets Manager. Asegúrate de anotar el nombre de recurso de Amazon (ARN) de este secreto, ya que Datadog lo utiliza para acceder a las credenciales durante la configuración y el funcionamiento.
+<div class="alert alert-info">Datadog no almacena las credenciales de administrador. Solo se utilizan temporalmente para conectar el Agent y no se retienen datos después de completar el proceso.</div>
 
-<div class="alert alert-info">Datadog no almacena las credenciales de administrador. Sólo se utilizan temporalmente para conectar el Agent y no se conserva ningún dato una vez finalizado el proceso.</div>
+## Instalación {#installation}
 
-## Instalación
+1. Navegue a la página de [Database Monitoring Setup][1].
+1. En la pestaña {{< ui >}}Unmonitored Hosts{{< /ui >}}, haga clic en {{< ui >}}Add Agent{{< /ui >}} para la instancia de RDS donde desea instalar el Agent.
+1. Si no tiene un clúster de ECS instalado para su cuenta y región, haga clic en {{< ui >}}Create Cluster{{< /ui >}}.
+1. Seleccione un grupo de seguridad de la lista desplegable {{< ui >}}Security Group{{< /ui >}}.
+1. Haga clic en {{< ui >}}Select API Key{{< /ui >}}, seleccione una clave de API de la lista y luego haga clic en {{< ui >}}Use API Key{{< /ui >}}.
+1. Haga clic en {{< ui >}}Launch CloudFormation Stack in AWS Console{{< /ui >}}. Se abre una nueva página que muestra la pantalla de AWS CloudFormation. Utilice la plantilla de CloudFormation proporcionada para crear una pila. La plantilla incluye la configuración necesaria para implementar el Agent para hacer un seguimiento de su instancia de RDS.
 
-1. Ve a la página de [configuración de Database Monitoring][1].
-1. En la pestaña **Hosts no monitorizados**, haz clic en **Add Agent** (Añadir Agent) para la instancia RDS en la que quieres instalar el Agent.
-1. Si no tienes un clúster ECS instalado para tu cuenta y región, haz clic en **Create Cluster** (Crear clúster).
-1. Selecciona un grupo de seguridad en la lista desplegable **Grupo de seguridad**.
-1. Haz clic en **Select API Key** (Seleccionar clave de API), selecciona una clave de API en la lista y luego haz clic en **Use API Key** (Utilizar clave de API).
-1. Haz clic en **Launch CloudFormation Stack in AWS Console** (Iniciar stack tecnológico de CloudFormation en la consola AWS). Se abrirá una nueva página con la pantalla de AWS CloudFormation. Utiliza la plantilla de CloudFormation proporcionada para crear un stack tecnológico. La plantilla incluye la configuración necesaria para desplegar el Agent para monitorizar tu instancia RDS.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

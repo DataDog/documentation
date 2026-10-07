@@ -3,20 +3,17 @@ title: Set Up a Standalone Private Action Runner
 description: Install, connect, manage, and update a standalone private action runner that you deploy and manage yourself with Docker or Helm.
 disable_toc: false
 further_reading:
-- link: "actions/private_actions/"
+- link: "/actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions Overview"
-- link: "actions/private_actions/set_up_agent_based"
-  tag: "Documentation"
-  text: "Set up a private action runner in the Datadog Agent"
-- link: "actions/connections"
+- link: "/actions/connections"
   tag: "Documentation"
   text: "Connections"
 ---
 
 ## Overview
 
-The standalone private action runner is a dedicated container you can install and manage independently of the Datadog Agent with Docker or Helm. It is supported and in maintenance mode: it continues to receive security and stability updates, and no new features are planned. For new deployments, and to use Execution Policies, run the runner in the Datadog Agent instead. See [Set up a private action runner in the Datadog Agent][1].
+The standalone private action runner is a dedicated container you can install and manage independently of the Datadog Agent with Docker or Helm. It is supported and in maintenance mode: it continues to receive security and stability updates, and no new features are planned.
 
 Setting up the runner takes three steps:
 

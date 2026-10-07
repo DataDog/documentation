@@ -24,13 +24,15 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" header="Join the Preview!">}}
-  Add to Security Inbox Rules is in Preview.
-{{< /callout >}}
-
 {{< product-availability >}}
 
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
+
+## Default inbox rules
+
+Datadog provides a set of default inbox rules, compiled by the Datadog Security Research team, that populate your [Security Inbox][3] automatically. These rules cover the findings most likely to represent real risk in a typical environment.
+
+Default rules appear alongside your own rules on the [Findings Automation][2] page. You can disable a default rule if it does not match how your organization triages, and you can add your own rules to cover cases the defaults miss.
 
 ## Create an inbox rule
 
@@ -38,13 +40,17 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
 1. Under **Rule name**, enter a descriptive name for the rule; for example, "Cloud Infrastructure Anomaly Warnings".
 1. Add your rule criteria into the following fields:
     - **Any of these types**: The types of findings that the rule should check for. Available types include:
+      - Runtime Code Vulnerability
+      - Static Code Vulnerability
+      - Library Vulnerability
+      - Secrets (Code)
+      - Infrastructure as Code
+      - Container Image Vulnerability
+      - Host Vulnerability
       - Misconfiguration
       - Attack Path
       - Identity Risk
-      - Runtime Code Vulnerability
-      - Library Vulnerability
-      - Container Image Vulnerability
-      - Host Vulnerability
+      - API Security
       - Workload Activity
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
@@ -59,3 +65,4 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox
+[3]: /security/security_inbox/

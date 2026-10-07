@@ -65,10 +65,9 @@ title: 템플릿 변수
 
 스크롤하는 동안 모든 변수를 한 번에 보고 싶다면 **템플릿 변수 확장**을 클릭하세요. 
 
-
 ## 템플릿 변수 추가 {#add-a-template-variable}
 대시보드에서 템플릿 변수를 추가하는 방법:
-1. {{< ui >}}Add Variable{{< /ui >}}을 클릭합니다(기존 템플릿 변수가 있는 경우 {{< ui >}}+{{< /ui >}} 클릭).
+1. {{< ui >}}Add Variable{{< /ui >}}을 클릭합니다(기존 템플릿 변수가 있는 경우 {{< ui >}}\+{{< /ui >}} 클릭).
 2. 권장 템플릿 변수 목록에서 선택하거나 원하는 특정 태그를 검색합니다.
 4. 이 템플릿 변수를 적용할 위젯을 선택합니다.
 6. {{< ui >}}Save{{< /ui >}}를 클릭합니다.
@@ -82,6 +81,53 @@ title: 템플릿 변수
 * 기본 드롭다운 값 선택
 * 드롭다운 값을 미리 보고 검색 쿼리를 사용하여 추가 구성
 
+## 팀 필터 {#team-filter}
+
+태그 키가 `team`인 템플릿 변수는 일반 태그 값 선택기가 아닌 [팀 필터][5]로 렌더링됩니다. 이는 대시보드와 노트북 모두에 적용됩니다.
+
+팀 필터는 다음을 추가합니다.
+
+- 조직의 Datadog Teams와 일치하는 팀이 없는 `team` 태그 값을 모두 포함하는 하나의 목록.
+- 계층 구조 인식 선택. 팀을 선택하면 해당 팀 하위의 팀들도 함께 선택됩니다. Shift 키를 누른 상태에서 팀을 클릭하면 하위 팀을 제외하고 해당 팀만 선택하거나, 해당 팀을 제외하고 하위 팀만 선택할 수 있습니다.
+- 팀 핸들과 팀 표시 이름을 모두 검색합니다.
+
+{{< img src="/dashboards/template_variables/team-template-variable.png" alt="Dashboard 헤더에서 cluster, env, region 변수는 일반 값 선택기이고, 팀 변수는 팀 필터로 열린 상태입니다." style="width:100%;" >}}
+
+계층 구조 인식 선택은 변수의 태그 키가 `team`인 경우에만 나타납니다. 다른 태그 키를 기반으로 정의된 변수는 팀 계층 구조 개념이 없는 일반 태그 값 선택기로 렌더링됩니다. 한 Dashboard의 팀 변수는 계층 구조를 제공하는 반면 다른 Dashboard의 팀 변수는 그렇지 않다면, 각 변수의 태그 키를 비교하세요.
+
+`team` 변수의 경우, 필터는 조직의 모든 팀을 나열합니다. {{< ui >}}Available Values{{< /ui >}}에 설정된 값은 목록을 제한하는 대신 목록에 추가됩니다.
+
+### 다른 태그 키와 함께 팀 필터 사용 {#use-the-team-filter-with-a-different-tag-key}
+
+일부 데이터는 팀 소유권을 `team`이 아닌 `team_attribution`, `attributes.team`, `usr.team` 등의 태그 키로 기록합니다. 해당 키 중 하나로 정의된 템플릿 변수는 계층 구조 없이 태그 문자열의 평면 목록을 제공합니다.
+
+해당 데이터에 대해 계층 구조 인식 팀 선택을 사용하려면 `team` 태그 키에 템플릿 변수를 정의하고 각 위젯 쿼리에서 `$team.value`를 사용하여 선택한 값을 참조하세요. 변수의 태그 키에 따라 사용되는 선택기가 결정됩니다. 위젯 쿼리가 필터링하는 태그 키는 별개이며 일치할 필요는 없습니다.
+
+1. 태그 키 `team`을 사용하여 템플릿 변수를 추가합니다. 팀 필터로 렌더링됩니다.
+1. 각 위젯 쿼리에서 데이터가 사용하는 태그 키로 필터링하고, 값이 들어갈 위치에 `$team.value`를 입력합니다.
+
+동일한 대체가 모든 태그 키에 작동합니다. 평소와 같이 쿼리를 작성한 다음 팀 핸들을 `$team.value`로 바꿉니다.
+
+| 위젯 | 팀 핸들을 사용한 쿼리 | `$team.value` |를 사용한 쿼리
+|---|---|---|
+| Case Management(`attributes.team`) | `attributes.team:payments-platform` | `attributes.team:$team.value` |
+| Cloud Cost(`team_attribution`) | `sum:all.cost{team_attribution:payments-platform}` | `sum:all.cost{team_attribution:$team.value}` |
+
+#### 선택 항목이 해석되는 방식 {#how-selections-resolve}
+
+`$team.value`는 쿼리에 작성한 태그 키를 사용하여 선택한 모든 팀 핸들을 `OR`로 결합한 형태로 확장됩니다. 팀 `payments-platform` 및 `payments-fraud`을 선택하면 위의 두 예제는 다음과 같이 해석됩니다.
+
+```text
+attributes.team:(payments-platform OR payments-fraud)
+```
+
+```text
+sum:all.cost{team_attribution:payments-platform OR team_attribution:payments-fraud}
+```
+
+상위 팀을 선택하면 상위 팀과 그 아래의 모든 팀이 각각 별도의 핸들로 확장됩니다. 따라서 계층 구조 선택은 `team` 태그가 지정된 위젯과 동일한 핸들 집합으로 데이터를 필터링합니다. 하위 팀 없이 팀을 선택하거나 팀 없이 하위 팀을 선택해도 동일한 방식으로 확장됩니다. 해당 선택 항목의 핸들만 포함됩니다.
+
+확장된 결과는 팀 핸들 목록입니다. 위젯이 결과를 반환하려면 데이터에 해당 핸들이 태그되어 있어야 합니다.
 
 ## 템플릿 변수 편집 {#edit-a-template-variable}
 1. 대시보드 헤더의 템플릿 변수 위에 마우스를 올린 다음 **Edit**을 클릭합니다. 템플릿 변수 사이드 패널이 표시됩니다.
@@ -209,3 +255,4 @@ $<TEMPLATE_VARIABLE_NAME>
 [2]: /ko/logs/explorer/facets/
 [3]: /ko/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [4]: /ko/dashboards/faq/historical-data/
+[5]: /ko/account_management/teams/#team-filter

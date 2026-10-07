@@ -21,7 +21,9 @@ further_reading:
   tag: "Blog"
   text: "Best practices for end-to-end custom metrics governance"
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/agent-side-filtering-for-custom/" >}} Agent-Side Filtering for Custom Metrics is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+{{< callout url="#" header="false" btn_hidden="true" >}}
+Agent-side filtering for custom metrics is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -51,7 +53,7 @@ Policy updates are deployed to Agents in 1-2 minutes.
 
 ### From the Metrics Settings page
 
-1. Click {{< ui >}}+ Create Policy{{< /ui >}}.
+1. Click {{< ui >}}\+ Create Policy{{< /ui >}}.
 2. Click {{< ui >}}Filter metrics{{< /ui >}}.
 3. Provide a description for the new policy.
 4. Select the metrics to filter from the {{< ui >}}Metrics to Filter{{< /ui >}} dropdown, or click {{< ui >}}Upload CSV{{< /ui >}}.
@@ -69,7 +71,7 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 2. Click the three vertical dots button on the right-hand side of the screen.
 3. Click {{< ui >}}Filter metrics{{< /ui >}}.
 4. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, click {{< ui >}}New Policy{{< /ui >}}. Provide a description for the policy.
-5. Review the {{< ui >}}Metrics to Filter{{< /ui >}}. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}+ Include More Metrics{{< /ui >}} to add metrics to the list.
+5. Review the {{< ui >}}Metrics to Filter{{< /ui >}}. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}\+ Include More Metrics{{< /ui >}} to add metrics to the list.
 6. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_from_metric_query.mp4" alt="Creating a metric filtering policy from a metric query" video="true" >}}
@@ -126,7 +128,7 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 2. Click the three vertical dots button on the right-hand side of the screen.
 3. Click {{< ui >}}Filter metrics{{< /ui >}}.
 4. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, select the policy to edit.
-5. Review the {{< ui >}}Metrics to Filter{{< /ui >}} and {{< ui >}}Existing metrics in policy{{< /ui >}} lists. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}+ Include More Metrics{{< /ui >}} to add metrics to the list.
+5. Review the {{< ui >}}Metrics to Filter{{< /ui >}} and {{< ui >}}Existing metrics in policy{{< /ui >}} lists. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}\+ Include More Metrics{{< /ui >}} to add metrics to the list.
 6. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/edit_policy_with_metric_query.mp4" alt="Editing a metric filtering policy with a metric query" video="true" >}}
@@ -148,7 +150,7 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 3. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, select the policy to edit.
 4. Click {{< ui >}}Upload CSV{{< /ui >}} to the right of the {{< ui >}}Metrics to Filter{{< /ui >}} field.
 5. Select the CSV file, and click {{< ui >}}Open{{< /ui >}}.
-6. Review the {{< ui >}}Metrics to Filter{{< /ui >}} and {{< ui >}}Existing metrics in policy{{< /ui >}} lists. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}+ Include More Metrics{{< /ui >}} to add metrics to the list.
+6. Review the {{< ui >}}Metrics to Filter{{< /ui >}} and {{< ui >}}Existing metrics in policy{{< /ui >}} lists. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}\+ Include More Metrics{{< /ui >}} to add metrics to the list.
 7. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{% /tab %}}
@@ -398,4 +400,3 @@ This initial preview release includes the following limitations:
 [7]: https://app.datadoghq.com/metric/settings/policies                                            
 [8]: /api/latest/#getting-started
 [9]: /getting_started/site/
-

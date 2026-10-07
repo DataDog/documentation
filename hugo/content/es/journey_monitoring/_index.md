@@ -1,6 +1,11 @@
 ---
-description: Haga un seguimiento y analice flujos de usuario críticos para solucionar
-  problemas de experiencia del usuario y técnicos.
+description: Haga un seguimiento y analice los flujos críticos de usuario para solucionar
+  problemas de experiencia de usuario y técnicos.
+further_reading:
+- link: https://www.datadoghq.com/blog/journey-monitoring/
+  tag: blog
+  text: Haga un seguimiento de los recorridos críticos de usuario con Datadog Journey
+    Monitoring
 title: Journey Monitoring
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="¡Únase a la vista previa!">}}
@@ -9,10 +14,10 @@ Journey Monitoring está en vista previa.
 
 ## Descripción general {#overview}
 
-**Journey Monitoring** le permite realizar un seguimiento del estado de flujos de usuario críticos, como el inicio de sesión, el pago o la transmisión de medios, todo desde un solo lugar. Para cualquier flujo determinado, usted puede responder:
-- ¿Los usuarios experimentan fricción?
+**Journey Monitoring** le permite hacer un seguimiento del estado de los flujos críticos de usuario, como el inicio de sesión, el proceso de pago o la transmisión de medios, todo desde un solo lugar. Para cualquier flujo determinado, usted puede responder:
+- ¿Están los usuarios experimentando fricción?
 - ¿Qué tan rápido y confiable es el rendimiento?
-- ¿Los problemas provienen del frontend, la red o el backend?
+- ¿Provienen los problemas del frontend, la red o el backend?
 
 Un *recorrido* es un flujo de usuario definido por un evento de inicio y un evento de finalización. Por ejemplo, un recorrido de pago captura la experiencia desde que un usuario llega a la página de pago hasta que completa el proceso de pago. Journey Monitoring extrae datos de [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3] y [Session Replay][4] para mostrar el tráfico, las tasas de conversión, el tiempo de actividad y los errores de cada journey en un solo informe.
 
@@ -109,3 +114,7 @@ Cada recorrido y sus variantes tienen las siguientes métricas de rendimiento:
 [12]: /es/journey_monitoring/details_report/
 [13]: /es/real_user_monitoring/operations_monitoring/
 [14]: /es/synthetics/test_suites/#service-level-objectives
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

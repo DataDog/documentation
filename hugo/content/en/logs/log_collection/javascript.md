@@ -22,6 +22,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
 - **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs sent from Worker environments do not automatically include session information.
+- **WebAssembly errors**: To symbolicate WASM frames in browser logs, [configure the Browser SDK WASM plugin](#webassembly-errors) and [upload the module's debug symbols][14].
 
 ## Setup
 
@@ -492,6 +493,35 @@ The results are the same when using NPM, CDN async, or CDN sync:
   ...
 }
 ```
+
+#### WebAssembly errors
+
+To symbolicate WebAssembly (WASM) stack frames, install the Browser SDK WASM plugin. Use the same version for the plugin and the Browser Logs SDK:
+
+```shell
+npm install --save-exact \
+  @datadog/browser-logs@<VERSION> \
+  @datadog/browser-plugin-wasm@<VERSION>
+```
+
+Register the plugin when you initialize Browser Logs:
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+import { makeWasmPlugin } from '@datadog/browser-plugin-wasm';
+
+datadogLogs.init({
+  // ...
+  forwardErrorsToLogs: true,
+  plugins: [makeWasmPlugin()],
+});
+```
+
+Initialize Browser Logs before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to errors that contain WASM stack frames.
+
+Set `forwardErrorsToLogs` to `true` to forward unhandled WASM errors automatically. When logging a handled WASM error, pass its `Error` object as the third argument to `logger.error()`, as shown in [Error tracking](#error-tracking).
+
+Then, [upload WebAssembly symbols][14] to symbolicate the errors.
 
 ### Generic logger function
 
@@ -1365,3 +1395,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[14]: /real_user_monitoring/guide/upload-webassembly-symbols/

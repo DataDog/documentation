@@ -64,7 +64,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and GitHu
 The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect workflow information. If you already have an app, you can skip to the next section.
 
 1. Go to the [GitHub integration tile][12].
-2. Click {{< ui >}}+ Create GitHub App{{< /ui >}}.
+2. Click {{< ui >}}\+ Create GitHub App{{< /ui >}}.
 3. Configure the integration for a personal or organization account and enter the name of the GitHub organization.
 3. Select the Datadog features you want to enable for the GitHub App.
 4. In the {{< ui >}}Edit Permissions{{< /ui >}} section, grant `Actions: Read Only` access.

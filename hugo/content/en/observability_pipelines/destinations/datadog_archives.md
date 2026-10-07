@@ -92,6 +92,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{tag_name}}`. See the [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) section for more information.
 1. Check the confirmation statement.
 1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
 1. Click **Save**.
@@ -108,14 +109,15 @@ After you select the Datadog Archives destination in the pipeline UI:
 1. Enter the AWS region the S3 bucket is in.
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-    - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
+    - Use [template syntax][8] to route logs to different object keys based on specific fields in your logs. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu. If you are going to archive and rehydrate your logs:
-    - **Note**: Rehydration only supports the following [storage classes][9]:
+    - **Note**: [Archive Search][16] only supports the following [storage classes][9]:
         - Standard
-        - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10] are both disabled.
         - Standard-IA
         - One Zone-IA
+        - Glacier Instant Retrieval
+        - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10] are both disabled.
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
     - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
 
@@ -123,7 +125,7 @@ After you select the Datadog Archives destination in the pipeline UI:
 
 #### Compression
 
-1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Each gzip or zstd file is stored as one object.
     - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
 1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
 
@@ -158,6 +160,18 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 - Storage class: `Standard`
 
 {{< img src="observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" style="width:70%;" >}}
+
+## Using template syntax for dynamic partitioning
+
+When you set up the Datadog Archives destination (Amazon S3), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive based on the attribute value.
+
+{{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
+
+However, you must manually create a Datadog [Log Archive][17] for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
+
+{{< img src="observability_pipelines/destinations/datadog_archives_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
+
+If the {{< ui >}}Prefix{{< /ui >}} field for the Amazon S3 destination is `{{service}}/` and the Log Archive {{< ui >}}Path{{< /ui >}} is `/web-store/`, the archived log files are stored as `/web-store/<date>/<hour>/<filename>`.
 
 ## Secret defaults
 
@@ -220,7 +234,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [12]: /observability_pipelines/destinations/amazon_s3/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /api/latest/observability-pipelines/
-[16]: /logs/explorer/archive_search/
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[16]: /logs/explorer/archive_search/
 [17]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [18]: /logs/log_configuration/archives/?tab=awss3#advanced-settings

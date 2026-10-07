@@ -1,7 +1,6 @@
 ---
 description: Cree formularios para recopilar información, analizar respuestas y activar
   automatizaciones.
-disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
@@ -76,8 +75,18 @@ Puede importar un formulario existente desde un archivo PDF o JSON.
 {{< /tabs >}}
 
 Para obtener una vista previa o compartir su formulario:
-1. Haga clic en {{< ui >}}Preview{{< /ui >}} para ver el formulario tal como aparece para los encuestados.
+1. Haga clic en {{< ui >}}Preview{{< /ui >}} para visualizar el formulario tal como aparece para los encuestados.
 1. Haga clic en {{< ui >}}Share{{< /ui >}} para copiar el enlace del formulario o configurar las opciones para compartir.
+
+## Personalice las páginas de inicio y de fin {#customize-start-and-end-pages}
+
+Los formularios pueden incluir una página de inicio que se muestra antes de la primera pregunta y una página de fin que se muestra después de que un encuestado envía el formulario. Personalice el título y el mensaje en ambas páginas. De forma predeterminada, los formularios no incluyen una página de inicio y la página de fin muestra un mensaje de finalización genérico.
+
+Para agregar o personalizar una página de inicio o de fin:
+1. Desde la página [Forms][2], haga clic en un formulario para abrirlo en el editor.
+1. En el panel {{< ui >}}Pages{{< /ui >}}, haga clic en {{< ui >}}Start Page{{< /ui >}} o {{< ui >}}End Page{{< /ui >}}. Si no existe una página de inicio, haga clic en el icono de más **+** para agregar una.
+1. Edite el título y el mensaje.
+1. Haga clic en {{< ui >}}Publish{{< /ui >}} o {{< ui >}}Publish Changes{{< /ui >}} para aplicar sus cambios.
 
 ## Form settings {#form-settings}
 
@@ -87,7 +96,7 @@ Desde la página [Forms][2], haga clic en un formulario para abrirlo en el edito
 |---------|-------------|
 | Accepting Responses | Configure el formulario como activo o inactivo. Cuando está inactivo, el formulario no acepta nuevas respuestas. También puede establecer una fecha de finalización para cerrar automáticamente el formulario en una fecha específica. Solo disponible para formularios publicados. |
 | Anonymous Responses | Cuando está habilitado, los correos electrónicos de los encuestados no se almacenan. |
-| Manage Permissions | Configure quién puede ver y editar el formulario, y quién puede ver las respuestas enviadas. Consulte [Manage access](#manage-access). |
+| Manage Permissions | Configure quién puede visualizar y editar el formulario, y quién puede ver las respuestas enviadas. Consulte [Manage access](#manage-access). |
 | Clone Form | Cree una copia del formulario. |
 | Import Form | Importe campos desde un archivo PDF o JSON al formulario actual. |
 | Export Form (JSON) | Descargue el formulario como un archivo JSON. |
@@ -102,8 +111,10 @@ Para configurar el uso compartido de un formulario:
 
 Están disponibles las siguientes opciones para compartir:
 
-{{% collapse-content title="Share within Datadog" level="h3" expanded=false %}}
-Comparta el formulario con los usuarios de su organización de Datadog.
+{{% collapse-content title="Compartir dentro de Datadog" level="h3" expanded=false %}}
+Comparta el formulario con usuarios o Teams de su organización Datadog.
+
+Agregue usuarios individuales o Teams como destinatarios. Habilite {{< ui >}}Notify added teammates{{< /ui >}} para enviar una notificación y, opcionalmente, agregue un mensaje personalizado. Teams reciben notificaciones en su canal de Slack configurado o por correo electrónico; los usuarios individuales reciben notificaciones por correo electrónico.
 
 En {{< ui >}}Add to Dashboard{{< /ui >}}, utilice el menú desplegable para agregar el formulario a un tablero existente o crear un tablero.
 
@@ -115,14 +126,14 @@ Comparta el formulario con usuarios fuera de su organización de Datadog. Puede 
 
 Las siguientes opciones están disponibles:
 
-- **Specific individuals**: Agregue destinatarios por dirección de correo electrónico individual. Por ejemplo, `alice@example.com` y `bob@example.com`.
-- **Company domain**: Comparta con cualquier persona en un dominio de correo electrónico específico. Por ejemplo, `*@yourcompany.com`.
-- **Shareable link**: Genere un enlace que cualquier persona pueda usar para acceder al formulario sin una cuenta de Datadog.
+- **Personas específicas**: Agregue destinatarios por dirección de correo electrónico individual. Por ejemplo, `alice@example.com` y `bob@example.com`.
+- **Dominio de la empresa**: Comparta con cualquier persona en un dominio de correo electrónico específico. Por ejemplo, `*@yourcompany.com`.
+- **Cualquier persona con un enlace**: genere un enlace que cualquier persona pueda usar para acceder al formulario después de verificar su dirección de correo electrónico.
 {{% /collapse-content %}}
 
 Para pausar o eliminar el uso compartido externo, haga clic en {{< ui >}}Share{{< /ui >}}, luego haga clic en {{< ui >}}Edit{{< /ui >}} y seleccione {{< ui >}}Pause Sharing{{< /ui >}} o {{< ui >}}Delete Sharing{{< /ui >}}.
 
-Para rellenar previamente campos en un enlace compartido de modo que los encuestados comiencen con algunas respuestas completadas, consulte [Prefill form fields][15].
+Para rellenar previamente campos en un enlace compartido de modo que los encuestados comiencen con algunas respuestas completadas, consulte [Campos de formulario con autocompletado][15].
 
 ## Agregar un formulario a un tablero {#add-a-form-to-a-dashboard}
 
@@ -138,9 +149,9 @@ También puede agregar un formulario a un tablero directamente desde el tablero:
 1. Seleccione **Form Widget**.
 1. Seleccione su formulario, luego haga clic en {{< ui >}}Save{{< /ui >}}.
 
-## Add automation {#add-automation}
+## Agregar automatización {#add-automation}
 
-Después de crear un formulario, puede agregar una [acción][7] o un [workflow blueprint][8] que se active automáticamente cuando se envía un formulario.
+Después de crear un formulario, puede agregar una [acción][7] o un [blueprint de flujo de trabajo][8] que se active automáticamente cuando se envía un formulario.
 1. Desde la página [Forms][2], haga clic en un formulario.
 1. En la parte superior del formulario, seleccione {{< ui >}}Automation{{< /ui >}}.
 1. Elija una acción o un blueprint.
@@ -149,11 +160,11 @@ Después de crear un formulario, puede agregar una [acción][7] o un [workflow b
 
 **Nota**: Las automatizaciones activadas por formularios aparecen en [Workflow Automation][10].
 
-## Create and manage Forms with MCP {#create-and-manage-forms-with-mcp}
+## Crear y administrar formulario con MCP {#create-and-manage-forms-with-mcp}
 
 Conecte un agente de IA externo al [Datadog MCP Server][11] para crear, actualizar, publicar y leer formularios y sus respuestas. Habilite el conjunto de herramientas `forms` (o `all`) cuando se [conecte al Servidor MCP][12]. También puede pedirle a [Bits Chat][13] que cree un formulario desde cualquier lugar en Datadog. Consulte [Forms][14] en la referencia de herramientas de Datadog MCP Server para obtener la lista completa de herramientas disponibles.
 
-## Manage access {#manage-access}
+## Administrar el acceso {#manage-access}
 
 De forma predeterminada, solo el creador de un formulario puede acceder a él. Para cambiar los permisos de un formulario:
 1. Desde la página [Forms][2], haga clic en un formulario para abrirlo en el editor.

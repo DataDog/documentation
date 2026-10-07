@@ -61,7 +61,7 @@ When there are multiple dimensions, the top values are determined according to t
 
 ### Multiple queries
 
-Multiple queries are supported in [Timeseries][5] and [Table][6] visualizations. Add multiple queries by clicking on the {{< ui >}}+ Add{{< /ui >}} button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
+Multiple queries are supported in [Timeseries][5] and [Table][6] visualizations. Add multiple queries by clicking on the {{< ui >}}\+ Add{{< /ui >}} button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
 
 {{< img src="logs/explorer/group/add_multiple_queries.mp4" alt="A user demonstrating how to add multiple queries in the query editor" video=true style="width:100%;" >}}
 
@@ -99,7 +99,7 @@ Here is an example of how to apply an [Exclusion function][16] to exclude certai
 
 ### Formulas
 
-Apply a formula on one or multiple queries by clicking on the {{< ui >}}+ Add{{< /ui >}} button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in logs for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
+Apply a formula on one or multiple queries by clicking on the {{< ui >}}\+ Add{{< /ui >}} button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in logs for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
 
 {{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="The query editor with a formula dividing query A by query B" style="width:100%;" >}}
 

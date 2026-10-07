@@ -5,102 +5,107 @@ algolia:
   - cost attribution
 aliases:
 - /fr/account_management/billing/advanced_usage_reporting/
-- /fr/account_management/billing/custom_usage_reporitng/
+- /fr/account_management/billing/custom_usage_reporting/
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Paramètres de formule et d'utilisation
-title: Attribution de l'utilisation
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization/#identifying-areas-for-cost-optimization
+  tag: Blog
+  text: 'Optimisation de Datadog à grande échelle : une observabilité économique chez
+    Zendesk'
+title: Usage Attribution
 ---
+## Présentation {#overview}
 
-## Présentation
+Les administrateurs ou les utilisateurs disposant de l'autorisation Usage Read peuvent accéder à l'onglet Usage Attribution depuis la section Plan & Usage dans Datadog. La page Usage Attribution fournit les informations et fonctionnalités suivantes :
 
-Les administrateurs ou les utilisateurs disposant de l'autorisation Usage Read peuvent accéder à l'onglet Usage Attribution depuis la section Plan & Usage dans Datadog. La page Usage Attribution fournit les informations et fonctionnalités suivantes :
+- Répertorie les clés de tag existantes selon lesquelles l'utilisation est ventilée et offre la possibilité d'en modifier et d'en ajouter de nouvelles (jusqu'à trois clés de tag).
+- Résume l'utilisation à la fin de chaque mois et visualise l'utilisation au fil du temps ventilée par tags.
+- Génère des fichiers CSV cumulés depuis le début du mois et horaires.
 
-- Consulter la répartition de l'utilisation en fonction des différentes clés de tag et ajouter ou modifier de nouvelles clés (jusqu'à trois clés de tag)
-- Résumez l'utilisation à la fin de chaque mois et visualisez son évolution dans le temps en la répartissant par tags.
-- Générez des fichiers CSV au fil du mois ainsi que des fichiers horaires.
+Cette fonctionnalité ne prend pas en charge l'utilisation de produits qui ne peuvent pas être tagués lors de l'instrumentation. Par exemple, Incident Management Users, Parallel Testing Slots et Audit Trail.
 
-Cette fonctionnalité ne prend pas en charge l'utilisation de produits qui ne peuvent pas être associés à des tags lors de l'instrumentation. Par exemple, les utilisateurs d'Incident Management, les utilisateurs de pipelines CI et des tests, les slots de tests parallèles et l'Audit Trail.
+**Remarque** : pour ventiler la facturation de CI Pipeline et de Test Optimization par équipe ou par d'autres tags organisationnels, consultez [Billing enrichment][5] dans la documentation de facturation de CI Visibility.
 
-## Prise en main
+## Mise en route {#getting-started}
 
-Pour commencer à recevoir des données quotidiennes, un administrateur doit sélectionner des tags pour le rapport.
+Pour commencer à recevoir des données quotidiennes, un administrateur doit choisir des tags pour le rapport.
 
-{{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Débuter avec l'attribution de l'utilisation dans Datadog" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Prise en main de l'attribution de l'utilisation dans Datadog" style="width:100%;" >}}
 
-La fenêtre contextuelle **Edit Tags** permet :
+La fenêtre contextuelle {{< ui >}}Edit Tags{{< /ui >}} permet :
 
-- De sélectionner dans une liste déroulante jusqu'à 3 clés de tag. Les valeurs de la liste déroulante correspondent aux tags existants dans le compte racine et dans les organisations enfant sous le compte.
-- De supprimer et modifier des tags existants.
+- De saisir jusqu'à trois clés de tag à partir d'une liste déroulante. La liste déroulante est pré-remplie avec les tags existants sur le compte racine et sur toutes les organisations enfants sous le compte.
+- De supprimer et de modifier les tags existants.
 
 {{< img src="account_management/billing/usage_attribution/Edit-Tags-Popover.png" alt="Modifier les tags dans l'attribution de l'utilisation" style="width:80%;" >}}
 
-- Une fois les tags configurés, le premier rapport est généré sous 24 heures.
-- Les rapports sont régulièrement générés.
-- Si vous modifiez des tags, le nouveau rapport tient compte de vos changements. Cependant, les rapports précédents conservent les anciens tags.
-- Les rapports mensuels reflètent le dernier jeu de tags. Si les tags sont modifiés en cours de mois, des rapports partiels sont créés pour chaque période de rapport.
+- Une fois les tags configurés, il faut 24 heures pour que le premier rapport soit généré.
+- Les rapports sont générés de manière continue.
+- Si les tags sont modifiés, le nouveau rapport reflète les nouveaux tags. Cependant, les rapports précédents conservent les anciens tags.
+- Les rapports mensuels reflètent le dernier ensemble de tags. Si les tags sont modifiés au milieu d'un mois, des rapports mensuels partiels sont créés pour chaque période de reporting.
 
-## Utilisation totale
+## Utilisation totale {#total-usage}
 
-### Attribution de l'utilisation mensuelle
+### Attribution de l'utilisation mensuelle {#monthly-usage-attribution}
 
 Les rapports mensuels sont mis à jour quotidiennement et fournissent une agrégation des données d'utilisation depuis le début du mois.
 
 {{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Tags appliqués dans Datadog" style="width:100%;" >}}
 
-- Les données pour des produits, des tags et des organisations spécifiques peuvent être sélectionnées à l'aide du sélecteur de facettes.
-- Les données peuvent être regroupées ou dissociées en fonction des clés de tags sélectionnées.
-- Les options Valeur et Pourcentage sont disponibles pour l'affichage du tableau.
-- Les données affichées dans le tableau peuvent être modifiées pour inclure certains produits.
-- Si vous avez activé les comptes multi-org, l'utilisation est résumée pour toutes les organisations Datadog du compte parent.
-- Utilisez le sélecteur d'intervalle pour accéder aux rapports des mois précédents.
-- Les rapports peuvent être téléchargés au format CSV. Ces rapports incluent à la fois les volumes d'utilisation et les pourcentages, ce qui facilite les répartitions et les refacturations. Les pourcentages sont calculés pour chaque organisation.
+- Les données pour des produits, tags et organisations spécifiques peuvent être sélectionnées à l'aide du sélecteur de facettes.
+- Les données peuvent être regroupées et dissociées par les clés de tag sélectionnées.
+- Les options Valeur et Pourcentage sont disponibles pour l'affichage du tableau. 
+- Les données affichées dans le tableau peuvent être modifiées pour inclure certains produits. 
+- Si le mode multi-organisation est activé, l'utilisation est résumée pour l'ensemble des organisations Datadog au niveau du compte parent.
+- Les rapports des mois précédents sont accessibles via le sélecteur de période.
+- Les rapports sont téléchargeables au format CSV. Ces rapports CSV incluent à la fois les chiffres d'utilisation et les pourcentages, ce qui permet de simplifier les allocations et la refacturation. Les pourcentages sont calculés sur une base par organisation.
 
-Les données mensuelles peuvent également être récupérées à l'aide de l'API. Pour plus d'informations, consultez la [documentation sur l'endpoint d'API][1].
+Les données mensuelles peuvent également être extraites via l'API. Pour plus d'informations, consultez la [documentation du endpoint de l'API][1].
 
-### Attribution de l'utilisation horaire
+### Attribution de l'utilisation horaire {#hourly-usage-attribution}
 
-Les données horaires peuvent également être récupérées à l'aide de l'API. Pour plus d'informations, consultez la [documentation sur l'endpoint d'API][2].
+Les données horaires peuvent être extraites via l'API. Pour plus d'informations, consultez la [documentation du endpoint de l'API][2].
 
-### Interprétation des données
+### Interprétation des données {#interpreting-the-data}
 
-Le tableau ci-dessous montre un exemple de rapport quotidien pour l'utilisation d'Infra selon deux tags : `app` et `service`.
+Le tableau ci-dessous présente un exemple de rapport quotidien sur l'utilisation de l'infrastructure par deux tags : `app` et `service`.
 
-| public_id | hour                | app          | service                  | total_usage |
+| public_id | heure                | app          | service                  | utilisation_totale |
 | --------- | ------------------- | ------------- | ------------------------| --------------------- |
-| publicid1 | 2022-03-31 00:00:00 | &lt;empty&gt; | service1 &#124; service2  | 50                  |
+| publicid1 | 2022-03-31 00:00:00 | &lt;vide&gt; | service1 &#124; service2  | 50                  |
 | publicid1 | 2022-03-31 09:00:00 | app1         |                          | 28                    |
 | publicid1 | 2022-03-31 18:00:00 | app2         | service3                 | 1023                  |
 
-- Une valeur `<empty>` indique que la ressource a été taguée avec le tag concerné, mais qu'elle ne présente aucune valeur.
-- Si aucune valeur n'est indiquée, cela indique que la ressource ne comporte pas le tag concerné.
-- Des valeurs séparées par le symbole `|` (barre verticale) (par exemple, `service1 | service2`) indiquent qu'un tag spécifique a été appliqué plusieurs fois à la ressource.
-- Une valeur de tag valide (voir la [documentation sur la définition de tags][3]) indique la valeur réelle du tag concerné.
+- Une valeur `<empty>` signifie que la ressource a été marquée avec le tag respectif mais ne possédait pas de valeur.
+- Aucune valeur signifie que la ressource n'a pas été marquée avec ce tag particulier.
+- `|` Les valeurs séparées par (pipe) (par exemple, `service1 | service2`) signifient qu'un tag particulier a été appliqué plusieurs fois sur la ressource.
+- Une valeur de tag valide (voir la [documentation sur la définition des tags][3]) fait référence à la valeur réelle du tag respectif.
 
-#### Analyse approfondie des données
+#### Analyse de données approfondie {#further-data-analysis}
 
-Lorsque vous utilisez plusieurs tags, les rapports Hourly Usage Attribution et Monthly Usage Attribution contiennent des données pour toutes les combinaisons possibles de ces tags. Ils constituent ainsi d'excellents ensembles de données de base pour vos tâches d'analyse plus approfondie. Par exemple, vous pouvez utiliser des opérations de regroupement ou de pivotement pour générer des vues afin d'étudier plus précisément un certain sous-ensemble de tags, ou encore d'effectuer des agrégations temporelles personnalisées.
+Lors de l'utilisation de plusieurs tags, les rapports d'attribution d'utilisation horaire et mensuelle contiennent des données pour toutes les combinaisons possibles de ces tags, et conviennent comme jeux de données de base pour des tâches d'analyse de données approfondie. Par exemple, vous pouvez utiliser le regroupement ou le tableau croisé dynamique pour produire des vues axées sur un sous-ensemble des tags, ou pour effectuer des agrégations sur des plages de dates personnalisées.
 
-## Surveillance de l'utilisation
+## Suivi de l'utilisation {#tracking-usage}
 
-Une série chronologique des données d'attribution de l'utilisation peut être affichée en cliquant sur « Track Usage ».
-- Les données pour des produits spécifiques, une organisation ou des clés de tags peuvent être sélectionnées à l'aide du sélecteur de facettes.
-- Les données peuvent être représentées graphiquement sur une journée, une semaine ou un mois à l'aide du sélecteur de période situé au-dessus des graphiques.
+Une série temporelle de données d'attribution d'utilisation peut être consultée en cliquant sur « Suivre l'utilisation »
+- Les données relatives à des produits, une organisation ou des clés de tag spécifiques peuvent être sélectionnées à l'aide du sélecteur de facettes.
+- Les données peuvent être représentées graphiquement pour un jour, une semaine ou un mois en utilisant le sélecteur de temps au-dessus des graphiques.
 
-{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="Graphiques des hosts d'infra séparés par tags" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="Graphiques des hosts d'infrastructure séparés par tags" style="width:100%;" >}}
 
 
-## Attribution des coûts
+## Attribution des coûts {#cost-attribution}
 
-Pour les clients en facturation directe, des rapports d'attribution des coûts de fin de mois sont générés à la fin de chaque cycle de facturation afin de permettre les processus mensuels de refacturation et de répartition des coûts.
-- Les données de coûts du mois précédent sont disponibles au plus tard le 19 du mois en cours.
+Pour les clients facturés directement, des rapports d'attribution des coûts de fin de mois sont générés à la fin de chaque cycle de facturation pour permettre les processus de refacturation et d'allocation des coûts mensuels. 
+- Les données de coûts pour le mois précédent sont disponibles au plus tard le 19 du mois en cours.
 - Pour les clients GovCloud, une clause de non-responsabilité doit être approuvée avant l'activation de la fonctionnalité.
-- Les données d'attribution des coûts mensuels sont [disponibles avec l'API][4]
+- Les données de Cost Attribution mensuelles sont [disponibles avec l'API][4]
 
-{{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Rapport d'attribution des coûts" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Rapport de Cost Attribution" style="width:100%;" >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -108,3 +113,4 @@ Pour les clients en facturation directe, des rapports d'attribution des coûts d
 [2]: https://docs.datadoghq.com/fr/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/fr/getting_started/tagging/#define-tags
 [4]: https://docs.datadoghq.com/fr/api/latest/usage-metering/#get-monthly-cost-attribution
+[5]: /fr/account_management/billing/ci_visibility/#billing-enrichment

@@ -18,45 +18,36 @@ cascade:
     rank: 70
 description: パフォーマンス向上のためにコードを操作する
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=APM
-  tag: リリースノート
-  text: Datadog APM の最新リリースをチェック！(アプリログインが必要です)
+- link: https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/
+  tag: Architecture Center
+  text: イベント駆動型アーキテクチャにおけるオブザーバビリティ
 - link: https://learn.datadoghq.com/courses/getting-started-apm
   tag: ラーニングセンター
   text: APM メトリクスとトレースの概要
-- link: https://www.datadoghq.com/blog/monitor-rust-otel/
-  tag: ブログ
-  text: OpenTelemetry を使用して Rust アプリケーションを監視する方法
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: APM の理解を深めるためのインタラクティブセッションに参加する
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: ブログ
   text: スパンベースのメトリクスを生成し、アプリケーションパフォーマンスの過去の傾向を追跡
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: ブログ
   text: APM セキュリティビューでリスク、脆弱性、攻撃を可視化する
-- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
-  tag: ブログ
-  text: Datadog で Azure App Service 上の Linux Web アプリを監視する
-- link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
-  tag: ブログ
-  text: Datadog API カタログで API のパフォーマンス、セキュリティ、所有権を管理する
-- link: https://www.datadoghq.com/blog/software-catalog/
-  tag: ブログ
-  text: Software Catalog でデベロッパー エクスペリエンスとコラボレーションを向上させる
-- link: https://www.datadoghq.com/blog/datadog-csi-driver/
-  tag: ブログ
-  text: Datadog の CSI ドライバーにより、高パフォーマンスの監視可能性を提供して Kubernetes 環境のセキュリティを確保する
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: APM の理解を深めるためのインタラクティブセッションに参加しましょう
-- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
-  tag: ブログ
-  text: Datadog で GitLab ソースコード統合を使用して迅速にトラブルシューティングを実行する
 - link: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing
   tag: ブログ
   text: Datadog を使用して Cloud Run で Google Pub/Sub ワークロードをトレースする
 - link: https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency
   tag: ブログ
   text: 往復クエリレイテンシーの分析
+- link: https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/
+  tag: ブログ
+  text: OpenTelemetryとDatadogを使用してBoomi統合フローを計測し、監視します
+- link: https://www.datadoghq.com/blog/dbm-supabase/
+  tag: ブログ
+  text: Datadog Database Monitoringを使用してSupabaseのクエリパフォーマンスを監視および最適化します
+- link: https://app.datadoghq.com/release-notes?category=APM
+  tag: リリースノート
+  text: Datadog APM の最新リリースをチェック！(アプリログインが必要です)
 title: APM
 ---
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
@@ -72,13 +63,13 @@ title: APM
 
 Datadog Application Performance Monitoring (APM) は、アプリケーションを詳細に可視化することで、パフォーマンスのボトルネックを特定し、問題をトラブルシューティングし、サービスを最適化することを可能にします。分散トレース、すぐに使えるダッシュボード、他のテレメトリとのシームレスな相関により、Datadog APM は、アプリケーションのパフォーマンスとユーザーエクスペリエンスを最適化するのに役立ちます。
 
-Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]を参照してください。
+Datadog APM で使用される用語の紹介は、[APM の用語と概念][1] を参照してください。
 
 ## はじめに {#getting-started}
 
-Datadog APM を始める最も簡単な方法は、シングルステップインスツルメンテーションです。このアプローチでは、Datadog Agent をインストールし、アプリケーションをインスツルメントする手順が 1 ステップにまとまっており、追加の設定ステップは不要です。詳しくは、[シングルステップインスツルメンテーション][27]をお読みください。
+Datadog APM を始める最も簡単な方法は、シングルステップインスツルメンテーションです。このアプローチでは、Datadog Agent をインストールし、アプリケーションをインスツルメントする手順が 1 ステップにまとまっており、追加の設定ステップは不要です。詳しくは、[シングルステップインスツルメンテーション][27] をお読みください。
 
-よりカスタマイズが必要なセットアップに対応するため、Datadog は Datadog SDK と Datadoc UI の[Dynamic Instrumentation][30]を使ったカスタムインスツルメンテーションをサポートしています。詳しくは、[アプリケーションインスツルメンテーション][2]をお読みください。
+よりカスタマイズが必要なセットアップに対応するため、Datadog は Datadog SDK と Datadoc UI の [Dynamic Instrumentation][30] を使ったカスタムインスツルメンテーションをサポートしています。詳しくは、[アプリケーションインスツルメンテーション][2] をお読みください。
 
 <div class="alert alert-info">Datadog APM が初めての場合は、<a href="https://docs.datadoghq.com/getting_started/tracing/">APM の製品概要</a>をお読みいただき、トレースを Datadog に送信する方法について詳細をご確認ください。</div>
 
@@ -86,12 +77,12 @@ Datadog APM を始める最も簡単な方法は、シングルステップイ�
 
 Datadog APM がそれぞれのユースケースにどのように対応できるか、いくつかの例をご紹介します。
 
-| 実現したいこと...| Datadog APMがどう役立つか |
+| 実現したいこと...| Datadog APM がどう役立つか |
 | ----------- | ----------- |
 | リクエストがシステム内をどのように流れるかを理解する。| [Trace Explorer][21] を使用して、分散サービス全体を対象にクエリを実行して、エンドツーエンドのトレースを視覚化します。|
-| 個別サービスの健全性とパフォーマンスを監視する。| [サービス詳細ページ][26]と[リソースページ][28]を使用し、パフォーマンスメトリクスの分析、デプロイメントの追跡、問題のあるリソースの特定を通じてサービスの健全性を評価します。|
-| トレースをDBM、RUM、ログ、Synthetics、プロファイルと相関付ける。| [APM データとその他のテレメトリーとの相関付け][20]を実行し、データにコンテキストを付与して、より包括的な分析を可能にします。|
-| Datadog へのデータの流れを制御する。| [Ingestion Control[6] を使用して、サービスやリソースごとの取り込みの構成とサンプリングレートを調整します。[保持フィルター][7]を使用して、どのスパンを 15 日間保持するかを選択します。|
+| 個別サービスの健全性とパフォーマンスを監視する。| [サービス詳細ページ][26] と [リソースページ][28] を使用し、パフォーマンスメトリクスの分析、デプロイメントの追跡、問題のあるリソースの特定を通じてサービスの健全性を評価します。|
+| トレースを DBM、RUM、ログ、Synthetics、プロファイルと相関付ける。| [APM データとその他のテレメトリとの相関付け][20] を実行し、データにコンテキストを付与して、より包括的な分析を可能にします。|
+| Datadog へのデータの流れを制御する。| [Ingestion Controls][6] を使用して、サービスやリソースごとの取り込みの構成とサンプリングレートを調整します。[保持フィルター][7] を使用して、どのスパンを 15 日間保持するかを選択します。|
 
 ### Trace Explorer {#trace-explorer}
 
@@ -101,17 +92,17 @@ Datadog APM がそれぞれのユースケースにどのように対応でき�
 
 ### サービス詳細画面 {#service-page}
 
-[サービス詳細ページ][26]は、サービスのパフォーマンスを監視し、[デプロイ中にバージョン間の比較][15]を行うのに役立ちます。
+[サービス詳細ページ][26] は、サービスのパフォーマンスを監視し、[デプロイ中にバージョン間の比較][15] を行うのに役立ちます。
 
 {{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面上のバージョン" style="width:100%;">}}
 
-### トレースを他のテレメトリーと相関付ける {#correlating-traces-with-other-telemetry}
+### トレースを他のテレメトリと相関付ける {#correlating-traces-with-other-telemetry}
 
 Datadog APM は、ログ、リアルユーザーモニタリング (RUM)、Synthetic モニタリングなどとシームレスに連携します。
 
-- [アプリケーションログをトレースと並べて表示する][9]ことで、特定のリクエスト、サービス、バージョンに関するログを見つけることができます。
-- [RUM セッションをバックエンドのトレースと関連付ける][10]ことで、バックエンドのパフォーマンスがユーザーエクスぺリンスに与える影響を理解できます。
-- [Synthetic テストをトレースと関連付ける][11]ことで、フロントエンドとバックエンドの両方のリクエストに関して、障害のトラブルシューティングを行うことができます。
+- [アプリケーションログをトレースと並べて表示する][9] ことで、特定のリクエスト、サービス、バージョンに関するログを見つけることができます。
+- [RUM セッションをバックエンドのトレースと関連付ける][10] ことで、バックエンドのパフォーマンスがユーザーエクスぺリエンスに与える影響を理解できます。
+- [Synthetic テストをトレースと関連付ける][11] ことで、フロントエンドとバックエンドの両方のリクエストに関して、障害のトラブルシューティングを行うことができます。
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="ログとトレースの接続" style="width:100%;">}}
 
@@ -119,13 +110,13 @@ Datadog APM は、ログ、リアルユーザーモニタリング (RUM)、Synth
 
 トレースはインスツルメンツされたアプリケーションで開始され、Datadog に取り込まれます。
 
-Datadog APM には、トレースデータの量と保持を管理するためのツールが用意されています。[Ingestion Control][6] を使用することにより、サンプリングレートを調整したり、[保持フィルター][7]を使用して保存するスパンを制御したりします。
+Datadog APM には、トレースデータの量と保持を管理するためのツールが用意されています。[Ingestion Control][6] を使用することにより、サンプリングレートを調整したり、[保持フィルター][7] を使用して保存するスパンを制御したりします。
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Datadog APM を通るデータの流れ" style="width:100%;" >}}
 
 ## トラブルシューティング {#troubleshooting}
 
-トラブルシューティングのサポートについては、[APM トラブルシューティング][29]ガイドをご覧ください。
+トラブルシューティングのサポートについては、[APM トラブルシューティング][29] ガイドをご覧ください。
 
 ## 参考資料 {#further-reading}
 

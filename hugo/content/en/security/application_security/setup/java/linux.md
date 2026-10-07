@@ -15,12 +15,6 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 {{% app_and_api_protection_java_setup_options platform="linux" %}}
 
 {{% app_and_api_protection_java_overview %}}

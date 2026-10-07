@@ -1,6 +1,6 @@
 ---
 title: Adaptive Sampling
-description: Automatically adjust sampling rates to match specific budgets while maintaining visibility over service endpoints.
+description: Automatically adjust sampling rates to match a specific target while maintaining visibility over service endpoints.
 disable_toc: false
 aliases:
     - /tracing/guide/adaptive_sampling
@@ -19,12 +19,12 @@ further_reading:
 
 ## Overview
 
-Datadog **adaptive sampling** helps you capture more relevant traces while remaining close to a specific budget (ingested gigabytes).
+Datadog **adaptive sampling** helps you capture more relevant traces while remaining close to a specific target (ingested gigabytes).
 
 When you choose adaptive sampling as your sampling strategy, you select a target monthly volume for trace ingestion for one or more services. This ensures that the consumption of these services matches the target volume at the end of the month, while keeping visibility over their endpoints.
 
 Adaptive sampling uses [remote configuration][3] plus the existing [sampling rules][7] mechanisms to dynamically adjust sampling rates for each environment, service, and resource combination. This helps you to:
-- Match your specified monthly budget.
+- Match your specified monthly target.
 - Ensure visibility for low-traffic services and endpoints by capturing at least one trace for each combination of service, resource, and environment every 5 minutes.
 
 To configure services to use adaptive sampling, follow the instructions listed below.
@@ -76,25 +76,25 @@ Limits apply to service and environment combinations depending on the sampling c
 
 To get started with adaptive sampling, you first need to pick a target strategy setting:
 
-- {{< ui >}}Set Budget by Number of APM Hosts{{< /ui >}}: Configure a budget that is proportional to your allotment and the number of services onboarded (for example, based on the number of APM hosts)
-- {{< ui >}}Set Budget by Data Volume{{< /ui >}}: Configure a fixed target in gigabytes per month
+- {{< ui >}}Set Target by Number of APM Hosts{{< /ui >}}: Configure a target that is proportional to your allotment and the number of services onboarded (for example, based on the number of APM hosts)
+- {{< ui >}}Set Target by Data Volume{{< /ui >}}: Configure a fixed target in gigabytes per month
 
 
-|          | Budget by Number of APM Hosts                                                                                                              | Budget by Data Volume                                                                 |
+|          | Target by Number of APM Hosts                                                                                                              | Target by Data Volume                                                                 |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| **Pros** | Scales with the number of APM hosts and the number of services onboarded; you only have to set it once                                                 | Ensures you never go over budget                                                      |
-| **Cons** | Not a good fit if you want to stay below a specific volume, as it may vary depending on the number of hosts reporting APM data to Datadog | You have to edit the budget every time you onboard a new service to adaptive sampling |
+| **Pros** | Scales with the number of APM hosts and the number of services onboarded; you only have to set it once                                                 | Helps you stay within your target                                                      |
+| **Cons** | Not a good fit if you want to stay below a specific volume, as it may vary depending on the number of hosts reporting APM data to Datadog | You have to edit the target every time you onboard a new service to adaptive sampling |
 
 To set the adaptive sampling monthly target:
 1. Navigate to the [Ingestion Control][18] page.
 2. Click {{< ui >}}Manage Adaptive Sampling Target{{< /ui >}}.
   {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_target_cta.png" alt="Call to action to set adaptive sampling target" style="width:100%;">}}
 3. Choose a target strategy for sampling:
-   - [Set budget by number of APM hosts](#set-budget-by-number-of-apm-hosts-recommended)
-   - [Set budget by data volume](#set-budget-by-data-volume)
+   - [Set target by number of APM hosts](#set-target-by-number-of-apm-hosts-recommended)
+   - [Set target by data volume](#set-target-by-data-volume)
 4. Click {{< ui >}}Apply{{< /ui >}}.
 
-### Set budget by number of APM hosts (Recommended)
+### Set target by number of APM hosts (Recommended)
 
 {{< img src="/tracing/guide/adaptive_sampling/percentage_based_target_setting.png" alt="Percentage based target setting" style="width:100%;">}}
 
@@ -108,12 +108,12 @@ Set your monthly target to a percentage of your allotment. At the bottom of the 
 
 That monthly target volume is recomputed every 30 minutes.
 
-### Set budget by data volume
+### Set target by data volume
 
 {{< img src="/tracing/guide/adaptive_sampling/volume_based_target_setting.png" alt="Volume based target setting" style="width:100%;">}}
 
-If you are configuring the first service to adaptive sampling, ensure that the ingestion volume target is `>0`. For subsequent services, you should increase the allocated budget after the new service is onboarded to account for the new volume.  
-  <div class="alert alert-info">The configured budget is only allocated to services enrolled in adaptive sampling. It does not include ingested volume from services not enrolled in adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or SDKs.</div>
+If you are configuring the first service to adaptive sampling, set the ingestion volume target to a value greater than `0`. For subsequent services, you should increase the allocated target after the new service is onboarded to account for the new volume.  
+  <div class="alert alert-info">The configured target is only allocated to services onboarded to adaptive sampling. It does not include ingested volume from services not onboarded to adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or SDKs.</div>
 
 ## Configure adaptive sampling for a service
 

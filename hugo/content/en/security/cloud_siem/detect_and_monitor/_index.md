@@ -59,7 +59,7 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - [Rule editor][3] for that specific rule
-2. After the rule is deprecated, the rule remains available for the length of your retention period before it is deleted. During this time, you can re-enable the rule by [cloning the rule][3] in the UI. The retention period depends on your [Cloud SIEM product][7]:
+2. After the rule is deprecated, the rule remains available for the length of your retention period before it is deleted. During this time, you can re-enable the rule by [cloning the rule][3] in the UI. The retention period depends on your [Cloud SIEM product][6]:
     - Standalone: 365 days (12 months)
     - Add-on with Flex Logs and Legacy: 15 months
 
@@ -72,11 +72,11 @@ Security signals warn you about possible threats to your infrastructure, but fal
 
 See [Suppressions][4] for more information.
 
-## Critical assets
+## Dynamic severity
 
-You can identify critical assets to customize the security signals associated with them. You can customize severity levels, apply custom tags, and isolate changes to specific rules.
+You can adjust the severity of security signals based on the assets they affect. You can customize severity levels, apply custom tags, and isolate changes to specific rules.
 
-See [Critical Assets][6] for more information.
+See [Dynamic Severity][7] for more information.
 
 ## MITRE ATT&CK Map
 
@@ -91,5 +91,5 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [3]: /security/detection_rules/#clone-a-rule
 [4]: /security/cloud_siem/detect_and_monitor/suppressions
 [5]: /security/cloud_siem/detection_rules/mitre_attack_map/
-[6]: /security/cloud_siem/detect_and_monitor/critical_assets
-[7]: /security/cloud_siem/guide/determine-cloud-siem-product/
+[6]: /security/cloud_siem/guide/determine-cloud-siem-product/
+[7]: /security/cloud_siem/detect_and_monitor/dynamic_severity

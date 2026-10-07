@@ -21,11 +21,7 @@ further_reading:
   text: Configure el inicio de sesión único SAML
 title: Acceso entre aplicaciones
 ---
-{{< callout url="#" btn_hidden="true" header="false">}}
-  El acceso entre aplicaciones está en versión preliminar. Okta controla el acceso a la versión preliminar y lo habilita para su inquilino, y las capacidades de Okta de las que depende esta configuración aún no están disponibles de forma general. Cualquier organización de Datadog puede habilitar el acceso entre aplicaciones en el lado de Datadog hoy mismo.
-{{< /callout >}}
-
-## Resumen {#overview}
+## Descripción general {#overview}
 
 El acceso entre aplicaciones (XAA) permite que los AI Agents llamen a la Datadog API en nombre de los usuarios que su organización ya autorizó en Okta. Sin esto, cada usuario autoriza al Agent de forma individual a través de una pantalla de consentimiento del navegador. Con esto, su administrador de Okta otorga ese acceso una vez, de forma centralizada, y los usuarios omiten el paso de consentimiento por usuario.
 
@@ -49,7 +45,7 @@ La configuración mueve valores en ambas direcciones entre Datadog y Okta. Dos d
 - Su organización utiliza Okta para el inicio de sesión único SAML en Datadog. El acceso entre aplicaciones resuelve usuarios a través de su conexión SAML existente, por lo que no funciona sin una. Consulte [Configurar el inicio de sesión único SAML](/account_management/saml/).
 - Cada usuario que utiliza Claude existe en su organización de Datadog y está asignado tanto a la aplicación Claude como a la aplicación Datadog en Okta.
 - Tiene el permiso `org_management` en Datadog. Para configurar el acceso entre aplicaciones a través de la API en lugar de la interfaz de usuario, también necesita un [Token de acceso personal](/account_management/personal-access-tokens/) (PAT), que se utiliza como `DD_TOKEN` en los ejemplos.
-- Su inquilino de Okta tiene habilitadas las funciones de acceso anticipado {{< ui >}}AI Agent Identity Assertion{{< /ui >}} y {{< ui >}}Agent to Agent Connections{{< /ui >}}, y usted tiene acceso de Superadministrador de Okta.
+- Su inquilino de Okta tiene habilitadas las funciones {{< ui >}}AI Agent Identity Assertion{{< /ui >}} y {{< ui >}}Agent to Agent Connections{{< /ui >}}, y usted tiene acceso de Superadministrador de Okta.
 
 ## Configurar el acceso entre aplicaciones en Datadog {#configure-cross-app-access-in-datadog}
 
@@ -82,7 +78,7 @@ Copie el valor en el campo {{< ui >}}Org UUID{{< /ui >}}. Okta envía este valor
 
 La tabla {{< ui >}}Registered client IDs{{< /ui >}} enumera todos los Agents que Datadog admite para el acceso entre aplicaciones y el ID de cliente OAuth que utiliza cada uno. Copie el ID de cliente para el Agent que está configurando. Usted lo ingresará en Okta como {{< ui >}}Client ID at resource{{< /ui >}}.
 
-Datadog agrega Agents a esta tabla a medida que los admite, así que consulte la tabla en lugar de reutilizar un ID de cliente de otra fuente.
+Datadog agrega Agents a esta tabla a medida que los admite, así que verifique la tabla en lugar de reutilizar un ID de cliente de otra fuente.
 
 Haga clic en {{< ui >}}Manage app{{< /ui >}} en una fila para abrir la configuración del contexto para ese Agent. Consulte [ Control del contexto en Datadog](#control-scopes-in-datadog).
 
@@ -197,7 +193,7 @@ Un contexto que no está permitido en Datadog nunca se concede, independientemen
 
 ## Agregue Datadog como conector en Claude {#add-datadog-as-a-connector-in-claude}
 
-1. En Claude, haga clic en el icono {{< ui >}}+{{< /ui >}} en la parte inferior de cualquier prompt y, a continuación, haga clic en {{< ui >}}Add Connector{{< /ui >}}.
+1. En Claude, haga clic en el icono {{< ui >}}\+{{< /ui >}} en la parte inferior de cualquier prompt, y luego haga clic en {{< ui >}}Add Connector{{< /ui >}}.
 2. Busque **Datadog** en el directorio y habilite el conector.
 3. Complete el flujo de inicio de sesión cuando se le solicite.
 

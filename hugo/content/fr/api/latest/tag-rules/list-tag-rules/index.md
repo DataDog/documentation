@@ -1,3 +1,3 @@
 ---
-title: Afficher les règles des tags
+title: Regrouper dans une liste les règles des tags
 ---

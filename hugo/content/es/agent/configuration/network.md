@@ -93,10 +93,10 @@ Resultados de pruebas de API para Synthetics Worker > v0.1.6: `intake.synthetics
 Resultados de la prueba de navegador para Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Resultados de pruebas de API para Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
-
-[Remote Configuration][101]
+[Remote Configuration][34]
 : `config.`{{< region-param key="dd_site" code="true" >}}
+
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -106,7 +106,6 @@ Resultados de pruebas de API para Synthetics Worker < v0.1.5: `api.`{{< region-p
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /es/remote_configuration
 [102]: /es/database_monitoring/
 [103]: /es/infrastructure/end_user_device_monitoring/
 
@@ -122,7 +121,7 @@ Otro: Consulte [logs endpoints][32]
 [HIPAA logs legacy][31] (Obsoleto, TCP no compatible)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
-[Metrics][26], [Service Checks][27], [Events][28] y otros metadatos del Agent
+[Métricas][26], [Service Checks][27], [Events][28] y otros metadatos del Agent
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 Por ejemplo, el Agent v7.31.0 reporta a `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Debe agregar `*.agent.`{{< region-param key="dd_site" code="true" >}} a su lista de inclusión en su(s) firewall(s).<br>
 Desde la v6.1.0, el Agent también consulta la API de Datadog para proporcionar funcionalidad no crítica (por ejemplo, mostrar la validez de la clave de API configurada):<br>
@@ -191,7 +190,7 @@ Abra los siguientes puertos para beneficiarse de todas las funcionalidades del *
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring                                                      | 443                                            | TCP              | La mayoría de los datos del Agent utilizan el puerto 443.                                                                                                |
 | [Custom Agent Autoscaling][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
-| Log collection                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Obsoleto) TCP | Registro a través de TCP. <br>**Nota**: La recopilación de registros TCP **no es compatible**. Datadog **no ofrece garantías de entrega ni de confiabilidad** al usar TCP, y los datos de registro pueden perderse sin previo aviso. Para una ingesta confiable, utilice el punto de conexión de ingesta HTTP, un Datadog Agent oficial o una integración de reenvío. Para otros tipos de conexión, consulte [logs endpoints][21]. |
+| Colección de registros                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Obsoleto) TCP | Registro a través de TCP. <br>**Nota**: La recopilación de registros TCP **no es compatible**. Datadog **no ofrece garantías de entrega ni de confiabilidad** al usar TCP, y los datos de registro pueden perderse sin previo aviso. Para una ingesta confiable, utilice el punto de conexión de ingesta HTTP, un Datadog Agent oficial o una integración de reenvío. Para otros tipos de conexión, consulte [logs endpoints][21]. |
 | NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP). Consulte [default NTP targets][20].<br>Para obtener información sobre la resolución de problemas de NTP, consulte [NTP issues][19].                                                                |
 | Connectivity test                                                                                                                                                        | 8042                                           | TCP              | Remote configuration connectivity test.<br>**Note**: this is a telemetry endpoint containing no customer data for protocol development, and is only used when [Remote Config][101] is enabled.
 
@@ -226,7 +225,7 @@ Se utiliza únicamente para que los servicios del Agent se comuniquen entre sí 
 | servidor go_expvar (APM)       | 5012 | TCP      | Para obtener más información, consulte [la documentación de integración de go_expvar][15].                                                        |
 | servidor de integración go_expvar | 5000 | TCP      | Para obtener más información, consulte [la documentación de integración de go_expvar][15].                                                        |
 | API de IPC                      | 5001 | TCP      | Puerto utilizado para la comunicación entre procesos (IPC).                                                                               |
-| Depuración del Agent de procesos          | 6062 | TCP      | Endpoints de depuración para el Agent de procesos.                                                                                         |
+| Depuración del Agent de procesos          | 6062 | TCP      | puntos de conexión de depuración para el Agent de procesos.                                                                                         |
 | Tiempo de ejecución del Agent de procesos        | 6162 | TCP      | Configuración del tiempo de ejecución para el Agent de procesos.                                                                          |
 
 ## Configurar puertos {#configure-ports}
@@ -323,9 +322,9 @@ Si está instalando el Datadog Operator en un entorno de Kubernetes con conectiv
 [7]: /es/profiler/
 [8]: /es/synthetics/private_locations
 [9]: /es/agent/configuration/proxy/
-[10]: /es/network_monitoring/devices Producto/Funcionalidad                                                                                               Puerto Protocolo Descripción
-[11]: /es/getting_started/site/ Agent APM Contenedores Procesos en vivo  Métricas Monitoreo de red en la nube Monitoreo de servicio universal 443  TCP      La mayoría de los datos del Agent utilizan el puerto 443.
-[12]: /es/agent/troubleshooting/send_a_flare NTP                                                                                                                 123  UDP      Protocolo de tiempo de red (NTP).
+[10]: /es/network_monitoring/devices
+[11]: /es/getting_started/site/
+[12]: /es/agent/troubleshooting/send_a_flare
 [13]: /es/infrastructure/containers/container_images
 [14]: /es/network_monitoring/network_path/
 [15]: /es/integrations/go_expvar/
@@ -347,3 +346,4 @@ Si está instalando el Datadog Operator en un entorno de Kubernetes con conectiv
 [31]: /es/data_security/logs/#hipaa-enabled-customers
 [32]: /es/logs/log_collection/#logging-endpoints
 [33]: /es/network_monitoring/network_path/setup/#source-public-ip-resolution
+[34]: /es/remote_configuration

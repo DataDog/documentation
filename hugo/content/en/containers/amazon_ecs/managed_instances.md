@@ -38,11 +38,11 @@ The following instructions assume that you have configured an ECS Managed Instan
 
 This ECS daemon task definition launches the Datadog Agent container with the necessary configurations.
 
-1. Download [datadog-agent-ecs-managed-instances-daemon.json][7]. This file provides minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the [Set up additional Agent features][27] section on this page.
-2. Modify the task definition file:
+1. Download [datadog-agent-ecs-managed-instances-daemon.json][7]. This file provides minimal configuration for core infrastructure monitoring. For more sample daemon task definition files with various features enabled, see the [Set up additional Agent features][27] section on this page.
+2. Modify the daemon task definition file:
     - Set the `DD_API_KEY` environment variable by replacing `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][5] for your account. Alternatively, you can also [supply the ARN of a secret stored in AWS Secrets Manager][9].
     - Set the `DD_SITE` environment variable to your [Datadog site][10]. Your site is: {{< region-param key="dd_site" code="true" >}}
-3. (Optional) To add an Agent health check, add the following to your ECS task definition:
+3. (Optional) To add an Agent health check, add the following to your ECS daemon task definition:
     ```json
     "healthCheck": {
       "retries": 3,
@@ -59,7 +59,7 @@ This ECS daemon task definition launches the Datadog Agent container with the ne
 {{% tab "AWS Console" %}}
 
 1. Log in to your [AWS Console][1] and navigate to the Elastic Container Service section.
-2. Select {{< ui >}}Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new task definition{{< /ui >}} menu, select {{< ui >}}Create new task definition with JSON{{< /ui >}}.
+2. Select {{< ui >}}Daemon Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new daemon task definition{{< /ui >}} menu, select {{< ui >}}Create new daemon task definition with JSON{{< /ui >}}.
 3. In the JSON editor box, paste the contents of your daemon task definition file.
 4. Select {{< ui >}}Create{{< /ui >}}.
 
@@ -86,7 +86,7 @@ The daemon is attached to a capacity provider and deploys automatically to each 
 1. Log in to your [AWS Web Console][1] and navigate to the Elastic Container Service section.
 2. Choose the cluster to run the Datadog Agent on.
 3. On the {{< ui >}}Daemons{{< /ui >}} tab, click {{< ui >}}Create{{< /ui >}}.
-4. For {{< ui >}}Daemon Task Definition{{< /ui >}}, select the task definition created in the previous steps.
+4. For {{< ui >}}Daemon Task Definition{{< /ui >}}, select the daemon task definition created in the previous steps.
 5. Enter a {{< ui >}}Daemon name{{< /ui >}}.
 6. For {{< ui >}}Capacity Provider{{< /ui >}}, choose the capacity provider tied to the cluster.
 7. Fill in the rest of the optional fields based on your preference.
@@ -122,11 +122,10 @@ To enable integrations, add Docker label annotations to your application contain
 {{% tab "AWS Console" %}}
 
 1. Log in to your [AWS Web Console][1] and navigate to the ECS section.
-2. Choose the cluster the Datadog Agent is running on.
-3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} name containing the Datadog Agent container.
+2. Choose the cluster your application is running on.
+3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} for your application.
 4. Click the {{< ui >}}Create new revision{{< /ui >}} button.
-5. Select the application container you want to monitor and click {{< ui >}}Edit{{< /ui >}}.
-6. Under {{< ui >}}Docker labels{{< /ui >}}, add the following:
+5. Under the application container, add the following {{< ui >}}Docker labels{{< /ui >}}:
 
 | Key                           | Value                                           |
 |-------------------------------|-------------------------------------------------|
@@ -134,7 +133,7 @@ To enable integrations, add Docker label annotations to your application contain
 | com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
 | com.datadoghq.ad.init_configs | `[{}]`                                          |
 
-7. Click the {{< ui >}}Update{{< /ui >}} button, then click the {{< ui >}}Create{{< /ui >}} button.
+6. Click the {{< ui >}}Update{{< /ui >}} button, then click the {{< ui >}}Create{{< /ui >}} button.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
@@ -257,7 +256,7 @@ FROM public.ecr.aws/datadog/agent:latest
 COPY conf.d/ /etc/datadog-agent/conf.d/
 {{< /code-block >}}
 
-After the image is built and pushed to an image registry, reference the custom image in the ECS task definition:
+After the image is built and pushed to an image registry, reference the custom image in the ECS daemon task definition:
 ```
 {
     "containerDefinitions": [
@@ -396,7 +395,7 @@ To collect Live Process information for all your containers and send it to Datad
 This feature is only available for Linux.
 </div>
 
-Consult the sample [datadog-agent-ecs-managed-instances-daemon-sysprobe.json][35] file for a complete task definition.
+Consult the sample [datadog-agent-ecs-managed-instances-daemon-sysprobe.json][35] file for a complete daemon task definition.
 
 Update your existing daemon task definition to include the following configuration:
 

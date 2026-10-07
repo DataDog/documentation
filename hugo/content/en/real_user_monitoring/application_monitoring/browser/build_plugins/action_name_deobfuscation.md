@@ -10,6 +10,9 @@ further_reading:
 - link: '/data_security/real_user_monitoring'
   tag: 'Documentation'
   text: 'RUM Data Security'
+- link: "https://www.datadoghq.com/blog/rum-build-time-privacy-allowlist/"
+  tag: "Blog"
+  text: "Reduce sensitive data exposure with build-time allowlists"
 - link: 'https://github.com/DataDog/build-plugins'
   tag: 'Source Code'
   text: 'Datadog Build Plugins GitHub Repository'

@@ -294,7 +294,7 @@ You must have edit access to restore general access to a restricted application.
 [9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
 [11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
-[12]: /session_replay/browser/
+[12]: /session_replay/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools
 [15]: /real_user_monitoring/application_monitoring/browser/setup/

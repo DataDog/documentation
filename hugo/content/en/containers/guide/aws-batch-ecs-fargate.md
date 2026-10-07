@@ -5,6 +5,9 @@ further_reading:
     - link: "integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate"
       tag: 'Documentation'
       text: 'Amazon ECS on AWS Fargate with AWS Batch'
+    - link: "https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/"
+      tag: 'Architecture Center'
+      text: 'Using Datadog with ECS Fargate'
 aliases:
     - /integrations/faq/aws-batch-ecs-fargate
     - /agent/guide/aws-batch-ecs-fargate-datadog-agent

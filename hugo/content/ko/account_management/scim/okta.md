@@ -50,7 +50,7 @@ SAML과 SCIM을 함께 사용할 때 Datadog에서는 액세스 불일치를 방
 2. {{< ui >}}Configure API integration{{< /ui >}}을 클릭합니다.
 3. {{< ui >}}Enable API integration{{< /ui >}}을 선택합니다.
 4. {{< ui >}}Credentials{{< /ui >}} 섹션을 다음과 같이 완료합니다.
-    - {{< ui >}}Base URL{{< /ui >}}: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **참고:** 사이트에 적절한 하위 도메인을 사용하세요. URL을 찾으려면 [Datadog 사이트][3]를 참조하세요.
+    - {{< ui >}}Base URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim` **참고:** 앱 호스트가 아닌 사이트의 API 호스트를 사용하십시오. 각 사이트의 SCIM 엔드포인트는 [SCIM API 참조][3]를 확인하십시오.
     - {{< ui >}}API Token{{< /ui >}}: 유효한 Datadog 애플리케이션 키를 사용합니다. [조직 설정 페이지][4]에서 애플리케이션 키를 생성할 수 있습니다. 데이터에 대한 지속적인 액세스를 유지하려면 [서비스 계정][5] 애플리케이션 키를 사용합니다.
 
 {{< img src="/account_management/scim/okta-admin-credentials.png" alt="Okta 관리자 자격 증명 구성 화면">}}
@@ -158,7 +158,7 @@ Datadog Team에서 Okta 그룹 연결을 해제하는 방법에는 두 가지가
 
 [1]: /ko/account_management/scim/
 [2]: /ko/account_management/scim/#using-a-service-account-with-scim
-[3]: /ko/getting_started/site
+[3]: /ko/api/latest/scim/
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /ko/account_management/org_settings/service_accounts
 [6]: /ko/account_management/teams/manage/#manage-teams-through-an-identity-provider

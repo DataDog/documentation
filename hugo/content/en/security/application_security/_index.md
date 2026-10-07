@@ -36,19 +36,13 @@ further_reading:
   text: "Mitigate account takeovers with Datadog App and API Protection"
 - link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
   tag: "Learning Center"
-  text: "Block Application Attacks with Application & API Protection"
+  text: "Block Application Attacks with App and API Protection"
 algolia:
   tags: ["asm", "App and API Protection"]
 site_support_id: application_security_override
 cascade:
     site_support_id: application_security_override
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
@@ -60,7 +54,7 @@ AI Guard is in Preview. Get real-time security guardrails for your AI apps and a
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-**App & API Protection (AAP)** provides unified visibility and security for your applications and APIs, helping you detect, investigate, and prevent threats across modern workloads.
+**App and API Protection (AAP)** provides unified visibility and security for your applications and APIs, helping you detect, investigate, and prevent threats across modern workloads.
 
 Whether you're defending public-facing APIs, internal services, or user-facing applications, AAP equips your teams with realtime OOTB threat detection, posture assessment, and in-app protections.
 

@@ -17,17 +17,20 @@ If you experience issues with the [Datadog Code Security MCP Server][3], use the
 
 ## Binary not found
 
-If a scan returns an error about a missing binary, install it using the instructions in the [Install security binaries][1] section.
+If a scan returns an error about a missing binary, list every required scanner:
+
+```shell
+datadog-code-security-mcp version --detailed
+```
+
+Install a missing binary with the instructions in [Install security binaries][1]. After you install the agent skills, `dd-codesec-setup-toolchain` installs, updates, and diagnoses the same binaries. See [Install agent skills][4].
 
 ## Authentication errors
 
-Check that your API and application keys are set:
+Keys set in the MCP server configuration are not exported to your shell. `echo $DD_API_KEY` shows only a key exported in that shell, which is what a direct CLI command uses.
 
-```shell
-echo $DD_API_KEY
-echo $DD_APP_KEY
-echo $DD_SITE
-```
+- For the MCP server, confirm `DD_API_KEY` and `DD_APP_KEY` are set in the client configuration on the [Code Security MCP Server][3] page.
+- For a direct CLI command, export `DD_API_KEY` and `DD_APP_KEY` in the same shell. Optionally export `DD_SITE`.
 
 If the values are set but scans still fail, verify your keys have the correct permissions. See [API and Application Keys][2] for details.
 
@@ -57,10 +60,11 @@ When running a comprehensive scan, some scan types may succeed while others fail
 
 This is expected behavior. Install the missing binaries and re-run to get complete results.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/dev_tool_int/mcp_server/#install-security-binaries
 [2]: /account_management/api-app-keys/
 [3]: /security/code_security/dev_tool_int/mcp_server/
+[4]: /security/code_security/dev_tool_int/mcp_server/#install-agent-skills
