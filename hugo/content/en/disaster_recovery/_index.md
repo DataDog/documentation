@@ -148,9 +148,9 @@ After synchronization is in place, confirm that:
 
 {{% collapse-content title="1\. Optimize DNS-related configurations across Agents and other data sources" level="h4" id="optimize-dns-configurations" %}}
 
-Failover speed depends on your DNS record's time to live (TTL) and how quickly Agents and other telemetry sources pick up DNS changes. Configure DNS caching and connection reuse together to meet your recovery time objective (RTO).
+Failover speed depends on your DNS record's time to live (TTL) and how quickly Agents and other telemetry sources pick up DNS changes. Configure DNS caching and connection reuse together to help meet your recovery time objective (RTO).
 
-See [Required settings for optimal Recovery Time Objective (RTO)][20] for the specific DNS, Agent, and application-level settings to configure, and why each one matters.
+See [Recommended Settings for DNS Failover][20] for the specific DNS, Agent, and application-level settings to configure, and why each one matters.
 
 {{% /collapse-content %}}
 
@@ -177,12 +177,10 @@ To set up the two-step DNS delegation:
 
 Datadog recommends validating your DNS failover setup with a scheduled drill before you need it in a real incident.
 
-1. Update your DNS record to point to the secondary Datadog data center endpoint (for example, from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`). Record when you complete the change. No coordination with Datadog is required to initiate DNS failover.
-1. Confirm that new telemetry appears in your secondary organization, and record when you observe it. If the observed recovery time exceeds your recovery time objective (RTO), review the [Required settings for optimal Recovery Time Objective (RTO)][20].
+1. Update your DNS record to point to the secondary Datadog data center endpoint (for example, from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`). No coordination with Datadog is required to initiate DNS failover.
+1. Confirm that new telemetry appears in your secondary organization.
 1. Restore your DNS record's original value to roll back.
 1. Confirm that new telemetry resumes in your primary organization.
-
-These observations help you evaluate the drill. Datadog's formal RTO measurement uses DNS monitoring and intake records. The time you observe telemetry in the UI can differ from the recorded intake time.
 
 Datadog recommends running this drill at least annually and after any material change to your DNS provider or telemetry pipeline.
 
