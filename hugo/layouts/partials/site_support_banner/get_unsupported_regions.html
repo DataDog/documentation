@@ -3,7 +3,8 @@
 
     Lookup order:
       1. If the page has a `site_support_id` frontmatter param, use that as the
-         key into Site.Params.unsupported_sites.
+         key into Site.Params.unsupported_sites. Translated pages without the
+         param inherit it from their English version.
       2. Otherwise, walk the page path segments (stripping any trailing `.md`)
          and return the first match.
 
@@ -15,6 +16,13 @@
 {{ $result := slice }}
 
 {{ $site_support_id := .Page.Params.site_support_id }}
+{{ if not $site_support_id }}
+    {{ range .Page.Translations }}
+        {{ if and (eq .Language.Lang "en") .Params.site_support_id }}
+            {{ $site_support_id = .Params.site_support_id }}
+        {{ end }}
+    {{ end }}
+{{ end }}
 {{ if $site_support_id }}
     {{ if index $unsupported_sites $site_support_id }}
         {{ $result = index $unsupported_sites $site_support_id }}
