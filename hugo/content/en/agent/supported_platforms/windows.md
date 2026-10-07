@@ -46,7 +46,7 @@ This overview highlights the topics to consider when planning an installation. D
 
 1. **Choose an [installation method](#installation-methods).**
 
-   Install the Agent directly with the executable or MSI installer. For centrally managed deployments, use [Ansible][28], [SCCM][29], the [Azure VM extension][30], or [AWS Systems Manager][31]. For all supported installation methods, [follow the instructions in the app][1].
+   Install the Agent directly with the executable or MSI installer. For centrally managed deployments, use [Ansible][28], [SCCM][29], the [Azure VM extension][30], or [AWS Systems Manager][31]. For all supported installation methods, [follow the instructions in the app][34].
 
 2. **Choose an [Agent version][32].**
 
@@ -102,14 +102,17 @@ The executable installer requires network access to download the Agent MSI and o
 
 **Version selection**
 
-* **Latest Agent release**: `https://install.datadoghq.com/datadog-installer-x86_64.exe`
-* **Specific Agent release**: `https://install.datadoghq.com/datadog-installer-7.84.0-1-x86_64.exe`
+* **Latest Agent release**: [`https://install.datadoghq.com/datadog-installer-x86_64.exe`][35]
+* **Specific Agent release**: [`https://install.datadoghq.com/datadog-installer-7.84.0-1-x86_64.exe`][36]
 
 The first URL installs the latest Agent release. To pin a specific version, use its download URL or set the `DD_AGENT_MINOR_VERSION` install-time option.
 
 **Upgrades and downgrades**
 
 For upgrades and downgrades, the executable installer removes the installed Agent, preserves its configuration, and installs the requested version. The executable can install Agent 7.72 or later.
+
+[35]: https://install.datadoghq.com/datadog-installer-x86_64.exe
+[36]: https://install.datadoghq.com/datadog-installer-7.84.0-1-x86_64.exe
 
 {{% /tab %}}
 {{% tab "MSI" %}}
@@ -124,8 +127,8 @@ The MSI contains the core Agent. Optional features can require network access to
 
 **Version selection**
 
-* **Latest Agent release**: `https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi`
-* **Specific Agent release**: `https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.84.0.msi`
+* **Latest Agent release**: [`https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi`][400]
+* **Specific Agent release**: [`https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.84.0.msi`][37]
 
 For links to all available MSI versions, see the [Windows installer manifest][25].
 
@@ -144,6 +147,11 @@ Run the MSI with Windows Installer `msiexec.exe`, or open the file for an intera
 1. Accept the license agreement, enter the [Datadog API key][500], and configure the Agent account.
 
 <div class="alert alert-info">The default installation location is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. When setting a custom location, include a <code>Datadog</code> subdirectory for the Datadog files.</div>
+
+[25]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
+[37]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.84.0.msi
+[400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[500]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -167,6 +175,8 @@ Set executable install-time options as environment variables before running the 
 | `DD_INSTALL_ONLY` | Boolean | **Agent 7.85+**: Installs the Agent without starting its services. |
 | `DDAGENTUSER_KEEP_RIGHTS` | Boolean | **Agent 7.85+**: Preserves customized Agent account deny-logon rights during installation and upgrades. The installer still grants the log-on-as-a-service right. |
 
+[3]: /agent/faq/windows-agent-ddagent-user/
+
 {{% /tab %}}
 {{% tab "MSI" %}}
 
@@ -180,6 +190,8 @@ Pass MSI install-time options as public properties on the `msiexec` command line
 | `PROJECTLOCATION` | Path | Sets the binary directory during an initial installation. Default: `%ProgramFiles%\Datadog\Datadog Agent`. Include a `Datadog` subdirectory when overriding the default. |
 | `DD_INSTALL_ONLY` | Boolean | **Agent 7.74+**: Installs the Agent without starting its services. |
 | `DDAGENTUSER_KEEP_RIGHTS` | Boolean | **Agent 7.85+**: Preserves customized Agent account deny-logon rights during installation and upgrades. The installer still grants the log-on-as-a-service right. |
+
+[3]: /agent/faq/windows-agent-ddagent-user/
 
 #### Installation log files
 
@@ -220,6 +232,8 @@ Set initial Agent configuration as environment variables before running the exec
 | `DD_PROXY_HTTPS` | URL | Sets the proxy URL for HTTPS requests. |
 | `DD_PROXY_NO_PROXY` | String | Sets a comma- or space-separated list of hosts that bypass the proxy. |
 
+[21]: /infrastructure/process/
+
 {{% /tab %}}
 {{% tab "MSI" %}}
 
@@ -243,6 +257,8 @@ Pass initial Agent configuration as public properties on the `msiexec` command l
 | `PROXY_USER` | String | Sets the proxy username. |
 | `PROXY_PASSWORD` | String | Sets the proxy password. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION` | Boolean | Uses the EC2 instance ID for Windows hosts on EC2. |
+
+[21]: /infrastructure/process/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -445,5 +461,9 @@ After configuration is complete, [restart the Agent][11].
 [31]: /integrations/guide/aws-agent-installation/#amazon-ec2-instances
 [32]: https://github.com/DataDog/datadog-agent/releases
 [33]: /agent/fleet_automation/configure_agents/
+[34]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[35]: https://install.datadoghq.com/datadog-installer-x86_64.exe
+[36]: https://install.datadoghq.com/datadog-installer-7.84.0-1-x86_64.exe
+[37]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.84.0.msi
 [400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [500]: https://app.datadoghq.com/organization-settings/api-keys

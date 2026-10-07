@@ -37,6 +37,8 @@ Do not provide a password for a gMSA. The installer verifies that Windows recogn
 
 For Active Directory configuration steps, see [Getting started with group Managed Service Accounts][11].
 
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
+
 {{% /tab %}}
 {{% tab "Domain account" %}}
 
