@@ -1,11 +1,11 @@
 ---
-title: Explore DBM
+title: Explore Database Monitoring
 description: Explore database hosts, query performance, schemas, recommendations, and custom metrics in Database Monitoring.
 ---
 
 After you set up Database Monitoring, use the following views to investigate the health and performance of your databases.
 
-{{< whatsnext desc="Explore DBM:" >}}
+{{< whatsnext desc="Explore Database Monitoring:" >}}
     {{< nextlink href="database_monitoring/database_hosts" >}}<strong>Database Hosts</strong>: View the health and configuration of each database host.{{< /nextlink >}}
     {{< nextlink href="database_monitoring/query_metrics" >}}<strong>Query Metrics</strong>: Analyze performance metrics for normalized queries.{{< /nextlink >}}
     {{< nextlink href="database_monitoring/custom_metrics" >}}<strong>Custom Metrics</strong>: Collect metrics from your own tables and view them alongside Database Monitoring data.{{< /nextlink >}}

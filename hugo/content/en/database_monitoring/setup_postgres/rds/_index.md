@@ -24,7 +24,7 @@ Database Monitoring provides deep visibility into your Postgres databases by exp
 
 If you're configuring Database Monitoring for a lightweight RDS instance, or you're new to the product, start with Quick Install. It works best when:
 
-- You're monitoring a small number of RDS for PostgreSQL instances
+- You're monitoring a small number of RDS for PostgreSQL instances (for example, around 20 or fewer)
 - You want Datadog to deploy and maintain the Agent for you
 - You want monitoring that works out of the box, without custom settings
 
@@ -62,7 +62,7 @@ To install and manage the Agent yourself, complete the following steps. The Agen
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
-## Before you begin
+### Before you begin
 
 Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
@@ -80,11 +80,11 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## Configure the AWS integration
+### Configure the AWS integration
 
 Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][3].
 
-## Configure Postgres settings
+### Configure Postgres settings
 
 Configure the following [parameters][4] in the [DB parameter group][5] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][6].
 
@@ -104,7 +104,7 @@ Configure the following [parameters][4] in the [DB parameter group][5] and then 
 | `pg_stat_statements.track_utility` | `off` | Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Enables collection of block read and write times for queries. |
 
-### Enable `auto_explain` (optional)
+#### Enable `auto_explain` (optional)
 
 By default, the agent only gathers [`EXPLAIN`][15] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
 
@@ -134,7 +134,7 @@ To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use 
 3. To ensure your RDS instances are forwarding logs to CloudWatch and Datadog, follow the instructions for [Amazon RDS Log Collection][18].
 
 
-## Grant the Agent access
+### Grant the Agent access
 
 The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
@@ -217,7 +217,7 @@ SECURITY DEFINER;
 
 <div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
-### Create the explain plan function
+#### Create the explain plan function
 
 Create the following function **in every database** to enable the Agent to collect explain plans:
 
@@ -246,7 +246,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Create the column statistics function
+#### Create the column statistics function
 
 Create the following function **in every database** to enable the Agent to collect column-level table statistics from `pg_stats`:
 
@@ -278,10 +278,10 @@ instances:
 
 For tuning options, see [Advanced Configuration][15].
 
-### Securely store your password
+#### Securely store your password
 {{% dbm-secret %}}
 
-### Verify database permissions
+#### Verify database permissions
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 {{< tabs >}}
@@ -324,7 +324,7 @@ psql -h localhost -U datadog postgres -A \
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
-## Install and configure the Agent
+### Install and configure the Agent
 
 To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][10].
 
@@ -405,7 +405,7 @@ The examples below show how to use [Docker Labels][2] and [Autodiscovery Templat
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
-### Command line
+#### Command line
 
 Run the following command from your [command line][4] to start the Agent. Replace the placeholder values with those for your account and environment.
 
@@ -440,7 +440,7 @@ For Postgres 9.6, add the following settings to the instance config where host a
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-### Dockerfile
+#### Dockerfile
 
 You can also specify labels in a `Dockerfile`, allowing you to build and deploy a custom Agent without modifying your infrastructure configuration:
 
@@ -476,7 +476,7 @@ If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to en
 
 Below are step-by-step instructions for configuring the Postgres integration using different Datadog Cluster Agent deployment methods.
 
-### Operator
+#### Operator
 
 Using the [Operator instructions in Kubernetes and Integrations][3] as a reference, follow the steps below to set up the Postgres integration:
 
@@ -539,7 +539,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     kubectl apply -f datadog-agent.yaml
     ```
 
-### Helm
+#### Helm
 
 Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
 
@@ -590,7 +590,7 @@ Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, 
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
-### Configure with mounted files
+#### Configure with mounted files
 
 To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container at the path: `/conf.d/postgres.yaml`:
 
@@ -614,11 +614,11 @@ instances:
     # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-### Configure with Kubernetes service annotations
+#### Configure with Kubernetes service annotations
 
 Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
-#### Autodiscovery annotations v2
+##### Autodiscovery annotations v2
 
 ```yaml
 apiVersion: v1
@@ -681,14 +681,14 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Verify Agent setup
+#### Verify Agent setup
 
 [Run the Agent's status subcommand][11] and look for `postgres` under the Checks section. Or visit the [Databases][12] page to get started!
 
-## Example Agent Configurations
+### Example Agent Configurations
 {{% dbm-postgres-agent-config-examples %}}
 
-## Install the RDS Integration
+### Install the RDS Integration
 
 To see infrastructure metrics from AWS, such as CPU, alongside the database telemetry in DBM, install the [RDS integration][13] (optional).
 

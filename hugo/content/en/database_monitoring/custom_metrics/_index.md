@@ -1,5 +1,5 @@
 ---
-title: Custom Metrics
+title: Custom Metrics in Database Monitoring
 description: Use the custom_queries option to collect metrics from your own database tables and view them in Database Monitoring.
 aliases:
 - /database_monitoring/custom_metrics/exploring_custom_metrics
@@ -24,15 +24,35 @@ Add `custom_queries` to your integration's `conf.yaml` file. Each entry in the l
 
 | Option | Required | Description |
 | --- | --- | --- |
-| `metric_prefix` | Yes | All metrics emitted by this query begin with this prefix. |
+| `metric_prefix` | No | All metrics emitted by this query begin with this prefix. |
 | `query` | Yes | The SQL to execute. All returned rows are evaluated. Use the pipe character (`\|`) for multi-line queries. |
 | `columns` | Yes | A list of columns in the same order as your `SELECT`. Each column requires a `name` and a `type`. Set `type` to `gauge`, `count`, `rate`, or another [metric type][1] to emit a metric, or `tag` to apply the column value as a tag on every metric from this query. |
 | `tags` | No | A list of static tags applied to every metric from this query. |
+| `collection_interval` | No | How often, in seconds, the Agent runs the query. Default: every 15 seconds. |
+
+If you set `metric_prefix`, metrics are named `<metric_prefix>.<column_name>`. Otherwise, the integration's default prefix applies. For example, Postgres metrics are named `postgresql.<column_name>`, and MySQL metrics are named `<column_name>`.
 
 **Notes:**
 - The number of `columns` entries must equal the number of columns returned by the query.
 - The order of `columns` entries must match the order of columns returned by the query.
 - At least one entry in `columns` must be a metric type (not `tag`).
+
+### Column types
+
+Each column in a custom query is assigned a type that controls how the metric is aggregated and displayed:
+
+| Type | Description |
+| --- | --- |
+| `gauge` | A value that can go up or down (for example, table size). |
+| `count` | A count of events since the last collection. |
+| `rate` | A per-second rate. |
+| `monotonic_count` | A counter that only increases. |
+| `monotonic_gauge` | A monotonically increasing gauge. |
+| `temporal_percent` | A percentage of time. |
+| `time_elapsed` | Duration in time units. |
+| `tag` | Groups or filters metrics; not plotted as its own graph. |
+
+`count` and `monotonic_count` columns are aggregated as `sum`. All other metric types are aggregated as `avg`.
 
 ## Examples
 
@@ -203,24 +223,11 @@ postgres
   - Collected 0 metrics, 0 events & 0 service checks
 ```
 
-## Exploring Custom Metrics
+## Explore custom metrics
 
 The {{< ui >}}Custom Metrics{{< /ui >}} section appears on the database instance detail page and displays timeseries graphs for any custom queries you have defined in your Datadog Agent configuration.
 
-### Overview
-
-If you have configured `custom_queries` in your Datadog Agent's database integration, this section automatically discovers those queries and visualizes each metric column as a timeseries graph. This lets you monitor business-specific or environment-specific database metrics alongside the standard Database Monitoring metrics, all in one place.
-
-### How it works
-
-1. Define custom queries in your Agent config. Each query specifies:
-- A SQL statement
-- One or more metric columns (with types like `gauge`, `count`, or `rate`)
-- Optional tag columns
-- An optional metric prefix
-- An optional collection interval
-2. The Agent collects the metrics by running your SQL queries on the configured interval (default: every 15 seconds) and emitting the results as Datadog metrics.
-3. The Custom Metrics section displays a graph for each metric column from your custom queries, scoped to the current database instance. Metrics are named `<prefix>.<column_name>` (for example, `postgresql.my_table_row_count`).
+If you have configured `custom_queries` in your Datadog Agent's database integration, this section automatically discovers those queries and visualizes each metric column as a timeseries graph. Graphs are scoped to the current database instance. This lets you monitor business-specific or environment-specific database metrics alongside the standard Database Monitoring metrics, all in one place. The Custom Metrics section is hidden if no custom queries are configured.
 
 ### Example Agent configuration
 
@@ -269,34 +276,13 @@ This configuration produces three metrics, each broken down by `table_name`:
 
 All three appear as separate timeseries graphs in the Custom Metrics section of the instance detail page.
 
-### Column types
-
-Each column in a custom query is assigned a type that controls how the metric is aggregated and displayed:
-
-| Type | Description |
-| --- | --- |
-| `gauge` | A value that can go up or down (for example, table size). |
-| `count` | A count of events since the last collection. |
-| `rate` | A per-second rate. |
-| `monotonic_count` | A counter that only increases. |
-| `monotonic_gauge` | A monotonically increasing gauge. |
-| `temporal_percent` | A percentage of time. |
-| `time_elapsed` | Duration in time units. |
-| `tag` | Groups or filters metrics; not plotted as its own graph. |
-
-`count` and `monotonic_count` columns are aggregated as `sum`. All other metric types are aggregated as `avg`.
-
-### Viewing the source SQL
+### View the source SQL
 
 Each graph has a {{< ui >}}View SQL query{{< /ui >}} button in the top-right corner. Clicking it shows the raw SQL statement that produces the metric, so you can understand and audit what is being measured.
 
 ### Collection interval
 
-The section subtitle shows how often the metrics are collected (for example, "collected every 15s"). If you have multiple custom queries with different intervals, the range is shown (for example, "collected every 15s–60s").
-
-### Requirements
-
-Custom queries must be defined under the `custom_queries` key in the database integration configuration. The Custom Metrics section is hidden if no custom queries are configured.
+The section subtitle shows how often the metrics are collected (for example, "collected every 15s"). If you have multiple custom queries with different intervals, the range is shown (for example, "collected every 15s-60s").
 
 ## Further Reading
 
