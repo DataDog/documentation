@@ -6,10 +6,12 @@ description: Cloud SIEM is available in Standalone, Add-on with Flex Logs, and L
 ## Overview
 Cloud SIEM is available as the following products:
 - Standalone
+  - 12 months (365 days, usage measured in GB)
+  - 15 months (450 days, usage measured in millions of events)
 - Add-on with Flex Logs
 - Legacy
 
-Standalone is the default product for new Cloud SIEM organizations. In Standalone:
+Standalone 12 months is the default product for new Cloud SIEM organizations. In Standalone:
 - Usage is measured in gigabytes of analyzed logs, rather than in millions of analyzed events.
 - Ingestion of logs indexed in the Cloud SIEM index is included in the analyzed log cost, rather than billed separately.
 - Data is retained for 365 days (12 months), rather than for 15 months.
