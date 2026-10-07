@@ -220,7 +220,7 @@ You can configure a workflow to trigger automatically when a user adds a specifi
 
 You can configure a workflow to trigger automatically when a message that matches your rules is posted in one or more Slack channels.
 
-<div class="alert alert-info">The Datadog App must be a member of each channel you select. Messages posted by the Datadog App itself don't trigger workflows.</div>
+<div class="alert alert-info">The Datadog Slack App must be a member of each channel you select. Messages posted by the Datadog Slack App itself don't trigger workflows.</div>
 
 1. Add a Slack trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}.
