@@ -77,6 +77,8 @@ Follow the instructions on this page to set up the {{< ui >}}Azure integration{{
 <div class="alert alert-info">Secretless Auth is not supported on the US1-FED and US2-FED sites. Use the <strong>Client Secret</strong> method to authenticate.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">Secretless Auth does not support app registrations in Azure sovereign clouds, such as Azure Government and Azure operated by 21Vianet (Azure China). For tenants in these clouds, use the <strong>Client Secret</strong> method to authenticate.</div>
+
 The Azure integration supports two authentication methods:
 
 | Method | How it works | What you manage |
