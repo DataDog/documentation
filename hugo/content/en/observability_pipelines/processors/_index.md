@@ -102,7 +102,7 @@ When you have multiple sources for a pipeline, you might want to modify events f
 
 {{< img src="observability_pipelines/processors/pre-processors_diagram.png" alt="A diagram showing logs from the Datadog Agent and Amazon Data Firehose going through source-specific pre-processors, then logs from all three sources going through pre-processors for all sources before being sent to the processor groups for branch 1 and branch 2 and then to their destinations." style="width:100%;" >}}
 
-For example, in this image, the log pipeline has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
+For example, the log pipeline in this image has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
 
 {{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources sending logs to two processor groups, one for pipeline branch 1 and one for pipeline branch 2. Branch 1 sends logs to Datadog and Datadog Archives, and branch 2 sends logs to CrowdStrike NG-SIEM." style="width:100%;" >}}
 
