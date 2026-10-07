@@ -13,9 +13,7 @@ further_reading:
       text: 'Access for Enterprises'
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Request Access is rolling out gradually. It may not be available in your organization yet.
-{{< /callout >}}
+<div class="alert alert-info">Datadog is rolling out Request Access gradually, so it might not be available in your organization.</div>
 
 ## Overview
 
