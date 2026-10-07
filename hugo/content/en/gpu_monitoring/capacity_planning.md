@@ -58,7 +58,7 @@ The graphs at the top of the page show how GPU quota is used across your fleet:
 | Fleet GPU Coverage | Allocated GPU quota split into active, idle, and unattributed devices across the fleet. |
 | Saturation - GPUs Over Quota | ClusterQueue and ResourceFlavor pairs ranked by the number of GPUs used beyond their nominal quota. |
 
-Queues with high unallocated quota or many idle allocated GPUs are candidates for reallocation. Queues that consistently run over quota, or that have a high preemption rate, may need more capacity.
+Queues with high unallocated quota or many idle allocated GPUs are candidates for reallocation. Queues that consistently run over quota, or have a high preemption rate, may need more capacity.
 
 ### Queues and workloads
 
