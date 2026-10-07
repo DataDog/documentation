@@ -41,8 +41,6 @@ To start using DORA Metrics, follow these steps:
 
 When configured, deployment events automatically populate your [DORA Metrics dashboard][1] with performance data filtered by team, service, environment, and [custom tags](#custom-tags).
 
-Delivery Performance general settings also identify the automation bots in your repositories. That configuration affects both DORA Metrics and AI Impact. For more information, see [Identify automation bots][7].
-
 ### Limitations
 
 - When you first select a data source option (such as APM Deployment Tracking), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected.
@@ -371,6 +369,10 @@ DORA Metrics automatically identifies failed deployments to calculate change fai
 - **Rollforwards**: Detected through default rules that match common patterns like revert PRs and hotfix labels. You can customize these rules in the [DORA settings][6] to match your team's specific workflows and remediation patterns.
 
 For detailed information about how detection works and how to customize rules, see the [Change Failure Detection documentation][5].
+
+## Additional configuration
+
+Delivery Performance general settings also identify the automation bots in your repositories. That configuration affects both DORA Metrics and AI Impact. For more information, see [Identify automation bots][7].
 
 ## Further Reading
 
