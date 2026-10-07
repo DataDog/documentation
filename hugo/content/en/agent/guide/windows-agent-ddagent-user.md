@@ -107,7 +107,14 @@ The installer also configures these user rights:
 * {{< ui >}}Deny log on locally{{< /ui >}}
 * {{< ui >}}Deny log on through Remote Desktop Services{{< /ui >}}
 
-The {{< ui >}}Deny access to this computer from the network{{< /ui >}} right applies to incoming connections. If you use one domain account for the Agent on multiple hosts, this right can prevent an Agent from accessing network resources on another Agent host. To allow this access with Agent 7.85 and later, pass the `DDAGENTUSER_KEEP_RIGHTS=1` install-time option when installing or upgrading the Agent on the target host, and remove the deny-network-logon right. The installer stores this option and does not reapply the three deny-logon rights during later installations or upgrades. The installer always grants the log-on-as-a-service right.
+**Access between Agent hosts:** If Agents on multiple hosts use the same domain account, the **{{< ui >}}Deny access to this computer from the network{{< /ui >}} right** can prevent one Agent from accessing resources on another Agent host.
+
+To allow this access with Agent 7.85 and later:
+
+1. Pass the `DDAGENTUSER_KEEP_RIGHTS=1` install-time option when installing or upgrading the Agent on the host providing the resource.
+2. Remove the **{{< ui >}}Deny access to this computer from the network{{< /ui >}} right** from that host.
+
+The installer stores this option and does not reapply the three deny-logon rights during future installations or upgrades. It continues to grant the {{< ui >}}Log on as a service{{< /ui >}} right.
 
 Domain Group Policy can override local group membership and user-rights assignments. Configure the applicable policy to grant the log-on-as-a-service right and required resource access.
 
@@ -201,7 +208,6 @@ If you use Chef and the official `datadog` cookbook to deploy the Agent on Windo
 [8]: /integrations/tomcat/
 [9]: /integrations/kafka/
 [10]: /integrations/win32_event_log/
-[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
 [12]: /integrations/sqlserver/
 [13]: /integrations/disk/
 [14]: https://github.com/DataDog/datadog-agent/releases/tag/7.66.0

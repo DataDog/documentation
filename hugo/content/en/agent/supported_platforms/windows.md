@@ -42,7 +42,7 @@ To install the Datadog Agent on Windows hosts, follow the [guided in-app flow in
 
 ### Planning your deployment
 
-This overview highlights the topics to consider when planning an installation. Detailed guidance follows later on this page.
+This overview highlights the topics to consider when planning an installation.
 
 1. **Choose an [installation method](#installation-methods).**
 
@@ -52,7 +52,7 @@ This overview highlights the topics to consider when planning an installation. D
 
    Choose whether to install the latest Agent release or pin a specific version. To pin a version, use its download URL or use the executable installer's `DD_AGENT_MINOR_VERSION` install-time option.
 
-3. **Choose an [Agent account](#install-time-options).**
+3. **Choose an Agent account.**
 
    The core Agent and integrations run as the selected Windows account. Choose the account based on host security policies and access requirements. For details, see [Datadog Windows Agent User][17].
 
@@ -79,7 +79,7 @@ This overview highlights the topics to consider when planning an installation. D
    {{% /tab %}}
    {{< /tabs >}}
 
-4. **Configure [network access](#agent-configuration-options).**
+4. **Configure network access.**
 
    For hosts that connect through a proxy, pass the proxy settings to the installer. The installer uses the proxy when optional features require additional packages and writes the settings to `datadog.yaml` for Agent runtime traffic. For endpoints and allowlists, see [Network traffic][24].
 
@@ -226,7 +226,6 @@ Set initial Agent configuration as environment variables before running the exec
 | `DD_LOGS_ENABLED` | Boolean | Enables or disables log collection. Default: `false`. |
 | `DD_INFRASTRUCTURE_MODE` | String | Sets the Agent's infrastructure mode. See [Infrastructure Modes][38] for guidance on selecting a mode. |
 | `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Boolean | Enables or disables [Live Process collection][21]. |
-| `DD_REMOTE_UPDATES` | Boolean | Enables or disables remote Agent upgrades through Fleet Automation. |
 | `DD_URL` | URL | Overrides the metrics intake URL. |
 | `DD_PROXY_HTTP` | URL | Sets the proxy URL for HTTP requests. |
 | `DD_PROXY_HTTPS` | URL | Sets the proxy URL for HTTPS requests. |
