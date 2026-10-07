@@ -38,9 +38,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
     tag: "Blog"
     text: "CI/CD security: How to secure your GitHub ecosystem"
-  - link: "https://www.datadoghq.com/blog/supply-chain-firewall-code-security/"
-    tag: "Blog"
-    text: "Block malicious packages across your organization with Supply Chain Firewall and Datadog Code Security"
 
 ---
 ## Overview

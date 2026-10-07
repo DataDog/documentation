@@ -14,9 +14,6 @@ further_reading:
  - link: "https://www.datadoghq.com/blog/monitor-warehouse-data-quality-beyond-pipeline-health/"
    tag: "Blog"
    text: "Monitor warehouse data quality beyond pipeline health"
- - link: "https://www.datadoghq.com/blog/how-to-monitor-databricks-with-datadog/"
-   tag: "Blog"
-   text: "Monitor Databricks with Datadog"
  - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
    tag: 'Architecture Center'
    text: 'Monitoring Financial Data Mesh on AWS using Datadog'
