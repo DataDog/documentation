@@ -246,21 +246,21 @@ Datadog provides suggested retention filters for each RUM application. The sugge
 - User activity
 - Specific application versions
 
-{{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="A side panel displaying suggested retention filters." style="width:80%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="The Recommended Filters sidepanel, with suggested retention filters grouped by category and an Add Filter button for each." style="width:80%" >}}
 
-For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days. Datadog refreshes these thresholds every Monday at 06:00 UTC. Suggestions vary by platform and appear only for applications on that platform.
+For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days. Datadog refreshes these thresholds every Monday at 06:00 UTC. The available suggestions depend on the application's platform.
 
-Datadog marks a suggestion as configured when a matching retention filter exists, including filters created before you view the recommendations. This shows which recommendations your configuration already follows.
+Datadog marks a suggestion as configured when a matching retention filter exists, including filters that existed before you opened the panel, so you can see which suggestion your configuration already covers.
 
 To review and apply suggestions:
 
 1. Go to the application's {{< ui >}}Retention Filters{{< /ui >}} page.
 1. Click {{< ui >}}View All Recommendations{{< /ui >}}.
-1. Select a suggestion, then click {{< ui >}}Add Filter{{< /ui >}}.
-1. Review and modify the pre-filled query and retention rate.
+1. Click {{< ui >}}Add Filter{{< /ui >}} next to a suggestion.
+1. Review and edit the pre-filled query and retention rate.
 1. Save the filter.
 
-Datadog adds the filter to the bottom of the custom retention filters list. Reorder the filter if needed because filter order affects which sessions are retained. You can also dismiss suggestions that do not apply and revisit them later.
+Datadog adds the filter to the bottom of the custom retention filters list. Filter order determines which sessions are retained, so reorder the filter if needed. You can also dismiss suggestions that do not apply and revisit them later.
 
 Creating a filter from a suggestion requires the `RUM Retention Filters Write` permission.
 
