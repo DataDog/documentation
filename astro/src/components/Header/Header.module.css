@@ -524,7 +524,9 @@
   fill: currentColor;
 }
 
-.product-menu__pricing-link {
+/* Two classes so this outranks `.header__dropdown-menu a`, which would
+   otherwise restyle the link as a plain dropdown item. */
+.product-menu .product-menu__pricing-link {
   all: unset;
   color: var(--hugo-nav-brand-primary);
   text-transform: uppercase;
@@ -539,7 +541,7 @@
   align-items: center;
 }
 
-.product-menu__pricing-link:hover {
+.product-menu .product-menu__pricing-link:hover {
   color: var(--hugo-nav-text-hover);
 }
 
@@ -561,6 +563,10 @@
 .product-menu__category {
   display: none;
   height: 100%;
+  /* Hugo gets border-box from Bootstrap's global reset. Without it, the
+     active category's padding adds to `height: 100%` and the menu overflows
+     into a scrollbar. */
+  box-sizing: border-box;
 }
 
 .product-menu__category--active {
