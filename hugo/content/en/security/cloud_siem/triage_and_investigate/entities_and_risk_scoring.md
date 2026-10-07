@@ -103,7 +103,7 @@ You can configure Datadog to send you notifications as soon as it detects new th
 
 ### Notify on rolled-up user identity risk
 
-A rule grouped by {{< ui >}}User identity{{< /ui >}} notifies you when one person's total risk across all of their entities crosses a threshold. This catches risk that is spread across several entities, where no single entity crosses your individual entity threshold.
+A rule grouped by {{< ui >}}User identity{{< /ui >}} notifies you when one person's total risk across all of their entities crosses a threshold. This helps you identify risk that is spread across several entities, where no single entity crosses your individual entity threshold.
 
 Rules grouped by user identity differ from individual entity rules in the following ways:
 
