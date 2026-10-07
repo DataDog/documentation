@@ -72,6 +72,8 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name t
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
+After creating a table, [edit its rows in the UI][12] without uploading another CSV file.
+
 {{% /tab %}}
 {{% tab "Cloud storage" %}}
 
@@ -222,6 +224,27 @@ Reference Table names and column headers are validated using the following namin
 
 ## Modify a Reference Table
 
+### Edit rows in the UI
+
+Edit rows in Reference Tables with a **Local File** or **API** source without uploading another CSV file. Editing requires the `reference_tables_write` permission and edit access to the table. See [Permissions][13]. Inline editing is not available for cloud storage or integration-backed tables.
+
+1. Open the Reference Table's detail page.
+2. In **Table Preview**, click {{< ui >}}Edit Table{{< /ui >}}.
+3. Make changes to the rows:
+   - Click a cell to edit its value.
+   - Click {{< ui >}}Add Row{{< /ui >}} to add a row.
+   - Hover over a row and click the trash icon to remove it.
+4. Resolve highlighted validation errors, including missing or duplicate primary keys and values that do not match column types.
+5. Click {{< ui >}}Save Version{{< /ui >}} to apply the changes.
+
+Changes remain in a draft until you save. Saving applies changes made across pages and row lookups. Rows you have not edited or removed remain unchanged. Click {{< ui >}}Cancel{{< /ui >}} and confirm to discard unsaved changes.
+
+For tables with 10,000 or more rows, the preview displays the first 100 rows. Use the search field to look up and edit other rows by their primary key.
+
+Each save supports up to 100 added or updated rows and 100 removed rows.
+
+### Replace data with a CSV file
+
 To modify an existing Reference Table with new data, select a table and click {{< ui >}}Update Config{{< /ui >}} on the top right corner.
 The selected CSV is upserted into the table, meaning that:
 
@@ -316,3 +339,5 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
+[12]: /reference_tables/#edit-rows-in-the-ui
+[13]: /reference_tables/#permissions
