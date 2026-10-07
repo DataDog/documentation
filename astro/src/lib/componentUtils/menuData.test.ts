@@ -76,12 +76,12 @@ const rawProductById = new Map(
   ]),
 );
 
-/** Mirrors `resolveUrl` in menuData.ts. */
+/** Mirrors `resolveUrl` in menuData.ts for English pages. */
 function expectedHref(url: string): string {
   if (/^https?:\/\//.test(url) || url.startsWith("#")) {
     return url;
   }
-  return `${import.meta.env.SITE}/${url.replace(/^\/+/, "")}`;
+  return `https://www.datadoghq.com/${url.replace(/^\/+/, "")}`;
 }
 
 /**
@@ -287,5 +287,58 @@ describe("mega menu", () => {
         `${identifier} is secondary but should still be in the mega menu`,
       ).toBe(true);
     }
+  });
+});
+
+/** Every `href` and `url` string anywhere in the header data. */
+function allHeaderUrls(value: unknown): string[] {
+  if (Array.isArray(value)) return value.flatMap(allHeaderUrls);
+  if (value && typeof value === "object") {
+    return Object.entries(value).flatMap(([key, child]) =>
+      (key === "href" || key === "url" || key === "pricingHref") &&
+      typeof child === "string"
+        ? [child]
+        : allHeaderUrls(child),
+    );
+  }
+  return [];
+}
+
+// Hugo resolves relative menu URLs against the corporate site
+// (hugo/layouts/partials/menulink.html), not the docs site.
+describe("header link URLs", () => {
+  const analystHref = (lang: "en" | "ja") =>
+    getHeaderData(lang).about?.children.find((child) =>
+      child.href.includes("about/analyst"),
+    )?.href;
+
+  it("points relative corporate links at the corporate site", () => {
+    expect(analystHref("en")).toBe("https://www.datadoghq.com/about/analyst/");
+  });
+
+  it("adds the ja/ prefix on Japanese pages, like Hugo", () => {
+    expect(analystHref("ja")).toBe(
+      "https://www.datadoghq.com/ja/about/analyst/",
+    );
+  });
+
+  it("leaves absolute URLs unchanged", () => {
+    const careers = getHeaderData("en").about?.children.find((child) =>
+      child.href.includes("careers."),
+    );
+    expect(careers?.href).toBe("https://careers.datadoghq.com/");
+  });
+
+  it("points the mega-menu pricing link at the corporate pricing page", () => {
+    expect(getHeaderData("en").product?.pricingHref).toBe(
+      "https://www.datadoghq.com/pricing/",
+    );
+  });
+
+  it("never points a header link at the docs site's own origin", () => {
+    const docsOriginUrls = allHeaderUrls(getHeaderData("en")).filter((url) =>
+      url.startsWith(`${import.meta.env.SITE}/`),
+    );
+    expect(docsOriginUrls).toEqual([]);
   });
 });

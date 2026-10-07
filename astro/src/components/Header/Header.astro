@@ -59,7 +59,7 @@ const logoPanelLabels = {
                 }}
                 hrefs={{
                   product: headerData.product.href,
-                  pricing: `${import.meta.env.SITE}/pricing/`,
+                  pricing: headerData.product.pricingHref,
                 }}
                 categories={headerData.product.megaCategories}
                 svgs={{ carrot: headerData.product.carrotSvg }}
