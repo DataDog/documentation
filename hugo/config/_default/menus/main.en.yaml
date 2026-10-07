@@ -5980,6 +5980,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_training
       weight: 4
+    - name: Inference Page
+      url: gpu_monitoring/inference/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_inference
+      weight: 5
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
