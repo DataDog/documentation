@@ -39,6 +39,8 @@ Resolving DNS again can still return a cached address. Configure [DNS record TTL
 
 ### Agent configuration examples
 
+Replace `<CUSTOM_INTAKE_URL>` with the intake endpoint Datadog configures during DDR onboarding. This endpoint uses your Datadog-delegated domain (`<CUSTOMER>.mrf.datadoghq.com`). See [Set up customer-initiated DNS failover][5].
+
 In `datadog.yaml`, update the connection-reset interval settings for each telemetry type you send. Configure an interval of no more than 300 seconds. Do not set the interval to `0`, which disables periodic reconnection.
 
 | Telemetry | Setting |
@@ -81,3 +83,4 @@ apm_config:
 [2]: https://www.rfc-editor.org/rfc/rfc2181
 [3]: https://www.rfc-editor.org/rfc/rfc2308
 [4]: /disaster_recovery/#prerequisites
+[5]: /disaster_recovery/#set-up-customer-initiated-dns-failover

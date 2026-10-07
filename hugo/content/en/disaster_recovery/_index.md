@@ -148,13 +148,13 @@ After synchronization is in place, confirm that:
 
 {{% collapse-content title="1\. Optimize DNS-related configurations across Agents and other data sources" level="h4" id="optimize-dns-configurations" %}}
 
-Failover speed depends on your DNS record's TTL and on how quickly your Agents and other telemetry sources pick up the DNS change after you make it. Tune your DNS settings and your telemetry source settings together, not in isolation; this is the single biggest lever you control over your realistic recovery time objective (RTO).
+Failover speed depends on your DNS record's time to live (TTL) and how quickly Agents and other telemetry sources pick up DNS changes. Configure DNS caching and connection reuse together to meet your recovery time objective (RTO).
 
 See [Required settings for optimal Recovery Time Objective (RTO)][20] for the specific DNS, Agent, and application-level settings to configure, and why each one matters.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="2\. Set up customer-initiated DNS failover" level="h4" %}}
+{{% collapse-content title="2\. Set up customer-initiated DNS failover" level="h4" id="set-up-customer-initiated-dns-failover" %}}
 
 Customer-initiated DNS failover gives you direct control over when and where failover happens, using a DNS record you own. This is the recommended path for triggering a DDR failover, because it requires no coordination with Datadog at failover time. If customer-initiated DNS failover is not suitable for your organization, contact your Datadog account team for alternatives.
 
@@ -169,96 +169,19 @@ To set up the two-step DNS delegation:
 1. Point this record to your current active Datadog data center endpoint. Your Datadog account team provides the list of available data center endpoints for your organization.
 1. Communicate your chosen domain to your Datadog account team, so Datadog can configure the initial `CNAME` delegation on its side.
 1. Configure your Agents and other telemetry sources to use your Datadog-delegated domain (`<CUSTOMER>.mrf.datadoghq.com`) as the intake URL, following the [Optimize DNS-related configurations across Agents and other data sources](#optimize-dns-configurations) section, instead of a standard Datadog [site URL][17].
-1. Jointly validate the end-to-end DNS chain with your Datadog account team.
+1. Validate the end-to-end DNS chain with your Datadog account team before relying on it during a real failover.
 
 {{% /collapse-content %}}
 
-### 3. Run failover tests in various environments
+### 4. Run a failover test
 
-{{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h4" %}}
+Datadog recommends validating your failover setup with a scheduled drill before you need it in a real incident.
 
-To trigger a failover of your Agents, click one of the policies in [Fleet Automation][13] in your DDR org, then click {{< ui >}}Enable{{< /ui >}}. The status of each host updates as the failover occurs.
+1. Update your own DNS record to point to your target Datadog data center endpoint (for example, switching from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`), then mark the time for the start of the test window. Failover initiation begins at the moment you complete the DNS record change. No coordination with Datadog is required.
+1. As soon as data begins to appear in your secondary organization, mark the time for the end of the test window. If the duration of the test does not meet your Required Time Objective, see [Required settings for optimal Recovery Time Objective (RTO)][20].
+1. Reverse the DNS change to roll back.
 
-{{< img src="/agent/guide/ddr/ddr-fa-policy-enable3.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
-
-Use the steps appropriate for your environment to activate/test the DDR failover.
-
-{{< tabs >}}
-{{% tab "Agent in non-containerized environments" %}}
-
-For Agent deployments in non-containerized environments, use the below Agent CLI commands:
-
-```shell
-agent config set multi_region_failover.failover_metrics true
-agent config set multi_region_failover.failover_logs true
-agent config set multi_region_failover.failover_apm true
-```
-
-{{% /tab %}}
-
-{{% tab "Agent in containerized environments" %}}
-
-If you are running the Agent in a containerized environment like Kubernetes, you can still use the Agent command-line tool, but you need to invoke it on the container running the Agent. You can make changes using one of the following, depending on your needs:
-
-- [kubectl](#using-kubectl)
-- [Agent configuration file (`datadog.yaml`)](#using-the-agent-configuration-file)
-- [Helm chart or Datadog Operator](#using-the-helm-chart-or-datadog-operator)
-
-##### Using kubectl
-
-Below is an example of using `kubectl` to fail over metrics and logs for a Datadog Agent pod deployed with either the official Helm chart or Datadog Operator. The `<POD_NAME>` should be replaced with the name of the Agent pod:
-
-```shell
-kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_metrics true
-kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_logs true
-kubectl exec <POD_NAME> -c agent -- agent config set multi_region_failover.failover_apm true
-```
-
-##### Using the Agent configuration file
-
-Alternatively, you can specify the below settings in the main Agent configuration file (`datadog.yaml`) and restart the Datadog Agent for the changes to apply:
-
-```shell
-multi_region_failover:
-  enabled: true
-  failover_metrics: true
-  failover_logs: true
-  failover_apm: true
-  site: NEW_ORG_SITE
-  api_key: NEW_SITE_API_KEY
-```
-
-##### Using the Helm chart or Datadog Operator
-
-You can make similar changes with either the official Helm chart or Datadog Operator if you need to specify a custom configuration. Otherwise, you can pass the settings as environment variables:
-
-```shell
-DD_MULTI_REGION_FAILOVER_ENABLED=true
-DD_MULTI_REGION_FAILOVER_FAILOVER_METRICS=true
-DD_MULTI_REGION_FAILOVER_FAILOVER_LOGS=true
-DD_MULTI_REGION_FAILOVER_FAILOVER_APM=true
-DD_MULTI_REGION_FAILOVER_SITE=ADD_NEW_ORG_SITE
-DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h4" id="id-for-cloud" %}}
-
-You can test failover for your cloud integrations from your DDR organization's landing page.
-
-{{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
-
-On the failover landing page, you can check the status of your DDR org, or click {{< ui >}}Fail over your integrations{{< /ui >}} to test your cloud integration failover.
-
-When no longer in failover, **disable the failover policy** in the DDR org to return integration data collection to the primary org.
-
-During testing, integration telemetry is spread over both organizations. If you cancel a failover test, the integrations return to running in the primary data center.
-
-{{% /collapse-content %}}
+Datadog recommends running this drill at least annually, and after any material change to your DNS provider or telemetry pipeline.
 
 ## Further reading
 
