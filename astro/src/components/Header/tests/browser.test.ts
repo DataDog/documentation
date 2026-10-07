@@ -146,6 +146,29 @@ test.describe("Header — Hugo-identical dimensions and behavior", () => {
     });
   });
 
+  test("GET STARTED FREE opens the free trial modal with the signup form", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    // The modal is mounted by the footer, which API pages include.
+    await page.goto("/api/latest/authentication/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForFunction(
+      () => document.querySelector(".free-trial-modal__overlay") !== null,
+    );
+
+    await page.locator(".header__btn-gradient").click();
+
+    const modal = page.locator(".free-trial-modal__overlay");
+    await expect(modal).toBeVisible();
+    await expect(modal.locator("iframe")).toHaveAttribute(
+      "src",
+      "https://app.datadoghq.com/signup_corp?lang=en",
+    );
+    // The click must not navigate away.
+    await expect(page).toHaveURL(/\/api\/latest\/authentication\/$/);
+  });
+
   test("hamburger opens the mobile overlay at 500px", async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);

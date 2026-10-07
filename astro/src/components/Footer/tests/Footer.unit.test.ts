@@ -92,6 +92,14 @@ describe("Footer", () => {
     );
   });
 
+  it("points the free trial link and modal at the embeddable signup_corp page", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(Footer);
+
+    expect(html).toContain("https://app.datadoghq.com/signup_corp?lang=en");
+    expect(html).not.toMatch(/app\.datadoghq\.com\/signup(?!_corp)/);
+  });
+
   it("renders the language selector with the current language", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);

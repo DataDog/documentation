@@ -10,6 +10,7 @@ import MobileNavToggle, {
 } from "@components/MobileNav/MobileNavToggle.tsx";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
+import { getSignupUrl } from "@lib/componentUtils/signupUrl";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
 import { useTranslations } from "@lib/i18n/i18n";
 import { resolveLocale } from "@lib/i18n/locale";
@@ -203,7 +204,10 @@ const logoPanelLabels = {
               <li class={cl("header__menu-item")}>
                 <a
                   class={cl("header__btn-gradient")}
-                  href={headerData.getStarted.href}
+                  href={getSignupUrl(lang)}
+                  data-trigger="free-trial"
+                  data-event-category="Signup"
+                  data-event-action="Step 1 Top Right Initiated"
                 >
                   <span class={cl("header__btn-gradient-full")}>
                     {translate("get_started_free")}

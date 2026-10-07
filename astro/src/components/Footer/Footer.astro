@@ -14,6 +14,7 @@ import FreeTrialModal from "./FreeTrialModal.tsx";
 import SocialIcon from "./SocialIcon.astro";
 import SvgIcon from "../SvgIcon/SvgIcon.astro";
 import { getFooterData } from "@lib/componentUtils/footerMenus.ts";
+import { getSignupUrl } from "@lib/componentUtils/signupUrl";
 import { useTranslations } from "@lib/i18n/i18n";
 import { getLanguageNames, getNativeLabel } from "@lib/i18n/languageNames";
 import {
@@ -70,8 +71,7 @@ function inlineSvg(name: string, color: string, size: string): string {
 const worldIconHtml = inlineSvg("world.svg", "#ffffff", "16px");
 const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
 
-// Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
-const freeTrialHref = "https://app.datadoghq.com/signup";
+const freeTrialHref = getSignupUrl(currentLang);
 const freeTrialLabel = translate("free_trial");
 ---
 
