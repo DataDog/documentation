@@ -8071,6 +8071,11 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
+    - name: Entity Packs
+      url: security/cloud_siem/ingest_and_enrich/entity_packs
+      parent: cloud_siem_content_packs
+      identifier: cloud_siem_entity_packs
+      weight: 1011
     - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
