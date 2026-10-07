@@ -57,13 +57,13 @@ To select which attribution mode your metrics use in the [AI Impact dashboard][1
 
 ## Set up coding assistants
 
-[{{< ui >}}AI Impact Settings{{< /ui >}}][2] show which coding assistants and sources Datadog detects. Some coding assistants are detected automatically, when they add themselves as a [co-author](#co-author-signatures) to the commits they generate. To measure an AI coding tool more fully, configure a source for it.
+[{{< ui >}}AI Impact Settings{{< /ui >}}][2] show which coding assistants and sources Datadog detects. Some coding assistants are detected automatically, when they add themselves as a [co-author](#co-author-signatures) to the commits they generate. To more completely capture an AI coding assistant's activity, configure a source for it.
 
 ### Supported AI coding assistants and sources
 
 Each supported coding assistant has one recommended source per context, listed in the following table. The recommended source is the most accurate one that most users can configure without manual work per pull request, and it ingests data automatically after setup.
 
-| Coding assistant | Recommended Source | Attribution |
+| Coding assistant | Recommended source | Attribution mode |
 |------------------|--------|-------------|
 | Claude Code (API or Platform) | [Anthropic Usage and Costs integration][4] | Inferred |
 | Claude Code (Enterprise plan) | [Claude Enterprise User Analytics integration][5] | Inferred |
@@ -113,7 +113,7 @@ Pull request labels give direct attribution for any coding assistant, including 
 1. When configuring a coding assistant in {{< ui >}}AI Impact Settings{{< /ui >}}, click {{< ui >}}Set Up{{< /ui >}} in the {{< ui >}}PR Labels{{< /ui >}} section.
 1. Enter one or more labels that your team uses to identify AI-assisted pull requests, and click {{< ui >}}Save{{< /ui >}}.
 
-Each rule applies to the whole pull request, so it also marks commits written without AI assistance. Label detection depends on consistent labeling by your team, which is difficult to sustain across a large organization. Use it for a coding assistant with no integration, or for a single team that can maintain the practice.
+Each rule applies to the whole pull request, so if any commits were written without AI assistance, they are classified as being AI-assisted. Label detection depends on consistent labeling by your team, which can be difficult to sustain across a large organization. Use it for a coding assistant with no Datadog integration, or for a single team that can maintain the practice.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Datadog public API" level="h4" id="datadog-public-api" %}}
@@ -150,9 +150,9 @@ To track an agent with a mapping rule:
 
 ### Identify automation bots
 
-Automation bots, such as dependency updaters and release bots, are not AI agents, and their activity is not relevant to AI Impact. Identifying a bot keeps its activity out of your AI Impact baseline.
+Automation bots, such as dependency updaters and release bots, are not AI agents, and their activity is not relevant to AI Impact. Identifying a bot prevents its activity from affecting your AI Impact metrics.
 
-Enable automatic bot detection (for GitHub) and define custom mapping rules in [Delivery Performance general settings][12] to detect automation bot-authored commits and PRs.
+To detect automation bot-authored commits and PRs, enable automatic bot detection (for GitHub) and define custom mapping rules in [Delivery Performance general settings][12].
 
 ## Further Reading
 
