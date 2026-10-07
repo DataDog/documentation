@@ -112,7 +112,7 @@ If you want to do the following in this example:
 - Sample all logs from the Datadog Agent source
 - Deduplicate logs from all sources
 
-Instead of having to add duplicate processors in branch 1 and 2's processor groups.
+Instead of having to add duplicate processors in branch 1 and 2's processor groups, you can add pre-processors.
 
 {{< img src="observability_pipelines/processors/pre-processor_tab.png" alt="The Pre-Processor tab for the Datadog Agent source, showing a Datadog Agent only group with Sample and Tags processors and an All sources group with a Dedupe processor." style="width:50%;" >}}
 
