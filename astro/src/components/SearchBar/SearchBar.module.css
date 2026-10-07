@@ -251,8 +251,15 @@
   padding: 0;
 }
 
+/* Separate adjacent results so the rows don't read as one block. The gap sits
+   between the hover/selected backgrounds rather than inside them, so each row
+   stays a distinct target. */
 .search-hit {
-  margin: 0;
+  margin: 0 0 var(--space-sm);
+}
+
+.search-hit:last-child {
+  margin-bottom: 0;
 }
 
 /* Two-column row: subcategory on the left, title+snippet on the right.
