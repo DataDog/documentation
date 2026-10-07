@@ -67,7 +67,7 @@ Entity Packs use the following permissions. A user with the [Datadog Admin Role]
 
 | Permission | What it allows |
 |---|---|
-| **SIEM Entities Notifications** | Users with this permission can modify Entity Risk notifications. |
+| **SIEM Entities Notification** | Users with this permission can modify Entity Risk notifications. |
 | **SIEM Entities Read** | View synced users in the User Inventory, see the user pill on signals and in Entity Risks, and open an Entity Pack side panel. |
 | **SIEM Entities Admin** | Everything **SIEM Entities Read** allows, plus connect a user directory, add and remove credentials, and enable or disable synchronization. |
 | **Integrations Manage** | Required only for the Microsoft Entra ID Entity Pack, to configure the Azure subscription and resource collection. |
