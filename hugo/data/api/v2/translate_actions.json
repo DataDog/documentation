@@ -1292,6 +1292,10 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "ListCostCloudAccountsV2": {
+    "description": "List the OCI and AWS CUR 2.0 cloud accounts for your organization, including account IDs, status, and validation errors.\nUse `filter[cloud]=oci` or `filter[cloud]=aws_cur2` to return a single cloud. When omitted or empty, both clouds are returned.\nAWS CUR 1.0, Azure, and GCP accounts are available through their dedicated configuration endpoints.\nArchived accounts are excluded. The response contains all matching accounts and is not paginated.\n\nThis endpoint replaces `GET /api/v2/cost/oci_config`. To migrate, use `filter[cloud]=oci` and update clients to accept\nthe `cloud_account` resource type instead of `oci_config`. Account IDs and the existing attributes are preserved;\neach account also includes the `cloud` attribute.",
+    "summary": "List Cloud Cost Management cloud accounts"
+  },
   "GetCommitmentsCommitmentList": {
     "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
     "summary": "Get commitments list"
@@ -1367,7 +1371,7 @@
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
   "ListCostOCIConfigs": {
-    "description": "**Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.\n\nList the OCI configs.",
+    "description": "**Note**: This endpoint is deprecated. Use [List Cloud Cost Management cloud accounts](https://docs.datadoghq.com/api/latest/cloud-cost-management/#list-cloud-cost-management-cloud-accounts)\nwith `filter[cloud]=oci` instead. Update clients to accept the `cloud_account` resource type instead of `oci_config`.\nAccount IDs and the existing attributes are preserved; each account also includes the `cloud` attribute.\n\nList the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
   "SearchCostRecommendations": {
