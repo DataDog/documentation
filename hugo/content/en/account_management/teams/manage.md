@@ -113,15 +113,21 @@ With hierarchies defined, you can:
 
 ### Set up team hierarchies
 
-You can define hierarchical relationships between teams in four ways:
+You can define hierarchical relationships between teams in five ways:
 
 - **GitHub Teams**: If you used [GitHub][9] to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
+- **ServiceNow assignment groups**: If you used [ServiceNow][12] to set up your Datadog Teams and your assignment groups have parent groups, those links sync to Datadog automatically during provisioning and appear in your Teams map.
 - **Teams API**: See [Create a team hierarchy link][5].
 - **Terraform**: Use the [`datadog_team_hierarchy_links`][8] resource.
 - **Datadog UI**: Define relationships directly on a team's page:
    1. On the [team directory page][1], click the team you want to add a subteam or parent team relationship to.
    1. In the {{< ui >}}Info{{< /ui >}} tab of the team page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Hierarchy{{< /ui >}} section.
    1. Select the parent or child teams associated with the team, then click {{< ui >}}Save{{< /ui >}}.
+
+## Limits
+
+- An organization can have up to 5,000 teams.
+- A team hierarchy can be up to 10 levels deep.
 
 ## Manage teams through an identity provider
 
