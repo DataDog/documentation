@@ -230,7 +230,7 @@ You can configure a workflow to trigger automatically when a message that matche
 1. Choose a {{< ui >}}Match type{{< /ui >}}:
    - {{< ui >}}Any message{{< /ui >}}: Every message in the selected channels triggers the workflow.
    - {{< ui >}}Contains text{{< /ui >}}: The message must contain the text you enter in {{< ui >}}Message pattern{{< /ui >}}. Matching is not case-sensitive.
-   - {{< ui >}}Matches regular expression{{< /ui >}}: The message must match the regular expression you enter in {{< ui >}}Message pattern{{< /ui >}}. Matching is case-sensitive and unanchored, so the pattern can match anywhere in the message. Use `^` and `$` to match the whole message, for example `^deploy\s+production$`, and add `(?i)` at the start to ignore case.
+   - {{< ui >}}Matches regular expression{{< /ui >}}: The message must match the regular expression you enter in {{< ui >}}Message pattern{{< /ui >}}. Matching is case-sensitive, and the pattern can match anywhere in the message. To match the whole message, use `^` and `$`, for example `^deploy\s+production$`. To ignore case, add `(?i)` at the start of the pattern.
 1. Optionally, filter which messages count:
    - {{< ui >}}Thread replies{{< /ui >}}: {{< ui >}}Include all messages{{< /ui >}}, {{< ui >}}Only thread replies{{< /ui >}}, or {{< ui >}}Exclude thread replies{{< /ui >}}.
    - {{< ui >}}App messages{{< /ui >}}: {{< ui >}}Include all messages{{< /ui >}}, {{< ui >}}Only app messages{{< /ui >}}, or {{< ui >}}Exclude app messages{{< /ui >}}.
