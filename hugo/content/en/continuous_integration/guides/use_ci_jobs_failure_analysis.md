@@ -1,5 +1,5 @@
 ---
-title: Use Logs Analysis to identify root causes in failed jobs
+title: Use Logs Analysis to identify root causes in failed CI jobs
 description: Learn how to use Logs Analysis to identify the most common root causes of failure in CI pipelines.
 further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
