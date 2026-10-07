@@ -25,7 +25,7 @@ Configure your AI coding tools and sources at [{{< ui >}}Software Delivery{{< /u
 
 - AI Impact requires setting up [DORA Metrics][3] with deployment, commit, and pull request data.
 
-- No AI-specific configuration is required to see initial data. For more complete measurement, configure your AI coding tools and sources as described below.
+No AI-specific configuration is required to see initial data. For more complete measurement, configure your AI coding tools and sources as described below.
 
 ## How AI detection works
 
@@ -41,7 +41,7 @@ Datadog classifies AI activity from the following types of AI tools:
 
 AI Impact classifies each pull request as AI-assisted or non-AI, and every metric is built on that classification. A PR is AI-assisted when at least one of its commits is AI-assisted.
 
-Two attribution modes are available, depending on the signal your tools provide: **direct attribution** and **inferred from user activity**.
+Each source emits signals that provide **direct attribution**, attribution **inferred from user activity**, or both.
 
 | | Direct attribution | Inferred from user activity |
 |---|---|---|
