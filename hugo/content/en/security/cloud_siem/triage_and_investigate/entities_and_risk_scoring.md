@@ -24,7 +24,7 @@ With Entity Risks, you can:
 
 - Explore entities, filtering them by attributes such as entity provider, entity type, entity name, [risk score severity](#risk-scoring), risk score, and configuration risks.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
-- Group risk by user identity to see one row per person, with their total risk across every account they act through.
+- Group risks by user identity to see one row per person, with their total risk across every account they act through.
 - Configure notifications so you can address risky entities, or risky people, as they emerge.
 - Triage relevant items in bulk.
 - Take mitigation steps such as creating a global suppression or creating a case for an entity.
