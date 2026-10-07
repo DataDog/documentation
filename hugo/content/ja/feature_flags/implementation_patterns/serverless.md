@@ -17,7 +17,7 @@ title: サーバーレス環境
 ---
 ## 概要 {#overview}
 
-Datadog Feature Flags Java、Node.js、および Python SDK は、Datadog 管理の CDN から直接フラグ構成を受信できます。この_エージェントレス_構成ソースはフラグ構成に Datadog Agent を必要としないため、オンボーディングが簡素化されます。また、Datadog Agent に接続できないサーバーレスアプリケーションにも対応しています。
+Datadog Feature Flags Java、Node.js、Python、および .NET SDK は、Datadog 管理の CDN から直接フラグ構成を受信できます。この_エージェントレス_構成ソースはフラグ構成に Datadog Agent を必要としないため、オンボーディングが簡素化されます。また、Datadog Agent に接続できないサーバーレスアプリケーションにも対応しています。
 
 構成が読み込まれた後、フラグ評価はアプリケーション内でローカルに行われます。SDK は、評価ごとにネットワークリクエストを行いません。
 
@@ -28,8 +28,11 @@ Datadog Feature Flags Java、Node.js、および Python SDK は、Datadog 管理
 | Java `dd-openfeature` および `dd-java-agent` | 1.66.0 | サポート対象 | サポート対象 | サポート対象 | 互換性のあるローカルテレメトリリレーを優先し、利用できない場合は直接フォールバックを使用する |
 | Node.js `dd-trace` | 6.12.0 | サポート対象 | サポート対象 | サポート対象外 | 互換性のあるローカルテレメトリリレーを優先し、利用できない場合は直接フォールバックを使用する |
 | Python `ddtrace` | 4.14.0 | サポート対象 | サポート対象 | サポート対象 | 互換性のあるローカルテレメトリリレー |
+| .NET `dd-trace-dotnet` および `Datadog.FeatureFlags.OpenFeature` | 3.54.0 および 2.3.1 | サポート対象 | 互換性のあるリレーでサポート対象 | サポート対象外 | 互換性のあるローカルテレメトリリレー。直接のフォールバックなし |
 
 Java CDN 配信には `dd-openfeature` および `dd-java-agent` が必要です。Java ランタイムは、`-javaagent` JVM オプションを使用して `dd-java-agent` を読み込むことをサポートする必要があります。このオプションは、Java コマンドで、または `JAVA_TOOL_OPTIONS` を通じて渡すことができます。
+
+.NET CDN 配信では、OpenFeature プロバイダーと併せて、[自動インスツルメンテーション][12]を使用して Datadog .NET トレーサーを読み込む必要があります。プロバイダーをインストールするだけでは不十分です。
 
 記載されているバージョンは、テーブルに表示されている機能を提供します。その他のサーバー SDK は、フラグ配信に Agent Remote Configuration を使用します。
 
@@ -37,10 +40,10 @@ Agentless 配信では、フラグ構成ソースのみが変更されます。F
 
 ## エージェントレスアーキテクチャ {#agentless-architecture}
 
-サーバーレスランタイムが Datadog へのアウトバウンド HTTPS リクエストを行える場合は、エージェントレス配信を使用してください。Java の場合、ランタイムで `-javaagent` JVM オプションも設定できるようにする必要があります。
+サーバーレスランタイムが Datadog へのアウトバウンド HTTPS リクエストを行える場合は、エージェントレス配信を使用してください。ランタイムは、言語トレーサーの読み込みをサポートしている必要があります。
 
 1. [サポートされている SDK バージョン](#overview)を使用します。
-2. Java の場合、`dd-java-agent` を `-javaagent` または `JAVA_TOOL_OPTIONS` で読み込みます。例については、[Cloud Run Functions][7] または [Cloud Run コンテナ][8] の Java セットアップを参照してください。
+2. Java の場合、`dd-java-agent` を `-javaagent` または `JAVA_TOOL_OPTIONS` で読み込みます。例については、[Cloud Run Functions][7] または [Cloud Run コンテナ][8] の Java セットアップを参照してください。.NET の場合は、[自動インスツルメンテーション][12]を使用してトレーサーを読み込んでください。
 3. サーバーレスアプリケーションで API キー、Datadog サイト、および環境を構成します。
 
    {{< code-block lang="bash" >}}
@@ -48,7 +51,7 @@ Agentless 配信では、フラグ構成ソースのみが変更されます。F
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-4. [Java][6]、[Node.js][3]、または [Python][9] のセットアップで説明されているように、Datadog OpenFeature プロバイダーの初期化またはアクセスを行います。これにより、CDN ポーリングが開始されます。Feature Flags の有効化やソース設定は必要ありません。
+4. [Java][6]、[Node.js][3]、[Python][9]、または [.NET][13] のセットアップで説明されているように、Datadog OpenFeature プロバイダーの初期化またはアクセスを行います。これにより、CDN ポーリングが開始されます。Feature Flags の有効化やソース設定は必要ありません。
 5. `DD_API_KEY` をサーバーレスプラットフォームのシークレットマネージャーに保存し、アプリケーションプロセスにのみ公開します。
 
 SDK はデフォルトで 30 秒ごとに Datadog 管理の CDN をポーリングし、変更されていない構成には ETag を使用します。一時的なエラーが発生した場合でも、最後に受け取った構成を保持します。構成が受け取られていない場合、OpenFeature 評価は呼び出し元が提供したデフォルト値を返します。
@@ -69,6 +72,7 @@ Agentless モードでは、_フラグ構成_のための Datadog Agent の依�
 
 - 実験エクスポージャーイベントは、実験に関連付けられたフラグに対してのみ発生します。
 - Java および Python は、EVP フラグ評価イベントを集約し、デフォルトで送信します。
+- .NET 3.54.0 は、構成された Agent トランスポートを通じて実験エクスポージャーを送信します。直接の EVP フォールバックや集約された EVP フラグ評価イベントは提供されません。互換性のあるリレーがない場合、エクスポージャーは配信されません。
 - EVP フラグ評価イベントパスのみを無効にするには、`DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` を設定してください。
 
 `feature_flag.evaluations` メトリクスは、個別の OpenTelemetry (OTLP) シグナルです。ポート 8126 での標準的な `serverless-init` コネクションでは、このメトリクスの OTLP エンドポイントは構成されません。Agent を使用しないサーバーレス環境の場合は、このメトリクスを有効にする前にプラットフォームのサーバーレステレメトリパスを構成します。[サーバーサイドのフラグ評価メトリクスをセットアップする][10]を参照してください。
@@ -81,7 +85,7 @@ Agentless モードでは、_フラグ構成_のための Datadog Agent の依�
    - `serverless-init` 1.9.13 以降を使用します。以前のバージョンは、必要な EVP ルートに対応していません。
    - エージェントレス CDN 構成配信のアプリケーション環境で `DD_API_KEY` と `DD_SITE` を保持します。サイドカーでもテレメトリの送信にそれらが必要です。
    - Feature Flags 専用のエンドポイントを構成しないでください。SDK は、Serverless Monitoring セットアップによって構成された標準のトレーサーコネクションを使用します。
-   - Node.js および Java は、ローカル EVP プロキシを検出するためにトレーサー URL で `GET /info` を呼び出します。Python は、この検出リクエストなしでサポート対象 EVP イベントを同じ URL に送信します。
+   - Node.js および Java は、ローカル EVP プロキシを検出するためにトレーサー URL で `GET /info` を呼び出します。Python および .NET 3.54.0 は、この検出リクエストなしでサポート対象 EVP イベントを同じ URL に送信します。
 
 ### テレメトリの送信を検証する {#verify-telemetry-egress}
 
@@ -123,7 +127,7 @@ DD_SITE=<DATADOG_SITE>
 - **API キーの所有権**: エージェントレスモードでは、アプリケーションが構成用の `DD_API_KEY` を所有します。`serverless-init` サイドカーでもテレメトリの送信にキーが必要です。`remote_config` モードでは、Agent が API キーを所有します。
 - **フラグの更新**: 配信は最終的に安定します。変更をテストする際は、SDK のポーリング間隔とアプリケーションの起動時間を考慮してください。
 - **Last-known-good 動作**: 構成が受け入れられた後、一時的なネットワーク障害や不正な形式の応答によって構成が置き換えられることはありません。
-- **ランタイムサポート**: Java には Java 11 以降が必要です。Node.js および Python については、トレーサーのランタイム互換性要件をチェックしてください。
+- **ランタイムサポート**: Java には Java 11 以降が必要です。Node.js、Python、および .NET については、トレーサーのランタイム互換性要件をチェックしてください。.NET ランタイムは、自動インスツルメンテーションされたトレーサーの読み込みをサポートしている必要があります。
 - **キルスイッチ**: `DD_FEATURE_FLAGS_ENABLED` のデフォルトは `true` です。`false` に設定すると、プロバイダーと両方の構成配信パスが無効になります。その場合、評価は呼び出し元が提供したデフォルト値を返します。
 
 これらのバージョンの Datadog for Government では、Datadog 管理エージェントレス配信は利用できません。そのサイトでは Agent Remote Configuration を使用してください。
@@ -158,7 +162,7 @@ Java 関数アプリは、ランタイムが `dd-java-agent` を読み込める�
 
 本番環境で Feature Flags を有効にする前に、以下を行います。
 
-1. アプリケーションが[最小サポート対象 SDK バージョン](#overview)を使用していることを確認します。Java の場合は、JVM が `dd-java-agent` を読み込むことを確認します。
+1. アプリケーションが[最小サポート対象 SDK バージョン](#overview)を使用していることを確認します。Java の場合は、JVM が `dd-java-agent` を読み込むことを確認します。.NET については、自動インスツルメンテーションによってトレーサーが読み込まれることを確認してください。
 2. エージェントレス配信の場合は、アプリケーションに `DD_API_KEY`、`DD_SITE`、および `DD_ENV` があることを確認します。Agent Remote Configuration の場合は、Agent に API キーと Remote Configuration が有効になっていることを確認します。
 3. OpenFeature プロバイダーを初期化し、準備が完了していることを確認します。
 4. Datadog で非本番環境のフラグを変更し、ポーリング間隔の経過後にワークロードが更新された値を受け取ることを確認します。
@@ -180,3 +184,5 @@ Java 関数アプリは、ランタイムが `dd-java-agent` を読み込める�
 [9]: /ja/feature_flags/server/python/
 [10]: /ja/feature_flags/guide/server_flag_evaluation_metrics/
 [11]: /ja/serverless/
+[12]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[13]: /ja/feature_flags/server/dotnet/
