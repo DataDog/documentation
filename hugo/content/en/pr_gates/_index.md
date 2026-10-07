@@ -64,7 +64,7 @@ You can configure PR Gates rules for the following categories. Please note that 
 | [**Secret Scanning**][10] | - Leaked secrets |
 | [**New Flaky Tests**][11] | - New flaky tests |
 
-After creating PR Gates rules, Datadog automatically creates checks on your pull requests using the [GitHub][5], [GitLab Source Code][13], [Azure DevOps Source Code][6], or [Bitbucket Cloud Source Code][14] integrations. Set those checks as required in GitHub, GitLab, Azure DevOps, or Bitbucket Cloud when you are ready to enforce them.
+After creating PR Gates rules, Datadog automatically creates checks on your pull requests using the [GitHub][5], [GitLab Source Code][13], [Azure DevOps Source Code][6], or [Bitbucket Cloud Source Code][14] integrations. To enforce PR Gates, set those checks as required in GitHub, Azure DevOps, or Bitbucket Cloud when you are ready to enforce them. In GitLab, set the Datadog service account as a required approver on merge requests. See [Set up PR Gate Rules][15].
 
 PR Gates also enable emoji reactions (similar to [PR Comments][12]). Datadog posts a 👀 reaction on the description of the PR when a Datadog product that has PR Gates is still waiting for results to arrive. After all results have arrived:
   * If all results are positive, the reaction is changed to 👍.
@@ -156,3 +156,4 @@ You can see all of the rules defined by the organization.
 [12]: /source_code/features/#pr-comments
 [13]: /integrations/gitlab-source-code/
 [14]: /integrations/bitbucket-source-code/
+[15]: /pr_gates/setup/
