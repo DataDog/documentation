@@ -126,10 +126,30 @@ The [recommended keywords][15] are used by default when library rules are added.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
+    - For structured events, keywords are also matched against attribute names in the event path. See [How keyword matching works](#how-keyword-matching-works) for case sensitivity, separators, and camel case handling.
     - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click {{< ui >}}Update{{< /ui >}}.
+
+#### How keyword matching works
+
+Keyword matching follows these rules for both library rules and custom rules:
+
+- **Matching is case-insensitive.** The keyword `secret` matches `secret`, `Secret`, and `SECRET`.
+- **Spaces, underscores, and hyphens are interchangeable.** The keyword `secret access key` matches `secret access key`, `secret_access_key`, and `secret-access-key`. It also matches an attribute named `AWS_SECRET_ACCESS_KEY`.
+- **Attribute names in structured events are split into words.** For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number` and `card-type` match. With the keyword `keyword`, the following event matches a rule whose pattern is `secret`, because `sneakyKeyword` is split into `sneaky` and `keyword`:
+
+  ```json
+  {
+    "some": {
+      "sneakyKeyword": {
+        "value": "secret"
+      }
+    }
+  }
+  ```
+
+- **Camel case is not a word boundary in the text around a match.** When keywords are matched against the characters before a matched value, camel case words are not split. For example, in the message `clientSecret=abc123`, the keyword `secret` does not match `clientSecret`.
 
 #### Add suppressions
 
@@ -159,7 +179,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
+    - For structured events, keywords are also matched against attribute names in the event path. See [How keyword matching works](#how-keyword-matching-works) for case sensitivity, separators, and camel case handling.
       **Note**: You cannot have more than 20 keywords for a rule.
 {{% sds-suppressions %}}
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
