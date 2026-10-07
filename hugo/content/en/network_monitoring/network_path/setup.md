@@ -676,7 +676,7 @@ About five minutes after restarting the Agent, open [Network Path][4] and filter
 
 Basic dynamic tests only select destinations allowed by your [filters][8].
 
-##### Troubleshooting
+##### Troubleshooting {#troubleshooting-basic-dynamic-tests}
 
 If no paths with `test_run_type:dynamic` appear in [Network Path][4], verify the following:
 
