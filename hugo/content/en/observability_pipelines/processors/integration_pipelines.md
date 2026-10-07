@@ -48,7 +48,7 @@ This follows the reserved-field approach described in [Datadog log preprocessing
 
 1. Add an Integration Pipelines processor to your [Observability Pipelines pipeline][2], before an archive destination.
 2. Define a filter query to select the logs that enter the processor. Only matching logs are normalized and processed. All logs continue to the next step. See [Search Syntax][3] for query syntax.
-3. When you add the processor in the UI, all integration pipelines are enabled by default. Use the checkboxes to selectively enable or disable pipelines.
+3. When you add the processor in the UI, all integration pipelines in the current catalog are enabled by default. Use the checkboxes to selectively enable or disable pipelines. After a Worker upgrade, integrations newly added to the catalog are not automatically enabled for existing processors. They appear in the processor's {{< ui >}}Disabled{{< /ui >}} section; add them to the {{< ui >}}Enabled{{< /ui >}} section and deploy the new configuration to include them.
 4. Ensure your logs identify their integration through `source` or `ddsource`, such as `nginx`. Logs collected by the Datadog Agent with an integration log configuration already have their source set. Enabling a pipeline does not apply it to every log: the normalized source must match that pipeline.
 5. Optionally, configure the reserved-field mappings in `preprocessing`. Omit this configuration to use the defaults described below.
 6. Validate the output with representative logs, including logs that do not match an enabled integration pipeline. Check downstream processors and destinations that use fields now nested under `attributes`.
