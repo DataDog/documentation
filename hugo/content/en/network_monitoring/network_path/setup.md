@@ -680,11 +680,11 @@ Basic dynamic tests only select destinations allowed by your [filters][8].
 
 If no paths with `test_run_type:dynamic` appear in [Network Path][4], verify the following:
 
-1. The [prerequisites](#prerequisites) are met, `basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
-2. CNM shows connections from the host on the [CNM Analytics][9] page.
-3. `traceroute.enabled` is not set to `false` in `system-probe.yaml`. For Helm, `datadog.traceroute.enabled` is set to `true`.
-4. The host has outgoing connections to destinations with a domain name. By default, dynamic tests skip destinations without a domain name. To include these destinations, set `network_path.collector.monitor_ip_without_domain` to `true`.
-5. Your [filters][8] don't exclude the destinations you expect to see.
+ - The [prerequisites](#prerequisites) are met, `basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
+ - CNM shows connections from the host on the [CNM Analytics][9] page.
+ - `traceroute.enabled` is not set to `false` in `system-probe.yaml`. For Helm, `datadog.traceroute.enabled` is set to `true`.
+ - The host has outgoing connections to destinations with a domain name. By default, dynamic tests skip destinations without a domain name. To include these destinations, set `network_path.collector.monitor_ip_without_domain` to `true`.
+ - Your [filters][8] don't exclude the destinations you expect to see.
 
 ### Dynamic Tests for NetFlow (Experimental)
 
