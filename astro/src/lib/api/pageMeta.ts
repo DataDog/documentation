@@ -3,7 +3,7 @@
  * twin's frontmatter cannot drift from what the HTML page shows.
  */
 
-import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
 import type { ApiCategoryStub, EndpointData } from "@lib/api/schemas/views";
 import { useTranslations } from "@lib/i18n/i18n";
 import { localizedHref, type Locale } from "@lib/i18n/locale";

@@ -11,7 +11,7 @@
 import Markdoc from "@markdoc/markdoc";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { stringify as stringifyYaml } from "yaml";
-import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
 import { absoluteUrl } from "@lib/site/siteUrl";
 
 // @markdoc/markdoc ships a CJS build whose named exports don't round-trip
