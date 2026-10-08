@@ -5,7 +5,7 @@ import { readdir } from "node:fs/promises";
  * Build-time guard that makes "confined to /api" and "fully static" mechanical
  * instead of a convention someone can silently break.
  *
- * Three checks, all reported together from `astro:build:done`:
+ * Three checks are reported together from `astro:build:done`:
  *   1. Prerender guard — every `/api` route must be `prerender: true`.
  *   2. Containment guard — every emitted file must live under `api/` or
  *      `{fr,ja,ko,es}/api/` (Astro emits locale-prefixed output per directory,
@@ -19,6 +19,13 @@ import { readdir } from "node:fs/promises";
  * describe route *definitions*, so the whole category tree is a single dynamic
  * `[category]` entry there. Coverage therefore counts generated *pages* instead,
  * which `astro:build:done` does provide.
+ *
+ * A fourth — the shadow guard — runs in `astro:routes:resolved` instead, and
+ * throws there, because the failure it catches is request-time route
+ * arbitration: it only shows up in dev and SSR preview, where
+ * `astro:build:done` never runs. A static build generates every prerendered
+ * route independently, with no router to arbitrate, so a route table that
+ * hides `/api` behind a catch-all builds and deploys perfectly while dev 404s.
  *
  * Imports must stay alias-free (relative + npm only), same reasoning as
  * `pagesJson.ts`/`llmsTxt.ts`: this runs in Node during build orchestration,
@@ -35,6 +42,23 @@ const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
 // inflate the count past the floor.
 const CATEGORY_PAGE = /^api\/latest\/([^/]+)\/?$/;
 
+// Probe paths for the shadow guard. All English, all real pages. The `.md`
+// paths are the ones a root-level catch-all plausibly swallows: a `.md`
+// filename suffix makes the catch-all's first segment "mixed" rather than
+// purely dynamic, which Astro's route comparator rewards, so it can out-rank
+// a route with a literal `api` segment. The HTML paths are cheap to include
+// and pin the same property for the component routes.
+const API_PROBE_PATHS = [
+  "/api/latest.md",
+  "/api/latest/dashboards.md",
+  "/api/latest/dashboards/get-a-dashboard.md",
+  "/api/latest/",
+  "/api/latest/dashboards/",
+  "/api/latest/dashboards/get-a-dashboard/",
+];
+// An `/api` entrypoint, nested under `[...lang]` or not.
+const API_ENTRYPOINT = /(?:^|\/)src\/pages\/(?:\[\.\.\.lang\]\/)?api[/.]/;
+
 export interface RouteLike {
   route: string;
   prerender?: boolean;
@@ -44,6 +68,53 @@ export interface RouteLike {
 export interface ResolvedRouteLike {
   pattern: string;
   isPrerendered: boolean;
+}
+
+/**
+ * The subset of `IntegrationResolvedRoute` the shadow guard reads. Astro hands
+ * integrations the routes already sorted by priority, so array order is the
+ * order the dev and SSR routers try them in.
+ */
+export interface OrderedRouteLike {
+  pattern: string;
+  patternRegex: RegExp;
+  entrypoint: string;
+}
+
+export interface ApiRouteShadower {
+  /** The probe path that does not reach an `/api` route. */
+  path: string;
+  /** Pattern of the route that claims it, or `null` if nothing matches. */
+  pattern: string | null;
+  entrypoint: string | null;
+}
+
+/**
+ * Returns every probe path whose first matching route is not an `/api` route.
+ *
+ * This is the general property, not a patch for one route: any future
+ * root-level route that happens to out-rank `/api` fails here rather than
+ * silently taking over the API docs in dev.
+ */
+export function findApiRouteShadowers(
+  routes: OrderedRouteLike[],
+): ApiRouteShadower[] {
+  const shadowers: ApiRouteShadower[] = [];
+  for (const path of API_PROBE_PATHS) {
+    const winner = routes.find((route) => route.patternRegex.test(path));
+    if (!winner) {
+      shadowers.push({ path, pattern: null, entrypoint: null });
+      continue;
+    }
+    if (!API_ENTRYPOINT.test(winner.entrypoint)) {
+      shadowers.push({
+        path,
+        pattern: winner.pattern,
+        entrypoint: winner.entrypoint,
+      });
+    }
+  }
+  return shadowers;
 }
 
 /**
@@ -124,6 +195,23 @@ export function staticApiGuard(
       // `{ pages, dir, assets, logger }` and no routes at all.
       "astro:routes:resolved": ({ routes }) => {
         resolvedRoutes = toRouteLike(routes);
+
+        // Thrown here rather than collected for `astro:build:done`: see the
+        // shadow guard note in this file's header.
+        const shadowers = findApiRouteShadowers(routes);
+        if (shadowers.length > 0) {
+          throw new Error(
+            `staticApiGuard shadow guard: ${shadowers.length} /api path(s) ` +
+              `do not resolve to an /api route:\n` +
+              shadowers
+                .map(
+                  ({ path, pattern, entrypoint }) =>
+                    `  - ${path} -> ${pattern ?? "(no matching route)"}` +
+                    (entrypoint ? ` (${entrypoint})` : ""),
+                )
+                .join("\n"),
+          );
+        }
       },
       "astro:build:done": async ({ logger, pages }) => {
         const problems: string[] = [];

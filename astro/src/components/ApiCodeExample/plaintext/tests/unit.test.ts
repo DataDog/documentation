@@ -79,6 +79,23 @@ describe("apiCodeExampleNode", () => {
     expect(out).toContain("**With auth**");
   });
 
+  it("appends run instructions when a set has them", () => {
+    const out = render([
+      {
+        ...examples[1],
+        instructions: {
+          exampleFile: "example.py",
+          runCommandByRegion: {
+            us: 'DD_SITE="datadoghq.com" python3 "example.py"',
+            eu: 'DD_SITE="datadoghq.eu" python3 "example.py"',
+          },
+        },
+      },
+    ]);
+    expect(out).toMatch(/from datadog_api_client[\s\S]*Instructions/);
+    expect(out).toContain('DD_SITE="datadoghq.com" python3 "example.py"');
+  });
+
   it("builds a tabs tag node", () => {
     const node = apiCodeExampleNode(examples);
     expect(node?.type).toBe("tag");

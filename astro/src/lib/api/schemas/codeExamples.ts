@@ -32,6 +32,14 @@ export const CodeExampleSetSchema = z
     entries: z
       .array(CodeExampleEntrySchema)
       .describe("One or more code examples for this language"),
+    instructions: z
+      .object({
+        exampleFile: z.string(),
+        runCommandByRegion: z.record(z.string(), z.string()),
+      })
+      .strict()
+      .optional()
+      .describe("How to run an SDK example, shown below it"),
   })
   .strict();
 

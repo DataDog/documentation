@@ -82,6 +82,17 @@ const ProductSubcategorySchema = z.object({
   sections: z.array(ProductSectionSchema).optional(),
 });
 
+/**
+ * Column-flow hints the footer's product grid reads. Upstream uses them to
+ * reorder categories in the 3-column tablet band and to force a column break
+ * after a category — see `footer_layout` in `product_categories.yaml`.
+ */
+const FooterLayoutSchema = z.object({
+  tablet_order: z.number().optional(),
+  tablet_break_after: z.boolean().optional(),
+  desktop_break_after: z.boolean().optional(),
+});
+
 const ProductCategorySchema = z.object({
   identifier: z.string(),
   lang_key: z.string(),
@@ -92,6 +103,7 @@ const ProductCategorySchema = z.object({
   icon: z.string(),
   mobile: z.boolean().optional(),
   mobile_products: z.array(z.string()).optional(),
+  footer_layout: FooterLayoutSchema.optional(),
   children: z.array(ProductSubcategorySchema).optional(),
 });
 
@@ -149,6 +161,25 @@ export type MegaCategory = {
   ctaHoverGradient?: [string, string, string];
   iconHtml: string;
   subcategories: MegaSubcategory[];
+};
+
+/** One labelled run of product links inside a footer category. */
+export type FooterProductGroup = {
+  /** Absent on a continuation group, whose products fold into the one before. */
+  label?: string;
+  products: SimpleLink[];
+};
+
+export type FooterProductCategory = {
+  identifier: string;
+  label: string;
+  iconHtml: string;
+  groups: FooterProductGroup[];
+  layout: {
+    tabletOrder?: number;
+    tabletBreakAfter: boolean;
+    desktopBreakAfter: boolean;
+  };
 };
 
 export type SolutionsColumn = {
@@ -258,16 +289,6 @@ function resolveProductList(
     }
   }
   return out;
-}
-
-/** Every product reference under a subcategory, whether or not it uses sections. */
-function subcategoryProductRefs(sub: {
-  products?: ProductRef[];
-  sections?: { products: ProductRef[] }[];
-}): ProductRef[] {
-  return (
-    sub.products ?? (sub.sections ?? []).flatMap((section) => section.products)
-  );
 }
 
 function buildMegaCategories(
@@ -399,33 +420,60 @@ export function getHeaderData(lang: Locale): HeaderData {
 }
 
 /**
- * Flat, deduped list of the products that appear in the desktop mega menu,
- * excluding those flagged `secondary`. The footer's product column consumes
- * this — Hugo's `$datadir.menu_data.products` equivalent, ordered by first
- * appearance in the category tree.
+ * The footer's product column, as the nested category tree it renders:
+ * category → subcategory group → product links. Mirrors the flattening in
+ * websites-modules `layouts/partials/footer.html`:
+ *
+ * - only categories that declare `children` appear (the bare, child-less
+ *   entries in `product_categories.yaml` are mobile-nav rows);
+ * - a subcategory that splits into `sections` contributes one group per section;
+ * - a group with no `lang_key` is a continuation of the one before it. The main
+ *   nav uses those to spill a subcategory into a second column; the footer
+ *   wants a single list, so their products fold into the preceding group;
+ * - `secondary` products stay in the mega menu and are omitted here.
  */
-export function getFooterProductLinks(lang: Locale): SimpleLink[] {
+export function getFooterProductCategories(
+  lang: Locale,
+): FooterProductCategory[] {
   const translate = useTranslations(lang);
-  const seen = new Set<string>();
-  const out: SimpleLink[] = [];
-  for (const cat of productCategories) {
-    for (const sub of cat.children ?? []) {
-      for (const ref of subcategoryProductRefs(sub)) {
-        // `secondary` products stay in the main nav but are omitted here,
-        // matching upstream `layouts/partials/footer.html`.
-        if (ref.secondary || seen.has(ref.identifier)) {
-          continue;
-        }
-        seen.add(ref.identifier);
-        const p = productById.get(ref.identifier);
-        if (p) {
-          out.push({
-            label: translate(p.lang_key),
-            href: resolveUrl(p.url, lang),
-          });
-        }
+  return productCategories
+    .filter((cat) => (cat.children ?? []).length > 0)
+    .map((cat) => ({
+      identifier: cat.identifier,
+      label: translate(cat.lang_key),
+      iconHtml: iconHtml(cat.icon),
+      groups: buildFooterGroups(cat.children ?? [], translate, lang),
+      layout: {
+        tabletOrder: cat.footer_layout?.tablet_order,
+        tabletBreakAfter: Boolean(cat.footer_layout?.tablet_break_after),
+        desktopBreakAfter: Boolean(cat.footer_layout?.desktop_break_after),
+      },
+    }));
+}
+
+function buildFooterGroups(
+  subcategories: z.infer<typeof ProductSubcategorySchema>[],
+  translate: Translate,
+  lang: Locale,
+): FooterProductGroup[] {
+  const groups: FooterProductGroup[] = [];
+  for (const sub of subcategories) {
+    for (const section of sub.sections ?? [sub]) {
+      const products = resolveProductList(
+        (section.products ?? []).filter((ref) => !ref.secondary),
+        translate,
+        lang,
+      ).map(({ label, url }) => ({ label, href: url }));
+      const previous = groups[groups.length - 1];
+      if (!section.lang_key && previous) {
+        previous.products.push(...products);
+      } else {
+        groups.push({
+          label: section.lang_key ? translate(section.lang_key) : undefined,
+          products,
+        });
       }
     }
   }
-  return out;
+  return groups;
 }

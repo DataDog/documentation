@@ -20,6 +20,7 @@ import {
   tag,
   plaintext,
 } from "@lib/plaintext/helpers";
+import { apiCodeInstructionsNodes } from "@components/ApiCodeInstructions/plaintext/ApiCodeInstructions";
 
 export function apiCodeExampleNode(
   examples: CodeExampleSet[],
@@ -40,6 +41,14 @@ function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
   const contents: MarkdocNode[] = [];
   for (const entry of set.entries) {
     contents.push(...renderCodeExampleContent(entry, includeHeading));
+  }
+  if (set.instructions) {
+    contents.push(
+      ...apiCodeInstructionsNodes({
+        language: set.language,
+        ...set.instructions,
+      }),
+    );
   }
   return contents;
 }

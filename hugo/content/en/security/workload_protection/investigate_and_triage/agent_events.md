@@ -16,7 +16,7 @@ further_reading:
 
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.
 
-With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, event tree, and raw JSON payload, and view triage and response instructions for the matching rule.
+With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, event tree, remote access sessions, and raw JSON payload, and view triage and response instructions for the matching rule.
 
 ## Investigate Agent events
 
@@ -29,7 +29,7 @@ To investigate an Agent event:
 
 The {{< ui >}}Overview{{< /ui >}} tab summarizes the event and is often the best place to start your investigation.
 
-{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_overview.png" alt="Agent event side panel Overview tab showing What, Where, Agent rule, and Investigation graph sections" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_overview_2.png" alt="Agent event side panel Overview tab showing What, Where, Agent rule, and Investigation graph sections" width="100%">}}
 
 The Overview tab includes the following sections:
 
@@ -66,6 +66,19 @@ Expand a process entry to view its command, credentials, and executable metadata
 Use the {{< ui >}}Show infrastructure entries{{< /ui >}} toggle to show or hide the affected host, pod, and container.
 
 Use attributes such as executable path, arguments, PID, and user to filter for related Agent events. Select {{< ui >}}View in JSON{{< /ui >}} on a process or activity entry to open the corresponding location in the raw event JSON.
+
+### Remote access
+
+When an Agent event occurs inside a remote access session, the {{< ui >}}Remote Access{{< /ui >}} tab shows the full session the event belongs to. Use it to scope the surrounding activity instead of examining one event in isolation. A remote access session is an SSH session or a Kubernetes `kubectl exec` session, or both.
+
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_remote_access.png" alt="Remote Access tab showing a Kubernetes session's details, the host it ran on, and a timeline and table of Agent events in the session" width="100%">}}
+
+The tab supports the following session types:
+
+- {{< ui >}}SSH{{< /ui >}}: Interactive SSH sessions. Session details include the session ID, client IP, client port, authentication method, and authentication key.
+- {{< ui >}}Kubernetes{{< /ui >}}: `kubectl exec` sessions. Session details include the username, groups, session ID, and UID.
+
+For each session, the tab also shows the host it ran on, a timeline of its Agent events, and a table of those events. The timeline charts when the related events occurred, so you can spot bursts of activity across the session. Drag to select a range on the timeline to narrow the table to that window. Select an event in the table to open it in its own side panel and continue your investigation without leaving the session view. To continue in the full [Agent Events Explorer][13], select {{< ui >}}Investigate all events in this session{{< /ui >}}. This opens the explorer filtered to the session, so you can query and group every event in it using the standard explorer controls.
 
 ### JSON
 

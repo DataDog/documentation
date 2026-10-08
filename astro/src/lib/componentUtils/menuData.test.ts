@@ -15,16 +15,20 @@ import { describe, expect, it } from "vitest";
 import { parse as parseYaml } from "yaml";
 import categoriesRaw from "@websites-modules/data/menu_data/product_categories.yaml?raw";
 import productsRaw from "@websites-modules/data/menu_data/products.yaml?raw";
-import { getFooterProductLinks, getHeaderData } from "./menuData";
+import { getFooterProductCategories, getHeaderData } from "./menuData";
 
 type RawProductRef = { identifier: string; secondary?: boolean };
 type RawSubcategory = {
   identifier: string;
   lang_key?: string;
   products?: RawProductRef[];
-  sections?: { products?: RawProductRef[] }[];
+  sections?: { lang_key?: string; products?: RawProductRef[] }[];
 };
-type RawCategory = { mobile?: boolean; children?: RawSubcategory[] };
+type RawCategory = {
+  identifier: string;
+  mobile?: boolean;
+  children?: RawSubcategory[];
+};
 
 const rawCategories = parseYaml(categoriesRaw) as RawCategory[];
 const rawProducts = parseYaml(productsRaw) as { identifier: string }[];
@@ -84,31 +88,39 @@ function expectedHref(url: string): string {
   return `https://www.datadoghq.com/${url.replace(/^\/+/, "")}`;
 }
 
+/** Every footer product link, flattened out of the nested category model. */
+function footerHrefs(): string[] {
+  return getFooterProductCategories("en").flatMap((category) =>
+    category.groups.flatMap((group) => group.products.map((p) => p.href)),
+  );
+}
+
 /**
- * The footer column the code should produce: every product reference in the
- * category tree in order of first appearance, skipping `secondary` ones and
- * identifiers with no `products.yaml` entry.
+ * The footer links the code should produce: every product reference in the
+ * category tree in order, skipping `secondary` ones and identifiers with no
+ * `products.yaml` entry.
  *
- * Deduping is by identifier, not URL — two distinct products can legitimately
- * share a URL (`product/ai/mcp-server/` is used twice upstream).
+ * Unlike the old flat column this is *not* deduped — upstream renders each
+ * category's own list, so a product that is primary in two categories appears
+ * in both. Nothing is deduped by URL either: two distinct products can
+ * legitimately share one (`product/ai/mcp-server/` is used twice upstream).
  */
 function expectedFooterHrefs(): string[] {
-  const seen = new Set<string>();
   const hrefs: string[] = [];
   for (const category of rawCategories) {
+    if (!(category.children ?? []).length) {
+      continue;
+    }
     for (const sub of category.children ?? []) {
-      const subRefs = [
-        ...(sub.products ?? []),
-        ...(sub.sections ?? []).flatMap((section) => section.products ?? []),
-      ];
-      for (const ref of subRefs) {
-        if (ref.secondary || seen.has(ref.identifier)) {
-          continue;
-        }
-        seen.add(ref.identifier);
-        const product = rawProductById.get(ref.identifier);
-        if (product) {
-          hrefs.push(expectedHref(product.url));
+      for (const section of sub.sections ?? [sub]) {
+        for (const ref of section.products ?? []) {
+          if (ref.secondary) {
+            continue;
+          }
+          const product = rawProductById.get(ref.identifier);
+          if (product) {
+            hrefs.push(expectedHref(product.url));
+          }
         }
       }
     }
@@ -121,8 +133,7 @@ function footerIncludes(identifier: string): boolean {
   if (!product) {
     throw new Error(`no products.yaml entry for ${identifier}`);
   }
-  const target = expectedHref(product.url);
-  return getFooterProductLinks("en").some((link) => link.href === target);
+  return footerHrefs().includes(expectedHref(product.url));
 }
 
 function megaMenuIdentifiers(): string[] {
@@ -154,7 +165,47 @@ describe("product_categories.yaml schema", () => {
   });
 });
 
-describe("getFooterProductLinks", () => {
+describe("getFooterProductCategories", () => {
+  it("omits categories with no children, as the footer partial does", () => {
+    const withChildren = rawCategories.filter(
+      (category) => (category.children ?? []).length > 0,
+    );
+    expect(withChildren.length).toBeLessThan(rawCategories.length);
+    expect(getFooterProductCategories("en").map((c) => c.identifier)).toEqual(
+      withChildren.map((category) => category.identifier),
+    );
+  });
+
+  it("labels every category and gives it an inline icon", () => {
+    for (const category of getFooterProductCategories("en")) {
+      expect(
+        category.label,
+        `${category.identifier} has no label`,
+      ).toBeTruthy();
+      expect(category.iconHtml).toContain("<svg");
+    }
+  });
+
+  it("folds an unlabelled continuation group into the one before it", () => {
+    // Upstream: a child with no `lang_key` continues the previous subcategory,
+    // so the footer renders one list rather than a second, headingless one.
+    const categories = getFooterProductCategories("en");
+    const continuationsExist = rawCategories
+      .filter((category) => (category.children ?? []).length > 0)
+      .flatMap((category) => category.children ?? [])
+      .some((sub) => !sub.lang_key);
+    expect(continuationsExist).toBe(true);
+
+    for (const category of categories) {
+      const unlabelled = category.groups.filter((group) => !group.label);
+      // Only a leading group may lack a label; any later one would have been
+      // folded into its predecessor.
+      for (const group of unlabelled) {
+        expect(category.groups.indexOf(group)).toBe(0);
+      }
+    }
+  });
+
   it("would omit a product that is `secondary` everywhere", () => {
     // Mirrors websites-modules `layouts/partials/footer.html`:
     //   {{/* `secondary` products stay in the main nav but are omitted here */}}
@@ -162,40 +213,13 @@ describe("getFooterProductLinks", () => {
     //
     // No product is currently secondary at every appearance — upstream uses the
     // flag only to mark a *repeat* listing — so this asserts the data shape the
-    // filter is written against rather than a live exclusion. If upstream ever
-    // adds a wholly-secondary product, this flips to a real exclusion check and
-    // the `expected column exactly` test below starts covering it.
+    // filter is written against rather than a live exclusion.
     expect(alwaysSecondaryIds).toEqual([]);
     for (const identifier of alwaysSecondaryIds) {
       expect(
         footerIncludes(identifier),
         `${identifier} is secondary everywhere and must not appear in the footer`,
       ).toBe(false);
-    }
-  });
-
-  it("positions a product at its primary appearance, not a secondary one", () => {
-    // `secondary` marks a repeat listing, so for the products whose *first*
-    // appearance is the secondary one, honoring the flag moves them later in
-    // the flat column — to the category that actually owns them.
-    const firstAppearanceSecondary = [...everPrimaryIds].filter(
-      (identifier) => {
-        const appearances = refs.filter((ref) => ref.identifier === identifier);
-        return appearances.length > 1 && Boolean(appearances[0].secondary);
-      },
-    );
-    expect(firstAppearanceSecondary.length).toBeGreaterThan(0);
-
-    const hrefs = getFooterProductLinks("en").map((link) => link.href);
-    for (const identifier of firstAppearanceSecondary) {
-      const product = rawProductById.get(identifier);
-      const index = hrefs.indexOf(expectedHref(product!.url));
-      expect(index, `${identifier} missing from the footer`).toBeGreaterThan(
-        -1,
-      );
-      expect(index, `${identifier} should sit at its primary appearance`).toBe(
-        expectedFooterHrefs().indexOf(expectedHref(product!.url)),
-      );
     }
   });
 
@@ -209,18 +233,8 @@ describe("getFooterProductLinks", () => {
     }
   });
 
-  it("matches the expected column exactly, in order", () => {
-    expect(getFooterProductLinks("en").map((link) => link.href)).toEqual(
-      expectedFooterHrefs(),
-    );
-  });
-
-  it("does not repeat an identifier", () => {
-    // URL-level duplicates are legitimate, so dedupe is asserted via the
-    // identifier-derived expectation above; here just pin the count.
-    expect(getFooterProductLinks("en")).toHaveLength(
-      expectedFooterHrefs().length,
-    );
+  it("matches the expected links exactly, in order", () => {
+    expect(footerHrefs()).toEqual(expectedFooterHrefs());
   });
 });
 

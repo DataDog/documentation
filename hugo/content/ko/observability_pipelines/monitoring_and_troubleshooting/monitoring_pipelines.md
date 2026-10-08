@@ -56,11 +56,12 @@ Observability Pipelines Workers의 리소스 사용량 및 전송된 데이터 �
 
 ## 파이프라인 구성 요소의 상태 조회{#view-the-status-of-your-pipeline-components}
 
-소스, 프로세스 또는 대상에 대한 메트릭을 보려면 다음을 수행하세요.
+소스, 프로세서 또는 대상의 메트릭을 조회하려면 다음을 수행하십시오:
 
 1. [Observability Pipelines][1]로 이동합니다.
 1. 파이프라인을 선택합니다.
-1. 소스, 프로세서 또는 대상 이름 옆의 톱니바퀴를 클릭한 다음 {{< ui >}}View details{{< /ui >}}를 선택합니다. Datadog은 선택한 구성 요소에 대한 상태 그래프를 표시합니다.
+1. 소스, 프로세서 또는 대상 이름 옆의 톱니바퀴를 클릭한 다음 {{< ui >}}View details{{< /ui >}}를 선택합니다. 측면 패널의 {{< ui >}}Metrics{{< /ui >}} 탭은 선택한 구성 요소에 대한 상태 그래프를 표시합니다.
+1. 구성 요소의 ID를 복사하려면 측면 패널 상단에 있는 구성 요소 이름 옆의 복사 아이콘을 클릭하십시오. `component_id` 태그와 함께 ID를 사용하여 해당 구성 요소에 대한 [Observability Pipelines 메트릭][5]을 필터링하거나 그룹화하십시오.
 1. 그래프를 [인시던트][2], [대시보드][3] 또는 [노트북][4]으로 내보내려면 그래프의 내보내기 아이콘을 클릭하세요. 내보낸 그래프는 메트릭이 특정 파이프라인 및 구성 요소 태그별로 그룹화되어 있음을 보여줍니다.
 
 {{< img src="observability_pipelines/monitoring_and_troubleshooting/pipeline_health_graphs.png" alt="파이프라인에 대한 유입/유출 이벤트, 유입/유출 바이트, 오류, 삭제된 데이터, 사용률 및 버퍼 이벤트를 보여주는 상태 그래프입니다." style="width:35%;" >}}

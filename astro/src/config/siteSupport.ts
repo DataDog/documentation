@@ -124,8 +124,8 @@ export function assertNoOverlappingPaths(file: SiteSupportFile): void {
  * real product key — deleting a real key is ordinary content work and must not
  * break these tests.
  *
- * Same guard as `src/pages/[...slug].md.ts`, which hides `dd_e2e` pages from
- * the live build.
+ * Same guard as `src/pages/[...lang]/[...slug].md.ts`, which hides `dd_e2e`
+ * pages from the live build.
  */
 function loadDataset(): SiteSupportFile {
   const shared = SiteSupportFileSchema.parse(parseYaml(SITE_SUPPORT_YAML_RAW));

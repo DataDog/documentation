@@ -1,0 +1,7 @@
+.api-code-instructions__heading {
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+.api-code-instructions__code-block {
+  margin-bottom: var(--space-sm);
+}

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import {
   LOCALES,
   DEFAULT_LOCALE,
@@ -7,6 +7,8 @@ import {
   localePrefix,
   localizedHref,
   stripLocalePrefix,
+  isLocaleCode,
+  resolveUnprefixedSlug,
 } from "./locale";
 
 const NON_DEFAULT = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
@@ -165,6 +167,80 @@ describe("locale helpers", () => {
         lang: "en",
         rest: "/pt/api/latest/",
       });
+    });
+  });
+
+  describe("isLocaleCode", () => {
+    it("accepts every locale the site can have", () => {
+      for (const lang of ["en", "fr", "ja", "ko", "es"]) {
+        expect(isLocaleCode(lang)).toBe(true);
+      }
+    });
+
+    it("rejects anything that is not a locale", () => {
+      expect(isLocaleCode("pt")).toBe(false);
+      expect(isLocaleCode("dd_e2e")).toBe(false);
+      expect(isLocaleCode("")).toBe(false);
+      expect(isLocaleCode(undefined)).toBe(false);
+      expect(isLocaleCode(42)).toBe(false);
+    });
+  });
+
+  describe("resolveUnprefixedSlug", () => {
+    beforeEach(resetEnv);
+    afterEach(resetEnv);
+
+    it("returns the slug untouched when no leading segment was captured", () => {
+      expect(resolveUnprefixedSlug(undefined, "foo")).toBe("foo");
+      expect(resolveUnprefixedSlug("", "foo")).toBe("foo");
+      expect(resolveUnprefixedSlug("", "")).toBe("");
+    });
+
+    // The reason this helper exists: `[...lang]/[...slug]` is an ambiguous
+    // pattern and the optional group is greedy, so the first path segment is
+    // always captured as `lang` whenever two or more segments remain.
+    it("reassembles a first segment that is not a locale", () => {
+      expect(resolveUnprefixedSlug("dd_e2e", "components/tabs")).toBe(
+        "dd_e2e/components/tabs",
+      );
+      expect(resolveUnprefixedSlug("pt", "foo")).toBe("pt/foo");
+    });
+
+    it("coerces a non-string capture rather than dropping it", () => {
+      expect(resolveUnprefixedSlug(2024, "foo")).toBe("2024/foo");
+    });
+
+    it("returns undefined for a real locale prefix", () => {
+      expect(resolveUnprefixedSlug("fr", "dd_e2e/components/tabs")).toBe(
+        undefined,
+      );
+      expect(resolveUnprefixedSlug("ja", "foo")).toBe(undefined);
+      expect(resolveUnprefixedSlug("ko", "foo")).toBe(undefined);
+      expect(resolveUnprefixedSlug("es", "foo")).toBe(undefined);
+    });
+
+    // English lives at the root, so `/en/...` is not a second address for it.
+    it("returns undefined for an explicit `en` prefix", () => {
+      expect(resolveUnprefixedSlug("en", "foo")).toBe(undefined);
+    });
+
+    // `LOCALES` shrinks to English in a translations-skipped build, so a
+    // check built on `isLocale` would reassemble `/fr/...` into the slug
+    // `fr/...` and give dev a different URL space than a full build. Locale
+    // detection here has to be build-independent, which is why `isLocaleCode`
+    // exists alongside `isLocale`.
+    it("rejects a locale prefix in a translations-skipped build too", async () => {
+      process.env.SKIP_TRANSLATIONS = "true";
+      vi.resetModules();
+      const reloaded = await import("./locale");
+      try {
+        expect(reloaded.LOCALES).toEqual(["en"]);
+        expect(reloaded.isLocale("fr")).toBe(false);
+        expect(reloaded.isLocaleCode("fr")).toBe(true);
+        expect(reloaded.resolveUnprefixedSlug("fr", "foo")).toBe(undefined);
+      } finally {
+        vi.resetModules();
+      }
     });
   });
 });

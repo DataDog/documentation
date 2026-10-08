@@ -21,6 +21,8 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
+Use `sum` as the space aggregator (`sum by`) when querying estimated usage metrics. Many of these metrics are split into several timeseries, such as by tag or by child organization, and only `sum` adds them up to your total usage.
+
 ## Types of usage
 
 Estimated usage metrics are generally available for the following usage types:
@@ -39,8 +41,8 @@ Estimated usage metrics are generally available for the following usage types:
 | (Preview) Ingested-to-Indexed Points Ratio | `datadog.estimated_usage.metrics.points.ratio` | Comparison of total ingested points to total indexed points. Applies to organizations on [Metric Name Pricing][7]. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
-| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
-| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | Number of events matched by pipelines in bytes, including excluded logs. |
+| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.pipelines.ingested_bytes` | Number of logs matched by pipelines in bytes. |
+| Logs Pipelines Events          | `datadog.estimated_usage.logs.pipelines.ingested_events` | Number of events matched by pipelines, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |

@@ -119,7 +119,6 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -292,8 +291,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 
 [1]: /getting_started/site/
 {{< /site-region >}}
@@ -626,7 +623,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Other" %}}
 
-For most other [supported clients](#supported-clients), use these instructions for remote authentication. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
+For most other [supported clients](#supported-clients), use these instructions.
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
@@ -714,6 +711,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
 - `assistant`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
+- `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
@@ -742,7 +740,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
-- `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
@@ -766,7 +763,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
 | [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
-| [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
+| [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
@@ -888,49 +885,9 @@ For security, use a scoped API key and application key from a [service account][
 
 ### Adding OAuth clients
 
-You can allow-list your redirect URLs in [{{< ui >}}Organization Preferences{{< /ui >}}][27] under {{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}.
+To allow-list a redirect URL, open [{{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}][80] in Organization Settings, enter the URL, and select {{< ui >}}Add URL{{< /ui >}}.
 
 If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
-
-### Local binary authentication
-
-Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
-
-{{% collapse-content title="Set up Datadog MCP Server local binary" level="h4" expanded=false id="mcp-local-binary" %}}
-
-1. Install the Datadog MCP Server binary (macOS and Linux):
-   ```bash
-   curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-   ```
-   This installs the binary to `~/.local/bin/datadog_mcp_cli`.
-
-   For Windows, download the [Windows version][20].
-
-2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow and choose a [Datadog site][21].
-
-3. Configure your AI client to use the stdio transport with `datadog_mcp_cli` as the command. For example, in macOS (replace `<USERNAME>` with your OS username):
-   ```json
-   {
-     "mcpServers": {
-       "datadog": {
-         "type": "stdio",
-         "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-         "args": [],
-         "env": {}
-       }
-     }
-   }
-   ```
-
-   For other operating systems, replace the `command` path with the location of the downloaded binary:
-   - Linux: `/home/<USERNAME>/.local/bin/datadog_mcp_cli`
-   - Windows: `<USERNAME>\bin\datadog_mcp_cli.exe`
-
-   <div class="alert alert-tip">For Claude Code, you can instead run:
-   <pre><code>claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli</code></pre></div>
-
-4. Fully restart your AI client to apply the configuration and load the MCP Server.
-{{% /collapse-content %}}
 
 ## Test access to the MCP Server
 
@@ -970,14 +927,12 @@ Local authentication is recommended for Cline and when remote authentication is 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [18]: /ide_plugins/idea/
 [19]: https://claude.ai
-[20]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
-[21]: /getting_started/site/
 [22]: /account_management/rbac/permissions/#mcp
 [23]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [24]: /account_management/rbac/permissions/#monitors
 [25]: /account_management/rbac/permissions/
 [26]: https://app.datadoghq.com/organization-settings/roles
-[27]: https://app.datadoghq.com/organization-settings/preferences
+[27]: https://app.datadoghq.com/organization-settings/mcp
 [28]: https://www.warp.dev/
 [29]: /synthetics/
 [30]: /continuous_integration/
@@ -1029,3 +984,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [77]: /tracing/live_debugger/
 [78]: /account_management/governance_console/
 [79]: ]https://app.datadoghq.com/personal-settings/apps
+[80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls

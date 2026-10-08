@@ -7,7 +7,6 @@ import FooterBlurb from "../FooterBlurb.astro";
 import {
   getFooterData,
   resolveFooterUrl,
-  splitHalves,
 } from "@lib/componentUtils/footerMenus";
 // The container has no i18n manifest, so `Astro.currentLocale` is undefined and
 // Footer renders as English. Expectations are built for the same locale.
@@ -44,11 +43,11 @@ describe("Footer", () => {
     const html = decodeEntities(await container.renderToString(Footer));
 
     const footer = getFooterData(DEFAULT_LOCALE);
-    const accordionLinks = footer.accordionSections
-      .filter((s) => s.id !== "product")
-      .flatMap((s) => [...s.firstColumn, ...s.secondColumn]);
+    const sectionLinks = footer.linkSections.flatMap(
+      (section) => section.links,
+    );
 
-    for (const link of [...accordionLinks, ...footer.sub]) {
+    for (const link of [...sectionLinks, ...footer.sub]) {
       expect(html).toContain(link.label);
       expect(html).toContain(link.href);
     }
@@ -83,21 +82,60 @@ describe("Footer", () => {
     expect(html).toMatch(new RegExp(`&copy; Datadog\\s*${year}`));
   });
 
-  it('renders the Free Trial CTA as a link with data-trigger="free-trial"', async () => {
+  it("renders the Datadog logo and the mobile-app row", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
     expect(html).toMatch(
-      /<a[^>]*data-trigger="free-trial"[^>]*>[\s\S]*?Free Trial[\s\S]*?<\/a>/,
+      /<img[^>]*class="[^"]*footer__logo[^"]*"[^>]*alt="Datadog logo"/,
     );
+    expect(html).toContain("Download mobile app");
+    expect(html).toContain('aria-label="Apple Store Link"');
+    expect(html).toContain('aria-label="Google Play Store Link"');
   });
 
-  it("points the free trial link and modal at the embeddable signup_corp page", async () => {
+  it("no longer renders a free-trial CTA", async () => {
+    // Upstream dropped it from the docs footer in websites-modules v1.4.322.
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
-    expect(html).toContain("https://app.datadoghq.com/signup_corp?lang=en");
-    expect(html).not.toMatch(/app\.datadoghq\.com\/signup(?!_corp)/);
+    expect(html).not.toContain("free-trial");
+  });
+
+  it("renders the nested product categories with their inline icons", async () => {
+    const container = await createContainer();
+    const html = decodeEntities(await container.renderToString(Footer));
+
+    const { categories } = getFooterData(DEFAULT_LOCALE).product;
+    expect(categories.length).toBeGreaterThan(0);
+
+    for (const category of categories) {
+      expect(html).toContain(`footer-category-${category.identifier}`);
+      expect(html).toContain(category.label);
+    }
+
+    // Every category icon is inlined, not an icon-font glyph.
+    expect(html).not.toMatch(/<i class="icon-/);
+    // `cl()` emits the static name and the hashed one, so match the attribute
+    // start to count elements rather than class tokens.
+    const iconCount = (html.match(/class="footer__category-icon/g) ?? [])
+      .length;
+    expect(iconCount).toBe(categories.length);
+  });
+
+  it("renders the subcategory headings inside a category", async () => {
+    const container = await createContainer();
+    const html = decodeEntities(await container.renderToString(Footer));
+
+    const { categories } = getFooterData(DEFAULT_LOCALE).product;
+    const labels = categories.flatMap((category) =>
+      category.groups.map((group) => group.label).filter(Boolean),
+    );
+    expect(labels.length).toBeGreaterThan(0);
+
+    for (const label of labels) {
+      expect(html).toContain(label as string);
+    }
   });
 
   it("renders the language selector with the current language", async () => {
@@ -125,18 +163,10 @@ describe("FooterBlurb", () => {
 });
 
 describe("footerMenus loader", () => {
-  it("splits a 10-item list into halves of 5 and 5", () => {
-    const items = Array.from({ length: 10 }, (_, i) => i);
-    const { first, second } = splitHalves(items);
-    expect(first).toHaveLength(5);
-    expect(second).toHaveLength(5);
-  });
-
-  it("splits a 9-item list into halves of 5 and 4 (first half gets the extra)", () => {
-    const items = Array.from({ length: 9 }, (_, i) => i);
-    const { first, second } = splitHalves(items);
-    expect(first).toHaveLength(5);
-    expect(second).toHaveLength(4);
+  it("orders the link sections resources, blog, about", () => {
+    expect(getFooterData(DEFAULT_LOCALE).linkSections.map((s) => s.id)).toEqual(
+      ["resources", "blog", "about"],
+    );
   });
 
   it("passes absolute URLs through unchanged", () => {
