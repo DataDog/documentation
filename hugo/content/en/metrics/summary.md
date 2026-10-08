@@ -38,6 +38,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - {{< ui >}}Configuration{{< /ui >}}: Metrics with tag configurations
 - {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics enabled by percentiles/advanced query capabilities
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled 
+- {{< ui >}}Metric Category{{< /ui >}}: Differentiate between Custom Metrics and Standard Integration Metrics.
 - {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
 - {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
 - {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)

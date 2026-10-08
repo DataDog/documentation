@@ -8,19 +8,22 @@ aliases:
 - actions/private_actions/use_private_actions/
 - actions/private_actions/update_private_action_runner/
 further_reading:
-- link: "actions/private_actions/"
+- link: "/actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions"
-- link: "actions/private_actions/enroll_runner"
+- link: "/actions/private_actions/enroll_runner"
   tag: "Documentation"
   text: "Enrollment and ownership"
-- link: "actions/private_actions/execution_policies"
+- link: "/actions/private_actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
-- link: "actions/private_actions/set_up_standalone"
+- link: "/actions/private_actions/set_up_standalone"
   tag: "Documentation"
   text: "Set up a standalone private action runner"
 ---
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Datadog Agent runner is not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -273,7 +276,7 @@ To edit the allowlist for a runner in the Datadog Agent:
 
 ### Automatic deletion of inactive runners
 
-To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only (ownerless) configuration after 35 days of inactivity. This automatic cleanup does not apply to owned runners, or to the Cluster Agent runner.
+To free up unused resources, Datadog automatically deletes inactive node Agent-based private action runners that use API-key-only (ownerless) configuration. A runner is considered inactive if it has not sent a health check to Datadog for 35 days. This automatic cleanup does not apply to owned runners, or to the Cluster Agent runner.
 
 If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
 
