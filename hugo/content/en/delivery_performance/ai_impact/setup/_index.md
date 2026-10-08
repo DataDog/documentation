@@ -76,7 +76,7 @@ Each supported coding assistant has one recommended source per context, listed i
 To track other coding assistants or use a different source for a supported coding assistant, the following sources are available for all coding assistants:
 
 - [PR labels](#pr-label-detection): (Direct attribution) PRs with a designated label are marked as AI-assisted.
-- [Public API](#datadog-public-api): (Inferred from user activity) Send your own event data, and Datadog infers AI attribution from it.
+- [Public API](#datadog-public-api): (Inferred from user activity) Send your own event data through the [Datadog Public API][11], and Datadog infers AI attribution from it.
 
 ### Configure a source for a coding assistant
 
@@ -168,5 +168,5 @@ To detect automation bot-authored commits and PRs, enable automatic bot detectio
 [8]: /integrations/github-copilot/
 [9]: /ai_agents_console/setup/#option-2-opentelemetry-otlp
 [10]: /ai_agents_console/setup/#option-3-forward-data-through-the-datadog-agent
-[11]: /api/latest/
+[11]: /api/latest/dora-metrics/send-ai-tool-user-activity/
 [12]: https://app.datadoghq.com/ci/settings/dora
