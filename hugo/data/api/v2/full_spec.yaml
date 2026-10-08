@@ -140315,6 +140315,8 @@ components:
             code_analysis_read: View Code Analysis.
             code_coverage_read: View Code Coverage.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with share type 'embed'.
             dashboards_invite_share: Create, modify, and delete shared dashboards with share type 'invite'.
@@ -143485,9 +143487,9 @@ paths:
         - apiKeyAuth: []
       summary: Send AI tool user activity
       tags:
-        - AI Impact
+        - DORA Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 11
   /api/v2/annotation:
     get:
       description: Returns a flat list of annotations matching the given page, time window, and optional widget filter.
@@ -164621,7 +164623,7 @@ paths:
       summary: Mark a deployment as failed by version
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 10
       x-permission:
         operator: OR
         permissions:
@@ -165099,7 +165101,7 @@ paths:
       summary: Send an incident event (legacy)
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -249745,9 +249747,6 @@ servers:
         default: api
         description: The subdomain where the API is deployed.
 tags:
-  - description: |-
-      Send AI coding tool usage data to measure the impact of AI tools on software delivery.
-    name: AI Impact
   - description: |-
       Configure your API endpoints through the Datadog API.
     name: API Management

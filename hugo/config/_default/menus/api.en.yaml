@@ -7415,22 +7415,6 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
-    - name: AI Impact
-      url: /api/latest/ai-impact/
-      identifier: ai-impact
-      generated: true
-    - name: Send AI tool user activity
-      url: /api/latest/ai-impact/send-ai-tool-user-activity/
-      identifier: ai-impact-send-ai-tool-user-activity
-      parent: ai-impact
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateAIImpactUserActivity
-        unstable: []
-        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
@@ -12944,7 +12928,7 @@ menu:
         operationids:
           - CreateDORAIncident
         unstable: []
-        order: 10
+        order: 12
     - name: Get an incident event
       url: /api/latest/dora-metrics/get-an-incident-event/
       identifier: dora-metrics-get-an-incident-event
@@ -13040,7 +13024,7 @@ menu:
         operationids:
           - PatchDORADeploymentByVersion
         unstable: []
-        order: 11
+        order: 10
     - name: Delete a deployment event
       url: /api/latest/dora-metrics/delete-a-deployment-event/
       identifier: dora-metrics-delete-a-deployment-event
@@ -13065,6 +13049,18 @@ menu:
           - CreateDORADeployment
         unstable: []
         order: 1
+    - name: Send AI tool user activity
+      url: /api/latest/dora-metrics/send-ai-tool-user-activity/
+      identifier: dora-metrics-send-ai-tool-user-activity
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAIImpactUserActivity
+        unstable: []
+        order: 11
     - name: Dashboard Secure Embed
       url: /api/latest/dashboard-secure-embed/
       identifier: dashboard-secure-embed

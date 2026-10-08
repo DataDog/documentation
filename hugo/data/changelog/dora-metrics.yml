@@ -11,3 +11,16 @@ entries:
     operations:
       - PatchDORADeployment
     title: Rename Patch a deployment event to Mark a deployment as failed by ID
+  - change_type: added
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40555
+    operations:
+      - CreateAIImpactUserActivity
+    title: Document AI Impact user activity endpoint under DORA Metrics
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40555
+    operations:
+      - CreateDORAIncident
+      - PatchDORADeploymentByVersion
+    title: Document AI Impact user activity endpoint under DORA Metrics
