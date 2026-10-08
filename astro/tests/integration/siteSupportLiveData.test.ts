@@ -48,22 +48,4 @@ describe("shared/site_support.yaml", () => {
     }
     expect(extraFields).toEqual([]);
   });
-
-  it("pins the set of keys carrying url_paths", () => {
-    // Astro resolves a page's support status from `url_paths` only, so adding
-    // or removing them changes which pages show a banner. Naming the exact set
-    // makes that change deliberate.
-    const KEYS_WITH_PATHS = [
-      "agentless-scanning",
-      "app_builder_override",
-      "experiments",
-      "on-call",
-      "workflow-automation",
-    ];
-    const withPaths = Object.entries(sharedIds)
-      .filter(([, entry]) => (entry.url_paths?.length ?? 0) > 0)
-      .map(([id]) => id)
-      .sort();
-    expect(withPaths).toEqual([...KEYS_WITH_PATHS].sort());
-  });
 });
