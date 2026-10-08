@@ -497,7 +497,7 @@ Under {{< ui >}}Email Address{{< /ui >}}, choose:
 - {{< ui >}}Temporary{{< /ui >}}: Generate a unique address and mailbox for each execution to avoid email conflicts between test runs. Use this for sign-up flows that register a different account each run.
 - {{< ui >}}Persistent{{< /ui >}}: Select an email global variable created in Synthetic Monitoring settings. Its address stays the same across runs, so you can create an application account once and reuse it for email workflows, such as OTP login. Select the variable and click {{< ui >}}Done{{< /ui >}}.
 
-A test can use one email address variable. Persistent email requires the feature to be enabled for your organization and access to the selected global variable. For setup, permissions, and concurrent-run considerations, see [Use persistent email addresses in browser tests][17].
+A test can use one email address variable. You need access to the selected global variable to use a persistent email address. For setup, permissions, and concurrent-run considerations, see [Use persistent email addresses in browser tests][17].
 
 <div class="alert alert-warning">Tests using the same persistent address share an inbox. Broad matching criteria can cause a test to use another parallel test's email. For example, extracting another test's OTP can cause a login failure. Use temporary email addresses or different persistent addresses to isolate tests. See <a href="/synthetics/guide/persistent-email-otp/#limitations">Persistent email limitations</a>.</div>
 

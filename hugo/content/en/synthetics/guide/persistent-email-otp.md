@@ -44,7 +44,7 @@ An [MFA token variable][1] serves a different authentication method: it generate
 
 ## Create a persistent email variable
 
-Persistent email variables must be enabled for your organization. You also need [access to global variables][2] to create and select them.
+You need [access to global variables][2] to create and select persistent email variables.
 
 1. Open [Synthetic Monitoring & Continuous Testing > Settings > Global Variables][3] and click {{< ui >}}+ New Global Variable{{< /ui >}}.
 2. Under {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email address{{< /ui >}}.
@@ -117,7 +117,6 @@ To avoid interference:
 
 | Symptom | What to check |
 | --- | --- |
-| The persistent email option is unavailable. | Check that persistent email is enabled for your organization and that you have access to global variables. |
 | The variable is missing from the recorder's list. | Save it as an **Email address** global variable, check its access permissions, and refresh the list. |
 | The application says the account does not exist. | Register the generated address in your application before running the login test. Creating the Datadog variable does not create an application account. |
 | No OTP is found. | Check that the test requests a new email, sends it to the selected address, and uses a parser that matches the message body. |
