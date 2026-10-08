@@ -85,7 +85,7 @@ Learn how to access and control [Synthetic Monitoring Settings][13].
 
 Manage how AI agents and tools access your organization's Datadog data through the [Datadog MCP Server][18]:
 
-- Enable or disable [organization-wide access][19] to the MCP Server and its tools.
+- Enable or disable [organization-wide access][19] to the MCP Server and its tools, and separately, write access for tools that create or modify resources.
 - Configure [redirect URLs][20] for OAuth authentication with the MCP Server.
 
 ## Security
