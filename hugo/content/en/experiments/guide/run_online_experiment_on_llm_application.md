@@ -21,6 +21,14 @@ Online experiments for Agent Observability are in Preview. Contact your Datadog 
 
 Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each [experiment subject][13], such as a user or an autonomous workflow run, to a variant. An Agent Observability evaluation score measures the outcome for each subject.
 
+{{< skill-callout
+    title="Start an online experiment with an agent"
+    text="Copy this prompt into your AI coding agent to use the `agent-observability-online-experiment` skill for guided setup."
+    action_name="copy_agent_observability_online_experiment_prompt"
+    lang="text" >}}
+Use the skill at https://github.com/datadog-labs/agent-skills/blob/main/agent-observability/agent-observability-online-experiment/SKILL.md to start an online experiment to compare the code in my current Git branch against trunk.
+{{< /skill-callout >}}
+
 This guide covers the LLM-specific configuration for the following workflow:
 
 1. Create a Datadog feature flag.
@@ -50,11 +58,6 @@ Follow [Create your first feature flag][4] to create a Boolean flag for the appl
 
 Make the flag available in each environment where you plan to run the experiment. Do not add a targeting rule or configure a percentage rollout on the flag. When you start the experiment, Datadog adds an experiment targeting rule that controls the traffic split.
 
-<div class="alert alert-info">
-  <strong>Use an AI coding agent</strong>: Connect your agent to the Datadog MCP Server with the <code>feature-flags</code> toolset enabled. The agent can use <code>create_datadog_feature_flag</code> to create the flag. For setup instructions and supported operations, see <a href="/feature_flags/feature_flag_mcp_server/">Feature Flags MCP Server</a>.<br><br>
-  <strong>Example prompt</strong>: <code>Create a Boolean Datadog feature flag named &lt;FLAG_NAME&gt; for &lt;APPLICATION_BEHAVIOR&gt;. Use false for the control and true for the treatment. Do not add targeting rules or percentage rollouts.</code>
-</div>
-
 {{< img src="/product_analytics/experiment/guide/llm_experiment_create_feature_flag.png" alt="The Create Flag page with the use-latest-frontier-model flag name, Boolean variant type, false and true variants, and Create Flag button." style="width:90%;" >}}
 
 ## Step 2: Evaluate the flag in your application
@@ -67,11 +70,6 @@ Set the Feature Flags evaluation context `targetingKey` to a stable identifier f
 - For an autonomous workflow without a human user, generate a UUID at the start of the run and retain it for the entire run.
 
 You use this same value as the `subject_identifier` when you report the evaluation score in [Step 3](#step-3-report-an-evaluation-score). If the values do not match, Datadog cannot associate the score with the subject's experiment exposure. For more information, see [The targeting key][6].
-
-<div class="alert alert-info">
-  <strong>Use an AI coding agent</strong>: Ask the agent to implement the feature flag in your application and preserve one stable subject identifier across the flag evaluation and evaluation score. For React applications, the agent can also use <code>check_datadog_flag_implementation</code> to review the implementation.<br><br>
-  <strong>Example prompt</strong>: <code>Implement the Datadog feature flag &lt;FLAG_NAME&gt; in this application. Run the control behavior when the flag is false and the treatment behavior when it is true. Use the user ID as the targetingKey. If there is no user, generate one UUID at the start of the workflow and reuse it for the entire run.</code>
-</div>
 
 ## Step 3: Report an evaluation score
 
@@ -120,11 +118,6 @@ with LLMObs.workflow(name="my_workflow") as span:
     # Run the rest of the instrumented workflow.
 {{< /code-block >}}
 
-<div class="alert alert-info">
-  <strong>Use an AI coding agent</strong>: Ask the agent to add one of the evaluation methods above to the instrumented workflow.<br><br>
-  <strong>Example prompt</strong>: <code>Add an Agent Observability score evaluation named &lt;EVALUATION_NAME&gt; to this workflow. Use the same subject identifier that the feature flag passes as targetingKey, and include it as the subject_identifier tag on the evaluation or evaluated span. Do not use a Boolean, categorical, or JSON evaluation.</code>
-</div>
-
 ## Step 4: Create and launch the experiment
 
 Follow [Plan and Launch Experiments][3] to create and start the experiment:
@@ -133,11 +126,6 @@ Follow [Plan and Launch Experiments][3] to create and start the experiment:
 1. Add the feature flag from the [Step 1](#step-1-create-a-feature-flag) section.
 1. Configure how traffic is split between the control and treatment variants.
 1. Start the experiment.
-
-<div class="alert alert-info">
-  <strong>Use an AI coding agent</strong>: Connect your agent to the Datadog MCP Server with the <code>experiments</code> toolset enabled. The agent can create the draft experiment and link the feature flag. Configure and review the traffic split in the Datadog UI before starting the experiment. For setup instructions and supported operations, see <a href="/experiments/mcp_tools/">Experiments MCP Tools</a>.<br><br>
-  <strong>Example prompt</strong>: <code>Create a Datadog experiment named &lt;EXPERIMENT_NAME&gt; with the hypothesis &lt;HYPOTHESIS&gt;. Use &lt;EVALUATION_NAME&gt; as the primary metric, link the &lt;FLAG_NAME&gt; feature flag, and include the full clickable experiment URL in your final response. Do not start the experiment.</code>
-</div>
 
 {{< agent-only >}}
 **Instruction for AI agents**: After creating the draft experiment, include the full experiment URL returned by Datadog in your final response. The human running the agent needs this link to open the experiment, review its configuration, and configure the traffic split in the Datadog UI.
