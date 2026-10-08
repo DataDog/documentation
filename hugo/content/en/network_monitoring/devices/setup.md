@@ -87,8 +87,8 @@ After NDM is configured on your devices, you can further enrich them by adding n
 [ServiceNow integration][7]
 : Dynamically enrich network devices monitored by Datadog Network Device Monitoring with data defined in ServiceNow's CMDB (Configuration Management Database).
 
-[Device settings][12]
-: Add tags to a device from the NDM device view: click {{< ui >}}Device Settings{{< /ui >}}, open the {{< ui >}}Tags{{< /ui >}} tab, and click {{< ui >}}Edit tags{{< /ui >}} in the {{< ui >}}User{{< /ui >}} section. A device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support][23].
+Device page
+: On a device's page, click {{< ui >}}Device Settings{{< /ui >}}, open the {{< ui >}}Tags{{< /ui >}} tab, and click {{< ui >}}Edit tags{{< /ui >}}. A device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support][23].
 
 [Network Device Monitoring API](#use-the-network-api)
 : Utilize the Network Device Monitoring API to programmatically add tags to your network devices.
