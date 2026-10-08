@@ -6,7 +6,8 @@
  */
 import styles from "./Footer.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
-import { resolveFooterUrl } from "@lib/componentUtils/footerMenus";
+import { HUGO_ORIGIN } from "@config/origins";
+import { localePrefix, resolveLocale } from "@lib/i18n/locale";
 
 const cl = classListFactory(styles);
 
@@ -15,7 +16,8 @@ const heading = "Can't find something?";
 const desc =
   "Our friendly, knowledgeable solutions engineers are here to help!";
 const ctaLabel = "Contact Us";
-const ctaHref = resolveFooterUrl("help/");
+// The help page is a Hugo docs page, not a corp-site page.
+const ctaHref = `${HUGO_ORIGIN}${localePrefix(resolveLocale(Astro.currentLocale))}/help/`;
 ---
 
 <div class={cl("footer__blurb-row")}>

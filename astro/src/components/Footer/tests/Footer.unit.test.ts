@@ -11,6 +11,7 @@ import {
 // The container has no i18n manifest, so `Astro.currentLocale` is undefined and
 // Footer renders as English. Expectations are built for the same locale.
 import { DEFAULT_LOCALE } from "@lib/i18n/locale";
+import { HUGO_ORIGIN } from "@config/origins";
 
 function decodeEntities(s: string): string {
   return s
@@ -149,7 +150,7 @@ describe("Footer", () => {
 });
 
 describe("FooterBlurb", () => {
-  it("renders the docs-only heading and Contact Us CTA pointing at /help/", async () => {
+  it("renders the docs-only heading and Contact Us CTA pointing at the docs /help/ page", async () => {
     const container = await createContainer();
     const html = decodeEntities(await container.renderToString(FooterBlurb));
 
@@ -158,7 +159,8 @@ describe("FooterBlurb", () => {
       "Our friendly, knowledgeable solutions engineers are here to help!",
     );
     expect(html).toContain("Contact Us");
-    expect(html).toContain("https://www.datadoghq.com/help/");
+    // The help page lives on the Hugo docs site; www.datadoghq.com/help/ is a 404.
+    expect(html).toContain(`href="${HUGO_ORIGIN}/help/"`);
   });
 });
 
