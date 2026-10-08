@@ -90,7 +90,7 @@ After NDM is configured on your devices, you can further enrich them by adding n
 [Network Device Monitoring API](#use-the-network-api)
 : Utilize the Network Device Monitoring API to programmatically add tags to your network devices.
 
-**Note**: A device supports up to 20 user tags by default, and an interface up to 10. To request a higher per-device limit for your organization, [contact Support][23].
+**Note**: A device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support][23].
 
 ### Customize metrics and tags
 
