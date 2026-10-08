@@ -17,8 +17,8 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { buildPlaintextPage } from "@lib/plaintext/preamble";
 import {
+  buildPlaintextPage,
   heading,
   inline,
   link,
@@ -73,8 +73,8 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       title: rootEntry.data.title,
       description: rootEntry.data.description ?? "",
       breadcrumbs: apiBreadcrumbs(lang),
-      site,
     },
+    site,
   );
 
   return new Response(body, {

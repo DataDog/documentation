@@ -16,9 +16,8 @@ import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
-import { heading } from "@lib/plaintext/helpers";
+import { buildPlaintextPage, heading } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { buildPlaintextPage } from "@lib/plaintext/preamble";
 
 function apiOperationBody(
   operation: ApiOperationView,
@@ -78,8 +77,8 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       title: operation.summary,
       description: operationMetaDescription(operation),
       breadcrumbs: apiBreadcrumbs(lang, operation.summary),
-      site,
     },
+    site,
   );
 
   return new Response(body, {

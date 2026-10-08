@@ -4,11 +4,10 @@ export const prerender = true;
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection, getEntry } from "astro:content";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
-import { parse } from "@lib/plaintext/helpers";
+import { buildPlaintextPage, parse } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
-import { buildPlaintextPage } from "@lib/plaintext/preamble";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection("en", (entry) => isApiSubPage(entry.id));
@@ -51,8 +50,8 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       title: entry.data.title,
       description: entry.data.description ?? "",
       breadcrumbs: apiBreadcrumbs(lang, entry.data.title),
-      site,
     },
+    site,
   );
 
   return new Response(body, {

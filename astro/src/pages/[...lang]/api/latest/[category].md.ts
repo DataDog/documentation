@@ -20,9 +20,12 @@ import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { alertNode } from "@components/Alert/plaintext/Alert";
 import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
-import { heading, nodesFromMd } from "@lib/plaintext/helpers";
+import {
+  buildPlaintextPage,
+  heading,
+  nodesFromMd,
+} from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { buildPlaintextPage } from "@lib/plaintext/preamble";
 
 function apiCategoryBody(
   category: ApiCategory,
@@ -97,8 +100,8 @@ export const GET: APIRoute = async ({ params, url, site }) => {
       title: category.name,
       description: categoryMetaDescription(category),
       breadcrumbs: apiBreadcrumbs(lang, category.name),
-      site,
     },
+    site,
   );
 
   return new Response(body, {

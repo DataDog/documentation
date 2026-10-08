@@ -10,6 +10,9 @@
 
 import Markdoc from "@markdoc/markdoc";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import { stringify as stringifyYaml } from "yaml";
+import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
+import { absoluteUrl } from "@lib/site/siteUrl";
 
 // @markdoc/markdoc ships a CJS build whose named exports don't round-trip
 // cleanly under Node's ESM loader during Astro's SSG step. Pulling from the
@@ -133,4 +136,58 @@ export function buildMarkdocStr(
   frontmatter?: string,
 ): string {
   return format(documentNode(children, frontmatter)).trim() + "\n";
+}
+
+export interface PageFrontmatter {
+  title: string;
+  /** Left out of the frontmatter when empty. */
+  description: string;
+  /** The page's own breadcrumb trail, current page included. */
+  breadcrumbs: BreadcrumbItem[];
+}
+
+/**
+ * Serialize a whole plaintext (`.md`) page: YAML frontmatter, a banner
+ * pointing at the top-level `llms.txt`, then `children`. `site` is the
+ * route's `site`, so the banner link carries any preview base path.
+ */
+export function buildPlaintextPage(
+  children: MarkdocNode[],
+  frontmatter: PageFrontmatter,
+  site: string | URL | undefined,
+): string {
+  return buildMarkdocStr(
+    [llmsTxtBannerNode(site), ...children],
+    frontmatterYaml(frontmatter),
+  );
+}
+
+function frontmatterYaml({
+  title,
+  description,
+  breadcrumbs,
+}: PageFrontmatter): string {
+  const fields = {
+    title,
+    ...(description ? { description } : {}),
+    breadcrumbs: breadcrumbs.map((crumb) => crumb.label).join(" > "),
+  };
+  return stringifyYaml(fields, { lineWidth: 0 }).trimEnd();
+}
+
+function llmsTxtBannerNode(site: string | URL | undefined): MarkdocNode {
+  if (!site) {
+    throw new Error(
+      "astro.config.mjs `site` must be set for the llms.txt banner to link canonically.",
+    );
+  }
+  return new Ast.Node("blockquote", {}, [
+    paragraph([
+      inline([
+        plaintext("For the complete documentation index, see "),
+        link(absoluteUrl("/llms.txt", site), "llms.txt"),
+        plaintext("."),
+      ]),
+    ]),
+  ]);
 }
