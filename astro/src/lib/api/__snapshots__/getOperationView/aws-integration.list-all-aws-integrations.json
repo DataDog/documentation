@@ -85,14 +85,6 @@
                               "deprecated": false,
                               "readOnly": false,
                               "description": "AWS Access Key ID."
-                            },
-                            {
-                              "name": "secret_access_key",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "AWS Secret Access Key."
                             }
                           ]
                         },
@@ -482,7 +474,7 @@
           "examples": [
             {
               "name": "Example",
-              "value": "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"account_tags\": [\n          \"env:prod\"\n        ],\n        \"auth_config\": {\n          \"access_key_id\": \"AKIAIOSFODNN7EXAMPLE\",\n          \"secret_access_key\": \"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\"\n        },\n        \"aws_account_id\": \"123456789012\",\n        \"aws_partition\": \"aws\",\n        \"aws_regions\": {\n          \"include_all\": true\n        },\n        \"logs_config\": {\n          \"lambda_forwarder\": {\n            \"lambdas\": [\n              \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n            ],\n            \"log_source_config\": {\n              \"tag_filters\": [\n                {\n                  \"source\": \"s3\",\n                  \"tags\": [\n                    \"env:prod\"\n                  ]\n                }\n              ]\n            },\n            \"sources\": [\n              \"s3\"\n            ]\n          }\n        },\n        \"metrics_config\": {\n          \"automute_enabled\": true,\n          \"collect_cloudwatch_alarms\": false,\n          \"collect_custom_metrics\": false,\n          \"enabled\": true,\n          \"namespace_filters\": {\n            \"exclude_only\": [\n              \"AWS/SQS\",\n              \"AWS/ElasticMapReduce\",\n              \"AWS/Usage\"\n            ]\n          },\n          \"tag_filters\": [\n            {\n              \"namespace\": \"AWS/EC2\",\n              \"tags\": [\n                \"datadog:true\"\n              ]\n            }\n          ]\n        },\n        \"resources_config\": {\n          \"cloud_security_posture_management_collection\": false,\n          \"extended_collection\": true\n        },\n        \"traces_config\": {\n          \"xray_services\": {\n            \"include_all\": false\n          }\n        }\n      },\n      \"id\": \"00000000-abcd-0001-0000-000000000000\",\n      \"type\": \"account\"\n    }\n  ]\n}"
+              "value": "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"account_tags\": [\n          \"env:prod\"\n        ],\n        \"auth_config\": {\n          \"access_key_id\": \"AKIAIOSFODNN7EXAMPLE\"\n        },\n        \"aws_account_id\": \"123456789012\",\n        \"aws_partition\": \"aws\",\n        \"aws_regions\": {\n          \"include_all\": true\n        },\n        \"logs_config\": {\n          \"lambda_forwarder\": {\n            \"lambdas\": [\n              \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n            ],\n            \"log_source_config\": {\n              \"tag_filters\": [\n                {\n                  \"source\": \"s3\",\n                  \"tags\": [\n                    \"env:prod\"\n                  ]\n                }\n              ]\n            },\n            \"sources\": [\n              \"s3\"\n            ]\n          }\n        },\n        \"metrics_config\": {\n          \"automute_enabled\": true,\n          \"collect_cloudwatch_alarms\": false,\n          \"collect_custom_metrics\": false,\n          \"enabled\": true,\n          \"namespace_filters\": {\n            \"exclude_only\": [\n              \"AWS/SQS\",\n              \"AWS/ElasticMapReduce\",\n              \"AWS/Usage\"\n            ]\n          },\n          \"tag_filters\": [\n            {\n              \"namespace\": \"AWS/EC2\",\n              \"tags\": [\n                \"datadog:true\"\n              ]\n            }\n          ]\n        },\n        \"resources_config\": {\n          \"cloud_security_posture_management_collection\": false,\n          \"extended_collection\": true\n        },\n        \"traces_config\": {\n          \"xray_services\": {\n            \"include_all\": false\n          }\n        }\n      },\n      \"id\": \"00000000-abcd-0001-0000-000000000000\",\n      \"type\": \"account\"\n    }\n  ]\n}"
             }
           ]
         },
