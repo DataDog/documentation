@@ -77,6 +77,10 @@ Follow the instructions on this page to set up the {{< ui >}}Azure integration{{
 <div class="alert alert-info">Secretless Auth is not supported on the US1-FED and US2-FED sites. Use the <strong>Client Secret</strong> method to authenticate.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">Secretless Auth does not support app registrations in Azure sovereign clouds, such as Azure Government and Azure operated by 21Vianet (Azure China*). For tenants in these clouds, use the <strong>Client Secret</strong> method to authenticate.</div>
+
+\*{{% mainland-china-disclaimer %}}
+
 The Azure integration supports two authentication methods:
 
 | Method | How it works | What you manage |
@@ -245,7 +249,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% collapse-content title="Migrate an existing app registration to Secretless Auth" level="h4" expanded=false id="secretless-migration-setup" %}}
 
-If you already connected an app registration using a client secret, you can migrate it to Secretless Auth in place. You don't need to recreate the app registration.
+If you already connected an app registration using a client secret, you can migrate it to Secretless Auth in place. You don't need to recreate the app registration. Secretless Auth does not support app registrations in Azure sovereign clouds. See [Authentication methods](#authentication-methods).
 
 1. In the [Azure integration tile][20], on the {{< ui >}}Configuration{{< /ui >}} tab, select the app registration you want to migrate.
 2. On the {{< ui >}}General{{< /ui >}} tab, under {{< ui >}}Authentication{{< /ui >}}, click {{< ui >}}Set Up Secretless Auth{{< /ui >}}.
