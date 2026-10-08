@@ -59,7 +59,7 @@ Notifications for Code Security findings on non-default branches are in Preview 
    - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
 1. Under **Destination**, select a routing mode:
     - **Manual routing**: Click {{< ui >}}Add Recipient{{< /ui >}} and specify the recipients you want to notify. You can notify individuals or teams, create Jira issues, and more. See [Notification channels][2] for more information.
-    - **Dynamic routing** (Preview): Automatically route notifications to the responsible team based on the `team` tag on findings. Specify a **Fallback Channel** for findings that cannot be dynamically routed. See [Dynamic routing](#dynamic-routing) for requirements.<br />**Note**: Dynamic routing is only available when **Trigger immediately for each individual issue meeting the criteria** is selected in step 6.
+    - **Dynamic routing**: Automatically route notifications to the responsible team based on the `team` tag on findings. Specify a **Fallback Channel** for findings that cannot be dynamically routed. See [Dynamic routing](#dynamic-routing) for requirements.<br />**Note**: Dynamic routing is only available when **Trigger immediately for each individual issue meeting the criteria** is selected in step 6.
 1. To send test notifications for this rule, click {{< ui >}}Test Notifications{{< /ui >}}.
   1. In the modal, select the security products you want to test.
   1. Click {{< ui >}}Run Test{{< /ui >}}.
@@ -84,10 +84,6 @@ To clone a notification rule, click the vertical three-dot menu on the notificat
 To delete a notification rule, click the vertical three-dot menu on the notification rule card and select {{< ui >}}Delete{{< /ui >}}.
 
 ## Dynamic routing
-
-{{< callout url="https://www.datadoghq.com/product-preview/dynamic-routing-for-security-notifications/" >}}
-Dynamic routing for notification rules is in Preview and is only available for non-aggregated finding notifications.
-{{< /callout >}}
 
 Dynamic routing automatically delivers finding notifications to the team responsible for remediation, based on the `team` tag attached to the finding. This removes the need to manually configure recipients for each rule and helps avoid catch-all notification channels.
 
