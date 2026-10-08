@@ -153,7 +153,7 @@ After you complete setup, Datadog collects the following:
 - `dynamo.component.*` metrics from worker pods
 - `vllm.*` metrics from vLLM workers
 
-**No metrics?** Send inference traffic to your deployment. Dynamo and vLLM create some metrics only after the first matching request.
+If no metrics appear, send inference traffic to your deployment. Dynamo and vLLM emit some metrics only after the first matching request.
 
 ### 5. Enable GPU tracing (optional)
 
