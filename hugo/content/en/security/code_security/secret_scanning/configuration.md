@@ -56,15 +56,15 @@ Rules are configured in Datadog as described in the [Configuring rules](#configu
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][4].
 
-The configuration must begin with `schema-version: v1.5`, followed by a `secrets` key containing a `global-config` object. The `global-config` object controls repository-wide settings:
+The configuration must begin with a `schema-version` key, followed by a `secrets` key containing a `global-config` object, which controls repository-wide settings. The `secrets` key was introduced in `schema-version: v1.5`. Each field has its own minimum `schema-version`, so use the highest version required by the fields you configure:
 
-| **Property** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None |
-| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None |
-| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` |
-| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` |
-| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `10240` |
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None | `v1.5` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None | `v1.5` |
+| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` | `v1.5` |
+| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` | `v1.5` |
+| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `10240` | `v1.5` |
 
 ### Example configuration
 
