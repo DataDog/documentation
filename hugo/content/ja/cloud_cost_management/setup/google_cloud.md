@@ -65,6 +65,22 @@ _新しく作成された BigQuery 請求エクスポートデータセットに
 
   **注:** BigQuery データ転送 API は、サービスアカウントを含む Google プロジェクトで有効にする必要があります。
 
+### (省略可)コミット利用割引メタデータのエクスポートを有効にします{#optional-enable-committed-use-discounts-metadata-export}
+
+[コミット利用割引（CUD）メタデータのエクスポート][20]を有効にすると、[コミットメントインベントリ][22]で[利用ベースのコミット利用割引][21]の開始日と終了日、コミット金額、その他のプロパティを確認できます。このエクスポートには、期限切れのコミットメントを含め、請求先アカウントにリンクされたプロジェクトで購入された CUD が含まれます。
+
+CUD メタデータのエクスポートを有効にするには:
+
+1. Google Cloud コンソールで、**[お支払い] > [お支払いのエクスポート][1]** に移動します。
+2. [コミット利用割引のエクスポート][2]を有効にします。プロジェクトを選択し、新しいリンクされたデータセット名を入力します。Google Cloud によってリンクされたデータセットが作成されます。
+3. 詳細な使用コストのエクスポートデータセットと一致する {{< ui >}}Location Type{{< /ui >}} およびリージョンまたはマルチリージョンを選択します。データセットを作成した後に場所を変更することはできません。
+4. [{{< ui >}}Save{{< /ui >}}] (保存) をクリックします。
+5. エクスポート {{< ui >}}Project ID{{< /ui >}} と {{< ui >}}Linked Dataset Name{{< /ui >}} を記録します。[Cloud Cost を構成](#configure-cloud-cost)する際に、これらを {{< ui >}}CUD Metadata Project ID{{< /ui >}} および {{< ui >}}CUD Metadata Dataset ID{{< /ui >}} として入力します。
+
+{{< img src="cloud_cost/commitments/cud_metadata_export.png" alt="プロジェクト、リンクされたデータセット、場所タイプ、マルチリージョンの各フィールドが強調表示された Google Cloud CUD エクスポート構成。" >}}
+
+Datadog に必要な権限を付与するための設定方法に一致するタブを選択します。
+
 {{< tabs >}}
 
 {{% tab "Terraform" %}}
@@ -97,43 +113,58 @@ CCM Terraform セットアップ UI で、**Apply Terraform Configuration** ス�
 
 {{% tab "手動" %}}
 
-{{< img src="cloud_cost/setup/gcp_manual_setup.png" alt="手動モードの Cloud Cost Management セットアップフォーム" style="width:100%" >}}
+{{< img src="cloud_cost/setup/gcp_manual_setup_cud_metadata.png" alt="手動モードの Cloud Cost Management セットアップフォーム" style="width:100%" >}}
 
 #### エクスポートプロジェクトアクセスを構成する {#configure-export-project-access}
 [エクスポートデータセットプロジェクトリソースにサービスアカウントをプリンシパルとして追加する][7]:
 1. Google Cloud コンソールの IAM ページに移動し、エクスポートデータセットプロジェクトを選択します。
 2. サービスアカウントをプリンシパルとして選択します。
-3. ドロップダウンリストから次の権限を持つロールを選択します。
-  * `bigquery.jobs.create`
-  * `bigquery.transfers.get`
-  * `bigquery.transfers.update`
+3. 以下の権限をすべて含むロールを 1 つ以上付与します。
+    * `bigquery.jobs.create`
+    * `bigquery.transfers.get`
+    * `bigquery.transfers.update`
 
   **注:** これはカスタムロールである可能性があります。または、既存の Google Cloud ロール `roles/bigquery.admin` を使用できます。
 
 #### エクスポート BigQuery データセットアクセスを構成する {#configure-export-bigquery-dataset-access}
 [エクスポート BigQuery データセットリソースにサービスアカウントをプリンシパルとして追加する][8]:
-1. BigQuery ページのエクスプローラーペインで、プロジェクトを展開してエクスポート BigQuery データセットを選択します。
+1. BigQuery ページのエクスプローラー ペインで、プロジェクトを展開してエクスポート BigQuery データセットを選択します。
 2. {{< ui >}}Sharing{{< /ui >}} > {{< ui >}}Permissions{{< /ui >}} の順にクリックし、その後 {{< ui >}}add principal{{< /ui >}} をクリックします。
 3. 新しいプリンシパルフィールドにサービスアカウントを入力します。
-4. ロールリストの選択を使用して、次の権限を持つロールを割り当てます。
-  * `bigquery.datasets.get`
-  * `bigquery.tables.create`
-  * `bigquery.tables.delete`
-  * `bigquery.tables.export`
-  * `bigquery.tables.get`
-  * `bigquery.tables.getData`
-  * `bigquery.tables.list`
-  * `bigquery.tables.update`
-  * `bigquery.tables.updateData`
+4. 以下の権限をすべて含むロールを 1 つ以上付与します。
+    * `bigquery.datasets.get`
+    * `bigquery.tables.create`
+    * `bigquery.tables.delete`
+    * `bigquery.tables.export`
+    * `bigquery.tables.get`
+    * `bigquery.tables.getData`
+    * `bigquery.tables.list`
+    * `bigquery.tables.update`
+    * `bigquery.tables.updateData`
 
   **注:** これはカスタムロールである可能性があります。または、既存の Google Cloud ロール `roles/bigquery.dataEditor` を使用できます。
+
+#### (省略可)CUD メタデータプロジェクトへのアクセスを構成します{#optional-configure-cud-metadata-project-access}
+[CUD メタデータプロジェクトリソースにサービスアカウントをプリンシパルとして追加する][7]:
+1. Google Cloud コンソールの IAM ページに移動し、CUD メタデータプロジェクトを選択します。
+2. サービスアカウントをプリンシパルとして選択します。
+3. 以下の権限をすべて含むロールを 1 つ以上付与します。
+    * `bigquery.datasets.get`
+    * `bigquery.readsessions.create`
+    * `bigquery.readsessions.getData`
+    * `bigquery.readsessions.update`
+    * `bigquery.tables.get`
+    * `bigquery.tables.getData`
+    * `bigquery.tables.list`
+
+  **注:** これはカスタムロールである可能性があります。または、既存の Google Cloud ロール `roles/bigquery.dataViewer` および `roles/bigquery.readSessionUser` を使用できます。
 
 #### バケットアクセスを構成する {#configure-bucket-access}
 [GCS バケットリソースにサービスアカウントをプリンシパルとして追加する][6]:
 1. Google Cloud コンソールの Cloud Storage Buckets ページに移動し、バケットを選択します。
 2. 権限タブを選択し、{{< ui >}}grant access{{< /ui >}} ボタンをクリックします。
 3. 新しいプリンシパルフィールドにサービスアカウントを入力します。
-4. 次の権限を持つロールを割り当てます。
+4. 以下の権限をすべて含むロールを 1 つ以上付与します。
    * `storage.buckets.get`
    * `storage.objects.create`
    * `storage.objects.delete`
@@ -231,7 +262,7 @@ Datadog は、複数のソースからのタグで Google Cloud コストデー�
 | BigQuery           | `project_id`, `dataset_id`    |
 | Kubernetes Engine  | `cluster_name`                |
 
-### コンテナ割り当て {#container-allocation}
+### コンテナ割り当て{#container-allocation}
 **コンテナ割り当て**メトリクスには、Google Cloud Platform メトリクスと同じコストがすべて含まれていますが、コンテナワークロードのための追加の内訳とインサイトも含まれています。詳細は[コンテナコスト割り当て][14]を参照してください。
 
 ## 参考資料 {#further-reading}
@@ -253,3 +284,6 @@ Datadog は、複数のソースからのタグで Google Cloud コストデー�
 [17]: /ja/cloud_cost_management/tags
 [18]: /ja/api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config
+[20]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export
+[21]: https://cloud.google.com/docs/cuds-spend-based
+[22]: /ja/cloud_cost_management/planning/commitment_programs/#commitments-inventory

@@ -543,7 +543,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a Bits AI investigation from a monitor alert or a general investigation.\nThe `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.",
+    "description": "Trigger a Bits AI investigation from a monitor alert or a general investigation.\nThis endpoint requires the `bits_investigations_write` permission. When the trigger type is\n`monitor_alert_trigger`, the `monitors_read` permission is also required.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
@@ -7057,7 +7057,7 @@
     "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
     "summary": "Get SPA recommendations v2",
     "request_description": "",
-    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a precomputed shard."
+    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",

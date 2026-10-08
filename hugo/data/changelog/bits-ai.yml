@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40556
+    operations:
+      - GetInvestigation
+      - ListInvestigations
+      - TriggerInvestigation
+    title: Mark Bits Investigation endpoints as stable
