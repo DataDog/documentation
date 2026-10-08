@@ -130,7 +130,7 @@ In most cases, Remote Configuration is enabled by default for your organization.
 {{< site-region region="gov,gov2" >}}
 **Note**: On US1-FED and US2-FED, Remote Configuration is not enabled by default.
 {{< /site-region >}}
-If you need to enable it:
+To enable Remote Configuration:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your {{< ui >}}Organization Settings{{< /ui >}} page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 1. Follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
