@@ -133,8 +133,6 @@ Cloud integrations such as AWS and Google Cloud collect data through your cloud 
 
 Configure each supported integration, including its settings and credentials, in both your primary and secondary organizations before an incident. During normal operation, Datadog collects data only through the primary organization's integrations.
 
-<!-- TODO: list of supported ints? -->
-
 <div class="alert alert-danger">Failing over cloud integrations to your secondary organization stops all cloud integration data collection in your primary organization for as long as the integrations remain failed over. Only fail over cloud integrations as part of a real failover.</div>
 
 {{% /collapse-content %}}
@@ -200,7 +198,7 @@ After completing and testing your DNS failover setup, you can fail over during a
 
 When the primary region is available and you're ready to return, restore your DNS record's original value. Confirm that new telemetry resumes in your primary organization.
 
-**Cloud integrations (if applicable):** <TODO: how to return to collecting in primary org>. Datadog resumes collection in the primary organization and stops collection in the secondary organization.
+If you failed over cloud integrations, return to {{< ui >}}Disaster Recovery{{< /ui >}} in your secondary organization and use the same button to switch integration data collection back to the primary organization. Datadog resumes collection in the primary organization and stops collection in the secondary organization. Confirm that new integration data appears in your primary organization.
 
 ## Further reading
 
