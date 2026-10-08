@@ -15,6 +15,9 @@ further_reading:
 - link: '/real_user_monitoring/'
   tag: Documentation
   text: Real User Monitoring
+- link: "https://www.datadoghq.com/blog/rum-remote-configuration/"
+  tag: "Blog"
+  text: "Configure RUM SDKs remotely from Datadog"
 ---
 
 ## Overview

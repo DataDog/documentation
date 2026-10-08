@@ -32,6 +32,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/from-traces-to-experiments-a-loop-for-improving-ai-agents/"
     tag: "Blog"
     text: "From traces to experiments: A loop for improving AI agents"
+  - link: "https://www.datadoghq.com/blog/jev-evals-agent-observability/"
+    tag: "Blog"
+    text: "Using TypeSafe’s Jev for evals in Datadog Agent Observability"
 ---
 
 {{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
