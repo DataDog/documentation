@@ -79,35 +79,31 @@ You can send standard OpenTelemetry data to Datadog without re-instrumenting you
 
 <!-- TODO: Update this section and its diagrams after the recommended setups and component names are finalized. -->
 
-Each option lists the steps to follow, in order.
+Which describes your pipeline? Each option lists the steps to follow, in order.
 
-<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features each setup supports.</div>
+You can also mix components, for example the Datadog SDK with the upstream OpenTelemetry Collector. To see which Datadog features each setup supports, see [Feature Compatibility][6].
 
-### Option 1: DDOT Collector (Recommended)
+### You want Datadog to support your pipeline (Recommended)
 
 {{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
-
-**Best for**: Teams that want Datadog to support the Collector in their pipeline.
 
 1. Instrument your applications with the [OpenTelemetry SDK][7] or the [Datadog SDK][8].
 1. Install the [DDOT Collector][9]. Running the DDOT Collector in the Datadog Agent also gives you Agent features, such as Fleet Automation, Live Processes, Cloud Network Monitoring, Universal Service Monitoring, and {{< translate key="integration_count" >}}+ Datadog integrations.
 1. Confirm that your services appear in Datadog APM. If they don't, see [Troubleshooting][10].
 
-### Option 2: Upstream OpenTelemetry Collector
+### You want no Datadog software in your pipeline
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to a host running the OpenTelemetry Collector, which forwards data to Datadog over OTLP." style="width:100%;" >}}
-
-**Best for**: Teams that want a pipeline built only from upstream OpenTelemetry components.
 
 1. Instrument your applications with the [OpenTelemetry SDK][7].
 1. Configure the [OpenTelemetry Collector][11] with the recommended OTLP HTTP exporter and `span_metrics` connector.
 1. Confirm that your services appear in Datadog APM. If they don't, see [Troubleshooting][10].
 
-### Option 3: Direct OTLP ingest
+### Your platform already sends OTLP, or you can't run a Collector
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
 
-**Best for**: Platforms that already send OTLP, serverless functions, managed platforms, and other environments where you can't run a Collector.
+This option covers platforms with built-in OTLP export, serverless functions, managed platforms, and other environments where you can't run a Collector.
 
 1. Instrument your applications with the [OpenTelemetry SDK][7], or use your platform's built-in OTLP export.
 1. Send your data to the [Datadog OTLP intake endpoints][12].

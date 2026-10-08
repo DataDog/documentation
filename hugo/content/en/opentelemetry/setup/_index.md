@@ -16,13 +16,13 @@ further_reading:
 
 ---
 
-This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog, grouped by the kind of pipeline you want. Each group lists a recommended option first.
+This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog, grouped by the kind of pipeline you want. Each group lists a recommended option first. You can also mix components, for example the Datadog SDK with the upstream OpenTelemetry Collector.
 
 <!-- TODO: Update the options and labels on this page after the recommended setups and component names are finalized. -->
 
 <div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features each setup supports.</div>
 
-## Use Datadog-supported components
+## You want Datadog to support your pipeline
 
 ### DDOT Collector (Recommended)
 
@@ -58,7 +58,7 @@ Use this option if you run the Datadog Agent and want it to receive OTLP data fr
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Use upstream OpenTelemetry components
+## You want no Datadog software in your pipeline
 
 ### OpenTelemetry Collector (Recommended)
 
@@ -82,7 +82,7 @@ Use this option if your Collector configuration already uses the Datadog Exporte
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Send data without a Collector
+## Your platform already sends OTLP, or you can't run a Collector
 
 ### Direct OTLP Ingest (Recommended)
 
