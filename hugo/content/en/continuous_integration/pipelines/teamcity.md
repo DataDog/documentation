@@ -76,9 +76,10 @@ Alternatively, restart the TeamCity server.
 When the plugin is enabled (`datadog.ci.enabled` is set to `true`), it automatically sends logs for each build
 reported as a job in a completed build chain. The logs appear in the {{< ui >}}Logs{{< /ui >}} tab for the job.
 
-To disable job log collection for a project, add the `datadog.ci.logs.disabled` project configuration parameter
-with any value (for example, `true`). Setting it to `false` also disables collection; remove the parameter where
-it is defined to re-enable it. Add it to the Root project to disable job log collection for all subprojects.
+To disable job log collection for a project, set the `datadog.ci.logs.disabled` project configuration parameter
+to `true`. Set it to `false` or remove it where it is defined to re-enable collection. An empty or unrecognized
+value also disables collection. Set the parameter on the Root project to disable job log collection for all
+subprojects.
 
 The plugin sends job logs after the final composite build finishes and before sending each completed job event.
 When available, it includes TeamCity log severity and the innermost log block name in the `status` and
