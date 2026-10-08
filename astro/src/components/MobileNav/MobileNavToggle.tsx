@@ -6,6 +6,7 @@ import {
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
+import { desktopMediaQuery } from "@lib/cssUtils/breakpoints";
 
 const cl = classListFactory(styles);
 
@@ -61,8 +62,18 @@ export default function MobileNavToggle({ labels, externalContext }: Props) {
 
     const close = () => setOpenState(false);
     backdropRef.current.addEventListener("click", close);
+
+    // At desktop width the panel is hidden, so an open nav would leave the
+    // backdrop graying out the page and the scroll lock in place.
+    const desktopQuery = window.matchMedia(desktopMediaQuery());
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) close();
+    };
+    desktopQuery.addEventListener("change", closeOnDesktop);
+
     return () => {
       backdropRef.current?.removeEventListener("click", close);
+      desktopQuery.removeEventListener("change", closeOnDesktop);
       document.documentElement.style.overflow = "";
     };
   }, []);
