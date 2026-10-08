@@ -7411,6 +7411,22 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
+    - name: AI Impact
+      url: /api/latest/ai-impact/
+      identifier: ai-impact
+      generated: true
+    - name: Send AI tool user activity
+      url: /api/latest/ai-impact/send-ai-tool-user-activity/
+      identifier: ai-impact-send-ai-tool-user-activity
+      parent: ai-impact
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAIImpactUserActivity
+        unstable: []
+        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
