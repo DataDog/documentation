@@ -28,7 +28,7 @@ With the Capacity Planning page, you can answer questions such as:
 - **What is the current state of a workload?** See whether each workload is admitted, pending, or evicted, and how many GPUs it uses.
 - **Why is a workload delayed or evicted?** Correlate pending and preempted workloads with quota and contention in their queue.
 
-{{< img src="gpu_monitoring/capacity-planning-page.png" alt="Capacity Planning page in GPU Monitoring showing GPU quota, idle allocated GPU, preemption, and fleet coverage graphs above a list of workloads." style="width:100%;" >}}
+{{< img src="gpu_monitoring/capacity-planning-page-2.png" alt="Capacity Planning page in GPU Monitoring showing GPU quota, idle allocated GPU, preemption, fleet coverage, and saturation graphs above a list of workloads." style="width:100%;" >}}
 
 ## Prerequisites
 
