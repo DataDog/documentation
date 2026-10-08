@@ -129,7 +129,11 @@ Managed sync replicates user accounts from your primary organization to your sec
 
 {{% collapse-content title="2\. Configure cloud integrations" level="h4" id="set-up-cloud-integrations" %}}
 
-Configure your cloud integrations (AWS, Azure, and GCP) in both your primary and secondary organizations. These integrations run in only one organization at a time: normally in your primary organization, and in your secondary organization during failover.
+Cloud integrations such as AWS and Google Cloud collect data through your cloud provider's APIs. Their failover is separate from DNS failover.
+
+Configure each supported integration, including its settings and credentials, in both your primary and secondary organizations before an incident. During normal operation, Datadog collects data only through the primary organization's integrations.
+
+<!-- TODO: list of supported ints? -->
 
 <div class="alert alert-danger">Failing over cloud integrations to your secondary organization stops all cloud integration data collection in your primary organization for as long as the integrations remain failed over. Only fail over cloud integrations as part of a real failover.</div>
 
@@ -191,10 +195,12 @@ Datadog recommends running this drill at least annually and after any material c
 After completing and testing your DNS failover setup, you can fail over during an incident. To fail over:
 
 1. Update your DNS record to point to the secondary Datadog data center endpoint (for example, from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`). No coordination with Datadog is required to initiate DNS failover.
-1. **Cloud integrations (if applicable):** TODO
+1. If you use supported cloud integrations, go to **Disaster Recovery** in your secondary organization and click **Fail over your integrations**. Datadog stops collecting integration data in the primary organization and starts collecting it in the secondary organization.
 1. Confirm that new telemetry appears in your secondary organization.
 
 When the primary region is available and you're ready to return, restore your DNS record's original value. Confirm that new telemetry resumes in your primary organization.
+
+**Cloud integrations (if applicable):** <TODO: how to return to collecting in primary org>. Datadog resumes collection in the primary organization and stops collection in the secondary organization.
 
 ## Further reading
 
