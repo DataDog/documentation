@@ -316,8 +316,7 @@ tbody code {
   display: none;
 }
 
-/* Hotjar's injected feedback button, hidden below Hugo's `lg` breakpoint
-   (--hugo-breakpoint-desktop) to match `hugo/assets/styles/pages/_global.scss`.
+/* Hotjar's injected feedback button, hidden below the desktop breakpoint.
    Global because Hotjar owns the class name; it can't be a CSS module. */
 ._hj_feedback_container {
   display: none;

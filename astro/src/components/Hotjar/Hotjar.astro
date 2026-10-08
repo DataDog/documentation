@@ -1,16 +1,15 @@
 ---
 // Hotjar. Resolved server-side, like GoogleTagManager, so the markup is
-// omitted from the response entirely in development. The preconnect hint is
-// gated with the script, unlike Hugo's `prefetch.html`, which always emits it.
+// omitted from the response entirely in development, preconnect hint included.
 import { resolveSiteEnv } from "@lib/site/siteEnv";
 import { getHotjarSiteId } from "@config/hotjar";
 
 const siteId = getHotjarSiteId(resolveSiteEnv());
 
-// Hotjar's install snippet, verbatim from Hugo's partial. Injected with
-// `set:html` rather than written inline: prettier-plugin-astro parses an
-// inline script inside a `{...}` expression as JSX and rejects the snippet's
-// statement-bodied function.
+// Hotjar's standard install snippet. Injected with `set:html` rather than
+// written inline: prettier-plugin-astro parses an inline script inside a
+// `{...}` expression as JSX and rejects the snippet's statement-bodied
+// function.
 const snippet = `
 (function (h, o, t, j, a, r) {
   h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };

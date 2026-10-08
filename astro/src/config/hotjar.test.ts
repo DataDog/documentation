@@ -6,7 +6,7 @@ describe("getHotjarSiteId", () => {
     expect(getHotjarSiteId("development")).toBeUndefined();
   });
 
-  it("matches the IDs in hugo/config/{live,preview}/params.yaml", () => {
+  it("uses a separate Hotjar site for live and preview", () => {
     expect(getHotjarSiteId("live")).toBe(1021060);
     expect(getHotjarSiteId("preview")).toBe(1022108);
   });
