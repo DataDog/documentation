@@ -513,7 +513,8 @@ For more information, reference the [Datadog Helm Chart documentation][1] and th
 #     tag: "<AGENT_VERSION>"
 
 datadog:
-  ## Set to true to enable the Traceroute Module of the System Probe
+  ## Required on all Agent versions: the Helm chart sets this to false by default,
+  ## which prevents the Agent from enabling the traceroute module automatically.
   traceroute:
     enabled: true
 
@@ -634,7 +635,8 @@ datadog:
   networkMonitoring:
     enabled: true
 
-  ## Enable the traceroute module of the system-probe.
+  ## Required on all Agent versions: the Helm chart sets this to false by default,
+  ## which prevents the Agent from enabling the traceroute module automatically.
   traceroute:
     enabled: true
 
