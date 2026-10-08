@@ -314,7 +314,7 @@ Configure dynamic tests to allow the Agent to automatically discover and monitor
 
 Agent `v7.73+` is required.
 
-1. On Agent versions earlier than `v7.84`, enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following. On Agent `v7.84+`, the module is enabled automatically when CNM and dynamic tests are enabled.
+1. (Agent `v7.83` and earlier) Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
    ```yaml
    traceroute:
@@ -381,7 +381,7 @@ Agent `v7.73+` is required.
 
 Agent `v7.79+` is required.
 
-1. On Agent versions earlier than `v7.84`, enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following. On Agent `v7.84+`, the module is enabled automatically when CNM and dynamic tests are enabled.
+1. (Agent `v7.83` and earlier) Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
 
    ```yaml
    traceroute:
@@ -435,7 +435,7 @@ Agent `v7.79+` is required.
 
 Agent `v7.73+` is required.
 
-1. On Agent versions earlier than `v7.84`, enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following. On Agent `v7.84+`, the module is enabled automatically when CNM and dynamic tests are enabled.
+1. (Agent `v7.83` and earlier) Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
    ```yaml
    traceroute:
