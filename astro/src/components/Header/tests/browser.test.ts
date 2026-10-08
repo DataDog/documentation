@@ -110,6 +110,81 @@ test.describe("Header — Hugo-identical dimensions and behavior", () => {
     await expect(obs).toBeHidden();
   });
 
+  // The mega-menu shares `.header__dropdown-menu` with the small dropdowns, so
+  // that block's link and overflow rules must not leak into it.
+  test.describe("mega-menu is not restyled by the shared dropdown rules", () => {
+    test.beforeEach(async ({ page }) => {
+      // Hugo caps the mega-menu at 80vh too, so pick a height where Hugo's
+      // menu fits (80vh = 720px) and only an oversized menu would scroll.
+      await page.setViewportSize({ width: 1400, height: 900 });
+      await page.goto(PAGE_WITH_CONTENT);
+      await page.waitForLoadState("networkidle");
+      await page.locator(".product-dropdown a.dropdown").first().hover();
+      await expect(page.locator(".product-menu")).toBeVisible();
+    });
+
+    test("pricing link is uppercase, bold, and brand purple like Hugo", async ({
+      page,
+    }) => {
+      const pricingLink = page.locator(".product-menu__pricing-link");
+      await expect(pricingLink).toHaveCSS("text-transform", "uppercase");
+      await expect(pricingLink).toHaveCSS("font-weight", "700");
+      await expect(pricingLink).toHaveCSS("color", "rgb(99, 44, 166)");
+    });
+
+    // The active category has `height: 100%` plus padding. Without
+    // border-box sizing (Bootstrap's default in Hugo), the padding adds to the
+    // height and the menu overflows into a scrollbar.
+    test("mega-menu fits at a window height where Hugo's does", async ({
+      page,
+    }) => {
+      const megaMenu = page.locator(".product-menu");
+      const isScrollable = await megaMenu.evaluate(
+        (menu) => menu.scrollHeight > menu.clientHeight,
+      );
+      expect(isScrollable).toBe(false);
+    });
+  });
+
+  test("Security category banner is a styled link with a hover state", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState("networkidle");
+    await page.locator(".product-dropdown a.dropdown").first().hover();
+    await page.locator(".product-menu__category-toggle--security").hover();
+    await page.waitForTimeout(250);
+
+    const banner = page.locator(
+      "#security-detail .product-menu__category-description--cta",
+    );
+    await expect(banner).toBeVisible();
+    await expect(banner).toHaveAttribute(
+      "href",
+      "https://www.datadoghq.com/products/security/",
+    );
+    // `.header__dropdown-menu a` must not restyle the banner.
+    await expect(banner).toHaveCSS("display", "flex");
+    await expect(banner).toHaveCSS("text-transform", "none");
+    await expect(banner).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(banner.locator(".product-menu__category-cta-label")).toHaveCSS(
+      "text-transform",
+      "uppercase",
+    );
+
+    const restingBackground = await banner.evaluate(
+      (element) => getComputedStyle(element).backgroundImage,
+    );
+    await banner.hover();
+    await expect(banner).toHaveCSS("outline-color", "rgb(139, 208, 255)");
+    await expect(banner).toHaveCSS("color", "rgb(255, 255, 255)");
+    const hoverBackground = await banner.evaluate(
+      (element) => getComputedStyle(element).backgroundImage,
+    );
+    expect(hoverBackground).not.toBe(restingBackground);
+  });
+
   test("hamburger opens the mobile overlay at 500px", async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
@@ -122,6 +197,28 @@ test.describe("Header — Hugo-identical dimensions and behavior", () => {
     const bg = page.locator("#mobile-nav-bg");
     await expect(overlay).toBeVisible();
     await expect(bg).toBeVisible();
+  });
+
+  test("mobile overlay starts below the header when a banner is showing", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 500, height: 900 });
+    // This test page always renders a banner, which pushes the header down.
+    await page.goto("/dd_e2e/components/announcement-banner/");
+    await page.waitForLoadState("networkidle");
+
+    await page.locator(".navbar-toggler").click();
+
+    const overlay = page.locator("#mobile-nav");
+    const bg = page.locator("#mobile-nav-bg");
+    await expect(overlay).toBeVisible();
+    const headerBottom = (await page.locator(".header__nav").boundingBox())!;
+    for (const layer of [overlay, bg]) {
+      const layerBox = (await layer.boundingBox())!;
+      expect(layerBox.y).toBeGreaterThanOrEqual(
+        headerBottom.y + headerBottom.height,
+      );
+    }
   });
 
   test("mobile nav accordion: all sections collapsed by default, sections toggle independently", async ({

@@ -11,10 +11,14 @@
   width: 100%;
   background-color: var(--color-bg);
   position: fixed;
-  top: var(--hugo-header-height);
+  /* Below the header, which a banner pushes down by
+     --hugo-active-banner-height (0 without a banner). */
+  top: calc(var(--hugo-header-height) + var(--hugo-active-banner-height));
   right: var(--hugo-mobile-nav-offscreen-x);
   overflow-y: auto;
-  height: calc(100% - var(--hugo-header-height));
+  height: calc(
+    100% - var(--hugo-header-height) - var(--hugo-active-banner-height)
+  );
   z-index: var(--hugo-mobile-nav-z);
   padding-bottom: var(--space-md);
   box-sizing: border-box;
@@ -41,10 +45,14 @@
   pointer-events: none;
   transition: opacity 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
   position: fixed;
-  top: var(--hugo-header-height);
+  /* Below the header, which a banner pushes down by
+     --hugo-active-banner-height (0 without a banner). */
+  top: calc(var(--hugo-header-height) + var(--hugo-active-banner-height));
   left: 0;
   width: 100%;
-  height: calc(100% - var(--hugo-header-height));
+  height: calc(
+    100% - var(--hugo-header-height) - var(--hugo-active-banner-height)
+  );
   background-color: var(--hugo-mobile-nav-bg-color);
   opacity: 0;
   z-index: var(--hugo-mobile-nav-bg-z);

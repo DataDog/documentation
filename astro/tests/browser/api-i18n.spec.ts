@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { chooseSelectOption } from "../../src/components/Select/tests/chooseSelectOption";
 
 test.describe("API docs i18n routing", () => {
   test("English category page is canonical at /api/latest/<slug>/ (no /en/ prefix)", async ({
@@ -23,15 +24,17 @@ test.describe("API docs i18n routing", () => {
     await page.goto("/api/latest/aws-integration/");
     const selector = page.locator(".language-selector").first();
     await expect(selector).toBeVisible();
-    const select = selector.locator(".language-selector .select__control");
-    await expect(select).toHaveValue("en");
+    await expect(selector.locator(".select")).toHaveAttribute(
+      "data-value",
+      "en",
+    );
   });
 
   test("language selector shows all locales with native labels", async ({
     page,
   }) => {
     await page.goto("/api/latest/aws-integration/");
-    const options = page.locator(".language-selector .select__control option");
+    const options = page.locator(".language-selector .select__option");
     await expect(options).toHaveCount(5);
     await expect(options.nth(0)).toHaveText("English");
     await expect(options.nth(1)).toHaveText("Français");
@@ -47,9 +50,7 @@ test.describe("API docs i18n routing", () => {
     await expect(
       page.locator('.language-selector[data-hydrated="true"]'),
     ).toBeVisible();
-    await page.selectOption(".language-selector .select__control", {
-      value: "ja",
-    });
+    await chooseSelectOption(page.locator(".language-selector"), "ja");
 
     await expect(page).toHaveURL(/\/ja\/api\/latest\/aws-integration\/?$/);
     await expect(page.locator("h1")).toContainText("AWS インテグレーション");

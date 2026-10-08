@@ -36,6 +36,8 @@ const categories: MegaCategory[] = [
     label: "Security",
     descriptionLabel: "Secure everything",
     gradient: ["#333", "#444"],
+    ctaHref: "https://www.datadoghq.com/products/security/",
+    ctaHoverGradient: ["#555", "#666", "#777"],
     iconHtml: '<svg data-testid="sec-icon"></svg>',
     subcategories: [
       {
@@ -58,7 +60,12 @@ const renderMenu = (
 ) =>
   render(
     h(ProductMegaMenuComponent, {
-      labels: { trigger: "Product", pricing: "Pricing", hype: "Hype!" },
+      labels: {
+        trigger: "Product",
+        pricing: "Pricing",
+        hype: "Hype!",
+        learnMore: "Learn more",
+      },
       hrefs: { product: "/product", pricing: "/pricing" },
       categories,
       svgs: { carrot: '<svg data-testid="carrot"></svg>' },
@@ -236,5 +243,56 @@ describe("continuation columns", () => {
       ...document.querySelectorAll(".product-menu__subcategory-header"),
     ].map((p) => p.textContent);
     expect(headers).toEqual(["Core"]);
+  });
+});
+
+// Hugo renders the banner as a link when the category has a `cta_url`
+// (websites-modules/layouts/partials/nav/main-nav.html).
+describe("ProductMegaMenu — category banner link", () => {
+  const banner = (identifier: string) =>
+    document.querySelector<HTMLElement>(
+      `#${identifier}-detail .product-menu__category-description`,
+    )!;
+
+  it("renders the banner as a link with a Learn more label when the category has a CTA", () => {
+    renderMenu();
+    const securityBanner = banner("security");
+
+    expect(securityBanner.tagName).toBe("A");
+    expect(securityBanner.getAttribute("href")).toBe(
+      "https://www.datadoghq.com/products/security/",
+    );
+    expect(securityBanner.classList).toContain(
+      "product-menu__category-description--cta",
+    );
+    expect(securityBanner.getAttribute("data-dd-action-name")).toBe(
+      "Category Banner security",
+    );
+    expect(
+      securityBanner.querySelector(".product-menu__category-cta-label")
+        ?.textContent,
+    ).toBe("Learn more");
+  });
+
+  it("passes the resting and hover gradients as CSS variables", () => {
+    renderMenu();
+    const style = banner("security").getAttribute("style") ?? "";
+
+    expect(style).toContain(
+      "--cta-bg: linear-gradient(90deg, #333 0%, #444 100%)",
+    );
+    expect(style).toContain(
+      "--cta-bg-hover: linear-gradient(90deg, #555 0%, #666 50%, #777 100%)",
+    );
+  });
+
+  it("keeps the banner a plain block when the category has no CTA", () => {
+    renderMenu();
+    const observabilityBanner = banner("observability");
+
+    expect(observabilityBanner.tagName).toBe("DIV");
+    expect(
+      observabilityBanner.querySelector(".product-menu__category-cta-label"),
+    ).toBeNull();
   });
 });

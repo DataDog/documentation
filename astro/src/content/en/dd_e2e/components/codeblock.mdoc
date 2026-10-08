@@ -48,6 +48,39 @@ This is an informational alert.
 {% /alert %}
 ```
 
+## Language Alias Examples
+
+Some language names in docs content are not Shiki language IDs. CodeBlock maps them to the closest Shiki grammar.
+
+### golang (highlighted as go)
+
+```golang
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, world!")
+}
+```
+
+### gemfile (highlighted as ruby)
+
+```gemfile
+source "https://rubygems.org"
+
+gem "datadog", require: "datadog/auto_instrument"
+gem "rails", "~> 7.1"
+```
+
+### curl (highlighted as bash)
+
+```curl
+curl -X GET "https://api.datadoghq.com/api/v1/validate" \
+  -H "Accept: application/json" \
+  -H "DD-API-KEY: ${DD_API_KEY}"
+```
+
 ## Feature Examples
 
 ### With filename

@@ -2,6 +2,7 @@
 if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { SelectDemo } from "@components/Select/SelectDemo";
 
 const title = "Select";
 ---
@@ -13,18 +14,26 @@ const title = "Select";
       <h1>Select</h1>
 
       <p>
-        A thin Preact wrapper around the native <code>&lt;select&gt;</code> element.
-        It provides the shared visual styling used by every dropdown in the Astro
-        API docs — the brand-purple border, hover/focus states, and the Hugo-style
-        chevron indicator drawn with CSS borders (matching <code>.chevron</code
-        >/<code>.chevron-down</code> in the Hugo <code>_dropdown.scss</code>).
+        A dropdown that opens a styled menu below its button, matching the Hugo
+        Bootstrap dropdown used for the Language and Datadog site selectors. It
+        replaces the native <code>&lt;select&gt;</code>, whose popup is drawn by
+        the operating system: on macOS it opens over the current value and
+        ignores CSS.
       </p>
 
       <p>
-        The component is intentionally minimal. State and persistence live in
-        the consuming component (e.g. <code>RegionSelector</code> keeps the region
-        in a signal/state and a cookie); <code>Select</code> only renders the form
-        control.
+        It follows the WAI-ARIA listbox button pattern. The button opens the
+        menu on click, <kbd>Enter</kbd>, <kbd>Space</kbd>, or <kbd>&darr;</kbd>.
+        In the menu, <kbd>&uarr;</kbd>/<kbd>&darr;</kbd>, <kbd>Home</kbd>, and
+        <kbd>End</kbd> move the highlight, <kbd>Enter</kbd> or <kbd>Space</kbd>
+        chooses, and <kbd>Escape</kbd>, <kbd>Tab</kbd>, or a click outside
+        closes it.
+      </p>
+
+      <p>
+        State and persistence live in the consuming component (for example,
+        <code>RegionSelector</code> keeps the region in a cookie);
+        <code>Select</code> only renders the control and reports the chosen value.
       </p>
 
       <h2>Properties</h2>
@@ -39,41 +48,33 @@ const title = "Select";
           <tr
             ><td><code>id</code></td><td><code>string</code></td><td>&mdash;</td
             ><td
-              >Forwarded to the inner <code>&lt;select&gt;</code>. Use this to
-              associate an external <code>&lt;label for=…&gt;</code>.</td
+              >Applied to the button. Also prefixes the listbox and option IDs.</td
             ></tr
+          >
+          <tr
+            ><td><code>labelledBy</code></td><td><code>string</code></td><td
+              >&mdash;</td
+            ><td
+              >ID of the visible label element. Screen readers announce the
+              label, then the current value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>options</code></td><td
+              ><code>{"{ value: string; label: string }[]"}</code></td
+            ><td>&mdash;</td><td>The choices, in display order.</td></tr
           >
           <tr
             ><td><code>value</code></td><td><code>string</code></td><td
               >&mdash;</td
-            ><td
-              >Controlled value of the underlying <code>&lt;select&gt;</code
-              >.</td
-            ></tr
+            ><td>The current value.</td></tr
           >
           <tr
             ><td><code>onChange</code></td><td
-              ><code
-                >(e: JSX.TargetedEvent&lt;HTMLSelectElement&gt;) =&gt; void</code
-              ></td
+              ><code>(value: string) =&gt; void</code></td
             ><td>&mdash;</td><td
-              >Forwarded to the underlying <code>&lt;select&gt;</code>.</td
-            ></tr
-          >
-          <tr
-            ><td><code>aria-label</code></td><td><code>string</code></td><td
-              >&mdash;</td
-            ><td
-              >Accessible label. Required when no <code>&lt;label&gt;</code> element
-              is associated by <code>id</code>.</td
-            ></tr
-          >
-          <tr
-            ><td><code>children</code></td><td
-              ><code>&lt;option&gt;</code> elements</td
-            ><td>&mdash;</td><td
-              >Provided as children, exactly as you would write inside a native <code
-                >&lt;select&gt;</code
+              >Called with the chosen value, only when it differs from <code
+                >value</code
               >.</td
             ></tr
           >
@@ -88,23 +89,61 @@ const title = "Select";
         <tbody>
           <tr
             ><td><code>select</code></td><td
-              >Outer wrapper that positions the chevron.</td
+              >Outer wrapper. Its <code>data-value</code> holds the current value;
+              tests should read state here.</td
             ></tr
           >
           <tr
-            ><td><code>select__control</code></td><td
-              >The native <code>&lt;select&gt;</code> element. Tests should target
-              this class to read state.</td
+            ><td><code>select--open</code></td><td
+              >Modifier on the wrapper while the menu is open. Flips the
+              chevron.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__button</code></td><td
+              >The button that shows the current value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__menu</code></td><td
+              >The listbox. Has the <code>hidden</code> attribute while closed.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__option</code></td><td
+              >One choice. Its <code>data-value</code> holds the option value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__option--selected</code></td><td
+              >The option that matches the current value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__option--active</code></td><td
+              >The highlighted option, from pointer hover or arrow keys.</td
             ></tr
           >
         </tbody>
       </table>
 
-      <h2>Live examples</h2>
+      <h2>Live example</h2>
 
-      <p>Two consumers render the component:</p>
+      <p>
+        The readout next to the dropdown shows the value passed to
+        <code>onChange</code>.
+      </p>
+
+      <div class="select-example">
+        <SelectDemo client:load />
+      </div>
+
+      <h2>Consumers</h2>
       <ul>
-        <li><code>LanguageSelector</code> — in the site header.</li>
+        <li>
+          <code>LanguageSelector</code> — in the toolbar of every API page, for example
+          <a href="/api/latest/aws-integration/">AWS Integration</a>.
+        </li>
         <li>
           <code>RegionSelector</code> — see the <a
             href="/dd_e2e/components/region-selector/">Region Selector</a
@@ -129,5 +168,10 @@ const title = "Select";
 
   h2 {
     margin-top: var(--space-xl);
+  }
+
+  /* Room for the open menu, so it doesn't cover the next section. */
+  .select-example {
+    min-height: 12rem;
   }
 </style>

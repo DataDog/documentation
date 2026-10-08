@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
-import type { JSX, TargetedEvent } from "preact";
+import type { JSX } from "preact";
 import styles from "./RegionSelector.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { Select } from "@components/Select/Select";
@@ -56,19 +56,15 @@ export function RegionSelector({
     return unsubscribe;
   }, []);
 
-  const handleChange = (e: TargetedEvent<HTMLSelectElement>) => {
-    setActiveRegion(e.currentTarget.value);
-  };
-
   return (
     <div
       class={cl("region-selector")}
       data-hydrated={hydrated ? "true" : undefined}
     >
       <span class={cl("region-selector__heading")}>
-        <label class={cl("region-selector__label")} for="region-select">
+        <span id="region-select-label" class={cl("region-selector__label")}>
           {labels["Datadog site"]}
-        </label>
+        </span>
         <a
           class={cl("region-selector__help")}
           href={hrefs["Site help"]}
@@ -76,13 +72,16 @@ export function RegionSelector({
           dangerouslySetInnerHTML={{ __html: helpIcon }}
         />
       </span>
-      <Select id="region-select" value={selected} onChange={handleChange}>
-        {regions.map((r) => (
-          <option key={r.key} value={r.key}>
-            {r.label}
-          </option>
-        ))}
-      </Select>
+      <Select
+        id="region-select"
+        labelledBy="region-select-label"
+        options={regions.map((region) => ({
+          value: region.key,
+          label: region.label,
+        }))}
+        value={selected}
+        onChange={setActiveRegion}
+      />
     </div>
   );
 }

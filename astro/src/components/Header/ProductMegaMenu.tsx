@@ -15,6 +15,7 @@ export interface ProductMegaMenuLabels {
   trigger: string;
   pricing: string;
   hype: string;
+  learnMore: string;
 }
 
 export interface ProductMegaMenuHrefs {
@@ -141,6 +142,8 @@ export default function ProductMegaMenu({
                 key={cat.identifier}
                 category={cat}
                 open={openCategory === cat.identifier}
+                learnMoreLabel={labels.learnMore}
+                carrotSvg={svgs.carrot}
               />
             ))}
           </div>
@@ -153,31 +156,26 @@ export default function ProductMegaMenu({
 interface CategoryDetailProps {
   category: MegaCategory;
   open: boolean;
+  learnMoreLabel: string;
+  carrotSvg: string;
 }
 
-function CategoryDetail({ category: cat, open }: CategoryDetailProps) {
+function CategoryDetail({
+  category: cat,
+  open,
+  learnMoreLabel,
+  carrotSvg,
+}: CategoryDetailProps) {
   return (
     <div
       class={`${cl("product-menu__category", open && "product-menu__category--active")} product-menu__category--${cat.identifier}`}
       id={`${cat.identifier}-detail`}
     >
-      <div
-        class={cl("product-menu__category-description")}
-        style={{
-          background: `linear-gradient(90deg, ${cat.gradient[0]} 0%, ${cat.gradient[1]} 100%)`,
-        }}
-      >
-        <span
-          class={cl("product-menu__category-description-icon")}
-          dangerouslySetInnerHTML={{ __html: cat.iconHtml }}
-        />
-        <div class={cl("product-menu__info")}>
-          <p class={cl("product-menu__category-header")}>{cat.label}</p>
-          <p class={cl("product-menu__category-description-text")}>
-            {cat.descriptionLabel}
-          </p>
-        </div>
-      </div>
+      <CategoryBanner
+        category={cat}
+        learnMoreLabel={learnMoreLabel}
+        carrotSvg={carrotSvg}
+      />
       <div class={cl("product-menu__category-details")}>
         {cat.subcategories.map((sub) => (
           <div
@@ -209,5 +207,73 @@ function CategoryDetail({ category: cat, open }: CategoryDetailProps) {
         ))}
       </div>
     </div>
+  );
+}
+
+/**
+ * The gradient banner at the top of a category. Like Hugo, it becomes a link
+ * with a "Learn more" label when the category has a `cta_url`, and can swap to
+ * a 3-stop gradient on hover. Both gradients go through CSS variables so the
+ * stylesheet owns the hover state.
+ */
+function CategoryBanner({
+  category: cat,
+  learnMoreLabel,
+  carrotSvg,
+}: Omit<CategoryDetailProps, "open">) {
+  const bannerStyle: Record<string, string> = {
+    "--cta-bg": `linear-gradient(90deg, ${cat.gradient[0]} 0%, ${cat.gradient[1]} 100%)`,
+  };
+  if (cat.ctaHoverGradient) {
+    const [start, middle, end] = cat.ctaHoverGradient;
+    bannerStyle["--cta-bg-hover"] =
+      `linear-gradient(90deg, ${start} 0%, ${middle} 50%, ${end} 100%)`;
+  }
+
+  const content = (
+    <>
+      <span
+        class={cl("product-menu__category-description-icon")}
+        dangerouslySetInnerHTML={{ __html: cat.iconHtml }}
+      />
+      <div class={cl("product-menu__info")}>
+        <p class={cl("product-menu__category-header")}>{cat.label}</p>
+        <p class={cl("product-menu__category-description-text")}>
+          {cat.descriptionLabel}
+        </p>
+      </div>
+    </>
+  );
+
+  if (!cat.ctaHref) {
+    return (
+      <div class={cl("product-menu__category-description")} style={bannerStyle}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <a
+      class={cl(
+        "product-menu__category-description",
+        "product-menu__category-description--cta",
+      )}
+      href={cat.ctaHref}
+      data-dd-action-name={`Category Banner ${cat.identifier}`}
+      style={bannerStyle}
+    >
+      <span class={cl("product-menu__category-main")}>{content}</span>
+      <span class={cl("product-menu__category-cta")}>
+        <span class={cl("product-menu__category-cta-label")}>
+          {learnMoreLabel}
+        </span>
+        <span
+          class={cl("product-menu__category-cta-carrot")}
+          aria-hidden="true"
+          dangerouslySetInnerHTML={{ __html: carrotSvg }}
+        />
+      </span>
+    </a>
   );
 }
