@@ -25907,6 +25907,57 @@ components:
         - type
         - attributes
       type: object
+    CreateOverrideRequestAttributes:
+      description: Attributes for creating an on-call schedule override.
+      properties:
+        end:
+          description: The end time of the override.
+          example: "2024-01-08T02:53:01.000000000Z"
+          format: date-time
+          type: string
+        start:
+          description: The start time of the override.
+          example: "2024-01-07T02:53:01.000000000Z"
+          format: date-time
+          type: string
+      required:
+        - start
+        - end
+      type: object
+    CreateOverrideRequestData:
+      description: Data for creating an on-call schedule override.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateOverrideRequestAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateOverrideRequestRelationships"
+        type:
+          $ref: "#/components/schemas/OverrideDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateOverrideRequestRelationships:
+      description: Relationships to set when creating an on-call schedule override.
+      properties:
+        overridden_user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+        user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+      type: object
+    CreateOverridesRequest:
+      description: Request to create one or more on-call schedule overrides. You can create up to 25 overrides in a single request.
+      properties:
+        data:
+          description: A list of on-call schedule overrides to create.
+          items:
+            $ref: "#/components/schemas/CreateOverrideRequestData"
+          maxItems: 25
+          minItems: 1
+          type: array
+      required:
+        - data
+      type: object
     CreatePageRequest:
       description: Full request to trigger an On-Call Page.
       example:
@@ -92563,6 +92614,202 @@ components:
         - ARRAY_NUMBER
         - ARRAY_BOOLEAN
         - ARRAY_OBJECT
+    OverrideAttributes:
+      description: Attributes for an on-call schedule override.
+      properties:
+        end:
+          description: The end time of the override.
+          format: date-time
+          type: string
+        inactive:
+          description: Whether the override is inactive (for example, because its time range has ended).
+          type: boolean
+        start:
+          description: The start time of the override.
+          format: date-time
+          type: string
+      type: object
+    OverrideCreateResponse:
+      description: The on-call schedule overrides that were created, and any related included resources (such as users).
+      example:
+        data:
+          - attributes:
+              end: "2024-01-08T02:53:01.000000000Z"
+              inactive: false
+              start: "2024-01-07T02:53:01.000000000Z"
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              schedule:
+                data:
+                  id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                  type: schedules
+              user:
+                data:
+                  id: 00000000-aba1-0000-0000-000000000000
+                  type: users
+            type: overrides
+        included:
+          - attributes:
+              email: jane.doe@example.com
+              name: "Jane Doe"
+              status: ""
+            id: 00000000-aba1-0000-0000-000000000000
+            type: users
+      properties:
+        data:
+          description: The on-call schedule overrides that were created.
+          items:
+            $ref: "#/components/schemas/OverrideData"
+          type: array
+        included:
+          description: Related resources referenced in the overrides' relationships, such as users.
+          items:
+            $ref: "#/components/schemas/OverrideIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    OverrideData:
+      description: Data for an on-call schedule override.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OverrideAttributes"
+        id:
+          description: The unique identifier of the override.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OverrideRelationships"
+        type:
+          $ref: "#/components/schemas/OverrideDataType"
+      required:
+        - type
+        - id
+      type: object
+    OverrideDataType:
+      default: overrides
+      description: "Indicates that the resource is of type 'overrides'."
+      enum:
+        - overrides
+      example: overrides
+      type: string
+      x-enum-varnames:
+        - OVERRIDES
+    OverrideIncluded:
+      description: Included data for on-call schedule override operations.
+      oneOf:
+        - $ref: "#/components/schemas/ScheduleUser"
+    OverrideRelationships:
+      description: Relationships for an on-call schedule override.
+      properties:
+        overridden_user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+        schedule:
+          $ref: "#/components/schemas/OverrideRelationshipsSchedule"
+        user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+      type: object
+    OverrideRelationshipsSchedule:
+      description: "Defines the relationship between an override and the schedule it belongs to."
+      properties:
+        data:
+          $ref: "#/components/schemas/OverrideRelationshipsScheduleData"
+      required:
+        - data
+      type: object
+    OverrideRelationshipsScheduleData:
+      description: "A reference to the schedule the override belongs to, containing the schedule's ID and resource type."
+      properties:
+        id:
+          description: "The unique identifier of the schedule."
+          example: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d"
+          type: string
+        type:
+          $ref: "#/components/schemas/OverrideRelationshipsScheduleDataType"
+      required:
+        - type
+        - id
+      type: object
+    OverrideRelationshipsScheduleDataType:
+      default: schedules
+      description: "Indicates that the related resource is of type 'schedules'."
+      enum:
+        - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+        - SCHEDULES
+    OverrideRelationshipsUser:
+      description: "Defines the relationship between an override and one of its associated users."
+      properties:
+        data:
+          $ref: "#/components/schemas/OverrideRelationshipsUserData"
+          nullable: true
+      required:
+        - data
+      type: object
+    OverrideRelationshipsUserData:
+      description: "A reference to a user, containing the user's ID and resource type."
+      properties:
+        id:
+          description: "The unique identifier of the user."
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/OverrideRelationshipsUserDataType"
+      required:
+        - type
+        - id
+      type: object
+    OverrideRelationshipsUserDataType:
+      default: users
+      description: "Indicates that the related resource is of type 'users'."
+      enum:
+        - users
+      example: users
+      type: string
+      x-enum-varnames:
+        - USERS
+    Overrides:
+      description: A list of on-call schedule overrides and any related included resources (such as users).
+      example:
+        data:
+          - attributes:
+              end: "2024-01-08T02:53:01.000000000Z"
+              inactive: false
+              start: "2024-01-07T02:53:01.000000000Z"
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              schedule:
+                data:
+                  id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                  type: schedules
+              user:
+                data:
+                  id: 00000000-aba1-0000-0000-000000000000
+                  type: users
+            type: overrides
+        included:
+          - attributes:
+              email: jane.doe@example.com
+              name: "Jane Doe"
+              status: ""
+            id: 00000000-aba1-0000-0000-000000000000
+            type: users
+      properties:
+        data:
+          description: A list of on-call schedule overrides.
+          items:
+            $ref: "#/components/schemas/OverrideData"
+          type: array
+        included:
+          description: Related resources referenced in the overrides' relationships, such as users.
+          items:
+            $ref: "#/components/schemas/OverrideIncluded"
+          type: array
+      required:
+        - data
+      type: object
     OverwriteAllocationsRequest:
       description: Request to overwrite targeting rules (allocations) for a feature flag in an environment.
       properties:
@@ -109919,15 +110166,21 @@ components:
           $ref: "#/components/schemas/ScheduleUserAttributes"
         id:
           description: The unique user identifier.
+          example: "00000000-0000-0000-0000-000000000000"
           type: string
         type:
           $ref: "#/components/schemas/ScheduleUserType"
       required:
         - type
+        - id
       type: object
     ScheduleUserAttributes:
       description: Provides basic user information for a schedule, including a name and email address.
       properties:
+        color:
+          description: "The user's on-call color, as a hex code (for example, `#FF0000`). Included only when `user.color` is requested in the `include` parameter."
+          example: "#FF0000"
+          type: string
         email:
           description: The user's email address.
           example: "jane.doe@example.com"
@@ -139992,6 +140245,8 @@ components:
             code_analysis_read: View Code Analysis.
             code_coverage_read: View Code Coverage.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with share type 'embed'.
             dashboards_invite_share: Create, modify, and delete shared dashboards with share type 'invite'.
@@ -203540,7 +203795,7 @@ paths:
           schema:
             example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
             type: string
-        - description: Retrieves the on-call user at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). When using timezone offsets with `+` or `-`, ensure proper URL encoding (`+` should be encoded as `%2B`). Defaults to the current time if omitted.
+        - description: Retrieves the on-call user at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`. Defaults to the current time if omitted.
           in: query
           name: filter[at_ts]
           schema:
@@ -203590,6 +203845,230 @@ paths:
         permissions:
           - on_call_read
       x-sunset: "2027-02-01"
+  /api/v2/on-call/schedules/{schedule_id}/overrides:
+    get:
+      description: Retrieve a list of overrides for the specified On-Call schedule within a given time range.
+      operationId: ListScheduleOverrides
+      parameters:
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: "Start of the time range to retrieve overrides for, in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`."
+          in: query
+          name: filter[start]
+          required: true
+          schema:
+            example: "2024-01-07T02:53:01Z"
+            format: date-time
+            type: string
+        - description: "End of the time range to retrieve overrides for, in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`. The time range cannot exceed 45 days."
+          in: query
+          name: filter[end]
+          required: true
+          schema:
+            example: "2024-01-14T02:53:01Z"
+            format: date-time
+            type: string
+        - description: "Comma-separated list of related resources to include in the response. Allowed values: `user`, `overridden_user`, `user.color`."
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: Number of overrides to return per page. The maximum allowed value is 50.
+          in: query
+          name: "page[size]"
+          schema:
+            default: 10
+            example: 10
+            format: int64
+            maximum: 50
+            type: integer
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          end: "2024-01-08T02:53:01.000000000Z"
+                          inactive: false
+                          start: "2024-01-07T02:53:01.000000000Z"
+                        id: 00000000-0000-0000-0000-000000000000
+                        relationships:
+                          schedule:
+                            data:
+                              id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                              type: schedules
+                          user:
+                            data:
+                              id: 00000000-aba1-0000-0000-000000000000
+                              type: users
+                        type: overrides
+              schema:
+                $ref: "#/components/schemas/Overrides"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List On-Call schedule overrides
+      tags:
+        - On-Call
+      x-menu-order: 24
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
+    post:
+      description: Create one or more overrides for the specified On-Call schedule.
+      operationId: CreateScheduleOverrides
+      parameters:
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: "Comma-separated list of included relationships to be returned. Allowed values: `user`, `overridden_user`, `user.color`."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        end: "2024-01-08T02:53:01.000000000Z"
+                        start: "2024-01-07T02:53:01.000000000Z"
+                      relationships:
+                        user:
+                          data:
+                            id: 00000000-aba1-0000-0000-000000000000
+                            type: users
+                      type: overrides
+            schema:
+              $ref: "#/components/schemas/CreateOverridesRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          end: "2024-01-08T02:53:01.000000000Z"
+                          inactive: false
+                          start: "2024-01-07T02:53:01.000000000Z"
+                        id: 00000000-0000-0000-0000-000000000000
+                        relationships:
+                          schedule:
+                            data:
+                              id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                              type: schedules
+                          user:
+                            data:
+                              id: 00000000-aba1-0000-0000-000000000000
+                              type: users
+                        type: overrides
+              schema:
+                $ref: "#/components/schemas/OverrideCreateResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create On-Call schedule overrides
+      tags:
+        - On-Call
+      x-menu-order: 25
+      "x-permission":
+        operator: OR
+        permissions:
+          - on_call_respond
+          - on_call_write
+  /api/v2/on-call/schedules/{schedule_id}/overrides/{override_id}:
+    delete:
+      description: Delete an override from the specified On-Call schedule.
+      operationId: DeleteScheduleOverride
+      parameters:
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: The ID of the override.
+          in: path
+          name: override_id
+          required: true
+          schema:
+            example: 00000000-0000-0000-0000-000000000000
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete On-Call schedule override
+      tags:
+        - On-Call
+      x-menu-order: 26
+      "x-permission":
+        operator: OR
+        permissions:
+          - on_call_respond
+          - on_call_write
   /api/v2/on-call/schedules/{schedule_id}/responders:
     get:
       description: "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position."
@@ -203613,7 +204092,7 @@ paths:
           schema:
             example: previous,current,next
             type: string
-        - description: "Retrieves the on-call responders at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). When using timezone offsets with `+` or `-`, ensure proper URL encoding (`+` should be encoded as `%2B`). Defaults to the current time if omitted."
+        - description: "Retrieves the on-call responders at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`. Defaults to the current time if omitted."
           in: query
           name: filter[at_ts]
           schema:
