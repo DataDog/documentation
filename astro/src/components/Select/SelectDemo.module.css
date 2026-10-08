@@ -7,7 +7,7 @@
 
 .select-demo__label {
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
 }
 

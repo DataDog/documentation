@@ -604,7 +604,7 @@
   justify-content: space-between;
   align-items: flex-end;
   padding: 27px 28px;
-  color: #ffffff;
+  color: var(--color-text-inverse);
   text-decoration: none;
   text-transform: none;
   white-space: normal;
@@ -616,15 +616,14 @@
     background 0.2s ease;
 }
 
-/* Three classes to outrank `.header__dropdown-menu a:hover`. The outline and
-   shadow values are Hugo's. */
+/* Three classes to outrank `.header__dropdown-menu a:hover`. */
 .product-menu .product-menu__category-description--cta:hover,
 .product-menu .product-menu__category-description--cta:focus-visible {
-  color: #ffffff;
+  color: var(--color-text-inverse);
   background: var(--cta-bg-hover, var(--cta-bg));
-  outline: 2px solid #8bd0ff;
+  outline: var(--border-width-thick) solid #8bd0ff;
   outline-offset: -1px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 .product-menu__category-main {
@@ -639,9 +638,9 @@
   align-items: center;
   gap: 8px;
   padding-bottom: 6px;
-  font-size: 18px;
+  font-size: var(--font-size-base);
   line-height: 18px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0.5px;
   white-space: nowrap;
   transition: gap 0.2s ease;

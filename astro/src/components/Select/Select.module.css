@@ -11,7 +11,7 @@
   cursor: pointer;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   /* Explicit line-height gives descenders ("g", "y") room. */
   line-height: 1.4;
   /* Asymmetric vertical padding (3/5) is an optical centering adjustment;
@@ -60,14 +60,13 @@
   transform: translateY(-25%) rotate(-135deg);
 }
 
-/* Menu metrics match Hugo's `.language-region-select-container
-   .dropdown-menu`: 8px below the button, at least the button's width. */
+/* Modeled on Hugo's `.language-region-select-container .dropdown-menu`: just
+   below the button, at least the button's width. */
 .select__menu {
   position: absolute;
   top: calc(100% + var(--space-sm));
   left: 0;
-  /* Above page content in the toolbar's stacking context. Component-internal,
-     so no token. */
+  /* Above page content in the toolbar's stacking context. */
   z-index: 10;
   min-width: 100%;
   margin: 0;
@@ -88,7 +87,7 @@
   color: var(--color-text);
   cursor: pointer;
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.4;
   white-space: nowrap;
 }
@@ -112,6 +111,6 @@
 
 /* Set by pointer hover and by arrow keys, so both inputs look the same. */
 .select__option--active {
-  background-color: var(--color-border-strong);
+  background-color: var(--color-gray-lighter);
   color: var(--color-brand);
 }
