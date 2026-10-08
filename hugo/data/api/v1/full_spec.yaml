@@ -29363,6 +29363,8 @@ components:
             cloud_cost_management_write: Configure cloud cost accounts and global customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data for Profile-Guided Optimization (PGO).
+            coterm_read: Read terminal recordings.
+            coterm_write: Write terminal recordings.
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with share type 'embed'.
             dashboards_invite_share: Create, modify, and delete shared dashboards with share type 'invite'.

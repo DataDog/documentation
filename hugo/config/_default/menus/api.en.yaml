@@ -9647,8 +9647,7 @@ menu:
           - v2
         operationids:
           - GetInvestigation
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Trigger a Bits AI investigation
       url: /api/latest/bits-ai/trigger-a-bits-ai-investigation/
@@ -9660,8 +9659,7 @@ menu:
           - v2
         operationids:
           - TriggerInvestigation
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: List Bits AI investigations
       url: /api/latest/bits-ai/list-bits-ai-investigations/
@@ -9673,8 +9671,7 @@ menu:
           - v2
         operationids:
           - ListInvestigations
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: CI Visibility GitHub Accounts
       url: /api/latest/ci-visibility-github-accounts/
