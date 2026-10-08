@@ -28,9 +28,9 @@ DDR has two independent parts. Both are required for failover:
 |----------|-----------|---------------|
 | Telemetry | APM traces, logs, metrics, processes, profiling, and Synthetic Monitoring | Other telemetry types (such as RUM) |
 | Assets and configurations | Users, roles, dashboards, monitors, log configurations, and other resources [supported by Datadog Sync CLI][6] | Cloud SIEM detection rules and signals configuration; Observability Pipelines configurations (pipelines, processors, destinations) |
-| Integrations | Agent and cloud integrations (AWS, Azure, Google Cloud) | Automatically syncing integration settings and credentials between orgs |
+| Integrations | Agent and cloud integrations (AWS, Azure, Google Cloud) | Automatic synchronization of integration settings and credentials between organizations. |
 
-**Integration setup**: Manually configure integrations and credentials in your secondary org. See the [Configure cloud integrations](#set-up-cloud-integrations) section.
+**Integration setup**: You must manually configure integrations and credentials in your secondary organization. See [Configure cloud integrations](#set-up-cloud-integrations).
 
 ## Prerequisites
 
