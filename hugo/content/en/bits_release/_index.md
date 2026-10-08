@@ -69,22 +69,9 @@ A validation ends in one of four verdicts. **Passed** and **Failed** are conclus
 | **Not enough data** | Production did not give Bits Release enough to judge. Either no relevant telemetry arrived, or too few requests reached the changed code to draw a conclusion. This also covers a healthy service where nothing confirmed the expected effect, for example because your change shipped during quiet hours, sits behind a feature flag that is still off, or serves a path that saw no traffic while Bits Release was watching. |
 | **Inconclusive** | There was enough data, but it points in different directions, or it cannot be confidently pinned on your change rather than on something else happening at the same time. |
 
-While a validation is still running, it shows as **Pending**. Bits Release may already have a provisional answer and be holding it back because the watch window is still short or a signal it needs has not arrived. It keeps watching and reports when it has more.
-
-**Code that never ran is never a failure.** If the changed code path was not exercised in production, Bits Release returns **Not enough data** rather than **Failed**. A change is not called broken on the grounds that nobody reached it.
+While a validation is running, it shows as **In Progress**. It shows as **Pending** when Bits Release already has a provisional answer but is holding it back, because the watch window is still short or a signal it needs has not arrived. In both cases it keeps watching and reports when it has more.
 
 Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
-
-## Preview scope and fit
-
-Bits Release works by comparing a service's production behavior before and after your change reaches production. Teams whose delivery model matches that comparison get the clearest verdicts during the preview. You are a strong fit if most of the following describe your services:
-
-- **You deploy straight to production.** Your changes go live for all traffic at once, rather than through a canary or a progressive rollout. A rollout that reaches a fraction of traffic dilutes the before-and-after comparison, because the service is serving both versions at the same time.
-- **Few of your changes are gated behind feature flags.** Bits Release validates a change when it deploys, not when a flag turns it on, so code that ships switched off produces little signal.
-- **Your services are backend services or web frontends.** Mobile applications, SDKs, and libraries are not yet supported.
-- **You want validation after deploy, not a gate before merge.** Bits Release reports on what production did with your change. It does not block a merge or a release.
-
-A setup that differs on one of these points still works, with weaker verdicts on the changes it affects. If your delivery model differs on most of them, the preview is likely to produce more inconclusive results than useful ones.
 
 ## Prerequisites
 
