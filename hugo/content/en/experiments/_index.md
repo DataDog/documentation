@@ -43,9 +43,9 @@ To get started, select a link from the table below. Otherwise, read on to learn 
 | Quick Links | |
 | :---- | :---- |
 | [Connect a data warehouse][13] | Set up Snowflake, BigQuery, Redshift, or Databricks for warehouse-native experiment analysis |
+| [Create a warehouse-native metric][14] | Define Metric SQL Models and experiment metrics from warehouse data |
 | [Run an online experiment on an LLM application][22] | Compare application variants using Agent Observability evaluation scores |
 | [Create a metric from Agent Observability data][23] | Measure LLM application cost, token usage, or custom evaluation scores |
-| [Create a warehouse-native metric][14] | Define Metric SQL Models and experiment metrics from warehouse data |
 | [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
 | [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
 | [Standardize experiments with protocols][21] | Define reusable defaults for metrics, randomization, duration, and statistical analysis |

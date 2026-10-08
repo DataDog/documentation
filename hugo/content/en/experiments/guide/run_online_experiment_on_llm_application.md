@@ -21,14 +21,6 @@ Online experiments for Agent Observability are in Preview. Contact your Datadog 
 
 Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each [experiment subject][13], such as a user or an autonomous workflow run, to a variant. An Agent Observability evaluation score measures the outcome for each subject.
 
-{{< skill-callout
-    title="Start an online experiment with an agent"
-    text="Copy this prompt into your AI coding agent to use the `agent-observability-online-experiment` skill for guided setup."
-    action_name="copy_agent_observability_online_experiment_prompt"
-    lang="text" >}}
-Use the skill at https://github.com/datadog-labs/agent-skills/blob/main/agent-observability/agent-observability-online-experiment/SKILL.md to start an online experiment to compare the code in my current Git branch against trunk. Make 10% of the traffic use the code in my branch.
-{{< /skill-callout >}}
-
 This guide covers the LLM-specific configuration for the following workflow:
 
 1. Create a Datadog feature flag.
@@ -36,6 +28,14 @@ This guide covers the LLM-specific configuration for the following workflow:
 1. Report a numeric Agent Observability evaluation score.
 1. Link the feature flag and evaluation score to a Datadog experiment.
 1. Run the experiment and review the results.
+
+{{< skill-callout
+    title="Start an online experiment with an agent"
+    text="Copy this prompt into your AI coding agent to use the `agent-observability-online-experiment` skill for guided setup."
+    action_name="copy_agent_observability_online_experiment_prompt"
+    lang="text" >}}
+Use the skill at https://github.com/datadog-labs/agent-skills/blob/main/agent-observability/agent-observability-online-experiment/SKILL.md to start an online experiment to compare the code in my current Git branch against trunk. Make 10% of the traffic use the code in my branch.
+{{< /skill-callout >}}
 
 ## Prerequisites
 
@@ -164,5 +164,4 @@ If the experiment reports missing metric data, confirm that:
 [9]: /feature_flags/concepts/experiments/
 [10]: /experiments/reading_results/
 [11]: /experiments/defining_metrics/?tab=agentobservability#create-a-metric-from-agent-observability-data
-[12]: /mcp_server/setup/#required-permissions
 [13]: /experiments/concepts/subject_types/
