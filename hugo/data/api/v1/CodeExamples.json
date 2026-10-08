@@ -1111,6 +1111,11 @@
       "group": "synthetics",
       "suffix": "_1068962881",
       "description": "Create a global variable from test returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2215516655",
+      "description": "Create a persistent email global variable returns a generated address"
     }
   ],
   "CreateSyntheticsBrowserTest": [

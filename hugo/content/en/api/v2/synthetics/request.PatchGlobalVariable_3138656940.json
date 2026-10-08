@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "global_variables_json_patch",
+    "attributes": {
+      "json_patch": [
+        {
+          "op": "replace",
+          "path": "/description",
+          "value": "Updated persistent email variable"
+        }
+      ]
+    }
+  }
+}
