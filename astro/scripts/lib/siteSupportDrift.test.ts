@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   collectApiCategorySlugs,
+  collectCascadeSiteSupport,
   findBannerDrift,
+  findCascadeDrift,
   findKeySetDrift,
   findRegionDrift,
   findUnpathedSlugCollisions,
+  runCheck,
 } from "./siteSupportDrift.ts";
 
 describe("findKeySetDrift", () => {
@@ -102,5 +105,114 @@ describe("collectApiCategorySlugs", () => {
       "cases",
       "experiments",
     ]);
+  });
+});
+
+describe("collectCascadeSiteSupport", () => {
+  it("returns each cascade target that sets a site_support_id", () => {
+    const markdown = [
+      "---",
+      "title: API Reference",
+      "cascade:",
+      "- _target:",
+      "    path: /api/latest/downtimes",
+      "  aliases:",
+      "    - /api/latest/downtimes/s",
+      "- _target:",
+      "    path: /api/latest/app-builder/**",
+      "    lang: en",
+      "  site_support_id: app_builder_override",
+      "---",
+      "",
+      "Body text.",
+    ].join("\n");
+    expect(collectCascadeSiteSupport(markdown)).toEqual([
+      {
+        path: "/api/latest/app-builder/**",
+        siteSupportId: "app_builder_override",
+      },
+    ]);
+  });
+
+  it("accepts a single cascade map as well as a list", () => {
+    const markdown = [
+      "---",
+      "cascade:",
+      "  _target:",
+      "    path: /api/latest/on-call",
+      "  site_support_id: on-call",
+      "---",
+    ].join("\n");
+    expect(collectCascadeSiteSupport(markdown)).toEqual([
+      { path: "/api/latest/on-call", siteSupportId: "on-call" },
+    ]);
+  });
+
+  it("returns nothing when there is no frontmatter cascade", () => {
+    expect(collectCascadeSiteSupport("---\ntitle: x\n---\n")).toEqual([]);
+    expect(collectCascadeSiteSupport("No frontmatter")).toEqual([]);
+  });
+});
+
+describe("findCascadeDrift", () => {
+  const sharedIds = {
+    app_builder_override: {
+      regions: ["gov2"],
+      url_paths: ["/api/latest/app-builder", "/api/latest/app-builder/**"],
+    },
+    no_paths: { regions: ["gov"] },
+  };
+
+  it("reports nothing when every cascade path is in the key's url_paths", () => {
+    expect(
+      findCascadeDrift(sharedIds, [
+        {
+          path: "/api/latest/app-builder/**",
+          siteSupportId: "app_builder_override",
+        },
+      ]),
+    ).toEqual([]);
+  });
+
+  it("reports a cascade path missing from the key's url_paths", () => {
+    expect(
+      findCascadeDrift(sharedIds, [
+        { path: "/api/latest/monitors", siteSupportId: "no_paths" },
+      ]),
+    ).toEqual([
+      "no_paths: Hugo's API cascade covers /api/latest/monitors, " +
+        "but the key's url_paths in shared/site_support.yaml don't include it",
+    ]);
+  });
+
+  it("reports a cascade key missing from shared/site_support.yaml", () => {
+    expect(
+      findCascadeDrift(sharedIds, [
+        { path: "/api/latest/monitors", siteSupportId: "missing_key" },
+      ]),
+    ).toEqual([
+      "missing_key: Hugo's API cascade uses this key for " +
+        "/api/latest/monitors, but it isn't in shared/site_support.yaml",
+    ]);
+  });
+});
+
+describe("runCheck", () => {
+  it("returns the check's findings", () => {
+    expect(runCheck("Title", () => ["a drift"])).toEqual({
+      title: "Title",
+      findings: ["a drift"],
+    });
+  });
+
+  it("turns an error into a finding instead of throwing", () => {
+    expect(
+      runCheck("Title", () => {
+        throw new Error("Map keys must be unique");
+      }),
+    ).toEqual({
+      title: "Title",
+      findings: ["Couldn't run this check: Map keys must be unique"],
+    });
   });
 });

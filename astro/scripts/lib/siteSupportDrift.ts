@@ -7,6 +7,7 @@
  * Keeping file access out of this module lets the unit tests pass small
  * literal inputs.
  */
+import { parse as parseYaml } from "yaml";
 import { toCategorySlug } from "../../src/lib/api/categorySlug.ts";
 
 export interface SharedSiteSupportEntry {
@@ -147,4 +148,89 @@ export function collectApiCategorySlugs(
     }
   }
   return slugs;
+}
+
+/** A Hugo frontmatter cascade target that assigns a `site_support_id`. */
+export interface CascadeSiteSupport {
+  path: string;
+  siteSupportId: string;
+}
+
+interface CascadeEntry {
+  _target?: { path?: string };
+  site_support_id?: string;
+}
+
+const FRONTMATTER = /^---\n([\s\S]*?)\n---(?:\n|$)/;
+
+/**
+ * Reads the `cascade` in a Hugo page's YAML frontmatter and returns each
+ * target that sets a `site_support_id`. Hugo accepts `cascade` as either a
+ * list of entries or a single entry, so both are handled.
+ */
+export function collectCascadeSiteSupport(
+  markdownSource: string,
+): CascadeSiteSupport[] {
+  const frontmatterYaml = FRONTMATTER.exec(markdownSource)?.[1];
+  if (!frontmatterYaml) return [];
+
+  const cascade = (parseYaml(frontmatterYaml) as { cascade?: unknown })
+    ?.cascade;
+  const entries = (
+    Array.isArray(cascade) ? cascade : cascade ? [cascade] : []
+  ) as CascadeEntry[];
+
+  return entries.flatMap((entry) => {
+    const path = entry._target?.path;
+    const siteSupportId = entry.site_support_id;
+    return path && siteSupportId ? [{ path, siteSupportId }] : [];
+  });
+}
+
+/**
+ * Hugo can also attach a key to API pages through the frontmatter cascade in
+ * `content/en/api/_index.md`. Astro has no cascade, so each cascade path must
+ * appear in that key's `url_paths` or Astro drops the banner Hugo shows.
+ */
+export function findCascadeDrift(
+  sharedIds: SharedSiteSupportIds,
+  cascadeSiteSupports: CascadeSiteSupport[],
+): string[] {
+  return cascadeSiteSupports.flatMap(({ path, siteSupportId }) => {
+    const entry = sharedIds[siteSupportId];
+    if (!entry) {
+      return [
+        `${siteSupportId}: Hugo's API cascade uses this key for ${path}, ` +
+          `but it isn't in shared/site_support.yaml`,
+      ];
+    }
+    if (!(entry.url_paths ?? []).includes(path)) {
+      return [
+        `${siteSupportId}: Hugo's API cascade covers ${path}, ` +
+          `but the key's url_paths in shared/site_support.yaml don't include it`,
+      ];
+    }
+    return [];
+  });
+}
+
+export interface CheckResult {
+  title: string;
+  findings: string[];
+}
+
+/**
+ * Runs one check. An error, such as a file that fails to parse, becomes a
+ * finding instead of crashing the script, so the other checks still report.
+ */
+export function runCheck(title: string, check: () => string[]): CheckResult {
+  try {
+    return { title, findings: check() };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    // YAML parse errors append a multi-line snippet; the first line already
+    // names the problem and its position.
+    const firstLine = message.split("\n")[0];
+    return { title, findings: [`Couldn't run this check: ${firstLine}`] };
+  }
 }

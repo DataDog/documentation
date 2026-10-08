@@ -23,11 +23,16 @@ import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 import {
   collectApiCategorySlugs,
+  collectCascadeSiteSupport,
   findBannerDrift,
+  findCascadeDrift,
   findKeySetDrift,
   findRegionDrift,
   findUnpathedSlugCollisions,
+  runCheck,
   type BannerPair,
+  type CascadeSiteSupport,
+  type CheckResult,
   type HugoUnsupportedSites,
   type MinimalOpenApiSpec,
   type SharedSiteSupportIds,
@@ -41,12 +46,25 @@ const HUGO_CONFIG_DIR = path.join(REPO_ROOT, "hugo/config/_default");
 const SHARED_DIR = path.join(REPO_ROOT, "shared");
 const LOCALES = ["en", "es", "fr", "ja", "ko"] as const;
 
+/**
+ * Reads and parses one file. A read or parse error is rethrown with the file's
+ * repo-relative path, so the report names the broken file.
+ */
+function readParsed<T>(filePath: string, parse: (text: string) => unknown): T {
+  try {
+    return parse(readFileSync(filePath, "utf8")) as T;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`${path.relative(REPO_ROOT, filePath)}: ${message}`);
+  }
+}
+
 function readYaml<T>(filePath: string): T {
-  return parseYaml(readFileSync(filePath, "utf8")) as T;
+  return readParsed<T>(filePath, (text) => parseYaml(text));
 }
 
 function readJson<T>(filePath: string): T {
-  return JSON.parse(readFileSync(filePath, "utf8")) as T;
+  return readParsed<T>(filePath, (text) => JSON.parse(text));
 }
 
 function loadSharedIds(): SharedSiteSupportIds {
@@ -90,7 +108,14 @@ function loadApiCategorySlugs(): Set<string> {
   return collectApiCategorySlugs(specs);
 }
 
-function printCheck(title: string, findings: string[]): void {
+function loadApiCascadeSiteSupport(): CascadeSiteSupport[] {
+  return readParsed<CascadeSiteSupport[]>(
+    path.join(REPO_ROOT, "hugo/content/en/api/_index.md"),
+    collectCascadeSiteSupport,
+  );
+}
+
+function printCheck({ title, findings }: CheckResult): void {
   if (findings.length === 0) {
     console.log(`✓ ${title}`);
     return;
@@ -102,32 +127,38 @@ function printCheck(title: string, findings: string[]): void {
 }
 
 function main(): void {
-  const sharedIds = loadSharedIds();
-  const hugoUnsupportedSites = loadHugoUnsupportedSites();
-
-  const checks: [string, string[]][] = [
-    ["Same keys", findKeySetDrift(sharedIds, hugoUnsupportedSites)],
-    ["Same regions per key", findRegionDrift(sharedIds, hugoUnsupportedSites)],
-    ["Same banner string", findBannerDrift(loadBannersByLocale())],
-    [
-      "API-slug keys have url_paths",
-      findUnpathedSlugCollisions(sharedIds, loadApiCategorySlugs()),
-    ],
+  // Each check loads its own inputs inside `runCheck`, so a file that fails
+  // to read or parse is reported against the checks that need it, and the
+  // rest still run.
+  const results = [
+    runCheck("Same keys", () =>
+      findKeySetDrift(loadSharedIds(), loadHugoUnsupportedSites()),
+    ),
+    runCheck("Same regions per key", () =>
+      findRegionDrift(loadSharedIds(), loadHugoUnsupportedSites()),
+    ),
+    runCheck("Same banner string", () =>
+      findBannerDrift(loadBannersByLocale()),
+    ),
+    runCheck("API-slug keys have url_paths", () =>
+      findUnpathedSlugCollisions(loadSharedIds(), loadApiCategorySlugs()),
+    ),
+    runCheck("API cascade paths are in url_paths", () =>
+      findCascadeDrift(loadSharedIds(), loadApiCascadeSiteSupport()),
+    ),
   ];
 
   console.log("Site-support drift: shared/site_support.yaml vs. Hugo\n");
-  for (const [title, findings] of checks) {
-    printCheck(title, findings);
-  }
+  results.forEach(printCheck);
 
-  const driftCount = checks.reduce(
-    (sum, [, findings]) => sum + findings.length,
+  const driftCount = results.reduce(
+    (sum, { findings }) => sum + findings.length,
     0,
   );
   if (driftCount > 0) {
     console.log(
       `\n${driftCount} drift finding(s). Update shared/site_support.yaml ` +
-        `to match Hugo, or add url_paths for API-slug keys.`,
+        `to match Hugo.`,
     );
     process.exitCode = 1;
   }
