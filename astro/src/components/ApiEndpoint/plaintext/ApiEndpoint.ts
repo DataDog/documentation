@@ -33,7 +33,7 @@ export function apiEndpointNodes(ep: EndpointData): MarkdocNode[] {
   return [
     ...statusNotice(ep),
     ...descriptionNodes(ep),
-    ...regionTableNodes(ep),
+    ...apiRegionTableNodes(ep.method, ep.regionUrls),
     ...permissionsNodes(ep),
     ...oauthScopesNodes(ep),
     ...argumentsNodes(ep),
@@ -95,13 +95,17 @@ function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
   );
 }
 
-function regionTableNodes(ep: EndpointData): MarkdocNode[] {
+/** One row per default region that has a URL. Shared with category summaries. */
+export function apiRegionTableNodes(
+  method: string,
+  regionUrls: Record<string, string> | undefined,
+): MarkdocNode[] {
   const regions = getDefaultRegions();
 
   type Row = { site: string; url: string };
   const rows: Row[] = [];
   for (const region of regions) {
-    const url = ep.regionUrls?.[region.key];
+    const url = regionUrls?.[region.key];
     if (!url) {
       continue;
     }
@@ -122,7 +126,7 @@ function regionTableNodes(ep: EndpointData): MarkdocNode[] {
 
   const urlCell = (url: string): MarkdocNode => {
     return new Ast.Node("td", {}, [
-      inline([apiMethodBadgeNode(ep.method), plaintext(` ${url}`)]),
+      inline([apiMethodBadgeNode(method), plaintext(` ${url}`)]),
     ]);
   };
 

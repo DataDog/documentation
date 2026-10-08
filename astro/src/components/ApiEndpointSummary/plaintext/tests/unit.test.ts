@@ -31,11 +31,15 @@ describe("apiEndpointSummaryNodes", () => {
     );
   });
 
-  it("renders the method and primary-region URL", () => {
+  it("renders a region URL table with a row per supported region", () => {
     const md = render();
-    expect(md).toContain("**GET**");
-    expect(md).toContain(
-      "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+    expect(md).toContain("Datadog site");
+    expect(md).toContain("API endpoint");
+    expect(md).toMatch(
+      /app\.datadoghq\.com.*\*\*GET\*\* https:\/\/api\.datadoghq\.com\/api\/v1\/dashboard\/\{dashboard_id\}/,
+    );
+    expect(md).toMatch(
+      /app\.datadoghq\.eu.*\*\*GET\*\* https:\/\/api\.datadoghq\.eu\/api\/v1\/dashboard\/\{dashboard_id\}/,
     );
   });
 
