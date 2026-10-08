@@ -173,8 +173,8 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 Keyword matching follows these rules for both library rules and custom rules:
 
 - **Case-insensitive matching**: The keyword `secret` matches `secret`, `Secret`, and `SECRET`.
-- **Interchangeable separators (spaces, underscores, hyphens)**: The keyword `secret access key` matches `secret access key`, `secret_access_key`, and `secret-access-key`. The keyword also matches an attribute named `AWS_SECRET_ACCESS_KEY`.
-- **Camelcase in attribute names**: For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number`, `card-type`, and `creditCardNumber` match. The following event matches a rule whose pattern is `secret` and whose keyword is `card`, because `creditCardNumber` is split into `credit`, `card`, and `number`:
+- **Interchangeable separators (spaces, underscores, hyphens, periods, slashes)**: The keyword `secret access key` matches `secret access key`, `secret_access_key`, `secret-access-key`, `secret.access.key`, and `secret/access/key`. The keyword also matches an attribute named `AWS_SECRET_ACCESS_KEY`.
+- **Camelcase in attribute names**: For structured events, keywords are also matched against attribute names in the event path. The same separators (spaces, `_`, `-`, `.`, and `/`) count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number`, `card-type`, and `creditCardNumber` match. The following event matches a rule whose pattern is `secret` and whose keyword is `card`, because `creditCardNumber` is split into `credit`, `card`, and `number`:
 
   ```json
   {
