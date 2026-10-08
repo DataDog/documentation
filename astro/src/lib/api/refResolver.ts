@@ -390,7 +390,7 @@ function unionOptionType(spec: any, variant: any): string {
  * - `allOf` (merged properties)
  * - Primitives (`string`, `integer`, `number`, `boolean`)
  * - `enum` values
- * - `format`, `example`, `default`, `readOnly`, `deprecated`
+ * - `format`, `example`, `default`, `readOnly`, `writeOnly`, `deprecated`
  * - Circular reference detection via a visited set
  *
  * @param spec     The full parsed OpenAPI spec object.
@@ -447,6 +447,7 @@ export function schemaToFields(
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
+        ...writeOnlyFlag(schema),
         description: schema.description ?? "",
         unionOptions,
       },
@@ -489,6 +490,7 @@ export function schemaToFields(
           required: false,
           deprecated: schema.deprecated === true,
           readOnly: schema.readOnly === true,
+          ...writeOnlyFlag(schema),
           description: schema.description ?? "",
         },
       ];
@@ -506,6 +508,7 @@ export function schemaToFields(
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
+        ...writeOnlyFlag(schema),
         description: schema.description ?? "",
         ...arrayChildFields(children),
       },
@@ -519,6 +522,7 @@ export function schemaToFields(
     required: false,
     deprecated: schema.deprecated === true,
     readOnly: schema.readOnly === true,
+    ...writeOnlyFlag(schema),
     description: schema.description ?? "",
   };
 
@@ -530,6 +534,18 @@ export function schemaToFields(
   }
 
   return [field];
+}
+
+/**
+ * The `writeOnly` half of a `SchemaField`, present only when the spec marks
+ * the schema write-only.
+ *
+ * `writeOnly` is rare — a handful of properties across both specs — so it is
+ * spread in conditionally to keep it out of the serialized view of the
+ * thousands of fields that are not write-only.
+ */
+function writeOnlyFlag(schema: any): { writeOnly?: true } {
+  return schema?.writeOnly === true ? { writeOnly: true } : {};
 }
 
 /**
@@ -551,15 +567,38 @@ export function schemaToFields(
  * @returns A new tree with read-only fields omitted.
  */
 export function stripReadOnlyFields(fields: SchemaField[]): SchemaField[] {
+  return stripFields(fields, (field) => field.readOnly === true);
+}
+
+/**
+ * Drop write-only fields from a field tree, at every depth.
+ *
+ * The mirror image of `stripReadOnlyFields`: the server accepts a write-only
+ * field (`webhookSecret`, `secret_access_key`) but never returns it, so it
+ * belongs in the request body and nowhere in the response — neither the Model
+ * table nor the generated example. Ports DataDog/documentation#39558.
+ *
+ * @param fields  Field tree to filter.
+ * @returns A new tree with write-only fields omitted.
+ */
+export function stripWriteOnlyFields(fields: SchemaField[]): SchemaField[] {
+  return stripFields(fields, (field) => field.writeOnly === true);
+}
+
+/** Rebuild a field tree without the fields `shouldOmit` selects, at any depth. */
+function stripFields(
+  fields: SchemaField[],
+  shouldOmit: (field: SchemaField) => boolean,
+): SchemaField[] {
   const kept: SchemaField[] = [];
 
   for (const field of fields) {
-    if (field.readOnly) continue;
+    if (shouldOmit(field)) continue;
 
     const next: SchemaField = { ...field };
 
     if (field.children) {
-      const children = stripReadOnlyFields(field.children);
+      const children = stripFields(field.children, shouldOmit);
       if (children.length > 0) {
         next.children = children;
       } else {
@@ -570,7 +609,7 @@ export function stripReadOnlyFields(fields: SchemaField[]): SchemaField[] {
     if (field.unionOptions) {
       next.unionOptions = field.unionOptions.map((option) => ({
         ...option,
-        fields: stripReadOnlyFields(option.fields),
+        fields: stripFields(option.fields, shouldOmit),
       }));
     }
 
@@ -805,6 +844,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
       description: resolved.description ?? "",
       unionOptions,
     };
@@ -820,6 +860,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
       description: resolved.description ?? "",
       ...(children.length > 0 ? { children } : {}),
     };
@@ -834,6 +875,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
       description: resolved.description ?? "",
       ...(children.length > 0 ? { children } : {}),
     };
@@ -854,6 +896,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
       description: resolved.description ?? "",
       ...arrayChildFields(children),
     };
@@ -866,6 +909,7 @@ function propertyToField(
     required,
     deprecated: resolved.deprecated === true,
     readOnly: resolved.readOnly === true,
+    ...writeOnlyFlag(resolved),
     description: resolved.description ?? "",
   };
 
@@ -973,6 +1017,9 @@ function mergeAllOf(schemas: any[], spec: any): any {
     }
     if (resolved.readOnly === true) {
       merged.readOnly = true;
+    }
+    if (resolved.writeOnly === true) {
+      merged.writeOnly = true;
     }
   }
 

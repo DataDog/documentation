@@ -7,6 +7,7 @@ import {
   getBestDiscriminant,
   unionOptionLabels,
   stripReadOnlyFields,
+  stripWriteOnlyFields,
 } from "@lib/api/refResolver";
 import type { SchemaField } from "@lib/api/schemas/schemaField";
 
@@ -1043,5 +1044,151 @@ describe("stripReadOnlyFields", () => {
 
   it("returns an empty array when everything is read-only", () => {
     expect(stripReadOnlyFields([field("a", { readOnly: true })])).toEqual([]);
+  });
+});
+
+describe("writeOnly flagging", () => {
+  it("flags a write-only property", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        secret: { type: "string", writeOnly: true },
+        name: { type: "string" },
+      },
+    };
+    const [secret, name] = schemaToFields({}, schema);
+
+    expect(secret.writeOnly).toBe(true);
+    expect(name.writeOnly).toBeUndefined();
+  });
+
+  it("flags a write-only object, array, and union property", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        credentials: {
+          type: "object",
+          writeOnly: true,
+          properties: { key: { type: "string" } },
+        },
+        keys: { type: "array", writeOnly: true, items: { type: "string" } },
+        either: {
+          writeOnly: true,
+          oneOf: [{ type: "string" }, { type: "integer" }],
+        },
+      },
+    };
+
+    expect(schemaToFields({}, schema).map((f) => f.writeOnly)).toEqual([
+      true,
+      true,
+      true,
+    ]);
+  });
+
+  it("omits the key entirely when the property is not write-only", () => {
+    const schema = { type: "object", properties: { name: { type: "string" } } };
+
+    expect("writeOnly" in schemaToFields({}, schema)[0]).toBe(false);
+  });
+});
+
+describe("stripWriteOnlyFields", () => {
+  const field = (name: string, extra: Partial<SchemaField> = {}) => ({
+    name,
+    type: "string",
+    required: false,
+    deprecated: false,
+    readOnly: false,
+    description: "",
+    ...extra,
+  });
+
+  it("drops write-only fields and keeps the rest", () => {
+    const fields = [
+      field("name"),
+      field("webhookSecret", { writeOnly: true }),
+      field("tags"),
+    ];
+
+    expect(stripWriteOnlyFields(fields).map((f) => f.name)).toEqual([
+      "name",
+      "tags",
+    ]);
+  });
+
+  it("keeps read-only fields, which belong in a response", () => {
+    const fields = [field("id", { readOnly: true })];
+
+    expect(stripWriteOnlyFields(fields).map((f) => f.name)).toEqual(["id"]);
+  });
+
+  it("drops write-only fields nested in children", () => {
+    const fields = [
+      field("data", {
+        type: "object",
+        children: [field("attributes"), field("secret", { writeOnly: true })],
+      }),
+    ];
+    const [data] = stripWriteOnlyFields(fields);
+
+    expect(data.children?.map((c) => c.name)).toEqual(["attributes"]);
+  });
+
+  it("drops a write-only object together with its subtree", () => {
+    const fields = [
+      field("credentials", {
+        type: "object",
+        writeOnly: true,
+        children: [field("access_key"), field("secret_key")],
+      }),
+      field("name"),
+    ];
+
+    expect(stripWriteOnlyFields(fields).map((f) => f.name)).toEqual(["name"]);
+  });
+
+  it("removes the children key when every child was write-only", () => {
+    const fields = [
+      field("wrapper", {
+        type: "object",
+        children: [field("a", { writeOnly: true })],
+      }),
+    ];
+    const [wrapper] = stripWriteOnlyFields(fields);
+
+    expect("children" in wrapper).toBe(false);
+  });
+
+  it("filters inside union options", () => {
+    const fields = [
+      field("variant", {
+        type: "oneOf",
+        unionOptions: [
+          {
+            label: "<type=a>",
+            type: "object",
+            fields: [field("keep"), field("drop", { writeOnly: true })],
+          },
+        ],
+      }),
+    ];
+    const [variant] = stripWriteOnlyFields(fields);
+
+    expect(variant.unionOptions?.[0].fields.map((f) => f.name)).toEqual([
+      "keep",
+    ]);
+  });
+
+  it("does not mutate the input tree", () => {
+    const fields = [
+      field("data", {
+        type: "object",
+        children: [field("secret", { writeOnly: true }), field("name")],
+      }),
+    ];
+    stripWriteOnlyFields(fields);
+
+    expect(fields[0].children).toHaveLength(2);
   });
 });

@@ -10,6 +10,7 @@ import {
   resolveRef,
   topLevelSchemaToFields,
   stripReadOnlyFields,
+  stripWriteOnlyFields,
 } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
 import { buildRunCommand } from "./runCommandBuilder";
@@ -233,7 +234,12 @@ export function extractResponses(
     let schemaDescription: string | undefined;
     const jsonContent = resolved?.content?.["application/json"];
     if (jsonContent?.schema) {
-      schema = topLevelSchemaToFields(spec, jsonContent.schema);
+      // Write-only fields are omitted from responses: the server accepts them
+      // but never returns them. Requests keep theirs, so the filter belongs
+      // here rather than in `topLevelSchemaToFields`.
+      schema = stripWriteOnlyFields(
+        topLevelSchemaToFields(spec, jsonContent.schema),
+      );
       schemaDescription = resolveSchemaDescription(spec, jsonContent.schema);
     }
 
@@ -263,7 +269,9 @@ export function extractResponses(
     }
 
     if (!examples && jsonContent?.schema) {
-      const generated = generateExampleFromSchema(spec, jsonContent.schema);
+      const generated = generateExampleFromSchema(spec, jsonContent.schema, {
+        omitWriteOnly: true,
+      });
       if (generated !== undefined) {
         examples = [
           {
@@ -350,6 +358,25 @@ export function buildRunCommandByRegion(
 /** Maximum structural depth (objects/arrays) for example generation. */
 const EXAMPLE_MAX_DEPTH = 10;
 
+interface ExampleOptions {
+  /**
+   * Skip properties the spec marks `writeOnly`. Set when generating a
+   * response example, where such a field is never returned.
+   */
+  omitWriteOnly?: boolean;
+}
+
+/** Whether a property schema is write-only, following a single `$ref` hop. */
+function isWriteOnly(
+  spec: OpenAPIV3.Document,
+  schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject,
+): boolean {
+  const resolved: OpenAPIV3.SchemaObject | undefined = isReference(schema)
+    ? resolveRef(spec, schema.$ref)
+    : schema;
+  return resolved?.writeOnly === true;
+}
+
 /**
  * Attempt to build a sample JSON value from a schema by using `example`
  * fields on properties. Returns `undefined` if no useful example can
@@ -358,10 +385,13 @@ const EXAMPLE_MAX_DEPTH = 10;
  * `depth` tracks structural nesting (object properties, array items).
  * `$ref` resolution does not increment depth — circular refs are guarded
  * by a `seen` set of ref paths instead.
+ *
+ * `options.omitWriteOnly` drops write-only properties, for response examples.
  */
 function generateExampleFromSchema(
   spec: OpenAPIV3.Document,
   schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject | undefined,
+  options: ExampleOptions = {},
   depth = 0,
   seen: Set<string> = new Set(),
 ): unknown {
@@ -372,7 +402,7 @@ function generateExampleFromSchema(
     seen.add(schema.$ref);
     const resolved = resolveRef(spec, schema.$ref);
     if (!resolved) return undefined;
-    return generateExampleFromSchema(spec, resolved, depth, seen);
+    return generateExampleFromSchema(spec, resolved, options, depth, seen);
   }
 
   if (schema.example !== undefined) return schema.example;
@@ -381,7 +411,7 @@ function generateExampleFromSchema(
     const merged: Record<string, unknown> = {};
     let hasValue = false;
     for (const sub of schema.allOf) {
-      const val = generateExampleFromSchema(spec, sub, depth, seen);
+      const val = generateExampleFromSchema(spec, sub, options, depth, seen);
       if (val !== undefined && typeof val === "object" && !Array.isArray(val)) {
         Object.assign(merged, val);
         hasValue = true;
@@ -398,7 +428,7 @@ function generateExampleFromSchema(
   if (unionKey) {
     const variants = schema[unionKey];
     if (Array.isArray(variants) && variants.length > 0) {
-      return generateExampleFromSchema(spec, variants[0], depth, seen);
+      return generateExampleFromSchema(spec, variants[0], options, depth, seen);
     }
     return undefined;
   }
@@ -411,7 +441,15 @@ function generateExampleFromSchema(
     let hasValue = false;
 
     for (const [propName, propSchema] of Object.entries(properties)) {
-      const val = generateExampleFromSchema(spec, propSchema, depth + 1, seen);
+      if (options.omitWriteOnly && isWriteOnly(spec, propSchema)) continue;
+
+      const val = generateExampleFromSchema(
+        spec,
+        propSchema,
+        options,
+        depth + 1,
+        seen,
+      );
       if (val !== undefined) {
         obj[propName] = val;
         hasValue = true;
@@ -425,6 +463,7 @@ function generateExampleFromSchema(
     const itemExample = generateExampleFromSchema(
       spec,
       schema.items,
+      options,
       depth + 1,
       seen,
     );

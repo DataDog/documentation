@@ -50,6 +50,92 @@ describe("extractResponses schema description", () => {
   });
 });
 
+describe("write-only fields in responses", () => {
+  // A write-only field (e.g. `webhookSecret`) is accepted on the way in but
+  // never returned, so it belongs in the request body and nowhere in the
+  // response.
+  const workflowSchema = {
+    type: "object" as const,
+    properties: {
+      name: { type: "string" as const, example: "my-workflow" },
+      webhookSecret: {
+        type: "string" as const,
+        writeOnly: true,
+        example: "s3cret",
+      },
+    },
+  };
+
+  const responseFor = (schema: OpenAPIV3.SchemaObject) =>
+    extractResponses(spec, {
+      responses: {
+        "201": {
+          description: "Created",
+          content: { "application/json": { schema } },
+        },
+      },
+    })[0];
+
+  it("omits write-only fields from the response model", () => {
+    const response = responseFor(workflowSchema);
+
+    expect(response.schema?.map((field) => field.name)).toEqual(["name"]);
+  });
+
+  it("omits write-only fields from the generated response example", () => {
+    const response = responseFor(workflowSchema);
+
+    expect(JSON.parse(response.examples![0].value)).toEqual({
+      name: "my-workflow",
+    });
+  });
+
+  it("omits write-only fields nested inside the response model", () => {
+    const response = responseFor({
+      type: "object",
+      properties: {
+        data: {
+          type: "object",
+          properties: {
+            id: { type: "string", example: "abc" },
+            webhookSecret: {
+              type: "string",
+              writeOnly: true,
+              example: "s3cret",
+            },
+          },
+        },
+      },
+    });
+
+    expect(response.schema?.[0].children?.map((field) => field.name)).toEqual([
+      "id",
+    ]);
+    expect(JSON.parse(response.examples![0].value)).toEqual({
+      data: { id: "abc" },
+    });
+  });
+
+  it("keeps write-only fields in the request body and its example", () => {
+    const body = extractRequestBody(spec, {
+      responses: {},
+      requestBody: {
+        required: true,
+        content: { "application/json": { schema: workflowSchema } },
+      } as OpenAPIV3.RequestBodyObject,
+    });
+
+    expect(body?.schema.map((field) => field.name)).toEqual([
+      "name",
+      "webhookSecret",
+    ]);
+    expect(JSON.parse(body!.examples[0].value)).toEqual({
+      name: "my-workflow",
+      webhookSecret: "s3cret",
+    });
+  });
+});
+
 describe("extractPermissionsMatch", () => {
   const withPermissions = (operator: string, permissions: string[]) => ({
     responses: {},
