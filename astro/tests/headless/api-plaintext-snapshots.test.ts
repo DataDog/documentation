@@ -1,12 +1,25 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { APIRoute } from "astro";
 
-import { GET as landingGET } from "../../src/pages/[...lang]/api/latest.md";
-import { GET as categoryGET } from "../../src/pages/[...lang]/api/latest/[category].md";
-import { GET as operationGET } from "../../src/pages/[...lang]/api/latest/[category]/[operation].md";
-import { GET as subPageGET } from "../../src/pages/[...lang]/api/latest/[...page].md";
+// The landing page's frontmatter comes from the `en` content collection. Stub
+// that entry so the snapshot only changes when the renderer does.
+vi.mock("astro:content", () => ({
+  getEntry: async () => ({
+    data: {
+      title: "Fixture API Reference",
+      description: "Fixture description for the API landing page.",
+    },
+  }),
+}));
+
+const { GET: landingGET } =
+  await import("../../src/pages/[...lang]/api/latest.md");
+const { GET: categoryGET } =
+  await import("../../src/pages/[...lang]/api/latest/[category].md");
+const { GET: operationGET } =
+  await import("../../src/pages/[...lang]/api/latest/[category]/[operation].md");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT_DIR = path.join(__dirname, "api-plaintext-snapshots");
@@ -44,14 +57,12 @@ function operationPage(
 /**
  * Audit set: the plaintext twins of the pages in `api-html-snapshots.test.ts`,
  * under the same names so a rendering change can be compared across both, plus
- * the API landing page and one hand-written sub-page. Unlike the HTML audit,
- * the sub-page is included: its plaintext goes through this project's own
- * parse/format pipeline, not Astro's renderer.
+ * the API landing page.
  *
- * Spec-generated pages render against the frozen fixture in tests/fixtures/api/
- * (wired by the frozen-api-spec plugin in vitest.unit.config.ts). The landing
- * and sub-page frontmatter, and the sub-page body, come from the real `en`
- * content collection, so those two snapshots change when that content does.
+ * Every page renders from fixtures: the frozen spec in tests/fixtures/api/
+ * (wired by the frozen-api-spec plugin in vitest.unit.config.ts) and the stub
+ * `astro:content` entry above. Hand-written sub-pages are left out, since their
+ * body is the content itself.
  */
 const AUDIT_PAGES: AuditPage[] = [
   {
@@ -59,12 +70,6 @@ const AUDIT_PAGES: AuditPage[] = [
     handler: landingGET,
     params: {},
     urlPath: "/api/latest.md",
-  },
-  {
-    name: "02-rate-limits",
-    handler: subPageGET,
-    params: { page: "rate-limits" },
-    urlPath: "/api/latest/rate-limits.md",
   },
 
   // One landing page + one representative operation per dynamic category.

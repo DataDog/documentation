@@ -1,6 +1,6 @@
 ---
-title: API Reference
-description: "Browse the Datadog API reference: endpoints, schemas, request and response examples for managing dashboards, monitors, logs, metrics, and more."
+title: Fixture API Reference
+description: Fixture description for the API landing page.
 breadcrumbs: Docs > API
 ---
 
