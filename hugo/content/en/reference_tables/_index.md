@@ -237,7 +237,7 @@ Edit individual rows in the UI instead of uploading another CSV file. UI editing
 4. Resolve highlighted validation errors, including missing or duplicate primary keys and values that do not match column types.
 5. Click {{< ui >}}Save Version{{< /ui >}} to apply the changes.
 
-Your changes remain in a draft until you click {{< ui >}}Save Version{{< /ui >}}. The draft includes edits you make on different pages of the table and on rows you find with the search field. Rows you have not edited or removed remain unchanged. Click {{< ui >}}Cancel{{< /ui >}} and confirm to discard unsaved changes.
+Your changes would remain in a draft until you click {{< ui >}}Save Version{{< /ui >}}. The draft includes edits you make on different pages of the table and on rows you find with the search field. Rows you have not edited or removed remain unchanged. Click {{< ui >}}Cancel{{< /ui >}} and confirm to discard unsaved changes.
 
 For tables with fewer than 10,000 rows, use the numbered pages to browse and edit all rows. For tables with 10,000 or more rows, the preview displays the first 100 rows.
 
