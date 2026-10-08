@@ -83283,6 +83283,8 @@ components:
 
         **Supported pipeline types:** metrics
       properties:
+        aggregation_timing:
+          $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessorAggregationTiming"
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
         enabled:
@@ -83317,6 +83319,31 @@ components:
         - enabled
       type: object
       x-pipeline-types: [metrics]
+    ObservabilityPipelineAggregateProcessorAggregationTiming:
+      description: Configures how metrics are assigned to aggregation windows. When omitted, metrics are grouped using system time.
+      properties:
+        allowed_lateness_secs:
+          description: Grace period, in seconds, for late-arriving metrics when using event time. Defaults to 10 seconds when omitted.
+          example: 10
+          format: int64
+          maximum: 3600
+          minimum: 0
+          type: integer
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessorAggregationTimingType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineAggregateProcessorAggregationTimingType:
+      description: Determines whether metrics are assigned to aggregation windows based on when they are processed or their timestamps.
+      enum:
+        - system_time
+        - event_time
+      example: event_time
+      type: string
+      x-enum-varnames:
+        - SYSTEM_TIME
+        - EVENT_TIME
     ObservabilityPipelineAggregateProcessorMode:
       description: The aggregation mode applied to metrics that share the same name and tags within the interval.
       enum:
