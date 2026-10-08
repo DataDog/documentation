@@ -105,7 +105,7 @@ Each option lists the steps to follow, in order.
 
 ### Option 3: Direct OTLP ingest
 
-<!-- TODO: Add a diagram for direct OTLP ingest. -->
+{{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
 
 **Best for**: Platforms that already send OTLP, serverless functions, managed platforms, and other environments where you can't run a Collector.
 
