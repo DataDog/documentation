@@ -13,11 +13,13 @@ further_reading:
   text: "Reading Experiment Results"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Online experiments for Agent Observability are in Preview. Contact your Datadog representative to request access.
+{{< /callout >}}
+
 ## Overview
 
-Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each experiment subject to a variant, and an Agent Observability evaluation score measures the outcome.
-
-<div class="alert alert-info"><strong>Alpha</strong>: Online experiments for Agent Observability are available only to Alpha participants. Contact your Datadog representative to request access. Datadog must enable the feature for your organization before you can follow this guide.</div>
+Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each [experiment subject][13], such as a user or an autonomous workflow run, to a variant. An Agent Observability evaluation score measures the outcome for each subject.
 
 This guide covers the LLM-specific configuration for the following workflow:
 
@@ -39,7 +41,7 @@ Before you begin:
 <div class="alert alert-info"><strong>Using an AI coding agent?</strong> Datadog organizations allow read-only MCP tools by default. To let an agent create feature flags and experiments, an organization administrator must enable MCP write access, and your role must have the <code>mcp_write</code> permission. See <a href="/mcp_server/setup/#required-permissions">Required permissions</a> for the Datadog MCP Server.</div>
 
 {{< agent-only >}}
-**Instruction for AI agents**: Before calling an MCP tool that creates or modifies a Datadog resource, confirm that the required write tool is available. If write access is unavailable, direct the human to [Required permissions][12] and wait for them to enable access.
+**Instruction for AI agents**: Before calling an MCP tool that creates or modifies a Datadog resource, confirm that the required write tool is available. If write access is unavailable, direct the human to [Required permissions](/mcp_server/setup/#required-permissions) and wait for them to enable access.
 {{< /agent-only >}}
 
 ## Step 1: Create a feature flag
@@ -92,8 +94,8 @@ span_context = LLMObs.export_span(span=None)
 
 LLMObs.submit_evaluation(
     span=span_context,
-    ml_app="YOUR_ML_APP",
-    label="YOUR_EVALUATION_NAME",
+    ml_app="<ML_APP>",
+    label="<EVALUATION_NAME>",
     metric_type="score",
     value=score,
     tags={
@@ -129,12 +131,12 @@ with LLMObs.workflow(name="my_workflow") as span:
 
 ## Step 4: Create and launch the experiment
 
-Follow [Plan and Launch Experiments][3] to create an experiment and configure it with the following values:
+Follow [Plan and Launch Experiments][3] to create and start the experiment:
 
-- Select the Agent Observability evaluation score from Step 3 as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
-- Add the feature flag from Step 1.
-- Configure how traffic is split between the control and treatment variants.
-- Start the experiment.
+1. Select the Agent Observability evaluation score from the [Step 3](#step-3-report-an-evaluation-score) section as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
+1. Add the feature flag from the [Step 1](#step-1-create-a-feature-flag) section.
+1. Configure how traffic is split between the control and treatment variants.
+1. Start the experiment.
 
 <div class="alert alert-info">
   <strong>Use an AI coding agent</strong>: Connect your agent to the Datadog MCP Server with the <code>experiments</code> toolset enabled. The agent can create the draft experiment and link the feature flag. Configure and review the traffic split in the Datadog UI before starting the experiment. For setup instructions and supported operations, see <a href="/experiments/mcp_tools/">Experiments MCP Tools</a>.<br><br>
@@ -179,3 +181,4 @@ If the experiment reports missing metric data, confirm that:
 [10]: /experiments/reading_results/
 [11]: /experiments/defining_metrics/?tab=agentobservability#create-a-metric-from-agent-observability-data
 [12]: /mcp_server/setup/#required-permissions
+[13]: /experiments/concepts/subject_types/

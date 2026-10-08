@@ -72,7 +72,9 @@ If you do not see the property you need, type the property name in the {{< ui >}
 {{% /tab %}}
 {{% tab "Agent Observability" %}}
 
-<div class="alert alert-info"><strong>Alpha</strong>: Agent Observability metrics for online experiments are available only to Alpha participants. Contact your Datadog representative to request access. Datadog must enable the feature for your organization before you can create these metrics.</div>
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Online experiments for Agent Observability are in Preview. Contact your Datadog representative to request access.
+{{< /callout >}}
 
 ### Prerequisites
 
@@ -81,7 +83,7 @@ Before you create an experiment metric from Agent Observability data:
 - [Instrument your LLM application with Agent Observability][14] and send traces to Datadog.
 - To use cost or token data, make sure your traces include token usage. Datadog uses token usage, model, and provider information to calculate [estimated costs][15].
 - To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value.
-- Tag each trace or evaluation with the subject identifier that you use to assign experiment variants. For setup instructions, see [Run an Online Experiment on an LLM Application][17].
+- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Run an Online Experiment on an LLM Application][17].
 
 <div class="alert alert-warning"><strong>Supported evaluation type</strong>: Experiment metrics support only Agent Observability evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types are not available in the metric picker.</div>
 
@@ -99,12 +101,12 @@ To create the metric:
 
 Select the {{< ui >}}Agent Spans{{< /ui >}} tab, then select one of the following:
 
-- {{< ui >}}Total estimated cost{{< /ui >}}: Measure the average estimated cost across completed Agent Observability traces.
-- {{< ui >}}Total tokens{{< /ui >}}: Measure the average total token usage across completed Agent Observability traces.
+- {{< ui >}}Total estimated cost{{< /ui >}}: Average estimated cost across completed Agent Observability traces.
+- {{< ui >}}Total tokens{{< /ui >}}: Average total token usage across completed Agent Observability traces.
 
 The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their corresponding trace property. You can change the aggregation, select another property or custom property path, add filters, or create a ratio.
 
-<div class="alert alert-info">Agent Observability estimated cost values use nanodollars. For details about cost calculations and supported models, see <a href="/llm_observability/investigate/cost/">Track Costs</a>.</div>
+<div class="alert alert-info">Agent Observability estimated cost values use nanodollars. For details about cost calculations and supported models, see <a href="/llm_observability/investigate/cost/">Cost</a>.</div>
 
 {{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="The Create Metric event picker with Agent Spans selected, showing All agent span events, Total estimated cost, and Total tokens, with Total estimated cost selected and its description displayed." style="width:90%;" >}}
 
@@ -119,6 +121,8 @@ Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 The picker lists score evaluations received by Agent Observability during the selected time range. If an evaluation does not appear, confirm that your application has submitted at least one score value for it.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing custom score evaluations, with the relevance evaluation selected and its score type displayed." style="width:90%;" >}}
+
+#### Save the metric
 
 After you configure either source:
 

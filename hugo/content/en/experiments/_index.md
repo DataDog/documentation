@@ -83,9 +83,11 @@ This path works when randomization runs through [Datadog Feature Flags][1] and y
 
 ### Agent Observability
 
-For live experiments on LLM applications, [create metrics from Agent Observability data][23]. Use completed Agent Observability traces to measure estimated cost or token usage, or use a custom score evaluation to measure application quality.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Online experiments for Agent Observability are in Preview. Contact your Datadog representative to request access.
+{{< /callout >}}
 
-Agent Observability metrics for online experiments are in Alpha and require explicit enablement. Contact your Datadog representative to request access.
+For live experiments on LLM applications, [create metrics from Agent Observability data][23]. Use completed Agent Observability traces to measure estimated cost or token usage, or use a custom score evaluation to measure application quality.
 
 ## Statistics
 
