@@ -107,7 +107,7 @@ const updateMenu = (specData, specs, languages) => {
             // instead of push we need to insert after last parent: tag.name
             const indx = newMenuArray.findIndex((i) => i.identifier === tagSlug);
             const item = {
-              name: existingNames[itemIdentifier] || action.summary,
+              name: existingNames[itemIdentifier] || existingNames[`${tagSlug}-${getLegacyTagSlug(action.summary)}`] || action.summary,
               url: `/api/latest/${tagSlug}/${actionSlug}/`,
               identifier: itemIdentifier,
               parent: tagSlug,
@@ -232,6 +232,10 @@ const writeEndpointPage = (entry) => {
   const frontMatter = {
     title: entry.title,
   };
+  const legacyEndpointSlug = getLegacyTagSlug(entry.title);
+  if (legacyEndpointSlug !== entry.endpointSlug) {
+    frontMatter.aliases = [`/api/latest/${entry.tagSlug}/${legacyEndpointSlug}/`];
+  }
   const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
   fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
 };
@@ -316,7 +320,10 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@]/g});
+const getTagSlug = (tagName) => getLegacyTagSlug(tagName).replace(/\//g, '');
+
+// Preserve the old URLs as aliases when removing slashes from endpoint slugs.
+const getLegacyTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@]/g});
 
 
 /**

@@ -4,9 +4,38 @@ import yaml from 'js-yaml';
 import $RefParser from '@apidevtools/json-schema-ref-parser';
 
 describe(`updateMenu`, () => {
+  it('uses a flat CI/CD URL and preserves the translated name from the old identifier', () => {
+    const readSpy = jest.spyOn(fs, 'readFileSync').mockReturnValue(yaml.safeDump({menu: {api: [{
+      name: 'Déclencher des tests à partir de pipelines de CI/CD',
+      identifier: 'synthetics-trigger-tests-from-ci/cd-pipelines',
+      generated: true,
+    }]}}));
+    const writeSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
+    try {
+      bp.updateMenu([{
+        tags: [{name: 'Synthetics'}],
+        paths: {'/api/v1/synthetics/tests/trigger/ci': {post: {
+          operationId: 'TriggerCITests',
+          summary: 'Trigger tests from CI/CD pipelines',
+          tags: ['Synthetics'],
+        }}},
+      }], ['./data/api/v1/full_spec.yaml'], ['fr']);
 
-
+      const menu = yaml.safeLoad(writeSpy.mock.calls[0][1]).menu.api;
+      expect(menu.find((entry) => entry.parent === 'synthetics')).toMatchObject({
+        name: 'Déclencher des tests à partir de pipelines de CI/CD',
+        url: '/api/latest/synthetics/trigger-tests-from-cicd-pipelines/',
+        identifier: 'synthetics-trigger-tests-from-cicd-pipelines',
+        params: {versions: ['v1'], operationids: ['TriggerCITests']},
+      });
+    } finally {
+      readSpy.mockRestore();
+      writeSpy.mockRestore();
+      logSpy.mockRestore();
+    }
+  });
 });
 
 describe(`createPages`, () => {
@@ -77,6 +106,20 @@ describe(`createEndpointPages`, () => {
     expect(writeSpy.mock.calls).toHaveLength(1);
     const [path] = writeSpy.mock.calls[0];
     expect(path).toBe('./content/en/api/latest/action-connection/list-foos/index.md');
+  });
+
+  it('keeps CI/CD endpoints in one URL segment and redirects the old nested URL', () => {
+    const specData = [buildSpec([
+      {path: '/api/v1/synthetics/tests/trigger/ci', method: 'post', operationId: 'TriggerCITests', summary: 'Trigger tests from CI/CD pipelines'},
+    ])];
+
+    bp.createEndpointPages(specData, ['./data/api/v1/full_spec.yaml']);
+
+    const [path, content] = writeSpy.mock.calls[0];
+    expect(path).toBe('./content/en/api/latest/action-connection/trigger-tests-from-cicd-pipelines/index.md');
+    const frontMatter = yaml.safeLoad(content.replace(/^---\n|---\n$/g, ''));
+    expect(frontMatter.title).toBe('Trigger tests from CI/CD pipelines');
+    expect(frontMatter.aliases).toEqual(['/api/latest/action-connection/trigger-tests-from-ci/cd-pipelines/']);
   });
 
 });
@@ -170,6 +213,10 @@ describe(`getTagSlug`, () => {
     const expected = "get-a-monitors-details";
     const actual = bp.getTagSlug("Get a monitor's details");
     expect(actual).toEqual(expected);
+  });
+
+  it('should remove slashes from endpoint titles', () => {
+    expect(bp.getTagSlug('Trigger tests from CI/CD pipelines')).toBe('trigger-tests-from-cicd-pipelines');
   });
 
 });
