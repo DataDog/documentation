@@ -16,65 +16,80 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 ## Overview
 
-The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, on your own infrastructure before sending them to a destination.
+The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
-The processor supports only the static, out-of-the-box integration pipelines included with the Worker. It does not run custom pipelines or edited copies of Datadog integration pipelines. The integration pipeline catalog ships with the Worker and is updated through new Worker releases. Upgrade your Workers to receive catalog updates; the catalog does not update automatically.
+The processor only supports static, out-of-the-box integration pipelines included with the Worker. It does not run custom pipelines or edited copies of Datadog integration pipelines. The integration pipeline catalog is included with the Worker and updated through new Worker releases. Because the catalog does not update automatically, you must upgrade your Worker for catalog updates and manually enable the new integration pipelines.
 
-Datadog recommends using this processor with archive destinations to store parsed and normalized logs.
+{{< img src="observability_pipelines/processors/integration_pipelines.png" alt="Manage Integration Pipelines panel showing the catalog version, pipeline search, Enabled and Disabled sections, and a table of integration names, source filters, and processor counts." style="width:100%;" >}}
 
-<div class="alert alert-warning">Datadog does not recommend using this processor before a Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and can produce conflicting results. Datadog's hosted integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination also reverses some of the processor's parsing and normalization.</div>
+**Notes**:
+- Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archive destinations.
+- Ensure your logs have the `source` or `ddsource` field, such as `source:nginx`, because those fields determine if there is a matching integration pipeline. Because an integration pipeline is enabled does not mean the Worker sends all logs through the integration pipeline.
+- Logs collected by the Datadog Agent with an integration log configuration already have their source set.
 
-## How processing works
+## Setup
+
+<div class="alert alert-warning">Datadog does not recommend using this processor before a Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog's hosted integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
+
+To set up an Integration Pipelines processor:
+
+1. Define a filter query to select the logs that enter the processor. See [Search Syntax][3] for more information.
+    - Only matching logs are normalized and processed.
+    - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved-field mappings the Worker uses for common normalization. See [Common normalization](#common-normalization) andd [Pre-processing options](#pre-processing-options) for more information.
+1. Click {{< ui >}}Edit Pipelines{{< /ui >}} to view a list of integration pipelines that have been enabled or disabled.
+1. The {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel shows a list of enabled integration pipelines. Click {{< ui >}}Disabled{{< /ui >}} to see integration pipelines that are disabled.
+    - **Note**: All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. They must be manually enabled.
+    - To enable integration pipelines:
+      1. Click {{< ui >}}Disabled{{< /ui >}} to see the list of disabled pipelines.
+      1. Check the boxes for pipelines you want to enable.
+      1. Click {{< ui >}}Enable Selected{{< /ui >}}.
+    - To disable integration pipelines:
+      1. Click {{< ui >}}Enabled{{< /ui >}} to see the list of enabled pipelines.
+      1. Check the boxes for pipelines you want to disable.
+      1. Click {{< ui >}}Disable Selected{{< /ui >}}.
+    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted, showing 552 enabled and 3 disabled pipelines." style="width:100%;" >}}
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+**Note**: When you enable or disable integrations, you must redeploy the pipeline for the changes to take effect.
+
+## How the processor works
 
 For every log that matches the processor's filter:
 
-1. A common normalization layer parses and prepares the log, regardless of whether it matches an integration pipeline.
-2. The processor uses the normalized log's `source` to select an enabled integration pipeline. For example, `source:nginx` selects the NGINX pipeline if it is enabled.
-3. The integration pipeline applies its processors to parse, remap, and enrich the log. Logs without a matching enabled pipeline skip this step.
-4. The log continues to the next step in the Observability Pipelines pipeline, with non-reserved fields grouped under `attributes`.
+1. The Worker normalizes and pre-processes all logs, regardless of whether it matches an integration pipeline. See [Common normalization](#common-normalization) and [Pre-processing options](#pre-processing-options) for more information.
+2. The normalized log's `source` is used to match it to an integration pipeline, such as `source:nginx` for the NGINX pipeline.
+3. The integration pipeline parses, remaps, and enriches the log. Logs that don't match a pipeline skip this step.
+4. Non-[reserved](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) fields are grouped under `attributes`.
 
 ### Common normalization
 
-Normalization runs even when no integration pipeline matches. As a result, these logs can still change. The normalization layer:
+The Worker normalizes all logs even if they don't match an integration pipeline. The normalization process:
 
 - Parses JSON objects in `message` and extracts their fields. For example, a message containing `{"message":"request complete","http.status_code":200}` becomes a message of `request complete` with an extracted HTTP status code.
 - Expands dotted keys into nested objects. For example, `"http.status_code": 200` becomes `"http": {"status_code": 200}`, stored under `attributes` in the output.
 - Maps log fields to reserved fields such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`.
 - Resolves the log's source, including from `ddsource`, before selecting an integration pipeline.
 
-This follows the reserved-field approach described in [Datadog log preprocessing][1]. Configure preprocessing on this processor to change its field mappings.
+### Pre-processing options
 
-## Setup
+The Worker preprocesses reserved attributes as described in the Datadog Log Management's [Preprocessing][1] section. You can change the Integration Pipelines processors' field mappings for preprocessing. Each option is an ordered list of candidate field paths. The first matching candidate supplies the reserved field. Paths refer to the incoming log's attributes; do not add the output's `attributes` prefix.
 
-1. Add an Integration Pipelines processor to your [Observability Pipelines pipeline][2], before an archive destination.
-2. Define a filter query to select the logs that enter the processor. Only matching logs are normalized and processed. All logs continue to the next step. See [Search Syntax][3] for query syntax.
-3. When you add the processor in the UI, all integration pipelines in the current catalog are enabled by default. Use the checkboxes to selectively enable or disable pipelines. After a Worker upgrade, integrations newly added to the catalog are not automatically enabled for existing processors. They appear in the processor's {{< ui >}}Disabled{{< /ui >}} section; add them to the {{< ui >}}Enabled{{< /ui >}} section and deploy the new configuration to include them.
-4. Ensure your logs identify their integration through `source` or `ddsource`, such as `nginx`. Logs collected by the Datadog Agent with an integration log configuration already have their source set. Enabling a pipeline does not apply it to every log: the normalized source must match that pipeline.
-5. Optionally, configure the reserved-field mappings in `preprocessing`. Omit this configuration to use the defaults described below.
-6. Validate the output with representative logs, including logs that do not match an enabled integration pipeline. Check downstream processors and destinations that use fields now nested under `attributes`.
-7. Deploy the pipeline and monitor Worker CPU usage and the processor's [health metrics](#health-metrics).
-
-{{< img src="observability_pipelines/processors/integration_pipelines.png" alt="Manage Integration Pipelines panel showing the catalog version, pipeline search, Enabled and Disabled sections, and a table of integration names, source filters, and processor counts." style="width:100%;" >}}
-
-### Preprocessing options
-
-Each option is an ordered list of candidate field paths. The first matching candidate supplies the reserved field. Paths refer to the incoming log's attributes; do not add the output's `attributes` prefix.
-
-| Option | Reserved field | Default candidates, in order |
-| --- | --- | --- |
-| `date_sources` | `timestamp` | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
-| `hostname_sources` | `host` | `host`, `hostname`, `syslog.hostname` |
-| `message_sources` | `message` | `message`, `msg`, `log` |
-| `service_sources` | `service` | `service`, `syslog.appname`, `dd.service` |
-| `status_sources` | `status` | `status`, `severity`, `level`, `syslog.severity` |
-| `trace_id_sources` | `trace_id` | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id` |
-| `span_id_sources` | `span_id` | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id` |
+| Option             | Reserved field | Default candidates, in order                                                                                    |
+| ------------------ | -------------- | --------------------------------------------------------------------------------------------------------------- |
+| `date_sources`     | `timestamp`    | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
+| `hostname_sources` | `host`         | `host`, `hostname`, `syslog.hostname`                                                                           |
+| `message_sources`  | `message`      | `message`, `msg`, `log`                                                                                         |
+| `service_sources`  | `service`      | `service`, `syslog.appname`, `dd.service`                                                                       |
+| `status_sources`   | `status`       | `status`, `severity`, `level`, `syslog.severity`                                                                |
+| `trace_id_sources` | `trace_id`     | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id`                                   |
+| `span_id_sources`  | `span_id`      | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id`                                       |
 
 Setting a candidate list replaces that field's default list. For example, `hostname_sources: ["custom_host", "hostname"]` checks `custom_host` before `hostname`. Omitted options keep their defaults. An empty list disables promotion for that field, except that an unset `status` still defaults to `info`.
 
-## CPU sizing
+### CPU sizing
 
-This processor is CPU intensive. Use **10,000 events per second per vCPU** as a conservative starting estimate, then size Workers using representative logs and enabled pipelines.
+This processor is CPU intensive. Use **10,000 events per second per vCPU** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
 
 CPU usage depends on:
 
@@ -90,12 +105,12 @@ For [component metrics][4] and [processor buffer metrics][5] emitted by all proc
 
 The processor also emits four metrics for each integration pipeline, tagged with `integration_id`, such as `apache` or `nginx`:
 
-| Metric | Description |
-| --- | --- |
-| `pipelines.integration_pipelines_ingested_events_total` | Number of events dispatched to the integration pipeline, whether or not it modifies them. |
-| `pipelines.integration_pipelines_ingested_event_bytes_total` | Estimated JSON size, in bytes, of events dispatched to the integration pipeline. |
-| `pipelines.integration_pipelines_modified_events_total` | Number of events modified by the integration pipeline. |
-| `pipelines.integration_pipelines_modified_event_bytes_total` | Estimated JSON size, in bytes, of events modified by the integration pipeline. |
+| Metric                                                       | Description                                                                               |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `pipelines.integration_pipelines_ingested_events_total`      | Number of events dispatched to the integration pipeline, whether or not it modifies them. |
+| `pipelines.integration_pipelines_ingested_event_bytes_total` | Estimated JSON size, in bytes, of events dispatched to the integration pipeline.          |
+| `pipelines.integration_pipelines_modified_events_total`      | Number of events modified by the integration pipeline.                                    |
+| `pipelines.integration_pipelines_modified_event_bytes_total` | Estimated JSON size, in bytes, of events modified by the integration pipeline.            |
 
 Both byte metrics use the event size after normalization and before the integration pipeline runs. The modified byte metric measures the volume of events modified, rather than the number of bytes changed or the output size.
 
