@@ -56474,8 +56474,9 @@ components:
       description: The definition of a configurable parameter on a control or mitigation.
       properties:
         default_value:
-          description: The default value of the parameter. The JSON type depends on the parameter's `type`.
+          description: The default value of the parameter. The JSON type depends on the parameter's `type`. `null` when the parameter has no default.
           example: 30
+          nullable: true
         description:
           description: A human-readable description of the parameter.
           example: "Number of days of inactivity before an API key is considered unused."
