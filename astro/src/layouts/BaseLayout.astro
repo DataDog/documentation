@@ -12,6 +12,7 @@ import { DevBadge } from "@components/DevBadge/DevBadge";
 import Telemetry from "@components/Telemetry/Telemetry.astro";
 import GoogleTagManager from "@components/GoogleTagManager/GoogleTagManager.astro";
 import GoogleTagManagerFallback from "@components/GoogleTagManager/GoogleTagManagerFallback.astro";
+import Hotjar from "@components/Hotjar/Hotjar.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
 import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
@@ -200,6 +201,7 @@ const activeRegionSelectors = allowedRegions
     }
     <Telemetry />
     <GoogleTagManager />
+    <Hotjar />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
     <GoogleTagManagerFallback />
