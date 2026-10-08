@@ -821,7 +821,7 @@ Use the following guidelines to troubleshoot issues with Network Path. If you ne
 
 If no data appears in the [Network Path][4] UI, the feature may not be fully enabled. Network Path requires the following:
 
-1. The traceroute module must be enabled in your `system-probe.yaml` file:
+1. The traceroute module must be enabled. On Agent `v7.84+`, the Agent enables it automatically for dynamic tests and basic dynamic tests, unless `traceroute.enabled` is set to `false`. Otherwise, add the following to your `system-probe.yaml` file (for Helm, set `datadog.traceroute.enabled: true`):
 
    ```yaml
    traceroute:
