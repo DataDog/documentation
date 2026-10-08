@@ -16,13 +16,13 @@ further_reading:
 - link: /real_user_monitoring/application_monitoring/browser/data_collected/
   tag: Documentation
   text: Données RUM Browser recueillies
+- link: https://learn.datadoghq.com/courses/intro-to-rum
+  tag: Centre d'apprentissage
+  text: Introduction au Real User Monitoring (RUM)
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive pour obtenir des informations exploitables
     grâce à la solution Real User Monitoring
-- link: https://learn.datadoghq.com/courses/intro-to-rum
-  tag: Centre d'apprentissage
-  text: Introduction au Real User Monitoring (RUM)
 - link: https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/
   tag: Blog
   text: Comprenez plus rapidement les replays de session grâce aux résumés générés
@@ -110,7 +110,7 @@ Une session RUM peut durer jusqu'à 4 heures et expire après 15 minutes d'inact
 | Profondeur maximale des attributs par événement          | 20                       |
 | Taille maximale d'un événement                         | 1 Mo                     |
 | Taille maximale de la charge utile d'ingestion                | 5 Mo                     |
-| Taille maximale des source maps et des fichiers de mappage | 500 Mo par fichier          |
+| Taille maximale des maps source et des fichiers de mappage | 500 Mo par fichier          |
 | Taille maximale des fichiers dSYM                    | 2 Go par fichier            |
 | Délai maximal lors de l'ingestion                 | 24 heures                 |
 
@@ -161,7 +161,7 @@ Le tableau suivant répertorie les fonctionnalités RUM qui sont prises en charg
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | **Flutter** Session Replay est en préversion. |
 | Signaux de frustration | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | Uniquement partiellement pris en charge pour tous les appareils **mobile** et **Roku**. |
 
-## Points de terminaison pris en charge pour les domaines SDK {#supported-endpoints-for-sdk-domains}
+## Endpoints pris en charge pour les domaines SDK {#supported-endpoints-for-sdk-domains}
 
 Tout le trafic des SDK Datadog est transmis via SSL (par défaut, sur le port 443) aux domaines suivants :
 
@@ -177,7 +177,7 @@ Tout le trafic des SDK Datadog est transmis via SSL (par défaut, sur le port 4
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 | UK1  | `https://browser-intake-uk1-datadoghq.com`    |
 
-### Points de terminaison supplémentaires pour le profilage de navigateur {#additional-endpoints-for-browser-profiling}
+### Endpoints supplémentaires pour le profilage de navigateur {#additional-endpoints-for-browser-profiling}
 
 Lorsque le [Browser Profiling][19] est activé, le SDK contacte également une API de quota pour déterminer si le profilage est autorisé pour la session en cours. Ceci utilise un `quota.` sous-domaine de l'origine d'ingestion standard :
 
@@ -233,7 +233,7 @@ Affichez les sessions utilisateur par segments, par exemple pour vérifier quand
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM Analytics" video=true >}}
 
-### Intégration avec les logs, l'APM et le profiler {#integration-with-logs-apm-and-profiler}
+### Intégration avec les logs, APM et le profiler {#integration-with-logs-apm-and-profiler}
 
 Plongez au cœur de vos [métriques d'infrastructure, logs et traces backend][5] jusqu'à identifier la ligne de code précise qui nuit aux performances de votre application, afin d'améliorer l'expérience de vos utilisateurs et résoudre les problèmes signalés.
 

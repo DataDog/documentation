@@ -144,6 +144,8 @@ To update the SDK versions:
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
+**Note**: You can use Bits AI to create instrumentation rules with natural language. Describe which processes you want to instrument, and Bits AI generates the corresponding rule.
+
 To configure instrumentation rules:
 
 1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20].

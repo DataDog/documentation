@@ -171,8 +171,12 @@ Vous pouvez fournir les paramètres suivants sous forme de variables d'environne
 <br />**Remarque**: Avant la version 1.54.0 de `dd-trace-java`, il s'agit d'un **champ obligatoire**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED` ou `dd.llmobs.agentless.enabled`
-: facultatif - _entier ou chaîne de caractères_ - **par défaut** : `false`
+: facultatif - _entier ou chaîne_ - **par défaut**: `false`
 <br />Requis uniquement si vous n'utilisez pas le Datadog Agent, auquel cas cela doit être défini sur `1` ou `true`.
+
+`DD_LLMOBS_SAMPLE_RATE` ou `dd.llmobs.sample.rate`
+: facultatif - _nombre à virgule flottante_ - **par défaut** : `1.0`
+<br />La fraction de traces conservée par Agent Observability. Nécessite `dd-trace-java` 1.66.0 ou une version ultérieure. Voir [Échantillonnage de traces](#trace-sampling).
 
 `DD_API_KEY` ou `dd.api.key`
 : optionnel - _ chaîne_
@@ -317,7 +321,7 @@ Après avoir installé le SDK et exécuté votre application, vous devriez voir 
 
 ## Échantillonnage des traces {#trace-sampling}
 
-<div class="alert alert-info">L'échantillonnage des traces est disponible dans le SDK Python (<code>ddtrace</code> 4.12.0 ou version ultérieure) et le SDK Node.js (<code>dd-trace</code> 5.110.0 ou version ultérieure). Le SDK Java ne prend pas en charge l'échantillonnage des traces.</div>
+<div class="alert alert-info">L'échantillonnage des traces est disponible dans le SDK Python (<code>ddtrace</code> 4.12.0 ou une version ultérieure), le SDK Node.js (<code>dd-trace</code> 5.110.0 ou une version ultérieure), et le SDK Java (<code>dd-trace-java</code> 1.66.0 ou une version ultérieure).</div>
 
 L'échantillonnage des traces définit la fraction de traces qu'Agent Observability conserve. Comme la facturation d'Agent Observability est basée sur le volume de spans que vous envoyez, définir un taux d'échantillonnage est un moyen de contrôler vos coûts liés à Agent Observability. Le SDK prend la décision d'échantillonnage sur le span racine et l'applique à tous les spans enfants de ce span racine, y compris les spans créés dans les services en aval via le [ tracing distribué](#distributed-tracing).
 
@@ -325,8 +329,8 @@ L'échantillonnage n'affecte pas vos [métriques Agent Observability](/llm_obser
 
 Configurez le taux d'échantillonnage via l'un des deux mécanismes suivants :
 
-- **Variable d'environnement** (`DD_LLMOBS_SAMPLE_RATE`) : s'applique à la fois à la [configuration en ligne de commande](#command-line-setup) et à la [configuration dans le code](#in-code-setup).
-- **Paramètre dans le code** (`sample_rate` en Python, `sampleRate` en Node.js) : transmis à `LLMObs.enable()` en Python, ou sous `llmobs` en Node.js, lorsque vous activez le SDK avec la [configuration dans le code](#in-code-setup). Lorsqu'il est défini, il prévaut sur `DD_LLMOBS_SAMPLE_RATE`.
+- **Variable d'environnement** (`DD_LLMOBS_SAMPLE_RATE`) : s'applique à la fois à la [configuration en ligne de commande](#command-line-setup) et à la [configuration dans le code](#in-code-setup). En Java, la propriété système `dd.llmobs.sample.rate` définit la même valeur.
+- **Paramètre dans le code** (`sample_rate` en Python, `sampleRate` en Node.js) : transmis à `LLMObs.enable()` en Python, ou sous `llmobs` en Node.js, lorsque vous activez le SDK avec la [configuration dans le code](#in-code-setup). Lorsqu'il est défini, il prévaut sur `DD_LLMOBS_SAMPLE_RATE`. Le SDK Java n'a pas d'équivalent dans le code.
 
 Le taux d'échantillonnage est un nombre à virgule flottante compris entre `0.0` (aucune trace conservée) et `1.0` (toutes les traces conservées). La valeur par défaut est `1.0`. Les valeurs hors plage sont ignorées.
 
@@ -368,6 +372,25 @@ const tracer = require('dd-trace').init({
 });
 
 const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+Définissez le taux d'échantillonnage avec la variable d'environnement :
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 \
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-jar path/to/your/app.jar
+{{< /code-block >}}
+
+Ou définissez la propriété système équivalente `dd.llmobs.sample.rate` :
+
+{{< code-block lang="shell" >}}
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -1307,11 +1330,11 @@ La méthode `LLMObs.annotate()` accepte les arguments suivants :
 
 `input_data`
 : optionnel - _type sérialisable en JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`, où `"tool_calls"` est une liste optionnelle de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et `"tool_id"` , `"type"` et `"tool_results"` est une liste optionnelle de dictionnaires de résultats d'outils avec la clé requise : `"result"`, et les clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires de médias pour les spans multimodaux, chacun avec un `"mime_type"` requis et exactement l'un des suivants : `"content"` (média encodé en base64, inclus en ligne) ou `"attachment_key"`. **Note** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`, où `"tool_calls"` est une liste optionnelle de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et `"tool_id"` , `"type"` et `"tool_results"` est une liste optionnelle de dictionnaires de résultats d'outils avec la clé requise : `"result"`, et les clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires multimédias pour les étendues multimodales, chacune avec un `"mime_type"` et un `"content"` requis (média encodé en base64, intégré en ligne). **Note** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
 
 `output_data`
 a: facultatif - _type sérialisable en JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, où `"tool_calls"` est une liste facultative de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et les clés facultatives : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires de médias pour les spans multimodaux, chacun avec un `"mime_type"` requis et exactement l'un des suivants : `"content"` (média encodé en base64, inclus en ligne) ou `"attachment_key"`. **Note** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, où `"tool_calls"` est une liste facultative de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et les clés facultatives : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires multimédias pour les étendues multimodales, chacune avec un `"mime_type"` et un `"content"` requis (média encodé en base64, intégré en ligne). **Note** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 a: facultatif - _liste de dictionnaires_
@@ -1435,11 +1458,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-Les messages annotés avec `audio_parts` ou `image_parts` s'affichent sous forme de lecteurs audio et d'images intégrés dans la vue de trace :
-
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Un span LLM dans la vue de trace Agent Observability. Le message d'entrée de l'UTILISATEUR affiche un lecteur audio intégré avec la transcription « Hey, how are you? », et le message de sortie de l'ASSISTANT affiche une commande « Click to play audio » avec la transcription « Hey! ». Je vais très bien, merci de demander. « How about you? »." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Un span LLM dans la vue de trace Agent Observability. Le message d'entrée de l'UTILISATEUR affiche l'invite « What is in this image? ». avec une photo intégrée d'un chiot noir, et le message de sortie de l'ASSISTANT le décrit comme un chiot Labrador Retriever noir sur une surface en bois." style="width:100%;" >}}
+Les messages annotés avec `audio_parts` ou `image_parts` s'affichent sous forme de lecteurs audio et d'images intégrés dans la vue de trace. Pour des exemples rendus, les formats pris en charge, les limites de taille et les intégrations qui remplissent automatiquement ces champs, consultez [Support multimodal](/llm_observability/instrument/multimodal/).
 
 {{% /tab %}}
 
@@ -1461,11 +1480,11 @@ L'objet `annotationOptions` peut contenir les éléments suivants :
 
 `inputData`
 : facultatif - _type sérialisable en JSON ou liste d'objets_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les spans multimodaux, chacun avec un `mimeType` requis et exactement un élément parmi `content` (média encodé en base64, transporté en ligne) ou `attachmentKey`. **Remarque** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les étendues multimodales, chacune avec un `mimeType` et un `content` requis (média encodé en base64, intégré en ligne). **Remarque** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "..."}`.
 
 `outputData`
 : facultatif - _type sérialisable en JSON ou liste d'objets_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste d'objets avec ce format : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les spans multimodaux, chacun avec un `mimeType` requis et exactement un élément parmi `content` (média encodé en base64, transporté en ligne) ou `attachmentKey`. **Remarque** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "...", name: "...", score: number, id: "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste d'objets avec ce format : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les étendues multimodales, chacune avec un `mimeType` et un `content` requis (média encodé en base64, intégré en ligne). **Remarque** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "...", name: "...", score: number, id: "..."}`.
 
 `metadata`
 : facultatif - _objet_
@@ -1576,13 +1595,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-Les messages annotés avec `audioParts` ou `imageParts` s'affichent sous forme de lecteurs audio et d'images intégrés dans la vue de trace :
+Les messages annotés avec `audioParts` ou `imageParts` s'affichent sous forme de lecteurs audio et d'images intégrés dans la vue de trace. Pour des exemples rendus, les formats pris en charge, les limites de taille et les intégrations qui remplissent automatiquement ces champs, consultez [Support multimodal](/llm_observability/instrument/multimodal/).
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Un span LLM dans la vue de trace Agent Observability. Le message d'entrée de l'UTILISATEUR affiche un lecteur audio intégré avec la transcription « Hey, how are you? », et le message de sortie de l'ASSISTANT affiche une commande « Click to play audio » avec la transcription « Hey! ». Je vais très bien, merci de demander. « How about you? »." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Un span LLM dans la vue de trace Agent Observability. Le message d'entrée de l'UTILISATEUR affiche l'invite « What is in this image? ». avec une photo intégrée d'un chiot noir, et le message de sortie de l'ASSISTANT le décrit comme un chiot Labrador Retriever noir sur une surface en bois." style="width:100%;" >}}
-
-Pour les complétions de chat audio OpenAI, `audioParts` sont également capturés automatiquement par [les intégrations LLM de Datadog](/llm_observability/instrument/auto_instrumentation/) — aucune annotation manuelle n'est requise. Contrairement à `audioParts`, `imageParts` ne sont actuellement pas capturés automatiquement et doivent être annotés manuellement ; une capture automatique est prévue pour une version ultérieure.
+Pour les complétions de chat audio OpenAI, `audioParts` sont également capturés automatiquement par [les intégrations LLM de Datadog](/llm_observability/instrument/auto_instrumentation/), sans aucune annotation manuelle requise. Le SDK Node.js ne capture pas `imageParts` automatiquement. Annotez-les comme indiqué ci-dessus.
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -2879,7 +2894,7 @@ Le constructeur accepte les méthodes suivantes :
 <br />Une explication textuelle du feedback.
 {{% /collapse-content %}}
 
-**Note**: `LLMObs.submitFeedback()` valide le commentaire et génère une `IllegalArgumentException` lorsque l'Agent Observability est activé et que le commentaire est invalide, par exemple lorsque la cible, la valeur ou l'expéditeur est manquant. Lorsque l'Agent Observability est désactivé, ou que l'Agent n'est pas attaché, l'appel est un no-op.
+**Note**: `LLMObs.submitFeedback()` valide le commentaire et génère une `IllegalArgumentException` lorsque Agent Observability est activé et que le commentaire est invalide, par exemple lorsque la cible, la valeur ou l'expéditeur est manquant. Lorsque l'Agent Observability est désactivé, ou que l'Agent n'est pas attaché, l'appel est un no-op.
 
 #### Exemple {#example-31}
 

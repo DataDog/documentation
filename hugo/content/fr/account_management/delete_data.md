@@ -1,65 +1,74 @@
 ---
-description: Supprimez des logs et d'autres données de Datadog avec les autorisations
-  appropriées, des requêtes basées sur le temps et la journalisation d'audit pour
-  la conformité.
-private: true
+description: Supprimez les données de logs de Datadog avec les autorisations appropriées,
+  des requêtes basées sur le temps et la journalisation des pistes d'audit pour la
+  conformité.
+further_reading:
+- link: /account_management/rbac/
+  tag: Documentation
+  text: En savoir plus sur les rôles et les autorisations
+- link: /account_management/audit_trail/
+  tag: Documentation
+  text: Surveillez l'activité des utilisateurs avec Audit Trail.
 title: Supprimer des données
 ---
+Cette page explique comment supprimer des données sensibles qui n'auraient pas dû être ingérées dans Datadog.
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  La suppression de données via l'UI est en préversion.
-{{< /callout >}}
+## Supprimer des données autres que les logs {#delete-non-logs-data}
 
-Cette page explique comment supprimer des données de Datadog.
+Pour supprimer des données d'un produit autre que Logs, contactez le [Support][1] avec votre demande.
 
-## Supprimer des données n'étant pas issues de Logs
+## Supprimer des données de Logs {#delete-logs-data}
 
-Pour supprimer des données d'un produit autre que les logs, contactez [l'assistance][1] avec votre demande.
+Vous pouvez supprimer des données du produit Logs en utilisant l'interface utilisateur.
 
-## Supprimer des données de Logs
+### Activer la fonctionnalité de suppression {#enable-deletion-feature}
 
-Vous pouvez supprimer des données du produit Logs en utilisant l'UI.
+La suppression des données de Logs ne peut être activée que par les administrateurs de l'organisation. Pour activer la suppression des données de Logs :
+1. Sous Organization Settings, accédez aux Préférences.
+2. Activez {{< ui >}}Logs Data Deletion{{< /ui >}} et enregistrez.
 
-### Suppression d'accès
+Pour accorder à un utilisateur la possibilité de supprimer des Logs :
+1. Sous Paramètres de l'organisation, accédez à [Roles][3].
+2. Créez un rôle disposant de l'autorisation {{< ui >}}Logs Delete Data{{< /ui >}}.
 
-Pour autoriser un compte à supprimer des données, procédez comme suit :
+### Démarrer les suppressions {#start-deletions}
 
-1. Sous Organizational Settingsn, allez à [Roles][3].
-2. Demandez ou créez un rôle qui possède l'autorisation **Delete Data** pour le produit dont vous souhaitez supprimer les données. Par exemple, pour supprimer les données de Logs, demandez ou créez un rôle avec l'autorisation **Logs Delete Data**.
+<div class="alert alert-info">Une demande de suppression peut être annulée jusqu'à 10 jours après sa soumission.</div>
 
-### Commencer les suppressions
+<div class="alert alert-danger"><strong>Pour les Logs</strong> : La suppression des données est permanente après 10 jours. Veuillez examiner attentivement vos demandes de suppression.</div>
 
-<div class="alert alert-warning">Les données supprimées ne peuvent jamais être récupérées et les suppressions sont irréversibles.</div>
-
-<div class="alert alert-info"><strong>Pour les logs</strong> : les suppressions ne peuvent pas être limitées à un index spécifique et s'appliquent aux Index, Flex Indexes et Online Archives.
-</div>
-
-Pour supprimer des données, procédez comme suit :
+Pour supprimer des données, effectuez les étapes suivantes :
 
 1. Sous Organization Settings, accédez à [Data Deletion][4].
-2. Sélectionnez un produit à partir duquel supprimer des données.
-3. Sélectionnez une période de temps pour la recherche.
-4. Recherchez des événements à supprimer dans la période.
-5. Lorsque la recherche affiche les résultats que vous souhaitez supprimer, cliquez sur le bouton **Delete** en bas à droite.
-6. Il vous est demandé de confirmer la suppression en cochant une case et en saisissant un texte de confirmation. Cliquez sur **Confirm**.
+2. Sélectionnez un produit à partir duquel effectuer la suppression. 
+3. Sélectionnez une période de recherche.
+4. Recherchez les événements à supprimer au sein de la période définie.
+5. Une fois que la recherche affiche les résultats que vous souhaitez supprimer, cliquez sur le bouton {{< ui >}}Delete{{< /ui >}} en bas à droite.
+6. Confirmez la suppression en cochant la case et en saisissant le texte de confirmation demandé. 
+7. Cliquez sur {{< ui >}}Confirm{{< /ui >}}.
 
-La suppression commence 2 heures après la confirmation de la demande.
+La suppression commence instantanément après la confirmation de la demande ; les données cibles sont inaccessibles.
 
-Pour valider une suppression, consultez l'onglet [Deletion History][5], où vous pouvez voir le statut des suppressions. Vous pouvez également rechercher les suppressions dans [Audit Trail][6] en utilisant la chaîne `@asset.name:"Data Deletion"`.
+Depuis l'onglet [Deletion History][5], vous pouvez consulter le statut des suppressions. Vous pouvez également rechercher des suppressions dans [Audit Trail][6] en utilisant la chaîne de recherche `@asset.name:"Data Deletion"`.
 
-**Remarques** :
-- Les suppressions commencent 2 heures après la confirmation, et les enregistrements correspondants arrivant durant cette période sont inclus dans la suppression. Dans certains cas, des enregistrements arrivant après le démarrage de la tâche peuvent ne pas être supprimés car la suppression a déjà traité la plage temporelle dans laquelle ces enregistrements sont apparus.
-- Lors de la suppression d'un enregistrement, les données dérivées de cet enregistrement ne sont pas supprimées (par exemple, les métriques générées à partir de Logs).
+**Remarques** :
+- Les suppressions démarrent instantanément après confirmation. Dans certains cas, les enregistrements arrivant après le lancement de la tâche pourraient ne pas être supprimés car la suppression a déjà traité la fenêtre temporelle dans laquelle cet enregistrement est survenu.
+- Lors de la suppression d'un enregistrement, les données dérivées de cet enregistrement ne sont pas supprimées (par exemple, les métriques générées à partir des Logs).
+- Un maximum de 5 suppressions simultanées est pris en charge.
 
-### Arrêter les suppressions
+### Annuler les suppressions {#cancel-deletions}
 
-**Remarque** : les suppressions en cours peuvent être annulées. Toutefois, cela empêche uniquement la suppression des données qui n'ont pas encore été traitées pour une tâche donnée.
+**Remarque** : Lorsqu'une demande de suppression est créée, elle reste dans un état récupérable pendant 10 jours. Pendant cette période, les données supprimées sont inaccessibles dans Datadog mais récupérées si la demande de suppression est annulée.
 
-Pour annuler une suppression, cliquez sur **Cancel** pour une tâche **Upcoming** ou **In Progress**.
+Pour annuler une suppression, cliquez sur {{< ui >}}Cancel{{< /ui >}} sur une tâche {{< ui >}}Upcoming{{< /ui >}} ou {{< ui >}}Done (Recoverable){{< /ui >}}.
 
-### Auditer les suppressions
+### Auditer les suppressions {#audit-deletions}
 
-Les suppressions sont enregistrées dans [l'historique des suppressions][5] pendant 90 jours. Elles sont également consignées dans [Audit Trail][6] avec les informations de l'utilisateur ayant fait la demande.
+Les suppressions sont enregistrées dans [Deletion History][5] pendant 90 jours. Elles sont également enregistrées dans [Audit Trail][6] avec les détails de l'utilisateur demandeur.
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/support/
 [2]: /fr/account_management/rbac/permissions/

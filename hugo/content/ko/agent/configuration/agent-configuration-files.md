@@ -17,14 +17,12 @@ title: Agent 구성 파일
 
 Agent 구성 파일의 위치는 운영 체제에 따라 다릅니다.
 
-| 플랫폼                             | 명령                              |
-|:-------------------------------------|:-------------------------------------|
-| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
-| Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| macOS                                | `~/.datadog-agent/datadog.yaml`      |
-| Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
-
-사용 가능한 모든 구성 옵션은 [샘플 `config_template.yaml` 파일][1]을 참조하세요.
+| 플랫폼 | 명령어                               | 예제 구성                            |
+|:---------|:--------------------------------------|:------------------------------------------|
+| AIX      | `/etc/datadog-agent/datadog.yaml`     | [`datadog.yaml.example`][3]               |
+| Linux    | `/etc/datadog-agent/datadog.yaml`     | [`datadog-agent_linux.yaml.example`][4]   |
+| macOS    | `/opt/datadog-agent/etc/datadog.yaml` | [`datadog-agent_darwin.yaml.example`][5]  |
+| Windows  | `%ProgramData%\Datadog\datadog.yaml`  | [`datadog-agent_windows.yaml.example`][6] |
 
 ## Agent 구성 디렉터리 {#agent-configuration-directory}
 
@@ -37,7 +35,7 @@ Agent 검사 및 통합에 대한 구성 파일은 `conf.d` 디렉터리에 저�
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |
 | Fedora                               | `/etc/datadog-agent/conf.d/`   |
-| macOS                                | `~/.datadog-agent/conf.d/`     |
+| macOS                                | `/opt/datadog-agent/etc/conf.d/`     |
 | RedHat                               | `/etc/datadog-agent/conf.d/`   |
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | SUSE                                 | `/etc/datadog-agent/conf.d/`   |
@@ -72,5 +70,8 @@ Autodiscovery 템플릿 파일은 구성 폴더에 `auto_conf.yaml` 파일로 �
 
 JMX Agent 검사에는 해당 구성 폴더에 추가로 `metrics.yaml` 파일이 있습니다. 이 파일에는 Datadog Agent가 기본적으로 수집하는 모든 Bean 목록이 포함되어 있습니다. 따라서 [Docker 레이블 또는 Kubernetes 주석][2]을 통해 검사를 구성할 때 모든 Bean을 수동으로 나열할 필요가 없습니다.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /ko/agent/kubernetes/integrations/#configuration
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/docs/datadog.yaml.example
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
+[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_darwin.yaml.example
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example

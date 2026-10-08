@@ -1331,27 +1331,6 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoTerm
-      url: coterm/
-      pre: coscreen
-      identifier: coterm
-      parent: essentials_heading
-      weight: 160000
-    - name: 설치
-      url: coterm/install
-      identifier: coterm_install
-      parent: coterm
-      weight: 1
-    - name: CoTerm 사용하기
-      url: coterm/usage
-      identifier: coterm_usage
-      parent: coterm
-      weight: 2
-    - name: 구성 규칙
-      url: coterm/rules
-      identifier: coterm_rules
-      parent: coterm
-      weight: 3
     - name: Remote Configuration
       pre: config-2
       url: remote_configuration
@@ -7824,7 +7803,7 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigate_security_signals
       weight: 301
-    - name: Risk Insights
+    - name: Entity Risks
       url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring

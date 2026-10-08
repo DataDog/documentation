@@ -4,50 +4,49 @@ code_lang_weight: 40
 title: Requisitos de compatibilidad de Envoy Gateway
 type: multi-code-lang
 ---
+La siguiente tabla enumera las capacidades de App and API Protection para la integración de Envoy Gateway según la versión de la imagen de Datadog External Processor especificada:
 
-La siguiente tabla enumera las capacidades de App y API Protection para la integración de Envoy Gateway según la versión de imagen del Datadog External Processor especificado:
-
-| Función de App and API Protection              | Versión mínima de la imagen del Datadog External Processor  |
+| Capacidad de App and API Protection              | Versión mínima de la imagen de Datadog External Processor  |
 |------------------------------------------------|---------------------------------------------------|
-| Threat Detection                               | v2.4.0                                            |
-| Threat Protection                              | v2.4.0                                            |
-| Personalizar la respuesta a las solicitudes bloqueadas         | v2.4.0                                            |
-| Modo asíncrono no bloqueante (observabilidad) | no compatible                                     |
-| Seguridad de la API                                   | v2.4.0                                            |
+| Detección de amenazas                               | v2.4.0                                            |
+| Protección contra amenazas                              | v2.4.0                                            |
+| Personalice la respuesta a las solicitudes bloqueadas         | v2.4.0                                            |
+| Modo asíncrono sin bloqueo (observabilidad) | no compatible                                     |
+| Seguridad de API                                   | v2.4.0                                            |
 | App and API Protection independiente              | v2.4.0                                            |
-| Rastreo automático de los eventos de actividad de los usuarios         | no compatible                                     |
+| Seguimiento automático de eventos de actividad del usuario         | no compatible                                     |
 
-### Soporte para el procesamiento del cuerpo
+### Soporte para el procesamiento del cuerpo {#body-processing-support}
 
 El servicio Datadog External Processor admite el procesamiento de cuerpos de solicitud y respuesta para los siguientes tipos de carga útil:
 
-| Tipo de carga útil | Versión mínima de la imagen del Datadog External Processor  |
+| Tipo de carga útil | Versión mínima de la imagen de Datadog External Processor  |
 |--------------|---------------------------------------------------|
 | JSON         | v2.4.0                                            |
 
-## Compatibilidad con la versión de Envoy Gateway
+## Compatibilidad de versiones de Envoy Gateway {#envoy-gateway-version-support}
 
-### Versiones compatibles de Envoy Gateway
+### Versiones de Envoy Gateway compatibles {#supported-envoy-gateway-versions}
 
-Envoy Gateway se basa en Envoy Proxy y en la API de Gateway, y se ejecuta dentro de un clúster de Kubernetes. Datadog solo es compatible con versiones de Envoy Gateway que no sean EOL; consulta la [Matriz de compatibilidad de Envoy Gateway][1] oficial para obtener la lista actual de versiones compatibles y dependencias ascendentes (Envoy Proxy, API de Gateway, Kubernetes).
+Envoy Gateway depende de Envoy Proxy y de la Gateway API, y se ejecuta dentro de un clúster de Kubernetes. Datadog solo admite versiones de Envoy Gateway que no hayan llegado al final de su vida útil (EOL); consulte la [Matriz de compatibilidad de Envoy Gateway][1] oficial para obtener la lista actual de versiones compatibles y dependencias upstream (Envoy Proxy, Gateway API, Kubernetes).
 
 
-### Compatibilidad con la versión de Envoy
+### Compatibilidad de versiones de Envoy {#envoy-version-support}
 
-La integración de Envoy en Datadog para App and API Protection se basa en funciones que pueden no estar presentes en todas las versiones de Envoy. La siguiente tabla muestra qué versiones de Envoy son compatibles con cada función.
+La integración de Datadog Envoy para App and API Protection depende de funciones que podrían no estar presentes en todas las versiones de Envoy. La siguiente tabla muestra qué versiones de Envoy admiten cada función.
 
 | Función | Versión mínima de Envoy |
 |---------|-----------------------|
 | Filtro de procesamiento externo | v1.27.0 |
 | Modo de observabilidad | v1.30.0 |
 
-## Compatibilidad con la integración de Datadog Envoy Gateway
+## Soporte para la integración de Datadog Envoy Gateway {#datadog-envoy-gateway-integration-support}
 
-<div class="alert alert-info">La integración de Datadog Envoy Gateway para App and API Protection está en vista previa.</div>
+Solo se admiten la versión de Linux y las arquitecturas amd64 y arm64.
 
-Solo es compatible la versión de Linux y las arquitecturas amd64 y arm64.
-
-<div class="alert alert-info">Si quieres que agreguemos la compatibilidad para alguna función que aún no es compatible, háznoslo saber. Rellena <a
-href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si desea que se agregue soporte para alguna de
+las capacidades no compatibles, ¡háganoslo saber! Complete <a
+href=\"https://forms.gle/gHrxGQMEnAobukfn7\">este breve formulario para enviar
+detalles</a>.</div>
 
 [1]: https://gateway.envoyproxy.io/news/releases/matrix/

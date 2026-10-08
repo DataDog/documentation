@@ -1,66 +1,78 @@
 ---
+description: Cree, pruebe y refine alertas de seguimiento de forma segura sin activar
+  notificaciones mediante los borradores de seguimiento.
 further_reading:
 - link: monitors/
   tag: Documentación
-  text: Información general de monitores y alertas
+  text: 'Seguimientos y Alerting: descripción general'
 - link: monitors/configuration/?tab=thresholdalert
   tag: Documentación
-  text: Configurar monitors
+  text: Configure seguimientos.
 - link: monitors/manage/
   tag: Documentación
-  text: Gestionar monitores
-title: Draft Monitors
+  text: Administre seguimientos.
+title: Borradores de seguimiento
 ---
+## Descripción general {#overview}
 
-{{< callout url="#" btn_hidden="true" >}}
-Draft Monitors está en vista previa.
-{{< /callout >}}
+Los borradores de seguimiento le permiten crear, refinar y probar alertas de forma segura sin activar notificaciones. 
 
-## Información general
+Ya sea que esté experimentando con umbrales, iterando en consultas complejas o colaborando con compañeros de equipo, los borradores de seguimiento le brindan un espacio limpio y aislado para trabajar, libre del ruido de los seguimientos de prueba o sin terminar. Además, los borradores de seguimiento ayudan a reducir la fatiga por alertas durante el desarrollo y garantizan que solo los seguimientos completamente validados se publiquen. 
 
-Draft Monitors te permite crear, perfeccionar y test alertas de forma segura sin activar notificaciones. 
+Ideales para ingenieros y SRE que gestionan flujos de trabajo de alertas, los borradores de seguimiento brindan claridad entre múltiples equipos y un camino seguro desde la idea hasta una alerta confiable.
 
-Tanto si estás experimentando con umbrales, iterando sobre consultas complejas o colaborando con compañeros de equipo, los borradores te ofrecen un espacio limpio y aislado para trabajar, sin el ruido de los monitores inacabados o de test. Además, Draft Monitors ayuda a reducir el cansancio de las alertas durante el desarrollo y garantiza que sólo se publiquen los monitores totalmente aprobados. 
+## Cree un borrador de seguimiento {#create-a-draft-monitor}
 
-Ideales para ingenieros y SRE que gestionan workflows (UI) / procesos (generic) de alertas, los monitores de borradores proporcionan claridad a todos los múltiples equipos y un camino seguro desde la idea hasta la alerta fiable.
+Para crear y almacenar seguimientos en estado de borrador:
 
-## Crear un monitor (noun) de borrador
+1. Navegue a [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][1].  
+2. [Configure el seguimiento][2] (añada su consulta, especifique las condiciones y, opcionalmente, establezca las notificaciones). Los identificadores de notificación establecidos en un borrador solo se utilizan después de publicar el seguimiento. 
+3. Haga clic en {{< ui >}}Save as Draft{{< /ui >}}. No se envían alertas desde este borrador de seguimiento.
 
-Para crear y almacenar monitores en estado borrador:
+{{< img src="/monitors/draft/save_as_draft.png" alt="Botón Guardar como borrador en la interfaz de creación de seguimiento" style="width:100%;" >}}
 
-1. Ve a [**Monitores > Nuevo monitor (noun)**][1].  
-2. [Configura el monitor (noun)][2] (añade tu consulta, especifica condiciones y, opcionalmente, configura notificaciones). Las gestiones de notificación configuradas en un borrador sólo se utilizan una vez que se publica el monitor (noun). 
-3. Haz clic en **Guardar como borrador**. No se envían alertas desde este monitor (noun) de borrador.
+## Publique un borrador de seguimiento {#publish-a-draft-monitor}
 
-{{< img src="/monitors/draft/save_as_draft.png" alt="El botón Guardar como borrador en la interfaz de creación de un monitor (noun)" style="width:100%;" >}}
+Cuando su seguimiento esté listo:
 
-## Publicar un monitor (noun) de borrador
+1. Abra el borrador desde [{{< ui >}}Monitors List{{< /ui >}}][3] usando la faceta de estado de borrador o filtre por `status:draft`.  
+2. Revise la configuración.  
+3. Haga clic en {{< ui >}}Publish Monitor{{< /ui >}}.  
+4. Esto publica su seguimiento y comienza Alerting según sus condiciones.
 
-Cuando tu monitor (noun) esté listo:
+## Administrar borradores de seguimiento {#manage-draft-monitors}
 
-1. Abre el borrador desde [**Lista de Monitores**][3] utilizando la faceta de estado de borrador o filtra por `status:draft`. 
-2. Revisa la configuración.  
-3. Haz clic en **Publicar monitor (noun).**  
-4. Esto publica tu monitor (noun) y comienza a alertar en función de tus condiciones.
+<!-- TODO Add image of Monitors List filtered to view drafts, and final QA of instructions with UI-->
 
-## Gestionar monitores de borrador
+Encuentre borradores de seguimiento desde [{{< ui >}}Monitors List{{< /ui >}}][3] usando la faceta de estado de borrador o filtre por `draft_status:draft`. Los borradores aparecen con una etiqueta {{< ui >}}Draft{{< /ui >}} en la página de estado del seguimiento y en la lista de seguimientos. Los borradores caducan después de 6 meses sin actualizaciones, pero puede eliminar borradores de seguimiento en cualquier momento.
 
-<!-- TODO Añadir imagen de la Lista de monitores filtrada para ver borradores y el QA final de instrucciones con la interfaz de usuario-->
+## Permisos {#permissions}
 
-Busca monitores de borradores en la [**Lista de Monitores**][3] utilizando la faceta de estado de borrador o filtra por `draft_status:draft`. Los borradores aparecen con la etiqueta **Borrador** en la page (página) del estado del monitor (noun) y en la lista de monitores (noun). Los borradores caducan a los 6 meses sin actualizaciones, pero puedes eliminar monitores de borrador en cualquier momento.
+Cualquier persona con [permisos de edición][4] puede actualizar un borrador de seguimiento. Puede usar eventos para obtener una vista previa de la frecuencia con la que se habría activado el seguimiento sin enviar notificaciones reales.
 
-## Permisos
+El permiso **Draft Monitors Write** permite a los usuarios administrar borradores de seguimiento sin el permiso más amplio **Monitors Write**. Otorgue este permiso a los usuarios que necesiten trabajar en borradores sin modificar los seguimientos publicados.
 
-Cualquier persona con [permisos de edición][4] puede actualizar un monitor (noun) de borrador. Puedes utilizar eventos para previsualizar la frecuencia con la que se habría activado el monitor (noun) sin enviar notificaciones reales.
+Un usuario que solo tenga el permiso **Draft Monitors Write** puede:
 
-## Prácticas recomendadas
+- Crear un seguimiento, siempre y cuando se guarde con `draft_status` establecido en `draft`.
+- Editar un borrador de seguimiento existente, siempre y cuando la edición no cambie `draft_status` de `draft`.
+- Eliminar un borrador de seguimiento que haya creado, o un borrador de seguimiento de un equipo al que pertenezca.
 
-* **Utiliza borradores para revisiones por pares:** Colabora antes de publicar los cambios.  
-* **Evita el ruido en la producción:** Test las condiciones de alerta de forma segura en un borrador primero.  
-* **Rastrea tu trabajo:** Utiliza nombres y tags (etiquetas) claros para los borradores durante el desarrollo.  
-* **Limita los borradores antiguos:** Revisa y limpia los borradores antiguos para reducir el desorden.
+Un usuario que solo tenga el permiso **Draft Monitors Write** no puede:
 
-## Referencias adicionales
+- Publicar borradores de seguimiento.
+- Editar o eliminar seguimientos publicados.
+
+Estos permisos se aplican tanto en la interfaz de usuario como en la API de Datadog.
+
+## Mejores prácticas {#best-practices}
+
+* **Utilice borradores para revisiones por pares:** Colabore antes de publicar los cambios.  
+* **Evite el ruido en producción:** Pruebe las condiciones de alerta de forma segura primero en un borrador.  
+* **Haga un seguimiento de su trabajo:** Utilice nombres y etiquetas claros para los borradores de seguimiento durante el desarrollo.  
+* **Limite los borradores de seguimiento obsoletos:** Revise y limpie los borradores de seguimiento antiguos para reducir el desorden.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
