@@ -9,6 +9,8 @@ further_reading:
 
 Database Monitoring provides deep visibility into your Supabase databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
+<div class="alert alert-info"><a href="/database_monitoring/setup_postgres/supabase/cloud">Supabase Cloud (Recommended)</a>: Set up Database Monitoring through the Supabase Cloud integration tile. No Agent installation required.</div>
+
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Supabase database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
