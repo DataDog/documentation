@@ -1,6 +1,5 @@
 ---
 title: Monitor Inference Workloads with GPU Monitoring
-is_beta: false
 description: Monitor the latency, throughput, and health of your model deployments alongside the GPUs they run on.
 further_reading:
 - link: "/gpu_monitoring/setup"
@@ -37,8 +36,8 @@ Setup uses two integrations. The Dynamo integration collects frontend and worker
 
 ### Prerequisites
 
-To begin monitoring your inference workloads, you must first meet the following criteria:
-- You are running the custom inference Agent 7.83.2 image with [GPU Monitoring enabled][2]. See [Step 1](#1-use-the-inference-agent-image).
+To begin monitoring your inference workloads, you must meet the following criteria:
+- You have [GPU Monitoring enabled][2] and access to the inference Agent image, which Datadog provides when you join the Preview.
 - You are serving models with vLLM workers in an NVIDIA Dynamo deployment.
 - You are running CUDA and CUPTI version 13 or later.
 
