@@ -51,6 +51,19 @@ Automation Pipelines operates through a rules-based system that allows you to au
 - **Rule configuration**: Each rule consists of multiple criteria, designed to filter findings based on specific attributes. Within a rule, the combination of these criteria operates as a logical AND; however, if any criteria include multiple values, those values operate as a logical OR. This structure gives you the flexibility to create rules that precisely target your needs.
 - **Rule matching**: Automation Pipelines evaluates findings against your rules in the order you've listed them. As each finding is processed, Automation Pipelines moves through the list until it finds a matching rule, at which point the specified action—such as muting non-urgent issues or highlighting critical threats—is triggered. Automation Pipeline rules apply immediately to new findings. For existing findings, updates can take up to two hours.
 
+### Code Security findings on non-default branches
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Automation for Code Security findings on non-default branches is in Preview and is available only to enrolled customers. For customers who are not enrolled in the Preview, Code Security findings are available only from the latest commit on the default branch.
+{{< /callout >}}
+
+With the Preview enabled, Code Security reports Static Code Analysis (SAST), Secrets, Software Composition Analysis (SCA), and Infrastructure as Code (IaC) findings from every branch and commit. Unless an automation rule includes an explicit `@git.branch` or `@git.is_default_branch` filter, its branch scope depends on the action:
+
+- **Set due date, add to Security Inbox, and create ticket** rules apply only to findings from the latest commit on the default branch.
+- **Mute and modify severity** rules apply to findings from all branches and commits.
+
+If your organization is enrolled in the Preview, you can target other branches or restrict a rule to specific branches by adding an `@git.branch` or `@git.is_default_branch` filter to the rule's tags or attributes. For example, use `@git.is_default_branch:false` to target non-default branches.
+
 ## Use cases
 
 ### Adjust finding severities to reflect your business context
