@@ -394,6 +394,165 @@ Provides guidance for investigating APM service issues like latency, errors, and
 - How should I investigate a latency increase in my API service?
 - Guide me through debugging an error spike in production.
 
+## Bits Data Analysis
+
+Tools for asking natural-language questions about your data warehouse and getting analyzed answers. Ask a question and the agent explores available datasets, writes and runs the necessary queries, and returns an analysis. Supporting tools manage saved query contexts and skills, and evaluation tools manage test cases, results, and runs.
+
+<div class="alert alert-info">The <code>bits-data-analysis</code> toolset is in Preview.</div>
+
+The evaluation tools for results, test cases, and runs require admin-level Bits Data Analysis permissions. Write tools require the standard MCP write permission in addition to Bits Data Analysis permissions.
+
+### `ask_bits_data_analysis`
+*Toolset: **bits-data-analysis***\
+Asks a natural-language question about the data warehouse. The tool explores available datasets, writes and runs the necessary queries, and returns an analyzed answer. To continue a previous conversation, pass its `conversation_id`.
+
+- Ask Bits Data Analysis which warehouse tables saw the most queries last week.
+- Which datasets contain order data, and what was the average order value by region last quarter?
+
+### `list_bits_data_analysis_query_contexts`
+*Toolset: **bits-data-analysis***\
+Lists saved query contexts.
+
+- Show me the saved query contexts.
+
+### `get_bits_data_analysis_query_context`
+*Toolset: **bits-data-analysis***\
+Gets one saved query context.
+
+- Get the full contents of the `weekly-revenue` query context.
+
+### `create_bits_data_analysis_query_context`
+*Toolset: **bits-data-analysis***\
+Creates a saved query context.
+
+- Create a saved query context for weekly revenue reporting.
+
+### `create_bits_data_analysis_query_context_from_git`
+*Toolset: **bits-data-analysis***\
+Creates a query context linked to a file version in a connected Git repository.
+
+- Create a query context from the `revenue.sql` file in our connected analytics repository.
+
+### `update_bits_data_analysis_query_context`
+*Toolset: **bits-data-analysis***\
+Updates a saved query context.
+
+- Update the `weekly-revenue` query context to exclude test accounts.
+
+### `sync_bits_data_analysis_query_context_from_git`
+*Toolset: **bits-data-analysis***\
+Syncs a Git-linked query context to its linked file at an exact commit.
+
+- Sync the `weekly-revenue` query context to commit `abc1234` of its linked file.
+
+### `delete_bits_data_analysis_query_context`
+*Toolset: **bits-data-analysis***\
+Deletes a saved query context.
+
+- Delete the old `staging-experiments` query context.
+
+### `list_bits_data_analysis_skills`
+*Toolset: **bits-data-analysis***\
+Lists the skills visible to the caller, with summaries only.
+
+- List the skills available to me.
+
+### `get_bits_data_analysis_skill`
+*Toolset: **bits-data-analysis***\
+Gets one skill by ID, including its full content.
+
+- Get the full contents of the `revenue-analysis` skill.
+
+### `create_bits_data_analysis_skill`
+*Toolset: **bits-data-analysis***\
+Creates a user-managed skill.
+
+- Create a skill documenting how we calculate active users.
+
+### `update_bits_data_analysis_skill`
+*Toolset: **bits-data-analysis***\
+Replaces the fields of a user-managed skill.
+
+- Update the `revenue-analysis` skill to use the new fiscal calendar.
+
+### `delete_bits_data_analysis_skill`
+*Toolset: **bits-data-analysis***\
+Deletes a skill.
+
+- Delete the `revenue-analysis` skill.
+
+### `create_bits_data_analysis_skill_from_git`
+*Toolset: **bits-data-analysis***\
+Creates a skill linked to an exact file version in a connected Git repository.
+
+- Create a skill from the `active-users.md` file in our connected analytics repository.
+
+### `sync_bits_data_analysis_skill`
+*Toolset: **bits-data-analysis***\
+Syncs a Git-linked skill from its linked file at an exact commit.
+
+- Sync the `revenue-analysis` skill to the latest commit of its linked file.
+
+### `list_bits_data_analysis_eval_results`
+*Toolset: **bits-data-analysis***\
+Lists stored evaluation results.
+
+- List the stored evaluation results.
+
+### `get_latest_bits_data_analysis_eval_results`
+*Toolset: **bits-data-analysis***\
+Gets the latest evaluation results.
+
+- Show me the latest evaluation results.
+
+### `list_bits_data_analysis_eval_test_cases`
+*Toolset: **bits-data-analysis***\
+Lists evaluation test cases.
+
+- List the evaluation test cases.
+
+### `get_bits_data_analysis_eval_test_case`
+*Toolset: **bits-data-analysis***\
+Gets one evaluation test case.
+
+- Get the details of the `top-customers` test case.
+
+### `create_bits_data_analysis_eval_test_case`
+*Toolset: **bits-data-analysis***\
+Creates an evaluation test case.
+
+- Create a test case that checks revenue by region against expected values.
+
+### `update_bits_data_analysis_eval_test_case`
+*Toolset: **bits-data-analysis***\
+Updates an evaluation test case.
+
+- Update the `top-customers` test case with a new expected answer.
+
+### `delete_bits_data_analysis_eval_test_case`
+*Toolset: **bits-data-analysis***\
+Deletes an evaluation test case.
+
+- Delete the `top-customers` test case.
+
+### `start_bits_data_analysis_eval_run`
+*Toolset: **bits-data-analysis***\
+Starts an evaluation run for test cases against a query context. This operation is idempotent.
+
+- Start an evaluation run of all test cases against the `weekly-revenue` query context.
+
+### `run_bits_data_analysis_eval`
+*Toolset: **bits-data-analysis***\
+Runs an evaluation and returns the results.
+
+- Run an evaluation of the `weekly-revenue` query context and show me the results.
+
+### `get_bits_data_analysis_eval_run`
+*Toolset: **bits-data-analysis***\
+Gets the status and results of an evaluation run.
+
+- What's the status of evaluation run `12345`?
+
 ## Cases
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.

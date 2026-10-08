@@ -476,6 +476,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `bits-data-analysis`: Tools for asking natural-language questions about your data warehouse, managing saved query contexts and skills, and running evaluations
 - `ddsql`: ([Request access][47]) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 
 ## Supported clients
