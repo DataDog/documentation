@@ -77,6 +77,8 @@ module:
        target: layouts/partials/language-selector-docs.html
      - source: layouts/partials/footer/products-index.html
        target: layouts/partials/footer/products-index.html
+     - source: layouts/partials/footer/category.html
+       target: layouts/partials/footer/category.html
      - source: layouts/partials/modals/modal-header-demo-signup.html
        target: layouts/partials/modals/modal-header-demo-signup.html
      - source: assets/styles/components/_demo-request-modal.scss
