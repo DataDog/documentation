@@ -12,7 +12,7 @@ further_reading:
   text: "Identify CI Jobs on the Critical Path to reduce the Pipeline Duration"
 - link: "/continuous_integration/guides/use_ci_jobs_failure_analysis/"
   tag: "Documentation"
-  text: "Use Logs Analysis to identify root causes in failed jobs"
+  text: "Use Logs Analysis to identify root causes in failed CI jobs"
 ---
 
 ## Overview
