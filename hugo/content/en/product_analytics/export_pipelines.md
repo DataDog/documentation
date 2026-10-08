@@ -48,7 +48,10 @@ Each pipeline exports continuously and independently of the others.
 
 - Product Analytics is enabled on the application (or RUM, or both).
 - The Datadog integration for your cloud provider is set up: [Amazon Web Services][6], [Azure][7], or [Google Cloud][8].
-- Your Datadog user has the `rum_write_archives` permission. See [Role Based Access Control][1].
+- Your Datadog user has the read permission for the cloud integration corresponding to your destination. See [Role Based Access Control][1]. Read permissions for each integration are:
+    - Amazon S3: `aws_configuration_read`
+    - Azure Blob Storage: `azure_configuration_read`
+    - Google Cloud Storage: `gcp_configuration_read`
 
 ## Set up an export pipeline
 
@@ -57,9 +60,7 @@ Each pipeline exports continuously and independently of the others.
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-If not already configured, set up the [AWS integration][1] for the account that holds your S3 bucket. This usually means creating a role that Datadog can assume.
-
-For AWS China accounts, use access keys instead of role delegation.
+If not already configured, set up the [AWS integration][1] for the account that holds your S3 bucket. Export Pipelines supports only role-based (STS) AWS integrations and does not support access-key integrations.
 
 [1]: /integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
@@ -74,7 +75,7 @@ Set up the [Azure integration][1] in the subscription that holds your storage ac
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [Google Cloud integration][1] for the project that holds your GCS bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2].
+Set up an STS-enabled [Google Cloud integration][1] for the project that holds your GCS bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2]. The destination also requires a GCP project ID.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup

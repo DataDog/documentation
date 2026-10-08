@@ -58,11 +58,12 @@ Pour voir les graphiques de l'utilisation des ressources et des données envoyé
 
 ## Voir le statut des composants de votre pipeline {#view-the-status-of-your-pipeline-components}
 
-Pour voir les métriques d'une source, d'un processus ou d'une destination :
+Pour afficher les métriques d'une source, d'un processeur ou d'une destination :
 
 1. Accédez à [Observability Pipelines][1].
 1. Sélectionnez un pipeline.
-1. Cliquez sur la roue dentée à côté du nom de la source, du processeur ou de la destination, puis sélectionnez {{< ui >}}View details{{< /ui >}}. Datadog affiche des graphiques d'état pour le composant que vous avez sélectionné.
+1. Cliquez sur la roue dentée à côté du nom de la source, du processeur ou de la destination, puis sélectionnez {{< ui >}}View details{{< /ui >}}. L'onglet {{< ui >}}Metrics{{< /ui >}} du panneau latéral affiche des graphiques de santé pour le composant que vous avez sélectionné.
+1. Pour copier l'ID du composant, cliquez sur l'icône de copie à côté du nom du composant en haut du panneau latéral. Utilisez l'ID avec le tag `component_id` pour filtrer ou regrouper les [métriques d'Observability Pipelines][5] pour ce composant.
 1. Si vous souhaitez exporter un graphique vers un [incident][2], un [dashboard][3] ou un [notebook][4], cliquez sur l'icône d'exportation sur le graphique. Le graphique exporté montre que la métrique est regroupée par les tags spécifiques du pipeline et du composant.
 
 {{< img src="observability_pipelines/monitoring_and_troubleshooting/pipeline_health_graphs.png" alt="Graphiques d'état affichant les événements entrants et sortants, les octets entrants et sortants, les erreurs, les données abandonnées, l'utilisation et les événements de tampon pour un pipeline." style="width:35%;" >}}

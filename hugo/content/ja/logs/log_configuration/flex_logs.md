@@ -72,7 +72,7 @@ Datadog Log Management は、以下のソリューションを提供します。
 
 コンピュートとは、Flex Logs クエリを実行するための処理能力を指します。これは、Flex Logs ティア内のログに対してクエリを実行する際に使用されます。データの取り込み時や、Standard Indexing のログのみを検索する場合には使用されません。利用可能なコンピュートティアは以下の通りです。
 
-<div class="alert alert-danger">US3、US5、AP1、AP2、US1-FED、および US2-FED で利用可能なコンピュートサイズは、Starter、XS、および S です。</div>
+<div class="alert alert-danger">US3、US5、AP1、AP2、US1-FED、US2-FED で利用可能なコンピュートサイズは、Starter、XS、XS+、S です。</div>
 
 - Starter
 - Extra small (XS)
