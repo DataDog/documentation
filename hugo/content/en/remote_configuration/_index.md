@@ -128,7 +128,7 @@ Enabling Remote Configuration impacts the following products. Each product defin
 
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page.
 {{< site-region region="gov,gov2" >}}
-Remote Configuration is not enabled by default in US1-FED and US2-FED. Enable it from the [Remote Configuration][8] settings page.
+**Note**: On US1-FED and US2-FED, Remote Configuration is not enabled by default.
 {{< /site-region >}}
 If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
