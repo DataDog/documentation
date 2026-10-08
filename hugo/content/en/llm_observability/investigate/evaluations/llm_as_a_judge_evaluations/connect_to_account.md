@@ -123,7 +123,7 @@ Connect your custom provider to Agent Observability with your base URL, API key,
 1. Select the {{< ui >}}Custom Provider for Agent Observability{{< /ui >}} tile.
 1. Click the {{< ui >}}Configure{{< /ui >}} tab, then click {{< ui >}}New{{< /ui >}} to create a provider.
 1. Follow the instructions on the tile.
-   - Provide a name for your provider.
+   - Enter a name for your provider.
    - Select your provider.
    - Provide your base URL.
    - Provide your API key and optionally any headers.
