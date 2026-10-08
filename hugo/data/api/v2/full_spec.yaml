@@ -104517,6 +104517,7 @@ components:
         - $ref: "#/components/schemas/SendTeamsMessageAction"
         - $ref: "#/components/schemas/TriggerWorkflowAutomationAction"
         - $ref: "#/components/schemas/RoutingRuleEscalationPolicyAction"
+        - $ref: "#/components/schemas/RoutingRuleRerouteToTeamAction"
     RoutingRuleAttributes:
       description: Defines the configurable attributes of a routing rule, such as actions, query, time restriction, and urgency.
       properties:
@@ -104615,6 +104616,29 @@ components:
       type: string
       x-enum-varnames:
         - POLICIES
+    RoutingRuleRerouteToTeamAction:
+      description: "Reroutes the page to another team, which then evaluates it against its own routing rules. Each routing rule can include this action only once. It can be combined only with `send_slack_message` and `send_teams_message` actions. It can't be used with `escalation_policy` or `workflow` actions, or when the routing rule sets `policy_id`."
+      properties:
+        destination_team_id:
+          description: "The ID of the team to reroute the page to."
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/RoutingRuleRerouteToTeamActionType"
+      required:
+        - type
+        - destination_team_id
+      type: object
+    RoutingRuleRerouteToTeamActionType:
+      default: reroute_to_team
+      description: "Indicates that the action reroutes the page to another team's routing rules."
+      enum:
+        - reroute_to_team
+      example: reroute_to_team
+      type: string
+      x-enum-varnames:
+        - REROUTE_TO_TEAM
     RoutingRuleType:
       default: team_routing_rules
       description: Team routing rules resource type.
