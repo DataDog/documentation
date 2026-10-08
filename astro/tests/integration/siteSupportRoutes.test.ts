@@ -25,6 +25,7 @@ function ctx(params: Record<string, string | undefined>, pathname: string) {
   return {
     params,
     url: new URL(pathname, SITE),
+    site: SITE,
   } as unknown as Parameters<typeof categoryGET>[0];
 }
 

@@ -10,8 +10,7 @@ import {
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { mdToMetaDescription } from "@lib/seo";
-import { useTranslations } from "@lib/i18n/i18n";
+import { apiBreadcrumbs, categoryMetaDescription } from "@lib/api/pageMeta";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -46,20 +45,14 @@ if (!current) {
 }
 
 const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
-const translate = useTranslations(lang);
 ---
 
 <ApiLayout
   title={`${current.name} - Datadog API`}
-  description={mdToMetaDescription(current.description) ||
-    `${current.name} endpoints in the Datadog API.`}
+  description={categoryMetaDescription(current)}
   categories={categories}
   activeCategory={current}
-  breadcrumbs={[
-    { label: translate("docs"), href: localizedHref(lang, "/") },
-    { label: translate("api"), href: localizedHref(lang, "/api/latest/") },
-    { label: current.name },
-  ]}
+  breadcrumbs={apiBreadcrumbs(lang, current.name)}
 >
   <ApiPageHeader title={current.name} />
   {

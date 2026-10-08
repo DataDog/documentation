@@ -12,11 +12,13 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ApiOperationView } from "@lib/api/schemas/views";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
+import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
 import { buildMarkdocStr, heading } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
+import { prependPreamble } from "@lib/plaintext/preamble";
 
 function apiOperationBody(
   operation: ApiOperationView,
@@ -53,7 +55,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params, url }) => {
+export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -70,7 +72,15 @@ export const GET: APIRoute = async ({ params, url }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = apiOperationBody(operation, lang, url.pathname);
+  const body = prependPreamble(
+    apiOperationBody(operation, lang, url.pathname),
+    {
+      title: operation.summary,
+      description: operationMetaDescription(operation),
+      breadcrumbs: apiBreadcrumbs(lang, operation.summary),
+      site,
+    },
+  );
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

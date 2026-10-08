@@ -12,8 +12,7 @@ import {
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { mdToMetaDescription } from "@lib/seo";
-import { useTranslations } from "@lib/i18n/i18n";
+import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -74,7 +73,6 @@ if (
 
 const { redirectTo } = Astro.props as PageProps;
 
-const translate = useTranslations(lang);
 const categories = await getCategoryStubsView(lang);
 const category = await getCategoryViewBySlug(catSlug, lang);
 if (!category) {
@@ -124,21 +122,11 @@ const tabDisabled = operation
     operation && (
       <ApiLayout
         title={`${operation.summary} - ${category.name} - Datadog API`}
-        description={
-          mdToMetaDescription(operation.variants[0].description) ||
-          `${operation.summary} endpoint in the Datadog API.`
-        }
+        description={operationMetaDescription(operation)}
         categories={categories}
         activeCategory={category}
         currentOperationSlug={opSlug}
-        breadcrumbs={[
-          { label: translate("docs"), href: localizedHref(lang, "/") },
-          {
-            label: translate("api"),
-            href: localizedHref(lang, "/api/latest/"),
-          },
-          { label: operation.summary },
-        ]}
+        breadcrumbs={apiBreadcrumbs(lang, operation.summary)}
       >
         <ApiPageHeader title={operation.summary} />
         <Tabs

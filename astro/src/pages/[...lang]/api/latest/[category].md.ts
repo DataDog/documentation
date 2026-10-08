@@ -15,12 +15,14 @@ import {
   getCategoryStubsView,
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
+import { apiBreadcrumbs, categoryMetaDescription } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { alertNode } from "@components/Alert/plaintext/Alert";
 import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
 import { buildMarkdocStr, heading, nodesFromMd } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
+import { prependPreamble } from "@lib/plaintext/preamble";
 
 function apiCategoryBody(
   category: ApiCategory,
@@ -73,7 +75,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params, url }) => {
+export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -89,7 +91,12 @@ export const GET: APIRoute = async ({ params, url }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = apiCategoryBody(category, lang, url.pathname);
+  const body = prependPreamble(apiCategoryBody(category, lang, url.pathname), {
+    title: category.name,
+    description: categoryMetaDescription(category),
+    breadcrumbs: apiBreadcrumbs(lang, category.name),
+    site,
+  });
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
