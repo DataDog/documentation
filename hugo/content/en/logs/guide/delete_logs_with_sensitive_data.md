@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Deleting logs that contain sensitive data helps keep your data secure. This guide provides information on how to:
+Deleting logs that contain sensitive data reduces the risk of exposing that data. This guide provides information on how to:
 
 - Check if the logs with sensitive data need to be deleted because they are within the retention period.
 - Make logs with sensitive data un-queryable.
@@ -36,7 +36,7 @@ To check or change your log retention period:
 
 ## Make logs with sensitive data un-queryable
 
-If logs that contain sensitive data are within the log retention period, you can make them un-queryable until they age out. This applies to the Log Explorer, Dashboards, and Live Tail. Logs made un-queryable are not available for querying or viewing. Follow these [instructions][2] to make logs with sensitive data un-queryable in Datadog.
+If logs within the retention period contain sensitive data, you can make them un-queryable until they age out. Un-queryable logs don't appear in the Log Explorer, Dashboards, or Live Tail. Follow these [instructions][2] to make logs with sensitive data un-queryable in Datadog.
 
 ## Delete an entire index
 
@@ -52,7 +52,7 @@ Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in D
 
 ## Delete logs from your organization
 
-If the other options don't adequately protect your data, use [Logs Data Deletion][3] to delete the indexed logs that contain sensitive data. Logs Data Deletion lets you query for logs within a time frame and delete them from your organization without contacting Datadog support.
+To permanently remove indexed logs that contain sensitive data, use [Logs Data Deletion][3]. Logs Data Deletion lets you query for logs within a time frame and delete them from your organization without contacting Datadog support.
 
 Before you delete logs:
 
@@ -60,7 +60,11 @@ Before you delete logs:
 1. Have an Organization Admin [enable Logs Data Deletion][6] for your organization.
 1. Confirm that you have a role with the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
 
-<div class="alert alert-danger">Deletions are permanent after 10 days. Review your deletion requests carefully. For the full procedure, including how to cancel and audit deletions, see <a href="/account_management/delete_data/">Delete Data</a>.</div>
+<div class="alert alert-danger">Deletions are permanent after 10 days. Review your deletion requests carefully.</div>
+
+**Note**: Logs Data Deletion doesn't delete data derived from the deleted logs, such as metrics generated from logs.
+
+For the full procedure, including how to cancel and audit deletions, see [Delete Data][3].
 
 ## Further reading
 
