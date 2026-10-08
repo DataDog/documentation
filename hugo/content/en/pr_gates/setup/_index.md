@@ -64,6 +64,12 @@ PR Gates automatically create PR checks in [GitHub][4], [GitLab][11], [Azure Dev
 
 To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][6], [GitLab Source Code][13], [Azure DevOps Source Code][7], or [Bitbucket Cloud Source Code][14] integration documentation to set one up.
 
+### Configure PR checks to be blocking
+
+<div class="alert alert-info">
+For Bitbucket Cloud, checks can only be configured to be blocking if you are using **Bitbucket Cloud Premium**.
+</div>
+
 To make these checks blocking, they must be set as required in the branch policies of your source code management provider (or the Service Account must be set as a required approver of your MRs in the case of GitLab):
 
 - [GitHub][2]
