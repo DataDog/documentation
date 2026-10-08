@@ -90,6 +90,8 @@ After NDM is configured on your devices, you can further enrich them by adding n
 [Network Device Monitoring API](#use-the-network-api)
 : Utilize the Network Device Monitoring API to programmatically add tags to your network devices.
 
+**Note**: A device supports up to 20 user tags by default, and an interface up to 10. To request a higher per-device limit for your organization, [contact Support][23].
+
 ### Customize metrics and tags
 
 Customize metrics and tags on your devices by viewing the [Supported Devices][9] page to view out-of-the-box device profiles. If you would like to edit or add more metrics, the following options are available:
@@ -152,3 +154,4 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [20]: /integrations/guide/high_availability
 [21]: /network_monitoring/devices/vpn_monitoring
 [22]: /network_monitoring/devices/syslog
+[23]: /help/
