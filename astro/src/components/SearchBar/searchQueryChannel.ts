@@ -1,14 +1,15 @@
 /**
- * Shared query state for the two SearchBar islands (API side nav and mobile
+ * Shared query channel for the two SearchBar islands (API side nav and mobile
  * nav). Both are mounted at every viewport width, and either can be the one
  * the user types into, so this module owns `?s=` on their behalf:
  *
  *   1. One debounced writer of `?s=`, shared by both islands.
- *   2. A `document` CustomEvent channel that mirrors each island's text into
- *      the other. Because the hidden input already holds the query, resizing
- *      across the 992px breakpoint needs no extra handling.
+ *   2. A listener set that mirrors each island's text into the other. Because
+ *      the hidden input already holds the query, resizing across the 992px
+ *      breakpoint needs no extra handling.
  *
- * Uses the same channel shape as `RegionSelector/regionState.ts`.
+ * Islands on a page share one instance of this module, so its state is
+ * page-wide. The URL, not this module, is the source of truth for the query.
  */
 
 import {
@@ -16,22 +17,22 @@ import {
   writeSearchQueryParam,
 } from "./searchUrlState";
 
-export const SEARCH_QUERY_CHANGE_EVENT = "dd-search-query-change";
-
 /**
  * Origin of a change from Back/forward rather than from an island, so no
  * island ignores it as its own echo.
  */
 export const EXTERNAL_ORIGIN_ID = "__external__";
 
-export interface SearchQueryChangeDetail {
+export interface SearchQueryChange {
   query: string;
   /** Id of the island that published, so it can ignore its own echo. */
   originId: string;
 }
 
+type SearchQueryListener = (change: SearchQueryChange) => void;
+
+const listeners = new Set<SearchQueryListener>();
 let pendingWriteTimerId: ReturnType<typeof setTimeout> | undefined;
-let subscriberCount = 0;
 
 function cancelPendingWrite(): void {
   if (pendingWriteTimerId !== undefined) {
@@ -46,12 +47,8 @@ if (typeof document !== "undefined") {
   document.addEventListener("astro:before-swap", cancelPendingWrite);
 }
 
-function broadcast(detail: SearchQueryChangeDetail): void {
-  document.dispatchEvent(
-    new CustomEvent<SearchQueryChangeDetail>(SEARCH_QUERY_CHANGE_EVENT, {
-      detail,
-    }),
-  );
+function broadcast(change: SearchQueryChange): void {
+  for (const listener of listeners) listener(change);
 }
 
 const onPopState = () => {
@@ -82,23 +79,18 @@ export function publishSearchQuery(
 
 /** Subscribe to query changes from any island, or from Back/forward. */
 export function subscribeToSearchQuery(
-  listener: (detail: SearchQueryChangeDetail) => void,
+  listener: SearchQueryListener,
 ): () => void {
-  const handleChange = (e: Event) => {
-    listener((e as CustomEvent<SearchQueryChangeDetail>).detail);
-  };
-  document.addEventListener(SEARCH_QUERY_CHANGE_EVENT, handleChange);
+  listeners.add(listener);
 
   // One `popstate` listener for the whole page rather than one per island.
-  subscriberCount += 1;
-  if (subscriberCount === 1) {
+  if (listeners.size === 1) {
     window.addEventListener("popstate", onPopState);
   }
 
   return () => {
-    document.removeEventListener(SEARCH_QUERY_CHANGE_EVENT, handleChange);
-    subscriberCount -= 1;
-    if (subscriberCount === 0) {
+    listeners.delete(listener);
+    if (listeners.size === 0) {
       window.removeEventListener("popstate", onPopState);
     }
   };

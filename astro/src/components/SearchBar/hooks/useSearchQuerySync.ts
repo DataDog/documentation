@@ -4,7 +4,7 @@ import { readSearchQueryFromUrl } from "../searchUrlState";
 import {
   publishSearchQuery,
   subscribeToSearchQuery,
-} from "../searchQueryStore";
+} from "../searchQueryChannel";
 
 interface SearchQuerySyncParams {
   setQuery: Dispatch<StateUpdater<string>>;
@@ -80,9 +80,9 @@ export function useSearchQuerySync({
   // is ever shown.
   useEffect(
     () =>
-      subscribeToSearchQuery((detail) => {
-        if (detail.originId === islandId) return;
-        setQuery(detail.query);
+      subscribeToSearchQuery((change) => {
+        if (change.originId === islandId) return;
+        setQuery(change.query);
       }),
     [islandId, setQuery],
   );

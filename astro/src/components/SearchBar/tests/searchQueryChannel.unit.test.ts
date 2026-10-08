@@ -1,20 +1,19 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
 import {
-  SEARCH_QUERY_CHANGE_EVENT,
   EXTERNAL_ORIGIN_ID,
   publishSearchQuery,
   subscribeToSearchQuery,
-  type SearchQueryChangeDetail,
-} from "../searchQueryStore";
+  type SearchQueryChange,
+} from "../searchQueryChannel";
 
 const DEBOUNCE_MS = 200;
 
 let unsubscribes: Array<() => void> = [];
 
 function collect() {
-  const received: SearchQueryChangeDetail[] = [];
-  unsubscribes.push(subscribeToSearchQuery((detail) => received.push(detail)));
+  const received: SearchQueryChange[] = [];
+  unsubscribes.push(subscribeToSearchQuery((change) => received.push(change)));
   return received;
 }
 
@@ -112,8 +111,10 @@ describe("subscribeToSearchQuery", () => {
   });
 
   it("detaches on unsubscribe", () => {
-    const received: SearchQueryChangeDetail[] = [];
-    const unsubscribe = subscribeToSearchQuery((d) => received.push(d));
+    const received: SearchQueryChange[] = [];
+    const unsubscribe = subscribeToSearchQuery((change) =>
+      received.push(change),
+    );
     unsubscribe();
     publishSearchQuery("RUM", "island-a", DEBOUNCE_MS);
     expect(received).toEqual([]);
@@ -135,23 +136,13 @@ describe("subscribeToSearchQuery", () => {
   });
 
   it("stops listening for popstate once the last subscriber leaves", () => {
-    const received: SearchQueryChangeDetail[] = [];
-    const unsubscribe = subscribeToSearchQuery((d) => received.push(d));
+    const received: SearchQueryChange[] = [];
+    const unsubscribe = subscribeToSearchQuery((change) =>
+      received.push(change),
+    );
     unsubscribe();
     window.history.replaceState(null, "", "/api/?s=logs");
     window.dispatchEvent(new PopStateEvent("popstate"));
     expect(received).toEqual([]);
-  });
-});
-
-describe("the broadcast channel", () => {
-  it("dispatches each change on `document` under SEARCH_QUERY_CHANGE_EVENT", () => {
-    const seen: string[] = [];
-    const listener = (e: Event) =>
-      seen.push((e as CustomEvent<SearchQueryChangeDetail>).detail.query);
-    document.addEventListener(SEARCH_QUERY_CHANGE_EVENT, listener);
-    publishSearchQuery("RUM", "island-a", DEBOUNCE_MS);
-    document.removeEventListener(SEARCH_QUERY_CHANGE_EVENT, listener);
-    expect(seen).toEqual(["RUM"]);
   });
 });
