@@ -1,7 +1,6 @@
 /**
  * The preamble every plaintext (`.md`) page opens with: YAML frontmatter, then a
- * banner pointing at the top-level `llms.txt`. Mirrors the output of Hugo's
- * `html-to-mdoc` converter, so both sites' `.md` pages read the same way.
+ * banner pointing at the top-level `llms.txt`.
  */
 
 import { stringify as stringifyYaml } from "yaml";
