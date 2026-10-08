@@ -21,18 +21,18 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your PHP application with the Datadog Feature Flags SDK. The PHP SDK uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your PHP application with the Datadog Feature Flags SDK. Released PHP SDKs receive flag updates through the Datadog Agent's Remote Configuration. The [agentless preview](#agentless-preview) reads configuration directly from Datadog.
 
 The PHP SDK provides two application APIs:
 
 - **Datadog PHP API**: Use `DDTrace\FeatureFlags\Client` with PHP 7 or PHP 8 applications.
 - **OpenFeature adapter**: Use `DDTrace\OpenFeature\DataDogProvider` with PHP 8 applications that use the [OpenFeature][1] standard API.
 
-Flag evaluation is local and fast. The SDK uses locally cached configuration data, so no network requests occur during evaluation.
+Flag evaluation uses locally cached configuration. In the agentless preview, the first evaluation can wait for the initial configuration within a bounded initialization timeout.
 
-## Prerequisites
+## Set up with an Agent
 
-Before setting up the PHP Feature Flags SDK, ensure you have:
+Before setting up the PHP Feature Flags SDK, you need:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
@@ -61,6 +61,52 @@ export DD_METRICS_OTEL_ENABLED=true
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
 To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
+
+## Agentless preview
+
+<div class="alert alert-warning">Agentless configuration and direct event delivery require an unreleased PHP SDK candidate. They are not available in PHP SDK 1.25.1. The proposed release boundary is 1.26.0 and depends on the implementation being included in that release.</div>
+
+The preview supports the Datadog PHP API and the OpenFeature adapter. Install a candidate that includes both agentless configuration and event delivery, then configure the PHP process:
+
+{{< code-block lang="bash" >}}
+export DD_FEATURE_FLAGS_ENABLED=true
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+export DD_API_KEY=<YOUR_DATADOG_API_KEY>
+export DD_SITE=<YOUR_DATADOG_SITE>
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+export DD_VERSION=<YOUR_APP_VERSION>
+{{< /code-block >}}
+
+Set these variables before starting PHP. For PHP-FPM, make them available to the worker processes and restart the pool after changes. Keep the API key in server-side secret storage.
+
+The SDK fetches configuration over HTTPS from `ufc-server.ff-cdn.<DD_SITE>` for `DD_ENV`. It uses the same application APIs and targeting contexts shown below. Feature flags can operate with `DD_TRACE_ENABLED=false`.
+
+### Configuration and initialization
+
+The first evaluation starts background polling and waits up to `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` (default: `10000`). Later evaluations share that initialization budget. If configuration is unavailable when the budget expires, evaluation returns the supplied default. Polling continues, so subsequent evaluations can recover.
+
+The SDK polls every 30 seconds by default, with a 5-second HTTP request timeout. Configure these intervals with `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` and `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS`. A failed request or invalid update retains the last valid configuration. An HTTP 304 response keeps that configuration.
+
+For a custom configuration service, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL`. A URL with only a root path uses `/api/v2/feature-flagging/config/rules-based/server`; a URL with a non-root path is requested as supplied. The SDK does not send the Datadog API key to a custom configuration URL. This setting changes configuration retrieval only; it does not redirect exposure or evaluation events.
+
+Configuration and polling belong to the PHP process. The SDK stops and joins its poller during process shutdown, and restarts independent pollers in the parent and child after a supported fork. The PHP application APIs do not expose a separate public flush or shutdown method. Allow graceful process termination to drain queued events; a forced kill cannot guarantee delivery.
+
+### Event delivery
+
+The SDK sends experiment exposures and aggregated flag evaluation events through a compatible local Datadog EVP receiver when one is available. In agentless mode, it can fall back to HTTPS at `event-platform-intake.<DD_SITE>` using `DD_API_KEY`. To use direct delivery without a receiver, omit `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT`, and `DD_TRACE_AGENT_URL`. Check that no local Agent or telemetry relay is listening.
+
+Evaluation events count evaluations independently of `DD_METRICS_OTEL_ENABLED`. They apply the flag configuration's evaluation-data privacy setting; protected events do not contain raw targeting keys or context attributes. Experiment exposures follow the flag's exposure-logging configuration and are deduplicated.
+
+The `feature_flag.evaluations` OpenTelemetry metric remains a separate signal. Direct event delivery does not configure an OTLP receiver. To collect that metric, enable `DD_METRICS_OTEL_ENABLED` and configure an OTLP destination as described in [Set Up Server-Side Flag Evaluation Metrics][6].
+
+### Source selection and rollback
+
+An explicit `DD_FEATURE_FLAGS_ENABLED=false` disables the provider. Otherwise, an explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` or `remote_config` selects the source. Invalid source values and the unsupported `offline` source disable the provider instead of silently changing routes.
+
+With no explicit source, `DD_FEATURE_FLAGS_ENABLED=true` selects agentless configuration. If the stable settings are unset, the legacy `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` continues to select Remote Configuration; an explicit legacy `false` disables the provider. With neither stable nor legacy settings supplied, the preview defaults to agentless configuration and requires a valid managed endpoint configuration.
+
+To return to Agent-based operation, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`, enable `DD_REMOTE_CONFIG_ENABLED=true`, configure the Agent endpoint, and restart PHP. Remote Configuration mode uses Agent-only event delivery. To turn off feature flags, set `DD_FEATURE_FLAGS_ENABLED=false` and restart PHP.
 
 ## Installation
 
@@ -106,7 +152,7 @@ $api->setProvider(new DataDogProvider());
 $client = $api->getClient('my-service');
 {{< /code-block >}}
 
-The OpenFeature provider returns default values until Remote Configuration delivers the initial flag configuration. Initialize the provider early in application startup so flag configuration has time to load before business logic evaluates flags.
+In Remote Configuration mode, the OpenFeature provider returns default values until the Agent delivers the initial flag configuration. In the agentless preview, the first evaluation starts polling and applies the initialization timeout described above. Registering the OpenFeature provider alone does not fetch configuration.
 
 ## Set the evaluation context
 
@@ -401,6 +447,8 @@ If feature flags unexpectedly always return default values, check the following:
 - Confirm your Datadog PHP SDK version includes feature flags support.
 - Check that the PHP process can communicate with the Datadog Agent.
 
+For the agentless preview, check `DD_FEATURE_FLAGS_ENABLED`, the selected configuration source, `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. Confirm that the PHP process can establish trusted HTTPS connections to the configuration endpoint. If only early evaluations return defaults, check the initialization timeout and whether a later evaluation recovers.
+
 ### OpenFeature provider not found
 
 The OpenFeature adapter is available only for PHP 8 applications. If `DDTrace\OpenFeature\DataDogProvider` is not found:
@@ -431,6 +479,8 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 1. Verify the flag is associated with an experiment in the Datadog UI.
 2. Verify the Agent's `DD_API_KEY` is correct and the Agent is receiving events.
 3. Verify the evaluation context uses flat primitive attributes. Nested arrays, objects, and null values are ignored for exposure reporting.
+
+For direct delivery in the agentless preview, verify the application's API key and HTTPS access to `event-platform-intake.<DD_SITE>`. A successful evaluation or an HTTP intake acknowledgment does not prove that an event is available in Datadog. Check the corresponding experiment data or evaluation graph for the service, environment, flag, and evaluation time.
 
 ## Further reading
 
