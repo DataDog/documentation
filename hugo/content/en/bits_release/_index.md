@@ -54,7 +54,7 @@ Bits Release does not require a dedicated data source. It reads the Datadog prod
 | **Events and change tracking** | Deployment events, which establish when the change went live and where the soak window starts. |
 | **Change stories, dashboards, and incidents** | Context about what else changed around the same time, to help separate the effect of your change from unrelated activity. |
 | **[Bits Testing][9]** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
-| **Live Debugger** | *Coming soon.* Temporary production instrumentation that reports when a specific code path actually executes. This is useful for code behind a condition or a feature flag, where telemetry alone cannot tell you whether the new path ran. |
+| **[Live Debugger][10]** | *Coming soon.* Temporary instrumentation that reports when a specific line of your changed code actually runs in production. This does two things: it confirms the change was exercised at all, and it lets Bits Release validate code that telemetry alone cannot see into, such as a branch behind a condition or a feature flag. It also sharpens timing, because Bits Release can evaluate from the moment the code first runs rather than waiting out a fixed window. |
 
 A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
 
@@ -119,3 +119,4 @@ Verdict quality depends on feedback, and the preview is the moment when it has t
 [7]: /source_code/service-mapping/
 [8]: /account_management/billing/ai_credits/
 [9]: /synthetics/bits_testing/
+[10]: /tracing/live_debugger/
