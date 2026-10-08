@@ -544,8 +544,6 @@ Custom extensions allow you to attach organization-specific metadata to entities
 Datadog also supports specific extension keys for certain features. These include:
 - `datadoghq.com/cd-visibility`: Control which commits are considered as part of a deployment in [CD Visibility][21].
 
-To map an entity to its source code, use the `datadog.codeLocations` attribute instead of an extension. For an example of how DORA Metrics uses it, see [Handling multiple services in the same repository][22].
-
 The following example defines a custom extension used to manage release scheduling across environments:
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -613,4 +611,3 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
 [21]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns
-[22]: /delivery_performance/dora_metrics/setup/#handling-multiple-services-in-the-same-repository
