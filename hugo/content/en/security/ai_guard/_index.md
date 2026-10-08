@@ -128,19 +128,6 @@ Choose the first method that fits your agent:
 
 For languages that the SDK doesn't support, such as Go or .NET, call the AI Guard HTTP API directly. The HTTP API needs no Datadog Agent or Datadog SDK, but your code must act on the returned action itself. HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog and don't generate signals.
 
-### Supported frameworks
-
-| Framework or library | Language | Method |
-| --- | --- | --- |
-| LangChain | Python | Automatic integration. |
-| OpenAI SDK | Python, Node.js | Automatic integration. |
-| Anthropic SDK | Python, Node.js | Automatic integration. <!-- TODO: current docs list no Anthropic tab for Node.js. Confirm Node.js support. --> |
-| AI SDK | Node.js | Automatic integration. |
-| RubyLLM | Ruby | Automatic integration. |
-| Amazon Strands | Python | Manual integration. |
-| LiteLLM Proxy | Python | Manual integration. |
-| Any framework | Java | SDK. |
-
 ## Specifications and limitations
 
 Learn what content AI Guard evaluates, how fast it responds, how much traffic it accepts, and how it handles your data.
