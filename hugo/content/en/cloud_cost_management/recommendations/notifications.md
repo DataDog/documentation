@@ -31,6 +31,7 @@ To set up a notification rule:
 
 1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4].
 1. Select the {{< ui >}}Notification{{< /ui >}} tab.
+1. Click {{< ui >}}Set New Notification{{< /ui >}}.
 1. Enter a name for the notification rule.
 1. In the {{< ui >}}Define scope{{< /ui >}} section, use the {{< ui >}}Team{{< /ui >}}, {{< ui >}}Recommendation Type{{< /ui >}}, and {{< ui >}}Env{{< /ui >}} filters to restrict the notification to matching resources. Click {{< ui >}}\+ Filter{{< /ui >}} to add more filters. Leave the filters empty to include all resources.
 1. (Optional) In {{< ui >}}Monthly savings range{{< /ui >}}, set a minimum, a maximum, or both. Only recommendations with estimated monthly savings in this range are included. Each notification lists the five recommendations with the highest savings in the selected scope.
