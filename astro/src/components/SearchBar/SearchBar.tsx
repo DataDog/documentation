@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "preact/hooks";
 import { createPortal } from "preact/compat";
 import styles from "./SearchBar.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
@@ -81,8 +87,8 @@ export default function SearchBar({
   // Recalculates whenever the form moves (e.g. window resize) so the popup
   // stays anchored directly below the search bar.
   const popupRect = usePopupPosition(formRef, popupRequested);
-  // A null rect means the form isn't laid out — this island is the hidden half
-  // of the 992px breakpoint pair. Don't paint a popup for an invisible anchor.
+  // A null rect means the form isn't laid out (this island is hidden at the
+  // current breakpoint), so there's nothing to anchor the popup to.
   const popupVisible = popupRequested && popupRect !== null;
 
   // `grouped` is used by SearchResultsPopup to render hits under category
@@ -117,9 +123,7 @@ export default function SearchBar({
     setHydrated(true);
   }, []);
 
-  // Keeps the two SearchBar islands and the `?s=` param in step. Both islands
-  // are mounted at every width, so whichever one the user types into owns the
-  // param, and the other mirrors the text.
+  // Keeps both SearchBar islands and the `?s=` param in sync.
   const { publishQuery } = useSearchQuerySync({
     setQuery,
     setOpen,
@@ -127,10 +131,11 @@ export default function SearchBar({
     debounceMs: DEBOUNCE_MS,
   });
 
-  const clearQuery = () => {
+  // Memoized because it's a dependency of the page-wide keydown listener.
+  const clearQuery = useCallback(() => {
     setQuery("");
     publishQuery("");
-  };
+  }, [publishQuery]);
 
   useGlobalSearchShortcuts({
     inputRef,

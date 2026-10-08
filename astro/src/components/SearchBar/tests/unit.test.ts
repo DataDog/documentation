@@ -420,6 +420,20 @@ describe("SearchBar — global keyboard shortcuts", () => {
     expect(document.activeElement).not.toBe(input);
   });
 
+  it("keeps one page-wide keydown listener while the user types", async () => {
+    const user = userEvent.setup();
+    mount();
+    const addEventListener = vi.spyOn(document, "addEventListener");
+
+    await typeAndWait(user, "dashboard");
+
+    const keydownRegistrations = addEventListener.mock.calls.filter(
+      ([eventType]) => eventType === "keydown",
+    );
+    expect(keydownRegistrations).toEqual([]);
+    addEventListener.mockRestore();
+  });
+
   it("Escape clears the query and blurs the input", async () => {
     const user = userEvent.setup();
     mount();
@@ -442,14 +456,18 @@ describe("SearchBar — global keyboard shortcuts", () => {
 
 // --- `?s=` URL sync -------------------------------------------------------
 //
-// Both SearchBar islands are mounted at every width, so the query is shared
-// state: whichever one the user types into writes `?s=`, and the other mirrors
-// the text. See `plans/27_search_url_sync.md`.
+// Both SearchBar islands are mounted at every width. Whichever one the user
+// types into writes `?s=`, and the other mirrors the text.
+// See `plans/27_search_url_sync.md`.
 
 const DEBOUNCE_MS = 200;
 
-/** Let the shared debounce fire and the resolved search promise flush. */
-const flushDebounce = () => new Promise((r) => setTimeout(r, DEBOUNCE_MS + 50));
+/** Fire the shared debounce and flush the resolved search promise. */
+const flushDebounce = () => vi.advanceTimersByTimeAsync(DEBOUNCE_MS + 50);
+
+/** A userEvent instance that drives the fake clock as it types. */
+const setupUser = () =>
+  userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
 
 function mountBoth(fixture: { results: any[] } = basicFixture) {
   const search = makeSearch(fixture);
@@ -481,9 +499,13 @@ async function typeInto(
 }
 
 describe("SearchBar — `?s=` URL sync, one instance", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+  });
+
+  // Let any pending `?s=` write land before the URL is reset.
   afterEach(async () => {
     await flushDebounce();
-    window.history.replaceState(null, "", "/");
   });
 
   it("restores the query from `?s=` on load, with results displayed", async () => {
@@ -515,7 +537,7 @@ describe("SearchBar — `?s=` URL sync, one instance", () => {
 
   it("writes the typed query to `?s=` after the debounce", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mount();
     await typeInto(user, sideNavInput(), "dashboard");
 
@@ -524,7 +546,7 @@ describe("SearchBar — `?s=` URL sync, one instance", () => {
 
   it("drops the param when the input is cleared, leaving no bare `?`", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mount();
     await typeInto(user, sideNavInput(), "dashboard");
     await user.clear(sideNavInput());
@@ -535,7 +557,7 @@ describe("SearchBar — `?s=` URL sync, one instance", () => {
 
   it("clears the input, the popup, and the param together on Escape", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mount();
     await typeInto(user, sideNavInput(), "dashboard");
 
@@ -550,7 +572,7 @@ describe("SearchBar — `?s=` URL sync, one instance", () => {
 
   it("preserves `?site=` while syncing the query", async () => {
     window.history.replaceState(null, "", "/api/?site=eu");
-    const user = userEvent.setup();
+    const user = setupUser();
     mount();
     await typeInto(user, sideNavInput(), "dashboard");
 
@@ -558,9 +580,9 @@ describe("SearchBar — `?s=` URL sync, one instance", () => {
     expect(window.location.search).toContain("s=dashboard");
   });
 
-  it("syncs from the mobile instance too — ownership follows the typing", async () => {
+  it("writes `?s=` from the mobile instance too", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mount(basicFixture, "mobile");
     await typeInto(user, mobileInput(), "dashboard");
 
@@ -569,25 +591,28 @@ describe("SearchBar — `?s=` URL sync, one instance", () => {
 });
 
 describe("SearchBar — `?s=` URL sync, both instances mounted", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+  });
+
+  // Let any pending `?s=` write land before the URL is reset.
   afterEach(async () => {
     await flushDebounce();
-    window.history.replaceState(null, "", "/");
   });
 
   it("mirrors text typed in the side nav into the mobile input", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mountBoth();
     await typeInto(user, sideNavInput(), "dashboard");
 
-    // This is what makes shrinking past 992px work with no resize handling:
-    // the mobile input already holds the query before it becomes visible.
+    // The mobile input holds the query before a resize makes it visible.
     expect(mobileInput().value).toBe("dashboard");
   });
 
   it("does not open the mirrored instance's popup", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mountBoth();
     await typeInto(user, sideNavInput(), "dashboard");
 
@@ -597,7 +622,7 @@ describe("SearchBar — `?s=` URL sync, both instances mounted", () => {
 
   it("mirrors in the other direction too", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mountBoth();
     await typeInto(user, mobileInput(), "dashboard");
 
@@ -607,7 +632,7 @@ describe("SearchBar — `?s=` URL sync, both instances mounted", () => {
 
   it("writes `?s=` once for input interleaved across both instances", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mountBoth();
     const replaceState = vi.spyOn(window.history, "replaceState");
 
@@ -624,7 +649,7 @@ describe("SearchBar — `?s=` URL sync, both instances mounted", () => {
 
   it("clearing one instance clears the other and drops the param", async () => {
     window.history.replaceState(null, "", "/api/");
-    const user = userEvent.setup();
+    const user = setupUser();
     mountBoth();
     await typeInto(user, sideNavInput(), "dashboard");
     await user.clear(sideNavInput());

@@ -84,6 +84,17 @@ describe("publishSearchQuery", () => {
     expect(window.location.search).toContain("s=RUM");
   });
 
+  it("cancels a pending write when the page is swapped, so `?s=` stays off the next page", () => {
+    const replaceState = vi.spyOn(window.history, "replaceState");
+    publishSearchQuery("RUM", "island-a", DEBOUNCE_MS);
+    document.dispatchEvent(new Event("astro:before-swap"));
+    vi.advanceTimersByTime(DEBOUNCE_MS);
+
+    expect(replaceState).not.toHaveBeenCalled();
+    expect(window.location.search).toBe("");
+    replaceState.mockRestore();
+  });
+
   it("tags the broadcast with the publisher's id, so it can ignore its own echo", () => {
     const received = collect();
     publishSearchQuery("RUM", "island-b", DEBOUNCE_MS);
@@ -134,7 +145,7 @@ describe("subscribeToSearchQuery", () => {
 });
 
 describe("the broadcast channel", () => {
-  it("is a document CustomEvent, the house pattern from regionState", () => {
+  it("dispatches each change on `document` under SEARCH_QUERY_CHANGE_EVENT", () => {
     const seen: string[] = [];
     const listener = (e: Event) =>
       seen.push((e as CustomEvent<SearchQueryChangeDetail>).detail.query);

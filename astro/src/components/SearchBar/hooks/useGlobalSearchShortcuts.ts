@@ -1,15 +1,11 @@
 import { useEffect } from "preact/hooks";
 import type { Dispatch, StateUpdater } from "preact/hooks";
 
-interface Args {
+interface GlobalSearchShortcutsParams {
   inputRef: { current: HTMLInputElement | null };
   wrapperRef: { current: HTMLElement | null };
   setOpen: Dispatch<StateUpdater<boolean>>;
-  /**
-   * Clears the query. A callback rather than `setQuery` because clearing has
-   * to reach the other SearchBar island and the `?s=` param too, not just this
-   * instance's state.
-   */
+  /** Clears the query in both islands and in the `?s=` param. */
   clearQuery: () => void;
   /**
    * When false, the page-wide listener is not attached. Used by the mobile-nav
@@ -30,7 +26,7 @@ export function useGlobalSearchShortcuts({
   setOpen,
   clearQuery,
   enabled = true,
-}: Args) {
+}: GlobalSearchShortcutsParams) {
   useEffect(() => {
     if (!enabled) return;
     const onKey = (e: KeyboardEvent) => {

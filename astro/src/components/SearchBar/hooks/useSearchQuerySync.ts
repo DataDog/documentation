@@ -6,18 +6,18 @@ import {
   subscribeToSearchQuery,
 } from "../searchQueryStore";
 
-interface Args {
+interface SearchQuerySyncParams {
   setQuery: Dispatch<StateUpdater<string>>;
   setOpen: Dispatch<StateUpdater<boolean>>;
-  /** The form element, used to test whether this instance is the laid-out one. */
+  /** The form element, used to test whether this instance is the visible one. */
   anchorRef: { current: HTMLElement | null };
   debounceMs: number;
 }
 
 interface SearchQuerySync {
   /**
-   * Record a user edit. Call this from `onInput` and from the clear handler,
-   * and from nowhere else: mirrored and restored updates must not republish.
+   * Record a user edit. Call this only from `onInput` and the clear handler:
+   * mirrored and restored updates must not republish.
    */
   publishQuery: (value: string) => void;
 }
@@ -26,14 +26,9 @@ interface SearchQuerySync {
 let nextIslandId = 0;
 
 /**
- * True once Astro's ClientRouter has swapped the document. Module state
- * survives a swap (the document is never reloaded), so this is a precise test
- * for "this mount is a client-side navigation, not a real page load" — without
- * it, every cdocs navigation would re-pop the results.
- *
- * It is a swap flag rather than a has-restored-once flag because both islands
- * mount during a single real load: a first-mount-wins flag would let whichever
- * island hydrated first consume the restore and leave the visible one closed.
+ * True after Astro's ClientRouter has swapped the document. Module state
+ * survives a swap, so this separates client-side navigations from full page
+ * loads, and keeps each cdocs navigation from reopening the results.
  */
 let hasSwappedDocument = false;
 if (typeof document !== "undefined") {
@@ -43,13 +38,10 @@ if (typeof document !== "undefined") {
 }
 
 /**
- * Is this instance the one the user can actually see?
- *
- * The two SearchBar islands are hidden by complementary `display: none` rules
- * at 992px, so at any width exactly one of them is laid out — a rect test is
- * therefore a more direct question than asking which `variant` this is. The
- * mobile panel is the one exception: it is laid out below 992px but parked
- * offscreen until the drawer opens, so an offscreen rect counts as hidden.
+ * Whether this instance is the one the user can see. At any width, the 992px
+ * `display: none` rules lay out only one of the two islands. The exception is
+ * the mobile drawer, which is laid out below 992px but parked offscreen to the
+ * right until it opens.
  */
 function isAnchorOnScreen(anchor: HTMLElement | null): boolean {
   const rect = anchor?.getClientRects()[0];
@@ -59,24 +51,22 @@ function isAnchorOnScreen(anchor: HTMLElement | null): boolean {
 
 /**
  * Binds one SearchBar island to the shared query state: restores `?s=` on
- * load, mirrors the other island's text as it is typed, and hands back the
- * callback that publishes this island's own edits.
+ * load, mirrors the other island's text, and returns the callback that
+ * publishes this island's own edits.
  */
 export function useSearchQuerySync({
   setQuery,
   setOpen,
   anchorRef,
   debounceMs,
-}: Args): SearchQuerySync {
+}: SearchQuerySyncParams): SearchQuerySync {
   const islandIdRef = useRef<string>();
   if (islandIdRef.current === undefined) {
     islandIdRef.current = `search-bar-${nextIslandId++}`;
   }
   const islandId = islandIdRef.current;
 
-  // Restore. Both islands take the text; only the visible one pops the
-  // results, so a phone reload leaves the query in the closed drawer rather
-  // than painting a popup beside an offscreen input.
+  // Both islands restore the text, but only the visible one opens its results.
   useEffect(() => {
     const restoredQuery = readSearchQueryFromUrl(window.location.search);
     if (!restoredQuery) return;
@@ -86,8 +76,8 @@ export function useSearchQuerySync({
     }
   }, []);
 
-  // Mirror. Text only: `open` stays per-instance, since a second popup
-  // portaled to document.body behind the first is never wanted.
+  // Mirror the text only. `open` stays per-instance so that only one popup
+  // is ever shown.
   useEffect(
     () =>
       subscribeToSearchQuery((detail) => {

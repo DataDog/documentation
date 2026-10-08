@@ -1,7 +1,6 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, afterEach } from "vitest";
 import {
-  SEARCH_QUERY_PARAM,
   readSearchQueryFromUrl,
   buildSearchUrl,
   writeSearchQueryParam,
@@ -9,12 +8,6 @@ import {
 
 afterEach(() => {
   window.history.replaceState(null, "", "/");
-});
-
-describe("SEARCH_QUERY_PARAM", () => {
-  it("is Hugo's `s`, the same param navigateToSearchPage emits", () => {
-    expect(SEARCH_QUERY_PARAM).toBe("s");
-  });
 });
 
 describe("readSearchQueryFromUrl", () => {

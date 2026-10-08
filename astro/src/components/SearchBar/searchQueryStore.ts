@@ -1,22 +1,14 @@
 /**
- * Shared query state for the search bars.
+ * Shared query state for the two SearchBar islands (API side nav and mobile
+ * nav). Both are mounted at every viewport width, and either can be the one
+ * the user types into, so this module owns `?s=` on their behalf:
  *
- * Astro renders two `SearchBar` islands — the API side nav and the mobile nav
- * — and both are mounted at every viewport width, with complementary
- * `display: none` rules at 992px deciding which one is laid out. Either can be
- * the one the user types into, so neither can be the sole owner of `?s=`.
+ *   1. One debounced writer of `?s=`, shared by both islands.
+ *   2. A `document` CustomEvent channel that mirrors each island's text into
+ *      the other. Because the hidden input already holds the query, resizing
+ *      across the 992px breakpoint needs no extra handling.
  *
- * This module is that shared owner. It holds:
- *   1. The single debounced writer of `?s=`, so two islands typing in turn
- *      produce one write rather than competing ones.
- *   2. A `document` CustomEvent channel, so each island mirrors the other's
- *      text as it is typed. Continuous mirroring is what makes resizing
- *      across the breakpoint work with no resize handling at all: the mobile
- *      input already holds the query before it becomes the visible one.
- *
- * Same channel shape as `RegionSelector/regionState.ts`, and framework-free
- * for the same reason — correctness does not depend on Vite handing both
- * islands the same module instance.
+ * Uses the same channel shape as `RegionSelector/regionState.ts`.
  */
 
 import {
@@ -27,8 +19,8 @@ import {
 export const SEARCH_QUERY_CHANGE_EVENT = "dd-search-query-change";
 
 /**
- * Origin of a change that came from outside any island (Back/forward), so no
- * island filters it out as its own echo.
+ * Origin of a change from Back/forward rather than from an island, so no
+ * island ignores it as its own echo.
  */
 export const EXTERNAL_ORIGIN_ID = "__external__";
 
@@ -40,6 +32,19 @@ export interface SearchQueryChangeDetail {
 
 let pendingWriteTimerId: ReturnType<typeof setTimeout> | undefined;
 let subscriberCount = 0;
+
+function cancelPendingWrite(): void {
+  if (pendingWriteTimerId !== undefined) {
+    clearTimeout(pendingWriteTimerId);
+    pendingWriteTimerId = undefined;
+  }
+}
+
+// A write still pending when ClientRouter swaps pages would land on the new
+// page's URL.
+if (typeof document !== "undefined") {
+  document.addEventListener("astro:before-swap", cancelPendingWrite);
+}
 
 function broadcast(detail: SearchQueryChangeDetail): void {
   document.dispatchEvent(
@@ -57,11 +62,9 @@ const onPopState = () => {
 };
 
 /**
- * Record a user edit: broadcast it now, write `?s=` after `debounceMs`.
- *
- * Only the URL write is debounced. The broadcast is immediate because it is
- * what keeps the two inputs consistent, and a 200ms lag there would be
- * visible to anyone resizing mid-keystroke.
+ * Record a user edit: broadcast it immediately, and write `?s=` after
+ * `debounceMs`. Edits from either island reset the same timer, so only the
+ * last value is written.
  */
 export function publishSearchQuery(
   query: string,
@@ -70,11 +73,7 @@ export function publishSearchQuery(
 ): void {
   broadcast({ query, originId });
 
-  // One module-scoped timer, so keystrokes interleaved across the two islands
-  // still collapse into a single write of the last value typed.
-  if (pendingWriteTimerId !== undefined) {
-    clearTimeout(pendingWriteTimerId);
-  }
+  cancelPendingWrite();
   pendingWriteTimerId = setTimeout(() => {
     pendingWriteTimerId = undefined;
     writeSearchQueryParam(query);

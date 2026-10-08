@@ -64,15 +64,11 @@ test.describe("SearchBar component — mobile-nav placement", () => {
 
 // --- `?s=` URL sync -------------------------------------------------------
 //
-// Only what the unit tests cannot reach: a real reload, real history, and the
-// real 992px `display: none` rules. The resize cases in particular depend on
-// the CSS actually applying, so they have no unit-test equivalent.
+// Covers what unit tests can't: a real reload, real history, and the 992px
+// `display: none` rules that the resize cases depend on.
 // See `plans/27_search_url_sync.md`.
 
-/**
- * Serve the search fixture instead of hitting Typesense, so these tests assert
- * on restore behavior rather than on live index contents.
- */
+/** Serve the search fixture instead of querying Typesense. */
 const searchFixture = readFileSync(
   fileURLToPath(
     new URL("../__fixtures__/typesense_basic.json", import.meta.url),
@@ -140,13 +136,11 @@ test.describe("SearchBar — `?s=` URL sync", () => {
       .fill("dashboard");
     await expect(page).toHaveURL(/[?&]s=dashboard/);
 
-    await page.goto("/api/latest/v1/dashboards/");
+    await page.goto("/api/latest/action-connection/");
     await page.goBack();
 
-    // `?s=` is written with replaceState rather than Hugo's pushState, so the
-    // search replaced the clean entry instead of adding one per debounce
-    // window. Back therefore lands on the searched URL — and the restore path
-    // brings the query back with it, rather than leaving a stale empty input.
+    // `?s=` is written with replaceState, so the searched URL replaced the
+    // clean one and Back lands on it, with the query restored.
     await expect(page).toHaveURL(/[?&]s=dashboard/);
     await expect(
       page.locator(`${hydratedSideNavBar} .search-bar__input`),
@@ -159,8 +153,8 @@ test.describe("SearchBar — `?s=` URL sync", () => {
     await page.goto("/api/latest/?s=dashboard");
     await expect(page.locator(".search-bar__popup")).toBeVisible();
 
-    // Without the rect guard in usePopupPosition this leaves a zero-width
-    // popup pinned at the top-left corner rather than closing.
+    // Without the rect guard in usePopupPosition, a zero-width popup stays
+    // pinned to the top-left corner.
     await page.setViewportSize({ width: 480, height: 800 });
     await expect(page.locator(".search-bar__popup")).toHaveCount(0);
   });
@@ -179,8 +173,8 @@ test.describe("SearchBar — `?s=` URL sync", () => {
       page.locator("#mobile-nav.mobile-nav__panel--open"),
     ).toBeVisible();
 
-    // The literal request: the drawer's input already holds the query, because
-    // the two islands mirror each other as the user types.
+    // The drawer's input already holds the query, because the two islands
+    // mirror each other as the user types.
     await expect(
       page.locator(".mobile-nav__search .search-bar__input"),
     ).toHaveValue("dashboard");

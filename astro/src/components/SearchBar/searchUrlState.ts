@@ -1,17 +1,13 @@
 /**
- * URL state helpers for the search query.
+ * URL state helpers for the search query: the Astro equivalent of Hugo's
+ * InstantSearch `routing.stateMapping`
+ * (`hugo/assets/scripts/components/instantsearch.js`), which syncs the query
+ * to `?s=` and restores it on load.
  *
- * Hugo syncs the live search query to `?s=` as the user types, and seeds the
- * search from that param on load (its InstantSearch `routing.stateMapping`,
- * `hugo/assets/scripts/components/instantsearch.js`). These helpers are the
- * Astro equivalent of that mapping.
- *
- * The pure functions take the search and href strings as input, so they are
- * unit-tested without a browser. Pattern follows `Tabs/tabSync.ts`, which
- * splits the same way: pure builders plus one impure writer.
+ * Pure builders plus one impure writer, like `Tabs/tabSync.ts`.
  */
 
-/** Hugo's param name, and already what `navigateToSearchPage` emits. */
+/** Hugo's param name, also used by `navigateToSearchPage`. */
 export const SEARCH_QUERY_PARAM = "s";
 
 /** The `?s=` value from a `location.search` string, or "" when absent. */
@@ -36,15 +32,13 @@ export function buildSearchUrl(href: string, query: string): string {
 }
 
 /**
- * Write the query to the address bar without adding a history entry.
- *
- * Hugo's router uses `pushState`, which leaves one entry per debounce window
- * and makes Back walk the query backwards; this site's other synced params
- * (`tabSync`, `regionState`) use `replaceState`, and so does this.
+ * Write the query to the address bar without adding a history entry, like
+ * `tabSync` and `regionState`. (Hugo uses `pushState`, which adds an entry per
+ * debounce window.)
  */
 export function writeSearchQueryParam(query: string): void {
-  // Pass the current state through: Astro's ClientRouter (BaseLayout.astro)
-  // keeps its navigation data in `history.state`.
+  // Keep the existing state: Astro's ClientRouter stores its navigation data
+  // in `history.state`.
   window.history.replaceState(
     window.history.state,
     "",
