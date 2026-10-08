@@ -4735,6 +4735,20 @@
     "description": "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead.",
     "summary": "Get scheduled on-call user"
   },
+  "ListScheduleOverrides": {
+    "description": "Retrieve a list of overrides for the specified On-Call schedule within a given time range.",
+    "summary": "List On-Call schedule overrides"
+  },
+  "CreateScheduleOverrides": {
+    "description": "Create one or more overrides for the specified On-Call schedule.",
+    "summary": "Create On-Call schedule overrides",
+    "request_description": "",
+    "request_schema_description": "Request to create one or more on-call schedule overrides. You can create up to 25 overrides in a single request."
+  },
+  "DeleteScheduleOverride": {
+    "description": "Delete an override from the specified On-Call schedule.",
+    "summary": "Delete On-Call schedule override"
+  },
   "GetScheduleOnCallResponders": {
     "description": "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position.",
     "summary": "Get on-call responders for a schedule"

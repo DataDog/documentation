@@ -1,0 +1,19 @@
+entries:
+  - change_type: added
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40460
+    operations:
+      - CreateScheduleOverrides
+      - DeleteScheduleOverride
+      - ListScheduleOverrides
+    title: Add on-call endpoints for overrides to the spec
+  - change_type: modified
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40460
+    operations:
+      - CreateOnCallSchedule
+      - GetOnCallSchedule
+      - GetScheduleOnCallResponders
+      - GetScheduleOnCallUser
+      - UpdateOnCallSchedule
+    title: Add on-call endpoints for overrides to the spec
