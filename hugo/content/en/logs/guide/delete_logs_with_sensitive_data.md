@@ -56,7 +56,7 @@ To permanently remove indexed logs that contain sensitive data, use [Logs Data D
 
 Before you delete logs, confirm the following:
 
-- The logs with sensitive data are no longer being sent to Datadog.
+- You've stopped sending the logs that contain sensitive data to Datadog.
 - Logs Data Deletion is [enabled for your organization][6]. Only an Organization Admin can enable it.
 - You have a role with the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
 
