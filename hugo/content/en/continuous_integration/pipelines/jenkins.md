@@ -331,7 +331,7 @@ DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME={{< region-param key=dd_full_site >}
 
 ## Logs Storage
 
-Logs Storage can be enabled optionally when configuring the Jenkins plugin (see previous section).
+Logs Storage can be enabled optionally when configuring the Jenkins plugin (see `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` in the previous section).
 Both Agentless and Agent-based options are supported.
 
 Logs Storage is billed separately from CI Visibility.
