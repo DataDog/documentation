@@ -15,6 +15,12 @@ export const SchemaFieldSchema = z.strictObject({
   required: z.boolean(),
   deprecated: z.boolean(),
   readOnly: z.boolean(),
+  writeOnly: z
+    .boolean()
+    .optional()
+    .describe(
+      "Set only when the spec marks the field `writeOnly`. Such a field is accepted on the way in but never returned, so it is stripped from response models and response examples.",
+    ),
   description: z
     .string()
     .describe("Markdown string from the spec's description field"),
