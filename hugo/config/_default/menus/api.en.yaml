@@ -9637,6 +9637,32 @@ menu:
       url: /api/latest/bits-ai/
       identifier: bits-ai
       generated: true
+    - name: Update monitor automatic investigation settings
+      url: /api/latest/bits-ai/update-monitor-automatic-investigation-settings/
+      identifier: bits-ai-update-monitor-automatic-investigation-settings
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorAutomation
+        unstable:
+          - v2
+        order: 5
+    - name: Get automatic investigation settings for a monitor
+      url: /api/latest/bits-ai/get-automatic-investigation-settings-for-a-monitor/
+      identifier: bits-ai-get-automatic-investigation-settings-for-a-monitor
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorAutomation
+        unstable:
+          - v2
+        order: 4
     - name: Get a Bits AI investigation
       url: /api/latest/bits-ai/get-a-bits-ai-investigation/
       identifier: bits-ai-get-a-bits-ai-investigation

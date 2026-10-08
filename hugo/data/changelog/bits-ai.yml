@@ -1,0 +1,8 @@
+entries:
+  - change_type: added
+    date: '2026-10-07'
+    link: https://github.com/DataDog/documentation/pull/40500
+    operations:
+      - GetMonitorAutomation
+      - UpdateMonitorAutomation
+    title: Add monitor automatic investigation settings API
