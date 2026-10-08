@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-2.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-2.png" alt="Operations tab under RUM > Performance Monitoring." style="width:100%;" >}}
 
-A RUM operation is a critical step in a [journey][9] that must be available and fast for users to complete the journey. A journey represents a major user-facing area of your application, such as checkout, login, or search. You can map RUM operations to the steps that matter to your application. A RUM operation typically starts with a user action and ends when a related technical event completes, such as when an API call resolves.
+A RUM operation is a critical step in a [journey][9] that must be available and fast for users to complete the journey. A journey represents a major user-facing area of your application, such as checkout, login, or search. You define RUM operations for the steps that matter in your application. An operation typically starts with a user action and ends when a related technical event completes, such as when an API call resolves.
 
-Datadog automatically generates [operation metrics][19] from all ingested, unsampled RUM traffic at no additional cost. [Operation events][21] can be used in [retention filters][12] and are available for investigation in retained RUM sessions.
+Datadog automatically generates [operation metrics][19] from all ingested, unsampled RUM traffic at no additional cost. Use [operation events][21] in [retention filters][12] or investigate them in retained RUM sessions.
 
 You can create operations in the following ways:
 
@@ -28,7 +28,7 @@ You can create operations in the following ways:
 - [Through the Datadog MCP (Model Context Protocol) Server][17]
 - [Programmatically with the Datadog API][18]
 
-For recommendations on defining and instrumenting operations, see [Best practices for setting up Operations Monitoring][14].
+For recommendations on defining and instrumenting operations, see [Best Practices for Setting Up RUM Operations][14].
 
 Grouping RUM operations into journeys connects technical performance with business outcomes:
 
@@ -69,14 +69,14 @@ Datadog automatically generates two out-of-the-box metrics for each RUM operatio
 Datadog retains both metrics for 15 months. The metrics include these dimensions:
 
 - `operation.name`, defined on the client side
-- `operation.status`, either success or failure
-- `operation.failure_reason`, error, abandoned, or other
+- `operation.status`, either `success` or `failure`
+- `operation.failure_reason`, either `error`, `abandoned`, or `other`
 
-Use these metrics to create [metric monitors][22] and availability or latency Service Level Objectives (SLO) for RUM operations. For recommended queries, thresholds, and examples, see [Best Practices for Creating SLOs for RUM Operations][23].
+Use these metrics to create [metric monitors][22] and availability or latency Service Level Objectives (SLOs) for RUM operations. For recommended queries, thresholds, and examples, see [Best Practices for Creating SLOs for RUM Operations][23].
 
 To view operation metrics, navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}. The Operations catalog groups together all operations with the same name.
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-2.png" alt="RUM Operations catalog showing operation volume, completion rate, and failure rate" style="width:100%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-2.png" alt="RUM Operations catalog showing operation volume, completion rate, and failure rate." style="width:100%;" >}}
 
 ## Use RUM operation events for investigation and retention
 
@@ -91,9 +91,9 @@ Query operation events from retained sessions in the [RUM Session Explorer][20] 
 - `@operation.start_view.name`
 - `@operation.end_view.name`
 
-Use the same attributes in retention filters to retain sessions based on operation activity. For example, retain sessions that contain a failed operation or an operation whose duration exceeds a threshold.
+Use the same attributes in [retention filters][12] to retain sessions based on operation activity. For example, retain sessions that contain a failed operation or an operation whose duration exceeds a threshold.
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-retention-filter.png" alt="RUM retention filter configured with operation event attributes" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-retention-filter.png" alt="RUM retention filter configured with operation event attributes." style="width:80%;" >}}
 
 ## Create operations with the SDK APIs
 
@@ -417,23 +417,23 @@ In the operations catalog, click the pencil icon to edit an operation. You can e
 
 ## Link RUM operations to journeys
 
-A link identifies a RUM operation as a definitive part of one or more journeys' critical paths. Explicit links distinguish operations that service a journey from unrelated operations that run concurrently.
+A link marks a RUM operation as part of the critical path of one or more journeys. Links distinguish operations that support a journey from unrelated operations that run at the same time.
 
 Linking an operation to a journey has these effects:
 
-- If the operation does not have at least one SLO, Datadog automatically creates an availability SLO with a 99% objective to establish a baseline. For guidance on customizing operation SLOs, see [Best Practices for Creating SLOs for RUM Operations][23].
+- If the operation has no SLOs, Datadog creates an availability SLO with a 99% objective as a baseline. For guidance on customizing operation SLOs, see [Best Practices for Creating SLOs for RUM Operations][23].
 - The journey's [health status in Journey Monitoring][9] reflects whether any SLO for the linked operation has a critical burn rate.
 
 ### Manage journey links
 
 Manage links with one of these methods:
 
-- In Datadog, from the operation details report or a specific journey's [details report][24]
+- In Datadog, from the operation's details report or a journey's [details report][24]
 - With the [RUM Operations API][10]
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-journey-link-side-panel.png" alt="Side panel in RUM Operations details report to manage Journey links" style="width:100%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-journey-link-side-panel.png" alt="Side panel in RUM Operations details report to manage journey links." style="width:100%;" >}}
 
-You can unlink an operation from one or more journeys at any time. All SLOs remain associated with the operation after it is unlinked.
+You can unlink an operation from a journey at any time. The operation keeps its SLOs after you unlink it.
 
 ## Investigate root causes with AI
 
