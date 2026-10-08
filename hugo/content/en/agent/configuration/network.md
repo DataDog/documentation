@@ -310,7 +310,6 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/
-[2]: /database_monitoring/
 [3]: /infrastructure/livecontainers/
 [4]: /infrastructure/process/
 [5]: /infrastructure/containers/#kubernetes-orchestrator-explorer
@@ -325,12 +324,7 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [14]: /network_monitoring/network_path/
 [15]: /integrations/go_expvar/
 [16]: /agent/basic_agent_usage/#gui
-[17]: /tracing/
 [18]: /extend/dogstatsd/
-[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /integrations/ntp/#overview
-[21]: /logs/log_collection/#logging-endpoints
-[22]: /containers/guide/cluster_agent_autoscaling_metrics
 [23]: /llm_observability/
 [24]: /network_monitoring/cloud_network_monitoring/
 [25]: /universal_service_monitoring/
