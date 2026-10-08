@@ -105,6 +105,8 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 
 ## Lighthouse audits
 
+Lighthouse is an automated tool that grades your pages on performance, accessibility, best practices, and SEO, so you can find and fix what slows down or frustrates users.
+
 A [browser Synthetic test][7] can run a [Lighthouse][15] audit and send the resulting scores to the matching RUM view. Lighthouse provides lab measurements that complement the real-user field data on this page, so you can track frontend quality on a schedule. The audit runs once per test run, on the final URL the test reaches.
 
 Each audit reports five category scores from 0 to 100:
