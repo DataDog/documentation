@@ -89,7 +89,7 @@ For local CLI deployments, port `8081` is common. If your workers use a differen
 
 ### 3. Configure the integrations
 
-Add the following [Autodiscovery annotations][3] to the corresponding workload pod templates. In each annotation key, replace the placeholder with the container `name` from `spec.template.spec.containers[]`, not the image name.
+Add the following [Autodiscovery annotations][3] to the corresponding workload pod templates. In each annotation key, replace the placeholder with the value of the container's `name` field in `spec.template.spec.containers[]`, not the image name.
 
 Add the following annotation to the Dynamo frontend pod template:
 
