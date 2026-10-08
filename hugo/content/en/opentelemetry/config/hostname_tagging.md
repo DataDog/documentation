@@ -121,9 +121,11 @@ If your Collector forwards to a gateway, also follow the [gateway recommendation
 
 ## Diagnose hostname issues
 
-Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems. It does not affect billing.
+Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. The metric doesn't affect billing.
 
-A trace has at most one `issue_type`. Use the following table to find the cause and the fix:
+<div class="alert alert-info">The <code>issue_type</code> values come from heuristics, so a correct configuration can produce them. Use this metric to investigate a hostname problem you've already seen, such as one node appearing as two hosts, traces that don't link to their host, or missing host tags.</div>
+
+A trace has at most one `issue_type`. Use the following table to find the likely cause and the fix:
 
 | `issue_type` | What it indicates | Recommended action |
 |---|---|---|
