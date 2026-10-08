@@ -130,40 +130,25 @@ Send log lines in batches while the job runs, or send the batches when it finish
 before submitting the completed job event. After you submit that event, Datadog closes the job log after 20 seconds
 without a new line. Lines received after it closes may not appear in the job's Logs tab.
 
-The following request sends two log lines for a job:
+The following request sends one log line for a job. This example uses the US1 site; replace `datadoghq.com` with your
+Datadog site if needed.
 
 {{< code-block lang="bash" >}}
-curl -X POST "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/cilogs" \
+curl -X POST "https://http-intake.logs.datadoghq.com/api/v2/cilogs" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -d @- << EOF
-[
-  {
-    "message": "Running go test ./...",
-    "status": "info",
-    "pipeline_unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
-    "job_id": "job-456",
-    "provider_name": "<YOUR_CI_PROVIDER>",
-    "line_number": 1,
-    "section_name": "tests",
-    "stream": "stdout"
-  },
-  {
-    "message": "Tests passed",
-    "status": "info",
-    "pipeline_unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
-    "job_id": "job-456",
-    "provider_name": "<YOUR_CI_PROVIDER>",
-    "line_number": 2,
-    "section_name": "tests",
-    "stream": "stdout"
-  }
-]
+{
+  "message": "Running go test ./...",
+  "pipeline_unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
+  "job_id": "job-456",
+  "provider_name": "<YOUR_CI_PROVIDER>"
+}
 EOF
 {{< /code-block >}}
 
-A request can contain up to 1,000 log lines and an uncompressed body of up to 5.1 MiB. For compression, retry
-guidance, optional attributes, and per-job limits, see the [Send CI job logs API reference][19].
+A request can contain one log object or an array of up to 1,000 log objects, with an uncompressed body of up to 5.1 MiB.
+For compression, retry guidance, optional attributes, and per-job limits, see the [Send CI job logs API reference][19].
 
 Datadog bills logs separately from CI Visibility. Configure log retention, exclusion filters, and indexes in
 [Log Management][20].
