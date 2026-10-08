@@ -48,21 +48,21 @@ To delete an entire index:
 
 ## Redact sensitive data with Sensitive Data Scanner
 
-Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in Datadog. Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner to prevent sensitive data leaks and limit non-compliance risks.
+Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in Datadog. Sensitive Data Scanner is a stream-based pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner to prevent sensitive data leaks and limit non-compliance risks.
 
 ## Delete logs from your organization
 
 To permanently remove indexed logs that contain sensitive data, use [Logs Data Deletion][3]. Logs Data Deletion lets you query for logs within a time frame and delete them from your organization without contacting Datadog support.
 
-Before you delete logs:
+Before you delete logs, confirm the following:
 
-1. Stop sending the logs with sensitive data to Datadog.
-1. Have an Organization Admin [enable Logs Data Deletion][6] for your organization.
-1. Confirm that you have a role with the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
+- The logs with sensitive data are no longer being sent to Datadog.
+- Logs Data Deletion is [enabled for your organization][6]. Only an Organization Admin can enable it.
+- You have a role with the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
 
-<div class="alert alert-danger">Deletions are permanent after 10 days. Review your deletion requests carefully.</div>
+<div class="alert alert-danger">Deletions are permanent after 10 days. Review each deletion request before you confirm it.</div>
 
-**Note**: Logs Data Deletion doesn't delete data derived from the deleted logs, such as metrics generated from logs.
+**Note**: Logs Data Deletion doesn't delete data derived from the deleted logs, such as generated metrics.
 
 For the full procedure, including how to cancel and audit deletions, see [Delete Data][3].
 
