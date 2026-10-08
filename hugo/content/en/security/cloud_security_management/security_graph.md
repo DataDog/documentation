@@ -22,7 +22,7 @@ The graph shows context for the selected finding. The resources and relationship
 ## Open an attack path's context graph
 
 1. Open [Security Inbox][1].
-1. Filter the findings by the **Attack Path** finding type.
+1. Filter Security Inbox by the **Attack Path** finding type.
 1. Select a finding to open its side panel.
 1. Open **Context Graph** to inspect the resources and relationships associated with the finding.
 1. Select a resource in the graph to view its details.
