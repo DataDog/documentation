@@ -4,11 +4,11 @@ export const prerender = true;
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection, getEntry } from "astro:content";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
-import { buildMarkdocStr, parse } from "@lib/plaintext/helpers";
+import { parse } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
-import { prependPreamble } from "@lib/plaintext/preamble";
+import { buildPlaintextPage } from "@lib/plaintext/preamble";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection("en", (entry) => isApiSubPage(entry.id));
@@ -42,11 +42,11 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = prependPreamble(
-    buildMarkdocStr([
+  const body = buildPlaintextPage(
+    [
       ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
       ...parse(entry.body ?? "").children,
-    ]),
+    ],
     {
       title: entry.data.title,
       description: entry.data.description ?? "",

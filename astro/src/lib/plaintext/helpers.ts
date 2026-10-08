@@ -20,8 +20,15 @@ export { Ast, format, parse };
 
 export const NO_CONTENT: MarkdocNode[] = [];
 
-export function documentNode(children: MarkdocNode[]): MarkdocNode {
-  return new Ast.Node("document", {}, children);
+/**
+ * `frontmatter` is the raw YAML between the `---` fences, which `format()`
+ * writes back out above the children.
+ */
+export function documentNode(
+  children: MarkdocNode[],
+  frontmatter?: string,
+): MarkdocNode {
+  return new Ast.Node("document", frontmatter ? { frontmatter } : {}, children);
 }
 
 export function plaintext(content: string): MarkdocNode {
@@ -118,8 +125,12 @@ export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
 
 /**
  * Serialize a list of block-level nodes as a Markdoc string. Wraps them in a
- * document node, calls Markdoc's `format()`, and ensures a trailing newline.
+ * document node (with optional raw YAML `frontmatter`), calls Markdoc's
+ * `format()`, and ensures a trailing newline.
  */
-export function buildMarkdocStr(children: MarkdocNode[]): string {
-  return format(documentNode(children)).trim() + "\n";
+export function buildMarkdocStr(
+  children: MarkdocNode[],
+  frontmatter?: string,
+): string {
+  return format(documentNode(children, frontmatter)).trim() + "\n";
 }

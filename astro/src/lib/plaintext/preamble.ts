@@ -7,6 +7,7 @@
 import { stringify as stringifyYaml } from "yaml";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import { absoluteUrl } from "@lib/site/siteUrl";
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import {
   Ast,
   buildMarkdocStr,
@@ -26,11 +27,18 @@ export interface PreambleData {
   site: string | URL | undefined;
 }
 
-export function prependPreamble(body: string, data: PreambleData): string {
-  return `${frontmatter(data)}\n${llmsTxtBanner(data.site)}\n${body}`;
+/** Formats a whole plaintext page: the preamble, then `children`. */
+export function buildPlaintextPage(
+  children: MarkdocNode[],
+  data: PreambleData,
+): string {
+  return buildMarkdocStr(
+    [llmsTxtBannerNode(data.site), ...children],
+    frontmatterYaml(data),
+  );
 }
 
-function frontmatter({
+function frontmatterYaml({
   title,
   description,
   breadcrumbs,
@@ -40,16 +48,16 @@ function frontmatter({
     ...(description ? { description } : {}),
     breadcrumbs: breadcrumbs.map((crumb) => crumb.label).join(" > "),
   };
-  return `---\n${stringifyYaml(fields, { lineWidth: 0 })}---\n`;
+  return stringifyYaml(fields, { lineWidth: 0 }).trimEnd();
 }
 
-function llmsTxtBanner(site: string | URL | undefined): string {
+function llmsTxtBannerNode(site: string | URL | undefined): MarkdocNode {
   if (!site) {
     throw new Error(
       "astro.config.mjs `site` must be set for the llms.txt banner to link canonically.",
     );
   }
-  const blockquote = new Ast.Node("blockquote", {}, [
+  return new Ast.Node("blockquote", {}, [
     paragraph([
       inline([
         plaintext("For the complete documentation index, see "),
@@ -58,5 +66,4 @@ function llmsTxtBanner(site: string | URL | undefined): string {
       ]),
     ]),
   ]);
-  return buildMarkdocStr([blockquote]);
 }

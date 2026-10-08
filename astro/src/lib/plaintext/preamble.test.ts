@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { parse as parseYaml } from "yaml";
-import { prependPreamble } from "./preamble";
+import { heading, paragraphFromText } from "./helpers";
+import { buildPlaintextPage } from "./preamble";
 
 const SITE = "https://docs.datadoghq.com";
 const CRUMBS = [
@@ -15,9 +16,9 @@ function frontmatterOf(text: string): unknown {
   return parseYaml(match[1]);
 }
 
-describe("prependPreamble", () => {
+describe("buildPlaintextPage", () => {
   it("opens with frontmatter holding title, description, and joined crumbs", () => {
-    const text = prependPreamble("# Get a metric\n", {
+    const text = buildPlaintextPage([heading(1, "Get a metric")], {
       title: "Get a metric",
       description: "Gets a metric.",
       breadcrumbs: CRUMBS,
@@ -31,7 +32,7 @@ describe("prependPreamble", () => {
   });
 
   it("puts the llms.txt banner between the frontmatter and the body", () => {
-    const text = prependPreamble("# Get a metric\n", {
+    const text = buildPlaintextPage([heading(1, "Get a metric")], {
       title: "Get a metric",
       description: "Gets a metric.",
       breadcrumbs: CRUMBS,
@@ -43,7 +44,7 @@ describe("prependPreamble", () => {
   });
 
   it("points the banner at the site's own root, base path included", () => {
-    const text = prependPreamble("body\n", {
+    const text = buildPlaintextPage([paragraphFromText("body")], {
       title: "T",
       description: "D",
       breadcrumbs: CRUMBS,
@@ -55,7 +56,7 @@ describe("prependPreamble", () => {
   });
 
   it("omits an empty description", () => {
-    const text = prependPreamble("body\n", {
+    const text = buildPlaintextPage([paragraphFromText("body")], {
       title: "T",
       description: "",
       breadcrumbs: CRUMBS,
@@ -66,7 +67,7 @@ describe("prependPreamble", () => {
 
   it("quotes values YAML would otherwise misread", () => {
     const title = "Status: OK # not a comment";
-    const text = prependPreamble("body\n", {
+    const text = buildPlaintextPage([paragraphFromText("body")], {
       title,
       description: "D",
       breadcrumbs: CRUMBS,
@@ -77,7 +78,7 @@ describe("prependPreamble", () => {
 
   it("throws without a site rather than emitting a relative link", () => {
     expect(() =>
-      prependPreamble("body\n", {
+      buildPlaintextPage([paragraphFromText("body")], {
         title: "T",
         description: "D",
         breadcrumbs: CRUMBS,

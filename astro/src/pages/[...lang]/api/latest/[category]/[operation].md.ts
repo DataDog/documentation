@@ -3,7 +3,7 @@ export const prerender = true;
  * Plaintext rendering of each endpoint page.
  *
  * Builds the page as Markdoc nodes — `# Summary`, then a `## v{N} (latest?)`
- * section per variant — and emits markdown via `buildMarkdocStr`. Structure
+ * section per variant — and emits markdown via `buildPlaintextPage`. Structure
  * (tables, tabs, alerts, fences) is described as nodes rather than concatenated
  * strings. Mirrors the HTML endpoint page in `[operation].astro`.
  */
@@ -16,15 +16,15 @@ import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
-import { buildMarkdocStr, heading } from "@lib/plaintext/helpers";
+import { heading } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { prependPreamble } from "@lib/plaintext/preamble";
+import { buildPlaintextPage } from "@lib/plaintext/preamble";
 
 function apiOperationBody(
   operation: ApiOperationView,
   lang: Locale,
   pathname: string,
-): string {
+): MarkdocNode[] {
   const contents: MarkdocNode[] = [
     heading(1, operation.summary),
     ...siteSupportNoteNodes(pathname, lang),
@@ -34,7 +34,7 @@ function apiOperationBody(
     contents.push(heading(2, label));
     contents.push(...apiEndpointNodes(variant));
   }
-  return buildMarkdocStr(contents);
+  return contents;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -72,7 +72,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = prependPreamble(
+  const body = buildPlaintextPage(
     apiOperationBody(operation, lang, url.pathname),
     {
       title: operation.summary,

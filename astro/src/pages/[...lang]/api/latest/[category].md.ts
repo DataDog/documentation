@@ -5,7 +5,7 @@ export const prerender = true;
  * Builds the page as Markdoc nodes — heading, optional deprecation alert,
  * description paragraph, and one summary block per endpoint (heading linking
  * to the endpoint page, plus its method + URL) — then emits markdown via
- * `buildMarkdocStr`. Mirrors the HTML category page in `[category].astro`.
+ * `buildPlaintextPage`. Mirrors the HTML category page in `[category].astro`.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
@@ -20,15 +20,15 @@ import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { alertNode } from "@components/Alert/plaintext/Alert";
 import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
-import { buildMarkdocStr, heading, nodesFromMd } from "@lib/plaintext/helpers";
+import { heading, nodesFromMd } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { prependPreamble } from "@lib/plaintext/preamble";
+import { buildPlaintextPage } from "@lib/plaintext/preamble";
 
 function apiCategoryBody(
   category: ApiCategory,
   lang: Locale,
   pathname: string,
-): string {
+): MarkdocNode[] {
   const categoryBaseHref = localizedHref(lang, `/api/latest/${category.slug}/`);
 
   const contents: MarkdocNode[] = [
@@ -50,7 +50,7 @@ function apiCategoryBody(
     contents.push(...endpointSummaryNodes(operation, categoryBaseHref));
   }
 
-  return buildMarkdocStr(contents);
+  return contents;
 }
 
 function endpointSummaryNodes(
@@ -91,12 +91,15 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = prependPreamble(apiCategoryBody(category, lang, url.pathname), {
-    title: category.name,
-    description: categoryMetaDescription(category),
-    breadcrumbs: apiBreadcrumbs(lang, category.name),
-    site,
-  });
+  const body = buildPlaintextPage(
+    apiCategoryBody(category, lang, url.pathname),
+    {
+      title: category.name,
+      description: categoryMetaDescription(category),
+      breadcrumbs: apiBreadcrumbs(lang, category.name),
+      site,
+    },
+  );
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

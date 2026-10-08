@@ -3,7 +3,7 @@ export const prerender = true;
  * Plaintext rendering of the API Reference landing page.
  *
  * Composes the page from Markdoc nodes — a heading, an intro paragraph, and a
- * bullet list of category links — then emits markdown via `buildMarkdocStr`.
+ * bullet list of category links — then emits markdown via `buildPlaintextPage`.
  * Mirrors the HTML landing page in `latest/index.astro`.
  */
 
@@ -17,9 +17,8 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { prependPreamble } from "@lib/plaintext/preamble";
+import { buildPlaintextPage } from "@lib/plaintext/preamble";
 import {
-  buildMarkdocStr,
   heading,
   inline,
   link,
@@ -32,7 +31,7 @@ function apiLandingBody(
   categories: ApiCategoryStub[],
   lang: Locale,
   pathname: string,
-): string {
+): MarkdocNode[] {
   const items = categories.map((cat) => {
     const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
     return listItem([inline([link(href, cat.name)])]);
@@ -47,7 +46,7 @@ function apiLandingBody(
     list("unordered", items),
   ];
 
-  return buildMarkdocStr(contents);
+  return contents;
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -68,12 +67,15 @@ export const GET: APIRoute = async ({ params, url, site }) => {
   }
 
   const categories = await getCategoryStubsView(lang);
-  const body = prependPreamble(apiLandingBody(categories, lang, url.pathname), {
-    title: rootEntry.data.title,
-    description: rootEntry.data.description ?? "",
-    breadcrumbs: apiBreadcrumbs(lang),
-    site,
-  });
+  const body = buildPlaintextPage(
+    apiLandingBody(categories, lang, url.pathname),
+    {
+      title: rootEntry.data.title,
+      description: rootEntry.data.description ?? "",
+      breadcrumbs: apiBreadcrumbs(lang),
+      site,
+    },
+  );
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
