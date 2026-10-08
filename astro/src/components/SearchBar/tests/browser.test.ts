@@ -66,7 +66,6 @@ test.describe("SearchBar component — mobile-nav placement", () => {
 //
 // Covers what unit tests can't: a real reload, real history, and the 992px
 // `display: none` rules that the resize cases depend on.
-// See `plans/27_search_url_sync.md`.
 
 /** Serve the search fixture instead of querying Typesense. */
 const searchFixture = readFileSync(

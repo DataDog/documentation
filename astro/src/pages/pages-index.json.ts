@@ -6,7 +6,7 @@ export const prerender = true;
  * cheap (no page body is built). The `pagesJson` integration reads this after
  * the build, hashes each already-emitted `.md` from disk, writes the final
  * `dist/client/pages.json`, and deletes this sidecar. It therefore never appears
- * in a real deploy; it is excluded from the sitemap. See `plans/20_pages_json.md`.
+ * in a real deploy; it is excluded from the sitemap.
  */
 
 import type { APIRoute } from "astro";

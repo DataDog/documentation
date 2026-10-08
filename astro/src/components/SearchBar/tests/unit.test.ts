@@ -458,7 +458,6 @@ describe("SearchBar — global keyboard shortcuts", () => {
 //
 // Both SearchBar islands are mounted at every width. Whichever one the user
 // types into writes `?s=`, and the other mirrors the text.
-// See `plans/27_search_url_sync.md`.
 
 const DEBOUNCE_MS = 200;
 
