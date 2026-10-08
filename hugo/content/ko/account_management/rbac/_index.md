@@ -12,20 +12,23 @@ description: 역할 기반 권한, 사용자 지정 역할 및 대시보드, 모
   사용자 액세스를 관리합니다.
 further_reading:
 - link: /api/v2/roles/
-  tag: 설명서
+  tag: 문서
   text: Roles API로 역할 및 권한 관리
 - link: /api/v2/roles/#list-permissions
-  tag: 설명서
+  tag: 문서
   text: Permissions API로 권한 관리
 - link: /account_management/rbac/permissions
-  tag: 설명서
+  tag: 문서
   text: 사용 가능한 권한 목록을 살펴보세요
 - link: /account_management/saml/
-  tag: 설명서
+  tag: 문서
   text: SAML로 싱글 사인온 활성화
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: 블로그
   text: Datadog Audit Trail로 팀 전반에 규정 준수, 거버넌스 및 투명성 구축
+- link: /account_management/delete_data/
+  tag: 문서
+  text: Datadog에서 데이터를 삭제하십시오.
 title: Access Control
 ---
 ## 개요 {#overview}

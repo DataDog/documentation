@@ -389,9 +389,9 @@ Both metrics are retained for 15 months, and include several dimensions:
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
 
-## Investigate root causes with AI
+## Investigate root causes with Bits AI
 
-You can run an agentic investigation on a single operation directly from the Operations page. The agent analyzes both the success rate and the latency of the operation and surfaces focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions. For more information, see [Operation AI Investigation][8].
+When you open an operation, RUM displays recommendation cards ranked by severity, one for each type of problem affecting the operation: errors, abandonment, timeouts, crashes, or slowness. Click **Investigate** on a card to start a Bits Investigation that analyzes the problem down to the code. For more information, see [Optimize Performance with Bits AI][8].
 
 ## Configure retention filters
 
@@ -419,7 +419,7 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
 [7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
-[8]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
+[8]: /real_user_monitoring/bits_ai/optimize_performance/#operations-monitoring
 [9]: /journey_monitoring/
 [10]: /api/latest/rum-operations/
 [11]: /real_user_monitoring/rum_without_limits/
