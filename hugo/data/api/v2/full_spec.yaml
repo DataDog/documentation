@@ -165964,7 +165964,6 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-        - AuthZ: []
       servers:
         - url: https://{subdomain}.{site}
           variables:
