@@ -23,6 +23,8 @@
     "build:preview": "yarn deps && CI_ENVIRONMENT_NAME=preview astro build",
     "build:live": "yarn deps && CI_ENVIRONMENT_NAME=live astro build",
     "verify:dist": "node scripts/verifyDist.mjs",
+    "//check:site-support-drift": "Reports drift between shared/site_support.yaml and Hugo's copy of the site-support data. Exits 1 on drift but is a warning, not a gate: it is deliberately outside the test suite.",
+    "check:site-support-drift": "node scripts/checkSiteSupportDrift.ts",
     "//format": "Uses astro/.prettierrc, not the repo-root prettier.config.js — Prettier picks the nearest config and uses it wholesale, so never run this from the repo root or pass the root config.",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
