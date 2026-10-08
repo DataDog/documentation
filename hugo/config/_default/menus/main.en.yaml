@@ -6034,6 +6034,12 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_explore
       weight: 2
+    - name: Bits Release
+      url: bits_release/
+      pre: ci
+      parent: software_delivery_heading
+      identifier: bits_release
+      weight: 35000
     - name: Test Optimization
       url: tests/
       pre: ci
