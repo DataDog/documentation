@@ -998,6 +998,10 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 **Histogram bucket count**
 : Each histogram datapoint is validated on ingestion, with a maximum per-bucket count (the number of observations in any single bucket) of 2,147,483,647 (2<sup>31</sup> − 1). If any bucket exceeds this, the entire datapoint is dropped.
 
+## Next steps
+
+{{% opentelemetry/setup-next-steps %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
