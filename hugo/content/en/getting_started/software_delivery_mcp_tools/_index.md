@@ -36,8 +36,8 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
 - **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions or GitLab job without leaving the agent session.
 - **Checking PR health**: Get a combined view of CI failures, code coverage, and quality or security violations for a pull request.
-- **Investigating Deployment Gate failures**: Find out why a gate failed, which rules caused it, and whether the deployment was blocked or the gate was in dry run.
-- **Reviewing Deployment Gate configuration**: Check which gates and rules protect a service and environment, and which are in dry run.
+- **Investigating Deployment Gate failures**: Find out which rules caused a gate to fail and whether the failure blocked the deployment.
+- **Reviewing Deployment Gate configuration**: See which gates and rules apply to a service and environment.
 
 ## Available tools
 
@@ -82,22 +82,24 @@ The `software-delivery` toolset includes the following tools:
 `retry_datadog_ci_job`
 : Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. For other CI providers, use the provider's UI to rerun.
 
+The Deployment Gates tools are in Preview. Contact [Datadog support](/help/) to request access.
+
 `search_datadog_deployment_gates`
-: Search the Deployment Gates configured in your organization by service, environment, identifier, or dry-run state. Returns gate configuration, not deployment outcomes.
+: Search configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
 
 `get_datadog_deployment_gate`
-: Get one configured Deployment Gate by its gate ID, including all of its rules, rule types, rule options, and gate-level and rule-level dry-run settings.
+: Get one configured Deployment Gate by its gate ID, including its rules and settings.
 
 `search_datadog_deployment_gate_evaluations`
-: Search Deployment Gate evaluations by service, environment, identifier, status (`in_progress`, `pass`, or `fail`), dry-run state, or evaluation ID. A `fail` status with `dry_run: true` means the gate failed in dry run and did not block the deployment. Searches the last 24 hours by default, with a maximum window of 30 days.
+: Search Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
 
 `get_datadog_deployment_gate_evaluation`
-: Get one Deployment Gate evaluation with every rule evaluated for it and a summary of which rules failed the gate, which failed only in dry run, and which are still in progress. Use this to explain why a gate evaluation failed.
+: Get a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
 
 `search_datadog_deployment_gate_rule_evaluations`
-: Search individual rule results across Deployment Gate evaluations, filtered by gate evaluation, gate, rule, service, environment, version, status, rule type (`monitor` or `faulty_deployment_detection`), or dry-run state. Each result includes the rule's status, reason, and failure evidence, such as the triggering monitors, faulty APM resources, or Watchdog insights. Use this to find which rules fail most often for a service.
+: Search individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
 
-The Deployment Gates tools are read-only and require the `deployment_gates_read` permission.
+The Deployment Gates tools are read-only and require the `DeploymentGatesRead` permission. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
 
 ## Example prompts
 
@@ -115,7 +117,7 @@ After you are connected, try prompts like:
 - Quarantine all active flaky tests in the `checkout-service` repository.
 - Why did the Deployment Gate for `checkout` in `prod` fail on the last deployment?
 - Which Deployment Gate rules for the `checkout` service in `prod` are in dry run?
-- Which gate rules failed most often for the `payments` service over the last 7 days?
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Setup
 
