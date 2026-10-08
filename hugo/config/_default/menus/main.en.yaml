@@ -1351,27 +1351,6 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoTerm
-      url: coterm/
-      pre: coscreen
-      identifier: coterm
-      parent: essentials_heading
-      weight: 150000
-    - name: Install
-      url: coterm/install
-      identifier: coterm_install
-      parent: coterm
-      weight: 1
-    - name: Using CoTerm
-      url: coterm/usage
-      identifier: coterm_usage
-      parent: coterm
-      weight: 2
-    - name: Configuration Rules
-      url: coterm/rules
-      identifier: coterm_rules
-      parent: coterm
-      weight: 3
     - name: Remote Configuration
       pre: config-2
       url: remote_configuration
@@ -5965,26 +5944,31 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_setup
       weight: 1
-    - name: Summary Page
+    - name: Summary
       url: gpu_monitoring/summary/
       parent: gpu_monitoring
       identifier: gpu_monitoring_summary
       weight: 2
-    - name: Fleet Page
+    - name: Explorer
       url: gpu_monitoring/fleet/
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
-    - name: Training Page
+    - name: Capacity Planning
+      url: gpu_monitoring/capacity_planning/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_capacity_planning
+      weight: 4
+    - name: Training
       url: gpu_monitoring/training/
       parent: gpu_monitoring
       identifier: gpu_monitoring_training
-      weight: 4
-    - name: Inference Page
+      weight: 5
+    - name: Inference
       url: gpu_monitoring/inference/
       parent: gpu_monitoring
       identifier: gpu_monitoring_inference
-      weight: 5
+      weight: 6
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -8071,6 +8055,11 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
+    - name: Entity Packs
+      url: security/cloud_siem/ingest_and_enrich/entity_packs
+      parent: cloud_siem_content_packs
+      identifier: cloud_siem_entity_packs
+      weight: 1011
     - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
@@ -8171,16 +8160,21 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
+    - name: User Inventory
+      url: security/cloud_siem/triage_and_investigate/user_inventory/
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_user_inventory
+      weight: 303
     - name: IOC Explorer
       url: security/cloud_siem/triage_and_investigate/ioc_explorer
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_ioc_explorer
-      weight: 303
+      weight: 304
     - name: Investigator
       url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
-      weight: 304
+      weight: 305
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem
