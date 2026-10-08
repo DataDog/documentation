@@ -19,7 +19,7 @@ The graph shows context for the selected finding. The resources and relationship
 
 {{< img src="security/csm/security_graph.png" alt="Graph showing relationships between AWS EC2 instances, IAM roles, and S3 buckets" width="100%">}}
 
-## Open an attack path's context graph
+## Open an attack path's Context Graph
 
 1. Open [Security Inbox][1].
 1. Filter Security Inbox by the **Attack Path** finding type.
