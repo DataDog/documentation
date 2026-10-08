@@ -33,6 +33,9 @@ import { HUGO_ORIGIN } from "@config/origins";
 afterEach(() => {
   cleanup();
   vi.useRealTimers();
+  // The searchbar syncs its query to `?s=`, so the URL is shared state between
+  // tests: a leftover param would be restored into the next mount's input.
+  window.history.replaceState(null, "", "/");
 });
 
 const env = {
@@ -417,6 +420,20 @@ describe("SearchBar — global keyboard shortcuts", () => {
     expect(document.activeElement).not.toBe(input);
   });
 
+  it("keeps one page-wide keydown listener while the user types", async () => {
+    const user = userEvent.setup();
+    mount();
+    const addEventListener = vi.spyOn(document, "addEventListener");
+
+    await typeAndWait(user, "dashboard");
+
+    const keydownRegistrations = addEventListener.mock.calls.filter(
+      ([eventType]) => eventType === "keydown",
+    );
+    expect(keydownRegistrations).toEqual([]);
+    addEventListener.mockRestore();
+  });
+
   it("Escape clears the query and blurs the input", async () => {
     const user = userEvent.setup();
     mount();
@@ -434,5 +451,232 @@ describe("SearchBar — global keyboard shortcuts", () => {
 
     expect(input.value).toBe("");
     expect(document.querySelector(".search-bar__popup")).toBeFalsy();
+  });
+});
+
+// --- `?s=` URL sync -------------------------------------------------------
+//
+// Both SearchBar islands are mounted at every width. Whichever one the user
+// types into writes `?s=`, and the other mirrors the text.
+
+const DEBOUNCE_MS = 200;
+
+/** Fire the shared debounce and flush the resolved search promise. */
+const flushDebounce = () => vi.advanceTimersByTimeAsync(DEBOUNCE_MS + 50);
+
+/** A userEvent instance that drives the fake clock as it types. */
+const setupUser = () =>
+  userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+
+function mountBoth(fixture: { results: any[] } = basicFixture) {
+  const search = makeSearch(fixture);
+  const sideNav = render(
+    h(SearchBar as any, { env, search, labels, variant: "default" }),
+  );
+  const mobile = render(
+    h(SearchBar as any, { env, search, labels, variant: "mobile" }),
+  );
+  return { sideNav, mobile, search };
+}
+
+const sideNavInput = () =>
+  Array.from(
+    document.querySelectorAll<HTMLInputElement>(".search-bar__input"),
+  ).find((el) => !el.classList.contains("search-bar__input--mobile"))!;
+
+const mobileInput = () =>
+  document.querySelector<HTMLInputElement>(".search-bar__input--mobile")!;
+
+async function typeInto(
+  user: ReturnType<typeof userEvent.setup>,
+  input: HTMLInputElement,
+  value: string,
+) {
+  await user.click(input);
+  await user.type(input, value);
+  await flushDebounce();
+}
+
+describe("SearchBar — `?s=` URL sync, one instance", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+  });
+
+  // Let any pending `?s=` write land before the URL is reset.
+  afterEach(async () => {
+    await flushDebounce();
+  });
+
+  it("restores the query from `?s=` on load, with results displayed", async () => {
+    window.history.replaceState(null, "", "/api/?s=dashboard");
+    mount();
+    await flushDebounce();
+
+    expect(sideNavInput().value).toBe("dashboard");
+    expect(document.querySelector(".search-bar__popup")).toBeTruthy();
+    expect(document.querySelector(".search-hit")).toBeTruthy();
+  });
+
+  it("leaves the URL alone when there is nothing to restore", async () => {
+    window.history.replaceState(null, "", "/api/");
+    mount();
+    await flushDebounce();
+
+    expect(document.querySelector(".search-bar__popup")).toBeFalsy();
+    expect(window.location.search).toBe("");
+  });
+
+  it("does not steal focus when it restores", async () => {
+    window.history.replaceState(null, "", "/api/?s=dashboard");
+    mount();
+    await flushDebounce();
+
+    expect(document.activeElement).not.toBe(sideNavInput());
+  });
+
+  it("writes the typed query to `?s=` after the debounce", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mount();
+    await typeInto(user, sideNavInput(), "dashboard");
+
+    expect(window.location.search).toBe("?s=dashboard");
+  });
+
+  it("drops the param when the input is cleared, leaving no bare `?`", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mount();
+    await typeInto(user, sideNavInput(), "dashboard");
+    await user.clear(sideNavInput());
+    await flushDebounce();
+
+    expect(window.location.search).toBe("");
+  });
+
+  it("clears the input, the popup, and the param together on Escape", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mount();
+    await typeInto(user, sideNavInput(), "dashboard");
+
+    await user.click(sideNavInput());
+    await user.keyboard("{Escape}");
+    await flushDebounce();
+
+    expect(sideNavInput().value).toBe("");
+    expect(document.querySelector(".search-bar__popup")).toBeFalsy();
+    expect(window.location.search).toBe("");
+  });
+
+  it("preserves `?site=` while syncing the query", async () => {
+    window.history.replaceState(null, "", "/api/?site=eu");
+    const user = setupUser();
+    mount();
+    await typeInto(user, sideNavInput(), "dashboard");
+
+    expect(window.location.search).toContain("site=eu");
+    expect(window.location.search).toContain("s=dashboard");
+  });
+
+  it("writes `?s=` from the mobile instance too", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mount(basicFixture, "mobile");
+    await typeInto(user, mobileInput(), "dashboard");
+
+    expect(window.location.search).toBe("?s=dashboard");
+  });
+});
+
+describe("SearchBar — `?s=` URL sync, both instances mounted", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+  });
+
+  // Let any pending `?s=` write land before the URL is reset.
+  afterEach(async () => {
+    await flushDebounce();
+  });
+
+  it("mirrors text typed in the side nav into the mobile input", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mountBoth();
+    await typeInto(user, sideNavInput(), "dashboard");
+
+    // The mobile input holds the query before a resize makes it visible.
+    expect(mobileInput().value).toBe("dashboard");
+  });
+
+  it("does not open the mirrored instance's popup", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mountBoth();
+    await typeInto(user, sideNavInput(), "dashboard");
+
+    expect(document.querySelector(".search-bar__popup")).toBeTruthy();
+    expect(document.querySelector(".search-bar__popup--mobile")).toBeFalsy();
+  });
+
+  it("mirrors in the other direction too", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mountBoth();
+    await typeInto(user, mobileInput(), "dashboard");
+
+    expect(sideNavInput().value).toBe("dashboard");
+    expect(document.querySelector(".search-bar__popup--mobile")).toBeTruthy();
+  });
+
+  it("writes `?s=` once for input interleaved across both instances", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mountBoth();
+    const replaceState = vi.spyOn(window.history, "replaceState");
+
+    await user.click(sideNavInput());
+    await user.type(sideNavInput(), "dash");
+    await user.click(mobileInput());
+    await user.type(mobileInput(), "board");
+    await flushDebounce();
+
+    expect(replaceState).toHaveBeenCalledTimes(1);
+    expect(window.location.search).toBe("?s=dashboard");
+    replaceState.mockRestore();
+  });
+
+  it("clearing one instance clears the other and drops the param", async () => {
+    window.history.replaceState(null, "", "/api/");
+    const user = setupUser();
+    mountBoth();
+    await typeInto(user, sideNavInput(), "dashboard");
+    await user.clear(sideNavInput());
+    await flushDebounce();
+
+    expect(mobileInput().value).toBe("");
+    expect(window.location.search).toBe("");
+  });
+
+  it("restores both inputs from the same param, with no ordering dependency", async () => {
+    window.history.replaceState(null, "", "/api/?s=dashboard");
+    mountBoth();
+    await flushDebounce();
+
+    expect(sideNavInput().value).toBe("dashboard");
+    expect(mobileInput().value).toBe("dashboard");
+  });
+
+  it("adopts the query from Back/forward in every instance", async () => {
+    window.history.replaceState(null, "", "/api/");
+    mountBoth();
+    await flushDebounce();
+
+    window.history.replaceState(null, "", "/api/?s=logs");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+    await flushDebounce();
+
+    expect(sideNavInput().value).toBe("logs");
+    expect(mobileInput().value).toBe("logs");
   });
 });

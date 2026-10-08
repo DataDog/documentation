@@ -264,6 +264,12 @@ export default defineMarkdocConfig({
       ),
       selfClosing: true,
     },
+    "region-keys": {
+      render: component(
+        "./src/components/RegionSelector/RegionKeysTable.astro",
+      ),
+      selfClosing: true,
+    },
     "whats-next": {
       render: component("./src/components/WhatsNext/WhatsNext.astro"),
       ...schema.tags["whats-next"],

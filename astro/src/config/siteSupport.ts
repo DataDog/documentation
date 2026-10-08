@@ -225,7 +225,7 @@ function normalizePath(pathname: string): string {
   return normalized;
 }
 
-/** The parsed dataset, for the equivalence and divergence tests. */
+/** The parsed dataset, for tests that derive their cases from real data. */
 export function getSiteSupportDataset(): SiteSupportFile {
   return DATASET;
 }

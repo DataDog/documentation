@@ -16,6 +16,7 @@ import categoriesRaw from "@websites-modules/data/menu_data/product_categories.y
 import productsRaw from "@websites-modules/data/menu_data/products.yaml?raw";
 import { useTranslations, type Translate } from "@lib/i18n/i18n";
 import type { Locale } from "@lib/i18n/locale";
+import { CORP_ORIGIN } from "@config/origins";
 
 // ---------------------------------------------------------------------------
 // Raw schemas (internal)
@@ -97,6 +98,8 @@ const ProductCategorySchema = z.object({
   lang_key: z.string(),
   description_key: z.string().optional(),
   gradient: z.tuple([z.string(), z.string()]).optional(),
+  cta_url: z.string().optional(),
+  cta_hover_gradient: z.tuple([z.string(), z.string(), z.string()]).optional(),
   icon: z.string(),
   mobile: z.boolean().optional(),
   mobile_products: z.array(z.string()).optional(),
@@ -152,6 +155,10 @@ export type MegaCategory = {
   label: string;
   descriptionLabel: string;
   gradient: [string, string];
+  /** Makes the banner a link (Hugo's `cta_url`). */
+  ctaHref?: string;
+  /** 3-stop banner gradient on hover; falls back to `gradient`. */
+  ctaHoverGradient?: [string, string, string];
   iconHtml: string;
   subcategories: MegaSubcategory[];
 };
@@ -184,6 +191,7 @@ export type HeaderData = {
   product: {
     label: string;
     href: string;
+    pricingHref: string;
     megaCategories: MegaCategory[];
     carrotSvg: string;
   } | null;
@@ -219,7 +227,12 @@ function isDisabledForDocs(item: {
   return Boolean(item.params?.disabled?.includes("documentation"));
 }
 
-function resolveUrl(url: string | undefined): string {
+/**
+ * Relative menu URLs belong to the corporate site, not the docs site. Mirrors
+ * Hugo's `layouts/partials/menulink.html`, which also adds `ja/` on Japanese
+ * pages (the only locale the corporate site serves).
+ */
+function resolveUrl(url: string | undefined, lang: Locale): string {
   if (!url) {
     return "#";
   }
@@ -229,7 +242,8 @@ function resolveUrl(url: string | undefined): string {
   if (url.startsWith("#")) {
     return url;
   }
-  return `${import.meta.env.SITE}/${url.replace(/^\/+/, "")}`;
+  const langPrefix = lang === "ja" ? "ja/" : "";
+  return `${CORP_ORIGIN}/${langPrefix}${url.replace(/^\/+/, "")}`;
 }
 
 function findItem(list: MenuItem[], identifier: string): MenuItem | undefined {
@@ -239,26 +253,29 @@ function findItem(list: MenuItem[], identifier: string): MenuItem | undefined {
 function asLink(
   item: MenuItem | MenuChild | undefined,
   translate: Translate,
+  lang: Locale,
 ): SimpleLink | null {
   if (!item) {
     return null;
   }
-  return { label: translate(item.lang_key), href: resolveUrl(item.url) };
+  return { label: translate(item.lang_key), href: resolveUrl(item.url, lang) };
 }
 
 function childLinks(
   item: MenuItem | undefined,
   translate: Translate,
+  lang: Locale,
 ): SimpleLink[] {
   return (item?.children ?? []).map((c) => ({
     label: translate(c.lang_key),
-    href: resolveUrl(c.url),
+    href: resolveUrl(c.url, lang),
   }));
 }
 
 function resolveProductList(
   refs: ProductRef[],
   translate: Translate,
+  lang: Locale,
 ): { identifier: string; label: string; url: string }[] {
   const out: { identifier: string; label: string; url: string }[] = [];
   for (const ref of refs) {
@@ -267,14 +284,17 @@ function resolveProductList(
       out.push({
         identifier: p.identifier,
         label: translate(p.lang_key),
-        url: resolveUrl(p.url),
+        url: resolveUrl(p.url, lang),
       });
     }
   }
   return out;
 }
 
-function buildMegaCategories(translate: Translate): MegaCategory[] {
+function buildMegaCategories(
+  translate: Translate,
+  lang: Locale,
+): MegaCategory[] {
   return productCategories
     .filter((c) => !c.mobile)
     .map((cat) => {
@@ -283,7 +303,7 @@ function buildMegaCategories(translate: Translate): MegaCategory[] {
           const sections: MegaSection[] = sub.sections
             ? sub.sections.map((section) => ({
                 label: translate(section.lang_key),
-                products: resolveProductList(section.products, translate),
+                products: resolveProductList(section.products, translate, lang),
               }))
             : sub.products
               ? [
@@ -291,7 +311,7 @@ function buildMegaCategories(translate: Translate): MegaCategory[] {
                     // A continuation column has no `lang_key`; leaving the
                     // label undefined makes the renderer emit a spacer.
                     label: sub.lang_key ? translate(sub.lang_key) : undefined,
-                    products: resolveProductList(sub.products, translate),
+                    products: resolveProductList(sub.products, translate, lang),
                   },
                 ]
               : [];
@@ -310,6 +330,8 @@ function buildMegaCategories(translate: Translate): MegaCategory[] {
         label: translate(cat.lang_key),
         descriptionLabel: translate(cat.description_key ?? ""),
         gradient: cat.gradient ?? ["#000000", "#333333"],
+        ctaHref: cat.cta_url ? resolveUrl(cat.cta_url, lang) : undefined,
+        ctaHoverGradient: cat.cta_hover_gradient,
         iconHtml: iconHtml(cat.icon),
         subcategories,
       };
@@ -319,12 +341,13 @@ function buildMegaCategories(translate: Translate): MegaCategory[] {
 function buildSolutionsColumns(
   item: MenuItem | undefined,
   translate: Translate,
+  lang: Locale,
 ): SolutionsColumn[] {
   return (item?.children ?? []).map((col) => ({
     label: translate(col.lang_key),
     items: (col.children ?? []).map((child) => ({
       label: translate(child.lang_key),
-      url: resolveUrl(child.url),
+      url: resolveUrl(child.url, lang),
     })),
   }));
 }
@@ -349,16 +372,18 @@ export function getHeaderData(lang: Locale): HeaderData {
     product: productItem
       ? {
           label: translate(productItem.lang_key),
-          href: resolveUrl(productItem.url),
-          megaCategories: buildMegaCategories(translate),
+          href: resolveUrl(productItem.url, lang),
+          // Hugo hardcodes `pricing/` for this link (main-nav.html).
+          pricingHref: resolveUrl("pricing/", lang),
+          megaCategories: buildMegaCategories(translate, lang),
           carrotSvg: iconHtml("right-carrot-normal-2"),
         }
       : null,
     solutions: solutionsItem
       ? {
           label: translate(solutionsItem.lang_key),
-          href: resolveUrl(solutionsItem.url),
-          columns: buildSolutionsColumns(solutionsItem, translate),
+          href: resolveUrl(solutionsItem.url, lang),
+          columns: buildSolutionsColumns(solutionsItem, translate, lang),
         }
       : null,
     leftLinks: left
@@ -372,25 +397,25 @@ export function getHeaderData(lang: Locale): HeaderData {
       .map((m) => ({
         identifier: m.identifier,
         label: translate(m.lang_key),
-        href: resolveUrl(m.url),
+        href: resolveUrl(m.url, lang),
       })),
     about: aboutItem
       ? {
-          ...asLink(aboutItem, translate)!,
-          children: childLinks(aboutItem, translate),
+          ...asLink(aboutItem, translate, lang)!,
+          children: childLinks(aboutItem, translate, lang),
         }
       : null,
     blog: blogItem
       ? {
-          ...asLink(blogItem, translate)!,
-          children: childLinks(blogItem, translate),
+          ...asLink(blogItem, translate, lang)!,
+          children: childLinks(blogItem, translate, lang),
         }
       : null,
     login:
       loginItem && !isDisabledForDocs(loginItem)
-        ? asLink(loginItem, translate)
+        ? asLink(loginItem, translate, lang)
         : null,
-    getStarted: asLink(getStartedItem, translate),
+    getStarted: asLink(getStartedItem, translate, lang),
   };
 }
 
@@ -417,7 +442,7 @@ export function getFooterProductCategories(
       identifier: cat.identifier,
       label: translate(cat.lang_key),
       iconHtml: iconHtml(cat.icon),
-      groups: buildFooterGroups(cat.children ?? [], translate),
+      groups: buildFooterGroups(cat.children ?? [], translate, lang),
       layout: {
         tabletOrder: cat.footer_layout?.tablet_order,
         tabletBreakAfter: Boolean(cat.footer_layout?.tablet_break_after),
@@ -429,6 +454,7 @@ export function getFooterProductCategories(
 function buildFooterGroups(
   subcategories: z.infer<typeof ProductSubcategorySchema>[],
   translate: Translate,
+  lang: Locale,
 ): FooterProductGroup[] {
   const groups: FooterProductGroup[] = [];
   for (const sub of subcategories) {
@@ -436,6 +462,7 @@ function buildFooterGroups(
       const products = resolveProductList(
         (section.products ?? []).filter((ref) => !ref.secondary),
         translate,
+        lang,
       ).map(({ label, url }) => ({ label, href: url }));
       const previous = groups[groups.length - 1];
       if (!section.lang_key && previous) {

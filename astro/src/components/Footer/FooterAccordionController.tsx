@@ -14,6 +14,7 @@ import {
   loadExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
+import { belowTabletMediaQuery } from "@lib/cssUtils/breakpoints";
 
 interface Props {
   externalContext: ExternalContext<{ nav: string }>;
@@ -80,7 +81,7 @@ function attachAccordion(nav: HTMLElement, classes: Classes): () => void {
   let openSection: HTMLElement | null = null;
   let openCategory: HTMLElement | null = null;
 
-  const mobileQuery = window.matchMedia(`(max-width: ${tabletMax()})`);
+  const mobileQuery = window.matchMedia(belowTabletMediaQuery());
   let mobile = mobileQuery.matches;
 
   function render() {
@@ -150,17 +151,6 @@ function attachAccordion(nav: HTMLElement, classes: Classes): () => void {
     nav.removeEventListener("click", onClick);
     mobileQuery.removeEventListener("change", onBreakpointChange);
   };
-}
-
-/**
- * The accordion is mobile-only, so the breakpoint is read as a max-width just
- * below the tablet token — the same `< 768` test Alpine makes on resize.
- */
-function tabletMax(): string {
-  const tablet = getComputedStyle(document.documentElement)
-    .getPropertyValue("--hugo-breakpoint-tablet")
-    .trim();
-  return tablet ? `calc(${tablet} - 0.02px)` : "767.98px";
 }
 
 function collectDisclosures(

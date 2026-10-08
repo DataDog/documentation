@@ -42,6 +42,7 @@ import {
   buildRunCommandByRegion,
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
+import { toCategorySlug, toSlug } from "./categorySlug";
 import {
   getCodeExamplesForOperation,
   getLanguageRunInfo,
@@ -69,11 +70,6 @@ const HTTP_METHODS = [
   "head",
   "options",
 ] as const;
-
-const SLUG_OVERRIDES: Record<string, string> = {
-  "case-management": "cases",
-  scorecards: "service-scorecards",
-};
 
 const categoriesCache = new Map<Locale, ApiCategory[]>();
 const operationViewCache = new Map<string, ApiOperationView>();
@@ -180,13 +176,6 @@ export async function getOperationView(
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
-function toSlug(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
-
 /**
  * Operation extensions used to drive the docs UI. None are part of the
  * OpenAPI 3.x base type, so we widen `OperationObject` here. `operationId`
@@ -277,8 +266,7 @@ function collectRawOperationsFromPathItem(
     if (!operation.operationId) continue;
 
     const primaryTag = operation.tags[0];
-    const rawSlug = toSlug(primaryTag);
-    const categorySlug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
+    const categorySlug = toCategorySlug(primaryTag);
 
     result.push({
       version,
@@ -407,8 +395,7 @@ function collectCategoryMetadataFromSpecTags(
 
   const result: CategoryMetadata[] = [];
   for (const tag of tags) {
-    const rawSlug = toSlug(tag.name);
-    const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
+    const slug = toCategorySlug(tag.name);
     const translated = translateTag(overlay, slug, {
       name: tag.name,
       description: tag.description,

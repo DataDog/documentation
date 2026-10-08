@@ -10,9 +10,8 @@
 import { z } from "zod";
 
 /**
- * Mirrors the kept subset of Hugo's `html-to-mdoc` pages listing (see
- * `plans/20_pages_json.md`): `metadata` + `mdocHash`, plus an Astro-specific
- * `source` key. Hugo's `htmlHash` and `astIsValid` are intentionally dropped —
+ * Mirrors the kept subset of Hugo's `html-to-mdoc` pages listing: `metadata` +
+ * `mdocHash`, plus an Astro-specific `source` key. Hugo's `htmlHash` and `astIsValid` are intentionally dropped —
  * Astro has no source HTML to hash, and it builds plaintext Markdoc→Markdoc so
  * validity is guaranteed by construction. Defined here rather than imported from
  * `corp-node-packages` to keep everything inside `astro/`.

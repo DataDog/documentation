@@ -151,6 +151,9 @@ site_support_ids:
     regions: [gov, gov2]
   experiments:
     regions: [gov, gov2]
+    url_paths:
+      - /api/latest/experiments
+      - /api/latest/experiments/**
   feature_flags:
     regions: [gov, gov2]
   fips-compliance:

@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { chooseSelectOption } from "../../Select/tests/chooseSelectOption";
 
 test.describe("ApiEndpoint component", () => {
   test.beforeEach(async ({ page }) => {
@@ -73,7 +74,7 @@ test.describe("ApiEndpoint region switching", () => {
     await expect(
       page.locator('.region-selector[data-hydrated="true"]').first(),
     ).toBeVisible();
-    await page.locator(".region-selector .select__control").selectOption("eu");
+    await chooseSelectOption(page.locator(".region-selector"), "eu");
 
     const endpoint = page.locator(".api-endpoint").first();
     const euUrl = endpoint.locator('[data-region="eu"]').first();
@@ -94,7 +95,7 @@ test.describe("ApiEndpoint region switching", () => {
     await expect(
       page.locator('.region-selector[data-hydrated="true"]').first(),
     ).toBeVisible();
-    await page.locator(".region-selector .select__control").selectOption("eu");
+    await chooseSelectOption(page.locator(".region-selector"), "eu");
 
     const codeExample = page.locator(".api-code-example").first();
     const euVariant = codeExample.locator('[data-region="eu"]').first();
