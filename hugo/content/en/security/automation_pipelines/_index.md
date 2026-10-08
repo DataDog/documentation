@@ -57,7 +57,7 @@ Automation Pipelines operates through a rules-based system that allows you to au
 Automation for Code Security findings on non-default branches is in Preview and is available only to enrolled customers. For customers who are not enrolled in the Preview, Code Security findings are available only from the latest commit on the default branch.
 {{< /callout >}}
 
-With the Preview enabled, Code Security reports Static Code Analysis (SAST), Secrets, Software Composition Analysis (SCA), and Infrastructure as Code (IaC) findings from every branch and commit. Unless an automation rule includes an explicit `@git.branch` or `@git.is_default_branch` filter, its branch scope depends on the action:
+With the Preview enabled, Code Security reports Static Code Vulnerabilities, Library Vulnerabilities, Secrets, and Infrastructure as Code findings from every branch and commit. Unless an automation rule includes an explicit `@git.branch` or `@git.is_default_branch` filter, its branch scope depends on the action:
 
 - **Set due date, add to Security Inbox, and create ticket** rules apply only to findings from the latest commit on the default branch.
 - **Mute and modify severity** rules apply to findings from all branches and commits.
