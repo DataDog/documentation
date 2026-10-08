@@ -1,11 +1,12 @@
 import { useEffect } from "preact/hooks";
 import type { Dispatch, StateUpdater } from "preact/hooks";
 
-interface Args {
+interface GlobalSearchShortcutsParams {
   inputRef: { current: HTMLInputElement | null };
   wrapperRef: { current: HTMLElement | null };
   setOpen: Dispatch<StateUpdater<boolean>>;
-  setQuery: Dispatch<StateUpdater<string>>;
+  /** Clears the query in both islands and in the `?s=` param. */
+  clearQuery: () => void;
   /**
    * When false, the page-wide listener is not attached. Used by the mobile-nav
    * SearchBar: it shares the page with the API side-nav SearchBar, and only one
@@ -23,9 +24,9 @@ export function useGlobalSearchShortcuts({
   inputRef,
   wrapperRef,
   setOpen,
-  setQuery,
+  clearQuery,
   enabled = true,
-}: Args) {
+}: GlobalSearchShortcutsParams) {
   useEffect(() => {
     if (!enabled) return;
     const onKey = (e: KeyboardEvent) => {
@@ -49,7 +50,7 @@ export function useGlobalSearchShortcuts({
         const focusInsideBar =
           active === inputRef.current || wrapperRef.current?.contains(active);
         if (focusInsideBar) {
-          setQuery("");
+          clearQuery();
           setOpen(false);
           inputRef.current?.blur();
         }
@@ -57,5 +58,5 @@ export function useGlobalSearchShortcuts({
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [inputRef, wrapperRef, setOpen, setQuery, enabled]);
+  }, [inputRef, wrapperRef, setOpen, clearQuery, enabled]);
 }
