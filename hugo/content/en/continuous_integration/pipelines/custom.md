@@ -126,7 +126,7 @@ job events you send through the [CI Visibility Pipelines API][1]. Each log objec
 All other log fields are optional. If provided, `provider_name` must match the pipeline event's `provider_name`.
 Datadog uses `custom` when the field is omitted from both the pipeline event and the log lines.
 
-You can stream log lines while the job runs or send them as a batch when it finishes. We recommend sending every line
+Send log lines in batches while the job runs, or send the batches when it finishes. We recommend sending all batches
 before submitting the completed job event. After you submit that event, Datadog closes the job log after 20 seconds
 without a new line. Lines received after it closes may not appear in the job's Logs tab.
 
