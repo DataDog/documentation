@@ -126,10 +126,47 @@ The [recommended keywords][15] are used by default when library rules are added.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. See the [How keyword matching works](#how-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
+    - For structured events, keywords are also matched against attribute names in the event path. See the [How Sensitive Data Scanner keyword matching works](#how-sensitive-data-scanner-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
     - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click {{< ui >}}Update{{< /ui >}}.
+
+#### Add suppressions
+
+{{% sds-suppressions %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
+You can create custom scanning rules using regex patterns to scan for sensitive data.
+
+1. Select a scanning group if you did not create this rule within a scanning group.
+1. Enter a name for the rule.
+1. In the {{< ui >}}Priority{{< /ui >}} dropdown menu, select the priority level for the rule based on your business needs.
+1. (Optional) Enter a description for the rule.
+1. In the {{< ui >}}Match conditions{{< /ui >}} section, specify the regex pattern to use for matching against events in the {{< ui >}}Regex pattern{{< /ui >}} field. Define regex patterns that are as precise as possible because generic patterns result in more false positives.<br>
+    Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
+    - Backreferences and capturing sub-expressions (lookarounds)
+    - Arbitrary zero-width assertions
+    - Subroutine references and recursive patterns
+    - Conditional patterns
+    - Backtracking control verbs
+    - The `\C` "single-byte" directive (which breaks UTF-8 sequences)
+    - The `\R` newline match
+    - The `\K` start of match reset directive
+    - Callouts and embedded code
+    - Atomic grouping and possessive quantifiers
+1. For {{< ui >}}Check surrounding match context for keywords to reduce noise{{< /ui >}}, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+    - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
+    - To remove keywords, click the **X** next to the keyword you want to remove.
+    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - For structured events, keywords are also matched against attribute names in the event path. See the [How Sensitive Data Scanner keyword matching works](#how-sensitive-data-scanner-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
+      **Note**: You cannot have more than 20 keywords for a rule.
+{{% sds-suppressions %}}
+1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
+{{% sds-scanning-rule %}}
+1. Click {{< ui >}}Add Rule{{< /ui >}}.
+
+{{% /collapse-content %}}
 
 #### How Sensitive Data Scanner keyword matching works
 
@@ -160,43 +197,6 @@ Keyword matching follows these rules for both library rules and custom rules:
     }
   }
   ```
-
-#### Add suppressions
-
-{{% sds-suppressions %}}
-
-{{% /collapse-content %}}
-{{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
-You can create custom scanning rules using regex patterns to scan for sensitive data.
-
-1. Select a scanning group if you did not create this rule within a scanning group.
-1. Enter a name for the rule.
-1. In the {{< ui >}}Priority{{< /ui >}} dropdown menu, select the priority level for the rule based on your business needs.
-1. (Optional) Enter a description for the rule.
-1. In the {{< ui >}}Match conditions{{< /ui >}} section, specify the regex pattern to use for matching against events in the {{< ui >}}Regex pattern{{< /ui >}} field. Define regex patterns that are as precise as possible because generic patterns result in more false positives.<br>
-    Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
-    - Backreferences and capturing sub-expressions (lookarounds)
-    - Arbitrary zero-width assertions
-    - Subroutine references and recursive patterns
-    - Conditional patterns
-    - Backtracking control verbs
-    - The `\C` "single-byte" directive (which breaks UTF-8 sequences)
-    - The `\R` newline match
-    - The `\K` start of match reset directive
-    - Callouts and embedded code
-    - Atomic grouping and possessive quantifiers
-1. For {{< ui >}}Check surrounding match context for keywords to reduce noise{{< /ui >}}, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
-    - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
-    - To remove keywords, click the **X** next to the keyword you want to remove.
-    - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. See [How keyword matching works](#how-keyword-matching-works) for case sensitivity, separators, and camel case handling.
-      **Note**: You cannot have more than 20 keywords for a rule.
-{{% sds-suppressions %}}
-1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
-{{% sds-scanning-rule %}}
-1. Click {{< ui >}}Add Rule{{< /ui >}}.
-
-{{% /collapse-content %}}
 
 **Notes**:
 
