@@ -18,8 +18,8 @@ further_reading:
     text: "Link your services to source code with service mapping"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-  Bits Release is in private preview and available to selected design partners only. Contact your Datadog representative to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-release/" >}}
+  Bits Release is in Preview. Request access to join the waiting list.
 {{< /callout >}}
 
 ## Overview
