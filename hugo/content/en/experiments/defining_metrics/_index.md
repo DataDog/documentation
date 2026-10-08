@@ -118,7 +118,7 @@ Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 1. Review the evaluation details, such as its ML application, scope, prompt, and model.
 1. Configure the aggregation and any filters. Evaluation metrics default to the average score.
 
-The picker lists score evaluations received by Agent Observability during the selected time range. If an evaluation does not appear, confirm that your application has submitted at least one score value for it.
+An evaluation appears in the picker only if it has run at least once. After you create an evaluation, run it on at least one span before you create the experiment metric.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing custom score evaluations, with the relevance evaluation selected and its score type displayed." style="width:90%;" >}}
 
@@ -126,8 +126,8 @@ The picker lists score evaluations received by Agent Observability during the se
 
 After you configure either source:
 
-1. (Optional) Under {{< ui >}}Additional settings{{< /ui >}}, mark the metric as certified, adjust its experiment settings, or configure its units.
-1. Click {{< ui >}}Save{{< /ui >}}.
+6. (Optional) Under {{< ui >}}Additional settings{{< /ui >}}, mark the metric as certified, adjust its experiment settings, or configure its units.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [14]: /llm_observability/instrument/

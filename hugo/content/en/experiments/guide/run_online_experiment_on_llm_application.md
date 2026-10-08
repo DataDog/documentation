@@ -55,7 +55,7 @@ Make the flag available in each environment where you plan to run the experiment
   <strong>Example prompt</strong>: <code>Create a Boolean Datadog feature flag named &lt;FLAG_NAME&gt; for &lt;APPLICATION_BEHAVIOR&gt;. Use false for the control and true for the treatment. Do not add targeting rules or percentage rollouts.</code>
 </div>
 
-<!-- TODO: Add a screenshot of the Boolean feature flag configuration. -->
+{{< img src="/product_analytics/experiment/guide/llm_experiment_create_feature_flag.png" alt="The Create Flag page with the use-latest-frontier-model flag name, Boolean variant type, false and true variants, and Create Flag button." style="width:90%;" >}}
 
 ## Step 2: Evaluate the flag in your application
 
@@ -72,8 +72,6 @@ You use this same value as the `subject_identifier` when you report the evaluati
   <strong>Use an AI coding agent</strong>: Ask the agent to implement the feature flag in your application and preserve one stable subject identifier across the flag evaluation and evaluation score. For React applications, the agent can also use <code>check_datadog_flag_implementation</code> to review the implementation.<br><br>
   <strong>Example prompt</strong>: <code>Implement the Datadog feature flag &lt;FLAG_NAME&gt; in this application. Run the control behavior when the flag is false and the treatment behavior when it is true. Use the user ID as the targetingKey. If there is no user, generate one UUID at the start of the workflow and reuse it for the entire run.</code>
 </div>
-
-<!-- TODO: Add a screenshot of the feature flag implementation instructions. -->
 
 ## Step 3: Report an evaluation score
 
@@ -127,8 +125,6 @@ with LLMObs.workflow(name="my_workflow") as span:
   <strong>Example prompt</strong>: <code>Add an Agent Observability score evaluation named &lt;EVALUATION_NAME&gt; to this workflow. Use the same subject identifier that the feature flag passes as targetingKey, and include it as the subject_identifier tag on the evaluation or evaluated span. Do not use a Boolean, categorical, or JSON evaluation.</code>
 </div>
 
-<!-- TODO: Add a screenshot of an evaluation score with its subject_identifier tag. -->
-
 ## Step 4: Create and launch the experiment
 
 Follow [Plan and Launch Experiments][3] to create and start the experiment:
@@ -149,7 +145,7 @@ Follow [Plan and Launch Experiments][3] to create and start the experiment:
 
 Starting the experiment adds the experiment targeting rule to the selected flag and begins recording exposures. For details about how feature flag assignments become experiment exposures, see [Feature Flags and Experiments][9].
 
-<!-- TODO: Add a screenshot of the experiment configured with an Agent Observability evaluation score and feature flag. -->
+{{< img src="/product_analytics/experiment/guide/llm_experiment_create_experiment.png" alt="The Create new draft experiment dialog with the latest-frontier-model-experiment name, Start from scratch protocol, and Create Draft Experiment button." style="width:90%;" >}}
 
 ## Step 5: Run the experiment and review results
 
@@ -163,7 +159,7 @@ If the experiment reports missing metric data, confirm that:
 - The evaluation has a numeric `score` value.
 - The evaluation's `subject_identifier` exactly matches the feature flag evaluation's `targetingKey`.
 
-<!-- TODO: Add a screenshot of the experiment results populated with the evaluation score. -->
+{{< img src="/product_analytics/experiment/guide/llm_experiment_results.png" alt="A completed LLM application experiment showing the rollout decision and relative lift for quality, token usage, and estimated cost metrics across the control and treatment variants." style="width:90%;" >}}
 
 ## Further reading
 
