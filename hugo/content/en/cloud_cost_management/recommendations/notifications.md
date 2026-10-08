@@ -31,24 +31,35 @@ To set up a notification rule:
 
 1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4].
 1. Select the {{< ui >}}Notification{{< /ui >}} tab.
+1. Enter a name for the notification rule.
 1. In the {{< ui >}}Define scope{{< /ui >}} section, use the {{< ui >}}Team{{< /ui >}}, {{< ui >}}Recommendation Type{{< /ui >}}, and {{< ui >}}Env{{< /ui >}} filters to restrict the notification to matching resources. Click {{< ui >}}\+ Filter{{< /ui >}} to add more filters. Leave the filters empty to include all resources.
+1. (Optional) In {{< ui >}}Monthly savings range{{< /ui >}}, set a minimum, a maximum, or both. Only recommendations with estimated monthly savings in this range are included. Each notification lists the five recommendations with the highest savings in the selected scope.
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
-1. In the {{< ui >}}Destination{{< /ui >}} section, select {{< ui >}}Slack{{< /ui >}} or {{< ui >}}Microsoft Teams{{< /ui >}}, then select a workspace and channel (Slack) or a tenant, team, and channel (Microsoft Teams).
+1. In the {{< ui >}}Set destination{{< /ui >}} section, select {{< ui >}}Slack{{< /ui >}} or {{< ui >}}Microsoft Teams{{< /ui >}}, then select a workspace and channel (Slack) or a tenant, team, and channel (Microsoft Teams). For Slack, you can optionally add {{< ui >}}@-mention targets{{< /ui >}} to mention specific users in the notification message.
 1. (Optional) In the {{< ui >}}Customize message{{< /ui >}} section, choose which details to include:
    - Notification details: {{< ui >}}Notification name{{< /ui >}}, {{< ui >}}Total est. savings{{< /ui >}}, and {{< ui >}}Custom text{{< /ui >}}. Custom text supports up to 500 characters and the dynamic fields `{{total_savings}}`, `{{rec_count}}`, and `{{digest_date}}`.
    - Recommendation details: {{< ui >}}Why{{< /ui >}}, {{< ui >}}Risk{{< /ui >}}, and {{< ui >}}Effort{{< /ui >}}. Recommendation type and estimated savings are always included.
    - Tags: In {{< ui >}}Include tags{{< /ui >}}, select or enter up to 10 tag keys, such as `env` or `service`. Each recommendation shows only tags with matching keys. Leave the field empty to include all tags.
-1. Enter a name for the notification rule.
-1. (Optional) Mention specific Slack users in the notification message.
-1. (Optional) Turn off the {{< ui >}}Notification enabled{{< /ui >}} toggle to create the rule without activating it.
+1. (Optional) Review the notification in the {{< ui >}}Preview{{< /ui >}} panel. See [Preview a notification](#preview-a-notification).
+1. (Optional) Click {{< ui >}}Test Notification{{< /ui >}} to send a one-time message to the selected destination.
+1. (Optional) Turn off the {{< ui >}}Enabled{{< /ui >}} toggle to create the rule without activating it.
 1. Click {{< ui >}}Save{{< /ui >}}.
+
+## Preview a notification
+
+While you configure a rule, the {{< ui >}}Preview{{< /ui >}} panel updates as you edit:
+
+- {{< ui >}}Recommendations{{< /ui >}}: The recommendations that match the rule's scope and monthly savings range.
+- {{< ui >}}Notification message{{< /ui >}}: The Slack or Microsoft Teams message that the rule sends, including your message customization. Previewing does not save the rule or send a message.
+
+To see the message in your channel before you save the rule, click {{< ui >}}Test Notification{{< /ui >}}.
 
 ## Manage notification rules
 
 The {{< ui >}}Notification{{< /ui >}} tab lists every notification rule in your organization. From this page you can:
 
 - Toggle a rule on or off without deleting it
-- Edit a rule's scope, schedule, destination, name, or message customization
+- Edit a rule's name, scope, savings range, schedule, destination, or message customization
 - Delete a rule
 
 ## Further reading
