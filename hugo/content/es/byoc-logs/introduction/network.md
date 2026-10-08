@@ -42,8 +42,10 @@ Solo los pods **searcher** establecen la conexión inversa. Los indexadores, el 
 
 También es posible configurar BYOC Logs para implementar un ingreso público de modo que Datadog pueda establecer la conexión en la otra dirección.
 
-El ingreso público permite que el plano de control y el servicio de consultas de Datadog gestionen y consulten los clústeres de BYOC Logs a través de internet pública. Proporciona acceso seguro a la API de gRPC de BYOC Logs mediante autenticación mTLS. Puede encontrar más información sobre el ingreso de BYOC Logs en su [página de configuración](/byoc-logs/configure/ingress/).
+El ingreso público permite que Datadog gestione y consulte los clústeres de BYOC Logs a través de Internet pública. Proporciona acceso seguro a la API de gRPC de BYOC Logs mediante autenticación mTLS. Puede encontrar más información sobre el ingreso de BYOC Logs en su [página de configuración][1].
 
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /es/byoc-logs/configure/ingress/
