@@ -62,7 +62,7 @@ With the Preview enabled, Code Security reports Static Code Analysis (SAST), Sec
 - **Set due date, add to Security Inbox, and create ticket** rules apply only to findings from the latest commit on the default branch.
 - **Mute and modify severity** rules apply to findings from all branches and commits.
 
-If your organization is enrolled in the Preview, you can target other branches or restrict a rule to specific branches by adding an `@git.branch` or `@git.is_default_branch` filter to the rule's tags or attributes. For example, use `@git.is_default_branch:false` to target non-default branches.
+If your organization is enrolled in the Preview, you can target other branches or restrict a rule to specific branches by adding an `@git.branch` or `@git.is_default_branch` filter to the rule's tags or attributes. For example, use `@git.is_default_branch:false` to target all non-default branches, or `@git.branch:staging` to target the `staging` branch.
 
 ## Use cases
 
