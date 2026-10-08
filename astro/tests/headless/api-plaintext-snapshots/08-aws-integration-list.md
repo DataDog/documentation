@@ -51,7 +51,6 @@ AWS Accounts response body.
 | attributes        | auth_config                                  | <oneOf>   | AWS Authentication config.                                                                                                                                                                                                                                                        |
 | auth_config       | Object 1                                     | object    | AWS Authentication config to integrate your account using an access key pair.                                                                                                                                                                                                     |
 | Object 1          | access_key_id [*required*]                   | string    | AWS Access Key ID.                                                                                                                                                                                                                                                                |
-| Object 1          | secret_access_key                            | string    | AWS Secret Access Key.                                                                                                                                                                                                                                                            |
 | auth_config       | Object 2                                     | object    | AWS Authentication config to integrate your account using an IAM role.                                                                                                                                                                                                            |
 | Object 2          | external_id                                  | string    | AWS IAM External ID for associated role.                                                                                                                                                                                                                                          |
 | Object 2          | role_name [*required*]                       | string    | AWS IAM Role name.                                                                                                                                                                                                                                                                |
@@ -128,8 +127,7 @@ AWS Accounts response body.
           "env:prod"
         ],
         "auth_config": {
-          "access_key_id": "AKIAIOSFODNN7EXAMPLE",
-          "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+          "access_key_id": "AKIAIOSFODNN7EXAMPLE"
         },
         "aws_account_id": "123456789012",
         "aws_partition": "aws",

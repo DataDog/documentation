@@ -315,3 +315,16 @@ tbody code {
 ::view-transition-old(root) {
   display: none;
 }
+
+/* Hotjar's injected feedback button, hidden below Hugo's `lg` breakpoint
+   (--hugo-breakpoint-desktop) to match `hugo/assets/styles/pages/_global.scss`.
+   Global because Hotjar owns the class name; it can't be a CSS module. */
+._hj_feedback_container {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  ._hj_feedback_container {
+    display: block;
+  }
+}
