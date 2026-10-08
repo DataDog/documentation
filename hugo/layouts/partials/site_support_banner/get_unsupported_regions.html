@@ -3,8 +3,7 @@
 
     Lookup order:
       1. If the page has a `site_support_id` frontmatter param, use that as the
-         key into Site.Params.unsupported_sites. Translated pages without the
-         param inherit it from their English version.
+         key into Site.Params.unsupported_sites.
       2. Otherwise, walk the page path segments (stripping any trailing `.md`)
          and return the first match.
 
