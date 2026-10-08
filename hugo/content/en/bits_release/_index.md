@@ -102,10 +102,6 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 
 Bits Release is free during the private preview. It does not consume [AI Credits][8], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
 
-## Send feedback
-
-Verdict quality depends on feedback, and the preview is the moment when it has the most effect. On any plan in Bits Release, mark whether the verdict was correct and add a short reason. Cases where Bits Release reported nothing and a real problem existed are the most valuable to report. For onboarding help or questions during the preview, contact your Datadog representative.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
