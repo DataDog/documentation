@@ -4,10 +4,10 @@ import yaml from 'js-yaml';
 import $RefParser from '@apidevtools/json-schema-ref-parser';
 
 describe(`updateMenu`, () => {
-  it('uses a flat CI/CD URL and preserves the translated name from the old identifier', () => {
+  it('uses a flat CI/CD URL and preserves the translated name', () => {
     const readSpy = jest.spyOn(fs, 'readFileSync').mockReturnValue(yaml.safeDump({menu: {api: [{
       name: 'Déclencher des tests à partir de pipelines de CI/CD',
-      identifier: 'synthetics-trigger-tests-from-ci/cd-pipelines',
+      identifier: 'synthetics-trigger-tests-from-cicd-pipelines',
       generated: true,
     }]}}));
     const writeSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
@@ -108,7 +108,7 @@ describe(`createEndpointPages`, () => {
     expect(path).toBe('./content/en/api/latest/action-connection/list-foos/index.md');
   });
 
-  it('keeps CI/CD endpoints in one URL segment and redirects the old nested URL', () => {
+  it('keeps CI/CD endpoints in one URL segment without aliases', () => {
     const specData = [buildSpec([
       {path: '/api/v1/synthetics/tests/trigger/ci', method: 'post', operationId: 'TriggerCITests', summary: 'Trigger tests from CI/CD pipelines'},
     ])];
@@ -119,7 +119,7 @@ describe(`createEndpointPages`, () => {
     expect(path).toBe('./content/en/api/latest/action-connection/trigger-tests-from-cicd-pipelines/index.md');
     const frontMatter = yaml.safeLoad(content.replace(/^---\n|---\n$/g, ''));
     expect(frontMatter.title).toBe('Trigger tests from CI/CD pipelines');
-    expect(frontMatter.aliases).toEqual(['/api/latest/action-connection/trigger-tests-from-ci/cd-pipelines/']);
+    expect(frontMatter.aliases).toBeUndefined();
   });
 
 });
