@@ -2618,7 +2618,7 @@ Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. U
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], [DORA metrics][66], and [Deployment Gates](/deployment_gates/)).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -2741,6 +2741,45 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
+
+<div class="alert alert-info">The Deployment Gates tools are in Preview. Contact <a href="/help/">Datadog support</a> to request access.</div>
+
+Deployment Gates tools are read-only. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
+
+### `search_datadog_deployment_gates`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
+
+- Which Deployment Gates apply to the `checkout` service in `prod`?
+
+### `get_datadog_deployment_gate`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a configured Deployment Gate by its gate ID, including its rules and settings.
+
+- Show me the rules configured for Deployment Gate `abc123`.
+
+### `search_datadog_deployment_gate_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
+
+- Show me failed Deployment Gate evaluations for the `checkout` service in `prod` over the last 7 days.
+
+### `get_datadog_deployment_gate_evaluation`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
+
+- Why did Deployment Gate evaluation `abc123` fail?
+
+### `search_datadog_deployment_gate_rule_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
+
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Synthetics
 
