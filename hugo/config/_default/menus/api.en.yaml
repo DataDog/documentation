@@ -4,6 +4,10 @@ menu:
       url: /api/latest/
       identifier: API overview
       weight: -10
+    - name: Changelog
+      url: /api/changelog/
+      identifier: API changelog
+      weight: -9
     - name: Using the API
       url: /api/latest/using-the-api/
       parent: API overview
@@ -7411,6 +7415,22 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
+    - name: AI Impact
+      url: /api/latest/ai-impact/
+      identifier: ai-impact
+      generated: true
+    - name: Send AI tool user activity
+      url: /api/latest/ai-impact/send-ai-tool-user-activity/
+      identifier: ai-impact-send-ai-tool-user-activity
+      parent: ai-impact
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAIImpactUserActivity
+        unstable: []
+        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
@@ -11269,6 +11289,110 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get a GitHub cloud authentication persona mapping
+      url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-persona-mapping/
+      identifier: cloud-authentication-get-a-github-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 6
+    - name: Delete a GitHub cloud auth persona mapping
+      url: /api/latest/cloud-authentication/delete-a-github-cloud-auth-persona-mapping/
+      identifier: cloud-authentication-delete-a-github-cloud-auth-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 8
+    - name: Create a GitHub cloud auth persona mapping
+      url: /api/latest/cloud-authentication/create-a-github-cloud-auth-persona-mapping/
+      identifier: cloud-authentication-create-a-github-cloud-auth-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 7
+    - name: List GitHub cloud authentication persona mappings
+      url: /api/latest/cloud-authentication/list-github-cloud-authentication-persona-mappings/
+      identifier: cloud-authentication-list-github-cloud-authentication-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 5
+    - name: Get a GitHub cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-get-a-github-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a GitHub cloud auth intake mapping
+      url: /api/latest/cloud-authentication/delete-a-github-cloud-auth-intake-mapping/
+      identifier: cloud-authentication-delete-a-github-cloud-auth-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 12
+    - name: Create a GitHub cloud auth intake mapping
+      url: /api/latest/cloud-authentication/create-a-github-cloud-auth-intake-mapping/
+      identifier: cloud-authentication-create-a-github-cloud-auth-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 11
+    - name: List GitHub cloud authentication intake mappings
+      url: /api/latest/cloud-authentication/list-github-cloud-authentication-intake-mappings/
+      identifier: cloud-authentication-list-github-cloud-authentication-intake-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCloudAuthIntakeMappings
+        unstable:
+          - v2
+        order: 9
     - name: Get an AWS cloud authentication persona mapping
       url: /api/latest/cloud-authentication/get-an-aws-cloud-authentication-persona-mapping/
       identifier: cloud-authentication-get-an-aws-cloud-authentication-persona-mapping
@@ -11897,6 +12021,18 @@ menu:
         unstable:
           - v2
         order: 55
+    - name: List Cloud Cost Management cloud accounts
+      url: /api/latest/cloud-cost-management/list-cloud-cost-management-cloud-accounts/
+      identifier: cloud-cost-management-list-cloud-cost-management-cloud-accounts
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostCloudAccountsV2
+        unstable: []
+        order: 77
     - name: List budgets
       url: /api/latest/cloud-cost-management/list-budgets/
       identifier: cloud-cost-management-list-budgets
@@ -12857,9 +12993,9 @@ menu:
           - CreateDORAFailure
         unstable: []
         order: 2
-    - name: Patch a deployment event
-      url: /api/latest/dora-metrics/patch-a-deployment-event/
-      identifier: dora-metrics-patch-a-deployment-event
+    - name: Mark a deployment as failed by ID
+      url: /api/latest/dora-metrics/mark-a-deployment-as-failed-by-id/
+      identifier: dora-metrics-mark-a-deployment-as-failed-by-id
       parent: dora-metrics
       generated: true
       params:

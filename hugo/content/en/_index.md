@@ -8,5 +8,9 @@ aliases:
   - /guides/overview/
   - /coscreen/
   - /coscreen/troubleshooting
+  - /coterm/
+  - /coterm/install
+  - /coterm/usage
+  - /coterm/rules
 disable_sidebar: true
 ---
