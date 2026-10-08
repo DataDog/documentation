@@ -70,16 +70,14 @@ describe("Header", () => {
     expect(html).toContain(i18n("get_started_free", DEFAULT_LOCALE));
   });
 
-  it("makes GET STARTED FREE open the free trial modal", async () => {
+  it("links GET STARTED FREE to the sign-up page", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
     const cta = html.match(/<a[^>]*header__btn-gradient[^>]*>/)?.[0] ?? "";
-    expect(cta).toContain('data-trigger="free-trial"');
-    // Fallback for when the modal's script hasn't loaded.
-    expect(cta).toContain(
-      'href="https://app.datadoghq.com/signup_corp?lang=en"',
-    );
+    expect(cta).toContain('href="https://app.datadoghq.com/signup"');
+    // No modal mounts on the page to handle this trigger.
+    expect(cta).not.toContain("data-trigger");
   });
 
   it("renders desktop product categories as interactive islands", async () => {

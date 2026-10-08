@@ -114,6 +114,10 @@ test.describe("RegionSelector component", () => {
     await page.locator(".region-selector .select__button").click();
     await page.locator(".region-selector .select__option").nth(2).hover();
 
+    // Only the dropdown is under test; hide the footer behind it so footer
+    // changes don't invalidate this baseline.
+    await page.addStyleTag({ content: "footer { visibility: hidden; }" });
+
     const selector = page.locator(".region-selector");
     const menu = page.locator(".region-selector .select__menu");
     const selectorBox = (await selector.boundingBox())!;
