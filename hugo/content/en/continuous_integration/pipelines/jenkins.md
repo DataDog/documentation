@@ -158,7 +158,7 @@ unclassified:
     ciInstanceName: 'jenkins'
     # (Optional) Configure the name of the host that you use to access Datadog UI
     datadogAppHostname: 'app.datadoghq.com'
-    # (Optional) Enable logs collection
+    # (Optional) Enable Logs Storage
     collectBuildLogs: true
 ```
 
@@ -194,7 +194,7 @@ unclassified:
     ciInstanceName: 'jenkins'
     # (Optional) Configure the name of the host that you use to access Datadog UI
     datadogAppHostname: '{{< region-param key=dd_full_site >}}'
-    # (Optional) Enable logs collection
+    # (Optional) Enable Logs Storage
     collectBuildLogs: true
 ```
 
@@ -227,7 +227,7 @@ datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, ag
 
 datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
+datadog.collectBuildLogs = true // (Optional) Enable Logs Storage
 
 datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
@@ -258,7 +258,7 @@ datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
 datadog.datadogAppHostname = '{{< region-param key=dd_full_site >}}' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
+datadog.collectBuildLogs = true // (Optional) Enable Logs Storage
 
 datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
@@ -291,7 +291,7 @@ DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 # (Optional) Configure Log Collection port as configured in your Datadog Agent
 DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
 
-# (Optional) Enable logs collection
+# (Optional) Enable Logs Storage
 DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
 # (Optional) Configure the name of the host that you use to access Datadog UI
@@ -320,7 +320,7 @@ DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
 # (Optional) Configure your CI Instance name
 DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 
-# (Optional) Enable logs collection
+# (Optional) Enable Logs Storage
 DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
 # (Optional) Configure the name of the host that you use to access Datadog UI
