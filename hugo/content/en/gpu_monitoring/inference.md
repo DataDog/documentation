@@ -65,7 +65,7 @@ kubectl apply -f datadog-agent.yaml
 kubectl get pods -n <DATADOG_NAMESPACE> -w
 ```
 
-### 2. Confirm worker metrics are enabled
+### 2. Confirm the metrics endpoints and ports
 
 The integrations collect metrics from the following endpoints:
 
