@@ -427,6 +427,7 @@ unsupported_sites:
   synthetics_email_validation: [gov,gov2]
   synthetics_safari: [gov,gov2]
   test_optimization: [gov,gov2]
+  tracing_remote_configuration: [gov,gov2]
   universal_service_monitoring: [gov,gov2]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2,uk1]
   wiz: [gov,gov2]
