@@ -4,9 +4,10 @@ export const prerender = true;
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection, getEntry } from "astro:content";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
-import { buildMarkdocStr, parse } from "@lib/plaintext/helpers";
+import { buildPlaintextPage, parse } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
+import { apiBreadcrumbs } from "@lib/api/pageMeta";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection("en", (entry) => isApiSubPage(entry.id));
@@ -24,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params, url }) => {
+export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -40,10 +41,18 @@ export const GET: APIRoute = async ({ params, url }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = buildMarkdocStr([
-    ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
-    ...parse(entry.body ?? "").children,
-  ]);
+  const body = buildPlaintextPage(
+    [
+      ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
+      ...parse(entry.body ?? "").children,
+    ],
+    {
+      title: entry.data.title,
+      description: entry.data.description ?? "",
+      breadcrumbs: apiBreadcrumbs(lang, entry.data.title),
+    },
+    site,
+  );
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

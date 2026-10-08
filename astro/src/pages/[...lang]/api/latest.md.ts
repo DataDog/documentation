@@ -3,19 +3,22 @@ export const prerender = true;
  * Plaintext rendering of the API Reference landing page.
  *
  * Composes the page from Markdoc nodes — a heading, an intro paragraph, and a
- * bullet list of category links — then emits markdown via `buildMarkdocStr`.
+ * bullet list of category links — then emits markdown via `buildPlaintextPage`.
  * Mirrors the HTML landing page in `latest/index.astro`.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
+import { getEntry } from "astro:content";
 import type { ApiCategoryStub } from "@lib/api/schemas/views";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
+import { API_CONTENT_DIR } from "@lib/api/overviewPages";
+import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import {
-  buildMarkdocStr,
+  buildPlaintextPage,
   heading,
   inline,
   link,
@@ -28,7 +31,7 @@ function apiLandingBody(
   categories: ApiCategoryStub[],
   lang: Locale,
   pathname: string,
-): string {
+): MarkdocNode[] {
   const items = categories.map((cat) => {
     const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
     return listItem([inline([link(href, cat.name)])]);
@@ -43,7 +46,7 @@ function apiLandingBody(
     list("unordered", items),
   ];
 
-  return buildMarkdocStr(contents);
+  return contents;
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -52,14 +55,27 @@ export const getStaticPaths: GetStaticPaths = () => {
   }));
 };
 
-export const GET: APIRoute = async ({ params, url }) => {
+export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
   }
 
+  const rootEntry = await getEntry("en", API_CONTENT_DIR);
+  if (!rootEntry) {
+    return new Response(null, { status: 404 });
+  }
+
   const categories = await getCategoryStubsView(lang);
-  const body = apiLandingBody(categories, lang, url.pathname);
+  const body = buildPlaintextPage(
+    apiLandingBody(categories, lang, url.pathname),
+    {
+      title: rootEntry.data.title,
+      description: rootEntry.data.description ?? "",
+      breadcrumbs: apiBreadcrumbs(lang),
+    },
+    site,
+  );
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

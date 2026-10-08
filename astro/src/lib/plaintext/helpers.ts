@@ -10,6 +10,9 @@
 
 import Markdoc from "@markdoc/markdoc";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import { stringify as stringifyYaml } from "yaml";
+import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
+import { absoluteUrl } from "@lib/site/siteUrl";
 
 // @markdoc/markdoc ships a CJS build whose named exports don't round-trip
 // cleanly under Node's ESM loader during Astro's SSG step. Pulling from the
@@ -20,8 +23,15 @@ export { Ast, format, parse };
 
 export const NO_CONTENT: MarkdocNode[] = [];
 
-export function documentNode(children: MarkdocNode[]): MarkdocNode {
-  return new Ast.Node("document", {}, children);
+/**
+ * `frontmatter` is the raw YAML between the `---` fences, which `format()`
+ * writes back out above the children.
+ */
+export function documentNode(
+  children: MarkdocNode[],
+  frontmatter?: string,
+): MarkdocNode {
+  return new Ast.Node("document", frontmatter ? { frontmatter } : {}, children);
 }
 
 export function plaintext(content: string): MarkdocNode {
@@ -118,8 +128,66 @@ export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
 
 /**
  * Serialize a list of block-level nodes as a Markdoc string. Wraps them in a
- * document node, calls Markdoc's `format()`, and ensures a trailing newline.
+ * document node (with optional raw YAML `frontmatter`), calls Markdoc's
+ * `format()`, and ensures a trailing newline.
  */
-export function buildMarkdocStr(children: MarkdocNode[]): string {
-  return format(documentNode(children)).trim() + "\n";
+export function buildMarkdocStr(
+  children: MarkdocNode[],
+  frontmatter?: string,
+): string {
+  return format(documentNode(children, frontmatter)).trim() + "\n";
+}
+
+export interface PageFrontmatter {
+  title: string;
+  /** Left out of the frontmatter when empty. */
+  description: string;
+  /** The page's own breadcrumb trail, current page included. */
+  breadcrumbs: BreadcrumbItem[];
+}
+
+/**
+ * Serialize a whole plaintext (`.md`) page: YAML frontmatter, a banner
+ * pointing at the top-level `llms.txt`, then `children`. `site` is the
+ * route's `site`, so the banner link carries any preview base path.
+ */
+export function buildPlaintextPage(
+  children: MarkdocNode[],
+  frontmatter: PageFrontmatter,
+  site: string | URL | undefined,
+): string {
+  return buildMarkdocStr(
+    [llmsTxtBannerNode(site), ...children],
+    frontmatterYaml(frontmatter),
+  );
+}
+
+function frontmatterYaml({
+  title,
+  description,
+  breadcrumbs,
+}: PageFrontmatter): string {
+  const fields = {
+    title,
+    ...(description ? { description } : {}),
+    breadcrumbs: breadcrumbs.map((crumb) => crumb.label).join(" > "),
+  };
+  return stringifyYaml(fields, { lineWidth: 0 }).trimEnd();
+}
+
+function llmsTxtBannerNode(site: string | URL | undefined): MarkdocNode {
+  if (!site) {
+    throw new Error(
+      "astro.config.mjs `site` must be set for the llms.txt banner to link canonically.",
+    );
+  }
+  return new Ast.Node("blockquote", {}, [
+    paragraph([
+      inline([
+        plaintext("For the complete documentation index, see "),
+        link(absoluteUrl("/llms.txt", site), "llms.txt"),
+        plaintext("."),
+      ]),
+    ]),
+  ]);
 }

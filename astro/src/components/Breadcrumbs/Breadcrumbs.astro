@@ -1,13 +1,9 @@
 ---
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import styles from "./Breadcrumbs.module.css";
+import type { BreadcrumbItem } from "./breadcrumbsTypes";
 
 const cl = classListFactory(styles);
-
-export interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
 
 interface Props {
   crumbs: BreadcrumbItem[];

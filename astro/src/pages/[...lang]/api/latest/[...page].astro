@@ -4,8 +4,8 @@ import { getCollection, getEntry, render } from "astro:content";
 import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
-import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { useTranslations } from "@lib/i18n/i18n";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
 import type { GetStaticPaths } from "astro";
 
@@ -53,18 +53,9 @@ const pageTitle = isRootPage
   ? "Datadog API Reference"
   : `${entry.data.title} - Datadog API`;
 
-const translate = useTranslations(lang);
-
 const breadcrumbs = isRootPage
-  ? [
-      { label: translate("docs"), href: localizedHref(lang, "/") },
-      { label: translate("api") },
-    ]
-  : [
-      { label: translate("docs"), href: localizedHref(lang, "/") },
-      { label: translate("api"), href: localizedHref(lang, "/api/latest/") },
-      { label: entry.data.title },
-    ];
+  ? apiBreadcrumbs(lang)
+  : apiBreadcrumbs(lang, entry.data.title);
 ---
 
 <ApiLayout

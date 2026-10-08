@@ -30,6 +30,7 @@ const routeCtx = (
   ({
     params,
     url: new URL(pathname, SITE),
+    site: SITE,
   }) as unknown as Parameters<typeof categoryGET>[0];
 
 /**

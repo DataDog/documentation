@@ -3,7 +3,7 @@ export const prerender = true;
  * Plaintext rendering of each endpoint page.
  *
  * Builds the page as Markdoc nodes — `# Summary`, then a `## v{N} (latest?)`
- * section per variant — and emits markdown via `buildMarkdocStr`. Structure
+ * section per variant — and emits markdown via `buildPlaintextPage`. Structure
  * (tables, tabs, alerts, fences) is described as nodes rather than concatenated
  * strings. Mirrors the HTML endpoint page in `[operation].astro`.
  */
@@ -12,17 +12,18 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ApiOperationView } from "@lib/api/schemas/views";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
+import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
-import { buildMarkdocStr, heading } from "@lib/plaintext/helpers";
+import { buildPlaintextPage, heading } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 
 function apiOperationBody(
   operation: ApiOperationView,
   lang: Locale,
   pathname: string,
-): string {
+): MarkdocNode[] {
   const contents: MarkdocNode[] = [
     heading(1, operation.summary),
     ...siteSupportNoteNodes(pathname, lang),
@@ -32,7 +33,7 @@ function apiOperationBody(
     contents.push(heading(2, label));
     contents.push(...apiEndpointNodes(variant));
   }
-  return buildMarkdocStr(contents);
+  return contents;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -53,7 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params, url }) => {
+export const GET: APIRoute = async ({ params, url, site }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -70,7 +71,15 @@ export const GET: APIRoute = async ({ params, url }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = apiOperationBody(operation, lang, url.pathname);
+  const body = buildPlaintextPage(
+    apiOperationBody(operation, lang, url.pathname),
+    {
+      title: operation.summary,
+      description: operationMetaDescription(operation),
+      breadcrumbs: apiBreadcrumbs(lang, operation.summary),
+    },
+    site,
+  );
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
