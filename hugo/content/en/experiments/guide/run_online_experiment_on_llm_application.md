@@ -26,7 +26,7 @@ Use a Datadog online experiment to compare two versions of an LLM application on
     text="Copy this prompt into your AI coding agent to use the `agent-observability-online-experiment` skill for guided setup."
     action_name="copy_agent_observability_online_experiment_prompt"
     lang="text" >}}
-Use the skill at https://github.com/datadog-labs/agent-skills/blob/main/agent-observability/agent-observability-online-experiment/SKILL.md to start an online experiment to compare the code in my current Git branch against trunk.
+Use the skill at https://github.com/datadog-labs/agent-skills/blob/main/agent-observability/agent-observability-online-experiment/SKILL.md to start an online experiment to compare the code in my current Git branch against trunk. Make 10% of the traffic use the code in my branch.
 {{< /skill-callout >}}
 
 This guide covers the LLM-specific configuration for the following workflow:
