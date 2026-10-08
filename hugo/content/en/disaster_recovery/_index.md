@@ -32,7 +32,7 @@ DDR has two independent parts. Both are required for failover:
 
 **Telemetry sources:** DDR supports Agent-based sources and supported non-Agent sources, such as OpenTelemetry Collector. Non-Agent sources must meet the same DNS re-resolution requirements as the Agent.
 
-**Integration setup:** Manually configure integrations and credentials in your secondary org. See [Set up access, integrations, syncing, and agents](#2-set-up-access-integrations-syncing-and-agents).
+**Integration setup:** Manually configure integrations and credentials in your secondary org. See [Configure access, integrations, and sync](#2-configure-access-integrations-and-sync).
 
 ## Prerequisites 
 
@@ -123,13 +123,13 @@ After you link your organizations, only your secondary organization displays the
 
 **Datadog recommends using Single Sign-On (SSO)** to enable all your users to log in to your secondary organization during an outage. Go to [Organization Settings][2] in your secondary organization to configure [SAML][3] or Google Login for your users.
 
-Managed sync replicates user accounts from your primary organization to your secondary organization. Datadog recommends configuring [Just-in-Time provisioning with SAML][4] so users can access your secondary organization during a failover without needing to reset their password.
+Managed sync replicates user accounts from your primary organization to your secondary organization. Datadog recommends configuring [Just-in-Time provisioning with SAML][4] so users can access your secondary organization during a failover without needing to reset their passwords.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="2\. Configure cloud integrations" level="h4" id="set-up-cloud-integrations" %}}
 
-Configure your cloud integrations (AWS, Azure, and GCP) in both your primary and secondary organizations. These integrations run in only one organization at a time: normally in your primary organization, and in your secondary organization during failover.
+Configure your cloud integrations (AWS, Azure, and GCP) in both your primary and secondary organizations. These integrations run in only one organization at a time: in your primary organization during normal operation, and in your secondary organization during failover.
 
 <div class="alert alert-danger">Failing over cloud integrations to your secondary organization stops all cloud integration data collection in your primary organization for as long as the integrations remain failed over. Only fail over cloud integrations as part of a real failover.</div>
 
