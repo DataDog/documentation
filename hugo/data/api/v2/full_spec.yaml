@@ -101715,6 +101715,12 @@ components:
           $ref: "#/components/schemas/ComponentRecommendation"
         executor:
           $ref: "#/components/schemas/ComponentRecommendation"
+        matched_params:
+          description: |-
+            Only returned by the v2 endpoint. The job parameters whose values the recommendation was matched on, as `parameter=value` pairs joined by `|`.
+            An empty string means the service-wide (coarse) recommendation was used.
+          example: "detailed_metrics=false|Region=US1"
+          type: string
       required: [driver, executor]
       type: object
     RecommendationData:
@@ -101748,7 +101754,7 @@ components:
     RecommendationV2RequestAttributes:
       description: |-
         Attributes for requesting SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a precomputed shard.
+        instead of a pre-computed shard.
       properties:
         arguments:
           description: |-
@@ -101764,7 +101770,7 @@ components:
     RecommendationV2RequestBody:
       description: |-
         Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a precomputed shard.
+        instead of a pre-computed shard.
       properties:
         data:
           $ref: "#/components/schemas/RecommendationV2RequestData"
@@ -235638,6 +235644,7 @@ paths:
                         heap: 3072
                         memory: 4096
                         overhead: 1024
+                    matched_params: "detailed_metrics=false"
                   id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
                   type: recommendation
               schema:
