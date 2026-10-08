@@ -1,4 +1,8 @@
 {
+  "ai-impact": {
+    "name": "AI Impact",
+    "description": "Send AI coding tool usage data to measure the impact of AI tools on software delivery."
+  },
   "api-management": {
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
