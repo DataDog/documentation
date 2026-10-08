@@ -314,7 +314,7 @@ Configure dynamic tests to allow the Agent to automatically discover and monitor
 
 Agent `v7.73+` is required.
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. On Agent versions earlier than `v7.84`, enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following. On Agent `v7.84+`, the module is enabled automatically when CNM and dynamic tests are enabled.
 
    ```yaml
    traceroute:
@@ -381,7 +381,7 @@ Agent `v7.73+` is required.
 
 Agent `v7.79+` is required.
 
-1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+1. On Agent versions earlier than `v7.84`, enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following. On Agent `v7.84+`, the module is enabled automatically when CNM and dynamic tests are enabled.
 
    ```yaml
    traceroute:
@@ -435,7 +435,7 @@ Agent `v7.79+` is required.
 
 Agent `v7.73+` is required.
 
-1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
+1. On Agent versions earlier than `v7.84`, enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following. On Agent `v7.84+`, the module is enabled automatically when CNM and dynamic tests are enabled.
 
    ```yaml
    traceroute:
@@ -585,13 +585,6 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
-
-   ```yaml
-   traceroute:
-     enabled: true
-   ```
-
 1. Add the following to `/etc/datadog-agent/datadog.yaml`:
 
    ```yaml
@@ -605,13 +598,6 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{% /tab %}}
 {{% tab "macOS" %}}
 
-1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
-
-   ```yaml
-   traceroute:
-     enabled: true
-   ```
-
 1. Add the following to `/opt/datadog-agent/etc/datadog.yaml`:
 
    ```yaml
@@ -624,13 +610,6 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 
 {{% /tab %}}
 {{% tab "Windows" %}}
-
-1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
-
-   ```yaml
-   traceroute:
-     enabled: true
-   ```
 
 1. Add the following to `%ProgramData%\Datadog\datadog.yaml`:
 
