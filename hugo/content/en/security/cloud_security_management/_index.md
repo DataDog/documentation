@@ -121,7 +121,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 
 ## Investigate resources
 
-- Use the [Security Graph][17] to model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources. You can write queries to search for specific relationships between resources, such as publicly accessible EC2 instances that can access S3 buckets containing sensitive data, so you can proactively mitigate those infrastructure risks.
+- Use the [Security Graph][17] to investigate supported attack-path findings. Open a finding's **Context Graph** to visualize the resources and relationships involved in the detected risk.
   {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 - Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
   {{< site-region region="gov,gov2" >}}
