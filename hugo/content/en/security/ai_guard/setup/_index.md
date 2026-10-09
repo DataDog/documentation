@@ -13,7 +13,9 @@ Set up AI Guard to start evaluating agent prompts, responses, and tool calls for
 
 AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
 
-## 1. Check prerequisites
+AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for every method. In step 3, you choose the method that fits your agent's language and libraries.
+
+## 1. Check prerequisites {#prerequisites}
 
 Confirm you have the permissions and components AI Guard needs.
 
@@ -32,7 +34,7 @@ Some setup steps require specific Datadog permissions. An admin might need to cr
 
 ### Datadog Agent and Datadog SDK
 
-Every integration method, except the HTTP API, runs on the Datadog SDK and sends AI Guard data through the Datadog Agent. The Agent must be running and reachable from your application.
+Every integration method runs on the Datadog SDK and sends AI Guard data through the Datadog Agent. The Agent must be running and reachable from your application.
 
 AI Guard requires these minimum Datadog SDK versions:
 
@@ -54,7 +56,7 @@ Some integrations require a later version. Each integration page lists its own r
 <p>AI Guard spans are billed either way.</p>
 </div>
 
-## 2. Create API and application keys
+## 2. Create API and application keys {#create-keys}
 
 AI Guard authenticates every evaluation with a Datadog API key and application key, so your application needs both before it can send evaluations.
 
@@ -62,7 +64,7 @@ AI Guard authenticates every evaluation with a Datadog API key and application k
 1. When you add [scopes][3] to the application key, add the `ai_guard_evaluate` scope. The user who creates the application key must have the {{< ui >}}AI Guard Evaluate{{< /ui >}} permission.
 1. Store both keys where your application reads its environment variables. Each integration page lists the variables to set.
 
-## 3. Instrument your application
+## 3. Instrument your application {#instrumentation}
 
 Instrument each agent with the integration method that matches its language and libraries, so AI Guard can evaluate LLM traffic.
 
@@ -97,7 +99,7 @@ Choose the first integration method that applies to the agent:
 | Amazon Strands | Python | Manual integration. |
 | LiteLLM Proxy | Python | Manual integration. |
 
-## 4. Create a retention filter for AI Guard spans
+## 4. Create a retention filter for AI Guard spans {#retention-filter}
 
 Create a retention filter so Datadog keeps every AI Guard span. APM samples spans by default, so without a retention filter, Datadog can drop AI Guard spans and they never appear in AI Guard, even though AI Guard is still evaluating your agent's requests.
 
@@ -107,7 +109,7 @@ Create a [custom retention filter][9] with these settings:
 - {{< ui >}}Span rate{{< /ui >}}: 100%.
 - {{< ui >}}Trace rate{{< /ui >}}: 100%.
 
-## 5. (Optional) Limit access to AI Guard spans
+## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
 Optionally restrict who can view AI Guard spans, because they can contain sensitive prompts, responses, and tool call data from your agents.
 
@@ -117,7 +119,7 @@ You must have the {{< ui >}}User Access Manage{{< /ui >}} permission to complete
 1. Apply the filter `resource_name:ai_guard`.
 1. Grant access to the dataset to specific roles or teams.
 
-## Verify the setup
+## Verify the setup {#verify}
 
 Confirm that AI Guard is evaluating agent traffic.
 
@@ -132,7 +134,7 @@ If expected evaluations don't appear in AI Guard, check these causes in order.
 1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When it's unset, AI Guard does nothing, even if your code calls the SDK. Set `DD_AI_GUARD_ENABLED=true`.
 1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
 1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
-1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See [step 4](#4-create-a-retention-filter-for-ai-guard-spans).
+1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See [Create a retention filter for AI Guard spans](#retention-filter).
 1. **The service or environment isn't set.** Confirm `DD_SERVICE` and `DD_ENV` are set, so AI Guard can match the agent to its policy and show it in Discover.
 
 To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.

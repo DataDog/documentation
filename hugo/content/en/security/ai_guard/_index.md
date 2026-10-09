@@ -186,4 +186,4 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [9]: /security/ai_guard/setup/automatic_integrations/
 [10]: /security/ai_guard/setup/manual_integrations/
 [11]: /security/ai_guard/setup/sdk/
-[12]: /security/ai_guard/setup/#5-optional-limit-access-to-ai-guard-spans
+[12]: /security/ai_guard/setup/#limit-access
