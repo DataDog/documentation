@@ -5419,16 +5419,21 @@ menu:
       parent: dbm
       identifier: dbm_workbench
       weight: 23
+    - name: Database Monitoring PR Reviews
+      url: database_monitoring/pr_reviews/
+      parent: dbm
+      identifier: dbm_pr_reviews
+      weight: 24
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 24
+      weight: 25
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 25
+      weight: 26
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
