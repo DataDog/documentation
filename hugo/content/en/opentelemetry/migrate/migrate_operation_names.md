@@ -25,7 +25,7 @@ The `enable_operation_and_resource_name_logic_v2` feature flag controls this new
 
 - **Datadog Distribution of OpenTelemetry (DDOT) Collector**: Datadog Agent v7.65+
 - **OpenTelemetry Collector**: OTel Collector v0.126.0+
-- **OTel to Datadog Agent (OTLP)**: Datadog Agent v7.66+
+- **OTLP Ingest in the Agent**: Datadog Agent v7.66+
 
 If you are using an earlier version and want to use the new logic without upgrading, you can [explicitly enable the new logic](#enabling-the-new-logic-opt-in).
 
