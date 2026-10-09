@@ -17,9 +17,9 @@ multifiltersearch:
     - name: Platform
       id: platform
       filter_by: true
-    - name: EU physical location
+    - name: EU
       id: eu
-    - name: US physical location
+    - name: US
       id: us
     - name: IP-routed locations
       id: routed
