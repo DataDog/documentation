@@ -1178,9 +1178,12 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
  * @param {array} specs - array of strings with path to spec e.g ['./data/api/v2/full_spec.yaml']
  */
 const processSpecs = (specs) => {
+  // dereference mutates its input, so the menu and endpoint pages below get their own copy
+  const loadSpecs = () => applyApiDisplayNames(specs.map((spec) => yaml.safeLoad(fs.readFileSync(spec, 'utf8'))));
+  const fileDataBySpec = loadSpecs();
   specs
-    .forEach((spec) => {
-      const fileData = applyApiDisplayNames(yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
+    .forEach((spec, index) => {
+      const fileData = fileDataBySpec[index];
       $RefParser.dereference(fileData, { resolve: { external: false } })
         .then((deref) => {
           const version = spec.split('/')[3];
@@ -1230,7 +1233,7 @@ const processSpecs = (specs) => {
     });
 
   // update menu with all specs
-  const specData = specs.map((spec) => applyApiDisplayNames(yaml.safeLoad(fs.readFileSync(spec, 'utf8'))));
+  const specData = loadSpecs();
   updateMenu(specData, specs, supportedLangs);
   createEndpointPages(specData, specs);
 };

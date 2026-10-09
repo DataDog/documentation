@@ -40,11 +40,10 @@ const extractVersion = (specPath) => {
 };
 
 // Process a single spec file
-const processSpec = async (specPath) => {
+const processSpec = async (specPath, fileData) => {
   try {
     console.log(`Processing spec: ${specPath}`);
 
-    const fileData = applyApiDisplayNames(yaml.safeLoad(fs.readFileSync(specPath, 'utf8')));
     const deref = await $RefParser.dereference(fileData, { resolve: { external: false } });
 
     // VALIDATION: Ensure we actually have an object with servers
@@ -94,8 +93,10 @@ const processSpecs = async (specs) => {
   const results = [];
 
   try {
+    // Display names are applied across all specs together so an override in one version labels both
+    const fileData = applyApiDisplayNames(specs.map(spec => yaml.safeLoad(fs.readFileSync(spec, 'utf8'))));
     // Process all specs concurrently
-    const processPromises = specs.map(spec => processSpec(spec));
+    const processPromises = specs.map((spec, index) => processSpec(spec, fileData[index]));
     const processedSpecs = await Promise.all(processPromises);
     results.push(...processedSpecs);
     console.log(`Successfully processed ${results.length} spec(s)`);

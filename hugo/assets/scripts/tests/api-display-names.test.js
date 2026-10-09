@@ -23,7 +23,7 @@ const fixture = () => ({
 describe('API display labels from the source specification', () => {
     it('preserves operation IDs, wire values, descriptions, and original routing labels', () => {
         const before = fixture();
-        const after = applyApiDisplayNames(JSON.parse(JSON.stringify(before)));
+        const [after] = applyApiDisplayNames([JSON.parse(JSON.stringify(before))]);
         expect(after.tags[0]).toMatchObject({ name: 'Animal Care', 'x-docs-original-name': 'Pets' });
         expect(after.paths['/api/v2/pets'].post).toEqual({
             ...before.paths['/api/v2/pets'].post,
@@ -32,7 +32,7 @@ describe('API display labels from the source specification', () => {
             'x-docs-original-summary': 'Create a pet'
         });
         const snapshot = JSON.stringify(after);
-        expect(JSON.stringify(applyApiDisplayNames(after))).toBe(snapshot);
+        expect(JSON.stringify(applyApiDisplayNames([after])[0])).toBe(snapshot);
     });
 
     it('leaves specs with no display overrides unchanged', () => {
@@ -40,7 +40,68 @@ describe('API display labels from the source specification', () => {
         delete spec.tags[0]['x-displayName'];
         delete spec.paths['/api/v2/pets'].post['x-displayName'];
         const before = JSON.stringify(spec);
-        expect(JSON.stringify(applyApiDisplayNames(spec))).toBe(before);
+        expect(JSON.stringify(applyApiDisplayNames([spec])[0])).toBe(before);
+    });
+
+    it('applies an override from either version to both', () => {
+        const withoutOverrides = () => {
+            const spec = fixture();
+            delete spec.tags[0]['x-displayName'];
+            delete spec.paths['/api/v2/pets'].post['x-displayName'];
+            return spec;
+        };
+        const [v1, v2] = applyApiDisplayNames([withoutOverrides(), fixture()]);
+        [v1, v2].forEach((spec) => {
+            expect(spec.tags[0]).toMatchObject({ name: 'Animal Care', 'x-docs-original-name': 'Pets' });
+            expect(spec.paths['/api/v2/pets'].post).toMatchObject({
+                tags: ['Animal Care'],
+                summary: 'Create an animal',
+                'x-docs-original-summary': 'Create a pet'
+            });
+        });
+        const [first] = applyApiDisplayNames([fixture(), withoutOverrides()]);
+        expect(first.paths['/api/v2/pets'].post.summary).toBe('Create an animal');
+    });
+
+    it('prefers the later version when overrides disagree', () => {
+        const v1 = fixture();
+        v1.tags[0]['x-displayName'] = 'Old Animal Care';
+        v1.paths['/api/v2/pets'].post['x-displayName'] = 'Create an old animal';
+        const [, v2] = applyApiDisplayNames([v1, fixture()]);
+        expect(v1.tags[0].name).toBe('Animal Care');
+        expect(v1.paths['/api/v2/pets'].post.summary).toBe('Create an animal');
+        expect(v2.paths['/api/v2/pets'].post.summary).toBe('Create an animal');
+    });
+
+    it('labels v1-only endpoints in the menu when only v2 has the override', () => {
+        const writes = new Map();
+        const write = jest.spyOn(fs, 'writeFileSync').mockImplementation((path, body) => writes.set(path, body));
+        const read = jest.spyOn(fs, 'readFileSync').mockReturnValue(yaml.safeDump({ menu: { api: [] } }));
+        const mkdir = jest.spyOn(fs, 'mkdirSync').mockImplementation(() => {});
+        const log = jest.spyOn(console, 'log').mockImplementation(() => {});
+        try {
+            const v1 = fixture();
+            delete v1.tags[0]['x-displayName'];
+            delete v1.paths['/api/v2/pets'].post['x-displayName'];
+            const specPaths = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
+            const specs = applyApiDisplayNames([v1, fixture()]);
+            bp.createEndpointPages(specs, specPaths);
+            bp.updateMenu(specs, specPaths, ['en']);
+            expect(writes.get('./content/en/api/latest/pets/create-a-pet/index.md')).toContain(
+                'title: Create an animal'
+            );
+            const menu = yaml.safeLoad(writes.get('./config/_default/menus/api.en.yaml')).menu.api;
+            expect(menu.find((entry) => entry.identifier === 'pets').name).toBe('Animal Care');
+            expect(menu.find((entry) => entry.identifier === 'pets-create-a-pet')).toMatchObject({
+                name: 'Create an animal',
+                params: { versions: ['v1', 'v2'] }
+            });
+        } finally {
+            write.mockRestore();
+            read.mockRestore();
+            mkdir.mockRestore();
+            log.mockRestore();
+        }
     });
 
     it('generates new English titles and menu labels at the existing URLs', () => {
@@ -59,7 +120,7 @@ describe('API display labels from the source specification', () => {
         const mkdir = jest.spyOn(fs, 'mkdirSync').mockImplementation(() => {});
         const log = jest.spyOn(console, 'log').mockImplementation(() => {});
         try {
-            const spec = applyApiDisplayNames(fixture());
+            const [spec] = applyApiDisplayNames([fixture()]);
             bp.createEndpointPages([spec], ['./data/api/v2/full_spec.yaml']);
             bp.updateMenu([spec], ['./data/api/v2/full_spec.yaml'], ['en', 'fr']);
             expect(writes.get('./content/en/api/latest/pets/create-a-pet/index.md')).toContain(
