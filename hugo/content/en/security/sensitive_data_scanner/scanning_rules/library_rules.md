@@ -26,6 +26,34 @@ These rules can also be viewed in Datadog:
 
 {{< multifilter-search resource="sds_rules" >}}
 
+## Reference library rules by ID
+
+Each library rule has a stable **Rule ID** (the standard pattern ID), shown in the table above. Datadog may rename a library rule to correct or clarify it, but the rule ID never changes. When you manage scanning rules with Terraform or the API, reference library rules by rule ID instead of by name so that a rename does not break your configuration.
+
+### Terraform
+
+In the [`datadog_sensitive_data_scanner_standard_pattern`][3] data source, set `standard_pattern_id` instead of `filter`. This requires Datadog Terraform provider v4.5.0 or later.
+
+```terraform
+data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
+  # AWS Access Key ID Scanner
+  standard_pattern_id = "OfGqX8R9TRqAcorxenl2fQ"
+}
+
+resource "datadog_sensitive_data_scanner_rule" "aws_access_key" {
+  name                = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.name
+  group_id            = datadog_sensitive_data_scanner_group.mygroup.id
+  standard_pattern_id = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.id
+  
+  is_enabled          = true
+  tags                = datadog_sensitive_data_scanner_group.mygroup.tags
+}
+```
+
+### API
+
+When you [create a scanning rule][4] from a library rule, set the rule ID in `relationships.standard_pattern.data.id`. To list all library rules and their IDs, use the [List standard patterns][5] endpoint.
+
 
 ## Further Reading
 
@@ -33,3 +61,6 @@ These rules can also be viewed in Datadog:
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/
 [2]: /security/sensitive_data_scanner/?#add-scanning-rules
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/sensitive_data_scanner_standard_pattern
+[4]: /api/latest/sensitive-data-scanner/#create-scanning-rule
+[5]: /api/latest/sensitive-data-scanner/#list-standard-patterns
