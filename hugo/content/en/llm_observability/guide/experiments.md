@@ -10,7 +10,7 @@ further_reading:
   text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
-This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. For complete runnable Node.js examples, see the [Node.js experiments examples](https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs).
+This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. See [runnable Node.js experiments examples][7].
 
 ## Prerequisites
 
@@ -92,13 +92,13 @@ DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> DD_LLMOBS_PROJECT_NAME=<
 NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
-For more information, see the [Node.js tracer command-line setup](/llm_observability/instrument/sdk?tab=nodejs#command-line-setup).
+For more information, see the [Node.js tracer command-line setup][8].
 {{% /tab %}}
     {{< /tabs >}}
 
-### APM Trace correlation
+### APM trace correlation
 
-To correlate experiment spans with [APM traces](/llm_observability/instrument/agent_observability_and_apm/), run Agent Observability through a Datadog Agent. The Agent forwards trace data to APM.
+To correlate experiment spans with [APM traces][9], run Agent Observability through a Datadog Agent. The Agent forwards trace data to APM.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -365,7 +365,7 @@ def retrieve_context(question):
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-For custom tracing, use `llmobs.trace()`. For automatic instrumentation, see the [supported Node.js frameworks](/llm_observability/instrument/auto_instrumentation?tab=nodejs).
+For custom tracing, use `llmobs.trace()`. For automatic instrumentation, see the [supported Node.js frameworks][10].
 
 ```javascript
 // Example: trace a workflow or tool call with the same LLMObs APIs used in production.
@@ -471,7 +471,7 @@ DD_TRACE_OTEL_ENABLED=1 node my_experiment.js
 
 ### 3. Define evaluators
 
-Evaluators measure how well your model or agent performs on each record. Both SDKs support function-based evaluators and reusable class-based evaluators.
+Evaluators measure how well your model or agent performs on each record. Both SDKs support local evaluators defined as functions or classes. The Node.js SDK also supports managed remote evaluators, which run evaluations configured in Datadog.
 
 For detailed information on building evaluators, including the full data model reference and best practices, see the [Evaluation Developer Guide][4].
 
@@ -543,7 +543,9 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The Node.js SDK supports function and class-based evaluators. Return a Boolean, number, string, or JSON-serializable object. Use an object map when you want to assign evaluator names explicitly.
+#### Function-based evaluators
+
+Return a Boolean, number, string, or JSON-serializable object. Use an object map to assign evaluator names explicitly.
 
 ```javascript
 function exact_match (inputData, outputData, expectedOutput) {
@@ -596,7 +598,7 @@ const experiment = experiments.experiment({
 
 #### Managed remote evaluators
 
-Use `experiments.RemoteEvaluator` to run a custom [LLM-as-a-judge evaluation](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/) configured in Datadog. Set `evalName` to the configured evaluation name. The default input mapping includes the task input and output, expected output, record metadata, and experiment span and trace IDs. You can provide `transformFn` to customize the request sent to Datadog.
+Use `experiments.RemoteEvaluator` to run a custom [LLM-as-a-judge evaluation][11] configured in Datadog. Set `evalName` to the configured evaluation name. The default input mapping includes the task input and output, expected output, record metadata, and experiment span and trace IDs. You can provide `transformFn` to customize the request sent to Datadog.
 
 ```javascript
 const remoteEvaluator = new experiments.RemoteEvaluator({
@@ -621,16 +623,16 @@ Summary evaluators receive aggregated results after all record-level evaluators 
 {{% tab "Python" %}}
 #### Function-based summary evaluators
 
+Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, or array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of lists of results from evaluators, keyed by the name of the evaluator function.
+
 ```python
 def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
     return evaluators_results["exact_match"].count(True)
 ```
 
-Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, or array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of lists of results from evaluators, keyed by the name of the evaluator function.
-
 #### Class-based summary evaluators
 
-For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide](/llm_observability/investigate/evaluations/evaluation_developer_guide/).
+For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][4].
 
 ```python
 from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
@@ -649,7 +651,9 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Summary evaluators are functions that receive the inputs, outputs, expected outputs, and an object containing the results from each evaluator. The optional fifth argument contains record metadata.
+#### Function-based summary evaluators
+
+Summary evaluator functions receive the inputs, outputs, expected outputs, and an object containing the results from each evaluator. The optional fifth argument contains record metadata.
 
 ```javascript
 function num_exact_matches (inputs, outputs, expectedOutputs, evaluatorResults, metadata) {
@@ -679,7 +683,9 @@ Add class-based summary evaluators to `summaryEvaluators` alongside function-bas
 {{% /tab %}}
 {{< /tabs >}}
 
-### 5. Create and run the experiment.
+### 5. Create and run the experiment
+
+Create an experiment with your dataset, task, and evaluators, then run it and inspect the results:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -776,7 +782,7 @@ const results = await experiment.run({
 {{% /tab %}}
 {{< /tabs >}}
 
-### 6. Review your experiment results in Datadog.
+### 6. Review your experiment results in Datadog
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -799,6 +805,11 @@ console.log(experiment.url())
 [1]: /llm_observability/improve/datasets
 [4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [6]: /llm_observability/instrument/otel_instrumentation
+[7]: https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs
+[8]: /llm_observability/instrument/sdk?tab=nodejs#command-line-setup
+[9]: /llm_observability/instrument/agent_observability_and_apm/
+[10]: /llm_observability/instrument/auto_instrumentation?tab=nodejs
+[11]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/
 
 ## Further reading
 

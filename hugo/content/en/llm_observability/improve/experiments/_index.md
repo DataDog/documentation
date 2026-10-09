@@ -38,6 +38,8 @@ further_reading:
 
 Agent Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 
+<div class="alert alert-info">To get started, see the <a href="/llm_observability/guide/experiments/">Set up and use Agent Observability Experiments</a> guide.</div>
+
 - Create and version datasets
 - Run and manage experiments
 - Compare results to evaluate impact
