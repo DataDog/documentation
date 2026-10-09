@@ -26,7 +26,7 @@ Optimization candidates are selected automatically from Database Monitoring tele
 
 <div class="alert alert-info">Bits Database Optimization does not require write access to your database, and does not export or use actual data from your environment. Optimizations are empirically tested against database simulations populated with synthetic data using statistical properties of your schema.</div>
 
-{{< img src="database_monitoring/database_optimization_panel_overview.png" alt="Am optimized query in the optimization panel, showing a detailed summary of the issue, a diff for the optimized query, and a button to create a PR." style="width:100%;">}}
+{{< img src="database_monitoring/database_optimization_panel_overview.png" alt="An optimized query in the optimization panel, showing a detailed summary of the issue, a diff for the optimized query, and a button to create a PR." style="width:100%;">}}
 
 ## Prerequisites
 
@@ -35,6 +35,21 @@ Optimization candidates are selected automatically from Database Monitoring tele
 - For automated PR creation:
     - **APM** must be configured for the services that issue the queries you want to address. See [Correlate Database Monitoring and Traces][2] for more information.
     - A **GitHub repository** must be linked in your Datadog organization.
+- [Bits AI][6] is available for your organization. You can check in **Plan & Usage** > **AI Credits**.
+
+## Enable continuous optimizations
+
+1. Go to [Database Monitoring > Queries][3].
+1. In the top right corner, click **Configure**.
+1. Toggle **Continuous Optimizations** on.
+
+The instances included in Continuous Optimizations are listed below the toggle. To remove an instance, click the minus (**-**) button on the right side of its row.
+
+When continuous optimizations are enabled, Bits Database Optimization will check for optimizations on the top 50 queries per host. If less than 50 queries are available, the optimizer will automatically check new queries on a hourly basis, throughout the month, until the quota is reached. The selection process for the top 50 queries is rerun on the first of each month. Throughout the month, those queries are checked for possible optimization on a rolling basis. 
+
+Top queries are prioritized by total duration per host and by individual execution time per service. 
+
+Bits Database Optimization is priced according to AI credits. For details, see the [AI credits pricing page][5].
 
 ## Viewing optimizations
 
@@ -77,3 +92,5 @@ To review the PR for the optimization fix to your database, select **Review PR b
 [2]: /database_monitoring/connect_dbm_and_apm/
 [3]: https://app.datadoghq.com/databases/queries
 [4]: /monitors/configuration/?tab=evaluateddata
+[5]: https://www.datadoghq.com/pricing/?product=ai-credits#products
+[6]: /bits_ai/
