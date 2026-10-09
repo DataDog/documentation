@@ -138,7 +138,7 @@ This approach works with the existing OpenTelemetry SDK. When you enable this fe
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
 {% /if %}
 {% if equals($prog_lang, "node_js") %}
-- **Datadog SDK**: `dd-trace-js` version 5.81.0 or later.
+- **Datadog SDK**: `dd-trace-js` version 7.0.0 or later for metrics shutdown. Basic OTel Metrics API support requires version 5.81.0 or later.
 - **OpenTelemetry API**: `@opentelemetry/api` version 1.0.0 to 1.10.0. (The Datadog SDK provides the implementation for this API).
 {% /if %}
 {% if equals($prog_lang, "python") %}
@@ -163,7 +163,7 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 - **Rust**: MSRV 1.84 or later.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- **Datadog SDK**: `dd-trace-java` version 1.61.0 or later.
+- **Datadog SDK**: `dd-trace-java` version 1.66.0 or later for metrics shutdown. Basic OTel Metrics API support requires version 1.61.0 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 {% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "java"]) %}
@@ -491,6 +491,65 @@ LongCounter counter = meter.counterBuilder("http.requests_total").build();
 // Record measurements
 counter.add(1, Attributes.builder().put("method", "GET").put("status_code", "200").build());
 ```
+{% /if %}
+
+{% if includes($prog_lang, ["node_js", "python", "java"]) %}
+
+### Shut down metrics in short-lived processes
+
+Metrics are normally exported on a schedule. `Shutdown` is an OpenTelemetry Metrics SDK life cycle operation, not a Metrics API method. Python exposes this operation through the OpenTelemetry SDK. The Datadog SDKs for Node.js and Java provide equivalent extensions.
+
+After recording is complete, call `shutdown` once to perform a final export and stop metrics export. Don't record more metrics after shutdown.
+
+{% if equals($prog_lang, "node_js") %}
+The completion callback receives `null` on success or an error on failure. `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` bounds each OTLP HTTP request in milliseconds.
+
+```javascript
+const meterProvider = metrics.getMeterProvider();
+
+meterProvider.shutdown((error) => {
+  if (error) console.error('Failed to shut down metrics', error);
+});
+```
+
+For TypeScript, cast the provider to the Datadog implementation type:
+
+```typescript
+import type { opentelemetry as DatadogOpenTelemetry } from 'dd-trace';
+
+const meterProvider = metrics.getMeterProvider() as ReturnType<typeof metrics.getMeterProvider> &
+  DatadogOpenTelemetry.MeterProvider;
+```
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+```python
+meter_provider = metrics.get_meter_provider()
+
+meter_provider.shutdown(timeout_millis=10_000)
+```
+
+`shutdown` succeeds without a return value and can fail with an exception if a metric reader fails or its deadline expires.
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+```java
+import datadog.trace.api.metrics.DatadogMeterProvider;
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.metrics.MeterProvider;
+import java.util.concurrent.TimeUnit;
+
+MeterProvider meterProvider = GlobalOpenTelemetry.get().getMeterProvider();
+DatadogMeterProvider datadogMeterProvider = (DatadogMeterProvider) meterProvider;
+
+if (!datadogMeterProvider.shutdown().join(10, TimeUnit.SECONDS).isSuccess()) {
+  throw new IllegalStateException("Metric export failed or is unavailable");
+}
+```
+
+The provider returned from `GlobalOpenTelemetry` implements `DatadogMeterProvider`. `shutdown()` performs a final export and stops the Datadog metrics export pipeline. A result that isn't successful indicates that the operation failed, timed out, or metrics export is unavailable.
+{% /if %}
+
 {% /if %}
 
 ### Create a histogram
