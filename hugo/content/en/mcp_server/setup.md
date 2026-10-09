@@ -769,6 +769,10 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 
 ## Required permissions
 
+The Datadog MCP Server requires both [user role permissions](#user-role-permissions) and [organization-wide access](#organization-wide-access). See the following sections for details.
+
+### User role permissions
+
 MCP Server tools require the following [Datadog user role permissions][22]:
 
 | Permission | Required for |
@@ -785,7 +789,14 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 1. Select any other resource-level permissions you need for the role.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
+### Organization-wide access
+
+MCP Server tools also require global, organization-wide MCP access and write capabilities, which organization administrators manage in [Organization Settings][27]. Enable these settings to allow access to the Datadog MCP Server and its tools:
+
+| Organization Setting | Description |
+|---------|-------------|
+| {{< ui >}}MCP Access{{< /ui >}} | Enable to allow access to the Datadog MCP Server. When disabled, users cannot access any MCP functionality, regardless of individual role permissions. This allows organizations to completely opt out of the MCP Server. |
+| {{< ui >}}MCP Write Access{{< /ui >}} | Enable to allow access to MCP Server tools that create or modify resources, such as `create_datadog_monitor`. When disabled, the MCP Server hides write tools from all users, regardless of individual role permissions. See [Troubleshooting](#write-tools-are-missing) for more information. |
 
 ### Restrict network access
 
@@ -903,6 +914,19 @@ If you are a partner or vendor adding Datadog to an MCP directory for your AI ag
    {{< /site-region >}}
 4. Click {{< ui >}}Connect{{< /ui >}}, then go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}List Tools{{< /ui >}}.
 5. Check if the [available tools][12] appear.
+
+## Troubleshooting
+
+### Write tools are missing
+
+If your AI client does not list Datadog MCP Server tools that create or modify resources (such as `create_datadog_monitor`), check the following:
+
+- **Organization write access**: When MCP write capabilities are disabled for your organization, the MCP Server hides write tools from the tool list for all users, regardless of individual user role permissions. An organization administrator can enable {{< ui >}}MCP Write Access{{< /ui >}} from [Organization Settings][27].
+- **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
+- **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
+- **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
+
+After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
 
 ## Further reading
 
