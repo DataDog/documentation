@@ -21,7 +21,7 @@ Your application continues to evaluate flags with their original keys. Obfuscati
 
 ## Compatibility and rollout
 
-Flag key obfuscation requires the browser JavaScript SDK, `@datadog/openfeature-browser`, version `2.1.0` or later. Datadog controls the rollout to compatible SDKs. The SDK handles the encoding automatically. You do not set a provider option, generate hashes, or change evaluation calls.
+Flag key obfuscation requires the JavaScript SDK, `@datadog/openfeature-browser`, version `2.1.0` or later. Datadog controls the rollout to compatible SDKs. The SDK handles the encoding automatically. You do not set a provider option, generate hashes, or change evaluation calls.
 
 During rollout, Datadog sends obfuscated responses only to SDKs that report support for the encoding. Other SDK versions continue to receive readable keys. Updating one application does not change the behavior of other applications still running an older SDK version.
 
