@@ -14,6 +14,7 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: Real User Monitoring
+site_support_id: rum_remote_configuration
 title: RUM Remote Configuration
 ---
 ## 概要 {#overview}
