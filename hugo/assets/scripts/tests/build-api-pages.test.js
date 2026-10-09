@@ -2782,6 +2782,42 @@ describe(`rowRecursive`, () => {
 
 describe(`schemaTable`, () => {
 
+  it('marks required fields in arrays of objects', () => {
+    const schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['message', 'job_id'],
+        properties: {
+          message: {type: 'string'},
+          job_id: {type: 'string'},
+          status: {type: 'string'}
+        }
+      }
+    };
+
+    for (const tableType of ['request', 'response']) {
+      const html = bp.schemaTable(tableType, schema);
+      expect(html).toContain('message&nbsp;[<em>required</em>]');
+      expect(html).toContain('job_id&nbsp;[<em>required</em>]');
+      expect(html).toContain('<p class="key table-cell">status</p>');
+    }
+  });
+
+  it('preserves required fields in object bodies', () => {
+    const html = bp.schemaTable('request', {
+      type: 'object',
+      required: ['message'],
+      properties: {
+        message: {type: 'string'},
+        status: {type: 'string'}
+      }
+    });
+
+    expect(html).toContain('message&nbsp;[<em>required</em>]');
+    expect(html).toContain('<p class="key table-cell">status</p>');
+  });
+
   xit('should return html table wrapping rows recursively generated', () => {
 
     // spyOn(build, 'rowRecursive').and.returnValue('FooBar');
