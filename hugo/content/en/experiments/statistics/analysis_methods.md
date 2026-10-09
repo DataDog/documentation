@@ -69,7 +69,7 @@ Sequential hybrid analysis combines sequential and fixed-sample analysis. While 
 
 To combine the two methods while controlling the false positive rate, sequential hybrid analysis splits the significance level (α) evenly between the two tests. Each test runs at α/2, so each phase uses a slightly more conservative version of its method. The tradeoffs are:
 
-- Intervals in each phase are about 10 to 15% wider than with sequential or fixed-sample analysis alone.
+- Intervals in each phase are about 10% to 15% wider than with sequential or fixed-sample analysis alone.
 - You must set a target duration before launching the experiment.
 
 Use sequential hybrid analysis when you want the flexibility to react to strong results during the experiment and the power of a fixed-sample test at the end.
