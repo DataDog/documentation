@@ -53,6 +53,18 @@ To set up an Integration Pipelines processor:
 
 **Note**: When you enable or disable integrations, you must redeploy the pipeline for the changes to take effect.
 
+## CPU sizing
+
+This processor is CPU intensive. Use **10,000 events per second per vCPU** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
+
+CPU usage depends on:
+
+- The proportion of logs that match an enabled integration pipeline.
+- The number and cost of processors in the integration pipelines that handle most of your logs.
+- The baseline normalization cost, paid for every log entering the processor, including logs without a matching integration pipeline.
+
+The number of enabled integration pipelines does not determine per-event processing cost: each log is dispatched by its source, rather than tested against every enabled pipeline. Use the processor's filter to limit incoming logs when appropriate, and allow CPU headroom for traffic spikes.
+
 ## How the processor works
 
 For every log that matches the processor's filter:
@@ -73,31 +85,23 @@ The Worker normalizes all logs even if they don't match an integration pipeline.
 
 ### Pre-processing options
 
-The Worker preprocesses reserved attributes as described in the Datadog Log Management's [Preprocessing][1] section. You can change the Integration Pipelines processors' field mappings for preprocessing. Each option is an ordered list of candidate field paths. The first matching candidate supplies the reserved field. Paths refer to the incoming log's attributes; do not add the output's `attributes` prefix.
+Preprocessing maps certain attributes from your logs to reserved attributes. For example, `timestamp` is a reserved attribute but if your logs use the `published_date` attribute for the timestamp, preprocessing maps the `published_date` value to the reserved attribute `timestamp`. Each reserved attribute has an ordered list of log attributes to check. The first matching log attribute is used for the reserved attribute's value. You can add additional log attributes to the list.
 
-| Option             | Reserved field | Default candidates, in order                                                                                    |
-| ------------------ | -------------- | --------------------------------------------------------------------------------------------------------------- |
-| `date_sources`     | `timestamp`    | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
-| `hostname_sources` | `host`         | `host`, `hostname`, `syslog.hostname`                                                                           |
-| `message_sources`  | `message`      | `message`, `msg`, `log`                                                                                         |
-| `service_sources`  | `service`      | `service`, `syslog.appname`, `dd.service`                                                                       |
-| `status_sources`   | `status`       | `status`, `severity`, `level`, `syslog.severity`                                                                |
-| `trace_id_sources` | `trace_id`     | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id`                                   |
-| `span_id_sources`  | `span_id`      | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id`                                       |
+**Note**: If the attribute is prefixed with the `attribute` prefix, such as `attribute.log_timestamp`, do not include the `attributes` prefix in the list; only add `log_timestamp`.
+
+the Datadog Log Management's [Preprocessing][1] section.
+
+| Reserved attribute | Log attributes, in order                                                                                        |
+| ------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `timestamp`        | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
+| `host`             | `host`, `hostname`, `syslog.hostname`                                                                           |
+| `message`          | `message`, `msg`, `log`                                                                                         |
+| `service`          | `service`, `syslog.appname`, `dd.service`                                                                       |
+| `status`           | `status`, `severity`, `level`, `syslog.severity`                                                                |
+| `trace_id`         | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id`                                   |
+| `span_id`          | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id`                                       |
 
 Setting a candidate list replaces that field's default list. For example, `hostname_sources: ["custom_host", "hostname"]` checks `custom_host` before `hostname`. Omitted options keep their defaults. An empty list disables promotion for that field, except that an unset `status` still defaults to `info`.
-
-### CPU sizing
-
-This processor is CPU intensive. Use **10,000 events per second per vCPU** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
-
-CPU usage depends on:
-
-- The proportion of logs that match an enabled integration pipeline.
-- The number and cost of processors in the integration pipelines that handle most of your logs.
-- The baseline normalization cost, paid for every log entering the processor, including logs without a matching integration pipeline.
-
-The number of enabled integration pipelines does not determine per-event processing cost: each log is dispatched by its source, rather than tested against every enabled pipeline. Use the processor's filter to limit incoming logs when appropriate, and allow CPU headroom for traffic spikes.
 
 ## Health metrics
 
