@@ -34,6 +34,14 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
   {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
 
+## Subject-specific flag delivery
+
+Client-side SDKs retrieve flag assignments for a specific subject, such as a user or device. The evaluation context identifies that subject through `targetingKey` and supplies attributes used by targeting rules.
+
+Datadog evaluates flags at the content delivery network (CDN) edge. The response includes only flags that produce an assignment for the supplied subject and context. Flags without an assignment are omitted. The SDK receives assigned values, not the full targeting rules or assignments for other subjects.
+
+An assignment can include `false` or a default variant. Subject-specific delivery does not mean that only enabled features are returned.
+
 ## Telemetry options by platform
 
 The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
