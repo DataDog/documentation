@@ -1868,7 +1868,7 @@ Without arguments, returns the available source, processor, and destination type
 ### `validate_observability_pipeline`
 *Toolset: **observability-pipelines***\
 *Permissions Required: `Observability Pipelines Read`*\
-Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns every validation error, so the agent can fix the configuration and validate it again.
+Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns all validation errors so the agent can fix the configuration and validate it again.
 
 - Validate this pipeline configuration before I create it.
 - Check this pipeline configuration for errors.
