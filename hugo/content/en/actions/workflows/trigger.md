@@ -31,6 +31,10 @@ further_reading:
   text: "Automate Security Workflows with Workflow Automation"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.
 
 A workflow runs with the identity of its owner, the user who triggered the run, or an associated service account. Triggers that fire without a user, such as schedules and webhooks, require the owner or a service account. For more information, see [Workflow identity][1].

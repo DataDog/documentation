@@ -12,6 +12,10 @@ further_reading:
   text: "Build Workflows"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 This page describes rate limits and throttles that apply to Workflow Automation.
 
 ## Account-level limits
