@@ -1,6 +1,7 @@
 ---
 title: Advanced Experiment Runs
 aliases:
+- /llm_observability/improve/experiments/advanced_runs/
 - /llm_observability/experiments/advanced_runs/
 description: Run experiments multiple times to account for model variability on a subset of your dataset, and automate experiment execution in CI/CD pipelines. 
 ---
@@ -271,5 +272,5 @@ GET /api/v2/llm-obs/v1/experiments?filter[experiment]=my-pipeline&filter[metadat
 ```
 
 [1]: /llm_observability/instrument/sdk?tab=python
-[2]: /llm_observability/improve/experiments/api
+[2]: /llm_observability/guide/experiments_api
 [3]: https://app.datadoghq.com/llm/experiments
