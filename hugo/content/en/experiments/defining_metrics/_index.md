@@ -118,7 +118,7 @@ Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 
 Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing custom score evaluations, with the relevance evaluation selected and its score type displayed." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing the faithfulness, user_score, and verbosity score evaluations, with faithfulness selected." style="width:90%;" >}}
 
 #### Save the metric
 
