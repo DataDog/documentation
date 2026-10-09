@@ -106,11 +106,11 @@ It uses `classListFactory(styles)` with `MobileNav.module.css`, as `MobileNavTog
 - **Other categories:** an empty `<ul class="mobile-nav__sublist" data-category-slug={slug}>`.
 - The Overview section and `ScrollActiveIntoView` are unchanged. The active operation is still in the server HTML, so scrolling it into view before first paint still works.
 
-### 4. Lazy-loading island: `MobileNavLazyOperations.tsx`
+### 4. Lazy-loading island: `MobileNavApiListLoader.tsx`
 
 A small Preact island using the existing hybrid pattern: `client:idle`, with `externalContext` pointing at the API list root. Keeping it separate from `MobileNavToggle` gives it its own isolated scope.
 
-- **Data module** (`mobileNavDataClient.ts`, plain TS so it's testable without a DOM). `loadMobileNavData()` returns a single cached promise for `/{locale}/api/mobile-nav.json` (fetched with `priority: "low"`), so any number of callers share one request. A failed request is cleared from the cache so a later expand can retry.
+- **Data loading** (exported from the island file, which is its only consumer). `loadMobileNavData()` returns a single cached promise for `/{locale}/api/mobile-nav.json` (fetched with `priority: "low"`), so any number of callers share one request. A failed request is cleared from the cache so a later expand can retry.
 - **Fetch on idle.** On mount (which `client:idle` already delays until the browser is idle), call `loadMobileNavData()`, but only when `matchMedia` reports a mobile width and `navigator.connection?.saveData` isn't set. At desktop widths the panel is `display: none`, so nothing is fetched.
 - **Expand handling.** One delegated `click` listener on the list root, filtered to a `summary` whose sibling `ul[data-category-slug]` is still empty:
   - **Data loaded:** render `MobileNavOperationItems` into the `<ul>` synchronously, inside the click handler, before the browser opens the `<details>`. The section opens already filled, with no empty frame.
@@ -179,7 +179,9 @@ Each **Compaction point** below marks a natural place to stop and compact. Each 
 
 ### Deviations from the design
 
-- **Data URL is computed on the server.** `loadMobileNavData(url)` takes the URL as an argument. `MobileNavApiList` computes it with `mobileNavDataUrl(lang)` (in `mobileNavData.ts`) and passes it to the island as the `dataUrl` prop, so the client never works out the locale itself. The cache is keyed by URL.
+- **Data URL is computed on the server.** `loadMobileNavData(url)` takes the URL as an argument. `MobileNavApiList` computes it with `mobileNavDataUrl(lang)` (in `mobileNavData.ts`) and passes it to the island as the `dataUrl` prop, so the client never works out the locale itself. A page only ever loads one locale's data, so the cache is a single module-level slot, not keyed by URL.
+- **Data loading folded into the island.** The plan had a separate `mobileNavDataClient.ts`. It had one consumer, so `loadMobileNavData`, `getLoadedMobileNavData` and the test-only `_resetMobileNavDataCache` are exported from `MobileNavApiListLoader.tsx`, and their tests live in `MobileNavApiListLoader.unit.test.ts`.
+- **Island renamed.** `MobileNavLazyOperations` became `MobileNavApiListLoader`, so the name pairs with `MobileNavApiList.astro`, which it adds behavior to.
 - **Click listener uses the capture phase.** It reads `details.open` before the click toggles it, and fills the list before the section opens. happy-dom toggles `<details>` during bubbling, so a bubbling listener saw the state after the toggle.
 - **Island placement.** The island is mounted in `MobileNavApiList` (not `MobileNav.astro`), with `externalContext` pointing at `ul#mobile-nav-api-list`. It marks that list root as hydrated (`.mobile-nav__list--api[data-hydrated="true"]`), and the browser tests wait on that.
 - **Test helper.** `MobileNav.unit.test.ts` registers the Preact renderer (`addClientRenderer`), because `MobileNavApiList` now contains a Preact island.

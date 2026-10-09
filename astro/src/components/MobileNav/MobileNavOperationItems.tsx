@@ -15,7 +15,7 @@ interface Props {
 /**
  * One API category's operation links in the mobile nav. Rendered statically
  * (no `client:` directive) by `MobileNavApiList` for the active category, and
- * rendered on the client by `MobileNavLazyOperations` for any other category
+ * rendered on the client by `MobileNavApiListLoader` for any other category
  * the user expands, so both paths produce identical markup.
  */
 export default function MobileNavOperationItems({

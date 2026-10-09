@@ -282,7 +282,7 @@ describe("MobileNav.astro", () => {
 
   describe("lazy category operations", () => {
     // Only the active category's operations are server-rendered; every other
-    // category ships an empty list that MobileNavLazyOperations fills on
+    // category ships an empty list that MobileNavApiListLoader fills on
     // expand from /api/mobile-nav.json, keeping the page HTML small.
     function categorySections(doc: Document): Element[] {
       return [
@@ -359,7 +359,7 @@ describe("MobileNav.astro", () => {
         (island) =>
           island
             .getAttribute("component-url")
-            ?.includes("MobileNavLazyOperations"),
+            ?.includes("MobileNavApiListLoader"),
       );
       expect(islands).toHaveLength(1);
       const props = islands[0].getAttribute("props") ?? "";

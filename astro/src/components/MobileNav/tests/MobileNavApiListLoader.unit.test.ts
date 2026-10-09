@@ -2,8 +2,11 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, cleanup } from "@testing-library/preact";
 import { h } from "preact";
-import MobileNavLazyOperations from "../MobileNavLazyOperations";
-import { _resetMobileNavDataCache } from "../mobileNavDataClient";
+import MobileNavApiListLoader, {
+  _resetMobileNavDataCache,
+  getLoadedMobileNavData,
+  loadMobileNavData,
+} from "../MobileNavApiListLoader";
 import type { MobileNavData } from "@lib/api/mobileNavData";
 
 const DATA_URL = "/api/mobile-nav.json";
@@ -71,8 +74,8 @@ function deferredResponse(): Deferred {
   return { promise, resolve, reject };
 }
 
-function jsonResponse(body: unknown): Response {
-  return new Response(JSON.stringify(body), { status: 200 });
+function jsonResponse(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), { status });
 }
 
 function stubViewport({ isDesktop }: { isDesktop: boolean }) {
@@ -96,7 +99,7 @@ function stubSaveData(saveData: boolean) {
 
 function mountIsland() {
   render(
-    h(MobileNavLazyOperations, {
+    h(MobileNavApiListLoader, {
       dataUrl: DATA_URL,
       labels,
       externalContext: {
@@ -149,7 +152,7 @@ afterEach(() => {
   document.body.innerHTML = "";
 });
 
-describe("MobileNavLazyOperations", () => {
+describe("MobileNavApiListLoader", () => {
   it("marks the list as hydrated on mount", () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse(data)));
     mountIsland();
@@ -319,5 +322,77 @@ describe("MobileNavLazyOperations", () => {
     toggle.click();
 
     expect(sublist("dashboards").children).toHaveLength(0);
+  });
+});
+
+describe("loadMobileNavData", () => {
+  it("fetches the given URL at low priority", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(data));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(loadMobileNavData(DATA_URL)).resolves.toEqual(data);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith(
+      DATA_URL,
+      expect.objectContaining({ priority: "low" }),
+    );
+  });
+
+  it("shares one request between concurrent callers", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(data));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const [first, second] = await Promise.all([
+      loadMobileNavData(DATA_URL),
+      loadMobileNavData(DATA_URL),
+    ]);
+    expect(first).toEqual(data);
+    expect(second).toBe(first);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not refetch after a successful load", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(data));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await loadMobileNavData(DATA_URL);
+    await loadMobileNavData(DATA_URL);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("clears the cache after a network failure, so a later call retries", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockRejectedValueOnce(new TypeError("network down"))
+      .mockResolvedValueOnce(jsonResponse(data));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(loadMobileNavData(DATA_URL)).rejects.toThrow();
+    await expect(loadMobileNavData(DATA_URL)).resolves.toEqual(data);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("treats a non-OK response as a failure", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(jsonResponse({}, 404))
+      .mockResolvedValueOnce(jsonResponse(data));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(loadMobileNavData(DATA_URL)).rejects.toThrow();
+    expect(getLoadedMobileNavData()).toBeUndefined();
+    await expect(loadMobileNavData(DATA_URL)).resolves.toEqual(data);
+  });
+});
+
+describe("getLoadedMobileNavData", () => {
+  it("returns nothing until the request resolves, then the data", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse(data)));
+
+    expect(getLoadedMobileNavData()).toBeUndefined();
+    const pending = loadMobileNavData(DATA_URL);
+    expect(getLoadedMobileNavData()).toBeUndefined();
+    await pending;
+    expect(getLoadedMobileNavData()).toEqual(data);
   });
 });

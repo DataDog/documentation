@@ -1,8 +1,9 @@
 /**
- * Fills a non-active API category's operation links into the mobile nav when
- * the user expands it. Renders nothing itself: `MobileNavApiList` ships every
- * non-active category as an empty `ul[data-category-slug]`, and this island
- * renders `MobileNavOperationItems` into it from `/api/mobile-nav.json`.
+ * The client half of `MobileNavApiList.astro`: fills a non-active API
+ * category's operation links into the mobile nav when the user expands it.
+ * Renders nothing itself: `MobileNavApiList` ships every non-active category
+ * as an empty `ul[data-category-slug]`, and this island renders
+ * `MobileNavOperationItems` into it from `/api/mobile-nav.json`.
  *
  * The JSON is prefetched on mount (which `client:idle` already defers) at
  * mobile widths, so by the time a user expands a category the links can be
@@ -19,15 +20,11 @@ import {
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import { desktopMediaQuery } from "@lib/cssUtils/breakpoints";
 import type { MobileNavData } from "@lib/api/mobileNavData";
-import {
-  getLoadedMobileNavData,
-  loadMobileNavData,
-} from "./mobileNavDataClient";
 import MobileNavOperationItems from "./MobileNavOperationItems";
 
 const cl = classListFactory(styles);
 
-export interface MobileNavLazyOperationsLabels {
+export interface MobileNavApiListLoaderLabels {
   Loading: string;
   "View category page": string;
 }
@@ -35,14 +32,18 @@ export interface MobileNavLazyOperationsLabels {
 interface Props {
   /** The localized URL of `mobile-nav.json` (see `mobileNavDataUrl`). */
   dataUrl: string;
-  labels: MobileNavLazyOperationsLabels;
+  labels: MobileNavApiListLoaderLabels;
   externalContext: ExternalContext<{ list: string }>;
 }
 
 /** Where a lazy list is in its life cycle. Unset until first expanded. */
 type LazyListState = "loading" | "loaded" | "failed";
 
-export default function MobileNavLazyOperations({
+/** One page only ever loads one locale's data, so a single slot suffices. */
+let mobileNavDataRequest: Promise<MobileNavData> | null = null;
+let loadedMobileNavData: MobileNavData | undefined;
+
+export default function MobileNavApiListLoader({
   dataUrl,
   labels,
   externalContext,
@@ -127,9 +128,9 @@ function findLazyListBeingExpanded(
 function fillLazyList(
   lazyList: HTMLUListElement,
   dataUrl: string,
-  labels: MobileNavLazyOperationsLabels,
+  labels: MobileNavApiListLoaderLabels,
 ) {
-  const loadedData = getLoadedMobileNavData(dataUrl);
+  const loadedData = getLoadedMobileNavData();
   if (loadedData) {
     renderOperations(lazyList, loadedData, labels);
     return;
@@ -145,7 +146,7 @@ function fillLazyList(
 function renderOperations(
   lazyList: HTMLUListElement,
   data: MobileNavData,
-  labels: MobileNavLazyOperationsLabels,
+  labels: MobileNavApiListLoaderLabels,
 ) {
   const category = data.categories.find(
     (candidate) => candidate.slug === lazyList.dataset.categorySlug,
@@ -166,7 +167,7 @@ function renderOperations(
 
 function renderLoadingRow(
   lazyList: HTMLUListElement,
-  labels: MobileNavLazyOperationsLabels,
+  labels: MobileNavApiListLoaderLabels,
 ) {
   setLazyListState(lazyList, "loading");
   render(
@@ -185,7 +186,7 @@ function renderLoadingRow(
 
 function renderFallbackLink(
   lazyList: HTMLUListElement,
-  labels: MobileNavLazyOperationsLabels,
+  labels: MobileNavApiListLoaderLabels,
 ) {
   setLazyListState(lazyList, "failed");
   render(
@@ -210,4 +211,47 @@ function setLazyListState(lazyList: HTMLUListElement, state: LazyListState) {
   } else {
     lazyList.removeAttribute("aria-busy");
   }
+}
+
+/**
+ * Fetch the mobile nav's operation links (see `mobileNavData.ts`). Every
+ * caller shares one request. A failed request is dropped, so a later call
+ * retries.
+ */
+export function loadMobileNavData(url: string): Promise<MobileNavData> {
+  mobileNavDataRequest ??= fetchMobileNavData(url).then(
+    (data) => {
+      loadedMobileNavData = data;
+      return data;
+    },
+    (error: unknown) => {
+      mobileNavDataRequest = null;
+      throw error;
+    },
+  );
+  return mobileNavDataRequest;
+}
+
+/**
+ * The data, if it has already arrived. Lets a click handler render
+ * synchronously, before the `<details>` it's expanding opens.
+ */
+export function getLoadedMobileNavData(): MobileNavData | undefined {
+  return loadedMobileNavData;
+}
+
+async function fetchMobileNavData(url: string): Promise<MobileNavData> {
+  const response = await fetch(url, { priority: "low" });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${url}: ${response.status}`);
+  }
+  return (await response.json()) as MobileNavData;
+}
+
+/**
+ * Reset the module-level cache. Exposed for testing only.
+ */
+export function _resetMobileNavDataCache(): void {
+  mobileNavDataRequest = null;
+  loadedMobileNavData = undefined;
 }

@@ -13,7 +13,7 @@
  *
  * Only the active category's operations are server-rendered. Every other
  * category ships an empty list tagged with `data-category-slug` and
- * `data-category-href`, which `MobileNavLazyOperations` fills on expand from
+ * `data-category-href`, which `MobileNavApiListLoader` fills on expand from
  * `/api/mobile-nav.json`. Rendering all ~1,900 operation links on every page
  * made the HTML large enough to hurt first paint.
  */
@@ -25,7 +25,7 @@ import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import SvgIcon from "@components/SvgIcon/SvgIcon.astro";
 import MobileNavOperationItems from "./MobileNavOperationItems";
-import MobileNavLazyOperations from "./MobileNavLazyOperations";
+import MobileNavApiListLoader from "./MobileNavApiListLoader";
 import { mobileNavDataUrl } from "@lib/api/mobileNavData";
 
 interface Props {
@@ -54,7 +54,7 @@ const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
 
 const listId = "mobile-nav-api-list";
 // TODO: replace with i18n keys once Hugo has them.
-const lazyOperationsLabels = {
+const loaderLabels = {
   Loading: "Loading",
   "View category page": "View category page",
 };
@@ -152,10 +152,10 @@ const lazyOperationsLabels = {
   }
 </ul>
 
-<MobileNavLazyOperations
+<MobileNavApiListLoader
   client:idle
   dataUrl={mobileNavDataUrl(lang)}
-  labels={lazyOperationsLabels}
+  labels={loaderLabels}
   externalContext={{ scope: listId, entries: { list: listId } }}
 />
 
