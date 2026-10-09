@@ -30,6 +30,8 @@ Bits Release closes that gap. After you merge a pull request, it reads the code 
 
 Bits Release does not modify your code, and it does not create permanent instrumentation or long-lived monitors. It reads the observability data you already send to Datadog, creates temporary artifacts when a check needs to run over time, and removes them when the validation ends.
 
+{{< img src="bits_release/bits_release_validation_timeline.png" alt="The Bits Release page for a merged pull request, showing a four-step timeline: pull request merged, deployed to production, validation started, and a passed verdict with the synthetic check and RUM error rate evidence behind it" style="width:100%;" >}}
+
 ## How it works
 
 1. **Trigger**: A pull request merges to the default branch of a repository in scope.
@@ -96,8 +98,6 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 - **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
 - **Slack**: The pull request author is notified when a verdict is ready.
 - **Bits Release in Datadog**: The Bits Release page holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it from the link in your pull request comment. It is not in the Datadog side navigation yet.
-
-{{< img src="bits_release/bits_release_validation_timeline.png" alt="The Bits Release page for a merged pull request, showing a four-step timeline: pull request merged, deployed to production, validation started, and a passed verdict with the synthetic check and RUM error rate evidence behind it" style="width:100%;" >}}
 
 ## Billing
 
