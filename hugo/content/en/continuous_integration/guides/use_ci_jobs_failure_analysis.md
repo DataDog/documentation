@@ -99,6 +99,8 @@ Logs Analysis is available for the following CI providers:
 * [CircleCI][13]
 * [GitHub Actions][1]
 * [GitLab][2]
+* [TeamCity][14]
+* [Other CI providers][15]
 
 **Note:** Logs Analysis may require CI provider specific configuration. Check the **Logs Analysis** section on the [Pipeline Visibility setup page][6] for your provider.
 
@@ -165,3 +167,5 @@ Enable PR Comments from [**CI/CD Optimization** > **Settings** > **Repositories*
 [11]:https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [12]:/continuous_integration/pipelines/buildkite/
 [13]:/continuous_integration/pipelines/circleci/
+[14]:/continuous_integration/pipelines/teamcity/
+[15]:/continuous_integration/pipelines/custom/
