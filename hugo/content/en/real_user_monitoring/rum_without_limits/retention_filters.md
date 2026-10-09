@@ -221,7 +221,7 @@ To **find sessions with indexed APM traces** in the RUM Explorer, query `@sessio
 
 Consider a configuration where you set up a unique RUM retention filter configured as follows:
 
-{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:80%" >}}
 
 If you have configured the SDK to sample 40% of traces, then the outcome is the following:
 
@@ -235,9 +235,40 @@ Cross-product retention filters are also available on the <a href="/real_user_mo
 
 <div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
 
+## Suggested retention filters
+
+Datadog provides suggested retention filters for each RUM application. The suggestions are based on the application's platform, enabled capabilities, and ingested data. They cover these categories:
+
+- Dynamic session sampling
+- Added capabilities, such as Session Replay and RUM Profiling
+- Errors
+- Slow performance
+- User activity
+- Specific application versions
+
+{{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="The Recommended Filters sidepanel, with suggested retention filters grouped by category and an Add Filter button for each." style="width:80%" >}}
+
+<div class="alert alert-info">Performance-based suggestions require AI features to be enabled for your organization.</div>
+
+For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days and refreshes them every Monday at 06:00 UTC. The available suggestions depend on the application's platform.
+
+Datadog marks a suggestion as configured when a matching retention filter exists, including filters that existed before you opened the panel, so you can see which suggestion your configuration already covers.
+
+To review and apply suggestions:
+
+1. Go to the application's {{< ui >}}Retention Filters{{< /ui >}} page.
+1. Click {{< ui >}}View All Recommendations{{< /ui >}}.
+1. Click {{< ui >}}Add Filter{{< /ui >}} next to a suggestion.
+1. Review and edit the pre-filled query and retention rate.
+1. Save the filter.
+
+Datadog adds the filter to the bottom of the custom retention filters list. Filter order determines which sessions are retained, so reorder the filter if needed. You can also dismiss suggestions that do not apply and revisit them later.
+
+Creating a filter from a suggestion requires the `RUM Retention Filters Write` permission.
+
 ## Best practices
 
-See [Retention Filter Best Practices][5].
+For suggested filter queries, retention rates, and use cases, see [Retention Filter Best Practices][5].
 
 ## API
 
