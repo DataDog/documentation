@@ -366,7 +366,7 @@ If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service 
 
 #### Declare a repository link
 
-If the entity definition contains a **full** GitHub, GitLab, or Azure DevOps URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the example below).
+If the entity definition contains a **full** repository URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the example below). Set `provider` to your source code provider: `github`, `gitlab`, `azure`, or `bitbucket`.
 
 **Example (schema version v2.2):**
 
@@ -379,8 +379,6 @@ links:
 {{< /code-block >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`.
-
-For GitLab or Azure DevOps, set `provider` to `gitlab` or `azure` and use that provider's URL for the application folder.
 
 For more granular control over which paths map to the service, declare [code locations](#declare-code-locations-schema-v3) instead.
 
