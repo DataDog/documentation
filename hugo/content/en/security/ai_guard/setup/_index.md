@@ -1,210 +1,159 @@
 ---
 title: Set Up AI Guard
-further_reading:
-- link: /security/ai_guard/
-  tag: Documentation
-  text: AI Guard
-- link: /security/ai_guard/onboarding/
-  tag: Documentation
-  text: Get Started with AI Guard
+description: Set up AI Guard to evaluate and block unsafe prompts, responses, and tool calls in your AI agents.
+aliases:
+  - /security/ai_guard/onboarding/
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Complete the following steps to set up AI Guard:
+Set up AI Guard to start evaluating agent prompts, responses, and tool calls for threats. After setup, the default policy monitors every evaluation, and you can [enable blocking][1] when you're ready.
 
-## 1. Check prerequisites
+AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
 
-Before you set up AI Guard, ensure you have everything you need:
-- While AI Guard is in Preview, Datadog needs to enable a backend feature flag for each organization in the Preview. Contact [Datadog support][1] with one or more Datadog organization names and regions to enable it.
-- Certain setup steps require specific Datadog permissions. An admin may need to create a new role with the required permissions and assign it to you:
-  | Permission                                    | Type  | Description                                                                                                                                                                                                     |
-  |-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | **AI Guard Evaluate** (`ai_guard_evaluate`)   | Write | Required to call the AI Guard evaluate API and to create an application key with the `ai_guard_evaluate` scope.                                                                                                 |
-  | **AI Guard View** (`ai_guard_view`)           | Read  | Required to view the AI Guard UI, including signals, spans, and read-only settings (service blocking policies, evaluation sensitivity, tool policies, tool allowlist). Also required to report false positives. |
-  | **AI Guard Write** (`ai_guard_write`)         | Write | Required to modify AI Guard configuration, including blocking policies, sensitive data scanning, tool policies, tool blocking, tool allowlist, and evaluation sensitivity thresholds.                           |
-  | **User Access Manage** (`user_access_manage`) | Write | Required to create a restricted dataset that [limits access to AI Guard spans](#limit-access) with Data Access Control.                                                                                         |
+AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for every method. In step 3, you choose the method that fits your agent's language and libraries.
 
-### Usage limits
+## 1. Check prerequisites {#prerequisites}
 
-The AI Guard evaluator API has the following usage limits:
-- 1 billion tokens evaluated per day.
-- 12,000 requests per minute, per IP.
+Confirm you have the permissions and components AI Guard needs.
 
-If you exceed these limits, or expect to exceed them soon, contact [Datadog support][1] to discuss possible solutions.
+<!-- TODO: Confirm that GA organizations don't need a backend feature flag enabled. If they do, add it back here as a requirement. -->
+
+### Permissions
+
+Some setup steps require specific Datadog permissions. An admin might need to create a role with these permissions and assign it to you:
+
+| Permission | ID | Type | Description |
+| --- | --- | --- | --- |
+| {{< ui >}}AI Guard Evaluate{{< /ui >}} | `ai_guard_evaluate` | Write | Required to call the AI Guard evaluation API and to create an application key with the `ai_guard_evaluate` scope. |
+| {{< ui >}}AI Guard View{{< /ui >}} | `ai_guard_view` | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings. |
+| {{< ui >}}AI Guard Write{{< /ui >}} | `ai_guard_write` | Write | Required to change AI Guard configuration, such as policies and sensitive data scanning. |
+| {{< ui >}}User Access Manage{{< /ui >}} | `user_access_manage` | Write | Required only to restrict access to AI Guard spans with Data Access Control. |
+
+### Datadog Agent and Datadog SDK
+
+Every integration method runs on the Datadog SDK and sends AI Guard data through the Datadog Agent. The Agent must be running and reachable from your application.
+
+AI Guard requires these minimum Datadog SDK versions:
+
+| Language | Datadog SDK | Minimum version |
+| --- | --- | --- |
+| Python | `dd-trace-py` | 3.19.0. |
+| Node.js | `dd-trace-js` | 5.69.0. |
+| Java | `dd-trace-java` | 1.54.0. |
+| Ruby | `dd-trace-rb` | 2.25.0. |
+
+Some integrations require a later version. Each integration page lists its own requirements.
+
+<div class="alert alert-info">
+<p>By default, running the Datadog SDK and the Agent turns on other Datadog products, which are billed separately from AI Guard:</p>
+<ul>
+<li>The Datadog SDK sends full APM traces. To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>.</li>
+<li>The Agent reports Infrastructure Monitoring data. To turn it off, set <code>DD_INFRASTRUCTURE_MODE=none</code>. This setting requires Agent 7.77.0 or later.</li>
+</ul>
+<p>AI Guard spans are billed either way.</p>
+</div>
 
 ## 2. Create API and application keys {#create-keys}
 
-To use AI Guard, you need at least one API key and one application key set in your Agent services, usually using environment variables. Follow the instructions at [API and Application Keys][2] to create both.
+AI Guard authenticates every evaluation with a Datadog API key and application key, so your application needs both before it can send evaluations.
 
-When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope. The user creating the application key must have the [AI Guard Evaluate permission](#1-check-prerequisites).
+1. Create an API key and an application key. See [API and Application Keys][2].
+1. When you add [scopes][3] to the application key, add the `ai_guard_evaluate` scope. The user who creates the application key must have the {{< ui >}}AI Guard Evaluate{{< /ui >}} permission.
+1. Store both keys where your application reads its environment variables. Each integration page lists the variables to set.
 
 ## 3. Instrument your application {#instrumentation}
 
-Choose an instrumentation approach based on your framework and language:
+Instrument each agent with the integration method that matches its language and libraries, so AI Guard can evaluate LLM traffic.
 
-### SDK
+AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values. Use the same service name that the agent reports to APM. Discover reports protection status for that service, and policies apply to that service and environment.
 
-The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript, Java, Ruby) to call the AI Guard REST API and monitor activity in real time in Datadog.
+### Find the agent language and libraries
 
-### Automatic integrations
+If you don't know which language or LLM libraries an agent uses, check its APM service page.
 
-[Automatic integrations][10] provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog SDK, AI Guard evaluations are automatically performed without requiring any code changes.
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} and open the agent's service page.
+1. Find the language icon next to the service name.
+1. Open the {{< ui >}}operation{{< /ui >}} dropdown. Operations such as `openai.request`, `anthropic.request`, `langchain.request`, or `litellm.request` show which LLM libraries the agent calls.
 
-| Language | Supported Frameworks         |
-|----------|------------------------------|
-| Python   | LangChain, OpenAI, Anthropic |
-| Node.js  | AI SDK, OpenAI, Anthropic    |
-| Ruby     | RubyLLM                      |
+### Choose an integration method
 
-### Manual integrations
+Choose the first integration method that applies to the agent:
 
-[Manual integrations][11] require additional configuration to enable AI Guard protection for supported frameworks.
+1. If the agent's LLM traffic goes through LiteLLM Proxy, use the [LiteLLM Proxy integration][4].
+1. If the agent uses a supported framework or LLM client, use the matching [automatic integration][5] or [manual integration][6].
+1. If no integration covers the agent's framework, but the agent is written in Python, Node.js, Java, or Ruby, use the [SDK][7].
+1. If none of these apply, use the [HTTP API][8]. HTTP API evaluations don't create spans, so they don't appear in Datadog. Skip the remaining setup steps.
 
-| Language   | Supported Frameworks           |
-|------------|--------------------------------|
-| Python     | Amazon Strands, LiteLLM Proxy  |
+**Supported frameworks**
 
-### HTTP API
+| Framework or library | Language | Method |
+| --- | --- | --- |
+| LangChain | Python | Automatic integration. |
+| OpenAI SDK | Python, Node.js | Automatic integration. |
+| Anthropic SDK | Python, Node.js | Automatic integration. |
+| AI SDK | Node.js | Automatic integration. |
+| RubyLLM | Ruby | Automatic integration. |
+| Amazon Strands | Python | Manual integration. |
+| LiteLLM Proxy | Python | Manual integration. |
 
-The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directly with any HTTP client, for languages or environments the SDK doesn't cover.
+## 4. Create a retention filter for AI Guard spans {#retention-filter}
 
-## 4. Create a custom retention filter {#retention-filter}
+Create a retention filter so Datadog keeps every AI Guard span. APM samples spans by default, so without a retention filter, Datadog can drop AI Guard spans and they never appear in AI Guard, even though AI Guard is still evaluating your agent's requests.
 
-To view AI Guard evaluations in Datadog, create a custom [retention filter][5] for AI Guard-generated spans. Follow the linked instructions to create a retention filter with the following settings:
-- {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard`
-- {{< ui >}}Span rate{{< /ui >}}: 100%
-- {{< ui >}}Trace rate{{< /ui >}}: 100%
+Create a [custom retention filter][9] with these settings:
 
-## 5. Configure AI Guard policies {#configure-policies}
+- {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard`.
+- {{< ui >}}Span rate{{< /ui >}}: 100%.
+- {{< ui >}}Trace rate{{< /ui >}}: 100%.
 
-AI Guard provides settings to control how evaluations are enforced, how sensitive threat detection is, and whether sensitive data scanning is enabled.
+## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
-### Configure service policies {#service-policies}
+Optionally restrict who can view AI Guard spans, because they can contain sensitive prompts, responses, and tool call data from your agents.
 
-On the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
-- [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Monitor only, or block unsafe requests
-- [{{< ui >}}Sensitive data scanning{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should scan for and redact sensitive data
-- [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): Additional information about the service that AI Guard uses during evaluation to reduce false positives
+You must have the {{< ui >}}User Access Manage{{< /ui >}} permission to complete this task.
 
-Beside {{< ui >}}Default policy{{< /ui >}}, click {{< ui >}}Edit{{< /ui >}} to set AI Guard's default behavior. To override the default behavior, click {{< ui >}}Add Service Policy{{< /ui >}}, select the service and environment you want your override to apply to, then configure the more specialized policy.
+1. In Datadog, go to [Data Access Control][10] and create a restricted dataset scoped to {{< ui >}}APM data{{< /ui >}}.
+1. Apply the filter `resource_name:ai_guard`.
+1. Grant access to the dataset to specific roles or teams.
 
-#### Blocking policy {#blocking-policy}
+## Verify the setup {#verify}
 
-By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the blocking policy for your services.
+Confirm that AI Guard is evaluating agent traffic.
 
-You can configure blocking at different levels of granularity, with more specific settings taking priority:
-- **Organization-wide**: Apply a default blocking policy to all services and environments.
-- **Per environment**: Override the organization default for a specific environment.
-- **Per service**: Override the organization default for a specific service.
-- **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+1. Send several requests through the agent.
+1. In Datadog, go to {{< ui >}}Security > AI Guard > Discover{{< /ui >}}.
+1. Find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}.
 
-#### Sensitive data scanning {#sensitive-data-scanning}
+### Troubleshooting: Traces don't appear
 
-AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. When you create or edit a policy for a service, you can set sensitive data scanning to {{< ui >}}Disabled{{< /ui >}}, {{< ui >}}Scanning{{< /ui >}}, or {{< ui >}}Scanning and redacting{{< /ui >}}.
+If expected evaluations don't appear in AI Guard, check these causes in order.
 
-When scanning is enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. With {{< ui >}}Scanning and redacting{{< /ui >}}, AI Guard also returns the replacement for each sensitive value that a rule mutates. Redaction is supported only with manual SDK integration: see [Sensitive Data Redaction][20] to configure it and apply the replacements.
+1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When it's unset, integrations don't evaluate anything, and in Node.js, Java, and Ruby, SDK calls return `ALLOW` without calling AI Guard. Set `DD_AI_GUARD_ENABLED=true`.
 
-By default, AI Guard scans for a standard set of secrets, such as AWS keys and Datadog API keys. To customize which [scanning rules][14] AI Guard uses, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], where you can enable or disable individual rules, and create scanning groups with custom rules, scoped specifically to AI Guard evaluations.
+   <!-- TODO: Confirm this cause. Replaced "AI Guard does nothing, even if your code calls the SDK," because SDK calls don't fail when AI Guard is disabled: Node.js, Java, and Ruby return `ALLOW`, and Python still calls the API. Node.js and Python were checked in the tracer source; Java and Ruby weren't re-checked. Also confirm that automatic and manual integrations evaluate nothing when the variable is unset. That part is inferred, not checked. -->
+1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
+1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
+1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See [Create a retention filter for AI Guard spans](#retention-filter).
+1. **The service or environment isn't set.** Confirm `DD_SERVICE` and `DD_ENV` are set, so AI Guard can match the agent to its policy and show it in Discover.
 
-### Block specific tools
+To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.
 
-You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Tool Blocklist{{< /ui >}}][8]. Click {{< ui >}}Add Tool Blocking Configuration{{< /ui >}}, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
+### Troubleshooting: AI Guard spans are empty
 
-### Evaluation sensitivity {#evaluation-sensitivity}
+If AI Guard spans appear but don't show evaluated messages, set `DD_TRACE_API_VERSION=v0.4` in your application environment. The Datadog SDK sends AI Guard span content only with trace API version `v0.4`.
 
-AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Evaluation Sensitivity{{< /ui >}}][7].
+<!-- TODO: confirm this still applies to current tracer versions. Source dated June 2026. -->
 
-Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
-- A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
-- A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
-
-### Add evaluation context {#evaluation-context}
-
-You can give AI Guard additional context about a service, such as its purpose and the type of data it processes. AI Guard uses this context during evaluation to better distinguish legitimate agent behavior from genuine threats, which helps reduce false positives.
-
-To add evaluation context for a service, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Click {{< ui >}}Edit{{< /ui >}} beside the default policy, or add or edit a service policy, then enter your context in the {{< ui >}}Evaluation context{{< /ui >}} field (up to 1,000 characters). For example:
-
-```text
-This is a fintech app. Requests to query account balances or initiate transfers are expected and authorized.
-```
-
-As with the [blocking policy](#blocking-policy), evaluation context follows the same precedence, with more specific settings taking priority: organization-wide, per environment, per service, then per service and environment.
-
-Use the [AI Guard Playground][19] to test how evaluation context affects the outcome of an evaluation before applying it to a service. The Playground has its own {{< ui >}}Evaluation Context{{< /ui >}} field that applies only to the conversation you're testing, so you can experiment without changing any service policy. Import an existing payload into the Playground, then add evaluation context to see how it changes the evaluation result.
-
-### Add context with your system prompt {#system-prompt-context}
-
-AI Guard evaluates the full conversation, including your system prompt, when assessing threats. Adding context about your agent's purpose, the data it handles, and the tools it is authorized to use helps AI Guard distinguish legitimate operations from genuine threats—reducing false positives without reducing security coverage.
-
-<div class="alert alert-info">To add this kind of context without modifying your application code, use the <a href="#evaluation-context">Evaluation context</a> field in your service settings instead.</div>
-
-#### What to include
-
-In your system prompt, describe:
-- **Agent purpose**: The agent's role and intended scope.
-- **Authorized data**: The categories of data the agent is expected to read, write, or export.
-- **Authorized tools**: The tools and operations the agent is permitted to call.
-
-#### Example
-
-A system prompt with minimal context is more likely to result in false positives for legitimate operations:
-
-```text
-You are a helpful assistant.
-```
-
-A system prompt with explicit context helps AI Guard evaluate intent accurately:
-
-```
-You are a financial data analyst assistant for internal employees. You are authorized to:
-- Query internal financial databases (read-only) using the `sql_query` tool.
-- Export query results to CSV or PDF using the `file_export` tool.
-- Retrieve and summarize internal financial reports.
-
-Do not access external systems or process requests unrelated to financial reporting.
-```
-
-With this context, AI Guard treats SQL queries and file exports as expected, authorized operations, and is less likely to flag them as data exfiltration or destructive tool calls.
-
-#### Limitations
-
-Do not use the system prompt to override AI Guard's security checks or to instruct AI Guard directly. AI Guard evaluates the system prompt as part of the conversation context, and ignores instructions that attempt to disable or weaken its own security checks.
-
-## 6. (Optional) Limit access to AI Guard spans {#limit-access}
-
-To restrict access to AI Guard spans for specific users, you can use [Data Access Control][9]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
-
-## Disable APM tracing
-
-To disable APM tracing on the tracer while keeping AI Guard enabled, set `DD_APM_TRACING_ENABLED=false`:
-
-{{< code-block lang="bash" >}}
-DD_AI_GUARD_ENABLED=true
-DD_APM_TRACING_ENABLED=false
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /help
+[1]: /security/ai_guard/policies/
 [2]: /account_management/api-app-keys/
 [3]: /account_management/api-app-keys/#scopes
-[4]: /agent/?tab=Host-based
-[5]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
-[6]: https://app.datadoghq.com/security/ai-guard/settings/services
-[7]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
-[8]: https://app.datadoghq.com/security/ai-guard/settings/tools
-[9]: https://app.datadoghq.com/organization-settings/data-access-controls/
-[10]: /security/ai_guard/setup/automatic_integrations/
-[11]: /security/ai_guard/setup/manual_integrations/
-[12]: /security/ai_guard/setup/sdk/
-[13]: /security/ai_guard/setup/http_api/
-[14]: /security/sensitive_data_scanner/scanning_rules/
-[15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
-[19]: https://app.datadoghq.com/security/ai-guard/playground
-[20]: /security/ai_guard/setup/sensitive_data_redaction/
+[4]: /security/ai_guard/setup/manual_integrations/#litellm-proxy
+[5]: /security/ai_guard/setup/automatic_integrations/
+[6]: /security/ai_guard/setup/manual_integrations/
+[7]: /security/ai_guard/setup/sdk/
+[8]: /security/ai_guard/setup/http_api/
+[9]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+[10]: https://app.datadoghq.com/organization-settings/data-access-controls/
