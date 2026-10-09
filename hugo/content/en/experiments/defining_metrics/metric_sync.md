@@ -194,7 +194,7 @@ Store your Datadog API and application keys as GitHub Actions secrets. If your o
 
 A `sync_tag` identifies the set of metric definitions that are managed together. Use a stable `sync_tag` for each repository, team, or metric domain that you want to manage independently. For example, a growth team and a checkout team can sync metrics from different repositories by using different `sync_tag` values, such as `growth-metrics` and `checkout-metrics`.
 
-Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Metric aggregations use `warehouse_metric_source_sync_id` to reference warehouse metric sources and `measure_sync_id` to reference measures. The source ID is required because measure IDs are scoped to their warehouse metric source.
+Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Metric aggregations use `warehouse_metric_source_sync_id` to select a warehouse metric source. Each aggregation also selects a declared measure, each row, or a subject mapping. See [Measure references][4].
 
 ### Top-level fields
 
@@ -274,7 +274,7 @@ Add the aggregation field that matches the metric type:
 
 | Field | Required | Description |
 | ----- | -------- | ----------- |
-| `operation` | Yes | Aggregation operation, such as `sum`, `average`, `count`, or `uniqueSubjects`. |
+| `operation` | Yes | Aggregation operation, such as `sum`, `average`, `count`, or `countDistinctValue`. |
 | `measure` | Yes | Measure reference. |
 | `timeframe_start_value` | No | Start offset for the metric timeframe. |
 | `timeframe_end_value` | No | End offset for the metric timeframe. |
@@ -287,23 +287,23 @@ Add the aggregation field that matches the metric type:
 
 ### Ratio metric aggregation
 
-Use `ratio_metric_aggregation` to define a metric as a numerator divided by a denominator. Both `numerator` and `denominator` use the same fields as `simple_metric_aggregation`.
+Use `ratio_metric_aggregation` to define a metric as a numerator divided by a denominator. Both `numerator_aggregation` and `denominator_aggregation` use the same fields as `simple_metric_aggregation`.
 
 | Field | Required | Description |
 | ----- | -------- | ----------- |
-| `numerator` | Yes | Simple metric aggregation used as the numerator. |
-| `denominator` | Yes | Simple metric aggregation used as the denominator. |
+| `numerator_aggregation` | Yes | Aggregation used as the numerator. |
+| `denominator_aggregation` | Yes | Aggregation used as the denominator. |
 
 Example ratio metric aggregation:
 
 ```yaml
 ratio_metric_aggregation:
-  numerator:
+  numerator_aggregation:
     operation: sum
     measure:
       warehouse_metric_source_sync_id: checkout_events
       measure_sync_id: revenue
-  denominator:
+  denominator_aggregation:
     operation: count
     measure:
       warehouse_metric_source_sync_id: checkout_events
@@ -353,7 +353,22 @@ Supported operators are `IS` and `IS_NOT`. When referencing a property:
 
 ### Measure references
 
-To reference a measure defined in the same sync payload, use `warehouse_metric_source_sync_id` and `measure_sync_id`:
+Each aggregation must select a source with `warehouse_metric_source_sync_id` and exactly one of these measure selectors:
+
+| Selector | What it selects |
+| -------- | --------------- |
+| `measure_sync_id` | A measure declared in the source's `measures` list. |
+| `kind: each_record` | Each row returned by the source. No measure declaration is required. |
+| `subject_type_name` | The column mapped to a name in the source's `subject_types` list. No measure declaration is required. |
+
+Use this reference format in `simple_metric_aggregation`, both ratio components, and `percentile_metric_aggregation`. The aggregation operation determines which selector to use:
+
+- `count` requires `kind: each_record`.
+- `sum` and `average` require `measure_sync_id`.
+- `countDistinctValue` accepts `measure_sync_id` or `subject_type_name`. It cannot use `each_record`.
+- `uniqueSubjects` requires `subject_type_name`. Use `countDistinctValue` for new definitions.
+
+To select a declared measure, use its `sync_id`:
 
 ```yaml
 measure:
@@ -361,7 +376,39 @@ measure:
   measure_sync_id: revenue
 ```
 
-To reference a measure from another sync tag, include `warehouse_metric_source_sync_tag`:
+To count rows returned by the source:
+
+```yaml
+simple_metric_aggregation:
+  operation: count
+  measure:
+    warehouse_metric_source_sync_id: checkout_events
+    kind: each_record
+  timeframe_start_value: 0
+```
+
+To count distinct users, first map the `User` subject type to a column on the `checkout_events` source:
+
+```yaml
+subject_types:
+  - name: User
+    column_name: user_id
+```
+
+Then select that subject mapping in the metric:
+
+```yaml
+simple_metric_aggregation:
+  operation: countDistinctValue
+  measure:
+    warehouse_metric_source_sync_id: checkout_events
+    subject_type_name: User
+  timeframe_start_value: 0
+```
+
+`User` must exist as a subject type in the organization. The selected name must match a `subject_types[].name` entry on the referenced source.
+
+To reference a source from another sync tag, include `warehouse_metric_source_sync_tag` with any of the three selectors:
 
 ```yaml
 measure:
@@ -370,7 +417,9 @@ measure:
   measure_sync_id: revenue
 ```
 
-To reference an existing Datadog measure directly, use `warehouse_metric_measure_id`.
+Run `validate` for local checks, then run `plan` to check references against Datadog and preview changes. Local validation checks source mappings in the submitted files. An explicit tag equal to the file's `sync_tag` still checks local mappings when that source is in the submitted files. For external sources, `plan` checks that the source and selected measure exist.
+
+The sync API does not support `warehouse_metric_measure_id`. Replace raw measure IDs with a source and one of the selectors above.
 
 ## Troubleshooting
 
@@ -385,3 +434,4 @@ To reference an existing Datadog measure directly, use `warehouse_metric_measure
 [1]: /experiments/guide/connecting_a_data_warehouse/
 [2]: /account_management/rbac/permissions/#product-analytics
 [3]: /account_management/api-app-keys/
+[4]: #measure-references
