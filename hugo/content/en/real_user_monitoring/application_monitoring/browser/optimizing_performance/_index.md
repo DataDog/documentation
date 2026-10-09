@@ -5,6 +5,9 @@ aliases:
   - /real_user_monitoring/browser/monitoring_performance_vitals/
   - /real_user_monitoring/browser/optimizing_performance/
 further_reading:
+  - link: "/synthetics/browser_tests/"
+    tag: "Documentation"
+    text: "Configure browser tests in Synthetic Monitoring"
   - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
     text: "Interactive Lab: Optimize Frontend Performance with Datadog RUM Browser Monitoring"
@@ -100,6 +103,59 @@ You can select another sample event using the dropdown in the top left, and expa
 For deeper root cause analysis, use browser profiling alongside RUM to identify what JavaScript or rendering activity is causing slow or unresponsive experiences. Profiling reveals performance issues that aren't always visible through Core Web Vitals alone. To get started, [ensure that browser profiling is enabled in your RUM SDK configuration][12].
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" alt="Browser profiling example when analyzing an event sample." style="width:100%;" >}}
 
+## Lighthouse audits
+
+Lighthouse is an automated tool that grades your pages on performance, accessibility, best practices, and SEO, so you can find and fix what slows down or frustrates users.
+
+A [browser Synthetic test][7] can run a [Lighthouse][15] audit and send the resulting scores to the matching RUM view. Lighthouse provides lab measurements that complement the real-user field data on this page, so you can track frontend quality on a schedule. The audit runs once per test run, on the final URL the test reaches.
+
+Each audit reports five category scores from 0 to 100:
+
+- **Performance**: measures how quickly the page loads, displays content, and becomes interactive.
+- **Accessibility**: measures how well people with disabilities can navigate and use the page, based on automated checks.
+- **Best Practices**: measures whether the page follows modern standards for security, browser compatibility, and code quality.
+- **SEO**: measures whether search engines can discover, understand, and index the page.
+- **Agentic**: measures how well AI agents can understand, navigate, and interact with the page.
+
+### Prerequisites
+
+- A [browser Synthetic test][7] that runs on **desktop Chrome** from a managed (Datadog) location.
+- [RUM data collection enabled on the test][16], with a RUM application selected. The test injects the RUM Browser SDK into the page it loads, so the tested site does not need to be instrumented for RUM separately.
+- The test must be saved and run on a schedule or on demand. Audits do not run while you create or record a test, or on runs triggered from CI/CD.
+
+### Set up a Lighthouse audit
+
+You can enable Lighthouse audits from a RUM application or from Synthetic Monitoring:
+
+- **From a RUM application**: on the Optimization page, select a view that has no Lighthouse data yet, then select {{< ui >}}Create a Synthetics test{{< /ui >}} in the {{< ui >}}Lighthouse{{< /ui >}} panel's empty state. RUM data collection and the Lighthouse audit are enabled automatically, and the test is linked to the RUM application. Finish configuring the test and save it.
+- **From Synthetic Monitoring**: create or edit a [browser test][7], enable [RUM data collection][16] and select your RUM application, then turn on {{< ui >}}Run Lighthouse audit{{< /ui >}} (available only when RUM data collection is enabled). Record the steps that reach the page you want to audit, then save the test.
+
+### View results
+
+After the test runs, Lighthouse results appear in two places under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][6]. The Lighthouse panel and table are scoped by application, view, and time frame only; other page filters, such as browser, country, or team, do not apply to them.
+
+On the **Optimization page**, when a single view is selected, the {{< ui >}}Lighthouse{{< /ui >}} panel shows that view's most recent audit in the selected time frame: the five category score gauges, the lab metrics Lighthouse measured, which audits failed, and how the scores trend over time. From the panel, you can open the report in the Lighthouse viewer, download it as JSON, or open the originating Synthetic test result.
+
+{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-panel.png" alt="The Lighthouse panel on the RUM Optimization page showing the five category score gauges, lab metrics, passed and failed audit counts, and the score trend over time." style="width:100%;" >}}
+
+On the **Performance Monitoring summary page**, the {{< ui >}}Lighthouse{{< /ui >}} section shows the **Lighthouse scores by view** table, which compares scores across views. Use the percentile selector (p75 by default) to set the percentile aggregated over the audits in the selected time frame, and select a row to open the Optimization page for that view.
+
+{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-scores-by-view.png" alt="The Lighthouse scores by view table comparing category scores across RUM views, with a percentile selector." style="width:100%;" >}}
+
+### Metrics and attributes
+
+Each audited view sets the `@synthetics.lighthouse_audited` attribute to `true`. To find audited views in the [RUM Explorer][17], switch the event type to {{< ui >}}Views{{< /ui >}} and search for `@synthetics.lighthouse_audited:true`. Audited views come from Synthetic tests rather than real-user sessions, so remove any `@session.type:user` filter from the query.
+
+The category scores are available as metrics, so you can graph them on dashboards and alert on regressions with monitors:
+
+- `rum.measure.lighthouse.performance`
+- `rum.measure.lighthouse.accessibility`
+- `rum.measure.lighthouse.best_practices`
+- `rum.measure.lighthouse.seo`
+- `rum.measure.lighthouse.agentic`
+
+These metrics are tagged with `application.id` and `view.name`.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -117,3 +173,7 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [12]: /real_user_monitoring/correlate_with_other_telemetry/profiling
 [13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
 [14]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#diagnose-core-web-vitals-with-subparts
+[7]: /synthetics/browser_tests/
+[15]: https://developer.chrome.com/docs/lighthouse/overview/
+[16]: /synthetics/guide/explore-rum-through-synthetics/
+[17]: /real_user_monitoring/explorer/
