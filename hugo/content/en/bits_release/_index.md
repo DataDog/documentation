@@ -97,6 +97,8 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 - **Slack**: The pull request author is notified when a verdict is ready.
 - **Bits Release in Datadog**: The Bits Release page holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it from the link in your pull request comment. It is not in the Datadog side navigation yet.
 
+{{< img src="bits_release/bits_release_validation_timeline.png" alt="The Bits Release page for a merged pull request, showing a four-step timeline: pull request merged, deployed to production, validation started, and a passed verdict with the synthetic check and RUM error rate evidence behind it" style="width:100%;" >}}
+
 ## Billing
 
 Bits Release is free during the private preview. It does not consume [AI Credits][8], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
