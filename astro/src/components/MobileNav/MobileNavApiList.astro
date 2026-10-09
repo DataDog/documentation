@@ -10,18 +10,28 @@
  * of hand-written pages comes first, mirroring the desktop side nav, then each
  * category; the section owning the current page starts expanded so users can
  * browse and navigate without leaving the page.
+ *
+ * Only the active category's operations are server-rendered. Every other
+ * category ships an empty list tagged with `data-category-slug` and
+ * `data-category-href`, which `MobileNavApiListLoader` fills on expand from
+ * `/api/mobile-nav.json`. Rendering all ~1,900 operation links on every page
+ * made the HTML large enough to hurt first paint.
  */
-import type { ApiCategory } from "@lib/api/schemas/views";
+import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
 import type { OverviewPage } from "@lib/api/overviewPages";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import SvgIcon from "@components/SvgIcon/SvgIcon.astro";
+import MobileNavOperationItems from "./MobileNavOperationItems";
+import MobileNavApiListLoader from "./MobileNavApiListLoader";
+import { mobileNavDataUrl } from "@lib/api/mobileNavData";
 
 interface Props {
-  categories: ApiCategory[];
-  activeCategorySlug?: string;
+  categories: ApiCategoryStub[];
+  /** The category owning the current page, with its operations. */
+  activeCategory?: ApiCategory;
   currentOperationSlug?: string;
   overviewPages?: OverviewPage[];
   isOverviewSection?: boolean;
@@ -30,7 +40,7 @@ interface Props {
 
 const {
   categories,
-  activeCategorySlug,
+  activeCategory,
   currentOperationSlug,
   overviewPages = [],
   isOverviewSection = false,
@@ -41,9 +51,19 @@ const cl = classListFactory(styles);
 
 const overviewHref = localizedHref(lang, "/api/latest/");
 const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
+
+const listId = "mobile-nav-api-list";
+// TODO: replace with i18n keys once Hugo has them.
+const loaderLabels = {
+  Loading: "Loading",
+  "View category page": "View category page",
+};
 ---
 
-<ul class:list={[cl("mobile-nav__list"), cl("mobile-nav__list--api")]}>
+<ul
+  id={listId}
+  class:list={[cl("mobile-nav__list"), cl("mobile-nav__list--api")]}
+>
   {
     overviewPages.length > 0 && (
       <li>
@@ -90,7 +110,7 @@ const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
   }
   {
     categories.map((category) => {
-      const isActiveCategory = category.slug === activeCategorySlug;
+      const isActiveCategory = category.slug === activeCategory?.slug;
       const categoryHref = localizedHref(lang, `/api/latest/${category.slug}/`);
       const isCategoryLandingPage = isActiveCategory && !currentOperationSlug;
       return (
@@ -110,35 +130,34 @@ const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
                 <SvgIcon src="caret-down.svg" />
               </span>
             </summary>
-            <ul class={cl("mobile-nav__sublist")}>
-              {category.operations.map((operation) => {
-                const isActiveOperation =
-                  isActiveCategory && operation.slug === currentOperationSlug;
-                return (
-                  <li>
-                    <a
-                      href={`${categoryHref}${operation.slug}/`}
-                      class:list={[
-                        cl("mobile-nav__link"),
-                        cl("mobile-nav__link--compact"),
-                        isActiveOperation && cl("mobile-nav__link--active"),
-                      ]}
-                      data-level="1"
-                      style="--depth:1"
-                      aria-current={isActiveOperation ? "page" : undefined}
-                    >
-                      {operation.summary}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            {isActiveCategory ? (
+              <ul class={cl("mobile-nav__sublist")}>
+                <MobileNavOperationItems
+                  categoryHref={categoryHref}
+                  operations={activeCategory.operations}
+                  activeOperationSlug={currentOperationSlug}
+                />
+              </ul>
+            ) : (
+              <ul
+                class={cl("mobile-nav__sublist")}
+                data-category-slug={category.slug}
+                data-category-href={categoryHref}
+              />
+            )}
           </details>
         </li>
       );
     })
   }
 </ul>
+
+<MobileNavApiListLoader
+  client:idle
+  dataUrl={mobileNavDataUrl(lang)}
+  labels={loaderLabels}
+  externalContext={{ scope: listId, entries: { list: listId } }}
+/>
 
 {
   /* Scroll the current page (operation link or active category summary, both

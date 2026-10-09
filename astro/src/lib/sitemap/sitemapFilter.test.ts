@@ -34,4 +34,13 @@ describe("isSitemapPage", () => {
       false,
     );
   });
+
+  it("excludes the mobile nav data file", () => {
+    expect(
+      isSitemapPage("https://docs.datadoghq.com/api/mobile-nav.json"),
+    ).toBe(false);
+    expect(
+      isSitemapPage("https://docs.datadoghq.com/ja/api/mobile-nav.json"),
+    ).toBe(false);
+  });
 });
