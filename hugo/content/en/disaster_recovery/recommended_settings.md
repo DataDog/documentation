@@ -15,15 +15,15 @@ Failover takes time because DNS caches must refresh and telemetry sources must r
 
 | Setting | Recommended configuration | Description |
 | --- | --- | --- |
-| A or CNAME record TTL | Set to 60 to 300 seconds. | **High impact.** Controls how long resolvers cache the record before checking for an updated value after failover. See [RFC 1035][1] (TTL field) and [RFC 2181][2] (TTL clarifications, including TTL=0 handling). |
-| Negative caching TTL | Set to 60 to 300 seconds, matching your A or CNAME record TTL. Check both the SOA record's TTL and its `MINIMUM` field. | **Medium impact.** If a lookup returns NXDOMAIN (the domain does not exist) or NODATA (the requested record type does not exist) during failover, resolvers cache that response. The negative caching TTL is the lower of the SOA record's TTL and its `MINIMUM` field. See [RFC 2308][3]. |
-| CNAME chain depth | Use no more than one CNAME hop between your custom DNS record and the Datadog-managed endpoint. | **Medium impact.** Each record in the chain has its own TTL, and each hop adds a record you need to keep synchronized. |
+| A or CNAME record TTL | Set to 60-300 seconds. | **High impact.** Controls how long resolvers cache the record before checking for an updated value after failover. See [RFC 1035][1] (TTL field) and [RFC 2181][2] (TTL clarifications, including TTL=0 handling). |
+| Negative caching TTL | Set to 60-300 seconds, matching your A or CNAME record TTL. Check both the SOA record's TTL and its `MINIMUM` field. | **Medium impact.** If a lookup returns NXDOMAIN (the domain does not exist) or NODATA (the requested record type does not exist) during failover, resolvers cache that response. The negative caching TTL is the lower of the SOA record's TTL and its `MINIMUM` field. See [RFC 2308][3]. |
+| CNAME chain depth | Point your DNS record directly at the Datadog data center endpoint, with no intermediate `CNAME` records. | **Medium impact.** Each record in the chain has its own TTL, and each hop adds a record you need to keep synchronized. |
 
 ## OS and application DNS caching
 
 | Setting | Recommended configuration | Description |
 | --- | --- | --- |
-| Application DNS caching | For applications with a DNS cache, set the cache TTL to 60 to 300 seconds, matching your DNS record TTL. For JVM-based applications, configure `networkaddress.cache.ttl`. | **High impact.** Application DNS caches can retain old addresses after DNS records change. Some JVM configurations cache addresses indefinitely. Verify caching behavior for each runtime and HTTP client, including Go and Node.js clients. |
+| Application DNS caching | For applications with a DNS cache, set the cache TTL to 60-300 seconds, matching your DNS record TTL. For JVM-based applications, configure `networkaddress.cache.ttl`. | **High impact.** Application DNS caches can retain old addresses after DNS records change. Some JVM configurations cache addresses indefinitely. Verify caching behavior for each runtime and HTTP client, including Go and Node.js clients. |
 | OS DNS caching | Confirm that OS DNS cache TTLs are 300 seconds or less on hosts running telemetry senders. | **Low to medium impact.** OS DNS caches, such as `nscd`, `systemd-resolved`, and Windows DNS Client, can also increase failover time. |
 
 ## Sender and Agent behavior
@@ -42,12 +42,6 @@ Resolving DNS again can still return a cached address. Configure [DNS record TTL
 Replace `<CUSTOM_INTAKE_URL>` with the intake endpoint Datadog configures during DDR onboarding. This endpoint uses your Datadog-delegated domain (`<CUSTOMER>.mrf.datadoghq.com`). See [Set up customer-initiated DNS failover][5].
 
 In `datadog.yaml`, update the connection-reset interval settings for each telemetry type you send. Configure an interval of no more than 300 seconds. Do not set the interval to `0`, which disables periodic reconnection.
-
-| Telemetry | Setting |
-| --- | --- |
-| Metrics | `forwarder_connection_reset_interval` |
-| Logs | `logs_config.connection_reset_interval` |
-| APM traces | `apm_config.connection_reset_interval` |
 
 **Metrics** (`datadog.yaml`):
 
