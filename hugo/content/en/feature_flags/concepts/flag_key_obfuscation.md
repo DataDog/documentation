@@ -21,24 +21,11 @@ Your application continues to evaluate flags with their original keys. Obfuscati
 
 ## Compatibility and rollout
 
-Obfuscation requires a compatible SDK version. Datadog controls the rollout to compatible SDKs. The SDK handles the encoding automatically. You do not set a provider option, generate hashes, or change evaluation calls.
+Flag key obfuscation requires the browser JavaScript SDK, `@datadog/openfeature-browser`, version `2.1.0` or later. Datadog controls the rollout to compatible SDKs. The SDK handles the encoding automatically. You do not set a provider option, generate hashes, or change evaluation calls.
 
 During rollout, Datadog sends obfuscated responses only to SDKs that report support for the encoding. Other SDK versions continue to receive readable keys. Updating one application does not change the behavior of other applications still running an older SDK version.
 
 This feature applies to precomputed assignments. It does not obfuscate downloaded targeting rules for local evaluation.
-
-### Planned versions
-
-The following versions are planning targets, not confirmed releases. Confirm SDK support and Datadog rollout availability before adopting them.
-
-| Client SDK | Package | Planned minimum version |
-| --- | --- | --- |
-| Browser | `@datadog/openfeature-browser` | `2.1.0` |
-| iOS | `DatadogFlags` | `3.20.0` |
-| Android | `dd-sdk-android-flags` | `3.16.0` |
-| Dart | `datadog_flags` | `1.3.0` |
-| Flutter | `datadog_flags_flutter` | `1.3.0` |
-| Unity | `com.datadoghq.unity` | `2.1.0` |
 
 ## How flag key obfuscation works
 
@@ -62,7 +49,7 @@ Obfuscation reduces casual discovery of flag names in assignment responses. It d
 
 - Keep secrets and sensitive business logic on the server. Restrict server-only flags to the **Server** [distribution channel][1].
 - Do not put sensitive information in client-facing values. Strings and JSON objects remain readable. Boolean values can also reveal behavior.
-- If flag names in application code are a concern, choose non-descriptive flag keys. Payload obfuscation does not remove strings from browser code or mobile binaries.
+- If flag names in application code are a concern, choose non-descriptive flag keys. Payload obfuscation does not remove strings from browser code.
 - Treat client-visible values, identifiers, telemetry, and application behavior as inspectable. Hashing flag keys does not conceal these other sources of information.
 - Enforce sensitive access decisions on the server. Obfuscation does not prevent a modified client from changing its behavior.
 

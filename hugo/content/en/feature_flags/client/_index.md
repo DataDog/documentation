@@ -34,7 +34,7 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
   {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
 
-Compatible SDK versions support [flag key obfuscation][2] for precomputed assignments without additional provider configuration.
+The browser JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscation][2] for precomputed assignments in version `2.1.0` or later. No additional provider configuration is required.
 
 ## Telemetry options by platform
 
