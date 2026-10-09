@@ -2,6 +2,8 @@
 title: Integration Guides
 disable_toc: true
 private: true
+aliases:
+    - /integrations/guide/servicenow-service-graph-connector-setup/
 cascade:
     algolia:
         rank: 20
@@ -86,7 +88,6 @@ cascade:
 {{< header-list header="ServiceNow guides" >}}
    {{< nextlink href="integrations/guide/servicenow-itom-itsm-setup" >}}Set up ServiceNow ITOM and ITSM{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-cmdb-enrichment-setup" >}}Set up ServiceNow CMDB Enrichment{{< /nextlink >}}
-   {{< nextlink href="integrations/guide/servicenow-service-graph-connector-setup" >}}Set up ServiceNow Service Graph Connector{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="Database guides" >}}
