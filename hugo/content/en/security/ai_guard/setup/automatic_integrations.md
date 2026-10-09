@@ -20,10 +20,12 @@ Automatic integrations work only with specific packages and versions. Check the 
 | Python | LangChain | 0.1.20 or later. | `dd-trace-py` 3.19.0 or later. |
 | Python | OpenAI | 1.102.0 or later. | `dd-trace-py` 4.10.0 or later. |
 | Python | Anthropic | 0.28.0 or later. | `dd-trace-py` 4.11.0 or later. |
-| Node.js | AI SDK | v6. | `dd-trace-js` 5.95.0 or later. |
+| Node.js | AI SDK | v6. | `dd-trace-js` 5.96.0 or later. |
 | Node.js | OpenAI | 4.87.0 or later. | `dd-trace-js` 5.105.0 or later. |
 | Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later in the v5 release line, or 6.11.0 or later. |
-| Ruby | RubyLLM | 1.0.0 or later. | `dd-trace-rb` 2.28.0 or later. |
+| Ruby | RubyLLM | 2.0.0 or later. With `dd-trace-rb` 2.28.0 through 2.43.x, 1.0.0 or later. | `dd-trace-rb` 2.28.0 or later. |
+
+<!-- TODO: Confirm the RubyLLM package versions. Changed from "1.0.0 or later", because current dd-trace-rb sets the RubyLLM minimum to 2.0.0 (`MINIMUM_VERSION` in `lib/datadog/ai_guard/contrib/ruby_llm/integration.rb`, checked). The claim that the minimum changed in dd-trace-rb 2.44.0, so 2.28.0 through 2.43.x still support RubyLLM 1.0.0, comes from the v2.44.0 release notes as reported in a source review and wasn't re-checked. -->
 
 <!-- TODO: Confirm the Node.js Anthropic minimum. dd-trace-js v5.122.0 and v6.11.0 both shipped 2026-08-17, and both release notes list Anthropic AI Guard support. -->
 
@@ -89,7 +91,13 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
 
    - **Python**: Run the application with `ddtrace-run`, or add `import ddtrace.auto` as the first import in the application.
    - **Node.js**: Start the application with `node --require dd-trace/init`, or call `require('dd-trace').init()` before any other module loads.
-   - **Ruby**: Add `require 'datadog/auto_instrument'` after the application requires its supported libraries.
+   - **Ruby**: Enable the RubyLLM integration in your Datadog configuration. RubyLLM isn't instrumented automatically, so `require 'datadog/auto_instrument'` alone doesn't enable it:
+
+     ```ruby
+     Datadog.configure do |config|
+       config.ai_guard.instrument :ruby_llm
+     end
+     ```
 
    For other loading options, see [tracing setup for your language][5].
 

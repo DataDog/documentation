@@ -52,11 +52,19 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
 1. Set these environment variables in the application's environment:
 
-   - `DD_AI_GUARD_ENABLED=true`. Without this value, the SDK evaluates nothing.
+   - `DD_AI_GUARD_ENABLED=true`.
    - `DD_API_KEY=<DATADOG_API_KEY>`.
    - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
    - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
    - `DD_ENV=<ENVIRONMENT>`.
+
+   <!-- TODO: Confirm the warning below for Java and Ruby. Replaced "Without this value, the SDK evaluates nothing," because the SDK doesn't fail: in Node.js, Java, and Ruby, a disabled SDK returns `ALLOW` without calling AI Guard. Node.js was checked in the dd-trace-js source (`noop.js` returns `ALLOW`, "AI Guard is not enabled"). Java and Ruby are from a source review that wasn't re-checked (dd-trace-java `NoOpEvaluator`, dd-trace-rb `no_op_result.rb`). Python is excluded because its `evaluate` method calls the API whether or not the variable is set (checked in dd-trace-py `ddtrace/aiguard/_api_client.py`). -->
+
+   {% if includes($prog_lang, ["node_js", "java", "ruby"]) %}
+   {% alert level="warning" %}
+   If `DD_AI_GUARD_ENABLED` isn't `true`, the SDK doesn't call AI Guard. The evaluate method returns `ALLOW` for every request, so unsafe requests proceed without any evaluation.
+   {% /alert %}
+   {% /if %}
 
    <!-- TODO: confirm whether the application must start with the Datadog SDK loaded, for example with `ddtrace-run` or `dd-trace/init`, for AI Guard spans to reach Datadog. -->
 
@@ -121,6 +129,8 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    {% if equals($prog_lang, "node_js") %}
    ```javascript
    import tracer from 'dd-trace'
+
+   tracer.init()
 
    // Evaluate a user prompt before the model call.
    let result = await tracer.aiguard.evaluate([
@@ -207,9 +217,15 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
    # Evaluate a tool call before the agent runs the tool.
    result = Datadog::AIGuard.evaluate(
-     Datadog::AIGuard.assistant(id: "call_1", tool_name: "shell", arguments: '{"command": "shutdown"}')
+     Datadog::AIGuard.assistant do |message|
+       message.tool_call(name: "shell", id: "call_1", arguments: '{"command": "shutdown"}')
+     end
    )
    ```
+
+   With `dd-trace-rb` versions earlier than 2.44.0, pass the tool call as keywords instead: `Datadog::AIGuard.assistant(tool_name: "shell", id: "call_1", arguments: '{"command": "shutdown"}')`.
+
+   <!-- TODO: Confirm the Ruby tool-call example runs on dd-trace-rb 2.44.0 or later. Changed from `Datadog::AIGuard.assistant(id:, tool_name:, arguments:)` to the block form, because dd-trace-rb 2.44.0 changed the method signature to `assistant(content: nil, &block)` and the keyword form raises an error. The `assistant` and `tool_call(name:, id:, arguments:)` signatures were checked in the dd-trace-rb source at v2.43.0 and v2.44.0, but the block usage (`do |message| ... end`) is inferred and wasn't run. Also confirm the keyword form still works on 2.25.0 through 2.43.x. -->
 
    To evaluate images, build the message content with a block:
 

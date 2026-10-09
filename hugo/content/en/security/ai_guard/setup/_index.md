@@ -131,7 +131,9 @@ Confirm that AI Guard is evaluating agent traffic.
 
 If expected evaluations don't appear in AI Guard, check these causes in order.
 
-1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When it's unset, AI Guard does nothing, even if your code calls the SDK. Set `DD_AI_GUARD_ENABLED=true`.
+1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When it's unset, integrations don't evaluate anything, and in Node.js, Java, and Ruby, SDK calls return `ALLOW` without calling AI Guard. Set `DD_AI_GUARD_ENABLED=true`.
+
+   <!-- TODO: Confirm this cause. Replaced "AI Guard does nothing, even if your code calls the SDK," because SDK calls don't fail when AI Guard is disabled: Node.js, Java, and Ruby return `ALLOW`, and Python still calls the API. Node.js and Python were checked in the tracer source; Java and Ruby weren't re-checked. Also confirm that automatic and manual integrations evaluate nothing when the variable is unset. That part is inferred, not checked. -->
 1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
 1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
 1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See [Create a retention filter for AI Guard spans](#retention-filter).

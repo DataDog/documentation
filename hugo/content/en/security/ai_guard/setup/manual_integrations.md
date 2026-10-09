@@ -99,7 +99,7 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
 **What's next?** [Create a retention filter for AI Guard spans][5], optionally [limit access to AI Guard spans][6], then [verify the setup][7].
 
-## Enable LiteLLM Proxy integrations
+## Enable LiteLLM Proxy integrations {#litellm-proxy}
 
 Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluates the LLM traffic of every agent that routes through the proxy, whatever language the agent uses.
 
