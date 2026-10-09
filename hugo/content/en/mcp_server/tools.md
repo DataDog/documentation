@@ -1832,6 +1832,55 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 - Run a traceroute from host `prod-web-01` to `api.example.com`.
 - Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
+## Observability Pipelines
+
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+
+<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
+
+### `list_observability_pipelines`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
+
+- How many pipelines do we have, and how many of them are metrics pipelines?
+- Find the ID of the `prod-agent-logs` pipeline.
+- Which pipelines were modified in the last week?
+
+### `describe_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
+
+- Explain what the `prod-agent-logs` pipeline does.
+- Where are logs dropped in my Splunk forwarding pipeline?
+- Are there redundant or expensive processors in pipeline `abc-123-def`?
+
+### `get_observability_pipeline_component_schema`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Without arguments, returns the available source, processor, and destination types. With `types`, returns the fields of each requested component, including which are required, their types, and allowed values. The schema can lag behind the server, so check assembled configurations with `validate_observability_pipeline`.
+
+- Which sources and destinations are available in Observability Pipelines?
+- What fields are required for the `splunk_hec` source and the `amazon_s3` destination?
+- What options does the `sample` processor support?
+
+### `validate_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns all validation errors so the agent can fix the configuration and validate it again.
+
+- Validate this pipeline configuration before I create it.
+- Check this pipeline configuration for errors.
+
+### `create_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Deploy`*\
+Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines. The new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration fails validation, the tool returns the validation errors.
+
+- Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
+- Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
+
 ## Onboarding
 
 Agentic onboarding tools for guided Datadog setup and configuration.
@@ -3259,6 +3308,10 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [84]: /account_management/governance_console/
 [85]: /security/code_security/iac_security/custom_rules/
 [86]: /infrastructure/resource_catalog/
+[87]: /observability_pipelines/
+[88]: /api/latest/observability-pipelines/
+[89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
+[90]: /observability_pipelines/configuration/install_the_worker/
 
 ## Further reading
 

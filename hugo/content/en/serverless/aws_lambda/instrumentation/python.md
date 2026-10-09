@@ -423,6 +423,8 @@ To configure Datadog using SST v3, follow these steps:
 
 ## Durable Function
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+
 {{% svl-lambda-durable-function %}}
 
 ## What's next?

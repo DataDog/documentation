@@ -19,6 +19,25 @@ DDR uses an active-passive model: your secondary site stays in sync but passive 
 
 DDR also lets you run periodic disaster recovery drills to test your ability to recover from outages and to meet your business and regulatory compliance needs.
 
+## How DDR works
+
+DDR has two independent parts. Both are required for failover:
+
+* **Organization synchronization**: Datadog regularly replicates dashboards, monitors, users, notebooks, and other resources from your primary organization to a secondary organization in another region. You're responsible for initial setup, including creating the secondary organization, configuring SSO, and setting up cloud integrations.
+* **Traffic failover**: When your primary region is unavailable, your Agents and other telemetry sources must send data to the secondary region. Datadog recommends customer-managed DNS failover to redirect this traffic. For other failover options, contact your Datadog Account Team.
+
+## What DDR supports
+
+| Category | Supported | Not supported |
+|----------|-----------|---------------|
+| Telemetry | APM traces, logs, metrics, processes, profiling, and Synthetics | Other telemetry types (such as RUM); senders that don't re-resolve DNS or cache DNS indefinitely |
+| Assets and configurations | Users, roles, dashboards, monitors, log configurations, and other resources [supported by Datadog Sync CLI][9] | Cloud SIEM detection rules and signals configuration; Observability Pipelines configurations (pipelines, processors, destinations) |
+| Integrations | Agent and cloud integrations (AWS, Azure, GCP) | Automatically syncing integration settings and credentials between orgs |
+
+**Telemetry sources:** DDR supports Agent-based sources and supported non-Agent sources, such as OpenTelemetry Collector. Non-Agent sources must meet the same DNS re-resolution requirements as the Agent.
+
+**Integration setup:** Manually configure integrations and credentials in your secondary org. See [Set up access, integrations, syncing, and agents](#2-set-up-access-integrations-syncing-and-agents).
+
 ## Prerequisites 
 
 The minimum Datadog Agent version you need depends on which products you use:

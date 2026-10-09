@@ -48,7 +48,10 @@ Each pipeline exports continuously and independently of the others.
 
 - Product Analytics is enabled on the application (or RUM, or both).
 - The Datadog integration for your cloud provider is set up: [Amazon Web Services][6], [Azure][7], or [Google Cloud][8].
-- Your Datadog user has the `rum_write_archives` permission. See [Role Based Access Control][1].
+- Your Datadog user has the read permission for the cloud integration corresponding to your destination. See [Role Based Access Control][1]. Read permissions for each integration are:
+    - Amazon S3: `aws_configuration_read`
+    - Azure Blob Storage: `azure_configuration_read`
+    - Google Cloud Storage: `gcp_configuration_read`
 
 ## Set up an export pipeline
 
