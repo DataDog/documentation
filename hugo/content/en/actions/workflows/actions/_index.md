@@ -17,9 +17,7 @@ further_reading:
 ---
 
 {{< site-region region="gov2" >}}
-{{< callout url="#" btn_hidden="true" header="Preview" respect-site-support="false" >}}
-Workflow Automation is in Preview on the US2-FED site.
-{{< /callout >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
 {{< /site-region >}}
 
 Datadog provides a suite of workflow actions that are not associated with a specific tool or integration. These actions give you more control over your workflows by allowing you to do things like:
