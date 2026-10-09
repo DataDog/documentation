@@ -211,7 +211,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. Verify the installation
 
-Open the [Kubernetes Explorer][9] and filter by your OpenTelemetry cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
+Open the [Kubernetes Explorer][9] and filter by your OpenTelemetry cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. To also populate **Custom Resources > Resources**, see [Collect custom resources][17].
 
 #### 5. Correlate logs, metrics, and traces with Kubernetes Explorer (optional)
 
@@ -278,6 +278,7 @@ For a complete application-telemetry Collector example, see the [DaemonSet colle
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
 [15]: /account_management/api-app-keys/#api-keys
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
+[17]: /containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube Stack" %}}
@@ -388,7 +389,7 @@ Both collectors default to limits of `500m` CPU and `1Gi` memory, and requests o
 
 #### Verify the installation
 
-Open the [Kubernetes Explorer][8] and filter by your cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
+Open the [Kubernetes Explorer][8] and filter by your cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. To also populate **Custom Resources > Resources**, see [Collect custom resources][9].
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
 [2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
@@ -398,6 +399,7 @@ Open the [Kubernetes Explorer][8] and filter by your cluster name. All core Kube
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/orchestration/overview
+[9]: /containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
 {{< /tabs >}}

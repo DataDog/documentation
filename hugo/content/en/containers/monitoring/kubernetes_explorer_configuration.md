@@ -254,9 +254,55 @@ For the other CRDs, follow these steps to collect the custom resources that thes
       ```
 
    {{% /tab %}}
+   {{% tab "OpenTelemetry" %}}
+
+   When you populate Kubernetes Explorer with the [OpenTelemetry Collector][1] or the [OpenTelemetry Kube Stack][2], custom resources are not collected automatically. List each custom resource in the `k8sobjects` receiver and grant the collector read access to it. The `kubernetesObjects` preset appends the objects you list to the core resources it already collects.
+
+   The CRD must be installed in the cluster before you deploy the collector.
+
+   1. Grant the collector read access to each custom resource. Add a top-level `clusterRole.rules` entry that grants the `get`, `list`, and `watch` verbs on the resource. The following example grants access to Argo Rollouts and Datadog custom resources:
+
+      ```yaml
+      clusterRole:
+        rules:
+          - apiGroups: ["argoproj.io"]
+            resources: ["rollouts"]
+            verbs: ["get", "list", "watch"]
+          - apiGroups: ["datadoghq.com"]
+            resources:
+              - datadoginstrumentations
+            verbs: ["get", "list", "watch"]
+      ```
+
+   1. Add each custom resource to the receiver's `objects` list. For each resource, add two entries: one with `mode: pull` for periodic full snapshots, and one with `mode: watch` for real-time updates. Set `name` to the resource's plural name and `group` to its API group.
+
+      ```yaml
+      k8sobjects:
+        interval: 3m
+        objects:
+          - name: rollouts
+            group: argoproj.io
+            mode: watch
+          - name: rollouts
+            group: argoproj.io
+            mode: pull
+          - name: datadoginstrumentations
+            group: datadoghq.com
+            mode: watch
+          - name: datadoginstrumentations
+            group: datadoghq.com
+            mode: pull
+      ```
+
+   1. Upgrade your Helm release with the updated values file.
+
+   [1]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrycollector#enable-kubernetes-explorer
+   [2]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrykubestack#enable-kubernetes-explorer
+
+   {{% /tab %}}
    {{< /tabs >}}
 
-   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+   For the Datadog Agent, each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
 1. In the modal, under **Select indexed fields for filtering/sorting**, select the fields you want to index from the custom resource for filtering and sorting. For some CRDs, Datadog provides a default configuration. You can select additional fields if needed.
 
