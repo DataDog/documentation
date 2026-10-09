@@ -67,7 +67,9 @@ Use sequential analysis when flexibility matters more than maximizing power for 
 
 Sequential hybrid analysis combines sequential and fixed-sample analysis. While the experiment is running, Datadog uses a sequential test so you can monitor results continuously. When the experiment reaches its target duration, Datadog switches to a fixed-sample test, which provides tighter intervals than the sequential test for the final decision. Before launching the experiment, set a target duration in the experiment's [statistical analysis plan][1].
 
-To combine the two methods while controlling the false positive rate, sequential hybrid analysis splits the significance level (α) evenly between the two tests. Each test runs at α/2, so each phase uses a slightly more conservative version of its method. The tradeoffs are:
+To control the false positive rate, sequential hybrid analysis splits the significance level (α) evenly between the two tests. Each test runs at α/2, so intervals are about 10% to 15% wider than with sequential  or fixed-sample analysis alone.
+
+You must set a target duration before launching the experiment.
 
 - Intervals in each phase are about 10% to 15% wider than with sequential or fixed-sample analysis alone.
 - You must set a target duration before launching the experiment.
