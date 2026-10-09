@@ -19,7 +19,6 @@ products:
   - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
-site_support_id: workflows
 ---
 
 {{< site-region region="gov2" >}}

@@ -30,13 +30,5 @@ cascade:
     lang: en
   aliases:
     - /api/latest/service-scorecards
-- _target:
-    path: /api/latest/workflow-automation
-    lang: en
-  site_support_id: workflows
-- _target:
-    path: /api/latest/workflow-automation/**
-    lang: en
-  site_support_id: workflows
 
 ---

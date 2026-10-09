@@ -1,7 +1,6 @@
 ---
 title: Automations
 description: Automatically trigger actions based on incident events such as severity changes or state transitions using Datadog Workflow Automation.
-site_support_id: workflows
 aliases:
 - /incident_response/incident_management/incident_settings/automations/
 further_reading:
