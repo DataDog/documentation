@@ -106,6 +106,10 @@ See [Destinations event batching](#event-batching) for more information.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][13] and [Destination buffer metrics][14] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -132,3 +136,5 @@ A batch of events is flushed when one of these parameters is met. Batching is al
 [10]: https://clickhouse.com/docs/operations/settings/formats#input_format_skip_unknown_fields
 [11]: https://clickhouse.com/docs/operations/settings/formats#date_time_input_format
 [12]: /observability_pipelines/destinations/#event-batching
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

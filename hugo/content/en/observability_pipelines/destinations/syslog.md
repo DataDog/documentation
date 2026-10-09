@@ -79,6 +79,10 @@ The rsyslog and syslog-ng destinations match these log fields to the following s
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][6] and [Destination buffer metrics][7] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -90,3 +94,5 @@ The rsyslog and syslog-ng destinations do not batch events.
 [3]: /api/latest/observability-pipelines/
 [4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [5]: https://datatracker.ietf.org/doc/html/rfc5424
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

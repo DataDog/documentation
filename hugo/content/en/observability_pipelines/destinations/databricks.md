@@ -176,7 +176,7 @@ To prevent this error, use the [Custom Processor][17] to convert log fields to t
 
 ## Health metrics
 
-For [component metrics][14] and [destination buffer metrics][15] emitted by all destinations, see the [Pipelines Usage Metrics][16] documentation. To filter or group by Databricks destination metrics, use the tag `component_type:databricks_zerobus`.
+See [Component metrics][14] and [Destination buffer metrics][15] for more information on metrics emitted by all destinations. To filter or group by Databricks destination metrics, use the tag `component_type:databricks_zerobus`.
 
 ## How the destination works
 
@@ -202,6 +202,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [12]: /observability_pipelines/processors/custom_processor#setup
 [13]: /observability_pipelines/processors/custom_processor/#parse_timestamp
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[16]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[15]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
 [17]: /observability_pipelines/processors/custom_processor/

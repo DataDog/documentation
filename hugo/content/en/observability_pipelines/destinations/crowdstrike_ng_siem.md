@@ -71,6 +71,10 @@ After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][7] and [Destination buffer metrics][8] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -87,3 +91,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
