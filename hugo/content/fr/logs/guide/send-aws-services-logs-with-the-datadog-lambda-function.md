@@ -1,5 +1,11 @@
 ---
 further_reading:
+- link: https://learn.datadoghq.com/courses/send-aws-logs
+  tag: Centre d'apprentissage
+  text: Envoyer les logs AWS
+- link: https://learn.datadoghq.com/courses/visibility-aws-lambda
+  tag: Centre d'apprentissage
+  text: Configurer AWS Lambda pour Serverless Monitoring avec Datadog
 - link: /logs/explorer/
   tag: Documentation
   text: Apprendre à explorer vos logs
@@ -11,120 +17,105 @@ further_reading:
   text: Apprendre à traiter vos logs
 - link: /logs/guide/reduce_data_transfer_fees
   tag: Guide
-  text: Comment envoyer des journaux à Datadog tout en réduisant les frais de transfert
+  text: Comment envoyer des logs à Datadog tout en réduisant les frais de transfert
     de données
-- link: https://learn.datadoghq.com/courses/send-aws-logs
-  tag: Centre d'apprentissage
-  text: Envoyer des journaux AWS
 title: Envoyer des logs de services AWS avec la fonction Lambda Datadog
 ---
-Les journaux des services AWS peuvent être collectés à l'aide de la fonction Lambda Datadog Forwarder. Cette Lambda—qui se déclenche sur les buckets S3, les groupes de journaux CloudWatch et les événements EventBridge—transmet les journaux à Datadog.
+Les logs des services AWS peuvent être collectés avec la fonction Lambda Datadog Forwarder. Cette fonction Lambda, qui se déclenche sur les buckets S3, les groupes de logs CloudWatch et les événements EventBridge, transfère les logs vers Datadog.
 
 Pour commencer à recueillir des logs à partir de vos services AWS :
 
 1. Configurez la [fonction Lambda Datadog Forwarder][1] dans votre compte AWS.
-2. [Activez la journalisation](#enable-logging-for-your-aws-service) pour votre service AWS (la plupart des services AWS peuvent enregistrer dans un bucket S3 ou un groupe de journaux CloudWatch).
-3. [Configurez les déclencheurs](#set-up-triggers) qui provoquent l'exécution de la fonction Lambda Forwarder lorsqu'il y a de nouveaux journaux à transmettre. Il existe deux façons de configurer les déclencheurs.
+2. Activez la journalisation pour votre service AWS. Recherchez votre service dans [Services AWS pris en charge](#supported-aws-services) pour consulter ses instructions de configuration. La plupart des services AWS peuvent envoyer des logs vers un bucket S3 ou un groupe de logs CloudWatch.
+3. [Configurez les déclencheurs](#set-up-triggers) qui permettent à la fonction Lambda Datadog Forwarder de s'exécuter lorsque de nouveaux logs doivent être transférés. Il existe deux manières de configurer les déclencheurs.
 
-**Remarques** :
-   - Vous pouvez utiliser [AWS PrivateLink][2] pour envoyer vos journaux via une connexion privée.
-   - CloudFormation crée une politique IAM qui inclut `KMS:Decrypt` pour toutes les ressources et qui n'est pas conforme aux meilleures pratiques d'AWS Security Hub. Cette autorisation est utilisée pour déchiffrer des objets provenant de buckets S3 chiffrés par KMS afin de configurer la fonction Lambda, et la clé KMS utilisée pour chiffrer les buckets S3 ne peut pas être prédite. Vous pouvez supprimer en toute sécurité cette autorisation après la fin réussie de l'installation.
+**Remarques** :
+   - Vous pouvez utiliser [AWS PrivateLink][2] pour envoyer vos logs via une connexion privée.
+   - CloudFormation crée une politique IAM qui inclut `KMS:Decrypt` pour toutes les ressources, ce qui n'est pas conforme aux bonnes pratiques d'AWS Security Hub. Cette autorisation est utilisée pour déchiffrer les objets provenant de buckets S3 chiffrés par KMS afin de configurer la fonction Lambda, et la clé KMS utilisée pour chiffrer les buckets S3 ne peut pas être prédite. Vous pouvez supprimer cette autorisation en toute sécurité une fois l'installation terminée avec succès.
 
-## Activez la journalisation pour votre service AWS {#enable-logging-for-your-aws-service}
+## Services AWS pris en charge {#supported-aws-services}
 
-Tout service AWS qui génère des journaux dans un bucket S3 ou un groupe de journaux CloudWatch est pris en charge. Trouvez les instructions de configuration pour les services les plus utilisés dans le tableau ci-dessous :
+La fonction Lambda Datadog Forwarder prend en charge tout service AWS qui génère des logs dans un bucket S3 ou un groupe de logs CloudWatch. Le tableau suivant répertorie les services dont elle peut collecter les logs :
 
-| Service AWS                        | Activer la journalisation du service AWS                                                                                   | Envoyer les journaux AWS à Datadog                                                                                                     |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [API Gateway][3]                   | [Activer les journaux Amazon API Gateway][4]                                                                            | [Manuel][5] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [AppSync][64]                      | [Activer les journaux AWS AppSync][65]                                                                                  | [Manuel][65] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| Batch                              | `-`                                                                                                            | [Collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [Bedrock Agentcore][74]            | `-`                                                                                                            | [Collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [Cloudfront][6]                    | [Activer les journaux Amazon CloudFront][7]                                                                             | [Manuel][8] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [CloudTrail][9]                    | [Activer les journaux AWS CloudTrail][9]                                                                                | [Manuel][10] et [collecte](#automatically-set-up-triggers) automatique des journaux. Voir [Configuration AWS pour Cloud SIEM][11] si vous configurez AWS CloudTrail pour Cloud SIEM. |
-| [CodeBuild][66]                    | [Activer les journaux AWS CodeBuild][67]                                                                                | [Manuel][67] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [DMS][68]                          | [Activer les journaux du Service de Migration de Base de Données AWS][69]                                                               | [Manuel][69] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [DocumentDB][70]                   | [Activer les journaux Amazon DocumentDB][71]                                                                            | [Manuel][71] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [DynamoDB][12]                     | [Activer les journaux Amazon DynamoDB][13]                                                                              | [Manuel][14] collecte des journaux.                                                                                                 |
-| [EC2][15]                          | `-`                                                                                                            | Utilisez l'[Agent Datadog][15] pour envoyer vos journaux à Datadog.                                                                    |
-| [ECS][16]                          | `-`                                                                                                            | [Utilisez l'Agent Docker pour rassembler vos journaux][17] ou [collecte](#automatically-set-up-triggers) automatique des journaux.                                                                              |
-| [EKS][62]                          | [Activer les journaux Amazon EKS][63]                                                                                   | [Manuel][63] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [Elastic Load Balancing (ELB)][18] | [Activer les journaux Amazon ELB][19]                                                                                   | [Manuel][20] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [Glue][76]                         | [Activer les journaux AWS Glue][77]                                                                                     | [Manuel][77] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [IoT Core][74]                     | [Activer les journaux Amazon IoT Core][75]                                                                              | [Collecte](#automatically-set-up-triggers) automatique des journaux.                                                                  |
-| [Lambda][21]                       | `-`                                                                                                            | [Manuel][22] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [MWAA][55]                         | [Activer les journaux Amazon MWAA][56]                                                                                  | [Manuel][56] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [Network Firewall][57]             | [Activer les journaux AWS Network Firewall][58]                                                                         | [Manuel][58] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [PCS][75]                          | `-`                                                                                                            | [Collecte](#automatically-set-up-triggers) automatique des journaux.                                                  |
-| [RDS][23]                          | [Activer les journaux Amazon RDS][24]                                                                                   | [Manuel][25] collecte des journaux.                                                                                                |
-| [RedShift][34]                     | [Activer les journaux Amazon Redshift][35]                                                                              | [Manuel][36] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| Redshift Serverless                | `-`                                                                                                            | [Collecte](#automatically-set-up-triggers) automatique des journaux.                                                                  |
-| [Route 53][59]                     | Activez la journalisation des requêtes DNS d'Amazon Route 53 [DNS query logging][60] et [resolver query logging][73]                                                                                                                                                  | [Manuel][61] et [collecte](#automatically-set-up-triggers) automatique des journaux.                                                 |
-| [S3][29]                           | [Activez les journaux Amazon S3][30]                                                                                    | [Manuel][31] et [automatique](#automatically-set-up-triggers) collecte des journaux.                                                 |
-| [SNS][32]                          | SNS ne fournit pas de journaux, mais vous pouvez traiter les journaux et les événements qui transitent vers le service SNS. | [Manuel][33] collecte des journaux.                                                                                                 |
-| SSM                                | `-`                                                                                                            | [Collecte](#automatically-set-up-triggers) automatique des journaux.                                                            |
-| [Step Functions][52]               | [Activez les journaux Amazon Step Functions][53]                                                                        | [Manuel][54] collecte des journaux.                                                                                                 |
-| [Verified Access][37]              | [Activez les journaux Verified Access][38]                                                                              | [Manuel][39] et [automatique](#automatically-set-up-triggers) collecte des journaux.                                                                                                 |
-| [VPC][40]                          | [Activez les journaux Amazon VPC][41]                                                                                   | [Manuel][42] et [automatique](#automatically-set-up-triggers) collecte des journaux.                                                                                                 |
-| [VPN][26]                          | [Activez les journaux AWS VPN][72]                                                                                      | [Manuel][27] et [automatique](#automatically-set-up-triggers) collecte des journaux.                                                                                                 |
-| [Web Application Firewall][49]     | [Activez les journaux AWS WAF][50]                                                                                      | [Manuel][51] et [automatique](#automatically-set-up-triggers) collecte des journaux.                                                 |
+- **Service AWS** : Le service AWS qui génère les logs. Chaque nom de service renvoie vers ses instructions de configuration de collecte de logs. Les services sans lien ne nécessitent aucune configuration côté service.
+- **Source de log** : Le tag `source` que Datadog applique aux logs. Utilisez-le pour trouver vos logs dans le [Log Explorer][40].
+- **Stockage** : Emplacement où le service AWS peut écrire les logs que le Forwarder collecte.
+- **Collecte automatique** : Indique si Datadog peut [configurer automatiquement les déclencheurs](#automatically-set-up-triggers) pour cette source de logs. Si ce n'est pas le cas, [configurez les déclencheurs manuellement](#manually-set-up-triggers).
 
+| Service AWS                        | Source de log                    | Stockage        | Collecte automatique |
+| ---------------------------------- | ----------------------------- | -------------- | -------------------- |
+| [API Gateway][3]                   | `source:apigateway`           | CloudWatch, S3 | Oui                  |
+| [AppSync][4]                       | `source:appsync`              | CloudWatch     | Oui                  |
+| Batch                              | `source:batch`                | CloudWatch     | Oui                  |
+| [Bedrock][5]                       | `source:bedrock`              | CloudWatch, S3 | Non                  |
+| Bedrock Agentcore                  | `source:bedrock-agentcore`    | CloudWatch, S3 | Oui                  |
+| [CloudFront][6]                    | `source:cloudfront`           | CloudWatch, S3 | Oui                  |
+| [CloudTrail][7]                    | `source:cloudtrail`           | CloudWatch, S3 | Oui                  |
+| [CodeBuild][8]                     | `source:codebuild`            | CloudWatch, S3 | Oui                  |
+| [DMS][9]                           | `source:dms`                  | CloudWatch, S3 | Oui                  |
+| [DocumentDB][10]                   | `source:docdb`                | CloudWatch, S3 | Oui                  |
+| [ECS][11]                          | `source:ecs`                  | CloudWatch     | Oui                  |
+| [EKS][12]                          | `source:eks` <sup>1</sup>     | CloudWatch     | Oui                  |
+| [Elastic Beanstalk][13]            | - <sup>2</sup>                | CloudWatch     | Oui                  |
+| [Elastic Load Balancing (ELB)][14] | `source:elb`                  | CloudWatch, S3 | Oui                  |
+| [FSx][15]                          | `source:aws.fsx`              | CloudWatch, S3 | Non                  |
+| [Glue][16]                         | `source:glue`                 | CloudWatch, S3 | Oui                  |
+| [IoT][17]                          | `source:iot`                  | CloudWatch     | Partiel <sup>3</sup> |
+| [Lambda][18]                       | `source:lambda`               | CloudWatch     | Oui                  |
+| Lambda@Edge                        | `source:lambda`               | CloudWatch     | Oui                  |
+| Lambda MicroVMs                    | `source:lambda`               | CloudWatch     | Oui                  |
+| [MWAA][19]                         | `source:mwaa`                 | CloudWatch     | Oui                  |
+| [Network Firewall][20]             | `source:network-firewall`     | CloudWatch, S3 | Oui                  |
+| [OpenSearch][21]                   | `source:opensearch`           | CloudWatch     | Non                  |
+| [PCS][22]                          | - <sup>2</sup>                | CloudWatch     | Partiel <sup>4</sup> |
+| [RDS][23]                          | `source:rds` <sup>5</sup>     | CloudWatch     | Oui                  |
+| [Redshift][24]                     | `source:redshift`             | CloudWatch, S3 | Oui                  |
+| Redshift Serverless                | `source:redshift-serverless`  | CloudWatch     | Oui                  |
+| [Route 53][25]                     | `source:route53` <sup>6</sup> | CloudWatch     | Oui                  |
+| [S3][26]                           | `source:s3`                   | S3             | Oui                  |
+| SSM                                | `source:ssm`                  | CloudWatch     | Oui                  |
+| [Step Functions][27]               | `source:stepfunction`         | CloudWatch     | Oui                  |
+| [Transit Gateway][28]              | `source:transitgateway`       | CloudWatch, S3 | Non                  |
+| [Verified Access][29]              | `source:verified-access`      | CloudWatch, S3 | Oui                  |
+| [VPC][30]                          | `source:vpc`                  | CloudWatch, S3 | Oui                  |
+| [VPN][31]                          | - <sup>2</sup>                | CloudWatch, S3 | Oui <sup>7</sup>     |
+| [Web Application Firewall][32]     | `source:waf`                  | S3             | Oui                  |
 
+<sup>1</sup> Les logs du plan de contrôle EKS utilisent également les sources `kubernetes.audit`, `kube-scheduler`, `kube-apiserver`, `kube-controller-manager` et `aws-iam-authenticator`.<br>
+<sup>2</sup> Datadog n'applique pas de tag de source spécifique au service à ces logs.<br>
+<sup>3</sup> La collecte automatique pour IoT est disponible uniquement au niveau du compte.<br>
+<sup>4</sup> La collecte automatique pour PCS est disponible uniquement pour les groupes de logs CloudWatch.<br>
+<sup>5</sup> Les logs du moteur RDS utilisent également les sources `postgresql`, `mariadb` et `mysql`.<br>
+<sup>6</sup> Couvre à la fois les logs de requêtes DNS et les logs de requêtes Resolver.<br>
+<sup>7</sup> La collecte automatique est disponible pour les groupes de logs CloudWatch. Pour les buckets S3, [configurez le déclencheur manuellement](#collecting-logs-from-s3-buckets).
+
+**Remarque** : Le Datadog Forwarder crée automatiquement des [filtres d'abonnement][43] sur les groupes de logs CloudWatch. Chaque filtre est nommé selon le format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
+
+### Services collectés via une autre méthode {#services-collected-through-another-method}
+
+Les services AWS suivants sont pris en charge pour la collecte de logs, mais n'utilisent pas la fonction Lambda Datadog Forwarder de la même manière :
+
+| Service AWS    | Comment les logs sont collectés                                                                                                                         |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DynamoDB][33] | DynamoDB ne génère pas ses propres logs. L'activité API est capturée via CloudTrail. Consultez [Envoyer des logs à Datadog][34].                           |
+| [EC2][35]      | Utilisez le [Datadog Agent][35] pour envoyer vos logs à Datadog.                                                                                      |
+| [SNS][36]      | SNS ne fournit pas de logs, mais vous pouvez traiter les logs et les événements qui transitent par le service SNS. Consultez [Envoyer des logs à Datadog][37].  |
 
 ## Configurez des déclencheurs {#set-up-triggers}
 
-Il existe deux méthodes de configuration des déclencheurs sur la fonction Lambda du Forwarder Datadog :
+Il existe deux méthodes de configuration des déclencheurs sur la fonction Lambda du Datadog Forwarder :
 
-- [Automatiquement](#automatically-set-up-triggers) : Datadog récupère automatiquement les emplacements des journaux pour les services AWS sélectionnés et les ajoute en tant que déclencheurs sur la fonction Lambda Datadog Forwarder. Datadog maintient également la liste à jour.
-- [Manuellement](#manually-set-up-triggers) : Configurez chaque déclencheur vous-même.
+- [Automatiquement](#automatically-set-up-triggers) : Datadog récupère automatiquement les emplacements des logs pour les services AWS sélectionnés et les ajoute en tant que déclencheurs sur la fonction Lambda Datadog Forwarder. Datadog maintient également la liste à jour.
+- [Manuellement](#manually-set-up-triggers) : Configurez chaque déclencheur vous-même.
 
-### Configurez automatiquement des déclencheurs {#automatically-set-up-triggers}
+### Configurez automatiquement les déclencheurs {#automatically-set-up-triggers}
 
-Datadog peut configurer automatiquement des déclencheurs sur la fonction Lambda Datadog Forwarder pour collecter les journaux AWS. Cependant, l'abonnement automatique ne prend pas en charge la création de déclencheurs sur différents comptes ou régions AWS. Pour les scénarios où les journaux sont publiés dans des compartiments S3 dans un compte séparé, nous recommandons de créer manuellement un déclencheur dans le même compte que le compartiment pour contourner cette limitation.
+Datadog peut configurer automatiquement des déclencheurs sur la fonction Lambda Datadog Forwarder pour collecter les logs AWS. Cependant, l'abonnement automatique ne prend pas en charge la création de déclencheurs entre différents comptes ou régions AWS. Pour les scénarios où les logs sont publiés dans des compartiments S3 situés dans un compte distinct, nous recommandons de créer manuellement un déclencheur dans le même compte que le compartiment pour contourner cette limitation.
 
-Les sources et emplacements suivants sont pris en charge :
+Pour voir quels services prennent en charge la collecte automatique, ainsi que les emplacements de stockage qu'ils supportent, consultez [Services AWS pris en charge](#supported-aws-services).
 
-| Source                      | Emplacement       |
-| --------------------------- | -------------- |
-| Apache Airflow (MWAA)       | CloudWatch     |
-| Journaux d'accès de l'API Gateway     | CloudWatch     |
-| Journaux d'exécution de l'API Gateway  | CloudWatch     |
-| Journaux d'accès de l'ELB d'application | S3             |
-| Journaux AppSync                | CloudWatch     |
-| Batch                       | CloudWatch     |
-| Journaux de Bedrock Agentcore      | S3, CloudWatch |
-| Journaux d'accès de l'ELB classique     | S3             |
-| Journaux d'accès de CloudFront      | S3             |
-| Journaux de CloudTrail             | S3, CloudWatch |
-| Journaux de CodeBuild              | S3, CloudWatch |
-| Journaux DMS                    | CloudWatch     |
-| Journaux DocumentDB             | CloudWatch     |
-| Journaux ECS                    | CloudWatch     |
-| Journaux du plan de contrôle EKS      | CloudWatch     |
-| Journaux Container Insights d'EKS | CloudWatch     |
-| Journaux des Glue Jobs | CloudWatch     |
-| Journaux Lambda                 | CloudWatch     |
-| Journaux Lambda@Edge            | CloudWatch     |
-| Journaux IoT Core                    | CloudWatch     |
-| Journaux de pare-feu réseau       | S3, CloudWatch |
-| Journaux PCS                    | CloudWatch     |
-| Journaux Redshift               | S3, CloudWatch |
-| Journaux Redshift Serverless    | CloudWatch     |
-| Journaux RDS                    | CloudWatch     |
-| Journaux des requêtes DNS Route53      | CloudWatch     |
-| Journaux des requêtes Route53 Resolver | S3, CloudWatch |
-| Journaux d'accès S3              | S3             |
-| Journaux de commandes SSM            | CloudWatch     |
-| Step Functions | CloudWatch     |
-| Journaux Verified Access | S3, CloudWatch |
-| Journaux de flux VPC               | S3, CloudWatch |
-| Journaux VPN                    | CloudWatch     |
-| Pare-feu d'application Web    | S3, CloudWatch |
-
-**Remarque** : [Subscription filters][48] sont créés automatiquement sur les groupes de journaux CloudWatch par le DatadogForwarder, et sont nommés au format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
-
-1. Si vous ne l'avez pas déjà fait, configurez la [Datadog log collection AWS Lambda function][1].
-2. Assurez-vous que la politique du rôle IAM utilisé pour [Datadog-AWS integration][43] dispose des autorisations suivantes. Des informations sur l'utilisation de ces permissions peuvent être trouvées dans les descriptions ci-dessous :
+1. Si ce n'est pas déjà fait, configurez la [fonction Lambda de collecte de logs Datadog pour AWS][1].
+2. Assurez-vous que la politique du rôle IAM utilisé pour l'[intégration Datadog-AWS][38] dispose des autorisations suivantes. Des informations sur la manière dont ces autorisations sont utilisées sont disponibles dans les descriptions ci-dessous :
 
     ```text
     "airflow:GetEnvironment",
@@ -145,6 +136,7 @@ Les sources et emplacements suivants sont pris en charge :
     "ecs:ListTaskDefinitionFamilies",
     "eks:DescribeCluster",
     "eks:ListClusters",
+    "elasticbeanstalk:DescribeEnvironments",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
     "glue:BatchGetJobs",
@@ -152,6 +144,7 @@ Les sources et emplacements suivants sont pris en charge :
     "glue:GetJob",
     "glue:ListJobs",
     "iot:GetV2LoggingOptions",
+    "lambda:GetMicrovmImageVersion",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
     "lambda:List*",
@@ -209,10 +202,12 @@ Les sources et emplacements suivants sont pris en charge :
     | `glue:ListJobs`                                             | List all Glue job names.                                                     |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `elasticbeanstalk:DescribeEnvironments`                     | List all Elastic Beanstalk environments.                                     |
     | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
+    | `lambda:GetMicrovmImageVersion`                             | Get information about a Lambda MicroVM image version.                        |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
     | `logs:DescribeLogGroups`                                    | Describe CloudWatch log groups.                                              |
@@ -241,36 +236,36 @@ Les sources et emplacements suivants sont pris en charge :
     | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.             |
 
 
-3. Sur la [page d'intégration AWS][44], sélectionnez le compte AWS à partir duquel collecter les journaux et cliquez sur l'onglet **Collecte de journaux**.
-4. Dans la section **Datadog Forwarder Lambda**, entrez l'ARN de la Lambda créée dans la section précédente et cliquez sur **Ajouter**. La fonction Lambda apparaît dans le tableau ci-dessous avec son nom, sa version et sa région.
-5. Dans la section **Log Autosubscription**, sous **Log Sources**, activez les services dont vous souhaitez collecter les journaux en les activant. Pour arrêter la collecte des journaux d'un service particulier, désactivez la source de journaux correspondante.
-6. (Optionnel) Dans la section **Log Source Tag Filters**, vous pouvez filtrer la collecte des journaux par balises de ressources pour chaque source de journal. Sélectionnez une source de journal dans le menu déroulant et ajoutez des balises au format `key:value` pour limiter la collecte des journaux aux ressources concernées. **Remarque** : Les balises de ressources sont automatiquement mises en minuscules pour correspondre aux conventions de la plateforme Datadog. Définissez vos filtres de balises en minuscules pour éviter les incohérences.
-7. Si vous avez des journaux dans plusieurs régions, vous devez créer des fonctions Lambda supplémentaires dans ces régions et les ajouter dans la section **Datadog Forwarder Lambda**.
-8. Pour arrêter la collecte de tous les journaux AWS d'une fonction Lambda spécifique, survolez la Lambda dans le tableau et cliquez sur l'icône de suppression. Tous les déclencheurs pour cette fonction sont supprimés.
-9. Dans les quelques minutes suivant cette configuration initiale, vos journaux AWS apparaissent dans le [Log Explorer][45] de Datadog.
+3. Sur la [page d'intégration AWS][39], sélectionnez le compte AWS dont vous souhaitez collecter les logs et cliquez sur l'onglet {{< ui >}}Log Collection{{< /ui >}}.
+4. Dans la section {{< ui >}}Datadog Forwarder Lambda{{< /ui >}}, saisissez l'ARN de la fonction Lambda créée dans la section précédente et cliquez sur {{< ui >}}Add{{< /ui >}}. La fonction Lambda apparaît dans le tableau ci-dessous avec son nom, sa version et sa région.
+5. Dans la section {{< ui >}}Log Autosubscription{{< /ui >}}, sous {{< ui >}}Log Sources{{< /ui >}}, activez les services dont vous souhaitez collecter les logs en basculant leur état sur « activé ». Pour arrêter la collecte des logs d'un service particulier, désactivez la source de logs.
+6. (Facultatif) Dans la section {{< ui >}}Log Source Tag Filters{{< /ui >}}, vous pouvez filtrer la collecte des logs par tags de ressource pour chaque source de logs. Sélectionnez une source de logs dans le menu déroulant et ajoutez des tags au format `key:value` afin de limiter la collecte des logs aux ressources concernées. **Remarque** : Les tags de ressource sont automatiquement convertis en minuscules pour correspondre aux conventions de la plateforme Datadog. Définissez vos filtres de tags en minuscules pour éviter les erreurs de correspondance.
+7. Si vous avez des logs dans plusieurs régions, vous devez créer des fonctions Lambda supplémentaires dans ces régions et les ajouter dans la section **Datadog Forwarder Lambda**.
+8. Pour arrêter la collecte de tous les logs AWS d'une fonction Lambda spécifique, survolez la fonction Lambda dans le tableau et cliquez sur l'icône de suppression. Tous les déclencheurs de cette fonction sont supprimés.
+9. Quelques minutes après cette configuration initiale, vos logs AWS apparaissent dans Datadog [Log Explorer][40].
 
 ### Configurez manuellement les déclencheurs {#manually-set-up-triggers}
 
-#### Collecte des journaux du groupe de journaux CloudWatch {#collecting-logs-from-cloudwatch-log-group}
+#### Collecte des logs à partir du groupe de logs CloudWatch {#collecting-logs-from-cloudwatch-log-group}
 
-Si vous recueillez des logs depuis un groupe de logs CloudWatch, configurez le déclencheur entraînant l'exécution de la [fonction Lambda du Forwarder Datadog][1] à l'aide de l'une des méthodes suivantes :
+Si vous recueillez des logs depuis un groupe de logs CloudWatch, configurez le déclencheur entraînant l'exécution de la [fonction Lambda du Datadog Forwarder][1] à l'aide de l'une des méthodes suivantes :
 
 {{< tabs >}}
 {{% tab "Console AWS" %}}
 
-1. Dans la console AWS, allez à **Lambda**.
-2. Cliquez sur **Functions** et sélectionnez le Datadog Forwarder.
-3. Cliquez sur **Ajouter un déclencheur** et sélectionnez **CloudWatch Logs**.
-4. Sélectionnez le groupe de journaux dans le menu déroulant.
-5. Entrez un nom pour votre filtre et, si vous le souhaitez, spécifiez un motif de filtre.
-6. Cliquez sur **Ajouter**.
-7. Allez dans la section [Datadog Log][1] pour explorer les nouveaux événements de journal envoyés à votre groupe de journaux.
+1. Dans la console AWS, accédez à {{< ui >}}Lambda{{< /ui >}}.
+2. Cliquez sur {{< ui >}}Functions{{< /ui >}} et sélectionnez le Datadog Forwarder.
+3. Cliquez sur {{< ui >}}Add trigger{{< /ui >}} et sélectionnez {{< ui >}}CloudWatch Logs{{< /ui >}}.
+4. Sélectionnez le groupe de logs dans le menu déroulant.
+5. Saisissez un nom pour votre filtre et spécifiez éventuellement un modèle de filtre.
+6. Cliquez sur {{< ui >}}Add{{< /ui >}}.
+7. Accédez à la [section Logs de Datadog][1] pour explorer les nouveaux événements de log envoyés à votre groupe de logs.
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Pour les utilisateurs de Terraform, vous pouvez provisionner et gérer vos déclencheurs en utilisant la ressource [aws_cloudwatch_log_subscription_filter][1]. Voir le code d'exemple ci-dessous.
+Pour les utilisateurs de Terraform, vous pouvez provisionner et gérer vos déclencheurs à l'aide de la ressource [aws_cloudwatch_log_subscription_filter][1]. Voir l'exemple de code ci-dessous.
 
 ```conf
 data "aws_cloudwatch_log_group" "some_log_group" {
@@ -291,15 +286,15 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
   filter_pattern  = ""
 }
 ```
-\*{{% mainland-china-disclaimer %}}
+*{{% mainland-china-disclaimer %}}
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-Pour les utilisateurs d'AWS CloudFormation, vous pouvez provisionner et gérer vos déclencheurs en utilisant la ressource CloudFormation [AWS::Logs::SubscriptionFilter][1]. Voir le code d'exemple ci-dessous.
+Pour les utilisateurs d'AWS CloudFormation, vous pouvez provisionner et gérer vos déclencheurs à l'aide de la ressource CloudFormation [AWS::Logs::SubscriptionFilter][1]. Voir l'exemple de code ci-dessous.
 
-Le code d'exemple fonctionne également pour AWS [SAM][2] et [Serverless Framework][3]. Pour Serverless Framework, placez le code sous la section [resources][4] dans votre `serverless.yml`.
+L'exemple de code fonctionne également pour AWS [SAM][2] et le [Serverless Framework][3]. Pour le Serverless Framework, placez le code sous la section [resources][4] dans votre `serverless.yml`.
 
 ```yaml
 Resources:
@@ -318,20 +313,20 @@ Resources:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Collecte des journaux à partir des buckets S3 {#collecting-logs-from-s3-buckets}
+#### Collecte des logs depuis les compartiments S3 {#collecting-logs-from-s3-buckets}
 
-Si vous recueillez des logs depuis un compartiment S3, configurez le déclencheur entraînant l'exécution de la [fonction Lambda du Forwarder Datadog][1] à l'aide de l'une des méthodes suivantes :
+Si vous recueillez des logs depuis un compartiment S3, configurez le déclencheur entraînant l'exécution de la [fonction Lambda du Datadog Forwarder][1] à l'aide de l'une des méthodes suivantes :
 
 {{< tabs >}}
 {{% tab "Console AWS" %}}
 
-1. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le bucket S3 contenant vos journaux dans la console AWS :
-  {{< img src="logs/aws/adding_trigger.png" alt="Ajout d’un déclencheur" popup="true"style="width:80%;">}}
+1. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 qui contient vos logs dans la console AWS :
+  {{< img src="logs/aws/adding_trigger.png" alt="Ajout d'un déclencheur" popup="true"style="width:80%;">}}
 
-2. Sélectionnez le bucket puis suivez les instructions AWS :
+2. Sélectionnez le compartiment, puis suivez les instructions AWS :
   {{< img src="logs/aws/integration_lambda.png" alt="Intégration Lambda" popup="true" style="width:80%;">}}
 
-3. Définissez le bon type d'événement sur les buckets S3 :
+3. Définissez le type d'événement correct sur les compartiments S3 :
   {{< img src="logs/aws/object_created.png" alt="Objet créé" popup="true" style="width:80%;">}}
 
 Accédez ensuite à la [section Log de Datadog][1] pour commencer à explorer vos logs !
@@ -340,7 +335,7 @@ Accédez ensuite à la [section Log de Datadog][1] pour commencer à explorer vo
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Pour les utilisateurs de Terraform, vous pouvez provisionner et gérer vos déclencheurs en utilisant la ressource [aws_s3_bucket_notification][1]. Voir le code d'exemple ci-dessous.
+Pour les utilisateurs de Terraform, vous pouvez provisionner et gérer vos déclencheurs en utilisant la ressource [aws_s3_bucket_notification][1]. Consultez l'exemple de code ci-dessous.
 
 ```conf
 resource "aws_s3_bucket_notification" "my_bucket_notification" {
@@ -359,7 +354,7 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-Pour les utilisateurs de CloudFormation, vous pouvez configurer des déclencheurs en utilisant la [NotificationConfiguration][1] de CloudFormation pour votre bucket S3. Voir le code d'exemple ci-dessous.
+Pour les utilisateurs de CloudFormation, vous pouvez configurer des déclencheurs en utilisant la [NotificationConfiguration][1] de CloudFormation pour votre compartiment S3. Consultez l'exemple de code ci-dessous.
 
 ```yaml
 Resources:
@@ -381,89 +376,53 @@ Resources:
 
 ## Nettoyage et filtrage {#scrubbing-and-filtering}
 
-Vous pouvez nettoyer les e-mails ou les adresses IP des journaux envoyés par la fonction Lambda, ou définir une règle de nettoyage personnalisée [dans les paramètres Lambda][46].
-Vous pouvez également exclure ou envoyer uniquement les journaux qui correspondent à un modèle spécifique en utilisant le [filtering option][47].
+Vous pouvez nettoyer les adresses e-mail ou l'adresse IP des logs envoyés par la fonction Lambda, ou définir une règle de nettoyage personnalisée [dans les paramètres Lambda][41].
+Vous pouvez également exclure ou envoyer uniquement les logs qui correspondent à un modèle spécifique en utilisant [l'option de filtrage][42].
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/serverless/forwarder/
 [2]: /fr/serverless/forwarder#aws-privatelink-support
-[3]: /fr/integrations/amazon_api_gateway/
-[4]: /fr/integrations/amazon_api_gateway/#log-collection
-[5]: /fr/integrations/amazon_api_gateway/#send-logs-to-datadog
-[6]: /fr/integrations/amazon_cloudfront/
-[7]: /fr/integrations/amazon_cloudfront/#enable-cloudfront-logging
-[8]: /fr/integrations/amazon_cloudfront/#send-logs-to-datadog
-[9]: /fr/integrations/amazon_cloudtrail/#enable-cloudtrail-logging
-[10]: /fr/integrations/amazon_cloudtrail/#send-logs-to-datadog
-[11]: /fr/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[12]: /fr/integrations/amazon_dynamodb/#enable-dynamodb-logging
-[13]: /fr/integrations/amazon_dynamodb/
-[14]: /fr/integrations/amazon_dynamodb/#send-logs-to-datadog
-[15]: /fr/integrations/amazon_ec2/
-[16]: /fr/integrations/amazon_ecs/
-[17]: /fr/integrations/amazon_ecs/#log-collection
-[18]: /fr/integrations/amazon_elb/
-[19]: /fr/integrations/amazon_elb/#enable-aws-elb-logging
-[20]: /fr/integrations/amazon_elb/#manual-installation-steps
-[21]: /fr/integrations/amazon_lambda/
-[22]: /fr/integrations/amazon_lambda/#log-collection
-[23]: /fr/integrations/amazon_rds/
-[24]: /fr/integrations/amazon_rds/#enable-rds-logging
-[25]: /fr/integrations/amazon_rds/#send-logs-to-datadog
-[26]: /fr/integrations/amazon-vpn/
-[27]: /fr/integrations/amazon-vpn/#send-logs-to-datadog
-[28]: /fr/integrations/amazon_route53/#send-logs-to-datadog
-[29]: /fr/integrations/amazon_s3/
-[30]: /fr/integrations/amazon_s3/#enable-s3-access-logs
-[31]: /fr/integrations/amazon_s3/#manual-installation-steps
-[32]: /fr/integrations/amazon_sns/
-[33]: /fr/integrations/amazon_sns/#send-logs-to-datadog
-[34]: /fr/integrations/amazon_redshift/
-[35]: /fr/integrations/amazon-redshift/#enable-logging
-[36]: /fr/integrations/amazon-redshift/#log-collection
-[37]: /fr/integrations/amazon-verified-access/
-[38]: /fr/integrations/amazon-verified-access/#enable-verified-access-logs
-[39]: /fr/integrations/amazon-verified-access/#log-collection
-[40]: /fr/integrations/amazon_vpc/
-[41]: /fr/integrations/amazon_vpc/#enable-vpc-flow-log-logging
-[42]: /fr/integrations/amazon_vpc/#log-collection
-[43]: /fr/integrations/amazon_web_services/
-[44]: https://app.datadoghq.com/integrations/amazon-web-services
-[45]: https://app.datadoghq.com/logs
-[46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
-[47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
-[48]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters
-[49]: /fr/integrations/amazon_waf/
-[50]: /fr/integrations/amazon_waf/#log-collection
-[51]: /fr/integrations/amazon_waf/#send-logs-to-datadog
-[52]: /fr/integrations/amazon_step_functions/
-[53]: /fr/integrations/amazon_step_functions/#log-collection
-[54]: /fr/integrations/amazon_step_functions/#send-logs-to-datadog
-[55]: /fr/integrations/amazon_mwaa/
-[56]: /fr/integrations/amazon_mwaa/#log-collection
-[57]: /fr/integrations/amazon_network_firewall/
-[58]: /fr/integrations/amazon_network_firewall/#log-collection
-[59]: /fr/integrations/amazon_route53/
-[60]: /fr/integrations/amazon_route53/#enable-route53-dns-query-logging
-[61]: /fr/integrations/amazon_route53/#send-logs-to-datadog
-[62]: /fr/integrations/amazon-eks/
-[63]: /fr/integrations/amazon-eks/#log-collection
-[64]: /fr/integrations/amazon-appsync/
-[65]: /fr/integrations/amazon-appsync/#send-logs-to-datadog
-[66]: /fr/integrations/amazon-codebuild/
-[67]: /fr/integrations/amazon-codebuild/#send-logs-to-datadog
-[68]: /fr/integrations/amazon-dms/
-[69]: /fr/integrations/amazon-dms/#send-logs-to-datadog
-[70]: /fr/integrations/amazon-documentdb/
-[71]: /fr/integrations/amazon-documentdb/#send-logs-to-datadog
-[72]: /fr/integrations/amazon-vpn/#enable-logging
-[73]: /fr/integrations/amazon_route53/#enable-route53-resolver-query-logging
-[74]: /fr/integrations/amazon-iot/
-[75]: /fr/integrations/amazon-iot/#enable-logging
-[74]: /fr/integrations/amazon-bedrock/
-[75]: /fr/integrations/amazon-pcs/
-[76]: /fr/integrations/amazon_glue/
-[77]: /fr/integrations/amazon_glue/#log-collection
+[3]: /fr/integrations/amazon_api_gateway/#log-collection
+[4]: /fr/integrations/amazon-appsync/#send-logs-to-datadog
+[5]: /fr/integrations/amazon-bedrock/
+[6]: /fr/integrations/amazon_cloudfront/#log-collection
+[7]: /fr/integrations/amazon_cloudtrail/#send-logs-to-datadog
+[8]: /fr/integrations/amazon-codebuild/#send-logs-to-datadog
+[9]: /fr/integrations/amazon-dms/#send-logs-to-datadog
+[10]: /fr/integrations/amazon-documentdb/#send-logs-to-datadog
+[11]: /fr/containers/amazon_ecs/logs/
+[12]: /fr/integrations/amazon-eks/#log-collection
+[13]: /fr/integrations/amazon-elastic-beanstalk/
+[14]: /fr/integrations/amazon_elb/#log-collection
+[15]: /fr/integrations/amazon_fsx/#log-collection
+[16]: /fr/integrations/amazon_glue/#log-collection
+[17]: /fr/integrations/amazon-iot/#enable-logging
+[18]: /fr/integrations/amazon_lambda/#log-collection
+[19]: /fr/integrations/amazon_mwaa/#log-collection
+[20]: /fr/integrations/amazon_network_firewall/#log-collection
+[21]: /fr/integrations/amazon_es/#log-collection
+[22]: /fr/integrations/amazon-pcs/
+[23]: /fr/integrations/amazon_rds/#log-collection
+[24]: /fr/integrations/amazon-redshift/#log-collection
+[25]: /fr/integrations/amazon_route53/#send-logs-to-datadog
+[26]: /fr/integrations/amazon_s3/#enable-s3-access-logs
+[27]: /fr/integrations/amazon_step_functions/#log-collection
+[28]: /fr/integrations/amazon_transit_gateway/#log-collection
+[29]: /fr/integrations/amazon-verified-access/#log-collection
+[30]: /fr/integrations/amazon_vpc/#log-collection
+[31]: /fr/integrations/amazon-vpn/#send-logs-to-datadog
+[32]: /fr/integrations/amazon_waf/#log-collection
+[33]: /fr/integrations/amazon_dynamodb/
+[34]: /fr/integrations/amazon_dynamodb/#send-logs-to-datadog
+[35]: /fr/integrations/amazon_ec2/
+[36]: /fr/integrations/amazon_sns/
+[37]: /fr/integrations/amazon_sns/#send-logs-to-datadog
+[38]: /fr/integrations/amazon_web_services/
+[39]: https://app.datadoghq.com/integrations/amazon-web-services
+[40]: https://app.datadoghq.com/logs
+[41]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
+[42]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[43]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters
