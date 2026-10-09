@@ -1,0 +1,17 @@
+entries:
+  - change_type: modified
+    date: '2026-10-07'
+    link: https://github.com/DataDog/documentation/pull/40506
+    operations:
+      - ConvertSecurityMonitoringRuleFromJSONToTerraform
+      - CreateSecurityMonitoringRule
+      - GetRuleVersionHistory
+      - GetSecurityMonitoringRule
+      - GetSuppressionsAffectingFutureRule
+      - ListSecurityMonitoringRules
+      - RestoreSecurityMonitoringRule
+      - TestExistingSecurityMonitoringRule
+      - TestSecurityMonitoringRule
+      - UpdateSecurityMonitoringRule
+      - ValidateSecurityMonitoringRule
+    title: Add SQL rule fields to security monitoring rule queries
