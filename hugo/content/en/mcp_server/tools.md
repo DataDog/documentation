@@ -1834,7 +1834,7 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new ones. The toolset cannot update or delete existing pipelines.
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
 
 <div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access.</div>
 
