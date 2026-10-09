@@ -1108,11 +1108,12 @@ Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregati
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
-Updates the state or assignee of an Error Tracking Issue in Datadog.
+Updates the state or assignee of an Error Tracking Issue in Datadog, or snoozes an issue until a condition is met. You can combine multiple snooze conditions, such as occurrences, elapsed time, or distinct values of any error attribute, like `@usr.id`.
 
 - Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+- Snooze Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` until it affects 10 users or a week passes.
 
 ### `manage_datadog_error_tracking_issue_comments`
 *Toolset: **error-tracking***\
