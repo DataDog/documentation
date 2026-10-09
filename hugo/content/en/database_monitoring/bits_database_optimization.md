@@ -45,7 +45,7 @@ Optimization candidates are selected automatically from Database Monitoring tele
 
 The instances included in Continuous Optimizations are listed below the toggle. To remove an instance, click the minus (**-**) button on the right side of its row.
 
-When continuous optimizations are enabled, Bits Database Optimization will check for optimizations on the top 50 queries per host. If less than 50 queries are available, the optimizer will automatically check new queries on a hourly basis, throughout the month, until the quota is reached. The selection process for the top 50 queries is rerun on the first of each month. Throughout the month, those queries are checked for possible optimization on a rolling basis. 
+When continuous optimizations are enabled, Bits Database Optimization will check for optimizations on the top 50 queries per host. If less than 50 queries are available, the optimizer will automatically check new queries on a hourly basis, throughout the month, until the quota is reached. The selection process for the top 50 queries is rerun on the first of each month. A given query will be checked exactly once during each month when it is selected.
 
 Top queries are prioritized by total duration per host and by individual execution time per service. 
 
