@@ -115,7 +115,7 @@ def detection_task(input_data, config):
     return response.choices[0].message.parsed
 ```
 
-### 3. Define evaluation functions
+### 3. Define evaluator functions
 
 To optimize your prompt, you need multiple layers of metric computation:
 

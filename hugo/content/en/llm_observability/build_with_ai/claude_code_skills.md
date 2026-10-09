@@ -12,7 +12,7 @@ further_reading:
       text: 'LLM Experiments'
     - link: '/llm_observability/investigate/evaluations/evaluation_developer_guide'
       tag: 'Guide'
-      text: 'Evaluation Developer Guide: Build custom evaluators'
+      text: 'Evaluator Developer Guide: Build custom evaluators'
     - link: "https://www.datadoghq.com/blog/bits-evals/"
       tag: "Blog"
       text: "Improve AI agent quality with Bits Evals"
@@ -288,7 +288,7 @@ If you are new to evaluating an LLM application, the recommended flow is:
 
 2. **Apply fixes.** The RCA report produced in Phase 2 includes specific before/after fix proposals grounded in trace evidence. Pass the report to a coding agent (or act on it directly) to fix system prompts, tool definitions, or routing logic in your codebase.
 
-3. **Run an offline experiment** using the generated evaluators against a labeled dataset to validate their quality before enabling them in production. See the [Evaluation Developer Guide][4].
+3. **Run an offline experiment** using the generated evaluators against a labeled dataset to validate their quality before enabling them in production. See the [Evaluator Developer Guide][4].
 
 4. **Publish online evaluators** once the evaluators are validated. Running `/agent-observability-eval-bootstrap` with `--publish` creates online LLM-judge evaluators in Datadog that run automatically on your production traces in real time — no code changes required:
    ```

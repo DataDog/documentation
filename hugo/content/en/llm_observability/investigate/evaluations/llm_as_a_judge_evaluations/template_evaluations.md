@@ -1,6 +1,6 @@
 ---
-title: LLM-as-a-Judge Evaluation Templates
-description: Learn how to create LLM-as-a-Judge evaluations from templates for your LLM applications.
+title: LLM-as-a-Judge Evaluator Templates
+description: Learn how to create LLM-as-a-Judge evaluators from templates for your LLM applications.
 further_reading:
 - link: "/llm_observability/quickstart/terms/"
   tag: "Documentation"
@@ -24,24 +24,24 @@ aliases:
   - /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations/
 ---
 
-Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
+Datadog provides LLM-as-a-judge templates for the following evaluators: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluator. 
 
-For best practices and details on how to create LLM-as-a-judge evaluations, read [Create a custom LLM-as-a-judge evaluation][17].
+For best practices and details on how to create LLM-as-a-judge evaluators, read [Create a custom LLM-as-a-judge evaluator][17].
 
 To select a template:
-1. In Datadog, navigate to the [Agent Observability Evaluations][11] page
-1. Click on the {{< ui >}}Create Evaluation{{< /ui >}} button
+1. In Datadog, navigate to the [Agent Observability Evaluators][11] page
+1. Click on the {{< ui >}}Create Evaluator{{< /ui >}} button
 1. Select the template of your choice
     {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 
     * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
-1. (Optional) Select the application you would like the evaluation to run for and set any desired span filters.
+1. (Optional) Select the application you would like the evaluator to run for and set any desired span filters.
 
-## Evaluations
+## Evaluators {#evaluations}
 
 ### Failure to Answer
 
-Failure to Answer evaluations identify instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
+Failure to Answer evaluators identify instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
 {{< img src="llm_observability/evaluations/failure_to_answer_6.png" alt="A Failure to Answer evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -49,7 +49,7 @@ Failure to Answer evaluations identify instances where the LLM fails to deliver 
 |---|---|
 | Evaluated on Output | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
-#### Configure a Failure to Answer evaluation
+#### Configure a Failure to Answer evaluator
 
 Datadog provides the following categories of Failure to Answer, listed in the following table. The template defaults to having `Empty Response` and `Refusal Response` marked as failing, but this can be configured to your specific use case.
 
@@ -63,7 +63,7 @@ Datadog provides the following categories of Failure to Answer, listed in the fo
 
 ### Hallucination
 
-Hallucination evaluations identify instances where the LLM makes a claim that disagrees with the provided input context. This check helps ensure your RAG applications stay grounded in retrieved data and do not fabricate information.
+Hallucination evaluators identify instances where the LLM makes a claim that disagrees with the provided input context. This check helps ensure your RAG applications stay grounded in retrieved data and do not fabricate information.
 
 {{< img src="llm_observability/evaluations/hallucination_5.png" alt="A Hallucination evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -71,7 +71,7 @@ Hallucination evaluations identify instances where the LLM makes a claim that di
 |---|---|
 | Evaluated on Output | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
-#### Configure a Hallucination evaluation
+#### Configure a Hallucination evaluator
 
 Use [Prompt Tracking][26] annotations to track your prompts and set them up for hallucination detection. Annotate your LLM spans with the user query and context so hallucination detection can evaluate model outputs against the retrieved data.
 
@@ -124,7 +124,7 @@ Contradictions are always detected, while Unsupported Claims can be optionally i
 
 ### Prompt Injection
 
-Prompt Injection evaluations identify attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
+Prompt Injection evaluators identify attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
 {{< img src="llm_observability/evaluations/prompt_injection_5.png" alt="A Prompt Injection evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -132,9 +132,9 @@ Prompt Injection evaluations identify attempts by unauthorized or malicious auth
 |---|---|
 | Evaluated on Input | [Prompt Injection][5] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
-#### Configure a Prompt Injection evaluation
+#### Configure a Prompt Injection evaluator
 
-You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table. The template defaults to have every category flagged as a prompt injection attempt.
+You can configure the prompt injection evaluator to use specific categories of prompt injection, listed in the following table. The template defaults to have every category flagged as a prompt injection attempt.
 
 | Category | Description | Example(s) |
 |---|---|---|
@@ -145,7 +145,7 @@ You can configure the prompt injection evaluation to use specific categories of 
 
 ### Sentiment
 
-Sentiment evaluations help you understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This evaluation classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
+Sentiment evaluations help you understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This evaluator classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
 {{< img src="llm_observability/evaluations/sentiment_6.png" alt="A Sentiment evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -155,7 +155,7 @@ Sentiment evaluations help you understand the overall mood of the conversation, 
 
 ### Topic Relevancy
 
-Topic Relevancy evaluations identify and flag user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
+Topic Relevancy evaluators identify and flag user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
 {{< img src="llm_observability/evaluations/topic_relevancy_4.png" alt="A topic relevancy evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -163,13 +163,13 @@ Topic Relevancy evaluations identify and flag user inputs that deviate from the 
 |---|---|
 | Evaluated on input | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the LLM application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
 
-You can provide topics for this evaluation by filling out the template and replacing `<<PLEASE WRITE YOUR TOPICS HERE>>` with your desired topics.
+You can provide topics for this evaluator by filling out the template and replacing `<<PLEASE WRITE YOUR TOPICS HERE>>` with your desired topics.
 
 Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
 ### Toxicity
 
-Toxicity evaluations evaluates each input and output prompt from the user and the response from the LLM application for toxic content. This evaluation identifies and flags toxic content to ensure that interactions remain respectful and safe.
+Toxicity evaluators evaluate each input and output prompt from the user and the response from the LLM application for toxic content. This evaluator identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
 {{< img src="llm_observability/evaluations/toxicity_5.png" alt="A Toxicity evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -177,9 +177,9 @@ Toxicity evaluations evaluates each input and output prompt from the user and th
 |---|---|
 | Evaluated on input and output | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
-#### Configure a Toxicity evaluation
+#### Configure a Toxicity evaluator
 
-You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table. The template defaults to have every category except profanity and user dissatisfaction selected to be flagged as toxic.
+You can configure toxicity evaluators to use specific categories of toxicity, listed in the following table. The template defaults to have every category except profanity and user dissatisfaction selected to be flagged as toxic.
 
 | Category | Description |
 |---|---|
@@ -197,7 +197,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][6],
 
 ### Goal Completeness
 
-An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluation checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
+An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluator checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
 
 {{< img src="llm_observability/evaluations/goal_completeness_2.png" alt="A Goal Completeness evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
@@ -205,17 +205,17 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 |---|---|
 | Evaluated on LLM spans | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
-#### Configure a Goal Completeness evaluation
+#### Configure a Goal Completeness evaluator
 
-This evaluation works by analyzing a session to determine if all user intentions were successfully addressed. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
+This evaluator works by analyzing a session to determine if all user intentions were successfully addressed. The evaluator returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
 
-The span should contain meaningful `input_data` and `output_data` that represent the final state of the session. This helps the evaluation understand the session's context and outcomes when assessing completeness.
+The span should contain meaningful `input_data` and `output_data` that represent the final state of the session. This helps the evaluator understand the session's context and outcomes when assessing completeness.
 
 
 
 ### Tool Selection
 
-This evaluation checks whether the agent successfully selected the appropriate tools to address the user’s request. Incorrect or irrelevant tool choices lead to wasted calls, higher latency, and failed tasks.
+This evaluator checks whether the agent successfully selected the appropriate tools to address the user’s request. Incorrect or irrelevant tool choices lead to wasted calls, higher latency, and failed tasks.
 
 | Evaluation Stage | Evaluation Definition | 
 |---|---|
@@ -223,13 +223,13 @@ This evaluation checks whether the agent successfully selected the appropriate t
 
 {{< img src="llm_observability/evaluations/tool_selection_2.png" alt="A tool selection evaluation in Agent Observability" style="width:100%;" >}}
 
-#### Configure a Tool Selection evaluation
+#### Configure a Tool Selection evaluator
 
 1. Ensure you are running `dd-trace` v3.12+.
-1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
-1. Enable the `ToolSelection` template evaluation in the Datadog UI by [creating a new evaluation][18] or [editing an existing evaluation][19].
+1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluator:
+1. Enable the `ToolSelection` evaluator template in the Datadog UI by [creating a new evaluator][18] or [editing an existing evaluator][19].
 
-This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][20]** to run this evaluation.
+This evaluator is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluator. See the **[complete code and packages required][20]** to run this evaluator.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -290,16 +290,16 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 |---|---|
 | Evaluated on spans with tool calls | Verifies that arguments provided to a tool are correct and relevant based on the tool schema. Identifies invalid or irrelevant arguments. |
 
-{{< img src="llm_observability/evaluations/tool_argument_correctness_2.png" alt="A tool argument correctness error detected by the evaluation in Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_argument_correctness_2.png" alt="A tool argument correctness error detected by the evaluator in Agent Observability" style="width:100%;" >}}
 
-#### Configure a Tool Argument Correctness evaluation
+#### Configure a Tool Argument Correctness evaluator
 
 1. Install `dd-trace` v3.12+.
-1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluator:
 
-Enable the ToolArgumentCorrectness evaluation in the Datadog UI by [creating a new evaluation][18] or [editing an existing evaluation][19].
+Enable the ToolArgumentCorrectness evaluator in the Datadog UI by [creating a new evaluator][18] or [editing an existing evaluator][19].
 
-This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][21]** to run this evaluation.  
+This evaluator is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluator. See the **[complete code and packages required][21]** to run this evaluator.  
 
 {{< code-block lang="python" >}}
 import os
@@ -383,7 +383,7 @@ result = triage_agent.run_sync(
 {{< /code-block >}}
 
 #### Troubleshooting
-- Make sure your tools use type hints—the evaluation relies on schema definitions.
+- Make sure your tools use type hints—the evaluator relies on schema definitions.
 - Make sure to include a tool description (for example, the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
 - Validate that your LLM prompt includes enough context for correct argument construction.
 

@@ -1,9 +1,9 @@
 ---
-title: Custom LLM-as-a-Judge Evaluations
+title: Custom LLM-as-a-Judge Evaluators
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/
 - /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/
-description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across Agent Observability.
+description: How to create custom LLM-as-a-judge evaluators, and how to use their evaluation results across Agent Observability.
 further_reading:
 - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
   tag: "Blog"
@@ -22,33 +22,33 @@ further_reading:
   text: "Learn how to set up Agent Observability"
 - link: "/llm_observability/investigate/evaluations/managed_evaluations"
   tag: "Documentation"
-  text: "Learn about managed evaluations"
+  text: "Learn about managed evaluators"
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
   tag: "Hugging Face"
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
 ---
 
-Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. Define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run the evaluations at scale on:
+Custom LLM-as-a-judge evaluators use an LLM to judge the performance of another LLM. Define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run the evaluators at scale on:
 
 - **Span scope**—score the input and output of one LLM call, agent step, or tool invocation in isolation.
-- **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluations][16] for the full walkthrough, use cases, and prompt examples.
-- **Session scope**—feed every trace in a user session (and every span in those traces) to the LLM judge in a single prompt, so the evaluation can reason across an entire multi-turn interaction. See [Session-Level Evaluations][17] for the full walkthrough, use cases, and prompt examples.
+- **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluators][16] for the full walkthrough, use cases, and prompt examples.
+- **Session scope**—feed every trace in a user session (and every span in those traces) to the LLM judge in a single prompt, so the evaluation can reason across an entire multi-turn interaction. See [Session-Level Evaluators][17] for the full walkthrough, use cases, and prompt examples.
 
-## Create a custom LLM-as-a-judge evaluation
+## Create a custom LLM-as-a-judge evaluator
 
-You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can provide an evaluation description to generate an evaluation, use and build on existing [template LLM-as-a-judge evaluations][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
+You can create and manage custom evaluators from the [Evaluators page][1] in Agent Observability. You can provide an evaluator description to generate an evaluator, use and build on existing [LLM-as-a-judge evaluator templates][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
 
-<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
+<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a custom LLM-as-a-judge evaluator</a>.</div>
 
 Learn more about the [compatibility requirements][6].
 
 ### Configure the prompt
 
-1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
-   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluations page after selecting Create Evaluation." style="width:100%;" >}}
-1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluation runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
+1. In Datadog, navigate to the Agent Observability [Evaluators page][1]. Select {{< ui >}}Create Evaluator{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluators page after selecting Create Evaluator." style="width:100%;" >}}
+1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluator runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
-1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
+1. Provide a clear, descriptive {{< ui >}}evaluator name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Configure the model:
     1. Select the {{< ui >}}Account{{< /ui >}} dropdown menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
         - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
@@ -96,14 +96,14 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the {{< ui >}}User Prompt{{< /ui >}} field, specify what parts of the span, trace, or session to evaluate by adding variables. You can add any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` paths to read across traces. See [Prompt Templating][15] for the full reference. To edit the user prompt directly, select it and edit the text.
+8. In the {{< ui >}}User Prompt{{< /ui >}} field, specify what parts of the span, trace, or session to evaluate by adding variables. You can add any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluators, use `{{spans...}}` paths to read across spans; for session-scoped evaluators, use `{{traces...}}` paths to read across traces. See [Prompt Templating][15] for the full reference. To edit the user prompt directly, select it and edit the text.
 
    You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Filtered Traces{{< /ui >}} in trace scope, {{< ui >}}Filtered Sessions{{< /ui >}} in session scope) to add span data as a variable:
    1. Choose an account and an application so that spans, traces, or sessions show up on the right.
    2. Select one of the spans on the right to view its JSON.
    3. Select {{< ui >}}\+{{< /ui >}} to add the JSON to your user prompt.
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="The menu contents of the JSON view in the custom evaluator configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
 ### Define the evaluation output
 
@@ -490,12 +490,12 @@ function __evalPostProcessing(input) {
 
 <div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
 
-Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluation runs. This helps control coverage (which spans or traces are included) and cost (how many are sampled).
+Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluator runs. This helps control coverage (which spans or traces are included) and cost (how many are sampled).
    - {{< ui >}}Application{{< /ui >}}: Select the application you want to evaluate.
    - {{< ui >}}Evaluate On{{< /ui >}}: Choose one of the following:
-      - {{< ui >}}Trace{{< /ui >}}: Evaluate the full trace, including all its spans, as a single unit. Use this when the answer depends on context across multiple spans (agent goal completion, tool-use chains, RAG faithfulness). See [Trace-Level Evaluations][16] for examples and details on how trace completion is determined.
+      - {{< ui >}}Trace{{< /ui >}}: Evaluate the full trace, including all its spans, as a single unit. Use this when the answer depends on context across multiple spans (agent goal completion, tool-use chains, RAG faithfulness). See [Trace-Level Evaluators][16] for examples and details on how trace completion is determined.
       - {{< ui >}}Span{{< /ui >}}: Evaluate matching spans individually. Use the {{< ui >}}Query{{< /ui >}} field to scope to specific spans (for example, only root spans, only `llm` spans, or spans with a specific tag).
-      - {{< ui >}}Session{{< /ui >}}: Evaluate an entire user session, including every trace and its spans, as a single unit. Use this when the answer depends on context across multiple traces in the same session (user satisfaction, multi-turn coherence, or user behavior over time). Requires spans tagged with a `session_id`. See [Session-Level Evaluations][17] for examples and details on how session completion is determined.
+      - {{< ui >}}Session{{< /ui >}}: Evaluate an entire user session, including every trace and its spans, as a single unit. Use this when the answer depends on context across multiple traces in the same session (user satisfaction, multi-turn coherence, or user behavior over time). Requires spans tagged with a `session_id`. See [Session-Level Evaluators][17] for examples and details on how session completion is determined.
    - {{< ui >}}Query{{< /ui >}}: (Optional) Enter a query using Datadog query syntax to filter which spans or traces are evaluated. For example:
       - `@name:agent.workflow` to filter by span name
       - `env:prod` to filter by tag
@@ -509,13 +509,13 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluatio
 
 The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
 
-Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluation{{< /ui >}} to pre-fill inputs to your evaluation with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
+Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluator{{< /ui >}} to pre-fill inputs to your evaluator with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
 
 ## Viewing and using results
 
-After you {{< ui >}}Save and Publish{{< /ui >}} your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluation later.
+After you {{< ui >}}Save and Publish{{< /ui >}} your evaluator, Datadog automatically runs your evaluator on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluator later.
 
-Results are available across Agent Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
+Results are available across Agent Observability in near-real-time for published evaluators. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
@@ -544,7 +544,7 @@ You can:
 
 ## Using in experiments
 
-To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+To reuse a custom LLM-as-a-judge evaluator in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, RemoteEvaluator
@@ -560,9 +560,9 @@ experiment = LLMObs.experiment(
 experiment.run()
 {{< /code-block >}}
 
-You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluation Developer Guide.
+You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluator Developer Guide.
 
-## Best practices for reliable custom evaluations
+## Best practices for reliable custom evaluators
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
 - **Enable reasoning** when you need explainable decisions and to improve the accuracy on complex reasoning tasks.
@@ -581,15 +581,15 @@ If you need more details, the following metrics allow you to track the LLM resou
 - `ml_obs.estimated_usage.llm.output.tokens`
 - `ml_obs.estimated_usage.llm.total.tokens`
 
-Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluators contributing to your usage.
 
-## Configure LLM-as-a-judge evaluations from the API
+## Configure LLM-as-a-judge evaluators from the API
 
-You can use basic CRUD operations to manipulate managed evaluation configs, after you have the `DD_API_KEY` [API key][14] specified in your environment.
+You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator configs, after you have the `DD_API_KEY` [API key][14] specified in your environment.
 
- - [GET][11] existing evaluation configurations
- - [PUT][12] existing evaluation configurations
- - [DELETE][13] existing evaluation configurations
+ - [GET][11] existing evaluator configurations
+ - [PUT][12] existing evaluator configurations
+ - [DELETE][13] existing evaluator configurations
 
 ## Further Reading
 

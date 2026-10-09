@@ -1,5 +1,5 @@
 ---
-title: Evaluation Developer Guide
+title: Evaluator Developer Guide
 aliases:
   - /llm_observability/guide/evaluation_developer_guide
   - /llm_observability/evaluations/evaluation_developer_guide/
@@ -29,13 +29,13 @@ An **evaluation** measures a specific quality of your LLM application's output, 
 To test your LLM application against a dataset before deploying, run your evaluators in [LLM Experiments][4]. In Experiments, evaluators run automatically: the SDK calls your evaluator on each distinct record. Use evaluators through the SDK.
 
 ### Running evaluators in production
-To monitor the quality of your live LLM responses, run evaluators in production. You can run evaluators manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluations][5]. Use evaluators through the SDK, HTTP API, or the Datadog UI.
+To monitor the quality of your live LLM responses, run evaluators in production. You can run evaluators manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluators][5]. Use evaluators through the SDK, HTTP API, or the Datadog UI.
 
 For production, there are two approaches:
 - **Manual evaluations** (this guide): You run evaluators in your application code and submit results with `LLMObs.submit_evaluation()` or the HTTP API. This gives you full control over evaluation logic and timing.
-- **Custom LLM-as-a-judge evaluations**: You configure evaluations in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
+- **Custom LLM-as-a-judge evaluators**: You configure evaluators in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
 
-This guide focuses on manual evaluations. For managed LLM-as-a-judge evaluations, see [Custom LLM-as-a-Judge Evaluations][5].
+This guide focuses on manual evaluations. For custom LLM-as-a-judge evaluators, see [Custom LLM-as-a-Judge Evaluators][5].
 
 ### Evaluation components
 
@@ -278,7 +278,7 @@ judge = LLMJudge(
 - Use `reasoning=True` in structured outputs to include an explanation in results.
 - Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
 
-#### Publishing an LLMJudge as a Datadog managed evaluation
+#### Publishing an LLMJudge as a custom LLM-as-a-judge evaluator {#publishing-an-llmjudge-as-a-datadog-managed-evaluation}
 
 Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without manually recreating the configuration in the UI.
 
@@ -579,9 +579,9 @@ experiment = LLMObs.experiment(
 experiment.run()
 {{< /code-block >}}
 
-### Using managed evaluators
+### Using custom LLM-as-a-judge evaluators {#using-managed-evaluators}
 
-`RemoteEvaluator` lets you reference a [custom LLM-as-a-judge evaluation][5] configured in the Datadog UI by name, and run it as part of a local experiment. This allows you to reuse your production evaluators in offline experiments without reimplementing the evaluation logic in Python.
+`RemoteEvaluator` lets you reference a [custom LLM-as-a-judge evaluator][5] configured in the Datadog UI by name, and run it as part of a local experiment. This allows you to reuse your production evaluators in offline experiments without reimplementing the evaluation logic in Python.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -647,7 +647,7 @@ except RemoteEvaluatorError as e:
 
 ## Using evaluators in production
 
-<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
+<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluators</a> instead.</div>
 
 To submit evaluations from your application code, construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
