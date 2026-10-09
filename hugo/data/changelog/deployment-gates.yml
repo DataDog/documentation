@@ -1,0 +1,14 @@
+entries:
+  - change_type: added
+    date: '2026-10-09'
+    link: https://github.com/DataDog/documentation/pull/40587
+    operations:
+      - ListDeploymentGateEvaluations
+      - ListDeploymentRuleEvaluations
+    title: Document public Deployment Gate and rule evaluation endpoints
+  - change_type: modified
+    date: '2026-10-09'
+    link: https://github.com/DataDog/documentation/pull/40587
+    operations:
+      - ListDeploymentGates
+    title: Document public Deployment Gate and rule evaluation endpoints

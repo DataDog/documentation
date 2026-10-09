@@ -35572,6 +35572,126 @@ components:
       type: string
       x-enum-varnames:
         - DEPLOYMENT_GATE
+    DeploymentGateEvaluationAttributes:
+      description: Attributes of a deployment gate evaluation.
+      properties:
+        dry_run:
+          description: Whether this evaluation used gate-level dry run.
+          example: true
+          type: boolean
+        duration_seconds:
+          description: Evaluation duration in seconds. Null while it is in progress.
+          example: 900
+          format: int64
+          nullable: true
+          type: integer
+        env:
+          description: Deployment environment evaluated by the gate.
+          example: prod
+          type: string
+        evaluation_id:
+          description: Gate evaluation UUID. Matches the resource `id`.
+          example: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+          format: uuid
+          type: string
+        finished_at:
+          description: Time the evaluation finished. Null while it is in progress.
+          example: "2026-09-14T08:15:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        gate_id:
+          description: Configured deployment gate UUID. Null for just-in-time evaluations.
+          example: e7cd2af1-b67b-11ee-8d0d-2a7caf4aa214
+          format: uuid
+          nullable: true
+          type: string
+        identifier:
+          description: Deployment gate identifier.
+          example: default
+          type: string
+        service:
+          description: Service evaluated by the deployment gate.
+          example: checkout
+          type: string
+        started_at:
+          description: Time the evaluation started.
+          example: "2026-09-14T08:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+        version:
+          description: Evaluated deployment version. Empty when no version was provided.
+          example: "2026.09.14.1"
+          type: string
+      required:
+        - evaluation_id
+        - gate_id
+        - service
+        - env
+        - identifier
+        - version
+        - status
+        - dry_run
+        - started_at
+        - finished_at
+        - duration_seconds
+      type: object
+    DeploymentGateEvaluationData:
+      description: JSON:API deployment gate evaluation resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGateEvaluationAttributes"
+        id:
+          description: Deployment gate evaluation UUID.
+          example: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGateEvaluationDataType"
+      required: [id, type, attributes]
+      type: object
+    DeploymentGateEvaluationDataType:
+      default: deployment_gate_evaluation
+      description: JSON:API type for a deployment gate evaluation.
+      enum: [deployment_gate_evaluation]
+      example: deployment_gate_evaluation
+      type: string
+      x-enum-varnames: [DEPLOYMENT_GATE_EVALUATION]
+    DeploymentGateEvaluationListMeta:
+      description: Pagination metadata.
+      properties:
+        page:
+          $ref: "#/components/schemas/DeploymentGateEvaluationPage"
+      required: [page]
+      type: object
+    DeploymentGateEvaluationPage:
+      description: Cursor pagination information.
+      properties:
+        next_cursor:
+          description: Opaque cursor for the next page. Absent on the final page.
+          type: string
+        size:
+          description: Requested maximum number of resources in this page.
+          example: 1
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      required: [size]
+      type: object
+    DeploymentGateEvaluationsResponse:
+      description: Paginated deployment gate evaluations.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DeploymentGateEvaluationData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DeploymentGateEvaluationListMeta"
+      required: [data, meta]
+      type: object
     DeploymentGateResponse:
       description: Response for a deployment gate.
       properties:
@@ -35670,6 +35790,237 @@ components:
           type: string
       required:
         - id
+      type: object
+    DeploymentGateRuleEvaluationAttributes:
+      description: Attributes of a deployment gate rule evaluation.
+      properties:
+        configuration:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationConfiguration"
+        dry_run:
+          description: Whether this rule is non-enforcing. A failed dry-run rule is ignored when computing the gate outcome. Independent of `gate_dry_run`.
+          example: false
+          type: boolean
+        duration_seconds:
+          description: Rule evaluation duration in seconds. Null while it is in progress.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        env:
+          description: Evaluated environment.
+          example: prod
+          type: string
+        evaluation_id:
+          description: Rule evaluation UUID. Matches the resource `id`.
+          example: 4f66c1c6-8346-59e5-be44-238214133260
+          format: uuid
+          type: string
+        failures:
+          $ref: "#/components/schemas/DeploymentGateRuleFailures"
+        finished_at:
+          description: Time the rule evaluation finished. Null while it is in progress.
+          example: "2026-09-14T08:15:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        gate_dry_run:
+          description: Whether the parent gate is dry-run. A failed dry-run gate blocks but does not stop deployment. Independent of rule-level `dry_run`.
+          example: false
+          type: boolean
+        gate_evaluation_id:
+          description: Deployment gate evaluation UUID.
+          example: 426a8f7b-b3e8-45f9-9d99-a1ed2f7fea04
+          format: uuid
+          type: string
+        gate_id:
+          description: Configured deployment gate UUID. Null for just-in-time evaluations.
+          example: e7cd2af1-b67b-11ee-8d0d-2a7caf4aa214
+          format: uuid
+          nullable: true
+          type: string
+        identifier:
+          description: Deployment gate identifier.
+          example: default
+          type: string
+        name:
+          description: Rule name.
+          example: APM faulty deployment detection
+          type: string
+        reason:
+          description: Reason for the rule result.
+          example: A faulty resource was detected.
+          type: string
+        rule_id:
+          description: Configured deployment rule UUID. Null for just-in-time rules.
+          example: 5cb4e76f-2937-47d7-80c8-7255ce2b76a4
+          format: uuid
+          nullable: true
+          type: string
+        service:
+          description: Evaluated service.
+          example: checkout
+          type: string
+        started_at:
+          description: Time the rule evaluation started.
+          example: "2026-09-14T08:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+        type:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationType"
+        version:
+          description: Evaluated deployment version. Empty when no version was provided.
+          example: "2026.09.14.1"
+          type: string
+      required:
+        - evaluation_id
+        - gate_evaluation_id
+        - gate_id
+        - rule_id
+        - service
+        - env
+        - identifier
+        - version
+        - gate_dry_run
+        - name
+        - type
+        - status
+        - dry_run
+        - reason
+        - started_at
+        - finished_at
+        - duration_seconds
+        - configuration
+        - failures
+      type: object
+    DeploymentGateRuleEvaluationConfiguration:
+      additionalProperties: false
+      description: |-
+        Evaluated rule configuration. Fields depend on rule type and unset fields are omitted.
+        Monitor rules can include `duration`, `query`, `monitor_ids`, `warmup`, `fail_on_no_groups_found`, and `fail_on_no_data`.
+        Faulty deployment detection rules can include `duration`, `allowed_resources`, and `excluded_resources`.
+      properties:
+        allowed_resources:
+          description: APM resources explicitly allowed by faulty deployment detection.
+          items:
+            type: string
+          type: array
+        duration:
+          description: Evaluation duration configured for this rule.
+          format: int64
+          type: integer
+        excluded_resources:
+          description: APM resources excluded from faulty deployment detection.
+          items:
+            type: string
+          type: array
+        fail_on_no_data:
+          description: Whether a monitor rule fails when no data is found.
+          type: boolean
+        fail_on_no_groups_found:
+          description: Whether a monitor rule fails when no groups are found.
+          type: boolean
+        monitor_ids:
+          description: Monitor IDs evaluated by a monitor rule.
+          items:
+            type: string
+          type: array
+        query:
+          description: Monitor query used by a monitor rule.
+          type: string
+        warmup:
+          description: Warm-up duration in seconds for a monitor rule. Omitted when zero.
+          format: int64
+          type: integer
+      type: object
+    DeploymentGateRuleEvaluationData:
+      description: JSON:API deployment gate rule evaluation resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationAttributes"
+        id:
+          description: Rule evaluation UUID.
+          example: 4f66c1c6-8346-59e5-be44-238214133260
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationDataType"
+      required: [id, type, attributes]
+      type: object
+    DeploymentGateRuleEvaluationDataType:
+      default: deployment_gate_rule_evaluation
+      description: JSON:API type for a deployment gate rule evaluation.
+      enum: [deployment_gate_rule_evaluation]
+      example: deployment_gate_rule_evaluation
+      type: string
+      x-enum-varnames: [DEPLOYMENT_GATE_RULE_EVALUATION]
+    DeploymentGateRuleEvaluationType:
+      description: Type of deployment gate rule.
+      enum: [monitor, faulty_deployment_detection]
+      example: faulty_deployment_detection
+      type: string
+      x-enum-varnames: [MONITOR, FAULTY_DEPLOYMENT_DETECTION]
+    DeploymentGateRuleEvaluationsResponse:
+      description: Paginated deployment gate rule evaluations.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DeploymentGateRuleEvaluationData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DeploymentGateEvaluationListMeta"
+      required: [data, meta]
+      type: object
+    DeploymentGateRuleFailureMonitor:
+      description: Failed monitor reference.
+      properties:
+        id:
+          description: Monitor ID.
+          example: "12345678"
+          type: string
+        state:
+          description: Monitor state that caused the failure.
+          example: alert
+          type: string
+        url:
+          description: URL for inspecting the monitor during the evaluation window.
+          example: https://app.datadoghq.com/monitors/12345678
+          type: string
+      required: [id, url, state]
+      type: object
+    DeploymentGateRuleFailureNarrative:
+      description: Faulty deployment detection narrative reference.
+      properties:
+        hostgroup:
+          description: Host group associated with the narrative.
+          example: service:checkout,env:prod
+          type: string
+        id:
+          description: Narrative ID.
+          example: narrative-123
+          type: string
+      required: [id, hostgroup]
+      type: object
+    DeploymentGateRuleFailures:
+      description: Rule failure details.
+      properties:
+        faulty_apm_resources:
+          description: Names of faulty APM resources.
+          example:
+            - GET /checkout
+          items:
+            type: string
+          type: array
+        monitors:
+          items:
+            $ref: "#/components/schemas/DeploymentGateRuleFailureMonitor"
+          type: array
+        narratives:
+          items:
+            $ref: "#/components/schemas/DeploymentGateRuleFailureNarrative"
+          type: array
+      required: [monitors, faulty_apm_resources, narratives]
       type: object
     DeploymentGateRulesResponse:
       description: Response for a deployment gate rules.
@@ -163554,7 +163905,31 @@ paths:
         Use `page[cursor]` and `page[size]` query parameters to paginate through results.
       operationId: ListDeploymentGates
       parameters:
-        - description: Cursor for pagination. Use the `meta.page.next_cursor` value from the previous response.
+        - description: Service name.
+          in: query
+          name: filter[service]
+          required: false
+          schema:
+            type: string
+        - description: Environment name.
+          in: query
+          name: filter[env]
+          required: false
+          schema:
+            type: string
+        - description: Gate identifier.
+          in: query
+          name: filter[identifier]
+          required: false
+          schema:
+            type: string
+        - description: Dry-run state.
+          in: query
+          name: filter[dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Cursor for pagination. Use the `meta.page.next_cursor` value from the previous response. Invalid cursors return 400.
           in: query
           name: page[cursor]
           required: false
@@ -163690,6 +164065,374 @@ paths:
         operator: OR
         permissions:
           - deployment_gates_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployment_gates/evaluations:
+    get:
+      description: |-
+        Returns deployment gate evaluations started in a maximum 30-day window (the default is the previous 24 hours).
+        Results are ordered by start time, newest first.
+        In-progress state is near-real-time and mutable. Finished state is eventually consistent.
+      operationId: ListDeploymentGateEvaluations
+      parameters:
+        - description: Inclusive evaluation start time. Defaults to 24 hours before the request. Together with `filter[to]`, the window may span no more than 30 days.
+          in: query
+          name: filter[from]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Exclusive evaluation start time. Defaults to the request time. Must be after `filter[from]`; the window may span no more than 30 days.
+          in: query
+          name: filter[to]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Service values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[service]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Environment values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[env]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Gate identifier values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[identifier]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Gate outcomes. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[status]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+            type: array
+        - description: Gate-level dry-run state.
+          in: query
+          name: filter[dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Gate evaluation UUID. No match returns an empty list.
+          in: query
+          name: filter[evaluation_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Configured gate UUID. Just-in-time evaluations have no gate ID.
+          in: query
+          name: filter[gate_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Deployment version values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[version]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Maximum evaluations returned.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 20
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Opaque cursor returned in `meta.page.next_cursor` by the previous page. Invalid cursors return 400.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          dry_run: true
+                          duration_seconds: 900
+                          env: prod
+                          evaluation_id: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+                          finished_at: "2026-09-14T08:15:00Z"
+                          gate_id: e7cd2af1-b67b-11ee-8d0d-2a7caf4aa214
+                          identifier: default
+                          service: checkout
+                          started_at: "2026-09-14T08:00:00Z"
+                          status: fail
+                          version: "2026.09.14.1"
+                        id: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+                        type: deployment_gate_evaluation
+                    meta:
+                      page:
+                        next_cursor: MTc4OTM3MjgwMFx4MDA3ODUzYWY3MC1lNmJmLTQ5ZDgtYTZjYy0xYjliNTBlZjA1Mzc=
+                        size: 20
+              schema:
+                $ref: "#/components/schemas/DeploymentGateEvaluationsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad request.
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - deployment_gates_read
+      summary: List deployment gate evaluations
+      tags: ["Deployment Gates"]
+      x-menu-order: 13
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions: [deployment_gates_read]
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployment_gates/evaluations/rules:
+    get:
+      description: |-
+        Returns rule evaluations whose gate evaluation started in a maximum 30-day window (the default is the previous 24 hours).
+        Filter by gate, rule, gate evaluation, or rule evaluation ID; omit IDs for cross-evaluation searches.
+        Results are ordered by start time, newest first.
+        In-progress state is near-real-time and mutable. Finished state is eventually consistent.
+        Gate-level and rule-level dry-run states are independent.
+        Pagination is deterministic but not snapshot isolated; clients should deduplicate by rule evaluation ID.
+      operationId: ListDeploymentRuleEvaluations
+      parameters:
+        - description: Inclusive gate evaluation start time. Defaults to 24 hours before the request. Together with `filter[to]`, the window may span no more than 30 days.
+          in: query
+          name: filter[from]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Exclusive gate evaluation start time. Defaults to the request time. Must be after `filter[from]`; the window may span no more than 30 days.
+          in: query
+          name: filter[to]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Gate evaluation UUID. No match returns an empty list.
+          in: query
+          name: filter[gate_evaluation_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Rule evaluation UUID. No match returns an empty list.
+          in: query
+          name: filter[evaluation_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Configured gate UUID. Just-in-time evaluations have no gate ID.
+          in: query
+          name: filter[gate_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Configured rule UUID. Just-in-time rules have no rule ID.
+          in: query
+          name: filter[rule_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Evaluated service values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[service]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Evaluated environment values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[env]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Gate identifier values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[identifier]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Evaluated deployment version values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[version]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Rule statuses. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[status]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+            type: array
+        - description: |-
+            Rule types. Repeated or comma-separated values are combined with OR.
+            Defaults to all rule types.
+          in: query
+          name: filter[type]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/DeploymentGateRuleEvaluationType"
+            type: array
+        - description: Rule-level dry-run state. A failed dry-run rule is ignored when computing the gate outcome.
+          in: query
+          name: filter[dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Gate-level dry-run state. A failed dry-run gate blocks but does not stop deployment.
+          in: query
+          name: filter[gate_dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Rule names. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[name]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Maximum rule evaluations returned.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Opaque cursor returned in `meta.page.next_cursor` by the previous page. Invalid cursors return 400.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          configuration:
+                            duration: 900
+                          dry_run: false
+                          duration_seconds: 900
+                          env: prod
+                          evaluation_id: 4f66c1c6-8346-59e5-be44-238214133260
+                          failures:
+                            faulty_apm_resources: [GET /checkout]
+                            monitors: []
+                            narratives: []
+                          finished_at: "2026-09-14T08:15:00Z"
+                          gate_dry_run: false
+                          gate_evaluation_id: 426a8f7b-b3e8-45f9-9d99-a1ed2f7fea04
+                          gate_id:
+                          identifier: default
+                          name: APM faulty deployment detection
+                          reason: A faulty resource was detected.
+                          rule_id:
+                          service: checkout
+                          started_at: "2026-09-14T08:00:00Z"
+                          status: fail
+                          type: faulty_deployment_detection
+                          version: "2026.09.14.1"
+                        id: 4f66c1c6-8346-59e5-be44-238214133260
+                        type: deployment_gate_rule_evaluation
+                    meta:
+                      page:
+                        size: 50
+              schema:
+                $ref: "#/components/schemas/DeploymentGateRuleEvaluationsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad request.
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - deployment_gates_read
+      summary: List deployment gate rule evaluations
+      tags: ["Deployment Gates"]
+      x-menu-order: 14
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions: [deployment_gates_read]
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
