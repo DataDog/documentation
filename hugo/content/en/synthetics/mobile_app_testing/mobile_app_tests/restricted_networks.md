@@ -1,6 +1,6 @@
 ---
 title: Run Mobile App tests from Restricted Networks
-description: "Configure network access for Mobile App tests using physical and IP-routed locations."
+description: "Run Mobile App tests from restricted networks"
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
@@ -18,33 +18,14 @@ cascade:
 
 ## Overview
 
-A mobile application may access services protected by firewalls, IP allowlists, or other network restrictions. To test the application, configure those services to accept traffic from the devices running the Mobile App tests.
-
-Mobile App Testing supports physical locations and IP-routed locations. The selected location type affects the source IP addresses your network needs to allow.
-
-**IP-location routing is not a connection to a corporate VPN.** Selecting an IP-routed location does not establish a tunnel into a private network or make private services publicly reachable. The application's services must remain reachable through your organization's approved network-access configuration.
+Some of your applications might not be available to the public internet because they are accessing development or local environments, or they are internal applications intended for users within your corporate network (for example, your corporate intranet or VPN).
 
 {{< img src="/mobile_app_testing/mobile_app_restricted_networks.png" alt="Diagram showing testing of mobile apps behind a firewall or restricted networks" style="width:100%;">}}
 
-## Locations and network access
+To test these applications, add the following IP address ranges to your company's allowlist. This ensures that requests from your applications in Datadog Mobile App Testing succeed.
 
-### Physical locations
+The following is the list of IP ranges associated with the real devices used for Datadog Mobile App Testing:
 
-Physical locations use the US or EU device location without applying IP-location routing. Device availability varies by model and operating system version. See [Supported Mobile App Testing Devices][3] for physical-location availability.
-
-### IP-routed locations
-
-IP-routed locations route the device's network traffic through a selected geographic location. Use these locations to test application behavior that depends on the apparent geographic origin of network requests.
-
-Only devices that support IP routing can use IP-routed locations. Physical-location availability does not indicate IP-routing support. Check compatibility in the device selector when creating or editing a test.
-
-If the application uses an IP allowlist, verify the egress IP addresses used by the selected routed locations before configuring the allowlist. Do not assume that allowing physical-device IP addresses also allows IP-routed traffic. Contact [Datadog support][1] for help confirming the network-access requirements.
-
-## Device traffic
-
-Configure the application's firewall or IP allowlist to accept traffic from the devices running the tests. Allowlisting source IP addresses does not make an otherwise unreachable private endpoint accessible.
-
-The following IP ranges are associated with the real devices used for Mobile App Testing. For IP-routed locations, verify the applicable egress addresses separately rather than treating this list as coverage for every routed location.
 
 `54.244.50.32/27`</br>
 `99.78.197.0/29`</br>
@@ -91,11 +72,9 @@ The following IP ranges are associated with the real devices used for Mobile App
 `3.64.247.89`<br>
 
 
-## Network access for HTTP steps {#http-steps}
+### HTTP steps
 
-HTTP steps have separate network-access requirements from requests made by the mobile application. Selecting an IP-routed device location does not route HTTP-step traffic through that location.
-
-If the tests include HTTP steps, allow the following HTTP-step IP ranges in addition to the applicable device-traffic IP addresses. If the tests do not include HTTP steps, omit these ranges.
+Below is the list of IP ranges required for executing HTTP steps within Synthetic Mobile Application Tests. You may disregard these ranges if your tests do not use HTTP steps.
 
 `52.13.151.244/32`<br>
 `54.201.250.26/32`<br>
@@ -120,24 +99,13 @@ If the tests include HTTP steps, allow the following HTTP-step IP ranges in addi
 
 If you experience issues with Mobile App Testing on restricted networks, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
-### Application requests are blocked
-
-If the application launches but cannot reach its services:
-
-1. Check whether the test uses a physical or IP-routed location.
-2. Verify that the selected device supports that location.
-3. Check firewall or access logs for the request's source IP address and confirm that the allowlist permits it.
-4. Verify that the destination is reachable from the test device. IP-location routing does not establish access to a corporate VPN.
-
 ### Unable to launch recorder
 
-The Mobile App Testing recorder requires connectivity between your browser and the remote device. Datadog uses UDP/TCP TURN connections to establish WebRTC connections. A restrictive firewall or VPN on your workstation can block these connections, resulting in a **Device unexpectedly disconnected** error.
-
-This connection is separate from the device's access to the application's services. Allowlisting application traffic does not necessarily resolve recorder connectivity problems:
+To launch the Mobile Application Testing (MAT) Recorder, Datadog needs to establish UDP/TCP TURN connections to enable WebRTC connections. If the user is behind a restrictive network (such as a strict firewall or VPN), these connections may fail, leading to a "Device unexpectedly disconnected" error:
 
 {{< img src="/mobile_app_testing/restricted_networks/device_disconnected_error.png" alt="Screenshot of launching a mobile device, displaying the disconnected error." style="width:100%;" >}}
 
-To check UDP/TCP TURN connectivity, run a [Twilio Network Test][2]. A successful connection displays a message such as "Successfully established a UDP connection to Twilio":
+To check for successful UDP/TCP TURN connections, run a network test using a [Twilio Network Test][2]. The result of the test confirms whether connectivity to TURN servers is successful or not. If the connection is successful, you will see a message like "Successfully established a UDP connection to Twilio":
 
 {{< img src="/mobile_app_testing/restricted_networks/twilio_test.png" alt="Screenshot of a successful test using a Twilio Network Test." style="width:100%;" >}}
 
@@ -156,7 +124,6 @@ If the test fails, Twilio generates a log output indicating errors due to an ina
 
 [1]: /help
 [2]: https://networktest.twilio.com/
-[3]: /synthetics/mobile_app_testing/devices/
 
 ## Further reading
 
