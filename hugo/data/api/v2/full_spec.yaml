@@ -84248,6 +84248,296 @@ components:
           description: A session identifier used for logging and tracing the assumed role session.
           type: string
       type: object
+    ObservabilityPipelineAzureDataExplorerDestination:
+      description: |-
+        The `azure_data_explorer` destination sends log events to an Azure Data Explorer table.
+
+        **Supported pipeline types:** logs
+      properties:
+        auth:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuth"
+        batch:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationBatch"
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionGzip"
+        database:
+          description: The name of the Azure Data Explorer database to ingest into. Supports template syntax.
+          example: logs_db
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: azure-data-explorer-destination
+          type: string
+        ingestion_endpoint_key:
+          description: |-
+            Name of the environment variable or secret that holds the Azure Data Explorer ingestion endpoint URL.
+            Defaults to `DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT` (prefixed with `DD_OP_` at runtime).
+          example: AZURE_DATA_EXPLORER_INGESTION_ENDPOINT
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        mapping_reference:
+          description: The name of a pre-created ingestion mapping on the table used to map incoming events to columns. Supports template syntax.
+          example: application_logs_mapping
+          nullable: true
+          type: string
+        table:
+          description: The name of the Azure Data Explorer table to ingest into. Supports template syntax.
+          example: application_logs
+          type: string
+        token_scope:
+          description: |-
+            The OAuth scope requested when acquiring an access token for Azure Data Explorer.
+            Defaults to `https://kusto.kusto.windows.net/.default`.
+          example: https://kusto.kusto.windows.net/.default
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationType"
+      required:
+        - id
+        - type
+        - inputs
+        - database
+        - table
+        - auth
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineAzureDataExplorerDestinationAuth:
+      description: Authentication configuration for Azure Data Explorer. The `azure_credential_kind` field selects the credential type.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCli"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecret"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificate"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentity"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentity"
+    ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCli:
+      description: Authenticate using the Azure CLI credentials available in the environment.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCliKind"
+      required:
+        - azure_credential_kind
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCliKind:
+      default: azure_cli
+      description: The Azure credential kind. The value should always be `azure_cli`.
+      enum:
+        - azure_cli
+      example: azure_cli
+      type: string
+      x-enum-varnames:
+        - AZURE_CLI
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificate:
+      description: Authenticate using a Microsoft Entra application client certificate.
+      properties:
+        azure_client_id:
+          description: The Microsoft Entra application (client) ID.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificateKind"
+        azure_tenant_id:
+          description: The Microsoft Entra tenant ID.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+        certificate_password_key:
+          description: Name of the environment variable or secret that holds the password for the client certificate.
+          example: AZURE_CERTIFICATE_PASSWORD
+          nullable: true
+          type: string
+        certificate_path:
+          description: Path to the `.pfx` client certificate file on the Worker.
+          example: /etc/certs/client.pfx
+          type: string
+      required:
+        - azure_credential_kind
+        - azure_tenant_id
+        - azure_client_id
+        - certificate_path
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificateKind:
+      default: client_certificate_credential
+      description: The Azure credential kind. The value should always be `client_certificate_credential`.
+      enum:
+        - client_certificate_credential
+      example: client_certificate_credential
+      type: string
+      x-enum-varnames:
+        - CLIENT_CERTIFICATE_CREDENTIAL
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecret:
+      description: Authenticate using a Microsoft Entra application client secret.
+      properties:
+        azure_client_id:
+          description: The Microsoft Entra application (client) ID.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        azure_client_secret_key:
+          description: Name of the environment variable or secret that holds the Microsoft Entra application client secret.
+          example: AZURE_CLIENT_SECRET
+          type: string
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecretKind"
+        azure_tenant_id:
+          description: The Microsoft Entra tenant ID.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+      required:
+        - azure_credential_kind
+        - azure_tenant_id
+        - azure_client_id
+        - azure_client_secret_key
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecretKind:
+      default: client_secret_credential
+      description: The Azure credential kind. The value should always be `client_secret_credential`.
+      enum:
+        - client_secret_credential
+      example: client_secret_credential
+      type: string
+      x-enum-varnames:
+        - CLIENT_SECRET_CREDENTIAL
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentity:
+      description: Authenticate using an Azure managed identity.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityKind"
+        user_assigned_managed_identity_id:
+          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
+          example: 00000000-0000-0000-0000-000000000000
+          nullable: true
+          type: string
+        user_assigned_managed_identity_id_type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
+      required:
+        - azure_credential_kind
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion:
+      description: Authenticate using a managed identity as a client assertion for a Microsoft Entra application.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind"
+        client_assertion_client_id:
+          description: The client ID of the Microsoft Entra application that trusts the managed identity.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        client_assertion_tenant_id:
+          description: The tenant ID of the Microsoft Entra application that trusts the managed identity.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+        user_assigned_managed_identity_id:
+          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
+          example: 00000000-0000-0000-0000-000000000000
+          nullable: true
+          type: string
+        user_assigned_managed_identity_id_type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
+      required:
+        - azure_credential_kind
+        - client_assertion_client_id
+        - client_assertion_tenant_id
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind:
+      default: managed_identity_client_assertion
+      description: The Azure credential kind. The value should always be `managed_identity_client_assertion`.
+      enum:
+        - managed_identity_client_assertion
+      example: managed_identity_client_assertion
+      type: string
+      x-enum-varnames:
+        - MANAGED_IDENTITY_CLIENT_ASSERTION
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityKind:
+      default: managed_identity
+      description: The Azure credential kind. The value should always be `managed_identity`.
+      enum:
+        - managed_identity
+      example: managed_identity
+      type: string
+      x-enum-varnames:
+        - MANAGED_IDENTITY
+    ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentity:
+      description: Authenticate using Azure Workload Identity (for example, on Kubernetes).
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentityKind"
+        client_id:
+          description: The client ID of the Microsoft Entra application. If omitted, it is read from the environment.
+          example: 22222222-2222-2222-2222-222222222222
+          nullable: true
+          type: string
+        tenant_id:
+          description: The Microsoft Entra tenant ID. If omitted, it is read from the environment.
+          example: 11111111-1111-1111-1111-111111111111
+          nullable: true
+          type: string
+        token_file_path:
+          description: Path to the federated token file. If omitted, it is read from the environment.
+          example: /var/run/secrets/azure/tokens/azure-identity-token
+          nullable: true
+          type: string
+      required:
+        - azure_credential_kind
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentityKind:
+      default: workload_identity
+      description: The Azure credential kind. The value should always be `workload_identity`.
+      enum:
+        - workload_identity
+      example: workload_identity
+      type: string
+      x-enum-varnames:
+        - WORKLOAD_IDENTITY
+    ObservabilityPipelineAzureDataExplorerDestinationBatch:
+      description: Event batching settings for Azure Data Explorer ingestion.
+      properties:
+        max_bytes:
+          description: Maximum batch size in bytes.
+          example: 2000000
+          format: int64
+          maximum: 4000000
+          minimum: 1
+          type: integer
+        max_events:
+          description: Maximum number of events per batch before it is flushed.
+          example: 1000
+          format: int64
+          minimum: 1
+          type: integer
+        timeout_secs:
+          description: Maximum number of seconds to wait before flushing a partial batch.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType:
+      description: The type of the user-assigned managed identity ID.
+      enum:
+        - client_id
+        - object_id
+        - resource_id
+      example: client_id
+      type: string
+      x-enum-varnames:
+        - CLIENT_ID
+        - OBJECT_ID
+        - RESOURCE_ID
+    ObservabilityPipelineAzureDataExplorerDestinationType:
+      default: azure_data_explorer
+      description: The destination type. The value should always be `azure_data_explorer`.
+      enum:
+        - azure_data_explorer
+      example: azure_data_explorer
+      type: string
+      x-enum-varnames:
+        - AZURE_DATA_EXPLORER
     ObservabilityPipelineAzureStorageDestinationCompression:
       description: |-
         Compression configuration for archived logs. When omitted, logs are compressed with gzip
@@ -84660,6 +84950,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3GenericDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination"
         - $ref: "#/components/schemas/AzureStorageDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineClickhouseDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination"
