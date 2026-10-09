@@ -9287,6 +9287,11 @@ menu:
       parent: synthetics
       identifier: synthetics_explore
       weight: 10
+    - name: Overview Page
+      url: synthetics/explore/overview
+      parent: synthetics_explore
+      identifier: synthetics_explore_overview
+      weight: 800
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
