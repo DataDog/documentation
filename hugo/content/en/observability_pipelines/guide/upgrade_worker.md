@@ -29,7 +29,7 @@ Worker version 2.21.0 gives you access to the following:
 
 - The Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage) now support a configurable `compression` option (`gzip` or `zstd`).
 - The Remap to OCSF processor now includes:
-    - The AWS Config Rules OCSF mapping
+    - The AWS Config Rules OCSF mapping.
     - The `concat_strings` OCSF mapping function, which joins the string representations of multiple source fields or constant values.
 - The Splunk HEC destination now supports an `endpoint_target` option (`event` or `raw`) to determine which Splunk HEC endpoint events are sent to.
 
@@ -39,7 +39,7 @@ Worker version 2.21.0 gives you access to the following:
 - Internal Worker logs and traces are now enriched with the pipeline name (`op_worker.pipeline_name:<pipeline_name>`), matching the tag already present on metrics.
 - The Worker's logging during graceful shutdown has been improved.
 - The validation of destination endpoints has been improved to check for incomplete or empty URLs.
-- The `parse_aws_vpc_flow_log` function in the Custom Processor now recognizes all fields introduced in AWS VPC Flow Logs versions 7 through 11, including:
+- The `parse_aws_vpc_flow_log` function in the Custom Processor now recognizes all fields introduced in Amazon VPC Flow Logs versions 7 through 11, including:
     - Version 7: ECS metadata fields
     - Version 8: `reject_reason`
     - Version 9: `resource_id`
