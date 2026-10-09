@@ -6313,6 +6313,12 @@
     "request_description": "",
     "request_schema_description": "List of requests to create ServiceNow tickets for security findings."
   },
+  "UpdateFindingsSeverity": {
+    "description": "Set or clear the manual severity override of security findings.\n\nYou can update up to 100 security findings per request.\nUse the `set` action with a `value` to apply a manual severity override.\n`value` is required for `set` and must be omitted for `clear`.\nThe `info` value sets the lowest severity the finding type allows.\nUse the `clear` action to remove a manual severity override.\n`clear` does not remove a severity set by an automation rule.\nThe optional `description` is accepted with both actions and has a limit of 280 characters.\n\nAuto-closed findings are excluded.\nFindings whose severity was set by an automation rule are skipped and listed in the response `meta.warnings`.\nIf every finding is skipped this way, the request fails with a `400` error.\nFindings that cannot be found are skipped without a warning.\nThe request fails with a `404` error only if none of the findings can be found.",
+    "summary": "Override the severity of security findings",
+    "request_description": "",
+    "request_schema_description": "Request to set or clear the manual severity override of security findings."
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"

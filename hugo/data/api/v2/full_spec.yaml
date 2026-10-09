@@ -119914,6 +119914,193 @@ components:
       x-enum-varnames:
         - UP_ONE
         - DOWN_ONE
+    SeverityOverrideAttributes:
+      description: |-
+        Severity override to apply to the findings.
+        Set `action` to `set` to apply a manual severity override with the given `value`.
+        Set `action` to `clear` to remove a manual severity override.
+      oneOf:
+        - $ref: "#/components/schemas/SeverityOverrideSet"
+        - $ref: "#/components/schemas/SeverityOverrideClear"
+    SeverityOverrideClear:
+      description: |-
+        Removes the manual severity override of the findings.
+        This action does not remove a severity set by an automation rule.
+      properties:
+        action:
+          $ref: "#/components/schemas/SeverityOverrideClearActionType"
+        description:
+          description: Additional information about the severity change. This field has a limit of 280 characters.
+          example: "Severity override no longer needed."
+          maxLength: 280
+          type: string
+      required:
+        - action
+      type: object
+    SeverityOverrideClearActionType:
+      default: clear
+      description: The action that removes a manual severity override.
+      enum:
+        - clear
+      example: clear
+      type: string
+      x-enum-varnames:
+        - CLEAR
+    SeverityOverrideDataType:
+      default: severity_override
+      description: Severity override resource type.
+      enum:
+        - severity_override
+      example: severity_override
+      type: string
+      x-enum-varnames:
+        - SEVERITY_OVERRIDE
+    SeverityOverrideRequest:
+      description: Request to set or clear the manual severity override of security findings.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityOverrideRequestData"
+      required:
+        - data
+      type: object
+    SeverityOverrideRequestData:
+      description: Data of the severity override request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityOverrideRequestDataAttributes"
+        id:
+          description: Unique identifier of the severity override request. If not provided, an identifier is generated.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/SeverityOverrideRequestDataRelationships"
+        type:
+          $ref: "#/components/schemas/SeverityOverrideDataType"
+      required:
+        - attributes
+        - relationships
+        - type
+      type: object
+    SeverityOverrideRequestDataAttributes:
+      description: Attributes of the severity override request.
+      properties:
+        severity:
+          $ref: "#/components/schemas/SeverityOverrideAttributes"
+      required:
+        - severity
+      type: object
+    SeverityOverrideRequestDataRelationships:
+      description: Relationships of the severity override request.
+      properties:
+        findings:
+          $ref: "#/components/schemas/Findings"
+          description: Security findings to override the severity of.
+      required:
+        - findings
+      type: object
+    SeverityOverrideResponse:
+      description: Response for the severity override request.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityOverrideResponseData"
+        meta:
+          $ref: "#/components/schemas/SeverityOverrideResponseMeta"
+      required:
+        - data
+      type: object
+    SeverityOverrideResponseData:
+      description: Data of the severity override response.
+      properties:
+        id:
+          description: Unique identifier of the severity override request.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityOverrideDataType"
+      required:
+        - id
+        - type
+      type: object
+    SeverityOverrideResponseMeta:
+      description: Security findings skipped while processing the severity override request.
+      properties:
+        warnings:
+          description: Findings skipped because an automation rule set their severity.
+          items:
+            $ref: "#/components/schemas/SeverityOverrideResult"
+          type: array
+      type: object
+    SeverityOverrideResult:
+      description: Per-finding outcome of a severity override operation.
+      properties:
+        detail:
+          description: Human-readable explanation of why the finding was skipped.
+          example: >-
+            cannot set severity on finding because it is overridden by an automation severity modifier rule; disable or update the automation rule first
+          type: string
+        finding_id:
+          description: Unique identifier of the security finding.
+          example: "ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw=="
+          type: string
+        status:
+          description: HTTP-like status code describing the outcome for this finding.
+          example: 400
+          format: int32
+          maximum: 599
+          type: integer
+        title:
+          description: Short label describing the outcome for this finding.
+          example: "Bad Request"
+          type: string
+      required:
+        - finding_id
+        - status
+        - title
+        - detail
+      type: object
+    SeverityOverrideSet:
+      description: Applies a manual severity override to the findings.
+      properties:
+        action:
+          $ref: "#/components/schemas/SeverityOverrideSetActionType"
+        description:
+          description: Additional information about the severity change. This field has a limit of 280 characters.
+          example: "Database contains sensitive data."
+          maxLength: 280
+          type: string
+        value:
+          $ref: "#/components/schemas/SeverityOverrideValue"
+      required:
+        - action
+        - value
+      type: object
+    SeverityOverrideSetActionType:
+      default: set
+      description: The action that applies a manual severity override.
+      enum:
+        - set
+      example: set
+      type: string
+      x-enum-varnames:
+        - SET
+    SeverityOverrideValue:
+      description: |-
+        Severity to apply to the findings.
+        `info` sets the lowest severity the finding type allows.
+      enum:
+        - critical
+        - high
+        - medium
+        - low
+        - info
+      example: high
+      type: string
+      x-enum-varnames:
+        - CRITICAL
+        - HIGH
+        - MEDIUM
+        - LOW
+        - INFO
     SharedDashboardGlobalTime:
       additionalProperties: {}
       description: Default time range configuration for the shared dashboard.
@@ -224967,6 +225154,110 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
+  /api/v2/security/findings/severity:
+    patch:
+      description: |-
+        Set or clear the manual severity override of security findings.
+
+        You can update up to 100 security findings per request.
+        Use the `set` action with a `value` to apply a manual severity override.
+        `value` is required for `set` and must be omitted for `clear`.
+        The `info` value sets the lowest severity the finding type allows.
+        Use the `clear` action to remove a manual severity override.
+        `clear` does not remove a severity set by an automation rule.
+        The optional `description` is accepted with both actions and has a limit of 280 characters.
+
+        Auto-closed findings are excluded.
+        Findings whose severity was set by an automation rule are skipped and listed in the response `meta.warnings`.
+        If every finding is skipped this way, the request fails with a `400` error.
+        Findings that cannot be found are skipped without a warning.
+        The request fails with a `404` error only if none of the findings can be found.
+      operationId: UpdateFindingsSeverity
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      severity:
+                        action: "set"
+                        description: "Database contains sensitive data."
+                        value: "high"
+                    relationships:
+                      findings:
+                        data:
+                          - id: "ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw=="
+                            type: "findings"
+                          - id: "ZGVmLTAwMC0wYmd-MDE4NjcyMDJkMzE4MDE5ODY5MGE4ZmQ2MmFlMjg0Y2M="
+                            type: "findings"
+                    type: "severity_override"
+            schema:
+              $ref: "#/components/schemas/SeverityOverrideRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: "severity_override"
+                    meta:
+                      warnings:
+                        - detail: >-
+                            cannot set severity on finding because it is overridden by an automation severity modifier rule; disable or update the automation rule first
+                          finding_id: "ZGVmLTAwMC0wYmd-MDE4NjcyMDJkMzE4MDE5ODY5MGE4ZmQ2MmFlMjg0Y2M="
+                          status: 400
+                          title: "Bad Request"
+              schema:
+                $ref: "#/components/schemas/SeverityOverrideResponse"
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: "Unprocessable Entity"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Override the severity of security findings
+      tags:
+        - "Security Monitoring"
+      x-codegen-request-body-name: body
+      x-menu-order: 176
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_findings_write
+          - appsec_vm_write
+          - data_scanner_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
       description: |-

@@ -2219,6 +2219,18 @@
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
+  "UpdateFindingsSeverity": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_412359663",
+      "description": "Apply a severity override to security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1312693410",
+      "description": "Clear the severity override of security findings returns \"Accepted\" response"
+    }
+  ],
   "AttachJiraIssue": [
     {
       "group": "security_monitoring",
