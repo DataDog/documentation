@@ -8,19 +8,11 @@ aliases:
 - /fr/product_analytics/journeys/funnel_analysis/
 disable_toc: false
 further_reading:
-- link: /product_analytics/analytics_explorer/
-  tag: Documentation
-  text: Analytics Explorer
-- link: /product_analytics/charts/journey_paths/
-  tag: Documentation
-  text: Analyse des parcours de navigation
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Centre d'apprentissage
   text: Bien démarrer avec Product Analytics
 title: Entonnoir
 ---
-## Présentation {#overview}
-
 L'analyse d'entonnoir vous aide à suivre les taux de conversion sur des workflows clés afin d'identifier et de résoudre les goulots d'étranglement dans les parcours de bout en bout. Plus précisément, vous pouvez :
 
 - Voir si les clients abandonnent à un certain point en raison de mauvaises performances du site web
@@ -30,17 +22,13 @@ L'analyse d'entonnoir vous aide à suivre les taux de conversion sur des workflo
 - Filtrer sur des événements individuels à différentes étapes de votre entonnoir
 - Combiner plusieurs événements au sein d'une étape donnée, car les utilisateurs finaux peuvent avoir différentes manières d'atteindre le même résultat via différents flux
 
+## Créez un graphique en entonnoir {#create-a-funnel-chart}
 
-## Créer un entonnoir {#build-a-funnel}
+1. Dans {{< ui >}}Product Analytics{{< /ui >}}, sélectionnez {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}.
 
-Pour commencer à créer un entonnoir, accédez à [{{< ui >}}Product Analytics{{< /ui >}}][1], puis sélectionnez [{{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}][2].
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_overview.png" alt="L'option d'entonnoir mise en évidence dans la boîte de dialogue Créer un nouveau dans Product Analytics" style="width:100%;" >}}
-
-Sélectionnez les étapes utilisateur qui lancent l'entonnoir et utilisez {{< ui >}}Add step{{< /ui >}} pour ajouter des étapes supplémentaires. Faites glisser et déposez les étapes pour les réorganiser dans l'entonnoir.
+1. Sélectionnez les étapes utilisateur qui initient l'entonnoir et utilisez {{< ui >}}Add step{{< /ui >}} pour ajouter des étapes supplémentaires. Faites glisser et déposez les étapes pour les réorganiser dans l'entonnoir.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_add_step_video.mp4" alt="Utilisation du bouton Ajouter une étape pour ajouter une étape à un entonnoir existant, et utilisation du glisser-déposer pour déplacer la nouvelle étape au bon endroit dans l'entonnoir." video=true >}}
-
 
 ### Ajouter des filtres {#add-filters}
 
@@ -117,60 +105,36 @@ Lors du calcul de vos conversions, sélectionnez la manière dont les conversion
 
 - {{< ui >}}Total{{< /ui >}} : Compte une conversion chaque fois que le même ID de session, utilisateur ou compte termine l'entonnoir défini. En utilisant le même exemple (`A, B, C, A, B, C`), cette méthode compte **deux conversions**. Le paramètre {{< ui >}}Total{{< /ui >}} compte les flux complets, et non le nombre de fois qu'une étape intermédiaire est répétée.
 
-
 ## Modifier la visualisation {#change-the-visualization}
-Une fois que vous avez défini les événements d'étape et la mesure de conversion, vous pouvez passer à une visualisation différente pour mieux comprendre les conversions des utilisateurs pour votre application.
 
+Par défaut, un entonnoir s'affiche sous forme d'étapes. Modifiez la visualisation pour voir les mêmes données de conversion dans un format différent.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="Changez la visualisation de Étapes à Séries temporelles à l'aide d'un menu déroulant." video=true >}}
+- Série temporelle : tracez la mesure de conversion au fil du temps.
 
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="Données de conversion d'un entonnoir affichées sous forme de série temporelle." style="width:90%;" >}}
 
-### Séries temporelles {#timeseries}
-Visualiser l'entonnoir sous forme de série temporelle peut être utile pour comprendre les tendances de conversion. Vous pouvez sélectionner la période pour représenter graphiquement la conversion, et vous pouvez afficher les conversions sous forme de nombre absolu ou de taux.
+- Valeur de requête : affichez la mesure de conversion sous forme de nombre unique.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="La visualisation Séries temporelles, configurée pour afficher les utilisateurs convertis uniques quotidiens sur la semaine écoulée." style="width:80%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="La visualisation de la valeur de requête, configurée pour afficher le nombre total de sessions uniques converties au cours de la semaine passée." style="width:80%;" >}}
 
-### Query value {#query-value}
+- Top list : classez la mesure de conversion par répartition, comme le pays ou le navigateur.
 
-La visualisation Valeur de requête affiche la valeur actuelle d'une métrique.
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="Données de conversion d'un entonnoir réparties par pays, affichées sous forme de top list." style="width:90%;" >}}
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="La visualisation Valeur de requête, configurée pour afficher le nombre total de sessions converties uniques sur la semaine écoulée." style="width:80%;" >}}
+- Graphique à barres : comparez la mesure de conversion entre les valeurs d'une répartition, affichées sous forme de colonnes.
 
-### Top list {#top-list}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_bar_chart.png" alt="Données de conversion d'un entonnoir réparties par pays, affichées sous forme de graphique à barres." style="width:90%;" >}}
 
-La visualisation Top list identifie les valeurs les plus élevées d'une facette en fonction d'une mesure choisie.
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="La visualisation Top list, configurée pour afficher les quatre principales sources de conversion par continent." style="width:80%;" >}}
+La top list et le graphique à barres nécessitent une répartition. Ajoutez-en une sous [Comparer](#compare-data) si l'entonnoir n'en possède pas déjà une.
 
 ## Afficher les facteurs de conversion {#view-conversion-drivers}
 
 Pour obtenir plus de contexte sur les conversions et les abandons des utilisateurs, cliquez sur une étape de l'entonnoir pour accéder à l'analyse de conversion.
 
-<div class="alert alert-info">L'analyse de conversion est en préversion.</div>
-
 Afficher les facteurs de conversion, les parcours de navigation, les replays disponibles pour les conversions et les abandons, ainsi que les détails des utilisateurs.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="La vue du panneau latéral après avoir cliqué sur une étape de l'entonnoir, montrant les facteurs de conversion, les replays disponibles et les utilisateurs convertis." style="width:100%;" >}}
 
-## Partager un entonnoir {#share-a-funnel}
-
-Les entonnoirs peuvent être partagés avec vos équipes sur des [tableaux de bord][3] pour analyser la conversion parallèlement à d'autres métriques de télémétrie, ou dans un [Notebook][4] pour être utilisés dans des rapports.
-
-Vous pouvez partager l'intégralité de la visualisation ou des widgets individuels.
-
-- Partager l'intégralité de la visualisation vers des Notebooks et des tableaux de bord :
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels_share_export.png" alt="L'option de partage de la visualisation étendue, qui affiche l'option supplémentaire Exporter en PNG " style="width:100%;" >}}
-
-- Partager des widgets individuels depuis un tableau de bord :
-
-  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_share_dashboard.png" alt="Partagez un widget en cliquant sur l'icône d'exportation en haut à droite du widget" style="width:100%;" >}}
-
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/product-analytics/
-[2]: https://app.datadoghq.com/product-analytics/user-journey/funnel
-[3]: /fr/product_analytics/dashboards/
-[4]: /fr/notebooks/

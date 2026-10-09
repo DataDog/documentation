@@ -67,6 +67,22 @@ The following permissions allow Datadog to access and transfer the billing expor
 
   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
 
+### (Optional) Enable committed use discounts metadata export
+
+Enable the [committed use discounts (CUD) metadata export][20] to see start and end dates, committed amounts, and other properties of your [spend-based committed use discounts][21] in the [Commitments Inventory][22]. The export includes CUDs purchased in projects linked to the billing account, including expired commitments.
+
+To enable CUD metadata export:
+
+1. In the Google Cloud console, go to **Billing > [Billing Export][1]**.
+2. Enable the [Committed Use Discounts Export][2]. Select a project and enter a new linked dataset name. Google Cloud creates the linked dataset.
+3. Select the {{< ui >}}Location Type{{< /ui >}} and the region or multi-region that matches your detailed usage cost export dataset. You cannot change the location after creating the dataset.
+4. Click {{< ui >}}Save{{< /ui >}}.
+5. Record the export {{< ui >}}Project ID{{< /ui >}} and {{< ui >}}Linked Dataset Name{{< /ui >}}. Enter these as the {{< ui >}}CUD Metadata Project ID{{< /ui >}} and {{< ui >}}CUD Metadata Dataset ID{{< /ui >}} when you [configure Cloud Cost](#configure-cloud-cost).
+
+{{< img src="cloud_cost/commitments/cud_metadata_export.png" alt="Google Cloud CUD export configuration with project, linked dataset, location type, and multi-region fields highlighted." >}}
+
+Select the tab that matches your setup method to grant Datadog the necessary permissions.
+
 {{< tabs >}}
 
 {{% tab "Terraform" %}}
@@ -99,16 +115,16 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 
 {{% tab "Manual" %}}
 
-{{< img src="cloud_cost/setup/gcp_manual_setup.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
+{{< img src="cloud_cost/setup/gcp_manual_setup_cud_metadata.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
 
 #### Configure export project access
 [Add the service account as a principal on the export dataset project resource][7]:
 1. Navigate to the IAM page in the Google Cloud console and select the export dataset project.
 2. Select the service account as a principal.
-3. Select a role with the following permissions to grant from the drop-down list:
-  * `bigquery.jobs.create`
-  * `bigquery.transfers.get`
-  * `bigquery.transfers.update`
+3. Grant one or more roles that together contain the following permissions:
+    * `bigquery.jobs.create`
+    * `bigquery.transfers.get`
+    * `bigquery.transfers.update`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.admin`.
 
@@ -117,25 +133,40 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 1. In the Explorer pane on the BigQuery page, expand your project and select the export BigQuery dataset.
 2. Click {{< ui >}}Sharing{{< /ui >}} > {{< ui >}}Permissions{{< /ui >}} and then {{< ui >}}add principal{{< /ui >}}.
 3. In the new principals field, enter the service account.
-4. Using the select a role list, assign a role with the following permissions:
-  * `bigquery.datasets.get`
-  * `bigquery.tables.create`
-  * `bigquery.tables.delete`
-  * `bigquery.tables.export`
-  * `bigquery.tables.get`
-  * `bigquery.tables.getData`
-  * `bigquery.tables.list`
-  * `bigquery.tables.update`
-  * `bigquery.tables.updateData`
+4. Grant one or more roles that together contain the following permissions:
+    * `bigquery.datasets.get`
+    * `bigquery.tables.create`
+    * `bigquery.tables.delete`
+    * `bigquery.tables.export`
+    * `bigquery.tables.get`
+    * `bigquery.tables.getData`
+    * `bigquery.tables.list`
+    * `bigquery.tables.update`
+    * `bigquery.tables.updateData`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.dataEditor`.
+
+#### (Optional) Configure CUD metadata project access
+[Add the service account as a principal on the CUD metadata project resource][7]:
+1. Navigate to the IAM page in the Google Cloud console and select the CUD metadata project.
+2. Select the service account as a principal.
+3. Grant one or more roles that together contain the following permissions:
+    * `bigquery.datasets.get`
+    * `bigquery.readsessions.create`
+    * `bigquery.readsessions.getData`
+    * `bigquery.readsessions.update`
+    * `bigquery.tables.get`
+    * `bigquery.tables.getData`
+    * `bigquery.tables.list`
+
+  **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/bigquery.dataViewer` and `roles/bigquery.readSessionUser`.
 
 #### Configure bucket access
 [Add the service account as a principal on the GCS bucket resource][6]:
 1. Navigate to the Cloud Storage Buckets page in the Google Cloud console, and select your bucket.
 2. Select the permissions tab and click the {{< ui >}}grant access{{< /ui >}} button.
 3. In the new principals field, enter the service account.
-4. Assign a role with the following permissions:
+4. Grant one or more roles that together contain the following permissions:
    * `storage.buckets.get`
    * `storage.objects.create`
    * `storage.objects.delete`
@@ -255,3 +286,6 @@ The following out-of-the-box tags are available:
 [17]: /cloud_cost_management/tags
 [18]: /api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config
+[20]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export
+[21]: https://cloud.google.com/docs/cuds-spend-based
+[22]: /cloud_cost_management/planning/commitment_programs/#commitments-inventory

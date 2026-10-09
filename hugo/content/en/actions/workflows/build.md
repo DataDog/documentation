@@ -132,18 +132,26 @@ You can configure your workflow to send you a notification on success or failure
 - PagerDuty
 - Email
 
+Notifications are configured from the workflow editor, in either of the following places:
+- Click the workflow name at the top of the editor to open the workflow title popover, then scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
+- Click the {{< ui >}}cog icon{{< /ui >}} in the top-right corner of the editor and select {{< ui >}}Edit permissions{{< /ui >}}. The {{< ui >}}Notifications{{< /ui >}} section is at the bottom of the modal.
+
+Changes made from the workflow title popover are saved immediately. Changes made from the {{< ui >}}Edit permissions{{< /ui >}} modal are applied when you click {{< ui >}}Save{{< /ui >}}.
+
 To add a notification:
-1. In the workflow configuration panel, scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
+1. Open the {{< ui >}}Notifications{{< /ui >}} section using one of the methods described above.
 1. To add a notification if the workflow succeeds:
-   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}On success{{< /ui >}}, or click {{< ui >}}Add success notification{{< /ui >}} if no success notifications are configured yet.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
-   1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
+   1. Click {{< ui >}}Save{{< /ui >}} to add the notification.
 1. To add a notification if the workflow fails:
-   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}On failure{{< /ui >}}, or click {{< ui >}}Add failure notification{{< /ui >}} if no failure notifications are configured yet.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
-   1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
+   1. Click {{< ui >}}Save{{< /ui >}} to add the notification.
+
+To edit or remove an existing notification, click it in the {{< ui >}}Notifications{{< /ui >}} section and update its fields, or use its delete icon to remove it.
 
 ## Error handling
 

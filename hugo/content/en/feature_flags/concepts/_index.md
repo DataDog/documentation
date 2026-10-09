@@ -9,6 +9,7 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/environments" >}}Environments{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/variants_and_flag_types" >}}Variants and Flag Types{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/evaluation_context" >}}Evaluation Context{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/evaluation_results" >}}Flag Evaluation Results{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/targeting_rules" >}}Targeting Rules and Filters{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/targeting_attributes" >}}Targeting Attributes{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/evaluation_tester" >}}Evaluation Tester{{< /nextlink >}}

@@ -13,9 +13,6 @@ further_reading:
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: 설명서
   text: 클라우드 스토리지를 위한 Sensitive Data Scanner 설정
-- link: coterm
-  tag: 설명서
-  text: 'CoTerm: 로컬 및 원격 시스템에서 터미널 세션 및 중요한 활동을 모니터링합니다.'
 - link: /data_security/
   tag: 설명서
   text: 데이터 관련 위험 감소

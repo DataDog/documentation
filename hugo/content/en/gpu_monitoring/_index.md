@@ -1,15 +1,18 @@
 ---
 title: GPU Monitoring
 further_reading:
-- link: "https://www.datadoghq.com/architecture/gpu-monitoring/"
-  tag: "Architecture Center"
-  text: "GPU Monitoring Reference Architecture"
 - link: "/gpu_monitoring/setup"
   tag: "Documentation"
   text: "Set up GPU Monitoring"
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
+- link: "https://www.datadoghq.com/blog/monitor-tas-and-gang-scheduling-for-ai-training-in-kubernetes/"
+  tag: "Blog"
+  text: "Monitor TAS and gang scheduling for AI training in Kubernetes"
+- link: "https://www.datadoghq.com/architecture/gpu-monitoring/"
+  tag: "Architecture Center"
+  text: "GPU Monitoring Reference Architecture"
 ---
 
 ## Overview

@@ -30,7 +30,7 @@ There are five default fields:
 |**Detection&nbsp;Method** | Add context on how this incident was declared.||
 |**Summary**               | Provide details on what happened to cause this incident.||
 |**Root&nbsp;Cause**       | List possible root causes or areas for investigation.||
-|**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically uses your APM Service names. To add values to `Services`, you can upload a CSV. |
+|**Services**              | If you have [Datadog APM][4] configured, the `Services` property field automatically uses your APM Service names. |
 |**Teams**                 | The `Teams` property field automatically populates from the [teams][5] defined in your organization. |
 
 **Note**: You cannot delete default fields.

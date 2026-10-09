@@ -44,7 +44,7 @@ Datadog evaluates the default Scorecards every 24 hours for all registered entit
 
 Datadog can summarize Scorecard results into automated reports and deliver them directly through Slack, helping your team stay aligned, track improvements, and efficiently address gaps.
 
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/?product=internal-developer-portal-idp" header="Sign up for early access to our upcoming features!" >}}
 {{< /callout >}}
 
 ## Get started

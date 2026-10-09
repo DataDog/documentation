@@ -50,6 +50,8 @@ Configure due date rules to ensure findings are addressed within your specified 
    For all other finding types, First Seen Date is always used.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
+You can also create due date rules with the [API][3] or the [`datadog_security_findings_due_date_rule`][4] Terraform resource.
+
 ## Where due dates appear
 
 When a finding has a due date, you can see it in these locations:
@@ -78,3 +80,5 @@ When managing findings, due dates can be removed under various conditions, such 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=set_due_date
+[3]: /api/latest/security-monitoring/create-a-due-date-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_due_date_rule

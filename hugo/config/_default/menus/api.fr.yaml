@@ -4731,8 +4731,8 @@ menu:
         unstable: []
         order: 17
     - name: Déclencher des tests à partir de pipelines de CI/CD
-      url: /api/latest/synthetics/trigger-tests-from-ci/cd-pipelines/
-      identifier: synthetics-trigger-tests-from-ci/cd-pipelines
+      url: /api/latest/synthetics/trigger-tests-from-cicd-pipelines/
+      identifier: synthetics-trigger-tests-from-cicd-pipelines
       parent: synthetics
       generated: true
       params:

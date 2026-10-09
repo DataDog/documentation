@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/bits_ai/bits_ai_sre/configure/
-title: Configure Integrations y ajustes
+title: Integrations y Settings
 ---
 Configure Integrations para ampliar las capacidades de Bits Investigation:
 - [Intégrese con plataformas de observabilidad y SCM de terceros](#integrate-with-third-party-observability-and-scm-platforms) para enriquecer las investigaciones con telemetría externa y contexto de código.

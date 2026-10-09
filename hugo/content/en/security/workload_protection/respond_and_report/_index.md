@@ -50,7 +50,7 @@ Both automated and manual response require specific [RBAC permissions][5]:
 
 ## Automated response
 
-Automated response enables you to proactively block threats identified by Datadog Agent detection rules by terminating matching processes or containers.
+Automated response enables you to proactively block threats identified by Datadog Agent detection rules by terminating or isolating from the network matching processes or containers.
 
 Automated response splits the decision between two teams:
 
@@ -73,7 +73,7 @@ To check whether automated response applies to a rule that generated a signal:
 
 ### Configure automated response on Agent rules
 
-By default, all out-of-the-box (OOTB) Agent rules are active without automated response. You must configure the automated response action manually in order to kill processes.
+By default, all out-of-the-box (OOTB) Agent rules are active without automated response. You must configure the automated response action manually in order to kill or isolate processes.
 
 #### Protection states
 
@@ -81,7 +81,7 @@ An Agent rule can be in one of the following states:
 
 - **Inactive:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
 - **Active:** This is the default setting for enabled rules. The Agent monitors for the enabled rule and displays detections in [Signals][1].
-- **Active with automated response:** The Agent monitors for the enabled rule, terminates matching processes, and displays detections in [Signals][1].
+- **Active with automated response:** The Agent monitors for the enabled rule, terminates or isolate from the network matching processes, and displays detections in [Signals][1].
 
 <div class="alert alert-info">Automated response is applied to all threats detected after automated response is enabled. Automated response is not retroactive.</div>
 
@@ -89,7 +89,7 @@ To enable automated response on an Agent rule:
 
 1. In [Agent Configuration][2], open a rule. If there is no {{< ui >}}Automated response{{< /ui >}} action in the {{< ui >}}Agent's actions{{< /ui >}} section, then automated response is not available for that rule.
 2. Click {{< ui >}}Edit{{< /ui >}}.
-3. Under {{< ui >}}Add actions for the agent to follow{{< /ui >}}, select {{< ui >}}Automated response{{< /ui >}}.
+3. Under {{< ui >}}Add actions for the agent to follow{{< /ui >}}, select one of the {{< ui >}}Automated response{{< /ui >}}.
 
    {{< img src="security/workload_protection/respond_and_report/automated_response_activation.png" alt="An Agent rule Protection section displaying the automated response action" style="width:100%;" >}}
 4. Under {{< ui >}}Link the rule to policies{{< /ui >}}, verify that the rule is {{< ui >}}Active{{< /ui >}} in at least one policy.

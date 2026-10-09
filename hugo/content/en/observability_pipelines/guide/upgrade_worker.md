@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.20.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.21.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,48 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.21.0
+
+To upgrade to Worker version 2.21.0:
+
+- Docker: Run the `docker pull` command for the [2.21.0 image][54].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.21.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.21.0`.
+
+Worker version 2.21.0 gives you access to the following:
+
+#### New features
+
+- The Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage) now support a configurable `compression` option (`gzip` or `zstd`).
+- The Remap to OCSF processor now includes:
+    - The AWS Config Rules OCSF mapping.
+    - The `concat_strings` OCSF mapping function, which joins the string representations of multiple source fields or constant values.
+- The Splunk HEC destination now supports an `endpoint_target` option (`event` or `raw`) to determine which Splunk HEC endpoint events are sent to.
+
+#### Enhancements
+
+- The Splunk TCP source now supports configuring TCP keepalive and the connection limit.
+- Internal Worker logs and traces are now enriched with the pipeline name (`op_worker.pipeline_name:<pipeline_name>`), matching the tag already present on metrics.
+- The Worker's logging during graceful shutdown has been improved.
+- The validation of destination endpoints has been improved to check for incomplete or empty URLs.
+- The `parse_aws_vpc_flow_log` function in the Custom Processor now recognizes all fields introduced in Amazon VPC Flow Logs versions 7 through 11, including:
+    - Version 7: ECS metadata fields
+    - Version 8: `reject_reason`
+    - Version 9: `resource_id`
+    - Version 10: `encryption_status`
+    - Version 11: Tag, interface, and next-hop fields
+- The Enrichment Table processor now:
+    - Keeps rows in its cache for approximately 30 minutes, regardless of whether the lookup was positive or negative
+    - Splits the events it yields into batches based on the source sender's batch size
+
+#### Fixes
+
+- Fixed case-insensitive glob matching in search queries containing UTF-8 text, which caused panics and incorrect results for non-ASCII input.
+- The MySQL source now includes the query name in the `Checkpoint updated` log.
+- Fixed Azure Blob Storage uploads larger than 4 MiB when using an account-key connection string.
+- Fixed an unrecoverable Worker error that occurred when a record exceeded the buffer's maximum record size. The error is now logged and reflected in the `buffer_discarded_events_total` and `buffer_discarded_bytes_total` health metrics (with `intentional="false"`).
 
 ## Worker version 2.20.4
 
@@ -737,3 +779,4 @@ Worker version 2.7.0 gives you access to the following:
 [51]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.2
 [52]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.3
 [53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4
+[54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0

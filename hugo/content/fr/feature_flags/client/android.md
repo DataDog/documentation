@@ -43,8 +43,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded initialization timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .initializationTimeout(2_000L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -101,7 +105,6 @@ Après avoir initialisé Datadog, activez `Flags` pour l'attacher à l'instance 
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-
 Flags.enable()
 {{< /code-block >}}
 
@@ -303,11 +306,19 @@ L'`Flags.enable()`API accepte une configuration facultative avec les options lis
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
+
+`initializationTimeout(timeoutMs)`
+:  Temps maximal, en millisecondes, d'attente avant que le premier contexte d'évaluation ne soit prêt. Le délai d'attente couvre le chargement des données en cache, la récupération des affectations, la lecture et le décodage de la réponse, le stockage des affectations et la publication de l'état prêt. Il ne modifie pas le délai d'attente du client HTTP. L'opération d'affectation se poursuit après le délai d'attente et peut faire passer le client à `Ready` lorsqu'elle se termine.
+
+Le délai d'attente s'applique uniquement au premier appel `setEvaluationContext`. Cet appel consomme le délai d'attente même si l'opération échoue ou ne démarre jamais. Les appels ultérieurs n'ont pas de minuteur d'initialisation. La valeur par défaut est de `5_000` millisecondes. Définissez-le sur zéro ou sur une valeur négative pour désactiver le délai d'attente. Lorsque le délai d'attente expire, le client devient `Stale` si des affectations en cache correspondantes sont disponibles. Sinon, il devient `Error`.
+
+<div class="alert alert-info"><code>initializationTimeout</code> est disponible dans <code>dd-sdk-android-flags</code> 3.14.0 et versions ultérieures.</div>
 
 `trackExposures()`
 : Lorsque `true` (par défaut), le SDK enregistre automatiquement un _événement d'exposition_ lorsqu'un Feature Flag est évalué. Ces événements contiennent des métadonnées sur le Feature Flag auquel il a été accédé, la variante qui a été servie et dans quel contexte : Ils sont envoyés à Datadog afin que vous puissiez analyser ultérieurement l'adoption des Feature Flags. Si vous n'avez besoin que d'une évaluation locale sans télémétrie, vous pouvez la désactiver avec : `trackExposures(false)`.

@@ -610,6 +610,21 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+### Disable Session Replay
+
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][35].
+
+**Note**: If you're using a version of the RUM Browser SDK earlier than v5.0.0, set `replaySampleRate` to `0` instead.
+{% /if %}
+<!-- end Browser -->
+
+<!-- Mobile -->
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
+To stop session recordings, set the sample rate shown in the [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) section to `0`.
+{% /if %}
+<!-- end Mobile -->
 
 ### Start or stop the recording manually
 
@@ -739,6 +754,74 @@ SessionReplay.stopRecording();
 {% /if %}
 <!-- end React Native -->
 
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+### Record canvas elements
+
+{% alert level="info" %}
+Canvas recording for Browser Session Replay is in Preview.
+{% /alert %}
+
+Session Replay does not record the contents of `<canvas>` elements by default, so certain charts, maps, 3D visualizations, and similar content does not appear in the replay. To record canvas elements, opt into the Preview with `enableExperimentalFeatures`, then turn on canvas recording with `sessionReplayCanvasRecording`.
+
+Canvas recording requires RUM Browser SDK v7.15.0 or later, and supports the 2D, WebGL, and WebGL2 rendering contexts.
+
+{% tabs %}
+{% tab label="NPM" %}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+   ...
+   enableExperimentalFeatures: ['session_replay_record_canvas'],
+   sessionReplayCanvasRecording: { enable: true },
+   ...
+});
+```
+{% /tab %}
+{% tab label="CDN async" %}
+```javascript
+<script>
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ['session_replay_record_canvas'],
+      sessionReplayCanvasRecording: { enable: true },
+      ...
+    });
+  })
+</script>
+```
+{% /tab %}
+{% tab label="CDN sync" %}
+```javascript
+<script>
+    window.DD_RUM && window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ['session_replay_record_canvas'],
+      sessionReplayCanvasRecording: { enable: true },
+      ...
+    });
+</script>
+```
+{% /tab %}
+{% /tabs %}
+
+#### Set the canvas recording quality
+
+The default canvas recording quality, `medium`, is tuned to provide a reasonable tradeoff between recording quality and resource usage. Set `quality` to `high` for a more detailed recording, or to `low` to minimize resource usage.
+
+```javascript
+datadogRum.init({
+   ...
+   enableExperimentalFeatures: ['session_replay_record_canvas'],
+   sessionReplayCanvasRecording: { enable: true, quality: 'high' },
+   ...
+});
+```
+{% /if %}
+<!-- end Browser -->
+
 ### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK.
@@ -862,3 +945,4 @@ See [Connect Session Replay to your third-party tools][30].
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
 [34]: /real_user_monitoring/application_monitoring/maui/setup
+[35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products

@@ -1,0 +1,13 @@
+entries:
+  - change_type: added
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40553
+    operations:
+      - UpdateFindingsSeverity
+    title: Add endpoint to override the severity of security findings
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40553
+    operations:
+      - UpdateFindingsAssignee
+    title: Add endpoint to override the severity of security findings
