@@ -32,6 +32,9 @@ const astroSite = fileURLToPath(new URL(".", import.meta.url));
 const apiExamples = fileURLToPath(
   new URL("./api-code-examples", import.meta.url),
 );
+// Staged API spec bundle (full_spec.yaml, CodeExamples.json, translate_*.json),
+// staged by `yarn fetch:spec`. Inside astroSite, so `server.fs.allow` covers it.
+const apiSpec = fileURLToPath(new URL("./api-spec", import.meta.url));
 
 const hugoDevPort = 1313;
 
@@ -216,6 +219,13 @@ export default defineConfig({
         // hardcoded so `vitest.unit.config.ts` can repoint it at the frozen
         // fixture with a one-line override.
         "@api-examples": apiExamples,
+        // The API spec, staged by `yarn fetch:spec` from the published bundle
+        // rather than read from the committed `hugo/data/api`. Gitignored and
+        // required: unlike `@api-examples`, the loaders import exact files
+        // here, so an unstaged tree fails the build instead of rendering
+        // empty pages. `vitest.unit.config.ts` redirects the spec and
+        // CodeExamples.json under this root to the frozen fixture.
+        "@api-spec": apiSpec,
         "@shared": sharedDir,
         "@websites-modules": websitesModules,
         "@layouts": fileURLToPath(new URL("./src/layouts", import.meta.url)),

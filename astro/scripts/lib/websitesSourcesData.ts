@@ -1,11 +1,23 @@
 /**
- * Reads the pinned SDK versions out of the websites-sources data tarball.
+ * Reads the two tarballs this site takes from the websites-sources bucket:
+ *
+ *   - the data-sources tarball, for the pinned SDK versions `yarn fetch:examples`
+ *     clones at;
+ *   - the API docs bundle (`latest-api-docs.tar.gz`), which `yarn fetch:spec`
+ *     stages into `api-spec/`. The docs pipeline publishes it from the committed
+ *     `hugo/data/api` on every live deploy and api-spec branch build, and it is
+ *     the source of truth the spec is moving to.
+ *
+ * This is the only file under `astro/` that knows the bucket or imports `tar`
+ * (see "No deploy code in this repo" in CLAUDE.md). Both reads are anonymous
+ * HTTPS GETs of public objects — no AWS SDK, no credentials.
  */
 
+import { mkdir } from "node:fs/promises";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import type { ReadableStream as NodeReadableStream } from "node:stream/web";
-import { list as listTarball } from "tar";
+import { extract as extractTarball, list as listTarball } from "tar";
 import { z } from "zod";
 
 /**
@@ -149,12 +161,143 @@ export async function fetchSdkVersions(
 }
 
 function buildTarballUrl(): string {
-  const bucket = process.env.FF_S3_BUCKET || "dd-websites-sources";
-  const dataPath = (process.env.FF_S3_PATH || "staging").replace(
-    /^\/+|\/+$/g,
-    "",
+  return bucketObjectUrl(process.env.FF_S3_PATH || "staging", TARBALL_NAME);
+}
+
+function bucketObjectUrl(
+  dataPath: string,
+  name: string,
+  env: NodeJS.ProcessEnv = process.env,
+): string {
+  const bucket = env.FF_S3_BUCKET || "dd-websites-sources";
+  return `https://${bucket}.s3.amazonaws.com/${trimSlashes(dataPath)}/${name}`;
+}
+
+function trimSlashes(value: string): string {
+  return value.replace(/^\/+|\/+$/g, "");
+}
+
+// ================== API docs bundle ================== //
+
+const API_DOCS_TARBALL_NAME = "latest-api-docs.tar.gz";
+
+/**
+ * The only members the bundle may contain: `v<N>/<file>.yaml|json`, one level
+ * deep. The archive is rooted at `data/api` (`./v1/full_spec.yaml`, …).
+ *
+ * An allowlist rather than trusting the archive, since it is read from a public
+ * bucket and written into the checkout: anything else — a `..` segment, an
+ * absolute path, a nested directory, a dotfile (including the `._*` AppleDouble
+ * files macOS tar adds), a non-data file — is skipped.
+ */
+const API_DOCS_MEMBER_RE = /^v\d+\/[A-Za-z0-9_][A-Za-z0-9_.-]*\.(yaml|json)$/;
+
+/**
+ * Which bundle to read: the bucket prefix `FF_API_DOCS_S3_PATH` names, or
+ * `production` when unset. Only `datadog-api-spec/*` branches have a bundle of
+ * their own, so CI sets the variable for those and every other build reads the
+ * live spec. Deliberately no fallback from a branch prefix to production: a
+ * missing branch bundle fails the fetch rather than quietly building the wrong
+ * spec.
+ */
+export function apiDocsSourcePath(
+  env: NodeJS.ProcessEnv = process.env,
+): string {
+  return trimSlashes(env.FF_API_DOCS_S3_PATH || "production");
+}
+
+export function apiDocsBundleUrl(env: NodeJS.ProcessEnv = process.env): string {
+  return bucketObjectUrl(apiDocsSourcePath(env), API_DOCS_TARBALL_NAME, env);
+}
+
+export function isApiDocsBundleMember(memberPath: string): boolean {
+  const normalized = normalizeMemberPath(memberPath);
+  return (
+    API_DOCS_MEMBER_RE.test(normalized) && !normalized.split("/").includes("..")
   );
-  return `https://${bucket}.s3.amazonaws.com/${dataPath}/${TARBALL_NAME}`;
+}
+
+/**
+ * Extracts the allowlisted members of a gzipped API docs bundle into
+ * `destDir`, and returns how many files it wrote. Shared by the network fetch
+ * and the offline `--bundle <path>` flag, so both go through the same filter.
+ */
+export async function extractApiDocsBundle(
+  bundle: Readable,
+  destDir: string,
+): Promise<number> {
+  await mkdir(destDir, { recursive: true });
+  let fileCount = 0;
+  const extractor = extractTarball({
+    cwd: destDir,
+    strict: true,
+    filter: (memberPath, entry) => {
+      const keep =
+        isApiDocsBundleMember(memberPath) &&
+        "type" in entry &&
+        entry.type === "File";
+      if (keep) {
+        fileCount += 1;
+      }
+      return keep;
+    },
+  });
+  await pipeline(bundle, extractor);
+  return fileCount;
+}
+
+export type ApiDocsDownload =
+  | { status: "not-modified" }
+  | { status: "extracted"; etag: string | null; fileCount: number };
+
+/**
+ * Downloads `latest-api-docs.tar.gz` and extracts it into `destDir`.
+ *
+ * With `ifNoneMatch` set to the ETag of the bundle already staged, S3 answers
+ * 304 when it has not changed, which keeps a repeat `yarn dev` to one small
+ * request instead of a 1.7 MB download.
+ *
+ * @param fetchImpl Injectable for tests; defaults to the global `fetch`.
+ */
+export async function downloadApiDocsBundle(
+  destDir: string,
+  { ifNoneMatch }: { ifNoneMatch: string | null },
+  fetchImpl: typeof fetch = fetch,
+): Promise<ApiDocsDownload> {
+  const url = apiDocsBundleUrl();
+  const headers = new Headers();
+  if (ifNoneMatch) {
+    headers.set("If-None-Match", ifNoneMatch);
+  }
+
+  const response = await fetchImpl(url, { headers });
+  if (response.status === 304) {
+    return { status: "not-modified" };
+  }
+  if (!response.ok) {
+    // The bucket allows anonymous GetObject but not ListBucket, so S3 answers
+    // a missing key with 403 rather than 404.
+    const hint =
+      response.status === 403
+        ? ` — S3 answers 403 for a missing object, so most likely no bundle ` +
+          `has been published under ${apiDocsSourcePath()}/ yet.`
+        : "";
+    throw new Error(
+      `Could not download ${url}: ${response.status} ${response.statusText}${hint}`,
+    );
+  }
+  if (!response.body) {
+    throw new Error(`Could not download ${url}: the response had no body.`);
+  }
+
+  // Same DOM-vs-node:stream/web ReadableStream bridge as fetchSdkVersions.
+  const body = response.body as NodeReadableStream<Uint8Array>;
+  const fileCount = await extractApiDocsBundle(Readable.fromWeb(body), destDir);
+  return {
+    status: "extracted",
+    etag: response.headers.get("ETag"),
+    fileCount,
+  };
 }
 
 /** Members are archived as `./data/…`; tar may or may not keep the `./`. */

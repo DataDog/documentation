@@ -23,6 +23,7 @@
     "paths": {
       "@hugo-site/*": ["../hugo/*"],
       "@api-examples/*": ["./api-code-examples/*"],
+      "@api-spec/*": ["./api-spec/*"],
       "@shared/*": ["../shared/*"],
       "@websites-modules/*": ["../../../../../../dd/websites-modules/*"],
       "@layouts/*": ["./src/layouts/*"],

@@ -2,7 +2,7 @@
 import { getViteConfig } from "astro/config";
 
 // Integration test config — intentionally omits the frozen-fixture plugin so
-// @hugo-site/data/api resolves to the live Hugo spec.
+// @api-spec resolves to the live spec staged by `yarn fetch:spec`.
 export default getViteConfig({
   test: {
     name: "live",

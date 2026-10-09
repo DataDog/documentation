@@ -7,13 +7,13 @@
  * stops matching any region.
  *
  * Picked up by `vitest.integration.config.ts`, which omits the frozen-fixture
- * plugin so `@hugo-site/data/api` resolves to the actual Hugo data directory.
+ * plugin so `@api-spec` resolves to the live spec staged by `yarn fetch:spec`.
  */
 
 import { describe, it, expect } from "vitest";
 import { parse as parseYaml } from "yaml";
-import V1_SPEC_RAW from "@hugo-site/data/api/v1/full_spec.yaml?raw";
-import V2_SPEC_RAW from "@hugo-site/data/api/v2/full_spec.yaml?raw";
+import V1_SPEC_RAW from "@api-spec/v1/full_spec.yaml?raw";
+import V2_SPEC_RAW from "@api-spec/v2/full_spec.yaml?raw";
 import { getRegions, getDefaultRegions } from "@lib/api/regionResolver";
 
 import type { OpenAPIV3 } from "openapi-types";

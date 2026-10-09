@@ -1,15 +1,16 @@
 /**
  * Shared OpenAPI spec parsing.
  *
- * Loads the v1 and v2 spec YAML once per build via Vite raw imports.
+ * Loads the v1 and v2 spec YAML once per build via Vite raw imports, from the
+ * bundle `yarn fetch:spec` stages under `@api-spec`.
  */
 
 import { parse as parseYaml } from "yaml";
 import type { OpenAPIV3 } from "openapi-types";
 import type { ApiVersion } from "./schemas/version";
 
-import v1Raw from "@hugo-site/data/api/v1/full_spec.yaml?raw";
-import v2Raw from "@hugo-site/data/api/v2/full_spec.yaml?raw";
+import v1Raw from "@api-spec/v1/full_spec.yaml?raw";
+import v2Raw from "@api-spec/v2/full_spec.yaml?raw";
 
 export const API_VERSIONS: readonly ApiVersion[] = ["v1", "v2"] as const;
 

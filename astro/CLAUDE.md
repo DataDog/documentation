@@ -4,7 +4,7 @@
 
 We intend to eventually deprecate Hugo (located in the `hugo` folder), having moved all of its content into this Astro site.
 
-The scope of this new Astro site is just the API docs. In Hugo, the HTML for the API docs can be found in [public/api](../hugo/public/api/). Those docs are generated from [the spec YAML in this folder](./../hugo/data/api). We've made a copy of that data to use for development of the Astro API docs.
+The scope of this new Astro site is just the API docs. In Hugo, the HTML for the API docs can be found in [public/api](../hugo/public/api/). Those docs are generated from [the spec YAML in this folder](./../hugo/data/api). The Astro site does not read that folder: it reads the same files from the published API docs bundle, which `yarn fetch:spec` stages into `api-spec/` (the `@api-spec` alias). The committed `hugo/data/api` is on its way out; the bundle is the source of truth.
 
 Prompts often refer to the "Hugo docs". This refers either to the general Hugo site setup (footer, header, etc.) or the API docs content specifically, depending on the context of the request.
 
@@ -76,10 +76,12 @@ Nothing under `astro/` may contain:
 `dist/client` and knows nothing about where that output is uploaded. Build-output
 verification belongs here; anything that talks to a cloud provider does not.
 
-One exception: `scripts/lib/websitesSourcesData.ts` reads the `websites-sources`
-data tarball to get the SDK versions `yarn fetch:examples` clones at. Keep that
-read confined to this one file — nothing else under `astro/` should import `tar`
-or know the tarball's URL. Everything above still applies.
+One exception: `scripts/lib/websitesSourcesData.ts` reads two public tarballs from
+the `websites-sources` bucket — the data tarball, for the SDK versions
+`yarn fetch:examples` clones at, and the API docs bundle (`latest-api-docs.tar.gz`),
+which `yarn fetch:spec` stages into `api-spec/`. Keep those reads confined to this
+one file — nothing else under `astro/` should import `tar` or know a tarball's URL.
+Both are anonymous HTTPS GETs; everything above still applies.
 
 ## Commands
 
