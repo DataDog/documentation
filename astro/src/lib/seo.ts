@@ -5,6 +5,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { IMAGES_URL } from "@config/images";
 import {
   LOCALES,
   DEFAULT_LOCALE,
@@ -14,7 +15,6 @@ import {
 
 export const TWITTER_HANDLE = "@datadoghq";
 export const THEME_COLOR = "#774aa4";
-export const IMG_URL = "https://datadog-docs.imgix.net/";
 
 // Indexed by the first digit of a page's content-path hash. Order and the
 // `generic5` fallback are copied from Hugo's `meta.html`, so a page shares the
@@ -47,7 +47,7 @@ export function ogImageUrl({
   const imagePath =
     metaImage ??
     `og-default/${contentPath ? rotatedOgDefault(contentPath) : OG_FALLBACK_IMAGE}`;
-  return `${IMG_URL}images/${imagePath}`;
+  return `${IMAGES_URL}/images/${imagePath}`;
 }
 
 function rotatedOgDefault(contentPath: string): string {

@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { IMG_URL, mdToMetaDescription, ogImageUrl } from "./seo";
+import { IMAGES_URL } from "@config/images";
+import { mdToMetaDescription, ogImageUrl } from "./seo";
 
-const ogDefault = (file: string) => `${IMG_URL}images/og-default/${file}`;
+const ogDefault = (file: string) => `${IMAGES_URL}/images/og-default/${file}`;
 
 describe("ogImageUrl", () => {
   it("serves an authored meta_image", () => {
@@ -10,7 +11,7 @@ describe("ogImageUrl", () => {
         metaImage: "logs/og-logs.png",
         contentPath: "api/latest/_index.md",
       }),
-    ).toBe(`${IMG_URL}images/logs/og-logs.png`);
+    ).toBe(`${IMAGES_URL}/images/logs/og-logs.png`);
   });
 
   // Expected images were read off the live Hugo pages, so these pin parity
