@@ -1,0 +1,16 @@
+entries:
+  - change_type: added
+    date: '2026-10-01'
+    link: https://github.com/DataDog/documentation/pull/40361
+    operations:
+      - DeletePendingQuota
+    title: Promote usage quota pending limits to public unstable
+  - change_type: modified
+    date: '2026-10-01'
+    link: https://github.com/DataDog/documentation/pull/40361
+    operations:
+      - CreateQuotas
+      - DeleteQuota
+      - ListQuotas
+      - UpdateQuota
+    title: Promote usage quota pending limits to public unstable
