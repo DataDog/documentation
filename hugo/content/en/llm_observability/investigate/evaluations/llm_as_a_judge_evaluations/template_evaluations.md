@@ -145,7 +145,7 @@ You can configure the prompt injection evaluator to use specific categories of p
 
 ### Sentiment
 
-Sentiment evaluations help you understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This evaluator classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
+Sentiment evaluators help you understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This evaluator classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
 {{< img src="llm_observability/evaluations/sentiment_6.png" alt="A Sentiment evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
