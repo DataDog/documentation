@@ -85,11 +85,15 @@ The Worker normalizes all logs even if they don't match an integration pipeline.
 
 ### Preprocessing options
 
-Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. Preprocessing uses the value of the first matching attribute. For example, if your logs use `published_date` for the timestamp, preprocessing maps its value to the reserved attribute `timestamp`. You can add additional log attributes to the list.
+Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. You can add additional log attributes to the list. Preprocessing uses the value of the first matching attribute.
 
-**Note**: If the attribute is prefixed with the `attribute` prefix, such as `attribute.log_timestamp`, do not include the `attributes` prefix in the list; only enter `log_timestamp`.
+For example, if you add `custom_host` before `hostname` in the list for the reserved attribute `host`, the Worker checks for `custom_host` first. Clearing a list disables remapping for that reserved attribute.
 
-| Reserved attribute | Log attributes, in order                                                                                        |
+**Notes**:
+- If `status` is unset, it still defaults to `info`, even when the list is empty.
+- Do not include the `attributes` prefix when adding an attribute to the list. For example, enter `log_timestamp` instead of `attributes.log_timestamp`.
+
+| Reserved attribute | Default log attributes, in order                                                                                        |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `timestamp`        | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
 | `host`             | `host`, `hostname`, `syslog.hostname`                                                                           |
@@ -98,8 +102,6 @@ Preprocessing maps log attributes to reserved attributes. Each reserved attribut
 | `status`           | `status`, `severity`, `level`, `syslog.severity`                                                                |
 | `trace_id`         | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id`                                   |
 | `span_id`          | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id`                                       |
-
-Setting a candidate list replaces that field's default list. For example, `hostname_sources: ["custom_host", "hostname"]` checks `custom_host` before `hostname`. Omitted options keep their defaults. An empty list disables promotion for that field, except that an unset `status` still defaults to `info`.
 
 ## Health metrics
 
