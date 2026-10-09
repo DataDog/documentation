@@ -95,7 +95,7 @@ These are the available processors:
 ## Preprocessing for multiple sources
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-Preprocessors is in Preview. Contact your account manager to request access.
+Preprocessors are in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches. Each branch has its own processor groups. By using preprocessors, you can avoid having to add the same processors to each processor group.
