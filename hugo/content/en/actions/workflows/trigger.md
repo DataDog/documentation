@@ -32,7 +32,9 @@ further_reading:
 ---
 
 {{< site-region region="gov2" >}}
-<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< callout url="#" btn_hidden="true" header="Preview" respect-site-support="false" >}}
+Workflow Automation is in Preview on the US2-FED site.
+{{< /callout >}}
 {{< /site-region >}}
 
 You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.
