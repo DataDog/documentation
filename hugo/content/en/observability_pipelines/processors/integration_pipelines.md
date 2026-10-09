@@ -50,27 +50,27 @@ This follows the reserved-field approach described in [Datadog log preprocessing
 2. Define a filter query to select the logs that enter the processor. Only matching logs are normalized and processed. All logs continue to the next step. See [Search Syntax][3] for query syntax.
 3. When you add the processor in the UI, all integration pipelines in the current catalog are enabled by default. Use the checkboxes to selectively enable or disable pipelines. After a Worker upgrade, integrations newly added to the catalog are not automatically enabled for existing processors. They appear in the processor's {{< ui >}}Disabled{{< /ui >}} section; add them to the {{< ui >}}Enabled{{< /ui >}} section and deploy the new configuration to include them.
 4. Ensure your logs identify their integration through `source` or `ddsource`, such as `nginx`. Logs collected by the Datadog Agent with an integration log configuration already have their source set. Enabling a pipeline does not apply it to every log: the normalized source must match that pipeline.
-5. Optionally, configure the reserved-field mappings in `preprocessing`. Omit this configuration to use the defaults described below.
+5. Review the reserved-field mappings in the {{< ui >}}Normalization & Preprocessing{{< /ui >}} tab. Keep the default source field lists or edit them as described below.
 6. Validate the output with representative logs, including logs that do not match an enabled integration pipeline. Check downstream processors and destinations that use fields now nested under `attributes`.
 7. Deploy the pipeline and monitor Worker CPU usage and the processor's [health metrics](#health-metrics).
 
 {{< img src="observability_pipelines/processors/integration_pipelines.png" alt="Manage Integration Pipelines panel showing the catalog version, pipeline search, Enabled and Disabled sections, and a table of integration names, source filters, and processor counts." style="width:100%;" >}}
 
-### Preprocessing options
+### Preprocessing field mappings
 
-Each option is an ordered list of candidate field paths. The first matching candidate supplies the reserved field. Paths refer to the incoming log's attributes; do not add the output's `attributes` prefix.
+Each reserved field has an ordered list of source field paths. The first matching source field supplies its value. Paths refer to the incoming log's attributes; do not add the output's `attributes` prefix.
 
-| Option | Reserved field | Default candidates, in order |
-| --- | --- | --- |
-| `date_sources` | `timestamp` | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
-| `hostname_sources` | `host` | `host`, `hostname`, `syslog.hostname` |
-| `message_sources` | `message` | `message`, `msg`, `log` |
-| `service_sources` | `service` | `service`, `syslog.appname`, `dd.service` |
-| `status_sources` | `status` | `status`, `severity`, `level`, `syslog.severity` |
-| `trace_id_sources` | `trace_id` | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id` |
-| `span_id_sources` | `span_id` | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id` |
+| Reserved field | Default source fields, in order |
+| --- | --- |
+| `timestamp` | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
+| `host` | `host`, `hostname`, `syslog.hostname` |
+| `message` | `message`, `msg`, `log` |
+| `service` | `service`, `syslog.appname`, `dd.service` |
+| `status` | `status`, `severity`, `level`, `syslog.severity` |
+| `trace_id` | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id` |
+| `span_id` | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id` |
 
-Setting a candidate list replaces that field's default list. For example, `hostname_sources: ["custom_host", "hostname"]` checks `custom_host` before `hostname`. Omitted options keep their defaults. An empty list disables promotion for that field, except that an unset `status` still defaults to `info`.
+Edit a reserved field's source field list to change its mapping. For example, listing `custom_host` before `hostname` for `host` checks `custom_host` first. Clearing the list disables remapping for that field; it does not restore the default list. An unset `status` still defaults to `info`, even when its source field list is empty.
 
 ## CPU sizing
 
