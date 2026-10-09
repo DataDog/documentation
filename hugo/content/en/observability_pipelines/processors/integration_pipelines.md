@@ -33,10 +33,10 @@ The processor only supports static, out-of-the-box integration pipelines include
 
 To set up an Integration Pipelines processor:
 
-1. Define a filter query to select the logs that enter the processor. See [Search Syntax][3] for more information.
+1. Define a filter query to select the logs that enter the processor. See [Search Syntax][1] for more information.
     - Only matching logs are normalized and processed.
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
-1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved-field mappings the Worker uses for common normalization. See [Common normalization](#common-normalization) andd [Pre-processing options](#pre-processing-options) for more information.
+1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved-field mappings the Worker uses for common normalization. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
 1. Click {{< ui >}}Edit Pipelines{{< /ui >}} to view a list of integration pipelines that have been enabled or disabled.
 1. The {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel shows a list of enabled integration pipelines. Click {{< ui >}}Disabled{{< /ui >}} to see integration pipelines that are disabled.
     - **Note**: All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. They must be manually enabled.
@@ -69,7 +69,7 @@ The number of enabled integration pipelines does not determine per-event process
 
 For every log that matches the processor's filter:
 
-1. The Worker normalizes and pre-processes all logs, regardless of whether it matches an integration pipeline. See [Common normalization](#common-normalization) and [Pre-processing options](#pre-processing-options) for more information.
+1. The Worker normalizes and preprocesses all logs, regardless of whether it matches an integration pipeline. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
 2. The normalized log's `source` is used to match it to an integration pipeline, such as `source:nginx` for the NGINX pipeline.
 3. The integration pipeline parses, remaps, and enriches the log. Logs that don't match a pipeline skip this step.
 4. Non-[reserved](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) fields are grouped under `attributes`.
@@ -80,16 +80,14 @@ The Worker normalizes all logs even if they don't match an integration pipeline.
 
 - Parses JSON objects in `message` and extracts their fields. For example, a message containing `{"message":"request complete","http.status_code":200}` becomes a message of `request complete` with an extracted HTTP status code.
 - Expands dotted keys into nested objects. For example, `"http.status_code": 200` becomes `"http": {"status_code": 200}`, stored under `attributes` in the output.
-- Maps log fields to reserved fields such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`.
+- Maps log fields to reserved fields such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`. See [Preprocessing options](#preprocessing-options) for more information.
 - Resolves the log's source, including from `ddsource`, before selecting an integration pipeline.
 
-### Pre-processing options
+### Preprocessing options
 
-Preprocessing maps certain attributes from your logs to reserved attributes. For example, `timestamp` is a reserved attribute but if your logs use the `published_date` attribute for the timestamp, preprocessing maps the `published_date` value to the reserved attribute `timestamp`. Each reserved attribute has an ordered list of log attributes to check. The first matching log attribute is used for the reserved attribute's value. You can add additional log attributes to the list.
+Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. Preprocessing uses the value of the first matching attribute. For example, if your logs use `published_date` for the timestamp, preprocessing maps its value to the reserved attribute `timestamp`. You can add additional log attributes to the list.
 
 **Note**: If the attribute is prefixed with the `attribute` prefix, such as `attribute.log_timestamp`, do not include the `attributes` prefix in the list; only add `log_timestamp`.
-
-the Datadog Log Management's [Preprocessing][1] section.
 
 | Reserved attribute | Log attributes, in order                                                                                        |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -105,24 +103,22 @@ Setting a candidate list replaces that field's default list. For example, `hostn
 
 ## Health metrics
 
-For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see [Pipelines Usage Metrics][6]. To filter or group by this processor, use `component_type:integration_pipelines`.
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see [Pipelines Usage Metrics][4]. To filter or group by this processor, use `component_type:integration_pipelines`.
 
 The processor also emits four metrics for each integration pipeline, tagged with `integration_id`, such as `apache` or `nginx`:
 
 | Metric                                                       | Description                                                                               |
 | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `pipelines.integration_pipelines_ingested_events_total`      | Number of events dispatched to the integration pipeline, whether or not it modifies them. |
-| `pipelines.integration_pipelines_ingested_event_bytes_total` | Estimated JSON size, in bytes, of events dispatched to the integration pipeline.          |
+| `pipelines.integration_pipelines_ingested_events_total`      | Number of events sent to the integration pipeline, regardless of whether they are modified. |
+| `pipelines.integration_pipelines_ingested_event_bytes_total` | Estimated JSON size, in bytes, of events sent to the integration pipeline.          |
 | `pipelines.integration_pipelines_modified_events_total`      | Number of events modified by the integration pipeline.                                    |
 | `pipelines.integration_pipelines_modified_event_bytes_total` | Estimated JSON size, in bytes, of events modified by the integration pipeline.            |
 
 Both byte metrics use the event size after normalization and before the integration pipeline runs. The modified byte metric measures the volume of events modified, rather than the number of bytes changed or the output size.
 
-Logs without a matching enabled integration pipeline do not contribute to these four metrics. Changes made only by common normalization do not count as integration pipeline modifications. Group by `integration_id` to identify the busiest integrations and compare processed events with modified events. The `pipeline_id` tag identifies the overall Observability Pipelines pipeline, rather than an integration.
+These four metrics count only logs that match an enabled integration pipeline. Changes made only by common normalization do not count as integration pipeline modifications. To identify integrations processing the most logs, group by `integration_id` and compare the number of processed and modified events. The `pipeline_id` tag identifies the overall Observability Pipelines pipeline, not an integration pipeline.
 
-[1]: /logs/log_configuration/pipelines/#preprocessing
-[2]: /observability_pipelines/configuration/set_up_pipelines/
-[3]: /observability_pipelines/search_syntax/logs/
-[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
-[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
