@@ -360,7 +360,7 @@ datadog:
         - src/libs/utils/**
 {{< /code-block >}}
 
-DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`. To include every path in the repository, use `**` as the only entry in `paths`.
+In this example, DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`. To include every path in the repository, use `**` as the only entry in `paths`.
 
 If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service Definitions to v3][7] to convert them.
 
