@@ -1,5 +1,5 @@
 ---
-title: Embedded Apps
+title: Embed App Builder Apps
 description: Embed published apps in dashboards and sync them with template variables and time frames for dynamic, contextual actions.
 disable_toc: false
 aliases:
@@ -16,17 +16,21 @@ App Builder is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
+
 When you have Datadog App Builder apps embedded in your dashboards, you can take direct actions on your resources, and all of the relevant data and context is immediately available. Link your app with the dashboard's time frame and template variables to dynamically set the scope of the app's actions, which allows you to carry out actions in your environment at any needed scope.
+
+<div class="alert alert-info">This page describes embedding App Builder apps, which you build in Datadog with a low-code, drag-and-drop editor. To embed an app built with <a href="/actions/datadog_apps/">Datadog Apps</a>, which you write locally as code in React and TypeScript, see <a href="/actions/datadog_apps/embed_apps/">Embed Apps</a>.</div>
 
 ## Add apps to your dashboard
 
-Add a previously published app to your dashboard by dragging the {{< ui >}}App{{< /ui >}} widget type out of the dashboard's widget tray:
+To add a previously published app to your dashboard:
 
-{{< img src="/actions/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:30%;">}}
+1. Open the dashboard where you want to add the app.
+1. Click {{< ui >}}Add Widgets{{< /ui >}} to open the widget tray.
+1. Select the {{< ui >}}Apps{{< /ui >}} tab, then drag the {{< ui >}}App{{< /ui >}} widget onto the dashboard.
+1. In the App Editor modal, select an app and provide it with a title.
 
-The App Editor modal appears, allowing you to select an app and provide it with a title:
-
-{{< img src="/actions/app_builder/embedded_apps/app-editor.png" alt="The App Editor modal with an app selected and a widget title" style="width:80%;">}}
+The {{< ui >}}Apps{{< /ui >}} tab also includes a **Created by Datadog** section with ready-made apps for common tasks, such as managing AWS or Azure resources and PagerDuty or LaunchDarkly configurations. Drag one of these apps onto your dashboard to add a working app without building one yourself.
 
 ## Sync your app with dashboard template and time frame variables
 

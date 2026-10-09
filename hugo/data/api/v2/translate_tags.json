@@ -1,4 +1,8 @@
 {
+  "ai-impact": {
+    "name": "AI Impact",
+    "description": "Send AI coding tool usage data to measure the impact of AI tools on software delivery."
+  },
   "api-management": {
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
@@ -67,6 +71,10 @@
     "name": "CI Visibility GitHub Accounts",
     "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
   },
+  "ci-visibility-logs": {
+    "name": "CI Visibility Logs",
+    "description": "Send CI job logs over HTTP for CI Visibility."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
@@ -113,7 +121,7 @@
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS and GitHub cloud authentication mappings for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",

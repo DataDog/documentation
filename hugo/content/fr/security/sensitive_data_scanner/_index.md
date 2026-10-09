@@ -14,10 +14,6 @@ further_reading:
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: Documentation
   text: Configurez Sensitive Data Scanner pour le stockage cloud.
-- link: coterm
-  tag: Documentation
-  text: 'CoTerm : surveillez les sessions de terminal et les activités sensibles sur
-    les systèmes locaux et distants.'
 - link: /data_security/
   tag: Documentation
   text: Réduire les risques liés aux données

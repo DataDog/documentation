@@ -264,6 +264,18 @@
       "description": "Edit an AuthN Mapping returns \"OK\" response"
     }
   ],
+  "SubmitCILog": [
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_4195490686",
+      "description": "Send batched CI job logs returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_1818302850",
+      "description": "Send one CI job log returns \"Request accepted for processing\" response"
+    }
+  ],
   "AggregateCIAppPipelineEvents": [
     {
       "group": "ci_visibility_pipelines",
@@ -2205,6 +2217,18 @@
       "group": "scorecards",
       "suffix": "_1831541184",
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpdateFindingsSeverity": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_412359663",
+      "description": "Apply a severity override to security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1312693410",
+      "description": "Clear the severity override of security findings returns \"Accepted\" response"
     }
   ],
   "AttachJiraIssue": [

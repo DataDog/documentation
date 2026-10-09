@@ -69,7 +69,7 @@ See [Deploying Agentless Scanning][7] for detailed guidance on recommended deplo
 
 ## Unavailable for GovCloud and FIPS
 
-Agentless Scanning is not available in GovCloud because it requires [Remote Configuration][3], which is not available in GovCloud environments. Agentless Scanning is not FIPS compliant.
+Agentless Scanning is not available in GovCloud and is not FIPS compliant.
 
 ## Further reading
 
