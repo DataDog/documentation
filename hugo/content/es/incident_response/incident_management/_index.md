@@ -123,7 +123,6 @@ Incident Management se integra con aplicaciones de terceros, incluidas:
 
 - [Atlassian Statuspage][25] para crear y actualizar incidentes de Statuspage.
 - [Confluence][22] para generar [postmortems][34] de incidentes.
-- [CoTerm][21] para seguir las actividades de remediación de incidentes basadas en terminal en tiempo real.
 - [Jira][15] para crear un ticket de Jira para un incidente.
 - [Microsoft Teams][23] para crear canales y reuniones de video para incidentes.
 - [PagerDuty][12] y [OpsGenie][13] para avisar a sus ingenieros de guardia y resolver automáticamente los avisos tras la resolución del incidente.
@@ -155,7 +154,6 @@ Incident Management se integra con aplicaciones de terceros, incluidas:
 [18]: /es/integrations/statuspage/
 [19]: /es/integrations/servicenow/
 [20]: /es/incident_response/incident_management/investigate/describe
-[21]: /es/coterm
 [22]: /es/integrations/confluence/
 [23]: /es/integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [24]: /es/integrations/zoom-incident-management/

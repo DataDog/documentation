@@ -117,6 +117,10 @@ Confirm that the build chain completed and `datadog.ci.enabled` is `true`. The e
 in `teamcity-server.log`. In TeamCity, go to {{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Diagnostic{{< /ui >}} ->
 {{< ui >}}Server Logs{{< /ui >}}.
 
+### Test runs are not linked to TeamCity jobs
+
+The Datadog CI Integration plugin does not correlate TeamCity pipeline or job executions with test runs in Test Optimization. Tests may appear in Test Optimization while the corresponding CI Visibility job shows **Test Runs: 0**.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

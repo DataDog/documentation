@@ -243,6 +243,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "CreateAIImpactUserActivity": {
+    "description": "Send daily AI coding tool activity for one or more users. Each entry records whether a\nuser was active on a given day, along with the AI tools and models they used. An entry\nis stored once per tool, and sending the same user, day, and tool again overwrites the\nprevious value.",
+    "summary": "Send AI tool user activity",
+    "request_description": "",
+    "request_schema_description": "Request to send daily AI tool activity for one or more users."
+  },
   "ListAnnotations": {
     "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
     "summary": "List annotations"
@@ -537,7 +543,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a Bits AI investigation from a monitor alert or a general investigation.\nThe `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.",
+    "description": "Trigger a Bits AI investigation from a monitor alert or a general investigation.\nThis endpoint requires the `bits_investigations_write` permission. When the trigger type is\n`monitor_alert_trigger`, the `monitors_read` permission is also required.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
@@ -1075,6 +1081,42 @@
     "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
     "summary": "Get an AWS cloud authentication persona mapping"
   },
+  "ListGitHubCloudAuthIntakeMappings": {
+    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
+    "summary": "List GitHub cloud authentication intake mappings"
+  },
+  "CreateGitHubCloudAuthIntakeMapping": {
+    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Create a GitHub cloud auth intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
+  },
+  "DeleteGitHubCloudAuthIntakeMapping": {
+    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
+    "summary": "Delete a GitHub cloud auth intake mapping"
+  },
+  "GetGitHubCloudAuthIntakeMapping": {
+    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Get a GitHub cloud authentication intake mapping"
+  },
+  "ListGitHubCloudAuthPersonaMappings": {
+    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
+    "summary": "List GitHub cloud authentication persona mappings"
+  },
+  "CreateGitHubCloudAuthPersonaMapping": {
+    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Create a GitHub cloud auth persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
+  },
+  "DeleteGitHubCloudAuthPersonaMapping": {
+    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
+    "summary": "Delete a GitHub cloud auth persona mapping"
+  },
+  "GetGitHubCloudAuthPersonaMapping": {
+    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Get a GitHub cloud authentication persona mapping"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
@@ -1292,6 +1334,10 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "ListCostCloudAccountsV2": {
+    "description": "List the OCI and AWS CUR 2.0 cloud accounts for your organization, including account IDs, status, and validation errors.\nUse `filter[cloud]=oci` or `filter[cloud]=aws_cur2` to return a single cloud. When omitted or empty, both clouds are returned.\nAWS CUR 1.0, Azure, and GCP accounts are available through their dedicated configuration endpoints.\nArchived accounts are excluded. The response contains all matching accounts and is not paginated.\n\nThis endpoint replaces `GET /api/v2/cost/oci_config`. To migrate, use `filter[cloud]=oci` and update clients to accept\nthe `cloud_account` resource type instead of `oci_config`. Account IDs and the existing attributes are preserved;\neach account also includes the `cloud` attribute.",
+    "summary": "List Cloud Cost Management cloud accounts"
+  },
   "GetCommitmentsCommitmentList": {
     "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
     "summary": "Get commitments list"
@@ -1367,7 +1413,7 @@
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
   "ListCostOCIConfigs": {
-    "description": "**Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.\n\nList the OCI configs.",
+    "description": "**Note**: This endpoint is deprecated. Use [List Cloud Cost Management cloud accounts](https://docs.datadoghq.com/api/latest/cloud-cost-management/#list-cloud-cost-management-cloud-accounts)\nwith `filter[cloud]=oci` instead. Update clients to accept the `cloud_account` resource type instead of `oci_config`.\nAccount IDs and the existing attributes are preserved; each account also includes the `cloud` attribute.\n\nList the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
   "SearchCostRecommendations": {
@@ -1844,7 +1890,7 @@
   },
   "PatchDORADeploymentByVersion": {
     "description": "Update a deployment's change failure status, identifying the deployment by its service, environment, and version instead of its ID. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation. If multiple deployments match the given service, environment, and version, the most recently finished one is updated.",
-    "summary": "Patch a deployment event by version",
+    "summary": "Mark a deployment as failed by version",
     "request_description": "",
     "request_schema_description": "Request to patch a DORA deployment event identified by service, environment, and version."
   },
@@ -1860,7 +1906,7 @@
   },
   "PatchDORADeployment": {
     "description": "Update a deployment's change failure status. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation.",
-    "summary": "Patch a deployment event",
+    "summary": "Mark a deployment as failed by ID",
     "request_description": "",
     "request_schema_description": "Request to patch a DORA deployment event."
   },
@@ -7011,7 +7057,7 @@
     "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
     "summary": "Get SPA recommendations v2",
     "request_description": "",
-    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a precomputed shard."
+    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",

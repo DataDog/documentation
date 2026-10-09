@@ -12,7 +12,7 @@ further_reading:
   text: アクセス管理の権限
 title: Agent Observability における Data Access Control
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Agent Observability プロジェクトには、データセットのプロンプトや期待される出力、実験の実行からのトレース、評価結果、アノテーションキューでレビュー中のトレースなど、機密性の高い素材が含まれる可能性があります。[Data Access Control][1] を使用すると、プロジェクトを制限して、指定したチームまたはロールのみがプロジェクトを表示できるようにすることができます。
 
@@ -104,8 +104,8 @@ Restricted Dataset のチームまたはロールを編集して、アクセス�
 - **取り込み時にプロジェクトでタグ付けされなかったスパンおよび評価メトリクスは制限されません。**プロジェクトは取り込み時にタグとしてこれらのイベントに付加され、過去のイベントが再タグ付けされることはありません。タグが付いているイベントは、制限が保存されるとすぐに非表示になります。リストビュー、メタデータ、およびデータセットレコードは、作成時期に関係なく非表示になります。
 - **Managed Prompts は、**Data Access Control ではサポートされていません。サポートされているテレメトリの全リストについては、「Data Access Control[1]」を参照してください。
 - **プロジェクトに属していないアノテーションキューは、Agent Observability の読み取りアクセス権を持つすべてのユーザーに表示され**、Restricted Dataset で非表示にすることはできません。キューをプロジェクトに移動するか、プロジェクト内に再作成して、制限の対象にしてください。
-- **Restricted Dataset がないプロジェクトは、Agent Observability の読み取りアクセス権を持つすべてのユーザーに表示されます。**組織で Agent Observability の [厳格モード][6] が有効になっていない限り、Data Access Control はデフォルトでは許可方式で動作します。値がどのプロジェクトとも一致しない Restricted Dataset は、何も制限しません。すべての新しい制限を、付与されたチームやロール以外のユーザーで確認してください。
-- **[厳格モード][6] では、Restricted Dataset にプロジェクト ID が指定されている場合にのみ、プロジェクトが表示されます。**アプリケーション名を `ml_app` の値として指定しても、Experiments ではアクセス権が付与されないため、他の Restricted Dataset のチームやロールを含め、すべてのユーザーにプロジェクトが非表示のままになります。「[プロジェクト ID を見つける](#find-a-projects-id)」を参照してください。
+- **Restricted Dataset がないプロジェクトは、Agent Observability の読み取りアクセス権を持つすべてのユーザーに表示されます。**組織がRestricted Datasets以外のAgent Observabilityデータを[Restricted][6]に設定しない場合、デフォルトのAccess Controlは許可状態となります。値がどのプロジェクトとも一致しない Restricted Dataset は、何も制限しません。すべての新しい制限を、付与されたチームやロール以外のユーザーで確認してください。
+- **Agent Observabilityが[Restricted][6]に設定されている場合、プロジェクトはRestricted DatasetsがそのプロジェクトIDを指定している場合にのみ表示されます。**アプリケーション名を `ml_app` の値として指定しても、Experiments ではアクセス権が付与されないため、他の Restricted Dataset のチームやロールを含め、すべてのユーザーにプロジェクトが非表示のままになります。「[プロジェクト ID を見つける](#find-a-projects-id)」を参照してください。
 
 ## 参考資料 {#further-reading}
 
