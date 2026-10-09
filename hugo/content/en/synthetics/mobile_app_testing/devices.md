@@ -218,18 +218,6 @@ multifiltersearch:
       eu: 'No'
       us: 'Yes'
       routed: 'Yes'
-    - device: Motorola moto e20 eu only
-      os: Android 11
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-      routed: 'No'
-    - device: Motorola Moto G 5G Plus eu only
-      os: Android 11
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-      routed: 'No'
     - device: Samsung Galaxy A15 5G
       os: Android 14
       platform: Android
@@ -242,13 +230,6 @@ multifiltersearch:
       eu: 'No'
       us: 'Yes'
       routed: 'Yes'
-    - device: Xiaomi Redmi 14C eu only
-      os: Android 15
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-      routed: 'No'
-    # Apple devices
     - device: iPad (2022)
       os: iOS 16
       platform: Apple
@@ -497,26 +478,18 @@ Mobile App Testing supports two types of locations:
 
 Selecting an IP-routed location changes the apparent geographic origin of the device's network traffic. It does not move the device to that location or establish a connection to a corporate VPN.
 
-Physical-location availability and IP-routing support are independent. A device available in the US or EU does not necessarily support IP-routed locations.
-
-## Device and location compatibility
-
 Use the table below to check physical-location availability and IP-routing support for each device and operating system version. Select devices that support the locations you want to test. A device can support only a subset of the selected locations.
 
 For IP-routed locations, use a device with **Yes** in the **IP-routed locations** column. Do not infer routing support from its availability in a physical location. Before starting a recording session, check that the selected device supports the location used for that session.
-
-For applications protected by network access restrictions, see [Run Mobile App tests from Restricted Networks][1].
 
 ## Supported devices
 
 The EU and US columns show physical-location compatibility. The **IP-routed locations** column shows whether the device supports IP routing, not whether it is physically located in each routed location.
 
-**Yes** indicates location compatibility, not real-time device capacity. A device remains supported when it is temporarily busy. Check the device selector for the latest compatibility and capacity information.
+**Yes** indicates location compatibility, not real-time device capacity. A device remains supported when it is temporarily busy.
 
 {{< multifilter-search >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /synthetics/mobile_app_testing/mobile_app_tests/restricted_networks/
