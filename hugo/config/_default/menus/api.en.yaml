@@ -13477,6 +13477,32 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: List deployment gate rule evaluations
+      url: /api/latest/deployment-gates/list-deployment-gate-rule-evaluations/
+      identifier: deployment-gates-list-deployment-gate-rule-evaluations
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentRuleEvaluations
+        unstable:
+          - v2
+        order: 14
+    - name: List deployment gate evaluations
+      url: /api/latest/deployment-gates/list-deployment-gate-evaluations/
+      identifier: deployment-gates-list-deployment-gate-evaluations
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentGateEvaluations
+        unstable:
+          - v2
+        order: 13
     - name: Create deployment gate
       url: /api/latest/deployment-gates/create-deployment-gate/
       identifier: deployment-gates-create-deployment-gate
