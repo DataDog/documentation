@@ -1,10 +1,10 @@
 ---
 aliases:
 - /fr/software_catalog/overview_pages
-description: Les pages de présentation d'Internal Developer Portal offrent aux développeurs
-  une vue de leurs éléments d'action et de l'état de santé des services, et donnent
-  aux responsables de l'ingénierie une vue d'ensemble de la fiabilité et des performances
-  des scorecards.
+description: Les pages de présentation de l'Internal Developer Portal offrent aux
+  développeurs une vue de leurs éléments d'action et de l'état de santé des services,
+  et donnent aux responsables de l'ingénierie une vue d'ensemble de la fiabilité et
+  des performances des Scorecards.
 further_reading:
 - link: actions/app_builder
   tag: Documentation
@@ -34,16 +34,16 @@ title: Pages de présentation
 
 La plateforme interne pour développeurs (IDP) de Datadog est livrée avec des **pages de présentation** qui mettent en avant les informations les plus pertinentes pour chaque partie prenante :
 - Les développeurs obtiennent une vue centralisée de leurs éléments d'action, de leurs problèmes et des informations sur les services de leur équipe.
-- Les SRE et les responsables de l'ingénierie obtiennent une vue d'ensemble de la fiabilité des produits, de l'état de santé des services, des performances des scorecards et d'autres métriques clés pour leurs équipes.
+- Les SRE et les responsables de l'ingénierie obtiennent une vue d'ensemble de la fiabilité des produits, de l'état de santé des services, des performances des Scorecards et d'autres métriques clés pour leurs équipes.
 
 ## Page de présentation du développeur {#developer-overview-page}
 
-{{< img src="tracing/eng_reports/developer-overview-page.png" alt="La page de présentation du développeur dans la section My Workspace d'Internal Developer Portal, avec une présentation affichant des métriques de haut niveau sur les alertes, les incidents et les SLO, et une section My Tasks affichant les tickets JIRA" style="width:100%;" >}}
+{{< img src="tracing/eng_reports/developer-overview-page.png" alt="La page de présentation du développeur dans la section My Workspace de l'Internal Developer Portal, avec une présentation affichant des métriques de haut niveau sur les alertes, les incidents et les SLO, et une section My Tasks affichant les tickets JIRA" style="width:100%;" >}}
 
 La page de présentation du développeur centralise les informations suivantes sur votre équipe et vos services :
 - Les monitors, incidents et SLO de votre équipe
 - Vos PR GitHub
-- Les services et les performances des scorecards de votre équipe
+- Les services et les performances des Scorecards de votre équipe
 - Vos problèmes, erreurs et alertes Watchdog
 
 ### Utilisation de la page de présentation du développeur {#using-the-developer-overview-page}
@@ -85,10 +85,10 @@ Affiche les signaux en direct des [Monitors][6], d'[Incident Management][3] et d
 
 Répertorie les pull requests ouvertes que vous avez créées et celles pour lesquelles vous êtes désigné comme réviseur, en fonction de l'organisation GitHub et du nom d'utilisateur que vous avez fournis.
 
-#### Services d'équipe et performances des scorecards {#team-services-and-scorecard-performance}
+#### Services d'équipe et performances des Scorecards {#team-services-and-scorecard-performance}
 
 - **Services de mon équipe** : Répertorie les services appartenant au filtre **Équipe** sélectionné.
-- **Performance des scorecards par service** : Affiche le score moyen de toutes les scorecards pour chaque service appartenant au filtre **Équipe** sélectionné.
+- **Performance des Scorecards par service** : Affiche le score moyen de toutes les Scorecards pour chaque service appartenant au filtre **Team** sélectionné.
 
 #### Problèmes et erreurs {#issues-and-errors}
 
@@ -103,7 +103,7 @@ Capture les alertes de [Datadog Watchdog][5].
 Si vous devez personnaliser votre vue, cliquez sur **Clone as dashboard** en haut à droite. Cela crée un dashboard prérempli avec le contenu de la page **Mon espace de travail**.
 
 Voici quelques exemples de personnalisations que vous pouvez effectuer avec le dashboard cloné :
-- Créez des [Applications intégrées][2] à l'aide de l'[Action Catalog][11] de Datadog pour afficher des données tierces supplémentaires (par exemple, afficher les informations d'astreinte PagerDuty).
+- Créez des [apps App Builder intégrées][2] à l'aide de l'[Action Catalog][11] de Datadog pour afficher des données tierces supplémentaires (par exemple, afficher les informations d'astreinte de PagerDuty).
 - Mettez à jour la mise en page et la conception globales de votre vue en redimensionnant, en réorganisant et en ajoutant/supprimant des [widgets][12].
 - Utilisez un widget [Note][13] pour ajouter une section d'annonces et de mises à jour contenant des informations pertinentes pour votre organisation.
 

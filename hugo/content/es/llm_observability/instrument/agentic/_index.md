@@ -9,11 +9,14 @@ title: Instrumentación agéntica
 
 1. Solo agregue código relacionado con Datadog Agent Observability y con Datadog tracer. A menos que sea para fines de instrumentación manual, no modifique código no relacionado.
 2. Si se ejecuta en un monorepo o proyecto con múltiples servicios u objetivos de instrumentación, confirme con el usuario qué servicio o subproyecto debe instrumentarse con Agent Observability.
-3. Instale los SDK de Datadog más recientes. Si ya está instalado, verifique con el usuario si está bien actualizar la dependencia.
+3. Verifique si el SDK de Datadog instalado admite la instrumentación requerida para la aplicación. Si es así, utilice esa versión. Si la instrumentación requiere una actualización del SDK, explique por qué y pregunte antes de actualizar la dependencia. Postergue las actualizaciones requeridas solo para Prompt Management opcional hasta que el usuario elija esa integración.
+4. Conserve el proveedor, el modelo, el contenido del prompt, el comportamiento, el administrador de paquetes y el flujo de trabajo de gestión de secretos existentes de la aplicación.
+
+Primero, complete la instrumentación, incluido el Prompt Tracking y cualquier intercambio de contexto solicitado. Luego, ofrezca Prompt Management alojado opcional. Prompt Management no es necesario para la instrumentación, el intercambio de contexto o las recomendaciones de verificación.
 
 ## Requisitos previos {#pre-requisites}
 
-1. Se requiere una clave de API de Datadog para enviar datos de Agent Observability a Datadog. Sin una clave de API, el usuario no recibirá datos de Agent Observability, por lo que este es un **requisito obligatorio**. Si el usuario aún no ha proporcionado una y no desea hacerlo, continúe instrumentando su aplicación, asegurándose de indicar explícitamente al final que debe configurarla y señálele dónde puede hacerlo.
+1. Se requiere una clave de Datadog API para enviar datos de Agent Observability a Datadog. Sin una clave de API, el usuario no recibirá datos de Agent Observability, por lo que este es un **requisito obligatorio**. Si el usuario aún no ha proporcionado una y no desea hacerlo, continúe instrumentando su aplicación, asegurándose de indicar explícitamente al final que debe configurarla y señálele dónde puede hacerlo.
 2. Determine el lenguaje de programación y el framework que se utilizan en la aplicación para instrumentar. Esto es importante para instrumentar correctamente la aplicación.
 
 ## Variables de entorno {#environment-variables}
@@ -64,10 +67,18 @@ Siga las instrucciones para el lenguaje detectado:
 
 | Lenguaje | Instrucciones |
 |----------|-------------|
-| Python | [Instrumentación agéntica de aplicaciones Python](/llm_observability/instrument/agentic/python.md) |
-| Node.js | [Instrumentación agéntica de aplicaciones Node.js](/llm_observability/instrument/agentic/nodejs.md) |
-| Java | [Instrumentación agéntica de aplicaciones Java](/llm_observability/instrument/agentic/java.md) |
-| OpenTelemetry | [Instrumentación de OpenTelemetry](/llm_observability/instrument/otel_instrumentation.md) |
+| Python | [Instrumentación agéntica de aplicaciones Python][1] |
+| Node.js | [Instrumentación agéntica de aplicaciones Node.js][2] |
+| Java | [Instrumentación agéntica de aplicaciones Java][3] |
+| OpenTelemetry | [Instrumentación de OpenTelemetry][4] |
+
+## Instrumentar prompts {#instrument-prompts}
+
+Prompt Tracking es parte de la instrumentación predeterminada de Agent Observability. Para cada llamada a LLM seleccionada, identifique dónde construye la aplicación el prompt. Mantenga la plantilla del prompt separada de los valores de las variables utilizados para completarla.
+
+Para prompts locales, siga las [instrucciones de Prompt Tracking][5] para registrar la plantilla del prompt y los valores de las variables con el tramo del LLM. Mantenga el código existente que construye el prompt. No lo reemplace con código que recupere prompts de Datadog Prompt Management.
+
+Si la aplicación ya recupera prompts de Datadog Prompt Management, mantenga esa integración. El seguimiento automático se aplica cuando el prompt formateado se pasa sin cambios a un proveedor compatible e instrumentado automáticamente. Si la aplicación copia o modifica el prompt formateado antes de enviarlo al proveedor, añada anotaciones explícitas como se describe en [Track prompt usage][6]. No añada anotaciones manuales cuando el seguimiento automático ya capture los metadatos del prompt.
 
 {{< agent-only >}}
 ## Compartir contexto del agente para recomendaciones de verificación {#share-agent-context-for-check-recommendations}
@@ -157,20 +168,9 @@ Siga estos requisitos de seguridad:
 - Si la carga falla, continúe con la instrumentación e informe al usuario que Datadog no recibió el contexto opcional. No vuelva a intentarlo con datos más amplios.
 
 {{< /agent-only >}}
-## Instrumente los prompts y ofrezca Prompt Management {#instrument-prompts-and-offer-prompt-management}
-
-Prompt Tracking es parte de la instrumentación predeterminada de Agent Observability. Identifique el límite de construcción del prompt para cada llamada de LLM seleccionada y conserve la plantilla del prompt por separado de sus variables dinámicas.
-
-1. Si la solicitud del usuario ya especifica un ID de prompt gestionado por Datadog, siga la [guía de integración agentic de Prompt Management](/llm_observability/instrument/agentic/prompt_management.md). No vuelva a preguntar si desea utilizar Prompt Management.
-2. De lo contrario, identifique los prompts de la aplicación y las variables dinámicas utilizadas para darles formato. Conserve el proveedor, el modelo, el contenido del prompt y el comportamiento de la aplicación existentes.
-3. Para una aplicación de Python compatible, indique al usuario qué prompts identificó y pregúntele si desea gestionar esos prompts con Datadog. Si acepta, siga la [guía de integración agentic de Prompt Management](/llm_observability/instrument/agentic/prompt_management.md) para promover los prompts locales seleccionados y reemplazar su construcción local con la recuperación de prompts gestionados.
-4. Si el usuario rechaza Prompt Management, o si el lenguaje de la aplicación no es compatible, instrumente los prompts seleccionados con metadatos de prompt estructurados siguiendo las [instrucciones de Prompt Tracking](/llm_observability/instrument/prompt_tracking). No añada la recuperación de prompts en tiempo de ejecución.
-
-Cuando Prompt Management reemplace un prompt local, utilice el seguimiento automático del prompt gestionado en lugar de adjuntar metadatos de prompt estructurados duplicados.
-
 ## Visualización de trazas {#viewing-traces}
 
-Informe al usuario que puede acceder a su aplicación y visualizar los datos en Datadog.
+Informe sobre los cambios de instrumentación, cualquier requisito de configuración restante y si la carga de contexto se realizó correctamente cuando se solicitó ese paso. Indique al usuario cómo ejecutar su aplicación y visualizar sus datos en Datadog. No afirme que los rastreos o las recomendaciones están disponibles sin verificación.
 
 **Obligatorio**: proporcione un enlace permanente donde el usuario pueda visualizar los datos asociados con esta aplicación. Esto tomará la forma de
 
@@ -179,8 +179,20 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 ```
 
 Complete los valores proporcionados:
-1. `dd_site` - si se proporcionó el valor para [sitio de Datadog](#datadog-site), utilice ese valor. De lo contrario, utilice `datadoghq.com`.
-2. `application_name` - utilice el valor proporcionado o inferido de la sección [Nombre de la aplicación de Agent Observability](#llm-observability-application-name).
+1. `dd_site`: si se proporcionó el valor para [sitio de Datadog](#datadog-site), utilice ese valor. De lo contrario, utilice `datadoghq.com`.
+2. `application_name`: utilice el valor proporcionado o inferido de la sección [Agent Observability application name](#agent-observability-application-name).
+
+## Prompt Management opcional {#optional-prompt-management}
+
+Tras completar la instrumentación y cualquier intercambio de contexto solicitado, informe de los resultados. A continuación, aborde Prompt Management alojado opcional para aplicaciones Python:
+
+- Si el usuario ya proporcionó un ID de prompt gestionado por Datadog, siga la [guía de integración agentic de Prompt Management][7]. No vuelva a preguntar si desea habilitar Prompt Management.
+- De lo contrario, identifique los prompt locales de la aplicación y pregunte si el usuario desea gestionarlos en Datadog. Si acepta, siga la guía para crear versiones gestionadas de los prompt seleccionados y actualice la aplicación para recuperarlos.
+- Si el usuario declina o no responde, mantenga los prompt locales instrumentados sin cambios.
+
+Siga la [sección Track prompt usage][6] de la guía para determinar si se requiere seguimiento automático o anotaciones explícitas. Evite duplicar los metadatos del prompt.
+
+Si Prompt Management requiere una actualización del SDK, explique el motivo y pregunte antes de actualizar la dependencia. Esta actualización opcional no debe retrasar la instrumentación principal ni el intercambio de contexto.
 
 ## Instrucciones específicas del lenguaje {#language-specific-instructions}
 
@@ -190,3 +202,11 @@ Complete los valores proporcionados:
     {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Instrumentación agéntica de aplicaciones Java{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Integración agéntica de Prompt Management{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /es/llm_observability/instrument/agentic/python.md
+[2]: /es/llm_observability/instrument/agentic/nodejs.md
+[3]: /es/llm_observability/instrument/agentic/java.md
+[4]: /es/llm_observability/instrument/otel_instrumentation.md
+[5]: /es/llm_observability/instrument/prompt_tracking.md
+[6]: /es/llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
+[7]: /es/llm_observability/instrument/agentic/prompt_management.md

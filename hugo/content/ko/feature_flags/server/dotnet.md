@@ -1,18 +1,18 @@
 ---
-description: Datadog Feature Flags를 .NET 애플리케이션에 맞게 설정합니다.
+description: Datadog Feature Flags를 .NET 애플리케이션에 맞게 설정하세요.
 further_reading:
 - link: /feature_flags/server/
-  tag: 설명서
+  tag: 문서
   text: 서버 측 Feature Flags
 - link: /tracing/trace_collection/dd_libraries/dotnet-core/
-  tag: 설명서
+  tag: 문서
   text: .NET 트레이싱
 - link: /feature_flags/guide/server_flag_evaluation_metrics/
   tag: 가이드
-  text: 서버 측 플래그 평가 메트릭 설정
+  text: 서버 측 플래그 평가 메트릭 설정하기
 - link: /feature_flags/guide/apm_trace_enrichment/
   tag: 가이드
-  text: Feature Flags에 대한 APM 트레이스 보강 설정
+  text: Feature Flags에 대한 APM 트레이스 보강 설정하기
 - link: /feature_flags/concepts/flag_graphs/
   tag: 개념
   text: Feature Flag 그래프
@@ -20,48 +20,55 @@ title: .NET Feature Flags
 ---
 ## 개요 {#overview}
 
-이 페이지에서는 Datadog Feature Flags SDK를 사용하여 .NET 애플리케이션을 계측하는 방법을 설명합니다. .NET SDK는 기능 플래그 관리를 위한 개방형 표준인 [OpenFeature][1]와 통합되며, Datadog .NET 트레이서(`dd-trace-dotnet`)의 Remote Configuration을 통해 플래그 업데이트를 수신합니다.
+이 페이지에서는 Datadog Feature Flags SDK를 사용하여 .NET 애플리케이션을 계측하는 방법을 설명합니다. .NET SDK는 Feature Flag 관리를 위한 개방형 표준인 [OpenFeature][1]와 통합되며, Datadog .NET 트레이서(`dd-trace-dotnet`)를 사용하여 관리형 CDN 또는 Agent Remote Configuration에서 플래그 업데이트를 수신합니다.
 
-이 가이드에서는 SDK를 설치 및 활성화하고, OpenFeature 클라이언트를 생성하며, 애플리케이션에서 기능 플래그를 평가하는 방법을 설명합니다.
+트레이서 버전 3.54.0부터는 새로운 설정에서 기본적으로 Datadog 관리형 CDN으로부터 플래그 구성을 로드합니다. 이 가이드에서는 SDK를 설치하고, OpenFeature 클라이언트를 생성하며, 애플리케이션에서 Feature Flags를 평가하는 방법을 설명합니다.
+
+<div class="alert alert-warning">버전 3.54.0에서 Agentless 모드는 플래그 구성만 변경합니다. 실험 노출 이벤트에는 여전히 호환되는 로컬 Agent 또는 텔레메트리 릴레이가 필요하며, 직접적인 Event Platform Proxy(EVP) 폴백은 지원되지 않습니다. 평가 메트릭에는 별도로 구성된 OpenTelemetry 내보내기 경로가 필요합니다. 텔레메트리 경로가 없으면 구성 전달 및 로컬 플래그 평가만 작동합니다.</div>
 
 ## 전제 조건 {#prerequisites}
 
-.NET Feature Flags SDK를 설정하기 전에 다음 사항을 확인합니다.
+Agentless 구성 전달을 위해서는 Datadog .NET 트레이서 버전 **3.54.0 이상** 및 `Datadog.FeatureFlags.OpenFeature` 버전 **2.3.1 이상**을 설치해야 합니다. 트레이서는 [자동 계측][8]을 통해 로드되어야 합니다. OpenFeature 공급자만 설치하는 것으로는 충분하지 않습니다. 플래그 구성을 가져오기 위해 별도의 Datadog Agent가 필요하지 않습니다.
 
-- **Datadog Agent** 버전 7.55 이상, [Remote Configuration][2] 활성화됨
-- **Datadog [API 키][5]**가 Agent에 구성되어 있음
-- **Datadog .NET SDK**(`dd-trace-dotnet`):
-  - .NET 6+의 경우 버전 3.36.0 이상
-  - .NET Framework 4.6.2+의 경우 버전 3.38.0 이상
-
-다음 환경 변수를 설정하세요.
+시작하기 전에 애플리케이션 프로세스에서 다음 환경 변수를 설정하세요.
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-
-# Required: Service identification
+DD_API_KEY=<YOUR_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-<div class="alert alert-info"> <code>EXPERIMENTAL_</code> 접두사는 이전 버전과의 호환성을 위해 유지됩니다. 공급자 자체는 안정적입니다.</div>
+Datadog [API 키][5]와 `datadoghq.com`과 같이 조직을 호스팅하는 사이트를 사용합니다. 새 설정의 경우 Feature Flags 활성화 또는 소스 설정이 필요하지 않습니다. 애플리케이션에서 Datadog OpenFeature 공급자를 초기화하여 폴링을 시작합니다. 트레이서만 설치하거나 초기화해서는 CDN 폴링이 시작되지 않습니다. 평가는 로컬에 캐시된 구성을 사용하며 네트워크 요청을 수행하지 않습니다.
 
-필수 트레이서 버전 및 Agent OTLP 설정을 포함하여 `feature_flag.evaluations`를 구성하는 방법은 [서버 측 플래그 평가 메트릭 설정][6]을 참조하세요. 사용 가능한 그래프에 대한 자세한 정보는 [Feature Flag 그래프][7]를 참조하세요.
+플래그 평가 메트릭은 별도로 구성된 OpenTelemetry 파이프라인을 사용합니다. CDN 전송을 활성화해도 메트릭 내보내기는 구성되지 않습니다. [서버 측 플래그 평가 메트릭 설정][6] 및 [Feature Flag 그래프][7]를 참조하세요.
+
+### Agent Remote Configuration 사용 {#use-agent-remote-configuration}
+
+Agent 기반 전달의 경우, [Remote Configuration][2]이 활성화되어 있고 Agent에 API 키가 구성된 Datadog Agent 7.55 이상을 사용하세요. 최소 트레이서 버전은 .NET 6+의 경우 3.36.0, .NET Framework 4.6.2+의 경우 3.38.0입니다.
+
+트레이서 버전 3.54.0 이상에서는 소스를 명시적으로 선택하세요.
+
+{{< code-block lang="bash" >}}
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+이전 트레이서 버전은 `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`를 사용합니다. 3.54.0 버전에서 이 지원이 중단된 설정은 새로운 활성화 설정이나 명시적 소스가 제공되지 않을 때 Remote Configuration을 보존합니다. 마이그레이션하려면 레거시 설정을 제거하고 위의 애플리케이션 자격 증명을 구성합니다. 이미 소스를 명시적으로 선택한 경우 `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`를 설정하세요. `DD_FEATURE_FLAGS_ENABLED=false`는 선택한 소스에 관계없이 Feature Flags를 비활성화합니다.
+
+폴링, 요청 시간 초과, 사용자 지정 엔드포인트 및 마이그레이션 설정은 [Configuration Sources][9]를 참조하세요. 기본 Agentless 폴링 간격은 30초, 요청 시간 초과는 5초이며, 공급자 초기화는 첫 번째 구성을 위해 최대 30초까지 대기합니다.
 
 ## 설치 {#installation}
 
-NuGet을 사용하여 Datadog [.NET SDK][3] 및 [OpenFeature SDK][4]를 설치합니다.
+NuGet을 사용하여 Datadog [.NET SDK][3] 및 [OpenFeature SDK][4]를 설치하세요.
 
 {{< code-block lang="bash" >}}
 dotnet add package Datadog.FeatureFlags.OpenFeature
 dotnet add package OpenFeature
 {{< /code-block >}}
 
-또는 `.csproj` 파일에 추가합니다.
+또는 `.csproj` 파일에 추가하세요.
 
 {{< code-block lang="xml" filename="MyProject.csproj" >}}
 <ItemGroup>
@@ -77,7 +84,7 @@ dotnet add package OpenTelemetry
 dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
 {{< /code-block >}}
 
-또는 `.csproj` 파일에 추가합니다.
+또는 `.csproj` 파일에 추가하세요.
 
 {{< code-block lang="xml" filename="MyProject.csproj" >}}
 <ItemGroup>
@@ -88,11 +95,11 @@ dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
 
 ## SDK 초기화 {#initialize-the-sdk}
 
-Datadog OpenFeature 공급자를 OpenFeature API에 등록합니다. 공급자는 Datadog .NET 트레이서의 Remote Configuration 시스템에 연결하여 플래그 구성을 수신합니다.
+Datadog OpenFeature 공급자를 OpenFeature API에 등록하세요. 공급자는 Datadog .NET 트레이서에서 선택된 소스를 활성화합니다.
 
 ### 초기화 차단 {#blocking-initialization}
 
-`SetProviderAsync`를 `await`과 함께 사용해 첫 번째 플래그 구성이 수신될 때까지 평가를 차단합니다. 이렇게 하면 애플리케이션이 요청 처리를 시작하기 전에 Feature Flags가 준비됩니다.
+`SetProviderAsync`를 `await`과 함께 사용해 첫 번째 플래그 구성이 수신될 때까지 평가를 차단하세요. 이렇게 하면 애플리케이션이 요청 처리를 시작하기 전에 Feature Flags가 준비됩니다.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -129,7 +136,7 @@ var client = Api.Instance.GetClient("my-service");
 
 ## 클라이언트 생성 {#create-a-client}
 
-플래그를 평가하려면 OpenFeature 클라이언트를 생성합니다. 애플리케이션의 각기 다른 부분에 대해 서로 다른 이름을 가진 여러 클라이언트를 생성할 수 있습니다.
+플래그를 평가하려면 OpenFeature 클라이언트를 생성하세요. 애플리케이션의 각기 다른 부분에 대해 서로 다른 이름을 가진 여러 클라이언트를 생성할 수 있습니다.
 
 {{< code-block lang="csharp" >}}
 // Create a client for your application
@@ -138,9 +145,9 @@ var client = Api.Instance.GetClient("my-service");
 
 ## 평가 컨텍스트 설정 {#set-the-evaluation-context}
 
-플래그 타겟팅을 위해 사용자 또는 엔티티를 식별하는 평가 컨텍스트를 정의하세요. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 속성이 포함됩니다.
+플래그 타겟팅을 위해 사용자 또는 엔터티를 식별하는 평가 컨텍스트를 정의하세요. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 속성이 포함됩니다.
 
-<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 부울과 같이 중첩되지 않은 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
+<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같이 중첩되지 않은 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
 
 {{< code-block lang="csharp" >}}
 using OpenFeature.Model;
@@ -164,9 +171,9 @@ var evalCtx = EvaluationContext.Builder()
 
 각 Feature Flag는 키(고유 문자열)로 식별되며 예상되는 유형의 값을 반환하는 유형화된 메서드로 평가할 수 있습니다. 각 Feature Flag가 존재하지 않거나 평가할 수 없는 경우, SDK는 제공된 기본값을 반환합니다.
 
-### 부울 플래그 {#boolean-flags}
+### 불리언 플래그 {#boolean-flags}
 
-on/off 또는 true/false 조건을 나타내는 플래그에는 `GetBooleanValueAsync`을 사용합니다.
+on/off 또는 true/false 조건을 나타내는 플래그에는 `GetBooleanValueAsync`를 사용합니다.
 
 {{< code-block lang="csharp" >}}
 var enabled = await client.GetBooleanValueAsync("new-checkout-flow", false, evalCtx);
@@ -204,7 +211,7 @@ switch (theme)
 
 ### 숫자 플래그 {#numeric-flags}
 
-숫자 플래그에는 `GetIntegerValueAsync` 또는 `GetDoubleValueAsync`을 사용합니다. 이것은 기능이 한도, 백분율 또는 승수와 같은 파라미터에 좌우될 때 적합합니다.
+숫자 플래그에는 `GetIntegerValueAsync` 또는 `GetDoubleValueAsync`를 사용합니다. 이것은 기능이 한도, 백분율 또는 승수와 같은 파라미터에 좌우될 때 적합합니다.
 
 {{< code-block lang="csharp" >}}
 var maxItems = await client.GetIntegerValueAsync("cart-max-items", 20, evalCtx);
@@ -214,7 +221,7 @@ var discountRate = await client.GetDoubleValueAsync("discount-rate", 0.0, evalCt
 
 ### 개체 플래그 {#object-flags}
 
-구조화된 데이터에는 `GetObjectValueAsync`을 사용합니다. 이를 사용하면 복잡한 구성에 액세스할 수 있는 값이 반환됩니다.
+구조화된 데이터에는 `GetObjectValueAsync`를 사용합니다. 이를 사용하면 복잡한 구성에 액세스할 수 있는 값이 반환됩니다.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature.Model;
@@ -250,7 +257,7 @@ Feature Flag 세부 정보는 평가 동작을 디버깅하고 사용자가 특�
 
 ## 공급자 초기화 대기 {#waiting-for-provider-initialization}
 
-기본적으로 공급자는 비동기적으로 초기화되며, 첫 번째 Remote Configuration 페이로드를 수신할 때까지 플래그 평가는 기본값을 반환합니다. 요청을 처리하기 전에 애플리케이션에서 플래그를 사용할 수 있는 상태가 되어야 하는 경우 이벤트 핸들러를 사용하여 공급자가 초기화될 때까지 기다릴 수 있습니다.
+기본적으로 공급자는 비동기적으로 초기화되며, 첫 번째 플래그 구성을 수신할 때까지 플래그 평가는 기본값을 반환합니다. 요청을 처리하기 전에 애플리케이션에서 플래그를 사용할 수 있는 상태가 되어야 하는 경우 이벤트 핸들러를 사용하여 공급자가 초기화될 때까지 기다릴 수 있습니다.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -298,7 +305,7 @@ await Api.Instance.ShutdownAsync();
 
 ## 테스트 {#testing}
 
-실제 `DatadogProvider`를 사용하여 전용 Datadog 테스트 환경에서 테스트하거나, OpenFeature의 `InMemoryProvider`로 교체하여 테스트 코드에서 직접 플래그 값을 제어할 수 있습니다. 이 섹션에는 테스트를 독립적이고 오프라인 상태로 유지하는 인메모리 방식을 표시했습니다. `InMemoryProvider`는 `OpenFeature` NuGet 패키지(네임스페이스 `OpenFeature.Providers.Memory`)에 포함되어 있으므로 프로덕션 환경에 이미 설치된 항목 외에 추가 종속성이 필요하지 않습니다.
+실제 `DatadogProvider`를 사용하여 전용 Datadog 테스트 환경에서 테스트하거나, OpenFeature의 `InMemoryProvider`로 교체하여 테스트 코드에서 직접 플래그 값을 제어할 수 있습니다. 이 섹션에는 테스트를 독립적이고 오프라인 상태로 유지하는 인메모리 방식을 설명합니다. `InMemoryProvider`는 `OpenFeature` NuGet 패키지(네임스페이스 `OpenFeature.Providers.Memory`)에 포함되어 있으므로 프로덕션 환경에 이미 설치된 항목 외에 추가 종속성이 필요하지 않습니다.
 
 `Api.Instance` 는 싱글톤입니다. xUnit의 `IAsyncLifetime`을 사용해 테스트당 공급자를 설정하고 `DisposeAsync`에서 해체하면 순서 지정에 좌우되는 테스트를 방지할 수 있습니다. 설정을 공유하여 스위트를 더 빨리 실행하려면 `InMemoryProvider.UpdateFlagsAsync(...)`을 사용하여 공급자를 다시 등록하지 않고 테스트 간에 플래그 상태를 변경할 수 있습니다.
 
@@ -356,22 +363,15 @@ NUnit(`[SetUp]`/`[TearDown]`) 및 MSTest(`[TestInitialize]`/`[TestCleanup]`)에�
 
 ## 문제 해결 {#troubleshooting}
 
-### 공급자가 활성화되지 않음 {#provider-not-enabled}
+### Agentless 설정이 작동하지 않음 {#agentless-configuration-not-working}
 
-공급자가 활성화되지 않았다는 경고가 표시되면 환경 또는 애플리케이션 구성에서 `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`가 설정되어 있는지 확인하세요.
+- 트레이서 버전 3.54.0 이상이 로드되었고 OpenFeature 공급자가 초기화되었는지 확인하세요.
+- 애플리케이션 프로세스에서 `DD_API_KEY`, `DD_SITE`, `DD_ENV`를 확인하세요.
+- `DD_FEATURE_FLAGS_ENABLED`가 `false`가 아님을 확인하세요. 새 설정의 경우 `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE`를 설정하지 않은 상태로 두거나 명시적으로 `agentless`로 설정하세요. 마이그레이션 시 레거시 `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` 설정을 제거하세요.
+- `ufc-server.ff-cdn.<DD_SITE>`로의 아웃바운드 HTTPS를 허용하세요.
+- `DD_TRACE_DEBUG=true`를 활성화하고 트레이서 로그에서 인증, 시간 초과 또는 잘못된 형식의 구성 오류가 있는지 검사하세요.
 
-{{< code-block lang="bash" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-컨테이너화된 애플리케이션의 경우 Docker 또는 Kubernetes 구성에 이 설정을 추가하세요.
-
-{{< code-block lang="yaml" filename="docker-compose.yml" >}}
-environment:
-  - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-  - DD_SERVICE=my-service
-  - DD_ENV=production
-{{< /code-block >}}
+첫 번째 유효한 구성 전에는 평가 시 호출자 기본값이 반환됩니다. 초기화가 성공한 후에는 일시적인 전달 실패가 발생하면 마지막으로 유효했던 구성이 유지됩니다.
 
 ### Remote Configuration이 작동하지 않음 {#remote-configuration-not-working}
 
@@ -400,6 +400,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [5]: /ko/account_management/api-app-keys/#api-keys
 [6]: /ko/feature_flags/guide/server_flag_evaluation_metrics/
 [7]: /ko/feature_flags/concepts/flag_graphs/
+[8]: /ko/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[9]: /ko/feature_flags/concepts/configuration_sources/
 
 ## 추가 자료 {#further-reading}
 
