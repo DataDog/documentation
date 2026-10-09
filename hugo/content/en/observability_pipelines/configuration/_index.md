@@ -23,7 +23,7 @@ further_reading:
 
 Observability Pipelines lets you collect and process logs and metrics within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
-- [Source][1]: Receives data from a tool like the Datadog Agent.
+- [Sources][1]: Receive data from tools like the Datadog Agent.
 - [Processors][2]: Transform, enrich, or filter data.
 - [Destinations][3]: Where data is sent (for example, Datadog, Amazon S3, Splunk, Google Security Operations, and Microsoft Sentinel).
 
@@ -50,7 +50,7 @@ Use one of the [logs templates][1] to create a log pipeline.
 - Sensitive Data Redaction
 - Split Logs
 
-See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
+See [Set Up Pipelines][2] for more information on setting up sources, processors, and destinations.
 
 [1]: /observability_pipelines/configuration/explore_templates/?tab=logs#templates
 [2]: /observability_pipelines/configuration/set_up_pipelines/
@@ -61,7 +61,7 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 
 Use the [Metric Tag Governance][1] template to create a metrics pipeline.
 
-See [Set Up Pipelines][2] for more information on setting up a source, processors and destination.
+See [Set Up Pipelines][2] for more information on setting up sources, processors, and destinations.
 
 ### Metrics data
 
