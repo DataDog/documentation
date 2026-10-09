@@ -305,7 +305,7 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 Android profiling data is attached to [application not responding (ANR)][16] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
 
-{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
+{% img src="real_user_monitoring/android/android-profiling-anr-1.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
 
 On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see [Step 3 - Configure ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces).
 
