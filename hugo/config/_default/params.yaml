@@ -304,7 +304,6 @@ unsupported_sites:
   amazon-security-lake: [gov,gov2]
   apm_processing_pipelines: [gov,gov2]
   apm_recommendations: [gov,gov2]
-  app_builder_override: [gov2] # docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)
   application_security: [gov,gov2]
   application_security_override: [gov2] # docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov
   autocomplete_search: [gov,gov2]
