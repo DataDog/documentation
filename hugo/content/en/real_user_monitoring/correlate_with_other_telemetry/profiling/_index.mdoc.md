@@ -263,13 +263,13 @@ The total volume of profiles may not match the percentage configured in `applica
 
 The [ProfilingManager API][7] also supports disabling rate limiting during debug builds.
 
-### Step 3 - Configure ANR profiling with system traces
+### Step 3 - (Optional) Disable ANR profiling with system traces
 
-On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22]. When the system detects an application not responding (ANR) error in your application, it captures a [system trace][23] covering the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
+On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22].  When the system detects an ANR in your application, it captures a [system trace][23] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
 
-ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17] and count toward the [preview quota](#preview-quota-system).
+ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17] and count toward the quota described in the [Preview quota system](#preview-quota-system) section.
 
-System traces are ideal for diagnosing ANRs since they are usually caused by thread contention, blocking I/O, or IPC delays rather than pure high-CPU computation. A system trace explicitly surfaces these issues by tracking thread states and system-level events over time.
+System traces help diagnose ANRs, which are usually caused by thread contention, blocking I/O, or interprocess communication (IPC) delays rather than CPU-heavy computation. A system trace shows thread states and system-level events over time, which surfaces these causes.
 
 To disable ANR profiling with system traces, add `enableAnrTrigger(false)` to the `ProfilingConfiguration.Builder()` call from Step 2:
 
@@ -305,9 +305,9 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 Android profiling data is attached to [application not responding (ANR)][16] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
 
-{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error event." style="width:90%;" /%}
+{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
 
-On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see [Step 3 - Configure ANR profiling with system traces](#step-3---configure-anr-profiling-with-system-traces).
+On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see [Step 3 - Configure ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces).
 
 ### During long tasks
 
@@ -444,5 +444,5 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [19]: /real_user_monitoring/operations_monitoring/?tab=browser
 [20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works
 [21]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm
-[22]: https://developer.android.com/topic/performance/tracing/profiling-manager/capture-trigger-based-profile
+[22]: https://developer.android.com/topic/performance/tracing/profiling-manager/trigger-based-capture
 [23]: https://developer.android.com/topic/performance/tracing
