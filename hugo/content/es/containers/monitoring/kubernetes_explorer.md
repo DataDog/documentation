@@ -89,7 +89,7 @@ Los siguientes pasos habilitan las vistas de recursos del Explorador sin recopil
 
 - OpenTelemetry Collector Contrib [v0.159.0][3] o posterior.
 - OpenTelemetry Collector [Helm chart][4] v0.156.2 o posterior.
-- Una [clave de API de Datadog][15] y su [sitio de Datadog][7].
+- Una [clave de Datadog API][15] y su [sitio de Datadog][7].
 
 #### Limitaciones {#limitations}
 
@@ -102,7 +102,7 @@ Recomendaciones:
 
 #### 1. Cree un secreto de Datadog {#1-create-a-datadog-secret}
 
-Establezca su clave de API de Datadog y su sitio, luego cree un secreto de Kubernetes. Estos pasos utilizan el espacio de nombres `default` tanto para el secreto como para el Collector:
+Establezca su clave de Datadog API y su sitio, luego cree un secreto de Kubernetes. Estos pasos utilizan el espacio de nombres `default` tanto para el secreto como para el Collector:
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
@@ -168,7 +168,7 @@ config:
   exporters:
     otlp_http:
       endpoint: https://otlp.${env:DD_SITE}
-      logs_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlplogs
+      logs_endpoint: https://otlp.${env:DD_SITE}/v1/logs
       headers:
         dd-api-key: ${env:DD_API_KEY}
       compression: zstd
@@ -515,7 +515,7 @@ Examine los recursos desde los mapas de clúster haciendo clic en cualquier cír
 
 ### Panel de información {#information-panel}
 
-Haga clic en cualquier fila de la tabla o en cualquier objeto de un mapa de clúster para ver información sobre un recurso específico en un panel lateral.
+Haga clic en cualquier fila de la tabla o en cualquier objeto de un mapa de clúster para visualizar información sobre un recurso específico en un panel lateral.
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="Una vista de los recursos en el panel lateral, abierta en procesos." style="width:80%;">}}
 
@@ -541,7 +541,7 @@ Las otras pestañas muestran más información para la solución de problemas de
 * [**Eventos**][5]: Visualice todos los eventos de Kubernetes para su recurso.
 * {{< ui >}}Monitors{{< /ui >}}: Vea los monitores etiquetados, con alcance o agrupados para este recurso.
 
-Para obtener un Dashboard detallado de este recurso, haga clic en Ver Dashboard en la esquina superior derecha de este panel.
+Para obtener un Dashboard detallado de este recurso, haga clic en Visualizar Dashboard en la esquina superior derecha de este panel.
 
 {{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="Un enlace a un pod Dashboard desde la visualización general de Containers en vivo." style="width:80%;">}}
 
@@ -760,7 +760,7 @@ Los porcentajes (`*_pct_*`) se almacenan como números de punto flotante, donde 
 ## Notas y problemas conocidos {#notes-and-known-issues}
 
 * Los datos se actualizan automáticamente en intervalos constantes.
-* En clústeres con más de 1000 implementaciones (Deployments) o conjuntos de réplicas (ReplicaSets), es posible que note un mayor uso de CPU por parte del agente de clúster. Existe una opción para deshabilitar la limpieza de contenedor en el gráfico de Helm. Consulte [el repositorio del gráfico de Helm][11] para obtener más detalles.
+* En clústeres con más de 1000 implementaciones (Deployments) o conjuntos de réplicas (ReplicaSets), es posible que note un mayor uso de CPU por parte del Agent de clúster. Existe una opción para deshabilitar la limpieza de contenedor en el gráfico de Helm. Consulte [el repositorio del gráfico de Helm][11] para obtener más detalles.
 
 ## Lecturas adicionales {#further-reading}
 

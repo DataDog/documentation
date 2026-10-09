@@ -179,6 +179,15 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 - Find slow database queries in the last 30 minutes.
 - Get spans for failed API requests to our payment service.
 
+### `aggregate_spans`
+*Toolset: **core***\
+*Permissions Required: `APM Read`*\
+Aggregates APM spans to compute counts, sums, averages, minimums, maximums, cardinality, and percentiles (p50 to p99). Group results by fields such as service or resource, or set `group_by.interval` in milliseconds to return a timeseries.
+
+- What is the p95 duration by resource for the checkout service over the last hour?
+- Show me request counts for the payments service in 5-minute buckets over the last day.
+- Count errors grouped by endpoint and status code for `service:web-store`.
+
 ### `analyze_datadog_logs`
 *Toolset: **core***\
 *Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
@@ -288,27 +297,19 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
+Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
-
-### `apm_search_spans`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for spans using APM query syntax, with support for pagination and tag filtering.
-
-- Show me spans with errors from the checkout service in the last hour.
-- Find slow database queries taking more than 2 seconds.
-- Search for spans with `service:payments` and `status:error`.
 
 ### `apm_query_trace`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Queries a trace's span data to filter, aggregate, or rank spans, such as finding the highest self-time spans or tracing an error to its origin service.
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
 
-- Find the top 5 spans by self-time in trace `abc123`.
-- Show all error messages and their originating services in trace `abc123`.
-- Which database calls in this trace took longer than 500ms?
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
@@ -324,21 +325,6 @@ Discovers available tag keys on spans within a time range.
 Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
-
-### `apm_search_watchdog_stories`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for Watchdog anomaly detection stories for a service within a time range, providing AI-powered insights into latency, error rate, and traffic anomalies.
-
-- Show me Watchdog anomalies for the checkout service in the last 24 hours.
-- Are there any latency anomalies detected for my API service?
-
-### `apm_get_watchdog_story`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Retrieves detailed information about a specific Watchdog story by its ID.
-
-- Get the details of Watchdog story `abc123`.
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -357,22 +343,6 @@ Analyzes latency bottlenecks across traces in an anomaly period using self-time 
 - What is consuming the most self-time in the payments service during this latency spike?
 - Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
 
-### `get_change_stories`
-*Toolset: **apm***\
-Retrieves change stories from the Change Tracking API for APM services. Use this to identify what changed (deployments, feature flags, configuration updates, and infrastructure events) during a time range and correlate changes with performance issues or incidents.
-
-- Show me recent deployments and changes for the payments service.
-- What infrastructure changes happened around the time of this latency spike?
-- Find feature flag and configuration changes for the checkout service in the last hour.
-
-### `semantic_search_change_stories`
-*Toolset: **apm***\
-Searches change stories using natural language and AI-powered semantic search. Use this to find feature flag or deployment changes related to a behavior, a user-reported issue, or a part of the product you are investigating.
-
-- What changed recently that could affect dashboard loading for trial users?
-- Which flags might impact authentication in the billing settings page?
-- Find changes related to missing telemetry data in the last week.
-
 ### `apm_search_recommendations`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -387,6 +357,75 @@ Searches for APM recommendations from Datadog.
 Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
+
+### `search_apm_sampling_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read`*\
+Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
+
+- Show me the sampling rules for the checkout service in prod.
+- List all remote sampling rules in my organization.
+
+### `create_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. If a rule already exists for that target, use `update_apm_sampling_rule` instead. The tool requires explicit confirmation before it creates the rule.
+
+- Sample 10% of `GET /health` spans for the checkout service in prod.
+- Keep all traces for the `POST /payments` resource on the payments service in staging.
+
+### `update_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. The tool requires explicit confirmation before it applies changes.
+
+- Raise the sample rate for `GET /api/orders` on the orders service in prod to 50%.
+- Lower the sample rate for the checkout service's health check endpoint to 1%.
+
+### `delete_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Remove the sampling rule for `GET /health` on the checkout service in prod.
+
+### `search_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
+
+- List all service remapping rules in my organization.
+- Which remapping rule renames the `postgres` inferred service?
+
+### `create_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. New rules are evaluated after existing rules. You can also specify a different tag for the rule to rewrite. The tool requires explicit confirmation before it creates the rule.
+
+- Rename the inferred database service `postgres` to `orders-db` for spans from the orders service.
+- Create a remapping rule that renames `web-store-v2` to `web-store`.
+
+### `update_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Updates an existing service remapping rule's name, filter, the name it assigns to matching services or inferred entities, or the tag it rewrites (`service` or `peer.service` by default). The rule type cannot be changed, and rules with multiple rewrite mappings must be edited in Datadog instead. The tool requires explicit confirmation before it applies changes.
+
+- Update the `orders-db` remapping rule to also match spans from the fulfillment service.
+- Update the `web-store` remapping rule to rename matching services to `storefront`.
+
+### `reorder_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. The tool requires explicit confirmation before it applies changes.
+
+- Move the `orders-db` remapping rule ahead of the generic database rule.
+
+### `delete_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Delete the `web-store` service remapping rule.
 
 ## Assistant
 
@@ -450,11 +489,11 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; linking work items to each other and to Jira issues; and managing attachments.
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> are not included in <code>toolsets=all</code>. To use them, explicitly add <code>cases</code> to the <code>toolsets</code> parameter. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
@@ -484,7 +523,7 @@ Creates a new [Work Management][38] work item (case) with a title, project, and 
 
 ### `update_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
 Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -500,12 +539,51 @@ Adds a comment to a work item (case) timeline. Comments support markdown formatt
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
+### `attach_file_to_datadog_case`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Uploads a file of up to 10 MiB and attaches it to a work item (case). The attachment remains in processing while Work Management validates it.
+
+- Attach the incident timeline I exported to CASE-1234.
+- Upload this screenshot of the error to the checkout latency work item.
+
+### `get_datadog_case_attachment`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists the attachments on a work item (case), or retrieves the contents of a specific attachment by ID.
+
+- What files are attached to CASE-1234?
+- Show me the screenshot attached to the database migration case.
+
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
+
+### `link_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
+
+- Mark CASE-1234 as blocking CASE-5678.
+- CASE-910 duplicates CASE-1234. Link them.
+
+### `get_datadog_case_links`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
+
+- What other work items are linked to CASE-1234?
+- Is anything blocking the database migration case?
+
+### `unlink_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
+
+- CASE-1234 no longer blocks CASE-5678. Remove that link.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
@@ -516,11 +594,18 @@ Lists available [Work Management][38] projects with optional filtering by name o
 - Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Read`*\
 Retrieves details for a specific project by ID.
 
 - What project is this work item part of?
+
+### `create_datadog_case_project`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Creates a [Work Management][38] project with default settings, given a name and an uppercase key used as the prefix for work items in the project.
+
+- Create a Work Management project called Platform Reliability with the key PLAT.
 
 ### `search_datadog_users`
 *Toolset: **cases***\
@@ -543,6 +628,20 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 - What are my top cloud cost-saving recommendations?
 - How much could I save per day, and how many open recommendations do I have?
 - Which of our Kubernetes cluster optimizations does the team already have underway?
+
+## Cloud Resources
+
+Tools for looking up a cloud resource in the [Resource Catalog][86] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
+
+### `get_cloud_resource_details`
+*Toolset: **cloud-resources***\
+*Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
+
+- Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
+- What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
+- Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
+- What tags are set on this resource, and is it owned by a team?
 
 ## Code Execution
 
@@ -1033,6 +1132,15 @@ Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an 
 - Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
 - Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `get_datadog_error_tracking_analytics`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read`*\
+Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day's count is a snapshot of issue states at end of day.
+
+- Is the error backlog for the payments service growing or shrinking over the last 30 days?
+- How many new Error Tracking Issues were introduced compared to resolved last week?
+- Did regressions spike after last Tuesday's deploy?
+
 ## Experiments
 
 Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
@@ -1280,7 +1388,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Governance
 
-Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
 <div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
 
@@ -1387,7 +1495,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 ### `update_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
-Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
 - Enable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
@@ -1654,7 +1762,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1689,6 +1797,89 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+### `get_network_path_test_runs`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Searches and retrieves [Network Path][83] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+
+- Show me the latest Network Path test runs to `api.example.com`.
+- Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
+- Find Network Path test runs with packet loss in the last hour.
+
+### `get_autonomous_system_status`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Checks the health of an Autonomous System (AS) using [Network Path][83] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+
+- Is AS 15169 experiencing elevated latency compared to last week?
+- Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
+
+### `list_autonomous_system_statuses`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Lists degraded Autonomous Systems (ASes) using [Network Path][83] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+
+- Are there any Autonomous System issues in the last hour?
+- Which ASes are degraded in the last 4 hours?
+- Show me the top three degraded ASes with packet loss.
+
+### `run_network_path`
+*Toolset: **networks***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
+
+- Run a traceroute from host `prod-web-01` to `api.example.com`.
+- Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
+
+## Observability Pipelines
+
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+
+<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
+
+### `list_observability_pipelines`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
+
+- How many pipelines do we have, and how many of them are metrics pipelines?
+- Find the ID of the `prod-agent-logs` pipeline.
+- Which pipelines were modified in the last week?
+
+### `describe_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
+
+- Explain what the `prod-agent-logs` pipeline does.
+- Where are logs dropped in my Splunk forwarding pipeline?
+- Are there redundant or expensive processors in pipeline `abc-123-def`?
+
+### `get_observability_pipeline_component_schema`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Without arguments, returns the available source, processor, and destination types. With `types`, returns the fields of each requested component, including which are required, their types, and allowed values. The schema can lag behind the server, so check assembled configurations with `validate_observability_pipeline`.
+
+- Which sources and destinations are available in Observability Pipelines?
+- What fields are required for the `splunk_hec` source and the `amazon_s3` destination?
+- What options does the `sample` processor support?
+
+### `validate_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns all validation errors so the agent can fix the configuration and validate it again.
+
+- Validate this pipeline configuration before I create it.
+- Check this pipeline configuration for errors.
+
+### `create_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Deploy`*\
+Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines. The new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration fails validation, the tool returns the validation errors.
+
+- Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
+- Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
 
 ## Onboarding
 
@@ -2129,7 +2320,7 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], analyzing [security findings][54], and authoring [IaC custom rules][85].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -2499,6 +2690,65 @@ Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 - Is AAP blocking enabled for the organization?
 - Is the AAP denylist enforced?
 - Show me the AAP blocking configuration.
+
+### `get_datadog_security_iac_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Retrieves one Infrastructure as Code (IaC) [custom rule][85] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+
+- List my published IaC custom rules for Terraform on AWS.
+- Get IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `get_datadog_security_iac_custom_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
+
+- What platforms and categories are supported for IaC custom rules?
+
+### `generate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+
+- Generate an IaC custom rule that flags S3 buckets without versioning enabled.
+- Draft a Terraform rule that requires encryption on GCP storage buckets.
+
+### `validate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+
+- Validate this Rego rule against my sample Terraform file.
+
+### `create_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
+
+- Create a draft IaC custom rule named "S3 bucket versioning required" from this Rego.
+
+### `update_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `publish_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
+
+- Publish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `delete_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Permanently deletes an IaC custom rule by ID. This action cannot be undone.
+
+- Delete IaC custom rule "custom-terraform-aws-open-bucket".
 
 ## Session Replay
 
@@ -3051,8 +3301,17 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
 [79]: /watchdog/
-[79]: /account_management/governance_console/
 [80]: /account_management/governance_console/controls/
+[81]: /tracing/services/service_remapping_rules/
+[82]: /tracing/guide/resource_based_sampling/
+[83]: /network_monitoring/network_path/
+[84]: /account_management/governance_console/
+[85]: /security/code_security/iac_security/custom_rules/
+[86]: /infrastructure/resource_catalog/
+[87]: /observability_pipelines/
+[88]: /api/latest/observability-pipelines/
+[89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
+[90]: /observability_pipelines/configuration/install_the_worker/
 
 ## Further reading
 

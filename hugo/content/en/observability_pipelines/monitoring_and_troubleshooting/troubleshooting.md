@@ -28,15 +28,39 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
  **Note**: See [Enable liveness and readiness probe][15] for instructions on how to expose the `/health` endpoint. After the endpoint is exposed, configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
 
-### Use `top` to find the component ID
+### Find the component ID
 
-You need the source's or processor's component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
+You need the source's, processor's, or destination's component ID to [`tap`](#use-tap-to-see-your-data) into it or to view [component metrics][30] with the `component_id` tag.
+
+{{< tabs >}}
+{{% tab "Command line" %}}
+
+Use the `top` command to find the component ID:
 
 ```
 observability-pipelines-worker top
 ```
 
-See [Worker Commands][13] for a list of commands and options.
+See [Worker CLI Commands][1] for a list of commands and options.
+
+[1]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
+
+{{% /tab %}}
+{{% tab "UI" %}}
+
+To copy the component ID in the UI:
+
+1. Navigate to [Observability Pipelines][1].
+1. Select your pipeline.
+1. Open the component's side panel:
+    - For a source or destination, click the component.
+    - For a processor, hover over the component and click the graph icon.
+1. Click the copy icon next to the component's name at the top of the side panel.
+
+[1]: https://app.datadoghq.com/observability-pipelines
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Use `tap` to see your data
 
@@ -222,7 +246,7 @@ If your log timestamps are in string format and your Databricks table has a time
 [10]: /observability_pipelines/configuration/install_the_worker/#index-your-worker-logs
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
-[13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
+[13]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
 [15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes
 [16]: /observability_pipelines/sources/#tls-certificates
@@ -239,3 +263,4 @@ If your log timestamps are in string format and your Databricks table has a time
 [27]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [28]: /observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
 [29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
+[30]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=sources#component-metrics

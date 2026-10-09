@@ -286,7 +286,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Delete Unused RDS Instance
-      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
+      recommendation_description: RDS instance with no client connections and no replica lag.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -677,6 +677,12 @@ multifiltersearch:
       resource_type: Storage Bucket
       recommendation_type: Transition Cloud Storage Bucket to Autoclass
       recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: GCP
+      resource_type: Vertex AI Project
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Google Cloud projects already using Vertex AI prompt caching below the target hit rate and estimates the input cost savings from reaching the target.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
