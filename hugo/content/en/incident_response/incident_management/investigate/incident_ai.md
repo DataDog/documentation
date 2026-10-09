@@ -64,7 +64,7 @@ Start a Bits Investigation directly from your incident Slack channel or the Data
 
 Bits Investigation must be enabled for your organization and you can only trigger an investigation from a **properly configured Datadog Incident Management Slack channel**. The Incident Investigation flow only activates when the system detects a valid incident channel.
 
-**From Slack,** type `@Datadog investigate` in the incident channel to kick off an investigation during an active incident. You can include additional context inline to help the agent narrow its scope from the start:
+**From Slack,** use the "Investigate with Bits AI" action button, the `/dd incident investigate` slash command, or type `@Datadog investigate` in the incident channel to kick off an investigation during an active incident. When using `@Datadog investigate`, You can include additional context inline to help the agent narrow its scope from the start:
 
 | Prompt                      | Behavior                                    |
 |-----------------------------|---------------------------------------------|
