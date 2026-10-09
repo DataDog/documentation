@@ -202026,7 +202026,9 @@ paths:
         - Network Device Monitoring
       x-menu-order: 4
     patch:
-      description: Update the tags for a device.
+      description: |-
+        Update the tags for a device.
+        A device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support](https://docs.datadoghq.com/help/).
       operationId: UpdateDeviceUserTags
       parameters:
         - description: The id of the device to update tags for.

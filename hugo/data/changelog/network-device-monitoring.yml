@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-10-09'
+    link: https://github.com/DataDog/documentation/pull/40582
+    operations:
+      - UpdateDeviceUserTags
+    title: Document the per-device user tag limit on `UpdateDeviceUserTags`

@@ -4620,7 +4620,7 @@
     "summary": "Get the list of tags for a device"
   },
   "UpdateDeviceUserTags": {
-    "description": "Update the tags for a device.",
+    "description": "Update the tags for a device.\nA device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support](https://docs.datadoghq.com/help/).",
     "summary": "Update the tags for a device",
     "request_description": "",
     "request_schema_description": "List tags response."
