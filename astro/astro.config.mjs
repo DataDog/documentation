@@ -22,6 +22,7 @@ import { pagesJson } from "./src/integrations/pagesJson.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
+import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
 
 const websitesModules = resolveWebsitesModulesPath(import.meta.url);
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
@@ -236,6 +237,8 @@ export default defineConfig({
       },
     },
     plugins: [
+      // `chunk-url:` imports, so a lazy chunk can be preloaded at low priority.
+      chunkUrlPlugin(),
       process.env.VISUALIZE &&
         visualizer({
           open: true,

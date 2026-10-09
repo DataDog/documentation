@@ -13,6 +13,8 @@
 
 <script>
   import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+  import { preloadModuleAtLowPriority } from "@lib/componentUtils/preloadModuleAtLowPriority";
+  import askAiChunkUrl from "chunk-url:@dd/ask-ai";
 
   /**
    * Dynamic, so that the deferred mount covers all three of the fetch, the parse
@@ -21,6 +23,15 @@
    * defer only the panel construction, which is the smallest of the three.
    */
   const mountWidget = async () => {
+    // Fetched at low priority first, since `import()` alone always fetches at
+    // high priority — and Lighthouse lists every high-priority script in its
+    // network dependency tree, however late it was requested. `null` under the
+    // dev server, which has no built chunk to name.
+    if (askAiChunkUrl) {
+      await preloadModuleAtLowPriority(
+        new URL(askAiChunkUrl, import.meta.url).href,
+      );
+    }
     const { mountAskAi } = await import("@dd/ask-ai");
 
     // TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
@@ -38,12 +49,11 @@
     }
   };
 
-  // Waiting for `load`, then idle, keeps the package off the critical path.
-  // Idle alone is not enough: the first idle period usually comes before `load`,
-  // and a large high-priority script fetched then lands in the page's own load,
-  // where Lighthouse counts it toward critical path latency. The widget is a
-  // floating button, so arriving late costs nothing — it is `position: fixed`
-  // and cannot shift the page.
+  // Waiting for `load`, then idle, keeps the package's download from competing
+  // with the page's own resources. Idle alone is not enough: the first idle
+  // period usually comes before `load`. The widget is a floating button, so
+  // arriving late costs nothing — it is `position: fixed` and cannot shift the
+  // page.
   //
   // The impression event still reports once per document load, so this does not
   // change what telemetry sees. Timer fallback for Safari, which shipped

@@ -69,7 +69,9 @@ async function stubDocsAiAnswer(page: Page): Promise<void> {
 /**
  * Resource-timing facts about the page's own load, read after the widget has
  * mounted. `ask-ai` matches case-sensitively, so it cannot collide with the
- * mount script's URL, which carries the component's `AskAi.astro` name.
+ * mount script's URL, which carries the component's `AskAi.astro` name. The
+ * `chunk-url:` stub is excluded: under the dev server its URL also ends in the
+ * package's path, but it is a one-line module the mount script imports eagerly.
  */
 async function readLoadTimings(page: Page) {
   return page.evaluate(() => {
@@ -78,7 +80,10 @@ async function readLoadTimings(page: Page) {
     )[0] as PerformanceNavigationTiming;
     const askAiModule = performance
       .getEntriesByType("resource")
-      .find((entry) => entry.name.includes("ask-ai"));
+      .find(
+        (entry) =>
+          entry.name.includes("ask-ai") && !entry.name.includes("chunk-url"),
+      );
 
     return {
       loadEventEndMs: navigation.loadEventEnd,
