@@ -85,7 +85,6 @@ title: インテグレーションガイド
 {{< header-list header="ServiceNow ガイド" >}}
    {{< nextlink href="integrations/guide/servicenow-itom-itsm-setup" >}}ServiceNow ITOM および ITSM のセットアップ{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-cmdb-enrichment-setup" >}}ServiceNow CMDB エンリッチメントのセットアップ{{< /nextlink >}}
-   {{< nextlink href="integrations/guide/servicenow-service-graph-connector-setup" >}}ServiceNow サービスグラフコネクタのセットアップ{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="データベースガイド" >}}
