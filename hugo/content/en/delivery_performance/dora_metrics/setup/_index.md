@@ -366,40 +366,23 @@ If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service 
 
 #### Declare a repository link
 
-If the entity definition contains a **full** GitHub, GitLab, or Azure DevOps URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
+If the entity definition contains a **full** GitHub, GitLab, or Azure DevOps URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the example below).
 
-**Example (schema version v2.2):**
-{{< tabs >}}
-{{% tab "GitHub" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: github
-    url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
-```
-{{% /tab %}}
-{{% tab "GitLab" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: gitlab
-    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
-```
-{{% /tab %}}
-{{% tab "Azure DevOps" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: azure
-    url: https://dev.azure.com/organization/project/_git/example-repository?path=/src/apps/shopist
-```
-{{% /tab %}}
-{{< /tabs >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: shopist
+  links:
+    - name: shopist
+      type: repo
+      provider: github
+      url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
+{{< /code-block >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`.
+
+For GitLab or Azure DevOps, set `provider` to `gitlab` or `azure` and use that provider's URL for the application folder. In v2.2 and earlier, `links` is a top-level field instead of nested under `metadata`.
 
 For more granular control over which paths map to the service, declare [code locations](#declare-code-locations-schema-v3) instead.
 
