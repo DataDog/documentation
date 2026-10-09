@@ -54,6 +54,7 @@ Some features cannot be managed through the Datadog resource in Azure. These inc
 
 - Metric filtering at the **resource** level
 - [Cloud Cost Management][8] (CCM)
+- [Data Observability][13]
 - [Log Archiving][9]
 - [Storage Management][7]
 
@@ -441,6 +442,7 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 [10]: https://docs.microsoft.com/azure/azure-resource-manager/management/control-plane-and-data-plane
 [11]: https://docs.microsoft.com/azure/azure-monitor/essentials/resource-logs-categories
 [12]: /logs/guide/azure-automated-log-forwarding
+[13]: /data_observability/
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us5,gov,gov2,ap1,ap2,uk1" >}}
