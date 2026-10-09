@@ -77,6 +77,9 @@ This video shows how to select a persistent email variable, insert its address i
 1. Open a browser test in the recorder.
 2. Under {{< ui >}}Variables{{< /ui >}}, add a variable and select {{< ui >}}Email Address{{< /ui >}}.
 3. Select {{< ui >}}Persistent{{< /ui >}}, choose `LOGIN_EMAIL`, and click {{< ui >}}Done{{< /ui >}}. The list contains email global variables you have access to. If you created the variable while the recorder was open, refresh the list.
+
+   {{< img src="synthetics/guide/email-validation/persistent-email-variable-picker.png" alt="Browser recorder with Persistent selected, an email global variable chosen, and the Done button" style="width:100%;" >}}
+
 4. Inject `{{ LOGIN_EMAIL }}` into the application's email field and record the action that requests an OTP. If the application also requires a password, store it in a separate obfuscated variable.
 5. Add an email assertion if you want to check the email's subject or body.
 6. Add a variable extracted from the email body, name it `LOGIN_OTP`, and configure a regular expression or XPath that matches the code. For example, `\b[0-9]{6}\b` matches a six-digit code. Use a more specific pattern if the message contains other numbers.
