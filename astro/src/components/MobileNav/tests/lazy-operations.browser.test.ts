@@ -198,4 +198,17 @@ test.describe("Mobile nav lazy-loaded API operations at desktop width", () => {
     await page.waitForLoadState("networkidle");
     expect(dataRequests).toEqual([]);
   });
+
+  test("requests the data when the viewport narrows to mobile", async ({
+    page,
+  }) => {
+    await page.goto(CATEGORY_URL);
+    await page
+      .locator('.mobile-nav__list--api[data-hydrated="true"]')
+      .waitFor({ state: "attached" });
+
+    const dataRequest = page.waitForRequest(DATA_URL_PATTERN);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await dataRequest;
+  });
 });

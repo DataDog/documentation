@@ -5,9 +5,11 @@
  * as an empty `ul[data-category-slug]`, and this island renders
  * `MobileNavOperationItems` into it from `/api/mobile-nav.json`.
  *
- * The JSON is prefetched on mount (which `client:idle` already defers) at
- * mobile widths, so by the time a user expands a category the links can be
- * rendered synchronously in the click handler, before the `<details>` opens.
+ * The JSON is prefetched at mobile widths: on mount (which `client:idle`
+ * already defers), or when a desktop viewport narrows past the breakpoint
+ * (a window resize or tablet rotation). By the time a user expands a
+ * category, the links can be rendered synchronously in the click handler,
+ * before the `<details>` opens.
  */
 import { render } from "preact";
 import { useEffect } from "preact/hooks";
@@ -56,11 +58,16 @@ export default function MobileNavApiListLoader({
     const listRoot = loaded.list;
     markSelfAsHydrated({ current: listRoot });
 
-    if (shouldPrefetch()) {
-      loadMobileNavData(dataUrl).catch(() => {
-        // An expand retries and shows the fallback if it fails again.
-      });
-    }
+    const desktopQuery = window.matchMedia(desktopMediaQuery());
+    const prefetchIfMobile = () => {
+      if (shouldPrefetch(desktopQuery)) {
+        loadMobileNavData(dataUrl).catch(() => {
+          // An expand retries and shows the fallback if it fails again.
+        });
+      }
+    };
+    prefetchIfMobile();
+    desktopQuery.addEventListener("change", prefetchIfMobile);
 
     const handleClick = (event: MouseEvent) => {
       const lazyList = findLazyListBeingExpanded(event, listRoot);
@@ -71,7 +78,10 @@ export default function MobileNavApiListLoader({
     // Capture, so `details.open` still reads the state before this click
     // toggles it (and the list is filled before the section opens).
     listRoot.addEventListener("click", handleClick, true);
-    return () => listRoot.removeEventListener("click", handleClick, true);
+    return () => {
+      desktopQuery.removeEventListener("change", prefetchIfMobile);
+      listRoot.removeEventListener("click", handleClick, true);
+    };
   }, []);
 
   return null;
@@ -81,14 +91,14 @@ export default function MobileNavApiListLoader({
  * Prefetch only where the panel can be shown: at desktop widths it's
  * `display: none`, so the request would be wasted.
  */
-function shouldPrefetch(): boolean {
+function shouldPrefetch(desktopQuery: MediaQueryList): boolean {
   const connection = (
     navigator as Navigator & { connection?: { saveData?: boolean } }
   ).connection;
   if (connection?.saveData) {
     return false;
   }
-  return !window.matchMedia(desktopMediaQuery()).matches;
+  return !desktopQuery.matches;
 }
 
 /**

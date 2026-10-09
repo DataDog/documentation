@@ -78,15 +78,33 @@ function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), { status });
 }
 
+type ChangeListener = (event: { matches: boolean }) => void;
+let viewportChangeListeners: Set<ChangeListener>;
+let viewportIsDesktop: boolean;
+
 function stubViewport({ isDesktop }: { isDesktop: boolean }) {
+  viewportIsDesktop = isDesktop;
+  viewportChangeListeners = new Set();
   vi.stubGlobal(
     "matchMedia",
     vi.fn((query: string) => ({
-      matches: isDesktop,
+      get matches() {
+        return viewportIsDesktop;
+      },
       media: query,
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
+      addEventListener: (_type: "change", listener: ChangeListener) =>
+        viewportChangeListeners.add(listener),
+      removeEventListener: (_type: "change", listener: ChangeListener) =>
+        viewportChangeListeners.delete(listener),
     })),
+  );
+}
+
+/** Resize across the desktop breakpoint, as a window resize or rotation would. */
+function resizeViewport({ isDesktop }: { isDesktop: boolean }) {
+  viewportIsDesktop = isDesktop;
+  viewportChangeListeners.forEach((listener) =>
+    listener({ matches: isDesktop }),
   );
 }
 
@@ -186,6 +204,48 @@ describe("MobileNavApiListLoader", () => {
       vi.stubGlobal("fetch", fetchMock);
       mountIsland();
       expect(fetchMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("prefetching on resize", () => {
+    it("fetches the data when a desktop viewport narrows to mobile", () => {
+      stubViewport({ isDesktop: true });
+      const fetchMock = vi.fn().mockResolvedValue(jsonResponse(data));
+      vi.stubGlobal("fetch", fetchMock);
+      mountIsland();
+      resizeViewport({ isDesktop: false });
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(fetchMock.mock.calls[0][0]).toBe(DATA_URL);
+    });
+
+    it("does not fetch when the viewport widens to desktop", () => {
+      stubViewport({ isDesktop: true });
+      const fetchMock = vi.fn().mockResolvedValue(jsonResponse(data));
+      vi.stubGlobal("fetch", fetchMock);
+      mountIsland();
+      resizeViewport({ isDesktop: false });
+      resizeViewport({ isDesktop: true });
+      resizeViewport({ isDesktop: false });
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not fetch on resize when save-data is on", () => {
+      stubViewport({ isDesktop: true });
+      stubSaveData(true);
+      const fetchMock = vi.fn().mockResolvedValue(jsonResponse(data));
+      vi.stubGlobal("fetch", fetchMock);
+      mountIsland();
+      resizeViewport({ isDesktop: false });
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("stops listening on unmount", () => {
+      stubViewport({ isDesktop: true });
+      vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse(data)));
+      mountIsland();
+      expect(viewportChangeListeners.size).toBe(1);
+      cleanup();
+      expect(viewportChangeListeners.size).toBe(0);
     });
   });
 
