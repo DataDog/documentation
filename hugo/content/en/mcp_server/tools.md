@@ -1876,7 +1876,7 @@ Validates a pipeline configuration in the [Observability Pipelines API][88] form
 ### `create_observability_pipeline`
 *Toolset: **observability-pipelines***\
 *Permissions Required: `Observability Pipelines Deploy`*\
-Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines, and the new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration is rejected, the tool returns the validation errors.
+Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines. The new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration fails validation, the tool returns the validation errors.
 
 - Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
 - Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
