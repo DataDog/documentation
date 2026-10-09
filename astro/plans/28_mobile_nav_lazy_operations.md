@@ -177,6 +177,17 @@ Each **Compaction point** below marks a natural place to stop and compact. Each 
 
 > **Compaction point 4:** all tests pass and the code is formatted. Before compacting, note in this plan any deviations from the design (for example, whether the performance budget test became a measurement only), so the verification step has them.
 
+### Deviations from the design
+
+- **Data URL is computed on the server.** `loadMobileNavData(url)` takes the URL as an argument. `MobileNavApiList` computes it with `mobileNavDataUrl(lang)` (in `mobileNavData.ts`) and passes it to the island as the `dataUrl` prop, so the client never works out the locale itself. The cache is keyed by URL.
+- **Click listener uses the capture phase.** It reads `details.open` before the click toggles it, and fills the list before the section opens. happy-dom toggles `<details>` during bubbling, so a bubbling listener saw the state after the toggle.
+- **Island placement.** The island is mounted in `MobileNavApiList` (not `MobileNav.astro`), with `externalContext` pointing at `ul#mobile-nav-api-list`. It marks that list root as hydrated (`.mobile-nav__list--api[data-hydrated="true"]`), and the browser tests wait on that.
+- **Test helper.** `MobileNav.unit.test.ts` registers the Preact renderer (`addClientRenderer`), because `MobileNavApiList` now contains a Preact island.
+- **Sitemap.** `sitemapFilter.ts` excludes `*/api/mobile-nav.json`, so the endpoint doesn't appear as a page in the sitemap.
+- **Performance budget kept as a hard assertion.** At 4× CPU throttling, the largest non-active category in the dev server's data (`security-monitoring`, 176 operations) renders in about 9 ms, against the 50 ms budget. The test also records the time as a `render-ms` annotation. If it turns out flaky in CI, make it a measurement only.
+- **HTML snapshots updated.** All 15 files in `tests/headless/api-html-snapshots/` lost the inline `client:idle` bootstrap `<script>`. Astro emits it once per page, before the first idle island. That island is now the mobile nav one, which is outside the `<main>` the snapshots capture. Nothing else in the snapshots changed.
+- **Visual snapshot unchanged.** `visual.browser.test.ts` passed without an update.
+
 ## Verification
 
 1. The user runs `yarn build`. Don't run the production build from the agent.

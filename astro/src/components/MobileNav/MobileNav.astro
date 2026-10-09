@@ -23,7 +23,10 @@ import {
   findActiveSectionIdentifier,
   findActivePageIdentifier,
 } from "@lib/componentUtils/docsNavMenu";
-import { getCategoriesView } from "@lib/api/viewsBuilder";
+import {
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+} from "@lib/api/viewsBuilder";
 import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
 import {
@@ -69,7 +72,13 @@ const apiPathSegments = unprefixedPath.split("/").filter(Boolean); // ['api','la
 const activeCategorySlug = apiPathSegments[2];
 const currentOperationSlug = apiPathSegments[3];
 
-const apiCategories = isApiContext ? await getCategoriesView(pageLang) : [];
+// Only the active category's operations are rendered into the page; the rest
+// load on expand (see MobileNavApiList).
+const apiCategories = isApiContext ? await getCategoryStubsView(pageLang) : [];
+const activeApiCategory =
+  isApiContext && activeCategorySlug
+    ? await getCategoryViewBySlug(activeCategorySlug, pageLang)
+    : undefined;
 
 // The hand-written pages under the API root, listed above the spec categories
 // the same way the desktop side nav lists them.
@@ -163,7 +172,7 @@ const searchLabels: SearchBarLabels = {
       isApiContext ? (
         <MobileNavApiList
           categories={apiCategories}
-          activeCategorySlug={activeCategorySlug}
+          activeCategory={activeApiCategory}
           currentOperationSlug={currentOperationSlug}
           overviewPages={overviewPages}
           isOverviewSection={isOverviewSection}
