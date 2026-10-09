@@ -19,6 +19,14 @@ further_reading:
 
 To get started with Agent Observability, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
 
+{{< skill-callout
+    title="Set up Agent Observability with a coding agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, instrument Datadog Agent Observability in my project.
+{{< /skill-callout >}}
+
 ## Instrumentation Options
 You can instrument your application with the Python, Node.js, or Java SDKs, or by using the Agent Observability API.
 
