@@ -186,9 +186,9 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 {{% /tab %}}
 {{< /tabs >}}
 
-## Examples
+## Export {#examples}
 
-### Using Strands Agents
+{{% collapse-content title="Using Strands Agents" level="h3" expanded=false id="using-strands-agents-1" %}}
 
 The following example demonstrates a complete application using [Strands Agents][7] with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37+ semantic conventions for generative AI.
 
@@ -222,8 +222,151 @@ if __name__ == "__main__":
     result = agent("I was born in 1993, what is my age?")
     print(f"Agent: {result}")
 ```
+{{% /collapse-content %}}
 
-### Custom OpenTelemetry instrumentation
+{{% collapse-content title="Using OpenLLMetry" level="h3" expanded=false id="using-openllmetry" %}}
+
+The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
+
+```python
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+import openai
+from opentelemetry.sdk.resources import Resource
+
+resource = Resource.create({
+    "service.name": "simple-openllmetry-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openllmetry-test",
+        "dd-otlp-source": "llmobs",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument()
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openllmetry-test` in the Agent Observability UI to find the generated trace.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using OpenInference" level="h3" expanded=false id="using-openinference" %}}
+
+The following example uses the [OpenInference OpenAI instrumentation][11] to automatically instrument OpenAI calls with OpenTelemetry.
+
+Configure the OpenTelemetry exporter and instrument the OpenAI client:
+
+```python
+import openai
+from openinference.instrumentation.openai import OpenAIInstrumentor
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+resource = Resource.create({
+    "service.name": "simple-openinference-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openinference-test",
+        "dd-otlp-source": "llmobs",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument(tracer_provider=provider)
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openinference-test` in the Agent Observability UI to find the generated trace.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using Cloudflare Agents" level="h3" expanded=false id="using-cloudflare-agents" %}}
+
+[Cloudflare Agents][15] running on Workers emit spans that follow the GenAI semantic conventions through [Workers Observability][16]. Because Workers export telemetry through a destination configured in the Cloudflare dashboard, you set the Datadog OTLP endpoint and headers on that destination instead of with `OTEL_EXPORTER_OTLP_*` environment variables.
+
+1. Enable tracing in your Worker configuration (`wrangler.jsonc`), pointing at a named destination:
+   ```jsonc
+   {
+     "observability": {
+       "traces": {
+         "enabled": true,
+         "destinations": ["datadog-agent-observability"]
+       }
+     }
+   }
+   ```
+2. Create the destination in the Cloudflare dashboard under **Workers & Pages** > **Observability** > **Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
+   | Field | Value |
+   |-------|-------|
+   | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
+   | Header | `dd-api-key`: `<YOUR_API_KEY>` |
+   | Header | `dd-otlp-source`: `llmobs` |
+   
+   The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
+3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
+   ```typescript
+   import { Agent } from "agents";
+   import * as ai from "ai";
+   import { wrapAISDK } from "agents/observability/ai";
+   import { createWorkersAI } from "workers-ai-provider";
+
+   // storeMessages/storeTools capture gen_ai.input.messages, gen_ai.output.messages,
+   // and tool call payloads. They are off by default.
+   const { generateText } = wrapAISDK(ai, { storeMessages: true, storeTools: true });
+
+   export class MyAgent extends Agent<Env> {
+     async onRequest(request: Request): Promise<Response> {
+       const workersai = createWorkersAI({ binding: this.env.AI });
+       const { text } = await generateText({
+         model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
+         prompt: "What is distributed tracing?",
+       });
+       return Response.json({ text });
+     }
+   }
+   ```
+   After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Custom OpenTelemetry instrumentation" level="h3" expanded=false id="custom-opentelemetry-instrumentation" %}}
 
 The following example demonstrates how to instrument your LLM application using custom OpenTelemetry code. This approach gives you full control over the traces and spans emitted by your application.
 
@@ -318,145 +461,7 @@ provider.force_flush()
 ```
 
 After running this example, search for `ml_app:simple-llm-example` in the Agent Observability UI to find the generated trace.
-
-### Using OpenLLMetry
-
-The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
-
-```python
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.instrumentation.openai import OpenAIInstrumentor
-import openai
-from opentelemetry.sdk.resources import Resource
-
-resource = Resource.create({
-    "service.name": "simple-openllmetry-test",
-})
-
-provider = TracerProvider(resource=resource)
-trace.set_tracer_provider(provider)
-
-exporter = OTLPSpanExporter(
-    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
-    headers={
-        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
-        "dd-ml-app": "simple-openllmetry-test",
-        "dd-otlp-source": "llmobs",
-    },
-)
-
-provider.add_span_processor(BatchSpanProcessor(exporter))
-
-OpenAIInstrumentor().instrument()
-
-# Make OpenAI call (automatically traced)
-client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
-client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
-)
-
-provider.force_flush(timeout_millis=5000)
-```
-
-After running this example, search for `ml_app:simple-openllmetry-test` in the Agent Observability UI to find the generated trace.
-
-### Using OpenInference
-
-The following example uses the [OpenInference OpenAI instrumentation][11] to automatically instrument OpenAI calls with OpenTelemetry.
-
-Configure the OpenTelemetry exporter and instrument the OpenAI client:
-
-```python
-import openai
-from openinference.instrumentation.openai import OpenAIInstrumentor
-from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-
-resource = Resource.create({
-    "service.name": "simple-openinference-test",
-})
-
-provider = TracerProvider(resource=resource)
-trace.set_tracer_provider(provider)
-
-exporter = OTLPSpanExporter(
-    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
-    headers={
-        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
-        "dd-ml-app": "simple-openinference-test",
-        "dd-otlp-source": "llmobs",
-    },
-)
-
-provider.add_span_processor(BatchSpanProcessor(exporter))
-
-OpenAIInstrumentor().instrument(tracer_provider=provider)
-
-# Make OpenAI call (automatically traced)
-client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
-client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
-)
-
-provider.force_flush(timeout_millis=5000)
-```
-
-After running this example, search for `ml_app:simple-openinference-test` in the Agent Observability UI to find the generated trace.
-
-### Using Cloudflare Agents
-
-[Cloudflare Agents][15] running on Workers emit spans that follow the GenAI semantic conventions through [Workers Observability][16]. Because Workers export telemetry through a destination configured in the Cloudflare dashboard, you set the Datadog OTLP endpoint and headers on that destination instead of with `OTEL_EXPORTER_OTLP_*` environment variables.
-
-1. Enable tracing in your Worker configuration (`wrangler.jsonc`), pointing at a named destination:
-   ```jsonc
-   {
-     "observability": {
-       "traces": {
-         "enabled": true,
-         "destinations": ["datadog-agent-observability"]
-       }
-     }
-   }
-   ```
-2. Create the destination in the Cloudflare dashboard under **Workers & Pages** > **Observability** > **Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
-   | Field | Value |
-   |-------|-------|
-   | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
-   | Header | `dd-api-key`: `<YOUR_API_KEY>` |
-   | Header | `dd-otlp-source`: `llmobs` |
-   
-   The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
-3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
-   ```typescript
-   import { Agent } from "agents";
-   import * as ai from "ai";
-   import { wrapAISDK } from "agents/observability/ai";
-   import { createWorkersAI } from "workers-ai-provider";
-
-   // storeMessages/storeTools capture gen_ai.input.messages, gen_ai.output.messages,
-   // and tool call payloads. They are off by default.
-   const { generateText } = wrapAISDK(ai, { storeMessages: true, storeTools: true });
-
-   export class MyAgent extends Agent<Env> {
-     async onRequest(request: Request): Promise<Response> {
-       const workersai = createWorkersAI({ binding: this.env.AI });
-       const { text } = await generateText({
-         model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
-         prompt: "What is distributed tracing?",
-       });
-       return Response.json({ text });
-     }
-   }
-   ```
-   After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
+{{% /collapse-content %}}
 
 ## Attribute mapping reference
 
