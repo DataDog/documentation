@@ -29,7 +29,7 @@ The processor only supports static, out-of-the-box integration pipelines include
 
 ## Setup
 
-<div class="alert alert-warning">Datadog does not recommend using this processor before a Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog's hosted integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
+<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog's hosted integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 To set up an Integration Pipelines processor:
 
