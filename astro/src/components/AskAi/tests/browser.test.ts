@@ -81,7 +81,7 @@ async function readLoadTimings(page: Page) {
       .find((entry) => entry.name.includes("ask-ai"));
 
     return {
-      domContentLoadedMs: navigation.domContentLoadedEventEnd,
+      loadEventEndMs: navigation.loadEventEnd,
       askAiModuleStartMs: askAiModule?.startTime ?? null,
       // Reported so a miss on the match above is legible in the failure output
       // rather than looking like the module was never requested.
@@ -134,19 +134,22 @@ test.describe("Ask AI", () => {
     await page.goto(PAGE);
     await page.waitForLoadState("networkidle");
 
+    // On a fast local server `load` beats the first idle period anyway, so hold
+    // it open: preloaded fonts delay the `load` event.
+    await page.route(/\.woff2?$/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await route.continue();
+    });
+
     await page.goto(PAGE);
     await expect(page.locator(".conv-search-float-btn")).toBeVisible();
 
     const timings = await readLoadTimings(page);
 
-    // The mount script registers its idle callback while the deferred module
-    // scripts are still running, and `DOMContentLoaded` is dispatched before the
-    // browser yields to an idle period — so the request cannot start any earlier
-    // than this, whatever the machine's speed.
+    // Starting any earlier puts a large high-priority script in the page's own
+    // load, where Lighthouse counts it in the network dependency tree.
     expect(timings.askAiModuleStartMs).not.toBeNull();
-    expect(timings.askAiModuleStartMs).toBeGreaterThan(
-      timings.domContentLoadedMs,
-    );
+    expect(timings.askAiModuleStartMs).toBeGreaterThan(timings.loadEventEndMs);
   });
 
   test("keeps the disclaimer tooltip hidden until the info button is hovered", async ({
