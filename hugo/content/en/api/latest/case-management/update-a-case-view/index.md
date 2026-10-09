@@ -1,3 +1,3 @@
 ---
-title: Update a case view
+title: Update a work item view
 ---

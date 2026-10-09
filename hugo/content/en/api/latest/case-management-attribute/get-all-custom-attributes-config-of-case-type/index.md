@@ -1,3 +1,3 @@
 ---
-title: Get all custom attributes config of case type
+title: Get custom attribute configs for work item type
 ---

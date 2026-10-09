@@ -1,3 +1,3 @@
 ---
-title: Archive case
+title: Archive work item
 ---
