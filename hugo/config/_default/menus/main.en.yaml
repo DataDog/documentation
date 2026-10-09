@@ -9479,41 +9479,46 @@ menu:
       identifier: journey_monitoring
       parent: digital_experience_heading
       weight: 10000
+    - name: Configure Journeys
+      url: journey_monitoring/configuring_journeys/
+      parent: journey_monitoring
+      identifier: journey_monitoring_configure_journeys
+      weight: 1
+    - name: Variants
+      url: journey_monitoring/details_report/variants/
+      parent: journey_monitoring
+      identifier: journey_monitoring_details_report_variants
+      weight: 2
+    - name: Journey Overview
+      url: journey_monitoring/overview/
+      parent: journey_monitoring
+      identifier: journey_monitoring_overview
+      weight: 3
     - name: Map
       url: journey_monitoring/map/
       parent: journey_monitoring
       identifier: journey_monitoring_map
-      weight: 1
+      weight: 4
     - name: Suggested Journeys
-      url: journey_monitoring/map/suggested_journeys/
-      parent: journey_monitoring_map
-      identifier: journey_monitoring_map_suggested_journeys
-      weight: 101
+      url: journey_monitoring/suggested_journeys/
+      parent: journey_monitoring
+      identifier: journey_monitoring_suggested_journeys
+      weight: 5
+    - name: Status
+      url: journey_monitoring/status/
+      parent: journey_monitoring
+      identifier: journey_monitoring_status
+      weight: 6
     - name: Details Report
       url: journey_monitoring/details_report/
       parent: journey_monitoring
       identifier: journey_monitoring_details_report
-      weight: 2
-    - name: Variants
-      url: journey_monitoring/details_report/variants/
-      parent: journey_monitoring_details_report
-      identifier: journey_monitoring_details_report_variants
-      weight: 201
-    - name: Uptime
-      url: journey_monitoring/uptime/
-      parent: journey_monitoring
-      identifier: journey_monitoring_uptime
-      weight: 3
+      weight: 7
     - name: Roles and Permissions
       url: journey_monitoring/roles_and_permissions/
       parent: journey_monitoring
       identifier: journey_monitoring_roles_and_permissions
-      weight: 4
-    - name: Guides
-      url: journey_monitoring/guide/
-      parent: journey_monitoring
-      identifier: journey_monitoring_guides
-      weight: 5
+      weight: 8
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
