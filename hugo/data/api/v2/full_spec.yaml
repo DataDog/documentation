@@ -66114,6 +66114,12 @@ components:
           example: "2024-01-01T00:00:00Z"
           format: date-time
           type: string
+        debug_id:
+          description: |-
+            The debug identifier (UUID format) that uniquely identifies this
+            JavaScript source map. Returned for source maps indexed by debug ID.
+          example: 00000000-0000-4000-8000-000000000001
+          type: string
         domain:
           description: The domain associated with the source map.
           example: example.com
@@ -122111,6 +122117,14 @@ components:
         - ELF
         - NDK
         - IL2CPP
+    SourcemapSearchBy:
+      description: The search mode for listing JavaScript source maps.
+      enum:
+        - debug_id
+      example: debug_id
+      type: string
+      x-enum-varnames:
+        - DEBUG_ID
     SourcemapsData:
       description: List of source map data objects.
       items:
@@ -122131,8 +122145,17 @@ components:
           description: Whether there are more results available beyond the current page.
           example: false
           type: boolean
+        next_cursor:
+          description: |-
+            Cursor for the next page of a JavaScript cursor-based listing. Pass
+            this value as `page[after]` with the same search mode and filters.
+            Only returned when another page is available.
+          type: string
         total_filtered_count:
-          description: Total number of source maps matching the filter criteria.
+          description: |-
+            Total number of matching source maps for legacy page-number pagination.
+            Cursor-based listings do not compute a total; this field may be zero
+            even when records are returned. Use `has_more_results` to continue.
           example: 100
           format: int64
           type: integer
@@ -235073,33 +235096,129 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/list:
     get:
-      description: Retrieves a paginated list of source maps matching the specified filter criteria.
+      description: |-
+        Retrieves a paginated list of source maps. Send filters as query parameters,
+        not in a JSON request body. `mapkind` defaults to `js`.
+
+        For JavaScript source maps, choose one of these searches:
+
+        - **Service and version:** provide both `filter[service]` and `filter[version]`.
+          This searches source maps indexed by service and version.
+        - **One debug ID:** provide `filter[debug_id]` with a UUID to look up the single
+          source map with that debug ID. Service and version are not required for this
+          JavaScript search.
+        - **Browse debug IDs:** set `search_by=debug_id` to list source maps indexed by
+          debug ID without specifying an ID. Do not send service, version, or filename
+          filters in this mode.
+
+        **Pagination:** for JavaScript listings, omit `page[after]` and `page[number]`
+        to start at the first page. Copy `meta.page.next_cursor` into `page[after]` on
+        the next request, keeping the same search mode and filters. Continue until
+        `meta.page.has_more_results` is `false`. Do not decode or modify the cursor.
+        Debug-ID browsing requires cursor pagination; `page[number]` is not supported.
+        A specific `filter[debug_id]` lookup without `search_by=debug_id` does not support
+        `page[after]`. Other map kinds use `page[number]`, starting at 1.
+
+        **Examples:** the following commands use the US1 API host. Replace the host with
+        the API host for your site, and the service, version, debug ID, and cursor with
+        values from your organization. Use `--get` so curl sends the filters in the query
+        string; `-X GET` with `--data-urlencode` sends them in the request body instead.
+
+        **List by service and version**
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "filter[service]=my-web-service" \
+          --data-urlencode "filter[version]=1.0.0" \
+          --data-urlencode "page[size]=10"
+        ```
+
+        **Find a specific JavaScript debug ID**
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "filter[debug_id]=00000000-0000-4000-8000-000000000001"
+        ```
+
+        **Browse debug-ID source maps from the first page**
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "search_by=debug_id" \
+          --data-urlencode "page[size]=10"
+        ```
+
+        **Get the next page of debug-ID source maps**
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "search_by=debug_id" \
+          --data-urlencode "page[size]=10" \
+          --data-urlencode "page[after]=<meta.page.next_cursor>"
+        ```
       operationId: ListSourcemaps
       parameters:
+        - description: |-
+            Set to `debug_id` to browse JavaScript source maps indexed by debug ID.
+            Only supported for `mapkind=js`. Omit for service/version searches or a
+            specific `filter[debug_id]` lookup. In debug-ID browse mode, service,
+            version, and filename filters are not supported.
+          example: debug_id
+          in: query
+          name: search_by
+          schema:
+            $ref: "#/components/schemas/SourcemapSearchBy"
+          x-docs-curl-required: true
         - description: The type of source map. Defaults to `js`.
           in: query
           name: mapkind
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
-        - description: The number of results to return per page. Must be at least 1.
+        - description: |-
+            Cursor for the next page of a JavaScript listing. Use the value from
+            `meta.page.next_cursor` and keep the same search mode and filters.
+            Omit on the first request. Not supported for other map kinds or for
+            a specific `filter[debug_id]` lookup without `search_by=debug_id`.
+          in: query
+          name: page[after]
+          schema:
+            type: string
+        - description: The number of results per page. Defaults to 100. Must be at least 1; values above 1000 are capped at 1000.
           in: query
           name: page[size]
           schema:
-            default: 20
-            example: 20
+            default: 100
+            example: 10
             format: int64
+            minimum: 1
             type: integer
-        - description: The page number to retrieve, starting from 1.
+        - description: |-
+            Legacy page number, starting from 1. Prefer `page[after]` for JavaScript
+            listings. Not supported with `search_by=debug_id`. Other map kinds
+            default to page 1 when pagination parameters are omitted.
           in: query
           name: page[number]
           schema:
-            default: 1
             example: 1
             format: int64
+            minimum: 1
             type: integer
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
           name: filter[service]
@@ -235112,7 +235231,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
           name: filter[version]
@@ -235229,10 +235349,15 @@ paths:
           name: filter[filename]
           schema:
             type: string
-        - description: Filter by debug ID (single value). Supported for `react`.
+        - description: |-
+            Filter by a single debug ID in UUID format. Supported for `js` and `react`.
+            For `js`, a debug ID identifies exactly one source map, so the lookup returns
+            at most one result and does not require service/version filters. For `react`,
+            a debug ID can match multiple files, and service/version filters remain required.
           in: query
           name: filter[debug_id]
           schema:
+            format: uuid
             type: string
         - description: Filter by GNU build ID (single value). Supported for `elf`.
           in: query
@@ -235254,6 +235379,22 @@ paths:
           content:
             application/json:
               examples:
+                debug_id_listing:
+                  summary: Browse JavaScript source maps by debug ID
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00Z"
+                          debug_id: 00000000-0000-4000-8000-000000000001
+                          mapkind: js
+                          size: 1024
+                        id: "7"
+                        type: sourcemaps
+                    meta:
+                      page:
+                        has_more_results: true
+                        next_cursor: opaque-debug-id-cursor
+                        total_filtered_count: 0
                 default:
                   value:
                     data:
