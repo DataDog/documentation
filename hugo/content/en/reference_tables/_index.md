@@ -72,6 +72,8 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name t
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
+After creating a table, [edit its rows in the UI](#edit-rows-in-the-ui) without uploading another CSV file.
+
 {{% /tab %}}
 {{% tab "Cloud storage" %}}
 
@@ -222,6 +224,27 @@ Reference Table names and column headers are validated using the following namin
 
 ## Modify a Reference Table
 
+### Edit rows in the UI
+
+Edit individual rows in the UI instead of uploading another CSV file. UI editing is available only for Reference Tables with a **Local File** source. It is not available for cloud storage or integration-backed tables. Editing requires the `reference_tables_write` permission and edit access to the table. See the [Permissions][13] section.
+
+1. Open the Reference Table's detail page.
+2. In **Table Preview**, click {{< ui >}}Edit Table{{< /ui >}}.
+3. Make changes to the rows:
+   - Click a cell to edit its value.
+   - Click {{< ui >}}Add Row{{< /ui >}} to add a row.
+   - Hover over a row and click the trash icon ({{< ui >}}Remove row{{< /ui >}}) to remove it.
+4. Resolve highlighted validation errors, including missing or duplicate primary keys and values that do not match column types.
+5. Click {{< ui >}}Save Version{{< /ui >}} to apply the changes.
+
+Your changes would remain in a draft until you click {{< ui >}}Save Version{{< /ui >}}. The draft includes edits you make on different pages of the table and on rows you find with the search field. Rows you have not edited or removed remain unchanged. Click {{< ui >}}Cancel{{< /ui >}} and confirm to discard unsaved changes.
+
+For tables with fewer than 10,000 rows, use the numbered pages to browse and edit all rows. For tables with 10,000 or more rows, the preview displays the first 100 rows.
+
+For either table size, use the search field to look up and edit a row by its primary key. The field is labeled {{< ui >}}Search by{{< /ui >}} followed by the primary-key column name, for example, {{< ui >}}Search by id{{< /ui >}}.
+
+### Replace data with a CSV file
+
 To modify an existing Reference Table with new data, select a table and click {{< ui >}}Update Config{{< /ui >}} on the top right corner.
 The selected CSV is upserted into the table, meaning that:
 
@@ -316,3 +339,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
+[13]: /reference_tables/#permissions
