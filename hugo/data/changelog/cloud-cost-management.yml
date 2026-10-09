@@ -1,0 +1,13 @@
+entries:
+  - change_type: added
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40475
+    operations:
+      - ListCostCloudAccountsV2
+    title: Publish Cloud Cost Management cloud account listing
+  - change_type: modified
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40475
+    operations:
+      - ListCostOCIConfigs
+    title: Publish Cloud Cost Management cloud account listing

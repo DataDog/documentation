@@ -4,13 +4,13 @@ aliases:
 disable_toc: true
 further_reading:
 - link: /security/cloud_siem/detection_rules
-  tag: 설명서
+  tag: 문서
   text: 로그 탐지 규칙 생성
 - link: security/cloud_siem/investigator
-  tag: 설명서
+  tag: 문서
   text: Investigator에 대해 자세히 알아보기
 - link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
-  tag: 설명서
+  tag: 문서
   text: Security 신호 조사
 - link: https://www.datadoghq.com/blog/cloud-siem-content-packs-whats-new-2024-09/
   tag: 블로그
@@ -48,10 +48,10 @@ title: 콘텐츠 팩
 - Cloud SIEM Security 신호에 매핑된 통합에서 제공하는 타사 경보
 
 다음 유형별로 콘텐츠 팩을 필터링할 수 있습니다.
-- **콘텐츠 팩**: 탐지 규칙, Security Orchestration, Automation, and Response(SOAR)워크플로, 사용자 지정 도구와 같은 보안 관련 콘텐츠가 포함된 통합 패키지
-- **인리치먼트 팩**: 조사 개선을 위해 취약점이나 타사 인사이트와 같이 SIEM 분석에 유용한 컨텍스트를 추가하는 콘텐츠
-- **통합 팩**: Cloud SIEM과 함께 사용하기 적합하도록 Datadog 카탈로그에서 선별된 콘텐츠
-<!-- - **Entity Packs**: Integrations and bundled content that power UEBA (User and Entity Behavior Analytics) by modeling normal activity for users and entities and surfacing risky anomalies in Cloud SIEM -->
+- **콘텐츠 팩**: 탐지 규칙, Security Orchestration, Automation, and Response (SOAR) 워크플로, 사용자 지정 도구 등 보안 관련 콘텐츠와 함께 제공되는 Integrations 번들.
+- **인리치먼트 팩**: 조사 개선을 위해 취약점이나 타사 인사이트 등 SIEM 분석에 유용한 컨텍스트를 추가하는 콘텐츠.
+- **통합 팩**: Cloud SIEM과 함께 사용하기 적합하도록 Datadog의 카탈로그에서 선별된 콘텐츠.
+- **엔티티 팩**: 환경 내 사용자를 식별하는 Integrations. 이러한 통합은 신호 및 위험에 대한 사용자 컨텍스트, 사용자별 위험 점수 산정, 사용자 기반 조사를 가능하게 합니다. 위험한 사용자를 탐지하려면 최소 하나의 엔티티 팩이 필요합니다.
 
 이 페이지에 나열된 콘텐츠 팩 외에도 Cloud SIEM에는 **상시 콘텐츠 팩**이 포함되어 있습니다. 이는 Datadog이 설치나 구성 없이 로그 및 보안 신호에 자동으로 적용하는 위협 인텔리전스 강화 기능입니다.
 
