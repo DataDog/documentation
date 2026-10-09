@@ -100,6 +100,10 @@ The author of a synced message does not need an Incident Management or Incident 
 
 ### Meeting summaries
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
 
 <div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
