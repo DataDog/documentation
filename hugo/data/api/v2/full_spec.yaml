@@ -116090,6 +116090,19 @@ components:
           type: string
         dataSource:
           $ref: "#/components/schemas/SecurityMonitoringStandardDataSource"
+        datasetIds:
+          description: IDs of the datasets queried by the rule. Only used when `queryLanguage` is `sql`.
+          items:
+            description: Dataset ID.
+            type: string
+          type: array
+        datasetVersions:
+          additionalProperties:
+            description: Dataset version.
+            format: int64
+            type: integer
+          description: Version of each dataset used by the rule, keyed by dataset ID. Only used when `queryLanguage` is `sql`.
+          type: object
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -116132,6 +116145,10 @@ components:
         query:
           description: Query to run on logs.
           example: a > 3
+          type: string
+        queryLanguage:
+          description: Language of the query. Use `sql` for SQL-based rules over datasets. Defaults to `event_query`.
+          example: sql
           type: string
       type: object
     SecurityMonitoringStandardRuleResponse:
