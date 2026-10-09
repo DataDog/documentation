@@ -26,11 +26,6 @@ To send RUM data from your Apple platform application to Datadog, complete the f
 {% stepper level="h4" %}
 
 {% step title="Add the iOS SDK as a dependency" %}
-Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
-
-{% tabs %}
-{% tab label="Swift Package Manager (SPM)" %}
-
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 
 ```swift
@@ -44,49 +39,6 @@ DatadogCore
 DatadogRUM
 ```
 
-{% /tab %}
-{% tab label="CocoaPods" %}
-
-You can use [CocoaPods][2] to install `dd-sdk-ios`:
-
-```
-pod 'DatadogCore'
-pod 'DatadogRUM'
-```
-
-[2]: https://cocoapods.org/
-
-{% /tab %}
-{% tab label="Carthage" %}
-
-You can use [Carthage][3] to install `dd-sdk-ios`:
-
-```
-github "DataDog/dd-sdk-ios"
-```
-
-{% alert level="info" %}
-Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source.
-{% /alert %}
-
-To build and integrate the SDK, run:
-
-```
-carthage bootstrap --use-xcframeworks --no-use-binaries
-```
-
-After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
-
-```
-DatadogInternal.xcframework
-DatadogCore.xcframework
-DatadogRUM.xcframework
-```
-
-[3]: https://github.com/Carthage/Carthage
-
-{% /tab %}
-{% /tabs %}
 {% /step %}
 
 {% step title="Specify application details in the UI" %}

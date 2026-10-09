@@ -66,19 +66,8 @@ Set up the RUM Browser SDK for the web page you want rendered on your mobile app
 Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
 1. Make sure to also enable [RUM][2] and/or [Logs][3].
-2. Add the `DatadogWebViewTracking` library according to your dependency manager.
+2. Add the `DatadogWebViewTracking` library.
 3. Update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
-
-{{% collapse-content title="CocoaPods" level="h4" %}}
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogWebViewTracking'
-```
-
-[1]: https://cocoapods.org/
-{{% /collapse-content %}}
-
-{{% collapse-content title="Swift Package Manager (SPM)" level="h4" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -90,22 +79,6 @@ In your project, link the following libraries:
 DatadogCore
 DatadogWebViewTracking
 ```
-{{% /collapse-content %}}
-
-{{% collapse-content title="Carthage" level="h4" %}}
-
-You can use [Carthage][1] to install `dd-sdk-ios`:
-```
-github "DataDog/dd-sdk-ios"
-```
-
-In Xcode, link the following frameworks:
-```
-DatadogWebViewTracking.xcframework
-```
-
-[1]: https://github.com/Carthage/Carthage
-{{% /collapse-content %}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [2]: /real_user_monitoring/application_monitoring/ios/

@@ -87,9 +87,9 @@ The following telemetry provide insight into your mobile application's performan
 [1]: https://developer.apple.com/documentation/xcode/diagnosing-issues-using-crash-reports-and-device-logs
 [2]: /real_user_monitoring/ios/crash_reporting/
 [3]: https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/
-[4]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
-[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#compute-the-hang-rate-of-your-application
-[6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-watchdog-terminations-reporting
+[4]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[5]: /real_user_monitoring/error_tracking/mobile/ios/#compute-the-hang-rate-of-your-application
+[6]: /real_user_monitoring/error_tracking/mobile/ios/#add-watchdog-terminations-reporting
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -155,7 +155,7 @@ The following telemetry provide insight into your mobile application's performan
 [2]: /real_user_monitoring/error_tracking/mobile/unity/
 [3]: https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/
 [4]: /real_user_monitoring/application_monitoring/unity/setup
-[6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-watchdog-terminations-reporting
+[6]: /real_user_monitoring/error_tracking/mobile/ios/#add-watchdog-terminations-reporting
 
 {{% /tab %}}
 

@@ -23,10 +23,7 @@ further_reading:
 
 ## Tracing iOS applications with OpenTelemetry
 
-1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
-
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
+1. Declare the library as a dependency.
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -38,40 +35,6 @@ In your project, link the following libraries:
 DatadogCore
 DatadogTrace
 ```
-
-{{% /tab %}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-
-```
-pod 'DatadogCore'
-pod 'DatadogTrace'
-```
-
-[1]: https://cocoapods.org/
-
-{{% /tab %}}
-{{% tab "Carthage" %}}
-
-You can use [Carthage][1] to install `dd-sdk-ios`:
-
-```
-github "DataDog/dd-sdk-ios"
-```
-
-In Xcode, link the following frameworks:
-```
-OpenTelemetryApi.xcframework
-DatadogInternal.xcframework
-DatadogCore.xcframework
-DatadogTrace.xcframework
-```
-
-[1]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{< /tabs >}}
 
 2. Initialize the library with your application context and your [Datadog client token][9]. For security reasons, you must use a client token: you cannot use [Datadog API keys][10] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
