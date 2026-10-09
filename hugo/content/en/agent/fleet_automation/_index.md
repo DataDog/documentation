@@ -23,8 +23,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/fleet-automation/"
   tag: "Blog"
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
-site_support_id: fleet-automation-standard-features
 ---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED).<br><br>
+Additional Fleet Automation functionality such as Configuring Agents, Upgrading Agents, and Upgrading SDKs are not supported for your selected Datadog site ({{< region-param key=dd_site_name >}}).
+</div>
+{{< /site-region >}}
 
 ## Overview
 
