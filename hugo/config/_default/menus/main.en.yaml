@@ -1610,6 +1610,11 @@ menu:
       identifier: bits_data_analysis
       parent: bits_ai
       weight: 8
+    - name: Bits Release
+      url: bits_release/
+      parent: bits_ai
+      identifier: bits_release
+      weight: 9
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -6034,12 +6039,6 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_explore
       weight: 2
-    - name: Bits Release
-      url: bits_release/
-      pre: ci
-      parent: software_delivery_heading
-      identifier: bits_release
-      weight: 35000
     - name: Test Optimization
       url: tests/
       pre: ci
