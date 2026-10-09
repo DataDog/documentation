@@ -40,7 +40,7 @@ To set up an Integration Pipelines processor:
 1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved-field mappings the Worker uses for common normalization. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
 1. Click {{< ui >}}Edit Pipelines{{< /ui >}} to view a list of integration pipelines that have been enabled or disabled.
 1. The {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel shows a list of enabled integration pipelines. Click {{< ui >}}Disabled{{< /ui >}} to see integration pipelines that are disabled.
-    - **Note**: All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. They must be manually enabled.
+    - **Note**: All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. You must enable them manually.
     - To enable integration pipelines:
       1. Click {{< ui >}}Disabled{{< /ui >}} to see the list of disabled pipelines.
       1. Check the boxes for pipelines you want to enable.
@@ -70,10 +70,10 @@ The number of enabled integration pipelines does not determine per-event process
 
 For every log that matches the processor's filter:
 
-1. The Worker normalizes and preprocesses all logs, regardless of whether it matches an integration pipeline. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
-2. The normalized log's `source` is used to match it to an integration pipeline, such as `source:nginx` for the NGINX pipeline.
-3. The integration pipeline parses, remaps, and enriches the log. Logs that don't match a pipeline skip this step.
-4. Non-[reserved](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) fields are grouped under `attributes`.
+1. The Worker normalizes and preprocesses the log, whether or not it matches an integration pipeline. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
+1. The normalized log's `source` is used to match it to an integration pipeline, such as `source:nginx` for the NGINX pipeline.
+1. The integration pipeline parses, remaps, and enriches the log. Logs that don't match a pipeline skip this step.
+1. Non-[reserved](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) fields are grouped under `attributes`.
 
 ### Common normalization
 
@@ -86,7 +86,7 @@ The Worker normalizes all logs even if they don't match an integration pipeline.
 
 ### Preprocessing options
 
-Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. You can add additional log attributes to the list. Preprocessing uses the value of the first matching attribute.
+Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. You can add more log attributes to the list. Preprocessing uses the value of the first matching attribute.
 
 For example, if you add `custom_host` before `hostname` in the list for the reserved attribute `host`, the Worker checks for `custom_host` first. Clearing a list disables remapping for that reserved attribute.
 
@@ -94,7 +94,7 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 - If `status` is unset, it still defaults to `info`, even when the list is empty.
 - Do not include the `attributes` prefix when adding an attribute to the list. For example, enter `log_timestamp` instead of `attributes.log_timestamp`.
 
-| Reserved attribute | Default log attributes, in order                                                                                        |
+| Reserved attribute | Default log attributes, in order                                                                                |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `timestamp`        | `@timestamp`, `timestamp`, `_timestamp`, `Timestamp`, `eventTime`, `date`, `published_date`, `syslog.timestamp` |
 | `host`             | `host`, `hostname`, `syslog.hostname`                                                                           |
