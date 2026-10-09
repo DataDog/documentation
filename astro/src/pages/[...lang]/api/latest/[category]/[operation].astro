@@ -110,7 +110,7 @@ const tabDisabled = operation
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />
-        <link rel="canonical" href={redirectTo} />
+        <link rel="canonical" href={new URL(redirectTo, Astro.site).href} />
         <title>Redirecting…</title>
       </head>
       <body>

@@ -10,6 +10,7 @@ import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelecto
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolveLocale, stripLocalePrefix } from "@lib/i18n/locale";
 import { buildHreflangAlternates } from "@lib/seo";
+import { rewriteInternalDocLink } from "@lib/plaintext/rewriteDocLink";
 import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
 
 interface Props {
@@ -38,6 +39,8 @@ const {
 const currentLang = resolveLocale(Astro.currentLocale);
 const { rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
 const hreflang = buildHreflangAlternates(unprefixedPath);
+// Every API page has a `.md` twin, including translated ones.
+const markdownHref = rewriteInternalDocLink(Astro.url.pathname);
 
 const overviewPages = await getOverviewPages();
 const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
@@ -50,6 +53,7 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
   title={title}
   description={description}
   hreflang={hreflang}
+  markdownHref={markdownHref}
   contentPath={contentPath}
 >
   <div class="api-shell">

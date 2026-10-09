@@ -44,6 +44,8 @@ interface Props {
   ogType?: "website" | "article";
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
+  /** Absolute path of the page's `.md` twin, for `<link rel="alternate" type="text/markdown">`. */
+  markdownHref?: string;
   /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
   announcementBanner?: BannerParams;
   /**
@@ -62,6 +64,7 @@ const {
   contentPath,
   ogType = "article",
   hreflang,
+  markdownHref,
   announcementBanner,
   enableViewTransitions = false,
 } = Astro.props;
@@ -143,6 +146,16 @@ const activeRegionSelectors = allowedRegions
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
 
+    {
+      markdownHref && (
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href={`${siteOrigin}${markdownHref}`}
+          title="Markdown Version"
+        />
+      )
+    }
     {
       hreflangResolved?.map((h) => (
         <link rel="alternate" hreflang={h.hreflang} href={h.href} />

@@ -166,6 +166,23 @@ function extractMain(html: string): string {
 }
 
 /**
+ * Pull the SEO tags out of `<head>`: the title, the description/social `<meta>`
+ * tags, and the canonical/alternate `<link>`s. The rest of the head (fonts,
+ * scripts, styles) is shared chrome, dropped for the same reason as in
+ * `extractMain`.
+ */
+function extractSeoHead(html: string): string {
+  const head = html.slice(0, html.search(/<\/head>/));
+  const seoTags = head.match(
+    /<title>[^<]*<\/title>|<meta\s+(?:name|property|itemprop)=[^>]*>|<link\s+rel="(?:canonical|alternate)"[^>]*>/g,
+  );
+  if (!seoTags) {
+    throw new Error("Could not locate SEO tags in rendered <head>");
+  }
+  return `<head>${seoTags.join("")}</head>`;
+}
+
+/**
  * Canonicalize build-random tokens so the snapshot tracks semantic content,
  * not non-deterministic per-build identifiers. Each unique token gets replaced
  * with a sequential placeholder (`X1`, `X2`, ...) keyed by first appearance,
@@ -242,7 +259,9 @@ describe("API page HTML snapshots", () => {
         params: page.params,
         request: new Request(`${BASE_URL}${page.urlPath}`),
       });
-      const normalized = await normalize(extractMain(html));
+      const normalized = await normalize(
+        extractSeoHead(html) + extractMain(html),
+      );
       await expect(normalized).toMatchFileSnapshot(
         path.join(SNAPSHOT_DIR, `${page.name}.html`),
       );
