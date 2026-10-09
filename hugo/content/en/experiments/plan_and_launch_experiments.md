@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
+- link: "/experiments/concepts/entry_points/"
+  tag: "Documentation"
+  text: "Entry Points"
 ---
 
 ## Overview
@@ -74,6 +77,8 @@ To define the metrics that measure the outcome of your experiment:
 
 The sample size calculator estimates the number of users and the duration needed to detect a meaningful effect. You choose an entry point, the event that assigns users to the experiment, and Datadog uses the volume of traffic to that event to produce the estimate.
 
+<div class="alert alert-info">The calculator's entry point only estimates traffic. It does not change which subjects your experiment analyzes. To limit the analysis to subjects who reached an event after assignment, add an <a href="/experiments/concepts/entry_points/">experiment entry point</a> in the <a href="#add-a-feature-flag">Feature flag</a> section.</div>
+
 To run the calculation:
 
 1. In the {{< ui >}}Run a sample size calculation (optional){{< /ui >}} section, click the **sample size calculator** link to open the side panel.
@@ -98,6 +103,7 @@ To add a feature flag to control how Datadog splits traffic between the experime
 1. In the {{< ui >}}Feature flag{{< /ui >}} section, click the {{< ui >}}Add a feature flag{{< /ui >}} button to open the picker.
 1. Select the feature flag for your experiment.
    - If you have not created a feature flag, click {{< ui >}}Create New Feature Flag{{< /ui >}}. For setup instructions, see [Create your first feature flag][9].
+1. (Optional) If your experiment's exposures come from an [Exposure SQL Model][14], click {{< ui >}}Filter exposures by entry point{{< /ui >}} to analyze only the subjects who reached a qualifying event after assignment. For details, see [Entry Points][15].
 1. Continue to [Configure randomization](#configure-randomization).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_add_ff.png" alt="The feature flag picker showing a list of available flags sorted by creation date, with new_product_photos selected and its details displayed, including the flag key new-product-photos, type Boolean, and a Create New Feature Flag link at the bottom." style="width:80%;" >}}
@@ -209,3 +215,5 @@ See [Reading Experiment Results][5] to review your data.
 [11]: /experiments/statistics/analysis_methods
 [12]: /experiments/statistics/cuped
 [13]: /experiments/statistics/multiple_testing_correction
+[14]: /experiments/concepts/exposure_sql
+[15]: /experiments/concepts/entry_points
