@@ -67,6 +67,10 @@ If you are updating an existing sign-up test, create the persistent variable and
 
 ## Example: record an OTP login flow
 
+This video shows how to select a persistent email variable, insert its address into an email field, and request an OTP during recording.
+
+{{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable in the browser recorder and use it to request an OTP" video="true" width="100%" >}}
+
 1. Open a browser test in the recorder.
 2. Under {{< ui >}}Variables{{< /ui >}}, add a variable and select {{< ui >}}Email Address{{< /ui >}}.
 3. Select {{< ui >}}Persistent{{< /ui >}}, choose `LOGIN_EMAIL`, and click {{< ui >}}Done{{< /ui >}}. The list contains email global variables you have access to. If you created the variable while the recorder was open, refresh the list.
