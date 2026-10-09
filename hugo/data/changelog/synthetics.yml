@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-10-03'
+    link: https://github.com/DataDog/documentation/pull/40401
+    operations:
+      - CreateGlobalVariable
+      - EditGlobalVariable
+      - GetGlobalVariable
+      - ListGlobalVariables
+      - PatchGlobalVariable
+    title: Add persistent email Synthetics global variables

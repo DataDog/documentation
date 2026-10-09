@@ -2957,6 +2957,13 @@
       "description": "Create a test suite returns \"OK\" response"
     }
   ],
+  "PatchGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_3138656940",
+      "description": "Patch a persistent email global variable preserves its address and type"
+    }
+  ],
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",
