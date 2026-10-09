@@ -10,7 +10,11 @@ import {
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { apiBreadcrumbs, categoryMetaDescription } from "@lib/api/pageMeta";
+import {
+  apiBreadcrumbs,
+  categoryMetaDescription,
+  hugoCategoryContentPath,
+} from "@lib/api/pageMeta";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -53,6 +57,7 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   categories={categories}
   activeCategory={current}
   breadcrumbs={apiBreadcrumbs(lang, current.name)}
+  contentPath={hugoCategoryContentPath(slug)}
 >
   <ApiPageHeader title={current.name} />
   {
