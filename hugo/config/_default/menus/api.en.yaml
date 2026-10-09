@@ -4338,6 +4338,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Override the severity of security findings
+      url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
+      identifier: security-monitoring-override-the-severity-of-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFindingsSeverity
+        unstable:
+          - v2
+        order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
       identifier: security-monitoring-create-servicenow-tickets-for-security-findings
