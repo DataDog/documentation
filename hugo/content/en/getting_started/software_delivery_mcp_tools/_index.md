@@ -82,8 +82,6 @@ The `software-delivery` toolset includes the following tools:
 `retry_datadog_ci_job`
 : Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. For other CI providers, use the provider's UI to rerun.
 
-The Deployment Gates tools are in Preview. Contact [Datadog support](/help/) to request access.
-
 `search_datadog_deployment_gates`
 : Search configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
 
