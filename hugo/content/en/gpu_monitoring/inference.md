@@ -14,23 +14,23 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-tracing/" >}}
-Monitoring inference workloads with GPU Monitoring is in Early Access Preview. Complete the form to request access.
+Optimizing inference workloads with Continuous Tracing in GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
 
-Inference workloads serve live traffic, so slow responses and errors directly affect your users, and underused GPUs drive up serving costs. The Inference page in GPU Monitoring shows the performance of each model deployment alongside the health of the GPUs it runs on. Your MLOps, platform, and ML engineering teams can find and fix serving issues in one place.
+Inference workloads serve live traffic, so slow responses and errors directly affect your users. Underused GPUs also drive up serving costs. The Inference page in GPU Monitoring shows the performance of each model deployment alongside the health of the GPUs it runs on. Your MLOps, platform, and ML engineering teams can find and fix serving issues in one place.
 
 With the Inference page, you get:
 
 - **Latency and throughput across model deployments**: Compare time to first token (TTFT), inter-token latency (ITL), and output tokens per second across your model deployments, and filter by environment, deployment, or Kubernetes namespace.
-- **Deployment health at a glance**: Review the request rate, error rate, health status, monitors, and GPU KV cache usage of each model deployment to identify which deployments need attention.
+- **Deployment health at a glance**: Review the request rate, error rate, health status, monitors, and GPU key-value (KV) cache usage of each model deployment to identify which deployments need attention.
 
 {{< img src="gpu_monitoring/inference-page.png" alt="Inference page in GPU Monitoring showing time to first token, inter-token latency, and output token graphs, and a list of model deployments." style="width:100%;" >}}
 
 ## Setup
 
-Inference monitoring supports [vLLM][1] as the inference engine and NVIDIA Dynamo as the inference router. To request support for other inference technologies, contact your Datadog representative.
+Inference monitoring supports [vLLM][1] as the inference engine and NVIDIA Dynamo as the inference router. Other inference engines and routers are not supported. To request support for them, contact your Datadog representative.
 
 Setup uses two integrations. The Dynamo integration collects frontend and worker runtime metrics, and the vLLM integration collects engine metrics.
 
@@ -38,12 +38,13 @@ Setup uses two integrations. The Dynamo integration collects frontend and worker
 
 To begin monitoring your inference workloads, you must meet the following criteria:
 - You have [GPU Monitoring enabled][2] and access to the inference Agent image, which Datadog provides when you join the Preview.
+- Your inference workloads run on Kubernetes.
 - You are serving models with vLLM workers in an NVIDIA Dynamo deployment.
 - You are running CUDA and CUPTI version 13 or later.
 
 ### 1. Use the inference Agent image
 
-The inference Agent image includes both the Dynamo and vLLM checks, so you don't need to install either integration separately. Datadog provides the image name when you join the Preview.
+The inference Agent image includes both the Dynamo and vLLM checks, so you don't need to install either integration separately.
 
 Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
@@ -75,7 +76,7 @@ The integrations collect metrics from the following endpoints:
 | Dynamo worker | `:9090/metrics` | Dynamo | `dynamo.component.*` |
 | vLLM engine | `:9090/metrics` | vLLM | `vllm.*` |
 
-The Dynamo worker and vLLM engine share an endpoint. Dynamo exposes the vLLM engine metrics through its worker metrics server, and each integration collects its own metrics from that endpoint.
+The Dynamo worker and vLLM engine share an endpoint. Dynamo exposes the vLLM engine metrics through the worker's metrics endpoint, and each integration collects its own metrics from that endpoint.
 
 The Dynamo Kubernetes Operator sets `DYN_SYSTEM_PORT=9090` by default. If you launch a worker directly, set the port explicitly:
 
@@ -85,7 +86,7 @@ env:
     value: "9090"
 ```
 
-For local CLI deployments, port `8081` is common. If your workers use a different port, substitute it in the worker configuration in [Step 3](#3-configure-the-integrations).
+For local CLI deployments, port `8081` is common. If your workers use a different port, substitute it in the worker annotation in [Step 3: Configure the integrations](#3-configure-the-integrations).
 
 ### 3. Configure the integrations
 
@@ -107,7 +108,7 @@ metadata:
       }
 ```
 
-Add the following annotation to every vLLM worker pod template. Both integrations use the worker's system metrics endpoint:
+Add the following annotation to every vLLM worker pod template. Both integrations use the worker's metrics endpoint on port `9090`:
 
 ```yaml
 metadata:
@@ -151,9 +152,9 @@ kubectl exec -n <DATADOG_NAMESPACE> <AGENT_POD> -c agent -- agent status
 After you complete setup, Datadog collects the following:
 - `dynamo.frontend.*` metrics from frontend pods
 - `dynamo.component.*` metrics from worker pods
-- `vllm.*` metrics from vLLM workers
+- `vllm.*` metrics from worker pods
 
-If no metrics appear, send inference traffic to your deployment. Dynamo and vLLM emit some metrics only after the first matching request.
+If no metrics appear, send inference traffic to your deployment. Dynamo and vLLM emit some metrics only after they serve the first request.
 
 ### 5. Enable GPU tracing (optional)
 
