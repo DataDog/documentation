@@ -314,7 +314,7 @@ Configure dynamic tests to allow the Agent to automatically discover and monitor
 
 Agent `v7.73+` is required.
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. (Agent `v7.83` and earlier) Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
    ```yaml
    traceroute:
@@ -381,7 +381,7 @@ Agent `v7.73+` is required.
 
 Agent `v7.79+` is required.
 
-1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+1. (Agent `v7.83` and earlier) Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
 
    ```yaml
    traceroute:
@@ -435,7 +435,7 @@ Agent `v7.79+` is required.
 
 Agent `v7.73+` is required.
 
-1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
+1. (Agent `v7.83` and earlier) Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
    ```yaml
    traceroute:
@@ -513,7 +513,8 @@ For more information, reference the [Datadog Helm Chart documentation][1] and th
 #     tag: "<AGENT_VERSION>"
 
 datadog:
-  ## Set to true to enable the Traceroute Module of the System Probe
+  ## Required on all Agent versions: the Helm chart sets this to false by default,
+  ## which prevents the Agent from enabling the traceroute module automatically.
   traceroute:
     enabled: true
 
@@ -585,13 +586,6 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
-
-   ```yaml
-   traceroute:
-     enabled: true
-   ```
-
 1. Add the following to `/etc/datadog-agent/datadog.yaml`:
 
    ```yaml
@@ -605,13 +599,6 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{% /tab %}}
 {{% tab "macOS" %}}
 
-1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
-
-   ```yaml
-   traceroute:
-     enabled: true
-   ```
-
 1. Add the following to `/opt/datadog-agent/etc/datadog.yaml`:
 
    ```yaml
@@ -624,13 +611,6 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 
 {{% /tab %}}
 {{% tab "Windows" %}}
-
-1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
-
-   ```yaml
-   traceroute:
-     enabled: true
-   ```
 
 1. Add the following to `%ProgramData%\Datadog\datadog.yaml`:
 
@@ -655,7 +635,8 @@ datadog:
   networkMonitoring:
     enabled: true
 
-  ## Enable the traceroute module of the system-probe.
+  ## Required on all Agent versions: the Helm chart sets this to false by default,
+  ## which prevents the Agent from enabling the traceroute module automatically.
   traceroute:
     enabled: true
 
@@ -840,7 +821,7 @@ Use the following guidelines to troubleshoot issues with Network Path. If you ne
 
 If no data appears in the [Network Path][4] UI, the feature may not be fully enabled. Network Path requires the following:
 
-1. The traceroute module must be enabled in your `system-probe.yaml` file:
+1. The traceroute module must be enabled. On Agent `v7.84+`, the Agent enables it automatically for dynamic tests and basic dynamic tests, unless `traceroute.enabled` is set to `false`. Otherwise, add the following to your `system-probe.yaml` file (for Helm, set `datadog.traceroute.enabled: true`):
 
    ```yaml
    traceroute:
