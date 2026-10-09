@@ -1850,7 +1850,7 @@ Lists all pipelines in your organization, including drafts, with each pipeline's
 ### `describe_observability_pipeline`
 *Toolset: **observability-pipelines***\
 *Permissions Required: `Observability Pipelines Read`*\
-Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export it][89] from the pipeline builder. Use `list_observability_pipelines` if needed to find pipeline IDs.
+Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` if needed to find pipeline IDs.
 
 - Explain what the `prod-agent-logs` pipeline does.
 - Where are logs dropped in my Splunk forwarding pipeline?
