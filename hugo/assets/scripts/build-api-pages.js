@@ -316,7 +316,7 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@]/g});
+const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@/]/g});
 
 
 /**
