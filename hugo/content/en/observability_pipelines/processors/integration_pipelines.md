@@ -109,14 +109,21 @@ For [component metrics][2] and [processor buffer metrics][3] emitted by all proc
 
 The processor also emits four metrics for each integration pipeline, tagged with `integration_id`, such as `apache` or `nginx`:
 
-| Metric                                                       | Description                                                                               |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `pipelines.integration_pipelines_ingested_events_total`      | Number of events sent to the integration pipeline, regardless of whether they are modified. |
-| `pipelines.integration_pipelines_ingested_event_bytes_total` | Estimated JSON size, in bytes, of events sent to the integration pipeline.          |
-| `pipelines.integration_pipelines_modified_events_total`      | Number of events modified by the integration pipeline.                                    |
-| `pipelines.integration_pipelines_modified_event_bytes_total` | Estimated JSON size, in bytes, of events modified by the integration pipeline.            |
+Ingested events
+: **Metric**: `pipelines.integration_pipelines_ingested_events_total`
+: **Description**: Number of events sent to the integration pipeline, regardless of whether they are modified.
 
-Both byte metrics use the event size after normalization and before the integration pipeline runs. The modified byte metric measures the volume of events modified, rather than the number of bytes changed or the output size.
+Ingested event bytes
+: **Metric**: `pipelines.integration_pipelines_ingested_event_bytes_total`
+: **Description**: Estimated JSON size, in bytes, of events sent to the integration pipeline. Event size is measured after normalization and before integration pipeline processing.
+
+Modified events
+: **Metric**: `pipelines.integration_pipelines_modified_events_total`
+: **Description**: Number of events modified by the integration pipeline.
+
+Modified event bytes
+: **Metric**: `pipelines.integration_pipelines_modified_event_bytes_total`
+: **Description**: Estimated JSON size, in bytes, of events modified by the integration pipeline. Event size is measured after normalization and before integration pipeline processing. This metric measures the total size of modified events, not the number of bytes changed or their size after processing.
 
 These four metrics count only logs that match an enabled integration pipeline. Changes made only by common normalization do not count as integration pipeline modifications. To identify integrations processing the most logs, group by `integration_id` and compare the number of processed and modified events. The `pipeline_id` tag identifies the overall Observability Pipelines pipeline, not an integration pipeline.
 
