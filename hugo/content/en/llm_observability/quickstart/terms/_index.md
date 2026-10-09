@@ -24,7 +24,7 @@ The Agent Observability UI provides many tools to troubleshoot conversation perf
 |---|---|
 | [Spans](#spans) | A span is a unit of work representing an operation in your LLM application, and is the building block of a trace. |
 | [Traces](#traces) | A trace represents the work involved in processing a request in your LLM application, and consists of one or more nested spans. A root span is the first span in a trace, and marks the beginning and end of the trace. |
-| [Evaluations](#evaluations) | Evaluations are a method for measuring the performance of your LLM application. For example, quality checks like failure to answer or topic relevancy are different types of evaluations that you can track for your LLM application. |
+| [Evaluations](#evaluations) | Evaluations are a method for measuring the performance of your LLM application. For example, quality checks like failure to answer or topic relevancy are different types of evaluators that produce evaluations you can track for your LLM application. |
 
 ## Spans
 
@@ -153,10 +153,10 @@ For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demon
 
 ## Evaluations
 
-Agent Observability offers managed evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
+Agent Observability offers managed evaluators and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
 Datadog provides a variety of options for your evaluations:
-- Use [managed evaluations][12] for your traces
+- Use [managed evaluators][12] for your traces
 - [Submit custom evaluations][6] to Agent Observability
 - Integrate with frameworks like [NeMo][13]
 

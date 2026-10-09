@@ -18,7 +18,7 @@ further_reading:
       text: 'Instrument with OpenTelemetry'
     - link: '/llm_observability/investigate/evaluations'
       tag: 'Evaluations'
-      text: 'Configure Evaluations on your application'
+      text: 'Configure Evaluators on your application'
     - link: '/llm_observability/lapdog'
       tag: 'Documentation'
       text: 'Local development tool for Agent Observability'
@@ -151,7 +151,7 @@ If you don't see any traces:
 
 After traces are being submitted from your application, you can:
 
-- [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
+- [Configure evaluators][4] that you can use to assess the effectiveness of your LLM application.
 - Add [manual instrumentation][5] to your application and extract data that automatic instrumentation cannot.
 
 

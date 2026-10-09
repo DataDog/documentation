@@ -3106,7 +3106,7 @@ llmobs.annotationContext({
 
 The Agent Observability SDK provides methods to export and submit your evaluations to Datadog.
 
-<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluator Developer Guide</a>.</div>
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
@@ -3174,7 +3174,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). To migrate, rename your <code>LLMObs.submit_evaluation_for</code> calls with <code>LLMObs.submit_evaluation</code>.</div>
 
-**Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**Agent Observability** > **Settings** > **Evaluations**][1] page in Datadog.
+**Note**: Custom evaluations are produced by evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluators for your application, use the [**Agent Observability** > **Evaluators**][1] page in Datadog.
 
 The `LLMObs.submit_evaluation()` method accepts the following arguments:
 

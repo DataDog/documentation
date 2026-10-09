@@ -372,7 +372,7 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 ## Evaluations API
 
-<div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+<div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluator Developer Guide</a>.</div>
 
 Use this endpoint to send evaluations and end-user feedback to Datadog. Evaluations can be associated with spans, traces, or sessions. End-user feedback can be associated with spans, traces, sessions, or a customer-defined feedback join key.
 
