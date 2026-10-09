@@ -37,11 +37,11 @@ Schedule downtimes for system shutdowns, offline maintenance, or upgrades withou
 
 To schedule a monitor downtime in Datadog, navigate to the [{{< ui >}}Manage Downtime{{< /ui >}}][1] page. Then, click the {{< ui >}}Schedule Downtime{{< /ui >}} button in the upper right.
 
-To mute an individual monitor, click the {{< ui >}}Mute{{< /ui >}} button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
+To mute an individual monitor, click the mute icon (<i class="icon-volume-wui"></i>) at the top of the monitor status page. This creates a downtime schedule for that particular monitor. If you don't have permission to mute the monitor, the mute icon is disabled. See [Permissions](#permissions).
 
 ### Choose what to silence
 
-Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [{{< ui >}}Group scope{{< /ui >}}](#downtime-scope). Click {{< ui >}}Preview affected monitors{{< /ui >}} to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
+Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [{{< ui >}}Group scope{{< /ui >}}](#downtime-scope). Click {{< ui >}}Preview affected monitors{{< /ui >}} to see the monitors included. If your organization uses [downtime access controls](#permissions), the preview only lists the monitors you have permission to mute. For more examples and use cases see  [Scoping downtimes schedules][2].
 
 **Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
@@ -131,6 +131,12 @@ The option to disable the first recovery notification is additive between multip
 
 **Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted, regardless of this option's settings.
 
+## Permissions and Access Controls
+
+To schedule, edit, or cancel downtimes, you need the [Manage Downtimes permission][16].
+
+With downtime access controls, a downtime only silences monitors that you have permission to mute (**Muter** or **Editor** [access level][17]). Teams can delegate muting to on-call engineers or service accounts without the risk of a downtime silencing monitors they don't own.
+
 ## Manage
 
 The [{{< ui >}}Manage Downtime{{< /ui >}} page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
@@ -199,3 +205,5 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [13]: /integrations/amazon_ec2/#ec2-automuting
 [14]: /integrations/google_compute_engine/#gce-automuting
 [15]: /integrations/azure_vm/#automuting-monitors
+[16]: /account_management/rbac/permissions/#monitors
+[17]: /monitors/configuration/#access-levels
