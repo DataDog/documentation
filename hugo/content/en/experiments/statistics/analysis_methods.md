@@ -33,9 +33,10 @@ Datadog Experiments provides several methods for estimating experiment lift and 
 | --- | --- | --- | --- |
 | [**Fixed-sample frequentist**](#fixed-sample-frequentist-analysis) | Choose a sample size or duration before launching the experiment, wait until that point, then make a decision. | Provides the most power for a fixed sample size. | Requires an upfront plan and can lose its statistical guarantees if you stop early or extend the experiment based on observed results. |
 | [**Sequential frequentist**](#sequential-frequentist-analysis) | Monitor results while the experiment runs and make a decision when you are ready. | Supports flexible decision-making while controlling the false positive rate. | Has less power than fixed-sample analysis, so it can require more samples to detect the same effect. |
+| [**Sequential hybrid**](#sequential-hybrid-analysis) | Monitor results with a sequential test while the experiment runs, then switch to a fixed-sample test when the experiment reaches its target duration. | Supports early stopping during the experiment and provides high power at the end. | Requires a target duration before launch, and produces slightly wider intervals than either method on its own. |
 | [**Bayesian**](#bayesian-analysis) | Combine experiment data with a prior belief about plausible lifts, then make decisions from the posterior distribution. | Supports nuanced decisions, especially when sample sizes are small. | Requires trust in the prior and alignment on how to interpret probabilities. |
 
-Sequential frequentist analysis is the default because it lets you monitor results and make ship or rollback decisions without inflating the false positive rate. Fixed-sample analysis can be more powerful when everything goes according to plan, but it requires a stricter decision process. Bayesian analysis supports more specialized decision-making workflows.
+Sequential frequentist analysis is the default because it lets you monitor results and make ship or rollback decisions without inflating the false positive rate. Fixed-sample analysis can be more powerful when everything goes according to plan, but it requires a stricter decision process. Sequential hybrid analysis combines the two, at the cost of planning the experiment duration in advance. Bayesian analysis supports more specialized decision-making workflows.
 
 Configure the analysis method in the experiment's [statistical analysis plan][1].
 
@@ -61,6 +62,28 @@ Use sequential analysis when flexibility matters more than maximizing power for 
 - Stop early for large improvements or degradations.
 - Continue collecting data without invalidating the analysis.
 - Avoid restarting the experiment when the original sample size assumptions were wrong.
+
+## Sequential hybrid analysis
+
+Sequential hybrid analysis combines sequential and fixed-sample analysis. While the experiment is running, Datadog uses a sequential test so you can monitor results continuously. When the experiment reaches its target duration, Datadog switches to a fixed-sample test, which provides tighter intervals for the final decision.
+
+To combine the two methods while controlling the false positive rate, sequential hybrid analysis splits the significance level (α) evenly between the two tests. Each test runs at α/2, so each phase uses a slightly more conservative version of its method. The tradeoffs are:
+
+- Intervals in each phase are about 10 to 15% wider than with sequential or fixed-sample analysis alone.
+- You must set a target duration before launching the experiment.
+
+Use sequential hybrid analysis when you want the flexibility to react to strong results during the experiment and the power of a fixed-sample test at the end.
+
+### Stop early for degradations only
+
+A common way to use sequential hybrid analysis is to stop early only when a variant degrades metrics, and wait until the target duration to declare a winning variant. This approach treats the analysis as two one-sided tests:
+
+- **Degradations**: A sequential test runs continuously on the degradation tail. If a variant significantly hurts metrics, you can roll it back without waiting for the end of the experiment. Degradations from poor user experiences often have large effect sizes, which offset the lower power of the sequential test. Precise lift estimates also tend to matter less for variants you roll back.
+- **Improvements**: A fixed-sample test runs on the improvement tail when the experiment reaches its target duration. Detecting improvements benefits from the additional power and more reliable lift estimates of the fixed-sample test.
+
+Because each test runs at α/2 and each two-sided test splits its significance level evenly across both tails, each one-sided test runs at α/4. For example, a 95% confidence level (α = 0.05) gives each one-sided test a significance level of 0.0125.
+
+<div class="alert alert-info">If you use sequential hybrid analysis as two one-sided tests, consider setting the confidence level to 90% (α = 0.1). This setting gives each tail a significance level of 0.025, which matches the significance level per tail of a conventional two-sided test at a 95% confidence level.</div>
 
 ## Bayesian analysis
 
