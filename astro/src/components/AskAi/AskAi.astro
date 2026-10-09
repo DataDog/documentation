@@ -13,14 +13,25 @@
 
 <script>
   import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+  import { preloadModuleAtLowPriority } from "@lib/componentUtils/preloadModuleAtLowPriority";
+  import askAiChunkUrl from "chunk-url:@dd/ask-ai";
 
   /**
-   * Dynamic, so that the idle callback defers all three of the fetch, the parse
+   * Dynamic, so that the deferred mount covers all three of the fetch, the parse
    * and the mount. A static import would leave the first two in the page's load
    * — the module graph is evaluated before this script's own body runs — and
    * defer only the panel construction, which is the smallest of the three.
    */
   const mountWidget = async () => {
+    // Fetched at low priority first, since `import()` alone always fetches at
+    // high priority — and Lighthouse lists every high-priority script in its
+    // network dependency tree, however late it was requested. `null` under the
+    // dev server, which has no built chunk to name.
+    if (askAiChunkUrl) {
+      await preloadModuleAtLowPriority(
+        new URL(askAiChunkUrl, import.meta.url).href,
+      );
+    }
     const { mountAskAi } = await import("@dd/ask-ai");
 
     // TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
@@ -30,19 +41,27 @@
     mountAskAi(createAskAiConfig());
   };
 
-  // Mounting at idle keeps the package off the critical path, where it would
-  // otherwise contend with island hydration: this page's `client:load` islands
-  // hydrate from inline scripts, which run before the browser yields to any
-  // idle period. The widget is a floating button, so arriving late costs
-  // nothing — it is `position: fixed` and cannot shift the page.
+  const mountAtIdle = () => {
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => void mountWidget(), { timeout: 3000 });
+    } else {
+      setTimeout(() => void mountWidget(), 200);
+    }
+  };
+
+  // Waiting for `load`, then idle, keeps the package's download from competing
+  // with the page's own resources. Idle alone is not enough: the first idle
+  // period usually comes before `load`. The widget is a floating button, so
+  // arriving late costs nothing — it is `position: fixed` and cannot shift the
+  // page.
   //
   // The impression event still reports once per document load, so this does not
   // change what telemetry sees. Timer fallback for Safari, which shipped
   // `requestIdleCallback` only in 17.4; `timeout` so a page that never idles
   // still mounts.
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(() => void mountWidget(), { timeout: 3000 });
+  if (document.readyState === "complete") {
+    mountAtIdle();
   } else {
-    setTimeout(() => void mountWidget(), 200);
+    window.addEventListener("load", mountAtIdle, { once: true });
   }
 </script>
