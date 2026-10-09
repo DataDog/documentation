@@ -29,7 +29,7 @@ The processor only supports static, out-of-the-box integration pipelines include
 
 ## Setup
 
-<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog's hosted integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
+<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 To set up an Integration Pipelines processor:
 
@@ -48,7 +48,7 @@ To set up an Integration Pipelines processor:
       1. Click {{< ui >}}Enabled{{< /ui >}} to see the list of enabled pipelines.
       1. Check the boxes for pipelines you want to disable.
       1. Click {{< ui >}}Disable Selected{{< /ui >}}.
-    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted, showing 552 enabled and 3 disabled pipelines." style="width:100%;" >}}
+    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted." style="width:100%;" >}}
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note**: When you enable or disable integrations, you must redeploy the pipeline for the changes to take effect.
@@ -63,7 +63,7 @@ CPU usage depends on:
 - The number and cost of processors in the integration pipelines that handle most of your logs.
 - The baseline normalization cost, paid for every log entering the processor, including logs without a matching integration pipeline.
 
-The number of enabled integration pipelines does not determine per-event processing cost: each log is dispatched by its source, rather than tested against every enabled pipeline. Use the processor's filter to limit incoming logs when appropriate, and allow CPU headroom for traffic spikes.
+The number of enabled integration pipelines does not determine per-event processing cost: each log is dispatched by its source, rather than tested against every enabled pipeline. Use the processor's filter to target specific logs when appropriate, and allow CPU headroom for traffic spikes.
 
 ## How the processor works
 
