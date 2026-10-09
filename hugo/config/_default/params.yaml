@@ -288,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  operations_monitoring: [gov]
   tag_enrichment: [gov, gov2]
   ai_credits: [gov, gov2]
   opentelemetry_collector_otlp_export: [gov, gov2]
