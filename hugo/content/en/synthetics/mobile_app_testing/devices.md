@@ -21,9 +21,8 @@ multifiltersearch:
       id: eu
     - name: US
       id: us
-    - name: IP-routed locations
+    - name: Routed
       id: routed
-      filter_by: true
   data:
     # Android devices
     - device: Google Pixel 10
@@ -480,11 +479,11 @@ Selecting an IP-routed location changes the apparent geographic origin of the de
 
 Use the table below to check physical-location availability and IP-routing support for each device and operating system version. Select devices that support the locations you want to test. A device can support only a subset of the selected locations.
 
-For IP-routed locations, use a device with **Yes** in the **IP-routed locations** column. Do not infer routing support from its availability in a physical location. Before starting a recording session, check that the selected device supports the location used for that session.
+For IP-routed locations, use a device with **Yes** in the **Routed** column. Do not infer routing support from its availability in a physical location. Before starting a recording session, check that the selected device supports the location used for that session.
 
 ## Supported devices
 
-The EU and US columns show physical-location compatibility. The **IP-routed locations** column shows whether the device supports IP routing, not whether it is physically located in each routed location.
+The EU and US columns show physical-location compatibility. The **Routed** column shows whether the device supports IP routing, not whether it is physically located in each routed location.
 
 **Yes** indicates location compatibility, not real-time device capacity. A device remains supported when it is temporarily busy.
 
