@@ -70,7 +70,7 @@ Each reserved field has an ordered list of source field paths. The first matchin
 | `trace_id` | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id` |
 | `span_id` | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id` |
 
-Edit a reserved field's source field list to change its mapping. For example, listing `custom_host` before `hostname` for `host` checks `custom_host` first. Clearing the list disables remapping for that field; it does not restore the default list. An unset `status` still defaults to `info`, even when its source field list is empty.
+Edit a reserved field's source field list to change its mapping. For example, listing `custom_host` before `hostname` for `host` checks `custom_host` first. Clearing the list disables remapping for that field. Note also that an unset `status` will default to `info`, even when its source field list is empty.
 
 ## CPU sizing
 
