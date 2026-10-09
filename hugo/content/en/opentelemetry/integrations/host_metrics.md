@@ -12,7 +12,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/host_metrics.png" alt="OpenTelemetry host metrics dashboard" style="width:100%;" >}}
 
-<div class="alert alert-danger">The host metrics receiver is only required for the standalone OpenTelemetry Collector. If you are using the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, the Datadog Agent already collects host metrics.</div>
+<div class="alert alert-danger">If you run the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a> with the Datadog Agent, you don't need the host metrics receiver. The Agent already collects host metrics.</div>
 
 To collect system metrics such as CPU, disk, and memory usage, enable the [host metrics receiver][1] in your Collector. 
 
