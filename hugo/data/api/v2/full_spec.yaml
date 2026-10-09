@@ -143517,9 +143517,9 @@ paths:
         - apiKeyAuth: []
       summary: Send AI tool user activity
       tags:
-        - AI Impact
+        - DORA Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 11
   /api/v2/annotation:
     get:
       description: Returns a flat list of annotations matching the given page, time window, and optional widget filter.
@@ -164643,7 +164643,7 @@ paths:
       summary: Mark a deployment as failed by version
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 10
       x-permission:
         operator: OR
         permissions:
@@ -165121,7 +165121,7 @@ paths:
       summary: Send an incident event (legacy)
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -249767,9 +249767,6 @@ servers:
         default: api
         description: The subdomain where the API is deployed.
 tags:
-  - description: |-
-      Send AI coding tool usage data to measure the impact of AI tools on software delivery.
-    name: AI Impact
   - description: |-
       Configure your API endpoints through the Datadog API.
     name: API Management
