@@ -52,6 +52,8 @@ These are the available processors:
 - [Tags][18]
 - [Throttle][19]
 
+**Note**: The Generate Metrics processor and the Quota processor with an overflow destination aren't available for [preprocessing](#preprocessing-for-multiple-sources).
+
 [1]: /observability_pipelines/processors/add_environment_variables/
 [2]: /observability_pipelines/processors/add_hostname/
 [3]: /observability_pipelines/processors/custom_processor/
@@ -89,6 +91,39 @@ These are the available processors:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Preprocessing for multiple sources
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+Preprocessors are in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
+When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches. Each branch has its own processor groups. By using preprocessors, you can avoid having to add the same processors to each processor group.
+
+For example, the log pipeline in this image has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
+
+{{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources sending logs to two processor groups, one for pipeline branch 1 and one for pipeline branch 2. Branch 1 sends logs to Datadog and Datadog Archives, and branch 2 sends logs to CrowdStrike NG-SIEM." style="width:100%;" >}}
+
+The Worker sends all logs in this pipeline to two different branches: branch 1 and branch 2. If you want to do the following:
+
+- Sample all logs from the Datadog Agent source
+- Deduplicate logs from all sources
+
+Instead of having to add duplicate processors in branch 1 and 2's processor groups, you can add preprocessors.
+
+{{< img src="observability_pipelines/processors/preprocessor_tab.png" alt="The Preprocessor tab for the Datadog Agent source, showing a Datadog Agent only group with Sample and Tags processors and an All sources group with a Dedupe processor." style="width:50%;" >}}
+
+When you add preprocessing for individual sources and all sources, logs are sent through processors for individual sources first and then to processors for all sources.
+
+{{< img src="observability_pipelines/processors/preprocessors_diagram.png" alt="A diagram showing logs from the Datadog Agent and Amazon Data Firehose going through source-specific preprocessors, then logs from all three sources going through preprocessors for all sources before being sent to the processor groups for branch 1 and branch 2 and then to their destinations." style="width:100%;" >}}
+
+The following are not available for preprocessing:
+
+- Generate Metrics processor
+- Quota processor with an overflow destination
+- Packs
+
+**Note**: Processor groups for specific sources and all sources count toward the 25 processor group limit per canvas.
 
 ## Processor groups
 
