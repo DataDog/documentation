@@ -14,6 +14,7 @@ import GoogleTagManager from "@components/GoogleTagManager/GoogleTagManager.astr
 import GoogleTagManagerFallback from "@components/GoogleTagManager/GoogleTagManagerFallback.astro";
 import Hotjar from "@components/Hotjar/Hotjar.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
+import AgentHint from "@components/AgentHint/AgentHint.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
 import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
@@ -83,6 +84,7 @@ const image = ogImageUrl({ metaImage, contentPath });
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
+const markdownUrl = markdownHref && `${siteOrigin}${markdownHref}`;
 // `data-env` on <html>, for debugging and env-conditional styling. Telemetry
 // itself does not read it (it resolves the environment at build time), but the
 // planned shared Ask AI package expects the attribute to be present.
@@ -147,11 +149,11 @@ const activeRegionSelectors = allowedRegions
     <meta name="twitter:image" content={image} />
 
     {
-      markdownHref && (
+      markdownUrl && (
         <link
           rel="alternate"
           type="text/markdown"
-          href={`${siteOrigin}${markdownHref}`}
+          href={markdownUrl}
           title="Markdown Version"
         />
       )
@@ -223,6 +225,7 @@ const activeRegionSelectors = allowedRegions
     <Hotjar />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
+    {markdownUrl && <AgentHint markdownUrl={markdownUrl} />}
     <GoogleTagManagerFallback />
     <AnnouncementBanner override={announcementBanner} />
     <Header />

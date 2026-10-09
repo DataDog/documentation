@@ -1,0 +1,23 @@
+---
+import styles from "./AgentHint.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+interface Props {
+  /** Absolute URL of the page's `.md` twin. */
+  markdownUrl: string;
+}
+
+const { markdownUrl } = Astro.props;
+const cl = classListFactory(styles);
+
+// Mirrors Hugo's `page-agent-hint-block.html`. Unlike AgentOnly, this is
+// visually hidden rather than `display: none`, so it stays in the
+// accessibility tree and reaches agents that read the rendered page.
+// `/llms.txt` is served by Hugo at the site root.
+---
+
+<div class={cl("agent-hint")}>
+  For AI agents: A markdown version of this page is available at <a
+    href={markdownUrl}>{markdownUrl}</a
+  >. A documentation index is available at <a href="/llms.txt">/llms.txt</a>.
+</div>

@@ -183,6 +183,20 @@ function extractSeoHead(html: string): string {
 }
 
 /**
+ * Pull out the visually hidden hint that points AI agents at the page's `.md`
+ * twin. It sits outside `<main>`, so `extractMain` alone would drop it.
+ */
+function extractAgentHint(html: string): string {
+  const hint = html.match(
+    /<div class="[^"]*\bagent-hint\b[^"]*"[^>]*>[\s\S]*?<\/div>/,
+  );
+  if (!hint) {
+    throw new Error("Could not locate the agent hint in rendered <body>");
+  }
+  return hint[0];
+}
+
+/**
  * Canonicalize build-random tokens so the snapshot tracks semantic content,
  * not non-deterministic per-build identifiers. Each unique token gets replaced
  * with a sequential placeholder (`X1`, `X2`, ...) keyed by first appearance,
@@ -260,7 +274,7 @@ describe("API page HTML snapshots", () => {
         request: new Request(`${BASE_URL}${page.urlPath}`),
       });
       const normalized = await normalize(
-        extractSeoHead(html) + extractMain(html),
+        extractSeoHead(html) + extractAgentHint(html) + extractMain(html),
       );
       await expect(normalized).toMatchFileSnapshot(
         path.join(SNAPSHOT_DIR, `${page.name}.html`),
