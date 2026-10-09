@@ -24,8 +24,8 @@ The processor only supports static, out-of-the-box integration pipelines include
 
 **Notes**:
 - Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archive destinations.
-- Ensure your logs have the `source` or `ddsource` field, such as `source:nginx`, because those fields determine if there is a matching integration pipeline. Because an integration pipeline is enabled does not mean the Worker sends all logs through the integration pipeline.
-- Logs collected by the Datadog Agent with an integration log configuration already have their source set.
+- Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log field, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those fields.
+- Logs sent by the Datadog Agent with an integration log configuration already have their source set.
 
 ## Setup
 
