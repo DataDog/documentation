@@ -39,7 +39,7 @@ Worker version 2.21.0 gives you access to the following:
 - Internal Worker logs and traces are now enriched with the pipeline name (`op_worker.pipeline_name:<pipeline_name>`), matching the tag already present on metrics.
 - The Worker's logging during graceful shutdown has been improved.
 - The validation of destination endpoints has been improved to check for incomplete or empty URLs.
-- The `parse_aws_vpc_flow_log` function in the Custom Processor now recognizes all fields introduced in AWS VPC Flow Logs since version 7, including:
+- The `parse_aws_vpc_flow_log` function in the Custom Processor now recognizes all fields introduced in AWS VPC Flow Logs versions 7 through 11, including:
     - Version 7: ECS metadata fields
     - Version 8: `reject_reason`
     - Version 9: `resource_id`
