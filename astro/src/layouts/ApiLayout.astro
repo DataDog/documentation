@@ -21,6 +21,8 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
   /** The page's `site_support_id` frontmatter, if it has one. */
   siteSupportId?: string;
+  /** Hugo source path, for the default OG image. See `BaseLayout`. */
+  contentPath?: string;
 }
 
 const {
@@ -31,6 +33,7 @@ const {
   currentOperationSlug,
   breadcrumbs,
   siteSupportId,
+  contentPath,
 } = Astro.props;
 const currentLang = resolveLocale(Astro.currentLocale);
 const { rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
@@ -43,7 +46,12 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
 );
 ---
 
-<BaseLayout title={title} description={description} hreflang={hreflang}>
+<BaseLayout
+  title={title}
+  description={description}
+  hreflang={hreflang}
+  contentPath={contentPath}
+>
   <div class="api-shell">
     <ApiSideNav
       categories={categories}

@@ -3,6 +3,9 @@ import {
   apiBreadcrumbs,
   categoryMetaDescription,
   operationMetaDescription,
+  hugoCategoryContentPath,
+  hugoOperationContentPath,
+  hugoOverviewContentPath,
 } from "./pageMeta";
 
 describe("apiBreadcrumbs", () => {
@@ -62,5 +65,31 @@ describe("operationMetaDescription", () => {
         variants: [{ description: "" }],
       }),
     ).toBe("Get a metric endpoint in the Datadog API.");
+  });
+});
+
+// Hugo's API tree: branch bundles (`_index.md`) for the root, overview pages,
+// and categories; leaf bundles (`index.md`) for operations.
+describe("Hugo content paths", () => {
+  it("maps a category to its branch bundle", () => {
+    expect(hugoCategoryContentPath("dashboards")).toBe(
+      "api/latest/dashboards/_index.md",
+    );
+  });
+
+  it("maps an operation to its leaf bundle", () => {
+    expect(
+      hugoOperationContentPath("dashboards", "create-a-new-dashboard"),
+    ).toBe("api/latest/dashboards/create-a-new-dashboard/index.md");
+  });
+
+  it("maps the API root entry to the root branch bundle", () => {
+    expect(hugoOverviewContentPath("api/latest")).toBe("api/latest/_index.md");
+  });
+
+  it("maps an overview entry to its branch bundle", () => {
+    expect(hugoOverviewContentPath("api/latest/rate-limits")).toBe(
+      "api/latest/rate-limits/_index.md",
+    );
   });
 });

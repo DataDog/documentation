@@ -12,7 +12,11 @@ import {
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
+import {
+  apiBreadcrumbs,
+  hugoOperationContentPath,
+  operationMetaDescription,
+} from "@lib/api/pageMeta";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -127,6 +131,7 @@ const tabDisabled = operation
         activeCategory={category}
         currentOperationSlug={opSlug}
         breadcrumbs={apiBreadcrumbs(lang, operation.summary)}
+        contentPath={hugoOperationContentPath(catSlug, opSlug)}
       >
         <ApiPageHeader title={operation.summary} />
         <Tabs

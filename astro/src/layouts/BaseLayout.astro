@@ -19,8 +19,8 @@ import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
-  DEFAULT_OG_IMAGE,
   getLocaleDefaults,
+  ogImageUrl,
 } from "@lib/seo";
 import { ClientRouter } from "astro:transitions";
 import faviconUrl from "../assets/favicon.ico?url";
@@ -33,8 +33,13 @@ interface Props {
   description?: string;
   /** Full URL or absolute path. Defaults to `Astro.site + Astro.url.pathname`. */
   canonical?: string;
-  /** Absolute URL of the social-share image. */
-  image?: string;
+  /** Social-share image path under `images/`, from `meta_image` frontmatter. */
+  metaImage?: string;
+  /**
+   * The page's Hugo source path relative to `content/<lang>/`, which picks the
+   * default social-share image the same way Hugo does. See `ogImageUrl`.
+   */
+  contentPath?: string;
   /** OpenGraph type; defaults to "article" to match Hugo. */
   ogType?: "website" | "article";
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
@@ -53,7 +58,8 @@ const {
   title,
   description: descriptionProp,
   canonical: canonicalProp,
-  image: imageProp,
+  metaImage,
+  contentPath,
   ogType = "article",
   hreflang,
   announcementBanner,
@@ -70,7 +76,7 @@ const lang: Locale = resolveLocale(Astro.currentLocale);
 const localeDefaults = getLocaleDefaults(lang);
 const description = descriptionProp ?? localeDefaults.metaDescription;
 const siteName = localeDefaults.siteName;
-const image = imageProp ?? DEFAULT_OG_IMAGE;
+const image = ogImageUrl({ metaImage, contentPath });
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
