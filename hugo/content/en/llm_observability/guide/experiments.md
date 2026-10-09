@@ -471,7 +471,7 @@ DD_TRACE_OTEL_ENABLED=1 node my_experiment.js
 
 ### 3. Define evaluators
 
-Evaluators measure how well your model or agent performs on each record. Both SDKs support function-based evaluators. Python also supports reusable class-based evaluators.
+Evaluators measure how well your model or agent performs on each record. Both SDKs support function-based evaluators and reusable class-based evaluators.
 
 For detailed information on building evaluators, including the full data model reference and best practices, see the [Evaluation Developer Guide][4].
 
@@ -543,7 +543,7 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The Node.js SDK supports function evaluators. Return a Boolean, number, string, or JSON-serializable object. Use an object map when you want to assign evaluator names explicitly.
+The Node.js SDK supports function and class-based evaluators. Return a Boolean, number, string, or JSON-serializable object. Use an object map when you want to assign evaluator names explicitly.
 
 ```javascript
 function exact_match (inputData, outputData, expectedOutput) {
@@ -564,13 +564,58 @@ function fake_llm_as_a_judge (inputData, outputData, expectedOutput) {
 }
 ```
 
-Class-based evaluators and `MultiEvaluatorResult` are not part of the Node.js experiments API. Define multiple named functions when you need multiple metrics.
+#### Class-based evaluators
+
+For reusable evaluators, extend `experiments.BaseEvaluator`. The `evaluate` method receives an `EvaluatorContext` and can return a value or a Promise. Return `experiments.EvaluatorResult` to attach reasoning, assessment, metadata, or tags to the evaluation metric.
+
+```javascript
+const tracer = require('dd-trace').init()
+const { experiments } = tracer.llmobs
+
+class ExactMatchEvaluator extends experiments.BaseEvaluator {
+  constructor () {
+    super('exact_match')
+  }
+
+  evaluate (context) {
+    const passed = context.outputData === context.expectedOutput
+    return new experiments.EvaluatorResult(passed, {
+      assessment: passed ? 'pass' : 'fail',
+      reasoning: passed ? 'The output matches the expected value.' : 'The output does not match the expected value.',
+      metadata: { evaluator_version: 'v1' },
+      tags: { evaluator_version: 'v1' },
+    })
+  }
+}
+
+const experiment = experiments.experiment({
+  // ...name, dataset, and task...
+  evaluators: [new ExactMatchEvaluator()],
+})
+```
+
+#### Managed remote evaluators
+
+Use `experiments.RemoteEvaluator` to run a custom [LLM-as-a-judge evaluation](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/) configured in Datadog. Set `evalName` to the configured evaluation name. The default input mapping includes the task input and output, expected output, record metadata, and experiment span and trace IDs. You can provide `transformFn` to customize the request sent to Datadog.
+
+```javascript
+const remoteEvaluator = new experiments.RemoteEvaluator({
+  evalName: '<YOUR_EVALUATOR_NAME>',
+})
+
+const experiment = experiments.experiment({
+  // ...name, dataset, and task...
+  evaluators: [remoteEvaluator],
+})
+```
+
+You can mix managed remote evaluators with local function-based or class-based evaluators in the same experiment.
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 4. (Optional) Define summary evaluators
 
-Summary evaluators receive aggregated results after all record-level evaluators finish. Use them to calculate dataset-level statistics, such as averages or pass rates. Both SDKs support function-based summary evaluators; Python also supports class-based summary evaluators.
+Summary evaluators receive aggregated results after all record-level evaluators finish. Use them to calculate dataset-level statistics, such as averages or pass rates. Both SDKs support function-based and class-based summary evaluators.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -612,7 +657,25 @@ function num_exact_matches (inputs, outputs, expectedOutputs, evaluatorResults, 
 }
 ```
 
-The Node.js SDK does not use class-based summary evaluators. Define multiple named summary evaluator functions when you need multiple dataset-level metrics.
+#### Class-based summary evaluators
+
+For reusable summary evaluators, extend `experiments.BaseSummaryEvaluator`. The `SummaryEvaluatorContext` includes the inputs, outputs, expected outputs, evaluator results, and record metadata.
+
+```javascript
+class PassRateEvaluator extends experiments.BaseSummaryEvaluator {
+  constructor () {
+    super('pass_rate')
+  }
+
+  evaluate (context) {
+    const values = context.evaluationResults.exact_match || []
+    if (values.length === 0) return null
+    return values.filter(Boolean).length / values.length
+  }
+}
+```
+
+Add class-based summary evaluators to `summaryEvaluators` alongside function-based evaluators.
 {{% /tab %}}
 {{< /tabs >}}
 
