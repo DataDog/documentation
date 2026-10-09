@@ -84,7 +84,7 @@ This path works when randomization runs through [Datadog Feature Flags][1] and y
 
 ## Statistics
 
-Datadog applies statistical analysis to compare variants and estimate lift. When you set up an experiment, choose an [analysis method][11]—sequential frequentist, fixed-sample frequentist, or Bayesian—and optionally run a [sample size calculation][8] to estimate how long the experiment needs to run. After results are in, use [Global Lift][19] to understand how a targeted experiment lift translates to impact on your company-wide metric total, and [Cumulative Impact][12] to aggregate noise-adjusted effects across many experiments on the same metric.
+Datadog applies statistical analysis to compare variants and estimate lift. When you set up an experiment, choose an [analysis method][11]—sequential frequentist, fixed-sample frequentist, sequential hybrid, or Bayesian—and optionally run a [sample size calculation][8] to estimate how long the experiment needs to run. After results are in, use [Global Lift][19] to understand how a targeted experiment lift translates to impact on your company-wide metric total, and [Cumulative Impact][12] to aggregate noise-adjusted effects across many experiments on the same metric.
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
 
