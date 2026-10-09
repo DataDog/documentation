@@ -28,6 +28,8 @@ further_reading:
 
 Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1].
 
+You can also manage log pipelines, indexes, and archives through an AI agent connected to the Datadog MCP Server. Enable the `logs-configuration` toolset to view, create, update, delete, and reorder these resources. See [Set Up the Datadog MCP Server][13] to connect your agent. For available tools and example prompts, see [Logs Configuration tools][14].
+
 ## Configuration options
 
 - Control how your logs are processed with [pipelines][3] and [processors][4].
@@ -60,3 +62,5 @@ Once you've completed configuration, start investigating and troubleshooting log
 [10]: /logs/guide/logs-rbac/
 [11]: /logs/explorer/
 [12]: /logs/explorer/archive_search/
+[13]: /mcp_server/setup/
+[14]: /mcp_server/tools/#logs-configuration
