@@ -342,7 +342,9 @@ describe("SearchBar — the Ask AI row", () => {
     const original = Object.getOwnPropertyDescriptor(window, "location");
     Object.defineProperty(window, "location", {
       configurable: true,
-      value: new Proxy({} as Partial<Location>, {
+      // `hostname` because the Ask AI config reads it, as a real `Location`
+      // always has one.
+      value: new Proxy({ hostname: "localhost" } as Partial<Location>, {
         set(_t, prop, value) {
           if (prop === "href") hrefs.push(value);
           return true;
