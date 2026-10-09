@@ -267,41 +267,6 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 
 {{% /tab %}}
 
-{{% tab "Gemini CLI" %}}
-
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
-
-1. Run in terminal:
-    <pre><code>gemini mcp add --transport http datadog {{< region-param key="mcp_server_endpoint" >}}</code></pre>
-
-   Alternatively, add to `~/.gemini/settings.json`:
-    <pre><code>{
-      "mcpServers": {
-        "datadog": {
-          "httpUrl": "{{< region-param key="mcp_server_endpoint" >}}"
-        }
-      }
-    }</code></pre>
-
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
-
-   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
-
-1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[1]: /getting_started/site/
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-[1]: /getting_started/site/
-{{% /tab %}}
-
 {{% tab "Goose" %}}
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
@@ -360,7 +325,7 @@ Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin pa
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code, Codex, or Gemini CLI, alongside their IDE.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
 
 Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
@@ -440,17 +405,15 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /collapse-content %}}
 
 {{% collapse-content title="Agent CLIs" level="h4" expanded=false id="jetbrains-agent-clis" %}}
-Many developers use an agent CLI such as Claude Code, Codex, or Gemini CLI alongside their JetBrains IDE. See the configuration for those CLI tools:
+Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
 - [Claude Code][4]
 - [Codex][5]
-- [Gemini CLI][6]
 
 The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
 
 [3]: /ide_plugins/idea/
 [4]: /mcp_server/setup/?tab=claudecode
 [5]: /mcp_server/setup/?tab=codex
-[6]: /mcp_server/setup/?tab=geminicli
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -755,7 +718,6 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
 | [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
-| [Gemini CLI][50] | Google | |
 | [Grok Build][71] | SpaceXAI | Datadog [Grok Build plugin][72] recommended. |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
@@ -768,6 +730,10 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
 ## Required permissions
+
+The Datadog MCP Server requires both [user role permissions](#user-role-permissions) and [organization-wide access](#organization-wide-access). See the following sections for details.
+
+### User role permissions
 
 MCP Server tools require the following [Datadog user role permissions][22]:
 
@@ -785,7 +751,14 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 1. Select any other resource-level permissions you need for the role.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
+### Organization-wide access
+
+MCP Server tools also require global, organization-wide MCP access and write capabilities, which organization administrators manage in [Organization Settings][27]. Enable these settings to allow access to the Datadog MCP Server and its tools:
+
+| Organization Setting | Description |
+|---------|-------------|
+| {{< ui >}}MCP Access{{< /ui >}} | Enable to allow access to the Datadog MCP Server. When disabled, users cannot access any MCP functionality, regardless of individual role permissions. This allows organizations to completely opt out of the MCP Server. |
+| {{< ui >}}MCP Write Access{{< /ui >}} | Enable to allow access to MCP Server tools that create or modify resources, such as `create_datadog_monitor`. When disabled, the MCP Server hides write tools from all users, regardless of individual role permissions. See [Troubleshooting](#write-tools-are-missing) for more information. |
 
 ### Restrict network access
 
@@ -904,6 +877,19 @@ If you are a partner or vendor adding Datadog to an MCP directory for your AI ag
 4. Click {{< ui >}}Connect{{< /ui >}}, then go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}List Tools{{< /ui >}}.
 5. Check if the [available tools][12] appear.
 
+## Troubleshooting
+
+### Write tools are missing
+
+If your AI client does not list Datadog MCP Server tools that create or modify resources (such as `create_datadog_monitor`), check the following:
+
+- **Organization write access**: When MCP write capabilities are disabled for your organization, the MCP Server hides write tools from the tool list for all users, regardless of individual user role permissions. An organization administrator can enable {{< ui >}}MCP Write Access{{< /ui >}} from [Organization Settings][27].
+- **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
+- **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
+- **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
+
+After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -955,7 +941,6 @@ If you are a partner or vendor adding Datadog to an MCP directory for your AI ag
 [47]: /help/
 [48]: /reference_tables/
 [49]: /mcp_server/tools
-[50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
 [52]: https://opencode.ai/
 [53]: https://github.com/datadog-labs/opencode-plugin

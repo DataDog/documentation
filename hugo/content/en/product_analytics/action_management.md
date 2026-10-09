@@ -2,6 +2,9 @@
 title: Action Management
 description: Label autocaptured actions from your web and mobile applications using Action Management.
 further_reading:
+  - link: "https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics"
+    tag: "Learning Center"
+    text: "Define User Behavior with Labeled Actions in Product Analytics"
   - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
     tag: "Blog"
     text: "From performance to impact: Bridging frontend teams through shared context"

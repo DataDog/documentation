@@ -4338,6 +4338,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Override the severity of security findings
+      url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
+      identifier: security-monitoring-override-the-severity-of-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFindingsSeverity
+        unstable:
+          - v2
+        order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
       identifier: security-monitoring-create-servicenow-tickets-for-security-findings
@@ -6056,8 +6069,8 @@ menu:
         unstable: []
         order: 17
     - name: Trigger tests from CI/CD pipelines
-      url: /api/latest/synthetics/trigger-tests-from-ci/cd-pipelines/
-      identifier: synthetics-trigger-tests-from-ci/cd-pipelines
+      url: /api/latest/synthetics/trigger-tests-from-cicd-pipelines/
+      identifier: synthetics-trigger-tests-from-cicd-pipelines
       parent: synthetics
       generated: true
       params:
@@ -9647,8 +9660,7 @@ menu:
           - v2
         operationids:
           - GetInvestigation
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Trigger a Bits AI investigation
       url: /api/latest/bits-ai/trigger-a-bits-ai-investigation/
@@ -9660,8 +9672,7 @@ menu:
           - v2
         operationids:
           - TriggerInvestigation
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: List Bits AI investigations
       url: /api/latest/bits-ai/list-bits-ai-investigations/
@@ -9673,8 +9684,7 @@ menu:
           - v2
         operationids:
           - ListInvestigations
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: CI Visibility GitHub Accounts
       url: /api/latest/ci-visibility-github-accounts/
@@ -11289,6 +11299,110 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get a GitHub cloud authentication persona mapping
+      url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-persona-mapping/
+      identifier: cloud-authentication-get-a-github-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 6
+    - name: Delete a GitHub cloud auth persona mapping
+      url: /api/latest/cloud-authentication/delete-a-github-cloud-auth-persona-mapping/
+      identifier: cloud-authentication-delete-a-github-cloud-auth-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 8
+    - name: Create a GitHub cloud auth persona mapping
+      url: /api/latest/cloud-authentication/create-a-github-cloud-auth-persona-mapping/
+      identifier: cloud-authentication-create-a-github-cloud-auth-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 7
+    - name: List GitHub cloud authentication persona mappings
+      url: /api/latest/cloud-authentication/list-github-cloud-authentication-persona-mappings/
+      identifier: cloud-authentication-list-github-cloud-authentication-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 5
+    - name: Get a GitHub cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-get-a-github-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a GitHub cloud auth intake mapping
+      url: /api/latest/cloud-authentication/delete-a-github-cloud-auth-intake-mapping/
+      identifier: cloud-authentication-delete-a-github-cloud-auth-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 12
+    - name: Create a GitHub cloud auth intake mapping
+      url: /api/latest/cloud-authentication/create-a-github-cloud-auth-intake-mapping/
+      identifier: cloud-authentication-create-a-github-cloud-auth-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 11
+    - name: List GitHub cloud authentication intake mappings
+      url: /api/latest/cloud-authentication/list-github-cloud-authentication-intake-mappings/
+      identifier: cloud-authentication-list-github-cloud-authentication-intake-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCloudAuthIntakeMappings
+        unstable:
+          - v2
+        order: 9
     - name: Get an AWS cloud authentication persona mapping
       url: /api/latest/cloud-authentication/get-an-aws-cloud-authentication-persona-mapping/
       identifier: cloud-authentication-get-an-aws-cloud-authentication-persona-mapping

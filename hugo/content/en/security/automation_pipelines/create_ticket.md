@@ -109,6 +109,8 @@ Configure ticket creation rules to automatically create tickets in Jira or Work 
 
 **Note**: Ticket creation rules only create tickets for new findings. Datadog does not create retroactive tickets for existing findings when you create a rule.
 
+You can also create ticket creation rules with the [API][7] or the [`datadog_security_findings_ticket_creation_rule`][8] Terraform resource.
+
 ## Identify automatically created tickets
 
 {{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Work Management ticket popup showing a case created by an Automation Rule, indicated with a lightning bolt icon, and a link to view all findings with tickets that were created from the same rule" style="width:60%;" >}}
@@ -141,3 +143,5 @@ When you disable or delete a ticket creation rule, tickets that were previously 
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /security/ticketing_integrations/
+[7]: /api/latest/security-monitoring/create-a-ticket-creation-rule/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_ticket_creation_rule
