@@ -391,6 +391,7 @@ unsupported_sites:
   observability_pipelines: [gov,gov2]
   on-call: [gov2]
   opentelemetry_collector_otlp_export: [gov,gov2]
+  operations_monitoring: [gov]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
   ovhcloud: [gov,gov2]
