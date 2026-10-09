@@ -706,6 +706,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+- `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
 ## Supported clients
@@ -970,3 +971,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [78]: /account_management/governance_console/
 [79]: ]https://app.datadoghq.com/personal-settings/apps
 [80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
+[81]: /observability_pipelines/
