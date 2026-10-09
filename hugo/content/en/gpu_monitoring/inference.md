@@ -160,6 +160,43 @@ If no metrics appear, send inference traffic to your deployment. Dynamo and vLLM
 
 To correlate inference requests with GPU activity, follow the [GPU Monitoring tracing setup][4] and label your vLLM worker workloads.
 
+## Explore the Inference page
+
+To get started, navigate to the [Inference page][5] in GPU Monitoring.
+
+### Filter model deployments
+
+Use the search bar at the top of the page to search for model deployments, models, engines, or namespaces. You can also filter by {{< ui >}}Env{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}}, and {{< ui >}}Kube Namespace{{< /ui >}}, or click {{< ui >}}Filter{{< /ui >}} to add other filters.
+
+### Latency and throughput
+
+The graphs at the top of the page show the latency and throughput of your model deployments, grouped by `app`:
+
+| Graph | Description |
+|-------|-------------|
+| Time to First Token | Time from when a request is received to when the first output token is generated. |
+| Inter-Token Latency | Time between consecutive output tokens. |
+| Output Tokens | Output tokens generated per second. |
+
+A spike in time to first token or inter-token latency for one deployment, without a matching change in the others, points to an issue with that deployment rather than with shared infrastructure.
+
+### Model deployments
+
+The table at the bottom of the page lists each model deployment with its inference engine, environment, and Kubernetes namespace, along with the following columns:
+
+| Column | Description |
+|--------|-------------|
+| Output Tok/s | Output tokens generated per second. |
+| Requests | Request rate. |
+| TTFT | Time to first token. |
+| ITL | Inter-token latency. |
+| Error Rate | Percentage of requests that return an error. |
+| Health | Health status of the deployment, such as {{< ui >}}Warning{{< /ui >}} or {{< ui >}}Critical{{< /ui >}}. |
+| Monitors | Monitors associated with the deployment. |
+| GPU Cache | GPU KV cache usage. |
+
+Click {{< ui >}}Column Settings{{< /ui >}} to choose which columns to display.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -168,3 +205,4 @@ To correlate inference requests with GPU activity, follow the [GPU Monitoring tr
 [2]: /gpu_monitoring/setup
 [3]: /containers/kubernetes/integrations/?tab=annotations
 [4]: /gpu_monitoring/tracing
+[5]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=inference-monitoring
