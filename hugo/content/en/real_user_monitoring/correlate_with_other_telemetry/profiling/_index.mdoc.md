@@ -265,7 +265,7 @@ The [ProfilingManager API][7] also supports disabling rate limiting during debug
 
 ### Step 3 - (Optional) Disable ANR profiling with system traces
 
-On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22].  When the system detects an ANR in your application, it captures a [system trace][23] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
+On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22]. When the system detects an ANR in your application, it captures a [system trace][23] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
 
 ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17] and count toward the quota described in the [Preview quota system](#preview-quota-system) section.
 
