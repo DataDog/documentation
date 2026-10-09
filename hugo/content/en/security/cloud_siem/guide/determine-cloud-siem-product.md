@@ -85,7 +85,7 @@ In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a {{<
     </tr>
     <tr>
       <td><strong>Core Configuration</strong> section with <strong>Security Filters Configuration</strong><br />
-        {{< img src="security/cloud_siem/guide/config_core_security_filters.png" alt="Configuration settings including a Core Configuration heading, which contains an Index Configuration section" width="80%">}}
+        {{< img src="security/cloud_siem/guide/config_core_security_filters.png" alt="Configuration settings including a Core Configuration heading, which contains an Security Filters Configuration section." width="80%">}}
       </td>
       <td>Add-on with Flex Logs</td>
     </tr>
@@ -114,7 +114,7 @@ The following table lists the Cloud SIEM features available in each product.
 | [Sequence detections][10] | {{< X >}} | {{< X >}} | |
 | [Historical jobs][11] | {{< X >}} | {{< X >}} | |
 | [Risk Insights][12] | {{< X >}} | {{< X >}} | |
-| [Critical Assets][13] | {{< X >}} | {{< X >}} | |
+| [Dynamic Severity][13] | {{< X >}} | {{< X >}} | |
 | [Open Cybersecurity Schema Framework (OCSF)][14] | {{< X >}} | {{< X >}} | |
 | [Threat intelligence][15] | {{< X >}} | {{< X >}} | |
 
@@ -132,6 +132,6 @@ For help identifying your product, or to use a feature your product does not inc
 [10]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence/
 [11]: /security/cloud_siem/detect_and_monitor/historical_jobs/
 [12]: /security/cloud_siem/triage_and_investigate/entities_and_risk_scoring/
-[13]: /security/cloud_siem/detect_and_monitor/critical_assets/
+[13]: /security/cloud_siem/detect_and_monitor/dynamic_severity/
 [14]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
 [15]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
