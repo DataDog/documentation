@@ -87,7 +87,7 @@ The Worker normalizes all logs even if they don't match an integration pipeline.
 
 Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. Preprocessing uses the value of the first matching attribute. For example, if your logs use `published_date` for the timestamp, preprocessing maps its value to the reserved attribute `timestamp`. You can add additional log attributes to the list.
 
-**Note**: If the attribute is prefixed with the `attribute` prefix, such as `attribute.log_timestamp`, do not include the `attributes` prefix in the list; only add `log_timestamp`.
+**Note**: If the attribute is prefixed with the `attribute` prefix, such as `attribute.log_timestamp`, do not include the `attributes` prefix in the list; only enter `log_timestamp`.
 
 | Reserved attribute | Log attributes, in order                                                                                        |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- |
