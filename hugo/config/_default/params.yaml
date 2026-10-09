@@ -433,6 +433,6 @@ unsupported_sites:
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2,uk1]
   wiz: [gov,gov2]
   workflow-automation: [gov,gov2]
-  workflows: [gov,gov2]
+  workflows: [gov2]
   workload_security_active_protection: [gov,gov2]
   work_management_ai_site_support: [gov,gov2]
