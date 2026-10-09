@@ -1,6 +1,8 @@
 ---
-title: GPU Monitoring Fleet Page
+title: GPU Monitoring Explorer
 description: "An inventory of all your GPU-accelerated hosts that helps you diagnose performance issues."
+aliases:
+    - /gpu_monitoring/fleet
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
       tag: "Blog"
@@ -9,7 +11,7 @@ further_reading:
 
 ## Overview
 
-[GPU Fleet Explorer][0] provides a detailed breakdown across AI infrastructure (such as GPU devices, hosts, or Ray clusters) and AI workloads (such as Pods, Kube Containers, or Training Runs) for a specified time frame. This page helps you uncover provisioning inefficiencies and workload performance optimizations through resource telemetry, including GPU utilization, host-level metrics, and costs. It also surfaces Datadog's real-time detection of issues impacting your fleet and workloads, with guidance on how to remediate them.
+[GPU Monitoring Explorer][0] provides a detailed breakdown across AI infrastructure (such as GPU devices, hosts, or Ray clusters) and AI workloads (such as Pods, Kube Containers, or Training Runs) for a specified time frame. This page helps you uncover provisioning inefficiencies and workload performance optimizations through resource telemetry, including GPU utilization, host-level metrics, and costs. It also surfaces Datadog's real-time detection of issues impacting your fleet and workloads, with guidance on how to remediate them.
 
 ## Detect issues with out-of-the-box monitors
 
@@ -27,11 +29,11 @@ You can customize any monitor's thresholds to fit your organization's needs.
 
 To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in the top-right corner of the page.
 
-{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Monitors dropdown in the top-right corner of the GPU Fleet page, showing OOTB monitor templates for Temperature, Power Cap Throttling, Unmet GPU Requests, Critical XID Errors, General XID Errors, ECC Errors, Bursty Workloads, and Idle Devices" style="width:40%;" >}}
+{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Monitors dropdown in the top-right corner of the Explorer page, showing OOTB monitor templates for Temperature, Power Cap Throttling, Unmet GPU Requests, Critical XID Errors, General XID Errors, ECC Errors, Bursty Workloads, and Idle Devices" style="width:40%;" >}}
 
 ## Break down your fleet by any tag
 
-GPU Fleet Explorer gives you visibility from your AI workloads down to the underlying AI infrastructure. You can switch between workload entities like pods and training runs, and infrastructure entities such as devices, hosts, and clusters.
+The Explorer gives you visibility from your AI workloads down to the underlying AI infrastructure. You can switch between workload entities like pods and training runs, and infrastructure entities such as devices, hosts, and clusters.
 
 {{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Side navigation bar showing AI Infrastructure entities (Devices, Hosts, Kube Clusters, Ray Clusters) and AI Workloads entities (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
 
@@ -41,12 +43,12 @@ Use the filter dropdowns at the top of the page to filter by a specific {{< ui >
 
 You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}\>{{< /ui >}} button next to any entry to see the devices for that service.
 
-{{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
+{{< img src="gpu_monitoring/host_row_expansion-2.png" alt="Explorer table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
-{{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
+{{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the Explorer page" style="width:90%;" >}}
 
 ## Use case-driven views and recommendations
-GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven views:
+GPU Monitoring's Explorer page provides two dedicated use case-driven views:
 
 - **Provisioning**: Allocate capacity and manage quotas.
 - **Performance**: Optimize workload efficiency and throughput.
@@ -145,7 +147,7 @@ You can click on the gear icon to customize which metrics are displayed within t
 
 ## Details side panel 
 
-Clicking any row in the Fleet table opens a side panel with more details for the selected cluster, host, or device.
+Clicking any row in the Explorer table opens a side panel with more details for the selected cluster, host, or device.
 
 ### Connected entities 
 

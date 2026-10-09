@@ -5950,9 +5950,9 @@ menu:
       identifier: gpu_monitoring_summary
       weight: 2
     - name: Explorer
-      url: gpu_monitoring/fleet/
+      url: gpu_monitoring/explorer/
       parent: gpu_monitoring
-      identifier: gpu_monitoring_fleet
+      identifier: gpu_monitoring_explorer
       weight: 3
     - name: Capacity Planning
       url: gpu_monitoring/capacity_planning/
