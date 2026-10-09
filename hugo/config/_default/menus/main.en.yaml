@@ -5094,26 +5094,21 @@ menu:
       identifier: dbm
       parent: apm_heading
       weight: 30000
-    - name: Set Up
-      url: database_monitoring/setup/
-      parent: dbm
-      identifier: dbm_setup
-      weight: 1
     - name: Agent Integration Overhead
       url: database_monitoring/agent_integration_overhead
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_agent_integration_overhead
-      weight: 2
+      weight: 1
     - name: Setup Architectures
       url: database_monitoring/architecture/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_architecture
-      weight: 1
-    - name: Postgres
+      weight: 2
+    - name: Setting Up Postgres
       url: database_monitoring/setup_postgres/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_postgres
-      weight: 3
+      weight: 4
     - name: Self-hosted
       url: database_monitoring/setup_postgres/selfhosted
       parent: dbm_setup_postgres
@@ -5124,56 +5119,66 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_rds
       weight: 302
+    - name: RDS Quick Install
+      url: database_monitoring/setup_postgres/rds/quick_install
+      parent: dbm_setup_postgres_rds
+      identifier: dbm_setup_rds_quick_install
+      weight: 2000
     - name: Aurora
       url: database_monitoring/setup_postgres/aurora
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_aurora
-      weight: 304
+      weight: 303
     - name: Google Cloud SQL
       url: database_monitoring/setup_postgres/gcsql
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_gcsql
-      weight: 305
+      weight: 304
     - name: AlloyDB
       url: database_monitoring/setup_postgres/alloydb
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_alloydb
-      weight: 306
+      weight: 305
     - name: Azure
       url: database_monitoring/setup_postgres/azure
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
+      weight: 306
+    - name: Supabase
+      url: database_monitoring/setup_postgres/supabase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_supabase
       weight: 307
     - name: Supabase Cloud
       url: database_monitoring/setup_postgres/supabase/cloud
-      parent: dbm_setup_postgres
+      parent: dbm_postgres_supabase
       identifier: dbm_supabase_cloud
-      weight: 308
+      weight: 1000
     - name: Supabase Self-Hosted
       url: database_monitoring/setup_postgres/supabase/agent
-      parent: dbm_setup_postgres
+      parent: dbm_postgres_supabase
       identifier: dbm_supabase_agent
-      weight: 309
+      weight: 2000
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
-      weight: 310
+      weight: 308
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 311
+      weight: 309
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 312
-    - name: MySQL
+      weight: 310
+    - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_mysql
-      weight: 4
+      weight: 5
     - name: Self-hosted
       url: database_monitoring/setup_mysql/selfhosted
       parent: dbm_setup_mysql
@@ -5209,11 +5214,11 @@ menu:
       parent: dbm_setup_mysql
       identifier: dbm_troubleshooting_mysql
       weight: 407
-    - name: MariaDB
+    - name: Setting Up MariaDB
       url: database_monitoring/setup_mariadb/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_mariadb
-      weight: 5
+      weight: 6
     - name: Self-hosted
       url: database_monitoring/setup_mariadb/selfhosted
       parent: dbm_setup_mariadb
@@ -5234,11 +5239,11 @@ menu:
       parent: dbm_setup_mariadb
       identifier: dbm_troubleshooting_mariadb
       weight: 454
-    - name: SQL Server
+    - name: Setting Up SQL Server
       url: database_monitoring/setup_sql_server/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_sql_server
-      weight: 6
+      weight: 7
     - name: Self-hosted
       url: database_monitoring/setup_sql_server/selfhosted/
       parent: dbm_setup_sql_server
@@ -5264,11 +5269,11 @@ menu:
       parent: dbm_setup_sql_server
       identifier: dbm_troubleshooting_sql_server
       weight: 505
-    - name: Oracle
+    - name: Setting Up Oracle
       url: database_monitoring/setup_oracle/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_oracle
-      weight: 7
+      weight: 8
     - name: Self-hosted
       url: database_monitoring/setup_oracle/selfhosted/
       parent: dbm_setup_oracle
@@ -5299,11 +5304,11 @@ menu:
       parent: dbm_setup_oracle
       identifier: dbm_troubleshooting_oracle
       weight: 606
-    - name: MongoDB
+    - name: Setting Up MongoDB
       url: database_monitoring/setup_mongodb/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_mongodb
-      weight: 8
+      weight: 9
     - name: Self-hosted
       url: database_monitoring/setup_mongodb/selfhosted
       parent: dbm_setup_mongodb
@@ -5319,11 +5324,11 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_troubleshooting_mongodb
       weight: 703
-    - name: ClickHouse
+    - name: Setting Up ClickHouse
       url: database_monitoring/setup_clickhouse/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_clickhouse
-      weight: 9
+      weight: 10
     - name: Self-hosted
       url: database_monitoring/setup_clickhouse/selfhosted
       parent: dbm_setup_clickhouse
@@ -5336,14 +5341,14 @@ menu:
       weight: 902
     - name: Provision the Agent with Terraform
       url: database_monitoring/setup_agent_terraform/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_agent_terraform
       weight: 11
-    - name: Amazon DocumentDB
+    - name: Setting Up Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
-      parent: dbm_setup
+      parent: dbm
       identifier: dbm_setup_documentdb
-      weight: 10
+      weight: 12
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/amazon_documentdb
       parent: dbm_setup_documentdb
@@ -5364,41 +5369,41 @@ menu:
       parent: dbm
       identifier: dbm_data_collected
       weight: 14
-    - name: Explore DBM
-      url: database_monitoring/explore/
-      parent: dbm
-      identifier: dbm_explore
-      weight: 15
-    - name: Database Hosts
-      url: database_monitoring/database_hosts/
-      parent: dbm_explore
-      identifier: dbm_database_hosts
-      weight: 1
-    - name: Query Metrics
-      url: database_monitoring/query_metrics/
-      parent: dbm_explore
-      identifier: dbm_query_metrics
-      weight: 2
-    - name: Query Samples
-      url: database_monitoring/query_samples/
-      parent: dbm_explore
-      identifier: dbm_query_samples
-      weight: 4
-    - name: Database Schemas
-      url: database_monitoring/schema_explorer
-      parent: dbm_explore
-      identifier: dbm_schema_explorer
-      weight: 5
-    - name: Recommendations
-      url: database_monitoring/recommendations/
-      parent: dbm_explore
-      identifier: dbm_recommendations
-      weight: 6
-    - name: Custom Metrics
+    - name: Collecting Custom Metrics
       url: database_monitoring/custom_metrics/
-      parent: dbm_explore
+      parent: dbm
       identifier: dbm_custom_metrics
-      weight: 3
+      weight: 15
+    - name: Exploring Custom Metrics
+      url: database_monitoring/custom_metrics/exploring_custom_metrics
+      parent: dbm_custom_metrics
+      identifier: dbm_custom_metrics_exploring
+      weight: 1
+    - name: Exploring Database Hosts
+      url: database_monitoring/database_hosts/
+      parent: dbm
+      identifier: dbm_database_hosts
+      weight: 16
+    - name: Exploring Query Metrics
+      url: database_monitoring/query_metrics/
+      parent: dbm
+      identifier: dbm_query_metrics
+      weight: 17
+    - name: Exploring Query Samples
+      url: database_monitoring/query_samples/
+      parent: dbm
+      identifier: dbm_query_samples
+      weight: 18
+    - name: Exploring Database Schemas
+      url: database_monitoring/schema_explorer
+      parent: dbm
+      identifier: dbm_schema_explorer
+      weight: 19
+    - name: Exploring Recommendations
+      url: database_monitoring/recommendations/
+      parent: dbm
+      identifier: dbm_recommendations
+      weight: 20
     - name: Database Investigations in Bits Chat
       url: database_monitoring/database_investigator/
       parent: dbm
