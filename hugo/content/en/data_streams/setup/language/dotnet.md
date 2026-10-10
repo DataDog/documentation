@@ -36,7 +36,7 @@ Starting with version 3.22.0 of the .NET tracer, Data Streams Monitoring is in a
 When `DD_DATA_STREAMS_ENABLED` is not set, then:
 
 * Schema tracking is disabled.
-* Data Streams is not enabled when running in a serverless environment.
+* Data Streams is not enabled when running in a serverless environment. To monitor AWS Lambda functions, see [Monitoring AWS Lambda functions](#monitoring-aws-lambda-functions).
 * Data Streams information is not propagated for certain messages which are too small or too large. See [Message sizes](#message-sizes) for more details.
 * Message sizes are not tracked.
 
@@ -75,6 +75,8 @@ environment:
 {{% data_streams/monitoring-sns-to-sqs-pipelines %}}
 
 {{% data_streams/monitoring-azure-service-bus %}}
+
+{{% data_streams/monitoring-aws-lambda %}}
 
 ### Monitoring connectors
 

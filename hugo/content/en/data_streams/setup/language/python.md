@@ -25,9 +25,9 @@ aliases:
 | Kafka          | [confluent-kafka](https://pypi.org/project/confluent-kafka/) | {{< dsm-tracer-version lang="python" lib="confluent-kafka" type="minimal" >}} | {{< dsm-tracer-version lang="python" lib="confluent-kafka" type="recommended" >}} | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
 | Kafka          | [aiokafka](https://pypi.org/project/aiokafka/)               | {{< dsm-tracer-version lang="python" lib="aiokafka" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="aiokafka" type="recommended" >}}        | Not supported                                                                 |
 | RabbitMQ       | [Kombu](https://pypi.org/project/kombu/)                     | {{< dsm-tracer-version lang="python" lib="kombu" type="minimal" >}}           | {{< dsm-tracer-version lang="python" lib="kombu" type="recommended" >}}           | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
-| Amazon SQS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
-| Amazon Kinesis | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
-| Amazon SNS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
+| Amazon SQS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [8.129.0][7]                                                                  |
+| Amazon Kinesis | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [8.129.0][7]                                                                  |
+| Amazon SNS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [8.129.0][7]                                                                  |
 | Google Pub/Sub | [google-cloud-pubsub](https://pypi.org/project/google-cloud-pubsub/) | {{< dsm-tracer-version lang="python" lib="google-cloud-pubsub" type="minimal" >}} | {{< dsm-tracer-version lang="python" lib="google-cloud-pubsub" type="recommended" >}} | |
 
 ### Installation
@@ -52,6 +52,8 @@ environment:
 
 {{% data_streams/monitoring-sns-to-sqs-pipelines %}}
 
+{{% data_streams/monitoring-aws-lambda %}}
+
 ### Manual instrumentation
 
 Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), use [manual instrumentation to set up DSM][6].
@@ -71,3 +73,4 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [3]: https://pypi.org/project/confluent-kafka/
 [5]: https://pypi.org/project/kombu/
 [6]: /data_streams/manual_instrumentation/?tab=python
+[7]: /data_streams/setup/serverless/aws_lambda

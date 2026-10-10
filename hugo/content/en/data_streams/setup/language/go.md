@@ -13,6 +13,7 @@ The following instrumentation types are available:
 -   [Automatic instrumentation for Kafka-based workloads](#automatic-instrumentation)
 -   [Manual Instrumentation for Kafka-based workloads](#kafka-based-workloads)
 -   [Manual instrumentation for other queuing technology or protocol](#other-queuing-technologies-or-protocols)
+-   [Automatic instrumentation for AWS Lambda functions](#monitoring-aws-lambda-functions) that use Amazon SQS, Amazon SNS, Amazon EventBridge, or Amazon Kinesis
 
 ### Prerequisites
 
@@ -165,6 +166,8 @@ if ok {
 ```go
 	ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
+
+{{% data_streams/monitoring-aws-lambda %}}
 
 ### Monitoring connectors
 
