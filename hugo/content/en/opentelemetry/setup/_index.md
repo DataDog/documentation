@@ -16,13 +16,19 @@ further_reading:
 
 ---
 
-This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog.
+This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog, grouped by the kind of pipeline you want. Each group lists a recommended option first. You can also mix components, for example the Datadog SDK with the upstream OpenTelemetry Collector.
 
-## DDOT Collector (Recommended)
+<!-- TODO: Update the options and labels on this page after the recommended setups and component names are finalized. -->
 
-The Datadog Distribution of OpenTelemetry (DDOT) Collector is an open source solution that combines the flexibility of OpenTelemetry with the comprehensive observability capabilities of Datadog.
+<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features each setup supports.</div>
 
-This approach gives you full control over OpenTelemetry pipelines while also providing access to powerful, Datadog Agent-based features, including:
+## You want Datadog to support your pipeline
+
+### DDOT Collector (Recommended)
+
+The Datadog Distribution of OpenTelemetry (DDOT) Collector is an OpenTelemetry Collector distribution that Datadog builds and supports. It includes a curated set of OpenTelemetry components, and you can add others.
+
+When you run the DDOT Collector in the Datadog Agent, you also get Agent features, including:
 
 - Fleet Automation
 - Live Container Monitoring
@@ -32,33 +38,62 @@ This approach gives you full control over OpenTelemetry pipelines while also pro
 - Universal Service Monitoring
 - {{< translate key="integration_count" >}}+ Datadog integrations
 
+You can also install the DDOT Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Helm chart (Preview).
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}
     <h3>Install the DDOT Collector</h3>
-    Follow our guided setup to install the Collector and start sending your OpenTelemetry data to Datadog.
+    Follow the guided setup to install the Collector and start sending your OpenTelemetry data to Datadog.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Other setup options
+### Alternative: OTLP Ingest in the Agent
 
-Alternative methods are available for specific use cases, such as running your own OpenTelemetry Collector distribution or operating in non-Kubernetes environments.
+Use this option if you run the Datadog Agent and want it to receive OTLP data from your applications without managing Collector pipelines.
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}
+    <h3>OTLP Ingest in the Agent</h3>
+    Enable the OTLP receiver in the Datadog Agent.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## You want no Datadog software in your pipeline
+
+### OpenTelemetry Collector (Recommended)
+
+Use the upstream OpenTelemetry Collector with the OTLP HTTP exporter and `span_metrics` connector. This option suits teams that manage their own Collector or need processing such as tail-based sampling.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
     <h3>Upstream OpenTelemetry Collector</h3>
-    Best for: Users who manage their own OpenTelemetry Collector or require advanced processing capabilities like tail-based sampling.
-    {{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}
-    <h3>OTLP Ingest in the Agent</h3>
-    Best for: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
-    {{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/setup/agentless" >}}
-    <h3>Direct OTLP Ingest</h3>
-    Best for: Situations requiring direct data transmission to Datadog's intake endpoint without any intermediary components.
+    Configure the Collector to send traces, metrics, and logs to Datadog.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-info"><strong>Still not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
+### Alternative: Datadog Exporter
+
+Use this option if your Collector configuration already uses the Datadog Exporter and Datadog Connector. For new configurations, use the OTLP HTTP exporter.
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/datadog_exporter/" >}}
+    <h3>Datadog Exporter</h3>
+    Send data with the Datadog Exporter and Datadog Connector.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Your platform already sends OTLP, or you can't run a Collector
+
+### Direct OTLP Ingest (Recommended)
+
+Send data straight to the Datadog OTLP intake endpoints. Use this option for platforms that already send OTLP, serverless functions, managed platforms, and other environments where you can't run a Collector.
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest/" >}}
+    <h3>Direct OTLP Ingest</h3>
+    Find the endpoints, protocols, and authentication for traces, metrics, and logs.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further reading
 

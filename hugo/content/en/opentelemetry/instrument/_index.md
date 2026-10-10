@@ -11,41 +11,42 @@ further_reading:
 
 ## Overview
 
-Datadog supports several approaches for instrumenting your applications with OpenTelemetry. Choose the method that best fits your needs:
+To send OpenTelemetry data to Datadog, choose an SDK to create telemetry in your applications. Both SDKs support the OpenTelemetry API, so your instrumentation code stays vendor-neutral. The SDK you choose determines which Datadog features are available. For details, see [Feature Compatibility][1].
+
+<!-- TODO: Update the SDK options on this page after instrumentation recommendations and names are finalized. -->
+
+## Choose an SDK
 
 ### OpenTelemetry SDK
 
 {{% opentelemetry/otel-sdks %}}
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://opentelemetry.io/docs/languages/" >}}Use OpenTelemetry SDKs{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/otel_sdks/" >}}Use OpenTelemetry SDKs{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### OpenTelemetry API and Datadog SDK
+### Datadog SDK
 
-Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive observability platform while leveraging OpenTelemetry's vendor-agnostic instrumentation. This allows you to collect, visualize, and analyze traces from your applications and infrastructure.
-
-Use the OpenTelemetry Tracing APIs with Datadog's SDK to maintain vendor-neutral instrumentation while accessing Datadog's full feature set. Datadog SDKs can also export traces in OpenTelemetry Protocol (OTLP) format to an OTLP-compatible receiver.
+Use the Datadog SDK with the OpenTelemetry API to keep vendor-neutral instrumentation and use Datadog features that require the Datadog SDK, such as Continuous Profiler and App and API Protection. The Datadog SDK can also export traces in OpenTelemetry Protocol (OTLP) format.
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support" >}}Use the Datadog SDK with the OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}Export traces from the Datadog SDK in OTLP format{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/instrument/api_support" >}}Use the Datadog SDK with OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}Configure the Datadog SDK with OpenTelemetry SDK environment variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### OpenTelemetry instrumentation libraries
+## Add instrumentation libraries
 
-Extend your observability with OpenTelemetry [instrumentation libraries][2] alongside Datadog's SDK.
+[Instrumentation libraries][2] add telemetry for frameworks and technologies that your SDK doesn't instrument automatically. You can use them with either SDK:
 
-Datadog supports OpenTelemetry-compatible instrumentation libraries which provide observability for frameworks and technologies not covered by Datadog's native SDKs. This allows you to instrument additional frameworks and libraries while still sending data to Datadog's backend.
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}Use OpenTelemetry Instrumentation Libraries with the Datadog SDK{{< /nextlink >}}
-{{< /whatsnext >}}
+- **With the OpenTelemetry SDK**: Find libraries in the [OpenTelemetry Registry][3].
+- **With the Datadog SDK**: See [Use OpenTelemetry Instrumentation Libraries with the Datadog SDK][4].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/setup/collector_exporter/
+[1]: /opentelemetry/compatibility/
 [2]: https://opentelemetry.io/docs/specs/otel/overview/#instrumentation-libraries
+[3]: https://opentelemetry.io/ecosystem/registry/?component=instrumentation
+[4]: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/

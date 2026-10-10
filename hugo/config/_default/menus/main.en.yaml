@@ -780,8 +780,8 @@ menu:
     - name: Hostnames and Tagging
       url: opentelemetry/config/hostname_tagging/
       identifier: otel_hostnames_tagging
-      parent: otel-setup-collector-exporter
-      weight: 40213
+      parent: otel_schema
+      weight: 503
     - name: Log Collection
       url: opentelemetry/config/log_collection/
       identifier: otel_log_collection
@@ -827,7 +827,7 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40234
       identifier: otel_setup_serverless
-    - name: Semantic Mapping
+    - name: How Datadog Uses OTel Data
       url: opentelemetry/mapping/
       identifier: otel_schema
       parent: opentelemetry_top_level
@@ -841,12 +841,12 @@ menu:
       url: opentelemetry/mapping/metrics_mapping/
       identifier: otel_metrics_mapping
       parent: otel_schema
-      weight: 502
+      weight: 506
     - name: Infrastructure Host Mapping
       url: opentelemetry/mapping/host_metadata/
       identifier: otel_host_metadata
       parent: otel_schema
-      weight: 503
+      weight: 505
     - name: Hostname Mapping
       url: opentelemetry/mapping/hostname/
       identifier: otel_hostname
@@ -856,7 +856,7 @@ menu:
       url: opentelemetry/mapping/service_entry_spans/
       identifier: otel_service_entry_spans
       parent: otel_schema
-      weight: 505
+      weight: 502
     - name: Ingestion Sampling
       url: opentelemetry/ingestion_sampling
       identifier: otel_ingestion_sampling
