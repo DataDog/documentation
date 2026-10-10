@@ -12,9 +12,6 @@ further_reading:
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: ドキュメント
   text: クラウドストレージ用のSensitive Data Scannerをセットアップする
-- link: coterm
-  tag: ドキュメント
-  text: CoTerm：ローカルおよびリモートシステムでのターミナルセッションと機密アクティビティを監視する
 - link: /data_security/
   tag: ドキュメント
   text: データ関連リスクの低減

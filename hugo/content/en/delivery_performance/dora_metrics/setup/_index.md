@@ -22,6 +22,9 @@ further_reading:
 - link: '/internal_developer_portal/catalog/'
   tag: 'Documentation'
   text: 'Learn about the Catalog'
+- link: '/internal_developer_portal/catalog/entity_model/v3_migration/'
+  tag: 'Documentation'
+  text: 'Migrate your service definitions to v3'
 - link: 'https://github.com/DataDog/datadog-ci'
   tag: 'Source Code'
   text: 'Learn about the datadog-ci CLI tool'
@@ -228,23 +231,32 @@ If your repositories are organized under [**GitLab groups or subgroups**][3] (fo
 `https://gitlab.com/my-org/group(/subgroup)/repo`),
 the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
 
-To ensure that DORA metrics handle your service's source code paths correctly,
-you can use the following configuration in your service definition:
+For DORA Metrics to resolve your service's source code paths correctly, declare the code locations explicitly in your entity definition. Use the `datadog.codeLocations` attribute, which is available with [entity schema v3][4]:
 
 ```yaml
-extensions:
-  datadoghq.com/dora-metrics:
-    source_patterns:
-      # All paths relative to the repository URL provided with the deployment
-      - **
-      # or specific paths related to this service (for monorepos)
-      - src/apps/shopist/**
-      - src/libs/utils/**
+apiVersion: v3
+kind: service
+metadata:
+  name: shopist
+datadog:
+  codeLocations:
+    # The repository that contains the service source code
+    - repositoryURL: https://gitlab.com/my-org/group/subgroup/repo.git
+      paths:
+        # Paths related to this service (for monorepos)
+        - src/apps/shopist/**
+        - src/libs/utils/**
 ```
+
+To include every path in the repository, use `**` as the only entry in `paths`.
+
+If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service Definitions to v3][5] to convert them.
 
 [1]: /integrations/gitlab-source-code/
 [2]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 [3]: https://docs.gitlab.com/user/group/
+[4]: /internal_developer_portal/catalog/entity_model/?tab=v30
+[5]: /internal_developer_portal/catalog/entity_model/v3_migration/
 
 {{% /tab %}}
 
@@ -276,6 +288,27 @@ To set up the integration:
 
 {{% /tab %}}
 
+{{% tab "Bitbucket" %}}
+
+<div class="alert alert-warning">
+Only Bitbucket Cloud Premium is supported. Bitbucket Data Center and Bitbucket Server are <strong>not</strong> supported.
+</div>
+
+If the [Bitbucket Cloud Source Code integration][1] is not already installed, install it on the [Bitbucket Cloud Source Code integration tile][2].
+
+When you create the workspace access token during [setup][3], grant at least the following scopes:
+
+- {{< ui >}}Account{{< /ui >}}: {{< ui >}}Read{{< /ui >}}
+- {{< ui >}}Repositories{{< /ui >}}: {{< ui >}}Read{{< /ui >}}
+- {{< ui >}}Pull requests{{< /ui >}}: {{< ui >}}Read{{< /ui >}}
+- {{< ui >}}Webhooks{{< /ui >}}: {{< ui >}}Read and write{{< /ui >}}
+
+[1]: /integrations/bitbucket-source-code/
+[2]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+[3]: /integrations/bitbucket-source-code/#setup
+
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -303,56 +336,51 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 If the source code of multiple services is present in the same repository, further actions are needed to ensure that the change lead time is calculated by taking into account only the commits affecting the specific service being deployed.
 
-To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][4].
+To measure only the commits that affect the service, declare the service source code location in the [entity definition][4] in one of two ways:
 
-If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
+- **[Code locations](#declare-code-locations-schema-v3) (recommended)**: The `datadog.codeLocations` attribute explicitly maps the service to a repository and a list of glob path patterns. It requires [entity schema v3][7].
+- **[Repository links](#declare-a-repository-link)**: A repository link points to the application folder with a full repository URL. A single path pattern is derived from it automatically.
+
+If both are defined for a service, only `datadog.codeLocations` is used to filter the commits.
+
+#### Declare code locations (schema v3)
+
+The `datadog.codeLocations` attribute specifies the repository that contains the service code, and the `paths` within that repository that belong to the service, as a list of [globs][8]:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: shopist
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/organization/example-repository.git
+      paths:
+        - src/apps/shopist/**
+        - src/libs/utils/**
+{{< /code-block >}}
+
+In this example, DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`. To include every path in the repository, use `**` as the only entry in `paths`.
+
+If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service Definitions to v3][7] to convert them.
+
+#### Declare a repository link
+
+If the entity definition contains a **full** repository URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the example below). Set `provider` to your source code provider: `github`, `gitlab`, `azure`, or `bitbucket`.
 
 **Example (schema version v2.2):**
-{{< tabs >}}
-{{% tab "GitHub" %}}
-```yaml
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" >}}
 links:
   - name: shopist
     type: repo
     provider: github
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
-```
-{{% /tab %}}
-{{% tab "GitLab" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: gitlab
-    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
-```
-{{% /tab %}}
-{{% tab "Azure DevOps" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: azure
-    url: https://dev.azure.com/organization/project/_git/example-repository?path=/src/apps/shopist
-```
-{{% /tab %}}
-{{< /tabs >}}
+{{< /code-block >}}
 
-DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
+DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`.
 
-**Example (schema version v2.2):**
-
-```yaml
-extensions:
-  datadoghq.com/dora-metrics:
-    source_patterns:
-      - src/apps/shopist/**
-      - src/libs/utils/**
-```
-
-DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
-
-If the two metadata entries are defined for a service, only `extensions[datadoghq.com/dora-metrics]` is considered to filter the commits.
+For more granular control over which paths map to the service, declare [code locations](#declare-code-locations-schema-v3) instead.
 
 ## Customize Change Failure Detection
 
@@ -380,3 +408,5 @@ For detailed information about how detection works and how to customize rules, s
 [4]: /internal_developer_portal/catalog/entity_model/
 [5]: /delivery_performance/dora_metrics/change_failure_detection/
 [6]: https://app.datadoghq.com/ci/settings/dora
+[7]: /internal_developer_portal/catalog/entity_model/v3_migration/
+[8]: https://en.wikipedia.org/wiki/Glob_(programming)

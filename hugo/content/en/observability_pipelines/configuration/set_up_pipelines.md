@@ -183,7 +183,7 @@ To delete a pipeline in the UI:
 
 - A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
 - For log pipelines:
-  - You can add a total of three destinations for a log pipeline.
+  - You can add a total of 20 destinations for a log pipeline.
 
 ## Further Reading
 

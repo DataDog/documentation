@@ -4,31 +4,31 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: Blog
-  text: Corrélez la télémétrie DBM et APM pour comprendre la performance des requêtes
+  text: Corrélez la télémétrie DBM et APM pour comprendre les performances des requêtes
     de bout en bout
 title: Associer la fonctionnalité Database Monitoring aux traces
 ---
-Ce guide suppose que vous avez configuré [Surveillance de la base de données][1] et que vous utilisez [APM][2]. La connexion d'APM et de DBM injecte des identifiants de trace APM dans la collecte de données DBM, ce qui permet de corréler ces deux sources de données. Cela active les fonctionnalités du produit qui affichent les informations sur la base de données dans APM et les données APM dans DBM.
+Ce guide suppose que vous avez configuré [Database Monitoring][1] et que vous utilisez [APM][2]. La connexion entre APM et DBM injecte des identifiants de trace APM dans la collecte de données DBM, ce qui permet la corrélation de ces deux sources de données. Cela active des fonctionnalités produit affichant des informations de base de données dans le produit APM, et des données APM dans le produit DBM.
 
 ## Avant de commencer {#before-you-begin}
 
 Bases de données prises en charge
 : Postgres, MySQL, SQL Server, Oracle, MongoDB
 
-Versions d'Agent prises en charge
+Versions de l'Agent prises en charge
 : 7.46+
 
 Confidentialité des données
-: L'activation de la propagation des commentaires SQL entraîne le stockage de données potentiellement confidentielles (noms de services) dans les bases de données, qui peuvent ensuite être accessibles par d'autres tiers ayant obtenu l'accès à la base de données.
+: L'activation de la propagation des commentaires SQL entraîne le stockage de données potentiellement confidentielles (noms de service) dans les bases de données, qui peuvent ensuite être consultées par d'autres tiers ayant obtenu un accès à la base de données.
 
 
-Les intégrations du SDK Datadog prennent en charge un *Mode de propagation*, qui contrôle la quantité d'informations transmises des applications à la base de données.
+Les intégrations SDK Datadog prennent en charge un *Mode de propagation*, qui contrôle la quantité d'informations transmises des applications à la base de données.
 
 | Mode de propagation | Description |
 |:-----------------|:------------|
-| `full` | Envoie des informations de trace complètes à la base de données, vous permettant d'examiner des traces individuelles dans DBM. C'est la solution recommandée pour la plupart des intégrations. |
+| `full` | Envoie des informations de trace complètes à la base de données, vous permettant d'examiner des traces individuelles au sein de DBM. Il s'agit de la solution recommandée pour la plupart des intégrations. |
 | `service` | Envoie le nom du service, vous permettant de comprendre quels services contribuent à la charge de la base de données. |
-| `disabled` | Désactive la propagation et n'envoie aucune information des applications. |
+| `disabled` | Désactive la propagation et n'envoie aucune information depuis les applications. |
 
 
 **Bases de données prises en charge**
@@ -36,7 +36,7 @@ Les intégrations du SDK Datadog prennent en charge un *Mode de propagation*, qu
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-| Langue | Version minimale du traceur | Bibliothèque/Framework | Mode |
+| Langage | Version minimale du traceur | Bibliothèque/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `full`<br>`service` |
 | **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
@@ -47,13 +47,13 @@ Les intégrations du SDK Datadog prennent en charge un *Mode de propagation*, qu
 | **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 2.9.0 | [asyncpg](https://pypi.org/project/asyncpg/) | `full`<br>`service` |
 | **Ruby** | [dd-trace-rb](https://github.com/dataDog/dd-trace-rb) >= 1.8.0 | [pg](https://github.com/ged/ruby-pg) | `full`<br>`service` |
 
-**Remarque** : [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) n'est pas pris en charge pour le pilote .NET.
+**Remarque** : [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) n'est pas pris en charge par le pilote .NET.
 
 {{% /tab %}}
 
 {{% tab "MySQL" %}}
 
-| Langue | Version minimale du traceur | Bibliothèque/Framework | Mode |
+| Langage | Version minimale du traceur | Bibliothèque/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `full`<br>`service` |
 | **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
@@ -65,13 +65,13 @@ Les intégrations du SDK Datadog prennent en charge un *Mode de propagation*, qu
 
 **Remarque** : [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) n'est pas pris en charge pour les pilotes .NET.
 
-**Remarque** : Le mode de propagation complet sur Aurora MySQL nécessite la version 3.
+**Remarque** : Le mode de propagation complète sur Aurora MySQL nécessite la version 3.
 
 {{% /tab %}}
 
 {{% tab "SQL Server" %}}
 
-| Langue | Version minimale du traceur | Bibliothèque/Framework | Mode |
+| Langage | Version minimale du traceur | Bibliothèque/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
 | **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
@@ -84,29 +84,35 @@ Pour le mode `full` avec Java et .NET :
 <div class="alert alert-danger">Si votre application utilise <code>context_info</code> pour l'instrumentation, le SDK Datadog l'écrase.</div>
 
 - L'instrumentation exécute une commande `SET context_info` lorsque le client émet une requête, ce qui entraîne un aller-retour supplémentaire vers la base de données.
-- Prérequis :
-  - Version de l'agent 7.55.0 ou supérieure
-  - Version du traceur Java 1.39.0 ou supérieure
-  - Version du traceur .NET 3.3 ou supérieure
+- Prérequis :
+  - Version 7.55.0 ou ultérieure de l'Agent
+  - Java tracer version 1.39.0 ou supérieur
+  - .NET tracer version 3.3 ou supérieure
 
 {{% /tab %}}
 
 {{% tab "Oracle" %}}
 
-| Langue | Version minimale du traceur | Bibliothèque/Framework | Mode |
+| Langage | Version minimale du traceur | Bibliothèque/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
 
 Pour le mode `full` avec Java :
 - L'instrumentation écrase `V$SESSION.ACTION`.
-- Prérequis : traceur Java 1.45 ou supérieur
+- Prérequis : Java tracer 1.45 ou supérieur
+
+Pour le mode `dynamic_service` avec Java, vous pouvez propager les informations de service sans modifier le texte de l'instruction SQL. Utilisez cette option si vous dépendez de fonctionnalités qui correspondent au texte SQL exact, telles que les lignes de base SQL Plan Management.
+- Définissez `DD_DBM_PROPAGATION_MODE=dynamic_service` et `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true`.
+- L'instrumentation écrit le hash de service dans `V$SESSION.ACTION` au lieu d'injecter des commentaires SQL. Ceci écrase toute valeur `V$SESSION.ACTION` existante.
+- `V$SESSION.ACTION` est défini une fois par connexion et n'est mis à jour que si le hash de service change.
+- Prérequis : Java tracer 1.67.0 ou supérieur
 
 {{% /tab %}}
 
 {{% tab "MongoDB" %}}
 
-| Langue | Version minimale du traceur | Bibliothèque/Framework | Mode |
+| Langage | Version minimale du traceur | Bibliothèque/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.58.0 | [mongo-java-driver](https://www.mongodb.com/docs/drivers/java/sync/current/) v3.8+ | `full`<br>`service` |
 | **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 5.80.0 | [mongodb](https://github.com/mongodb/node-mongodb-native) | `full`<br>`service` |
@@ -116,7 +122,7 @@ Pour le mode `full` avec Java :
 
 {{< /tabs >}}
 
-## Configuration : {#setup}
+## Configuration {#setup}
 Définissez les variables d'environnement suivantes dans votre application :
 
 ```shell
@@ -125,20 +131,20 @@ DD_ENV=(application environment)
 DD_VERSION=(application version)
 ```
 
-Ces balises identifient votre service dans les vues de corrélation APM et dans la répartition des connexions actives DBM.
+Ces tags identifient votre service dans les vues de corrélation APM et dans la répartition des connexions actives DBM.
 
-Datadog recommande de définir le mode d'obfuscation sur `obfuscate_and_normalize` pour les versions de l'Agent `7.63` et supérieures. Ajoutez le paramètre suivant dans la section `apm_config` de votre fichier de configuration de l'agent APM :
+Datadog recommande de définir le mode d'obfuscation sur `obfuscate_and_normalize` pour les versions `7.63` et supérieures de l'Agent. Ajoutez le paramètre suivant dans la section `apm_config` de votre fichier de configuration de l'Agent APM :
 
 ```yaml
   sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
-<div class="alert alert-warning">Changer le mode d'obfuscation peut modifier le texte SQL normalisé. Si vous avez des moniteurs basés sur le texte SQL dans les traces APM, vous devrez peut-être les mettre à jour.</div>
+<div class="alert alert-warning">La modification du mode d'obfuscation peut altérer le texte SQL normalisé. Si vous avez des monitors basés sur du texte SQL dans des traces APM, vous devrez peut-être les mettre à jour.</div>
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Mettez à jour vos dépendances d'application pour inclure [dd-trace-go v2][1]. {{% tracing-go-v2 %}}
+Mettez à jour les dépendances de votre application pour inclure [dd-trace-go v2][1]. {{% tracing-go-v2 %}}
 
 ```shell
 go get github.com/DataDog/dd-trace-go/v2 # 2.x
@@ -158,7 +164,7 @@ Activez la fonctionnalité de propagation de Database Monitoring via l'une des m
 - Variable d'environnement :
    `DD_DBM_PROPAGATION_MODE=full`
 
-- Utilisation du code lors de l'enregistrement du conducteur :
+- Utilisation du code lors de l'enregistrement du pilote :
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
@@ -208,11 +214,11 @@ func main() {
 
 {{% tab "Java" %}}
 
-Suivez les instructions d'instrumentation de [Java tracing][1] et installez la version `1.11.0` ou supérieure de l'Agent.
+Suivez les instructions d'instrumentation du [Java tracing][1] et installez la version `1.11.0`, ou supérieure, de l'Agent.
 
-Vous devez également activer `jdbc-datasource` l'[instrumentation][2].
+Vous devez également activer l'`jdbc-datasource` [instrumentation][2].
 
-Activez la fonctionnalité de propagation de la surveillance de la base de données en utilisant **une** des méthodes suivantes :
+Activez la fonctionnalité de propagation de la surveillance de base de données en utilisant **l'une** des méthodes suivantes :
 
 - Définissez la propriété système `dd.dbm.propagation.mode=full`
 - Définissez la variable d'environnement `DD_DBM_PROPAGATION_MODE=full`
@@ -244,17 +250,24 @@ public class Application {
 }
 ```
 
-**Versions du traceur 1.44 et supérieures** :
-Activez le traçage des instructions préparées pour Postgres en utilisant **une** des méthodes suivantes :
+**Oracle sans commentaires SQL (versions du traceur 1.67.0 et supérieures)** :
+Pour propager les informations de service vers Oracle sans modifier le texte de l'instruction SQL, définissez **les deux** éléments suivants :
+- `DD_DBM_PROPAGATION_MODE=dynamic_service` (ou la propriété système `dd.dbm.propagation.mode=dynamic_service`)
+- `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true` (ou la propriété système `dd.dbm.propagation.oracle.action-only.enabled=true`)
+
+Avec cette configuration, le traceur écrit le hash du service dans `V$SESSION.ACTION` au lieu d'injecter des commentaires SQL dans les instructions Oracle, y compris les instructions préparées. Les connexions aux autres bases de données continuent de recevoir des commentaires SQL.
+
+**Versions du traceur 1.44 et supérieures**:
+Activez le traçage des instructions préparées pour Postgres en utilisant **l'une** des méthodes suivantes:
 - Définissez la propriété système `dd.dbm.trace_prepared_statements=true`
 - Définissez la variable d'environnement `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
-**Remarque** : L'instrumentation des instructions préparées écrase la propriété `Application` avec le texte `_DD_overwritten_by_tracer`, et entraîne un aller-retour supplémentaire vers la base de données. Ce voyage supplémentaire a un impact minimal sur le temps d'exécution des instructions SQL.
+**Remarque**: L'instrumentation des instructions préparées écrase la propriété `Application` avec le texte `_DD_overwritten_by_tracer`, et provoque un aller-retour supplémentaire vers la base de données. Cet aller-retour supplémentaire a un impact minimal sur le temps d'exécution des instructions SQL.
 
-<div class="alert alert-danger">L'activation du traçage des instructions préparées peut entraîner une augmentation du maintien de connexion lors de l'utilisation d'Amazon RDS Proxy, ce qui réduit l'efficacité du pool de connexions. Pour plus d'informations, voir <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">Maintien de connexion sur RDS Proxy</a>.</div>
+<div class="alert alert-danger">L'activation du traçage des instructions préparées peut entraîner une augmentation du verrouillage de connexion lors de l'utilisation d'Amazon RDS Proxy, ce qui réduit l'efficacité du regroupement de connexions. Pour plus d'informations, consultez <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">Épinglage de connexion sur un proxy RDS</a>.</div>
 
-**Versions du traceur inférieures à 1.44** :
-Les instructions préparées ne sont pas prises en charge en mode `full` pour Postgres et MySQL, et tous les appels d'API JDBC qui utilisent des instructions préparées sont automatiquement rétrogradés en mode `service`. Étant donné que la plupart des bibliothèques SQL Java utilisent des instructions préparées par défaut, cela signifie que **la plupart** des applications Java ne peuvent utiliser que le mode `service`.
+**Versions du traceur inférieures à 1.44**:
+Les instructions préparées ne sont pas prises en charge en mode `full` pour Postgres et MySQL, et tous les appels d'API JDBC qui utilisent des instructions préparées sont automatiquement rétrogradés en mode `service`. Comme la plupart des bibliothèques SQL Java utilisent des instructions préparées par défaut, cela signifie que **la plupart** des applications Java ne peuvent utiliser que le mode `service`.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/java/
 [2]: /fr/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -263,7 +276,7 @@ Les instructions préparées ne sont pas prises en charge en mode `full` pour Po
 
 {{% tab "Ruby" %}}
 
-Dans votre Gemfile, installez ou mettez à jour [dd-trace-rb][1] vers la version `1.8.0` ou supérieure :
+Dans votre Gemfile, installez ou mettez à jour [dd-trace-rb][1] vers la version `1.8.0` ou supérieure:
 
 ```rb
 source 'https://rubygems.org'
@@ -278,7 +291,7 @@ Activez la fonctionnalité de propagation de Database Monitoring via l'une des m
 1. Variable d'environnement :
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Option `comment_propagation` (par défaut : `ENV['DD_DBM_PROPAGATION_MODE']`), pour [mysql2][2] ou [pg][3] :
+2. Option `comment_propagation` (par défaut : `ENV['DD_DBM_PROPAGATION_MODE']`), pour [mysql2][2] ou [pg][3]:
    ```rb
 	Datadog.configure do |c|
 		c.tracing.instrument :mysql2, comment_propagation: 'full'
@@ -330,7 +343,7 @@ Pour MongoDB, installez pymongo :
 pip install pymongo
 ```
 
-**Remarque** : Le support de MongoDB nécessite `dd-trace-py` >= 3.5.0. Si vous devez mettre à niveau : `pip install "ddtrace>=3.5.0"`.
+**Remarque**: La prise en charge de MongoDB nécessite `dd-trace-py` >= 3.5.0. Si vous devez effectuer une mise à niveau : `pip install "ddtrace>=3.5.0"`.
 
 Activez la fonctionnalité de propagation de Database Monitoring en définissant la variables d'environnement suivante :
    - `DD_DBM_PROPAGATION_MODE=full`
@@ -392,7 +405,7 @@ Assurez-vous d'utiliser une bibliothèque cliente prise en charge. Par exemple, 
 
 Activez la fonctionnalité de propagation de Database Monitoring en définissant la variables d'environnement suivante :
    - Pour Postgres et MySQL : `DD_DBM_PROPAGATION_MODE=full`
-   - Pour SQL Server : `DD_DBM_PROPAGATION_MODE=service` ou `DD_DBM_PROPAGATION_MODE=full` avec des traceurs Java et .NET
+   - Pour SQL Server : `DD_DBM_PROPAGATION_MODE=service` ou `DD_DBM_PROPAGATION_MODE=full` avec les traceurs Java et .NET
    - Pour Oracle : `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /fr/tracing/trace_collection/dd_libraries/dotnet-framework
@@ -419,7 +432,7 @@ Activez la fonctionnalité de propagation de Database Monitoring en définissant
 
 {{% tab "Node.js" %}}
 
-Installez ou mettez à jour [dd-trace-js][1] vers une version supérieure à `3.17.0` (ou `2.30.0` si vous utilisez la version 12 de Node.js en fin de vie) :
+Installez ou mettez à jour [dd-trace-js][1] vers une version supérieure à `3.17.0` (ou `2.30.0` si vous utilisez une version 12 de Node.js en fin de vie):
 
 ```shell
 npm install dd-trace@^3.17.0
@@ -433,17 +446,17 @@ const tracer = require('dd-trace').init();
 ```
 
 Activez la fonctionnalité de propagation de Database Monitoring via l'une des méthodes suivantes :
-* Définissez la variable d'environnement suivante :
+* Définissez la variable d'environnement suivante:
    ```
    DD_DBM_PROPAGATION_MODE=full
    ```
 
-* Définissez le SDK pour utiliser l'option `dbmPropagationMode` (par défaut : `ENV['DD_DBM_PROPAGATION_MODE']`) :
+* Configurez le SDK pour utiliser l'option `dbmPropagationMode` (par défaut : `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
 
-* Activez uniquement au niveau de l'intégration :
+* Activez uniquement au niveau de l'intégration:
    ```javascript
    const tracer = require('dd-trace').init();
    tracer.use('pg', {
@@ -485,51 +498,51 @@ Pour désactiver la propagation après l'avoir activée, définissez `DD_DBM_PRO
 ## Vérifiez l'intégration {#verify-the-integration}
 
 Pour confirmer que l'intégration fonctionne :
-1. Exécutez votre application instrumentée et exécutez une requête de base de données.
-1. Dans Datadog, allez à [**Surveillance de base de données > Échantillons de requêtes**][37].
+1. Exécutez votre application instrumentée et effectuez une requête de base de données.
+1. Dans Datadog, accédez à [**Database Monitoring > Query Samples**][37].
 1. Confirmez que le badge de corrélation **APM** apparaît sur l'échantillon de requête.
 
 ## Explorez la connexion APM dans DBM {#explore-the-apm-connection-in-dbm}
 
-### Attribuez les connexions actives de la base de données aux services APM appelants {#attribute-active-database-connections-to-the-calling-apm-services}
+### Attribuez les connexions actives à la base de données aux services APM appelants {#attribute-active-database-connections-to-the-calling-apm-services}
 
-{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="Affichez les connexions actives à une base de données, ventilées par le service APM dont elles proviennent.">}}
+{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="Affichez les connexions actives à une base de données ventilées par le service APM dont elles proviennent.">}}
 
-Décomposez les connexions actives pour un hôte donné par les services APM en amont qui effectuent les requêtes. Vous pouvez attribuer la charge sur une base de données à des services individuels pour comprendre quels services sont les plus actifs sur la base de données. Basculez vers la page du service en amont le plus actif pour poursuivre l'enquête.
+Ventilez les connexions actives pour un host donné par les services APM en amont effectuant les requêtes. Vous pouvez attribuer la charge sur une base de données à des services individuels pour comprendre quels services sont les plus actifs sur la base de données. Passez à la page du service en amont le plus actif pour poursuivre l'investigation.
 
-### Filtrez vos hôtes de base de données par les services APM qui les appellent {#filter-your-database-hosts-by-the-apm-services-that-call-them}
+### Filtrez vos hosts de base de données par les services APM qui les appellent {#filter-your-database-hosts-by-the-apm-services-that-call-them}
 
-{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filtrez vos hôtes de base de données par les services APM qui les appellent.">}}
+{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filtrez vos hosts de base de données par les services APM qui les appellent.">}}
 
-Filtrez la liste des bases de données pour n'afficher que les hôtes de base de données dont vos services APM spécifiques dépendent. Identifiez si l'une de vos dépendances en aval a une activité bloquante qui pourrait affecter la performance du service.
+Filtrez la liste des bases de données pour n'afficher que les hosts de base de données dont dépendent vos services APM spécifiques. Identifiez si l'une de vos dépendances en aval présente une activité bloquante susceptible d'affecter les performances du service.
 
 ### Affichez la trace associée pour un échantillon de requête {#view-the-associated-trace-for-a-query-sample}
 
-{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Prévisualisez la trace APM échantillonnée dont l'échantillon de requête inspecté a été généré.">}}
+{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Prévisualisez l'échantillon de trace APM à partir duquel l'échantillon de requête inspecté a été généré.">}}
 
-Lors de la visualisation d'un [échantillon de requête][37] dans la surveillance de base de données, si la trace associée a été échantillonnée par APM, vous pouvez voir l'échantillon DBM dans le contexte de la trace APM. Cela vous permet de combiner la télémétrie DBM, y compris le plan d'exécution et les performances historiques de la requête, avec la traçabilité du span au sein de votre infrastructure pour déterminer si un changement apporté à la base de données est responsable de la mauvaise performance de l'application.
+Lors de la consultation d'un [Query Sample][37] dans Database Monitoring, si la trace associée a été échantillonnée par APM, vous pouvez afficher l'échantillon DBM dans le contexte de la trace APM. Cela vous permet de combiner la télémétrie DBM, y compris le plan d'exécution et les performances historiques de la requête, avec la lignée du span au sein de votre infrastructure pour comprendre si un changement sur la base de données est responsable de mauvaises performances applicatives.
 
 ## Explorez la connexion DBM dans APM {#explore-the-dbm-connection-in-apm}
 
-### Visualisez les hôtes de base de données en aval des services APM {#visualize-the-downstream-database-hosts-of-apm-services}
+### Visualisez les hosts de base de données en aval des services APM {#visualize-the-downstream-database-hosts-of-apm-services}
 
-Sur la page APM d'un service donné, visualisez les dépendances directes de la base de données en aval du service telles qu'identifiées par la surveillance de base de données, et déterminez si des hôtes ont une charge disproportionnée qui pourrait être causée par des voisins bruyants. Pour visualiser les dépendances de base de données d'un service :
-1. Sélectionnez le service dans le [catalogue de logiciels][26] pour ouvrir un panneau de détails.
+Sur la page APM d'un service donné, affichez les dépendances directes de base de données en aval du service telles qu'identifiées par Database Monitoring, et déterminez si certains hosts ont une charge disproportionnée qui pourrait être causée par des voisins bruyants. Pour afficher les dépendances de base de données d'un service :
+1. Sélectionnez le service dans le [Catalog][26] pour ouvrir un panneau de détails.
 1. Sélectionnez {{< ui >}}Service Page{{< /ui >}} dans le panneau.
-1. Sur la page de service, sélectionnez la section {{< ui >}}Databases{{< /ui >}}.
-1. Dans la section Bases de données, sélectionnez l'onglet {{< ui >}}Databases{{< /ui >}}.
+1. Sur la page Service, sélectionnez la section {{< ui >}}Databases{{< /ui >}}.
+1. Dans la section Databases, sélectionnez l'onglet {{< ui >}}Databases{{< /ui >}}.
 
-### Visualisez les durées des spans et consultez les détails des requêtes {#visualize-span-durations-and-view-query-details}
+### Visualisez les durées des spans et affichez les détails des requêtes {#visualize-span-durations-and-view-query-details}
 
-Sélectionnez l'onglet {{< ui >}}Queries{{< /ui >}} dans la section {{< ui >}}Databases{{< /ui >}} de la page de service APM pour voir les anomalies de latence et une liste complète des requêtes de l'intervalle de temps sélectionné. Sélectionnez une requête dans le tableau pour afficher le panneau de requête et accéder aux diagnostics, aux détails des erreurs et aux informations de trace.
+Sélectionnez l'onglet {{< ui >}}Queries{{< /ui >}} dans la section {{< ui >}}Databases{{< /ui >}} sur la page de service APM pour afficher les valeurs aberrantes de latence et une liste complète des requêtes de l'intervalle de temps sélectionné. Sélectionnez une requête dans le tableau pour afficher le panneau de requête et accéder aux diagnostics, aux détails des erreurs et aux informations de trace.
 
-### Identifiez les optimisations potentielles en utilisant les plans d'exécution pour les requêtes de base de données dans les traces {#identify-potential-optimizations-using-explain-plans-for-database-queries-in-traces}
+### Identifiez les optimisations potentielles à l'aide des plans d'exécution pour les requêtes de base de données dans les traces {#identify-potential-optimizations-using-explain-plans-for-database-queries-in-traces}
 
-{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="Identifiez les inefficacités en utilisant les plans d'exécution pour les requêtes de base de données dans les traces.">}}
+{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="Identifiez les inefficacités à l'aide des plans d'exécution pour les requêtes de base de données dans les traces.">}}
 
-Consultez les performances historiques de requêtes similaires à celles exécutées dans votre trace, y compris les événements d'attente échantillonnés, la latence moyenne et les plans d'exécution récemment capturés, pour contextualiser la performance attendue d'une requête. Déterminez si le comportement est anormal et poursuivez l'enquête en passant à [Surveillance de la base de données][1] pour obtenir un contexte supplémentaire sur les hôtes de base de données sous-jacents.
+Affichez les performances historiques de requêtes similaires à celles exécutées dans votre trace, y compris les événements d'attente échantillonnés, la latence moyenne et les plans d'exécution récemment capturés, afin de contextualiser les performances attendues d'une requête. Déterminez si le comportement est anormal et poursuivez l'investigation en basculant vers [Database Monitoring][1] pour obtenir un contexte supplémentaire sur les hosts de base de données sous-jacents.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

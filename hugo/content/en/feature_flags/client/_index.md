@@ -34,9 +34,13 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
   {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
 
+The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscation][2] for precomputed assignments in version `2.1.0` or later. No additional provider configuration is required.
+
 ## Telemetry options by platform
 
 The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
+
+The web options below apply to `DatadogProvider`, the recommended browser provider. The advanced `DatadogCoreProvider` does not enable telemetry automatically. Applications using it explicitly register tracking hooks and manage their life cycle. See [Browser Rules-Based Evaluation][1].
 
 <div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift">dd-openfeature-provider-swift</a>) is available for use as a pre-1.0 package. Until it reaches 1.0, version updates may include breaking changes. For the most stable iOS API surface, use the <code>FlagsClient</code> API directly.</div>
 
@@ -126,3 +130,6 @@ const evaluationContext = {
 For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[2]: /feature_flags/concepts/flag_key_obfuscation/

@@ -56,7 +56,7 @@ When defining a notification rule's recipients, you can use `@` handles for any 
 | **Mobile devices**     | *(Selected from UI)*           | Select the user's name with **(Mobile Push Notification)**. The user must have notifications enabled in the [Datadog mobile app][3] for this option to appear.                                                                                                      |
 | **Slack channels**     | `@slack-<channel>`<br>`@incident-slack-channel`            | Use a `@slack-` handle. To notify the incident Slack channel, use `@incident-slack-channel`.                                                                                                                                                |
 | **On-Call Teams**      | `@oncall-<team>`               | Use a `@oncall-` handle to page a [Datadog on-call team][7].                                                                                                                                                                                            |
-| **Microsoft Teams**    | `@teams-<channel>`             | Use a `@teams-` handle to notify a Microsoft Teams channel.                                                                                                                                                                                 |
+| **Microsoft Teams**    | `@teams-<channel>`             | Use a `@teams-` handle to notify a Microsoft Teams channel. There is no Microsoft Teams equivalent of `@incident-slack-channel`, so a `@teams-` handle cannot target an incident's automatically created channel. See [Microsoft Teams notification targets][8].                                                                                                                                                                                 |
 | **Webhooks**           | `@webhook-<name>`              | Use a `@webhook-` handle to trigger a [webhook][6]. You must define the webhook with an **incident** payload type.                                                                                                                          |
 | **Workflows**          | `@workflows-<workflow_name>`   | Use a `@workflows-` handle to trigger a [Datadog Workflow][5]. You must publish the workflow with an **incident** trigger type.                                                                                                             |
 
@@ -72,3 +72,4 @@ When defining a notification rule's recipients, you can use `@` handles for any 
 [5]: /actions/workflows/
 [6]: /integrations/webhooks/
 [7]: /incident_response/on-call/
+[8]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#notification-targets

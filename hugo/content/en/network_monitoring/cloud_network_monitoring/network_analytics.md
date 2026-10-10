@@ -70,6 +70,8 @@ To run a recommended query, click on the tile. Hovering over the tile displays a
 
 {{< img src="network_performance_monitoring/network_analytics/recommended_query_detail.png" alt="The detail view of a recommended query displaying a description and query information, with four query dimensions displayed: Search for, View clients as, View servers as, and Visualize as" style="width:70%;">}}
 
+You can also query network traffic data from an AI agent with the [`analyze_cloud_network_monitoring`][18] tool in the Datadog MCP Server.
+
 ### Facet panels
 
 Use the facet panels to browse all available tags on your flows or filter traffic without needing to remember exact tag names. Facet panels mirror the tags in your search bar query. Use the {{< ui >}}Client{{< /ui >}} and {{< ui >}}Server{{< /ui >}} tabs to switch between facet panels.
@@ -378,4 +380,5 @@ network:
 [15]: /network_monitoring/cloud_network_monitoring/tags_reference/#neutral-tags
 [16]: /network_monitoring/cloud_network_monitoring/tags_reference/
 [17]: /tracing/
+[18]: /mcp_server/tools/#analyze_cloud_network_monitoring
 

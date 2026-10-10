@@ -507,10 +507,12 @@ The Angular provider uses the Datadog browser provider, which also supports thes
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
-| `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
+| `initialFlagsConfiguration` | unset | Supply context-matching precomputed data as a fallback if fetching fails. See [Initial precomputed fallback data][3]. |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+
+`DatadogProvider` remains the recommended browser provider for Angular applications. For application-owned configuration delivery or local rules evaluation across context changes, see [Browser Rules-Based Evaluation][4]. This advanced setup requires explicit configuration refresh and tracking life cycle management.
 
 ## Testing
 
@@ -561,3 +563,5 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Re
 
 [1]: https://openfeature.dev/docs/reference/sdks/client/web/angular/
 [2]: /account_management/api-app-keys/#client-tokens
+[3]: /feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
+[4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
