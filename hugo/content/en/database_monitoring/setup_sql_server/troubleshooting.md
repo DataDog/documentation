@@ -180,7 +180,7 @@ At the moment, the only character known to cause this specific connectivity issu
 
 ### Data source name not found, and no default driver specified {#data-source-name-not-found}
 
-This is a common error seen on Linux when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
+This is a common error seen on Linux when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the Agent's `odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
 
 For example, if you wanted to use the default ODBC driver for the Agent (`{ODBC Driver 18 for SQL Server}`), your instance config should contain the following:
 
@@ -188,12 +188,12 @@ For example, if you wanted to use the default ODBC driver for the Agent (`{ODBC 
   connector: odbc
 ```
 
-When the Agent starts and tries to establish a connection to your SQL Server instance, it looks for the `/etc/odbcinst.ini` file to find the path to the driver binaries.
+When the Agent starts and tries to establish a connection to your SQL Server instance, it reads `odbcinst.ini` from `embedded/etc` inside the Agent install directory (`/opt/datadog-agent` for package installs, or `/opt/datadog-packages/datadog-agent/stable` for Fleet Automation installs) to find the path to the driver binaries. If the `ODBCSYSINI` environment variable is set, the Agent reads `odbcinst.ini` from that directory instead.
 
-For example, this `/etc/odbcinst.ini` file sets the driver:
+For example, this `odbcinst.ini` file sets the driver:
 
     ```text
-    $ cat /etc/odbcinst.ini
+    $ cat /opt/datadog-agent/embedded/etc/odbcinst.ini
     [ODBC Driver 18 for SQL Server]
     Description=Microsoft ODBC Driver 18 for SQL Server
     Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
@@ -202,10 +202,10 @@ For example, this `/etc/odbcinst.ini` file sets the driver:
 
 The DSN in the above example is `[ODBC Driver 18 for SQL Server]`, which matches the default driver name the Agent is using. If the DSN for your driver does not match the name of driver the Agent is using, you will get the `Data source not found` error.
 
-It is possible to set the `dsn` in your instance config to match what is set in your `/etc/odbcinst.ini` file. For example:
+It is possible to set the `dsn` in your instance config to match what is set in the Agent's `odbcinst.ini` file. For example:
 
     ```text
-    $ cat /etc/odbcinst.ini
+    $ cat /opt/datadog-agent/embedded/etc/odbcinst.ini
     [Custom]
     Description=Microsoft ODBC Driver 18 for SQL Server
     Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
@@ -252,7 +252,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
     Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
     UsageCount=1
     ```
-2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+2. Add your driver's section from `/etc/odbcinst.ini` to `embedded/etc/odbcinst.ini` inside the Agent install directory: `/opt/datadog-agent` for package installs, or `/opt/datadog-packages/datadog-agent/stable` for Fleet Automation installs. Starting with Agent 7.NN, this file already registers the bundled drivers, so add to it instead of replacing it. If you use DSNs, copy `odbc.ini` into the same directory.
 3. If needed, install the pyodbc module. This can be done by running pip install pyodbc within your Agent's python environment. For example:
 
     ```shell
