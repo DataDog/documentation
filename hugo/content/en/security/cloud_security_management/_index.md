@@ -65,7 +65,7 @@ cascade:
   Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
-Datadog Cloud Security delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
+Datadog Cloud Security helps you assess cloud configuration, identity risk, and vulnerabilities across your cloud infrastructure. For real-time threat detection in running workloads, use [Workload Protection][24].
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
@@ -73,11 +73,21 @@ Security and DevOps teams can act on the shared context of observability and sec
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
+Cloud Security includes the following capabilities:
 
 - [{{< ui >}}Misconfigurations{{< /ui >}}][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [{{< ui >}}Identity Risks{{< /ui >}}][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [{{< ui >}}Vulnerabilities{{< /ui >}}][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
+
+## How Datadog collects Cloud Security data
+
+Datadog uses three collection families. You can combine them to cover different assets and security outcomes:
+
+- **Unified Datadog Agent**: Host Agent, Cluster Agent, and serverless Agent deployments collect host and runtime context.
+- **Agentless**: Cloud integrations assess cloud configuration and identities. Agentless Scanning finds vulnerabilities in supported AWS, Azure, and GCP assets without an Agent on every resource.
+- **Repository and CI/CD integrations**: Scan container images before deployment and connect findings to source code.
+
+See [Cloud Security Coverage and Collection Methods][25] for the supported assets, prerequisites, and exclusions for each collection family.
 
 Cloud Security also includes access to Datadog Security features, including:
 - [Detection Rules][18]
@@ -169,3 +179,5 @@ To get started with Cloud Security, navigate to the [{{< ui >}}Cloud Security Se
 [21]: https://app.datadoghq.com/security/map
 [22]: /datadog_cloudcraft/overlays/#security
 [23]: /dashboards/
+[24]: /security/workload_protection/
+[25]: /security/cloud_security_management/setup/supported_deployment_types/

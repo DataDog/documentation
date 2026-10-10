@@ -17,7 +17,7 @@ aliases:
 further_reading:
     - link: "/security/cloud_security_management/setup/supported_deployment_types"
       tag: "Documentation"
-      text: "Supported Deployment Types"
+      text: "Cloud Security Coverage and Collection Methods"
     - link: "/security/guide/aws_fargate_config_guide"
       tag: "Documentation"
       text: "AWS Fargate Configuration Guide for Datadog Security"
@@ -30,14 +30,24 @@ further_reading:
 
 To get started with Cloud Security, review the following:
 
-- [Enable Agentless Scanning](#enable-agentless-scanning)
-- [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
-- [Enable additional features](#enable-additional-features)
-  - [Container Image Scanning in CI/CD](#container-image-scanning-in-cicd)
-  - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
-  - [Deploy using cloud integrations](#deploy-using-cloud-integrations)
+- [Choose a coverage and collection method](#choose-a-coverage-and-collection-method)
+- [Enable Agentless Scanning](#enable-agentless-scanning) for supported vulnerability discovery without an Agent on every resource
+- [Deploy the Unified Datadog Agent](#deploy-the-agent-for-deeper-context) for host and runtime context
+- [Deploy using cloud integrations](#deploy-using-cloud-integrations) for cloud configuration and identity assessment
+- [Scan container images in CI/CD](#container-image-scanning-in-cicd) before deployment
+- [Enable AWS CloudTrail Logs](#aws-cloudtrail-logs) for additional Identity Risks context
 - [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
+
+## Choose a coverage and collection method
+
+Cloud Security has three collection families. You can use more than one:
+
+- **Unified Datadog Agent** collects host and runtime context. This includes Host Agent, Cluster Agent, and serverless Agent deployments.
+- **Agentless** includes cloud integrations for cloud configuration and identity assessment, and Agentless Scanning for supported vulnerability discovery in AWS, Azure, and GCP.
+- **Repository and CI/CD integrations** scan container images before deployment and connect findings to source code.
+
+For a capability-by-asset overview, prerequisites, and exclusions, see [Cloud Security Coverage and Collection Methods][10].
 
 ## Enable Agentless Scanning
 
@@ -45,13 +55,13 @@ To get started with Cloud Security, review the following:
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
+For vulnerability discovery across supported AWS, Azure, and GCP assets, start by [enabling Agentless Scanning][1]. It does not require the Datadog Agent on each scanned resource, but coverage depends on the provider, asset type, and platform. It is not a replacement for cloud integrations, CI/CD image scanning, or runtime threat detection.
 
 To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
 ## Deploy the Agent for deeper context
 
-Agentless Scanning covers your entire cloud infrastructure, but deploying the Datadog Agent on critical hosts adds deeper security context such as runtime vulnerability prioritization, real-time updates, and host benchmarks. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security on the Agent][3].
+Deploy the Unified Datadog Agent on critical hosts and workloads when you need deeper security context, real-time vulnerability updates, host benchmarks, or runtime threat detection. The following table compares the context available through Agentless Scanning and an Agent-based deployment. For more information, see [Setting up Cloud Security on the Agent][3].
 
 <table>
   <thead>
@@ -138,3 +148,4 @@ For information on disabling Cloud Security, see the following:
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /security/cloud_security_management/setup/ci_cd
+[10]: /security/cloud_security_management/setup/supported_deployment_types
