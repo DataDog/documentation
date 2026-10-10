@@ -82,6 +82,8 @@ Logs Storage is supported for the following providers:
 - [GitHub Actions][3]
 - [GitLab][4]
 - [Jenkins][5]
+- [TeamCity][14]
+- [Other CI providers][15]
 
 ### Logs Analysis based on relevant logs
 
@@ -105,3 +107,5 @@ Use [Logs Analysis][12] to identify the most common root causes of failure for y
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
 [12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [13]: /continuous_integration/pipelines/buildkite/#logs-storage
+[14]: /continuous_integration/pipelines/teamcity/#collect-job-logs
+[15]: /continuous_integration/pipelines/custom/#collect-job-logs
