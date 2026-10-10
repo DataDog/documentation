@@ -59,7 +59,7 @@ Bits Chat uses your Datadog role to fetch data, so it can only access the resour
 
 Bits Chat saves your conversations. To see past chats, open {{< ui >}}History{{< /ui >}} in [Bits Chat][2], or click {{< img src="bits_ai/icons/clock_historical.svg" inline="true" style="width:16px;" alt="History icon" >}} in the Bits Chat panel.
 
-## Manage and share chats
+### Manage and share chats
 
 Click {{< ui >}}...{{< /ui >}} next to a chat in {{< ui >}}History{{< /ui >}}, or in an open chat's header, to {{< ui >}}Rename{{< /ui >}}, {{< ui >}}Share{{< /ui >}}, or {{< ui >}}Delete{{< /ui >}} it. Deleting a chat cannot be undone.
 
