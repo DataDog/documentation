@@ -32,9 +32,11 @@ aliases:
 
 ## Overview
 
-{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Chat interface with suggested tasks" style="width:100%;">}}
+Bits Chat helps you search and act across Datadog using natural language. Ask it to investigate an incident, explore your telemetry, build a dashboard, or query your data with DDSQL, and it answers in a conversational chat instead of sending you to build the query yourself.
 
-Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack.
+Bits Chat is available in the Datadog web application, the mobile app, and Slack. See [Use Bits Chat][1] to open it from each surface.
+
+{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Chat interface with suggested tasks" style="width:100%;">}}
 
 Ask Bits Chat questions like:
 - `Why is the error rate spiking on the web-store service?`
@@ -49,7 +51,7 @@ Ask Bits Chat questions like:
 
 To use Bits Chat, your role must have the **Bits Chat Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
 
-To manage this permission for custom roles, you can [update the role][1] to enable **Bits Chat Access**. 
+To manage this permission for custom roles, you can [update the role][2] to enable **Bits Chat Access**. 
 
 ### Data access through Bits Chat
 
@@ -57,7 +59,7 @@ Bits Chat uses your Datadog role to fetch data, so it can only access the resour
 
 ## Chat History
 
-Bits Chat saves your conversations. To see past chats, open {{< ui >}}History{{< /ui >}} in [Bits Chat][2], or click {{< img src="bits_ai/icons/clock_historical.svg" inline="true" style="width:16px;" alt="History icon" >}} in the Bits Chat panel.
+Bits Chat saves your conversations. To see past chats, open {{< ui >}}History{{< /ui >}} in [Bits Chat][3], or click {{< img src="bits_ai/icons/clock_historical.svg" inline="true" style="width:16px;" alt="History icon" >}} in the Bits Chat panel.
 
 ### Manage and share chats
 
@@ -71,7 +73,7 @@ Shared links expire automatically (see the expiration date in the {{< ui >}}Shar
 
 ## Reports
 
-The Bits Chat Reports page provides visibility into how your organization uses Bits Chat. Go to [**Bits AI** > **Chat** > **Reports**][3] to view:
+The Bits Chat Reports page provides visibility into how your organization uses Bits Chat. Go to [**Bits AI** > **Chat** > **Reports**][4] to view:
 
 - **Top users**: See which team members use Bits Chat the most, ranked by conversation count.
 - **Usage trends**: Track conversation volume over time to understand adoption and identify usage patterns.
@@ -82,6 +84,7 @@ Use these insights to understand adoption patterns, identify power users for bes
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/?tab=datadogapplication#update-a-role
-[2]: https://app.datadoghq.com/ask
-[3]: https://app.datadoghq.com/ask/usage
+[1]: /bits_ai/bits_chat/usage/
+[2]: /account_management/rbac/?tab=datadogapplication#update-a-role
+[3]: https://app.datadoghq.com/ask
+[4]: https://app.datadoghq.com/ask/usage
