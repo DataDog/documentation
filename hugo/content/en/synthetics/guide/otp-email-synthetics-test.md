@@ -27,7 +27,9 @@ products:
 
 ## Overview
 
-Synthetic Browser Tests are to used monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time passcode (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
+Synthetic Browser Tests are used to monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time passcode (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
+
+For sign-up flows, use a temporary email address generated for each run. For login with an existing user, use a [persistent email global variable][12]. Create the application account once and reuse its address across runs. Each run still requests and extracts a new OTP.
 
 This guide walks you through how to configure the OTP extraction for a Synthetic Browser Test.
 
@@ -35,13 +37,17 @@ This guide walks you through how to configure the OTP extraction for a Synthetic
 
 ### Step 1 - Create an email variable
 
-Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetic Monitoring email address][7] for the Synthetic test run.
+Add an email variable to the [browser test][3]. Choose its type based on whether the test creates an account or logs in to an existing account:
 
 1. On a new or existing Browser Test, under {{< ui >}}Variables{{< /ui >}} click {{< ui >}}Add Variable{{< /ui >}}.
-2. Next, select {{< ui >}}Email Address{{< /ui >}} from the dropdown menu.
-3. Name the variable and click {{< ui >}}Create{{< /ui >}}.
+2. Select {{< ui >}}Email Address{{< /ui >}} from the dropdown menu.
+3. Choose the email type for your workflow:
+   - For a sign-up test, select {{< ui >}}Temporary{{< /ui >}}. Name the variable and click {{< ui >}}Create{{< /ui >}}.
+   - For a login test, [create a persistent email global variable and register its application account][12]. Select {{< ui >}}Persistent{{< /ui >}}, choose that variable, and click {{< ui >}}Done{{< /ui >}}.
 
-   {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a unqiue email variable" style="width:80%;" >}}
+   The following images show a temporary email variable:
+
+   {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a temporary email variable" style="width:80%;" >}}
 
    This adds the email variable to the {{< ui >}}Variables{{< /ui >}} section in the UI:
 
@@ -81,6 +87,10 @@ The following are example regex patterns to parse the OTP token from the email b
 | Alphanumerical OTP                 | a1b2cd34                                     | `/[a-zA-Z0-9]{8,8}/`                       |
 
 The OTP will be stored in the variable for use in your Browser Test.
+
+Extraction uses the first value that matches the configured pattern and fails if no email yields a match.
+
+<div class="alert alert-warning">Tests using the same persistent address share an inbox. Broad patterns can extract another parallel test's OTP and cause login failures. Use temporary email addresses or different persistent addresses to isolate tests. See <a href="/synthetics/guide/persistent-email-otp/#limitations">Persistent email limitations</a>.</div>
 
 ### Step 4 - Use a JavaScript assertion to insert the OTP
 
@@ -127,7 +137,7 @@ Below is a visual example of an OTP setup with separately defined fields that th
 
 ## Next steps
 
-Once the OTP is inserted and verified, you can continue adding steps to your Browser Test to verify that the user has completed the sign-up flow of your application such as adding an [assertion][6] that specific text is present on the page.
+After the OTP is inserted and verified, add steps to confirm that the user completed sign-up or login. For example, [assert][6] that specific text is present on the page. With a persistent address, retain the application account for later runs and continue testing the journeys available after login.
 From here, you can continue [recording the rest of your Browser Test][9] and then verify your [Browser Test results][10].
 
 ## Further Reading
@@ -145,3 +155,4 @@ From here, you can continue [recording the rest of your Browser Test][9] and the
 [9]: /synthetics/browser_tests/test_steps?tab=testanelementontheactivepage
 [10]: /synthetics/browser_tests/test_results
 [11]: /synthetics/browser_tests/test_steps?tab=testanelementontheactivepage#automatically-recorded-steps
+[12]: /synthetics/guide/persistent-email-otp/

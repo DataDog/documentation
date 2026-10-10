@@ -19,18 +19,27 @@ Maintaining a great user experience on your website includes ensuring that your 
 
 ## Create an email variable
 
-To add an email variable called `EMAIL`:
+Choose the email address type for your workflow:
 
-1. Click {{< ui >}}Variables{{< /ui >}} and select {{< ui >}}Email{{< /ui >}} from the dropdown menu. 
-2. Click {{< ui >}}Add Variable{{< /ui >}} to make the variable available for you to use when you start recording. 
+- **Temporary** creates a unique mailbox for each test execution to avoid email conflicts between test runs. Use it for sign-up flows that register a different account each run.
+- **Persistent** reuses the same Datadog-managed address across executions. Create an account once and reuse it for login, password reset, and other emails sent to an existing user. Parallel tests sharing the inbox can interfere with each other; see [Concurrent executions][2]. Follow [Use persistent email addresses in browser tests][1] to create the email global variable and register the account.
 
-{{< img src="synthetics/guide/email-validation/adding-variable-email.mp4" alt="Create an email variable" video="true" width="100%">}}
+To add a temporary email variable called `EMAIL`:
 
-The email variable generates a unique mailbox maintained by Datadog at every test execution, which enables your browser tests to run without conflicts.
+1. Under {{< ui >}}Variables{{< /ui >}}, add a variable and select {{< ui >}}Email Address{{< /ui >}}.
+2. Select {{< ui >}}Temporary{{< /ui >}}, enter `EMAIL`, and add the variable.
+
+To reuse a persistent address, select {{< ui >}}Persistent{{< /ui >}}, choose the email global variable, and click {{< ui >}}Done{{< /ui >}}. A test can use one email address variable.
+
+The following video shows how to select a persistent email variable and insert its address into an email field in the browser recorder.
+
+{{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable and insert its address into an email field" video="true" width="100%" >}}
+
+The following sign-up example uses a temporary address. The same email assertion and navigation steps also work with a persistent address. Persistent addresses share a mailbox across runs, so [plan for concurrent executions][2] when reusing an account.
 
 ## Record steps
 
-Once you have created an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger.
+After you have added an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger. Trigger a new email during each run, including when using a persistent address.
 
 Click {{< ui >}}Start Recording{{< /ui >}} and record all of the steps leading up to the email being triggered with your email variable. Click the hand icon in a variable to inject its value into the text input of a form or field.
 
@@ -66,3 +75,5 @@ As the final step to your browser test, create an assertion to confirm that the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /synthetics/guide/persistent-email-otp/
+[2]: /synthetics/guide/persistent-email-otp/#concurrent-executions
