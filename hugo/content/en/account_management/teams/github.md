@@ -8,6 +8,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
       tag: Blog
       text: Keep service ownership up to date with Datadog Teams' GitHub integration
+    - link: '/account_management/teams/servicenow/'
+      tag: 'Documentation'
+      text: 'Provision Datadog Teams with ServiceNow'
 ---
 
 ## Overview

@@ -79,6 +79,17 @@ In some cases, a team's membership cannot be directly modified within Datadog by
 
 A team that is managed externally from an identity provider displays a **Managed** badge in its header.
 
+#### Teams connected to more than one source
+
+A team can be connected to more than one source. How much control each source has depends on the source:
+
+- **Managing sources (SCIM, and SAML in SAML-only mode)**: A team is managed when SCIM provisions it or when your organization uses SAML-only provisioning. The source controls the team's name, handle, and membership. You cannot change them through Datadog or another source. Other sources can stay connected, for example to route incidents from [ServiceNow][12].
+- **Syncing sources ([GitHub][9], [ServiceNow][12], and SAML when it is not your only provisioning source)**: These sources sync a team without taking exclusive control. They set the team's name, handle, and membership. You can still connect other sources to the team, and change it from the Datadog UI, the [Teams API][10], or the [Terraform provider][11]. If more than one source syncs members to the same team, Datadog combines the members from each source.
+
+SCIM can start managing a team that already syncs from GitHub or ServiceNow. The team stays connected to that source, but SCIM controls its name, handle, and membership.
+
+GitHub and ServiceNow update a team's name only if no managing source controls the team. The source must also have created the team with {{< ui >}}Import, create, and link teams{{< /ui >}}. They never change a team handle after the team is created.
+
 
 ## Team hierarchies
 
@@ -102,15 +113,21 @@ With hierarchies defined, you can:
 
 ### Set up team hierarchies
 
-You can define hierarchical relationships between teams in four ways:
+You can define hierarchical relationships between teams in five ways:
 
 - **GitHub Teams**: If you used [GitHub][9] to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
+- **ServiceNow assignment groups**: If you used [ServiceNow][12] to set up your Datadog Teams and your assignment groups have parent groups, those links sync to Datadog automatically during provisioning and appear in your Teams map.
 - **Teams API**: See [Create a team hierarchy link][5].
 - **Terraform**: Use the [`datadog_team_hierarchy_links`][8] resource.
 - **Datadog UI**: Define relationships directly on a team's page:
    1. On the [team directory page][1], click the team you want to add a subteam or parent team relationship to.
    1. In the {{< ui >}}Info{{< /ui >}} tab of the team page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Hierarchy{{< /ui >}} section.
    1. Select the parent or child teams associated with the team, then click {{< ui >}}Save{{< /ui >}}.
+
+## Limits
+
+- An organization can have up to 5,000 teams.
+- A team hierarchy can be up to 10 levels deep.
 
 ## Manage teams through an identity provider
 
@@ -145,3 +162,6 @@ To enforce a strict membership model, configure your default team settings so {{
 [7]: https://app.datadoghq.com/software?selectedComponent=team
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_hierarchy_links
 [9]: /account_management/teams/github/
+[10]: /api/latest/teams/
+[11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team
+[12]: /account_management/teams/servicenow/
