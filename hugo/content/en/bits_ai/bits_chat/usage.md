@@ -1,5 +1,5 @@
 ---
-title: Access Bits Chat
+title: Use Bits Chat
 description: "Open Bits Chat from the Datadog web application, mobile app, or Slack."
 further_reading:
 - link: "/bits_ai/bits_chat/"
@@ -10,35 +10,22 @@ further_reading:
   text: "Code channels with Bits Code"
 ---
 
-## Permissions
-
-### Access to Bits Chat
-
-To use Bits Chat, your role must have the **Bits Chat Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
-
-To manage this permission for custom roles, go to **Organization Settings** > **Roles**, select a role, and toggle **Bits Chat Access** under **General Permissions**.
-
-### Data access through Bits Chat
-
-Bits Chat uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, Bits Chat can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, Bits Chat cannot edit that dashboard on your behalf.
+Bits Chat has context on Datadog public documentation, telemetry, and ownership. Use Bits Chat to ask questions about your system or active incident. Bits Chat is available in the Datadog web application, the mobile app, and Slack.
 
 ## Web application
 There are multiple ways to open Bits Chat in the Datadog web application:
-- Go to [Bits Chat][1].
+- Go directly to [Bits Chat][1].
 - In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}.
-- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon).
+- In a Datadog product integrated with Bits Chat, click the AI trigger button (for example, {{< ui >}}Ask Bits{{< /ui >}}) or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px" alt="">}} (the twinkling stars icon).
 - Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
-- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}.
-
-{{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat panel open alongside the Dashboards list" style="width:40%;">}}
+- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}, then select {{< ui >}}Bits Chat{{< /ui >}}.
 
 ## Mobile application
 
-Ask Bits questions about your system or active incident. Bits has context on Datadog public documentation, telemetry, and ownership.
+Ask Bits questions about your system or active incident from the [Mobile App][2]. 
 
-1. [Download the mobile app and log in][2].
-2. On the home screen, tap {{< ui >}}Bits Chat{{< /ui >}}.
-3. Start chatting with Bits Chat by voice or text.
+1. On the home screen, tap {{< ui >}}Bits Chat{{< /ui >}}.
+1. Start chatting with Bits Chat by voice or text.
 {{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ## Slack
