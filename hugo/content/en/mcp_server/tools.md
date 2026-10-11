@@ -267,7 +267,7 @@ Retrieves an agent by ID, including its system prompt, action tools, MCP servers
 ### `list_datadog_bits_agent_models`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Read` or `Bits Agent Builder Write`*\
-Lists supported model identifiers, the default model, and whether each model supports loading tool definitions on demand. Use these identifiers when creating or updating an agent. Omitting `ai_model` uses the default model on creation and preserves the current model on update.
+Lists supported model identifiers, the default model, and whether each model supports loading tool definitions on demand. Use these identifiers when creating or updating an agent.
 
 - Which models are available for a Bits agent?
 - Show the default model and models that support tool search.
