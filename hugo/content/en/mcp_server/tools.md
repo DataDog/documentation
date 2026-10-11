@@ -275,7 +275,7 @@ Lists supported model identifiers, the default model, and whether each model sup
 ### `create_datadog_bits_agent`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Write`*\
-Creates a persistent custom AI agent from a name and system prompt. Optionally, provide a description, model, action tools, and a `code-sandbox` MCP server. The `datadog` MCP server is attached automatically with full tool access. Resolve action identifiers and input schemas with `search_datadog_workflow_actions` and `get_datadog_workflow_action` before adding action tools.
+Creates a persistent custom AI agent from a name and system prompt. Optionally, provide a description, model, action tools, and a `code-sandbox` MCP server. The `datadog` MCP server is attached automatically with full tool access. Look up action identifiers and input schemas with `search_datadog_workflow_actions` and `get_datadog_workflow_action` before adding action tools.
 
 - Create an agent that investigates checkout service errors using logs, metrics, and traces.
 - Create an agent that summarizes service health and can send its findings to a Slack channel.
