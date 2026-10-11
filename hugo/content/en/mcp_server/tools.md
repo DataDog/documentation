@@ -240,7 +240,7 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
-## Agent builder
+## Agent Builder
 
 Tools for [Bits Agent Builder][87], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, and running agents and inspecting their conversations.
 
