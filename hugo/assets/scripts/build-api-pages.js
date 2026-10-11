@@ -316,7 +316,7 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@]/g});
+const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@/]/g});
 
 
 /**
@@ -1113,7 +1113,7 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, getInitialRequiredData(data), 0, '', skipAnyKeys) : emptyRow}</div>`;
 };
 
 /**

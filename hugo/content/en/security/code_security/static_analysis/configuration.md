@@ -67,7 +67,7 @@ sast:
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, `v1.2`, `v1.3`, or `v1.4`), followed by a `sast` key containing the analysis configuration. Use `v1.4` for all new configurations. The configuration is structured as shown below:
+The configuration file must begin with a `schema-version` key, followed by a `sast` key containing the analysis configuration. The configuration is structured as shown below:
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
@@ -125,37 +125,37 @@ sast:
     max-file-size-kb: 200
 {{< /code-block >}}
 
-The `sast` key supports the following fields:
+The `sast` key was introduced in `schema-version: v1.0` and supports the following fields:
 
-| **Property** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `use-default-rulesets` | Boolean | Whether to enable Datadog default rulesets. | `true` |
-| `use-rulesets` | Array | A list of ruleset names to enable. | None |
-| `ignore-rulesets` | Array | A list of ruleset names to disable. Takes precedence over `use-rulesets` and `use-default-rulesets`. | None |
-| `ruleset-configs` | Object | A map from ruleset name to its configuration. | None |
-| `global-config` | Object | Global settings for the repository. | None |
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `use-default-rulesets` | Boolean | Whether to enable Datadog default rulesets. | `true` | `v1.0` |
+| `use-rulesets` | Array | A list of ruleset names to enable. | None | `v1.0` |
+| `ignore-rulesets` | Array | A list of ruleset names to disable. Takes precedence over `use-rulesets` and `use-default-rulesets`. | None | `v1.0` |
+| `ruleset-configs` | Object | A map from ruleset name to its configuration. | None | `v1.0` |
+| `global-config` | Object | Global settings for the repository. | None | `v1.0` |
 
 ## Ruleset configuration
 
 Each entry in the `ruleset-configs` map configures a specific ruleset. A ruleset does not need to be listed in `use-rulesets` for its configuration to apply; the configuration is used whenever the ruleset is enabled, including through `use-default-rulesets`.
 
-| **Property** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. Only files matching these patterns are processed for this ruleset. | None |
-| `ignore-paths` | Array | File paths or glob patterns to exclude from analysis for this ruleset. | None |
-| `rule-configs` | Object | A map from rule name to its configuration. | None |
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only files matching these patterns are processed for this ruleset. | None | `v1.0` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude from analysis for this ruleset. | None | `v1.0` |
+| `rule-configs` | Object | A map from rule name to its configuration. | None | `v1.0` |
 
 ## Rule configuration
 
 Each entry in a ruleset's `rule-configs` map configures a specific rule:
 
-| **Property** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. | None |
-| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. | None |
-| `arguments` | Object | Parameters and values for the rule. Values can be scalars or defined per path. | None |
-| `severity` | String or Object | The rule severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or defined per path. | None |
-| `category` | String | The rule category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None |
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. | None | `v1.0` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. | None | `v1.0` |
+| `arguments` | Object | Parameters and values for the rule. Values can be scalars or defined per path. | None | `v1.0` |
+| `severity` | String or Object | The rule severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or defined per path. | None | `v1.0` |
+| `category` | String | The rule category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None | `v1.0` |
 
 ## Argument and severity configuration
 
@@ -192,13 +192,13 @@ The `category` field takes a single string value for the whole repository.
 
 The `global-config` object controls repository-wide settings:
 
-| **Property** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None |
-| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None |
-| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` |
-| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` |
-| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `200` |
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None | `v1.0` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None | `v1.0` |
+| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` | `v1.0` |
+| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` | `v1.0` |
+| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `200` | `v1.0` |
 
 Example configuration:
 

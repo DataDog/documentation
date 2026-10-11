@@ -8,7 +8,7 @@ description: Learn about the compatibility requirements for evaluations.
 
 ## Evaluation compatibility
 
-The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, and AI Gateway.
+The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, and Custom Provider.
 
 ### Managed evaluations
 

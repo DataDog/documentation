@@ -2,18 +2,20 @@
 aliases:
 - /ja/opentelemetry/collector_exporter/deployment
 further_reading:
-- link: /opentelemetry/setup/collector_exporter/
+- link: /opentelemetry/setup/collector_exporter/datadog_exporter/
   tag: ドキュメント
-  text: OpenTelemetry Collector の構成
+  text: Datadog Exporter と Connector を設定する
 - link: https://opentelemetry.io/docs/collector/deployment/
   tag: 外部サイト
   text: OpenTelemetry Collector のデプロイ
-title: OpenTelemetry Collector をデプロイする
+- link: https://www.datadoghq.com/architecture/opentelemetry-collector-in-kubernetes/
+  tag: Architecture Center
+  text: Kubernetes の OpenTelemetry Collector
+title: Datadog Exporter を使用して OpenTelemetry Collector をデプロイする
 ---
-
 このページでは、OpenTelemetry Collector と Datadog Exporter のさまざまなデプロイオプションを案内し、Datadog にトレース、メトリクス、およびログを送信できるようにします。
 
-## Collector のデプロイ
+## Collector のデプロイ {#deploy-the-collector}
 
 OpenTelemetry Collector は、さまざまなインフラストラクチャーのニーズに合わせて、さまざまな環境にデプロイできます。このセクションでは、以下のデプロイオプションについて説明します。
 
@@ -21,11 +23,11 @@ OpenTelemetry Collector は、さまざまなインフラストラクチャー�
 - [Docker](#docker)
 - [Kubernetes](#kubernetes)
 
-デプロイ方法によっては、特定の機能や能力が異なる場合があることに注意してください。これらの違いの詳細な概要については、[デプロイベースの制限事項](#deployment-based-limitations)を参照してください。
+デプロイ方法によって、特定の機能や能力が異なる場合があることに注意してください。これらの違いの詳細については、「[デプロイメントに基づく制限](#deployment-based-limitations)」を参照してください。
 
 インフラストラクチャーに最適なデプロイオプションを選択し、以下の手順を完了してください。
 
-### ホスト上で
+### ホスト上で {#on-a-host}
 
 `--config` パラメーターを使用してコンフィギュレーションファイルを指定し、Collector を実行します。
 
@@ -33,17 +35,17 @@ OpenTelemetry Collector は、さまざまなインフラストラクチャー�
 otelcontribcol_linux_amd64 --config collector.yaml
 ```
 
-### Docker
+### Docker {#docker}
 
 {{< tabs >}}
 {{% tab "localhost" %}}
 OpenTelemetry Collector を Docker イメージとして実行し、同じホストからトレースを受信するには
 
-1. [`otel/opentelemetry-collector-contrib`][1] などの公開された Docker イメージを選択します。
+1. [`otel/opentelemetry-collector-contrib`][1] などの公開されている Docker イメージを選択します。
 
-2. OpenTelemetry のトレースを OpenTelemetry Collector に送信するために、コンテナ上でどのポートをオープンするかを決定します。デフォルトでは、トレースはポート 4317 の gRPC で送信されます。gRPC を使用しない場合は、ポート 4318 を使用します。
+2. OpenTelemetry トレースが OpenTelemetry Collector に送信されるように、コンテナ上で開くポートを決定します。デフォルトでは、トレースはポート 4317 で gRPC を介して送信されます。gRPC を使用しない場合は、ポート 4318 を使用してください。
 
-3. コンテナを実行し、`collector.yaml` ファイルを使用して、必要なポートを公開します。例えば、ポート 4317 を使用する場合
+3. `collector.yaml` ファイルを使用してコンテナを実行し、必要なポートを公開します。たとえば、ポート 4317 を使用している場合は次のようにします。
 
    ```
    $ docker run \
@@ -56,7 +58,7 @@ OpenTelemetry Collector を Docker イメージとして実行し、同じホス
 
 [1]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
 {{% /tab %}}
-{{% tab "他のコンテナ" %}}
+{{% tab "その他のコンテナ" %}}
 
 OpenTelemetry Collector を Docker イメージとして実行し、その他のコンテナからトレースを受信するには
 
@@ -77,7 +79,7 @@ OpenTelemetry Collector を Docker イメージとして実行し、その他の
        otel/opentelemetry-collector-contrib
    ```
 
-   アプリケーションコンテナの実行中は、環境変数 `OTEL_EXPORTER_OTLP_ENDPOINT` が OpenTelemetry Collector 向けの適切なホスト名を使用して構成されていることをご確認ください。以下の例では `opentelemetry-collector` を使用しています。
+   アプリケーションコンテナの実行中は、OpenTelemetry Collector の適切なホスト名を使用するように環境変数 `OTEL_EXPORTER_OTLP_ENDPOINT` が構成されていることをご確認ください。以下の例では、`opentelemetry-collector` です。
 
    ```
    # Run the application container
@@ -91,15 +93,15 @@ OpenTelemetry Collector を Docker イメージとして実行し、その他の
 {{% /tab %}}
 {{< /tabs >}}
 
-### Kubernetes
+### Kubernetes {#kubernetes}
 
 {{< tabs >}}
 {{% tab "DaemonSet" %}}
 
-Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を使用することが最も一般的で推奨される方法です。Kubernetes インフラクチャーに OpenTelemetry コレクターと Datadog エクスポーターをデプロイするには
+Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を使用することが最も一般的で推奨される方法です。Kubernetes インフラストラクチャーに OpenTelemetry Collector と Datadog Exporter をデプロイするには、次のようにします。
 
 1. アプリケーションの構成を含むこの[構成例][1]を使用して、Datadog Exporter を含む OpenTelemetry Collector を DaemonSet としてセットアップします。
-2. DaemonSet の重要なポートが公開され、アプリケーションからアクセス可能であることを確認してください。以下の[例からの][2]構成オプションがこれらのポートを定義しています。
+2. DaemonSet の重要なポートが公開され、アプリケーションからアクセス可能であることを確認します。以下の[例からの][2]構成オプションがこれらのポートを定義しています。
    ```yaml
    # ...
         ports:
@@ -112,7 +114,7 @@ Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を�
    ```
    <div class="alert alert-info">アプリケーションが HTTP と gRPC の両方を必要としない場合、構成から未使用のポートを削除してください。</div>
 
-1. Datadog のコンテナタグ付けに使用される有用な Kubernetes 属性を収集するため、[例に示すように][3] Pod IP をリソース属性として報告します。
+1. Datadog コンテナのタグ付けに使用される有用な Kubernetes 属性を収集するために、[例に示すように][3] Pod IP をリソース属性として報告します。
 
    ```yaml
    # ...
@@ -127,9 +129,9 @@ Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を�
    # ...
    ```
 
-   これにより、[構成マップ][5]で使用される [Kubernetes Attributes Processor][4] が、トレースに付加するための必要なメタデータを抽出できるようになります。このメタデータへのアクセスを許可するために設定する必要がある追加の[ロール][6]があります。[例][1]は完全で、すぐに使用でき、正しいロールが設定されています。
-
-1. [アプリケーションコンテナ][7]を正しい OTLP エンドポイントホスト名を使用するように構成します。OpenTelemetry Collector は DaemonSet として実行されるため、現在のホストを対象とする必要があります。[例のチャート][8]のように、アプリケーションコンテナの `OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を適切に設定します。
+   これにより、[構成マップ][5]で使用される [Kubernetes Attributes Processor][4] が、トレースにアタッチするために必要なメタデータを抽出することができるようになります。このメタデータにアクセスできるようにするために、追加で設定する必要がある[ロール][6]があります。[この例][1]は完全で、すぐに使用でき、正しいロールが設定されています。
+  
+1. [アプリケーションコンテナ][7]を正しい OTLP エンドポイントホスト名を使用するように構成します。OpenTelemetry Collector は DaemonSet として実行されるため、現在のホストを対象とする必要があります。[例のチャート][8]に従って、アプリケーションコンテナの `OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を適切に設定します。
 
    ```yaml
    # ...
@@ -144,7 +146,7 @@ Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を�
              value: "http://$(HOST_IP):4318"
    # ...
    ```
-
+   
   1. 正確なホスト情報を確保するために、ホストメタデータの収集を構成します。DaemonSet を設定して、ホストメタデータを収集し転送します。
 
      ```yaml
@@ -167,7 +169,7 @@ Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を�
            exporters: [datadog]
      ```
 
-   この構成は、`resourcedetection` プロセッサを使用してホストメタデータを収集し、`k8sattributes` プロセッサで Kubernetes メタデータを追加し、`datadog.host.use_as_metadata` 属性を `true` に設定します。詳細については、[OpenTelemetry セマンティック規約をインフラストラクチャーリストのホスト情報にマッピングする][9]を参照してください。
+   この構成は、`resourcedetection` プロセッサを使用してホストメタデータを収集し、`k8sattributes` プロセッサで Kubernetes メタデータを追加し、`datadog.host.use_as_metadata` 属性を `true` に設定します。詳細については、「[OpenTelemetry のセマンティック規約をインフラストラクチャーリストのホスト情報にマッピングする][9]」を参照してください。
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart
@@ -187,7 +189,7 @@ Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を�
 Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog エクスポーターをデプロイするには
 
 1. アプリケーションの構成を含むこの[構成例][1]を使用して、Datadog Exporter を含む OpenTelemetry Collector を DaemonSet としてセットアップします。
-2. DaemonSet の重要なポートが公開され、アプリケーションからアクセス可能であることを確認してください。以下の[例からの][2]構成オプションがこれらのポートを定義しています。
+2. DaemonSet の重要なポートが公開され、アプリケーションからアクセス可能であることを確認します。以下の[例からの][2]構成オプションがこれらのポートを定義しています。
    ```yaml
    # ...
         ports:
@@ -200,7 +202,7 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
    ```
    <div class="alert alert-info">アプリケーションが HTTP と gRPC の両方を必要としない場合、構成から未使用のポートを削除してください。</div>
 
-1. Datadog のコンテナタグ付けに使用される有用な Kubernetes 属性を収集するため、[例に示すように][3] Pod IP をリソース属性として報告します。
+1. Datadog コンテナのタグ付けに使用される有用な Kubernetes 属性を収集するために、[例に示すように][3] Pod IP をリソース属性として報告します。
 
    ```yaml
    # ...
@@ -215,9 +217,9 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
    # ...
    ```
 
-   これにより、[構成マップ][5]で使用される [Kubernetes Attributes Processor][4] が、トレースに付加するための必要なメタデータを抽出できるようになります。このメタデータへのアクセスを許可するために設定する必要がある追加の[ロール][6]があります。[例][1]は完全で、すぐに使用でき、正しいロールが設定されています。
-
-1. [アプリケーションコンテナ][7]を正しい OTLP エンドポイントホスト名を使用するように構成します。OpenTelemetry Collector は DaemonSet として実行されるため、現在のホストを対象とする必要があります。[例のチャート][8]のように、アプリケーションコンテナの `OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を適切に設定します。
+   これにより、[構成マップ][5]で使用される [Kubernetes Attributes Processor][4] が、トレースにアタッチするために必要なメタデータを抽出することができるようになります。このメタデータにアクセスできるようにするために、追加で設定する必要がある[ロール][6]があります。[この例][1]は完全で、すぐに使用でき、正しいロールが設定されています。
+  
+1. [アプリケーションコンテナ][7]を正しい OTLP エンドポイントホスト名を使用するように構成します。OpenTelemetry Collector は DaemonSet として実行されるため、現在のホストを対象とする必要があります。[例のチャート][8]に従って、アプリケーションコンテナの `OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を適切に設定します。
 
    ```yaml
    # ...
@@ -233,7 +235,7 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
    # ...
    ```
 
-1. DaemonSet に[現在設置されている][10] Datadog Exporter の代わりに [OTLP エクスポーター][9]を含めるように変更します。
+1. [現在設置されている][10] Datadog Exporter の代わりに [OTLP エクスポーター][9]を含めるように DaemonSet を変更します。
 
    ```yaml
    # ...
@@ -243,7 +245,7 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
    # ...
    ```
 
-1. サービスパイプラインが、[サンプルにある][11] Datadog のものでなく、このエクスポーターを使用することを確認してください。
+1. サービスパイプラインが、[サンプルにある][11] Datadog のものでなく、このエクスポーターを使用することを確認します。
 
    ```yaml
    # ...
@@ -275,7 +277,7 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
 
    `passthrough` オプションの詳細については、[そのドキュメント][13]を参照してください。
 
-1. Gateway Collector の構成が、Agent で OTLP エクスポーターに置き換えられたのと同じ Datadog Exporter の設定を使用していることを確認します。例 (`<DD_SITE>` はあなたのサイト、{{< region-param key="dd_site" code="true" >}}):
+1. Gateway Collector の構成が、Agent で OTLP エクスポーターに置き換えられたのと同じ Datadog Exporter の設定を使用していることを確認します。たとえば、次のようになります (`<DD_SITE>` はご使用のサイトです{{< region-param key="dd_site" code="true" >}})。
 
    ```yaml
    # ...
@@ -287,10 +289,10 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
    # ...
    ```
 1. ホストメタデータの収集を構成します。
-   ゲートウェイデプロイメントでは、ホストメタデータがエージェントコレクターによって収集され、ゲートウェイコレクターによって保持されることを確認する必要があります。これにより、ホストメタデータがエージェントによって収集され、ゲートウェイを介して適切に Datadog に転送されます。
+   ゲートウェイデプロイメントでは、ホストメタデータが Agent Collector によって収集され、Gateway Collector によって保持されることを確認する必要があります。これにより、ホストメタデータが Agent によって収集され、ゲートウェイを介して適切に Datadog に転送されます。 
    詳細については、[OpenTelemetry セマンティック規約をインフラストラクチャーリストのホスト情報にマッピングする][14]を参照してください。
 
-   **エージェントコレクターの構成**:
+   **Agent Collector の構成**:
 
    ```yaml
    processors:
@@ -311,7 +313,7 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
          exporters: [otlp]
    ```
 
-   **ゲートウェイコレクターの構成**:
+   **Gateway Collector の構成**:
 
    ```yaml
    processors:
@@ -351,7 +353,7 @@ Kubernetes Gateway のデプロイで OpenTelemetry コレクターと Datadog �
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-OpenTelemetry Operator を使用するには、[OpenTelemetry Operator のデプロイメントに関する公式ドキュメント][1]に従ってください。そこに記載されているように、Operator に加えて、証明書マネージャをデプロイします。
+OpenTelemetry Operator を使用するには、[OpenTelemetry Operator のデプロイに関する公式ドキュメント][1]に従ってください。このドキュメントの説明に従って、Operator に加えて証明書マネージャーをデプロイします。
 
 OpenTelemetry Collector の標準 Kubernetes 構成の 1 つを使用して Operator を構成します。
 * [DaemonSet デプロイメント][2] - ホストメトリクスを確実に受信したい場合は、DaemonSet デプロイメントを使用します。
@@ -366,20 +368,20 @@ OpenTelemetry Collector の標準 Kubernetes 構成の 1 つを使用して Oper
 {{< /tabs >}}
 
 
-## ホスト名解決
+## ホスト名解決 {#hostname-resolution}
 
 ホスト名がどのように解決されるかを理解するために、[OpenTelemetry セマンティック規約をホスト名にマッピングする][25]を参照してください。
 
-## デプロイメントに基づく制限
+## デプロイメントに基づく制限 {#deployment-based-limitations}
 
-OpenTelemetry コレクターには、[2 つの主要なデプロイメント方法][20]があります。Agent と Gateway です。デプロイメント方法によっては、以下のコンポーネントを利用できます。
+OpenTelemetry Collector には、Agent とゲートウェイという [2 つの主要なデプロイメント方法][20]があります。デプロイメント方法に応じて、以下のコンポーネントを利用できます。
 
 | デプロイメントモード | ホストメトリクス | Kubernetes オーケストレーションメトリクス | トレース | ログの自動取り込み |
 | --- | --- | --- | --- | --- |
-| Gateway として | | {{< X >}} | {{< X >}} | |
+| ゲートウェイとして | | {{< X >}} | {{< X >}} | |
 | Agent として | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
