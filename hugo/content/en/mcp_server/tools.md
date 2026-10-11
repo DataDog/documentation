@@ -299,7 +299,7 @@ Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a spec
 ### `add_datadog_managed_mcp_server_to_bits_agent`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
-Adds or reconfigures the `datadog` or `code-sandbox` MCP server on an agent, preserving its OAuth MCP integrations. If the named server already exists, its configuration is replaced. An empty `allowed_tools` list permits all tools. For `code-sandbox`, provide `repo_urls` for repositories connected through the Source Code integration. Set `dry_run: true` to preview changes.
+Adds or reconfigures the `datadog` or `code-sandbox` MCP server on an agent, preserving its OAuth MCP integrations. If the named server already exists, this tool replaces its configuration. An empty `allowed_tools` list permits all tools. For `code-sandbox`, provide `repo_urls` for repositories connected through the Source Code integration. Set `dry_run: true` to preview changes.
 
 - Restrict this agent's Datadog MCP server to selected tools from `list_datadog_bits_agent_mcp_tools`.
 - Add a code sandbox for the connected repository `github.com/example/checkout`.
