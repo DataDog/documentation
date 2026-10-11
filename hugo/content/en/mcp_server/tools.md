@@ -244,9 +244,7 @@ Edits an existing Datadog notebook.
 
 Tools for [Bits Agent Builder][87], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, and running agents and inspecting their conversations.
 
-<div class="alert alert-info">The <code>agent-builder</code> toolset requires access to be enabled for your organization. Request it explicitly with <code>toolsets=agent-builder</code>.</div>
-
-Include the `workflows` toolset (`toolsets=agent-builder,workflows`) to discover action tools or configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps. Connect or disconnect OAuth MCP integrations through the Datadog UI.
+Workflow Automation tools are used to configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps. Connect or disconnect OAuth MCP integrations through the Datadog UI.
 
 ### `list_datadog_bits_agents`
 *Toolset: **agent-builder***\
@@ -267,7 +265,8 @@ Retrieves an agent by ID, including its system prompt, action tools, MCP servers
 ### `list_datadog_bits_agent_models`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Read` or `Bits Agent Builder Write`*\
-Lists supported model identifiers, the default model, and whether each model supports loading tool definitions on demand. Use these identifiers when creating or updating an agent.
+
+Lists supported model identifiers, identifies the default, and notes capabilities such as tool search support. Use these identifiers when creating or updating an agent.
 
 - Which models are available for a Bits agent?
 - Show the default model and models that support tool search.
