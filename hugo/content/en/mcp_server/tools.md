@@ -315,7 +315,7 @@ Removes the `datadog` or `code-sandbox` MCP server from an agent, preserving its
 ### `run_datadog_bits_agent`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Run`*\
-Starts an agent with a user prompt and returns a `conversation_id` immediately while the agent runs in the background. Each call starts a separate conversation; this tool cannot add messages to an existing conversation. Poll `get_datadog_bits_agent_conversation_events` to retrieve the response.
+Starts an agent with a user prompt and returns a `conversation_id` immediately while the agent runs in the background. Each call starts a separate conversation. This tool cannot add messages to an existing conversation. Poll `get_datadog_bits_agent_conversation_events` to retrieve the response.
 
 - Run the checkout investigation agent to investigate the error spike from the past hour.
 - Ask the service health agent to summarize the payments service's current status.
