@@ -291,7 +291,7 @@ Updates an agent's name, description, system prompt, model, or action tools. Omi
 ### `list_datadog_bits_agent_mcp_tools`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Read`*\
-Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a specific agent. Returns the full catalog available to your organization, regardless of the agent's `allowed_tools` restrictions. Use the returned names when restricting tools. For capabilities absent from the catalog, search the Workflow Automation action catalog.
+Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a specific agent. Returns the full catalog available to your organization, regardless of the agent's `allowed_tools` restrictions. Use the returned names when restricting tools. For capabilities absent from the catalog, use `search_datadog_workflow_actions` to search the Workflow Automation action catalog.
 
 - List the Datadog MCP tools available for this agent.
 - Check which MCP tools are available before restricting the agent's access.
