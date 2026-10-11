@@ -283,7 +283,7 @@ Creates a persistent custom AI agent from a name and system prompt. Optionally, 
 ### `update_datadog_bits_agent`
 *Toolset: **agent-builder***\
 *Permissions Required: `Bits Agent Builder Write`*\
-Updates an agent's name, description, system prompt, model, or action tools. Omitted fields remain unchanged. Providing `action_tools` replaces the complete list; an empty array clears it. Set `dry_run: true` to preview changes. Use the MCP server tools below to change an agent's MCP configuration.
+Updates an agent's name, description, system prompt, model, or action tools. Omitted fields remain unchanged. Providing `action_tools` replaces the complete list. An empty array clears it. Set `dry_run: true` to preview changes. To change an agent's MCP configuration, use `add_datadog_managed_mcp_server_to_bits_agent` or `remove_datadog_managed_mcp_server_from_bits_agent`.
 
 - Update the checkout investigation agent's instructions to include deployment events.
 - Preview changing this agent to the default model returned by `list_datadog_bits_agent_models`.
