@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-10-09'
+    link: https://github.com/DataDog/documentation/pull/40590
+    operations:
+      - DeleteSourcemaps
+      - ListSourcemaps
+      - RestoreSourcemaps
+    title: Clarify JavaScript source map listing and pagination
