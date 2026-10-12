@@ -102,7 +102,7 @@ To retain more data or access logs in other Datadog products, choose one of the 
 - **Rehydrate before launch**:
   Retain more than 100,000 logs, set a custom retention period (for example, 7, 15, or 30 days), and access results across the platform immediately.
 - **Rehydrate after completion**:
-  During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks. The 30 days (flex) option is not available here because this rehydrates an existing Archive Search.
+  During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks. The 30 days (flex) option is not available here. Rehydration to Flex is only available when creating an Archive Search, not on existing ones.
 
 ## Analyze results
 
@@ -171,7 +171,7 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 - {{< ui >}}Default Rehydration volume limit{{< /ui >}}: Define the default number of logs (in millions) that can be rehydrated per Archive Search in {{< ui >}}Search & Rehydration{{< /ui >}} mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
-- {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog. If Flex Logs is enabled for your account, you can also select 30 days (flex) to rehydrate logs into the Flex Tier. This option is only available when creating an Archive Search. You can't rehydrate an existing Archive Search into the Flex Tier.
+- {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog. If Flex Logs are enabled for your account, you can also select 30 days (flex) to rehydrate logs into the Flex. This option is only available when creating an Archive Search. You can't rehydrate an existing Archive Search into the Flex.
 
 When an Archive Search in {{< ui >}}Search & Rehydration{{< /ui >}} mode reaches the volume limit, its status changes to {{< ui >}}Limit reached{{< /ui >}}, indicating that not all logs matching your query and time range were rehydrated. To rehydrate the remaining logs, run a new Archive Search with a higher volume limit, or with a narrower query or time range.
 
