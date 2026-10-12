@@ -350,6 +350,14 @@ The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Serve
 
 For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
 
+### Agent availability
+
+When you use Agent Remote Configuration (`DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`), Agent availability has these effects:
+
+- **Start the Agent before the application.** If the Agent is not available when the application starts, Java does not send experiment exposure events or flag evaluation events. Java does not start to send these events when the Agent becomes available. Restart the application after the Agent is available.
+- **Flag configuration recovers without a restart.** If the Agent is not available when the provider initializes, flag evaluations return the default values. After the initialization timeout, the provider emits `PROVIDER_ERROR`. When the provider receives the first configuration, it emits `PROVIDER_READY`.
+- **The last configuration stays in use.** If the Agent stops after the provider is ready, the provider keeps the last configuration. Flag evaluations continue to use this configuration.
+
 ### Custom initialization timeout
 
 Configure how long the provider waits for initial configuration:
@@ -377,7 +385,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` is an optional OpenFeature event. Check the Datadog provider documentation to verify this event is supported in your version.
+After the provider is ready, it emits `PROVIDER_CONFIGURATION_CHANGED` for each new flag configuration that it receives.
 
 ### Multiple clients
 
@@ -643,6 +651,7 @@ When the selected configuration path supports exposures, exposures appear only f
 
 1. Verify the flag is associated with an experiment in the Datadog UI.
 2. Verify the Agent API key and connectivity.
+3. If you use Agent Remote Configuration, verify that the Agent was available when the application started. If it was not, restart the application. See [Agent availability](#agent-availability).
 
 ## Further reading
 
