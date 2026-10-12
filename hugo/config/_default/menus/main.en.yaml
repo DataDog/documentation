@@ -1549,6 +1549,11 @@ menu:
       identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
+    - name: Use Bits Chat
+      url: bits_ai/bits_chat/usage
+      identifier: bits_ai_bits_chat_usage
+      parent: bits_ai_bits_chat
+      weight: 201
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
