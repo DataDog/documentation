@@ -343,20 +343,13 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use a custom agentless endpoint][10] for advanced testing, local development, or an operator-managed proxy
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
+- [Start the Agent before the application][18] when you use Agent Remote Configuration
 
 In agentless mode, Java prefers a compatible local telemetry relay for experiment exposure and aggregated flag evaluation events. It sends both event types directly when no compatible relay is available. The direct path uses the application `DD_API_KEY` and `DD_SITE` settings. For no-Agent serverless environments, you can use [`serverless-init`][17] as the local telemetry relay.
 
 The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide.
 
 For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
-
-### Agent availability
-
-When you use Agent Remote Configuration (`DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`), Agent availability has these effects:
-
-- **Start the Agent before the application.** If the Agent is not available when the application starts, Java does not send experiment exposure events or flag evaluation events. Java does not start to send these events when the Agent becomes available. Restart the application after the Agent is available.
-- **Flag configuration recovers without a restart.** If the Agent is not available when the provider initializes, flag evaluations return the default values. After the initialization timeout, the provider emits `PROVIDER_ERROR`. When the provider receives the first configuration, it emits `PROVIDER_READY`.
-- **The last configuration stays in use.** If the Agent stops after the provider is ready, the provider keeps the last configuration. Flag evaluations continue to use this configuration.
 
 ### Custom initialization timeout
 
@@ -673,4 +666,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [15]: /serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /serverless/google_cloud_run/containers/in_container/java/
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
-[18]: #agent-availability
+[18]: /feature_flags/concepts/configuration_sources/#agent-availability

@@ -340,6 +340,7 @@ If feature flags unexpectedly always return default values, check the following:
 
 - If the application runs on JRuby, use the Java SDK. See [Use the Java SDK on JRuby][9].
 - Verify Remote Configuration is enabled in your Datadog Agent configuration
+- Verify that the Datadog Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][10].
 - Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
 - Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
 - Verify the `datadog` gem version includes OpenFeature support (2.24.0 or later)
@@ -376,3 +377,4 @@ Look for messages about:
 [7]: /feature_flags/server/java/#compatibility-requirements
 [8]: /feature_flags/concepts/configuration_sources/
 [9]: #use-the-java-sdk-on-jruby
+[10]: /feature_flags/concepts/configuration_sources/#agent-availability
