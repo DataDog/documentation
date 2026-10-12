@@ -59,8 +59,35 @@ describe('API display labels from the source specification', () => {
                 'x-docs-original-summary': 'Create a pet'
             });
         });
-        const [first] = applyApiDisplayNames([fixture(), withoutOverrides()]);
-        expect(first.paths['/api/v2/pets'].post.summary).toBe('Create an animal');
+        const reverse = applyApiDisplayNames([fixture(), withoutOverrides()]);
+        reverse.forEach((spec) => {
+            expect(spec.tags[0].name).toBe('Animal Care');
+            expect(spec.paths['/api/v2/pets'].post.summary).toBe('Create an animal');
+        });
+        const snapshot = JSON.stringify(reverse);
+        expect(JSON.stringify(applyApiDisplayNames(reverse))).toBe(snapshot);
+    });
+
+    it('renames a shared group without changing an endpoint absent from the other version', () => {
+        const v1 = fixture();
+        delete v1.tags[0]['x-displayName'];
+        delete v1.paths['/api/v2/pets'].post['x-displayName'];
+        v1.paths['/api/v2/pets'].post.summary = 'Legacy pet operation';
+        const [after] = applyApiDisplayNames([v1, fixture()]);
+        expect(after.tags[0].name).toBe('Animal Care');
+        expect(after.paths['/api/v2/pets'].post.tags).toEqual(['Animal Care']);
+        expect(after.paths['/api/v2/pets'].post.summary).toBe('Legacy pet operation');
+        expect(after.paths['/api/v2/pets'].post['x-docs-original-summary']).toBeUndefined();
+    });
+
+    it('does not propagate operation labels across different API groups', () => {
+        const other = fixture();
+        other.tags = [{ name: 'Other' }];
+        other.paths['/api/v2/pets'].post.tags = ['Other'];
+        delete other.paths['/api/v2/pets'].post['x-displayName'];
+        const [after] = applyApiDisplayNames([other, fixture()]);
+        expect(after.tags[0].name).toBe('Other');
+        expect(after.paths['/api/v2/pets'].post.summary).toBe('Create a pet');
     });
 
     it('prefers the later version when overrides disagree', () => {
@@ -73,7 +100,7 @@ describe('API display labels from the source specification', () => {
         expect(v2.paths['/api/v2/pets'].post.summary).toBe('Create an animal');
     });
 
-    it('labels v1-only endpoints in the menu when only v2 has the override', () => {
+    it('labels shared endpoints in the menu when only v2 has the override', () => {
         const writes = new Map();
         const write = jest.spyOn(fs, 'writeFileSync').mockImplementation((path, body) => writes.set(path, body));
         const read = jest.spyOn(fs, 'readFileSync').mockReturnValue(yaml.safeDump({ menu: { api: [] } }));
