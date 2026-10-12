@@ -105,17 +105,17 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 
 ## Lighthouse audits
 
-Lighthouse is an automated tool that grades your pages on performance, accessibility, best practices, and SEO, so you can find and fix what slows down or frustrates users.
+[Lighthouse][15] is an open source Google tool that grades your pages on categories such as performance, accessibility, best practices, SEO, and agentic browsing, so you can find and fix what slows down or frustrates users.
 
-A [browser Synthetic test][7] can run a [Lighthouse][15] audit and send the resulting scores to the matching RUM view. Lighthouse provides lab measurements that complement the real-user field data on this page, so you can track frontend quality on a schedule. The audit runs once per test run, on the final URL the test reaches.
+A [browser Synthetic test][7] can run a Lighthouse audit and send scores to the matching RUM view. Lighthouse lab measurements complement the real-user field data on this page, so you can track frontend quality on a schedule.
 
-Each audit reports five category scores from 0 to 100:
+The audit runs once per test run, on the final URL the test reaches, and reports five category scores from 0 to 100:
 
-- **Performance**: measures how quickly the page loads, displays content, and becomes interactive.
-- **Accessibility**: measures how well people with disabilities can navigate and use the page, based on automated checks.
-- **Best Practices**: measures whether the page follows modern standards for security, browser compatibility, and code quality.
-- **SEO**: measures whether search engines can discover, understand, and index the page.
-- **Agentic**: measures how well AI agents can understand, navigate, and interact with the page.
+- **Performance**: Measures how quickly the page loads, displays content, and becomes interactive.
+- **Accessibility**: Measures how well people with disabilities can navigate and use the page, based on automated checks.
+- **Best Practices**: Measures whether the page follows modern standards for security, browser compatibility, and code quality.
+- **SEO**: Measures whether search engines can discover, understand, and index the page.
+- **Agentic**: Measures how well AI agents can understand, navigate, and interact with the page.
 
 ### Prerequisites
 
@@ -127,24 +127,32 @@ Each audit reports five category scores from 0 to 100:
 
 You can enable Lighthouse audits from a RUM application or from Synthetic Monitoring:
 
-- **From a RUM application**: on the Optimization page, select a view that has no Lighthouse data yet, then select {{< ui >}}Create a Synthetics test{{< /ui >}} in the {{< ui >}}Lighthouse{{< /ui >}} panel's empty state. RUM data collection and the Lighthouse audit are enabled automatically, and the test is linked to the RUM application. Finish configuring the test and save it.
-- **From Synthetic Monitoring**: create or edit a [browser test][7], enable [RUM data collection][16] and select your RUM application, then turn on {{< ui >}}Run Lighthouse audit{{< /ui >}} (available only when RUM data collection is enabled). Record the steps that reach the page you want to audit, then save the test.
+- **From a RUM application**: On the Optimization page, select a view that has no Lighthouse data yet, then select {{< ui >}}Create a Synthetics test{{< /ui >}} in the {{< ui >}}Lighthouse{{< /ui >}} panel's empty state. RUM data collection and the Lighthouse audit are enabled automatically, and the test is linked to the RUM application. Finish configuring the test and save it.
+- **From Synthetic Monitoring**: Create or edit a [browser test][7], enable [RUM data collection][16] and select your RUM application, then turn on {{< ui >}}Run Lighthouse audit{{< /ui >}} (available only when RUM data collection is enabled). Record the steps that reach the page you want to audit, then save the test.
 
-### View results
+### View Lighthouse results
 
-After the test runs, Lighthouse results appear in two places under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][6]. The Lighthouse panel and table are scoped by application, view, and time frame only; other page filters, such as browser, country, or team, do not apply to them.
+After the test runs, Lighthouse results appear in two places under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][6]. The Lighthouse panel and table are scoped only by application, view, and time frame. Other page filters, such as browser, country, or team, do not apply.
 
-On the **Optimization page**, when a single view is selected, the {{< ui >}}Lighthouse{{< /ui >}} panel shows that view's most recent audit in the selected time frame: the five category score gauges, the lab metrics Lighthouse measured, which audits failed, and how the scores trend over time. From the panel, you can open the report in the Lighthouse viewer, download it as JSON, or open the originating Synthetic test result.
+On the **Optimization page**, when a single view is selected, the {{< ui >}}Lighthouse{{< /ui >}} panel shows the view's most recent audit in the selected time frame:
 
-{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-panel.png" alt="The Lighthouse panel on the RUM Optimization page showing the five category score gauges, lab metrics, passed and failed audit counts, and the score trend over time." style="width:100%;" >}}
+- Five category score gauges
+- The change in each category score compared to the previous time frame
+- Lab metrics measured by Lighthouse
+- Passed and failed audit counts
+- Score trends over time
 
-On the **Performance Monitoring summary page**, the {{< ui >}}Lighthouse{{< /ui >}} section shows the **Lighthouse scores by view** table, which compares scores across views. Use the percentile selector (p75 by default) to set the percentile aggregated over the audits in the selected time frame, and select a row to open the Optimization page for that view.
+From the panel, you can open the report in the Lighthouse viewer, download it as JSON, or open the originating Synthetic test result.
+
+{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-panel.png" alt="The Lighthouse panel showing category scores, lab metrics, audit results, and a score trend over time." style="width:100%;" >}}
+
+On the **Performance Monitoring summary page**, the {{< ui >}}Lighthouse{{< /ui >}} section shows the **Lighthouse scores by view** table, which compares scores across views. Use the percentile selector (p75 by default) to choose which percentile of audit scores in the selected time frame the table shows, and select a row to open the Optimization page for that view.
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-scores-by-view.png" alt="The Lighthouse scores by view table comparing category scores across RUM views, with a percentile selector." style="width:100%;" >}}
 
 ### Metrics and attributes
 
-Each audited view sets the `@synthetics.lighthouse_audited` attribute to `true`. To find audited views in the [RUM Explorer][17], switch the event type to {{< ui >}}Views{{< /ui >}} and search for `@synthetics.lighthouse_audited:true`. Audited views come from Synthetic tests rather than real-user sessions, so remove any `@session.type:user` filter from the query.
+The `@synthetics.lighthouse_audited` attribute is set to `true` on each audited view. To find audited views in the [RUM Explorer][17], switch the event type to {{< ui >}}Views{{< /ui >}} and search for `@synthetics.lighthouse_audited:true`. Audited views come from Synthetic tests rather than real-user sessions, so remove any `@session.type:user` filter from the query.
 
 The category scores are available as metrics, so you can graph them on dashboards and alert on regressions with monitors:
 
@@ -154,7 +162,7 @@ The category scores are available as metrics, so you can graph them on dashboard
 - `rum.measure.lighthouse.seo`
 - `rum.measure.lighthouse.agentic`
 
-These metrics are tagged with `application.id` and `view.name`.
+The Lighthouse score metrics are tagged with `application.id` and `view.name`.
 
 ## Further Reading
 
