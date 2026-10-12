@@ -88,6 +88,21 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2574782816",
+      "description": "Create a heatgrid widget with a preset gradient"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1322784076",
+      "description": "Create a heatgrid widget with custom discrete thresholds"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1681529203",
+      "description": "Create a heatgrid widget with custom gradient colors for both themes"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },

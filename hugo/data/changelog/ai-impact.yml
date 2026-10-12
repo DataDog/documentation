@@ -1,0 +1,7 @@
+entries:
+  - change_type: added
+    date: '2026-10-02'
+    link: https://github.com/DataDog/documentation/pull/40377
+    operations:
+      - CreateAIImpactUserActivity
+    title: Add AI Impact user activity endpoint

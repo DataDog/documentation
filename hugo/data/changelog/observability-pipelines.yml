@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40476
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add aggregate event-time configuration to Observability Pipelines

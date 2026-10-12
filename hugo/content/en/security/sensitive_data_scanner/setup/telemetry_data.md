@@ -126,7 +126,7 @@ The [recommended keywords][15] are used by default when library rules are added.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
+    - For structured events, keywords are also matched against attribute names in the event path. See the [How Sensitive Data Scanner keyword matching works](#how-sensitive-data-scanner-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
     - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click {{< ui >}}Update{{< /ui >}}.
@@ -159,7 +159,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
+    - For structured events, keywords are also matched against attribute names in the event path. See the [How Sensitive Data Scanner keyword matching works](#how-sensitive-data-scanner-keyword-matching-works) section for case sensitivity, separators, and camel case handling.
       **Note**: You cannot have more than 20 keywords for a rule.
 {{% sds-suppressions %}}
 1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
@@ -167,6 +167,36 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Click {{< ui >}}Add Rule{{< /ui >}}.
 
 {{% /collapse-content %}}
+
+#### How Sensitive Data Scanner keyword matching works
+
+Keyword matching follows these rules for both library rules and custom rules:
+
+- **Case-insensitive matching**: The keyword `secret` matches `secret`, `Secret`, and `SECRET`.
+- **Interchangeable separators (spaces, underscores, hyphens, periods, slashes)**: The keyword `secret access key` matches `secret access key`, `secret_access_key`, `secret-access-key`, `secret.access.key`, and `secret/access/key`. The keyword also matches an attribute named `AWS_SECRET_ACCESS_KEY`.
+- **Camel case in attribute names**: For structured events, keywords are also matched against attribute names in the event path. The same separators (spaces, `_`, `-`, `.`, and `/`) count as word boundaries, and so does a change from lowercase to uppercase (camel case). The character limit does not apply to attribute name matching. For example, with the keyword `card`, the attributes `card_number`, `card-type`, and `creditCardNumber` match. The following event matches a rule whose pattern is `secret` and whose keyword is `card`, because `creditCardNumber` is split into `credit`, `card`, and `number`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "secret"
+      }
+    }
+  }
+  ```
+
+- **Camel case in surrounding text**: When keywords are matched against the characters before a matched value, including the value of an attribute in a structured event, camel case words are not split. For example, the following event does not match a rule whose pattern is `secret` and whose keyword is `bank`, because `anotherBank` in the value is not split into `another` and `bank`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "anotherBank secret"
+      }
+    }
+  }
+  ```
 
 **Notes**:
 

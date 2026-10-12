@@ -12,11 +12,9 @@ further_reading:
 
 ---
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-warning">
-    Secret Scanning is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
+{{< callout url="https://www.datadoghq.com/product-preview/generic-secret-scanning-in-code/" header="Find Generic Secrets in Your Code" >}}
+Generic Secret Scanning is in Preview. It looks for internal tokens and passwords that do not match a provider pattern.
+{{< /callout >}}
 
 Datadog Secret Scanning scans code to find exposed secrets. Datadog also attempts to validate secrets and surface their status (valid, invalid) to help you prioritize secrets remediation.
 
