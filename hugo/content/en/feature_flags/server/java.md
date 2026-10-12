@@ -651,7 +651,7 @@ When the selected configuration path supports exposures, exposures appear only f
 
 1. Verify the flag is associated with an experiment in the Datadog UI.
 2. Verify the Agent API key and connectivity.
-3. If you use Agent Remote Configuration, verify that the Agent was available when the application started. If it was not, restart the application. See [Agent availability](#agent-availability).
+3. If you use Agent Remote Configuration, verify that the Agent was available when the application started. If it was not, restart the application. See [Agent availability][18].
 
 ## Further reading
 
@@ -673,3 +673,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [15]: /serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /serverless/google_cloud_run/containers/in_container/java/
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: #agent-availability
