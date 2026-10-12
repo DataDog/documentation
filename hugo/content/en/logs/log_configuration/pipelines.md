@@ -54,8 +54,6 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 **Note**: For optimal use of the Log Management solution, Datadog recommends using at most **20 processors per pipeline** and **10 parsing rules** within a [Grok processor][6]. Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
-Use [Auto-Processing][15] to automatically parse custom application logs that do not match the filter of an existing integration or custom pipeline. Datadog manages the parsing configuration.
-
 ## Pipeline permissions
 
 Pipelines use [Granular Access Control][7] to manage who can edit pipeline and processor configurations. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources. Pipelines without any restrictions are considered unrestricted, meaning any user with the `logs_write_pipelines` permission can modify the pipeline and its processors.
@@ -216,6 +214,61 @@ By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. 
 
 {{< /tabs >}}
 
+<!-- vale Datadog.headings = NO -->
+## Auto-Processing
+<!-- vale Datadog.headings = YES -->
+
+{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="Auto-Processing is in Preview" >}}
+Complete the form to request access.
+{{< /callout >}}
+
+Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, service, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring parsing.
+
+Auto-Processing only handles logs that do not match the filter of any existing integration or custom pipeline. If a log matches an existing pipeline's filter, Auto-Processing does not process it, even if that pipeline does not modify the log. Your existing pipeline configurations remain unchanged.
+
+### How it works
+
+Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Datadog manages and updates these entries as new log patterns appear.
+
+Review transformations and control which entries process your logs. Switch an entry to a manual pipeline to customize its configuration.
+
+### Configuration
+
+Go to the [{{< ui >}}Processing{{< /ui >}} page][8] and select the {{< ui >}}Auto-Processing{{< /ui >}} tab.
+
+#### Enable or disable the feature
+
+Use the feature toggle to opt your organization in to or out of Auto-Processing.
+
+#### Choose how new entries are enabled
+
+When Auto-Processing is on, you can choose how newly created entries are enabled:
+
+- **Automatically enable new entries:** New entries are created enabled and begin processing matching incoming logs.
+- **Review new entries before enabling:** New entries are created disabled. Review their transformations, then enable the entries you want to use.
+
+Configure this behavior in the {{< ui >}}Auto-Processing{{< /ui >}} tab. You can also enable or disable individual entries for each source and service.
+
+### Review transformations
+
+1. In the {{< ui >}}Auto-Processing{{< /ui >}} tab, find the source and service you want to review.
+2. Select {{< ui >}}View Transformations{{< /ui >}}.
+3. Select a log pattern and inspect example logs to compare their original and processed attributes.
+
+Use the entry's toggle in the {{< ui >}}Auto-Processing{{< /ui >}} tab to enable or disable processing for that source and service. Disabling an entry affects future logs only; it does not change logs already processed.
+
+### Switch to a manual pipeline
+
+To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the transformations page.
+
+After conversion, you manage the pipeline's configuration and updates.
+
+### Limitations
+
+- Each organization can have up to **100 Auto-Processing pipelines**.
+- Some new log patterns may remain unparsed, even for a source and service that Auto-Processing already covers.
+- You cannot directly customize parsing or rename attributes within an Auto-Processing entry. Switch to a manual pipeline when you need these changes.
+
 ## Create a pipeline
 
 1. Navigate to [Pipelines][8] in Datadog.
@@ -356,4 +409,3 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 [12]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [14]: /api/latest/restriction-policies/
-[15]: /logs/log_configuration/auto_processing/
