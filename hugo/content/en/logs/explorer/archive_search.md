@@ -102,7 +102,7 @@ To retain more data or access logs in other Datadog products, choose one of the 
 - **Rehydrate before launch**:
   Retain more than 100,000 logs, set a custom retention period (for example, 7, 15, or 30 days), and access results across the platform immediately.
 - **Rehydrate after completion**:
-  During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
+  During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks. The 30 days (flex) option is not available here because this rehydrates an existing Archive Search.
 
 ## Analyze results
 
