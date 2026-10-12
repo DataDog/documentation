@@ -54,6 +54,8 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 **Note**: For optimal use of the Log Management solution, Datadog recommends using at most **20 processors per pipeline** and **10 parsing rules** within a [Grok processor][6]. Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
+Use [Auto-Processing][15] to automatically parse custom application logs that do not match the filter of an existing integration or custom pipeline. Datadog manages the parsing configuration.
+
 ## Pipeline permissions
 
 Pipelines use [Granular Access Control][7] to manage who can edit pipeline and processor configurations. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources. Pipelines without any restrictions are considered unrestricted, meaning any user with the `logs_write_pipelines` permission can modify the pipeline and its processors.
@@ -354,3 +356,4 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 [12]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [14]: /api/latest/restriction-policies/
+[15]: /logs/log_configuration/auto_processing/
