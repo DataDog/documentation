@@ -33,7 +33,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][1] enabled
 - **Datadog [API key][4]** configured on the Agent
 - **Datadog Ruby SDK** `datadog` version 2.24.0 or later
-- **Ruby runtime** version 3.1 or later to use the full Datadog Feature Flags OpenFeature integration. The Ruby SDK does not support Feature Flags on JRuby. For JRuby, see [Use the Java SDK on JRuby][9].
+- **Ruby runtime** version 3.1 or later to use the full Datadog Feature Flags OpenFeature integration
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later for provider hooks, exposure logging, and flag evaluation metrics support
 - **OpenTelemetry metrics gems** for [flag evaluation metrics][5]: `opentelemetry-metrics-sdk` version 0.8.0 or later, and `opentelemetry-exporter-otlp-metrics` version 0.4.0 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
