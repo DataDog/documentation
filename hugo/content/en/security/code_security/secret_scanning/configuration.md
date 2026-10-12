@@ -69,7 +69,7 @@ The configuration must begin with a `schema-version` key, followed by a `secrets
 ### Example configuration
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.5
+schema-version: {{< version key="code_security_schema_version" >}}
 secrets:
   global-config:
     # Only analyze the following paths/files
