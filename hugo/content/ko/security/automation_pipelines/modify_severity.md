@@ -30,7 +30,7 @@ title: 심각도 수정자 규칙
 1. Datadog에서 **Security** > **Settings** > [**Findings Automation**][2]로 이동합니다. **Add a New Rule**을 클릭한 다음 **Modify Severity Level**을 선택합니다. Create a New Rule 페이지가 열립니다.
 1. **Rule name** 아래에 규칙을 설명하는 이름을 입력합니다(예: \"PII 데이터베이스에 액세스하는 서비스의 심각도 증가\").
 1. 다음 필드에 규칙 기준을 추가합니다.
-    - **다음 유형 중 하나**: 규칙이 검사해야 하는 탐지 결과의 유형입니다. 사용 가능한 유형은 다음과 같습니다.
+    - **다음 유형 중 하나**: 규칙이 검사해야 하는 발견 사항의 유형입니다. 사용 가능한 유형은 다음과 같습니다.
       - 런타임 코드 취약성
       - 정적 코드 취약성
       - 라이브러리 취약성
@@ -41,9 +41,9 @@ title: 심각도 수정자 규칙
       - 구성 오류
       - 공격 경로
       - ID 위험
-      - API 보안
+      - API Security
       - 워크로드 활동
-    - **이 태그 또는 속성 중 하나**: 규칙이 적용되려면 일치해야 하는 리소스 태그 또는 속성입니다.
+    - **다음 태그 또는 속성 중 하나**: 규칙이 적용되려면 일치해야 하는 리소스 태그 또는 속성입니다.
 1. 필요한 경우 **Add Severity**를 클릭하여 심각도 수준별로 탐지 결과를 필터링합니다. 규칙은 사용자 정의 조정이 적용되기 전, 각 탐지의 Datadog 조정 심각도를 기준으로 일치 여부를 확인합니다.
 1. 다음과 같이 심각도 수정 작업을 정의합니다.
     - **특정 수준으로 설정**: 일치하는 탐지를 고정된 심각도로 설정합니다. **Info / None**, **Low**, **Medium**, **High**, **Critical** 중에서 선택하세요.
@@ -53,6 +53,8 @@ title: 심각도 수정자 규칙
 1. **Save**를 클릭합니다. 규칙은 새로운 탐지 결과에 즉시 적용되며 이후 1시간 이내에 기존 탐지 결과를 검사하기 시작합니다.
 
 **참고**: 규칙 쿼리의 `@severity` 또는 `@severity_details.user_adjusted`는 사용할 수 없습니다. 심각도 수정자 규칙은 탐지에 저장된 `@severity` 값이 아니라 Datadog 조정 심각도(`@severity_details.adjusted.value`)를 기준으로 평가됩니다.
+
+[API][3] 또는 [`datadog_security_findings_severity_modifier_rule`][4] Terraform 리소스를 사용하여 심각도 수정자 규칙을 생성할 수도 있습니다.
 
 ## 평가 순서 {#evaluation-order}
 
@@ -126,3 +128,5 @@ Datadog 조정 CVSS 점수가 있는 취약성 탐지 결과의 경우, 심각�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=modify_severity
+[3]: /ko/api/latest/security-monitoring/create-a-severity-modifier-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_severity_modifier_rule

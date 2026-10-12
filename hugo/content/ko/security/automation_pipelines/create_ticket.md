@@ -108,6 +108,8 @@ title: 티켓 생성 규칙
 
 **참고**: 티켓 생성 규칙은 새로운 결과에 대해서만 티켓을 생성합니다. Datadog은 규칙을 생성할 때 기존 결과에 대해 소급하여 티켓을 생성하지 않습니다.
 
+[API][7] 또는 [`datadog_security_findings_ticket_creation_rule`][8] Terraform 리소스를 사용하여 티켓 생성 규칙을 만들 수도 있습니다.
+
 ## 자동으로 생성된 티켓 식별하기 {#identify-automatically-created-tickets}
 
 {{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="번개 아이콘으로 표시되며 동일한 규칙에서 생성된 티켓이 있는 모든 결과를 볼 수 있는 링크가 포함되어 있는, 자동화 규칙에 의해 생성된 케이스를 보여주는 Work Management 티켓 팝업" style="width:60%;" >}}
@@ -140,3 +142,5 @@ Datadog은 탐지 결과를 식별할 때 티켓 생성 규칙의 시퀀스에 �
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /ko/security/ticketing_integrations/
+[7]: /ko/api/latest/security-monitoring/create-a-ticket-creation-rule/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_ticket_creation_rule
