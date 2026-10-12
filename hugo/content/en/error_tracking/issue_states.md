@@ -86,7 +86,7 @@ To combine multiple conditions, or to count distinct values of any error attribu
    - {{< ui >}}Until this occurs again...{{< /ui >}} to snooze the issue until it reaches a number of new occurrences.
    - {{< ui >}}Until this affects an additional...{{< /ui >}} to snooze the issue until it affects a number of additional users.
 
-{{< img src="error_tracking/issue-snooze-selection.png" alt="Snooze options" style="width:70%;" >}}
+{{< img src="error_tracking/issue-snooze.png" alt="Snooze options" style="width:100%;" >}}
 
 Snoozed issues appear in the {{< ui >}}IGNORED{{< /ui >}} tab.
 
