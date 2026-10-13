@@ -156,10 +156,45 @@ export function buildPlaintextPage(
   frontmatter: PageFrontmatter,
   site: string | URL | undefined,
 ): string {
-  return buildMarkdocStr(
-    [llmsTxtBannerNode(site), ...children],
-    frontmatterYaml(frontmatter),
-  );
+  const nodes = [llmsTxtBannerNode(site), ...children];
+  pointDocsLinksAtMd(nodes, site!);
+  return buildMarkdocStr(nodes, frontmatterYaml(frontmatter));
+}
+
+const DOCS_HOST = "docs.datadoghq.com";
+
+/**
+ * Point a docs page link at its `.md` twin, absolute, so agents following
+ * links stay in plaintext. Root-relative hrefs already carry any preview
+ * prefix, so they resolve against the site's origin, not `absoluteUrl()`.
+ * Other hosts, file links, `.md` links, and the root pass through unchanged.
+ */
+export function mdLinkHref(href: string, site: string | URL): string {
+  const siteUrl = new URL(site);
+  const isRootRelative = href.startsWith("/") && !href.startsWith("//");
+  if (!isRootRelative && !href.startsWith("http")) {
+    return href;
+  }
+  const url = new URL(href, siteUrl.origin);
+  if (url.host !== DOCS_HOST && url.host !== siteUrl.host) {
+    return href;
+  }
+  const lastSegment = url.pathname.split("/").filter(Boolean).pop();
+  if (!lastSegment || /\.[a-z0-9]+$/i.test(lastSegment)) {
+    return href;
+  }
+  url.pathname = `${url.pathname.replace(/\/+$/, "")}.md`;
+  return url.href;
+}
+
+function pointDocsLinksAtMd(nodes: MarkdocNode[], site: string | URL): void {
+  for (const node of nodes) {
+    for (const child of [node, ...node.walk()]) {
+      if (child.type === "link" && typeof child.attributes.href === "string") {
+        child.attributes.href = mdLinkHref(child.attributes.href, site);
+      }
+    }
+  }
 }
 
 function frontmatterYaml({

@@ -8,9 +8,9 @@ breadcrumbs: Docs > API > Incidents
 
 # Incidents
 
-Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information.
+Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management.md) for more information.
 
-## [Create an incident](/api/latest/incidents/create-an-incident/) (preview)
+## [Create an incident](https://docs.datadoghq.com/api/latest/incidents/create-an-incident.md) (preview)
 
 | Datadog site      | API endpoint                                            |
 | ----------------- | ------------------------------------------------------- |
@@ -22,7 +22,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents      |
 
-## [Get the details of an incident](/api/latest/incidents/get-the-details-of-an-incident/) (preview)
+## [Get the details of an incident](https://docs.datadoghq.com/api/latest/incidents/get-the-details-of-an-incident.md) (preview)
 
 | Datadog site      | API endpoint                                                         |
 | ----------------- | -------------------------------------------------------------------- |
@@ -34,7 +34,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}      |
 
-## [Update an existing incident](/api/latest/incidents/update-an-existing-incident/) (preview)
+## [Update an existing incident](https://docs.datadoghq.com/api/latest/incidents/update-an-existing-incident.md) (preview)
 
 | Datadog site      | API endpoint                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
@@ -46,7 +46,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/{incident_id}      |
 
-## [Delete an existing incident](/api/latest/incidents/delete-an-existing-incident/) (preview)
+## [Delete an existing incident](https://docs.datadoghq.com/api/latest/incidents/delete-an-existing-incident.md) (preview)
 
 | Datadog site      | API endpoint                                                            |
 | ----------------- | ----------------------------------------------------------------------- |
@@ -58,7 +58,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/{incident_id}      |
 
-## [Create postmortem attachment](/api/latest/incidents/create-postmortem-attachment/) (preview)
+## [Create postmortem attachment](https://docs.datadoghq.com/api/latest/incidents/create-postmortem-attachment.md) (preview)
 
 | Datadog site      | API endpoint                                                                                  |
 | ----------------- | --------------------------------------------------------------------------------------------- |
@@ -70,7 +70,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/postmortems      |
 
-## [Search for incidents](/api/latest/incidents/search-for-incidents/) (preview)
+## [Search for incidents](https://docs.datadoghq.com/api/latest/incidents/search-for-incidents.md) (preview)
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -82,7 +82,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/search |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/search      |
 
-## [List an incident's impacts](/api/latest/incidents/list-an-incident-s-impacts/)
+## [List an incident's impacts](https://docs.datadoghq.com/api/latest/incidents/list-an-incident-s-impacts.md)
 
 | Datadog site      | API endpoint                                                                 |
 | ----------------- | ---------------------------------------------------------------------------- |
@@ -94,7 +94,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts      |
 
-## [Create an incident impact](/api/latest/incidents/create-an-incident-impact/)
+## [Create an incident impact](https://docs.datadoghq.com/api/latest/incidents/create-an-incident-impact.md)
 
 | Datadog site      | API endpoint                                                                  |
 | ----------------- | ----------------------------------------------------------------------------- |
@@ -106,7 +106,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts      |
 
-## [Delete an incident impact](/api/latest/incidents/delete-an-incident-impact/)
+## [Delete an incident impact](https://docs.datadoghq.com/api/latest/incidents/delete-an-incident-impact.md)
 
 | Datadog site      | API endpoint                                                                                |
 | ----------------- | ------------------------------------------------------------------------------------------- |
@@ -118,7 +118,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts/{impact_id}      |
 
-## [Create an incident integration metadata](/api/latest/incidents/create-an-incident-integration-metadata/) (preview)
+## [Create an incident integration metadata](https://docs.datadoghq.com/api/latest/incidents/create-an-incident-integration-metadata.md) (preview)
 
 | Datadog site      | API endpoint                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
@@ -130,7 +130,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations      |
 
-## [Get incident integration metadata details](/api/latest/incidents/get-incident-integration-metadata-details/) (preview)
+## [Get incident integration metadata details](https://docs.datadoghq.com/api/latest/incidents/get-incident-integration-metadata-details.md) (preview)
 
 | Datadog site      | API endpoint                                                                                                              |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -142,7 +142,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}      |
 
-## [Update an existing incident integration metadata](/api/latest/incidents/update-an-existing-incident-integration-metadata/) (preview)
+## [Update an existing incident integration metadata](https://docs.datadoghq.com/api/latest/incidents/update-an-existing-incident-integration-metadata.md) (preview)
 
 | Datadog site      | API endpoint                                                                                                                |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -154,7 +154,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}      |
 
-## [Delete an incident integration metadata](/api/latest/incidents/delete-an-incident-integration-metadata/) (preview)
+## [Delete an incident integration metadata](https://docs.datadoghq.com/api/latest/incidents/delete-an-incident-integration-metadata.md) (preview)
 
 | Datadog site      | API endpoint                                                                                                                 |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -166,7 +166,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}      |
 
-## [Get a list of an incident's todos](/api/latest/incidents/get-a-list-of-an-incident-s-todos/) (preview)
+## [Get a list of an incident's todos](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-an-incident-s-todos.md) (preview)
 
 | Datadog site      | API endpoint                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------- |
@@ -178,7 +178,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos      |
 
-## [Create an incident todo](/api/latest/incidents/create-an-incident-todo/) (preview)
+## [Create an incident todo](https://docs.datadoghq.com/api/latest/incidents/create-an-incident-todo.md) (preview)
 
 | Datadog site      | API endpoint                                                                              |
 | ----------------- | ----------------------------------------------------------------------------------------- |
@@ -190,7 +190,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos      |
 
-## [Get incident todo details](/api/latest/incidents/get-incident-todo-details/) (preview)
+## [Get incident todo details](https://docs.datadoghq.com/api/latest/incidents/get-incident-todo-details.md) (preview)
 
 | Datadog site      | API endpoint                                                                                       |
 | ----------------- | -------------------------------------------------------------------------------------------------- |
@@ -202,7 +202,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}      |
 
-## [Update an incident todo](/api/latest/incidents/update-an-incident-todo/) (preview)
+## [Update an incident todo](https://docs.datadoghq.com/api/latest/incidents/update-an-incident-todo.md) (preview)
 
 | Datadog site      | API endpoint                                                                                         |
 | ----------------- | ---------------------------------------------------------------------------------------------------- |
@@ -214,7 +214,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}      |
 
-## [Delete an incident todo](/api/latest/incidents/delete-an-incident-todo/) (preview)
+## [Delete an incident todo](https://docs.datadoghq.com/api/latest/incidents/delete-an-incident-todo.md) (preview)
 
 | Datadog site      | API endpoint                                                                                          |
 | ----------------- | ----------------------------------------------------------------------------------------------------- |
@@ -226,7 +226,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}      |
 
-## [Create an incident type](/api/latest/incidents/create-an-incident-type/) (preview)
+## [Create an incident type](https://docs.datadoghq.com/api/latest/incidents/create-an-incident-type.md) (preview)
 
 | Datadog site      | API endpoint                                                         |
 | ----------------- | -------------------------------------------------------------------- |
@@ -238,7 +238,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/config/types |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/config/types      |
 
-## [Get a list of incident types](/api/latest/incidents/get-a-list-of-incident-types/) (preview)
+## [Get a list of incident types](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-incident-types.md) (preview)
 
 | Datadog site      | API endpoint                                                        |
 | ----------------- | ------------------------------------------------------------------- |
@@ -250,7 +250,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/types |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/types      |
 
-## [Get incident type details](/api/latest/incidents/get-incident-type-details/) (preview)
+## [Get incident type details](https://docs.datadoghq.com/api/latest/incidents/get-incident-type-details.md) (preview)
 
 | Datadog site      | API endpoint                                                                           |
 | ----------------- | -------------------------------------------------------------------------------------- |
@@ -262,7 +262,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id}      |
 
-## [Update an incident type](/api/latest/incidents/update-an-incident-type/) (preview)
+## [Update an incident type](https://docs.datadoghq.com/api/latest/incidents/update-an-incident-type.md) (preview)
 
 | Datadog site      | API endpoint                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------- |
@@ -274,7 +274,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id}      |
 
-## [Delete an incident type](/api/latest/incidents/delete-an-incident-type/) (preview)
+## [Delete an incident type](https://docs.datadoghq.com/api/latest/incidents/delete-an-incident-type.md) (preview)
 
 | Datadog site      | API endpoint                                                                              |
 | ----------------- | ----------------------------------------------------------------------------------------- |
@@ -286,7 +286,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id}      |
 
-## [List incident notification templates](/api/latest/incidents/list-incident-notification-templates/) (preview)
+## [List incident notification templates](https://docs.datadoghq.com/api/latest/incidents/list-incident-notification-templates.md) (preview)
 
 | Datadog site      | API endpoint                                                                         |
 | ----------------- | ------------------------------------------------------------------------------------ |
@@ -298,7 +298,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/notification-templates      |
 
-## [Create incident notification template](/api/latest/incidents/create-incident-notification-template/) (preview)
+## [Create incident notification template](https://docs.datadoghq.com/api/latest/incidents/create-incident-notification-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -310,7 +310,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/config/notification-templates      |
 
-## [Get incident notification template](/api/latest/incidents/get-incident-notification-template/) (preview)
+## [Get incident notification template](https://docs.datadoghq.com/api/latest/incidents/get-incident-notification-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                              |
 | ----------------- | ----------------------------------------------------------------------------------------- |
@@ -322,7 +322,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id}      |
 
-## [Update incident notification template](/api/latest/incidents/update-incident-notification-template/) (preview)
+## [Update incident notification template](https://docs.datadoghq.com/api/latest/incidents/update-incident-notification-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                                |
 | ----------------- | ------------------------------------------------------------------------------------------- |
@@ -334,7 +334,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id}      |
 
-## [Delete a notification template](/api/latest/incidents/delete-a-notification-template/) (preview)
+## [Delete a notification template](https://docs.datadoghq.com/api/latest/incidents/delete-a-notification-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                                 |
 | ----------------- | -------------------------------------------------------------------------------------------- |
@@ -346,7 +346,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id}      |
 
-## [List incident notification rules](/api/latest/incidents/list-incident-notification-rules/) (preview)
+## [List incident notification rules](https://docs.datadoghq.com/api/latest/incidents/list-incident-notification-rules.md) (preview)
 
 | Datadog site      | API endpoint                                                                     |
 | ----------------- | -------------------------------------------------------------------------------- |
@@ -358,7 +358,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/notification-rules      |
 
-## [Create an incident notification rule](/api/latest/incidents/create-an-incident-notification-rule/) (preview)
+## [Create an incident notification rule](https://docs.datadoghq.com/api/latest/incidents/create-an-incident-notification-rule.md) (preview)
 
 | Datadog site      | API endpoint                                                                      |
 | ----------------- | --------------------------------------------------------------------------------- |
@@ -370,7 +370,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/config/notification-rules      |
 
-## [Get an incident notification rule](/api/latest/incidents/get-an-incident-notification-rule/) (preview)
+## [Get an incident notification rule](https://docs.datadoghq.com/api/latest/incidents/get-an-incident-notification-rule.md) (preview)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -382,7 +382,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id}      |
 
-## [Update an incident notification rule](/api/latest/incidents/update-an-incident-notification-rule/) (preview)
+## [Update an incident notification rule](https://docs.datadoghq.com/api/latest/incidents/update-an-incident-notification-rule.md) (preview)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -394,7 +394,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} |
 | app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id}      |
 
-## [Delete an incident notification rule](/api/latest/incidents/delete-an-incident-notification-rule/) (preview)
+## [Delete an incident notification rule](https://docs.datadoghq.com/api/latest/incidents/delete-an-incident-notification-rule.md) (preview)
 
 | Datadog site      | API endpoint                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------- |
@@ -406,7 +406,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id}      |
 
-## [List incident attachments](/api/latest/incidents/list-incident-attachments/) (preview)
+## [List incident attachments](https://docs.datadoghq.com/api/latest/incidents/list-incident-attachments.md) (preview)
 
 | Datadog site      | API endpoint                                                                     |
 | ----------------- | -------------------------------------------------------------------------------- |
@@ -418,7 +418,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments      |
 
-## [Create incident attachment](/api/latest/incidents/create-incident-attachment/) (preview)
+## [Create incident attachment](https://docs.datadoghq.com/api/latest/incidents/create-incident-attachment.md) (preview)
 
 | Datadog site      | API endpoint                                                                      |
 | ----------------- | --------------------------------------------------------------------------------- |
@@ -430,7 +430,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments      |
 
-## [Delete incident attachment](/api/latest/incidents/delete-incident-attachment/) (preview)
+## [Delete incident attachment](https://docs.datadoghq.com/api/latest/incidents/delete-incident-attachment.md) (preview)
 
 | Datadog site      | API endpoint                                                                                        |
 | ----------------- | --------------------------------------------------------------------------------------------------- |
@@ -442,7 +442,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}      |
 
-## [Update incident attachment](/api/latest/incidents/update-incident-attachment/) (preview)
+## [Update incident attachment](https://docs.datadoghq.com/api/latest/incidents/update-incident-attachment.md) (preview)
 
 | Datadog site      | API endpoint                                                                                       |
 | ----------------- | -------------------------------------------------------------------------------------------------- |
@@ -454,7 +454,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}      |
 
-## [Get global incident settings](/api/latest/incidents/get-global-incident-settings/) (preview)
+## [Get global incident settings](https://docs.datadoghq.com/api/latest/incidents/get-global-incident-settings.md) (preview)
 
 | Datadog site      | API endpoint                                                                  |
 | ----------------- | ----------------------------------------------------------------------------- |
@@ -466,7 +466,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/global/settings      |
 
-## [Update global incident settings](/api/latest/incidents/update-global-incident-settings/) (preview)
+## [Update global incident settings](https://docs.datadoghq.com/api/latest/incidents/update-global-incident-settings.md) (preview)
 
 | Datadog site      | API endpoint                                                                    |
 | ----------------- | ------------------------------------------------------------------------------- |
@@ -478,7 +478,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/config/global/settings      |
 
-## [List global incident handles](/api/latest/incidents/list-global-incident-handles/) (preview)
+## [List global incident handles](https://docs.datadoghq.com/api/latest/incidents/list-global-incident-handles.md) (preview)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -490,7 +490,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles      |
 
-## [Create global incident handle](/api/latest/incidents/create-global-incident-handle/) (preview)
+## [Create global incident handle](https://docs.datadoghq.com/api/latest/incidents/create-global-incident-handle.md) (preview)
 
 | Datadog site      | API endpoint                                                                           |
 | ----------------- | -------------------------------------------------------------------------------------- |
@@ -502,7 +502,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles      |
 
-## [Update global incident handle](/api/latest/incidents/update-global-incident-handle/) (preview)
+## [Update global incident handle](https://docs.datadoghq.com/api/latest/incidents/update-global-incident-handle.md) (preview)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -514,7 +514,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles |
 | app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles      |
 
-## [Delete global incident handle](/api/latest/incidents/delete-global-incident-handle/) (preview)
+## [Delete global incident handle](https://docs.datadoghq.com/api/latest/incidents/delete-global-incident-handle.md) (preview)
 
 | Datadog site      | API endpoint                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------- |
@@ -526,7 +526,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles      |
 
-## [List postmortem templates](/api/latest/incidents/list-postmortem-templates/) (preview)
+## [List postmortem templates](https://docs.datadoghq.com/api/latest/incidents/list-postmortem-templates.md) (preview)
 
 | Datadog site      | API endpoint                                                                       |
 | ----------------- | ---------------------------------------------------------------------------------- |
@@ -538,7 +538,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates      |
 
-## [Create postmortem template](/api/latest/incidents/create-postmortem-template/) (preview)
+## [Create postmortem template](https://docs.datadoghq.com/api/latest/incidents/create-postmortem-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                        |
 | ----------------- | ----------------------------------------------------------------------------------- |
@@ -550,7 +550,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates      |
 
-## [Get postmortem template](/api/latest/incidents/get-postmortem-template/) (preview)
+## [Get postmortem template](https://docs.datadoghq.com/api/latest/incidents/get-postmortem-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
@@ -562,7 +562,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id}      |
 
-## [Update postmortem template](/api/latest/incidents/update-postmortem-template/) (preview)
+## [Update postmortem template](https://docs.datadoghq.com/api/latest/incidents/update-postmortem-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                                       |
 | ----------------- | -------------------------------------------------------------------------------------------------- |
@@ -574,7 +574,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id}      |
 
-## [Delete postmortem template](/api/latest/incidents/delete-postmortem-template/) (preview)
+## [Delete postmortem template](https://docs.datadoghq.com/api/latest/incidents/delete-postmortem-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                                        |
 | ----------------- | --------------------------------------------------------------------------------------------------- |
@@ -586,7 +586,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id}      |
 
-## [Import an incident](/api/latest/incidents/import-an-incident/) (preview)
+## [Import an incident](https://docs.datadoghq.com/api/latest/incidents/import-an-incident.md) (preview)
 
 | Datadog site      | API endpoint                                                   |
 | ----------------- | -------------------------------------------------------------- |
@@ -598,7 +598,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/import |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/import      |
 
-## [Get a list of incidents](/api/latest/incidents/get-a-list-of-incidents/) (preview)
+## [Get a list of incidents](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-incidents.md) (preview)
 
 | Datadog site      | API endpoint                                           |
 | ----------------- | ------------------------------------------------------ |
@@ -610,7 +610,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents      |
 
-## [Get a list of an incident's integration metadata](/api/latest/incidents/get-a-list-of-an-incident-s-integration-metadata/) (preview)
+## [Get a list of an incident's integration metadata](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-an-incident-s-integration-metadata.md) (preview)
 
 | Datadog site      | API endpoint                                                                                    |
 | ----------------- | ----------------------------------------------------------------------------------------------- |
@@ -622,7 +622,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations      |
 
-## [Get a list of incident user-defined fields](/api/latest/incidents/get-a-list-of-incident-user-defined-fields/) (preview)
+## [Get a list of incident user-defined fields](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-incident-user-defined-fields.md) (preview)
 
 | Datadog site      | API endpoint                                                                      |
 | ----------------- | --------------------------------------------------------------------------------- |
@@ -634,7 +634,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields      |
 
-## [Create an incident user-defined field](/api/latest/incidents/create-an-incident-user-defined-field/) (preview)
+## [Create an incident user-defined field](https://docs.datadoghq.com/api/latest/incidents/create-an-incident-user-defined-field.md) (preview)
 
 | Datadog site      | API endpoint                                                                       |
 | ----------------- | ---------------------------------------------------------------------------------- |
@@ -646,7 +646,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields      |
 
-## [Get an incident user-defined field](/api/latest/incidents/get-an-incident-user-defined-field/) (preview)
+## [Get an incident user-defined field](https://docs.datadoghq.com/api/latest/incidents/get-an-incident-user-defined-field.md) (preview)
 
 | Datadog site      | API endpoint                                                                                 |
 | ----------------- | -------------------------------------------------------------------------------------------- |
@@ -658,7 +658,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id}      |
 
-## [Update an incident user-defined field](/api/latest/incidents/update-an-incident-user-defined-field/) (preview)
+## [Update an incident user-defined field](https://docs.datadoghq.com/api/latest/incidents/update-an-incident-user-defined-field.md) (preview)
 
 | Datadog site      | API endpoint                                                                                   |
 | ----------------- | ---------------------------------------------------------------------------------------------- |
@@ -670,7 +670,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id}      |
 
-## [Delete an incident user-defined field](/api/latest/incidents/delete-an-incident-user-defined-field/) (preview)
+## [Delete an incident user-defined field](https://docs.datadoghq.com/api/latest/incidents/delete-an-incident-user-defined-field.md) (preview)
 
 | Datadog site      | API endpoint                                                                                    |
 | ----------------- | ----------------------------------------------------------------------------------------------- |
