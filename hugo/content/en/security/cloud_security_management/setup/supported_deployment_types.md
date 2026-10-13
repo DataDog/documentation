@@ -1,12 +1,12 @@
 ---
-title: Cloud Security Coverage and Collection Methods
+title: Cloud Security Coverage and Data Collection Methods
 ---
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
-Cloud Security helps you find and fix security issues in production and before deployment. Choose a path, then use the coverage tables to compare what each capability supports.
+Cloud Security helps you find and fix security issues in production and before deployment. Choose one or more deployment strategies, then use the coverage tables to compare what each capability supports.
 
-## Choose your path
+## Deployment strategies
 
 ### Agentless
 
@@ -26,11 +26,11 @@ Cloud Security helps you find and fix security issues in production and before d
 
 | Environment   | Misconfigurations | Identity Risks | Vulnerabilities |
 |---------------|-------------------|----------------|-----------------|
-| Cloud account | Yes               | Yes            | Not applicable  |
-| Hosts         | Yes               | Not applicable | Yes             |
-| Docker        | Yes               | Not applicable | Yes             |
-| Kubernetes    | Yes               | Not applicable | Yes             |
-| Serverless    | Yes               | Not applicable | Yes             |
+| Cloud account | {{< X >}}         | {{< X >}}      | Not applicable  |
+| Hosts         | {{< X >}}         | Not applicable | {{< X >}}       |
+| Docker        | {{< X >}}         | Not applicable | {{< X >}}       |
+| Kubernetes    | {{< X >}}         | Not applicable | {{< X >}}       |
+| Serverless    | {{< X >}}         | Not applicable | {{< X >}}       |
 
 - Misconfigurations is available for AWS, Azure, GCP, and OCI.
 - Identity Risks is available for AWS, Azure, and GCP.
@@ -44,7 +44,7 @@ Cloud Security helps you find and fix security issues in production and before d
 | CI/CD pipeline     | Scan container images before deployment and link findings to the Dockerfile and commit that introduced them.                    | [Container Image Scanning in CI/CD][5]                                     |
 | Repository         | Run IaC checks before merge, and map Cloud Security findings to the IaC repository, file, line, and code owner for remediation. | [Code Security][8], [source-code integration][6], and [IaC remediation][9] |
 
-You can combine these paths: scan before deployment, and use Agentless or Agent deployments to find issues in production.
+You can combine these strategies: scan before deployment, and use Agentless or Agent deployments to find issues in production.
 
 ## Detailed compatibility
 

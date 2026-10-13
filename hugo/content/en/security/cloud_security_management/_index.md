@@ -65,7 +65,7 @@ cascade:
   Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
-Datadog Cloud Security helps you assess cloud configuration, identity risk, and vulnerabilities across your cloud infrastructure. For real-time threat detection in running workloads, use [Workload Protection][24].
+Datadog Cloud Security helps you assess cloud configuration, identity risk, and vulnerabilities across your cloud infrastructure.
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
@@ -79,15 +79,17 @@ Cloud Security includes the following capabilities:
 - [{{< ui >}}Identity Risks{{< /ui >}}][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [{{< ui >}}Vulnerabilities{{< /ui >}}][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
+For real-time threat detection in running workloads, use [Workload Protection][24].
+
 ## How Datadog collects Cloud Security data
 
-Datadog uses three collection methods. You can combine them to cover different assets and security outcomes:
+Datadog uses three methods to collect Cloud Security data. You can combine them to cover different assets and security outcomes:
 
 - **Unified Datadog Agent**: Host Agent, Cluster Agent, and serverless Agent deployments collect host and runtime context.
 - **Agentless**: Cloud integrations assess cloud configuration and identities. Agentless Scanning finds vulnerabilities in supported AWS, Azure, and GCP assets without an Agent on every resource.
-- **Repository and CI/CD integrations**: Scan container images before deployment and connect findings to source code.
+- **Repository and CI/CD integrations**: Integrations scan container images before deployment and connect findings to source code.
 
-See [Cloud Security Coverage and Collection Methods][25] for the supported assets, prerequisites, and exclusions for each collection method.
+See [Cloud Security Coverage and Data Collection Methods][25] for the supported assets, prerequisites, and exclusions for each data collection method.
 
 Cloud Security also includes access to Datadog Security features, including:
 - [Detection Rules][18]

@@ -6,7 +6,9 @@ aliases:
   - /security/cloud_security_management/setup/cloud_accounts
 ---
 
-Cloud integrations are an Agentless collection method for [Misconfigurations][2] and [Identity Risks][3]. Use the following instructions to enable them on AWS, Azure, GCP, and OCI. Cloud integrations do not provide vulnerability scanning. For vulnerability coverage on AWS, Azure, and GCP, see [Agentless Scanning][4]. See [Cloud Security Coverage and Collection Methods][5] for the distinction.
+Cloud integrations are an Agentless collection method for [Misconfigurations][2] and [Identity Risks][3]. Use the instructions on this page to enable them on AWS, Azure, GCP, and OCI.
+
+Cloud integrations do not provide vulnerability scanning. For vulnerability coverage on AWS, Azure, and GCP, see [Agentless Scanning][4]. For more information, see [Cloud Security Coverage and Data Collection Methods][5].
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>

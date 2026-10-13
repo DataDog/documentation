@@ -28,7 +28,7 @@ further_reading:
 
 Cloud Security Vulnerabilities helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
-Cloud Security Vulnerabilities scans container images in three contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage and prerequisites. See [Cloud Security Coverage and Collection Methods][25] before choosing a deployment method.
+Cloud Security Vulnerabilities scans container images in three contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage and prerequisites. See [Cloud Security Coverage and Data Collection Methods][25] before choosing a deployment method.
 
 With Cloud Security Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 
@@ -36,7 +36,7 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 - Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10]. Cloud Security Vulnerabilities does not detect runtime threats. For runtime threat detection, see [Workload Protection][26].
+**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10]. Cloud Security Vulnerabilities does not detect runtime threats; for runtime threat detection, see [Workload Protection][26].
 
 ## Key capabilities
 
@@ -44,8 +44,8 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Collect vulnerability data with Agentless or the Unified Datadog Agent
-: Use Agentless Scanning for supported AWS, Azure, and GCP assets without installing an Agent on each resource. Use the Unified Datadog Agent for host and runtime context and real-time updates. You can use both together.
+Collect vulnerability data with Agentless and/or the Unified Datadog Agent
+: Use Agentless Scanning for supported AWS, Azure, and GCP assets without installing an Agent on each resource. You can use it in combination with the Unified Datadog Agent, which providess host and runtime context and real-time updates.
 
 Inventory cloud resources, in real-time
 : Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM (software bill of materials).

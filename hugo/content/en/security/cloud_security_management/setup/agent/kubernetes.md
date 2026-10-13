@@ -9,7 +9,9 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
 ---
 
-Use the following instructions to enable Misconfigurations and Vulnerabilities with the Unified Datadog Agent on Kubernetes. This deployment provides Agent-based workload context. It is distinct from Agentless image discovery, which can use the Datadog Cluster Agent to identify images used by Kubernetes workloads but does not provide full Kubernetes observability. See [Cloud Security Coverage and Collection Methods][12] for the distinction.
+Use the following instructions to enable Misconfigurations and Vulnerabilities with the Unified Datadog Agent on Kubernetes.
+
+This deployment provides Agent-based workload context. It is distinct from Agentless image discovery, which can use the Datadog Cluster Agent to identify images used by Kubernetes workloads but does not provide full Kubernetes observability. For more information, see [Cloud Security Coverage and Data Collection Methods][12].
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 

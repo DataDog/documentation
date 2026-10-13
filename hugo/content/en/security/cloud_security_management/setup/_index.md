@@ -17,7 +17,7 @@ aliases:
 further_reading:
     - link: "/security/cloud_security_management/setup/supported_deployment_types"
       tag: "Documentation"
-      text: "Cloud Security Coverage and Collection Methods"
+      text: "Cloud Security Coverage and Data Collection Methods"
     - link: "/security/guide/aws_fargate_config_guide"
       tag: "Documentation"
       text: "AWS Fargate Configuration Guide for Datadog Security"
@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-To get started with Cloud Security, review the following:
+The following resources contain helpful information on getting started with Cloud Security:
 
 - [Choose a coverage and collection method](#choose-a-coverage-and-collection-method)
 - [Enable Agentless Scanning](#enable-agentless-scanning) for supported vulnerability discovery without an Agent on every resource
@@ -47,7 +47,7 @@ Cloud Security has three collection methods. You can use more than one:
 - **Agentless** includes cloud integrations for cloud configuration and identity assessment, and Agentless Scanning for supported vulnerability discovery in AWS, Azure, and GCP.
 - **Repository and CI/CD integrations** scan container images before deployment and connect findings to source code.
 
-For a capability-by-asset overview, prerequisites, and exclusions, see [Cloud Security Coverage and Collection Methods][10].
+For an overview of coverage capability for different asset types, as well as prerequisites and exclusions, see [Cloud Security Coverage and Data Collection Methods][10].
 
 ## Enable Agentless Scanning
 
