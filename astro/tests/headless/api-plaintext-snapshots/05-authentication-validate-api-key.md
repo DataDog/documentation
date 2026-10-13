@@ -147,7 +147,7 @@ func main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=go) and then save the example to `main.go` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<DD_API_KEY>" go run "main.go"
@@ -174,7 +174,7 @@ with ApiClient(configuration) as api_client:
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<DD_API_KEY>" python3 "example.py"

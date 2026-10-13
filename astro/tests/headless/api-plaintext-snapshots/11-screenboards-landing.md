@@ -12,4 +12,4 @@ breadcrumbs: Docs > API > Screenboards
 This endpoint is deprecated.
 {% /alert %}
 
-This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
+This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards.md) instead.

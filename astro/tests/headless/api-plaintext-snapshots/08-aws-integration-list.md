@@ -76,8 +76,8 @@ AWS Accounts response body.
 | lambda_forwarder  | sources                                      | [string]  | List of service IDs set to enable automatic log collection.
   Discover the list of available services with the
   [Get list of AWS log ready
-  services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
-  endpoint.               |
+  services](https://docs.datadoghq.com/api/latest/aws-logs-integration.md#get-list-of-aws-log-ready-services)
+  endpoint.             |
 | attributes        | metrics_config                               | object    | AWS Metrics Collection config.                                                                                                                                                                                                                                                    |
 | metrics_config    | automute_enabled                             | boolean   | Enable EC2 automute for AWS metrics. Defaults to `true`.                                                                                                                                                                                                                          |
 | metrics_config    | collect_cloudwatch_alarms                    | boolean   | Enable CloudWatch alarms collection. Defaults to `false`.                                                                                                                                                                                                                         |
@@ -112,8 +112,8 @@ AWS Accounts response body.
 | Object 2          | include_only [*required*]                    | [string]  | Include only these services.                                                                                                                                                                                                                                                      |
 | data              | id [*required*]                              | string    | Unique Datadog ID of the AWS Account Integration Config.
   To get the config ID for an account, use the
-  [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
-  endpoint and query by AWS Account ID.                   |
+  [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration.md#list-all-aws-integrations)
+  endpoint and query by AWS Account ID.                 |
 | data              | type [*required*]                            | enum      | AWS Account resource type. Allowed values: `account`. Default: `account`.                                                                                                                                                                                                         |
 {% /tab %}
 
@@ -297,7 +297,7 @@ func main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=go) and then save the example to `main.go` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" go run "main.go"
@@ -335,7 +335,7 @@ public class Example {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=java) and then save the example to `Example.java` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=java) and then save the example to `Example.java` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" java "Example.java"
@@ -362,7 +362,7 @@ with ApiClient(configuration) as api_client:
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" python3 "example.py"
@@ -381,7 +381,7 @@ p api_instance.list_aws_accounts()
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=ruby) and then save the example to `example.rb` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=ruby) and then save the example to `example.rb` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" rb "example.rb"
@@ -413,7 +413,7 @@ async fn main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=rust) and then save the example to `src/main.rs` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=rust) and then save the example to `src/main.rs` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" cargo run
@@ -444,7 +444,7 @@ apiInstance
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=typescript) and then save the example to `example.ts` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=typescript) and then save the example to `example.ts` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" tsc "example.ts"
@@ -679,7 +679,7 @@ func main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=go) and then save the example to `main.go` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" go run "main.go"
@@ -717,7 +717,7 @@ public class Example {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=java) and then save the example to `Example.java` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=java) and then save the example to `Example.java` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" java "Example.java"
@@ -744,7 +744,7 @@ with ApiClient(configuration) as api_client:
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" python3 "example.py"
@@ -763,7 +763,7 @@ p api_instance.list_aws_accounts()
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=ruby) and then save the example to `example.rb` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=ruby) and then save the example to `example.rb` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" rb "example.rb"
@@ -795,7 +795,7 @@ async fn main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=rust) and then save the example to `src/main.rs` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=rust) and then save the example to `src/main.rs` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" cargo run
@@ -826,7 +826,7 @@ apiInstance
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=typescript) and then save the example to `example.ts` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=typescript) and then save the example to `example.ts` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" tsc "example.ts"

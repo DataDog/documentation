@@ -16,7 +16,7 @@ Interact with your dashboard lists through the API to
 organize, find, and share all of your dashboards with your team and
 organization.
 
-## [Get all dashboard lists](/api/latest/dashboard-lists/get-all-dashboard-lists/)
+## [Get all dashboard lists](https://docs.datadoghq.com/api/latest/dashboard-lists/get-all-dashboard-lists.md)
 
 | Datadog site      | API endpoint                                                        |
 | ----------------- | ------------------------------------------------------------------- |
@@ -28,7 +28,7 @@ organization.
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
 
-## [Create a dashboard list](/api/latest/dashboard-lists/create-a-dashboard-list/)
+## [Create a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/create-a-dashboard-list.md)
 
 | Datadog site      | API endpoint                                                         |
 | ----------------- | -------------------------------------------------------------------- |
@@ -40,7 +40,7 @@ organization.
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
 
-## [Get a dashboard list](/api/latest/dashboard-lists/get-a-dashboard-list/)
+## [Get a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/get-a-dashboard-list.md)
 
 | Datadog site      | API endpoint                                                                  |
 | ----------------- | ----------------------------------------------------------------------------- |
@@ -52,7 +52,7 @@ organization.
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}      |
 
-## [Update a dashboard list](/api/latest/dashboard-lists/update-a-dashboard-list/)
+## [Update a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/update-a-dashboard-list.md)
 
 | Datadog site      | API endpoint                                                                  |
 | ----------------- | ----------------------------------------------------------------------------- |
@@ -64,7 +64,7 @@ organization.
 | ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}      |
 
-## [Delete a dashboard list](/api/latest/dashboard-lists/delete-a-dashboard-list/)
+## [Delete a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/delete-a-dashboard-list.md)
 
 | Datadog site      | API endpoint                                                                     |
 | ----------------- | -------------------------------------------------------------------------------- |
