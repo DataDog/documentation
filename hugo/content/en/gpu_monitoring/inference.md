@@ -158,7 +158,7 @@ If no metrics appear, send inference traffic to your deployment. Dynamo and vLLM
 
 ### 5. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, follow the [GPU Monitoring tracing setup][4] and label your vLLM worker workloads.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM worker workloads.
 
 ## Explore the Inference page
 
