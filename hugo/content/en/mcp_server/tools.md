@@ -131,6 +131,22 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 - Find notebooks related to performance investigation.
 - List notebooks tagged with `incident-response`.
 
+### `delete_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within 30 days of deletion.
+
+- Delete notebook 12345678.
+- Delete the notebook with ID 12345678 that I created for testing.
+
+### `recover_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Restores a soft-deleted notebook by its numeric ID. The notebook can be restored only within 30 days of deletion.
+
+- Recover notebook 12345678.
+- Restore the notebook with ID 12345678 that I deleted by mistake.
+
 ### `search_datadog_hosts`
 *Toolset: **core***\
 *Permissions Required: `Hosts Read` and `Timeseries`*\
@@ -239,6 +255,104 @@ Edits an existing Datadog notebook.
 
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
+
+## Agent Builder
+
+Tools for [Bits Agent Builder][91], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, running agents, and inspecting their conversations.
+
+Workflow Automation tools are used to configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps.
+
+Connect or disconnect OAuth MCP integrations through the Datadog UI.
+
+### `list_datadog_bits_agents`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the custom AI agents in your organization, including each agent's ID, name, description, and model. Use `get_datadog_bits_agent` for the complete configuration.
+
+- List the Bits agents in this organization.
+- Find the agent that investigates checkout service errors.
+
+### `get_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Workflows Read`*\
+Retrieves an agent by ID, including its system prompt, action tools, MCP servers, and the workflows that invoke it. Use `get_datadog_workflow` to inspect a workflow's complete specification.
+
+- Show the system prompt and tools configured for the checkout investigation agent.
+- Which workflows invoke this agent?
+
+### `list_datadog_bits_agent_models`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` or `Bits Agent Builder Write`*\
+
+Lists supported model identifiers, identifies the default, and notes capabilities such as tool search support. Use these identifiers when creating or updating an agent.
+
+- Which models are available for a Bits agent?
+- Show the default model and models that support tool search.
+
+### `create_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Creates a persistent custom AI agent from a name and system prompt. Optionally, provide a description, model, action tools, and a `code-sandbox` MCP server. The `datadog` MCP server is attached automatically with full tool access. Look up action identifiers and input schemas with `search_datadog_workflow_actions` and `get_datadog_workflow_action` before adding action tools.
+
+- Create an agent that investigates checkout service errors using logs, metrics, and traces.
+- Create an agent that summarizes service health and can send its findings to a Slack channel.
+
+### `update_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Updates an agent's name, description, system prompt, model, or action tools. Omitted fields remain unchanged. Providing `action_tools` replaces the complete list. An empty array clears it. Set `dry_run: true` to preview changes. To change an agent's MCP configuration, use `add_datadog_managed_mcp_server_to_bits_agent` or `remove_datadog_managed_mcp_server_from_bits_agent`.
+
+- Update the checkout investigation agent's instructions to include deployment events.
+- Preview changing this agent to the default model returned by `list_datadog_bits_agent_models`.
+
+### `list_datadog_bits_agent_mcp_tools`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a specific agent. Returns the full catalog available to your organization, regardless of the agent's `allowed_tools` restrictions. Use the returned names when restricting tools. For capabilities absent from the catalog, use `search_datadog_workflow_actions` to search the Workflow Automation action catalog.
+
+- List the Datadog MCP tools available for this agent.
+- Check which MCP tools are available before restricting the agent's access.
+
+### `add_datadog_managed_mcp_server_to_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Adds or reconfigures the `datadog` or `code-sandbox` MCP server on an agent, preserving its OAuth MCP integrations. If the named server already exists, this tool replaces its configuration. An empty `allowed_tools` list permits all tools. For `code-sandbox`, provide `repo_urls` for repositories connected through the Source Code integration. Set `dry_run: true` to preview changes.
+
+- Restrict this agent's Datadog MCP server to selected tools from `list_datadog_bits_agent_mcp_tools`.
+- Add a code sandbox for the connected repository `github.com/example/checkout`.
+
+### `remove_datadog_managed_mcp_server_from_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Removes the `datadog` or `code-sandbox` MCP server from an agent, preserving its OAuth MCP integrations. If the server is not configured, the agent remains unchanged. Set `dry_run: true` to preview changes.
+
+- Remove the code sandbox from the checkout investigation agent.
+- Preview removing this agent's Datadog MCP server.
+
+### `run_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Run`*\
+Starts an agent with a user prompt and returns a `conversation_id` immediately while the agent runs in the background. Each call starts a separate conversation. This tool cannot add messages to an existing conversation. Poll `get_datadog_bits_agent_conversation_events` to retrieve the response.
+
+- Run the checkout investigation agent to investigate the error spike from the past hour.
+- Ask the service health agent to summarize the payments service's current status.
+
+### `list_datadog_bits_agent_conversations`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists an agent's past conversations, including IDs and titles. Use the returned IDs with `get_datadog_bits_agent_conversation_events` to inspect their history.
+
+- List past conversations for the checkout investigation agent.
+- Find the conversation from the last service health investigation.
+
+### `get_datadog_bits_agent_conversation_events`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Retrieves a conversation's event history using its `agent_id` and `conversation_id`, including prompts, agent messages, tool calls, tool results, and errors. Filter with `event_types`, or omit it to return all events. After starting a run, poll until a `final_response` event indicates success or an `application_error` event indicates failure.
+
+- Retrieve the response from the latest agent run.
+- Show the tool calls and results from this investigation.
+- Check whether this conversation has a final response or an application error.
 
 ## Alerting
 
@@ -489,11 +603,11 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; linking work items to each other and to Jira issues; and managing attachments.
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> are not included in <code>toolsets=all</code>. To use them, explicitly add <code>cases</code> to the <code>toolsets</code> parameter. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
@@ -523,7 +637,7 @@ Creates a new [Work Management][38] work item (case) with a title, project, and 
 
 ### `update_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
 Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -539,12 +653,51 @@ Adds a comment to a work item (case) timeline. Comments support markdown formatt
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
+### `attach_file_to_datadog_case`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Uploads a file of up to 10 MiB and attaches it to a work item (case). The attachment remains in processing while Work Management validates it.
+
+- Attach the incident timeline I exported to CASE-1234.
+- Upload this screenshot of the error to the checkout latency work item.
+
+### `get_datadog_case_attachment`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists the attachments on a work item (case), or retrieves the contents of a specific attachment by ID.
+
+- What files are attached to CASE-1234?
+- Show me the screenshot attached to the database migration case.
+
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
+
+### `link_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
+
+- Mark CASE-1234 as blocking CASE-5678.
+- CASE-910 duplicates CASE-1234. Link them.
+
+### `get_datadog_case_links`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
+
+- What other work items are linked to CASE-1234?
+- Is anything blocking the database migration case?
+
+### `unlink_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
+
+- CASE-1234 no longer blocks CASE-5678. Remove that link.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
@@ -555,11 +708,18 @@ Lists available [Work Management][38] projects with optional filtering by name o
 - Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Read`*\
 Retrieves details for a specific project by ID.
 
 - What project is this work item part of?
+
+### `create_datadog_case_project`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Creates a [Work Management][38] project with default settings, given a name and an uppercase key used as the prefix for work items in the project.
+
+- Create a Work Management project called Platform Reliability with the key PLAT.
 
 ### `search_datadog_users`
 *Toolset: **cases***\
@@ -582,6 +742,20 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 - What are my top cloud cost-saving recommendations?
 - How much could I save per day, and how many open recommendations do I have?
 - Which of our Kubernetes cluster optimizations does the team already have underway?
+
+## Cloud Resources
+
+Tools for looking up a cloud resource in the [Resource Catalog][86] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
+
+### `get_cloud_resource_details`
+*Toolset: **cloud-resources***\
+*Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
+
+- Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
+- What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
+- Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
+- What tags are set on this resource, and is it owned by a team?
 
 ## Code Execution
 
@@ -1072,6 +1246,15 @@ Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an 
 - Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
 - Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `get_datadog_error_tracking_analytics`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read`*\
+Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day's count is a snapshot of issue states at end of day.
+
+- Is the error backlog for the payments service growing or shrinking over the last 30 days?
+- How many new Error Tracking Issues were introduced compared to resolved last week?
+- Did regressions spike after last Tuesday's deploy?
+
 ## Experiments
 
 Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
@@ -1319,7 +1502,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Governance
 
-Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
 <div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
 
@@ -1426,7 +1609,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 ### `update_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
-Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
 - Enable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
@@ -1693,7 +1876,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1728,6 +1911,89 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+### `get_network_path_test_runs`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Searches and retrieves [Network Path][83] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+
+- Show me the latest Network Path test runs to `api.example.com`.
+- Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
+- Find Network Path test runs with packet loss in the last hour.
+
+### `get_autonomous_system_status`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Checks the health of an Autonomous System (AS) using [Network Path][83] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+
+- Is AS 15169 experiencing elevated latency compared to last week?
+- Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
+
+### `list_autonomous_system_statuses`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Lists degraded Autonomous Systems (ASes) using [Network Path][83] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+
+- Are there any Autonomous System issues in the last hour?
+- Which ASes are degraded in the last 4 hours?
+- Show me the top three degraded ASes with packet loss.
+
+### `run_network_path`
+*Toolset: **networks***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
+
+- Run a traceroute from host `prod-web-01` to `api.example.com`.
+- Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
+
+## Observability Pipelines
+
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+
+<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
+
+### `list_observability_pipelines`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
+
+- How many pipelines do we have, and how many of them are metrics pipelines?
+- Find the ID of the `prod-agent-logs` pipeline.
+- Which pipelines were modified in the last week?
+
+### `describe_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
+
+- Explain what the `prod-agent-logs` pipeline does.
+- Where are logs dropped in my Splunk forwarding pipeline?
+- Are there redundant or expensive processors in pipeline `abc-123-def`?
+
+### `get_observability_pipeline_component_schema`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Without arguments, returns the available source, processor, and destination types. With `types`, returns the fields of each requested component, including which are required, their types, and allowed values. The schema can lag behind the server, so check assembled configurations with `validate_observability_pipeline`.
+
+- Which sources and destinations are available in Observability Pipelines?
+- What fields are required for the `splunk_hec` source and the `amazon_s3` destination?
+- What options does the `sample` processor support?
+
+### `validate_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns all validation errors so the agent can fix the configuration and validate it again.
+
+- Validate this pipeline configuration before I create it.
+- Check this pipeline configuration for errors.
+
+### `create_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Deploy`*\
+Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines. The new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration fails validation, the tool returns the validation errors.
+
+- Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
+- Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
 
 ## Onboarding
 
@@ -2168,7 +2434,7 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], analyzing [security findings][54], and authoring [IaC custom rules][85].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -2539,6 +2805,65 @@ Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 - Is the AAP denylist enforced?
 - Show me the AAP blocking configuration.
 
+### `get_datadog_security_iac_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Retrieves one Infrastructure as Code (IaC) [custom rule][85] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+
+- List my published IaC custom rules for Terraform on AWS.
+- Get IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `get_datadog_security_iac_custom_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
+
+- What platforms and categories are supported for IaC custom rules?
+
+### `generate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+
+- Generate an IaC custom rule that flags S3 buckets without versioning enabled.
+- Draft a Terraform rule that requires encryption on GCP storage buckets.
+
+### `validate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+
+- Validate this Rego rule against my sample Terraform file.
+
+### `create_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
+
+- Create a draft IaC custom rule named "S3 bucket versioning required" from this Rego.
+
+### `update_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `publish_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
+
+- Publish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `delete_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Permanently deletes an IaC custom rule by ID. This action cannot be undone.
+
+- Delete IaC custom rule "custom-terraform-aws-open-bucket".
+
 ## Session Replay
 
 Tools for searching [Session Replay][69] recordings and summarizing session activity.
@@ -2618,7 +2943,7 @@ Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. U
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], [DORA metrics][66], and [Deployment Gates][2]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -2741,6 +3066,43 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
+
+Deployment Gates tools are read-only. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
+
+### `search_datadog_deployment_gates`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
+
+- Which Deployment Gates apply to the `checkout` service in `prod`?
+
+### `get_datadog_deployment_gate`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a configured Deployment Gate by its gate ID, including its rules and settings.
+
+- Show me the rules configured for Deployment Gate `abc123`.
+
+### `search_datadog_deployment_gate_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
+
+- Show me failed Deployment Gate evaluations for the `checkout` service in `prod` over the last 7 days.
+
+### `get_datadog_deployment_gate_evaluation`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
+
+- Why did Deployment Gate evaluation `abc123` fail?
+
+### `search_datadog_deployment_gate_rule_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
+
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Synthetics
 
@@ -3046,6 +3408,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 - Stop workflow instance `00000000-0000-0000-0000-000000000000`.
 
 [1]: /mcp_server/setup#toolsets
+[2]: /deployment_gates/
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
@@ -3090,10 +3453,18 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
 [79]: /watchdog/
-[79]: /account_management/governance_console/
 [80]: /account_management/governance_console/controls/
 [81]: /tracing/services/service_remapping_rules/
 [82]: /tracing/guide/resource_based_sampling/
+[83]: /network_monitoring/network_path/
+[84]: /account_management/governance_console/
+[85]: /security/code_security/iac_security/custom_rules/
+[86]: /infrastructure/resource_catalog/
+[87]: /observability_pipelines/
+[88]: /api/latest/observability-pipelines/
+[89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
+[90]: /observability_pipelines/configuration/install_the_worker/
+[91]: /actions/agents/
 
 ## Further reading
 

@@ -51,14 +51,21 @@ Por ejemplo:
 
 ## Creación de enlaces de tramo {#creating-span-links}
 
-Si su aplicación está instrumentada con:
+La forma en que crea enlaces de tramo depende de cómo esté instrumentada su aplicación.
 
-- El SDK de OpenTelemetry, siga la documentación de instrumentación manual de OpenTelemetry para su lenguaje. Por ejemplo, [Crear tramos con enlaces para Java][3].
-- El SDK de Datadog, siga los ejemplos de [Agregar enlaces de tramo][1].
+### Datadog SDK {#datadog-sdk}
+
+Los SDK de Python, Node.js, Go y PHP proporcionan una API para agregar enlaces de tramo. Consulte los ejemplos para [Python][10], [Node.js][11], [Go][12] o [PHP][1].
+
+Para Java, .NET y Ruby, agregue enlaces de tramo con la API de OpenTelemetry. El Datadog SDK envía los enlaces de tramo creados con la API de OpenTelemetry a Datadog. Para usar la API de OpenTelemetry con el Datadog SDK, consulte [Instrumentación personalizada con la API de OpenTelemetry][13]. Para la API de enlaces de tramo, consulte la documentación de OpenTelemetry para [Java][3], [.NET][14] o [Ruby][15].
+
+### OpenTelemetry SDK {#opentelemetry-sdk}
+
+Siga la documentación de instrumentación de OpenTelemetry para su lenguaje. Por ejemplo, consulte la [API de tramo para Java][3].
 
 ## Soporte mínimo {#minimum-support}
 
-**Nota***: Esta sección documenta el soporte mínimo para generar enlaces de tramo con las bibliotecas cliente de Datadog APM (con la API de OpenTelemetry). Los enlaces de tramo generados por el SDK de OpenTelemetry se envían a Datadog a través de [OTLP Ingest][8].
+**Nota**: Esta sección documenta el soporte mínimo para generar enlaces de tramo con las bibliotecas cliente de Datadog APM (con la API de OpenTelemetry). Los enlaces de tramo generados por el SDK de OpenTelemetry se envían a Datadog a través de [OTLP Ingest][8].
 
 Se requiere Agent v7.52.0 o superior para generar enlaces de tramo utilizando [SDKs de Datadog][7]. El soporte para enlaces de tramo se introdujo en las siguientes versiones:
 
@@ -81,12 +88,18 @@ Puede visualizar los enlaces de tramo desde el [Trace Explorer][4] en Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/tracing/trace_collection/custom_instrumentation/php/#adding-span-links
+[1]: /es/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=php#adding-span-links-php
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
-[3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
+[3]: https://opentelemetry.io/docs/languages/java/api/#span
 [4]: /es/tracing/trace_explorer/trace_view/?tab=spanlinks#more-information
 [5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/es/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [8]: https://docs.datadoghq.com/es/opentelemetry/interoperability/otlp_ingest_in_the_agent
 [9]: /es/tracing/trace_collection/custom_instrumentation/?tab=datadogapi
+[10]: /es/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=python#adding-span-links-python
+[11]: /es/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=node_js#adding-span-links-nodejs
+[12]: /es/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=go#adding-span-links-go
+[13]: /es/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api
+[14]: https://opentelemetry.io/docs/languages/dotnet/instrumentation/#create-activities-with-links
+[15]: https://opentelemetry.io/docs/languages/ruby/instrumentation/#add-span-links

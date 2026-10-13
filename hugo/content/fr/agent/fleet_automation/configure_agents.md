@@ -1,5 +1,5 @@
 ---
-description: Déployez et gérez la configuration de l'Agent Datadog à grande échelle
+description: Déployez et gérez la configuration du Datadog Agent à grande échelle
   avec Fleet Automation.
 further_reading:
 - link: /agent/fleet_automation/
@@ -11,34 +11,34 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 title: Configurer les Agents
 ---
-Utilisez [Fleet Automation][3] pour déployer et gérer la configuration de l'Agent Datadog à grande échelle. Appliquez des modifications de configuration via des workflows guidés dans l'interface utilisateur ou avec des fichiers YAML personnalisés.
+Utilisez [Fleet Automation][3] pour déployer et gérer la configuration du Datadog Agent à grande échelle. Appliquez des modifications de configuration via des workflows guidés dans l'interface utilisateur ou avec des fichiers YAML personnalisés. Pour les paramètres de l'Agent que vous pouvez gérer avec Fleet Automation, consultez [Supported datadog.yaml Configuration Fields][11].
 
 ## Prérequis {#prerequisites}
 
 - [Remote Configuration][9] activée pour votre organisation
 - Agent version 7.73+ pour la configuration de l'Agent et du collecteur OTel (version 7.76+ pour la configuration des intégrations et des secrets). Pour mettre à niveau vos Agents, consultez [Mettre à niveau les Agents][10].
-- Machines virtuelles Linux installées avec le script d'installation ou le rôle Ansible Datadog, ou machines virtuelles Windows
+- VM Linux installées avec le script d'installation ou le rôle Ansible Datadog, ou VM Windows
 
 {{< callout url="https://www.datadoghq.com/product-preview/configure-agent-kubernetes-operator/" header="Rejoignez la Preview !" >}}
 La Remote Configuration des Agents dans les charges de travail conteneurisées est en version préliminaire. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
 {{< /callout >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/" header="Rejoignez la Preview !" >}}
-La gestion des balises de l'Agent Datadog avec Fleet Automation est en version préliminaire. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
+La gestion des tags du Datadog Agent avec Fleet Automation est en version préliminaire. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
 {{< /callout >}}
 
 ## Configurer plusieurs Agents {#configure-multiple-agents}
 
 1. Dans Fleet Automation, ouvrez l'onglet [Configuration][1] et cliquez sur {{< ui >}}Configure Agents{{< /ui >}}.
-1. Définissez la portée de la configuration pour les Agents cibles. Filtrez par informations du host ou par tags pour cibler un groupe spécifique.
+1. Définissez le périmètre de la configuration pour les Agents cibles. Filtrez par informations du host ou par tags pour cibler un groupe spécifique.
 
-   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="L'étape Définir la portée de cette configuration dans le workflow Configurer les Agents de Fleet Automation, montrant les filtres pour l'environnement, le système d'exploitation et le nom d'hôte, une liste de 33 Agents inclus dans la portée, et un panneau Résumé de la configuration sur la droite." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="L'étape Définir le périmètre de cette configuration dans le workflow Configurer les Agents de Fleet Automation, montrant les filtres pour l'environnement, le système d'exploitation et le nom de host, une liste de 33 Agents inclus dans le périmètre, et un panneau Résumé de la configuration sur la droite." style="width:100%;" >}}
 
 1. Sélectionnez les produits (par exemple, Logs, APM ou NDM) que les Agents cibles doivent exécuter.
 
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="L'étape « Select products to configure » dans le workflow « Configure Agents » de Fleet Automation, montrant les tuiles de produits regroupées sous Core Observability (Infrastructure Monitoring, Log Management, APM) et Additional Observability (Live Process Monitoring, Cloud Network Monitoring, Network Device Monitoring)." style="width:100%;" >}}
 
-1. Examinez le plan de déploiement pour confirmer les Agents inclus dans la portée et les paramètres de déploiement, tels que la simultanéité du déploiement.
+1. Examinez le plan de déploiement pour confirmer les Agents inclus dans le périmètre et les paramètres de déploiement, tels que la simultanéité du déploiement.
 1. Cliquez sur {{< ui >}}Deploy Configuration{{< /ui >}} pour démarrer le déploiement et suivre sa progression depuis la [Deployments page][2].
 
 ## Modifier la configuration d'un seul Agent {#edit-the-configuration-of-a-single-agent}
@@ -61,9 +61,9 @@ L'exemple ci-dessous montre le champ `logs_enabled` modifié de `false` à `true
 
 ## Configurer les Agents avec l'API {#configure-agents-with-the-api}
 
-Fleet Automation fournit une API pour appliquer les mises à jour de configuration de manière programmatique. Déployez des modifications sur n'importe quel groupe d'hôtes avec des requêtes de filtrage, en fournissant soit des fichiers de configuration complets, soit des correctifs ciblés. Envoyez la configuration à la demande ou intégrez-la à vos flux de travail d'automatisation existants. Pour plus de détails, consultez l'[Fleet Automation API][4].
+Fleet Automation fournit une API pour appliquer les mises à jour de configuration de manière programmatique. Déployez des modifications sur n'importe quel groupe de hosts avec des requêtes de filtrage, en fournissant soit des fichiers de configuration complets, soit des correctifs ciblés. Envoyez la configuration à la demande ou intégrez-la à vos workflows d'automatisation existants. Pour plus de détails, consultez l'[Fleet Automation API][4].
 
-**Remarque** : L'API ne prend pas en charge tous les champs de configuration de l'Agent. Les paramètres liés à la connexion de l'Agent ou aux secrets (`site`, `api_key` et autres paramètres d'authentification) ne peuvent pas être gérés via l'API.
+**Remarque** : L'API ne prend pas en charge tous les champs de configuration de l'Agent. Les paramètres liés à la connexion de l'Agent ou aux secrets (`site`, `api_key` et autres paramètres d'authentification) ne peuvent pas être gérés via l'API. Pour les champs que vous pouvez gérer, consultez [Champs de configuration datadog.yaml pris en charge][11].
 
 ## Priorité de configuration {#configuration-precedence}
 
@@ -102,3 +102,4 @@ Pour obtenir des instructions sur l'utilisation de dépôts miroirs ou isolés (
 [8]: /fr/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: /fr/agent/guide/setup_remote_config
 [10]: /fr/agent/fleet_automation/upgrade_agents/
+[11]: /fr/agent/fleet_automation/supported_datadog_yaml_fields/

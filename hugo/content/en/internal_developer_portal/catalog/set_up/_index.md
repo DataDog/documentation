@@ -100,7 +100,7 @@ When you use [**Import Entities**][10] and choose a data source, Datadog queries
 
 [Entity definitions][1], defined in entity YAML files, are the canonical source of truth in Catalog. You can: 
 - Create entity definitions manually through Datadog.
-- Store definitions in a version control system like Git, and set up [Source Code Integration][6] to sync definitions with IDP. Changes made to your files are reflected in Datadog within minutes.
+- Store definitions in GitHub or GitLab repositories, and set up [Source Code Integration][6] to sync definitions with IDP. Changes made to your files are reflected in Datadog within minutes.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/internal_developer_portal/catalog/set_up/create_entities#through-the-datadog-ui" >}}Create through the Datadog UI{{< /nextlink >}}
