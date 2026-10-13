@@ -1820,6 +1820,14 @@
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
   },
+  "ListDeploymentGateEvaluations": {
+    "description": "Returns deployment gate evaluations started in a maximum 30-day window (the default is the previous 24 hours).\nResults are ordered by start time, newest first.\nIn-progress state is near-real-time and mutable. Finished state is eventually consistent.",
+    "summary": "List deployment gate evaluations"
+  },
+  "ListDeploymentRuleEvaluations": {
+    "description": "Returns rule evaluations whose gate evaluation started in a maximum 30-day window (the default is the previous 24 hours).\nFilter by gate, rule, gate evaluation, or rule evaluation ID; omit IDs for cross-evaluation searches.\nResults are ordered by start time, newest first.\nIn-progress state is near-real-time and mutable. Finished state is eventually consistent.\nGate-level and rule-level dry-run states are independent.\nPagination is deterministic but not snapshot isolated; clients should deduplicate by rule evaluation ID.",
+    "summary": "List deployment gate rule evaluations"
+  },
   "GetDeploymentGateRules": {
     "description": "Endpoint to get rules for a deployment gate.",
     "summary": "Get rules for a deployment gate"
@@ -4620,7 +4628,7 @@
     "summary": "Get the list of tags for a device"
   },
   "UpdateDeviceUserTags": {
-    "description": "Update the tags for a device.",
+    "description": "Update the tags for a device.\nA device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support](https://docs.datadoghq.com/help/).",
     "summary": "Update the tags for a device",
     "request_description": "",
     "request_schema_description": "List tags response."
@@ -4770,6 +4778,20 @@
   "GetScheduleOnCallUser": {
     "description": "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead.",
     "summary": "Get scheduled on-call user"
+  },
+  "ListScheduleOverrides": {
+    "description": "Retrieve a list of overrides for the specified On-Call schedule within a given time range.",
+    "summary": "List On-Call schedule overrides"
+  },
+  "CreateScheduleOverrides": {
+    "description": "Create one or more overrides for the specified On-Call schedule.",
+    "summary": "Create On-Call schedule overrides",
+    "request_description": "",
+    "request_schema_description": "Request to create one or more on-call schedule overrides. You can create up to 25 overrides in a single request."
+  },
+  "DeleteScheduleOverride": {
+    "description": "Delete an override from the specified On-Call schedule.",
+    "summary": "Delete On-Call schedule override"
   },
   "GetScheduleOnCallResponders": {
     "description": "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position.",
@@ -7046,7 +7068,7 @@
     "summary": "Get a JavaScript source map"
   },
   "ListSourcemaps": {
-    "description": "Retrieves a paginated list of source maps matching the specified filter criteria.",
+    "description": "Retrieves a paginated list of source maps. Send filters as query parameters,\nnot in a JSON request body. `mapkind` defaults to `js`.\n\nFor JavaScript source maps, choose one of the three request shapes below.\n\n**Examples:** the following commands use the US1 API host. Replace the host with\nthe API host for your site, and the service, version, debug ID, and cursor with\nvalues from your organization. Use `--get` so curl sends the filters in the query\nstring; `-X GET` with `--data-urlencode` sends them in the request body instead.\n\n**1. List by service and version**\n\nProvide both `filter[service]` and `filter[version]` to search source maps\nindexed by service and version. Omit `search_by`.\n\n**Pagination:** prefer cursor pagination. Omit `page[after]` and `page[number]`\non the first request. To get the next page, pass `meta.page.next_cursor` as\n`page[after]`, keeping the same filters. Continue until\n`meta.page.has_more_results` is `false`. Do not decode or modify the cursor.\nLegacy page-number pagination is also supported, starting at `page[number]=1`.\n\n```bash\ncurl -sS --get \"https://api.datadoghq.com/api/v2/sourcemaps/list\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n  --data-urlencode \"mapkind=js\" \\\n  --data-urlencode \"filter[service]=my-web-service\" \\\n  --data-urlencode \"filter[version]=1.0.0\" \\\n  --data-urlencode \"page[size]=10\"\n```\n\n**2. Find a specific JavaScript debug ID**\n\nProvide `filter[debug_id]` with a UUID. Service and version filters are not\nrequired. Omit `search_by`.\n\n**Pagination:** the lookup returns at most one result, so no pagination is\nneeded. `page[after]` is not supported.\n\n```bash\ncurl -sS --get \"https://api.datadoghq.com/api/v2/sourcemaps/list\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n  --data-urlencode \"mapkind=js\" \\\n  --data-urlencode \"filter[debug_id]=00000000-0000-4000-8000-000000000001\"\n```\n\n**3. Browse source maps indexed by debug ID**\n\nSet `search_by=debug_id` without specifying a debug ID. Do not send service,\nversion, or filename filters in this mode.\n\n**Pagination:** this mode requires cursor pagination; `page[number]` is not\nsupported. Omit `page[after]` on the first request. To get the next page, pass\n`meta.page.next_cursor` as `page[after]`, keeping the same search mode and\nfilters. Continue until `meta.page.has_more_results` is `false`. Do not decode\nor modify the cursor.\n\nFirst page:\n\n```bash\ncurl -sS --get \"https://api.datadoghq.com/api/v2/sourcemaps/list\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n  --data-urlencode \"mapkind=js\" \\\n  --data-urlencode \"search_by=debug_id\" \\\n  --data-urlencode \"page[size]=10\"\n```\n\nNext page:\n\n```bash\ncurl -sS --get \"https://api.datadoghq.com/api/v2/sourcemaps/list\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n  --data-urlencode \"mapkind=js\" \\\n  --data-urlencode \"search_by=debug_id\" \\\n  --data-urlencode \"page[size]=10\" \\\n  --data-urlencode \"page[after]=<meta.page.next_cursor>\"\n```\n\nFor other map kinds, use `page[number]`, starting at 1.",
     "summary": "List source maps"
   },
   "RestoreSourcemaps": {
