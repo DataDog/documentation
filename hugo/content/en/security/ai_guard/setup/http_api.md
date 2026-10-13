@@ -3,13 +3,15 @@ title: HTTP API
 description: Evaluate prompts and tool calls with AI Guard from any language by calling the AI Guard HTTP API directly.
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-The AI Guard HTTP API evaluates prompts and tool calls from any language or environment that can send an HTTP request. Use the HTTP API only when the AI Guard SDK doesn't support your agent's language, because HTTP API evaluations don't appear in Datadog.
+The AI Guard HTTP API evaluates prompts and tool calls from any language or environment that can send an HTTP request. Use the HTTP API only when the AI Guard SDK doesn't support your agent's language, because HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog.
 
 Your code sends the conversation to a single endpoint, and AI Guard returns an action. The HTTP API doesn't block anything on its own: your code reads the action and decides whether to proceed.
+
+<!-- TODO: Confirm whether the HTTP API also evaluates model responses. The SDK page lists prompts, model responses, and tool calls. -->
 
 ## Supported environments
 
@@ -27,7 +29,6 @@ HTTP API evaluations skip the Datadog SDK, so they lose the Datadog features tha
 
 To keep full visibility for an agent in a language that the SDK doesn't support, route the agent's LLM traffic through LiteLLM Proxy and use the [LiteLLM Proxy integration][2] instead.
 
-<!-- TODO: document the `meta.service` and `meta.env` request fields. AI Guard uses them to apply the policy for that service and environment. Confirm which policy applies when a request omits `meta`. -->
 
 ## Evaluate messages with the HTTP API
 
@@ -65,7 +66,7 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
      https://app.datadoghq.com/api/v2/ai-guard/evaluate
    ```
 
-   The endpoint URL depends on your Datadog site. Replace `app.datadoghq.com` with the URL of your Datadog site. <!-- TODO: confirm the host for each Datadog site. -->
+   The endpoint URL depends on your Datadog site. Replace `app.datadoghq.com` with {{< region-param key="dd_full_site" code="true" >}}.
 
 1. Read the `action` attribute in the response:
 
@@ -86,6 +87,8 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
 
 ## Request format
 
+<!-- TODO: Link to the API reference for this endpoint after it's published. After it publishes, replace these with a link to the reference: the headers table, the message fields table, and the `meta` field description in Request format, and the attributes table in Response format. Keep the task steps, the user prompt and tool result examples, the Limitations section, the `ABORT` handling guidance, and the advice not to pass `reason` back to the model or the end user. -->
+
 The request body follows the JSON:API format, with the conversation in `data.attributes.messages`. Use this reference to build requests for prompts, tool calls, and tool results.
 
 The request needs these headers:
@@ -96,12 +99,14 @@ The request needs these headers:
 | `DD-APPLICATION-KEY` | `<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope. |
 | `Content-Type` | `application/json`. |
 
+To apply the AI Guard policy settings for a specific service and environment, add `data.attributes.meta` with `service` and `env` values. Without `meta`, AI Guard applies only your organization-wide settings.
+
 `messages` holds the full conversation in order. AI Guard evaluates the last message, and uses the earlier messages as context. Each message has these fields:
 
 | Field | Description |
 | --- | --- |
-| `role` | `system`, `user`, `assistant`, or `tool`. |
-| `content` | The message text. For an assistant message with tool calls, an empty string. |
+| `role` | `system`, `developer`, `user`, `assistant`, or `tool`. |
+| `content` | The message text, or an array of content parts to include images. Each part has a `type` of `text` or `image_url`, with a `text` value or an `image_url.url` value. For an assistant message with tool calls, an empty string. |
 | `tool_calls` | For an assistant message, the tool calls the model requested. Each tool call has an `id` and a `function` with a `name` and `arguments`. `arguments` is a JSON string. |
 | `tool_call_id` | For a tool message, the `id` of the tool call that produced the result. |
 
@@ -120,7 +125,7 @@ To evaluate a user prompt before the model call, end the conversation with the u
 }
 ```
 
-To evaluate a tool result after the tool runs, end the conversation with the tool message. Evaluate the tool call before the agent runs the tool as well, so AI Guard can stop an unsafe tool call before the tool runs.
+To evaluate a tool result after the tool runs, end the conversation with the tool message:
 
 ```json
 {
@@ -146,6 +151,8 @@ To evaluate a tool result after the tool runs, end the conversation with the too
 }
 ```
 
+Evaluate the tool call before the agent runs the tool as well, so AI Guard can stop an unsafe tool call before the tool runs.
+
 ## Response format
 
 The response tells your code what AI Guard decided and why. Use this reference to read the decision and record the reason.
@@ -156,8 +163,11 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | `data.type` | Always `evaluations`. |
 | `data.attributes.action` | `ALLOW` or `DENY`. Handle `ABORT` the same as `DENY`. |
 | `data.attributes.reason` | A natural language summary of the decision, for auditing and logging. Don't pass `reason` back to the model or the end user. |
-
-<!-- TODO: add the other response attributes: `tags`, `tag_probs`, `is_blocking_enabled`, and `sds_findings`. `is_blocking_enabled` tells HTTP API callers whether the policy wants the request blocked. -->
+| `data.attributes.tags` | The attack categories AI Guard detected. |
+| `data.attributes.tag_probs` | The confidence score for each attack category. |
+| `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use it to decide whether to stop a request when the action is `DENY`. |
+| `data.attributes.global_prob` | The overall threat score. Present only for some evaluations. |
+| `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` (`path`, `start_index`, `end_index_exclusive`). |
 
 <!-- TODO: Confirm whether `ABORT` is planned for future use or left over from an earlier design. The service returns only `ALLOW` or `DENY`. -->
 

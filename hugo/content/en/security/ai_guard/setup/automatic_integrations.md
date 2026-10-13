@@ -3,11 +3,11 @@ title: Automatic Integrations
 description: Protect agents built on supported LLM frameworks and client libraries with AI Guard, without changing application code.
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard automatic integrations protect agents built on supported LLM frameworks and client libraries without any changes to application code. If your agent calls a supported package, you can enable AI Guard with environment variables instead of adding evaluation calls by hand.
+AI Guard automatic integrations protect agents built on supported LLM frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you can enable AI Guard with environment variables instead of adding evaluation calls by hand.
 
 When the application starts with the Datadog SDK loaded, the SDK detects supported packages and instruments them. Each instrumented model call and tool call goes to AI Guard for evaluation before the call proceeds.
 
@@ -27,7 +27,7 @@ Automatic integrations work only with specific packages and versions. Check the 
 
 <!-- TODO: Confirm the RubyLLM package versions. Changed from "1.0.0 or later", because current dd-trace-rb sets the RubyLLM minimum to 2.0.0 (`MINIMUM_VERSION` in `lib/datadog/ai_guard/contrib/ruby_llm/integration.rb`, checked). The claim that the minimum changed in dd-trace-rb 2.44.0, so 2.28.0 through 2.43.x still support RubyLLM 1.0.0, comes from the v2.44.0 release notes as reported in a source review and wasn't re-checked. -->
 
-<!-- TODO: Confirm the Node.js Anthropic minimum. dd-trace-js v5.122.0 and v6.11.0 both shipped 2026-08-17, and both release notes list Anthropic AI Guard support. -->
+<!-- TODO: Confirm whether AI SDK v7 is supported, so the AI SDK row could say "v6 or later". The dd-trace-js model-call hook has no upper version bound, but other AI SDK hooks in the same file stop before 7.0.0. -->
 
 Automatic integrations don't support Java. For Java agents, use the [SDK][1]. For Amazon Strands and LiteLLM Proxy, use [manual integrations][2].
 
@@ -39,21 +39,21 @@ Each automatic integration evaluates a specific set of operations, so check the 
 
 | Language | Package | Evaluated operations |
 | --- | --- | --- |
-| Python | LangChain | LLM `invoke()` and `ainvoke()`, chat model `invoke()` and `ainvoke()`, and `BaseTool.invoke()` and `BaseTool.ainvoke()`. |
+| Python | LangChain | LLM `invoke()` and `ainvoke()`, chat model `invoke()` and `ainvoke()`, and the tool calls that LangChain agents decide to run: AgentExecutor agents, and `create_agent` agents in LangChain 1.0 and later (`dd-trace-py` 4.12.0 or later). |
 | Python | OpenAI | `client.chat.completions.create()`, `client.chat.completions.parse()`, `client.responses.create()`, and `client.responses.parse()`. |
 | Python | Anthropic | `client.messages.create()` and `client.messages.stream()`. With the `anthropic` package 0.37.0 or later, also `client.beta.messages.create()` and `client.beta.messages.stream()`. |
-| Node.js | AI SDK | `generateText`, `streamText`, `generateObject`, `streamObject`, and `tool.execute`. |
+| Node.js | AI SDK | Model calls from `generateText`, `streamText`, `generateObject`, and `streamObject`, including the tool calls and tool results they carry. |
 | Node.js | OpenAI | `client.chat.completions.create()`, `client.chat.completions.parse()`, and `client.responses.create()`. |
 | Node.js | Anthropic | `client.messages.create()`. With the `@anthropic-ai/sdk` package 0.33.0 or later, also `client.beta.messages.create()`. |
-| Ruby | RubyLLM | `RubyLLM::Chat#ask`, `RubyLLM::Chat#complete`, and `RubyLLM::Chat#handle_tool_calls`. |
+| Ruby | RubyLLM | `RubyLLM::Chat#ask` and `RubyLLM::Chat#complete`, including the tool calls the model requests. |
 
 ### Limitations
 
-Some calls through supported packages aren't evaluated or can't be blocked by default, so review these limits before you rely on automatic integrations alone.
+Some calls through supported packages aren't evaluated or can't be blocked by default, so review these limits before you rely on automatic integrations alone:
 
 - When an agent framework calls Amazon Bedrock, Google Gemini, or Ollama, AI Guard evaluates the calls but can't block them.
 
-   <!-- TODO: Confirm. Source: internal support notes, June 2026. No public source found. -->
+   <!-- TODO: Confirm. No public source found. -->
 
 - By default, AI Guard doesn't evaluate streamed model responses.
 
@@ -66,7 +66,7 @@ Some calls through supported packages aren't evaluated or can't be blocked by de
    | Node.js | OpenAI | `dd-trace-js` 6.17.0 or later. |
    | Node.js | Anthropic | `dd-trace-js` 6.19.0 or later. |
 
-   <!-- TODO: Confirm non-support for LangChain and RubyLLM. Absence inferred from tracer source. -->
+   <!-- TODO: Confirm whether RubyLLM evaluates streamed responses. LangChain doesn't (checked in dd-trace-py `_listener.py` and the v4.16.0rc1 release notes). The RubyLLM instrumentation evaluates messages before the provider call, but it's unclear whether streamed output is evaluated. -->
 
 ## Enable automatic integrations
 
@@ -83,9 +83,13 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
    - `DD_ENV=<ENVIRONMENT>`.
    - `DD_TRACE_ENABLED=true`.
 
+   To turn off APM tracing but keep AI Guard, set `DD_APM_TRACING_ENABLED=false`. Don't set `DD_TRACE_ENABLED` to `false`, because it breaks AI Guard in various ways depending on your agent's language.
+
    <div class="alert alert-tip">To keep a Python or Node.js service in monitoring only, even when the service's AI Guard policy blocks unsafe requests, also set <code>DD_AI_GUARD_BLOCK=false</code>. <code>DD_AI_GUARD_BLOCK</code> can only turn blocking off. Ruby doesn't support <code>DD_AI_GUARD_BLOCK</code>, so for a Ruby service, change the enforcement mode in the service's <a href="/security/ai_guard/policies/">AI Guard policy</a> instead.</div>
 
    <!-- TODO: What is the use case for `DD_AI_GUARD_BLOCK`, given that policy overrides already turn off blocking per service and environment. Is this earning its space here? -->
+
+   <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code> to <code>false</code>.</div>
 
 1. Start the application with the Datadog SDK loaded:
 

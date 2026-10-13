@@ -5,7 +5,7 @@ aliases:
   - /security/ai_guard/onboarding/
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
@@ -45,7 +45,11 @@ AI Guard requires these minimum Datadog SDK versions:
 | Java | `dd-trace-java` | 1.54.0. |
 | Ruby | `dd-trace-rb` | 2.25.0. |
 
+<!-- TODO: Confirm the Python minimum. The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
+
 Some integrations require a later version. Each integration page lists its own requirements.
+
+To take advantage of all AI Guard features, use the latest version of the Datadog SDK for your language.
 
 <div class="alert alert-info">
 <p>By default, running the Datadog SDK and the Agent turns on other Datadog products, which are billed separately from AI Guard:</p>
@@ -85,7 +89,7 @@ Choose the first integration method that applies to the agent:
 1. If the agent's LLM traffic goes through LiteLLM Proxy, use the [LiteLLM Proxy integration][4].
 1. If the agent uses a supported framework or LLM client, use the matching [automatic integration][5] or [manual integration][6].
 1. If no integration covers the agent's framework, but the agent is written in Python, Node.js, Java, or Ruby, use the [SDK][7].
-1. If none of these apply, use the [HTTP API][8]. HTTP API evaluations don't create spans, so they don't appear in Datadog. Skip the remaining setup steps.
+1. If none of these apply, use the [HTTP API][8]. HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog. Skip the remaining setup steps.
 
 **Supported frameworks**
 
@@ -97,7 +101,7 @@ Choose the first integration method that applies to the agent:
 | AI SDK | Node.js | Automatic integration. |
 | RubyLLM | Ruby | Automatic integration. |
 | Amazon Strands | Python | Manual integration. |
-| LiteLLM Proxy | Python | Manual integration. |
+| LiteLLM Proxy | Any (the proxy runs on Python) | Manual integration. |
 
 ## 4. Create a retention filter for AI Guard spans {#retention-filter}
 
@@ -129,14 +133,14 @@ Confirm that AI Guard is evaluating agent traffic.
 
 ### Troubleshooting: Traces don't appear
 
-If expected evaluations don't appear in AI Guard, check these causes in order.
+If expected evaluations don't appear in AI Guard, check these causes in order:
 
 1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When it's unset, integrations don't evaluate anything, and in Node.js, Java, and Ruby, SDK calls return `ALLOW` without calling AI Guard. Set `DD_AI_GUARD_ENABLED=true`.
 
-   <!-- TODO: Confirm this cause. Replaced "AI Guard does nothing, even if your code calls the SDK," because SDK calls don't fail when AI Guard is disabled: Node.js, Java, and Ruby return `ALLOW`, and Python still calls the API. Node.js and Python were checked in the tracer source; Java and Ruby weren't re-checked. Also confirm that automatic and manual integrations evaluate nothing when the variable is unset. That part is inferred, not checked. -->
-1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
+   <!-- TODO: Confirm that automatic and manual integrations evaluate nothing when `DD_AI_GUARD_ENABLED` is unset. The SDK behavior in this item was checked in the tracer source for all four languages. The integration part is inferred. -->
+1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope. A 403 error can also mean AI Guard isn't enabled for your organization.
 1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
-1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See [Create a retention filter for AI Guard spans](#retention-filter).
+1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See the [Create a retention filter for AI Guard spans](#retention-filter) section.
 1. **The service or environment isn't set.** Confirm `DD_SERVICE` and `DD_ENV` are set, so AI Guard can match the agent to its policy and show it in Discover.
 
 To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.
@@ -145,7 +149,7 @@ To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluat
 
 If AI Guard spans appear but don't show evaluated messages, set `DD_TRACE_API_VERSION=v0.4` in your application environment. The Datadog SDK sends AI Guard span content only with trace API version `v0.4`.
 
-<!-- TODO: confirm this still applies to current tracer versions. Source dated June 2026. -->
+<!-- TODO: Confirm whether Node.js and Java need `DD_TRACE_API_VERSION=v0.4` for AI Guard span content. Current dd-trace-py uses v0.4 automatically when AI Guard is enabled, so for Python this matters only if someone forced v0.5 (checked in dd-trace-py `ddtrace/internal/writer/writer.py`). -->
 
 [1]: /security/ai_guard/policies/
 [2]: /account_management/api-app-keys/

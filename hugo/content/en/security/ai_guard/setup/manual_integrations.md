@@ -3,7 +3,7 @@ title: Manual Integrations
 description: Protect agents built on Amazon Strands, and LLM traffic that passes through LiteLLM Proxy, with AI Guard by adding a plugin or guardrail.
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
@@ -21,7 +21,7 @@ Manual integrations work only with specific framework and Datadog SDK versions. 
 | Language | Framework | Framework version | Datadog SDK version |
 | --- | --- | --- | --- |
 | Python | Amazon Strands | `strands-agents` 1.29.0 or later. | `dd-trace-py` 4.7.0 or later. |
-| Python | LiteLLM Proxy | `litellm` 1.78.5 or later. <!-- TODO: confirm the minimum. The `dd-trace-py` 4.8.0 release notes say `litellm` 1.46.1 or later. --> | `dd-trace-py` 4.8.0 or later. |
+| Python | LiteLLM Proxy | `litellm` 1.78.5 or later. | `dd-trace-py` 4.8.0 or later. |
 
 For LiteLLM Proxy, the language and Datadog SDK version apply to the proxy, not to the agents that route traffic through the proxy.
 
@@ -48,11 +48,11 @@ The LiteLLM Proxy integration evaluates traffic in each mode that you set in the
 | `during_call` | The request messages, in parallel with the model call. | The proxy rejects the request. |
 | `post_call` | The model's response, together with the request messages from a `pre_call` or `during_call` evaluation. | The proxy rejects the response. |
 
-<!-- TODO: confirm the HTTP status code and error body that the client receives when the proxy rejects a request. The guardrail raises an exception with status 403. -->
+<!-- TODO: Confirm the HTTP status and body that the client receives when the guardrail blocks a request. The guardrail raises an exception with status 403 and the message "Datadog AI Guard: request blocked '<reason>'" (checked in dd-trace-py `ddtrace/aiguard/integrations/litellm.py`), but how LiteLLM passes it to the client wasn't checked. -->
 
 ### Limitations
 
-Some activity through manual integrations isn't evaluated or can't be blocked, so review these limits before you rely on a manual integration alone.
+Some activity through manual integrations isn't evaluated or can't be blocked, so review these limits before you rely on a manual integration alone:
 
 - If AI Guard returns an error or doesn't respond, both integrations allow the request to proceed.
 - The Amazon Strands plugin doesn't evaluate images, documents, or video. With `dd-trace-py` 4.12.0 or later, the plugin sends a placeholder for non-text content. With earlier versions, non-text content can cause AI Guard to skip the evaluation.
@@ -88,9 +88,7 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
    With `dd-trace-py` versions earlier than 4.13.0, import `AIGuardStrandsPlugin` from `ddtrace.appsec.ai_guard` instead.
 
-   With `strands-agents` versions earlier than 1.29.0, use the hook provider instead of the plugin: import `AIGuardStrandsHookProvider` from the same module, and pass `hooks=[AIGuardStrandsHookProvider()]` to the agent.
-
-   `AIGuardStrandsPlugin()` and `AIGuardStrandsHookProvider()` accept these optional arguments:
+   `AIGuardStrandsPlugin()` accepts these optional arguments:
 
    - `detailed_error=True`: Add the AI Guard reason to the blocked message. Default: `False`.
    - `raise_error_on_tool_calls=True`: Raise `AIGuardAbortError` for blocked tool calls, instead of canceling the tool call or replacing the tool result. Default: `False`.
@@ -138,7 +136,7 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
          default_on: true
    ```
 
-   Without `default_on: true`, LiteLLM Proxy runs the guardrail only on requests that name the guardrail in their `guardrails` field. For the other modes, see [Evaluated operations](#evaluated-operations).
+   Without `default_on: true`, LiteLLM Proxy runs the guardrail only on requests that name the guardrail in their `guardrails` field. For the other modes, see the [Evaluated operations](#evaluated-operations) section.
 
    <div class="alert alert-tip">By default, the guardrail follows the blocking setting in the AI Guard policy for the proxy's service and environment. To keep the proxy in monitoring only, also add <code>block: false</code> under <code>litellm_params</code>.</div>
 

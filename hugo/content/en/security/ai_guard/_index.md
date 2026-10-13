@@ -13,7 +13,8 @@ further_reading:
     text: "Securing AI agents: Why guardrail placement is a key design decision"
 ---
 
-{{< site-region region="gov" >}}
+<!-- TODO: Confirm that AI Guard is unavailable on the US2-FED site (gov2) as well as US1-FED (gov). Every AI Guard page shows this banner for both. -->
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 

@@ -25,6 +25,8 @@ The AI Guard SDK is available for Python, Node.js, Java, and Ruby. Check the age
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 The AI Guard SDK requires `dd-trace-py` 3.19.0 or later.
+
+<!-- TODO: Confirm the Python minimum. The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
 {% /if %}
 
 <!-- Node.js -->
@@ -42,7 +44,7 @@ The AI Guard SDK requires `dd-trace-java` 1.54.0 or later.
 The AI Guard SDK requires `dd-trace-rb` 2.25.0 or later.
 {% /if %}
 
-For languages that the SDK doesn't support, AI Guard provides an [HTTP API][3]. HTTP API evaluations don't create spans, so they don't appear in Datadog.
+For languages that the SDK doesn't support, AI Guard provides an [HTTP API][3]. HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog.
 
 ## Evaluate messages with the SDK
 
@@ -58,22 +60,30 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
    - `DD_ENV=<ENVIRONMENT>`.
 
-   <!-- TODO: Confirm the warning below for Java and Ruby. Replaced "Without this value, the SDK evaluates nothing," because the SDK doesn't fail: in Node.js, Java, and Ruby, a disabled SDK returns `ALLOW` without calling AI Guard. Node.js was checked in the dd-trace-js source (`noop.js` returns `ALLOW`, "AI Guard is not enabled"). Java and Ruby are from a source review that wasn't re-checked (dd-trace-java `NoOpEvaluator`, dd-trace-rb `no_op_result.rb`). Python is excluded because its `evaluate` method calls the API whether or not the variable is set (checked in dd-trace-py `ddtrace/aiguard/_api_client.py`). -->
-
    {% if includes($prog_lang, ["node_js", "java", "ruby"]) %}
    {% alert level="warning" %}
    If `DD_AI_GUARD_ENABLED` isn't `true`, the SDK doesn't call AI Guard. The evaluate method returns `ALLOW` for every request, so unsafe requests proceed without any evaluation.
    {% /alert %}
    {% /if %}
 
-   <!-- TODO: confirm whether the application must start with the Datadog SDK loaded, for example with `ddtrace-run` or `dd-trace/init`, for AI Guard spans to reach Datadog. -->
+   <!-- Node.js -->
+   {% if equals($prog_lang, "node_js") %}
+   Initialize the Datadog SDK with `tracer.init()` or `node --require dd-trace/init` before you call the AI Guard SDK. If the tracer isn't initialized, the evaluate method returns `ALLOW` without calling AI Guard.
+   {% /if %}
+
+   <!-- Java -->
+   {% if equals($prog_lang, "java") %}
+   Run the application with the Datadog Java agent (`-javaagent`). Without the agent, the evaluate method returns `ALLOW` without calling AI Guard.
+   {% /if %}
+
+   <!-- TODO: Confirm whether Python applications must run with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog. The Python evaluate call works without it, but span delivery wasn't checked. -->
 
 1. At each point you want AI Guard to check, call the SDK's evaluate method with the conversation so far. Evaluate user prompts before each model call, and evaluate tool calls before the agent runs the tool. Include the system prompt, so AI Guard can judge each request in context.
 
    <!-- Python -->
    {% if equals($prog_lang, "python") %}
    ```python
-   from ddtrace.aiguard import new_ai_guard_client, Function, Message, Options, ToolCall
+   from ddtrace.aiguard import new_ai_guard_client, Function, Message, ToolCall
 
    client = new_ai_guard_client()
 
@@ -82,8 +92,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
        messages=[
            Message(role="system", content="You are an AI Assistant"),
            Message(role="user", content="What is the weather like today?"),
-       ],
-       options=Options(block=True),
+       ]
    )
 
    # Evaluate a tool call before the agent runs the tool.
@@ -136,7 +145,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    let result = await tracer.aiguard.evaluate([
      { role: 'system', content: 'You are an AI Assistant' },
      { role: 'user', content: 'What is the weather like today?' }
-   ], { block: true })
+   ])
 
    // Evaluate a tool call before the agent runs the tool.
    result = await tracer.aiguard.evaluate([
@@ -160,14 +169,15 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    {% if equals($prog_lang, "java") %}
    ```java
    import datadog.trace.api.aiguard.AIGuard;
+   import java.util.Arrays;
+   import java.util.Collections;
 
    // Evaluate a user prompt before the model call.
    AIGuard.Evaluation evaluation = AIGuard.evaluate(
        Arrays.asList(
            AIGuard.Message.message("system", "You are an AI Assistant"),
            AIGuard.Message.message("user", "What is the weather like today?")
-       ),
-       new AIGuard.Options().block(true)
+       )
    );
 
    // Evaluate a tool call before the agent runs the tool.
@@ -240,13 +250,13 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    {% /if %}
    <!-- end Ruby -->
 
-1. Handle the result. Proceed with the request when the action is `ALLOW`. If the SDK raises `AIGuardAbortError`, stop the request and return a safe response instead. For how the SDK reports each decision, see [Handling evaluation outcomes](#handling-evaluation-outcomes).
+1. Handle the result. Proceed with the request when the action is `ALLOW`. If the SDK raises `AIGuardAbortError`, stop the request and return a safe response instead. For how the SDK reports each decision, see the [Handling evaluation outcomes](#handling-evaluation-outcomes) section.
 
 **What's next?** [Create a retention filter for AI Guard spans][6], optionally [limit access to AI Guard spans][7], then [verify the setup][8].
 
 ## Handling evaluation outcomes
 
-An SDK call reports AI Guard's decision to your code in one of two ways, depending on the AI Guard policy for the service. Knowing which way applies tells your code where to look for the decision and what to do with the decision.
+Knowing how SDK calls report AI Guard decisions tells your code where to look for decisions and what to do with them. SDK calls report decisions in one of two ways, depending on the AI Guard policy for the service:
 
 - **The SDK returns an evaluation** when AI Guard allows the request, and when the policy for the service uses {% ui %}Monitor only{% /ui %} mode. In {% ui %}Monitor only{% /ui %} mode, a `DENY` action doesn't stop anything on its own. Your code reads the `action` field and decides whether to proceed.
 - **The SDK raises `AIGuardAbortError`** when AI Guard returns `DENY` and the policy for the service uses {% ui %}Block unsafe{% /ui %} mode. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the error stops the agent.
@@ -265,7 +275,7 @@ An evaluation tells your code what AI Guard decided and why, so your agent can r
 
 <!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
-The Ruby SDK doesn't return `sds`.
+In Ruby, the field is `sds_findings`.
 {% /if %}
 
 ### Blocked request errors
@@ -298,21 +308,19 @@ The error is `Datadog::AIGuard::AIGuardAbortError`, with the fields `action`, `r
 
 Per-call blocking options change whether a single SDK call raises `AIGuardAbortError`, so one checkpoint can report without blocking while the rest of the agent follows the policy.
 
-<!-- TODO: confirm the effect of the per-call option for Python, Node.js, and Java. The published docs say `block: true` raises the error when blocking is enabled for the service, and that omitting the option follows the service's blocking setting. Those describe the same behavior. Confirm what `block: true` changes, and whether `block: false` stops a single call from raising, like Ruby's `allow_raise: false`. -->
-
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
-The per-call blocking option is `options=Options(block=True)`.
+Pass `options=Options(block=False)` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode. Import `Options` from `ddtrace.aiguard`.
 {% /if %}
 
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
-The per-call blocking option is `{ block: true }`.
+Pass `{ block: false }` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
-The per-call blocking option is `new AIGuard.Options().block(true)`.
+Pass `new AIGuard.Options().block(false)` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
 <!-- Ruby -->
