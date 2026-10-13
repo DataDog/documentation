@@ -96,6 +96,8 @@ Add the following annotation to the Dynamo frontend pod template:
 
 ```yaml
 metadata:
+  labels:
+    tags.datadoghq.com/service: "<SERVICE_NAME>"
   annotations:
     ad.datadoghq.com/<FRONTEND_CONTAINER_NAME>.checks: |-
       {
