@@ -1569,17 +1569,17 @@ menu:
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai
-      weight: 2
+      weight: 3
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
       parent: bits_ai
-      weight: 3
+      weight: 4
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 4
+      weight: 5
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1594,27 +1594,27 @@ menu:
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 5
+      weight: 6
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 6
+      weight: 7
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
-      weight: 7
+      weight: 8
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
-      weight: 8
+      weight: 9
     - name: Bits Release
       url: bits_release/
       parent: bits_ai
       identifier: bits_release
-      weight: 9
+      weight: 2
     - name: Dashboards
       url: dashboards/
       pre: dashboard
