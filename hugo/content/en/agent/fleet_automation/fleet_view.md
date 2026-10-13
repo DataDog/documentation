@@ -49,6 +49,8 @@ Select a Datadog Agent or OTel Collector to view its configuration, connected in
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="The Agent detail panel showing configuration, connected integrations, and audit events." style="width:100%;" >}}
 
+The Agent's **Remote Configuration** status indicates whether it can receive configuration from Datadog. Its **Remote Agent Management** status indicates whether remote management is enabled. An Agent can appear in Fleet View and be connected to Remote Configuration while remote management is **NOT ENABLED**. To enable upgrades and configuration changes on VMs, see [Enable remote Agent management][8].
+
 ## Search and filter
 
 Use the search bar at the top of Fleet View to find specific Agents, OTel Collectors, or clusters across your fleet. You can:
@@ -181,3 +183,4 @@ Compared to the default view, the Kubernetes view has the following limitations:
 [5]: /containers/datadog_operator
 [6]: /agent/guide/setup_remote_config
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
