@@ -1791,7 +1791,7 @@ Retrieves a pipeline's complete configuration by ID, including its ordered proce
 ### `upsert_datadog_log_pipeline`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Write Pipelines` or `Logs Write Processors`*\
-Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updates preserve fields you omit. When you provide a list field, such as processors or tags, the new list replaces the existing one. Integration-managed, read-only pipelines cannot be updated.
+Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updated pipelines preserve fields you omit. When you provide a list field, such as processors or tags, the new list replaces the existing one. Integration-managed, read-only pipelines cannot be updated.
 
 - Create a pipeline for `service:checkout` with a Grok parser for these sample logs.
 
@@ -1826,7 +1826,7 @@ Retrieves an index's complete configuration by name, including its filter query,
 ### `upsert_datadog_log_index`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Modify Indexes`*\
-Creates or updates an index by name. If an index with that name exists, the tool updates it; otherwise, it creates the index. Updates preserve fields you omit. When you provide a list field, such as exclusion filters or tags, the new list replaces the existing one. Creating an index requires a filter query, and the index name cannot be changed after creation.
+Creates or updates an index by name. If an index with that name exists, the tool updates it; otherwise, it creates the index. Updated indexes preserve fields you omit. When you provide a list field, such as exclusion filters or tags, the new list replaces the existing one. Creating an index requires a filter query, and the index name cannot be changed after creation.
 
 - Set the daily limit for the staging index to one million logs.
 
@@ -1861,7 +1861,7 @@ Retrieves an archive's complete configuration by ID, including its filter query,
 ### `upsert_datadog_log_archive`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Write Archives`*\
-Creates an archive or updates an existing archive's configuration. To update an archive, provide `archive_id`; omit it to create one. Updates preserve fields you omit. An archive's destination cannot be changed after creation.
+Creates an archive or updates an existing archive's configuration. To update an archive, provide `archive_id`; omit it to create one. Updated archives preserve fields you omit. An archive's destination cannot be changed after creation.
 
 - Update archive `<ARCHIVE_ID>` to archive logs matching `env:prod`.
 
