@@ -23,7 +23,7 @@ If your CI provider is not supported, you can send custom pipelines through HTTP
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Logs Analysis][21] | Logs Analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Logs Analysis][21] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 | [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
@@ -118,10 +118,10 @@ A running job event does not require an `end` time. The `end` time is set when t
 
 ### Logs Analysis
 
-Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs from your CI provider.
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from your CI provider.
 For a full explanation, see the [Logs Analysis guide][21].
 
-Logs Analysis is enabled by default in Datadog, but requires job logs to be sent as described below. In
+Logs Analysis is enabled by default in Datadog, but requires job logs forwarding to be configured, as described below. In
 [CI/CD Optimization Repository settings][22], you can enable or disable Logs Analysis for your organization or
 individual repositories.
 
