@@ -64,13 +64,13 @@ Bits Release reports what production is doing, not which line to change. From th
 
 ## Prerequisites
 
-Bits Release needs to read the code you merged, and to recognize the moment that code is live in production.
+Bits Release needs to read the code you merged, and to recognize the moment that code is live in production. During the preview, GitHub is the only supported source code provider.
 
 ### Required
 
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
-| [Source Code Integration][2] on the repositories in scope | Lets Bits Release read the code change it is validating. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
+| [Source Code Integration][2] on the GitHub repositories in scope | Lets Bits Release read the code change it is validating. GitHub is the only provider supported today, so repositories hosted elsewhere cannot be validated. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
 | A `version` tag on the services in scope | Identifies each deployment, so Bits Release can tell when a new one happens. Services report it with their [APM][4] or [RUM][5] telemetry. |
 | The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][8] to set this up. |
 
