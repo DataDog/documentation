@@ -35,9 +35,9 @@ Bits Release does not modify your code, and it does not create permanent instrum
 ## How it works
 
 1. **Identify merge**: Bits Release picks up a pull request when it merges to the default branch of a repository in scope.
-2. **Analyze change**: It reads the code change alongside your production data, and builds a validation plan describing what should be different once the change ships (expected impact) and what should stay stable (expected regression risk).
-3. **Deployment**: The plan waits until Bits Release confirms your pull request is running in production.
-4. **Evaluation**: Bits Release evaluates the plan against production until it reaches a verdict, then delivers it as a pull request comment, a Slack notification, and a full report in Datadog.
+2. **Analyze change**: It reads the code change alongside your production data to work out what the change is for: the effect it should have in production once it ships (expected impact), and the behavior it should leave untouched (expected regression risk).
+3. **Deployment**: Validation waits until Bits Release confirms your pull request is running in production.
+4. **Evaluation**: Bits Release measures production against what it expected until it reaches a verdict, then delivers it as a pull request comment, a Slack notification, and a full report in Datadog.
 
 Validation runs against your production environment.
 
@@ -53,7 +53,7 @@ A validation ends in one of four verdicts. **Passed** and **Failed** are conclus
 
 | Verdict | Meaning |
 | ------- | ------- |
-| **Passed** | Your service is healthy after the deploy. If the plan expected your change to make something happen, Bits Release also saw at least one of those things happen. A healthy service on its own is not enough to pass a change that was supposed to have a visible effect. For a change with nothing specific to look for, a healthy service is enough. |
+| **Passed** | Your service is healthy after the deploy. If your change was expected to make something happen, Bits Release also saw at least one of those things happen. A healthy service on its own is not enough to pass a change that was supposed to have a visible effect. For a change with nothing specific to look for, a healthy service is enough. |
 | **Failed** | Bits Release has clear evidence that something is wrong: your change caused a regression, or the changed code ran and the effect you wanted is missing or went the wrong way. For example, the bug you fixed still happens, the latency or error rate you meant to improve did not improve, or a new feature is throwing errors. |
 | **Not enough data** | Production did not give Bits Release enough to judge. Either no relevant telemetry arrived, or too few requests reached the changed code to draw a conclusion. This also covers a healthy service where nothing confirmed the expected effect, for example because your change shipped during quiet hours, sits behind a feature flag that is still off, or serves a path that saw no traffic while Bits Release was watching. |
 | **Inconclusive** | There was enough data, but it points in different directions, or it cannot be confidently pinned on your change rather than on something else happening at the same time. |
