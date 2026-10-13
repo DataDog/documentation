@@ -16,6 +16,8 @@ The `config.cluster_id` Helm value identifies a BYOC Logs cluster in Datadog. Ch
 
 Renaming a cluster changes its BYOC Logs index names from `byoc--<old_cluster_id>--<index_name>` to `byoc--<new_cluster_id>--<index_name>`. Update monitors and dashboards that use the old index names.
 
+Use the currently installed chart version throughout the rename so that the operation does not also upgrade your deployment.
+
 ## Rename with downtime
 
 Use this procedure when temporary ingestion and search failures are acceptable.
@@ -31,6 +33,7 @@ Use this procedure when temporary ingestion and search failures are acceptable.
 
    ```shell
    helm upgrade <RELEASE_NAME> datadog/cloudprem \
+     --version <CHART_VERSION> \
      --namespace <NAMESPACE_NAME> \
      --values datadog-values.yaml
    ```
@@ -40,12 +43,13 @@ Use this procedure when temporary ingestion and search failures are acceptable.
 
 ## Rename gracefully
 
-Use `config.extra_cluster_ids` to allow nodes with the old and new cluster IDs to communicate during the rename. Complete each rollout before starting the next one.
+Use `config.extra_cluster_ids` to allow nodes with the old and new cluster IDs to communicate during the rename. These aliases apply only to communication between nodes; they do not preserve the old Datadog index names. Complete each rollout before starting the next one.
 
 After each change to the Helm values, upgrade the release with the following command:
 
 ```shell
 helm upgrade <RELEASE_NAME> datadog/cloudprem \
+  --version <CHART_VERSION> \
   --namespace <NAMESPACE_NAME> \
   --values datadog-values.yaml
 ```
