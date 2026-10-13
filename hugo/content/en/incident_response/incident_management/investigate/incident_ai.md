@@ -77,7 +77,7 @@ When triggered, the agent automatically pulls in the incident's timeline, linked
 
 **From the web UI**, you can trigger an investigation directly from the "Investigation" section on the incident overview page.
 
-{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Investigation button." >}}
 
 When triggered, the investigation is embedded in the incident web UI, and Bits Investigation appears as a responder in the Responder Roles section of the page.
 
