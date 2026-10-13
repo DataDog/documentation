@@ -210,7 +210,6 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 [1]: /getting_started/tagging/
 [2]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
 [3]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
-[4]: https://docs.databricks.com/aws/en/compute/serverless/
 
 {{% /tab %}}
 
@@ -593,7 +592,7 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/databricks?search=databricks
-[4]: https://docs.databricks.com/en/security/secrets/index.html
+[4]: https://docs.databricks.com/aws/en/compute/serverless/
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
 [8]: https://docs.databricks.com/api/workspace/jobs/submit

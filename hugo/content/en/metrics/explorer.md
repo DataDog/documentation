@@ -40,6 +40,21 @@ To access this feature, click {{< ui >}}Ask{{< /ui >}} in the search field and t
 
 To disable NLQ for your organization, you must have [org_management permissions][11]. Navigate to {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Preferences{{< /ui >}} and toggle off the Natural Language Queries feature.
 
+## Sessions
+
+Metrics Explorer automatically keeps a history of your recent investigations, making it easier to explore and share different questions without rebuilding previous work.
+
+Use Sessions to:
+
+- **Start a separate investigation:** Click {{< ui >}}New Session{{< /ui >}} to explore another question without losing your current work.
+- **Return to previous work:** Select or search for a recent session to continue an investigation.
+- **Preserve an important investigation:** Pin and rename a session so it is easier to recognize and find later.
+- **Explore an alternative:** Duplicate a session and modify the copy while preserving the original.
+- **Share an investigation:** Copy a session link to share it with another user.
+- **Remove an unused session:** Delete a session you no longer need.
+
+{{< img src="metrics/explorer/09282026_metric_explorer_sessions.png" alt="Metrics Explorer sessions example" style="width:80%;" >}}
+
 ## Graphing
 
 Use the query editor to customize the graph displayed on the Metrics Explorer page.

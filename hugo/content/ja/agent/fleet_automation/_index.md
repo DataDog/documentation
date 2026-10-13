@@ -22,9 +22,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/fleet-automation/
   tag: ブログ
   text: Fleet Automation を使用して、Datadog Agent を大規模に一元管理し、リモートで管理する
+site_support_id: fleet-automation-standard-features
 title: Fleet Automation
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Datadog Fleet Automation を使用すると、変化する可観測性のニーズに対応するため、Datadog Agent と OpenTelemetry (OTel) コレクターを大規模に一元管理し、リモートで管理することができます。
 
@@ -35,8 +36,10 @@ Datadog Fleet Automation を使用すると、変化する可観測性のニー�
 Fleet Automation を使用すると、以下のことが可能です。
 - **[Agent および OTel Collector の構成を表示する][3]**。履歴変更を表示し、デプロイの更新を確認し、構成の一貫性を検証します。
 - **[Datadog Agent を構成する][4]**。セットアップを一元化し、環境を迅速に可視化します。
+- **[Datadog Agentのタグを管理][4]** _(プレビュー)_して、フリート全体のタグ付けを修正および標準化します。
 - **[フリートを最新の状態に保つ][5]**。古い Agent および OTel Collector バージョンを特定し、アップグレードします。
 - **[リモートでサポートフレアを送信する][6]**。Agent または DDOT Collector の問題をデバッグするのにかかる時間を短縮します。
+- **[Kubernetesクラスターごとにフリートを表示する][7]**して、個々のホストではなくクラスターごとにグループ化されたDatadog Agentを調査および構成します。
 
 ## Fleet Automation API {#fleet-automation-api}
 
@@ -69,3 +72,4 @@ Fleet Automation は Datadog 組織内の全ユーザーが利用可能です。
 [4]: /ja/agent/fleet_automation/configure_agents/
 [5]: /ja/agent/fleet_automation/upgrade_agents/
 [6]: /ja/agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[7]: /ja/agent/fleet_automation/fleet_view/#kubernetes-view
