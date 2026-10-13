@@ -1966,6 +1966,13 @@
       "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
