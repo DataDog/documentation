@@ -87,7 +87,7 @@ The Worker normalizes all logs even if they don't match an integration pipeline.
 
 ### Preprocessing options
 
-Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. You can add more log attributes to the list. Preprocessing uses the value of the first matching attribute.
+Preprocessing maps log attributes to reserved attributes. Each reserved attribute has an ordered list of log attributes to check. You can add more log attributes to the list. The value of the first matching attribute in each list is used for the corresponding reserved attribute.
 
 For example, if you add `custom_host` before `hostname` in the list for the reserved attribute `host`, the Worker checks for `custom_host` first. Clearing a list disables remapping for that reserved attribute.
 
