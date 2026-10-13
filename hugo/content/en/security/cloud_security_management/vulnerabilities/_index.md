@@ -28,7 +28,7 @@ further_reading:
 
 Cloud Security Vulnerabilities helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
-Container images can be scanned in three distinct contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage and prerequisites. See [Cloud Security Coverage and Collection Methods][25] before choosing a deployment method.
+Cloud Security Vulnerabilities scans container images in three contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage and prerequisites. See [Cloud Security Coverage and Collection Methods][25] before choosing a deployment method.
 
 With Cloud Security Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 
@@ -36,7 +36,7 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 - Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10]. Vulnerability detection does not detect runtime threats; for that outcome, see [Workload Protection][26].
+**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10]. Cloud Security Vulnerabilities does not detect runtime threats. For runtime threat detection, see [Workload Protection][26].
 
 ## Key capabilities
 
@@ -89,7 +89,7 @@ Use these tables to decide which solution to start with:
 | Container image               | OS packages and app packages, mapped to image                                                                                                                | OS packages                    |
 | Cloud provider                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not supported                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not supported                  |
 | Container registries          | Amazon ECR and Google Artifact Registry (running + at-rest); Azure Container Registry, Docker Hub, GitHub Container Registry, Microsoft Container Registry, and Kubernetes registry (authenticated pull only). See [Container image registries][24] for details | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.

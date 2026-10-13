@@ -20,11 +20,11 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides vulnerability visibility for supported hosts, container images, host images, registries, and serverless workloads in AWS, Azure, and GCP without requiring the Datadog Agent on each scanned resource. It is one Agentless collection method; [cloud integrations][17] are a separate Agentless method for cloud configuration and identity assessment. See [Cloud Security Coverage and Collection Methods][18] to compare collection methods and their limits.
+Agentless Scanning provides vulnerability visibility for supported hosts, container images, host images, registries, and serverless workloads in AWS, Azure, and GCP without requiring the Datadog Agent on each scanned resource. Agentless Scanning is one Agentless collection method. [Cloud integrations][17] are a separate Agentless method for cloud configuration and identity assessment. See [Cloud Security Coverage and Collection Methods][18] to compare collection methods and their limits.
 
 <div class="alert alert-info">Agentless Scanning excludes resources that have the Datadog Agent installed.</div>
 
-Agentless Scanning is not a replacement for the Unified Datadog Agent when you need runtime context or real-time vulnerability updates. It also does not provide runtime threat detection; use [Workload Protection][19] for that outcome.
+Agentless Scanning is not a replacement for the Unified Datadog Agent when you need runtime context or real-time vulnerability updates. Agentless Scanning also does not provide runtime threat detection. For runtime threat detection, use [Workload Protection][19].
 
 ## How it works
 

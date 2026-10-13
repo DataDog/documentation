@@ -6,7 +6,7 @@ aliases:
 
 ## Availability
 
-This page is the technical compatibility reference for **Agentless Scanning vulnerability coverage**. It does not describe cloud-integration coverage for Misconfigurations or Identity Risks, and it does not describe all Cloud Security capabilities. For an outcome-first coverage overview, see [Cloud Security Coverage and Collection Methods](/security/cloud_security_management/setup/supported_deployment_types/).
+This page describes the assets that Agentless Scanning can scan for vulnerabilities. For Misconfigurations and Identity Risks coverage, see [cloud integrations][19]. For an overview of all Cloud Security capabilities, see [Cloud Security Coverage and Collection Methods][20].
 
 Agentless Scanning is supported on AWS, Azure, and GCP. It is not supported on OCI.
 
@@ -111,3 +111,5 @@ The following container runtimes are supported:
 [16]: /help
 [17]: /security/cloud_security_management/setup/agentless_scanning/update
 [18]: /containers/cluster_agent/setup/
+[19]: /security/cloud_security_management/setup/cloud_integrations/
+[20]: /security/cloud_security_management/setup/supported_deployment_types/

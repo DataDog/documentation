@@ -41,7 +41,7 @@ To get started with Cloud Security, review the following:
 
 ## Choose a coverage and collection method
 
-Cloud Security has three collection families. You can use more than one:
+Cloud Security has three collection methods. You can use more than one:
 
 - **Unified Datadog Agent** collects host and runtime context. This includes Host Agent, Cluster Agent, and serverless Agent deployments.
 - **Agentless** includes cloud integrations for cloud configuration and identity assessment, and Agentless Scanning for supported vulnerability discovery in AWS, Azure, and GCP.

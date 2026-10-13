@@ -81,13 +81,13 @@ Cloud Security includes the following capabilities:
 
 ## How Datadog collects Cloud Security data
 
-Datadog uses three collection families. You can combine them to cover different assets and security outcomes:
+Datadog uses three collection methods. You can combine them to cover different assets and security outcomes:
 
 - **Unified Datadog Agent**: Host Agent, Cluster Agent, and serverless Agent deployments collect host and runtime context.
 - **Agentless**: Cloud integrations assess cloud configuration and identities. Agentless Scanning finds vulnerabilities in supported AWS, Azure, and GCP assets without an Agent on every resource.
 - **Repository and CI/CD integrations**: Scan container images before deployment and connect findings to source code.
 
-See [Cloud Security Coverage and Collection Methods][25] for the supported assets, prerequisites, and exclusions for each collection family.
+See [Cloud Security Coverage and Collection Methods][25] for the supported assets, prerequisites, and exclusions for each collection method.
 
 Cloud Security also includes access to Datadog Security features, including:
 - [Detection Rules][18]
