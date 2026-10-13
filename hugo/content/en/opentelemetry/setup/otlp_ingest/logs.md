@@ -109,7 +109,7 @@ Add any receivers and processors required by your Collector distribution.
 
 For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, and host metadata enrichment.
 
-## Configure log processing
+## Configure log processing (optional)
 
 Use the `dd-otel-log-config` header to configure how Datadog processes OTLP log records on intake. The header value is a JSON object with the following fields:
 
@@ -135,7 +135,13 @@ export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-api-key=${DD_API_KEY},dd-otel-log-con
 For manual instrumentation, add the header in your exporter configuration. For example, in Java:
 
 ```java
-.addHeader("dd-otel-log-config", "{\"keep_raw_message\": true}")
+import io.opentelemetry.exporter.otlp.http.logs.OtlpHttpLogRecordExporter;
+
+OtlpHttpLogRecordExporter exporter = OtlpHttpLogRecordExporter.builder()
+    .setEndpoint("${YOUR_ENDPOINT}")
+    .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
+    .addHeader("dd-otel-log-config", "{\"keep_raw_message\": true}")
+    .build();
 ```
 
 In an OpenTelemetry Collector, add the header under the `otlp_http` exporter's `headers`:
