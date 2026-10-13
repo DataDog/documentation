@@ -347,7 +347,7 @@ Auto-Processing only handles logs that do not match the filter of any existing i
 
 ### How it works
 
-Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Datadog manages and updates these entries as new log patterns appear.
+Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Automatic updates add support for new log patterns without changing how previously supported patterns are parsed.
 
 Review transformations and control which entries process your logs. Switch an entry to a manual pipeline to customize its configuration.
 
