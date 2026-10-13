@@ -23,7 +23,7 @@ If your CI provider is not supported, you can send custom pipelines through HTTP
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Logs Analysis][21] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Logs Analysis][21] | Logs Analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 | [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
@@ -129,7 +129,7 @@ job events you send through the [CI Visibility Pipelines API][1]. Each log objec
 All other log fields are optional. If provided, `provider_name` must match the pipeline event's `provider_name`.
 Datadog uses `custom` when the field is omitted from both the pipeline event and the log lines.
 
-Send log lines in batches while the job runs, or send the batches when it finishes. We recommend sending all batches
+Send log lines in batches while the job runs, or send the batches when it finishes. Datadog recommends sending all batches
 before submitting the completed job event. After you submit that event, Datadog closes the job log after 20 seconds
 without a new line. Lines received after it closes may not appear in the job's Logs tab.
 
@@ -156,14 +156,14 @@ For compression, retry guidance, optional attributes, and per-job limits, see th
 ### Logs Analysis
 
 Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs from your CI provider.
-For a full explanation, see the guide on [using Logs Analysis][21].
+For a full explanation, see the [Logs Analysis guide][21].
 
-Logs Analysis is enabled by default in Datadog. In [CI/CD Repository settings][22], you can enable or disable it
+Logs Analysis is enabled by default in Datadog. In [CI/CD Optimization Repository settings][22], you can enable or disable it
 for your organization or individual repositories.
 
 ### Logs Storage
 
-To store job logs and view them in the Logs tab, go to [CI/CD Repository settings][22] and enable Logs Storage
+To store job logs and view them in the Logs tab, go to [CI/CD Optimization Repository settings][22] and enable Logs Storage
 for your organization or individual repositories.
 
 Logs Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in

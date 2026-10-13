@@ -26,7 +26,7 @@ Set up CI Visibility for TeamCity to collect data about your pipeline executions
 | [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
-| [Logs Analysis][21] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Logs Analysis][21] | Logs Analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 
 The following TeamCity versions are supported:
@@ -90,14 +90,14 @@ When available, the plugin collects TeamCity log severity and the name of the in
 ### Logs Analysis
 
 Logs Analysis uses LLM models to classify job failures by root cause based on relevant TeamCity logs.
-For a full explanation, see the guide on [using Logs Analysis][21].
+For a full explanation, see the [Logs Analysis guide][21].
 
-Logs Analysis is enabled by default in Datadog. In [CI/CD Repository settings][22], you can enable or disable it
+Logs Analysis is enabled by default in Datadog. In [CI/CD Optimization Repository settings][22], you can enable or disable it
 for your organization or individual repositories.
 
 ### Logs Storage
 
-To store job logs and view them in the Logs tab, go to [CI/CD Repository settings][22] and enable Logs Storage
+To store job logs and view them in the Logs tab, go to [CI/CD Optimization Repository settings][22] and enable Logs Storage
 for your organization or individual repositories.
 
 Logs Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in
@@ -128,7 +128,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 
 ### Missing or incomplete job logs
 
-If logs are missing from the Logs tab, confirm that Logs Storage is enabled in [CI/CD Repository settings][22].
+If logs are missing from the Logs tab, confirm that Logs Storage is enabled in [CI/CD Optimization Repository settings][22].
 Confirm that the build chain completed and `datadog.ci.enabled` is `true`. The effective value of
 `datadog.ci.logs.disabled` for the project must be `false` or unset. For upload errors, review the plugin's messages
 in `teamcity-server.log`. In TeamCity, go to {{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Diagnostic{{< /ui >}} ->
