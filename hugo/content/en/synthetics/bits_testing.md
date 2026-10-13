@@ -24,6 +24,9 @@ further_reading:
 - link: "/synthetics/platform/private_locations/"
   tag: "Documentation"
   text: "Run Synthetic Tests from Private Locations"
+- link: "/synthetics/guide/rum-to-synthetics/"
+  tag: "Documentation"
+  text: "Generate Synthetic Browser Tests From Session Replay"
 - link: "https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products"
   tag: "Pricing"
   text: "Synthetic Monitoring pricing"
@@ -52,6 +55,7 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 - **Bits Testing** in the Synthetic Monitoring & Testing top navigation.
 - `Cmd+K` on macOS or `Ctrl+K` on Windows, then search for Bits Testing.
 - **Bits Testing** in the side navigation menu, under **Digital Experience > Synthetic Monitoring & Testing**.
+- {{< ui >}}Generate a Test With Bits Testing{{< /ui >}} in a session replay's details panel. See [Generate a test from a session replay][10].
 
 ## Run Bits Testing
 
@@ -175,3 +179,4 @@ Bits Testing and Goal-Based tests run from the managed locations in [Run Bits Te
 [7]: /synthetics/api_tests/http_tests
 [8]: /synthetics/network_path_tests/
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[10]: /synthetics/guide/rum-to-synthetics/#generate-a-test-from-a-session-replay

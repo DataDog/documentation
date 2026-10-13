@@ -2,9 +2,9 @@
 title: Generate Synthetic Browser Tests From Session Replay
 
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/create-browser-tests-from-datadog-rum-session-replay/'
-    tag: 'Blog'
-    text: 'Create browser tests directly from Datadog RUM Session Replay'
+  - link: 'synthetics/bits_testing'
+    tag: 'Documentation'
+    text: 'Bits Testing'
   - link: 'synthetics/browser_tests'
     tag: 'Documentation'
     text: 'Configure a Browser Test'
@@ -18,23 +18,19 @@ further_reading:
 
 [Real User Monitoring (RUM)][1] gives you end-to-end visibility into the real-time activity and experience of individual users. [Synthetic browser tests][2] allow you to observe how your systems and applications are performing using simulated requests and actions from around the globe.
 
-{{< img src="synthetics/guide/rum_to_synthetics/generate_test_modal.png" alt="Generate a Browser Test with your Session Replay modal" style="width:70%" >}}
+{{< img src="synthetics/guide/rum_to_synthetics/bits_testing_from_replay.png" alt="The Generate a Test With Bits Testing button in a session replay's details panel" style="width:70%" >}}
 
-You can create Synthetic browser tests from your session replays in RUM to track performance based on real user behavior.
+You can trigger a [Bits Testing][7] job to generate tests based on a session replay's summary.
 
 ## Generate a test from a session replay
 
-Navigate to the [RUM Explorer][3] and select a session with an available [Session Replay][4] that you want to create a browser test from. Click {{< ui >}}Generate Synthetic Browser Test{{< /ui >}} above the event timeline. 
+Navigate to the [RUM Explorer][3] and open a session with an available [Session Replay][4] and a Session Summary. Click {{< ui >}}Generate a Test With Bits Testing{{< /ui >}} in the session's details panel.
 
-{{< img src="synthetics/guide/rum_to_synthetics/test_recording.png" alt="A user session in the RUM Explorer" style="width:100%" >}}
+This triggers a Bits Testing job to generate tests based on the session replay's summary. The session's starting URL and summary prefill the job's starting URL and goal.
 
-This automatically clones the events captured within a session replay, such as user clicks and page loads, into individual steps for a new browser test. 
+{{< img src="synthetics/guide/rum_to_synthetics/bits_testing_start_discovery.png" alt="The Bits Testing Start Discovery card prefilled with a goal and starting URL generated from a session replay's summary" style="width:100%" >}}
 
-For example, in the following screenshot, the generated browser test cloned a user's session on the shopping page, including them navigating to it and clicking the {{< ui >}}Add to cart{{< /ui >}} button. 
-
-{{< img src="synthetics/guide/rum_to_synthetics/example_test.png" alt="Browser test recorder filled automatically with RUM data" style="width:100%" >}}
-
-Further customize your tests and test steps to suit your needs, just as you would for [any other browser test][6]. For example, you can add additional [test steps][5] (such as assertions), adjust the frequency of your test's runs, and customize its notification.
+Review the prefilled job, adjust its [location, Agent Profile, and review mode][8], and click {{< ui >}}Start Discovery{{< /ui >}}.
 
 ## Further Reading
 
@@ -43,6 +39,6 @@ Further customize your tests and test steps to suit your needs, just as you woul
 [1]: /real_user_monitoring/
 [2]: /synthetics/browser_tests
 [3]: https://app.datadoghq.com/rum/sessions
-[4]: /session_replay/
-[5]: /synthetics/browser_tests/test_steps
-[6]: /synthetics/browser_tests/?tab=requestoptions#test-configuration
+[4]: /session_replay/browser/
+[7]: /synthetics/bits_testing/
+[8]: /synthetics/bits_testing/#run-bits-testing
