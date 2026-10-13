@@ -35,7 +35,7 @@ Bits Release does not modify your code, and it does not create permanent instrum
 ## How it works
 
 1. **Identify merge**: Bits Release picks up a pull request when it merges to the default branch of a repository in scope.
-2. **Analyze change**: It reads the code change alongside your production data, and builds a validation plan describing what should be different once the change ships, and what should stay stable.
+2. **Analyze change**: It reads the code change alongside your production data, and builds a validation plan describing what should be different once the change ships (expected impact) and what should stay stable (expected regression risk).
 3. **Deployment**: The plan waits until Bits Release confirms your pull request is running in production.
 4. **Evaluation**: Bits Release evaluates the plan against production until it reaches a verdict, then delivers it as a pull request comment, a Slack notification, and a full report in Datadog.
 
