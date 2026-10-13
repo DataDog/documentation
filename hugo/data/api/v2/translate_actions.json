@@ -1820,6 +1820,14 @@
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
   },
+  "ListDeploymentGateEvaluations": {
+    "description": "Returns deployment gate evaluations started in a maximum 30-day window (the default is the previous 24 hours).\nResults are ordered by start time, newest first.\nIn-progress state is near-real-time and mutable. Finished state is eventually consistent.",
+    "summary": "List deployment gate evaluations"
+  },
+  "ListDeploymentRuleEvaluations": {
+    "description": "Returns rule evaluations whose gate evaluation started in a maximum 30-day window (the default is the previous 24 hours).\nFilter by gate, rule, gate evaluation, or rule evaluation ID; omit IDs for cross-evaluation searches.\nResults are ordered by start time, newest first.\nIn-progress state is near-real-time and mutable. Finished state is eventually consistent.\nGate-level and rule-level dry-run states are independent.\nPagination is deterministic but not snapshot isolated; clients should deduplicate by rule evaluation ID.",
+    "summary": "List deployment gate rule evaluations"
+  },
   "GetDeploymentGateRules": {
     "description": "Endpoint to get rules for a deployment gate.",
     "summary": "Get rules for a deployment gate"
