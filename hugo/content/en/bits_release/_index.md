@@ -19,7 +19,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/bits-release/" >}}
-  Bits Release is in Preview. Request access to join the waiting list.
+  Bits Release is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 ## Overview
