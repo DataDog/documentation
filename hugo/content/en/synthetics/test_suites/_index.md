@@ -90,10 +90,10 @@ To create test suites with Bits Testing:
 
 1. In Synthetic Monitoring & Testing, click {{< ui >}}Bits Testing{{< /ui >}} in the top navigation.
 2. Describe how you want your tests grouped, for example, `Create a suite for each one of my teams`. You can also select one of the suggested prompts.
+3. Review the suites Bits Testing plans to generate, then click the generate button. The button shows the number of suites, for example, {{< ui >}}Generate 5 Suites{{< /ui >}}, or {{< ui >}}Generate Suite{{< /ui >}} for a single suite.
 
-   {{< img src="synthetics/test_suites/bits_testing_suite_prompt.png" alt="The Bits Testing page with a prompt asking to create a suite for each of the user's teams." style="width:80%;" >}}
+   {{< img src="synthetics/test_suites/bits_testing_multiple_suites.png" alt="Bits Testing's response to a request for one test suite per team, listing five suite prompts and a Generate 5 Suites button." style="width:100%;" >}}
 
-3. Review the list of suites Bits Testing plans to generate, then click {{< ui >}}Generate Suites{{< /ui >}}. The button shows the number of suites, for example, {{< ui >}}Generate 3 Suites{{< /ui >}}.
 4. In the {{< ui >}}Review suggested suites{{< /ui >}} panel, select each suite in the list to see its description and tests. For each suite, you can:
    - Click {{< ui >}}Add Tests{{< /ui >}} to add tests, or select tests and click {{< ui >}}Remove From Suite{{< /ui >}} to remove them.
    - Set each test's {{< ui >}}Suite Alerting{{< /ui >}} value. See [Test suite configuration](#test-suite-configuration).
