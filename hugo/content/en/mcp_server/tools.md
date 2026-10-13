@@ -131,6 +131,22 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 - Find notebooks related to performance investigation.
 - List notebooks tagged with `incident-response`.
 
+### `delete_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within 30 days of deletion.
+
+- Delete notebook 12345678.
+- Delete the notebook with ID 12345678 that I created for testing.
+
+### `recover_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Restores a soft-deleted notebook by its numeric ID. The notebook can be restored only within 30 days of deletion.
+
+- Recover notebook 12345678.
+- Restore the notebook with ID 12345678 that I deleted by mistake.
+
 ### `search_datadog_hosts`
 *Toolset: **core***\
 *Permissions Required: `Hosts Read` and `Timeseries`*\
