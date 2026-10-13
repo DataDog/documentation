@@ -336,7 +336,7 @@ spec:
 To avoid labeling each workload on a dedicated Fargate cluster, you can instrument pods in bulk, but you must configure both webhooks:
 
 - Set `DD_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_MUTATE_UNLABELLED=true` on the Cluster Agent so the `cws-instrumentation` init container is injected into every pod. To limit which pods this applies to, use the `admission_controller.cws_instrumentation.include` and `admission_controller.cws_instrumentation.exclude` settings; to exclude a single pod, label it `admission.datadoghq.com/cws-instrumentation.enabled: "false"`.
-- The Agent sidecar has no equivalent bulk switch: give `agentSidecarInjection` a namespace selector (`selectors`) that matches your target namespaces, otherwise pods still need the `agent.datadoghq.com/sidecar: fargate` label. Without the sidecar, the init container has no Agent to send events to.
+- The Agent sidecar has no equivalent bulk switch: give `agentSidecarInjection` a namespace selector (`selectors`) that matches your target namespaces; otherwise, pods still need the `agent.datadoghq.com/sidecar: fargate` label. Without the sidecar, the init container has no Agent to send events to.
 
 Avoid bulk injection on clusters that also run workloads on EC2 nodes, where you use standard eBPF-based Workload Protection instead of the eBPF-less Fargate instrumentation.
 
