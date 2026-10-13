@@ -89,7 +89,7 @@ You can ask Bits Testing for:
 To create test suites with Bits Testing:
 
 1. In Synthetic Monitoring & Testing, click {{< ui >}}Bits Testing{{< /ui >}} in the top navigation.
-2. Describe how you want your tests grouped, for example, `Create a suite for each one of my teams`. You can also select a suggested prompt, such as {{< ui >}}Create a test suite for my team{{< /ui >}}.
+2. Describe how you want your tests grouped, for example, `Create a suite for each one of my teams`. You can also select one of the suggested prompts.
 
    {{< img src="synthetics/test_suites/bits_testing_suite_prompt.png" alt="The Bits Testing page with a prompt asking to create a suite for each of the user's teams." style="width:80%;" >}}
 
