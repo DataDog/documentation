@@ -156,7 +156,18 @@ After you complete setup, Datadog collects the following:
 
 If no metrics appear, send inference traffic to your deployment. Dynamo and vLLM emit some metrics only after they serve the first request.
 
-### 5. Enable GPU tracing (optional)
+### 5. Enable percentiles on your metrics
+
+To graph percentiles on certain vLLM and Dynamo metrics, you must opt in to [advanced query functionality][6] on the following distribution metrics:
+
+| Metric |
+|--------|
+| `dynamo.frontend.time_to_first_token.seconds` |
+| `dynamo.frontend.inter_token_latency.seconds` |
+| `vllm.request.prompt_tokens` |
+| `vllm.request.generation_tokens` |
+
+### 6. Enable GPU tracing (optional)
 
 To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM worker workloads.
 
@@ -206,3 +217,4 @@ Click {{< ui >}}Column Settings{{< /ui >}} to choose which columns to display.
 [3]: /containers/kubernetes/integrations/?tab=annotations
 [4]: /gpu_monitoring/tracing
 [5]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=inference-monitoring
+[6]: /metrics/distributions/#enabling-advanced-query-functionality
