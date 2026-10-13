@@ -398,6 +398,10 @@ DORA Metrics automatically identifies failed deployments to calculate change fai
 
 For detailed information about how detection works and how to customize rules, see the [Change Failure Detection documentation][5].
 
+## Additional configuration
+
+Delivery Performance general settings also identify the automation bots in your repositories. That configuration affects both DORA Metrics and AI Impact. For more information, see [Identify automation bots][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -410,3 +414,4 @@ For detailed information about how detection works and how to customize rules, s
 [6]: https://app.datadoghq.com/ci/settings/dora
 [7]: /internal_developer_portal/catalog/entity_model/v3_migration/
 [8]: https://en.wikipedia.org/wiki/Glob_(programming)
+[9]: /delivery_performance/ai_impact/setup/#identify-automation-bots

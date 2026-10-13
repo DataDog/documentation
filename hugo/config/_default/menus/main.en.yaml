@@ -5833,7 +5833,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 40505
-    - name: Evaluation Developer Guide
+    - name: Evaluator Developer Guide
       url: llm_observability/investigate/evaluations/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
@@ -6547,6 +6547,11 @@ menu:
       parent: delivery_performance
       identifier: delivery_performance_ai_impact
       weight: 2
+    - name: Setup
+      url: delivery_performance/ai_impact/setup/
+      parent: delivery_performance_ai_impact
+      identifier: delivery_performance_ai_impact_setup
+      weight: 1
     - name: Feature Flags
       url: feature_flags/
       pre: signpost
