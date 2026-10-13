@@ -28,36 +28,24 @@ Merging and deploying a change is not the same as knowing it worked. Most teams 
 
 Bits Release closes that gap. After you merge a pull request, it reads the code change, decides what should be different in production, waits for the change to deploy, and then examines your production telemetry to report a verdict on the pull request.
 
-Bits Release does not modify your code, and it does not create permanent instrumentation or long-lived monitors. It reads the observability data you already send to Datadog, creates temporary artifacts when a check needs to run over time, and removes them when the validation ends.
+Bits Release does not modify your code, and it does not create permanent instrumentation or leave anything behind. It reads the observability data you already send to Datadog, creates temporary artifacts when a check needs to run over time, and removes them when the validation ends.
 
 {{< img src="bits_release/bits_release_demo.mp4" alt="Video walking through a Bits Release validation: a merged pull request is deployed to production, validation starts, and a verdict arrives with the evidence behind it" video="true" style="width:100%;" >}}
 
 ## How it works
 
-1. **Trigger**: A pull request merges to the default branch of a repository in scope.
-2. **Impact analysis**: Bits Release reads the diff and queries production data for the affected service to determine the change type, the risk level, and the code paths involved.
-3. **Validation plan**: It produces a plan describing the expected impact of the change. Each item states either that a behavior must move, or that a behavior must stay stable. Items are labeled as an expected impact or an expected regression risk, so you can see what the change is supposed to do separately from what it might break.
-4. **Deploy detection**: The plan stays pending until Bits Release confirms your pull request is running in production.
-5. **Evaluation**: After deployment, Bits Release evaluates the plan over a soak window, the period it watches production once your change is live, comparing post-deploy behavior to the pre-deploy baseline it captured.
-6. **Verdict**: It weighs the evidence from every source into a single verdict, delivered as a pull request comment, a Slack notification, and a full report in Datadog.
+1. **Identify merge**: Bits Release picks up a pull request when it merges to the default branch of a repository in scope.
+2. **Analyze change**: It reads the code change alongside your production data, and builds a validation plan describing what should be different once the change ships, and what should stay stable.
+3. **Deployment**: The plan waits until Bits Release confirms your pull request is running in production.
+4. **Evaluation**: Bits Release evaluates the plan against production until it reaches a verdict, then delivers it as a pull request comment, a Slack notification, and a full report in Datadog.
 
 Validation runs against your production environment.
 
 ### What Bits Release looks at
 
-Bits Release does not require a dedicated data source. It reads the Datadog products you already have enabled and adapts to what is available for each service. In practice, **logs and APM traces carry most validations**, with the other sources adding coverage depending on the change.
+Bits Release does not require a dedicated data source. It validates your change with the core Datadog telemetry your services already send, primarily [logs][3] and [APM][4] traces for backend services and [RUM][5] for web frontends, and it adapts to what each service has enabled.
 
-| Source | How it is used |
-| ------ | -------------- |
-| **APM traces and spans** | Error rates, latency, and throughput on the endpoints and services the change touches. Also supplies the commit SHA used for deploy detection. |
-| **Logs** | Error messages, exceptions, and log-based evidence for behavior the change was meant to alter or preserve. |
-| **Metrics and monitors** | Baseline-versus-post-deploy comparison. Bits Release can create a temporary monitor when a check needs to watch for a rare regression over days rather than minutes, and removes it afterward. |
-| **RUM** | Frontend validation: errors, views, and user actions on the pages affected by the change. |
-| **Events and change tracking** | Deployment events, which establish when the change went live and where the soak window starts. |
-| **Change stories, dashboards, and incidents** | Context about what else changed around the same time, to help separate the effect of your change from unrelated activity. |
-| **[Bits Testing][9]** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
-
-A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
+Coverage follows your instrumentation. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
 
 ## Verdicts
 
@@ -83,15 +71,15 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
 | [Source Code Integration][2] on the repositories in scope | Lets Bits Release read the code change it is validating. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
-| A `version` tag on the services in scope | Identifies each deployment, so Bits Release can tell when a new one happens. Services report it with their [APM][3] or [RUM][4] telemetry. |
-| The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][7] to set this up. |
+| A `version` tag on the services in scope | Identifies each deployment, so Bits Release can tell when a new one happens. Services report it with their [APM][4] or [RUM][5] telemetry. |
+| The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][8] to set this up. |
 
 ### Recommended
 
 | Requirement | What it adds |
 | ----------- | ------------ |
-| [Slack integration][5] | Notifies the pull request author directly when a verdict is ready, instead of relying on them seeing the pull request comment. |
-| An existing [synthetic test][6] on the same domain | Lets Bits Release validate a change by actively calling your application rather than waiting for organic traffic. It reuses the entry point and sign-in method your existing test already establishes. |
+| [Slack integration][6] | Notifies the pull request author directly when a verdict is ready, instead of relying on them seeing the pull request comment. |
+| An existing [synthetic test][7] on the same domain | Lets Bits Release validate a change by actively calling your application rather than waiting for organic traffic. It reuses the entry point and sign-in method your existing test already establishes. |
 
 ## Where results appear
 
@@ -101,7 +89,7 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 
 ## Billing
 
-Bits Release is free during the private preview. It does not consume [AI Credits][8], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
+Bits Release is free during the private preview. It does not consume [AI Credits][9], and any temporary resources it creates while validating a change are not billed.
 
 ## Further reading
 
@@ -109,10 +97,10 @@ Bits Release is free during the private preview. It does not consume [AI Credits
 
 [1]: /bits_ai/bits_code/
 [2]: /source_code/
-[3]: /tracing/trace_collection/
-[4]: /real_user_monitoring/
-[5]: /integrations/slack/
-[6]: /synthetics/
-[7]: /source_code/service-mapping/
-[8]: /account_management/billing/ai_credits/
-[9]: /synthetics/bits_testing/
+[3]: /logs/
+[4]: /tracing/trace_collection/
+[5]: /real_user_monitoring/
+[6]: /integrations/slack/
+[7]: /synthetics/
+[8]: /source_code/service-mapping/
+[9]: /account_management/billing/ai_credits/
