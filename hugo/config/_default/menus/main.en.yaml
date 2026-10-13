@@ -1549,6 +1549,11 @@ menu:
       identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
+    - name: Use Bits Chat
+      url: bits_ai/bits_chat/usage
+      identifier: bits_ai_bits_chat_usage
+      parent: bits_ai_bits_chat
+      weight: 201
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
@@ -6718,6 +6723,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
       weight: 316
+    - name: Flag Key Obfuscation
+      url: feature_flags/concepts/flag_key_obfuscation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_key_obfuscation
+      weight: 317
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -10990,6 +11000,11 @@ menu:
       identifier: disaster_recovery
       parent: administration_heading
       weight: 15000
+    - name: Recommended Settings for DNS Failover
+      identifier: disaster_recovery_recommended_settings
+      url: disaster_recovery/recommended_settings/
+      parent: disaster_recovery
+      weight: 1
     - name: Data Security
       url: data_security/
       pre: security-lock

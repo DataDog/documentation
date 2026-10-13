@@ -20,12 +20,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Overview
 This page provides a list of UI components that you can use when creating apps in App Builder.
 

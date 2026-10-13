@@ -7428,22 +7428,6 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
-    - name: AI Impact
-      url: /api/latest/ai-impact/
-      identifier: ai-impact
-      generated: true
-    - name: Send AI tool user activity
-      url: /api/latest/ai-impact/send-ai-tool-user-activity/
-      identifier: ai-impact-send-ai-tool-user-activity
-      parent: ai-impact
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateAIImpactUserActivity
-        unstable: []
-        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
@@ -12954,7 +12938,7 @@ menu:
         operationids:
           - CreateDORAIncident
         unstable: []
-        order: 10
+        order: 12
     - name: Get an incident event
       url: /api/latest/dora-metrics/get-an-incident-event/
       identifier: dora-metrics-get-an-incident-event
@@ -13050,7 +13034,7 @@ menu:
         operationids:
           - PatchDORADeploymentByVersion
         unstable: []
-        order: 11
+        order: 10
     - name: Delete a deployment event
       url: /api/latest/dora-metrics/delete-a-deployment-event/
       identifier: dora-metrics-delete-a-deployment-event
@@ -13075,6 +13059,18 @@ menu:
           - CreateDORADeployment
         unstable: []
         order: 1
+    - name: Send AI tool user activity
+      url: /api/latest/dora-metrics/send-ai-tool-user-activity/
+      identifier: dora-metrics-send-ai-tool-user-activity
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAIImpactUserActivity
+        unstable: []
+        order: 11
     - name: Dashboard Secure Embed
       url: /api/latest/dashboard-secure-embed/
       identifier: dashboard-secure-embed
@@ -13490,6 +13486,32 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: List deployment gate rule evaluations
+      url: /api/latest/deployment-gates/list-deployment-gate-rule-evaluations/
+      identifier: deployment-gates-list-deployment-gate-rule-evaluations
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentRuleEvaluations
+        unstable:
+          - v2
+        order: 14
+    - name: List deployment gate evaluations
+      url: /api/latest/deployment-gates/list-deployment-gate-evaluations/
+      identifier: deployment-gates-list-deployment-gate-evaluations
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentGateEvaluations
+        unstable:
+          - v2
+        order: 13
     - name: Create deployment gate
       url: /api/latest/deployment-gates/create-deployment-gate/
       identifier: deployment-gates-create-deployment-gate
@@ -18254,6 +18276,42 @@ menu:
           - GetScheduleOnCallResponders
         unstable: []
         order: 22
+    - name: Delete On-Call schedule override
+      url: /api/latest/on-call/delete-on-call-schedule-override/
+      identifier: on-call-delete-on-call-schedule-override
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScheduleOverride
+        unstable: []
+        order: 26
+    - name: Create On-Call schedule overrides
+      url: /api/latest/on-call/create-on-call-schedule-overrides/
+      identifier: on-call-create-on-call-schedule-overrides
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScheduleOverrides
+        unstable: []
+        order: 25
+    - name: List On-Call schedule overrides
+      url: /api/latest/on-call/list-on-call-schedule-overrides/
+      identifier: on-call-list-on-call-schedule-overrides
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScheduleOverrides
+        unstable: []
+        order: 24
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user
