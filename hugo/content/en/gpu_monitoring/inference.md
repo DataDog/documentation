@@ -124,7 +124,9 @@ metadata:
         "vllm": {
           "init_config": {},
           "instances": [{
-            "openmetrics_endpoint": "http://%%host%%:9090/metrics"
+            "openmetrics_endpoint": "http://%%host%%:9090/metrics",
+            "histogram_buckets_as_distributions": true,
+            "collect_counters_with_distributions": true
           }]
         }
       }
