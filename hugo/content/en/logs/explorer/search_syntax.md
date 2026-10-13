@@ -143,13 +143,21 @@ You can use wildcards with free text search. However, it only searches for terms
 
 ### Multi-character wildcard
 
-To perform a multi-character wildcard search in the log message (the `content` column in Log Explorer), use the `*` symbol as follows:
+Use the `*` symbol to match zero or more characters. In the log message (the `content` column in Log Explorer), `*` matches characters within a single word. For how search defines a word, see [How free-text search splits words](#how-free-text-search-splits-words).
 
-* `service:web*` matches every log message that has a service starting with `web`.
-* `web*` matches all log messages starting with `web`.
-* `*web` matches all log messages that end with `web`.
+* `web*` matches log messages that contain a word starting with `web`, such as `webserver`.
+* `*web` matches log messages that contain a word ending with `web`, such as `myweb`.
+* `*web*` matches log messages that contain a word with `web` anywhere in it, such as `mywebserver`.
+* `service:web*` matches logs with a service starting with `web`.
 
-**Note**: Wildcards only work as wildcards outside of double quotes. For example, `"*test*"` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
+A single `*` doesn't match across words. For example, `waiting*time` doesn't match the log message `waiting until next renew time`. To match across words, use one of the following:
+
+* `**` matches any characters, including spaces and punctuation between words. For example, `waiting**time` matches `waiting until next renew time`.
+* An escaped space (`\ `) matches consecutive words, and each word can contain wildcards. For example, `waiting\ un*` matches `waiting until next renew time`.
+
+**Note**: Wildcards only work as wildcards outside of double quotes. Inside double quotes, `*` is treated like other punctuation and ignored, so `"*test*"` searches for the word `test`.
+
+**Tip**: Single-word searches without wildcards or double quotes are the fastest. Wildcard and quoted searches take longer, especially across a large volume of logs. To speed them up, combine them with selective filters such as `service` or `host`.
 
 Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
 <p> </p>
@@ -159,7 +167,7 @@ Wildcard searches work within tags and attributes (faceted or not) with this syn
 service:*mongo
 ```
 
-Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs with content (message) that contain the string `NETWORK`:
+Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs with content (message) that contain a word that includes the string `NETWORK`:
 
 ```
 *NETWORK*
@@ -171,6 +179,27 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
 <p> </p>
+
+## How free-text search splits words
+
+Free-text search matches whole words. Datadog splits both the log message and your query into words according to the [Unicode word boundary rules][9]. Spaces and most punctuation separate words, and the separators themselves aren't searchable. For example, `hello` matches `Hello, world!`, and `"hello world"` matches `hello-world`.
+
+Periods, colons, commas, and underscores separate words only in some contexts:
+
+| Characters                 | Example       | Words                  |
+|----------------------------|---------------|------------------------|
+| Letter, period, letter     | `my.friend`   | `my.friend`            |
+| Period, space              | `my. friend`  | `my`, `friend`         |
+| Letter, period, number     | `version.2`   | `version`, `2`         |
+| Number, period, letter     | `5.star`      | `5`, `star`            |
+| Number, period, number     | `192.168.1.1` | `192.168.1.1`          |
+| Number, comma, number      | `3,456`       | `3,456`                |
+| Letter, colon, letter      | `metric:cpu`  | `metric:cpu`           |
+| Letter, colon, number      | `RequestId:5` | `RequestId`, `5`       |
+| Letter, underscore, letter | `hello_world` | `hello_world`          |
+| Letter, hyphen, letter     | `hello-world` | `hello`, `world`       |
+
+Because `my.friend` is a single word, the query `friend` doesn't match it. To match part of a word, use a [wildcard](#multi-character-wildcard): `*friend` matches `my.friend`.
 
 ## Numerical values
 
@@ -250,3 +279,4 @@ Calculated fields function like log attributes and can be used for search, aggre
 [6]: /logs/explorer/saved_views/
 [7]: /logs/explorer/facets/#facet-panel
 [8]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[9]: https://www.unicode.org/reports/tr29/#Word_Boundaries
