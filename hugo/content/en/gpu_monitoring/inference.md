@@ -40,7 +40,6 @@ To begin monitoring your inference workloads, you must meet the following criter
 - You have [GPU Monitoring enabled][2] and access to the inference Agent image, which Datadog provides when you join the Preview.
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM workers in an NVIDIA Dynamo deployment.
-- You are running CUDA and CUPTI version 13 or later.
 
 ### 1. Use the inference Agent image
 
@@ -173,7 +172,7 @@ To graph percentiles on certain vLLM and Dynamo metrics, you must opt in to [adv
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM worker workloads.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM worker workloads. Continuous Tracing requires CUDA and CUPTI version 13 or later.
 
 ## Explore the Inference page
 
