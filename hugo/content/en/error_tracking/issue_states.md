@@ -61,7 +61,7 @@ To resume collecting errors for an excluded issue, select any status other than 
 
 ## Snoozing an issue
 
-Snoozing an issue moves it to {{< ui >}}IGNORED{{< /ui >}} until a condition you define is met. When the condition is met, Error Tracking moves the issue back to {{< ui >}}FOR REVIEW{{< /ui >}}. Use snoozing when you need more evidence before deciding whether an issue matters: the issue stays out of your inbox, but it comes back if its impact grows.
+Snoozing an issue moves it to {{< ui >}}IGNORED{{< /ui >}} until a condition you define is met. When the condition is met, Error Tracking moves the issue back to {{< ui >}}FOR REVIEW{{< /ui >}}. Use snoozing when you need more evidence before deciding whether to take action on an issue: the issue stays out of your inbox, but it comes back if its impact grows.
 
 For example, you can ignore an issue until it affects 10 distinct users.
 
