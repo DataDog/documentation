@@ -131,6 +131,22 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 - Find notebooks related to performance investigation.
 - List notebooks tagged with `incident-response`.
 
+### `delete_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within 30 days of deletion.
+
+- Delete notebook 12345678.
+- Delete the notebook with ID 12345678 that I created for testing.
+
+### `recover_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Restores a soft-deleted notebook by its numeric ID. The notebook can be restored only within 30 days of deletion.
+
+- Recover notebook 12345678.
+- Restore the notebook with ID 12345678 that I deleted by mistake.
+
 ### `search_datadog_hosts`
 *Toolset: **core***\
 *Permissions Required: `Hosts Read` and `Timeseries`*\
@@ -1832,6 +1848,55 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 - Run a traceroute from host `prod-web-01` to `api.example.com`.
 - Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
+## Observability Pipelines
+
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+
+<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
+
+### `list_observability_pipelines`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
+
+- How many pipelines do we have, and how many of them are metrics pipelines?
+- Find the ID of the `prod-agent-logs` pipeline.
+- Which pipelines were modified in the last week?
+
+### `describe_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
+
+- Explain what the `prod-agent-logs` pipeline does.
+- Where are logs dropped in my Splunk forwarding pipeline?
+- Are there redundant or expensive processors in pipeline `abc-123-def`?
+
+### `get_observability_pipeline_component_schema`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Without arguments, returns the available source, processor, and destination types. With `types`, returns the fields of each requested component, including which are required, their types, and allowed values. The schema can lag behind the server, so check assembled configurations with `validate_observability_pipeline`.
+
+- Which sources and destinations are available in Observability Pipelines?
+- What fields are required for the `splunk_hec` source and the `amazon_s3` destination?
+- What options does the `sample` processor support?
+
+### `validate_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns all validation errors so the agent can fix the configuration and validate it again.
+
+- Validate this pipeline configuration before I create it.
+- Check this pipeline configuration for errors.
+
+### `create_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Deploy`*\
+Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines. The new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration fails validation, the tool returns the validation errors.
+
+- Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
+- Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
+
 ## Onboarding
 
 Agentic onboarding tools for guided Datadog setup and configuration.
@@ -2780,7 +2845,7 @@ Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. U
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], [DORA metrics][66], and [Deployment Gates][2]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -2903,6 +2968,43 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
+
+Deployment Gates tools are read-only. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
+
+### `search_datadog_deployment_gates`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
+
+- Which Deployment Gates apply to the `checkout` service in `prod`?
+
+### `get_datadog_deployment_gate`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a configured Deployment Gate by its gate ID, including its rules and settings.
+
+- Show me the rules configured for Deployment Gate `abc123`.
+
+### `search_datadog_deployment_gate_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
+
+- Show me failed Deployment Gate evaluations for the `checkout` service in `prod` over the last 7 days.
+
+### `get_datadog_deployment_gate_evaluation`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
+
+- Why did Deployment Gate evaluation `abc123` fail?
+
+### `search_datadog_deployment_gate_rule_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
+
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Synthetics
 
@@ -3208,6 +3310,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 - Stop workflow instance `00000000-0000-0000-0000-000000000000`.
 
 [1]: /mcp_server/setup#toolsets
+[2]: /deployment_gates/
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
@@ -3259,6 +3362,10 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [84]: /account_management/governance_console/
 [85]: /security/code_security/iac_security/custom_rules/
 [86]: /infrastructure/resource_catalog/
+[87]: /observability_pipelines/
+[88]: /api/latest/observability-pipelines/
+[89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
+[90]: /observability_pipelines/configuration/install_the_worker/
 
 ## Further reading
 
