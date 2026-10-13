@@ -45,7 +45,7 @@ You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other 
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="Explorer table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
-{{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the Explorer page" style="width:90%;" >}}
+{{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the Explorer page." style="width:90%;" >}}
 
 ## Use case-driven views and recommendations
 GPU Monitoring's Explorer page provides two dedicated use case-driven views:
