@@ -32,11 +32,20 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-- Python 3.9 or later.
-- `ddtrace` version **4.13.0 or later**.
-- Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
-- An [application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to retrieve deployed prompts directly from Datadog. It is not needed when retrieval succeeds through the Agent.
-- To manage prompts through the API or SDK, provide both keys. The application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions for writes.
+### Supported versions
+
+- Python 3.9 or later
+- `ddtrace` version 4.13.0 or later
+
+### Credentials
+
+You need your [Datadog site][2] and the credentials required for your retrieval method:
+
+- **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+- **Retrieve through the Agent**: Provide an API key. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
+- **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
+
+To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires the read permissions listed for direct retrieval, plus `llm_observability_write` and `feature_flag_config_write`.
 
 [2]: /getting_started/site/
 [3]: /account_management/api-app-keys/#api-keys
@@ -44,13 +53,20 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-- `dd-trace` version **5.128.0 or later in the 5.x release line**, or **6.17.0 or later**.
-- Node.js **18 or later** for `dd-trace` 5.x, or **22 or later** for 6.x.
-- Your [Datadog site][2] and a [Datadog API key][3].
-- An [application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to retrieve deployed prompts directly from Datadog. It is not needed when retrieval succeeds through the Agent.
-- To manage prompts through the API or SDK, provide both keys. The application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions for writes.
+### Supported versions
 
-**Agent setup:** When retrieving an environment's deployed prompt through the Agent, neither key is required in the application. Follow [Configure prompt retrieval](#configure-prompt-retrieval). Retrieving an exact or latest version still requires `DD_API_KEY`.
+- Node.js 18 or later for `dd-trace` 5.x, or 22 or later for 6.x
+- `dd-trace` version 5.128.0 or later in the 5.x release line, or 6.17.0 or later
+
+### Credentials
+
+You need your [Datadog site][2] and the credentials required for your retrieval method:
+
+- **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+- **Retrieve through the Agent**: Neither key is required when retrieval succeeds through the Agent. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
+- **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
+
+To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires the read permissions listed for direct retrieval, plus `llm_observability_write` and `feature_flag_config_write`.
 
 [2]: /getting_started/site/
 [3]: /account_management/api-app-keys/#api-keys
@@ -60,7 +76,7 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 
 ## Install the SDK
 
-Install or upgrade the SDK to a supported version listed in [Prerequisites](#prerequisites).
+Install or upgrade the SDK in your application's environment to a [supported version](#prerequisites):
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -121,16 +137,16 @@ After the integration is complete, run your application and trigger the modified
 
 ### Configure prompt retrieval
 
-Provide configuration through the workflow already used by your application, such as its environment file, Docker Compose or Kubernetes configuration, deployment platform, or secret manager. Set configuration before initializing the SDK.
+Configure prompt retrieval through your application's existing workflow, such as its environment file, Docker Compose or Kubernetes configuration, deployment platform, or secrets manager. Set the configuration before initializing the SDK.
 
-`DD_ENV` selects the deployment environment and must match an environment where the prompt is deployed.
-
-The examples below configure direct retrieval from Datadog. You can also retrieve deployed prompts through a Datadog Agent with [Remote Configuration][11] enabled. The notes in each tab explain which credentials are still needed; keep both keys to allow direct retrieval if the Agent is unavailable.
+Retrieve deployed prompts directly from Datadog or through a Datadog Agent with [Remote Configuration][11] enabled. For either method, set `DD_ENV` to an environment where the prompt is deployed.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Set the following environment variables before importing `ddtrace`:
+#### Retrieve directly from Datadog
+
+Replace the placeholders and set the following environment variables before importing `ddtrace`:
 
 {{< code-block lang="shell" >}}
 export DD_SITE="<DATADOG_SITE>"
@@ -139,12 +155,21 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-**Agent setup:** Install `ddtrace[openfeature]` and set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`. Keep `DD_API_KEY`; `DD_APP_KEY` is not needed when retrieval succeeds through the Agent.
+#### Retrieve through the Agent
+
+To retrieve an environment's deployed prompt through the Agent, complete the following setup before importing `ddtrace`:
+
+1. Install `ddtrace[openfeature]`.
+2. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`.
+
+**Note**: Prompt retrieval requires `DD_API_KEY`. `DD_APP_KEY` is not required when retrieval succeeds through the Agent. To allow direct retrieval if the Agent is unavailable, also configure `DD_APP_KEY`.
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Set the following environment variables before initializing `dd-trace`:
+#### Retrieve directly from Datadog
+
+Replace the placeholders and set the following environment variables before initializing `dd-trace`:
 
 {{< code-block lang="shell" >}}
 export DD_SITE="<DATADOG_SITE>"
@@ -165,7 +190,7 @@ Follow the [Node.js SDK initialization guide][16] if the SDK is not already init
 
 Preserve the prompt already used by your application as the fallback. The fallback keeps the application working if the managed prompt cannot be retrieved.
 
-These examples retrieve and format a chat prompt, then pass the messages to OpenAI.
+The following examples show how to retrieve and format a chat prompt, then pass its messages to OpenAI:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -205,7 +230,7 @@ If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueEr
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-After initializing the tracer, use this example inside an async application function:
+The following example assumes the tracer is initialized and the code runs inside an async application function:
 
 ```javascript
 const tracer = require('dd-trace')
@@ -246,10 +271,10 @@ Without prompt composition, combine prompts in application code or manage the fi
 
 By default, the SDK selects the prompt version as follows:
 
-- **With `DD_ENV`:** The version deployed to that environment, including any matching targeting rules or A/B test assignment.
-- **Without `DD_ENV`:** The latest prompt version.
+- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or A/B test assignment
+- **Without `DD_ENV`**: The latest prompt version
 
-To select an exact numeric version, use the option shown below. It takes precedence over `DD_ENV` and targeting rules. Retrieving either an exact version or the latest version requires `DD_API_KEY`, even when the application uses an Agent. For environment-specific credential requirements, see [Prerequisites](#prerequisites).
+To select an exact numeric version, set the `version` option. This option takes precedence over `DD_ENV` and targeting rules. Retrieving either an exact version or the latest version requires `DD_API_KEY`, even when the application uses an Agent. For environment-specific credential requirements, see the [Prerequisites](#prerequisites) section.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -277,12 +302,12 @@ const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-greeting'
 
 ### Track prompt usage
 
-The examples below retrieve a managed system prompt, format it for an audience, and append the user's question before calling OpenAI Responses. Use the same variables for formatting and prompt tracking so the recorded prompt matches the model call.
+The following examples show how to track a managed system prompt when combining it with a user's question for an OpenAI Responses call. Pass the same variables to the formatting and tracking methods.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-[Enable Agent Observability][5] and [automatic instrumentation][6] for your model client. Passing a formatted managed prompt directly to a supported client tracks it automatically.
+[Enable Agent Observability][5] and [automatic instrumentation][6] for your model client. For supported, automatically instrumented clients, Datadog tracks the managed prompt when you pass the formatted value directly to the client.
 
 If you modify the formatted prompt, as in this example, use `LLMObs.annotation_context()` to associate it with the LLM call:
 
@@ -389,9 +414,11 @@ Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 
 ### Manage prompts programmatically
 
-For a text prompt, pass a string instead of a message array.
+Use the SDK to create prompts, publish versions, and manage deployments. Perform these operations during setup. Do not run them during application startup or request handling.
 
-Treat prompt creation, versioning, and deployment as setup operations, not application startup or request-path operations. These methods require the API and application key permissions listed in [Prerequisites](#prerequisites). The `env_ids` or `envIds` values are Feature Flags environment IDs from the [List environments API][9], not environment names.
+These methods require the API and application key permissions listed in the [Prerequisites](#prerequisites) section. The `env_ids` or `envIds` values are Feature Flags environment IDs from the [List environments API][9], not environment names.
+
+The following examples create chat prompts from message arrays. To create a text prompt, pass a string instead.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -434,7 +461,7 @@ created_version = LLMObs.create_prompt_version(
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Use `createPrompt()` to create a prompt and deploy its first version to one or more environments. Run this example inside an async setup function:
+Use `createPrompt()` to create a prompt and deploy its first version to one or more environments. The following example assumes the tracer is initialized and the code runs inside an async setup function:
 
 ```javascript
 const prompts = tracer.llmobs.prompts

@@ -40,7 +40,7 @@ For example, compare two versions of a checkout assistant to see which produces 
 
 1. Open the prompt and click {{< ui >}}Set up A/B test{{< /ui >}}.
 1. Select an environment and click {{< ui >}}Create draft & continue{{< /ui >}}. This opens the test in Product Analytics. Creating a draft does not change live traffic.
-1. Choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's targeting key—for example, **User** when you pass a user ID.
+1. Choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's targeting key (for example, **User** when you pass a user ID).
 1. Start the test. Check {{< ui >}}Flag & Exposures{{< /ui >}} to confirm that it receives assignments, then [compare the results][12].
 
 Return to {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to open the results or finish a draft. Configure and conclude the test in Product Analytics; see [Plan and Launch Experiments][11] for detailed instructions.
@@ -95,11 +95,14 @@ Install the SDK with experimentation support:
 pip install --upgrade "ddtrace[openfeature]>=4.15.0"
 ```
 
-Make sure the application can reach the Agent. Do not enable `DD_LLMOBS_AGENTLESS_ENABLED=1` for this setup.
+This Python setup requires a connection to the Datadog Agent. Check the tracer startup or debug logs for Agent connection errors. See [APM Connection Errors][19] for troubleshooting.
+
+Leave Agentless mode disabled. If your application sets `DD_LLMOBS_AGENTLESS_ENABLED=1`, remove that setting before using this setup.
 
 For application setup, see the [Python SDK guide][17].
 
 [17]: /tracing/trace_collection/dd_libraries/python/#getting-started
+[19]: /tracing/troubleshooting/connection_errors/
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -118,7 +121,7 @@ Make sure the application can reach the Agent and [Remote Configuration][16] is 
 
 ### Match prompt requests to outcomes
 
-Use the same user ID when fetching the prompt and recording the outcome. This lets Datadog connect a user's outcome to the prompt version they received.
+Pass the user ID as the targeting key when retrieving a prompt, as illustrated in the following examples. Use a stable, non-empty string that matches the user ID recorded with outcome events. Datadog uses this ID to associate outcomes with the assigned prompt version.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -146,7 +149,7 @@ const prompt = await tracer.llmobs.prompts.getPrompt('checkout-assistant', {
 {{% /tab %}}
 {{< /tabs >}}
 
-Use a stable, non-empty string that matches the user ID recorded with your outcomes. Do not pass an exact version: that bypasses environment assignment and does not record an experiment exposure. No separate reporting call is needed.
+Do not specify an exact prompt version. Doing so bypasses environment assignment and prevents Datadog from recording an experiment exposure. The SDK reports exposures automatically.
 
 For example, if your checkout metric uses RUM events and the **User** subject type, identify the browser user with the same ID:
 
