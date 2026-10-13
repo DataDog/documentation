@@ -18,12 +18,12 @@ further_reading:
 If your organization already maintains assignment groups in ServiceNow, you can use them as the source for Datadog Teams instead of re-creating teams by hand. Connecting ServiceNow assignment groups to Datadog Teams supports:
 
 - Creating Datadog Teams from your ServiceNow assignment groups.
-- Linking existing Datadog Teams to ServiceNow assignment groups, for example to route On-Call and Incidents by ServiceNow group.
+- Linking existing Datadog Teams to ServiceNow assignment groups. For example, you can route On-Call and Incidents by ServiceNow group.
 - Keeping team membership in-sync with ServiceNow, on a one-time or recurring schedule.
 
 If your ServiceNow assignment groups have parent groups, Datadog replicates that same hierarchy during provisioning.
 
-Existing Datadog Teams are linked, not duplicated, when a Datadog team [handle][7] matches a ServiceNow assignment group name. The match is case-insensitive and ignores whitespace differences. All other existing Datadog Teams, and their permissions, are not affected.
+Existing Datadog Teams are linked, not duplicated, when a Datadog team [handle][7] matches a ServiceNow assignment group name. The match is case-insensitive and ignores whitespace differences. All other existing Datadog Teams and their permissions are not affected.
 
 Datadog has read-only access to ServiceNow assignment groups. It never writes to, creates, or modifies them.
 
@@ -88,7 +88,7 @@ Datadog matches users by email address. A user is added to a team when their Dat
 
 The integration does not create Datadog users or send invitations. If a member of a ServiceNow assignment group does not have a Datadog account, Datadog skips them.
 
-If a user's email address changes, for example after a domain migration, update the address in both Datadog and ServiceNow. The next sync picks up the new address and relinks the user.
+If a user's email address changes, such as after a domain migration, update the address in both Datadog and ServiceNow. The next sync picks up the new address and relinks the user.
 
 ## Renaming assignment groups
 
@@ -96,7 +96,7 @@ Datadog identifies each ServiceNow assignment group by its unique ID, so renamin
 
 The Datadog team name follows the ServiceNow rename only when all of the following are true:
 
-- This ServiceNow connection created the Datadog team.
+- The ServiceNow connection created the Datadog team.
 - No other source, such as SCIM, manages the team.
 - The connection uses {{< ui >}}Import, create, and link teams{{< /ui >}}.
 
@@ -104,7 +104,7 @@ In all other cases, Datadog leaves the team name unchanged.
 
 ## Removing assignment groups from the sync
 
-When an assignment group falls out of the sync, for example because you narrowed the filter, Datadog does not delete the matching Datadog team. Instead, Datadog removes all synced members from the team and leaves the team in place with no members. This applies to both one-time and recurring syncs.
+When an assignment group falls out of the sync - for example, because you narrowed the filter - Datadog does not delete the matching Datadog team. Instead, Datadog removes all synced members from the team and leaves the team in place with no members. This applies to both one-time and recurring syncs.
 
 To remove the empty teams:
 
