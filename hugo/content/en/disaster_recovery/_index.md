@@ -46,10 +46,6 @@ The minimum Datadog Agent version you need depends on which products you use:
 |Metrics             |Infrastructure Monitoring   | v7.54+                |
 |Traces              |APM                         | v7.68+                |
 
-<div class="alert alert-info">
-To request DDR support for additional products, contact the <a href="mailto:disaster-recovery@datadoghq.com">Disaster Recovery team</a>.
-</div>
-
 For each supported non-Agent telemetry source you use, validate its DNS caching and connection reuse behavior. See [Recommended Settings for DNS Failover][14] for configuration guidance.
 
 **Requirements for customer-initiated DNS failover**: Telemetry is supported only if its type, source, and intake path are listed as supported in this documentation. The source must send telemetry to the Datadog-delegated domain and re-resolve DNS to pick up destination changes. Sources that never re-resolve DNS or cache DNS indefinitely are not supported.
