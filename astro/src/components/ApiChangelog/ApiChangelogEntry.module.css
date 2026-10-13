@@ -79,14 +79,14 @@
   font-weight: var(--font-weight-medium);
 }
 
-a.api-changelog-entry__product {
+a.api-changelog-entry__product-name {
   color: var(--color-brand);
 }
 
 .api-changelog-entry__title {
   margin: 0;
   color: var(--color-text);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -120,9 +120,15 @@ a.api-changelog-entry__product {
 
 .api-changelog-entry__operation {
   font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-regular);
   overflow-wrap: anywhere;
+}
+
+/* The global inline `code` size would otherwise apply inside a link, making
+   linked operations a different size from unlinked ones. */
+a.api-changelog-entry__operation code {
+  font-size: inherit;
 }
 
 /* Underlines run through the monospace operation IDs and make them harder
@@ -134,4 +140,11 @@ a.api-changelog-entry__operation {
 a.api-changelog-entry__operation:hover,
 a.api-changelog-entry__operation:focus-visible {
   text-decoration: underline;
+}
+
+/* The global inline `code` color would otherwise override the link's hover
+   color, leaving the text a different color from its underline. */
+a.api-changelog-entry__operation:hover code,
+a.api-changelog-entry__operation:focus-visible code {
+  color: inherit;
 }

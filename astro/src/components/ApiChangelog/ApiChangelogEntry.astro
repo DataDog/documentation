@@ -13,7 +13,8 @@ interface Props {
 
 const { entry } = Astro.props;
 const cl = classListFactory(styles);
-// TODO: no Hugo i18n key exists for this string yet.
+// TODO: no Hugo i18n keys exist for these strings yet.
+const productLabel = "API product";
 const operationsLabel = "Operations";
 ---
 
@@ -28,20 +29,23 @@ const operationsLabel = "Operations";
   </span>
   <div class={cl("api-changelog-entry__body")}>
     <div class={cl("api-changelog-entry__meta")}>
-      {
-        entry.product.href ? (
-          <a
-            class={cl("api-changelog-entry__product")}
-            href={entry.product.href}
-          >
-            {entry.product.name}
-          </a>
-        ) : (
-          <span class={cl("api-changelog-entry__product")}>
-            {entry.product.name}
-          </span>
-        )
-      }
+      <span class={cl("api-changelog-entry__product")}>
+        {productLabel}:{" "}
+        {
+          entry.product.href ? (
+            <a
+              class={cl("api-changelog-entry__product-name")}
+              href={entry.product.href}
+            >
+              {entry.product.name}
+            </a>
+          ) : (
+            <span class={cl("api-changelog-entry__product-name")}>
+              {entry.product.name}
+            </span>
+          )
+        }
+      </span>
     </div>
     <h3 class={cl("api-changelog-entry__title")}>
       {

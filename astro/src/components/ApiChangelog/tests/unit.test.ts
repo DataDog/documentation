@@ -95,21 +95,27 @@ describe("ApiChangelogEntry", () => {
     expect(text(title)).toBe("Limit tags on <UpdateDeviceUserTags>");
   });
 
-  it("links a product that has a page", async () => {
+  it("prefixes the product with API product:, linking only its name", async () => {
     const doc = await render(ApiChangelogEntry, { entry: makeEntry() });
     const product = doc.querySelector(".api-changelog-entry__product")!;
-    expect(product.tagName).toBe("A");
-    expect(product.getAttribute("href")).toBe("/api/latest/dashboards/");
-    expect(text(product)).toBe("Dashboards");
+    expect(text(product)).toBe("API product: Dashboards");
+    const links = [...product.querySelectorAll("a")];
+    expect(links).toHaveLength(1);
+    expect(links[0].classList).toContain("api-changelog-entry__product-name");
+    expect(links[0].getAttribute("href")).toBe("/api/latest/dashboards/");
+    expect(text(links[0])).toBe("Dashboards");
   });
 
-  it("renders a product with no page as plain text", async () => {
+  it("renders a product with no page as plain text, still prefixed", async () => {
     const doc = await render(ApiChangelogEntry, {
       entry: makeEntry({ product: { name: "Ai Impact" } }),
     });
     const product = doc.querySelector(".api-changelog-entry__product")!;
-    expect(product.tagName).toBe("SPAN");
-    expect(text(product)).toBe("Ai Impact");
+    expect(text(product)).toBe("API product: Ai Impact");
+    expect(product.querySelector("a")).toBeNull();
+    const name = product.querySelector(".api-changelog-entry__product-name")!;
+    expect(name.tagName).toBe("SPAN");
+    expect(text(name)).toBe("Ai Impact");
   });
 
   it("links known operations and leaves unknown ones as code", async () => {

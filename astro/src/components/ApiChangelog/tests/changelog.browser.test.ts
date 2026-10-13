@@ -203,6 +203,49 @@ test.describe("API changelog", () => {
     await expect(operationLink).toHaveCSS("text-decoration-line", "underline");
   });
 
+  test("a hovered operation link's text is its underline's color", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    const operationLink = page
+      .locator("a.api-changelog-entry__operation")
+      .first();
+    const codeColor = () =>
+      operationLink.evaluate(
+        (element) => getComputedStyle(element.querySelector("code")!).color,
+      );
+    const restingColor = await codeColor();
+
+    await operationLink.hover();
+    await expect.poll(codeColor).not.toBe(restingColor);
+    const linkColor = await operationLink.evaluate(
+      (element) => getComputedStyle(element).textDecorationColor,
+    );
+    expect(await codeColor()).toBe(linkColor);
+  });
+
+  test("linked and unlinked operations are the same size", async ({ page }) => {
+    await page.goto(CHANGELOG_URL);
+    const fontSizeOf = (selector: string) =>
+      page.locator(selector).evaluateAll((elements) =>
+        elements.map((element) => {
+          const code = element.matches("code")
+            ? element
+            : element.querySelector("code")!;
+          return getComputedStyle(code).fontSize;
+        }),
+      );
+    const linkedSizes = await fontSizeOf("a.api-changelog-entry__operation");
+    const unlinkedSizes = await fontSizeOf(
+      "code.api-changelog-entry__operation",
+    );
+    test.skip(
+      linkedSizes.length === 0 || unlinkedSizes.length === 0,
+      "The live changelog lacks a linked or an unlinked operation.",
+    );
+    expect(new Set([...linkedSizes, ...unlinkedSizes]).size).toBe(1);
+  });
+
   test("the side nav's Changelog link is active", async ({ page }) => {
     await page.goto("/api/changelog/breaking/");
     const activeCategory = page.locator(".api-side-nav__category--active");
