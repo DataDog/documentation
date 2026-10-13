@@ -224,26 +224,21 @@ test.describe("API changelog", () => {
     expect(await codeColor()).toBe(linkColor);
   });
 
-  test("linked and unlinked operations are the same size", async ({ page }) => {
+  // Unlinked operations take the class's size directly, but the live data has
+  // none to compare against, so this checks that a linked operation's code
+  // takes that same class size instead of the global inline-code size.
+  test("a linked operation's code is the operation class's size", async ({
+    page,
+  }) => {
     await page.goto(CHANGELOG_URL);
-    const fontSizeOf = (selector: string) =>
-      page.locator(selector).evaluateAll((elements) =>
-        elements.map((element) => {
-          const code = element.matches("code")
-            ? element
-            : element.querySelector("code")!;
-          return getComputedStyle(code).fontSize;
-        }),
-      );
-    const linkedSizes = await fontSizeOf("a.api-changelog-entry__operation");
-    const unlinkedSizes = await fontSizeOf(
-      "code.api-changelog-entry__operation",
-    );
-    test.skip(
-      linkedSizes.length === 0 || unlinkedSizes.length === 0,
-      "The live changelog lacks a linked or an unlinked operation.",
-    );
-    expect(new Set([...linkedSizes, ...unlinkedSizes]).size).toBe(1);
+    const fontSizes = await page
+      .locator("a.api-changelog-entry__operation")
+      .first()
+      .evaluate((element) => ({
+        link: getComputedStyle(element).fontSize,
+        code: getComputedStyle(element.querySelector("code")!).fontSize,
+      }));
+    expect(fontSizes.code).toBe(fontSizes.link);
   });
 
   test("the side nav's Changelog link is active", async ({ page }) => {
