@@ -86,7 +86,7 @@ env:
     value: "9090"
 ```
 
-For local CLI deployments, port `8081` is common. If your workers use a different port, substitute it in the worker annotation in [Step 3: Configure the integrations](#3-configure-the-integrations).
+If your workers use a port other than `9090`, substitute it in the worker annotation in [Step 3: Configure the integrations](#3-configure-the-integrations).
 
 ### 3. Configure the integrations
 
