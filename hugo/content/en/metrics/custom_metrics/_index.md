@@ -26,15 +26,18 @@ further_reading:
 - link: "/metrics/guide/custom_metrics_governance/"
   tag: "Guide"
   text: "Best Practice for Custom Metric Governance"
+- link: "https://learn.datadoghq.com/courses/metrics-governance"
+  tag: "Learning Center"
+  text: "Metrics Governance"
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
-- link: "https://learn.datadoghq.com/courses/metrics-governance"
-  tag: "Learning Center"
-  text: "Metrics Governance"
+- link: "https://www.datadoghq.com/blog/how-to-monitor-databricks-with-datadog/"
+  tag: "Blog"
+  text: "Monitor Databricks with Datadog"
 algolia:
   tags: ['custom metrics']
 ---

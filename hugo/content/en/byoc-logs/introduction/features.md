@@ -3,6 +3,10 @@ title: Supported Features
 description: Learn which Datadog Log Explorer features are supported in BYOC Logs
 aliases:
   - /cloudprem/introduction/features/
+further_reading:
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 ---
 
 ## Overview
@@ -71,3 +75,7 @@ BYOC Logs does not support the following features:
   - Grok extraction (query-time parsing)
 
 [1]: /api/latest/logs-restriction-queries/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

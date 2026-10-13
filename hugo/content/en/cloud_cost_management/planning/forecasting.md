@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-budget-forecasting/"
   tag: "Blog"
   text: "Project and manage cloud spend with Datadog budget forecasting"
+- link: "https://www.datadoghq.com/blog/how-to-monitor-databricks-with-datadog/"
+  tag: "Blog"
+  text: "Monitor Databricks with Datadog"
 ---
 
 ## Overview

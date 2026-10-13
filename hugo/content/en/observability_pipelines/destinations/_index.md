@@ -11,6 +11,9 @@ further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -179,3 +182,7 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
 [4]: /observability_pipelines/configuration/secrets_management/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

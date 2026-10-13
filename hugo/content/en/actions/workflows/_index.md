@@ -47,6 +47,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
   tag: "Blog"
   text: "Build and run Datadog workflows from Bits Chat or AI agents"
+- link: "https://www.datadoghq.com/blog/fedramp-high-incident-response/"
+  tag: "Blog"
+  text: "Run incident response in your FedRAMP High environment"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}

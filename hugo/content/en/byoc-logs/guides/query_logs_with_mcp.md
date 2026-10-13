@@ -2,15 +2,18 @@
 title: Query BYOC Logs with the Datadog MCP Server
 description: Learn how to query logs stored in BYOC Logs indexes using the Datadog MCP server
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
-  tag: "Blog"
-  text: "Introducing the Datadog MCP server"
 - link: "/ide_plugins/vscode/?tab=cursor#installation"
   tag: "Documentation"
   text: "Datadog Extension for VS Code & Cursor"
 - link: "/byoc-logs/operate/search_logs/"
   tag: "Documentation"
   text: "Search Logs in BYOC Logs"
+- link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
+  tag: "Blog"
+  text: "Introducing the Datadog MCP server"
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 aliases:
   - /cloudprem/guides/query_logs_with_mcp/
 ---

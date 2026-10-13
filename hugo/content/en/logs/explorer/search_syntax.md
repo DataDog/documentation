@@ -26,6 +26,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/log-explorer"
   tag: "Learning Center"
   text: "Getting Started with Log Explorer"
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 
 ---
 
