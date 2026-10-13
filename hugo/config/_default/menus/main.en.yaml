@@ -9485,7 +9485,7 @@ menu:
       parent: journey_monitoring
       identifier: journey_monitoring_variants
       weight: 3
-    - name: Journey Overview
+    - name: Journey Overview Page
       url: journey_monitoring/overview/
       parent: journey_monitoring
       identifier: journey_monitoring_overview

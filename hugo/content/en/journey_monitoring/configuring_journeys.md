@@ -51,7 +51,7 @@ Review the [Journey Monitoring prerequisites][1]. Journey Monitoring requires an
 Different configuration steps require different products:
 
 - Defining a journey with action or view events requires RUM and Product Analytics Preview, trial, or paid access.
-- Adding RUM operation data requires an active trial or paid subscription to [RUM without Limits™][4].
+- Adding RUM operation data requires an active trial or paid subscription to [RUM without Limits&trade;][4].
 - Adding Synthetic coverage requires an active trial or paid subscription to [Synthetic Browser Tests][12] or [Synthetic Mobile Tests][13].
 
 ### Permissions and roles

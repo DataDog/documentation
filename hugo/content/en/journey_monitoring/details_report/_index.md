@@ -34,7 +34,7 @@ The journey and its [variants][5] act as report filters. The journey is selected
 
 ### Funnel
 
-The [funnel][6] shows traffic, conversion rate, and average time to convert for each step. Below the funnel, review factors associated with conversion and drop-off. Click **View Details** to analyze drop-off patterns.
+The [funnel][6] shows traffic, conversion rate, and average time to convert for each step. The funnel also lists factors associated with conversion and drop-off. Click **View Details** to analyze drop-off patterns.
 
 ### Traffic and conversion trends
 
@@ -54,7 +54,7 @@ The KPI data source and retention period depend on Product Analytics access:
 - **Preview**: Uses all Product Analytics data from a rolling 30-day window
 - **Trial**: Uses all Product Analytics data from the full trial period
 - **Paid**: Uses all Product Analytics data from a rolling 15-month window
-- **Product Analytics not enabled**: Uses [RUM without Limits™][18] metrics
+- **Product Analytics not enabled**: Uses [RUM without Limits&trade;][18] metrics
 
 With RUM without Limits, starts volume, conversion volume, and conversion rate use the `rum.measure.journey` metric. Average time to convert uses `rum.measure.journey.duration`.
 
@@ -62,7 +62,7 @@ With RUM without Limits, starts volume, conversion volume, and conversion rate u
 
 <div class="alert alert-info">The data in this section is available only with an active Product Analytics trial or paid subscription.</div>
 
-{{< img src="journey_monitoring/journey-monitoring-details-report-product-analytics.png" alt="Section of the Journey Monitoring details report a specific journey's top paths and users for converted and dropped off sessions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-product-analytics.png" alt="The Journey Monitoring details report section showing a specific journey's top paths and users for converted and dropped-off sessions." style="width:100%;" >}}
 
 ### Top paths
 
@@ -78,7 +78,7 @@ The users table lists the top users who converted or dropped off during the jour
 
 <div class="alert alert-info">The data in this section is available only with an active trial or paid subscription to RUM without Limits&trade;.</div>
 
-{{< img src="journey_monitoring/journey-monitoring-details-report-real-user-monitoring.png" alt="Section of the Journey Monitoring details report a specific journey's RUM operations and timeseries of frontend issues." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-real-user-monitoring.png" alt="The Journey Monitoring details report section showing a specific journey's RUM operations and a timeseries of frontend issues." style="width:100%;" >}}
 
 ### Operations
 
@@ -113,7 +113,7 @@ The error count chart plots frontend issues from [Error Tracking][9] that occurr
 
 <div class="alert alert-info">The data in this section is available only with an active trial or paid subscription to <a href="/synthetics/browser_tests/">Synthetic Browser Tests</a> or <a href="/synthetics/mobile_app_testing/">Synthetic Mobile Tests</a>.</div>
 
-{{< img src="journey_monitoring/journey-monitoring-details-report-synthetics.png" alt="Section of the Journey Monitoring details report a specific journey's Synthetics tests." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-synthetics.png" alt="The Journey Monitoring details report section showing a specific journey's Synthetic tests." style="width:100%;" >}}
 
 ### Test suite and journey coverage
 

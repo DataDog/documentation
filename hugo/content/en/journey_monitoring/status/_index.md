@@ -68,7 +68,7 @@ Changes to the journey's inputs affect its status automatically. This includes l
 
 View journey status in the [catalog][12], [map][13], and details report:
 
-- For a **Degraded** journey, Datadog links to the **Critical** operations or in **Alert** Synthetic tests that contribute to the state. If Bits AI is enabled for your organization, launch a [Bits Investigation][14] from the operation or test to identify the root cause.
+- For a **Degraded** journey, Datadog links to the **Critical** operations or the Synthetic tests in the **Alert** state that contribute to the status. If Bits AI is enabled for your organization, launch a [Bits Investigation][14] from the operation or test to identify the root cause.
 - For a journey with **Missing coverage**, [link an operation with an SLO][8] or [add a covering test][9]. If coverage is configured, confirm that its SLO inputs report data.
 
 ## Further reading

@@ -1,5 +1,5 @@
 ---
-title: Journey Overview
+title: Journey Overview Page
 description: Review one journey's health, KPIs, definition, and relationships to other journeys.
 further_reading:
 - link: '/journey_monitoring/'
@@ -15,7 +15,7 @@ further_reading:
 
 ## Explore a journey
 
-The Journey Overview focuses on one journey and displays its [status][2], [key performance indicators (KPIs)][4], [start and end events][5], and relationships to upstream and downstream journeys.
+When you click a journey on the [map][6] or in the [catalog](#journey-catalog), the Journey Overview displays its [status][2], [key performance indicators (KPIs)][4], [start and end events][5], and upstream and downstream journeys.
 
 Click the focused journey tile to open its [details report][1]. Click an upstream or downstream journey tile to open that journey's report.
 
