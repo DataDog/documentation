@@ -230,17 +230,6 @@ export function changelogPageTitle(
   return `${CHANGELOG_BUCKET_LABELS[filter]} changes${pageQualifier} - API Changelog`;
 }
 
-/**
- * A `YYYY-MM-DD` date, formatted for the locale. Formatted in UTC, because
- * the date has no time zone and must not shift a day.
- */
-export function formatChangelogDate(date: string, lang: Locale): string {
-  return new Intl.DateTimeFormat(lang, {
-    dateStyle: "medium",
-    timeZone: "UTC",
-  }).format(new Date(`${date}T00:00:00Z`));
-}
-
 /** Groups consecutive same-date entries, keeping their order. */
 export function groupByDate<Entry extends ChangelogEntry>(
   entries: Entry[],

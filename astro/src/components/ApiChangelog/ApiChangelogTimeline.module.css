@@ -65,13 +65,19 @@
   display: none;
 }
 
+/* Centers the date's line on the dot. */
 .api-changelog-timeline__date {
   margin: 0;
-  padding-block-start: var(--space-sm);
+  padding-block-start: calc(
+    var(--api-changelog-timeline-dot-top) +
+      var(--api-changelog-timeline-dot-size) / 2 - 0.5lh
+  );
   color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height);
+  white-space: nowrap;
 }
 
 .api-changelog-timeline__entries {
@@ -84,14 +90,19 @@
 @media (min-width: 768px) {
   .api-changelog-timeline {
     --api-changelog-timeline-rail-x: calc(
-      var(--timeline-label-width) + var(--space-xl) / 2
+      var(--timeline-label-width) + var(--space-lg) / 2
     );
   }
 
   .api-changelog-timeline__section {
     grid-template-columns: var(--timeline-label-width) minmax(0, 1fr);
-    column-gap: var(--space-xl);
+    column-gap: var(--space-lg);
     padding-inline-start: 0;
+  }
+
+  /* Hugs the dot, so the date reads as its label. */
+  .api-changelog-timeline__date {
+    text-align: end;
   }
 }
 

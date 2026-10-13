@@ -75,6 +75,15 @@
   --color-status-neutral-bg: var(--color-gray-lighter);
   --color-status-neutral-text: var(--color-text-muted);
 
+  /* Colors — Solid status pills (bg/text pairs, for badges that need more
+     weight than the tinted pairs above) */
+  --color-status-success-solid-bg: #5cb85c;
+  --color-status-success-solid-text: #fff;
+  --color-status-attention-solid-bg: #f0ad4e;
+  --color-status-attention-solid-text: #555;
+  --color-status-danger-solid-bg: #d9534f;
+  --color-status-danger-solid-text: #fff;
+
   /* Colors — Semantic */
   --color-blue: #1a73e8;
   --color-blue-tint: rgba(26, 115, 232, 0.1);

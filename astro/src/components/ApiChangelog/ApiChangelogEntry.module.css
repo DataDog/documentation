@@ -2,19 +2,19 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  gap: var(--space-xs) var(--space-sm);
+  gap: var(--space-xs) var(--space-md);
   padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius-md);
   background: var(--color-bg);
 }
 
-/* As in Hugo, the badge takes its own column on wider screens. Every card's
-   column is the same width, so the bodies line up, and the badge keeps its own
-   width. On phones the badge stacks above the body instead. */
+/* As in Hugo, the badge takes its own column on wider screens. Every badge is
+   the same width, so the bodies line up. On phones the badge stacks above the
+   body instead. */
 @media (min-width: 768px) {
   .api-changelog-entry {
-    grid-template-columns: var(--badge-column-width) minmax(0, 1fr);
+    grid-template-columns: var(--badge-width) minmax(0, 1fr);
   }
 }
 
@@ -32,37 +32,48 @@
   gap: var(--space-xs);
 }
 
+/* Sized and colored as in Hugo. */
 .api-changelog-entry__pill {
-  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--badge-width);
+  height: var(--badge-height);
+  padding: 0 var(--space-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wide);
   white-space: nowrap;
-  padding: var(--space-2xs) var(--space-xs);
-  border-radius: var(--border-radius-lg);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height);
 }
 
 .api-changelog-entry__pill--added {
-  background: var(--color-status-success-bg);
-  color: var(--color-status-success-text);
+  background: var(--color-status-success-solid-bg);
+  color: var(--color-status-success-solid-text);
 }
 
 .api-changelog-entry__pill--modified {
-  background: var(--color-status-attention-bg);
-  color: var(--color-status-attention-text);
-}
-
-.api-changelog-entry__pill--breaking {
-  background: var(--color-status-danger-bg);
-  color: var(--color-status-danger-text);
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
 }
 
 .api-changelog-entry__pill--deprecated {
-  background: var(--color-status-neutral-bg);
-  color: var(--color-status-neutral-text);
+  background: var(--color-status-attention-solid-bg);
+  color: var(--color-status-attention-solid-text);
 }
 
+.api-changelog-entry__pill--breaking {
+  background: var(--color-status-danger-solid-bg);
+  color: var(--color-status-danger-solid-text);
+}
+
+/* Trims the leading above the first line, so the tops of its capitals line
+   up with the top of the badge beside it. The small padding is an optical
+   correction: flush capitals read as sitting above the badge's rounded edge. */
 .api-changelog-entry__product {
+  text-box: trim-start cap alphabetic;
+  padding-block-start: var(--space-2xs);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);

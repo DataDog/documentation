@@ -170,7 +170,6 @@ describe("ApiChangelogEntry", () => {
 describe("ApiChangelogTimeline", () => {
   it("groups entries into a section per date, in order", async () => {
     const doc = await render(ApiChangelogTimeline, {
-      lang: "en",
       entries: [
         makeEntry({ title: "A" }),
         makeEntry({ title: "B" }),
@@ -189,14 +188,13 @@ describe("ApiChangelogTimeline", () => {
         ].map(text),
       })),
     ).toEqual([
-      { datetime: "2026-10-08", date: "Oct 8, 2026", titles: ["A", "B"] },
-      { datetime: "2026-10-06", date: "Oct 6, 2026", titles: ["C"] },
+      { datetime: "2026-10-08", date: "2026-10-08", titles: ["A", "B"] },
+      { datetime: "2026-10-06", date: "2026-10-06", titles: ["C"] },
     ]);
   });
 
   it("carries the anchor pagination links jump to", async () => {
     const doc = await render(ApiChangelogTimeline, {
-      lang: "en",
       entries: [makeEntry()],
     });
     expect(doc.getElementById("changelog-timeline")).not.toBeNull();

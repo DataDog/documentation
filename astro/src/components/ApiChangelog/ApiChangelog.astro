@@ -39,7 +39,7 @@ const hrefForPage = (pageNumber: number) =>
   <ApiChangelogFilterBar lang={lang} activeFilter={page.filter} />
   {
     page.entries.length > 0 ? (
-      <ApiChangelogTimeline lang={lang} entries={page.entries} />
+      <ApiChangelogTimeline entries={page.entries} />
     ) : (
       <ApiChangelogEmptyState lang={lang} filter={page.filter} />
     )

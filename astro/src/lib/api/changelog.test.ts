@@ -4,7 +4,6 @@ import {
   changelogHref,
   changelogMarkdownHref,
   changelogPageTitle,
-  formatChangelogDate,
   getChangelogView,
   groupByDate,
   loadRawChangelogFiles,
@@ -467,21 +466,5 @@ describe("changelogMarkdownHref", () => {
   it("points every page at the one localized .md twin", () => {
     expect(changelogMarkdownHref("en")).toBe("/api/changelog.md");
     expect(changelogMarkdownHref("ja")).toBe("/ja/api/changelog.md");
-  });
-});
-
-describe("formatChangelogDate", () => {
-  it("formats a date for the locale without shifting its day", () => {
-    expect(formatChangelogDate("2026-10-08", "en")).toBe("Oct 8, 2026");
-    expect(formatChangelogDate("2026-01-01", "en")).toBe("Jan 1, 2026");
-  });
-
-  it("localizes the format", () => {
-    expect(formatChangelogDate("2026-10-08", "ja")).toBe(
-      new Intl.DateTimeFormat("ja", {
-        dateStyle: "medium",
-        timeZone: "UTC",
-      }).format(new Date("2026-10-08T00:00:00Z")),
-    );
   });
 });

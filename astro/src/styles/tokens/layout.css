@@ -3,11 +3,13 @@
   --control-height-sm: 2rem;
   --content-max-width: 1440px;
   --sidebar-width: 315px;
-  /* Label column beside a timeline or definition-style list on wide screens. */
-  --timeline-label-width: 96px;
-  /* Column that holds a status badge beside the content it labels. Fits the
-     widest badge label, "Deprecated", at --font-size-xs. */
-  --badge-column-width: 4.5rem;
+  /* Label column beside a timeline or definition-style list on wide screens.
+     Fits a monospace ISO date, "2026-10-09", at --font-size-xs. */
+  --timeline-label-width: 5rem;
+  /* Fixed size of a status badge, so a column of badges lines up. Fits the
+     widest changelog label, "Deprecated". */
+  --badge-width: 96px;
+  --badge-height: 26px;
   /* WCAG 2.5.8 minimum target size, checked by Lighthouse's target-size audit. */
   --touch-target-min-size: 24px;
 }

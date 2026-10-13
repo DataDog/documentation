@@ -95,9 +95,7 @@ test.describe("API changelog", () => {
     });
   });
 
-  test("badges sit in their own column, keeping their own width", async ({
-    page,
-  }) => {
+  test("badges are one fixed width, in their own column", async ({ page }) => {
     await page.goto(CHANGELOG_URL);
     const entries = page.locator(".api-changelog-entry");
     const layouts = await entries.evaluateAll((elements) =>
@@ -114,19 +112,43 @@ test.describe("API changelog", () => {
         const card = element.getBoundingClientRect();
         return {
           pillLeftOfBody: pill.right < Math.min(title.left, meta.left),
+          pillWidth: Math.round(pill.width),
           bodyOffset: Math.round(title.left - card.left),
-          pillFillsColumn:
-            Math.round(pill.width) >= Math.round(title.left - pill.left),
         };
       }),
     );
     expect(layouts.length).toBeGreaterThan(1);
     for (const layout of layouts) {
       expect(layout.pillLeftOfBody).toBe(true);
-      expect(layout.pillFillsColumn).toBe(false);
     }
+    expect(new Set(layouts.map((layout) => layout.pillWidth))).toEqual(
+      new Set([96]),
+    );
     // Every card's body starts at the same offset, so the column lines up.
     expect(new Set(layouts.map((layout) => layout.bodyOffset)).size).toBe(1);
+  });
+
+  test("the date fits on one line in its column, centered on the dot", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    await page.evaluate(() => document.fonts.ready);
+    const section = page.locator(".api-changelog-timeline__section").first();
+    const layout = await section.evaluate((element) => {
+      const sectionTop = element.getBoundingClientRect().top;
+      const date = element.querySelector(".api-changelog-timeline__date")!;
+      const time = date.querySelector("time")!.getBoundingClientRect();
+      const dotStyle = getComputedStyle(element, "::after");
+      return {
+        lineCount: date.querySelector("time")!.getClientRects().length,
+        overflows: date.scrollWidth > date.clientWidth,
+        timeCenter: time.top + time.height / 2 - sectionTop,
+        dotCenter: parseFloat(dotStyle.top) + parseFloat(dotStyle.height) / 2,
+      };
+    });
+    expect(layout.lineCount).toBe(1);
+    expect(layout.overflows).toBe(false);
+    expect(Math.abs(layout.timeCenter - layout.dotCenter)).toBeLessThan(2);
   });
 
   test("operation links are underlined only on hover", async ({ page }) => {
