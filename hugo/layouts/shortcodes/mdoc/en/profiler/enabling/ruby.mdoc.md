@@ -92,34 +92,73 @@ Use the following prompt with a local AI coding agent to set up the Ruby profile
 You are helping me set up Datadog Continuous Profiler for my Ruby service.
 
 First, scan my project to auto-detect as much as possible. Look for:
-- Gemfile and Gemfile.lock to determine the Ruby version and whether the
-  datadog gem (or older ddtrace gem) is already a dependency.
-- .ruby-version or .tool-versions for the Ruby version.
-- config.ru, Procfile, bin/rails, puma.rb, unicorn.rb, or passenger config
-  to determine how the application starts.
-- Existing Datadog.configure blocks in config/initializers/ or application
-  entrypoints to detect current APM or profiler usage.
+- Gemfile and Gemfile.lock to determine the Ruby version, engine (MRI,
+  JRuby, TruffleRuby), and whether the datadog gem (or older ddtrace
+  gem) is already a dependency. Also check for opentelemetry-sdk.
+- .ruby-version or .tool-versions for the Ruby version and engine.
+- config.ru, Procfile, bin/rails, puma.rb, unicorn.rb, or passenger
+  config to determine how the application starts.
+- Existing Datadog.configure blocks in config/initializers/ or
+  application entrypoints to detect current APM or profiler usage.
+  Note whether config uses environment variables or in-code style.
 - Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
-  image (check if Alpine/musl), startup command, and existing Datadog
-  Agent configuration.
+  image (check OS: Linux glibc, Alpine musl, macOS, or Windows; and
+  architecture: x86-64 or aarch64), startup command, and existing
+  Datadog Agent configuration. Check whether the application targets
+  a serverless platform (AWS Lambda) or uses Single Step APM
+  Instrumentation.
 - Existing environment variables or .env files referencing DD_SERVICE,
   DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
 
-Present a summary of what you detected, then ask ONLY about what you could
-not determine:
+Before proceeding, check for unsupported configurations:
+- JRuby and TruffleRuby are NOT supported. If detected, warn and stop.
+- Only Linux (glibc or musl) on x86-64 and aarch64 is supported.
+  macOS and Windows are not supported. If detected, warn and stop.
+- Continuous Profiler is not supported on serverless platforms such as
+  AWS Lambda. If detected, warn and stop.
+- Single Step APM Instrumentation cannot be used to set up the Ruby
+  Profiler. If detected, warn that manual setup is required instead.
+
+Present a summary of what you detected, then ask ONLY about what you
+could not determine:
 - DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
-- Datadog Agent deployment method (if no Agent config found in the project).
-- Whether allocation or heap profiling is needed beyond CPU and wall time.
+- Datadog Agent deployment method (if no Agent config found in the
+  project).
+- Whether allocation or heap profiling is needed beyond CPU and wall
+  time.
 - Anything ambiguous from the project files.
 
 Generate the setup steps tailored to what you found:
-- Add the datadog gem (~> 2.30) to the Gemfile if not already present.
-- Enable profiling using environment variables (DD_PROFILING_ENABLED=true)
-  or a Datadog.configure block, matching the project's existing pattern.
-- For Rails apps, create config/initializers/datadog.rb if using in-code config.
-- Wrap the start command with bundle exec ddprofrb exec. If Phusion Passenger
-  is detected, use require 'datadog/profiling/preload' instead.
+- If the older ddtrace gem is detected, replace it with the datadog
+  gem (~> 2.30) in the Gemfile.
+- Add the datadog gem (~> 2.30) to the Gemfile if not already present,
+  then run bundle install.
+- Enable profiling using environment variables
+  (DD_PROFILING_ENABLED=true) or a Datadog.configure block, matching
+  the project's existing configuration pattern.
+- For Rails apps, create config/initializers/datadog.rb if using
+  in-code config.
+- Wrap the start command with bundle exec ddprofrb exec. This step is
+  required for the profiler to work. Examples:
+    bundle exec ddprofrb exec ruby myapp.rb
+    bundle exec ddprofrb exec bin/rails s
+  The ONLY exception is Phusion Passenger, which does not support
+  wrapping. For Passenger, add require 'datadog/profiling/preload'
+  to the application entry point (such as config.ru) instead.
 - Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- If allocation profiling is requested, set
+  DD_PROFILING_ALLOCATION_ENABLED=true (or c.profiling.allocation_enabled
+  = true in code). The profiler must be enabled first.
+- If heap profiling is requested, set
+  DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED=true. This requires allocation
+  profiling to be enabled as well. For heap size profiling, also set
+  DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED=true. Note: heap size
+  profiling is not compatible with Ruby 4.
+- If opentelemetry-sdk is detected in the Gemfile, set
+  DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED=only when using profiling
+  directly with OpenTelemetry, or =true for auto-detection.
+- Suggest setting up Source Code Integration to connect profiling data
+  with Git repositories.
 - Show the complete modified startup command or Dockerfile.
 
 Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=ruby
