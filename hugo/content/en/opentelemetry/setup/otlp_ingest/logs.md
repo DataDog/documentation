@@ -109,7 +109,7 @@ Add any receivers and processors required by your Collector distribution.
 
 For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, and host metadata enrichment.
 
-## (Optional) Configure log processing
+## Configure log processing
 
 Use the `dd-otel-log-config` header to configure how Datadog processes OTLP log records on intake. The header value is a JSON object with the following fields:
 
