@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  padding-block: var(--space-sm);
+  padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  background: var(--color-bg);
 }
 
 .api-changelog-entry__meta {

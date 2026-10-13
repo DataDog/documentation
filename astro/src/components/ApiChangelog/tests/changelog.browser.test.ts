@@ -47,6 +47,54 @@ test.describe("API changelog", () => {
     expect(viewTransitionName).toBe("api-changelog-filter-bar");
   });
 
+  test("the timeline dot is a hollow circle in the rail's color", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    const section = page.locator(".api-changelog-timeline__section").first();
+    const { rail, dot, pageBackground } = await section.evaluate((element) => {
+      const railStyle = getComputedStyle(element, "::before");
+      const dotStyle = getComputedStyle(element, "::after");
+      return {
+        rail: {
+          color: railStyle.borderInlineStartColor,
+          width: railStyle.borderInlineStartWidth,
+        },
+        dot: {
+          background: dotStyle.backgroundColor,
+          borderColor: dotStyle.borderTopColor,
+          borderWidth: dotStyle.borderTopWidth,
+          borderStyle: dotStyle.borderTopStyle,
+        },
+        pageBackground: getComputedStyle(document.body).backgroundColor,
+      };
+    });
+    expect(dot).toEqual({
+      background: pageBackground,
+      borderColor: rail.color,
+      borderWidth: rail.width,
+      borderStyle: "solid",
+    });
+  });
+
+  test("each entry is a bordered card", async ({ page }) => {
+    await page.goto(CHANGELOG_URL);
+    const entry = page.locator(".api-changelog-entry").first();
+    const card = await entry.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        borderStyle: style.borderTopStyle,
+        borderWidth: style.borderTopWidth,
+        borderRadius: style.borderTopLeftRadius,
+      };
+    });
+    expect(card).toEqual({
+      borderStyle: "solid",
+      borderWidth: "1px",
+      borderRadius: "6px",
+    });
+  });
+
   test("the side nav's Changelog link is active", async ({ page }) => {
     await page.goto("/api/changelog/breaking/");
     const activeCategory = page.locator(".api-side-nav__category--active");

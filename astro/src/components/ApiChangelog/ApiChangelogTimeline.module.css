@@ -1,5 +1,6 @@
 /* Each section draws its own slice of the rail (::before) and its dot
    (::after), so the rail is continuous across sections without a wrapper.
+   The dot is a hollow circle in the rail's color.
    On narrow screens the date stacks above the entries and the rail runs down
    the left edge; on wide screens the date sits in its own column and the
    rail runs down the gutter between the columns. */
@@ -39,11 +40,12 @@
     var(--api-changelog-timeline-rail-x) -
       var(--api-changelog-timeline-dot-size) / 2
   );
+  box-sizing: border-box;
   width: var(--api-changelog-timeline-dot-size);
   height: var(--api-changelog-timeline-dot-size);
+  border: var(--border-width-thick) solid var(--color-border);
   border-radius: 50%;
-  background: var(--color-brand);
-  box-shadow: 0 0 0 var(--border-width-thick) var(--color-bg);
+  background: var(--color-bg);
 }
 
 /* The rail starts at the first dot and ends at the last one. */
@@ -73,6 +75,9 @@
 }
 
 .api-changelog-timeline__entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
   min-width: 0;
 }
 
