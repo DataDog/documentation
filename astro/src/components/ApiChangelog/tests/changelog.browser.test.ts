@@ -24,7 +24,7 @@ test.describe("API changelog", () => {
     await expect(activeTab).toHaveAttribute("aria-current", "page");
   });
 
-  test("Next goes to page 2 with the timeline in view", async ({ page }) => {
+  test("Next goes to the top of page 2", async ({ page }) => {
     await page.goto(CHANGELOG_URL);
     const next = page.locator("a.pagination__next");
     test.skip(
@@ -32,11 +32,13 @@ test.describe("API changelog", () => {
       "The live changelog fits on one page.",
     );
 
+    await next.scrollIntoViewIfNeeded();
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
     await next.click();
 
-    await expect(page).toHaveURL(/\/api\/changelog\/2\/#changelog-timeline$/);
-    await expect(page.locator("#changelog-timeline")).toBeInViewport();
+    await expect(page).toHaveURL(/\/api\/changelog\/2\/$/);
     await expect(page.locator(".pagination__page--current")).toHaveText("2");
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
   });
 
   test("the filter bar has its own view transition name", async ({ page }) => {
@@ -75,6 +77,41 @@ test.describe("API changelog", () => {
       borderWidth: rail.width,
       borderStyle: "solid",
     });
+  });
+
+  test("each filter tab is its own bordered box, filled when active", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    const tabs = await page
+      .locator(".api-changelog-filter-bar__tab")
+      .evaluateAll((elements) =>
+        elements.map((element) => {
+          const style = getComputedStyle(element);
+          const item = element.parentElement!.getBoundingClientRect();
+          const box = element.getBoundingClientRect();
+          return {
+            active: element.classList.contains(
+              "api-changelog-filter-bar__tab--active",
+            ),
+            borderStyle: style.borderTopStyle,
+            borderColor: style.borderTopColor,
+            background: style.backgroundColor,
+            fillsItem:
+              Math.round(box.height) === Math.round(item.height) &&
+              Math.round(box.top) === Math.round(item.top),
+          };
+        }),
+      );
+    expect(tabs.length).toBeGreaterThan(1);
+    for (const tab of tabs) {
+      expect(tab.borderStyle).toBe("solid");
+      expect(tab.fillsItem).toBe(true);
+    }
+    const activeTabs = tabs.filter((tab) => tab.active);
+    expect(activeTabs).toHaveLength(1);
+    // The active tab's border is its fill color, so its corners read cleanly.
+    expect(activeTabs[0].borderColor).toBe(activeTabs[0].background);
   });
 
   test("each entry is a bordered card", async ({ page }) => {

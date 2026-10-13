@@ -1,6 +1,6 @@
 ---
 title: Changelog
-description: Review recent additions, modifications, and removals to Datadog API operations.
+description: Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.
 breadcrumbs: Docs > API > Changelog
 ---
 
@@ -8,7 +8,7 @@ breadcrumbs: Docs > API > Changelog
 
 # Changelog
 
-Review recent additions, modifications, and removals to Datadog API operations.
+Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.
 
 ## 2026-10-08
 

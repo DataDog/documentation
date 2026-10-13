@@ -13,7 +13,7 @@ const cl = classListFactory(styles);
 const dateGroups = groupByDate(entries);
 ---
 
-<div id="changelog-timeline" class={cl("api-changelog-timeline")}>
+<div class={cl("api-changelog-timeline")}>
   {
     dateGroups.map((dateGroup) => (
       <section class={cl("api-changelog-timeline__section")}>

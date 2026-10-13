@@ -28,7 +28,7 @@ describe("apiPageSource", () => {
     expect(changelog?.metadata).toEqual({
       title: "Changelog",
       description:
-        "Review recent additions, modifications, and removals to Datadog API operations.",
+        "Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.",
       breadcrumbs: ["Docs", "API Reference"],
       isPrivate: false,
     });

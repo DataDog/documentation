@@ -192,13 +192,6 @@ describe("ApiChangelogTimeline", () => {
       { datetime: "2026-10-06", date: "2026-10-06", titles: ["C"] },
     ]);
   });
-
-  it("carries the anchor pagination links jump to", async () => {
-    const doc = await render(ApiChangelogTimeline, {
-      entries: [makeEntry()],
-    });
-    expect(doc.getElementById("changelog-timeline")).not.toBeNull();
-  });
 });
 
 describe("ApiChangelogFilterBar", () => {
@@ -285,18 +278,15 @@ describe("ApiChangelog", () => {
     expect(doc.querySelector(".api-changelog-empty-state")).not.toBeNull();
   });
 
-  it("paginates within the filter, jumping to the timeline", async () => {
+  it("paginates within the filter, to the top of each page", async () => {
     const doc = await render(ApiChangelog, {
       lang: "en",
       page: makePage({ filter: "added", pageNumber: 2, totalPages: 3 }),
     });
     const previous = doc.querySelector(".pagination__previous")!;
     const next = doc.querySelector(".pagination__next")!;
-    expect(previous.getAttribute("href")).toBe(
-      "/api/changelog/added/#changelog-timeline",
-    );
-    expect(next.getAttribute("href")).toBe(
-      "/api/changelog/added/3/#changelog-timeline",
-    );
+    expect(text(previous)).toBe("Prev");
+    expect(previous.getAttribute("href")).toBe("/api/changelog/added/");
+    expect(next.getAttribute("href")).toBe("/api/changelog/added/3/");
   });
 });

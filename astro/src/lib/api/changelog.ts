@@ -47,7 +47,7 @@ export type ChangelogFilter = (typeof CHANGELOG_FILTERS)[number];
 // TODO: no Hugo i18n keys exist for these strings yet.
 export const CHANGELOG_TITLE = "Changelog";
 export const CHANGELOG_INTRO =
-  "Review recent additions, modifications, and removals to Datadog API operations.";
+  "Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.";
 export const CHANGELOG_EMPTY_MESSAGE =
   "No API changes have been published yet.";
 export const CHANGELOG_BUCKET_LABELS: Record<ChangelogBucket, string> = {

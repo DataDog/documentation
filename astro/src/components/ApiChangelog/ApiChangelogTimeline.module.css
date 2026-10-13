@@ -10,8 +10,6 @@
   --api-changelog-timeline-rail-x: calc(
     var(--api-changelog-timeline-dot-size) / 2
   );
-
-  scroll-margin-top: var(--hugo-header-height);
 }
 
 .api-changelog-timeline__section {
@@ -75,7 +73,7 @@
   color: var(--color-text-muted);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height);
   white-space: nowrap;
 }

@@ -11,8 +11,6 @@
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius);
   list-style: none;
 }
 
@@ -20,27 +18,57 @@
   content: none;
 }
 
+/* A flex item, the tab stretches to the item's full height. As an inline box
+   it sat on the item's baseline instead, which pushed its text low and left
+   gaps above and below the active tab's fill. */
+.api-changelog-filter-bar__item {
+  display: flex;
+}
+
+/* Each tab draws its own border, so the active tab's border and rounded
+   corners match its fill. Neighbors overlap by one border width, so shared
+   edges stay a single line. */
+.api-changelog-filter-bar__item + .api-changelog-filter-bar__item {
+  margin-inline-start: calc(var(--border-width) * -1);
+}
+
+/* Trimmed to the capitals and the baseline, so equal padding centers the text
+   optically. Untrimmed, the font's tall ascender space made it sit low. */
 .api-changelog-filter-bar__tab {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--touch-target-min-size);
-  padding-inline: var(--space-sm);
+  display: block;
+  text-box: trim-both cap alphabetic;
+  padding: calc(var(--space-sm) + var(--space-2xs)) var(--space-md);
+  border: var(--border-width) solid var(--color-border);
   color: var(--color-text);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
   text-decoration: none;
+}
+
+.api-changelog-filter-bar__item:first-child .api-changelog-filter-bar__tab {
+  border-start-start-radius: var(--border-radius);
+  border-end-start-radius: var(--border-radius);
+}
+
+.api-changelog-filter-bar__item:last-child .api-changelog-filter-bar__tab {
+  border-start-end-radius: var(--border-radius);
+  border-end-end-radius: var(--border-radius);
 }
 
 .api-changelog-filter-bar__tab:hover {
   background: var(--color-brand-hover-bg);
 }
 
+/* Raised so its purple border covers the gray edge it shares with a neighbor. */
 .api-changelog-filter-bar__tab--active {
+  position: relative;
+  border-color: var(--color-brand);
   background: var(--color-brand);
   color: var(--color-text-on-brand);
   font-weight: var(--font-weight-semibold);
 }
 
 .api-changelog-filter-bar__tab--active:hover {
+  border-color: var(--color-brand-hover);
   background: var(--color-brand-hover);
 }

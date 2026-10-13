@@ -374,7 +374,7 @@ describe("renderChangelogMarkdown", () => {
     );
     expect(markdown).toBe(`# Changelog
 
-Review recent additions, modifications, and removals to Datadog API operations.
+Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.
 
 ## 2026-10-08
 
@@ -405,7 +405,7 @@ Review recent additions, modifications, and removals to Datadog API operations.
   it("says so when there are no entries", () => {
     expect(buildMarkdocStr(renderChangelogMarkdown([]))).toBe(`# Changelog
 
-Review recent additions, modifications, and removals to Datadog API operations.
+Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.
 
 No API changes have been published yet.
 `);

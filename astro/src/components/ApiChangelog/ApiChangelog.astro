@@ -3,8 +3,6 @@
  * The body of one static changelog page: intro, filter tabs, the page's
  * entries (or an empty state), and pagination within the filter.
  */
-import styles from "./ApiChangelog.module.css";
-import { classListFactory } from "@lib/cssUtils/classListFactory";
 import Pagination from "@components/Pagination/Pagination.astro";
 import ApiChangelogEmptyState from "./ApiChangelogEmptyState.astro";
 import ApiChangelogFilterBar from "./ApiChangelogFilterBar.astro";
@@ -23,19 +21,18 @@ interface Props {
 }
 
 const { lang, page } = Astro.props;
-const cl = classListFactory(styles);
 // TODO: no Hugo i18n keys exist for these strings yet.
 const paginationLabels = {
   navLabel: "Changelog pages",
-  previous: "Previous",
+  previous: "Prev",
   next: "Next",
 };
 const hrefForPage = (pageNumber: number) =>
-  `${changelogHref(lang, page.filter, pageNumber)}#changelog-timeline`;
+  changelogHref(lang, page.filter, pageNumber);
 ---
 
-<div class={cl("api-changelog")}>
-  <p class={cl("api-changelog__intro")}>{CHANGELOG_INTRO}</p>
+<div class="api-changelog">
+  <p class="api-changelog__intro">{CHANGELOG_INTRO}</p>
   <ApiChangelogFilterBar lang={lang} activeFilter={page.filter} />
   {
     page.entries.length > 0 ? (
