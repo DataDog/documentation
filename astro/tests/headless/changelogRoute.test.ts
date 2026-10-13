@@ -33,7 +33,7 @@ describe("changelog route", () => {
     const response = await renderChangelog({}, "/api/changelog/");
     expect(response.status).toBe(200);
     const html = await response.text();
-    expect(html).toContain("<title>Changelog - Datadog API</title>");
+    expect(html).toContain("<title>API Changelog</title>");
     expect(html).toContain("api-changelog-timeline");
   });
 
@@ -43,7 +43,7 @@ describe("changelog route", () => {
       "/api/changelog/breaking/",
     );
     expect(await response.text()).toContain(
-      "<title>Breaking changes - Datadog API</title>",
+      "<title>Breaking changes - API Changelog</title>",
     );
   });
 

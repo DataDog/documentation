@@ -5,6 +5,9 @@
   --sidebar-width: 315px;
   /* Label column beside a timeline or definition-style list on wide screens. */
   --timeline-label-width: 96px;
+  /* Column that holds a status badge beside the content it labels. Fits the
+     widest badge label, "Deprecated", at --font-size-xs. */
+  --badge-column-width: 4.5rem;
   /* WCAG 2.5.8 minimum target size, checked by Lighthouse's target-size audit. */
   --touch-target-min-size: 24px;
 }

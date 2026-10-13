@@ -18,57 +18,70 @@ const operationsLabel = "Operations";
 ---
 
 <article class={cl("api-changelog-entry")}>
-  <div class={cl("api-changelog-entry__meta")}>
-    <span
-      class={cl(
-        "api-changelog-entry__pill",
-        `api-changelog-entry__pill--${entry.bucket}`,
-      )}
-    >
-      {CHANGELOG_BUCKET_LABELS[entry.bucket]}
-    </span>
+  <span
+    class={cl(
+      "api-changelog-entry__pill",
+      `api-changelog-entry__pill--${entry.bucket}`,
+    )}
+  >
+    {CHANGELOG_BUCKET_LABELS[entry.bucket]}
+  </span>
+  <div class={cl("api-changelog-entry__body")}>
+    <div class={cl("api-changelog-entry__meta")}>
+      {
+        entry.product.href ? (
+          <a
+            class={cl("api-changelog-entry__product")}
+            href={entry.product.href}
+          >
+            {entry.product.name}
+          </a>
+        ) : (
+          <span class={cl("api-changelog-entry__product")}>
+            {entry.product.name}
+          </span>
+        )
+      }
+    </div>
+    <h3 class={cl("api-changelog-entry__title")}>
+      {
+        splitInlineCode(entry.title).map((part) =>
+          part.isCode ? <code>{part.text}</code> : part.text,
+        )
+      }
+    </h3>
     {
-      entry.product.href ? (
-        <a class={cl("api-changelog-entry__product")} href={entry.product.href}>
-          {entry.product.name}
-        </a>
-      ) : (
-        <span class={cl("api-changelog-entry__product")}>
-          {entry.product.name}
-        </span>
+      entry.operations.length > 0 && (
+        <div class={cl("api-changelog-entry__operations-row")}>
+          <span
+            class={cl("api-changelog-entry__operations-label")}
+            aria-hidden="true"
+          >
+            {operationsLabel}:
+          </span>
+          <ul
+            class={cl("api-changelog-entry__operations")}
+            aria-label={operationsLabel}
+          >
+            {entry.operations.map((operation) => (
+              <li class={cl("api-changelog-entry__operation-item")}>
+                {operation.href ? (
+                  <a
+                    class={cl("api-changelog-entry__operation")}
+                    href={operation.href}
+                  >
+                    <code>{operation.operationId}</code>
+                  </a>
+                ) : (
+                  <code class={cl("api-changelog-entry__operation")}>
+                    {operation.operationId}
+                  </code>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
   </div>
-  <h3 class={cl("api-changelog-entry__title")}>
-    {
-      splitInlineCode(entry.title).map((part) =>
-        part.isCode ? <code>{part.text}</code> : part.text,
-      )
-    }
-  </h3>
-  {
-    entry.operations.length > 0 && (
-      <ul
-        class={cl("api-changelog-entry__operations")}
-        aria-label={operationsLabel}
-      >
-        {entry.operations.map((operation) => (
-          <li class={cl("api-changelog-entry__operation-item")}>
-            {operation.href ? (
-              <a
-                class={cl("api-changelog-entry__operation")}
-                href={operation.href}
-              >
-                <code>{operation.operationId}</code>
-              </a>
-            ) : (
-              <code class={cl("api-changelog-entry__operation")}>
-                {operation.operationId}
-              </code>
-            )}
-          </li>
-        ))}
-      </ul>
-    )
-  }
 </article>

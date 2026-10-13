@@ -225,12 +225,9 @@ export function changelogPageTitle(
   pageNumber: number,
 ): string {
   // TODO: no Hugo i18n keys exist for these strings yet.
-  const subject =
-    filter === "all"
-      ? CHANGELOG_TITLE
-      : `${CHANGELOG_BUCKET_LABELS[filter]} changes`;
   const pageQualifier = pageNumber > 1 ? `, page ${pageNumber}` : "";
-  return `${subject}${pageQualifier} - Datadog API`;
+  if (filter === "all") return `API Changelog${pageQualifier}`;
+  return `${CHANGELOG_BUCKET_LABELS[filter]} changes${pageQualifier} - API Changelog`;
 }
 
 /**

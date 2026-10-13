@@ -454,10 +454,10 @@ describe("splitInlineCode", () => {
 
 describe("changelogPageTitle", () => {
   it.each([
-    ["all", 1, "Changelog - Datadog API"],
-    ["all", 2, "Changelog, page 2 - Datadog API"],
-    ["added", 1, "Added changes - Datadog API"],
-    ["breaking", 2, "Breaking changes, page 2 - Datadog API"],
+    ["all", 1, "API Changelog"],
+    ["all", 2, "API Changelog, page 2"],
+    ["added", 1, "Added changes - API Changelog"],
+    ["breaking", 2, "Breaking changes, page 2 - API Changelog"],
   ] as const)("%s page %d → %s", (filter, pageNumber, title) => {
     expect(changelogPageTitle(filter, pageNumber)).toBe(title);
   });

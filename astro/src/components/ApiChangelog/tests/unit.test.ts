@@ -143,9 +143,27 @@ describe("ApiChangelogEntry", () => {
     ]);
   });
 
+  it("labels the operations list with a visible Operations: prefix", async () => {
+    const doc = await render(ApiChangelogEntry, {
+      entry: makeEntry({ operations: [{ operationId: "GetDashboardUsage" }] }),
+    });
+    const label = doc.querySelector(".api-changelog-entry__operations-label");
+    expect(text(label)).toBe("Operations:");
+    // The list's aria-label already names it, so screen readers skip the prefix.
+    expect(label?.getAttribute("aria-hidden")).toBe("true");
+    expect(
+      doc
+        .querySelector(".api-changelog-entry__operations")
+        ?.getAttribute("aria-label"),
+    ).toBe("Operations");
+  });
+
   it("leaves out the operations list when there are none", async () => {
     const doc = await render(ApiChangelogEntry, { entry: makeEntry() });
     expect(doc.querySelector(".api-changelog-entry__operations")).toBeNull();
+    expect(
+      doc.querySelector(".api-changelog-entry__operations-label"),
+    ).toBeNull();
   });
 });
 

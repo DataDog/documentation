@@ -95,6 +95,55 @@ test.describe("API changelog", () => {
     });
   });
 
+  test("badges sit in their own column, keeping their own width", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    const entries = page.locator(".api-changelog-entry");
+    const layouts = await entries.evaluateAll((elements) =>
+      elements.slice(0, 5).map((element) => {
+        const pill = element
+          .querySelector(".api-changelog-entry__pill")!
+          .getBoundingClientRect();
+        const title = element
+          .querySelector(".api-changelog-entry__title")!
+          .getBoundingClientRect();
+        const meta = element
+          .querySelector(".api-changelog-entry__meta")!
+          .getBoundingClientRect();
+        const card = element.getBoundingClientRect();
+        return {
+          pillLeftOfBody: pill.right < Math.min(title.left, meta.left),
+          bodyOffset: Math.round(title.left - card.left),
+          pillFillsColumn:
+            Math.round(pill.width) >= Math.round(title.left - pill.left),
+        };
+      }),
+    );
+    expect(layouts.length).toBeGreaterThan(1);
+    for (const layout of layouts) {
+      expect(layout.pillLeftOfBody).toBe(true);
+      expect(layout.pillFillsColumn).toBe(false);
+    }
+    // Every card's body starts at the same offset, so the column lines up.
+    expect(new Set(layouts.map((layout) => layout.bodyOffset)).size).toBe(1);
+  });
+
+  test("operation links are underlined only on hover", async ({ page }) => {
+    await page.goto(CHANGELOG_URL);
+    const operationLink = page
+      .locator("a.api-changelog-entry__operation")
+      .first();
+    const textDecorationLines = await operationLink.evaluate((element) => [
+      getComputedStyle(element).textDecorationLine,
+      getComputedStyle(element.querySelector("code")!).textDecorationLine,
+    ]);
+    expect(textDecorationLines).toEqual(["none", "none"]);
+
+    await operationLink.hover();
+    await expect(operationLink).toHaveCSS("text-decoration-line", "underline");
+  });
+
   test("the side nav's Changelog link is active", async ({ page }) => {
     await page.goto("/api/changelog/breaking/");
     const activeCategory = page.locator(".api-side-nav__category--active");
@@ -106,6 +155,24 @@ test.describe("API changelog", () => {
 
 test.describe("API changelog at phone width", () => {
   test.use({ viewport: { width: 375, height: 800 } });
+
+  test("badges stack above the entry body", async ({ page }) => {
+    await page.goto(CHANGELOG_URL);
+    const entry = page.locator(".api-changelog-entry").first();
+    const layout = await entry.evaluate((element) => {
+      const pill = element
+        .querySelector(".api-changelog-entry__pill")!
+        .getBoundingClientRect();
+      const body = element
+        .querySelector(".api-changelog-entry__body")!
+        .getBoundingClientRect();
+      return {
+        pillAboveBody: pill.bottom <= body.top,
+        sameLeftEdge: Math.round(pill.left) === Math.round(body.left),
+      };
+    });
+    expect(layout).toEqual({ pillAboveBody: true, sameLeftEdge: true });
+  });
 
   test("doesn't scroll horizontally", async ({ page }) => {
     await page.goto(CHANGELOG_URL);

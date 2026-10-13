@@ -1,11 +1,28 @@
 .api-changelog-entry {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-xs) var(--space-sm);
   padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius-md);
   background: var(--color-bg);
+}
+
+/* As in Hugo, the badge takes its own column on wider screens. Every card's
+   column is the same width, so the bodies line up, and the badge keeps its own
+   width. On phones the badge stacks above the body instead. */
+@media (min-width: 768px) {
+  .api-changelog-entry {
+    grid-template-columns: var(--badge-column-width) minmax(0, 1fr);
+  }
+}
+
+.api-changelog-entry__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
 }
 
 .api-changelog-entry__meta {
@@ -16,6 +33,8 @@
 }
 
 .api-changelog-entry__pill {
+  justify-self: start;
+  white-space: nowrap;
   padding: var(--space-2xs) var(--space-xs);
   border-radius: var(--border-radius-lg);
   font-size: var(--font-size-xs);
@@ -60,6 +79,19 @@ a.api-changelog-entry__product {
   font-weight: var(--font-weight-semibold);
 }
 
+.api-changelog-entry__operations-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.api-changelog-entry__operations-label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
 /* Specificity bump and ::before reset defeat the global `.prose ul` /
    `.prose ul li::before` en-dash bullet styles in global.css. */
 .api-changelog-entry .api-changelog-entry__operations {
@@ -80,4 +112,15 @@ a.api-changelog-entry__product {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   overflow-wrap: anywhere;
+}
+
+/* Underlines run through the monospace operation IDs and make them harder
+   to read, so the links show one only on hover and focus. */
+a.api-changelog-entry__operation {
+  text-decoration: none;
+}
+
+a.api-changelog-entry__operation:hover,
+a.api-changelog-entry__operation:focus-visible {
+  text-decoration: underline;
 }
