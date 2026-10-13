@@ -242,9 +242,11 @@ Edits an existing Datadog notebook.
 
 ## Agent Builder
 
-Tools for [Bits Agent Builder][91], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, and running agents and inspecting their conversations.
+Tools for [Bits Agent Builder][91], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, running agents, and inspecting their conversations.
 
-Workflow Automation tools are used to configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps. Connect or disconnect OAuth MCP integrations through the Datadog UI.
+Workflow Automation tools are used to configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps.
+
+Connect or disconnect OAuth MCP integrations through the Datadog UI.
 
 ### `list_datadog_bits_agents`
 *Toolset: **agent-builder***\
