@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-tracing/" >}}
-Optimizing inference workloads with Continuous Tracing in GPU Monitoring is in Early Access Preview. Complete the form to request access.
+Optimizing inference workloads with Continuous Tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
