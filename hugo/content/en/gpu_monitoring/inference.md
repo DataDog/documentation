@@ -75,7 +75,9 @@ The integrations collect metrics from the following endpoints:
 | Dynamo worker | `:9090/metrics` | Dynamo | `dynamo.component.*` |
 | vLLM engine | `:9090/metrics` | vLLM | `vllm.*` |
 
-The Dynamo worker and vLLM engine share an endpoint. Dynamo exposes the vLLM engine metrics through the worker's metrics endpoint, and each integration collects its own metrics from that endpoint.
+By default, the Dynamo worker and vLLM engine share an endpoint. Dynamo exposes the vLLM engine metrics through the worker's metrics endpoint, and each integration collects its own metrics from that endpoint.
+
+<div class="alert alert-info">If your deployment runs the vLLM engine separately from the Dynamo worker, such as in a sidecar, the worker and engine expose metrics on separate endpoints. In this case, point the <code>dynamo</code> check at the worker's metrics endpoint and the <code>vllm</code> check at the engine's metrics endpoint in <a href="#3-configure-the-integrations">Step 3: Configure the integrations</a>.</div>
 
 The Dynamo Kubernetes Operator sets `DYN_SYSTEM_PORT=9090` by default. If you launch a worker directly, set the port explicitly:
 
