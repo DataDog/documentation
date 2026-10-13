@@ -215,7 +215,9 @@ Each submission defines the complete set of sources and metrics managed by its `
 
 All files in an operation must use the same `schema_version`, `sync_tag`, and effective `options`. Nonempty top-level `reference_url` and `warehouse_connection_id` values must also agree across files.
 
-### Adopt existing objects
+### Manage existing metrics with YAML
+
+The CLI does not export existing metrics to YAML. Create the YAML from the source and metric definitions, then store it in version control. For migrations, `existing_id` refers to an object already present in the target Datadog organization.
 
 To manage an existing manual source or metric with YAML:
 
@@ -300,6 +302,8 @@ Add the aggregation field that matches the metric type:
 
 ### Simple metric aggregation
 
+Winsorization percentiles and percentile metrics use decimal fractions. For example, `0.95` means the 95th percentile in both cases.
+
 | Field | Required | Description |
 | ----- | -------- | ----------- |
 | `operation` | Yes | Aggregation operation, such as `sum`, `average`, `count`, or `countDistinctValue`. |
@@ -307,8 +311,8 @@ Add the aggregation field that matches the metric type:
 | `timeframe_start_value` | No | Start offset for the metric timeframe. |
 | `timeframe_end_value` | No | End offset for the metric timeframe. |
 | `timeframe_unit` | No | Timeframe unit. |
-| `winsor_lower_percentile` | No | Lower winsorization percentile, from zero to one. Must be less than `winsor_upper_percentile` when both are set. |
-| `winsor_upper_percentile` | No | Upper winsorization percentile, from zero to one. |
+| `winsor_lower_percentile` | No | Lower winsorization percentile, from zero to one inclusive. Must be less than `winsor_upper_percentile` when both are set. |
+| `winsor_upper_percentile` | No | Upper winsorization percentile, from zero to one inclusive. |
 | `winsor_lower_fixed_value` | No | Lower fixed winsorization value. |
 | `winsor_upper_fixed_value` | No | Upper fixed winsorization value. |
 | `winsorization_strategy` | No | Supported values are `all_assigned_subjects` (default) and `nonzero`. For `operation: threshold`, omit this field or use `all_assigned_subjects`. |
