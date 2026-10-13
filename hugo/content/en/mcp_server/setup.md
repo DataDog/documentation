@@ -93,7 +93,7 @@ Install the Datadog plugin from the [official Anthropic Plugin Marketplace](http
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
-1. After any making any configuration change, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
+1. After making any configuration change, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -143,9 +143,14 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools](#toolsets), define a header `X-Datadog-MCP-Toolsets` in the `config.toml` file on the line after the URL. For example, this header enables _only_ APM and Agent Observability tools (use `X-Datadog-MCP-Toolsets = "all"` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), add the `X-Datadog-MCP-Toolsets` header in the same `[mcp_servers.datadog]` section. For example, this configuration enables only APM (Preview) and Agent Observability tools:
 
-   <pre><code>http_headers = { "X-Datadog-MCP-Toolsets" = "apm,llmobs" }</code></pre>
+   <pre><code>[mcp_servers.datadog]
+   url = "{{< region-param key="mcp_server_endpoint" >}}"
+   http_headers = { "X-Datadog-MCP-Toolsets" = "apm,llmobs" }
+   </code></pre>
+
+   To enable all generally available toolsets, set the header value to `"all"`. See [Toolsets](#toolsets) for context window considerations and [Preview toolsets](#preview-toolsets) for tools that require explicit selection.
 
 1. Log in to the Datadog MCP Server:
 
@@ -178,11 +183,13 @@ Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.
 1. Install the Datadog plugin:
     <pre><code>copilot plugin install datadog@awesome-copilot</code></pre>
 
-1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Copilot.
+1. Run `/ddsetup` to select your [Datadog site](/getting_started/site/).
+
+1. Run `/mcp reload` to activate the MCP Server, and complete the OAuth login flow when prompted.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
-1. After any making any configuration change, restart `copilot` and reauthenticate the Datadog MCP Server.
+1. After making any configuration change, run `/mcp reload` and reauthenticate the Datadog MCP Server.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -196,10 +203,11 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
    Alternatively, add to `~/.copilot/mcp-config.json`:
     <pre><code>{
-      "servers": {
+      "mcpServers": {
         "datadog": {
           "type": "http",
-          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+          "url": "{{< region-param key="mcp_server_endpoint" >}}",
+          "tools": ["*"]
          }
        }
     }</code></pre>
@@ -215,6 +223,10 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
+{{< /site-region >}}
+
+{{< site-region region="uk1" >}}
+For UK1, use the manual MCP Server configuration in the [Other tab](?tab=other) with your site's endpoint.
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -523,12 +535,28 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 {{% tab "VS Code" %}}
 
-For Copilot, install the [Datadog Copilot plugin][2] from the marketplace. For more information, see the instructions for the [Copilot CLI][3].
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+#### Copilot
 
-For other extensions & CLIs, Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
+Install the [Datadog Copilot plugin](https://github.com/datadog-labs/copilot-plugin) in VS Code:
+
+1. Open the {{< ui >}}Extensions{{< /ui >}} view and search for `@agentPlugins datadog`.
+1. Select the Datadog plugin and click {{< ui >}}Install{{< /ui >}}.
+1. If you previously configured the Datadog MCP Server manually, remove or disable that entry to avoid conflicts.
+1. Run `/ddsetup` in Copilot to select your Datadog site.
+1. Run {{< ui >}}MCP: List Servers{{< /ui >}} from the Command Palette, select `datadog`, and click {{< ui >}}Start Server{{< /ui >}}.
+1. Complete the OAuth login flow when prompted.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+To enable [product-specific tools](#toolsets), run `/ddtoolsets` in Copilot. For terminal setup, see the [Copilot CLI instructions](?tab=copilotcli).
+{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-1. Install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
+#### Other extensions and CLIs
+
+Datadog's [Cursor and VS Code extension](/ide_plugins/vscode/) provides a configuration assistant for the Datadog MCP Server.
+
+1. Install the [Datadog extension](/ide_plugins/vscode/?tab=vscode#installation). If you have the extension installed already, make sure it's the latest version.
 1. Sign in to your Datadog account.
 1. **Restart the IDE.**
 1. Run the {{< ui >}}Datadog: Open MCP Configuration Assistant{{< /ui >}} and follow the guidance to configure the Datadog MCP Server.
@@ -536,17 +564,12 @@ For other extensions & CLIs, Datadog's [Cursor and VS Code extension][1] provide
 
 The Datadog MCP server connection is managed by Copilot (or whichever agent you are using), not the Datadog extension. You must authorize the Datadog MCP server independently of the extension.
 
-[2]: /ide_plugins/vscode/?tab=vscode#installation
-[3]: /mcp_server/tools
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: /ide_plugins/vscode/
-[2]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
-[3]: /mcp_server/setup/?tab=copilot-cli
 {{% /tab %}}
 
 {{% tab "Warp" %}}
@@ -623,12 +646,14 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 ## Toolsets
 
-The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
+The Datadog MCP Server supports _toolsets_, which allow you to select the [MCP tools][49] you need and save context window space. For remote connections, select toolsets with the `toolsets` query parameter in the endpoint URL or your client's plugin commands.
+
+For Codex CLI, select toolsets with the `X-Datadog-MCP-Toolsets` HTTP header. See the [Codex setup instructions](?tab=codex) for a complete configuration example.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.
+Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets sends more tool definitions to your AI client, which consumes context window space. Select only the toolsets you need if your client does not filter or load tools on demand. [Preview toolsets](#preview-toolsets) require explicit selection and are not included in `all`.
 
-For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+For clients that use URL query parameters, examples for your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}) include:
 
 - Retrieve only the core tools (this is the default if `toolsets` is not specified):
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -644,8 +669,6 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
-
-<div class="alert alert-info">For the Codex CLI, use the <code>X-Datadog-MCP-Toolsets</code> header described in the <a href="?tab=codex">Codex setup instructions</a>, not the query parameter described here.</div>
 
 ### Omit specific tools
 
@@ -775,7 +798,7 @@ Most clients complete the OAuth 2.0 flow automatically during setup. Select your
 
 #### Custom subdomains
 
-If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`), add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can be authorized.
+If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`, add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without this parameter, the flow starts on the default Datadog domain. Users signed in on a custom subdomain must sign in again before authorizing the client.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -855,7 +878,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
-For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
+For security, use an API key and a scoped application key from a [service account][13] that has only the required permissions.
 
 ### Adding OAuth clients
 
@@ -969,6 +992,6 @@ After you change any of these settings, refresh the tool list in your AI client.
 [76]: /mcp_server/code_execution/ 
 [77]: /tracing/live_debugger/
 [78]: /account_management/governance_console/
-[79]: ]https://app.datadoghq.com/personal-settings/apps
+[79]: https://app.datadoghq.com/personal-settings/apps
 [80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
 [81]: /observability_pipelines/
