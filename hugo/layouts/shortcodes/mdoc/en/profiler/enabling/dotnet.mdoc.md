@@ -146,72 +146,122 @@ To install the .NET Profiler per-webapp:
 Use the following prompt with a local AI coding agent to set up the .NET profiler for your service. Copy and paste this prompt into your AI agent to get started.
 
 ```text
-You are helping me set up Datadog Continuous Profiler for my .NET service.
+You are helping me set up Datadog Continuous Profiler for my .NET service
+(C#, F#, Visual Basic, or any language targeting the .NET runtime).
 
 First, scan my project to auto-detect as much as possible. Look for:
 - .csproj, .fsproj, or .vbproj files to determine the target framework
-  (.NET Framework vs .NET Core / .NET 5+) and version.
+  (.NET Framework vs .NET Core / .NET 5+), version, and platform target
+  (x64, x86, ARM64, AnyCPU).
 - NuGet references (PackageReference in project files or packages.config)
   to check if Datadog.Trace or Datadog.Trace.Bundle is already installed.
+  Note the dd-trace-dotnet version if present.
+- Check for other CLR profiler integrations (such as Application Insights
+  profiler, New Relic .NET agent, or Dynatrace) that would conflict —
+  the .NET CLR Profiling API allows only one subscriber.
 - Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
-  image (Linux vs Windows, Alpine vs Debian), startup command, and existing
-  Datadog Agent configuration.
+  image (Linux vs Windows, Alpine vs Debian, architecture), startup
+  command, and existing Datadog Agent configuration. Check whether
+  the app targets a serverless platform (AWS Lambda, Azure Functions).
 - launchSettings.json, web.config, or appsettings.json for hosting model
   (IIS, Kestrel, self-hosted) and existing environment variables.
 - Existing environment variables or .env files referencing DD_SERVICE,
   DD_ENV, DD_VERSION, CORECLR_ENABLE_PROFILING, COR_ENABLE_PROFILING,
   or DD_PROFILING_ENABLED.
 - Azure App Service configuration (azure-pipelines.yml, ARM templates,
-  or app settings).
+  or app settings). Distinguish Web Apps from Function Apps.
 - Windows Service registration (sc.exe commands, installer projects).
 
-Determine which installation AND enablement path applies. There are six
-possible combinations:
+Before proceeding, check for unsupported configurations:
+- Only 64-bit applications are supported. If the project targets x86 or
+  AnyCPU-prefer-32-bit, warn and stop.
+- ARM64 is NOT supported. If detected, warn and stop.
+- AWS Lambda is NOT supported. If detected, warn and stop.
+- Azure Function Apps are NOT supported (only Web Apps). If detected,
+  warn and stop.
+- If another CLR profiler is detected, warn that only one APM solution
+  can use the CLR Profiling API at a time.
+
+Determine which installation AND enablement path applies:
 
 Installation paths:
 a. Linux with Single Step APM Instrumentation — nothing extra to install.
+   If APM was previously installed manually, the old CORECLR_* env vars
+   and LD_PRELOAD must be removed to avoid conflicts.
 b. Linux — install the .NET Tracer package (dpkg, rpm, or tar.gz).
 c. Windows — install using the .NET Monitoring MSI installer.
 d. NuGet — add Datadog.Trace.Bundle NuGet package (does not support IIS).
 e. Azure App Service — install the Datadog APM extension (Web Apps only).
 
 Enablement paths (each requires different environment variables):
-1. Linux with Single Step APM — only DD_PROFILING_ENABLED=1 is needed.
-2. Linux standalone — set CORECLR_ENABLE_PROFILING=1, CORECLR_PROFILER,
-   CORECLR_PROFILER_PATH, DD_DOTNET_TRACER_HOME, LD_PRELOAD, and
-   DD_PROFILING_ENABLED=1.
+1. Linux with Single Step APM — only DD_PROFILING_ENABLED is needed.
+   Supported values: 1/true (enable), Auto (enable only if a trace is
+   created and the app runs for more than 30 seconds — Preview),
+   0/false (disable).
+2. Linux standalone — set CORECLR_ENABLE_PROFILING=1, CORECLR_PROFILER=
+   {846F5F1C-F9AE-4B07-969E-05C26BC060D8}, CORECLR_PROFILER_PATH=
+   /opt/datadog/Datadog.Trace.ClrProfiler.Native.so,
+   DD_DOTNET_TRACER_HOME=/opt/datadog, LD_PRELOAD=
+   /opt/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so,
+   and DD_PROFILING_ENABLED=1.
 3. IIS — set environment variables in the Windows Registry under
    HKLM\System\CurrentControlSet\Services\WAS and W3SVC.
    Use CORECLR_* for .NET Core/.NET 5+ or COR_* for .NET Framework.
-   Restart IIS with net stop /y was && net start w3svc (not iisreset).
+   CRITICAL: restart IIS with "net stop /y was" then "net start w3svc".
+   Do NOT use iisreset — a reset does not always apply changes.
+   Do NOT enable the profiler machine-wide or for all IIS applications;
+   this causes unnecessary overhead. Use per-application configuration
+   in applicationhost.config on IIS 10+.
 4. Windows Services — set environment variables in the service's
    Registry key (HKLM\System\CurrentControlSet\Services\<ServiceName>).
    Use CORECLR_* for .NET Core/.NET 5+ or COR_* for .NET Framework.
+   Can also use a PowerShell script with Set-ItemProperty.
 5. Windows standalone apps — set environment variables in a batch file
    or shell. Use CORECLR_* or COR_* based on runtime.
 6. NuGet — set CORECLR_ENABLE_PROFILING, CORECLR_PROFILER,
-   CORECLR_PROFILER_PATH (OS/arch-specific path under the app directory),
-   LD_PRELOAD (Linux only), and DD_DOTNET_TRACER_HOME.
+   CORECLR_PROFILER_PATH, DD_PROFILING_ENABLED=1, LD_PRELOAD (Linux
+   only), and DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog.
+   CORECLR_PROFILER_PATH varies by OS and architecture:
+   - Alpine Linux x64: <APP_DIR>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so
+   - Linux x64: <APP_DIR>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so
+   - Linux ARM64: <APP_DIR>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so
+   - Windows x64: <APP_DIR>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll
+   - Windows x86: <APP_DIR>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll
+   For Docker on Linux, also run: RUN /<APP_DIR>/datadog/createLogPath.sh
 
-Present a summary of what you detected (framework, OS, hosting model,
-installation path, enablement path), then ask ONLY about what you could
-not determine:
+IMPORTANT: Unlike APM, the Continuous Profiler is NOT activated by
+default when the APM package is installed. You must explicitly set
+DD_PROFILING_ENABLED=1 for every application you want to profile.
+
+Present a summary of what you detected (framework, OS, architecture,
+hosting model, installation path, enablement path), then ask ONLY
+about what you could not determine:
 - DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
-- Datadog Agent deployment method (if no Agent config found in the project).
-- Which extra profile types to enable beyond CPU and wall time
-  (Exceptions, Allocations, Lock Contention, Live Heap, GC).
+- Datadog Agent deployment method (if no Agent config found in the
+  project).
+- Which extra profile types to enable beyond CPU and wall time.
 - Anything ambiguous from the project files.
 
 Generate the setup steps for the detected path:
 - Show the complete environment variable block, Registry configuration,
   PowerShell script, batch file, or modified Dockerfile as appropriate.
 - Set DD_PROFILING_ENABLED=1, DD_SERVICE, DD_ENV, and DD_VERSION.
-- Enable any requested extra profile types
-  (DD_PROFILING_EXCEPTION_ENABLED, DD_PROFILING_ALLOCATION_ENABLED,
-  DD_PROFILING_LOCK_ENABLED, DD_PROFILING_HEAP_ENABLED).
+- Enable any requested extra profile types:
+  DD_PROFILING_EXCEPTION_ENABLED (Exceptions)
+  DD_PROFILING_ALLOCATION_ENABLED (Allocations — Preview)
+  DD_PROFILING_LOCK_ENABLED (Lock Contention)
+  DD_PROFILING_HEAP_ENABLED (Live Heap — Preview)
+  DD_PROFILING_GC_ENABLED (GC, on by default, used in Timeline)
+  DD_PROFILING_HTTP_ENABLED (outgoing HTTP requests, Timeline)
+  DD_PROFILING_HEAPSNAPSHOT_ENABLED (heap snapshots for Memory Leak UI)
+- If Allocations or Lock Contention is requested on .NET Framework,
+  warn that the Datadog Agent and the profiled application must be
+  running on the same machine.
 - Warn that containers require more than one CPU core.
 - Note: starting with v2.14.0, CORECLR_PROFILER / COR_PROFILER do not
   need to be set if the SDK was installed using the MSI.
+- Suggest setting up Source Code Integration to connect profiling data
+  with Git repositories.
 
 Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=dot_net
 ```
