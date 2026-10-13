@@ -22,12 +22,14 @@ Select your SDK for platform-specific setup instructions.
 
 {% if equals($platform, "android") %}
 {% partial file="sdk/track_app_startups/android.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/peer_benchmarks.mdoc.md" /%}
 {% /if %}
 
 <!-- iOS -->
 
 {% if equals($platform, "ios") %}
 {% partial file="sdk/track_app_startups/ios.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/peer_benchmarks.mdoc.md" /%}
 {% /if %}
 
 <!-- Flutter -->
