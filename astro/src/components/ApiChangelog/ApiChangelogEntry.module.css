@@ -1,0 +1,80 @@
+.api-changelog-entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-block: var(--space-sm);
+}
+
+.api-changelog-entry__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.api-changelog-entry__pill {
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height);
+}
+
+.api-changelog-entry__pill--added {
+  background: var(--color-status-success-bg);
+  color: var(--color-status-success-text);
+}
+
+.api-changelog-entry__pill--modified {
+  background: var(--color-status-attention-bg);
+  color: var(--color-status-attention-text);
+}
+
+.api-changelog-entry__pill--breaking {
+  background: var(--color-status-danger-bg);
+  color: var(--color-status-danger-text);
+}
+
+.api-changelog-entry__pill--deprecated {
+  background: var(--color-status-neutral-bg);
+  color: var(--color-status-neutral-text);
+}
+
+.api-changelog-entry__product {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+a.api-changelog-entry__product {
+  color: var(--color-brand);
+}
+
+.api-changelog-entry__title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Specificity bump and ::before reset defeat the global `.prose ul` /
+   `.prose ul li::before` en-dash bullet styles in global.css. */
+.api-changelog-entry .api-changelog-entry__operations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.api-changelog-entry__operations .api-changelog-entry__operation-item::before {
+  content: none;
+}
+
+.api-changelog-entry__operation {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  overflow-wrap: anywhere;
+}

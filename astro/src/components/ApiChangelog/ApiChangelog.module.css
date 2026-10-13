@@ -1,0 +1,4 @@
+.api-changelog__intro {
+  color: var(--color-text);
+  font-weight: var(--font-weight-regular);
+}

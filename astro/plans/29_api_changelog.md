@@ -237,13 +237,25 @@ Write each test first and confirm it fails before implementing. While developing
 
 > **Compaction point 3:** the feature is fully wired. Only browser tests and the final regression run are left. **Stop here and ask the user to compact.**
 
+> **Status at compaction point 3 (steps 1–9 done):** 466 related headless tests pass and `tsc` is clean. Nothing is committed.
+> - The nav uses `isChangelogPath` and `CHANGELOG_ROOT_PATH` from `overviewPages.ts`. It doesn't import `changelog.ts`, which eagerly globs the YAML.
+> - The test container has no i18n manifest and always renders English, so the localized nav href (`/ja/api/changelog/`) is a browser test in step 10.
+
+9b. **Inline code in entry titles (user decision, made after step 9).** Some changelog titles contain markdown backtick spans, for example ``Document the per-device user tag limit on `UpdateDeviceUserTags` ``. Render each span as inline code instead of literal backticks, in both outputs:
+    - **HTML:** the `<h3 class="api-changelog-entry__title">` in `ApiChangelogEntry.astro` renders `<code>` for each span and plain text for the rest. Don't use `set:html`; build the parts from a small pure helper, for example `splitInlineCode(title): {text, isCode}[]` in `changelog.ts`, so nothing in the title is treated as HTML.
+    - **Markdown:** `renderChangelogMarkdown` emits `new Ast.Node("code", {content})` for each span instead of the raw backticks.
+    - **Done.** Test caveat: the exact-string markdown check can't tell code nodes from literal backticks, because both print the same. The markdown test therefore checks the AST for `code` nodes.
+    - **Red to green:** unit tests for the helper (no backticks, one span, several spans, an unmatched backtick stays literal), a component test checking for `code` inside `.api-changelog-entry__title`, and an exact-string markdown test. Add a backtick title to a fixture entry if none has one, then update the `13-changelog` HTML and plaintext snapshots with `-u` and review the diff.
+
 10. **Browser tests** (`src/components/ApiChangelog/tests/*.browser.test.ts`), only for what unit tests can't cover:
     - Clicking a filter tab goes to its URL, and the active tab updates (check the stable BEM class).
     - Clicking Next goes to `/api/changelog/2/#changelog-timeline` and the timeline is in view. Skip this if the live data has 20 entries or fewer; there's no fixture redirect for browser tests.
     - The filter bar's computed `view-transition-name` is `api-changelog-filter-bar`.
     - At 375px, the page has no horizontal scroll.
     - The side nav's Changelog link is active on the page.
+    - On `/ja/api/changelog/`, the side nav's and the mobile nav's Changelog links point at `/ja/api/changelog/`. The unit-test container can't check this.
 11. **Full regression run:** `yarn test-ai`. Fix anything this feature broke, such as snapshot updates in nav tests or a page count in a guard test.
+    - **Status (steps 10–11 done):** the browser tests are in `changelog.browser.test.ts`. Both page-listing tests needed to know about `/api/changelog.md`. One live-data failure remains (`regionResolver.full-spec`, prodlytics), from upstream spec drift unrelated to this feature.
 12. **Hand back.** Recommend that the user run the production build (`yarn build`, which this plan doesn't run). After it, they should confirm that:
     - `staticApiGuard` and `verifyDist.mjs` pass
     - `dist/client/api/changelog/` holds the expected pages for each locale

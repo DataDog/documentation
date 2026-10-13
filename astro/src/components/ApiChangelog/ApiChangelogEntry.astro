@@ -1,0 +1,74 @@
+---
+import styles from "./ApiChangelogEntry.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import {
+  CHANGELOG_BUCKET_LABELS,
+  splitInlineCode,
+  type ResolvedChangelogEntry,
+} from "@lib/api/changelog";
+
+interface Props {
+  entry: ResolvedChangelogEntry;
+}
+
+const { entry } = Astro.props;
+const cl = classListFactory(styles);
+// TODO: no Hugo i18n key exists for this string yet.
+const operationsLabel = "Operations";
+---
+
+<article class={cl("api-changelog-entry")}>
+  <div class={cl("api-changelog-entry__meta")}>
+    <span
+      class={cl(
+        "api-changelog-entry__pill",
+        `api-changelog-entry__pill--${entry.bucket}`,
+      )}
+    >
+      {CHANGELOG_BUCKET_LABELS[entry.bucket]}
+    </span>
+    {
+      entry.product.href ? (
+        <a class={cl("api-changelog-entry__product")} href={entry.product.href}>
+          {entry.product.name}
+        </a>
+      ) : (
+        <span class={cl("api-changelog-entry__product")}>
+          {entry.product.name}
+        </span>
+      )
+    }
+  </div>
+  <h3 class={cl("api-changelog-entry__title")}>
+    {
+      splitInlineCode(entry.title).map((part) =>
+        part.isCode ? <code>{part.text}</code> : part.text,
+      )
+    }
+  </h3>
+  {
+    entry.operations.length > 0 && (
+      <ul
+        class={cl("api-changelog-entry__operations")}
+        aria-label={operationsLabel}
+      >
+        {entry.operations.map((operation) => (
+          <li class={cl("api-changelog-entry__operation-item")}>
+            {operation.href ? (
+              <a
+                class={cl("api-changelog-entry__operation")}
+                href={operation.href}
+              >
+                <code>{operation.operationId}</code>
+              </a>
+            ) : (
+              <code class={cl("api-changelog-entry__operation")}>
+                {operation.operationId}
+              </code>
+            )}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>

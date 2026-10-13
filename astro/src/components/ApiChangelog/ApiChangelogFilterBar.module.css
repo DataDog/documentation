@@ -1,0 +1,46 @@
+.api-changelog-filter-bar {
+  margin-block: var(--space-md);
+  /* Stays put while the timeline swaps; see the group list in global.css. */
+  view-transition-name: api-changelog-filter-bar;
+}
+
+/* Specificity bump and ::before reset defeat the global `.prose ul` /
+   `.prose ul li::before` en-dash bullet styles in global.css. */
+.api-changelog-filter-bar .api-changelog-filter-bar__list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  list-style: none;
+}
+
+.api-changelog-filter-bar__list .api-changelog-filter-bar__item::before {
+  content: none;
+}
+
+.api-changelog-filter-bar__tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min-size);
+  padding-inline: var(--space-sm);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  text-decoration: none;
+}
+
+.api-changelog-filter-bar__tab:hover {
+  background: var(--color-brand-hover-bg);
+}
+
+.api-changelog-filter-bar__tab--active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+.api-changelog-filter-bar__tab--active:hover {
+  background: var(--color-brand-hover);
+}

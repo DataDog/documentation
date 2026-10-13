@@ -158,6 +158,16 @@ describe("findApiRouteShadowers", () => {
       patternRegex: /^(?:\/(.*?))?\/api\/latest\/?$/,
       entrypoint: "src/pages/[...lang]/api/latest.astro",
     },
+    {
+      pattern: "/[...lang]/api/changelog.md",
+      patternRegex: /^(?:\/(.*?))?\/api\/changelog\.md$/,
+      entrypoint: "src/pages/[...lang]/api/changelog.md.ts",
+    },
+    {
+      pattern: "/[...lang]/api/changelog/[...path]",
+      patternRegex: /^(?:\/(.*?))?\/api\/changelog(?:\/(.*?))?\/?$/,
+      entrypoint: "src/pages/[...lang]/api/changelog/[...path].astro",
+    },
   ];
   // The route the `.md` tree regressed behind.
   const catchAll: OrderedRouteLike = {
@@ -177,6 +187,7 @@ describe("findApiRouteShadowers", () => {
       "/api/latest.md",
       "/api/latest/dashboards.md",
       "/api/latest/dashboards/get-a-dashboard.md",
+      "/api/changelog.md",
     ]);
     for (const shadower of shadowers) {
       expect(shadower.pattern).toBe("/[...lang]/[...slug].md");
@@ -186,7 +197,7 @@ describe("findApiRouteShadowers", () => {
 
   it("flags a probe path that no route matches at all", () => {
     const shadowers = findApiRouteShadowers([]);
-    expect(shadowers).toHaveLength(6);
+    expect(shadowers).toHaveLength(8);
     for (const shadower of shadowers) {
       expect(shadower.pattern).toBe(null);
       expect(shadower.entrypoint).toBe(null);

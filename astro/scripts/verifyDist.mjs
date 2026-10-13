@@ -13,12 +13,17 @@
  * this script runs as plain Node outside Vite/Astro's TS-aware module graph.
  * Keep them in sync if either file changes.
  *
+ * It also checks that a short list of required files exists, for pages no
+ * coverage floor would notice going missing.
+ *
  * Usage: node scripts/verifyDist.mjs [dist/client] [--min-categories=150]
  */
 import { readdir, stat } from "node:fs/promises";
 import { join } from "node:path";
 
 const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
+// Pages no coverage floor would notice going missing on their own.
+const REQUIRED_FILES = ["api/changelog/index.html", "api/changelog.md"];
 
 const args = process.argv.slice(2);
 const positional = args.filter((arg) => !arg.startsWith("--"));
@@ -80,6 +85,17 @@ async function main() {
       `Coverage guard: only ${categoryDirs.size} api/latest/{category} ` +
         `directories were found, below the floor of ${minCategoryCount}. ` +
         `This usually means the API spec failed to parse.`,
+    );
+  }
+
+  const emittedFilePaths = new Set(filePaths);
+  const missingFiles = REQUIRED_FILES.filter(
+    (filePath) => !emittedFilePaths.has(filePath),
+  );
+  if (missingFiles.length > 0) {
+    problems.push(
+      `Required-files guard: the following files were not emitted:\n` +
+        missingFiles.map((filePath) => `  - ${filePath}`).join("\n"),
     );
   }
 

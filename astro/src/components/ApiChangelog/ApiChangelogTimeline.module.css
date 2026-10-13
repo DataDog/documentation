@@ -1,0 +1,101 @@
+/* Each section draws its own slice of the rail (::before) and its dot
+   (::after), so the rail is continuous across sections without a wrapper.
+   On narrow screens the date stacks above the entries and the rail runs down
+   the left edge; on wide screens the date sits in its own column and the
+   rail runs down the gutter between the columns. */
+.api-changelog-timeline {
+  --api-changelog-timeline-dot-size: calc(var(--space-sm) + var(--space-xs));
+  --api-changelog-timeline-dot-top: calc(var(--space-sm) + var(--space-sm));
+  --api-changelog-timeline-rail-x: calc(
+    var(--api-changelog-timeline-dot-size) / 2
+  );
+
+  scroll-margin-top: var(--hugo-header-height);
+}
+
+.api-changelog-timeline__section {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-inline-start: var(--space-lg);
+  padding-block-end: var(--space-md);
+}
+
+.api-changelog-timeline__section::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(
+    var(--api-changelog-timeline-rail-x) - var(--border-width-thick) / 2
+  );
+  border-inline-start: var(--border-width-thick) solid var(--color-border);
+}
+
+.api-changelog-timeline__section::after {
+  content: "";
+  position: absolute;
+  inset-block-start: var(--api-changelog-timeline-dot-top);
+  inset-inline-start: calc(
+    var(--api-changelog-timeline-rail-x) -
+      var(--api-changelog-timeline-dot-size) / 2
+  );
+  width: var(--api-changelog-timeline-dot-size);
+  height: var(--api-changelog-timeline-dot-size);
+  border-radius: 50%;
+  background: var(--color-brand);
+  box-shadow: 0 0 0 var(--border-width-thick) var(--color-bg);
+}
+
+/* The rail starts at the first dot and ends at the last one. */
+.api-changelog-timeline__section:first-child::before {
+  inset-block-start: var(--api-changelog-timeline-dot-top);
+}
+
+.api-changelog-timeline__section:last-child::before {
+  inset-block-end: auto;
+  height: calc(
+    var(--api-changelog-timeline-dot-top) +
+      var(--api-changelog-timeline-dot-size) / 2
+  );
+}
+
+.api-changelog-timeline__section:only-child::before {
+  display: none;
+}
+
+.api-changelog-timeline__date {
+  margin: 0;
+  padding-block-start: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height);
+}
+
+.api-changelog-timeline__entries {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .api-changelog-timeline {
+    --api-changelog-timeline-rail-x: calc(
+      var(--timeline-label-width) + var(--space-xl) / 2
+    );
+  }
+
+  .api-changelog-timeline__section {
+    grid-template-columns: var(--timeline-label-width) minmax(0, 1fr);
+    column-gap: var(--space-xl);
+    padding-inline-start: 0;
+  }
+}
+
+/* A pagination jump scrolls the page, so the desktop header has already
+   collapsed to its scrolled height by the time the timeline lands. */
+@media (min-width: 992px) {
+  .api-changelog-timeline {
+    scroll-margin-top: calc(
+      var(--hugo-header-height-desktop-scrolled) + var(--space-md)
+    );
+  }
+}

@@ -1,0 +1,51 @@
+---
+import styles from "./ApiChangelogFilterBar.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import {
+  CHANGELOG_BUCKET_LABELS,
+  CHANGELOG_FILTERS,
+  changelogHref,
+  type ChangelogFilter,
+} from "@lib/api/changelog";
+import type { Locale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
+
+interface Props {
+  lang: Locale;
+  activeFilter: ChangelogFilter;
+}
+
+const { lang, activeFilter } = Astro.props;
+const cl = classListFactory(styles);
+const translate = useTranslations(lang);
+// TODO: no Hugo i18n key exists for this string yet.
+const navLabel = "Filter by change type";
+
+const tabs = CHANGELOG_FILTERS.map((filter) => ({
+  filter,
+  label: filter === "all" ? translate("all") : CHANGELOG_BUCKET_LABELS[filter],
+  href: changelogHref(lang, filter, 1),
+  isActive: filter === activeFilter,
+}));
+---
+
+<nav class={cl("api-changelog-filter-bar")} aria-label={navLabel}>
+  <ul class={cl("api-changelog-filter-bar__list")}>
+    {
+      tabs.map((tab) => (
+        <li class={cl("api-changelog-filter-bar__item")}>
+          <a
+            class={cl(
+              "api-changelog-filter-bar__tab",
+              tab.isActive && "api-changelog-filter-bar__tab--active",
+            )}
+            href={tab.href}
+            aria-current={tab.isActive ? "page" : undefined}
+          >
+            {tab.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

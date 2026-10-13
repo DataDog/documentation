@@ -21,6 +21,9 @@ export interface OverviewState {
 export const API_CONTENT_DIR = "api/latest";
 const API_ROOT_PATH = `/${API_CONTENT_DIR}/`;
 
+/** The changelog landing page, a top-level nav sibling of the overview. */
+export const CHANGELOG_ROOT_PATH = "/api/changelog/";
+
 /**
  * True for the API root entry and every entry beneath it — the pages served by
  * the API route with `ApiLayout`, which every other content route excludes.
@@ -68,4 +71,12 @@ export function resolveOverviewState(
   return activePage
     ? { isOverviewSection: true, activeOverviewPageSlug: activePage.slug }
     : { isOverviewSection: false };
+}
+
+/**
+ * True for a locale-stripped path on any changelog page: the landing page and
+ * every filtered or later page beneath it, but not the `.md` twin.
+ */
+export function isChangelogPath(unprefixedPath: string): boolean {
+  return unprefixedPath.startsWith(CHANGELOG_ROOT_PATH);
 }

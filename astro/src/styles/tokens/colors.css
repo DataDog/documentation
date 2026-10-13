@@ -64,6 +64,17 @@
   --color-gray-lighter: #eee;
   --color-gray-lightest: #f6f6f6;
 
+  /* Colors — Status pills (bg/text pairs for badges that report a state:
+     success, attention, danger, or neutral) */
+  --color-status-success-bg: var(--color-forest-tint);
+  --color-status-success-text: var(--color-forest);
+  --color-status-attention-bg: var(--color-amber-tint);
+  --color-status-attention-text: var(--color-amber);
+  --color-status-danger-bg: var(--color-crimson-tint);
+  --color-status-danger-text: var(--color-crimson);
+  --color-status-neutral-bg: var(--color-gray-lighter);
+  --color-status-neutral-text: var(--color-text-muted);
+
   /* Colors — Semantic */
   --color-blue: #1a73e8;
   --color-blue-tint: rgba(26, 115, 232, 0.1);

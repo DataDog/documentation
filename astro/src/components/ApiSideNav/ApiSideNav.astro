@@ -8,7 +8,7 @@ import SearchBar, {
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import { useTranslations } from "@lib/i18n/i18n";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
-import type { OverviewPage } from "@lib/api/overviewPages";
+import { CHANGELOG_ROOT_PATH, type OverviewPage } from "@lib/api/overviewPages";
 
 interface Props {
   categories: ApiCategoryStub[];
@@ -17,6 +17,7 @@ interface Props {
   overviewPages?: OverviewPage[];
   isOverviewSection?: boolean;
   activeOverviewPageSlug?: string;
+  isChangelogSection?: boolean;
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   overviewPages = [],
   isOverviewSection = false,
   activeOverviewPageSlug,
+  isChangelogSection = false,
 } = Astro.props;
 // `lang` is still needed for the hrefs below; `translate` covers the labels.
 const lang = resolveLocale(Astro.currentLocale);
@@ -34,6 +36,9 @@ const cl = classListFactory(styles);
 
 const overviewLabel = translate("overview");
 const overviewHref = localizedHref(lang, "/api/latest/");
+// TODO: no Hugo i18n key exists for this string yet.
+const changelogLabel = "Changelog";
+const changelogHref = localizedHref(lang, CHANGELOG_ROOT_PATH);
 
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
@@ -88,6 +93,18 @@ const searchLabels: SearchBarLabels = {
         </li>
       )
     }
+    <li>
+      <a
+        href={changelogHref}
+        class:list={[
+          cl("api-side-nav__category"),
+          isChangelogSection && cl("api-side-nav__category--active"),
+        ]}
+        aria-current={isChangelogSection ? "page" : undefined}
+      >
+        {changelogLabel}
+      </a>
+    </li>
     {
       categories.map((cat) => {
         const isActive = cat.slug === activeCategory?.slug;
