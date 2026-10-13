@@ -67,7 +67,7 @@ To ensure PR Gates are able to create PR checks, you must install the integratio
 ### Configure PR checks to be blocking
 
 <div class="alert alert-info">
-For Bitbucket Cloud, checks can only be configured to be blocking if you are using **Bitbucket Cloud Premium**.
+For Bitbucket Cloud, checks can only be configured to be blocking if you are using <strong>Bitbucket Cloud Premium</strong>.
 </div>
 
 To make these checks blocking, they must be set as required in the branch policies of your source code management provider (or the Service Account must be set as a required approver of your MRs in the case of GitLab):
