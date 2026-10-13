@@ -316,7 +316,7 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@]/g});
+const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@/]/g});
 
 
 /**
@@ -359,11 +359,10 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
         }
       }
 
-      if(actionType === "request" && value.readOnly) {
-        // skip
-      } else if(actionType === "curl" && value.readOnly) {
-        // skip
-      } else {
+      const shouldSkip = ((actionType === "request" || actionType === "curl") && value.readOnly)
+        || (actionType === "response" && value.writeOnly);
+
+      if(!shouldSkip) {
 
         let prefixType = '';
         let suffixType = '';
@@ -978,6 +977,10 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
     if (typeof data === 'object') {
       Object.entries(data).forEach(([key, value]) => {
 
+        if(tableType === "response" && value.writeOnly) {
+          return;
+        }
+
         // calculate child data in advance
         // we do this here so that we can add classes to html with this knowledge
         let childData = null;
@@ -1110,7 +1113,7 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, getInitialRequiredData(data), 0, '', skipAnyKeys) : emptyRow}</div>`;
 };
 
 /**

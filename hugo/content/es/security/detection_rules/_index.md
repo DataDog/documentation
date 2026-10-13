@@ -7,17 +7,17 @@ aliases:
 further_reading:
 - link: /security/default_rules/#all
   tag: Documentación
-  text: Explorar las reglas de detección por defecto
+  text: Explore las reglas de detección predeterminadas
 - link: /security/notifications/
   tag: Documentación
-  text: Más información sobre las notificación de seguridad
+  text: Obtenga más información sobre las notificaciones de seguridad
 - link: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
   tag: Blog
-  text: Detectar el uso indebido de funcionalidad con Datadog
+  text: Detecte el abuso de funcionalidad con Datadog
 - link: https://www.datadoghq.com/blog/impossible-travel-detection-rules/
   tag: Blog
-  text: Detectar actividades de inicio de sesión sospechosas con reglas de detección
-    de Impossible Travel
+  text: Detecte actividad de inicio de sesión sospechosa con reglas de detección de
+    viajes imposibles
 products:
 - icon: siem
   name: Cloud SIEM
@@ -33,155 +33,166 @@ products:
   url: /security/workload_protection/
 title: Reglas de detección
 ---
-
 {{< product-availability >}}
 
-Las reglas de detección definen una lógica condicional que se aplica a todas las configuraciones de logs y de la nube. Cuando al menos un caso definido en una regla coincide durante un periodo determinado, se genera una señal de seguridad. Puedes ver estas señales en el [Explorador de señales][1].
+Las reglas de detección definen la lógica condicional que se aplica a todos los registros ingeridos y configuraciones de la nube. Cuando al menos una incidencia definida en una regla coincide durante un período de tiempo determinado, se genera una señal de seguridad. Puede ver estas señales en el [Explorador de señales][1].
 
-## Reglas de detección predefinidas
+## Reglas de detección predeterminadas {#out-of-the-box-detection-rules}
 
-Datadog ofrece [reglas de detección predefinidas][2] para detectar técnicas de ataque y posibles errores de configuración. Cuando se publican nuevas reglas de detección, se importan automáticamente a tu cuenta, a tu biblioteca de App and API Protection y al Agent, según tu configuración.
+Datadog proporciona [reglas de detección predeterminadas][2] para señalar técnicas de atacantes y posibles configuraciones erróneas. Cuando se lanzan nuevas reglas de detección, se importan automáticamente a su cuenta, a su biblioteca de App and API Protection y al Agent, dependiendo de su configuración.
 
-Las reglas predefinidas están disponibles para los siguientes productos de seguridad:
+Las reglas predeterminadas están disponibles para los siguientes productos de seguridad:
 
-- [Cloud SIEM][3] utiliza la detección de logs para analizar logs ingeridos en tiempo real.
+- [Cloud SIEM][3] utiliza la detección de registros para analizar los registros ingeridos en tiempo real.
 - Cloud Security:
-    - [Cloud Security Misconfigurations][4] utiliza reglas de detección de configuración en la nube y configuración de infraestructura para analizar el estado de tu entorno en la nube.
-    - [Cloud Security Identity Risks][6] utiliza reglas de detección para detectar riesgos basados en IAM en tu infraestructura de nube.
-- [Workload Protection][5] utiliza las reglas del Agent y de detección para monitorizar activamente y evaluar la actividad del sistema.
-- [App and API Protection][7] (AAP) aprovecha Datadog [APM][8], el [Datadog Agent][9] y las reglas de detección para detectar amenazas en el entorno de tu aplicación.
+    - [Cloud Security Misconfigurations][4] utiliza reglas de detección de configuración de la nube y de infraestructura para escanear el estado de su entorno en la nube.
+    - [Cloud Security Identity Risks][6] utiliza reglas de detección para detectar riesgos basados en IAM en su infraestructura en la nube.
+- [Workload Protection][5] utiliza el Datadog Agent y reglas de detección para hacer un seguimiento y evaluar activamente la actividad del sistema.
+- [App and API Protection][7] (AAP) aprovecha [APM][8] de Datadog, el [Datadog Agent][9] y reglas de detección para detectar amenazas en su entorno de aplicaciones.
 
-## Mapa de MITRE ATT&CK
+## Mapa de MITRE ATT&CK {#mitre-attck-map}
 
 {{< product-availability names="Cloud SIEM,App and API Protection,Workload Protection" >}}
 
-MITRE ATT&CK es un marco que ayuda a las organizaciones a comprender cómo actúan los ciberatacantes. Mapea lo siguiente:
+MITRE ATT&CK es un marco de trabajo que ayuda a las organizaciones a comprender cómo operan los ciberatacantes. Mapea lo siguiente:
 
-- **Táctica:** el "por qué" de un ataque. Son los objetivos generales, como obtener acceso inicial, ejecutar código malicioso o robar datos.
-- **Técnicas:** el "cómo" de un ataque. Son las acciones específicas que realiza un atacante para lograr una táctica, como utilizar el phishing para entrar en un sistema o explotar una vulnerabilidad en el software.
+- **Tácticas:** El "porqué" de un ataque. Estos son los objetivos de alto nivel, como obtener acceso inicial, ejecutar código malicioso o robar datos.
+- **Técnicas:** El "cómo" de un ataque. Estas son las acciones específicas que realiza un atacante para lograr una táctica, como usar phishing para ingresar a un sistema o explotar una vulnerabilidad en el software.
 
-Mediante el mapeo de tácticas y técnicas, MITRE ATT&CK proporciona a los equipos de seguridad un lenguaje común para comunicar las amenazas y preparar mejor las defensas.
+Al mapear tácticas y técnicas, MITRE ATT&CK proporciona a los equipos de seguridad un lenguaje común para comunicar amenazas y preparar mejor las defensas.
 
-Para utilizar el mapa de ATT&CK de MITRE, haz lo siguiente:
+Para usar el mapa de MITRE ATT&CK, haga lo siguiente:
 
-1. Abrir reglas de detección en [SIEM][16] o [Workload Protection][17].
-2. Selecciona el mapa **MITRE ATT&CK**.
-3. Selecciona uno o varios productos en el filtro <i class="icon-filter"></i>.
-4. Revisa el mapa para ver lo siguiente:
-   - Evaluar la cobertura: determina qué técnicas de ataque están bien cubiertas y cuáles están poco vigiladas.
-   - Priorizar la creación de reglas: centrarse en la creación de reglas de detección para técnicas con baja o nula cobertura.
-   - Racionalización de la gestión de reglas: gestionar y actualizar las reglas de detección, asegurándote de que se ajustan a la información sobre amenazas más reciente.
-El mapa de ATT&CK de MITRE está disponible en SIEM o Workload Protection, pero puedes seleccionar Application and API Protection en el filtro. Application and API Protection se incluye en el mapa de MITRE ATT&CK para una cobertura de seguridad integral.
-## Reglas de detección beta
+1. Abra Reglas de detección en [SIEM][16] o [Workload Protection][17].
+2. Seleccione {{< ui >}}MITRE ATT&CK map{{< /ui >}}.
+3. Seleccione uno o más productos en el filtro <i class="icon-filter"></i>.
+4. Revise el mapa para lo siguiente:
+   - Evaluación de la cobertura: Determine qué técnicas de ataque están bien cubiertas y cuáles tienen poca supervisión.
+   - Priorización de la creación de reglas: Enfóquese en crear reglas de detección para técnicas con poca o nula cobertura.
+   - Optimización de la gestión de reglas: Gestione y actualice las reglas de detección, asegurándose de que se alineen con la inteligencia de amenazas más reciente.
+El mapa de MITRE ATT&CK está disponible en SIEM o Workload Protection, pero puede seleccionar Application and API Protection en el filtro. Application and API Protection se incluye en el mapa de MITRE ATT&CK para una cobertura de seguridad integral.
 
-El equipo de investigación de seguridad de Datadog añade continuamente nuevas reglas de detección de seguridad predefinidas. Aunque el objetivo es ofrecer detecciones de alta calidad con el lanzamiento de integraciones u otras nuevas funciones, a menudo es necesario observar el rendimiento de la detección a escala antes de poner la regla a disposición general. De este modo, el equipo de investigación de seguridad de Datadog dispone del tiempo necesario para perfeccionar o eliminar las posibilidades de detección que no cumplan nuestras normas.
+## Reglas de detección beta {#beta-detection-rules}
 
-## Reglas de detección personalizadas
+El equipo de investigación de seguridad de Datadog agrega continuamente nuevas reglas de detección de seguridad listas para usar. Aunque el objetivo es ofrecer detecciones de alta calidad con el lanzamiento de integraciones u otras funciones nuevas, a menudo es necesario observar el rendimiento de la detección a escala antes de que la regla esté disponible de forma general. Esto le da al equipo de investigación de seguridad de Datadog tiempo para refinar o descontinuar las oportunidades de detección que no cumplen con nuestros estándares.
 
-Puede haber situaciones en las que necesites personalizar una regla según tu entorno o carga de trabajo. Por ejemplo, si utilizas AAP, es posible que quieras personalizar una regla de detección que detecte a los usuarios que realizan acciones confidenciales desde una geolocalización en la que no opera tu empresa.
+## Reglas de detección personalizadas {#custom-detection-rules}
 
-Para [crear reglas personalizadas](#create-detection-rules), puedes clonar las reglas por defecto y editar las copias, o crear tus propias reglas desde cero.
+Puede haber situaciones en las que necesite personalizar una regla según su entorno o carga de trabajo. Por ejemplo, si utiliza AAP, es posible que desee personalizar una regla de detección que detecte usuarios que realizan acciones confidenciales desde una ubicación geográfica donde su empresa no opera.
 
-## Buscar y filtrar reglas de detección
+Para [crear reglas personalizadas](#create-detection-rules), puede clonar las reglas predeterminadas y editar las copias, o crear sus propias reglas desde cero.
 
-Para ver las reglas de detección predefinidas y personalizadas en Datadog, ve a la página [**Parámetros de seguridad**][10]. Las reglas aparecen en páginas separadas para cada producto (Application Security, Cloud Security Management y Cloud SIEM).
+## Buscar y filtrar reglas de detección {#search-and-filter-detection-rules}
 
-Para buscar y filtrar las reglas, utiliza el cuadro de búsqueda y las facetas para consultar por valor. Por ejemplo, para mostrar solo las reglas de un tipo de regla determinado, pasa el ratón por encima del tipo de regla y selecciona `only`. También puedes filtrar por facetas como `source` y `severity` al investigar y clasificar las incidencias entrantes.
+Para visualizar las reglas de detección listas para usar y personalizadas en Datadog, navegue a la página [{{< ui >}}Security Settings{{< /ui >}}][10]. Las reglas se enumeran en páginas separadas para cada producto (App and API Protection, Cloud Security y Cloud SIEM).
 
-{{< img src="security/default_detection_rules.png" alt="La página de configuración muestra reglas de detección de Cloud SIEM predeterminadas y personalizadas" width="100%">}}
+Para buscar y filtrar las reglas, utilice el cuadro de búsqueda y las facetas para realizar consultas por valor. Por ejemplo, para mostrar solo las reglas de un tipo de regla determinado, pase el cursor sobre el tipo de regla y seleccione `only`. También puede filtrar por facetas como `source` y `severity` al investigar y clasificar los problemas entrantes.
 
-## Crear reglas de detección
+{{< img src="security/default_detection_rules.png" alt="La página de configuración muestra las reglas de detección predeterminadas y personalizadas de Cloud SIEM" width="100%">}}
 
-Para crear una regla de detección personalizada, haz clic en el botón **New Rule** (Nueva regla) situado en la esquina superior derecha de la página Detection Rules (Reglas de detección). También puedes [clonar una regla predeterminada o personalizada existente](#clone-a-rule) y utilizarla como plantilla.
+## Crear reglas de detección {#create-detection-rules}
 
-Para obtener instrucciones detalladas, consulta los siguientes artículos:
+Para crear una regla de detección personalizada, haga clic en el botón {{< ui >}}New Rule{{< /ui >}} en la esquina superior derecha de la página Reglas de detección. También puede [clonar una regla predeterminada o personalizada existente](#clone-a-rule) y usarla como plantilla.
+
+Para obtener instrucciones detalladas, consulte los siguientes artículos:
 
 - [Cloud SIEM][11]
 - [AAP][12]
 - [Cloud Security Misconfigurations][13]
 - [Workload Protection][14]
 
-## Gestionar las reglas de detección
+## Administrar reglas de detección {#manage-detection-rules}
 
-### Activar o desactivar reglas
+Puede administrar las reglas de detección desde las páginas de [SIEM][16] o [Workload Protection][17] en Datadog. Estas instrucciones describen cómo realizar estas acciones desde esas páginas, pero estas opciones también están disponibles cuando hace clic en una regla de detección para abrirla en un panel lateral.
 
-Para activar o desactivar una regla, activa el conmutador situado a la derecha del nombre de la regla.
+### Habilitar o deshabilitar reglas {#enable-or-disable-rules}
 
-También puedes activar o desactivar reglas en bloque:
+Para habilitar o deshabilitar una regla, cambie el interruptor a la derecha del nombre de la regla.
 
-1. Haz clic en **Select Rule** (Seleccionar regla).
-1. Selecciona las reglas que deseas activar o desactivar.
-1. Haz clic en el menú desplegable **Edit Rules** (Editar reglas).
-1. Selecciona **Enable Rules** o **Disable Rules** (Activar reglas o Desactivar reglas).
+También puede habilitar o deshabilitar reglas de forma masiva:
 
-### Editar una regla
+1. Haga clic en {{< ui >}}Select Rules{{< /ui >}}.
+1. Seleccione las reglas que desea habilitar o deshabilitar.
+1. Haga clic en el menú desplegable {{< ui >}}Bulk Actions{{< /ui >}}.
+1. Seleccione {{< ui >}}Enable Rules{{< /ui >}} o {{< ui >}}Disable Rules{{< /ui >}}.
 
-Para las reglas de detección predefinidas, solo puedes añadir o editar una consulta de supresión. Para actualizar la consulta, ajustar los desencadenantes o gestionar notificaciones, puedes [clonar la regla predeterminada](#clone-a-rule) y utilizarla como plantilla para una regla personalizada. A continuación, puedes [desactivar la regla predeterminada](#enable-or-disable-rules).
+### Editar una regla {#edit-a-rule}
 
-- Para editar una regla por defecto, haz clic en el menú vertical de tres puntos de la regla y selecciona **Edit default rule** (Editar regla por defecto).
-- Para editar una regla personalizada, haz clic en el menú vertical de tres puntos de la regla y selecciona **Edit rule** (Editar regla).
+Puede editar reglas de detección listas para usar y personalizadas. Si desea conservar la regla original en lugar de editarla directamente, puede [clonar la regla](#clone-a-rule), realizar cambios en la regla clonada y [deshabilitar la regla original](#enable-or-disable-rules).
 
-### Clonar una regla
+Para editar una regla, haga clic en el menú de tres puntos verticales de la regla y seleccione {{< ui >}}Edit default rule{{< /ui >}} o {{< ui >}}Edit rule{{< /ui >}}, según el tipo de regla.
 
-Para clonar una regla, haz clic en el menú vertical de tres puntos de la regla y selecciona **Clone rule** (Clonar regla).
+### Clonar una regla {#clone-a-rule}
 
-Clonar una regla es útil si deseas duplicar una regla existente y modificar ligeramente la configuración para cubrir otras áreas de detección. Por ejemplo, podrías duplicar una regla de detección de log y modificarla de **Umbral** a **Anomalía** para añadir una nueva dimensión a la detección de amenazas utilizando las mismas consultas y desencadenantes.
+Para clonar una regla, haga clic en el menú de tres puntos verticales de la regla y seleccione {{< ui >}}Clone rule{{< /ui >}}.
 
-### Eliminar una regla
+Clonar una regla es útil si desea duplicar una regla existente y modificar ligeramente la configuración para cubrir otras áreas de detección. Por ejemplo, podría duplicar una regla de detección de registro y modificarla de {{< ui >}}Threshold{{< /ui >}} a {{< ui >}}Anomaly{{< /ui >}} para agregar una nueva dimensión a la detección de amenazas utilizando las mismas consultas y activadores.
 
-Para eliminar una regla personalizada, haz clic en el menú vertical de tres puntos de la regla y selecciona **Delete rule** (Eliminar regla).
+### Eliminar una regla {#delete-a-rule}
 
-**Nota**: Solo puedes eliminar reglas personalizadas. Para eliminar una regla predeterminada, debes [desactivarla](#enable-or-disable-rules).
+Para eliminar una regla, haga clic en el menú de tres puntos verticales de la regla y seleccione {{< ui >}}Delete rule{{< /ui >}}.
 
-### Consultar el historial de versiones de una regla
+También puede eliminar reglas de forma masiva:
 
-{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="Historial de versiones de un compromiso de token de acceso GitHub OAuth" style="width:80%;" >}}
+1. Haga clic en {{< ui >}}Select Rules{{< /ui >}}.
+1. Seleccione las reglas que desea eliminar.
+1. Haga clic en el menú desplegable {{< ui >}}Bulk Actions{{< /ui >}}.
+1. Seleccione {{< ui >}}Delete Rules{{< /ui >}}.
 
-Utiliza el historial de versiones de reglas para:
-- Consulta las versiones anteriores de una regla de detección y entiende los cambios a lo largo del tiempo.
-- Descubre quién realizó los cambios para mejorar la colaboración.
-- Compara versiones con diferencias para analizar las modificaciones y el impacto de los cambios.
+### Consulte el historial de versiones de una regla {#see-the-version-history-for-a-rule}
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="El historial de versiones de un token de acceso OAuth de GitHub comprometido, mostrando" style="width:80%;" >}}
+
+Utilice el Historial de versiones de reglas para:
+- Vea versiones anteriores de una regla de detección y comprenda los cambios a lo largo del tiempo.
+- Vea quién realizó los cambios para mejorar la colaboración.
+- Compare las versiones con diferencias para analizar las modificaciones y el impacto de los cambios.
 
 Para ver el historial de versiones de una regla:
-1. Ve a la página [Parámetros de seguridad][15]. En el panel de navegación izquierdo:
-    - Para AAP: Haz clic en **App and API Protection** y luego en **Detection Rules** (Reglas de detección).
-    - Para Cloud Security: Haz clic en **Cloud Security** y luego en **Threat Detection Rules** (Reglas de detección de amenazas).
-    - Para Cloud SIEM: Haz clic en **Cloud SIEM** y luego en **Detection Rules** (Reglas de detección).
-1. Haz clic en la regla que te interese.
-1. En el editor de reglas, haz clic en **Version History** (Historial de versiones) para ver los cambios anteriores.
-1. Haz clic en una versión concreta para ver los cambios realizados.
-1. Haz clic en **Open Version Comparison** (Abrir comparación de versiones) para ver los cambios entre versiones.
-1. Selecciona las dos versiones que quieres comparar.
-    - Los datos resaltados en rojo indican datos modificados o eliminados.
-    - Los datos resaltados en verde indican los datos añadidos.
-1. Haz clic en **Unified** (Unificado) si quieres ver la comparación en el mismo panel.
+1. Navegue a la página [Security Settings][15]. En el panel de navegación izquierdo:
+    - Para AAP: Haga clic en {{< ui >}}App and API Protection{{< /ui >}} y luego haga clic en {{< ui >}}Detection Rules{{< /ui >}}.
+    - Para Cloud Security: Haga clic en {{< ui >}}Cloud Security{{< /ui >}} y luego haga clic en {{< ui >}}Threat Detection Rules{{< /ui >}}.
+    - Para Cloud SIEM: Haga clic en {{< ui >}}Cloud SIEM{{< /ui >}} y luego haga clic en {{< ui >}}Detection Rules{{< /ui >}}.
+1. Haga clic en la regla que le interesa y, a continuación, haga clic en {{< ui >}}Edit rule{{< /ui >}}.
+1. En el editor de reglas, haga clic en {{< ui >}}Version History{{< /ui >}} para ver los cambios anteriores:
+   - Haga clic en una versión específica para ver qué cambios se realizaron.
+   - Haga clic en {{< ui >}}Open Version Comparison{{< /ui >}} para ver qué cambió entre las versiones y, luego, seleccione las dos versiones que desea comparar. Haga clic en {{< ui >}}Unified{{< /ui >}} si desea ver la comparación en el mismo panel.
+     - Los datos resaltados en rojo indican datos que se modificaron o eliminaron.
+     - Los datos resaltados en verde indican datos que se agregaron.
 
-### Restringir permisos de edición
+### Restringir permisos de edición {#restrict-edit-permissions}
 
 {{% security-products/detection-rules-granular-access %}}
 
-### Ver las señales generadas
+### Ver señales generadas {#view-generated-signals}
 
-Para ver las señales de seguridad de una regla en el [Explorador de señales][1], haz clic en el menú vertical de tres puntos y selecciona **View generated signals** (Ver señales generadas). Esto es útil cuando se correlacionan señales a través de múltiples fuentes por regla, o cuando se completa una auditoría de reglas.
+Para visualizar las señales de seguridad de una regla en el [Signals Explorer][1], haga clic en el menú de tres puntos verticales y seleccione {{< ui >}}View generated signals{{< /ui >}}. Esto es útil al correlacionar señales entre múltiples fuentes por regla, o al completar una auditoría de reglas.
 
-### Exportar una regla como JSON
+### Exportar una regla {#export-a-rule}
 
-Para exportar una copia de una regla como JSON, haz clic en el menú vertical de tres puntos de la regla y selecciona **Export as JSON** (Exportar como JSON).
+Para exportar una copia de una regla, haga clic en la regla para abrirla en el panel lateral. Haga clic en {{< ui >}}Export{{< /ui >}}, luego seleccione {{< ui >}}Export rule to JSON{{< /ui >}} o {{< ui >}}Export rule to Terraform{{< /ui >}}.
 
-## Obsolescencia de reglas
+También puede exportar reglas de forma masiva:
 
-Se realizan auditorías periódicas de todas las reglas de detección para mantener una calidad de señal de alta fidelidad. Las reglas obsoletas se sustituyen por una regla mejorada.
+1. Haga clic en {{< ui >}}Select Rules{{< /ui >}}.
+1. Seleccione las reglas que desea exportar.
+1. Haga clic en el menú desplegable {{< ui >}}Bulk Actions{{< /ui >}}.
+1. Seleccione {{< ui >}}Export to JSON{{< /ui >}} o {{< ui >}}Export to Terraform{{< /ui >}}.
 
-El proceso de obsolescencia de las reglas es el siguiente:
+## Depreciación de reglas {#rule-deprecation}
 
-1. La regla incluye una advertencia con la fecha de obsolescencia. En la interfaz de usuario, la advertencia se muestra en la:
-    - Sección **Rule Details > Playbook** (Detalles de la regla > Guía) del panel lateral de señales
-    - Panel lateral de Misconfigurations (sólo Cloud Security Misconfigurations)
+Se realizan auditorías periódicas de todas las reglas de detección para mantener una alta fidelidad en la calidad de las señales. Las reglas depreciadas se reemplazan por una regla mejorada.
+
+El proceso de depreciación de reglas es el siguiente:
+
+- Hay una advertencia con la fecha de depreciación en la regla. En la interfaz de usuario, la advertencia se muestra en:
+    - La sección {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} del panel lateral de señales
+    - Panel lateral de configuraciones incorrectas (solo configuraciones incorrectas de Cloud Security)
     - [Editor de reglas][10] para esa regla específica
-2. Una vez que la regla se vuelve obsoleta, transcurre un periodo de 15 meses antes de que se elimine la regla. Esto se debe al periodo de conservación de señales de 15 meses. Durante este tiempo, puedes volver a habilitar la regla [clonando la regla][2](#clone-a-rule) en la interfaz de usuario.
-3. Una vez eliminada la regla, ya no podrás clonarla ni volver a activarla.
+- Después de que la regla se marca como obsoleta, hay un periodo de 15 meses antes de que la regla se elimine. Esto se debe al periodo de retención de señales de 15 meses. Durante este tiempo, puede volver a habilitar la regla [clonando la regla](#clone-a-rule) en la interfaz de usuario.
+- Después de que la regla se elimina, ya no puede clonarla ni volver a habilitarla.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -198,7 +209,7 @@ El proceso de obsolescencia de las reglas es el siguiente:
 [11]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [12]: /es/security/application_security/policies/custom_rules/
 [13]: /es/security/cloud_security_management/misconfigurations/custom_rules
-[14]: /es/security/workload_protection/workload_security_rules?tab=host#create-custom-rules
+[14]: /es/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-a-custom-detection-rule
 [15]: https://app.datadoghq.com/security/configuration/
-[16]: https://app.datadoghq.com/security/rules
+[16]: https://app.datadoghq.com/security/siem/rules
 [17]: https://app.datadoghq.com/security/workload-protection/detection-rules

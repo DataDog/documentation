@@ -63,7 +63,7 @@ The function action allows for variable assignments and complex data transformat
 
 To add a function action:
 - In a new workflow, click {{< ui >}}Add step{{< /ui >}} and search for `function`. Select the {{< ui >}}Function{{< /ui >}} action to add it to your workflow.
-- In an existing workflow, click {{< ui >}}+{{< /ui >}} and search for `function`. Select the {{< ui >}}Function{{< /ui >}} action to add it to your workflow.
+- In an existing workflow, click {{< ui >}}\+{{< /ui >}} and search for `function`. Select the {{< ui >}}Function{{< /ui >}} action to add it to your workflow.
 
 #### Write function steps with AI
 
@@ -81,7 +81,7 @@ In most cases, use an inline expression instead of a dedicated expression step. 
 
 To add an expression action:
 - In a new workflow, click {{< ui >}}Add step{{< /ui >}} and search for `expression`. Select the {{< ui >}}Expression{{< /ui >}} action to add it to your workflow.
-- In an existing workflow, click {{< ui >}}+{{< /ui >}} and search for `expression`. Select the {{< ui >}}Expression{{< /ui >}} action to add it to your workflow.
+- In an existing workflow, click {{< ui >}}\+{{< /ui >}} and search for `expression`. Select the {{< ui >}}Expression{{< /ui >}} action to add it to your workflow.
 
 In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Variables and parameters][2].
 

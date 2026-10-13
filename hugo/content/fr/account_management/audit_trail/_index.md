@@ -223,11 +223,6 @@ Datadog Audit Trail comprend un [dashboard prêt à l'emploi][13] qui représen
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Dashboard du journal d'audit" style="width:100%;">}}
 
-## Contrôler les commandes du terminal avec CoTerm
-
-[CoTerm][14] permet d'enregistrer les sessions de terminal pour les analyser dans Datadog. Utilisez CoTerm pour auditer les modifications sensibles du système effectuées via les terminaux. Vous pouvez ensuite consulter ces commandes et leur sortie sous forme de logs et d'événements dans Datadog.
-
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -245,6 +240,5 @@ Datadog Audit Trail comprend un [dashboard prêt à l'emploi][13] qui représen
 [11]: /fr/dashboards/widgets/list/
 [12]: /fr/dashboards/querying/#define-the-metric/
 [13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
-[14]: /fr/coterm
 [15]: /fr/security/cloud_siem/
 [16]: /fr/getting_started/cloud_siem/

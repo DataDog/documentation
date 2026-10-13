@@ -43,10 +43,10 @@ In the example below, a for loop iterates over a list of incidents and sends a S
 {{< img src="actions/workflows/actions/flow_control/iteration2.png" alt="A workflow with a for loop. The loop iterates over a list of incidents and sends a message to a slack channel if the incident is more than a week old." style="width:100%;" >}}
 
 To add a for loop to your workflow:
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
 1. Search for and select the {{< ui >}}For loop{{< /ui >}} step.
 1. Click the loop step and enter an {{< ui >}}Input list{{< /ui >}} for the step to iterate over. You can enter a custom list or use a workflow variable.
-1. Inside the loop frame, click the ({{< ui >}}+{{< /ui >}}) icon to add a step to the loop.
+1. Inside the loop frame, click the ({{< ui >}}\+{{< /ui >}}) icon to add a step to the loop.
 1. Configure the looped action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
 1. Add and configure any additional steps you need to loop. You can use an {{< ui >}}if statement{{< /ui >}} and a {{< ui >}}break{{< /ui >}} to exit your loop early.
 1. {{< ui >}}Save{{< /ui >}} and {{< ui >}}Publish{{< /ui >}} the workflow.
@@ -62,10 +62,10 @@ The following example uses a while loop to paginate the AWS S3 List Buckets API 
 {{< img src="actions/workflows/actions/flow_control/iteration3.png" alt="A workflow with a while loop. The workflow uses a while loop to paginate the AWS S3 List Buckets API for an App." style="width:100%;" >}}
 
 To add a while loop to your workflow:
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
 1. Search for and select the {{< ui >}}While loop{{< /ui >}} step.
 1. Click the loop step and define the condition that the While loop will evaluate before each iteration. The loop continues if the condition is true, and stops when it evaluates to false.
-1. Inside the loop frame, click the plus ({{< ui >}}+{{< /ui >}}) icon to add a step to the loop.
+1. Inside the loop frame, click the plus ({{< ui >}}\+{{< /ui >}}) icon to add a step to the loop.
 1. Configure the looped action. To access the index of the current value, use `{{Current.Index}}`.
 1. Add and configure any additional steps you need to loop. You can use an {{< ui >}}if statement{{< /ui >}} and a {{< ui >}}break{{< /ui >}} action to exit your loop early.
 1. {{< ui >}}Save{{< /ui >}} and {{< ui >}}Publish{{< /ui >}} the workflow.

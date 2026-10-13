@@ -86,10 +86,6 @@ There are three permanent retention filters:
 
 ## Exclusion filters
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-exclusion-filters/" btn_hidden="false" header="Join the Preview!">}}
-Exclusion filters are in Preview.
-{{< /callout >}}
-
 {{< img src="real_user_monitoring/rum_without_limits/exclusion-filters.png" alt="The Exclusion Filters group expanded, showing the predefined Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
 
 Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.
@@ -145,7 +141,7 @@ You can also:
 
 To create a retention filter or an exclusion filter:
 
-1. In the section for the type of filter you want to create, click the {{< ui >}}+ Add Filter{{< /ui >}} button.
+1. In the section for the type of filter you want to create, click the {{< ui >}}\+ Add Filter{{< /ui >}} button.
 1. Give the filter a descriptive name.
 1. Select an event type from the dropdown and enter a query. Any query that can be written in the [RUM Explorer][4] works. Exclusion filters can also target {{< ui >}}All events{{< /ui >}}.
 1. For a custom retention filter, optionally set a retention rate against sessions that match the query. You can click {{< ui >}}Generate Estimate{{< /ui >}} to help guide you in setting this rate. Exclusion filters have no retention rate.

@@ -1,97 +1,116 @@
 ---
+aliases:
+- /fr/serverless/aws
 further_reading:
 - link: /serverless/configuration/
   tag: Documentation
-  text: Configurer la surveillance sans serveur
+  text: Configurer la surveillance serverless
 - link: /integrations/amazon_lambda/
   tag: Documentation
   text: Intégration AWS Lambda
+- link: /serverless/guide/disable_serverless
+  tag: Documentation
+  text: Désactiver Serverless Monitoring
+- link: /opentelemetry/setup/otlp_ingest/serverless/?tab=aws#lambda
+  tag: Documentation
+  text: Envoyer des traces AWS Lambda à Datadog avec OTLP
 - link: https://www.datadoghq.com/blog/monitoring-lambda-containers/
   tag: Blog
-  text: Surveiller des fonctions Lambda Datadog AWS déployées à l'aide d'images de
-    conteneur
+  text: Surveiller des fonctions AWS Lambda déployées à l'aide d'images de conteneur
 - link: https://www.datadoghq.com/blog/manage-serverless-logs-datadog/
   tag: Blog
   text: Meilleures pratiques pour la collecte et la gestion des logs depuis un environnement
-    sans serveur
+    serverless
 - link: https://www.datadoghq.com/blog/aws-serverless-application-design/
   tag: Blog
-  text: Concevoir des applications sans serveur AWS prêtes pour la production
+  text: Concevoir des applications serverless AWS prêtes pour la production
 - link: https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/
   tag: Blog
-  text: Conseils pour créer des applications sans serveur tout en suivant le framework
+  text: Conseils pour créer des applications serverless tout en suivant le framework
     AWS Well-Architected
 - link: https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/
   tag: Blog
   text: Surveiller l'utilisation du stockage éphémère de vos fonctions AWS Lambda
 - link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
   tag: Blog
-  text: Comprendre les performances des fonctions sans serveur avec le tracing des
-    démarrages à froid
-title: Surveillance sans serveur pour AWS Lambda
+  text: Comprendre les performances des fonctions serverless avec le tracing des démarrages
+    à froid
+- link: https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/
+  tag: Blog
+  text: Identifier les fonctions Lambda obsolètes avec Datadog
+- link: https://www.datadoghq.com/blog/monitoring-lwa-with-datadog/
+  tag: Blog
+  text: Surveiller les applications Web hébergées sur Lambda avec l'intégration Lambda
+    Web Adapter
+- link: https://www.datadoghq.com/blog/lambda-managed-instances
+  tag: Blog
+  text: Surveiller les instances gérées AWS Lambda avec Datadog
+- link: https://learn.datadoghq.com/courses/visibility-aws-lambda
+  tag: Centre d'apprentissage
+  text: Configurer AWS Lambda pour Serverless Monitoring avec Datadog
+title: Serverless Monitoring pour AWS Lambda
 ---
+Datadog Serverless Monitoring pour AWS Lambda vous offre une visibilité optimale sur vos fonctions Lambda.
 
-La surveillance de serveur Datadog pour AWS Lambda vous offre une visibilité optimale sur vos fonctions Lambda.
+Pour commencer, suivez les [instructions d'installation][1] afin de collecter des métriques, des traces et des logs depuis vos applications serverless.
 
-Pour commencer, suivez les [instructions d'installation][1] pour recueillir des métriques, traces et logs à partir de vos applications sans serveur.
+## Fonctionnement {#how-it-works}
 
-## Fonctionnement
+{{< img src="serverless/serverless_custom_metrics.png" alt="Collecte de métriques améliorées depuis AWS Lambda" >}}
 
-{{< img src="serverless/serverless_custom_metrics.png" alt="Collecte de métriques optimisées depuis AWS Lambda" >}}
+Datadog Serverless Monitoring tire profit d'une bibliothèque Lambda Datadog spécifique au runtime, ainsi que de l'extension Lambda Datadog, pour envoyer des données de télémétrie à partir de vos fonctions Lambda.
 
-La surveillance sans serveur Datadog tire profit d'une bibliothèque Lambda Datadog spécifique au runtime, ainsi que de l'extension Lambda Datadog, pour envoyer des données de télémétrie à partir de vos fonctions Lambda.
+La Datadog Lambda Extension collecte les logs de fonction à l'aide de l'API de télémétrie Lambda, éliminant ainsi le besoin de CloudWatch. Elle génère également des métriques améliorées. Elle unifie ces signaux de télémétrie avec les traces APM, les spans personnalisés et les métriques personnalisées de la bibliothèque Datadog Lambda.
 
-L'extension Lambda Datadog recueille des logs via CloudWatch, ainsi que des traces, des métriques optimisées et des métriques custom à partir de la bibliothèque Lambda Datadog.
+## Utilisation {#usage}
 
-## Utilisation
-
-Consultez les ressources suivantes pour découvrir comment installer et configurer la surveillance sans serveur pour AWS Lambda, et notamment comment utiliser les métriques, traces et logs pour bénéficier d'une visibilité complète.
+Consultez les ressources suivantes pour découvrir comment installer et configurer Serverless Monitoring pour AWS Lambda, et notamment comment utiliser les métriques, traces et logs pour bénéficier d'une visibilité complète.
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/serverless/installation" >}}<u>Installation</u> : installez la surveillance sans serveur pour AWS Lambda.{{< /nextlink >}}
-    {{< nextlink href="/serverless/enhanced_lambda_metrics" >}}<u>Métriques Lambda</u> : familiarisez-vous avec les métriques optimisées et découvrez comment envoyer des métriques custom.{{< /nextlink >}}
-    {{< nextlink href="/serverless/distributed_tracing" >}}<u>Tracing distribué</u> : tirez profit d'APM et du tracing distribué pour bénéficier d'une vue d'ensemble détaillée et contextualisée des performances de votre application. {{< /nextlink >}}
+    {{< nextlink href="/serverless/installation" >}}<u>Installation</u> : Installez Serverless Monitoring for AWS Lambda.{{< /nextlink >}}
+    {{< nextlink href="/serverless/enhanced_lambda_metrics" >}}<u>Métriques Lambda</u> : Apprenez-en davantage sur les métriques améliorées et découvrez comment soumettre des métriques personnalisées.{{< /nextlink >}}
+    {{< nextlink href="/serverless/distributed_tracing" >}}<u>Distributed Tracing</u> : Utilisez APM et Distributed Tracing pour obtenir une vue riche en contexte des performances de votre application.{{< /nextlink >}}
     {{< nextlink href="/serverless/aws_lambda/logs" >}}
-    <u>Collecte de logs</u> : découvrez le fonctionnement de la collecte de logs, apprenez à filtrer des logs et associez vos logs à vos traces.{{< /nextlink >}}
+    <u>Log Collection</u>: Read more about log collection, how to filter logs, and how to connect logs and traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Surveiller toute votre pile sans serveur avec la vue Serverless
+### Surveillez l'intégralité de votre stack serverless dans la vue Serverless {#monitor-your-entire-serverless-stack-in-the-serverless-view}
 
 Grâce à la vue Serverless, vous pouvez mettre en corrélation des métriques générales provenant de ressources AWS avec les métriques de fonctions Lambda, afin d'identifier rapidement vos problèmes et de commencer au plus tôt votre enquête.
 
-Par défaut, la vue Serverless regroupe vos ressources sans serveur par service, afin que vous puissiez visualiser facilement les performances de chaque aspect de votre application. Chaque service répertorie les fonctions associées, ainsi que les ressources qui ont appelé ces fonctions (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis).
+Par défaut, la vue Serverless regroupe vos ressources serverless par service pour vous aider à visualiser les performances de chaque partie de votre application. Pour chaque service, vous pouvez voir les fonctions qui lui appartiennent, ainsi que les ressources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) qui les ont invoquées.
 
-{{< img src="serverless/serverless-view-hero.jpeg" alt="Surveillance sans serveur Datadog" style="width:100%;" >}}
+{{< img src="serverless/serverless-view-hero.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### Corriger plus rapidement les échecs des fonctions AWS Lambda en surveillant les charges utiles d'invocations
+### Résolvez plus rapidement les échecs des fonctions AWS Lambda en surveillant les charges utiles d'invocation {#resolve-aws-lambda-function-failures-faster-by-monitoring-invocation-payloads}
 
-Datadog recueille automatiquement les requêtes et réponses de tous vos appels de fonction. Vous disposez ainsi de précieux insights qui simplifient la résolution de problèmes. Par exemple, si vous découvrez qu'une de vos fonctions Lambda génère des échecs, vous pouvez analyser la charge utile des requêtes pour vérifier s'il manque des paramètres, si des adresses de ressource ont mal été saisies ou si ces échecs sont causés par d'autres problèmes de configuration.
+Datadog collecte automatiquement les requêtes et les réponses de fonction pour toutes vos invocations de fonction, fournissant des informations clés qui peuvent aider à résoudre les problèmes. Par exemple, si vous êtes informé qu'une de vos fonctions Lambda rencontre des échecs, vous pouvez analyser les charges utiles de requête pertinentes pour vérifier l'absence de paramètres, les adresses de ressources mal saisies ou d'autres erreurs de configuration pouvant être à l'origine des échecs.
 
 Grâce à l'identification de ces erreurs, vous pouvez reproduire plus facilement les problèmes dans votre environnement de développement, puis exécuter des tests pour vous assurer que vos correctifs fonctionnent.
 
-{{< img src="serverless/lambda_payload_hero.jpeg" alt="Surveillance sans serveur Datadog" style="width:100%;" >}}
+{{< img src="serverless/lambda_payload_hero.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### Envoyer des alertes liées à votre environnement de fonctions Lambda grâce aux métriques en temps réel
+### Métriques en temps réel pour alerter sur les problèmes dans votre environnement de fonctions Lambda {#real-time-metrics-for-alerting-on-issues-across-your-lambda-function-environment}
 
-Les métriques Lambda optimisées de Datadog, qui sont identifiées dans Datadog par le préfixe `aws.lambda.enhanced`, sont fournies quasiment en temps réel avec une granularité d'une seconde. Elles vous permettent de générer des alertes ou d'appliquer des SLO basés sur les démarrages à froid, les coûts AWS estimés, les expirations, les erreurs liées à une mémoire insuffisante et l'utilisation de la mémoire pour l'ensemble de vos fonctions Lambda. Vous pouvez ainsi visualiser en temps réel les problèmes de performance de vos environnements sans serveur et les diagnostiquer au plus vite.
+Les métriques Lambda améliorées de Datadog, qui apparaissent dans Datadog avec le préfixe `aws.lambda.enhanced`, sont disponibles avec une granularité à la seconde et en temps quasi réel. Vous pouvez utiliser les métriques Lambda améliorées pour des alertes ou des SLO sur les démarrages à froid, les coûts AWS estimés, les délais d'attente, les erreurs de mémoire insuffisante et l'utilisation de la mémoire sur l'ensemble de vos fonctions Lambda. Cela vous permet de visualiser les problèmes de performance dans vos environnements serverless dès qu'ils surviennent et de les résoudre sans délai.
 
-{{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Surveillance sans serveur Datadog" style="width:100%;" >}}
+{{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### Surveiller les changements de configuration sans serveur grâce au suivi des déploiements
+### Surveillez les changements de configuration serverless avec le suivi des déploiements {#monitor-serverless-configuration-changes-with-deployment-tracking}
 
-Vous pouvez facilement mettre en corrélation les métriques, traces et logs de vos fonctions avec le code sans serveur, les configurations et les changements de déploiement. Cela vous permet d'obtenir en temps réel des informations pertinentes sur l'incidence de ces changements sur l'intégrité et les performances de vos applications.
+Vous pouvez facilement mettre en corrélation les métriques, traces et logs de vos fonctions avec le code serverless, les configurations et les changements de déploiement. Cela vous permet d'obtenir en temps réel des informations pertinentes sur l'incidence de ces changements sur l'intégrité et les performances de vos applications.
 
-{{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Surveillance sans serveur Datadog" style="width:100%;" >}}
+{{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-## Fonctionnalités supplémentaires
+## Fonctionnalités supplémentaires {#additional-capabilities}
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Profileur en continu</u> : activez le profileur continu Datadog pour identifier la ligne de code précise de votre fonction Lambda qui génère des goulots d'étranglement.{{< /nextlink >}}
-    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Sécurisation de vos fonctions</u> : tirez profit de la solution Application Security Management (ASM) pour gérer les menaces envers vos fonctions.{{< /nextlink >}}
-    {{< nextlink href="/serverless/deployment_tracking" >}}<u>Suivi des déploiements</u> : surveillez vos déploiements afin de détecter lorsqu'une nouvelle version du code ou un changement de configuration entraîne une régression.{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u> : activez le Continuous Profiler de Datadog pour trouver la ligne de code exacte de votre fonction Lambda à l'origine des goulots d'étranglement.{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Secure Functions</u> : utilisez App and API Protection (AAP) pour gérer les menaces pesant sur vos fonctions.{{< /nextlink >}}
+    {{< nextlink href="/serverless/deployment_tracking" >}}<u>Deployment Tracking</u> : suivez les déploiements pour voir quand une nouvelle version de code ou un changement de configuration provoque une régression.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

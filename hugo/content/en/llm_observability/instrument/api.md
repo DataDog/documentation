@@ -206,23 +206,21 @@ If the request is successful, the API responds with a 202 network code and an em
 
 #### AudioPart
 
-An audio segment on a message. Provide either `content` or `attachment_key`.
+An audio segment on a message. For supported formats and size limits, see [Multimodal Support][6].
 
 | Field | Type | Description |
 |-------|------|-------------|
-| mime_type [*required*] | string | The media type of the audio, such as `audio/wav` or `audio/pcm`. |
-| content | string | The base64-encoded audio, carried inline with the message. |
-| attachment_key | string | A reference to audio stored outside the span payload, instead of inline `content`. |
+| mime_type [*required*] | string | The media type of the audio, such as `audio/wav` or `audio/mpeg`. |
+| content [*required*] | string | The base64-encoded audio, carried inline with the message. |
 
 #### ImagePart
 
-An image on a message. Provide either `content` or `attachment_key`.
+An image on a message. For supported formats and size limits, see [Multimodal Support][6].
 
 | Field | Type | Description |
 |-------|------|-------------|
 | mime_type [*required*] | string | The media type of the image, such as `image/png` or `image/jpeg`. |
-| content | string | The base64-encoded image, carried inline with the message. |
-| attachment_key | string | A reference to an image stored outside the span payload, instead of inline `content`. |
+| content [*required*] | string | The base64-encoded image, carried inline with the message. |
 
 #### ToolDefinition
 
@@ -374,7 +372,7 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 ## Evaluations API
 
-<div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+<div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 Use this endpoint to send evaluations and end-user feedback to Datadog. Evaluations can be associated with spans, traces, or sessions. End-user feedback can be associated with spans, traces, sessions, or a customer-defined feedback join key.
 
@@ -702,5 +700,6 @@ For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`,
 [1]: /llm_observability/setup/sdk/
 [2]: /llm_observability/quickstart/terms/
 [3]: /getting_started/tagging/
-[4]: /llm_observability/configure/evaluations/end_user_feedback
+[4]: /llm_observability/investigate/evaluations/end_user_feedback
 [5]: /llm_observability/instrument/sdk/?tab=python#enriching-spans
+[6]: /llm_observability/instrument/multimodal/

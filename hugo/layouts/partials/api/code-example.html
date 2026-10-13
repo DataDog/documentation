@@ -5,6 +5,28 @@
 {{ $endpoint := .endpoint }}
 {{ $version := .version }}
 {{ $securitySchemes := .securitySchemes }}
+{{ $globalSecurity := .globalSecurity }}
+{{- $effectiveSecurity := $globalSecurity | default (slice) -}}
+{{- if isset $endpoint.action "security" -}}
+  {{- $effectiveSecurity = index $endpoint.action "security" -}}
+{{- end -}}
+{{- $useBearerToken := false -}}
+{{- range $requirement := $effectiveSecurity -}}
+  {{- if and (isset $requirement "AuthZ") (eq (len $requirement) 1) -}}
+    {{- $useBearerToken = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $authRequirement := dict -}}
+{{- if gt (len $effectiveSecurity) 0 -}}
+  {{- $authRequirement = index $effectiveSecurity 0 -}}
+{{- end -}}
+{{- range $requirement := $effectiveSecurity -}}
+  {{- if not (isset $requirement "AuthZ") -}}
+    {{- $authRequirement = $requirement -}}
+    {{- break -}}
+  {{- end -}}
+{{- end -}}
+{{- $authData := dict "requirement" $authRequirement "useBearerToken" $useBearerToken -}}
 {{- $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") -}}
 
 <h3 class="mb-2">{{ i18n "code_example" }}</h3>
@@ -42,6 +64,10 @@
   {{ $lang := .lang }}
   {{ $endpoint := .endpoint }}
   {{ $securitySchemes := .securitySchemes }}
+  {{ $authData := .authData }}
+  {{ if not (in (slice "go" "python" "java" "ruby" "typescript") $lang.name) }}
+    {{ $authData = dict "requirement" $authData.requirement "useBearerToken" false }}
+  {{ end }}
   <h4>Instructions</h4>
   <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
   <pre class="chroma">
@@ -53,20 +79,7 @@
           {{- end -}}
       {{- end -}}"</span>
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset $endpoint.action "security" -}}
-  {{- /* Find authentication per operationId */ -}}
-  {{- range $endpoint.action.security -}}
-      {{- range $key, $val := . -}}
-          {{ $authSchema := (index $securitySchemes $key) }}
-          {{- if eq $authSchema.in "header" -}}
-            &nbsp;<span class="n">{{- index $authSchema "x-env-name" -}}</span><span class="o">=</span><span class="s1">"&lt;{{- index $authSchema "x-env-name" -}}&gt;"</span>
-          {{- end -}}
-      {{- end -}}
-  {{- end -}}
-{{- else -}}
-{{- /* Use global authentication */ -}}
-  &nbsp;<span class="n">DD_API_KEY</span><span class="o">=</span><span class="s1">"&lt;API-KEY&gt;"</span>&nbsp;<span class="n">DD_APP_KEY</span><span class="o">=</span><span class="s1">"&lt;APP-KEY&gt;"</span>
-{{- end -}}
+{{- partial "api/auth-instructions.html" (dict "action" $endpoint.action "authData" $authData "securitySchemes" $securitySchemes) -}}
 {{- if eq $lang.name "rust" -}}
 &nbsp;<span class="n">cargo run</span></div></code></pre>
 {{- else -}}
@@ -157,15 +170,15 @@
                                                   {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                                               {{- end -}}
                                             {{- end -}}
-                                            {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                            {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "authData" $authData "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
                                           {{- end -}}
                                       {{- else -}}
-                                        {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                        {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "authData" $authData "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
                                       {{- end -}}
                                   {{- end -}}
                               {{- end -}}
                           {{- else -}}
-                            {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                            {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "authData" $authData "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
                           {{- end -}}
                           </code>
                         </pre>
@@ -214,15 +227,15 @@
                                             {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                                         {{- end -}}
                                       {{- end -}}
-                  {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "authData" $authData "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
                                   {{- end -}}
                               {{- else -}}
-                  {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "authData" $authData "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
                               {{- end -}}
                           {{- end -}}
                       {{- end -}}
                   {{- else -}}
-                  {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "authData" $authData "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
                   {{- end -}}
                   </code>
                 </pre>
@@ -285,7 +298,7 @@
         {{ end }}
       {{ if gt $numOfCodeExamples 1 }}</div>{{ end }}
       {{ if ne $lang.extension "sh" }}
-          {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
+          {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes "authData" $authData) }}
       {{ end }}
     </div>
     {{ end }}
@@ -311,7 +324,7 @@
               </div>
               {{ highlight $file_content $lang.syntax "" }}
             </div>
-            {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
+            {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes "authData" $authData) }}
           </div>
         {{ end }}
     {{ end }}

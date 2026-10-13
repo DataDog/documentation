@@ -4,6 +4,9 @@ further_reading:
   - link: '/opentelemetry/'
     tag: 'Documentation'
     text: 'OpenTelemetry in Datadog'
+  - link: 'https://www.datadoghq.com/architecture/enhancing-observability-in-aws-lambda-with-otel/'
+    tag: 'Architecture Center'
+    text: 'Enhancing Application Observability in AWS Lambda with Datadog and OpenTelemetry'
 ---
 
 [OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data.

@@ -2,7 +2,7 @@
 title: Connect Session Replay To Your Third-Party Tools
 description: "Integrate Session Replay with third-party customer experience and analytics tools by accessing replay URLs from the browser."
 further_reading:
-- link: '/session_replay/browser/'
+- link: '/session_replay/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
 ---

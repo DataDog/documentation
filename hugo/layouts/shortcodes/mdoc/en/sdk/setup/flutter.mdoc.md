@@ -28,7 +28,6 @@ Datadog supports Flutter Monitoring for iOS, Android, and Web for Flutter 3.27+.
 Datadog supports Flutter Web starting with v3 of the SDK, with a few known limitations.
 
 * Long running actions (`startAction` and `stopAction`) are not supported
-* Actions (`addAction`) and manually reported Resources (`startResource` and `stopResource`) do not properly associate with Errors or Actions.
 * Event mappers are not supported.
 
 #### iOS

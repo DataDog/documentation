@@ -10,59 +10,29 @@ further_reading:
   text: OpenTelemetry セマンティック規約をサービスエントリーのスパンにマッピングする
 title: トレースメトリクス
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="OpenTelemetry からの APM メトリクス" style="width:100%;" >}}
 
-{{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="OpenTelemetry の APM メトリクス" style="width:100%;" >}}
+ヒット、エラー、期間などの APM メトリクスを送信するには、[`span_metrics` connector][1] をセットアップします。トレースメトリクスがサンプリングされていないトラフィックを表すように、サンプリングプロセッサの前にすべてのトレースを受信するようコネクタを構成します。
 
-ヒット、エラー、期間などの APM 統計情報を送信するには、[Datadog Connector][1] をセットアップします。
+## セットアップ {#setup}
 
-詳しくは、OpenTelemetry プロジェクトドキュメントの [Datadog Connector][1] を参照してください。
+[推奨される Collector セットアップ][1] で環境を選択し、その完全な `span_metrics` コネクタブロックを使用します。Datadog がホストタグ、ピアサービス、オペレーション名、リソース名の導出に使用するすべてのディメンションを保持します。
 
-## セットアップ
-
-Collector の構成に以下の行を追加します。
-
-```yaml
-processors:
-  probabilistic_sampler:
-    sampling_percentage: 20
-connectors:
-    # "datadog" コネクタ定義と構成を追加します
-    datadog/connector:
-exporters:
-  datadog:
-    api:
-      key: ${env:DD_API_KEY}
-service:
-  pipelines:
-   traces:
-     receivers: [otlp]
-     processors: [batch]
-     exporters: [datadog/connector]
-   traces/2:
-     receivers: [datadog/connector]
-     processors: [batch, probabilistic_sampler]
-     exporters: [datadog]
-  metrics:
-    receivers: [datadog/connector]
-    processors: [batch]
-    exporters: [datadog]
-```
-
-## データ収集
+## 収集データ {#data-collected}
 
 [トレースメトリクス][2]を参照してください。
 
-## 完全な構成例
+## 完全な構成例 {#full-example-configuration}
 
-Datadog Exporter を用いた実際に動作する構成の完全な例については、[`trace-metrics.yaml`][3] を参照してください。
+完全に動作する構成ファイルの例については、[`opentelemetry-examples` リポジトリ][5] を参照してください。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
+[1]: /ja/opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /ja/tracing/metrics/metrics_namespace/
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml
+[5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

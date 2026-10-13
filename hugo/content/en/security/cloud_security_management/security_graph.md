@@ -9,10 +9,6 @@ further_reading:
     text: Trace exposure routes between resources with Datadog Cloud Security
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/security-graph" header="Join the Preview!">}}
-  Security Graph is in Limited Availability.
-{{< /callout >}}
-
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Security Graph is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}

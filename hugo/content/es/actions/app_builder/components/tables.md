@@ -2,126 +2,132 @@
 aliases:
 - /es/service_management/app_builder/tables/
 - /es/service_management/app_builder/components/tables
-description: Funciones avanzadas de componentes de tablas, como el filtrado del lado
-  del cliente, el filtrado del lado del servidor, indicadores de carga y valores dinámicos.
+description: Funciones avanzadas del componente de tabla, incluyendo filtrado del
+  lado del cliente, filtrado del lado del servidor, indicadores de carga y valores
+  dinámicos.
 disable_toc: false
 further_reading:
-- link: /service_management/app_builder/components/
+- link: /actions/app_builder/components/
   tag: Documentación
   text: Componentes
-- link: /service_management/app_builder/build/
+- link: /actions/app_builder/build/
   tag: Documentación
   text: Crear aplicaciones
 title: Tablas
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder está en versión preliminar en el sitio de Datadog Government US1-FED.
+</div>
+{{< /site-region >}}
 
-En esta página se describen las funciones avanzadas que puedes utilizar para manipular componentes de tablas en tus aplicaciones App Builder.
+Esta página describe las funciones avanzadas que puede usar para manipular componentes de tabla en sus aplicaciones de App Builder.
 
-## Filtrado del lado del cliente
+## Filtrado del lado del cliente{#client-side-filtering}
 
-Cuando ya tienes una lista completa de elementos y quieres filtrarlos, existen varios métodos para hacerlo del lado del cliente.
+Cuando ya tiene una lista completa de elementos y desea filtrarlos, existen múltiples métodos para hacerlo en el lado del cliente.
 
-### Filtrado por columnas
+### Filtrado de columnas{#column-filtering}
 
-En **Columns** (Columnas), amplía una columna y activa la opción **Filterable** (Filtrable) para permitir a los usuarios filtrar por las entradas de esa columna. Cuando está activada, aparece un menú desplegable en la cabecera de la tabla que permite al usuario seleccionar un elemento de esa columna para filtrar.
+En {{< ui >}}Columns{{< /ui >}}, expanda una columna y habilite la opción {{< ui >}}Filterable{{< /ui >}} para permitir que los usuarios filtren por entradas en esa columna. Cuando se habilita, aparece un menú desplegable en el encabezado de la tabla que permite al usuario seleccionar un elemento de esa columna para filtrar.
 
-### Filtrar por intervalo de fechas
+### Filtrar por rango de fechas{#filter-by-date-range}
 
-Para permitir el filtrado por intervalo de fechas, en **Appearance** (Apariencia) activa la opción **Has Date Range Filter** (Tiene filtro de intervalo de fechas) y selecciona una ruta de datos por la que filtrar. Cuando está activada, aparece un menú desplegable en la cabecera de la tabla que permite al usuario seleccionar un periodo de tiempo por el que filtrar.
+Para permitir el filtrado por rango de fechas, en {{< ui >}}Appearance{{< /ui >}}, habilite la opción {{< ui >}}Has Date Range Filter{{< /ui >}} y seleccione una ruta de datos para filtrar. Cuando se habilita, aparece un menú desplegable en el encabezado de la tabla que permite al usuario seleccionar un tramo de tiempo para filtrar.
 
-### Filtrar con búsqueda
+### Filtrar con búsqueda{#filter-with-search}
 
-Para añadir una barra de búsqueda a tu tabla, **Appearance** (Apariencia) activa la opción **Is Searchable** (Se puede buscar).
+Para agregar una barra de búsqueda a su tabla, en {{< ui >}}Appearance{{< /ui >}}, habilite la opción {{< ui >}}Is Searchable{{< /ui >}}.
 
-### Filtrar una tabla con un componente de entrada de texto o de búsqueda
+### Filtrar una tabla con una entrada de texto o un componente de búsqueda{#filter-a-table-with-a-text-input-or-search-component}
 
-Un uso frecuente consiste en filtrar un componente de tabla utilizando el valor de un componente de entrada de texto.
+Un caso de uso común es filtrar un componente de tabla usando el valor en un componente de entrada de texto.
 
-Por ejemplo, si quieres enumerar tus dashboards en una tabla que puedas filtrar utilizando un componente de entrada de texto, puedes hacer lo siguiente: 
+Por ejemplo, si desea listar sus tableros en una tabla que pueda filtrar usando un componente de entrada de texto, podría hacer lo siguiente:
 
-1. Añadir una nueva consulta utilizando el botón **+**.
-1. Buscar "List dashboards" (Enumerar dashboards) y hacer clic en la acción **List Dashboards**. Debes asignar un nombre a tu consulta `listDashboards0`.
-1. Añadir un componente de entrada de texto o de búsqueda a tu aplicación. Debes asignarle el nombre `searchInput`.
-1. Añadir un componente de tabla.
-1. Configurar la propiedad **data source** (fuente de datos) de la tabla con los datos filtrados por el componente de entrada de texto o búsqueda que creaste. En este ejemplo, debes configurar **data source** con la siguiente expresión:
+1. Agregue una nueva consulta usando el botón {{< ui >}}\+{{< /ui >}}.
+1. Busque "listar dashboards" y haga clic en la acción {{< ui >}}List Dashboards{{< /ui >}}. Nombre su consulta `listDashboards0`.
+1. Agregue una entrada de texto o un componente de búsqueda a su aplicación. Nómbrelo `searchInput`.
+1. Agregue un componente de tabla.
+1. Establezca la propiedad {{< ui >}}data source{{< /ui >}} de la tabla con sus datos filtrados por el componente de entrada de texto o de búsqueda que creó. En este ejemplo, establezca {{< ui >}}data source{{< /ui >}} con la siguiente expresión:
 
     ```
     ${listDashboards0?.outputs.dashboards.filter(row => row.title.includes(searchInput.value))}
     ```
 
-Puedes escribir texto en el componente de entrada de texto y las filas de la tabla se filtrarán por ese texto.
+Puede escribir texto en el componente de entrada de texto y las filas de la tabla se filtrarán según ese texto.
 
-### Filtrar una tabla con un componente seleccionado
+### Filtrar una tabla con un componente de selección {#filter-a-table-with-a-select-component}
 
-Otro uso frecuente consiste en filtrar una tabla utilizando un componente seleccionado.
+Otro caso de uso común es filtrar una tabla mediante un componente de selección.
 
-Por ejemplo, si quieres enumerar tus dashboards en una tabla que puedas filtrar utilizando un componente seleccionado, puedes hacer lo siguiente: 
+Por ejemplo, si desea listar sus tableros en una tabla que pueda filtrar mediante un componente de selección, podría hacer lo siguiente:
 
-1. Añadir una nueva consulta utilizando el botón **+**.
-1. Buscar "List dashboards" (Enumerar dashboards) y hacer clic en la acción **List Dashboards**. Debes asignar un nombre a tu consulta `listDashboards0`.
-1. Añadir un componente seleccionadoa tu aplicación. Debes asignarle el nombre `selectInput`.
-1. Añadir un componente de tabla.
-1. Configurar la propiedad **data source** (fuente de datos) a tus datos filtrados por el componente seleccionado. En este ejemplo, debes configurar **data source** con la siguiente expresión:
+1. Agregue una nueva consulta usando el botón {{< ui >}}\+{{< /ui >}}.
+1. Busque "listar dashboards" y haga clic en la acción {{< ui >}}List Dashboards{{< /ui >}}. Nombre su consulta `listDashboards0`.
+1. Agregue un componente de selección a su aplicación. Nómbrelo `selectInput`.
+1. Agregue un componente de tabla.
+1. Establezca la propiedad {{< ui >}}data source{{< /ui >}} de la tabla a sus datos filtrados por el componente de selección. En este ejemplo, establezca {{< ui >}}data source{{< /ui >}} con la siguiente expresión:
 
     ```
     ${listDashboards0?.outputs.dashboards.filter(row => row.title.includes(selectInput.value))}
     ```
 
-Puedes seleccionar un valor del componente seleccionado y las filas de la tabla se filtrarán por ese valor.
+Puede seleccionar un valor del componente de selección y las filas de la tabla se filtrarán según ese valor.
 
-### Filtrar los resultados de la consulta mediante una transformación posterior a la consulta
+### Filtrar resultados de consulta mediante una transformación posterior a la consulta {#filter-query-results-using-a-post-query-transformation}
 
-Si quieres filtrar los resultados de una consulta en sí, y luego utilizar esos resultados en tu tabla, realiza los siguientes pasos:
+Si desea filtrar los resultados de una consulta en sí, y luego usar esos resultados en su tabla, realice los siguientes pasos:
 
-1. Añade una nueva consulta utilizando el botón **+**.
-1. Busca "List dashboards" (Enumerar dashboards) y haz clic en la acción **List Dashboards**. Asigna un nombre a tu consulta `listDashboards0`.
-1. Añade un componente de entrada de texto o de búsqueda a tu aplicación. Asígnale el nombre `searchInput`.
-1. Añade un componente de tabla y configura su propiedad **data source** (fuente de datos) a la consulta que añadiste.
-1. Amplía la sección **Advanced** (Avanzado) de la consulta y busca **Post-query Transformation** (Transformación posterior a la consulta).
-1. Sustituya `return outputs` por la línea siguiente:
+1. Agregue una nueva consulta usando el botón {{< ui >}}\+{{< /ui >}}.
+1. Busque "listar dashboards" y haga clic en la acción {{< ui >}}List Dashboards{{< /ui >}}. Nombre su consulta `listDashboards0`.
+1. Agregue una entrada de texto o un componente de búsqueda a su aplicación. Nómbrelo `searchInput`.
+1. Agregue un componente de tabla y establezca su propiedad {{< ui >}}data source{{< /ui >}} a la consulta que agregó.
+1. Expanda la sección {{< ui >}}Advanced{{< /ui >}} de la consulta y busque {{< ui >}}Post-query Transformation{{< /ui >}}.
+1. Reemplace `return outputs` con la siguiente línea:
 
     ```
     outputs.dashboards.filter(row => row.title.includes(searchInput.value))
     ```
 
-Puedes escribir texto en el componente de entrada de texto y las filas de la tabla se filtrarán por ese texto.
+Puede escribir texto en el componente de entrada de texto y las filas de la tabla se filtrarán según ese texto.
 
-Si necesita el resultado de la consulta original, sin transformar, puedes referenciarlo como `${listDashboards0.rawOutputs}`.
+Si necesita el resultado de la consulta original y sin transformar, puede hacer referencia a él como `${listDashboards0.rawOutputs}`.
 
-## Filtrado del lado del servidor
+## Filtrado del lado del servidor {#server-side-filtering}
 
-En algunos casos, es posible que quieras filtrar valores del lado del servidor y emitir nuevas solicitudes cuando el usuario introduce un valor en una entrada, como por ejemplo un componente de entrada de texto.
+En algunos casos, es posible que desee filtrar los valores del lado del servidor y emitir nuevas solicitudes cuando el usuario ingresa un valor en una entrada, como un componente de entrada de texto.
 
-En este caso, puedes activar el filtrado del lado del servidor editando la consulta directamente.
+En este caso, puede habilitar el filtrado del lado del servidor editando la consulta directamente.
 
-Por ejemplo, en el plano del [pipeline de solicitudes de extracción de GitHub][4], la consulta `listOpenedPulls` tiene una entrada que obtiene la siguiente URL:
+Por ejemplo, en el blueprint [GitHub PR pipeline][4], la consulta `listOpenedPulls` tiene una entrada que obtiene la siguiente URL:
 
 ```
 https://api.github.com/search/issues?q=org:${organizationInput.value}+author:${userNameInput.value}+type:pr+state:open
 ```
 
-La API de GitHub acepta parámetros de consulta para filtrar por organización, autor o tipo de solicitud de extracción. La URL de entrada de la consulta anterior contiene expresiones de plantilla para `organizationInput.value`, que es el valor del componente de entrada de texto "Organización", y `userNameInput.value`, que es el valor del componente de entrada de texto "Nombre de usuario". Si defines la configuración de ejecución de la consulta en automática, la consulta se actualizará automáticamente cuando cambien los valores de estas expresiones de plantilla y se actualizarán los valores de la tabla.
+La API de GitHub acepta parámetros de consulta para filtrar según la organización, el autor o el tipo de solicitud de extracción. La URL de entrada de la consulta anterior contiene expresiones de plantilla para `organizationInput.value`, que es el valor del componente de entrada de texto "Organización", y `userNameInput.value`, que es el valor del componente de entrada de texto "Nombre de usuario". Si establece la configuración de ejecución de la consulta en automático, la consulta se actualiza automáticamente cuando cambian los valores de estas expresiones de plantilla y los valores de la tabla se actualizan.
 
 
-## Mostrar un indicador de carga
+## Mostrar un indicador de carga {#showing-a-loading-indicator}
 
-Si quieres mostrar un indicador de carga en una tabla mientras se obtienen los datos, puedes configurar el valor `isLoading` _de la tabla_ igual a la propiedad `isLoading` _de la consulta_. Por ejemplo:
+Si desea mostrar un indicador de carga en una tabla mientras se obtienen los datos, puede establecer el valor `isLoading` de la _tabla_ igual a la propiedad `isLoading` de la _consulta_. Por ejemplo:
 
-1. Sigue los pasos de [filtrado con una entrada de texto][2].
-1. En las propiedades de tu tabla, en **Appearance** (Apariencia), haz clic en el **&lt;/&gt;** junto a **Is Loading** (Se está cargando) para abrir el editor de código.
-1. Configura el valor `isLoading` de la tabla con la siguiente expresión:
+1. Siga los pasos en [filtrado con una entrada de texto][2].
+1. En las propiedades de su tabla, debajo de {{< ui >}}Appearance{{< /ui >}}, haga clic en {{< ui >}}&lt;/&gt;{{< /ui >}} junto a {{< ui >}}Is Loading{{< /ui >}} para abrir el editor de código.
+1. Establezca el valor `isLoading` de la tabla en la siguiente expresión:
 
     ```
     ${listDashboards0.isLoading}
     ```
 
-La tabla muestra un indicador de carga cuando se escribes texto nuevo en el componente de entrada de texto.
+La tabla muestra un indicador de carga cuando escribe texto nuevo en el componente de entrada de texto.
 
-## Valores dinámicos de la tabla
+## Valores de tabla dinámicos {#dynamic-table-values}
 
-Puedes utilizar la propiedad **data source** (fuente de datos) de un componente de tabla para rellenar dinámicamente los valores de la tabla y restringir qué objetos se introducen en la tabla como columnas.
+Puede usar la propiedad {{< ui >}}data source{{< /ui >}} de un componente de tabla para completar dinámicamente los valores de la tabla y restringir qué objetos se incluyen en la tabla como columnas.
 
-Por ejemplo, el plano del [resumidor de solicitudes de extracción de GitHub][3] utiliza una serie de consultas de GitHub para resumir una lista de solicitudes de extracción en un repositorio. La consulta utiliza la entrada de la fuente de datos para restringir la tabla a 6 columnas: `title`,`Summary`,`updated_at`,`user`,`html_url` y `state`. El código resaltado rellena dinámicamente la columna de usuario de cada solicitud de extracción con el avatar del autor y el nombre de usuario de GitHub.
+Por ejemplo, el blueprint [GitHub PR Summarizer][3] utiliza una serie de consultas de GitHub para resumir una lista de solicitudes de extracción en un repositorio. La consulta utiliza la entrada de la fuente a continuación para limitar la tabla a 6 columnas: `title`, `Summary`, `updated_at`, `user`, `html_url` y `state`. El código resaltado completa dinámicamente la columna de usuario para cada solicitud de extracción con el avatar y el nombre de usuario de GitHub del autor.
 
 {{< highlight js "hl_lines=17" >}}
 ${(() => {
@@ -147,18 +153,18 @@ ${(() => {
 })()}
 {{< /highlight >}}
 
-En la tabla, la columna **User** (Usuario) se rellena con un avatar y un nombre de usuario de GitHub para cada autor de una solicitud pull.
+En la tabla, la columna {{< ui >}}User{{< /ui >}} se completa con un avatar y el nombre de usuario de GitHub para cada autor de PR.
 
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>¿Tienes preguntas o comentarios? Únete al canal **#app-builder** en [Datadog Community Slack][0].
+<br>¿Tiene preguntas o comentarios? Únase al canal **#app-builder** en el [Datadog Community Slack][0].
 
-[0]: https://datadoghq.slack.com/
+[0]: https://chat.datadoghq.com/
 [1]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=pagerduty_oncall_manager&viewMode=preview
-[2]: /es/service_management/app_builder/components/tables/#filtering-with-a-text-input
+[2]: /es/actions/app_builder/components/tables/#filtering-with-a-text-input
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=github-pr-dashboard&viewMode=preview

@@ -11,6 +11,9 @@ further_reading:
 - link: "/database_monitoring/guide/parameterized_queries/"
   tag: "Documentation"
   text: "Capturing SQL Query Parameter Values"
+- link: "https://www.datadoghq.com/architecture/dbm-quick-install-aws-rds-postgres/"
+  tag: "Architecture Center"
+  text: "Datadog DBM Quick Install for AWS RDS"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.

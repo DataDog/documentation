@@ -17,7 +17,9 @@ further_reading:
 
 Use the Observability Pipelines Worker to send your processed logs and metrics to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
-Select a destination in the left navigation menu to see more information about it.
+**Notes**:
+- You can add a total of 20 destinations for a pipeline.
+- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client destinations for two different HTTP clients, you must use secret identifiers for the HTTP client URIs. You cannot use the default `DESTINATION_HTTP_CLIENT_URI` to store the two different HTTP client URIs.
 
 ## Destinations
 
@@ -83,14 +85,12 @@ These are the available destinations:
 - [Datadog Metrics][1]
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
-- [OpenTelemetry][5]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
 [2]: /observability_pipelines/destinations/elasticsearch/
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
-[5]: /observability_pipelines/destinations/opentelemetry/metrics
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -103,15 +103,15 @@ When the Observability Pipelines Worker cannot resolve the field with the templa
 
 The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
 
-| Destination       | Fields that support template syntax | Behavior when the field cannot be resolved                                                                                 |
-|-------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Destination       | Fields that support template syntax                        | Behavior when the field cannot be resolved                                                                                 |
+|-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Amazon Opensearch | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
 | Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Elasticsearch     | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
 | Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Opensearch        | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
 | Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
 
@@ -178,3 +178,4 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+[4]: /observability_pipelines/configuration/secrets_management/

@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "action": {
+        "description": "Needs triage"
+      },
+      "enabled": false,
+      "name": "Example-Security-Monitoring",
+      "rule": {
+        "finding_types": [
+          "misconfiguration"
+        ],
+        "query": "env:staging"
+      }
+    },
+    "id": "00000000-0000-0000-0000-000000000000",
+    "type": "inbox_rules"
+  }
+}

@@ -43,7 +43,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 ## Teams
 
-Use the {{< ui >}}My Teams{{< /ui >}} toggle to switch between viewing all dashboards and only dashboards owned by your [teams][2].
+Use the [team filter][3] to show only the dashboards owned by the teams you select. To go back to viewing all dashboards, clear your selection.
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -55,7 +55,7 @@ To edit the teams associated with one or more dashboards, take the following ste
 
 Dashboard lists groups dashboards so you and your team can switch between dashboards within the same context. You can add dashboards to [preset lists](#preset-lists) or to a custom list.
 
-1. To create a dashboard list, click {{< ui >}}+ New List{{< /ui >}} in the upper right.
+1. To create a dashboard list, click {{< ui >}}\+ New List{{< /ui >}} in the upper right.
 1. Click the pencil icon to change a list's title. The list's title is automatically set with the user's first name. For example, `John's list`.
 1. Add dashboards to a list. In the [{{< ui >}}All Dashboards{{< /ui >}}](#view-all-dashboards) table, check the checkboxes next to the Dashboard title. Then click the {{< ui >}}Add to{{< /ui >}} dropdown in the upper right corner of the Dashboard list and select the list.
 
@@ -152,3 +152,4 @@ Use `<`, `>`, `<=`, and `>=` with numeric fields.
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /account_management/teams/
+[3]: /account_management/teams/#team-filter

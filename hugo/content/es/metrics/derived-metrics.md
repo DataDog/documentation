@@ -1,55 +1,52 @@
 ---
+description: Guarde una consulta de métricas como una nueva métrica que pueda reutilizar
+  en tableros, seguimientos, SLOs y cuadernos.
 further_reading:
 - link: https://www.datadoghq.com/blog/auto-smoother-asap/
   tag: Blog
-  text: Métricas ruidosas con suavizado automático para revelar tendencias
+  text: Suavice automáticamente las métricas ruidosas para revelar tendencias
 title: Métricas derivadas
 ---
+## Descripción general {#overview}
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScUkDpqIQNN1G4llFA7JN2qeevIp4wqfyDaa4A7lRCEa9FopQ/viewform?usp=header" >}}
-La función de métricas derivadas está en vista previa.
-{{< /callout >}} 
+Las métricas derivadas le permiten guardar cualquier consulta de métricas como una nueva métrica, para que pueda simplificar y optimizar cómo trabaja con métricas en Datadog. En lugar de crear repetidamente consultas complejas en tableros, seguimientos, SLOs y cuadernos, puede crear una métrica derivada una vez y reutilizarla en todos sus activos. Utilice métricas derivadas para:
 
-## Información general
+- **Simplificar las consultas**: Defina una consulta una vez, guárdela como una métrica derivada y reutilícela en todas partes.
+- **Reducir errores y aumentar la consistencia**: Mantenga las fórmulas de forma centralizada para evitar errores y garantizar la uniformidad entre los equipos.
+- **Acelerar los flujos de trabajo**: No se necesitan cambios de código ni nuevos envíos de métricas; cree nuevas métricas directamente a partir de las métricas existentes en Datadog.
+- **Obtenga control y auditabilidad**: Gestione y mejore las fórmulas derivadas en un solo lugar.
 
-Las métricas derivadas te permiten guardar cualquier consulta sobre métricas como una nueva métrica, para que puedas simplificar y optimizar la forma en que trabajas con las métricas en Datadog. En lugar de crear repetidamente consultas complejas utilizando dashboards, monitores, SLOs y notebooks, puedes crear una métrica derivada una vez y reutilizarla en todos tus recursos. Utiliza métricas derivadas para:
+**Nota**: Las métricas derivadas **no** se facturan como Custom Metrics, ya que se calculan dinámicamente al momento de la consulta y no se almacenan ni indexan.
 
-- **Simplificar la consulta**: Define una consulta una vez, guárdala como métrica derivada y reutilízala en todas partes.
-- **Reducir los errores y aumentar la coherencia**: Mantén las fórmulas de forma centralizada para evitar errores y garantizar la uniformidad entre equipos.
-- **Acelerar los flujos de trabajo**: No se necesitan cambios de código ni nuevos envíos de métricas. Crea nuevas métricas directamente a partir de las métricas existentes en Datadog.
-- **Ganar control y auditabilidad**: Gestiona y mejora las fórmulas derivadas en un único lugar.
+## Crear una métrica derivada {#create-a-derived-metric}
 
-**Nota**: Las métricas derivadas **no** se facturan como métricas personalizadas, ya que se calculan dinámicamente en el momento de la consulta y no se almacenan ni indexan.
+Para crear una métrica derivada, navegue a [{{< ui >}}Metrics > Generate Metrics{{< /ui >}}][1] y haga clic en {{< ui >}}\+ New Metric{{< /ui >}}.
 
-## Crear una métrica derivada
+{{< img src="metrics/derived_metrics/generate_metrics_tab.png" alt="La pestaña generate metrics en Datadog" style="width:90%;" >}}
 
-Para crear una métrica derivada, ve a **[Metrics > Generate Metrics (Métricas > Generar métricas)][1]** y haz clic en **+ New Metric** (+ Nueva métrica).
+1. Asigne a su métrica derivada un nombre que **no** comience con `datadog.estimated_usage`. Utilice el formato descrito en [naming Custom Metrics][2].
 
-{{< img src="metrics/derived_metrics/generate_metrics_tab.png" alt="Pestaña de generación de métricas en Datadog" style="width:90%;" >}}
+2. Defina cualquier consulta de métricas subyacente y, opcionalmente, utilice el cuadro de fórmulas para definir las operaciones matemáticas que se realizarán sobre los valores de las métricas. 
 
-1. Asigna a tu métrica derivada un nombre que **no** empiece por `datadog.estimated_usage`. Utiliza el formato descrito en la [denominación de métricas personalizadas][2].
+   Por ejemplo, para monitorear la estabilidad general de los conectores de Kafka, podría crear consultas individuales `a` y `b` utilizando las métricas `kafka.connect.connector.status.running` y `kafka.connect.connector.status.failed`. Luego, en el cuadro de fórmulas, ingrese la fórmula `(a / (a + b)) * 100`.
 
-2. Define cualquier consulta de métricas subyacente y, opcionalmente, utiliza el cuadro de fórmulas para definir las operaciones matemáticas que se realizarán con los valores métricos.
+   Para obtener más información sobre cómo definir consultas de métricas, consulte [consulta de métricas][3].
 
-   Por ejemplo, para monitorizar la estabilidad general de los conectores Kafka, podrías crear consultas individuales `a` y `b` utilizando las métricas `kafka.connect.connector.status.running` y `kafka.connect.connector.status.failed`. A continuación, en el cuadro de fórmulas, introduce la fórmula `(a / (a + b)) * 100`.
+{{< img src="metrics/derived_metrics/derived_metric_query.png" alt="Una consulta de métricas de Datadog para generar una métrica derivada" style="width:90%;" >}}
 
-   Para obtener más información sobre cómo definir consultas de métricas, consulta las [consultas de métricas][3].
+3. Haga clic en {{< ui >}}Create Metric{{< /ui >}}.
 
-{{< img src="metrics/derived_metrics/derived_metric_query.png" alt="Consulta de métricas de Datadog para generar una métrica derivada" style="width:90%;" >}}
+## Actualizar una métrica derivada {#update-a-derived-metric}
 
-3. Haz clic en **Crear métrica**.
+Para actualizar una métrica derivada, coloque el cursor sobre la métrica y haga clic en el icono {{< ui >}}Edit{{< /ui >}} que aparece a la derecha. 
 
-## Actualizar una métrica derivada
+**Nota **: No puede cambiar el nombre de una métrica existente. Cree una métrica nueva en su lugar.
 
-Para actualizar una métrica derivada, pasa el cursor sobre la métrica y haz clic en el icono **Edit** (Editar) que aparece a la derecha.
+## Eliminar una métrica derivada {#delete-a-derived-metric}
 
-**Nota**: No puedes cambiar el nombre de una métrica existente. En su lugar, crea una nueva métrica.
+Para eliminar una métrica derivada, coloque el cursor sobre la métrica derivada y haga clic en el icono {{< ui >}}Delete{{< /ui >}} que aparece a la derecha. 
 
-## Eliminar una métrica derivada
-
-Para eliminar una métrica derivada, pasa el cursor sobre la métrica y haz clic en el icono **Delete** (Eliminar) que aparece a la derecha.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

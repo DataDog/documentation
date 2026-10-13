@@ -1,6 +1,12 @@
 ---
 title: Kafka Console Setup
 description: Set up Kafka Console, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
+aliases:
+- /data_streams/kafka/data_collection
+further_reading:
+- link: "https://www.datadoghq.com/blog/kafka-console/"
+  tag: "Blog"
+  text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
 ---
 
 This page covers the prerequisites and setup steps for Kafka Console.
@@ -25,11 +31,13 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 
 ## Setup
 
-Go to the [Kafka Console setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
+Enable Kafka Console by setting `enable_kafka_console: true` in the [Kafka Consumer][12] integration. On Agent versions 7.83 and earlier, the flag is named `enable_cluster_monitoring`.
+
+For additional environment-specific guidance on configuring the integration, go to the [Kafka Console setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions.
 
 {{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Console setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
 
-The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
+You can copy the setup instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
 
 ## Enable message inspection
 
@@ -64,7 +72,7 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 #### 1. Create a role
 
 1. Navigate to the [{{< ui >}}Roles{{< /ui >}} page][8] in Datadog.
-2. Click {{< ui >}}+ New Role{{< /ui >}} in the top-right corner.
+2. Click {{< ui >}}\+ New Role{{< /ui >}} in the top-right corner.
    <div class="alert alert-info">
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
@@ -89,6 +97,10 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 
 {{% /collapse-content %}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
 [3]: /remote_configuration/
 [5]: https://app.datadoghq.com/organization-settings/remote-config
@@ -97,3 +109,4 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 [9]: https://app.datadoghq.com/organization-settings/users
 [10]: /remote_configuration/#enable-remote-configuration
 [11]: /account_management/api-app-keys/
+[12]: /integrations/kafka-consumer/?tab=containerized

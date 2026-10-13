@@ -139,9 +139,9 @@ Use the `@trace` attribute to access trace-level information, such as estimated 
 
 [1]: https://app.datadoghq.com/llm/traces
 [2]: /llm_observability/quickstart/terms/
-[3]: /llm_observability/configure/evaluations/
-[4]: /llm_observability/configure/evaluations/submit_evaluations
+[3]: /llm_observability/investigate/evaluations/
+[4]: /llm_observability/investigate/evaluations/external_evaluations
 [5]: /llm_observability/quickstart/terms/#span-kinds
 [6]: /tracing/trace_explorer/query_syntax/
 [7]: /llm_observability/instrument/sdk/#annotating-metadata
-[8]: /llm_observability/configure/evaluations/end_user_feedback
+[8]: /llm_observability/investigate/evaluations/end_user_feedback

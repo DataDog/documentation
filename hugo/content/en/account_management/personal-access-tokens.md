@@ -39,7 +39,7 @@ For Service Access Tokens, see [Service Access Tokens][7].
 ## Create a Personal Access Token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1].
-2. Click {{< ui >}}+ New Access Token{{< /ui >}}.
+2. Click {{< ui >}}\+ New Access Token{{< /ui >}}.
 3. Enter a {{< ui >}}Name{{< /ui >}} for the token.
 4. Select an {{< ui >}}Expiration Date{{< /ui >}}. The minimum expiration is 24 hours and the maximum is one year from creation.
 5. Click {{< ui >}}Select Scopes{{< /ui >}} to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.

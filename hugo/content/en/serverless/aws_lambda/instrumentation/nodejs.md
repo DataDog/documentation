@@ -13,6 +13,9 @@ further_reading:
     - link: 'serverless/custom_metrics/'
       tag: 'Documentation'
       text: 'Submitting Custom Metrics from Serverless Applications'
+    - link: "https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/"
+      tag: "Blog"
+      text: "Trace AWS Lambda durable functions with Datadog"
 aliases:
     - /serverless/datadog_lambda_library/nodejs/
     - /serverless/guide/nodejs/
@@ -406,6 +409,8 @@ To configure Datadog using SST v3, follow these steps:
 {{% svl-lambda-vpc %}}
 
 ## Durable Function
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 {{% svl-lambda-durable-function %}}
 

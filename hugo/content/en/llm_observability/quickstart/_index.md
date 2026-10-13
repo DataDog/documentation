@@ -16,7 +16,7 @@ further_reading:
     - link: '/llm_observability/instrument/otel_instrumentation'
       tag: 'Documentation'
       text: 'Instrument with OpenTelemetry'
-    - link: '/llm_observability/configure/evaluations'
+    - link: '/llm_observability/investigate/evaluations'
       tag: 'Evaluations'
       text: 'Configure Evaluations on your application'
     - link: '/llm_observability/lapdog'
@@ -236,7 +236,7 @@ To try Agent Observability locally, for free, [follow the steps][12] to instrume
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: https://app.datadoghq.com/llm/traces
-[4]: /llm_observability/configure/evaluations
+[4]: /llm_observability/investigate/evaluations
 [5]: /llm_observability/instrument/sdk#manual-instrumentation
 [6]: /llm_observability/instrument/auto_instrumentation
 [7]: /llm_observability/instrument/auto_instrumentation/?tab=python

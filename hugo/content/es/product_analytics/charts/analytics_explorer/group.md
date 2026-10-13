@@ -1,37 +1,28 @@
 ---
-further_reading:
-- link: /real_user_monitoring/explorer/search/
-  tag: Documentación
-  text: Buscar tus eventos
-title: Agrupar eventos de análisis de productos
+description: Agregue desgloses de facetas para dividir su consulta de Product Analytics
+  en múltiples valores.
+title: Agrupar eventos de Product Analytics
 ---
+Una consulta sin desglose devuelve un solo valor, como un conteo total de vistas. Agregue un *desglose* para dividir ese valor en categorías. Por ejemplo, dada una consulta de vistas totales, usted podría agregar un desglose por país para que pueda ver de dónde provienen las vistas.
 
-## Información general
+## Agregar un desglose{#add-a-breakdown}
 
-Los eventos de Product Analytics son valiosos individual y colectivamente. La consulta de búsqueda contiene información para agregar un subconjunto de eventos.
+Haga clic en {{< ui >}}Add breakdown{{< /ui >}} para agregar hasta cuatro desgloses a una sola consulta. Cada desglose aparece como una fila debajo de {{< ui >}}compared by{{< /ui >}} en el generador de consultas.
 
-{{< img src="product_analytics/analytics/group/pana_group_search_bar.png" alt="Agrupar en sección de campos de la consulta de búsqueda" style="width:100%;" >}}
+Cada desglose que usted agrega divide los resultados en valores cada vez más pequeños. Por ejemplo, una consulta desglosada tanto por navegador como por país devuelve un grupo para cada combinación de navegador y país en sus datos, como Chrome/Estados Unidos y Chrome/Alemania.
 
-La selección de campos para agrupar, agregar y medir tus eventos se conserva al cambiar entre tipos de visualización.
+{{< img src="product_analytics/analytics/group/analytics-breakdown-1.png" alt="Una consulta desglosada por navegador y país en el generador de gráficos de Analytics." style="width:90%;" >}}
 
-## Agregación por campos
+## Elija una medida{#choose-a-measure}
 
-Todos los eventos de Product Analytics que coinciden con tu consulta de filtro se agregan en grupos según el valor de una o varias facetas de eventos. Además de los agregados, puedes extraer las siguientes medidas:
+De forma predeterminada, una consulta mide el conteo de {{< ui >}}All events{{< /ui >}}.
 
-- Recuento de eventos por grupo
+{{< img src="product_analytics/analytics/group/analytics-measure-count-1.png" alt="El conteo predeterminado de todos los eventos en el generador de gráficos de Analytics." style="width:90%;" >}}
 
-  {{< img src="product_analytics/analytics/group/pana_group_by_action.png" alt="Agrupar por recuento de eventos" style="width:90%;" >}}
+Cambie {{< ui >}}All events{{< /ui >}} a un valor diferente para ver un conteo único del valor especificado. Por ejemplo, seleccionar {{< ui >}}Browser Name{{< /ui >}} devuelve el número de navegadores distintos que vieron una página.
 
-- Recuento único de valores codificados para una faceta por grupo
+{{< img src="product_analytics/analytics/group/analytics-measure-count-unique-1.png" alt="Un conteo único por navegador en el generador de gráficos de Analytics." style="width:90%;" >}}
 
-  {{< img src="product_analytics/analytics/group/pana_group_by_loading_time.png" alt="Agrupar por recuentos únicos de valores codificados" style="width:90%;" >}}
+Cambie la medida a una agregación estadística de una faceta numérica, como el tiempo de carga. Elija promedio, mínimo, máximo, mediana, suma o un percentil (75, 90, 95, 98 o 99).
 
-- Operaciones estadísticas (como mínimo, máximo, media y percentiles) sobre los valores numéricos de una faceta por grupo.
-
-  {{< img src="product_analytics/analytics/group/pana_group_distribution.png" alt="Agrupar en campos utilizando operaciones estadísticas" style="width:90%;" >}}
-
-Los eventos individuales con varios valores para una faceta única pertenecen a ese número de agregados. Por ejemplo, un evento con los atributos `country:france` y `browser:chrome` se cuenta una vez en el agregado `country:france` y una vez en el agregado `browser:chrome`.
-
-## Referencias adicionales
-
-{{< partial name="whats-next/whats-next.html" >}}
+{{< img src="product_analytics/analytics/group/analytics-measure-statistical-1.png" alt="Opciones de agregación estadística para el tiempo de carga en el generador de gráficos de Analytics." style="width:90%;" >}}

@@ -65,7 +65,7 @@ To run the workflow:
 1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Monitor{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Monitor{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Monitor triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
 1. Save your workflow.
@@ -75,7 +75,7 @@ To run the workflow:
 
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the {{< ui >}}Configure notifications & automations{{< /ui >}} section, click {{< ui >}}+ Add Workflow{{< /ui >}}.
+1. In the {{< ui >}}Configure notifications & automations{{< /ui >}} section, click {{< ui >}}\+ Add Workflow{{< /ui >}}.
 1. Use the workflow mention name to search for your workflow and select it from the dropdown. Only workflows with monitor triggers appear in the list.<br>A mention for the monitor appears in the notification message field, in the format `@workflow-name` if it takes no input parameters or `@workflow-name(param="")` if it takes input parameters.
 1. If the workflow takes input parameters:
     1. Click {{< ui >}}Configure Inputs{{< /ui >}} next to the monitor name and ID.
@@ -119,7 +119,7 @@ To trigger a workflow from a notification rule, you must first add a security tr
 1. Add a security trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Security{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Security{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Security triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
 1. Save your workflow.
@@ -155,7 +155,7 @@ To run a workflow from a software catalog entity, you must first add a software 
 1. Add a software catalog trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Catalog{{< /ui >}}.
-2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 3. Save your workflow.
 4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
@@ -182,7 +182,7 @@ You can trigger a workflow from GitHub using the following steps.
 1. In GitHub, set the {{< ui >}}Content type{{< /ui >}} of your webhook to `application/json`.
 1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the {{< ui >}}Secret{{< /ui >}} field of your workflow trigger.
 1. In GitHub, choose which events you would like to trigger your webhook, then click {{< ui >}}Add webhook{{< /ui >}}.
-1. _Optionally_, in your workflow, click the {{< ui >}}+{{< /ui >}} to add a {{< ui >}}Rate Limit{{< /ui >}}.
+1. _Optionally_, in your workflow, click the {{< ui >}}\+{{< /ui >}} to add a {{< ui >}}Rate Limit{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
@@ -192,14 +192,14 @@ You can trigger a workflow from GitHub using the following steps.
 
 <div class="alert alert-info"><strong>Quick start</strong>: Click to create a <a href="https://app.datadoghq.com/workflow/create?source=slack">workflow</a> with a Slack trigger.</div>
 
-You can trigger a workflow from Slack manually with the `/datadog workflow` command, or automatically when an emoji reaction is added to a message.
+You can trigger a workflow from Slack manually with the `/datadog workflow` command, or automatically when an emoji reaction is added to a message or when a message is posted in a channel.
 
 ### Manual Slack trigger
 
 1. Add a Slack trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Slack{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
@@ -215,6 +215,42 @@ You can configure a workflow to trigger automatically when a user adds a specifi
 1. If the workspace requires the `emoji:read` permission, click {{< ui >}}Enable Permission{{< /ui >}} to reinstall the Slack app with the necessary scope.
 1. Select one or more emoji reactions that trigger the workflow.
 1. Click {{< ui >}}Save{{< /ui >}}, then {{< ui >}}Publish{{< /ui >}}.
+
+### Message Slack trigger
+
+You can configure a workflow to trigger automatically when a message that matches your rules is posted in one or more Slack channels.
+
+<div class="alert alert-info">The Datadog Slack App must be a member of each channel you select. Messages posted by the Datadog Slack App itself don't trigger workflows.</div>
+
+1. Add a Slack trigger to your workflow:
+   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}.
+   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Slack{{< /ui >}}.
+1. In the {{< ui >}}Configure{{< /ui >}} tab, under {{< ui >}}Message triggers{{< /ui >}}, select the Slack {{< ui >}}Workspace{{< /ui >}}.
+1. Select one or more {{< ui >}}Channels{{< /ui >}} to listen to.
+1. Choose a {{< ui >}}Match type{{< /ui >}}:
+   - {{< ui >}}Any message{{< /ui >}}: Every message in the selected channels triggers the workflow.
+   - {{< ui >}}Contains text{{< /ui >}}: The message must contain the text you enter in {{< ui >}}Message pattern{{< /ui >}}. Matching is not case-sensitive.
+   - {{< ui >}}Matches regular expression{{< /ui >}}: The message must match the regular expression you enter in {{< ui >}}Message pattern{{< /ui >}}. Matching is case-sensitive, and the pattern can match anywhere in the message. To match the whole message, use `^` and `$`, for example `^deploy\s+production$`. To ignore case, add `(?i)` at the start of the pattern.
+1. Optionally, filter which messages count:
+   - {{< ui >}}Thread replies{{< /ui >}}: {{< ui >}}Include all messages{{< /ui >}}, {{< ui >}}Only thread replies{{< /ui >}}, or {{< ui >}}Exclude thread replies{{< /ui >}}.
+   - {{< ui >}}App messages{{< /ui >}}: {{< ui >}}Include all messages{{< /ui >}}, {{< ui >}}Only app messages{{< /ui >}}, or {{< ui >}}Exclude app messages{{< /ui >}}.
+1. To listen for different patterns or channels, click {{< ui >}}Add message rule{{< /ui >}}. If a message matches more than one rule, the workflow runs once.
+1. Click {{< ui >}}Save{{< /ui >}}, then {{< ui >}}Publish{{< /ui >}}.
+
+#### Access the Slack message
+
+In later steps of your workflow, use `Source.slack_message` to reference the message that triggered the workflow:
+
+| Variable | Description |
+|---|---|
+| `Source.slack_message.text` | The text of the message. |
+| `Source.slack_message.user_id` | The Slack ID of the user who posted the message, when present. |
+| `Source.slack_message.channel_id` | The Slack ID of the channel the message was posted in. |
+| `Source.slack_message.team_id` | The Slack ID of the workspace. |
+| `Source.slack_message.message_ts` | The Slack timestamp of the message. |
+| `Source.slack_message.thread_ts` | The Slack timestamp of the parent message, when the message is a thread reply. |
+| `Source.slack_message.app_id` | The Slack ID of the app that posted the message, when the message was posted by an app. |
+| `Source.slack_message.bot_id` | The Slack ID of the bot that posted the message, when the message was posted by a bot. |
 
 ## API triggers
 
