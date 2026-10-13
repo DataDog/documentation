@@ -18,15 +18,16 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
-The processor only supports static, out-of-the-box integration pipelines included with the Worker. It does not run custom pipelines or edited copies of Datadog integration pipelines. The integration pipeline catalog is included with the Worker and updated through new Worker releases. Because the catalog does not update automatically, you must upgrade your Worker for catalog updates and manually enable the new integration pipelines.
+The processor only supports static, out-of-the-box integration pipelines included with the Worker. The Worker's catalog of integration pipelines is updated through new Worker releases. Because the catalog does not update automatically, you must upgrade your Worker for catalog updates and manually enable the new integration pipelines.
 
 {{< img src="observability_pipelines/processors/integration_pipelines.png" alt="Manage Integration Pipelines panel showing the catalog version, pipeline search, Enabled and Disabled sections, and a table of integration names, source filters, and processor counts." style="width:100%;" >}}
 
 **Notes**:
 - Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archive destinations.
 - Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log field, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those fields.
-- Logs sent by the Datadog Agent with an integration log configuration already have their source set.
+    - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
+- The processor does not run custom pipelines created in Log Management or modified versions of integration pipelines in Log Management.
 
 ## Setup
 
@@ -61,10 +62,10 @@ This processor is CPU intensive. Use **10,000 events per second per vCPU** as a 
 CPU usage depends on:
 
 - The proportion of logs that match an enabled integration pipeline.
-- The number and cost of processors in the integration pipelines that handle most of your logs.
-- The baseline normalization cost, paid for every log entering the processor, including logs without a matching integration pipeline.
+- The amount of processing required by the integration pipeline. For example, Grok, User-Agent, and URL parsers typically require more processing than remappers.
+- The processing overhead of normalizing every incoming log, including logs without a matching integration pipeline.
 
-The number of enabled integration pipelines does not determine per-event processing cost: each log is dispatched by its source, rather than tested against every enabled pipeline. Use the processor's filter to target specific logs when appropriate, and allow CPU headroom for traffic spikes.
+Enabling more integration pipelines does not necessarily increase per-event processing overhead because the Worker routes each log based on its `source` or `ddsource` field. It does not send logs through all enabled integration pipelines. Use the processor's filter to target specific logs when appropriate, and allow CPU headroom for traffic spikes.
 
 ## How the processor works
 
@@ -92,7 +93,6 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 **Notes**:
 - If `status` is unset, it still defaults to `info`, even when the list is empty.
-- Do not include the `attributes` prefix when adding an attribute to the list. For example, enter `log_timestamp` instead of `attributes.log_timestamp`.
 
 | Reserved attribute | Default log attributes, in order                                                                                |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -108,7 +108,7 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see [Pipelines Usage Metrics][4]. To filter or group by this processor, use `component_type:integration_pipelines`.
 
-The processor also emits four metrics for each integration pipeline, tagged with `integration_id`, such as `apache` or `nginx`:
+The processor also emits these metrics for each integration pipeline, tagged with `integration_id`, such as `apache` or `nginx`:
 
 Ingested events
 : **Metric**: `pipelines.integration_pipelines_ingested_events_total`
@@ -126,7 +126,7 @@ Modified event bytes
 : **Metric**: `pipelines.integration_pipelines_modified_event_bytes_total`
 : **Description**: Estimated JSON size, in bytes, of events modified by the integration pipeline. Event size is measured after normalization and before integration pipeline processing. This metric measures the total size of modified events, not the number of bytes changed or their size after processing.
 
-These four metrics count only logs that match an enabled integration pipeline. Changes made only by common normalization do not count as integration pipeline modifications. To identify integrations processing the most logs, group by `integration_id` and compare the number of processed and modified events. The `pipeline_id` tag identifies the overall Observability Pipelines pipeline, not an integration pipeline.
+These metrics only count logs that match an enabled integration pipeline. Changes made only by common normalization do not count as integration pipeline modifications. To identify integrations processing the most logs, group by `integration_id` and compare the number of processed and modified events. The `pipeline_id` tag identifies the overall Observability Pipelines pipeline, not an integration pipeline.
 
 [1]: /observability_pipelines/search_syntax/logs/
 [2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
