@@ -8,6 +8,9 @@ further_reading:
 - link: /monitors/types/synthetic_monitoring/
   tag: Documentation
   text: Configure Synthetic test monitors
+- link: "/synthetics/bits_testing/"
+  tag: "Documentation"
+  text: "Bits Testing"
 - link: "/synthetics/troubleshooting/"
   tag: "Documentation"
   text: "Synthetic Monitoring Troubleshooting"
@@ -36,6 +39,8 @@ To create a Synthetic Monitoring Test Suite:
 1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}}.
 2. Click {{< ui >}}New Test Suite{{< /ui >}}.
 3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click {{< ui >}}\+ New Suite{{< /ui >}}.
+
+To have Bits Testing group your existing tests into suites for you, see [Create test suites with Bits Testing](#create-test-suites-with-bits-testing).
 
 ## Test suite configuration
 
@@ -67,6 +72,52 @@ To create a Synthetic Monitoring Test Suite:
 7. Click {{< ui >}}Save Suite{{< /ui >}} when finished.
 
 {{< img src="synthetics/test_suites/test_suite_creation_2.png" alt="Synthetic Monitoring Test Suite creation page" style="width:80%;">}}
+
+## Create test suites with Bits Testing
+
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-warning">Creating test suites with Bits Testing is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
+
+[Bits Testing][4] can group your existing Synthetic tests into suites. Describe in plain language how you want your tests organized. Bits Testing finds the matching tests and proposes suites for you to review. Bits Testing doesn't create any suites until you approve them.
+
+You can ask Bits Testing for:
+
+- **One suite**: Describe what the suite represents, for example, "Create a suite that monitors the checkout flow."
+- **Several suites at once**: Describe how to split your tests, for example, one suite per team, service, environment, or service and environment.
+
+To create test suites with Bits Testing:
+
+1. In Synthetic Monitoring & Testing, click {{< ui >}}Bits Testing{{< /ui >}} in the top navigation.
+2. Describe how you want your tests grouped, for example, `Create a suite for each one of my teams`. You can also select a suggested prompt, such as {{< ui >}}Create a test suite for my team{{< /ui >}}.
+
+   {{< img src="synthetics/test_suites/bits_testing_suite_prompt.png" alt="The Bits Testing page with a prompt asking to create a suite for each of the user's teams." style="width:80%;" >}}
+
+3. Review the list of suites Bits Testing plans to generate, then click {{< ui >}}Generate Suites{{< /ui >}}. The button shows the number of suites, for example, {{< ui >}}Generate 3 Suites{{< /ui >}}.
+4. In the {{< ui >}}Review suggested suites{{< /ui >}} panel, select each suite in the list to see its description and tests. For each suite, you can:
+   - Click {{< ui >}}Add Tests{{< /ui >}} to add tests, or select tests and click {{< ui >}}Remove From Suite{{< /ui >}} to remove them.
+   - Set each test's {{< ui >}}Suite Alerting{{< /ui >}} value. See [Test suite configuration](#test-suite-configuration).
+   - Click {{< ui >}}Exclude Suite{{< /ui >}} to drop the suite.
+
+   {{< img src="synthetics/test_suites/bits_testing_review_suites.png" alt="The Review suggested suites panel with three generated suites, one suite's description, and its list of tests." style="width:100%;" >}}
+
+5. Click {{< ui >}}Create Suites{{< /ui >}}. The button shows the number of suites to create.
+6. Click {{< ui >}}View Suites{{< /ui >}} to open your new suites.
+
+Suites that Bits Testing creates work like suites you create manually, including suite-level alerting and an automatic [service level objective](#service-level-objectives).
+
+### Write a prompt for Bits Testing
+
+Describe the business or operational area you want to monitor, not only the technical details. For example:
+
+- "Create a suite for the checkout journey."
+- "Create separate suites for each team and environment."
+- "Group the tests that validate authentication."
+- "Create one suite for each production service."
+
+No single suite structure is correct. A suite can represent a user journey, service, team, environment, shared platform capability, or release validation.
+
+The suites Bits Testing proposes depend on the information in your existing tests and on how clearly you describe the grouping. Review each proposed suite before you create it.
 
 ## Service level objectives
 
@@ -173,3 +224,4 @@ If execution results look incomplete:
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/notifications/
 [3]: /synthetics/platform/downtime/
+[4]: /synthetics/bits_testing/
