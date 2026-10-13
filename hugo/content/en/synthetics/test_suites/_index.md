@@ -99,9 +99,9 @@ To create test suites with Bits Testing:
    - Set each test's {{< ui >}}Suite Alerting{{< /ui >}} value. See [Test suite configuration](#test-suite-configuration).
    - Click {{< ui >}}Exclude Suite{{< /ui >}} to drop the suite.
 
-   {{< img src="synthetics/test_suites/bits_testing_review_suites.png" alt="The Review suggested suites panel with three generated suites, one suite's description, and its list of tests." style="width:100%;" >}}
+   {{< img src="synthetics/test_suites/bits_testing_review_suites.png" alt="The Review suggested suites panel with five generated suites, one suite's description, and its tests with Suite Alerting set to Critical." style="width:100%;" >}}
 
-5. Click {{< ui >}}Create Suites{{< /ui >}}. The button shows the number of suites to create.
+5. Click the create button. The button shows the number of suites to create, for example, {{< ui >}}Create 5 Suites{{< /ui >}}.
 6. Click {{< ui >}}View Suites{{< /ui >}} to open your new suites.
 
 Suites that Bits Testing creates work like suites you create manually, including suite-level alerting and an automatic [service level objective](#service-level-objectives).
