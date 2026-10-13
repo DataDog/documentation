@@ -79,17 +79,17 @@ Cloud Security includes the following capabilities:
 - [{{< ui >}}Identity Risks{{< /ui >}}][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [{{< ui >}}Vulnerabilities{{< /ui >}}][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
-For real-time threat detection in running workloads, use [Workload Protection][24].
+For real-time threat detection in running workloads, use [Workload Protection][1].
 
 ## How Datadog collects Cloud Security data
 
 Datadog uses three methods to collect Cloud Security data. You can combine them to cover different assets and security outcomes:
 
-- **Unified Datadog Agent**: Host Agent, Cluster Agent, and serverless Agent deployments collect host and runtime context.
-- **Agentless**: Cloud integrations assess cloud configuration and identities. Agentless Scanning finds vulnerabilities in supported AWS, Azure, and GCP assets without an Agent on every resource.
-- **Repository and CI/CD integrations**: Integrations scan container images before deployment and connect findings to source code.
+- **[Unified Datadog Agent][24]**: Host Agent, Cluster Agent, and serverless Agent deployments collect host and runtime context.
+- **Agentless**: [Cloud integrations][25] assess cloud configuration and identities. [Agentless Scanning][26] finds vulnerabilities in supported AWS, Azure, and GCP assets without an Agent on every resource.
+- **Repository and CI/CD integrations**: [CI/CD integrations][27] scan container images before deployment, and [source code integrations][28] connect findings to source code.
 
-See [Cloud Security Coverage and Data Collection Methods][25] for the supported assets, prerequisites, and exclusions for each data collection method.
+See [Cloud Security Coverage and Data Collection Methods][29] to compare coverage by capability and data collection method.
 
 Cloud Security also includes access to Datadog Security features, including:
 - [Detection Rules][18]
@@ -181,5 +181,9 @@ To get started with Cloud Security, navigate to the [{{< ui >}}Cloud Security Se
 [21]: https://app.datadoghq.com/security/map
 [22]: /datadog_cloudcraft/overlays/#security
 [23]: /dashboards/
-[24]: /security/workload_protection/
-[25]: /security/cloud_security_management/setup/supported_deployment_types/
+[24]: /security/cloud_security_management/setup/agent/
+[25]: /security/cloud_security_management/setup/cloud_integrations/
+[26]: /security/cloud_security_management/setup/agentless_scanning/
+[27]: /security/cloud_security_management/setup/ci_cd/
+[28]: /security/cloud_security_management/code_locations/
+[29]: /security/cloud_security_management/setup/coverage_data_collection_methods/

@@ -7,9 +7,9 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent
 ---
 
-Use the following instructions to enable Cloud Security Misconfigurations and Vulnerabilities on the Unified Datadog Agent. Agent deployments add host and runtime context, real-time vulnerability updates, and host benchmarks. 
+Use the following instructions to enable Cloud Security Misconfigurations and Vulnerabilities on the Unified Datadog Agent. Agent deployments add host and runtime context, real-time vulnerability updates, and host benchmarks.
 
-For Identity Risks, which doesn't use the Agent, see [cloud integrations][1]. For all data collection methods and prerequisites, see [Cloud Security Coverage and Data Collection Methods][2].
+For Identity Risks, which does not use the Agent, see [cloud integrations][1]. To compare all data collection methods, see [Cloud Security Coverage and Data Collection Methods][2].
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -22,4 +22,4 @@ For Identity Risks, which doesn't use the Agent, see [cloud integrations][1]. Fo
 {{< /card-grid >}}
 
 [1]: /security/cloud_security_management/setup/cloud_integrations/
-[2]: /security/cloud_security_management/setup/supported_deployment_types/
+[2]: /security/cloud_security_management/setup/coverage_data_collection_methods/

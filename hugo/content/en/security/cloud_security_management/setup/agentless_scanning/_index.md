@@ -24,9 +24,9 @@ Agentless Scanning provides vulnerability visibility for supported hosts, contai
 
 <div class="alert alert-info">Agentless Scanning excludes resources that have the Datadog Agent installed.</div>
 
-Agentless Scanning is one of two Agentless data collection methods. [Cloud integrations][17] are a separate Agentless method for cloud configuration and identity assessment. See [Cloud Security Coverage and Data Collection Methods][18] to compare data collection methods and their limits.
+Agentless Scanning is one of two Agentless data collection methods. [Cloud integrations][17] are a separate Agentless method for cloud configuration and identity assessment. See [Cloud Security Coverage and Data Collection Methods][18] to compare data collection methods.
 
-Agentless Scanning is not a replacement for the Unified Datadog Agent when you need runtime context or real-time vulnerability updates. Agentless Scanning also does not provide runtime threat detection. For runtime threat detection, use [Workload Protection][19].
+Agentless Scanning is not a replacement for the [Unified Datadog Agent][20] when you need runtime context or real-time vulnerability updates. Agentless Scanning also does not provide runtime threat detection. For runtime threat detection, use [Workload Protection][19].
 
 ## How it works
 
@@ -117,5 +117,6 @@ By default, Agentless Scanning automatically scans your resources every 12 hours
 [15]: /security/cloud_security_management/guide/resource_evaluation_filters
 [16]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
 [17]: /security/cloud_security_management/setup/cloud_integrations/
-[18]: /security/cloud_security_management/setup/supported_deployment_types/
+[18]: /security/cloud_security_management/setup/coverage_data_collection_methods/
 [19]: /security/workload_protection/
+[20]: /security/cloud_security_management/setup/agent/

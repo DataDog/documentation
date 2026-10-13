@@ -179,4 +179,4 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/cloud_security_management/identity_risks/
 [4]: /security/cloud_security_management/setup/agentless_scanning/
-[5]: /security/cloud_security_management/setup/supported_deployment_types/
+[5]: /security/cloud_security_management/setup/coverage_data_collection_methods/

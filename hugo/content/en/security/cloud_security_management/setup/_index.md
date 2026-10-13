@@ -15,7 +15,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_cloud_workload_security
   - /security/cloud_security_management/setup/csm_pro
 further_reading:
-    - link: "/security/cloud_security_management/setup/supported_deployment_types"
+    - link: "/security/cloud_security_management/setup/coverage_data_collection_methods"
       tag: "Documentation"
       text: "Cloud Security Coverage and Data Collection Methods"
     - link: "/security/guide/aws_fargate_config_guide"
@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-The following resources contain helpful information on getting started with Cloud Security:
+The following resources contain information on getting started with Cloud Security:
 
 - [Choose a coverage and collection method](#choose-a-coverage-and-collection-method)
 - [Enable Agentless Scanning](#enable-agentless-scanning) for supported vulnerability discovery without an Agent on every resource
@@ -41,13 +41,13 @@ The following resources contain helpful information on getting started with Clou
 
 ## Choose a coverage and collection method
 
-Cloud Security has three collection methods. You can use more than one:
+Cloud Security uses three data collection methods. You can use more than one:
 
 - **Unified Datadog Agent** collects host and runtime context. This includes Host Agent, Cluster Agent, and serverless Agent deployments.
 - **Agentless** includes cloud integrations for cloud configuration and identity assessment, and Agentless Scanning for supported vulnerability discovery in AWS, Azure, and GCP.
 - **Repository and CI/CD integrations** scan container images before deployment and connect findings to source code.
 
-For an overview of coverage capability for different asset types, as well as prerequisites and exclusions, see [Cloud Security Coverage and Data Collection Methods][10].
+To compare coverage by capability and data collection method, see [Cloud Security Coverage and Data Collection Methods][10].
 
 ## Enable Agentless Scanning
 
@@ -55,7 +55,7 @@ For an overview of coverage capability for different asset types, as well as pre
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-For vulnerability discovery across supported AWS, Azure, and GCP assets, start by [enabling Agentless Scanning][1]. It does not require the Datadog Agent on each scanned resource, but coverage depends on the provider, asset type, and platform. It is not a replacement for cloud integrations, CI/CD image scanning, or runtime threat detection.
+For vulnerability discovery across supported AWS, Azure, and GCP assets, start by [enabling Agentless Scanning][1]. It does not require the Datadog Agent on each scanned resource, but coverage depends on the provider, asset type, and platform. It is not a replacement for cloud integrations, CI/CD image scanning, or runtime threat detection with Workload Protection.
 
 To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
@@ -148,4 +148,4 @@ For information on disabling Cloud Security, see the following:
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /security/cloud_security_management/setup/ci_cd
-[10]: /security/cloud_security_management/setup/supported_deployment_types
+[10]: /security/cloud_security_management/setup/coverage_data_collection_methods/

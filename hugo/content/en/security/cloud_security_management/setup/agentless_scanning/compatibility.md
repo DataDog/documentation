@@ -112,4 +112,4 @@ The following container runtimes are supported:
 [17]: /security/cloud_security_management/setup/agentless_scanning/update
 [18]: /containers/cluster_agent/setup/
 [19]: /security/cloud_security_management/setup/cloud_integrations/
-[20]: /security/cloud_security_management/setup/supported_deployment_types/
+[20]: /security/cloud_security_management/setup/coverage_data_collection_methods/

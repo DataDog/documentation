@@ -8443,7 +8443,7 @@ menu:
       identifier: csm_setup
       weight: 2
     - name: Coverage and Data Collection Methods
-      url: security/cloud_security_management/setup/supported_deployment_types
+      url: security/cloud_security_management/setup/coverage_data_collection_methods
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100

@@ -290,4 +290,4 @@ To verify the setup, filter vulnerability findings by [runtime signals][10].
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [10]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
 [11]: /security/workload_protection/setup/
-[12]: /security/cloud_security_management/setup/supported_deployment_types/
+[12]: /security/cloud_security_management/setup/coverage_data_collection_methods/

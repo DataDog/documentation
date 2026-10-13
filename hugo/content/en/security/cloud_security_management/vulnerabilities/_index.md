@@ -28,7 +28,7 @@ further_reading:
 
 Cloud Security Vulnerabilities helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
-Cloud Security Vulnerabilities scans container images in three contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage and prerequisites. See [Cloud Security Coverage and Data Collection Methods][25] before choosing a deployment method.
+Cloud Security Vulnerabilities scans container images in three contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage. See [Cloud Security Coverage and Data Collection Methods][25] before choosing a data collection method.
 
 With Cloud Security Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 
@@ -44,8 +44,8 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Collect vulnerability data with Agentless and/or the Unified Datadog Agent
-: Use Agentless Scanning for supported AWS, Azure, and GCP assets without installing an Agent on each resource. You can use it in combination with the Unified Datadog Agent, which providess host and runtime context and real-time updates.
+Collect vulnerability data with Agentless Scanning or the Unified Datadog Agent
+: Use [Agentless Scanning][27] for supported AWS, Azure, and GCP assets without installing an Agent on each resource. You can combine it with the [Unified Datadog Agent][28], which provides host and runtime context and real-time updates.
 
 Inventory cloud resources, in real-time
 : Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM (software bill of materials).
@@ -161,8 +161,10 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 [24]: /security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
-[25]: /security/cloud_security_management/setup/supported_deployment_types/
+[25]: /security/cloud_security_management/setup/coverage_data_collection_methods/
 [26]: /security/workload_protection/
+[27]: /security/cloud_security_management/setup/agentless_scanning/
+[28]: /security/cloud_security_management/setup/agent/
 
 ## Further reading
 
