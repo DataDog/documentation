@@ -104,7 +104,7 @@ In all other cases, Datadog leaves the team name unchanged.
 
 ## Removing assignment groups from the sync
 
-When an assignment group falls out of the sync - for example, because you narrowed the filter - Datadog does not delete the matching Datadog team. Instead, Datadog removes all synced members from the team and leaves the team in place with no members. This applies to both one-time and recurring syncs.
+When an assignment group falls out of the sync—for example, because you narrowed the filter—Datadog does not delete the matching Datadog team. Instead, Datadog removes all synced members from the team and leaves the team in place with no members. This applies to both one-time and recurring syncs.
 
 To remove the empty teams:
 
