@@ -116,7 +116,7 @@ Use the `dd-otel-log-config` header to configure how Datadog processes OTLP log 
 `keep_raw_message`
 : **Type**: Boolean<br>
 **Default**: `false`<br>
-**Description**: By default, Datadog will parse a JSON log body into log attributes so that you can search individual fields (for example, `@key:value`) instead of full text search on the message. If `keep_raw_message` is set to `true`, Datadog does not parse the body and keeps it as a string in the `message` attribute. Use this option if you do custom parsing of the log message in a Logs pipeline or if fields in your JSON body conflict with existing log attributes.
+**Description**: By default, Datadog parses a JSON log body into log attributes so that you can search individual fields (for example, `@key:value`) instead of running a full-text search on the message. If `keep_raw_message` is set to `true`, Datadog does not parse the body and keeps it as a string in the `message` attribute. Use this option if you do custom parsing of the log message in a logs pipeline or if fields in your JSON body conflict with existing log attributes.
 
 For example, to keep JSON log bodies as raw strings:
 
