@@ -9,3 +9,13 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Add aggregate event-time configuration to Observability Pipelines
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40574
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add azure_data_explorer destination to Observability Pipelines spec
