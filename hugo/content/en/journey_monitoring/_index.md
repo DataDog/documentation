@@ -64,7 +64,7 @@ Use the [Journey Monitoring API][14] to query, create, update, and delete journe
 
 {{< whatsnext desc="Explore Journey Monitoring:" >}}
    {{< nextlink href="/journey_monitoring/configuring_journeys/" >}}<strong>Configure Journeys</strong>: Define a journey and add technical coverage.{{< /nextlink >}}
-   {{< nextlink href="/journey_monitoring/details_report/variants/" >}}<strong>Variants</strong>: Track and compare different paths users take through a journey.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/variants/" >}}<strong>Variants</strong>: Track and compare different paths users take through a journey.{{< /nextlink >}}
    {{< nextlink href="/journey_monitoring/overview/" >}}<strong>Journey Overview</strong>: Understand a journey's health and its relationships to upstream and downstream journeys.{{< /nextlink >}}
    {{< nextlink href="/journey_monitoring/map/" >}}<strong>Map</strong>: Visualize all your journeys and their traffic and conversion metrics.{{< /nextlink >}}
    {{< nextlink href="/journey_monitoring/suggested_journeys/" >}}<strong>Suggested Journeys</strong>: Get automatically generated journey suggestions based on real user behavior in your application.{{< /nextlink >}}
@@ -79,7 +79,7 @@ Use the [Journey Monitoring API][14] to query, create, update, and delete journe
 [5]: /real_user_monitoring/rum_without_limits/
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
-[8]: /journey_monitoring/details_report/variants/
+[8]: /journey_monitoring/variants/
 [9]: /journey_monitoring/suggested_journeys/
 [10]: /journey_monitoring/details_report/#traffic-and-conversion-trends
 [11]: /real_user_monitoring/operations_monitoring/

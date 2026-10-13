@@ -11,7 +11,7 @@ further_reading:
 - link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
   text: 'Learn about journey details reports'
-- link: '/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---

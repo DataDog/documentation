@@ -13,7 +13,7 @@ further_reading:
 - link: '/journey_monitoring/suggested_journeys/'
   tag: 'Documentation'
   text: 'Learn about suggested journeys'
-- link: '/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---
@@ -144,7 +144,7 @@ Click **Manage Tests** to add or remove tests from the suite, or **New Test** to
 [2]: /synthetics/
 [3]: /product_analytics/
 [4]: /session_replay/
-[5]: /journey_monitoring/details_report/variants/
+[5]: /journey_monitoring/variants/
 [6]: /product_analytics/charts/funnel_analysis/
 [7]: /real_user_monitoring/operations_monitoring/
 [8]: /internal_developer_portal/catalog/

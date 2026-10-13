@@ -1,6 +1,8 @@
 ---
 title: Journey Variants
 description: Define and compare the paths users take between a journey's start and end events.
+aliases:
+- /journey_monitoring/details_report/variants/
 further_reading:
 - link: "/journey_monitoring/"
   tag: "Documentation"

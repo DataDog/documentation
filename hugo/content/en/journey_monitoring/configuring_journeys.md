@@ -258,7 +258,7 @@ After you change a journey's start or end events, review its variants, matching 
 
 [1]: /journey_monitoring/#prerequisites
 [2]: /journey_monitoring/suggested_journeys/
-[3]: /journey_monitoring/details_report/variants/
+[3]: /journey_monitoring/variants/
 [4]: /real_user_monitoring/rum_without_limits/
 [5]: /journey_monitoring/details_report/
 [6]: /journey_monitoring/status/
