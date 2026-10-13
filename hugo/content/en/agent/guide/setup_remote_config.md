@@ -45,7 +45,7 @@ To remotely upgrade or configure Agents on Linux or Windows VMs, enable Remote C
 Starting with Agent version 7.73.0, `remote_updates` defaults to `true`. On earlier supported versions, explicitly set it to `true`.
 
 1. Enable Remote Configuration for your organization and [on the Agent's API key](#enable-remote-configuration-on-the-api-key).
-1. In the Agent's [`datadog.yaml` configuration file][16], enable the following settings. `remote_updates` is a top-level setting:
+1. In the Agent's [configuration file][16], enable the following settings. `remote_updates` is a top-level setting:
 
    ```yaml
    remote_configuration:
@@ -54,11 +54,9 @@ Starting with Agent version 7.73.0, `remote_updates` defaults to `true`. On earl
    remote_updates: true
    ```
 
-   The default file location is `/etc/datadog-agent/datadog.yaml` on Linux and `%ProgramData%\Datadog\datadog.yaml` on Windows. If you manage this file with a configuration management tool, update the configuration in that tool.
-
-   Alternatively, set `DD_REMOTE_CONFIGURATION_ENABLED=true` and `DD_REMOTE_whereUPDATES=true` in the environment used by the Agent service.
+   Alternatively, set `DD_REMOTE_CONFIGURATION_ENABLED=true` and `DD_REMOTE_UPDATES=true` in the environment used by the Agent service.
 1. [Restart the Agent][14] to apply the changes.
-1. In Fleet Automation, open the Agent's side panel and check its **Remote Agent Management** status. If it still shows **NOT ENABLED**, verify that the effective configuration has `remote_updates` enabled.
+1. In Fleet Automation, open the Agent's side panel and check its **Remote Agent Management** status. If remote management remains unavailable, see [Troubleshoot remote Agent management](#troubleshoot-remote-agent-management).
 
 ## Agent Remote Configuration status
 
@@ -133,6 +131,16 @@ To disable Remote Configuration at the organization level:
 ## Troubleshooting
 
 If you experience issues using Remote Configuration with your Agents, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][6].
+
+### Troubleshoot remote Agent management
+
+If the Agent's side panel shows **Remote Agent Management: NOT ENABLED**, verify that the effective configuration has `remote_updates` enabled.
+
+If remote management remains unavailable, check:
+
+- The version and platform requirements for [Agent upgrades][10] or [Agent configuration][13].
+- The Agent's [Remote Configuration connectivity](#agent-remote-configuration-status).
+- Whether the Datadog Installer is running.
 
 ### Restart the Agent
 
