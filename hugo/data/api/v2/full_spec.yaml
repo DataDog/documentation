@@ -236522,28 +236522,65 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
-        Retrieves the content of a specific JavaScript source map file by its
-        filename, service name, and version.
+        Retrieves the content of a specific JavaScript source map file. Provide either
+        `debug_id` with a UUID, or all three of `filename`, `service`, and `version`.
+        When `debug_id` is provided, filename, service, and version are not required
+        and are ignored.
+
+        **Examples:** the following commands use the US1 API host. Replace the host
+        with the API host for your site, and the filename, service, version, and
+        debug ID with values from your organization. Use `--get` so curl sends the
+        parameters in the query string.
+
+        **1. Retrieve a source map by debug ID**
+
+        Provide `debug_id` with a UUID. No filename, service, or version is required.
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "debug_id=00000000-0000-4000-8000-000000000001"
+        ```
+
+        **2. Retrieve a source map by service and version**
+
+        Provide `filename` together with `service` and `version`.
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "filename=js/bundle.min.js.map" \
+          --data-urlencode "service=my-web-service" \
+          --data-urlencode "version=1.0.0"
+        ```
       operationId: GetSourcemaps
       parameters:
-        - description: The path to the source map file.
+        - description: |-
+            The debug ID of the JavaScript source map, in UUID format. When provided,
+            filename, service, and version are not required and are ignored.
+          in: query
+          name: debug_id
+          schema:
+            example: 00000000-0000-4000-8000-000000000001
+            format: uuid
+            type: string
+        - description: The path to the source map file. Required when `debug_id` is omitted.
           in: query
           name: filename
-          required: true
           schema:
             example: js/bundle.min.js.map
             type: string
-        - description: The service name associated with the source map.
+        - description: The service name associated with the source map. Required when `debug_id` is omitted.
           in: query
           name: service
-          required: true
           schema:
             example: my-web-service
             type: string
-        - description: The version of the service associated with the source map.
+        - description: The version of the service associated with the source map. Required when `debug_id` is omitted.
           in: query
           name: version
-          required: true
           schema:
             example: 1.0.0
             type: string
