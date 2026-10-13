@@ -109,6 +109,46 @@ Add any receivers and processors required by your Collector distribution.
 
 For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, and host metadata enrichment.
 
+## (Optional) Configure log processing
+
+Use the `dd-otel-log-config` header to configure how Datadog processes OTLP log records on intake. The header value is a JSON object with the following fields:
+
+`keep_raw_message`
+: **Type**: Boolean<br>
+**Default**: `false`<br>
+**Description**: By default, Datadog will parse a JSON log body into log attributes so that you can search individual fields (for example, `@key:value`) instead of full text search on the message. If `keep_raw_message` is set to `true`, Datadog does not parse the body and keeps it as a string in the `message` attribute. Use this option if you do custom parsing of the log message in a Logs pipeline or if fields in your JSON body conflict with existing log attributes.
+
+For example, to keep JSON log bodies as raw strings:
+
+```json
+{
+  "keep_raw_message": true
+}
+```
+
+Set the header on your OTLP requests alongside `dd-api-key`. For example, with automatic instrumentation:
+
+```shell
+export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-api-key=${DD_API_KEY},dd-otel-log-config={\"keep_raw_message\":true}"
+```
+
+For manual instrumentation, add the header in your exporter configuration. For example, in Java:
+
+```java
+.addHeader("dd-otel-log-config", "{\"keep_raw_message\": true}")
+```
+
+In an OpenTelemetry Collector, add the header under the `otlp_http` exporter's `headers`:
+
+```yaml
+exporters:
+  otlp_http:
+    logs_endpoint: {{< region-param key="otlp_logs_endpoint" >}}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      dd-otel-log-config: '{"keep_raw_message": true}'
+```
+
 ## Troubleshooting
 
 ### Error: 403 Forbidden
