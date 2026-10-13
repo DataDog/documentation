@@ -99,9 +99,9 @@ An exclusion filter is made of an event type and a query, like retention filters
 - An exclusion filter can target **All events** instead of a single event type, which lets you exclude on attributes or tags shared by every event, such as `@device.type` or `@geo.country`.
 - An exclusion filter has no retention rate. It either matches an event or it does not, so the **order of exclusion filters does not matter**.
 
-### Excluding errors ignored in Error Tracking
+### Reusing Error Tracking exclusions
 
-A predefined exclusion filter at the top of the list targets the errors you [ignored or excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
+A predefined exclusion filter at the top of the list targets the errors you [excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
 
 You can enable or disable this filter, but you cannot edit it or delete it.
 
