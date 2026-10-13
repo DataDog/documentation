@@ -3,17 +3,17 @@ title: Prompt Templating
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating/
 - /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating/
-description: Reference for the templating used in custom LLM-as-a-judge evaluation prompts—variables, array operators, span and trace filters, session paths, and resolution rules.
+description: Reference for the templating used in custom LLM-as-a-judge evaluator prompts—variables, array operators, span and trace filters, session paths, and resolution rules.
 further_reading:
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
-  text: "Custom LLM-as-a-Judge Evaluations"
+  text: "Custom LLM-as-a-Judge Evaluators"
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations"
   tag: "Documentation"
-  text: "Session-Level Evaluations"
+  text: "Session-Level Evaluators"
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations"
   tag: "Documentation"
-  text: "Trace-Level Evaluations"
+  text: "Trace-Level Evaluators"
 ---
 
 Custom LLM-as-a-judge prompts inject session, trace, or span data into the {{< ui >}}User{{< /ui >}} message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time. The available paths depend on the evaluation scope: session, trace, or span.
@@ -42,9 +42,9 @@ The autocomplete dropdown opens after you type `{{` and lists fields available o
 
 ## Session-scope syntax
 
-Session-scope evaluations expose every trace in the [user session][1] under the `traces` array. Each trace includes its own `spans` array, so you can read across traces and spans in one prompt. Use `{{traces[...]}}` paths (and nested `{{traces[...].spans[...]}}` paths) to build session-level judges. The `{{span_input}}` and `{{span_output}}` aliases are not available in session scope.
+Session-scope evaluators expose every trace in the [user session][1] under the `traces` array. Each trace includes its own `spans` array, so you can read across traces and spans in one prompt. Use `{{traces[...]}}` paths (and nested `{{traces[...].spans[...]}}` paths) to build session-level judges. The `{{span_input}}` and `{{span_output}}` aliases are not available in session scope.
 
-Session-level evaluations require spans to be tagged with a `session_id`. See [Tracking user sessions][1] to instrument your application, and [Session-Level Evaluations][2] for configuration, example prompts, and guidance on when to choose session scope.
+Session-level evaluators require spans to be tagged with a `session_id`. See [Tracking user sessions][1] to instrument your application, and [Session-Level Evaluators][2] for configuration, example prompts, and guidance on when to choose session scope.
 
 ### Reference the whole session
 
@@ -82,7 +82,7 @@ Use `[*]` on `traces` or `spans` to fan out: values from every matching element 
 
 ## Trace-scope syntax
 
-Trace-scope evaluations expose every span in the trace under the `spans` array. Use `{{spans...}}` paths to read across spans. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope. See [Trace-Level Evaluations][3] for configuration, example prompts, and guidance on when to choose trace scope.
+Trace-scope evaluators expose every span in the trace under the `spans` array. Use `{{spans...}}` paths to read across spans. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope. See [Trace-Level Evaluators][3] for configuration, example prompts, and guidance on when to choose trace scope.
 
 ### Reference the whole trace
 
@@ -110,7 +110,7 @@ Trace-scope evaluations expose every span in the trace under the `spans` array. 
 
 ## Span-scope syntax
 
-Span-scope evaluations expose a single span per evaluation. Reference fields by their JSON path on the span.
+Span-scope evaluators expose a single span per evaluation. Reference fields by their JSON path on the span.
 
 ### Built-in aliases
 
@@ -173,10 +173,10 @@ For example, given a span where `meta.input.messages` is:
 ## Tips
 
 - Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (session, trace, or span) and to the sample selected.
-- Pick a sample in the panel on the right ({{< ui >}}Sample Session{{< /ui >}} for session scope, {{< ui >}}Spans in Selected Trace{{< /ui >}} for trace scope, or {{< ui >}}Filtered Spans{{< /ui >}} for span scope), then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving.
+- Pick a sample in the panel on the right ({{< ui >}}Sample Session{{< /ui >}} for session scope, {{< ui >}}Spans in Selected Trace{{< /ui >}} for trace scope, or {{< ui >}}Filtered Spans{{< /ui >}} for span scope), then click {{< ui >}}Test Evaluator{{< /ui >}} to preview how each placeholder resolves on real data before saving.
 - Use the three-dots menu on a sample's JSON view and select {{< ui >}}Add variable to message{{< /ui >}} to insert a field path into the prompt without typing it.
 - Pass `{{*}}` when you want the LLM judge to see the full payload—useful for free-form prompts that decide for themselves which fields matter.
-- Use `{{traces}}` or targeted `{{traces[...].spans[...]}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluations][2] for scope guidance and example prompts.
+- Use `{{traces}}` or targeted `{{traces[...].spans[...]}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluators][2] for scope guidance and example prompts.
 
 ## Further Reading
 
