@@ -79,7 +79,7 @@ To have Bits Testing group your existing tests into suites for you, see [Create 
 <div class="alert alert-warning">Creating test suites with Bits Testing is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
-[Bits Testing][4] can group your existing Synthetic tests into suites. Describe in plain language how you want your tests organized. Bits Testing finds the matching tests and proposes suites for you to review. Bits Testing doesn't create any suites until you approve them.
+[Bits Testing][4] can group your existing Synthetic tests into suites. Describe in plain language how you want your tests grouped, and Bits Testing proposes suites of matching tests. You review each suite and choose which ones to create.
 
 You can ask Bits Testing for:
 
