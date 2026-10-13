@@ -79,9 +79,11 @@ warehouse_metric_sources:
   - sync_id: checkout_events
     name: Checkout events
     sql: |
-      SELECT user_id, event_timestamp, revenue
+      SELECT user_id, event_timestamp, transaction_timestamp, revenue
       FROM analytics.checkout_events
     timestamp_column: event_timestamp
+    additional_timestamp_columns:
+      - transaction_timestamp
     subject_types:
       - name: User
         column_name: user_id
@@ -102,6 +104,8 @@ metrics:
         warehouse_metric_source_sync_id: checkout_events
         measure_sync_id: revenue
       timeframe_start_value: 0
+      winsor_upper_percentile: 0.99
+      winsorization_strategy: nonzero
 ```
 
 ## Preview and sync changes
@@ -226,6 +230,7 @@ Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_
 | `description` | No | Description for the source. |
 | `sql` | Yes | SQL query that returns the timestamp, subject columns, measures, and properties used by metrics. |
 | `timestamp_column` | Yes | Column containing the event or metric timestamp. |
+| `additional_timestamp_columns` | No | Up to four additional timestamp columns returned by `sql`. Each name must be nonblank and contain at most 255 characters. Names must be unique after trimming whitespace and must not include `timestamp_column`. If omitted, the source has no additional timestamp columns. |
 | `reference_url` | No | Source-specific reference URL. |
 | `subject_types` | Yes | Subject mappings for the source. |
 | `measures` | No | Numeric columns that metrics aggregate. |
@@ -280,14 +285,19 @@ Add the aggregation field that matches the metric type:
 | `timeframe_end_value` | No | End offset for the metric timeframe. |
 | `timeframe_unit` | No | Timeframe unit. |
 | `property_filters` | No | Filters applied to the metric aggregation. |
-| `winsor_lower_percentile` | No | Lower winsorization percentile. |
-| `winsor_upper_percentile` | No | Upper winsorization percentile. |
+| `winsor_lower_percentile` | No | Lower winsorization percentile, from zero to one. Must be less than `winsor_upper_percentile` when both are set. |
+| `winsor_upper_percentile` | No | Upper winsorization percentile, from zero to one. |
 | `winsor_lower_fixed_value` | No | Lower fixed winsorization value. |
 | `winsor_upper_fixed_value` | No | Upper fixed winsorization value. |
+| `winsorization_strategy` | No | Supported values are `all_assigned_subjects` (default) and `nonzero`. For `operation: threshold`, omit this field or use `all_assigned_subjects`. |
+
+Omitting `additional_timestamp_columns` or `winsorization_strategy` applies the defaults above, including when you update or adopt an existing object. Include these fields in YAML to set their values.
 
 ### Ratio metric aggregation
 
 Use `ratio_metric_aggregation` to define a metric as a numerator divided by a denominator. Both `numerator_aggregation` and `denominator_aggregation` use the same fields as `simple_metric_aggregation`.
+
+Set `winsorization_strategy` separately on each aggregation. If omitted, each aggregation uses `all_assigned_subjects`.
 
 | Field | Required | Description |
 | ----- | -------- | ----------- |
@@ -303,11 +313,14 @@ ratio_metric_aggregation:
     measure:
       warehouse_metric_source_sync_id: checkout_events
       measure_sync_id: revenue
+    winsor_upper_percentile: 0.99
+    winsorization_strategy: nonzero
   denominator_aggregation:
     operation: count
     measure:
       warehouse_metric_source_sync_id: checkout_events
       kind: each_record
+    winsorization_strategy: all_assigned_subjects
 ```
 
 ### Percentile metric aggregation
