@@ -74,11 +74,17 @@ To create, update, or delete prompts through the API or SDK, provide an API key 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-- `dd-trace-go/v2` version **2.12.0 or later**.
-- Your [Datadog site][2] and a [Datadog API key][3].
-- An [application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to retrieve prompts by environment. Check these permissions if you use an existing key.
+### Supported versions
 
-**Agent setup:** When retrieving an environment's deployed prompt through the Agent, neither key is required in the application. Follow [Configure prompt retrieval](#configure-prompt-retrieval). Retrieving an exact or latest version still requires `DD_API_KEY`.
+- `dd-trace-go/v2` version 2.12.0 or later
+
+### Credentials
+
+You need your [Datadog site][2] and the credentials required for your retrieval method:
+
+- **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+- **Retrieve through the Agent**: Neither key is required when retrieval succeeds through the Agent. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
+- **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
 
 The Go Prompt Management SDK supports retrieval and formatting. To create or manage prompts, use the UI or API.
 
@@ -199,8 +205,6 @@ To retrieve an environment's deployed prompt through the Agent, complete the fol
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Follow the [Node.js SDK initialization guide][16] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
-
 #### Retrieve directly from Datadog
 
 Replace the placeholders and set the following environment variables before initializing `dd-trace`:
@@ -222,7 +226,8 @@ Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow d
 {{% /tab %}}
 {{% tab "Go" %}}
 
-With a Datadog Agent and [Remote Configuration][11] enabled, use the following setup to retrieve deployed prompts and report A/B test assignments. This setup is recommended even if you are not running A/B tests yet:
+#### Retrieve directly from Datadog
+Replace the placeholders and set the following environment variables before starting the tracer:
 
 ```shell
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"

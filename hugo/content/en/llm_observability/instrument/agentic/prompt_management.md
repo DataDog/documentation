@@ -236,10 +236,10 @@ Apply the shared consent, secret-handling, fallback, and verification rules in t
 
 The Go SDK is read-only. If the user wants to promote a local prompt, explain that they must create it through the UI or API first and provide its prompt ID. Do not call nonexistent SDK creation methods or create a custom HTTP client.
 
-1. Follow the Go tab in [Configure prompt retrieval](/llm_observability/configure/prompt_management/#configure-prompt-retrieval). Reuse the application's tracer initialization and request context. Do not require application-side credentials for successful Agent-backed retrieval; exact/latest retrieval needs an API key, and direct environment retrieval needs both keys.
+1. Follow the Go tab in [Configure prompt retrieval][1]. Reuse the application's tracer initialization and request context. Do not require application-side credentials for successful Agent-backed retrieval; exact/latest retrieval needs an API key, and direct environment retrieval needs both keys.
 2. At the existing prompt-construction boundary, call `llmobs.GetPrompt(ctx, promptID, llmobs.WithPromptFallback(...))`, preserving the application's text or chat prompt as the fallback. Handle the error before using the prompt.
-3. Call `prompt.Format(variables)` and handle its error. Follow the Go example in [Retrieve, format, and use a prompt](/llm_observability/configure/prompt_management/#retrieve-format-and-use-a-prompt) to pass the formatted output to the existing model client without changing its behavior.
-4. Follow the Go example in [Track prompt usage](/llm_observability/configure/prompt_management/#track-prompt-usage). Formatting does not automatically track the prompt. Annotate the LLM span with `llmobs.WithAnnotatedPrompt(prompt.Annotation(variables))`, using the same variables as formatting. Preserve existing manual instrumentation rather than creating duplicate spans.
+3. Call `prompt.Format(variables)` and handle its error. Follow the Go example in [Retrieve, format, and use a prompt][6] to pass the formatted output to the existing model client without changing its behavior.
+4. Follow the Go example in [Track prompt usage][7]. Formatting does not automatically track the prompt. Annotate the LLM span with `llmobs.WithAnnotatedPrompt(prompt.Annotation(variables))`, using the same variables as formatting. Preserve existing manual instrumentation rather than creating duplicate spans.
 5. Verify the integration as described below. Do not claim live verification without running the approved application flow.
 
 ## Verify the integration
@@ -256,3 +256,5 @@ The Go SDK is read-only. If the user wants to promote a local prompt, explain th
 [3]: /api/latest/feature-flags/list-environments/
 [4]: /api/latest/feature-flags/create-an-environment/
 [5]: /llm_observability/instrument/agentic/nodejs.md
+[6]: /llm_observability/configure/prompt_management/#retrieve-format-and-use-a-prompt
+[7]: /llm_observability/configure/prompt_management/#track-prompt-usage
