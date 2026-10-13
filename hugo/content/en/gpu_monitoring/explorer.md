@@ -29,7 +29,7 @@ You can customize any monitor's thresholds to fit your organization's needs.
 
 To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in the top-right corner of the page.
 
-{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Monitors dropdown in the top-right corner of the Explorer page, showing OOTB monitor templates for Temperature, Power Cap Throttling, Unmet GPU Requests, Critical XID Errors, General XID Errors, ECC Errors, Bursty Workloads, and Idle Devices" style="width:40%;" >}}
+{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Monitors dropdown in the top-right corner of the Explorer page, showing out-of-the-box monitor templates for Temperature, Power Cap Throttling, Unmet GPU Requests, Critical XID Errors, General XID Errors, ECC Errors, Bursty Workloads, and Idle Devices." style="width:40%;" >}}
 
 ## Break down your fleet by any tag
 
