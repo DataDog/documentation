@@ -1188,6 +1188,28 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
 
+## Documentation
+
+Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+
+### `search_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Searches published Datadog documentation and returns up to 10 relevant passages, each with its page title, section, URL, and document ID. Returns source passages, not a generated answer. Searches English documentation by default, or French, Japanese, Korean, or Spanish documentation when requested. Search uses AI embeddings for semantic matching. If your organization has [disabled AI providers][92], it uses keyword matching only.
+
+- How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
+- Find the Datadog documentation on monitor notification variables.
+- Which Datadog Agent settings control container log collection?
+
+### `read_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Reads a published Datadog documentation page as Markdown, by the document ID that `search_datadog_documentation` returns or by a `docs.datadoghq.com` URL. Long pages are returned in parts of up to 20,000 characters, and the agent can continue from where the previous part ended.
+
+- Read https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/ and explain the matcher syntax.
+- Open the Datadog MCP Server setup page and summarize the toolset options.
+- Read the full page behind the top search result before answering.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -3465,6 +3487,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
+[92]: /mcp_server/#data-handling-and-ai-providers
 
 ## Further reading
 
