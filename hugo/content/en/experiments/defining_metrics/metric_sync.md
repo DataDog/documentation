@@ -440,7 +440,7 @@ measure:
   measure_sync_id: revenue
 ```
 
-Run `validate` for local checks, then run `plan` to check references against Datadog and preview changes. Local validation checks source mappings in the submitted files. An explicit tag equal to the file's `sync_tag` still checks local mappings when that source is in the submitted files. For external sources, `plan` checks that the source and selected measure exist.
+Run `validate` for local checks, then run `plan` to preview changes. Local validation checks source mappings in the submitted files. An explicit tag equal to the file's `sync_tag` still checks local mappings when that source is in the submitted files. External references are resolved during `execute`; a successful plan does not confirm that an external source or selected measure exists.
 
 The sync API does not support `warehouse_metric_measure_id`. Replace raw measure IDs with a source and one of the selectors above.
 
