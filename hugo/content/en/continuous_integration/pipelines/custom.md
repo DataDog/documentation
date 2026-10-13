@@ -116,7 +116,14 @@ A running job event does not require an `end` time. The `end` time is set when t
 
 ## Manage job logs
 
-### Collect job logs
+### Logs Analysis
+
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs from your CI provider.
+For a full explanation, see the [Logs Analysis guide][21].
+
+Logs Analysis is enabled by default in Datadog, but requires job logs to be sent as described below. In
+[CI/CD Optimization Repository settings][22], you can enable or disable Logs Analysis for your organization or
+individual repositories.
 
 Send log lines for a custom CI job to the [CI job logs intake API][19]. Use identifiers that match the pipeline and
 job events you send through the [CI Visibility Pipelines API][1]. Each log object has three required fields:
@@ -129,9 +136,9 @@ job events you send through the [CI Visibility Pipelines API][1]. Each log objec
 All other log fields are optional. If provided, `provider_name` must match the pipeline event's `provider_name`.
 Datadog uses `custom` when the field is omitted from both the pipeline event and the log lines.
 
-Send log lines in batches while the job runs, or send the batches when it finishes. Datadog recommends sending all batches
-before submitting the completed job event. After you submit that event, Datadog closes the job log after 20 seconds
-without a new line. Lines received after it closes may not appear in the job's Logs tab.
+Send log lines in batches while the job runs, or send the batches when it finishes. Datadog recommends sending
+all batches before submitting the completed job event. After you submit that event, Datadog closes the job log after
+20 seconds without a new line. Lines received after it closes may not appear in the job's Logs tab.
 
 The following request sends one log line for a job. This example uses the US1 site; replace `datadoghq.com` with your
 Datadog site if needed.
@@ -153,18 +160,11 @@ EOF
 A request can contain one log object or an array of up to 1,000 log objects, with an uncompressed body of up to 5.1 MiB.
 For compression, retry guidance, optional attributes, and per-job limits, see the [Send CI job logs API reference][19].
 
-### Logs Analysis
-
-Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs from your CI provider.
-For a full explanation, see the [Logs Analysis guide][21].
-
-Logs Analysis is enabled by default in Datadog. In [CI/CD Optimization Repository settings][22], you can enable or disable it
-for your organization or individual repositories.
-
 ### Logs Storage
 
-To store job logs and view them in the Logs tab, go to [CI/CD Optimization Repository settings][22] and enable Logs Storage
-for your organization or individual repositories.
+After setting up job log delivery as described in [Logs Analysis](#logs-analysis), go to
+[CI/CD Optimization Repository settings][22] and enable Logs Storage for your organization or individual repositories.
+Stored logs appear in the {{< ui >}}Logs{{< /ui >}} tab for the job.
 
 Logs Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in
 [Log Management][20].
