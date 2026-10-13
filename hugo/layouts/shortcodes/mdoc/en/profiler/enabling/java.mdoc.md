@@ -191,8 +191,9 @@ Use the following prompt with a local AI coding agent to set up the Java profile
 You are helping me set up Datadog Continuous Profiler for my Java service.
 
 First, scan my project to auto-detect as much as possible. Look for:
-- pom.xml, build.gradle, or build.gradle.kts to determine Java version and
-  dependencies (check if dd-java-agent or dd-trace-java is already present).
+- pom.xml, build.gradle, build.gradle.kts, or Bazel BUILD/WORKSPACE files to
+  determine Java version and dependencies (check if dd-java-agent or
+  dd-trace-java is already present).
 - Dockerfile, docker-compose.yml, or Kubernetes manifests for startup commands,
   base image (JDK distribution and OS), and existing Datadog Agent config.
 - Application startup scripts or entrypoints (look for java -jar, mvn exec,
@@ -208,12 +209,17 @@ Determine which of the three setup paths applies:
    CPU, Wallclock, Allocations, Live Heap, Exceptions, I/O.
    Minimum JDK versions: OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+.
    OpenJ9: 8u372+, 11.0.18+, 17.0.6+.
+   If OpenJ9 is detected, add -XX:+IgnoreUnrecognizedVMOptions and
+   -XX:+KeepJNIIDs to the JVM flags to keep jmethodids stable and
+   prevent profiler crashes.
 
 2. JVM on Windows — reduced profile type support:
    CPU, Allocations, I/O, Exceptions (no Wallclock or Live Heap).
    Minimum JDK versions: OpenJDK 8u282+, 11.0.17+, 17.0.5+, 21.0.3+.
    Oracle JDK: 11.0.17+ (JDK 8 limited to CPU only, may require
    commercial license for JFR).
+   Do NOT set any -Ddd.profiling.ddprof.* system properties on Windows —
+   the ddprof native library is not supported on this platform.
 
 3. GraalVM Native Image (Linux, Windows, or macOS) — Preview:
    CPU and Allocations only (no Wallclock or Live Heap).
@@ -233,6 +239,9 @@ For JVM (Linux or Windows):
 - Add the -javaagent flag BEFORE -jar in the startup command.
 - Set DD_PROFILING_ENABLED=true.
 - Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- If OpenJ9 is detected, add -XX:+IgnoreUnrecognizedVMOptions and
+  -XX:+KeepJNIIDs to the JVM flags.
+- On Windows, do not set any -Ddd.profiling.ddprof.* system properties.
 - Show the complete modified startup command or Dockerfile.
 - Note which profile types are available for the detected OS.
 
