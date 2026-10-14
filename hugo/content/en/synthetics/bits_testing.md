@@ -37,10 +37,6 @@ Bits Testing is an AI agent that explores your application to map its most criti
 
 Bits Testing can also generate [Goal-Based tests][1]. This Synthetic test type uses prompted, non-deterministic, agentic testing to check that users can complete a specific goal in your application.
 
-## Prerequisites
-
-If your application sits behind bot protection or a web application firewall (WAF), allow the IPs listed under `synthetics` in the [Datadog IP ranges][2] with your provider. To run Bits Testing from a single location, you can allow only that location's IP range instead. See [Run Bits Testing](#run-bits-testing) for the locations Bits Testing can run from. You don't need to allow any IPs if you run Bits Testing from a [private location](#run-bits-testing-from-a-private-location).
-
 ## Access Bits Testing
 
 Open Bits Testing from Synthetic Monitoring & Testing using any of the following:
@@ -50,20 +46,20 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 - **Bits Testing** in the side navigation menu, under **Digital Experience > Synthetic Monitoring & Testing**.
 - {{< ui >}}Generate a Test With Bits Testing{{< /ui >}} in a session replay's details panel. See [Generate a test from a session replay][10].
 
-## Run Bits Testing
+## Trigger a Bits Testing job
 
 1. On the Bits Testing page, describe the coverage you want in plain language, or select a suggested prompt. For example, ask Bits Testing to increase coverage generally, or to focus on specific features.
 1. Confirm the starting URL. Leave {{< ui >}}Restrict Discovery to the start URL domain{{< /ui >}} enabled to keep Bits Testing from following links to a different domain. Turn it off if your application's sign-in flow redirects off-site and back.
 1. Select a location to run the Bits Testing job from:
    - A managed location: Frankfurt (GCP: `gcp:europe-west3`), N. Virginia (AWS: `aws:us-east-1`), Ohio (AWS: `aws:us-east-2`), or Virginia (Azure: `azure:eastus`).
    - A [private location][5] running remote execution. See [Run Bits Testing from a private location](#run-bits-testing-from-a-private-location).
-1. Optionally, select an [Agent Profile](#agent-profiles-optional).
+1. Optionally, select a [Profile](#profiles).
 1. Select a review mode:
    - {{< ui >}}Ask about every action{{< /ui >}}: Pauses before a sensitive action that changes real data, until you approve or deny it. See [Approve or deny sensitive actions](#approve-or-deny-sensitive-actions).
    - {{< ui >}}Auto-approve actions{{< /ui >}}: Never pauses. Use only in test environments.
-1. Click {{< ui >}}Start Discovery{{< /ui >}}, or {{< ui >}}Start Discovery Without a Profile{{< /ui >}} if you didn't select an Agent Profile.
+1. Click {{< ui >}}Start Discovery{{< /ui >}}, or {{< ui >}}Start Discovery Without a Profile{{< /ui >}} if you didn't select a Profile.
 
-{{< img src="synthetics/bits_testing/start_discovery.png" alt="The Bits Testing job configuration panel with a starting URL, location, Agent Profile, and review mode selectors." style="width:80%;" >}}
+{{< img src="synthetics/bits_testing/start_discovery.png" alt="The Bits Testing job configuration panel with a starting URL, location, Profile, and review mode selectors." style="width:80%;" >}}
 
 ### Run Bits Testing from a private location
 
@@ -103,22 +99,22 @@ Use the panel's navigation controls to move between the screenshots captured dur
 
 {{< img src="synthetics/bits_testing/bits_testing_step_detail.png" alt="A step detail panel showing a screenshot, the action taken, the page URL, the agent's reasoning, and the step performed." style="width:90%;" >}}
 
-## Agent Profiles (Optional)
+## Profiles
 
-An Agent Profile stores context that Bits Testing uses while interacting with your application, such as login credentials.
+A Profile stores context that Bits Testing uses while interacting with your application, such as login credentials.
 
-To create an Agent Profile:
+To create a Profile:
 
-1. Open the {{< ui >}}Agent Profile{{< /ui >}} dropdown menu and select {{< ui >}}\+ New Profile{{< /ui >}}.
+1. Open the {{< ui >}}Profile{{< /ui >}} dropdown menu and select {{< ui >}}\+ New Profile{{< /ui >}}.
 1. Name the profile.
 1. Add one or more variables. For each variable, set:
    - **Usage**: The variable's purpose, for example, `username` or `password`.
    - **Value**: Either a typed value, or an existing [Global Variable][3].
 1. Click {{< ui >}}Create Profile{{< /ui >}}.
 
-The new profile is automatically selected for the current job. Saved Agent Profiles can be reused in later Bits Testing jobs without redefining their variables.
+The new profile is automatically selected for the current job. Saved Profiles can be reused in later Bits Testing jobs without redefining their variables.
 
-{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating an Agent Profile, with fields for name, variable usage, and value." style="width:100%;" >}}
+{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating a Profile, with fields for name, variable usage, and value." style="width:100%;" >}}
 
 ## Review results
 
@@ -149,13 +145,19 @@ After you start testing a suite, each test becomes a regular Synthetic test that
 
 {{< img src="synthetics/bits_testing/bits_testing_generated_suite.png" alt="A generated test suite with Browser, HTTP, Network Path, and Goal-Based tests, showing a passed run's details." style="width:100%;" >}}
 
-## Billing
-
-Tests you enable from a Bits Testing job are billed as regular Synthetic tests, based on test runs. See [Synthetic Monitoring pricing][4] for Bits Testing and Goal-Based test pricing.
-
 ## Supported locations
 
-Bits Testing and Goal-Based tests run only from the managed locations listed in [Run Bits Testing](#run-bits-testing), or from a private location using remote execution. Browser, HTTP, and network path tests generated by Bits Testing support the same locations as any other Synthetic test, including [private locations][5].
+Bits Testing and Goal-Based tests run from the managed locations in [Trigger a Bits Testing job](#trigger-a-bits-testing-job), or from a private location using remote execution. Browser, HTTP, and network path tests generated by Bits Testing support the same locations as any other Synthetic test, including [private locations][5].
+
+## FAQ
+
+### Do you need to allowlist any IPs to run Bits Testing?
+
+If your application sits behind bot protection or a web application firewall (WAF), allow the IPs listed under `synthetics` in the [Datadog IP ranges][2] with your provider. To run Bits Testing from a single location, you can allow only that location's IP range instead. See [Trigger a Bits Testing job](#trigger-a-bits-testing-job) for the locations Bits Testing can run from.
+
+### How do you bypass bot protection without allowlisting IPs?
+
+Run Bits Testing from a [private location](#run-bits-testing-from-a-private-location) instead of a managed location. Traffic then reaches your application from inside your own network, bypassing bot protection or a WAF that blocks public cloud traffic.
 
 ## Further reading
 
@@ -164,7 +166,6 @@ Bits Testing and Goal-Based tests run only from the managed locations listed in 
 [1]: /synthetics/goal_based_testing/
 [2]: /api/latest/ip-ranges/list-ip-ranges/
 [3]: /synthetics/platform/settings/#global-variables
-[4]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products
 [5]: /synthetics/platform/private_locations/
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/api_tests/http_tests

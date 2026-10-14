@@ -30,7 +30,7 @@ Bits Testing pre-fills the job's starting URL and goal from the session.
 
 {{< img src="synthetics/guide/rum_to_synthetics/bits_testing_start_discovery.png" alt="The Bits Testing Start Discovery card prefilled with a goal and starting URL generated from a session replay's summary." style="width:100%" >}}
 
-Review the prefilled job, adjust its [location, Agent Profile, and review mode][8], and click {{< ui >}}Start Discovery{{< /ui >}}.
+Review the prefilled job, adjust its [location, Profile, and review mode][8], and click {{< ui >}}Start Discovery{{< /ui >}}.
 
 ## Further Reading
 
@@ -41,4 +41,4 @@ Review the prefilled job, adjust its [location, Agent Profile, and review mode][
 [3]: https://app.datadoghq.com/rum/sessions
 [4]: /session_replay/
 [7]: /synthetics/bits_testing/
-[8]: /synthetics/bits_testing/#run-bits-testing
+[8]: /synthetics/bits_testing/#trigger-a-bits-testing-job

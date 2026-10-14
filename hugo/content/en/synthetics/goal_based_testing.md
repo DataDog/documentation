@@ -43,14 +43,14 @@ To create a Goal-Based test manually:
 - Enter a **starting URL** for the application under test.
 - Write a **goal** as a prompt in plain language (for example, "Ask the support chatbot for a product recommendation").
 - Select a **location** to run the test from. See [supported locations](#supported-locations).
-- Optionally, select an [Agent Profile][2] to reuse variables such as login credentials.
+- Optionally, select a [Profile][2] to reuse variables such as login credentials.
 - Click {{< ui >}}Run Now{{< /ui >}}.
 
 {{< img src="synthetics/goal_based_testing/new_goal_based_test.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:80%;" >}}
 
 ### Supported locations
 
-Goal-Based tests run from the same locations as Bits Testing, including private locations using remote execution. See [Run Bits Testing][4].
+Goal-Based tests run from the same locations as Bits Testing, including private locations using remote execution. See [Trigger a Bits Testing job][4].
 
 ## Evaluate a test run
 
@@ -70,20 +70,20 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Schedule the test to run on a recurring basis.
 - Edit the test name.
 - Add tags.
-- Change the selected Agent Profile.
+- Change the selected Profile.
 - Click {{< ui >}}Save Test{{< /ui >}}.
 
 {{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Scheduling step of the Goal-Based test creation wizard, with recurrence interval options" style="width:80%;" >}}
 
 ## Billing
 
-For pricing, see [Bits Testing billing][3].
+For pricing, see [Synthetic Monitoring pricing][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/bits_testing/
-[2]: /synthetics/bits_testing/#agent-profiles-optional
-[3]: /synthetics/bits_testing/#billing
-[4]: /synthetics/bits_testing/#run-bits-testing
+[2]: /synthetics/bits_testing/#profiles
+[3]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products
+[4]: /synthetics/bits_testing/#trigger-a-bits-testing-job
