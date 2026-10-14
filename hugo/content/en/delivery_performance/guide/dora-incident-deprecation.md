@@ -14,86 +14,62 @@ further_reading:
   text: "Learn about DORA Metrics"
 ---
 
-## Overview
-
-<div class="alert alert-warning">
-DORA Metrics is retiring incident ingestion and reporting. Incident ingestion ends on <strong>December 31, 2026</strong>. Incident data previously sent to DORA Metrics becomes inaccessible on <strong>March 31, 2027</strong>.
-</div>
-
-DORA Metrics stops ingesting and displaying incidents. This change affects the following:
+As of **December 31, 2026**, DORA Metrics does not ingest or display incident data, and as of **March 31, 2027**, incidents stored in DORA Metrics are inaccessible. This affects the following:
 
 - The incident views in DORA Metrics
 - The DORA incident APIs
 - The PagerDuty and Datadog Incidents data sources in [DORA Metrics settings][1]
 - Any dashboard, notebook, or saved query that uses DORA incident data
 
-### What is not changing
+This does not affect how Change Failure Rate and Failed Deployment Recovery Time are calculated, because they use [Change Failure Detection][2], not incident events.
 
-**How your DORA metrics are calculated.** Since January 2026, Change Failure Rate and Failed Deployment Recovery Time have used [Change Failure Detection][2] rather than incident events. Both metrics continue to work as they do today.
+If you have incidents and incident history in [Datadog Incident Management][3], they are also unaffected. You can declare, manage, and report on them independently of DORA Metrics.
 
-**Datadog Incident Management.** Your incidents and incident history in [Datadog Incident Management][3] are unaffected. You can continue to declare, manage, and report on them as usual.
+## Actions by data source
 
-## Who is affected
-
-You are affected if your organization sends or reads incident data in DORA Metrics through any of the following:
+The actions you need to take depend on whether your organization sends or reads incident data in DORA Metrics through any of the following:
 
 - The **Datadog Incidents** data source in DORA Metrics settings
 - The **PagerDuty** data source in DORA Metrics settings
 - The **DORA incident API** (`POST /api/v2/dora/incident`)
 
-The steps you need to take depend on which of these your organization uses.
+### Datadog Incidents data source
 
-### If you use only the Datadog Incidents data source
+Incidents from the **Datadog Incidents** data source in DORA Metrics settings are stored in Datadog Incident Management, not in DORA Metrics. Your incident history stays available in Incident Management, so the March 31, 2027 export deadline does not apply.
 
-Your incidents are stored in Datadog Incident Management, which is not affected by this change. Only the incident views within DORA Metrics are removed, on December 31, 2026. Your incident history remains available in Incident Management, so the March 31, 2027 export deadline does not apply to your organization.
+If any dashboards, notebooks, or saved queries reference DORA incident data, update them to use [Incident Management Analytics][4] before December 31, 2026. Otherwise, no action is needed.
 
-**What to do**: Check whether any of your dashboards, notebooks, or saved queries reference DORA incident data. Update those to use [Incident Management Analytics][4] before December 31, 2026. If none do, no action is needed.
+### PagerDuty data source or DORA incident API
 
-### If you use the DORA incident API or the PagerDuty data source
+Incidents from the **PagerDuty** data source in DORA Metrics settings or the **DORA incident API** are stored in DORA Metrics, so both dates apply. To keep your incident reporting and history:
 
-Incidents you send through the DORA incident API or the PagerDuty data source are stored by DORA Metrics. Both dates in the [timeline](#timeline) apply to your organization.
-
-**What to do**: Remove your API calls, migrate your reporting, and export any incident history you want to keep.
-
-## Timeline
-
-### December 31, 2026: incident ingestion ends
-
-DORA Metrics stops accepting new incidents:
-
-- The incident ingestion and deletion APIs are disabled.
-- The PagerDuty data source in DORA Metrics stops forwarding incidents.
-- Datadog Incidents data is no longer displayed in DORA Metrics.
-
-Before this date:
-
-- **If you call the DORA incident APIs**: Remove your calls to the incident ingestion endpoint (`POST /api/v2/dora/incident`) and the incident deletion endpoint.
-- **If you use DORA incidents for ongoing reporting**: Move your reporting to one of the [alternatives](#alternatives-for-incident-reporting) to avoid a gap in your data.
-
-### March 31, 2027: access to DORA incident data ends
-
-Incidents previously sent through the DORA incident API or the PagerDuty data source can no longer be viewed or exported. Datadog removes the incident views and the PagerDuty and Datadog Incidents configurations from DORA Metrics settings.
-
-Incidents ingested before December 31, 2026 remain available for viewing and export until March 31, 2027.
-
-Before this date:
-
-- **To keep your incident history**: Export it with the [incident events API][5] or download your dashboard data as CSV.
-- **If dashboards, notebooks, or saved queries reference DORA incident data**: Update or retire them.
+1. Before December 31, 2026:
+   - Remove calls to the incident ingestion endpoint (`POST /api/v2/dora/incident`) and the incident deletion endpoint.
+   - Move your ongoing reporting to one of the [alternatives](#alternatives-for-incident-reporting) to avoid a gap in your incident data.
+1. Before March 31, 2027:
+   - Export any incident history you want to keep with the [incident events API][5], or download your dashboard data as CSV.
+   - Update or retire any dashboards, notebooks, or saved queries that reference DORA incident data.
 
 ## Alternatives for incident reporting
 
-| Source of your incidents | Use instead |
+| Incidents source | Use instead |
 | --- | --- |
 | Datadog Incident Management | [Incident Management Analytics][4] |
 | PagerDuty | The [Datadog PagerDuty integration][6], which brings triggered and resolved events into the Events Explorer. This integration is separate from the PagerDuty data source in DORA Metrics. |
 | Custom incident events sent through the API | The [Datadog Events API][7], to send events to the Events Explorer for querying and dashboards. To declare and manage incidents in Datadog, use [Datadog Incident Management][3]. |
 
-**Note**: These alternatives support incident reporting only. They do not feed DORA stability metrics, which use [Change Failure Detection][2].
+<div class="alert alert-info">These alternatives support incident reporting only. They do not feed DORA stability metrics, which use <a href="/delivery_performance/dora_metrics/change_failure_detection/">Change Failure Detection</a>.</div>
+
+## Timeline
+
+| Date | Change |
+| --- | --- |
+| December&nbsp;31,&nbsp;2026 | DORA Metrics stops accepting incidents: <br>- Incident ingestion and deletion APIs are disabled.<br>- The PagerDuty data source in DORA Metrics stops forwarding incidents.<br>- Datadog Incidents data is not displayed in DORA Metrics.<br>Incidents ingested before this date remain available for viewing and export until March 31, 2027. |
+| March&nbsp;31,&nbsp;2027 | Incidents previously sent through the DORA incident API or the PagerDuty data source cannot be viewed or exported. Datadog removes the incident views and the PagerDuty and Datadog Incidents configurations from [DORA Metrics settings][1]. |
 
 ## Get help
 
-If you need help assessing the impact of this change or updating your incident reporting, contact [Datadog Support][8].
+For help assessing the impact or updating your incident reporting, contact [Datadog Support][8].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
