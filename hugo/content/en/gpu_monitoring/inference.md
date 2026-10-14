@@ -82,9 +82,7 @@ vLLM serves metrics on the same port as its OpenAI-compatible API server, which 
 
 ### 3. Configure the integration
 
-Add the following [Autodiscovery annotations][2] to the corresponding workload pod templates. In each annotation key, replace the placeholder with the value of the container's `name` field in `spec.template.spec.containers[]`, not the image name.
-
-Add the following annotation to every vLLM pod template:
+Add the following [Autodiscovery annotation][2] to every vLLM pod template. In the annotation key, replace `<VLLM_CONTAINER_NAME>` with the value of the container's `name` field in `spec.template.spec.containers[]`, not the image name:
 
 ```yaml
 metadata:
