@@ -494,7 +494,7 @@ Choose one of the following approaches for the user or service principal:
 
 #### System table permissions
 
-The regular setup instructions grant `SELECT` on `CATALOG system`. As a more granular alternative for users who do not want catalog-level `SELECT`, grant the user or service principal access only to the system tables that Datadog queries:
+The regular setup instructions grant `SELECT` on `CATALOG system`. As a more granular alternative for users who do not want catalog-level `SELECT`, grant the user or service principal access only to the following resources that Datadog requires:
 
 - `CAN USE` permission on the SQL Warehouse.
 - `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
