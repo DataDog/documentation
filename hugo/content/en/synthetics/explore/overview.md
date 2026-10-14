@@ -49,7 +49,7 @@ Use these filters to scope the map and the list of failing tests:
 
 ### Find concentrated failures
 
-The map shows where failures concentrate. Tests first split into {{< ui >}}OK{{< /ui >}} and {{< ui >}}In alert{{< /ui >}}. Each tile represents a group and shows how many tests it contains. Larger tiles contain more tests.
+The map shows where failures concentrate. It first splits tests into {{< ui >}}OK{{< /ui >}} and {{< ui >}}In alert{{< /ui >}}. Each tile represents a group and shows how many tests it contains. Larger tiles contain more tests.
 
 Use the {{< ui >}}Group by{{< /ui >}} menu to choose how the map groups tests:
 
