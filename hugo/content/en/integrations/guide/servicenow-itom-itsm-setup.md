@@ -15,6 +15,7 @@ To use the integration, follow the instructions to install it, and then configur
    1. [Configure Datadog templated monitor notifications](#monitor-notifications)
    1. [Configure Datadog Work Management](#case-management)
    1. [Configure Datadog Incident Management](#incident-management)
+   1. [Configure Datadog On-Call](#on-call)
 1. [Customize data with transform maps](#transform-maps)
 
 ## Configure the ServiceNow tile {#tile}
@@ -25,7 +26,7 @@ Before installing the integration, ensure you have the [ServiceNow tile configur
 
 There are two ways to install the integration:
 - Datadog recommends installing the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
-- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.8.0.xml][2]) and upload it to your ServiceNow instance manually.
+- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.9.3.xml][2]) and upload it to your ServiceNow instance manually.
 
 ## Configure the integration
 
@@ -255,6 +256,21 @@ After installing the integration, in Datadog, go to the [Integration Settings][9
 
 For step-by-step instructions on setting up and configuring this integration for incident management, see [Integrate ServiceNow with Datadog Incident Management][12].
 
+### Configure Datadog On-Call {#on-call}
+
+Create a ServiceNow incident when a Datadog On-Call page triggers, and page Datadog On-Call from a ServiceNow record.
+
+1. In Datadog, go to **Incident Response** > **On-Call** > **Settings**. On the left side, select **Integrations**.
+1. Click **ServiceNow**, then click **Add Connection** and configure the settings for the connection with your instance.
+1. Click a [routing rule][13] for a team, and add a rule that creates a ServiceNow incident when an On-Call page triggers.
+1. To create a Datadog On-Call page from ServiceNow, add a business rule in ServiceNow that calls the `PublishOnCallPage` script include with the target type, the identifier of the paging target, and the urgency of the page. This script include requires ITOM/ITSM integration version 2.8.0 or newer, and uses the credentials from the [**Configuration** record](#sync-bidirectionally), so complete that configuration first. For example:
+
+   ```
+   <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+       new PublishOnCallPage("user_uuid", "<USER_UUID>", "high").execute(current);
+   })(current, previous);]]></script>
+   ```
+
 ## Sync data bidirectionally between ServiceNow and Work/Incident Management {#sync-bidirectionally}
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Work Management and Incident Management.
@@ -399,7 +415,7 @@ Need additional help? Contact [Datadog support][10].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
+[2]: /resources/xml/Datadog-Snow_Update_Set_v2.9.3.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/work/settings
@@ -410,3 +426,4 @@ Need additional help? Contact [Datadog support][10].
 [10]: /help/
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
 [12]: /incident_response/incident_management/integrations/servicenow
+[13]: /incident_response/on-call/routing_rules/
