@@ -5,11 +5,9 @@ description: Reduce CI testing time by distributing test files across CI nodes o
 
 ## Overview
 
-Test Parallelization helps you reduce CI testing time by distributing test files across CI nodes or local workers. It uses Test Optimization data to detect which test files should run, estimate their duration, and create an execution plan.
+Test Parallelization helps you shorten test runs and use CI resources more efficiently by balancing test files across CI nodes or local workers. It uses test duration data from Test Optimization to distribute work by expected runtime and reduce idle time.
 
-Test Parallelization is designed to work with [Test Impact Analysis][1]. Test Impact Analysis skips tests that are not affected by a code change. Test Parallelization splits the remaining test files evenly across the selected CI nodes.
-
-Use Test Parallelization when your test suite takes a long time to run. When used with Test Impact Analysis, Test Parallelization runs only files with non-skipped tests. It selects a CI node count within your configured budget using estimated test durations and setup overhead. Measure duration and cost after representative runs to choose a budget for your suite.
+Pair it with Test Impact Analysis to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change, and Test Parallelization automatically scales down the CI node count to match the remaining workload - saving the cost and time of provisioning and setting up unnecessary runners.
 
 ## Setup
 
@@ -21,13 +19,11 @@ Test Parallelization is supported for the following languages and frameworks:
 
 | Language | Frameworks | Minimum library version |
 | -------- | ---------- | ----------------------- |
-| Ruby     | RSpec, Minitest | `datadog-ci` gem `1.31.0` or later |
+| Ruby     | RSpec, Minitest | `datadog-ci` gem `1.42.0` or later |
 | Python   | pytest | `ddtrace` package `4.11.0` or later |
-| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright | `dd-trace` package `5.111.0` or later for `v5` and `6.0.0` or later for `v6` |
+| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest | `dd-trace` package `5.125.0` or later for `v5` and `6.14.0` or later for `v6` |
 
-For the Vitest Node.js API integration, use Vitest **1.6 or later**. Use `dd-trace` **5.125.0 or later on v5**, or **6.14.0 or later on v6**.
-
-For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13. These frameworks require `ddtest` 1.6.0 or later. Your framework version must also meet the [`dd-trace` compatibility requirements][4].
+For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13.
 
 ## How it works
 
@@ -51,4 +47,3 @@ For single-node and multi-node examples, see [Set Up Test Parallelization][3].
 [1]: /tests/test_impact_analysis/
 [2]: /tests/setup/
 [3]: /tests/test_parallelization/setup/
-[4]: /tests/setup/javascript/#compatibility
