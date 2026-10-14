@@ -184,7 +184,7 @@ When searching for an attribute or tag value that contains special characters or
 
 Free-text search matches whole words. Datadog splits both the log message and your query into words according to the [Unicode word boundary rules][9]. Spaces and most punctuation separate words, and the separators themselves aren't searchable. For example, `hello` matches `Hello, world!`, and `"hello world"` matches `hello-world`. The same rules apply to full-text searches that use `*:`.
 
-Some punctuation separates words only in certain contexts. The following table shows how periods, colons, commas, underscores, and hyphens split text:
+Some punctuation separates words only in certain contexts. The following table shows how periods, colons, commas, apostrophes, underscores, and hyphens split text:
 
 | Characters                 | Example       | Words                  |
 |----------------------------|---------------|------------------------|
@@ -196,10 +196,13 @@ Some punctuation separates words only in certain contexts. The following table s
 | Number, comma, number      | `3,456`       | `3,456`                |
 | Letter, colon, letter      | `metric:cpu`  | `metric:cpu`           |
 | Letter, colon, number      | `RequestId:5` | `RequestId`, `5`       |
+| Letter, apostrophe, letter | `don't`       | `don't`                |
 | Letter, underscore, letter | `hello_world` | `hello_world`          |
 | Letter, hyphen, letter     | `hello-world` | `hello`, `world`       |
 
 Because `my.friend` is a single word, the query `friend` doesn't match it. To match part of a word, use a wildcard as described in the [Multi-character wildcard](#multi-character-wildcard) section. For example, `*friend` matches `my.friend`.
+
+Straight (`'`) and curly (`’`) apostrophes are different characters, so `don't` doesn't match `don’t`. To match both, use a wildcard such as `don*`.
 
 ## Numerical values
 
