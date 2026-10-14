@@ -106,6 +106,7 @@ When review mode is set to {{< ui >}}Ask about every action{{< /ui >}}, Bits Tes
 
 - Click {{< ui >}}Approve{{< /ui >}} to let Bits Testing continue down that path.
 - Click {{< ui >}}Deny{{< /ui >}} to skip the action. Bits Testing stops exploring that branch, marks it as denied in the map, and continues exploring other paths.
+- If you don't respond before the approval expires, Bits Testing treats it like a denial and stops exploring that branch.
 
 {{< img src="synthetics/bits_testing/bits_testing_approval_needed.png" alt="Four Approval needed cards for two product review actions, a profile edit, and a sign-up action, each with an explanation and Approve and Deny buttons." style="width:100%;" >}}
 
@@ -124,10 +125,10 @@ Use the panel's navigation controls to move between the screenshots captured dur
 
 {{< img src="synthetics/bits_testing/bits_testing_step_detail.png" alt="A step detail panel showing a screenshot, the action taken, the page URL, the agent's reasoning, and the step performed." style="width:90%;" >}}
 
-After a job completes, Bits Testing updates the map to show every branch it explored:
+After a job completes, Bits Testing updates the map to distinguish two kinds of paths:
 
-- **Successful (green)** branches led to a relevant user journey that Bits Testing can generate a test for.
-- **Unsuccessful (indigo)** branches didn't yield a relevant journey, either because Bits Testing judged the flow as not relevant or inconsistent, or because it encountered an error.
+- **Exploration path**: Every page and action Bits Testing tried while exploring your application.
+- **Path to generated journey**: The specific sequence of actions that produced a test suite.
 
 If a job doesn't complete successfully, the map shows the error that stopped it.
 
