@@ -22,10 +22,10 @@ To use AI Guard and see AI Guard activity in Datadog, install the appropriate SD
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Install dd-trace-py v3.19.0 or later:
+Install dd-trace-py v4.13.0 or later:
 
 ```shell
-pip install ddtrace>=3.19.0
+pip install ddtrace>=4.13.0
 ```
 {{% /tab %}}
 {{% tab "JavaScript" %}}
@@ -54,14 +54,14 @@ gem install ddtrace -v '>= 2.25.0'
 
 {{< tabs >}}
 {{% tab "Python" %}}
-The Python SDK ([dd-trace-py v3.18.0][1] or later) provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
+The Python SDK ([dd-trace-py v4.13.0][1] or later) provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
 
 <div class="alert alert-info">
-Starting with dd-trace-py v3.18.0, the Python SDK uses the standardized common message format.
+Starting with dd-trace-py v4.13.0, the Python SDK module is <code>ddtrace.aiguard</code>. The previous <code>ddtrace.appsec.ai_guard</code> module is deprecated and is scheduled for removal in dd-trace-py v5.0.0.
 </div>
 
 ```py
-from ddtrace.appsec.ai_guard import new_ai_guard_client, Function, Message, Options, ToolCall
+from ddtrace.aiguard import new_ai_guard_client, Function, Message, Options, ToolCall
 
 client = new_ai_guard_client()
 ```
@@ -94,7 +94,7 @@ The method returns an `Evaluation` object containing:
 For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
 
 ```py
-from ddtrace.appsec.ai_guard import ContentPart, ImageURL
+from ddtrace.aiguard import ContentPart, ImageURL
 
 # Evaluate a user prompt with both text and image content
 result = client.evaluate(
@@ -134,7 +134,7 @@ result = client.evaluate(
 )
 ```
 
-[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.18.0
+[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.13.0
 {{% /tab %}}
 {{% tab "Javascript" %}}
 The JavaScript SDK ([dd-trace-js v5.69.0][1] or later) offers a simplified interface for interacting with the REST API directly from JavaScript applications.
