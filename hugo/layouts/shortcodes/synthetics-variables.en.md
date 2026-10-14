@@ -45,3 +45,9 @@ When you reference a variable, you can transform its resolved value by appending
 : Base64-decodes the variable's value. For example, `aGVsbG8=` becomes `hello`.
 
 Filters apply to both local and global variables. You can apply one filter per reference, and filter names are case-sensitive.
+
+### Send literal double curly braces
+
+To send literal double curly braces in an interpolated field such as the URL, request body, headers, or assertions, wrap the text in a raw block: everything between the markers is sent verbatim and the markers are removed. For example, &#x7b;&#x7b;&#x7b;&#x7b;raw&#x7d;&#x7d;&#x7d;&#x7d;&#x7b;&#x7b;7*7&#x7d;&#x7d;&#x7b;&#x7b;&#x7b;&#x7b;/raw&#x7d;&#x7d;&#x7d;&#x7d; sends &#x7b;&#x7b;7*7&#x7d;&#x7d;. Variables outside the block resolve normally.
+
+This uses the same raw format as [monitor notifications](/monitors/notify/variables/#raw-format).
