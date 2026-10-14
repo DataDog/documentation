@@ -70,7 +70,7 @@ Click a tile in the map to filter the list to the tests in that tile.
 
 For each failing test, you can:
 
-- Click {{< ui >}}Investigate With Bits{{< /ui >}} to start an AI-assisted investigation of the failure.
+- Click {{< ui >}}Investigate with Bits{{< /ui >}} to start an AI-assisted investigation of the failure.
 - Click {{< ui >}}View Traces{{< /ui >}} to see the backend traces for an API test.
 - Click {{< ui >}}View Failing Step{{< /ui >}} to open the step where a browser test failed.
 
