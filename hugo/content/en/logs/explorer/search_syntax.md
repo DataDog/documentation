@@ -143,7 +143,7 @@ You can use wildcards with free text search. However, it only searches for terms
 
 ### Multi-character wildcard
 
-Use the `*` symbol to match zero or more characters. In the log message (the `content` column in Log Explorer), `*` matches characters within a single word. For how search defines a word, see [How free-text search splits words](#how-free-text-search-splits-words).
+Use the `*` symbol to match zero or more characters. In the log message (the `content` column in Log Explorer), `*` matches characters within a single word. For how search defines a word, see the [How free-text search splits words](#how-free-text-search-splits-words) section.
 
 * `web*` matches log messages that contain a word starting with `web`, such as `webserver`.
 * `*web` matches log messages that contain a word ending with `web`, such as `myweb`.
@@ -155,7 +155,7 @@ A single `*` doesn't match across words. For example, `waiting*time` doesn't mat
 * `**` matches any characters, including spaces and punctuation between words. For example, `waiting**time` matches `waiting until next renew time`.
 * An escaped space (`\ `) matches consecutive words, and each word can contain wildcards. For example, `waiting\ un*` matches `waiting until next renew time`.
 
-**Note**: Wildcards only work as wildcards outside of double quotes. Inside double quotes, `*` is treated like other punctuation and ignored, so `"*test*"` searches for the word `test`.
+**Note**: Wildcards work as wildcards only outside double quotes. Inside double quotes, `*` is treated like other punctuation and ignored, so `"*test*"` searches for the word `test`.
 
 **Tip**: Single-word searches without wildcards or double quotes are the fastest. Wildcard and quoted searches take longer, especially across a large volume of logs. To speed them up, combine them with selective filters such as `service` or `host`.
 
@@ -167,7 +167,7 @@ Wildcard searches work within tags and attributes (faceted or not) with this syn
 service:*mongo
 ```
 
-Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs with content (message) that contain a word that includes the string `NETWORK`:
+Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs whose message (content) contains a word that includes the string `NETWORK`:
 
 ```
 *NETWORK*
@@ -182,9 +182,9 @@ When searching for an attribute or tag value that contains special characters or
 
 ## How free-text search splits words
 
-Free-text search matches whole words. Datadog splits both the log message and your query into words according to the [Unicode word boundary rules][9]. Spaces and most punctuation separate words, and the separators themselves aren't searchable. For example, `hello` matches `Hello, world!`, and `"hello world"` matches `hello-world`.
+Free-text search matches whole words. Datadog splits both the log message and your query into words according to the [Unicode word boundary rules][9]. Spaces and most punctuation separate words, and the separators themselves aren't searchable. For example, `hello` matches `Hello, world!`, and `"hello world"` matches `hello-world`. The same rules apply to full-text searches that use `*:`.
 
-Periods, colons, commas, and underscores separate words only in some contexts:
+Some punctuation separates words only in certain contexts. The following table shows how periods, colons, commas, underscores, and hyphens split text:
 
 | Characters                 | Example       | Words                  |
 |----------------------------|---------------|------------------------|
@@ -199,7 +199,7 @@ Periods, colons, commas, and underscores separate words only in some contexts:
 | Letter, underscore, letter | `hello_world` | `hello_world`          |
 | Letter, hyphen, letter     | `hello-world` | `hello`, `world`       |
 
-Because `my.friend` is a single word, the query `friend` doesn't match it. To match part of a word, use a [wildcard](#multi-character-wildcard): `*friend` matches `my.friend`.
+Because `my.friend` is a single word, the query `friend` doesn't match it. To match part of a word, use a wildcard as described in the [Multi-character wildcard](#multi-character-wildcard) section. For example, `*friend` matches `my.friend`.
 
 ## Numerical values
 
