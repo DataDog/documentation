@@ -142,7 +142,7 @@ To correlate inference requests with GPU activity, set up [Continuous Tracing wi
 [4]: /gpu_monitoring/tracing
 
 {{% /tab %}}
-{{% tab "vLLM & Dynamo" %}}
+{{% tab "vLLM with Dynamo" %}}
 
 Setup uses two integrations. The Dynamo integration collects frontend and worker runtime metrics, and the vLLM integration collects engine metrics.
 
