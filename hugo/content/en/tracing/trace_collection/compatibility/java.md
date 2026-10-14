@@ -124,6 +124,7 @@ The following instrumentations are disabled by default and can be enabled with t
 |------------------------------|----------------------------------------------------------------------------------------------------------|
 | Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                           |
 | Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                      |
+| Guidewire                    | `-Ddd.integration.guidewire.enabled=true`                                                                |
 | Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`         |
 | Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                   |
 | JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                   |
@@ -139,6 +140,8 @@ The following instrumentations are disabled by default and can be enabled with t
 
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
+
+**Guidewire Note**: The Guidewire integration propagates trace context from the originating request span to WSI (Web Service Invocation) worker threads, so outbound SOAP call spans appear as children of the originating request instead of separate orphaned traces. Requires Java tracer 1.67.0+.
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
@@ -260,6 +263,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Datanucleus JDO     | 4.0+             | Fully Supported                                        | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+             | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+            | Fully Supported                                        | `graphql-java`                                 |
+| Guidewire (PolicyCenter, BillingCenter) | 10.x | [Preview](#framework-integrations-disabled-by-default) | `guidewire`, `guidewire-wsi`   |
 | Hazelcast (client)  | 3.6+             | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
 | Hibernate           | 3.5+             | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
 | Hystrix             | 1.4+             | Fully Supported                                        | `hystrix`                                      |
