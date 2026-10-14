@@ -76,10 +76,12 @@ Toggle the switch to **Enable Compression** with gzip. Optionally, select the co
 
 You can configure how the Worker batches events before sending them to ADX.
 
-- **Batch Max Bytes**: The maximum size of a batch, in bytes. The default is `2,000,000` bytes (2 MB). The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][13] for more information.
+1. In the **Batch Max Bytes** field, enter the maximum batch size in bytes.
+    - The default is `2,000,000` bytes (2 MB).
+    - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][13] for more information.
     - **Note**: Data created by [update policies][14] is included in the ingestion data size limit. Datadog recommends a default batch size of 2 MB to accommodate this additional data.
-- **Batch Max Events**: The maximum number of events in a batch. The default is `1,000`.
-- **Batch Timeout**: The maximum number of seconds before a partial batch is flushed. The default is `1` second.
+1. In the **Batch Max Events** field, enter the maximum number of events in a batch. The default is `1,000`.
+1. In the **Batch Timeout** field, enter the maximum number of seconds before a batch is flushed. The default is `1` second.
 
 #### Buffering
 
@@ -125,13 +127,13 @@ The Worker does not retry `400` responses, so the batch is dropped. This error o
 
 ### Failed to render template
 
-If the Worker logs an error similar to the following, the Worker couldn't resolve the template in the **Table** field:
+If the Worker logs an error similar to the following, the Worker couldn't resolve the template syntax in the **Table** field:
 
 ```
-Failed to render template for "table". error=Missing fields on event: [".adx.table"] error_type="template_failed" stage="processing"
+Failed to render template for "table". error=Missing fields on event: ["adx.table"] error_type="template_failed" stage="processing"
 ```
 
-This error occurs when a log doesn't have the field referenced in the template. The Worker drops logs whose table template cannot be resolved. To resolve this issue, make sure all logs sent to the destination contain the field referenced in the template. See [Template syntax][12] for more information.
+This error occurs when a log doesn't have the field referenced in the template. The Worker drops logs whose table template syntax cannot be resolved. To resolve this issue, make sure all logs sent to the destination contain the field referenced in the template. See [Template syntax][12] for more information.
 
 ### Throttling when sending logs to many tables
 
@@ -144,17 +146,17 @@ Retrying after response.
 Internal log [Retrying after response.] has been suppressed 132 times.
 ```
 
-When you use template syntax in the **Table** or **Mapping Reference** fields, the Worker creates a separate batch for each combination of resolved table and mapping reference. If your logs resolve to many distinct tables and mapping references, the Worker sends many small requests at the same time. Depending on the size of your cluster, ADX might throttle these requests.
+The Worker creates a separate batch for each combination of resolved table and mapping reference. If your logs resolve to many distinct tables and mapping references, the Worker sends many small requests at the same time to ADX. Depending on the size of your cluster, ADX might throttle these requests.
 
 As long as your ADX cluster remains available, throttled requests are retried, so data loss is unlikely. However, high rates of throttling can cause:
 
 - A large drop in pipeline throughput, which is the number of logs that pass through the pipeline per second.
 - High buffer utilization. Logs waiting to be sent fill the destination buffer, and the backpressure propagates to the source. When the source buffer is full, push-based sources, such as the HTTP Server and Datadog Agent sources, reject new logs. Pull-based sources stop pulling new logs.
 
-If you expect your pipeline to send logs to a high number of tables:
+If you expect your pipeline to send logs to a large number of tables:
 
 - [Scale your ADX cluster][15] to handle the volume of requests.
-- Monitor your source and destination [buffer metrics][16] to make sure the buffers don't fill up. Full buffers can cause the pipeline to reject logs.
+- Monitor your source and destination [buffer metrics][16] to make sure the buffers don't fill up, which could lead to logs getting rejected at the source.
 
 ## Health metrics
 
@@ -164,7 +166,7 @@ For [component metrics][16] and [destination buffer metrics][17] emitted by all 
 
 ### Azure authentication
 
-The fields you need to fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
+After you select an authentication method in the **Azure Authentication** dropdown menu, the fields you need to fill in depend on the authentication method selected.
 
 #### Azure CLI
 
