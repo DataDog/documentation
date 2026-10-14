@@ -22,7 +22,7 @@ further_reading:
 
 The Synthetic Monitoring & Testing {{< ui >}}Overview{{< /ui >}} page shows the health and coverage of your Synthetic tests in one place. It answers two questions:
 
-- **What is failing?** See which tests are in alert, where failures cluster, and act on each failing test.
+- **What is failing?** Identify which tests are in alert, see where failures are concentrated, and take action on each failing test.
 - **What is not tested yet?** Find the endpoints and views with the most traffic that no Synthetic test covers, and create tests for them.
 
 Use this page as the starting point for triaging failures and for deciding where to add test coverage.
