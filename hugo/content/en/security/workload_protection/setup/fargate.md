@@ -278,7 +278,7 @@ spec:
 
 As an alternative to the manual manifest above, you can let the [Datadog admission controller][7] inject the `cws-instrumentation` init container and the Agent sidecar for you. This works when you deploy Datadog with the [Datadog Operator][8] or [Helm][9].
 
-On AWS Fargate, set the CWS instrumentation `mode` to `init_container`. The default `remote_copy` mode has the Cluster Agent copy the instrumentation binary into each target pod through the Kubernetes pod `exec` API (the same mechanism as `kubectl cp`), which is not available for pods running on Fargate.
+On AWS Fargate, set the CWS instrumentation `mode` to `init_container`. The default `remote_copy` mode copies the binary into each pod through the Kubernetes pod `exec` API (like `kubectl cp`). Fargate does not support that API.
 
 #### Enable the admission controller
 
@@ -301,11 +301,11 @@ admissionController:
             value: "true"
 ```
 
-The `profiles` block sets the Workload Protection environment variables on the injected sidecar: `DD_RUNTIME_SECURITY_CONFIG_ENABLED=true` enables runtime security on the Agent, and `DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true` selects the eBPF-less mode required on Fargate. Without them, the sidecar and init container are injected but no security events are collected. With `provider: fargate`, the sidecar also automatically sets `DD_EKS_FARGATE=true` and enables `shareProcessNamespace` on the pod, so you do not need to set these on each pod manifest. For more details on Agent sidecar injection, see the [EKS Fargate integration setup][10].
+The `profiles` block sets the Workload Protection environment variables on the injected sidecar. `DD_RUNTIME_SECURITY_CONFIG_ENABLED=true` enables runtime security on the Agent, and `DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true` selects the eBPF-less mode required on Fargate. Without them, the sidecar and init container are injected but no security events are collected. With `provider: fargate`, the sidecar also sets `DD_EKS_FARGATE=true` and enables `shareProcessNamespace` on the pod. You do not need to set these on each pod manifest. For more details on Agent sidecar injection, see the [EKS Fargate integration setup][10].
 
 #### Select the pods to instrument
 
-The Agent sidecar and the `cws-instrumentation` init container are injected by two separate admission webhooks, each with its own trigger, so enabling the configuration above is not enough on its own. Label the pod template of each workload you want to protect with both:
+The Agent sidecar and the `cws-instrumentation` init container are injected by two separate admission webhooks, each with its own trigger. Enabling the configuration above is not enough on its own. Label the pod template of each workload you want to protect with both:
 
 - `agent.datadoghq.com/sidecar: fargate` to inject the Agent sidecar.
 - `admission.datadoghq.com/cws-instrumentation.enabled: "true"` to inject the `cws-instrumentation` init container.
