@@ -167,11 +167,11 @@ describe("resolveChangelogEntries", () => {
 
   it("title-cases the slug of a product with no category page, unlinked", async () => {
     const [entry] = resolveChangelogEntries(
-      [makeEntry({ productSlug: "ai-impact" })],
+      [makeEntry({ productSlug: "deployment-gates" })],
       await getCategoriesView("en"),
       "en",
     );
-    expect(entry.product).toEqual({ name: "Ai Impact" });
+    expect(entry.product).toEqual({ name: "Deployment Gates" });
   });
 
   it("links known operations and leaves unknown ones unlinked", async () => {
@@ -360,8 +360,8 @@ describe("renderChangelogMarkdown", () => {
           ],
         }),
         makeResolvedEntry({
-          productSlug: "ai-impact",
-          product: { name: "Ai Impact" },
+          productSlug: "deployment-gates",
+          product: { name: "Deployment Gates" },
           bucket: "breaking",
           title: "Remove an endpoint",
         }),
@@ -379,7 +379,7 @@ Review recent changes to Datadog API operations, ordered newest first. Entries a
 ## 2026-10-08
 
 - **Added**: [Dashboards](/api/latest/dashboards/): Add Heatgrid widget (Operations: [\`ListDashboards\`](/api/latest/dashboards/get-all-dashboards/), \`GetDashboardUsage\`)
-- **Breaking**: Ai Impact: Remove an endpoint
+- **Breaking**: Deployment Gates: Remove an endpoint
 
 ## 2026-10-06
 

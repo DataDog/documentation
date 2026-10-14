@@ -18,7 +18,8 @@
  * made the HTML large enough to hurt first paint.
  */
 import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
-import { CHANGELOG_ROOT_PATH, type OverviewPage } from "@lib/api/overviewPages";
+import type { OverviewPage } from "@lib/api/overviewPages";
+import { CHANGELOG_ROOT_PATH } from "@lib/api/changelogPaths";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";

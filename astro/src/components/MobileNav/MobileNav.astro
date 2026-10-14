@@ -27,11 +27,8 @@ import {
   getCategoryStubsView,
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
-import {
-  getOverviewPages,
-  isChangelogPath,
-  resolveOverviewState,
-} from "@lib/api/overviewPages";
+import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
+import { isChangelogPath } from "@lib/api/changelogPaths";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
 import {
   localizedHref,

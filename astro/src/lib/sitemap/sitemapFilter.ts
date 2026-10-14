@@ -1,7 +1,6 @@
 // Relative, not `@lib`: `astro.config.mjs` imports this file before aliases exist.
 import { stripLocalePrefix } from "../i18n/locale";
-
-const CHANGELOG_ROOT_PATH = "/api/changelog/";
+import { CHANGELOG_ROOT_PATH } from "../api/changelogPaths";
 
 export function isSitemapPage(url: string): boolean {
   const { pathname } = new URL(url);

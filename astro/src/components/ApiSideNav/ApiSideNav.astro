@@ -8,7 +8,8 @@ import SearchBar, {
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import { useTranslations } from "@lib/i18n/i18n";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
-import { CHANGELOG_ROOT_PATH, type OverviewPage } from "@lib/api/overviewPages";
+import type { OverviewPage } from "@lib/api/overviewPages";
+import { CHANGELOG_ROOT_PATH } from "@lib/api/changelogPaths";
 
 interface Props {
   categories: ApiCategoryStub[];

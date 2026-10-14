@@ -21,6 +21,7 @@ import {
   plaintext,
 } from "@lib/plaintext/helpers";
 import { toCategorySlug } from "./categorySlug";
+import { CHANGELOG_ROOT_PATH } from "./changelogPaths";
 import { getCategoriesView } from "./viewsBuilder";
 import { ChangelogFileSchema } from "./schemas/changelog";
 import type { ApiCategory, ApiOperationStub } from "./schemas/views";
@@ -207,7 +208,9 @@ export function changelogHref(
   pageNumber: number,
 ): string {
   const pathParam = toPathParam(filter, pageNumber);
-  const path = pathParam ? `/api/changelog/${pathParam}/` : "/api/changelog/";
+  const path = pathParam
+    ? `${CHANGELOG_ROOT_PATH}${pathParam}/`
+    : CHANGELOG_ROOT_PATH;
   return localizedHref(lang, path);
 }
 
@@ -372,7 +375,7 @@ function resolveProduct(
   };
 }
 
-/** `ai-impact` → `Ai Impact`. */
+/** `service-level-objectives` → `Service Level Objectives`. */
 function titleCaseSlug(slug: string): string {
   return slug
     .split("-")

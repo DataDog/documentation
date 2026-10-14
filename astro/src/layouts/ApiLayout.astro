@@ -1,11 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
-import {
-  getOverviewPages,
-  isChangelogPath,
-  resolveOverviewState,
-} from "@lib/api/overviewPages";
+import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
+import { isChangelogPath } from "@lib/api/changelogPaths";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";

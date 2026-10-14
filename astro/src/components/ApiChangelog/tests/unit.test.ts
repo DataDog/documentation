@@ -108,14 +108,14 @@ describe("ApiChangelogEntry", () => {
 
   it("renders a product with no page as plain text, still prefixed", async () => {
     const doc = await render(ApiChangelogEntry, {
-      entry: makeEntry({ product: { name: "Ai Impact" } }),
+      entry: makeEntry({ product: { name: "Deployment Gates" } }),
     });
     const product = doc.querySelector(".api-changelog-entry__product")!;
-    expect(text(product)).toBe("API product: Ai Impact");
+    expect(text(product)).toBe("API product: Deployment Gates");
     expect(product.querySelector("a")).toBeNull();
     const name = product.querySelector(".api-changelog-entry__product-name")!;
     expect(name.tagName).toBe("SPAN");
-    expect(text(name)).toBe("Ai Impact");
+    expect(text(name)).toBe("Deployment Gates");
   });
 
   it("links known operations and leaves unknown ones as code", async () => {
