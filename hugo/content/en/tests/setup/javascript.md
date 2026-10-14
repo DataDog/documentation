@@ -726,7 +726,9 @@ When `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` is unset, Test Optimization automatic
 - `'only-on-failure'`: Capture screenshot after each test failure.
 - `'on-first-failure'`: Capture screenshot after each test's first failure.
 
-With Playwright 1.38 or later, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` to enable failure capture and uploads regardless of the screenshot setting. To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`. Disabling uploads does not change Playwright's screenshot capture setting.
+With Playwright 1.38 or later, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` to enable failure capture and uploads regardless of the screenshot setting.
+
+To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`. This does not change Playwright's screenshot capture setting.
 
 **Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
 
@@ -767,7 +769,9 @@ WebdriverIO video recording and uploads are disabled by default. To enable them 
 1. Install [FFmpeg][3] with the `libvpx` encoder and make the `ffmpeg` executable available on the test process's `PATH`.
 2. Set `DD_TEST_FAILURE_VIDEOS_ENABLED=1`.
 
-Test Optimization records and uploads videos from failed tests. No additional WebdriverIO video configuration is required.
+To disable video recording and uploads, unset `DD_TEST_FAILURE_VIDEOS_ENABLED` or set it to `0`.
+
+No additional WebdriverIO configuration is required beyond the steps above.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
