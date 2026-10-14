@@ -4709,6 +4709,402 @@ components:
           format: int64
           type: integer
       type: object
+    HeatgridColor:
+      description: A color string, or two color strings for the light and dark themes, in that order.
+      example: "#FF0000"
+      oneOf:
+        - type: string
+        - $ref: "#/components/schemas/HeatgridThemeColors"
+    HeatgridColorBin:
+      additionalProperties: false
+      description: A color and optional lower threshold for a discrete bin.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColor"
+        lower_bound:
+          description: Inclusive lower bound. Omit for the first bin.
+          format: double
+          type: number
+      required:
+        - color
+      type: object
+    HeatgridColorConfig:
+      description: Color configuration for continuous gradients or discrete thresholds.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridGradientCustomColor"
+        - $ref: "#/components/schemas/HeatgridGradientPresetColor"
+        - $ref: "#/components/schemas/HeatgridDiscreteCustomColor"
+        - $ref: "#/components/schemas/HeatgridDiscretePresetColor"
+    HeatgridColorStop:
+      additionalProperties: false
+      description: A position and color in a continuous gradient.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColor"
+        position:
+          description: Position in the gradient, from 0 to 100.
+          example: 100
+          format: int64
+          maximum: 100
+          minimum: 0
+          type: integer
+      required:
+        - position
+        - color
+      type: object
+    HeatgridCustomColorSource:
+      description: Use custom colors.
+      enum:
+        - custom
+      example: custom
+      type: string
+      x-enum-varnames:
+        - CUSTOM
+    HeatgridDiscreteCustomColor:
+      additionalProperties: false
+      description: Discrete thresholds with custom colors.
+      properties:
+        bins:
+          description: |-
+            Two to six bins. Omit `lower_bound` on the first bin. Subsequent lower bounds must be in
+            ascending order.
+          items:
+            $ref: "#/components/schemas/HeatgridColorBin"
+          maxItems: 6
+          minItems: 2
+          type: array
+        mode:
+          $ref: "#/components/schemas/HeatgridDiscreteMode"
+        source:
+          $ref: "#/components/schemas/HeatgridCustomColorSource"
+      required:
+        - mode
+        - source
+        - bins
+      type: object
+    HeatgridDiscreteMode:
+      description: Use discrete color thresholds.
+      enum:
+        - discrete
+      example: discrete
+      type: string
+      x-enum-varnames:
+        - DISCRETE
+    HeatgridDiscretePresetColor:
+      additionalProperties: false
+      description: A preset discrete color palette.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridDiscreteMode"
+        preset_name:
+          description: Name of the preset color palette.
+          example: "classic"
+          type: string
+        source:
+          $ref: "#/components/schemas/HeatgridPresetColorSource"
+      required:
+        - mode
+        - source
+        - preset_name
+      type: object
+    HeatgridGradientCustomColor:
+      additionalProperties: false
+      description: A continuous gradient with custom color stops.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridGradientMode"
+        source:
+          $ref: "#/components/schemas/HeatgridCustomColorSource"
+        stops:
+          description: Two to six stops with positions in ascending order.
+          items:
+            $ref: "#/components/schemas/HeatgridColorStop"
+          maxItems: 6
+          minItems: 2
+          type: array
+      required:
+        - mode
+        - source
+        - stops
+      type: object
+    HeatgridGradientMode:
+      description: Use a continuous color gradient.
+      enum:
+        - gradient
+      example: gradient
+      type: string
+      x-enum-varnames:
+        - GRADIENT
+    HeatgridGradientPresetColor:
+      additionalProperties: false
+      description: A preset gradient color palette.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridGradientMode"
+        preset_name:
+          description: Name of the preset color palette.
+          example: "classic"
+          type: string
+        source:
+          $ref: "#/components/schemas/HeatgridPresetColorSource"
+      required:
+        - mode
+        - source
+        - preset_name
+      type: object
+    HeatgridLabelColumn:
+      additionalProperties: false
+      description: Configuration of the group label column.
+      properties:
+        width:
+          $ref: "#/components/schemas/HeatgridLabelColumnWidth"
+      required:
+        - width
+      type: object
+    HeatgridLabelColumnWidth:
+      description: Width of the label column.
+      enum:
+        - xs
+        - s
+        - m
+        - l
+        - xl
+      example: xs
+      type: string
+      x-enum-varnames:
+        - XS
+        - S
+        - M
+        - L
+        - XL
+    HeatgridLegend:
+      additionalProperties: false
+      description: Legend configuration for the heatgrid widget.
+      properties:
+        show_caption:
+          description: Whether to display the legend caption.
+          type: boolean
+      type: object
+    HeatgridNestingDisplay:
+      description: Display groups as flat rows.
+      enum:
+        - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+        - FLAT
+    HeatgridPresetColorSource:
+      description: Use a preset color palette.
+      enum:
+        - preset
+      example: preset
+      type: string
+      x-enum-varnames:
+        - PRESET
+    HeatgridSort:
+      additionalProperties: false
+      description: Ordering of the heatgrid rows.
+      properties:
+        nesting_display:
+          $ref: "#/components/schemas/HeatgridNestingDisplay"
+        sort_by:
+          $ref: "#/components/schemas/HeatgridSortBy"
+      required:
+        - nesting_display
+        - sort_by
+      type: object
+    HeatgridSortAggregation:
+      description: Aggregation used to order rows over the displayed time range.
+      enum:
+        - avg
+        - min
+        - max
+        - sum
+      example: avg
+      type: string
+      x-enum-varnames:
+        - AVG
+        - MIN
+        - MAX
+        - SUM
+    HeatgridSortBy:
+      description: Sort rows by aggregated value or group label.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridSortByValue"
+        - $ref: "#/components/schemas/HeatgridSortByLabel"
+    HeatgridSortByLabel:
+      additionalProperties: false
+      description: Sort rows by their group labels.
+      properties:
+        order:
+          $ref: "#/components/schemas/HeatgridSortOrder"
+        property:
+          $ref: "#/components/schemas/HeatgridSortByLabelProperty"
+      required:
+        - property
+        - order
+      type: object
+    HeatgridSortByLabelProperty:
+      description: Sort by label.
+      enum:
+        - label
+      example: label
+      type: string
+      x-enum-varnames:
+        - LABEL
+    HeatgridSortByValue:
+      additionalProperties: false
+      description: Sort rows by their aggregated values.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/HeatgridSortAggregation"
+        order:
+          $ref: "#/components/schemas/HeatgridSortOrder"
+        property:
+          $ref: "#/components/schemas/HeatgridSortByValueProperty"
+      required:
+        - property
+        - order
+        - aggregation
+      type: object
+    HeatgridSortByValueProperty:
+      description: Sort by value.
+      enum:
+        - value
+      example: value
+      type: string
+      x-enum-varnames:
+        - VALUE
+    HeatgridSortOrder:
+      description: Sort direction.
+      enum:
+        - asc
+        - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+        - ASC
+        - DESC
+    HeatgridThemeColors:
+      description: Two color strings for the light and dark themes, in that order.
+      example: ["#FFFFFF", "#000000"]
+      items:
+        description: Color for the light or dark theme.
+        type: string
+      maxItems: 2
+      minItems: 2
+      type: array
+    HeatgridWidgetDefinition:
+      additionalProperties: false
+      description: The heatgrid visualization displays values for each group over time using color.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColorConfig"
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: Description of the widget.
+          type: string
+        label_column:
+          $ref: "#/components/schemas/HeatgridLabelColumn"
+        legend:
+          $ref: "#/components/schemas/HeatgridLegend"
+        requests:
+          description: Widget requests. The widget displays one formula, which can combine multiple queries.
+          items:
+            $ref: "#/components/schemas/HeatgridWidgetRequest"
+          minItems: 1
+          type: array
+        sort:
+          $ref: "#/components/schemas/HeatgridSort"
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/HeatgridWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - sort
+      type: object
+    HeatgridWidgetDefinitionType:
+      default: heatgrid
+      description: Type of the heatgrid widget.
+      enum:
+        - heatgrid
+      example: heatgrid
+      type: string
+      x-enum-varnames:
+        - HEATGRID
+    HeatgridWidgetFormula:
+      additionalProperties: false
+      description: A formula for a heatgrid widget request.
+      properties:
+        alias:
+          description: Expression alias.
+          type: string
+        conditional_formats:
+          description: |-
+            Conditional formatting rules. These rules do not affect heatgrid rendering.
+            Use the widget-level `color` configuration to control cell colors.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: "query1"
+          type: string
+        limit:
+          $ref: "#/components/schemas/WidgetFormulaLimit"
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+        style:
+          $ref: "#/components/schemas/WidgetFormulaStyle"
+      required:
+        - formula
+      type: object
+    HeatgridWidgetRequest:
+      additionalProperties: false
+      description: A request for a heatgrid widget that uses formulas and functions.
+      properties:
+        formulas:
+          description: The single displayed formula can combine multiple queries.
+          items:
+            $ref: "#/components/schemas/HeatgridWidgetFormula"
+          type: array
+        queries:
+          description: Queries returned directly or combined in a formula.
+          example:
+            - data_source: "metrics"
+              name: "my_query"
+              query: "avg:system.cpu.user{*}"
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
+          type: array
+        response_format:
+          $ref: "#/components/schemas/HeatgridWidgetResponseFormat"
+      required:
+        - response_format
+        - queries
+      type: object
+    HeatgridWidgetResponseFormat:
+      description: Response format for heatgrid queries.
+      enum:
+        - timeseries
+      example: timeseries
+      type: string
+      x-enum-varnames:
+        - TIMESERIES
     Host:
       description: Object representing a host.
       properties:
@@ -28469,6 +28865,7 @@ components:
         - $ref: "#/components/schemas/ProductAnalyticsFunnelWidgetDefinition"
         - $ref: "#/components/schemas/GeomapWidgetDefinition"
         - $ref: "#/components/schemas/GroupWidgetDefinition"
+        - $ref: "#/components/schemas/HeatgridWidgetDefinition"
         - $ref: "#/components/schemas/HeatMapWidgetDefinition"
         - $ref: "#/components/schemas/HostMapWidgetDefinition"
         - $ref: "#/components/schemas/IFrameWidgetDefinition"

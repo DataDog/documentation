@@ -223,6 +223,7 @@ agent diagnose show-metadata agent-telemetry
 | runtime.agent_service_running               | Whether an Agent service process is up under a supervisor, tagged by service and supervisor (procmgr, systemd, windows_service) |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
+| amd_gpu.device_total                        | Total number of AMD GPUs in the system                                                                                 |
 | **APM**                                     |                                                                                                                        |
 | trace.enabled                               | Whether the trace-agent process is running.                                                                            |
 | trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
