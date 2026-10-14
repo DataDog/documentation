@@ -6,6 +6,9 @@
  *   - `translate_tags.{lang}.json`    keyed by tag slug (e.g. `dashboards`)
  *   - `translate_actions.{lang}.json` keyed by operation ID (e.g. `ListAPIKeys`)
  *
+ * The files ship in the API docs bundle with the spec, staged under
+ * `@api-spec` by `yarn fetch:spec`.
+ *
  * Missing files and missing keys silently fall through to English. Translation
  * coverage is owned upstream — this site does not warn on gaps.
  */
@@ -17,14 +20,14 @@ type TagOverlay = Record<string, TagTranslation>;
 type ActionOverlay = Record<string, ActionTranslation>;
 
 const tagModules: Record<string, TagOverlay> = import.meta.glob<TagOverlay>(
-  "@hugo-site/data/api/v*/translate_tags.*.json",
+  "@api-spec/v*/translate_tags.*.json",
   { eager: true, import: "default" },
 );
 const actionModules: Record<string, ActionOverlay> =
-  import.meta.glob<ActionOverlay>(
-    "@hugo-site/data/api/v*/translate_actions.*.json",
-    { eager: true, import: "default" },
-  );
+  import.meta.glob<ActionOverlay>("@api-spec/v*/translate_actions.*.json", {
+    eager: true,
+    import: "default",
+  });
 
 const TAG_OVERLAY_RE = /\/(v1|v2)\/translate_tags\.([a-z]{2})\.json$/;
 const ACTION_OVERLAY_RE = /\/(v1|v2)\/translate_actions\.([a-z]{2})\.json$/;

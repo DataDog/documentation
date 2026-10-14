@@ -3,6 +3,9 @@
 node_modules/
 dist/
 .astro/
+api-code-examples/
+api-spec/
+api-spec.incoming/
 .yarn/
 test-results/
 playwright-report/
