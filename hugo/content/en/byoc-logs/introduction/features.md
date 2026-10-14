@@ -3,7 +3,6 @@ title: Supported Features
 description: Learn which Datadog Log Explorer features are supported in BYOC Logs
 aliases:
   - /cloudprem/introduction/features/
-further_reading:
 ---
 
 ## Overview
@@ -72,7 +71,3 @@ BYOC Logs does not support the following features:
   - Grok extraction (query-time parsing)
 
 [1]: /api/latest/logs-restriction-queries/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

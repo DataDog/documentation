@@ -50,11 +50,11 @@ For single-node and multi-node examples, see [Set Up Test Parallelization][3].
 {{< nextlink href="/tests/test_parallelization/troubleshooting/" >}}Troubleshooting Test Parallelization{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tests/test_impact_analysis/
 [2]: /tests/setup/
 [3]: /tests/test_parallelization/setup/
 [4]: /tests/setup/javascript/#compatibility
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
