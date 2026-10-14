@@ -319,7 +319,7 @@ To narrow the log list, use the query filter or filter by impact:
 
 Identify when the last change to a pipeline or processor was made and which user made the change using the modification information on the pipeline. Filter your pipelines using this modification information, as well as other faceted properties such as whether the pipeline is enabled or read-only.
 
-{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modificiation information, and the reordering modal" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modification information, and the reordering modal" style="width:50%;">}}
 
 Reorder pipelines precisely with the {{< ui >}}Move to{{< /ui >}} option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the {{< ui >}}Move to{{< /ui >}} modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
 
