@@ -2243,7 +2243,7 @@
     "summary": "Get experiment traffic summary"
   },
   "ListFeatureFlags": {
-    "description": "Returns a list of feature flags for the organization.\nSupports filtering by key and archived status.",
+    "description": "Returns a paginated list of feature flags for the organization.\nSupports filtering by key, tags, teams, SDK availability, production status, and other flag properties.\nUse `page[limit]` and `page[offset]` to paginate, or follow the `next` link in the response.",
     "summary": "List feature flags"
   },
   "CreateFeatureFlag": {
