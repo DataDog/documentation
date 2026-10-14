@@ -3,6 +3,7 @@ import { getViteConfig } from "astro/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
+import { FIXTURE_SDK_VERSIONS } from "./tests/fixtures/api/sdkVersions";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const fixture = path.resolve(__dirname, "tests/fixtures/api");
@@ -82,6 +83,12 @@ export default getViteConfig({
     alias: {
       "@api-examples": path.resolve(fixture, "examples"),
     },
+  },
+  // `astro.config.mjs` reads the live `api-code-examples/` stamp into this
+  // define. Override it with frozen versions so `{% $sdkVersions.<client> %}`
+  // renders the same value on every run, and on a fresh clone with no stamp.
+  define: {
+    __SDK_VERSIONS__: JSON.stringify(FIXTURE_SDK_VERSIONS),
   },
   test: {
     name: "fixture",

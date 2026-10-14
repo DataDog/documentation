@@ -34,7 +34,18 @@ function* unwrapChildParagraphs(node) {
   }
 }
 
+/* global __SDK_VERSIONS__ */
+// Inlined by the `define` in `astro.config.mjs`. Astro also loads this file
+// once outside Vite, where the constant isn't replaced, so guard with typeof.
+const sdkVersions =
+  typeof __SDK_VERSIONS__ === "undefined" ? {} : __SDK_VERSIONS__;
+
 export default defineMarkdocConfig({
+  variables: {
+    // `{% $sdkVersions.datadog-api-client-java %}` → "2.62.0". Hugo's
+    // `{{< sdk-version "datadog-api-client-java" >}}`.
+    sdkVersions,
+  },
   // Custom Markdoc functions for cdocs conditionals. Markdoc's built-in
   // functions (equals, and, or, not) and the built-in `if`/`else`/`partial`
   // tags are already available, so only the cdocs-specific extras are declared
@@ -57,6 +68,27 @@ export default defineMarkdocConfig({
       attributes: {
         ...nodes.fence.attributes,
         ...schema.nodes.fence.attributes,
+      },
+      // `CodeBlock` highlights the `content` attribute, which Markdoc fills
+      // with the raw source. Variables such as `{% $sdkVersions.<client> %}`
+      // are only resolved in the fence's children, so rebuild `content` from
+      // them. Keep the raw source when there are no children (`process=false`,
+      // as Markdoc's own fence transform does) or when any child is a tag (a
+      // fence that shows Markdoc syntax as an example: joining would drop it).
+      transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        const children = node.transformChildren(config);
+        const childrenAreText =
+          children.length > 0 &&
+          children.every((child) => typeof child === "string");
+        const resolvedContent = childrenAreText
+          ? children.join("")
+          : attributes.content;
+        return new Markdoc.Tag(
+          config.nodes.fence.render,
+          { ...attributes, content: resolvedContent },
+          children,
+        );
       },
     },
   },
