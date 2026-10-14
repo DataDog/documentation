@@ -32,11 +32,11 @@ Use this page as the starting point for triaging failures and for deciding where
 - To see untested endpoints, enable [APM][1] for your services.
 - To see untested views, enable [RUM][2] for your web or mobile applications.
 
-The [tests in alert](#review-tests-in-alert) section of the Overview page doesn't require APM or RUM.
+The [Test Health](#test-health) section of the Overview page doesn't require APM or RUM.
 
-## Review tests in alert
+## Test health
 
-The top of the page shows how many tests are in alert out of your total number of tests. Click {{< ui >}}View all alerting tests{{< /ui >}} to open the full list.
+The {{< ui >}}Test Health{{< /ui >}} section shows how many tests are in alert out of your total number of tests. Click {{< ui >}}View all alerting tests{{< /ui >}} to open the full list.
 
 ### Filter tests
 
@@ -80,7 +80,7 @@ Click the kebab menu (**⋮**) on a test to:
 - {{< ui >}}Pause scheduling{{< /ui >}}: Stop scheduled runs for the test.
 - {{< ui >}}Open in Results Explorer{{< /ui >}}: See the test's results in the [Results Explorer][3].
 
-## Close your coverage gaps
+## Coverage gaps
 
 The {{< ui >}}Close your coverage gaps{{< /ui >}} section shows the endpoints and views that no Synthetic test covers. Datadog ranks them by traffic, which is the number of requests or views over the past week. Start with the items at the top of the list to cover your highest-traffic surfaces first.
 
