@@ -43,7 +43,7 @@ To create a Goal-Based test manually:
 - Enter a **starting URL** for the application under test.
 - Write a **goal** as a prompt in plain language (for example, "Ask the support chatbot for a product recommendation").
 - Select a **location** to run the test from. See [supported locations](#supported-locations).
-- Optionally, select a [Profile][2] to reuse variables such as login credentials.
+- Optionally, select a [profile][2] to reuse variables such as login credentials.
 - Click {{< ui >}}Run Now{{< /ui >}}.
 
 {{< img src="synthetics/goal_based_testing/new_goal_based_test.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:80%;" >}}
@@ -70,7 +70,7 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Schedule the test to run on a recurring basis.
 - Edit the test name.
 - Add tags.
-- Change the selected Profile.
+- Change the selected profile.
 - Click {{< ui >}}Save Test{{< /ui >}}.
 
 {{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Scheduling step of the Goal-Based test creation wizard, with recurrence interval options" style="width:80%;" >}}

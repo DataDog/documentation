@@ -199,7 +199,7 @@ Add covering tests when the suite is empty or when Datadog identifies additional
 
 {{< img src="journey_monitoring/journey-monitoring-covering-tests.png" alt="The Manage Tests in Suite panel showing Synthetic browser tests that cover a journey." style="width:100%;" >}}
 
-**Preview**: When no Synthetic test covers a journey, [Bits Testing][15] can generate a covering browser test. [Sign up for the Bits Testing preview][16].
+When no Synthetic test covers a journey, [Bits Testing][15] can generate covering tests.
 
 ### Maintain coverage
 
@@ -238,4 +238,3 @@ A well-configured journey has the following characteristics:
 [13]: /real_user_monitoring/operations_monitoring/?tab=browser#create-operations-with-the-sdk-apis
 [14]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/
 [15]: https://www.datadoghq.com/blog/bits-testing-test-coverage/
-[16]: https://www.datadoghq.com/product-preview/bits-testing/
