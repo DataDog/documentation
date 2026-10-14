@@ -60,8 +60,10 @@ spec:
   override:
     nodeAgent:
       image:
-        name: <INFERENCE_AGENT_IMAGE>
+        tag: 7.85.0-rc.5
 ```
+
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
 
 Apply the resource and wait for the Agent DaemonSet to roll out:
 
@@ -167,8 +169,10 @@ spec:
   override:
     nodeAgent:
       image:
-        name: <INFERENCE_AGENT_IMAGE>
+        tag: 7.85.0-rc.5
 ```
+
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
 
 Apply the resource and wait for the Agent DaemonSet to roll out:
 
