@@ -631,11 +631,11 @@ with DAG(
 
 With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ lineage_root_*() }}` calls in your task templates resolve to values that match the built-in macros shipped with provider 2.3.0+, so downstream Spark or dbt jobs can link to the Airflow root parent in Datadog.
 
-### Disable OpenLineage events for specific DAGs
+### Filter out specific DAGs from monitoring
 
 <div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later.</div>
 
-To stop specific DAGs from sending OpenLineage events to Datadog, add an `emission_policy` rule for each DAG to the `[openlineage]` section of your Airflow configuration:
+To disable specific DAGs from sending OpenLineage events to Datadog for monitoring, add an `emission_policy` rule for each DAG to the `[openlineage]` section of your Airflow configuration:
 
 ```ini
 [openlineage]
