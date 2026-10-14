@@ -8,6 +8,11 @@
   line-height: var(--line-height);
 }
 
+/* The bottom padding is the only space below the text, so it matches the top. */
+.alert > :last-child {
+  margin-bottom: 0;
+}
+
 .alert--info {
   border-color: var(--color-info);
 }

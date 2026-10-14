@@ -94,7 +94,7 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
       />
       <h1 transition:name="cdoc-title">{entry.data.title}</h1>
       {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
-      <div class="cdoc__content" transition:name="cdoc-content">
+      <div class="cdoc__content prose" transition:name="cdoc-content">
         <Content {...valsByTraitId} />
       </div>
     </main>

@@ -22,3 +22,21 @@ test.describe("Alert component — visual", () => {
     });
   }
 });
+
+test.describe("Alert component — spacing", () => {
+  test("the last paragraph adds no space below the text", async ({ page }) => {
+    await page.goto("/dd_e2e/components/alert");
+    const alert = page
+      .locator(".tabs__panel--active")
+      .locator(".alert--info")
+      .first();
+
+    // Without this, the paragraph's margin-bottom sits on top of the alert's
+    // bottom padding, so the space below the text is larger than above it.
+    const lastChildMarginBottom = await alert.evaluate((element) =>
+      parseFloat(getComputedStyle(element.lastElementChild!).marginBottom),
+    );
+
+    expect(lastChildMarginBottom).toBe(0);
+  });
+});

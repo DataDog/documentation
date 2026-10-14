@@ -131,6 +131,9 @@ h4,
 h5,
 h6 {
   font-weight: 600;
+  /* Hugo's Bootstrap reboot sets 0.5rem. Without this, browser defaults
+     (about 1–1.67em) put three times as much space under each heading. */
+  margin-bottom: var(--space-sm);
 }
 
 h1 {
@@ -163,26 +166,38 @@ h5 {
 
 h6 {
   font-size: var(--font-size-h6);
+  margin-top: 0.778rem;
 }
 
 /* Lists — opt-in via `.prose`. Wrap rendered docs/API prose in
    <div class="prose"> (or add `prose` to the container) so lists in content
-   get the en-dash bullet; UI components like nav menus, tabs, and the side
-   nav stay unaffected. */
+   get these styles; UI components like nav menus, tabs, and the side nav stay
+   unaffected.
+
+   Bullets are the browser's native markers (disc, circle, square by nesting
+   depth), not Hugo's en-dash `::before`. Don't set `list-style` here: any
+   author rule on `.prose ul` also matches nested lists and overrides the
+   browser's per-depth markers. Safari with VoiceOver also stops announcing a
+   list when it has `list-style: none`. */
 .prose ul {
-  list-style: none;
   padding-left: 1.222rem;
 }
 
-.prose ul li {
-  position: relative;
-  padding-left: 0;
+/* The space before a list comes from two collapsing margins, the paragraph's
+   margin-bottom and the list's margin-top, so both are reduced. */
+.prose ul,
+.prose ol {
+  margin-top: 0;
 }
 
-.prose ul li::before {
-  content: "\2013";
-  position: absolute;
-  left: -1.111rem;
+/* Hugo's Bootstrap reboot zeroes paragraph margin-top. The browser default
+   (1em) would collapse with a heading's smaller margin-bottom and win. */
+.prose p {
+  margin-top: 0;
+}
+
+.prose p:has(+ ul, + ol) {
+  margin-bottom: var(--space-xs);
 }
 
 .prose ul ul {
