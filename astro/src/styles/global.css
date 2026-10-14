@@ -250,6 +250,12 @@ table td {
   vertical-align: top;
 }
 
+/* Row lines, as in Hugo. The first body row's top border is removed below,
+   since the header sits directly above it. */
+table td {
+  border-top: var(--border-width) solid var(--color-surface-border);
+}
+
 table thead th {
   vertical-align: bottom;
   background: var(--color-surface-header);
