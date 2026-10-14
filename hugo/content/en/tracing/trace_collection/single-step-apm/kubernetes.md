@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your Kubernetes applications with the Datadog SDKs. To setup SSI for individual workloads see [Target specific workloads](#target-specific-workloads).
+Use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your Kubernetes applications with the Datadog SDKs.
 
 {{< skill-callout
     title="Set up APM with an agent"
@@ -269,11 +269,7 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 Use one of the following setup methods:
 
-- **[Configure with DatadogInstrumentation (recommended)](?tab=datadoginstrumentationcrdrecommended#configure-sdk-versions-and-settings)**:
-
-  Add SDK environment variables to `spec.config.apm.ddTraceConfigs` for the target workload, then replace its pods.
-
-- **[Configure with Agent targeting rules](#target-specific-workloads)**:
+- **[Configure with Agent targeting rules](?tab=targetingrulesv764#target-specific-workloads)**:
 
   Use `ddTraceConfigs` in Agent-configured targets to enable products for groups of namespaces or pods.
 
@@ -349,7 +345,7 @@ Supported values: `init_container`, `csi`.
 By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
 
 {{< tabs >}}
-{{% tab "DatadogInstrumentation CRD (Recommended, Agent v7.85+)" %}}
+{{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
 
 #### Enable APM with DatadogInstrumentation
 
@@ -430,8 +426,11 @@ For pods eligible for admission, the Cluster Agent selects APM configuration in 
 
 A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with  DDI, remove conflicting annotations from the pod spec.
 
+[7]: /tracing/trace_collection/library_config/
+[36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+
 {{% /tab %}}
-{{% tab "Agent v7.64+" %}}
+{{% tab "Targeting Rules (v7.64+)" %}}
 
 Create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
@@ -631,7 +630,7 @@ For a full list of products you can enable through SSI, see [Enable SDK-dependen
 
 {{% /tab %}}
 
-{{% tab "Agent <=v7.63 (Legacy)" %}}
+{{% tab "Legacy (<=v7.63)" %}}
 
 #### Enable or disable instrumentation for namespaces
 
