@@ -2,9 +2,6 @@
 title: Bits Testing
 description: Use Bits Testing, an AI agent that explores your application to map critical user journeys and generate covering Synthetic tests.
 further_reading:
-- link: "/synthetics/goal_based_testing/"
-  tag: "Documentation"
-  text: "Goal-Based Testing"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Browser Testing"
@@ -34,8 +31,6 @@ further_reading:
 ## Overview
 
 Bits Testing is an AI agent that explores your application to map its most critical user journeys. It recommends ways to increase test coverage, and it can generate the Synthetic tests needed to close coverage gaps.
-
-Bits Testing can also generate [Goal-Based tests][1]. This Synthetic test type uses prompted, non-deterministic, agentic testing to check that users can complete a specific goal in your application.
 
 ## Access Bits Testing
 
@@ -67,7 +62,35 @@ Select a private location to run Discovery against an internal application that 
 
 Remote execution requires private location worker `v1.74.0` or later. Pull the latest image from the [private location worker page on Docker Hub][9]. Workers on earlier versions keep running but can't be selected for Bits Testing.
 
+Enable remote execution on the private location:
+
+- **New private locations**: In the [creation wizard's][11] "Configure your private location" step, leave the remote execution toggle in its default, off position.
+- **Existing private locations**: Upgrade the worker image, then set `disableRemoteExecution` to `false` in the location's [configuration file][12] and redeploy the workers.
+
+The location picker shows each private location's remote execution status when you select it.
+
 Job results list the private location you selected as the job's location.
+
+## Profiles
+
+A Profile stores context that Bits Testing uses while interacting with your application, such as login credentials.
+
+To create a Profile:
+
+1. Open the {{< ui >}}Profile{{< /ui >}} dropdown menu and select {{< ui >}}\+ New Profile{{< /ui >}}.
+1. Name the profile.
+1. Add one or more variables. For each variable, set:
+   - **Usage**: The variable's purpose, for example, `username` or `password`.
+   - **Value**: Either a typed value, or an existing [Global Variable][3].
+1. Click {{< ui >}}Create Profile{{< /ui >}}.
+
+The new profile is automatically selected for the current job. Saved Profiles can be reused in later Bits Testing jobs without redefining their variables.
+
+{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating a Profile, with fields for name, variable usage, and value." style="width:100%;" >}}
+
+## Review results
+
+Review a Bits Testing job while it's in progress, as it pauses for approval, or after it completes.
 
 ### Discovery in progress
 
@@ -99,26 +122,7 @@ Use the panel's navigation controls to move between the screenshots captured dur
 
 {{< img src="synthetics/bits_testing/bits_testing_step_detail.png" alt="A step detail panel showing a screenshot, the action taken, the page URL, the agent's reasoning, and the step performed." style="width:90%;" >}}
 
-## Profiles
-
-A Profile stores context that Bits Testing uses while interacting with your application, such as login credentials.
-
-To create a Profile:
-
-1. Open the {{< ui >}}Profile{{< /ui >}} dropdown menu and select {{< ui >}}\+ New Profile{{< /ui >}}.
-1. Name the profile.
-1. Add one or more variables. For each variable, set:
-   - **Usage**: The variable's purpose, for example, `username` or `password`.
-   - **Value**: Either a typed value, or an existing [Global Variable][3].
-1. Click {{< ui >}}Create Profile{{< /ui >}}.
-
-The new profile is automatically selected for the current job. Saved Profiles can be reused in later Bits Testing jobs without redefining their variables.
-
-{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating a Profile, with fields for name, variable usage, and value." style="width:100%;" >}}
-
-## Review results
-
-When a job completes, Bits Testing displays a map of the branches it explored:
+After a job completes, Bits Testing updates the map to show every branch it explored:
 
 - **Successful (green)** branches led to a relevant user journey that Bits Testing can generate a test for.
 - **Unsuccessful (indigo)** branches didn't yield a relevant journey, either because Bits Testing judged the flow as not relevant or inconsistent, or because it encountered an error.
@@ -134,7 +138,6 @@ Click a green journey card to open the AI-generated test suite for that journey.
 - **[Browser tests][6]** that replay the interactions a user takes to complete the journey, with assertions along the way.
 - **[HTTP tests][7]** that validate the endpoints the journey calls to retrieve data.
 - **[Network path tests][8]** that check the hosts powering the journey are reachable.
-- **[Goal-Based tests][1]** that validate the journey using non-deterministic, agentic testing.
 
 Each test in the suite includes a free sample test run. Review the suite and either:
 
@@ -143,27 +146,22 @@ Each test in the suite includes a free sample test run. Review the suite and eit
 
 After you start testing a suite, each test becomes a regular Synthetic test that you can edit or delete. By default, generated tests run every 5 minutes from the location you selected for the Bits Testing job.
 
-{{< img src="synthetics/bits_testing/bits_testing_generated_suite.png" alt="A generated test suite with Browser, HTTP, Network Path, and Goal-Based tests, showing a passed run's details." style="width:100%;" >}}
+{{< img src="synthetics/bits_testing/bits_testing_generated_suite.png" alt="A generated test suite with Browser, HTTP, and Network Path tests, showing a passed run's details." style="width:100%;" >}}
 
 ## Supported locations
 
-Bits Testing and Goal-Based tests run from the managed locations in [Trigger a Bits Testing job](#trigger-a-bits-testing-job), or from a private location using remote execution. Browser, HTTP, and network path tests generated by Bits Testing support the same locations as any other Synthetic test, including [private locations][5].
+Bits Testing runs from the managed locations in [Trigger a Bits Testing job](#trigger-a-bits-testing-job), or from a private location using remote execution. Browser, HTTP, and network path tests generated by Bits Testing support the same locations as any other Synthetic test, including [private locations][5].
 
-## FAQ
-
-### Do you need to allowlist any IPs to run Bits Testing?
+## Handling bot blocking
 
 If your application sits behind bot protection or a web application firewall (WAF), allow the IPs listed under `synthetics` in the [Datadog IP ranges][2] with your provider. To run Bits Testing from a single location, you can allow only that location's IP range instead. See [Trigger a Bits Testing job](#trigger-a-bits-testing-job) for the locations Bits Testing can run from.
 
-### How do you bypass bot protection without allowlisting IPs?
-
-Run Bits Testing from a [private location](#run-bits-testing-from-a-private-location) instead of a managed location. Traffic then reaches your application from inside your own network, bypassing bot protection or a WAF that blocks public cloud traffic.
+You can also run Bits Testing from a [private location](#run-bits-testing-from-a-private-location) instead of a managed location to bypass bot protection without allowlisting any IPs. Traffic then reaches your application from inside your own network.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/goal_based_testing/
 [2]: /api/latest/ip-ranges/list-ip-ranges/
 [3]: /synthetics/platform/settings/#global-variables
 [5]: /synthetics/platform/private_locations/
@@ -172,3 +170,5 @@ Run Bits Testing from a [private location](#run-bits-testing-from-a-private-loca
 [8]: /synthetics/network_path_tests/
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [10]: /synthetics/guide/rum-to-synthetics/#generate-a-test-from-a-session-replay
+[11]: /synthetics/platform/private_locations/#create-your-private-location
+[12]: /synthetics/platform/private_locations/configuration/
