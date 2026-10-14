@@ -11,7 +11,7 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through the API.
+Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through Terraform or the API.
 
 ## Prerequisites
 
@@ -84,7 +84,7 @@ Before you begin:
 
 **Note**: Endpoints for creating, updating, and deleting schedules through Terraform are in Preview.
 
-The following example defines an inactive schedule for hosts matching `env:staging service:example`. The schedule targets the latest Agent version, with a two-hour maintenance window starting at 03:00 on Tuesdays and Thursdays in the `America/New_York` time zone.
+The following example defines an inactive schedule for hosts matching `env:staging service:example`. The schedule targets the latest Agent version (`version_to_latest = 0`). It specifies a two-hour maintenance window (`maintenance_window_duration = 120`, in minutes), starting at 03:00 on Tuesdays and Thursdays in the `America/New_York` time zone.
 
 ```hcl
 resource "datadog_fleet_schedule" "staging" {
