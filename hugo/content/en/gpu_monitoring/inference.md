@@ -104,6 +104,8 @@ metadata:
       }
 ```
 
+Replace `<SERVICE_NAME>` with a name for your model deployment, such as `inference-vllm-glm5.3`. The Inference page groups metrics by `service`.
+
 Apply the updated workload resources and recreate the pods so that Autodiscovery detects the new annotations.
 
 ### 4. Verify setup
@@ -235,6 +237,8 @@ metadata:
         }
       }
 ```
+
+Replace `<SERVICE_NAME>` with a name for your model deployment, such as `inference-vllm-glm5.3`. The Inference page groups metrics by `service`.
 
 Add the following annotation to every vLLM worker pod template. Both integrations use the worker's metrics endpoint on port `9090`:
 
