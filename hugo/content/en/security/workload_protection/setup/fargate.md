@@ -301,7 +301,7 @@ admissionController:
             value: "true"
 ```
 
-The `profiles` block sets the Workload Protection environment variables on the injected sidecar: `DD_RUNTIME_SECURITY_CONFIG_ENABLED=true` enables the runtime security Agent, and `DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true` selects the eBPF-less mode required on Fargate. Without them, the sidecar and init container are injected but no security events are collected. With `provider: fargate`, the sidecar also automatically sets `DD_EKS_FARGATE=true` and enables `shareProcessNamespace` on the pod, so you do not need to set these on each pod manifest. For more details on Agent sidecar injection, see the [EKS Fargate integration setup][6].
+The `profiles` block sets the Workload Protection environment variables on the injected sidecar: `DD_RUNTIME_SECURITY_CONFIG_ENABLED=true` enables runtime security on the Agent, and `DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true` selects the eBPF-less mode required on Fargate. Without them, the sidecar and init container are injected but no security events are collected. With `provider: fargate`, the sidecar also automatically sets `DD_EKS_FARGATE=true` and enables `shareProcessNamespace` on the pod, so you do not need to set these on each pod manifest. For more details on Agent sidecar injection, see the [EKS Fargate integration setup][10].
 
 #### Select the pods to instrument
 
@@ -344,6 +344,7 @@ Avoid bulk injection on clusters that also run workloads on EC2 nodes. Those wor
 [7]: /containers/cluster_agent/admission_controller/
 [8]: /containers/datadog_operator/
 [9]: /containers/kubernetes/installation/?tab=helm
+[10]: /integrations/eks_fargate/#admission-controller---datadog-operator
 
 {{% /tab %}}
 {{< /tabs >}}
