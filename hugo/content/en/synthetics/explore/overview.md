@@ -74,7 +74,7 @@ For each failing test, you can:
 - Click {{< ui >}}View Traces{{< /ui >}} to see the backend traces for an API test.
 - Click {{< ui >}}View Failing Step{{< /ui >}} to open the step where a browser test failed.
 
-Click the kebab menu to:
+Click the kebab menu (**⋮**) on a test to:
 
 - {{< ui >}}Run test now{{< /ui >}}: Trigger a test run outside its schedule.
 - {{< ui >}}Pause scheduling{{< /ui >}}: Stop scheduled runs for the test.
