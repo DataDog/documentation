@@ -24,7 +24,9 @@ Every Wednesday at midnight UTC, Datadog analyzes the previous 30 days of [page 
 - A start event
 - An end event
 
-Select a suggested journey from the [map][1] or [catalog][2] to open the [journey creation page][4]. Datadog populates the name, description, start event, and end event. Review these fields before you create the journey. If you dismiss a suggested journey, it does not appear again.
+Select a suggested journey from the [map][1] or [catalog][2] to open the [journey creation page][4]. Datadog populates the name, description, start event, and end event. Review these fields before you create the journey.
+
+Hover over a suggested journey to accept or dismiss it. To dismiss it, click the X icon. A dismissed suggestion does not appear again.
 
 <div class="alert alert-warning"><p>Suggested journeys do not appear if your organization has opted out of applied AI experiences.</p></div>
 
