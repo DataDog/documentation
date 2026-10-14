@@ -347,9 +347,7 @@ By default, SSI instruments all services in all namespaces in your cluster. Depe
 {{< tabs >}}
 {{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
 
-#### Enable APM with DatadogInstrumentation
-
-Use a `DatadogInstrumentation` resource to enable SSI and configure SDKs for a specific workload without modifying your workloads deployment
+Use a `DatadogInstrumentation` custom resource to enable SSI and configure SDKs for a specific set of workloads.
 
 This method requires Datadog Agent and Cluster Agent **v7.85.0 or later** and Datadog Operator **v1.31.0 or later**.
 
