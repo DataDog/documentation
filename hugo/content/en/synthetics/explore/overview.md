@@ -96,7 +96,10 @@ Each card represents a service or an application. Each square in a card represen
 | Orange | Untested, high traffic  |
 | Gray   | Untested, lower traffic |
 
-<!-- TODO (validate): Confirm the high-traffic threshold. Working assumption: endpoints and views at or above p90 traffic are orange. -->
+High traffic is defined as follows:
+
+- **Endpoints**: Across the top 20 services, Datadog sorts endpoints by number of requests over the past week. The endpoints that together make up 90% of requests are high traffic.
+- **Views**: Across the top 20 applications, Datadog sorts views by number of views over the past week. The views that together make up 90% of views are high traffic.
 
 ### Untested endpoints
 
@@ -112,7 +115,7 @@ To create a test for an endpoint:
 
 ### Untested views
 
-The {{< ui >}}Views{{< /ui >}} view lists untested views from RUM for your web and mobile applications. Each entry shows the view name and the application.
+The {{< ui >}}Views{{< /ui >}} view lists untested views from RUM for your web and mobile applications. It shows the top 20 applications by number of views over the past week. Each entry shows the view name and the application.
 
 Turn on {{< ui >}}Group by application{{< /ui >}} to show one card per application, with the number of untested views in each.
 
