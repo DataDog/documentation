@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/product-analytics-journey-paths/"
   tag: "Blog"
   text: "Understand the top paths users take to convert or drop off with Journey Paths"
+- link: "https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics"
+  tag: "Learning Center"
+  text: "Define User Behavior with Labeled Actions in Product Analytics"
 ---
 
 Journey paths show the most common paths users take between selected events.

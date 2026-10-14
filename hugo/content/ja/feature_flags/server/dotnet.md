@@ -20,37 +20,44 @@ title: .NET Feature Flags
 ---
 ## 概要 {#overview}
 
-このページでは、Datadog Feature Flags SDK を使用して .NET アプリケーションをインスツルメントする方法について説明します。.NET SDK は、Feature Flags 管理のオープン標準である [OpenFeature][1] と統合され、Datadog .NET トレーサー (`dd-trace-dotnet`) の Remote Configuration を通じてフラグ更新を受信します。
+このページでは、Datadog Feature Flags SDK を使用して .NET アプリケーションをインスツルメントする方法について説明します。.NET SDK は、Feature Flag 管理のオープン標準である [OpenFeature][1] と統合され、Datadog .NET トレーサー (`dd-trace-dotnet`) を使用して、管理対象 CDN または Agent Remote Configuration からフラグ更新を受信します。
 
-このガイドでは、SDK のインストールと有効化、OpenFeature クライアントの作成、およびアプリケーションでの Feature Flags の評価方法について説明します。
+トレーサーバージョン 3.54.0 以降では、新規セットアップはデフォルトで Datadog 管理の CDN からフラグ構成を読み込みます。このガイドでは、SDK のインストール、OpenFeature クライアントの作成、およびアプリケーションでの Feature Flags の評価方法について説明します。
+
+<div class="alert alert-warning">バージョン 3.54.0 では、Agentless モードはフラグ構成のみを変更します。エクスペリメントの露出イベントには、引き続き互換性のあるローカル Agent またはテレメトリリレーが必要です。直接の Event Platform Proxy (EVP) フォールバックはサポートされていません。評価メトリクスには、個別に構成された OpenTelemetry エクスポートパスが必要です。テレメトリパスがない場合、構成の配信とローカルフラグの評価のみが機能します。</div>
 
 ## 前提条件 {#prerequisites}
 
-.NET Feature Flags SDK をセットアップする前に、以下の条件を満たしていることを確認してください。
+Agentless 構成配信の場合は、Datadog .NET トレーサーのバージョン **3.54.0 以降** および `Datadog.FeatureFlags.OpenFeature`バージョン **2.3.1 以降** をインストールしてください。トレーサーは [自動インスツルメンテーション][8] で読み込む必要があります。OpenFeature プロバイダーをインストールするだけでは不十分です。フラグ構成を取得するために、個別の Datadog Agent は必要ありません。
 
-- **Datadog Agent** バージョン 7.55 以降 ([Remote Configuration][2] が有効)
-- **Datadog [API キー][5]** が Agent で構成済み
-- **Datadog .NET SDK** (`dd-trace-dotnet`):
-  - .NET 6 以降の場合はバージョン 3.36.0 以降
-  - .NET Framework 4.6.2 以降の場合はバージョン 3.38.0 以降
-
-以下の環境変数を設定します。
+起動前に、アプリケーションプロセスで以下の環境変数を設定します。
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-
-# Required: Service identification
+DD_API_KEY=<YOUR_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-<div class="alert alert-info"> <code>EXPERIMENTAL_</code> プレフィックスは後方互換性のために保持されていますが、プロバイダー自体は安定しています。</div>
+Datadog [API キー][5] と、`datadoghq.com` のような組織をホストするサイトを使用します。新規セットアップの場合、Feature Flags の有効化やソース設定は必要ありません。アプリケーションで Datadog OpenFeature プロバイダーを初期化してポーリングを開始します。トレーサーのインストールや初期化だけでは、CDN ポーリングは開始されません。評価にはローカルにキャッシュされた構成が使用され、ネットワークリクエストは行われません。
 
-必要なトレーサーのバージョンや Agent OTLP のセットアップを含む `feature_flag.evaluations` の構成については、[サーバーサイドの Feature Flag 評価メトリクスをセットアップする][6] を参照してください。利用可能なグラフ作成の詳細については、[Feature Flag グラフ][7] を参照してください。
+フラグ評価メトリクスには、個別に構成された OpenTelemetry パイプラインが使用されます。CDN 配信を有効にしても、メトリクスのエクスポートは構成されません。[サーバーサイドフラグ評価メトリクスの設定][6] および [Feature Flag グラフ][7] を参照してください。
+
+### Agent Remote Configuration を使用する{#use-agent-remote-configuration}
+
+Agent ベースの配信の場合は、[Remote Configuration][2] が有効で、Agent に API キーが構成されている Datadog Agent 7.55 以降を使用してください。最小トレーサーバージョンは、.NET 6+ の場合は 3.36.0、.NET Framework 4.6.2+ の場合は 3.38.0 です。
+
+Tracer 3.54.0 以降では、ソースを明示的に選択してください。
+
+{{< code-block lang="bash" >}}
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+それより前の Tracer バージョンでは `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` を使用します。3.54.0 では、この非推奨の設定は、新しい有効化設定も明示的なソースも指定されていない場合に Remote Configuration を保持します。移行するには、レガシーな設定を削除し、上記のアプリケーション認証情報を設定し、ソースをすでに明示的に選択している場合は `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` を設定してください。`DD_FEATURE_FLAGS_ENABLED=false` は、選択されたソースに関係なく Feature Flags を無効にします。
+
+ポーリング、リクエストタイムアウト、カスタムエンドポイント、および移行設定については、[Configuration Sources][9] を参照してください。デフォルトの Agentless ポーリング間隔は 30 秒、リクエストタイムアウトは 5 秒であり、プロバイダーの初期化は最初の設定まで最大 30 秒待機します。
 
 ## インストール {#installation}
 
@@ -88,7 +95,7 @@ dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
 
 ## SDK の初期化 {#initialize-the-sdk}
 
-Datadog OpenFeature プロバイダーを OpenFeature API に登録します。このプロバイダーは、Datadog .NET トレーサーの Remote Configuration システムに接続して、フラグ構成を受信します。
+Datadog OpenFeature プロバイダーを OpenFeature API に登録します。プロバイダーは、Datadog .NET Tracer で選択された設定ソースをアクティブにします。
 
 ### ブロッキングの初期化 {#blocking-initialization}
 
@@ -250,7 +257,7 @@ Console.WriteLine($"Error Message: {details.ErrorMessage}");
 
 ## プロバイダーの初期化の待機 {#waiting-for-provider-initialization}
 
-デフォルトでは、最初の Remote Configuration ペイロードが受信されるまで、プロバイダーは非同期に初期化されてフラグ評価はデフォルト値を返します。アプリケーションでリクエストを処理する前にフラグの準備が必要な場合は、イベントハンドラーを使用してプロバイダーの初期化を待機できます。
+デフォルトでは、最初のフラグ設定が受信されるまで、プロバイダーは非同期に初期化されてフラグ評価はデフォルト値を返します。アプリケーションでリクエストを処理する前にフラグの準備が必要な場合は、イベントハンドラーを使用してプロバイダーの初期化を待機できます。
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -356,22 +363,15 @@ public class CheckoutFlagTests : IAsyncLifetime
 
 ## トラブルシューティング {#troubleshooting}
 
-### プロバイダーが有効になっていない {#provider-not-enabled}
+### Agentless 設定が機能していません{#agentless-configuration-not-working}
 
-プロバイダーが有効になっていないという警告が表示される場合は、ご利用の環境またはアプリケーション構成で `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` が設定されていることを確認してください。
+- Tracer 3.54.0 以降が読み込まれ、OpenFeature プロバイダーが初期化されていることを確認してください。
+- `DD_API_KEY`、`DD_SITE`、および `DD_ENV` をアプリケーションプロセスでチェックしてください。
+- `DD_FEATURE_FLAGS_ENABLED` が `false` ではないことを確認してください。新規セットアップの場合は `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` を設定しないままにするか、明示的に `agentless` に設定してください。移行時には、レガシーな `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` 設定を削除してください。
+- `ufc-server.ff-cdn.<DD_SITE>` へのアウトバウンド HTTPS を許可してください。
+- `DD_TRACE_DEBUG=true` を有効にし、認証、タイムアウト、または不正な形式の設定エラーがないか Tracer ログを確認してください。
 
-{{< code-block lang="bash" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-コンテナ化されたアプリケーションの場合は、これを Docker または Kubernetes の構成に追加してください。
-
-{{< code-block lang="yaml" filename="docker-compose.yml" >}}
-environment:
-  - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-  - DD_SERVICE=my-service
-  - DD_ENV=production
-{{< /code-block >}}
+最初の有効な設定が行われる前は、評価は呼び出し元のデフォルト値を返します。初期化が成功した後は、一時的な配信失敗が発生しても、最後に有効だった設定が保持されます。
 
 ### Remote Configuration が機能していない {#remote-configuration-not-working}
 
@@ -400,6 +400,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [5]: /ja/account_management/api-app-keys/#api-keys
 [6]: /ja/feature_flags/guide/server_flag_evaluation_metrics/
 [7]: /ja/feature_flags/concepts/flag_graphs/
+[8]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[9]: /ja/feature_flags/concepts/configuration_sources/
 
 ## 参考資料 {#further-reading}
 

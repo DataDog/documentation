@@ -34,7 +34,7 @@ With the Training page, you get:
 
 To begin monitoring your training workloads, you must first meet the following criteria:
 - You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
-- You are running CUDA and CUPTI version 13 or later.
+- You are running CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
 
 ### 1. Connect training runs to GPU hardware
 
