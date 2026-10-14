@@ -1,63 +1,65 @@
 ---
-description: Examinez la vue des systèmes autonomes du chemin réseau
+description: Examinez la vue Autonomous Systems de Network Path
 further_reading:
 - link: /network_monitoring/network_path/list_view
   tag: Documentation
-  text: En savoir plus sur la vue liste dans le chemin réseau
+  text: En savoir plus sur la vue List dans Network Path
 - link: /network_monitoring/network_path/path_view
   tag: Documentation
-  text: En savoir plus sur la vue du chemin dans le chemin réseau
+  text: En savoir plus sur la vue Path dans Network Path
 - link: /network_monitoring/network_path/glossary
   tag: Documentation
-  text: Termes et concepts du chemin réseau
+  text: Termes et concepts de Network Path
 - link: /network_monitoring/network_path/setup
   tag: Documentation
-  text: Configuration du chemin réseau
-title: Vue des systèmes autonomes
+  text: Configuration de Network Path
+title: Vue Systèmes autonomes
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-La vue des systèmes autonomes (AS) offre une visibilité sur les fournisseurs de réseau et les fournisseurs de services Internet (FAI) qui transportent votre trafic à travers la couche de routage du protocole Border Gateway (BGP). Cette vue surveille la latence et les indicateurs de performance pour chaque AS dans vos chemins réseau, vous aidant à identifier exactement quels fournisseurs en amont rencontrent des problèmes lorsque la performance de votre réseau se dégrade.
+La vue Systèmes autonomes (AS) offre une visibilité sur les fournisseurs de réseau et les fournisseurs d'accès à Internet (FAI) qui acheminent votre trafic via la couche de routage BGP (Border Gateway Protocol). Cette vue surveille la latence et les métriques de performance pour chaque AS dans vos chemins réseau, vous aidant à identifier précisément quels fournisseurs en amont rencontrent des problèmes lorsque les performances de votre réseau se dégradent.
 
-Les problèmes de routage BGP et les problèmes spécifiques aux fournisseurs sont difficiles à diagnostiquer car ils échappent à votre contrôle direct. La vue AS rend visibles ces couches normalement invisibles, vous fournissant les données nécessaires pour répondre à des questions telles que « Est-ce un problème de peering ? » ou « Notre trafic a-t-il basculé vers un autre fournisseur de transit ? » sans tracer manuellement les routes ou analyser les tables BGP.
+Les problèmes de routage BGP et les problèmes spécifiques aux fournisseurs sont difficiles à diagnostiquer car ils échappent à votre contrôle direct. La vue AS rend visibles ces couches habituellement invisibles, vous fournissant les données pour répondre à des questions telles que « S'agit-il d'un problème d'appairage ? » ou « Notre trafic a-t-il basculé vers un autre fournisseur de transit ? » sans avoir à tracer manuellement les routes ou à analyser les tables BGP.
 
-Pour commencer, rendez-vous sur Network Path Explorer et cliquez sur [**Autonomous Systems (AS)**][1]
+Pour commencer, accédez au Network Path Explorer et cliquez sur [{{< ui >}}Autonomous Systems (AS){{< /ui >}}][1].
+
+Vous pouvez également vérifier l'état de santé d'un AS depuis un agent IA avec les outils [`list_autonomous_system_statuses`][4] et [`get_autonomous_system_status`][3] dans le Datadog MCP Server. Les outils comparent la latence, la perte de paquets et la visibilité de chaque AS par rapport à une référence sur 7 jours.
 
 ## Dashboard {#dashboard}
 
-Le Dashboard présente les données de performance sous plusieurs perspectives :
+Le dashboard présente les données de performance sous plusieurs angles :
 
 ### Rayon d'impact global {#global-blast-radius}
 
-La carte du rayon d'impact global montre la latence moyenne par pays sur la période sélectionnée. Cliquez sur n'importe quel pays sur la carte pour filtrer la [liste des systèmes autonomes](#autonomous-systems-table).
+La carte du rayon d'impact global affiche la latence moyenne par pays sur la période sélectionnée. Cliquez sur n'importe quel pays sur la carte pour filtrer la [liste des systèmes autonomes](#autonomous-systems-table).
 
 ### Catégories de trafic {#traffic-categories}
-Le panneau des catégories de trafic indique si votre trafic passe principalement par des fournisseurs d'hébergement ou des FAI traditionnels.
+Le panneau des catégories de trafic indique si votre trafic transite principalement par des fournisseurs d'hébergement ou par des FAI traditionnels.
 
-### Distribution du trafic {#traffic-distribution}
-Le panneau de distribution du trafic décompose le pourcentage de vos chemins qui traversent chaque région. 
+### Répartition du trafic {#traffic-distribution}
+Le panneau de répartition du trafic détaille le pourcentage de vos chemins qui traversent chaque région. 
 
-### Need Attention {#need-attention}
+### Nécessite une attention {#need-attention}
 
-La section Need Attention signale automatiquement les AS présentant des pics de latence ou des anomalies de performance, les classant par gravité afin que vous sachiez où concentrer votre enquête Sélectionnez un AS dans la liste pour voir ses [détails](#autonomous-system-details).
+La section Nécessite une attention signale automatiquement les AS présentant des pics de latence ou des anomalies de performance, en les classant par gravité afin que vous sachiez sur quoi concentrer votre enquête. Sélectionnez un AS dans la liste pour afficher ses [détails](#autonomous-system-details).
 
-## Autonomous Systems table {#autonomous-systems-table}
+## Tableau des systèmes autonomes {#autonomous-systems-table}
 
-Le tableau détaillé des AS fournit des données opérationnelles pour le dépannage:  des préfixes que chaque AS annonce, combien de vos chemins surveillés traversent cet AS, et quels problèmes spécifiques ont été détectés (pics de latence, changements de routage ou problèmes de connectivité). Lorsqu'un client signale une dégradation de la performance, vous pouvez rapidement déterminer si le problème provient de votre infrastructure, d'un fournisseur de transit spécifique ou d'un FAI de dernier kilomètre—information cruciale pour escalader vers la bonne équipe ou le bon fournisseur.
+Le tableau détaillé des AS fournit des données opérationnelles pour le dépannage, indiquant : les préfixes que chaque AS annonce, le nombre de vos chemins surveillés qui traversent cet AS, et les problèmes spécifiques détectés (pics de latence, changements de routage ou problèmes de connectivité). Lorsqu'un client signale une dégradation des performances, vous pouvez rapidement déterminer si le problème provient de votre infrastructure, d'un fournisseur de transit spécifique ou d'un FAI du dernier kilomètre — une information essentielle pour escalader le problème à la bonne équipe ou au bon fournisseur.
 
-Le tableau des AS montre les Systèmes Autonomes que traversent vos chemins réseau surveillés. Chaque ligne comprend :
+Le tableau des AS affiche les systèmes autonomes que traversent vos chemins réseau surveillés. Chaque ligne comprend :
 
 ASN
-: Le Numéro de Système Autonome.
+: Le numéro de système autonome.
 
 Name
-: Le nom du fournisseur de services qui gère l'AS.
+: Le nom du fournisseur de services qui exploite l'AS.
 
 Pays
 : Les pays où le trafic est observé pour l'AS.
 
 Préfixes surveillés
-: Les préfixes IP observés pour l'AS à travers vos chemins surveillés.
+: Les préfixes IP observés pour l'AS sur vos chemins surveillés.
 
 Tests trouvés
 : Le nombre de tests traversant l'AS.
@@ -65,23 +67,23 @@ Tests trouvés
 Problèmes détectés
 : Problèmes observés pour l'AS, tels que des pics de latence ou des pertes de paquets.
 
-Utilisez les contrôles de filtre au-dessus de la liste pour affiner les résultats par **Numéro d'AS**, **Pays**, **Catégorie** ou **Problèmes détectés**.
+Utilisez les commandes de filtrage au-dessus de la liste pour restreindre les résultats par **numéro d'AS**, **pays**, **catégorie** ou **problèmes détectés**.
 
-## Détails de l'AS {#autonomous-system-details}
+## Détails du système autonome {#autonomous-system-details}
 
-Cliquez sur un AS dans la liste pour ouvrir ses détails. La vue détaillée comprend un onglet **Trafic**, un onglet **Voisins** et une liste de chemins.
+Cliquez sur un système autonome dans la liste pour ouvrir ses détails. La vue détaillée inclut un onglet {{< ui >}}Traffic{{< /ui >}}, un onglet {{< ui >}}Neighbors{{< /ui >}} et une liste de chemins.
 
 ### Trafic {#traffic}
 
-L'onglet **Trafic** montre un diagramme relationnel du trafic circulant des sources **Amont** à travers l'AS sélectionné vers les destinations **Aval**. Survolez un nœud de trafic pour voir ses chemins agrégés et le nombre d'occurrences, et cliquez sur n'importe quel AS pour filtrer ses chemins dans la [liste des chemins](#path-list).
+L'onglet {{< ui >}}Traffic{{< /ui >}} affiche un diagramme relationnel du trafic circulant depuis les sources {{< ui >}}Upstream{{< /ui >}} à travers l'AS sélectionné vers les destinations {{< ui >}}Downstream{{< /ui >}}. Survolez un nœud de trafic pour voir ses chemins agrégés et son nombre d'occurrences, et cliquez sur n'importe quel AS pour filtrer ses chemins dans la [liste des chemins](#path-list).
 
-### Neighbors {#neighbors}
+### Voisins {#neighbors}
 
-L'onglet **Neighbors** montre une visualisation complète des AS en amont et en aval qui bordent celui que vous avez sélectionné Cliquez sur n'importe quel AS dans le graphique pour filtrer ses chemins dans la [Path list](#path-list)
+L'onglet {{< ui >}}Neighbors{{< /ui >}} affiche une visualisation complète des systèmes autonomes en amont et en aval qui sont voisins de celui que vous avez sélectionné. Cliquez sur n'importe quel AS dans le graphique pour filtrer ses chemins dans la [liste des chemins](#path-list).
 
-### Path list {#path-list}
+### Liste des chemins {#path-list}
 
-La liste des chemins comprend des chemins individuels à travers l'AS, avec les colonnes ci-dessous. Cliquez sur n'importe quelle ligne de chemin dans la liste pour l'ouvrir dans le [Path View][2]
+La liste des chemins inclut les chemins individuels à travers l'AS, avec les colonnes ci-dessous. Cliquez sur n'importe quelle ligne de chemin dans la liste pour l'ouvrir dans la [Vue Chemin][2].
 
 Source
 : La source du chemin.
@@ -89,18 +91,20 @@ Source
 Destination
 : La destination du chemin.
 
-Les tags
-: Étiquettes associées au chemin.
+Tags
+: Tags associés au chemin.
 
 Accessibilité moyenne
-: Le pourcentage de sondes de traceroute qui ont atteint avec succès la destination pendant la période sélectionnée.
+: Le pourcentage de sondes traceroute ayant atteint avec succès la destination sur la période sélectionnée.
 
 RTT moyen
-: Le temps de réponse aller-retour moyen pour le chemin.
+: Le temps de parcours moyen pour le chemin.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network-path/autonomous-systems
 [2]: /fr/network_monitoring/network_path/path_view/
+[3]: /fr/mcp_server/tools/#get_autonomous_system_status
+[4]: /fr/mcp_server/tools/#list_autonomous_system_statuses

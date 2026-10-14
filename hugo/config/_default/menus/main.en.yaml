@@ -655,6 +655,11 @@ menu:
       url: agent/troubleshooting/high_memory_usage/
       weight: 1012
       parent: agent_troubleshooting
+    - name: Missing Log Bytes
+      identifier: agent_troubleshooting_missing_log_bytes
+      url: agent/troubleshooting/missing_log_bytes/
+      weight: 1013
+      parent: agent_troubleshooting
     - name: Guides
       url: agent/guide/
       identifier: agent_guides
@@ -1346,27 +1351,6 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoTerm
-      url: coterm/
-      pre: coscreen
-      identifier: coterm
-      parent: essentials_heading
-      weight: 150000
-    - name: Install
-      url: coterm/install
-      identifier: coterm_install
-      parent: coterm
-      weight: 1
-    - name: Using CoTerm
-      url: coterm/usage
-      identifier: coterm_usage
-      parent: coterm
-      weight: 2
-    - name: Configuration Rules
-      url: coterm/rules
-      identifier: coterm_rules
-      parent: coterm
-      weight: 3
     - name: Remote Configuration
       pre: config-2
       url: remote_configuration
@@ -1565,6 +1549,11 @@ menu:
       identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
+    - name: Use Bits Chat
+      url: bits_ai/bits_chat/usage
+      identifier: bits_ai_bits_chat_usage
+      parent: bits_ai_bits_chat
+      weight: 201
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
@@ -3062,6 +3051,11 @@ menu:
       identifier: datadog_apps
       parent: actions_heading
       weight: 35000
+    - name: Embed Apps
+      url: actions/datadog_apps/embed_apps/
+      parent: datadog_apps
+      identifier: datadog_apps_embed_apps
+      weight: 1
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
@@ -3123,7 +3117,7 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: Embedded Apps
+    - name: Embed App Builder Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
@@ -5844,7 +5838,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 40505
-    - name: Evaluation Developer Guide
+    - name: Evaluator Developer Guide
       url: llm_observability/investigate/evaluations/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
@@ -5970,11 +5964,16 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
+    - name: Capacity Planning Page
+      url: gpu_monitoring/capacity_planning/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_capacity_planning
+      weight: 4
     - name: Training Page
       url: gpu_monitoring/training/
       parent: gpu_monitoring
       identifier: gpu_monitoring_training
-      weight: 4
+      weight: 5
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -6548,6 +6547,11 @@ menu:
       parent: delivery_performance
       identifier: delivery_performance_ai_impact
       weight: 2
+    - name: Setup
+      url: delivery_performance/ai_impact/setup/
+      parent: delivery_performance_ai_impact
+      identifier: delivery_performance_ai_impact_setup
+      weight: 1
     - name: Feature Flags
       url: feature_flags/
       pre: signpost
@@ -6724,6 +6728,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
       weight: 316
+    - name: Flag Key Obfuscation
+      url: feature_flags/concepts/flag_key_obfuscation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_key_obfuscation
+      weight: 317
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -8061,6 +8070,11 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
+    - name: Entity Packs
+      url: security/cloud_siem/ingest_and_enrich/entity_packs
+      parent: cloud_siem_content_packs
+      identifier: cloud_siem_entity_packs
+      weight: 1011
     - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
@@ -8156,21 +8170,26 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigate_security_signals
       weight: 301
-    - name: Risk Insights
+    - name: Entity Risks
       url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
+    - name: User Inventory
+      url: security/cloud_siem/triage_and_investigate/user_inventory/
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_user_inventory
+      weight: 303
     - name: IOC Explorer
       url: security/cloud_siem/triage_and_investigate/ioc_explorer
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_ioc_explorer
-      weight: 303
+      weight: 304
     - name: Investigator
       url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
-      weight: 304
+      weight: 305
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem
@@ -10206,25 +10225,25 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
-    - name: AI Investigations
-      url: real_user_monitoring/ai_investigations/
+    - name: Bits in RUM
+      url: real_user_monitoring/bits_ai/
       parent: rum
-      identifier: rum_ai_investigations
+      identifier: rum_bits_ai
       weight: 9
-    - name: Single-View AI Investigation
-      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_single_view
+    - name: Optimize Performance
+      url: real_user_monitoring/bits_ai/optimize_performance/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_optimize_performance
       weight: 901
-    - name: Multi-View AI Investigation
-      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_multi_view
+    - name: Investigate Regressions
+      url: real_user_monitoring/bits_ai/investigate_regressions/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_investigate_regressions
       weight: 902
-    - name: Operation AI Investigation
-      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_operation
+    - name: Bits Chat in RUM
+      url: real_user_monitoring/bits_ai/bits_chat/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_bits_chat
       weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
@@ -10986,6 +11005,11 @@ menu:
       identifier: disaster_recovery
       parent: administration_heading
       weight: 15000
+    - name: Recommended Settings for DNS Failover
+      identifier: disaster_recovery_recommended_settings
+      url: disaster_recovery/recommended_settings/
+      parent: disaster_recovery
+      weight: 1
     - name: Data Security
       url: data_security/
       pre: security-lock
