@@ -27,7 +27,7 @@ Automatic retries reduce the number of pipelines that developers re-run by hand,
 
 When a job in your CI pipeline fails:
 1. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
-   - This is the same AI error classifier used by [CI jobs failure analysis][6], which reads indexed job logs to decide whether a failure is transient.
+   - This is the same AI error classifier used by [Logs Analysis][6], which reads relevant job logs to decide whether a failure is transient.
 1. If the failure is classified as retriable, Datadog requests a retry through the provider's API.
 1. Datadog retries each failing job up to a maximum number of attempts (set by Datadog) to prevent infinite retry loops. Retries are counted per job per commit—if the same job fails again on a new commit, the counter resets.
 1. Datadog records the retry outcome on the original pipeline in CI Visibility.
@@ -38,7 +38,7 @@ To use automatic job retries:
 - CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
 - For GitHub Actions, the [Datadog GitHub App][8] must have the **Actions: Write** permission.
 - The [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
-- Datadog must have indexed CI job logs for the repositories where you'd like to use automatic retries (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
+- Logs Analysis must be configured for the repositories where you'd like to use automatic retries (see [Logs Analysis for GitHub Actions][4] or [Logs Analysis for GitLab][5]).
 - To enable this feature, you must have the **CI Provider Settings Write** permission in Datadog.
 
 ## Enable automatic job retries
@@ -97,8 +97,8 @@ A failed job is not retried when:
 [1]: /continuous_integration/pipelines/github/
 [2]: /continuous_integration/pipelines/gitlab/
 [3]: /integrations/guide/source-code-integration/
-[4]: /continuous_integration/pipelines/github/#collect-job-logs
-[5]: /continuous_integration/pipelines/gitlab/#collect-job-logs
+[4]: /continuous_integration/pipelines/github/#logs-analysis
+[5]: /continuous_integration/pipelines/gitlab/#logs-analysis
 [6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /continuous_integration/pipelines/github/#configure-a-github-app

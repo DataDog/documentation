@@ -39,11 +39,11 @@ Vous pouvez gérer les ensembles de règles de pipeline de tags via l'[API][7], 
 
 Pour créer un ensemble de règles, accédez à [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Pipelines{{< /ui >}}][1].
 
-<div class="alert alert-danger"> Vous pouvez créer jusqu'à 100 règles. Les tables de référence basées sur l'API ne sont pas prises en charge. </div>
+<div class="alert alert-info"> Vous pouvez créer jusqu'à 100 règles. </div>
 
-Avant de créer des règles individuelles, créez un ensemble de règles (un dossier pour vos règles) en cliquant sur {{< ui >}}+ New Ruleset{{< /ui >}}.
+Avant de créer des règles individuelles, créez un ensemble de règles (un dossier pour vos règles) en cliquant sur {{< ui >}}\+ New Ruleset{{< /ui >}}.
 
-Au sein de chaque ensemble de règles, cliquez sur {{< ui >}}+ Add New Rule{{< /ui >}} et sélectionnez un type de règle : {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}} ou {{< ui >}}Map multiple tags{{< /ui >}}. Ces règles s'exécutent dans un ordre séquentiel et déterministe, de haut en bas.
+Au sein de chaque ensemble de règles, cliquez sur {{< ui >}}\+ Add New Rule{{< /ui >}} et sélectionnez un type de règle : {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}} ou {{< ui >}}Map multiple tags{{< /ui >}}. Ces règles s'exécutent dans un ordre séquentiel et déterministe, de haut en bas.
 
 {{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="Une liste de règles de tag sur la page Tag Pipelines affichant diverses catégories telles que l'équipe, le compte, le service, le département, l'unité commerciale, et plus encore" style="width:60%;" >}}
 
@@ -101,11 +101,22 @@ Sous la section {{< ui >}}Additional options{{< /ui >}}, vous disposez des optio
   - {{< ui >}}Replace the column{{< /ui >}} - Remplace les valeurs de colonne existantes par les nouvelles valeurs. <div class="alert alert-warning">Le remplacement de colonnes peut écraser les données existantes. Utilisez cette option avec précaution.</div>
 - {{< ui >}}Apply case-insensitive matching for primary key values{{< /ui >}} - Active la correspondance insensible à la casse entre la valeur de la clé primaire de la Reference Table et la valeur du tag dans les données de coût lorsque la clé de tag correspond à la clé primaire. Par exemple, si la paire de valeurs de clé primaire de l'interface utilisateur est `foo:Bar` et que le tag des données de coût est `foo:bar`, alors les deux peuvent être mis en correspondance.
 
+#### Tables de référence basées sur l'API {#api-based-reference-tables}
+
+Vous pouvez également utiliser des tables de référence basées sur l'API dans Tag Pipelines. Certaines tables plus anciennes peuvent nécessiter une mise à jour des données pour se synchroniser avec Cloud Cost Management avant que vous puissiez les utiliser dans une règle.
+
+##### Dépannage des erreurs de synchronisation {#troubleshooting-synchronization-errors}
+
+Si vous recevez une erreur indiquant qu'une Reference Table ne s'est pas synchronisée avec Cloud Cost Management lors de l'enregistrement d'une règle :
+
+1. **Attendez la propagation :** Si vous avez récemment créé ou mis à jour la table, attendez quelques minutes que les modifications se propagent, puis enregistrez à nouveau la règle.
+2. **Déclencher la synchronisation :** Si l'erreur persiste, téléchargez à nouveau le fichier de données de la table ou mettez à jour une ligne pour déclencher la synchronisation avec Cloud Cost Management.
+
 ## Tags réservés {#reserved-tags}
 
 Certains tags tels que `env` et `host` sont des [tags réservés][4] et font partie du [Unified Service Tagging][3]. Le tag `host` ne peut pas être ajouté dans les pipelines de tags.
 
-L'utilisation de tags aide à corréler vos métriques, traces, processus et logs. Les tags réservés comme `host` offrent une visibilité et une surveillance efficace sur l'ensemble de votre infrastructure. Pour une corrélation optimale et des informations exploitables, utilisez ces tags réservés dans le cadre de votre stratégie de balisage dans Datadog.
+L'utilisation de tags aide à corréler vos métriques, traces, processus et logs. Les tags réservés comme `host` offrent une visibilité et une surveillance efficace sur l'ensemble de votre infrastructure. Pour une corrélation optimale et des informations exploitables, utilisez ces tags réservés dans le cadre de votre stratégie de tagging dans Datadog.
 
 ## Supprimer des tags {#delete-tags}
 Pour supprimer un tag créé à l'aide des pipelines de tags, supprimez la règle qui l'a créé. Dans les 24 heures, le tag est automatiquement supprimé des données des trois derniers mois. Pour supprimer le tag des anciennes données, contactez le [support Datadog][5].

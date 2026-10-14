@@ -47,7 +47,7 @@ Recommendations:
 
    - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or Log Management.
    - **Import from external systems** such as [Backstage][14] or [ServiceNow][15].  
-   - **[Create entries directly][24]** through the Datadog UI, or programmatically by importing from GitHub, Terraform, the Datadog Software Metadata Provider, or the Service Definition API.  
+   - **[Create entries directly][24]** through the Datadog UI, or programmatically by importing from GitHub, GitLab, Terraform, the Datadog Software Metadata Provider, or the Service Definition API.
 
   **Note**: If you use APM, prioritize [Unified Service Tagging][25] and [Inferred Services][26] as entry points, rather than relying on service overrides.
 
@@ -56,7 +56,7 @@ Recommendations:
 
 ## Phase 3: Integrate data sources
 
-1. **Adopt GitOps-style management**: [Connect GitHub][13] or other repos to manage your catalog. [Import existing Backstage manifests][14] if available.  
+1. **Adopt GitOps-style management**: [Connect GitHub or GitLab][13] to manage your catalog. [Import existing Backstage manifests][14] if available.
 1. **[Import from ServiceNow][15]**: Sync CIs from your ServiceNow CMDB into IDP.  
 1. **Connect on-call and incident tools**: Configure [Jira][9], [PagerDuty][10], or [other integrations][16].
 
@@ -98,7 +98,7 @@ Recommendations:
 [10]: /integrations/pagerduty/
 [11]: https://app.datadoghq.com/software/self-service-actions
 [12]: /internal_developer_portal/eng_reports/
-[13]: /internal_developer_portal/catalog/set_up/create_entities/#github-integration
+[13]: /internal_developer_portal/catalog/set_up/create_entities/#github-and-gitlab-integrations
 [14]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
 [15]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
 [16]: /internal_developer_portal/integrations

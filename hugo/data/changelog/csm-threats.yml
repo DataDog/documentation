@@ -1,0 +1,8 @@
+entries:
+  - change_type: modified
+    date: '2026-10-01'
+    link: https://github.com/DataDog/documentation/pull/40342
+    operations:
+      - CreateCSMThreatsAgentPolicy
+    title: Fix Workload Protection policy creation success response to 201 
+      Created

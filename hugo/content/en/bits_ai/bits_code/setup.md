@@ -116,7 +116,7 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 ### Enable auto-push
 
-Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
+Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog (or in a [Slack code channel][13]) before it gets pushed.
 
 To enable auto-push, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6].
 
@@ -216,7 +216,7 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [11]: /bits_ai/bits_code/#supported-source-code-providers
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
 [13]: /bits_ai/bits_code/slack_code_channels/
-[14]: /bits_ai/bits_chat/#slack
+[14]: /bits_ai/bits_chat/usage/#slack
 [15]: https://docs.slack.dev/reference/scopes/
 [16]: https://app.datadoghq.com/code/settings/slack
 

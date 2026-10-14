@@ -25,13 +25,6 @@ Connect the MCP server to your Claude Code session:
 <pre><code>claude mcp add --scope user --transport http datadog-llmo-mcp \
   '{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core'</code></pre>
 
-To run the MCP server as a local binary instead, install the Datadog MCP CLI:
-
-{{< code-block lang="shell" >}}
-curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-datadog_mcp_cli login
-claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
-{{< /code-block >}}
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
