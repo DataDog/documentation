@@ -378,15 +378,9 @@ spec:
 ```
 
 Replace the workload name, namespace, tracer language, and service tags with the correct values for your application. `targetRef` identifies the workload by its API version, kind, and name. Only one `DatadogInstrumentation` custom resource can target a given workload at a time. If a resource already exists for that workload, add `config.apm` to that resource.
+Once applied, new pods part of the targeted workload will be instrumented with the tracer and config defined in your resource.
 
 Supported target kinds are `Deployment`, `StatefulSet`, `DaemonSet`, `Job`, `CronJob`, and Argo `Rollout`.
-
-
-DDI changes apply to new pods. After updating SDK settings, replace the affected pods using the workload's normal rollout process. For CronJobs, subsequent runs use the updated configuration.
-
-1. Send traffic to the application and [verify the installation](#verify-the-installation).
-
-This keeps trace collection enabled and lets DDI select pods without admission opt-in labels. Other instrumentation sources still follow the [configuration precedence](#configuration-precedence).
 
 ##### Configuration settings
 
