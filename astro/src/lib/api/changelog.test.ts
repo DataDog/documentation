@@ -8,15 +8,12 @@ import {
   groupByDate,
   loadRawChangelogFiles,
   normalizeChangelog,
-  renderChangelogMarkdown,
   resolveChangelogEntries,
   splitInlineCode,
   toChangelogBucket,
   type ChangelogBucket,
   type ChangelogEntry,
-  type ResolvedChangelogEntry,
 } from "./changelog";
-import { buildMarkdocStr } from "@lib/plaintext/helpers";
 import { getCategoriesView, getCategoryStubsView } from "./viewsBuilder";
 
 function makeEntry(overrides: Partial<ChangelogEntry> = {}): ChangelogEntry {
@@ -330,85 +327,6 @@ describe("getChangelogView", () => {
 
   it("memoizes per locale", async () => {
     expect(await getChangelogView("en")).toBe(await getChangelogView("en"));
-  });
-});
-
-describe("renderChangelogMarkdown", () => {
-  function makeResolvedEntry(
-    overrides: Partial<ResolvedChangelogEntry> = {},
-  ): ResolvedChangelogEntry {
-    return {
-      ...makeEntry(),
-      product: { name: "Dashboards", href: "/api/latest/dashboards/" },
-      operations: [],
-      ...overrides,
-    };
-  }
-
-  it("groups entries under date headings, linking what it can", () => {
-    const markdown = buildMarkdocStr(
-      renderChangelogMarkdown([
-        makeResolvedEntry({
-          bucket: "added",
-          title: "Add Heatgrid widget",
-          operations: [
-            {
-              operationId: "ListDashboards",
-              href: "/api/latest/dashboards/get-all-dashboards/",
-            },
-            { operationId: "GetDashboardUsage" },
-          ],
-        }),
-        makeResolvedEntry({
-          productSlug: "deployment-gates",
-          product: { name: "Deployment Gates" },
-          bucket: "breaking",
-          title: "Remove an endpoint",
-        }),
-        makeResolvedEntry({
-          date: "2026-10-06",
-          bucket: "deprecated",
-          title: "Deprecate an endpoint",
-        }),
-      ]),
-    );
-    expect(markdown).toBe(`# Changelog
-
-Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.
-
-## 2026-10-08
-
-- **Added**: [Dashboards](/api/latest/dashboards/): Add Heatgrid widget (Operations: [\`ListDashboards\`](/api/latest/dashboards/get-all-dashboards/), \`GetDashboardUsage\`)
-- **Breaking**: Deployment Gates: Remove an endpoint
-
-## 2026-10-06
-
-- **Deprecated**: [Dashboards](/api/latest/dashboards/): Deprecate an endpoint
-`);
-  });
-
-  it("renders backtick spans in a title as code nodes", () => {
-    const nodes = renderChangelogMarkdown([
-      makeResolvedEntry({
-        title: "Limit tags on `UpdateDeviceUserTags` and `GetDevice`",
-      }),
-    ]);
-    const codeContents = [...nodes.at(-1)!.walk()]
-      .filter((node) => node.type === "code")
-      .map((node) => node.attributes.content);
-    expect(codeContents).toEqual(["UpdateDeviceUserTags", "GetDevice"]);
-    expect(buildMarkdocStr(nodes)).toContain(
-      "Limit tags on `UpdateDeviceUserTags` and `GetDevice`\n",
-    );
-  });
-
-  it("says so when there are no entries", () => {
-    expect(buildMarkdocStr(renderChangelogMarkdown([]))).toBe(`# Changelog
-
-Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.
-
-No API changes have been published yet.
-`);
   });
 });
 

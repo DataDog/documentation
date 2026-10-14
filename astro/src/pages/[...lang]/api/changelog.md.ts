@@ -10,8 +10,8 @@ import {
   CHANGELOG_INTRO,
   CHANGELOG_TITLE,
   getChangelogView,
-  renderChangelogMarkdown,
 } from "@lib/api/changelog";
+import { apiChangelogNodes } from "@components/ApiChangelog/plaintext/ApiChangelog";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { buildPlaintextPage } from "@lib/plaintext/helpers";
@@ -30,7 +30,7 @@ export const GET: APIRoute = async ({ params, site }) => {
 
   const entries = await getChangelogView(lang);
   const body = buildPlaintextPage(
-    renderChangelogMarkdown(entries),
+    apiChangelogNodes(entries),
     {
       title: CHANGELOG_TITLE,
       description: CHANGELOG_INTRO,

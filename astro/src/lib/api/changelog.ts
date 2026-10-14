@@ -6,20 +6,8 @@
  * function, so tests can drive it with synthetic data.
  */
 
-import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { parse as parseYaml } from "yaml";
 import { localizedHref, type Locale } from "@lib/i18n/locale";
-import {
-  Ast,
-  bold,
-  heading,
-  inline,
-  link,
-  list,
-  listItem,
-  paragraphFromText,
-  plaintext,
-} from "@lib/plaintext/helpers";
 import { toCategorySlug } from "./categorySlug";
 import { CHANGELOG_ROOT_PATH } from "./changelogPaths";
 import { getCategoriesView } from "./viewsBuilder";
@@ -267,64 +255,6 @@ export function splitInlineCode(title: string): TitlePart[] {
     parts.push({ text: title.slice(lastIndex), isCode: false });
   }
   return parts;
-}
-
-/**
- * The body of the plaintext twin: the whole, unpaginated changelog as
- * Markdoc nodes, grouped by date.
- */
-export function renderChangelogMarkdown(
-  entries: ResolvedChangelogEntry[],
-): MarkdocNode[] {
-  const intro = [
-    heading(1, CHANGELOG_TITLE),
-    paragraphFromText(CHANGELOG_INTRO),
-  ];
-  if (entries.length === 0) {
-    return [...intro, paragraphFromText(CHANGELOG_EMPTY_MESSAGE)];
-  }
-  const dateSections = groupByDate(entries).flatMap((group) => [
-    heading(2, group.date),
-    list("unordered", group.entries.map(entryListItem)),
-  ]);
-  return [...intro, ...dateSections];
-}
-
-function entryListItem(entry: ResolvedChangelogEntry): MarkdocNode {
-  const productNode = entry.product.href
-    ? link(entry.product.href, entry.product.name)
-    : plaintext(entry.product.name);
-  const children = [
-    bold([plaintext(CHANGELOG_BUCKET_LABELS[entry.bucket])]),
-    plaintext(": "),
-    productNode,
-    plaintext(": "),
-    ...titleNodes(entry.title),
-    ...operationsNodes(entry.operations),
-  ];
-  return listItem([inline(children)]);
-}
-
-function titleNodes(title: string): MarkdocNode[] {
-  return splitInlineCode(title).map((part) =>
-    part.isCode
-      ? new Ast.Node("code", { content: part.text })
-      : plaintext(part.text),
-  );
-}
-
-function operationsNodes(
-  operations: ResolvedChangelogEntry["operations"],
-): MarkdocNode[] {
-  if (operations.length === 0) return [];
-  const operationNodes = operations.flatMap((operation, index) => {
-    const code = new Ast.Node("code", { content: operation.operationId });
-    const operationNode = operation.href
-      ? new Ast.Node("link", { href: operation.href }, [code])
-      : code;
-    return index === 0 ? [operationNode] : [plaintext(", "), operationNode];
-  });
-  return [plaintext(" (Operations: "), ...operationNodes, plaintext(")")];
 }
 
 function parseChangelogFile(

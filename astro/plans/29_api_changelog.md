@@ -118,7 +118,7 @@ Only one filter dimension (change type), single select. Each entry belongs to ex
   - **Unknown paths:** if `getStaticPaths` didn't produce the path, return 404 (needed for dev mode).
 - **`src/pages/[...lang]/api/changelog.md.ts`:** the plaintext twin.
   - `prerender = true`, emitted for every locale.
-  - Renders the **whole, unpaginated** changelog as markdown, grouped by date, using `renderChangelogMarkdown(resolvedEntries)` (a pure function in `changelog.ts`). Each entry includes its type, product (linked when it has a page), title and operations (linked when known). Build the page with the `buildPlaintextPage` helpers.
+  - Renders the **whole, unpaginated** changelog as markdown, grouped by date, using `apiChangelogNodes(resolvedEntries)` (the plaintext twin in `src/components/ApiChangelog/plaintext/ApiChangelog.ts`). Each entry includes its type, product (linked when it has a page), title and operations (linked when known). Build the page with the `buildPlaintextPage` helpers.
   - Every paginated or filtered HTML page points its copy button at this one `.md`. Check how `rewriteInternalDocLink` maps `/api/changelog/added/2/`; it probably needs an explicit override passed into `ApiLayout`.
 
 ### 3. Components (vanilla Astro, CSS modules, full BEM)
@@ -204,7 +204,7 @@ Write each test first and confirm it fails before implementing. While developing
 
 > **Compaction point 1:** the data layer is complete and unit-tested. No routes or components use it yet. **Stop here and ask the user to compact.**
 
-4. **`renderChangelogMarkdown`** and the **`.md` twin route.** Unit test the markdown (grouping, links, unlinked fallbacks) against a snapshot. Then add `changelog.md.ts`.
+4. **`apiChangelogNodes` (plaintext twin)** and the **`.md` twin route.** Unit test the markdown (grouping, links, unlinked fallbacks) against a snapshot. Then add `changelog.md.ts`.
 5. **`Pagination.astro`.** Unit tests, following the pattern in existing component unit tests (see `ApiSideNav/tests/unit.test.ts`):
    - it renders nothing for 1 page
    - Prev is disabled on page 1, Next on the last page
@@ -243,7 +243,7 @@ Write each test first and confirm it fails before implementing. While developing
 
 9b. **Inline code in entry titles (user decision, made after step 9).** Some changelog titles contain markdown backtick spans, for example ``Document the per-device user tag limit on `UpdateDeviceUserTags` ``. Render each span as inline code instead of literal backticks, in both outputs:
     - **HTML:** the `<h3 class="api-changelog-entry__title">` in `ApiChangelogEntry.astro` renders `<code>` for each span and plain text for the rest. Don't use `set:html`; build the parts from a small pure helper, for example `splitInlineCode(title): {text, isCode}[]` in `changelog.ts`, so nothing in the title is treated as HTML.
-    - **Markdown:** `renderChangelogMarkdown` emits `new Ast.Node("code", {content})` for each span instead of the raw backticks.
+    - **Markdown:** `apiChangelogNodes` emits `new Ast.Node("code", {content})` for each span instead of the raw backticks.
     - **Done.** Test caveat: the exact-string markdown check can't tell code nodes from literal backticks, because both print the same. The markdown test therefore checks the AST for `code` nodes.
     - **Red to green:** unit tests for the helper (no backticks, one span, several spans, an unmatched backtick stays literal), a component test checking for `code` inside `.api-changelog-entry__title`, and an exact-string markdown test. Add a backtick title to a fixture entry if none has one, then update the `13-changelog` HTML and plaintext snapshots with `-u` and review the diff.
 
