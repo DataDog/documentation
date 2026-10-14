@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40541
+    operations:
+      - CreateEvent
+    title: Remove bearer token auth from the CreateEvent intake endpoint

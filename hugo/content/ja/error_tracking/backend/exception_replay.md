@@ -141,6 +141,7 @@ Exception Replay のスナップショットには、**インスタンスごと�
 - [Log Index][6] の保持設定または先行するインデックスの [Exclusion Filters][7] により `source:dd_debugger` が欠落しているログ
 - Exception Replay は FedRAMP リージョンでは利用できません
 - Java: JDK 18 以下では、`-parameters` フラグでコンパイルされたクラスはサポートされない場合があります。Spring 6+、Spring Boot 3+、および Scala は、このフラグをデフォルトで使用します。
+- .NET：FIPSが有効なホストでは、3.55.0より前のトレーサーはException Replayをサポートしていません。Linuxでは、アプリケーションがクラッシュします。Exception Replayを使用するには、トレーサーを3.55.0以降にアップグレードしてください。以前のバージョンでは、クラッシュを回避するために`DD_EXCEPTION_REPLAY_ENABLED=false`を設定してください。
 
 Error Tracking Explorer でクエリ `@error.debug_info_captured:true` を使用して、Exception Replay のスナップショットを含むエラーを検索します
 。

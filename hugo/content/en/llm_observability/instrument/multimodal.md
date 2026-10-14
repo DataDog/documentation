@@ -260,7 +260,7 @@ Audio plays through the browser's native audio player. Supported containers incl
 ## Best practices
 
 - **Use the typed media fields.** Attach media with `image_parts` and `audio_parts` rather than embedding base64 strings in a message's `content`. Only typed fields render in the trace view.
-- **Attach the transcript with the audio.** Set the message `content` to the turn transcript so that the span is readable, searchable, and usable by evaluations even before the audio is played.
+- **Attach the transcript with the audio.** Set the message `content` to the turn transcript so that the span is readable, searchable, and usable by evaluators even before the audio is played.
 
 ## Further reading
 

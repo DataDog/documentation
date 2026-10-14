@@ -13,10 +13,6 @@ further_reading:
   text: Référence de l'API des portes de déploiement
 title: Configurer des portes de déploiement Just-In-Time (JIT)
 ---
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Les portes de déploiement sont en préversion. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
-{{< /callout >}}
-
 Avec les portes de déploiement **Just-In-Time (JIT)**, les règles sont définies en ligne dans la demande d'évaluation. Aucune porte n'a besoin d'exister au préalable dans Datadog, ce qui rend le JIT idéal pour les règles en tant que code et la flexibilité par déploiement.
 
 Vous recherchez des portes persistantes gérées dans l'interface utilisateur, l'API ou Terraform de Datadog ? Consultez [Portes de déploiement préconfigurées][5].
@@ -124,7 +120,7 @@ L'analyse est effectuée automatiquement pour tous les services instrumentés pa
 
 - `duration` : La période de temps (en secondes) pendant laquelle l'analyse s'exécute. Pour une confiance optimale dans l'analyse, cette valeur doit être d'au moins 900 secondes (15 minutes) après le début d'un déploiement. Le maximum est de 7200 secondes (2 heures).
 - `allowed_resources` (facultatif) : [Ressources APM][2] à inclure dans l'analyse. Lorsqu'elles sont spécifiées, seules les ressources listées sont analysées. Mutuellement exclusif avec `excluded_resources`.
-- `excluded_resources` (facultatif) : [Ressources APM][2] à ignorer (telles que les points de terminaison à faible volume ou à faible priorité). Mutuellement exclusif avec `allowed_resources`.
+- `excluded_resources` (facultatif) : [Ressources APM][2] à ignorer (telles que les endpoints à faible volume ou à faible priorité). Mutuellement exclusif avec `allowed_resources`.
 
 Exemple de règle en ligne :
 
@@ -434,7 +430,7 @@ Pour des options de configuration complètes et des exemples d'utilisation, cons
 {{% /tab %}}
 {{% tab "Script générique" %}}
 
-Utilisez ce script comme point de départ. Il évalue un gate en utilisant des règles JIT inline.
+Utilisez ce script comme point de départ. Il évalue une porte en utilisant des règles JIT inline.
 
 Remplacez ce qui suit :
 
@@ -728,8 +724,8 @@ Lors de l'intégration des portes de déploiement dans votre workflow Continuous
 
 1. Définissez `dry_run: true` sur le `configuration` (ou `dryRun: true` dans le fichier de configuration CLI). Pour marquer uniquement certaines règles en mode dry-run, définissez `dry_run` par règle. Une évaluation en mode dry-run renvoie toujours `pass` via l'API, mais le résultat réel est enregistré dans l'interface utilisateur.
 2. Ajoutez l'évaluation Deployment Gate à votre processus de déploiement. Les déploiements ne sont pas impactés par le résultat de Deployment Gate tant que le mode dry-run est activé.
-3. Après une certaine période (par exemple, 1 à 2 semaines), vérifiez les exécutions de Deployment Gate et des règles sur la page {{< ui >}}Deployment Gates Evaluations{{< /ui >}}. L'interface utilisateur affiche le statut réel, vous permettant ainsi de voir quand Deployment Gate aurait échoué et pour quelle raison.
-4. Lorsque vous êtes certain que le comportement de Deployment Gate est conforme à vos attentes, passez `dry_run` à `false`. Ensuite, l'API commence à renvoyer le statut réel et les déploiements commencent à être promus ou annulés en fonction du résultat de Deployment Gate.
+3. Après une certaine période (par exemple, 1 à 2 semaines), vérifiez les exécutions de Deployment Gate et des règles sur la page {{< ui >}}Deployment Gates Evaluations{{< /ui >}}. L'interface utilisateur affiche le statut réel, vous permettant ainsi de voir quand Deployment Gate aurait échoué et pour quelle raison.
+4. Lorsque vous êtes certain que le comportement de Deployment Gate est conforme à vos attentes, passez `dry_run` à `false`. Ensuite, l'API commence à renvoyer le statut réel et les déploiements commencent à être promus ou annulés en fonction du résultat de la Deployment Gate.
 
 ## Pour aller plus loin {#further-reading}
 
