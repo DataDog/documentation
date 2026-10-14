@@ -7913,6 +7913,11 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
       weight: 608
+    - name: Rename a Cluster
+      url: /byoc-logs/operate/rename_cluster
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_rename_cluster
+      weight: 609
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
