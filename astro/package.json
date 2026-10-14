@@ -35,6 +35,8 @@
     "test": "yarn typecheck && yarn test:headless && yarn test:browser",
     "test:headless": "vitest run",
     "test:browser": "USE_DEV_SERVER=true playwright test",
+    "//test:ci": "Typecheck plus the Vitest suites. Skips Playwright, whose screenshot baselines are captured on macOS and won't match a Linux runner.",
+    "test:ci": "yarn typecheck && yarn test:headless",
     "test-ai": "yarn typecheck && yarn test:headless-ai && yarn test:browser-ai",
     "test:headless-ai": "vitest run --reporter=dot --silent=true",
     "test:browser-ai": "USE_DEV_SERVER=true playwright test --reporter=dot",
