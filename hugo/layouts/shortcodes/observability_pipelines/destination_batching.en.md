@@ -3,6 +3,7 @@
 | Amazon OpenSearch                          | None           | 10                | 1                   |
 | Amazon S3 (Datadog Log Archives)           | None           | 100               | 900                 |
 | Amazon Security Lake                       | None           | 256               | 300                 |
+| Azure Data Explorer                        | 1,000          | 2                 | 1                   |
 | Azure Storage (Datadog Log Archives)       | None           | 100               | 900                 |
 | CrowdStrike                                | None           | 1                 | 1                   |
 | Datadog BYOC Logs                          | 1,000          | 4.25              | 5                   |

@@ -128,6 +128,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
+{{% tab "Azure Data Explorer" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/azure_data_explorer %}}
+
+{{% /tab %}}
 {{% tab "ClickHouse" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/clickhouse %}}

@@ -1,0 +1,3 @@
+- Azure Data Explorer ingestion endpoint:
+   - The URI of your Azure Data Explorer cluster, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
+   - The default environment variable is `DD_OP_DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT`.
