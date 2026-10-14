@@ -140,8 +140,6 @@ The following instrumentations are disabled by default and can be enabled with t
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
-**Guidewire Note**: The Guidewire integration propagates trace context from the originating request span to WSI (Web Service Invocation) worker threads, so outbound SOAP call spans appear as children of the originating request instead of separate orphaned traces. Requires Java tracer 1.67.0+.
-
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
 ### Networking framework compatibility
