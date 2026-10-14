@@ -633,7 +633,7 @@ With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ linea
 
 ### Filter out specific DAGs from monitoring
 
-<div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later.</div>
+<div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later, which requires Airflow 2.11 or later.</div>
 
 To disable specific DAGs from sending OpenLineage events to Datadog for monitoring, add an `emission_policy` rule for each DAG to the `[openlineage]` section of your Airflow configuration:
 
