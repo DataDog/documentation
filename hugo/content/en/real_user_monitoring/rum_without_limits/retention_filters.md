@@ -86,10 +86,6 @@ There are three permanent retention filters:
 
 ## Exclusion filters
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-exclusion-filters/" btn_hidden="false" header="Join the Preview!">}}
-Exclusion filters are in Preview.
-{{< /callout >}}
-
 {{< img src="real_user_monitoring/rum_without_limits/exclusion-filters.png" alt="The Exclusion Filters group expanded, showing the predefined Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
 
 Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.

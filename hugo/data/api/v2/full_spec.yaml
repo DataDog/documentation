@@ -949,6 +949,14 @@ components:
       required: true
       schema:
         type: string
+    IntakeMappingID:
+      description: The ID of the intake mapping
+      example: d6d869d7-29d3-5595-bf40-57c95235cf5b
+      in: path
+      name: intake_mapping_id
+      required: true
+      schema:
+        type: string
     IntegrationAccountIdParameter:
       description: Unique identifier of the integration account.
       in: path
@@ -2396,6 +2404,116 @@ components:
             $ref: "#/components/schemas/JSONAPIErrorResponse"
       description: The server cannot process the request because it contains invalid data.
   schemas:
+    AIImpactUserActivityAttributes:
+      additionalProperties: false
+      description: |-
+        Daily AI coding tool activity for a single user. Each entry reports whether the user was
+        active on a given day and which AI tools and models they used.
+      properties:
+        day:
+          description: The day the activity refers to, in `YYYY-MM-DD` format.
+          example: "2026-05-26"
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+          type: string
+        is_active:
+          description: Whether the user actively used the listed AI tools on that day.
+          example: true
+          type: boolean
+        models:
+          $ref: "#/components/schemas/AIImpactUserActivityModels"
+        tools:
+          $ref: "#/components/schemas/AIImpactUserActivityTools"
+        user_email:
+          description: |-
+            The email address of the user. It is case-insensitive and is matched against the
+            email addresses of commit authors.
+          example: user@example.com
+          pattern: "^[^@]+@[^@.]+(?:\\.[^@.]+)+$"
+          type: string
+      required:
+        - user_email
+        - is_active
+        - day
+        - tools
+      type: object
+    AIImpactUserActivityData:
+      additionalProperties: false
+      description: A single daily AI tool activity entry.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AIImpactUserActivityAttributes"
+        type:
+          $ref: "#/components/schemas/AIImpactUserActivityType"
+      required:
+        - type
+        - attributes
+      type: object
+    AIImpactUserActivityDataArray:
+      description: |-
+        A batch of daily AI tool activity entries. A batch must contain between 1 and 1,000 entries.
+      example:
+        - attributes:
+            day: "2026-05-26"
+            is_active: true
+            models:
+              - claude-sonnet-4.5
+              - gpt-5
+            tools:
+              - Claude Code
+              - Cursor
+            user_email: user@example.com
+          type: ai_impact_user_activity
+      items:
+        $ref: "#/components/schemas/AIImpactUserActivityData"
+      maxItems: 1000
+      minItems: 1
+      type: array
+    AIImpactUserActivityModels:
+      description: |-
+        The AI models the user used on that day, for example `claude-sonnet-4.5` or `gpt-5`.
+        Values are lowercased and duplicates are removed.
+      example:
+        - claude-sonnet-4.5
+        - gpt-5
+      items:
+        description: The name of an AI model.
+        example: claude-sonnet-4.5
+        type: string
+      type: array
+    AIImpactUserActivityRequest:
+      additionalProperties: false
+      description: Request to send daily AI tool activity for one or more users.
+      properties:
+        data:
+          $ref: "#/components/schemas/AIImpactUserActivityDataArray"
+      required:
+        - data
+      type: object
+    AIImpactUserActivityTools:
+      description: |-
+        The AI coding tools the user used on that day, for example `Claude Code`, `Cursor`, or
+        `GitHub Copilot`. Known tools are normalized to a canonical name (`claude_code`, `cursor`,
+        `copilot`), and other values are converted to snake case. Entries must not be empty.
+      example:
+        - Claude Code
+        - Cursor
+      items:
+        description: The name of an AI coding tool.
+        example: Claude Code
+        minLength: 1
+        pattern: ".*\\S.*"
+        type: string
+      minItems: 1
+      type: array
+    AIImpactUserActivityType:
+      default: ai_impact_user_activity
+      description: JSON:API type for AI Impact user activity entries.
+      enum:
+        - ai_impact_user_activity
+      example: ai_impact_user_activity
+      type: string
+      x-enum-varnames:
+        - AI_IMPACT_USER_ACTIVITY
     APIErrorResponse:
       description: API error response.
       properties:
@@ -19023,6 +19141,85 @@ components:
       type: string
       x-enum-varnames:
         - CLOUD_CONFIGURATION
+    CloudCostAccount:
+      description: A Cloud Cost Management account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CloudCostAccountAttributes"
+        id:
+          description: The Datadog cloud account ID used by the account filters API.
+          example: "534"
+          type: string
+        type:
+          $ref: "#/components/schemas/CloudCostAccountType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CloudCostAccountAttributes:
+      description: Read-only status and identifiers for a cloud cost account.
+      properties:
+        account_id:
+          description: The cloud provider account identifier, such as an OCI tenancy OCID or AWS account ID.
+          example: "ocid1.tenancy.oc1..example"
+          type: string
+        cloud:
+          description: The cloud provider and cost report type. Currently supports `oci` and `aws_cur2`.
+          example: "oci"
+          type: string
+        created_at:
+          description: The timestamp when the cloud account was created.
+          example: "2026-01-01T12:00:00Z"
+          type: string
+        error_messages:
+          description: Validation errors for the cloud account. Empty when there are no errors.
+          example: []
+          items:
+            description: An error message.
+            type: string
+          type: array
+        status:
+          description: The cloud account status, one of `active`, `warn`, `error`, or `disabled`.
+          example: "active"
+          type: string
+        status_updated_at:
+          description: The timestamp when the cloud account status was last updated.
+          example: "2026-01-01T12:00:00Z"
+          type: string
+        updated_at:
+          description: The timestamp when the cloud account was last updated.
+          example: "2026-01-01T12:00:00Z"
+          type: string
+      required:
+        - account_id
+        - cloud
+        - created_at
+        - error_messages
+        - status
+        - status_updated_at
+        - updated_at
+      type: object
+    CloudCostAccountType:
+      default: cloud_account
+      description: Type of a cloud cost account.
+      enum:
+        - cloud_account
+      example: cloud_account
+      type: string
+      x-enum-varnames:
+        - CLOUD_ACCOUNT
+    CloudCostAccountsResponse:
+      description: List of cloud cost accounts.
+      properties:
+        data:
+          description: The cloud cost accounts matching the filter.
+          items:
+            $ref: "#/components/schemas/CloudCostAccount"
+          type: array
+      required:
+        - data
+      type: object
     CloudInventoryCloudProviderId:
       description: |-
         Cloud provider for this sync configuration (`aws`, `gcp`, or `azure`). For requests, must match the provider block supplied under `attributes`.
@@ -25717,6 +25914,57 @@ components:
       required:
         - type
         - attributes
+      type: object
+    CreateOverrideRequestAttributes:
+      description: Attributes for creating an on-call schedule override.
+      properties:
+        end:
+          description: The end time of the override.
+          example: "2024-01-08T02:53:01.000000000Z"
+          format: date-time
+          type: string
+        start:
+          description: The start time of the override.
+          example: "2024-01-07T02:53:01.000000000Z"
+          format: date-time
+          type: string
+      required:
+        - start
+        - end
+      type: object
+    CreateOverrideRequestData:
+      description: Data for creating an on-call schedule override.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateOverrideRequestAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateOverrideRequestRelationships"
+        type:
+          $ref: "#/components/schemas/OverrideDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateOverrideRequestRelationships:
+      description: Relationships to set when creating an on-call schedule override.
+      properties:
+        overridden_user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+        user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+      type: object
+    CreateOverridesRequest:
+      description: Request to create one or more on-call schedule overrides. You can create up to 25 overrides in a single request.
+      properties:
+        data:
+          description: A list of on-call schedule overrides to create.
+          items:
+            $ref: "#/components/schemas/CreateOverrideRequestData"
+          maxItems: 25
+          minItems: 1
+          type: array
+      required:
+        - data
       type: object
     CreatePageRequest:
       description: Full request to trigger an On-Call Page.
@@ -35375,6 +35623,126 @@ components:
       type: string
       x-enum-varnames:
         - DEPLOYMENT_GATE
+    DeploymentGateEvaluationAttributes:
+      description: Attributes of a deployment gate evaluation.
+      properties:
+        dry_run:
+          description: Whether this evaluation used gate-level dry run.
+          example: true
+          type: boolean
+        duration_seconds:
+          description: Evaluation duration in seconds. Null while it is in progress.
+          example: 900
+          format: int64
+          nullable: true
+          type: integer
+        env:
+          description: Deployment environment evaluated by the gate.
+          example: prod
+          type: string
+        evaluation_id:
+          description: Gate evaluation UUID. Matches the resource `id`.
+          example: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+          format: uuid
+          type: string
+        finished_at:
+          description: Time the evaluation finished. Null while it is in progress.
+          example: "2026-09-14T08:15:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        gate_id:
+          description: Configured deployment gate UUID. Null for just-in-time evaluations.
+          example: e7cd2af1-b67b-11ee-8d0d-2a7caf4aa214
+          format: uuid
+          nullable: true
+          type: string
+        identifier:
+          description: Deployment gate identifier.
+          example: default
+          type: string
+        service:
+          description: Service evaluated by the deployment gate.
+          example: checkout
+          type: string
+        started_at:
+          description: Time the evaluation started.
+          example: "2026-09-14T08:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+        version:
+          description: Evaluated deployment version. Empty when no version was provided.
+          example: "2026.09.14.1"
+          type: string
+      required:
+        - evaluation_id
+        - gate_id
+        - service
+        - env
+        - identifier
+        - version
+        - status
+        - dry_run
+        - started_at
+        - finished_at
+        - duration_seconds
+      type: object
+    DeploymentGateEvaluationData:
+      description: JSON:API deployment gate evaluation resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGateEvaluationAttributes"
+        id:
+          description: Deployment gate evaluation UUID.
+          example: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGateEvaluationDataType"
+      required: [id, type, attributes]
+      type: object
+    DeploymentGateEvaluationDataType:
+      default: deployment_gate_evaluation
+      description: JSON:API type for a deployment gate evaluation.
+      enum: [deployment_gate_evaluation]
+      example: deployment_gate_evaluation
+      type: string
+      x-enum-varnames: [DEPLOYMENT_GATE_EVALUATION]
+    DeploymentGateEvaluationListMeta:
+      description: Pagination metadata.
+      properties:
+        page:
+          $ref: "#/components/schemas/DeploymentGateEvaluationPage"
+      required: [page]
+      type: object
+    DeploymentGateEvaluationPage:
+      description: Cursor pagination information.
+      properties:
+        next_cursor:
+          description: Opaque cursor for the next page. Absent on the final page.
+          type: string
+        size:
+          description: Requested maximum number of resources in this page.
+          example: 1
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      required: [size]
+      type: object
+    DeploymentGateEvaluationsResponse:
+      description: Paginated deployment gate evaluations.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DeploymentGateEvaluationData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DeploymentGateEvaluationListMeta"
+      required: [data, meta]
+      type: object
     DeploymentGateResponse:
       description: Response for a deployment gate.
       properties:
@@ -35473,6 +35841,237 @@ components:
           type: string
       required:
         - id
+      type: object
+    DeploymentGateRuleEvaluationAttributes:
+      description: Attributes of a deployment gate rule evaluation.
+      properties:
+        configuration:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationConfiguration"
+        dry_run:
+          description: Whether this rule is non-enforcing. A failed dry-run rule is ignored when computing the gate outcome. Independent of `gate_dry_run`.
+          example: false
+          type: boolean
+        duration_seconds:
+          description: Rule evaluation duration in seconds. Null while it is in progress.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        env:
+          description: Evaluated environment.
+          example: prod
+          type: string
+        evaluation_id:
+          description: Rule evaluation UUID. Matches the resource `id`.
+          example: 4f66c1c6-8346-59e5-be44-238214133260
+          format: uuid
+          type: string
+        failures:
+          $ref: "#/components/schemas/DeploymentGateRuleFailures"
+        finished_at:
+          description: Time the rule evaluation finished. Null while it is in progress.
+          example: "2026-09-14T08:15:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        gate_dry_run:
+          description: Whether the parent gate is dry-run. A failed dry-run gate blocks but does not stop deployment. Independent of rule-level `dry_run`.
+          example: false
+          type: boolean
+        gate_evaluation_id:
+          description: Deployment gate evaluation UUID.
+          example: 426a8f7b-b3e8-45f9-9d99-a1ed2f7fea04
+          format: uuid
+          type: string
+        gate_id:
+          description: Configured deployment gate UUID. Null for just-in-time evaluations.
+          example: e7cd2af1-b67b-11ee-8d0d-2a7caf4aa214
+          format: uuid
+          nullable: true
+          type: string
+        identifier:
+          description: Deployment gate identifier.
+          example: default
+          type: string
+        name:
+          description: Rule name.
+          example: APM faulty deployment detection
+          type: string
+        reason:
+          description: Reason for the rule result.
+          example: A faulty resource was detected.
+          type: string
+        rule_id:
+          description: Configured deployment rule UUID. Null for just-in-time rules.
+          example: 5cb4e76f-2937-47d7-80c8-7255ce2b76a4
+          format: uuid
+          nullable: true
+          type: string
+        service:
+          description: Evaluated service.
+          example: checkout
+          type: string
+        started_at:
+          description: Time the rule evaluation started.
+          example: "2026-09-14T08:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+        type:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationType"
+        version:
+          description: Evaluated deployment version. Empty when no version was provided.
+          example: "2026.09.14.1"
+          type: string
+      required:
+        - evaluation_id
+        - gate_evaluation_id
+        - gate_id
+        - rule_id
+        - service
+        - env
+        - identifier
+        - version
+        - gate_dry_run
+        - name
+        - type
+        - status
+        - dry_run
+        - reason
+        - started_at
+        - finished_at
+        - duration_seconds
+        - configuration
+        - failures
+      type: object
+    DeploymentGateRuleEvaluationConfiguration:
+      additionalProperties: false
+      description: |-
+        Evaluated rule configuration. Fields depend on rule type and unset fields are omitted.
+        Monitor rules can include `duration`, `query`, `monitor_ids`, `warmup`, `fail_on_no_groups_found`, and `fail_on_no_data`.
+        Faulty deployment detection rules can include `duration`, `allowed_resources`, and `excluded_resources`.
+      properties:
+        allowed_resources:
+          description: APM resources explicitly allowed by faulty deployment detection.
+          items:
+            type: string
+          type: array
+        duration:
+          description: Evaluation duration configured for this rule.
+          format: int64
+          type: integer
+        excluded_resources:
+          description: APM resources excluded from faulty deployment detection.
+          items:
+            type: string
+          type: array
+        fail_on_no_data:
+          description: Whether a monitor rule fails when no data is found.
+          type: boolean
+        fail_on_no_groups_found:
+          description: Whether a monitor rule fails when no groups are found.
+          type: boolean
+        monitor_ids:
+          description: Monitor IDs evaluated by a monitor rule.
+          items:
+            type: string
+          type: array
+        query:
+          description: Monitor query used by a monitor rule.
+          type: string
+        warmup:
+          description: Warm-up duration in seconds for a monitor rule. Omitted when zero.
+          format: int64
+          type: integer
+      type: object
+    DeploymentGateRuleEvaluationData:
+      description: JSON:API deployment gate rule evaluation resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationAttributes"
+        id:
+          description: Rule evaluation UUID.
+          example: 4f66c1c6-8346-59e5-be44-238214133260
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGateRuleEvaluationDataType"
+      required: [id, type, attributes]
+      type: object
+    DeploymentGateRuleEvaluationDataType:
+      default: deployment_gate_rule_evaluation
+      description: JSON:API type for a deployment gate rule evaluation.
+      enum: [deployment_gate_rule_evaluation]
+      example: deployment_gate_rule_evaluation
+      type: string
+      x-enum-varnames: [DEPLOYMENT_GATE_RULE_EVALUATION]
+    DeploymentGateRuleEvaluationType:
+      description: Type of deployment gate rule.
+      enum: [monitor, faulty_deployment_detection]
+      example: faulty_deployment_detection
+      type: string
+      x-enum-varnames: [MONITOR, FAULTY_DEPLOYMENT_DETECTION]
+    DeploymentGateRuleEvaluationsResponse:
+      description: Paginated deployment gate rule evaluations.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DeploymentGateRuleEvaluationData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DeploymentGateEvaluationListMeta"
+      required: [data, meta]
+      type: object
+    DeploymentGateRuleFailureMonitor:
+      description: Failed monitor reference.
+      properties:
+        id:
+          description: Monitor ID.
+          example: "12345678"
+          type: string
+        state:
+          description: Monitor state that caused the failure.
+          example: alert
+          type: string
+        url:
+          description: URL for inspecting the monitor during the evaluation window.
+          example: https://app.datadoghq.com/monitors/12345678
+          type: string
+      required: [id, url, state]
+      type: object
+    DeploymentGateRuleFailureNarrative:
+      description: Faulty deployment detection narrative reference.
+      properties:
+        hostgroup:
+          description: Host group associated with the narrative.
+          example: service:checkout,env:prod
+          type: string
+        id:
+          description: Narrative ID.
+          example: narrative-123
+          type: string
+      required: [id, hostgroup]
+      type: object
+    DeploymentGateRuleFailures:
+      description: Rule failure details.
+      properties:
+        faulty_apm_resources:
+          description: Names of faulty APM resources.
+          example:
+            - GET /checkout
+          items:
+            type: string
+          type: array
+        monitors:
+          items:
+            $ref: "#/components/schemas/DeploymentGateRuleFailureMonitor"
+          type: array
+        narratives:
+          items:
+            $ref: "#/components/schemas/DeploymentGateRuleFailureNarrative"
+          type: array
+      required: [monitors, faulty_apm_resources, narratives]
       type: object
     DeploymentGateRulesResponse:
       description: Response for a deployment gate rules.
@@ -54958,6 +55557,294 @@ components:
       example: 66adc9350f2cc9b250b69abddab733dd55e1a588
       pattern: "^[a-fA-F0-9]{40,}$"
       type: string
+    GitHubCloudAuthIntakeMappingAttributesResponse:
+      additionalProperties: false
+      description: Attributes for GitHub cloud authentication intake mapping response.
+      properties:
+        claim_matchers:
+          $ref: "#/components/schemas/GitHubOIDCClaimPatterns"
+      required:
+        - claim_matchers
+      type: object
+    GitHubCloudAuthIntakeMappingCreateAttributes:
+      additionalProperties: false
+      description: Attributes for creating a GitHub cloud authentication intake mapping
+      properties:
+        claim_matchers:
+          $ref: "#/components/schemas/GitHubOIDCClaimPatterns"
+      required:
+        - claim_matchers
+      type: object
+    GitHubCloudAuthIntakeMappingCreateData:
+      additionalProperties: false
+      description: Data for creating a GitHub cloud authentication intake mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingCreateAttributes"
+        type:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    GitHubCloudAuthIntakeMappingCreateRequest:
+      additionalProperties: false
+      description: Request used to create a GitHub cloud authentication intake mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingCreateData"
+      required:
+        - data
+      type: object
+    GitHubCloudAuthIntakeMappingDataResponse:
+      description: Data for GitHub cloud authentication intake mapping response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingAttributesResponse"
+        id:
+          description: Unique identifier for the intake mapping.
+          example: "d6d869d7-29d3-5595-bf40-57c95235cf5b"
+          type: string
+        type:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GitHubCloudAuthIntakeMappingResponse:
+      description: Response containing a single GitHub cloud authentication intake mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingDataResponse"
+      required:
+        - data
+      type: object
+    GitHubCloudAuthIntakeMappingType:
+      description: Type identifier for GitHub cloud authentication intake mapping.
+      enum:
+        - github_oidc_auth_intake_mapping
+      example: github_oidc_auth_intake_mapping
+      type: string
+      x-enum-varnames:
+        - GITHUB_OIDC_AUTH_INTAKE_MAPPING
+    GitHubCloudAuthIntakeMappingsData:
+      description: List of GitHub cloud authentication intake mappings.
+      items:
+        $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingDataResponse"
+      type: array
+    GitHubCloudAuthIntakeMappingsResponse:
+      description: Response containing a list of GitHub cloud authentication intake mappings.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingsData"
+          example:
+            - attributes:
+                claim_matchers:
+                  ref: "refs/heads/main"
+                  repository: "test_owner/test_repo"
+                  repository_owner: "test_owner"
+                  sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+              id: "d6d869d7-29d3-5595-bf40-57c95235cf5b"
+              type: github_oidc_auth_intake_mapping
+      required:
+        - data
+      type: object
+    GitHubCloudAuthPersonaMappingAttributesResponse:
+      additionalProperties: false
+      description: Attributes for GitHub cloud authentication persona mapping response.
+      properties:
+        account_identifier:
+          description: Datadog account identifier (email or handle) mapped to the GitHub principal.
+          example: "test@example.com"
+          type: string
+        account_uuid:
+          description: Datadog account UUID.
+          example: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+          type: string
+        claim_matchers:
+          $ref: "#/components/schemas/GitHubOIDCClaimPatterns"
+      required:
+        - claim_matchers
+        - account_identifier
+        - account_uuid
+      type: object
+    GitHubCloudAuthPersonaMappingCreateAttributes:
+      additionalProperties: false
+      description: Attributes for creating a GitHub cloud authentication persona mapping.
+      properties:
+        account_identifier:
+          description: Datadog account identifier (email or handle) mapped to the GitHub principal.
+          example: "test@example.com"
+          type: string
+        claim_matchers:
+          $ref: "#/components/schemas/GitHubOIDCClaimPatterns"
+      required:
+        - claim_matchers
+        - account_identifier
+      type: object
+    GitHubCloudAuthPersonaMappingCreateData:
+      additionalProperties: false
+      description: Data for creating a GitHub cloud authentication persona mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingCreateAttributes"
+        type:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    GitHubCloudAuthPersonaMappingCreateRequest:
+      additionalProperties: false
+      description: Request used to create a GitHub cloud authentication persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingCreateData"
+      required:
+        - data
+      type: object
+    GitHubCloudAuthPersonaMappingDataResponse:
+      description: Data for GitHub cloud authentication persona mapping response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingAttributesResponse"
+        id:
+          description: Unique identifier for the persona mapping.
+          example: "c5c758c6-18c2-4484-ae3f-46b84128404a"
+          type: string
+        type:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GitHubCloudAuthPersonaMappingResponse:
+      description: Response containing a single GitHub cloud authentication persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingDataResponse"
+      required:
+        - data
+      type: object
+    GitHubCloudAuthPersonaMappingType:
+      description: Type identifier for GitHub cloud authentication persona mapping.
+      enum:
+        - github_oidc_auth_config
+      example: github_oidc_auth_config
+      type: string
+      x-enum-varnames:
+        - GITHUB_OIDC_AUTH_CONFIG
+    GitHubCloudAuthPersonaMappingsData:
+      description: List of GitHub cloud authentication persona mappings.
+      items:
+        $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingDataResponse"
+      type: array
+    GitHubCloudAuthPersonaMappingsResponse:
+      description: Response containing a list of GitHub cloud authentication persona mappings.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingsData"
+          example:
+            - attributes:
+                account_identifier: "test@example.com"
+                account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                claim_matchers:
+                  ref: "refs/heads/main"
+                  repository: "test_owner/test_repo"
+                  repository_owner: "test_owner"
+                  sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+              id: "c5c758c6-18c2-4484-ae3f-46b84128404a"
+              type: github_oidc_auth_config
+      required:
+        - data
+      type: object
+    GitHubOIDCClaimPatterns:
+      additionalProperties: false
+      description: |-
+        GitHub Actions OIDC claims to match against. Each field is a regular expression.
+        The `sub` claim is required; all other claims are optional. A token matches only when
+        all provided patterns match simultaneously (AND semantics).
+      properties:
+        actor:
+          description: Regular expression matched against the `actor` claim.
+          example: "octocat"
+          type: string
+        actor_id:
+          description: Regular expression matched against the `actor_id` claim.
+          example: "1234567"
+          type: string
+        enterprise:
+          description: Regular expression matched against the `enterprise` claim.
+          example: "test_enterprise"
+          type: string
+        enterprise_id:
+          description: Regular expression matched against the `enterprise_id` claim.
+          example: "42"
+          type: string
+        environment:
+          description: Regular expression matched against the `environment` claim.
+          example: "production"
+          type: string
+        event_name:
+          description: Regular expression matched against the `event_name` claim.
+          example: "push"
+          type: string
+        job_workflow_ref:
+          description: Regular expression matched against the `job_workflow_ref` claim.
+          example: "test_owner/test_repo/.github/workflows/jobs.yml@refs/heads/main"
+          type: string
+        ref:
+          description: Regular expression matched against the `ref` claim.
+          example: "refs/heads/main"
+          type: string
+        ref_type:
+          description: Regular expression matched against the `ref_type` claim.
+          example: "branch"
+          type: string
+        repository:
+          description: Regular expression matched against the `repository` claim.
+          example: "test_owner/test_repo"
+          type: string
+        repository_id:
+          description: Regular expression matched against the `repository_id` claim.
+          example: "123456789"
+          type: string
+        repository_owner:
+          description: Regular expression matched against the `repository_owner` claim.
+          example: "test_owner"
+          type: string
+        repository_owner_id:
+          description: Regular expression matched against the `repository_owner_id` claim.
+          example: "987654321"
+          type: string
+        repository_visibility:
+          description: Regular expression matched against the `repository_visibility` claim.
+          example: "public"
+          type: string
+        runner_environment:
+          description: Regular expression matched against the `runner_environment` claim.
+          example: "github-hosted"
+          type: string
+        sub:
+          description: |-
+            Regular expression matched against the entire `sub` (subject) claim, the primary GitHub Actions OIDC
+            identifier (for example, `repo:<OWNER>/<REPO>:ref:refs/heads/main`). The pattern must begin with
+            `repo:<OWNER>/`, where `<OWNER>` is a literal repository-owner name rather than a regular expression.
+          example: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+          type: string
+        workflow:
+          description: Regular expression matched against the `workflow` claim.
+          example: "CI"
+          type: string
+        workflow_ref:
+          description: Regular expression matched against the `workflow_ref` claim.
+          example: "test_owner/test_repo/.github/workflows/ci.yml@refs/heads/main"
+          type: string
+      required:
+        - sub
+      type: object
     GitRepositoryID:
       description: "Git Repository ID"
       example: "github.com/organization/example-repository"
@@ -56285,8 +57172,9 @@ components:
       description: The definition of a configurable parameter on a control or mitigation.
       properties:
         default_value:
-          description: The default value of the parameter. The JSON type depends on the parameter's `type`.
+          description: The default value of the parameter. The JSON type depends on the parameter's `type`. `null` when the parameter has no default.
           example: 30
+          nullable: true
         description:
           description: A human-readable description of the parameter.
           example: "Number of days of inactivity before an API key is considered unused."
@@ -65628,6 +66516,12 @@ components:
           description: The timestamp when the source map was created.
           example: "2024-01-01T00:00:00Z"
           format: date-time
+          type: string
+        debug_id:
+          description: |-
+            The debug identifier (UUID format) that uniquely identifies this
+            JavaScript source map. Returned for source maps indexed by debug ID.
+          example: 00000000-0000-4000-8000-000000000001
           type: string
         domain:
           description: The domain associated with the source map.
@@ -83094,6 +83988,8 @@ components:
 
         **Supported pipeline types:** metrics
       properties:
+        aggregation_timing:
+          $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessorAggregationTiming"
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
         enabled:
@@ -83128,6 +84024,31 @@ components:
         - enabled
       type: object
       x-pipeline-types: [metrics]
+    ObservabilityPipelineAggregateProcessorAggregationTiming:
+      description: Configures how metrics are assigned to aggregation windows. When omitted, metrics are grouped using system time.
+      properties:
+        allowed_lateness_secs:
+          description: Grace period, in seconds, for late-arriving metrics when using event time. Defaults to 10 seconds when omitted.
+          example: 10
+          format: int64
+          maximum: 3600
+          minimum: 0
+          type: integer
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessorAggregationTimingType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineAggregateProcessorAggregationTimingType:
+      description: Determines whether metrics are assigned to aggregation windows based on when they are processed or their timestamps.
+      enum:
+        - system_time
+        - event_time
+      example: event_time
+      type: string
+      x-enum-varnames:
+        - SYSTEM_TIME
+        - EVENT_TIME
     ObservabilityPipelineAggregateProcessorMode:
       description: The aggregation mode applied to metrics that share the same name and tags within the interval.
       enum:
@@ -83736,6 +84657,296 @@ components:
           description: A session identifier used for logging and tracing the assumed role session.
           type: string
       type: object
+    ObservabilityPipelineAzureDataExplorerDestination:
+      description: |-
+        The `azure_data_explorer` destination sends log events to an Azure Data Explorer table.
+
+        **Supported pipeline types:** logs
+      properties:
+        auth:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuth"
+        batch:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationBatch"
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionGzip"
+        database:
+          description: The name of the Azure Data Explorer database to ingest into. Supports template syntax.
+          example: logs_db
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: azure-data-explorer-destination
+          type: string
+        ingestion_endpoint_key:
+          description: |-
+            Name of the environment variable or secret that holds the Azure Data Explorer ingestion endpoint URL.
+            Defaults to `DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT` (prefixed with `DD_OP_` at runtime).
+          example: AZURE_DATA_EXPLORER_INGESTION_ENDPOINT
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        mapping_reference:
+          description: The name of a pre-created ingestion mapping on the table used to map incoming events to columns. Supports template syntax.
+          example: application_logs_mapping
+          nullable: true
+          type: string
+        table:
+          description: The name of the Azure Data Explorer table to ingest into. Supports template syntax.
+          example: application_logs
+          type: string
+        token_scope:
+          description: |-
+            The OAuth scope requested when acquiring an access token for Azure Data Explorer.
+            Defaults to `https://kusto.kusto.windows.net/.default`.
+          example: https://kusto.kusto.windows.net/.default
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationType"
+      required:
+        - id
+        - type
+        - inputs
+        - database
+        - table
+        - auth
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineAzureDataExplorerDestinationAuth:
+      description: Authentication configuration for Azure Data Explorer. The `azure_credential_kind` field selects the credential type.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCli"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecret"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificate"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentity"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentity"
+    ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCli:
+      description: Authenticate using the Azure CLI credentials available in the environment.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCliKind"
+      required:
+        - azure_credential_kind
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCliKind:
+      default: azure_cli
+      description: The Azure credential kind. The value should always be `azure_cli`.
+      enum:
+        - azure_cli
+      example: azure_cli
+      type: string
+      x-enum-varnames:
+        - AZURE_CLI
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificate:
+      description: Authenticate using a Microsoft Entra application client certificate.
+      properties:
+        azure_client_id:
+          description: The Microsoft Entra application (client) ID.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificateKind"
+        azure_tenant_id:
+          description: The Microsoft Entra tenant ID.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+        certificate_password_key:
+          description: Name of the environment variable or secret that holds the password for the client certificate.
+          example: AZURE_CERTIFICATE_PASSWORD
+          nullable: true
+          type: string
+        certificate_path:
+          description: Path to the `.pfx` client certificate file on the Worker.
+          example: /etc/certs/client.pfx
+          type: string
+      required:
+        - azure_credential_kind
+        - azure_tenant_id
+        - azure_client_id
+        - certificate_path
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificateKind:
+      default: client_certificate_credential
+      description: The Azure credential kind. The value should always be `client_certificate_credential`.
+      enum:
+        - client_certificate_credential
+      example: client_certificate_credential
+      type: string
+      x-enum-varnames:
+        - CLIENT_CERTIFICATE_CREDENTIAL
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecret:
+      description: Authenticate using a Microsoft Entra application client secret.
+      properties:
+        azure_client_id:
+          description: The Microsoft Entra application (client) ID.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        azure_client_secret_key:
+          description: Name of the environment variable or secret that holds the Microsoft Entra application client secret.
+          example: AZURE_CLIENT_SECRET
+          type: string
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecretKind"
+        azure_tenant_id:
+          description: The Microsoft Entra tenant ID.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+      required:
+        - azure_credential_kind
+        - azure_tenant_id
+        - azure_client_id
+        - azure_client_secret_key
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecretKind:
+      default: client_secret_credential
+      description: The Azure credential kind. The value should always be `client_secret_credential`.
+      enum:
+        - client_secret_credential
+      example: client_secret_credential
+      type: string
+      x-enum-varnames:
+        - CLIENT_SECRET_CREDENTIAL
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentity:
+      description: Authenticate using an Azure managed identity.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityKind"
+        user_assigned_managed_identity_id:
+          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
+          example: 00000000-0000-0000-0000-000000000000
+          nullable: true
+          type: string
+        user_assigned_managed_identity_id_type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
+      required:
+        - azure_credential_kind
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion:
+      description: Authenticate using a managed identity as a client assertion for a Microsoft Entra application.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind"
+        client_assertion_client_id:
+          description: The client ID of the Microsoft Entra application that trusts the managed identity.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        client_assertion_tenant_id:
+          description: The tenant ID of the Microsoft Entra application that trusts the managed identity.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+        user_assigned_managed_identity_id:
+          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
+          example: 00000000-0000-0000-0000-000000000000
+          nullable: true
+          type: string
+        user_assigned_managed_identity_id_type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
+      required:
+        - azure_credential_kind
+        - client_assertion_client_id
+        - client_assertion_tenant_id
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind:
+      default: managed_identity_client_assertion
+      description: The Azure credential kind. The value should always be `managed_identity_client_assertion`.
+      enum:
+        - managed_identity_client_assertion
+      example: managed_identity_client_assertion
+      type: string
+      x-enum-varnames:
+        - MANAGED_IDENTITY_CLIENT_ASSERTION
+    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityKind:
+      default: managed_identity
+      description: The Azure credential kind. The value should always be `managed_identity`.
+      enum:
+        - managed_identity
+      example: managed_identity
+      type: string
+      x-enum-varnames:
+        - MANAGED_IDENTITY
+    ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentity:
+      description: Authenticate using Azure Workload Identity (for example, on Kubernetes).
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentityKind"
+        client_id:
+          description: The client ID of the Microsoft Entra application. If omitted, it is read from the environment.
+          example: 22222222-2222-2222-2222-222222222222
+          nullable: true
+          type: string
+        tenant_id:
+          description: The Microsoft Entra tenant ID. If omitted, it is read from the environment.
+          example: 11111111-1111-1111-1111-111111111111
+          nullable: true
+          type: string
+        token_file_path:
+          description: Path to the federated token file. If omitted, it is read from the environment.
+          example: /var/run/secrets/azure/tokens/azure-identity-token
+          nullable: true
+          type: string
+      required:
+        - azure_credential_kind
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentityKind:
+      default: workload_identity
+      description: The Azure credential kind. The value should always be `workload_identity`.
+      enum:
+        - workload_identity
+      example: workload_identity
+      type: string
+      x-enum-varnames:
+        - WORKLOAD_IDENTITY
+    ObservabilityPipelineAzureDataExplorerDestinationBatch:
+      description: Event batching settings for Azure Data Explorer ingestion.
+      properties:
+        max_bytes:
+          description: Maximum batch size in bytes.
+          example: 2000000
+          format: int64
+          maximum: 4000000
+          minimum: 1
+          type: integer
+        max_events:
+          description: Maximum number of events per batch before it is flushed.
+          example: 1000
+          format: int64
+          minimum: 1
+          type: integer
+        timeout_secs:
+          description: Maximum number of seconds to wait before flushing a partial batch.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+      type: object
+    ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType:
+      description: The type of the user-assigned managed identity ID.
+      enum:
+        - client_id
+        - object_id
+        - resource_id
+      example: client_id
+      type: string
+      x-enum-varnames:
+        - CLIENT_ID
+        - OBJECT_ID
+        - RESOURCE_ID
+    ObservabilityPipelineAzureDataExplorerDestinationType:
+      default: azure_data_explorer
+      description: The destination type. The value should always be `azure_data_explorer`.
+      enum:
+        - azure_data_explorer
+      example: azure_data_explorer
+      type: string
+      x-enum-varnames:
+        - AZURE_DATA_EXPLORER
     ObservabilityPipelineAzureStorageDestinationCompression:
       description: |-
         Compression configuration for archived logs. When omitted, logs are compressed with gzip
@@ -84148,6 +85359,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3GenericDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination"
         - $ref: "#/components/schemas/AzureStorageDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineClickhouseDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination"
@@ -92374,6 +93586,202 @@ components:
         - ARRAY_NUMBER
         - ARRAY_BOOLEAN
         - ARRAY_OBJECT
+    OverrideAttributes:
+      description: Attributes for an on-call schedule override.
+      properties:
+        end:
+          description: The end time of the override.
+          format: date-time
+          type: string
+        inactive:
+          description: Whether the override is inactive (for example, because its time range has ended).
+          type: boolean
+        start:
+          description: The start time of the override.
+          format: date-time
+          type: string
+      type: object
+    OverrideCreateResponse:
+      description: The on-call schedule overrides that were created, and any related included resources (such as users).
+      example:
+        data:
+          - attributes:
+              end: "2024-01-08T02:53:01.000000000Z"
+              inactive: false
+              start: "2024-01-07T02:53:01.000000000Z"
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              schedule:
+                data:
+                  id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                  type: schedules
+              user:
+                data:
+                  id: 00000000-aba1-0000-0000-000000000000
+                  type: users
+            type: overrides
+        included:
+          - attributes:
+              email: jane.doe@example.com
+              name: "Jane Doe"
+              status: ""
+            id: 00000000-aba1-0000-0000-000000000000
+            type: users
+      properties:
+        data:
+          description: The on-call schedule overrides that were created.
+          items:
+            $ref: "#/components/schemas/OverrideData"
+          type: array
+        included:
+          description: Related resources referenced in the overrides' relationships, such as users.
+          items:
+            $ref: "#/components/schemas/OverrideIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    OverrideData:
+      description: Data for an on-call schedule override.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OverrideAttributes"
+        id:
+          description: The unique identifier of the override.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OverrideRelationships"
+        type:
+          $ref: "#/components/schemas/OverrideDataType"
+      required:
+        - type
+        - id
+      type: object
+    OverrideDataType:
+      default: overrides
+      description: "Indicates that the resource is of type 'overrides'."
+      enum:
+        - overrides
+      example: overrides
+      type: string
+      x-enum-varnames:
+        - OVERRIDES
+    OverrideIncluded:
+      description: Included data for on-call schedule override operations.
+      oneOf:
+        - $ref: "#/components/schemas/ScheduleUser"
+    OverrideRelationships:
+      description: Relationships for an on-call schedule override.
+      properties:
+        overridden_user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+        schedule:
+          $ref: "#/components/schemas/OverrideRelationshipsSchedule"
+        user:
+          $ref: "#/components/schemas/OverrideRelationshipsUser"
+      type: object
+    OverrideRelationshipsSchedule:
+      description: "Defines the relationship between an override and the schedule it belongs to."
+      properties:
+        data:
+          $ref: "#/components/schemas/OverrideRelationshipsScheduleData"
+      required:
+        - data
+      type: object
+    OverrideRelationshipsScheduleData:
+      description: "A reference to the schedule the override belongs to, containing the schedule's ID and resource type."
+      properties:
+        id:
+          description: "The unique identifier of the schedule."
+          example: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d"
+          type: string
+        type:
+          $ref: "#/components/schemas/OverrideRelationshipsScheduleDataType"
+      required:
+        - type
+        - id
+      type: object
+    OverrideRelationshipsScheduleDataType:
+      default: schedules
+      description: "Indicates that the related resource is of type 'schedules'."
+      enum:
+        - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+        - SCHEDULES
+    OverrideRelationshipsUser:
+      description: "Defines the relationship between an override and one of its associated users."
+      properties:
+        data:
+          $ref: "#/components/schemas/OverrideRelationshipsUserData"
+          nullable: true
+      required:
+        - data
+      type: object
+    OverrideRelationshipsUserData:
+      description: "A reference to a user, containing the user's ID and resource type."
+      properties:
+        id:
+          description: "The unique identifier of the user."
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/OverrideRelationshipsUserDataType"
+      required:
+        - type
+        - id
+      type: object
+    OverrideRelationshipsUserDataType:
+      default: users
+      description: "Indicates that the related resource is of type 'users'."
+      enum:
+        - users
+      example: users
+      type: string
+      x-enum-varnames:
+        - USERS
+    Overrides:
+      description: A list of on-call schedule overrides and any related included resources (such as users).
+      example:
+        data:
+          - attributes:
+              end: "2024-01-08T02:53:01.000000000Z"
+              inactive: false
+              start: "2024-01-07T02:53:01.000000000Z"
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              schedule:
+                data:
+                  id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                  type: schedules
+              user:
+                data:
+                  id: 00000000-aba1-0000-0000-000000000000
+                  type: users
+            type: overrides
+        included:
+          - attributes:
+              email: jane.doe@example.com
+              name: "Jane Doe"
+              status: ""
+            id: 00000000-aba1-0000-0000-000000000000
+            type: users
+      properties:
+        data:
+          description: A list of on-call schedule overrides.
+          items:
+            $ref: "#/components/schemas/OverrideData"
+          type: array
+        included:
+          description: Related resources referenced in the overrides' relationships, such as users.
+          items:
+            $ref: "#/components/schemas/OverrideIncluded"
+          type: array
+      required:
+        - data
+      type: object
     OverwriteAllocationsRequest:
       description: Request to overwrite targeting rules (allocations) for a feature flag in an environment.
       properties:
@@ -101203,6 +102611,12 @@ components:
           $ref: "#/components/schemas/ComponentRecommendation"
         executor:
           $ref: "#/components/schemas/ComponentRecommendation"
+        matched_params:
+          description: |-
+            Only returned by the v2 endpoint. The job parameters whose values the recommendation was matched on, as `parameter=value` pairs joined by `|`.
+            An empty string means the service-wide (coarse) recommendation was used.
+          example: "detailed_metrics=false|Region=US1"
+          type: string
       required: [driver, executor]
       type: object
     RecommendationData:
@@ -101236,7 +102650,7 @@ components:
     RecommendationV2RequestAttributes:
       description: |-
         Attributes for requesting SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a precomputed shard.
+        instead of a pre-computed shard.
       properties:
         arguments:
           description: |-
@@ -101252,7 +102666,7 @@ components:
     RecommendationV2RequestBody:
       description: |-
         Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a precomputed shard.
+        instead of a pre-computed shard.
       properties:
         data:
           $ref: "#/components/schemas/RecommendationV2RequestData"
@@ -104328,6 +105742,7 @@ components:
         - $ref: "#/components/schemas/SendTeamsMessageAction"
         - $ref: "#/components/schemas/TriggerWorkflowAutomationAction"
         - $ref: "#/components/schemas/RoutingRuleEscalationPolicyAction"
+        - $ref: "#/components/schemas/RoutingRuleRerouteToTeamAction"
     RoutingRuleAttributes:
       description: Defines the configurable attributes of a routing rule, such as actions, query, time restriction, and urgency.
       properties:
@@ -104426,6 +105841,29 @@ components:
       type: string
       x-enum-varnames:
         - POLICIES
+    RoutingRuleRerouteToTeamAction:
+      description: "Reroutes the page to another team, which then evaluates it against its own routing rules. Each routing rule can include this action only once. It can be combined only with `send_slack_message` and `send_teams_message` actions. It can't be used with `escalation_policy` or `workflow` actions, or when the routing rule sets `policy_id`."
+      properties:
+        destination_team_id:
+          description: "The ID of the team to reroute the page to."
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/RoutingRuleRerouteToTeamActionType"
+      required:
+        - type
+        - destination_team_id
+      type: object
+    RoutingRuleRerouteToTeamActionType:
+      default: reroute_to_team
+      description: "Indicates that the action reroutes the page to another team's routing rules."
+      enum:
+        - reroute_to_team
+      example: reroute_to_team
+      type: string
+      x-enum-varnames:
+        - REROUTE_TO_TEAM
     RoutingRuleType:
       default: team_routing_rules
       description: Team routing rules resource type.
@@ -109730,15 +111168,21 @@ components:
           $ref: "#/components/schemas/ScheduleUserAttributes"
         id:
           description: The unique user identifier.
+          example: "00000000-0000-0000-0000-000000000000"
           type: string
         type:
           $ref: "#/components/schemas/ScheduleUserType"
       required:
         - type
+        - id
       type: object
     ScheduleUserAttributes:
       description: Provides basic user information for a schedule, including a name and email address.
       properties:
+        color:
+          description: "The user's on-call color, as a hex code (for example, `#FF0000`). Included only when `user.color` is requested in the `include` parameter."
+          example: "#FF0000"
+          type: string
         email:
           description: The user's email address.
           example: "jane.doe@example.com"
@@ -119372,6 +120816,193 @@ components:
       x-enum-varnames:
         - UP_ONE
         - DOWN_ONE
+    SeverityOverrideAttributes:
+      description: |-
+        Severity override to apply to the findings.
+        Set `action` to `set` to apply a manual severity override with the given `value`.
+        Set `action` to `clear` to remove a manual severity override.
+      oneOf:
+        - $ref: "#/components/schemas/SeverityOverrideSet"
+        - $ref: "#/components/schemas/SeverityOverrideClear"
+    SeverityOverrideClear:
+      description: |-
+        Removes the manual severity override of the findings.
+        This action does not remove a severity set by an automation rule.
+      properties:
+        action:
+          $ref: "#/components/schemas/SeverityOverrideClearActionType"
+        description:
+          description: Additional information about the severity change. This field has a limit of 280 characters.
+          example: "Severity override no longer needed."
+          maxLength: 280
+          type: string
+      required:
+        - action
+      type: object
+    SeverityOverrideClearActionType:
+      default: clear
+      description: The action that removes a manual severity override.
+      enum:
+        - clear
+      example: clear
+      type: string
+      x-enum-varnames:
+        - CLEAR
+    SeverityOverrideDataType:
+      default: severity_override
+      description: Severity override resource type.
+      enum:
+        - severity_override
+      example: severity_override
+      type: string
+      x-enum-varnames:
+        - SEVERITY_OVERRIDE
+    SeverityOverrideRequest:
+      description: Request to set or clear the manual severity override of security findings.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityOverrideRequestData"
+      required:
+        - data
+      type: object
+    SeverityOverrideRequestData:
+      description: Data of the severity override request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityOverrideRequestDataAttributes"
+        id:
+          description: Unique identifier of the severity override request. If not provided, an identifier is generated.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/SeverityOverrideRequestDataRelationships"
+        type:
+          $ref: "#/components/schemas/SeverityOverrideDataType"
+      required:
+        - attributes
+        - relationships
+        - type
+      type: object
+    SeverityOverrideRequestDataAttributes:
+      description: Attributes of the severity override request.
+      properties:
+        severity:
+          $ref: "#/components/schemas/SeverityOverrideAttributes"
+      required:
+        - severity
+      type: object
+    SeverityOverrideRequestDataRelationships:
+      description: Relationships of the severity override request.
+      properties:
+        findings:
+          $ref: "#/components/schemas/Findings"
+          description: Security findings to override the severity of.
+      required:
+        - findings
+      type: object
+    SeverityOverrideResponse:
+      description: Response for the severity override request.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityOverrideResponseData"
+        meta:
+          $ref: "#/components/schemas/SeverityOverrideResponseMeta"
+      required:
+        - data
+      type: object
+    SeverityOverrideResponseData:
+      description: Data of the severity override response.
+      properties:
+        id:
+          description: Unique identifier of the severity override request.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityOverrideDataType"
+      required:
+        - id
+        - type
+      type: object
+    SeverityOverrideResponseMeta:
+      description: Security findings skipped while processing the severity override request.
+      properties:
+        warnings:
+          description: Findings skipped because an automation rule set their severity.
+          items:
+            $ref: "#/components/schemas/SeverityOverrideResult"
+          type: array
+      type: object
+    SeverityOverrideResult:
+      description: Per-finding outcome of a severity override operation.
+      properties:
+        detail:
+          description: Human-readable explanation of why the finding was skipped.
+          example: >-
+            cannot set severity on finding because it is overridden by an automation severity modifier rule; disable or update the automation rule first
+          type: string
+        finding_id:
+          description: Unique identifier of the security finding.
+          example: "ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw=="
+          type: string
+        status:
+          description: HTTP-like status code describing the outcome for this finding.
+          example: 400
+          format: int32
+          maximum: 599
+          type: integer
+        title:
+          description: Short label describing the outcome for this finding.
+          example: "Bad Request"
+          type: string
+      required:
+        - finding_id
+        - status
+        - title
+        - detail
+      type: object
+    SeverityOverrideSet:
+      description: Applies a manual severity override to the findings.
+      properties:
+        action:
+          $ref: "#/components/schemas/SeverityOverrideSetActionType"
+        description:
+          description: Additional information about the severity change. This field has a limit of 280 characters.
+          example: "Database contains sensitive data."
+          maxLength: 280
+          type: string
+        value:
+          $ref: "#/components/schemas/SeverityOverrideValue"
+      required:
+        - action
+        - value
+      type: object
+    SeverityOverrideSetActionType:
+      default: set
+      description: The action that applies a manual severity override.
+      enum:
+        - set
+      example: set
+      type: string
+      x-enum-varnames:
+        - SET
+    SeverityOverrideValue:
+      description: |-
+        Severity to apply to the findings.
+        `info` sets the lowest severity the finding type allows.
+      enum:
+        - critical
+        - high
+        - medium
+        - low
+        - info
+      example: high
+      type: string
+      x-enum-varnames:
+        - CRITICAL
+        - HIGH
+        - MEDIUM
+        - LOW
+        - INFO
     SharedDashboardGlobalTime:
       additionalProperties: {}
       description: Default time range configuration for the shared dashboard.
@@ -121569,6 +123200,14 @@ components:
         - ELF
         - NDK
         - IL2CPP
+    SourcemapSearchBy:
+      description: The search mode for listing JavaScript source maps.
+      enum:
+        - debug_id
+      example: debug_id
+      type: string
+      x-enum-varnames:
+        - DEBUG_ID
     SourcemapsData:
       description: List of source map data objects.
       items:
@@ -121589,8 +123228,17 @@ components:
           description: Whether there are more results available beyond the current page.
           example: false
           type: boolean
+        next_cursor:
+          description: |-
+            Cursor for the next page of a JavaScript cursor-based listing. Pass
+            this value as `page[after]` with the same search mode and filters.
+            Only returned when another page is available.
+          type: string
         total_filtered_count:
-          description: Total number of source maps matching the filter criteria.
+          description: |-
+            Total number of matching source maps for legacy page-number pagination.
+            Cursor-based listings do not compute a total; this field may be zero
+            even when records are returned. Use `has_more_results` to continue.
           example: 100
           format: int64
           type: integer
@@ -142924,6 +144572,60 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_findings_read
+  /api/v2/ai_impact/user_activity:
+    post:
+      description: |-
+        Send daily AI coding tool activity for one or more users. Each entry records whether a
+        user was active on a given day, along with the AI tools and models they used. An entry
+        is stored once per tool, and sending the same user, day, and tool again overwrites the
+        previous value.
+      operationId: CreateAIImpactUserActivity
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        day: "2026-05-26"
+                        is_active: true
+                        models:
+                          - claude-sonnet-4.5
+                          - gpt-5
+                        tools:
+                          - Claude Code
+                          - Cursor
+                        user_email: user@example.com
+                      type: ai_impact_user_activity
+            schema:
+              $ref: "#/components/schemas/AIImpactUserActivityRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Bad Request: the batch is empty, has more than 1,000 entries, or contains an invalid entry.
+            An entry is invalid when `user_email`, `is_active`, or `day` is missing, `tools` is missing
+            or an empty array, `user_email` is not a valid email address, `day` is not in `YYYY-MM-DD`
+            format, or a tool name is empty. The error message identifies the index of the first invalid
+            entry. Fix the payload and send the request again.
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+      summary: Send AI tool user activity
+      tags:
+        - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 11
   /api/v2/annotation:
     get:
       description: Returns a flat list of annotations matching the given page, time window, and optional widget filter.
@@ -146547,13 +148249,11 @@ paths:
         operator: OR
         permissions:
           - bits_investigations_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Trigger a Bits AI investigation from a monitor alert or a general investigation.
-        The `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.
+        This endpoint requires the `bits_investigations_write` permission. When the trigger type is
+        `monitor_alert_trigger`, the `monitors_read` permission is also required.
       operationId: TriggerInvestigation
       requestBody:
         content:
@@ -146613,20 +148313,15 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - bits_investigations_write
-            - monitors_read
       summary: Trigger a Bits AI investigation
       tags:
         - Bits AI
       x-codegen-request-body-name: body
       x-menu-order: 1
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
           - bits_investigations_write
-          - monitors_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/bits-ai/investigations/{id}:
     get:
       description: Get a specific Bits AI investigation by ID.
@@ -146688,9 +148383,6 @@ paths:
         operator: OR
         permissions:
           - bits_investigations_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases:
     get:
       description: >-
@@ -152712,6 +154404,385 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in public beta and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cloud_auth/github/intake_mapping:
+    get:
+      description: List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.
+      operationId: ListGitHubCloudAuthIntakeMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          claim_matchers:
+                            ref: "refs/heads/main"
+                            repository: "test_owner/test_repo"
+                            repository_owner: "test_owner"
+                            sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                        id: d6d869d7-29d3-5595-bf40-57c95235cf5b
+                        type: github_oidc_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub cloud authentication intake mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 9
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.
+      operationId: CreateGitHubCloudAuthIntakeMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      claim_matchers:
+                        ref: "refs/heads/main"
+                        repository: "test_owner/test_repo"
+                        repository_owner: "test_owner"
+                        sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                    type: github_oidc_auth_intake_mapping
+            schema:
+              $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: d6d869d7-29d3-5595-bf40-57c95235cf5b
+                      type: github_oidc_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub cloud auth intake mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cloud_auth/github/intake_mapping/{intake_mapping_id}:
+    delete:
+      description: Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.
+      operationId: DeleteGitHubCloudAuthIntakeMapping
+      parameters:
+        - $ref: "#/components/parameters/IntakeMappingID"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub cloud auth intake mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 12
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.
+      operationId: GetGitHubCloudAuthIntakeMapping
+      parameters:
+        - $ref: "#/components/parameters/IntakeMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: d6d869d7-29d3-5595-bf40-57c95235cf5b
+                      type: github_oidc_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub cloud authentication intake mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 10
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cloud_auth/github/persona_mapping:
+    get:
+      description: List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.
+      operationId: ListGitHubCloudAuthPersonaMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_identifier: "test@example.com"
+                          account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                          claim_matchers:
+                            ref: "refs/heads/main"
+                            repository: "test_owner/test_repo"
+                            repository_owner: "test_owner"
+                            sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                        id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                        type: github_oidc_auth_config
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub cloud authentication persona mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.
+      operationId: CreateGitHubCloudAuthPersonaMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_identifier: "test@example.com"
+                      claim_matchers:
+                        ref: "refs/heads/main"
+                        repository: "test_owner/test_repo"
+                        repository_owner: "test_owner"
+                        sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                    type: github_oidc_auth_config
+            schema:
+              $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: "test@example.com"
+                        account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                      type: github_oidc_auth_config
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub cloud auth persona mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cloud_auth/github/persona_mapping/{persona_mapping_id}:
+    delete:
+      description: Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.
+      operationId: DeleteGitHubCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub cloud auth persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 8
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.
+      operationId: GetGitHubCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: "test@example.com"
+                        account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                      type: github_oidc_auth_config
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub cloud authentication persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cloud_security_management/custom_frameworks:
     post:
       description: Create a custom framework.
@@ -155557,6 +157628,82 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 33
+  /api/v2/cost/cloud_accounts:
+    get:
+      description: |-
+        List the OCI and AWS CUR 2.0 cloud accounts for your organization, including account IDs, status, and validation errors.
+        Use `filter[cloud]=oci` or `filter[cloud]=aws_cur2` to return a single cloud. When omitted or empty, both clouds are returned.
+        AWS CUR 1.0, Azure, and GCP accounts are available through their dedicated configuration endpoints.
+        Archived accounts are excluded. The response contains all matching accounts and is not paginated.
+
+        This endpoint replaces `GET /api/v2/cost/oci_config`. To migrate, use `filter[cloud]=oci` and update clients to accept
+        the `cloud_account` resource type instead of `oci_config`. Account IDs and the existing attributes are preserved;
+        each account also includes the `cloud` attribute.
+      operationId: ListCostCloudAccountsV2
+      parameters:
+        - description: Filter by cloud, either `oci` or `aws_cur2` (case insensitive). Omit or leave empty to return both.
+          example: oci
+          in: query
+          name: filter[cloud]
+          required: false
+          schema:
+            pattern: ^([oO][cC][iI]|[aA][wW][sS]_[cC][uU][rR]2)?(?![\s\S])
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_id: "ocid1.tenancy.oc1..example"
+                          cloud: oci
+                          created_at: "2026-01-01T12:00:00Z"
+                          error_messages: []
+                          status: active
+                          status_updated_at: "2026-01-01T12:00:00Z"
+                          updated_at: "2026-01-01T12:00:00Z"
+                        id: "534"
+                        type: cloud_account
+              schema:
+                $ref: "#/components/schemas/CloudCostAccountsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_cloud:
+                  value:
+                    errors:
+                      - detail: 'attribute "filter[cloud]" must be one of: oci, aws_cur2'
+                        status: "400"
+                        title: Bad Request
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: List Cloud Cost Management cloud accounts
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 77
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
   /api/v2/cost/commitments/commitment-list:
     get:
       description: Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.
@@ -156655,7 +158802,9 @@ paths:
     get:
       deprecated: true
       description: |-
-        **Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.
+        **Note**: This endpoint is deprecated. Use [List Cloud Cost Management cloud accounts](https://docs.datadoghq.com/api/latest/cloud-cost-management/#list-cloud-cost-management-cloud-accounts)
+        with `filter[cloud]=oci` instead. Update clients to accept the `cloud_account` resource type instead of `oci_config`.
+        Account IDs and the existing attributes are preserved; each account also includes the `cloud` attribute.
 
         List the OCI configs.
       operationId: ListCostOCIConfigs
@@ -162511,7 +164660,31 @@ paths:
         Use `page[cursor]` and `page[size]` query parameters to paginate through results.
       operationId: ListDeploymentGates
       parameters:
-        - description: Cursor for pagination. Use the `meta.page.next_cursor` value from the previous response.
+        - description: Service name.
+          in: query
+          name: filter[service]
+          required: false
+          schema:
+            type: string
+        - description: Environment name.
+          in: query
+          name: filter[env]
+          required: false
+          schema:
+            type: string
+        - description: Gate identifier.
+          in: query
+          name: filter[identifier]
+          required: false
+          schema:
+            type: string
+        - description: Dry-run state.
+          in: query
+          name: filter[dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Cursor for pagination. Use the `meta.page.next_cursor` value from the previous response. Invalid cursors return 400.
           in: query
           name: page[cursor]
           required: false
@@ -162647,6 +164820,374 @@ paths:
         operator: OR
         permissions:
           - deployment_gates_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployment_gates/evaluations:
+    get:
+      description: |-
+        Returns deployment gate evaluations started in a maximum 30-day window (the default is the previous 24 hours).
+        Results are ordered by start time, newest first.
+        In-progress state is near-real-time and mutable. Finished state is eventually consistent.
+      operationId: ListDeploymentGateEvaluations
+      parameters:
+        - description: Inclusive evaluation start time. Defaults to 24 hours before the request. Together with `filter[to]`, the window may span no more than 30 days.
+          in: query
+          name: filter[from]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Exclusive evaluation start time. Defaults to the request time. Must be after `filter[from]`; the window may span no more than 30 days.
+          in: query
+          name: filter[to]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Service values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[service]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Environment values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[env]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Gate identifier values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[identifier]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Gate outcomes. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[status]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+            type: array
+        - description: Gate-level dry-run state.
+          in: query
+          name: filter[dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Gate evaluation UUID. No match returns an empty list.
+          in: query
+          name: filter[evaluation_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Configured gate UUID. Just-in-time evaluations have no gate ID.
+          in: query
+          name: filter[gate_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Deployment version values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[version]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Maximum evaluations returned.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 20
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Opaque cursor returned in `meta.page.next_cursor` by the previous page. Invalid cursors return 400.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          dry_run: true
+                          duration_seconds: 900
+                          env: prod
+                          evaluation_id: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+                          finished_at: "2026-09-14T08:15:00Z"
+                          gate_id: e7cd2af1-b67b-11ee-8d0d-2a7caf4aa214
+                          identifier: default
+                          service: checkout
+                          started_at: "2026-09-14T08:00:00Z"
+                          status: fail
+                          version: "2026.09.14.1"
+                        id: 7853af70-e6bf-49d8-a6cc-1b9b50ef0537
+                        type: deployment_gate_evaluation
+                    meta:
+                      page:
+                        next_cursor: MTc4OTM3MjgwMFx4MDA3ODUzYWY3MC1lNmJmLTQ5ZDgtYTZjYy0xYjliNTBlZjA1Mzc=
+                        size: 20
+              schema:
+                $ref: "#/components/schemas/DeploymentGateEvaluationsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad request.
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - deployment_gates_read
+      summary: List deployment gate evaluations
+      tags: ["Deployment Gates"]
+      x-menu-order: 13
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions: [deployment_gates_read]
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployment_gates/evaluations/rules:
+    get:
+      description: |-
+        Returns rule evaluations whose gate evaluation started in a maximum 30-day window (the default is the previous 24 hours).
+        Filter by gate, rule, gate evaluation, or rule evaluation ID; omit IDs for cross-evaluation searches.
+        Results are ordered by start time, newest first.
+        In-progress state is near-real-time and mutable. Finished state is eventually consistent.
+        Gate-level and rule-level dry-run states are independent.
+        Pagination is deterministic but not snapshot isolated; clients should deduplicate by rule evaluation ID.
+      operationId: ListDeploymentRuleEvaluations
+      parameters:
+        - description: Inclusive gate evaluation start time. Defaults to 24 hours before the request. Together with `filter[to]`, the window may span no more than 30 days.
+          in: query
+          name: filter[from]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Exclusive gate evaluation start time. Defaults to the request time. Must be after `filter[from]`; the window may span no more than 30 days.
+          in: query
+          name: filter[to]
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Gate evaluation UUID. No match returns an empty list.
+          in: query
+          name: filter[gate_evaluation_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Rule evaluation UUID. No match returns an empty list.
+          in: query
+          name: filter[evaluation_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Configured gate UUID. Just-in-time evaluations have no gate ID.
+          in: query
+          name: filter[gate_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Configured rule UUID. Just-in-time rules have no rule ID.
+          in: query
+          name: filter[rule_id]
+          required: false
+          schema:
+            format: uuid
+            type: string
+        - description: Evaluated service values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[service]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Evaluated environment values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[env]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Gate identifier values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[identifier]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Evaluated deployment version values. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[version]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Rule statuses. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[status]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+            type: array
+        - description: |-
+            Rule types. Repeated or comma-separated values are combined with OR.
+            Defaults to all rule types.
+          in: query
+          name: filter[type]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/DeploymentGateRuleEvaluationType"
+            type: array
+        - description: Rule-level dry-run state. A failed dry-run rule is ignored when computing the gate outcome.
+          in: query
+          name: filter[dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Gate-level dry-run state. A failed dry-run gate blocks but does not stop deployment.
+          in: query
+          name: filter[gate_dry_run]
+          required: false
+          schema:
+            type: boolean
+        - description: Rule names. Repeated or comma-separated values are combined with OR.
+          in: query
+          name: filter[name]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Maximum rule evaluations returned.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Opaque cursor returned in `meta.page.next_cursor` by the previous page. Invalid cursors return 400.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          configuration:
+                            duration: 900
+                          dry_run: false
+                          duration_seconds: 900
+                          env: prod
+                          evaluation_id: 4f66c1c6-8346-59e5-be44-238214133260
+                          failures:
+                            faulty_apm_resources: [GET /checkout]
+                            monitors: []
+                            narratives: []
+                          finished_at: "2026-09-14T08:15:00Z"
+                          gate_dry_run: false
+                          gate_evaluation_id: 426a8f7b-b3e8-45f9-9d99-a1ed2f7fea04
+                          gate_id:
+                          identifier: default
+                          name: APM faulty deployment detection
+                          reason: A faulty resource was detected.
+                          rule_id:
+                          service: checkout
+                          started_at: "2026-09-14T08:00:00Z"
+                          status: fail
+                          type: faulty_deployment_detection
+                          version: "2026.09.14.1"
+                        id: 4f66c1c6-8346-59e5-be44-238214133260
+                        type: deployment_gate_rule_evaluation
+                    meta:
+                      page:
+                        size: 50
+              schema:
+                $ref: "#/components/schemas/DeploymentGateRuleEvaluationsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad request.
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - deployment_gates_read
+      summary: List deployment gate rule evaluations
+      tags: ["Deployment Gates"]
+      x-menu-order: 14
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions: [deployment_gates_read]
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163600,7 +166141,7 @@ paths:
       summary: Mark a deployment as failed by version
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 10
       x-permission:
         operator: OR
         permissions:
@@ -164078,7 +166619,7 @@ paths:
       summary: Send an incident event (legacy)
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -164943,7 +167484,6 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-        - AuthZ: []
       servers:
         - url: https://{subdomain}.{site}
           variables:
@@ -185429,6 +187969,7 @@ paths:
           - manage_integrations
   /api/v2/integration/salesforce-incidents/incident-templates:
     get:
+      deprecated: true
       description: Get all Salesforce incident templates configured for your organization.
       operationId: GetIncidentTemplates
       responses:
@@ -185464,6 +188005,7 @@ paths:
         permissions:
           - integrations_read
     post:
+      deprecated: true
       description: |-
         Create a new Salesforce incident template for your organization. Template
         names must be unique within an organization.
@@ -185528,6 +188070,7 @@ paths:
           - manage_integrations
   /api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}:
     delete:
+      deprecated: true
       description: Delete a single Salesforce incident template from your organization.
       operationId: DeleteIncidentTemplate
       parameters:
@@ -185550,6 +188093,7 @@ paths:
         permissions:
           - manage_integrations
     patch:
+      deprecated: true
       description: Update a single Salesforce incident template in your organization.
       operationId: UpdateIncidentTemplate
       parameters:
@@ -185610,6 +188154,7 @@ paths:
           - manage_integrations
   /api/v2/integration/salesforce-incidents/organizations:
     get:
+      deprecated: true
       description: |-
         Get all Salesforce organizations connected to your Datadog organization
         through the Salesforce integration. Salesforce organizations are connected
@@ -185651,6 +188196,7 @@ paths:
           - integrations_read
   /api/v2/integration/salesforce-incidents/organizations/{salesforce_org_id}:
     delete:
+      deprecated: true
       description: |-
         Disconnect a Salesforce organization from your Datadog organization.
         This also deletes any incident templates referencing the organization.
@@ -200978,7 +203524,9 @@ paths:
         - Network Device Monitoring
       x-menu-order: 4
     patch:
-      description: Update the tags for a device.
+      description: |-
+        Update the tags for a device.
+        A device supports up to 20 user tags by default. To request a higher limit for your organization, [contact Support](https://docs.datadoghq.com/help/).
       operationId: UpdateDeviceUserTags
       parameters:
         - description: The id of the device to update tags for.
@@ -203215,7 +205763,7 @@ paths:
           schema:
             example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
             type: string
-        - description: Retrieves the on-call user at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). When using timezone offsets with `+` or `-`, ensure proper URL encoding (`+` should be encoded as `%2B`). Defaults to the current time if omitted.
+        - description: Retrieves the on-call user at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`. Defaults to the current time if omitted.
           in: query
           name: filter[at_ts]
           schema:
@@ -203265,6 +205813,230 @@ paths:
         permissions:
           - on_call_read
       x-sunset: "2027-02-01"
+  /api/v2/on-call/schedules/{schedule_id}/overrides:
+    get:
+      description: Retrieve a list of overrides for the specified On-Call schedule within a given time range.
+      operationId: ListScheduleOverrides
+      parameters:
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: "Start of the time range to retrieve overrides for, in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`."
+          in: query
+          name: filter[start]
+          required: true
+          schema:
+            example: "2024-01-07T02:53:01Z"
+            format: date-time
+            type: string
+        - description: "End of the time range to retrieve overrides for, in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`. The time range cannot exceed 45 days."
+          in: query
+          name: filter[end]
+          required: true
+          schema:
+            example: "2024-01-14T02:53:01Z"
+            format: date-time
+            type: string
+        - description: "Comma-separated list of related resources to include in the response. Allowed values: `user`, `overridden_user`, `user.color`."
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: Number of overrides to return per page. The maximum allowed value is 50.
+          in: query
+          name: "page[size]"
+          schema:
+            default: 10
+            example: 10
+            format: int64
+            maximum: 50
+            type: integer
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          end: "2024-01-08T02:53:01.000000000Z"
+                          inactive: false
+                          start: "2024-01-07T02:53:01.000000000Z"
+                        id: 00000000-0000-0000-0000-000000000000
+                        relationships:
+                          schedule:
+                            data:
+                              id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                              type: schedules
+                          user:
+                            data:
+                              id: 00000000-aba1-0000-0000-000000000000
+                              type: users
+                        type: overrides
+              schema:
+                $ref: "#/components/schemas/Overrides"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List On-Call schedule overrides
+      tags:
+        - On-Call
+      x-menu-order: 24
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
+    post:
+      description: Create one or more overrides for the specified On-Call schedule.
+      operationId: CreateScheduleOverrides
+      parameters:
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: "Comma-separated list of included relationships to be returned. Allowed values: `user`, `overridden_user`, `user.color`."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        end: "2024-01-08T02:53:01.000000000Z"
+                        start: "2024-01-07T02:53:01.000000000Z"
+                      relationships:
+                        user:
+                          data:
+                            id: 00000000-aba1-0000-0000-000000000000
+                            type: users
+                      type: overrides
+            schema:
+              $ref: "#/components/schemas/CreateOverridesRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          end: "2024-01-08T02:53:01.000000000Z"
+                          inactive: false
+                          start: "2024-01-07T02:53:01.000000000Z"
+                        id: 00000000-0000-0000-0000-000000000000
+                        relationships:
+                          schedule:
+                            data:
+                              id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                              type: schedules
+                          user:
+                            data:
+                              id: 00000000-aba1-0000-0000-000000000000
+                              type: users
+                        type: overrides
+              schema:
+                $ref: "#/components/schemas/OverrideCreateResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create On-Call schedule overrides
+      tags:
+        - On-Call
+      x-menu-order: 25
+      "x-permission":
+        operator: OR
+        permissions:
+          - on_call_respond
+          - on_call_write
+  /api/v2/on-call/schedules/{schedule_id}/overrides/{override_id}:
+    delete:
+      description: Delete an override from the specified On-Call schedule.
+      operationId: DeleteScheduleOverride
+      parameters:
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: The ID of the override.
+          in: path
+          name: override_id
+          required: true
+          schema:
+            example: 00000000-0000-0000-0000-000000000000
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete On-Call schedule override
+      tags:
+        - On-Call
+      x-menu-order: 26
+      "x-permission":
+        operator: OR
+        permissions:
+          - on_call_respond
+          - on_call_write
   /api/v2/on-call/schedules/{schedule_id}/responders:
     get:
       description: "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position."
@@ -203288,7 +206060,7 @@ paths:
           schema:
             example: previous,current,next
             type: string
-        - description: "Retrieves the on-call responders at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). When using timezone offsets with `+` or `-`, ensure proper URL encoding (`+` should be encoded as `%2B`). Defaults to the current time if omitted."
+        - description: "Retrieves the on-call responders at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). If you use a time zone offset with `+`, URL-encode the `+` as `%2B`. Defaults to the current time if omitted."
           in: query
           name: filter[at_ts]
           schema:
@@ -207967,6 +210739,7 @@ paths:
                 - browser-intake-us5-datadoghq.com
                 - browser-intake-ap1-datadoghq.com
                 - browser-intake-ap2-datadoghq.com
+                - browser-intake-uk1-datadoghq.com
                 - browser-intake-datadoghq.eu
               x-enum-varnames:
                 - US1
@@ -207974,6 +210747,7 @@ paths:
                 - US5
                 - AP1
                 - AP2
+                - UK1
                 - EU1
         - url: "{protocol}://{name}"
           variables:
@@ -211613,7 +214387,7 @@ paths:
         description: "The definition of the new Agent policy"
         required: true
       responses:
-        "200":
+        "201":
           content:
             "application/json":
               examples:
@@ -211628,7 +214402,7 @@ paths:
                       type: policy
               schema:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentPolicyResponse"
-          description: OK
+          description: Created
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "403":
@@ -223919,6 +226693,110 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
+  /api/v2/security/findings/severity:
+    patch:
+      description: |-
+        Set or clear the manual severity override of security findings.
+
+        You can update up to 100 security findings per request.
+        Use the `set` action with a `value` to apply a manual severity override.
+        `value` is required for `set` and must be omitted for `clear`.
+        The `info` value sets the lowest severity the finding type allows.
+        Use the `clear` action to remove a manual severity override.
+        `clear` does not remove a severity set by an automation rule.
+        The optional `description` is accepted with both actions and has a limit of 280 characters.
+
+        Auto-closed findings are excluded.
+        Findings whose severity was set by an automation rule are skipped and listed in the response `meta.warnings`.
+        If every finding is skipped this way, the request fails with a `400` error.
+        Findings that cannot be found are skipped without a warning.
+        The request fails with a `404` error only if none of the findings can be found.
+      operationId: UpdateFindingsSeverity
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      severity:
+                        action: "set"
+                        description: "Database contains sensitive data."
+                        value: "high"
+                    relationships:
+                      findings:
+                        data:
+                          - id: "ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw=="
+                            type: "findings"
+                          - id: "ZGVmLTAwMC0wYmd-MDE4NjcyMDJkMzE4MDE5ODY5MGE4ZmQ2MmFlMjg0Y2M="
+                            type: "findings"
+                    type: "severity_override"
+            schema:
+              $ref: "#/components/schemas/SeverityOverrideRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: "severity_override"
+                    meta:
+                      warnings:
+                        - detail: >-
+                            cannot set severity on finding because it is overridden by an automation severity modifier rule; disable or update the automation rule first
+                          finding_id: "ZGVmLTAwMC0wYmd-MDE4NjcyMDJkMzE4MDE5ODY5MGE4ZmQ2MmFlMjg0Y2M="
+                          status: 400
+                          title: "Bad Request"
+              schema:
+                $ref: "#/components/schemas/SeverityOverrideResponse"
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: "Unprocessable Entity"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Override the severity of security findings
+      tags:
+        - "Security Monitoring"
+      x-codegen-request-body-name: body
+      x-menu-order: 176
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_findings_write
+          - appsec_vm_write
+          - data_scanner_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
       description: |-
@@ -234025,33 +236903,140 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/list:
     get:
-      description: Retrieves a paginated list of source maps matching the specified filter criteria.
+      description: |-
+        Retrieves a paginated list of source maps. Send filters as query parameters,
+        not in a JSON request body. `mapkind` defaults to `js`.
+
+        For JavaScript source maps, choose one of the three request shapes below.
+
+        **Examples:** the following commands use the US1 API host. Replace the host with
+        the API host for your site, and the service, version, debug ID, and cursor with
+        values from your organization. Use `--get` so curl sends the filters in the query
+        string; `-X GET` with `--data-urlencode` sends them in the request body instead.
+
+        **1. List by service and version**
+
+        Provide both `filter[service]` and `filter[version]` to search source maps
+        indexed by service and version. Omit `search_by`.
+
+        **Pagination:** prefer cursor pagination. Omit `page[after]` and `page[number]`
+        on the first request. To get the next page, pass `meta.page.next_cursor` as
+        `page[after]`, keeping the same filters. Continue until
+        `meta.page.has_more_results` is `false`. Do not decode or modify the cursor.
+        Legacy page-number pagination is also supported, starting at `page[number]=1`.
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "filter[service]=my-web-service" \
+          --data-urlencode "filter[version]=1.0.0" \
+          --data-urlencode "page[size]=10"
+        ```
+
+        **2. Find a specific JavaScript debug ID**
+
+        Provide `filter[debug_id]` with a UUID. Service and version filters are not
+        required. Omit `search_by`.
+
+        **Pagination:** the lookup returns at most one result, so no pagination is
+        needed. `page[after]` is not supported.
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "filter[debug_id]=00000000-0000-4000-8000-000000000001"
+        ```
+
+        **3. Browse source maps indexed by debug ID**
+
+        Set `search_by=debug_id` without specifying a debug ID. Do not send service,
+        version, or filename filters in this mode.
+
+        **Pagination:** this mode requires cursor pagination; `page[number]` is not
+        supported. Omit `page[after]` on the first request. To get the next page, pass
+        `meta.page.next_cursor` as `page[after]`, keeping the same search mode and
+        filters. Continue until `meta.page.has_more_results` is `false`. Do not decode
+        or modify the cursor.
+
+        First page:
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "search_by=debug_id" \
+          --data-urlencode "page[size]=10"
+        ```
+
+        Next page:
+
+        ```bash
+        curl -sS --get "https://api.datadoghq.com/api/v2/sourcemaps/list" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+          --data-urlencode "mapkind=js" \
+          --data-urlencode "search_by=debug_id" \
+          --data-urlencode "page[size]=10" \
+          --data-urlencode "page[after]=<meta.page.next_cursor>"
+        ```
+
+        For other map kinds, use `page[number]`, starting at 1.
       operationId: ListSourcemaps
       parameters:
+        - description: |-
+            Set to `debug_id` to browse JavaScript source maps indexed by debug ID.
+            Only supported for `mapkind=js`. Omit for service/version searches or a
+            specific `filter[debug_id]` lookup. In debug-ID browse mode, service,
+            version, and filename filters are not supported.
+          example: debug_id
+          in: query
+          name: search_by
+          schema:
+            $ref: "#/components/schemas/SourcemapSearchBy"
+          x-docs-curl-required: true
         - description: The type of source map. Defaults to `js`.
           in: query
           name: mapkind
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
-        - description: The number of results to return per page. Must be at least 1.
+        - description: |-
+            Cursor for the next page of a JavaScript listing. Use the value from
+            `meta.page.next_cursor` and keep the same search mode and filters.
+            Omit on the first request. Not supported for other map kinds or for
+            a specific `filter[debug_id]` lookup without `search_by=debug_id`.
+          in: query
+          name: page[after]
+          schema:
+            type: string
+        - description: The number of results per page. Defaults to 100. Must be at least 1; values above 1000 are capped at 1000.
           in: query
           name: page[size]
           schema:
-            default: 20
-            example: 20
+            default: 100
+            example: 10
             format: int64
+            minimum: 1
             type: integer
-        - description: The page number to retrieve, starting from 1.
+        - description: |-
+            Legacy page number, starting from 1. Prefer `page[after]` for JavaScript
+            listings. Not supported with `search_by=debug_id`. Other map kinds
+            default to page 1 when pagination parameters are omitted.
           in: query
           name: page[number]
           schema:
-            default: 1
             example: 1
             format: int64
+            minimum: 1
             type: integer
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
           name: filter[service]
@@ -234064,7 +237049,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
           name: filter[version]
@@ -234181,10 +237167,14 @@ paths:
           name: filter[filename]
           schema:
             type: string
-        - description: Filter by debug ID (single value). Supported for `react`.
+        - description: |-
+            Filter by a single debug ID in UUID format. Supported for `js` and `react`.
+            For `js`, the lookup returns at most one result and does not require
+            service/version filters. For `react`, service/version filters remain required.
           in: query
           name: filter[debug_id]
           schema:
+            format: uuid
             type: string
         - description: Filter by GNU build ID (single value). Supported for `elf`.
           in: query
@@ -234206,6 +237196,22 @@ paths:
           content:
             application/json:
               examples:
+                debug_id_listing:
+                  summary: Browse JavaScript source maps by debug ID
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00Z"
+                          debug_id: 00000000-0000-4000-8000-000000000001
+                          mapkind: js
+                          size: 1024
+                        id: "7"
+                        type: sourcemaps
+                    meta:
+                      page:
+                        has_more_results: true
+                        next_cursor: opaque-debug-id-cursor
+                        total_filtered_count: 0
                 default:
                   value:
                     data:
@@ -234588,6 +237594,7 @@ paths:
                         heap: 3072
                         memory: 4096
                         overhead: 1024
+                    matched_params: "detailed_metrics=false"
                   id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
                   type: recommendation
               schema:
@@ -248855,7 +251862,7 @@ tags:
       View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
     name: Change Management
   - description: |-
-      Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API.
+      Configure AWS and GitHub cloud authentication mappings for persona and intake authentication through the Datadog API.
     name: Cloud Authentication
   - description: |-
       The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/).
@@ -249077,11 +252084,19 @@ tags:
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
     name: Logs
   - description: |-
-      Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate
-      the matches into a retained historical view.
+      Archive Search queries logs directly from long-term storage archives without prior
+      rehydration and charges only for the data scanned.
 
-      See the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)
-      page for the searches currently running in Datadog.
+      A search runs in one of two modes. By default, it scans the archive and retains up to
+      100,000 matching logs for 24 hours on a dedicated results page. Include a `rehydration`
+      object to run a Search & Rehydration instead, which retains the matches for a longer
+      custom retention period and makes them available beyond Log Explorer, such as in Dashboards and Notebooks.
+
+      A search requires the `logs_write_historical_view` or `logs_write_archive_search`
+      permission. Rehydration requires `logs_write_historical_view`.
+    externalDocs:
+      description: Find out more at
+      url: https://docs.datadoghq.com/logs/explorer/archive_search/
     name: Logs Archive Searches
   - description: |-
       Archives forward all the logs ingested to a cloud storage system.

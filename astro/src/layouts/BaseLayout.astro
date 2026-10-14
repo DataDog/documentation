@@ -14,13 +14,14 @@ import GoogleTagManager from "@components/GoogleTagManager/GoogleTagManager.astr
 import GoogleTagManagerFallback from "@components/GoogleTagManager/GoogleTagManagerFallback.astro";
 import Hotjar from "@components/Hotjar/Hotjar.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
+import AgentHint from "@components/AgentHint/AgentHint.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
 import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
-  DEFAULT_OG_IMAGE,
   getLocaleDefaults,
+  ogImageUrl,
 } from "@lib/seo";
 import { ClientRouter } from "astro:transitions";
 import faviconUrl from "../assets/favicon.ico?url";
@@ -33,12 +34,19 @@ interface Props {
   description?: string;
   /** Full URL or absolute path. Defaults to `Astro.site + Astro.url.pathname`. */
   canonical?: string;
-  /** Absolute URL of the social-share image. */
-  image?: string;
+  /** Social-share image path under `images/`, from `meta_image` frontmatter. */
+  metaImage?: string;
+  /**
+   * The page's Hugo source path relative to `content/<lang>/`, which picks the
+   * default social-share image the same way Hugo does. See `ogImageUrl`.
+   */
+  contentPath?: string;
   /** OpenGraph type; defaults to "article" to match Hugo. */
   ogType?: "website" | "article";
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
+  /** Absolute path of the page's `.md` twin, for `<link rel="alternate" type="text/markdown">`. */
+  markdownHref?: string;
   /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
   announcementBanner?: BannerParams;
   /**
@@ -53,9 +61,11 @@ const {
   title,
   description: descriptionProp,
   canonical: canonicalProp,
-  image: imageProp,
+  metaImage,
+  contentPath,
   ogType = "article",
   hreflang,
+  markdownHref,
   announcementBanner,
   enableViewTransitions = false,
 } = Astro.props;
@@ -70,10 +80,11 @@ const lang: Locale = resolveLocale(Astro.currentLocale);
 const localeDefaults = getLocaleDefaults(lang);
 const description = descriptionProp ?? localeDefaults.metaDescription;
 const siteName = localeDefaults.siteName;
-const image = imageProp ?? DEFAULT_OG_IMAGE;
+const image = ogImageUrl({ metaImage, contentPath });
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
+const markdownUrl = markdownHref && `${siteOrigin}${markdownHref}`;
 // `data-env` on <html>, for debugging and env-conditional styling. Telemetry
 // itself does not read it (it resolves the environment at build time), but the
 // planned shared Ask AI package expects the attribute to be present.
@@ -137,6 +148,16 @@ const activeRegionSelectors = allowedRegions
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
 
+    {
+      markdownUrl && (
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href={markdownUrl}
+          title="Markdown Version"
+        />
+      )
+    }
     {
       hreflangResolved?.map((h) => (
         <link rel="alternate" hreflang={h.hreflang} href={h.href} />
@@ -204,6 +225,7 @@ const activeRegionSelectors = allowedRegions
     <Hotjar />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
+    {markdownUrl && <AgentHint markdownUrl={markdownUrl} />}
     <GoogleTagManagerFallback />
     <AnnouncementBanner override={announcementBanner} />
     <Header />

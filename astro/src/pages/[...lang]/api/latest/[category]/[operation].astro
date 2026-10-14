@@ -12,7 +12,11 @@ import {
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
+import {
+  apiBreadcrumbs,
+  hugoOperationContentPath,
+  operationMetaDescription,
+} from "@lib/api/pageMeta";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -106,7 +110,7 @@ const tabDisabled = operation
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />
-        <link rel="canonical" href={redirectTo} />
+        <link rel="canonical" href={new URL(redirectTo, Astro.site).href} />
         <title>Redirecting…</title>
       </head>
       <body>
@@ -127,6 +131,7 @@ const tabDisabled = operation
         activeCategory={category}
         currentOperationSlug={opSlug}
         breadcrumbs={apiBreadcrumbs(lang, operation.summary)}
+        contentPath={hugoOperationContentPath(catSlug, opSlug)}
       >
         <ApiPageHeader title={operation.summary} />
         <Tabs

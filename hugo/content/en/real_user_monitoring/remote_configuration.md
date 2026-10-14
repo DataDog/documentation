@@ -1,6 +1,7 @@
 ---
 title: RUM Remote Configuration
 description: Configure RUM SDK settings remotely for Browser, iOS, and Android applications.
+site_support_id: rum_remote_configuration
 aliases:
 - /real_user_monitoring/guide/remote-config-launchdarkly/
 - /real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
@@ -105,6 +106,10 @@ Remote configuration does not override any SDK settings by default. To manage a 
 
 2. Configure the setting by selecting a state, changing its sampling rate, or adding data.
 3. Save your changes.
+
+## View changes in Audit Trail
+
+Changes to RUM remote configurations appear in [Datadog Audit Trail][3], where you can review who made each change and when.
 
 ## Configurable settings
 
@@ -242,3 +247,4 @@ Remote configuration does not override any SDK settings by default. To manage a 
 
 [1]: /account_management/rbac/permissions/#real-user-monitoring
 [2]: /remote_configuration/
+[3]: /account_management/audit_trail/

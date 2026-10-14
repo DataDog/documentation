@@ -3,4 +3,6 @@
   --control-height-sm: 2rem;
   --content-max-width: 1440px;
   --sidebar-width: 315px;
+  /* WCAG 2.5.8 minimum target size, checked by Lighthouse's target-size audit. */
+  --touch-target-min-size: 24px;
 }

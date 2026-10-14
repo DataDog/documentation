@@ -369,7 +369,7 @@
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Workload Protection policy returns \"OK\" response"
+      "description": "Create a Workload Protection policy returns \"Created\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -1966,6 +1966,13 @@
       "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
@@ -2217,6 +2224,18 @@
       "group": "scorecards",
       "suffix": "_1831541184",
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpdateFindingsSeverity": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_412359663",
+      "description": "Apply a severity override to security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1312693410",
+      "description": "Clear the severity override of security findings returns \"Accepted\" response"
     }
   ],
   "AttachJiraIssue": [

@@ -148,7 +148,7 @@ Restart Claude Code after running both commands for the skills to appear.
 | Trace RCA | `/agent-observability-trace-rca` | Root cause analysis on failing production traces |
 | Experiment analyzer | `/agent-observability-experiment-analyzer` | Analyze and compare LLM experiment results |
 | Experiment Python codegen | `/agent-observability-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
-| Eval bootstrap | `/agent-observability-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
+| Evaluator bootstrap | `/agent-observability-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
 | Eval pipeline | `/agent-observability-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
@@ -227,7 +227,7 @@ Each phase has a canonical short name — the same value accepted by `--start-at
 | 5 | Generate and run experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`experiment`</span> | `list_llmobs_evals` (one-shot startup beacon — connectivity + telemetry); runtime uses the ddtrace SDK | Introspects your app for LLM call sites, emits a self-contained `.py` or `.ipynb` wiring `task_fn` to a real entry point, then runs it. |
 | 6 | Analyze experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`analyze`</span> | `get_llmobs_experiment_summary`, `get_llmobs_experiment_metric_values`, `list_llmobs_experiment_events`, `get_llmobs_experiment_event`, `get_llmobs_experiment_dimension_values` | Pulls top-line metrics, per-record scores, segment dimensions, and drill-down events; synthesizes a structured analysis report. |
 
-You can `stop` cleanly at any checkpoint and resume later with `--start-at <stage-name>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
+You can `stop` cleanly at any checkpoint and resume later with `--start-at <stage-name>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase evaluator-only behavior.
 
 ```
 /agent-observability-eval-pipeline my-chatbot --project-name my-chatbot

@@ -51,3 +51,23 @@ export function operationMetaDescription(operation: {
     `${operation.summary} endpoint in the Datadog API.`
   );
 }
+
+// Hugo source paths of the API pages, relative to `content/<lang>/`. Used only
+// to pick the same default OG image Hugo picks (see `ogImageUrl`): the root,
+// overview pages, and categories are branch bundles, operations leaf bundles.
+
+export function hugoCategoryContentPath(categorySlug: string): string {
+  return `api/latest/${categorySlug}/_index.md`;
+}
+
+export function hugoOperationContentPath(
+  categorySlug: string,
+  operationSlug: string,
+): string {
+  return `api/latest/${categorySlug}/${operationSlug}/index.md`;
+}
+
+/** `entryId` is an `en` collection id such as `api/latest/rate-limits`. */
+export function hugoOverviewContentPath(entryId: string): string {
+  return `${entryId}/_index.md`;
+}

@@ -5,7 +5,7 @@ import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
-import { apiBreadcrumbs } from "@lib/api/pageMeta";
+import { apiBreadcrumbs, hugoOverviewContentPath } from "@lib/api/pageMeta";
 import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
 import type { GetStaticPaths } from "astro";
 
@@ -64,6 +64,7 @@ const breadcrumbs = isRootPage
   categories={categories}
   breadcrumbs={breadcrumbs}
   siteSupportId={entry.data.site_support_id}
+  contentPath={hugoOverviewContentPath(entry.id)}
 >
   <ApiPageHeader title={entry.data.title} />
   <Content />

@@ -129,7 +129,9 @@
 }
 
 .api-side-nav__operation {
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target-min-size);
   padding: 0 var(--space-md) 0 var(--space-xl);
   color: var(--color-text);
   font-size: var(--font-size-sm);

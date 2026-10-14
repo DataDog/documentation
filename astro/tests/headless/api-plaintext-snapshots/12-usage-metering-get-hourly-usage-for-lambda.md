@@ -15,7 +15,7 @@ This endpoint is deprecated.
 {% /alert %}
 
 Get hourly usage for Lambda.
-**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.
+**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering.md#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration.md) for the associated migration guide.
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -113,7 +113,7 @@ func main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=go) and then save the example to `main.go` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" go run "main.go"
@@ -145,7 +145,7 @@ with ApiClient(configuration) as api_client:
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" python3 "example.py"

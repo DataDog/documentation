@@ -23,6 +23,11 @@ async function renderMobileNav(pathname?: string): Promise<Document> {
     renderer: preactRenderer,
     name: "@astrojs/preact",
   });
+  // Without a client renderer the container omits islands' serialized props.
+  container.addClientRenderer({
+    name: "@astrojs/preact",
+    entrypoint: "@astrojs/preact/client.js",
+  });
   const html = await container.renderToString(MobileNav, {
     // When a pathname is given, drive Astro.url through a request so the
     // active-section logic can pick the section owning the current page.
@@ -165,8 +170,7 @@ describe("MobileNav.astro", () => {
       `/api/latest/${category.slug}/${operation.slug}/`,
     );
 
-    // All categories render their operations in the DOM (inside <details>);
-    // only the active one has the open attribute.
+    // Only the active category is open (and the only one with operations).
     const openSections = doc.querySelectorAll(
       ".mobile-nav__list--api .mobile-nav__section[open]",
     );
@@ -276,17 +280,105 @@ describe("MobileNav.astro", () => {
     ).not.toBeNull();
   });
 
-  it("shows all categories' operations inside their <details>, not just the active one", async () => {
-    const [category] = await getCategoriesWithOperations();
-    const operation = category.operations[0];
-    const doc = await renderMobileNav(
-      `/api/latest/${category.slug}/${operation.slug}/`,
-    );
-    const operationLists = doc.querySelectorAll(
-      ".mobile-nav__list--api .mobile-nav__sublist",
-    );
-    // Every category should have its operations in the DOM.
-    expect(operationLists.length).toBeGreaterThan(1);
+  describe("lazy category operations", () => {
+    // Only the active category's operations are server-rendered; every other
+    // category ships an empty list that MobileNavApiListLoader fills on
+    // expand from /api/mobile-nav.json, keeping the page HTML small.
+    function categorySections(doc: Document): Element[] {
+      return [
+        ...doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section"),
+      ].filter(
+        (section) =>
+          !section.querySelector("summary")?.textContent?.includes("Overview"),
+      );
+    }
+
+    it("still renders a summary for every category", async () => {
+      const categories = await getCategoriesView();
+      const [category] = await getCategoriesWithOperations();
+      const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+      const summaries = categorySections(doc).map((section) =>
+        section.querySelector("summary")?.textContent?.trim(),
+      );
+      expect(summaries).toEqual(categories.map((cat) => cat.name));
+    });
+
+    it("renders operation links only inside the active category", async () => {
+      const [category] = await getCategoriesWithOperations();
+      const operation = category.operations[0];
+      const doc = await renderMobileNav(
+        `/api/latest/${category.slug}/${operation.slug}/`,
+      );
+      const sectionsWithLinks = categorySections(doc).filter(
+        (section) => section.querySelector(".mobile-nav__link") !== null,
+      );
+      expect(sectionsWithLinks.length).toBe(1);
+      const links = [
+        ...sectionsWithLinks[0].querySelectorAll(".mobile-nav__link"),
+      ];
+      expect(links.map((link) => link.getAttribute("href"))).toEqual(
+        category.operations.map(
+          (op) => `/api/latest/${category.slug}/${op.slug}/`,
+        ),
+      );
+      // The active category's list is complete, so it carries no lazy marker.
+      expect(
+        sectionsWithLinks[0].querySelector("ul[data-category-slug]"),
+      ).toBeNull();
+    });
+
+    it("leaves every non-active category with an empty, lazily-fillable list", async () => {
+      const categories = await getCategoriesView();
+      const [category] = await getCategoriesWithOperations();
+      const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+      const lazyLists = [
+        ...doc.querySelectorAll(
+          ".mobile-nav__list--api ul.mobile-nav__sublist[data-category-slug]",
+        ),
+      ];
+      const otherCategories = categories.filter(
+        (cat) => cat.slug !== category.slug,
+      );
+      expect(
+        lazyLists.map((list) => list.getAttribute("data-category-slug")),
+      ).toEqual(otherCategories.map((cat) => cat.slug));
+      expect(
+        lazyLists.map((list) => list.getAttribute("data-category-href")),
+      ).toEqual(otherCategories.map((cat) => `/api/latest/${cat.slug}/`));
+      for (const list of lazyLists) {
+        expect(list.children.length).toBe(0);
+      }
+    });
+
+    it("mounts the lazy-loading island on the API list, pointed at the localized JSON", async () => {
+      const [category] = await getCategoriesWithOperations();
+      const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+      const apiList = doc.querySelector(".mobile-nav__list--api");
+      expect(apiList?.id).toBeTruthy();
+      const islands = [...doc.querySelectorAll("astro-island")].filter(
+        (island) =>
+          island
+            .getAttribute("component-url")
+            ?.includes("MobileNavApiListLoader"),
+      );
+      expect(islands).toHaveLength(1);
+      const props = islands[0].getAttribute("props") ?? "";
+      expect(props).toContain("/api/mobile-nav.json");
+      expect(props).toContain(apiList!.id);
+    });
+
+    it("renders no category operations on the API root or an overview page", async () => {
+      const [page] = await getOverviewPages();
+      for (const pathname of ["/api/latest/", `/api/latest/${page.slug}/`]) {
+        const doc = await renderMobileNav(pathname);
+        for (const section of categorySections(doc)) {
+          expect(section.querySelector(".mobile-nav__link")).toBeNull();
+          expect(
+            section.querySelector("ul[data-category-slug]"),
+          ).not.toBeNull();
+        }
+      }
+    });
   });
 
   describe("Overview section", () => {
