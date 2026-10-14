@@ -30,7 +30,7 @@ Use this page as the starting point for triaging failures and for deciding where
 ## Prerequisites
 
 - To see untested endpoints, you need [APM][1] enabled for your services.
-- To see untested views, you need [RUM][2] enabled for your web or mobile applications.
+- To see untested views, enable [RUM][2] for your web or mobile applications.
 
 The [tests in alert](#review-tests-in-alert) section of the Overview page doesn't require APM or RUM.
 
