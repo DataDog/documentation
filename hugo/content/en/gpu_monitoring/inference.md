@@ -48,7 +48,7 @@ To begin monitoring your inference workloads, you must meet the following criter
 
 ### 1. Use the inference Agent image
 
-The inference Agent image includes both the Dynamo and vLLM checks, so you don't need to install either integration separately.
+The inference Agent image includes the vLLM check, so you don't need to install the vLLM integration separately.
 
 Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
