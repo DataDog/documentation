@@ -42,6 +42,21 @@
   --color-highlight-bg: #f2f2f2;
   --color-highlight-text: #555;
 
+  /* Colors — Syntax (code highlighting, `src/styles/shiki-light.ts`).
+     Values match Hugo's Chroma theme. Code blocks use `--color-panel-bg` and
+     `--color-panel-text` for their background and default text. */
+  --color-syntax-keyword: #a90d91;
+  --color-syntax-self: #5b269a;
+  --color-syntax-string: #c41a16;
+  --color-syntax-number: #1c01ce;
+  --color-syntax-char: #2300ce;
+  --color-syntax-comment: #177500;
+  --color-syntax-preprocessor: #633820;
+  --color-syntax-class: #3f6e75;
+  --color-syntax-attribute: #836c28;
+  --color-syntax-inserted: #177500;
+  --color-syntax-deleted: #c41a16;
+
   /* Colors — Surface variants */
   --color-surface-border: #ebebeb;
   --color-surface-header: #f3edff;
