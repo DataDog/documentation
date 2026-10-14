@@ -19,7 +19,6 @@ further_reading:
   text: "Mobile Application Testing"
 ---
 
-## Overview
 
 The Synthetic Monitoring & Testing {{< ui >}}Overview{{< /ui >}} page shows the health and coverage of your Synthetic tests in one place. It answers two questions:
 
