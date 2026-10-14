@@ -166,7 +166,7 @@ All in `src/components/ApiChangelog/` except `Pagination`, which is generic:
 - **`staticApiGuard`:** add `/api/changelog/` and `/api/changelog.md` to `API_PROBE_PATHS`, so a catch-all can't silently shadow them.
 - **Sitemap:** only `/api/changelog/` (and its locale versions) is listed. In `isSitemapPage`, exclude filtered pages and pages 2 and up, because they're thin duplicates of the landing page. Each page keeps a self-referencing canonical.
 - **`pages.json` / `llms.txt`:** add `/api/changelog.md` to `apiPageSource` (title "Changelog", breadcrumbs `API_CRUMBS`). Then check whether `llms.txt` picks it up from the same source, or needs its own one-line entry.
-- **`scripts/verifyDist.mjs`:** check that the new files pass its shape checks. Add a check that `api/changelog/index.html` and `api/changelog.md` exist, so the page can't quietly disappear.
+- **`scripts/verifyDist.mjs`:** check that the new files pass its shape checks. No required-files check: the `staticApiGuard` probes already fail the build if the route goes missing, and page 1 is always emitted.
 - **Dev routing:** the root `Caddyfile` already sends `/api/*` to Astro, so nothing changes.
 
 ## Implementation steps (red to green)
@@ -232,7 +232,7 @@ Write each test first and confirm it fails before implementing. While developing
 9. **Build plumbing.** Unit tests:
    - `isSitemapPage`: the changelog root is included, and filtered pages and pages 2+ are excluded.
    - `apiPageSource`: includes `/api/changelog.md`.
-   - Add the probe paths to `staticApiGuard` and the existence checks to `verifyDist.mjs`.
+   - Add the probe paths to `staticApiGuard`.
    - Check how `llms.txt` lists the page.
 
 > **Compaction point 3:** the feature is fully wired. Only browser tests and the final regression run are left. **Stop here and ask the user to compact.**
