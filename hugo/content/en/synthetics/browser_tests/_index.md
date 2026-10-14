@@ -270,6 +270,7 @@ You can switch tabs in a browser test recording to perform an action on your app
 
 1. Optionally, select {{< ui >}}Open in a pop-up{{< /ui >}} at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in {{< ui >}}Incognito mode{{< /ui >}} to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
 2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][13].
+
    With RUM data collection enabled, you can also turn on {{< ui >}}Run Lighthouse audit{{< /ui >}} to collect Lighthouse scores each time the saved test runs. For more information, see [Lighthouse audits in RUM][20].
 3. Click {{< ui >}}Start Recording{{< /ui >}} to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][14] within your browser test scenario on the left.
