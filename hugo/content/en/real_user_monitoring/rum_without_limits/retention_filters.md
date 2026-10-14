@@ -86,7 +86,7 @@ There are three permanent retention filters:
 
 ## Exclusion filters
 
-{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters.png" alt="The Exclusion Filters group expanded, showing the predefined Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters-excluded-errors.png" alt="The Exclusion Filters group expanded, showing the predefined Excluded errors from Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
 
 Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.
 
