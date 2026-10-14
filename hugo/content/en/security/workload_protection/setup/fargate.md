@@ -274,77 +274,28 @@ spec:
      shareProcessNamespace: true
 ```
 
-### Inject the instrumentation with the Datadog admission controller
+Update the following items in the manifest:
+- `<APPLICATION_NAME>`
+- `<POD_NAME>`
+- `<YOUR_APP_NAME>`
+- `<YOUR_APP_IMAGE>`
+- `<ENTRYPOINT>`
+- `<DD_API_KEY>`
+- `<CLUSTER_NAME>`
 
-As an alternative to the manual manifest above, you can let the [Datadog admission controller][7] inject the `cws-instrumentation` init container and the Agent sidecar for you. This works when you deploy Datadog with the [Datadog Operator][8] or [Helm][9].
+You can use the following command to find the entry point of your workload:
 
-On AWS Fargate, set the CWS instrumentation `mode` to `init_container`. The default `remote_copy` mode copies the binary into each pod through the Kubernetes pod `exec` API (like `kubectl cp`). Fargate does not support that API.
-
-#### Enable the admission controller
-
-Add the following to your admission controller configuration (under `spec.features` with the Datadog Operator, or under `clusterAgent` with Helm):
-
-```yaml
-admissionController:
-  enabled: true
-  cwsInstrumentation:
-    enabled: true
-    mode: init_container
-  agentSidecarInjection:
-    enabled: true
-    provider: fargate
-    profiles:
-      - env:
-          - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-            value: "true"
-          - name: DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED
-            value: "true"
+```shell
+docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
 ```
 
-The `profiles` block sets the Workload Protection environment variables on the injected sidecar. `DD_RUNTIME_SECURITY_CONFIG_ENABLED=true` enables runtime security on the Agent, and `DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true` selects the eBPF-less mode required on Fargate. Without them, the sidecar and init container are injected but no security events are collected. With `provider: fargate`, the sidecar also sets `DD_EKS_FARGATE=true` and enables `shareProcessNamespace` on the pod. You do not need to set these on each pod manifest. For more details on Agent sidecar injection, see the [EKS Fargate integration setup][10].
+or
 
-#### Select the pods to instrument
-
-The Agent sidecar and the `cws-instrumentation` init container are injected by two separate admission webhooks, each with its own trigger. Enabling the configuration above is not enough on its own. Label the pod template of each workload you want to protect with both:
-
-- `agent.datadoghq.com/sidecar: fargate` to inject the Agent sidecar.
-- `admission.datadoghq.com/cws-instrumentation.enabled: "true"` to inject the `cws-instrumentation` init container.
-
-Because the labels are on the pod template, every pod the workload creates inherits them:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-app
-spec:
-  selector:
-    matchLabels:
-      app: my-app
-  template:
-    metadata:
-      labels:
-        app: my-app
-        agent.datadoghq.com/sidecar: fargate
-        admission.datadoghq.com/cws-instrumentation.enabled: "true"
-    spec:
-      containers:
-        - name: my-app
-          image: my-app:latest
+```shell
+docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Cmd}}'
 ```
-
-To avoid labeling each workload on a dedicated Fargate cluster, you can instrument pods in bulk, but you must configure both webhooks:
-
-- Set `DD_ADMISSION_CONTROLLER_CWS_INSTRUMENTATION_MUTATE_UNLABELLED=true` on the Cluster Agent so the `cws-instrumentation` init container is injected into every pod. To limit which pods this applies to, use the `admission_controller.cws_instrumentation.include` and `admission_controller.cws_instrumentation.exclude` settings; to exclude a single pod, label it `admission.datadoghq.com/cws-instrumentation.enabled: "false"`.
-- The Agent sidecar has no equivalent bulk switch: give `agentSidecarInjection` a namespace selector (`selectors`) that matches your target namespaces; otherwise, pods still need the `agent.datadoghq.com/sidecar: fargate` label. Without the sidecar, the init container has no Agent to send events to.
-
-Avoid bulk injection on clusters that also run workloads on EC2 nodes. Those workloads use standard eBPF-based Workload Protection, not the eBPF-less Fargate instrumentation.
 
 [6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
-[7]: /containers/cluster_agent/admission_controller/
-[8]: /containers/datadog_operator/
-[9]: /containers/kubernetes/installation/?tab=helm
-[10]: /integrations/eks_fargate/#admission-controller---datadog-operator
 
 {{% /tab %}}
 {{< /tabs >}}
