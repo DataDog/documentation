@@ -24,7 +24,7 @@ Use Metric Sync when you want to:
 - Apply metric changes from CI after they are approved.
 - Mark synced metrics as certified by default for experiment decision-making.
 
-Metric Sync supports a plan-and-apply workflow. The `plan` command validates your YAML and previews the changes Datadog would make. The `execute` command validates the YAML, submits a write operation, and waits for completion. Successful operations print a summary of created, updated, deleted, upgraded, and blocked objects, plus an error count.
+Metric Sync supports a plan-and-apply workflow. The `plan` command validates your YAML and previews the changes Datadog would make. The `execute` command validates the YAML, submits a write operation, and waits for completion. Results include change counts, object IDs, field changes, blocked reasons, warnings, and available error details. Plans show proposed changes; a failed operation does not confirm that those changes were applied.
 
 ## Prerequisites
 
@@ -68,9 +68,9 @@ export DD_SITE={{< region-param key="dd_site" >}}
 
 ## Create a metric definition
 
-Create one or more YAML files in a dedicated directory in your repository. The CLI accepts a file, multiple files, a directory, or multiple directories. When you pass a directory, the CLI recursively discovers `.yaml` and `.yml` files, except in hidden subdirectories. Use one YAML document per file.
+Create one or more YAML files in a dedicated directory in your repository. The CLI accepts a file, multiple files, a directory, or multiple directories. When you pass a directory, the CLI recursively discovers `.yaml` and `.yml` files, except in hidden subdirectories. Use one YAML document per file. The CLI rejects additional documents in the same file, including an empty document after a `---` separator. Put additional definitions in separate files and submit the directory together.
 
-The following example defines one warehouse metric source and one metric with `metric_type: simple`. If the organization has exactly one warehouse connection, the CLI selects it when the YAML omits `warehouse_connection_id`. If the organization has multiple connections, set `warehouse_connection_id` at the top level or on each source. A source-level value overrides the top-level value.
+The following example defines one warehouse metric source and one metric with `metric_type: simple`. The metric includes events from the US and CA. If the organization has exactly one warehouse connection, the CLI selects it when the YAML omits `warehouse_connection_id`. If the organization has multiple connections, set `warehouse_connection_id` at the top level or on each source. A source-level value overrides the top-level value.
 
 ```yaml
 schema_version: 1
@@ -81,7 +81,7 @@ warehouse_metric_sources:
   - sync_id: checkout_events
     name: Checkout events
     sql: |
-      SELECT user_id, event_timestamp, transaction_timestamp, revenue
+      SELECT user_id, event_timestamp, transaction_timestamp, revenue, country
       FROM analytics.checkout_events
     timestamp_column: event_timestamp
     additional_timestamp_columns:
@@ -94,6 +94,11 @@ warehouse_metric_sources:
         name: Revenue
         column_name: revenue
         column_type: FLOAT
+    properties:
+      - sync_id: country
+        property_name: Country
+        property_column: country
+        property_type: STRING
 
 metrics:
   - sync_id: checkout_revenue
@@ -108,6 +113,12 @@ metrics:
       timeframe_start_value: 0
       winsor_upper_percentile: 0.99
       winsorization_strategy: nonzero
+      property_filters:
+        property:
+          warehouse_metric_source_sync_id: checkout_events
+          property_sync_id: country
+        operation: IS
+        values: [US, CA]
 ```
 
 ## Preview and sync changes
@@ -118,7 +129,7 @@ To preview the changes before applying them, run `plan`:
 metric-sync plan ./metrics
 ```
 
-The plan output shows the operation ID, sync tag, status, and counts of the changes Datadog would make. A completed plan can contain blocked objects; check the `Blocked` count before executing. To save object IDs, field changes, and error details, run `plan` with `--log-file ./metric-sync-plan.log` and inspect that log.
+The plan output shows the operation ID, sync tag, status, proposed field changes, and blocked reasons. Review these details before executing. The `plan`, `execute`, and `result` commands exit with a nonzero status if an operation fails or its result contains blocked objects or errors. To save the API response for troubleshooting, add `--log-file ./metric-sync-plan.log`.
 
 After reviewing the plan, run `execute` to apply the changes:
 
@@ -209,7 +220,7 @@ Use a concurrency group for each sync tag to prevent overlapping executions from
 
 A `sync_tag` identifies the set of metric definitions that are managed together. Use a stable `sync_tag` for each repository, team, or metric domain that you want to manage independently. For example, a growth team and a checkout team can sync metrics from different repositories by using different `sync_tag` values, such as `growth-metrics` and `checkout-metrics`.
 
-Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Metric aggregations use `warehouse_metric_source_sync_id` to select a warehouse metric source. Each aggregation also selects a declared measure, each row, or a subject mapping. See [Measure references][4].
+Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Each declared property and measure also requires a `sync_id`, unique within its own list on that source. Choose stable IDs; they do not need to be UUIDs. Metric aggregations use `warehouse_metric_source_sync_id` to select a warehouse metric source. Each aggregation also selects a declared measure, each row, or a subject mapping. See [Measure references][4].
 
 Each submission defines the complete set of sources and metrics managed by its `sync_tag`. Objects already managed by that tag but absent from the submitted files are candidates for deletion. Submit all files for the tag together, including unchanged definitions. Changing a `sync_id` can result in deletion of the old object and creation of another object.
 
@@ -262,6 +273,7 @@ Adoption applies the YAML definition and assigns sync ownership to the existing 
 | `reference_url` | No | Source-specific reference URL. |
 | `subject_types` | Yes | At least one subject mapping for the source. |
 | `measures` | No | Columns that metrics aggregate. |
+| `properties` | No | Columns used to filter metric events. Include these columns in the source SQL. |
 
 ### Subject types
 
@@ -279,6 +291,22 @@ Adoption applies the YAML definition and assigns sync ownership to the existing 
 | `column_name` | Yes | SQL result column name. |
 | `column_type` | Yes | Required so Datadog can validate the column and show the correct metric configuration options. Supported values are `STRING`, `INTEGER`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. |
 | `description` | No | Description for the measure. |
+
+### Properties
+
+Use `properties` on a warehouse metric source to declare columns for filters.
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `sync_id` | Yes | Stable identifier within the source's properties list. Filters reference it with `property_sync_id`. |
+| `property_name` | Yes | Display name in Datadog. |
+| `property_column` | Yes | SQL result column name. |
+| `property_type` | Yes | Column type, such as `STRING`. |
+| `description` | No | Description for the property. |
+
+These property field names match the API. Replace the previous property fields `name`, `column_name`, and `column_type` with `property_name`, `property_column`, and `property_type`. The CLI rejects the previous property names. Measure definitions still use `name`, `column_name`, and `column_type`.
+
+The Datadog YAML format differs from Eppo's format. When migrating, replace `fact_sources` and `facts` with `warehouse_metric_sources` and `measures`, then update property definitions and references to use the fields in this guide.
 
 ### Metrics
 
@@ -308,6 +336,7 @@ Winsorization percentiles and percentile metrics use decimal fractions. For exam
 | ----- | -------- | ----------- |
 | `operation` | Yes | Aggregation operation, such as `sum`, `average`, `count`, or `countDistinctValue`. |
 | `measure` | Yes | Measure reference. |
+| `property_filters` | No | Filters on events included in the aggregation. See [Filters][5]. |
 | `timeframe_start_value` | No | Start offset for the metric timeframe. |
 | `timeframe_end_value` | No | End offset for the metric timeframe. |
 | `timeframe_unit` | No | Timeframe unit. |
@@ -354,6 +383,7 @@ ratio_metric_aggregation:
 | Field | Required | Description |
 | ----- | -------- | ----------- |
 | `measure` | Yes | Measure reference. |
+| `property_filters` | No | Filters on events included in the aggregation. See [Filters][5]. |
 | `percentile` | Yes | Decimal greater than zero and less than one. Use `0.95` for the 95th percentile. |
 
 Time frame fields do not configure percentile metrics.
@@ -368,9 +398,68 @@ percentile_metric_aggregation:
     measure_sync_id: revenue
 ```
 
+### Filters
+
+Set `property_filters` in `simple_metric_aggregation`, either ratio component, or `percentile_metric_aggregation`. Every filter must reference the same source and sync tag as the aggregation's measure.
+
+For one condition, use a single filter object:
+
+```yaml
+property_filters:
+  property:
+    warehouse_metric_source_sync_id: checkout_events
+    property_sync_id: country
+  operation: IS
+  values: [US, CA]
+```
+
+Use `IS` to include any listed value or `IS_NOT` to exclude the listed values. Both operations require at least one value. The `property_sync_id` must match a declared property on the source. To filter a source from another sync tag, include `warehouse_metric_source_sync_tag` in both the property reference and the aggregation's measure reference.
+
+For multiple conditions that must all match (AND), use a flat list:
+
+```yaml
+property_filters:
+  - property:
+      warehouse_metric_source_sync_id: checkout_events
+      property_sync_id: country
+    operation: IS
+    values: [US, CA]
+  - property:
+      warehouse_metric_source_sync_id: checkout_events
+      property_sync_id: country
+    operation: IS_NOT
+    values: [CA]
+```
+
+This example includes US events. A single filter or a flat list becomes one filter group in the API request.
+
+For alternatives (OR), use nested groups. Conditions inside each group use AND; separate groups use OR:
+
+```yaml
+property_filters:
+  -
+    - property:
+        warehouse_metric_source_sync_id: checkout_events
+        property_sync_id: country
+      operation: IS
+      values: [US]
+  -
+    - property:
+        warehouse_metric_source_sync_id: checkout_events
+        property_sync_id: country
+      operation: IS
+      values: [CA]
+```
+
+This example includes US or CA events. Each group must contain at least one condition. Do not mix individual filters and groups in the same list.
+
+Use `operation` in new YAML. The previous `operator` field remains an alias, but the CLI rejects a filter that sets both. Requests always use `operation`. Filter values retain their text, including numeric-looking values such as `001`. Quote values when you need other YAML tools to preserve them as strings. YAML anchors and aliases are optional and work within a single document.
+
+Percentile metrics support only property filters with `IS` or `IS_NOT`. They do not support measure filters or null checks.
+
 ### CLI limitations
 
-The CLI does not support source property definitions or property filters. Do not use it to manage sources or metrics that require these settings.
+The CLI does not export existing definitions or convert Eppo YAML automatically. Create and review the full definitions before managing existing metrics with YAML.
 
 For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upgrade_mode: by_name` alone does not adopt objects with matching names.
 
@@ -451,12 +540,13 @@ The sync API does not support `warehouse_metric_measure_id`. Replace raw measure
 | The API returns `403`. | Confirm the API/application key has the Product Analytics permissions required to write metrics. If `is_certified` is enabled, confirm the role also has Product Analytics Certified Metrics Write. |
 | A warehouse connection was not found. | Confirm the target Datadog organization has a warehouse connection configured. If you set `warehouse_connection_id`, confirm that it belongs to the target organization. |
 | A subject type was not found. | Confirm the `subject_types[].name` value matches an existing Datadog subject type. |
-| The plan or execute result shows no changes. | The YAML already matches Datadog for that `sync_tag`. |
-| A sync is blocked. | Check the debug log for the affected objects and reasons. Possible causes include experiment references, metrics outside the sync tag that reference a source, and adoption conflicts. |
-| A command reports a failed operation without details. | Run `result <metric_sync_id> --log-file ./metric-sync-result.log` and inspect the log for the API response. Console output contains counts, not individual field changes or error details. |
-| Local validation passes, but `plan` rejects the YAML. | Local checks do not cover every API rule. For example, percentile metrics require a value between zero and one, and ratio components cannot use `average`. Use the error details in the debug log to correct the definition. |
+| A successful result shows no changes. | The YAML already matches Datadog for that `sync_tag`. A failed operation does not establish this. |
+| A sync is blocked. | Read the object details and blocked reasons in the console output. Possible causes include experiment references, metrics outside the sync tag that reference a source, and adoption conflicts. A blocked result exits with a nonzero status. |
+| An operation fails. | Run `result <metric_sync_id> --log-file ./metric-sync-result.log` to retrieve available errors and inspect the API response. Changes shown for a failed operation are not confirmed as applied. |
+| Local validation passes, but `plan` rejects the YAML. | Local checks do not cover every API rule. For example, percentile metrics require a value between zero and one, and ratio components cannot use `average`. Use the error details in the console output or debug log to correct the definition. |
 
 [1]: /experiments/guide/connecting_a_data_warehouse/
 [2]: /account_management/rbac/permissions/#product-analytics
 [3]: /account_management/api-app-keys/
 [4]: #measure-references
+[5]: #filters
