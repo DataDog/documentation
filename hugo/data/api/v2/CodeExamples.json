@@ -606,27 +606,6 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
-  "ListDORADeployments": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1654201709",
-      "description": "Get a list of deployment events returns deployments with date-time timestamps"
-    }
-  ],
-  "CreateDORADeployment": [
-    {
-      "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send a deployment event returns \"OK\" response"
-    }
-  ],
-  "CreateDORAIncident": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1101664022",
-      "description": "Send a failure event returns \"OK\" response"
-    }
-  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -677,6 +656,27 @@
       "group": "datasets",
       "suffix": "",
       "description": "Edit a dataset returns \"OK\" response"
+    }
+  ],
+  "ListDORADeployments": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
+  "CreateDORADeployment": [
+    {
+      "group": "delivery_performance",
+      "suffix": "",
+      "description": "Send a deployment event returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDeploymentGate": [
@@ -1964,6 +1964,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Create On-Call escalation policy returns \"Created\" response"
+    }
+  ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
     }
   ],
   "CreateOnCallSchedule": [

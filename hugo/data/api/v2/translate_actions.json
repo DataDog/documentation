@@ -4779,6 +4779,20 @@
     "description": "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead.",
     "summary": "Get scheduled on-call user"
   },
+  "ListScheduleOverrides": {
+    "description": "Retrieve a list of overrides for the specified On-Call schedule within a given time range.",
+    "summary": "List On-Call schedule overrides"
+  },
+  "CreateScheduleOverrides": {
+    "description": "Create one or more overrides for the specified On-Call schedule.",
+    "summary": "Create On-Call schedule overrides",
+    "request_description": "",
+    "request_schema_description": "Request to create one or more on-call schedule overrides. You can create up to 25 overrides in a single request."
+  },
+  "DeleteScheduleOverride": {
+    "description": "Delete an override from the specified On-Call schedule.",
+    "summary": "Delete On-Call schedule override"
+  },
   "GetScheduleOnCallResponders": {
     "description": "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position.",
     "summary": "Get on-call responders for a schedule"
@@ -7050,7 +7064,7 @@
     "summary": "Delete source maps"
   },
   "GetSourcemaps": {
-    "description": "Retrieves the content of a specific JavaScript source map file by its\nfilename, service name, and version.",
+    "description": "Retrieves the content of a specific JavaScript source map file. Provide either\n`debug_id` with a UUID, or all three of `filename`, `service`, and `version`.\nWhen `debug_id` is provided, filename, service, and version are not required\nand are ignored.\n\n**Examples:** the following commands use the US1 API host. Replace the host\nwith the API host for your site, and the filename, service, version, and\ndebug ID with values from your organization. Use `--get` so curl sends the\nparameters in the query string.\n\n**1. Retrieve a source map by debug ID**\n\nProvide `debug_id` with a UUID. No filename, service, or version is required.\n\n```bash\ncurl -sS --get \"https://api.datadoghq.com/api/v2/sourcemaps\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n  --data-urlencode \"debug_id=00000000-0000-4000-8000-000000000001\"\n```\n\n**2. Retrieve a source map by service and version**\n\nProvide `filename` together with `service` and `version`.\n\n```bash\ncurl -sS --get \"https://api.datadoghq.com/api/v2/sourcemaps\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n  --data-urlencode \"filename=js/bundle.min.js.map\" \\\n  --data-urlencode \"service=my-web-service\" \\\n  --data-urlencode \"version=1.0.0\"\n```",
     "summary": "Get a JavaScript source map"
   },
   "ListSourcemaps": {

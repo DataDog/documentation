@@ -17,6 +17,6 @@ cascade:
     {{< nextlink href="/llm_observability/guide/crewai_guide" >}}Using the Datadog-CrewAI integration for Agent Observability{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/nextjs_guide" >}}Instrument a Next.js Application for Agent Observability{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/agent_monitoring" >}}Agent Monitoring{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/investigate/evaluations/evaluation_developer_guide" >}}Evaluation Developer Guide: Build custom evaluators{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/investigate/evaluations/evaluation_developer_guide" >}}Evaluator Developer Guide: Build custom evaluators{{< /nextlink >}}
     {{< nextlink href="/llm_observability/build_with_ai/claude_code_skills" >}}Analyze LLM Applications with Claude Code Skills{{< /nextlink >}}
 {{< /whatsnext >}}

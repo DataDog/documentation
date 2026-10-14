@@ -12923,154 +12923,6 @@ menu:
           - CreateJourney
         unstable: []
         order: 5
-    - name: DORA Metrics
-      url: /api/latest/dora-metrics/
-      identifier: dora-metrics
-      generated: true
-    - name: Send an incident event (legacy)
-      url: /api/latest/dora-metrics/send-an-incident-event-legacy/
-      identifier: dora-metrics-send-an-incident-event-legacy
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateDORAIncident
-        unstable: []
-        order: 12
-    - name: Get an incident event
-      url: /api/latest/dora-metrics/get-an-incident-event/
-      identifier: dora-metrics-get-an-incident-event
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetDORAFailure
-        unstable: []
-        order: 6
-    - name: Get a list of incident events
-      url: /api/latest/dora-metrics/get-a-list-of-incident-events/
-      identifier: dora-metrics-get-a-list-of-incident-events
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListDORAFailures
-        unstable: []
-        order: 4
-    - name: Delete an incident event
-      url: /api/latest/dora-metrics/delete-an-incident-event/
-      identifier: dora-metrics-delete-an-incident-event
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteDORAFailure
-        unstable: []
-        order: 7
-    - name: Send an incident event
-      url: /api/latest/dora-metrics/send-an-incident-event/
-      identifier: dora-metrics-send-an-incident-event
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateDORAFailure
-        unstable: []
-        order: 2
-    - name: Mark a deployment as failed by ID
-      url: /api/latest/dora-metrics/mark-a-deployment-as-failed-by-id/
-      identifier: dora-metrics-mark-a-deployment-as-failed-by-id
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - PatchDORADeployment
-        unstable: []
-        order: 9
-    - name: Get a deployment event
-      url: /api/latest/dora-metrics/get-a-deployment-event/
-      identifier: dora-metrics-get-a-deployment-event
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetDORADeployment
-        unstable: []
-        order: 5
-    - name: Get a list of deployment events
-      url: /api/latest/dora-metrics/get-a-list-of-deployment-events/
-      identifier: dora-metrics-get-a-list-of-deployment-events
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListDORADeployments
-        unstable: []
-        order: 3
-    - name: Mark a deployment as failed by version
-      url: /api/latest/dora-metrics/mark-a-deployment-as-failed-by-version/
-      identifier: dora-metrics-mark-a-deployment-as-failed-by-version
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - PatchDORADeploymentByVersion
-        unstable: []
-        order: 10
-    - name: Delete a deployment event
-      url: /api/latest/dora-metrics/delete-a-deployment-event/
-      identifier: dora-metrics-delete-a-deployment-event
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteDORADeployment
-        unstable: []
-        order: 8
-    - name: Send a deployment event
-      url: /api/latest/dora-metrics/send-a-deployment-event/
-      identifier: dora-metrics-send-a-deployment-event
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateDORADeployment
-        unstable: []
-        order: 1
-    - name: Send AI tool user activity
-      url: /api/latest/dora-metrics/send-ai-tool-user-activity/
-      identifier: dora-metrics-send-ai-tool-user-activity
-      parent: dora-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateAIImpactUserActivity
-        unstable: []
-        order: 11
     - name: Dashboard Secure Embed
       url: /api/latest/dashboard-secure-embed/
       identifier: dashboard-secure-embed
@@ -13352,6 +13204,154 @@ menu:
         unstable:
           - v2
         order: 3
+    - name: Delivery Performance
+      url: /api/latest/delivery-performance/
+      identifier: delivery-performance
+      generated: true
+    - name: Send an incident event (legacy)
+      url: /api/latest/delivery-performance/send-an-incident-event-legacy/
+      identifier: delivery-performance-send-an-incident-event-legacy
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDORAIncident
+        unstable: []
+        order: 12
+    - name: Get an incident event
+      url: /api/latest/delivery-performance/get-an-incident-event/
+      identifier: delivery-performance-get-an-incident-event
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORAFailure
+        unstable: []
+        order: 6
+    - name: Get a list of incident events
+      url: /api/latest/delivery-performance/get-a-list-of-incident-events/
+      identifier: delivery-performance-get-a-list-of-incident-events
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORAFailures
+        unstable: []
+        order: 4
+    - name: Delete an incident event
+      url: /api/latest/delivery-performance/delete-an-incident-event/
+      identifier: delivery-performance-delete-an-incident-event
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDORAFailure
+        unstable: []
+        order: 7
+    - name: Send an incident event
+      url: /api/latest/delivery-performance/send-an-incident-event/
+      identifier: delivery-performance-send-an-incident-event
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDORAFailure
+        unstable: []
+        order: 2
+    - name: Mark a deployment as failed by ID
+      url: /api/latest/delivery-performance/mark-a-deployment-as-failed-by-id/
+      identifier: delivery-performance-mark-a-deployment-as-failed-by-id
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeployment
+        unstable: []
+        order: 9
+    - name: Get a deployment event
+      url: /api/latest/delivery-performance/get-a-deployment-event/
+      identifier: delivery-performance-get-a-deployment-event
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDORADeployment
+        unstable: []
+        order: 5
+    - name: Get a list of deployment events
+      url: /api/latest/delivery-performance/get-a-list-of-deployment-events/
+      identifier: delivery-performance-get-a-list-of-deployment-events
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDORADeployments
+        unstable: []
+        order: 3
+    - name: Mark a deployment as failed by version
+      url: /api/latest/delivery-performance/mark-a-deployment-as-failed-by-version/
+      identifier: delivery-performance-mark-a-deployment-as-failed-by-version
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeploymentByVersion
+        unstable: []
+        order: 10
+    - name: Delete a deployment event
+      url: /api/latest/delivery-performance/delete-a-deployment-event/
+      identifier: delivery-performance-delete-a-deployment-event
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDORADeployment
+        unstable: []
+        order: 8
+    - name: Send a deployment event
+      url: /api/latest/delivery-performance/send-a-deployment-event/
+      identifier: delivery-performance-send-a-deployment-event
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDORADeployment
+        unstable: []
+        order: 1
+    - name: Send AI tool user activity
+      url: /api/latest/delivery-performance/send-ai-tool-user-activity/
+      identifier: delivery-performance-send-ai-tool-user-activity
+      parent: delivery-performance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAIImpactUserActivity
+        unstable: []
+        order: 11
     - name: Deployment Gates
       url: /api/latest/deployment-gates/
       identifier: deployment-gates
@@ -18276,6 +18276,42 @@ menu:
           - GetScheduleOnCallResponders
         unstable: []
         order: 22
+    - name: Delete On-Call schedule override
+      url: /api/latest/on-call/delete-on-call-schedule-override/
+      identifier: on-call-delete-on-call-schedule-override
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScheduleOverride
+        unstable: []
+        order: 26
+    - name: Create On-Call schedule overrides
+      url: /api/latest/on-call/create-on-call-schedule-overrides/
+      identifier: on-call-create-on-call-schedule-overrides
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScheduleOverrides
+        unstable: []
+        order: 25
+    - name: List On-Call schedule overrides
+      url: /api/latest/on-call/list-on-call-schedule-overrides/
+      identifier: on-call-list-on-call-schedule-overrides
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScheduleOverrides
+        unstable: []
+        order: 24
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user
