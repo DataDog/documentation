@@ -315,5 +315,11 @@
   },
   "alert_tip": {
     "other": "TIP"
+  },
+  "home_enablement_banner_title": {
+    "other": "Learn Datadog fundamentals in a live 60-minute session."
+  },
+  "home_enablement_banner_cta": {
+    "other": "View Sessions >"
   }
 }

@@ -2,6 +2,12 @@
 title: Product Analytics Data Collected
 description: Learn about the event types, measurements, and attributes that Product Analytics collects, including sessions, views, and actions.
 further_reading:
+- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
+  tag: Learning Center
+  text: Getting Started with Product Analytics
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: Learning Center
+  text: Define User Behavior with Labeled Actions in Product Analytics
 - link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
@@ -14,9 +20,6 @@ further_reading:
 - link: "/product_analytics/data_collected/server_side_events/"
   tag: "Documentation"
   text: "Track Server-Side Events"
-- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
-  tag: Learning Center
-  text: Getting Started with Product Analytics
 ---
 
 ## Overview

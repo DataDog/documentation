@@ -1,6 +1,6 @@
 ---
-description: Instalar y configurar la monitorización de bases de datos para MySQL
-  gestionado en Amazon RDS
+description: Instale y configure Database Monitoring para MySQL administrado en Amazon
+  RDS.
 further_reading:
 - link: /integrations/mysql/
   tag: Documentación
@@ -8,56 +8,52 @@ further_reading:
 - link: /database_monitoring/guide/rds_autodiscovery
   tag: Documentación
   text: Autodiscovery para RDS
-title: Configuración de la monitorización de bases de datos para MySQL gestionado
-  por Amazon RDS
+title: Configuración de Database Monitoring para MySQL administrado en Amazon RDS
 ---
+Database Monitoring proporciona una visibilidad profunda de sus bases de datos MySQL al exponer métricas de consultas, muestras de consultas, planes de explicación, datos de conexión, métricas del sistema y telemetría para el motor de almacenamiento InnoDB.
 
-La monitorización de bases de datos proporciona una amplia visibilidad de tus bases de datos MySQL mediante la exposición de métricas de consultas, ejemplos de consultas, planes de explicación, datos de conexión, métricas de sistemas y telemetría para el motor de almacenamiento InnoDB.
+**Nota**: Si utiliza MariaDB, consulte [Configuración de MariaDB][13] en su lugar.
 
-El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de solo lectura. Realiza la siguiente configuración para habilitar la monitorización de bases de datos con tu base de datos MySQL:
+El Agent recopila telemetría directamente de la base de datos iniciando sesión como un usuario de solo lectura. Realice la siguiente configuración para habilitar Database Monitoring con su base de datos MySQL:
 
-1. [Configura la integración AWS](#configure-the-aws-integration).
-1. [Configura parámetros de bases de datos](#configure-mysql-settings).
-1. [Concede al Agent acceso a la base de datos](#grant-the-agent-access).
-1. [Instala y configura el Agent](#install-and-configure-the-agent).
-1. [Instala la integración RDS](#install-the-rds-integration).
+1. [Configure la integración de AWS](#configure-the-aws-integration)
+1. [Configure los parámetros de la base de datos](#configure-mysql-settings)
+1. [Otorgue al Agent acceso a la base de datos](#grant-the-agent-access)
+1. [Instale y configure el Agent](#install-and-configure-the-agent)
+1. [Instale la integración de RDS](#install-the-rds-integration)
 
-## Antes de empezar
+## Antes de comenzar {#before-you-begin}
 
 Versiones de MySQL compatibles
-: 5.6, 5.7, o 8.0+
+: 5.6, 5.7 o 8.0+
 
-Versiones de MariaDB compatibles
-: v10.5, v10.6 o v10.11 <br/><br/>
-La monitorización de bases de datos para MariaDB es compatible con [limitaciones conocidas][11].
-
-Versiones del Agent compatibles
-: 7.36.1 o posteriores
+Versiones de Agent compatibles
+: 7.36.1+
 
 Impacto en el rendimiento
-: El valor predeterminado de configuración del Agent para la monitorización de bases de datos es conservador, pero puedes ajustar parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas para que se adapten mejor a tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de consultas en la base de datos y menos del uno por ciento de la CPU. <br/><br/>
-La monitorización de bases de datos se ejecuta como integración junto con el Agent de base ([consulta los valores de referencia][1]).
+: La configuración predeterminada del Agent para Database Monitoring es conservadora, pero puede ajustar configuraciones como el intervalo de recopilación y la tasa de muestreo de consultas para que se adapten mejor a sus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de consultas en la base de datos y menos del uno por ciento de la CPU. <br/><br/>
+Database Monitoring se ejecuta como una integración sobre el Agent base ([consulte los puntos de referencia][1]).
 
-Proxies, equilibradores de carga y agrupadores de conexiones
-: El Datadog Agent debe conectarse directamente al host que está siendo monitorizado, preferiblemente a través del endpoint de la instancia. El Agent no debe conectarse a la base de datos a través de un proxy, equilibrador de carga o agrupador de conexiones. Si el Agent se conecta a diferentes hosts mientras se está ejecutando (como en el caso de la conmutación por error, el equilibrio de carga, etc.), el Agent calcula la diferencia en las estadísticas entre dos hosts, produciendo métricas inexactas.
+Proxies, balanceadores de carga y agrupadores de conexiones
+: El Datadog Agent debe conectarse directamente al servidor que se está monitoreando, preferiblemente a través del punto de conexión de la instancia. El Agent no debe conectarse a la base de datos a través de un proxy, balanceador de carga o agrupador de conexiones. Si el Agent se conecta a diferentes servidores mientras se ejecuta (como en el caso de conmutación por error, equilibrio de carga, etc.), el Agent calcula la diferencia en las estadísticas entre dos servidores, lo que produce métricas inexactas.
 
-Consideraciones sobre la seguridad de los datos
-: Para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar su seguridad, consulta [Información confidencial][2].
+Consideraciones de seguridad de los datos
+: Consulte [Información confidencial][2] para obtener información sobre qué datos recopila el Agent de sus bases de datos y cómo garantizar que estén seguros.
 
-## Configuración de la integración AWS
+## Configure la integración de AWS {#configure-the-aws-integration}
 
-Habilita la **Recopilación estándar** en la sección **Resource Collection** (Recopilación de recursos) de tu [cuadro de integración de Amazon Web Services][10].
+Habilite {{< ui >}}Standard Collection{{< /ui >}} en la sección {{< ui >}}Resource Collection{{< /ui >}} de su [Amazon Web Services integration tile][10].
 
-## Configurar los parámetros de MySQL
+## Configure los ajustes de MySQL {#configure-mysql-settings}
 
-Configura lo siguiente en el [grupo de parámetros de base de datos][3] y luego **reinicia el servidor** para que los ajustes surtan efecto:
+Configure lo siguiente en el [grupo de parámetros de base de datos][3] y luego **reinicie el servidor** para que los ajustes surtan efecto:
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 5.7" %}}
-| Parámetro | Valor | Descripción
+| Parámetro | Valor | Descripción |
 | --- | --- | --- |
-| `performance_schema` | `1` | Obligatorio. Habilita el [esquema de rendimiento][1]. |
-| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Aumenta el tamaño del texto del resumen SQL en las tablas de `events_statements_*`. Si se deja en el valor por defecto, no se recopilarán las consultas de más de `1024` caracteres. |
+| `performance_schema` | `1` | Obligatorio. Habilita el [Performance Schema][1]. |
+| `max_digest_length` | `4096` | Requerido para la recopilación de consultas más grandes. Aumenta el tamaño del texto de resumen SQL en las tablas `events_statements_*`. Si se deja en el valor predeterminado, las consultas de más de `1024` caracteres no se recopilarán. |
 | `performance_schema_max_digest_length` | `4096` | Debe coincidir con `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Debe coincidir con `max_digest_length`. |
 
@@ -66,8 +62,8 @@ Configura lo siguiente en el [grupo de parámetros de base de datos][3] y luego 
 {{% tab "MySQL 5.6" %}}
 | Parámetro | Valor | Descripción |
 | --- | --- | --- |
-| `performance_schema` | `1` | Obligatorio. Habilita el [esquema de rendimiento][1]. |
-| `max_digest_length` | `4096` | Obligatorio para la recopilación de grandes consultas. Aumenta el tamaño del texto de compendio SQL en tablas `events_statements_*`.  Si se deja en el valor por defecto, no se recopilarán las consultas de más de `1024` caracteres. |
+| `performance_schema` | `1` | Obligatorio. Habilita el [Performance Schema][1]. |
+| `max_digest_length` | `4096` | Requerido para la recopilación de consultas más grandes. Aumenta el tamaño del texto de resumen SQL en las tablas `events_statements_*`. Si se deja en el valor predeterminado, las consultas de más de `1024` caracteres no se recopilarán. |
 | `performance_schema_max_digest_length` | `4096` | Debe coincidir con `max_digest_length`. |
 
 
@@ -75,16 +71,16 @@ Configura lo siguiente en el [grupo de parámetros de base de datos][3] y luego 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Conceder acceso al Agent
+## Otorgue al Agent acceso {#grant-the-agent-access}
 
-El Datadog Agent requiere acceso de solo lectura a la base de datos para poder recopilar estadísticas y realizar consultas.
+El Datadog Agent requiere acceso de solo lectura a la base de datos para recopilar estadísticas y consultas.
 
-Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host que utilice `datadog@'%'`. Puedes restringir al usuario `datadog` para que solo pueda iniciar sesión desde el host local utilizando `datadog@'localhost'`. Para obtener más información, consulta la [documentación de MySQL][4].
+Las siguientes instrucciones otorgan al Agent permiso para iniciar sesión desde cualquier host usando `datadog@'%'`. Puede restringir al usuario `datadog` para que solo se le permita iniciar sesión desde localhost usando `datadog@'localhost'`. Consulte la [documentación de MySQL][4] para obtener más información.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 5.7" %}}
 
-Crea el usuario `datadog` y concédele permisos básicos:
+Cree el usuario `datadog` y otorgue permisos básicos:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
@@ -97,7 +93,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{% tab "MySQL 5.6" %}}
 
-Crea el usuario `datadog` y concédele permisos básicos:
+Cree el usuario `datadog` y otorgue permisos básicos:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -109,14 +105,14 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{< /tabs >}}
 
-Crea el siguiente esquema:
+Cree el siguiente esquema:
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
 ```
 
-Crea el procedimiento `explain_statement` para que el Agent pueda recopilar planes de explicación:
+Cree el procedimiento `explain_statement` para permitir que el Agent recopile planes de ejecución:
 
 ```sql
 DELIMITER $$
@@ -131,7 +127,7 @@ END $$
 DELIMITER ;
 ```
 
-Además, crea este procedimiento **en cada esquema** del que quieras recopilar planes de explicación. Sustituye `<YOUR_SCHEMA>` por el esquema de tu base de datos:
+Además, cree este procedimiento **en cada esquema** del cual desee recopilar planes de ejecución. Reemplace `<YOUR_SCHEMA>` con su esquema de base de datos:
 
 ```sql
 DELIMITER $$
@@ -147,16 +143,16 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-Para recopilar métricas de índices, concede al usuario `datadog` un privilegio adicional:
+Para recopilar métricas de índice, otorgue al usuario `datadog` un privilegio adicional:
 
 ```sql
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
 ```
 
-A partir del Agent v7.65, el Datadog Agent puede recopilar información de esquemas de bases de datos MySQL. Consulta la sección [Recopilación de esquemas][12] a continuación para obtener más información sobre cómo conceder al Agent permisos para esta recopilación.
+A partir del Agent v7.65, el Datadog Agent puede recopilar información de esquema de bases de datos MySQL. Consulte la sección [Collecting schemas][12] a continuación para obtener más información sobre cómo otorgar al Agent los permisos para esta recopilación.
 
-### Consumidores de configuración en tiempo de ejecución
-Con RDS, los consumidores de esquemas de rendimiento no pueden habilitarse permanentemente en una configuración. Crea el siguiente procedimiento para dar al Agent la capacidad de habilitar consumidores de `performance_schema.events_*` en tiempo de ejecución.
+### Consumidores de configuración en tiempo de ejecución {#runtime-setup-consumers}
+Con RDS, los consumidores de performance schema no se pueden habilitar de forma permanente en una configuración. Cree el siguiente procedimiento para darle al Agent la capacidad de habilitar consumidores `performance_schema.events_*` en tiempo de ejecución.
 
 ```SQL
 DELIMITER $$
@@ -170,25 +166,24 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Guardar tu contraseña de forma segura
+### Almacene su contraseña de forma segura {#securely-store-your-password}
 {{% dbm-secret %}}
 
-## Instala y configura el Agent
+## Instale y configure el Agent {#install-and-configure-the-agent}
 
-Para monitorizar hosts de RDS, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, solo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][5].
+Para hacer un seguimiento de los servidores RDS, instale el Datadog Agent en su infraestructura y configúrelo para conectarse a cada punto de conexión de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, solo necesita conectarse a ella. Para obtener métodos de instalación del Agent adicionales no mencionados aquí, consulte las [instrucciones de instalación del Agent][5].
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "Servidor" %}}
 
-Para configurar este check para un Agent que se ejecuta en un host, por ejemplo, cuando se aprovisiona una pequeña instancia EC2 para que el Agent recopile de la base de datos de RDS:
+Para configurar esta comprobación para un Agent que se ejecuta en un servidor, por ejemplo, cuando usted aprovisiona una instancia EC2 pequeña para que el Agent recopile datos de una base de datos RDS:
 
-Edita el archivo `mysql.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1], para empezar a recopilar tus métricas de MySQL. Para conocer todas las opciones de configuración disponibles, consulta el [mysql.d/conf.yaml de ejemplo][2].
+Edite el archivo `mysql.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de su [directorio de configuración del Agent][1] para comenzar a recopilar sus métricas de MySQL. Consulte el [sample mysql.d/conf.yaml][2] para ver todas las opciones de configuración disponibles, incluidas las de métricas personalizadas.
 
-Añade este bloque de configuración a tu `mysql.d/conf.yaml` para recopilar métricas de MySQL:
+Agregue este bloque de configuración a su `mysql.d/conf.yaml` para recopilar métricas de MySQL:
 
 ```yaml
 init_config:
-
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
@@ -202,22 +197,43 @@ instances:
       region: <AWS_REGION>
 ```
 
-[Reinicia el Agent][3] para empezar a enviar métricas de MySQL a Datadog.
+Si desea autenticarse con IAM, especifique los parámetros `region` y `instance_endpoint`, y establezca `managed_authentication.enabled` en `true`.
+
+**Nota**: solo habilite `managed_authentication` si desea utilizar la autenticación IAM. La autenticación IAM tiene prioridad sobre el campo `password`.
+
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: '<AWS_INSTANCE_ENDPOINT>'
+    port: <PORT>
+    username: datadog
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+      region: <AWS_REGION>
+      managed_authentication:
+        enabled: true
+```
+
+Para obtener información sobre cómo configurar la autenticación IAM en su instancia de RDS, consulte [Conexión con autenticación administrada][3].
+
+[Reinicie el Agent][4] para comenzar a enviar métricas de MySQL a Datadog.
 
 
 [1]: /es/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /es/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /es/database_monitoring/guide/managed_authentication/?tab=mysql#configure-iam-authentication
+[4]: /es/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Para configurar el Agent de monitorización de bases de datos que se ejecuta en un contenedor Docker, como en ECS o en Fargate, puedes definir las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en tu contenedor del Agent.
+Para configurar el Database Monitoring Agent que se ejecuta en un contenedor Docker, como en ECS o Fargate, puede establecer las [Autodiscovery Integration Templates][1] como etiquetas de Docker en su contenedor del Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que funcione Autodiscovery de etiquetas.
 
-### Línea de comandos
+### Línea de comandos {#command-line}
 
-Ponte en marcha rápidamente con el siguiente comando para ejecutar el Agent desde tu línea de comandos. Sustituye los valores para que coincidan con tu cuenta y tu entorno:
+Comience a trabajar rápidamente ejecutando el siguiente comando para ejecutar el Agent desde su línea de comandos. Reemplace los valores para que coincidan con su cuenta y entorno:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -238,15 +254,15 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "region": "<AWS_REGION>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
-### Archivo de Docker
+### Dockerfile {#dockerfile}
 
-Las etiquetas también pueden especificarse en un `Dockerfile`, por lo que puedes crear y desplegar un Agent personalizado sin cambiar la configuración de tu infraestructura:
+Las etiquetas también se pueden especificar en un `Dockerfile`, por lo que puede compilar e implementar un Agent personalizado sin cambiar ninguna configuración de infraestructura:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
@@ -257,13 +273,13 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Si tienes un clúster Kubernetes, utiliza el [Datadog Cluster Agent][1] para la monitorización de bases de datos.
+Si tiene un clúster de Kubernetes, utilice el [Datadog Cluster Agent][1] para Database Monitoring.
 
-Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
+Siga las instrucciones para [habilitar las verificaciones de clúster][2] si aún no están habilitadas en su clúster de Kubernetes. Puede declarar la configuración de MySQL con archivos estáticos montados en el contenedor del Cluster Agent o utilizando anotaciones de servicio:
 
-### Operator
+### Datadog Operator {#operator}
 
-Utilizando como referencia las [Instrucciones para operadores en Kubernetes e integraciones][3], sigue los pasos que se indican a continuación para configurar la integración de MySQL:
+Utilizando las [instrucciones de Datadog Operator en Kubernetes e Integrations][3] como referencia, siga los pasos a continuación para configurar la integración de MySQL:
 
 1. Cree o actualice el archivo `datadog-agent.yaml` con la siguiente configuración:
 
@@ -308,16 +324,16 @@ Utilizando como referencia las [Instrucciones para operadores en Kubernetes e in
                     region: <AWS_REGION>
     ```
 
-2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
+2. Aplique los cambios al Datadog Operator utilizando el siguiente comando:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-### Helm
+### Helm {#helm}
 
 1. Complete las [instrucciones de instalación del Datadog Agent][4] para Helm.
-2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
+2. Actualice su archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
     ```yaml
     clusterAgent:
       confd:
@@ -338,19 +354,19 @@ Utilizando como referencia las [Instrucciones para operadores en Kubernetes e in
       enabled: true
     ```
 
-3. Despliega el Agent con el archivo de configuración anterior desde la línea de comandos:
+3. Implemente el Agent con el archivo de configuración anterior desde la línea de comandos:
 
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
 
 <div class="alert alert-info">
-For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+Para Windows, añada <code>--set targetSystem=windows</code> al <code>helm install</code> comando.
 </div>
 
-### Configuración con archivos integrados
+### Configure con archivos montados {#configure-with-mounted-files}
 
-Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/mysql.yaml`:
+Para configurar una verificación de clúster con un archivo de configuración montado, monte el archivo de configuración en el contenedor del Cluster Agent en la ruta `/conf.d/mysql.yaml`:
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -366,9 +382,9 @@ instances:
       region: <AWS_REGION>
 ```
 
-### Configuración con anotaciones de servicios de Kubernetes
+### Configure con anotaciones de servicio de Kubernetes {#configure-with-kubernetes-service-annotations}
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio utilizando la siguiente sintaxis:
+En lugar de montar un archivo, puede declarar la configuración de la instancia como un servicio de Kubernetes. Para configurar esta verificación para un Agent que se ejecuta en Kubernetes, cree un servicio utilizando la siguiente sintaxis:
 
 
 ```yaml
@@ -404,9 +420,9 @@ spec:
     name: mysql
 ```
 
-El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de SQL Server.
+El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar la verificación de MySQL.
 
-Para evitar exponer la contraseña del usuario de `datadog` en texto plano, utilice el [paquete de gestión de secretos][6] de Agent y declare la contraseña utilizando la sintaxis de `ENC[]`.
+Para evitar exponer la contraseña del usuario `datadog` en texto plano, utilice el [paquete de gestión de secretos][6] del Agent y declare la contraseña utilizando la sintaxis `ENC[]`.
 
 [1]: /es/containers/cluster_agent/setup/
 [2]: /es/containers/cluster_agent/clusterchecks/
@@ -418,22 +434,22 @@ Para evitar exponer la contraseña del usuario de `datadog` en texto plano, util
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validación
+### Validar {#validate}
 
-[Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][7] para empezar.
+[Ejecute el subcomando de estado del Agent][6] y busque `mysql` en la sección de verificaciones, o consulte la página [Bases de datos][7] para comenzar.
 
-## Configuraciones del Agent de ejemplo
+## Ejemplos de configuraciones de Agent {#example-agent-configurations}
 {{% dbm-mysql-agent-config-examples %}}
 
-## Instalar la integración de RDS
+## Instale la integración de RDS {#install-the-rds-integration}
 
-Para ver métricas de infraestructura de AWS, como la CPU, junto con la telemetría de la base de datos en DBM, instala la [integración RDS][8] (opcional).
+Para ver las métricas de infraestructura de AWS, como la CPU, junto con la telemetría de la base de datos en DBM, instale la [integración de RDS][8] (opcional).
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-Si has instalado y configurado las integraciones y el Agent como se describe, pero no funcionan como esperabas, consulta [Solucionar problemas][9].
+Si ha instalado y configurado las integraciones y el Agent como se describe y no funciona como se espera, consulte [Troubleshooting][9].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -447,5 +463,5 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [8]: /es/integrations/amazon_rds
 [9]: /es/database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
-[11]: /es/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
 [12]: /es/database_monitoring/setup_mysql/rds?tab=mysql57#collecting-schemas
+[13]: /es/database_monitoring/setup_mariadb/

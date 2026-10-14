@@ -189,7 +189,7 @@ To create an experiment:
    - **Function-based**: Define a function that receives `input_data`, `output_data`, and `expected_output` as separate arguments. Best for one-off evaluators with straightforward logic.
    - **Class-based**: Subclass `BaseEvaluator` for reusable evaluators with custom configuration. Class-based evaluators receive an `EvaluatorContext` object with full span context.
 
-   For detailed information on building evaluators, including the full data model reference and best practices, see the [Evaluation Developer Guide][4].
+   For detailed information on building evaluators, including the full data model reference and best practices, see the [Evaluator Developer Guide][4].
 
    Datadog supports the following evaluator return types:
    - **Boolean**: returns true or false
@@ -199,7 +199,7 @@ To create an experiment:
 
    You can also return:
    - An `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
-   - A `MultiEvaluatorResult` to emit multiple named metrics from a single evaluator call. For details and examples, see the [Evaluation Developer Guide][4].
+   - A `MultiEvaluatorResult` to emit multiple named metrics from a single evaluator call. For details and examples, see the [Evaluator Developer Guide][4].
 
    #### Function-based evaluators
 
@@ -262,7 +262,7 @@ To create an experiment:
 
    Summary evaluators run after all record-level evaluators have finished, and receive the aggregated results to compute dataset-level statistics like averages or pass rates. Like record-level evaluators, you can define summary evaluators as functions or classes.
 
-   For the class-based approach using `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][4].
+   For the class-based approach using `BaseSummaryEvaluator`, see the [Evaluator Developer Guide][4].
 
    #### Function-based summary evaluators
 

@@ -7,7 +7,7 @@ further_reading:
   tag: ブログ
   text: Kubernetes オペレーターを監視して、アプリケーションがスムーズに動作するようにします。
 - link: https://learn.datadoghq.com/courses/getting-started-k8s
-  tag: 学習センター
+  tag: ラーニングセンター
   text: Kubernetes Observability の開始
 title: Kubernetes エクスプローラー
 ---
@@ -166,7 +166,7 @@ config:
   exporters:
     otlp_http:
       endpoint: https://otlp.${env:DD_SITE}
-      logs_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlplogs
+      logs_endpoint: https://otlp.${env:DD_SITE}/v1/logs
       headers:
         dd-api-key: ${env:DD_API_KEY}
       compression: zstd
