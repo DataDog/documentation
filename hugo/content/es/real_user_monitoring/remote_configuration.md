@@ -106,6 +106,10 @@ La Remote Configuration no anula ninguna configuración del SDK de forma predete
 2. Configure el ajuste seleccionando un estado, cambiando su tasa de muestreo o agregando datos.
 3. Guarde sus cambios.
 
+## Visualizar cambios en Audit Trail {#view-changes-in-audit-trail}
+
+Los cambios en las configuraciones remotas de RUM aparecen en [Datadog Audit Trail][3], donde puede revisar quién realizó cada cambio y cuándo.
+
 ## Configuraciones configurables {#configurable-settings}
 
 {{< tabs >}}
@@ -242,3 +246,4 @@ La Remote Configuration no anula ninguna configuración del SDK de forma predete
 
 [1]: /es/account_management/rbac/permissions/#real-user-monitoring
 [2]: /es/remote_configuration/
+[3]: /es/account_management/audit_trail/

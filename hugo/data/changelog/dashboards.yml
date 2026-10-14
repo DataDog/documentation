@@ -6,3 +6,11 @@ entries:
       - GetDashboardUsage
       - ListDashboardsUsage
     title: Document dashboard quality scores in usage APIs
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40562
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Heatgrid dashboard widget support

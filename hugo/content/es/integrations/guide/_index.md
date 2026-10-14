@@ -85,7 +85,6 @@ title: Guías de integración
 {{< header-list header="Guías de ServiceNow" >}}
    {{< nextlink href="integrations/guide/servicenow-itom-itsm-setup" >}}Configure ServiceNow ITOM e ITSM{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-cmdb-enrichment-setup" >}}Configurar el enriquecimiento de CMDB de ServiceNow{{< /nextlink >}}
-   {{< nextlink href="integrations/guide/servicenow-service-graph-connector-setup" >}}Configurar el conector Service Graph de ServiceNow{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="Guías de bases de datos" >}}

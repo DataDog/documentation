@@ -1,0 +1,13 @@
+entries:
+  - change_type: modified
+    date: '2026-10-13'
+    link: https://github.com/DataDog/documentation/pull/40650
+    operations:
+      - ArchiveFeatureFlag
+      - CreateFeatureFlag
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlag
+      - ListFeatureFlags
+      - UnarchiveFeatureFlag
+      - UpdateFeatureFlag
+    title: Add Feature Flag list filters and pagination details
