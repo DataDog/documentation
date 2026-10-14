@@ -7,7 +7,7 @@ further_reading:
   text: "Set up GPU Monitoring"
 - link: "/gpu_monitoring/explorer"
   tag: "Documentation"
-  text: "Explore your GPU fleet with the Explorer page"
+  text: "Analyze your GPU fleet with GPU Monitoring Explorer"
 - link: "/gpu_monitoring"
   tag: "Documentation"
   text: "Learn more about what GPU Monitoring offers"
