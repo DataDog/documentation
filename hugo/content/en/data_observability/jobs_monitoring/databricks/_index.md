@@ -133,7 +133,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
-   1. Grant the token's principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands, replacing `<PRINCIPAL>` with the application/client ID if the token belongs to a service principal, or the user principal name (typically an email address) if the token belongs to a Databricks user:
+   1. Grant the token's principal read access to the Unity Catalog [system tables][20]. Replace `<PRINCIPAL>` with the application (client) ID if the token belongs to a service principal, or with the user principal name (typically an email address) if the token belongs to a Databricks user. Then, in the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands:
 
       ```sql
       GRANT USE CATALOG ON CATALOG system TO `<PRINCIPAL>`;
@@ -494,10 +494,10 @@ Choose one of the following approaches for the user or service principal:
 
 #### System table permissions
 
-The regular setup instructions grant `SELECT` on `CATALOG system`. As a more granular alternative for users who do not want catalog-level `SELECT`, grant the user or service principal access only to the following resources that Datadog requires:
+The [Setup](#setup) instructions grant `SELECT` on `CATALOG system`. If you do not want to grant catalog-level `SELECT`, use the following granular alternative, which grants the user or service principal access only to the resources that Datadog requires:
 
 - `CAN USE` permission on the SQL warehouse provided during setup.
-- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, replacing `<PRINCIPAL>` with the application/client ID for a service principal, or the user principal name (typically an email address) for a Databricks user:
+- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. Replace `<PRINCIPAL>` with the application (client) ID for a service principal, or with the user principal name (typically an email address) for a Databricks user. Then, in Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands:
 
   ```sql
   GRANT USE CATALOG ON CATALOG system TO `<PRINCIPAL>`;
@@ -509,7 +509,7 @@ The regular setup instructions grant `SELECT` on `CATALOG system`. As a more gra
   GRANT SELECT ON TABLE system.billing.account_prices TO `<PRINCIPAL>`;
   ```
 
-  The user granting these must have `MANAGE` privilege on `CATALOG system`.
+  The user running these commands must have the `MANAGE` privilege on `CATALOG system`.
 
 #### Query text access
 
@@ -527,7 +527,7 @@ Add the service principal to `databricks_pii_access` to use the following capabi
 
 Databricks cost data, job monitoring on all-purpose and job clusters, and table-level [Quality Monitoring][35] metrics do not depend on query text and are unaffected.
 
-Group membership controls whether SQL query text is masked; it does not replace the system table permissions required by the integration. Follow either the catalog-wide grants in the regular setup instructions or the granular grants in [System table permissions](#system-table-permissions).
+Group membership controls whether SQL query text is masked. It does not replace the system table permissions that the integration requires. Use either the catalog-wide grants in the [Setup](#setup) section or the granular grants in the [System table permissions](#system-table-permissions) section.
 
 To create the group and add the service principal:
 
