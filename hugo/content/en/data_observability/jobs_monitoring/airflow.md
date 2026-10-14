@@ -388,7 +388,7 @@ In Airflow 2.x, manually marking a DAG run or task as failed does not update its
 Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
 
 **Airflow 2.11 or later, including Airflow 3**
-: **Recommended provider version**: `2.18.0`
+: **Recommended provider version**: `2.20.3`
 : **Required dependency minimums**:
 : - `apache-airflow-providers-common-sql>=1.32.0`
 : - `apache-airflow-providers-common-compat>=1.15.0`
