@@ -511,7 +511,7 @@ Add the service principal to `databricks_pii_access` to use the following capabi
 
 Databricks cost data, job monitoring on all-purpose and job clusters, and table-level [Quality Monitoring][35] metrics do not depend on query text and are unaffected.
 
-Group membership is required in addition to the [system table grants](#cost-data-permissions). A principal that is in the group but lacks `SELECT` on `CATALOG system` still cannot read query history.
+Group membership is required in addition to the [scoped system table grants](#cost-data-permissions).
 
 To create the group and add the service principal:
 
