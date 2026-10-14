@@ -1,10 +1,6 @@
 ---
 title: Active Directory
 description: Learn more about the Active Directory pack.
-further_reading:
-- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
-  tag: "Blog"
-  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -18,7 +14,3 @@ What this pack does:
 - Parses Kerberos events
 - Flags DCSync replication
 - Drops routine renewals
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

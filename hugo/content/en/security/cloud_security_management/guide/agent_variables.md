@@ -2,10 +2,6 @@
 title: Cloud Security Agent Variables
 aliases:
   - /security/cloud_security_management/setup/agent_variables
-further_reading:
-- link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
-  tag: "Blog"
-  text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 ---
 
 The Datadog Agent has several environment variables that can be enabled for Cloud Security. This article describes the purpose of each environment variable.
@@ -56,7 +52,3 @@ The Datadog Agent has several environment variables that can be enabled for Clou
         <td>Allows allowlisting of specific containers in SBOM collection.</td>
     </tr>
 </table>
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

@@ -17,9 +17,6 @@ further_reading:
   - link: "/monitors/status/"
     tag: "Documentation"
     text: "Consult your monitor status"
-  - link: "https://www.datadoghq.com/blog/how-to-monitor-databricks-with-datadog/"
-    tag: "Blog"
-    text: "Monitor Databricks with Datadog"
 ---
 
 ## Overview

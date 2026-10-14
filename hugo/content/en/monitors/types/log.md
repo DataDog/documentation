@@ -17,15 +17,12 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "https://learn.datadoghq.com/courses/log-investigations"
-  tag: "Learning Center"
-  text: "Track Logs for Alerting and Investigations"
 - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
   tag: "Blog"
   text: "Use CIDR notation queries to filter your network traffic logs"
-- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
-  tag: "Blog"
-  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
+- link: "https://learn.datadoghq.com/courses/log-investigations"
+  tag: "Learning Center"
+  text: "Track Logs for Alerting and Investigations"
 
 ---
 

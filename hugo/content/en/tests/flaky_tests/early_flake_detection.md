@@ -14,9 +14,6 @@ further_reading:
   - link: "/pr_gates"
     tag: "Documentation"
     text: "Learn about PR Gates"
-  - link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
-    tag: "Blog"
-    text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
 ---
 
 ## Overview

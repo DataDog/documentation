@@ -5,18 +5,15 @@ further_reading:
     - link: "agent/"
       tag: "Documentation"
       text: "The Datadog Agent"
-    - link: '/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/'
-      tag: 'FAQ'
-      text: 'Why should I install the Datadog Agent on my cloud instances?'
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to power up your Infrastructure monitoring'
+    - link: '/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/'
+      tag: 'FAQ'
+      text: 'Why should I install the Datadog Agent on my cloud instances?'
     - link: https://www.datadoghq.com/blog/lambda-managed-instances
       tag: Blog
       text: Monitor AWS Lambda Managed Instances with Datadog
-    - link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
-      tag: "Blog"
-      text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 ---
 
 ## Overview

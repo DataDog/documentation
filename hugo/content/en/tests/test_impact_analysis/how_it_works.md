@@ -3,21 +3,18 @@ title: How Test Impact Analysis Works in Datadog
 aliases:
   - /intelligent_test_runner/how_it_works
 further_reading:
-  - link: "/intelligent_test_runner"
-    tag: "Documentation"
-    text: "Learn about Test Impact Analysis"
-  - link: "/tests"
-    tag: "Documentation"
-    text: "Learn about Test Optimization"
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
     text: "Streamline CI testing with Datadog Intelligent Test Runner"
   - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
-  - link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
-    tag: "Blog"
-    text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
+  - link: "/intelligent_test_runner"
+    tag: "Documentation"
+    text: "Learn about Test Impact Analysis"
+  - link: "/tests"
+    tag: "Documentation"
+    text: "Learn about Test Optimization"
 ---
 
 ## Overview
