@@ -14,9 +14,6 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
   tag: "Knowledge Center"
   text: "Flaky Tests Overview"
-- link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
-  tag: "Blog"
-  text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
 ---
 
 ## Overview

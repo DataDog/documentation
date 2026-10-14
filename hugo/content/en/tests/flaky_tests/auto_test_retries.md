@@ -11,9 +11,6 @@ further_reading:
   - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
-  - link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
-    tag: "Blog"
-    text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
 ---
 
 ## Overview

@@ -28,9 +28,6 @@ further_reading:
     - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
       tag: Blog
       text: Accelerate investigations with AI-powered log parsing
-    - link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
-      tag: "Blog"
-      text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 
 ---
 

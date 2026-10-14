@@ -54,9 +54,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-oci"
     tag: "Blog"
     text: "Protect your OCI resources with Datadog Cloud Security"
-  - link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
-    tag: "Blog"
-    text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
