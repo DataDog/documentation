@@ -42,7 +42,7 @@ Setup uses the vLLM integration, which collects engine metrics.
 ### Prerequisites
 
 To begin monitoring your inference workloads, you must meet the following criteria:
-- You have [GPU Monitoring enabled][1] and access to the inference Agent image, which Datadog provides when you join the Preview.
+- You have [GPU Monitoring enabled][1] with the inference Agent image (`7.85.0-rc.5`).
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM.
 
@@ -151,7 +151,7 @@ Setup uses two integrations. The Dynamo integration collects frontend and worker
 ### Prerequisites
 
 To begin monitoring your inference workloads, you must meet the following criteria:
-- You have [GPU Monitoring enabled][1] and access to the inference Agent image, which Datadog provides when you join the Preview.
+- You have [GPU Monitoring enabled][1] with the inference Agent image (`7.85.0-rc.5`).
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM workers in an NVIDIA Dynamo deployment.
 
