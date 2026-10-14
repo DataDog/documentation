@@ -320,7 +320,7 @@ The graphs at the top of the page show the latency and throughput of your model 
 
 A spike in time to first token or inter-token latency for one deployment, without a matching change in the others, points to an issue with that deployment rather than with shared infrastructure.
 
-### Model deployments
+### Review model deployment health
 
 The table at the bottom of the page lists each model deployment with its inference engine, environment, and Kubernetes namespace, along with the following columns:
 
