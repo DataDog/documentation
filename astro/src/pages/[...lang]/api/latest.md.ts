@@ -16,8 +16,6 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
-import { SDK_VERSIONS } from "@lib/site/sdkVersions";
 import { buildPlaintextPage, heading, parse } from "@lib/plaintext/helpers";
 
 function apiLandingBody(
@@ -33,9 +31,7 @@ function apiLandingBody(
 }
 
 function overviewContentNodes(rootEntry: CollectionEntry<"en">): MarkdocNode[] {
-  const nodes = parse(rootEntry.body ?? "").children;
-  resolveFenceVariables(nodes, { sdkVersions: SDK_VERSIONS });
-  return nodes;
+  return parse(rootEntry.body ?? "").children;
 }
 
 export const getStaticPaths: GetStaticPaths = () => {

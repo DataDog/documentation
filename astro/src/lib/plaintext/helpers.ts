@@ -13,6 +13,8 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { stringify as stringifyYaml } from "yaml";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
 import { absoluteUrl } from "@lib/site/siteUrl";
+import { SDK_VERSIONS } from "@lib/site/sdkVersions";
+import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
 
 // @markdoc/markdoc ships a CJS build whose named exports don't round-trip
 // cleanly under Node's ESM loader during Astro's SSG step. Pulling from the
@@ -130,11 +132,16 @@ export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
  * Serialize a list of block-level nodes as a Markdoc string. Wraps them in a
  * document node (with optional raw YAML `frontmatter`), calls Markdoc's
  * `format()`, and ensures a trailing newline.
+ *
+ * Resolves `{% $sdkVersions.<client> %}` inside code fences first (in place),
+ * as the HTML pages do. Every API `.md` route and the twin pipeline end here,
+ * so no route has to remember to do it.
  */
 export function buildMarkdocStr(
   children: MarkdocNode[],
   frontmatter?: string,
 ): string {
+  resolveFenceVariables(children, { sdkVersions: SDK_VERSIONS });
   return format(documentNode(children, frontmatter)).trim() + "\n";
 }
 

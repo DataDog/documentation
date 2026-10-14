@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { renderCdocPlaintext } from "./renderCdocPlaintext";
+import { FIXTURE_SDK_VERSIONS } from "../../../../tests/fixtures/api/sdkVersions";
 
 // The cdocs plaintext renderer: parse the `.mdoc` body, evaluate `if`/`else`
 // against the resolved filter variables (dropping non-matching branches, the
@@ -219,5 +220,24 @@ describe("renderCdocPlaintext", () => {
     const out = render("Body text", {}, { title: "My Doc" });
     expect(out.startsWith("# My Doc\n")).toBe(true);
     expect(out).toContain("Body text");
+  });
+});
+
+describe("renderCdocPlaintext fence variables", () => {
+  it("resolves SDK versions and filter variables inside code fences", () => {
+    // The HTML page resolves both (global variables plus the filter values),
+    // so the .md twin must too, or it prints the variable syntax literally.
+    const body = [
+      "```text",
+      "{% $prog_lang %} uses {% $sdkVersions.datadog-api-client-java %}",
+      "```",
+    ].join("\n");
+
+    const out = render(body, { prog_lang: "java" });
+
+    expect(out).toContain(
+      `java uses ${FIXTURE_SDK_VERSIONS["datadog-api-client-java"]}`,
+    );
+    expect(out).not.toContain("{% $");
   });
 });

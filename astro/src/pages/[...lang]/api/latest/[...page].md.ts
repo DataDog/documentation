@@ -6,8 +6,6 @@ import { getCollection, getEntry } from "astro:content";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { buildPlaintextPage, parse } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
-import { SDK_VERSIONS } from "@lib/site/sdkVersions";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
 
@@ -43,12 +41,10 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     return new Response(null, { status: 404 });
   }
 
-  const contentNodes = parse(entry.body ?? "").children;
-  resolveFenceVariables(contentNodes, { sdkVersions: SDK_VERSIONS });
   const body = buildPlaintextPage(
     [
       ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
-      ...contentNodes,
+      ...parse(entry.body ?? "").children,
     ],
     {
       title: entry.data.title,

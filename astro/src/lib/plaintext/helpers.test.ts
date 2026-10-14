@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { parse as parseYaml } from "yaml";
-import { buildPlaintextPage, heading, paragraphFromText } from "./helpers";
+import { FIXTURE_SDK_VERSIONS } from "../../../tests/fixtures/api/sdkVersions";
+import {
+  buildMarkdocStr,
+  buildPlaintextPage,
+  heading,
+  paragraphFromText,
+  parse,
+} from "./helpers";
 
 const SITE = "https://docs.datadoghq.com";
 const CRUMBS = [
@@ -102,5 +109,21 @@ describe("buildPlaintextPage", () => {
         undefined,
       ),
     ).toThrow(/`site` must be set/);
+  });
+});
+
+describe("buildMarkdocStr", () => {
+  it("resolves SDK versions in code fences, so no .md route has to", () => {
+    // Every API route and the twin pipeline build their text through here.
+    const nodes = parse(
+      "```xml\n<version>{% $sdkVersions.datadog-api-client-java %}</version>\n```\n",
+    ).children;
+
+    const output = buildMarkdocStr(nodes);
+
+    expect(output).toContain(
+      `<version>${FIXTURE_SDK_VERSIONS["datadog-api-client-java"]}</version>`,
+    );
+    expect(output).not.toContain("$sdkVersions");
   });
 });

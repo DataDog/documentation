@@ -191,6 +191,13 @@ function processNode(
   if (node.type === "comment") {
     return [];
   }
+  // A fence's children are its literal code, so a `<!-- -->`, a link, or an
+  // `{% if %}` in them is part of the example, not something to filter.
+  // Stripping them would also break `resolveFenceVariables`, which rebuilds
+  // the fence text from these children.
+  if (node.type === "fence") {
+    return [node];
+  }
   if (node.type === "tag" && node.tag === "if") {
     return processIf(node, config, resolvePartial, seenPartials);
   }
