@@ -33,7 +33,7 @@ To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in t
 
 ## Break down your fleet by any tag
 
-The Explorer gives you visibility from your AI workloads down to the underlying AI infrastructure. You can switch between workload entities such as pods and training runs, and infrastructure entities such as devices, hosts, and clusters.
+GPU Monitoring Explorer gives you visibility from your AI workloads down to the underlying AI infrastructure. You can switch between workload entities such as pods and training runs, and infrastructure entities such as devices, hosts, and clusters.
 
 {{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Side navigation bar showing AI Infrastructure entities (Devices, Hosts, Kube Clusters, Ray Clusters) and AI Workloads entities (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
 
