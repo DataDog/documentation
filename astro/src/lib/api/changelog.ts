@@ -35,7 +35,7 @@ export const CHANGELOG_PAGE_SIZE = 20;
 
 export type ChangelogBucket = "added" | "modified" | "deprecated" | "breaking";
 
-/** The filter tabs. Deprecated entries appear under `all` only, as in Hugo. */
+/** The filter tabs. Deprecated entries appear under `all` only. */
 export const CHANGELOG_FILTERS = [
   "all",
   "added",
@@ -372,7 +372,7 @@ function resolveProduct(
   };
 }
 
-/** `ai-impact` → `Ai Impact`, matching Hugo's `humanize | title`. */
+/** `ai-impact` → `Ai Impact`. */
 function titleCaseSlug(slug: string): string {
   return slug
     .split("-")

@@ -2,8 +2,7 @@ import { z } from "zod";
 
 /**
  * One file in `hugo/data/changelog/`, written by the API client generator.
- * As lenient as Hugo's template was: only `date` is required. `link` is
- * accepted but never rendered.
+ * Lenient: only `date` is required. `link` is accepted but never rendered.
  */
 export const ChangelogFileSchema = z.object({
   entries: z.array(

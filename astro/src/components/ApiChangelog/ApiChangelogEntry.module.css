@@ -9,9 +9,9 @@
   background: var(--color-bg);
 }
 
-/* As in Hugo, the badge takes its own column on wider screens. Every badge is
-   the same width, so the bodies line up. On phones the badge stacks above the
-   body instead. */
+/* The badge takes its own column on wider screens. Every badge is the same
+   width, so the bodies line up. On phones the badge stacks above the body
+   instead. */
 @media (min-width: 768px) {
   .api-changelog-entry {
     grid-template-columns: var(--badge-width) minmax(0, 1fr);
@@ -32,7 +32,6 @@
   gap: var(--space-xs);
 }
 
-/* Sized and colored as in Hugo. */
 .api-changelog-entry__pill {
   display: inline-flex;
   align-items: center;
