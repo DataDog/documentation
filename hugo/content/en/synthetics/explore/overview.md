@@ -82,7 +82,7 @@ Click the kebab menu (**⋮**) on a test to:
 
 ## Coverage gaps
 
-The {{< ui >}}Close your coverage gaps{{< /ui >}} section shows the endpoints and views that no Synthetic test covers. Datadog ranks them by traffic, which is the number of requests or views over the past week. Start with the items at the top of the list to cover your highest-traffic surfaces first.
+The {{< ui >}}Coverage gaps{{< /ui >}} section shows the endpoints and views that no Synthetic test covers. Datadog ranks them by traffic, which is the number of requests or views over the past week. Start with the items at the top of the list to cover your highest-traffic surfaces first.
 
 Use the toggle in the upper-right corner of the section to switch between {{< ui >}}Endpoints{{< /ui >}} and {{< ui >}}Views{{< /ui >}}. Use the search bar to find a specific service, application, endpoint, or view.
 
