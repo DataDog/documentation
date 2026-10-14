@@ -327,7 +327,7 @@ The table at the bottom of the page lists each model deployment with its inferen
 | Column | Description |
 |--------|-------------|
 | Output Tok/s | Output tokens generated per second. |
-| Requests | Request rate. |
+| Requests | Average concurrent running requests for the selected time frame. |
 | TTFT | Time to first token. |
 | ITL | Inter-token latency. |
 | Error Rate | Percentage of requests that return an error. |
