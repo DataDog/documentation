@@ -347,26 +347,26 @@ Auto-Processing only handles logs that do not match the filter of any existing i
 
 ### How it works
 
-Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Automatic updates add support for new log patterns without changing how previously supported patterns are parsed.
+Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Datadog automatically updates entries to support new log patterns without changing how previously supported patterns are parsed.
 
-Review transformations and control which entries process your logs. Switch an entry to a manual pipeline to customize its configuration.
+[Review transformations](#review-transformations) and [control which entries process your logs](#enable-or-disable-an-entry). [Switch an entry to a manual pipeline](#switch-to-a-manual-pipeline) to customize its configuration.
 
-### Configuration
+<!-- vale Datadog.headings = NO -->
+### Configure Auto-Processing
+<!-- vale Datadog.headings = YES -->
 
 Go to the [{{< ui >}}Processing{{< /ui >}} page][8] and select the {{< ui >}}Auto-Processing{{< /ui >}} tab.
 
-#### Enable or disable the feature
+#### Turn Auto-Processing on or off
 
 Use the feature toggle to turn Auto-Processing on or off for your organization.
 
 #### Choose how new entries are enabled
 
-When Auto-Processing is on, you can choose how newly created entries are enabled:
+When Auto-Processing is on, choose whether new entries are enabled automatically:
 
-- **Automatically enable new entries:** New entries are enabled on creation and begin processing matching incoming logs.
-- **Review new entries before enabling:** New entries are disabled on creation. Review their transformations, then enable the ones you want to use.
-
-Configure this behavior in the {{< ui >}}Auto-Processing{{< /ui >}} tab. You can also enable or disable individual entries for each source and service.
+- **Automatically enable new entries**: New entries are enabled on creation and begin processing matching incoming logs.
+- **Review new entries before enabling**: New entries are disabled on creation. Review their transformations, then enable the ones you want to use.
 
 ### Review transformations
 
@@ -374,19 +374,21 @@ Configure this behavior in the {{< ui >}}Auto-Processing{{< /ui >}} tab. You can
 2. Select {{< ui >}}View Transformations{{< /ui >}}.
 3. Select a log pattern and inspect example logs to compare their original and processed attributes.
 
-Use the entry's toggle in the {{< ui >}}Auto-Processing{{< /ui >}} tab to enable or disable processing for that source and service. Disabling an entry affects future logs only; it does not change logs already processed.
+### Enable or disable an entry
+
+In the {{< ui >}}Auto-Processing{{< /ui >}} tab, use an entry's toggle to enable or disable processing for that source and service. Disabling an entry affects future logs only. Logs that are already processed don't change.
 
 ### Switch to a manual pipeline
 
-To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the transformations page.
+To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the {{< ui >}}View Transformations{{< /ui >}} page.
 
 After switching, you manage the pipeline's configuration and any future updates.
 
 ### Limitations
 
-- Each organization can have up to **100 Auto-Processing pipelines**.
-- Some new log patterns may remain unparsed, even for a source and service that Auto-Processing already covers.
-- You cannot directly customize parsing or rename attributes within an Auto-Processing entry. Switch to a manual pipeline when you need these changes.
+- Each organization can have up to 100 Auto-Processing entries.
+- Some new log patterns might remain unparsed, even for a source and service that Auto-Processing already covers.
+- You cannot customize parsing or rename attributes within an Auto-Processing entry. Switch to a manual pipeline to make these changes.
 
 ## Further Reading
 
