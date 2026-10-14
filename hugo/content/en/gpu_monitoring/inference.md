@@ -108,16 +108,25 @@ Apply the updated workload resources and recreate the pods so that Autodiscovery
 
 ### 4. Verify setup
 
-Run the following commands to confirm that the vLLM endpoint responds and that the Agent runs the check:
+Use two terminals to confirm that the vLLM endpoint responds and that the Agent runs the check. Run the port-forward in your workload's Kubernetes namespace, or add `-n <WORKLOAD_NAMESPACE>` if it differs from your current namespace.
+
+**Terminal 1**: Forward the vLLM metrics endpoint, and leave it running.
 
 ```shell
-# Confirm the vLLM endpoint responds
 kubectl port-forward pod/<VLLM_POD> 18000:8000
+```
+
+**Terminal 2**: Verify the endpoint and the Agent check.
+
+```shell
+# Show vLLM metrics from the endpoint
 curl -fsS http://localhost:18000/metrics | grep '^vllm:'
 
-# Confirm that "vllm" appears under Checks
+# Look for "vllm" under Checks
 kubectl exec -n <DATADOG_NAMESPACE> <AGENT_POD> -c agent -- agent status
 ```
+
+When you finish, press **Ctrl+C** in terminal 1 to stop forwarding.
 
 After you complete setup, Datadog collects `vllm.*` metrics from your vLLM pods.
 
