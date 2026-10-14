@@ -19545,8 +19545,7 @@ menu:
           - v2
         operationids:
           - UpdateRUMOperation
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Get a RUM operation
       url: /api/latest/rum-operations/get-a-rum-operation/
@@ -19558,8 +19557,7 @@ menu:
           - v2
         operationids:
           - GetRUMOperation
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete a RUM operation
       url: /api/latest/rum-operations/delete-a-rum-operation/
@@ -19571,8 +19569,7 @@ menu:
           - v2
         operationids:
           - DeleteRUMOperation
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Update a RUM operation link
       url: /api/latest/rum-operations/update-a-rum-operation-link/
@@ -19584,8 +19581,7 @@ menu:
           - v2
         operationids:
           - UpdateRUMOperationStrongLink
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Delete a RUM operation link
       url: /api/latest/rum-operations/delete-a-rum-operation-link/
@@ -19597,8 +19593,7 @@ menu:
           - v2
         operationids:
           - DeleteRUMOperationStrongLink
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Create a RUM operation link
       url: /api/latest/rum-operations/create-a-rum-operation-link/
@@ -19610,8 +19605,7 @@ menu:
           - v2
         operationids:
           - CreateRUMOperationStrongLink
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: List RUM operation links
       url: /api/latest/rum-operations/list-rum-operation-links/
@@ -19635,8 +19629,7 @@ menu:
           - v2
         operationids:
           - ListRUMOperations
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get a RUM operation by name
       url: /api/latest/rum-operations/get-a-rum-operation-by-name/
@@ -19648,8 +19641,7 @@ menu:
           - v2
         operationids:
           - GetRUMOperationByName
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Create a RUM operation
       url: /api/latest/rum-operations/create-a-rum-operation/
@@ -19661,8 +19653,7 @@ menu:
           - v2
         operationids:
           - CreateRUMOperation
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: RUM Remote Config
       url: /api/latest/rum-remote-config/
