@@ -310,7 +310,7 @@ Use the search bar at the top of the page to search for model deployments, model
 
 ### Understand latency and throughput
 
-The graphs at the top of the page show the latency and throughput of your model deployments, grouped by `app`:
+The graphs at the top of the page show the latency and throughput of your model deployments:
 
 | Graph | Description |
 |-------|-------------|
