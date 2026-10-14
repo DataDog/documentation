@@ -1,6 +1,6 @@
 ---
 title: Build Plugins
-description: "Integrate Datadog build plugins with your JavaScript bundler to automate source map uploads, action name deobfuscation, and other RUM tasks at build time."
+description: "Integrate Datadog build plugins with your JavaScript bundler to automate source map uploads, privacy allowlist generation, and other RUM tasks at build time."
 algolia:
   tags: ['build plugins', 'webpack', 'vite', 'esbuild', 'rollup', 'rspack', 'bundler']
 further_reading:
@@ -165,7 +165,7 @@ datadogWebpackPlugin({
 
 {{< whatsnext desc="Configure individual build plugins:" >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u>: Automatically upload source maps to Datadog during your build, enabling deobfuscated stack traces.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>Action Name Deobfuscation</u>: Restore readable action names in minified builds.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>Privacy Plugin</u>: Generate an allowlist of safe strings at build time to keep useful action names while masking sensitive data.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Source Code Context</u>: Display source code inline in Error Tracking stack traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
