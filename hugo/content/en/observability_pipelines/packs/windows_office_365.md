@@ -1,6 +1,10 @@
 ---
 title: Windows Office 365
 description: Learn more about the Windows Office 365 pack.
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -14,3 +18,7 @@ What this pack does:
 - Flags external forwarding
 - Flags role escalations
 - Drops routine successes
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

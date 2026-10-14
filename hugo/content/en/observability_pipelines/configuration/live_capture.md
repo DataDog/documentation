@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mitre-attack-enrichment-packs-observability-pipelines/"
   tag: "Blog"
   text: "Automatically enrich security logs with MITRE ATT&CK context before they reach your SIEM"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 products:
 - name: Logs
   icon: logs

@@ -7,6 +7,9 @@ further_reading:
 - link: "/reference_tables/"
   tag: "Documentation"
   text: "Reference Tables"
+- link: "https://www.datadoghq.com/blog/how-to-monitor-databricks-with-datadog/"
+  tag: "Blog"
+  text: "Monitor Databricks with Datadog"
 ---
 
 ## Overview

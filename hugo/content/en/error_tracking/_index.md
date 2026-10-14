@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
   text: "A practical guide to React error monitoring"
+- link: "https://www.datadoghq.com/blog/product-analytics-visual-labeling/"
+  tag: "Blog"
+  text: "Define user actions on your web app with visual labeling in Product Analytics"
 ---
 
 ## Overview

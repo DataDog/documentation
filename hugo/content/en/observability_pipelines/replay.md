@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
   tag: Blog
   text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview

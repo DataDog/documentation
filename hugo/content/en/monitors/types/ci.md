@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
   tag: "Blog"
   text: "Configure pipeline alerts with Datadog CI monitors"
+- link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
+  tag: "Blog"
+  text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
 site_support_id: ci_visibility
 ---
 

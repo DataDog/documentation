@@ -15,6 +15,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
   tag: "Blog"
   text: "Unify remediation and communication with Datadog Incident Response"
+- link: "https://www.datadoghq.com/blog/monitor-warehouse-data-quality-beyond-pipeline-health/"
+  tag: "Blog"
+  text: "Monitor warehouse data quality beyond pipeline health"
+- link: "https://www.datadoghq.com/blog/fedramp-high-incident-response/"
+  tag: "Blog"
+  text: "Run incident response in your FedRAMP High environment"
+- link: "https://www.datadoghq.com/blog/how-datadog-defines-service-criticality-at-scale/"
+  tag: "Blog"
+  text: "How Datadog defines service criticality at scale"
 cascade:
     algolia:
         rank: 70
