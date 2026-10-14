@@ -48,13 +48,17 @@ With Fleet Automation, you can:
 - **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
 
-## Fleet Automation API
+<a id="fleet-automation-api"></a>
+
+## Manage Fleet Automation programmatically
 
 Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][1]. 
 
 <div class="alert alert-info">
 The Fleet Automation API does not support all Datadog Agent configuration capabilities.
 </div>
+
+You can also create and manage Agent upgrade schedules with the Datadog Terraform provider. Define target hosts, Agent versions, and maintenance windows in Terraform configuration files. For prerequisites and an example, see [Schedule Agent upgrades with Terraform][8].
 
 ## Control access to Fleet Automation
 
@@ -80,3 +84,4 @@ For information on setting up roles and permissions, see [Access Control][2].
 [5]: /agent/fleet_automation/upgrade_agents/
 [6]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [7]: /agent/fleet_automation/fleet_view/#kubernetes-view
+[8]: /agent/fleet_automation/upgrade_agents/#schedule-agent-upgrades-with-terraform
