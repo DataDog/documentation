@@ -357,14 +357,14 @@ Go to the [{{< ui >}}Processing{{< /ui >}} page][8] and select the {{< ui >}}Aut
 
 #### Enable or disable the feature
 
-Use the feature toggle to opt your organization in to or out of Auto-Processing.
+Use the feature toggle to turn Auto-Processing on or off for your organization.
 
 #### Choose how new entries are enabled
 
 When Auto-Processing is on, you can choose how newly created entries are enabled:
 
-- **Automatically enable new entries:** New entries are created enabled and begin processing matching incoming logs.
-- **Review new entries before enabling:** New entries are created disabled. Review their transformations, then enable the entries you want to use.
+- **Automatically enable new entries:** New entries are enabled on creation and begin processing matching incoming logs.
+- **Review new entries before enabling:** New entries are disabled on creation. Review their transformations, then enable the ones you want to use.
 
 Configure this behavior in the {{< ui >}}Auto-Processing{{< /ui >}} tab. You can also enable or disable individual entries for each source and service.
 
@@ -380,7 +380,7 @@ Use the entry's toggle in the {{< ui >}}Auto-Processing{{< /ui >}} tab to enable
 
 To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the transformations page.
 
-After conversion, you manage the pipeline's configuration and updates.
+After switching, you manage the pipeline's configuration and any future updates.
 
 ### Limitations
 
