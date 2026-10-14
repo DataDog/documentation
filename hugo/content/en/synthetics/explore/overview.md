@@ -105,19 +105,20 @@ High traffic is defined as follows:
 
 The {{< ui >}}Endpoints{{< /ui >}} view lists untested API endpoints from APM. It shows the top 20 services by traffic. Each entry shows the HTTP method, the path, and the service.
 
-Turn on {{< ui >}}Group by service{{< /ui >}} to show one card per service, with the number of untested endpoints in each.
+By default, {{< ui >}}Group by service{{< /ui >}} is on, so the view shows one card per service, with the number of untested endpoints in each. Click a service card to filter the list to that service's endpoints, ranked by number of requests over the past week.
 
 To create a test for an endpoint:
 
-1. Hover over an endpoint in the list.
-2. Click {{< ui >}}Create an API Test{{< /ui >}}.
-3. In the new [API test][4], which opens with the endpoint URL prefilled, complete the test configuration and click {{< ui >}}Save{{< /ui >}}.
+1. Click a service card to filter the list to that service.
+2. Hover over the endpoint at the top of the list, which has the most requests over the past week.
+3. Click {{< ui >}}Create an API Test{{< /ui >}}.
+4. In the new [API test][4], which opens with the endpoint URL prefilled, complete the test configuration and click {{< ui >}}Save{{< /ui >}}.
 
 ### Untested views
 
 The {{< ui >}}Views{{< /ui >}} view lists untested views from RUM for your web and mobile applications. It shows the top 20 applications by number of views over the past week. Each entry shows the view name and the application.
 
-Turn on {{< ui >}}Group by application{{< /ui >}} to show one card per application, with the number of untested views in each.
+By default, {{< ui >}}Group by application{{< /ui >}} is on, so the view shows one card per application, with the number of untested views in each.
 
 To create a test for a view:
 
