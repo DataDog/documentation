@@ -129,6 +129,30 @@ const theme: ThemeRegistrationRaw = {
       settings: { foreground: "#836c28" },
     },
 
+    // — Java import/package paths and the `*` wildcard (Chroma .nn / .o).
+    // Their scopes start with `storage.modifier` and `variable.language`, so
+    // without this they would inherit the keyword purple and the self/this
+    // color above. The more specific scope wins in TextMate matching.
+    {
+      scope: [
+        "storage.modifier.import",
+        "storage.modifier.package",
+        "variable.language.wildcard",
+      ],
+      settings: { foreground: "#000000" },
+    },
+
+    // — XML text between tags. Hugo shows it gray (#555555, inherited from
+    // `pre code`, because Chroma doesn't wrap it in a token span). Astro uses
+    // the string red instead, on purpose: the gray was hard to read.
+    // `text.xml` is the grammar's root scope; tags, attributes, and strings
+    // have deeper scopes with their own rules above, so only unscoped text
+    // gets this color.
+    {
+      scope: ["text.xml"],
+      settings: { foreground: "#c41a16" },
+    },
+
     // — Diff markup
     {
       scope: ["markup.deleted"],
