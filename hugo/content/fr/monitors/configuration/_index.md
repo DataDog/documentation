@@ -70,7 +70,7 @@ Utilisez le graphique {{< ui >}}Source Data{{< /ui >}} pour vous assurer que vot
 
 ## Définissez les conditions d'alerte {#set-alert-conditions}
 
-Les conditions d'alerte varient en fonction du [type de monitor][1]. Configurez les monitors pour qu'ils se déclenchent si la valeur de la requête dépasse un seuil, ou si un certain nombre de vérifications consécutives ont échoué.
+Les conditions d'alerte varient en fonction du [type de monitor][1]. Configurez les monitors pour qu'ils se déclenchent si la valeur de la requête dépasse un seuil, ou si un certain nombre de checks consécutifs ont échoué.
 
 {{< tabs >}}
 {{% tab "Alerte de seuil" %}}
@@ -166,19 +166,19 @@ Lorsque vous modifiez un seuil, l'aperçu du graphique dans l'éditeur affiche u
 {{% /tab %}}
 {{% tab "Vérifier l'alerte" %}}
 
-Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils. Configurez l'alerte de vérification pour :
+Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils. Configurez l'alerte de check pour :
 
 1. Déclenchez l'alerte après le nombre sélectionné d'échecs consécutifs : `<NUMBER>`
 
-    Chaque exécution de vérification soumet un statut unique de `OK`, `WARN` ou `CRITICAL`. Choisissez combien d'exécutions consécutives avec le statut `WARN` et `CRITICAL` déclenchent une notification. Par exemple, votre processus peut connaître une interruption momentanée lorsque la connexion échoue. Si vous définissez cette valeur sur `> 1`, l'interruption momentanée est ignorée, mais un problème avec plus d'un échec consécutif déclenche une notification.
+    Chaque exécution de check soumet un statut unique de `OK`, `WARN` ou `CRITICAL`. Choisissez combien d'exécutions consécutives avec le statut `WARN` et `CRITICAL` déclenchent une notification. Par exemple, votre processus peut connaître une interruption momentanée lorsque la connexion échoue. Si vous définissez cette valeur sur `> 1`, l'interruption momentanée est ignorée, mais un problème avec plus d'un échec consécutif déclenche une notification.
 
-    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="Seuils de vérification Alerte/Avertissement" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="Seuils de check Alerte/Avertissement" style="width:90%;">}}
 
 2. Résolvez l'alerte après le nombre sélectionné de succès consécutifs : `<NUMBER>`
 
     Choisissez combien d'exécutions consécutives avec le statut `OK` résout l'alerte.
 
-    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Seuils de vérification Rétablissement" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Seuils de check Rétablissement" style="width:90%;">}}
 
 Consultez la documentation sur les monitors de [check de processus][1], [check d'intégration][2] et [check personnalisé][3] pour en savoir plus sur la configuration des alertes des checks.
 
@@ -194,7 +194,7 @@ Consultez la documentation sur les monitors de [check de processus][1], [check d
 
 #### Aucune donnée {#no-data}
 
-Les notifications pour les données manquantes sont utiles si vous attendez d'une métrique qu'elle rapporte toujours des données dans des circonstances normales. Par exemple, si un hôte avec l'Agent doit être opérationnel en continu, vous pouvez vous attendre à ce que la métrique `system.cpu.idle` rapporte toujours des données.
+Les notifications pour les données manquantes sont utiles si vous attendez d'une métrique qu'elle rapporte toujours des données dans des circonstances normales. Par exemple, si un host avec l'Agent doit être opérationnel en continu, vous pouvez vous attendre à ce que la métrique `system.cpu.idle` rapporte toujours des données.
 
 Dans ce cas, vous devez activer les notifications pour les données manquantes. Les sections ci-dessous expliquent comment accomplir cela avec chaque option.
 
@@ -238,7 +238,9 @@ Dans la plupart des cas, ce paramètre n'est pas utile car vous souhaitez qu'une
 
 La rétention de groupe contrôle la durée pendant laquelle un groupe de monitors est conservé dans le statut du monitor après l'arrêt de la transmission des données. Une fois la période de rétention écoulée, le groupe expire et est supprimé du statut du monitor.
 
-Par défaut, un groupe conserve son statut pendant 24 heures avant d'être supprimé. Les monitors d'hôtes et les vérifications de service qui notifient en cas de données manquantes conservent le statut pendant 48 heures.
+Par défaut, un groupe conserve son statut pendant 24 heures avant d'être supprimé. Les monitors de hosts et les checks de service qui notifient en cas de données manquantes conservent le statut pendant 48 heures.
+
+Pour les monitors comportant de nombreux groupes, la rétention dynamique des groupes est activée par défaut. Datadog raccourcit automatiquement la période de rétention pour les groupes qui cessent de transmettre des données. Plus les groupes apparaissent et disparaissent fréquemment, plus la période de rétention devient courte, ce qui permet de maintenir la rapidité et l'efficacité du monitor. Ce comportement affecte uniquement les groupes qui ont cessé de transmettre des données ; les groupes qui transmettent activement des données ne sont jamais supprimés.
 
 Pour les types de monitors multi-alertes qui prennent en charge la rétention personnalisée, vous pouvez définir une valeur comprise entre 1 heure et 72 heures. Sélectionnez {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
@@ -253,8 +255,6 @@ Voici quelques cas d'utilisation pour définir une durée de rétention de group
 
 **Remarque** : L'option de durée de rétention de groupe personnalisée nécessite un monitor multi-alertes qui prend en charge l'option [`On missing data`][4]. Ces types de monitors sont les monitors APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs et RUM.
 
-<div class="alert alert-info"><strong>Aperçu : Rétention de groupe dynamique</strong><p>La rétention de groupe dynamique est en version préliminaire et s'applique aux monitors nouvellement créés. Pour les monitors comportant un grand nombre de groupes, Datadog raccourcit automatiquement la durée de conservation d'un groupe après qu'il a cessé de transmettre des données. Plus les groupes apparaissent et disparaissent fréquemment, plus cette période devient courte, ce qui permet de maintenir la rapidité et l'efficacité du monitor. Cela n'affecte que les groupes devenus silencieux ; les groupes transmettant activement des données ne sont jamais supprimés.</p></div>
-
 #### Délai de nouveau groupe {#new-group-delay}
 
 Retardez le début de l'évaluation de `N` secondes pour les nouveaux groupes.
@@ -267,8 +267,8 @@ Cette option est disponible pour les monitors à alertes multiples.
 
 #### Délai d'évaluation {#evaluation-delay}
 
-<div class="alert alert-info"> Datadog recommande un délai de 15 minutes pour les métriques cloud, qui sont complétées a posteriori par les fournisseurs de services. De plus, lors de l'utilisation d'une formule de division, un délai de 60 secondes est utile pour garantir que votre monitor évalue des valeurs complètes. Consultez la <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/">
-">Cloud Metric Delay</a> page pour connaître les délais estimés.</div>
+<div class="alert alert-info"> Datadog recommande un délai de 15 minutes pour les métriques cloud, qui sont complétées a posteriori par les fournisseurs de services. De plus, lors de l'utilisation d'une formule de division, un délai de 60 secondes est utile pour garantir que votre monitor évalue des valeurs complètes. Consultez la page <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
+">Cloud Metric Delay</a> pour connaître les délais estimés.</div>
 
 Différer l'évaluation de `N` secondes.
 
@@ -318,7 +318,7 @@ Par exemple, lors de la configuration d'un monitor pour vous avertir si la laten
 
 ##### Regroupement des notifications {#notification-grouping}
 
-Lors de la surveillance d'un grand groupe d'entités, les alertes multiples peuvent entraîner des monitors bruyants. Pour atténuer cela, personnalisez les dimensions qui déclenchent les alertes. Cela réduit le bruit et vous permet de vous concentrer sur les alertes les plus importantes. Par exemple, vous surveillez l'utilisation moyenne du processeur de tous vos hôtes. Si vous regroupez votre requête par `service` et `host` mais que vous souhaitez uniquement que des alertes soient envoyées une fois pour chaque attribut `service` atteignant le seuil, supprimez l'attribut `host` de vos options d'alerte multiple et réduisez le nombre de notifications qui sont envoyées.
+Lors de la surveillance d'un grand groupe d'entités, les alertes multiples peuvent entraîner des monitors bruyants. Pour atténuer cela, personnalisez les dimensions qui déclenchent les alertes. Cela réduit le bruit et vous permet de vous concentrer sur les alertes les plus importantes. Par exemple, vous surveillez l'utilisation moyenne du processeur de tous vos hosts. Si vous regroupez votre requête par `service` et `host` mais que vous souhaitez uniquement que des alertes soient envoyées une fois pour chaque attribut `service` atteignant le seuil, supprimez l'attribut `host` de vos options d'alerte multiple et réduisez le nombre de notifications qui sont envoyées.
 
 {{< img src="/monitors/create/multi-alert-aggregated.png" alt="Schéma de la manière dont les notifications sont envoyées lorsqu'elles sont définies sur des dimensions spécifiques dans les alertes multiples" style="width:90%;">}}
 

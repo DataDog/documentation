@@ -62,7 +62,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - [Windows Kernel Memory][10]
   - [Windows Performance Counters][11] (7.80+)
   - [Windows Registry][12] (7.80+)
-  - [Windows Services][13]
+  - [Windows Services][13] (7.78+)
   - [WMI Check][14] (7.80+)
   - [Custom checks][15] prefixed with `custom_`
 

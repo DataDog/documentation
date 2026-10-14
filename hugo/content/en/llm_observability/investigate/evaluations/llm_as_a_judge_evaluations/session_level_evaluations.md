@@ -1,5 +1,5 @@
 ---
-title: Session-Level Evaluations
+title: Session-Level Evaluators
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations/
 - /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/session_level_evaluations/
@@ -7,10 +7,10 @@ description: Run a custom LLM-as-a-judge across an entire user session, with exa
 further_reading:
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
-  text: "Custom LLM-as-a-Judge Evaluations"
+  text: "Custom LLM-as-a-Judge Evaluators"
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations"
   tag: "Documentation"
-  text: "Trace-Level Evaluations"
+  text: "Trace-Level Evaluators"
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/prompt_templating"
   tag: "Documentation"
   text: "Prompt Templating"
@@ -19,18 +19,18 @@ further_reading:
   text: "Tracking user sessions"
 ---
 
-A session-level evaluation runs once per [user session][9], with every trace—and every span in those traces—available to the LLM judge in a single prompt. Sessions group related interactions under a shared `session_id` (for example, a chat conversation) and can include multiple traces over an extended interaction.
+A session-level evaluator runs once per [user session][9], with every trace—and every span in those traces—available to the LLM judge in a single prompt. Sessions group related interactions under a shared `session_id` (for example, a chat conversation) and can include multiple traces over an extended interaction.
 
 Session scope answers questions about agent performance and user behavior across an entire interaction—questions that trace-level and span-level judges cannot answer from a single request or span.
 
-<div class="alert alert-info">Session-level evaluations require spans to be tagged with a <code>session_id</code>. See <a href="/llm_observability/instrument/sdk/#tracking-user-sessions">Tracking user sessions</a> to instrument your application.</div>
+<div class="alert alert-info">Session-level evaluators require spans to be tagged with a <code>session_id</code>. See <a href="/llm_observability/instrument/sdk/#tracking-user-sessions">Tracking user sessions</a> to instrument your application.</div>
 
-## Configure a session-level evaluation
+## Configure a session-level evaluator
 
-The walkthrough below highlights the parts of the configuration that are specific to session scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span- or trace-scoped evaluations.
+The walkthrough below highlights the parts of the configuration that are specific to session scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span- or trace-scoped evaluators.
 
-1. Navigate to the Agent Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select {{< ui >}}Session{{< /ui >}}. (You can also start from a [template evaluation][2].)
-1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
+1. Navigate to the Agent Observability [Evaluators page][1] and select {{< ui >}}Create Evaluator{{< /ui >}}, then in the `Evaluate On` select {{< ui >}}Session{{< /ui >}}. (You can also start from an [evaluator template][2].)
+1. Fill in the {{< ui >}}evaluator name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluator.
 
    {{< img src="llm_observability/evaluations/session_level_evaluation_scope.png" alt="The Evaluate On scope picker with Session selected." style="width:100%;" >}}
 
@@ -50,15 +50,15 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    See [Prompt Templating][3] for the full reference.
 
-   {{< img src="llm_observability/evaluations/session_level_prompt_editor.png" alt="The User prompt editor for a session-level evaluation, with the autocomplete dropdown listing traces-prefixed fields after typing two open braces." style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/session_level_prompt_editor.png" alt="The User prompt editor for a session-level evaluator, with the autocomplete dropdown listing traces-prefixed fields after typing two open braces." style="width:100%;" >}}
 
 1. Pick a sample session from the panel on the right. The pane lists the traces in that session, with the fields referenced by your prompt highlighted.
 
    {{< img src="llm_observability/evaluations/session_level_sample_session_trace_view.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
 
 
-1. Click {{< ui >}}Test Evaluation{{< /ui >}} to run the prompt against the selected session and preview the LLM judge's output before saving.
-1. Continue with the rest of the [evaluation configuration][5] (output type, assessment criteria) and {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluation against new sessions.
+1. Click {{< ui >}}Test Evaluator{{< /ui >}} to run the prompt against the selected session and preview the LLM judge's output before saving.
+1. Continue with the rest of the [evaluator configuration][5] (output type, assessment criteria) and {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluator against new sessions.
 
 ## Session completion
 
@@ -98,7 +98,7 @@ Session traces:
 {{traces}}
 ```
 
-The managed [Goal Completeness][11] template evaluation implements this pattern.
+The [Goal Completeness][11] evaluator template implements this pattern.
 
 ### Multi-turn conversation quality
 
@@ -181,13 +181,13 @@ Use {{< ui >}}Session{{< /ui >}} scope when the evaluation needs context from mo
 - User behavior over time — patterns such as frustration, confusion, topic switching, or giving up before the agent finished helping.
 - Agent performance across a session — consistency, regression after tool failures, or whether the agent recovered from mistakes in a later turn.
 
-Use {{< ui >}}Trace{{< /ui >}} scope when the answer depends on steps within a single request—for example, tool-call ordering, RAG faithfulness within one workflow run, or goal completion for one agent invocation. See [Trace-Level Evaluations][10].
+Use {{< ui >}}Trace{{< /ui >}} scope when the answer depends on steps within a single request—for example, tool-call ordering, RAG faithfulness within one workflow run, or goal completion for one agent invocation. See [Trace-Level Evaluators][10].
 
 Use {{< ui >}}Span{{< /ui >}} scope when the evaluation can be answered from one span in isolation—for example, scoring a single LLM response, classifying intent on one message, or validating tool arguments on one call.
 
 ## Permissions
 
-Configuring evaluations requires the `Agent Observability Write` [permission][4].
+Configuring evaluators requires the `Agent Observability Write` [permission][4].
 
 ## Further Reading
 

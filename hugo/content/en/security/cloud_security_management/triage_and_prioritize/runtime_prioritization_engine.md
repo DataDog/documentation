@@ -43,11 +43,18 @@ The Runtime Prioritization Engine prioritizes a finding when these signals indic
 
 The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
 
-Datadog computes each vulnerability's remediation timeline according to the directive. The due date appears on the vulnerability finding.
+Datadog computes each vulnerability's remediation timeline according to the directive and adds it to the finding as one of the following values: 
+- `three_days_and_forensic_triage`
+- `three_days`
+- `fourteen_days`
+- `sixty_days`
+- `fix_on_system_upgrade`
+
+The due date computed from this timeline appears directly on the vulnerability finding. Datadog also records the date the vulnerability's CVE was added to the [CISA KEV catalog][1] as a `@vulnerability.cisa.kev_added_at` timestamp on the finding.
 
 For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
 
-{{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer shows CISA BOD 26-04 remediation timelines and due dates on vulnerability findings." width="100%">}}
+{{< img src="security/cloud_security_management/cisa_bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer filtered to the 3 Days + Forensic Triage CISA BOD 26-04 remediation timeline facet, with a search bar query combining the remediation timeline and kev_added_at attributes, and the time helper dropdown open." width="100%">}}
 
 ## Crown Jewels
 
