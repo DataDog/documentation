@@ -139,7 +139,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 | [Langfuse][37] | Native | >= 4.0.0 |
-| [Claude Managed Agents][38] | Native ([OpenTelemetry export][39]) | Public beta |
+| [Claude Managed Agents][38] | Native ([OpenTelemetry export][39]) | — |
 
 [5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
@@ -279,9 +279,9 @@ Traces appear on the [Agent Observability Traces page][3]. Search by `ml_app` to
 
 #### Avoid double-counted tokens
 
-During the public beta, Claude SDK spans and Claude Platform API spans both carry token counts for the same model calls. If you export both, Agent Observability counts those tokens twice, which inflates token metrics and estimated cost.
+Claude SDK spans and Claude Platform API spans both carry token counts for the same model calls. If you export both, Agent Observability counts those tokens twice, which inflates token metrics and estimated cost.
 
-Until the platform stops reporting them in both places, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
+To count each model call once, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
 
 ```python
 from opentelemetry.sdk.trace import ReadableSpan
