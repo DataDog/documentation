@@ -139,6 +139,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 | [Langfuse][37] | Native | >= 4.0.0 |
+| [Claude Managed Agents][38] | Native ([OpenTelemetry export][39]) | Public beta |
 
 [5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
@@ -159,6 +160,8 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 [35]: https://pypi.org/project/traceloop-sdk/
 [36]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [37]: https://langfuse.com/integrations/native/opentelemetry
+[38]: https://platform.claude.com/docs/en/managed-agents
+[39]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 {{% /tab %}}
 {{% tab "Node.js" %}}
 | Framework | Instrumentation | Supported Versions |
@@ -186,7 +189,163 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 {{% /tab %}}
 {{< /tabs >}}
 
-## Export {#examples}
+## Send traces from your framework or platform {#examples}
+
+{{% collapse-content title="Using Claude Managed Agents" level="h3" expanded=false id="using-claude-managed-agents" %}}
+
+[Claude Managed Agents][18] and the Claude SDKs emit spans that follow the GenAI semantic conventions natively through [OpenTelemetry export][19], so no additional instrumentation library is required. Spans come from two independent sources:
+
+- **API spans** for each Sessions API request, agent turn, model request, and tool call that Anthropic runs. Anthropic delivers these to a destination that you configure in the Claude Console.
+- **SDK spans** for each Claude SDK call, and for each tool that the SDK tool runner executes inside your application. Your application exports these with its own OpenTelemetry exporter.
+
+If your application uses a Claude SDK, both sets of spans land in the same trace, because the SDK propagates W3C trace context on its API requests.
+
+#### Export API spans
+
+Anthropic delivers API spans from its own infrastructure, so you add a Datadog destination in the Claude Console rather than setting `OTEL_EXPORTER_OTLP_*` environment variables.
+
+1. In the Claude Console, go to **Organization settings** > **OpenTelemetry** and click **Add destination**. Complete the fields:
+   | Field | Value |
+   |-------|-------|
+   | Provider | **Datadog** |
+   | Site | Your Datadog site, for example `US1` |
+   | API key | Your [Datadog API key][2]. Application keys do not work. |
+   | Content mode | **Full content** so spans carry message and tool content, or **Metadata only** for identifiers, timing, status, and token counts |
+
+   Selecting **Datadog** as the provider sets the OTLP endpoint for the site you choose, shown under **OTLP details**. There is no endpoint or header to enter by hand.
+
+   Choose **Full content** only if your Datadog organization may store model prompts and responses. To restrict who can read them once they arrive, see [Data Access Controls][8].
+2. Set **Workspaces** on the destination to choose which workspaces export to it: **All**, **Selected** for a specific list, or **All except** to exclude a few.
+3. Run a session, then check that the destination's **Delivery** column reads **Healthy**. The spans arrive under the `claude-platform` service and form this tree:
+   | Span | Agent Observability span kind |
+   |------|-------------------------------|
+   | `anthropic.sessions.events.send` | Workflow |
+   | `anthropic.session.turn` | Agent, carrying the conversation input and output |
+   | `anthropic.model_request` | LLM, carrying the model name and token usage |
+   | Hosted tool calls, for example `bash` or `read` | Tool |
+
+#### Export SDK spans
+
+To also capture spans from the Claude SDK in your own application, register an OpenTelemetry tracer provider before you construct the client, and export to Datadog:
+
+```python
+import os
+
+from anthropic import Anthropic
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+# service.name becomes the ml_app that these spans are indexed under.
+provider = TracerProvider(resource=Resource.create({"service.name": "my-agent-app"}))
+provider.add_span_processor(
+    BatchSpanProcessor(
+        OTLPSpanExporter(
+            endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+            headers={
+                "dd-api-key": os.environ["DD_API_KEY"],
+                "dd-otlp-source": "llmobs",
+            },
+        )
+    )
+)
+trace.set_tracer_provider(provider)
+
+# content_mode="content" records prompts and responses. The default is metadata only.
+client = Anthropic(
+    open_telemetry={"tracer_provider": provider, "traces": {"content_mode": "content"}}
+)
+```
+
+Unlike the Console destination, this exporter is an ordinary OTLP client, so its endpoint does include `/v1/traces`. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, and turn SDK spans off entirely with `ANTHROPIC_OPEN_TELEMETRY=false`.
+
+To group several calls into one conversation, set a conversation ID on the client. The SDK sends it as `gen_ai.conversation.id`, which Agent Observability indexes as the session:
+
+```python
+client = client.with_options(
+    open_telemetry={**client.open_telemetry, "conversation_id": "conv_42"}
+)
+
+message = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+```
+
+Traces appear on the [Agent Observability Traces page][3]. Search by `ml_app` to find them.
+
+#### Avoid double-counted tokens
+
+During the public beta, Claude SDK spans and Claude Platform API spans both carry token counts for the same model calls. If you export both, Agent Observability counts those tokens twice, which inflates token metrics and estimated cost.
+
+Until the platform stops reporting them in both places, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
+
+```python
+from opentelemetry.sdk.trace import ReadableSpan
+from opentelemetry.sdk.trace.export import SpanExporter
+
+# Agent Observability reads token counts and costs from these two namespaces.
+DROPPED_PREFIXES = ("gen_ai.usage.", "gen_ai.cost.")
+
+
+def _without_token_usage(span):
+    attributes = {
+        key: value
+        for key, value in (span.attributes or {}).items()
+        if not key.startswith(DROPPED_PREFIXES)
+    }
+    return ReadableSpan(
+        name=span.name,
+        context=span.get_span_context(),
+        parent=span.parent,
+        resource=span.resource,
+        attributes=attributes,
+        events=span.events,
+        links=span.links,
+        kind=span.kind,
+        status=span.status,
+        start_time=span.start_time,
+        end_time=span.end_time,
+        instrumentation_scope=span.instrumentation_scope,
+    )
+
+
+class StripClaudeTokenUsage(SpanExporter):
+    """Leave token counting to the Claude Platform spans."""
+
+    def __init__(self, exporter):
+        self._exporter = exporter
+
+    def export(self, spans):
+        return self._exporter.export(
+            [
+                _without_token_usage(span)
+                if span.name.startswith("anthropic.")
+                else span
+                for span in spans
+            ]
+        )
+
+    def shutdown(self):
+        return self._exporter.shutdown()
+
+    def force_flush(self, timeout_millis=30000):
+        return self._exporter.force_flush(timeout_millis)
+```
+
+Then wrap the OTLP exporter with it where you register the span processor:
+
+```python
+provider.add_span_processor(
+    BatchSpanProcessor(StripClaudeTokenUsage(OTLPSpanExporter(endpoint=..., headers=...)))
+)
+```
+
+Apply this only when a Console destination is also exporting API spans for the same workspace. If the Claude SDK is your only source of spans, leave the token counts in place, because nothing else reports them.
+{{% /collapse-content %}}
 
 {{% collapse-content title="Using Strands Agents" level="h3" expanded=false id="using-strands-agents-1" %}}
 
@@ -1044,3 +1203,5 @@ with tracer.start_as_current_span("my-span") as span:
 [15]: https://developers.cloudflare.com/agents/
 [16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
 [17]: https://sdk.vercel.ai/
+[18]: https://platform.claude.com/docs/en/managed-agents
+[19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
