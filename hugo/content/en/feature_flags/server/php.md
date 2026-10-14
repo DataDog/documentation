@@ -486,3 +486,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [4]: /tracing/trace_collection/dd_libraries/php/
 [5]: /feature_flags/concepts/environments/
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[7]: /feature_flags/concepts/flag_graphs/
