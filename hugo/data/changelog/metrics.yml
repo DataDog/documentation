@@ -1,0 +1,8 @@
+entries:
+  - change_type: modified
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40694
+    operations:
+      - CreateTagIndexingRuleExemption
+      - GetTagIndexingRuleExemption
+    title: Add impact fields to tag indexing rule exemptions
