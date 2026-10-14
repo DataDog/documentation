@@ -90,7 +90,7 @@ Cloud SIEM embeds both cloud and on-premises telemetry directly into security wo
 
 ### Flexible cost control for security data
 
-As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs.
+As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for your security logs. This flexibility helps you balance cost efficiency with your threat detection needs.
 
 Store logs using one of the available options:
 - [Standard indexing][6] for logs that need to be queried frequently with the most compute.
@@ -165,9 +165,9 @@ See signals grouped by rule name and sorted by severity to get an overview of th
 
 Use [Case Management][5] to track signals that require further analysis. View active security cases in your environment and click a case to see more details.
 
-### Risk insights
+### Entity Risks
 
-{{< img src="security/security_monitoring/landing/03_risk_insights.png" alt="" style="width:100%;" >}}
+{{< img src="security/security_monitoring/landing/03_entity_risks.png" alt="The Entity Risks section of the Cloud SIEM Overview page, showing the top risky entities, a breakdown by entity type, and entity counts by risk severity" style="width:100%;" >}}
 
 Review the risky entities in your environment.
 

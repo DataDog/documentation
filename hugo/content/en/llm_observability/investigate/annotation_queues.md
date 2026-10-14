@@ -30,7 +30,7 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 - Review traces with complete context including spans, metadata, tool calls, inputs, outputs, and evaluation results
 - Apply structured labels and free-form observations to traces
 - Identify and categorize failure patterns
-- Validate LLM-as-a-Judge evaluation accuracy
+- Validate LLM-as-a-Judge evaluator accuracy
 - Build golden datasets with human-verified labels for testing and validation
 
 
@@ -357,7 +357,7 @@ Review failed traces to identify recurring patterns and categorize how your appl
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Validating LLM-as-a-Judge evaluations" level="h3" expanded=true id="example-validating-llm-as-a-judge-evaluations" %}}
+{{% collapse-content title="Validating LLM-as-a-Judge evaluators" level="h3" expanded=true id="example-validating-llm-as-a-judge-evaluations" %}}
 
 Find traces where automated evaluators may be uncertain or incorrect, then have humans provide ground truth.
 
@@ -366,7 +366,7 @@ Find traces where automated evaluators may be uncertain or incorrect, then have 
 3. Annotators review traces and provide human scores for the same criteria
 4. Compare human labels to automated evaluation scores
 5. Identify systematic disagreements (judge too strict, too lenient, or misunderstanding criteria)
-6. Refine evaluation prompts based on disagreements
+6. Refine evaluator prompts based on disagreements
 
 #### Queue configuration
 

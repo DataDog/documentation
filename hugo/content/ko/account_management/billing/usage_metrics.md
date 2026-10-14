@@ -38,8 +38,8 @@ Datadog은 현재 예상 사용량을 거의 실시간으로 계산합니다. �
 | (미리 보기) Ingested-to-Indexed Points Ratio | `datadog.estimated_usage.metrics.points.ratio` | 전체 수집 포인트와 전체 인덱싱 포인트의 비교. [Metric Name 요금제][7]를 사용하는 조직에 적용됩니다. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | 바이트 기준 로그 총 수집량. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | 제외된 로그를 포함한 총 수집 이벤트 수. |
-| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | 바이트 기준 파이프라인과 일치한 로그 수. |
-| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | 제외된 로그를 포함하여 바이트 기준 파이프라인과 일치한 이벤트 수. |
+| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.pipelines.ingested_bytes` | 파이프라인에서 일치하는 로그의 바이트 수 |
+| Logs Pipelines Events          | `datadog.estimated_usage.logs.pipelines.ingested_events` | 제외된 로그를 포함하여 파이프라인에서 일치하는 이벤트 수 |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | 수집 중 삭제된 총 이벤트 수. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | 수집 시 잘린 총 이벤트 수. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | 바이트 기준 잘린 이벤트 볼륨. |
