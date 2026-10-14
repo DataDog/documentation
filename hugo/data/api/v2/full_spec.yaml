@@ -42113,6 +42113,18 @@ components:
       type: string
       x-enum-varnames:
         - CONCLUDE_EXPERIMENT_REQUEST
+    ExperimentsConfidenceInterval:
+      description: "Lower and upper bounds of the reported statistical interval."
+      properties:
+        lower:
+          description: "Lower bound of the reported interval."
+          format: double
+          type: number
+        upper:
+          description: "Upper bound of the reported interval."
+          format: double
+          type: number
+      type: object
     ExperimentsCreateExperimentMetricGroupV2Request:
       description: "Request to create a metric group on an experiment."
       example:
@@ -42463,26 +42475,13 @@ components:
           example: []
           items:
             $ref: >-
-              #/components/schemas/ExperimentsCreateExperimentV2RequestDataAttributesDatadogFlagConfigurationTargetingRulesItems
+              #/components/schemas/ExperimentsTargetingRule
           type: array
       required:
         - entry_point
         - environment_id
         - feature_flag_id
         - targeting_rules
-      type: object
-    ExperimentsCreateExperimentV2RequestDataAttributesDatadogFlagConfigurationTargetingRulesItems:
-      description: Use an empty array when no targeting rules apply.
-      properties:
-        conditions:
-          description: >-
-            Conditions that must all match for this rule. Each condition must use exactly one shape: saved_filter_id alone or operator plus attribute plus value.
-          example: []
-          items:
-            $ref: "#/components/schemas/ExperimentsTargetingRuleCondition"
-          type: array
-      required:
-        - conditions
       type: object
     ExperimentsCreateExperimentV2RequestDataAttributesDecisionMetricsItems:
       description: "Metric used to make an experiment decision, with its primary metric designation."
@@ -42531,7 +42530,7 @@ components:
           type: string
         column_type:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationEntryPointFiltersItemsItemsColumnType
+            #/components/schemas/ExperimentsDatadogEntryPointFilterColumnType
         name:
           description: Optional display name. Defaults to column_name for a new property.
           type: string
@@ -42647,7 +42646,7 @@ components:
       properties:
         entry_point:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesWarehouseExposureConfigurationEntryPoint
+            #/components/schemas/ExperimentsWarehouseEntryPoint
         experiment_key:
           description: Warehouse experiment key. Must not be blank.
           example: checkout_button_test
@@ -43147,17 +43146,6 @@ components:
       oneOf:
         - $ref: "#/components/schemas/ExperimentsWarehousePercentileAggregationInput"
         - $ref: "#/components/schemas/ExperimentsDatadogPercentileAggregationInput"
-    ExperimentsCreateMetricV2RequestDataAttributesPercentileAggregationWarehouseMetricMeasure:
-      description: "Reference to a measure defined in a warehouse metric SQL model."
-      properties:
-        id:
-          description: "Identifier of the warehouse metric measure."
-          example: 550e8400-e29b-41d4-a716-446655440021
-          format: uuid
-          type: string
-      required:
-        - id
-      type: object
     ExperimentsCreateSubjectTypeV2Request:
       description: "Request to create a subject type for experiment assignments."
       example:
@@ -43241,10 +43229,10 @@ components:
           type: string
         column_type:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationEntryPointFiltersItemsItemsColumnType
+            #/components/schemas/ExperimentsDatadogEntryPointFilterColumnType
         operation:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationEntryPointFiltersItemsItemsOperation
+            #/components/schemas/ExperimentsDatadogEntryPointFilterOperation
         values:
           description: "Comparison values used by the filter operation."
           example: []
@@ -43258,11 +43246,55 @@ components:
         - operation
         - values
       type: object
+    ExperimentsDatadogEntryPointFilterColumnType:
+      description: "Data type of the column evaluated by the entry-point filter."
+      enum:
+        - varchar
+        - int
+        - double
+        - boolean
+        - varchar_array
+        - int_array
+        - double_array
+        - raw
+      example: varchar
+      type: string
+      x-enum-varnames:
+        - VARCHAR
+        - INT
+        - DOUBLE
+        - BOOLEAN
+        - VARCHAR_ARRAY
+        - INT_ARRAY
+        - DOUBLE_ARRAY
+        - RAW
     ExperimentsDatadogEntryPointFilterGroup:
       description: Entry-point filters combined with AND.
       items:
         $ref: "#/components/schemas/ExperimentsDatadogEntryPointFilter"
       type: array
+    ExperimentsDatadogEntryPointFilterOperation:
+      description: "Comparison applied by the Datadog entry-point filter."
+      enum:
+        - eq
+        - in
+        - neq
+        - not_in
+        - gte
+        - lte
+        - gt
+        - lt
+      example: eq
+      type: string
+      x-enum-varnames:
+        - EQ
+        - IN
+        - NEQ
+        - NOT_IN
+        - GTE
+        - LTE
+        - GT
+        - LT
     ExperimentsDatadogMetricAggregationInput:
       description: >-
         Settings for a metric aggregation that uses a Datadog measure. The other measure must be omitted or null.
@@ -44585,7 +44617,7 @@ components:
           type: string
         operator:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationTargetingRulesItemsConditionsItemsOperator
+            #/components/schemas/ExperimentsTargetingRuleOperator
         value:
           description: Values used by the operator. Every operator requires at least one value.
           example:
@@ -46084,7 +46116,7 @@ components:
           example: []
           items:
             $ref: >-
-              #/components/schemas/ExperimentsCreateExperimentV2RequestDataAttributesDatadogFlagConfigurationTargetingRulesItems
+              #/components/schemas/ExperimentsTargetingRule
           type: array
       type: object
     ExperimentsPatchExperimentV2Response:
@@ -46436,7 +46468,7 @@ components:
           description: "Rules that select subjects for the experiment."
           items:
             $ref: >-
-              #/components/schemas/ExperimentsCreateExperimentV2RequestDataAttributesDatadogFlagConfigurationTargetingRulesItems
+              #/components/schemas/ExperimentsTargetingRule
           type: array
       required:
         - entry_point
@@ -46459,88 +46491,6 @@ components:
         - filters
         - measure_id
       type: object
-    ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationEntryPointFiltersItemsItemsColumnType:
-      description: "Data type of the column evaluated by the entry-point filter."
-      enum:
-        - varchar
-        - int
-        - double
-        - boolean
-        - varchar_array
-        - int_array
-        - double_array
-        - raw
-      example: varchar
-      type: string
-      x-enum-varnames:
-        - VARCHAR
-        - INT
-        - DOUBLE
-        - BOOLEAN
-        - VARCHAR_ARRAY
-        - INT_ARRAY
-        - DOUBLE_ARRAY
-        - RAW
-    ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationEntryPointFiltersItemsItemsOperation:
-      description: "Comparison applied by the Datadog entry-point filter."
-      enum:
-        - eq
-        - in
-        - neq
-        - not_in
-        - gte
-        - lte
-        - gt
-        - lt
-      example: eq
-      type: string
-      x-enum-varnames:
-        - EQ
-        - IN
-        - NEQ
-        - NOT_IN
-        - GTE
-        - LTE
-        - GT
-        - LT
-    ExperimentsPatchExperimentV2ResponseDataAttributesDatadogFlagConfigurationTargetingRulesItemsConditionsItemsOperator:
-      description: Required with attribute and value for an inline condition; omit when saved_filter_id is set.
-      enum:
-        - LT
-        - LTE
-        - GT
-        - GTE
-        - MATCHES
-        - NOT_MATCHES
-        - ONE_OF
-        - NOT_ONE_OF
-        - IS_NULL
-        - EQUALS
-        - SEMVER_EQ
-        - SEMVER_NEQ
-        - SEMVER_LT
-        - SEMVER_LTE
-        - SEMVER_GT
-        - SEMVER_GTE
-      example: LT
-      type: string
-      x-enum-varnames:
-        - LT
-        - LTE
-        - GT
-        - GTE
-        - MATCHES
-        - NOT_MATCHES
-        - ONE_OF
-        - NOT_ONE_OF
-        - IS_NULL
-        - EQUALS
-        - SEMVER_EQ
-        - SEMVER_NEQ
-        - SEMVER_LT
-        - SEMVER_LTE
-        - SEMVER_GT
-        - SEMVER_GTE
     ExperimentsPatchExperimentV2ResponseDataAttributesSplitByPropertiesItemsColumnType:
       description: Type of the Datadog exposure field or Warehouse column.
       enum:
@@ -46618,7 +46568,7 @@ components:
       properties:
         entry_point:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesWarehouseExposureConfigurationEntryPoint
+            #/components/schemas/ExperimentsWarehouseEntryPoint
         experiment_key:
           description: >-
             Warehouse experiment key. Reads can return null for incomplete configuration; configuration writes require a value.
@@ -46634,35 +46584,6 @@ components:
         - experiment_key
         - exposure_sql_model_id
       type: object
-    ExperimentsPatchExperimentV2ResponseDataAttributesWarehouseExposureConfigurationEntryPoint:
-      description: Optional Warehouse measure that scopes analyzed subjects.
-      example:
-      nullable: true
-      properties:
-        filters:
-          description: Complete ordered Warehouse entry-point filter set.
-          example: []
-          items:
-            $ref: "#/components/schemas/ExperimentsWarehouseExposureFilter"
-          type: array
-        measure_id:
-          description: Warehouse measure UUID.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          type: string
-      required:
-        - filters
-        - measure_id
-      type: object
-    ExperimentsPatchExperimentV2ResponseDataAttributesWarehouseExposureConfigurationEntryPointFiltersItemsOperation:
-      description: "Comparison applied by the warehouse entry-point filter."
-      enum:
-        - IS
-        - IS_NOT
-      example: IS
-      type: string
-      x-enum-varnames:
-        - IS
-        - IS_NOT
     ExperimentsPatchExperimentV2ResponseDataType:
       default: experiments
       description: Experiments resource type.
@@ -46819,7 +46740,7 @@ components:
           type: string
         operation:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesWarehouseExposureConfigurationEntryPointFiltersItemsOperation
+            #/components/schemas/ExperimentsWarehouseEntryPointFilterOperation
         property_id:
           description: ID of the property on the aggregation source.
           example: 550e8400-e29b-41d4-a716-446655440023
@@ -47651,11 +47572,62 @@ components:
       type: string
       x-enum-varnames:
         - SUBJECT_TYPES
+    ExperimentsTargetingRule:
+      description: Use an empty array when no targeting rules apply.
+      properties:
+        conditions:
+          description: >-
+            Conditions that must all match for this rule. Each condition must use exactly one shape: saved_filter_id alone or operator plus attribute plus value.
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsTargetingRuleCondition"
+          type: array
+      required:
+        - conditions
+      type: object
     ExperimentsTargetingRuleCondition:
       description: A saved-filter condition or a complete inline condition. The two forms cannot be combined.
       oneOf:
         - $ref: "#/components/schemas/ExperimentsSavedFilterCondition"
         - $ref: "#/components/schemas/ExperimentsInlineCondition"
+    ExperimentsTargetingRuleOperator:
+      description: Required with attribute and value for an inline condition; omit when saved_filter_id is set.
+      enum:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+        - SEMVER_EQ
+        - SEMVER_NEQ
+        - SEMVER_LT
+        - SEMVER_LTE
+        - SEMVER_GT
+        - SEMVER_GTE
+      example: LT
+      type: string
+      x-enum-varnames:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+        - SEMVER_EQ
+        - SEMVER_NEQ
+        - SEMVER_LT
+        - SEMVER_LTE
+        - SEMVER_GT
+        - SEMVER_GTE
     ExperimentsTrafficSummaryV2DTO:
       description: "Response containing the experiment traffic summary."
       properties:
@@ -48175,7 +48147,7 @@ components:
       properties:
         confidence_interval:
           $ref: >-
-            #/components/schemas/ExperimentsVariantResultsV2DTODataAttributesMetricsItemsAnalysesItemsConfidenceInterval
+            #/components/schemas/ExperimentsConfidenceInterval
         confidence_level:
           description: >-
             Configured nominal confidence level. Interval bounds can use an adjusted level for multiple testing or hybrid methods.
@@ -48251,18 +48223,6 @@ components:
           type: number
         z_score:
           description: "Standardized statistic used to compare the observed effect with zero."
-          format: double
-          type: number
-      type: object
-    ExperimentsVariantResultsV2DTODataAttributesMetricsItemsAnalysesItemsConfidenceInterval:
-      description: "Lower and upper bounds of the reported statistical interval."
-      properties:
-        lower:
-          description: "Lower bound of the reported interval."
-          format: double
-          type: number
-        upper:
-          description: "Upper bound of the reported interval."
           format: double
           type: number
       type: object
@@ -48351,12 +48311,41 @@ components:
       type: string
       x-enum-varnames:
         - EXPERIMENT_VARIANT_RESULTS
+    ExperimentsWarehouseEntryPoint:
+      description: Optional Warehouse measure that scopes analyzed subjects.
+      example:
+      nullable: true
+      properties:
+        filters:
+          description: Complete ordered Warehouse entry-point filter set.
+          example: []
+          items:
+            $ref: "#/components/schemas/ExperimentsWarehouseExposureFilter"
+          type: array
+        measure_id:
+          description: Warehouse measure UUID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+        - filters
+        - measure_id
+      type: object
+    ExperimentsWarehouseEntryPointFilterOperation:
+      description: "Comparison applied by the warehouse entry-point filter."
+      enum:
+        - IS
+        - IS_NOT
+      example: IS
+      type: string
+      x-enum-varnames:
+        - IS
+        - IS_NOT
     ExperimentsWarehouseExposureFilter:
       description: "A comparison that selects warehouse exposure data by a property."
       properties:
         operation:
           $ref: >-
-            #/components/schemas/ExperimentsPatchExperimentV2ResponseDataAttributesWarehouseExposureConfigurationEntryPointFiltersItemsOperation
+            #/components/schemas/ExperimentsWarehouseEntryPointFilterOperation
         property_id:
           description: Warehouse property UUID.
           example: 550e8400-e29b-41d4-a716-446655440000
@@ -48464,7 +48453,7 @@ components:
           type: string
         warehouse_metric_measure:
           $ref: >-
-            #/components/schemas/ExperimentsCreateMetricV2RequestDataAttributesPercentileAggregationWarehouseMetricMeasure
+            #/components/schemas/ExperimentsWarehouseMetricMeasure
         winsor_lower_fixed_value:
           description: Fixed lower bound used to cap extreme measure values.
           format: double
@@ -48487,6 +48476,17 @@ components:
       required:
         - operation
         - warehouse_metric_measure
+      type: object
+    ExperimentsWarehouseMetricMeasure:
+      description: "Reference to a measure defined in a warehouse metric SQL model."
+      properties:
+        id:
+          description: "Identifier of the warehouse metric measure."
+          example: 550e8400-e29b-41d4-a716-446655440021
+          format: uuid
+          type: string
+      required:
+        - id
       type: object
     ExperimentsWarehousePercentileAggregationInput:
       description: >-
@@ -48511,7 +48511,7 @@ components:
           type: array
         warehouse_metric_measure:
           $ref: >-
-            #/components/schemas/ExperimentsCreateMetricV2RequestDataAttributesPercentileAggregationWarehouseMetricMeasure
+            #/components/schemas/ExperimentsWarehouseMetricMeasure
       required:
         - percentile
         - warehouse_metric_measure
@@ -144623,7 +144623,7 @@ paths:
         - apiKeyAuth: []
       summary: Send AI tool user activity
       tags:
-        - DORA Metrics
+        - Delivery Performance
       x-codegen-request-body-name: body
       x-menu-order: 11
   /api/v2/annotation:
@@ -166061,7 +166061,7 @@ paths:
       security:
         - apiKeyAuth: []
       summary: Send a deployment event
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 1
   /api/v2/dora/deployment/{deployment_id}:
@@ -166094,7 +166094,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Delete a deployment event
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-menu-order: 8
       x-permission:
         operator: OR
@@ -166139,7 +166139,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Mark a deployment as failed by version
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 10
       x-permission:
@@ -166201,7 +166201,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Get a list of deployment events
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 3
       x-permission:
@@ -166254,7 +166254,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Get a deployment event
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-permission:
@@ -166307,7 +166307,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Mark a deployment as failed by ID
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 9
       x-permission:
@@ -166385,7 +166385,7 @@ paths:
       security:
         - apiKeyAuth: []
       summary: Send an incident event
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 2
   /api/v2/dora/failure/{failure_id}:
@@ -166418,7 +166418,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Delete an incident event
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-menu-order: 7
       x-permission:
         operator: OR
@@ -166482,7 +166482,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Get a list of incident events
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-permission:
@@ -166537,7 +166537,7 @@ paths:
           appKeyAuth: []
         - AuthZ: []
       summary: Get an incident event
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 6
       x-permission:
@@ -166617,7 +166617,7 @@ paths:
       security:
         - apiKeyAuth: []
       summary: Send an incident event (legacy)
-      tags: ["DORA Metrics"]
+      tags: ["Delivery Performance"]
       x-codegen-request-body-name: body
       x-menu-order: 12
   /api/v2/downtime:
@@ -251941,11 +251941,6 @@ tags:
   - description: Manage Digital Experience Monitoring journeys.
     name: DEM
   - description: |-
-      Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.
-
-      **Note**: DORA Metrics are not available in the US1-FED site.
-    name: DORA Metrics
-  - description: |-
       Interact with your dashboard lists through the API to
       organize, find, and share all of your dashboards with your team and
       organization.
@@ -251987,6 +251982,11 @@ tags:
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can
       view certain types of telemetry (for example, logs, traces, metrics, and RUM data).
     name: Datasets
+  - description: |-
+      Search, send, or delete events for Delivery Performance (formerly DORA Metrics) to measure and improve your software delivery performance. See the [Delivery Performance page](https://docs.datadoghq.com/dora_metrics/) for more information.
+
+      **Note**: Delivery Performance is not available in the US1-FED site.
+    name: Delivery Performance
   - description: |-
       Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information.
     name: Deployment Gates
