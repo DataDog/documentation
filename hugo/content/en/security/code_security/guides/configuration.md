@@ -12,6 +12,9 @@ further_reading:
 - link: /security/code_security/iac_security/configuration/
   tag: Documentation
   text: Infrastructure as Code (IaC) Security Configuration
+- link: /security/code_security/secret_scanning/configuration/
+  tag: Documentation
+  text: Secret Scanning Configuration
 ---
 
 Datadog Code Security can be configured in Datadog, in a file at the root of your repository, or in both locations.
@@ -20,29 +23,34 @@ Datadog Code Security can be configured in Datadog, in a file at the root of you
 
 The configuration file must begin with a `schema-version` key, followed by top-level keys for each product you want to configure. Use the schema version that matches the products you want to configure:
 
-| Schema version | Supported products |
-|---|---|
-| `v1.0` | SAST |
-| `v1.1` | SAST, SCA |
-| `v1.2` | SAST, SCA, IaC Security |
-| `v1.3` | SAST, SCA, IaC Security |
-| `v1.4` | SAST, SCA, IaC Security |
+| Schema version | Supported products | Added in this version |
+|---|---|---|
+| `v1.0` | SAST | SAST configuration |
+| `v1.1` | SAST, SCA | SCA path exclusions |
+| `v1.2` | SAST, SCA, IaC Security | IaC Security configuration |
+| `v1.3` | SAST, SCA, IaC Security | IaC per-rule configuration, including path scoping and severity overrides, and platform filters |
+| `v1.4` | SAST, SCA, IaC Security | Per-rule `arguments` for IaC rules |
+| `v1.5` | SAST, SCA, IaC Security, Secret Scanning | Secret Scanning file configuration |
+| `v1.6` | SAST, SCA, IaC Security, Secret Scanning | Experimental AST-based filtering for Secret Scanning |
+| `v1.7` | SAST, SCA, IaC Security, Secret Scanning | SCA ecosystem and package exclusions |
 
-Use `schema-version: v1.4` for all new configurations. It supports the same products as `v1.3` and adds per-rule `arguments` for IaC rules. Version `v1.3` added IaC configuration options such as per-rule path scoping, per-rule severity overrides, and platform filters. See [Infrastructure as Code (IaC) Security Configuration][3] for IaC-specific fields.
+Use `schema-version: {{< version key="code_security_schema_version" >}}` for all new configurations. Each field also has its own minimum `schema-version`. Use the highest version required by the fields you configure. The minimum version for each field is listed on the product configuration pages: [SAST][1], [SCA][2], [IaC Security][3], and [Secret Scanning][4].
 
 The following example shows the top-level structure:
 
 ```yaml
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   # Static Code Analysis (SAST) configuration
 sca:
   # Software Composition Analysis (SCA) configuration
 iac:
   # Infrastructure as Code (IaC) Security configuration
+secrets:
+  # Secret Scanning configuration
 ```
 
-The `sast`, `sca`, and `iac` sections are optional. Any configuration location, including the org level, repository level, or repository file, can include one or more sections. The `sast` section also controls AI-native SAST rulesets for Datadog-hosted scans. For the full schema for each section and AI-native SAST ruleset names, see [Static Code Analysis (SAST) Configuration][1], [Software Composition Analysis (SCA) Configuration][2], and [Infrastructure as Code (IaC) Security Configuration][3].
+The `sast`, `sca`, `iac`, and `secrets` sections are optional. Any configuration location, including the org level, repository level, or repository file, can include one or more sections. The `sast` section also controls AI-native SAST rulesets for Datadog-hosted scans. The `secrets` section controls which files are scanned for secrets; the rules themselves are configured in Datadog. For the full schema for each section, see [Static Code Analysis (SAST) Configuration][1], [Software Composition Analysis (SCA) Configuration][2], [Infrastructure as Code (IaC) Security Configuration][3], and [Secret Scanning Configuration][4]. The SAST page also lists the AI-native SAST ruleset names.
 
 ## Where to define configurations
 
@@ -93,7 +101,7 @@ The following example shows how configurations are merged:
 #### Org-level
 
 ```yaml
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-default-rulesets: false
   use-rulesets:
@@ -120,7 +128,7 @@ iac:
 #### Repo-level
 
 ```yaml
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-rulesets:
     - B
@@ -149,7 +157,7 @@ iac:
 #### Merged result
 
 ```yaml
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-default-rulesets: false
   use-rulesets:
@@ -195,3 +203,4 @@ The example demonstrates each merge rule from the table above:
 [1]: /security/code_security/static_analysis/configuration/
 [2]: /security/code_security/software_composition_analysis/configuration/
 [3]: /security/code_security/iac_security/configuration/
+[4]: /security/code_security/secret_scanning/configuration/

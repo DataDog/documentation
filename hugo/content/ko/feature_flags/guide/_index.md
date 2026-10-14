@@ -1,0 +1,22 @@
+---
+cascade:
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Feature Flags Guides
+disable_toc: true
+private: true
+title: Feature Flags 가이드
+---
+{{< whatsnext desc="Feature Flags 가이드:" >}}
+    {{< nextlink href="/getting_started/feature_flags" >}}Feature Flags 시작하기{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/server_flag_evaluation_metrics" >}}서버 측 플래그 평가 메트릭 설정{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/apm_trace_enrichment" >}}Feature Flags에 대한 APM 트레이스 보강 설정{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/migrate_flags_with_cli" >}}Flag Migration CLI로 Feature Flags 마이그레이션하기{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/migrate_from_launchdarkly" >}}LaunchDarkly에서 Feature Flags 마이그레이션하기{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/migrate_from_statsig" >}}Statsig에서 Feature Flags 마이그레이션하기{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/headless_cms" >}}Feature Flags와 헤드리스 CMS 통합{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/estimating_and_managing_costs" >}}Feature Flags 비용 추정 및 관리{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/proxy_sdk_traffic" >}}프록시 Feature Flag SDK 트래픽{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/proxy_server_setup" >}}Feature Flag SDK 트래픽을 위한 프록시 서버를 설정하십시오.{{< /nextlink >}}
+{{< /whatsnext >}}

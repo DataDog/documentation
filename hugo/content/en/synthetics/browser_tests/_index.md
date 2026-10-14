@@ -44,13 +44,13 @@ You may create a test using one of the following options:
 ### Create a test from a template
 
   1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, {{< ui >}}Steps{{< /ui >}}, and optionally {{< ui >}}Variables{{< /ui >}}.
-  2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
   3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
-  1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
+  1. Click the {{< ui >}}\+{{< /ui >}} template to start a new Browser Test from scratch.
   1. Enter a {{< ui >}}Starting URL{{< /ui >}}: The URL from which your browser test starts the scenario.
   1. Add a {{< ui >}}name{{< /ui >}}: The name of your browser test.
   1. Select {{< ui >}}environment and additional tags{{< /ui >}}: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
@@ -97,6 +97,11 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    * {{< ui >}}Disable CORS{{< /ui >}}: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
    * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
    * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
+
+     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.</div>
+
+     Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
+
    * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
@@ -107,6 +112,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
 [3]: /synthetics/browser_tests/test_results#resources
+[4]: /data_security/data_retention_periods/
    {{% /tab %}}
 
    {{% tab "Certificate" %}}
@@ -253,7 +259,7 @@ For more information, see [Synthetic Monitoring notifications][9].
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][10] and [Microsoft Edge][18]. To record your test, download the [Datadog Record Test extension][11].
+Tests can be recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension][11]. Because Microsoft Edge is Chromium-based, you can also install the Chrome extension in Edge after you turn on **Allow extensions from other stores**. See Microsoft's [guide to adding extensions from other stores][18] for instructions.
 
 You can switch tabs in a browser test recording to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][12]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
@@ -387,5 +393,5 @@ Use [granular access control][17] to limit who has access to your test based on 
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
-[18]: https://www.microsoft.com/edge
+[18]: https://support.microsoft.com/en-us/edge/add-turn-off-or-remove-extensions-in-microsoft-edge
 [19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

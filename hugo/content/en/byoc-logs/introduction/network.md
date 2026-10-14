@@ -37,12 +37,16 @@ If your environment uses an HTTP proxy, BYOC Logs supports standard proxy config
 
 Only **searcher** pods establish the reverse connection. Indexers, the control plane, the metastore, and the janitor do not initiate any connection to Datadog.
 
+<div class="alert alert-warning">Keep at least one searcher pod running when using the reverse connection. If all searcher pods are unavailable or scaled to <code>0</code>, Datadog cannot route queries or index management requests through the reverse connection until a searcher pod starts and reconnects.</div>
+
 ## Public ingress (optional)
 
 It is also possible to configure BYOC Logs to deploy a public ingress so Datadog can establish the connection in the other direction.
 
-The public ingress enables Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page](/byoc-logs/configure/ingress/).
+The public ingress enables Datadog to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /byoc-logs/configure/ingress/

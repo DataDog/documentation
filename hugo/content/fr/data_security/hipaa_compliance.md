@@ -8,10 +8,6 @@ further_reading:
 - link: data_security/logs
   tag: Documentation
   text: Sécurité des données pour Log Management
-- link: coterm
-  tag: Documentation
-  text: 'CoTerm : surveiller les sessions de terminal et les activités sensibles sur
-    les systèmes locaux et distants'
 title: Conformité à la norme HIPAA
 ---
 

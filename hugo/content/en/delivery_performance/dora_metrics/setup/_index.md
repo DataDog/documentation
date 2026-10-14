@@ -1,19 +1,13 @@
 ---
 title: Set up DORA Metrics
-description: "Configure deployment and failure event data sources for DORA Metrics including APM Deployment Tracking, API, CLI, and incident management."
+description: "Configure deployment event data sources for DORA Metrics including APM Deployment Tracking, API, and CLI."
 aliases:
 - /continuous_integration/dora_metrics/setup/
 - /continuous_integration/dora_metrics/setup/deployments
-- /continuous_integration/dora_metrics/setup/incidents
-- /dora_metrics/setup/incidents
 - /dora_metrics/setup/deployments
-- /dora_metrics/setup/failures/
 - /dora_metrics/deployments/apm
 - /dora_metrics/deployments/deployment_api
 - /dora_metrics/deployments
-- /dora_metrics/failures/incident_api
-- /dora_metrics/failures/pagerduty
-- /dora_metrics/failures/
 - /dora_metrics/setup/
 further_reading:
 - link: '/delivery_performance/dora_metrics/'
@@ -28,6 +22,9 @@ further_reading:
 - link: '/internal_developer_portal/catalog/'
   tag: 'Documentation'
   text: 'Learn about the Catalog'
+- link: '/internal_developer_portal/catalog/entity_model/v3_migration/'
+  tag: 'Documentation'
+  text: 'Migrate your service definitions to v3'
 - link: 'https://github.com/DataDog/datadog-ci'
   tag: 'Source Code'
   text: 'Learn about the datadog-ci CLI tool'
@@ -44,8 +41,6 @@ To start using DORA Metrics, follow these steps:
 2. **[Enrich deployments with commit information](#enrich-deployments-with-commit-information)**: Add Git metadata (repository URL and commit SHA) to your deployment events and synchronize your repository to Datadog to enable change lead time calculations.
 
 3. **[Customize Change Failure Detection](#customize-change-failure-detection)**: DORA Metrics automatically detects failed deployments through rollbacks (redeploying a previous version) and includes default rules for common rollforward patterns like revert PRs and hotfix labels. You can customize these rules to match your team's specific workflows and remediation patterns.
-
-4. **[(Optional) Set up incidents tracking](#optional-set-up-incidents-tracking)**: Integrate incident data to correlate detected change failures with production incidents, providing a complete view of how your deployments affect service health.
 
 When configured, deployment events automatically populate your [DORA Metrics dashboard][1] with performance data filtered by team, service, environment, and [custom tags](#custom-tags).
 
@@ -236,23 +231,32 @@ If your repositories are organized under [**GitLab groups or subgroups**][3] (fo
 `https://gitlab.com/my-org/group(/subgroup)/repo`),
 the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
 
-To ensure that DORA metrics handle your service's source code paths correctly,
-you can use the following configuration in your service definition:
+For DORA Metrics to resolve your service's source code paths correctly, declare the code locations explicitly in your entity definition. Use the `datadog.codeLocations` attribute, which is available with [entity schema v3][4]:
 
 ```yaml
-extensions:
-  datadoghq.com/dora-metrics:
-    source_patterns:
-      # All paths relative to the repository URL provided with the deployment
-      - **
-      # or specific paths related to this service (for monorepos)
-      - src/apps/shopist/**
-      - src/libs/utils/**
+apiVersion: v3
+kind: service
+metadata:
+  name: shopist
+datadog:
+  codeLocations:
+    # The repository that contains the service source code
+    - repositoryURL: https://gitlab.com/my-org/group/subgroup/repo.git
+      paths:
+        # Paths related to this service (for monorepos)
+        - src/apps/shopist/**
+        - src/libs/utils/**
 ```
+
+To include every path in the repository, use `**` as the only entry in `paths`.
+
+If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service Definitions to v3][5] to convert them.
 
 [1]: /integrations/gitlab-source-code/
 [2]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 [3]: https://docs.gitlab.com/user/group/
+[4]: /internal_developer_portal/catalog/entity_model/?tab=v30
+[5]: /internal_developer_portal/catalog/entity_model/v3_migration/
 
 {{% /tab %}}
 
@@ -284,6 +288,27 @@ To set up the integration:
 
 {{% /tab %}}
 
+{{% tab "Bitbucket" %}}
+
+<div class="alert alert-warning">
+Only Bitbucket Cloud Premium is supported. Bitbucket Data Center and Bitbucket Server are <strong>not</strong> supported.
+</div>
+
+If the [Bitbucket Cloud Source Code integration][1] is not already installed, install it on the [Bitbucket Cloud Source Code integration tile][2].
+
+When you create the workspace access token during [setup][3], grant at least the following scopes:
+
+- {{< ui >}}Account{{< /ui >}}: {{< ui >}}Read{{< /ui >}}
+- {{< ui >}}Repositories{{< /ui >}}: {{< ui >}}Read{{< /ui >}}
+- {{< ui >}}Pull requests{{< /ui >}}: {{< ui >}}Read{{< /ui >}}
+- {{< ui >}}Webhooks{{< /ui >}}: {{< ui >}}Read and write{{< /ui >}}
+
+[1]: /integrations/bitbucket-source-code/
+[2]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+[3]: /integrations/bitbucket-source-code/#setup
+
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -311,56 +336,51 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 If the source code of multiple services is present in the same repository, further actions are needed to ensure that the change lead time is calculated by taking into account only the commits affecting the specific service being deployed.
 
-To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][4].
+To measure only the commits that affect the service, declare the service source code location in the [entity definition][4] in one of two ways:
 
-If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
+- **[Code locations](#declare-code-locations-schema-v3) (recommended)**: The `datadog.codeLocations` attribute explicitly maps the service to a repository and a list of glob path patterns. It requires [entity schema v3][7].
+- **[Repository links](#declare-a-repository-link)**: A repository link points to the application folder with a full repository URL. A single path pattern is derived from it automatically.
+
+If both are defined for a service, only `datadog.codeLocations` is used to filter the commits.
+
+#### Declare code locations (schema v3)
+
+The `datadog.codeLocations` attribute specifies the repository that contains the service code, and the `paths` within that repository that belong to the service, as a list of [globs][8]:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: shopist
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/organization/example-repository.git
+      paths:
+        - src/apps/shopist/**
+        - src/libs/utils/**
+{{< /code-block >}}
+
+In this example, DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`. To include every path in the repository, use `**` as the only entry in `paths`.
+
+If your entity definitions use v1, v2, v2.1, or v2.2, see [Migrate Your Service Definitions to v3][7] to convert them.
+
+#### Declare a repository link
+
+If the entity definition contains a **full** repository URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the example below). Set `provider` to your source code provider: `github`, `gitlab`, `azure`, or `bitbucket`.
 
 **Example (schema version v2.2):**
-{{< tabs >}}
-{{% tab "GitHub" %}}
-```yaml
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" >}}
 links:
   - name: shopist
     type: repo
     provider: github
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
-```
-{{% /tab %}}
-{{% tab "GitLab" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: gitlab
-    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
-```
-{{% /tab %}}
-{{% tab "Azure DevOps" %}}
-```yaml
-links:
-  - name: shopist
-    type: repo
-    provider: azure
-    url: https://dev.azure.com/organization/project/_git/example-repository?path=/src/apps/shopist
-```
-{{% /tab %}}
-{{< /tabs >}}
+{{< /code-block >}}
 
-DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
+DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`.
 
-**Example (schema version v2.2):**
-
-```yaml
-extensions:
-  datadoghq.com/dora-metrics:
-    source_patterns:
-      - src/apps/shopist/**
-      - src/libs/utils/**
-```
-
-DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
-
-If the two metadata entries are defined for a service, only `extensions[datadoghq.com/dora-metrics]` is considered to filter the commits.
+For more granular control over which paths map to the service, declare [code locations](#declare-code-locations-schema-v3) instead.
 
 ## Customize Change Failure Detection
 
@@ -378,195 +398,9 @@ DORA Metrics automatically identifies failed deployments to calculate change fai
 
 For detailed information about how detection works and how to customize rules, see the [Change Failure Detection documentation][5].
 
-## (Optional) Set up incidents tracking
+## Additional configuration
 
-Integrating incident data provides a comprehensive view of how your deployment activity impacts service health. By tracking incidents alongside automatically detected change failures, you can correlate delivery performance with real-world operational impact and understand the full story of your software delivery's effect on service reliability.
-
-DORA Metrics supports the following options for tracking incidents:
-
-{{< tabs >}}
-{{% tab "Datadog Incidents" %}}
-DORA Metrics can automatically identify and track failures through [Datadog Incidents][1]. After incidents are declared, DORA uses them to measure change failure rate and time to restore.
-
-**Note**: The time to restore is measured as the total duration an incident spends in the `active` state. For cases like `active` → `stable` → `active` → `stable`, it includes all `active` periods. The time to restore is shown only when an incident is in a `stable` or `resolved` state. If a `resolved` incident is reactivated, the metric is hidden until it's `resolved` again.
-
-
-### Requirements
-
-- {{< ui >}}Incidents{{< /ui >}} is enabled as a {{< ui >}}Failures{{< /ui >}} event data source in [DORA settings][2].
-
-To avoid having unlabeled failures, Datadog strongly recommends adding the following attributes to incidents:
-  - {{< ui >}}Teams{{< /ui >}}
-  - {{< ui >}}Services{{< /ui >}}
-  - {{< ui >}}Envs{{< /ui >}}: The {{< ui >}}Envs{{< /ui >}} attribute can be added in the [Incident Settings][3] if it doesn't already exist.
-
-If provided with incidents, the `Severity` tag is added to failure events.
-
-**Recommended**: In the [Incident Settings][3], set attributes field {{< ui >}}Prompted{{< /ui >}} to {{< ui >}}At Resolution{{< /ui >}} to ensure you never forget to add these attributes to your incidents.
-
-### Include historical incidents
-
-You can retroactively include incidents from the past two years by selecting {{< ui >}}Backfill Data{{< /ui >}} in the [DORA settings][2], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
-
-[1]: /incident_response/incident_management/
-[2]: https://app.datadoghq.com/ci/settings/dora
-[3]: https://app.datadoghq.com/incidents/settings?section=property-fields
-
-
-{{% /tab %}}
-{{% tab "PagerDuty" %}}
-[PagerDuty][1] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
-
-To integrate your PagerDuty account with DORA Metrics:
-
-1. Enable {{< ui >}}PagerDuty{{< /ui >}} as a {{< ui >}}Failures{{< /ui >}} event data source in [DORA settings][2].
-
-1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Developer Tools{{< /ui >}} in PagerDuty and click {{< ui >}}Generic Webhooks (v3){{< /ui >}}.
-
-1. Click {{< ui >}}+ New Webhook{{< /ui >}} and enter the following details:
-
-     <table>
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Webhook URL</td>
-          <td>Add <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/</code>.</td>
-        </tr>
-        <tr>
-          <td>Scope Type</td>
-          <td>Select the scope of which incidents you want to send. You can send incidents for a specific {{< ui >}}Service{{< /ui >}} or {{< ui >}}Team{{< /ui >}}, or all PagerDuty services in your {{< ui >}}Account{{< /ui >}}. Depending on your environment and access level, some scope types may not be available.</td>
-        </tr>
-        <tr>
-          <td>Description</td>
-          <td>A description helps distinguish the webhook. Add something like <code>Datadog DORA Metrics integration</code>.</td>
-        </tr>
-        <tr>
-          <td>Event Subscription</td>
-          <td>Select the following events:<br>-<code>incident.acknowledged</code><br>-<code>incident.annotated</code><br>-<code>incident.custom_field_values.updated</code><br>-<code>incident.delegated</code><br>-<code>incident.escalated</code><br>-<code>incident.priority_updated</code><br>-<code>incident.reassigned</code><br>-<code>incident.reopened</code><br>-<code>incident.resolved</code><br>-<code>incident.triggered</code><br>-<code>incident.unacknowledged</code></td>
-        </tr>
-        <tr>
-          <td>Custom Headers</td>
-          <td>Click {{< ui >}}Add custom header{{< /ui >}}, enter <code>DD-API-KEY</code> as the name, and input your <a href="https://docs.datadoghq.com/api/latest/authentication/#api-keys">Datadog API key</a> as the value.<br><br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name <code>dd_env</code> and the desired environment as the value.</td>
-        </tr>
-      </tbody>
-    </table>
-
-1. To save the webhook, click {{< ui >}}Add Webhook{{< /ui >}}.
-
-The severity of the failure in the DORA Metrics product is based on the [incident priority][3] in PagerDuty.
-
-**Note:** Upon webhook creation, a new secret is created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed using the API key instead.
-
-### Mapping PagerDuty services to Datadog services
-
-When an incident event is received for a specific [PagerDuty service][4], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][5] and from the [Catalog][6].
-
-The matching algorithm works in the following steps:
-
-1. If the PagerDuty incident event was [triggered from a Datadog monitor][5]:
-   - If the monitor is in [Multi Alert mode][7], the incident metrics and events are emitted with the `env`, `service`, and `team` from the alerted group.
-   - If the monitor has [tags][8] for `env`, `service`, or `team`:
-     - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
-     - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
-     - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
-
-2. If the service URL of the incident matches the PagerDuty service URL for any services in the Catalog:
-   - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
-   - If multiple Datadog services match, the incident metrics and events are emitted with the team.
-
-   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Catalog][9].
-
-3. If the PagerDuty service name of the incident matches a service name in the Catalog, the incident metrics and events are emitted with the service and team.
-4. If the PagerDuty team name of the incident matches a team name in the Catalog, the incident metrics and events are emitted with the team.
-5. If the PagerDuty service name of the incident matches a team name in the Catalog, the incident metrics and events are emitted with the team.
-6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
-
-<div class="alert alert-danger">
-If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event does not contain monitor information and the first step of the matching algorithm is skipped.
-</div>
-
-[1]: /integrations/pagerduty/
-[2]: https://app.datadoghq.com/ci/settings/dora
-[3]: https://support.pagerduty.com/main/docs/incident-priority
-[4]: https://support.pagerduty.com/docs/services-and-integrations
-[5]: /integrations/pagerduty/#troubleshooting
-[6]: /internal_developer_portal/catalog/
-[7]: /monitors/configuration/#multi-alert
-[8]: /monitors/manage/#monitor-tags
-[9]: /internal_developer_portal/integrations/
-
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-To send your own failure events, use the [DORA Metrics API][1]. Failure events are used in order to calculate change failure rate and time to restore.
-
-Include the `finished_at` attribute in a failure event to mark that the failure is resolved. You can send events at the start of the failure and after it has been resolved. Failure events are matched by the `env`, `service` and `started_at` attributes.
-
-### Requirements
-
-- {{< ui >}}datadog-ci CLI / API{{< /ui >}} is enabled as a {{< ui >}}Failures{{< /ui >}} event data source in [DORA settings][2].
-- The following attributes are required:
-  - `services` or `team` (at least one must be present)
-  - `started_at`
-
-You can optionally add the following attributes to the failure events:
-- `finished_at` for *resolved failures*. ***Required for calculating time to restore***
-- `id` for identifying failures. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
-- `name` to describe the failure.
-- `severity`
-- `env` to filter your DORA metrics by environment on the [{{< ui >}}DORA Metrics{{< /ui >}} page][3].
-- `repository_url`
-- `commit_sha`
-- `version`
-- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [{{< ui >}}DORA Metrics{{< /ui >}} page][3].
-
-See the [DORA Metrics API reference documentation][1] for the full spec and additional code samples.
-
-### API (cURL) Example
-
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-
-```shell
-curl -X POST "https://api.<DD_SITE>/api/v2/dora/failure" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -d @- << EOF
-  {
-    "data": {
-      "attributes": {
-        "services": ["shopist"],
-        "team": "shopist-devs",
-        "started_at": 1693491974000000000,
-        "finished_at": 1693491984000000000,
-        "git": {
-          "commit_sha": "66adc9350f2cc9b250b69abddab733dd55e1a588",
-          "repository_url": "https://github.com/organization/example-repository"
-        },
-        "env": "prod",
-        "name": "Web server is down failing all requests",
-        "severity": "High",
-        "version": "v1.12.07",
-        "custom_tags": ["department:engineering", "app_type:backend"]
-      }
-    }
-  }
-EOF
-```
-
-[1]: /api/latest/dora-metrics/#send-a-failure-event-for-dora-metrics
-[2]: https://app.datadoghq.com/ci/settings/dora
-[3]: https://app.datadoghq.com/ci/dora
-
-
-{{% /tab %}}
-{{< /tabs >}}
+Delivery Performance general settings also identify the automation bots in your repositories. That configuration affects both DORA Metrics and AI Impact. For more information, see [Identify automation bots][9].
 
 ## Further Reading
 
@@ -578,3 +412,6 @@ EOF
 [4]: /internal_developer_portal/catalog/entity_model/
 [5]: /delivery_performance/dora_metrics/change_failure_detection/
 [6]: https://app.datadoghq.com/ci/settings/dora
+[7]: /internal_developer_portal/catalog/entity_model/v3_migration/
+[8]: https://en.wikipedia.org/wiki/Glob_(programming)
+[9]: /delivery_performance/ai_impact/setup/#identify-automation-bots

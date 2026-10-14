@@ -16,7 +16,9 @@ further_reading:
 
 ## Overview
 
-Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback.
+Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback. 
+
+You can work with Bits Code in Datadog or in a [Slack code channel][40].
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
@@ -36,6 +38,7 @@ After [completing setup][6], do one of the following to start a Bits Code sessio
 - Enter a freeform prompt at [{{< ui >}}Sessions{{< /ui >}}][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
 - Set up a Bits Code [automation][28]
+- In Slack, ask [Bits Chat][16] (with `@Datadog`) to make a code change, which hands off the task to Bits Code and creates a [code channel][40]
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
@@ -52,13 +55,12 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
-- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30], including *.ghe.com, *.github.com domains.
+- **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
 - **GitLab**: GitLab.com and GitLab Self-Managed.
+- **Azure DevOps Cloud**: [dev.azure.com and *.visualstudio.com][39].
 
 The following plans are not supported:
-- **Self-hosted GitHub Enterprise**: Custom domains are not supported.
-- **Cloud-hosted GitHub on dedicated domains**: such as [GitHub Enterprise Cloud with data residency][31] when using a custom domain name.
-- **Azure DevOps**: Neither Azure DevOps Cloud nor Azure DevOps Server (On-Prem) is supported by Bits Code. Datadog [Source Code Integration][37] does not support Azure DevOps Server (On-Prem).
+- **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
 - **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
 ## Supported Datadog products
@@ -107,12 +109,18 @@ Bits Code automatically invokes appropriate skills based on their `name` and `de
 
 Bits Code also [ingests custom instructions][33] defined in your repository and Bits Code settings.
 
+### Code channels in Slack
+
+When you ask [Bits Chat][16] in Slack to make a code change, Bits Code creates a dedicated [code channel][40] for that task. In the code channel, you and your team can steer the agent, view a diff of proposed changes, and open a pull or merge request.
+
 ### Pull or merge request collaboration
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
-- Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
+- Iterate on pull or merge requests in response to comments on GitHub, GitLab, and Azure DevOps: mention `@Datadog` in a comment to ask Bits Code for updates
 - Monitor CI logs and pull or merge request state to fix failures and merge blockers
+
+While Bits Code works on your request, it keeps a single status comment up to date on the pull or merge request. The comment shows the state of the run and the actions and links available to you, including a link to the Datadog session when the request is backed by one. When CI Auto-fix is available, the comment also shows its status and controls to fix failing CI checks.
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
@@ -120,7 +128,6 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 
 - Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
 - Bits Code does not support multi-repository investigations.
-- When using GitLab, mentioning `@Datadog` in a comment to prompt Bits for updates is not supported.
 
 ## Further reading
 
@@ -158,3 +165,6 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
 [33]: /bits_ai/bits_code/setup/#configure-custom-instructions
 [37]: /source_code/source-code-management#source-code-management-providers
+[38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
+[39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops
+[40]: /bits_ai/bits_code/slack_code_channels/

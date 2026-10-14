@@ -3,7 +3,6 @@ title: Service remapping rules
 aliases:
 - /tracing/services/inferred_entity_remapping_rules/
 - /tracing/services/renaming_rules/
-site_support_id: service_remapping_rules
 further_reading:
 - link: "https://www.datadoghq.com/blog/service-remapping/"
   tag: "Blog"
@@ -63,6 +62,9 @@ In the text box, enter a unique name for the selected entity (or entities). Alte
 
 1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
 1. Review and save your remapping rule. After you save your rule, _it may take about a minute for it to take effect_.
+
+## Service remapping with Bits Chat 
+Rename your services with the Bits Chat service remapping skill. To enable the skill, navigate to **Bits AI** > **Bits Chat** > **Settings**. Go to **Skills**, and turn on `service-remapping`. Then, prompt Bits Chat to create, delete, or update remapping rules.
 
 ## Remapping rules behavior
 

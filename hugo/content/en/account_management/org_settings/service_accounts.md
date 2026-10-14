@@ -72,7 +72,7 @@ a service account. SATs are scoped, optionally long-lived, and standalone — th
 To create a SAT for a service account:
 
 1. Navigate to [**Organization Settings** > **Service Accounts**][2] and click a service account. The details panel appears.
-2. Under **Access Tokens**, click {{< ui >}}+ New Token{{< /ui >}}.
+2. Under **Access Tokens**, click {{< ui >}}\+ New Token{{< /ui >}}.
 3. Follow the steps in [Create a Service Access Token][5].
 
 ### Create or revoke application keys

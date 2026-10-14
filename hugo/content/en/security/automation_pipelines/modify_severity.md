@@ -17,6 +17,9 @@ further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
     text: "Automation Pipelines"
+  - link: "/security/manual_severity_adjustment/"
+    tag: "Documentation"
+    text: "Severity Adjustment"
 ---
 
 {{< product-availability >}}
@@ -51,6 +54,8 @@ Configure severity modifier rules to adjust finding severities to reflect your o
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 **Note**: You cannot use `@severity` or `@severity_details.user_adjusted` in the rule query. Severity modifier rules are evaluated against the Datadog-adjusted severity (`@severity_details.adjusted.value`), not the `@severity` value stored in the finding.
+
+You can also create severity modifier rules with the [API][3] or the [`datadog_security_findings_severity_modifier_rule`][4] Terraform resource.
 
 ## Evaluation order
 
@@ -124,3 +129,5 @@ Severity modifiers are not cleared or updated for findings that transition to au
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=modify_severity
+[3]: /api/latest/security-monitoring/create-a-severity-modifier-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_severity_modifier_rule

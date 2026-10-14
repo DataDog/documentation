@@ -103,10 +103,14 @@ nav_sections:
         link: watchdog/
         icon: watchdog
         desc: 애플리케이션 및 인프라스트럭처의 이상 징후를 감지하고 표면화합니다.
-      - title: LLM Observability
+      - title: Agent Observability
         link: llm_observability/
         icon: llm-observability
         desc: "LLM 애플리케이션을 트레이스, 모니터링하고 보안을 유지합니다."
+      - title: MCP 서버
+        link: mcp_server/
+        icon: bits-ai
+        desc: "AI 에이전트를 관측 데이터에 연결하여 메트릭, 로그, 추적 등을 쿼리하십시오."
   - nav_section:
     - name: '디지털 경험'
     - navtiles:
@@ -130,6 +134,10 @@ nav_sections:
         link: mobile_app_testing/
         icon: mobile
         desc: 모바일 애플리케이션의 사용자 여정 및 비즈니스 트랜잭션을 모니터링합니다.
+      - title: 실험
+        link: experiments/
+        icon: experiment-wui
+        desc: "A/B 테스트를 계획, 실행 및 분석하여 제품 변경의 영향을 측정하십시오."
   - nav_section:
     - name: '소프트웨어 제공'
     - navtiles:
@@ -154,7 +162,7 @@ nav_sections:
         icon: ide
         desc: 코딩하면서 IDE에서 Datadog 서비스와 직접 상호 작용합니다.
       - title: DORA Metrics
-        link: dora_metrics/
+        link: delivery_performance/dora_metrics/
         icon: ci
         desc: 조직의 소프트웨어 배포 프로세스를 측정하고 개선합니다.
       - title: Feature Flag
@@ -266,19 +274,19 @@ nav_sections:
         link: api/latest/
         icon: api
         desc: Datadog API를 사용해 보세요.
-      - title: Data Security
+      - title: 데이터 보안
         link: data_security/
         icon: security-lock
         desc: Datadog의 데이터 보호에 대해 알아보세요.
-      - title: Client SDK
+      - title: 클라이언트 SDK
         link: client_sdks/
         icon: building-block
         desc: 플랫폼에 Datadog SDK를 설치하고 구성합니다.
-      - title: Extend Datadog
+      - title: Datadog 확장
         link: extend/
         icon: dev-code
         desc: Datadog 플랫폼을 확장합니다.
-      - title: Partners
+      - title: 파트너
         link: partners/
         icon: colab
         desc: 모범 사례에 대해 알아보고 고객 환경 모니터링을 시작하세요.

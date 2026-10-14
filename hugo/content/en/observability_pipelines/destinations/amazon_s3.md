@@ -10,10 +10,6 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-The Amazon S3 destination is in Preview. Contact your account manager for access.
-{{< /callout >}}
-
 ## Overview
 
 Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema).
@@ -104,6 +100,11 @@ After you select the Amazon S3 destination in the pipeline UI:
 
 1. Enter a maximum batching size and select the unit ({{< ui >}}MB{{< /ui >}} or {{< ui >}}GB{{< /ui >}}) in the dropdown menu. If not configured, the default is `100` MB.
 1. Enter a batching timeout in seconds. If not configured, the default is `900` seconds.
+
+#### Server-side encryption
+
+1. Select an encryption type for your S3 bucket in the {{< ui >}}Server-Side Encryption{{< /ui >}} dropdown menu: {{< ui >}}AWS KMS{{< /ui >}} or {{< ui >}}AES256{{< /ui >}}.
+1. If you selected {{< ui >}}AWS KMS{{< /ui >}}, enter the AWS KMS key ID.
 
 #### AWS authentication
 

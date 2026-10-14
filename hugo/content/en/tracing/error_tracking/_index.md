@@ -38,9 +38,16 @@ To get started with configuring your repository, see the [Source Code Integratio
 
 The Datadog SDKs collect errors through integrations and the manual instrumentation of your backend services' source code. An error span must contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] and belong to a complete trace to be tracked. If an error is reported multiple times within a service, only the top-most error is kept.
 
+<div class="alert alert-warning">
+The Go tracer introduced a change of attributes used to report stack traces in its v2.7.0 version.
+For older Go tracer versions (before v2.7.0), the stack trace is reported in the <code>error.stack</code> span attribute.
+Starting with v2.7.0, the Go tracer reports the handling stack trace in the <code>error.handling_stack</code> span attribute (with <code>error.stack</code> now carrying the throwing stack when available).
+See <a href="/tracing/error_tracking/stack_traces/">Stack Traces in Error Tracking</a> for details.
+</div>
+
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 
-Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
+Error Tracking computes a fingerprint for each error span it processes. The fingerprint uses the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
 
 ## Control which errors are tracked
 

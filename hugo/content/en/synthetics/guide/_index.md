@@ -66,4 +66,5 @@ cascade:
     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Use authentication in API and multistep API tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}Use time-based one-time passwords (TOTPs) for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-passkeys/" >}}Use passkeys (FIDO2) in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/mobile-test-auth-tokens/" >}}Inject and auto-refresh auth tokens in Mobile Application Tests{{< /nextlink >}}
 {{< /whatsnext >}}

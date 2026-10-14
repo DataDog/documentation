@@ -1,8 +1,8 @@
 ---
 algolia:
   tags:
-  - integración
-  - configuración de la integración
+  - integration
+  - integration setup
 aliases:
 - /es/integrations/verisign_openhybrid/
 - /es/integrations/snyk/
@@ -17,14 +17,17 @@ aliases:
 - /es/integrations/perimeterx/
 - /es/integrations/open-policy-agent/
 - /es/integrations/open_policy_agent/
+- /es/integrations/coreos/
+- /es/integrations/ubuntu/
+- /es/integrations/amazon-opsworks/
 cascade:
 - _target:
     lang: en
     path: /integrations/azure
   algolia:
-    category: Documentación
+    category: Documentation
     rank: 80
-    subcategory: Integraciones
+    subcategory: Integrations
     tags:
     - azure
     - microsoft azure
@@ -32,18 +35,18 @@ cascade:
     lang: en
     path: /integrations/kubernetes_state_core
   algolia:
-    category: Documentación
+    category: Documentation
     rank: 60
-    subcategory: Integraciones
+    subcategory: Integrations
     tags:
     - ksm
 - _target:
     lang: en
     path: /integrations/google_cloud_platform
   algolia:
-    category: Documentación
+    category: Documentation
     rank: 80
-    subcategory: Integraciones
+    subcategory: Integrations
     tags:
     - gcp
     - google cloud platform
@@ -51,9 +54,9 @@ cascade:
     lang: en
     path: /integrations/amazon_web_services
   algolia:
-    category: Documentación
+    category: Documentation
     rank: 80
-    subcategory: Integraciones
+    subcategory: Integrations
     tags:
     - aws
     - amazon web services
@@ -61,28 +64,31 @@ cascade:
     lang: en
     path: /integrations/eks_fargate
   algolia:
-    category: Documentación
+    category: Documentation
     rank: 60
-    subcategory: Integraciones
+    subcategory: Integrations
     tags:
-    - generación de logs eks
+    - eks logging
 - _target:
     lang: en
     path: /integrations/event-viewer
   algolia:
-    category: Documentación
+    category: Documentation
     rank: 60
-    subcategory: Integraciones
+    subcategory: Integrations
     tags:
-    - visor de eventos
-description: Reúne datos de todos tus sistemas, aplicaciones y servicios
+    - event viewer
+- _target:
+    lang: en
+    path: /integrations/confluent-cloud
+  site_support_id: confluent_cloud_integration
+description: Recopile datos de todos sus sistemas, aplicaciones y servicios
 disable_sidebar: true
-title: Integraciones
+title: Integrations
 ---
+Más de {{< translate key="integration_count" >}} Integrations integradas. Visualice todos sus sistemas, aplicaciones y servicios.
 
-Más de {{< translate key="integration_count" >}} integraciones incorporadas. Visualiza todos tus sistemas, aplicaciones y servicios.
-
-¿Qué es una integración? Consulta [Introducción a las integraciones][1].
+¿Qué es una Integrations? Consulte [Introducción a las Integrations][1].
 
 {{< integrations >}}
 

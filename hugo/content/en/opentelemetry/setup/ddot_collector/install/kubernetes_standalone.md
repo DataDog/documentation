@@ -768,6 +768,18 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 {{% /tab %}}
 {{< /tabs >}}
 
+## Install the core Datadog Agent alongside DDOT
+
+If you want to run the core Datadog Agent on the same nodes as the standalone DDOT Collector—for example, to collect infrastructure metrics, APM, or logs through the core Agent while DDOT handles OTLP ingestion—you can install it separately using the [Datadog Operator][57].
+
+By default, the Datadog Operator Helm chart watches <code>DatadogAgent</code> resources only in the namespace where the Operator is installed (<code>watchNamespaces: []</code>). If the <code>DatadogAgent</code> resource is in a different namespace than the Operator, for example, to keep it separate from the <code>OpenTelemetryCollector</code> resource's namespace, set <code>watchNamespaces</code> to include the namespace where the <code>DatadogAgent</code> resource is created:
+<pre><code>helm upgrade datadog-operator datadog/datadog-operator \
+  -n &lt;OPERATOR_NAMESPACE&gt; \
+  --reuse-values \
+  --set 'watchNamespaces[0]=&lt;DATADOG_AGENT_NAMESPACE&gt;'
+</code></pre>
+If the Operator doesn't watch the namespace where the <code>DatadogAgent</code> resource is created, the resource silently fails to reconcile, with no error, no Kubernetes event, and no status update to indicate the problem.
+
 ## Send your telemetry to Datadog
 
 To send your telemetry data to Datadog:
@@ -905,3 +917,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [54]: https://helm.sh
 [55]: https://opentelemetry.io/docs/platforms/kubernetes/operator/
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
+[57]: /getting_started/containers/datadog_operator/

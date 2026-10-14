@@ -23,8 +23,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/fleet-automation/"
   tag: "Blog"
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
-site_support_id: fleet-automation-standard-features
 ---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED).<br><br>
+Additional Fleet Automation functionality such as Configuring Agents, Upgrading Agents, and Upgrading SDKs are not supported for your selected Datadog site ({{< region-param key=dd_site_name >}}).
+</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -37,6 +43,7 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 With Fleet Automation, you can:
 - **[View Agent and OTel Collector configurations][3]** along with historical changes to confirm deployment updates and verify configuration consistency.
 - **[Configure Datadog Agents][4]** to centralize setup and gain visibility into your environments faster.
+- **[Manage Datadog Agent tags][4]** _(Preview)_ to correct and standardize tagging across your fleet.
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
 - **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.

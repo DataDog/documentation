@@ -1,5 +1,6 @@
 ---
 title: Fluentd and Fluent Bit Sources
+description: Learn how to collect logs from a Fluentd or Fluent Bit agent using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

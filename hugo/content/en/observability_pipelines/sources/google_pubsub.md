@@ -1,5 +1,6 @@
 ---
 title: Google Pub/Sub Source
+description: Learn how to pull logs from Google Cloud Pub/Sub using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

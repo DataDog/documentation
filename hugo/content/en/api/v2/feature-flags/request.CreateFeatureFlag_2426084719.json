@@ -1,0 +1,35 @@
+{
+  "data": {
+    "type": "feature-flags",
+    "attributes": {
+      "default_variant_key": "variant-Example-Feature-Flag-1",
+      "description": "Test feature flag with notification rule targets for BDD scenarios",
+      "key": "test-feature-flag-notify-Example-Feature-Flag",
+      "name": "Test Feature Flag Notify Example-Feature-Flag",
+      "value_type": "BOOLEAN",
+      "variants": [
+        {
+          "key": "variant-Example-Feature-Flag-1",
+          "name": "Variant Example-Feature-Flag A",
+          "value": "true"
+        },
+        {
+          "key": "variant-Example-Feature-Flag-2",
+          "name": "Variant Example-Feature-Flag B",
+          "value": "false"
+        }
+      ],
+      "notification_rule_query": "notification_type:rollout_started",
+      "rule_targets": [
+        {
+          "type": "SLACK_CHANNEL",
+          "version": 1,
+          "configuration": {
+            "channel": "#feature-flags-test",
+            "workspace": "datadoghq"
+          }
+        }
+      ]
+    }
+  }
+}

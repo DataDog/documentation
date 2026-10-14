@@ -6,77 +6,83 @@ aliases:
 code_lang: swift
 code_lang_weight: 50
 further_reading:
-- link: /continuous_integration/tests
+- link: /tests
   tag: ドキュメント
-  text: テスト結果とパフォーマンスを確認する
-- link: /continuous_integration/intelligent_test_runner/swift
+  text: テスト結果とパフォーマンスを調べる
+- link: /tests/test_impact_analysis/swift
   tag: ドキュメント
-  text: Intelligent Test Runner でテストジョブを高速化する
-- link: /continuous_integration/troubleshooting/
+  text: Test Impact Analysis を使用してテストジョブを高速化する
+- link: /tests/troubleshooting/
   tag: ドキュメント
-  text: CI Visibility のトラブルシューティング
+  text: Test Optimization のトラブルシューティング
 title: Swift テスト
 type: multi-code-lang
 ---
+## 互換性{#compatibility}
 
-## 互換性
+サポート対象言語:
 
-対応言語:
+| 言語    | バージョン |
+| ----------- | ------- |
+| Swift       | 6.2 以上|
+| Objective-C | 2.0 以上|
+| Xcode       | 26.0 以上|
 
-| 言語 | バージョン | 注 |
-|---|---|---|
-| Swift | >= 5.2 | Swift Concurrency を使用している場合、非同期タスクの正確なスパン表現には Xcode 13.2 以上が必要です。 |
-| Objective-C | >= 2.0 | |
+サポート対象プラットフォーム:
 
-対応プラットフォーム:
+| プラットフォーム     | バージョン  |
+| ------------ | -------- |
+| iOS / iPadOS | 15.0 以上|
+| macOS        | 11.0 以上|
+| tvOS         | 15.0 以上|
+| macCatalyst  | 13.0 以上|
 
-| プラットフォーム | バージョン |
-|---|---|
-| iOS | >= 11.0 |
-| macOS | >= 10.13 |
-| tvOS | >= 11.0 |
+サポート対象テストフレームワーク:
 
-## Swift テスト用 SDK のインストール
+| フレームワーク     | SDK バージョン  | サポートレベル                                     |
+| ------------- | ------------ | ------------------------------------------------- |
+| XCTest        | すべてのバージョン | 完全サポート                                      |
+| Swift Testing | 2.7.0 以上  | 2.7.1 以上で完全サポート。2.7.0 は監視のみ |
 
-テストフレームワークのインストール方法は 3 つあります。
+## Swift テスト SDK のインストール{#installing-the-swift-testing-sdk}
+
+テストフレームワークをインストールする方法は、3 つあります。
 
 {{< tabs >}}
-{{% tab "Swift パッケージマネージャー" %}}
+{{% tab "Swift Package Manager" %}}
 
-### Xcode プロジェクトの使用
+### Xcode プロジェクトの使用{#using-xcode-project}
 
-1. プロジェクトに `dd-sdk-swift-testing` パッケージを追加します。これは、[`https://github.com/DataDog/dd-sdk-swift-testing`][1] にあります。
+1. `dd-sdk-swift-testing` パッケージをプロジェクトに追加します。[`https://github.com/DataDog/dd-sdk-swift-testing`][1] にあります。
 
 {{< img src="continuous_integration/swift_package.png" alt="Swift パッケージ" >}}
 
 
-2. パッケージに含まれるライブラリ `DatadogSDKTesting` とテストターゲットをリンクします。
+2. テストターゲットをパッケージからのライブラリ `DatadogSDKTesting` にリンクします。
 
-{{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
+{{< img src="continuous_integration/swift_link2.png" alt="Swift から SPM にリンク" >}}
 
-3. UITests を実行する場合は、テストを実行するアプリもこのライブラリでリンクします。
+3. UI テストを実行し、RUM を使用しない場合は、テストを実行するアプリケーションに依存関係を追加することも行います。
 
-### Swift パッケージプロジェクトの使用
+### Swift パッケージプロジェクトの使用{#using-swift-package-project}
 
-1. パッケージの依存関係の配列に `dd-sdk-swift-testing` を追加します。例:
+1. `dd-sdk-swift-testing` をパッケージの依存関係配列に追加します。たとえば、以下のようにします。
 
 {{< code-block lang="swift" >}}
-.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.2.0")
+.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.5.3")
 {{< /code-block >}}
 
-2. テスト対象の依存関係にテストフレームワークを追加するには、以下の行をテスト対象の依存関係の配列に追加します。
+2. テストフレームワークをテストターゲットの依存関係に追加するには、テストターゲットの依存関係配列に次の行を追加します。
 {{< code-block lang="swift" >}}
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. UITests を実行する場合は、テストを実行するアプリケーションにも依存関係を追加します。
-
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
-{{% tab "Cocoapods" %}}
+{{% tab "CocoaPods" %}}
 
-1. `DatadogSDKTesting` 依存関係を `Podfile` のテストターゲットに追加します。
+1. `Podfile` のテストターゲットに `DatadogSDKTesting` 依存関係を追加します:
 
 {{< code-block lang="ruby" >}}
 target 'MyApp' do
@@ -89,60 +95,77 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. UITests を実行する場合は、テストを実行するアプリにも依存関係を追加します。
-
 {{% /tab %}}
 {{% tab "フレームワークのリンク" %}}
 
-1. [リリース][1]のページから `DatadogSDKTesting.zip` をダウンロードし、解凍します。
+1. [リリース][1] ページから `DatadogSDKTesting.zip` をダウンロードして解凍します。
 
-2. 出来上がった XCFramework にテストターゲットをコピーしてリンクします。
+2. テストターゲットをコピーし、結果の XCFramework とリンクします。
 
-{{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
-
-3. UITests を実行する場合は、テストを実行するアプリもこのライブラリでリンクします。
+{{< img src="continuous_integration/swift_link.png" alt="Swift から XCFramework にリンク" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
-{{% tab "GitHub Actions" %}}
-
-GitHub を使用している場合、GitHub Marketplace から [Swift テストアクション][1]を使用して、テストを自動的に構成して実行することができます。デフォルトでは、このページで説明されている残りの構成はスキップできますが (アクション自体の構成を除く)、設定環境変数を使って、追加機能の無効化や設定をすることができます。
-
-Cocoapods やフレームワークのリンクなど他の方法と比較して、Swift テストアクションオプションは設定や実行の柔軟性に欠ける可能性がありますが、コードの変更は必要ありません。
-
-[1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
-{{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-danger"><strong>注</strong>: このフレームワークはテストにのみ有用であり、テストを実行するときのみアプリケーションとリンクさせる必要があります。フレームワークをユーザーに配布しないでください。 </div>
 
+<div class="alert alert-danger">このフレームワークはテスト専用であり、テスト実行時にのみアプリケーションとリンクする必要があります。このフレームワークをユーザーに配布しないでください。</div>
 
+## テストのインスツルメンテーション{#instrumenting-your-tests}
 
+### Swift Testing フレームワーク{#swift-testing-framework}
 
-## テストのインスツルメンテーション
+Datadog SDK は、バージョン 2.7.0 (監視のみ) から Swift Testing フレームワークをサポートしており、バージョン 2.7.1 以上ではすべての高度な機能を完全にサポートしています。
 
-### Datadog の構成
+#### Swift Testing 監視の設定{#setting-up-swift-testing-observation}
 
-#### Xcode プロジェクトの使用
+Swift Testing テストの監視を有効にするには、以下の手順に従います。
 
-テストのインスツルメンテーションを有効にするには、テストターゲットに以下の環境変数を追加するか、または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに追加します。テストプランを使用している場合は、`Expand variables based on` または `Target for Variable Expansion` でメインターゲットを選択する**必要があります**。
+1. テストソースファイルに `DatadogSDKTesting` をインポートします:
+
+{{< code-block lang="swift" >}}
+import DatadogSDKTesting
+import Testing
+{{< /code-block >}}
+
+2. テストスイートまたはスタンドアロンのテスト関数に `.datadogTesting` トレイトを追加します:
+
+{{< code-block lang="swift" >}}
+@Suite(.datadogTesting)
+struct MyTestSuite {
+    @Test func myTest() {
+        // ...
+    }
+}
+
+// For standalone test functions:
+@Test(.datadogTesting) func myStandaloneTest() {
+    // ...
+}
+{{< /code-block >}}
+
+### SDK の構成{#configuring-sdk}
+
+#### Xcode プロジェクトの使用{#using-xcode-project-1}
+
+テストのインスツルメンテーションを有効にするには、[以下で説明する](#using-infoplist-for-configuration)ように、以下の環境変数をテストターゲットまたは `Info.plist` ファイルに追加します。テストプランを使用している場合は、**必ず** {{< ui >}}Expand variables based on{{< /ui >}} または {{< ui >}}Target for Variable Expansion{{< /ui >}} でメインターゲットを選択してください。
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift 環境" >}}
 
-<div class="alert alert-danger">環境変数の変数展開にはメインターゲットを設定する必要があります。選択されていない場合、変数は無効になります。 </div>
+<div class="alert alert-danger">環境変数の変数展開にメインターゲットを含める必要があります。選択されていない場合、変数は無効になります。</div>
 
-UITests の場合、フレームワークがこれらの値をアプリケーションに自動で注入するため、環境変数はテストターゲットにのみ設定する必要があります。
+UI テストの場合、フレームワークがこれらの値をアプリケーションに自動的にインジェクトするため、環境変数はテストターゲットにのみ設定する必要があります。
 
-#### Swift パッケージプロジェクトの使用
+#### Swift パッケージプロジェクトの使用 {#using-swift-package-project-1}
 
-テストのインスツルメンテーションを有効にするには、以下の環境変数をテストのコマンドライン実行に設定する必要があります。代わりに、テストを実行する前に環境に設定することもできますし、コマンドに前置きすることもできます。
+テストのインスツルメンテーションを有効にするには、テストのコマンドライン実行に以下の環境変数を設定する必要があります。あるいは、テストを実行する前に環境に設定するか、コマンドの先頭に付加することもできます。
 
 <pre>
 <code>
-DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD swift test ...
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD swift test ...
 
 or
 
-DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD xcodebuild test -scheme ...
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD xcodebuild test -scheme ...
 </code>
 </pre>
 
@@ -150,161 +173,178 @@ DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_
 テストターゲットにこれらすべての変数を設定します。
 
 `DD_TEST_RUNNER`
-: テストのインスツルメンテーションを有効または無効にします。この値を `$(DD_TEST_RUNNER)` に設定すると、テストプロセスの外部 (CI ビルドなど) で定義された環境変数を使用してテストインスツルメンテーションを有効または無効にできます。<br/>
+: テストのインスツルメンテーションを有効または無効にします。この値を `$(DD_TEST_RUNNER)` に設定すると、テストプロセス外 (CI ビルドなど) で定義された環境変数を使用して、テストのインスツルメンテーションを有効または無効にできます。<br/>
 **デフォルト**: `false`<br/>
 **推奨**: `$(DD_TEST_RUNNER)`
 
-`DD_API_KEY`
-: テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
+`DD_API_KEY` (必須)
+: テスト結果のアップロードを認証するために使用される [Datadog API キー][2]。<br/>
 **デフォルト**: `(empty)`
 
-`DD_APPLICATION_KEY`
-: テスト結果のアップロードに使用される [Datadog アプリケーションキー][5]。<br/>
-**デフォルト**: `(empty)`
+`DD_TEST_SESSION_NAME` (オプション)
+: テストのグループ (`unit-tests`、`integration-tests`、`smoke-tests` など) を識別します。<br/>
+**デフォルト**: CI ジョブ名とテストコマンド、または CI ジョブ名が利用できない場合はテストコマンド。<br/>
+**例**: `unit-tests`、`integration-tests`、`smoke-tests`
 
-`DD_SERVICE`
+`DD_SERVICE` (オプション)
 : テスト対象のサービスまたはライブラリの名前。<br/>
 **デフォルト**: リポジトリ名<br/>
 **例**: `my-ios-app`
 
-`DD_ENV`
-: テストが実行されている環境の名前。この値を `$(DD_ENV)` に設定して、実行時に環境変数を使用して設定できるようにします。<br/>
-**デフォルト**: `none`<br/>
+`DD_ENV` (オプション)
+: テストが実行されている環境の名前。<br/>
+**デフォルト**: `ci` (CI プロバイダーが検出される場合)。それ以外の場合は `none`。<br/>
 **推奨**: `$(DD_ENV)`<br/>
-**例**: `ci`、`local`
+**例**: `local`、`ci`
 
 `SRCROOT`
-: プロジェクトの場所へのパス。Xcode を使用している場合、この値は自動的に設定されるため、`$(SRCROOT)` を使用します。<br/>
+: プロジェクトの場所へのパス。Xcode を使用している場合は、自動的に設定されるため、値に `$(SRCROOT)` を使用してください。<br/>
 **デフォルト**: `(empty)`<br/>
 **推奨**: `$(SRCROOT)`<br/>
 **例**: `/Users/ci/source/MyApp`
 
-`service` と `env` の予約タグの詳細については、[統合サービスタグ付け][8]を参照してください。
+`service` および `env` の予約タグの詳細については、[unified service tagging][8] を参照してください。
 
-さらに、選択したサイトを使用するように Datadog サイトを構成します ({{< region-param key="dd_site_name" >}}):
+`DD_SITE` を構成します。サイト ({{< region-param key="dd_site_name" >}}) のためです。
 
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][3]。<br/>
+`DD_SITE` (オプション)
+: 結果のアップロード先となる [Datadog サイト][3]。<br/>
 **デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+**選択されたサイト**:{{< region-param key="dd_site" code="true" >}}
 
-## Git のメタデータを収集する
+## Git のメタデータを収集する {#collecting-git-metadata}
 
 {{% ci-git-metadata %}}
 
-### テストの実行
+### テストの実行 {#running-tests}
 
-インストール後、通常どおりにテストを実行します。たとえば、`xcodebuild test` コマンドを使用します。テスト、ネットワークリクエスト、アプリケーションクラッシュは自動的に記録されます。CI でテストを実行するときに、環境変数を渡します。次に例を示します。
+インストール後、通常通りテストを実行します。たとえば、`xcodebuild test` コマンドを使用します。テスト、ネットワークリクエスト、アプリケーションのクラッシュは自動的にインスツルメンテーションされます。CI でテストを実行する際は、環境変数を渡します。たとえば、以下のようにします。
 
 <pre>
 <code>
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
+DD_TEST_RUNNER=1 DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
-  -destination "platform=macOS,arch=x86_64" \
+  -destination "platform=macOS,arch=arm64" \
   test
 </code>
 </pre>
 
-### UI テスト
+### UI テスト {#ui-tests}
 
-UITests では、テストターゲットと UITests から実行されるアプリケーションの両方がフレームワークとリンクしている必要があります。フレームワークがこれらの値をアプリケーションに自動で注入するため、環境変数はテストターゲットにのみ設定する必要があります。
+### RUM インテグレーション {#rum-integration}
 
-### RUM インテグレーション
+テスト対象のアプリケーションが RUM を使用してインスツルメンテーションされている場合、UI テストの結果と生成された RUM セッションが自動的にリンクされます。RUM の詳細については、[RUM iOS インテグレーション][4] ガイドを参照してください。iOS RUM バージョン 1.10 以上が必要です。
 
-テスト対象のアプリケーションが RUM を使用してインスツルメンテーションされている場合、UI テストの結果と生成された RUM セッションは自動的にリンクされます。RUM の詳細については、[RUM iOS インテグレーション][4]ガイドを参照してください。iOS RUM バージョン 1.10 以上が必要です。
+フレームワークがこれらの値をアプリケーションに自動的に注入するため、環境変数はテストターゲットにのみ設定する必要があります。
 
+### Test Optimisation SDK{#test-optimisation-sdk}
 
-## 追加のオプション構成
+RUM を使用しない場合は、アプリケーションターゲットを Test SDK にリンクできます。SDK はアプリケーションに自動インスツルメンテーションを追加し、ネットワークリクエストとログを収集して、それらをテストトレースに添付します。
 
-以下の構成設定の場合:
- - `Boolean` 変数には `1`、`0`、`true`、`false`、`YES`、`NO` のいずれかを使用できます
- - `String` リスト変数には `,` または `;` で区切られた要素の一覧が許可されます
+フレームワークがこれらの値をアプリケーションに自動的に注入するため、環境変数はテストターゲットにのみ設定する必要があります。
 
-### 自動インスツルメンテーションの有効化
+## 追加のオプション構成 {#additional-optional-configuration}
+
+以下の構成設定において、
+ - `Boolean` 変数には、: `1`、`0`、`true`、`false`、`YES`、または `NO` のいずれかを使用できます
+ - `String` リスト変数には、`,` または `;` で区切られた要素のリストが許可されます
+
+### 自動インスツルメンテーションの有効化 {#enabling-auto-instrumentation}
 
 `DD_ENABLE_STDOUT_INSTRUMENTATION`
-: `stdout` に書き込まれたメッセージ (例えば `print()`) をキャプチャして、ログとして報告します。これは請求額に影響を与える可能性があります。(ブール値)
+: `stdout` (たとえば `print()`) に書き込まれたメッセージをキャプチャし、ログとして報告します。これは請求額に影響する可能性があります。(ブール値)
 
 `DD_ENABLE_STDERR_INSTRUMENTATION`
-: `stderr` に書き込まれたメッセージ (例えば `NSLog()` や UITest のステップ) をキャプチャして、ログとして報告します。これは請求額に影響を与える可能性があります。(ブール値)
+: `stderr` (たとえば `NSLog()`、UITest ステップ) に書き込まれたメッセージをキャプチャし、ログとして報告します。これは請求額に影響する可能性があります。(ブール値)
 
-### 自動インスツルメンテーションの無効化
+### 自動インスツルメンテーションの無効化 {#disabling-auto-instrumentation}
 
-このフレームワークでは、サポートされているすべてのライブラリの自動インスツルメンテーションが可能ですが、これが望ましくない場合もあります。次の環境変数を（または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに）設定することにより、特定のライブラリの自動インスツルメンテーションを無効にできます。
+このフレームワークは、サポートされているすべてのライブラリの自動インスツルメンテーションを有効にしますが、場合によってはこれが望ましくないこともあります。以下の環境変数を設定することで (または[後述する](#using-infoplist-for-configuration)ように `Info.plist` ファイルで)、特定のライブラリの自動インスツルメンテーションを無効にできます。
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
-: すべてのネットワークインスツルメンテーションを無効化します (Boolean)
+: すべてのネットワークインスツルメンテーションを無効にします (ブール値)
 
 `DD_DISABLE_RUM_INTEGRATION`
-: RUMセッションとのインテグレーションを無効にします (Boolean)
+: RUM セッションとの統合を無効にします (ブール値)
 
 `DD_DISABLE_SOURCE_LOCATION`
 : テストのソースコードの場所と Codeowners を無効にします (ブール値)
 
 `DD_DISABLE_CRASH_HANDLER`
-: クラッシュの処理およびレポートを無効化します (Boolean)
-<div class="alert alert-danger"><strong>重要</strong>: クラッシュレポートを無効にすると、クラッシュしたテストはまったく報告されず、テストの失敗として表示されません。いずれかのテストでクラッシュ処理を無効にする必要がある場合は、それらを個別のターゲットとして実行し、他のテストでは無効にしないようにします。</div>
+: クラッシュ処理とクラッシュレポートを無効にします。(ブール値)
+<div class="alert alert-danger">クラッシュレポートを無効にすると、クラッシュしたテストは一切レポートされず、テストの失敗としても表示されません。いずれかのテストでクラッシュ処理を無効にする必要がある場合は、それらを別のターゲットとして実行してください。そうすることで、他のテストのクラッシュ処理を無効にせずに済みます。</div>
 
-### ネットワークの自動インスツルメンテーション
+### ネットワークの自動インスツルメンテーション {#network-auto-instrumentation}
 
-ネットワークの自動インスツルメンテーションでは、以下の追加設定を構成できます。
+ネットワークの自動インスツルメンテーションについては、以下の追加設定を構成できます。
 
 `DD_DISABLE_HEADERS_INJECTION`
-: トレースヘッダーのすべての挿入を無効化します (Boolean)
+: トレーシングヘッダーのすべてのインジェクションを無効にします (ブール値)
 
 `DD_INSTRUMENTATION_EXTRA_HEADERS`
-: ログを作成する特定の追加ヘッダー (文字列リスト)
+: ログに記録する特定の追加ヘッダー (文字列一覧)
 
 `DD_EXCLUDED_URLS`
-: ログの作成またはヘッダーの挿入を行わない URL (文字列リスト)
+: ログの作成またはヘッダーの挿入を行わない URL (文字列一覧)
 
 `DD_ENABLE_RECORD_PAYLOAD`
-: リクエストおよび応答内のペイロードのサブセット (1024 バイト) のレポートを有効化します (Boolean)
+: リクエストおよび応答内のペイロードのサブセット (1024 バイト) のレポートを有効化します (ブール値)
 
 `DD_MAX_PAYLOAD_SIZE`
-: ペイロードから報告される最大サイズを設定します。デフォルトは `1024` (整数)
+: ペイロードからレポートされる最大サイズを設定します。デフォルト `1024` (整数)
 
 `DD_DISABLE_NETWORK_CALL_STACK`
-: ネットワークスパンのコールスタック情報を無効にします (ブール値)
+: ネットワークスパン内のコールスタック情報を無効にします (ブール値)
 
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
-: メソッド名だけでなく、正確なファイルや行の情報を含むコールスタック情報を表示します。テストのパフォーマンスに影響を与える可能性があります (ブール値)
+: メソッド名だけでなく、正確なファイルおよび行情報を含むコールスタック情報を表示します。テストのパフォーマンスに影響が出る可能性があります (ブール値)
 
-### インフラストラクチャーテストの相関
+### インフラストラクチャーのテスト相関 {#infrastructure-test-correlation}
 
-自身のインフラストラクチャーでテストを実行している場合 (macOS やシミュレータのテスト)、Datadog Agent をインストールして以下を設定することで、テストとインフラストラクチャーのメトリクスを関連付けることができます。
+自身のインフラストラクチャーでテストを実行している場合 (macOS やシミュレータのテスト)、Datadog Agent をインストールして以下を設定することで、テストをインフラストラクチャーのメトリクスに関連付けることができます。
 
 `DD_CIVISIBILITY_REPORT_HOSTNAME`
-: テストを開始するマシンのホスト名を報告します (ブール値)
+: テストを実行するマシンのホスト名をレポートします (ブール値)
 
-モジュール `DatadogSDKTesting` をインポートしクラス: `DDInstrumentationControl` を使用することで、Swift または Objective-C の一部のテストで特定の自動インスツルメンテーションを有効/無効にすることも可能です。
+モジュール `DatadogSDKTesting` をインポートし、クラス `DDInstrumentationControl` を使用することで、Swift または Objective-C の一部のテストで特定の自動インスツルメンテーションを有効または無効にすることもできます。
 
-## カスタムタグ
+## カスタムタグ {#custom-tags}
 
-### 環境変数
+### 環境変数 {#environment-variables}
 
-`DD_TAGS` 環境変数を（または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに）使用できます。スペース区切りの `key:tag` のペアを含む必要があります。例:
+`DD_TAGS` 環境変数を使用できます (または[後述する](#using-infoplist-for-configuration)ように`Info.plist`ファイル内で)。これには、スペースで区切られた `key:tag` のペアが含まれている必要があります。たとえば、以下のとおりです。
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
 
-値の 1 つが `$` の文字で始まる場合、同じ名前（存在する場合）の環境変数に置換されます。例:
+値の 1 つが `$` の文字で始まる場合、同じ名前の環境変数が存在すれば、その環境変数に置換されます。たとえば、以下のようにです。
 {{< code-block lang="bash" >}}
 DD_TAGS=home:$HOME
 {{< /code-block >}}
 
-`$` 文字を使うことで、値の先頭にある環境変数を置換することもサポートされます。ただし、その値には環境変数に対応しない文字 (`a-z`、`A-Z` または `_`) が含まれている必要があります。例:
+`$` 文字を使用すると、値に環境変数でサポートされる文字 (`a-z`、`A-Z`、または `_`) 以外が含まれている場合でも、値の先頭にある環境変数を置換できます。たとえば、以下のようにです。
 {{< code-block lang="bash" >}}
 FOO = BAR
 DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 {{< /code-block >}}
 
-### OpenTelemetry
+### テストメソッド内 {#inside-a-test-method}
+
+テストメソッド内にカスタムタグを追加できます。静的プロパティ `DDTest.current` は、テストメソッドのスコープ内で呼び出された場合、現在のテストインスタンスを返します。
+
+{{< code-block lang="swift" >}}
+// Somewhere inside the test method
+DDTest.current?.setTag(key: "key1", value: "value1")
+// test continues normally
+// ...
+{{< /code-block >}}
+
+### OpenTelemetry {#opentelemetry}
 
 **注**: OpenTelemetry の使用は Swift でのみサポートされています。
 
-Datadog Swift テストフレームワークは、内部的に [OpenTelemetry][6] をトレーシングテクノロジーとして使用します。OpenTelemetry トレーサーには、`DDInstrumentationControl.openTelemetryTracer` を使用してアクセスでき、OpenTelemetry API を使用します。たとえば、タグまたは属性を追加するには、
+Datadog Swift テストフレームワークは、内部でトレーシング技術として [OpenTelemetry][6] を使用しています。`DDInstrumentationControl.openTelemetryTracer` を使用して OpenTelemetry トレーサーにアクセスし、任意の OpenTelemetry API を使用できます。たとえば、タグまたは属性を追加するには、次のようにします。
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -316,21 +356,21 @@ span?.setAttribute(key: "OTTag2", value: "OTValue2")
 span?.end()
 {{< /code-block >}}
 
-テストターゲットは、`opentelemetry-swift` で明示的にリンクする必要があります。
+テストターゲットは `opentelemetry-swift` と明示的にリンクする必要があります。
 
-### コードカバレッジを報告する
+### コードカバレッジを報告する {#reporting-code-coverage}
 
 コードカバレッジが利用できる場合、Datadog SDK (v2.2.7+) は、テストセッションの `test.code_coverage.lines_pct` タグでそれを報告します。
 
-Xcode では、Test Scheme でコードカバレッジの報告を有効にすることができます。
+Xcode では、プロジェクト構成に応じて、テストプランまたはテストスキームでコードカバレッジの収集を有効にできます。
 
-テストセッションの **Coverage** タブで、テストカバレッジの推移を見ることができます。
+テストセッションの {{< ui >}}Coverage{{< /ui >}} タブで、テストカバレッジの推移を見ることができます。
 
-## 構成に Info.plist を使用する
+## Info.plist を使用した構成 {#using-infoplist-for-configuration}
 
-または、環境変数を設定する代わりに、構成の値を（アプリバンドルではなく）テストバンドルの `Info.plist` ファイルに追加して提供することも可能です。環境変数と `Info.plist` ファイルに同じ設定がされている場合は、環境変数が優先されます。
+環境変数を設定する代わりに、すべての構成値をテストバンドル (アプリバンドルではない) の `Info.plist` ファイルに追加することで構成値を提供できます。同じ設定が環境変数と `Info.plist` ファイルの両方に設定されている場合、環境変数が優先されます。
 
-## CI プロバイダーの環境変数
+## CI プロバイダーの環境変数 {#ci-provider-environment-variables}
 
 {{< tabs >}}
 {{% tab "Jenkins" %}}
@@ -345,7 +385,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `JOB_NAME`           | `$(JOB_NAME)`          |
 | `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数 | 値           |
 | -------------------- | --------------- |
@@ -366,7 +406,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `CIRCLE_WORKFLOW_ID`       | `$(CIRCLE_WORKFLOW_ID)`       |
 | `CIRCLE_PROJECT_REPONAME`  | `$(CIRCLE_PROJECT_REPONAME)`  |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数    | 値                      |
 | ----------------------- | -------------------------- |
@@ -392,7 +432,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
 
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数 | 値                  |
 | -------------------- | ---------------------- |
@@ -418,7 +458,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `TRAVIS_REPO_SLUG`         | `$(TRAVIS_REPO_SLUG)`         |
 | `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数         | 値                           |
 | ---------------------------- | ------------------------------- |
@@ -442,7 +482,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
 | `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数 | 値                  |
 | -------------------- | ---------------------- |
@@ -463,7 +503,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `BUILDKITE_PIPELINE_SLUG`       | `$(BUILDKITE_PIPELINE_SLUG)`       |
 | `BUILDKITE_JOB_ID`              | `$(BUILDKITE_JOB_ID)`              |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数           | 値                             |
 | ------------------------------ | --------------------------------- |
@@ -485,7 +525,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `BITBUCKET_PIPELINE_UUID`  | `$(BITBUCKET_PIPELINE_UUID)`  |
 | `BITBUCKET_REPO_FULL_NAME` | `$(BITBUCKET_REPO_FULL_NAME)` |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数       | 値                         |
 | -------------------------- | ----------------------------- |
@@ -506,7 +546,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `APPVEYOR_REPO_TAG_NAME` | `$(APPVEYOR_REPO_TAG_NAME)` |
 | `APPVEYOR_REPO_NAME`     | `$(APPVEYOR_REPO_NAME)`     |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数                     | 値                                       |
 | ---------------------------------------- | ------------------------------------------- |
@@ -533,7 +573,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
 | `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数                     | 値                                       |
 | ---------------------------------------- | ------------------------------------------- |
@@ -558,7 +598,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
 | `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
 
-物理デバイスのテストのための追加 Git 構成:
+物理デバイスでテストするための追加 Git 構成:
 
 | 環境変数               | 値                                 |
 | ---------------------------------- | ------------------------------------- |
@@ -580,7 +620,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 
 | 環境変数    | 値                   |
 | ----------------------- | ----------------------- |
-| `DD_GIT_REPOSITORY_URL` | リポジトリ URL      |
+| `DD_GIT_REPOSITORY_URL` | リポジトリ URL|
 | `CI_WORKSPACE`          | `$(CI_WORKSPACE)`       |
 | `CI_COMMIT`             | `$(CI_COMMIT)`          |
 | `CI_BUILD_ID`           | `$(CI_BUILD_ID)`        |
@@ -593,169 +633,59 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{< /tabs >}}
 
-## 手動テスト API
+## ベストプラクティス{#best-practices}
 
-Swift プロジェクトで XCTests を使用している場合、`DatadogSDKTesting`フレームワークが自動的にインスツルメントし、Datadog バックエンドに結果を送信します。XCTest を使用しない場合、代わりに Swift/Objective-C の手動テスト API を使用することができ、これもバックエンドにテスト結果を報告します。
+テストフレームワークと Test Optimization を最大限に活用するために、以下のプラクティスに従ってください。
 
-この API は、*テストモジュール*、*テストスイート*、*テスト*の 3 つの概念に基づいています。
+### ビルド時にシンボルファイルを生成する{#generate-symbols-file-when-building}
 
-### テストモジュール
+Xcode でコードをビルドする場合は `DWARF with dSYM File` (または、`swift` でビルドする場合は `-Xswiftc -debug-info-format=dwarf`) を使用します。
 
-テストモジュールは、テストを含むライブラリやバンドルの読み込みを表します。
+テストフレームワークは、クラッシュのシンボル化、テストソースの場所の報告、コード所有者の報告など、一部の機能でシンボルファイルを使用します。デバッグシンボルがバイナリに埋め込まれている場合、シンボルファイルは自動的に生成されますが、読み込みに追加の時間がかかることがあります。
 
-テストモジュールを開始するには、`DDTestModule.start()` を呼び出して、テストするモジュールまたはバンドルの名前を渡します。
+### macOS の UI テストのサンドボックスを無効化する{#disable-sandbox-for-ui-tests-on-macos}
 
-すべてのテストが終了したら、`module.end()` を呼び出し、これによりライブラリは残っているテスト結果をすべてバックエンドに送信します。
+一部の Xcode バージョンでは、UI テストバンドルはデフォルトでサンドボックス付きでビルドされます。サンドボックスに伴う設定により、`xcrun` を使用する一部のシステムコマンドでテストフレームワークを実行できなくなるため、無効にすることが必要になります。
 
-### テストスイート
-
-テストスイートは、共通の機能を共有するテストのセットで構成されます。これらのテストは、共通の初期化および終了を共有することができ、また、いくつかの変数を共有することができます。
-
-`module.suiteStart()` を呼び出し、テストスイートの名前を渡すことでテストモジュール内にテストスイートを作成します。
-
-スイートの中の関連するテストがすべて実行を終えたら `suite.end()` を呼び出します。
-
-### テスト
-
-各テストはスイート内で実行され、`pass`、`fail`、`skip` のいずれかのステータスで終了する必要があります。テストは、オプションで属性やエラー情報などの追加情報を持つことができます。
-
-`suite.testStart()` を呼び出し、テストの名前を渡すことで、スイート内のテストを作成します。テストが終了したら、定義済みのステータスのいずれかを設定する必要があります。
-
-### API インターフェイス
-
-{{< code-block lang="swift" >}}
-class DDTestModule {
-    // モジュールを開始します。
-    // - パラメーター:
-    //   - bundleName: テストするモジュールまたはバンドルの名前。
-    //   - startTime: オプション。モジュールが開始された時間。
-    static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
-    //
-    // モジュールを終了します。
-    // - パラメーター:
-    //   - endTime: オプション。モジュールが終了した時間。
-    func end(endTime: Date? = nil)
-    // テストモジュールにタグ/属性を追加します。タグはいくつでも追加可能です。
-    // - パラメーター:
-    //   - key: タグの名前。同じ名前のタグが既に存在する場合、
-    //     その値は新しい値で置き換えられます。
-    //   - value: タグの値。数値または文字列を指定することができます。
-    func setTag(key: String, value: Any)
-    //
-    // このモジュールでスイートを開始します。
-    // - パラメーター:
-    //   - name: スイートの名前。
-    //   - startTime: オプション。スイートの開始時間。
-    func suiteStart(name: String, startTime: Date? = nil) -> DDTestSuite
-}
-    //
-public class DDTestSuite : NSObject {
-    // テストスイートを終了します。
-    // - パラメーター:
-    //   - endTime: オプション。スイートが終了した時間。
-    func end(endTime: Date? = nil)
-    // タグ/属性をテストスイートに追加します。タグはいくつでも追加することができます。
-    // - パラメーター:
-    //   - key: タグの名前。同じ名前のタグが既に存在する場合、
-    //     その値は新しい値で置き換えられます。
-    //   - value: タグの値。数値または文字列を指定することができます。
-    func setTag(key: String, value: Any)
-    //
-    // このスイートのテストを開始します。
-    // - パラメーター:
-    //   - name: テストの名前。
-    //   - startTime: オプション。テストが開始された時間。
-    func testStart(name: String, startTime: Date? = nil) -> DDTest
-}
-    //
-public class DDTest : NSObject {
-    // テストにタグ/属性を追加します。タグはいくつでも追加することができます。
-    // - パラメーター:
-    //   - key: タグの名前。同じ名前のタグが既に存在する場合、
-    //     その値は新しい値で置き換えられます。
-    //   - value: タグの値。数値または文字列を指定することができます。
-    func setTag(key: String, value: Any)
-    //
-    // テストにエラー情報を追加します。1 つのテストが報告できるエラー情報は 1 つだけです。
-    // - パラメーター:
-    //   - type: 報告されるエラーのタイプ。
-    //   - message: エラーに関連するメッセージ。
-    //   - callstack: オプション。エラーに関連するコールスタック。
-    func setErrorInfo(type: String, message: String, callstack: String? = nil)
-    //
-    // テストを終了します。
-    // - パラメーター:
-    //   - status: このテストについて報告されたステータス。
-    //   - endTime: オプション。テストが終了した時間。
-    func end(status: DDTestStatus, endTime: Date? = nil)
-}
-    //
-// テストによって報告される可能性のあるステータス:
-enum DDTestStatus {
-  // テストは合格しました。
-  case pass
-  //
-  // テストは失敗しました。
-  case fail
-  //
-  // テストはスキップされました。
-  case skip
-}
-{{< /code-block >}}
-
-### コード例
-
-次のコードは、API の簡単な使い方を表しています。
-
-{{< code-block lang="swift" >}}
-import DatadogSDKTesting
-let module = DDTestModule.start(bundleName: "ManualModule")
-let suite1 = module.suiteStart(name: "ManualSuite 1")
-let test1 = suite1.testStart(name: "Test 1")
-test1.setTag(key: "key", value: "value")
-test1.end(status: .pass)
-let test2 = suite1.testStart(name: "Test 2")
-test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
-test2.end(test: test2, status: .fail)
-suite1.end()
-let suite2 = module.suiteStart(name: "ManualSuite 2")
-..
-..
-module.end()
-{{< /code-block >}}
-
-最後に必ず `module.end()` を呼び出し、すべてのテスト情報を Datadog に流すようにします。
-
-## ベストプラクティス
-
-テストフレームワークと CI 表示を最大限に活用するために、以下のプラクティスに従ってください。
-
-### ビルド時にシンボルファイルを生成する
-
-Xcode で `DWARF with dSYM File` (または `swift` でビルドする場合は `-Xswiftc -debug-info-format=dwarf`) を使用してコードをビルドします
-
-テストフレームワークは、クラッシュのシンボル化、テストソースの位置の報告、コードの所有者の報告など、いくつかの機能でシンボルファイルを使用します。デバッグシンボルがバイナリに埋め込まれている場合、シンボルファイルを自動的に生成しますが、読み込みに余分な時間がかかることがあります。
-
-### macOS の UI テストのサンドボックスを無効化する
-
-一部の Xcode のバージョンでは、UI Test バンドルはデフォルトでサンドボックス付きでビルドされています。サンドボックスに付属する設定は、一部のシステムコマンドで `xcrun` を使ってテストフレームワークを実行することを妨げるので、それを無効にする必要があります。
-
-UI Test ランナーバンドルに Entitlements を追加し、それらに `App Sandbox = NO` を追加してサンドボックスを無効にします。また、`.entitlement` ファイルを作成し、Signing Build Settings に追加することができます。このファイルには、以下の内容を含める必要があります。
+UI テストランナーバンドルに Entitlements を追加し、そこに `App Sandbox = NO` を追加すると、サンドボックスが無効になります。`.entitlement` ファイルを作成し、それを署名ビルド設定に追加することもできます。このファイルには、以下の内容を含める必要があります。
 
 {{< code-block lang="xml" >}}
 <key>com.apple.security.app-sandbox</key>
  <false/>
 {{< /code-block >}}
 
-## その他の参考資料
+### テストセッション名 `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
+
+`DD_TEST_SESSION_NAME` を使用してテストセッションの名前と関連するテストグループを定義します。このタグの値の例は次のとおりです。
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+`DD_TEST_SESSION_NAME` が指定されていない場合、デフォルトで CI ジョブ名とテストコマンドになります。CI ジョブ名が利用できない場合は、テストコマンドが使用されます。
+
+異なるテストグループを区別しやすくするため、テストセッション名はリポジトリ内で一意でなければなりません。
+
+#### `DD_TEST_SESSION_NAME` を使用するタイミング{#when-to-use-dd-test-session-name}
+
+Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。一時フォルダーなど、実行ごとに変化する文字列がテストコマンドに含まれる場合、Datadog はそれらのセッションを互いに無関係なものとみなします。たとえば、以下のとおりです。
+
+- `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+テストコマンドが実行ごとに異なる場合、Datadog は `DD_TEST_SESSION_NAME` を使用することを推奨します。
+
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/continuous_integration/tests/#test-suite-level-visibility
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /ja/getting_started/site/
-[4]: /ja/continuous_integration/guides/rum_swift_integration
+[4]: /ja/tests/swift_tests/
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
-[7]: /ja/continuous_integration/intelligent_test_runner/
+[7]: /ja/tests/test_impact_analysis/
 [8]: /ja/getting_started/tagging/unified_service_tagging

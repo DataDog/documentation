@@ -80,7 +80,7 @@ If you want to use an existing resource group, skip to Create an Event Hubs name
 
 ### Create an event hub
 
-1. In the Event Hubs namespace you just created, click {{< ui >}}+ Event Hub{{< /ui >}}.
+1. In the Event Hubs namespace you just created, click {{< ui >}}\+ Event Hub{{< /ui >}}.
 1. Enter a name for the event hub.
 1. Optionally, configure the partition count and retention options.
 1. Click {{< ui >}}Review + create{{< /ui >}}.

@@ -1,37 +1,52 @@
 ---
+description: Descubra las posibles causas raíz utilizando Metric Correlations, Watchdog
+  Explains y la detección de anomalía en los tableros para analizar el comportamiento
+  irregular de las métricas.
 disable_toc: false
 further_reading:
 - link: /watchdog/insights/
   tag: Documentación
-  text: Obtener más información sobre Watchdog Insights
-title: Información de gráficos
+  text: Obtenga más información sobre Watchdog Insights
+- link: https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/
+  tag: Blog
+  text: 'Detección de anomalías, correlaciones predictivas: uso de monitoreo de métricas
+    asistido por IA'
+title: Graph Insights
 ---
+## Descripción general {#overview}
 
-## Información general
+Graph Insights puede ayudarle a encontrar posibles causas raíz de un problema observado mediante la búsqueda de otras métricas que mostraron un comportamiento irregular aproximadamente al mismo tiempo. Metric Correlations analiza sus métricas de diferentes fuentes, como tableros, integraciones, APM y métricas personalizadas.
 
-La información de gráficos puede ayudarte a encontrar posibles causas raíz de un problema observado mediante la búsqueda de otras métricas que exhibieron un comportamiento irregular en el mismo momento. Las correlaciones de métricas analizan tus métricas desde diferentes fuentes, como dashboards, integraciones, APM y métricas personalizadas.
+## Metric Correlations {#metric-correlations}
 
-## Correlaciones de métricas
+<div class="alert alert-info">Metric Correlations está disponible para <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widgets de series temporales</a> con la fuente de datos <strong>Metric</strong>.</div>
 
-<div class="alert alert-info">Las correlaciones de métricas se encuentran disponible para los <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widgets de serie temporal</a> con la fuente de datos de la <strong>métrica</strong>.</div>
+Para dirigir la búsqueda de manera más efectiva, Metric Correlations utiliza información sobre tableros y servicios relacionados. Las correlaciones pueden examinar métricas de diversas fuentes, incluyendo APM, integraciones y tableros, así como espacios de nombres de métricas arbitrarios que usted seleccione. Busca irregularidades en otras métricas durante el período de tiempo correspondiente, lo que permite a Datadog proporcionar automáticamente pistas que facilitan un análisis de causa raíz más eficiente.
 
-Para orientar la búsqueda de manera más eficaz, las correlaciones de métricas utilizan información sobre los dashboards y servicios relacionados. Las correlaciones pueden filtrar métricas desde varias fuentes, como APM, integraciones y dashboards, así como espacios de nombres de métricas arbitrarios que selecciones. Buscan irregularidades en otras métricas durante el período de tiempo correspondiente, lo que permite que Datadog proporcione automáticamente pistas que faciliten un análisis de causa raíz más eficiente.
+Para obtener más información, consulte la documentación de [Metric Correlations][1].
 
-Para más información, consulta la documentación [Correlaciones de métricas][1].
+## Watchdog Explains {#watchdog-explains}
 
-## Watchdog Explains
+<div class="alert alert-info">Watchdog Explains está disponible para <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widgets de series temporales</a> con la fuente de datos <strong>Metric</strong>.</div>
 
-<div class="alert alert-info">Watchdog Explains está disponible para los <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widgets de Timeseries</a> con la fuente de datos de <strong>métricas</strong>.</div>
-
-Datadog recopila distintos tipos de datos para brindar información sobre el rendimiento de las aplicaciones, incluidas métricas, trazas (traces) y logs que te indican qué sucede, cómo y por qué. Watchdog Explains analiza tendencias de alto nivel, como latencia, tasas de error o evolución del recuento de solicitudes, para detectar señales críticas. Al observar un pico en estos gráficos, Watchdog Explains ayuda a investigar las preguntas inmediatas:
-- ¿Cuál es el origen del pico?
+Datadog recopila varios tipos de datos para proporcionar información sobre el rendimiento de las aplicaciones, incluyendo métricas, trazas y registros, los cuales le indican qué, cómo y por qué está sucediendo algo. Watchdog Explains analiza tendencias de alto nivel como la latencia, las tasas de error o la evolución del recuento de solicitudes para detectar señales críticas. Al observar un pico en estos gráficos, Watchdog Explains le ayuda a investigar las preguntas inmediatas:
+- ¿Cuál es la fuente del pico?
 - ¿Esta anomalía afecta a todos o es un incidente aislado?
 
-Para obtener más información, consulta la documentación de [Watchdog Explains][2].
+Para obtener más información, consulte la documentación de [Watchdog Explains][2].
 
-## Referencias adicionales
+## Detección de anomalías en los tableros {#dashboard-anomaly-detection}
+
+<div class="alert alert-info">La detección de anomalías está disponible para <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widgets de series temporales</a> con la fuente de datos <strong>Metric</strong> data source.</div>
+
+Datadog detecta anomalías en los gráficos de sus tableros y agrupa aquellas que ocurren juntas en incidentes. Para cada incidente, Datadog identifica las etiquetas que más contribuyen a la anomalía. Puede analizar un solo gráfico con Watchdog Explains o delegar el análisis de causa raíz a Bits Investigation.
+
+Para obtener más información, consulte [Investigar anomalías en los tableros][3].
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/dashboards/graph_insights/correlations/
 [2]: /es/dashboards/graph_insights/watchdog_explains/
+[3]: /es/dashboards/graph_insights/investigate_anomalies/

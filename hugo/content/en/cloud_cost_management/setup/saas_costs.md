@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
   tag: "Blog"
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
+- link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
+  tag: "Blog"
+  text: "Manage Cursor costs with Datadog Cloud Cost Management"
 ---
 
 ## Overview

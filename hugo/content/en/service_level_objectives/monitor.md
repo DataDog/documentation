@@ -38,7 +38,7 @@ Datadog monitor-based SLOs support the following monitor types:
 
 ## Setup
 
-On the [SLO status page][2], click {{< ui >}}+ New SLO{{< /ui >}}. Then, select {{< ui >}}By Monitor Uptime{{< /ui >}}.
+On the [SLO status page][2], click {{< ui >}}\+ New SLO{{< /ui >}}. Then, select {{< ui >}}By Monitor Uptime{{< /ui >}}.
 
 ### Define queries
 

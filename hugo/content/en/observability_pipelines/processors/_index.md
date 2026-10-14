@@ -1,6 +1,9 @@
 ---
 title: Processors
+description: Learn about the processors available for parsing, structuring, and enriching logs, metrics, and traces in Observability Pipelines.
 disable_toc: false
+aliases:
+  - /observability_pipelines/processors/tail_based_sampling/
 further_reading:
 - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
   tag: Blog
@@ -14,13 +17,11 @@ further_reading:
 
 <div class="alert alert-info">The processors outlined in this documentation are specific to on-premises logging environments. To parse, structure, and enrich cloud-based logs, see the <a href="https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics">Log Management</a> documentation.</div>
 
-Use Observability Pipelines' processors to parse, structure, and enrich your {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}}. When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
+Use Observability Pipelines' processors to parse, structure, and enrich your logs and metrics. When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
 
 Processor groups are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
-**Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
-
-Select a processor in the left navigation menu to see more information about it.
+**Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
 
 ## Processors
 
@@ -85,28 +86,13 @@ These are the available processors:
 [5]: /observability_pipelines/processors/tag_cardinality_control/
 
 {{% /tab %}}
-{{% tab "Traces" %}}
-
-- [Custom Processor][1]
-- [Filter][2]
-- [Sample][3]
-- [Sensitive Data Scanner][4]
-- [Tail-Based Sampling][5]
-
-[1]: /observability_pipelines/processors/custom_processor/
-[2]: /observability_pipelines/processors/filter/
-[3]: /observability_pipelines/processors/sample/
-[4]: /observability_pipelines/processors/sensitive_data_scanner/
-[5]: /observability_pipelines/processors/tail_based_sampling/
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Processor groups
 
 <div class="alert alert-info">Configuring a pipeline with processor groups is only available for Worker versions 2.7 and later.</div>
 
-{{< img src="observability_pipelines/processors/processor_groups.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/processor_groups.png" alt="A pipeline with a Splunk HEC source sending logs to three processor groups, each with its own filter and processors, which then send logs to Microsoft Sentinel and Splunk HEC destinations." style="width:100%;" >}}
 
 You can organize your processors into logical groups to help you manage them. Each processor group has a Group Filter so that those processors are only applied to specific events. For example, if you want the group processors to only process events coming from `vpc`, then use the group filter `source:vpc`. You can also add filters for each individual processor.
 

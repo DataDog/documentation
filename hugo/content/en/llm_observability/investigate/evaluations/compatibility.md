@@ -1,0 +1,59 @@
+---
+title: Evaluator compatibility
+aliases:
+- /llm_observability/evaluations/evaluation_compatibility/
+- /llm_observability/configure/evaluations/compatibility/
+description: Learn about the compatibility requirements for evaluators.
+---
+
+## Evaluator compatibility
+
+The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, and Custom Provider.
+
+### Managed evaluators
+
+Managed evaluators are supported for the following configurations.
+
+| Evaluator                       | DD-trace version  |  LLM Provider                 | Applicable span |
+| --------------------------------| ----------------- | ------------------------------| ----------------|
+| [Language Mismatch][10]         | Fully supported   | Self hosted                   | All span kinds  |
+
+### Custom LLM-as-a-judge evaluators
+
+Custom LLM-as-a-judge evaluators are supported for the following configurations.
+
+| Evaluator        | DD-trace version | LLM Provider                  | Applicable span |
+| ---------------- | ---------------- | ----------------------------- | --------------- |
+| [Boolean][11]    | Fully supported  | All third party LLM providers | All span kinds  |
+| [Score][11]      | Fully supported  | All third party LLM providers | All span kinds  |
+| [Categorical][11]| Fully supported  | All third party LLM providers | All span kinds  |
+| [JSON][11]       | Fully supported  | All third party LLM providers | All span kinds  |
+
+#### LLM-as-a-judge evaluator templates
+
+Existing templates for custom LLM-as-a-judge evaluators are supported for the following configurations.
+
+| Evaluator               | DD-trace version | LLM Provider                  | Applicable span |
+| ----------------------- | ---------------- | ----------------------------- | --------------- |
+| [Failure to Answer][5]  | Fully supported  | All third party LLM providers | All span kinds  |
+| [Hallucination][4]      | Fully supported  | All third party LLM providers | LLM only        |
+| [Sentiment][6]          | Fully supported  | All third party LLM providers | All span kinds  |
+| [Toxicity][7]           | Fully supported  | All third party LLM providers | All span kinds  |
+| [Prompt Injection][8]   | Fully supported  | All third party LLM providers | All span kinds  |
+| [Topic Relevancy][9]    | Fully supported  | All third party LLM providers | All span kinds  |
+| [Tool Selection][1]             | Fully supported | All third party LLM providers | LLM only |
+| [Tool Argument Correctness][2]  | Fully supported | All third party LLM providers | LLM only |
+| [Goal Completeness][3]          | Fully supported | All third party LLM providers | LLM only |
+
+
+[1]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
+[2]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
+[3]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#goal-completeness
+[4]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
+[5]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
+[6]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#sentiment
+[7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#toxicity
+[8]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#prompt-injection
+[9]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
+[10]: /llm_observability/investigate/evaluations/language_mismatch
+[11]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations#define-the-evaluation-output

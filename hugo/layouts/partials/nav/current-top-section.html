@@ -1,0 +1,35 @@
+{{- /*
+  Returns the pipe-delimited identifiers of every top-level main-menu entry (e.g. "apm",
+  "logs") whose URL matches the current page, or "" if none do.
+
+  left-nav.html independently checks each top-level entry against the current page to decide
+  whether to render that entry's Levels 3-4, so this full match set -- not just one identifier
+  -- is what left-nav.html's rendered HTML depends on. It's used as that partial's partialCached
+  key; keying by .Section, or by only the first match, is unsound because menu entries can nest
+  (e.g. "security/" and "security/cloud_siem/" are sibling top-level entries), which would let
+  two pages with different actual matches share the same key.
+
+  This menu is config-defined (plain url: strings, no page front matter), so entries have no
+  .Page and Hugo's .IsMenuCurrent/.HasMenuCurrent never match -- comparing URLs directly works.
+
+  A top-level entry's whole subtree counts as a match, not just its own URL (menu nesting and
+  content folder structure can diverge, e.g. actions/private_actions/*). This runs uncached on
+  every page, so it uses nav/flattened-menu.html's precomputed, build-wide-cached flat list
+  (one non-recursive loop) rather than walking the menu tree per page -- see that file for why.
+*/ -}}
+{{- $currentPage := . -}}
+{{- $curURL := trim $currentPage.RelPermalink "/" -}}
+{{- $flatMenu := partial "nav/flattened-menu.html" $currentPage -}}
+{{- $matchedIDs := slice -}}
+{{- range $flatMenu -}}
+    {{- if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) -}}
+        {{- if not (in $matchedIDs .identifier) -}}
+            {{- $matchedIDs = $matchedIDs | append .identifier -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $result := "" -}}
+{{- range $matchedIDs -}}
+    {{- $result = print $result "|" . -}}
+{{- end -}}
+{{- $result -}}

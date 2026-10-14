@@ -147,7 +147,7 @@ For high-urgency notifications, Datadog strongly recommends customizing your sys
 Receive status updates on your active incidents by setting up [Notification Rules for incidents on the Web][2]. 
 
 1. In Incidents, navigate to {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Notification Rules{{< /ui >}}][1].
-2. Click the {{< ui >}}+ New Rule{{< /ui >}} button on the top right.
+2. Click the {{< ui >}}\+ New Rule{{< /ui >}} button on the top right.
 3. Enter your desired condition fields for {{< ui >}}When an incident is...{{< /ui >}} and {{< ui >}}And meets the following conditions...{{< /ui >}}. By default, these filters are empty, and a notification rule triggers for any incident.
 4. Under {{< ui >}}Notify...{{< /ui >}} select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes {{< ui >}}(Mobile Push Notification){{< /ui >}}. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 5. {{< ui >}}With Template:{{< /ui >}} Select the desired message template you want the notification rule to use.
@@ -163,7 +163,7 @@ By default if you have push notifications enabled and are assigned as a commande
 
 Create [workflow automations][3] that send mobile push notifications.
 
-1. On the workflow canvas, click the {{< ui >}}+{{< /ui >}} icon.
+1. On the workflow canvas, click the {{< ui >}}\+{{< /ui >}} icon.
 2. Search for {{< ui >}}Send mobile push notification{{< /ui >}}.
 3. Under {{< ui >}}To{{< /ui >}} select your notification recipient. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 4. Enter the message {{< ui >}}Body{{< /ui >}}.

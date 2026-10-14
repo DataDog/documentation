@@ -1,5 +1,6 @@
 ---
 title: Splunk HTTP Event Collector (HEC) Source
+description: Learn how to collect logs from a Splunk HTTP Event Collector (HEC) using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

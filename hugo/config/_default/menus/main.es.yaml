@@ -1331,27 +1331,6 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoTerm
-      url: coterm/
-      pre: coscreen
-      identifier: coterm
-      parent: essentials_heading
-      weight: 160000
-    - name: Instalar
-      url: coterm/install
-      identifier: coterm_install
-      parent: coterm
-      weight: 1
-    - name: Uso de CoTerm
-      url: coterm/usage
-      identifier: coterm_usage
-      parent: coterm
-      weight: 2
-    - name: Reglas de configuración
-      url: coterm/rules
-      identifier: coterm_rules
-      parent: coterm
-      weight: 3
     - name: Configuración remota
       pre: config-2
       url: remote_configuration
@@ -3087,9 +3066,9 @@ menu:
       identifier: actions_http
       weight: 101
     - name: Integración con AWS
-      url: actions/connections/aws_integration/
+      url: actions/connections/integration/
       parent: actions_connections
-      identifier: actions_aws_integration
+      identifier: actions_integration
       weight: 102
     - name: Google Workspace
       url: actions/connections/google_workspace/

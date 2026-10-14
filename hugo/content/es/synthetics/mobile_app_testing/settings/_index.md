@@ -5,90 +5,98 @@ aliases:
 further_reading:
 - link: /synthetics/mobile_app_testing/
   tag: Documentación
-  text: Aprender a crear un test móvil
+  text: Aprenda a crear una prueba móvil
 - link: /continuous_testing/cicd_integrations
   tag: Documentación
-  text: Ejecutar tus tests Synthetic en un pipeline CI
+  text: Ejecute sus pruebas Synthetic en una canalización de CI.
 is_beta: true
-title: Parámetros de los tests de aplicaciones móviles
+title: Mobile Application Testing Settings
 ---
 {{< jqmath-vanilla >}}
 
-## Información general
+## Descripción general {#overview}
 
-Gestiona tus aplicaciones móviles cargadas y tus parámetros de paralelización en la [página de parámetros de Monitorización Synthetic y tests continuos][1].
+Administre sus aplicaciones móviles cargadas y su configuración de paralelización en la [Synthetic Monitoring & Continuous Testing Settings page][1].
 
-{{< img src="mobile_app_testing/applications_list_2.png" alt="Parámetros de aplicaciones móviles" style="width:100%;">}}
+{{< img src="mobile_app_testing/applications_list_2.png" alt="Configuración de aplicaciones móviles" style="width:100%;">}}
 
-## Crear una aplicación
+## Cree una aplicación {#create-an-application}
 
-Para añadir una aplicación móvil, ve a la [pestaña **Lista de aplicaciones móviles**][5] y haz clic en **+ Create Application** (+ Crear aplicación).
+Para agregar una aplicación móvil, navegue a la [{{< ui >}}Mobile Applications List{{< /ui >}} pestaña][5] y haga clic en {{< ui >}}\+ Create Application{{< /ui >}}.
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-1. Selecciona **Android** como sistema operativo para tu aplicación móvil.
-2. Ponle un nombre a tu aplicación móvil.
-3. Añade etiquetas `env` y etiquetas adicionales a tu aplicación móvil. Puedes utilizar estas etiquetas para filtrar rápidamente los tests de tu aplicación móvil en la [página Monitorización Synthetic y tests continuos][101]. 
-4. También puedes introducir una descripción de tu aplicación móvil.
-5. Carga un [archivo `.apk`][102].
-6. Introduce un nombre para la versión de tu aplicación móvil. También puedes seleccionar **Mark this version as latest** (Marcar esta versión como la más reciente).
-7. Haz clic en **Create Application** (Crear aplicación).
+1. Seleccione {{< ui >}}Android{{< /ui >}} como el sistema operativo para su aplicación móvil.
+2. Seleccione el marco de trabajo con el que se creó su aplicación. Los frameworks compatibles son los nativos de Android y React Native.
+3. Asigne un nombre a su aplicación móvil.
+4. Agregue `env` etiquetas, así como etiquetas adicionales a su aplicación móvil. Puede usar estas etiquetas para filtrar sus pruebas de aplicaciones móviles en la [Synthetic Monitoring & Continuous Testing Settings page][101]. 
+5. Opcionalmente, ingrese una descripción para su aplicación móvil.
+6. Cargue un [`.apk` archivo][102].
+7. Ingrese un nombre para la versión de su aplicación móvil. Opcionalmente, seleccione {{< ui >}}Mark this version as latest{{< /ui >}}.
+8. Haga clic en {{< ui >}}Create Application{{< /ui >}}.
 
 [101]: https://app.datadoghq.com/synthetics/tests
 [102]: https://developer.android.com/tools/bundletool
 
+{{< img src="mobile_app_testing/settings/mobile_app_settings_android.png" alt="Cree una prueba de aplicación móvil con Android y Native (predeterminado) seleccionados" height="400px" >}}
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-1. Selecciona **iOS** como sistema operativo para tu aplicación móvil.
-2. Ponle un nombre a tu aplicación móvil.
-3. Añade etiquetas `env` y etiquetas adicionales a tu aplicación móvil. Puedes utilizar estas etiquetas para filtrar rápidamente los tests de tu aplicación móvil en la [página Monitorización Synthetic y tests continuos][101]. 
-4. También puedes introducir una descripción de tu aplicación móvil.
-5. Carga un archivo `.ipa`.
-6. Introduce un nombre para la versión de tu aplicación móvil. También puedes seleccionar **Mark this version as latest** (Marcar esta versión como la más reciente).
-7. Haz clic en **Create Application** (Crear aplicación).
+1. Seleccione {{< ui >}}iOS{{< /ui >}} como el sistema operativo para su aplicación móvil.
+2. Seleccione el marco de trabajo con el que se creó su aplicación. Los frameworks compatibles son los nativos de iOS y React Native.
+3. Asigne un nombre a su aplicación móvil.
+4. Agregue `env` etiquetas, así como etiquetas adicionales a su aplicación móvil. Puede usar estas etiquetas para filtrar sus pruebas de aplicaciones móviles en la [Synthetic Monitoring & Continuous Testing Settings page][101]. 
+5. Opcionalmente, ingrese una descripción para su aplicación móvil.
+6. Cargue un archivo `.ipa`.
+7. Ingrese un nombre para la versión de su aplicación móvil. Opcionalmente, seleccione {{< ui >}}Mark this version as latest{{< /ui >}}.
+8. Haga clic en {{< ui >}}Create Application{{< /ui >}}.
 
 [101]: https://app.datadoghq.com/synthetics/tests
+
+{{< img src="mobile_app_testing/settings/mobile_app_settings_ios.png" alt="Cree una prueba de aplicación móvil con iOS y Native (predeterminado) seleccionados" height="400px" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Para editar o eliminar una aplicación móvil, sitúa el cursor sobre una aplicación móvil en la **Lista de aplicaciones móviles** y haz clic en el icono correspondiente.
+Para editar o eliminar una aplicación móvil, pase el cursor sobre una aplicación móvil en {{< ui >}}Mobile Applications List{{< /ui >}} y haga clic en el icono correspondiente.
 
-**Nota**: Los tests de aplicaciones móviles no son completamente compatibles con las aplicaciones Flutter.
+<div class="alert alert-info">
+  <strong>Nota</strong>: A partir de julio de 2025, las aplicaciones de React Native son oficialmente compatibles con Mobile Application Testing. No se requiere ninguna acción para las aplicaciones de React Native que se cargaron antes del soporte oficial: las pruebas continúan ejecutándose como se esperaba. Mobile Application Testing no proporciona soporte completo para aplicaciones de Flutter.
+</div>
 
-## Gestionar las versiones de las aplicaciones
+## Administrar versiones de la aplicación {#manage-application-versions}
 
-Al hacer clic en una aplicación móvil en la **Lista de aplicaciones móviles** se muestran las versiones existentes de la aplicación. Pasa el cursor sobre una versión y haz clic en el icono **+** para [crear un test de aplicación móvil][6] con la versión de la aplicación móvil seleccionada.
+Al hacer clic en una aplicación móvil en {{< ui >}}Mobile Applications List{{< /ui >}} se muestran las versiones existentes de la aplicación. Pase el cursor sobre una versión y haga clic en el icono {{< ui >}}\+{{< /ui >}} para [crear una prueba de aplicación móvil][6] con la versión de la aplicación móvil seleccionada.
 
-Para editar o eliminar una versión de una aplicación móvil, pasa el cursor sobre una versión de la aplicación móvil y haz clic en el icono correspondiente.
+Para editar o eliminar una versión de una aplicación móvil, pase el cursor sobre una versión en la aplicación móvil y haga clic en el icono correspondiente.
 
-### Añadir una versión
+### Agregar una versión {#add-a-version}
 
-Para añadir una versión de una aplicación móvil existente:
+Para agregar una versión de una aplicación móvil existente:
 
-1. Pasa el cursor sobre el icono `+` de una aplicación móvil en la **Lista de aplicaciones móviles** y haz clic en **Add new version** (Añadir nueva versión).
-2. Carga un archivo [`.apk`][4] o `.ipa`.
-3. Introduce un nombre de versión.
-4. También puedes seleccionar **Mark this version as latest** (Marcar esta versión como la última).
-5. Haz clic en **Add Version** (Añadir versión).
+1. Pase el cursor sobre el icono {{< ui >}}\+{{< /ui >}} en una aplicación móvil en {{< ui >}}Mobile Applications List{{< /ui >}} y haga clic en {{< ui >}}Add new version{{< /ui >}}. 
+2. Cargue un archivo [`.apk`][4] o `.ipa`.
+3. Ingrese un nombre de versión. 
+4. Opcionalmente, seleccione {{< ui >}}Mark this version as latest{{< /ui >}}.
+5. Haga clic en {{< ui >}}Add Version{{< /ui >}}.
 
-{{< img src="mobile_app_testing/add_new_version.png" alt="Añadir una nueva versión de la aplicación móvil" style="width:50%;">}}
+{{< img src="mobile_app_testing/add_new_version.png" alt="Agregar una nueva versión de una aplicación móvil" style="width:50%;">}}
 
-## Personalizar tu paralelización
+## Personalice su paralelización {#customize-your-parallelization}
 
-Para obtener más información sobre cómo paralelizar tests Synthetic, consulta [Parámetros de tests continuos][7].
+Para obtener más información sobre cómo paralelizar sus pruebas Synthetic, consulte [Continuous Testing Settings][7].
 
 
 
-## Permisos
+## Permisos {#permissions}
 
-De manera predeterminada, sólo los usuarios con los roles de administrador de Datadog y estándar de Datadog pueden acceder a la página de la **Lista de aplicaciones** de la monitorización Synthetic. Para acceder a la página de la **Lista de aplicaciones**, actualiza tu usuario a uno de esos dos [roles predeterminados][2].
+De forma predeterminada, solo los usuarios con los roles Datadog Admin y Datadog Standard pueden acceder a la página de Synthetic Monitoring {{< ui >}}Applications List{{< /ui >}}. Para obtener acceso a la página {{< ui >}}Applications List{{< /ui >}}, actualice su usuario a uno de esos dos [default roles][2]. 
 
-Si estás utilizando la [función rol personalizado][3], añade tu usuario a cualquier rol personalizado que incluya permisos de `synthetics_read` y `synthetics_write`.
+Si está utilizando la [custom role feature][3], agregue su usuario a cualquier custom role que incluya los permisos `synthetics_read` y `synthetics_write`. 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

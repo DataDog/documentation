@@ -1,62 +1,64 @@
 ---
+description: Implemente el monitoreo RUM en tiendas Squarespace para comprender el
+  comportamiento del cliente, realizar un seguimiento del rendimiento y optimizar
+  la experiencia del usuario.
 further_reading:
 - link: /real_user_monitoring/guide/rum-for-product-analytics/
   tag: Documentación
-  text: Uso de RUM y Session Replay para el análisis de productos
+  text: Utilice RUM y Session Replay para Product Analytics
 - link: /real_user_monitoring/guide/alerting-with-conversion-rates/
   tag: Documentación
-  text: Generación de alertas con tasas de conversión
-title: Habilitar RUM en tu tienda Squarespace
+  text: Alerting con tasas de conversión
+title: Habilite RUM en su tienda Squarespace
 ---
+## Descripción general {#overview}
 
-## Información general
+Comprender cómo interactúan los clientes con sus páginas web es crucial para el éxito de su tienda en línea.
 
-Comprender cómo interactúan los clientes con tus páginas web es esencial para el éxito de tu tienda en línea.
+Esta guía explica cómo puede configurar Real User Monitoring en su tienda impulsada por Squarespace.
 
-Esta guía te explica cómo puedes configurar Real User Monitoring en tu tienda con tecnología Squarespace.
+## Configuración {#setup}
 
-## Configuración
+1. Regístrese en su panel de administración de Squarespace y haga clic en {{< ui >}}Settings{{< /ui >}}.
 
-1. Inicia sesión en tu panel de administración de Squarespace y haz clic en **Configuración**.
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Habilite RUM en su tienda Squarespace" style="width:30%;">}}
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Habilitar RUM en tu tienda Squarespace" style="width:30%;">}}
+2. En {{< ui >}}Settings{{< /ui >}}, haga clic en {{< ui >}}Advanced{{< /ui >}}.
 
-2. En **Configuración**, haz clic en **Avanzado**.
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Habilite RUM en su tienda Squarespace" style="width:30%;">}}
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Habilitar RUM en tu tienda Squarespace" style="width:30%;">}}
+3. En el menú abierto, haga clic en {{< ui >}}Code Injection{{< /ui >}}.
 
-3. En el menú abierto, haz clic en **Inyección de código**.
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Habilite RUM en su tienda Squarespace" style="width:30%;">}}
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Habilitar RUM en tu tienda Squarespace" style="width:30%;">}}
+4. Inicialice el Browser RUM SDK agregando el fragmento de código del SDK dentro de la sección {{< ui >}}Header{{< /ui >}}. Consulte más información sobre qué método de instalación elegir en la [documentación de RUM Browser Monitoring][1].
 
-4. Inicializa el SDK del Navegador RUM añadiendo el fragmento de código SDK en la sección **Cabecera*. Para ver más información sobre qué método de instalación elegir, consulta la [documentación de monitorización del Navegador RUM][1].
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-4.png" alt="Habilite RUM en su tienda Squarespace" >}}
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-4.png" alt="Habilitar RUM en tu tienda Squarespace" >}}
+5. Haga clic en el botón {{< ui >}}Save{{< /ui >}} para guardar sus cambios.
 
-5. Haz clic en el botón **Guardar** para guardar los cambios.
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Habilite RUM en su tienda Squarespace" style="width:50%;">}}
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Habilitar RUM en tu tienda Squarespace" style="width:50%;">}}
+Consulte más información sobre la inyección de código en la [documentación de Squarespace][2].
 
-Para ver más información sobre la inyección de código, consulta la [documentación de Squarespace][2].
+## Comience a explorar {#start-exploring}
 
-## Para empezar a explorar
+Una vez que haya inicializado el Browser RUM SDK, puede comenzar a usar Real User Monitoring con su tienda Squarespace.
 
-Una vez que hayas inicializado el SDK del Navegador RUM, puedes empezar a utilizar Real User Monitoring con tu tienda Squarespace.
+Por ejemplo, puede:
 
-Por ejemplo, podrás:
+- Obtenga información valiosa sobre el comportamiento de sus clientes al
+tomar decisiones basadas en datos para mejorar su tienda
+- Aumente la conversión observando sesiones enriquecidas con grabaciones del navegador mediante [Session Replay][3]
+- Utilice el [análisis de embudo][4] para comprender mejor el recorrido del cliente, o
+- [Genere métricas][5] a partir de esas sesiones recién capturadas
 
-- Obtener información valiosa sobre el comportamiento de tus clientes
-tomando decisiones basadas en datos para mejorar tu tienda
-- Aumentar la conversión viendo las sesiones enriquecidas de grabaciones del navegador utilizando [Session Replay][3]
-- Utilizar el [análisis de embudo][4] para comprender mejor el recorrido del cliente o
-- [Generar métricas][5] a partir de esas sesiones recién capturadas.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/real_user_monitoring/browser/setup/#choose-the-right-installation-method/
+[1]: /es/real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: https://support.squarespace.com/hc/en-us/articles/205815908-Using-code-injection
-[3]: /es/real_user_monitoring/session_replay/browser/
+[3]: /es/session_replay/
 [4]: /es/product_analytics/journeys/funnel_analysis/
 [5]: /es/real_user_monitoring/generate_metrics/

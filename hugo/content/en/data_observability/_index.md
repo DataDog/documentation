@@ -2,12 +2,21 @@
 title: Data Observability Overview
 description: "Monitor data quality, performance, and cost with Data Observability to detect anomalies, analyze data lineage, and prevent issues affecting downstream systems."
 further_reading:
+ - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
+   tag: 'Architecture Center'
+   text: 'Monitoring Financial Data Mesh on AWS using Datadog'
+ - link: 'https://www.datadoghq.com/architecture/monitoring-insurance-data-lakes-on-aws-using-datadog/'
+   tag: 'Architecture Center'
+   text: 'Monitoring Insurance Data Lakes on AWS using Datadog'
  - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
    tag: 'Blog'
    text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
  - link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
    tag: "Blog"
    text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
+ - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+   tag: "Blog"
+   text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 ## Overview
