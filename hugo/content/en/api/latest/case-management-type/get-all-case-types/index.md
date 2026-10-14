@@ -1,3 +1,3 @@
 ---
-title: Get all case types
+title: Get all work item types
 ---
