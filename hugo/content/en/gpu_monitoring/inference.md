@@ -264,20 +264,34 @@ Apply the updated workload resources and recreate the pods so that Autodiscovery
 
 ### 4. Verify setup
 
-Run the following commands to confirm that each endpoint responds and that the Agent runs both checks:
+Use three terminals to confirm that each endpoint responds and that the Agent runs both checks. Run the port-forwards in your workloads' Kubernetes namespace, or add `-n <WORKLOAD_NAMESPACE>` if it differs from your current namespace.
+
+**Terminal 1**: Forward the frontend metrics endpoint, and leave it running.
 
 ```shell
-# Confirm the frontend endpoint responds
 kubectl port-forward pod/<FRONTEND_POD> 18000:8000
-curl -fsS http://localhost:18000/metrics | head
+```
 
-# Confirm the worker endpoint responds
+**Terminal 2**: Forward the worker metrics endpoint, and leave it running. If your worker uses a different metrics port, replace `9090` with that port.
+
+```shell
 kubectl port-forward pod/<WORKER_POD> 19090:9090
+```
+
+**Terminal 3**: Verify both endpoints and the Agent checks.
+
+```shell
+# Show the first ten lines of frontend metrics
+curl -fsS http://localhost:18000/metrics | sed -n '1,10p'
+
+# Show Dynamo and vLLM metrics from the worker
 curl -fsS http://localhost:19090/metrics | grep -E '^(dynamo_|vllm:)'
 
-# Confirm that "dynamo" and "vllm" appear under Checks
+# Look for "dynamo" and "vllm" under Checks
 kubectl exec -n <DATADOG_NAMESPACE> <AGENT_POD> -c agent -- agent status
 ```
+
+Confirm that the worker output includes both `dynamo_` and `vllm:` metric names, and that the Agent status lists both checks. When you finish, press **Ctrl+C** in terminals 1 and 2 to stop forwarding.
 
 After you complete setup, Datadog collects the following:
 - `dynamo.frontend.*` metrics from frontend pods
