@@ -677,7 +677,7 @@ Lists the attachments on a work item (case), or retrieves the contents of a spec
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `link_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write` and `Cases Read`*\
 Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
 
