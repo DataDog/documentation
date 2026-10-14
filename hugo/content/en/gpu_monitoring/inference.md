@@ -308,7 +308,7 @@ To get started, navigate to the [Inference page][2] in GPU Monitoring.
 
 Use the search bar at the top of the page to search for model deployments, models, engines, or namespaces. You can also filter by {{< ui >}}Env{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}}, and {{< ui >}}Kube Namespace{{< /ui >}}, or click {{< ui >}}Filter{{< /ui >}} to add other filters.
 
-### Latency and throughput
+### Understand latency and throughput
 
 The graphs at the top of the page show the latency and throughput of your model deployments, grouped by `app`:
 
