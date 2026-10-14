@@ -2033,6 +2033,37 @@ Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
 
+### `test_parallelization_onboarding`
+*Toolset: **onboarding***\
+*Permissions Required: None*\
+Returns instructions for a coding agent to set up [Test Parallelization][92] for your test suite. The tool does not inspect or edit repositories, run tests, or provision credentials.
+
+Test Parallelization requires [Test Optimization][24]. The guidance preserves an existing Test Optimization integration and uses `test_optimization_onboarding` only when that integration is missing.
+
+Enable the `onboarding` toolset as described in [Set Up the Datadog MCP Server][1]. Ask your coding agent to inspect the repository's dependencies, test configuration, and CI configuration before calling the tool.
+
+All three parameters are required strings. A repository name is not required.
+
+| Parameter | Accepted values |
+| --- | --- |
+| `runtime` | `ruby`, `python`, `nodejs` |
+| `test_framework` | A framework compatible with the runtime, as listed below. |
+| `ci_provider` | `github`, `circleci`, `gitlab`, `jenkins`, `bitbucket`, `travisci`, `buildkite`, `appveyor`, `bitrise`, `azure-pipelines`, `other`. Use `other` only for an unrecognized provider. |
+
+| Runtime | Supported `test_framework` values |
+| --- | --- |
+| `ruby` | `rspec`, `minitest` |
+| `python` | `pytest` |
+| `nodejs` | `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, `vitest` |
+
+Other runtime and framework combinations are not supported. The agent must report unsupported combinations without making parallelization changes. See [Test Parallelization compatibility][93] for library and framework version requirements.
+
+For GitHub Actions (`github`) and CircleCI (`circleci`), the guidance covers distributing tests across CI nodes or using local workers. For other providers, the guidance is limited to local workers on one CI node.
+
+- Set up Test Parallelization for this Ruby RSpec suite on GitHub Actions, preserving the existing Test Optimization integration.
+- Configure Test Parallelization for this Python pytest suite on CircleCI. Set up Test Optimization first if it is missing.
+- Set up Test Parallelization for this Node.js Jest suite using parallel workers in the existing GitLab CI job.
+
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\
@@ -3465,6 +3496,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
+[92]: /tests/test_parallelization/
+[93]: /tests/test_parallelization/#compatibility
 
 ## Further reading
 
