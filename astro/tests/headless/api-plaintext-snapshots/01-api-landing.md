@@ -6,9 +6,21 @@ breadcrumbs: Docs > API
 
 > For the complete documentation index, see [llms.txt](https://docs.datadoghq.com/llms.txt).
 
-# API Reference
+# Fixture API Reference
 
-Welcome to the Datadog API Reference. Select a category to get started.
+## Client libraries
+
+```xml
+<version>2.40.0</version>
+```
+
+```markdoc
+{% alert level="info" %}
+Example alert.
+{% /alert %}
+```
+
+## API categories
 
 - [Authentication](https://docs.datadoghq.com/api/latest/authentication.md)
 - [AWS Integration](https://docs.datadoghq.com/api/latest/aws-integration.md)

@@ -2,12 +2,14 @@ export const prerender = true;
 /**
  * Plaintext rendering of the API Reference landing page.
  *
- * Composes the page from Markdoc nodes — a heading, an intro paragraph, and a
- * bullet list of category links — then emits markdown via `buildPlaintextPage`.
- * Mirrors the HTML landing page in `latest/index.astro`.
+ * Mirrors the HTML landing page (`latest/[...page].astro` for the root entry):
+ * the title, then the hand-written `index.mdoc` content (getting started,
+ * client libraries). A bullet list of category links follows, because the HTML
+ * page lists them in its side nav and agents use this page to find them.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { CollectionEntry } from "astro:content";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getEntry } from "astro:content";
 import type { ApiCategoryStub } from "@lib/api/schemas/views";
@@ -17,6 +19,8 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
+import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
+import { SDK_VERSIONS } from "@lib/site/sdkVersions";
 import {
   buildPlaintextPage,
   heading,
@@ -24,29 +28,40 @@ import {
   link,
   list,
   listItem,
-  paragraphFromText,
+  parse,
 } from "@lib/plaintext/helpers";
 
 function apiLandingBody(
+  rootEntry: CollectionEntry<"en">,
   categories: ApiCategoryStub[],
   lang: Locale,
   pathname: string,
 ): MarkdocNode[] {
-  const items = categories.map((cat) => {
-    const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
-    return listItem([inline([link(href, cat.name)])]);
-  });
-
-  const contents: MarkdocNode[] = [
-    heading(1, "API Reference"),
-    ...siteSupportNoteNodes(pathname, lang),
-    paragraphFromText(
-      "Welcome to the Datadog API Reference. Select a category to get started.",
-    ),
-    list("unordered", items),
+  return [
+    heading(1, rootEntry.data.title),
+    ...siteSupportNoteNodes(pathname, lang, rootEntry.data.site_support_id),
+    ...overviewContentNodes(rootEntry),
+    // TODO: localize once Hugo's i18n bundle has a key for this heading.
+    heading(2, "API categories"),
+    categoryList(categories, lang),
   ];
+}
 
-  return contents;
+function overviewContentNodes(rootEntry: CollectionEntry<"en">): MarkdocNode[] {
+  const nodes = parse(rootEntry.body ?? "").children;
+  resolveFenceVariables(nodes, { sdkVersions: SDK_VERSIONS });
+  return nodes;
+}
+
+function categoryList(
+  categories: ApiCategoryStub[],
+  lang: Locale,
+): MarkdocNode {
+  const items = categories.map((category) => {
+    const href = localizedHref(lang, `/api/latest/${category.slug}/`);
+    return listItem([inline([link(href, category.name)])]);
+  });
+  return list("unordered", items);
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -68,7 +83,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
 
   const categories = await getCategoryStubsView(lang);
   const body = buildPlaintextPage(
-    apiLandingBody(categories, lang, url.pathname),
+    apiLandingBody(rootEntry, categories, lang, url.pathname),
     {
       title: rootEntry.data.title,
       description: rootEntry.data.description ?? "",
