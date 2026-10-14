@@ -1,6 +1,10 @@
 ---
 title: Exabeam - Cisco ASA
 description: Learn more about the Exabeam - Cisco ASA pack.
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -14,3 +18,7 @@ What this pack does:
 - Normalizes ASA codes
 - Deduplicates repeated logs
 - Drops non-actionable syslog noise
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
