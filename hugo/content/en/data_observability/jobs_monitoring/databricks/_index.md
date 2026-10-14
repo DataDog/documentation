@@ -133,12 +133,12 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
-   1. Grant the token's principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the principal's client ID (not its display name):
+   1. Grant the token's principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands, replacing `<PRINCIPAL>` with the application/client ID if the token belongs to a service principal, or the user principal name (typically an email address) if the token belongs to a Databricks user:
 
       ```sql
-      GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
-      GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
-      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT USE CATALOG ON CATALOG system TO `<PRINCIPAL>`;
+      GRANT USE SCHEMA ON CATALOG system TO `<PRINCIPAL>`;
+      GRANT SELECT ON CATALOG system TO `<PRINCIPAL>`;
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
@@ -497,16 +497,16 @@ Choose one of the following approaches for the user or service principal:
 The regular setup instructions grant `SELECT` on `CATALOG system`. As a more granular alternative for users who do not want catalog-level `SELECT`, grant the user or service principal access only to the following resources that Datadog requires:
 
 - `CAN USE` permission on the SQL Warehouse.
-- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
+- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, replacing `<PRINCIPAL>` with the application/client ID for a service principal, or the user principal name (typically an email address) for a Databricks user:
 
   ```sql
-  GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
-  GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
-  GRANT SELECT ON TABLE system.access.column_lineage TO `<CLIENT-ID>`;
-  GRANT SELECT ON TABLE system.billing.usage TO `<CLIENT-ID>`;
-  GRANT SELECT ON TABLE system.access.workspaces_latest TO `<CLIENT-ID>`;
-  GRANT SELECT ON TABLE system.billing.list_prices TO `<CLIENT-ID>`;
-  GRANT SELECT ON TABLE system.billing.account_prices TO `<CLIENT-ID>`;
+  GRANT USE CATALOG ON CATALOG system TO `<PRINCIPAL>`;
+  GRANT USE SCHEMA ON CATALOG system TO `<PRINCIPAL>`;
+  GRANT SELECT ON TABLE system.access.column_lineage TO `<PRINCIPAL>`;
+  GRANT SELECT ON TABLE system.billing.usage TO `<PRINCIPAL>`;
+  GRANT SELECT ON TABLE system.access.workspaces_latest TO `<PRINCIPAL>`;
+  GRANT SELECT ON TABLE system.billing.list_prices TO `<PRINCIPAL>`;
+  GRANT SELECT ON TABLE system.billing.account_prices TO `<PRINCIPAL>`;
   ```
 
   The user granting these must have `MANAGE` privilege on `CATALOG system`.
