@@ -224,6 +224,8 @@ Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_
 
 Each submission defines the complete set of sources and metrics managed by its `sync_tag`. Objects already managed by that tag but absent from the submitted files are candidates for deletion. Submit all files for the tag together, including unchanged definitions. Changing a `sync_id` can result in deletion of the old object and creation of another object.
 
+Remove a source and its dependent metrics in two submissions. First remove the metric definitions, keep the source and all unrelated definitions, and run `plan` and `execute`. Then remove the source and submit the remaining definitions. A plan that removes both the source and its metrics in one operation can pass but fail during execution. References from other sync tags must also be removed before deleting the source.
+
 All files in an operation must use the same `schema_version`, `sync_tag`, and effective `options`. Nonempty top-level `reference_url` and `warehouse_connection_id` values must also agree across files.
 
 ### Manage existing metrics with YAML
@@ -459,6 +461,8 @@ Percentile metrics support only property filters with `IS` or `IS_NOT`. They do 
 
 ### CLI limitations
 
+Changing only `options.is_certified` does not update certification on an otherwise unchanged existing source or metric. Check certification in Datadog after managing existing definitions with YAML; a successful sync alone does not confirm a certification change.
+
 The CLI does not export existing definitions or convert Eppo YAML automatically. Create and review the full definitions before managing existing metrics with YAML.
 
 For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upgrade_mode: by_name` alone does not adopt objects with matching names.
@@ -542,7 +546,7 @@ The sync API does not support `warehouse_metric_measure_id`. Replace raw measure
 | A subject type was not found. | Confirm the `subject_types[].name` value matches an existing Datadog subject type. |
 | A successful result shows no changes. | The YAML already matches Datadog for that `sync_tag`. A failed operation does not establish this. |
 | A sync is blocked. | Read the object details and blocked reasons in the console output. Possible causes include experiment references, metrics outside the sync tag that reference a source, and adoption conflicts. A blocked result exits with a nonzero status. |
-| An operation fails. | Run `result <metric_sync_id> --log-file ./metric-sync-result.log` to retrieve available errors and inspect the API response. Changes shown for a failed operation are not confirmed as applied. |
+| An operation fails. | Run `result <metric_sync_id> --log-file ./metric-sync-result.log` to retrieve available errors and inspect the API response. Changes shown for a failed operation are not confirmed as applied. Some server failures return no error details; keep the operation ID for support. |
 | Local validation passes, but `plan` rejects the YAML. | Local checks do not cover every API rule. For example, percentile metrics require a value between zero and one, and ratio components cannot use `average`. Use the error details in the console output or debug log to correct the definition. |
 
 [1]: /experiments/guide/connecting_a_data_warehouse/
