@@ -23386,6 +23386,19 @@ menu:
           - GetTeamMemberships
         unstable: []
         order: 9
+    - name: Get team hierarchy members
+      url: /api/latest/teams/get-team-hierarchy-members/
+      identifier: teams-get-team-hierarchy-members
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamHierarchyMembers
+        unstable:
+          - v2
+        order: 35
     - name: Update a team link
       url: /api/latest/teams/update-a-team-link/
       identifier: teams-update-a-team-link
