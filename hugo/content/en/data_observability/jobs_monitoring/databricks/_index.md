@@ -496,7 +496,7 @@ Choose one of the following approaches for the user or service principal:
 
 The regular setup instructions grant `SELECT` on `CATALOG system`. As a more granular alternative for users who do not want catalog-level `SELECT`, grant the user or service principal access only to the following resources that Datadog requires:
 
-- `CAN USE` permission on the SQL Warehouse.
+- `CAN USE` permission on the SQL warehouse provided during setup.
 - `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, replacing `<PRINCIPAL>` with the application/client ID for a service principal, or the user principal name (typically an email address) for a Databricks user:
 
   ```sql
