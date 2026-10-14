@@ -77,7 +77,15 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the service principal `CAN USE`.
-   1. Grant the service principal the read access described in [Cost data permissions](#cost-data-permissions), using the service principal's client ID (not its display name).
+   1. Grant the service principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the service principal's client ID (not its display name):
+
+      ```sql
+      GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
+      ```
+
+      <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
    1. Add the service principal to the `databricks_pii_access` account-level group. Serverless job monitoring and SQL warehouse and query monitoring require this membership, because Databricks masks SQL query text for principals outside the group. See [Query text access](#query-text-access) for the full requirements.
 1. In the **Select products to set up integration** section, ensure that Data Observability: Jobs Monitoring is {{< ui >}}Enabled{{< /ui >}}.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
@@ -125,7 +133,15 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
-   1. Grant the token's principal the read access described in [Cost data permissions](#cost-data-permissions), using the principal's client ID (not its display name).
+   1. Grant the token's principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the principal's client ID (not its display name):
+
+      ```sql
+      GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
+      ```
+
+      <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
    1. Add the token's principal to the `databricks_pii_access` account-level group. Serverless job monitoring and SQL warehouse and query monitoring require this membership, because Databricks masks SQL query text for principals outside the group. See [Query text access](#query-text-access) for the full requirements.
 1. In the **Select products to set up integration** section, make sure the Data Observability: Jobs Monitoring product is **Enabled**.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
@@ -476,12 +492,12 @@ Choose one of the following approaches for the user or service principal:
   | [Query][23]                            | CAN VIEW
   | [SQL warehouse][24]                    | CAN MONITOR
 
-#### Cost data permissions
+#### System table permissions
 
-Additionally, for Datadog to access your Databricks cost data in Data Observability: Jobs Monitoring or [Cloud Cost Management][26], the user or service principal used to query [system tables][27] must have the following permissions:
+The regular setup instructions grant `SELECT` on `CATALOG system`. As a more granular alternative for users who do not want catalog-level `SELECT`, grant the user or service principal access only to the system tables that Datadog queries:
 
 - `CAN USE` permission on the SQL Warehouse.
-- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five system tables that Datadog queries. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
+- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
 
   ```sql
   GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
@@ -511,7 +527,7 @@ Add the service principal to `databricks_pii_access` to use the following capabi
 
 Databricks cost data, job monitoring on all-purpose and job clusters, and table-level [Quality Monitoring][35] metrics do not depend on query text and are unaffected.
 
-Group membership is required in addition to the [scoped system table grants](#cost-data-permissions).
+Group membership controls whether SQL query text is masked; it does not replace the system table permissions required by the integration. Follow either the catalog-wide grants in the regular setup instructions or the granular grants in [System table permissions](#system-table-permissions).
 
 To create the group and add the service principal:
 
