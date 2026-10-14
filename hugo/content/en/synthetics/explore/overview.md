@@ -20,16 +20,16 @@ further_reading:
 ---
 
 
-The Synthetic Monitoring & Testing {{< ui >}}Overview{{< /ui >}} page shows the health and coverage of your Synthetic tests in one place. It answers two questions:
+The Synthetic Monitoring & Testing Overview page gives you a single view of the health and coverage of your Synthetic tests, helping you answer two questions:
 
 - **What is failing?** Identify which tests are in alert, see where failures are concentrated, and take action on each failing test.
-- **What is not tested yet?** Find the endpoints and views with the most traffic that no Synthetic test covers, and create tests for them.
+- **What is not tested yet?** Find the highest-traffic endpoints and views that no Synthetic test covers, and create tests for them.
 
 Use this page as the starting point for triaging failures and for deciding where to add test coverage.
 
 ## Prerequisites
 
-- To see untested endpoints, you need [APM][1] enabled for your services.
+- To see untested endpoints, enable [APM][1] for your services.
 - To see untested views, enable [RUM][2] for your web or mobile applications.
 
 The [tests in alert](#review-tests-in-alert) section of the Overview page doesn't require APM or RUM.
@@ -108,7 +108,7 @@ To create a test for an endpoint:
 
 1. Hover over an endpoint in the list.
 2. Click {{< ui >}}Create an API Test{{< /ui >}}.
-3. Datadog opens a new [API test][4] with the endpoint URL prefilled. Complete the test configuration and click {{< ui >}}Save{{< /ui >}}.
+3. In the new [API test][4], which opens with the endpoint URL prefilled, complete the test configuration and click {{< ui >}}Save{{< /ui >}}.
 
 ### Untested views
 
@@ -120,9 +120,9 @@ To create a test for a view:
 
 1. Hover over a view in the list.
 2. Click {{< ui >}}Create a Browser Test{{< /ui >}} for a web application view, or {{< ui >}}Create a Mobile Test{{< /ui >}} for a mobile application view.
-3. Datadog opens a new test with no fields prefilled:
-   - For a web application view, Datadog opens a new [browser test][5]. Enter the starting URL, record your steps, and click {{< ui >}}Save{{< /ui >}}.
-   - For a mobile application view, Datadog opens a new [mobile app test][6]. Select your application, record your steps, and click {{< ui >}}Save{{< /ui >}}.
+3. Configure the new test, which opens with no fields prefilled:
+   - For a web application view, in the new [browser test][5], enter the starting URL, record your steps, and click {{< ui >}}Save{{< /ui >}}.
+   - For a mobile application view, in the new [mobile app test][6], select your application, record your steps, and click {{< ui >}}Save{{< /ui >}}.
 
 ## Further reading
 
