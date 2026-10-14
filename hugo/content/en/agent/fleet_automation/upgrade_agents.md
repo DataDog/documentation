@@ -79,10 +79,10 @@ Use the Datadog Terraform provider to create and manage Agent upgrade schedules 
 Before you begin:
 
 - Verify that the Agents meet the [upgrade prerequisites](#prerequisites).
-- [Set up the Datadog Terraform provider][8], using provider version 4.22.0 or later.
+- [Set up the Datadog Terraform provider][8] (version 4.22.0 or later).
 - Use an application key with the `agent_upgrade_write` and `hosts_read` permissions.
 
-**Note**: Creating, updating, and deleting schedules through Terraform uses Preview API endpoints.
+**Note**: Endpoints for creating, updating, and deleting schedules through Terraform are in Preview.
 
 The following example defines an inactive schedule for hosts matching `env:staging service:example`. The schedule targets the latest Agent version, with a two-hour maintenance window starting at 03:00 on Tuesdays and Thursdays in the `America/New_York` time zone.
 
