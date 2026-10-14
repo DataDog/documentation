@@ -80,7 +80,7 @@ export DD_VERSION=<YOUR_APP_VERSION>
 
 Set these variables before starting PHP. For PHP-FPM, make them available to the worker processes and restart the pool after changes. Keep the API key in server-side secret storage.
 
-The SDK fetches configuration over HTTPS from `ufc-server.ff-cdn.<DD_SITE>` for `DD_ENV`. It uses the same application APIs and targeting contexts shown below. Feature flags can operate with `DD_TRACE_ENABLED=false`.
+The SDK starts a libdatadog sidecar subprocess that fetches configuration over HTTPS from `ufc-server.ff-cdn.<DD_SITE>` for `DD_ENV`. It uses the same application APIs and targeting contexts shown below. Feature flags can operate with `DD_TRACE_ENABLED=false`.
 
 ### Configuration and initialization
 
@@ -90,7 +90,7 @@ The SDK polls every 30 seconds by default, with a 5-second HTTP request timeout.
 
 For a custom configuration service, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL`. A URL with only a root path uses `/api/v2/feature-flagging/config/rules-based/server`; a URL with a non-root path is requested as supplied. The SDK does not send the Datadog API key to a custom configuration URL. This setting changes configuration retrieval only; it does not redirect exposure or evaluation events.
 
-CDN configuration and polling belong to the PHP process. The SDK stops and joins its poller during process shutdown, and restarts independent pollers in the parent and child after a supported fork. The PHP application APIs do not expose a separate public flush or shutdown method.
+CDN requests run in the sidecar subprocess. PHP reads configuration through shared memory and evaluates locally. After a sidecar restart, PHP resubscribes while retaining the last valid configuration; after a supported fork, the parent and child resume their configuration readers. Polling stops when the last subscriber disconnects. Explicit `DD_TRACE_SIDECAR_CONNECTION_MODE=thread` does not support CDN configuration; use the default `auto` mode. The PHP application APIs do not expose a separate public flush or shutdown method.
 
 ### Reporting
 
@@ -443,7 +443,7 @@ If feature flags unexpectedly always return default values, check the following:
 - Confirm your Datadog PHP SDK version includes feature flags support.
 - Check that the PHP process can communicate with the Datadog Agent.
 
-For the agentless preview, check `DD_FEATURE_FLAGS_ENABLED`, the selected configuration source, `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. Confirm that the PHP process can establish trusted HTTPS connections to the configuration endpoint. If only early evaluations return defaults, check the initialization timeout and whether a later evaluation recovers.
+For the agentless preview, check `DD_FEATURE_FLAGS_ENABLED`, the selected configuration source, `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. Confirm that PHP can start its sidecar subprocess and that the subprocess can establish trusted HTTPS connections to the configuration endpoint. If only early evaluations return defaults, check the initialization timeout and whether a later evaluation recovers.
 
 ### OpenFeature provider not found
 
