@@ -13,7 +13,7 @@ title: Créez des métriques d'expérimentation
 ---
 ## Présentation {#overview}
 
-Créez les métriques que vous souhaitez mesurer dans vos expériences. Vous pouvez utiliser des données issues de Real User Monitoring (RUM), de Product Analytics ou de votre propre entrepôt pour créer des métriques Datadog Experiments.
+Créez les métriques que vous souhaitez mesurer dans vos expériences. Vous pouvez utiliser les données de Real User Monitoring (RUM), de Product Analytics, d'Agent Observability ou de votre propre entrepôt pour créer des métriques Datadog Experiments.
 
 <div class="alert alert-info">Si votre organisation utilise des rôles personnalisés, vous devez disposer des <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">autorisations Product Analytics appropriées</a> pour créer des métriques d'expérimentation.</div>
 
@@ -51,7 +51,7 @@ Pour créer une métrique pour votre expérimentation :
    1. Ajustez [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) et {{< ui >}}Units{{< /ui >}} selon vos besoins. Les valeurs par défaut conviennent à la plupart des cas d'utilisation.
 1. Cliquez sur {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="La page Create Metric avec le Metric name défini sur « Example metric », l'événement « click on ADD TO CART » sélectionné, la méthode d'agrégation définie sur Nombre d'événements, la section Paramètres supplémentaires, un aperçu du graphique à barres sur la droite et le bouton Save mis en surbrillance." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="La page Create Metric avec le nom de métrique défini sur « Example metric », l'événement « click on ADD TO CART » sélectionné, la méthode d'agrégation définie sur Count of events, la section Additional settings, un aperçu du graphique à barres sur la droite et le bouton Save mis en surbrillance." style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [3]: /fr/real_user_monitoring/#get-started
@@ -69,9 +69,73 @@ Si vous ne voyez pas la propriété dont vous avez besoin, saisissez le nom de l
 {{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="Le panneau Filtrer par ouvert dans la section Définition de la métrique, affichant Toutes les propriétés sélectionnées, les propriétés d'événement telles que ID d'application, Service, Nom du navigateur et Pays au centre, un filtre Par type de données avec des options Numérique, Chaîne et Booléen sur la gauche, et une section Propriété personnalisée en bas avec un champ de texte affichant l'espace réservé « e.g. @context.tracking » et un bouton Ajouter." style="width:90%;" >}}
 
 {{% /tab %}}
-{{% tab "Entrepôt" %}}
+{{% tab "Agent Observability" %}}
+
+<div class="alert alert-info"><strong>Remarque</strong> : Les expériences en ligne pour Agent Observability sont en préversion. Contactez votre représentant Datadog pour demander l'accès.</div>
 
 ### Prérequis {#prerequisites-1}
+
+Avant de créer une métrique d'expérience à partir des données d'Agent Observability :
+
+- [Instrumentez votre application LLM avec Agent Observability][14] et envoyez les traces à Datadog.
+- Pour utiliser les données de coût ou de jeton, assurez-vous que vos traces incluent l'utilisation des jetons. Datadog utilise les informations sur l'utilisation des jetons, le modèle et le fournisseur pour calculer les [coûts estimés][15].
+- Pour utiliser une évaluation, soumettez ou configurez une [évaluation Agent Observability][16] personnalisée avec une valeur `score` numérique.
+- Ajoutez un tag `subject_identifier` à chaque trace ou évaluation. La valeur doit correspondre au `targetingKey` que vous utilisez pour évaluer le feature flag de l'expérience. Pour obtenir des instructions de configuration, consultez [Run an Online Experiment on an LLM Application][17].
+
+<div class="alert alert-warning"><strong>Type d'évaluation pris en charge</strong> : Les métriques d'expérience ne prennent en charge que les évaluations Agent Observability avec un <code>score</code> type de métrique. Les types d'évaluation booléens, catégoriels et autres ne sont pas disponibles dans le sélecteur de métriques.</div>
+
+### Créer une métrique à partir des données d'Agent Observability {#create-a-metric-from-agent-observability-data}
+
+Pour créer la métrique :
+
+1. Accédez à la [page Métriques][1] dans Datadog Product Analytics.
+1. Sélectionnez l'onglet {{< ui >}}Metrics{{< /ui >}} et cliquez sur {{< ui >}}Create Metric{{< /ui >}}.
+1. Ajoutez un {{< ui >}}Metric name{{< /ui >}} et, éventuellement, un {{< ui >}}Description{{< /ui >}}.
+1. Dans la section {{< ui >}}Metric definition{{< /ui >}}, cliquez sur {{< ui >}}Select an event{{< /ui >}}.
+1. Choisissez l'une des sources Agent Observability suivantes.
+
+#### Agent Spans {#agent-spans}
+
+Sélectionnez l'onglet {{< ui >}}Agent Spans{{< /ui >}}, puis sélectionnez l'une des options suivantes :
+
+- {{< ui >}}Total estimated cost{{< /ui >}} : Coût estimé moyen sur l'ensemble des traces Agent Observability terminées.
+- {{< ui >}}Total tokens{{< /ui >}} : Utilisation totale moyenne de jetons sur l'ensemble des traces Agent Observability terminées.
+
+Les modèles de coût et de jetons utilisent par défaut {{< ui >}}Average of{{< /ui >}} leur propriété de trace correspondante. Vous pouvez modifier l'agrégation, sélectionner une autre propriété ou un chemin de propriété personnalisé, ajouter des filtres ou créer un ratio.
+
+<div class="alert alert-info">Les valeurs de coût estimé d'Agent Observability utilisent des nanodollars (1 nanodollar = 10⁻⁹ USD). Pour plus de détails sur les calculs de coût et les modèles pris en charge, consultez <a href="/llm_observability/investigate/cost/">Coût</a>.</div>
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="Le sélecteur d'événement Créer une métrique avec Agent Spans sélectionné, affichant tous les événements d'Agent Spans, Coût total estimé et Jetons totaux, avec Coût total estimé sélectionné et sa description affichée." style="width:90%;" >}}
+
+#### Évaluations {#evaluations}
+
+Sélectionnez l'onglet {{< ui >}}Evaluations{{< /ui >}}, puis :
+
+1. Recherchez et sélectionnez l'évaluation de score personnalisée que vous souhaitez mesurer.
+1. Examinez les détails de l'évaluation, tels que son application ML, son périmètre, son prompt et son modèle.
+1. Configurez l'agrégation et les éventuels filtres. Les métriques d'évaluation utilisent le score moyen par défaut.
+
+Avant de créer la métrique d'expérience, exécutez l'évaluation sur au moins un span. Une évaluation n'apparaît dans le sélecteur qu'après son exécution.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="Le sélecteur d'événement Créer une métrique avec Évaluations sélectionné, affichant les évaluations faithfulness, user_score et verbosity score, avec faithfulness sélectionné." style="width:90%;" >}}
+
+#### Enregistrer la métrique {#save-the-metric}
+
+Après avoir configuré l'une ou l'autre source :
+
+1. (Facultatif) Sous {{< ui >}}Additional settings{{< /ui >}}, marquez la métrique comme certifiée, ajustez ses paramètres d'expérience ou configurez ses unités.
+1. Cliquez sur {{< ui >}}Save{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[14]: /fr/llm_observability/instrument/
+[15]: /fr/llm_observability/investigate/cost/
+[16]: /fr/llm_observability/investigate/evaluations/
+[17]: /fr/experiments/guide/run_online_experiment_on_llm_application/
+
+{{% /tab %}}
+{{% tab "Entrepôt" %}}
+
+### Prérequis {#prerequisites-2}
 
 Pour créer une métrique à partir des données de votre entrepôt, vous devez [connecter votre entrepôt à Datadog][8]. Datadog prend en charge BigQuery, Databricks, Redshift et Snowflake.
 
@@ -152,7 +216,7 @@ Datadog Experiments prend en charge les méthodes d'agrégation suivantes :
 - {{< ui >}}Percentile{{< /ui >}} d'une propriété d'événement (utile pour les métriques de latence)
 - {{< ui >}}Average of{{< /ui >}} une propriété d'événement (utile pour les métriques de satisfaction)
 
-{{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="La liste déroulante des méthodes d'agrégation affiche « Count of unique users » (selected) et « Count of events » en haut, suivie d'une section « SELECT A MEASURE » proposant les options « Sum of », « Distinct values of », « Percentile » et « Average of », avec une description indiquant « The number of users who performed the event » sur la droite." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="La liste déroulante des méthodes d'agrégation affiche « Count of unique users » (sélectionné) et « Count of events » en haut, suivie d'une section « SELECT A MEASURE » proposant les options « Sum of », « Distinct values of », « Percentile » et « Average of », avec une description indiquant « The number of users who performed the event » sur la droite." style="width:90%;" >}}
 
 Datadog calcule des métriques pour chaque sujet d'expérience. Par exemple, une métrique {{< ui >}}Count of events{{< /ui >}} sur une expérience randomisée par utilisateur calcule le nombre total d'événements pour tous les utilisateurs de la variante (groupe d'expérience) divisé par le nombre d'utilisateurs dans cette variante.
 
@@ -162,7 +226,7 @@ Cliquez sur {{< ui >}}Create Ratio{{< /ui >}} pour diviser votre métrique par u
 
 Datadog prend en compte les corrélations entre le numérateur et le dénominateur en utilisant la [méthode delta][2].
 
-{{< img src="/product_analytics/experiment/exp_create_ratio_new_ui.png" alt="La section de définition de la métrique montrant l'événement « click on ADD TO CART » avec l'agrégation Count of events et une option Add Filter, le bouton Create Ratio mis en surbrillance ci-dessous, ainsi que la section Additional settings avec le bouton bascule Mark as certified, Experiment settings et Units." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_ratio_new_ui.png" alt="La section de définition de la métrique montrant l'événement « click on ADD TO CART » avec l'agrégation Count of events et une option Add Filter, le bouton Create Ratio mis en surbrillance en dessous, ainsi que la section Additional settings avec le bouton bascule Mark as certified, Experiment settings et Units." style="width:90%;" >}}
 
 ## Options avancées {#advanced-options}
 
