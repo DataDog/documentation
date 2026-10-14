@@ -88,7 +88,13 @@ The first evaluation starts background polling and waits up to `DD_EXPERIMENTAL_
 
 The SDK polls every 30 seconds by default, with a 5-second HTTP request timeout. Configure these intervals with `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` and `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS`. A failed request or invalid update retains the last valid configuration. An HTTP 304 response keeps that configuration.
 
+Transient failures can trigger up to three attempts per poll. The SDK honors `Retry-After` on retryable HTTP responses when it requests a longer wait than the SDK's backoff. Process shutdown cancels that wait.
+
 For a custom configuration service, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL`. A URL with only a root path uses `/api/v2/feature-flagging/config/rules-based/server`; a URL with a non-root path is requested as supplied. The SDK does not send the Datadog API key to a custom configuration URL. This setting changes configuration retrieval only; it does not redirect exposure or evaluation events.
+
+Custom services must return a JSON:API resource with `data.type` set to `universal-flag-configuration` and a UFC document in `data.attributes` with `format` set to `SERVER`. Invalid responses do not replace the cached configuration. The sidecar honors `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` from its startup environment.
+
+On first evaluation, invalid settings produce a redacted warning once per process. Invalid polling or timeout values use their defaults. Missing managed-endpoint credentials and invalid source, site, or URL settings return defaults with a specific error message in evaluation details. After correcting process settings, restart PHP.
 
 CDN requests run in the sidecar subprocess. PHP reads configuration through shared memory and evaluates locally. After a sidecar restart, PHP resubscribes while retaining the last valid configuration; after a supported fork, the parent and child resume their configuration readers. Polling stops when the last subscriber disconnects. Explicit `DD_TRACE_SIDECAR_CONNECTION_MODE=thread` does not support CDN configuration; use the default `auto` mode. The PHP application APIs do not expose a separate public flush or shutdown method.
 
