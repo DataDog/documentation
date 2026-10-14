@@ -86,7 +86,7 @@ When review mode is set to {{< ui >}}Ask about every action{{< /ui >}}, Bits Tes
 - Click {{< ui >}}Approve{{< /ui >}} to let Bits Testing continue down that path.
 - Click {{< ui >}}Deny{{< /ui >}} to skip the action. Bits Testing stops exploring that branch, marks it as denied in the map, and continues exploring other paths.
 
-{{< img src="synthetics/bits_testing/bits_testing_approval_needed.png" alt="Two Approval needed cards for a sign-up and a profile edit action, each with an explanation and Approve and Deny buttons." style="width:100%;" >}}
+{{< img src="synthetics/bits_testing/bits_testing_approval_needed.png" alt="Four Approval needed cards for two product review actions, a profile edit, and a sign-up action, each with an explanation and Approve and Deny buttons." style="width:100%;" >}}
 
 {{< img src="synthetics/bits_testing/bits_testing_action_denied.png" alt="The exploration map after an action is denied, showing the branch marked as denied and no longer explored." style="width:100%;" >}}
 
