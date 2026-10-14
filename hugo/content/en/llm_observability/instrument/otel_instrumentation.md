@@ -139,7 +139,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 | [Langfuse][37] | Native | >= 4.0.0 |
-| [Claude Managed Agents][38] | Native ([OpenTelemetry export][39]) | — |
+| [Claude Platform][38] | Native ([OpenTelemetry export][39]) | — |
 
 [5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
@@ -160,7 +160,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 [35]: https://pypi.org/project/traceloop-sdk/
 [36]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [37]: https://langfuse.com/integrations/native/opentelemetry
-[38]: https://platform.claude.com/docs/en/managed-agents
+[38]: https://platform.claude.com/docs
 [39]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -191,11 +191,11 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 
 ## Send traces from your framework or platform {#examples}
 
-{{% collapse-content title="Using Claude Managed Agents" level="h3" expanded=false id="using-claude-managed-agents" %}}
+{{% collapse-content title="Using Claude Platform" level="h3" expanded=false id="using-claude-managed-agents" %}}
 
-[Claude Managed Agents][18] and the Claude SDKs emit spans that follow the GenAI semantic conventions natively through [OpenTelemetry export][19], so no additional instrumentation library is required. Spans come from two independent sources:
+The [Claude Platform][18] emits spans that follow the GenAI semantic conventions natively through [OpenTelemetry export][19], so no additional instrumentation library is required. This covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
 
-- **API spans** for each Sessions API request, agent turn, model request, and tool call that Anthropic runs. Anthropic delivers these to a destination that you configure in the Claude Console.
+- **API spans** for the requests Anthropic runs: Messages API requests, and for Managed Agents each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these to a destination that you configure in the Claude Console.
 - **SDK spans** for each Claude SDK call, and for each tool that the SDK tool runner executes inside your application. Your application exports these with its own OpenTelemetry exporter.
 
 If your application uses a Claude SDK, both sets of spans land in the same trace, because the SDK propagates W3C trace context on its API requests.
@@ -216,13 +216,15 @@ Anthropic delivers API spans from its own infrastructure, so you add a Datadog d
 
    Choose **Full content** only if your Datadog organization may store model prompts and responses. To restrict who can read them once they arrive, see [Data Access Controls][8].
 2. Set **Workspaces** on the destination to choose which workspaces export to it: **All**, **Selected** for a specific list, or **All except** to exclude a few.
-3. Run a session, then check that the destination's **Delivery** column reads **Healthy**. The spans arrive under the `claude-platform` service and form this tree:
+3. Run a session, then check that the destination's **Delivery** column reads **Healthy**. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
    | Span | Agent Observability span kind |
    |------|-------------------------------|
    | `anthropic.sessions.events.send` | Workflow |
    | `anthropic.session.turn` | Agent, carrying the conversation input and output |
    | `anthropic.model_request` | LLM, carrying the model name and token usage |
    | Hosted tool calls, for example `bash` or `read` | Tool |
+
+   A destination receives spans for every surface the workspace uses, so Messages API requests arrive at the same destination without further configuration.
 
 #### Export SDK spans
 
@@ -1203,5 +1205,5 @@ with tracer.start_as_current_span("my-span") as span:
 [15]: https://developers.cloudflare.com/agents/
 [16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
 [17]: https://sdk.vercel.ai/
-[18]: https://platform.claude.com/docs/en/managed-agents
+[18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
