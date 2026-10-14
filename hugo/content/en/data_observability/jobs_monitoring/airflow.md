@@ -631,6 +631,30 @@ with DAG(
 
 With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ lineage_root_*() }}` calls in your task templates resolve to values that match the built-in macros shipped with provider 2.3.0+, so downstream Spark or dbt jobs can link to the Airflow root parent in Datadog.
 
+### Disable OpenLineage events for specific DAGs
+
+<div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later.</div>
+
+To stop specific DAGs from sending OpenLineage events to Datadog, add an `emission_policy` rule for each DAG to the `[openlineage]` section of your Airflow configuration:
+
+```ini
+[openlineage]
+emission_policy = [{"scope": {"dag_id": "<YOUR_DAG_ID>"}, "controls": {"emit": false}}]
+```
+
+Replace `<YOUR_DAG_ID>` with the ID of the DAG you want to exclude.
+
+To exclude multiple DAGs that share a naming pattern, set `match_mode` to `regex`:
+
+```ini
+[openlineage]
+emission_policy = [{"scope": {"dag_id": "^staging_.*"}, "match_mode": "regex", "controls": {"emit": false}}]
+```
+
+Set `emission_policy` the same way you set the other OpenLineage provider options for your platform, such as an Airflow configuration override or the `AIRFLOW__OPENLINEAGE__EMISSION_POLICY` environment variable. Restart your Airflow schedulers and workers to apply the change.
+
+For additional scopes and controls, see the [OpenLineage emission policy documentation][9].
+
 
 ## Further Reading
 
@@ -644,3 +668,4 @@ With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ linea
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
 [8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/spark.html#automatic-injection
+[9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html
