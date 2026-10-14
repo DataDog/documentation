@@ -147,7 +147,7 @@ All in `src/components/ApiChangelog/` except `Pagination`, which is generic:
   - Reuse `translate("all")` and `translate("overview")`, which exist in `shared/i18n/en.json`.
   - Don't add keys to the i18n bundle.
 - **Tokens:**
-  - The pills need success/attention/danger/neutral backgrounds. Add generic status tokens to `colors.css` (for example `--color-status-success-bg`), following its naming. Don't name them after the changelog.
+  - The pills need success/attention/danger backgrounds. Add generic status tokens to `colors.css` (for example `--color-status-success-solid-bg`), following its naming. Don't name them after the changelog.
   - Fixed widths (Hugo's 96px date column) go through layout or spacing tokens where one fits.
   - Every text element sets an explicit `font-weight`.
 - **Layout:** the date column sits next to the entries on desktop. On narrow screens it stacks above each section's entries (Hugo kept a narrow grid). The pill sits above the title, so the page doesn't scroll sideways at 320px.
