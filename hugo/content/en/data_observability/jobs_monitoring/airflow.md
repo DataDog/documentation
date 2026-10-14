@@ -394,7 +394,9 @@ Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider
 : - `apache-airflow-providers-common-compat>=1.15.0`
 : - `openlineage-integration-common>=1.47.0`
 : - `openlineage-python>=1.47.0`
-: **Notes**: This is the newest provider release. Provider `2.9.0` and later requires Airflow 2.11 or later.
+: - `openlineage-integration-common>=1.52.0`
+: - `openlineage-python>=1.52.0`
+: **Notes**: This is the newest provider release. Provider `2.20.3` requires Python 3.11 or later. Provider `2.9.0` and later requires Airflow 2.11 or later.
 
 **Airflow 2.10.x**
 : **Recommended provider version**: `2.8.0`
