@@ -27,7 +27,7 @@ Specify the request method and any necessary [authentication][1]. Read the secti
 {{% /tab %}}
 
 {{% tab "App Builder" %}}
-1. In your app, under {{< ui >}}Data{{< /ui >}}, click {{< ui >}}+ New{{< /ui >}} and select {{< ui >}}Query{{< /ui >}}
+1. In your app, under {{< ui >}}Data{{< /ui >}}, click {{< ui >}}\+ New{{< /ui >}} and select {{< ui >}}Query{{< /ui >}}
 1. Search for `HTTP`, then select the {{< ui >}}Make request{{< /ui >}} action to add it to your app.
 
 Specify the request method and any necessary [authentication][1]. Read the sections below for further information about the available configuration options.

@@ -1,5 +1,5 @@
 ---
-description: パイプラインを構成するソース、プロセッサ、および送信先の各コンポーネントと、それらの構築およびデプロイ方法について学びます。
+description: パイプラインを構成するソース、プロセッサー、送信先コンポーネントについて、また、それらを構築してデプロイする方法について学びます。
 disable_toc: false
 further_reading:
 - link: observability_pipelines/configuration/set_up_pipelines/
@@ -7,10 +7,10 @@ further_reading:
   text: パイプラインのセットアップ
 - link: observability_pipelines/configuration/install_the_worker/
   tag: ドキュメント
-  text: Worker のインストール
+  text: Worker をインストールする
 - link: observability_pipelines/configuration/live_capture/
   tag: ドキュメント
-  text: Live Capture について
+  text: Live Capture の詳細
 - link: observability_pipelines/troubleshooting
   tag: ドキュメント
   text: トラブルシューティング
@@ -18,15 +18,15 @@ title: 構成
 ---
 ## 概要 {#overview}
 
-{{< img src="observability_pipelines/setup/pipeline_ui.png" alt="ソースが 2 つのプロセッサグループと 2 つの送信先に接続されているパイプラインページ" style="width:100%;" >}}
+{{< img src="observability_pipelines/setup/pipeline_ui.png" alt="ソースから 2 つのプロセッサーグループと 2 つの送信先に接続されたパイプラインのページです。" style="width:100%;" >}}
 
-Observability Pipelines を使用すると、独自のインフラストラクチャー内で {{< tooltip text="logs, metrics, and traces" tooltip="ユースケースや価格については、アカウントマネージャーにお問い合わせください。" >}} を収集および処理し、それらをさまざまな送信先にルーティングできます。パイプラインは、3 つの主要なコンポーネントで構成されます。
+Observability Pipelines を使用すると、独自のインフラストラクチャー内でログとメトリクスを収集して処理し、さまざまな送信先にルーティングできます。パイプラインは、次の 3 つの主要コンポーネントで構成されます。
 
-- [ソース][1]: Datadog Agent のようなツールからデータを受信します。
-- [プロセッサ][2]: データを変換、エンリッチ、フィルタリングします。
-- [送信先][3]: データの送信先です (例: Datadog、Amazon S3、Splunk、Google Security Operations、Microsoft Sentinel)。
+- [ソース][1]: Datadog Agent などのツールからデータを受信します。
+- [プロセッサー][2]: データを変換、エンリッチ、またはフィルタリングします。
+- [送信先][3]: データの送信先 (Datadog、Amazon S3、Splunk、Google Security Operations、Microsoft Sentinel など)。
 
-次のいずれかの方法を使用して、データを収集、変換、ルーティングするためのパイプラインを構築およびデプロイします。
+次のいずれかの方法を使用して、データを収集、変換、ルーティングするパイプラインを構築してデプロイします。
 
  - [パイプライン UI][4]
  - [API][5]
@@ -34,22 +34,22 @@ Observability Pipelines を使用すると、独自のインフラストラク�
 
 ## パイプラインの種類 {#pipeline-types}
 
-パイプラインには 2 つの種類があります。
+パイプラインには 2 種類あります。
 
 {{< tabs >}}
 {{% tab "ログ" %}}
 
-ログパイプラインは、いずれかの[ログテンプレート][1]を使用して作成します。
+[ログテンプレート][1]のいずれかを使用して、ログパイプラインを作成します。
 
-- ログのアーカイブ
-- ログのデュアル送信
-- ログベースのメトリクスの生成
-- ログのエンリッチメント
-- ログボリュームの制御
-- 機密データのマスキング
+- アーカイブログ
+- デュアルシップログ
+- ログベースのメトリクスを生成する
+- ログエンリッチメント
+- ログボリュームコントロール
+- 機密データのリダクション
 - ログの分割
 
-ソース、プロセッサ、および送信先のセットアップの詳細については、[パイプラインのセットアップ][2]を参照してください。
+ソース、プロセッサー、および送信先の設定に関する詳細については、[パイプラインのセットアップ][2] を参照してください。
 
 [1]: /ja/observability_pipelines/configuration/explore_templates/?tab=logs#templates
 [2]: /ja/observability_pipelines/configuration/set_up_pipelines/
@@ -58,31 +58,31 @@ Observability Pipelines を使用すると、独自のインフラストラク�
 
 {{% tab "メトリクス" %}}
 
-メトリクスパイプラインは、[メトリクスタグのガバナンス][1]テンプレートを使用して作成します。
+メトリクスパイプラインを作成するには、[メトリクスタグのガバナンス][1] テンプレートを使用します。
 
-ソース、プロセッサ、および送信先のセットアップの詳細については、[パイプラインのセットアップ][2]を参照してください。
+ソース、プロセッサー、および送信先の設定に関する詳細については、[パイプラインのセットアップ][2] を参照してください。
 
 ### メトリクスデータ {#metrics-data}
 
-Observability Pipelines に送信されるメトリクスには、次のものが含まれます。
+Observability Pipelines に送信されるメトリクスには、以下が含まれます。
 
 - `name`: メトリクス名。
-- `kind`: メトリクスは 2 種類あります。
-  - `absolute` メトリクス: 報告された時点での測定値を表します。
-  - `incremental` メトリクス: 前回の報告値からの測定値の変化を表します。システムで経時的に集計されます。
-- `value`: [メトリクスのタイプ](#metric-types):
+- `kind`: メトリクスには 2 種類あります。
+  - `absolute` メトリクス: 報告時点での測定値の現在の値を表します。
+  - `incremental` メトリクス: 前回の報告値からの測定値の変化を表します。システムは、一定期間におけるこれらの測定値を集計します。
+- `value`: [メトリクスタイプ](#metric-types):
 	- `counter`
 	- `gauge`
 	- `distribution`
 	- `histogram`
-- `timestamp`: メトリクスの作成日時。
+- `timestamp`: メトリクスが作成された日時。
 - `tags`: `host` などのタグが含まれます。
 
-受信したメトリクスが `incremental` か `absolute` かは、ソースによって異なります。たとえば、OpenTelemetry からのメトリクスは、その[時間性][4]に基づいて、incremental または absolute のいずれかになります。次の表は、デルタ時間性と累積時間性で送信された OTel カウンターメトリクスの例です。
+受信したメトリクスが `incremental` か `absolute` かは、ソースによって異なります。たとえば、OpenTelemetry からのメトリクスは、その[テンポラリティ][4]に基づいて、インクリメンタル (増分) またはアブソリュート (絶対値) のいずれかになります。次の表は、デルタと累積のテンポラリティで送信された OTel のカウンターメトリクスの例です。
 
-| メトリクスのタイプ | Incremental                      | Absolute                               |
+| メトリクスタイプ | インクリメンタル                      | アブソリュート                               |
 |-------------|----------------------------------|----------------------------------------|
-| Counter     | デルタとして送信: `+2`、`+4`、`+6` |  累積合計として送信: `2`、`6`、`10` |
+| カウンター     | デルタとして送信: `+2`、`+4`、`+6` | 累積合計として送信: `2`、`6`、`10` |
 
 メトリクスの例:
 
@@ -102,34 +102,23 @@ Observability Pipelines に送信されるメトリクスには、次のもの�
 }
 ```
 
-### メトリクスのタイプ {#metric-types}
+### メトリクスタイプ {#metric-types}
 
-利用可能なメトリクスのタイプ:
+利用可能なメトリクスタイプ:
 
-| メトリクスのタイプ  | 説明                                                                                                                                                       | 例                                                                                       |
+| メトリクスタイプ  | 説明                                                                                                                                                       | 例                                                                                       |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| COUNTER      | 一定の時間間隔におけるイベント発生の総数。ゼロにリセットすることはできますが、値を減らすことはできません。                                                       | `status:error` のログの数をカウントする。                                    |
-| GAUGE        | 報告時点での値のスナップショット。                                                                                                                | 各ホストの最新の CPU 使用率を追跡する。                                  |
-| HISTOGRAM    | Datadog Agent によって一定の時間間隔でホストごとに計算され、Datadog に送信される統計的集計 (`avg`、`min`、`max`、`count`、`median`、パーセンタイル)。| 各 Web サーバーからのホストごとのリクエストレイテンシーの集計を求める。                         |
-| DISTRIBUTION | パーセンタイル集計をサーバー側で計算するために Datadog に送信される生の値。一定の時間間隔でメトリクスを報告するすべてのホストでグローバルに計算されます。            | API エンドポイントのグローバルな p95 レイテンシーを、それをホストしているすべてのホストで計算する。 |
+| COUNTER | 1 つの時間間隔におけるイベントの発生回数の合計。ゼロにリセットすることはできますが、減らすことはできません。                                                       | ログの数を `status:error` でカウントしたい場合。                                    |
+| GAUGE        | 報告された時点での値のスナップショット。                                                                                                                | 各ホストの最新の CPU 使用率を追跡したい場合。                                  |
+| HISTOGRAM | Datadog Agent によってある時間間隔でホストごとに計算され、Datadog に送信される統計的集計 (`avg`、`min`、`max`、`count`、`median`、パーセンタイル)。| 各 Web サーバーからホストごとのリクエストレイテンシーの集計を取得したい場合。                         |
+| DISTRIBUTION | パーセンタイル集計をサーバー側で計算するために Datadog に送信される生の値。ある時間間隔でメトリクスを報告するすべてのホストでグローバルに計算されます。            | API エンドポイントのグローバルな p95 レイテンシーを、それを提供するすべてのホスト全体で計算したい場合。 |
 
-詳細については、[メトリクスのタイプ][3]を参照してください。
+詳細については、[メトリクスタイプ][3] を参照してください。
 
 [1]: /ja/observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [2]: /ja/observability_pipelines/configuration/set_up_pipelines/
 [3]: /ja/metrics/types/?tab=gauge#metric-types
 [4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
-
-{{% /tab %}}
-
-{{% tab "トレース" %}}
-
-[トレースサンプリング][1]テンプレートを使用して、 {{< tooltip text="traces" tooltip="アクセスをリクエストするには、アカウントマネージャーにお問い合わせください。" >}} を取り込んで処理し、さまざまな送信先に送信できます。
-
-ソース、プロセッサ、および送信先のセットアップの詳細については、[パイプラインのセットアップ][2]を参照してください。
-
-[1]: /ja/observability_pipelines/configuration/explore_templates/?tab=traces#trace-sampling
-[2]: /ja/observability_pipelines/configuration/set_up_pipelines/
 
 {{% /tab %}}
 {{< /tabs >}}

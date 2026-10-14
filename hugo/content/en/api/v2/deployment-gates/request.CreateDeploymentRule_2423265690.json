@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "dry_run": false,
+      "name": "Specific monitor deployment rule",
+      "options": {
+        "monitor_ids": [
+          {
+            "id": "7",
+            "groups": []
+          }
+        ]
+      },
+      "type": "monitor"
+    },
+    "type": "deployment_rule"
+  }
+}

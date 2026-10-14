@@ -27,6 +27,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-service-management/
   tag: 블로그
   text: Datadog Service Management로 높은 서비스 가용성 보장하기
+- link: https://www.datadoghq.com/blog/work-management/
+  tag: 블로그
+  text: Datadog Work Management를 통해 사람과 agent 기반 업무를 중앙에서 관리합니다.
 title: Work Management
 ---
 <div class="alert alert-info">Work Management의 이전 이름은 Case Management입니다. API 엔드포인트 및 권한은 여전히 <code>case</code> 용어를 사용합니다.</div>

@@ -3,7 +3,9 @@
 1. Navigate to Datadog [Log Forwarding][201].
 1. Click **New archive**.
 1. Enter a descriptive archive name.
-1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. In the **Define Which Data To Forward** section, add a query that filters out all logs going through Log Management pipelines so that Log Archive doesn't send any logs to this bucket. Otherwise, both Log Archive and the Worker send logs to the bucket, resulting in duplicate archived logs.
+    - For example, if you add the query `observability_pipelines_read_only_archive` and logs going through your Log Management pipelines don't have that tag, the Worker sends logs to the bucket, while Log Archive only reads and rehydrates from the bucket.
+    - After you enter the query, such as `observability_pipelines_read_only_archive`, the logs preview at the top of the page should show no matching results.
 1. Select **AWS S3**.
 1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.

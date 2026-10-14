@@ -38,7 +38,7 @@ Para generar una nueva métrica basada en registros:
 
 1. Navegue a la página [Generate Metrics][5].
 1. Seleccione la pestaña {{< ui >}}Generate Metrics{{< /ui >}}.
-1. Haga clic en {{< ui >}}+New Metric{{< /ui >}}.
+1. Haga clic en {{< ui >}}\+ New Metric{{< /ui >}}.
 
 También puede crear métricas desde una búsqueda de Analytics seleccionando la opción {{< ui >}}Generate new metric{{< /ui >}} del menú {{< ui >}}Export{{< /ui >}}.
 
@@ -48,7 +48,7 @@ También puede crear métricas desde una búsqueda de Analytics seleccionando la
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Crear una métrica a partir de registros" style="width:80%;">}}
 
-1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: Escriba la consulta utilizando la [Log Explorer search syntax][6]. Datadog evalúa la consulta de filtro de flujo contra el flujo de registros en el momento de la ingesta, no contra los registros indexados. El filtro no admite todas las funciones de búsqueda de Log Explorer, incluida la [búsqueda de texto completo][12] (`*:search_term`). Una consulta que devuelve resultados en Log Explorer aún puede no coincidir con ningún registro aquí. La agregación solo considera los registros ingeridos con una marca de tiempo dentro de los últimos 20 minutos. Excluya el índice de la consulta.
+1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: Escriba la consulta utilizando la [sintaxis de búsqueda de Log Explorer][6]. Datadog evalúa la consulta de filtro de flujo contra el flujo de registros en el momento de la ingesta, no contra los registros indexados. El filtro no admite todas las funciones de búsqueda de Log Explorer, incluida la [búsqueda de texto completo][12] (`*:search_term`). Una consulta que devuelve resultados en Log Explorer aún puede no coincidir con ningún registro aquí. La agregación solo considera los registros ingeridos con una marca de tiempo dentro de los últimos 20 minutos. Excluya el índice de la consulta.
 
    Después de guardar la métrica, confirme que produce puntos de datos en el [Metrics Explorer][13] antes de confiar en ella. Si la consulta coincide con registros en Log Explorer pero la métrica permanece vacía, reescriba el término como una frase entre comillas; por ejemplo, `message:"Database operation failed."`.
 2. {{< ui >}}Select the field you would like to track{{< /ui >}}: Seleccione `*` para generar un conteo de todos los registros que coincidan con su consulta o ingrese un atributo de registro (por ejemplo, `@network.bytes_written`) para agregar un valor numérico y crear sus correspondientes métricas agregadas `count`, `min`, `max`, `sum` y `avg`. Si la faceta del atributo de registro es una [medida][7], el valor de la métrica es el valor del atributo de registro.

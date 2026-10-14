@@ -14,11 +14,7 @@ further_reading:
   text: Bonnes pratiques pour la création de SLO pour les opérations RUM
 title: Surveillance des opérations
 ---
-## Vue d'ensemble {#overview}
-
-{{< callout header="Aperçu" btn_hidden="true" >}}
-Surveillance des opérations est en aperçu.
-{{< /callout >}}
+## Présentation {#overview}
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Onglet Opérations sous RUM > Surveillance des performances" style="width:100%;" >}}
 
@@ -416,7 +412,7 @@ De même que pour les métriques, ces événements sont accompagnés d'attributs
 - `@operation.start_view.name`
 - `@operation.end_view.name`
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

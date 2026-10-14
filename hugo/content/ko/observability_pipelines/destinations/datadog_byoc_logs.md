@@ -25,7 +25,18 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 
 [파이프라인을 설정][4]할 때 BYOC Logs 목적지를 구성하세요. 파이프라인은 [UI][1]에서 설정할 수 있으며, [API][5] 또는 [Terraform][6]을 사용하여 설정할 수 있습니다. 이 섹션에서 설명하는 단계는 UI에서 설정합니다.
 
-### 선택적 버퍼링 {#optional-buffering}
+### 선택적 설정 {#optional-settings}
+
+#### TLS 활성화 {#enable-tls}
+
+<div class="alert alert-danger">시크릿 관리의 경우 TLS 키 암호의 식별자만 입력하세요. 실제 값을 입력하지 <b>마세요</b>.</div>
+
+{{% observability_pipelines/tls_settings %}}
+- (선택 사항) TLS 인증서 검증을 위한 서버 이름을 입력하세요.
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+#### 버퍼링 {#buffering}
 
 파이프라인 UI에서 BYOC Logs 목적지를 선택한 후 버퍼링을 구성할 수 있습니다.
 
@@ -46,6 +57,8 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 		- 클러스터 URL을 정의합니다(예: `http://byoc-logs.acme.internal:7280`). **참고**: URL에는 포트가 포함되어야 합니다.
 		- Worker가 엔드포인트 URL에 `/api/v2/logs` 및 `/api/v1/validate`를 추가하므로 전달 또는 방화벽 규칙을 사용하는 경우 이러한 엔드포인트가 허용되어야 합니다.
 	- 기본 식별자는 `DESTINATION_CLOUDPREM_ENDPOINT_URL`입니다.
+- BYOC Logs TLS 암호 식별자(TLS가 활성화된 경우):
+	- 기본 식별자는 `DESTINATION_CLOUDPREM_KEY_PASS`입니다.
 
 {{% /tab %}}
 
@@ -57,13 +70,15 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 	- Observability Pipelines는 BYOC Logs 수집 엔드포인트로 로그를 전송합니다. 클러스터 URL을 정의합니다(예: `http://byoc-logs.acme.internal:7280`). **참고**: URL에는 포트가 포함되어야 합니다.
 	- Worker가 엔드포인트 URL에 `/api/v2/logs` 및 `/api/v1/validate`를 추가하므로 전달 또는 방화벽 규칙을 사용하는 경우 이러한 엔드포인트가 허용되어야 합니다.
   - 환경 변수 `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`에 저장됩니다.
+- BYOC Logs TLS 암호(TLS가 활성화된 경우)
+  - 환경 변수 `DD_OP_DESTINATION_CLOUDPREM_KEY_PASS`에 저장됩니다.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## 상태 메트릭 {#health-metrics}
 
-모든 목적지에서 내보내는 [구성 요소 메트릭][7] 및 [목적지 버퍼 메트릭][8]은 [파이프라인 사용량 메트릭][9] 설명서를 참조하세요. Datadog Logs 목적지 메트릭을 필터링하거나 그룹화하려면 태그 `component_type:datadog_logs`를 사용하세요.
+모든 목적지에서 내보내는 [구성 요소 메트릭][7] 및 [목적지 버퍼 메트릭][8]은 [파이프라인 사용량 메트릭][9] 문서를 참조하세요. Datadog Logs 목적지 메트릭을 필터링하거나 그룹화하려면 태그 `component_type:datadog_logs`를 사용하세요.
 
 ## 목적지의 작동 방식 {#how-the-destination-works}
 
@@ -71,7 +86,7 @@ Observability Pipelines의 BYOC(Bring Your Own Cloud) Logs 목적지를 사용�
 
 이벤트 배치는 다음 중 하나의 파라미터를 충족하면 플러시됩니다. 자세한 내용은 [목적지 이벤트 배치 처리][2]를 참조하세요.
 
-| 최대 이벤트 | 최대 크기(MB) | 타임아웃(초)   |
+| 최대 이벤트 | 최대 크기(MB) | 시간 초과(초)   |
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
 

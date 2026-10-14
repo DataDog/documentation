@@ -1,4 +1,6 @@
 ---
+description: Aprenda a usar el procesador Generate Metrics para crear métricas de
+  conteo, gauge o distribución a partir de registros que coincidan con una consulta.
 disable_toc: false
 products:
 - icon: logs
@@ -12,7 +14,7 @@ title: Procesador Generar métricas basadas en registros
 
 Se utilizan muchos tipos de registros para realizar un seguimiento de las tendencias, como los KPI, durante largos períodos de tiempo. Generar métricas a partir de sus registros es una forma rentable de resumir datos provenientes de registros de alto volumen, como los registros de CDN, registros de flujo de VPC, registros de firewall y registros de red. Utilice el procesador Generar métricas para generar métricas de conteo, gauge o distribución a partir de registros que coincidan con una consulta, y envíe las métricas a su destino.
 
-**Nota**: Las métricas generadas a partir de registros y enviadas a Datadog son [Custom Metrics][1] y se facturan en consecuencia. Consulte [Custom Metrics Billing][2] para obtener más información.
+**Nota**: Las métricas generadas a partir de registros y enviadas a Datadog son [Métricas personalizadas][1] y se facturan en consecuencia. Consulte [Custom Metrics Billing][2] para obtener más información.
 
 ## Configuración {#setup}
 

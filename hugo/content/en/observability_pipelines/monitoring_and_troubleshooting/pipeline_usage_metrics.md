@@ -142,7 +142,7 @@ Worker reloads
 
 These metrics are available for sources, processors, and destinations.
 
-- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_id` tag to filter or group by individual components. See [Find the component ID][7] for instructions.
 - Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
 - Use the `component_kind` tag to filter or group by `source`, `transform` (processor) or `sink` (destination).
 
@@ -435,3 +435,4 @@ These metrics provide information about the adaptive concurrency controller, whi
 [4]: /getting_started/tagging/
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
+[7]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#find-the-component-id

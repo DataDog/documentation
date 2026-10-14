@@ -967,7 +967,7 @@ Los componentes de pestañas tienen las siguientes propiedades.
 
 #### Pestañas {#tabs}
 
-Una lista de vistas de pestañas. Utilice el ({{< ui >}}+{{< /ui >}}) para agregar vistas adicionales.
+Una lista de vistas de pestañas. Utilice el ({{< ui >}}\+{{< /ui >}}) para agregar vistas adicionales.
 
 
 #### Estilo {#style-1}

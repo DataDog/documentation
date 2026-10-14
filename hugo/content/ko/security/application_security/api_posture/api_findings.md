@@ -2,12 +2,6 @@
 description: Triage는 정의, 게이트웨이 및 실시간 트래픽 전반에서 API 위험을 탐지했습니다.
 title: API 발견 사항
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection은 정부 기관용 Datadog 사이트 US1-FED에서 미리 보기로 제공되고 있습니다.
-</div>
-{{< /site-region >}}
-
 [API Findings][1] 탐색기는 정의, 게이트웨이 및 실시간 트래픽 전반에서 감지된 API 위험에 대한 중앙 집중식 Triage 조회를 제공합니다. 기본 규칙은 일반적인 취약점 및 잘못된 설정을 감지합니다. 특정 사용 사례에 대해 [사용자 지정 규칙][2]을 추가할 수도 있습니다.
 
 **API 발견 사항** 열:

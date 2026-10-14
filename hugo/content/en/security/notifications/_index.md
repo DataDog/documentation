@@ -63,7 +63,7 @@ Notifications can be sent to individuals and teams through Slack, Jira, PagerDut
 You can use webhooks to send alerts to other platforms, such as SOAR. To set up a webhook:
 
 1. Navigate to the [Webhooks][4] integration.
-1. Click {{< ui >}}+ New{{< /ui >}} in the {{< ui >}}Webhooks{{< /ui >}} section.
+1. Click {{< ui >}}\+ New{{< /ui >}} in the {{< ui >}}Webhooks{{< /ui >}} section.
 1. Enter a name for the webhook.
 1. Enter the webhook URL.
 1. In the {{< ui >}}Payload{{< /ui >}} section, select {{< ui >}}Security Signal{{< /ui >}}.

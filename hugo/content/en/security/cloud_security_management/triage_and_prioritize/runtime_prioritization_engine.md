@@ -39,6 +39,23 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 
 The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
 
+## CISA BOD 26-04 remediation timelines
+
+The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
+
+Datadog computes each vulnerability's remediation timeline according to the directive and adds it to the finding as one of the following values: 
+- `three_days_and_forensic_triage`
+- `three_days`
+- `fourteen_days`
+- `sixty_days`
+- `fix_on_system_upgrade`
+
+The due date computed from this timeline appears directly on the vulnerability finding. Datadog also records the date the vulnerability's CVE was added to the [CISA KEV catalog][1] as a `@vulnerability.cisa.kev_added_at` timestamp on the finding.
+
+For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
+
+{{< img src="security/cloud_security_management/cisa_bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer filtered to the 3 Days + Forensic Triage CISA BOD 26-04 remediation timeline facet, with a search bar query combining the remediation timeline and kev_added_at attributes, and the time helper dropdown open." width="100%">}}
+
 ## Crown Jewels
 
 [Crown Jewels][8] are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
@@ -125,3 +142,5 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
 [14]: /security/cloud_security_management/vulnerabilities/
+[15]: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk
+[16]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/

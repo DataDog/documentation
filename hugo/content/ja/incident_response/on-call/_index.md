@@ -21,11 +21,11 @@ title: On-Call
 ---
 Datadog On-Call は、モニタリング、ページング、インシデント対応を 1 つのプラットフォームに統合しています。
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="ページのルーティングの概要。モニター、インシデント、セキュリティシグナル、または API 呼び出しからページがチーム (例: 「payments-team」) に送信され、その後、(たとえば優先度に基づく) ルーティングルールに送られ、エスカレーションポリシーに従って処理されます。そこからスケジュールに送られるか、または直接ユーザーに送信されます。" style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="ページのルーティングの概要。モニター、インシデント、セキュリティシグナル、または API 呼び出しからページがチーム (例: 「payments-team」) に送信され、その後、(たとえば優先度に基づく) ルーティングルールに送られ、エスカレーションポリシーに従って処理されます。そこからスケジュールに送られるか、または直接ユーザーに送信されます。" style="width:100%;" >}}
 
 ## コンセプト {#concepts}
 
-- **ページ**とは、モニター、インシデント、セキュリティシグナルなど、アラートを受ける対象のことを指します。ページのステータスには `Triggered`、`Acknowledged`、`Resolved` があります。
+- **Pages**は、モニター、インシデント、セキュリティシグナルなど、アラートを受ける対象となるイベントを表します。ページのステータスには `Triggered`、`Acknowledged`、`Resolved` があります。
 - **チーム**は、専門知識や業務の役割に基づき、特定の種類のページを処理するために Datadog 内で構成されたグループです。
 - **ルーティングルール**により、チームは特定の種類の受信イベントに対する対応を細かく調整できます。これらのルールでは、イベントのメタデータに基づき、ページの緊急度を設定し、異なるエスカレーションポリシーにページをルーティングすることができます。[サポート時間][7] を設定すると、定義されたタイムウィンドウにエスカレーション通知を遅延させることができます。
 - **エスカレーションポリシー**は、チーム内またはチーム間でページがどのようにエスカレーションされるかを決定します。
@@ -35,15 +35,15 @@ Datadog On-Call は、モニタリング、ページング、インシデント�
 
 **チーム**は、Datadog On-Call の中心的な組織単位です。Datadog で通知がトリガーされると、**ページ** が指定された On-Call Team に送信されます。
 
-{{< img src="service_management/oncall/notification_page.png" alt="On-Call Team に言及する通知。" style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="On-Call Team に言及する通知。" style="width:80%;" >}}
 
 各チームは**エスカレーションポリシー**と**スケジュール**を所有しています。エスカレーションポリシーは、ページがさまざまなスケジュールに送信される方法を定義します (例: 以下のスクリーンショットの _Checkout Operations - Interrupt Handler_、_Primary_、_Secondary_)。また、各チームはページを異なるエスカレーションポリシーにルーティングするための**ルーティングルール**も構成できます。
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="エスカレーションポリシーのサンプル。" style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="エスカレーションポリシーのサンプル。" style="width:80%;" >}}
 
 スケジュールは、チームメンバーがページに対応するために割り当てられた特定の時間を定義します。スケジュールは、異なるタイムゾーンやシフトにまたがるチームメンバーの対応可能時間を整理し、管理します。
 
-{{< img src="service_management/oncall/schedule.png" alt="複数のレイヤー (JP、EU、US の営業時間) で構成されたサンプルスケジュール。" style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="複数のレイヤー (JP、EU、US の営業時間) で構成されたサンプルスケジュール。" style="width:80%;" >}}
 
 ## きめ細かなアクセス制御 {#granular-access-control}
 
@@ -84,14 +84,14 @@ Datadog On-Call は、モニタリング、ページング、インシデント�
 
 <div class="alert alert-danger">インシデント履歴を保持するため、Datadog On-Call は、ページ、エスカレーションポリシー、またはスケジュールなどのリソースの削除をサポートしていません。本番環境に影響を与えずに On-Call をテストするには、サンドボックスとしてトライアル組織を作成します。</div>
 
-On-Call を開始するには、[オンコールチームを編成][1] し、通知を受信できるようにすべてのチームメンバーが [オンコールプロファイル設定][2] を構成したことを確認してください。
+On-Call を開始するには、[On-Call チームに登録][1] し、すべてのチームメンバーが [On-Call 通知設定][2] を構成して通知を受信できるようにしてください。
 
 {{< whatsnext desc="このセクションには下記のトピックが含まれています。">}}
   {{< nextlink href="/incident_response/on-call/teams">}}<u>チームをオンボーディングする</u>: 新しいオンコールチームを作成するか、既存の Datadog チームをオンコールに追加するか、PagerDuty からチームをインポートします。{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/pages">}}<u>ページ</u>: モニター、インシデント、セキュリティシグナル、その他のソースからページをトリガーします。ページを確認、再割り当て、または解決するか、インシデントに昇格させます。{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>エスカレーションポリシー</u>: 異なるスケジュールにページが送信される方法のステップを定義します。{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>スケジュール</u>: チームメンバーのオンコールローテーションのタイムテーブルを定義します。{{< /nextlink >}}
-  {{< nextlink href="/incident_response/on-call/profile_settings">}}<u>プロファイル設定</u>: 連絡方法と通知の設定を構成して、タイムリーで効果的なページを受け取るようにします。{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/notification_preferences">}}<u>通知設定</u>: 連絡方法と通知設定を構成して、タイムリーかつ効果的な Pages を受信できるようにしてください。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 課金 {#billing}
@@ -103,7 +103,7 @@ On-Call を開始するには、[オンコールチームを編成][1] し、通
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/incident_response/on-call/teams
-[2]: /ja/incident_response/on-call/profile_settings
+[2]: /ja/incident_response/on-call/notification_preferences
 [3]: /ja/account_management/rbac/granular_access/
 [4]: /ja/account_management/rbac/#role-based-access-control
 [5]: https://www.datadoghq.com/pricing/?product=incident-response#products

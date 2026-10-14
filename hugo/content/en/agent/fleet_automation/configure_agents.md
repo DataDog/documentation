@@ -11,7 +11,9 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes in the UI through guided workflows or with custom YAML files. You can also apply configuration updates [through the Fleet Automation API](#configure-agents-with-the-api). You can configure:
+Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. You can also apply configuration updates [through the Fleet Automation API](#configure-agents-with-the-api). For the Agent settings you can manage with Fleet Automation, see [Supported datadog.yaml Configuration Fields][11].
+
+You can configure:
 
 * [Agents running on hosts](#configure-host-based-agents)
 * (In Preview) [Agents running in Kubernetes clusters managed by the Datadog Operator](#configure-the-agent-on-kubernetes)
@@ -73,7 +75,7 @@ Use Fleet Automation to edit the `DatadogAgent` custom resource for an Operator-
 - The Datadog Agent is running in the Kubernetes cluster.
 - Datadog Operator v1.27 or later manages the Agent deployment.
 - Remote Configuration is enabled for the API key used by the Agent.
-- The Operator is configured to accept remote updates. For the required Operator settings, API and application keys, and cluster name requirements, see [Prerequisites for Kubernetes view][11].
+- The Operator is configured to accept remote updates. For the required Operator settings, API and application keys, and cluster name requirements, see [Prerequisites for Kubernetes view][12].
 
 ### Edit the cluster configuration
 
@@ -91,7 +93,7 @@ Fleet Automation initiates the change, and Remote Configuration transmits it to 
 
 Fleet Automation provides an API to apply configuration updates programmatically. Deploy changes to any group of hosts with filter queries, supplying either full configuration files or targeted patches. Push configuration on demand or integrate it into your existing automation workflows. For full details, see the [Fleet Automation API][4].
 
-**Note**: The API does not support all Agent configuration fields. Settings related to Agent connection or secrets (`site`, `api_key`, and other authentication parameters) cannot be managed through the API.
+**Note**: The API does not support all Agent configuration fields. Settings related to Agent connection or secrets (`site`, `api_key`, and other authentication parameters) cannot be managed through the API. For the fields you can manage, see [Supported datadog.yaml Configuration Fields][11].
 
 ## Configuration precedence
 
@@ -130,4 +132,5 @@ For instructions on using mirrored or air-gapped repositories, see:
 [8]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: /agent/guide/setup_remote_config
 [10]: /agent/fleet_automation/upgrade_agents/
-[11]: /agent/fleet_automation/fleet_view/#prerequisites-for-kubernetes-view
+[11]: /agent/fleet_automation/supported_datadog_yaml_fields/
+[12]: /agent/fleet_automation/fleet_view/#prerequisites-for-kubernetes-view

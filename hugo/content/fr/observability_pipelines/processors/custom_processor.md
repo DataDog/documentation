@@ -1,4 +1,6 @@
 ---
+description: Apprenez à utiliser Vector Remap Language (VRL) dans le Custom Processor
+  pour modifier et enrichir vos logs, métriques ou traces.
 disable_toc: false
 further_reading:
 - link: /observability_pipelines/guide/remap_reserved_attributes/

@@ -134,7 +134,7 @@ The easiest way to create a facet is to add it from the Test Runs side panel so 
 
 ### Creating facets from the facet list
 
-If finding a test run that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}+ Add{{< /ui >}}.
+If finding a test run that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}\+ Add{{< /ui >}}.
 
 {{< img src="continuous_integration/add_facet.png" alt="Add a facet from the facet side panel" style="width:30%;">}}
 

@@ -9,6 +9,8 @@ Any time an incident progresses through status changes, you can guide responders
 
 {{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Status Change form prompting the user to fill out the required Teams and Postmortem Owner fields when moving an incident to Resolved" style="width:70%;" >}}
 
+<div class="alert alert-info">Required fields on transition forms apply only to status changes made by a human. Automated status changes, such as those triggered through the API or <a href="/incident_response/incident_management/setup_and_configuration/automations">incident automations</a>, are not blocked.</div>
+
 ## Prerequisites
 
 To set up transition forms, you must have the `Incident Settings Write` permission. For more information, see [Datadog Role Permissions][1].
@@ -19,10 +21,10 @@ To set up transition forms, you must have the `Incident Settings Write` permissi
 1. Under **Incident Types**, expand an incident type to edit.
 1. Click the **Transition Forms** tab.
 1. Select the status you want to configure.
-1. Choose which fields appear on the form. You can add [property fields][3] and [responder types][4]. Any field can be marked as required or optional.
+1. Choose which fields appear on the form. You can add [property fields][3] and [responder roles][4]. Any field can be marked as required or optional.
 1. Click **Save**.
 
 [1]: /account_management/rbac/permissions/#case-and-incident-management
 [2]: https://app.datadoghq.com/incidents/settings
 [3]: /incident_response/incident_management/setup_and_configuration/property_fields
-[4]: /incident_response/incident_management/setup_and_configuration/responder_types
+[4]: /incident_response/incident_management/setup_and_configuration/responder_roles

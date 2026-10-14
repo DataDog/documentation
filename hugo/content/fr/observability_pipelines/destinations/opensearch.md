@@ -18,7 +18,7 @@ Utilisez la destination OpenSearch d'Observability Pipelines pour envoyer des lo
 
 <div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement les identifiants de l'URL de l'endpoint, du nom d'utilisateur et du mot de passe OpenSearch. Ne <b>saisissez pas</b> les valeurs réelles.</div>
 
-Configurez la destination OpenSearch lorsque vous [configurez un pipeline][6]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][1], en utilisant l'[API][7] ou avec [Terraform][8]. Les étapes de cette section sont configurées dans l'UI.
+Configurez la destination OpenSearch lorsque vous [configurez un pipeline][6]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][1], en utilisant l'[API][7] ou avec [Terraform][8]. Les étapes de cette section sont configurées dans l'interface utilisateur.
 
 Après avoir sélectionné la destination OpenSearch dans l'interface utilisateur du pipeline :
 
@@ -84,7 +84,7 @@ Pour les [métriques de composant][9] et les [métriques de tampon de destinatio
 
 ### Regroupement d'événements {#event-batching}
 
-Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Destinations event batching][2] pour plus d'informations.
+Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Regroupement d'événements par destination][2] pour plus d'informations.
 
 | Nombre maximal d'événements | Taille maximale (Mo) | Délai d'expiration (secondes)   |
 |----------------|-------------------|---------------------|

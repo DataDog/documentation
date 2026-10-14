@@ -8,6 +8,27 @@ cascade:
     rank: 70
 description: Database Monitoring에 관해 알아보기 및 시작하기
 further_reading:
+- link: /database_monitoring/data_collected/
+  tag: 설명서
+  text: 데이터 수집됨
+- link: /database_monitoring/troubleshooting/
+  tag: 설명서
+  text: 문제 해결
+- link: https://learn.datadoghq.com/courses/database-monitoring
+  tag: 학습 센터
+  text: Datadog DBM으로 Postgres 데이터베이스 모니터링
+- link: https://dtdg.co/fe
+  tag: 기반 활성화
+  text: 대화형 세션에 참여해 Database Monitoring을 한 단계 업그레이드
+- link: https://www.datadoghq.com/blog/map-postgresql-explain-plan-nodes-to-sql-with-datadog/
+  tag: 블로그
+  text: 실행 계획 상관관계를 활용해 느린 PostgreSQL 쿼리를 더욱 빠르게 진단하기
+- link: https://www.datadoghq.com/blog/dbm-supabase/
+  tag: 블로그
+  text: Datadog Database Monitoring으로 Supabase 쿼리 성능 모니터링 및 최적화
+- link: https://www.datadoghq.com/blog/detect-inefficient-index-scans-with-dbm/
+  tag: 블로그
+  text: 모든 인덱스 스캔은 동일한 것은 아닙니다. 쿼리 지연 시간 99% 이상 단축
 - link: https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency
   tag: 블로그
   text: 왕복 쿼리 지연 시간 분석
@@ -26,21 +47,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-database-research/
   tag: 블로그
   text: 마이크로서비스가 데이터베이스 기술 사용을 형성한 과정
-- link: /database_monitoring/data_collected/
-  tag: 설명서
-  text: 수집된 데이터
-- link: /database_monitoring/troubleshooting/
-  tag: 설명서
-  text: 문제 해결
-- link: https://dtdg.co/fe
-  tag: 기반 활성화
-  text: 대화형 세션에 참여해 Database Monitoring을 한 단계 업그레이드
-- link: https://learn.datadoghq.com/courses/database-monitoring
-  tag: 학습 센터
-  text: Datadog DBM으로 Postgres 데이터베이스 모니터링
 title: Database Monitoring
 ---
-{{< learning-center-callout header="활성화 웨비나 세션에 참여하기" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
+{{< learning-center-callout header="교육 웨비나 세션 참가" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
   Database Monitoring을 사용하여 비용이 많이 들고 속도가 느린 쿼리를 신속하게 찾아내는 방법을 알아보세요. 정확한 실행 세부 정보를 드릴다운하여 병목을 해결합니다.
 {{< /learning-center-callout >}}
 
@@ -53,7 +62,7 @@ Datadog Database Monitoring은 **Postgres**, **MySQL**, **Oracle**, **SQL Server
 ### Postgres {#postgres}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="자체 호스팅" title="자체 호스팅" >}}
   {{< image-card href="/database_monitoring/setup_postgres/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_postgres/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_postgres/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
@@ -67,7 +76,7 @@ Datadog Database Monitoring은 **Postgres**, **MySQL**, **Oracle**, **SQL Server
 ### MySQL {#mysql}
 
 {{< card-grid card_width="130px">}}
-  {{< image-card href="/database_monitoring/setup_mysql/selfhosted" src="integrations_logos/mysql.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_mysql/selfhosted" src="integrations_logos/mysql.png" alt="자체 호스팅" title="자체 호스팅" >}}
   {{< image-card href="/database_monitoring/setup_mysql/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_mysql/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_mysql/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
@@ -78,18 +87,18 @@ Datadog Database Monitoring은 **Postgres**, **MySQL**, **Oracle**, **SQL Server
 ### Oracle {#oracle}
 
 {{< card-grid card_width="130px">}}
-  {{< image-card href="/database_monitoring/setup_oracle/selfhosted" src="integrations_logos/oracle.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_oracle/selfhosted" src="integrations_logos/oracle.png" alt="자체 호스팅" title="자체 호스팅" >}}
   {{< image-card href="/database_monitoring/setup_oracle/rds" src="integrations_logos/amazon_rds.png" alt="RDS" title="RDS" >}}
   {{< image-card href="/database_monitoring/setup_oracle/rac" src="integrations_logos/oracle.png" alt="RAC" title="RAC" >}}
   {{< image-card href="/database_monitoring/setup_oracle/exadata" src="integrations_logos/oracle.png" alt="Exadata" title="Exadata" >}}
-  {{< image-card href="/database_monitoring/setup_oracle/autonomous_database" src="integrations_logos/oracle.png" alt="Selfhosted" title="Autonomous Database" >}}
+  {{< image-card href="/database_monitoring/setup_oracle/autonomous_database" src="integrations_logos/oracle.png" alt="자체 호스팅" title="Autonomous Database" >}}
 {{< /card-grid >}}
 <p></p>
 
 ### SQL Server {#sql-server}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_sql_server/selfhosted" src="integrations_logos/sqlserver.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_sql_server/selfhosted" src="integrations_logos/sqlserver.png" alt="자체 호스팅" title="자체 호스팅" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/azure" src="integrations_logos/azure.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
@@ -99,7 +108,7 @@ Datadog Database Monitoring은 **Postgres**, **MySQL**, **Oracle**, **SQL Server
 ### MongoDB {#mongodb}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_mongodb/selfhosted" src="integrations_logos/mongo.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_mongodb/selfhosted" src="integrations_logos/mongo.png" alt="자체 호스팅" title="자체 호스팅" >}}
   {{< image-card href="/database_monitoring/setup_mongodb/mongodbatlas" src="integrations_logos/mongodb_atlas.png" alt="MongoDB Atlas" title="MongoDB Atlas" >}}
 {{< /card-grid >}}
 <p></p>
@@ -114,8 +123,8 @@ Datadog Database Monitoring은 **Postgres**, **MySQL**, **Oracle**, **SQL Server
 ### ClickHouse {#clickhouse}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
-  {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse Cloud" title="ClickHouse Cloud" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="자체 호스팅" title="자체 호스팅" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse 클라우드" title="ClickHouse 클라우드" >}}
 {{< /card-grid >}}
 <p></p>
 

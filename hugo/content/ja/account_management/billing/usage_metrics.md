@@ -38,8 +38,8 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | (プレビュー) 取り込みポイントとインデックス化ポイントの比率 | `datadog.estimated_usage.metrics.points.ratio` | 取り込まれたポイントの合計とインデックスされたポイントの合計の比較。[メトリクス名の料金][7]を使用している組織に適用されます。|
 | ログ取り込みバイト | `datadog.estimated_usage.logs.ingested_bytes` | バイト単位のログの取り込みの合計。|
 |  ログ取り込みイベント | `datadog.estimated_usage.logs.ingested_events` | 除外されたログを含む、取り込まれたイベントの総数。|
-| ログパイプラインバイト | `datadog.estimated_usage.logs.ingested_bytes` | バイト単位のパイプラインによって一致したログの数。|
-| ログパイプラインイベント | `datadog.estimated_usage.logs.ingested_events` | 除外されたログを含む、バイト単位のパイプラインによって一致したイベントの数。|
+| Logs Pipelines バイト           | `datadog.estimated_usage.logs.pipelines.ingested_bytes` | バイト単位でPipelinesによって一致したログの数です。|
+| Logs Pipelines イベント          | `datadog.estimated_usage.logs.pipelines.ingested_events` | 除外されたログを含む、Pipelinesによって一致したイベントの数です。|
 | 削除ログ数 | `datadog.estimated_usage.logs.drop_count` | 取り込み中に削除されたイベントの総数。|
 | 切り捨てログ数 | `datadog.estimated_usage.logs.truncated_count` | 取り込み時に切り捨てられたイベントの総数。|
 | 切り捨てログバイト数 | `datadog.estimated_usage.logs.truncated_bytes` | バイト単位の切り捨てイベントの量。|

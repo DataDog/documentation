@@ -19,11 +19,6 @@ Cloud Security は、脆弱性、誤設定、アイデンティティリスク�
 <div class="alert alert-danger">ランタイム優先順位付けエンジンは、選択したサイト ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
 {{< /site-region >}}
 
-{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
- btn_hidden="false" header="プレビューに参加しましょう">}}
-ランタイム優先順位付けエンジンは、Cloud Security の脆弱性に対してプレビュー中です。このフォームを使用してアクセスをリクエストしてください。
-{{< /callout >}}
-
 [ランタイム優先順位付けエンジン][1]は、ランタイム監視可能性とセキュリティデータを組み合わせて、ビジネスクリティカルなリソースを本当に明らかにする約 5% の所見を特定します。各所見は到達可能性、露出、悪用可能性、ビジネスクリティカル性、および対処可能性の 5 つのディメンションで評価されます。
 
 ## 重大度スコアリング{#severity-scoring}
