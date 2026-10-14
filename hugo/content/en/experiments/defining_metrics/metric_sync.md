@@ -176,7 +176,7 @@ The commands do the following:
 - `result`: Fetches the terminal plan or execute result.
 - `version`: Prints build metadata.
 
-Use `--timeout 20m` to change the default ten-minute command timeout. If a command times out after submission, check the printed operation ID with `status` before submitting again. To submit without waiting, use `--no-poll`, then check `status` and `result`. A successful `--no-poll` command confirms submission only.
+Use `--timeout 20m` to change the default 10-minute command timeout. If a command times out after submission, check the printed operation ID with `status` before submitting again. To submit without waiting, use `--no-poll`, then check `status` and `result`. A successful `--no-poll` command confirms submission only.
 
 ## GitHub Actions example
 
@@ -241,13 +241,13 @@ A `sync_tag` identifies the set of metric definitions that are managed together.
 
 Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Each declared property and measure also requires a `sync_id`, unique within its own list on that source. Choose stable IDs; they do not need to be UUIDs. Metric aggregations use `warehouse_metric_source_sync_id` to select a warehouse metric source. Each aggregation also selects a declared measure, each row, or a subject mapping. See the [Measure references][4] section.
 
-Changing a `sync_id` can result in deletion of the old object and creation of another object. To rename an object, change its `name` and keep the same `sync_tag` and `sync_id`.
+Changing a `sync_id` can delete the object with the old ID and create another in its place. To rename an object, change its `name` and keep the same `sync_tag` and `sync_id`.
 
 Remove a source and its dependent metrics in two submissions. First remove the metric definitions, keep the source and all unrelated definitions, and run `plan` and `execute`. Then remove the source and submit the remaining definitions. A plan that removes both the source and its metrics in one operation can pass but fail during execution. References from other sync tags must also be removed before deleting the source.
 
-All files in an operation must use the same `schema_version`, `sync_tag`, and effective `options`. Nonempty top-level `reference_url` and `warehouse_connection_id` values must also agree across files.
+All files in an operation must use the same `schema_version` and `sync_tag`. Their `options` must match after defaults are applied. For example, omitting `is_certified` is equivalent to setting it to `true`. Nonempty top-level `reference_url` and `warehouse_connection_id` values must also agree across files.
 
-### Manage existing metrics with YAML
+### Manage existing metrics and sources with YAML {#manage-existing-metrics-with-yaml}
 
 The CLI does not export existing metrics to YAML. Create the YAML from the source and metric definitions, then store it in version control. For migrations, `existing_id` refers to an object already present in the target Datadog organization.
 
@@ -289,7 +289,7 @@ Adoption applies the YAML definition and assigns sync ownership to the existing 
 | `description` | No | Description for the source. |
 | `sql` | Yes | SQL query that returns the timestamp, subject columns, and measures used by metrics. |
 | `timestamp_column` | Yes | Column containing the event or metric timestamp. |
-| `additional_timestamp_columns` | No | Up to four additional timestamp columns returned by `sql`. Each name must be nonblank and contain at most 255 characters. Names must be unique after trimming whitespace and must not include `timestamp_column`. If omitted, the source has no additional timestamp columns. |
+| `additional_timestamp_columns` | No | Up to four additional timestamp columns returned by `sql`. Each name must contain at least one character other than whitespace and no more than 255 characters. Names must be unique after trimming whitespace and must not include `timestamp_column`. If omitted, the source has no additional timestamp columns. |
 | `warehouse_connection_id` | No | Warehouse connection UUID for this source. Overrides the top-level value. |
 | `reference_url` | No | Source-specific reference URL. |
 | `subject_types` | Yes | At least one subject mapping for the source. |
@@ -490,14 +490,6 @@ Use `operation` in new YAML. The previous `operator` field remains an alias, but
 
 Percentile metrics support only property filters with `IS` or `IS_NOT`. They do not support measure filters or null checks.
 
-### CLI limitations
-
-Changing only `options.is_certified` does not update certification on an otherwise unchanged existing source or metric. Check certification in Datadog after managing existing definitions with YAML; a successful sync alone does not confirm a certification change.
-
-The CLI does not export existing definitions or convert Eppo YAML automatically. Create and review the full definitions before managing existing metrics with YAML.
-
-For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upgrade_mode: by_name` alone does not adopt objects with matching names.
-
 ### Measure references
 
 Each aggregation must select a source with `warehouse_metric_source_sync_id` and exactly one of these measure selectors:
@@ -566,7 +558,15 @@ measure:
 
 Run `validate` for local checks, then run `plan` to preview changes. Local validation checks source mappings in the submitted files. An explicit tag equal to the file's `sync_tag` still checks local mappings when that source is in the submitted files. External references are resolved during `execute`; a successful plan does not confirm that an external source or selected measure exists.
 
-The sync API does not support `warehouse_metric_measure_id`. Replace raw measure IDs with a source and one of the selectors above.
+The sync API does not support `warehouse_metric_measure_id`. Replace raw measure IDs with a source and one of the preceding selectors.
+
+## CLI limitations
+
+Changing only `options.is_certified` does not update certification on an otherwise unchanged existing source or metric. Check certification in Datadog after managing existing definitions with YAML; a successful sync alone does not confirm a certification change.
+
+The CLI does not export existing definitions or convert Eppo YAML automatically. Create and review the full definitions before managing existing metrics with YAML.
+
+For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upgrade_mode: by_name` alone does not adopt objects with matching names.
 
 ## Troubleshooting
 
@@ -576,9 +576,9 @@ The sync API does not support `warehouse_metric_measure_id`. Replace raw measure
 | A warehouse connection was not found. | Confirm the target Datadog organization has a warehouse connection configured. If you set `warehouse_connection_id`, confirm that it belongs to the target organization. |
 | A subject type was not found. | Confirm the `subject_types[].name` value matches an existing Datadog subject type. |
 | A successful result shows no changes. | The service detected no changes to apply. If you changed only `options.is_certified`, check certification in Datadog; a successful sync does not confirm that this setting changed. A failed operation does not establish that the YAML matches Datadog. |
-| A sync is blocked. | Read the object details and blocked reasons in the console output. Possible causes include experiment references, metrics outside the sync tag that reference a source, and adoption conflicts. A blocked result exits with a nonzero status. |
+| A sync is blocked. | Read the object details and blocked reasons in the console output. To save the API response, run `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync.log`. Possible causes include experiment references, metrics outside the sync tag that reference a source, and adoption conflicts. A blocked result exits with a nonzero status. |
 | An operation fails. | Run `metric-sync result <METRIC_SYNC_ID> --log-file ./metric-sync-result.log` to retrieve available errors and inspect the API response. Changes shown for a failed operation are not confirmed as applied. Some server failures return no error details; keep the operation ID for support. |
-| Local validation passes, but `plan` rejects the YAML. | Local checks do not cover every API rule. For example, percentile metrics require a value between zero and one, and ratio components cannot use `average`. Use the error details in the console output or debug log to correct the definition. |
+| Local validation passes, but `plan` rejects the YAML. | Local checks do not verify warehouse queries. Read the error details in the console output. To save the API response, run `metric-sync plan ./metrics --log-file ./metric-sync.log`. Use those details to correct the definition. |
 
 [1]: /experiments/guide/connecting_a_data_warehouse/
 [2]: /account_management/rbac/permissions/#product-analytics
