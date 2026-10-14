@@ -494,19 +494,19 @@ Choose one of the following approaches for the user or service principal:
 
 #### System table permissions
 
-The [Setup](#setup) instructions grant `SELECT` on `CATALOG system`. If you do not want to grant catalog-level `SELECT`, use the following granular alternative, which grants the user or service principal access only to the resources that Datadog requires:
+The [Setup](#setup) instructions grant `SELECT` on `CATALOG system`. If you do not want to grant catalog-level `SELECT`, use the following granular alternative, which grants the service principal access only to the resources that Datadog requires:
 
 - `CAN USE` permission on the SQL warehouse provided during setup.
-- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. Replace `<PRINCIPAL>` with the application (client) ID for a service principal, or with the user principal name (typically an email address) for a Databricks user. Then, in Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands:
+- `USE CATALOG` and `USE SCHEMA` permissions, and read access to the five required system tables. Replace `<CLIENT-ID>` with the service principal's application (client) ID, not its display name. Then, in Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands:
 
   ```sql
-  GRANT USE CATALOG ON CATALOG system TO `<PRINCIPAL>`;
-  GRANT USE SCHEMA ON CATALOG system TO `<PRINCIPAL>`;
-  GRANT SELECT ON TABLE system.access.column_lineage TO `<PRINCIPAL>`;
-  GRANT SELECT ON TABLE system.billing.usage TO `<PRINCIPAL>`;
-  GRANT SELECT ON TABLE system.access.workspaces_latest TO `<PRINCIPAL>`;
-  GRANT SELECT ON TABLE system.billing.list_prices TO `<PRINCIPAL>`;
-  GRANT SELECT ON TABLE system.billing.account_prices TO `<PRINCIPAL>`;
+  GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+  GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+  GRANT SELECT ON TABLE system.access.column_lineage TO `<CLIENT-ID>`;
+  GRANT SELECT ON TABLE system.billing.usage TO `<CLIENT-ID>`;
+  GRANT SELECT ON TABLE system.access.workspaces_latest TO `<CLIENT-ID>`;
+  GRANT SELECT ON TABLE system.billing.list_prices TO `<CLIENT-ID>`;
+  GRANT SELECT ON TABLE system.billing.account_prices TO `<CLIENT-ID>`;
   ```
 
   The user running these commands must have the `MANAGE` privilege on `CATALOG system`.
@@ -616,8 +616,6 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [23]: https://docs.databricks.com/aws/en/security/auth/access-control#query-acls
 [24]: https://docs.databricks.com/aws/en/security/auth/access-control#sql-warehouse-acls
 [25]: https://docs.datadoghq.com/api/latest/authentication/?code-lang=curl#validate-api-key
-[26]: https://docs.datadoghq.com/cloud_cost_management
-[27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /getting_started/tagging/
 [29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
 [30]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
