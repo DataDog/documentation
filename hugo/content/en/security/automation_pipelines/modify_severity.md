@@ -44,7 +44,7 @@ Configure severity modifier rules to adjust finding severities to reflect your o
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. By default, severity modifier rules apply to Code Security findings from the latest commit on the default branch. If your organization is enrolled in the [Preview for Code Security findings on non-default branches][3], severity modifier rules instead apply to findings from all branches and commits. You can use this field to limit which branches the rule applies to.
 1. Optionally, click **Add Severity** to filter findings by severity level. The rule matches against each finding's Datadog-adjusted severity, before any user-defined adjustments.
 1. Define the severity modification action:
     - **Set to a specific level**: Sets matching findings to a fixed severity. Choose from **Info / None**, **Low**, **Medium**, **High**, or **Critical**.
@@ -127,3 +127,4 @@ Severity modifiers are not cleared or updated for findings that transition to au
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=modify_severity
+[3]: /security/automation_pipelines/#code-security-findings-on-non-default-branches

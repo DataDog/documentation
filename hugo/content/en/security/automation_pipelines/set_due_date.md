@@ -41,7 +41,7 @@ Configure due date rules to ensure findings are addressed within your specified 
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. By default, due date rules apply to Code Security findings from the latest commit on the default branch. If your organization is enrolled in the [Preview for Code Security findings on non-default branches][3], you can use this field to specify other branches where you want the rule applied.
 1. Set a due date for each severity level that needs one.
 1. If the rule includes a CVE-based finding type (Library, Container Image, or Host vulnerability), under **Calculate due dates from**, select the base date for the SLA clock:
    - **First Seen Date**: Starts the SLA clock when Datadog first detects the finding.
@@ -78,3 +78,4 @@ When managing findings, due dates can be removed under various conditions, such 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=set_due_date
+[3]: /security/automation_pipelines/#code-security-findings-on-non-default-branches
