@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for AWS Lambda
+description: Set up Data Streams Monitoring for AWS Lambda functions that produce or consume messages with Amazon SQS, SNS, EventBridge, or Kinesis.
 further_reading:
     - link: '/serverless/aws_lambda/instrumentation/'
       tag: 'Documentation'
