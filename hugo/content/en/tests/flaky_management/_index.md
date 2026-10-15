@@ -8,12 +8,12 @@ further_reading:
 - link: "/tests/flaky_tests/"
   tag: "Documentation"
   text: "Learn about working with flaky tests"
-- link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
-  tag: "Knowledge Center"
-  text: "Flaky Tests Overview"
 - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
   tag: "Learning Center"
   text: "Getting Started with Test Optimization"
+- link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
+  tag: "Knowledge Center"
+  text: "Flaky Tests Overview"
 ---
 
 ## Overview

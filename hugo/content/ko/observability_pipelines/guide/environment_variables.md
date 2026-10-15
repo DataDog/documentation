@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/observability_pipelines/environment_variables/
+description: Observability Pipelines 소스, 프로세서 및 대상에서 사용 가능한 환경 변수를 찾으십시오.
 disable_toc: false
 title: 환경 변수
 ---
@@ -42,6 +43,9 @@ title: 환경 변수
 ### Logstash {#logstash}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
+### MySQL {#mysql}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
+
 ### OpenTelemetry {#opentelemetry}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
@@ -72,7 +76,7 @@ title: 환경 변수
   - 환경 변수 `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`에 저장됩니다.
 
 {{% /tab %}}
-{{% tab "대상" %}}
+{{% tab "목적지" %}}
 
 ### Amazon OpenSearch {#amazon-opensearch}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
@@ -85,6 +89,9 @@ title: 환경 변수
 
 ### Databricks(Zerobus) {#databricks-zerobus}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
+
+### Datadog APM {#datadog-apm}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Logs {#datadog-logs}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}

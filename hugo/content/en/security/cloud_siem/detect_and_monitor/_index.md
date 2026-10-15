@@ -59,8 +59,14 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - [Rule editor][3] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][3] in the UI.
-3. Once the rule is deleted, you can no longer clone and re-enable it.
+2. After the rule is deprecated, the rule remains available for the length of your retention period before it is deleted. During this time, you can re-enable the rule by [cloning the rule][3] in the UI. The retention period depends on your [Cloud SIEM product][6]:
+    - Standalone
+      - 12 months (365 days, usage measured in GB)
+      - 15 months (450 days, usage measured in millions of events)
+    - Add-on with Flex Logs and Legacy: 15 months
+
+    Organizations that adopted Standalone before gigabyte-based usage was introduced have a 15-month retention period.
+3. After the rule is deleted, you can no longer clone and re-enable it.
 
 ## Suppressions
 
@@ -72,7 +78,7 @@ See [Suppressions][4] for more information.
 
 You can adjust the severity of security signals based on the assets they affect. You can customize severity levels, apply custom tags, and isolate changes to specific rules.
 
-See [Dynamic Severity][6] for more information.
+See [Dynamic Severity][7] for more information.
 
 ## MITRE ATT&CK Map
 
@@ -87,4 +93,5 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [3]: /security/detection_rules/#clone-a-rule
 [4]: /security/cloud_siem/detect_and_monitor/suppressions
 [5]: /security/cloud_siem/detection_rules/mitre_attack_map/
-[6]: /security/cloud_siem/detect_and_monitor/dynamic_severity
+[6]: /security/cloud_siem/guide/determine-cloud-siem-product/
+[7]: /security/cloud_siem/detect_and_monitor/dynamic_severity

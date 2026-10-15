@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: Learning Center
+  text: Define User Behavior with Labeled Actions in Product Analytics
 - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
   tag: "Blog"
   text: "The product signal latency gap slowing your growth"
