@@ -1,0 +1,8 @@
+entries:
+  - change_type: modified
+    date: '2026-10-15'
+    link: https://github.com/DataDog/documentation/pull/40731
+    operations:
+      - ListScorecardCampaigns
+      - ListScorecardOutcomes
+    title: Update Scorecards Outcome Pagination Schema And API Tests

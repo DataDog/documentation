@@ -7817,10 +7817,6 @@
     "request_description": "",
     "request_schema_description": "Team link create request"
   },
-  "GetTeamHierarchyMembers": {
-    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
-    "summary": "Get team hierarchy members"
-  },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
     "summary": "Get team memberships"
