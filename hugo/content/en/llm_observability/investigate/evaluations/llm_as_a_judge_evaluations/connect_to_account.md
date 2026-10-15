@@ -137,7 +137,7 @@ Select {{< ui >}}API key{{< /ui >}} and provide your API key. Datadog sends it t
 
 <div class="alert alert-info">OAuth 2.0 client credentials authentication is in Preview. Contact your Datadog representative to request access.</div>
 
-If your provider, such as an AI gateway, accepts OAuth 2.0 access tokens from your identity provider (IdP), Datadog can obtain short-lived tokens with the [client credentials grant][3] instead of using a static API key. Datadog authenticates to your IdP's token endpoint with a client ID and client secret, caches the access token until shortly before it expires, and sends it to your provider as `Authorization: Bearer <ACCESS_TOKEN>`. The client secret is sent only to your IdP's token URL, never to your provider.
+Some providers, such as AI gateways, accept OAuth 2.0 access tokens from your identity provider (IdP). For these providers, Datadog can obtain short-lived tokens with the [client credentials grant][3] instead of using a static API key. Datadog authenticates to your IdP's token endpoint with a client ID and client secret. It caches the access token until shortly before it expires, and sends it to your provider as `Authorization: Bearer <ACCESS_TOKEN>`. The client secret is sent only to your IdP's token URL, never to your provider.
 
 Select {{< ui >}}OAuth 2.0 client credentials{{< /ui >}} and provide:
 
@@ -150,7 +150,7 @@ When you save the provider, Datadog requests an access token and calls your prov
 
 To rotate the client secret, generate a new secret in your IdP, update it in Datadog, and then deactivate the old secret. To revoke Datadog's access, deactivate the application in your IdP. Access tokens that were already issued remain valid until they expire, so keep token lifetimes short.
 
-##### Example: Okta
+##### Okta example
 
 The client credentials grant on an Okta custom authorization server requires an Okta plan that supports it.
 
