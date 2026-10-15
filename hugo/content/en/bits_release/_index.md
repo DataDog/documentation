@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Bits Release validates that a merged pull request behaves as intended in production. It learns what your change was meant to do, watches the service once that change is live, and reports a verdict on the pull request itself, with a Slack notification to the author where that integration is connected.
+Bits Release validates that a merged pull request behaves as intended in production. It learns what your change was meant to do, watches the service once that change is live, and reports a verdict on the pull request and in Slack.
 
 Standard release checks rarely cover the specific behavior a change targets. A dashboard watched for a few minutes shows the service is up, and an alert may never fire for the thing you changed, so a change that shipped broken, or shipped with no effect at all, can go unnoticed for days. Bits Release checks that behavior directly, on every merge.
 
