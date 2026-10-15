@@ -290,7 +290,7 @@ To find the entry point of your workload, run the following command:
 docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
 ```
 
-or
+To find the default command of your workload, run the following command:
 
 ```shell
 docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Cmd}}'
