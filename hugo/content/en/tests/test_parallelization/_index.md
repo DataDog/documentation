@@ -11,7 +11,7 @@ Pair it with Test Impact Analysis to reduce CI costs further. Test Impact Analys
 
 ## Setup
 
-Before setting up Test Parallelization, set up [Test Optimization][2]. Optionally, also set up [Test Impact Analysis][1] if you plan to use it with Test Parallelization. Then [choose your language and framework][3] and follow the instructions for GitHub Actions, CircleCI, or local workers on one CI node. The setup guide uses `ddtest` 1.12.0 or later.
+Before setting up Test Parallelization, set up [Test Optimization][2]. Optionally, also set up [Test Impact Analysis][1] if you plan to use it with Test Parallelization. Then [choose your language and framework][3] and follow the instructions for GitHub Actions, CircleCI, or local workers on one CI node.
 
 ## Compatibility
 

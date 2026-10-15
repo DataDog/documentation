@@ -13,7 +13,7 @@ further_reading:
     text: "Troubleshoot Test Optimization"
 ---
 
-Use the error code and framework output in your CI logs to locate the failure. DDTest reports fatal errors as `[error_code] message`. See the [complete error-code reference](https://github.com/DataDog/ddtest/blob/v1.12.0/docs/error-codes.md).
+Use the error code and framework output in your CI logs to locate the failure. DDTest reports fatal errors as `[error_code] message`. See the [complete error-code reference](https://github.com/DataDog/ddtest/blob/main/docs/error-codes.md).
 
 ## Missing or invalid plan artifacts
 
