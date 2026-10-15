@@ -64,8 +64,8 @@ Incidents from the **PagerDuty** data source in DORA Metrics settings or the **D
 
 | Date | Change |
 | --- | --- |
-| December&nbsp;31,&nbsp;2026 | DORA Metrics stops accepting incidents: <br>- Incident ingestion and deletion APIs are disabled.<br>- The PagerDuty data source in DORA Metrics stops forwarding incidents.<br>- Datadog Incidents data is not displayed in DORA Metrics.<br>Incidents ingested before this date remain available for viewing and export until March 31, 2027. |
-| March&nbsp;31,&nbsp;2027 | Incidents previously sent through the DORA incident API or the PagerDuty data source cannot be viewed or exported. Datadog removes the incident views and the PagerDuty and Datadog Incidents configurations from [DORA Metrics settings][1]. |
+| December&nbsp;31,&nbsp;2026 | DORA Metrics stops accepting incidents: <br>- Incident ingestion and deletion APIs are disabled.<br>- The PagerDuty data source in DORA Metrics stops forwarding incidents.<br>- Datadog Incidents data is not displayed in DORA Metrics.<br>Incidents ingested before this date remain available for viewing and export until March 31, 2027. Datadog removes incident configurations from [DORA Metrics settings][1]. |
+| March&nbsp;31,&nbsp;2027 | Incidents previously sent through the DORA cannot be viewed or exported. |
 
 ## Get help
 
