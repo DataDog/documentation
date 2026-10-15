@@ -140,11 +140,13 @@ Wildcards work in free-text search, which searches the log message (the `content
 
 ### Multi-character wildcard
 
-Use the `*` symbol to match any number of characters, including zero. In the log message, `*` matches characters within a single word. For how search defines a word, see the [How free-text search splits words](#how-free-text-search-splits-words) section.
+Use the `*` symbol to match any number of characters, including zero. In the log message, `*` matches characters within a single word. For example:
 
 * `web*` matches log messages that contain a word starting with `web`, such as `web` or `webserver`.
 * `*web` matches log messages that contain a word ending with `web`, such as `myweb`.
 * `*web*` matches log messages that contain a word with `web` anywhere in it, such as `mywebserver`.
+
+For how search defines a word, see the [How free-text search splits words](#how-free-text-search-splits-words) section.
 
 A single `*` doesn't match across words. For example, `waiting*time` doesn't match the log message `waiting until next renew time`. To match across words, use one of the following:
 
@@ -155,7 +157,7 @@ Wildcards take effect only outside double quotes. Inside double quotes, `*` is t
 
 **Tip**: Single-word searches without wildcards or double quotes are the fastest. Wildcard and quoted searches take longer, especially across a large volume of logs. To speed these searches up, combine them with selective filters such as `service` or `host`.
 
-Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. For example, this query returns all the services that end with the string `mongo`:
 
 ```
 service:*mongo
@@ -187,13 +189,14 @@ Some punctuation separates words only in certain contexts. The following table s
 | Letter, underscore, letter | `hello_world` | `hello_world`          |
 | Letter, hyphen, letter     | `hello-world` | `hello`, `world`       |
 
-Because `my.friend` is a single word, the query `friend` doesn't match it. To match part of a word, use a wildcard as described in the [Multi-character wildcard](#multi-character-wildcard) section. For example, `*friend` matches `my.friend`.
+Because Datadog treats `my.friend` as a single word, the query `friend` doesn't match it. To match part of a word, use a wildcard as described in the [Multi-character wildcard](#multi-character-wildcard) section. For example, `*friend` matches `my.friend`.
 
 Straight (`'`) and curly (`’`) apostrophes are different characters, so `don't` doesn't match `don’t`. To match both, use a wildcard such as `don*`.
 
 ## Numerical values
 
 To search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+
 For example, retrieve all logs that have a response time over 100 ms with:
 
 ```
