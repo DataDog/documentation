@@ -514,7 +514,11 @@ Message placeholders insert conversation history or tool interactions into a sav
 
 The prompt version stores the placeholder's name and position, not the messages you pass at runtime. To move the history within the prompt, publish a new prompt version. You do not need to change application code.
 
-**Preview SDK access:** Contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager for the SDK version to use for your language.
+**SDK requirements:**
+
+- **Python:** `ddtrace` 4.16.0 or later.
+- **Node.js:** `dd-trace` 5.129.0 or later in the 5.x release line, or 6.18.0 or later.
+- **Go:** `dd-trace-go/v2` 2.12.0 or later.
 
 ### Define the placeholder
 
@@ -538,7 +542,7 @@ LLMObs.create_prompt(
 )
 ```
 
-The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see the [Use the Python SDK](#use-the-python-sdk) section.
+The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see [Manage prompts programmatically](#manage-prompts-programmatically).
 
 ### Supply runtime values
 
@@ -586,7 +590,7 @@ messages := rendered.Messages
 
 {{% tab "Node.js" %}}
 ```javascript
-const prompt = await tracer.llmobs.getPrompt('support-assistant')
+const prompt = await tracer.llmobs.prompts.getPrompt('support-assistant')
 
 const variables = {
   plan: 'enterprise',
@@ -688,7 +692,11 @@ Deploy the version to an environment when it is ready. Applications retrieving t
 
 Retrieve the prompt deployed to your application's environment, then pass its configuration to your model client.
 
-**Preview SDK access:** Contact Datadog Support or your Customer Success Manager for the SDK version to use for your language.
+**SDK requirements:**
+
+- **Python:** `ddtrace` 4.16.0 or later.
+- **Node.js:** `dd-trace` 5.129.0 or later in the 5.x release line, or 6.18.0 or later.
+- **Go:** `dd-trace-go/v2` 2.12.0 or later.
 
 These examples use a prompt named `summarizer` with the configuration shown above.
 
