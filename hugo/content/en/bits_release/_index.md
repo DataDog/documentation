@@ -1,7 +1,6 @@
 ---
 title: Bits Release
 description: "Learn how Bits Release validates your pull requests in production after deployment and reports whether the change behaved as intended."
-private: true
 is_beta: true
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-release/"
@@ -89,7 +88,7 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 
 ## Billing
 
-Bits Release is free during the private preview. It does not consume [AI Credits][9], and any temporary resources it creates while validating a change are not billed.
+Bits Release is free during the Preview. It does not consume [AI Credits][9], and any temporary resources it creates while validating a change are not billed.
 
 ## Further reading
 
