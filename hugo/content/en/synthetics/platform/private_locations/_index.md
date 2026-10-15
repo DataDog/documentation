@@ -926,7 +926,7 @@ Then, run the [configuration command based on your environment](#install-your-pr
 
 ### Run the latest browser versions
 
-The Chrome, Edge, and Firefox versions in the `latest` image update with each private location release, so they can trail the newest public browser releases. Use the opt-in `browsers-latest` image to run the newest browsers and their security patches sooner, which reduces the browser vulnerabilities (CVEs) reported against your private location.
+The Chrome, Edge, and Firefox versions in the `latest` image update with each private location release. As a result, they can be older than the newest versions released by the browser vendors. Use the opt-in `browsers-latest` image to run the newest browsers and their security patches sooner, which reduces the browser vulnerabilities (CVEs) reported against your private location.
 
 The `browsers-latest` image is rebuilt every week. To use it, pull the `browsers-latest` tag instead of `latest`:
 
