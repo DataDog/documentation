@@ -109979,6 +109979,181 @@ components:
       required:
         - data
       type: object
+    SavedFilterAttributes:
+      description: Saved filter details, including the full targeting rules and conditions.
+      properties:
+        archived_at:
+          description: The time the saved filter was archived. Omitted when the filter is not archived.
+          example: "2026-01-03T12:00:00Z"
+          format: date-time
+          type: string
+        created_at:
+          description: The time the saved filter was created.
+          example: "2026-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the saved filter.
+          example: "550e8400-e29b-41d4-a716-446655440091"
+          type: string
+        creation_type:
+          $ref: "#/components/schemas/SavedFilterCreationType"
+        description:
+          description: A description of the saved filter. Omitted when no description is set.
+          example: Users selected by email address or organization ID.
+          type: string
+        migration_metadata:
+          description: Optional JSON metadata supplied by migration tools for tracking the source of a saved filter.
+          example:
+            provider: launchdarkly
+            segment_key: early-access-users
+        name:
+          description: The name of the saved filter.
+          example: Early access users
+          type: string
+        targeting_rules:
+          description: Targeting rules combined with OR. Conditions within each rule are combined with AND. Both saved lists and saved rules use this structure.
+          items:
+            $ref: "#/components/schemas/SavedFilterTargetingRule"
+          type: array
+        updated_at:
+          description: The time the saved filter was last updated.
+          example: "2026-01-02T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - name
+        - creation_type
+        - targeting_rules
+        - created_by
+        - created_at
+        - updated_at
+      type: object
+    SavedFilterCondition:
+      description: An inline condition in a saved filter targeting rule.
+      properties:
+        attribute:
+          description: The attribute evaluated by the condition.
+          example: email
+          type: string
+        id:
+          description: The ID of the condition.
+          example: "550e8400-e29b-41d4-a716-446655440093"
+          format: uuid
+          type: string
+        operator:
+          $ref: "#/components/schemas/SavedFilterConditionOperator"
+        value:
+          description: Values used by the condition operator.
+          example:
+            - user@example.com
+          items:
+            type: string
+          type: array
+      required:
+        - id
+        - operator
+        - attribute
+        - value
+      type: object
+    SavedFilterConditionOperator:
+      description: The comparison operator used by a saved filter condition.
+      enum:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+        - SEMVER_EQ
+        - SEMVER_NEQ
+        - SEMVER_LT
+        - SEMVER_LTE
+        - SEMVER_GT
+        - SEMVER_GTE
+      example: ONE_OF
+      type: string
+      x-enum-varnames:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+        - SEMVER_EQ
+        - SEMVER_NEQ
+        - SEMVER_LT
+        - SEMVER_LTE
+        - SEMVER_GT
+        - SEMVER_GTE
+    SavedFilterCreationType:
+      description: How the saved filter was authored. RULES indicates rule-based authoring and LIST indicates list import. Both types return targeting rules and conditions.
+      enum:
+        - RULES
+        - LIST
+      example: RULES
+      type: string
+      x-enum-varnames:
+        - RULES
+        - LIST
+    SavedFilterData:
+      description: A saved filter resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SavedFilterAttributes"
+        id:
+          description: The ID of the saved filter.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SavedFilterDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SavedFilterDataType:
+      description: The saved filter resource type.
+      enum:
+        - saved-filters
+      example: saved-filters
+      type: string
+      x-enum-varnames:
+        - SAVED_FILTERS
+    SavedFilterResponse:
+      description: Response containing a saved filter and its targeting rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/SavedFilterData"
+      required:
+        - data
+      type: object
+    SavedFilterTargetingRule:
+      description: A targeting rule in a saved filter. A rule matches when all its conditions match.
+      properties:
+        conditions:
+          description: Conditions combined with AND within this targeting rule.
+          items:
+            $ref: "#/components/schemas/SavedFilterCondition"
+          type: array
+        id:
+          description: The ID of the targeting rule.
+          example: "550e8400-e29b-41d4-a716-446655440092"
+          format: uuid
+          type: string
+      required:
+        - id
+        - conditions
+      type: object
     ScaRequest:
       description: The top-level request object for submitting a Software Composition Analysis (SCA) scan result.
       properties:
@@ -173597,6 +173772,110 @@ paths:
         operator: AND
         permissions:
           - feature_flag_config_write
+  /api/v2/feature-flags/saved-filters/{saved_filter_id}:
+    get:
+      description: |-
+        Returns a saved filter by ID, including its full targeting rules, conditions, and values.
+        Supports both saved lists and saved rules. Targeting rules are combined with OR,
+        and conditions within each rule are combined with AND.
+        Returns the stored filter definition rather than evaluating it against users or organizations.
+        Archived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.
+      operationId: GetSavedFilter
+      parameters:
+        - description: The ID of the saved filter.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          in: path
+          name: saved_filter_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: A saved rule matching an email address OR an organization ID
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T12:00:00Z"
+                        created_by: "550e8400-e29b-41d4-a716-446655440091"
+                        creation_type: RULES
+                        description: Users selected by email address or organization ID.
+                        name: Early access users
+                        targeting_rules:
+                          - conditions:
+                              - attribute: email
+                                id: "550e8400-e29b-41d4-a716-446655440093"
+                                operator: ONE_OF
+                                value: ["user@example.com"]
+                            id: "550e8400-e29b-41d4-a716-446655440092"
+                          - conditions:
+                              - attribute: org_id
+                                id: "550e8400-e29b-41d4-a716-446655440095"
+                                operator: ONE_OF
+                                value: ["12345", "67890"]
+                            id: "550e8400-e29b-41d4-a716-446655440094"
+                        updated_at: "2026-01-02T12:00:00Z"
+                      id: "550e8400-e29b-41d4-a716-446655440090"
+                      type: saved-filters
+                saved_list:
+                  summary: A saved list containing user IDs
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T12:00:00Z"
+                        created_by: "550e8400-e29b-41d4-a716-446655440091"
+                        creation_type: LIST
+                        name: Early access user list
+                        targeting_rules:
+                          - conditions:
+                              - attribute: user_id
+                                id: "550e8400-e29b-41d4-a716-446655440098"
+                                operator: ONE_OF
+                                value: ["user-123", "user-456"]
+                            id: "550e8400-e29b-41d4-a716-446655440097"
+                        updated_at: "2026-01-02T12:00:00Z"
+                      id: "550e8400-e29b-41d4-a716-446655440096"
+                      type: saved-filters
+              schema:
+                $ref: "#/components/schemas/SavedFilterResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+      summary: Get a saved filter
+      tags:
+        - Feature Flags
+      x-menu-order: 23
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
   /api/v2/feature-flags/{feature_flag_id}:
     get:
       description: |-

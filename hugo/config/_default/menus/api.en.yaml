@@ -14730,6 +14730,18 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Get a saved filter
+      url: /api/latest/feature-flags/get-a-saved-filter/
+      identifier: feature-flags-get-a-saved-filter
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSavedFilter
+        unstable: []
+        order: 23
     - name: Stop a progressive rollout
       url: /api/latest/feature-flags/stop-a-progressive-rollout/
       identifier: feature-flags-stop-a-progressive-rollout

@@ -11,3 +11,9 @@ entries:
       - UnarchiveFeatureFlag
       - UpdateFeatureFlag
     title: Add Feature Flag list filters and pagination details
+  - change_type: added
+    date: '2026-10-15'
+    link: https://github.com/DataDog/documentation/pull/40692
+    operations:
+      - GetSavedFilter
+    title: publish GetSavedFilter
