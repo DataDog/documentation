@@ -28,7 +28,7 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 Data Access Control allows you to create a Restricted Dataset, specifying data that only users in designated teams or roles can access.
 
-To view all of your Restricted Datasets, navigate to [Organization Settings][6]. In the left pane, Under the {{< ui >}}Access{{< /ui >}} heading, select [Access Control][7]. This action opens the {{< ui >}}Data Access Control{{< /ui >}} tab, which has three sections:
+To view all of your Restricted Datasets, navigate to [Organization Settings][6]. In the left pane, under the {{< ui >}}Access{{< /ui >}} heading, select [Access Control][7]. This action opens the {{< ui >}}Data Access Control{{< /ui >}} tab, which has three sections:
 
 - {{< ui >}}Restricted Datasets{{< /ui >}}: The Restricted Datasets in your organization, with the teams or roles that can access each one and the data it covers.
 - {{< ui >}}Unrestricted Access{{< /ui >}}: The teams and roles with [unrestricted access](#unrestricted-user-groups) to a telemetry type.
@@ -48,7 +48,6 @@ To create a Restricted Dataset, identify the data to be restricted with a query.
 
 Choose Data Scope
 : The boundary definition that describes which data to restrict to a specific set of users. Select a product next to {{< ui >}}In Product{{< /ui >}}, then select a tag key and one or more values next to {{< ui >}}Tagged{{< /ui >}}. To add another product to the same dataset, click {{< ui >}}New Product{{< /ui >}}. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals (Cloud SIEM signals only).
-
 
 Designate Users with Access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
