@@ -56,7 +56,7 @@ attributes:
        - **Recommendations**: 90 days
   - product: Cloud Security
     data_type: |
-       - **Findings and resolved vulnerabilities**: 15 months
+       - **Findings and resolved vulnerabilities**: 30 days
   - product: Cloud SIEM
     data_type: |
        - **Signals**: 15 months
