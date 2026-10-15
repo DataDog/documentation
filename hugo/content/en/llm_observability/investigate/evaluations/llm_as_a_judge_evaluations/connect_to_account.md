@@ -152,7 +152,7 @@ To rotate the client secret, generate a new secret in your IdP, update it in Dat
 
 ##### Example: Okta
 
-Client credentials on an Okta custom authorization server requires an Okta plan that supports it.
+The client credentials grant on an Okta custom authorization server requires an Okta plan that supports it.
 
 1. In Okta, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}API{{< /ui >}} > {{< ui >}}Authorization Servers{{< /ui >}} and use a custom authorization server whose audience matches what your provider validates. Your token URL is `<ISSUER>/v1/token`.
 1. On the authorization server's {{< ui >}}Scopes{{< /ui >}} tab, add a scope for provider access, such as `gateway.invoke`. Okta requires at least one scope for client credentials requests.
