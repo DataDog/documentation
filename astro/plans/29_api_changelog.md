@@ -35,7 +35,7 @@ Follow-up decisions from the user:
 I checked the live data against the live spec:
 
 - **Every operation ID exists** in the v1 or v2 spec.
-- **Every file slug except `ai-impact` matches a category slug** (`toCategorySlug` of a spec tag). The page must handle a product with no category page.
+- **All but one file slug match a category slug** (`toCategorySlug` of a spec tag). The page must handle a product with no category page.
 
 ### Astro conventions that apply
 
@@ -99,7 +99,7 @@ Only one filter dimension (change type), single select. Each entry belongs to ex
   - `normalizeChangelog(rawFilesBySlug)` → `ChangelogEntry[]` (`{ productSlug, date, bucket, title, operationIds }`).
     - Sorted by date (desc), then product slug, then title. Hugo's order within a date wasn't deterministic, and ours needs to be for snapshots.
   - `resolveChangelogEntries(entries, categoriesView, lang)` → `ResolvedChangelogEntry[]`. It adds:
-    - `product: { name, href? }`. The name and href come from the category with a matching slug. Otherwise the name is a title-cased slug (`ai-impact` → "Ai Impact", like Hugo) and there's no href.
+    - `product: { name, href? }`. The name and href come from the category with a matching slug. Otherwise the name is a title-cased slug (`deployment-gates` → "Deployment Gates") and there's no href.
     - `operations: { operationId, href? }[]`, from an `operationId` → operation-page map built across all categories.
     - Unknown IDs render unlinked, as Hugo did. Linking known ones is the "Astro conventions" improvement.
     - If an operation ID shows up in more than one category, link the first one and add a test that pins this.
@@ -178,7 +178,7 @@ Write each test first and confirm it fails before implementing. While developing
 1. **Fixture and alias.**
    - Add `tests/fixtures/api/changelog/` with 3–4 small, hand-trimmed YAML files, each starting with a one-line provenance banner. Together they need:
      - a product whose slug is a category in `tests/fixtures/api/` (check which ones the partial spec includes)
-     - the `ai-impact` file, for the no-category fallback
+     - the `deployment-gates` file, for the no-category fallback
      - a `removed` entry
      - two entries on the same date in different products
      - one operation ID that isn't in the fixture spec

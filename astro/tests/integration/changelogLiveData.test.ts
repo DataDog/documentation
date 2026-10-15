@@ -11,8 +11,8 @@ import { loadRawChangelogFiles, normalizeChangelog } from "@lib/api/changelog";
 describe("hugo/data/changelog", () => {
   it("reads real data, not the unit-test fixture", () => {
     expect(Object.keys(loadRawChangelogFiles())).not.toEqual([
-      "ai-impact",
       "dashboards",
+      "deployment-gates",
       "incidents",
     ]);
   });

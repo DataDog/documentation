@@ -36,8 +36,8 @@ function makeEntries(count: number, bucket: ChangelogBucket): ChangelogEntry[] {
 describe("loadRawChangelogFiles", () => {
   it("reads the frozen fixture, not the live Hugo data", () => {
     expect(Object.keys(loadRawChangelogFiles()).sort()).toEqual([
-      "ai-impact",
       "dashboards",
+      "deployment-gates",
       "incidents",
     ]);
   });
@@ -125,12 +125,12 @@ describe("normalizeChangelog", () => {
     expect(
       entries.map((entry) => [entry.date, entry.productSlug, entry.bucket]),
     ).toEqual([
-      ["2026-10-08", "ai-impact", "breaking"],
       ["2026-10-08", "dashboards", "modified"],
+      ["2026-10-08", "deployment-gates", "breaking"],
       ["2026-10-08", "incidents", "added"],
       ["2026-10-07", "incidents", "deprecated"],
       ["2026-10-06", "dashboards", "modified"],
-      ["2026-10-02", "ai-impact", "added"],
+      ["2026-10-02", "deployment-gates", "added"],
     ]);
   });
 });
