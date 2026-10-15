@@ -1,6 +1,5 @@
 ---
 title: Data Streams Monitoring for Amazon EventBridge
-title: Data Streams Monitoring for Amazon EventBridge
 description: Enable Data Streams Monitoring for AWS Lambda functions that produce to or consume from Amazon EventBridge.
 further_reading:
     - link: '/data_streams/setup/serverless/aws_lambda/'

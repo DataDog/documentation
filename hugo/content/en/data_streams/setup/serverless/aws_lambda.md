@@ -37,13 +37,11 @@ Context injection and extraction are automatic for both producers and consumers.
 | Java    | Datadog Java Lambda layer    | 28              |
 | .NET    | Datadog .NET Lambda layer    | 26              |
 | Go      | Go tracer (`dd-trace-go`)    | 2.10.0          |
-| Python  | Datadog Python Lambda layer  | 8.129.0         |
-| Node.js | Datadog Node.js Lambda layer | 12.143.0        |
+| Python  | Datadog Python Lambda layer  | 129             |
+| Node.js | Datadog Node.js Lambda layer | 143             |
 
 ### Setup
 
-1. Set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on each Lambda function that produces or consumes messages.
-1. On each Lambda function that consumes from Amazon EventBridge, set the `DD_DSM_EXCHANGE_NAME` environment variable to the event bus name. DSM uses this value to identify the event bus in your pipeline.
 1. Set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on each Lambda function that produces or consumes messages.
 1. On each Lambda function that consumes from Amazon EventBridge, set the `DD_DSM_EXCHANGE_NAME` environment variable to the event bus name. DSM uses this value to identify the event bus in your pipeline.
 
