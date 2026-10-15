@@ -13,7 +13,7 @@ further_reading:
     text: "Test Parallelization Best Practices"
 ---
 
-This reference describes `ddtest` 1.12.0 and later. For the guided setup, see [Set Up Test Parallelization](/tests/test_parallelization/setup/).
+For the guided setup, see [Set Up Test Parallelization](/tests/test_parallelization/setup/).
 
 ## Environment variables
 
@@ -168,7 +168,7 @@ Keep options that affect test behavior, such as filters, seeds, configuration, a
 
 A wrapper separator before the framework executable is preserved, for example `npx -- jest --runInBand`. A framework's own `--` ends its options: discovery flags go before it, and execution replaces positional selection after it with assigned files. Do not rely on a command's positional paths to restrict every framework; use the [framework setup instructions](/tests/test_parallelization/setup/#choose-your-language-and-framework).
 
-For pytest, the default is `python -m pytest <files>`. Since version 1.7.0, `--command` replaces that base command without adding `-m pytest`. Keep extra pytest options in `PYTEST_ADDOPTS`; `ddtest` preserves its value and appends `--ddtrace`.
+For pytest, the default is `python -m pytest <files>`. `--command` replaces that base command without adding `-m pytest`. Keep extra pytest options in `PYTEST_ADDOPTS`; `ddtest` preserves its value and appends `--ddtrace`.
 
 Test workers run non-interactively. Standard input is closed; prompts and interactive debuggers are not supported.
 
@@ -256,7 +256,7 @@ export DD_TEST_OPTIMIZATION_RUNTIME_TAGS='{"os.architecture":"x86_64","os.platfo
 ddtest run
 {{< /code-block >}}
 
-A complete set of `os.platform`, `os.architecture`, `os.version`, `runtime.name`, and `runtime.version` skips the runtime probe during planning. Partial overrides merge with detected values. See [local planning for a CI environment](https://github.com/DataDog/ddtest/blob/v1.12.0/docs/local-ci-skippable-tests.md).
+A complete set of `os.platform`, `os.architecture`, `os.version`, `runtime.name`, and `runtime.version` skips the runtime probe during planning. Partial overrides merge with detected values. See [local planning for a CI environment](https://github.com/DataDog/ddtest/blob/main/docs/local-ci-skippable-tests.md).
 
 `ddtest` also accepts the runner-specific `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS` environment variable and the `--runtime-tags` CLI flag.
 
@@ -276,8 +276,6 @@ Most integrations should treat `.testoptimization/` as a generated artifact. The
 | `.testoptimization/github/config` | GitHub Actions matrix output, written when `ddtest` detects GitHub Actions. |
 
 The HTTP cache under `.testoptimization/cache/http/` supplies Test Optimization data to the Datadog SDKs. Keep it with the plan. Files under `runner/cache/` and `tests-discovery/` are internal to `ddtest`; use the supported file lists for custom integrations.
-
-If upgrading from a pre-1.0 CLI, update consumers of legacy root-level plan files to the paths above. See the [1.0 upgrade guide](https://github.com/DataDog/ddtest/blob/v1.12.0/docs/upgrade-1.0.md).
 
 ## Use a plan with another test runner
 

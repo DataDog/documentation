@@ -18,7 +18,7 @@ Choose your language and framework, then connect `ddtest` to your CI provider. M
 ## Prerequisites
 
 - Set up [Test Optimization](/tests/setup/) for the suite. Reuse its credentials, `DD_SITE`, `DD_SERVICE`, and instrumentation.
-- Use `ddtest` **1.12.0 or later** for these instructions. Install the same version in planning and test jobs.
+- Use the latest `ddtest` release. Install the same version in planning and test jobs.
 - Install Git and check out the repository.
 - Keep the suite's runtime, dependencies, configuration, and required services. Run planning and tests from the same project directory and source revision.
 - Enable [Test Impact Analysis](/tests/test_impact_analysis/) for the service if you want to skip tests unaffected by a change. It is optional for parallelization.
@@ -27,11 +27,11 @@ Planning does not require a Datadog SDK. Ruby and Python can use one for full te
 
 ## Install ddtest
 
-Add this step to the jobs that need `ddtest`. This example pins the Linux AMD64 binary to version 1.12.0:
+Add this step to the jobs that need `ddtest`. This example downloads the latest Linux AMD64 binary:
 
 {{< code-block lang="bash" >}}
 mkdir -p bin
-curl -fsSL https://github.com/DataDog/ddtest/releases/download/v1.12.0/ddtest-linux-amd64 -o bin/ddtest
+curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/ddtest-linux-amd64 -o bin/ddtest
 chmod +x bin/ddtest
 {{< /code-block >}}
 
@@ -39,11 +39,11 @@ For another operating system or architecture, choose the matching asset from [DD
 
 {{< collapse-content title="Download with the GitHub CLI" level="h3" >}}
 
-If your CI job uses the GitHub CLI, download the same pinned release with:
+If your CI job uses the GitHub CLI, download the latest release with:
 
 {{< code-block lang="bash" >}}
 mkdir -p bin
-gh release download v1.12.0 --repo DataDog/ddtest --pattern ddtest-linux-amd64 --dir bin
+gh release download --repo DataDog/ddtest --pattern ddtest-linux-amd64 --dir bin
 mv bin/ddtest-linux-amd64 bin/ddtest
 chmod +x bin/ddtest
 {{< /code-block >}}
