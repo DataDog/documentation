@@ -260,10 +260,12 @@ For step-by-step instructions on setting up and configuring this integration for
 
 Use this integration to create a ServiceNow incident when a Datadog On-Call page triggers, and to page Datadog On-Call from a ServiceNow record.
 
+**Note**: The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.
+
 1. In Datadog, go to **Incident Response** > **On-Call** > **Settings**. On the left side, select **Integrations**.
 1. Click **ServiceNow**, then click **Add Connection** and configure the settings for the connection with your instance.
 1. Click a [routing rule][13] for a team, and add a rule that creates a ServiceNow incident when an On-Call page triggers.
-1. (Optional) If you have ITOM/ITSM integration version 2.9.3 or newer, you can create a Datadog On-Call page from ServiceNow.<br /> Instructions on how to do so can be found below under **Create a Datadog On-Call page from ServiceNow**.
+1. (Optional) To create a Datadog On-Call page from ServiceNow, see [Create a Datadog On-Call page from ServiceNow](#create-on-call-page).
 
 ## Sync data bidirectionally between ServiceNow and Datadog Work/Incident Management and On-Call {#sync-bidirectionally}
 
@@ -380,7 +382,19 @@ To populate data into the ServiceNow incident, you have to modify your script to
 {{% collapse-content title="Create a Datadog On-Call page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
 To create a Datadog On-Call page from a ServiceNow record, add a new business rule in ServiceNow that calls the `PublishOnCallPage` script include. The script include uses the credentials from the **Configuration** record you create in [Sync data bidirectionally](#sync-bidirectionally), so complete that section first.
 
-`PublishOnCallPage` takes three arguments, in order: the type of target to page, the identifier of that target, and the urgency of the page. In the following example, the business rule pages the Datadog user with the UUID `<USER_UUID>` at high urgency:
+`PublishOnCallPage` takes three arguments, in order:
+
+| Argument | Required | Description |
+| -------- | -------- | ----------- |
+| Target type | Yes | The kind of target to page: `team_handle`, `team_uuid`, or `user_uuid`. |
+| Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's UUID, or the user's UUID. |
+| Urgency | No | The urgency of the page: `high` or `low`. Defaults to `high`. |
+
+If the target type or target identifier is empty, the script include logs a message and does not create a page.
+
+The script include populates the rest of the page from the ServiceNow record: the title and description come from the record's `title` and `description` fields (or `short_description` if the record has no `title` field), and the record's priority is added to the page as a `priority:<PRIORITY>` tag.
+
+In the following example, the business rule pages the Datadog user with the UUID `<USER_UUID>` at high urgency:
 
 ```javascript
 (function executeRule(current, previous /* null when async */) {
