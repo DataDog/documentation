@@ -318,7 +318,7 @@ describe("getChangelogView", () => {
   it("resolves the fixture for a locale", async () => {
     const entries = await getChangelogView("en");
     expect(entries).toHaveLength(6);
-    expect(entries[1]).toMatchObject({
+    expect(entries[0]).toMatchObject({
       productSlug: "dashboards",
       product: { name: "Dashboards", href: "/api/latest/dashboards/" },
       title: "Add Heatgrid dashboard widget support",

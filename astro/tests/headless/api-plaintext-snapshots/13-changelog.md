@@ -12,8 +12,8 @@ Review recent changes to Datadog API operations, ordered newest first. Entries a
 
 ## 2026-10-08
 
-- **Breaking**: Ai Impact: Document AI Impact user activity endpoint under DORA Metrics (Operations: `CreateAIImpactUserActivity`)
 - **Modified**: [Dashboards](/api/latest/dashboards/): Add Heatgrid dashboard widget support (Operations: [`CreateDashboard`](/api/latest/dashboards/create-a-new-dashboard/), [`ListDashboards`](/api/latest/dashboards/get-all-dashboards/))
+- **Breaking**: Deployment Gates: Remove legacy Deployment Gate evaluation endpoint (Operations: `ListDeploymentGateEvaluations`)
 - **Added**: [Incidents](/api/latest/incidents/): Add incident listing endpoint (Operations: [`ListIncidents`](/api/latest/incidents/get-a-list-of-incidents/))
 
 ## 2026-10-07
@@ -26,4 +26,4 @@ Review recent changes to Datadog API operations, ordered newest first. Entries a
 
 ## 2026-10-02
 
-- **Added**: Ai Impact: Add AI Impact user activity endpoint (Operations: `CreateAIImpactUserActivity`)
+- **Added**: Deployment Gates: Document public Deployment Gate evaluation endpoint (Operations: `ListDeploymentGateEvaluations`)
