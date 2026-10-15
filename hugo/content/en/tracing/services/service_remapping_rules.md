@@ -50,7 +50,7 @@ You can create service remapping rules only for services instrumented with suppo
 1. Use the search bar to build a query of the entities you want to remap.
    - You can select one or more entities, but all must be of the same type (service, inferred service, datastore, or queue). Select services based on their `service` or `peer.service` tag, not by their Display Name metadata.
    - You can also use wildcards (*) to select multiple entities at once.
-   - The service query supports all tags and the following attributes: `@language`, `@http.endpoint`, `@http.method`, `@peer.*`. Other attribute values are not supported.
+   - The service query supports all tags and the following attributes: `@language`, `@http.endpoint`, `@http.method`, `@peer.*`.
    - If you're correlating a service with infrastructure tags, you can only select _one_ service. Choose infra tag(s) to correlate telemetry on. All telemetry with the same infra tag(s) as the service chosen will be remapped to a single unified service name.
 
 ### Step 2: Specify new entity name
