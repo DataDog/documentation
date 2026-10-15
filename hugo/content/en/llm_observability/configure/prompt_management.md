@@ -205,6 +205,8 @@ To retrieve an environment's deployed prompt through the Agent, complete the fol
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
+Follow the [Node.js SDK initialization guide][16] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+
 #### Retrieve directly from Datadog
 
 Replace the placeholders and set the following environment variables before initializing `dd-trace`:
@@ -226,6 +228,8 @@ Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow d
 {{% /tab %}}
 {{% tab "Go" %}}
 
+Follow the [Go SDK setup guide][17] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+
 #### Retrieve directly from Datadog
 Replace the placeholders and set the following environment variables before starting the tracer:
 
@@ -235,11 +239,13 @@ export DD_SERVICE="<SERVICE_NAME>"
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 ```
 
-Follow the [Go SDK setup guide][17] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+#### Retrieve through the Agent
 
-Keep the `_ "github.com/DataDog/dd-trace-go/v2/openfeature"` import: together with the setting above, it enables reporting which prompt version each user is assigned in an A/B test. No additional initialization is needed for Prompt Management or A/B test reporting.
+To retrieve an environment's deployed prompt through the Agent, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` before starting the tracer and add the following import:
 
 Optionally, set `DD_SITE`, `DD_API_KEY`, and `DD_APP_KEY` so the application can retrieve a deployed prompt directly from Datadog if it is unavailable through the Agent. The same credentials let you retrieve deployed prompts without an Agent. Use a [fallback](#retrieve-format-and-use-a-prompt) to keep the application working if retrieval fails.
+
+Neither key is required when retrieval succeeds through the Agent. Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow direct retrieval if the Agent is unavailable, configure both keys.
 
 [17]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}

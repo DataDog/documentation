@@ -125,7 +125,7 @@ Alternatively, use [agentless delivery][20] to retrieve prompt assignments and r
 Use `dd-trace-go/v2` **2.12.0 or later**, including the `openfeature` package. Set the following before [starting the tracer][19]:
 
 ```shell
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 ```
 
 Add the import that enables experiment reporting:
@@ -136,8 +136,11 @@ import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
 
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
+Alternatively, use [agentless delivery][20] to retrieve prompt assignments and report exposures without an Agent. This setup requires `DD_API_KEY` in the application.
+
 [16]: /remote_configuration/
 [19]: /tracing/trace_collection/dd_libraries/go/#getting-started
+[20]: /feature_flags/server/go/
 {{% /tab %}}
 {{< /tabs >}}
 
