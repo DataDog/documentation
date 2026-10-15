@@ -152,8 +152,8 @@ Use the `*` symbol to match any number of characters, including zero. In the log
 
 A single `*` doesn't match across words. For example, `waiting*time` doesn't match the log message `waiting until next renew time`. To match across words, use one of the following:
 
-* `**` matches any characters, including spaces and punctuation between words. For example, `waiting**time` matches `waiting until next renew time`.
-* An escaped space (`\ `) matches consecutive words, and each word can contain wildcards. For example, `waiting\ un*` matches `waiting until next renew time`.
+* **Double wildcard (`**`)**: Matches any characters, including spaces and punctuation between words. For example, `waiting**time` matches `waiting until next renew time`.
+* **Escaped space (`\ `)**: Matches consecutive words, and each word can contain wildcards. For example, `waiting\ un*` matches `waiting until next renew time`.
 
 **Note**: Wildcards take effect only outside double quotes. Inside double quotes, `*` is treated like other punctuation and ignored, so `"*test*"` searches for the word `test`.
 
