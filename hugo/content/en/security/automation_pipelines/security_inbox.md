@@ -52,7 +52,7 @@ Default rules appear alongside your own rules on the [Findings Automation][2] pa
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. If your organization is enrolled in the Preview for Code Security findings on non-default branches, Security Inbox rules without an `@git.branch` or `@git.is_default_branch` filter apply to Code Security findings from the latest commit on the default branch. See [Code Security findings on non-default branches][4].
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. By default, Security Inbox rules apply to Code Security findings from the latest commit on the default branch. If your organization is enrolled in the [Preview for Code Security findings on non-default branches][4], you can use this field to specify other branches where you want the rule applied.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 

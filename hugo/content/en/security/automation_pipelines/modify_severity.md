@@ -44,7 +44,7 @@ Configure severity modifier rules to adjust finding severities to reflect your o
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. If your organization is enrolled in the Preview for Code Security findings on non-default branches, severity modifier rules without an `@git.branch` or `@git.is_default_branch` filter apply to Code Security findings from all branches and commits. See [Code Security findings on non-default branches][3].
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. By default, severity modifier rules apply to Code Security findings from the latest commit on the default branch. If your organization is enrolled in the [Preview for Code Security findings on non-default branches][3], severity modifier rules instead apply to findings from all branches and commits. You can use this field to limit which branches the rule applies to.
 1. Optionally, click **Add Severity** to filter findings by severity level. The rule matches against each finding's Datadog-adjusted severity, before any user-defined adjustments.
 1. Define the severity modification action:
     - **Set to a specific level**: Sets matching findings to a fixed severity. Choose from **Info / None**, **Low**, **Medium**, **High**, or **Critical**.

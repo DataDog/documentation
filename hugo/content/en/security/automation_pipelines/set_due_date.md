@@ -41,7 +41,7 @@ Configure due date rules to ensure findings are addressed within your specified 
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. If your organization is enrolled in the Preview for Code Security findings on non-default branches, due date rules without an `@git.branch` or `@git.is_default_branch` filter apply to Code Security findings from the latest commit on the default branch. See [Code Security findings on non-default branches][3].
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. By default, due date rules apply to Code Security findings from the latest commit on the default branch. If your organization is enrolled in the [Preview for Code Security findings on non-default branches][3], you can use this field to specify other branches where you want the rule applied.
 1. Set a due date for each severity level that needs one.
 1. If the rule includes a CVE-based finding type (Library, Container Image, or Host vulnerability), under **Calculate due dates from**, select the base date for the SLA clock:
    - **First Seen Date**: Starts the SLA clock when Datadog first detects the finding.

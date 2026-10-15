@@ -48,8 +48,8 @@ To create a notification rule, specify the conditions under which the rule shoul
     - **Signal**: Suspicious activity that poses an active threat against your infrastructure.
 1. Select one or more severity levels.
 1. Specify the tags and attributes that must be present for the notification rule to be triggered.
-   For Code Security findings (Static Code Vulnerabilities, Library Vulnerabilities, Secrets, and Infrastructure as Code), notification rules apply only to findings from the latest commit on the default branch. Notifications for other branches are in Preview. If your organization is enrolled, add an `@git.branch` or `@git.is_default_branch` filter to include findings from other branches. For example, use `@git.is_default_branch:false` to target all non-default branches, or `@git.branch:staging` to target the `staging` branch.
-   <div class="alert alert-tip">If you selected <strong>Signal</strong> in step 3, you can get notifications for completed <a href="/bits_ai/bits_security_analyst">Bits Security Analyst</a> investigations by adding the tag <code>@workflow.bits_investigator.state:*</code>.</div>
+   - If you selected **Finding** in step 3, the rule applies by default only to Code Security findings from the latest commit on the default branch. If your organization is enrolled in the [Preview for Code Security findings on non-default branches][5], you can use the tags and attributes to specify other branches where you want the rule applied. For example, use `@git.is_default_branch:false` to apply the rule to all non-default branches, or `@git.branch:staging` to apply it only to the `staging` branch.
+   - If you selected **Signal** in step 3, you can get notifications for completed [Bits Security Analyst][6] investigations by adding the tag `@workflow.bits_investigator.state:*`.
 1. If you selected **Finding** in step 3, select the frequency of the notifications:
    - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.
    - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
@@ -115,3 +115,5 @@ The fallback channel is also used for test notifications.
 [2]: /security/notifications/#notification-channels
 [3]: /account_management/teams/
 [4]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
+[5]: /security/automation_pipelines/#code-security-findings-on-non-default-branches
+[6]: /bits_ai/bits_security_analyst

@@ -53,16 +53,18 @@ Automation Pipelines operates through a rules-based system that allows you to au
 
 ### Code Security findings on non-default branches
 
+Automation rules handle Code Security findings from non-default branches differently depending on the rule type. Knowing each rule type's default branch scope helps you avoid muting, ticketing, or escalating findings you didn't intend to target.
+
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
 Automation for Code Security findings on non-default branches is in Preview. If your organization isn't enrolled in the Preview, automation rules apply only to Code Security findings from the latest commit on the default branch.
 {{< /callout >}}
 
-With the Preview, Code Security reports Static Code Vulnerabilities, Library Vulnerabilities, Secrets, and Infrastructure as Code findings from every branch and commit. If an automation rule doesn't filter on `@git.branch` or `@git.is_default_branch`, the branches it applies to depend on the rule type:
+With the Preview enabled, Code Security reports Static Code Vulnerabilities, Library Vulnerabilities, Secrets, and Infrastructure as Code findings from every branch and commit. If an automation rule doesn't filter on `@git.branch` or `@git.is_default_branch`, the branches the rule applies to depend on the rule type:
 
 - Due date, Security Inbox, and ticket creation rules apply only to findings from the latest commit on the default branch.
-- Mute and severity modifier rules apply to findings from all branches and commits. For example, a mute rule that you created for findings on the default branch also mutes matching findings on feature branches.
+- Mute and severity modifier rules apply to findings from all branches and commits. For example, a mute rule created for findings on the default branch also mutes matching findings on feature branches.
 
-To target other branches or restrict a rule to specific branches, add an `@git.branch` or `@git.is_default_branch` filter to the rule's **Any of these tags or attributes** field. For example, use `@git.is_default_branch:false` to target all non-default branches, or `@git.branch:staging` to target the `staging` branch.
+To control which branches a rule applies to, use the rule field **Any of these tags or attributes** to specify branches where you *do* want the rule applied. For example, use `@git.is_default_branch:false` to apply the rule to all non-default branches, or `@git.branch:staging` to apply it only to the `staging` branch.
 
 ## Use cases
 
