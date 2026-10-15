@@ -47,7 +47,7 @@ Coverage follows your instrumentation. A backend change on a service with APM an
 
 ## Verdicts
 
-A validation ends in one of four verdicts. **Passed** and **Failed** are conclusions about your change. **Not enough data** and **Inconclusive** mean Bits Release could not reach one, so the change is worth a look of your own.
+A validation ends in one of four verdicts. **Passed** and **Failed** are conclusions about your change. **Not enough data** and **Inconclusive** mean Bits Release could not reach one, and need your attention.
 
 | Verdict | Meaning |
 | ------- | ------- |
