@@ -685,7 +685,7 @@ Creates a directional link between two work items (cases). The relationship is s
 - CASE-910 duplicates CASE-1234. Link them.
 
 ### `get_datadog_case_links`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
 Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
 
@@ -693,7 +693,7 @@ Lists all links for a work item (case), including each link's ID, relationship t
 - Is anything blocking the database migration case?
 
 ### `unlink_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
 Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
 
