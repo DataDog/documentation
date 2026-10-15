@@ -27,6 +27,8 @@ The Synthetic Monitoring & Testing Overview page gives you a single view of the 
 
 Use this page as the starting point for triaging failures and for deciding where to add test coverage.
 
+{{< img src="synthetics/explore/overview/overview_page.png" alt="The Synthetic Monitoring & Testing Overview page, showing the Test health section with a failure map grouped by location and a list of tests in alert, and the Coverage gaps section with service cards of tested and untested endpoints." style="width:100%;" >}}
+
 ## Prerequisites
 
 - To see untested endpoints, enable [APM][1] for your services.
@@ -62,6 +64,8 @@ Use the {{< ui >}}Group by{{< /ui >}} menu to choose how the map groups tests:
 
 When you group by location, a test appears under every location it runs from. Each tile shows whether the test is failing in that location. As a result, the tile counts can add up to more than your total number of tests.
 
+{{< img src="synthetics/explore/overview/failure_map.png" alt="The failure map grouped by location, split into OK and In alert sections, with tiles sized by the number of tests in each location." style="width:100%;" >}}
+
 ### Act on a failing test
 
 The list next to the map shows every test in alert. Each entry shows the test name, the URL or request it checks, and the locations where it fails.
@@ -79,6 +83,8 @@ Click the kebab menu (**⋮**) on a test to:
 - {{< ui >}}Run test now{{< /ui >}}: Trigger a test run outside its schedule.
 - {{< ui >}}Pause scheduling{{< /ui >}}: Stop scheduled runs for the test.
 - {{< ui >}}Open in Results Explorer{{< /ui >}}: See the test's results in the [Results Explorer][3].
+
+{{< img src="synthetics/explore/overview/failing_test_actions.png" alt="The failure map filtered to one location, next to the list of tests in alert for that location. Investigate With Bits is highlighted on the first test, and its kebab menu is open with Run test now, Pause scheduling, and Open in Results Explorer." style="width:100%;" >}}
 
 ## Coverage gaps
 
@@ -101,6 +107,8 @@ High traffic is defined as follows:
 - **Endpoints**: Across the top 20 services, Datadog sorts endpoints by number of requests over the past week. The endpoints that together make up 90% of requests are high traffic.
 - **Views**: Across the top 20 applications, Datadog sorts views by number of views over the past week. The views that together make up 90% of views are high traffic.
 
+{{< img src="synthetics/explore/overview/coverage_grid.png" alt="The Coverage gaps section in the Endpoints view with Group by service on. Service cards show orange squares for high-traffic untested endpoints, gray squares for lower-traffic untested endpoints, and blue squares for tested endpoints. The selected service's untested endpoints are listed on the left, ranked by traffic." style="width:100%;" >}}
+
 ### Untested endpoints
 
 The {{< ui >}}Endpoints{{< /ui >}} view lists untested API endpoints from APM. It shows the top 20 services by traffic. Each entry shows the HTTP method, the path, and the service.
@@ -113,6 +121,8 @@ To create a test for an endpoint:
 2. Hover over the endpoint at the top of the list, which has the most requests over the past week.
 3. Click {{< ui >}}Create an API Test{{< /ui >}}.
 4. In the new [API test][4], which opens with the endpoint URL prefilled, complete the test configuration and click {{< ui >}}Save{{< /ui >}}.
+
+{{< img src="synthetics/explore/overview/create_api_test.png" alt="An untested endpoint in the list on hover, showing the Create an API Test button, next to the selected service card in the coverage grid." style="width:100%;" >}}
 
 ### Untested views
 
