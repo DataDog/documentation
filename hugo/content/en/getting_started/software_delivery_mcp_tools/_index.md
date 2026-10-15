@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Software Delivery MCP Tools
-description: Connect AI agents to your CI Visibility and Test Optimization data using the Datadog MCP Server.
+description: Connect AI agents to your CI Visibility, Test Optimization, and Deployment Gates data using the Datadog MCP Server.
 further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
@@ -11,6 +11,9 @@ further_reading:
 - link: "tests/"
   tag: "Documentation"
   text: "Test Optimization"
+- link: "deployment_gates/"
+  tag: "Documentation"
+  text: "Deployment Gates"
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
   text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server"
@@ -18,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], and [DORA metrics][9] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [DORA metrics][9], and [Deployment Gates][10] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Use cases
 
@@ -33,6 +36,8 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
 - **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions or GitLab job without leaving the agent session.
 - **Checking PR health**: Get a combined view of CI failures, code coverage, and quality or security violations for a pull request.
+- **Investigating Deployment Gate failures**: Find out which rules caused a gate to fail and whether the failure blocked the deployment.
+- **Reviewing Deployment Gate configuration**: See which gates and rules apply to a service and environment.
 
 ## Available tools
 
@@ -77,6 +82,23 @@ The `software-delivery` toolset includes the following tools:
 `retry_datadog_ci_job`
 : Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. For other CI providers, use the provider's UI to rerun.
 
+`search_datadog_deployment_gates`
+: Search configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
+
+`get_datadog_deployment_gate`
+: Get one configured Deployment Gate by its gate ID, including its rules and settings.
+
+`search_datadog_deployment_gate_evaluations`
+: Search Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
+
+`get_datadog_deployment_gate_evaluation`
+: Get a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
+
+`search_datadog_deployment_gate_rule_evaluations`
+: Search individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
+
+The Deployment Gates tools are read-only and require the `DeploymentGatesRead` permission. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
+
 ## Example prompts
 
 After you are connected, try prompts like:
@@ -91,6 +113,9 @@ After you are connected, try prompts like:
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Which test optimization features are enabled for the `auth-service`?
 - Quarantine all active flaky tests in the `checkout-service` repository.
+- Why did the Deployment Gate for `checkout` in `prod` fail on the last deployment?
+- Which Deployment Gate rules for the `checkout` service in `prod` are in dry run?
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Setup
 
@@ -172,3 +197,4 @@ For flaky failures, the skill chains into `triage-flaky-test` for a deeper inves
 [7]: https://github.com/DataDog/pup
 [8]: /code_coverage/
 [9]: /delivery_performance/dora_metrics/
+[10]: /deployment_gates/

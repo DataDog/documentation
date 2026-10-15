@@ -12,6 +12,8 @@ further_reading:
 
 This guide shows the complete workflow for managing a Reference Table backed by a local CSV file with the [Reference Tables API][1]. It creates an upload, pushes the CSV data to the returned URLs, creates the table, patches it with new data, and deletes it.
 
+To update individual rows without uploading another CSV file, [edit rows in the UI][4].
+
 Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and application keys.
 
 1. Create a reference table upload. Provide the CSV `headers`, the number of parts you plan to upload in `part_count`, and the maximum size of each part in bytes in `part_size`.
@@ -137,3 +139,4 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
 [1]: /api/latest/reference-tables/
 [2]: /api/latest/reference-tables/#update-reference-table
 [3]: /api/latest/reference-tables/#delete-table
+[4]: /reference_tables/#edit-rows-in-the-ui
