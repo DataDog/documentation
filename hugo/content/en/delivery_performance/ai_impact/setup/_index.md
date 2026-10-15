@@ -168,5 +168,5 @@ To detect automation bot-authored commits and PRs, enable automatic bot detectio
 [8]: /integrations/github-copilot/
 [9]: /ai_agents_console/setup/#option-2-opentelemetry-otlp
 [10]: /ai_agents_console/setup/#option-3-forward-data-through-the-datadog-agent
-[11]: /api/latest/dora-metrics/send-ai-tool-user-activity/
+[11]: /api/latest/delivery-performance/send-ai-tool-user-activity/
 [12]: https://app.datadoghq.com/ci/settings/dora

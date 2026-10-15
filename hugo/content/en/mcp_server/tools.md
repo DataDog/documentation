@@ -2033,6 +2033,13 @@ Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
 
+### `test_parallelization_onboarding`
+*Toolset: **onboarding***\
+*Permissions Required: None*\
+Guides you through onboarding Test Parallelization in Datadog.
+
+- Help me set up Test Parallelization for my CI pipeline.
+
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\

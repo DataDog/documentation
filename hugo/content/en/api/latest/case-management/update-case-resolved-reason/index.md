@@ -1,3 +1,3 @@
 ---
-title: Update case resolved reason
+title: Update work item resolved reason
 ---
