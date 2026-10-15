@@ -246,7 +246,7 @@ table {
   margin-bottom: var(--space-lg);
   border: var(--border-width) solid var(--color-surface-border);
   border-collapse: collapse;
-  font-size: var(--font-size-table);
+  font-size: var(--font-size-sm);
   background-color: var(--color-surface-bg);
 }
 
