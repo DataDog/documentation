@@ -143,7 +143,7 @@ You can use wildcards with free-text search. However, it only searches for terms
 
 ### Multi-character wildcard
 
-Use the `*` symbol to match any number of characters, including none. In the log message, `*` matches characters within a single word. For how search defines a word, see the [How free-text search splits words](#how-free-text-search-splits-words) section.
+Use the `*` symbol to match any number of characters, including zero. In the log message, `*` matches characters within a single word. For how search defines a word, see the [How free-text search splits words](#how-free-text-search-splits-words) section.
 
 * `web*` matches log messages that contain a word starting with `web`, such as `web` or `webserver`.
 * `*web` matches log messages that contain a word ending with `web`, such as `myweb`.
