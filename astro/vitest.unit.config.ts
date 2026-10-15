@@ -12,30 +12,31 @@ const siteSupportFixture = path.resolve(
 );
 
 // Redirect the four spec/example files to the frozen fixture so unit tests are
-// decoupled from the live Hugo spec. The @hugo-site alias is applied by an
-// earlier plugin, so by the time our resolveId fires the ids are already
-// absolute paths — we match on those absolute paths, not on the alias strings.
+// decoupled from the live spec staged in api-spec/. The @api-spec alias is
+// applied by an earlier plugin, so by the time our resolveId fires the ids are
+// already absolute paths — we match on those absolute paths, not on the alias
+// strings.
 //
 // `shared/site_support.yaml` is redirected the same way, and for the same
 // reason: resolver tests assert on matching behavior, so they must not depend
 // on which real products are unsupported. The fixture's keys are invented.
-const docRoot = path.resolve(__dirname, "../hugo");
+const apiSpecRoot = path.resolve(__dirname, "api-spec");
 const sharedRoot = path.resolve(__dirname, "../shared");
 function buildLiveToFixtureMap(): Record<string, string> {
   const raw: Record<string, string> = {
-    [path.join(docRoot, "data/api/v1/full_spec.yaml")]: path.join(
+    [path.join(apiSpecRoot, "v1/full_spec.yaml")]: path.join(
       fixture,
       "v1/partial_spec.yaml",
     ),
-    [path.join(docRoot, "data/api/v2/full_spec.yaml")]: path.join(
+    [path.join(apiSpecRoot, "v2/full_spec.yaml")]: path.join(
       fixture,
       "v2/partial_spec.yaml",
     ),
-    [path.join(docRoot, "data/api/v1/CodeExamples.json")]: path.join(
+    [path.join(apiSpecRoot, "v1/CodeExamples.json")]: path.join(
       fixture,
       "v1/CodeExamples.json",
     ),
-    [path.join(docRoot, "data/api/v2/CodeExamples.json")]: path.join(
+    [path.join(apiSpecRoot, "v2/CodeExamples.json")]: path.join(
       fixture,
       "v2/CodeExamples.json",
     ),
@@ -47,8 +48,8 @@ function buildLiveToFixtureMap(): Record<string, string> {
   const result: Record<string, string> = {};
   for (const [live, fix] of Object.entries(raw)) {
     result[live] = fix;
-    // Also map the double-slash variant the @hugo-site / @shared aliases can emit
-    for (const root of [docRoot, sharedRoot]) {
+    // Also map the double-slash variant the @api-spec / @shared aliases can emit
+    for (const root of [apiSpecRoot, sharedRoot]) {
       result[live.replace(root + path.sep, root + path.sep + path.sep)] = fix;
     }
   }

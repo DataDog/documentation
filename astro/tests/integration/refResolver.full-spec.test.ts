@@ -9,7 +9,7 @@
  * hiding information. This file fails loudly if that happens.
  *
  * Picked up by `vitest.integration.config.ts`, which omits the frozen-fixture
- * plugin so `@hugo-site/data/api` resolves to the real Hugo data directory.
+ * plugin so `@api-spec` resolves to the live spec staged by `yarn fetch:spec`.
  */
 
 import { describe, it, expect } from "vitest";

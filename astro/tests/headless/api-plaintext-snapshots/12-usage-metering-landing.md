@@ -17,9 +17,9 @@ It is retained for 15 months.
 
 You can retrieve up to 24 hours of hourly usage data for multiple organizations,
 and up to two months of hourly usage data for a single organization in one request.
-Learn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/).
+Learn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details.md).
 
-## [Get hourly usage attribution](/api/latest/usage-metering/get-hourly-usage-attribution/)
+## [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-attribution.md)
 
 | Datadog site      | API endpoint                                                          |
 | ----------------- | --------------------------------------------------------------------- |
@@ -31,7 +31,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/hourly-attribution |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/hourly-attribution      |
 
-## [Get monthly usage attribution](/api/latest/usage-metering/get-monthly-usage-attribution/)
+## [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/get-monthly-usage-attribution.md)
 
 | Datadog site      | API endpoint                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
@@ -43,7 +43,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/monthly-attribution |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/monthly-attribution      |
 
-## [Get billable usage across your account](/api/latest/usage-metering/get-billable-usage-across-your-account/)
+## [Get billable usage across your account](https://docs.datadoghq.com/api/latest/usage-metering/get-billable-usage-across-your-account.md)
 
 | Datadog site      | API endpoint                                                        |
 | ----------------- | ------------------------------------------------------------------- |
@@ -55,7 +55,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/billable-summary |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/billable-summary      |
 
-## [Get all custom metrics by hourly average](/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average/)
+## [Get all custom metrics by hourly average](https://docs.datadoghq.com/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average.md)
 
 | Datadog site      | API endpoint                                                       |
 | ----------------- | ------------------------------------------------------------------ |
@@ -67,7 +67,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/top_avg_metrics |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/top_avg_metrics      |
 
-## [Get usage across your account](/api/latest/usage-metering/get-usage-across-your-account/)
+## [Get usage across your account](https://docs.datadoghq.com/api/latest/usage-metering/get-usage-across-your-account.md)
 
 | Datadog site      | API endpoint                                               |
 | ----------------- | ---------------------------------------------------------- |
@@ -79,7 +79,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/summary |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/summary      |
 
-## [Get hourly usage for logs by index](/api/latest/usage-metering/get-hourly-usage-for-logs-by-index/)
+## [Get hourly usage for logs by index](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-logs-by-index.md)
 
 | Datadog site      | API endpoint                                                     |
 | ----------------- | ---------------------------------------------------------------- |
@@ -91,7 +91,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/logs_by_index |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/logs_by_index      |
 
-## [Get hourly logs usage by retention](/api/latest/usage-metering/get-hourly-logs-usage-by-retention/) (deprecated)
+## [Get hourly logs usage by retention](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-logs-usage-by-retention.md) (deprecated)
 
 | Datadog site      | API endpoint                                                         |
 | ----------------- | -------------------------------------------------------------------- |
@@ -103,7 +103,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/logs-by-retention |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/logs-by-retention      |
 
-## [Get hourly usage for hosts and containers](/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers/) (deprecated)
+## [Get hourly usage for hosts and containers](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers.md) (deprecated)
 
 | Datadog site      | API endpoint                                             |
 | ----------------- | -------------------------------------------------------- |
@@ -115,7 +115,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/hosts |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/hosts      |
 
-## [Get hourly usage for logs](/api/latest/usage-metering/get-hourly-usage-for-logs/) (deprecated)
+## [Get hourly usage for logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-logs.md) (deprecated)
 
 | Datadog site      | API endpoint                                            |
 | ----------------- | ------------------------------------------------------- |
@@ -127,7 +127,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/logs |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/logs      |
 
-## [Get hourly usage for custom metrics](/api/latest/usage-metering/get-hourly-usage-for-custom-metrics/) (deprecated)
+## [Get hourly usage for custom metrics](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-custom-metrics.md) (deprecated)
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -139,7 +139,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/timeseries |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/timeseries      |
 
-## [Get hourly usage for indexed spans](/api/latest/usage-metering/get-hourly-usage-for-indexed-spans/) (deprecated)
+## [Get hourly usage for indexed spans](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-indexed-spans.md) (deprecated)
 
 | Datadog site      | API endpoint                                                     |
 | ----------------- | ---------------------------------------------------------------- |
@@ -151,7 +151,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/indexed-spans |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/indexed-spans      |
 
-## [Get hourly usage for synthetics checks](/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks/) (deprecated)
+## [Get hourly usage for synthetics checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks.md) (deprecated)
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -163,7 +163,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/synthetics |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/synthetics      |
 
-## [Get hourly usage for synthetics API checks](/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks/) (deprecated)
+## [Get hourly usage for synthetics API checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks.md) (deprecated)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -175,7 +175,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/synthetics_api |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/synthetics_api      |
 
-## [Get hourly usage for synthetics browser checks](/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks/) (deprecated)
+## [Get hourly usage for synthetics browser checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks.md) (deprecated)
 
 | Datadog site      | API endpoint                                                          |
 | ----------------- | --------------------------------------------------------------------- |
@@ -187,7 +187,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/synthetics_browser |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/synthetics_browser      |
 
-## [Get hourly usage for Fargate](/api/latest/usage-metering/get-hourly-usage-for-fargate/) (deprecated)
+## [Get hourly usage for Fargate](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-fargate.md) (deprecated)
 
 | Datadog site      | API endpoint                                               |
 | ----------------- | ---------------------------------------------------------- |
@@ -199,7 +199,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/fargate |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/fargate      |
 
-## [Get hourly usage for Lambda](/api/latest/usage-metering/get-hourly-usage-for-lambda/) (deprecated)
+## [Get hourly usage for Lambda](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-lambda.md) (deprecated)
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -211,7 +211,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
 
-## [Get hourly usage for RUM sessions](/api/latest/usage-metering/get-hourly-usage-for-rum-sessions/) (deprecated)
+## [Get hourly usage for RUM sessions](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-rum-sessions.md) (deprecated)
 
 | Datadog site      | API endpoint                                                    |
 | ----------------- | --------------------------------------------------------------- |
@@ -223,7 +223,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/rum_sessions |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/rum_sessions      |
 
-## [Get hourly usage for network hosts](/api/latest/usage-metering/get-hourly-usage-for-network-hosts/) (deprecated)
+## [Get hourly usage for network hosts](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-network-hosts.md) (deprecated)
 
 | Datadog site      | API endpoint                                                     |
 | ----------------- | ---------------------------------------------------------------- |
@@ -235,7 +235,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/network_hosts |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/network_hosts      |
 
-## [get hourly usage for network flows](/api/latest/usage-metering/get-hourly-usage-for-network-flows/) (deprecated)
+## [get hourly usage for network flows](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-network-flows.md) (deprecated)
 
 | Datadog site      | API endpoint                                                     |
 | ----------------- | ---------------------------------------------------------------- |
@@ -247,7 +247,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/network_flows |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/network_flows      |
 
-## [Get hourly usage for analyzed logs](/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs/) (deprecated)
+## [Get hourly usage for analyzed logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs.md) (deprecated)
 
 | Datadog site      | API endpoint                                                     |
 | ----------------- | ---------------------------------------------------------------- |
@@ -259,7 +259,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/analyzed_logs |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/analyzed_logs      |
 
-## [Get hourly usage for SNMP devices](/api/latest/usage-metering/get-hourly-usage-for-snmp-devices/) (deprecated)
+## [Get hourly usage for SNMP devices](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-snmp-devices.md) (deprecated)
 
 | Datadog site      | API endpoint                                            |
 | ----------------- | ------------------------------------------------------- |
@@ -271,7 +271,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/snmp |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/snmp      |
 
-## [Get hourly usage for ingested spans](/api/latest/usage-metering/get-hourly-usage-for-ingested-spans/) (deprecated)
+## [Get hourly usage for ingested spans](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-ingested-spans.md) (deprecated)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -283,7 +283,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/ingested-spans |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/ingested-spans      |
 
-## [Get hourly usage for incident management](/api/latest/usage-metering/get-hourly-usage-for-incident-management/) (deprecated)
+## [Get hourly usage for incident management](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-incident-management.md) (deprecated)
 
 | Datadog site      | API endpoint                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
@@ -295,7 +295,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/incident-management |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/incident-management      |
 
-## [Get hourly usage for IoT](/api/latest/usage-metering/get-hourly-usage-for-iot/) (deprecated)
+## [Get hourly usage for IoT](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-iot.md) (deprecated)
 
 | Datadog site      | API endpoint                                           |
 | ----------------- | ------------------------------------------------------ |
@@ -307,7 +307,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/iot |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/iot      |
 
-## [Get hourly usage for CSM Pro](/api/latest/usage-metering/get-hourly-usage-for-csm-pro/) (deprecated)
+## [Get hourly usage for CSM Pro](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-csm-pro.md) (deprecated)
 
 | Datadog site      | API endpoint                                            |
 | ----------------- | ------------------------------------------------------- |
@@ -319,7 +319,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/cspm |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/cspm      |
 
-## [Get hourly usage for cloud workload security](/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security/) (deprecated)
+## [Get hourly usage for cloud workload security](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security.md) (deprecated)
 
 | Datadog site      | API endpoint                                           |
 | ----------------- | ------------------------------------------------------ |
@@ -331,7 +331,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/cws |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/cws      |
 
-## [Get hourly usage for database monitoring](/api/latest/usage-metering/get-hourly-usage-for-database-monitoring/) (deprecated)
+## [Get hourly usage for database monitoring](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-database-monitoring.md) (deprecated)
 
 | Datadog site      | API endpoint                                           |
 | ----------------- | ------------------------------------------------------ |
@@ -343,7 +343,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/dbm |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/dbm      |
 
-## [Get hourly usage for sensitive data scanner](/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner/) (deprecated)
+## [Get hourly usage for sensitive data scanner](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner.md) (deprecated)
 
 | Datadog site      | API endpoint                                           |
 | ----------------- | ------------------------------------------------------ |
@@ -355,7 +355,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/sds |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/sds      |
 
-## [Get hourly usage for RUM units](/api/latest/usage-metering/get-hourly-usage-for-rum-units/) (deprecated)
+## [Get hourly usage for RUM units](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-rum-units.md) (deprecated)
 
 | Datadog site      | API endpoint                                           |
 | ----------------- | ------------------------------------------------------ |
@@ -367,7 +367,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/rum |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/rum      |
 
-## [Get hourly usage for profiled hosts](/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts/) (deprecated)
+## [Get hourly usage for profiled hosts](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts.md) (deprecated)
 
 | Datadog site      | API endpoint                                                 |
 | ----------------- | ------------------------------------------------------------ |
@@ -379,7 +379,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/profiling |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/profiling      |
 
-## [Get hourly usage for CI visibility](/api/latest/usage-metering/get-hourly-usage-for-ci-visibility/) (deprecated)
+## [Get hourly usage for CI visibility](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-ci-visibility.md) (deprecated)
 
 | Datadog site      | API endpoint                                              |
 | ----------------- | --------------------------------------------------------- |
@@ -391,7 +391,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/ci-app |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/ci-app      |
 
-## [Get hourly usage for online archive](/api/latest/usage-metering/get-hourly-usage-for-online-archive/) (deprecated)
+## [Get hourly usage for online archive](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-online-archive.md) (deprecated)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -403,7 +403,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/online-archive |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/online-archive      |
 
-## [Get hourly usage for audit logs](/api/latest/usage-metering/get-hourly-usage-for-audit-logs/) (deprecated)
+## [Get hourly usage for audit logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-audit-logs.md) (deprecated)
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -415,7 +415,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/audit_logs |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/audit_logs      |
 
-## [Get the list of available daily custom reports](/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports/) (deprecated)
+## [Get the list of available daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports.md) (deprecated)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -427,7 +427,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/daily_custom_reports |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/daily_custom_reports      |
 
-## [Get specified daily custom reports](/api/latest/usage-metering/get-specified-daily-custom-reports/) (deprecated)
+## [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-specified-daily-custom-reports.md) (deprecated)
 
 | Datadog site      | API endpoint                                                                  |
 | ----------------- | ----------------------------------------------------------------------------- |
@@ -439,7 +439,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/daily_custom_reports/{report_id}      |
 
-## [Get the list of available monthly custom reports](/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports/) (deprecated)
+## [Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports.md) (deprecated)
 
 | Datadog site      | API endpoint                                                        |
 | ----------------- | ------------------------------------------------------------------- |
@@ -451,7 +451,7 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monthly_custom_reports      |
 
-## [Get specified monthly custom reports](/api/latest/usage-metering/get-specified-monthly-custom-reports/) (deprecated)
+## [Get specified monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-specified-monthly-custom-reports.md) (deprecated)
 
 | Datadog site      | API endpoint                                                                    |
 | ----------------- | ------------------------------------------------------------------------------- |

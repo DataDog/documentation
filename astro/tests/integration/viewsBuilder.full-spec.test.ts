@@ -5,7 +5,7 @@
  * against the frozen 8-category fixture), these walk every category and every
  * operation the real spec exports. This file is picked up by
  * `vitest.integration.config.ts`, which omits the frozen-fixture plugin so
- * `@hugo-site/data/api` resolves to the actual Hugo data directory.
+ * `@api-spec` resolves to the live spec staged by `yarn fetch:spec`.
  *
  * Both unit and integration projects run via `yarn test`.
  */

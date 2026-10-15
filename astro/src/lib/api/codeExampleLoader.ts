@@ -8,16 +8,15 @@
  * (no suffix), matching the Hugo template's fallback branch in
  * layouts/partials/api/code-example.html.
  *
- * The two inputs have different provenance, which is why only one of them
- * moved off Hugo. The example sources are build artifacts, now staged into
- * `astro/api-code-examples/` by `yarn fetch:examples`. CodeExamples.json is
- * committed spec-repo automation output, present on a fresh clone with no
- * network, so it is still imported from `hugo/data/`.
+ * The two inputs are staged separately. The example sources are build
+ * artifacts, staged into `astro/api-code-examples/` by `yarn fetch:examples`.
+ * CodeExamples.json is spec-repo automation output that ships in the API docs
+ * bundle with the spec, staged into `astro/api-spec/` by `yarn fetch:spec`.
  */
 
 import { z } from "zod";
-import API_V1_CODE_EXAMPLES from "@hugo-site/data/api/v1/CodeExamples.json";
-import API_V2_CODE_EXAMPLES from "@hugo-site/data/api/v2/CodeExamples.json";
+import API_V1_CODE_EXAMPLES from "@api-spec/v1/CodeExamples.json";
+import API_V2_CODE_EXAMPLES from "@api-spec/v2/CodeExamples.json";
 import type { CodeExampleEntry, CodeExampleSet } from "./schemas/codeExamples";
 
 const sdkExampleFiles: Record<string, string> = import.meta.glob(

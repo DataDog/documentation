@@ -9,9 +9,9 @@ breadcrumbs: Docs > API > AWS Integration
 # AWS Integration
 
 Configure your Datadog-AWS integration directly through the Datadog API.
-For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).
+For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services.md).
 
-## [Get all AWS tag filters](/api/latest/aws-integration/get-all-aws-tag-filters/) (deprecated)
+## [Get all AWS tag filters](https://docs.datadoghq.com/api/latest/aws-integration/get-all-aws-tag-filters.md) (deprecated)
 
 | Datadog site      | API endpoint                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
@@ -23,7 +23,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/integration/aws/filtering      |
 
-## [List available namespaces](/api/latest/aws-integration/list-available-namespaces/)
+## [List available namespaces](https://docs.datadoghq.com/api/latest/aws-integration/list-available-namespaces.md)
 
 | Datadog site      | API endpoint                                                                      |
 | ----------------- | --------------------------------------------------------------------------------- |
@@ -35,7 +35,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/available_namespaces |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/available_namespaces      |
 
-## [Generate a new external ID](/api/latest/aws-integration/generate-a-new-external-id/)
+## [Generate a new external ID](https://docs.datadoghq.com/api/latest/aws-integration/generate-a-new-external-id.md)
 
 | Datadog site      | API endpoint                                                                           |
 | ----------------- | -------------------------------------------------------------------------------------- |
@@ -47,7 +47,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/integration/aws/generate_new_external_id |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/integration/aws/generate_new_external_id      |
 
-## [Set an AWS tag filter](/api/latest/aws-integration/set-an-aws-tag-filter/) (deprecated)
+## [Set an AWS tag filter](https://docs.datadoghq.com/api/latest/aws-integration/set-an-aws-tag-filter.md) (deprecated)
 
 | Datadog site      | API endpoint                                                            |
 | ----------------- | ----------------------------------------------------------------------- |
@@ -59,7 +59,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/integration/aws/filtering      |
 
-## [Delete a tag filtering entry](/api/latest/aws-integration/delete-a-tag-filtering-entry/) (deprecated)
+## [Delete a tag filtering entry](https://docs.datadoghq.com/api/latest/aws-integration/delete-a-tag-filtering-entry.md) (deprecated)
 
 | Datadog site      | API endpoint                                                              |
 | ----------------- | ------------------------------------------------------------------------- |
@@ -71,7 +71,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v1/integration/aws/filtering      |
 
-## [Get an AWS integration by config ID](/api/latest/aws-integration/get-an-aws-integration-by-config-id/)
+## [Get an AWS integration by config ID](https://docs.datadoghq.com/api/latest/aws-integration/get-an-aws-integration-by-config-id.md)
 
 | Datadog site      | API endpoint                                                                                  |
 | ----------------- | --------------------------------------------------------------------------------------------- |
@@ -83,7 +83,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}      |
 
-## [Delete an AWS integration](/api/latest/aws-integration/delete-an-aws-integration/)
+## [Delete an AWS integration](https://docs.datadoghq.com/api/latest/aws-integration/delete-an-aws-integration.md)
 
 | Datadog site      | API endpoint                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
@@ -95,7 +95,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}      |
 
-## [List namespace rules](/api/latest/aws-integration/list-namespace-rules/) (deprecated)
+## [List namespace rules](https://docs.datadoghq.com/api/latest/aws-integration/list-namespace-rules.md) (deprecated)
 
 | Datadog site      | API endpoint                                                                           |
 | ----------------- | -------------------------------------------------------------------------------------- |
@@ -107,7 +107,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/integration/aws/available_namespace_rules |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/integration/aws/available_namespace_rules      |
 
-## [Update an AWS integration](/api/latest/aws-integration/update-an-aws-integration/)
+## [Update an AWS integration](https://docs.datadoghq.com/api/latest/aws-integration/update-an-aws-integration.md)
 
 | Datadog site      | API endpoint                                                                                    |
 | ----------------- | ----------------------------------------------------------------------------------------------- |
@@ -119,7 +119,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}      |
 
-## [Get AWS integration IAM permissions](/api/latest/aws-integration/get-aws-integration-iam-permissions/)
+## [Get AWS integration IAM permissions](https://docs.datadoghq.com/api/latest/aws-integration/get-aws-integration-iam-permissions.md)
 
 | Datadog site      | API endpoint                                                                 |
 | ----------------- | ---------------------------------------------------------------------------- |
@@ -131,7 +131,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions      |
 
-## [List all AWS integrations](/api/latest/aws-integration/list-all-aws-integrations/)
+## [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/list-all-aws-integrations.md)
 
 | Datadog site      | API endpoint                                                          |
 | ----------------- | --------------------------------------------------------------------- |
@@ -143,7 +143,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/accounts      |
 
-## [Get AWS integration standard IAM permissions](/api/latest/aws-integration/get-aws-integration-standard-iam-permissions/)
+## [Get AWS integration standard IAM permissions](https://docs.datadoghq.com/api/latest/aws-integration/get-aws-integration-standard-iam-permissions.md)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -155,7 +155,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions/standard |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions/standard      |
 
-## [Create an AWS integration](/api/latest/aws-integration/create-an-aws-integration/)
+## [Create an AWS integration](https://docs.datadoghq.com/api/latest/aws-integration/create-an-aws-integration.md)
 
 | Datadog site      | API endpoint                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
@@ -167,7 +167,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/integration/aws/accounts      |
 
-## [Get resource collection IAM permissions](/api/latest/aws-integration/get-resource-collection-iam-permissions/)
+## [Get resource collection IAM permissions](https://docs.datadoghq.com/api/latest/aws-integration/get-resource-collection-iam-permissions.md)
 
 | Datadog site      | API endpoint                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
@@ -179,7 +179,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions/resource_collection      |
 
-## [Update AWS CCM config](/api/latest/aws-integration/update-aws-ccm-config/) (preview)
+## [Update AWS CCM config](https://docs.datadoghq.com/api/latest/aws-integration/update-aws-ccm-config.md) (preview)
 
 | Datadog site      | API endpoint                                                                                               |
 | ----------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -191,7 +191,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config      |
 
-## [Delete AWS CCM config](/api/latest/aws-integration/delete-aws-ccm-config/) (preview)
+## [Delete AWS CCM config](https://docs.datadoghq.com/api/latest/aws-integration/delete-aws-ccm-config.md) (preview)
 
 | Datadog site      | API endpoint                                                                                                |
 | ----------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -203,7 +203,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config      |
 
-## [Get all Amazon EventBridge sources](/api/latest/aws-integration/get-all-amazon-eventbridge-sources/)
+## [Get all Amazon EventBridge sources](https://docs.datadoghq.com/api/latest/aws-integration/get-all-amazon-eventbridge-sources.md)
 
 | Datadog site      | API endpoint                                                              |
 | ----------------- | ------------------------------------------------------------------------- |
@@ -215,7 +215,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/event_bridge      |
 
-## [Create an Amazon EventBridge source](/api/latest/aws-integration/create-an-amazon-eventbridge-source/)
+## [Create an Amazon EventBridge source](https://docs.datadoghq.com/api/latest/aws-integration/create-an-amazon-eventbridge-source.md)
 
 | Datadog site      | API endpoint                                                               |
 | ----------------- | -------------------------------------------------------------------------- |
@@ -227,7 +227,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/integration/aws/event_bridge      |
 
-## [Delete an Amazon EventBridge source](/api/latest/aws-integration/delete-an-amazon-eventbridge-source/)
+## [Delete an Amazon EventBridge source](https://docs.datadoghq.com/api/latest/aws-integration/delete-an-amazon-eventbridge-source.md)
 
 | Datadog site      | API endpoint                                                                 |
 | ----------------- | ---------------------------------------------------------------------------- |
@@ -239,7 +239,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/integration/aws/event_bridge      |
 
-## [Get AWS CCM config](/api/latest/aws-integration/get-aws-ccm-config/) (preview)
+## [Get AWS CCM config](https://docs.datadoghq.com/api/latest/aws-integration/get-aws-ccm-config.md) (preview)
 
 | Datadog site      | API endpoint                                                                                             |
 | ----------------- | -------------------------------------------------------------------------------------------------------- |
@@ -251,7 +251,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config      |
 
-## [Create AWS CCM config](/api/latest/aws-integration/create-aws-ccm-config/) (preview)
+## [Create AWS CCM config](https://docs.datadoghq.com/api/latest/aws-integration/create-aws-ccm-config.md) (preview)
 
 | Datadog site      | API endpoint                                                                                              |
 | ----------------- | --------------------------------------------------------------------------------------------------------- |

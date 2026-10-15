@@ -12,7 +12,7 @@ breadcrumbs: Docs > API > Create an incident
 
 {% alert level="warning" %}
 **Note**: This endpoint is in public beta.
-If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help.md).
 {% /alert %}
 
 Create an incident.
@@ -590,7 +590,7 @@ func main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=go) and then save the example to `main.go` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" go run "main.go"
@@ -658,7 +658,7 @@ with ApiClient(configuration) as api_client:
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" python3 "example.py"
