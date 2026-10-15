@@ -1343,6 +1343,15 @@ components:
         example: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
         format: uuid
         type: string
+    OrgGroupMembershipDeleteFilterOrgGroupId:
+      description: The ID of the organization group that the memberships belong to.
+      in: query
+      name: filter[org_group_id]
+      required: true
+      schema:
+        example: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+        format: uuid
+        type: string
     OrgGroupMembershipFilterOrgGroupId:
       description: Filter memberships by org group ID. Required when `filter[org_uuid]` is not provided.
       in: query
@@ -92399,14 +92408,47 @@ components:
         - created_at
         - modified_at
       type: object
+    OrgGroupMembershipBulkDeleteRequest:
+      description: Request to delete a batch of org group memberships.
+      properties:
+        data:
+          description: >-
+            The memberships to delete, specified as membership resource identifiers. Each request must include between 1 and 100 unique membership IDs.
+          items:
+            $ref: "#/components/schemas/OrgGroupMembershipBulkDeleteRequestData"
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - data
+      type: object
+    OrgGroupMembershipBulkDeleteRequestData:
+      description: A resource identifier for an org group membership to delete.
+      properties:
+        id:
+          description: The ID of the org group membership.
+          example: "f1e2d3c4-b5a6-7890-1234-567890abcdef"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/OrgGroupMembershipType"
+      required:
+        - id
+        - type
+      type: object
     OrgGroupMembershipBulkUpdateAttributes:
       description: Attributes for bulk updating org group memberships.
       properties:
         orgs:
-          description: List of organizations to move. Maximum 100 per request.
+          description: >-
+            List of organizations to move. Each request must include between 1 and 100 organizations. Each `org_uuid` and `org_site` pair must be unique.
           items:
             $ref: "#/components/schemas/GlobalOrgIdentifier"
+          maxItems: 100
+          minItems: 1
           type: array
+          uniqueItems: true
       required:
         - orgs
       type: object
@@ -92451,6 +92493,51 @@ components:
       type: string
       x-enum-varnames:
         - ORG_GROUP_MEMBERSHIP_BULK_UPDATES
+    OrgGroupMembershipCreateAttributes:
+      description: Attributes for adding organizations to an org group.
+      properties:
+        orgs:
+          description: >-
+            List of organizations to add. Each request must include between 1 and 100 organizations. Each `org_uuid` and `org_site` pair must be unique.
+          items:
+            $ref: "#/components/schemas/GlobalOrgIdentifier"
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - orgs
+      type: object
+    OrgGroupMembershipCreateData:
+      description: Data for adding organizations to an org group.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateAttributes"
+        relationships:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupMembershipType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    OrgGroupMembershipCreateRelationships:
+      description: Relationships for adding organizations to an org group.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      required:
+        - org_group
+      type: object
+    OrgGroupMembershipCreateRequest:
+      description: Request to add organizations to an org group.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateData"
+      required:
+        - data
+      type: object
     OrgGroupMembershipData:
       description: An org group membership resource.
       properties:
@@ -109891,6 +109978,181 @@ components:
           type: array
       required:
         - data
+      type: object
+    SavedFilterAttributes:
+      description: Saved filter details, including the full targeting rules and conditions.
+      properties:
+        archived_at:
+          description: The time the saved filter was archived. Omitted when the filter is not archived.
+          example: "2026-01-03T12:00:00Z"
+          format: date-time
+          type: string
+        created_at:
+          description: The time the saved filter was created.
+          example: "2026-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the saved filter.
+          example: "550e8400-e29b-41d4-a716-446655440091"
+          type: string
+        creation_type:
+          $ref: "#/components/schemas/SavedFilterCreationType"
+        description:
+          description: A description of the saved filter. Omitted when no description is set.
+          example: Users selected by email address or organization ID.
+          type: string
+        migration_metadata:
+          description: Optional JSON metadata supplied by migration tools for tracking the source of a saved filter.
+          example:
+            provider: launchdarkly
+            segment_key: early-access-users
+        name:
+          description: The name of the saved filter.
+          example: Early access users
+          type: string
+        targeting_rules:
+          description: Targeting rules combined with OR. Conditions within each rule are combined with AND. Both saved lists and saved rules use this structure.
+          items:
+            $ref: "#/components/schemas/SavedFilterTargetingRule"
+          type: array
+        updated_at:
+          description: The time the saved filter was last updated.
+          example: "2026-01-02T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - name
+        - creation_type
+        - targeting_rules
+        - created_by
+        - created_at
+        - updated_at
+      type: object
+    SavedFilterCondition:
+      description: An inline condition in a saved filter targeting rule.
+      properties:
+        attribute:
+          description: The attribute evaluated by the condition.
+          example: email
+          type: string
+        id:
+          description: The ID of the condition.
+          example: "550e8400-e29b-41d4-a716-446655440093"
+          format: uuid
+          type: string
+        operator:
+          $ref: "#/components/schemas/SavedFilterConditionOperator"
+        value:
+          description: Values used by the condition operator.
+          example:
+            - user@example.com
+          items:
+            type: string
+          type: array
+      required:
+        - id
+        - operator
+        - attribute
+        - value
+      type: object
+    SavedFilterConditionOperator:
+      description: The comparison operator used by a saved filter condition.
+      enum:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+        - SEMVER_EQ
+        - SEMVER_NEQ
+        - SEMVER_LT
+        - SEMVER_LTE
+        - SEMVER_GT
+        - SEMVER_GTE
+      example: ONE_OF
+      type: string
+      x-enum-varnames:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+        - SEMVER_EQ
+        - SEMVER_NEQ
+        - SEMVER_LT
+        - SEMVER_LTE
+        - SEMVER_GT
+        - SEMVER_GTE
+    SavedFilterCreationType:
+      description: How the saved filter was authored. RULES indicates rule-based authoring and LIST indicates list import. Both types return targeting rules and conditions.
+      enum:
+        - RULES
+        - LIST
+      example: RULES
+      type: string
+      x-enum-varnames:
+        - RULES
+        - LIST
+    SavedFilterData:
+      description: A saved filter resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SavedFilterAttributes"
+        id:
+          description: The ID of the saved filter.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SavedFilterDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SavedFilterDataType:
+      description: The saved filter resource type.
+      enum:
+        - saved-filters
+      example: saved-filters
+      type: string
+      x-enum-varnames:
+        - SAVED_FILTERS
+    SavedFilterResponse:
+      description: Response containing a saved filter and its targeting rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/SavedFilterData"
+      required:
+        - data
+      type: object
+    SavedFilterTargetingRule:
+      description: A targeting rule in a saved filter. A rule matches when all its conditions match.
+      properties:
+        conditions:
+          description: Conditions combined with AND within this targeting rule.
+          items:
+            $ref: "#/components/schemas/SavedFilterCondition"
+          type: array
+        id:
+          description: The ID of the targeting rule.
+          example: "550e8400-e29b-41d4-a716-446655440092"
+          format: uuid
+          type: string
+      required:
+        - id
+        - conditions
       type: object
     ScaRequest:
       description: The top-level request object for submitting a Software Composition Analysis (SCA) scan result.
@@ -173510,6 +173772,110 @@ paths:
         operator: AND
         permissions:
           - feature_flag_config_write
+  /api/v2/feature-flags/saved-filters/{saved_filter_id}:
+    get:
+      description: |-
+        Returns a saved filter by ID, including its full targeting rules, conditions, and values.
+        Supports both saved lists and saved rules. Targeting rules are combined with OR,
+        and conditions within each rule are combined with AND.
+        Returns the stored filter definition rather than evaluating it against users or organizations.
+        Archived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.
+      operationId: GetSavedFilter
+      parameters:
+        - description: The ID of the saved filter.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          in: path
+          name: saved_filter_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: A saved rule matching an email address OR an organization ID
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T12:00:00Z"
+                        created_by: "550e8400-e29b-41d4-a716-446655440091"
+                        creation_type: RULES
+                        description: Users selected by email address or organization ID.
+                        name: Early access users
+                        targeting_rules:
+                          - conditions:
+                              - attribute: email
+                                id: "550e8400-e29b-41d4-a716-446655440093"
+                                operator: ONE_OF
+                                value: ["user@example.com"]
+                            id: "550e8400-e29b-41d4-a716-446655440092"
+                          - conditions:
+                              - attribute: org_id
+                                id: "550e8400-e29b-41d4-a716-446655440095"
+                                operator: ONE_OF
+                                value: ["12345", "67890"]
+                            id: "550e8400-e29b-41d4-a716-446655440094"
+                        updated_at: "2026-01-02T12:00:00Z"
+                      id: "550e8400-e29b-41d4-a716-446655440090"
+                      type: saved-filters
+                saved_list:
+                  summary: A saved list containing user IDs
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T12:00:00Z"
+                        created_by: "550e8400-e29b-41d4-a716-446655440091"
+                        creation_type: LIST
+                        name: Early access user list
+                        targeting_rules:
+                          - conditions:
+                              - attribute: user_id
+                                id: "550e8400-e29b-41d4-a716-446655440098"
+                                operator: ONE_OF
+                                value: ["user-123", "user-456"]
+                            id: "550e8400-e29b-41d4-a716-446655440097"
+                        updated_at: "2026-01-02T12:00:00Z"
+                      id: "550e8400-e29b-41d4-a716-446655440096"
+                      type: saved-filters
+              schema:
+                $ref: "#/components/schemas/SavedFilterResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+      summary: Get a saved filter
+      tags:
+        - Feature Flags
+      x-menu-order: 23
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
   /api/v2/feature-flags/{feature_flag_id}:
     get:
       description: |-
@@ -208340,10 +208706,73 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: >-
+        Add a batch of organizations to an existing organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. This is an atomic operation: either all organizations are added or none are. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization. The requesting organization must own the organization group.
+      operationId: CreateOrgGroupMemberships
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      orgs:
+                        - org_site: "us1"
+                          org_uuid: "c3d4e5f6-a7b8-9012-cdef-012345678901"
+                    relationships:
+                      org_group:
+                        data:
+                          id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                          type: org_groups
+                    type: org_group_memberships
+            schema:
+              $ref: "#/components/schemas/OrgGroupMembershipCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create org group memberships
+      tags: [Org Groups]
+      x-menu-order: 7
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_group_memberships/bulk:
     patch:
       description: >-
-        Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.
+        Move a batch of organizations from one organization group to another. This is an atomic operation. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization.
       operationId: BulkUpdateOrgGroupMemberships
       requestBody:
         content:
@@ -208421,7 +208850,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Bulk update org group memberships
       tags: [Org Groups]
-      x-menu-order: 9
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -208429,7 +208858,115 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_memberships/bulk_delete:
+    post:
+      description: >-
+        Delete a batch of memberships from an organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. The memberships to delete are provided as membership resource identifiers, and the organization group they belong to must be specified using `filter[org_group_id]`. Each request must include between 1 and 100 unique membership IDs, and the requesting organization must own the organization group. The request does not fail if a membership ID refers to a membership that has already been deleted, does not exist, or does not belong to the organization group.
+      operationId: DeleteOrgGroupMemberships
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupMembershipDeleteFilterOrgGroupId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - id: "f1e2d3c4-b5a6-7890-1234-567890abcdef"
+                      type: org_group_memberships
+                    - id: "e2d3c4b5-a6f7-8901-2345-67890abcdef1"
+                      type: org_group_memberships
+                    - id: "d3c4b5a6-f7e8-9012-3456-7890abcdef12"
+                      type: org_group_memberships
+            schema:
+              $ref: "#/components/schemas/OrgGroupMembershipBulkDeleteRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk delete org group memberships
+      tags: [Org Groups]
+      x-menu-order: 12
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_group_memberships/{org_group_membership_id}:
+    delete:
+      description: >-
+        Remove an organization from an organization group by deleting its membership. This operation is not supported for organization groups with `group_type` set to `config_management`. The organization group that the membership belongs to must be specified using `filter[org_group_id]`, and the requesting organization must own that organization group. Returns `404` if the membership does not exist, was already removed, or does not belong to the organization group.
+      operationId: DeleteOrgGroupMembership
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupMembershipId"
+        - $ref: "#/components/parameters/OrgGroupMembershipDeleteFilterOrgGroupId"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an org group membership
+      tags: [Org Groups]
+      x-menu-order: 10
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a specific organization group membership by its ID.
       operationId: GetOrgGroupMembership
@@ -208487,7 +209024,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group membership
       tags: [Org Groups]
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -208569,7 +209106,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group membership
       tags: [Org Groups]
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -208651,7 +209188,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policies
       tags: [Org Groups]
-      x-menu-order: 10
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -208771,7 +209308,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an org group policy
       tags: [Org Groups]
-      x-menu-order: 12
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -208816,7 +209353,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an org group policy
       tags: [Org Groups]
-      x-menu-order: 14
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -208882,7 +209419,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group policy
       tags: [Org Groups]
-      x-menu-order: 11
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -208995,7 +209532,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group policy
       tags: [Org Groups]
-      x-menu-order: 13
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -209042,7 +209579,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy configs
       tags: [Org Groups]
-      x-menu-order: 20
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -209126,7 +209663,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy overrides
       tags: [Org Groups]
-      x-menu-order: 15
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -209215,7 +209752,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an org group policy override
       tags: [Org Groups]
-      x-menu-order: 17
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -209260,7 +209797,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an org group policy override
       tags: [Org Groups]
-      x-menu-order: 19
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -209328,7 +209865,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group policy override
       tags: [Org Groups]
-      x-menu-order: 16
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -209411,7 +209948,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group policy override
       tags: [Org Groups]
-      x-menu-order: 18
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -209470,7 +210007,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy suggestions
       tags: [Org Groups]
-      x-menu-order: 21
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -214684,7 +215221,7 @@ paths:
                   data:
                     attributes:
                       description: My agent policy
-                      enabled: true
+                      enabled: false
                       hostTagsLists:
                         -   - env:test
                       name: my_agent_policy
@@ -214703,7 +215240,7 @@ paths:
                     data:
                       attributes:
                         description: My agent policy
-                        enabled: true
+                        enabled: false
                         name: my_agent_policy
                       id: abc-123
                       type: policy
@@ -214824,7 +215361,7 @@ paths:
                   data:
                     attributes:
                       description: My agent policy
-                      enabled: true
+                      enabled: false
                       name: my_agent_policy
                     id: 6517fcc1-cec7-4394-a655-8d6e9d085255
                     type: policy
@@ -214842,7 +215379,7 @@ paths:
                     data:
                       attributes:
                         description: My agent policy
-                        enabled: true
+                        enabled: false
                         name: my_agent_policy
                       id: abc-123
                       type: policy

@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
   tag: "Blog"
   text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
+- link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
+  tag: "Blog"
+  text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 ---
 
 Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many findings that are never exploited in practice as critical. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
