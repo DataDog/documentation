@@ -52,12 +52,12 @@ Review recent changes to Datadog API operations, ordered newest first. Entries a
 
 ## 2026-10-08
 
-- **Added**: [Dashboards](/api/latest/dashboards/): Add Heatgrid widget (Operations: [\`ListDashboards\`](/api/latest/dashboards/get-all-dashboards/), \`GetDashboardUsage\`)
-- **Breaking**: Deployment Gates: Remove an endpoint
+- Added: [Dashboards](/api/latest/dashboards/): Add Heatgrid widget (Operations: [\`ListDashboards\`](/api/latest/dashboards/get-all-dashboards/), \`GetDashboardUsage\`)
+- Breaking: Deployment Gates: Remove an endpoint
 
 ## 2026-10-06
 
-- **Deprecated**: [Dashboards](/api/latest/dashboards/): Deprecate an endpoint
+- Deprecated: [Dashboards](/api/latest/dashboards/): Deprecate an endpoint
 `);
   });
 

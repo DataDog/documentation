@@ -8,7 +8,6 @@
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import {
   Ast,
-  bold,
   heading,
   inline,
   link,
@@ -49,8 +48,7 @@ function entryListItem(entry: ResolvedChangelogEntry): MarkdocNode {
     ? link(entry.product.href, entry.product.name)
     : plaintext(entry.product.name);
   const children = [
-    bold([plaintext(CHANGELOG_BUCKET_LABELS[entry.bucket])]),
-    plaintext(": "),
+    plaintext(`${CHANGELOG_BUCKET_LABELS[entry.bucket]}: `),
     productNode,
     plaintext(": "),
     ...titleNodes(entry.title),
