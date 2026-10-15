@@ -68,7 +68,7 @@ Bits Release reads the code you merged and detects when that code is live in pro
 
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
-| The Datadog [GitHub App][2] installed on the repositories in scope, with `Contents: Read` and `Pull Requests: Write` | `Contents: Read` lets Bits Release read the code change it is validating. `Pull Requests: Write` lets it post the plan and the verdict back on the pull request, which is where most developers see the result. |
+| The Datadog [GitHub App][2] installed on the repositories in scope, with `Contents: Read` and `Pull Requests: Write` | `Contents: Read` lets Bits Release read the code change it is validating. `Pull Requests: Write` lets it post the validation plan and the verdict back on the pull request, which is where most developers see the result. |
 | A `version` tag on the services in scope | Identifies each deployment, so Bits Release can tell when a new one happens. Services report it with their [APM][4] or [RUM][5] telemetry. |
 | The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][8] to set this up. |
 
