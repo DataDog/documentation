@@ -10,7 +10,7 @@ aliases:
 - /ko/integrations/faq/container-integration-event/
 - /ko/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
 - /ko/agent/kubernetes/
-description: Kubernetes에서 Datadog Agent 설치 및 구성
+description: Datadog Agent 또는 OpenTelemetry를 사용하여 Kubernetes를 모니터링합니다.
 further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-k8s
   tag: 학습 센터
@@ -35,9 +35,11 @@ further_reading:
   text: Kubernetes 오퍼레이터를 모니터링하여 애플리케이션을 원활하게 운영하기
 title: Kubernetes
 ---
-{{< learning-center-callout header="활성화 웨비나 세션에 참여하기" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+{{< learning-center-callout header="교육 웨비나 세션 참가" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
   이 기반 활성화 세션에서는 Datadog이 Kubernetes를 어떻게 모니터링하는지 중점적으로 다룹니다. Datadog을 Kubernetes에 맞춰 구성하는 방법과 시작하는 방법을 알아보세요. 클러스터 및 애플리케이션 메트릭, 트레이스, 로그를 시각화하고 분석하는 다양한 Datadog 조회 및 도구를 둘러보세요.
 {{< /learning-center-callout >}}
+
+Datadog Agent 대신 OpenTelemetry를 사용하여 Kubernetes 리소스 및 인프라 메트릭을 Datadog으로 보내려면 [OpenTelemetry로 Kubernetes 모니터링][10]을 참조하십시오.
 
 ## Agent 설치 {#agent-installation}
 
@@ -95,3 +97,4 @@ Agent 명령은 [Agent Commands 가이드][9]를 참조하세요. Datadog Cluste
 [7]: /ko/containers/kubernetes/installation
 [8]: https://docs.datadoghq.com/ko/containers/guide/kubernetes_daemonset/
 [9]: /ko/agent/configuration/agent-commands/
+[10]: /ko/containers/kubernetes/opentelemetry/
