@@ -53,12 +53,12 @@ In the [Detection Rules explorer][8], and the side panel that appears when you c
 In the rule side panel, you can view more information about individual fields referenced in the rule. For each scope (the source or service the query is attached to), you can see:
 - {{< ui >}}Field{{< /ui >}}: The field Datadog evaluated.
 - {{< ui >}}Presence rate{{< /ui >}}: The percentage of logs ingested in that scope over the last 24 hours that contain that field.
-- {{< ui >}}Log count change{{< /ui >}}: The number of times the field has appeared in logs over the last 24 hours, compared to the average number of times over the last 30 days. Indicates whether the presence of that field is increasing, decreasing, or staying the same.
+- {{< ui >}}Log count change{{< /ui >}}: The number of times the field has appeared in logs over the last 24 hours, compared to the average number of times over the last 29 days. Indicates whether the presence of that field is increasing, decreasing, or staying the same.
 - {{< ui >}}Status{{< /ui >}}: Indicates Datadog's assessment of the field. Values include:
   - {{< ui >}}Monitoring{{< /ui >}}: Datadog is still collecting information about the field and has not identified any issues that require action.
   - {{< ui >}}All zero{{< /ui >}}: Over the last 30 days, all values have been zero. This could indicate that the detection was never active, or that it has become inactive after the rule was created.
   - {{< ui >}}Trailing silence{{< /ui >}}: The field appeared more frequently earlier in the 30-day lookback, but appeared significantly fewer times over the last consecutive 15 business days.
-  - {{< ui >}}Drifting{{< /ui >}}: For three consecutive business days, the number of times the field appeared in logs was below 5% of its median number of appearances over the previous 27 days. This indicates that there was data for the field, but that it has since experienced a steep decline.
+  - {{< ui >}}Drifting{{< /ui >}}: For three consecutive days, the number of times the field appeared in logs was below 5% of its median number of appearances over the previous 27 days. This indicates that there was data for the field, but that it has since experienced a steep decline.
 
 If a field's status is either {{< ui >}}Trailing silence{{< /ui >}} or {{< ui >}}Drifting{{< /ui >}}, under {{< ui >}}Health Insights{{< /ui >}}, Datadog marks the rule as {{< ui >}}Needs attention{{< /ui >}} so you can investigate whether missing or anomalous values indicate a problem.
 
