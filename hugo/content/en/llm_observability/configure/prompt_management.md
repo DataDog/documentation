@@ -167,6 +167,8 @@ To retrieve an environment's deployed prompt through the Agent, complete the fol
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
+Follow the [Node.js SDK initialization guide][16] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+
 #### Retrieve directly from Datadog
 
 Replace the placeholders and set the following environment variables before initializing `dd-trace`:
@@ -178,9 +180,11 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-Follow the [Node.js SDK initialization guide][16] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+#### Retrieve through the Agent
 
-**Agent setup:** Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`. Neither key is needed when retrieval succeeds through the Agent. Keep `DD_API_KEY` if you also retrieve exact or latest versions.
+To retrieve an environment's deployed prompt through the Agent, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` before initializing `dd-trace`. Neither key is required when retrieval succeeds through the Agent.
+
+Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow direct retrieval if the Agent is unavailable, configure both keys.
 
 [16]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
 {{% /tab %}}

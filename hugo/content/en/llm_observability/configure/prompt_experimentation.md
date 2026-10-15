@@ -84,7 +84,7 @@ Complete this setup once for either workflow. If your application already sends 
 
 ### Connect the application
 
-Complete the [Prompt Management setup][15] and set `DD_ENV` to the experiment's environment. The setup below sends prompt assignments through a [Datadog Agent][14].
+Complete the [Prompt Management setup][15] and set `DD_ENV` to the experiment's environment. Then follow the instructions for your language. This setup uses the [Datadog Agent][14] to report experiment exposures.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -114,8 +114,11 @@ export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
+Alternatively, use [agentless delivery][20] to retrieve prompt assignments and report exposures without an Agent. This setup requires `DD_API_KEY` in the application.
+
 [16]: /remote_configuration/
 [18]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
+[20]: /feature_flags/server/nodejs/#configure-agentless-delivery
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -195,6 +198,7 @@ To configure and launch an A/B test in Product Analytics, see [Product Analytics
 ### I do not see assignments or results
 
 - **Only the fallback is returned, or assignments are missing:** check the SDK installation, `DD_ENV`, Agent connectivity, and that retrieval does not specify `version`.
+- **The Agent is unavailable:** backup credentials can keep prompt retrieval working, but the Agent-based setup does not automatically switch to agentless exposure reporting.
 - **Outcomes are missing:** check matching subject IDs, metric scope, and that events occur after exposure. Allow enough data to accumulate; see [Experiment Diagnostics][13].
 
 ### I cannot control or inspect a rollout
