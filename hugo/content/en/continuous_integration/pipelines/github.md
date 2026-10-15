@@ -29,10 +29,10 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Running jobs][28] | Running jobs | View job executions that are currently running. |
-| [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Logs Analysis][23] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | [Automatic job retries][27] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 | [Queue time][8] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -91,20 +91,27 @@ To disable the CI Visibility GitHub Actions integration:
 2. Choose the GitHub account that you want to disable CI Visibility for, and click {{< ui >}}Account Enabled{{< /ui >}}.
 3. Untoggle {{< ui >}}Enable CI Visibility{{< /ui >}}, or choose which repository you want to disable it for individually.
 
-### Collect job logs
+### Manage job logs
 
-The GitHub Actions CI Visibility integration also allows you to automatically forward workflow job logs to [Log Management][15].
+#### Logs Analysis
 
-To enable job logs collection:
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from GitHub Actions.
 
-1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] and select **GitHub**.
-2. Click {{< ui >}}Enable Account{{< /ui >}} for the account you want to enable.
-3. Enable Job Logs Collection for the whole account by clicking the toggle next to {{< ui >}}Enable Job Logs Collection{{< /ui >}}.
-4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the {{< ui >}}Enable Job Logs Collection{{< /ui >}} toggle.
+For a full explanation, see the guide on [using Logs Analysis][23].
 
-Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1 GiB are truncated.
+Logs Analysis is enabled by default in Datadog. To manage Logs Analysis settings, go to [CI/CD Repository settings][29], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
+You can also add Logs Analysis to a PR comment. See the guide on [using PR comments][26].
+
+Logs Analysis being enabled is also a prerequisite for [automatic job retries][27].
+
+#### Logs Storage
+
+To enable Logs Storage, go to [CI/CD Repository settings][29], and enable Logs Storage at the Datadog organization level or for the desired repositories.
+
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
+
+Job logs are collected in [Log Management][15] and, once stored, are automatically correlated with the GitHub Actions workflow in CI Visibility. Log files larger than one GiB are truncated.
 
 ### Correlate infrastructure metrics to jobs
 
@@ -115,14 +122,6 @@ The GitHub Actions CI Visibility integration allows for correlation between infr
 - For other configurations: To correlate jobs with the hosts running them, ensure the GitHub runner name matches the machine's hostname.
 
 To see the metrics, click on a job span in the trace view. A window opens with an {{< ui >}}Infrastructure{{< /ui >}} tab displaying the host metrics.
-
-### CI jobs failure analysis
-
-If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitHub Actions.
-
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
-
-For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 ## Visualize pipeline data in Datadog
 
@@ -162,3 +161,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [27]: /continuous_integration/pipelines/automatic_retries/
 [28]: /glossary/#running-job
+[29]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
