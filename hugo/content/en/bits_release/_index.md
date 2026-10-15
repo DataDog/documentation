@@ -1,7 +1,6 @@
 ---
 title: Bits Release
 description: "Learn how Bits Release validates your pull requests in production after deployment and reports whether the change behaved as intended."
-is_beta: true
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-release/"
     tag: "Blog"
