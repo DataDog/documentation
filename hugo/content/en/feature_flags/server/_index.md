@@ -42,12 +42,13 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
 | Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
+| .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
 Agentless delivery changes only the flag configuration source. Java and Node.js support direct exposure delivery. Java, Node.js, and Python can also use a compatible local telemetry relay.
 
-The listed versions provide the current capabilities described on each language page. Other server SDKs use Agent Remote Configuration.
+The listed versions provide the current capabilities described on each language page. .NET 3.54.0 supports agentless configuration but still requires a compatible local telemetry relay for experiment exposures. Other server SDKs use Agent Remote Configuration.
 
 ## Choose a language
 
@@ -106,7 +107,7 @@ Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Ag
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
 
-Existing Java, Node.js, and Python implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+Existing Java, Node.js, Python, and .NET implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
 ### Remote Configuration polling interval
 

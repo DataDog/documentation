@@ -1,0 +1,16 @@
+# Allows a scheduled ddoghq/web-ui CI job to push the generated Security Finding Schema reference page and open its PR.
+# Only pipelines defined on and running from web-ui's preprod branch can get this token.
+issuer: https://gitlab.ddbuild.io
+
+subject_pattern: 'project_path:(ddoghq/web-ui|ddoghq@230443989/web-ui@1303817029):ref_type:branch:ref:preprod'
+
+claim_pattern:
+    project_path: '(ddoghq/web-ui|ddoghq@230443989/web-ui@1303817029)'
+    ref_type: 'branch'
+    ref_path: 'refs/heads/preprod'
+    ci_config_ref_uri: 'gitlab\.ddbuild\.io/(ddoghq/web-ui|ddoghq@230443989/web-ui@1303817029)//\.gitlab-ci\.yml@refs/heads/preprod'
+    pipeline_source: '(schedule|trigger|web)'
+
+permissions:
+    contents: write
+    pull_requests: write

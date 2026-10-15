@@ -4,30 +4,31 @@ algolia:
   - browser logs
 aliases:
 - /ko/logs/log_collection/web_browser
-title: 브라우저 로그 수집
+title: 브라우저 로그 수집하기
 ---
-브라우저 로그 SDK를 사용해 웹 브라우저 페이지에서 Datadog로 로그를 보냅니다.
+브라우저 로그 SDK를 사용해 웹 브라우저 페이지에서 Datadog으로 로그를 보냅니다.
 
-브라우저 로그 SDK를 사용하면 웹 브라우저 페이지에서 직접 Datadog로 로그를 보낼 수 있고, 다음과 같은 기능을 활용할 수 있습니다.
+브라우저 로그 SDK를 사용하면 웹 브라우저 페이지에서 직접 Datadog으로 로그를 보낼 수 있고, 다음과 같은 기능을 활용할 수 있습니다.
 
-- SDK를 로거로 사용합니다. 모든 항목이 Datadog에 JSON 문서로 전달됩니다.
-- 전송한 각 로그에 `context` 및 추가 사용자 지정 속성을 추가합니다.
-- 모든 프론트엔드 오류를 자동으로 래핑하고 전달합니다.
-- 프론트엔드 오류를 전달합니다.
-- 실제 클라이언트 IP 주소 및 사용자 에이전트를 기록합니다.
-- 자동 일괄 포스트를 사용해 네트워크 사용량을 최적화합니다.
-- Worker 및 Service Worker 환경에서 사용합니다.
+- SDK를 로거로 사용. 모든 항목이 Datadog에 JSON 문서로 전달됩니다.
+- 전송한 각 로그에 `context` 및 추가 사용자 지정 속성 추가
+- 모든 프런트엔드 오류를 자동으로 래핑 및 전달
+- 프런트엔드 오류 전달
+- 실제 클라이언트 IP 주소 및 사용자 에이전트 기록
+- 자동 일괄 포스트를 사용해 네트워크 사용량 최적화
+- Worker 및 Service Worker 환경에서 사용
 
 **참고**:
 
 - **RUM SDK와 무관**: 브라우저 로그 SDK는 RUM SDK 없이 사용할 수 있습니다.
 - **Worker 환경**: 브라우저 로그 SDK는 Worker 및 Service Worker 환경에서 같은 설정 방법을 사용하여 작동합니다. 하지만 Worker 환경에서 보낸 로그에는 세션 정보가 자동으로 포함되지 않습니다.
+- **WebAssembly 오류**: 브라우저 로그에서 WASM 프레임을 심볼화하려면 [Browser SDK WASM 플러그인을 구성](#webassembly-errors)하고 [모듈의 디버그 심볼을 업로드][14]하세요.
 
 ## 설정 {#setup}
 
 ### 1단계 - 클라이언트 토큰 생성 {#step-1-create-a-client-token}
 
-Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니다.
+Datadog에서 [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}New Client Tokens{{< /ui >}}][1]로 이동하세요.
 
 **지원되는 환경**: 브라우저 로그 SDK는 모든 최신 데스크톱 및 모바일 브라우저, 그리고 Worker 및 Service Worker 환경을 지원합니다. [브라우저 지원][4] 표를 참조하세요.
 
@@ -35,14 +36,14 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
 
 ###  2단계 - 로그 브라우저 SDK 설치{#step-2-install-the-logs-browser-sdk}
 
-브라우저 SDK의 설치 방법을 선택합니다.
+브라우저 SDK의 설치 방법을 선택하세요.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-최신 웹 애플리케이션의 경우, Datadog에서는 노드 패키지 관리자(npm)를 통해 설치하는 편을 권장합니다. 브라우저 SDK는 나머지 프론트엔드 JavaScript 코드로 패키징됩니다. 페이지 로드 성능에는 아무런 영향이 없습니다. 하지만 SDK가 해당 SDK를 초기화하기 전에 발생하는 오류 또는 콘솔 로그를 캡처하지 않을 가능성이 있습니다. Datadog에서는 브라우저 로그 SDK와 일치하는 버전을 사용하도록 권장합니다.  
+최신 웹 애플리케이션의 경우, Datadog에서는 노드 패키지 관리자(npm)를 통해 설치하는 편을 권장합니다. 브라우저 SDK는 나머지 프런트엔드 JavaScript 코드로 패키징됩니다. 페이지 로드 성능에는 아무런 영향이 없습니다. 하지만 SDK가 해당 SDK를 초기화하기 전에 발생하는 오류 또는 콘솔 로그를 캡처하지 않을 가능성이 있습니다. Datadog에서는 브라우저 로그 SDK와 일치하는 버전을 사용하도록 권장합니다.  
 
-[`@datadog/browser-logs`][13]를 `package.json` 파일에 추가합니다. 예를 들어 npm cli를 사용하는 경우입니다.  
+[`@datadog/browser-logs`][13]를 `package.json` 파일에 추가하세요. 예를 들어, npm cli를 사용하는 경우입니다.  
 
 [13]: https://www.npmjs.com/package/@datadog/browser-logs
 
@@ -51,7 +52,7 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
 
 성능 목표가 있는 웹 애플리케이션은 CDN async를 통해 설치해야 합니다. 브라우저 SDK는 Datadog의 CDN에서 비동기식으로 로드되어 페이지 로드 성능에 영향을 미치지 않습니다. 하지만 SDK가 해당 SDK를 초기화하기 전에 발생하는 오류 또는 콘솔 로그를 캡처하지 않을 가능성이 있습니다.  
 
-애플리케이션에서 모니터링하고자 하는 모든 HTML 페이지의 헤드 태그에 생성된 코드 스니펫을 추가합니다.
+애플리케이션에서 모니터링하려는 모든 HTML 페이지의 헤드 태그에 생성된 코드 스니펫을 추가합니다.
 
 {{< site-region region="us" >}}
 
@@ -74,7 +75,7 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -131,6 +132,19 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
 ```
 
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
 
 ```javascript
@@ -150,7 +164,7 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
 
 모든 이벤트를 수집하려면 CDN sync를 통해 설치해야 합니다. 브라우저 SDK가 Datadog의 CDN에서 동기식으로 로드되어 SDK가 먼저 로드되고 모든 오류, 리소스와 사용자 액션을 수집합니다. 이 방법은 페이지 로드 성능에 영향을 미칠 수 있습니다.  
 
-애플리케이션에서 모니터링하고자 하는 모든 HTML 페이지의 헤드 태그(다른 모든 스크립트 태그 앞)에 생성된 코드 스니펫을 추가합니다. 스크립트 태그를 더 높이 배치하고 동기식으로 로드하면 Datadog RUM이 모든 성능 데이터와 오류를 수집할 수 있습니다.
+애플리케이션에서 모니터링하려는 모든 HTML 페이지의 헤드 태그(다른 모든 스크립트 태그 앞)에 생성된 코드 스니펫을 추가합니다. 스크립트 태그를 더 높이 배치하고 동기식으로 로드하면 Datadog RUM이 모든 성능 데이터와 오류를 수집할 수 있습니다.
 
 {{< site-region region="us" >}}
 
@@ -167,7 +181,7 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js"
+    src="https://www.datadoghq-browser-agent.com/eu1/v7/datadog-logs.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -212,6 +226,17 @@ Datadog에서 [**Organization Settings > New Client Tokens]**[1]로 이동합니
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -305,13 +330,13 @@ RUM 브라우저 SDK는 GDPR, CCPA 및 유사한 규정을 준수하기 위해 [
 
 로그의 기본 설정을 완료했으므로, 애플리케이션이 브라우저 로그를 수집하고 실시간으로 문제를 모니터링하고 디버깅할 수 있습니다.
 
-[Log Explorer][7]에서 로그를 시각화합니다.
+[Log Explorer][7]에서 로그를 시각화하세요.
 
-## 사용량 {#usage}
+## 사용 방법 {#usage}
 
 ### 사용자 지정 로그 {#custom-logs}
 
-Datadog 브라우저 로그 SDK가 초기화된 후 API를 사용해 사용자 지정 로그 항목을 Datadog에 직접 전송합니다.
+Datadog 브라우저 로그 SDK가 초기화된 후 API를 사용해 사용자 지정 로그 항목을 Datadog에 직접 전송하세요.
 
 ```typescript
 logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
@@ -351,7 +376,7 @@ window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonNa
 
 #### 결과 {#results}
 
-NPM, CDN async 또는 CDN sync 사용 시 결과는 모두 같음:
+NPM, CDN async 또는 CDN sync 사용 시 결과는 모두 같습니다.
 
 ```json
 {
@@ -451,7 +476,7 @@ try {
 
 #### 결과 {#results-1}
 
-NPM, CDN async 또는 CDN sync 사용 시 결과는 모두 같음:
+NPM, CDN async 또는 CDN sync 사용 시 결과는 모두 같습니다.
 
 ```json
 {
@@ -468,6 +493,35 @@ NPM, CDN async 또는 CDN sync 사용 시 결과는 모두 같음:
   ...
 }
 ```
+
+#### WebAssembly 오류 {#webassembly-errors}
+
+WebAssembly(WASM) 스택 프레임을 심볼화하려면 Browser SDK WASM 플러그인을 설치하세요. 플러그인과 Browser Logs SDK의 버전을 동일하게 사용하세요.
+
+```shell
+npm install --save-exact \
+  @datadog/browser-logs@<VERSION> \
+  @datadog/browser-plugin-wasm@<VERSION>
+```
+
+Browser Logs를 초기화할 때 플러그인을 등록하세요.
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+import { makeWasmPlugin } from '@datadog/browser-plugin-wasm';
+
+datadogLogs.init({
+  // ...
+  forwardErrorsToLogs: true,
+  plugins: [makeWasmPlugin()],
+});
+```
+
+WASM 모듈을 로드하기 전에 Browser Logs를 초기화하세요. 플러그인은 브라우저의 `WebAssembly` API로 생성된 모듈을 관찰하고, WASM 스택 프레임이 포함된 오류에 해당 URL 및 빌드 ID를 추가합니다.
+
+처리되지 않은 WASM 오류를 자동으로 전달하려면 `forwardErrorsToLogs`를 `true`로 설정하세요. 처리된 WASM 오류를 로깅할 때 [오류 추적](#error-tracking)에 표시된 대로 `Error` 객체를 `logger.error()`의 세 번째 인수로 전달하세요.
+
+그런 다음 [WebAssembly 심볼을 업로드][14]하여 오류를 심볼화하세요.
 
 ### 일반 로거 함수 {#generic-logger-function}
 
@@ -524,9 +578,9 @@ window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>
 
 ### 브라우저 로그에서 민감한 데이터 스크러빙 {#scrub-sensitive-data-from-your-browser-logs}
 
-브라우저 로그에 삭제해야 하는 민감한 정보가 포함되어 있다면 Browser Log Collector를 초기화할 때 `beforeSend` 콜백을 사용해 민감한 시퀀스를 스크러빙하도록 Browswer SDK를 구성하세요.
+브라우저 로그에 삭제해야 하는 민감한 정보가 포함되어 있다면 Browser Log Collector를 초기화할 때 `beforeSend` 콜백을 사용해 민감한 시퀀스를 스크러빙하도록 Browser SDK를 구성하세요.
 
-`beforeSend` 콜백 함수는 두 가지 인수인 `log` 이벤트 및 `context`로 호출할 수 있습니다. 이 함수를 사용하면 Datadog로 전송되기 전에 브라우저 SDK가 수집한 각 로그에 액세스할 수 있으며, 컨텍스트를 사용해 로그 속성을 조정할 수 있습니다. 컨텍스트에는 이벤트와 관련되지만, 이벤트에 꼭 포함되는 것은 아닌 추가 정보가 포함됩니다. 일반적으로 이 정보를 사용해 이벤트를 [강화][11]하거나 [폐기][12]할 수 있습니다.
+`beforeSend` 콜백 함수는 두 가지 인수인 `log` 이벤트 및 `context`로 호출할 수 있습니다. 이 함수를 사용하면 Datadog으로 전송되기 전에 브라우저 SDK가 수집한 각 로그에 액세스할 수 있으며, 컨텍스트를 사용해 로그 속성을 조정할 수 있습니다. 컨텍스트에는 이벤트와 관련되지만, 이벤트에 꼭 포함되는 것은 아닌 추가 정보가 포함됩니다. 일반적으로 이 정보를 사용해 이벤트를 [강화][11]하거나 [폐기][12]할 수 있습니다.
 
 ```javascript
 function beforeSend(log, context)
@@ -536,10 +590,10 @@ function beforeSend(log, context)
 
 | 값 | 데이터 유형 | 사용 사례 |
 |-------|---------|------------|
-| `isAborted` | Boolean | 네트워크 로그 이벤트에서 이 속성은 실패한 요청이 애플리케이션에 의해 중단되었는지를 알려줍니다. 이 경우, 해당 전송이 의도적으로 중단될 수 있기 때문에 이 이벤트 전송을 다시 고려해봐야 할 수 있습니다. |
-| `handlingStack` | String|  로그 이벤트가 처리된 스택 트레이스입니다. 이것을 사용해 로그를 어느 [마이크로프론트엔드][9]에서 보냈는지 확인할 수 있습니다. |
+| `isAborted` | 불리언 | 네트워크 로그 이벤트에서 이 속성은 실패한 요청이 애플리케이션에 의해 중단되었는지를 알려줍니다. 이 경우, 해당 전송이 의도적으로 중단될 수 있기 때문에 이 이벤트 전송을 다시 고려해봐야 할 수 있습니다. |
+| `handlingStack` | String|  로그 이벤트가 처리된 스택 트레이스입니다. 이것을 사용해 로그를 어느 [마이크로프런트엔드][9]에서 보냈는지 확인할 수 있습니다. |
 
-웹 애플리케이션 URL에서 이메일 주소를 삭제하는 방법:
+웹 애플리케이션 URL에서 이메일 주소를 삭제하는 방법은 다음과 같습니다.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -607,9 +661,9 @@ window.DD_LOGS &&
 
 ### 특정 로그 삭제 {#discard-specific-logs}
 
-`beforeSend` 콜백 함수를 사용하면 로그를 Datadog로 보내기 전에 삭제할 수도 있습니다.
+`beforeSend` 콜백 함수를 사용하면 로그를 Datadog으로 보내기 전에 삭제할 수도 있습니다.
 
-네트워크 오류의 상태가 404인 경우 해당 오류를 삭제하는 방법:
+네트워크 오류의 상태가 404인 경우 해당 오류를 삭제하는 방법은 다음과 같습니다.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -677,7 +731,7 @@ Datadog 브라우저 로그 SDK에는 기본 로거가 포함되지만, 다른 �
 
 #### 새 로거 생성 {#create-a-new-logger}
 
-Datadog 브라우저 로그 SDK가 초기화되고 나서, API `createLogger`를 사용해 새 로거를 정의합니다.
+Datadog 브라우저 로그 SDK가 초기화되고 나서, API `createLogger`를 사용해 새 로거를 정의하세요.
 
 ```typescript
 createLogger (name: string, conf?: {
@@ -691,7 +745,7 @@ createLogger (name: string, conf?: {
 
 #### 사용자 지정 로거 가져오기 {#get-a-custom-logger}
 
-로거를 생성하고 나서, 다음 API를 사용해 JavaScript 코드의 아무 부분에서나 액세스합니다.
+로거를 생성하고 나서, 다음 API를 사용해 JavaScript 코드의 아무 부분에서나 액세스하세요.
 
 ```typescript
 getLogger(name: string)
@@ -700,7 +754,7 @@ getLogger(name: string)
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-예를 들어 다른 모든 로거로 정의된 `signupLogger`가 있다고 가정하는 경우:
+예를 들어, 다른 모든 로거와 함께 정의된 `signupLogger`가 있다고 가정합니다.
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -712,7 +766,7 @@ datadogLogs.createLogger('signupLogger', {
 })
 ```
 
-다음을 사용해 이것을 코드의 다른 부분에서 사용 가능:
+그러면 코드의 다른 부분에서 다음과 같이 사용할 수 있습니다.
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -724,7 +778,7 @@ signupLogger.info('Test sign up completed')
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-예를 들어 다른 모든 로거로 정의된 `signupLogger`가 있다고 가정하는 경우:
+예를 들어, 다른 모든 로거와 함께 정의된 `signupLogger`가 있다고 가정합니다.
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -736,7 +790,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-다음을 사용해 이것을 코드의 다른 부분에서 사용 가능:
+그러면 코드의 다른 부분에서 다음과 같이 사용할 수 있습니다.
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -750,7 +804,7 @@ window.DD_LOGS.onReady(function () {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-예를 들어 다른 모든 로거로 정의된 `signupLogger`가 있다고 가정하는 경우:
+예를 들어, 다른 모든 로거와 함께 정의된 `signupLogger`가 있다고 가정합니다.
 
 ```javascript
 if (window.DD_LOGS) {
@@ -762,7 +816,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-다음을 사용해 이것을 코드의 다른 부분에서 사용 가능:
+그러면 코드의 다른 부분에서 다음과 같이 사용할 수 있습니다.
 
 ```javascript
 if (window.DD_LOGS) {
@@ -780,13 +834,13 @@ if (window.DD_LOGS) {
 
 #### 전역 컨텍스트 {#global-context}
 
-Datadog 브라우저 로그 SDK가 초기화되고 나면, 다음과 같이 할 수 있습니다.
+Datadog 브라우저 로그 SDK가 초기화되고 나면 다음 작업을 수행할 수 있습니다.
 
-- `setGlobalContext (context: object)` API를 사용해 모든 로거에 대한 전체 컨텍스트를 설정합니다.
-- `setGlobalContextProperty (key: string, value: any)` API를 사용해 모든 로거에 컨텍스트를 추가합니다.
-- `getGlobalContext ()` API를 사용해 전체 글로벌 컨텍스트를 가져옵니다.
-- `removeGlobalContextProperty (key: string)` API를 사용해 컨텍스트 속성을 제거합니다.
-- `clearGlobalContext ()` API를 사용해 기존 컨텍스트 속성을 모두 지웁니다.
+- `setGlobalContext (context: object)` API를 사용해 모든 로거에 대한 전체 컨텍스트 설정
+- `setGlobalContextProperty (key: string, value: any)` API를 사용해 모든 로거에 컨텍스트 추가
+- `getGlobalContext ()` API를 사용해 전체 글로벌 컨텍스트 가져오기
+- `removeGlobalContextProperty (key: string)` API를 사용해 컨텍스트 속성 제거
+- `clearGlobalContext ()` API를 사용해 기존 컨텍스트 속성 모두 제거
 
 > 로그 브라우저 SDK v4.17.0에서는 여러 API 이름이 다음과 같이 업데이트되었습니다.
 >
@@ -798,7 +852,7 @@ Datadog 브라우저 로그 SDK가 초기화되고 나면, 다음과 같이 할 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-NPM의 경우, 다음 사용:
+NPM의 경우, 다음을 사용하세요.
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -821,7 +875,7 @@ datadogLogs.getGlobalContext() // => {}
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-CDN async의 경우, 다음 사용:
+CDN async의 경우, 다음을 사용하세요.
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -858,7 +912,7 @@ window.DD_LOGS.onReady(function () {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-CDN sync의 경우, 다음 사용:
+CDN sync의 경우, 다음을 사용하세요.
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.setGlobalContext({ env: 'staging' })
@@ -885,18 +939,18 @@ window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 
 Datadog 로그 SDK는 `User`를 생성된 로그와 연결하는 편리한 함수를 제공합니다.
 
-- `setUser (newUser: User)` API를 사용해 모든 로거에 대한 사용자를 설정합니다.
-- `setUserProperty (key: string, value: any)` API를 사용해 사용자 속성을 모든 로거에 추가하거나 수정합니다.
-- `getUser ()` API를 사용해 현재 저장된 사용자를 가져옵니다.
-- `removeUserProperty (key: string)` API를 사용해 사용자 속성을 제거합니다.
-- `clearUser ()` API를 사용해 기존 사용자 속성을 모두 지웁니다.
+- `setUser (newUser: User)` API를 사용해 모든 로거에 대한 사용자 설정
+- `setUserProperty (key: string, value: any)` API를 사용해 모든 로거에 사용자 속성 추가 또는 수정
+- `getUser ()` API를 사용해 현재 저장된 사용자 가져오기
+- `removeUserProperty (key: string)` API를 사용해 사용자 속성 제거
+- `clearUser ()` API를 사용해 기존 사용자 속성 모두 제거
 
 **참고**: 사용자 컨텍스트가 글로벌 컨텍스트 전에 적용됩니다. 따라서 글로벌 컨텍스트에 포함된 모든 사용자 속성이 로그 생성 시 사용자 컨텍스트를 재정의하게 됩니다.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-NPM의 경우, 다음 사용:
+NPM의 경우, 다음을 사용하세요.
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -915,7 +969,7 @@ datadogLogs.getUser() // => {}
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-CDN async의 경우, 다음 사용:
+CDN async의 경우, 다음을 사용하세요.
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -952,7 +1006,7 @@ window.DD_LOGS.onReady(function () {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-CDN sync의 경우, 다음 사용:
+CDN sync의 경우, 다음을 사용하세요.
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
@@ -979,11 +1033,11 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 
 Datadog 로그 SDK는 `Account`를 생성된 로그와 연결하는 편리한 함수를 제공합니다.
 
-- `setAccount (newAccount: Account)` API를 사용해 모든 로거에 대한 계정을 설정합니다.
-- `setAccountProperty (key: string, value: any)` API를 사용해 계정 속성을 모든 로거에 추가하거나 수정합니다.
-- `getAccount ()` API를 사용해 현재 저장된 계정을 가져옵니다.
-- `removeAccountProperty (key: string)` API를 사용해 계정 속성을 제거합니다.
-- `clearAccount ()` API를 사용해 기존 계정 속성을 모두 지웁니다.
+- `setAccount (newAccount: Account)` API를 사용해 모든 로거에 대한 계정 설정
+- `setAccountProperty (key: string, value: any)` API를 사용해 모든 로거에 계정 속성 추가 또는 수정
+- `getAccount ()` API를 사용해 현재 저장된 계정을 가져오기
+- `removeAccountProperty (key: string)` API를 사용해 계정 속성 제거
+- `clearAccount ()` API를 사용해 기존 계정 속성을 모두 제거
 
 **참고**: 계정 컨텍스트가 글로벌 컨텍스트 전에 적용됩니다. 따라서 글로벌 컨텍스트에 포함된 모든 계정 속성이 로그 생성 시 계정 컨텍스트를 재정의하게 됩니다.
 
@@ -1085,10 +1139,10 @@ window.DD_LOGS && window.DD_LOGS.getAccount() // => {}
 
 #### 로거 컨텍스트 {#logger-context}
 
-로거가 생성되고 나면, 다음과 같이 할 수 있습니다.
+로거가 생성되고 나면, 다음과 작업을 수행할 수 있습니다.
 
-- `setContext (context: object)` API를 사용해 로거에 대한 전체 컨텍스트를 설정합니다.
-- `setContextProperty (key: string, value: any)` API를 사용해 로거에 컨텍스트 속성을 설정합니다.
+- `setContext (context: object)` API를 사용해 로거에 대한 전체 컨텍스트 설정
+- `setContextProperty (key: string, value: any)` API를 사용해 로거에 컨텍스트 속성 설정
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1172,9 +1226,9 @@ window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 {{% /tab %}}
 {{< /tabs >}}
 
-### 대상 변경 {#change-the-destination}
+### 목적지 변경 {#change-the-destination}
 
-기본적으로 Datadog 브라우저 로그 SDK가 생성한 로거는 Datadog로 로그를 보냅니다. Datadog 브라우저 로그 SDK가 초기화되고 나면, 로거를 구성해 다음과 같이 할 수 있습니다.
+기본적으로 Datadog 브라우저 로그 SDK가 생성한 로거는 Datadog으로 로그를 보냅니다. Datadog 브라우저 로그 SDK가 초기화되고 나면, 로거를 구성해 다음 작업을 수행할 수 있습니다.
 
 - `console` 및 Datadog(`http`)에 로그 보내기
 - `console`에만 로그 보내기
@@ -1210,7 +1264,7 @@ window.DD_LOGS.onReady(function () {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-CDN sync의 경우, 다음 사용:
+CDN sync의 경우, 다음을 사용하세요.
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.logger.setHandler('<HANDLER>')
@@ -1228,7 +1282,7 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 `trackingConsent` 초기화 파라미터는 다음 값 중 하나일 수 있습니다.
 
-1. `"granted"`: 로그 브라우저 SDK가 데이터를 수집하기 시작하고 이를 Datadog로 보냅니다.
+1. `"granted"`: 로그 브라우저 SDK가 데이터를 수집하기 시작하고 이를 Datadog으로 보냅니다.
 2. `"not-granted"`: Logs Browser SDK가 데이터를 수집하지 않습니다.
 
 Logs Browser SDK가 초기화된 이후에 추적 동의 값을 변경하려면 `setTrackingConsent()` API 호출을 사용하세요. 로그 브라우저 SDK는 새 값에 따라 동작을 변경합니다.
@@ -1341,3 +1395,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [11]: /ko/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /ko/real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[14]: /ko/real_user_monitoring/guide/upload-webassembly-symbols/
