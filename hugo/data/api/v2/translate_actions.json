@@ -4027,6 +4027,10 @@
     "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
     "summary": "Get patterns run status"
   },
+  "ListLLMObsPatternsTemplates": {
+    "description": "List all enabled patterns templates.",
+    "summary": "List patterns templates"
+  },
   "ListLLMObsPatternsTopics": {
     "description": "List the topics discovered by a patterns run. When no run is specified,\nthe most recent completed run is used.",
     "summary": "List patterns topics"
@@ -7816,10 +7820,6 @@
     "summary": "Update a team link",
     "request_description": "",
     "request_schema_description": "Team link create request"
-  },
-  "GetTeamHierarchyMembers": {
-    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
-    "summary": "Get team hierarchy members"
   },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
