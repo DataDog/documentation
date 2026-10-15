@@ -29,7 +29,7 @@ algolia:
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
-All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
+All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][1], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
 
 ## Installation
 
@@ -48,83 +48,83 @@ For example, it sends APM payloads to <code>trace.agent.datadoghq.com.</code>.<b
 This behavior can be disabled in version 7.72.0 and later by setting <code>convert_dd_site_fqdn.enabled</code> to <code>false</code> in the configuration, or with the environment variable <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
 </div>
 
-[APM][1]
+[APM][2]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[LLM Observabilty][23]
+[LLM Observabilty][3]
 : `llmobs-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Container Images][13]
+[Container Images][4]
 : `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Live Containers][3], [Live Process][4], [Cloud Network Monitoring][24], [Universal Service Monitoring][25]
+[Live Containers][5], [Live Process][6], [Cloud Network Monitoring][7], [Universal Service Monitoring][8]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Network Device Monitoring][10]
+[Network Device Monitoring][9]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Network Path][14]
+[Network Path][10]
 : `netpath-intake.`{{< region-param key="dd_site" code="true" >}}<br>
-In Agent v7.75+, Network Path contacts external services over HTTPS to resolve the source host's public IP. This is optional and Network Path functions without it, but if your network restricts outbound traffic and you want source public IP resolution, add the following to your allowlist: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][33] for details.
+In Agent v7.75+, Network Path contacts external services over HTTPS to resolve the source host's public IP. This is optional and Network Path functions without it, but if your network restricts outbound traffic and you want source public IP resolution, add the following to your allowlist: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][11] for details.
 
-[Orchestrator][5]
+[Orchestrator][12]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
 `contlcycle-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Profiling][7]
+[Profiling][13]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
 
-[Real User Monitoring (RUM)][6]
+[Real User Monitoring (RUM)][14]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
-[Cloud Security Vulnerabilities][29]
+[Cloud Security Vulnerabilities][15]
 : `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Synthetic Monitoring Private Locations][8]
+[Synthetic Monitoring Private Locations][16]
 : Synthetics Worker v1.5.0 or later: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint you need to configure.<br>
 API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-[Remote Configuration][34]
+[Remote Configuration][17]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
 {{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
-[Database Monitoring][102]
+[Database Monitoring][18]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[End User Device Monitoring][103]
+[End User Device Monitoring][19]
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[102]: /database_monitoring/
-[103]: /infrastructure/end_user_device_monitoring/
+[18]: /database_monitoring/
+[19]: /infrastructure/end_user_device_monitoring/
 
 {{% /site-region %}}
 
 {{% logs-tcp-disclaimer %}}
 
-[Logs][30] & [HIPAA logs][31]
+[Logs][20] & [HIPAA logs][21]
 : (Deprecated) TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
 HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
-Other: See [logs endpoints][32]
+Other: See [logs endpoints][22]
 
-[HIPAA logs legacy][31] (Deprecated, TCP not supported)
+[HIPAA logs legacy][21] (Deprecated, TCP not supported)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
-[Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
+[Metrics][23], [Service Checks][24], [Events][25], and other Agent metadata
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):<br>
 Agent v7.18.0 or 6.18.0 and later: `api.`{{< region-param key="dd_site" code="true" >}}<br>
 Agent < v7.18.0 or 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
 
-[Agent flare][12]
+[Agent flare][26]
 : `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 
@@ -185,15 +185,15 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality                                                                                                                                                    | Port                                           | Protocol         | Description                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring                                                      | 443                                            | TCP              | Most Agent data uses port 443.                                                                                                                                                              |
-| [Custom Agent Autoscaling][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
-| Log collection                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice. For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][21]. |
-| NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19].                                                                |
-| Connectivity test                                                                                                                                                        | 8042                                           | TCP              | Remote configuration connectivity test.<br>**Note**: this is a telemetry endpoint containing no customer data for protocol development, and is only used when [Remote Config][101] is enabled.
+| [Custom Agent Autoscaling][27]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
+| Log collection                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice. For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][28]. |
+| NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP). See [default NTP targets][29].<br>For information on troubleshooting NTP, see [NTP issues][30].                                                                |
+| Connectivity test                                                                                                                                                        | 8042                                           | TCP              | Remote configuration connectivity test.<br>**Note**: this is a telemetry endpoint containing no customer data for protocol development, and is only used when [Remote Config][17] is enabled.
 
-[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /integrations/ntp/#overview
-[21]: /logs/log_collection/#logging-endpoints
-[22]: /containers/guide/cluster_agent_autoscaling_metrics
+[27]: /containers/guide/cluster_agent_autoscaling_metrics
+[28]: /logs/log_collection/#logging-endpoints
+[29]: /integrations/ntp/#overview
+[30]: /agent/faq/network-time-protocol-ntp-offset-issues/
 
 {{% /site-region %}}
 
@@ -202,10 +202,10 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality                                                                                               | Port | Protocol | Description                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring | 443  | TCP      | Most Agent data uses port 443.                                                                                               |
-| NTP                                                                                                                 | 123  | UDP      | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
+| NTP                                                                                                                 | 123  | UDP      | Network Time Protocol (NTP). See [default NTP targets][29].<br>For information on troubleshooting NTP, see [NTP issues][30]. |
 
-[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /integrations/ntp/#overview
+[29]: /integrations/ntp/#overview
+[30]: /agent/faq/network-time-protocol-ntp-offset-issues/
 
 {{% /site-region %}}
 
@@ -215,11 +215,11 @@ Used for Agent services communicating with each other locally within the host on
 
 | Product/Functionality        | Port | Protocol | Description                                                                                                                    |
 | ---------------------------- | ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [Agent browser GUI][16]      | 5002 | TCP      |                                                                                                                                |
+| [Agent browser GUI][31]      | 5002 | TCP      |                                                                                                                                |
 | APM receiver                 | 8126 | TCP      | Includes Tracing and the Profiler.                                                                                             |
-| [DogStatsD][18]              | 8125 | UDP      | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
-| go_expvar server (APM)       | 5012 | TCP      | For more information, see [the go_expvar integration documentation][15].                                                        |
-| go_expvar integration server | 5000 | TCP      | For more information, see [the go_expvar integration documentation][15].                                                        |
+| [DogStatsD][32]              | 8125 | UDP      | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
+| go_expvar server (APM)       | 5012 | TCP      | For more information, see [the go_expvar integration documentation][33].                                                        |
+| go_expvar integration server | 5000 | TCP      | For more information, see [the go_expvar integration documentation][33].                                                        |
 | IPC API                      | 5001 | TCP      | Port used for Inter Process Communication (IPC).                                                                               |
 | Process Agent debug          | 6062 | TCP      | Debug endpoints for the Process Agent.                                                                                         |
 | Process Agent runtime        | 6162 | TCP      | Runtime configuration settings for the Process Agent.                                                                          |
@@ -278,7 +278,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][34].
 
 ## Data buffering
 
@@ -309,37 +309,31 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/
-[2]: /database_monitoring/
-[3]: /infrastructure/livecontainers/
-[4]: /infrastructure/process/
-[5]: /infrastructure/containers/#kubernetes-orchestrator-explorer
-[6]: /real_user_monitoring/
-[7]: /profiler/
-[8]: /synthetics/private_locations
-[9]: /agent/configuration/proxy/
-[10]: /network_monitoring/devices
-[11]: /getting_started/site/
-[12]: /agent/troubleshooting/send_a_flare
-[13]: /infrastructure/containers/container_images
-[14]: /network_monitoring/network_path/
-[15]: /integrations/go_expvar/
-[16]: /agent/basic_agent_usage/#gui
-[17]: /tracing/
-[18]: /extend/dogstatsd/
-[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /integrations/ntp/#overview
-[21]: /logs/log_collection/#logging-endpoints
-[22]: /containers/guide/cluster_agent_autoscaling_metrics
-[23]: /llm_observability/
-[24]: /network_monitoring/cloud_network_monitoring/
-[25]: /universal_service_monitoring/
-[26]: /metrics/
-[27]: /extend/service_checks/
-[28]: /events/
-[29]: /security/cloud_security_management/vulnerabilities/
-[30]: /logs/
-[31]: /data_security/logs/#hipaa-enabled-customers
-[32]: /logs/log_collection/#logging-endpoints
-[33]: /network_monitoring/network_path/setup/#source-public-ip-resolution
-[34]: /remote_configuration
+[1]: /getting_started/site/
+[2]: /tracing/
+[3]: /llm_observability/
+[4]: /infrastructure/containers/container_images
+[5]: /infrastructure/livecontainers/
+[6]: /infrastructure/process/
+[7]: /network_monitoring/cloud_network_monitoring/
+[8]: /universal_service_monitoring/
+[9]: /network_monitoring/devices
+[10]: /network_monitoring/network_path/
+[11]: /network_monitoring/network_path/setup/#source-public-ip-resolution
+[12]: /infrastructure/containers/#kubernetes-orchestrator-explorer
+[13]: /profiler/
+[14]: /real_user_monitoring/
+[15]: /security/cloud_security_management/vulnerabilities/
+[16]: /synthetics/private_locations
+[17]: /remote_configuration
+[20]: /logs/
+[21]: /data_security/logs/#hipaa-enabled-customers
+[22]: /logs/log_collection/#logging-endpoints
+[23]: /metrics/
+[24]: /extend/service_checks/
+[25]: /events/
+[26]: /agent/troubleshooting/send_a_flare
+[31]: /agent/basic_agent_usage/#gui
+[32]: /extend/dogstatsd/
+[33]: /integrations/go_expvar/
+[34]: /agent/configuration/proxy/
