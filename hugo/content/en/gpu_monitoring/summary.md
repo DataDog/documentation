@@ -51,8 +51,6 @@ AI workloads can experience unpredictable spikes in resource usage. As a result,
 
 For example, if you see a spike in the forecasted values for the number of allocated devices, your future workloads may require additional GPU devices.
 
-{{< img src="gpu_monitoring/allocation.png" alt="Total, Allocated and Active device counts over time" style="width:90%;" >}}
-
 ## Cost & Utilization
 
 {{< img src="gpu_monitoring/cost-and-utilization2.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
