@@ -102,7 +102,8 @@ test.describe("Pagination", () => {
     await expect(ellipsis).toHaveCSS("border-top-style", "none");
   });
 
-  test("disabled Prev and Next are muted", async ({ page }) => {
+  // A text color change alone was too subtle to read as disabled.
+  test("disabled Prev and Next are grayed out", async ({ page }) => {
     const disabledPrevious = await boxStyle(
       page.locator("#first-page .pagination__previous--disabled"),
     );
@@ -113,7 +114,9 @@ test.describe("Pagination", () => {
       page.locator("#last-page .pagination__next--disabled"),
     );
     expect(disabledPrevious.color).not.toBe(enabledNext.color);
-    expect(disabledNext.color).toBe(disabledPrevious.color);
+    expect(disabledPrevious.background).not.toBe(enabledNext.background);
+    expect(disabledPrevious.borderColor).not.toBe(enabledNext.borderColor);
+    expect(disabledNext).toEqual(disabledPrevious);
   });
 
   test("a linked control is highlighted on hover", async ({ page }) => {

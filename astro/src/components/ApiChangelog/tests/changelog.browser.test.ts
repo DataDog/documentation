@@ -314,6 +314,46 @@ test.describe("API changelog", () => {
     expect(fontSizes.code).toBe(fontSizes.link);
   });
 
+  // Narrows a row so the label and first item fit on one line but the rest
+  // don't, which pins the wrap point regardless of the live data.
+  test("a wrapping operations list starts on the label's line", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    const layout = await page
+      .locator(".api-changelog-entry__operations-row", {
+        has: page.locator(".api-changelog-entry__operation-item >> nth=1"),
+      })
+      .first()
+      .evaluate((row: HTMLElement) => {
+        const label = row.querySelector(
+          ".api-changelog-entry__operations-label",
+        )!;
+        const [firstItem, secondItem] = row.querySelectorAll(
+          ".api-changelog-entry__operation-item",
+        );
+        // The trailing margin counts toward fitting an inline-block on a line.
+        const lineWidth =
+          firstItem.getBoundingClientRect().right -
+          row.getBoundingClientRect().left +
+          parseFloat(getComputedStyle(firstItem).marginInlineEnd);
+        row.style.width = `${lineWidth + 1}px`;
+        const labelRect = label.getBoundingClientRect();
+        const firstRect = firstItem.getBoundingClientRect();
+        return {
+          firstItemBesideLabel:
+            firstRect.top < labelRect.bottom &&
+            firstRect.bottom > labelRect.top,
+          secondItemWraps:
+            secondItem.getBoundingClientRect().top >= firstRect.bottom,
+        };
+      });
+    expect(layout).toEqual({
+      firstItemBesideLabel: true,
+      secondItemWraps: true,
+    });
+  });
+
   test("the side nav's Changelog link is active", async ({ page }) => {
     await page.goto("/api/changelog/breaking/");
     const activeCategory = page.locator(".api-side-nav__category--active");

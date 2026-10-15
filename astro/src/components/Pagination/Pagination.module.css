@@ -67,7 +67,10 @@ a.pagination__page:hover {
 
 .pagination__previous--disabled,
 .pagination__next--disabled {
-  color: var(--color-text-muted);
+  border-color: var(--color-disabled-border);
+  background: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
 }
 
 .pagination__ellipsis {

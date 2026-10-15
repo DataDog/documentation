@@ -95,14 +95,16 @@ a.api-changelog-entry__product-name {
   font-size: var(--font-size-2xs);
 }
 
+/* Inline flow, not flex: a flex list wraps as one block, dropping below the
+   label once it's too long to fit beside it. Inline items start beside the
+   label and wrap under it. The items' block margins space wrapped lines
+   apart, and the row's negative margins cancel them at its outer edges. */
 .api-changelog-entry__operations-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-xs);
+  margin-block: calc(var(--space-xs) / -2);
 }
 
 .api-changelog-entry__operations-label {
+  margin-inline-end: var(--space-xs);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
@@ -111,12 +113,16 @@ a.api-changelog-entry__product-name {
 /* Specificity bump and ::before reset defeat the global `.prose ul` /
    `.prose ul li::before` en-dash bullet styles in global.css. */
 .api-changelog-entry .api-changelog-entry__operations {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
+  display: inline;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.api-changelog-entry__operation-item {
+  display: inline-block;
+  margin-block: calc(var(--space-xs) / 2);
+  margin-inline-end: var(--space-xs);
 }
 
 .api-changelog-entry__operations .api-changelog-entry__operation-item::before {
