@@ -32,7 +32,7 @@ Bits Release does not modify your code or add permanent instrumentation. It read
 
 {{< img src="bits_release/bits_release_demo.mp4" alt="Video walking through a Bits Release validation: a merged pull request is deployed to production, validation starts, and a verdict arrives with the evidence behind it" video="true" style="width:100%;" >}}
 
-## How it works
+## How Bits Release works
 
 1. **Detect the merge**: Bits Release picks up a pull request when it merges to the default branch of a repository in scope.
 2. **Analyze the change**: It reads the code change alongside your production data to work out what the change is for: the effect it should have in production once it ships (expected impact), and the behavior it should leave untouched (expected regression risk).
