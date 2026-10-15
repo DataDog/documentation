@@ -18,9 +18,11 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
-The processor supports only the static, out-of-the-box integration pipelines included with the Worker. The Worker's catalog of integration pipelines updates only through new Worker releases. To get catalog updates, upgrade your Worker, then manually enable the new integration pipelines.
+The processor supports only the static, out-of-the-box integration pipelines included with the Worker. The Worker's catalog of integration pipelines updates only through new Worker releases.
 
 {{< img src="observability_pipelines/processors/integration_pipelines.png" alt="The Manage Integration Pipelines panel listing enabled integration pipelines with their source filters and processor counts." style="width:100%;" >}}
+
+<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 **Notes**:
 - Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archive destinations.
@@ -28,10 +30,9 @@ The processor supports only the static, out-of-the-box integration pipelines inc
     - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
 - The processor does not run custom pipelines created in Log Management or modified versions of integration pipelines in Log Management.
+- All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. You must enable them manually.
 
 ## Setup
-
-<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 To set up an Integration Pipelines processor:
 
@@ -40,8 +41,8 @@ To set up an Integration Pipelines processor:
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved-field mappings the Worker uses for common normalization. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
 1. Click {{< ui >}}Edit Pipelines{{< /ui >}} to view a list of integration pipelines that have been enabled or disabled.
-1. The {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel shows a list of enabled integration pipelines. Click {{< ui >}}Disabled{{< /ui >}} to see integration pipelines that are disabled.
-    - **Note**: All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. You must enable them manually.
+1. In the {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel, enable or disable integration pipelines. When the {{< ui >}}Enabled{{< /ui >}} button is selected, the list shows all enabled integration pipelines.
+    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted." style="width:100%;" >}}
     - To enable integration pipelines:
       1. Click {{< ui >}}Disabled{{< /ui >}} to see the list of disabled pipelines.
       1. Select the checkboxes for the pipelines you want to enable.
@@ -50,10 +51,8 @@ To set up an Integration Pipelines processor:
       1. Click {{< ui >}}Enabled{{< /ui >}} to see the list of enabled pipelines.
       1. Select the checkboxes for the pipelines you want to disable.
       1. Click {{< ui >}}Disable Selected{{< /ui >}}.
-    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted." style="width:100%;" >}}
 1. Click {{< ui >}}Save{{< /ui >}}.
-
-**Note**: After you enable or disable integration pipelines, you must redeploy the pipeline for the changes to take effect.
+1. If you enabled or disabled integration pipelines, you must redeploy the pipeline for the changes to take effect.
 
 ## CPU sizing
 
