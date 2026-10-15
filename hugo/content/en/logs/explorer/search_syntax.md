@@ -37,9 +37,9 @@ There are two types of terms:
 
 * A **single term** is a single word such as `test` or `hello`.
 
-* A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
+* A **sequence** is a group of words surrounded by double quotes, such as `"hello world"`.
 
-**Note**: Use straight double quotes (`"`) for sequences. Search ignores curly quotation marks (`“ ”`), which some text editors and chat apps insert automatically. For example, `“hello dolly”` matches logs that contain `hello` and `dolly` in any order.
+**Note**: Use straight double quotes (`"`) for sequences. Search ignores curly quotation marks (`“ ”`), which some text editors and chat apps insert automatically. For example, `“hello world”` matches logs that contain `hello` and `world` in any order.
 
 To combine multiple terms into a complex query, use any of the following case-sensitive Boolean operators:
 
