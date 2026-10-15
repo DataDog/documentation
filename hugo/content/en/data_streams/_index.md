@@ -72,7 +72,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
-<sup>1</sup> Supported in AWS Lambda functions only. Java, Python, .NET, Node.js, and Go Lambda functions support Amazon SQS, Amazon SNS, Amazon EventBridge, and Amazon Kinesis. See [Data Streams Monitoring for AWS Lambda][16].
+<sup>1</sup> Supported only in AWS Lambda functions. See [Data Streams Monitoring for AWS Lambda][16].
 
 Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 

@@ -13,7 +13,7 @@ The following instrumentation types are available:
 -   [Automatic instrumentation for Kafka-based workloads](#automatic-instrumentation)
 -   [Manual Instrumentation for Kafka-based workloads](#kafka-based-workloads)
 -   [Manual instrumentation for other queuing technology or protocol](#other-queuing-technologies-or-protocols)
--   [Automatic instrumentation for AWS Lambda functions](#monitoring-aws-lambda-functions) that use Amazon SQS, Amazon SNS, Amazon EventBridge, or Amazon Kinesis
+-   [Automatic instrumentation for AWS Lambda functions](#monitoring-aws-lambda-functions)
 
 ### Prerequisites
 

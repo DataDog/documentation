@@ -12,7 +12,7 @@ further_reading:
 
 Data Streams Monitoring (DSM) supports AWS Lambda functions that produce messages to or consume messages from Amazon SQS, Amazon SNS, Amazon EventBridge, and Amazon Kinesis. DSM automatically injects context into outgoing messages and extracts context from incoming events. You can track end-to-end latency and throughput across your Lambda functions and messaging services without manual instrumentation.
 
-{{< img src="data_streams/dsm_aws_lambda_map.png" alt="Data Streams Monitoring map showing a claimsflow-api service publishing to a claim-submitted topic, which fans out through three subscriptions to a claimsflow-processors service. The processors service produces to several queues, including claim-decided, which routes back to claimsflow-api through a subscription." style="width:100%;" >}}
+{{< img src="data_streams/dsm_aws_lambda_map.png" alt="Data Streams Monitoring map showing Lambda services publishing to an SNS topic that fans out to queues and other services." style="width:100%;" >}}
 
 ### Supported runtimes and technologies
 
@@ -24,13 +24,13 @@ Data Streams Monitoring (DSM) supports AWS Lambda functions that produce message
 | Python   | {{< X >}}   | {{< X >}}   | {{< X >}}          | {{< X >}}      |
 | Node.js  | {{< X >}}   | {{< X >}}   | {{< X >}}          | {{< X >}}      |
 
-Context injection and extraction are automatic for both producers and consumers.
+Ruby Lambda functions are not supported.
 
 ### Prerequisites
 
 * [Datadog Lambda Extension v100 or later][1]
-* A Lambda function instrumented with Datadog. See [Instrument AWS Lambda applications][2].
-* The following minimum version for your runtime:
+* A Lambda function instrumented with Datadog (see [Instrument AWS Lambda applications][2])
+* The minimum Datadog Lambda layer or tracer version for your runtime:
 
 | Runtime | Component                    | Minimum version |
 |---------|------------------------------|-----------------|
@@ -40,12 +40,12 @@ Context injection and extraction are automatic for both producers and consumers.
 | Python  | Datadog Python Lambda layer  | 129             |
 | Node.js | Datadog Node.js Lambda layer | 143             |
 
-### Setup
+### Setting up Data Streams Monitoring
 
 1. Set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on each Lambda function that produces or consumes messages.
 1. On each Lambda function that consumes from Amazon EventBridge, set the `DD_DSM_EXCHANGE_NAME` environment variable to the event bus name. DSM uses this value to identify the event bus in your pipeline.
 
-The following examples configure an EventBridge consumer function. For functions that do not consume from EventBridge, omit `DD_DSM_EXCHANGE_NAME`.
+For functions that do not consume from EventBridge, omit `DD_DSM_EXCHANGE_NAME`. The following examples configure an EventBridge consumer function:
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
