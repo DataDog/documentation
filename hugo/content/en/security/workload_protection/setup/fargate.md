@@ -283,7 +283,7 @@ Update the following items in the manifest:
 - `<DD_API_KEY>`
 - `<CLUSTER_NAME>`
 
-You can use the following command to find the entry point of your workload:
+To find the entry point of your workload, run the following command:
 
 ```shell
 docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
