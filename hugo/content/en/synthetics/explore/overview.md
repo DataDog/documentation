@@ -1,5 +1,5 @@
 ---
-title: Synthetic Monitoring Overview Page
+title: Synthetic Monitoring & Testing Overview Page
 description: Use the Synthetic Monitoring & Testing Overview page to see which tests are failing, where failures cluster, and which endpoints and views have no test coverage.
 further_reading:
 - link: "/synthetics/"
