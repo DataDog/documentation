@@ -13,7 +13,7 @@ further_reading:
 private: true
 title: インフラストラクチャーモード
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 インフラストラクチャーモードによって、Datadog Agent がホスト上で有効にするインフラストラクチャー監視機能が決まります。これらのモードを使用して、Agent の動作をホストの役割に合わせます。完全な Infrastructure Monitoring、基本的なシステムリソースメトリクス、Infrastructure Monitoring なし、または End User Device Monitoring から選択できます。
 
@@ -62,7 +62,7 @@ Agent は 4 つのインフラストラクチャーモードをサポートし�
   - [Windows Kernel Memory][10]
   - [Windows Performance Counters][11] (7.80+)
   - [Windows Registry][12] (7.80+)
-  - [Windows Services][13]
+  - [Windows Services][13] (7.78+)
   - [WMI Check][14] (7.80+)
   - `custom_` というプレフィックスが付いた [カスタムチェック][15]
 

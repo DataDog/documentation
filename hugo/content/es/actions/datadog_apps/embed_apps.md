@@ -1,23 +1,23 @@
 ---
-description: Incruste una aplicación de Datadog publicada en Dashboards, Notebooks,
-  la página de inicio del Internal Developer Portal y en el Catalog side panel.
+description: Incruste una aplicación de Datadog publicada en Dashboards, notebooks,
+  la página de inicio del Internal Developer Portal y el panel lateral del Catalog.
 further_reading:
 - link: /actions/datadog_apps/
   tag: Documentación
   text: Datadog Apps
 - link: /actions/app_builder/embedded_apps/
   tag: Documentación
-  text: Incruste aplicaciones de App Builder
+  text: Incrustar aplicaciones de App Builder
 - link: https://www.npmjs.com/package/@datadog/apps-frontend
   tag: Sitio externo
   text: paquete @datadog/apps-frontend en npm
-title: Incruste aplicaciones
+title: Incrustar aplicaciones
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="¡Únase a la vista previa!">}}
 Datadog Apps está en versión preliminar (Preview). Utilice este formulario para solicitar acceso.
 {{< /callout >}}
 
-Incruste [Datadog Apps][1] en otros productos de Datadog para colocar herramientas operativas directamente en las superficies donde los usuarios investigan problemas y toman medidas. Una aplicación incrustada puede mostrar su experiencia existente o responder al contexto en vivo proporcionado por su servidor, como el rango de tiempo y las variables de plantilla de un Dashboard.
+Incruste [Datadog Apps][1] en otros productos de Datadog para colocar herramientas operativas directamente en las superficies donde los usuarios investigan problemas y toman medidas. Una aplicación incrustada puede mostrar su experiencia existente o responder al contexto en vivo proporcionado por su host, como el rango de tiempo y las variables de plantilla del Dashboard.
 
 ## Requisitos previos {#prerequisites}
 
@@ -28,7 +28,7 @@ Para obtener información sobre cómo crear, cargar y publicar una aplicación, 
 
 ## Incrustar una aplicación {#embed-an-app}
 
-<div class="alert alert-info">Solo puede incrustar una aplicación en la Datadog UI. Los agentes de IA no pueden incrustar aplicaciones.</div>
+<div class="alert alert-info">Solo puede incrustar una aplicación en la interfaz de usuario de Datadog. Los agentes de IA no pueden incrustar aplicaciones.</div>
 
 Después de cargar y publicar una aplicación, puede agregarla a una superficie de Datadog compatible sin cambiar la aplicación.
 
@@ -37,18 +37,19 @@ Puede incrustar una aplicación desde la propia aplicación o desde la superfici
 ### Incrustar desde la aplicación {#embed-from-the-app}
 
 1. En la [Lista de aplicaciones][2], abra la aplicación publicada que desea incrustar.
-1. En la parte superior de la página, haga clic en **+ Add to Dashboard**, o haga clic en la flecha hacia abajo junto a ella y seleccione un tipo de destino en el menú.
+1. En la parte superior de la página, haga clic en **+ Agregar al Dashboard**, o haga clic en la flecha hacia abajo junto a ella y seleccione un tipo de destino en el menú.
 1. Seleccione el destino y luego haga clic en **Guardar**.
 
-### Incruste desde el destino {#embed-from-the-destination}
+### Incrustar desde el destino {#embed-from-the-destination}
 
 {{< tabs >}}
 {{% tab "Dashboard" %}}
 
 1. Abra el Dashboard donde desea agregar la aplicación.
-1. En la bandeja de widgets, busque el widget **Apps** en **Actions and Remediations** y arrástrelo al Dashboard.
-1. En el editor, elija la aplicación en el menú desplegable **Select app**. Para limitar la lista a las aplicaciones que usted posee, habilite **My Apps Only**.
-1. Cambie el tamaño del widget y luego guarde el Dashboard.
+1. Haga clic en **Add Widgets** para abrir la bandeja de widgets.
+1. Seleccione la pestaña **Apps** y, luego, arrastre el widget **Apps** al Dashboard.
+1. En el editor, elija la aplicación en el menú desplegable **Select app**. Para limitar la lista a las aplicaciones que posee, habilite **My Apps Only**.
+1. Cambie el tamaño del widget y, luego, guarde el Dashboard.
 
 {{% /tab %}}
 {{% tab "Notebook" %}}
@@ -63,16 +64,16 @@ La celda **Apps** utiliza el intervalo de tiempo del notebook. Para leer el inte
 {{% /tab %}}
 {{% tab "Catalog" %}}
 
-1. Vaya a [Catalog][1] y seleccione un servicio.
+1. Navegue a [Catalog][1] y seleccione un servicio.
 1. En el panel lateral del servicio, seleccione la pestaña **+ Add App**.
-1. Elija la aplicación en el menú desplegable. Para limitar la lista a las aplicaciones que usted posee, habilite **My Apps Only**.
+1. Elija la aplicación en el menú desplegable. Para limitar la lista a las aplicaciones que posee, habilite **My Apps Only**.
 
 [1]: https://app.datadoghq.com/services
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Después de incrustar la aplicación, opcionalmente [configure la aplicación](#customize-the-embedded-experience) para que responda al contexto, tema o estado del enlace compartido de su servidor. Luego [verifíquela](#verify-the-app). Una aplicación incrustada muestra la versión publicada más recientemente, así que publique sus cambios antes de incrustarla.
+Después de incrustar la aplicación, opcionalmente [configure la aplicación](#customize-the-embedded-experience) para que responda al contexto, tema o estado del enlace compartido de su host. Luego [verifíquela](#verify-the-app). Una aplicación incrustada muestra la versión publicada más recientemente, así que publique sus cambios antes de incrustarla.
 
 ## Personalice la experiencia incrustada {#customize-the-embedded-experience}
 
@@ -82,7 +83,7 @@ Si aún no lo ha hecho, instale el paquete [`@datadog/apps-frontend`][3] en la a
 npm install @datadog/apps-frontend
 ```
 
-Para hacer que una aplicación incrustada responda a su servidor de Datadog, mantenga `DatadogAppProvider` en la raíz de la aplicación. El proveedor establece la comunicación con el servidor de Datadog, pone las entradas del servidor a disposición de los hooks y conserva el estado de la URL de la aplicación en los enlaces compartidos de Datadog.
+Para hacer que una aplicación incrustada responda a su host de Datadog, mantenga `DatadogAppProvider` en la raíz de la aplicación. El proveedor establece la comunicación con el host de Datadog, pone las entradas del host a disposición de los hooks y conserva el estado de la URL de la aplicación en los enlaces compartidos de Datadog.
 
 ```typescript
 import { DatadogAppProvider } from '@datadog/apps-frontend/embedding/react';
@@ -98,11 +99,11 @@ export function Root() {
 
 El andamiaje estándar de las aplicaciones de Datadog incluye este proveedor de forma predeterminada. Cada hook `@datadog/apps-frontend` debe renderizarse debajo de él, así que mantenga el proveedor en su lugar cuando reestructure la aplicación.
 
-### Leer entradas del servidor {#read-host-inputs}
+### Leer entradas del host {#read-host-inputs}
 
-Las entradas del servidor son valores y funciones proporcionados por el producto de Datadog que contiene la aplicación. Por ejemplo, un dashboard puede proporcionar su rango de tiempo actual y variables de plantilla, mientras que el panel lateral del Catálogo puede proporcionar el servicio que está mostrando.
+Las entradas del host son valores y funciones suministrados por el producto de Datadog que contiene la aplicación. Por ejemplo, un Dashboard puede proporcionar su rango de tiempo actual y variables de plantilla, mientras que el panel lateral del Catalog puede proporcionar el servicio que está mostrando.
 
-Los valores del servidor se actualizan automáticamente cuando cambia el contexto del producto circundante.
+Los valores del host se actualizan automáticamente cuando cambia el contexto del producto circundante.
 
 Importe `useDatadogAppInput` y el esquema de entrada para la superficie del producto relevante:
 
@@ -123,7 +124,7 @@ Para ver las definiciones completas de TypeScript, consulte la [`@datadog/apps-f
 
 `useDatadogAppInput` devuelve un objeto de estado cuyo `status` es `pending`, `ready`, `unavailable` o `failed`. Los valores están disponibles en `fields` solo cuando el estado es `ready`.
 
-`unavailable` es un resultado normal en lugar de un error. Significa que la aplicación se está ejecutando en una superficie que no proporciona esa entrada, como leer `datadogDashboard` dentro de un Notebook. Renderice una alternativa para este caso.
+`unavailable` es un resultado normal en lugar de un error. Significa que la aplicación se está ejecutando en una superficie que no proporciona esa entrada, como leer `datadogDashboard` dentro de un notebook. Renderice una alternativa para este caso.
 
 Por ejemplo:
 
@@ -154,7 +155,7 @@ function PanelHeader() {
 {{< tabs >}}
 {{% tab "Tema" %}}
 
-Utilice `datadogTheme` para responder al tema que utiliza actualmente el servidor de Datadog.
+Utilice `datadogTheme` para responder al tema que utiliza actualmente el host de Datadog.
 
 ```typescript
 const theme = useDatadogAppInput(datadogTheme);
@@ -170,7 +171,7 @@ Cuando el estado es `ready`, `fields` proporciona:
 
 El valor se actualiza cuando el usuario cambia el tema de Datadog.
 
-Si la aplicación utiliza [DRUIDS][1], utilice `DruidsEnvironmentWithThemeInput` para aplicar el tema del servidor automáticamente:
+Si la aplicación utiliza [DRUIDS][1], puede utilizar `DruidsEnvironmentWithThemeInput` para aplicar el tema del host automáticamente:
 
 ```typescript
 import { DruidsEnvironmentWithThemeInput } from '@datadog/apps-frontend/druids/react';
@@ -214,12 +215,12 @@ Cuando el estado es `ready`, `fields` proporciona:
 }
 ```
 
-Utilice el rango de tiempo para limitar las consultas de la aplicación al Dashboard. Utilice las variables de plantilla para aplicar el mismo servicio, entorno, equipo u otros filtros utilizados por el Dashboard circundante.
+Utilice el rango de tiempo para limitar las consultas de la aplicación al Dashboard. Utilice las variables de plantilla para aplicar los mismos filtros de servicio, entorno, equipo u otros filtros utilizados por el Dashboard circundante.
 
 {{% /tab %}}
 {{% tab "Notebook" %}}
 
-Utilice `datadogNotebook` para leer el rango de tiempo y las variables de plantilla actuales de un Notebook.
+Utilice `datadogNotebook` para leer el rango de tiempo y las variables de plantilla actuales de un notebook.
 
 ```typescript
 const notebook = useDatadogAppInput(datadogNotebook);
@@ -247,7 +248,7 @@ Cuando el estado es `ready`, `fields` proporciona:
 }
 ```
 
-Utilice este contexto para mantener la aplicación sincronizada con el rango de tiempo y los filtros aplicados al Notebook circundante.
+Utilice este contexto para mantener la aplicación sincronizada con el rango de tiempo y los filtros aplicados al notebook circundante.
 
 {{% /tab %}}
 {{% tab "Página de inicio del IDP" %}}
@@ -267,16 +268,16 @@ Cuando el estado es `ready`, `fields` proporciona:
 }
 ```
 
-Utilice `position` para leer la posición actual de la aplicación en la página de inicio. Llame a `move()` para mover la aplicación una cantidad de posiciones; se resuelve en la nueva posición de la aplicación.
+Utilice `position` para leer la posición actual de la aplicación en la página de inicio. Llame a `move()` para mover la aplicación un número determinado de posiciones; se resuelve en la nueva posición de la aplicación.
 
 ```typescript
 const newPosition = await idp.fields.move({ delta: 1 });
 ```
 
 {{% /tab %}}
-{{% tab "Panel lateral del catálogo" %}}
+{{% tab "Panel lateral del Catalog" %}}
 
-Utilice `datadogServicePanel` para identificar el servicio que se muestra en el panel lateral del catálogo.
+Utilice `datadogServicePanel` para identificar el servicio que se muestra en el panel lateral del Catalog.
 
 ```typescript
 const servicePanel = useDatadogAppInput(datadogServicePanel);
@@ -291,12 +292,12 @@ Cuando el estado es `ready`, `fields` proporciona:
 }
 ```
 
-Utilice `service` para establecer el contexto del contenido de la aplicación en el servicio seleccionado. Llame a `close()` cuando una acción de la aplicación deba cerrar el panel lateral.
+Utilice `service` para ajustar el contenido de la aplicación al contexto del servicio seleccionado. Llame a `close()` cuando una acción de la aplicación deba cerrar el panel lateral.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-No asuma que una entrada disponible en una superficie de producto está disponible en otra. Solicite solo el contexto que la aplicación necesita y proporcione una experiencia útil cuando ese contexto no esté presente.
+No asuma que una entrada disponible en una superficie de producto está disponible en otra. Solicite solo el contexto que la aplicación necesita y proporcione una experiencia útil cuando ese contexto esté ausente.
 
 ## Conserve el estado en los enlaces compartidos {#preserve-state-in-shared-links}
 
@@ -306,9 +307,9 @@ No asuma que una entrada disponible en una superficie de producto está disponib
 
 Después de incrustar la aplicación, verifique lo siguiente en la superficie donde la incrustó:
 
-- **Acceso**: Abra la superficie como un usuario que tiene permiso para usar la aplicación pero que no la incrustó. La aplicación se renderiza en lugar de mostrar un error de permiso.
-- **Tamaño**: Cambie el tamaño de la aplicación al tamaño más pequeño que espera que los usuarios configuren. El contenido permanece legible, sin desbordamiento ni recortes.
-- **Contexto del servidor**: Cambie el contexto del servidor, como el rango de tiempo de un Dashboard o el valor de una variable de plantilla, y confirme que la aplicación se actualice. Si la aplicación incrustada renderiza su `unavailable` fallback en lugar de ello, significa que está leyendo una entrada que la superficie no proporciona.
+- **Acceso**: Abra la superficie como un usuario que tiene permiso para usar la aplicación pero que no la incrustó. La aplicación se muestra en lugar de mostrar un error de permiso.
+- **Tamaño**: Redimensione la aplicación al tamaño más pequeño que espera que los usuarios configuren. El contenido permanece legible, sin desbordamiento ni recortes.
+- **Contexto del host**: Cambie el contexto del host, como el rango de tiempo de un Dashboard o el valor de una variable de plantilla, y confirme que la aplicación se actualiza. Si la aplicación renderiza su `unavailable` alternativa en su lugar, significa que está leyendo una entrada que la superficie no proporciona.
 - **Enlaces compartidos**: Cambie el estado dentro de la aplicación, copie el enlace para compartir de Datadog y ábralo en una nueva sesión del navegador. La aplicación restaura el mismo estado.
 
 ## Lecturas adicionales {#further-reading}
