@@ -62,7 +62,7 @@ Bits Release reports how production behaves after a change. It does not identify
 
 ## Prerequisites
 
-Bits Release needs to read the code you merged, and to recognize the moment that code is live in production. **Bits Release supports GitHub only.** Repositories hosted on GitLab, Azure DevOps, or Bitbucket cannot be validated.
+Bits Release reads the code you merged and detects when that code is live in production. It supports only GitHub repositories. Repositories hosted on GitLab, Azure DevOps, or Bitbucket are not supported.
 
 ### Required
 
