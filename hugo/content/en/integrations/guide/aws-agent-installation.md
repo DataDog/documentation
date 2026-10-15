@@ -159,7 +159,7 @@ Lambda instrumentation needs no Secrets Manager, Systems Manager, or IAM write p
 
 ## How it works
 
-Instrumentation is based on an **instrumentation rule**: an AWS account paired with a query that describes which resources to cover. Datadog evaluates the query, instruments each covered resource inside your own account, and keeps it instrumented:
+An **instrumentation rule** is the saved **Scope to** selection for an AWS account. It determines which resources Datadog automatically instruments, including resources that match the selection later. Datadog evaluates the query, instruments each covered resource inside your own account, and keeps it instrumented:
 
 1. You write a query describing the resources to cover, select specific resources, or add all eligible resources.
 1. Datadog evaluates the rule against your account and records which resources it covers.
