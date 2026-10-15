@@ -31,7 +31,7 @@ Bits Release does not modify your code or add permanent instrumentation. It read
 
 {{< img src="bits_release/bits_release_demo.mp4" alt="Video walking through a Bits Release validation: a merged pull request is deployed to production, validation starts, and a verdict arrives with the evidence behind it" video="true" style="width:100%;" >}}
 
-## How it works
+## How Bits Release works
 
 1. **Detect the merge**: Bits Release picks up a pull request when it merges to the default branch of a repository in scope.
 2. **Analyze the change**: It reads the code change alongside your production data to work out what the change is for: the effect it should have in production once it ships (expected impact), and the behavior it should leave untouched (expected regression risk).
@@ -40,7 +40,7 @@ Bits Release does not modify your code or add permanent instrumentation. It read
 
 Validation runs against your production environment.
 
-### What Bits Release looks at
+### Data sources for Bits Release
 
 Bits Release does not require a dedicated data source. It validates your change with the core Datadog telemetry your services already send, primarily [logs][3] and [APM][4] traces for backend services and [RUM][5] for web frontends, and it adapts to what each service has enabled.
 
