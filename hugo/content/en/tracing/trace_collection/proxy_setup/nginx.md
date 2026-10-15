@@ -22,7 +22,7 @@ aliases:
 Datadog APM supports NGINX in the following configurations:
 - NGINX operated as a proxy with tracing provided by the Datadog module.
 - NGINX as an Ingress Controller for Kubernetes.
-- [OpenResty](#openresty), which is built on NGINX, with tracing provided by an OpenResty-specific build of the Datadog module.
+- [OpenResty](#openresty-with-datadog-module), which is built on NGINX, with tracing provided by an OpenResty-specific build of the Datadog module.
 
 ## NGINX with Datadog module
 Datadog provides an NGINX module for distributed tracing.
@@ -345,17 +345,21 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
-## OpenResty
+## OpenResty with Datadog module
 
-OpenResty is built on NGINX, and each nginx-datadog release includes a separate OpenResty build of the module. The setup is similar to [NGINX with Datadog module](#nginx-with-datadog-module).
+OpenResty is built on NGINX, and each `nginx-datadog` release includes a separate OpenResty build of the module.
 
 To install the Datadog NGINX module for OpenResty:
-1. Download the appropriate `openresty-` prefixed version from the [latest nginx-datadog GitHub release][1].
-2. Choose the tarball corresponding to the specific OpenResty, version and CPU architecture. Use the four-part OpenResty version from `openresty -v` (for example, `1.31.1.1`), not the NGINX core version it is built on.
+1. Download the appropriate `openresty-` prefixed version from the [latest `nginx-datadog` GitHub release][1].
+2. Choose the tarball that matches your OpenResty version and CPU architecture. Use the four-part OpenResty version from `openresty -v` (for example, `1.31.1.1`), not the NGINX core version it's built on.
+3. Extract `ngx_http_datadog_module.so` from the tarball and place it in `/usr/local/openresty/nginx/modules`. Create the directory if it doesn't exist.
+4. At the top of `/usr/local/openresty/nginx/conf/nginx.conf`, load the module:
 
-Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in `/usr/local/openresty/nginx/modules`, creating this directory if necessary. Add the `load_module` directive at the top of `/usr/local/openresty/nginx/conf/nginx.conf`.
+    ```nginx
+    load_module modules/ngx_http_datadog_module.so;
+    ```
 
-The `datadog_*` directives and the `DD_` environment variables behave the same as on NGINX.
+The `datadog_*` directives described in the module's [API documentation][4] and the `DD_*` environment variables work the same way in OpenResty as in NGINX.
 
 ## Correlating traces to logs
 
