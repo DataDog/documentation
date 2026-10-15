@@ -89,6 +89,12 @@ a.api-changelog-entry__product-name {
   font-weight: var(--font-weight-semibold);
 }
 
+/* Semibold monospace reads larger than the title's proportional text at the
+   global inline `code` size, so title code steps down one size. */
+.api-changelog-entry__title code {
+  font-size: var(--font-size-2xs);
+}
+
 .api-changelog-entry__operations-row {
   display: flex;
   flex-wrap: wrap;
