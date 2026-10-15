@@ -13,8 +13,8 @@ further_reading:
   text: "Reading Experiment Results"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Online experiments for Agent Observability are in Preview. Contact your Datadog representative to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/?product=ai-observability" btn_hidden="false" header="Join the Preview!" >}}
+Online experiments for Agent Observability are in Preview. Fill out the form to register your interest.
 {{< /callout >}}
 
 ## Overview
