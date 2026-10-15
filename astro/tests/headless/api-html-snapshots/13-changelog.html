@@ -337,37 +337,48 @@
         Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product
         team and collected here in one changelog.
       </p>
-      <nav class="api-changelog-filter-bar _api-changelog-filter-bar_0fe17b" aria-label="Filter by change type">
-        <ul class="api-changelog-filter-bar__list _api-changelog-filter-bar__list_0fe17b">
-          <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
-            <a
-              class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b api-changelog-filter-bar__tab--active _api-changelog-filter-bar__tab--active_0fe17b"
-              href="/api/changelog/"
-              aria-current="page"
-              >All</a
-            >
-          </li>
-          <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
-            <a class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b" href="/api/changelog/added/"
-              >Added</a
-            >
-          </li>
-          <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
-            <a
-              class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b"
-              href="/api/changelog/modified/"
-              >Modified</a
-            >
-          </li>
-          <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
-            <a
-              class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b"
-              href="/api/changelog/breaking/"
-              >Breaking</a
-            >
-          </li>
-        </ul>
-      </nav>
+      <astro-island
+        uid="X5"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"ApiChangelogFilterBar","value":true}'
+        await-children
+        ><nav aria-label="Filter by change type" class="api-changelog-filter-bar _api-changelog-filter-bar_0fe17b">
+          <ul class="api-changelog-filter-bar__list _api-changelog-filter-bar__list_0fe17b">
+            <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
+              <a
+                href="/api/changelog/"
+                aria-current="page"
+                class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b api-changelog-filter-bar__tab--active _api-changelog-filter-bar__tab--active_0fe17b"
+                >All</a
+              >
+            </li>
+            <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
+              <a
+                href="/api/changelog/added/"
+                class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b"
+                >Added</a
+              >
+            </li>
+            <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
+              <a
+                href="/api/changelog/modified/"
+                class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b"
+                >Modified</a
+              >
+            </li>
+            <li class="api-changelog-filter-bar__item _api-changelog-filter-bar__item_0fe17b">
+              <a
+                href="/api/changelog/breaking/"
+                class="api-changelog-filter-bar__tab _api-changelog-filter-bar__tab_0fe17b"
+                >Breaking</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <!--astro:end--></astro-island
+      >
       <div class="api-changelog-timeline _api-changelog-timeline_d964c1">
         <section class="api-changelog-timeline__section _api-changelog-timeline__section_d964c1">
           <h2 class="api-changelog-timeline__date _api-changelog-timeline__date_d964c1">

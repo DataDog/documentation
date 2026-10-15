@@ -1,10 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { Window } from "happy-dom";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
+import preactRenderer from "@astrojs/preact/server.js";
 import ApiChangelog from "../ApiChangelog.astro";
 import ApiChangelogEmptyState from "../ApiChangelogEmptyState.astro";
 import ApiChangelogEntry from "../ApiChangelogEntry.astro";
-import ApiChangelogFilterBar from "../ApiChangelogFilterBar.astro";
 import ApiChangelogTimeline from "../ApiChangelogTimeline.astro";
 import type {
   ChangelogBucket,
@@ -22,6 +23,10 @@ async function render(
   props: Record<string, unknown>,
 ): Promise<Document> {
   const container = await AstroContainer.create();
+  container.addServerRenderer({
+    renderer: preactRenderer,
+    name: "@astrojs/preact",
+  });
   const html = await container.renderToString(component, { props });
   return new parserWindow.DOMParser().parseFromString(
     html,
@@ -200,11 +205,36 @@ describe("ApiChangelogTimeline", () => {
   });
 });
 
-describe("ApiChangelogFilterBar", () => {
-  it("links every filter tab, marking the active one", async () => {
-    const doc = await render(ApiChangelogFilterBar, {
+describe("ApiChangelogEmptyState", () => {
+  it("says no changes have been published, under All", async () => {
+    const doc = await render(ApiChangelogEmptyState, {
+      lang: "en",
+      filter: "all",
+    });
+    expect(text(doc.querySelector(".api-changelog-empty-state"))).toBe(
+      "No API changes have been published yet.",
+    );
+    expect(doc.querySelector("a")).toBeNull();
+  });
+
+  it("names the filter and links back to All, under a filter", async () => {
+    const doc = await render(ApiChangelogEmptyState, {
       lang: "ja",
-      activeFilter: "breaking",
+      filter: "breaking",
+    });
+    expect(text(doc.querySelector(".api-changelog-empty-state__message"))).toBe(
+      "No breaking changes yet.",
+    );
+    const link = doc.querySelector(".api-changelog-empty-state__link")!;
+    expect(link.getAttribute("href")).toBe("/ja/api/changelog/");
+  });
+});
+
+describe("ApiChangelog", () => {
+  it("renders the filter bar's localized tabs, marking the page's filter", async () => {
+    const doc = await render(ApiChangelog, {
+      lang: "ja",
+      page: makePage({ filter: "breaking" }),
     });
     const nav = doc.querySelector("nav.api-changelog-filter-bar")!;
     expect(nav.getAttribute("aria-label")).toBe("Filter by change type");
@@ -241,34 +271,7 @@ describe("ApiChangelogFilterBar", () => {
       },
     ]);
   });
-});
 
-describe("ApiChangelogEmptyState", () => {
-  it("says no changes have been published, under All", async () => {
-    const doc = await render(ApiChangelogEmptyState, {
-      lang: "en",
-      filter: "all",
-    });
-    expect(text(doc.querySelector(".api-changelog-empty-state"))).toBe(
-      "No API changes have been published yet.",
-    );
-    expect(doc.querySelector("a")).toBeNull();
-  });
-
-  it("names the filter and links back to All, under a filter", async () => {
-    const doc = await render(ApiChangelogEmptyState, {
-      lang: "ja",
-      filter: "breaking",
-    });
-    expect(text(doc.querySelector(".api-changelog-empty-state__message"))).toBe(
-      "No breaking changes yet.",
-    );
-    const link = doc.querySelector(".api-changelog-empty-state__link")!;
-    expect(link.getAttribute("href")).toBe("/ja/api/changelog/");
-  });
-});
-
-describe("ApiChangelog", () => {
   it("renders the timeline and no empty state when there are entries", async () => {
     const doc = await render(ApiChangelog, { lang: "en", page: makePage() });
     expect(doc.querySelector(".api-changelog-timeline")).not.toBeNull();

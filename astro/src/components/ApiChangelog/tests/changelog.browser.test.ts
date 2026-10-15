@@ -24,6 +24,79 @@ test.describe("API changelog", () => {
     await expect(activeTab).toHaveAttribute("aria-current", "page");
   });
 
+  test("a clicked filter tab turns active while its page is still loading", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    await page
+      .locator('.api-changelog-filter-bar[data-hydrated="true"]')
+      .waitFor();
+
+    // Holds the next page's response, so the old page stays up until released.
+    let releaseResponse!: () => void;
+    const responseReleased = new Promise<void>((resolve) => {
+      releaseResponse = resolve;
+    });
+    await page.route("**/api/changelog/added/", async (route) => {
+      await responseReleased;
+      await route.continue();
+    });
+
+    // Locators and evaluate() both wait out a pending navigation, so the old
+    // page reports its own active tab changes instead.
+    const activeTabChanges: string[] = [];
+    let reportFirstChange!: () => void;
+    const firstChangeReported = new Promise<void>((resolve) => {
+      reportFirstChange = resolve;
+    });
+    await page.exposeFunction("reportActiveTab", (label: string) => {
+      activeTabChanges.push(label);
+      reportFirstChange();
+    });
+    await page.evaluate(() => {
+      const bar = document.querySelector(".api-changelog-filter-bar")!;
+      new MutationObserver(() => {
+        const activeTab = bar.querySelector(
+          ".api-changelog-filter-bar__tab--active",
+        );
+        // @ts-expect-error -- exposed by the test above.
+        window.reportActiveTab(activeTab?.textContent ?? "");
+      }).observe(bar, { subtree: true, attributeFilter: ["class"] });
+    });
+
+    await page
+      .locator(".api-changelog-filter-bar__tab", { hasText: "Added" })
+      .click({ noWaitAfter: true });
+
+    await firstChangeReported;
+    expect(activeTabChanges.at(-1)).toBe("Added");
+    expect(page.url()).toMatch(/\/api\/changelog\/$/);
+
+    releaseResponse();
+    await expect(page).toHaveURL(/\/api\/changelog\/added\/$/);
+    await expect(
+      page.locator(".api-changelog-filter-bar__tab--active"),
+    ).toHaveText("Added");
+  });
+
+  test("the active filter tab keeps its text color on hover", async ({
+    page,
+  }) => {
+    await page.goto(CHANGELOG_URL);
+    const activeTab = page.locator(".api-changelog-filter-bar__tab--active");
+    const restingColor = await activeTab.evaluate(
+      (element) => getComputedStyle(element).color,
+    );
+
+    await activeTab.hover();
+    const hover = await activeTab.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return { color: style.color, background: style.backgroundColor };
+    });
+    expect(hover.color).toBe(restingColor);
+    expect(hover.color).not.toBe(hover.background);
+  });
+
   test("Next goes to the top of page 2", async ({ page }) => {
     await page.goto(CHANGELOG_URL);
     const next = page.locator("a.pagination__next");

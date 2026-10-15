@@ -68,7 +68,10 @@
   font-weight: var(--font-weight-semibold);
 }
 
+/* Restates the text color, which the global `a:hover` rule outranks and would
+   otherwise turn the same purple as the fill. */
 .api-changelog-filter-bar__tab--active:hover {
   border-color: var(--color-brand-hover);
   background: var(--color-brand-hover);
+  color: var(--color-text-on-brand);
 }

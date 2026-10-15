@@ -5,15 +5,18 @@
  */
 import Pagination from "@components/Pagination/Pagination.astro";
 import ApiChangelogEmptyState from "./ApiChangelogEmptyState.astro";
-import ApiChangelogFilterBar from "./ApiChangelogFilterBar.astro";
+import ApiChangelogFilterBar from "./ApiChangelogFilterBar";
 import ApiChangelogTimeline from "./ApiChangelogTimeline.astro";
 import {
+  CHANGELOG_BUCKET_LABELS,
+  CHANGELOG_FILTERS,
   CHANGELOG_INTRO,
   changelogHref,
   type ChangelogPage,
   type ResolvedChangelogEntry,
 } from "@lib/api/changelog";
 import type { Locale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
 
 interface Props {
   lang: Locale;
@@ -21,19 +24,31 @@ interface Props {
 }
 
 const { lang, page } = Astro.props;
+const translate = useTranslations(lang);
 // TODO: no Hugo i18n keys exist for these strings yet.
+const filterBarLabels = { nav: "Filter by change type" };
 const paginationLabels = {
   navLabel: "Changelog pages",
   previous: "Prev",
   next: "Next",
 };
+const filterTabs = CHANGELOG_FILTERS.map((filter) => ({
+  filter,
+  label: filter === "all" ? translate("all") : CHANGELOG_BUCKET_LABELS[filter],
+  href: changelogHref(lang, filter, 1),
+}));
 const hrefForPage = (pageNumber: number) =>
   changelogHref(lang, page.filter, pageNumber);
 ---
 
 <div class="api-changelog">
   <p class="api-changelog__intro">{CHANGELOG_INTRO}</p>
-  <ApiChangelogFilterBar lang={lang} activeFilter={page.filter} />
+  <ApiChangelogFilterBar
+    client:load
+    tabs={filterTabs}
+    activeFilter={page.filter}
+    labels={filterBarLabels}
+  />
   {
     page.entries.length > 0 ? (
       <ApiChangelogTimeline entries={page.entries} />
