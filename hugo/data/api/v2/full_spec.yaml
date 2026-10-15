@@ -1343,6 +1343,15 @@ components:
         example: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
         format: uuid
         type: string
+    OrgGroupMembershipDeleteFilterOrgGroupId:
+      description: The ID of the organization group that the memberships belong to.
+      in: query
+      name: filter[org_group_id]
+      required: true
+      schema:
+        example: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+        format: uuid
+        type: string
     OrgGroupMembershipFilterOrgGroupId:
       description: Filter memberships by org group ID. Required when `filter[org_uuid]` is not provided.
       in: query
@@ -49344,6 +49353,8 @@ components:
           description: Indicates the whether a feature flag is stale or not.
           example: "ACTIVE"
           type: string
+        staleness_status_override:
+          $ref: "#/components/schemas/FeatureFlagStalenessStatusOverride"
         tags:
           description: Tags associated with the feature flag.
           example: []
@@ -49591,9 +49602,12 @@ components:
         staleness_details:
           $ref: "#/components/schemas/FeatureFlagStalenessDetails"
         staleness_status:
-          description: Indicates the staleness status of the feature flag.
+          deprecated: true
+          description: Legacy status retained for compatibility. This field is always `ACTIVE`; use `staleness_details.staleness_status` for the computed status.
           example: "ACTIVE"
           type: string
+        staleness_status_override:
+          $ref: "#/components/schemas/FeatureFlagStalenessStatusOverride"
         tags:
           description: Tags associated with the feature flag.
           example: []
@@ -49620,6 +49634,18 @@ components:
         - value_type
         - variants
       type: object
+    FeatureFlagProductionStatus:
+      description: The status of a feature flag across production environments.
+      enum:
+        - ENABLED
+        - DISABLED
+        - OVERRIDDEN
+      example: ENABLED
+      type: string
+      x-enum-varnames:
+        - ENABLED
+        - DISABLED
+        - OVERRIDDEN
     FeatureFlagResponse:
       description: Response containing a feature flag.
       properties:
@@ -49701,6 +49727,28 @@ components:
           example: "Archive the feature flag."
           type: string
       type: object
+    FeatureFlagStalenessStatus:
+      description: The computed staleness status of a feature flag.
+      enum:
+        - ACTIVE
+        - STALE
+        - PERMANENT
+      example: ACTIVE
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - STALE
+        - PERMANENT
+    FeatureFlagStalenessStatusOverride:
+      description: An explicit staleness status override. Omitted when no override is set.
+      enum:
+        - STALE
+        - PERMANENT
+      example: PERMANENT
+      type: string
+      x-enum-varnames:
+        - STALE
+        - PERMANENT
     FeatureFlagStatus:
       description: The status of a feature flag in an environment.
       enum:
@@ -49711,6 +49759,30 @@ components:
       x-enum-varnames:
         - ENABLED
         - DISABLED
+    FeatureFlagsPaginationLinks:
+      description: Pagination links. Follow `next` with the same authentication to retrieve the next page. Links use `page[limit]` and `page[offset]` and preserve the filters. Navigation links are omitted when not applicable.
+      properties:
+        first:
+          description: Link to the first page.
+          example: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=0
+          type: string
+        last:
+          description: Link to the last page.
+          example: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=75
+          type: string
+        next:
+          description: Link to the next page, when available.
+          example: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=25
+          type: string
+        prev:
+          description: Link to the previous page, when available.
+          example: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=0
+          type: string
+        self:
+          description: Link to the current page.
+          example: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=0
+          type: string
+      type: object
     FeatureFlagsPaginationMeta:
       description: Pagination metadata for feature flags.
       properties:
@@ -49720,16 +49792,60 @@ components:
     FeatureFlagsPaginationMetaPage:
       description: Pagination metadata for feature flags list responses.
       properties:
+        first_offset:
+          description: Offset of the first page.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Offset of the last page.
+          example: 75
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Maximum number of flags returned on this page.
+          example: 25
+          format: int64
+          type: integer
+        next_offset:
+          description: Offset of the next page, or null when there is no next page.
+          example: 25
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Number of matching flags skipped before this page.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Offset of the previous page, or null when there is no previous page.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total number of flags matching the filters, independent of the page size.
+          example: 100
+          format: int64
+          type: integer
         total_count:
-          description: Total number of items.
+          deprecated: true
+          description: Legacy count field. Use `total` for the number of matching flags.
           example: 100
           format: int64
           type: integer
         total_filtered_count:
-          description: Total number of items matching the filter.
+          deprecated: true
+          description: Legacy filtered count field. Use `total` for the number of matching flags.
           example: 25
           format: int64
           type: integer
+        type:
+          description: The pagination method. Always `offset_limit`.
+          example: offset_limit
+          type: string
       type: object
     FileCoverageLines:
       description: Per-file line coverage data including executable, covered, and added lines.
@@ -75732,6 +75848,8 @@ components:
           items:
             $ref: "#/components/schemas/FeatureFlagListItem"
           type: array
+        links:
+          $ref: "#/components/schemas/FeatureFlagsPaginationLinks"
         meta:
           $ref: "#/components/schemas/FeatureFlagsPaginationMeta"
       required:
@@ -84725,7 +84843,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecret"
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificate"
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentity"
-        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertion"
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentity"
     ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCli:
       description: Authenticate using the Azure CLI credentials available in the environment.
@@ -84828,40 +84946,6 @@ components:
       required:
         - azure_credential_kind
       type: object
-    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion:
-      description: Authenticate using a managed identity as a client assertion for a Microsoft Entra application.
-      properties:
-        azure_credential_kind:
-          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind"
-        client_assertion_client_id:
-          description: The client ID of the Microsoft Entra application that trusts the managed identity.
-          example: 22222222-2222-2222-2222-222222222222
-          type: string
-        client_assertion_tenant_id:
-          description: The tenant ID of the Microsoft Entra application that trusts the managed identity.
-          example: 11111111-1111-1111-1111-111111111111
-          type: string
-        user_assigned_managed_identity_id:
-          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
-          example: 00000000-0000-0000-0000-000000000000
-          nullable: true
-          type: string
-        user_assigned_managed_identity_id_type:
-          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
-      required:
-        - azure_credential_kind
-        - client_assertion_client_id
-        - client_assertion_tenant_id
-      type: object
-    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind:
-      default: managed_identity_client_assertion
-      description: The Azure credential kind. The value should always be `managed_identity_client_assertion`.
-      enum:
-        - managed_identity_client_assertion
-      example: managed_identity_client_assertion
-      type: string
-      x-enum-varnames:
-        - MANAGED_IDENTITY_CLIENT_ASSERTION
     ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityKind:
       default: managed_identity
       description: The Azure credential kind. The value should always be `managed_identity`.
@@ -84947,6 +85031,40 @@ components:
       type: string
       x-enum-varnames:
         - AZURE_DATA_EXPLORER
+    ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertion:
+      description: Authenticate using a managed identity as a client assertion for a Microsoft Entra application.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertionKind"
+        client_assertion_client_id:
+          description: The client ID of the Microsoft Entra application that trusts the managed identity.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        client_assertion_tenant_id:
+          description: The tenant ID of the Microsoft Entra application that trusts the managed identity.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+        user_assigned_managed_identity_id:
+          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
+          example: 00000000-0000-0000-0000-000000000000
+          nullable: true
+          type: string
+        user_assigned_managed_identity_id_type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
+      required:
+        - azure_credential_kind
+        - client_assertion_client_id
+        - client_assertion_tenant_id
+      type: object
+    ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertionKind:
+      default: managed_identity_client_assertion
+      description: The Azure credential kind. The value should always be `managed_identity_client_assertion`.
+      enum:
+        - managed_identity_client_assertion
+      example: managed_identity_client_assertion
+      type: string
+      x-enum-varnames:
+        - MANAGED_IDENTITY_CLIENT_ASSERTION
     ObservabilityPipelineAzureStorageDestinationCompression:
       description: |-
         Compression configuration for archived logs. When omitted, logs are compressed with gzip
@@ -92290,14 +92408,47 @@ components:
         - created_at
         - modified_at
       type: object
+    OrgGroupMembershipBulkDeleteRequest:
+      description: Request to delete a batch of org group memberships.
+      properties:
+        data:
+          description: >-
+            The memberships to delete, specified as membership resource identifiers. Each request must include between 1 and 100 unique membership IDs.
+          items:
+            $ref: "#/components/schemas/OrgGroupMembershipBulkDeleteRequestData"
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - data
+      type: object
+    OrgGroupMembershipBulkDeleteRequestData:
+      description: A resource identifier for an org group membership to delete.
+      properties:
+        id:
+          description: The ID of the org group membership.
+          example: "f1e2d3c4-b5a6-7890-1234-567890abcdef"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/OrgGroupMembershipType"
+      required:
+        - id
+        - type
+      type: object
     OrgGroupMembershipBulkUpdateAttributes:
       description: Attributes for bulk updating org group memberships.
       properties:
         orgs:
-          description: List of organizations to move. Maximum 100 per request.
+          description: >-
+            List of organizations to move. Each request must include between 1 and 100 organizations. Each `org_uuid` and `org_site` pair must be unique.
           items:
             $ref: "#/components/schemas/GlobalOrgIdentifier"
+          maxItems: 100
+          minItems: 1
           type: array
+          uniqueItems: true
       required:
         - orgs
       type: object
@@ -92342,6 +92493,51 @@ components:
       type: string
       x-enum-varnames:
         - ORG_GROUP_MEMBERSHIP_BULK_UPDATES
+    OrgGroupMembershipCreateAttributes:
+      description: Attributes for adding organizations to an org group.
+      properties:
+        orgs:
+          description: >-
+            List of organizations to add. Each request must include between 1 and 100 organizations. Each `org_uuid` and `org_site` pair must be unique.
+          items:
+            $ref: "#/components/schemas/GlobalOrgIdentifier"
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - orgs
+      type: object
+    OrgGroupMembershipCreateData:
+      description: Data for adding organizations to an org group.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateAttributes"
+        relationships:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupMembershipType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    OrgGroupMembershipCreateRelationships:
+      description: Relationships for adding organizations to an org group.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      required:
+        - org_group
+      type: object
+    OrgGroupMembershipCreateRequest:
+      description: Request to add organizations to an org group.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateData"
+      required:
+        - data
+      type: object
     OrgGroupMembershipData:
       description: An org group membership resource.
       properties:
@@ -172495,23 +172691,24 @@ paths:
   /api/v2/feature-flags:
     get:
       description: |-
-        Returns a list of feature flags for the organization.
-        Supports filtering by key and archived status.
+        Returns a paginated list of feature flags for the organization.
+        Supports filtering by key, tags, teams, SDK availability, production status, and other flag properties.
+        Use `page[limit]` and `page[offset]` to paginate, or follow the `next` link in the response.
       operationId: ListFeatureFlags
       parameters:
-        - description: Filter feature flags by key (partial matching).
-          example: "flag-search-term"
+        - description: Filter feature flags by an exact, case-sensitive key. Use `search` for partial matching.
+          example: example-feature-flag
           in: query
           name: key
           schema:
             type: string
-        - description: Filter by archived status.
+        - description: Filter by archived status. If `true`, return only archived flags. If `false`, return only flags that are not archived. If omitted, return both.
           example: false
           in: query
           name: is_archived
           schema:
             type: boolean
-        - description: Maximum number of results to return.
+        - description: Deprecated alias for `page[limit]`. Use `page[limit]` for new requests. Used only when `page[limit]` is absent. When both parameters are omitted, the server defaults to `25`. Values that exceed `50` are set to `50`; non-positive or empty values use the server default.
           example: 10
           in: query
           name: limit
@@ -172521,10 +172718,132 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Number of results to skip.
+        - description: Deprecated alias for `page[offset]`. Used only when `page[offset]` is absent. Defaults to `0`. Negative or empty values are set to `0`.
           example: 0
           in: query
           name: offset
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
+        - description: Filter by exact tag values using repeated parameters, such as `tags=env:prod&tags=purpose:sitemap`. A flag must have all ordinary tags. Values of the form `team:<handle>` match any selected team and are combined with `teams` into one set. The result must match all ordinary tags, any selected team, and all other filters. Empty values are ignored.
+          example:
+            - env:prod
+            - purpose:sitemap
+          explode: true
+          in: query
+          name: tags
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Filter by team handles without the `team:` prefix. Use repeated parameters to filter by multiple team handles, such as `teams=checkout&teams=payments`. A flag must belong to at least one selected team. Team handles from `teams` and `team:<handle>` values from tags are treated as a single set and combined with ordinary tags and other filters using AND logic. Duplicate handles do not duplicate results. Unknown handles do not match any flags. Empty handles, surrounding white space, or using the `team:` prefix return a bad request error. Response tags are unchanged.
+          example:
+            - checkout
+            - payments
+          explode: true
+          in: query
+          name: teams
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Filter by status across production environments. Use repeated parameters to match any selected status. `ENABLED` matches at least one enabled production environment without a variant override. `OVERRIDDEN` matches at least one enabled production environment with a variant override. `DISABLED` matches flags whose associated production environments are all disabled. A flag can match both `ENABLED` and `OVERRIDDEN` in different environments. Flags without associated production environments do not match. This does not filter by a specific environment. Unknown values do not match any status.
+          example:
+            - ENABLED
+            - OVERRIDDEN
+          explode: true
+          in: query
+          name: production_status
+          schema:
+            items:
+              $ref: "#/components/schemas/FeatureFlagProductionStatus"
+            type: array
+          style: form
+        - description: Filter by SDK availability. `CLIENT` returns flags with channel `CLIENT` or `ALL`. `SERVER` returns flags with channel `SERVER` or `ALL`. `ALL`, an empty value, or omission applies no channel restriction; it does not select only flags whose channel is `ALL`. Values are case-insensitive and surrounding white space is ignored. Invalid values return a bad request error.
+          example: CLIENT
+          in: query
+          name: distribution_channel
+          schema:
+            $ref: "#/components/schemas/FeatureFlagDistributionChannel"
+        - description: Case-insensitive substring search on flag names, keys, and tag names. Combined with all other filters. An empty value applies no search restriction.
+          example: checkout
+          in: query
+          name: search
+          schema:
+            type: string
+        - description: Filter by variant value types using repeated parameters. A flag must match at least one selected type. Empty values are ignored. Invalid types return a bad request error.
+          example:
+            - BOOLEAN
+            - STRING
+          explode: true
+          in: query
+          name: value_type
+          schema:
+            items:
+              $ref: "#/components/schemas/ValueType"
+            type: array
+          style: form
+        - description: Filter by creator UUIDs using repeated parameters. A flag must match at least one creator. Empty values are ignored. Invalid UUIDs return a bad request error.
+          example:
+            - 550e8400-e29b-41d4-a716-446655440010
+          explode: true
+          in: query
+          name: created_by
+          schema:
+            items:
+              format: uuid
+              type: string
+            type: array
+          style: form
+        - description: Filter by feature flag UUIDs using repeated parameters. A flag must match at least one ID and all other filters. Duplicate IDs return each flag once. Unknown IDs and IDs from other organizations do not match any flags. Empty or invalid UUIDs return a bad request error. Pagination still applies.
+          example:
+            - 550e8400-e29b-41d4-a716-446655440000
+          explode: true
+          in: query
+          name: flag_ids
+          schema:
+            items:
+              format: uuid
+              type: string
+            type: array
+          style: form
+        - description: "Filter by the computed staleness status: `ACTIVE`, `STALE`, or `PERMANENT`. Values are case-insensitive and surrounding white space is ignored. An empty value or omission applies no restriction. Invalid values return a bad request error. Read the computed result from `staleness_details.staleness_status`, not the legacy `staleness_status` response field."
+          example: STALE
+          in: query
+          name: staleness_status
+          schema:
+            $ref: "#/components/schemas/FeatureFlagStalenessStatus"
+        - description: Filter to flags that reference this saved filter in their targeting conditions. An empty value or omission applies no restriction. An invalid UUID returns a bad request error.
+          example: 550e8400-e29b-41d4-a716-446655440020
+          in: query
+          name: saved_filter_id
+          schema:
+            format: uuid
+            type: string
+        - description: Sort by `name`, `updated_at`, `created_at`, or `evaluations`. Use a comma-separated list for multiple sort fields and prefix a field with `-` for descending order. The default is `updated_at` descending. When favorites are enabled, the authenticated user's favorite flags take precedence over the selected ordering. Unknown fields return a bad request error.
+          example: -updated_at
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Maximum number of flags to return. Defaults to `25` and is capped at `50`. Values that exceed `50` are set to `50`. Non-positive or empty values use the default. A non-integer value returns a bad request error. Takes precedence over `limit` when both are present. Pagination applies even when no pagination parameters are supplied.
+          example: 25
+          in: query
+          name: page[limit]
+          schema:
+            default: 25
+            format: int64
+            maximum: 50
+            minimum: 1
+            type: integer
+        - description: Number of matching flags to skip before returning results. Defaults to `0`. Negative or empty values are set to `0`. A non-integer value returns a bad request error. Takes precedence over `offset` when both are present.
+          example: 0
+          in: query
+          name: page[offset]
           schema:
             default: 0
             format: int64
@@ -172538,9 +172857,29 @@ paths:
                 default:
                   value:
                     data: []
+                    links:
+                      first: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=0
+                      last: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=0
+                      self: https://api.datadoghq.com/api/v2/feature-flags?page%5Blimit%5D=25&page%5Boffset%5D=0
+                    meta:
+                      page:
+                        first_offset: 0
+                        last_offset: 0
+                        limit: 25
+                        next_offset:
+                        offset: 0
+                        prev_offset:
+                        total: 0
+                        type: offset_limit
               schema:
                 $ref: "#/components/schemas/ListFeatureFlagsResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           content:
             application/json:
@@ -208088,10 +208427,73 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: >-
+        Add a batch of organizations to an existing organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. This is an atomic operation: either all organizations are added or none are. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization. The requesting organization must own the organization group.
+      operationId: CreateOrgGroupMemberships
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      orgs:
+                        - org_site: "us1"
+                          org_uuid: "c3d4e5f6-a7b8-9012-cdef-012345678901"
+                    relationships:
+                      org_group:
+                        data:
+                          id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                          type: org_groups
+                    type: org_group_memberships
+            schema:
+              $ref: "#/components/schemas/OrgGroupMembershipCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create org group memberships
+      tags: [Org Groups]
+      x-menu-order: 7
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_group_memberships/bulk:
     patch:
       description: >-
-        Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.
+        Move a batch of organizations from one organization group to another. This is an atomic operation. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization.
       operationId: BulkUpdateOrgGroupMemberships
       requestBody:
         content:
@@ -208169,7 +208571,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Bulk update org group memberships
       tags: [Org Groups]
-      x-menu-order: 9
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -208177,7 +208579,115 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_memberships/bulk_delete:
+    post:
+      description: >-
+        Delete a batch of memberships from an organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. The memberships to delete are provided as membership resource identifiers, and the organization group they belong to must be specified using `filter[org_group_id]`. Each request must include between 1 and 100 unique membership IDs, and the requesting organization must own the organization group. The request does not fail if a membership ID refers to a membership that has already been deleted, does not exist, or does not belong to the organization group.
+      operationId: DeleteOrgGroupMemberships
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupMembershipDeleteFilterOrgGroupId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - id: "f1e2d3c4-b5a6-7890-1234-567890abcdef"
+                      type: org_group_memberships
+                    - id: "e2d3c4b5-a6f7-8901-2345-67890abcdef1"
+                      type: org_group_memberships
+                    - id: "d3c4b5a6-f7e8-9012-3456-7890abcdef12"
+                      type: org_group_memberships
+            schema:
+              $ref: "#/components/schemas/OrgGroupMembershipBulkDeleteRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk delete org group memberships
+      tags: [Org Groups]
+      x-menu-order: 12
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_group_memberships/{org_group_membership_id}:
+    delete:
+      description: >-
+        Remove an organization from an organization group by deleting its membership. This operation is not supported for organization groups with `group_type` set to `config_management`. The organization group that the membership belongs to must be specified using `filter[org_group_id]`, and the requesting organization must own that organization group. Returns `404` if the membership does not exist, was already removed, or does not belong to the organization group.
+      operationId: DeleteOrgGroupMembership
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupMembershipId"
+        - $ref: "#/components/parameters/OrgGroupMembershipDeleteFilterOrgGroupId"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an org group membership
+      tags: [Org Groups]
+      x-menu-order: 10
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a specific organization group membership by its ID.
       operationId: GetOrgGroupMembership
@@ -208235,7 +208745,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group membership
       tags: [Org Groups]
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -208317,7 +208827,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group membership
       tags: [Org Groups]
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -208399,7 +208909,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policies
       tags: [Org Groups]
-      x-menu-order: 10
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -208519,7 +209029,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an org group policy
       tags: [Org Groups]
-      x-menu-order: 12
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -208564,7 +209074,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an org group policy
       tags: [Org Groups]
-      x-menu-order: 14
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -208630,7 +209140,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group policy
       tags: [Org Groups]
-      x-menu-order: 11
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -208743,7 +209253,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group policy
       tags: [Org Groups]
-      x-menu-order: 13
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -208790,7 +209300,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy configs
       tags: [Org Groups]
-      x-menu-order: 20
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -208874,7 +209384,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy overrides
       tags: [Org Groups]
-      x-menu-order: 15
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -208963,7 +209473,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an org group policy override
       tags: [Org Groups]
-      x-menu-order: 17
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -209008,7 +209518,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an org group policy override
       tags: [Org Groups]
-      x-menu-order: 19
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -209076,7 +209586,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group policy override
       tags: [Org Groups]
-      x-menu-order: 16
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -209159,7 +209669,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group policy override
       tags: [Org Groups]
-      x-menu-order: 18
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -209218,7 +209728,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy suggestions
       tags: [Org Groups]
-      x-menu-order: 21
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -252073,7 +252583,7 @@ tags:
       view certain types of telemetry (for example, logs, traces, metrics, and RUM data).
     name: Datasets
   - description: |-
-      Search, send, or delete events for Delivery Performance (formerly DORA Metrics) to measure and improve your software delivery performance. See the [Delivery Performance page](https://docs.datadoghq.com/dora_metrics/) for more information.
+      Search, send, or delete events for Delivery Performance (formerly DORA Metrics) to measure and improve your software delivery performance. See the [Delivery Performance page](https://docs.datadoghq.com/delivery_performance/) for more information.
 
       **Note**: Delivery Performance is not available in the US1-FED site.
     name: Delivery Performance
