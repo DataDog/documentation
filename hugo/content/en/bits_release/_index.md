@@ -22,9 +22,9 @@ further_reading:
 
 ## Overview
 
-Merging and deploying a change is not the same as knowing it worked. Most teams confirm a release by watching a dashboard for a few minutes, or by waiting for an alert that may never fire for the specific behavior they changed. Problems that monitors do not cover surface days later, through a support ticket or a colleague.
+Bits Release validates that a merged pull request behaves as intended in production. It learns what your change was meant to do, watches the service once that change is live, and reports a verdict on the pull request itself.
 
-Bits Release closes that gap. After you merge a pull request, it reads the code change, decides what should be different in production, waits for the change to deploy, and then examines your production telemetry to report a verdict on the pull request.
+Standard release checks rarely cover the specific behavior a change targets. A dashboard watched for a few minutes shows the service is up, and an alert may never fire for the thing you changed, so a change that shipped broken, or shipped with no effect at all, can go unnoticed for days. Bits Release checks that behavior directly, on every merge.
 
 Bits Release does not modify your code or add permanent instrumentation. It reads the observability data you already send to Datadog. When a check must run over time, it creates temporary resources and removes them when validation ends.
 
