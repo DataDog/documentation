@@ -87,16 +87,16 @@ For installation and configuration instructions, see the [Buildkite integration 
 
 {{% /collapse-content %}}
 
-### Steps
+### Collect job steps
 
-<div class="alert alert-info">Steps for Buildkite are in Preview. Reach out to your Datadog representative to sign up.</div>
+<div class="alert alert-info">Steps for Buildkite are in Preview. Contact your Datadog representative to sign up.</div>
 
-Datadog shows the steps of each Buildkite job, built from the job's [log groups][26]. Each log group becomes a step under its job, with the group's name and duration.
+Datadog creates steps for each Buildkite job from the job's [log groups][26]. Each log group becomes a step under its job, with the group's name and duration.
 
-Steps depend on job logs. To get steps:
+Steps require job logs. To collect steps:
 
 1. Send your Buildkite job logs to Datadog, as described in [Manage job logs](#manage-job-logs).
-2. In [CI/CD Repository settings][23], enable Logs Analysis, Logs Storage, or both. Steps require at least one of them.
+2. In [CI/CD Repository settings][23], enable Logs Analysis, Logs Storage, or both.
 
 ## Advanced configuration
 
