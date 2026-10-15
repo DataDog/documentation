@@ -57,9 +57,10 @@ Name Policy
 
 **Note:** A maximum of 50 principals (roles or teams) can be tied to a given Restricted Dataset.
 
+<!-- TBD (DOCS-15824): The field placeholder says "Add roles, teams, or agents and automated processes." Confirm whether agents and automated processes (service accounts?) can be granted access, and whether they count toward the 50-principal limit. -->
+
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
-<!-- TBD (DOCS-15824): Confirm the submit button label and add it here. -->
 After completing all the fields to define the dataset, save the policy to apply it to your organization.
 
 You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10 on other plans. Enterprise customers that set a telemetry type to [Restricted](#strict-mode) can create up to 1,000 Restricted Datasets.
@@ -92,8 +93,6 @@ The following are available as a Preview upon request:
 
 Each telemetry type has a setting that controls who can view data outside a Restricted Dataset. Telemetry types set to {{< ui >}}Restricted{{< /ui >}} appear in the {{< ui >}}Data Hidden by Default{{< /ui >}} section of the [Access Control][7] page. If no telemetry types are set to {{< ui >}}Restricted{{< /ui >}}, the section shows {{< ui >}}All Products Unrestricted{{< /ui >}}.
 
-<!-- TBD (DOCS-15824): Confirm whether "Unrestricted" and "Restricted" still appear as labels in the new UI. If not, update the terms below and the links to #strict-mode on other pages that use them. -->
-
 {{< ui >}}Unrestricted{{< /ui >}} (default)
 : Data that is not in a Restricted Dataset, and untagged data, are visible to all users with appropriate permissions.
 
@@ -117,8 +116,6 @@ To change the setting for a telemetry type, you must have the [`user_access_mana
 
 1. Navigate to [Access Control][7].
 1. In the {{< ui >}}Data Hidden by Default{{< /ui >}} section, click {{< ui >}}Add New{{< /ui >}}.
-<!-- TBD (DOCS-15824): Steps after "Add New" (it's a dropdown), the save button label, and how to set a telemetry type back to Unrestricted. Not visible in the screenshots. -->
-
 
 ### Unrestricted access {#unrestricted-user-groups}
 
@@ -134,7 +131,7 @@ To grant unrestricted access:
 1. In the {{< ui >}}Unrestricted Access{{< /ui >}} section, click {{< ui >}}New{{< /ui >}}.
 1. Under {{< ui >}}Designate User Groups{{< /ui >}}, add the teams or roles.
 1. Under {{< ui >}}Choose Content Scope{{< /ui >}}, select {{< ui >}}Data{{< /ui >}}, {{< ui >}}Assets{{< /ui >}}, or {{< ui >}}Infrastructure{{< /ui >}}. Next to {{< ui >}}Users can always view{{< /ui >}}, select one or more telemetry types.
-1. Save the policy. <!-- TBD (DOCS-15824): Confirm the submit button label. -->
+1. Save the policy. 
 
 The {{< ui >}}Unrestricted Access{{< /ui >}} section lists these teams and roles, along with the telemetry types they can view.
 
