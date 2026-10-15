@@ -274,7 +274,8 @@ spec:
      shareProcessNamespace: true
 ```
 
-Update the following items in the manifest:
+Replace the following placeholders in the manifest with your own values:
+
 - `<APPLICATION_NAME>`
 - `<POD_NAME>`
 - `<YOUR_APP_NAME>`
