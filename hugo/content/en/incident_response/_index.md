@@ -1,6 +1,9 @@
 ---
 title: Incident Response
 further_reading:
+- link: "https://www.datadoghq.com/blog/fedramp-high-incident-response/"
+  tag: "Blog"
+  text: "Run incident response in your FedRAMP High environment"
 - link: "https://app.datadoghq.com/release-notes?category=Incident%20Response"
   tag: "Release Notes"
   text: "Check out the latest Datadog Incident Response releases! (App login required)."
