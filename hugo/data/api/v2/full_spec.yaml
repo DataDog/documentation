@@ -1343,6 +1343,15 @@ components:
         example: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
         format: uuid
         type: string
+    OrgGroupMembershipDeleteFilterOrgGroupId:
+      description: The ID of the organization group that the memberships belong to.
+      in: query
+      name: filter[org_group_id]
+      required: true
+      schema:
+        example: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+        format: uuid
+        type: string
     OrgGroupMembershipFilterOrgGroupId:
       description: Filter memberships by org group ID. Required when `filter[org_uuid]` is not provided.
       in: query
@@ -92399,14 +92408,47 @@ components:
         - created_at
         - modified_at
       type: object
+    OrgGroupMembershipBulkDeleteRequest:
+      description: Request to delete a batch of org group memberships.
+      properties:
+        data:
+          description: >-
+            The memberships to delete, specified as membership resource identifiers. Each request must include between 1 and 100 unique membership IDs.
+          items:
+            $ref: "#/components/schemas/OrgGroupMembershipBulkDeleteRequestData"
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - data
+      type: object
+    OrgGroupMembershipBulkDeleteRequestData:
+      description: A resource identifier for an org group membership to delete.
+      properties:
+        id:
+          description: The ID of the org group membership.
+          example: "f1e2d3c4-b5a6-7890-1234-567890abcdef"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/OrgGroupMembershipType"
+      required:
+        - id
+        - type
+      type: object
     OrgGroupMembershipBulkUpdateAttributes:
       description: Attributes for bulk updating org group memberships.
       properties:
         orgs:
-          description: List of organizations to move. Maximum 100 per request.
+          description: >-
+            List of organizations to move. Each request must include between 1 and 100 organizations. Each `org_uuid` and `org_site` pair must be unique.
           items:
             $ref: "#/components/schemas/GlobalOrgIdentifier"
+          maxItems: 100
+          minItems: 1
           type: array
+          uniqueItems: true
       required:
         - orgs
       type: object
@@ -92451,6 +92493,51 @@ components:
       type: string
       x-enum-varnames:
         - ORG_GROUP_MEMBERSHIP_BULK_UPDATES
+    OrgGroupMembershipCreateAttributes:
+      description: Attributes for adding organizations to an org group.
+      properties:
+        orgs:
+          description: >-
+            List of organizations to add. Each request must include between 1 and 100 organizations. Each `org_uuid` and `org_site` pair must be unique.
+          items:
+            $ref: "#/components/schemas/GlobalOrgIdentifier"
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - orgs
+      type: object
+    OrgGroupMembershipCreateData:
+      description: Data for adding organizations to an org group.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateAttributes"
+        relationships:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupMembershipType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    OrgGroupMembershipCreateRelationships:
+      description: Relationships for adding organizations to an org group.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      required:
+        - org_group
+      type: object
+    OrgGroupMembershipCreateRequest:
+      description: Request to add organizations to an org group.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgGroupMembershipCreateData"
+      required:
+        - data
+      type: object
     OrgGroupMembershipData:
       description: An org group membership resource.
       properties:
@@ -208340,10 +208427,73 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: >-
+        Add a batch of organizations to an existing organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. This is an atomic operation: either all organizations are added or none are. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization. The requesting organization must own the organization group.
+      operationId: CreateOrgGroupMemberships
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      orgs:
+                        - org_site: "us1"
+                          org_uuid: "c3d4e5f6-a7b8-9012-cdef-012345678901"
+                    relationships:
+                      org_group:
+                        data:
+                          id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                          type: org_groups
+                    type: org_group_memberships
+            schema:
+              $ref: "#/components/schemas/OrgGroupMembershipCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create org group memberships
+      tags: [Org Groups]
+      x-menu-order: 7
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_group_memberships/bulk:
     patch:
       description: >-
-        Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.
+        Move a batch of organizations from one organization group to another. This is an atomic operation. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization.
       operationId: BulkUpdateOrgGroupMemberships
       requestBody:
         content:
@@ -208421,7 +208571,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Bulk update org group memberships
       tags: [Org Groups]
-      x-menu-order: 9
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -208429,7 +208579,115 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_memberships/bulk_delete:
+    post:
+      description: >-
+        Delete a batch of memberships from an organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. The memberships to delete are provided as membership resource identifiers, and the organization group they belong to must be specified using `filter[org_group_id]`. Each request must include between 1 and 100 unique membership IDs, and the requesting organization must own the organization group. The request does not fail if a membership ID refers to a membership that has already been deleted, does not exist, or does not belong to the organization group.
+      operationId: DeleteOrgGroupMemberships
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupMembershipDeleteFilterOrgGroupId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - id: "f1e2d3c4-b5a6-7890-1234-567890abcdef"
+                      type: org_group_memberships
+                    - id: "e2d3c4b5-a6f7-8901-2345-67890abcdef1"
+                      type: org_group_memberships
+                    - id: "d3c4b5a6-f7e8-9012-3456-7890abcdef12"
+                      type: org_group_memberships
+            schema:
+              $ref: "#/components/schemas/OrgGroupMembershipBulkDeleteRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk delete org group memberships
+      tags: [Org Groups]
+      x-menu-order: 12
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_group_memberships/{org_group_membership_id}:
+    delete:
+      description: >-
+        Remove an organization from an organization group by deleting its membership. This operation is not supported for organization groups with `group_type` set to `config_management`. The organization group that the membership belongs to must be specified using `filter[org_group_id]`, and the requesting organization must own that organization group. Returns `404` if the membership does not exist, was already removed, or does not belong to the organization group.
+      operationId: DeleteOrgGroupMembership
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupMembershipId"
+        - $ref: "#/components/parameters/OrgGroupMembershipDeleteFilterOrgGroupId"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an org group membership
+      tags: [Org Groups]
+      x-menu-order: 10
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a specific organization group membership by its ID.
       operationId: GetOrgGroupMembership
@@ -208487,7 +208745,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group membership
       tags: [Org Groups]
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -208569,7 +208827,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group membership
       tags: [Org Groups]
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -208651,7 +208909,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policies
       tags: [Org Groups]
-      x-menu-order: 10
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -208771,7 +209029,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an org group policy
       tags: [Org Groups]
-      x-menu-order: 12
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -208816,7 +209074,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an org group policy
       tags: [Org Groups]
-      x-menu-order: 14
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -208882,7 +209140,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group policy
       tags: [Org Groups]
-      x-menu-order: 11
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -208995,7 +209253,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group policy
       tags: [Org Groups]
-      x-menu-order: 13
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -209042,7 +209300,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy configs
       tags: [Org Groups]
-      x-menu-order: 20
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -209126,7 +209384,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy overrides
       tags: [Org Groups]
-      x-menu-order: 15
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -209215,7 +209473,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an org group policy override
       tags: [Org Groups]
-      x-menu-order: 17
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -209260,7 +209518,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an org group policy override
       tags: [Org Groups]
-      x-menu-order: 19
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -209328,7 +209586,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an org group policy override
       tags: [Org Groups]
-      x-menu-order: 16
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -209411,7 +209669,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an org group policy override
       tags: [Org Groups]
-      x-menu-order: 18
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -209470,7 +209728,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List org group policy suggestions
       tags: [Org Groups]
-      x-menu-order: 21
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
