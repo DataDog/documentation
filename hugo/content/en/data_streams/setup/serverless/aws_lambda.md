@@ -12,6 +12,8 @@ further_reading:
 
 Data Streams Monitoring (DSM) supports AWS Lambda functions that produce messages to or consume messages from Amazon SQS, Amazon SNS, Amazon EventBridge, and Amazon Kinesis. DSM automatically injects context into outgoing messages and extracts context from incoming events. You can track end-to-end latency and throughput across your Lambda functions and messaging services without manual instrumentation.
 
+{{< img src="data_streams/dsm_aws_lambda_map.png" alt="Data Streams Monitoring map showing a claimsflow-api service publishing to a claim-submitted topic, which fans out through three subscriptions to a claimsflow-processors service. The processors service produces to several queues, including claim-decided, which routes back to claimsflow-api through a subscription." style="width:100%;" >}}
+
 ### Supported runtimes and technologies
 
 | Runtime  | Amazon SQS  | Amazon SNS  | Amazon EventBridge | Amazon Kinesis |
