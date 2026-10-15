@@ -82,7 +82,7 @@ return assignTagAnchorsToFirstGroup(groups);         // step 3
 
 Unit tests (`yarn test:headless-ai <path>`):
 
-- `scopesBuilder.unit.test.ts`, against fixtures:
+- `scopesBuilder.test.ts`, against fixtures:
   - Collection: first tag only, endpoints in Hugo order, deduped by href, v2 description overrides v1.
   - Grouping: one hop rather than transitive. The test uses a fixture with A∩B and B∩C but no A∩C. It checks that identical tag lists collapse and that groups and scopes are ordered alphabetically.
   - Anchors: each tag appears exactly once across all groups, under the first group that contains it. `toScopeAnchor` handles special characters (`CI Visibility GitHub Accounts`, `&`, `/`, leading or trailing punctuation).
@@ -127,10 +127,12 @@ At each compaction point, stop and hand back to the user. The next phase starts 
 ### Phase 1: scopes data builder
 
 1. If needed, add fixture cases to `partial_spec.yaml`: an A∩B / B∩C overlap, a camelCase tag, and a tag with a category slug override.
-2. Write `scopesBuilder.unit.test.ts` covering collection, grouping, anchors, aliases and override hrefs. Run it and confirm it fails.
+2. Write `scopesBuilder.test.ts` covering collection, grouping, anchors, aliases and override hrefs. Run it and confirm it fails.
 3. Implement `scopesBuilder.ts` (`collectScopesFromSpecs`, `groupScopesByOverlappingTags`, `assignTagAnchorsToFirstGroup`, `toScopeAnchor`, `toHugoScopeAnchor`).
 4. Switch `viewsBuilder.ts` to `toScopeAnchor`, and add the anchor-consistency test.
 5. Make the scoped tests pass and format the touched files.
+
+**Phase 1 status: done.** Synthetic specs in `scopesBuilder.test.ts` cover the edge cases, so the fixtures weren't edited. The real-spec consistency and unique-anchor checks are in `tests/integration/scopesBuilder.full-spec.test.ts`. Against the real spec: 40 groups (identical headings and order to the Oct 14 Hugo build), identical scope rows, 64 anchors (one alias, `ci-visibility-git-hub-accounts`; `High Availability MultiRegion` has no scopes). Two endpoint lists each have one extra endpoint that was added to the spec after the Hugo build.
 
 **🛑 Compaction point 1.** The data layer is done and green. Report the group, anchor and alias counts from the real spec, compared with Hugo's 40 headings.
 
@@ -141,6 +143,8 @@ At each compaction point, stop and hand back to the user. The next phase starts 
 3. Register `api-scopes` in `markdoc.schema.mjs` and `markdoc.config.mjs`, and replace the shortcode in `scopes.mdoc`.
 4. Make the scoped tests pass, format, and check `/api/latest/scopes/` on the dev server.
 
+**Phase 2 status: done.** `ApiScopesTable.astro` takes an optional `groups` prop (tests only) and otherwise reads `getScopeGroupsView()`. Borders, header and stripes come from the global `table` styles; the module CSS only adds the h4-sized heading, Hugo's 4/3/5 column widths, an unbulleted endpoint list, and a `scroll-margin-top` on the anchor spans so a jump clears the sticky header and API toolbar (about 133px). The anchor spans sit before the heading rather than after it as in Hugo. The dev server renders 40 headings and 64 anchors, and `/ja/` links are prefixed.
+
 **🛑 Compaction point 2.** The page renders. Ask the user to look at it visually before going on.
 
 ### Phase 3: plaintext twin
@@ -149,6 +153,8 @@ At each compaction point, stop and hand back to the user. The next phase starts 
 2. Implement `plaintext/ApiScopesTable.ts`, and register the adapter in `twinTransform.ts`.
 3. Make the scoped tests pass, format, and spot-check `/api/latest/scopes.md`.
 
+**Phase 3 status: done.** `plaintext/ApiScopesTable.ts` exports `apiScopesTableNodes(groups, { lang, site })`: an h3 and a `tableMd` table per group, with the HTML table's column headers, code-formatted scope names, and `<br>`-joined endpoint links pointed at `.md` twins. The anchors are dropped. The `api-scopes` adapter is registered in `twinTransform.ts`, but `/api/latest/scopes.md` is served by `[...page].md.ts`, which never ran twins, so that route now swaps in only `api-scopes` nodes and leaves every other tag as authored. Link-text escaping was left out because `tableMd` round-trips cells through `parse`/`format`, which drops backslash escapes.
+
 **🛑 Compaction point 3.** The twin is done.
 
 ### Phase 4: browser tests, parity, regressions
@@ -156,5 +162,7 @@ At each compaction point, stop and hand back to the user. The next phase starts 
 1. Write the browser tests (anchor scroll target, endpoint "scope" link lands on its section). Confirm they fail where expected, then pass. Kill any stale `astro dev` on :4321 first.
 2. Run the throwaway parity diff against the Hugo build, and report any differences beyond the expected ones listed above.
 3. Run the full `yarn test-ai`.
+
+**Phase 4 status: done.** `ApiScopesTable/tests/browser.test.ts` covers two anchor jumps (`#dashboards` and the Hugo alias `#ci-visibility-git-hub-accounts`): the heading must be in view and not covered by the sticky header. Both failed with `scroll-margin-top` removed. It also covers the endpoint scope link from `dashboards/get-a-dashboard`. Parity against the Oct 14 Hugo build: same 40 headings in the same order, same scope rows and descriptions; 64 unique anchors against Hugo's 63 (125 with duplicates), the extra one being the `ci-visibility-github-accounts` slug; 22 duplicate endpoint links removed. Category paths use the overrides (`/cases/`, `/service-scorecards/`). Operation slugs now use `toOperationSlug`, a port of Hugo's `anchorize`, so punctuation is dropped (`get-a-monitors-details`, not `get-a-monitor-s-details`). This renames 25 operation pages. All 829 fragments resolve on the Astro pages and match Hugo's, except `trigger-tests-from-cicd-pipelines`: Hugo's scopes page links to `#trigger-tests-from-ci/cd-pipelines`, which matches no ID on its own synthetics page. Two endpoints appear only because the spec bundle is newer. Full `yarn test-ai` passes.
 
 **🛑 Compaction point 4 (done).** Report the results, and recommend the prod build to the user.

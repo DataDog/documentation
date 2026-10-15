@@ -30,6 +30,8 @@ import {
   cardGridNode,
   type PlaintextCard,
 } from "@components/CardGrid/plaintext/CardGrid";
+import { apiScopesTableNodes } from "@components/ApiScopesTable/plaintext/ApiScopesTable";
+import { getScopeGroupsView } from "@lib/api/scopesBuilder";
 import { IMAGES_URL } from "@config/images";
 
 /**
@@ -117,6 +119,9 @@ function buildTwinAdapters(
       }
       return cardGridNode(cards, options.site);
     },
+
+    "api-scopes": () =>
+      apiScopesTableNodes(getScopeGroupsView(), { site: options.site }),
 
     stepper: (node) => {
       const steps: StepInput[] = [];
