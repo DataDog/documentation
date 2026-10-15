@@ -28,8 +28,8 @@ Static Code Analysis (SAST) uses AI to automate detection, validation, and remed
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------ |
 | Detection       | [Malicious PR protection](#malicious-pr-protection) detects potentially malicious changes or suspicious diffs.                                        | At PR time                                | Flags PRs introducing novel risky code.                                       |
 | Detection               | [AI-native SAST](#ai-native-sast) uses LLM-based taint analysis to detect security vulnerabilities with higher accuracy.                          | At scan time (Datadog-hosted scans only)  | Identifies contextually complex vulnerabilities missed by rule-based analysis. |
-| Validation     | [False positive filtering](#false-positive-filtering) deprioritizes low-likelihood findings.                                                            | After scan                                | Reduces noise, allows focus on actual issue.                                   |
-| Validation | [Agentic false positive filtering](#agentic-false-positive-filtering) deprioritizes low-likelihood findings for a subset of injection-related rules using cross-file context. | After scan                        | Reduces false positives that depend on cross-file behavior, for supported rule categories. |
+| Validation     | [False positive filtering](#false-positive-filtering) deprioritizes low-likelihood findings.                                                            | After scan (Datadog-hosted scans only) | Reduces noise, allows focus on actual issue.                                   |
+| Validation | [Agentic false positive filtering](#agentic-false-positive-filtering) deprioritizes low-likelihood findings for a subset of injection-related rules using cross-file context. | After scan (Datadog-hosted scans only) | Reduces false positives that depend on cross-file behavior, for supported rule categories. |
 | Remediation                  | [Remediation](#remediation) uses Bits Code to generate suggested fixes manually or automatically.        | After scan                                | Reduces developer effort, accelerates fix cycle.                              |
 
 ## Detection
@@ -128,7 +128,9 @@ AI-native SAST uses language-specific rulesets (for example, `python-ai_sast`) i
 
 ## Validation
 
-False positive filtering happens after a scan completes. Two layers of filtering are available: baseline false positive filtering, and agentic filtering that gathers cross-file context for a subset of rules.
+False positive filtering runs only for Datadog-hosted scans and applies only to security category SAST rules in Datadog's default rulesets. It does not evaluate findings from CI uploads or custom rules.
+
+After a Datadog-hosted scan completes, two layers of filtering are available. Baseline false positive filtering assesses eligible findings, and agentic filtering gathers cross-file context for a subset of rules.
 
 ### False positive filtering
 
