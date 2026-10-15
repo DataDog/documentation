@@ -77,7 +77,7 @@ Bits Release reads the code you merged and detects when that code is live in pro
 | Requirement | What it adds |
 | ----------- | ------------ |
 | [Slack integration][6] | Notifies the pull request author directly when a verdict is ready, instead of relying on them to see the pull request comment. |
-| An existing [synthetic test][7] on the same domain | Lets Bits Release validate a change by actively calling your application rather than waiting for organic traffic. It reuses the entry point and sign-in method your existing test already establishes. |
+| An existing [synthetic test][7] for your application's domain | Lets Bits Release validate a change by actively calling your application rather than waiting for organic traffic. It reuses the entry point and sign-in method your existing test already establishes. |
 
 ## Where results appear
 
