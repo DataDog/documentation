@@ -148,7 +148,7 @@ For standalone Dart, use the same `onFirstFlags` method on the client created wi
 | Platform | Registration when the first event is available | Registration before the first event is available | Cleanup |
 |---|---|---|---|
 | Android | Immediate on the registering thread, before `onFirstFlags` returns | Background delivery | `subscription.unsubscribe()` |
-| iOS | Synchronous on the registering thread, before `onFirstFlags` returns | On the thread that installs the flags | `subscription.cancel()` |
+| iOS | Synchronous on the registering thread, before `onFirstFlags` returns | Asynchronously on a background executor, after installation bookkeeping | `subscription.cancel()` |
 | Dart and Flutter | A microtask after registration | A microtask after the event is available and client binding completes | Call the returned unregister function |
 
 Android and iOS callbacks are not guaranteed to run on the UI thread. Dart and Flutter callbacks run in the zone where the listener was registered, including replay. Keep callbacks short and dispatch UI work as needed.
