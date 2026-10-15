@@ -256,9 +256,26 @@ export DD_TEST_OPTIMIZATION_RUNTIME_TAGS='{"os.architecture":"x86_64","os.platfo
 ddtest run
 {{< /code-block >}}
 
-A complete set of `os.platform`, `os.architecture`, `os.version`, `runtime.name`, and `runtime.version` skips the runtime probe during planning. Partial overrides merge with detected values. See [local planning for a CI environment](https://github.com/DataDog/ddtest/blob/main/docs/local-ci-skippable-tests.md).
+A complete set of `os.platform`, `os.architecture`, `os.version`, `runtime.name`, and `runtime.version` skips the runtime probe during planning. Partial overrides merge with detected values.
 
 `ddtest` also accepts the runner-specific `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS` environment variable and the `--runtime-tags` CLI flag.
+
+### Use CI runtime tags locally
+
+To reuse Test Impact Analysis decisions from CI on your local machine, supply the runtime tags from the intended CI environment. For example, Linux CI and a macOS development machine have different runtime tags, so they do not automatically share skippable tests.
+
+1. Open a CI test run in [Test Optimization](https://app.datadoghq.com/ci/test-runs). In the test details panel, find the `os` and `runtime` sections.
+2. Copy `os.architecture`, `os.platform`, `os.version`, `runtime.name`, and `runtime.version` exactly as reported by that CI run.
+3. Commit your local changes before running `ddtest`. Test Impact Analysis uses committed changes to determine which tests can be skipped.
+4. Pass the copied tags as a JSON object to `--runtime-tags`, or set `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS`.
+
+For example, when the CI environment reports these values:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --runtime-tags '{"os.architecture":"x86_64","os.platform":"linux","os.version":"6.8.0-aws","runtime.name":"ruby","runtime.version":"3.3.0"}'
+{{< /code-block >}}
+
+For Python, `runtime.name` is the implementation name, such as `CPython`, and `runtime.version` is the interpreter version. For JavaScript, use `node` for `runtime.name` and preserve the leading `v` in the Node.js version, such as `v22.16.0`.
 
 ## Plan artifacts
 

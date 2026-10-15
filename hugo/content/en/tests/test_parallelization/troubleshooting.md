@@ -13,7 +13,7 @@ further_reading:
     text: "Troubleshoot Test Optimization"
 ---
 
-Use the error code and framework output in your CI logs to locate the failure. DDTest reports fatal errors as `[error_code] message`. See the [complete error-code reference](https://github.com/DataDog/ddtest/blob/main/docs/error-codes.md).
+Use the error code and framework output in your CI logs to locate the failure. DDTest reports fatal errors as `[error_code] message`. See [Error codes](#error-codes) for meanings and next steps.
 
 ## Missing or invalid plan artifacts
 
@@ -103,6 +103,41 @@ Vitest's Node.js API does not run package-script preparation or npm life cycle c
 Look for shared databases, ports, temporary files, browser displays, and report paths. Keep application startup and readiness checks in each execution job. Use [worker isolation](/tests/test_parallelization/best_practices/#isolate-workers) and lower parallelism while investigating.
 
 Do not combine `ddtest` assignments with another whole-suite splitter. Check that each worker runs its assignment and that the original full-suite command no longer runs alongside it.
+
+## Error codes
+
+Fatal `ddtest plan` and `ddtest run` errors include a code in the form `[error_code] message`. Use the code to identify the failed step, then read the rest of the message for the specific cause.
+
+### Planning errors
+
+| Error code | Meaning and next step |
+| --- | --- |
+| `plan_git_unavailable` | Git could not be found. Install Git and check that it is on `PATH` in the planning job. |
+| `plan_platform_detection_failed` | The language platform could not be selected or initialized. Check the runtime installation and the `--platform` setting. |
+| `plan_platform_tags_creation_failed` | Runtime or operating-system tags could not be collected. Check the runtime environment or supply [runtime tags](/tests/test_parallelization/configuration/#stabilize-runtime-tags). |
+| `plan_runtime_tags_invalid` | The runtime-tag override could not be parsed. Supply a valid JSON object with string keys and values. |
+| `plan_framework_detection_failed` | The test framework is unsupported or could not be initialized. Check the framework installation, `--framework`, and selected platform. |
+| `plan_optimization_client_creation_failed`, `plan_optimization_client_initialization_failed` | The Test Optimization client could not be created or initialized. Review the underlying error and check credentials, `DD_SITE`, and network access. |
+| `plan_test_files_resolution_failed` | Test-file patterns could not be resolved or the file scan failed. Check the working directory, include/exclude patterns, and file permissions. |
+| `plan_full_test_discovery_failed` | Full discovery failed with strict discovery enabled. Check the framework output and fix discovery setup or configuration. |
+| `plan_fast_test_discovery_failed` | File discovery failed and no full-discovery result was available. Check test paths, file permissions, and framework discovery output. |
+| `plan_full_discovery_results_processing_failed`, `plan_fast_discovery_results_processing_failed` | Discovery results could not be matched to the configured test selection. Check the project directory, file paths, and include/exclude patterns. |
+| `plan_manifest_write_failed`, `plan_cache_write_failed`, `plan_test_files_write_failed`, `plan_skippable_percentage_write_failed`, `plan_parallel_runners_write_failed`, `plan_test_splits_write_failed` | A planning artifact could not be written. Check permissions and available disk space for `.testoptimization/`, then generate a fresh plan. |
+
+### Execution errors
+
+| Error code | Meaning and next step |
+| --- | --- |
+| `run_git_unavailable` | Git could not be found. Install Git and check that it is on `PATH` in the test job. |
+| `run_planning_failed` | Automatic planning failed. Review the accompanying error. When a planning error has its own `plan_*` code, that code is reported instead. |
+| `run_plan_status_check_failed` | DDTest could not check whether plan artifacts exist. Check the working directory and permissions for `.testoptimization/`. |
+| `run_plan_load_failed` | The saved plan could not be loaded. Transfer the complete plan or regenerate it; see [Missing or invalid plan artifacts](#missing-or-invalid-plan-artifacts). |
+| `run_parallel_runners_read_failed`, `run_parallel_runners_parse_failed` | The runner-count artifact could not be read or did not contain an integer. Check the transferred plan and regenerate it if necessary. |
+| `run_platform_detection_failed` | The language platform could not be selected or initialized. Check the runtime installation and the `--platform` setting in the test job. |
+| `run_framework_detection_failed` | The test framework is unsupported or could not be initialized. Check dependencies, framework settings, and instrumentation in the test job. |
+| `run_sequential_test_files_read_failed`, `run_parallel_splits_read_failed`, `run_parallel_test_files_read_failed`, `run_ci_node_test_files_read_failed` | A test-file list or split directory could not be read. Check that the complete plan was transferred and that its files are readable. |
+| `run_ci_node_test_files_missing` | No split file exists for the requested CI node. Check the zero-based `--ci-node` index against the plan's assignments. |
+| `run_sequential_tests_failed`, `run_parallel_tests_failed`, `run_ci_node_tests_failed` | The test framework failed during execution. Check its output for test failures, missing dependencies, or setup errors. See [Tests fail only in parallel](#tests-fail-only-in-parallel) for isolation checks. |
 
 ## Further reading
 
