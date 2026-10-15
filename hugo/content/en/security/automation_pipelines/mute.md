@@ -46,7 +46,7 @@ Configure mute rules to streamline security alerts by automatically filtering ou
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. If your organization is enrolled in the Preview for Code Security findings on non-default branches, mute rules without an `@git.branch` or `@git.is_default_branch` filter apply to Code Security findings from all branches and commits. See [Code Security findings on non-default branches][3].
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Specify the mute reason and duration:
     - **Reason for muting**: The reason for muting the finding. Available reasons include:
@@ -69,3 +69,4 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=mute
+[3]: /security/automation_pipelines/#code-security-findings-on-non-default-branches

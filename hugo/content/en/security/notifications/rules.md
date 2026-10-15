@@ -39,10 +39,6 @@ Notification rules are predefined sets of conditions that automate the process o
 
 To create a notification rule, specify the conditions under which the rule should be triggered. These conditions may include criteria such as severity, detection rule type, tags, and attributes. When an issue matches the defined criteria, the rule automatically sends notifications to the designated recipients.
 
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Notifications for Code Security findings on non-default branches are in Preview and are available only to enrolled customers. For customers who are not enrolled in the Preview, Code Security findings are available only from the latest commit on the default branch.
-{{< /callout >}}
-
 <div class="alert alert-info">As you configure the rule, a preview of issues matching the notification rule conditions appears on the <strong>Preview of Matching Results</strong> panel. This preview helps you determine if your notification rule is too specific or too broad, allowing you to adjust the criteria accordingly for optimal coverage.</div>
 
 1. On the [**Notification Rules**][1] page, click {{< ui >}}New Notification Rule{{< /ui >}}.
@@ -52,7 +48,7 @@ Notifications for Code Security findings on non-default branches are in Preview 
     - **Signal**: Suspicious activity that poses an active threat against your infrastructure.
 1. Select one or more severity levels.
 1. Specify the tags and attributes that must be present for the notification rule to be triggered.
-   <div class="alert alert-info">For Code Security findings from Static Code Vulnerabilities, Library Vulnerabilities, Secrets, and Infrastructure as Code, notifications are sent only for findings from the latest commit on the default branch. If your organization is enrolled in the Preview, you can include findings from other branches by adding an explicit <code>@git.branch</code> or <code>@git.is_default_branch</code> filter. For example, use <code>@git.is_default_branch:false</code> to target all non-default branches, or <code>@git.branch:staging</code> to target the <code>staging</code> branch.</div>
+   For Code Security findings (Static Code Vulnerabilities, Library Vulnerabilities, Secrets, and Infrastructure as Code), notification rules apply only to findings from the latest commit on the default branch. Notifications for other branches are in Preview. If your organization is enrolled, add an `@git.branch` or `@git.is_default_branch` filter to include findings from other branches. For example, use `@git.is_default_branch:false` to target all non-default branches, or `@git.branch:staging` to target the `staging` branch.
    <div class="alert alert-tip">If you selected <strong>Signal</strong> in step 3, you can get notifications for completed <a href="/bits_ai/bits_security_analyst">Bits Security Analyst</a> investigations by adding the tag <code>@workflow.bits_investigator.state:*</code>.</div>
 1. If you selected **Finding** in step 3, select the frequency of the notifications:
    - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.

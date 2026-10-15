@@ -54,7 +54,7 @@ Configure ticket creation rules to automatically create tickets in Jira or Work 
       - Identity Risk
       - API Security
       - Workload Activity
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
+    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply. If your organization is enrolled in the Preview for Code Security findings on non-default branches, ticket creation rules without an `@git.branch` or `@git.is_default_branch` filter apply to Code Security findings from the latest commit on the default branch. See [Code Security findings on non-default branches][4].
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Select the ticketing system and configure the ticket destination:
   {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
@@ -141,3 +141,4 @@ When you disable or delete a ticket creation rule, tickets that were previously 
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /security/ticketing_integrations/
+[4]: /security/automation_pipelines/#code-security-findings-on-non-default-branches
