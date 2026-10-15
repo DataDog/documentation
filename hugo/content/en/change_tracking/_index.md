@@ -35,6 +35,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/change-tracking/"
   tag: "Blog"
   text: "Unify visibility into changes to your services and dependencies"
+- link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+  tag: "Blog"
+  text: "Teaching a 9B model to investigate production alerts"
 ---
 
 {{< site-region region="gov,gov2" >}}

@@ -151,7 +151,7 @@ If the deployment CI job is running on the exact same Git revision that is being
 
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[1]: /api/latest/delivery-performance/#send-a-deployment-event
 [2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [3]: https://app.datadoghq.com/ci/settings/dora
 [4]: /internal_developer_portal/catalog/
@@ -398,6 +398,10 @@ DORA Metrics automatically identifies failed deployments to calculate change fai
 
 For detailed information about how detection works and how to customize rules, see the [Change Failure Detection documentation][5].
 
+## Additional configuration
+
+Delivery Performance general settings also identify the automation bots in your repositories. That configuration affects both DORA Metrics and AI Impact. For more information, see [Identify automation bots][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -410,3 +414,4 @@ For detailed information about how detection works and how to customize rules, s
 [6]: https://app.datadoghq.com/ci/settings/dora
 [7]: /internal_developer_portal/catalog/entity_model/v3_migration/
 [8]: https://en.wikipedia.org/wiki/Glob_(programming)
+[9]: /delivery_performance/ai_impact/setup/#identify-automation-bots
