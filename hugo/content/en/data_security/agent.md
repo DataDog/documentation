@@ -225,8 +225,8 @@ agent diagnose show-metadata agent-telemetry
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 | amd_gpu.device_total                        | Total number of AMD GPUs in the system                                                                                 |
 | gpu.collectors__created                     | Number of GPU metric collectors created, tagged by result (success or error), collector, and GPU properties            |
-| gpu.collectors__collection_runs             | Number of GPU metric collector runs, tagged by collector, and GPU properties                                           |
-| gpu.collectors__collection_errors           | Number of failed GPU metric collector runs, tagged by collector, and GPU properties                                    |
+| gpu.collectors__collection_runs             | Number of GPU metric collector runs, tagged by collector and GPU properties                                            |
+| gpu.collectors__collection_errors           | Number of failed GPU metric collector runs, tagged by collector and GPU properties                                     |
 | gpu.container_gpu_mapping_failure_pct       | Percentage of GPU containers whose GPUs could not be matched to devices                                                |
 | gpu.driver_events__parse_failures           | Number of NVIDIA driver events that could not be parsed, tagged by reason                                              |
 | **APM**                                     |                                                                                                                        |
