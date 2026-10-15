@@ -390,10 +390,6 @@ To create a Datadog On-Call page from a ServiceNow record, add a new business ru
 | Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's UUID, or the user's UUID. |
 | Urgency | No | The urgency of the page: `high` or `low`. Defaults to `high`. |
 
-If the target type or target identifier is empty, the script include logs a message and does not create a page.
-
-The script include populates the rest of the page from the ServiceNow record: the title and description come from the record's `title` and `description` fields (or `short_description` if the record has no `title` field), and the record's priority is added to the page as a `priority:<PRIORITY>` tag.
-
 In the following example, the business rule pages the Datadog user with the UUID `<USER_UUID>` at high urgency:
 
 ```javascript
