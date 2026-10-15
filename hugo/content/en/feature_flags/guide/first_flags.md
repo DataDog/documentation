@@ -27,7 +27,7 @@ Before using the examples, complete the SDK initialisation and flags setup for [
 
 ## Understand the callback
 
-Register with `client.onFirstFlags(...)`. Each registration receives one event for the first accepted cache or network installation:
+Register with `client.onFirstFlags(...)`. For a configured client, each registration receives one event for the first accepted cache or network installation:
 
 - A valid configuration with no flags triggers the callback with an empty key list. Missing or invalid cached data and failed requests do not trigger it. If no configuration is ever accepted, the callback remains pending indefinitely.
 - `type` identifies `CONFIGURATION_CHANGED`. `flagsChanged` contains all keys from that first installation. Although the field is optional in the event API, a First Flags event supplies a list, which can be empty.
@@ -36,6 +36,8 @@ Register with `client.onFirstFlags(...)`. Each registration receives one event f
 - The event contains keys, not values. Evaluations in the callback read the client's data at evaluation time, which can differ from the first installation.
 
 First Flags is a one-time notification for each registration, not a subscription to subsequent configuration changes. A context update does not produce another callback for the same registration.
+
+**Apple fallback exception:** If the SDK returns a fallback client, each registration immediately receives a `.configurationChanged` event with `flagsChanged: []` on the registering thread. This does not represent an accepted configuration or successful initialisation. The client remains in its error state, evaluations return defaults with `providerNotReady`, and setting context fails. The returned subscription has no effect.
 
 ## Register and evaluate
 
@@ -148,7 +150,7 @@ For standalone Dart, use the same `onFirstFlags` method on the client created wi
 | Platform | Registration when the first event is available | Registration before the first event is available | Cleanup |
 |---|---|---|---|
 | Android | Immediate on the registering thread, before `onFirstFlags` returns | Background delivery | `subscription.unsubscribe()` |
-| iOS | Synchronous on the registering thread, before `onFirstFlags` returns | Asynchronously on a background executor, after installation bookkeeping | `subscription.cancel()` |
+| iOS configured client | Synchronous on the registering thread, before `onFirstFlags` returns | Asynchronously on a background executor, after installation bookkeeping | `subscription.cancel()` |
 | Dart and Flutter | A microtask after registration | A microtask after the event is available and client binding completes | Call the returned unregister function |
 
 Android and iOS callbacks are not guaranteed to run on the UI thread. Dart and Flutter callbacks run in the zone where the listener was registered, including replay. Keep callbacks short and dispatch UI work as needed.
