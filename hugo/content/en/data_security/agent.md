@@ -72,7 +72,7 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][10], and additionally, Datadog Agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog Agent for potential vulnerabilities.
 
-If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. 
+If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11].
 To check the status of a specific CVE, see the [Public Artifact Vulnerabilities page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the {{< ui >}}Product type{{< /ui >}} field to {{< ui >}}Vulnerability Inquiry on Datadog Product{{< /ui >}}.
 
 ## Running as an unprivileged user
@@ -223,6 +223,12 @@ agent diagnose show-metadata agent-telemetry
 | runtime.agent_service_running               | Whether an Agent service process is up under a supervisor, tagged by service and supervisor (procmgr, systemd, windows_service) |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
+| amd_gpu.device_total                        | Total number of AMD GPUs in the system                                                                                 |
+| gpu.collectors__created                     | Number of GPU metric collectors created, tagged by result (success or error), collector, and GPU properties            |
+| gpu.collectors__collection_runs             | Number of GPU metric collector runs, tagged by collector and GPU properties                                            |
+| gpu.collectors__collection_errors           | Number of failed GPU metric collector runs, tagged by collector and GPU properties                                     |
+| gpu.container_gpu_mapping_failure_pct       | Percentage of GPU containers whose GPUs could not be matched to devices                                                |
+| gpu.driver_events__parse_failures           | Number of NVIDIA driver events that could not be parsed, tagged by reason                                              |
 | **APM**                                     |                                                                                                                        |
 | trace.enabled                               | Whether the trace-agent process is running.                                                                            |
 | trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
