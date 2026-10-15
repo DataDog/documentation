@@ -304,7 +304,6 @@ unsupported_sites:
   amazon-security-lake: [gov,gov2]
   apm_processing_pipelines: [gov,gov2]
   apm_recommendations: [gov,gov2]
-  app_builder_override: [gov2] # docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)
   application_security: [gov,gov2]
   application_security_override: [gov2] # docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov
   autocomplete_search: [gov,gov2]
@@ -391,6 +390,7 @@ unsupported_sites:
   observability_pipelines: [gov,gov2]
   on-call: [gov2]
   opentelemetry_collector_otlp_export: [gov,gov2]
+  operations_monitoring: [gov]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
   ovhcloud: [gov,gov2]
@@ -433,6 +433,4 @@ unsupported_sites:
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2,uk1]
   wiz: [gov,gov2]
   work_management_ai_site_support: [gov,gov2]
-  workflow-automation: [gov,gov2]
-  workflows: [gov,gov2]
   workload_security_active_protection: [gov,gov2]

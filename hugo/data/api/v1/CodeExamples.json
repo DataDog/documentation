@@ -63,6 +63,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2030704107",
+      "description": "Create a dashboard with network device flows formula query"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1442588603",
       "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
     },

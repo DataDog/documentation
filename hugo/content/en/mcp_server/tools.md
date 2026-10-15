@@ -131,6 +131,22 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 - Find notebooks related to performance investigation.
 - List notebooks tagged with `incident-response`.
 
+### `delete_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within 30 days of deletion.
+
+- Delete notebook 12345678.
+- Delete the notebook with ID 12345678 that I created for testing.
+
+### `recover_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Restores a soft-deleted notebook by its numeric ID. The notebook can be restored only within 30 days of deletion.
+
+- Recover notebook 12345678.
+- Restore the notebook with ID 12345678 that I deleted by mistake.
+
 ### `search_datadog_hosts`
 *Toolset: **core***\
 *Permissions Required: `Hosts Read` and `Timeseries`*\
@@ -239,6 +255,104 @@ Edits an existing Datadog notebook.
 
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
+
+## Agent Builder
+
+Tools for [Bits Agent Builder][91], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, running agents, and inspecting their conversations.
+
+Workflow Automation tools are used to configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps.
+
+Connect or disconnect OAuth MCP integrations through the Datadog UI.
+
+### `list_datadog_bits_agents`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the custom AI agents in your organization, including each agent's ID, name, description, and model. Use `get_datadog_bits_agent` for the complete configuration.
+
+- List the Bits agents in this organization.
+- Find the agent that investigates checkout service errors.
+
+### `get_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Workflows Read`*\
+Retrieves an agent by ID, including its system prompt, action tools, MCP servers, and the workflows that invoke it. Use `get_datadog_workflow` to inspect a workflow's complete specification.
+
+- Show the system prompt and tools configured for the checkout investigation agent.
+- Which workflows invoke this agent?
+
+### `list_datadog_bits_agent_models`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` or `Bits Agent Builder Write`*\
+
+Lists supported model identifiers, identifies the default, and notes capabilities such as tool search support. Use these identifiers when creating or updating an agent.
+
+- Which models are available for a Bits agent?
+- Show the default model and models that support tool search.
+
+### `create_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Creates a persistent custom AI agent from a name and system prompt. Optionally, provide a description, model, action tools, and a `code-sandbox` MCP server. The `datadog` MCP server is attached automatically with full tool access. Look up action identifiers and input schemas with `search_datadog_workflow_actions` and `get_datadog_workflow_action` before adding action tools.
+
+- Create an agent that investigates checkout service errors using logs, metrics, and traces.
+- Create an agent that summarizes service health and can send its findings to a Slack channel.
+
+### `update_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Updates an agent's name, description, system prompt, model, or action tools. Omitted fields remain unchanged. Providing `action_tools` replaces the complete list. An empty array clears it. Set `dry_run: true` to preview changes. To change an agent's MCP configuration, use `add_datadog_managed_mcp_server_to_bits_agent` or `remove_datadog_managed_mcp_server_from_bits_agent`.
+
+- Update the checkout investigation agent's instructions to include deployment events.
+- Preview changing this agent to the default model returned by `list_datadog_bits_agent_models`.
+
+### `list_datadog_bits_agent_mcp_tools`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a specific agent. Returns the full catalog available to your organization, regardless of the agent's `allowed_tools` restrictions. Use the returned names when restricting tools. For capabilities absent from the catalog, use `search_datadog_workflow_actions` to search the Workflow Automation action catalog.
+
+- List the Datadog MCP tools available for this agent.
+- Check which MCP tools are available before restricting the agent's access.
+
+### `add_datadog_managed_mcp_server_to_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Adds or reconfigures the `datadog` or `code-sandbox` MCP server on an agent, preserving its OAuth MCP integrations. If the named server already exists, this tool replaces its configuration. An empty `allowed_tools` list permits all tools. For `code-sandbox`, provide `repo_urls` for repositories connected through the Source Code integration. Set `dry_run: true` to preview changes.
+
+- Restrict this agent's Datadog MCP server to selected tools from `list_datadog_bits_agent_mcp_tools`.
+- Add a code sandbox for the connected repository `github.com/example/checkout`.
+
+### `remove_datadog_managed_mcp_server_from_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Removes the `datadog` or `code-sandbox` MCP server from an agent, preserving its OAuth MCP integrations. If the server is not configured, the agent remains unchanged. Set `dry_run: true` to preview changes.
+
+- Remove the code sandbox from the checkout investigation agent.
+- Preview removing this agent's Datadog MCP server.
+
+### `run_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Run`*\
+Starts an agent with a user prompt and returns a `conversation_id` immediately while the agent runs in the background. Each call starts a separate conversation. This tool cannot add messages to an existing conversation. Poll `get_datadog_bits_agent_conversation_events` to retrieve the response.
+
+- Run the checkout investigation agent to investigate the error spike from the past hour.
+- Ask the service health agent to summarize the payments service's current status.
+
+### `list_datadog_bits_agent_conversations`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists an agent's past conversations, including IDs and titles. Use the returned IDs with `get_datadog_bits_agent_conversation_events` to inspect their history.
+
+- List past conversations for the checkout investigation agent.
+- Find the conversation from the last service health investigation.
+
+### `get_datadog_bits_agent_conversation_events`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Retrieves a conversation's event history using its `agent_id` and `conversation_id`, including prompts, agent messages, tool calls, tool results, and errors. Filter with `event_types`, or omit it to return all events. After starting a run, poll until a `final_response` event indicates success or an `application_error` event indicates failure.
+
+- Retrieve the response from the latest agent run.
+- Show the tool calls and results from this investigation.
+- Check whether this conversation has a final response or an application error.
 
 ## Alerting
 
@@ -1919,6 +2033,13 @@ Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
 
+### `test_parallelization_onboarding`
+*Toolset: **onboarding***\
+*Permissions Required: None*\
+Guides you through onboarding Test Parallelization in Datadog.
+
+- Help me set up Test Parallelization for my CI pipeline.
+
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\
@@ -2829,7 +2950,7 @@ Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. U
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], [DORA metrics][66], and [Deployment Gates][2]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -2952,6 +3073,43 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
+
+Deployment Gates tools are read-only. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
+
+### `search_datadog_deployment_gates`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
+
+- Which Deployment Gates apply to the `checkout` service in `prod`?
+
+### `get_datadog_deployment_gate`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a configured Deployment Gate by its gate ID, including its rules and settings.
+
+- Show me the rules configured for Deployment Gate `abc123`.
+
+### `search_datadog_deployment_gate_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
+
+- Show me failed Deployment Gate evaluations for the `checkout` service in `prod` over the last 7 days.
+
+### `get_datadog_deployment_gate_evaluation`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
+
+- Why did Deployment Gate evaluation `abc123` fail?
+
+### `search_datadog_deployment_gate_rule_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
+
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Synthetics
 
@@ -3257,6 +3415,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 - Stop workflow instance `00000000-0000-0000-0000-000000000000`.
 
 [1]: /mcp_server/setup#toolsets
+[2]: /deployment_gates/
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
@@ -3312,6 +3471,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [88]: /api/latest/observability-pipelines/
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
+[91]: /actions/agents/
 
 ## Further reading
 
