@@ -80,9 +80,7 @@ The following characters are considered special and require escaping with the `\
 - `/` is not considered a special character and doesn't need to be escaped.
 - `@` cannot be used in search queries within Logs Explorer because it is reserved for [Attribute Search](#attributes-search).
 
-You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
-
-To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
+Special characters in a log message aren't searchable. To search for them, parse them into an attribute with the [Grok Parser][1], then search on that attribute.
 
 ## Attributes search
 
