@@ -83,7 +83,7 @@ Bits Release reads the code you merged and detects when that code is live in pro
 
 - **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
 - **Slack**: The pull request author is notified when a verdict is ready.
-- **Bits Release in Datadog**: The Bits Release page holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it from the link in your pull request comment. It is not in the Datadog side navigation yet.
+- **Bits Release in Datadog**: The Bits Release page holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the Preview, reach it from the link in your pull request comment. It is not available in the Datadog side navigation.
 
 ## Billing
 
