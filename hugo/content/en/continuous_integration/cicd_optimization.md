@@ -7,6 +7,9 @@ further_reading:
   - link: "/tests/"
     tag: "Documentation"
     text: "Test Optimization"
+  - link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
+    tag: "Blog"
+    text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
 ---
 
 CI/CD Optimization combines Datadog's [CI Visibility][1] and [Test Optimization][2] experiences into one unified interface. It provides a single place to understand, monitor, and improve your entire CI/CD ecosystem, from pipeline executions to individual test runs.

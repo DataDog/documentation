@@ -1,5 +1,6 @@
 ---
 title: Data Streams Monitoring for AWS Lambda
+description: Set up Data Streams Monitoring for AWS Lambda functions that produce or consume messages with Amazon SQS, SNS, EventBridge, or Kinesis.
 further_reading:
     - link: '/serverless/aws_lambda/instrumentation/'
       tag: 'Documentation'
@@ -39,7 +40,8 @@ Context injection and extraction are automatic for both producers and consumers.
 
 ### Setup
 
-1. Instrument your Lambda function with Datadog. See [Instrument AWS Lambda applications][2].
+1. Set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on each Lambda function that produces or consumes messages.
+1. On each Lambda function that consumes from Amazon EventBridge, set the `DD_DSM_EXCHANGE_NAME` environment variable to the event bus name. DSM uses this value to identify the event bus in your pipeline.
 1. Set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on each Lambda function that produces or consumes messages.
 1. On each Lambda function that consumes from Amazon EventBridge, set the `DD_DSM_EXCHANGE_NAME` environment variable to the event bus name. DSM uses this value to identify the event bus in your pipeline.
 

@@ -1,6 +1,10 @@
 ---
 title: Test Parallelization
 description: Reduce CI testing time by distributing test files across CI nodes or workers with Test Optimization data.
+further_reading:
+- link: "https://www.datadoghq.com/blog/ci-cd-optimization/"
+  tag: "Blog"
+  text: "Ship faster, improve reliability, and control CI costs with Datadog CI/CD Optimization"
 ---
 
 ## Overview
@@ -45,6 +49,10 @@ For single-node and multi-node examples, see [Set Up Test Parallelization][3].
 {{< nextlink href="/tests/test_parallelization/best_practices/" >}}Best Practices for Test Parallelization{{< /nextlink >}}
 {{< nextlink href="/tests/test_parallelization/troubleshooting/" >}}Troubleshooting Test Parallelization{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/test_impact_analysis/
 [2]: /tests/setup/

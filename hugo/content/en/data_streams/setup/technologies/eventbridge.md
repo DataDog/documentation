@@ -1,5 +1,11 @@
 ---
 title: Data Streams Monitoring for Amazon EventBridge
+title: Data Streams Monitoring for Amazon EventBridge
+description: Enable Data Streams Monitoring for AWS Lambda functions that produce to or consume from Amazon EventBridge.
+further_reading:
+    - link: '/data_streams/setup/serverless/aws_lambda/'
+      tag: 'Documentation'
+      text: 'Data Streams Monitoring for AWS Lambda'
 ---
 
 Data Streams Monitoring supports Amazon EventBridge for AWS Lambda functions that use the Java, .NET, Go, Python, or Node.js runtimes. DSM automatically injects context into events that your functions publish and extracts context from events that your functions consume.
@@ -12,7 +18,7 @@ Data Streams Monitoring supports Amazon EventBridge for AWS Lambda functions tha
 ### Setting up Data Streams Monitoring
 
 1. Set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on your producer and consumer Lambda functions.
-1. On each consumer Lambda function, set the `DD_DSM_EXCHANGE_NAME` environment variable to the name of the event bus name.
+1. On each consumer Lambda function, set the `DD_DSM_EXCHANGE_NAME` environment variable to the event bus name.
 
 For more information, see [Data Streams Monitoring for AWS Lambda][2].
 
