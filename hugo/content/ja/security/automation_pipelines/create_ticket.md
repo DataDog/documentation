@@ -22,7 +22,6 @@ products:
 - icon: security-workload-security
   name: Workload Protection
   url: /security/workload_protection/
-site_support_id: case_management
 title: チケット作成ルール
 ---
 {{< product-availability >}}

@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Agrégez, corrélez et agissez sur les alertes plus rapidement grâce à Event
     Management propulsée par AIOps.
-site_support_id: case_management
 title: Event Management Triage Inbox
 ---
 ## Vue d'ensemble {#overview}

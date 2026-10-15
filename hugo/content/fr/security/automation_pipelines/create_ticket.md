@@ -22,7 +22,6 @@ products:
 - icon: security-workload-security
   name: Workload Protection
   url: /security/workload_protection/
-site_support_id: case_management
 title: Règles de création de tickets
 ---
 {{< product-availability >}}

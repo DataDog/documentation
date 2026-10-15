@@ -1,7 +1,6 @@
 ---
 title: Assignee Management
 description: "Assign Datadog users to security findings to manage triage ownership across Cloud Security, Code Security, App and API Protection, and Workload Protection."
-site_support_id: case_management
 products:
 - name: Cloud Security
   url: /security/cloud_security_management/

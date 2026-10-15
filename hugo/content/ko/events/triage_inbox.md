@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-event-management/
   tag: 블로그
   text: AIOps 기반 Event Management를 통해 더 빠르게 알림을 집계하고 상호 연관성을 파악하여 조치를 취하세요.
-site_support_id: case_management
 title: Event Management 분류 받은 편지함
 ---
 ## 개요 {#overview}

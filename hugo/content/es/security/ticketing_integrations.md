@@ -31,7 +31,6 @@ products:
 - icon: cloud-security-management
   name: Cloud Security
   url: /security/cloud_security_management/
-site_support_id: case_management
 title: Integrations de tickets
 ---
 {{< product-availability >}}

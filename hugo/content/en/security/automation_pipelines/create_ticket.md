@@ -1,6 +1,5 @@
 ---
 title: Ticket Creation Rules
-site_support_id: case_management
 products:
   - name: Cloud Security
     url: /security/cloud_security_management/

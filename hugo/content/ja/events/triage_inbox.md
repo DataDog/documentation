@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-event-management/
   tag: ブログ
   text: AIOps を活用した Event Management により、アラートの集約、相関付け、対応を迅速化する
-site_support_id: case_management
 title: Event Management トリアージインボックス
 ---
 ## 概要{#overview}
