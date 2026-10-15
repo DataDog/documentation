@@ -18,7 +18,6 @@
 
 .api-scopes-table__table {
   table-layout: fixed;
-  font-weight: var(--font-weight-regular);
 }
 
 /* Hugo's 4/3/5 column split. */

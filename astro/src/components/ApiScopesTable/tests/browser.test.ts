@@ -41,6 +41,16 @@ test.describe("ApiScopesTable anchors", () => {
   }
 });
 
+test.describe("ApiScopesTable endpoint links", () => {
+  test("have one underline, below the descenders", async ({ page }) => {
+    await page.goto(SCOPES_PATH, { waitUntil: "domcontentloaded" });
+    const link = page.locator(".api-scopes-table__endpoint a").first();
+
+    await expect(link).toHaveCSS("text-underline-position", "under");
+    await expect(link).toHaveCSS("border-bottom-style", "none");
+  });
+});
+
 test.describe("Endpoint scope link", () => {
   test("lands on the endpoint's section of the scopes page", async ({
     page,
