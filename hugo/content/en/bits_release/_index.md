@@ -28,7 +28,7 @@ Merging and deploying a change is not the same as knowing it worked. Most teams 
 
 Bits Release closes that gap. After you merge a pull request, it reads the code change, decides what should be different in production, waits for the change to deploy, and then examines your production telemetry to report a verdict on the pull request.
 
-Bits Release does not modify your code, and it does not create permanent instrumentation or leave anything behind. It reads the observability data you already send to Datadog, creates temporary artifacts when a check needs to run over time, and removes them when the validation ends.
+Bits Release does not modify your code or add permanent instrumentation. It reads the observability data you already send to Datadog. When a check must run over time, it creates temporary resources and removes them when validation ends.
 
 {{< img src="bits_release/bits_release_demo.mp4" alt="Video walking through a Bits Release validation: a merged pull request is deployed to production, validation starts, and a verdict arrives with the evidence behind it" video="true" style="width:100%;" >}}
 
