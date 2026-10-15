@@ -41,7 +41,7 @@ Bits Release does not modify your code or add permanent instrumentation. It read
 
 Validation runs against your production environment.
 
-### What Bits Release looks at
+### Data sources for Bits Release
 
 Bits Release does not require a dedicated data source. It validates your change with the core Datadog telemetry your services already send, primarily [logs][3] and [APM][4] traces for backend services and [RUM][5] for web frontends, and it adapts to what each service has enabled.
 
