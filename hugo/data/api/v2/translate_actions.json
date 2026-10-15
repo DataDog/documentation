@@ -2292,6 +2292,10 @@
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
   },
+  "GetSavedFilter": {
+    "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
+    "summary": "Get a saved filter"
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -7812,6 +7816,10 @@
     "summary": "Update a team link",
     "request_description": "",
     "request_schema_description": "Team link create request"
+  },
+  "GetTeamHierarchyMembers": {
+    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
+    "summary": "Get team hierarchy members"
   },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
