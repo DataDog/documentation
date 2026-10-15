@@ -29,3 +29,13 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Add generated metric aggregation option to Observability Pipelines
+  - change_type: modified
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40664
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Shorten Azure Data Explorer auth model names for RubyGems

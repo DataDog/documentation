@@ -84834,7 +84834,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientSecret"
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthClientCertificate"
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentity"
-        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertion"
         - $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthWorkloadIdentity"
     ObservabilityPipelineAzureDataExplorerDestinationAuthAzureCli:
       description: Authenticate using the Azure CLI credentials available in the environment.
@@ -84937,40 +84937,6 @@ components:
       required:
         - azure_credential_kind
       type: object
-    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertion:
-      description: Authenticate using a managed identity as a client assertion for a Microsoft Entra application.
-      properties:
-        azure_credential_kind:
-          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind"
-        client_assertion_client_id:
-          description: The client ID of the Microsoft Entra application that trusts the managed identity.
-          example: 22222222-2222-2222-2222-222222222222
-          type: string
-        client_assertion_tenant_id:
-          description: The tenant ID of the Microsoft Entra application that trusts the managed identity.
-          example: 11111111-1111-1111-1111-111111111111
-          type: string
-        user_assigned_managed_identity_id:
-          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
-          example: 00000000-0000-0000-0000-000000000000
-          nullable: true
-          type: string
-        user_assigned_managed_identity_id_type:
-          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
-      required:
-        - azure_credential_kind
-        - client_assertion_client_id
-        - client_assertion_tenant_id
-      type: object
-    ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityClientAssertionKind:
-      default: managed_identity_client_assertion
-      description: The Azure credential kind. The value should always be `managed_identity_client_assertion`.
-      enum:
-        - managed_identity_client_assertion
-      example: managed_identity_client_assertion
-      type: string
-      x-enum-varnames:
-        - MANAGED_IDENTITY_CLIENT_ASSERTION
     ObservabilityPipelineAzureDataExplorerDestinationAuthManagedIdentityKind:
       default: managed_identity
       description: The Azure credential kind. The value should always be `managed_identity`.
@@ -85056,6 +85022,40 @@ components:
       type: string
       x-enum-varnames:
         - AZURE_DATA_EXPLORER
+    ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertion:
+      description: Authenticate using a managed identity as a client assertion for a Microsoft Entra application.
+      properties:
+        azure_credential_kind:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertionKind"
+        client_assertion_client_id:
+          description: The client ID of the Microsoft Entra application that trusts the managed identity.
+          example: 22222222-2222-2222-2222-222222222222
+          type: string
+        client_assertion_tenant_id:
+          description: The tenant ID of the Microsoft Entra application that trusts the managed identity.
+          example: 11111111-1111-1111-1111-111111111111
+          type: string
+        user_assigned_managed_identity_id:
+          description: The ID of the user-assigned managed identity. If omitted, the system-assigned managed identity is used.
+          example: 00000000-0000-0000-0000-000000000000
+          nullable: true
+          type: string
+        user_assigned_managed_identity_id_type:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType"
+      required:
+        - azure_credential_kind
+        - client_assertion_client_id
+        - client_assertion_tenant_id
+      type: object
+    ObservabilityPipelineAzureDataExplorerManagedIdentityClientAssertionKind:
+      default: managed_identity_client_assertion
+      description: The Azure credential kind. The value should always be `managed_identity_client_assertion`.
+      enum:
+        - managed_identity_client_assertion
+      example: managed_identity_client_assertion
+      type: string
+      x-enum-varnames:
+        - MANAGED_IDENTITY_CLIENT_ASSERTION
     ObservabilityPipelineAzureStorageDestinationCompression:
       description: |-
         Compression configuration for archived logs. When omitted, logs are compressed with gzip
