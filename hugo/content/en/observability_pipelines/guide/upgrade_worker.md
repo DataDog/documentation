@@ -67,7 +67,7 @@ Worker version 2.22.0 gives you access to the following:
     - `memory_enrichment_table_failed_reads_total`
     - `memory_enrichment_table_ttl_expirations_total`
   The previous metric names without the `_total` suffix are still emitted, but they are deprecated and are planned for removal in a future release.
-- The deprecated `buffer_byte_size` and `buffer_events` gauge metrics have been removed. Use `buffer_size_bytes` instead of `buffer_byte_size`, and `buffer_size_events` instead of `buffer_events`.
+- The deprecated `pipelines.buffer_byte_size` and `pipelines.buffer_events` gauge metrics have been removed. Use `pipelines.buffer_size_bytes` instead of `buffer_byte_size`, and `pipelines.buffer_size_events` instead of `buffer_events`.
 - When a compressed request payload fails to decompress, the OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message. You can diagnose decompression failures, such as a corrupt or truncated gzip stream, from the returned status and the sender's logs.
 
 ## Worker version 2.21.0
