@@ -1195,20 +1195,20 @@ Tools for searching and reading published Datadog documentation, with source URL
 ### `search_datadog_documentation`
 *Toolset: **documentation***\
 *Permissions Required: None*\
-Searches published Datadog documentation and returns up to 10 relevant passages, each with its page title, section, URL, and document ID. Returns source passages, not a generated answer. Searches English documentation by default, or French, Japanese, Korean, or Spanish documentation when requested. Search uses AI embeddings for semantic matching. If your organization has [disabled AI providers][92], it uses keyword matching only.
+Searches published Datadog documentation and returns up to 10 matching passages with links to their source pages. Returns source passages, not a generated answer. Supports English, French, Japanese, Korean, and Spanish. Other languages return no results. Search uses AI models to match by meaning. If your organization has [disabled AI providers][92], search matches by keyword only.
 
 - How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
-- Find the Datadog documentation on monitor notification variables.
+- What's the difference between a metric monitor and an anomaly monitor?
 - Which Datadog Agent settings control container log collection?
 
 ### `read_datadog_documentation`
 *Toolset: **documentation***\
 *Permissions Required: None*\
-Reads a published Datadog documentation page as Markdown, by the document ID that `search_datadog_documentation` returns or by a `docs.datadoghq.com` URL. Long pages are returned in parts of up to 20,000 characters, and the agent can continue from where the previous part ended.
+Reads a full Datadog documentation page from a `docs.datadoghq.com` URL or a document ID returned by `search_datadog_documentation`. Reads long pages in parts. Site-specific values, such as endpoints, appear as placeholders like `<YOUR_MCP_SERVER_ENDPOINT>`.
 
-- Read https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/ and explain the matcher syntax.
+- Read `https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/` and explain the matcher syntax.
 - Open the Datadog MCP Server setup page and summarize the toolset options.
-- Read the full page behind the top search result before answering.
+- Search the Datadog docs for log pipeline processors, then read the top result in full.
 
 ## Error Tracking
 
