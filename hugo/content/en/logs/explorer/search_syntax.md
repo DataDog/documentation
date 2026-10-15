@@ -39,6 +39,8 @@ There are two types of terms:
 
 * A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
+**Note**: Use straight double quotes (`"`) for sequences. Search ignores curly quotation marks (`“ ”`), which some text editors and chat apps insert automatically. For example, `“hello dolly”` matches logs that contain `hello` and `dolly` in any order.
+
 To combine multiple terms into a complex query, use any of the following case-sensitive Boolean operators:
 
 | Operator | Description                                                                                                  | Example                        |
@@ -191,7 +193,7 @@ Some punctuation separates words only in certain contexts. The following table s
 
 Because Datadog treats `my.friend` as a single word, the query `friend` doesn't match it. To match part of a word, use a wildcard as described in the [Multi-character wildcard](#multi-character-wildcard) section. For example, `*friend` matches `my.friend`.
 
-Straight (`'`) and curly (`’`) apostrophes are different characters, so `don't` doesn't match `don’t`. To match both, use a wildcard such as `don*`.
+Straight (`'`) and curly (`‘` or `’`) apostrophes are different characters, so `don't` doesn't match `don’t`. To match both, use a wildcard such as `don*`.
 
 ## Numerical values
 
