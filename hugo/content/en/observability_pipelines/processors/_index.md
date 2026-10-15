@@ -90,24 +90,24 @@ These are the available processors:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Per-source and shared processors
+## Per-source and shared processors for multiple sources
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
 Per-source and shared processors are in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
-When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches. Each branch has its own processor groups. By using per-source and shared processors, you can avoid having to add the same processors to each processor group.
+When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches, which have their own processor groups. By using per-source and shared processors, you can avoid having to add the same processors to each branch's processor group.
 
 For example, the log pipeline in this image has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
 
 {{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources and two branches that send logs to Datadog, Datadog Archives, and CrowdStrike NG-SIEM." style="width:100%;" >}}
 
-The Worker sends all logs in this pipeline to two different branches: branch 1 and branch 2. If you want to do the following:
+The Worker sends all logs in this pipeline to two different branches. If you want to do the following:
 
 - Sample all logs from the Datadog Agent source
 - Deduplicate logs from all sources
 
-Instead of adding duplicate processors to each branch's processor groups, add a per-source processor for the Datadog Agent and a shared processor for all sources.
+Instead of adding duplicate processors to each branch's processor group, add a per-source processor for the Datadog Agent and a shared processor to deduplicate logs from all sources.
 
 {{< img src="observability_pipelines/processors/per_source_shared_processors_tab.png" alt="The Datadog Agent source panel with per-source Sample and Tags processors and a shared Dedupe processor." style="width:50%;" >}}
 
