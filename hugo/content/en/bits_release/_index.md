@@ -60,7 +60,7 @@ A validation ends in one of four verdicts. **Passed** and **Failed** are conclus
 
 While a validation is running, it shows as **In Progress**. It shows as **Pending** when Bits Release already has a provisional answer but is holding it back, because the watch window is still short or a signal it needs has not arrived. In both cases it keeps watching and reports when it has more.
 
-Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
+Bits Release reports how production behaves after a change. It does not identify the code to fix. Use the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) as the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or use that context in your own AI coding tools.
 
 ## Prerequisites
 
