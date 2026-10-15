@@ -2,7 +2,7 @@
 title: Prompt Management
 aliases:
 - /llm_observability/monitoring/prompt_management/
-description: Create, version, and retrieve managed prompts in Python, Node.js, and Go applications with Prompt Management.
+description: Create, version, and retrieve managed prompts in your applications with Prompt Management.
 
 further_reading:
   - link: "/llm_observability/instrument/prompt_tracking"
@@ -21,11 +21,11 @@ further_reading:
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
 
-Runtime retrieval is supported by the Python, Node.js, and Go SDKs. Prompt retrieval and Prompt Tracking are separate: you can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
+Prompt retrieval and Prompt Tracking are separate: you can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
 After creating prompt versions, use [Prompt Experimentation][10] to compare them with an A/B test or deploy one progressively with a Guarded Rollout.
 
-Prompt Management works alongside [Prompt Tracking][1]. Python supports automatic tracking for supported, automatically instrumented LLM calls. In Node.js and Go, explicitly annotate the LLM call with the managed prompt, as shown in [Track prompt usage](#track-prompt-usage).
+Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. See [Track prompt usage](#track-prompt-usage) for setup.
 
 ## Prerequisites
 
@@ -127,7 +127,7 @@ For installation and application setup, see the [Node.js SDK guide][19].
 go get github.com/DataDog/dd-trace-go/v2@latest
 ```
 
-Also install the package that enables A/B test reporting. Include it even if you are not running experiments yet, so the application is ready when you create one:
+For Agent-backed retrieval, also install:
 
 ```shell
 go get github.com/DataDog/dd-trace-go/v2/openfeature@latest
@@ -143,9 +143,7 @@ For installation and application setup, see the [Go SDK guide][20].
 
 ### Integrate Prompt Management with a coding agent
 
-The coding-agent workflow below is for Python applications. For Node.js and Go, follow the language tabs in [Configure prompt retrieval](#configure-prompt-retrieval).
-
-Integrate a managed prompt with a coding agent of your choice by pasting in the following prompt:
+Paste the following prompt into your coding agent:
 
 ```text
 Follow the instructions at https://docs.datadoghq.com/llm_observability/instrument/agentic.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
@@ -231,19 +229,23 @@ Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow d
 Follow the [Go SDK setup guide][17] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
 
 #### Retrieve directly from Datadog
+
 Replace the placeholders and set the following environment variables before starting the tracer:
 
-```shell
+{{< code-block lang="shell" >}}
+export DD_SITE="<DATADOG_SITE>"
+export DD_API_KEY="<DATADOG_API_KEY>"
+export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
-export DD_SERVICE="<SERVICE_NAME>"
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-```
+{{< /code-block >}}
 
 #### Retrieve through the Agent
 
 To retrieve an environment's deployed prompt through the Agent, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` before starting the tracer and add the following import:
 
-Optionally, set `DD_SITE`, `DD_API_KEY`, and `DD_APP_KEY` so the application can retrieve a deployed prompt directly from Datadog if it is unavailable through the Agent. The same credentials let you retrieve deployed prompts without an Agent. Use a [fallback](#retrieve-format-and-use-a-prompt) to keep the application working if retrieval fails.
+```go
+import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
+```
 
 Neither key is required when retrieval succeeds through the Agent. Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow direct retrieval if the Agent is unavailable, configure both keys.
 
@@ -562,7 +564,7 @@ span.Finish()
 
 ## Create and manage prompts
 
-Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, through the Python or Node.js SDK, or through the API. The Go SDK is read-only.
+Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, through a supported SDK, or through the API.
 
 ### Create a prompt
 
@@ -710,7 +712,11 @@ Message placeholders insert conversation history or tool interactions into a sav
 
 The prompt version stores the placeholder's name and position, not the messages you pass at runtime. To move the history within the prompt, publish a new prompt version. You do not need to change application code.
 
-**Preview SDK access:** Contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager for the SDK version to use for your language.
+**SDK requirements:**
+
+- **Python:** `ddtrace` 4.16.0 or later.
+- **Node.js:** `dd-trace` 5.129.0 or later in the 5.x release line, or 6.18.0 or later.
+- **Go:** `dd-trace-go/v2` 2.12.0 or later.
 
 ### Define the placeholder
 
@@ -734,7 +740,7 @@ LLMObs.create_prompt(
 )
 ```
 
-The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see the [Use the Python SDK](#use-the-python-sdk) section.
+The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see [Manage prompts programmatically](#manage-prompts-programmatically).
 
 ### Supply runtime values
 
@@ -782,7 +788,7 @@ messages := rendered.Messages
 
 {{% tab "Node.js" %}}
 ```javascript
-const prompt = await tracer.llmobs.getPrompt('support-assistant')
+const prompt = await tracer.llmobs.prompts.getPrompt('support-assistant')
 
 const variables = {
   plan: 'enterprise',
@@ -884,7 +890,11 @@ Deploy the version to an environment when it is ready. Applications retrieving t
 
 Retrieve the prompt deployed to your application's environment, then pass its configuration to your model client.
 
-**Preview SDK access:** Contact Datadog Support or your Customer Success Manager for the SDK version to use for your language.
+**SDK requirements:**
+
+- **Python:** `ddtrace` 4.16.0 or later.
+- **Node.js:** `dd-trace` 5.129.0 or later in the 5.x release line, or 6.18.0 or later.
+- **Go:** `dd-trace-go/v2` 2.12.0 or later.
 
 These examples use a prompt named `summarizer` with the configuration shown above.
 
@@ -1096,58 +1106,9 @@ To configure this:
 
 4. Save the rule. Calls with `tag=unstable` resolve to the matched version; all other calls fall back to the default version.
 
-Pass targeting attributes as keyword arguments in Python, through `attributes` in Node.js, or through `WithPromptTargetingAttributes()` in Go. Use flat string, number, or Boolean values. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
+Pass the attributes used by your targeting rule, as shown above. Use string, number, or Boolean values. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
-
-### Assign users to an A/B test
-
-After configuring a [prompt A/B test][10], pass a stable targeting key, such as a user or session identifier. Use the same key for the same subject across requests. Set `DD_ENV` to the experiment's environment and omit the exact version so the SDK can select a variant.
-
-{{< tabs >}}
-{{% tab "Python" %}}
-
-```python
-prompt = LLMObs.get_prompt(
-    "customer-support-greeting",
-    targeting_key=user_id,
-    fallback="You are a helpful support agent.",
-)
-```
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-```javascript
-const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-greeting', {
-  targetingKey: userId,
-  fallback: 'You are a helpful support agent.',
-})
-```
-
-To report A/B test assignments through the Agent, use the [recommended setup](#configure-prompt-retrieval), including `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`. Pass the user's targeting key to `getPrompt()`; no separate reporting call is needed.
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-```go
-prompt, err := llmobs.GetPrompt(ctx, "customer-support-greeting",
-    llmobs.WithPromptTargetingKey(userID),
-    llmobs.WithPromptFallback(llmobs.PromptFallback{
-        Template: llmobs.PromptTemplate{Text: "You are a helpful support agent."},
-    }),
-)
-if err != nil {
-    return err
-}
-```
-
-To report A/B test assignments through the Agent, use the [recommended setup](#configure-prompt-retrieval), including the `openfeature` import and `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`. Pass the user's targeting key to `GetPrompt()`; no separate reporting call is needed.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-An A/B test exposure records which prompt version a user is assigned. It is separate from [tracking the prompt used in an LLM call](#track-prompt-usage). For Node.js and Go, if retrieval through the Agent is unavailable and the SDK uses the backup API credentials to retrieve a prompt directly, that retrieval does not record an A/B test exposure.
 
 ## Further reading
 
