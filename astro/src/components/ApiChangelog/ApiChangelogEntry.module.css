@@ -2,7 +2,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  gap: var(--space-xs) var(--space-md);
+  /* The row gap only applies on phones, where the badge stacks above the
+     body. Matching the top padding keeps the badge from crowding the body. */
+  gap: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
   padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius-md);
