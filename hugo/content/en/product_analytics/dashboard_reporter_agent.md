@@ -34,7 +34,7 @@ Dashboard Reporter agents are built on [Bits Agent Builder][1].
 
 <div class="alert alert-info">Dashboard Reporter agents consume <a href="/account_management/billing/ai_credits/">AI Credits</a>.</div>
 
-Reports are text summaries delivered on a schedule. Charts aren't embedded in the report, but each item links to its source chart. To get notified when a metric crosses a threshold, use a [monitor][2].
+Reports are text summaries delivered on a schedule. To get notified when a metric crosses a threshold, use a [monitor][2].
 
 ## Use cases
 
