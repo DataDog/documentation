@@ -9,6 +9,13 @@ describe("toSlug", () => {
   it("collapses runs of non-alphanumerics and trims the ends", () => {
     expect(toSlug("  On-Call / Paging  ")).toBe("on-call-paging");
   });
+
+  it("deletes punctuation inside a word, as Hugo does", () => {
+    expect(toSlug("Get a monitor's details")).toBe("get-a-monitors-details");
+    expect(toSlug("Trigger tests from CI/CD pipelines")).toBe(
+      "trigger-tests-from-cicd-pipelines",
+    );
+  });
 });
 
 describe("toCategorySlug", () => {

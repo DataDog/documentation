@@ -50,19 +50,123 @@
       "responses": [
         {
           "statusCode": "200",
-          "description": "OK"
+          "description": "OK",
+          "schemaDescription": "Response containing the number of Lambda functions and sum of the invocations of all Lambda functions\nfor each hour for a given organization.",
+          "schema": [
+            {
+              "name": "usage",
+              "type": "[object]",
+              "required": false,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Get hourly usage for Lambda.",
+              "children": [
+                {
+                  "name": "func_count",
+                  "type": "int64",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Contains the number of different functions for each region and AWS account."
+                },
+                {
+                  "name": "hour",
+                  "type": "date-time",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The hour for the usage."
+                },
+                {
+                  "name": "invocations_sum",
+                  "type": "int64",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Contains the sum of invocations of all functions."
+                },
+                {
+                  "name": "org_name",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The organization name."
+                },
+                {
+                  "name": "public_id",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The organization public ID."
+                }
+              ]
+            }
+          ]
         },
         {
           "statusCode": "400",
-          "description": "Bad Request"
+          "description": "Bad Request",
+          "schemaDescription": "Error response object.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
         },
         {
           "statusCode": "403",
-          "description": "Forbidden - User is not authorized"
+          "description": "Forbidden - User is not authorized",
+          "schemaDescription": "Error response object.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
         },
         {
           "statusCode": "429",
-          "description": "Too many requests"
+          "description": "Too many requests",
+          "schemaDescription": "Error response object.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
         }
       ],
       "codeExamples": [

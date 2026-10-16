@@ -232,16 +232,29 @@ export function extractResponses(
 
     let schema: SchemaField[] | undefined;
     let schemaDescription: string | undefined;
-    const jsonContent = resolved?.content?.["application/json"];
-    if (jsonContent?.schema) {
+    // As with request bodies, prefer JSON, then fall back to the first
+    // declared type (e.g. `application/json;datetime-format=rfc3339`,
+    // `text/csv`).
+    const content = resolved?.content ?? {};
+    const mediaType =
+      "application/json" in content
+        ? "application/json"
+        : Object.keys(content)[0];
+    const mediaContent = mediaType ? content[mediaType] : undefined;
+    if (mediaContent?.schema) {
       // Write-only fields are omitted from responses: the server accepts them
       // but never returns them. Requests keep theirs, so the filter belongs
       // here rather than in `topLevelSchemaToFields`.
       schema = stripWriteOnlyFields(
-        topLevelSchemaToFields(spec, jsonContent.schema),
+        topLevelSchemaToFields(spec, mediaContent.schema),
       );
-      schemaDescription = resolveSchemaDescription(spec, jsonContent.schema);
+      schemaDescription = resolveSchemaDescription(spec, mediaContent.schema);
     }
+
+    // A JSON example would misrepresent a non-JSON response, so those show
+    // the schema only.
+    const jsonContent =
+      mediaType && isJsonMediaType(mediaType) ? mediaContent : undefined;
 
     let examples: Array<{ name: string; value: string }> | undefined;
     if (jsonContent?.examples && typeof jsonContent.examples === "object") {

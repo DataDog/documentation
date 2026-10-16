@@ -12,7 +12,7 @@ Eleven findings, all unreviewed: three `missing-in-astro`, three `extra-in-astro
 
 ## I1. Operation slug differs when the summary has an apostrophe
 
-Recommendation: automatic fix (per monitors I1)
+Recommendation: automatic fix (per monitors I1). done: covered by monitors F1
 Findings: 6 (three missing-in-astro, three extra-in-astro, all links). Samples: 1de9ea743207, 48a3572e786b
 Location: the h2 links for "List an incident's impacts", "Get a list of an incident's todos" and "Get a list of an incident's integration metadata"
 Search: `incident's` on each .md page.
@@ -25,7 +25,7 @@ Success: http://localhost:4321/api/latest/incidents/list-an-incidents-impacts/ r
 
 ## I2. Badge missing from the .md when an operation is both deprecated and preview
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F2
 Findings: 2 (one structure, one structure-unmapped). Samples: 3895d4bbc4b8, d1a4b3042ad8
 Location: the h2 for "Create a page from an incident"
 Search: `Create a page from an incident` on each .md page.

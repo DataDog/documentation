@@ -14,10 +14,16 @@ const SLUG_OVERRIDES: Record<string, string> = {
   scorecards: "service-scorecards",
 };
 
+/**
+ * Matches Hugo's `anchorize`: punctuation is deleted, so "monitor's" becomes
+ * "monitors" and "CI/CD" becomes "cicd", and only spaces and hyphens separate
+ * words.
+ */
 export function toSlug(name: string): string {
   return name
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/[ -]+/g, "-")
     .replace(/(^-|-$)/g, "");
 }
 

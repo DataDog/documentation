@@ -12,7 +12,7 @@ Links:
 
 ## I1. Response models and examples are missing when the content type isn't exactly `application/json`
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F1
 Findings: 20 (17 missing-in-astro, astro-wrong, HTML matches the Hugo .md; 3 structure-unmapped). Samples: 6efb18215157, 5502df3adfbb, 296eb4a2e41e, bd0a3f971048, 5a8c56558157, e66d94a6229d
 Location: Response section, all four status tabs (200, 400, 403, 429)
 Search: `func_count` on each page. It's on both prod pages, and absent from both Astro pages.
@@ -27,7 +27,7 @@ Success: http://localhost:4321/api/latest/usage-metering/get-hourly-usage-for-la
 
 ## I2. Version label is "(latest)" on a deprecated operation
 
-Recommendation: automatic fix (user, 2026-10-16)
+Recommendation: automatic fix (user, 2026-10-16). done: F2
 Findings: none. It isn't in the report. Found by comparing the HTML.
 Location: the version tab in the HTML, and the version heading in the .md
 Search: `v1 (` on each HTML page.
@@ -57,7 +57,7 @@ Proposed fix: none.
 
 ## I4. .md drops the link on "scope" in the OAuth sentence
 
-Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1)
+Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1). done: covered by dashboard-lists/get-all-dashboard-lists F1
 Findings: 1 (missing-in-astro, link). Samples: 68433f971259
 
 Hugo .md links "scope" to `scopes.md#usage-metering`. Astro .md has no link.

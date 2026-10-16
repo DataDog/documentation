@@ -194,7 +194,8 @@ Claude can't confirm fixes against the tool, because the tool reads `dist/`, and
 
 Fix log (Claude adds a line per batch):
 
-- [ ] Batch 1:
+- [x] Batch 1: monitors F1 (operation slugs drop punctuation), incidents F2 (both badges in the .md), dashboard-lists/get-all-dashboard-lists F1 (scope link in the .md), usage-metering/get-hourly-usage-for-lambda F1 (responses fall back to the first content type) and F2 ("(deprecated)" version label). Covered: incidents I1, lambda I4. ⏸
+- [ ] Batch 2:
 
 ### Phase 3: human review lists
 
@@ -225,3 +226,4 @@ For each page, Claude moves the "human review" items into `<slug>-review.md`, us
 - 1.12 done. First POST page. No new automatic fixes. The additionalProperties fix (1.11 I2) must also handle oneOf. New human review: I1, request examples come from the spec because Hugo's `request.*.json` files (784, under hugo/content) aren't staged for Astro; I2, "Request Body (required)" heading vs "Request" plus a "Body Data (required)" label. I11 (help link as .md) is no change. Next: 1.13 `monitors/create-a-monitor`.
 - 1.13 done. No new automatic fixes. New human review, per the user: I1, OAuth scope with more than one AuthZ entry (Hugo shows the last, Astro the first; 17 operations); I2, read-only fields left out of request tables (26 rows here). I3 (three request and curl examples vs one) falls under 1.12 I1. I7: Hugo's .md shortens enum lists and descriptions; no change. Hugo also drops a default of `0`. Next: 1.14 `dashboards/get-a-dashboard` (about 2,400 findings).
 - 1.14 done. Phase 1 is complete. New automatic fixes, all in `src/lib/api/refResolver.ts` unless noted: I1, an array of oneOf uses up an extra nesting level, so rows past the cap are cut (about 988 rows); I2, follow `$ref` chains (`ProductAnalyticsBaseQuery`, about 189 rows); I4, per the user, drop the nameless `<items>` wrapper row under array-typed oneOf options (9 schemas); I5, per the user, a `$ref`'s own `description` and `deprecated` win over the target's (about 200 and 98 refs); I6, the plaintext twin drops enum values on oneOf option rows (`ApiSchemaTable.ts:61-68`). New human review, per the user: I9, the "(recursive)" row; I10, bare URLs left unlinked in the .md. The investigation file has console snippets to count rows (prod 13486, Astro 12167). Next: the stop gate. Ask the user before Phase 2.
+- Batch 1 done. Five fixes, each red → green, with the fixes files written and the investigation items marked `done`. Scoped headless suites pass (1313 tests) and `astro check` has 0 errors. Side notes in the fixes files: local `scopes.md` lacks prod's per-category scope sections, and non-JSON responses show no Example tab where prod shows `{}`. Next: batch 2, starting with lambda I6 (curl variables), then aws-integration/list-all-aws-integrations I1 and I2, then get-a-dashboard I1 and I2.

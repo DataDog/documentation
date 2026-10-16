@@ -24,7 +24,7 @@ Get a dashboard using the specified ID.
 
 This endpoint requires the `dashboards_read` permission.
 
-OAuth apps require the `dashboards_read` authorization scope to access this endpoint.
+OAuth apps require the `dashboards_read` authorization [scope](https://docs.datadoghq.com/api/latest/scopes.md#dashboards) to access this endpoint.
 
 ### Arguments
 

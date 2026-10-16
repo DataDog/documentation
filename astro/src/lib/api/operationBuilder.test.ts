@@ -210,3 +210,46 @@ describe("extractRequestBody content types", () => {
     expect(body?.schema.map((field) => field.name)).toEqual(["data"]);
   });
 });
+
+describe("extractResponses content types", () => {
+  const objectSchema = (field: string) => ({
+    type: "object" as const,
+    properties: { [field]: { type: "string" as const, example: "x" } },
+  });
+
+  const responseFor = (content: Record<string, unknown>) =>
+    extractResponses(spec, {
+      responses: {
+        "200": { description: "OK", content } as OpenAPIV3.ResponseObject,
+      },
+    })[0];
+
+  it("reads a JSON response with media type parameters, including an example", () => {
+    const response = responseFor({
+      "application/json;datetime-format=rfc3339": {
+        schema: objectSchema("func_count"),
+      },
+    });
+
+    expect(response.schema?.map((field) => field.name)).toEqual(["func_count"]);
+    expect(response.examples?.length).toBeGreaterThan(0);
+  });
+
+  it("reads a text/csv response's schema, without a JSON example", () => {
+    const response = responseFor({
+      "text/csv": { schema: objectSchema("row") },
+    });
+
+    expect(response.schema?.map((field) => field.name)).toEqual(["row"]);
+    expect(response.examples).toBeUndefined();
+  });
+
+  it("prefers application/json when a response offers several content types", () => {
+    const response = responseFor({
+      "text/csv": { schema: objectSchema("row") },
+      "application/json": { schema: objectSchema("data") },
+    });
+
+    expect(response.schema?.map((field) => field.name)).toEqual(["data"]);
+  });
+});

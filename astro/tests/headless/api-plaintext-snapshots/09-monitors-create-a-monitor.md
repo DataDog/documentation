@@ -254,7 +254,7 @@ Example: `network-path(query).index(index_name).rollup(rollup_method[, measure])
 
 This endpoint requires the `monitors_write` permission.
 
-OAuth apps require the `monitors_write` authorization scope to access this endpoint.
+OAuth apps require the `monitors_write` authorization [scope](https://docs.datadoghq.com/api/latest/scopes.md#monitors) to access this endpoint.
 
 ### Request Body (required)
 

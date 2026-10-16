@@ -360,7 +360,7 @@
             data-tab-index="0"
             class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
           >
-            v1 (latest)
+            v1 (deprecated)
           </button>
         </div>
         <!--astro:end--></astro-island
@@ -424,7 +424,7 @@
           </div>
           <div class="api-endpoint__section _api-endpoint__section_071384">
             <h3>Arguments</h3>
-            <div id="schema-table-X32" class="schema-table">
+            <div id="schema-table-X40" class="schema-table">
               <h4>Query Strings</h4>
               <div class="schema-table__table _schema-table__table_d7636a">
                 <div class="schema-table__columns _schema-table__columns_d7636a">
@@ -485,7 +485,7 @@
           </div>
           <div class="api-response _api-response_d8cf04">
             <h3 class="api-response__heading _api-response__heading_d8cf04">Response</h3>
-            <div id="api-response-X33" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+            <div id="api-response-X41" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
               <astro-island
                 uid="X7"
                 ssr
@@ -497,7 +497,7 @@
                   <button
                     role="tab"
                     aria-selected="true"
-                    aria-controls="api-response-X33-panel-0"
+                    aria-controls="api-response-X41-panel-0"
                     data-tab-index="0"
                     class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
                   >
@@ -505,7 +505,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-response-X33-panel-1"
+                    aria-controls="api-response-X41-panel-1"
                     data-tab-index="1"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
@@ -513,7 +513,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-response-X33-panel-2"
+                    aria-controls="api-response-X41-panel-2"
                     data-tab-index="2"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
@@ -521,7 +521,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-response-X33-panel-3"
+                    aria-controls="api-response-X41-panel-3"
                     data-tab-index="3"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
@@ -531,38 +531,545 @@
                 <!--astro:end--></astro-island
               >
               <div
-                id="api-response-X33-panel-0"
+                id="api-response-X41-panel-0"
                 role="tabpanel"
                 class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
               >
                 <div class="api-response__panel api-response__panel--200">
                   <p class="api-response__description _api-response__description_d8cf04">OK</p>
+                  <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                    <p>
+                      Response containing the number of Lambda functions and sum of the invocations of all Lambda
+                      functions for each hour for a given organization.
+                    </p>
+                  </div>
+                  <div id="schema-table-X42" class="schema-table">
+                    <div class="schema-table__toolbar _schema-table__toolbar_d7636a">
+                      <button
+                        id="schema-table-X42-expand-all"
+                        type="button"
+                        class="schema-table__expand-all _schema-table__expand-all_d7636a"
+                      >
+                        <span
+                          class="schema-table__expand-all-label _schema-table__expand-all-label_d7636a schema-table__expand-all-label--expand _schema-table__expand-all-label--expand_d7636a"
+                          >Expand All</span
+                        ><span
+                          class="schema-table__expand-all-label _schema-table__expand-all-label_d7636a schema-table__expand-all-label--collapse _schema-table__expand-all-label--collapse_d7636a"
+                          hidden
+                          >Collapse All</span
+                        >
+                      </button>
+                    </div>
+                    <div class="schema-table__table _schema-table__table_d7636a">
+                      <div class="schema-table__columns _schema-table__columns_d7636a">
+                        <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
+                        <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+                        <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
+                          Description
+                        </div>
+                      </div>
+                      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="usage" data-depth="0">
+                        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+                          <button
+                            type="button"
+                            class="schema-table__toggle _schema-table__toggle_d7636a"
+                            aria-expanded="false"
+                            aria-label="Toggle usage"
+                          >
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                              <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                            </svg></button
+                          ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                            ><code class="schema-table__name _schema-table__name_d7636a">usage</code></span
+                          >
+                        </div>
+                        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                          <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
+                        </div>
+                        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                          <div class="schema-table__description _schema-table__description_d7636a">
+                            <p>Get hourly usage for Lambda.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                        <div
+                          class="schema-table__row _schema-table__row_d7636a"
+                          data-field-name="func_count"
+                          data-depth="1"
+                        >
+                          <div
+                            class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                            style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          >
+                            <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                              ><code class="schema-table__name _schema-table__name_d7636a">func_count</code></span
+                            >
+                          </div>
+                          <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                            <span class="schema-table__type _schema-table__type_d7636a">int64</span>
+                          </div>
+                          <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>Contains the number of different functions for each region and AWS account.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="schema-table__row _schema-table__row_d7636a" data-field-name="hour" data-depth="1">
+                          <div
+                            class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                            style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          >
+                            <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                              ><code class="schema-table__name _schema-table__name_d7636a">hour</code></span
+                            >
+                          </div>
+                          <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                            <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
+                          </div>
+                          <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>The hour for the usage.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="schema-table__row _schema-table__row_d7636a"
+                          data-field-name="invocations_sum"
+                          data-depth="1"
+                        >
+                          <div
+                            class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                            style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          >
+                            <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                              ><code class="schema-table__name _schema-table__name_d7636a">invocations_sum</code></span
+                            >
+                          </div>
+                          <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                            <span class="schema-table__type _schema-table__type_d7636a">int64</span>
+                          </div>
+                          <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>Contains the sum of invocations of all functions.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="schema-table__row _schema-table__row_d7636a"
+                          data-field-name="org_name"
+                          data-depth="1"
+                        >
+                          <div
+                            class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                            style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          >
+                            <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                              ><code class="schema-table__name _schema-table__name_d7636a">org_name</code></span
+                            >
+                          </div>
+                          <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                            <span class="schema-table__type _schema-table__type_d7636a">string</span>
+                          </div>
+                          <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>The organization name.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="schema-table__row _schema-table__row_d7636a"
+                          data-field-name="public_id"
+                          data-depth="1"
+                        >
+                          <div
+                            class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                            style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          >
+                            <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                              ><code class="schema-table__name _schema-table__name_d7636a">public_id</code></span
+                            >
+                          </div>
+                          <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                            <span class="schema-table__type _schema-table__type_d7636a">string</span>
+                          </div>
+                          <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>The organization public ID.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <astro-island
+                      uid="X8"
+                      ssr
+                      client="idle"
+                      before-hydration-url="astro:scripts/before-hydration.js"
+                      opts='{"name":"ApiSchemaTableNav","value":true}'
+                      await-children
+                      ><span hidden aria-hidden="true"></span><!--astro:end--></astro-island
+                    >
+                  </div>
                 </div>
               </div>
-              <div id="api-response-X33-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-response-X41-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-response__panel api-response__panel--400">
                   <p class="api-response__description _api-response__description_d8cf04">Bad Request</p>
+                  <div id="api-response-X41-inner-1" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+                    <astro-island
+                      uid="X9"
+                      ssr
+                      client="load"
+                      before-hydration-url="astro:scripts/before-hydration.js"
+                      opts='{"name":"TabsNav","value":true}'
+                      await-children
+                      ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+                        <button
+                          role="tab"
+                          aria-selected="true"
+                          aria-controls="api-response-X41-model-1"
+                          data-tab-index="0"
+                          class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+                        >
+                          Model</button
+                        ><button
+                          role="tab"
+                          aria-selected="false"
+                          aria-controls="api-response-X41-example-1"
+                          data-tab-index="1"
+                          class="tabs__button _tabs__button_d3f7cd"
+                        >
+                          Example
+                        </button>
+                      </div>
+                      <!--astro:end--></astro-island
+                    >
+                    <div
+                      id="api-response-X41-model-1"
+                      role="tabpanel"
+                      class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+                    >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Error response object.</p>
+                      </div>
+                      <div id="schema-table-X43" class="schema-table">
+                        <div class="schema-table__table _schema-table__table_d7636a">
+                          <div class="schema-table__columns _schema-table__columns_d7636a">
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
+                            <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+                            <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
+                              Description
+                            </div>
+                          </div>
+                          <div
+                            class="schema-table__row _schema-table__row_d7636a"
+                            data-field-name="errors"
+                            data-depth="0"
+                          >
+                            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+                              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                ><code class="schema-table__name _schema-table__name_d7636a">errors</code
+                                ><span class="schema-table__required _schema-table__required_d7636a">
+                                  [required]</span
+                                ></span
+                              >
+                            </div>
+                            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                              <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
+                            </div>
+                            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Array of errors returned by the API.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <astro-island
+                          uid="X10"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"ApiSchemaTableNav","value":true}'
+                          await-children
+                          ><span hidden aria-hidden="true"></span><!--astro:end--></astro-island
+                        >
+                      </div>
+                    </div>
+                    <div id="api-response-X41-example-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                      <div class="api-response__example _api-response__example_d8cf04">
+                        <div id="code-block-X44" class="code-block _code-block_961fb8" data-language="json">
+                          <div id="code-block-X44-content" class="code-block__content _code-block__content_961fb8">
+                            <astro-island
+                              uid="X11"
+                              ssr
+                              client="idle"
+                              before-hydration-url="astro:scripts/before-hydration.js"
+                              opts='{"name":"CopyButton","value":true}'
+                              await-children
+                              ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                                <span>Copy</span></button
+                              ><!--astro:end--></astro-island
+                            >
+                            <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                              <pre
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
+                                tabindex="0"
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">errors</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "Bad Request"</span></span>
+<span class="line"><span style="color:#000000">  ]</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div id="api-response-X33-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-response-X41-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-response__panel api-response__panel--403">
                   <p class="api-response__description _api-response__description_d8cf04">
                     Forbidden - User is not authorized
                   </p>
+                  <div id="api-response-X41-inner-2" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+                    <astro-island
+                      uid="X12"
+                      ssr
+                      client="load"
+                      before-hydration-url="astro:scripts/before-hydration.js"
+                      opts='{"name":"TabsNav","value":true}'
+                      await-children
+                      ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+                        <button
+                          role="tab"
+                          aria-selected="true"
+                          aria-controls="api-response-X41-model-2"
+                          data-tab-index="0"
+                          class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+                        >
+                          Model</button
+                        ><button
+                          role="tab"
+                          aria-selected="false"
+                          aria-controls="api-response-X41-example-2"
+                          data-tab-index="1"
+                          class="tabs__button _tabs__button_d3f7cd"
+                        >
+                          Example
+                        </button>
+                      </div>
+                      <!--astro:end--></astro-island
+                    >
+                    <div
+                      id="api-response-X41-model-2"
+                      role="tabpanel"
+                      class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+                    >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Error response object.</p>
+                      </div>
+                      <div id="schema-table-X45" class="schema-table">
+                        <div class="schema-table__table _schema-table__table_d7636a">
+                          <div class="schema-table__columns _schema-table__columns_d7636a">
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
+                            <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+                            <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
+                              Description
+                            </div>
+                          </div>
+                          <div
+                            class="schema-table__row _schema-table__row_d7636a"
+                            data-field-name="errors"
+                            data-depth="0"
+                          >
+                            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+                              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                ><code class="schema-table__name _schema-table__name_d7636a">errors</code
+                                ><span class="schema-table__required _schema-table__required_d7636a">
+                                  [required]</span
+                                ></span
+                              >
+                            </div>
+                            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                              <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
+                            </div>
+                            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Array of errors returned by the API.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <astro-island
+                          uid="X13"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"ApiSchemaTableNav","value":true}'
+                          await-children
+                          ><span hidden aria-hidden="true"></span><!--astro:end--></astro-island
+                        >
+                      </div>
+                    </div>
+                    <div id="api-response-X41-example-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                      <div class="api-response__example _api-response__example_d8cf04">
+                        <div id="code-block-X46" class="code-block _code-block_961fb8" data-language="json">
+                          <div id="code-block-X46-content" class="code-block__content _code-block__content_961fb8">
+                            <astro-island
+                              uid="X11"
+                              ssr
+                              client="idle"
+                              before-hydration-url="astro:scripts/before-hydration.js"
+                              opts='{"name":"CopyButton","value":true}'
+                              await-children
+                              ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                                <span>Copy</span></button
+                              ><!--astro:end--></astro-island
+                            >
+                            <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                              <pre
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
+                                tabindex="0"
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">errors</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "Bad Request"</span></span>
+<span class="line"><span style="color:#000000">  ]</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div id="api-response-X33-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-response-X41-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-response__panel api-response__panel--429">
                   <p class="api-response__description _api-response__description_d8cf04">Too many requests</p>
+                  <div id="api-response-X41-inner-3" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+                    <astro-island
+                      uid="X14"
+                      ssr
+                      client="load"
+                      before-hydration-url="astro:scripts/before-hydration.js"
+                      opts='{"name":"TabsNav","value":true}'
+                      await-children
+                      ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+                        <button
+                          role="tab"
+                          aria-selected="true"
+                          aria-controls="api-response-X41-model-3"
+                          data-tab-index="0"
+                          class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+                        >
+                          Model</button
+                        ><button
+                          role="tab"
+                          aria-selected="false"
+                          aria-controls="api-response-X41-example-3"
+                          data-tab-index="1"
+                          class="tabs__button _tabs__button_d3f7cd"
+                        >
+                          Example
+                        </button>
+                      </div>
+                      <!--astro:end--></astro-island
+                    >
+                    <div
+                      id="api-response-X41-model-3"
+                      role="tabpanel"
+                      class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+                    >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Error response object.</p>
+                      </div>
+                      <div id="schema-table-X47" class="schema-table">
+                        <div class="schema-table__table _schema-table__table_d7636a">
+                          <div class="schema-table__columns _schema-table__columns_d7636a">
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
+                            <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+                            <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
+                              Description
+                            </div>
+                          </div>
+                          <div
+                            class="schema-table__row _schema-table__row_d7636a"
+                            data-field-name="errors"
+                            data-depth="0"
+                          >
+                            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+                              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                ><code class="schema-table__name _schema-table__name_d7636a">errors</code
+                                ><span class="schema-table__required _schema-table__required_d7636a">
+                                  [required]</span
+                                ></span
+                              >
+                            </div>
+                            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                              <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
+                            </div>
+                            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Array of errors returned by the API.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <astro-island
+                          uid="X15"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"ApiSchemaTableNav","value":true}'
+                          await-children
+                          ><span hidden aria-hidden="true"></span><!--astro:end--></astro-island
+                        >
+                      </div>
+                    </div>
+                    <div id="api-response-X41-example-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                      <div class="api-response__example _api-response__example_d8cf04">
+                        <div id="code-block-X48" class="code-block _code-block_961fb8" data-language="json">
+                          <div id="code-block-X48-content" class="code-block__content _code-block__content_961fb8">
+                            <astro-island
+                              uid="X11"
+                              ssr
+                              client="idle"
+                              before-hydration-url="astro:scripts/before-hydration.js"
+                              opts='{"name":"CopyButton","value":true}'
+                              await-children
+                              ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                                <span>Copy</span></button
+                              ><!--astro:end--></astro-island
+                            >
+                            <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                              <pre
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
+                                tabindex="0"
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">errors</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "Bad Request"</span></span>
+<span class="line"><span style="color:#000000">  ]</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="api-code-example _api-code-example_c15178">
             <h3 class="api-code-example__heading _api-code-example__heading_c15178">Code Example</h3>
-            <div id="api-code-example-X34" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+            <div id="api-code-example-X49" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
               <astro-island
-                uid="X8"
+                uid="X16"
                 ssr
                 client="load"
                 before-hydration-url="astro:scripts/before-hydration.js"
@@ -572,7 +1079,7 @@
                   <button
                     role="tab"
                     aria-selected="true"
-                    aria-controls="api-code-example-X34-panel-0"
+                    aria-controls="api-code-example-X49-panel-0"
                     data-tab-index="0"
                     data-sync-group="code-lang"
                     data-sync-key="curl"
@@ -582,7 +1089,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X34-panel-1"
+                    aria-controls="api-code-example-X49-panel-1"
                     data-tab-index="1"
                     data-sync-group="code-lang"
                     data-sync-key="go"
@@ -592,7 +1099,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X34-panel-2"
+                    aria-controls="api-code-example-X49-panel-2"
                     data-tab-index="2"
                     data-sync-group="code-lang"
                     data-sync-key="python"
@@ -604,15 +1111,15 @@
                 <!--astro:end--></astro-island
               >
               <div
-                id="api-code-example-X34-panel-0"
+                id="api-code-example-X49-panel-0"
                 role="tabpanel"
                 class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
               >
                 <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X35" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X35-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X50" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X50-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X9"
+                        uid="X17"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -640,10 +1147,10 @@
                   </div>
                 </div>
                 <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X36" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X36-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X51" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X51-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X10"
+                        uid="X18"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -671,10 +1178,10 @@
                   </div>
                 </div>
                 <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X37" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X37-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X52" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X52-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X11"
+                        uid="X19"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -702,10 +1209,10 @@
                   </div>
                 </div>
                 <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X38" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X38-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X53" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X53-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X12"
+                        uid="X20"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -733,10 +1240,10 @@
                   </div>
                 </div>
                 <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X39" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X39-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X54" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X54-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X13"
+                        uid="X21"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -764,10 +1271,10 @@
                   </div>
                 </div>
                 <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X40" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X40-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X55" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X55-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X14"
+                        uid="X22"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -795,10 +1302,10 @@
                   </div>
                 </div>
                 <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X41" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X41-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X56" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X56-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X15"
+                        uid="X23"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -826,12 +1333,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X34-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X49-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X42" class="code-block _code-block_961fb8" data-language="go">
-                    <div id="code-block-X42-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X57" class="code-block _code-block_961fb8" data-language="go">
+                    <div id="code-block-X57-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X16"
+                        uid="X24"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -892,10 +1399,10 @@
                     data-region="us"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X43" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X43-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X58" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X58-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X17"
+                          uid="X25"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -919,10 +1426,10 @@
                     data-region="us3"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X44" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X44-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X59" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X59-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X18"
+                          uid="X26"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -946,10 +1453,10 @@
                     data-region="us5"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X45" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X45-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X60" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X60-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X19"
+                          uid="X27"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -973,10 +1480,10 @@
                     data-region="eu"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X46" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X46-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X61" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X61-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X20"
+                          uid="X28"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1000,10 +1507,10 @@
                     data-region="ap1"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X47" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X47-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X62" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X62-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X21"
+                          uid="X29"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1027,10 +1534,10 @@
                     data-region="ap2"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X48" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X48-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X63" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X63-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X22"
+                          uid="X30"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1054,10 +1561,10 @@
                     data-region="gov"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X49" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X49-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X64" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X64-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X23"
+                          uid="X31"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1079,12 +1586,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X34-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X49-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X50" class="code-block _code-block_961fb8" data-language="python">
-                    <div id="code-block-X50-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X65" class="code-block _code-block_961fb8" data-language="python">
+                    <div id="code-block-X65-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X24"
+                        uid="X32"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -1133,10 +1640,10 @@
                     data-region="us"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X51" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X51-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X66" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X66-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X25"
+                          uid="X33"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1160,10 +1667,10 @@
                     data-region="us3"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X52" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X52-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X67" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X67-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X26"
+                          uid="X34"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1187,10 +1694,10 @@
                     data-region="us5"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X53" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X53-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X68" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X68-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X27"
+                          uid="X35"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1214,10 +1721,10 @@
                     data-region="eu"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X54" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X54-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X69" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X69-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X28"
+                          uid="X36"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1241,10 +1748,10 @@
                     data-region="ap1"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X55" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X55-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X70" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X70-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X29"
+                          uid="X37"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1268,10 +1775,10 @@
                     data-region="ap2"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X56" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X56-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X71" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X71-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X30"
+                          uid="X38"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"
@@ -1295,10 +1802,10 @@
                     data-region="gov"
                     class="api-code-instructions__code-block _api-code-instructions__code-block_bff3fe"
                   >
-                    <div id="code-block-X57" class="code-block _code-block_961fb8" data-language="bash">
-                      <div id="code-block-X57-content" class="code-block__content _code-block__content_961fb8">
+                    <div id="code-block-X72" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X72-content" class="code-block__content _code-block__content_961fb8">
                         <astro-island
-                          uid="X31"
+                          uid="X39"
                           ssr
                           client="idle"
                           before-hydration-url="astro:scripts/before-hydration.js"

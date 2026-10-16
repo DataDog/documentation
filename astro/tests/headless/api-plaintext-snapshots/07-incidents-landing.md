@@ -82,7 +82,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents/search |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents/search      |
 
-## [List an incident's impacts](https://docs.datadoghq.com/api/latest/incidents/list-an-incident-s-impacts.md)
+## [List an incident's impacts](https://docs.datadoghq.com/api/latest/incidents/list-an-incidents-impacts.md)
 
 | Datadog site      | API endpoint                                                                 |
 | ----------------- | ---------------------------------------------------------------------------- |
@@ -166,7 +166,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}      |
 
-## [Get a list of an incident's todos](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-an-incident-s-todos.md) (preview)
+## [Get a list of an incident's todos](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-an-incidents-todos.md) (preview)
 
 | Datadog site      | API endpoint                                                                             |
 | ----------------- | ---------------------------------------------------------------------------------------- |
@@ -610,7 +610,7 @@ Manage incident response, as well as associated attachments, metadata, and todos
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/incidents |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/incidents      |
 
-## [Get a list of an incident's integration metadata](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-an-incident-s-integration-metadata.md) (preview)
+## [Get a list of an incident's integration metadata](https://docs.datadoghq.com/api/latest/incidents/get-a-list-of-an-incidents-integration-metadata.md) (preview)
 
 | Datadog site      | API endpoint                                                                                    |
 | ----------------- | ----------------------------------------------------------------------------------------------- |

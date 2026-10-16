@@ -52,6 +52,21 @@ export function operationMetaDescription(operation: {
   );
 }
 
+/**
+ * The version tab label (and `.md` heading) for one variant of an operation.
+ * The first variant is the latest, unless it's deprecated, which Hugo labels
+ * instead.
+ */
+export function variantLabel(
+  variant: Pick<EndpointData, "version" | "deprecated">,
+  index: number,
+): string {
+  if (index > 0) {
+    return variant.version;
+  }
+  return `${variant.version} (${variant.deprecated ? "deprecated" : "latest"})`;
+}
+
 // Hugo source paths of the API pages, relative to `content/<lang>/`. Used only
 // to pick the same default OG image Hugo picks (see `ogImageUrl`): the root,
 // overview pages, and categories are branch bundles, operations leaf bundles.

@@ -12,7 +12,7 @@ Links:
 
 ## I1. .md drops the link on "scope" in the OAuth sentence
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F1
 Findings: 1 (missing-in-astro, link). Samples: bdf4ff53f296
 Location: the OAuth sentence after the endpoint table
 Search: `authorization scope` on each .md page.

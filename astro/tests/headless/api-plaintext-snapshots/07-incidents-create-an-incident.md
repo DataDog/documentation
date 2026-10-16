@@ -29,7 +29,7 @@ Create an incident.
 
 This endpoint requires the `incident_write` permission.
 
-OAuth apps require the `incident_write` authorization scope to access this endpoint.
+OAuth apps require the `incident_write` authorization [scope](https://docs.datadoghq.com/api/latest/scopes.md#incidents) to access this endpoint.
 
 ### Request Body (required)
 

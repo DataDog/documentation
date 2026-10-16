@@ -12,7 +12,7 @@ Six findings, all unreviewed: one `missing-in-astro`, one `extra-in-astro` and f
 
 ## I1. Operation slug differs when the summary has an apostrophe or slash
 
-Recommendation: automatic fix (user, 2026-10-16)
+Recommendation: automatic fix (user, 2026-10-16). done: F1
 Findings: 2 (one missing-in-astro, one extra-in-astro, both links). Samples: 96c462cb0131, 2cf430f37726
 Location: the h2 link for "Get a monitor's details"
 Search: `monitor's details` on each .md page.
