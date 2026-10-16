@@ -76,7 +76,7 @@ The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect w
 
 After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
 
-<div class="alert alert-info">CI Visibility is now part of <a href="/continuous_integration/cicd_optimization/">CI/CD Optimization</a>, which brings CI Visibility and Test Optimization together in one interface. While both interfaces are available, the setup page is located under <strong>Software Delivery</strong> &gt; <strong>CI/CD Optimization</strong> in the new interface and under <strong>Software Delivery</strong> &gt; <strong>CI Visibility</strong> in the original interface. The steps below are the same in both.</div>
+CI Visibility is now part of <a href="/continuous_integration/cicd_optimization/">CI/CD Optimization</a>, which brings CI Visibility and Test Optimization together in one interface. While both interfaces are available, the setup page is located under **Software Delivery**  > **CI/CD Optimization** in the new interface and under **Software Delivery** > **CI Visibility** in the original interface. The steps below are the same in both.
 
 1. In Datadog, navigate to [**Software Delivery** > **CI/CD Optimization** > **Add a Pipeline Provider**][13] and select **GitHub**. If you are using the original interface, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] instead.
 2. Click {{< ui >}}Enable Account{{< /ui >}} for the account you want to enable.
