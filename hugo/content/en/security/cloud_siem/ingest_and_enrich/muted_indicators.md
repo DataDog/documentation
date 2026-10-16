@@ -31,7 +31,7 @@ When an indicator is muted, Cloud SIEM changes how it enriches new logs that mat
 
 - The [intention][2] of each eligible threat intelligence result changes to `benign`.
 - The log keeps the rest of its threat intelligence enrichment, such as the source and category, and is marked with `has_been_muted: true`.
-- The indicator's IOC score does not change.
+- The indicator's IOC score remains the same.
 
 Muting applies to logs that Cloud SIEM processes after the mute takes effect. Logs that were already processed keep their original enrichment.
 
