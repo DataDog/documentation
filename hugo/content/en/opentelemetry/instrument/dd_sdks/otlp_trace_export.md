@@ -106,6 +106,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
+      dd-otel-metric-config: '{"trace_metrics":{"instrumentation_metrics_calc":false}}'
 
 service:
   pipelines:
@@ -120,11 +121,7 @@ Don't enable SDK-computed trace metrics if your Collector metrics pipeline uses 
 
 `OTEL_TRACES_SPAN_METRICS_ENABLED` is a tri-state setting. An explicit value of `true` or `false` takes precedence. When it is unset, the SDK enables OTLP trace metrics automatically if `OTEL_TRACES_EXPORTER=otlp` and `DD_METRICS_OTEL_ENABLED=true`. You don't need to set `DD_METRICS_OTEL_ENABLED` when you explicitly enable OTLP trace metrics.
 
-Enabling `DD_TRACE_OTEL_SEMANTICS_ENABLED` does not remove `datadog.*` attributes from SDK-computed trace metrics. The metric datapoints contain both OpenTelemetry semantic convention attributes and the Datadog attributes required for APM.
-
-The Datadog connector included with DDOT recognizes `_dd.stats_computed`. The upstream OpenTelemetry `span_metrics` connector does not. Datadog recommends that you don't enable SDK-computed trace metrics for services whose traces pass through the `span_metrics` connector. Otherwise, the metrics are computed twice.
-
-For a mixed setup where only some SDKs compute trace metrics, filter resources with `_dd.stats_computed=true` from the pipeline that feeds `span_metrics`. Continue to send all resources through the trace export pipeline. For more information, see [Span metrics connector][8].
+Use only one source of APM trace metrics per service. The [recommended Collector configuration][8] prevents duplicate computation by the SDK, `span_metrics`, and HTTP/RPC instrumentation metrics.
 
 ## Verify
 

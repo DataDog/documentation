@@ -199,7 +199,8 @@ exporters:
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
-        "instrumentation_scope_metadata_as_tags": true
+        "instrumentation_scope_metadata_as_tags": true,
+        "trace_metrics": {"instrumentation_metrics_calc": false}
         }
     compression: zstd
     compression_params:
@@ -406,7 +407,8 @@ exporters:
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
-        "instrumentation_scope_metadata_as_tags": true
+        "instrumentation_scope_metadata_as_tags": true,
+        "trace_metrics": {"instrumentation_metrics_calc": false}
         }
     compression: zstd
     compression_params:
@@ -736,7 +738,8 @@ exporters:
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
-        "instrumentation_scope_metadata_as_tags": true
+        "instrumentation_scope_metadata_as_tags": true,
+        "trace_metrics": {"instrumentation_metrics_calc": false}
         }
     compression: zstd
     compression_params:
@@ -957,7 +960,7 @@ The `span_metrics` connector generates RED metrics from trace data. These metric
 
 Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 
-<div class="alert alert-warning">Some Datadog SDKs can <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">compute and export APM trace metrics through OTLP</a>. The upstream <code>span_metrics</code> connector does not recognize the <code>_dd.stats_computed=true</code> resource attribute added by these SDKs. Datadog recommends that you don't use SDK-computed trace metrics with this connector, because doing so computes the metrics twice.</div>
+<div class="alert alert-warning">Don't send traces with <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed APM trace metrics</a> through an unfiltered <code>span_metrics</code> connector. The configurations on this page filter them from the connector pipeline to prevent double counting.</div>
 
 For a mixed setup where only some SDKs compute trace metrics, filter marked resources from the pipeline that feeds `span_metrics`. Use a separate pipeline so that the filter doesn't remove these resources from trace export:
 
@@ -1005,8 +1008,10 @@ The `dd-otel-metric-config` header is a JSON payload sent with metrics requests 
 | `resource_attributes_as_tags` | Boolean | `false` | Propagates OTLP resource attributes as Datadog tags on emitted metrics. |
 | `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
 | `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
-| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes supported HTTP instrumentation metrics to power APM trace metrics. |
-| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular metrics intake after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
+| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes supported HTTP and RPC instrumentation metrics to power APM trace metrics. |
+| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP and RPC instrumentation metrics after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
+
+Supported instrumentation metrics include `http.server.request.duration` and the stable RPC metric `rpc.server.call.duration`, which covers gRPC server calls.
 
 Example with instrumentation metrics enabled:
 
@@ -1022,7 +1027,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended OpenTelemetry Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+<div class="alert alert-info">Use one source of APM trace metrics for each service. Don't enable <code>instrumentation_metrics_calc</code> with the <code>span_metrics</code> connector or with <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed trace metrics</a>, because each source counts the same requests.</div>
 
 ### Trace forward connector
 
