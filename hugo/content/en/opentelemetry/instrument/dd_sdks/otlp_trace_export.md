@@ -76,7 +76,7 @@ To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the
 
 ## Export APM trace metrics
 
-Datadog SDKs can compute APM trace metrics, such as request count, error count, and duration, before sampling and export them through OTLP. Add the following environment variable to the [OTLP trace export configuration][9]:
+Datadog SDKs can compute [APM trace metrics][10], such as request count, error count, and duration, before sampling and export them through OTLP. Add the following environment variable to the [OTLP trace export configuration][9]:
 
 ```shell
 OTEL_TRACES_SPAN_METRICS_ENABLED=true
@@ -94,15 +94,37 @@ This feature requires the following minimum SDK versions:
 
 When enabled, the SDK:
 
-- Computes trace metrics and exports the `traces.span.sdk.metrics.duration` delta histogram to the OTLP metrics endpoint. By default, the endpoint is `http://localhost:4318/v1/metrics`. To use a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`.
+- Computes trace metrics and exports the `traces.span.sdk.metrics.duration` delta histogram to the [configured OTLP metrics endpoint][11].
 - Stops exporting trace metrics to the Datadog Agent's `/v0.6/stats` endpoint.
 - Adds the `_dd.stats_computed=true` string resource attribute to exported OTLP traces. The Datadog connector uses this attribute to avoid computing the same trace metrics again.
 
+Configure the Collector metrics pipeline to use the OTLP HTTP exporter:
+
+```yaml
+exporters:
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [otlp_http]
+```
+
+When sent through the OTLP HTTP exporter, Datadog translates `traces.span.sdk.metrics.duration` into the [APM trace metrics][10] used in APM views. This is the only supported Collector export path for SDK-computed APM trace metrics. For a production-ready Collector configuration, including processors and batching, see [Set Up the OpenTelemetry Collector][12].
+
+Don't enable SDK-computed trace metrics if your Collector metrics pipeline uses the Datadog Exporter. The Datadog Exporter sends `traces.span.sdk.metrics.duration` as a regular metric instead of translating it into APM trace metrics. Support for using the raw metric in APM is planned for an upcoming release.
+
 `OTEL_TRACES_SPAN_METRICS_ENABLED` is a tri-state setting. An explicit value of `true` or `false` takes precedence. When it is unset, the SDK enables OTLP trace metrics automatically if `OTEL_TRACES_EXPORTER=otlp` and `DD_METRICS_OTEL_ENABLED=true`. You don't need to set `DD_METRICS_OTEL_ENABLED` when you explicitly enable OTLP trace metrics.
 
-If `DD_TRACE_OTEL_SEMANTICS_ENABLED=true`, trace metric datapoints contain OpenTelemetry semantic convention attributes and omit `datadog.*` attributes.
+Enabling `DD_TRACE_OTEL_SEMANTICS_ENABLED` does not remove `datadog.*` attributes from SDK-computed trace metrics. The metric datapoints contain both OpenTelemetry semantic convention attributes and the Datadog attributes required for APM.
 
-The Datadog connector included with DDOT recognizes `_dd.stats_computed`. The upstream OpenTelemetry `span_metrics` connector does not. If you use the upstream connector, don't send marked traces through an unfiltered `span_metrics` connector, because doing so computes the metrics a second time. For more information, see [Span metrics connector][8].
+The Datadog connector included with DDOT recognizes `_dd.stats_computed`. The upstream OpenTelemetry `span_metrics` connector does not. Datadog recommends that you don't enable SDK-computed trace metrics for services whose traces pass through the `span_metrics` connector. Otherwise, the metrics are computed twice.
+
+For a mixed setup where only some SDKs compute trace metrics, filter resources with `_dd.stats_computed=true` from the pipeline that feeds `span_metrics`. Continue to send all resources through the trace export pipeline. For more information, see [Span metrics connector][8].
 
 ## Verify
 
@@ -128,3 +150,6 @@ For details on which Datadog features each setup supports, see the [feature comp
 [7]: /opentelemetry/compatibility/#feature-compatibility
 [8]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [9]: #enable-otlp-trace-export
+[10]: /tracing/metrics/metrics_namespace/
+[11]: /opentelemetry/config/environment_variable_support/#metrics-specific-otlp-configuration
+[12]: /opentelemetry/setup/collector_exporter/

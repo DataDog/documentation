@@ -38,6 +38,8 @@ The Datadog distribution of OpenTelemetry (DDOT) Collector is an open source sol
 
 {{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
+<div class="alert alert-warning"><a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed APM trace metrics</a> require a custom DDOT metrics pipeline that uses the <a href="/opentelemetry/setup/collector_exporter/#otlp-http-exporter">OTLP HTTP exporter</a>. Don't enable this SDK feature with DDOT's default Datadog Exporter pipeline. Support for using the raw SDK metric in APM is planned for an upcoming release.</div>
+
 ## Key benefits
 
 The DDOT Collector offers:
