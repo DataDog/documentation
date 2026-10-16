@@ -12,7 +12,7 @@ Within an investigation, you can chat with Bits to gather additional information
 
 Chat on an investigation page runs in [Bits Chat][2]:
 - Users need the **Bits Chat Access** permission. Bits Investigations Read is enough to view the investigation; Bits Investigations Write is not required to chat.
-- Messages are billed as Bits Chat usage, not Bits Investigation usage. To prevent a user from chatting, remove Bits Chat Access from all of their roles. For details, see [Disable specific products][3].
+- Messages are billed as Bits Chat usage, not Bits Investigation usage.
 
 ## Data sources
 
@@ -40,4 +40,3 @@ The Bits Investigation chatbot has access to:
 
 [1]: /bits_ai/bits_investigation/configure#confluence
 [2]: /bits_ai/bits_chat/
-[3]: /account_management/billing/ai_credits/#disable-specific-products
