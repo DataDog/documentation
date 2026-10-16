@@ -18,7 +18,7 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
-The catalog of integration pipelines are updated through Worker releases. See [Upgrade the integration pipelines catalog](#upgrade-the-integration-pipelines-catalog) for more information.
+The catalog of integration pipelines are updated through Worker releases. See [Update the integration pipelines catalog](#update-the-integration-pipelines-catalog) for more information.
 
 For every log that matches the processor's filter:
 
@@ -116,7 +116,7 @@ The Worker normalizes every log that matches the processor's filter, even if the
 - Maps log attributes to reserved attributes such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`. See [Preprocessing options](#preprocessing-options) for more information.
 - Resolves the log's source before selecting an integration pipeline.
 
-## Upgrade the integration pipelines catalog
+## Update the integration pipelines catalog
 
 The Worker's catalog of integration pipelines is updated only through new Worker releases. You must upgrade your Worker to receive catalog updates.
 
