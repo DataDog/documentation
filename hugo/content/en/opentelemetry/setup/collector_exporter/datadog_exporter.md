@@ -30,6 +30,8 @@ The OpenTelemetry Collector enables you to collect, process, and export telemetr
 
 <div class="alert alert-info">For new OpenTelemetry Collector configurations, Datadog recommends the <a href="/opentelemetry/setup/collector_exporter/">OTLP HTTP exporter and <code>span_metrics</code> connector setup</a>. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.</div>
 
+<div class="alert alert-warning">Don't enable <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed APM trace metrics</a> when the metrics pipeline uses the Datadog Exporter. The exporter sends <code>traces.span.sdk.metrics.duration</code> as a regular metric, so it doesn't power APM trace metrics. Support for using the raw metric in APM is planned for an upcoming release. Use the <a href="/opentelemetry/setup/collector_exporter/">OTLP HTTP exporter setup</a> for this feature.</div>
+
 - **Datadog Exporter**: Forwards trace, metric, and logs data from OpenTelemetry SDKs to Datadog (without the Datadog Agent)
 - **Datadog Connector**: Calculates Trace Metrics from collected span data
 
