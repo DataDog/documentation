@@ -354,6 +354,9 @@ Trace parts of your experiment task, for example, workflows or tool calls, using
 {{% tab "Python" %}}
 For custom tracing, use the [Python tracing decorators][2]. For automatic instrumentation, see the [supported Python frameworks][3].
 
+[2]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
+[3]: /llm_observability/instrument/auto_instrumentation?tab=python
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
