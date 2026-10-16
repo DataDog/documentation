@@ -48,7 +48,7 @@ Under email subscriptions, you have access to the following reports:
 
 If you are unsure if an email digest is relevant to you, you can view an example by clicking the {{< ui >}}Example{{< /ui >}} link next to each email subscription. You can also use the {{< ui >}}Unsubscribe From All{{< /ui >}} button to unsubscribe from all email subscriptions.
 
-Deactivated users do not receive the Daily Digest. If an active user does not receive an email digest, see [Troubleshooting Email Delivery][17].
+Deactivated users do not receive email digests. If an active user does not receive an email digest, see [Troubleshooting Email Delivery][17].
 {{% /site-region %}}
 
 

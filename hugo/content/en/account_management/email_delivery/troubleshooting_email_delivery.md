@@ -66,7 +66,7 @@ Contact [Datadog Support][5] and provide these items to remove the suppression:
 Some failures never produce a delivery event, because Datadog does not attempt the send. If you cannot find any event for a recipient, check whether the account is in one of these states:
 
 - **Unverified users**: Invited, but have not accepted the invitation yet.
-- **Disabled users**: Deactivated users do not receive notifications, including the [Daily Digest][8].
+- **Disabled users**: Deactivated users do not receive notifications, including [email digests][8].
 
 ## Email security gateways
 
