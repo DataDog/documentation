@@ -107,11 +107,17 @@ Choose the first integration method that applies to the agent:
 
 Create a retention filter so Datadog keeps every AI Guard span. APM samples spans by default, so without a retention filter, Datadog can drop AI Guard spans and they never appear in AI Guard, even though AI Guard is still evaluating your agent's requests.
 
-Create a [custom retention filter][9] with these settings:
+You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to complete this task.
 
-- {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard`.
-- {{< ui >}}Span rate{{< /ui >}}: 100%.
-- {{< ui >}}Trace rate{{< /ui >}}: 100%.
+1. Create a [custom retention filter][9] with these settings:
+
+   - {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard` in {{< ui >}}All Spans{{< /ui >}}.
+   - {{< ui >}}Span rate{{< /ui >}}: 100%.
+   - {{< ui >}}Trace rate{{< /ui >}}: 100%.
+
+1. Drag the AI Guard filter to the top of the {{< ui >}}Custom Retention Filters{{< /ui >}} list. New filters are added to the bottom of the list, and Datadog applies only the first filter that matches a span, so a filter higher in the list with a lower rate can drop AI Guard spans.
+
+<!-- TODO: Confirm that the Intelligent Retention Filters, which sit in a separate section outside the ordered custom list, can't drop AI Guard spans before the custom filter applies. Also confirm whether AI Guard needs a 100% trace rate, or whether a 100% span rate is enough. Trace rate indexes every span in each matching trace, which adds cost. -->
 
 ## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
@@ -140,7 +146,7 @@ If expected evaluations don't appear in AI Guard, check these causes in order:
    <!-- TODO: Confirm that automatic and manual integrations evaluate nothing when `DD_AI_GUARD_ENABLED` is unset. The SDK behavior in this item was checked in the tracer source for all four languages. The integration part is inferred. -->
 1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope. A 403 error can also mean AI Guard isn't enabled for your organization.
 1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
-1. **No retention filter exists.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates. See the [Create a retention filter for AI Guard spans](#retention-filter) section.
+1. **The retention filter is missing or out of order.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates, and that it sits above any other filter that matches AI Guard spans. See the [Create a retention filter for AI Guard spans](#retention-filter) section.
 1. **The service or environment isn't set.** Confirm `DD_SERVICE` and `DD_ENV` are set, so AI Guard can match the agent to its policy and show it in Discover.
 
 To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.
