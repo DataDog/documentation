@@ -30,7 +30,7 @@ All output goes in `qa/content/review/`. It is committed, not gitignored, so rev
 
 - `<slug>-investigation.md`: working notes, one item per root cause, each marked "automatic fix" or "human review".
 - `<slug>-fixes.md`: fixes already made, with a place for feedback.
-- `<slug>-review.md`: items where no action was taken and a human has to decide.
+- `~/Desktop/qa-issues.md` (one file for every page, outside the repo, per the user): items where no action was taken and a human has to decide. It has one section per page, in Phase 1 order.
 
 ## Links
 
@@ -125,14 +125,16 @@ Feedback:
 ### Review file
 
 ```markdown
-# Human review: authentication/validate-api-key
+# Human review: API content QA
+
+## authentication/validate-api-key
 
 Links:
 - Hugo prod: <plaintext> | <HTML>
 - Astro local: <plaintext> | <HTML>
 - Astro staging: <plaintext> | <HTML>
 
-## R2. Astro lists more enum values than prod
+### R2. Astro lists more enum values than prod
 
 Findings: 12 (changed). Samples: 8e5659672ed6, e7c37b301305
 Context: Astro lists 1mo, 3mo, 6mo and others that prod doesn't. The spec Astro reads (api-spec/) has them, so this is probably spec drift and Astro is right. Claude couldn't confirm that prod was built from an older spec.
@@ -200,15 +202,13 @@ Fix log (Claude adds a line per batch):
 
 ### Phase 3: human review lists
 
-For each page, Claude moves the "human review" items into `<slug>-review.md`, using the template. Investigation done, so these steps are small. Several pages fit in one step.
+Claude moves the "human review" items into one file, `~/Desktop/qa-issues.md`, with one section per page in Phase 1 order. Each section starts with the page's links block, then its items, using the review template. An item that repeats an earlier page's item ("per <slug> I<n>") names that entry, so the decision is made once.
 
-- [ ] 3a. The eight index and small operation pages (1.1–1.8) ⏸
-- [ ] 3b. 1.9–1.12 ⏸
-- [ ] 3c. 1.13–1.14 ⏸
+- [x] 3a. Write `~/Desktop/qa-issues.md` for all 14 pages. ⏸
 
 ### Phase 4: wrap-up
 
-- [ ] 4a. Run `yarn test-ai`. Recommend that the user run `yarn build` and rerun `node qa/content/compare.ts` to confirm the counts dropped. List the fix and review files. ⏸ Done.
+- [ ] 4a. Run `yarn test-ai`. Recommend that the user run `yarn build` and rerun `node qa/content/compare.ts` to confirm the counts dropped. List the fix files and the review file. ⏸ Done.
 
 ## Handoff notes
 
@@ -230,3 +230,4 @@ For each page, Claude moves the "human review" items into `<slug>-review.md`, us
 - Batch 1 done. Five fixes, each red → green, with the fixes files written and the investigation items marked `done`. Scoped headless suites pass (1313 tests) and `astro check` has 0 errors. Side notes in the fixes files: local `scopes.md` lacks prod's per-category scope sections, and non-JSON responses show no Example tab where prod shows `{}`. Next: batch 2, starting with lambda I6 (curl variables), then aws-integration/list-all-aws-integrations I1 and I2, then get-a-dashboard I1 and I2.
 - Batch 2 done. Five fixes, each red → green, with fixes files for aws-integration/list-all-aws-integrations, dashboards/get-a-dashboard, incidents/create-an-incident and monitors/create-a-monitor, and the covered items checked on the dev server and marked `done`. Scoped headless suites pass (1326 tests) and `astro check` has 0 errors. The get-a-dashboard `.md` has 13,484 table rows locally against prod's 13,511; the rows still missing are all under the `<items>` wrapper (I4). Next: batch 3, get-a-dashboard I4 (drop the `<items>` wrapper; recount rows afterwards), I5 (a `$ref`'s own `description` and `deprecated` win; F2 keeps the first target's description, so I5 goes on top of that) and I6 (option-row descriptions in the plaintext twin). Then any automatic items left in Phase 1 order, then Phase 3.
 - Batch 3 done. Three fixes, each red → green, written up in the get-a-dashboard fixes file, and I4 to I6 marked `done`. F4 also covers `Object 41`, which the investigation called an array but is a oneOf option that is itself a oneOf: its inner options now sit directly under it, as on prod. Scoped headless suites pass (1332 tests) and `astro check` has 0 errors. The get-a-dashboard `.md` has 13,512 table rows locally against prod's 13,511, and the only schema row that differs is local's `widgets | (recursive)` (I9, human review). No automatic items are left. Next: Phase 3, step 3a.
+- 3a done. Per the user, the human-review lists went into one file, `~/Desktop/qa-issues.md`, instead of one `<slug>-review.md` per page; the plan's Files, template and Phase 3 now say so. It has 57 items over 14 pages. 17 of them need a decision; the other 40 repeat one and point to it. A table at the top lists the 17. Entries carry the plan 31 fixes forward: for example, the curl item notes that F6 already covers the parameter exports. Next: Phase 4, step 4a.
