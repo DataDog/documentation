@@ -33,11 +33,11 @@ In Kubernetes environments, injection is handled by the Datadog Admission Contro
 
 1. Evaluates whether the pod should be instrumented based on configured selectors (such as namespaces, labels, or specific pod properties).
 1. Mutates the pod spec to:
-   - Use the Datadog CSI driver to mount the injector and SDKs
+   - Deliver the injector and SDKs, using init containers or the Datadog CSI driver
    - Set environment variables (such as `LD_PRELOAD`)
    - Mount volumes to persist injected libraries
 
-The default delivery method uses init containers, but SSI supports additional [injection modes][2] that may better suit your environment.
+By default, SSI selects the delivery method that best fits your cluster. You can also choose an [injection mode][2] explicitly.
 
 ### Windows
 

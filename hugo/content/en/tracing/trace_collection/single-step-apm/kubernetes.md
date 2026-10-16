@@ -288,10 +288,11 @@ SSI supports multiple injection modes, which control how the injector and APM li
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
+| `auto` | **Default.** The Cluster Agent selects the best injection mode for your cluster and workloads. The selection logic can change between Agent versions. | Agent 7.76.0+ |
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
 | `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
 
-Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot.
+Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot. In `auto` mode, the Cluster Agent selects the CSI driver only when it is installed and safe to use in your cluster.
 
 #### Configure injection mode globally
 
@@ -307,7 +308,7 @@ datadog:
       injectionMode: <mode>
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto` (default), `init_container`, `csi`.
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -321,7 +322,7 @@ features:
       injectionMode: <mode>
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto` (default), `init_container`, `csi`.
 
 If you are using Datadog Operator earlier than 1.25.0, use the [pod annotation](#configure-injection-mode-per-pod) to override the injection mode for specific pods.
 
@@ -338,7 +339,7 @@ metadata:
     admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto`, `init_container`, `csi`.
 
 ### Target specific workloads
 
