@@ -38,11 +38,11 @@ further_reading:
 
 Agent Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 
-<div class="alert alert-info">To get started, see the <a href="/llm_observability/guide/experiments/">Set up and use Agent Observability Experiments</a> guide.</div>
-
 - Create and version datasets
 - Run and manage experiments
 - Compare results to evaluate impact
+
+To get started, see the [Set up and use Agent Observability Experiments][3] guide.
 
 ## Cookbooks
 
@@ -54,4 +54,5 @@ For in-depth examples of what you can do with LLM Experiments, see Datadog's pro
 
 [1]: https://app.datadoghq.com/llm/testing/experiments
 [2]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
+[3]: /llm_observability/guide/experiments/
 

@@ -1038,4 +1038,5 @@ with tracer.start_as_current_span("my-span") as span:
 [14]: /llm_observability/instrument/agent_observability_and_apm/
 [15]: https://developers.cloudflare.com/agents/
 [16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
+[18]: /llm_observability/guide/experiments#using-opentelemetry-spans-inside-experiments
 [17]: https://sdk.vercel.ai/
