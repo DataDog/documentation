@@ -130676,6 +130676,26 @@ components:
           example: user@datadoghq.com
           readOnly: true
           type: string
+        indexing_rule_missing_tags:
+          description: Tag keys required by the matching tag indexing rule that are missing from the metric.
+          example:
+            - service
+          items:
+            type: string
+          readOnly: true
+          type: array
+        indexing_rule_volume_diff:
+          description: |-
+            Estimated change in indexed volume if the exemption is removed and the matching tag indexing rule applies
+            to the metric. The value represents metric points or tag cardinality based on the organization's pricing
+            mode. A null value indicates that the estimate is unavailable.
+          example: 45
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        indexing_rule_volume_status:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionVolumeStatus"
         kind:
           description: >-
             Discriminates between an explicit exemption (`exemption`) and a pre-existing legacy tag configuration acting as an implicit exclusion (`legacy_tag_configuration`).
@@ -130743,6 +130763,22 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionVolumeStatus:
+      description: |-
+        Indicates whether the indexing rule volume impact estimate is available. `ok` indicates a fresh estimate.
+        `unindexed_tags` indicates that the matching rule uses tags that are not indexed for the metric.
+        `unavailable` indicates that the estimate is stale, was not computed, or could not be retrieved.
+      enum:
+        - ok
+        - unindexed_tags
+        - unavailable
+      example: unavailable
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - OK
+        - UNINDEXED_TAGS
+        - UNAVAILABLE
     TagIndexingRuleMetricMatch:
       description: Criteria for matching metrics based on query state.
       properties:
@@ -201463,6 +201499,10 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        indexing_rule_missing_tags:
+                          - service
+                        indexing_rule_volume_diff: 45
+                        indexing_rule_volume_status: ok
                         kind: exemption
                         reason: This metric has a pre-existing tag configuration.
                       id: dd.test.metric
@@ -201541,6 +201581,9 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        indexing_rule_missing_tags: []
+                        indexing_rule_volume_diff:
+                        indexing_rule_volume_status: unavailable
                         kind: exemption
                         reason: This metric has a pre-existing tag configuration.
                       id: dd.test.metric
