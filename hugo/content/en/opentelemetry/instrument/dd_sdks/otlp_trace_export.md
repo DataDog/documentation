@@ -74,6 +74,36 @@ By default, traces are sent to `http://localhost:4318/v1/traces`.
 
 To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
 
+## Export APM trace metrics
+
+Datadog SDKs can compute APM trace metrics, such as request count, error count, and duration, before sampling and export them through OTLP. Add the following environment variable to the [OTLP trace export configuration][9]:
+
+```shell
+OTEL_TRACES_SPAN_METRICS_ENABLED=true
+```
+
+This feature requires the following minimum SDK versions:
+
+| Language | Minimum SDK version |
+|---|---|
+| Java | v1.67.1 |
+| Python | v4.17.0 |
+| Node.js | v6.21.0 |
+| Go | v2.11.2 |
+| .NET | v3.55.2 |
+
+When enabled, the SDK:
+
+- Computes trace metrics and exports the `traces.span.sdk.metrics.duration` delta histogram to the OTLP metrics endpoint. By default, the endpoint is `http://localhost:4318/v1/metrics`. To use a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`.
+- Stops exporting trace metrics to the Datadog Agent's `/v0.6/stats` endpoint.
+- Adds the `_dd.stats_computed=true` string resource attribute to exported OTLP traces. The Datadog connector uses this attribute to avoid computing the same trace metrics again.
+
+`OTEL_TRACES_SPAN_METRICS_ENABLED` is a tri-state setting. An explicit value of `true` or `false` takes precedence. When it is unset, the SDK enables OTLP trace metrics automatically if `OTEL_TRACES_EXPORTER=otlp` and `DD_METRICS_OTEL_ENABLED=true`. You don't need to set `DD_METRICS_OTEL_ENABLED` when you explicitly enable OTLP trace metrics.
+
+If `DD_TRACE_OTEL_SEMANTICS_ENABLED=true`, trace metric datapoints contain OpenTelemetry semantic convention attributes and omit `datadog.*` attributes.
+
+The Datadog connector included with DDOT recognizes `_dd.stats_computed`. The upstream OpenTelemetry `span_metrics` connector does not. If you use the upstream connector, don't send marked traces through an unfiltered `span_metrics` connector, because doing so computes the metrics a second time. For more information, see [Span metrics connector][8].
+
 ## Verify
 
 After you enable OTLP export and your service receives traffic, confirm that traces appear in the [Trace Explorer][5]. If traces don't arrive, verify that your [receiver][6] is running, reachable at the configured endpoint, and forwarding data to Datadog.
@@ -96,3 +126,5 @@ For details on which Datadog features each setup supports, see the [feature comp
 [5]: /tracing/trace_explorer/
 [6]: /opentelemetry/setup/
 [7]: /opentelemetry/compatibility/#feature-compatibility
+[8]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[9]: #enable-otlp-trace-export

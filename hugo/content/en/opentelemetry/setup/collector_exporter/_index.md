@@ -930,6 +930,8 @@ The `span_metrics` connector generates RED metrics from trace data. These metric
 
 Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 
+<div class="alert alert-warning">Some Datadog SDKs can <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">compute and export APM trace metrics through OTLP</a>. These SDKs add <code>_dd.stats_computed=true</code> to their trace resource. The upstream <code>span_metrics</code> connector does not recognize this attribute. To avoid computing the same metrics twice, either disable SDK-computed trace metrics or filter marked resources out of the trace pipeline that feeds <code>span_metrics</code>. Continue to send those resources through the trace export pipeline.</div>
+
 The [full configuration files][5] also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
 
 ### OTLP HTTP exporter
