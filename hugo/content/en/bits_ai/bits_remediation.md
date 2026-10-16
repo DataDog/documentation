@@ -58,7 +58,7 @@ For infrastructure-related issues, Bits can recommend a remediation action, such
 Kubernetes actions are supported in Preview. See the [Action Catalog][4] for the full list of supported actions and how to enable them in Datadog.
 
 To run one-click Kubernetes actions, your organization needs:
-- A [Private Action Runner][5] with network access to your Kubernetes cluster, paired with a [Connection][6] to the Kubernetes integration.
+- A [Private Action Runner][5] with network access to your Kubernetes cluster.
 - A user role with permission to run actions and resolve the Kubernetes connection.
 
 ## Govern how Bits takes remediation action
@@ -85,6 +85,5 @@ Bits can verify whether a remediation action was applied successfully, and wheth
 [3]: https://app.datadoghq.com/bits-ai/settings/source-code-integration
 [4]: /actions/actions_catalog/
 [5]: /actions/private_actions/
-[6]: /actions/connections/
 [7]: https://app.datadoghq.com/organization-settings/roles
-[8]: https://app.datadoghq.com/bits-ai/settings/remediation-guardrails 
+[8]: https://app.datadoghq.com/bits-ai/settings/guardrails 
