@@ -79,9 +79,15 @@ export default getViteConfig({
   // One alias override rather than another `resolveId` interception, which is
   // why the loader's glob is aliased at all. Contrast the four absolute paths
   // and their double-slash variants above.
+  //
+  // The changelog's glob in `changelog.ts` reads through `@hugo-site` for the
+  // same reason, so it's redirected with a narrower key. These aliases are
+  // merged ahead of `astro.config.mjs`'s, so this key matches before
+  // `@hugo-site` does.
   resolve: {
     alias: {
       "@api-examples": path.resolve(fixture, "examples"),
+      "@hugo-site/data/changelog": path.resolve(fixture, "changelog"),
     },
   },
   test: {

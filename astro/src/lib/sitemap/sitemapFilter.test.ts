@@ -43,4 +43,27 @@ describe("isSitemapPage", () => {
       isSitemapPage("https://docs.datadoghq.com/ja/api/mobile-nav.json"),
     ).toBe(false);
   });
+
+  it("keeps the changelog landing page in every locale", () => {
+    expect(isSitemapPage("https://docs.datadoghq.com/api/changelog/")).toBe(
+      true,
+    );
+    expect(isSitemapPage("https://docs.datadoghq.com/ja/api/changelog/")).toBe(
+      true,
+    );
+  });
+
+  it("excludes filtered and later changelog pages", () => {
+    for (const path of [
+      "/api/changelog/2/",
+      "/api/changelog/breaking/",
+      "/api/changelog/added/3/",
+      "/ja/api/changelog/2/",
+      "/fr/api/changelog/modified/",
+    ]) {
+      expect(isSitemapPage(`https://docs.datadoghq.com${path}`), path).toBe(
+        false,
+      );
+    }
+  });
 });

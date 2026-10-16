@@ -13,10 +13,25 @@ describe("apiPageSource", () => {
       "/api/latest/rate-limits.md",
       "/api/latest/scopes.md",
       "/api/latest/using-the-api.md",
+      "/api/changelog.md",
     ]);
     const landing = roots[0];
     expect(landing.metadata.title).toBe("API Reference");
     expect(landing.metadata.breadcrumbs).toEqual(["Docs"]);
+  });
+
+  it("lists the changelog's single .md twin as a root page", async () => {
+    const roots = await apiPageSource.listRootPages();
+    const changelog = roots.find(
+      (page) => page.urlPath === "/api/changelog.md",
+    );
+    expect(changelog?.metadata).toEqual({
+      title: "Changelog",
+      description:
+        "Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.",
+      breadcrumbs: ["Docs", "API Reference"],
+      isPrivate: false,
+    });
   });
 
   it("exposes one section per category, path /api/latest/{slug}/llms.txt", async () => {

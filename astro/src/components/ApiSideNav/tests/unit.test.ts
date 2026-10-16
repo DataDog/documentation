@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { Window } from "happy-dom";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 // @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
 import preactRenderer from "@astrojs/preact/server.js";
@@ -217,6 +218,63 @@ describe("ApiSideNav component", () => {
       });
 
       expect(html).not.toContain("Overview");
+    });
+  });
+
+  describe("Changelog link", () => {
+    const overviewPages = [{ title: "Rate Limits", slug: "rate-limits" }];
+    const parserWindow = new Window();
+
+    async function renderNav(
+      props: Record<string, unknown>,
+    ): Promise<Document> {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, ...props },
+      });
+      return new parserWindow.DOMParser().parseFromString(
+        html,
+        "text/html",
+      ) as unknown as Document;
+    }
+
+    function topLevelLinks(doc: Document): Element[] {
+      return [...doc.querySelectorAll(".api-side-nav__list > li > a")];
+    }
+
+    function changelogLink(doc: Document): Element | undefined {
+      return topLevelLinks(doc).find(
+        (link) => link.textContent?.trim() === "Changelog",
+      );
+    }
+
+    it("sits right after Overview, ahead of the spec categories", async () => {
+      const doc = await renderNav({});
+      expect(
+        topLevelLinks(doc).map((link) => link.textContent?.trim()),
+      ).toEqual(["Overview", "Changelog", "Dashboards", "Monitors"]);
+      expect(changelogLink(doc)?.getAttribute("href")).toBe("/api/changelog/");
+    });
+
+    it("is active and current on a changelog page", async () => {
+      const doc = await renderNav({ isChangelogSection: true });
+      const link = changelogLink(doc);
+      expect(link?.classList.contains("api-side-nav__category--active")).toBe(
+        true,
+      );
+      expect(link?.getAttribute("aria-current")).toBe("page");
+      expect(
+        doc.querySelectorAll(".api-side-nav__category--active").length,
+      ).toBe(1);
+    });
+
+    it("is inactive elsewhere", async () => {
+      const doc = await renderNav({ activeCategory: dashboards });
+      const link = changelogLink(doc);
+      expect(link?.classList.contains("api-side-nav__category--active")).toBe(
+        false,
+      );
+      expect(link?.hasAttribute("aria-current")).toBe(false);
     });
   });
 

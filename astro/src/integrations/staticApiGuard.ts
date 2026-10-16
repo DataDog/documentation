@@ -55,6 +55,8 @@ const API_PROBE_PATHS = [
   "/api/latest/",
   "/api/latest/dashboards/",
   "/api/latest/dashboards/get-a-dashboard/",
+  "/api/changelog.md",
+  "/api/changelog/",
 ];
 // An `/api` entrypoint, nested under `[...lang]` or not.
 const API_ENTRYPOINT = /(?:^|\/)src\/pages\/(?:\[\.\.\.lang\]\/)?api[/.]/;

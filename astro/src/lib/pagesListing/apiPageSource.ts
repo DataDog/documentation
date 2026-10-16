@@ -2,7 +2,7 @@
  * The API plaintext page source.
  *
  * Root pages are the hand-written `.mdoc` pages under the API root, read from the
- * content collection. Sections are the API categories: each section holds its
+ * content collection, plus the changelog's single `.md` twin. Sections are the API categories: each section holds its
  * category overview page plus one page per operation, and becomes its own detail
  * `llms.txt`.
  *
@@ -19,6 +19,7 @@ import type {
 } from "./types";
 import { getCollection } from "astro:content";
 import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
+import { CHANGELOG_INTRO, CHANGELOG_TITLE } from "@lib/api/changelog";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
 
@@ -77,10 +78,21 @@ async function operationPage(
   };
 }
 
+/** Every paginated and filtered changelog page shares this one `.md` twin. */
+const changelogPage: PlaintextPage = {
+  urlPath: "/api/changelog.md",
+  metadata: {
+    title: CHANGELOG_TITLE,
+    description: CHANGELOG_INTRO,
+    breadcrumbs: [...API_CRUMBS],
+    isPrivate: false,
+  },
+};
+
 async function listRootPages(): Promise<PlaintextPage[]> {
   const entries = await getCollection("en", (entry) => isApiContent(entry.id));
 
-  return entries.map((entry) => {
+  const contentPages = entries.map((entry) => {
     const isApiRoot = entry.id === API_CONTENT_DIR;
     return {
       urlPath: `/${entry.id}.md`,
@@ -92,6 +104,7 @@ async function listRootPages(): Promise<PlaintextPage[]> {
       },
     };
   });
+  return [...contentPages, changelogPage];
 }
 
 async function listSections(): Promise<PlaintextSection[]> {
