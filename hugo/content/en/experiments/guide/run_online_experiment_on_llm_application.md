@@ -13,10 +13,6 @@ further_reading:
   text: "Reading Experiment Results"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/?product=ai-observability" btn_hidden="false" header="Join the Preview!" >}}
-Online experiments for Agent Observability are in Preview. Fill out the form to register your interest.
-{{< /callout >}}
-
 ## Overview
 
 Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each [experiment subject][13], such as a user or an autonomous workflow run, to a variant. An Agent Observability evaluation score measures the outcome for each subject.
