@@ -30,7 +30,7 @@ With the Inference page, you get:
 
 ## Setup
 
-Inference monitoring supports [vLLM][1] as the inference engine, either standalone, with NVIDIA Dynamo as the inference router, or running on Ray. Other inference engines and routers are not supported. To request support for them, contact your Datadog representative.
+Inference monitoring supports [vLLM][1] as the inference engine in the following deployments: standalone, with NVIDIA Dynamo as the inference router, or on Ray. Other inference engines and routers are not supported. To request support for them, contact your Datadog representative.
 
 Select the tab that matches your deployment:
 
@@ -327,7 +327,7 @@ To correlate inference requests with GPU activity, set up [Continuous Tracing wi
 {{% /tab %}}
 {{% tab "vLLM with Ray" %}}
 
-Setup uses two integrations. The Ray integration collects Ray cluster metrics, and the vLLM integration collects engine metrics.
+Setup uses two integrations. The [Ray integration][5] collects Ray cluster metrics, and the [vLLM integration][6] collects engine metrics.
 
 ### Prerequisites
 
@@ -364,14 +364,9 @@ kubectl get pods -n <DATADOG_NAMESPACE> -w
 
 ### 2. Confirm the metrics endpoint and port
 
-When vLLM runs inside Ray, it does not serve its own metrics endpoint. vLLM records its engine metrics through Ray, and each Ray node publishes them with a `ray_vllm_` prefix on the same endpoint as Ray's own metrics:
+When vLLM runs inside Ray, it does not serve its own metrics endpoint. Instead, vLLM records its engine metrics through Ray, and each Ray node publishes them with a `ray_vllm_` prefix on the same endpoint as Ray's own metrics. The Ray and vLLM integrations both collect from that endpoint.
 
-| Target | Endpoint | Integration | Metrics |
-|--------|----------|-------------|---------|
-| Ray node | `:8080` | Ray | `ray.*` |
-| vLLM engine | `:8080` | vLLM | `vllm.*` |
-
-Each integration collects its own metrics from that endpoint. The port is the one set by `--metrics-export-port` when Ray starts. If your Ray nodes use a port other than `8080`, substitute it in the annotation in Step 3.
+The examples use port `8080`, the port set by `--metrics-export-port` when Ray starts. If your Ray nodes use a different port, replace `8080` in the annotation in Step 3.
 
 ### 3. Configure the integrations
 
@@ -428,7 +423,7 @@ In the `vllm` instance:
 
 <div class="alert alert-info">If your <code>ray</code> check already collects <code>ray_vllm_</code> metrics through <code>extra_metrics</code>, they are submitted twice: as <code>ray.ray_vllm_*</code> and as <code>vllm.*</code>. Remove those patterns from the <code>ray</code> check after you migrate any dashboards and monitors that use the <code>ray.ray_vllm_*</code> names.</div>
 
-Apply the updated workload resources. With KubeRay, changing a worker group's pod template recreates the worker pods, or creates a new Ray cluster for a `RayService`, depending on the upgrade strategy.
+Apply the updated workload resources. With KubeRay, changing a worker group's pod template recreates the worker pods. For a `RayService`, KubeRay can create a new Ray cluster instead, depending on the upgrade strategy.
 
 ### 4. Verify setup
 
@@ -458,7 +453,7 @@ After you complete setup, Datadog collects the following:
 
 If no metrics appear, send inference traffic to your deployment. vLLM emits some metrics only after it serves the first request.
 
-<div class="alert alert-info">Some vLLM versions do not publish gauge metrics, such as the number of running and waiting requests or the KV cache usage, through Ray. If the endpoint has no <code>ray_vllm_num_requests_running</code> or <code>ray_vllm_kv_cache_usage_perc</code> metrics, the concurrent requests and KV cache usage columns of the Inference page stay empty.</div>
+<div class="alert alert-info">Some vLLM versions do not publish gauge metrics, such as the number of running and waiting requests or the KV cache usage, through Ray. If the endpoint has no <code>ray_vllm_num_requests_running</code> or <code>ray_vllm_kv_cache_usage_perc</code> metrics, the <strong>Requests</strong> and <strong>GPU Cache</strong> columns on the Inference page stay empty.</div>
 
 ### 5. Enable percentiles on your metrics
 
@@ -478,6 +473,8 @@ To correlate inference requests with GPU activity, set up [Continuous Tracing wi
 [2]: /containers/kubernetes/integrations/?tab=annotations
 [3]: /metrics/distributions/#enabling-advanced-query-functionality
 [4]: /gpu_monitoring/tracing
+[5]: /integrations/ray/
+[6]: /integrations/vllm/
 
 {{% /tab %}}
 {{< /tabs >}}
