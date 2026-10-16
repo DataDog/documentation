@@ -121,7 +121,7 @@ Don't enable SDK-computed trace metrics if your Collector metrics pipeline uses 
 
 `OTEL_TRACES_SPAN_METRICS_ENABLED` is a tri-state setting. An explicit value of `true` or `false` takes precedence. When it is unset, the SDK enables OTLP trace metrics automatically if `OTEL_TRACES_EXPORTER=otlp` and `DD_METRICS_OTEL_ENABLED=true`. You don't need to set `DD_METRICS_OTEL_ENABLED` when you explicitly enable OTLP trace metrics.
 
-Use only one source of APM trace metrics per service. The [recommended Collector configuration][8] prevents duplicate computation by the SDK, `span_metrics`, and HTTP/RPC instrumentation metrics.
+Use only one source of APM trace metrics per service. If traces also pass through the [`span_metrics` connector][8], filter resources where `_dd.stats_computed` is `"true"` from the connector pipeline, and keep instrumentation metric remapping (`trace_metrics.instrumentation_metrics_calc`) disabled.
 
 ## Verify
 

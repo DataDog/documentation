@@ -128,11 +128,6 @@ processors:
     override: true # Disable if incoming attributes (especially host.name) are verified correct
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
-  # Prevent duplicate APM trace metrics from Datadog SDKs that compute them
-  filter/drop_sdk_computed_metrics:
-    error_mode: ignore
-    trace_conditions:
-      - 'resource.attributes["_dd.stats_computed"] == "true"'
 
 connectors:
   # Separate trace processing from sampling so span metrics are computed on all traces
@@ -199,8 +194,7 @@ exporters:
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
-        "instrumentation_scope_metadata_as_tags": true,
-        "trace_metrics": {"instrumentation_metrics_calc": false}
+        "instrumentation_scope_metadata_as_tags": true
         }
     compression: zstd
     compression_params:
@@ -234,11 +228,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [resource_detection]
-      exporters: [forward/traces_sample]
-    traces/span_metrics:
-      receivers: [otlp]
-      processors: [resource_detection, filter/drop_sdk_computed_metrics]
-      exporters: [span_metrics]
+      exporters: [forward/traces_sample, span_metrics]
     traces/sample:
       receivers: [forward/traces_sample]
       # Add sampling processors here (for example, tail_sampling) before exporting traces
@@ -336,11 +326,6 @@ processors:
     override: true # Disable if incoming attributes (especially host.name) are verified correct
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
-  # Prevent duplicate APM trace metrics from Datadog SDKs that compute them
-  filter/drop_sdk_computed_metrics:
-    error_mode: ignore
-    trace_conditions:
-      - 'resource.attributes["_dd.stats_computed"] == "true"'
 
 connectors:
   # Separate trace processing from sampling so span metrics are computed on all traces
@@ -407,8 +392,7 @@ exporters:
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
-        "instrumentation_scope_metadata_as_tags": true,
-        "trace_metrics": {"instrumentation_metrics_calc": false}
+        "instrumentation_scope_metadata_as_tags": true
         }
     compression: zstd
     compression_params:
@@ -442,11 +426,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [resource_detection]
-      exporters: [forward/traces_sample]
-    traces/span_metrics:
-      receivers: [otlp]
-      processors: [resource_detection, filter/drop_sdk_computed_metrics]
-      exporters: [span_metrics]
+      exporters: [forward/traces_sample, span_metrics]
     traces/sample:
       receivers: [forward/traces_sample]
       # Add sampling processors here (for example, tail_sampling) before exporting traces
@@ -625,11 +605,6 @@ processors:
           enabled: false # Containers report inaccurate host names
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
-  # Prevent duplicate APM trace metrics from Datadog SDKs that compute them
-  filter/drop_sdk_computed_metrics:
-    error_mode: ignore
-    trace_conditions:
-      - 'resource.attributes["_dd.stats_computed"] == "true"'
   # Convert selected delta metrics to rates
   deltatorate:
     metrics:
@@ -738,8 +713,7 @@ exporters:
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
-        "instrumentation_scope_metadata_as_tags": true,
-        "trace_metrics": {"instrumentation_metrics_calc": false}
+        "instrumentation_scope_metadata_as_tags": true
         }
     compression: zstd
     compression_params:
@@ -777,11 +751,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [k8s_attributes, resource_detection]
-      exporters: [forward/traces_sample]
-    traces/span_metrics:
-      receivers: [otlp]
-      processors: [k8s_attributes, resource_detection, filter/drop_sdk_computed_metrics]
-      exporters: [span_metrics]
+      exporters: [forward/traces_sample, span_metrics]
     traces/sample:
       receivers: [forward/traces_sample]
       # Add sampling processors here (for example, tail_sampling) before exporting traces
@@ -960,32 +930,7 @@ The `span_metrics` connector generates RED metrics from trace data. These metric
 
 Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 
-<div class="alert alert-warning">Don't send traces with <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed APM trace metrics</a> through an unfiltered <code>span_metrics</code> connector. The configurations on this page filter them from the connector pipeline to prevent double counting.</div>
-
-For a mixed setup where only some SDKs compute trace metrics, filter marked resources from the pipeline that feeds `span_metrics`. Use a separate pipeline so that the filter doesn't remove these resources from trace export:
-
-```yaml
-processors:
-  filter/drop_sdk_computed_metrics:
-    error_mode: ignore
-    trace_conditions:
-      - 'resource.attributes["_dd.stats_computed"] == "true"'
-
-service:
-  pipelines:
-    traces:
-      receivers: [otlp]
-      processors: [resource_detection]
-      # Export every trace, including resources with SDK-computed trace metrics
-      exporters: [forward/traces_sample]
-    traces/span_metrics:
-      receivers: [otlp]
-      # Include the same enrichment processors as the traces pipeline before the filter
-      processors: [resource_detection, filter/drop_sdk_computed_metrics]
-      exporters: [span_metrics]
-```
-
-For Kubernetes, also include `k8s_attributes` before `resource_detection` in both trace pipelines, as shown in the Kubernetes configuration on this page.
+<div class="alert alert-warning">Datadog SDK traces with <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed APM trace metrics</a> can cause double counting with <code>span_metrics</code>. Filter resources where <code>_dd.stats_computed</code> is <code>"true"</code> from the pipeline that feeds the connector.</div>
 
 The [full configuration files][5] also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
 
@@ -1027,7 +972,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">Use one source of APM trace metrics for each service. Don't enable <code>instrumentation_metrics_calc</code> with the <code>span_metrics</code> connector or with <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed trace metrics</a>, because each source counts the same requests.</div>
+<div class="alert alert-info">Keep instrumentation metric remapping (<code>trace_metrics.instrumentation_metrics_calc</code>) disabled when using the <code>span_metrics</code> connector or <a href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/#export-apm-trace-metrics">SDK-computed trace metrics</a> to prevent double counting.</div>
 
 ### Trace forward connector
 
