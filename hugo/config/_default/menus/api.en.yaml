@@ -8120,6 +8120,19 @@ menu:
         unstable:
           - v2
         order: 58
+    - name: List patterns templates
+      url: /api/latest/agent-observability/list-patterns-templates/
+      identifier: agent-observability-list-patterns-templates
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTemplates
+        unstable:
+          - v2
+        order: 74
     - name: Get patterns run status
       url: /api/latest/agent-observability/get-patterns-run-status/
       identifier: agent-observability-get-patterns-run-status
@@ -23437,19 +23450,6 @@ menu:
           - GetTeamMemberships
         unstable: []
         order: 9
-    - name: Get team hierarchy members
-      url: /api/latest/teams/get-team-hierarchy-members/
-      identifier: teams-get-team-hierarchy-members
-      parent: teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetTeamHierarchyMembers
-        unstable:
-          - v2
-        order: 35
     - name: Update a team link
       url: /api/latest/teams/update-a-team-link/
       identifier: teams-update-a-team-link
