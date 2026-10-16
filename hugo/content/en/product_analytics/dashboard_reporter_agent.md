@@ -30,14 +30,11 @@ Dashboard Reporter Agent is in Preview. Complete the form to request access.
 
 The Dashboard Reporter Agent monitors the Product Analytics dashboards you choose and sends your team a scheduled report in Slack, Microsoft Teams, or email. Each report summarizes what changed, what needs attention, and what to do next, so you don't have to open each dashboard to check. As you ship more features, one agent can monitor many dashboards, including dashboards for past launches that no longer get regular attention.
 
-<!-- TODO: Confirm whether agents are built on Bits Agent Builder or Workflow Automation. -->
 Dashboard Reporter agents are built on [Bits Agent Builder][1].
 
-<!-- TODO: Confirm whether runs consume AI Credits. If yes, keep this alert. -->
 <div class="alert alert-info">Dashboard Reporter agents consume <a href="/account_management/billing/ai_credits/">AI Credits</a>.</div>
 
 Reports are text summaries delivered on a schedule. Charts aren't embedded in the report, but each item links to its source chart. To get notified when a metric crosses a threshold, use a [monitor][2].
-<!-- TODO: Add any other Preview limits, such as the maximum number of dashboards per agent or run timeouts. -->
 
 ## Use cases
 
@@ -59,7 +56,6 @@ Use the Dashboard Reporter Agent to:
 - **Linked sources**: Each metric and issue in the report links to its underlying chart.
 
 The agent reads dashboard data with the permissions of the user who created the agent. If that user loses access to a dashboard, the dashboard is no longer included in the report.
-<!-- TODO: Confirm behavior when the creator loses access or leaves the org, and whether inaccessible or deleted dashboards are noted in the report. -->
 
 ### What a report contains
 
@@ -70,22 +66,16 @@ Each report includes:
 3. Notable changes, ranked by severity, each linked to its source chart.
 4. Suggested next steps.
 
-<!-- TODO: Confirm follow-up actions on the report, such as Convert to notebook or Open dashboard. -->
-
 ## Prerequisites
 
-<!-- TODO: Confirm required permissions. -->
 - Access to Product Analytics and to the dashboards you want to monitor.
 - To deliver reports to Slack, the [Datadog Slack integration][3] must be installed in your organization.
 - To deliver reports to Microsoft Teams, the [Microsoft Teams integration][4] must be installed in your organization.
-
-<!-- TODO: Confirm that Slack, Microsoft Teams, and email delivery are all available in the Preview. -->
 
 ## Create a Dashboard Reporter agent
 
 You can start from a dashboard or from the Agents page in Product Analytics.
 
-<!-- TODO: Confirm Option 1 is available in the Preview. -->
 ### Option 1: Start from a dashboard
 
 1. Open the Product Analytics dashboard you want to monitor.
@@ -95,8 +85,7 @@ You can start from a dashboard or from the Agents page in Product Analytics.
 
 ### Option 2: Start from the Agents page
 
-<!-- TODO: Confirm the navigation path to the Agents page. -->
-1. In Datadog, go to **Product Analytics > Agents**.
+1. In Datadog, go to [**Product Analytics > Agents**][6].
 2. Click {{< ui >}}+ New Agent{{< /ui >}}.
 3. Select the {{< ui >}}Dashboard Reporter{{< /ui >}} blueprint.
 
@@ -105,10 +94,8 @@ You can start from a dashboard or from the Agents page in Product Analytics.
 1. **Name the agent.** Choose a name that tells readers what the report covers, such as "Checkout Weekly Health." The name appears in the title of every report.
 2. **Choose the dashboards to monitor.** Select one or more dashboards. You can add more dashboards later.
 3. **Select a report format.** Select a predefined report format, or write your own. For a custom format, describe the questions the report should answer on each run and any formatting requirements.
-   <!-- TODO: Confirm the predefined format names. -->
 4. **Choose where to deliver reports.** Select a Slack channel, a Microsoft Teams channel, or an email address.
 5. **Set the cadence.** Choose how often the agent runs (daily, weekly, or monthly), the time it sends the report, and the time zone.
-   <!-- TODO: Confirm whether a custom interval (every N days, weeks, or months) ships. -->
 6. **Create the agent.** Click {{< ui >}}Create{{< /ui >}}.
 
 ## Read reports
@@ -124,7 +111,6 @@ You can open a report in Datadog and ask the agent follow-up questions. For exam
    - **From Datadog**: Go to the Agents page and select the agent.
 2. Enter your question in the message box and press <kbd>Enter</kbd>.
 
-<!-- TODO: Confirm @Datadog in Slack can answer questions about a report, or remove this section. -->
 ### Ask Bits AI in Slack
 
 If your reports go to Slack, you can also ask Bits AI about a report without leaving Slack. Mention `@Datadog` with your question, for example: `@Datadog Why did checkout conversion drop this week?`
@@ -133,7 +119,7 @@ To use `@Datadog`, you need the Datadog Slack integration with Bits AI enabled. 
 
 ## Manage Dashboard Reporter agents
 
-To view your agents, go to **Product Analytics > Agents**.
+To view your agents, go to [**Product Analytics > Agents**][6].
 
 ### Edit an agent
 
@@ -148,7 +134,6 @@ You can change an agent's dashboards, report format, destination, or cadence.
 
 Pause an agent to stop reports temporarily, for example during a quiet period or while a dashboard is being rebuilt. A paused agent keeps its configuration.
 
-<!-- TODO: Confirm button labels. The draft used both "Resume agent" and "Resume". -->
 - **To pause an agent**: On the Agents page, hover over the agent and click {{< ui >}}Pause{{< /ui >}}. In the confirmation window, click {{< ui >}}Pause{{< /ui >}} again.
 - **To resume an agent**: On the Agents page, hover over the agent and click {{< ui >}}Resume{{< /ui >}}. In the confirmation window, click {{< ui >}}Resume{{< /ui >}}.
 
@@ -169,3 +154,4 @@ To delete an agent, go to the Agents page, hover over the agent, and click {{< u
 [3]: /integrations/slack/?tab=datadogforslack
 [4]: /integrations/microsoft_teams/
 [5]: /bits_ai/bits_chat/usage/#slack
+[6]: https://app.datadoghq.com/product-analytics/agents
