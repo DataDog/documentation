@@ -80,7 +80,7 @@ You can start from a dashboard or from the Agents page in Product Analytics.
 {{% tab "From a dashboard" %}}
 
 1. Open the Product Analytics dashboard you want to monitor.
-2. Click {{< ui >}}Set up report{{< /ui >}}. If the dashboard is already included in other agents' reports, they are listed here.
+2. Click {{< ui >}}Set Up Report{{< /ui >}}. If the dashboard is already included in other agents' reports, they are listed here.
 
    {{< img src="product_analytics/dashboard_reporter_agent/from-dashboard.png" alt="A Product Analytics dashboard header with the Set Up Report button highlighted." style="width:100%;" >}}
 
