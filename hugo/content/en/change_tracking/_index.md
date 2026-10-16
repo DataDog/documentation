@@ -126,7 +126,7 @@ To view information about a change or set of changes, click a datapoint in the w
 
 ## Change types you can track
 
-Change Tracking covers deployments, feature flags, database changes, streaming/application behavior, infrastructure changes, and any custom change you send yourself.
+Change Tracking covers deployments, feature flags, database changes, streaming and application behavior, infrastructure changes, and any custom change you send yourself.
 
 For the full list of change types, the Datadog feature each one comes from, and what you need to enable it, see [Tracked Change Types][16].
   

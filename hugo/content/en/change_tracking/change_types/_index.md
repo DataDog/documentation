@@ -3,7 +3,7 @@ title: Tracked Change Types
 description: Learn which types of changes Change Tracking monitors, which Datadog feature each type comes from, and how to turn on tracking for each.
 ---
 
-Change Tracking collects changes from multiple Datadog products. There is no separate Change Tracking product to buy and, in most cases, no separate agent or integration to install. If you are sending the underlying telemetry, the changes are already being tracked.
+Change Tracking collects changes from multiple Datadog products. There is no separate Change Tracking product to buy and, in most cases, no separate Agent or integration to install. If you are sending the underlying telemetry, the changes are already being tracked.
 
 Use the information on this page to confirm:
 
@@ -25,7 +25,7 @@ Use the information on this page to confirm:
 | Change type | Comes from | How to enable |
 | --- | --- | --- |
 | Datadog Feature Flags | Datadog Feature Flags | Tracked automatically. |
-| LaunchDarkly and other providers | LaunchDarkly integration | Set up the [LaunchDarkly integration][3]. |
+| LaunchDarkly | LaunchDarkly integration | Set up the [LaunchDarkly integration][3]. |
 | Any other feature flag provider | Events API | Send flag changes as custom events using the [Events API][4]. |
 | Frontend feature flag evaluations | RUM | Set up [RUM feature flag tracking][5]. |
 
