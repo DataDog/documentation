@@ -202,6 +202,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
 {{% /tab %}}
+{{% tab "OpenTelemetry" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
+
+{{% /tab %}}
 {{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
