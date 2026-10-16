@@ -124,6 +124,6 @@ When your organization reaches 10,000 active mutes, unmute indicators you no lon
 [1]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
 [2]: /security/threat_intelligence/#threat-intelligence-intents
 [3]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
-[4]: /account_management/rbac/permissions/
+[4]: /account_management/rbac/permissions/#cloud-security-platform
 [5]: https://app.datadoghq.com/security/siem/ioc-explorer
 [6]: https://app.datadoghq.com/security/configuration/siem/muted-indicators
