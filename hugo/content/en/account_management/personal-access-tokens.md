@@ -44,6 +44,8 @@ For Service Access Tokens, see [Service Access Tokens][7].
 4. Select an {{< ui >}}Expiration Date{{< /ui >}}. The minimum expiration is 24 hours and the maximum is one year from creation.
 5. Click {{< ui >}}Select Scopes{{< /ui >}} to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.
 
+**Note:** Each user can have up to 500 PATs.
+
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time. Copy and store it securely. You cannot retrieve it later.</div>
 
 ## Use a Personal Access Token

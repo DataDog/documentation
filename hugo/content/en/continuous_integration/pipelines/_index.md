@@ -58,7 +58,7 @@ Select your CI provider to set up CI Visibility in Datadog:
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | {{< X >}} | | | | | {{< X >}} | {{< X >}} | {{< X >}} | | {{< X >}} |
 | {{< ci-details title="Running jobs" >}}Identification of job executions that are running with associated tracing.{{< /ci-details >}} |  |  |  |  |  | {{< X >}} | {{< X >}} |  |  | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  {{< X >}} |
-| {{< ci-details title="Step granularity" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} |  |  |  |  | {{< X >}} | {{< X >}} |  | {{< X >}} <br /> (_Presented as job spans_) |  |  {{< X >}} |
+| {{< ci-details title="Step granularity" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} |  |  | {{< X >}} <br /> (_Preview_) |  | {{< X >}} | {{< X >}} |  | {{< X >}} <br /> (_Presented as job spans_) |  |  {{< X >}} |
 | {{< ci-details title="Manual steps" >}}Identification of when there is a job with a manual approval phase in the overall pipeline.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  {{< X >}} |
 
 ### Automatic analysis and actions

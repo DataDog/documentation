@@ -11,6 +11,10 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Centre d'apprentissage
   text: Bien démarrer avec Product Analytics
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: Centre d'apprentissage
+  text: Définir le comportement utilisateur avec des actions labellisées dans Product
+    Analytics
 title: Entonnoir
 ---
 L'analyse d'entonnoir vous aide à suivre les taux de conversion sur des workflows clés afin d'identifier et de résoudre les goulots d'étranglement dans les parcours de bout en bout. Plus précisément, vous pouvez :

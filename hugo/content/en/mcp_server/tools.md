@@ -677,7 +677,7 @@ Lists the attachments on a work item (case), or retrieves the contents of a spec
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `link_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write` and `Cases Read`*\
 Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
 
@@ -685,7 +685,7 @@ Creates a directional link between two work items (cases). The relationship is s
 - CASE-910 duplicates CASE-1234. Link them.
 
 ### `get_datadog_case_links`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
 Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
 
@@ -693,7 +693,7 @@ Lists all links for a work item (case), including each link's ID, relationship t
 - Is anything blocking the database migration case?
 
 ### `unlink_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
 Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
 
@@ -1958,7 +1958,7 @@ Tools for [Observability Pipelines][87], including inspecting existing pipelines
 Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
 
 - How many pipelines do we have, and how many of them are metrics pipelines?
-- Find the ID of the `prod-agent-logs` pipeline.
+- Find the ID of the "Prod Agent Logs" pipeline.
 - Which pipelines were modified in the last week?
 
 ### `describe_observability_pipeline`
@@ -1966,7 +1966,7 @@ Lists all pipelines in your organization, including drafts, with each pipeline's
 *Permissions Required: `Observability Pipelines Read`*\
 Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
 
-- Explain what the `prod-agent-logs` pipeline does.
+- Explain what the "Prod Agent Logs" pipeline does.
 - Where are logs dropped in my Splunk forwarding pipeline?
 - Are there redundant or expensive processors in pipeline `abc-123-def`?
 
@@ -2032,6 +2032,13 @@ Guides you through onboarding Agent Observability in Datadog.
 Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
+
+### `test_parallelization_onboarding`
+*Toolset: **onboarding***\
+*Permissions Required: None*\
+Guides you through onboarding Test Parallelization in Datadog.
+
+- Help me set up Test Parallelization for my CI pipeline.
 
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
@@ -2675,6 +2682,15 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Assign these critical findings to the security team lead.
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
+
+### `override_datadog_security_findings_severity`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Sets or clears the manual severity override on up to 100 security findings. Action `set` requires a severity (`critical`, `high`, `medium`, `low`, or `info`); action `clear` removes the manual override. Supports an optional description. Findings whose severity is set by an automation rule are skipped and listed as warnings in the response.
+
+- Set the severity of these findings to low, they only affect a test environment.
+- Raise this misconfiguration to critical because the resource holds customer data.
+- Clear the manual severity override on these findings.
 
 ### `list_datadog_security_findings_automation_rules`
 *Toolset: **security***\

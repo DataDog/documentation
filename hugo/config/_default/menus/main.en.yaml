@@ -1624,21 +1624,26 @@ menu:
       identifier: bits_ai_live_debugger
       parent: bits_ai
       weight: 8
+    - name: Bits Release
+      url: bits_release/
+      identifier: bits_release
+      parent: bits_ai
+      weight: 9
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai
-      weight: 9
+      weight: 10
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 10
+      weight: 11
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 11
+      weight: 12
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2531,11 +2536,16 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
-    - name: Feature Flags
-      url: change_tracking/feature_flags/
+    - name: Change Types
+      url: change_tracking/change_types/
       parent: change_tracking
-      identifier: change_tracking_feature_flags
+      identifier: change_tracking_change_types
       weight: 1
+    - name: Feature Flags
+      url: change_tracking/change_types/feature_flags/
+      parent: change_tracking_change_types
+      identifier: change_tracking_feature_flags
+      weight: 101
     - name: Event Management
       url: events/
       pre: events
@@ -4587,11 +4597,6 @@ menu:
       identifier: dyninst_explang
       parent: dyninst
       weight: 2043
-    - name: Sensitive Data Scrubbing
-      url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
-      identifier: dyninst_sensitive_data_scrubbing
-      parent: dyninst
-      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -4887,6 +4892,11 @@ menu:
       identifier: live_debugger_bits_live_debugger
       parent: live_debugger
       weight: 1
+    - name: Sensitive Data Scrubbing
+      url: tracing/live_debugger/sensitive-data-scrubbing/
+      identifier: live_debugger_sensitive_data_scrubbing
+      parent: live_debugger
+      weight: 2
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
@@ -5954,26 +5964,31 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_setup
       weight: 1
-    - name: Summary Page
+    - name: Summary
       url: gpu_monitoring/summary/
       parent: gpu_monitoring
       identifier: gpu_monitoring_summary
       weight: 2
-    - name: Fleet Page
-      url: gpu_monitoring/fleet/
+    - name: Explorer
+      url: gpu_monitoring/explorer/
       parent: gpu_monitoring
-      identifier: gpu_monitoring_fleet
+      identifier: gpu_monitoring_explorer
       weight: 3
-    - name: Capacity Planning Page
+    - name: Capacity Planning
       url: gpu_monitoring/capacity_planning/
       parent: gpu_monitoring
       identifier: gpu_monitoring_capacity_planning
       weight: 4
-    - name: Training Page
+    - name: Training
       url: gpu_monitoring/training/
       parent: gpu_monitoring
       identifier: gpu_monitoring_training
       weight: 5
+    - name: Inference
+      url: gpu_monitoring/inference/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_inference
+      weight: 6
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -9302,6 +9317,11 @@ menu:
       parent: synthetics
       identifier: synthetics_explore
       weight: 10
+    - name: Overview Page
+      url: synthetics/explore/overview
+      parent: synthetics_explore
+      identifier: synthetics_explore_overview
+      weight: 800
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
@@ -9494,41 +9514,46 @@ menu:
       identifier: journey_monitoring
       parent: digital_experience_heading
       weight: 10000
+    - name: Configure Journeys
+      url: journey_monitoring/configuring_journeys/
+      parent: journey_monitoring
+      identifier: journey_monitoring_configure_journeys
+      weight: 1
+    - name: Suggested Journeys
+      url: journey_monitoring/suggested_journeys/
+      parent: journey_monitoring
+      identifier: journey_monitoring_suggested_journeys
+      weight: 2
+    - name: Variants
+      url: journey_monitoring/variants/
+      parent: journey_monitoring
+      identifier: journey_monitoring_variants
+      weight: 3
+    - name: Journey Overview Page
+      url: journey_monitoring/overview/
+      parent: journey_monitoring
+      identifier: journey_monitoring_overview
+      weight: 4
     - name: Map
       url: journey_monitoring/map/
       parent: journey_monitoring
       identifier: journey_monitoring_map
-      weight: 1
-    - name: Suggested Journeys
-      url: journey_monitoring/map/suggested_journeys/
-      parent: journey_monitoring_map
-      identifier: journey_monitoring_map_suggested_journeys
-      weight: 101
+      weight: 5
+    - name: Status
+      url: journey_monitoring/status/
+      parent: journey_monitoring
+      identifier: journey_monitoring_status
+      weight: 6
     - name: Details Report
       url: journey_monitoring/details_report/
       parent: journey_monitoring
       identifier: journey_monitoring_details_report
-      weight: 2
-    - name: Variants
-      url: journey_monitoring/details_report/variants/
-      parent: journey_monitoring_details_report
-      identifier: journey_monitoring_details_report_variants
-      weight: 201
-    - name: Uptime
-      url: journey_monitoring/uptime/
-      parent: journey_monitoring
-      identifier: journey_monitoring_uptime
-      weight: 3
+      weight: 7
     - name: Roles and Permissions
       url: journey_monitoring/roles_and_permissions/
       parent: journey_monitoring
       identifier: journey_monitoring_roles_and_permissions
-      weight: 4
-    - name: Guides
-      url: journey_monitoring/guide/
-      parent: journey_monitoring
-      identifier: journey_monitoring_guides
-      weight: 5
+      weight: 8
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
