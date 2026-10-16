@@ -320,6 +320,7 @@ unsupported_sites:
   byoc-logs: [gov,gov2]
   byoti: [gov,gov2]
   case_management: [gov2]
+  change_tracking: [gov,gov2]
   ci_visibility: [gov,gov2]
   cloudcraft_apm_overlay: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
