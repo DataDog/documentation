@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-10-13'
+    link: https://github.com/DataDog/documentation/pull/40642
+    operations:
+      - ListDatastores
+    title: Move the Terraform annotations to the document-root family registry
