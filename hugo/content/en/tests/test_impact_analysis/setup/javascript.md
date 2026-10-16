@@ -86,17 +86,17 @@ NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_ENV=ci DD_SE
 {{% /tab %}}
 {{< /tabs >}}
 
-### Vitest
-
-`dd-trace` automatically collects the per-suite code coverage required for Test Impact Analysis. No additional coverage package or `--coverage` flag is required.
-
-Test Impact Analysis is not supported in Vitest browser mode, watch mode, or typecheck-only runs. It is also not supported when using the experimental mode enabled by `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`.
-
 ### Cypress
 
 For Test Impact Analysis for Cypress to work, you must instrument your web application with code coverage. For more information about enabling code coverage, see the [Cypress documentation][2].
 
 To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the `window.__coverage__` global variable. This is what `dd-trace` uses to collect code coverage for Test Impact Analysis.
+
+### Vitest
+
+`dd-trace` automatically collects the per-suite code coverage required for Test Impact Analysis. No additional coverage package or `--coverage` flag is required.
+
+Test Impact Analysis is not supported in Vitest browser mode, watch mode, or typecheck-only runs. It is also not supported with the experimental mode enabled by `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`.
 
 ## Inconsistent test durations
 
