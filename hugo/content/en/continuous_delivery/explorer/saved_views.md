@@ -7,8 +7,8 @@ further_reading:
   text: "Learn how to create a search query"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility is in Preview and is not accepting new customers.
 {{< /callout >}}
 
 ## Overview
