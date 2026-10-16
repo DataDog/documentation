@@ -78,6 +78,8 @@ All AI Credits products are enabled by default with the Datadog Standard Role. T
 | [Bits Code][2] | Bits Code Write |
 | [Bits Agent Builder][4] | Bits Agent Builder Write, Bits Agent Builder Run |
 
+**Note**: Chatting with Bits on an investigation page is Bits Chat usage and is controlled by Bits Chat Access. Removing Bits Investigations Write stops a user from starting investigations, but not from chatting about existing ones.
+
 To manage permissions, go to [**Organization Settings > Roles**][7], select a role, and toggle the relevant permission.
 
 ## Monitor usage
