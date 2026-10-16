@@ -131,8 +131,8 @@ az containerapp exec --resource-group <RESOURCE_GROUP> --name <APP_NAME> --comma
 
 If `OTEL_EXPORTER_OTLP_ENDPOINT` is missing, set it to the managed agent's base URL:
 
-1. Copy the value of any `CONTAINERAPP_OTEL_*_GRPC_ENDPOINT` variable from the output.
-2. Remove the trailing signal path (for example, `/v1/traces`). The result looks like `http://<AGENT_HOST>:4317`.
+1. Copy the value of `CONTAINERAPP_OTEL_TRACING_GRPC_ENDPOINT` from the output.
+2. Remove the trailing `/v1/traces` path. The result looks like `http://<AGENT_HOST>:4317`.
 3. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to that value on your container app.
 
 Use the hostname from your own container's variables, not from documentation examples. Set either `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`, not both.
@@ -178,8 +178,8 @@ az containerapp exec --resource-group <RESOURCE_GROUP> --name <APP_NAME> --comma
 
 If `OTEL_EXPORTER_OTLP_ENDPOINT` is missing, set it to the managed agent's base URL:
 
-1. Copy the value of any `CONTAINERAPP_OTEL_*_GRPC_ENDPOINT` variable from the output.
-2. Remove the trailing signal path (for example, `/v1/traces`). The result looks like `http://<AGENT_HOST>:4317`.
+1. Copy the value of `CONTAINERAPP_OTEL_TRACING_GRPC_ENDPOINT` from the output.
+2. Remove the trailing `/v1/traces` path. The result looks like `http://<AGENT_HOST>:4317`.
 3. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to that value on your container app.
 
 Use the hostname from your own container's variables, not from documentation examples. Set either `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`, not both.
