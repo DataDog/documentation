@@ -23,10 +23,7 @@ The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 
 ## Setup
 
-1. Declare the library as a dependency depending on your package manager. Swift Package Manager is recommended.
-
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
+1. Declare the library as a dependency.
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -38,37 +35,6 @@ In your project, link the following libraries:
 DatadogCore
 DatadogLogs
 ```
-
-{{% /tab %}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][6] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogLogs'
-```
-
-[6]: https://cocoapods.org/
-
-{{% /tab %}}
-{{% tab "Carthage" %}}
-
-You can use [Carthage][7] to install `dd-sdk-ios`:
-```
-github "DataDog/dd-sdk-ios"
-```
-
-In Xcode, link the following frameworks:
-```
-DatadogInternal.xcframework
-DatadogCore.xcframework
-DatadogLogs.xcframework
-```
-
-[7]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{< /tabs >}}
 
 2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
