@@ -83,8 +83,6 @@ There are two RBAC permissions that apply to Bits Investigation:
 | Bits Investigations Read (`bits_investigations_read`)   | Read Bits investigations.              | Datadog Read Only Role |
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role  |
 
-Chatting with Bits on an investigation page is part of [Bits Chat][19]. It requires the **Bits Chat Access** permission, not Bits Investigations Write, and is billed as Bits Chat usage. A user with only Bits Investigations Read can open an investigation and ask follow-up questions if one of their roles also grants Bits Chat Access. For details, see [Chat with Bits Investigation][20].
-
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or has previously modified the default roles, an admin with the User Access Manage permission needs to manually add these permissions to the appropriate roles. For details, see [Access Control][8].
 
 ### Disable Bits Investigation
@@ -92,10 +90,6 @@ These permissions are added by default to Managed Roles. If your organization us
 To prevent your organization from using Bits Investigation, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
 
 Or, an admin can disable all AI products billable through AI Credits using the org-level toggle in [Plan & Usage > AI Credits][16]. For details, see [Admin controls for AI Credits][17].
-
-### Grant view-only access
-
-To let users view investigations without consuming AI Credits, grant Bits Investigations Read only, and make sure none of their roles grant Bits Investigations Write or Bits Chat Access.
 
 ## Configure rate limits
 
@@ -160,5 +154,3 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
 [17]: /account_management/billing/ai_credits/#admin-controls
 [18]: /api/latest/bits-ai/
-[19]: /bits_ai/bits_chat/
-[20]: /bits_ai/bits_investigation/chat_bits_investigation/
