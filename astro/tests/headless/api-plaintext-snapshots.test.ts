@@ -11,6 +11,23 @@ vi.mock("astro:content", () => ({
       title: "Fixture API Reference",
       description: "Fixture description for the API landing page.",
     },
+    // A small frozen body, not the live `index.mdoc`: a fence that uses an
+    // SDK version (resolved from `tests/fixtures/api/sdkVersions.ts`), and a
+    // fence that shows Markdoc syntax, which must stay unchanged.
+    body: [
+      "## Client libraries",
+      "",
+      "```xml",
+      "<version>{% $sdkVersions.datadog-api-client-java %}</version>",
+      "```",
+      "",
+      "```markdoc",
+      '{% alert level="info" %}',
+      "Example alert.",
+      "{% /alert %}",
+      "```",
+      "",
+    ].join("\n"),
   }),
 }));
 

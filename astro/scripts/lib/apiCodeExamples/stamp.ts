@@ -65,6 +65,28 @@ export async function readStampIfAny(
 }
 
 /**
+ * SDK client name → release version, for `{% $sdkVersions.<client> %}` in
+ * content (Hugo's `{{< sdk-version "<client>" >}}`). Empty when no tree is
+ * staged.
+ *
+ * The stamp records git refs, whose tag conventions differ by repo (`v2.67.0`,
+ * `datadog-api-client-2.62.0`, `2.62.0`). Stripping everything before the
+ * first digit is the same rule as Hugo's shortcode
+ * (`hugo/layouts/shortcodes/sdk-version.html`).
+ */
+export function sdkVersionsFromStamp(
+  stamp: StageStamp | null,
+): Record<string, string> {
+  if (stamp === null) return {};
+  return Object.fromEntries(
+    Object.entries(stamp.refs).map(([client, ref]) => [
+      client,
+      ref.replace(/^[^0-9]*/, ""),
+    ]),
+  );
+}
+
+/**
  * "Present and current" is deliberately cheap: a stamp is only written after a
  * complete fetch, so its presence means the tree is whole, and the recorded
  * branch is what decides whether the resolved refs could have changed.

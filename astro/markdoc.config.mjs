@@ -7,6 +7,8 @@ import {
 import schema from "./markdoc.schema.mjs";
 import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts";
 import { syncKeyFromLabel } from "./src/components/Tabs/tabSync.ts";
+import { resolveFenceContent } from "./src/lib/markdoc/resolveFenceContent.ts";
+import { SDK_VERSIONS } from "./src/lib/site/sdkVersions.ts";
 
 /**
  * Yield a tag's children, replacing any paragraph with the nodes inside it.
@@ -35,6 +37,11 @@ function* unwrapChildParagraphs(node) {
 }
 
 export default defineMarkdocConfig({
+  variables: {
+    // `{% $sdkVersions.datadog-api-client-java %}` → "2.62.0". Hugo's
+    // `{{< sdk-version "datadog-api-client-java" >}}`.
+    sdkVersions: SDK_VERSIONS,
+  },
   // Custom Markdoc functions for cdocs conditionals. Markdoc's built-in
   // functions (equals, and, or, not) and the built-in `if`/`else`/`partial`
   // tags are already available, so only the cdocs-specific extras are declared
@@ -57,6 +64,18 @@ export default defineMarkdocConfig({
       attributes: {
         ...nodes.fence.attributes,
         ...schema.nodes.fence.attributes,
+      },
+      // `CodeBlock` highlights the `content` attribute, which Markdoc fills
+      // with the raw source; see `resolveFenceContent` for how variables are
+      // resolved and when the raw source is kept.
+      transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        const children = node.transformChildren(config);
+        return new Markdoc.Tag(
+          config.nodes.fence.render,
+          { ...attributes, content: resolveFenceContent(node, children) },
+          children,
+        );
       },
     },
   },

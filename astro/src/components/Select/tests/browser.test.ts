@@ -34,6 +34,8 @@ test.describe("Select component", () => {
     const menu = page.locator(".select-demo .select__menu");
     const firstOption = page.locator(".select-demo .select__option").first();
     await expect(menu).toHaveCSS("padding-left", "0px");
+    // Prose lists use the browser's markers, so the menu must turn them off.
+    await expect(menu).toHaveCSS("list-style-type", "none");
     const bulletContent = await firstOption.evaluate(
       (option) => getComputedStyle(option, "::before").content,
     );

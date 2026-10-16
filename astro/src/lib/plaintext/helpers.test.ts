@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { parse as parseYaml } from "yaml";
+import { FIXTURE_SDK_VERSIONS } from "../../../tests/fixtures/api/sdkVersions";
 import {
   buildMarkdocStr,
   buildPlaintextPage,
   heading,
   paragraphFromText,
+  parse,
   tableMd,
 } from "./helpers";
 
@@ -133,5 +135,32 @@ describe("tableMd", () => {
       "Filter by account. If not provided, all accounts are returned.",
     );
     expect(bodyRows[1]).toContain("First paragraph. Second paragraph.");
+  });
+});
+
+describe("buildMarkdocStr", () => {
+  it("resolves SDK versions in code fences, so no .md route has to", () => {
+    // Every API route and the twin pipeline build their text through here.
+    const nodes = parse(
+      "```xml\n<version>{% $sdkVersions.datadog-api-client-java %}</version>\n```\n",
+    ).children;
+
+    const output = buildMarkdocStr(nodes);
+
+    expect(output).toContain(
+      `<version>${FIXTURE_SDK_VERSIONS["datadog-api-client-java"]}</version>`,
+    );
+    expect(output).not.toContain("$sdkVersions");
+  });
+
+  it("doesn't change the nodes it's given", () => {
+    const source =
+      "```xml\n<version>{% $sdkVersions.datadog-api-client-java %}</version>\n```\n";
+    const nodes = parse(source).children;
+    const before = JSON.stringify(nodes);
+
+    buildMarkdocStr(nodes);
+
+    expect(JSON.stringify(nodes)).toBe(before);
   });
 });

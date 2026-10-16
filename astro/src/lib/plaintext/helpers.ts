@@ -13,6 +13,8 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { stringify as stringifyYaml } from "yaml";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
 import { absoluteUrl } from "@lib/site/siteUrl";
+import { SDK_VERSIONS } from "@lib/site/sdkVersions";
+import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
 
 // @markdoc/markdoc ships a CJS build whose named exports don't round-trip
 // cleanly under Node's ESM loader during Astro's SSG step. Pulling from the
@@ -133,12 +135,27 @@ export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
  * Serialize a list of block-level nodes as a Markdoc string. Wraps them in a
  * document node (with optional raw YAML `frontmatter`), calls Markdoc's
  * `format()`, and ensures a trailing newline.
+ *
+ * Resolves `{% $sdkVersions.<client> %}` inside code fences first, as the HTML
+ * pages do. Every API `.md` route and the twin pipeline end here, so no route
+ * has to remember to do it. That step edits nodes in place, so it runs on a
+ * copy: callers keep the AST they passed in unchanged.
  */
 export function buildMarkdocStr(
   children: MarkdocNode[],
   frontmatter?: string,
 ): string {
-  return format(documentNode(children, frontmatter)).trim() + "\n";
+  const copiedChildren = copyNodes(children);
+  resolveFenceVariables(copiedChildren, { sdkVersions: SDK_VERSIONS });
+  return format(documentNode(copiedChildren, frontmatter)).trim() + "\n";
+}
+
+/**
+ * Deep copy of Markdoc AST nodes. `Ast.fromJSON` rebuilds real `Node` and
+ * `Variable` instances, so the copy still transforms like the original.
+ */
+function copyNodes(nodes: MarkdocNode[]): MarkdocNode[] {
+  return Ast.fromJSON(JSON.stringify(nodes)) as MarkdocNode[];
 }
 
 export interface PageFrontmatter {

@@ -2,51 +2,36 @@ export const prerender = true;
 /**
  * Plaintext rendering of the API Reference landing page.
  *
- * Composes the page from Markdoc nodes — a heading, an intro paragraph, and a
- * bullet list of category links — then emits markdown via `buildPlaintextPage`.
- * Mirrors the HTML landing page in `latest/index.astro`.
+ * Mirrors the HTML landing page (`latest/[...page].astro` for the root entry)
+ * and Hugo's `/api/latest.md`: the title, then the hand-written `index.mdoc`
+ * content (getting started, client libraries).
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { CollectionEntry } from "astro:content";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getEntry } from "astro:content";
-import type { ApiCategoryStub } from "@lib/api/schemas/views";
-import { getCategoryStubsView } from "@lib/api/viewsBuilder";
 import { API_CONTENT_DIR } from "@lib/api/overviewPages";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
-import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import {
-  buildPlaintextPage,
-  heading,
-  inline,
-  link,
-  list,
-  listItem,
-  paragraphFromText,
-} from "@lib/plaintext/helpers";
+import { buildPlaintextPage, heading, parse } from "@lib/plaintext/helpers";
 
 function apiLandingBody(
-  categories: ApiCategoryStub[],
+  rootEntry: CollectionEntry<"en">,
   lang: Locale,
   pathname: string,
 ): MarkdocNode[] {
-  const items = categories.map((cat) => {
-    const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
-    return listItem([inline([link(href, cat.name)])]);
-  });
-
-  const contents: MarkdocNode[] = [
-    heading(1, "API Reference"),
-    ...siteSupportNoteNodes(pathname, lang),
-    paragraphFromText(
-      "Welcome to the Datadog API Reference. Select a category to get started.",
-    ),
-    list("unordered", items),
+  return [
+    heading(1, rootEntry.data.title),
+    ...siteSupportNoteNodes(pathname, lang, rootEntry.data.site_support_id),
+    ...overviewContentNodes(rootEntry),
   ];
+}
 
-  return contents;
+function overviewContentNodes(rootEntry: CollectionEntry<"en">): MarkdocNode[] {
+  return parse(rootEntry.body ?? "").children;
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -66,9 +51,8 @@ export const GET: APIRoute = async ({ params, url, site }) => {
     return new Response(null, { status: 404 });
   }
 
-  const categories = await getCategoryStubsView(lang);
   const body = buildPlaintextPage(
-    apiLandingBody(categories, lang, url.pathname),
+    apiLandingBody(rootEntry, lang, url.pathname),
     {
       title: rootEntry.data.title,
       description: rootEntry.data.description ?? "",

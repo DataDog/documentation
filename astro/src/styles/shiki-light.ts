@@ -2,18 +2,22 @@
  * Custom Shiki theme matching the Hugo site's Chroma syntax highlighting.
  * Source of truth: assets/styles/vendor/_chroma-styles.scss
  *
+ * Colors are CSS variables from `src/styles/tokens/colors.css`, not raw values.
+ * Shiki copies them into each span's inline `style`, and the browser resolves
+ * them, so a dark theme only has to redefine the tokens (no rebuild).
+ *
  * Color mapping from Chroma token types → TextMate scopes:
- *   Keywords  (#a90d91) → keyword, storage, constant.language (true/false/null)
- *   Strings   (#c41a16) → string, string.regexp, constant.character.escape
- *   CharLit   (#2300ce) → constant.character (Chroma .sc)
- *   Numbers   (#1c01ce) → constant.numeric
- *   Comments  (#177500) → comment
- *   Classes   (#3f6e75) → entity.name.type
- *   Attrs     (#836c28) → entity.other.attribute-name, support.type.property-name
- *   Builtins  (#a90d91) → support.function, support.type (non-property)
- *   Self/this (#5b269a) → variable.language
- *   Preproc   (#633820) → meta.preprocessor
- *   Default   (#000000) → everything else
+ *   Keywords  (--color-syntax-keyword)      → keyword, storage, constant.language (true/false/null)
+ *   Strings   (--color-syntax-string)       → string, string.regexp, constant.character.escape
+ *   CharLit   (--color-syntax-char)         → constant.character (Chroma .sc)
+ *   Numbers   (--color-syntax-number)       → constant.numeric
+ *   Comments  (--color-syntax-comment)      → comment
+ *   Classes   (--color-syntax-class)        → entity.name.type
+ *   Attrs     (--color-syntax-attribute)    → entity.other.attribute-name, support.type.property-name
+ *   Builtins  (--color-syntax-keyword)      → support.function, support.type (non-property)
+ *   Self/this (--color-syntax-self)         → variable.language
+ *   Preproc   (--color-syntax-preprocessor) → meta.preprocessor
+ *   Default   (--color-panel-text)          → everything else
  */
 import type { ThemeRegistrationRaw } from "shiki";
 
@@ -21,8 +25,8 @@ const theme: ThemeRegistrationRaw = {
   name: "datadog-chroma",
   type: "light",
   colors: {
-    "editor.background": "#ffffff",
-    "editor.foreground": "#000000",
+    "editor.background": "var(--color-panel-bg)",
+    "editor.foreground": "var(--color-panel-text)",
   },
   settings: [
     // — Default: most identifiers, names, operators are black
@@ -36,7 +40,7 @@ const theme: ThemeRegistrationRaw = {
         "entity.name.tag",
         "meta.object-literal.key",
       ],
-      settings: { foreground: "#000000" },
+      settings: { foreground: "var(--color-panel-text)" },
     },
 
     // — Keywords & storage (Chroma .k / .kd / .kn / .kr)
@@ -48,7 +52,7 @@ const theme: ThemeRegistrationRaw = {
         "storage.type",
         "storage.modifier",
       ],
-      settings: { foreground: "#a90d91" },
+      settings: { foreground: "var(--color-syntax-keyword)" },
     },
 
     // — Built-in functions & types (Chroma .nb)
@@ -60,13 +64,13 @@ const theme: ThemeRegistrationRaw = {
         "support.class",
         "support.constant",
       ],
-      settings: { foreground: "#a90d91" },
+      settings: { foreground: "var(--color-syntax-keyword)" },
     },
 
     // — self / this (Chroma .bp — NameBuiltinPseudo)
     {
       scope: ["variable.language"],
-      settings: { foreground: "#5b269a" },
+      settings: { foreground: "var(--color-syntax-self)" },
     },
 
     // — Strings, regex, string escapes (Chroma .s / .s1 / .s2 / .sr / .se)
@@ -77,31 +81,31 @@ const theme: ThemeRegistrationRaw = {
         "punctuation.definition.string",
         "constant.character.escape",
       ],
-      settings: { foreground: "#c41a16" },
+      settings: { foreground: "var(--color-syntax-string)" },
     },
 
     // — Numbers (Chroma .m / .mi / .mf)
     {
       scope: ["constant.numeric"],
-      settings: { foreground: "#1c01ce" },
+      settings: { foreground: "var(--color-syntax-number)" },
     },
 
     // — Language constants: true / false / null / nil (Chroma .kc — KeywordConstant)
     {
       scope: ["constant.language"],
-      settings: { foreground: "#a90d91" },
+      settings: { foreground: "var(--color-syntax-keyword)" },
     },
 
     // — Character literals (Chroma .sc)
     {
       scope: ["constant.character"],
-      settings: { foreground: "#2300ce" },
+      settings: { foreground: "var(--color-syntax-char)" },
     },
 
     // — Comments (Chroma .c / .c1 / .cm)
     {
       scope: ["comment", "punctuation.definition.comment"],
-      settings: { foreground: "#177500" },
+      settings: { foreground: "var(--color-syntax-comment)" },
     },
 
     // — Preprocessor comments (Chroma .cp / .cpf)
@@ -112,13 +116,13 @@ const theme: ThemeRegistrationRaw = {
         "keyword.control.import",
         "punctuation.definition.preprocessor",
       ],
-      settings: { foreground: "#633820" },
+      settings: { foreground: "var(--color-syntax-preprocessor)" },
     },
 
     // — Class / type names (Chroma .nc)
     {
       scope: ["entity.name.type", "entity.name.class"],
-      settings: { foreground: "#3f6e75" },
+      settings: { foreground: "var(--color-syntax-class)" },
     },
 
     // — Attributes & CSS property names (Chroma .na)
@@ -126,17 +130,41 @@ const theme: ThemeRegistrationRaw = {
     // otherwise cascade to the purple support.type rule above.
     {
       scope: ["entity.other.attribute-name", "support.type.property-name"],
-      settings: { foreground: "#836c28" },
+      settings: { foreground: "var(--color-syntax-attribute)" },
+    },
+
+    // — Java import/package paths and the `*` wildcard (Chroma .nn / .o).
+    // Their scopes start with `storage.modifier` and `variable.language`, so
+    // without this they would inherit the keyword purple and the self/this
+    // color above. The more specific scope wins in TextMate matching.
+    {
+      scope: [
+        "storage.modifier.import",
+        "storage.modifier.package",
+        "variable.language.wildcard",
+      ],
+      settings: { foreground: "var(--color-panel-text)" },
+    },
+
+    // — XML text between tags. Hugo shows it gray (#555555, inherited from
+    // `pre code`, because Chroma doesn't wrap it in a token span). Astro uses
+    // the string color instead, on purpose: the gray was hard to read.
+    // `text.xml` is the grammar's root scope; tags, attributes, and strings
+    // have deeper scopes with their own rules above, so only unscoped text
+    // gets this color.
+    {
+      scope: ["text.xml"],
+      settings: { foreground: "var(--color-syntax-string)" },
     },
 
     // — Diff markup
     {
       scope: ["markup.deleted"],
-      settings: { foreground: "#c41a16" },
+      settings: { foreground: "var(--color-syntax-deleted)" },
     },
     {
       scope: ["markup.inserted"],
-      settings: { foreground: "#177500" },
+      settings: { foreground: "var(--color-syntax-inserted)" },
     },
   ],
 };

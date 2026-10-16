@@ -23,6 +23,10 @@ import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 import { chunkUrlPlugin } from "./src/lib/vite/chunkUrlPlugin.ts";
+import {
+  readStampIfAny,
+  sdkVersionsFromStamp,
+} from "./scripts/lib/apiCodeExamples/stamp.ts";
 
 const websitesModules = resolveWebsitesModulesPath(import.meta.url);
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
@@ -36,6 +40,17 @@ const apiExamples = fileURLToPath(
 // Staged API spec bundle (full_spec.yaml, CodeExamples.json, translate_*.json),
 // staged by `yarn fetch:spec`. Inside astroSite, so `server.fs.allow` covers it.
 const apiSpec = fileURLToPath(new URL("./api-spec", import.meta.url));
+
+// SDK release versions for `{% $sdkVersions.<client> %}` in content, read from
+// the stamp `yarn fetch:examples` writes (it runs first, through `yarn deps`).
+// Read here and inlined as a define, not read in `markdoc.config.mjs`: Astro
+// bundles that file into the server build, where the stamp doesn't exist.
+const sdkVersions = sdkVersionsFromStamp(await readStampIfAny(apiExamples));
+if (Object.keys(sdkVersions).length === 0) {
+  console.warn(
+    "[sdk-versions] No api-code-examples/ stamp, so {% $sdkVersions.<client> %} renders empty. Run `yarn fetch:examples`.",
+  );
+}
 
 const hugoDevPort = 1313;
 
@@ -206,6 +221,7 @@ export default defineConfig({
     define: {
       __HUGO_DOCS_ORIGIN__: JSON.stringify(deriveHugoDocsUrl()),
       __CI_ENV__: JSON.stringify(process.env.CI_ENVIRONMENT_NAME ?? ""),
+      __SDK_VERSIONS__: JSON.stringify(sdkVersions),
       DOCS_PATH_PREFIX: JSON.stringify(pathPrefix()),
       // Telemetry's build-time constants are *not* defines — see the
       // `PUBLIC_` assignments above for why.
