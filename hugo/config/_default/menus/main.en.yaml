@@ -2536,11 +2536,16 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
-    - name: Feature Flags
-      url: change_tracking/feature_flags/
+    - name: Change Types
+      url: change_tracking/change_types/
       parent: change_tracking
-      identifier: change_tracking_feature_flags
+      identifier: change_tracking_change_types
       weight: 1
+    - name: Feature Flags
+      url: change_tracking/change_types/feature_flags/
+      parent: change_tracking_change_types
+      identifier: change_tracking_feature_flags
+      weight: 101
     - name: Event Management
       url: events/
       pre: events

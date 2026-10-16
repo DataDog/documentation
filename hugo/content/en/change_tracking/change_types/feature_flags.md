@@ -1,6 +1,8 @@
 ---
 title: Track Feature Flag Changes
 description: Learn how to track, correlate, and remediate feature flag changes in Datadog to identify and resolve issues caused by flag updates.
+aliases:
+  - /change_tracking/feature_flags/
 further_reading:
   - link: "/change_tracking/"
     tag: "Documentation"
