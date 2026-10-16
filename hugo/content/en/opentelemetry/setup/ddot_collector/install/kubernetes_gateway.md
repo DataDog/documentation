@@ -1362,6 +1362,10 @@ To view your gateway pods:
 
   * **Startup race condition**: When deploying the DaemonSet and gateway in the same release, DaemonSet pods might start before the gateway service is ready, causing initial connection error logs. The OTLP exporter automatically retries, so these logs can be safely ignored. Alternatively, deploy the gateway first and wait for it to become ready before deploying the DaemonSet.
 
+## Next steps
+
+{{% opentelemetry/setup-next-steps %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
