@@ -2033,6 +2033,13 @@ Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
 
+### `test_parallelization_onboarding`
+*Toolset: **onboarding***\
+*Permissions Required: None*\
+Guides you through onboarding Test Parallelization in Datadog.
+
+- Help me set up Test Parallelization for my CI pipeline.
+
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\
@@ -2675,6 +2682,15 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Assign these critical findings to the security team lead.
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
+
+### `override_datadog_security_findings_severity`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Sets or clears the manual severity override on up to 100 security findings. Action `set` requires a severity (`critical`, `high`, `medium`, `low`, or `info`); action `clear` removes the manual override. Supports an optional description. Findings whose severity is set by an automation rule are skipped and listed as warnings in the response.
+
+- Set the severity of these findings to low, they only affect a test environment.
+- Raise this misconfiguration to critical because the resource holds customer data.
+- Clear the manual severity override on these findings.
 
 ### `list_datadog_security_findings_automation_rules`
 *Toolset: **security***\

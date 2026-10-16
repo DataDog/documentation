@@ -2,70 +2,69 @@
 further_reading:
 - link: /error_tracking/regression_detection/
   tag: Documentación
-  text: Detección de regresión
-title: Estados de incidentes en Error Tracking
+  text: Detección de regresiones
+title: Estados de las incidencias de Error Tracking
 ---
+## Descripción general {#overview}
 
-## Información general
+Todas las incidencias en Error Tracking tienen un estado para ayudarle a clasificar y priorizar incidencias o descartar ruido. Existen cinco estados:
 
-Todas las incidencias en Error Tracking tienen un estado que te ayuda a clasificar y priorizar las incidencias o a descartar el ruido. Hay cinco estados:
+- {{< ui >}}FOR REVIEW{{< /ui >}}: Incidencias nuevas o regresivas que requieren atención.
+- {{< ui >}}REVIEWED{{< /ui >}}: Incidencias clasificadas que deben corregirse, ahora o más tarde.
+- {{< ui >}}RESOLVED{{< /ui >}}: Incidencias que han sido corregidas y ya no ocurren.
+- {{< ui >}}IGNORED{{< /ui >}}: Incidencias que no requieren más investigación ni acción.
+- {{< ui >}}EXCLUDED{{< /ui >}}: Incidencias que no requieren más investigación, dejan de recopilar nuevos errores y ya no cuentan para el uso o la facturación
 
-- **FOR REVIEW** (PARA REVISIÓN): incidencias nuevas o regresivas que requieren atención.
-- **REVIEWED** (REVISADO): incidencias de triaje que deben solucionarse, ahora o más adelante.
-- **RESOLVED** (RESUELTO): incidencias que se han solucionado y ya no se producen.
-- **IGNORED** (IGNORADOS): incidencias que no requieren más investigación o acción.
-- **EXCLUDED** (EXCLUIDOS): incidencias que no requieren más investigación, deja de recopilar nuevos errores y ya no cuentan para el uso o la facturación.
+Todas las incidencias comienzan con un estado FOR REVIEW. Error Tracking actualiza automáticamente el estado en los casos descritos a continuación, o puede [actualizar el estado manualmente](#updating-an-error-status). También puede [visualizar el historial](#issue-history) de los cambios de estado de un error determinado.
 
-Todas los problemas comienzan con un estado FOR REVIEW (PARA REVISAR). El seguimiento de errores actualiza automáticamente el estado en los casos descritos a continuación, o puedes [actualizar manualmente el estado](#updating-an-error-status). También puedes [ver el historial](#issue-history) de los cambios de estado de un error determinado.
+El siguiente diagrama muestra cómo se actualizan los estados de Error Tracking de forma automática y manual:
+{{< img src="error_tracking/issue-states-diagram.png" alt="Estados de las incidencias de Error Tracking" style="width:75%;" >}}
 
-En el siguiente diagrama se muestra cómo se actualizan automática y manualmente los estados del Seguimiento de errores:
-{{< img src="error_tracking/issue-states-diagram.png" alt="Estados de problemas del Seguimiento de errores" style="width:75%;" >}}
+## Revisión automática {#automatic-review}
 
-## Revisión automática
+Error Tracking marca automáticamente las incidencias como {{< ui >}}REVIEWED{{< /ui >}} si se ha realizado una de las siguientes acciones:
 
-El seguimiento de errores marca automáticamente los problemas como **REVIEWED** (REVISADAS) si se ha realizado una de las siguientes acciones:
+- La incidencia ha sido asignada
+- Se ha creado un elemento de trabajo a partir de la incidencia
 
-- Se ha asignado el problema
-- Se ha creado un caso a partir del problema
+{{< img src="error_tracking/auto-review-actions-2.png" alt="Acciones de revisión automática de Error Tracking" style="width:75%;" >}}
 
-{{< img src="error_tracking/auto-review-actions-2.png" alt="Acciones de revisión automáticas de Error Tracking" style="width:75%;" >}}
+## Resolución automática {#automatic-resolution}
 
-## Resolución automática
+Error Tracking marca automáticamente como {{< ui >}}RESOLVED{{< /ui >}} las incidencias que parecen estar inactivas o resueltas debido a la falta de ocurrencias de errores recientes:
 
-El seguimiento de errores marca automáticamente como **RESOLVED** (RESUELTOS) los problemas que parecen inactivos o resueltos debido a la falta de incidencias de error recientes:
+- Si el problema se reportó por última vez en una versión de hace más de 14 días y se ha lanzado una versión más reciente que no reporta el mismo error, Error Tracking resuelve automáticamente el problema. Configure sus servicios con etiquetas de versión (consulte las instrucciones para [APM][1], [RUM][2] y [Logs][3]) para asegurarse de que la resolución automática tenga en cuenta las versiones de sus servicios.
+- Si no se han configurado las etiquetas `version`, Error Tracking resuelve automáticamente un problema si no se han reportado errores nuevos para ese problema en los últimos 14 días.
 
-- Si el problema se notificó por última vez en una versión con más de 14 días de antigüedad y se ha publicado una versión más reciente que no notifica el mismo error, Error Tracking lo resolverá automáticamente. Configura tus servicios con etiquetas de versión (consulta las instrucciones para [APM][1], [RUM][2] y [Logs][3]) para garantizar que la resolución automática tenga en cuenta las versiones de tus servicios.
-- Si no se configuran etiquetas de `version`, el Seguimiento de errores resuelve automáticamente un problema si no se han notificado nuevos errores para ese problemas en los últimos 14 días.
+**Nota**: La lógica de resolución automática no toma en cuenta `version`.
 
-**Nota**: La lógica de autoresolución no tiene en cuenta `version`.
+## Reapertura automática mediante detección de regresiones {#automatic-re-opening-through-regression-detection}
 
-## Reapertura automática mediante detección de regresiones
+Consulte [Detección de regresiones][4].
 
-Consulta [Detección de regresión][4].
+## Actualización del estado del problema {#updating-the-issue-status}
 
-## Actualización del estado del problema
+El estado del problema aparece dondequiera que se pueda ver el problema, como en la lista de problemas o en el panel de detalles de un problema determinado. Para actualizar manualmente el estado de un problema, haga clic en el estado y elija uno diferente en el menú desplegable.
 
-El estado de un problema aparece en cualquier lugar donde se pueda ver, como en la lista de problemas o en el panel de detalles de un problema determinada. Para actualizar manualmente el estado de un problema, haz clic en el estado y selecciona otro en el menú desplegable.
+{{< img src="error_tracking/updating-issue-status.png" alt="La línea de tiempo de actividad en el problema de Error Tracking" style="width:100%;" >}}
 
-{{< img src="error_tracking/updating-issue-status.png" alt="La escala de tiempo de la actividad en el problema de rastreo de errores" style="width:100%;" >}}
+## Excluir un problema {#excluding-an-issue}
 
-## Excluir una incidencia
+El estado `EXCLUDED` le permite evitar que se rastreen errores específicos, asegurando que no se recopilen ni se contabilicen para la facturación. Esto le ayuda a eliminar errores que no requieren acción o problemas causados por fallas esperadas sin necesidad de reglas de exclusión complejas.
 
-El estado `EXCLUDED` te permite evitar que se realice un seguimiento de errores específicos, garantizando que no se recopilen ni se tengan en cuenta para la facturación. Esto te ayuda a eliminar errores no procesables o problemas causados por fallos esperados sin necesidad de complejas reglas de exclusión.
+Para excluir un problema, haga clic en su estado y elija {{< ui >}}EXCLUDED{{< /ui >}} en el menú desplegable. Los problemas excluidos siguen siendo accesibles en la pestaña {{< ui >}}IGNORED{{< /ui >}}. Puede revisar su historial en cualquier momento.
 
-Para excluir una incidencia, haz clic en su estado y selecciona **EXCLUDED** (EXCLUIDO) en el menú desplegable. Las incidencias excluidas siguen siendo accesibles en la pestaña **EXCLUDED** (EXCLUIDO). Puedes consultar su historial en cualquier momento.
+{{< img src="error_tracking/issue-states-excluded.png" alt="Excluido en el menú desplegable de estado del problema" style="width:100%;" >}}
 
-{{< img src="error_tracking/issue-states-excluded.png" alt="Excluido en el menú desplegable de estado de la incidencia" style="width:100%;" >}}
-
-Para reanudar la recopilación de errores de una incidencia excluida, selecciona cualquier estado que no sea **EXCLUDED** (EXCLUIDO).
+Para reanudar la recopilación de errores de un problema excluido, seleccione cualquier estado que no sea {{< ui >}}EXCLUDED{{< /ui >}}.
 
 
-## Historial de problemas
-Consulta el historial de la actividad de tu incidencia con la **Cronología de la actividad**. En el panel de detalles de cualquier incidencia de Error Tracking, consulta la cronología de la actividad haciendo clic en la pestaña **Activity** (Actividad).
+## Historial del problema {#issue-history}
+Visualice un historial de la actividad de su problema con el {{< ui >}}Activity Timeline{{< /ui >}}. En el panel de detalles de cualquier problema de Error Tracking, visualice la Cronología de actividad haciendo clic en la pestaña {{< ui >}}Activity{{< /ui >}}.
 
-{{< img src="error_tracking/issue-status-history-3.png" alt="La Cronología de la actividad en la incidencia de Error Tracking" style="width:80%;" >}}
+{{< img src="error_tracking/issue-status-history-3.png" alt="La línea de tiempo de actividad en el problema de Error Tracking" style="width:80%;" >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
