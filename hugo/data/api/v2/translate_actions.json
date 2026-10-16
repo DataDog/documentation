@@ -6459,6 +6459,62 @@
     "description": "Get a list of vulnerable assets.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.",
     "summary": "List vulnerable assets"
   },
+  "ListSecurityMonitoringBatchMigrations": {
+    "description": "List the batch migrations of your organization. A batch migration groups detection\nrules from another SIEM that the Datadog Detection Agent translates into Cloud SIEM\ndetection rules. To retrieve a single batch migration, filter by its ID with\n`filter[query]=id:<batch_id>`. Poll this endpoint to follow the progress of a batch\nmigration through its `status` and `resourceStatusCounts`.",
+    "summary": "List batch migrations"
+  },
+  "CreateSecurityMonitoringBatchMigration": {
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "summary": "Create a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to create a batch migration."
+  },
+  "DeleteSecurityMonitoringBatchMigration": {
+    "description": "Delete a batch migration and its resources. Detection rules that were already\npublished are not deleted. Returns `409 Conflict` while any resource is `in_progress`\nor `publishing`: cancel the batch migration, or wait for publishing to finish, and\nthen try again.",
+    "summary": "Delete a batch migration"
+  },
+  "UpdateSecurityMonitoringBatchMigration": {
+    "description": "Update the name, description, or tags of a batch migration, in any status. At least\none of these attributes must be provided. Omitted attributes are left unchanged, and\n`tags` replaces the full list of tags.",
+    "summary": "Update a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to update a batch migration."
+  },
+  "CancelSecurityMonitoringBatchMigration": {
+    "description": "Cancel an `in_progress` batch migration. Resources that are `pending` or `in_progress`\nbecome `canceled`. Resources that are already `completed` or `failed` keep their status\nand output, so completed resources can still be published. Canceling a `canceled` batch\nmigration succeeds, so the request can be safely retried. Returns `409 Conflict` if the\nbatch migration is `draft` or `completed`.",
+    "summary": "Cancel a batch migration"
+  },
+  "PublishSecurityMonitoringBatchMigration": {
+    "description": "Create a Cloud SIEM detection rule from the `output` of each selected `completed`\nresource of a batch migration. Completed resources can be published while the rest of\nthe batch migration is still being translated. When `resourceIds` is omitted or empty,\nevery `completed` resource is published. Published rules are created disabled.\n\nEvery requested resource must be publishable: `completed`, or left in `publishing` for\nmore than one minute after an uncertain result. Otherwise, the request returns\n`409 Conflict` and nothing is published. Already published resources are not publishable.\n\nThe response reports the outcome of each resource, and some resources can be published\nwhile others fail. A `failed` result that contains a `ruleId` means the rule was created:\ndo not retry that resource. Publishing a rule with a `block_ip` or `block_user` action\nrequires the `appsec_protect_write` permission.",
+    "summary": "Publish a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to publish the resources of a batch migration."
+  },
+  "DeleteSecurityMonitoringBatchMigrationResources": {
+    "description": "Delete resources from a batch migration. The request is all-or-nothing: it returns\n`404 Not Found` if any resource does not exist, and `409 Conflict` if any resource is\n`in_progress` or `publishing`. In both cases nothing is deleted. Duplicate resource IDs\nare ignored. Detection rules already published from the deleted resources are not deleted.",
+    "summary": "Delete resources from a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to delete resources from a batch migration."
+  },
+  "ListSecurityMonitoringBatchMigrationResources": {
+    "description": "List the resources of a batch migration, including the input of each source rule and,\nonce translated, the proposed Cloud SIEM detection rule in `output`.",
+    "summary": "List batch migration resources"
+  },
+  "CreateSecurityMonitoringBatchMigrationResources": {
+    "description": "Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the\nbatch migration is not `draft`, and `400 Bad Request` if the batch migration would\ncontain more than 1000 resources.",
+    "summary": "Add resources to a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to add resources to a batch migration."
+  },
+  "UpdateSecurityMonitoringBatchMigrationResource": {
+    "description": "Update a resource of a batch migration. At least one of `name`, `description`,\n`inputType`, or `input` must be provided. `name` and `description` can be updated at\nany time. `inputType` and `input` can only be updated while the resource is `pending`;\notherwise, the request returns `409 Conflict`. The translated `output` cannot be edited.",
+    "summary": "Update a batch migration resource",
+    "request_description": "",
+    "request_schema_description": "Request to update a batch migration resource."
+  },
+  "StartSecurityMonitoringBatchMigration": {
+    "description": "Start translating the `pending` resources of a `draft` batch migration into Cloud SIEM\ndetection rules. The batch migration moves to `in_progress`, and its resources are\ntranslated asynchronously. Once no resource is `pending` or `in_progress`, the batch\nmigration moves to `completed`. Starting an `in_progress` batch migration again does not\nqueue duplicate work, so the request can be safely retried, including after a timeout or\na `5xx` error. Returns `409 Conflict` if the batch migration is `completed` or `canceled`.\n\nAn organization can translate up to 2000 resources in total across all of its batch\nmigrations. Resources that were already processed count toward this limit even after\nthey are deleted, and `pending` resources of `in_progress` batch migrations reserve\ncapacity. Returns `409 Conflict` if starting the batch migration would exceed this limit.\nTo request a higher limit for your organization, contact\n[Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Start a batch migration"
+  },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
