@@ -18,7 +18,7 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
-The catalog of integration pipelines are updated through Worker releases. See [Update the integration pipelines catalog](#update-the-integration-pipelines-catalog) for more information.
+The catalog of integration pipelines is updated through Worker releases. See [Update the integration pipelines catalog](#update-the-integration-pipelines-catalog) for more information.
 
 For every log that matches the processor's filter:
 
@@ -59,7 +59,7 @@ To set up an Integration Pipelines processor:
       1. Select the checkboxes for the pipelines you want to disable.
       1. Click {{< ui >}}Disable Selected{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
-1. If you enabled or disabled integration pipelines, you must redeploy the pipeline for the changes to take effect.
+1. If you enabled or disabled integration pipelines, redeploy your Observability Pipelines pipeline for the changes to take effect.
 
 ### Preprocessing options
 
@@ -81,7 +81,7 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 ## CPU sizing
 
-The Integration Pipelines processor is CPU intensive. Use **10,000 events per second per vCPU** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
+The Integration Pipelines processor is CPU intensive. Use **10,000 events per second per virtual CPU (vCPU)** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
 
 CPU usage depends on:
 
