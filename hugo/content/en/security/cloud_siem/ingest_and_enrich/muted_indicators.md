@@ -44,7 +44,7 @@ Muting applies to logs that Cloud SIEM processes after the mute takes effect. Lo
 
 Muting your organization's indicators does not change ratings from:
 
-- threat intelligence you bring yourself through [reference tables][3]
+- Threat intelligence you bring yourself through [reference tables][3]
 - Threat Intelligence Platform (TIP) integrations: MISP, OpenCTI, and Anomali ThreatStream
 
 ## Prerequisites
