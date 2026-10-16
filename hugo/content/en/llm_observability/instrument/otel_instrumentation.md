@@ -27,7 +27,7 @@ For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt T
 
 ### Experiments
 
-You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+You can use OpenTelemetry spans inside [Agent Observability Experiments][55]. By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
 ### Multimodal support
 
@@ -1207,3 +1207,4 @@ with tracer.start_as_current_span("my-span") as span:
 [17]: https://sdk.vercel.ai/
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
+[55]: /llm_observability/guide/experiments#using-opentelemetry-spans-inside-experiments
