@@ -112,7 +112,10 @@ The Worker normalizes every log that matches the processor's filter, even if the
     }
   }
   ```
-  In this example, the Worker:<br>- Parses the JSON in `message`<br>- Expands the dotted key `http.status_code` into a nested object<br>- Moves the non-reserved `http` attribute under `attributes`.
+    In this example, the Worker:
+    - Parses the JSON in `message`.
+    - Expands the dotted key `http.status_code` into a nested object.
+    - Moves the non-reserved `http` attribute under `attributes`.
 - Maps log attributes to reserved attributes such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`. See [Preprocessing options](#preprocessing-options) for more information.
 - Resolves the log's source before selecting an integration pipeline.
 
