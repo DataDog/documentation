@@ -29,7 +29,13 @@ Prompt Tracking enables you to:
 
 ## Set up Prompt Tracking
 
-When Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()` as described in the Prompt Management documentation. The following setup options apply to prompts defined outside the registry.
+{{< agent-only >}}
+Include Prompt Tracking in the default Agent Observability instrumentation. For each selected LLM call, identify where the application builds the prompt. Keep the template separate from its variable values and preserve the existing local prompt construction.
+
+Do not replace local prompts with Datadog Prompt Management retrieval unless the user requested or approved that integration. Preserve existing managed-prompt integrations. If automatic tracking captures the prompt metadata, do not add duplicate manual annotations. For copied or transformed managed prompts, follow [Track prompt usage](/llm_observability/instrument/prompt_management.md#track-prompt-usage).
+{{< /agent-only >}}
+
+When Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()` as described in [Track prompt usage][9]. The following setup options apply to prompts defined outside the registry.
 
 ### With structured prompt metadata
 To use Prompt Tracking, you can submit structured prompt metadata (ID, optional version, template, variables).
@@ -127,3 +133,4 @@ You can use the Agent Observability Trace Explorer to locate requests by prompt 
 [6]: /llm_observability/instrument/sdk/?tab=nodejs#prompt-tracking
 [7]: /llm_observability/instrument/otel_instrumentation
 [8]: /llm_observability/configure/prompt_management
+[9]: /llm_observability/instrument/prompt_management/#track-prompt-usage
