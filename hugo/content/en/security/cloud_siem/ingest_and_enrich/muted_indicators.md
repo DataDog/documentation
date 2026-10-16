@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Threat intelligence feeds can flag an indicator that is harmless for your organization, such as your corporate VPN egress IP address, a sanctioned cryptomining pool, or the domain of an internal tool. Muting an indicator tells Cloud SIEM to rate it as benign for your organization, so your team stops triaging the same false positives.
+Threat intelligence feeds can flag an indicator that is harmless for your organization, such as your corporate VPN egress IP address, a sanctioned cryptomining pool, or the domain of an internal tool. Muting an indicator tells Cloud SIEM to rate it as `benign` for your organization, so your team can stop triaging the same false positives.
 
 Muting does not remove threat intelligence. Muted indicators keep their enrichment and stay visible in the [IOC Explorer][1], so you can still search for them and see why they were flagged.
 
