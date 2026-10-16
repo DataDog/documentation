@@ -5783,6 +5783,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_multimodal
       weight: 312
+    - name: Prompt Management
+      url: llm_observability/instrument/prompt_management
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_instrumentation_prompt_management
+      weight: 313
     - name: Investigate
       url: llm_observability/investigate/
       parent: llm_obs
