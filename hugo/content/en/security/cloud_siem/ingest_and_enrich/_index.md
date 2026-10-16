@@ -40,7 +40,7 @@ Datadog provides built-in [Threat Intelligence][5] for Cloud SIEM logs and also 
 
 ### Muted indicators
 
-If a threat intelligence indicator is benign for your organization, you can mute it so Cloud SIEM rates it as benign in log enrichment and the IOC Explorer. Datadog also maintains a read-only list of known-benign indicators that are muted for every organization. See [Muted Indicators][7] for more information.
+If a threat intelligence indicator is benign for your organization, you can mute it so Cloud SIEM rates it as `benign` in log enrichment and the IOC Explorer. Datadog also maintains a read-only list of known-benign indicators that are muted for every organization. See [Muted Indicators][7] for more information.
 
 ### Open Cybersecurity Framework (OCSF)
 
