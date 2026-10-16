@@ -93,7 +93,7 @@ Install the Datadog plugin from the [official Anthropic Plugin Marketplace](http
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
-1. After any making any configuration change, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
+1. After making any configuration change, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -182,7 +182,7 @@ Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
-1. After any making any configuration change, restart `copilot` and reauthenticate the Datadog MCP Server.
+1. After making any configuration change, restart `copilot` and reauthenticate the Datadog MCP Server.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -196,7 +196,7 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
    Alternatively, add to `~/.copilot/mcp-config.json`:
     <pre><code>{
-      "servers": {
+      "mcpServers": {
         "datadog": {
           "type": "http",
           "url": "{{< region-param key="mcp_server_endpoint" >}}"
@@ -546,7 +546,7 @@ The Datadog MCP server connection is managed by Copilot (or whichever agent you 
 
 [1]: /ide_plugins/vscode/
 [2]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
-[3]: /mcp_server/setup/?tab=copilot-cli
+[3]: /mcp_server/setup/?tab=copilotcli
 {{% /tab %}}
 
 {{% tab "Warp" %}}
@@ -626,7 +626,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.
+Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool search.
 
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
@@ -706,6 +706,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+- `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
 ## Supported clients
@@ -774,7 +775,7 @@ Most clients complete the OAuth 2.0 flow automatically during setup. Select your
 
 #### Custom subdomains
 
-If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`), add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can be authorized.
+If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`, add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can be authorized.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -968,5 +969,6 @@ After you change any of these settings, refresh the tool list in your AI client.
 [76]: /mcp_server/code_execution/ 
 [77]: /tracing/live_debugger/
 [78]: /account_management/governance_console/
-[79]: ]https://app.datadoghq.com/personal-settings/apps
+[79]: https://app.datadoghq.com/personal-settings/apps
 [80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
+[81]: /observability_pipelines/

@@ -42,7 +42,9 @@ Agent Observability [Experiments][1] supports the entire lifecycle of building L
 - Run and manage experiments
 - Compare results to evaluate impact
 
-To get started, see the [Set up and use Agent Observability Experiments][3] guide.
+## Set up experiments
+
+Follow the [Set Up and Use Agent Observability Experiments][3] guide to install the SDK, configure credentials, create datasets, define tasks and evaluators, run experiments, and review results.
 
 ## Cookbooks
 

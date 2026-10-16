@@ -1,3 +1,3 @@
 ---
-title: Create Jira issue for case
+title: Create Jira issue for work item
 ---

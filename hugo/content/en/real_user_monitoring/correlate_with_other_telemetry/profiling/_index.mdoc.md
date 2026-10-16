@@ -32,8 +32,8 @@ Datadog RUM supports profiling for browser, iOS, and Android applications. Use p
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png" 
-alt="Browser profiling tab in the Sessions Explorer." 
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png"
+alt="Browser profiling tab in the Sessions Explorer."
 style="width:100%;" /%}
 
 Browser profiling provides visibility into how your application behaves in your users' browsers, helping you understand root causes behind unresponsive applications at page load or during the page life cycle. Use profiling data alongside RUM insights to identify which code executes during a [Long Animation Frame (LoAF)][1] and how JavaScript execution and rendering tasks impact user-perceived performance.
@@ -72,7 +72,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 2. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
     ```javascript
         app.get("/", (request, response) => {
-            … 
+            …
             response.set("Document-Policy", "js-profiling");
             …
         });
@@ -85,15 +85,15 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
       This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
-    
+
     To enable CORS:
 
     - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
     - Make sure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
-    
+
        ```javascript
        app.get("/", (request, response) => {
-           … 
+           …
            response.header("Access-Control-Allow-Origin", "*");
            response.header("Access-Control-Allow-Headers",
            …
@@ -204,6 +204,7 @@ Only devices running Android 15 (API level 35) or higher generate profiling data
 
 - Application launch profiling requires Android SDK version 3.6.0+.
 - Continuous profiling requires Android SDK version 3.12.0+.
+- ANR profiling with system traces requires Android SDK version 3.15.0+ and devices running Android 16 (API level 36) or higher.
 
 ## Preview quota system
 
@@ -222,7 +223,7 @@ Initialize the RUM SDK and configure the `setApplicationLaunchSampleRate` and `s
 - `setApplicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 15 means profiling runs on 15 out of 100 launches).
 - `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][19] are profiled (for example, 15 means that 15 out of 100 sessions will have their time to full display, ANRs, and long tasks profiled).
 
-Both sample rates are applied on top of the [RUM session sampling rate][17]. 
+Both sample rates are applied on top of the [RUM session sampling rate][17].
 
 {% alert level="danger" %}
 If no value is specified, the default for both `setApplicationLaunchSampleRate` and `setContinuousSampleRate` is 15%.
@@ -260,7 +261,31 @@ If no value is specified, the default for both `setApplicationLaunchSampleRate` 
 The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate` or `continuousSampleRate`. This variation results from [rate limitations][20] within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
 {% /alert %}
 
-The [ProfilingManager API][7] also supports disabling rate limiting during debug builds. 
+The [ProfilingManager API][7] also supports disabling rate limiting during debug builds.
+
+### Step 3 - (Optional) Disable ANR profiling with system traces
+
+On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22]. When the system detects an ANR in your application, it captures a [system trace][23] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
+
+ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17] and count toward the quota described in the [Preview quota system](#preview-quota-system) section.
+
+System traces help diagnose ANRs, which are usually caused by thread contention, blocking I/O, or interprocess communication (IPC) delays rather than CPU-heavy computation. A system trace shows thread states and system-level events over time, which surfaces these causes.
+
+To disable ANR profiling with system traces, add `enableAnrTrigger(false)` to the `ProfilingConfiguration.Builder()` call from Step 2:
+
+```kotlin
+  Profiling.enable(
+      ProfilingConfiguration.Builder()
+          .setApplicationLaunchSampleRate(15f)
+          .setContinuousSampleRate(15f)
+          .enableAnrTrigger(false)
+          .build()
+  )
+```
+
+{% alert level="info" %}
+The system applies its own [rate limits][20] to trigger-based profiling, so not every ANR has a system trace attached.
+{% /alert %}
 
 ## Explore profiling data
 
@@ -280,7 +305,9 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 Android profiling data is attached to [application not responding (ANR)][16] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
 
-{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error event." style="width:90%;" /%}
+{% img src="real_user_monitoring/android/android-profiling-anr-1.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
+
+On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see [Step 3 - Configure ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces).
 
 ### During long tasks
 
@@ -302,7 +329,7 @@ Android profiling data is attached to operations events in a RUM session. You ca
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 
-iOS profiling helps you identify and optimize slow methods during important moments in user sessions. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks. 
+iOS profiling helps you identify and optimize slow methods during important moments in user sessions. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks.
 
 ## Prerequisites
 
@@ -415,5 +442,7 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [17]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#sample-session-rates-2
 [18]: /real_user_monitoring/application_monitoring/ios/data_collected#error-attributes
 [19]: /real_user_monitoring/operations_monitoring/?tab=browser
-[20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works 
+[20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works
 [21]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm
+[22]: https://developer.android.com/topic/performance/tracing/profiling-manager/trigger-based-capture
+[23]: https://developer.android.com/topic/performance/tracing
