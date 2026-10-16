@@ -29,6 +29,10 @@ Before you begin, make sure you have:
 - The [Datadog Azure integration][2] installed, with an App Registration that has access to that subscription.
 - Permission to create role assignments on the subscription or on individual data factories.
 
+{{% site-region region="us3" %}}
+**Note**: If you use Datadog's **US3** site and set up the [Azure native integration][5] through a Datadog resource in the Azure portal, [create an App Registration][6] to enable Jobs Monitoring for Azure Data Factory.
+{{% /site-region %}}
+
 ## Add required Azure permissions
 
 The Datadog Azure integration assigns the **Monitoring Reader** role. That role covers reading data factory metadata, but not reading run history. Azure registers the run-history endpoints as *actions* rather than *reads*, and the wildcard in Monitoring Reader matches reads only.
@@ -191,3 +195,5 @@ Not every activity carries the information Datadog needs to resolve the datasets
 [2]: /integrations/azure/
 [3]: https://app.datadoghq.com/data-obs/settings/integrations
 [4]: /data_observability/lineage/
+[5]: /integrations/guide/azure-native-integration/
+[6]: /integrations/azure/?tab=azurecliv20#setup
