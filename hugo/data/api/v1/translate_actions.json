@@ -995,7 +995,7 @@
     "description": "Create a Synthetic global variable.",
     "summary": "Create a global variable",
     "request_description": "Details of the global variable to create.",
-    "request_schema_description": "Details of the global variable to create."
+    "request_schema_description": "Details of the global variable to create or update."
   },
   "DeleteGlobalVariable": {
     "description": "Delete a Synthetic global variable.",
@@ -1009,7 +1009,7 @@
     "description": "Edit a Synthetic global variable.",
     "summary": "Edit a global variable",
     "request_description": "Details of the global variable to update.",
-    "request_schema_description": "Details of the global variable to create."
+    "request_schema_description": "Details of the global variable to create or update."
   },
   "ListHostTags": {
     "description": "Returns a mapping of tags to hosts. For each tag, the response returns a list of host names that contain this tag. There is a restriction of 10k total host names from the org that can be attached to tags and returned.",
