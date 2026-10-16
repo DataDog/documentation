@@ -28,7 +28,7 @@ title: 概要ページ
 {{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" header="開発者概要ページのプレビューに参加してください。" >}}
 {{< /callout >}}
 
-## 概要{#overview}
+## 概要 {#overview}
 
 Datadog の Internal Developer Platform (IDP) には、各ステークホルダーにとって最も関連性の高い情報を表示する**概要ページ**が付属しています。
 - 開発者は、自分のアクションアイテム、問題、チームのサービス情報を一元的に確認できます。
@@ -101,7 +101,7 @@ Datadog の [Monitors][6]、[Incident Management][3]、[SLOs][7] からのライ
 ビューをカスタマイズする必要がある場合は、右上の [**Clone as dashboard**] (ダッシュボードとして複製) をクリックします。これにより、[**My Workspace**] ページの内容が事前入力された状態でダッシュボードが作成されます。
 
 複製したダッシュボードで行えるカスタマイズの例をいくつか紹介します。
-- Datadog の [Action Catalog][11] を使用して [埋め込みアプリ][2] を作成し、サードパーティの追加データを表示します (例: PagerDuty のオンコール情報を表示します)。
+- Datadog の [Action Catalog][11] を使用して [埋め込み App Builder アプリ][2] を作成し、サードパーティの追加データ（例：PagerDuty のオンコール情報など）を表示してください。
 - [ウィジェット][12] のサイズ変更、並べ替え、追加/削除を行って、表示全体のレイアウトとデザインを更新します。
 - [Note][13] ウィジェットを使用して、組織に関連する情報を含むお知らせと更新情報のセクションを追加します。
 
