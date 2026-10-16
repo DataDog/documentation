@@ -14,7 +14,10 @@ This guide describes how to set up and use Agent Observability experiments with 
 
 ## Prerequisites
 
-To run experiments, you need a Datadog API key and application key.
+To run experiments, you need a Datadog [API key][12] and a [Datadog application key][13].
+
+[12]: /account_management/api-app-keys/#add-an-api-key-or-client-token
+[13]: /account_management/api-app-keys/#add-application-keys
 
 ## Set up Agent Observability
 
