@@ -9590,6 +9590,11 @@ menu:
       parent: rum_browser
       identifier: rum_browser_build_plugins
       weight: 103
+    - name: Privacy Plugin
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/privacy/
+      parent: rum_browser_build_plugins
+      identifier: rum_browser_privacy_plugin
+      weight: 10301
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/browser/data_collected/
       parent: rum_browser
