@@ -69,7 +69,7 @@
     {
       "operationId": "GetMonitor",
       "summary": "Get a monitor's details",
-      "slug": "get-a-monitor-s-details",
+      "slug": "get-a-monitors-details",
       "menuOrder": 4,
       "versions": [
         "v1"

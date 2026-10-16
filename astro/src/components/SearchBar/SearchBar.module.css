@@ -156,8 +156,8 @@
   column-gap: var(--space-sm);
 }
 
-/* Bump the result text from the dense side-nav size up to Hugo's mobile size
-   (~14px / --font-size-sm), which reads far better at a phone viewport. */
+/* Bump the result text from the dense side-nav size up to --font-size-sm,
+   which reads far better at a phone viewport. */
 .search-bar__popup--mobile .search-hit__subcategory,
 .search-bar__popup--mobile .search-hit__title,
 .search-bar__popup--mobile .search-hit__snippet {

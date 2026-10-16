@@ -2,12 +2,31 @@ export const prerender = true;
 /** Plaintext twin of `[...page].astro`. The API root has never had one. */
 
 import type { APIRoute, GetStaticPaths } from "astro";
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { getCollection, getEntry } from "astro:content";
-import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import { LOCALES, parseLangParam, type Locale } from "@lib/i18n/locale";
 import { buildPlaintextPage, parse } from "@lib/plaintext/helpers";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
+import { getScopeGroupsView } from "@lib/api/scopesBuilder";
+import { apiScopesTableNodes } from "@components/ApiScopesTable/plaintext/ApiScopesTable";
+
+/**
+ * Swap each `{% api-scopes /%}` for its twin. Other tags pass through as
+ * authored; this route has never run the full twin transform.
+ */
+function withScopesTables(
+  nodes: MarkdocNode[],
+  lang: Locale,
+  site: URL | undefined,
+): MarkdocNode[] {
+  return nodes.flatMap((node) =>
+    node.type === "tag" && node.tag === "api-scopes"
+      ? apiScopesTableNodes(getScopeGroupsView(), { lang, site })
+      : [node],
+  );
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection("en", (entry) => isApiSubPage(entry.id));
@@ -44,7 +63,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
   const body = buildPlaintextPage(
     [
       ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
-      ...parse(entry.body ?? "").children,
+      ...withScopesTables(parse(entry.body ?? "").children, lang, site),
     ],
     {
       title: entry.data.title,

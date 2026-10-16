@@ -5,7 +5,7 @@
     monospace;
   --font-size-root: 18px;
   --font-size-xs: 0.778rem;
-  --font-size-sm: 0.875rem;
+  --font-size-sm: 0.889rem; /* Hugo's 16px */
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
   --font-size-h1: clamp(1.4rem, calc(1.1rem + 1.682vw), 2.222rem);
