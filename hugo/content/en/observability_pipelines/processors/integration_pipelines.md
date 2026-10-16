@@ -32,7 +32,7 @@ For every log that matches the processor's filter:
 <div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 **Notes**:
-- Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archive destinations.
+- Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archives destinations.
 - Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log field, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those fields.
     - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
@@ -79,7 +79,6 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 | `trace_id`         | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id`                                   |
 | `span_id`          | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id`                                       |
 
-
 ## CPU sizing
 
 The Integration Pipelines processor is CPU intensive. Use **10,000 events per second per vCPU** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
@@ -96,8 +95,24 @@ Enabling more integration pipelines does not necessarily increase per-event proc
 
 The Worker normalizes every log that matches the processor's filter, even if the log doesn't match an integration pipeline. The normalization process:
 
-- Parses JSON objects in `message` and extracts their fields. For example, a message containing `{"message":"request complete","http.status_code":200}` becomes a message of `request complete` with an extracted HTTP status code.
-- Expands dotted keys into nested objects. For example, `"http.status_code": 200` becomes `"http": {"status_code": 200}`, stored under `attributes` in the output.
+- Parses JSON objects in `message` and extracts their fields. For example, this log:
+  ```json
+  {
+    "message": "{\"message\":\"request complete\",\"http.status_code\":200}"
+  }
+  ```
+  is normalized to:
+  ```json
+  {
+    "message": "request complete",
+    "attributes": {
+      "http": {
+        "status_code": 200
+      }
+    }
+  }
+  ```
+  In this example, the Worker:<br>- Parses the JSON in `message`<br>- Expands the dotted key `http.status_code` into a nested object<br>- Moves the non-reserved `http` attribute under `attributes`.
 - Maps log attributes to reserved attributes such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`. See [Preprocessing options](#preprocessing-options) for more information.
 - Resolves the log's source, including from `ddsource`, before selecting an integration pipeline.
 
