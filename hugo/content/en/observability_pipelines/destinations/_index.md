@@ -31,6 +31,7 @@ These are the available destinations:
 - [Amazon OpenSearch][1]
 - [Amazon S3][22]
 - [Amazon Security Lake][3]
+- [Azure Data Explorer][25]
 - [Azure Storage][4]
 - [ClickHouse][24]
 - [CrowdStrike Next-Gen SIEM][6]
@@ -77,6 +78,7 @@ These are the available destinations:
 [22]: /observability_pipelines/destinations/amazon_s3/
 [23]: /observability_pipelines/destinations/databricks/
 [24]: /observability_pipelines/destinations/clickhouse/
+[25]: /observability_pipelines/destinations/azure_data_explorer/
 
 {{% /tab %}}
 
@@ -106,6 +108,7 @@ The following table lists the destinations and fields that support template synt
 | Destination       | Fields that support template syntax                        | Behavior when the field cannot be resolved                                                                                 |
 |-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
 | Amazon Opensearch | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
+| Azure Data Explorer | Table<br><br>Mapping Reference | The Worker drops the logs.<br><br>The Worker sends the logs without a mapping reference. Azure Data Explorer ingests the logs as is. |
 | Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Elasticsearch     | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |

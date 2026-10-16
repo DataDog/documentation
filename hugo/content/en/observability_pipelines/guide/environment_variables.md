@@ -85,6 +85,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Amazon Security Lake
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
+### Azure Data Explorer
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/azure_data_explorer %}}
+
 ### CrowdStrike NG-SIEM
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
