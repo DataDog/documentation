@@ -38,7 +38,7 @@ Muting applies to logs that Cloud SIEM processes after the mute takes effect. Lo
 ### When a mute takes effect
 
 - **IOC Explorer**: Shows the new mute state immediately.
-- **Log enrichment**: May take up to an hour to catch up. During that time, new logs, and detections based on them, may still use the original rating.
+- **Log enrichment**: May take up to an hour to apply. During that time, new logs and detections based on them may still use the original rating.
 
 Unmuting follows the same timing.
 
