@@ -30,7 +30,7 @@ To set up the Aggregate processor:
 
 If **Use event timestamp** is enabled, enter a grace period in the **Allowed lateness** field. This is the number of seconds a time window accepts late metrics after its end time. Enter `0` to drop all late metrics. See [Late metrics](#late-metrics) for more information.
 
-**Note**: A longer allowed lateness increases memory usage.
+**Note**: A longer grace period increases memory usage.
 
 ## How the processor works
 
