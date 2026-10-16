@@ -15,9 +15,9 @@ const SLUG_OVERRIDES: Record<string, string> = {
 };
 
 /**
- * Matches Hugo's `anchorize`: punctuation is deleted, so "monitor's" becomes
- * "monitors" and "CI/CD" becomes "cicd", and only spaces and hyphens separate
- * words.
+ * Matches Hugo's `anchorize` (and `getTagSlug`): punctuation is deleted, so
+ * "monitor's" becomes "monitors" and "CI/CD" becomes "cicd", and only spaces
+ * and hyphens separate words.
  */
 export function toSlug(name: string): string {
   return name

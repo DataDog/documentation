@@ -10,8 +10,11 @@ describe("toSlug", () => {
     expect(toSlug("  On-Call / Paging  ")).toBe("on-call-paging");
   });
 
-  it("deletes punctuation inside a word, as Hugo does", () => {
+  it("deletes apostrophes instead of hyphenating them, as Hugo does", () => {
     expect(toSlug("Get a monitor's details")).toBe("get-a-monitors-details");
+  });
+
+  it("drops slashes instead of hyphenating them", () => {
     expect(toSlug("Trigger tests from CI/CD pipelines")).toBe(
       "trigger-tests-from-cicd-pipelines",
     );
