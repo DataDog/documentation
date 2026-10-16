@@ -28,9 +28,9 @@ To set up the Aggregate processor:
 
 **Use event timestamp** is enabled by default and groups metrics into time windows based on each metric's timestamp. Toggle it off to group metrics by when the Worker processes them. See [Grouping by timestamp](#grouping-by-timestamp) for more information.
 
-If **Use event timestamp** is enabled, enter a grace period in the **Allowed lateness** field. This is the number of seconds a time window accepts late metrics after its end time. Enter `0` to drop all late metrics. See [Late metrics](#late-metrics) for more information.
+If **Use event timestamp** is enabled, in the **Allowed lateness** field, enter the number of seconds a time window accepts late metrics after its end time. Enter `0` to drop all late metrics. See [Late metrics](#late-metrics) for more information.
 
-**Note**: A longer grace period increases memory usage.
+**Note**: A longer allowed lateness increases memory usage.
 
 ## How the processor works
 
