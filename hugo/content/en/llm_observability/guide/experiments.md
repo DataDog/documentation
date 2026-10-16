@@ -10,14 +10,11 @@ further_reading:
   text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
-This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. See [runnable Node.js experiments examples][7].
+This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. See [runnable Node.js experiment examples][7].
 
 ## Prerequisites
 
 To run experiments, you need a Datadog [API key][12] and a [Datadog application key][13].
-
-[12]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[13]: /account_management/api-app-keys/#add-application-keys
 
 ## Set up Agent Observability
 
@@ -211,7 +208,7 @@ main().catch((error) => {
 A dataset is a collection of inputs, expected outputs, and metadata that represent scenarios you want to test your agent on. Each dataset belongs to a project.
 
 - **Input** (required): Represents all the information that the agent can access in a task.
-- **Expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assess.
+- **Expected output** (optional): Represents the ideal answer that the agent should output. Expected output is also called _ground truth_. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assess.
 - **Metadata** (optional): Contains information to categorize the record for further analysis, such as topics, tags, descriptions, and notes.
 
 Create a dataset using the example for your SDK:
@@ -266,7 +263,7 @@ const dataset = experiments.createDataset('capitals-of-the-world', {
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Datasets][1] for more information about datasets, including how to manually create datasets, retrieve and manage datasets, and how Datadog retains dataset versions.
+See [Datasets][1] for information about creating, retrieving, and managing datasets and how Datadog retains dataset versions.
 
 ## Create an experiment
 
@@ -276,7 +273,7 @@ An experiment has the following components:
 
 - **Task**: Defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 - **Evaluator**: A function, executed on each record, that measures how well the model or agent performs. Evaluators allow you to compare the output to either the expected output or the original input.
-- **Summary evaluators**: Optional functions executed against all the data of the experiment (input, output, expected output, and evaluator results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset.
+- **Summary evaluators**: Optional functions executed against all the data of the experiment (input, output, expected output, and evaluator results). Summary evaluators allow you to compute more advanced metrics such as precision, recall, and accuracy across your dataset.
 
 To create an experiment:
 
@@ -629,23 +626,6 @@ def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
 
 For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][1].
 
-[1]: /llm_observability/investigate/evaluations/evaluation_developer_guide
-
-```python
-from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
-
-class AverageScoreEvaluator(BaseSummaryEvaluator):
-    def __init__(self, target_evaluator: str):
-        super().__init__(name="average_score")
-        self.target_evaluator = target_evaluator
-
-    def evaluate(self, context: SummaryEvaluatorContext):
-        scores = context.evaluation_results.get(self.target_evaluator, [])
-        if not scores:
-            return None
-        return sum(scores) / len(scores)
-```
-{{% /tab %}}
 
 {{% tab "Node.js" %}}
 #### Function-based summary evaluators
@@ -799,12 +779,14 @@ console.log(experiment.url())
 
 **Note:** LLM Experiments traces are retained for 90 days.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /llm_observability/improve/datasets
 [4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [6]: /llm_observability/instrument/otel_instrumentation
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs
 [9]: /llm_observability/instrument/agent_observability_and_apm/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[12]: /account_management/api-app-keys/#add-an-api-key-or-client-token
+[13]: /account_management/api-app-keys/#add-application-keys
