@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
 import preactRenderer from "@astrojs/preact/server.js";
 import ChangelogPage from "../../src/pages/[...lang]/api/changelog/[...path].astro";
 

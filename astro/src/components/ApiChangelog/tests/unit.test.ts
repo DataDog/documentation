@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { Window } from "happy-dom";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
 import preactRenderer from "@astrojs/preact/server.js";
 import ApiChangelog from "../ApiChangelog.astro";
 import ApiChangelogEmptyState from "../ApiChangelogEmptyState.astro";
