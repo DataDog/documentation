@@ -38,7 +38,7 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 ## Restrict a project in the UI
 
-<!-- TBD (DOCS-15824): Steps updated for the Access Control page at rollout. Confirm the labels against the live UI (the previous version used preview naming: "New Policy > Sensitive Data Partition"), and confirm with the Agent Observability team. -->
+<!-- TBD (DOCS-15824): Confirm these steps with the Agent Observability team. -->
 
 1. Navigate to [Organization Settings > Access Control][3].
 2. In the **Restricted Datasets** section, click **New Policy**. On the **New Policy** page, select the **Restricted Datasets** tab.

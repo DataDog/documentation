@@ -50,14 +50,14 @@ Choose Data Scope
 : The boundary definition that describes which data to restrict to a specific set of users. Select a product next to {{< ui >}}In Product{{< /ui >}}, then select a tag key and one or more values next to {{< ui >}}Tagged{{< /ui >}}. To add another product to the same dataset, click {{< ui >}}New Product{{< /ui >}}. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals (Cloud SIEM signals only).
 
 Designate Users with Access
-: Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
+: Select one or more teams, roles, or agents and automated processes that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
 
 Name Policy
 : A descriptive name to help users understand what data is contained in the dataset.
 
 **Note:** A maximum of 50 principals (roles or teams) can be tied to a given Restricted Dataset.
 
-<!-- TBD (DOCS-15824): The field placeholder says "Add roles, teams, or agents and automated processes." Confirm whether agents and automated processes (service accounts?) can be granted access, and whether they count toward the 50-principal limit. -->
+<!-- TBD (DOCS-15824): Confirm that managed agents support is available before merging. Confirm whether agents and automated processes count toward the 50-principal limit (note above). -->
 
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
@@ -110,8 +110,6 @@ Restricted Datasets cannot be shared between the {{< ui >}}Unrestricted{{< /ui >
 
 **Before you set a telemetry type to {{< ui >}}Restricted{{< /ui >}}**, identify any data for that telemetry type that is _not_ in a Restricted Dataset. After you save the change, that data is hidden from users without [unrestricted access](#unrestricted-user-groups). Review the {{< ui >}}Restricted Datasets{{< /ui >}} section on the [Access Control][7] page to confirm coverage.
 
-<!-- TBD (DOCS-15824): Confirm whether a telemetry type still needs at least one Restricted Dataset before it can be hidden by default, and whether each dataset still belongs to one setting (paragraphs above). -->
-
 To change the setting for a telemetry type, you must have the [`user_access_manage` permission][5].
 
 1. Navigate to [Access Control][7].
@@ -122,8 +120,6 @@ To change the setting for a telemetry type, you must have the [`user_access_mana
 Some users, such as high-privilege admins or central observability teams with access to data across the entire organization, need full visibility into a telemetry type regardless of any Restricted Datasets. Rather than adding these users to every Restricted Dataset individually, you can grant their team or role _unrestricted access_ for a specific telemetry type.
 
 A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or the setting for data not in a Restricted Dataset. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM.
-
-<!-- TBD (DOCS-15824): The Unrestricted Access section description says "roles, teams and users," but the form says "Add roles or teams." Confirm whether individual users can be granted unrestricted access (affects the paragraph above). -->
 
 To grant unrestricted access:
 
