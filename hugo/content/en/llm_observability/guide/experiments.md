@@ -92,9 +92,12 @@ DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> DD_LLMOBS_PROJECT_NAME=<
 NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
-For more information, see the [Node.js tracer command-line setup][8].
+For more information, see the [Node.js tracer command-line setup][1].
+
+[1]: /llm_observability/instrument/sdk?tab=nodejs#command-line-setup
+
 {{% /tab %}}
-    {{< /tabs >}}
+{{< /tabs >}}
 
 ### APM trace correlation
 
@@ -351,29 +354,11 @@ Trace parts of your experiment task, for example, workflows or tool calls, using
 {{% tab "Python" %}}
 For custom tracing, use the [Python tracing decorators][2]. For automatic instrumentation, see the [supported Python frameworks][3].
 
-[2]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
-[3]: /llm_observability/instrument/auto_instrumentation?tab=python
-
-```python
-# Example: trace a workflow or tool call with the same decorators used in production.
-from ddtrace.llmobs.decorators import workflow
-
-@workflow(name="retrieve_context")
-def retrieve_context(question):
-    return call_retriever(question)
-```
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-For custom tracing, use `llmobs.trace()`. For automatic instrumentation, see the [supported Node.js frameworks][10].
+For custom tracing, use `llmobs.trace()`. For automatic instrumentation, see the [supported Node.js frameworks][1].
 
-```javascript
-// Example: trace a workflow or tool call with the same LLMObs APIs used in production.
-const context = await tracer.llmobs.trace(
-  { kind: 'task', name: 'retrieve_context' },
-  async () => callRetriever(question),
-)
-```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -598,7 +583,7 @@ const experiment = experiments.experiment({
 
 #### Managed remote evaluators
 
-Use `experiments.RemoteEvaluator` to run a custom [LLM-as-a-judge evaluation][11] configured in Datadog. Set `evalName` to the configured evaluation name. The default input mapping includes the task input and output, expected output, record metadata, and experiment span and trace IDs. You can provide `transformFn` to customize the request sent to Datadog.
+Use `experiments.RemoteEvaluator` to run a custom [LLM-as-a-judge evaluation][1] configured in Datadog. Set `evalName` to the configured evaluation name. The default input mapping includes the task input and output, expected output, record metadata, and experiment span and trace IDs. You can provide `transformFn` to customize the request sent to Datadog.
 
 ```javascript
 const remoteEvaluator = new experiments.RemoteEvaluator({
@@ -612,6 +597,8 @@ const experiment = experiments.experiment({
 ```
 
 You can mix managed remote evaluators with local function-based or class-based evaluators in the same experiment.
+
+[1]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -632,7 +619,7 @@ def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
 
 #### Class-based summary evaluators
 
-For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][4].
+For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][1].
 
 ```python
 from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
@@ -647,7 +634,6 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
         if not scores:
             return None
         return sum(scores) / len(scores)
-```
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
