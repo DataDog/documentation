@@ -34,7 +34,7 @@ For every log that matches the processor's filter:
 **Notes**:
 
 - Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archives destinations.
-- Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log field, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those fields.
+- Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log attribute, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those attributes.
     - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
 - The processor supports only out-of-the-box integration pipelines included with the Worker. It does not run custom pipelines or modified versions of integration pipelines created in Log Management.
@@ -89,7 +89,7 @@ CPU usage depends on:
 - The amount of processing required by the integration pipeline. For example, Grok, User-Agent, and URL parsers typically require more processing than remappers.
 - The processing overhead of normalizing every log that matches the processor's filter, including logs without a matching integration pipeline.
 
-Enabling more integration pipelines does not necessarily increase per-event processing overhead because the Worker routes each log based on its `source` or `ddsource` field. It does not send logs through all enabled integration pipelines. Use the processor's filter to target specific logs when appropriate, and allow CPU headroom for traffic spikes.
+Enabling more integration pipelines does not necessarily increase per-event processing overhead because the Worker routes each log based on its `source` or `ddsource` attribute. It does not send logs through all enabled integration pipelines. Use the processor's filter to target specific logs when appropriate, and allow CPU headroom for traffic spikes.
 
 ## Common normalization
 
@@ -114,7 +114,7 @@ The Worker normalizes every log that matches the processor's filter, even if the
   ```
   In this example, the Worker:<br>- Parses the JSON in `message`<br>- Expands the dotted key `http.status_code` into a nested object<br>- Moves the non-reserved `http` attribute under `attributes`.
 - Maps log attributes to reserved attributes such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`. See [Preprocessing options](#preprocessing-options) for more information.
-- Resolves the log's source, including from `ddsource`, before selecting an integration pipeline.
+- Resolves the log's source before selecting an integration pipeline.
 
 ## Upgrade the integration pipelines catalog
 
