@@ -49,9 +49,10 @@ Muting your organization's indicators does not change ratings from:
 
 ## Prerequisites
 
-- Your organization must subscribe to Cloud SIEM.
-- To view muted indicators, you need the `security_monitoring_signals_read` [permission][4].
-- To mute or unmute indicators, you need the `security_monitoring_signals_write` [permission][4].
+- Your organization must subscribe to Cloud SIEM
+- You need the following [permissions][4]:
+  - To view muted indicators: `security_monitoring_signals_read`
+  - To mute or unmute indicators: `security_monitoring_signals_write`
 
 ## Mute indicators
 
