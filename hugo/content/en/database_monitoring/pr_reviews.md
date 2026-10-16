@@ -110,7 +110,6 @@ For new and changed Postgres queries, Datadog runs the query through Database Mo
 | ---------- | ------------------ |
 | **Missing index** | The query has no index that supports its filter or sort. The comment includes the `CREATE INDEX` statement to add and how many other queries the index would help. |
 | **`SELECT *`** | The query selects every column. When possible, the comment includes a rewrite that names the columns. |
-| **`OFFSET` without `ORDER BY`** | The query paginates without a deterministic order, so results can be skipped or duplicated across pages. |
 
 ### Impact analysis
 
