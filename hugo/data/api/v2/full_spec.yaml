@@ -185755,9 +185755,10 @@ paths:
         - AWS Integration
       x-menu-order: 10
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - aws_configuration_edit
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -185864,9 +185865,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 9
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - aws_configuration_edit
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -185931,9 +185933,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 15
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - aws_configuration_edit
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
