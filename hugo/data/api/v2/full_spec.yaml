@@ -93776,6 +93776,8 @@ components:
           $ref: "#/components/schemas/OutcomesResponseIncluded"
         links:
           $ref: "#/components/schemas/OutcomesResponseLinks"
+        meta:
+          $ref: "#/components/schemas/PaginatedResponseMeta"
       type: object
     OutcomesResponseData:
       description: List of rule outcomes.
@@ -93823,12 +93825,24 @@ components:
           type: string
       type: object
     OutcomesResponseLinks:
-      description: Links attributes.
+      description: Pagination links for rule outcomes.
       properties:
+        first:
+          description: Link for the first set of results.
+          type: string
+        last:
+          description: Link for the last set of results.
+          type: string
         next:
           description: |-
             Link for the next set of results.
           example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100"
+          type: string
+        previous:
+          description: Link for the previous set of results.
+          type: string
+        self:
+          description: Link for the current set of results.
           type: string
       type: object
     OutputSchema:
@@ -94978,10 +94992,10 @@ components:
         - LOW
         - HIGH
     PaginatedResponseMeta:
-      description: Metadata for scores response.
+      description: Pagination metadata.
       properties:
         count:
-          description: Number of entities in this response.
+          description: Number of results in this response.
           example: 10
           format: int64
           type: integer
@@ -94996,7 +95010,7 @@ components:
           format: int64
           type: integer
         total:
-          description: Total number of entities available.
+          description: Total number of results matching the filters.
           example: 150
           format: int64
           type: integer
