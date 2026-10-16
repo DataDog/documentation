@@ -87,7 +87,7 @@ For each indicator, the list shows the indicator type, scope, and reason. Datado
 
 ### Find muted indicators in the IOC Explorer
 
-In the IOC Explorer, the {{< ui >}}Custom mute{{< /ui >}} column shows {{< ui >}}Muted{{< /ui >}} for indicators your organization muted. To show only those indicators, filter with the {{< ui >}}Muted{{< /ui >}} facet.
+In the [IOC Explorer][5], the {{< ui >}}Custom mute{{< /ui >}} column shows {{< ui >}}Muted{{< /ui >}} for indicators your organization muted. To show only those indicators, filter with the {{< ui >}}Muted{{< /ui >}} facet.
 
 The column and facet reflect your organization's mutes only. Indicators muted only by Datadog don't appear as muted in this column or facet. To see every mute, use the [Muted Indicators page](#review-muted-indicators).
 
