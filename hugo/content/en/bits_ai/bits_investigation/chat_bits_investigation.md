@@ -11,7 +11,7 @@ Within an investigation, you can chat with Bits to gather additional information
 ## Permissions and billing
 
 Chat on an investigation page runs in [Bits Chat][2]:
-- Users need the **Bits Chat Access** permission. Bits Investigations Read is enough to view the investigation; Bits Investigations Write is not required to chat.
+- Users need the **Bits Chat Access** permission. Bits Investigations Read allows users to view the investigation and use Bits Chat; Bits Investigations Write is not required to chat.
 - Messages are billed as Bits Chat usage, not Bits Investigation usage.
 
 ## Data sources
