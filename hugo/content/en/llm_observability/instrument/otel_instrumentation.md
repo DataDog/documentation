@@ -193,30 +193,30 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 
 {{% collapse-content title="Using Claude Platform" level="h3" expanded=false id="using-claude-managed-agents" %}}
 
-The [Claude Platform][18] emits spans that follow the GenAI semantic conventions natively through [OpenTelemetry export][19], so no additional instrumentation library is required. This covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
+The [Claude Platform][18] natively emits spans that follow the GenAI semantic conventions through [OpenTelemetry export][19], so you don't need an instrumentation library. Native export covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
 
-- **API spans** for the requests Anthropic runs: Messages API requests, and for Managed Agents each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these to a destination that you configure in the Claude Console.
+- **API spans** cover requests that Anthropic runs: Messages API requests and, for Managed Agents, each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these spans to a destination that you configure in the Claude Console.
 - **SDK spans** for each Claude SDK call, and for each tool that the SDK tool runner executes inside your application. Your application exports these with its own OpenTelemetry exporter.
 
-If your application uses a Claude SDK, both sets of spans land in the same trace, because the SDK propagates W3C trace context on its API requests.
+If your application uses a Claude SDK, both sets of spans appear in the same trace, because the SDK propagates W3C trace context on its API requests.
 
 #### Export API spans
 
 Anthropic delivers API spans from its own infrastructure, so you add a Datadog destination in the Claude Console rather than setting `OTEL_EXPORTER_OTLP_*` environment variables.
 
-1. In the Claude Console, go to **Organization settings** > **OpenTelemetry** and click **Add destination**. Complete the fields:
+1. In the Claude Console, go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}OpenTelemetry{{< /ui >}} and click {{< ui >}}Add destination{{< /ui >}}. Complete the fields:
    | Field | Value |
    |-------|-------|
-   | Provider | **Datadog** |
+   | Provider | {{< ui >}}Datadog{{< /ui >}} |
    | Site | Your Datadog site, for example `US1` |
    | API key | Your [Datadog API key][2]. Application keys do not work. |
-   | Content mode | **Full content** so spans carry message and tool content, or **Metadata only** for identifiers, timing, status, and token counts |
+   | Content mode | {{< ui >}}Full content{{< /ui >}} so spans carry message and tool content, or {{< ui >}}Metadata only{{< /ui >}} for identifiers, timing, status, and token counts |
 
-   Selecting **Datadog** as the provider sets the OTLP endpoint for the site you choose, shown under **OTLP details**. There is no endpoint or header to enter by hand.
+   Selecting {{< ui >}}Datadog{{< /ui >}} as the provider sets the OTLP endpoint for the site you choose, shown under {{< ui >}}OTLP details{{< /ui >}}. You don't need to enter an endpoint or headers.
 
-   Choose **Full content** only if your Datadog organization may store model prompts and responses. To restrict who can read them once they arrive, see [Data Access Controls][8].
-2. Set **Workspaces** on the destination to choose which workspaces export to it: **All**, **Selected** for a specific list, or **All except** to exclude a few.
-3. Run a session, then check that the destination's **Delivery** column reads **Healthy**. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
+   Choose {{< ui >}}Full content{{< /ui >}} only if your Datadog organization is permitted to store model prompts and responses. To restrict who can read them after they arrive, see [Data Access Controls][8].
+2. Set {{< ui >}}Workspaces{{< /ui >}} on the destination to choose which workspaces export to it: {{< ui >}}All{{< /ui >}}, {{< ui >}}Selected{{< /ui >}} for a specific list, or {{< ui >}}All except{{< /ui >}} to exclude a few.
+3. Send a request or run a session, then check that the destination's {{< ui >}}Delivery{{< /ui >}} column reads {{< ui >}}Healthy{{< /ui >}}. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
    | Span | Agent Observability span kind |
    |------|-------------------------------|
    | `anthropic.sessions.events.send` | Workflow |
@@ -261,7 +261,7 @@ client = Anthropic(
 )
 ```
 
-Unlike the Console destination, this exporter is an ordinary OTLP client, so its endpoint does include `/v1/traces`. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, and turn SDK spans off entirely with `ANTHROPIC_OPEN_TELEMETRY=false`.
+The endpoint for this exporter includes the `/v1/traces` path. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, or turn off SDK spans with `ANTHROPIC_OPEN_TELEMETRY=false`.
 
 To group several calls into one conversation, set a conversation ID on the client. The SDK sends it as `gen_ai.conversation.id`, which Agent Observability indexes as the session:
 
@@ -281,7 +281,7 @@ Traces appear on the [Agent Observability Traces page][3]. Search by `ml_app` to
 
 #### Avoid double-counted tokens
 
-Claude SDK spans and Claude Platform API spans both carry token counts for the same model calls. If you export both, Agent Observability counts those tokens twice, which inflates token metrics and estimated cost.
+If you export both Claude SDK spans and Claude Platform API spans for the same workspace, Agent Observability counts tokens for the same model calls twice. The duplicate counts inflate token metrics and estimated cost. If the Claude SDK is your only source of spans, skip this step.
 
 To count each model call once, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
 
@@ -345,8 +345,6 @@ provider.add_span_processor(
     BatchSpanProcessor(StripClaudeTokenUsage(OTLPSpanExporter(endpoint=..., headers=...)))
 )
 ```
-
-Apply this only when a Console destination is also exporting API spans for the same workspace. If the Claude SDK is your only source of spans, leave the token counts in place, because nothing else reports them.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Using Strands Agents" level="h3" expanded=false id="using-strands-agents-1" %}}
