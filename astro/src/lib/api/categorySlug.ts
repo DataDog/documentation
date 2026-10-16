@@ -15,10 +15,15 @@ const SLUG_OVERRIDES: Record<string, string> = {
 };
 
 export function toSlug(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  return (
+    name
+      .toLowerCase()
+      // Slashes drop out rather than becoming a hyphen, so `CI/CD` slugs as
+      // `cicd` and not `ci-cd`. Matches Hugo's `getTagSlug`.
+      .replace(/\//g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+  );
 }
 
 /** The slug of the API category page for an OpenAPI tag name. */
