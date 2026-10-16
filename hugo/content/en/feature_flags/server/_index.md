@@ -43,12 +43,13 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
 | .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
+| Ruby `datadog` | 2.46.0 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
 Agentless delivery changes only the flag configuration source. Java and Node.js support direct exposure delivery. Java, Node.js, and Python can also use a compatible local telemetry relay.
 
-The listed versions provide the current capabilities described on each language page. .NET 3.54.0 supports agentless configuration but still requires a compatible local telemetry relay for experiment exposures. Other server SDKs use Agent Remote Configuration.
+The listed versions provide the current capabilities described on each language page. .NET 3.54.0 and Ruby 2.46.0 support agentless configuration but require a compatible local telemetry relay for experiment exposures. Ruby also sends aggregated EVP flag evaluation events through that relay. Other server SDKs use Agent Remote Configuration.
 
 ## Choose a language
 
@@ -93,11 +94,11 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-No Feature Flags enablement or source setting is required. See [Java Feature Flags][10], [Node.js Feature Flags][9], or [Python Feature Flags][11] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+No Feature Flags enablement or source setting is required. See the [language setup instructions](#choose-a-language) for dependency versions and initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
 ## Agent Remote Configuration
 
-For Java, Node.js, and Python, set the source explicitly to retain Agent-managed delivery:
+For the SDK versions listed above, set the source explicitly to retain Agent-managed delivery:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -107,7 +108,7 @@ Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Ag
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
 
-Existing Java, Node.js, Python, and .NET implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+Existing Java, Node.js, Python, .NET, and Ruby implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
 ### Remote Configuration polling interval
 
@@ -135,7 +136,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 # See "Set Up Server-Side Flag Evaluation Metrics" documentation
 {{< /code-block >}}
 
-<div class="alert alert-info">In the Java, Node.js, and Python versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
+<div class="alert alert-info">In the SDK versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
 For telemetry, metrics, and graphing options, see:
 
