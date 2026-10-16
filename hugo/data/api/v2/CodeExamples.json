@@ -1410,6 +1410,13 @@
       "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
+  "CreateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a derived metric returns \"Created\" response"
+    }
+  ],
   "CreateTagConfiguration": [
     {
       "group": "metrics",
@@ -1650,6 +1657,13 @@
       "group": "metrics",
       "suffix": "_1116544040",
       "description": "Timeseries cross product query with spans data source returns \"OK\" response"
+    }
+  ],
+  "UpdateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a derived metric returns \"OK\" response"
     }
   ],
   "UpdateTagConfiguration": [

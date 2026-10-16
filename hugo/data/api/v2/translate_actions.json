@@ -4361,6 +4361,26 @@
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
+  "CreateDerivedMetric": {
+    "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
+    "summary": "Create a derived metric",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a derived metric."
+  },
+  "DeleteDerivedMetric": {
+    "description": "Delete a derived metric by name. Idempotent: returns 204 regardless of whether the derived\nmetric existed. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Delete a derived metric"
+  },
+  "GetDerivedMetric": {
+    "description": "Get the definition of a derived metric by name.",
+    "summary": "Get a derived metric"
+  },
+  "UpdateDerivedMetric": {
+    "description": "Update the definition of an existing derived metric. The `id` in the request body\nmust match the `metric_name` path parameter. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a derived metric",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a derived metric."
+  },
   "CreateHistoricalMetricsConfiguration": {
     "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
     "summary": "Enable historical metrics ingestion",
