@@ -101,7 +101,6 @@ export default getViteConfig({
       "src/layouts/**/*.test.ts",
       "src/integrations/**/*.test.ts",
       "scripts/**/*.test.ts",
-      "qa/**/*.test.ts",
     ],
   },
 });

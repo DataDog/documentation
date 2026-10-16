@@ -32,9 +32,3 @@ tests/fixtures/
 # assertion it is supposed to satisfy. Regenerate with `yarn test -u`, never
 # with Prettier.
 **/__snapshots__/
-
-# Content QA tool: cached prod Hugo responses, generated reports, and frozen
-# page fixtures that must stay byte-identical to what was captured.
-qa/content/.cache/
-qa/content/out/
-qa/content/fixtures/

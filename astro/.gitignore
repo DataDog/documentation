@@ -24,7 +24,3 @@ api-spec.incoming/
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
-
-# Content QA tool (qa/content/): cached prod Hugo responses and generated reports.
-qa/content/.cache/
-qa/content/out/
