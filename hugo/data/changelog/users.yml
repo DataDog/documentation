@@ -5,3 +5,9 @@ entries:
     operations:
       - CreateUser
     title: Add team hierarchy members endpoint
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40776
+    operations:
+      - ListUsers
+    title: Add handle filter parameter to ListUsers
