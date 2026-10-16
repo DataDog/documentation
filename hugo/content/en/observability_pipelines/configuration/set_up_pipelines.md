@@ -52,7 +52,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
 1. Select and set up your [log sources][3].
 1. Select and set up [destinations][5] for your processed logs.
-1. To add per-source or shared processors ({{< tooltip glossary="preview" case="title" >}}) for mutiple sources:
+1. To add per-source or shared processors ({{< tooltip glossary="preview" case="title" >}}) for multiple sources:
     1. Click a source and select the {{< ui >}}Pre-processor{{< /ui >}} tab in the panel.
     1. Add [processors][4].
     - See [Per-source and shared processors][7] for more information.

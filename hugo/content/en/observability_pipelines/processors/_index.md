@@ -102,16 +102,16 @@ For example, the log pipeline in this image has three sources: Datadog Agent, Am
 
 {{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources and two branches that send logs to Datadog, Datadog Archives, and CrowdStrike NG-SIEM." style="width:100%;" >}}
 
-The Worker sends all logs in this pipeline to two different branches. If you want to do the following:
+The Worker sends all logs in this pipeline to two different branches. Suppose you want to:
 
 - Sample all logs from the Datadog Agent source
 - Deduplicate logs from all sources
 
-Instead of adding duplicate processors to each branch's processor group, add a per-source processor for the Datadog Agent and a shared processor to deduplicate logs from all sources.
+Instead of adding the same processors to each branch's processor group, add a per-source processor for the Datadog Agent and a shared processor to deduplicate logs from all sources.
 
 {{< img src="observability_pipelines/processors/per_source_shared_processors_tab.png" alt="The Datadog Agent source panel with per-source Sample and Tags processors and a shared Dedupe processor." style="width:50%;" >}}
 
-When you add per-source and shared processors, logs are sent through the per-source processors first and then through the shared processors.
+The Worker sends logs through the per-source processors first, then through the shared processors.
 
 {{< img src="observability_pipelines/processors/per_source_shared_processors_diagram.png" alt="A diagram showing logs sent from three sources through per-source and shared processors, then to branches and destinations." style="width:100%;" >}}
 
