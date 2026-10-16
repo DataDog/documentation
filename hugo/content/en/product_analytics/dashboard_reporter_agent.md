@@ -151,7 +151,7 @@ Pause an agent to stop reports temporarily, for example during a quiet period or
 
 To stop reports temporarily, [pause the agent](#pause-or-resume-an-agent) instead.
 
-<div class="alert alert-warning">Deleting an agent is permanent. The agent stops sending reports, and you can't restore it.</div>
+<div class="alert alert-warning">Deleting an agent is permanent. The agent stops sending reports, its underlying workflow in <a href="/actions/workflows/">Workflow Automation</a> is also deleted, and you can't restore either.</div>
 
 To delete an agent, go to the Agents page, hover over the agent, and click {{< ui >}}Delete{{< /ui >}}.
 
