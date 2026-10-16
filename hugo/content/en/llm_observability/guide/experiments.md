@@ -362,6 +362,8 @@ For custom tracing, use the [Python tracing decorators][2]. For automatic instru
 {{% tab "Node.js" %}}
 For custom tracing, use `llmobs.trace()`. For automatic instrumentation, see the [supported Node.js frameworks][1].
 
+[1]: /llm_observability/instrument/auto_instrumentation?tab=nodejs
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -441,7 +443,7 @@ async function task (inputData, config, metadata) {
 {{% /tab %}}
 {{< /tabs >}}
 
-To enable this, set the `DD_TRACE_OTEL_ENABLED` environment variable:
+To include OpenTelemetry spans in your experiment traces, set `DD_TRACE_OTEL_ENABLED` to `1` when running your experiment:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -624,6 +626,8 @@ def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
 
 For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][1].
 
+[1]: /llm_observability/investigate/evaluations/evaluation_developer_guide
+
 ```python
 from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
 
@@ -637,7 +641,6 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
         if not scores:
             return None
         return sum(scores) / len(scores)
-{{% /tab %}}
 
 {{% tab "Node.js" %}}
 #### Function-based summary evaluators
@@ -795,10 +798,7 @@ console.log(experiment.url())
 [4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [6]: /llm_observability/instrument/otel_instrumentation
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs
-[8]: /llm_observability/instrument/sdk?tab=nodejs#command-line-setup
 [9]: /llm_observability/instrument/agent_observability_and_apm/
-[10]: /llm_observability/instrument/auto_instrumentation?tab=nodejs
-[11]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/
 
 ## Further reading
 
