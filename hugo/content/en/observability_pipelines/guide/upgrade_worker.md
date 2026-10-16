@@ -38,7 +38,7 @@ Worker version 2.22.0 gives you access to the following:
 - Configuration parse errors for a source, processor, or destination now include the component's ID and type, and the field causing the error when it can be determined.
 - Reference Table lookup errors caused by a failed HTTP request, such as a timeout, DNS failure, or connection reset, now report the underlying cause instead of a generic `error sending request` message.
 - The Datadog BYOC Logs destination now supports a configurable HTTP payload size limit with the `DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES` environment variable.
-- The following sources now have TCP keepalive enabled by default with a 60-second idle timeout. This helps to detect dead connections when clients disconnect without sending FIN or RST packets.
+- The following sources now have TCP keepalive enabled by default with a 60-second idle timeout, which helps to detect dead connections when clients disconnect without sending FIN or RST packets.
     - Datadog Agent
     - Fluent
     - Logstash
@@ -50,9 +50,10 @@ Worker version 2.22.0 gives you access to the following:
 
 #### Fixes
 
+- The deprecated `pipelines.buffer_byte_size` and `pipelines.buffer_events` gauge metrics have been removed. Use `pipelines.buffer_size_bytes` and `pipelines.buffer_size_events` instead.
 - The Syslog destination no longer shuts down the Worker when a log's `timestamp` field is not a timestamp value, such as a JSON string. These logs now use the current UTC time in the syslog header.
-- The `chunked_gelf` framing decoder now limits the payload buffered across incomplete messages to 128 MiB. Previously, an unauthenticated sender could exhaust memory by sending chunks for messages it never completed, especially on the Socket source in UDP mode.
-- The Logstash source now rejects frames larger than the configured maximum instead of buffering them indefinitely. Previously, a sender could declare an extremely large frame and force the source to hold its bytes in memory until it ran out of memory. The limit is controlled by the existing `--max-decompressed-size-bytes` option (default: 100 MiB).
+- The `chunked_gelf` framing decoder now limits the payload buffered across incomplete messages to 128 MiB. Previously, an unauthenticated sender could exhaust memory by sending chunks for messages it never completed, especially with the Socket source in UDP mode.
+- The Logstash source now rejects frames larger than the configured maximum instead of buffering them indefinitely. Previously, a sender could declare an extremely large frame and force the source to hold its bytes in memory until it ran out of memory.
 - The Splunk TCP source now truncates frames that exceed the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` limit instead of dropping the events. This matches Splunk's `TRUNCATE` behavior.
 - Fixed an issue in the `chunked_gelf` framing decoder that caused the source to shut down when a one-byte message arrived and trace-level logging was enabled for the decoder. The decoder now rejects these messages, as it does other malformed payloads.
 - Fixed an issue where the internal buffer usage reporter outlived the buffer it reported on, which caused the reporter for the old buffer to keep publishing stale metrics under the same `buffer_id` as its replacement. Metrics for a buffer that was removed, rather than replaced, also age out under `expire_metrics_secs`, which the continuously republished values previously prevented.
@@ -60,15 +61,7 @@ Worker version 2.22.0 gives you access to the following:
     - `pending_messages_limit` was applied to every chunk instead of only to new messages. After the limit was reached, chunks of messages that were already pending were rejected, so those messages could never complete.
     - Dropping a message for exceeding `max_length` left its timeout task running, so the number of live tasks was not bounded by `pending_messages_limit` the way the pending message count was.
 - The FIPS endpoint setting is propagated to STS AssumeRole clients. When `AWS_USE_FIPS_ENDPOINT=true` is configured, the Worker uses FIPS endpoints for STS operations, such as `sts-fips.<region>.amazonaws.com`, in addition to the primary service client.
-- The Aggregate processor's `aggregate_failed_updates` internal counter has been renamed to `aggregate_failed_updates_total`, to match the counter naming convention. The `aggregate_failed_updates` name is still emitted, but it is deprecated and is planned for removal in a future release.
-- The `process_runtime` counter emitted by the host metrics source has been renamed to `process_runtime_total`, to match the counter naming convention. The `process_runtime` name is still emitted, but it is deprecated and is planned for removal in a future release.
-- The memory enrichment table failure and TTL expiration internal metrics have been renamed to end in `_total`, to match the counter naming convention:
-    - `memory_enrichment_table_failed_insertions_total`
-    - `memory_enrichment_table_failed_reads_total`
-    - `memory_enrichment_table_ttl_expirations_total`
-  The previous metric names without the `_total` suffix are still emitted, but they are deprecated and are planned for removal in a future release.
-- The deprecated `pipelines.buffer_byte_size` and `pipelines.buffer_events` gauge metrics have been removed. Use `pipelines.buffer_size_bytes` instead of `buffer_byte_size`, and `pipelines.buffer_size_events` instead of `buffer_events`.
-- When a compressed request payload fails to decompress, the OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message. You can diagnose decompression failures, such as a corrupt or truncated gzip stream, from the returned status and the sender's logs.
+- The OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message when a compressed request payload fails to decompress.
 
 ## Worker version 2.21.0
 
