@@ -18,7 +18,7 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
-The processor supports only the static, out-of-the-box integration pipelines included with the Worker. The Worker's catalog of integration pipelines updates only through new Worker releases.
+The catalog of integration pipelines are updated through Worker releases. See [Upgrade the integration pipelines catalog](#upgrade-the-integration-pipelines-catalog) for more information.
 
 For every log that matches the processor's filter:
 
@@ -32,12 +32,12 @@ For every log that matches the processor's filter:
 <div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 **Notes**:
+
 - Datadog strongly recommends using this processor to parse and normalize logs when sending logs to Datadog Archives destinations.
 - Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log field, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those fields.
     - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
-- The processor does not run custom pipelines created in Log Management or modified versions of integration pipelines in Log Management.
-- All available integration pipelines are enabled by default. However, new integration pipelines added to the catalog in subsequent Worker releases are **not** automatically enabled for existing Integration Pipelines processors. You must enable them manually.
+- The processor supports only out-of-the-box integration pipelines included with the Worker. It does not run custom pipelines or modified versions of integration pipelines created in Log Management.
 
 ## Setup
 
@@ -115,6 +115,12 @@ The Worker normalizes every log that matches the processor's filter, even if the
   In this example, the Worker:<br>- Parses the JSON in `message`<br>- Expands the dotted key `http.status_code` into a nested object<br>- Moves the non-reserved `http` attribute under `attributes`.
 - Maps log attributes to reserved attributes such as `timestamp`, `host`, `service`, `message`, `status`, `trace_id`, and `span_id`. For example, `hostname` can populate `host`, and `level` can populate `status`. See [Preprocessing options](#preprocessing-options) for more information.
 - Resolves the log's source, including from `ddsource`, before selecting an integration pipeline.
+
+## Upgrade the integration pipelines catalog
+
+The Worker's catalog of integration pipelines is updated only through new Worker releases. You must upgrade your Worker to receive catalog updates.
+
+All available integration pipelines are enabled by default when you first add and deploy an Integration Pipelines processor. However, integration pipelines introduced in subsequent Worker releases are **not** automatically enabled for existing processors. You must enable them manually.
 
 ## Health metrics
 
