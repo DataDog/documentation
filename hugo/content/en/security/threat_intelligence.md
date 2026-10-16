@@ -127,7 +127,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | suspicious | Low reputation                               |
 | malicious  | Malicious reputation                         |
 
-In Cloud SIEM, you can change an indicator's intention to `benign` for your organization by muting it. Datadog also mutes a list of known-benign indicators for every organization. See [Muted Indicators][4].
+In Cloud SIEM, you can change an indicator's intention to `benign` for your organization by muting it. Datadog also mutes a list of known-benign indicators for every organization. For more information, see [Muted Indicators][4].
 
 
 ## Entity types
