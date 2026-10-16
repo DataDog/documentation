@@ -4,6 +4,8 @@ We need to write a plan for investigating the reports created by plan 30, and pr
 
 Each item should include a plaintext and HTML link to Hugo prod, the local Astro page, and the Astro staging page (https://docs-staging.datadoghq.com/jen.gilbert/astro-base/api/latest/, which can be thought of as Astro prod, since it's the unchanged version the user would be comparing against when reviewing fixes). These links can be listed at the top of a section if multiple items use the same links (as is expected since we're QAing by page). Also include helpful items like what string the user should search for to quickly find the right spot on each plaintext page, steps to follow on each HTML page, what success looks like, etc., and any brief context to help the user understand the item. Keep formatting like bold to a minimum, it just makes the raw Markdown harder for people to read.
 
+When content is too large to compare by hand (for example, thousands of schema rows), give the reviewer a JS snippet to paste into the browser console on each HTML page. It should count the relevant items (rows, links, examples) so the reviewer can check that the counts match. Give the expected count for each site, and check each snippet's selectors against the fetched HTML before including it.
+
 The above artifacts can be created in the following way:
 
 For each page that was QA'd, investigate the items and recommend either "automatic fix" or "human review". You can write this to a file for the page, `<identifier>-investigation.md` or something like that. In order to shift more fixes to the "automatically done" category, you can ask the user questions along the way as needed to give you the confidence you need. Just be sure to give them links/search terms/context as described above so they can easily see what you're talking about.
@@ -87,6 +89,13 @@ Confidence: high. Prod HTML and the spec both have the full text.
 
 Recommendation: human review
 Question for the user: <the specific thing Claude needs to know>
+
+## I3. ...
+
+Recommendation: human review
+Cause: drift: PR #<number>, <title>. Prod has this change and Astro doesn't yet.
+Drift PR: https://github.com/DataDog/documentation/pull/<number>
+Proposed fix: none. Port the PR's change instead.
 ```
 
 ### Fixes file
@@ -131,6 +140,7 @@ Context: Astro lists 1mo, 3mo, 6mo and others that prod doesn't. The spec Astro 
 To check the plaintext: search for `live_span` on each `.md` page.
 To check the HTML: open the page, expand "Response", and find `live_span` under "Model".
 Question: Is Astro's longer list correct? If so, mark this "no change".
+Drift PR (drift items only): https://github.com/DataDog/documentation/pull/<number>
 
 Decision: [ ] Astro is wrong  [ ] no change  [ ] other
 Notes:
@@ -150,22 +160,26 @@ Context rules from plan 30 still apply. Never `cat` whole pages, reports or HTML
 
 For each page, Claude groups findings into root causes, checks samples against the prod HTML and the code, and writes the investigation file. Where a question would move an item from "human review" to "automatic fix", Claude asks it, with links, search terms and context, and records the answer in the item. Pages run smallest first, so the templates settle before the big pages.
 
-- [ ] 1.1 `dashboards` ⏸
-- [ ] 1.2 `aws-integration` ⏸
-- [ ] 1.3 `usage-metering` ⏸
-- [ ] 1.4 `screenboards` (absent in Astro; one item) ⏸
-- [ ] 1.5 `dashboard-lists` ⏸
-- [ ] 1.6 `monitors` ⏸
-- [ ] 1.7 `incidents` ⏸
-- [ ] 1.8 `authentication/validate-api-key` ⏸
-- [ ] 1.9 `dashboard-lists/get-all-dashboard-lists` ⏸
-- [ ] 1.10 `usage-metering/get-hourly-usage-for-lambda` ⏸
-- [ ] 1.11 `aws-integration/list-all-aws-integrations` ⏸
-- [ ] 1.12 `incidents/create-an-incident` ⏸
-- [ ] 1.13 `monitors/create-a-monitor` ⏸
-- [ ] 1.14 `dashboards/get-a-dashboard` (about 2,400 findings; may take more than one step) ⏸
+Drift check: before recommending an automatic fix, Claude checks whether a recent Hugo PR caused the difference, meaning prod has a change that Astro hasn't caught up with yet. Claude lists the Hugo-side commits this branch doesn't have with `git fetch origin master` and `git log --oneline $(git merge-base HEAD origin/master)..origin/master -- hugo/`. It looks at the ones that touch the API templates, shortcodes, or spec, and finds the PR with `gh pr list --repo DataDog/documentation --state merged --search <sha>`. If a PR explains the item, Claude doesn't fix it. The item goes to human review, and its Cause line reads "drift: PR #<number>, <title>" followed by the PR link. The PR link also goes in the review file entry, so the reviewer can open it.
+
+- [x] 1.1 `dashboards` ⏸
+- [x] 1.2 `aws-integration` ⏸
+- [x] 1.3 `usage-metering` ⏸
+- [x] 1.4 `screenboards` (absent in Astro; one item) ⏸
+- [x] 1.5 `dashboard-lists` ⏸
+- [x] 1.6 `monitors` ⏸
+- [x] 1.7 `incidents` ⏸
+- [x] 1.8 `authentication/validate-api-key` ⏸
+- [x] 1.9 `dashboard-lists/get-all-dashboard-lists` ⏸
+- [x] 1.10 `usage-metering/get-hourly-usage-for-lambda` ⏸
+- [x] 1.11 `aws-integration/list-all-aws-integrations` ⏸
+- [x] 1.12 `incidents/create-an-incident` ⏸
+- [x] 1.13 `monitors/create-a-monitor` ⏸
+- [x] 1.14 `dashboards/get-a-dashboard` (about 2,400 findings; may take more than one step) ⏸
 
 ### Phase 2: automatic fixes, five per step
+
+Stop gate: when Phase 1 is done, Claude stops and asks the user before making any automatic fix. Don't start Phase 2 without an explicit go-ahead.
 
 Claude works through the "automatic fix" items, page by page in Phase 1 order. For each one:
 
@@ -196,4 +210,18 @@ For each page, Claude moves the "human review" items into `<slug>-review.md`, us
 
 ## Handoff notes
 
-- 0a (2026-10-16): Reran the tool on the new `dist/` (built 18:27 UTC) with no `--refresh`. Prod snapshot is from 17:09 UTC. Counts barely moved: get-a-dashboard has 1,873 astro-wrong. All six link forms return 200 with the right content type for validate-api-key, `.md` included. Claude started the dev server (`astro dev`, a daemon; stop it with `astro dev stop`). Created `qa/content/review/`, which isn't gitignored. Next: 1.1 `dashboards`.
+- 0a done 2026-10-16. Reran the tool without `--refresh`. All six link forms return 200 with the right content type, including `.md` on the dev server. Created `qa/content/review/`. This branch is 23 Hugo commits behind `origin/master`. Two of them touch `hugo/data/api` (PRs #40737 and #40713, spec regenerations), so check them first during the drift check. Next: 1.1 `dashboards`.
+- 1.1 done. I2 (breadcrumb "API" instead of "API Reference") is human review. The user cleared these as no change on every page: I1, the tag description in frontmatter and meta; I3, "(preview)" with no "→" or `{% #anchor %}`; I4, the region-selector row order and bold method. On later pages, mark matching items "no change, per dashboards I<n>" without asking. Next: 1.2 `aws-integration`.
+- 1.2 done. No automatic fixes. I2 (breadcrumb) is human review. I1, I3 and I4 are no change, per dashboards. A "(deprecated)" badge counts as dashboards I3. #40737 (CCM permissions, changelog) caused no findings on this page. Next: 1.3 `usage-metering`.
+- 1.3 done. No automatic fixes. Same four items as dashboards: I2 (breadcrumb) is human review, I1/I3/I4 no change. 35 deprecated + 4 preview badges, all parentheses-only. No drift. Added the Phase 2 stop gate. Next: 1.4 `screenboards`.
+- 1.4 done. No automatic fixes. I1 (page absent: prod serves an empty stub, and the tag is retired from the spec) is human review, per the user. The option to redirect to dashboards is noted. Next: 1.5 `dashboard-lists`.
+- 1.5 done. No automatic fixes. New: I1, Astro's page-level "This endpoint is deprecated." (the v1 tag has x-deprecated and v2 doesn't; v1 metadata wins), is human review, per the user. I3 (breadcrumb) is human review. I2 and I4 are no change, per dashboards. Next: 1.6 `monitors`.
+- 1.6 done. First automatic fix: I1, operation slugs. `toSlug` hyphenates apostrophes and slashes, and Hugo deletes them. 25 operations site-wide, no redirects, per the user. Later pages with apostrophe slug findings fall under monitors I1. I3 (breadcrumb) is human review. I2, I4 and I5 are no change, per dashboards. Next: 1.7 `incidents`.
+- 1.7 done. I1 (three apostrophe slugs) falls under monitors I1. New automatic fix: I2. The .md plaintext twin uses `else if`, so it drops "(preview)" when an operation is also deprecated. The HTML shows both badges. Affects 17 operations site-wide. I4 (breadcrumb) is human review. I3, I5 and I6 are no change. Next: 1.8 `authentication/validate-api-key`.
+- 1.8 done. First operation page. No automatic fixes. Human review, per the user, for every operation page: I1, breadcrumbs that skip the category; I2, Astro's "Read-only."; I3, Astro's curl builder (exports, header order); I4, the five .md format differences (version heading, no Overview, language tabs, Instructions label, Parent field). I5 (Hugo .md merges run commands) is no change. Later operation pages refer back to these. Next: 1.9 `dashboard-lists/get-all-dashboard-lists`.
+- 1.9 done. New automatic fix: I1. The .md plaintext twin doesn't link "scope" in the OAuth sentence, and the HTML does. New human review, per the user: I2, the overview split and placement (description and permissions as separate blocks; the .md puts the description above the table); I3, response examples from the spec's `examples.default` instead of being built from the schema. Read-only, curl, breadcrumbs and .md format are per 1.8. Next: 1.10 `usage-metering/get-hourly-usage-for-lambda`.
+- 1.10 done. Three new automatic fixes. I1: response models and examples are missing when the content type isn't exactly `application/json` (63 operations; fall back to the first type, like the request builder). I2: deprecated operations get the label "(deprecated)" instead of "(latest)" (user). I6: curl references `${START_HR}` without exporting it (user). New human review: I3, Astro's "This endpoint is deprecated." alert (user). Next: 1.11 `aws-integration/list-all-aws-integrations`.
+- 1.11 done. Two new automatic fixes. I1: line breaks in .md table cells break the tables (`tableMd`). I2: `additionalProperties` is ignored, so `<any-key>` rows are missing (284 schemas; user). New human review: I3, Astro shows "Default: false.", which Hugo drops as falsy (user). I4 (Hugo .md drops other defaults) is no change. Three more .md forms (enum, deprecated marker, oneOf spacing) are added to the .md format item. Next: 1.12 `incidents/create-an-incident`.
+- 1.12 done. First POST page. No new automatic fixes. The additionalProperties fix (1.11 I2) must also handle oneOf. New human review: I1, request examples come from the spec because Hugo's `request.*.json` files (784, under hugo/content) aren't staged for Astro; I2, "Request Body (required)" heading vs "Request" plus a "Body Data (required)" label. I11 (help link as .md) is no change. Next: 1.13 `monitors/create-a-monitor`.
+- 1.13 done. No new automatic fixes. New human review, per the user: I1, OAuth scope with more than one AuthZ entry (Hugo shows the last, Astro the first; 17 operations); I2, read-only fields left out of request tables (26 rows here). I3 (three request and curl examples vs one) falls under 1.12 I1. I7: Hugo's .md shortens enum lists and descriptions; no change. Hugo also drops a default of `0`. Next: 1.14 `dashboards/get-a-dashboard` (about 2,400 findings).
+- 1.14 done. Phase 1 is complete. New automatic fixes, all in `src/lib/api/refResolver.ts` unless noted: I1, an array of oneOf uses up an extra nesting level, so rows past the cap are cut (about 988 rows); I2, follow `$ref` chains (`ProductAnalyticsBaseQuery`, about 189 rows); I4, per the user, drop the nameless `<items>` wrapper row under array-typed oneOf options (9 schemas); I5, per the user, a `$ref`'s own `description` and `deprecated` win over the target's (about 200 and 98 refs); I6, the plaintext twin drops enum values on oneOf option rows (`ApiSchemaTable.ts:61-68`). New human review, per the user: I9, the "(recursive)" row; I10, bare URLs left unlinked in the .md. The investigation file has console snippets to count rows (prod 13486, Astro 12167). Next: the stop gate. Ask the user before Phase 2.
