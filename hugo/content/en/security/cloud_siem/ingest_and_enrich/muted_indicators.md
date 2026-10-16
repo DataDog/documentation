@@ -101,7 +101,7 @@ You can unmute indicators that your organization muted. Datadog-managed mutes ar
 
 To unmute indicators, do one of the following:
 
-- In the IOC Explorer, open the indicator's side panel and click {{< ui >}}Un-mute This IoC{{< /ui >}}.
+- In the [IOC Explorer][5], open the indicator's side panel and click {{< ui >}}Un-mute This IoC{{< /ui >}}.
 - On the [Muted Indicators page][6], click {{< ui >}}Un-mute{{< /ui >}} on the indicator's row.
 - On the Muted Indicators page, select up to 100 indicators and click {{< ui >}}Un-mute{{< /ui >}}.
 
