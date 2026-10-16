@@ -293,6 +293,19 @@ To verify the configuration:
 1. Check the raw trace data to confirm that container IDs and tags are properly translated into Datadog format (for example, `container.id` should become `container_id`).
 2. Verify that container metadata appears on the Containers page.
 
+## Services or trace metrics are missing in APM
+
+**Symptom**: Traces arrive in Datadog, but services don't appear in the Catalog or on service pages, or trace metrics such as request rate, errors, and latency are missing.
+
+**Cause**: Datadog didn't receive trace metrics for the traces, or the traces don't identify their service and environment.
+
+**Resolution**: Check the item that matches your setup:
+
+- **Upstream OpenTelemetry Collector**: Add the `span_metrics` connector to your traces pipeline. It generates the trace metrics that power the Catalog and service pages. See [Span metrics connector][10].
+- **Datadog Exporter**: Add the Datadog Connector to your traces pipeline to calculate trace metrics. See [Datadog Exporter and Connector][11].
+- **Direct OTLP ingest**: Datadog doesn't compute trace metrics by default for traces sent to the OTLP traces intake endpoint. Add the `compute_stats=true` header to your exporter configuration. See [Traces endpoint][12].
+- **All setups**: Set the `service.name` and `deployment.environment.name` resource attributes. Without `service.name`, OpenTelemetry SDKs report a default name such as `unknown_service`. See [Unified service tagging][13].
+
 ## Missing metrics in Catalog and dashboards
 
 **Symptom**: Metrics are not appearing in the Catalog and dashboards despite being properly collected.
@@ -350,3 +363,7 @@ features:
 [7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
 [8]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainerID
 [9]: /opentelemetry/config/hostname_tagging/#hostname-recommendations
+[10]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[11]: /opentelemetry/setup/collector_exporter/datadog_exporter/
+[12]: /opentelemetry/setup/otlp_ingest/traces/
+[13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
