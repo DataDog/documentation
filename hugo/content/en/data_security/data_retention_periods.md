@@ -57,7 +57,7 @@ attributes:
   - product: Cloud Security
     data_type: |
        - **Resolved vulnerabilities**: 30 days after the resource was last scanned
-       - **Resolved Misconfigurations, Identity Risks and Attack Paths**: 15 months
+       - **Resolved misconfigurations, identity risks, and attack paths**: 15 months
   - product: Cloud SIEM
     data_type: |
        - **Signals**: 15 months
