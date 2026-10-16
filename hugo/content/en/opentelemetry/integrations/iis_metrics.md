@@ -10,18 +10,26 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/iis_metrics.png" alt="OpenTelemetry IIS metrics in an IIS dashboard" style="width:100%;" >}}
 
-The [IIS receiver][1] allows for collection of IIS (Internet Information Services) metrics and access to the [IIS Overview][4] dashboard. Configure the receiver according to the specifications of the latest version of the `iisreceiver`.
+The [IIS receiver][1] collects IIS (Internet Information Services) metrics that populate the [IIS Overview][4] dashboard.
 
 For more information, see the OpenTelemetry project documentation for the [IIS receiver][1].
 
 ## Setup
 
-To collect IIS metrics with OpenTelemetry for use with Datadog:
+This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
-1. Configure the [IIS receiver][1] in your OpenTelemetry Collector configuration.
-2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
+The IIS receiver reads Windows performance counters, so it runs only on Windows. Run the Collector on the IIS host.
 
-See the [IIS receiver documentation][1] for detailed configuration options and requirements.
+The receiver has no required settings. Add the following lines to your Collector configuration:
+
+```yaml
+receivers:
+  iis:
+```
+
+Add `iis` to the `receivers` list of the metrics pipeline in your configuration. Keep the processors already in that pipeline. The Datadog OTLP metrics intake accepts only delta metrics, and this receiver produces cumulative sums, so the pipeline needs `cumulativetodelta`. The [recommended Collector setup][5] includes it.
+
+For all configuration options, see the [IIS receiver documentation][1].
 
 ## Data collected
 
