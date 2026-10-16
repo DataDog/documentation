@@ -76,18 +76,28 @@ Each report includes:
 
 You can start from a dashboard or from the Agents page in Product Analytics.
 
-### Option 1: Start from a dashboard
+{{< tabs >}}
+{{% tab "From a dashboard" %}}
 
 1. Open the Product Analytics dashboard you want to monitor.
 2. Click {{< ui >}}Set up report{{< /ui >}}. If the dashboard is already included in other agents' reports, they are listed here.
 
+   {{< img src="product_analytics/dashboard_reporter_agent/from-dashboard.png" alt="A Product Analytics dashboard header with the Set Up Report button highlighted" style="width:100%;" >}}
+
 **Note**: If more than one agent monitors the same dashboard, their reports can differ, because each agent writes its report independently.
 
-### Option 2: Start from the Agents page
+{{% /tab %}}
+{{% tab "From the Agents page" %}}
 
-1. In Datadog, go to [**Product Analytics > Agents**][6].
-2. Click {{< ui >}}+ New Agent{{< /ui >}}.
+1. In Datadog, go to [**Product Analytics > Agents**][1].
+2. Click {{< ui >}}\+ New Agent{{< /ui >}}.
 3. Select the {{< ui >}}Dashboard Reporter{{< /ui >}} blueprint.
+
+{{< img src="product_analytics/dashboard_reporter_agent/from-agents.png" alt="The new agent page with the Dashboard Reporter blueprint highlighted under Start from blueprint" style="width:60%;" >}}
+
+[1]: https://app.datadoghq.com/product-analytics/agents
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configure the agent
 
