@@ -91,6 +91,39 @@ To add a section:
 1. Drag existing components into the section, or add new components directly within it.
 1. To set conditions on the section, click the section, then click {{< ui >}}Conditions{{< /ui >}} and define the rule.
 
+## Pages
+
+Pages split a form into multiple screens that respondents complete in order. Use pages to break up a long form, or to show a whole screen of questions only when a respondent's earlier answer calls for it.
+
+A page can contain both fields and [sections](#sections). Pages are all-or-nothing: once a form has any pages, it cannot also have fields at the root of the form. Adding a first page moves the form's existing fields onto it.
+
+Pages appear in the {{< ui >}}Pages{{< /ui >}} panel on the left side of the form editor, alongside the form's [start and end pages][2]. Click a page to show only that page in the canvas.
+
+### Add, delete, and reorder pages
+
+To add a page, in the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}\+ Page{{< /ui >}}.
+
+To move a field to a different page, drag it onto that page in the {{< ui >}}Pages{{< /ui >}} panel.
+
+To delete a page, hover over it in the {{< ui >}}Pages{{< /ui >}} panel and click the trash <i class="icon-trash"></i> icon. Because a page holds fields, Datadog asks what to do with them:
+
+| Option | Description |
+|--------|-------------|
+| Merge fields and delete page | Moves the page's fields onto another page, then deletes the page. Choose the destination page in the modal. |
+| Delete page and all fields | Deletes the page and every field on it. |
+
+If the fields on a page control whether other pages are shown, there is no safe destination to merge into. In that case, only {{< ui >}}Delete page and all fields{{< /ui >}} is available.
+
+### Validation across pages
+
+Validation runs one page at a time. A respondent cannot advance to the next page until every [validation rule](#validation-rules) and required field on the current page passes. Because of this, responses are submitted progressively as respondents move through the form.
+
+### Conditional pages
+
+You can show or hide an entire page based on a respondent's answer to an earlier question, the same way you can for a field or a section. See [Conditional fields](#conditional-fields).
+
+Conditions flow in one direction: a field can control whether a page is shown, but a page cannot control whether a field is shown. The controlling field must also be on an earlier page than the page it controls.
+
 ## Dynamic dropdown options
 
 Dropdown components can fetch options dynamically from Datadog tag values at runtime. Dynamic options update automatically as your tag values change, without requiring manual edits to the form.
@@ -112,3 +145,4 @@ In addition to the visual component editor, you can edit the underlying JSON Sch
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /actions/forms/guide/prefill/
+[2]: /actions/forms/#customize-start-and-end-pages
