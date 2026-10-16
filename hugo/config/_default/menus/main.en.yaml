@@ -1624,21 +1624,26 @@ menu:
       identifier: bits_ai_live_debugger
       parent: bits_ai
       weight: 8
+    - name: Bits Release
+      url: bits_release/
+      identifier: bits_release
+      parent: bits_ai
+      weight: 9
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai
-      weight: 9
+      weight: 10
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 10
+      weight: 11
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 11
+      weight: 12
     - name: Dashboards
       url: dashboards/
       pre: dashboard
