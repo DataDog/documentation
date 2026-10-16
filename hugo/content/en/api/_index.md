@@ -30,5 +30,11 @@ cascade:
     lang: en
   aliases:
     - /api/latest/service-scorecards
+- _target:
+    path: /api/latest/delivery-performance
+    lang: en
+  aliases:
+    - /api/latest/dora-metrics
+    - /api/latest/ai-impact
 
 ---
