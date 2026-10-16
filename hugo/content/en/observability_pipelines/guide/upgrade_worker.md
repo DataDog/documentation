@@ -23,24 +23,24 @@ To upgrade to Worker version 2.22.0:
 - APT: Run the command `apt-get install observability-pipelines-worker=2.22.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.22.0`.
 
-<div class="alert alert-warning"><strong>Breaking change:</strong> This change only affects logs that contain a top-level <code>attributes</code> object and are sent to the Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage). It is particularly relevant to logs from the OpenTelemetry source, which commonly include a top-level <code>attributes</code> object.<br><br>The Datadog Archives destinations store non-<a href="/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved</a> log attributes within an <code>attributes</code> object. Starting with Worker 2.22.0, if a log already has an <code>attributes</code> object, the Datadog Archives destinations reuse that object instead of nesting it one level deeper. If you use queries with the syntax <code>@attributes.&lt;field_name&gt;</code> on logs rehydrated from an Observability Pipelines archive, use <code>@&lt;field_name&gt;</code> instead.</div>
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects only logs that contain a top-level <code>attributes</code> object and are sent to the Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage). The change is particularly relevant to logs from the OpenTelemetry source, which commonly include a top-level <code>attributes</code> object.<br><br>The Datadog Archives destinations store non-<a href="/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved</a> log attributes within an <code>attributes</code> object. Starting with Worker 2.22.0, if a log already has an <code>attributes</code> object, the Datadog Archives destinations reuse that object instead of nesting it one level deeper. If you use queries with the syntax <code>@attributes.&lt;field_name&gt;</code> on logs rehydrated from an Observability Pipelines archive, use <code>@&lt;field_name&gt;</code> instead.</div>
 
 Worker version 2.22.0 gives you access to the following:
 
 #### New features
 
 - The Integration Pipelines processor is now available for logs pipelines.
-- The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period allows late-arriving metrics to be included in their corresponding event-time window.
+- The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period includes late-arriving metrics in their event-time window.
 
 #### Enhancements
 
-- The Generate Metrics processor for logs pipelines now has an option to enable metric aggregation. When enabled, generated metrics are rolled up by event timestamp into 1-second buckets, so metrics generated within the same second aren't dropped by last-point-wins behavior at the Datadog metrics intake.
+- The Generate Metrics processor for logs pipelines now has an option to enable metric aggregation. When the option is enabled, generated metrics are rolled up by event timestamp into 1-second buckets. This prevents the Datadog metrics intake from dropping metrics generated within the same second because of last-point-wins behavior.
 - Configuration parse errors for a source, processor, or destination now include the component's ID and type, and the field causing the error when it can be determined.
 - Reference Table lookup errors caused by a failed HTTP request, such as a timeout, DNS failure, or connection reset, now report the underlying cause instead of a generic `error sending request` message.
 - The Datadog BYOC Logs destination now supports a configurable HTTP payload size limit with the `DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES` environment variable.
-- The following sources now have TCP keepalive enabled by default with a 60-second idle timeout, which helps to detect dead connections when clients disconnect without sending FIN or RST packets.
+- The following sources now have TCP keepalive enabled by default with a 60-second idle timeout, which helps to detect dead connections when clients disconnect without sending FIN or RST packets:
     - Datadog Agent
-    - Fluent
+    - Fluentd and Fluent Bit
     - Logstash
     - OpenTelemetry (HTTP)
     - Socket (TCP mode)
@@ -57,11 +57,11 @@ Worker version 2.22.0 gives you access to the following:
 - The Splunk TCP source now truncates frames that exceed the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` limit instead of dropping the events. This matches Splunk's `TRUNCATE` behavior.
 - Fixed an issue in the `chunked_gelf` framing decoder that caused the source to shut down when a one-byte message arrived and trace-level logging was enabled for the decoder. The decoder now rejects these messages, as it does other malformed payloads.
 - Fixed an issue where the internal buffer usage reporter outlived the buffer it reported on, which caused the reporter for the old buffer to keep publishing stale metrics under the same `buffer_id` as its replacement. Metrics for a buffer that was removed, rather than replaced, also age out under `expire_metrics_secs`, which the continuously republished values previously prevented.
-- Fixed issues with the `chunked_gelf` framing decoder's limits:
+- Fixed the following issues with the `chunked_gelf` framing decoder's limits:
     - `pending_messages_limit` was applied to every chunk instead of only to new messages. After the limit was reached, chunks of messages that were already pending were rejected, so those messages could never complete.
-    - Dropping a message for exceeding `max_length` left its timeout task running, so the number of live tasks was not bounded by `pending_messages_limit` the way the pending message count was.
-- The FIPS endpoint setting is propagated to STS AssumeRole clients. When `AWS_USE_FIPS_ENDPOINT=true` is configured, the Worker uses FIPS endpoints for STS operations, such as `sts-fips.<region>.amazonaws.com`, in addition to the primary service client.
-- The OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message when a compressed request payload fails to decompress.
+    - Dropping a message for exceeding `max_length` left its timeout task running, so `pending_messages_limit` capped the number of pending messages but not the number of live timeout tasks.
+- The FIPS endpoint setting now applies to STS AssumeRole clients. When `AWS_USE_FIPS_ENDPOINT=true` is set, the Worker uses FIPS endpoints, such as `sts-fips.<region>.amazonaws.com`, for STS operations as well as for the primary service client.
+- When a compressed request payload fails to decompress, the OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message.
 
 ## Worker version 2.21.0
 
