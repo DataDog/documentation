@@ -72,16 +72,16 @@ The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect w
 6. Give the app a name, for example, `Datadog CI Visibility`.
 7. Click {{< ui >}}Install GitHub App{{< /ui >}} and follow the instructions on GitHub.
 
-### Configure CI Visibility for GitHub Actions
+### Configure CI/CD Optimization (Previously CI Visibility) for GitHub Actions
 
-After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
+After the GitHub App is created and installed, enable CI/CD Optimization on the accounts and/or repositories you want visibility into.
 
-1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] and select **GitHub**.
+1. In Datadog, navigate to [**Software Delivery** > **CI/CD Optimization** > **Add a Pipeline Provider**][13] and select **GitHub**.
 2. Click {{< ui >}}Enable Account{{< /ui >}} for the account you want to enable.
 3. Enable CI Visibility for the whole account by clicking the toggle next to {{< ui >}}Enable CI Visibility{{< /ui >}}.
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the {{< ui >}}Enable CI Visibility{{< /ui >}} toggle.
 
-Pipelines appear immediately after enabling CI Visibility for any account or repository.
+Pipelines appear immediately after enabling CI/CD Optimization for any account or repository.
 
 ### Disable CI Visibility for GitHub Actions
 
