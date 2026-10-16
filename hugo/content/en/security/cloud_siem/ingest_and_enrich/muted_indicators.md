@@ -40,8 +40,6 @@ Muting applies to logs that Cloud SIEM processes after the mute takes effect. Lo
 - **IOC Explorer**: Shows the new mute state immediately.
 - **Log enrichment**: May take up to an hour to apply. During that time, new logs and detections based on them may still use the original rating.
 
-Unmuting follows the same timing.
-
 ### Threat intelligence that muting does not change
 
 Muting your organization's indicators does not change ratings from:
