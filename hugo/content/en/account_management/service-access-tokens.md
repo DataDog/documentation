@@ -57,6 +57,8 @@ For Personal Access Tokens, see [Personal Access Tokens][2].
 5. Click {{< ui >}}Select Scopes{{< /ui >}} to define what the token can access. Grant only the
    permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.
 
+**Note:** Each service account can have up to 500 SATs.
+
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time.
 Copy and store it securely. You cannot retrieve it later.</div>
 
