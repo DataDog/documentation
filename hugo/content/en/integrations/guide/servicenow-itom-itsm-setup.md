@@ -15,6 +15,7 @@ To use the integration, follow the instructions to install it, and then configur
    1. [Configure Datadog templated monitor notifications](#monitor-notifications)
    1. [Configure Datadog Work Management](#case-management)
    1. [Configure Datadog Incident Management](#incident-management)
+   1. [Configure Datadog On-Call](#on-call)
 1. [Customize data with transform maps](#transform-maps)
 
 ## Configure the ServiceNow tile {#tile}
@@ -25,7 +26,7 @@ Before installing the integration, ensure you have the [ServiceNow tile configur
 
 There are two ways to install the integration:
 - Datadog recommends installing the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
-- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.8.0.xml][2]) and upload it to your ServiceNow instance manually.
+- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.9.3.xml][2]) and upload it to your ServiceNow instance manually.
 
 ## Configure the integration
 
@@ -255,7 +256,18 @@ After installing the integration, in Datadog, go to the [Integration Settings][9
 
 For step-by-step instructions on setting up and configuring this integration for incident management, see [Integrate ServiceNow with Datadog Incident Management][12].
 
-## Sync data bidirectionally between ServiceNow and Work/Incident Management {#sync-bidirectionally}
+### Configure Datadog On-Call {#on-call}
+
+Use this integration to create a ServiceNow incident when a Datadog On-Call page triggers, and to page Datadog On-Call from a ServiceNow record.
+
+**Note**: The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.
+
+1. In Datadog, go to **Incident Response** > **On-Call** > **Settings**. On the left side, select **Integrations**.
+1. Click **ServiceNow**, then click **Add Connection** and configure the settings for the connection with your instance.
+1. Click a [routing rule][13] for a team, and add a rule that creates a ServiceNow incident when an On-Call page triggers.
+1. (Optional) To create a Datadog On-Call page from ServiceNow, see [Create a Datadog On-Call page from ServiceNow](#create-on-call-page).
+
+## Sync data bidirectionally between ServiceNow and Datadog Work/Incident Management and On-Call {#sync-bidirectionally}
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Work Management and Incident Management.
 
@@ -367,6 +379,30 @@ To populate data into the ServiceNow incident, you have to modify your script to
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Create a Datadog On-Call page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
+To create a Datadog On-Call page from a ServiceNow record, add a new business rule in ServiceNow that calls the `PublishOnCallPage` script include. The script include uses the credentials from the **Configuration** record you create in [Sync data bidirectionally](#sync-bidirectionally), so complete that section first.
+
+`PublishOnCallPage` takes three arguments, in order:
+
+| Argument | Required | Description |
+| -------- | -------- | ----------- |
+| Target type | Yes | The kind of target to page: `team_handle`, `team_uuid`, or `user_uuid`. |
+| Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's UUID, or the user's UUID. |
+| Urgency | No | The urgency of the page: `high` or `low`. Defaults to `high`. |
+
+In the following example, the business rule pages the Datadog user with the UUID `<USER_UUID>` at high urgency:
+
+```javascript
+(function executeRule(current, previous /* null when async */) {
+    new PublishOnCallPage(
+        "user_uuid",
+        "<USER_UUID>",
+        "high"
+    ).execute(current);
+})(current, previous);
+```
+{{% /collapse-content %}}
+
 ## Troubleshooting
 
 {{% collapse-content title="Error message in your Datadog integration" level="h3" expanded=false id="troubleshooting-error-messages" %}}
@@ -399,7 +435,7 @@ Need additional help? Contact [Datadog support][10].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
+[2]: /resources/xml/Datadog-Snow_Update_Set_v2.9.3.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/work/settings
@@ -410,3 +446,4 @@ Need additional help? Contact [Datadog support][10].
 [10]: /help/
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
 [12]: /incident_response/incident_management/integrations/servicenow
+[13]: /incident_response/on-call/routing_rules/
