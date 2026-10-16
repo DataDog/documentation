@@ -1188,6 +1188,36 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
 
+## Derived metrics
+
+<div class="alert alert-info">The <code>derived-metrics</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>derived-metrics</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,derived-metrics</code>.</div>
+
+Tools for creating, updating, and deleting [derived metrics][92]. A derived metric saves a formula and named queries for reuse across dashboards, monitors, SLOs, and notebooks. Each query includes a name, a data source such as `metrics`, and a query expression. Use `get_datadog_metric_context` in the `core` toolset to inspect a derived metric's formula and named queries.
+
+### `create_derived_metric`
+*Toolset: **derived-metrics***\
+*Permissions Required: `Metric Tags Write`*\
+Creates a derived metric from a metric name, formula, and complete set of named queries. The metric name must not already exist. If the name exists, creation fails without changing the existing metric.
+
+- Create `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{*}`, using the `metrics` data source.
+- Create `custom.cpu.total` with formula `a + b`. Query `a` is `avg:system.cpu.user{*}` and query `b` is `avg:system.cpu.system{*}`. Both queries use the `metrics` data source.
+
+### `update_derived_metric`
+*Toolset: **derived-metrics***\
+*Permissions Required: `Metric Tags Write`*\
+Replaces the complete definition of an existing derived metric. Provide the replacement formula and every named query to retain; omitted queries are removed. If the metric does not exist, the update fails without creating it.
+
+- Replace the definition of `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{env:prod}`, using the `metrics` data source.
+- Update `custom.cpu.total` to formula `a + b`, with query `a` = `avg:system.cpu.user{env:prod}` and query `b` = `avg:system.cpu.system{env:prod}`. Both queries use the `metrics` data source. Remove all other queries from the definition.
+
+### `delete_derived_metric`
+*Toolset: **derived-metrics***\
+*Permissions Required: `Metric Tags Write`*\
+Deletes a derived metric definition. Explicitly confirm the exact metric name before deletion; the tool requires `confirm_metric_name` to match `metric_name`. Deletion succeeds if the metric is already absent. Deleting a definition can break dashboards, monitors, and other resources that use the metric.
+
+- Delete `custom.cpu.user`. Confirmed deletion target: `custom.cpu.user`.
+- Delete `custom.cpu.total` if it exists. Confirmed deletion target: `custom.cpu.total`.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -3481,6 +3511,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
+[92]: /metrics/derived-metrics/
 
 ## Further reading
 
