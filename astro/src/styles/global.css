@@ -97,6 +97,14 @@ b {
   font-weight: 600;
 }
 
+/* Center images and icons on the text line, as Hugo does through Bootstrap's
+   reboot (`img, svg { vertical-align: middle }`). The browser default,
+   `baseline`, puts an image in a line of text too high. */
+img,
+svg {
+  vertical-align: middle;
+}
+
 a {
   color: var(--color-brand);
 }
