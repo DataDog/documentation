@@ -627,6 +627,25 @@ def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
 For details on implementing `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][1].
 
 
+```python
+from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
+
+class AverageScoreEvaluator(BaseSummaryEvaluator):
+    def __init__(self, target_evaluator: str):
+        super().__init__(name="average_score")
+        self.target_evaluator = target_evaluator
+
+    def evaluate(self, context: SummaryEvaluatorContext):
+        scores = context.evaluation_results.get(self.target_evaluator, [])
+        if not scores:
+            return None
+        return sum(scores) / len(scores)
+```
+
+[1]: /llm_observability/investigate/evaluations/evaluation_developer_guide
+
+{{% /tab %}}
+
 {{% tab "Node.js" %}}
 #### Function-based summary evaluators
 
