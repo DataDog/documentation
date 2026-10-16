@@ -41,7 +41,7 @@ Lorsque le SAST natif pour l'IA est activé, ses ensembles de règles par défau
 | Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
 
-Les identifiants de règle SAST natifs de l'IA utilisent le format `datadog/<rule-name>` (par exemple, `datadog/typescript-promptinjection`). Pour cibler une règle SAST spécifique, native de l'IA, dans `rule-configs` ou dans un commentaire `no-dd-sa`, utilisez l'identifiant complet de la règle, y compris le préfixe `datadog/`.
+Les ID de règle SAST natifs de l'IA utilisent le format `datadog/<rule-name>` (par exemple, `datadog/typescript-promptinjection`). Pour cibler une règle SAST native de l'IA spécifique dans `rule-configs` ou un commentaire `no-dd-sa`, utilisez l'ID de règle complet, y compris le préfixe `datadog/`.
 
 Le paramètre `use-default-rulesets` s'applique aux ensembles de règles SAST traditionnels et SAST natifs pour l'IA. Si vous définissez `use-default-rulesets: false`, incluez tous les ensembles de règles SAST traditionnels et natifs pour l'IA que vous souhaitez exécuter. Par exemple, la configuration suivante exécute les ensembles de règles de sécurité Ruby et SAST natifs pour l'IA :
 
@@ -68,7 +68,7 @@ sast:
 
 Le format de configuration suivant s'applique à tous les emplacements de configuration : au niveau de l'organisation, au niveau du dépôt et au niveau du dépôt (fichier).
 
-Le fichier de configuration doit commencer par un `schema-version` pris en charge (`v1.0`, `v1.1`, `v1.2`, `v1.3` ou `v1.4`), suivi d'une clé `sast` contenant la configuration de l'analyse. Utilisez `v1.4` pour toutes les nouvelles configurations. La configuration est structurée comme indiqué ci-dessous :
+Le fichier de configuration doit commencer par une clé `schema-version`, suivie d'une clé `sast` contenant la configuration de l'analyse. La configuration est structurée comme indiqué ci-dessous :
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
@@ -126,37 +126,37 @@ sast:
     max-file-size-kb: 200
 {{< /code-block >}}
 
-La clé `sast` prend en charge les champs suivants :
+La clé `sast` a été introduite dans `schema-version: v1.0` et prend en charge les champs suivants :
 
-| **Propriété** | **Type** | **Description** | **Par défaut** |
-| --- | --- | --- | --- |
-| `use-default-rulesets` | Booléen | Indique s'il faut activer les ensembles de règles par défaut de Datadog. | `true` |
-| `use-rulesets` | Tableau | Une liste de noms d'ensembles de règles à activer. | Aucun |
-| `ignore-rulesets` | Tableau | Une liste de noms d'ensembles de règles à désactiver. Prévaut sur `use-rulesets` et `use-default-rulesets`. | Aucun |
-| `ruleset-configs` | Objet | Une correspondance du nom d'un ensemble de règles à sa configuration. | Aucun |
-| `global-config` | Objet | Paramètres globaux pour le dépôt. | Aucun |
+| **Propriété** | **Type** | **Description** | **Par défaut** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `use-default-rulesets` | Booléen | Indique s'il faut activer les ensembles de règles par défaut de Datadog. | `true` | `v1.0` |
+| `use-rulesets` | Tableau | Une liste de noms d'ensembles de règles à activer. | Aucun | `v1.0` |
+| `ignore-rulesets` | Tableau | Une liste de noms d'ensembles de règles à désactiver. Prévaut sur `use-rulesets` et `use-default-rulesets`. | Aucun | `v1.0` |
+| `ruleset-configs` | Objet | Une correspondance du nom d'un ensemble de règles à sa configuration. | Aucun | `v1.0` |
+| `global-config` | Objet | Paramètres globaux pour le dépôt. | Aucun | `v1.0` |
 
 ## Configuration de l'ensemble de règles {#ruleset-configuration}
 
 Chaque entrée dans le mappage `ruleset-configs` configure un ensemble de règles spécifique. Un ensemble de règles n'a pas besoin d'être répertorié dans `use-rulesets` pour que sa configuration s'applique ; la configuration est utilisée chaque fois que l'ensemble de règles est activé, y compris via `use-default-rulesets`.
 
-| **Propriété** | **Type** | **Description** | **Par défaut** |
-| --- | --- | --- | --- |
-| `only-paths` | Tableau | Chemins de fichiers ou modèles glob. Seuls les fichiers correspondant à ces modèles sont traités pour cet ensemble de règles. | Aucun |
-| `ignore-paths` | Tableau | Chemins de fichiers ou modèles glob à exclure de l'analyse pour cet ensemble de règles. | Aucun |
-| `rule-configs` | Objet | Une correspondance du nom de la règle à sa configuration. | Aucun |
+| **Propriété** | **Type** | **Description** | **Par défaut** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Tableau | Chemins de fichiers ou modèles glob. Seuls les fichiers correspondant à ces modèles sont traités pour cet ensemble de règles. | Aucun | `v1.0` |
+| `ignore-paths` | Tableau | Chemins de fichiers ou modèles glob à exclure de l'analyse pour cet ensemble de règles. | Aucun | `v1.0` |
+| `rule-configs` | Objet | Une correspondance du nom de la règle à sa configuration. | Aucun | `v1.0` |
 
 ## Configuration de la règle {#rule-configuration}
 
 Chaque entrée dans la carte `rule-configs` d'un ensemble de règles configure une règle spécifique :
 
-| **Propriété** | **Type** | **Description** | **Par défaut** |
-| --- | --- | --- | --- |
-| `only-paths` | Tableau | Chemins de fichiers ou modèles glob. La règle est appliquée uniquement aux fichiers correspondant à ces modèles. | Aucun |
-| `ignore-paths` | Tableau | Chemins de fichiers ou modèles glob à exclure. La règle n'est pas appliquée aux fichiers correspondant à ces modèles. | Aucun |
-| `arguments` | Objet | Paramètres et valeurs pour la règle. Les valeurs peuvent être scalaires ou définies par chemin. | Aucun |
-| `severity` | Chaîne ou Objet | La sévérité de la règle. Valeurs valides : `ERROR`, `WARNING`, `NOTICE`, `NONE`. Peut être une valeur unique ou définie par chemin. | Aucun |
-| `category` | Chaîne | La catégorie de la règle. Valeurs valides : `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | Aucun |
+| **Propriété** | **Type** | **Description** | **Par défaut** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Tableau | Chemins de fichiers ou modèles glob. La règle est appliquée uniquement aux fichiers correspondant à ces modèles. | Aucun | `v1.0` |
+| `ignore-paths` | Tableau | Chemins de fichiers ou modèles glob à exclure. La règle n'est pas appliquée aux fichiers correspondant à ces modèles. | Aucun | `v1.0` |
+| `arguments` | Objet | Paramètres et valeurs pour la règle. Les valeurs peuvent être scalaires ou définies par chemin. | Aucun | `v1.0` |
+| `severity` | Chaîne ou Objet | La sévérité de la règle. Valeurs valides : `ERROR`, `WARNING`, `NOTICE`, `NONE`. Peut être une valeur unique ou définie par chemin. | Aucun | `v1.0` |
+| `category` | Chaîne | La catégorie de la règle. Valeurs valides : `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | Aucun | `v1.0` |
 
 ## Configuration des arguments et de la sévérité {#argument-and-severity-configuration}
 
@@ -193,13 +193,13 @@ Le champ `category` accepte une seule valeur de chaîne pour l'ensemble du dép�
 
 L'objet `global-config` contrôle les paramètres à l'échelle du dépôt:
 
-| **Propriété** | **Type** | **Description** | **Par défaut** |
-| --- | --- | --- | --- |
-| `only-paths` | Tableau | Chemins de fichiers ou modèles glob. Seuls les fichiers correspondants sont analysés. | Aucun |
-| `ignore-paths` | Tableau | Chemins de fichiers ou modèles glob à exclure. Les fichiers correspondants ne sont pas analysés. | Aucun |
-| `use-gitignore` | Booléen | Indique s'il faut inclure les entrées du fichier `.gitignore` dans `ignore-paths`. | `true` |
-| `ignore-generated-files` | Booléen | Indique s'il faut inclure les modèles de fichiers générés courants dans `ignore-paths`. | `true` |
-| `max-file-size-kb` | Nombre | Taille maximale de fichier (en ko) à analyser. Les fichiers plus volumineux sont ignorés. | `200` |
+| **Propriété** | **Type** | **Description** | **Par défaut** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Tableau | Chemins de fichiers ou modèles glob. Seuls les fichiers correspondants sont analysés. | Aucun | `v1.0` |
+| `ignore-paths` | Tableau | Chemins de fichiers ou modèles glob à exclure. Les fichiers correspondants ne sont pas analysés. | Aucun | `v1.0` |
+| `use-gitignore` | Booléen | Indique s'il faut inclure les entrées du fichier `.gitignore` dans `ignore-paths`. | `true` | `v1.0` |
+| `ignore-generated-files` | Booléen | Indique s'il faut inclure les modèles de fichiers générés courants dans `ignore-paths`. | `true` | `v1.0` |
+| `max-file-size-kb` | Nombre | Taille maximale de fichier (en ko) à analyser. Les fichiers plus volumineux sont ignorés. | `200` | `v1.0` |
 
 Exemple de configuration :
 

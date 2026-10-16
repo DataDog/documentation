@@ -39,7 +39,7 @@ AI-native SAST を有効にすると、リポジトリで検出されたサポ�
 | Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
 
-AIネイティブSASTルールIDは、`datadog/<rule-name>`という形式を使用します（例：`datadog/typescript-promptinjection`）。`rule-configs`または`no-dd-sa`コメントで特定のAIネイティブSASTルールを指定するには、`datadog/`プレフィックスを含む完全なルールIDを使用してください。
+AIネイティブSASTルールIDは、`datadog/<rule-name>`の形式（例: `datadog/typescript-promptinjection`）を使用します。`rule-configs`または`no-dd-sa`コメント内で特定のAIネイティブSASTルールをターゲットにするには、`datadog/`プレフィックスを含む完全なルールIDを使用してください。
 
 `use-default-rulesets` 設定は、従来の SAST ルールセットと AI-native SAST ルールセットの両方に適用されます。`use-default-rulesets: false` に設定する場合は、実行するすべての従来の SAST ルールセットと AI-native SAST ルールセットを指定してください。たとえば、次の設定では Ruby のセキュリティルールセットと AI-native SAST ルールセットが実行されます。
 
@@ -66,7 +66,7 @@ sast:
 
 下記の構成形式は、組織レベル、リポジトリレベル、およびリポジトリレベル (ファイル) のすべての設定場所に適用されます。
 
-構成ファイルは、サポートされている `schema-version` (`v1.0`、`v1.1`、`v1.2`、`v1.3`、または `v1.4`) で始まり、その後に分析設定を含む `sast` キーが続く必要があります。すべての新しい構成には `v1.4` を使用してください。構成は次のような構造になっています。
+構成ファイルは `schema-version` キーで始まり、その後に分析設定を含む `sast` キーが続く必要があります。構成は次のような構造になっています。
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
@@ -124,37 +124,37 @@ sast:
     max-file-size-kb: 200
 {{< /code-block >}}
 
-`sast`キーは、次のフィールドをサポートしています。
+`sast` キーは `schema-version: v1.0` で導入され、以下のフィールドをサポートしています。
 
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| --- | --- | --- | --- |
-| `use-default-rulesets` | Boolean | Datadog のデフォルトルールセットを有効にするかどうか。| `true` |
-| `use-rulesets` | Array | 有効にするルールセット名のリスト。| なし|
-| `ignore-rulesets` | Array | 無効にするルールセット名のリスト。`use-rulesets` や `use-default-rulesets` よりも優先されます。| なし|
-| `ruleset-configs` | Object | ルールセット名とその構成へのマッピング。| なし|
-| `global-config` | Object | リポジトリのグローバル設定。| なし|
+| **プロパティ** | **タイプ** | **説明** | **デフォルト** | **最小 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `use-default-rulesets` | Boolean | Datadog のデフォルトルールセットを有効にするかどうか。| `true` | `v1.0` |
+| `use-rulesets` | Array | 有効にするルールセット名のリスト。| なし | `v1.0` |
+| `ignore-rulesets` | Array | 無効にするルールセット名のリスト。`use-rulesets` や `use-default-rulesets` よりも優先されます。| なし | `v1.0` |
+| `ruleset-configs` | Object | ルールセット名とその構成へのマッピング。| なし | `v1.0` |
+| `global-config` | Object | リポジトリのグローバル設定。| なし | `v1.0` |
 
 ## ルールセットの構成{#ruleset-configuration}
 
 `ruleset-configs` マップの各エントリは、特定のルールセットを構成します。構成を適用するルールセットを `use-rulesets` に一覧表示する必要はありません。ルールセットが有効になっている場合は、`use-default-rulesets` によって有効になっている場合も含め、構成が常に適用されます。
 
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | ファイルパスまたは glob パターン。これらのパターンに一致するファイルのみが、このルールセットの処理対象となります。| なし|
-| `ignore-paths` | Array | このルールセットの分析から除外するファイルパスまたは glob パターン。| なし|
-| `rule-configs` | Object | ルール名とらその構成へのマッピング。| なし|
+| **プロパティ** | **タイプ** | **説明** | **デフォルト** | **最小 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | ファイルパスまたは glob パターン。これらのパターンに一致するファイルのみが、このルールセットの処理対象となります。| なし | `v1.0` |
+| `ignore-paths` | Array | このルールセットの分析から除外するファイルパスまたは glob パターン。| なし | `v1.0` |
+| `rule-configs` | Object | ルール名とらその構成へのマッピング。| なし | `v1.0` |
 
 ## ルールの構成 {#rule-configuration}
 
 ルールセットの `rule-configs` マップ内の各エントリは、特定のルールを構成します。
 
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | ファイルパスまたは glob パターン。ルールは、これらのパターンに一致するファイルにのみ適用されます。| なし|
-| `ignore-paths` | Array | 除外するファイルパスまたは glob パターン。これらのパターンに一致するファイルには、ルールは適用されません。| なし|
-| `arguments` | Object | ルールのパラメーターと値。値にはスカラー値を指定することも、パスごとに指定することもできます。| なし|
-| `severity` | String または Object | ルールの重大度。有効な値は、`ERROR`、`WARNING`、`NOTICE`、`NONE` です。単一の値を指定することも、パスごとに指定することもできます。| なし|
-| `category` | String | ルールのカテゴリー。有効な値は、`BEST_PRACTICES`、`CODE_STYLE`、`ERROR_PRONE`、`PERFORMANCE`、`SECURITY` です。| なし|
+| **プロパティ** | **タイプ** | **説明** | **デフォルト** | **最小 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | ファイルパスまたは glob パターン。ルールは、これらのパターンに一致するファイルにのみ適用されます。| なし | `v1.0` |
+| `ignore-paths` | Array | 除外するファイルパスまたは glob パターン。これらのパターンに一致するファイルには、ルールは適用されません。| なし | `v1.0` |
+| `arguments` | Object | ルールのパラメーターと値。値にはスカラー値を指定することも、パスごとに指定することもできます。| なし | `v1.0` |
+| `severity` | String または Object | ルールの重大度。有効な値は、`ERROR`、`WARNING`、`NOTICE`、`NONE` です。単一の値を指定することも、パスごとに指定することもできます。| なし | `v1.0` |
+| `category` | String | ルールのカテゴリー。有効な値は、`BEST_PRACTICES`、`CODE_STYLE`、`ERROR_PRONE`、`PERFORMANCE`、`SECURITY` です。| なし | `v1.0` |
 
 ## 引数および重大度の構成 {#argument-and-severity-configuration}
 
@@ -191,13 +191,13 @@ sast:
 
 `global-config` オブジェクトは、リポジトリ全体に適用する設定を指定します。
 
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| --- | --- | --- | --- |
-| `only-paths` | Array | ファイルパスまたは glob パターン。一致するファイルのみが分析されます。| なし|
-| `ignore-paths` | Array | 除外するファイルパスまたは glob パターン。一致するファイルは分析されません。| なし|
-| `use-gitignore` | Boolean | `.gitignore` ファイルのエントリを `ignore-paths` に含めるかどうか。| `true` |
-| `ignore-generated-files` | Boolean | 一般的な生成ファイルパターンを `ignore-paths` に含めるかどうか。| `true` |
-| `max-file-size-kb` | Number | 分析する最大ファイルサイズ (kB)。これより大きいファイルは無視されます。| `200` |
+| **プロパティ** | **タイプ** | **説明** | **デフォルト** | **最小 `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Array | ファイルパスまたは glob パターン。一致するファイルのみが分析されます。| なし | `v1.0` |
+| `ignore-paths` | Array | 除外するファイルパスまたは glob パターン。一致するファイルは分析されません。| なし | `v1.0` |
+| `use-gitignore` | Boolean | `.gitignore` ファイルのエントリを `ignore-paths` に含めるかどうか。| `true` | `v1.0` |
+| `ignore-generated-files` | Boolean | 一般的な生成ファイルパターンを `ignore-paths` に含めるかどうか。| `true` | `v1.0` |
+| `max-file-size-kb` | Number | 分析する最大ファイルサイズ (kB)。これより大きいファイルは無視されます。| `200` | `v1.0` |
 
 構成の例
 

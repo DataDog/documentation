@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: ラーニングセンター
   text: Product Analytics の利用を開始する
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: ラーニングセンター
+  text: Product Analyticsにおけるラベル付きアクションを用いたユーザー行動の定義
 title: ファネル
 ---
 ファネル分析は、エンドツーエンドのジャーニーパスにおける主要なワークフロー全体のコンバージョン率を追跡し、ボトルネックを特定して対処するのに役立ちます。具体的には、以下のことが可能です。
