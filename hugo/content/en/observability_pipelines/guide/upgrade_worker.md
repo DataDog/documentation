@@ -50,7 +50,6 @@ Worker version 2.22.0 gives you access to the following:
 
 #### Fixes
 
-- The deprecated `pipelines.buffer_byte_size` and `pipelines.buffer_events` gauge metrics have been removed. Use `pipelines.buffer_size_bytes` and `pipelines.buffer_size_events` instead.
 - The Syslog destination no longer shuts down the Worker when a log's `timestamp` field is not a timestamp value, such as a JSON string. These logs now use the current UTC time in the syslog header.
 - The `chunked_gelf` framing decoder now limits the payload buffered across incomplete messages to 128 MiB. Previously, an unauthenticated sender could exhaust memory by sending chunks for messages it never completed, especially with the Socket source in UDP mode.
 - The Logstash source now rejects frames larger than the configured maximum instead of buffering them indefinitely. Previously, a sender could declare an extremely large frame and force the source to hold its bytes in memory until it ran out of memory.
@@ -62,6 +61,10 @@ Worker version 2.22.0 gives you access to the following:
     - Dropping a message for exceeding `max_length` left its timeout task running, so `pending_messages_limit` capped the number of pending messages but not the number of live timeout tasks.
 - The FIPS endpoint setting now applies to STS AssumeRole clients. When `AWS_USE_FIPS_ENDPOINT=true` is set, the Worker uses FIPS endpoints, such as `sts-fips.<region>.amazonaws.com`, for STS operations as well as for the primary service client.
 - When a compressed request payload fails to decompress, the OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message.
+
+#### Removed metrics
+
+- The deprecated `pipelines.buffer_byte_size` and `pipelines.buffer_events` gauge metrics have been removed. Use `pipelines.buffer_size_bytes` and `pipelines.buffer_size_events` instead.
 
 ## Worker version 2.21.0
 
