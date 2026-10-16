@@ -30,7 +30,7 @@ Worker version 2.22.0 gives you access to the following:
 #### New features
 
 - The Integration Pipelines processor is now available for logs pipelines.
-- The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period lets late-arriving metrics be included in their event-time window.
+- The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period allows late-arriving metrics to be included in their corresponding event-time window.
 
 #### Enhancements
 
