@@ -13,8 +13,8 @@ further_reading:
   text: "Learn about Code Changes Detection in CD Visibility"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility is in Preview and is not accepting new customers.
 {{< /callout >}}
 
 CD Visibility collects deployment events so that Datadog can identify key metrics from them. Additionally, it provides a series of features to enhance the Continuous Delivery workflow. Select the following topics for more information.

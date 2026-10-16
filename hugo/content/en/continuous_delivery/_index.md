@@ -23,8 +23,8 @@ cascade:
         tags: ['ci/cd', 'continuous delivery', 'deployment visibility', 'deployments', 'deployment executions']
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility is in Preview and is not accepting new customers.
 {{< /callout >}}
 
 Datadog Continuous Delivery (CD) Visibility provides observability on your deployments. CD Visibility brings deployment metrics and data into Datadog so you can communicate the health of your deployments, and focus your efforts in improving your team's ability to deliver quality code every time.
