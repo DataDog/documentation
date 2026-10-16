@@ -644,6 +644,7 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
         if not scores:
             return None
         return sum(scores) / len(scores)
+```
 
 {{% tab "Node.js" %}}
 #### Function-based summary evaluators
