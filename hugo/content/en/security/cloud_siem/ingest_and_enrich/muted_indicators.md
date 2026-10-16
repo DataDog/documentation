@@ -35,7 +35,7 @@ When an indicator is muted, Cloud SIEM changes how it enriches new logs that mat
 
 Muting applies to logs that Cloud SIEM processes after the mute takes effect. Logs that were already processed keep their original enrichment.
 
-### When a mute takes effect
+### When a mute or unmute takes effect
 
 - **IOC Explorer**: Shows the new mute state immediately.
 - **Log enrichment**: May take up to an hour to apply. During that time, new logs and detections based on them may still use the original rating.
