@@ -105,7 +105,7 @@ To unmute indicators, do one of the following:
 - On the [Muted Indicators page][6], click {{< ui >}}Un-mute{{< /ui >}} on the indicator's row.
 - On the Muted Indicators page, select up to 100 indicators and click {{< ui >}}Un-mute{{< /ui >}}.
 
-If Datadog also mutes the indicator, unmuting removes only your organization's mute. The indicator stays rated as benign.
+If Datadog also mutes the indicator, unmuting removes only your organization's mute. The indicator stays rated as `benign`.
 
 ## Limits
 
