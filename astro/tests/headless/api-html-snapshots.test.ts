@@ -8,6 +8,7 @@ import { format as prettierFormat } from "prettier";
 
 import CategoryPage from "../../src/pages/[...lang]/api/latest/[category].astro";
 import OperationPage from "../../src/pages/[...lang]/api/latest/[category]/[operation].astro";
+import ChangelogPage from "../../src/pages/[...lang]/api/changelog/[...path].astro";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT_DIR = path.join(__dirname, "api-html-snapshots");
@@ -146,6 +147,14 @@ const AUDIT_PAGES: AuditPage[] = [
     },
     urlPath: "/api/latest/usage-metering/get-hourly-usage-for-lambda/",
   },
+
+  // The changelog landing page, from tests/fixtures/api/changelog/.
+  {
+    name: "13-changelog",
+    component: ChangelogPage,
+    params: {},
+    urlPath: "/api/changelog/",
+  },
 ];
 
 /**
@@ -163,6 +172,37 @@ function extractMain(html: string): string {
     throw new Error("Could not locate <main>...</main> in rendered page");
   }
   return html.slice(start, end + endTag.length);
+}
+
+/**
+ * Pull the SEO tags out of `<head>`: the title, the description/social `<meta>`
+ * tags, and the canonical/alternate `<link>`s. The rest of the head (fonts,
+ * scripts, styles) is shared chrome, dropped for the same reason as in
+ * `extractMain`.
+ */
+function extractSeoHead(html: string): string {
+  const head = html.slice(0, html.search(/<\/head>/));
+  const seoTags = head.match(
+    /<title>[^<]*<\/title>|<meta\s+(?:name|property|itemprop)=[^>]*>|<link\s+rel="(?:canonical|alternate)"[^>]*>/g,
+  );
+  if (!seoTags) {
+    throw new Error("Could not locate SEO tags in rendered <head>");
+  }
+  return `<head>${seoTags.join("")}</head>`;
+}
+
+/**
+ * Pull out the visually hidden hint that points AI agents at the page's `.md`
+ * twin. It sits outside `<main>`, so `extractMain` alone would drop it.
+ */
+function extractAgentHint(html: string): string {
+  const hint = html.match(
+    /<div class="[^"]*\bagent-hint\b[^"]*"[^>]*>[\s\S]*?<\/div>/,
+  );
+  if (!hint) {
+    throw new Error("Could not locate the agent hint in rendered <body>");
+  }
+  return hint[0];
 }
 
 /**
@@ -242,7 +282,9 @@ describe("API page HTML snapshots", () => {
         params: page.params,
         request: new Request(`${BASE_URL}${page.urlPath}`),
       });
-      const normalized = await normalize(extractMain(html));
+      const normalized = await normalize(
+        extractSeoHead(html) + extractAgentHint(html) + extractMain(html),
+      );
       await expect(normalized).toMatchFileSnapshot(
         path.join(SNAPSHOT_DIR, `${page.name}.html`),
       );

@@ -8,14 +8,14 @@ breadcrumbs: Docs > API > Monitors
 
 # Monitors
 
-[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and
+[Monitors](https://docs.datadoghq.com/monitors.md) allow you to watch a metric or check that you care about and
 notifies your team when a defined threshold has exceeded.
 
-For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).
+For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types.md).
 
 **Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html).
 
-## [Create a monitor](/api/latest/monitors/create-a-monitor/)
+## [Create a monitor](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor.md)
 
 | Datadog site      | API endpoint                                          |
 | ----------------- | ----------------------------------------------------- |
@@ -27,7 +27,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor      |
 
-## [Get all monitors](/api/latest/monitors/get-all-monitors/)
+## [Get all monitors](https://docs.datadoghq.com/api/latest/monitors/get-all-monitors.md)
 
 | Datadog site      | API endpoint                                         |
 | ----------------- | ---------------------------------------------------- |
@@ -39,7 +39,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor      |
 
-## [Edit a monitor](/api/latest/monitors/edit-a-monitor/)
+## [Edit a monitor](https://docs.datadoghq.com/api/latest/monitors/edit-a-monitor.md)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -51,7 +51,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
 
-## [Get a monitor's details](/api/latest/monitors/get-a-monitor-s-details/)
+## [Get a monitor's details](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-s-details.md)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -63,7 +63,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
 
-## [Delete a monitor](/api/latest/monitors/delete-a-monitor/)
+## [Delete a monitor](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor.md)
 
 | Datadog site      | API endpoint                                                         |
 | ----------------- | -------------------------------------------------------------------- |
@@ -75,7 +75,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
 
-## [Check if a monitor can be deleted](/api/latest/monitors/check-if-a-monitor-can-be-deleted/)
+## [Check if a monitor can be deleted](https://docs.datadoghq.com/api/latest/monitors/check-if-a-monitor-can-be-deleted.md)
 
 | Datadog site      | API endpoint                                                    |
 | ----------------- | --------------------------------------------------------------- |
@@ -87,7 +87,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/can_delete |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/can_delete      |
 
-## [Validate a monitor](/api/latest/monitors/validate-a-monitor/)
+## [Validate a monitor](https://docs.datadoghq.com/api/latest/monitors/validate-a-monitor.md)
 
 | Datadog site      | API endpoint                                                   |
 | ----------------- | -------------------------------------------------------------- |
@@ -99,7 +99,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/validate |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/validate      |
 
-## [Validate an existing monitor](/api/latest/monitors/validate-an-existing-monitor/)
+## [Validate an existing monitor](https://docs.datadoghq.com/api/latest/monitors/validate-an-existing-monitor.md)
 
 | Datadog site      | API endpoint                                                                |
 | ----------------- | --------------------------------------------------------------------------- |
@@ -111,7 +111,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/validate      |
 
-## [Get a monitor configuration policy](/api/latest/monitors/get-a-monitor-configuration-policy/)
+## [Get a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-configuration-policy.md)
 
 | Datadog site      | API endpoint                                                            |
 | ----------------- | ----------------------------------------------------------------------- |
@@ -123,7 +123,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
 
-## [Monitors search](/api/latest/monitors/monitors-search/)
+## [Monitors search](https://docs.datadoghq.com/api/latest/monitors/monitors-search.md)
 
 | Datadog site      | API endpoint                                                |
 | ----------------- | ----------------------------------------------------------- |
@@ -135,7 +135,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/search |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/search      |
 
-## [Get all monitor configuration policies](/api/latest/monitors/get-all-monitor-configuration-policies/)
+## [Get all monitor configuration policies](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-configuration-policies.md)
 
 | Datadog site      | API endpoint                                                |
 | ----------------- | ----------------------------------------------------------- |
@@ -147,7 +147,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/policy |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/policy      |
 
-## [Monitors group search](/api/latest/monitors/monitors-group-search/)
+## [Monitors group search](https://docs.datadoghq.com/api/latest/monitors/monitors-group-search.md)
 
 | Datadog site      | API endpoint                                                       |
 | ----------------- | ------------------------------------------------------------------ |
@@ -159,7 +159,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/groups/search |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/groups/search      |
 
-## [Create a monitor configuration policy](/api/latest/monitors/create-a-monitor-configuration-policy/)
+## [Create a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-configuration-policy.md)
 
 | Datadog site      | API endpoint                                                 |
 | ----------------- | ------------------------------------------------------------ |
@@ -171,7 +171,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/policy |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/policy      |
 
-## [Unmute a monitor](/api/latest/monitors/unmute-a-monitor/)
+## [Unmute a monitor](https://docs.datadoghq.com/api/latest/monitors/unmute-a-monitor.md)
 
 | Datadog site      | API endpoint                                                              |
 | ----------------- | ------------------------------------------------------------------------- |
@@ -183,7 +183,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/unmute      |
 
-## [Edit a monitor configuration policy](/api/latest/monitors/edit-a-monitor-configuration-policy/)
+## [Edit a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/edit-a-monitor-configuration-policy.md)
 
 | Datadog site      | API endpoint                                                              |
 | ----------------- | ------------------------------------------------------------------------- |
@@ -195,7 +195,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
 
-## [Mute a monitor](/api/latest/monitors/mute-a-monitor/)
+## [Mute a monitor](https://docs.datadoghq.com/api/latest/monitors/mute-a-monitor.md)
 
 | Datadog site      | API endpoint                                                            |
 | ----------------- | ----------------------------------------------------------------------- |
@@ -207,7 +207,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/mute      |
 
-## [Delete a monitor configuration policy](/api/latest/monitors/delete-a-monitor-configuration-policy/)
+## [Delete a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-configuration-policy.md)
 
 | Datadog site      | API endpoint                                                               |
 | ----------------- | -------------------------------------------------------------------------- |
@@ -219,7 +219,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
 
-## [Unmute all monitors](/api/latest/monitors/unmute-all-monitors/) (deprecated)
+## [Unmute all monitors](https://docs.datadoghq.com/api/latest/monitors/unmute-all-monitors.md) (deprecated)
 
 | Datadog site      | API endpoint                                                 |
 | ----------------- | ------------------------------------------------------------ |
@@ -231,7 +231,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/v1/monitor/unmute_all |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/v1/monitor/unmute_all      |
 
-## [Get a monitor notification rule](/api/latest/monitors/get-a-monitor-notification-rule/)
+## [Get a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-notification-rule.md)
 
 | Datadog site      | API endpoint                                                                     |
 | ----------------- | -------------------------------------------------------------------------------- |
@@ -243,7 +243,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
 
-## [Mute all monitors](/api/latest/monitors/mute-all-monitors/) (deprecated)
+## [Mute all monitors](https://docs.datadoghq.com/api/latest/monitors/mute-all-monitors.md) (deprecated)
 
 | Datadog site      | API endpoint                                               |
 | ----------------- | ---------------------------------------------------------- |
@@ -255,7 +255,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/v1/monitor/mute_all |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/v1/monitor/mute_all      |
 
-## [Get all monitor notification rules](/api/latest/monitors/get-all-monitor-notification-rules/)
+## [Get all monitor notification rules](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-notification-rules.md)
 
 | Datadog site      | API endpoint                                                           |
 | ----------------- | ---------------------------------------------------------------------- |
@@ -267,7 +267,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
 
-## [Create a monitor notification rule](/api/latest/monitors/create-a-monitor-notification-rule/)
+## [Create a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-notification-rule.md)
 
 | Datadog site      | API endpoint                                                            |
 | ----------------- | ----------------------------------------------------------------------- |
@@ -279,7 +279,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
 
-## [Update a monitor notification rule](/api/latest/monitors/update-a-monitor-notification-rule/)
+## [Update a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/update-a-monitor-notification-rule.md)
 
 | Datadog site      | API endpoint                                                                       |
 | ----------------- | ---------------------------------------------------------------------------------- |
@@ -291,7 +291,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
 
-## [Delete a monitor notification rule](/api/latest/monitors/delete-a-monitor-notification-rule/)
+## [Delete a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-notification-rule.md)
 
 | Datadog site      | API endpoint                                                                        |
 | ----------------- | ----------------------------------------------------------------------------------- |
@@ -303,7 +303,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
 
-## [Get a monitor user template](/api/latest/monitors/get-a-monitor-user-template/) (preview)
+## [Get a monitor user template](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-user-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                |
 | ----------------- | --------------------------------------------------------------------------- |
@@ -315,7 +315,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
 
-## [Get all monitor user templates](/api/latest/monitors/get-all-monitor-user-templates/) (preview)
+## [Get all monitor user templates](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-user-templates.md) (preview)
 
 | Datadog site      | API endpoint                                                  |
 | ----------------- | ------------------------------------------------------------- |
@@ -327,7 +327,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/template |
 | app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/template      |
 
-## [Create a monitor user template](/api/latest/monitors/create-a-monitor-user-template/) (preview)
+## [Create a monitor user template](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-user-template.md) (preview)
 
 | Datadog site      | API endpoint                                                   |
 | ----------------- | -------------------------------------------------------------- |
@@ -339,7 +339,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/template |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/template      |
 
-## [Update a monitor user template to a new version](/api/latest/monitors/update-a-monitor-user-template-to-a-new-version/) (preview)
+## [Update a monitor user template to a new version](https://docs.datadoghq.com/api/latest/monitors/update-a-monitor-user-template-to-a-new-version.md) (preview)
 
 | Datadog site      | API endpoint                                                                |
 | ----------------- | --------------------------------------------------------------------------- |
@@ -351,7 +351,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
 | app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
 
-## [Delete a monitor user template](/api/latest/monitors/delete-a-monitor-user-template/) (preview)
+## [Delete a monitor user template](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-user-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                   |
 | ----------------- | ------------------------------------------------------------------------------ |
@@ -363,7 +363,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
 | app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
 
-## [Validate a monitor user template](/api/latest/monitors/validate-a-monitor-user-template/) (preview)
+## [Validate a monitor user template](https://docs.datadoghq.com/api/latest/monitors/validate-a-monitor-user-template.md) (preview)
 
 | Datadog site      | API endpoint                                                            |
 | ----------------- | ----------------------------------------------------------------------- |
@@ -375,7 +375,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/template/validate |
 | app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/template/validate      |
 
-## [Validate an existing monitor user template](/api/latest/monitors/validate-an-existing-monitor-user-template/) (preview)
+## [Validate an existing monitor user template](https://docs.datadoghq.com/api/latest/monitors/validate-an-existing-monitor-user-template.md) (preview)
 
 | Datadog site      | API endpoint                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------- |

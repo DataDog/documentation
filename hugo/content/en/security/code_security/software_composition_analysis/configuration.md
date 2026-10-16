@@ -23,7 +23,7 @@ The `sca` key was introduced in `schema-version: v1.1` and supports the followin
 Example:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.7
+schema-version: {{< version key="code_security_schema_version" >}}
 sca:
   ignore-paths:
     - "vendor/"

@@ -299,13 +299,11 @@ Jenkins によってすべてのビルドに設定される環境変数の包括
 | `TEAMCITY_VERSION`           | TeamCity サーバーのバージョン。                                                                       |
 | `TEAMCITY_BUILDCONF_NAME`    | 現在のビルドが属するビルド構成の名前。                                          |
 | `BUILD_URL`                  | 現在のビルドへのリンク。                                                                            |
-| `DATADOG_BUILD_ID`           | [Datadog TeamCity インテグレーション][102] で設定されるカスタム変数。                                            |
 
 TeamCity によってすべてのビルドに設定される環境変数の包括的なリストについては、[TeamCity の公式ドキュメント][101] を参照してください。
 
 
 [101]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
-[102]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 
 {{% /tab %}}
 {{% tab "Travis CI" %}}

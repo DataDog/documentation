@@ -102,7 +102,7 @@ function loadBannersByLocale(): Record<string, BannerPair> {
 function loadApiCategorySlugs(): Set<string> {
   const specs = ["v1", "v2"].map((version) =>
     readYaml<MinimalOpenApiSpec>(
-      path.join(REPO_ROOT, "hugo/data/api", version, "full_spec.yaml"),
+      path.join(REPO_ROOT, "astro/api-spec", version, "full_spec.yaml"),
     ),
   );
   return collectApiCategorySlugs(specs);

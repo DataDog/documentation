@@ -42,7 +42,7 @@ The type of monitor chosen from:
 
 **Notes**:
 
-- Synthetic monitors are created through the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for more information.
+- Synthetic monitors are created through the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics.md) documentation for more information.
 - Log monitors require an unscoped App Key.
 
 #### Query Types
@@ -62,7 +62,7 @@ Example: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`
 If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
 
 - `change_aggr` change, pct_change
-- `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)
+- `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types.md#define-the-conditions)
 - `time_window` last_#m (between 1 and 2880 depending on the monitor type), last_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or 2)
 - `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 
@@ -78,17 +78,17 @@ Example: `"check".over(tags).last(count).by(group).count_by_status()`
 - `count` must be at greater than or equal to your max threshold (defined in the `options`). It is limited to 100.
   For example, if you've specified to notify on 1 critical, 3 ok, and 2 warn statuses, `count` should be at least 3.
 - `group` must be specified for check monitors. Per-check grouping is already explicitly known for some service checks.
-  For example, Postgres integration monitors are tagged by `db`, `host`, and `port`, and Network monitors by `host`, `instance`, and `url`. See [Service Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation for more information.
+  For example, Postgres integration monitors are tagged by `db`, `host`, and `port`, and Network monitors by `host`, `instance`, and `url`. See [Service Checks](https://docs.datadoghq.com/api/latest/service-checks.md) documentation for more information.
 
 ##### Event Alert Query
 
-**Note:** The Event Alert Query has been replaced by the Event V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).
+**Note:** The Event Alert Query has been replaced by the Event V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features.md).
 
 ##### Event V2 Alert Query
 
 Example: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
 - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
@@ -100,7 +100,7 @@ Example: `events(query).rollup(rollup_method[, measure]).last(time_window) opera
 Example: `processes(search).over(tags).rollup('count').last(timeframe) operator #`
 
 - `search` free text search string for querying processes.
-  Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) page.
+  Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process.md?tab=linuxwindows) page.
 - `tags` one or more tags (comma-separated)
 - `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported timeframes: s, m, h and d
 - `operator` <, <=, >, >=, ==, or !=
@@ -110,7 +110,7 @@ Example: `processes(search).over(tags).rollup('count').last(timeframe) operator 
 
 Example: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `index_name` For multi-index organizations, the log index in which the request is performed.
 - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
@@ -141,7 +141,7 @@ Example: `error_budget("slo_id").over("time_window") operator #`
 
 Example: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
 - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
@@ -152,7 +152,7 @@ Example: `audits(query).rollup(rollup_method[, measure]).last(time_window) opera
 
 Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
 - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
@@ -163,7 +163,7 @@ Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
 
 Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
 - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
@@ -175,7 +175,7 @@ Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) ope
 "New issue" example: `error-tracking(query).source(issue_source).new().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`
 "High impact issue" example: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `issue_source` The issue source - supports `all`, `browser`, `mobile` and `backend` and defaults to `all` if omitted.
 - `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality` and defaults to `count` if omitted.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
@@ -188,7 +188,7 @@ Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) ope
 
 Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
 - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
@@ -199,7 +199,7 @@ Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_
 
 Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
 - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
@@ -210,7 +210,7 @@ Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_
 
 Example: `formula(query).timeframe_type(time_window).function(parameter) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `timeframe_type` The timeframe type to evaluate the cost
   - for `forecast` supports `current`
   - for `change`, `anomaly`, `threshold` supports `last`
@@ -234,7 +234,7 @@ Example: `formula(query).timeframe_type(time_window).function(parameter) operato
 
 Example: `network-path(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`
 
-- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax.md).
 - `index_name` The data type to monitor on - supports `netpath-path` and `netpath-hop`.
 - `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.
 - `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
@@ -287,10 +287,10 @@ This field is in preview. The draft value is only available to customers with th
 |                               | options                        | object    | List of options associated with your monitor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | options                       | enable_logs_sample             | boolean   | Whether or not to send a log sample when the log monitor triggers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | options                       | enable_samples                 | boolean   | Whether or not to send a list of samples when the monitor triggers. This is only used by CI Test and Pipeline monitors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| options                       | escalation_message             | string    | We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
+| options                       | escalation_message             | string    | We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify.md?tab=is_alert#renotify),
   block in the original message instead.
   A message to include with a re-notification. Supports the `@username` notification we allow elsewhere.
-  Not applicable if `renotify_interval` is `None`.                                                                                                                                                                                                                                                                                                                                                    |
+  Not applicable if `renotify_interval` is `None`.                                                                                                                                                                                                                                                                                                                                                  |
 | options                       | evaluation_delay               | int64     | Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to `300` (5min),
   the timeframe is set to `last_5m` and the time is 7:00, the monitor evaluates data from 6:50 to 6:55.
   This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.                                                                                                                                                                                                                                                                                                            |
@@ -554,9 +554,9 @@ Use new_group_delay instead. **Deprecated.** Default: `300`.                    
 | Object 5                      | name                           | string    | Name of the query for use in formulas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |                               | priority                       | int64     | Integer from 1 (high) to 5 (low) indicating alert severity.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |                               | query [*required*]             | string    | The monitor query.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|                               | restricted_roles               | [string]  | A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage write authorization for individual monitors by teams and users, in addition to roles.                                               |
+|                               | restricted_roles               | [string]  | A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles.md#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies.md) to manage write authorization for individual monitors by teams and users, in addition to roles.                                           |
 |                               | tags                           | [string]  | Tags associated to your monitor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|                               | type [*required*]              | enum      | The type of the monitor. For more information about `type`, see the [monitor options](https://docs.datadoghq.com/monitors/guide/monitor_api_options/) docs. Allowed values: `composite`, `event alert`, `log alert`, `metric alert`, `process alert`, `query alert`, `rum alert`, `service check`, `synthetics alert`, `trace-analytics alert`, `slo alert`, `event-v2 alert`, `audit alert`, `ci-pipelines alert`, `ci-tests alert`, `error-tracking alert`, `database-monitoring alert`, `network-performance alert`, `cost alert`, `data-quality alert`, `network-path alert`.                                                                                |
+|                               | type [*required*]              | enum      | The type of the monitor. For more information about `type`, see the [monitor options](https://docs.datadoghq.com/monitors/guide/monitor_api_options.md) docs. Allowed values: `composite`, `event alert`, `log alert`, `metric alert`, `process alert`, `query alert`, `rum alert`, `service check`, `synthetics alert`, `trace-analytics alert`, `slo alert`, `event-v2 alert`, `audit alert`, `ci-pipelines alert`, `ci-tests alert`, `error-tracking alert`, `database-monitoring alert`, `network-performance alert`, `cost alert`, `data-quality alert`, `network-path alert`.                                                                              |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -629,10 +629,10 @@ This field is in preview. The draft value is only available to customers with th
 | options                       | device_ids                     | [string]  | IDs of the device the Synthetics monitor is running on. **Deprecated.** Read-only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | options                       | enable_logs_sample             | boolean   | Whether or not to send a log sample when the log monitor triggers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | options                       | enable_samples                 | boolean   | Whether or not to send a list of samples when the monitor triggers. This is only used by CI Test and Pipeline monitors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| options                       | escalation_message             | string    | We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
+| options                       | escalation_message             | string    | We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify.md?tab=is_alert#renotify),
   block in the original message instead.
   A message to include with a re-notification. Supports the `@username` notification we allow elsewhere.
-  Not applicable if `renotify_interval` is `None`.                                                                                                                                                                                                                                                                                                                                                    |
+  Not applicable if `renotify_interval` is `None`.                                                                                                                                                                                                                                                                                                                                                  |
 | options                       | evaluation_delay               | int64     | Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to `300` (5min),
   the timeframe is set to `last_5m` and the time is 7:00, the monitor evaluates data from 6:50 to 6:55.
   This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.                                                                                                                                                                                                                                                                                                            |
@@ -897,12 +897,12 @@ Use new_group_delay instead. **Deprecated.** Default: `300`.                    
 |                               | overall_state                  | enum      | The different states your monitor can be in. Read-only. Allowed values: `Alert`, `Ignored`, `No Data`, `OK`, `Skipped`, `Unknown`, `Warn`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |                               | priority                       | int64     | Integer from 1 (high) to 5 (low) indicating alert severity.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |                               | query [*required*]             | string    | The monitor query.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|                               | restricted_roles               | [string]  | A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage write authorization for individual monitors by teams and users, in addition to roles.                                               |
+|                               | restricted_roles               | [string]  | A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles.md#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies.md) to manage write authorization for individual monitors by teams and users, in addition to roles.                                           |
 |                               | state                          | object    | Wrapper object with the different monitor states. Read-only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | state                         | groups                         | object    | Dictionary where the keys are groups (comma separated lists of tags) and the values are
   the list of groups your monitor is broken down on.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 |                               | tags                           | [string]  | Tags associated to your monitor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|                               | type [*required*]              | enum      | The type of the monitor. For more information about `type`, see the [monitor options](https://docs.datadoghq.com/monitors/guide/monitor_api_options/) docs. Allowed values: `composite`, `event alert`, `log alert`, `metric alert`, `process alert`, `query alert`, `rum alert`, `service check`, `synthetics alert`, `trace-analytics alert`, `slo alert`, `event-v2 alert`, `audit alert`, `ci-pipelines alert`, `ci-tests alert`, `error-tracking alert`, `database-monitoring alert`, `network-performance alert`, `cost alert`, `data-quality alert`, `network-path alert`.                                                                                |
+|                               | type [*required*]              | enum      | The type of the monitor. For more information about `type`, see the [monitor options](https://docs.datadoghq.com/monitors/guide/monitor_api_options.md) docs. Allowed values: `composite`, `event alert`, `log alert`, `metric alert`, `process alert`, `query alert`, `rum alert`, `service check`, `synthetics alert`, `trace-analytics alert`, `slo alert`, `event-v2 alert`, `audit alert`, `ci-pipelines alert`, `ci-tests alert`, `error-tracking alert`, `database-monitoring alert`, `network-performance alert`, `cost alert`, `data-quality alert`, `network-path alert`.                                                                              |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -1164,7 +1164,7 @@ func main() {
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=go) and then save the example to `main.go` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" go run "main.go"
@@ -1212,7 +1212,7 @@ with ApiClient(configuration) as api_client:
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" python3 "example.py"
@@ -1252,7 +1252,7 @@ p api_instance.create_monitor(body)
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=ruby) and then save the example to `example.rb` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=ruby) and then save the example to `example.rb` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>" rb "example.rb"
@@ -1289,7 +1289,7 @@ api.Monitor.create(
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=python-legacy) and then save the example to `example.py` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python-legacy) and then save the example to `example.py` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<DD_API_KEY>" DD_APP_KEY="<DD_APP_KEY>" python "example.py"
@@ -1324,7 +1324,7 @@ dog.monitor(
 
 **Instructions**
 
-First [install the library and its dependencies](/api/latest/?code-lang=ruby-legacy) and then save the example to `example.rb` and run following commands:
+First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=ruby-legacy) and then save the example to `example.rb` and run following commands:
 
 ```bash
 DD_SITE="datadoghq.com" DD_API_KEY="<DD_API_KEY>" DD_APP_KEY="<DD_APP_KEY>" rb "example.rb"

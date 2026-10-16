@@ -513,7 +513,7 @@ Push events (spans and metrics) for an experiment.
 | Field | Type | Description |
 | ---- | ---- | ---- |
 | `spans` | [][Span](#object-span) | List of spans capturing experiment task execution. |
-| `metrics` | [][Metric](#object-metric) | List of evaluator metrics associated with spans. |
+| `metrics` | [][Metric](#object-metric) | List of evaluation metrics associated with spans. |
 
 #### Object: Span
 

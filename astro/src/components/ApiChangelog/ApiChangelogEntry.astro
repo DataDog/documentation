@@ -1,0 +1,91 @@
+---
+import styles from "./ApiChangelogEntry.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import {
+  CHANGELOG_BUCKET_LABELS,
+  splitInlineCode,
+  type ResolvedChangelogEntry,
+} from "@lib/api/changelog";
+
+interface Props {
+  entry: ResolvedChangelogEntry;
+}
+
+const { entry } = Astro.props;
+const cl = classListFactory(styles);
+// TODO: no Hugo i18n keys exist for these strings yet.
+const productLabel = "API product";
+const operationsLabel = "Operations";
+---
+
+<article class={cl("api-changelog-entry")}>
+  <span
+    class={cl(
+      "api-changelog-entry__pill",
+      `api-changelog-entry__pill--${entry.bucket}`,
+    )}
+  >
+    {CHANGELOG_BUCKET_LABELS[entry.bucket]}
+  </span>
+  <div class={cl("api-changelog-entry__body")}>
+    <div class={cl("api-changelog-entry__meta")}>
+      <span class={cl("api-changelog-entry__product")}>
+        {productLabel}:{" "}
+        {
+          entry.product.href ? (
+            <a
+              class={cl("api-changelog-entry__product-name")}
+              href={entry.product.href}
+            >
+              {entry.product.name}
+            </a>
+          ) : (
+            <span class={cl("api-changelog-entry__product-name")}>
+              {entry.product.name}
+            </span>
+          )
+        }
+      </span>
+    </div>
+    <h3 class={cl("api-changelog-entry__title")}>
+      {
+        splitInlineCode(entry.title).map((part) =>
+          part.isCode ? <code>{part.text}</code> : part.text,
+        )
+      }
+    </h3>
+    {
+      entry.operations.length > 0 && (
+        <div class={cl("api-changelog-entry__operations-row")}>
+          <span
+            class={cl("api-changelog-entry__operations-label")}
+            aria-hidden="true"
+          >
+            {operationsLabel}:
+          </span>
+          <ul
+            class={cl("api-changelog-entry__operations")}
+            aria-label={operationsLabel}
+          >
+            {entry.operations.map((operation) => (
+              <li class={cl("api-changelog-entry__operation-item")}>
+                {operation.href ? (
+                  <a
+                    class={cl("api-changelog-entry__operation")}
+                    href={operation.href}
+                  >
+                    <code>{operation.operationId}</code>
+                  </a>
+                ) : (
+                  <code class={cl("api-changelog-entry__operation")}>
+                    {operation.operationId}
+                  </code>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</article>

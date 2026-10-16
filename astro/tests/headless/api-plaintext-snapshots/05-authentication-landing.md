@@ -16,9 +16,9 @@ Requests that read data require full access and also require an `application key
 If you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to
 `https://api.datadoghq.eu` or override this value directly when creating your client.
 
-[Manage your account’s API and application keys](https://app.datadoghq.com/organization-settings/) in Datadog, and see the [API and Application Keys page](https://docs.datadoghq.com/account_management/api-app-keys/) in the documentation.
+[Manage your account’s API and application keys](https://app.datadoghq.com/organization-settings/) in Datadog, and see the [API and Application Keys page](https://docs.datadoghq.com/account_management/api-app-keys.md) in the documentation.
 
-## [Validate API key](/api/latest/authentication/validate-api-key/)
+## [Validate API key](https://docs.datadoghq.com/api/latest/authentication/validate-api-key.md)
 
 | Datadog site      | API endpoint                                          |
 | ----------------- | ----------------------------------------------------- |

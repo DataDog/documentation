@@ -446,6 +446,54 @@ describe("MobileNav.astro", () => {
     });
   });
 
+  describe("Changelog link", () => {
+    function topLevelLabels(doc: Document): string[] {
+      return [...doc.querySelectorAll(".mobile-nav__list--api > li")].map(
+        (item) =>
+          (
+            item.querySelector(":scope > a, :scope > details > summary")
+              ?.textContent ?? ""
+          ).trim(),
+      );
+    }
+
+    function changelogLink(doc: Document): Element | null {
+      return doc.querySelector(
+        '.mobile-nav__list--api > li > a.mobile-nav__link[data-level="0"]',
+      );
+    }
+
+    it("renders a top-level Changelog link right after Overview", async () => {
+      const [category] = await getCategoriesWithOperations();
+      const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+      expect(topLevelLabels(doc).slice(0, 2)).toEqual([
+        "Overview",
+        "Changelog",
+      ]);
+
+      const link = changelogLink(doc);
+      expect(link?.textContent?.trim()).toBe("Changelog");
+      expect(link?.getAttribute("href")).toBe("/api/changelog/");
+      expect(link?.classList.contains("mobile-nav__link--active")).toBe(false);
+      expect(link?.hasAttribute("aria-current")).toBe(false);
+    });
+
+    for (const pathname of ["/api/changelog/", "/api/changelog/breaking/2/"]) {
+      it(`is active and current on ${pathname}, with no section expanded`, async () => {
+        const doc = await renderMobileNav(pathname);
+        const link = changelogLink(doc);
+        expect(link?.classList.contains("mobile-nav__link--active")).toBe(true);
+        expect(link?.getAttribute("aria-current")).toBe("page");
+        expect(
+          doc.querySelectorAll(
+            ".mobile-nav__list--api .mobile-nav__section[open]",
+          ).length,
+        ).toBe(0);
+        expect(doc.querySelector('summary[aria-current="page"]')).toBeNull();
+      });
+    }
+  });
+
   it("renders nested subsections with children as expandable <details> elements", async () => {
     const tree = getDocsNavTree();
     const sectionWithGrandchildren = tree.find((node) =>

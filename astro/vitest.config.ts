@@ -6,7 +6,7 @@ import { defineConfig } from "vitest/config";
 // Vite server and module graph:
 //
 //   fixture     headless + component tests, frozen 8-category fixture
-//   live        full-spec shape validation, live Hugo data
+//   live        full-spec shape validation, live spec staged in api-spec/
 //
 // Run a single project:
 //   vitest run --config vitest.unit.config.ts

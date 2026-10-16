@@ -7,14 +7,15 @@
  * stops matching any region.
  *
  * Picked up by `vitest.integration.config.ts`, which omits the frozen-fixture
- * plugin so `@hugo-site/data/api` resolves to the actual Hugo data directory.
+ * plugin so `@api-spec` resolves to the live spec staged by `yarn fetch:spec`.
  */
 
 import { describe, it, expect } from "vitest";
 import { parse as parseYaml } from "yaml";
-import V1_SPEC_RAW from "@hugo-site/data/api/v1/full_spec.yaml?raw";
-import V2_SPEC_RAW from "@hugo-site/data/api/v2/full_spec.yaml?raw";
+import V1_SPEC_RAW from "@api-spec/v1/full_spec.yaml?raw";
+import V2_SPEC_RAW from "@api-spec/v2/full_spec.yaml?raw";
 import { getRegions, getDefaultRegions } from "@lib/api/regionResolver";
+import { getAllowedRegions } from "@config/regions";
 
 import type { OpenAPIV3 } from "openapi-types";
 
@@ -99,7 +100,7 @@ describe("getRegions across the full spec", () => {
     expect([...unknown]).toEqual([]);
   });
 
-  it("resolves the on-call paging operations to all nine regions", () => {
+  it("resolves the on-call paging operations to all regions", () => {
     const allKeys = getDefaultRegions().map((r) => r.key);
     for (const id of FULLY_QUALIFIED_HOST_OPERATIONS.filter((i) =>
       i.includes("on-call"),
@@ -113,16 +114,23 @@ describe("getRegions across the full spec", () => {
     }
   });
 
-  it("resolves prodlytics to the six regions with a browser-intake host", () => {
-    const found = ALL_OPERATIONS.find(
-      (o) => o.id === "POST /api/v2/prodlytics",
+  it("maps every fully-qualified host in the spec to a region", () => {
+    // If the spec adds a host that no region lists in `exact_domains`,
+    // getRegions drops that region silently. This catches it without
+    // pinning which regions each operation supports.
+    const claimedHosts = new Set(
+      getAllowedRegions().flatMap((region) => region.exactDomains),
     );
-    expect(found, "POST /api/v2/prodlytics missing from the spec").toBeTruthy();
-    // uk1 has a browser-intake host defined in shared/regions.yaml but the
-    // spec enum omits it; gov and gov2 have no browser-intake host at all.
-    expect(getRegions(found!.spec, found!.operation).map((r) => r.key)).toEqual(
-      ["us", "us3", "us5", "eu", "ap1", "ap2"],
-    );
+    for (const id of FULLY_QUALIFIED_HOST_OPERATIONS) {
+      const found = ALL_OPERATIONS.find((o) => o.id === id);
+      expect(found, `${id} missing from the spec`).toBeTruthy();
+      const servers = found!.operation.servers ?? found!.spec.servers;
+      const hosts: string[] = servers?.[0]?.variables?.site?.enum ?? [];
+      expect(
+        hosts.filter((host) => !claimedHosts.has(host)),
+        id,
+      ).toEqual([]);
+    }
   });
 
   it("needs the fallback for exactly the operations listed above", () => {

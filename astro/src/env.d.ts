@@ -31,6 +31,16 @@ declare module "*.astro" {
   export default Component;
 }
 
+/**
+ * The built URL of the chunk a dynamic `import()` of the specifier loads,
+ * relative to the importing chunk. Provided by `chunkUrlPlugin`; `null` under
+ * the dev server and in server builds.
+ */
+declare module "chunk-url:*" {
+  const url: string | null;
+  export default url;
+}
+
 declare module "*?raw" {
   const content: string;
   export default content;

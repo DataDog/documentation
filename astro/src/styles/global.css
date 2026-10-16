@@ -297,6 +297,7 @@ tbody code {
 ::view-transition-group(header__nav),
 ::view-transition-group(announcement-banner),
 ::view-transition-group(sidenav),
+::view-transition-group(api-changelog-filter-bar),
 ::view-transition-group(root),
 ::view-transition-old(header__nav),
 ::view-transition-new(header__nav),
@@ -304,6 +305,8 @@ tbody code {
 ::view-transition-new(announcement-banner),
 ::view-transition-old(sidenav),
 ::view-transition-new(sidenav),
+::view-transition-old(api-changelog-filter-bar),
+::view-transition-new(api-changelog-filter-bar),
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -312,6 +315,7 @@ tbody code {
 ::view-transition-old(header__nav),
 ::view-transition-old(announcement-banner),
 ::view-transition-old(sidenav),
+::view-transition-old(api-changelog-filter-bar),
 ::view-transition-old(root) {
   display: none;
 }

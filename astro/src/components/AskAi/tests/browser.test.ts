@@ -10,28 +10,6 @@ import { test, expect, type Page } from "@playwright/test";
 const PAGE = "/api/latest/authentication/";
 
 /**
- * The Datadog-user lookup is cross-origin. Left alone it either succeeds or is
- * blocked by CORS depending on the network the suite runs on, and a blocked
- * request logs a console error that has nothing to do with the widget.
- */
-async function stubDatadogUserLookup(page: Page): Promise<void> {
-  await page.route("**/www.datadoghq.com/locate", async (route) => {
-    // Echoed rather than `*`: the fetch sends credentials, and a wildcard is
-    // rejected for credentialed requests.
-    const origin = route.request().headers()["origin"] ?? "";
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      headers: {
-        "access-control-allow-origin": origin,
-        "access-control-allow-credentials": "true",
-      },
-      body: JSON.stringify({ user_status: false }),
-    });
-  });
-}
-
-/**
  * Answers the one AI request this suite makes, so the source chips are rendered
  * by the real code path rather than by markup fabricated in the test. The
  * package parses sources out of the answer text, so the canned message carries
@@ -69,7 +47,9 @@ async function stubDocsAiAnswer(page: Page): Promise<void> {
 /**
  * Resource-timing facts about the page's own load, read after the widget has
  * mounted. `ask-ai` matches case-sensitively, so it cannot collide with the
- * mount script's URL, which carries the component's `AskAi.astro` name.
+ * mount script's URL, which carries the component's `AskAi.astro` name. The
+ * `chunk-url:` stub is excluded: under the dev server its URL also ends in the
+ * package's path, but it is a one-line module the mount script imports eagerly.
  */
 async function readLoadTimings(page: Page) {
   return page.evaluate(() => {
@@ -78,10 +58,13 @@ async function readLoadTimings(page: Page) {
     )[0] as PerformanceNavigationTiming;
     const askAiModule = performance
       .getEntriesByType("resource")
-      .find((entry) => entry.name.includes("ask-ai"));
+      .find(
+        (entry) =>
+          entry.name.includes("ask-ai") && !entry.name.includes("chunk-url"),
+      );
 
     return {
-      domContentLoadedMs: navigation.domContentLoadedEventEnd,
+      loadEventEndMs: navigation.loadEventEnd,
       askAiModuleStartMs: askAiModule?.startTime ?? null,
       // Reported so a miss on the match above is legible in the failure output
       // rather than looking like the module was never requested.
@@ -94,8 +77,6 @@ test.describe("Ask AI", () => {
   test("mounts a floating button that opens the panel, throwing nothing", async ({
     page,
   }) => {
-    await stubDatadogUserLookup(page);
-
     // A throwaway load first: under `astro dev`, the first page to pull a
     // dependency through Vite's optimizer gets reloaded mid-load, and the
     // requests that reload cancels surface as console errors. Recording from
@@ -126,33 +107,53 @@ test.describe("Ask AI", () => {
   test("fetches the package only after the page has finished loading", async ({
     page,
   }) => {
-    await stubDatadogUserLookup(page);
-
     // Same throwaway load as above: Vite's dep optimizer reloads the first page
     // to pull a new dependency, which would land the module's request in the
     // wrong navigation's resource timeline.
     await page.goto(PAGE);
     await page.waitForLoadState("networkidle");
 
+    // On a fast local server `load` beats the first idle period anyway, so hold
+    // it open: preloaded fonts delay the `load` event.
+    await page.route(/\.woff2?$/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await route.continue();
+    });
+
     await page.goto(PAGE);
     await expect(page.locator(".conv-search-float-btn")).toBeVisible();
 
     const timings = await readLoadTimings(page);
 
-    // The mount script registers its idle callback while the deferred module
-    // scripts are still running, and `DOMContentLoaded` is dispatched before the
-    // browser yields to an idle period — so the request cannot start any earlier
-    // than this, whatever the machine's speed.
+    // Starting any earlier puts a large high-priority script in the page's own
+    // load, where Lighthouse counts it in the network dependency tree.
     expect(timings.askAiModuleStartMs).not.toBeNull();
-    expect(timings.askAiModuleStartMs).toBeGreaterThan(
-      timings.domContentLoadedMs,
-    );
+    expect(timings.askAiModuleStartMs).toBeGreaterThan(timings.loadEventEndMs);
+  });
+
+  test("makes no Datadog-user lookup off Datadog's domain", async ({
+    page,
+  }) => {
+    // The lookup is blocked by CORS anywhere but Datadog's domain, so making it
+    // here would only log an error. Both mount sites share one config, so the
+    // widget mounting is enough to prove neither asked.
+    const locateRequests: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes("datadoghq.com/locate")) {
+        locateRequests.push(request.url());
+      }
+    });
+
+    await page.goto(PAGE);
+    await expect(page.locator(".conv-search-float-btn")).toBeVisible();
+    await page.waitForLoadState("networkidle");
+
+    expect(locateRequests).toEqual([]);
   });
 
   test("keeps the disclaimer tooltip hidden until the info button is hovered", async ({
     page,
   }) => {
-    await stubDatadogUserLookup(page);
     await page.goto(PAGE);
 
     await page.locator(".conv-search-float-btn").click();
@@ -197,7 +198,6 @@ test.describe("Ask AI", () => {
   });
 
   test("sizes the source chips the way Hugo does", async ({ page }) => {
-    await stubDatadogUserLookup(page);
     await stubDocsAiAnswer(page);
     await page.goto(PAGE);
 
@@ -230,7 +230,6 @@ test.describe("Ask AI", () => {
   test("the searchbar's Ask AI row opens the one mounted panel", async ({
     page,
   }) => {
-    await stubDatadogUserLookup(page);
     await page.goto(PAGE);
 
     // Two SearchBar islands hydrate on this page (the API side nav and the

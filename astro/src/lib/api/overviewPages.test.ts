@@ -57,6 +57,15 @@ describe("resolveOverviewState", () => {
     });
   });
 
+  it("leaves the section inactive on changelog pages", () => {
+    expect(resolveOverviewState(pages, "/api/changelog/")).toEqual({
+      isOverviewSection: false,
+    });
+    expect(resolveOverviewState(pages, "/api/changelog/breaking/2/")).toEqual({
+      isOverviewSection: false,
+    });
+  });
+
   it("leaves the section inactive outside the API root", () => {
     expect(resolveOverviewState(pages, "/getting_started/")).toEqual({
       isOverviewSection: false,
