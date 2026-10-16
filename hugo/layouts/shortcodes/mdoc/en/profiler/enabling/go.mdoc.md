@@ -15,7 +15,6 @@ For the [Trace to Profiling integration][5] and [Endpoint Profiling][6], use `dd
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
 ## Installation
-
 To begin profiling applications:
 
 1. Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][3].
@@ -72,6 +71,86 @@ By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfil
 {% /alert %}
 
 If you automatically instrument your Go application with [Orchestrion][18], it adds the continuous profiler code to your application. To enable the profiler at runtime, set the environment variable `DD_PROFILING_ENABLED=true`.
+
+### AI-assisted installation
+
+Use the following prompt with a local AI coding agent to set up the Go profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my Go service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- go.mod and go.sum to determine the Go version and whether dd-trace-go
+  is already a dependency. Check whether it is v1
+  (gopkg.in/DataDog/dd-trace-go.v1) or v2
+  (github.com/DataDog/dd-trace-go/v2). If v1, note the exact version
+  pinned in go.sum.
+- The main package (main.go or cmd/ directory) to find the application
+  entrypoint.
+- Existing imports of the profiler or tracer packages to detect current
+  APM or profiler usage.
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for startup
+  commands and existing Datadog Agent configuration. Check whether the
+  application targets a serverless platform (AWS Lambda, Cloud Functions)
+  where Continuous Profiler is not supported.
+- Existing environment variables or config files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
+- Use of cgo (import "C" statements) that would benefit from
+  cgosymbolizer.
+- Orchestrion configuration (orchestrion.tool.go or go generate
+  directives) for automatic instrumentation.
+
+Present a summary of what you detected, then ask ONLY about what you
+could not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the
+  project).
+- Which extra profile types to enable beyond CPU and Heap
+  (BlockProfile, MutexProfile, GoroutineProfile).
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+- If a serverless platform is detected, warn that Continuous Profiler
+  is not supported there and stop.
+- dd-trace-go v2 is recommended for all projects. Add the
+  github.com/DataDog/dd-trace-go/v2/profiler dependency.
+  If v1 is detected, recommend migrating to v2 and link the migration
+  guide: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/migration
+  If v1 must be kept, use the v1 import path instead.
+- If v1 is detected at a version older than 1.51.0, warn that
+  Trace-to-Profiling integration and Endpoint Profiling require
+  dd-trace-go v1.51.0+.
+- Add the profiler.Start() call in the main() function with
+  WithService, WithEnv, WithVersion, and the requested
+  WithProfileTypes. Handle the error:
+    err := profiler.Start(...)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer profiler.Stop()
+  IMPORTANT: defer profiler.Stop() must be in the same function scope
+  as profiler.Start() (typically main) for the defer to execute on
+  shutdown.
+- If Orchestrion is detected, use the DD_PROFILING_ENABLED=true
+  environment variable approach instead of code changes.
+- If cgo is detected, suggest adding the cgosymbolizer package:
+  go get github.com/ianlancetaylor/cgosymbolizer@latest
+  and import _ "github.com/ianlancetaylor/cgosymbolizer".
+  Warn that this library is experimental and can cause infrequent
+  deadlocks in programs that use C++ exceptions or libraries like
+  tcmalloc that also collect call stacks.
+- If Go version is 1.21+, mention that Profile-Guided Optimization
+  (PGO) is available and can save up to 14% CPU using Datadog
+  profiler data. Link the guide:
+  https://docs.datadoghq.com/profiler/guide/save-cpu-in-production-with-go-pgo
+- Mention the optional timeline feature for connecting traces and
+  profiles with span execution timelines.
+- Suggest setting up Source Code Integration to connect profiling
+  data with Git repositories.
+- Show the complete modified main() function or Dockerfile.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=go
+```
 
 ## Save up to 14% CPU in production with PGO
 

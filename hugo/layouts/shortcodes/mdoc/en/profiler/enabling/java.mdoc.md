@@ -79,7 +79,6 @@ Available profile types
 <!-- end GraalVM Native Image -->
 
 ## Installation
-
 To begin profiling applications:
 
 1. Install and run Datadog Agent v6+. Datadog recommends using [Datadog Agent v7+][3]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and the port to `8126/TCP`.
@@ -184,6 +183,94 @@ For GraalVM native-image applications, switch the **Runtime** filter above to **
 {% /if %}
 <!-- end GraalVM Native Image -->
 
+### AI-assisted installation
+
+Use the following prompt with a local AI coding agent to set up the Java profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my JVM-based
+service (Java, Scala, Kotlin, Groovy, or Clojure).
+
+First, scan my project to auto-detect as much as possible. Look for:
+- pom.xml, build.gradle, build.gradle.kts, or Bazel BUILD/WORKSPACE files to
+  determine Java version and dependencies (check if dd-java-agent or
+  dd-trace-java is already present).
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for startup commands,
+  base image (JDK distribution and OS), and existing Datadog Agent config.
+- Application startup scripts or entrypoints (look for java -jar, mvn exec,
+  gradle bootRun, or similar commands). Note whether profiling config uses
+  -D system properties or DD_ environment variables so you can match the
+  existing pattern.
+- Existing environment variables or config files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
+- GraalVM native-image configuration (native-image.properties,
+  native-maven-plugin, Gradle native-image plugin, Bazel native-image rules,
+  or direct native-image CLI usage in build scripts).
+
+Determine which of the three setup paths applies:
+
+1. JVM on Linux — full profile type support:
+   CPU, Wallclock, Allocations, Live Heap, Exceptions, I/O.
+   Minimum JDK versions: OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+.
+   OpenJ9: 8u372+, 11.0.18+, 17.0.6+.
+
+2. JVM on Windows — reduced profile type support:
+   CPU, Allocations, I/O, Exceptions (no Wallclock or Live Heap).
+   Minimum JDK versions: OpenJDK 8u282+, 11.0.17+, 17.0.5+, 21.0.3+.
+   Oracle JDK: 11.0.17+ (JDK 8 limited to CPU only, may require
+   commercial license for JFR).
+
+3. GraalVM Native Image (Linux, Windows, or macOS) — Preview:
+   CPU and Allocations only (no Wallclock or Live Heap).
+   Minimum: GraalVM 17+.
+   Uses a different setup flow from the JVM paths.
+
+Present a summary of what you detected (OS, JDK distribution, runtime
+path, config style), then ask ONLY about what you could not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+  If APM is not already enabled, the Datadog Agent needs DD_APM_ENABLED=true
+  and listening on port 8126/TCP.
+- Anything ambiguous from the project files.
+
+Generate the setup steps for the detected path:
+
+For JVM (Linux or Windows):
+- Download dd-java-agent.jar if not already present:
+  curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+  (or ADD in a Dockerfile).
+- Add the -javaagent:dd-java-agent.jar flag to the startup command.
+  CRITICAL: the -javaagent argument MUST appear BEFORE -jar. It is a JVM
+  option, not an application argument.
+- Enable profiling. Match the config style the project already uses:
+  - System properties: -Ddd.profiling.enabled=true -Ddd.service=<SERVICE>
+    -Ddd.env=<ENV> -Ddd.version=<VERSION>
+  - Environment variables: DD_PROFILING_ENABLED=true DD_SERVICE=<SERVICE>
+    DD_ENV=<ENV> DD_VERSION=<VERSION>
+- If OpenJ9 is detected, add -XX:+IgnoreUnrecognizedVMOptions and
+  -XX:+KeepJNIIDs to the JVM flags to keep jmethodids stable and prevent
+  profiler crashes.
+- On Windows, do NOT set any -Ddd.profiling.ddprof.* system properties —
+  the ddprof native library is not supported on this platform.
+- Show the complete modified startup command or Dockerfile.
+- Note which profile types are available for the detected OS.
+- Suggest setting up Source Code Integration to connect profiling data
+  with Git repositories.
+
+For GraalVM Native Image:
+- Follow the GraalVM native-image tracer setup to build with Datadog
+  Java Profiler instrumentation.
+- Set DD_PROFILING_ENABLED=true and DD_PROFILING_DIRECTALLOCATION_ENABLED=true.
+- Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- Note that only CPU and Allocations profiling are available, and only
+  JFR-based profiling is supported (no Wallclock or Live Heap).
+- Suggest setting up Source Code Integration.
+
+Reference:
+- JVM: https://docs.datadoghq.com/profiler/enabling/?code-lang=java&runtime=jvm
+- GraalVM: https://docs.datadoghq.com/profiler/enabling/?code-lang=java&runtime=graalvm_native_image
+```
+
 ## Configuration
 
 In addition to the environment, service, and version variables shown in the installation steps, you can apply custom tags to uploaded profiles with `DD_TAGS` (a comma-separated list of `<key>:<value>` pairs such as `layer:api, team:intake`).
@@ -199,8 +286,6 @@ For additional configuration options, see the [Configuration reference][9] in th
 For profile type configuration options, see the [Configuration reference][9] in the Java profiler troubleshooting guide.
 {% /if %}
 <!-- end GraalVM Native Image -->
-
-
 
 [1]: /tracing/trace_collection/
 [2]: /profiler/enabling/supported_versions/
