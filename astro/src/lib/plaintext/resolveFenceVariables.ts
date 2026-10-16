@@ -1,6 +1,6 @@
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import Markdoc from "@markdoc/markdoc";
-import { resolveFenceContent } from "@components/CodeBlock/resolveFenceContent";
+import { resolveFenceContent } from "@lib/markdoc/resolveFenceContent";
 
 /**
  * Resolve variables inside code fences, in place, before `format()` prints the

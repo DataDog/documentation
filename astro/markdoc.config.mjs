@@ -7,7 +7,7 @@ import {
 import schema from "./markdoc.schema.mjs";
 import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts";
 import { syncKeyFromLabel } from "./src/components/Tabs/tabSync.ts";
-import { resolveFenceContent } from "./src/components/CodeBlock/resolveFenceContent.ts";
+import { resolveFenceContent } from "./src/lib/markdoc/resolveFenceContent.ts";
 import { SDK_VERSIONS } from "./src/lib/site/sdkVersions.ts";
 
 /**
