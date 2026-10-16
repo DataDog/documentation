@@ -57,15 +57,6 @@ Use the Dashboard Reporter Agent to:
 
 The agent reads dashboard data with the permissions of the user who created the agent. If that user loses access to a dashboard, the dashboard is no longer included in the report.
 
-### What a report contains
-
-Each report includes:
-
-1. A title with the agent name and the time period covered.
-2. Key metrics, compared to the previous period.
-3. Notable changes, ranked by severity, each linked to its source chart.
-4. Suggested next steps.
-
 ## Prerequisites
 
 - Access to Product Analytics and to the dashboards you want to monitor.
@@ -82,7 +73,7 @@ You can start from a dashboard or from the Agents page in Product Analytics.
 1. Open the Product Analytics dashboard you want to monitor.
 2. Click {{< ui >}}Set Up Report{{< /ui >}}. If the dashboard is already included in other agents' reports, they are listed here.
 
-   {{< img src="product_analytics/dashboard_reporter_agent/from-dashboard.png" alt="A Product Analytics dashboard header with the Set Up Report button highlighted." style="width:100%;" >}}
+   {{< img src="product_analytics/dashboards/dashboard_reporter_agent/from-dashboard.png" alt="A Product Analytics dashboard header with the Set Up Report button highlighted." style="width:100%;" >}}
 
 **Note**: If more than one agent monitors the same dashboard, their reports can differ, because each agent writes its report independently.
 
@@ -93,7 +84,7 @@ You can start from a dashboard or from the Agents page in Product Analytics.
 2. Click {{< ui >}}\+ New Agent{{< /ui >}}.
 3. Select the {{< ui >}}Dashboard Reporter{{< /ui >}} blueprint.
 
-{{< img src="product_analytics/dashboard_reporter_agent/from-agents.png" alt="The new agent page with the Dashboard Reporter blueprint highlighted under Start from blueprint." style="width:60%;" >}}
+{{< img src="product_analytics/dashboards/dashboard_reporter_agent/from-agents.png" alt="The new agent page with the Dashboard Reporter blueprint highlighted under Start from blueprint." style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/agents
 {{% /tab %}}
@@ -123,7 +114,7 @@ You can open a report in Datadog and ask the agent follow-up questions. For exam
 
 ### Ask Bits AI in Slack
 
-If your reports go to Slack and the Datadog Slack integration has Bits AI enabled, you can ask Bits AI about a report without leaving Slack. Mention `@Datadog` with your question, for example, `@Datadog Why did checkout conversion drop this week?` For setup, see [Use Bits Chat in Slack][5].
+If your reports go to Slack and the Datadog Slack integration has Bits AI enabled, you can use Bits Chat about a report without leaving Slack. Mention `@Datadog` with your question, for example, `@Datadog Why did checkout conversion drop this week?` For setup, see [Use Bits Chat in Slack][5].
 
 ## Manage Dashboard Reporter agents
 
