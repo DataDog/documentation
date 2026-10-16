@@ -30,10 +30,14 @@ further_reading:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Configure ticket creation rules to automatically create tickets in Jira, Linear, or Work Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+
+[3]: /security/ticketing_integrations/
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
 Configure ticket creation rules to automatically create tickets in Jira or Work Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+
+[3]: /security/ticketing_integrations/
 {{< /site-region >}}
 
 ## Create a ticket creation rule
@@ -142,6 +146,5 @@ When you disable or delete a ticket creation rule, tickets that were previously 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
-[3]: /security/ticketing_integrations/
 [7]: /api/latest/security-monitoring/create-a-ticket-creation-rule/
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_ticket_creation_rule
