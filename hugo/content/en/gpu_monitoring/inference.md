@@ -42,9 +42,14 @@ Setup uses the vLLM integration, which collects engine metrics.
 ### Prerequisites
 
 To begin monitoring your inference workloads, you must meet the following criteria:
-- You have [GPU Monitoring enabled][1] with the inference Agent image (`7.85.0-rc.5`).
+- You have [GPU Monitoring enabled][1].
+- You are running the inference Agent image (`7.85.0-rc.5`).
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM.
+
+### 0. Enable GPU Monitoring
+
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
 
 ### 1. Use the inference Agent image
 
@@ -162,9 +167,14 @@ Setup uses two integrations. The Dynamo integration collects frontend and worker
 ### Prerequisites
 
 To begin monitoring your inference workloads, you must meet the following criteria:
-- You have [GPU Monitoring enabled][1] with the inference Agent image (`7.85.0-rc.5`).
+- You have [GPU Monitoring enabled][1].
+- You are running the inference Agent image (`7.85.0-rc.5`).
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM workers in an NVIDIA Dynamo deployment.
+
+### 0. Enable GPU Monitoring
+
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
 
 ### 1. Use the inference Agent image
 
