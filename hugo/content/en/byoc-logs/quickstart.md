@@ -47,8 +47,6 @@ docker run -d \
 
 In Datadog, go to the [BYOC Logs console][4] and check that your cluster is connected. You should see the `connected` status.
 
-In the BYOC Logs console, you can edit the cluster metadata and rename your cluster to `demo`.
-
 {{< img src="/cloudprem/quickstart/clouprem_console.png" alt="Screenshot of the BYOC Logs console showing the cluster connected status" style="width:100%;" >}}
 
 ## Step 3: Send a log

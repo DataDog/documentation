@@ -23,7 +23,7 @@ aliases:
 BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
 ```text
-byoc--<CLUSTER_NAME>--<INDEX_NAME>
+byoc--<cluster_id>--<index_name>
 ```
 
 To search your BYOC Logs indexes:
@@ -45,13 +45,13 @@ Use Log Explorer, dashboards, log monitors, or the public Logs API to search acr
 
 ### Use Log Explorer
 
-In the [Log Explorer][1] search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
+In the [Log Explorer][1] search bar, prefix each cluster ID with `byoc--`. Group the IDs in parentheses after `index:`, separated by `OR`. For example:
 
 ```text
 index:(byoc--cluster-1 OR byoc--cluster-2)
 ```
 
-Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
+Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster IDs.
 
 Matching logs from the selected clusters appear in a single list. Changes to search filters and the time range apply to all selected clusters.
 
