@@ -54,6 +54,17 @@ Muting your organization's indicators does not change ratings from:
   - To view muted indicators: `security_monitoring_signals_read`
   - To mute or unmute indicators: `security_monitoring_signals_write`
 
+## Limits
+
+| Limit | Value |
+|---|---|
+| Active mutes per organization | 10,000 |
+| Indicators per mute or unmute action | 100 |
+| Reason length | 100 characters |
+| Supported indicator types | IP address, domain, SHA-256 file hash |
+
+When your organization reaches 10,000 active mutes, unmute indicators you no longer need before you mute new ones.
+
 ## Mute indicators
 
 You can mute IP addresses, domains, and SHA-256 file hashes. Mute single values only. CIDR ranges cannot be muted, so mute individual IP addresses instead.
@@ -106,17 +117,6 @@ To unmute indicators, do one of the following:
 - On the Muted Indicators page, select up to 100 indicators and click {{< ui >}}Un-mute{{< /ui >}}.
 
 If Datadog also mutes the indicator, unmuting removes only your organization's mute. The indicator stays rated as `benign`.
-
-## Limits
-
-| Limit | Value |
-|---|---|
-| Active mutes per organization | 10,000 |
-| Indicators per mute or unmute action | 100 |
-| Reason length | 100 characters |
-| Supported indicator types | IP address, domain, SHA-256 file hash |
-
-When your organization reaches 10,000 active mutes, unmute indicators you no longer need before you mute new ones.
 
 ## Further reading
 
