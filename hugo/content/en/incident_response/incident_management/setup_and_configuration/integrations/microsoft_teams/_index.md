@@ -126,6 +126,21 @@ Meeting summaries are generated for Microsoft Teams meetings attached to an inci
 
 When the meeting ends, a final post-meeting summary is posted to the same locations.
 
+#### Approving, editing, or rejecting a summary
+
+After a summary is posted, you can approve it, edit its text, or reject it. You can take these actions from the incident timeline in Datadog, or from the incident chat channel if the summary was broadcast there.
+
+To review a summary from the incident timeline:
+
+1. Open the incident in Datadog and find the **Meeting Summary** entry on the timeline.
+2. Click the checkmark icon to approve the summary, the pencil icon to edit its text, or the reject icon to remove it from the timeline.
+
+Approving or editing a summary records who took the action. After a summary is edited, it can't be approved — the edited version takes precedence. Rejecting a summary removes it from the incident timeline for everyone and hides its content in connected chat channels. You're asked to confirm before rejecting, and this action can't be undone.
+
+If the summary was broadcast to the incident chat channel, you can take the same actions from the message using the **Approve**, **Edit**, or **Reject summary** buttons.
+
+Reviewing a summary requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7].
+
 #### Re-inviting the transcriber
 
 If the Datadog Transcriber leaves a meeting, re-invite it to the same linked meeting to resume summarization:
