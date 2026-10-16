@@ -63,7 +63,7 @@ You can mute IP addresses, domains, and SHA-256 file hashes. Mute single values 
 1. Go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Investigate{{< /ui >}} > [{{< ui >}}IOC Explorer{{< /ui >}}][5].
 1. Click an indicator to open its side panel.
 1. Click {{< ui >}}Mute This IoC{{< /ui >}}.
-1. Optionally, enter a reason, such as `Corporate VPN egress`. The reason can be up to 100 characters and appears on the Muted Indicators page.
+1. Optionally, enter a reason for muting, such as `Corporate VPN egress`. The reason can be up to 100 characters and appears on the Muted Indicators page.
 1. Click {{< ui >}}Mute{{< /ui >}}.
 
 ### Mute multiple indicators
