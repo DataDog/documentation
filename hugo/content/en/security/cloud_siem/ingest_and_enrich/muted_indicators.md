@@ -93,7 +93,7 @@ The column and facet reflect your organization's mutes only. Indicators muted on
 
 ### View mute history
 
-The {{< ui >}}Conversation{{< /ui >}} tab in an indicator's side panel lists every mute and unmute event, with who performed it and when. These events appear alongside the indicator's comments and triage changes.
+The {{< ui >}}Conversation{{< /ui >}} tab in an indicator's side panel lists every mute and unmute event, who performed it, and when. These events appear alongside the indicator's comments and triage changes.
 
 ## Unmute indicators
 
