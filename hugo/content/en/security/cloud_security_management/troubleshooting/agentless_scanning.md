@@ -23,6 +23,12 @@ If no results appear after two hours:
 - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
 - Check that the cloud integration is properly configured. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, verify that your cloud account appears with Agentless Scanning enabled.
 
+### Enable Remote Configuration on the API key
+
+To authenticate and authorize the Agent to receive configuration, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
+
+**Note:** If you have [`api_keys_write`][9] RBAC permission, but are missing Remote Configuration [Organization][10] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key. To view and manage your organization's API Keys, see [API Keys][11] in Datadog.
+
 ## GCP: Failed to create state bucket (storage.buckets.create 403)
 
 If the GCP Cloud Shell setup fails at **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** with an error like:
@@ -83,3 +89,6 @@ Agentless Scanning is not available in GovCloud and is not FIPS compliant.
 [6]: /security/cloud_security_management/vulnerabilities
 [7]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
 [8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
+[9]: /account_management/rbac/permissions#api-and-application-keys
+[10]: https://app.datadoghq.com/organization-settings/remote-config
+[11]: https://app.datadoghq.com/organization-settings/api-keys
