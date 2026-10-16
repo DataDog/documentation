@@ -212,7 +212,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [6]: https://app.datadoghq.com/security/ai-guard/settings/services
 [7]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
 [8]: https://app.datadoghq.com/security/ai-guard/settings/tools
-[9]: https://app.datadoghq.com/organization-settings/data-access-controls/
+[9]: https://app.datadoghq.com/organization-settings/access-controls
 [10]: /security/ai_guard/setup/automatic_integrations/
 [11]: /security/ai_guard/setup/manual_integrations/
 [12]: /security/ai_guard/setup/sdk/
