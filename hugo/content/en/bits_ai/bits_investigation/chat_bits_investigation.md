@@ -8,7 +8,7 @@ Within an investigation, you can chat with Bits to gather additional information
 
 {{< img src="bits_ai/bits_ai_sre_chat_example.png" alt="Example chat where a user asks Bits AI about related ongoing incidents, and Bits AI responds with a list of related incidents and an explanation on what makes them related" style="width:100%;" >}}
 
-## Permissions and AI Credits
+## Permissions and billing
 
 Chat on an investigation page runs in [Bits Chat][2]:
 - Users need the **Bits Chat Access** permission. Bits Investigations Read is enough to view the investigation; Bits Investigations Write is not required to chat.
