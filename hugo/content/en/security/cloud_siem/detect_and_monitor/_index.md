@@ -44,6 +44,10 @@ You can edit OOTB detection rules and do the following:
 
 #### Assess rule health
 
+{{< callout url="#" btn_hidden="true" header="Preview">}}
+Rule health insights are in Preview.
+{{< /callout >}}
+
 Rules may become less effective as your business needs change over time. Monitoring rules for drifting logic is inherently difficult: if a rule results in few signals, that might be by design, or it might be missing issues it was intended to catch.
 
 In the [Detection Rules explorer][8], and the side panel that appears when you click an out-of-the-box rule in that explorer, you can view information about the health of the rule:
@@ -64,9 +68,11 @@ If a field's status is either {{< ui >}}Trailing silence{{< /ui >}} or {{< ui >}
 
 <div class="alert alert-info">The service that analyzes field status runs once a day. If you edit a rule, the updated status appears after the service runs again.</div>
 
-##### Investigate and mute rule health alerts
+##### Investigate rule health alerts
 
-In the side panel of the [Detection Rules explorer][8], you can click {{< ui >}}View{{< /ui >}} beside a specific scope or field to view its appearances in the Logs Explorer.
+In the side panel of the [Detection Rules explorer][8], you can click {{< ui >}}View{{< /ui >}} beside a specific scope or field to view its appearances in the Logs Explorer. With this information, you can explore whether the scope or field changed, or if the problem might have another cause, such as an issue with your pipelines.
+
+##### Mute or unmute rule health alerts
 
 To mute the alerts associated with a rule:
 1. In the {{< ui >}}Health Insights{{< /ui >}} section of the rule side panel, click {{< ui >}}Mute Alerts{{< /ui >}}. The Mute alerts window opens.
