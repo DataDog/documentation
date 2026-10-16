@@ -14,6 +14,8 @@
 import Markdoc from "@markdoc/markdoc";
 import { buildPlaintextConfig } from "./plaintextConfig";
 import { processNodes, type PartialResolver } from "./filterMarkdocAst";
+import { resolveFenceVariables } from "@lib/plaintext/resolveFenceVariables";
+import { SDK_VERSIONS } from "@lib/site/sdkVersions";
 
 const { parse, format, Ast } = Markdoc;
 
@@ -39,6 +41,11 @@ export function renderCdocPlaintext(input: RenderCdocPlaintextInput): string {
     resolvePartial,
     new Set(),
   );
+
+  // Fences show their raw source unless resolved. Same variables as the HTML
+  // page: the global ones, then the filter values (which win, as Astro merges
+  // them over the config's variables).
+  resolveFenceVariables(filtered, { sdkVersions: SDK_VERSIONS, ...variables });
 
   const document = new Ast.Node("document", {}, filtered);
   // `orderedListMode: 'increment'` numbers ordered lists sequentially. Authors

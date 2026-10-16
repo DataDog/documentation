@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { describeBestEffortFallback, parseStamp } from "./stamp.ts";
+import {
+  describeBestEffortFallback,
+  parseStamp,
+  sdkVersionsFromStamp,
+} from "./stamp.ts";
 
 const WHOLE_STAMP = {
   docsBranch: "someone/other-branch",
@@ -49,5 +53,30 @@ describe("describeBestEffortFallback", () => {
     const message = describeBestEffortFallback(null);
     expect(message).toMatch(/without SDK code examples/i);
     expect(message).not.toMatch(/stale/i);
+  });
+});
+
+describe("sdkVersionsFromStamp", () => {
+  it("strips everything before the first digit, as Hugo's sdk-version does", () => {
+    // The tag conventions differ by repo: `v2.67.0` (go), `datadog-api-client-2.62.0`
+    // (java), a bare `2.62.0` (python).
+    const versions = sdkVersionsFromStamp({
+      ...WHOLE_STAMP,
+      refs: {
+        "datadog-api-client-go": "v2.67.0",
+        "datadog-api-client-java": "datadog-api-client-2.62.0",
+        "datadog-api-client-python": "2.62.0",
+      },
+    });
+
+    expect(versions).toEqual({
+      "datadog-api-client-go": "2.67.0",
+      "datadog-api-client-java": "2.62.0",
+      "datadog-api-client-python": "2.62.0",
+    });
+  });
+
+  it("returns no versions when no tree is staged", () => {
+    expect(sdkVersionsFromStamp(null)).toEqual({});
   });
 });

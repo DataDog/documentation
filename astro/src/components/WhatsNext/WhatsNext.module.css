@@ -8,9 +8,9 @@
   margin: 0 0 var(--space-sm) 0;
 }
 
-/* Specificity bump and ::before reset defeat the global `.prose ul` /
-   `.prose ul li::before` en-dash bullet styles in global.css when this
-   component is rendered inside a `.prose` container. */
+/* Two classes outrank the global `.prose ul` rules in global.css (its indent,
+   and the browser's list markers), for when this component is rendered inside
+   a `.prose` container. */
 .whatsnext .whatsnext__list {
   list-style: none;
   padding: 0;
@@ -20,10 +20,6 @@
 .whatsnext__item {
   margin: 0;
   padding-left: 0;
-}
-
-.whatsnext__list .whatsnext__item::before {
-  content: none;
 }
 
 .whatsnext__link {
