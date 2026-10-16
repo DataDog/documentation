@@ -38,6 +38,8 @@ Test Impact Analysis is only supported in the following versions and testing fra
 * `cypress>=6.7.0`
   * From `dd-trace>=4.17.0` or `dd-trace>=3.38.0`.
   * Instrument your web application with [code coverage][2].
+* `vitest>=1.6.0`
+  * From `dd-trace>=6.21.0` or `dd-trace>=5.132.0`.
 
 ## Setup
 
@@ -59,6 +61,12 @@ After completing setup, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
 
+For Vitest, include the ESM loader and use `vitest run`:
+
+{{< code-block lang="shell" >}}
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn vitest run
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
@@ -69,8 +77,20 @@ After completing setup, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY yarn test
 {{< /code-block >}}
 
+For Vitest, include the ESM loader and use `vitest run`:
+
+{{< code-block lang="shell" >}}
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY yarn vitest run
+{{< /code-block >}}
+
 {{% /tab %}}
 {{< /tabs >}}
+
+### Vitest
+
+`dd-trace` automatically collects the per-suite code coverage required for Test Impact Analysis. No additional coverage package or `--coverage` flag is required.
+
+Test Impact Analysis is not supported in Vitest browser mode, watch mode, or typecheck-only runs. It is also not supported when using the experimental mode enabled by `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`.
 
 ### Cypress
 
@@ -100,7 +120,7 @@ Designating tests as unskippable helps Test Impact Analysis run them regardless 
 ### Marking tests as unskippable
 
 {{< tabs >}}
-{{% tab "Jest/Mocha/Cypress" %}}
+{{% tab "Jest/Mocha/Cypress/Vitest" %}}
 You can use the following docblock to mark an entire test file as unskippable. You cannot mark individual tests as unskippable. Place the docblock at the top of the file, before any code; only other comments can appear before it. This prevents any of the tests defined in the test file from being skipped by Test Impact Analysis. This is similar to jest's [`testEnvironmentOptions`][1].
 
 ```javascript
