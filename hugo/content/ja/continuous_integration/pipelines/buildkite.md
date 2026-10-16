@@ -10,46 +10,78 @@ further_reading:
   text: CI Visibility のトラブルシューティング
 - link: /continuous_integration/pipelines/custom_tags_and_measures/
   tag: ドキュメント
-  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
-title: Buildkite パイプラインでトレースを設定する
+  text: カスタムタグと測定値を追加して Pipeline Visibility を拡張する
+title: Buildkite 向けの CI Visibility のセットアップ
 ---
+## 概要 {#overview}
 
-## 概要
+[Buildkite][1] は、独自のインフラストラクチャー上でビルドを実行できる継続的インテグレーションおよびデプロイメントプラットフォームです。クラウドでのオーケストレーションを管理しながら、セキュリティとビルド環境のカスタマイズを完全に制御できます。
 
-[Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
+Buildkite 向け CI Visibility をセットアップすることで、リソース使用量の最適化、オーバーヘッドの削減、ソフトウェア開発ライフサイクルの速度と品質の向上が実現します。
 
-Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
-
-### 互換性
+### 互換性 {#compatibility}
 
 | Pipeline Visibility | プラットフォーム | 定義 |
 |---|---|---|
-| [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
-| インフラストラクチャーメトリクスの相関 | インフラストラクチャーメトリクスの相関 | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
-| [Manual steps][12] | Manual steps | View manually triggered pipelines. |
-| [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
-| [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
+| [Partial retries][9] | Partial pipelines | 部分的に再試行されたパイプライン実行を表示します|
+| Infrastructure metric correlation | Infrastructure metric correlation |  ビルドエージェントのジョブを[インフラストラクチャーホストメトリクス][6]に関連付けます。|
+| [Manual steps][12] | Manual steps | 手動でトリガーされたパイプラインを表示します。|
+| [Queue time][13] | Queue time | パイプラインのジョブが処理される前にキューに残っている時間を表示します。|
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | ランタイムの[カスタムタグと測定値][6]を構成します。|
+| [Custom spans][14] | Custom spans | パイプラインのカスタムスパンを構成します。|
+| [クリティカルパスで CI ジョブをフィルタリングする][17] | クリティカルパスで CI ジョブをフィルタリングする | クリティカルパスのジョブでフィルタリングします。|
+| [実行時間][18] | 実行時間  | パイプラインによるジョブ実行時間を表示します。|
+| Logs correlation | Logs correlation | パイプラインおよびジョブのスパンをログに関連付け、[ジョブログの収集][20]を有効にします。|
 
-## Datadog インテグレーションの構成
 
-To set up the Datadog integration for [Buildkite][1]:
+### 用語 {#terminology}
 
-1. Buildkite の **Settings > Notification Services** に移動し、add a **Datadog Pipeline Visibility** integration をクリックします。
+次の表は、Datadog CI Visibility と Buildkite の概念のマッピングを示しています。
+
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Pipeline                   | Build (パイプラインの実行) |
+| Job                        | Job (ステップの実行)       |
+
+## Datadog インテグレーションの構成 {#configure-the-datadog-integration}
+
+[Buildkite][1] の Datadog インテグレーションをセットアップするには、次の手順を実行します。
+
+1. Buildkite で {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification Services{{< /ui >}} に移動し、{{< ui >}}Datadog Pipeline Visibility{{< /ui >}} の横にある {{< ui >}}Add{{< /ui >}} ボタンをクリックします。
 2. 以下の情報をフォームに入力してください。
-   * **Description**: Datadog CI Visibility インテグレーションのように、将来的にインテグレーションを識別するのに役立つ説明です。
-   * **API key**: [Datadog API キー][2]です。
-   * **Datadog site**: {{< region-param key="dd_site" code="true" >}}
-   * **Pipelines**: トレースするすべてのパイプラインまたはパイプラインのサブセットを選択します。
-   * **Branch filtering**: すべてのブランチをトレースする場合は空のままにします。または、トレースしたいブランチのサブセットを選択します。
-3. **Add Datadog Pipeline Visibility Notification** をクリックして、インテグレーションを保存します。
+   *  {{< ui >}}Description{{< /ui >}}: `Datadog CI Visibility integration` など、将来インテグレーションを識別しやすくするための説明。
+   * {{< ui >}}API key{{< /ui >}}: [Datadog API キー][2]。
+   * {{< ui >}}Datadog site{{< /ui >}}: `{{< region-param key="dd_site" code="true" >}}`
+   *  {{< ui >}}Pipelines{{< /ui >}}: すべてのパイプライン、またはトレースするパイプラインのサブセットを選択します。
+   *  {{< ui >}}Branch filtering{{< /ui >}}: すべてのブランチをトレースする場合は空のままにするか、トレースするブランチのサブセットを選択します。
+3. インテグレーションを保存するには、{{< ui >}}Add Datadog Pipeline Visibility Notification{{< /ui >}} をクリックします。
 
-### カスタムタグの設定
+### ジョブログの収集 {#collect-job-logs}
 
-カスタムタグは `buildkite-agent meta-data set` コマンドを使用して Buildkite トレースに追加することができます。
-`dd_tags.` で始まるキーを持つメタデータタグはすべて、ジョブとパイプラインのスパンに追加されます。これらのタグを使用して、パイプラインを検索および整理するための文字列ファセットを作成することができます。
+Buildkite Agent からのジョブログを、OpenTelemetry ログとして [Datadog OTLP ログエンドポイント][23]へエクスポートします。エクスポートを有効にするには、Buildkite の [OpenTelemetry ジョブログエクスポートドキュメント][22]に従います。
 
-以下の YAML は、チーム名と Go バージョンのタグが設定されたシンプルなパイプラインを表しています。
+Datadog は、ログを CI Visibility とは別に課金します。[Log Management][21] で、ログの保持期間、除外フィルター、インデックスを構成します。これらのルールを Buildkite ログに適用するには、`datadog.product:cipipeline` タグと `source:buildkite` タグでフィルターします。
+
+{{% collapse-content title="Datadog Buildkite インテグレーション (レガシー)" level="h4" expanded=false id="legacy-buildkite-integration-job-log-collection" %}}
+
+Datadog Buildkite インテグレーションは、ジョブログを収集するためのレガシーな方法です。OpenTelemetry を使用できない場合は、Datadog の担当者にお問い合わせください。
+
+インストールおよび構成の手順については、[Buildkite インテグレーションドキュメント][19]を参照してください。
+
+<div class="alert alert-warning">このインテグレーションは、Buildkite API を介してジョブログを取得します。ログの収集によって、Buildkite API のレート制限の大部分が消費される可能性があります。</div>
+
+{{% /collapse-content %}}
+
+## 高度な構成 {#advanced-configuration}
+
+### カスタムタグの設定 {#set-custom-tags}
+
+カスタムタグは、`buildkite-agent meta-data set` コマンドを使用して Buildkite トレースに追加できます。
+`dd_tags.` で始まるキーを持つメタデータタグは、ジョブスパンおよびパイプラインスパンに追加されます。これらの
+タグを使用して、パイプラインの検索と整理を行うための文字列ファセットを作成できます。
+
+以下の YAML は、チーム名と Go バージョンのタグが設定されたシンプルな
+パイプラインを示しています。
 
 ```yaml
 steps:
@@ -63,15 +95,18 @@ steps:
 Datadog では、ルートスパンだけでなく、関連するジョブスパンにも以下のタグが表示されます。
 
 - `team: backend`
-- `go.version: go version go1.17 darwin/amd64` (出力はランナーに依存します)
+- `go.version: go version go1.17 darwin/amd64`(出力はランナーによって異なります)
 
-その結果、パイプラインは次のようになります。
+結果として得られるパイプラインは次のようになります。
 
-{{< img src="ci/buildkite-custom-tags.png" alt="カスタムタグによる Buildkite パイプラインのトレース" style="width:100%;">}}
+{{< img src="ci/buildkite-custom-tags.png" alt="カスタムタグ付きの Buildkite パイプラインのトレース" style="width:100%;">}}
 
-Any metadata with a key starting with `dd-measures.` and containing a numerical value will be set as
-a metric tag that can be used to create numerical measures. You can use the `buildkite-agent meta-data set`
-command to create such tags. This can be used for example to measure the binary size in a pipeline:
+`dd-measures.` で始まり、数値を含むキーを持つメタデータはすべて次のように設定されます。
+数値メジャーの作成に使用できるメトリックタグ。
+
+これらのタグを作成するには、`buildkite-agent meta-data set` コマンドを使用します。
+
+たとえば、次のコマンドを使用してパイプライン内のバイナリサイズを測定できます。
 
 ```yaml
 steps:
@@ -83,40 +118,38 @@ steps:
 
 出来上がったパイプラインは、パイプラインスパンに以下のようなタグが表示されます。
 
-- `binary_size: 502` (出力はファイルサイズに依存します)
+- `binary_size: 502` (出力はファイルサイズによって異なります)
 
-この例では、`binary_size` の値を使って、バイナリーサイズの経時変化をプロットすることができます。
+この例では、`binary_size` の値を使用して、経時的なバイナリサイズの変化をプロットできます。
 
-## Datadog でパイプラインデータを視覚化する
+### インフラストラクチャー メトリクスとジョブの相関付け {#correlate-infrastructure-metrics-to-jobs}
 
-The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
+Buildkite エージェントを使用している場合、ジョブとそれを実行しているインフラストラクチャーを関連付けることができます。
+この機能を利用するには、Buildkite エージェントを実行しているホストに [Datadog Agent][7] をインストールします。
 
-The **CI Pipeline List** page shows data for only the default branch of each repository.
+## 部分的パイプラインとダウンストリームパイプラインの表示 {#view-partial-and-downstream-pipelines}
 
-### インフラストラクチャーメトリクスとジョブの相関付け
+[CI Visibility Explorer][15] で、次のフィルターを使用して検索クエリをカスタマイズできます。
 
-If you are using Buildkite agents, you can correlate jobs with the infrastructure that is running them.
-For this feature to work, install the [Datadog Agent][7] in the hosts running the Buildkite agents.
+{{< img src="ci/partial_retries_search_tags.png" alt="検索クエリに Partial Pipeline:retry が入力されている [Pipeline executions] (パイプライン実行) ページ" style="width:100%;">}}
 
-### 部分的およびダウンストリームパイプラインを表示する
+| ファセット名 | ファセット ID | 使用可能な値 |
+|---|---|---|
+| Downstream Pipeline (ダウンストリームパイプライン) | `@ci.pipeline.downstream` | `true`、`false` |
+| Manually Triggered (手動トリガー) | `@ci.is_manual` | `true`、`false` |
+| Partial Pipeline (部分パイプライン) | `@ci.partial_pipeline` | `retry`、`paused`、`resumed` |
 
-**Executions** ページでは、検索バーで以下のフィルターを使用することができます。
+ページの左側にあるファセットパネルを使用して、これらのフィルターを適用することもできます。
 
-`Downstream Pipeline`
-: 可能な値: `true`、`false`
+{{< img src="ci/partial_retries_facet_panel.png" alt="[Partial Pipeline] (部分パイプライン) ファセットが展開され、値 Retry が選択され、[Partial Retry] (部分的なリトライ) ファセットが展開され、値 true が選択されているファセットパネル" style="width:20%;">}}
 
-`Manually Triggered`
-: 可能な値: `true`、`false`
+## Datadog でパイプラインデータを視覚化する{#visualize-pipeline-data-in-datadog}
 
-`Partial Pipeline`
-: 可能な値: `retry`、`paused`、`resumed`
+[**CI Pipeline List**][3] ページおよび [**Executions**][4] ページには、パイプラインの完了後にデータが取り込まれます。
 
-{{< img src="ci/partial_retries_search_tags.png" alt="検索クエリに Partial Pipeline:retry を入力したパイプラインの実行画面" style="width:100%;">}}
+[{{< ui >}}CI Pipeline List{{< /ui >}}] (CI パイプラインリスト) ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。詳しくは、[CI パイプラインの検索と管理][16]を参照してください。
 
-これらのフィルターは、ページの左側にあるファセットパネルからも適用することができます。
-{{< img src="ci/partial_retries_facet_panel.png" alt="Partial Pipeline ファセットが展開され、値 Retry が選択されたファセットパネル、Partial Retry ファセットが展開され、値 true が選択されたファセットパネル" style="width:40%;">}}
-
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -134,3 +167,12 @@ For this feature to work, install the [Datadog Agent][7] in the hosts running th
 [12]: /ja/glossary/#manual-step
 [13]: /ja/glossary/#queue-time
 [14]: /ja/glossary/#custom-span
+[15]: /ja/continuous_integration/explorer
+[16]: /ja/continuous_integration/search/#search-for-pipelines
+[17]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /ja/glossary/#pipeline-execution-time
+[19]: /ja/integrations/buildkite/
+[20]: /ja/continuous_integration/pipelines/buildkite/#collect-job-logs
+[21]: /ja/logs/
+[22]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
+[23]: /ja/opentelemetry/setup/otlp_ingest/logs/
