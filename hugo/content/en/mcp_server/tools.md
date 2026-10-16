@@ -1958,7 +1958,7 @@ Tools for [Observability Pipelines][87], including inspecting existing pipelines
 Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
 
 - How many pipelines do we have, and how many of them are metrics pipelines?
-- Find the ID of the `prod-agent-logs` pipeline.
+- Find the ID of the "Prod Agent Logs" pipeline.
 - Which pipelines were modified in the last week?
 
 ### `describe_observability_pipeline`
@@ -1966,7 +1966,7 @@ Lists all pipelines in your organization, including drafts, with each pipeline's
 *Permissions Required: `Observability Pipelines Read`*\
 Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
 
-- Explain what the `prod-agent-logs` pipeline does.
+- Explain what the "Prod Agent Logs" pipeline does.
 - Where are logs dropped in my Splunk forwarding pipeline?
 - Are there redundant or expensive processors in pipeline `abc-123-def`?
 
