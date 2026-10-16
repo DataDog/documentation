@@ -77,6 +77,15 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
 
   const lines: string[] = [];
 
+  // --- Parameters without an example, which the URL references by name ---
+  const parameterExportLines = buildParameterExportLines(
+    pathParams,
+    queryParams,
+  );
+  if (parameterExportLines.length > 0) {
+    lines.push(...parameterExportLines, "");
+  }
+
   // --- Shell variable exports as comments ---
   lines.push(`# Set your Datadog site and credentials`);
   lines.push(`export DD_SITE="${site}"`);
@@ -117,8 +126,39 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
 /* ------------------------------------------------------------------ */
 
 /**
+ * Export each parameter that has no example as `"CHANGE_ME"`, as Hugo does,
+ * so the `${name}` references in the URL are set.
+ */
+function buildParameterExportLines(
+  pathParams: CurlParam[] = [],
+  queryParams: CurlParam[] = [],
+): string[] {
+  const lines: string[] = [];
+  const unsetPathParams = pathParams.filter(
+    (param) => param.example === undefined,
+  );
+  if (unsetPathParams.length > 0) {
+    lines.push("# Path parameters", ...unsetPathParams.map(exportPlaceholder));
+  }
+  const unsetQueryParams = queryParams.filter(
+    (param) => param.example === undefined && param.required,
+  );
+  if (unsetQueryParams.length > 0) {
+    lines.push(
+      "# Required query arguments",
+      ...unsetQueryParams.map(exportPlaceholder),
+    );
+  }
+  return lines;
+}
+
+function exportPlaceholder(param: CurlParam): string {
+  return `export ${param.name}="CHANGE_ME"`;
+}
+
+/**
  * Replace `{param_name}` placeholders in the path with example values or
- * shell-friendly uppercase placeholders.
+ * `${param_name}` shell variables.
  */
 function interpolatePath(path: string, pathParams?: CurlParam[]): string {
   if (!pathParams || pathParams.length === 0) return path;
@@ -126,7 +166,7 @@ function interpolatePath(path: string, pathParams?: CurlParam[]): string {
   let result = path;
   for (const param of pathParams) {
     const placeholder = `{${param.name}}`;
-    const value = param.example ?? `\${${param.name.toUpperCase()}}`;
+    const value = param.example ?? `\${${param.name}}`;
     result = result.replace(placeholder, value);
   }
   return result;
@@ -148,9 +188,7 @@ function buildQueryString(
         `${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`,
       );
     } else if (param.required) {
-      parts.push(
-        `${encodeURIComponent(param.name)}=\${${param.name.toUpperCase()}}`,
-      );
+      parts.push(`${encodeURIComponent(param.name)}=\${${param.name}}`);
     }
   }
 

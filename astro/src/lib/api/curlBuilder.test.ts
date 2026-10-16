@@ -78,14 +78,42 @@ describe("buildCurlCommand", () => {
     expect(result).not.toContain("{dashboard_id}");
   });
 
-  it("uses uppercase placeholder when no example is provided", () => {
+  it("exports a path parameter that has no example", () => {
     const result = buildCurlCommand({
       method: "GET",
       path: "/api/v1/dashboard/{dashboard_id}",
       pathParams: [{ name: "dashboard_id" }],
     });
 
-    expect(result).toContain("${DASHBOARD_ID}");
+    expect(result).toContain(
+      '# Path parameters\nexport dashboard_id="CHANGE_ME"',
+    );
+    expect(result).toContain("/api/v1/dashboard/${dashboard_id}");
+  });
+
+  it("exports a required query parameter that has no example", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/usage/aws_lambda",
+      queryParams: [{ name: "start_hr", required: true }],
+    });
+
+    expect(result).toContain(
+      '# Required query arguments\nexport start_hr="CHANGE_ME"',
+    );
+    expect(result).toContain("?start_hr=${start_hr}");
+  });
+
+  it("exports nothing for parameters that have examples", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/dashboard/{dashboard_id}",
+      pathParams: [{ name: "dashboard_id", example: "abc-123" }],
+      queryParams: [{ name: "filter", example: "active", required: true }],
+    });
+
+    expect(result).not.toContain("# Path parameters");
+    expect(result).not.toContain("# Required query arguments");
   });
 
   it("includes query parameters with example values", () => {

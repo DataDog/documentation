@@ -7,6 +7,7 @@ import {
   heading,
   paragraphFromText,
   parse,
+  tableMd,
 } from "./helpers";
 
 const SITE = "https://docs.datadoghq.com";
@@ -109,6 +110,31 @@ describe("buildPlaintextPage", () => {
         undefined,
       ),
     ).toThrow(/`site` must be set/);
+  });
+});
+
+describe("tableMd", () => {
+  it("keeps a cell with line breaks on one row", () => {
+    const table = tableMd(
+      ["Name", "Description"],
+      [
+        [
+          "aws_account_id",
+          "Filter by account.\n  If not provided, all accounts are returned.",
+        ],
+        ["other", "First paragraph.\n\nSecond paragraph."],
+      ],
+    );
+    const bodyRows = buildMarkdocStr([table])
+      .split("\n")
+      .filter((line) => line.startsWith("|") && !line.startsWith("| Name"))
+      .filter((line) => !/^\|[\s|-]+\|$/.test(line));
+
+    expect(bodyRows).toHaveLength(2);
+    expect(bodyRows[0]).toContain(
+      "Filter by account. If not provided, all accounts are returned.",
+    );
+    expect(bodyRows[1]).toContain("First paragraph. Second paragraph.");
   });
 });
 

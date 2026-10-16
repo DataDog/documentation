@@ -12,7 +12,11 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ApiOperationView } from "@lib/api/schemas/views";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
-import { apiBreadcrumbs, operationMetaDescription } from "@lib/api/pageMeta";
+import {
+  apiBreadcrumbs,
+  operationMetaDescription,
+  variantLabel,
+} from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
@@ -29,9 +33,8 @@ function apiOperationBody(
     ...siteSupportNoteNodes(pathname, lang),
   ];
   for (const [i, variant] of operation.variants.entries()) {
-    const label = i === 0 ? `${variant.version} (latest)` : variant.version;
-    contents.push(heading(2, label));
-    contents.push(...apiEndpointNodes(variant));
+    contents.push(heading(2, variantLabel(variant, i)));
+    contents.push(...apiEndpointNodes(variant, lang));
   }
   return contents;
 }

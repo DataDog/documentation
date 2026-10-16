@@ -51,7 +51,7 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
 
-## [Get a monitor's details](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-s-details.md)
+## [Get a monitor's details](https://docs.datadoghq.com/api/latest/monitors/get-a-monitors-details.md)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |

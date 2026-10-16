@@ -118,6 +118,29 @@ describe("apiSchemaTableNode", () => {
     expect(out).toContain("Default:");
   });
 
+  it("inlines an option's enum values and default into its description", () => {
+    const out = render([
+      field({
+        name: "aggregation",
+        type: "oneOf",
+        unionOptions: [
+          {
+            label: "Object 1",
+            type: "enum",
+            description: "Standard aggregation types.",
+            enumValues: ["avg", "sum"],
+            defaultValue: "avg",
+            fields: [],
+          },
+        ],
+      }),
+    ]);
+
+    expect(out).toMatch(
+      /\| aggregation +\| Object 1 +\| enum +\| Standard aggregation types\. Allowed values: `avg`, `sum`\. Default: `avg`\. +\|/,
+    );
+  });
+
   it("marks deprecated fields in the description", () => {
     const out = render([
       field({ name: "old_field", deprecated: true, description: "Old." }),
@@ -128,5 +151,27 @@ describe("apiSchemaTableNode", () => {
   it("produces an AST table node, not a string", () => {
     const node = apiSchemaTableNode([field({ name: "x", type: "string" })]);
     expect(node?.type).toBe("table");
+  });
+
+  it("puts additionalProperties in the parent column of an <any-key> row, as Hugo does", () => {
+    const out = render([
+      field({
+        name: "node_objects",
+        type: "object",
+        children: [
+          field({
+            name: "<any-key>",
+            type: "object",
+            description: "Base query.",
+            children: [field({ name: "search", type: "string" })],
+          }),
+        ],
+      }),
+    ]);
+
+    expect(out).toMatch(
+      /\| additionalProperties +\| <any-key> +\| object +\| Base query\. +\|/,
+    );
+    expect(out).toMatch(/\| <any-key> +\| search +\| string +\|/);
   });
 });

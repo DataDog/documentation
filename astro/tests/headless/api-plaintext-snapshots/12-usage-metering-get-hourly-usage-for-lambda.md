@@ -8,7 +8,7 @@ breadcrumbs: Docs > API > Get hourly usage for Lambda
 
 # Get hourly usage for Lambda
 
-## v1 (latest)
+## v1 (deprecated)
 
 {% alert level="warning" %}
 This endpoint is deprecated.
@@ -29,7 +29,7 @@ Get hourly usage for Lambda.
 
 This endpoint requires the `usage_read` permission.
 
-OAuth apps require the `usage_read` authorization scope to access this endpoint.
+OAuth apps require the `usage_read` authorization [scope](https://docs.datadoghq.com/api/latest/scopes.md#usage-metering) to access this endpoint.
 
 ### Arguments
 
@@ -45,18 +45,90 @@ OAuth apps require the `usage_read` authorization scope to access this endpoint.
 {% tabs %}
 {% tab label="200" %}
 OK
+
+Response containing the number of Lambda functions and sum of the invocations of all Lambda functions
+for each hour for a given organization.
+
+| Parent field | Field           | Type      | Description                                                                 |
+| ------------ | --------------- | --------- | --------------------------------------------------------------------------- |
+|              | usage           | [object]  | Get hourly usage for Lambda.                                                |
+| usage        | func_count      | int64     | Contains the number of different functions for each region and AWS account. |
+| usage        | hour            | date-time | The hour for the usage.                                                     |
+| usage        | invocations_sum | int64     | Contains the sum of invocations of all functions.                           |
+| usage        | org_name        | string    | The organization name.                                                      |
+| usage        | public_id       | string    | The organization public ID.                                                 |
 {% /tab %}
 
 {% tab label="400" %}
 Bad Request
+
+{% tabs %}
+{% tab label="Model" %}
+Error response object.
+
+| Parent field | Field               | Type     | Description                          |
+| ------------ | ------------------- | -------- | ------------------------------------ |
+|              | errors [*required*] | [string] | Array of errors returned by the API. |
+{% /tab %}
+
+{% tab label="Example" %}
+```json
+{
+  "errors": [
+    "Bad Request"
+  ]
+}
+```
+{% /tab %}
+{% /tabs %}
 {% /tab %}
 
 {% tab label="403" %}
 Forbidden - User is not authorized
+
+{% tabs %}
+{% tab label="Model" %}
+Error response object.
+
+| Parent field | Field               | Type     | Description                          |
+| ------------ | ------------------- | -------- | ------------------------------------ |
+|              | errors [*required*] | [string] | Array of errors returned by the API. |
+{% /tab %}
+
+{% tab label="Example" %}
+```json
+{
+  "errors": [
+    "Bad Request"
+  ]
+}
+```
+{% /tab %}
+{% /tabs %}
 {% /tab %}
 
 {% tab label="429" %}
 Too many requests
+
+{% tabs %}
+{% tab label="Model" %}
+Error response object.
+
+| Parent field | Field               | Type     | Description                          |
+| ------------ | ------------------- | -------- | ------------------------------------ |
+|              | errors [*required*] | [string] | Array of errors returned by the API. |
+{% /tab %}
+
+{% tab label="Example" %}
+```json
+{
+  "errors": [
+    "Bad Request"
+  ]
+}
+```
+{% /tab %}
+{% /tabs %}
 {% /tab %}
 {% /tabs %}
 
@@ -65,12 +137,15 @@ Too many requests
 {% tabs %}
 {% tab label="Curl" %}
 ```bash
+# Required query arguments
+export start_hr="CHANGE_ME"
+
 # Set your Datadog site and credentials
 export DD_SITE="datadoghq.com"
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}" \
+curl -X GET "https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}" \
 -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
 -H "Accept: application/json"
 ```

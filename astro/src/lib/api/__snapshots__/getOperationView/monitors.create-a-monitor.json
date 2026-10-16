@@ -460,7 +460,17 @@
                 "required": false,
                 "deprecated": true,
                 "readOnly": false,
-                "description": "Information about the downtime applied to the monitor. Only shows v1 downtimes."
+                "description": "Information about the downtime applied to the monitor. Only shows v1 downtimes.",
+                "children": [
+                  {
+                    "name": "<any-key>",
+                    "type": "int64",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "UTC epoch timestamp in seconds when the downtime for the group expires."
+                  }
+                ]
               },
               {
                 "name": "synthetics_check_id",
@@ -3044,7 +3054,17 @@
                   "required": false,
                   "deprecated": true,
                   "readOnly": false,
-                  "description": "Information about the downtime applied to the monitor. Only shows v1 downtimes."
+                  "description": "Information about the downtime applied to the monitor. Only shows v1 downtimes.",
+                  "children": [
+                    {
+                      "name": "<any-key>",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "UTC epoch timestamp in seconds when the downtime for the group expires."
+                    }
+                  ]
                 },
                 {
                   "name": "synthetics_check_id",
@@ -5055,7 +5075,76 @@
                   "required": false,
                   "deprecated": false,
                   "readOnly": false,
-                  "description": "Dictionary where the keys are groups (comma separated lists of tags) and the values are\nthe list of groups your monitor is broken down on."
+                  "description": "Dictionary where the keys are groups (comma separated lists of tags) and the values are\nthe list of groups your monitor is broken down on.",
+                  "children": [
+                    {
+                      "name": "<any-key>",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Monitor state for a single group.",
+                      "children": [
+                        {
+                          "name": "last_nodata_ts",
+                          "type": "int64",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Latest timestamp the monitor was in NO_DATA state."
+                        },
+                        {
+                          "name": "last_notified_ts",
+                          "type": "int64",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Latest timestamp of the notification sent for this monitor group."
+                        },
+                        {
+                          "name": "last_resolved_ts",
+                          "type": "int64",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Latest timestamp the monitor group was resolved."
+                        },
+                        {
+                          "name": "last_triggered_ts",
+                          "type": "int64",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Latest timestamp the monitor group triggered."
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "The name of the monitor."
+                        },
+                        {
+                          "name": "status",
+                          "type": "enum",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": true,
+                          "description": "The different states your monitor can be in.",
+                          "enumValues": [
+                            "Alert",
+                            "Ignored",
+                            "No Data",
+                            "OK",
+                            "Skipped",
+                            "Unknown",
+                            "Warn"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },

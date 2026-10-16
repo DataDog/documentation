@@ -14,6 +14,7 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { EndpointData } from "@lib/api/schemas/views";
 import { getDefaultRegions } from "@lib/api/regionResolver";
 import { appHost } from "@config/regions";
+import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
 import {
   Ast,
   NO_CONTENT,
@@ -29,13 +30,16 @@ import { apiRequestBodyTabsNodes } from "@components/ApiRequestBodyTabs/plaintex
 import { apiResponseNode } from "@components/ApiResponse/plaintext/ApiResponse";
 import { apiCodeExampleNode } from "@components/ApiCodeExample/plaintext/ApiCodeExample";
 
-export function apiEndpointNodes(ep: EndpointData): MarkdocNode[] {
+export function apiEndpointNodes(
+  ep: EndpointData,
+  lang: Locale = DEFAULT_LOCALE,
+): MarkdocNode[] {
   return [
     ...statusNotice(ep),
     ...descriptionNodes(ep),
     ...apiRegionTableNodes(ep.method, ep.regionUrls),
     ...permissionsNodes(ep),
-    ...oauthScopesNodes(ep),
+    ...oauthScopesNodes(ep, lang),
     ...argumentsNodes(ep),
     ...requestBodyNodes(ep),
     ...responseNodes(ep),
@@ -86,12 +90,15 @@ function permissionsNodes(ep: EndpointData): MarkdocNode[] {
   );
 }
 
-function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
+function oauthScopesNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
   if (!ep.oauthScopes || ep.oauthScopes.length === 0) {
     return NO_CONTENT;
   }
+  const scope = ep.oauthScopesAnchor
+    ? `[scope](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
+    : "scope";
   return nodesFromMd(
-    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization scope to access this endpoint.`,
+    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scope} to access this endpoint.`,
   );
 }
 

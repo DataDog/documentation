@@ -104,14 +104,17 @@ export function nodesFromMd(md: string): MarkdocNode[] {
  * Build a Markdown table whose cells can contain inline markdown. Each cell
  * is parsed; if it parses to a single paragraph, its inline children are
  * inlined into the cell. Otherwise the cell falls back to plain text.
+ *
+ * A table row can't span lines, so line breaks in a cell collapse to spaces.
  */
 export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
   const cellChildren = (text: string): MarkdocNode[] => {
-    const parsed = nodesFromMd(text);
+    const oneLineText = text.replace(/\s*\n\s*/g, " ");
+    const parsed = nodesFromMd(oneLineText);
     if (parsed.length === 1 && parsed[0].type === "paragraph") {
       return parsed[0].children;
     }
-    return [inline([plaintext(text)])];
+    return [inline([plaintext(oneLineText)])];
   };
   const th = (text: string): MarkdocNode => {
     return new Ast.Node("th", {}, cellChildren(text));
