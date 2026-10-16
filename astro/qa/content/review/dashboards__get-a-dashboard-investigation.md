@@ -21,7 +21,7 @@ I checked both selectors against the fetched HTML. After I1 to I4, the Astro cou
 
 ## I1. Rows under an array of oneOf stop one level early
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F1
 Findings: about 988 of the 1,334 missing-in-astro rows (astro-wrong, HTML matches the Hugo .md). Samples: 09f50c01991a
 Location: 200 model, deep inside widget queries, such as `widgets` → `definition` → `<type=bar_chart>` → `requests` → `queries` → `<data_source=product_analytics_extended>` → `query`
 Search: `| query                                     | search` on each .md page. Hugo's has 85 hits and Astro's has none.
@@ -37,7 +37,7 @@ Success: the Astro .md has `| query | search [*required*] | object | Search conf
 
 ## I2. A schema that is only a `$ref` to another schema renders with no fields
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F2
 Findings: about 189 of the missing-in-astro rows (astro-wrong, HTML matches the Hugo .md). Samples: in the 200 model, `base_query.data_source` and `base_query.search` under `cohort_criteria`
 Location: `<data_source=product_analytics_retention>` → `search` → `cohort_criteria` → `base_query`
 Search: `| base_query                                | search` on each .md page. Hugo's has 38 hits and Astro's has none.
@@ -50,7 +50,7 @@ Success: the Astro .md has `data_source` and `search` rows under `base_query`.
 
 ## I3. `additionalProperties` fields are missing
 
-Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I2)
+Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I2). done: covered by aws-integration/list-all-aws-integrations F2
 Findings: 92 (missing-in-astro tableRow: 56 `additionalProperties.<any-key>`, plus 36 `<any-key>.data_source` and `<any-key>.search`)
 Location: `search` → `node_objects` in user journey queries
 
@@ -58,7 +58,7 @@ Success: the Astro .md shows `| additionalProperties | <any-key> | object | Base
 
 ## I4. Astro adds a wrapper row under a oneOf option that is an array
 
-Recommendation: automatic fix (user, 2026-10-16)
+Recommendation: automatic fix (user, 2026-10-16). done: F4
 Findings: about 120: 15 extra-in-astro (`Object 1.<items>`, `Object 41.<items>`, with the HTML check not-found), 41 changed matches-neither (Astro's parent is `<items>` where Hugo's is the option), and about 65 missing-in-astro (`Object 1.facet`, `Object 1.limit`, `Object 1.sort`, `sort.*`). Samples: 2644bb8c05d8, 6f647121c3ac, b6ea035736f6, 9fb9fd42bc78
 Location: `group_by` under events queries ("Object 1 [object] List of objects used to group by."), and the `definition` option for the topology map widget (Object 41)
 Search: `List of objects used to group by.` on each HTML page. Prod has it 31 times and Astro 44 times, because the wrapper repeats it.
@@ -74,7 +74,7 @@ Success: `List of objects used to group by.` shows up 31 times on the Astro HTML
 
 ## I5. A property's own description and deprecated flag next to a `$ref` are ignored
 
-Recommendation: automatic fix (user, 2026-10-16)
+Recommendation: automatic fix (user, 2026-10-16). done: F5
 Findings: about 300: 210 changed `deprecated-marker-differs,other`, 31 `deprecated-marker-differs`, and most of the 89 `other` rows that are astro-wrong and match the Hugo .md. All are astro-wrong, and the HTML matches the Hugo .md. Samples: 0253856c3e7e, a361de3f8cde, a3c5d461cf83, 7f901e52f94f, dc0b72924ec6
 Location: 200 model, such as `requests.apm_query`, `compute.rollup`, `default_timeframe` and `requests.request_type`
 Search: `Use queries and formulas instead` on each .md page.
@@ -91,7 +91,7 @@ Success: both Astro pages show `apm_query` as deprecated, with the description "
 
 ## I6. .md drops enum values on oneOf option rows
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F6
 Findings: 30 (changed `other`, astro-wrong, HTML matches the Hugo .md). Samples: c9c8753eac77
 Location: `aggregation` → `Object 1` in events and retention compute
 Search: `Standard aggregation types for events-based queries.` on each page.
@@ -106,14 +106,14 @@ Success: the Astro .md row ends with ``Allowed values: `avg`, `cardinality`, …
 
 ## I7. Line breaks inside .md table cells break the tables
 
-Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I1)
+Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I1). done: covered by aws-integration/list-all-aws-integrations F1
 Findings: 44 (astro-malformed, `table-cell-line-break`), plus 3 extra-in-astro links. Samples: 83adab2257d1
 
 New: the 3 `graphing_json/request_json` links that didn't get `.md` (Astro .md line 608) all sit in a cell that breaks right after the link. Check that they get `.md` once this fix is in. If they don't, look at `mdLinkHref` (`src/lib/plaintext/helpers.ts:172`).
 
 ## I8. .md drops the link on "scope" in the OAuth sentence
 
-Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1)
+Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1). done: covered by dashboard-lists/get-all-dashboard-lists F1
 Findings: 1 (missing-in-astro, link). Samples: f60aff4241c0
 
 ## I9. Astro shows a "(recursive)" row in the group widget
@@ -172,6 +172,8 @@ Recommendation: human review (per authentication/validate-api-key I3)
 Findings: 3 (one hugo-malformed `unfenced-code`, two changed code). Samples: bb4c95b002b0, 7f6491aaa003
 
 Prod exports the path parameter (`export dashboard_id="CHANGE_ME"`). Check that the curl variable fix (usage-metering/get-hourly-usage-for-lambda I6) covers path parameters here.
+
+Checked after usage-metering/get-hourly-usage-for-lambda F6: local exports `dashboard_id="CHANGE_ME"` and the URL uses `${dashboard_id}`. The rest stays human review.
 
 ## I16. Overview text is split and placed differently
 

@@ -37,31 +37,38 @@ Incident payload.
 
 {% tabs %}
 {% tab label="Model" %}
-| Parent field         | Field                          | Type      | Description                                                                                                                    |
-| -------------------- | ------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
-|                      | data [*required*]              | object    | Incident data for a create request.                                                                                            |
-| data                 | attributes [*required*]        | object    | The incident's attributes for a create request.                                                                                |
-| attributes           | customer_impact_scope          | string    | Required if `customer_impacted:"true"`. A summary of the impact customers experienced during the incident.                     |
-| attributes           | customer_impacted [*required*] | boolean   | A flag indicating whether the incident caused customer impact.                                                                 |
-| attributes           | fields                         | object    | A condensed view of the user-defined fields for which to create initial selections.                                            |
-| attributes           | incident_type_uuid             | string    | A unique identifier that represents an incident type. The default incident type will be used if this property is not provided. |
-| attributes           | initial_cells                  | [<oneOf>] | An array of initial timeline cells to be placed at the beginning of the incident timeline.                                     |
-| initial_cells        | <cell_type=markdown>           | object    | Timeline cell data for Markdown timeline cells for a create request.                                                           |
-| <cell_type=markdown> | cell_type [*required*]         | enum      | Type of the Markdown timeline cell. Allowed values: `markdown`. Default: `markdown`.                                           |
-| <cell_type=markdown> | content [*required*]           | object    | The Markdown timeline cell contents.                                                                                           |
-| content              | content                        | string    | The Markdown content of the cell.                                                                                              |
-| <cell_type=markdown> | important                      | boolean   | A flag indicating whether the timeline cell is important and should be highlighted. Default: `false`.                          |
-| attributes           | is_test                        | boolean   | A flag indicating whether the incident is a test incident.                                                                     |
-| attributes           | notification_handles           | [object]  | Notification handles that will be notified of the incident at creation.                                                        |
-| notification_handles | display_name                   | string    | The name of the notified handle.                                                                                               |
-| notification_handles | handle                         | string    | The handle used for the notification. This includes an email address, Slack channel, or workflow.                              |
-| attributes           | title [*required*]             | string    | The title of the incident, which summarizes what happened.                                                                     |
-| data                 | relationships                  | object    | The relationships the incident will have with other resources once created.                                                    |
-| relationships        | commander_user [*required*]    | object    | Relationship to user.                                                                                                          |
-| commander_user       | data [*required*]              | object    | Relationship to user object.                                                                                                   |
-| data                 | id [*required*]                | string    | A unique identifier that represents the user.                                                                                  |
-| data                 | type [*required*]              | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                |
-| data                 | type [*required*]              | enum      | Incident resource type. Allowed values: `incidents`. Default: `incidents`.                                                     |
+| Parent field         | Field                          | Type      | Description                                                                                                                                    |
+| -------------------- | ------------------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+|                      | data [*required*]              | object    | Incident data for a create request.                                                                                                            |
+| data                 | attributes [*required*]        | object    | The incident's attributes for a create request.                                                                                                |
+| attributes           | customer_impact_scope          | string    | Required if `customer_impacted:"true"`. A summary of the impact customers experienced during the incident.                                     |
+| attributes           | customer_impacted [*required*] | boolean   | A flag indicating whether the incident caused customer impact.                                                                                 |
+| attributes           | fields                         | object    | A condensed view of the user-defined fields for which to create initial selections.                                                            |
+| additionalProperties | <any-key>                      | <oneOf>   | Dynamic fields for which selections can be made, with field names as keys.                                                                     |
+| <any-key>            | Object 1                       | object    | A field with a single value selected.                                                                                                          |
+| Object 1             | type                           | enum      | Type of the single value field definitions. Allowed values: `dropdown`, `textbox`. Default: `dropdown`.                                        |
+| Object 1             | value                          | string    | The single value selected for this field.                                                                                                      |
+| <any-key>            | Object 2                       | object    | A field with potentially multiple values selected.                                                                                             |
+| Object 2             | type                           | enum      | Type of the multiple value field definitions. Allowed values: `multiselect`, `textarray`, `metrictag`, `autocomplete`. Default: `multiselect`. |
+| Object 2             | value                          | [string]  | The multiple values selected for this field.                                                                                                   |
+| attributes           | incident_type_uuid             | string    | A unique identifier that represents an incident type. The default incident type will be used if this property is not provided.                 |
+| attributes           | initial_cells                  | [<oneOf>] | An array of initial timeline cells to be placed at the beginning of the incident timeline.                                                     |
+| initial_cells        | <cell_type=markdown>           | object    | Timeline cell data for Markdown timeline cells for a create request.                                                                           |
+| <cell_type=markdown> | cell_type [*required*]         | enum      | Type of the Markdown timeline cell. Allowed values: `markdown`. Default: `markdown`.                                                           |
+| <cell_type=markdown> | content [*required*]           | object    | The Markdown timeline cell contents.                                                                                                           |
+| content              | content                        | string    | The Markdown content of the cell.                                                                                                              |
+| <cell_type=markdown> | important                      | boolean   | A flag indicating whether the timeline cell is important and should be highlighted. Default: `false`.                                          |
+| attributes           | is_test                        | boolean   | A flag indicating whether the incident is a test incident.                                                                                     |
+| attributes           | notification_handles           | [object]  | Notification handles that will be notified of the incident at creation.                                                                        |
+| notification_handles | display_name                   | string    | The name of the notified handle.                                                                                                               |
+| notification_handles | handle                         | string    | The handle used for the notification. This includes an email address, Slack channel, or workflow.                                              |
+| attributes           | title [*required*]             | string    | The title of the incident, which summarizes what happened.                                                                                     |
+| data                 | relationships                  | object    | The relationships the incident will have with other resources once created.                                                                    |
+| relationships        | commander_user [*required*]    | object    | Relationship to user.                                                                                                                          |
+| commander_user       | data [*required*]              | object    | Relationship to user object.                                                                                                                   |
+| data                 | id [*required*]                | string    | A unique identifier that represents the user.                                                                                                  |
+| data                 | type [*required*]              | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                |
+| data                 | type [*required*]              | enum      | Incident resource type. Allowed values: `incidents`. Default: `incidents`.                                                                     |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -136,8 +143,7 @@ Response with an incident.
 | attributes                  | archived                    | date-time | Timestamp of when the incident was archived. Read-only.                                                                                                            |
 | attributes                  | case_id                     | int64     | The incident case id.                                                                                                                                              |
 | attributes                  | created                     | date-time | Timestamp when the incident was created. Read-only.                                                                                                                |
-| attributes                  | customer_impact_duration    | int64     | Length of the incident's customer impact in seconds.
-  Equals the difference between `customer_impact_start` and `customer_impact_end`. Read-only.                 |
+| attributes                  | customer_impact_duration    | int64     | Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`. Read-only.                   |
 | attributes                  | customer_impact_end         | date-time | Timestamp when customers were no longer impacted by the incident.                                                                                                  |
 | attributes                  | customer_impact_scope       | string    | A summary of the impact customers experienced during the incident.                                                                                                 |
 | attributes                  | customer_impact_start       | date-time | Timestamp when customers began being impacted by the incident.                                                                                                     |
@@ -149,6 +155,13 @@ Response with an incident.
 | attributes                  | declared_by_uuid            | string    | UUID of the user who declared the incident.                                                                                                                        |
 | attributes                  | detected                    | date-time | Timestamp when the incident was detected.                                                                                                                          |
 | attributes                  | fields                      | object    | A condensed view of the user-defined fields attached to incidents.                                                                                                 |
+| additionalProperties        | <any-key>                   | <oneOf>   | Dynamic fields for which selections can be made, with field names as keys.                                                                                         |
+| <any-key>                   | Object 1                    | object    | A field with a single value selected.                                                                                                                              |
+| Object 1                    | type                        | enum      | Type of the single value field definitions. Allowed values: `dropdown`, `textbox`. Default: `dropdown`.                                                            |
+| Object 1                    | value                       | string    | The single value selected for this field.                                                                                                                          |
+| <any-key>                   | Object 2                    | object    | A field with potentially multiple values selected.                                                                                                                 |
+| Object 2                    | type                        | enum      | Type of the multiple value field definitions. Allowed values: `multiselect`, `textarray`, `metrictag`, `autocomplete`. Default: `multiselect`.                     |
+| Object 2                    | value                       | [string]  | The multiple values selected for this field.                                                                                                                       |
 | attributes                  | incident_type_uuid          | string    | A unique identifier that represents an incident type.                                                                                                              |
 | attributes                  | is_test                     | boolean   | A flag indicating whether the incident is a test incident.                                                                                                         |
 | attributes                  | modified                    | date-time | Timestamp when the incident was last modified. Read-only.                                                                                                          |
@@ -162,8 +175,7 @@ Response with an incident.
 | attributes                  | resolved                    | date-time | Timestamp when the incident's state was last changed from active or stable to resolved or completed.                                                               |
 | attributes                  | severity                    | enum      | The incident severity. Allowed values: `UNKNOWN`, `SEV-0`, `SEV-1`, `SEV-2`, `SEV-3`, `SEV-4`, `SEV-5`.                                                            |
 | attributes                  | state                       | string    | The state incident.                                                                                                                                                |
-| attributes                  | time_to_detect              | int64     | The amount of time in seconds to detect the incident.
-  Equals the difference between `customer_impact_start` and `detected`. Read-only.                           |
+| attributes                  | time_to_detect              | int64     | The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`. Read-only.                             |
 | attributes                  | time_to_internal_response   | int64     | The amount of time in seconds to call incident after detection. Equals the difference of `detected` and `created`. Read-only.                                      |
 | attributes                  | time_to_repair              | int64     | The amount of time in seconds to resolve customer impact after detecting the issue. Equals the difference between `customer_impact_end` and `detected`. Read-only. |
 | attributes                  | time_to_resolve             | int64     | The amount of time in seconds to resolve the incident after it was created. Equals the difference between `created` and `resolved`. Read-only.                     |

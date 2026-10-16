@@ -40,7 +40,7 @@ Proposed fix: none.
 
 ## I3. `additionalProperties` fields are missing, including oneOf ones
 
-Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I2)
+Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I2). done: covered by aws-integration/list-all-aws-integrations F2
 Findings: 14 (missing-in-astro, astro-wrong, HTML matches the Hugo .md). Samples: 7d464af233bb, 0b9a5e7b8b92
 Location: `attributes.fields` in the request model and the 201 response model
 
@@ -52,7 +52,7 @@ Success: both Astro pages show `<any-key>` (`<oneOf>`) with Object 1 and Object 
 
 ## I4. Line breaks inside .md table cells break the tables
 
-Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I1)
+Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I1). done: covered by aws-integration/list-all-aws-integrations F1
 Findings: 2 (astro-malformed, `table-cell-line-break`). Samples: 1cc1f3fa939e, 2077ac014e9e
 Location: 201 response model, `attributes.customer_impact_duration` and `attributes.time_to_detect`
 
@@ -90,7 +90,7 @@ New for POST: prod's curl starts with a `## default` comment line (the example n
 
 ## I10. .md drops the link on "scope" in the OAuth sentence
 
-Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1)
+Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1). done: covered by dashboard-lists/get-all-dashboard-lists F1
 Findings: 1 (missing-in-astro, link). Samples: 4e38fa7b8057
 
 ## I11. Help link uses `.md`

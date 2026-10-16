@@ -780,7 +780,17 @@
                   "required": false,
                   "deprecated": false,
                   "readOnly": false,
-                  "description": "An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) containing user-supplied overrides\nfor AWS namespace metric collection. **Important**: This field only contains namespaces explicitly configured through API calls,\nnot the comprehensive enabled or disabled status of all namespaces. If a namespace is absent from this field, it uses Datadog's\ninternal defaults (all namespaces enabled by default, except `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage`).\nFor a complete view of all namespace statuses, use the V2 AWS Integration API instead."
+                  "description": "An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) containing user-supplied overrides\nfor AWS namespace metric collection. **Important**: This field only contains namespaces explicitly configured through API calls,\nnot the comprehensive enabled or disabled status of all namespaces. If a namespace is absent from this field, it uses Datadog's\ninternal defaults (all namespaces enabled by default, except `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage`).\nFor a complete view of all namespace statuses, use the V2 AWS Integration API instead.",
+                  "children": [
+                    {
+                      "name": "<any-key>",
+                      "type": "boolean",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A list of additional properties."
+                    }
+                  ]
                 },
                 {
                   "name": "cspm_resource_collection_enabled",

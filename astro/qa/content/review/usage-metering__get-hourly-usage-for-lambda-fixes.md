@@ -37,3 +37,16 @@ Feedback:
 ## F4. .md drops the link on "scope" in the OAuth sentence
 
 Covered by dashboard-lists/get-all-dashboard-lists F1. Checked on this page: local has `authorization [scope](http://localhost:4321/api/latest/scopes.md#usage-metering)`, matching prod.
+
+## F6. Curl references a variable it never sets
+
+What was wrong: when a required query parameter or a path parameter had no example, the curl URL used `${START_HR}` but nothing exported it, so the pasted command sent an empty `start_hr`.
+What changed: `src/lib/api/curlBuilder.ts` exports each such parameter as `"CHANGE_ME"` under `# Path parameters` or `# Required query arguments`, as Hugo does, and the URL uses the lowercase name. Parameters with an example stay inlined in the URL. Test: `src/lib/api/curlBuilder.test.ts`. The lambda and get-a-dashboard view, HTML and plaintext snapshots gained the export.
+Findings covered: 2. Samples: 906fa96768ca, 70108436a3bd
+
+To check the plaintext: search for `start_hr=` on each `.md` page.
+To check the HTML: open the Curl tab in Code Example.
+Success: local has `export start_hr="CHANGE_ME"` and the URL uses `?start_hr=${start_hr}`, as prod does. Staging uses `${START_HR}` with no export.
+
+Status: [ ] approved
+Feedback:

@@ -137,12 +137,15 @@ Error response object.
 {% tabs %}
 {% tab label="Curl" %}
 ```bash
+# Required query arguments
+export start_hr="CHANGE_ME"
+
 # Set your Datadog site and credentials
 export DD_SITE="datadoghq.com"
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}" \
+curl -X GET "https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}" \
 -H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
 -H "Accept: application/json"
 ```

@@ -23,6 +23,9 @@ import type { SchemaField } from "./schemas/schemaField";
  */
 const MAX_DEPTH = 10;
 
+/** Name of the row Hugo shows for an object's `additionalProperties`. */
+export const ANY_KEY_FIELD_NAME = "<any-key>";
+
 /* ------------------------------------------------------------------ */
 /*  Module-level cache for resolved $ref schemas                       */
 /*                                                                     */
@@ -324,10 +327,14 @@ function buildUnionOptions(
   visited: Set<string>,
   level: number,
 ): NonNullable<SchemaField["unionOptions"]> {
+  // The option rows sit one level below the union; past the cap Hugo renders
+  // none of them.
+  if (level + 1 > MAX_DEPTH) return [];
+
   const labels = unionOptionLabels(spec, variants);
 
   return variants.map((variant: any, idx: number) => {
-    const fields = schemaToFields(spec, variant, new Set(visited), level + 2);
+    const fields = optionFields(spec, variant, visited, level + 2);
 
     // A scalar branch yields one anonymous leaf and nothing else; its type
     // belongs on the option row rather than on a nested unnamed row.
@@ -350,6 +357,72 @@ function buildUnionOptions(
       fields: leaf ? [] : fields,
     };
   });
+}
+
+/**
+ * The rows under one union option, resolved at `fieldLevel`.
+ *
+ * Hugo's `rowRecursive` puts no nameless row between an option and what it
+ * holds. An option that is an array of objects gets its item fields directly
+ * (`items.properties`), and keeps the array's `[object]` type. An option that
+ * is itself a union gets its inner options directly, as rows of their own.
+ */
+function optionFields(
+  spec: any,
+  variant: any,
+  visited: Set<string>,
+  fieldLevel: number,
+): SchemaField[] {
+  const optionVisited = new Set(visited);
+  let resolved = variant;
+  if (variant?.$ref && !visited.has(variant.$ref)) {
+    optionVisited.add(variant.$ref);
+    resolved = resolveRef(spec, variant.$ref) ?? variant;
+  }
+  if (resolved?.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  const unionKey = resolved?.oneOf ? "oneOf" : resolved?.anyOf ? "anyOf" : null;
+  if (unionKey) {
+    return buildUnionOptions(
+      spec,
+      resolved[unionKey],
+      optionVisited,
+      fieldLevel - 1,
+    ).map(optionAsField);
+  }
+
+  const items = resolved?.type === "array" ? resolved.items : undefined;
+  const itemTypeName = items ? resolveItemTypeName(items, spec) : undefined;
+  const itemsAreObjects =
+    items &&
+    arrayItemsHaveChildren(items, spec) &&
+    itemTypeName !== "<oneOf>" &&
+    itemTypeName !== "<anyOf>";
+
+  return itemsAreObjects
+    ? schemaToFields(spec, items, optionVisited, fieldLevel)
+    : schemaToFields(spec, variant, new Set(visited), fieldLevel);
+}
+
+/** An inner union option, as a row under its outer option. */
+function optionAsField(
+  option: NonNullable<SchemaField["unionOptions"]>[number],
+): SchemaField {
+  return {
+    name: option.label,
+    type: option.type,
+    required: false,
+    deprecated: false,
+    readOnly: false,
+    description: option.description ?? "",
+    ...(option.enumValues ? { enumValues: option.enumValues } : {}),
+    ...(option.defaultValue !== undefined
+      ? { defaultValue: option.defaultValue }
+      : {}),
+    ...(option.fields.length > 0 ? { children: option.fields } : {}),
+  };
 }
 
 /**
@@ -461,7 +534,23 @@ export function schemaToFields(
   }
 
   // ── object type ──────────────────────────────────────────────────
-  if (schema.type === "object" || schema.properties) {
+  if (schema.type === "object" || schema.properties || anyKeySchema(schema)) {
+    const additionalProperties = schema.properties
+      ? undefined
+      : anyKeySchema(schema);
+    if (additionalProperties) {
+      return [
+        propertyToField(
+          spec,
+          ANY_KEY_FIELD_NAME,
+          additionalProperties,
+          false,
+          visited,
+          level,
+        ),
+      ];
+    }
+
     const requiredSet = new Set<string>(schema.required ?? []);
     const properties: Record<string, any> = schema.properties ?? {};
 
@@ -498,7 +587,12 @@ export function schemaToFields(
 
     const itemTypeName = resolveItemTypeName(items, spec);
     const children = arrayItemsHaveChildren(items, spec)
-      ? schemaToFields(spec, items, new Set(visited), level + 1)
+      ? schemaToFields(
+          spec,
+          items,
+          new Set(visited),
+          arrayItemsLevel(items, spec, level),
+        )
       : [];
 
     return [
@@ -808,14 +902,20 @@ function propertyToField(
     };
   }
 
-  // Resolve $ref first so we can inspect the real schema
+  // Resolve $ref first so we can inspect the real schema. A target can itself
+  // be only a `$ref` (`ProductAnalyticsBaseQuery`), so follow the chain, as
+  // Hugo's dereferenced spec does, keeping the first description found.
   let resolved = schema;
-  let resolvedRef: string | undefined;
-  if (schema.$ref) {
-    const ref = schema.$ref;
-    resolvedRef = ref;
+  let chainDescription: string | undefined;
+  let chainDeprecated = false;
+  const nextVisited = new Set(visited);
+  while (resolved.$ref) {
+    const ref: string = resolved.$ref;
+    // A `$ref`'s own `description` and `deprecated` win over the target's.
+    chainDescription ??= resolved.description;
+    chainDeprecated ||= resolved.deprecated === true;
 
-    if (visited.has(ref)) {
+    if (nextVisited.has(ref)) {
       return {
         name,
         type: refName(ref),
@@ -825,12 +925,22 @@ function propertyToField(
         description: `Circular reference to ${refName(ref)}.`,
       };
     }
+    nextVisited.add(ref);
 
-    resolved = resolveRef(spec, ref) ?? schema;
+    const target = resolveRef(spec, ref);
+    if (!target) break;
+    chainDescription ??= target.description;
+    resolved = target;
   }
-
-  const nextVisited = new Set(visited);
-  if (resolvedRef) nextVisited.add(resolvedRef);
+  if (
+    chainDescription !== undefined &&
+    resolved.description !== chainDescription
+  ) {
+    resolved = { ...resolved, description: chainDescription };
+  }
+  if (chainDeprecated && resolved.deprecated !== true) {
+    resolved = { ...resolved, deprecated: true };
+  }
 
   // ── oneOf / anyOf ────────────────────────────────────────────────
   const unionKey = resolved.oneOf ? "oneOf" : resolved.anyOf ? "anyOf" : null;
@@ -867,7 +977,11 @@ function propertyToField(
   }
 
   // ── object ───────────────────────────────────────────────────────
-  if (resolved.type === "object" || resolved.properties) {
+  if (
+    resolved.type === "object" ||
+    resolved.properties ||
+    anyKeySchema(resolved)
+  ) {
     const children = schemaToFields(spec, resolved, nextVisited, level + 1);
     return {
       name,
@@ -887,7 +1001,12 @@ function propertyToField(
     const itemTypeName = items ? resolveItemTypeName(items, spec) : "any";
     const children =
       items && arrayItemsHaveChildren(items, spec)
-        ? schemaToFields(spec, items, new Set(nextVisited), level + 1)
+        ? schemaToFields(
+            spec,
+            items,
+            new Set(nextVisited),
+            arrayItemsLevel(items, spec, level),
+          )
         : [];
 
     return {
@@ -921,6 +1040,26 @@ function propertyToField(
   }
 
   return field;
+}
+
+/**
+ * The schema of an object's `additionalProperties`, when it describes values.
+ *
+ * Mirrors Hugo's `rowRecursive`, which renders a non-empty
+ * `additionalProperties` object as one `<any-key>` child row, and only when
+ * the object has no `properties`. `true` and `{}` say nothing about the
+ * values, so they get no row.
+ */
+function anyKeySchema(schema: any): any {
+  const additionalProperties = schema.additionalProperties;
+  if (
+    !additionalProperties ||
+    typeof additionalProperties !== "object" ||
+    Object.keys(additionalProperties).length === 0
+  ) {
+    return undefined;
+  }
+  return additionalProperties;
 }
 
 /**
@@ -980,6 +1119,22 @@ function arrayItemsHaveChildren(items: any, spec: any): boolean {
   }
 
   return !!(resolved.properties || resolved.oneOf || resolved.anyOf);
+}
+
+/**
+ * The level to resolve an array's `items` at.
+ *
+ * Object items put their properties one level below the array. A union's
+ * option rows hang directly off the array (see `arrayChildFields`), so union
+ * items resolve at the array's own level: `buildUnionOptions` then puts the
+ * options at + 1 and their fields at + 2, as Hugo's `rowRecursive` does for a
+ * `oneOf` property and for `items.oneOf` alike.
+ */
+function arrayItemsLevel(items: any, spec: any, level: number): number {
+  const itemTypeName = resolveItemTypeName(items, spec);
+  const itemsAreUnion =
+    itemTypeName === "<oneOf>" || itemTypeName === "<anyOf>";
+  return itemsAreUnion ? level : level + 1;
 }
 
 /**

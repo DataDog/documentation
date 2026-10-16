@@ -71,7 +71,7 @@ Prod has the description and "This endpoint requires the `usage_read` permission
 
 ## I6. Curl references a variable it never sets
 
-Recommendation: automatic fix (user, 2026-10-16)
+Recommendation: automatic fix (user, 2026-10-16). done: F6
 Findings: 2 (one hugo-malformed / matches-neither, one changed / astro-wrong). Samples: 906fa96768ca, 70108436a3bd
 Location: Code Example, Curl tab
 Search: `start_hr=` on each page.

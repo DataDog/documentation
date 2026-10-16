@@ -12,7 +12,7 @@ Links:
 
 ## I1. Line breaks inside .md table cells break the tables
 
-Recommendation: automatic fix
+Recommendation: automatic fix. done: F1
 Findings: 14 (astro-malformed, reason `table-cell-line-break`). Samples: 4a1671b5806b, 4fb649be4bba, 0302e84f8aeb
 Location: the arguments table and both 200 model tables, in the .md only
 Search: `aws_account_id | string | Optional query` on the Astro .md.
@@ -34,7 +34,7 @@ Success: each row on the Astro .md is one line, and `If not provided, all accoun
 
 ## I2. `additionalProperties` fields are missing
 
-Recommendation: automatic fix (user, 2026-10-16)
+Recommendation: automatic fix (user, 2026-10-16). done: F2
 Findings: 1 (missing-in-astro, astro-wrong, HTML matches the Hugo .md). Samples: 3bc9f0250cb0
 Location: v1 response 200 model, under `accounts.account_specific_namespace_rules`
 Search: `<any-key>` on each page.

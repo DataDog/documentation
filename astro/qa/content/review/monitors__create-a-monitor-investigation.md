@@ -51,7 +51,7 @@ Cause: Hugo shows up to three request examples from `request.CreateMonitor*.json
 
 ## I4. `additionalProperties` fields are missing
 
-Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I2)
+Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I2). done: covered by aws-integration/list-all-aws-integrations F2
 Findings: 8 (missing-in-astro tableRow). Samples: in the 200 response model, `additionalProperties.<any-key>` and `<any-key>.last_nodata_ts`
 Location: 200 response model, `state.groups`
 
@@ -59,7 +59,7 @@ Success: the Astro 200 model shows `<any-key>` under `state.groups`, with `last_
 
 ## I5. Line breaks inside .md table cells break the tables
 
-Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I1)
+Recommendation: automatic fix (per aws-integration/list-all-aws-integrations I1). done: covered by aws-integration/list-all-aws-integrations F1
 Findings: 53 (astro-malformed, `table-cell-line-break`). Samples: 4608f5f4225d, 062fa6646375
 
 ## I6. Astro shows "Default: false." and "Default: 0."
@@ -108,7 +108,7 @@ Findings: 4 (two hugo-malformed / matches-neither, one changed / astro-wrong, on
 
 ## I12. .md drops the link on "scope" in the OAuth sentence
 
-Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1)
+Recommendation: automatic fix (per dashboard-lists/get-all-dashboard-lists I1). done: covered by dashboard-lists/get-all-dashboard-lists F1
 Findings: 1 (missing-in-astro, link). Samples: 7d2bc7813633
 
 ## I13. Request heading and label differ
