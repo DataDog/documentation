@@ -10431,6 +10431,11 @@ menu:
       parent: product_analytics
       identifier: pa_usability
       weight: 8
+    - name: Dashboard Reporter Agent
+      url: product_analytics/dashboard_reporter_agent
+      parent: product_analytics
+      identifier: pa_dashboard_reporter_agent
+      weight: 9
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
