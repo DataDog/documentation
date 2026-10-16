@@ -24,6 +24,34 @@ To set up the Aggregate processor:
 1. In the **Mode** dropdown menu, select the aggregation function to use. See the [Modes](#modes) section for details.
 1. In the **Interval** field, enter the time window in seconds for aggregating metrics. The maximum value is 60 seconds.
 
+### Optional settings
+
+- **Use event timestamp** is enabled by default and groups metrics into time windows based on each metric's timestamp. Toggle it off to group metrics by when the Worker processes them. See [Grouping by timestamp](#grouping-by-timestamp) for more information.
+- If **Use event timestamp** is enabled, in the **Allowed lateness** field, enter the number of seconds a time window accepts late metrics after its end time.
+    - **Notes**:
+        - A longer grace period increases memory usage.
+        - Enter `0` to drop all late metrics. See [Late metrics](#late-metrics) for more information.
+
+## How the processor works
+
+### Grouping by timestamp
+
+When **Use event timestamp** is enabled, the processor groups metrics by each metric's timestamp, not by when the Worker processes the metric.
+
+Event time windows start at fixed times based on the interval. For example, with a 10-second interval, the windows are:
+
+- 12:00:00 to 12:00:10
+- 12:00:10 to 12:00:20
+- 12:00:20 to 12:00:30, and so on.
+
+A metric with a timestamp of 12:00:07 always goes into the first window, even if the metric arrives late but still during the grace period. See [Late metrics](#late-metrics) for more information.
+
+Grouping metrics by timestamp is useful for destinations that use the metric timestamp as a key. For example, Datadog Metrics overwrites earlier values that have the same timestamp.
+
+### Late metrics
+
+The **Allowed lateness** grace period starts at a window's end time and is based on the Worker's system clock. After the grace period, the window stops accepting metrics, the aggregated metrics are sent, and the window is permanently closed. Any late metrics for that window are dropped and counted in the `pipelines.component_discarded_events_total` metric. See [Pipeline Usage Metrics][3] for more information.
+
 ## Modes
 
 The Aggregate processor can combine metrics into a single metric based on the following modes. Some modes are available only for specific [metric kinds][2], incremental or absolute.
@@ -40,3 +68,4 @@ The Aggregate processor can combine metrics into a single metric based on the fo
 
 [1]: /observability_pipelines/search_syntax/metrics/
 [2]: /observability_pipelines/configuration/?tab=metrics#metrics-data
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
