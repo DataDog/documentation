@@ -68,7 +68,8 @@ You can mute IP addresses, domains, and SHA-256 file hashes. Mute single values 
 
 ### Mute multiple indicators
 
-1. In the [IOC Explorer][5], select the checkboxes next to the indicators you want to mute. You can mute up to 100 indicators at a time.
+1. Go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Investigate{{< /ui >}} > [{{< ui >}}IOC Explorer{{< /ui >}}][5].
+1. Select the checkboxes next to the indicators you want to mute. You can mute up to 100 indicators at a time.
 1. In the bulk actions menu, click {{< ui >}}Mute{{< /ui >}}.
 1. Optionally, enter a reason. The reason applies to every selected indicator.
 1. Confirm the action.
