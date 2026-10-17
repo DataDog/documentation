@@ -22,3 +22,11 @@ entries:
       - GetDashboard
       - UpdateDashboard
     title: Allow network device flows in dashboard formula queries
+  - change_type: modified
+    date: '2026-10-17'
+    link: https://github.com/DataDog/documentation/pull/39574
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Fix dashboard tag limits for team and AI tags
