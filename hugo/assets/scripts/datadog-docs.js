@@ -12,6 +12,7 @@ import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
 import ExpressionLanguageEvaluator from './components/expression-language-evaluator';
+import { buildMobileDocsNav } from './components/mobile-nav-transform';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -301,6 +302,14 @@ function updateSidebar(event) {
             event.target.closest('li').classList.add('open');
         }
     }
+}
+
+// nav/mobile-documentation.html's "Docs main nav" branch is generated here, from the
+// desktop sidenav's DOM, instead of being independently server-rendered (WEB-9804).
+// Must run before setMobileNav()'s first call (below, and via window.onload/updateSidebar).
+const mobileDocsNavMount = document.getElementById('mobile-docs-nav-mount');
+if (mobileDocsNavMount) {
+    mobileDocsNavMount.replaceChildren(buildMobileDocsNav(document.querySelector('.side .sidenav-nav-js-load')));
 }
 
 const sideNav = document.querySelector('.side .sidenav-nav-js-load');
