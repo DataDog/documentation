@@ -1,0 +1,8 @@
+entries:
+  - change_type: modified
+    date: '2026-10-17'
+    link: https://github.com/DataDog/documentation/pull/39574
+    operations:
+      - CreateDashboardListItems
+      - GetDashboardListItems
+    title: Fix dashboard tag limits for team and AI tags
