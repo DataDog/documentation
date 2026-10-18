@@ -1942,6 +1942,47 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringBatchMigrationID:
+      description: The UUID of the batch migration.
+      in: path
+      name: batch_id
+      required: true
+      schema:
+        example: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+        format: uuid
+        type: string
+    SecurityMonitoringBatchMigrationPageNumber:
+      description: Specific page number to return, starting at 1.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 1
+        example: 1
+        format: int64
+        minimum: 1
+        type: integer
+    SecurityMonitoringBatchMigrationPageSize:
+      description: Size for a given page. The maximum allowed value is 500.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 50
+        example: 50
+        format: int64
+        maximum: 500
+        minimum: 1
+        type: integer
+    SecurityMonitoringBatchMigrationResourceID:
+      description: The UUID of the batch migration resource.
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        example: c968cf83-56c2-4d54-a993-6c86dfb83527
+        format: uuid
+        type: string
     SecurityMonitoringCriticalAssetID:
       description: The ID of the critical asset.
       in: path
@@ -2370,6 +2411,42 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Method Not Allowed
+    SecurityMonitoringBatchMigrationBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    SecurityMonitoringBatchMigrationConflictResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Conflict
+    SecurityMonitoringBatchMigrationForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Forbidden
+    SecurityMonitoringBatchMigrationInternalServerErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Internal Server Error
+    SecurityMonitoringBatchMigrationNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
+    SecurityMonitoringBatchMigrationUnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Unauthorized
     SpansBadRequestResponse:
       content:
         application/json:
@@ -113480,6 +113557,725 @@ components:
         - resource_collection_enabled
         - subscription_count
         - error_count
+      type: object
+    SecurityMonitoringBatchMigrationAttributes:
+      description: Attributes of a batch migration.
+      properties:
+        createdAt:
+          description: The creation date of the batch migration, in RFC 3339 format.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        createdBy:
+          description: The UUID of the user or service account who created the batch migration.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        description:
+          description: The description of the batch migration.
+          example: Rules imported from Splunk
+          type: string
+        inputSource:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationInputSource"
+        lastUpdatedAt:
+          description: The last update date of the batch migration, in RFC 3339 format.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        lastUpdatedBy:
+          description: |-
+            The UUID of the user or service account who last updated the batch migration,
+            or the name of a system actor.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        name:
+          description: The name of the batch migration.
+          example: Splunk migration
+          type: string
+        orgId:
+          description: The ID of the organization that owns the batch migration.
+          example: 123456
+          format: int64
+          type: integer
+        resourceStatusCounts:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceStatusCounts"
+        status:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationStatus"
+        tags:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationTags"
+      required:
+        - orgId
+        - name
+        - inputSource
+        - status
+        - createdAt
+        - lastUpdatedAt
+        - tags
+        - resourceStatusCounts
+      type: object
+    SecurityMonitoringBatchMigrationCreateAttributes:
+      description: Attributes of the batch migration to create.
+      properties:
+        description:
+          description: The description of the batch migration.
+          example: Rules imported from Splunk
+          maxLength: 4096
+          type: string
+        name:
+          description: The name of the batch migration.
+          example: Splunk migration
+          maxLength: 512
+          type: string
+        resources:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateResources"
+        tags:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationTags"
+      required:
+        - resources
+      type: object
+    SecurityMonitoringBatchMigrationCreateData:
+      description: Data of the batch migration to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationCreateRequest:
+      description: Request to create a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationCreateResources:
+      description: The initial resources of the batch migration. From 1 to 100 resources.
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceCreateItem"
+      maxItems: 100
+      minItems: 1
+      type: array
+    SecurityMonitoringBatchMigrationData:
+      description: A batch migration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationAttributes"
+        id:
+          description: The UUID of the batch migration.
+          example: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationInputSource:
+      description: |-
+        The origin of a batch migration. Always `batch_migration` for batch migrations
+        created through this API.
+      enum:
+        - batch_migration
+        - threat_hunting
+        - user
+      example: batch_migration
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION
+        - THREAT_HUNTING
+        - USER
+    SecurityMonitoringBatchMigrationListMeta:
+      description: Metadata of a list response.
+      properties:
+        totalCount:
+          description: Total number of items matching the request.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - totalCount
+      type: object
+    SecurityMonitoringBatchMigrationPublishAttributes:
+      description: Attributes of the batch migration publish request.
+      properties:
+        resourceIds:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResourceIDs"
+      type: object
+    SecurityMonitoringBatchMigrationPublishData:
+      description: Data of the batch migration publish request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationPublishRequest:
+      description: Request to publish the resources of a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationPublishResourceIDs:
+      description: |-
+        Unique UUIDs of the resources to publish. Up to 1000 IDs. When omitted or empty,
+        every `completed` resource of the batch migration is published.
+      example:
+        - c968cf83-56c2-4d54-a993-6c86dfb83527
+      items:
+        format: uuid
+        type: string
+      maxItems: 1000
+      type: array
+      uniqueItems: true
+    SecurityMonitoringBatchMigrationPublishResponse:
+      description: Response containing the publication outcome of each resource.
+      properties:
+        data:
+          description: The publication outcome of each resource.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceData"
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationPublishType:
+      description: The type of resource for a batch migration publish request.
+      enum:
+        - batchMigrationPublish
+      example: batchMigrationPublish
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_PUBLISH
+    SecurityMonitoringBatchMigrationPublishedResourceAttributes:
+      description: Attributes of the publication outcome of a batch migration resource.
+      properties:
+        error:
+          description: The reason why the resource could not be published.
+          example: failed to create rule
+          type: string
+        ruleId:
+          description: The ID of the created Cloud SIEM detection rule.
+          example: abc-def-ghi
+          type: string
+        status:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceStatus"
+      required:
+        - status
+      type: object
+    SecurityMonitoringBatchMigrationPublishedResourceData:
+      description: The publication outcome of a batch migration resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceAttributes"
+        id:
+          description: The UUID of the batch migration resource.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationPublishedResourceStatus:
+      description: The outcome of publishing a batch migration resource.
+      enum:
+        - published
+        - failed
+      example: published
+      type: string
+      x-enum-varnames:
+        - PUBLISHED
+        - FAILED
+    SecurityMonitoringBatchMigrationPublishedResourceType:
+      description: The type of resource for a published batch migration resource.
+      enum:
+        - batchMigrationPublishedResource
+      example: batchMigrationPublishedResource
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_PUBLISHED_RESOURCE
+    SecurityMonitoringBatchMigrationResourceAttributes:
+      description: Attributes of a batch migration resource.
+      properties:
+        batchId:
+          description: The UUID of the batch migration that contains the resource.
+          example: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+          format: uuid
+          type: string
+        createdAt:
+          description: The creation date of the resource, in RFC 3339 format.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        createdBy:
+          description: The UUID of the user or service account who created the resource.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        description:
+          description: The description of the resource.
+          example: Detects repeated failed Windows authentication attempts.
+          type: string
+        input:
+          description: The source query or natural language description to translate.
+          example: index=wineventlog EventCode=4625
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceInputType"
+        lastUpdatedAt:
+          description: The last update date of the resource, in RFC 3339 format.
+          example: "2026-09-21T12:02:00Z"
+          format: date-time
+          type: string
+        lastUpdatedBy:
+          description: |-
+            The UUID of the user or service account who last updated the resource,
+            or the name of a system actor.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        name:
+          description: The name of the resource.
+          example: Repeated Windows login failures
+          type: string
+        output:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceOutput"
+        outputType:
+          description: The type of the translation output. Currently always `siem_rule`.
+          example: siem_rule
+          type: string
+        ruleId:
+          description: The ID of the Cloud SIEM detection rule created when the resource was published.
+          example: abc-def-ghi
+          type: string
+        status:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceStatus"
+      required:
+        - batchId
+        - name
+        - inputType
+        - outputType
+        - status
+        - input
+        - output
+        - createdAt
+        - lastUpdatedAt
+      type: object
+    SecurityMonitoringBatchMigrationResourceCreateItem:
+      description: A source rule to translate into a Cloud SIEM detection rule.
+      properties:
+        description:
+          description: The description of the resource.
+          example: Detects repeated failed Windows authentication attempts.
+          maxLength: 4096
+          type: string
+        input:
+          description: The source query or natural language description to translate. Must not be blank.
+          example: index=wineventlog EventCode=4625
+          maxLength: 65536
+          minLength: 1
+          pattern: '^[\s\S]*\S[\s\S]*$'
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceInputType"
+        name:
+          description: The name of the resource.
+          example: Repeated Windows login failures
+          maxLength: 512
+          type: string
+      required:
+        - inputType
+        - input
+      type: object
+    SecurityMonitoringBatchMigrationResourceCreateItems:
+      description: The resources to add. From 1 to 1000 resources.
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceCreateItem"
+      maxItems: 1000
+      minItems: 1
+      type: array
+    SecurityMonitoringBatchMigrationResourceData:
+      description: A batch migration resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceAttributes"
+        id:
+          description: The UUID of the batch migration resource.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourceIDs:
+      description: Unique UUIDs of batch migration resources. From 1 to 1000 IDs.
+      example:
+        - c968cf83-56c2-4d54-a993-6c86dfb83527
+      items:
+        format: uuid
+        type: string
+      maxItems: 1000
+      minItems: 1
+      type: array
+    SecurityMonitoringBatchMigrationResourceInputType:
+      description: |-
+        The type of the source rule: `spl` for a Splunk SPL search or saved search definition,
+        `natural_language` for a plain-English description of the behavior to detect, or `kql`
+        for a Microsoft KQL query. SPL inputs must be self-contained, with search macros expanded.
+      enum:
+        - natural_language
+        - spl
+        - kql
+      example: spl
+      type: string
+      x-enum-varnames:
+        - NATURAL_LANGUAGE
+        - SPL
+        - KQL
+    SecurityMonitoringBatchMigrationResourceOutput:
+      additionalProperties: {}
+      description: |-
+        The translation output. When the resource is `completed`, a Cloud SIEM detection rule
+        definition in the same format as the create detection rule API. When the resource is
+        `failed`, an object with an `error` describing the failure, with `kind` set to
+        `translation_error` or `internal_error`, and optional `type` and `message`. Otherwise, null.
+      example:
+        name: Repeated Windows login failures
+        type: log_detection
+      nullable: true
+      type: object
+    SecurityMonitoringBatchMigrationResourceResponse:
+      description: Response containing a batch migration resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourceStatus:
+      description: |-
+        The status of a batch migration resource. `completed` resources have a translation in
+        `output` that is ready to be published. `duplicate` is reserved for future duplicate rule
+        detection.
+      enum:
+        - pending
+        - in_progress
+        - completed
+        - canceled
+        - failed
+        - publishing
+        - published
+        - duplicate
+      example: completed
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - IN_PROGRESS
+        - COMPLETED
+        - CANCELED
+        - FAILED
+        - PUBLISHING
+        - PUBLISHED
+        - DUPLICATE
+    SecurityMonitoringBatchMigrationResourceStatusCounts:
+      description: The number of resources of a batch migration in each status.
+      properties:
+        canceled:
+          description: Number of resources whose translation was canceled.
+          example: 0
+          format: int64
+          type: integer
+        completed:
+          description: Number of resources translated and ready to be published.
+          example: 0
+          format: int64
+          type: integer
+        duplicate:
+          description: Number of resources identified as duplicates of an existing rule. Reserved for future use.
+          example: 0
+          format: int64
+          type: integer
+        failed:
+          description: Number of resources whose translation failed.
+          example: 0
+          format: int64
+          type: integer
+        inProgress:
+          description: Number of resources being translated.
+          example: 0
+          format: int64
+          type: integer
+        pending:
+          description: Number of resources waiting to be translated.
+          example: 1
+          format: int64
+          type: integer
+        published:
+          description: Number of resources published as Cloud SIEM detection rules.
+          example: 0
+          format: int64
+          type: integer
+        publishing:
+          description: Number of resources being published.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - pending
+        - inProgress
+        - completed
+        - canceled
+        - failed
+        - publishing
+        - published
+        - duplicate
+      type: object
+    SecurityMonitoringBatchMigrationResourceType:
+      description: The type of resource for a batch migration resource.
+      enum:
+        - batchMigrationResource
+      example: batchMigrationResource
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_RESOURCE
+    SecurityMonitoringBatchMigrationResourceUpdateAttributes:
+      additionalProperties: false
+      description: Attributes of the batch migration resource to update. At least one attribute is required.
+      minProperties: 1
+      properties:
+        description:
+          description: The description of the resource.
+          example: Detects repeated failed Windows authentication attempts.
+          maxLength: 4096
+          type: string
+        input:
+          description: The source query or natural language description to translate. Must not be blank.
+          example: index=wineventlog EventCode=4625 | stats count by user
+          maxLength: 65536
+          minLength: 1
+          pattern: '^[\s\S]*\S[\s\S]*$'
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceInputType"
+        name:
+          description: The name of the resource.
+          example: Repeated Windows login failures
+          maxLength: 512
+          type: string
+      type: object
+    SecurityMonitoringBatchMigrationResourceUpdateData:
+      description: Data of the batch migration resource to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourceUpdateRequest:
+      description: Request to update a batch migration resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateAttributes:
+      description: Attributes of the resources to add to a batch migration.
+      properties:
+        resources:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceCreateItems"
+      required:
+        - resources
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateData:
+      description: Data of the resources to add to a batch migration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateRequest:
+      description: Request to add resources to a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateResponse:
+      description: Response containing the batch migration resources that were added.
+      properties:
+        data:
+          description: The added batch migration resources.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceData"
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesDeleteAttributes:
+      description: Attributes of the resources to delete from a batch migration.
+      properties:
+        resourceIds:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceIDs"
+      required:
+        - resourceIds
+      type: object
+    SecurityMonitoringBatchMigrationResourcesDeleteData:
+      description: Data of the resources to delete from a batch migration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesDeleteAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourcesDeleteRequest:
+      description: Request to delete resources from a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesDeleteData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesListResponse:
+      description: Response containing batch migration resources.
+      properties:
+        data:
+          description: The batch migration resources.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationListMeta"
+      required:
+        - data
+        - meta
+      type: object
+    SecurityMonitoringBatchMigrationResourcesType:
+      description: The type of resource for a request on a set of batch migration resources.
+      enum:
+        - batchMigrationResources
+      example: batchMigrationResources
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_RESOURCES
+    SecurityMonitoringBatchMigrationResponse:
+      description: Response containing a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationStatus:
+      description: |-
+        The status of a batch migration. A batch migration is created as `draft` and moves to
+        `in_progress` when started. It moves to `completed` once no resource is `pending` or
+        `in_progress`, or to `canceled` when canceled.
+      enum:
+        - draft
+        - in_progress
+        - canceled
+        - completed
+      example: draft
+      type: string
+      x-enum-varnames:
+        - DRAFT
+        - IN_PROGRESS
+        - CANCELED
+        - COMPLETED
+    SecurityMonitoringBatchMigrationTags:
+      description: Tags of the batch migration. Up to 50 tags, each up to 256 characters.
+      example:
+        - source:splunk
+      items:
+        maxLength: 256
+        type: string
+      maxItems: 50
+      type: array
+    SecurityMonitoringBatchMigrationType:
+      description: The type of resource for a batch migration.
+      enum:
+        - batchMigration
+      example: batchMigration
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION
+    SecurityMonitoringBatchMigrationUpdateAttributes:
+      additionalProperties: false
+      description: Attributes of the batch migration to update. At least one attribute is required.
+      minProperties: 1
+      properties:
+        description:
+          description: The description of the batch migration.
+          example: Rules imported from Splunk
+          maxLength: 4096
+          type: string
+        name:
+          description: The name of the batch migration.
+          example: Splunk migration - Windows
+          maxLength: 512
+          type: string
+        tags:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationTags"
+      type: object
+    SecurityMonitoringBatchMigrationUpdateData:
+      description: Data of the batch migration to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationUpdateRequest:
+      description: Request to update a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationsListResponse:
+      description: Response containing a page of batch migrations.
+      properties:
+        data:
+          description: The batch migrations.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationListMeta"
+      required:
+        - data
+        - meta
       type: object
     SecurityMonitoringContentPackActivation:
       description: The activation status of a content pack.
@@ -229897,6 +230693,793 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is a private preview.
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).
+  /api/v2/security_monitoring/batch-migrations:
+    get:
+      description: |-
+        List the batch migrations of your organization. A batch migration groups detection
+        rules from another SIEM that the Datadog Detection Agent translates into Cloud SIEM
+        detection rules. To retrieve a single batch migration, filter by its ID with
+        `filter[query]=id:<batch_id>`. Poll this endpoint to follow the progress of a batch
+        migration through its `status` and `resourceStatusCounts`.
+      operationId: ListSecurityMonitoringBatchMigrations
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageSize"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageNumber"
+        - description: |-
+            A search query in Datadog search syntax to filter batch migrations, such as
+            `status:completed`. Filterable attributes are `id`, `name`, `description`, `status`,
+            `createdBy`, and `lastUpdatedBy`. Free text matches the batch migration name.
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            example: "status:draft"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          createdAt: "2026-09-21T12:00:00Z"
+                          createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          description: Rules imported from Splunk
+                          inputSource: batch_migration
+                          lastUpdatedAt: "2026-09-21T12:00:00Z"
+                          lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          name: Splunk migration
+                          orgId: 123456
+                          resourceStatusCounts:
+                            canceled: 0
+                            completed: 0
+                            duplicate: 0
+                            failed: 0
+                            inProgress: 0
+                            pending: 1
+                            published: 0
+                            publishing: 0
+                          status: draft
+                          tags:
+                            - source:splunk
+                        id: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                        type: batchMigration
+                    meta:
+                      totalCount: 1
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationsListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+      summary: List batch migrations
+      tags:
+        - Security Monitoring
+      x-menu-order: 177
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    post:
+      description: |-
+        Create a batch migration in the `draft` status, together with 1 to 100 initial
+        resources. Each resource holds one source rule to translate into a Cloud SIEM detection
+        rule. To load more rules, add them with the add resources endpoint before starting the
+        batch migration. A batch migration can hold up to 1000 resources. The response does not
+        include the created resources: list the resources of the batch migration to retrieve them.
+      operationId: CreateSecurityMonitoringBatchMigration
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Rules imported from Splunk
+                      name: Splunk migration
+                      resources:
+                        - description: Detects repeated failed Windows authentication attempts.
+                          input: index=wineventlog EventCode=4625
+                          inputType: spl
+                          name: Repeated Windows login failures
+                        - input: >-
+                            Alert when PowerShell is launched with a command line that downloads and executes a remote script, such as IEX with Net.WebClient or Invoke-WebRequest.
+                          inputType: natural_language
+                          name: Suspicious PowerShell download cradle
+                      tags:
+                        - source:splunk
+                    type: batchMigration
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        createdAt: "2026-09-21T12:00:00Z"
+                        createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        description: Rules imported from Splunk
+                        inputSource: batch_migration
+                        lastUpdatedAt: "2026-09-21T12:00:00Z"
+                        lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        name: Splunk migration
+                        orgId: 123456
+                        resourceStatusCounts:
+                          canceled: 0
+                          completed: 0
+                          duplicate: 0
+                          failed: 0
+                          inProgress: 0
+                          pending: 2
+                          published: 0
+                          publishing: 0
+                        status: draft
+                        tags:
+                          - source:splunk
+                      id: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                      type: batchMigration
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Create a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 178
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}:
+    delete:
+      description: |-
+        Delete a batch migration and its resources. Detection rules that were already
+        published are not deleted. Returns `409 Conflict` while any resource is `in_progress`
+        or `publishing`: cancel the batch migration, or wait for publishing to finish, and
+        then try again.
+      operationId: DeleteSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Delete a batch migration
+      tags:
+        - Security Monitoring
+      x-menu-order: 180
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    patch:
+      description: |-
+        Update the name, description, or tags of a batch migration, in any status. At least
+        one of these attributes must be provided. Omitted attributes are left unchanged, and
+        `tags` replaces the full list of tags.
+      operationId: UpdateSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: Splunk migration - Windows
+                      tags:
+                        - source:splunk
+                        - team:secops
+                    type: batchMigration
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        createdAt: "2026-09-21T12:00:00Z"
+                        createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        description: Rules imported from Splunk
+                        inputSource: batch_migration
+                        lastUpdatedAt: "2026-09-21T12:05:00Z"
+                        lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        name: Splunk migration - Windows
+                        orgId: 123456
+                        resourceStatusCounts:
+                          canceled: 0
+                          completed: 0
+                          duplicate: 0
+                          failed: 0
+                          inProgress: 0
+                          pending: 1
+                          published: 0
+                          publishing: 0
+                        status: draft
+                        tags:
+                          - source:splunk
+                          - team:secops
+                      id: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                      type: batchMigration
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Update a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 179
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/cancel:
+    post:
+      description: |-
+        Cancel an `in_progress` batch migration. Resources that are `pending` or `in_progress`
+        become `canceled`. Resources that are already `completed` or `failed` keep their status
+        and output, so completed resources can still be published. Canceling a `canceled` batch
+        migration succeeds, so the request can be safely retried. Returns `409 Conflict` if the
+        batch migration is `draft` or `completed`.
+      operationId: CancelSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Cancel a batch migration
+      tags:
+        - Security Monitoring
+      x-menu-order: 181
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/publish:
+    post:
+      description: |-
+        Create a Cloud SIEM detection rule from the `output` of each selected `completed`
+        resource of a batch migration. Completed resources can be published while the rest of
+        the batch migration is still being translated. When `resourceIds` is omitted or empty,
+        every `completed` resource is published. Published rules are created disabled.
+
+        Every requested resource must be publishable: `completed`, or left in `publishing` for
+        more than one minute after an uncertain result. Otherwise, the request returns
+        `409 Conflict` and nothing is published. Already published resources are not publishable.
+
+        The response reports the outcome of each resource, and some resources can be published
+        while others fail. A `failed` result that contains a `ruleId` means the rule was created:
+        do not retry that resource. Publishing a rule with a `block_ip` or `block_user` action
+        requires the `appsec_protect_write` permission.
+      operationId: PublishSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              all_completed:
+                summary: Publish every completed resource
+                value:
+                  data:
+                    attributes: {}
+                    type: batchMigrationPublish
+              default:
+                value:
+                  data:
+                    attributes:
+                      resourceIds:
+                        - c968cf83-56c2-4d54-a993-6c86dfb83527
+                    type: batchMigrationPublish
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          ruleId: abc-def-ghi
+                          status: published
+                        id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                        type: batchMigrationPublishedResource
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Publish a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 182
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/resources:
+    delete:
+      description: |-
+        Delete resources from a batch migration. The request is all-or-nothing: it returns
+        `404 Not Found` if any resource does not exist, and `409 Conflict` if any resource is
+        `in_progress` or `publishing`. In both cases nothing is deleted. Duplicate resource IDs
+        are ignored. Detection rules already published from the deleted resources are not deleted.
+      operationId: DeleteSecurityMonitoringBatchMigrationResources
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      resourceIds:
+                        - c968cf83-56c2-4d54-a993-6c86dfb83527
+                    type: batchMigrationResources
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesDeleteRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Delete resources from a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 185
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    get:
+      description: |-
+        List the resources of a batch migration, including the input of each source rule and,
+        once translated, the proposed Cloud SIEM detection rule in `output`.
+      operationId: ListSecurityMonitoringBatchMigrationResources
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageSize"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageNumber"
+        - description: |-
+            A search query in Datadog search syntax to filter resources, such as
+            `status:completed`. Filterable attributes are `id`, `name`, `description`, `inputType`,
+            `status`, `input`, `createdBy`, and `lastUpdatedBy`. Free text matches the resource name.
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            example: "status:completed inputType:spl"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          batchId: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                          createdAt: "2026-09-21T12:00:00Z"
+                          createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          description: Detects repeated failed Windows authentication attempts.
+                          input: index=wineventlog EventCode=4625
+                          inputType: spl
+                          lastUpdatedAt: "2026-09-21T12:02:00Z"
+                          lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          name: Repeated Windows login failures
+                          output:
+                            cases:
+                              - condition: failed_logins >= 5
+                                name: Repeated failures
+                                notifications: []
+                                status: medium
+                            isEnabled: false
+                            message: Repeated failed Windows login attempts were detected.
+                            name: Repeated Windows login failures
+                            options:
+                              evaluationWindow: 300
+                              keepAlive: 3600
+                              maxSignalDuration: 86400
+                            queries:
+                              - aggregation: count
+                                groupByFields:
+                                  - "@usr.name"
+                                  - "@network.client.ip"
+                                name: failed_logins
+                                query: "source:windows @evt.id:4625"
+                            tags:
+                              - source:windows
+                              - migration:splunk
+                            type: log_detection
+                          outputType: siem_rule
+                          status: completed
+                        id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                        type: batchMigrationResource
+                    meta:
+                      totalCount: 1
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+      summary: List batch migration resources
+      tags:
+        - Security Monitoring
+      x-menu-order: 183
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    post:
+      description: |-
+        Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the
+        batch migration is not `draft`, and `400 Bad Request` if the batch migration would
+        contain more than 1000 resources.
+      operationId: CreateSecurityMonitoringBatchMigrationResources
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      resources:
+                        - input: index=linux process=sudo "authentication failure" | stats count by user, host
+                          inputType: spl
+                          name: Linux sudo abuse
+                    type: batchMigrationResources
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          batchId: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                          createdAt: "2026-09-21T12:10:00Z"
+                          createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          input: index=linux process=sudo "authentication failure" | stats count by user, host
+                          inputType: spl
+                          lastUpdatedAt: "2026-09-21T12:10:00Z"
+                          lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          name: Linux sudo abuse
+                          output:
+                          outputType: siem_rule
+                          status: pending
+                        id: 0b3f5e5c-8a2b-4a8f-9f0e-3c1d2e4f5a6b
+                        type: batchMigrationResource
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Add resources to a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 184
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/resources/{resource_id}:
+    patch:
+      description: |-
+        Update a resource of a batch migration. At least one of `name`, `description`,
+        `inputType`, or `input` must be provided. `name` and `description` can be updated at
+        any time. `inputType` and `input` can only be updated while the resource is `pending`;
+        otherwise, the request returns `409 Conflict`. The translated `output` cannot be edited.
+      operationId: UpdateSecurityMonitoringBatchMigrationResource
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationResourceID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      input: index=wineventlog EventCode=4625 | stats count by user
+                    type: batchMigrationResource
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        batchId: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                        createdAt: "2026-09-21T12:00:00Z"
+                        createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        input: index=wineventlog EventCode=4625 | stats count by user
+                        inputType: spl
+                        lastUpdatedAt: "2026-09-21T12:15:00Z"
+                        lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        name: Repeated Windows login failures
+                        output:
+                        outputType: siem_rule
+                        status: pending
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: batchMigrationResource
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Update a batch migration resource
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 186
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/start:
+    post:
+      description: |-
+        Start translating the `pending` resources of a `draft` batch migration into Cloud SIEM
+        detection rules. The batch migration moves to `in_progress`, and its resources are
+        translated asynchronously. Once no resource is `pending` or `in_progress`, the batch
+        migration moves to `completed`. Starting an `in_progress` batch migration again does not
+        queue duplicate work, so the request can be safely retried, including after a timeout or
+        a `5xx` error. Returns `409 Conflict` if the batch migration is `completed` or `canceled`.
+
+        An organization can translate up to 2000 resources in total across all of its batch
+        migrations. Resources that were already processed count toward this limit even after
+        they are deleted, and `pending` resources of `in_progress` batch migrations reserve
+        capacity. Returns `409 Conflict` if starting the batch migration would exceed this limit.
+        To request a higher limit for your organization, contact
+        [Datadog support](https://docs.datadoghq.com/help/).
+      operationId: StartSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationInternalServerErrorResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Start a batch migration
+      tags:
+        - Security Monitoring
+      x-menu-order: 187
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: |-

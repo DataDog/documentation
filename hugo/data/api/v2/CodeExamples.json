@@ -2226,6 +2226,13 @@
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
+  "CreateSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add resources to a batch migration returns \"Created\" response"
+    }
+  ],
   "UpdateFindingsSeverity": [
     {
       "group": "security_monitoring",
@@ -2312,6 +2319,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create Jira issues for security findings returns \"Created\" response"
+    }
+  ],
+  "CreateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a batch migration returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -2482,6 +2496,13 @@
       "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
+  "DeleteSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Delete resources from a batch migration returns \"No Content\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
@@ -2614,6 +2635,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Test a rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigrationResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration resource returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [

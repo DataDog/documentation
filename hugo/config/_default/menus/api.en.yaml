@@ -4103,6 +4103,149 @@ menu:
           - ListSecurityMonitoringCriticalAssets
         unstable: []
         order: 52
+    - name: Start a batch migration
+      url: /api/latest/security-monitoring/start-a-batch-migration/
+      identifier: security-monitoring-start-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 187
+    - name: Update a batch migration resource
+      url: /api/latest/security-monitoring/update-a-batch-migration-resource/
+      identifier: security-monitoring-update-a-batch-migration-resource
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigrationResource
+        unstable:
+          - v2
+        order: 186
+    - name: Add resources to a batch migration
+      url: /api/latest/security-monitoring/add-resources-to-a-batch-migration/
+      identifier: security-monitoring-add-resources-to-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 184
+    - name: List batch migration resources
+      url: /api/latest/security-monitoring/list-batch-migration-resources/
+      identifier: security-monitoring-list-batch-migration-resources
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 183
+    - name: Delete resources from a batch migration
+      url: /api/latest/security-monitoring/delete-resources-from-a-batch-migration/
+      identifier: security-monitoring-delete-resources-from-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 185
+    - name: Publish a batch migration
+      url: /api/latest/security-monitoring/publish-a-batch-migration/
+      identifier: security-monitoring-publish-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 182
+    - name: Cancel a batch migration
+      url: /api/latest/security-monitoring/cancel-a-batch-migration/
+      identifier: security-monitoring-cancel-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 181
+    - name: Update a batch migration
+      url: /api/latest/security-monitoring/update-a-batch-migration/
+      identifier: security-monitoring-update-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 179
+    - name: Delete a batch migration
+      url: /api/latest/security-monitoring/delete-a-batch-migration/
+      identifier: security-monitoring-delete-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 180
+    - name: Create a batch migration
+      url: /api/latest/security-monitoring/create-a-batch-migration/
+      identifier: security-monitoring-create-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 178
+    - name: List batch migrations
+      url: /api/latest/security-monitoring/list-batch-migrations/
+      identifier: security-monitoring-list-batch-migrations
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrations
+        unstable:
+          - v2
+        order: 177
     - name: List vulnerable assets
       url: /api/latest/security-monitoring/list-vulnerable-assets/
       identifier: security-monitoring-list-vulnerable-assets
