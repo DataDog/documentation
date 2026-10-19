@@ -36,6 +36,7 @@ Datadog Logging without Limits* decouples log ingestion and indexing. Choose whi
 - Institute fine-grained control over your log management budget with [log indexes][7].
 - Forward ingested logs to your own cloud-hosted storage bucket to keep as an [archive][8] for future troubleshooting or compliance audits.
 - [Search an archive][12] with Archive Search to query logs in real time directly from storage. Use **Search & Rehydration** mode when you need full platform access or longer retention.
+- Connect [external sources][13], such as Databricks tables, to search logs stored outside Datadog with Federated Logs.
 - Restrict [logs data access][10] with restriction queries.
 
 ## Log Explorer
@@ -60,3 +61,4 @@ Once you've completed configuration, start investigating and troubleshooting log
 [10]: /logs/guide/logs-rbac/
 [11]: /logs/explorer/
 [12]: /logs/explorer/archive_search/
+[13]: /logs/log_configuration/external_sources/

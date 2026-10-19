@@ -4,7 +4,7 @@ description: Search logs stored in Databricks from Log Explorer, without ingesti
 further_reading:
 - link: "/logs/explorer/federated_logs/"
   tag: "Documentation"
-  text: "Federated Logs"
+  text: "Search external sources with Federated Logs"
 - link: "/integrations/databricks/"
   tag: "Documentation"
   text: "Databricks integration"
@@ -19,14 +19,14 @@ Federated Logs is in Preview. Use this form to submit your request today.
 
 ## Overview
 
-Use [Federated Logs][1] to search logs stored in a Databricks table from Log Explorer. Datadog translates your Log Explorer query into SQL and runs it on your Databricks SQL warehouse.
+Connect a Databricks table as an external source to search it from Log Explorer with [Federated Logs][1]. Datadog translates your Log Explorer query into SQL and runs it on your Databricks SQL warehouse.
 
 ## Prerequisites
 
 - Access to the Federated Logs Preview. To request access, complete the [Preview form][2].
 - A [Databricks integration][3] account configured in Datadog. Note the application (client) ID of the service principal used by the integration.
 - A Databricks table, registered in Unity Catalog, that contains your logs. To send logs to Databricks, you can use the [Observability Pipelines Databricks destination][4].
-- The Datadog [Federated Logs permissions][5].
+- The Logs Federated Query Write (`logs_federated_query_write`) permission. See [Permissions][5].
 
 ## Grant access to the table
 
@@ -61,7 +61,7 @@ Numeric timestamps, such as epoch values, are not supported.
 
 To change the integration account or the table of a saved source, delete the source and connect it again.
 
-To search the table, select {{< ui >}}Databricks{{< /ui >}} under {{< ui >}}External Sources{{< /ui >}} in the Log Explorer data source dropdown. See [Search federated logs][7].
+To search the table, select {{< ui >}}Databricks{{< /ui >}} under {{< ui >}}External Sources{{< /ui >}} in the Log Explorer data source dropdown. See [Search federated logs][1].
 
 ## Further reading
 
@@ -73,4 +73,3 @@ To search the table, select {{< ui >}}Databricks{{< /ui >}} under {{< ui >}}Exte
 [4]: /observability_pipelines/destinations/databricks/
 [5]: /logs/explorer/federated_logs/#permissions
 [6]: https://app.datadoghq.com/logs/external-sources
-[7]: /logs/explorer/federated_logs/#search-federated-logs
