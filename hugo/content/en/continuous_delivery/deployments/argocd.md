@@ -209,7 +209,7 @@ Here is an example on how you can run the command when generating the image that
 ```
 
 
-This command correlates images from deployment resources. If you correlate multiple images for a service, only one is used: the image whose name contains the service name. The correlation only works for deployment resources.
+This command correlates images from deployment resources. If a service's Kubernetes Deployment contains more than one correlated image, only one is used: the image whose name contains the service name. The correlation only works for deployment resources.
 
 
 
