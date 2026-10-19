@@ -7,6 +7,7 @@ client_sdk_platform_options:
   - id: react_native
   - id: kotlin_multiplatform
   - id: cpp
+  - id: electron
   - id: roku
   - id: unity
   - id: maui
