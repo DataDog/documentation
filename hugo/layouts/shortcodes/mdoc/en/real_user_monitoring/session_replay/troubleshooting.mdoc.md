@@ -228,6 +228,16 @@ At any time during the lifetime of the host app, it's possible to change the tra
 {% /if %}
 <!-- end Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+## Overview
+
+Electron renderers are recorded by the Browser SDK, so the [browser Session Replay troubleshooting][15] applies to them. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
+
+For Electron setup issues, such as a renderer host missing from `allowedRendererHosts` or windows opened before `init`, see [Electron troubleshooting][16].
+{% /if %}
+<!-- end Electron -->
+
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
@@ -242,3 +252,5 @@ At any time during the lifetime of the host app, it's possible to change the tra
 [12]: https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/CORS_enabled_image
 [13]: /session_replay/setup_and_configuration/?platform=browser#web-view-instrumentation
 [14]: /session_replay/setup_and_configuration/?platform=browser#set-the-canvas-recording-quality
+[15]: /session_replay/troubleshooting/?platform=browser
+[16]: /real_user_monitoring/application_monitoring/electron/troubleshooting/

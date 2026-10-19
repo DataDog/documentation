@@ -28,7 +28,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
+Datadog RUM supports profiling for browser, Electron, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
@@ -188,6 +188,60 @@ The **Optimization page** surfaces profiling data in several contexts:
 
 {% /if %}
 <!-- end Browser -->
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Electron profiling collects code-level performance data from renderer pages with the [JS Self-Profiling API][electron-1], and correlates it with your RUM data.
+
+{% alert level="info" %}
+Profiling is not yet available in the main process. It is available in renderer processes only.
+{% /alert %}
+
+## Setup
+
+### Step 1 - Set up RUM
+
+To start collecting data, set up [RUM for Electron][electron-2], including the Browser SDK in your renderer processes.
+
+### Step 2 - Configure the profiling sampling rate
+
+1. In the main process `init` call, set `profilingSampleRate`, which determines the percentage of sampled sessions that are profiled. It defaults to `0`, which disables profiling.
+    ```typescript
+    await init({
+      // ...
+      profilingSampleRate: 100, // percentage of sampled sessions that are profiled
+    });
+    ```
+
+    The main process decides which sessions are profiled. `profilingSampleRate` set in the renderer `datadogRum.init` call has no effect.
+
+2. Serve the renderer pages with the HTTP response header `Document-Policy: js-profiling`. The JS Self-Profiling API is not available without it.
+
+{% alert level="warning" %}
+Pages loaded from `file://` are not served with this header by default. Serve the renderer over a protocol where you control the response headers: a custom protocol registered with [`protocol.handle`][electron-3] (as privileged, with `standard` and `secure`), or a local HTTP server.
+{% /alert %}
+
+Register the custom protocol as privileged before the app is ready. Otherwise the JS Self-Profiling API stays unavailable even with the header, because Chromium does not treat the scheme as a secure context.
+
+```typescript
+import { protocol } from 'electron';
+
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } },
+]);
+```
+
+## Explore profiling
+
+Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][electron-4] for the browser SDK.
+
+[electron-1]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
+[electron-2]: /real_user_monitoring/application_monitoring/electron/setup/
+[electron-3]: https://www.electronjs.org/docs/latest/api/protocol#protocolhandlescheme-handler
+[electron-4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser#explore-profiling
+
+{% /if %}
+<!-- end Electron -->
 
 <!-- Android -->
 {% if equals($platform, "android") %}

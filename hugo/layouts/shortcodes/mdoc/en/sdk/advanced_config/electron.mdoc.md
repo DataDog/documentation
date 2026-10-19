@@ -21,15 +21,15 @@ Pass these parameters to `init` in the main process.
 | `version` | `string` | No | | Application version. |
 | `sessionSampleRate` | `number` | No | `100` | Percentage of sessions to collect, from `0` to `100`. `0` collects no sessions, and `100` collects all sessions. |
 | `trackingConsent` | `'granted' \| 'pending' \| 'not-granted'` | No | `'granted'` | Initial tracking consent of the end user. See [Tracking consent][ac-init-2]. |
-| `logsSampleRate` | `number` | No | `100` | Percentage of renderer logs to forward, from `0` to `100`, sampled independently for each log. |
+| `logsSampleRate` | `number` | No | `100` | Percentage of renderer logs to forward, from `0` to `100`, sampled independently for each log. See [Electron log collection][ac-init-3]. |
 | `traceSampleRate` | `number` | No | `100` | Percentage of main process traces to keep when no `traceSamplingRules` rule matches, from `0` to `100`. |
-| `traceSamplingRules` | `TraceSamplingRule[]` | No | `[]` | Ordered sampling rules for main process traces. See [Trace sampling rules][ac-init-3]. |
-| `sessionReplaySampleRate` | `number` | No | `0` | Percentage of sampled sessions that record Session Replay, from `0` to `100`. `0` disables Session Replay. |
-| `profilingSampleRate` | `number` | No | `0` | Percentage of sampled sessions that are profiled, from `0` to `100`. `0` disables renderer profiling. |
-| `defaultPrivacyLevel` | `'mask' \| 'allow' \| 'mask-user-input'` | No | `'mask'` | Default privacy level for Session Replay in renderers. |
+| `traceSamplingRules` | `TraceSamplingRule[]` | No | `[]` | Ordered sampling rules for main process traces. See [Trace sampling rules][ac-init-4]. |
+| `sessionReplaySampleRate` | `number` | No | `0` | Percentage of sampled sessions that record Session Replay, from `0` to `100`. `0` disables Session Replay. See [Session Replay][ac-init-5]. |
+| `profilingSampleRate` | `number` | No | `0` | Percentage of sampled sessions that are profiled, from `0` to `100`. `0` disables renderer profiling. See [Profiling][ac-init-6]. |
+| `defaultPrivacyLevel` | `'mask' \| 'allow' \| 'mask-user-input'` | No | `'mask'` | Default privacy level for Session Replay in renderers. See [Session Replay privacy options][ac-init-7]. |
 | `batchSize` | `'SMALL' \| 'MEDIUM' \| 'LARGE'` | No | `'MEDIUM'` | Size threshold that closes a batch file early: `SMALL` is 16 KiB, `MEDIUM` is 512 KiB, and `LARGE` is 4 MiB. |
 | `uploadFrequency` | `'RARE' \| 'NORMAL' \| 'FREQUENT'` | No | `'NORMAL'` | How often the SDK uploads pending batches, and the window over which events accumulate: `RARE` is 30 seconds, `NORMAL` is 10 seconds, and `FREQUENT` is 5 seconds. |
-| `beforeSendRum` | `RumBeforeSend` | No | | Modify or drop RUM events before they are sent. See [Modify or drop RUM events][ac-init-4]. |
+| `beforeSendRum` | `RumBeforeSend` | No | | Modify or drop RUM events before they are sent. See [Modify or drop RUM events][ac-init-8]. |
 
 {% alert level="info" %}
 `sessionReplaySampleRate` and `profilingSampleRate` apply to sampled sessions only. With `sessionSampleRate: 0`, no session records Session Replay or is profiled.
@@ -37,8 +37,12 @@ Pass these parameters to `init` in the main process.
 
 [ac-init-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
 [ac-init-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
-[ac-init-3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#trace-sampling-rules
-[ac-init-4]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
+[ac-init-3]: /logs/log_collection/electron/
+[ac-init-4]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#trace-sampling-rules
+[ac-init-5]: /session_replay/setup_and_configuration/?platform=electron
+[ac-init-6]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=electron
+[ac-init-7]: /session_replay/privacy_options/?platform=electron
+[ac-init-8]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
 
 ## Allowed renderer hosts
 
