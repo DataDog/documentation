@@ -57,7 +57,7 @@ Remote Configuration is on by default in most environments, but it has to be ena
 
    [Restart the Agent][5] after changing this setting.
 
-Each Agent's Remote Configuration status is also listed on the [Remote Configuration][9] settings page, where `CONNECTED` is the state you want. For the meaning of the other statuses and for network requirements, see [Agent Remote Configuration status][14].
+Each Agent's Remote Configuration status is also listed on the [Remote Configuration][9] settings page. For status descriptions and network requirements, see [Agent Remote Configuration status][14].
 
 ## Already using Database Monitoring?
 
