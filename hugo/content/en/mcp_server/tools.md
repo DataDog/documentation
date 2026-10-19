@@ -1188,6 +1188,28 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
 
+## Documentation
+
+Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+
+### `search_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Searches published Datadog documentation and returns up to 10 matching passages with links to their source pages. Returns source passages, not a generated answer. Supports English, French, Japanese, Korean, and Spanish. Other languages return no results. Search uses AI models to match by meaning. If your organization has [disabled AI providers][92], search matches by keyword only.
+
+- How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
+- What's the difference between a metric monitor and an anomaly monitor?
+- Which Datadog Agent settings control container log collection?
+
+### `read_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Reads a full Datadog documentation page from a `docs.datadoghq.com` URL or a document ID returned by `search_datadog_documentation`. Reads long pages in parts. Site-specific values, such as endpoints, appear as placeholders like `<YOUR_MCP_SERVER_ENDPOINT>`.
+
+- Read `https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/` and explain the matcher syntax.
+- Open the Datadog MCP Server setup page and summarize the toolset options.
+- Search the Datadog docs for log pipeline processors, then read the top result in full.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -1876,7 +1898,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Logs Configuration
 
-Tools for managing the configuration of [log pipelines][92], [indexes][93], and [archives][94]:
+Tools for managing the configuration of [log pipelines][93], [indexes][94], and [archives][95]:
 
 - **Pipelines** parse and enrich incoming logs.
 - **Indexes** control indexing and retention.
@@ -1889,7 +1911,7 @@ To search and analyze logs, use `search_datadog_logs` and `analyze_datadog_logs`
 ### `list_datadog_log_pipelines`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Read Config`*\
-Lists your organization's [log pipelines][92] in evaluation order. Returns each pipeline's ID, name, filter query, enabled state, and processor count.
+Lists your organization's [log pipelines][93] in evaluation order. Returns each pipeline's ID, name, filter query, enabled state, and processor count.
 
 - List my log pipelines in evaluation order.
 
@@ -1924,7 +1946,7 @@ Places a pipeline immediately before or after another pipeline in the evaluation
 ### `list_datadog_log_indexes`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Read Config`*\
-Lists your organization's [log indexes][93] in evaluation order. Returns each index's name, filter query, retention settings, daily limit, and exclusion filter count.
+Lists your organization's [log indexes][94] in evaluation order. Returns each index's name, filter query, retention settings, daily limit, and exclusion filter count.
 
 - List my log indexes with their retention settings and daily limits.
 
@@ -1959,7 +1981,7 @@ Places an index immediately before or after another index in the evaluation orde
 ### `list_datadog_log_archives`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Read Archives`*\
-Lists your organization's [log archives][94]. Returns each archive's ID, name, filter query, state, and destination type.
+Lists your organization's [log archives][95]. Returns each archive's ID, name, filter query, state, and destination type.
 
 - List my log archives and their destination types.
 
@@ -3598,9 +3620,10 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
-[92]: /logs/log_configuration/pipelines/
-[93]: /logs/log_configuration/indexes/
-[94]: /logs/log_configuration/archives/
+[92]: /mcp_server/#data-handling-and-ai-providers
+[93]: /logs/log_configuration/pipelines/
+[94]: /logs/log_configuration/indexes/
+[95]: /logs/log_configuration/archives/
 
 ## Further reading
 

@@ -701,6 +701,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
 - `dbm`: Tools for interacting with [Database Monitoring][33].
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
+- `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
