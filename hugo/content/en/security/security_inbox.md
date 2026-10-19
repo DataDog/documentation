@@ -179,7 +179,7 @@ For supported Cloud Security attack-path findings, the **Context Graph** in the 
 
 {{< img src="security/csm/security_graph.png" alt="Graph showing relationships between AWS EC2 instances, IAM roles, and S3 buckets" width="100%">}}
 
-Use the graph alongside the finding's description and remediation guidance to understand the risk and plan remediation. For more information, see [Investigate attack paths with Security Graph][25].
+Use the graph, alongside the finding's description and remediation guidance, to understand the risk and plan remediation. For more information, see [Investigate attack paths with Security Graph][25].
 
 ## Customize Security Inbox
 

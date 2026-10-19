@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-danger">Security Graph is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Security Graph supports AWS and Azure. It visualizes the resources and relationships associated with attack-path findings. Use the **Context Graph** in a finding's side panel to understand how exposure, vulnerabilities, and permissions contribute to the detected risk.
+One of the most persistent challenges in cloud security is understanding the resources and relationships associated with attack-path findings. With Security Graph, which supports AWS and Azure, you can use the **Context Graph** in a finding's side panel to understand how exposure, vulnerabilities, and permissions contribute to the detected risk.
 
 The graph shows context for the selected finding. The resources and relationships shown depend on the detection rule and available cloud data.
 
@@ -21,11 +21,11 @@ The graph shows context for the selected finding. The resources and relationship
 
 ## Open an attack path's Context Graph
 
-1. Open [Security Inbox][1].
-1. Filter Security Inbox by the **Attack Path** finding type.
-1. Select a finding to open its side panel.
-1. Open **Context Graph** to inspect the resources and relationships associated with the finding.
-1. Select a resource in the graph to view its details.
+1. In Datadog, go to **Security** > [**Inbox**][1].
+1. In the **Finding Type** list,  beside **attack_path**, click **Only** to filter the Security Inbox findings.
+1. Click a finding to view it in a side panel. If the Security Inbox has grouping applied, open a group, then click a finding in the group to view it.
+1. Scroll to the **Context Graph** to inspect the resources and relationships associated with the finding.
+1. Click a resource in the graph to view its details.
 
 ## Investigate the detected risk
 
@@ -37,4 +37,4 @@ Review the finding's description and remediation guidance alongside the graph to
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/security_inbox/
+[1]: https://app.datadoghq.com/security/issues
