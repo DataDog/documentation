@@ -41,6 +41,17 @@ test.describe("Img component — visual", () => {
     await expect(inlineImg).toBeVisible();
   });
 
+  test("inline image sits centered on its line of text", async ({ page }) => {
+    // Hugo centers every img and svg (`vertical-align: middle`, from
+    // Bootstrap's reboot). Without that, an image in a line of text, such as
+    // the API overview's "Run in Postman" button, sits too high.
+    const paragraphWithImage = page
+      .locator("main")
+      .locator("p", { has: page.locator("img.img__image") })
+      .first();
+    await expect(paragraphWithImage).toHaveScreenshot("img-inline-line.png");
+  });
+
   test("video renders with controls", async ({ page }) => {
     const video = page.locator("main").locator("video.img__video").first();
     await expect(video).toBeVisible();

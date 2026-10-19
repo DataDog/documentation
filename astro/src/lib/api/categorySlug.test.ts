@@ -9,6 +9,12 @@ describe("toSlug", () => {
   it("collapses runs of non-alphanumerics and trims the ends", () => {
     expect(toSlug("  On-Call / Paging  ")).toBe("on-call-paging");
   });
+
+  it("drops slashes instead of hyphenating them", () => {
+    expect(toSlug("Trigger tests from CI/CD pipelines")).toBe(
+      "trigger-tests-from-cicd-pipelines",
+    );
+  });
 });
 
 describe("toCategorySlug", () => {

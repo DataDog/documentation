@@ -28,6 +28,7 @@ import {
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
 import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
+import { isChangelogPath } from "@lib/api/changelogPaths";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
 import {
   localizedHref,
@@ -87,6 +88,7 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
   overviewPages,
   unprefixedPath,
 );
+const isChangelogSection = isChangelogPath(unprefixedPath);
 
 // The docs accordion is only rendered on non-API pages, so skip building its
 // tree (and the active-page lookups) entirely in API context. Everything is
@@ -177,6 +179,7 @@ const searchLabels: SearchBarLabels = {
           overviewPages={overviewPages}
           isOverviewSection={isOverviewSection}
           activeOverviewPageSlug={activeOverviewPageSlug}
+          isChangelogSection={isChangelogSection}
         />
       ) : (
         <ul class={cl("mobile-nav__list")}>

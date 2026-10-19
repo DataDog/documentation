@@ -11,6 +11,7 @@ import { GET as landingGET } from "../../src/pages/[...lang]/api/latest.md.ts";
 import { GET as categoryGET } from "../../src/pages/[...lang]/api/latest/[category].md.ts";
 import { GET as operationGET } from "../../src/pages/[...lang]/api/latest/[category]/[operation].md.ts";
 import { GET as handWrittenGET } from "../../src/pages/[...lang]/api/latest/[...page].md.ts";
+import { GET as changelogGET } from "../../src/pages/[...lang]/api/changelog.md.ts";
 
 const SITE = new URL("https://docs.datadoghq.com");
 
@@ -40,6 +41,14 @@ const routeCtx = (
  * fails here.
  */
 async function serveMarkdown(file: string): Promise<string> {
+  if (file === "api/changelog.md") {
+    const res = (await changelogGET(
+      routeCtx({ lang: undefined }, `/${file}`),
+    )) as Response;
+    if (res.status !== 200) throw new Error(`${file} returned ${res.status}`);
+    return res.text();
+  }
+
   const path = file.replace(/^api\/latest/, "").replace(/\.md$/, "");
   const lang = undefined; // English lives at the root; `[...lang]` is empty.
   // The served URL, as the build would request it.

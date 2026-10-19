@@ -109,7 +109,7 @@ The following table lists the destinations and fields that support template synt
 | Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Elasticsearch     | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
-| Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
+| Google SecOps     | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
 | Prometheus*        | Tenant ID                           | The Worker drops the metric.  |

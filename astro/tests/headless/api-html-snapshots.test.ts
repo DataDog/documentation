@@ -8,6 +8,7 @@ import { format as prettierFormat } from "prettier";
 
 import CategoryPage from "../../src/pages/[...lang]/api/latest/[category].astro";
 import OperationPage from "../../src/pages/[...lang]/api/latest/[category]/[operation].astro";
+import ChangelogPage from "../../src/pages/[...lang]/api/changelog/[...path].astro";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT_DIR = path.join(__dirname, "api-html-snapshots");
@@ -145,6 +146,14 @@ const AUDIT_PAGES: AuditPage[] = [
       operation: "get-hourly-usage-for-lambda",
     },
     urlPath: "/api/latest/usage-metering/get-hourly-usage-for-lambda/",
+  },
+
+  // The changelog landing page, from tests/fixtures/api/changelog/.
+  {
+    name: "13-changelog",
+    component: ChangelogPage,
+    params: {},
+    urlPath: "/api/changelog/",
   },
 ];
 

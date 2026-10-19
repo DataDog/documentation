@@ -33,6 +33,8 @@ vi.mock("astro:content", () => ({
 
 const { GET: landingGET } =
   await import("../../src/pages/[...lang]/api/latest.md");
+const { GET: changelogGET } =
+  await import("../../src/pages/[...lang]/api/changelog.md");
 const { GET: categoryGET } =
   await import("../../src/pages/[...lang]/api/latest/[category].md");
 const { GET: operationGET } =
@@ -78,7 +80,7 @@ function operationPage(
  *
  * Every page renders from fixtures: the frozen spec in tests/fixtures/api/
  * (wired by the frozen-api-spec plugin in vitest.unit.config.ts) and the stub
- * `astro:content` entry above. Hand-written sub-pages are left out, since their
+ * `astro:content` entry above. The changelog reads tests/fixtures/api/changelog/. Hand-written sub-pages are left out, since their
  * body is the content itself.
  */
 const AUDIT_PAGES: AuditPage[] = [
@@ -139,6 +141,14 @@ const AUDIT_PAGES: AuditPage[] = [
     "usage-metering",
     "get-hourly-usage-for-lambda",
   ),
+
+  // The whole changelog, from tests/fixtures/api/changelog/.
+  {
+    name: "13-changelog",
+    handler: changelogGET,
+    params: {},
+    urlPath: "/api/changelog.md",
+  },
 ];
 
 /** Calls the route the way the build does for an English page. */

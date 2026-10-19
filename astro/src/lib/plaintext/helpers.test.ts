@@ -126,4 +126,15 @@ describe("buildMarkdocStr", () => {
     );
     expect(output).not.toContain("$sdkVersions");
   });
+
+  it("doesn't change the nodes it's given", () => {
+    const source =
+      "```xml\n<version>{% $sdkVersions.datadog-api-client-java %}</version>\n```\n";
+    const nodes = parse(source).children;
+    const before = JSON.stringify(nodes);
+
+    buildMarkdocStr(nodes);
+
+    expect(JSON.stringify(nodes)).toBe(before);
+  });
 });

@@ -2,6 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
 import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
+import { isChangelogPath } from "@lib/api/changelogPaths";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/breadcrumbsTypes";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
@@ -24,6 +25,11 @@ interface Props {
   siteSupportId?: string;
   /** Hugo source path, for the default OG image. See `BaseLayout`. */
   contentPath?: string;
+  /**
+   * The page's `.md` twin, when it isn't the page's own path with `.md`
+   * appended. Every changelog page shares one twin, for example.
+   */
+  markdownHref?: string;
 }
 
 const {
@@ -35,18 +41,21 @@ const {
   breadcrumbs,
   siteSupportId,
   contentPath,
+  markdownHref: markdownHrefOverride,
 } = Astro.props;
 const currentLang = resolveLocale(Astro.currentLocale);
 const { rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
 const hreflang = buildHreflangAlternates(unprefixedPath);
 // Every API page has a `.md` twin, including translated ones.
-const markdownHref = rewriteInternalDocLink(Astro.url.pathname);
+const markdownHref =
+  markdownHrefOverride ?? rewriteInternalDocLink(Astro.url.pathname);
 
 const overviewPages = await getOverviewPages();
 const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
   overviewPages,
   unprefixedPath,
 );
+const isChangelogSection = isChangelogPath(unprefixedPath);
 ---
 
 <BaseLayout
@@ -64,6 +73,7 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
       overviewPages={overviewPages}
       isOverviewSection={isOverviewSection}
       activeOverviewPageSlug={activeOverviewPageSlug}
+      isChangelogSection={isChangelogSection}
     />
     <main class="api-main">
       <div class="api-toolbar">

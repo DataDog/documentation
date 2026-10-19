@@ -19,6 +19,7 @@
  */
 import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
 import type { OverviewPage } from "@lib/api/overviewPages";
+import { CHANGELOG_ROOT_PATH } from "@lib/api/changelogPaths";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";
@@ -36,6 +37,7 @@ interface Props {
   overviewPages?: OverviewPage[];
   isOverviewSection?: boolean;
   activeOverviewPageSlug?: string;
+  isChangelogSection?: boolean;
 }
 
 const {
@@ -45,12 +47,16 @@ const {
   overviewPages = [],
   isOverviewSection = false,
   activeOverviewPageSlug,
+  isChangelogSection = false,
 } = Astro.props;
 const lang = resolveLocale(Astro.currentLocale);
 const cl = classListFactory(styles);
 
 const overviewHref = localizedHref(lang, "/api/latest/");
 const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
+// TODO: no Hugo i18n key exists for this string yet.
+const changelogLabel = "Changelog";
+const changelogHref = localizedHref(lang, CHANGELOG_ROOT_PATH);
 
 const listId = "mobile-nav-api-list";
 // TODO: replace with i18n keys once Hugo has them.
@@ -108,6 +114,20 @@ const loaderLabels = {
       </li>
     )
   }
+  <li>
+    <a
+      href={changelogHref}
+      class:list={[
+        cl("mobile-nav__link"),
+        isChangelogSection && cl("mobile-nav__link--active"),
+      ]}
+      data-level="0"
+      style="--depth:0"
+      aria-current={isChangelogSection ? "page" : undefined}
+    >
+      {changelogLabel}
+    </a>
+  </li>
   {
     categories.map((category) => {
       const isActiveCategory = category.slug === activeCategory?.slug;

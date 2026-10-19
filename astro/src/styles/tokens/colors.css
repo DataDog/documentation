@@ -79,6 +79,21 @@
   --color-gray-lighter: #eee;
   --color-gray-lightest: #f6f6f6;
 
+  /* Colors — Disabled controls. Disabled controls are exempt from WCAG text
+     contrast minimums, so the text can be fainter than muted text. */
+  --color-disabled-bg: #f6f6f6;
+  --color-disabled-border: #eee;
+  --color-disabled-text: #a6a6a6;
+
+  /* Colors — Solid status pills (bg/text pairs for badges that report a
+     state: success, attention, or danger) */
+  --color-status-success-solid-bg: #5cb85c; /* medium green */
+  --color-status-success-solid-text: #fff; /* white */
+  --color-status-attention-solid-bg: #f0ad4e; /* light orange */
+  --color-status-attention-solid-text: #555; /* dark gray */
+  --color-status-danger-solid-bg: #d9534f; /* medium red */
+  --color-status-danger-solid-text: #fff; /* white */
+
   /* Colors — Semantic */
   --color-blue: #1a73e8;
   --color-blue-tint: rgba(26, 115, 232, 0.1);

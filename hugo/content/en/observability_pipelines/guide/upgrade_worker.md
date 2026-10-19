@@ -52,7 +52,6 @@ Worker version 2.21.0 gives you access to the following:
 #### Fixes
 
 - Fixed case-insensitive glob matching in search queries containing UTF-8 text, which caused panics and incorrect results for non-ASCII input.
-- The MySQL source now includes the query name in the `Checkpoint updated` log.
 - Fixed Azure Blob Storage uploads larger than 4 MiB when using an account-key connection string.
 - Fixed an unrecoverable Worker error that occurred when a record exceeded the buffer's maximum record size. The error is now logged and reflected in the `buffer_discarded_events_total` and `buffer_discarded_bytes_total` health metrics (with `intentional="false"`).
 

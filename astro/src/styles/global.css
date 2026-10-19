@@ -97,6 +97,14 @@ b {
   font-weight: 600;
 }
 
+/* Center images and icons on the text line, as Hugo does through Bootstrap's
+   reboot (`img, svg { vertical-align: middle }`). The browser default,
+   `baseline`, puts an image in a line of text too high. */
+img,
+svg {
+  vertical-align: middle;
+}
+
 /* As in Hugo, links are body-text colored. The underline sits below the
    descenders, where Hugo draws its link border. */
 a {
@@ -317,6 +325,7 @@ tbody code {
 ::view-transition-group(header__nav),
 ::view-transition-group(announcement-banner),
 ::view-transition-group(sidenav),
+::view-transition-group(api-changelog-filter-bar),
 ::view-transition-group(root),
 ::view-transition-old(header__nav),
 ::view-transition-new(header__nav),
@@ -324,6 +333,8 @@ tbody code {
 ::view-transition-new(announcement-banner),
 ::view-transition-old(sidenav),
 ::view-transition-new(sidenav),
+::view-transition-old(api-changelog-filter-bar),
+::view-transition-new(api-changelog-filter-bar),
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -332,6 +343,7 @@ tbody code {
 ::view-transition-old(header__nav),
 ::view-transition-old(announcement-banner),
 ::view-transition-old(sidenav),
+::view-transition-old(api-changelog-filter-bar),
 ::view-transition-old(root) {
   display: none;
 }
