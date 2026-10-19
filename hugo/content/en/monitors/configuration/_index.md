@@ -345,7 +345,7 @@ You can further restrict your monitor by specifying a list of [teams][17], [role
 ### Access levels
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-The Muter access level and downtime access controls are in Preview. Contact <a href="/help/">Datadog Support</a> to check availability for your organization.
+The Muter access level and downtime access controls are in Preview.
 {{< /callout >}}
 
 Each team, role, or user on a restricted monitor has one of the following access levels:
