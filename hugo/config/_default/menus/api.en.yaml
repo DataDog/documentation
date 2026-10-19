@@ -20990,8 +20990,7 @@ menu:
           - v2
         operationids:
           - UpdateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: Get a RUM exclusion filter
       url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
@@ -21003,8 +21002,7 @@ menu:
           - v2
         operationids:
           - GetExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Delete a RUM exclusion filter
       url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
@@ -21016,8 +21014,7 @@ menu:
           - v2
         operationids:
           - DeleteExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Create a RUM exclusion filter
       url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
@@ -21029,8 +21026,7 @@ menu:
           - v2
         operationids:
           - CreateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Get all RUM exclusion filters
       url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
@@ -21042,8 +21038,7 @@ menu:
           - v2
         operationids:
           - ListExclusionFilters
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Create a RUM retention filter
       url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
