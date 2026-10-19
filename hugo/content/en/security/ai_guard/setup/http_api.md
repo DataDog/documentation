@@ -7,11 +7,9 @@ description: Evaluate prompts and tool calls with AI Guard from any language by 
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-The AI Guard HTTP API evaluates prompts and tool calls from any language or environment that can send an HTTP request. Use the HTTP API only when the AI Guard SDK doesn't support your agent's language, because HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog.
+The AI Guard HTTP API evaluates prompts, model responses, and tool calls from any language or environment that can send an HTTP request. Use the HTTP API only when the AI Guard SDK doesn't support your agent's language, because HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog.
 
 Your code sends the conversation to a single endpoint, and AI Guard returns an action. The HTTP API doesn't block anything on its own: your code reads the action and decides whether to proceed.
-
-<!-- TODO: Confirm whether the HTTP API also evaluates model responses. The SDK page lists prompts, model responses, and tool calls. -->
 
 ## Supported environments
 
@@ -83,11 +81,11 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
    }
    ```
 
-1. If the action is `ALLOW`, proceed with the request. If the action is `DENY` or `ABORT`, stop the request and return a safe response. AI Guard returns `ALLOW` or `DENY`, but the API format also defines `ABORT`, so handle `ABORT` the same as `DENY`.
+1. If the action is `ALLOW`, proceed with the request. If the action is `DENY`, stop the request and return a safe response.
 
 ## Request format
 
-<!-- TODO: Link to the API reference for this endpoint after it's published. After it publishes, replace these with a link to the reference: the headers table, the message fields table, and the `meta` field description in Request format, and the attributes table in Response format. Keep the task steps, the user prompt and tool result examples, the Limitations section, the `ABORT` handling guidance, and the advice not to pass `reason` back to the model or the end user. -->
+<!-- TODO: After the API reference for this endpoint is published, replace these with a link to it: the headers table, the message fields table, and the `meta` field description in Request format, and the attributes table in Response format. Keep the task steps, the user prompt and tool result examples, the Limitations section, and the advice not to pass `reason` back to the model or the end user. -->
 
 The request body follows the JSON:API format, with the conversation in `data.attributes.messages`. Use this reference to build requests for prompts, tool calls, and tool results.
 
@@ -161,15 +159,13 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | --- | --- |
 | `data.id` | The evaluation ID. |
 | `data.type` | Always `evaluations`. |
-| `data.attributes.action` | `ALLOW` or `DENY`. Handle `ABORT` the same as `DENY`. |
+| `data.attributes.action` | `ALLOW` or `DENY`. |
 | `data.attributes.reason` | A natural language summary of the decision, for auditing and logging. Don't pass `reason` back to the model or the end user. |
 | `data.attributes.tags` | The attack categories AI Guard detected. |
 | `data.attributes.tag_probs` | The confidence score for each attack category. |
 | `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use it to decide whether to stop a request when the action is `DENY`. |
 | `data.attributes.global_prob` | The overall threat score. Present only for some evaluations. |
 | `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` (`path`, `start_index`, `end_index_exclusive`). |
-
-<!-- TODO: Confirm whether `ABORT` is planned for future use or left over from an earlier design. The service returns only `ALLOW` or `DENY`. -->
 
 [1]: /security/ai_guard/setup/sdk/
 [2]: /security/ai_guard/setup/manual_integrations/

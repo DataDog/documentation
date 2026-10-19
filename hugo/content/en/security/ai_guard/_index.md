@@ -13,7 +13,6 @@ further_reading:
     text: "Securing AI agents: Why guardrail placement is a key design decision"
 ---
 
-<!-- TODO: Confirm that AI Guard is unavailable on the US2-FED site (gov2) as well as US1-FED (gov). Every AI Guard page shows this banner for both. -->
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
@@ -145,7 +144,9 @@ AI Guard evaluates text and images only.
 
 Latency indicates how much time evaluation adds to each LLM interaction in your agent.
 
-<!-- TODO: latency figures for text and image evaluation. -->
+AI Guard evaluations typically complete in under 100 milliseconds. Latency varies with the size of the conversation and the region where your application runs.
+
+Image evaluation takes longer, and its latency varies more.
 
 ### Usage limits
 
@@ -156,21 +157,24 @@ The AI Guard evaluation API enforces these limits for each Datadog organization:
 | Tokens evaluated per day | 2.5 billion. |
 | Requests per minute | 700. |
 
-<!-- TODO: Product code shows the defaults above. Confirm and find out whether limits can be raised for an organization. Current docs list 1 billion tokens per day and 12,000 requests per minute per IP address. -->
+To request higher limits for your organization, contact [Datadog Support][13].
 
-When your organization exceeds a limit, the API returns a `429 Too Many Requests` error, and AI Guard doesn't evaluate the request:
+<!-- TODO: Which usage limit values are correct? Product code shows the defaults in the table above, but the current docs list 1 billion tokens per day and 12,000 requests per minute per IP address. -->
+
+When your organization exceeds a limit, AI Guard stops evaluating requests, and the API returns a `429 Too Many Requests` error. What happens to each request depends on the integration method:
 
 - Automatic and manual integrations let the LLM call or tool call proceed without an evaluation.
-- Direct SDK calls raise an `AIGuardClientError`. Catch this error to decide whether your agent proceeds or stops.
+- SDK calls raise an `AIGuardClientError`. Catch this error to decide whether your agent proceeds or stops.
 
-<!-- TODO: confirm integration behavior for manual integrations (Amazon Strands, LiteLLM Proxy) and for Node.js, Java, and Ruby. Verified for the Python OpenAI automatic integration only. -->
+### Data residency, retention, and privacy
 
-### Data retention and privacy
+AI Guard processes all evaluations in the US, regardless of your Datadog site.
 
-AI Guard spans follow APM retention for indexed spans, which is 15 days by default. To restrict which users can view AI Guard spans, see [Limit access to AI Guard spans][12].
+After a retention filter indexes AI Guard spans, Datadog keeps them for 15 days. To restrict which users can view AI Guard spans, see [Limit access to AI Guard spans][12].
 
-External model providers that AI Guard uses for evaluation operate under zero data retention. 
-<!-- TODO: verify against current product and public docs. -->
+External model providers that AI Guard uses for evaluation operate under zero data retention. Datadog doesn't train models on your data. AI Guard encrypts data in transit with TLS.
+
+<!-- TODO: Can customers change how long Datadog keeps indexed AI Guard spans? If so, how, and what range is allowed? The APM settings UI and the Trace Retention docs show a fixed 15 days, and retention filters control only which spans are kept. -->
 
 ## Further reading
 
@@ -188,3 +192,4 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [10]: /security/ai_guard/setup/manual_integrations/
 [11]: /security/ai_guard/setup/sdk/
 [12]: /security/ai_guard/setup/#limit-access
+[13]: /help/

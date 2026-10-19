@@ -19,8 +19,6 @@ AI Guard connects to AI agents through several integration methods: automatic in
 
 Confirm you have the permissions and components AI Guard needs.
 
-<!-- TODO: Confirm that GA organizations don't need a backend feature flag enabled. If they do, add it back here as a requirement. -->
-
 ### Permissions
 
 Some setup steps require specific Datadog permissions. An admin might need to create a role with these permissions and assign it to you:
@@ -45,7 +43,7 @@ AI Guard requires these minimum Datadog SDK versions:
 | Java | `dd-trace-java` | 1.54.0. |
 | Ruby | `dd-trace-rb` | 2.25.0. |
 
-<!-- TODO: Confirm the Python minimum. The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
+<!-- TODO: What is the minimum `dd-trace-py` version for AI Guard? The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
 
 Some integrations require a later version. Each integration page lists its own requirements.
 
@@ -117,7 +115,9 @@ You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to
 
 1. Drag the AI Guard filter to the top of the {{< ui >}}Custom Retention Filters{{< /ui >}} list. New filters are added to the bottom of the list, and Datadog applies only the first filter that matches a span, so a filter higher in the list with a lower rate can drop AI Guard spans.
 
-<!-- TODO: Confirm that the Intelligent Retention Filters, which sit in a separate section outside the ordered custom list, can't drop AI Guard spans before the custom filter applies. Also confirm whether AI Guard needs a 100% trace rate, or whether a 100% span rate is enough. Trace rate indexes every span in each matching trace, which adds cost. -->
+AI Guard spans don't count toward APM ingestion billing, but the spans this filter keeps count toward your APM indexed span usage. If you don't use APM, or you keep a high volume of traces, indexed AI Guard spans can appear on your bill.
+
+<!-- TODO: Can the Intelligent Retention Filters drop AI Guard spans before the custom AI Guard filter applies? They sit outside the ordered list of custom filters. If they can, how should customers prevent it? -->
 
 ## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
@@ -142,9 +142,7 @@ Confirm that AI Guard is evaluating agent traffic.
 If expected evaluations don't appear in AI Guard, check these causes in order:
 
 1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When it's unset, integrations don't evaluate anything, and in Node.js, Java, and Ruby, SDK calls return `ALLOW` without calling AI Guard. Set `DD_AI_GUARD_ENABLED=true`.
-
-   <!-- TODO: Confirm that automatic and manual integrations evaluate nothing when `DD_AI_GUARD_ENABLED` is unset. The SDK behavior in this item was checked in the tracer source for all four languages. The integration part is inferred. -->
-1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope. A 403 error can also mean AI Guard isn't enabled for your organization.
+1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
 1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
 1. **The retention filter is missing or out of order.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates, and that it sits above any other filter that matches AI Guard spans. See the [Create a retention filter for AI Guard spans](#retention-filter) section.
 1. **The service or environment isn't set.** Confirm `DD_SERVICE` and `DD_ENV` are set, so AI Guard can match the agent to its policy and show it in Discover.
@@ -155,7 +153,7 @@ To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluat
 
 If AI Guard spans appear but don't show evaluated messages, set `DD_TRACE_API_VERSION=v0.4` in your application environment. The Datadog SDK sends AI Guard span content only with trace API version `v0.4`.
 
-<!-- TODO: Confirm whether Node.js and Java need `DD_TRACE_API_VERSION=v0.4` for AI Guard span content. Current dd-trace-py uses v0.4 automatically when AI Guard is enabled, so for Python this matters only if someone forced v0.5 (checked in dd-trace-py `ddtrace/internal/writer/writer.py`). -->
+<!-- TODO: Do Node.js and Java need `DD_TRACE_API_VERSION=v0.4` for AI Guard spans to show their content? `dd-trace-py` uses v0.4 automatically when AI Guard is enabled, so for Python this matters only if someone forces v0.5. -->
 
 [1]: /security/ai_guard/policies/
 [2]: /account_management/api-app-keys/

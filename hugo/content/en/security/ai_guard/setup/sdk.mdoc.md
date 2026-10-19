@@ -26,7 +26,7 @@ The AI Guard SDK is available for Python, Node.js, Java, and Ruby. Check the age
 {% if equals($prog_lang, "python") %}
 The AI Guard SDK requires `dd-trace-py` 3.19.0 or later.
 
-<!-- TODO: Confirm the Python minimum. The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
+<!-- TODO: What is the minimum `dd-trace-py` version for AI Guard? The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
 {% /if %}
 
 <!-- Node.js -->
@@ -76,7 +76,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    Run the application with the Datadog Java agent (`-javaagent`). Without the agent, the evaluate method returns `ALLOW` without calling AI Guard.
    {% /if %}
 
-   <!-- TODO: Confirm whether Python applications must run with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog. The Python evaluate call works without it, but span delivery wasn't checked. -->
+   <!-- TODO: Must Python applications run with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog? The Python `evaluate` call works without it, but span delivery wasn't checked. If so, add it to step 1. -->
 
 1. At each point you want AI Guard to check, call the SDK's evaluate method with the conversation so far. Evaluate user prompts before each model call, and evaluate tool calls before the agent runs the tool. Include the system prompt, so AI Guard can judge each request in context.
 
@@ -235,7 +235,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
    With `dd-trace-rb` versions earlier than 2.44.0, pass the tool call as keywords instead: `Datadog::AIGuard.assistant(tool_name: "shell", id: "call_1", arguments: '{"command": "shutdown"}')`.
 
-   <!-- TODO: Confirm the Ruby tool-call example runs on dd-trace-rb 2.44.0 or later. Changed from `Datadog::AIGuard.assistant(id:, tool_name:, arguments:)` to the block form, because dd-trace-rb 2.44.0 changed the method signature to `assistant(content: nil, &block)` and the keyword form raises an error. The `assistant` and `tool_call(name:, id:, arguments:)` signatures were checked in the dd-trace-rb source at v2.43.0 and v2.44.0, but the block usage (`do |message| ... end`) is inferred and wasn't run. Also confirm the keyword form still works on 2.25.0 through 2.43.x. -->
+   <!-- TODO: Does this block-form example run on `dd-trace-rb` 2.44.0 and later? Version 2.44.0 changed the method signature to `assistant(content: nil, &block)`, so the earlier keyword form raises an error. Does the keyword form still work on 2.25.0 through 2.43.x? -->
 
    To evaluate images, build the message content with a block:
 

@@ -48,7 +48,7 @@ The LiteLLM Proxy integration evaluates traffic in each mode that you set in the
 | `during_call` | The request messages, in parallel with the model call. | The proxy rejects the request. |
 | `post_call` | The model's response, together with the request messages from a `pre_call` or `during_call` evaluation. | The proxy rejects the response. |
 
-<!-- TODO: Confirm the HTTP status and body that the client receives when the guardrail blocks a request. The guardrail raises an exception with status 403 and the message "Datadog AI Guard: request blocked '<reason>'" (checked in dd-trace-py `ddtrace/aiguard/integrations/litellm.py`), but how LiteLLM passes it to the client wasn't checked. -->
+<!-- TODO: When the guardrail blocks a request, what HTTP status and body does the client receive? Is it the same as what the SDK reports? In `dd-trace-py`, the guardrail raises an exception with status 403 and the message "Datadog AI Guard: request blocked '<reason>'", but the client might instead receive a 200 with an error in the response body. -->
 
 ### Limitations
 
@@ -93,7 +93,7 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
    - `detailed_error=True`: Add the AI Guard reason to the blocked message. Default: `False`.
    - `raise_error_on_tool_calls=True`: Raise `AIGuardAbortError` for blocked tool calls, instead of canceling the tool call or replacing the tool result. Default: `False`.
 
-<!-- TODO: confirm whether the application must start with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog. -->
+<!-- TODO: Must the application start with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog? If so, add it as a step. -->
 
 **What's next?** [Create a retention filter for AI Guard spans][5], optionally [limit access to AI Guard spans][6], then [verify the setup][7].
 
@@ -111,7 +111,7 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
    - `DD_SERVICE=<SERVICE_NAME>`.
    - `DD_ENV=<ENVIRONMENT>`.
 
-   <!-- TODO: confirm that every agent behind the proxy shares the AI Guard policy for the proxy's service and environment. -->
+   <!-- TODO: Do all agents behind the proxy share the AI Guard policy for the proxy's service and environment? If so, do their spans all appear under the proxy's service, and is there a way to apply a different policy to each agent? -->
 
 1. In the directory of the LiteLLM Proxy configuration file, create a `guardrails.py` file that imports the AI Guard guardrail:
 
@@ -137,10 +137,6 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
    ```
 
    Without `default_on: true`, LiteLLM Proxy runs the guardrail only on requests that name the guardrail in their `guardrails` field. For the other modes, see the [Evaluated operations](#evaluated-operations) section.
-
-   <div class="alert alert-tip">By default, the guardrail follows the blocking setting in the AI Guard policy for the proxy's service and environment. To keep the proxy in monitoring only, also add <code>block: false</code> under <code>litellm_params</code>.</div>
-
-   <!-- TODO: same question as `DD_AI_GUARD_BLOCK` on the automatic integrations page. What is the use case for `block: false`, given that policy overrides already turn off blocking per service and environment? -->
 
 1. Restart the LiteLLM Proxy so the proxy loads the guardrail.
 
