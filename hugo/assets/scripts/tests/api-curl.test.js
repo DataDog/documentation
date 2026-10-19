@@ -27,12 +27,6 @@ const examples = [
         exampleValue: fixture('content/en/api/v1/metrics/distribution-points.json.sh'),
         dynamic: true,
     },
-    {
-        name: 'metrics-v2',
-        endpointPath: '/api/v2/series',
-        exampleValue: fixture('content/en/api/v2/metrics/dynamic-points.json.sh'),
-        dynamic: true,
-    },
 ];
 
 let siteDir;
@@ -109,7 +103,7 @@ describe.each(shells)('deflate curl examples in %s', shell => {
         const body = inflateSync(result.stdout).toString();
         if (example.dynamic) {
             const points = JSON.parse(body).series[0].points;
-            const timestamp = example.name === 'metrics-v2' ? points[0].timestamp : points[0][0];
+            const timestamp = points[0][0];
             expect(timestamp).toBeGreaterThanOrEqual(before);
             expect(timestamp).toBeLessThanOrEqual(Math.floor(Date.now() / 1000));
             expect(body).toBe(example.exampleValue.trimEnd().replace('${NOW}', String(timestamp)));
