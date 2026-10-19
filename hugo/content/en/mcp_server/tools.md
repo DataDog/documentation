@@ -1188,6 +1188,28 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
 
+## Documentation
+
+Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+
+### `search_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Searches published Datadog documentation and returns up to 10 matching passages with links to their source pages. Returns source passages, not a generated answer. Supports English, French, Japanese, Korean, and Spanish. Other languages return no results. Search uses AI models to match by meaning. If your organization has [disabled AI providers][92], search matches by keyword only.
+
+- How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
+- What's the difference between a metric monitor and an anomaly monitor?
+- Which Datadog Agent settings control container log collection?
+
+### `read_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Reads a full Datadog documentation page from a `docs.datadoghq.com` URL or a document ID returned by `search_datadog_documentation`. Reads long pages in parts. Site-specific values, such as endpoints, appear as placeholders like `<YOUR_MCP_SERVER_ENDPOINT>`.
+
+- Read `https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/` and explain the matcher syntax.
+- Open the Datadog MCP Server setup page and summarize the toolset options.
+- Search the Datadog docs for log pipeline processors, then read the top result in full.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -2057,14 +2079,14 @@ Guides you through uploading source maps for RUM error mapping.
 
 ## Processes
 
-Tools for searching recent [Live Processes][92] observations on your hosts.
+Tools for searching recent [Live Processes][93] observations on your hosts.
 
 <div class="alert alert-info">The <code>processes</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_live_processes`
 *Toolset: **processes***\
 *Permissions Required: `Hosts Read`*\
-Searches recent process observations collected by [Live Processes][92], returning each process's PID, user, command, start time, host, and tags. Filter by free-text search or by exact `key:value` tags such as `user:foo`. Live Processes data is retained for 36 hours, and each query covers a window of at most one hour. Results are paginated.
+Searches recent process observations collected by [Live Processes][93], returning each process's PID, user, command, start time, host, and tags. Filter by free-text search or by exact `key:value` tags such as `user:foo`. Live Processes data is retained for 36 hours, and each query covers a window of at most one hour. Results are paginated.
 
 - Which processes are running as user `foo` on host `bar`?
 - Did the `foo` process on host `bar` restart in the last hour?
@@ -3498,7 +3520,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
-[92]: /infrastructure/process/
+[92]: /mcp_server/#data-handling-and-ai-providers
+[93]: /infrastructure/process/
 
 ## Further reading
 
