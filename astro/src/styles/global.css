@@ -69,6 +69,25 @@
 /* Base */
 html {
   font-size: var(--font-size-root);
+  /* Anchor jumps, scrollIntoView, and focus scrolling stop below the fixed
+     header instead of under it. A layout with its own sticky bar adds that
+     bar's height through --sticky-bar-height. */
+  scroll-padding-top: calc(
+    var(--hugo-active-banner-height) + var(--hugo-header-height) +
+      var(--sticky-bar-height, 0px) + var(--space-sm)
+  );
+}
+
+/* An anchor jump scrolls the page, so the desktop header has already
+   collapsed to its scrolled height by the time the target lands. */
+@media (min-width: 992px) {
+  html {
+    scroll-padding-top: calc(
+      var(--hugo-active-banner-height) +
+        var(--hugo-header-height-desktop-scrolled) +
+        var(--sticky-bar-height, 0px) + var(--space-sm)
+    );
+  }
 }
 
 body {

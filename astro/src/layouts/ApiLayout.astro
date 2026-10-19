@@ -106,6 +106,20 @@ const isChangelogSection = isChangelogPath(unprefixedPath);
 </BaseLayout>
 
 <style>
+  /* Height of the sticky .api-toolbar, which global.css adds to the anchor
+     scroll offset. Measured, because the toolbar's height comes from its
+     content. Below 992px it stacks into a column whose height varies with
+     width and page; 128px fits the overview pages at phone width. */
+  :global(html) {
+    --sticky-bar-height: 128px;
+  }
+
+  @media (min-width: 992px) {
+    :global(html) {
+      --sticky-bar-height: 68px;
+    }
+  }
+
   .api-shell {
     display: flex;
     max-width: var(--content-max-width);
