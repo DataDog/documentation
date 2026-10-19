@@ -86,4 +86,4 @@ Bits can verify whether a remediation action was applied successfully, and wheth
 [4]: /actions/actions_catalog/
 [5]: /actions/private_actions/
 [7]: https://app.datadoghq.com/organization-settings/roles
-[8]: https://app.datadoghq.com/bits-ai/settings/guardrails 
+[8]: https://app.datadoghq.com/bits-ai/guardrails 
