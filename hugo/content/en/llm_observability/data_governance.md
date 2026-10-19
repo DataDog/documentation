@@ -28,7 +28,7 @@ Agent Observability allows you to restrict access to potentially sensitive data 
 
 Access controls in Agent Observability are built on Datadog's [Data Access Control][11] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific AI applications within your organization.
 
-You can also restrict individual Agent Observability projects, including their experiments, datasets, dataset records, and annotation queues. See [Data Access Control in Agent Observability][14].
+You can also restrict individual Agent Observability projects, including their experiments, datasets, dataset records, and annotation queues. The `ml_app` tag also restricts the evaluators that target an application. See [Data Access Control in Agent Observability][14].
 
 ## Redacting data with span processors
 

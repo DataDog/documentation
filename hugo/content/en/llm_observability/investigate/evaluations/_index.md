@@ -60,6 +60,8 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 [`Agent Observability Write` permissions][7] are necessary to configure evaluators.
 
+To restrict an application's evaluators to specific teams or roles, see [Data Access Control in Agent Observability][14].
+
 ### Retrieving spans
 
 Agent Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
@@ -80,3 +82,4 @@ Agent Observability offers an [Export API][9] that you can use to retrieve spans
 [11]: /llm_observability/investigate/annotation_queues
 [12]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /llm_observability/investigate/evaluations/end_user_feedback
+[14]: /llm_observability/improve/access_control/
