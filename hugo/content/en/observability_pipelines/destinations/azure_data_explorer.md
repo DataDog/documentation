@@ -29,35 +29,35 @@ Before you configure the Azure Data Explorer destination, you must have:
 
 - An ADX cluster with streaming ingestion enabled.
     - See [Create a cluster][3] and [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
-- An ADX database and the tables to which you want to send logs.
-    - See [Create a database][4] for more information.
+- An ADX database and the tables you want to send logs to.
+    - See [Create a database][4] and [Create a table in Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/create-table-wizard) more information.
 - A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
     ```
     .alter table ['<TABLE_NAME>'] policy streamingingestion enable
     ```
-    See [Streaming ingestion policy][5] for more information.
-- (Optional) An [ingestion mapping][6] on the target table, if you want to map log fields to table columns.
-- An Azure identity that the Worker uses to authenticate to ADX. The identity must have ingestion permissions, such as the [Database Ingestor][7] role, on each database to which the Worker sends logs.
+    -  See [Streaming ingestion policy][5] for more information.
+- (Optional) An ingestion mapping on the target table, if you want to map log fields to table columns. See [Ingestion mappings][6] for more information.
+- An Azure identity that the Worker uses to authenticate to ADX. The identity must have ingestion permissions, such as the [Database Ingestor][7] role, on each database the Worker sends logs to.
 
 ## Setup
 
-<div class="alert alert-danger">Only enter the identifier for the Azure Data Explorer ingestion endpoint. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-danger">Only enter the identifiers for the Azure Data Explorer ingestion endpoint and, if applicable, the Azure authentication client secret and certificate password. Do <b>not</b> enter the actual values.</div>
 
 Configure the Azure Data Explorer destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][9], using the [API][10], or with [Terraform][11]. The steps in this section are configured in the UI.
 
 After you select the Azure Data Explorer destination in the pipeline UI:
 
 1. Enter the identifier for your Azure Data Explorer ingestion endpoint. This identifier references the ingestion endpoint, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
-    - **Note**: The ingestion endpoint is the URI shown in your ADX Cluster. It is **not** the data ingestion URI, which is prefixed with `ingest-`.
+    - **Note**: Use the cluster URI shown in the Azure portal, **not** the data ingestion URI, which starts with `ingest-`.
 1. In the **Database** field, enter the name of the ADX database, such as `logs_db`.
-1. In the **Table** field, enter the name of the ADX table to which you want to send logs, such as `application_logs`. This field supports [template syntax][12], so you can route logs to different tables based on a log field. For example, `{{ adx.table }}`.
-    - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of events.
+1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][12], so you can route logs to different tables based on a log field. A template syntax example: `{{ adx.table }}`.
+    - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of logs.
 1. (Optional) In the **Mapping Reference** field, enter the name of the ingestion mapping to use, such as `logs_json_mapping`. This field supports [template syntax][12], such as `{{ adx.mapping }}`.
     - **Notes**:
         - The resolved mapping must already exist in your cluster.
         - If the field is left blank or the template doesn't resolve to a value, the Worker sends the logs without a mapping reference and ADX ingests the logs as is.
-        - See [Mapping with ingestionMappingReference][6] for more information.
-1. In the **Azure Authentication** dropdown menu, select the authentication method and credentials for the Worker to use.
+        - See [Mapping with ingestionMappingReference][24] for more information.
+1. In the **Azure Authentication** dropdown menu, select the authentication method for the Worker to use.
 1. Enter the credentials for the authentication method you selected. See [Azure authentication](#azure-authentication) for the fields that each method requires.
 
 {{% observability_pipelines/secrets_env_var_note %}}
@@ -66,21 +66,21 @@ After you select the Azure Data Explorer destination in the pipeline UI:
 
 #### Token scope
 
-In the **Token Scope** field, enter the scope used to request access tokens for ADX. The default is `https://kusto.kusto.windows.net/.default`. You only need to change this setting if your cluster is in a sovereign or national cloud, such as Azure Government or Azure China.
+In the **Token Scope** field, enter the scope used to request access tokens for ADX. The default is `https://kusto.kusto.windows.net/.default`. Use a different scope only if your cluster is in a sovereign or national cloud, such as Azure Government or Azure China.
 
 #### Compression
 
-Toggle the switch to **Enable Compression** with gzip. Optionally, select the compression level. If left unset, gzip level `3` is used.
+Toggle **Enable Compression** to compress requests with gzip. Optionally, select the compression level. If left unset, the default is `3`.
 
 #### Batching
 
-You can configure how the Worker batches events before sending them to ADX.
+You can configure how the Worker batches logs before sending them to ADX.
 
 1. In the **Batch Max Bytes** field, enter the maximum batch size in bytes.
-    - The default is `2,000,000` bytes (2 MB).
+    - The default is 2,000,000 bytes (2 MB).
     - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][13] for more information.
-    - **Note**: Data created by [update policies][14] is included in the ingestion data size limit. Datadog recommends a default batch size of 2 MB to accommodate this additional data.
-1. In the **Batch Max Events** field, enter the maximum number of events in a batch. The default is `1,000`.
+    - **Note**: Data created by [update policies][14] is included in the ingestion data size limit. Datadog recommends keeping the default batch size of 2 MB to leave room for this additional data.
+1. In the **Batch Max Events** field, enter the maximum number of logs in a batch. The default is 1,000.
 1. In the **Batch Timeout** field, enter the maximum number of seconds before a batch is flushed. The default is `1` second.
 
 #### Buffering
@@ -89,15 +89,15 @@ You can configure how the Worker batches events before sending them to ADX.
 
 ### Azure authentication
 
-After you select an authentication method in the **Azure Authentication** dropdown menu, the fields you need to fill in depend on the authentication method selected.
+When you set up the Azure Data Explorer destination, the credential fields you fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
 
 #### Azure CLI
 
-Uses the credentials of the account signed in to the [Azure CLI][19] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
+The Azure CLI authentication method uses the credentials of the account signed in to the [Azure CLI][19] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
 
 #### Client certificate
 
-Uses a [Microsoft Entra application (service principal)][20] client ID and certificate.
+The client certificate authentication method uses a [Microsoft Entra application (service principal)][20] client ID and certificate. For the following fields:
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
@@ -106,7 +106,7 @@ Uses a [Microsoft Entra application (service principal)][20] client ID and certi
 
 #### Client secret
 
-Uses a [Microsoft Entra application (service principal)][20] client ID and client secret.
+The client secret authentication method uses a [Microsoft Entra application (service principal)][20] client ID and client secret. For the following fields:
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
@@ -114,23 +114,23 @@ Uses a [Microsoft Entra application (service principal)][20] client ID and clien
 
 #### Managed identity
 
-Uses an [Azure managed identity][21] assigned to the resource where the Worker runs.
+The managed identity authentication method uses an [Azure managed identity][21] assigned to the resource where the Worker runs. For the following fields:
 
 - (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-assigned managed identity ID type**: Enter the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
+- (Optional) **User-assigned managed identity ID type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
 
 #### Managed identity (client assertion)
 
-Uses a managed identity to get a client assertion, which is then exchanged for an access token for the target application.
+The managed identity with client assertion authentication method uses a managed identity to get a client assertion, which is then exchanged for an access token for the target application. For the following fields:
 
 - **Client assertion client ID**: Enter the client ID of the target application.
 - **Client assertion tenant ID**: Enter the tenant ID of the target application.
 - (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-assigned managed identity ID type**: Enter the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
+- (Optional) **User-assigned managed identity ID type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
 
 #### Workload identity
 
-Uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate.
+The workload identity authentication method uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate. For the following fields:
 
 - (Optional) **Client ID**: Enter the client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
 - (Optional) **Tenant ID**: Enter your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
@@ -175,7 +175,7 @@ Not retriable; dropping the request. reason="Default retry strategy: Bad Request
 Internal log [Service call failed. No retries or retries exhausted.] has been suppressed 63 times.
 ```
 
-The Worker does not retry `400` responses, so the batch is dropped. This error occurs when the table in the **Table** field, or the table that the template resolves to, does not exist in your ADX database. To resolve this issue:
+The Worker does not retry `400` responses, so the batch is dropped. This error typically occurs when the table in the **Table** field, or the table that the template resolves to, does not exist in your ADX database. To resolve this issue:
 
 - Verify that the table name is spelled correctly and that the table exists in the database specified in the **Database** field.
 - If you use template syntax, verify that the values in your logs resolve to tables that exist in the database.
@@ -211,7 +211,7 @@ As long as your ADX cluster remains available, throttled requests are retried, s
 If you expect your pipeline to send logs to a large number of tables:
 
 - [Scale your ADX cluster][15] to handle the volume of requests.
-- Monitor your source and destination [buffer metrics][16] to make sure the buffers don't fill up, which could lead to logs getting rejected at the source.
+- Monitor your source and destination [buffer metrics][17] to make sure the buffers don't fill up, which could lead to logs getting rejected at the source.
 
 ## Health metrics
 
@@ -221,11 +221,11 @@ For [component metrics][16] and [destination buffer metrics][17] emitted by all 
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][23] for more information.
+A batch of logs is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][23] for more information.
 
-| Maximum Events | Maximum Bytes | Timeout (seconds) |
-|----------------|---------------|-------------------|
-| 1,000          | 2 MB          | 1                 |
+| Maximum Events | Maximum Bytes (MB) | Timeout (seconds) |
+|----------------|--------------------|-------------------|
+| 1,000          | 2                  | 1                 |
 
 
 ## Further reading
@@ -255,3 +255,4 @@ A batch of events is flushed when one of these parameters is met. Batching is al
 [21]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
 [22]: https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview
 [23]: /observability_pipelines/destinations/#event-batching
+[24]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer#mapping-with-ingestionmappingreference
