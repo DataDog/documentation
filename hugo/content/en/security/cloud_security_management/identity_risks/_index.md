@@ -30,6 +30,8 @@ Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (
 
 <div class="alert alert-info">Cloud Security Identity Risks is available for AWS, Azure, and GCP.</div>
 
+Identity Risks uses [cloud integrations][5] to collect cloud identity and permission data. It does not use Agentless Scanning or the Unified Datadog Agent. See [Cloud Security Coverage and Data Collection Methods][6] to compare data collection methods.
+
 ## Review identity risks
 
 Cloud Security Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions. Review your organization's active identity risks on the [Identity Risks Findings page][1].
@@ -103,3 +105,5 @@ If you are enabling AWS IAM Access Analyzer for the first time:
 [2]: /security/ticketing_integrations/?tab=jira
 [3]: /security/cloud_security_management/workflows
 [4]: /integrations/iam-access-analyzer/
+[5]: /security/cloud_security_management/setup/cloud_integrations/
+[6]: /security/cloud_security_management/setup/supported_deployment_types/

@@ -6,7 +6,9 @@ aliases:
   - /security/cloud_security_management/setup/cloud_accounts
 ---
 
-Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on AWS, Azure, GCP, and OCI.
+Cloud integrations are an Agentless collection method for [Misconfigurations][2] and [Identity Risks][3]. Use the instructions on this page to enable them on AWS, Azure, GCP, and OCI.
+
+Cloud integrations do not provide vulnerability scanning. For vulnerability coverage on AWS, Azure, and GCP, see [Agentless Scanning][4]. For more information, see [Cloud Security Coverage and Data Collection Methods][5].
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
@@ -174,3 +176,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: /security/cloud_security_management/identity_risks/
+[4]: /security/cloud_security_management/setup/agentless_scanning/
+[5]: /security/cloud_security_management/setup/coverage_data_collection_methods/

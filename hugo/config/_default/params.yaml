@@ -424,7 +424,7 @@ unsupported_sites:
   status_pages: [gov,gov2]
   storage_management: [gov,gov2]
   stripe_projects: [us3,us5,eu,gov,gov2,ap1,ap2,uk1]
-  supported_deployment_types: [gov,gov2]
+  coverage_data_collection_methods: [gov,gov2]
   synthetics_email_validation: [gov,gov2]
   synthetics_safari: [gov,gov2]
   tag_enrichment: [gov,gov2]

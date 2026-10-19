@@ -11,6 +11,8 @@ algolia:
 
 Cloud Security Misconfigurations makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
+Misconfigurations uses [cloud integrations][16] to evaluate cloud resources, and uses the [Unified Datadog Agent][18] to run supported host benchmarks. Misconfigurations is separate from Agentless Scanning, which discovers vulnerabilities in supported assets. See [Cloud Security Coverage and Data Collection Methods][17] to compare these data collection methods.
+
 ## Detect misconfigurations across your cloud resources
 
 Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#maintain-compliance-with-industry-frameworks-and-benchmarks).
@@ -84,3 +86,6 @@ To remediate a misconfiguration, you can:
 [13]: /security/cloud_security_management/mute_issues
 [14]: /security/cloud_security_management/review_remediate/workflows/
 [15]: /security/ticketing_integrations
+[16]: /security/cloud_security_management/setup/cloud_integrations/
+[17]: /security/cloud_security_management/setup/coverage_data_collection_methods/
+[18]: /security/cloud_security_management/setup/agent/

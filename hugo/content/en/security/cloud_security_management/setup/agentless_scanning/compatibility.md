@@ -6,9 +6,11 @@ aliases:
 
 ## Availability
 
-Agentless Scanning is supported on AWS, Azure, and GCP.
+This page describes the assets that Agentless Scanning can scan for vulnerabilities.
 
-The following table provides a summary of Agentless Scanning technologies in relation to their corresponding components for each supported cloud provider:
+For Misconfigurations and Identity Risks coverage, see [cloud integrations][19]. For an overview of all Cloud Security capabilities, see [Cloud Security Coverage and Data Collection Methods][20].
+
+Agentless Scanning is supported on AWS, Azure, and GCP. It is not supported on OCI. The following table provides a technical summary of the assets that Agentless Scanning can scan for vulnerabilities for each supported cloud provider:
 
 | Component                                       | AWS                                                                                                                           | Azure                                                                                                                                                                             | GCP                                                                                                                                                                                                                       |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -109,3 +111,5 @@ The following container runtimes are supported:
 [16]: /help
 [17]: /security/cloud_security_management/setup/agentless_scanning/update
 [18]: /containers/cluster_agent/setup/
+[19]: /security/cloud_security_management/setup/cloud_integrations/
+[20]: /security/cloud_security_management/setup/coverage_data_collection_methods/
