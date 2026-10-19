@@ -40,6 +40,8 @@ title: 収集された Kubernetes データ
 
 詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
 
+**注**：Kubernetes v1.37以降、Agentは`kubernetes.cpu.load.10s.avg`メトリックを収集しません。これらのバージョンにおけるkubeletの組み込みcAdvisorは、基盤となる`container_cpu_load_average_10s`メトリックをエクスポートしません。
+
 {{< get-metrics-from-git "kubelet" >}}
 
 ### Kubernetes ステートメトリクスコア {#kubernetes-state-metrics-core}

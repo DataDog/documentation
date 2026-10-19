@@ -24,7 +24,7 @@ ServiceNow의 ITOM/ITSM 통합을 사용하면 Datadog에서 생성된 경보, �
 
 통합을 설치하는 방법에는 두 가지가 있습니다.
 - Datadog은 ServiceNow 스토어에서 [Datadog용 ITOM/ITSM 통합][1]의 최신 버전을 설치할 것을 권장합니다.
-- 또는 최신 업데이트 세트([Datadog-Snow_Update_Set_v2.7.9.xml][2])를 다운로드하여 ServiceNow 인스턴스에 수동으로 업로드할 수 있습니다.
+- 또는 최신 업데이트 세트([Datadog-Snow_Update_Set_v2.8.0.xml][2])를 다운로드하여 ServiceNow 인스턴스에 수동으로 업로드할 수 있습니다.
 
 ## 통합 구성 {#configure-the-integration}
 
@@ -40,7 +40,7 @@ ServiceNow의 ITOM/ITSM 통합을 사용하면 Datadog에서 생성된 경보, �
 1. **Configure** 탭으로 이동한 다음 **ITOM/ITSM** 탭, **Monitors** 탭으로 이동합니다.
 1. **Instance Priority Mapping for Templates** 아래에서 ServiceNow 인스턴스에 대한 설정을 엽니다.
 1. **Instance Priority Mapping for Templates** 토글을 켭니다.
-1. **ServiceNow Urgency** 및 **ServiceNow Impact** 아래에서 Datadog의 모니터링 우선순위 수준과 대응시킬 수준을 선택합니다. 예를 들면 다음과 같습니다.
+1. **ServiceNow Urgency** 및 **ServiceNow Impact** 아래에서 Datadog의 모니터링 우선순위 수준과 대응시킬 수준을 선택합니다. 예:
    - 영향: 4
    - 긴급도: 5
 1. **Update**를 클릭합니다.
@@ -398,7 +398,7 @@ Datadog Work Management에서 ServiceNow로의 업데이트는 확인되지만 S
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /ko/resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
+[2]: /ko/resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
 [3]: /ko/integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/work/settings

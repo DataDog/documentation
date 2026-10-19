@@ -22,12 +22,13 @@ Browser Logs SDK を使用すると、Web ブラウザページから Datadog �
 
 - **RUM SDK とは独立**: Browser Logs SDK は RUM SDK がなくても利用できます。
 - **Worker 環境**: Browser Logs SDK は同じセットアップ方法により、Worker および Service Worker 環境で動作します。ただし、Worker 環境から送信されたログにはセッション情報が自動的に記録されません。
+- **WebAssembly エラー**: ブラウザログ内の WASM フレームをシンボル化するには、[Browser SDK WASM プラグインを構成](#webassembly-errors)し、[モジュールのデバッグシンボルをアップロード][14]してください。
 
 ## セットアップ {#setup}
 
 ### ステップ 1 - クライアントトークンを作成する{#step-1-create-a-client-token}
 
-Datadog で、[**Organization Settings (組織設定) > New Client Tokens (新しいクライアントトークン)**][1] に移動します。
+Datadog で [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}New Client Tokens{{< /ui >}}][1] の順に移動します。
 
 **対応環境**: Browser Logs SDK は、すべての最新のデスクトップおよびモバイルブラウザ、そして Worker および Service Worker 環境をサポートしています。[ブラウザサポート][4] テーブルを参照してください。
 
@@ -74,7 +75,7 @@ Browser SDK のインストール方法を選択します。
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -131,6 +132,19 @@ Browser SDK のインストール方法を選択します。
 ```
 
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
 
 ```javascript
@@ -167,7 +181,7 @@ Browser SDK のインストール方法を選択します。
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js"
+    src="https://www.datadoghq-browser-agent.com/eu1/v7/datadog-logs.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -212,6 +226,17 @@ Browser SDK のインストール方法を選択します。
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -305,7 +330,7 @@ GDPR、CCPA、および同様の規制に準拠するために、RUM Browser SDK
 
 Logs の基本セットアップが完了したので、アプリケーションではブラウザログの収集が開始され、リアルタイムで問題の監視やデバッグを開始できます。
 
-[ログエクスプローラー][7] でログを視覚化します。
+[Log Explorer][7] でログを視覚化します。
 
 ## 使用方法 {#usage}
 
@@ -468,6 +493,35 @@ try {
   ...
 }
 ```
+
+#### WebAssembly エラー {#webassembly-errors}
+
+WebAssembly (WASM) スタックフレームをシンボル化するには、Browser SDK WASM プラグインをインストールします。プラグインと Browser Logs SDK には同じバージョンを使用してください。
+
+```shell
+npm install --save-exact \
+  @datadog/browser-logs@<VERSION> \
+  @datadog/browser-plugin-wasm@<VERSION>
+```
+
+Browser Logs を初期化する際にプラグインを登録してください。
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+import { makeWasmPlugin } from '@datadog/browser-plugin-wasm';
+
+datadogLogs.init({
+  // ...
+  forwardErrorsToLogs: true,
+  plugins: [makeWasmPlugin()],
+});
+```
+
+WASM モジュールを読み込む前に Browser Logs を初期化してください。このプラグインは、ブラウザの `WebAssembly` API で作成されたモジュールを監視し、WASM スタックフレームを含むエラーにそれらの URL とビルド ID を追加します。
+
+`forwardErrorsToLogs` を `true` に設定して、未処理の WASM エラーを自動的に転送してください。処理済みの WASM エラーをログに記録する際は、[エラー追跡](#error-tracking)に示すように、その `Error` オブジェクトを `logger.error()` への第 3 引数として渡してください。
+
+次に、[WebAssembly シンボルをアップロード][14]して、エラーをシンボル化してください。
 
 ### 汎用ロガー関数 {#generic-logger-function}
 
@@ -1341,3 +1395,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [11]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[14]: /ja/real_user_monitoring/guide/upload-webassembly-symbols/

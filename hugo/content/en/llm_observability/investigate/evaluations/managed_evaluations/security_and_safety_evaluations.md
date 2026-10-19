@@ -1,6 +1,6 @@
 ---
 title: Sensitive Data Scanner
-description: Learn how to configure managed evaluations for your LLM applications.
+description: Learn how to configure managed evaluators for your LLM applications.
 further_reading:
 - link: "/llm_observability/quickstart/terms/"
   tag: "Documentation"

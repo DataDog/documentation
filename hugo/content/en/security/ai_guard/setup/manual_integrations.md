@@ -15,12 +15,15 @@ further_reading:
 Manual integrations require additional configuration to enable AI Guard protection. Follow the instructions for each framework to set up AI Guard evaluations.
 
 ## Supported frameworks and libraries
+
+<div class="alert alert-tip">Manual integration is supported for Amazon Strands and LiteLLM Proxy. For any other framework, or for custom LLM or tool call code, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> to call <code>evaluate()</code> in your code.</div>
+
 ### Python
 
 | Framework                         | Supported Versions | SDK Version |
 | --------------------------------- | ------------------ | -------------- |
-| [Amazon Strands](#amazon-strands) | >= 1.29.0          | >= 4.7.0       |
-| [LiteLLM Proxy](#litellm-proxy)   | >= 1.78.5          | >= 4.8.0       |
+| [Amazon Strands](#amazon-strands) | >= 1.29.0          | >= 4.13.0      |
+| [LiteLLM Proxy](#litellm-proxy)   | >= 1.78.5          | >= 4.13.0      |
 
 {{< partial name="security-platform/aiguard-sdk-setup.html" target="manual" >}}
 
@@ -33,10 +36,10 @@ The Amazon Strands integration enables AI Guard evaluations for applications bui
 
 ##### Setup
 
-Install dd-trace-py v4.7.0 or later:
+Install dd-trace-py v4.13.0 or later:
 
 ```shell
-pip install ddtrace>=4.7.0
+pip install ddtrace>=4.13.0
 ```
 
 Next, define the entry point for the integration with a plugin or hook provider:
@@ -44,7 +47,7 @@ Next, define the entry point for the integration with a plugin or hook provider:
 * Plugin (recommended):
 
 ```python
-from ddtrace.appsec.ai_guard import AIGuardStrandsPlugin
+from ddtrace.aiguard.integrations.strands import AIGuardStrandsPlugin
 
 agent = Agent(
     model=model,
@@ -55,7 +58,7 @@ agent = Agent(
 * HookProvider (legacy):
 
 ```python
-from ddtrace.appsec.ai_guard import AIGuardStrandsHookProvider
+from ddtrace.aiguard.integrations.strands import AIGuardStrandsHookProvider
 
 agent = Agent(
     model=model,
@@ -72,16 +75,16 @@ The LiteLLM Proxy integration enables AI Guard evaluations for applications usin
 
 ##### Setup
 
-Install dd-trace-py v4.8.0 or later:
+Install dd-trace-py v4.13.0 or later:
 
 ```shell
-pip install ddtrace>=4.8.0
+pip install ddtrace>=4.13.0
 ```
 
 Import Datadog's LiteLLM guardrail next to your configuration file (for example, `guardrails.py`):
 
 ```python
-from ddtrace.appsec.ai_guard.integrations.litellm import DatadogAIGuardGuardrail
+from ddtrace.aiguard.integrations.litellm import DatadogAIGuardGuardrail
 
 __all__ = ["DatadogAIGuardGuardrail"]
 ```
