@@ -36804,6 +36804,109 @@ components:
         - $ref: "#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitor"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitorIds"
+    DerivedMetricAttributes:
+      description: Attributes of a derived metric.
+      properties:
+        definition:
+          $ref: "#/components/schemas/DerivedMetricDefinition"
+      required:
+        - definition
+      type: object
+    DerivedMetricCreateData:
+      description: Data object for creating or updating a derived metric.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DerivedMetricAttributes"
+        id:
+          description: The derived metric name used as the resource ID.
+          example: my.derived.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/DerivedMetricsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DerivedMetricCreateRequest:
+      description: Request body for creating or updating a derived metric.
+      properties:
+        data:
+          $ref: "#/components/schemas/DerivedMetricCreateData"
+      required:
+        - data
+      type: object
+    DerivedMetricData:
+      description: A derived metric resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DerivedMetricAttributes"
+        id:
+          description: The derived metric name used as the resource ID.
+          example: my.derived.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/DerivedMetricsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DerivedMetricDefinition:
+      description: The definition of a derived metric as a formula over one or more queries.
+      properties:
+        formula:
+          description: The formula that combines the queries into the value of the derived metric.
+          example: a
+          type: string
+        queries:
+          description: The list of queries referenced by the formula.
+          items:
+            $ref: "#/components/schemas/DerivedMetricQuery"
+          minItems: 1
+          type: array
+      required:
+        - formula
+        - queries
+      type: object
+    DerivedMetricQuery:
+      description: A single query used in the definition of a derived metric.
+      properties:
+        data_source:
+          description: The data source that the query is run against.
+          example: metrics
+          type: string
+        name:
+          description: The name used to reference this query from the formula.
+          example: a
+          type: string
+        query:
+          description: The query string executed against the data source.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+        - data_source
+        - name
+        - query
+      type: object
+    DerivedMetricResponse:
+      description: Response containing a single derived metric.
+      properties:
+        data:
+          $ref: "#/components/schemas/DerivedMetricData"
+      readOnly: true
+      required:
+        - data
+      type: object
+    DerivedMetricsType:
+      default: derived_metrics
+      description: The derived metric resource type.
+      enum:
+        - derived_metrics
+      example: derived_metrics
+      type: string
+      x-enum-varnames:
+        - DERIVED_METRICS
     DetachCaseRequest:
       description: Request for detaching security findings from their case.
       properties:
@@ -201193,6 +201296,249 @@ paths:
         permissions:
           - metric_tags_write
       x-sunset: "2027-01-01"
+  /api/v2/metrics/derived-metrics:
+    post:
+      description: |-
+        Create a derived metric for the org. The metric name is supplied as the resource `id`,
+        and the `definition` sets the formula and the queries the formula is computed from.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: CreateDerivedMetric
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        formula: a
+                        queries:
+                          - data_source: metrics
+                            name: a
+                            query: avg:system.cpu.user{*}
+                    id: my.derived.metric
+                    type: derived_metrics
+            schema:
+              $ref: "#/components/schemas/DerivedMetricCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: Created
+          headers:
+            Location:
+              description: The URL of the newly created derived metric.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Create a derived metric
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+  /api/v2/metrics/derived-metrics/{metric_name}:
+    delete:
+      description: |-
+        Delete a derived metric by name. Idempotent: returns 204 regardless of whether the derived
+        metric existed. Requires the `Manage Tags for Metrics` permission.
+      operationId: DeleteDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Delete a derived metric
+      tags:
+        - Metrics
+      x-menu-order: 33
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+    get:
+      description: Get the definition of a derived metric by name.
+      operationId: GetDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: Get a derived metric
+      tags:
+        - Metrics
+      x-menu-order: 31
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+    put:
+      description: |-
+        Update the definition of an existing derived metric. The `id` in the request body
+        must match the `metric_name` path parameter. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        formula: a
+                        queries:
+                          - data_source: metrics
+                            name: a
+                            query: avg:system.cpu.user{*}
+                    id: my.derived.metric
+                    type: derived_metrics
+            schema:
+              $ref: "#/components/schemas/DerivedMetricCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a derived metric
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 32
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
   /api/v2/metrics/historical-metrics-configurations:
     post:
       description: |-
