@@ -159,12 +159,16 @@ The AI Guard evaluation API enforces these limits for each Datadog organization:
 
 To request higher limits for your organization, contact [Datadog Support][13].
 
-<!-- TODO: Which usage limit values are correct? Product code shows the defaults in the table above, but the current docs list 1 billion tokens per day and 12,000 requests per minute per IP address. -->
+<!-- TODO: Which usage limit values are correct? Product code shows 2.5 billion tokens per day and 700 requests per minute per organization, as in the table above. The current published docs list 1 billion tokens per day and 12,000 requests per minute per IP address. -->
 
 When your organization exceeds a limit, AI Guard stops evaluating requests, and the API returns a `429 Too Many Requests` error. What happens to each request depends on the integration method:
 
 - Automatic and manual integrations let the LLM call or tool call proceed without an evaluation.
 - SDK calls raise an `AIGuardClientError`. Catch this error to decide whether your agent proceeds or stops.
+
+<!-- TODO: When an organization exceeds its limit, integrations let calls proceed without evaluation, but SDK calls raise `AIGuardClientError`, so the customer's code decides. Is that intended? The docs describe both behaviors. If SDK calls should also proceed without evaluation, the docs, and possibly the SDKs, need to change. -->
+
+<!-- TODO: How does a customer limit AI Guard to tool calls, or a subset of tool calls, to reduce cost? Is it a policy setting, an integration setting, or only possible with the SDK? Sampling doesn't work for a security product, so evaluating fewer call types is the way to cut cost. The docs need the mechanism before they can describe it. -->
 
 ### Data residency, retention, and privacy
 
@@ -174,7 +178,7 @@ After a retention filter indexes AI Guard spans, Datadog keeps them for 15 days.
 
 External model providers that AI Guard uses for evaluation operate under zero data retention. Datadog doesn't train models on your data. AI Guard encrypts data in transit with TLS.
 
-<!-- TODO: Can customers change how long Datadog keeps indexed AI Guard spans? If so, how, and what range is allowed? The APM settings UI and the Trace Retention docs show a fixed 15 days, and retention filters control only which spans are kept. -->
+<!-- TODO: Can customers change how long Datadog keeps indexed AI Guard spans? If so, how, and what range is allowed? One source says customers can set 1 day to 15 months in APM settings, but the APM settings UI and the Trace Retention docs show a fixed 15 days, and retention filters control only which spans are kept. The draft says 15 days. -->
 
 ## Further reading
 

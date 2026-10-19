@@ -93,7 +93,7 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
    - `detailed_error=True`: Add the AI Guard reason to the blocked message. Default: `False`.
    - `raise_error_on_tool_calls=True`: Raise `AIGuardAbortError` for blocked tool calls, instead of canceling the tool call or replacing the tool result. Default: `False`.
 
-<!-- TODO: Must the application start with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog? If so, add it as a step. -->
+<!-- TODO: Must Python applications start with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog? Does the answer differ between the SDK and the Amazon Strands integration? The Python `evaluate` call works without it, but span delivery wasn't checked. If it's required, the docs will add it as a setup step. -->
 
 **What's next?** [Create a retention filter for AI Guard spans][5], optionally [limit access to AI Guard spans][6], then [verify the setup][7].
 
@@ -111,7 +111,7 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
    - `DD_SERVICE=<SERVICE_NAME>`.
    - `DD_ENV=<ENVIRONMENT>`.
 
-   <!-- TODO: Do all agents behind the proxy share the AI Guard policy for the proxy's service and environment? If so, do their spans all appear under the proxy's service, and is there a way to apply a different policy to each agent? -->
+   <!-- TODO: Do all agents behind the proxy share the AI Guard policy for the proxy's service and environment? If so, do their spans all appear under the proxy's service, and is there a way to apply a different policy to each agent? AI Guard is set up on the proxy with one `DD_SERVICE` and `DD_ENV`. If every agent shares that policy, customers can't block for one agent and only monitor another, and Discover may show the agents themselves as unprotected. -->
 
 1. In the directory of the LiteLLM Proxy configuration file, create a `guardrails.py` file that imports the AI Guard guardrail:
 

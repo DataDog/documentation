@@ -53,7 +53,7 @@ Some calls through supported packages aren't evaluated or can't be blocked by de
 
 - When an agent framework calls Amazon Bedrock, Google Gemini, or Ollama, AI Guard evaluates the calls but can't block them.
 
-   <!-- TODO: When an agent framework calls Amazon Bedrock, Google Gemini, or Ollama, is it true that AI Guard evaluates the calls but can't block them? If so, does that apply to every supported framework? No public source was found for this claim. -->
+   <!-- TODO: When an agent framework calls Amazon Bedrock, Google Gemini, or Ollama, is it true that AI Guard evaluates the calls but can't block them? If so, does that apply to every supported framework? The claim came from an earlier draft. No public source was found for it. -->
 
 - By default, AI Guard doesn't evaluate streamed model responses.
 
@@ -66,7 +66,7 @@ Some calls through supported packages aren't evaluated or can't be blocked by de
    | Node.js | OpenAI | `dd-trace-js` 6.17.0 or later. |
    | Node.js | Anthropic | `dd-trace-js` 6.19.0 or later. |
 
-   <!-- TODO: Does AI Guard evaluate streamed RubyLLM responses? LangChain doesn't evaluate streamed responses. With `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`, does the SDK hold the stream until evaluation finishes, so a blocked response never reaches the client? -->
+   <!-- TODO: Does AI Guard evaluate streamed RubyLLM responses? With `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`, does the SDK hold the stream until evaluation finishes, so a blocked response never reaches the client? LangChain doesn't evaluate streamed responses. -->
 
 ## Enable automatic integrations
 
