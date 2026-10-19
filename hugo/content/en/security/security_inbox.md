@@ -173,9 +173,9 @@ The **Reporting** tab shows a dashboard of Security Inbox trends over time, so y
 
 For supported Cloud Security attack-path findings, the **Context Graph** in the finding side panel shows the resources and relationships involved in the detected risk.
 
-1. Filter Security Inbox by the **Attack Path** finding type.
-1. Select a finding to open its side panel.
-1. Open **Context Graph** to inspect the resources and relationships associated with the finding.
+1. In the **Finding Type** list,  beside **attack_path**, click **Only** to filter the Security Inbox findings.
+1. Click a finding to view it in a side panel. If the Security Inbox has grouping applied, open a group, then click a finding in the group to view it.
+1. Scroll to the **Context Graph** to inspect the resources and relationships associated with the finding.
 
 {{< img src="security/csm/security_graph.png" alt="Graph showing relationships between AWS EC2 instances, IAM roles, and S3 buckets" width="100%">}}
 
