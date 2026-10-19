@@ -26,6 +26,16 @@ These names describe the shared behavior. Use the language-specific names and sy
 
 ## Prerequisites and scope
 
+<div class="alert alert-warning">These annotation APIs are not available in published SDK releases. Use a development build that includes the annotation implementation for the test framework.</div>
+
+| Language | Datadog SDK | First supported SDK release |
+|----------|-------------|-----------------------------|
+| JavaScript and TypeScript | `dd-trace` | Unreleased |
+| Java | `dd-trace-java` | Unreleased |
+| Python | `ddtrace` | Unreleased |
+
+The minimum versions for Test Optimization or a test framework do not establish support for these annotation APIs.
+
 Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads. An annotation only affects automation that the Datadog library supports for that framework.
 
 Annotations apply to individual test declarations. An annotated parameterized declaration applies to every generated test case. They preserve framework skips, test filters, and expected-failure behavior. They do not override [Test Impact Analysis][5]: a test or file excluded by Test Impact Analysis remains excluded. The annotations do not disable test discovery or flakiness reporting.
