@@ -133,9 +133,15 @@ The option to disable the first recovery notification is additive between multip
 
 ## Permissions and Access Controls
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The Muter access level and downtime access controls are in Preview. Contact <a href="/help/">Datadog Support</a> to check availability for your organization.
+{{< /callout >}}
+
 To schedule, edit, or cancel downtimes, you need the [Manage Downtimes permission][16].
 
 With downtime access controls, a downtime only silences monitors that you have permission to mute (**Muter** or **Editor** [access level][17]). Teams can delegate muting to on-call engineers or service accounts without the risk of a downtime silencing monitors they don't own.
+
+**Note**: A downtime runs with its creator's access, and you can't change it after the downtime is created. If a central team schedules downtimes for monitors restricted to other teams, grant that team Muter access on those monitors.
 
 ## Manage
 
