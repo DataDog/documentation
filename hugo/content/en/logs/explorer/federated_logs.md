@@ -13,8 +13,8 @@ further_reading:
   text: "Send logs to Databricks with Observability Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/federated-search/" header="Federated Logs is in Preview" >}}
-Complete the form to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/federated-search/" btn_hidden="false" header="Join the Preview!" >}}
+Federated Logs is in Preview. Use this form to submit your request today.
 {{< /callout >}}
 
 ## Overview
@@ -32,6 +32,7 @@ With a Databricks source, you can:
 
 ## Prerequisites
 
+- Access to the Federated Logs Preview. To request access, complete the [Preview form][7].
 - A [Databricks integration][3] account configured in Datadog. Note the application (client) ID of the service principal used by the integration.
 - A Databricks table, registered in Unity Catalog, that contains your logs. To send logs to Databricks, you can use the [Observability Pipelines Databricks destination][4].
 - The permissions listed in [Permissions](#permissions).
@@ -107,3 +108,4 @@ Datadog replaces the mapped field names in your query with the corresponding col
 [4]: /observability_pipelines/destinations/databricks/
 [5]: /account_management/rbac/
 [6]: https://app.datadoghq.com/logs/external-sources
+[7]: https://www.datadoghq.com/product-preview/federated-search/
