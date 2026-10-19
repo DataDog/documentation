@@ -20,3 +20,19 @@ entries:
       - CreateLinearIssues
       - CreateServiceNowTickets
     title: Rename Case Management API documentation to Work Management
+  - change_type: added
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40745
+    operations:
+      - CancelSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - DeleteSecurityMonitoringBatchMigration
+      - DeleteSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrations
+      - PublishSecurityMonitoringBatchMigration
+      - StartSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigrationResource
+    title: Add Cloud SIEM batch migration endpoints as unstable
