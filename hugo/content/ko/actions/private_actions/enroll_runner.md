@@ -122,7 +122,7 @@ Datadog은 발송하는 모든 태스크에 서명하며, 러너는 태스크를
 
 ## 프라이빗 러너 자격 증명 교체{#rotating-private-runner-credentials}
 
-재배포 없이 프라이빗 러너의 자격 증명을 교체하려면 호스트 또는 노드 Agent에서 `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity`를 실행하거나 Cluster Agent에서 `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity`를 실행하세요.
+재배포 없이 프라이빗 러너의 자격 증명을 교체하려면 호스트 또는 노드 Agent에서 `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity`를 실행하거나 Cluster Agent에서 `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity`를 실행하세요.
 
 ## 추가 자료 {#further-reading}
 
