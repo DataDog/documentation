@@ -369,7 +369,7 @@
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Workload Protection policy returns \"OK\" response"
+      "description": "Create a Workload Protection policy returns \"Created\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -606,27 +606,6 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
-  "ListDORADeployments": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1654201709",
-      "description": "Get a list of deployment events returns deployments with date-time timestamps"
-    }
-  ],
-  "CreateDORADeployment": [
-    {
-      "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send a deployment event returns \"OK\" response"
-    }
-  ],
-  "CreateDORAIncident": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1101664022",
-      "description": "Send a failure event returns \"OK\" response"
-    }
-  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -677,6 +656,27 @@
       "group": "datasets",
       "suffix": "",
       "description": "Edit a dataset returns \"OK\" response"
+    }
+  ],
+  "ListDORADeployments": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
+  "CreateDORADeployment": [
+    {
+      "group": "delivery_performance",
+      "suffix": "",
+      "description": "Send a deployment event returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDeploymentGate": [
@@ -1410,6 +1410,13 @@
       "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
+  "CreateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a derived metric returns \"Created\" response"
+    }
+  ],
   "CreateTagConfiguration": [
     {
       "group": "metrics",
@@ -1650,6 +1657,13 @@
       "group": "metrics",
       "suffix": "_1116544040",
       "description": "Timeseries cross product query with spans data source returns \"OK\" response"
+    }
+  ],
+  "UpdateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a derived metric returns \"OK\" response"
     }
   ],
   "UpdateTagConfiguration": [
@@ -1966,6 +1980,13 @@
       "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
@@ -2219,6 +2240,13 @@
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
+  "CreateSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add resources to a batch migration returns \"Created\" response"
+    }
+  ],
   "UpdateFindingsSeverity": [
     {
       "group": "security_monitoring",
@@ -2305,6 +2333,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create Jira issues for security findings returns \"Created\" response"
+    }
+  ],
+  "CreateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a batch migration returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -2475,6 +2510,13 @@
       "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
+  "DeleteSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Delete resources from a batch migration returns \"No Content\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
@@ -2607,6 +2649,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Test a rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigrationResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration resource returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [

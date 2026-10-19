@@ -104,7 +104,7 @@ Pour plus d'informations, consultez la documentation [Décrire un incident][20].
 
 ## Évaluer les données d'incident {#evaluate-incident-data}
 
-L'analyse des incidents fournit des informations sur l'efficacité et les performances de votre processus de réponse aux incidents en vous permettant d'agréger et d'analyser les statistiques des incidents passés. Des métriques clés, tels que le temps de résolution et l'impact sur les clients, peuvent être suivis au fil du temps. Vous pouvez interroger ces analyses à l'aide de widgets graphiques dans les tableaux de bord et les notebooks. Datadog propose des modèles personnalisables, tels que le dashboard de vue d'ensemble Incident Management et un rapport d'incident de notebook, pour vous aider à démarrer.
+L'analyse des incidents fournit des informations sur l'efficacité et les performances de votre processus de réponse aux incidents en vous permettant d'agréger et d'analyser les statistiques des incidents passés. Des métriques clés, tels que le temps de résolution et l'impact sur les clients, peuvent être suivis au fil du temps. Vous pouvez interroger ces analyses à l'aide de widgets graphiques dans les dashboards et les notebooks. Datadog propose des modèles personnalisables, tels que le dashboard Incident Management Overview et un rapport d'incident de notebook, pour vous aider à démarrer.
 
 Pour plus de détails sur les mesures collectées et les configurations graphiques étape par étape pour visualiser vos données, consultez [Analyse Incident Management][10].
 

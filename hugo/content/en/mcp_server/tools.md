@@ -131,6 +131,22 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 - Find notebooks related to performance investigation.
 - List notebooks tagged with `incident-response`.
 
+### `delete_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within 30 days of deletion.
+
+- Delete notebook 12345678.
+- Delete the notebook with ID 12345678 that I created for testing.
+
+### `recover_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Write`*\
+Restores a soft-deleted notebook by its numeric ID. The notebook can be restored only within 30 days of deletion.
+
+- Recover notebook 12345678.
+- Restore the notebook with ID 12345678 that I deleted by mistake.
+
 ### `search_datadog_hosts`
 *Toolset: **core***\
 *Permissions Required: `Hosts Read` and `Timeseries`*\
@@ -239,6 +255,104 @@ Edits an existing Datadog notebook.
 
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
+
+## Agent Builder
+
+Tools for [Bits Agent Builder][91], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, running agents, and inspecting their conversations.
+
+Workflow Automation tools are used to configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps.
+
+Connect or disconnect OAuth MCP integrations through the Datadog UI.
+
+### `list_datadog_bits_agents`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the custom AI agents in your organization, including each agent's ID, name, description, and model. Use `get_datadog_bits_agent` for the complete configuration.
+
+- List the Bits agents in this organization.
+- Find the agent that investigates checkout service errors.
+
+### `get_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Workflows Read`*\
+Retrieves an agent by ID, including its system prompt, action tools, MCP servers, and the workflows that invoke it. Use `get_datadog_workflow` to inspect a workflow's complete specification.
+
+- Show the system prompt and tools configured for the checkout investigation agent.
+- Which workflows invoke this agent?
+
+### `list_datadog_bits_agent_models`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` or `Bits Agent Builder Write`*\
+
+Lists supported model identifiers, identifies the default, and notes capabilities such as tool search support. Use these identifiers when creating or updating an agent.
+
+- Which models are available for a Bits agent?
+- Show the default model and models that support tool search.
+
+### `create_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Creates a persistent custom AI agent from a name and system prompt. Optionally, provide a description, model, action tools, and a `code-sandbox` MCP server. The `datadog` MCP server is attached automatically with full tool access. Look up action identifiers and input schemas with `search_datadog_workflow_actions` and `get_datadog_workflow_action` before adding action tools.
+
+- Create an agent that investigates checkout service errors using logs, metrics, and traces.
+- Create an agent that summarizes service health and can send its findings to a Slack channel.
+
+### `update_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Updates an agent's name, description, system prompt, model, or action tools. Omitted fields remain unchanged. Providing `action_tools` replaces the complete list. An empty array clears it. Set `dry_run: true` to preview changes. To change an agent's MCP configuration, use `add_datadog_managed_mcp_server_to_bits_agent` or `remove_datadog_managed_mcp_server_from_bits_agent`.
+
+- Update the checkout investigation agent's instructions to include deployment events.
+- Preview changing this agent to the default model returned by `list_datadog_bits_agent_models`.
+
+### `list_datadog_bits_agent_mcp_tools`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a specific agent. Returns the full catalog available to your organization, regardless of the agent's `allowed_tools` restrictions. Use the returned names when restricting tools. For capabilities absent from the catalog, use `search_datadog_workflow_actions` to search the Workflow Automation action catalog.
+
+- List the Datadog MCP tools available for this agent.
+- Check which MCP tools are available before restricting the agent's access.
+
+### `add_datadog_managed_mcp_server_to_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Adds or reconfigures the `datadog` or `code-sandbox` MCP server on an agent, preserving its OAuth MCP integrations. If the named server already exists, this tool replaces its configuration. An empty `allowed_tools` list permits all tools. For `code-sandbox`, provide `repo_urls` for repositories connected through the Source Code integration. Set `dry_run: true` to preview changes.
+
+- Restrict this agent's Datadog MCP server to selected tools from `list_datadog_bits_agent_mcp_tools`.
+- Add a code sandbox for the connected repository `github.com/example/checkout`.
+
+### `remove_datadog_managed_mcp_server_from_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Removes the `datadog` or `code-sandbox` MCP server from an agent, preserving its OAuth MCP integrations. If the server is not configured, the agent remains unchanged. Set `dry_run: true` to preview changes.
+
+- Remove the code sandbox from the checkout investigation agent.
+- Preview removing this agent's Datadog MCP server.
+
+### `run_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Run`*\
+Starts an agent with a user prompt and returns a `conversation_id` immediately while the agent runs in the background. Each call starts a separate conversation. This tool cannot add messages to an existing conversation. Poll `get_datadog_bits_agent_conversation_events` to retrieve the response.
+
+- Run the checkout investigation agent to investigate the error spike from the past hour.
+- Ask the service health agent to summarize the payments service's current status.
+
+### `list_datadog_bits_agent_conversations`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists an agent's past conversations, including IDs and titles. Use the returned IDs with `get_datadog_bits_agent_conversation_events` to inspect their history.
+
+- List past conversations for the checkout investigation agent.
+- Find the conversation from the last service health investigation.
+
+### `get_datadog_bits_agent_conversation_events`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Retrieves a conversation's event history using its `agent_id` and `conversation_id`, including prompts, agent messages, tool calls, tool results, and errors. Filter with `event_types`, or omit it to return all events. After starting a run, poll until a `final_response` event indicates success or an `application_error` event indicates failure.
+
+- Retrieve the response from the latest agent run.
+- Show the tool calls and results from this investigation.
+- Check whether this conversation has a final response or an application error.
 
 ## Alerting
 
@@ -563,7 +677,7 @@ Lists the attachments on a work item (case), or retrieves the contents of a spec
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `link_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write` and `Cases Read`*\
 Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
 
@@ -571,7 +685,7 @@ Creates a directional link between two work items (cases). The relationship is s
 - CASE-910 duplicates CASE-1234. Link them.
 
 ### `get_datadog_case_links`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
 Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
 
@@ -579,7 +693,7 @@ Lists all links for a work item (case), including each link's ID, relationship t
 - Is anything blocking the database migration case?
 
 ### `unlink_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
 Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
 
@@ -1073,6 +1187,28 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Save this query as "CPU usage by host".
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
+
+## Documentation
+
+Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+
+### `search_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Searches published Datadog documentation and returns up to 10 matching passages with links to their source pages. Returns source passages, not a generated answer. Supports English, French, Japanese, Korean, and Spanish. Other languages return no results. Search uses AI models to match by meaning. If your organization has [disabled AI providers][92], search matches by keyword only.
+
+- How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
+- What's the difference between a metric monitor and an anomaly monitor?
+- Which Datadog Agent settings control container log collection?
+
+### `read_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Reads a full Datadog documentation page from a `docs.datadoghq.com` URL or a document ID returned by `search_datadog_documentation`. Reads long pages in parts. Site-specific values, such as endpoints, appear as placeholders like `<YOUR_MCP_SERVER_ENDPOINT>`.
+
+- Read `https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/` and explain the matcher syntax.
+- Open the Datadog MCP Server setup page and summarize the toolset options.
+- Search the Datadog docs for log pipeline processors, then read the top result in full.
 
 ## Error Tracking
 
@@ -1760,6 +1896,123 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 - Disable all logpoints in session `session-12345`.
 - Stop all the logpoints in this debugging session.
 
+## Logs Configuration
+
+Tools for managing the configuration of [log pipelines][93], [indexes][94], and [archives][95]:
+
+- **Pipelines** parse and enrich incoming logs.
+- **Indexes** control indexing and retention.
+- **Archives** route logs to your cloud storage.
+
+Tools that update, delete, or reorder an existing resource return a preview first and apply the change only after you confirm it. Creating a resource does not require confirmation.
+
+To search and analyze logs, use `search_datadog_logs` and `analyze_datadog_logs` in the [Core tools](#core-tools) section.
+
+### `list_datadog_log_pipelines`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Lists your organization's [log pipelines][93] in evaluation order. Returns each pipeline's ID, name, filter query, enabled state, and processor count.
+
+- List my log pipelines in evaluation order.
+
+### `get_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Retrieves a pipeline's complete configuration by ID, including its ordered processors.
+
+- Show the configuration and processors for pipeline `<PIPELINE_ID>`.
+
+### `upsert_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines` or `Logs Write Processors`*\
+Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updated pipelines preserve fields you omit. When you provide a list field, such as processors or tags, the new list replaces the existing one. Integration-managed, read-only pipelines cannot be updated.
+
+- Create a pipeline for `service:checkout` with a Grok parser for these sample logs.
+
+### `delete_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines`*\
+Permanently removes a pipeline from your organization, including its processors and position in the evaluation order. Integration-managed, read-only pipelines cannot be deleted.
+
+- Delete pipeline `<PIPELINE_ID>`.
+
+### `move_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines`*\
+Places a pipeline immediately before or after another pipeline in the evaluation order. Changing this order affects the sequence in which matching pipelines process logs.
+
+- Move the parsing pipeline before the enrichment pipeline.
+
+### `list_datadog_log_indexes`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Lists your organization's [log indexes][94] in evaluation order. Returns each index's name, filter query, retention settings, daily limit, and exclusion filter count.
+
+- List my log indexes with their retention settings and daily limits.
+
+### `get_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Retrieves an index's complete configuration by name, including its filter query, retention settings, daily limit, and exclusion filters.
+
+- Show the configuration and exclusion filters for the production index.
+
+### `upsert_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Creates or updates an index by name. If an index with that name exists, the tool updates it; otherwise, it creates the index. Updated indexes preserve fields you omit. When you provide a list field, such as exclusion filters or tags, the new list replaces the existing one. Creating an index requires a filter query, and the index name cannot be changed after creation.
+
+- Set the daily limit for the staging index to one million logs.
+
+### `delete_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Permanently removes an index from your organization. The index name cannot be reused. Logs that would have matched the deleted index go to the next index in evaluation order whose filter matches them. Logs that match no remaining index are not indexed.
+
+- Delete the `obsolete-staging` index.
+
+### `move_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Places an index immediately before or after another index in the evaluation order. Logs are indexed in the first index whose filter matches, so changing the order can change their destination.
+
+- Move the `production-errors` index before the `production` index.
+
+### `list_datadog_log_archives`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Archives`*\
+Lists your organization's [log archives][95]. Returns each archive's ID, name, filter query, state, and destination type.
+
+- List my log archives and their destination types.
+
+### `get_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Archives`*\
+Retrieves an archive's complete configuration by ID, including its filter query, cloud storage destination, and rehydration settings.
+
+- Show the destination and rehydration settings for archive `<ARCHIVE_ID>`.
+
+### `upsert_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Creates an archive or updates an existing archive's configuration. To update an archive, provide `archive_id`; omit it to create one. Updated archives preserve fields you omit. An archive's destination cannot be changed after creation.
+
+- Update archive `<ARCHIVE_ID>` to archive logs matching `env:prod`.
+
+### `delete_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Permanently removes an archive's configuration and stops routing logs to that destination. Logs already stored in the cloud storage bucket remain intact.
+
+- Delete archive `<ARCHIVE_ID>`.
+
+### `move_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Places an archive immediately before or after another archive in the evaluation order. Logs are routed to the first archive whose filter matches, so changing the order can change their destination.
+
+- Move the production archive before the catch-all archive.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
@@ -1832,6 +2085,55 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 - Run a traceroute from host `prod-web-01` to `api.example.com`.
 - Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
+## Observability Pipelines
+
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+
+<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
+
+### `list_observability_pipelines`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
+
+- How many pipelines do we have, and how many of them are metrics pipelines?
+- Find the ID of the "Prod Agent Logs" pipeline.
+- Which pipelines were modified in the last week?
+
+### `describe_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
+
+- Explain what the "Prod Agent Logs" pipeline does.
+- Where are logs dropped in my Splunk forwarding pipeline?
+- Are there redundant or expensive processors in pipeline `abc-123-def`?
+
+### `get_observability_pipeline_component_schema`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Without arguments, returns the available source, processor, and destination types. With `types`, returns the fields of each requested component, including which are required, their types, and allowed values. The schema can lag behind the server, so check assembled configurations with `validate_observability_pipeline`.
+
+- Which sources and destinations are available in Observability Pipelines?
+- What fields are required for the `splunk_hec` source and the `amazon_s3` destination?
+- What options does the `sample` processor support?
+
+### `validate_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Read`*\
+Validates a pipeline configuration in the [Observability Pipelines API][88] format without creating or deploying anything. Returns all validation errors so the agent can fix the configuration and validate it again.
+
+- Validate this pipeline configuration before I create it.
+- Check this pipeline configuration for errors.
+
+### `create_observability_pipeline`
+*Toolset: **observability-pipelines***\
+*Permissions Required: `Observability Pipelines Deploy`*\
+Creates a pipeline from a name and a configuration in the [Observability Pipelines API][88] format, and returns the new pipeline's ID and a link to it in Datadog. Creating a pipeline does not affect existing pipelines. The new pipeline does not process data until you [install the Observability Pipelines Worker][90] for it. Use `validate_observability_pipeline` to check the configuration first. If the configuration fails validation, the tool returns the validation errors.
+
+- Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
+- Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
+
 ## Onboarding
 
 Agentic onboarding tools for guided Datadog setup and configuration.
@@ -1869,6 +2171,13 @@ Guides you through onboarding Agent Observability in Datadog.
 Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
+
+### `test_parallelization_onboarding`
+*Toolset: **onboarding***\
+*Permissions Required: None*\
+Guides you through onboarding Test Parallelization in Datadog.
+
+- Help me set up Test Parallelization for my CI pipeline.
 
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
@@ -2513,6 +2822,15 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
 
+### `override_datadog_security_findings_severity`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Sets or clears the manual severity override on up to 100 security findings. Action `set` requires a severity (`critical`, `high`, `medium`, `low`, or `info`); action `clear` removes the manual override. Supports an optional description. Findings whose severity is set by an automation rule are skipped and listed as warnings in the response.
+
+- Set the severity of these findings to low, they only affect a test environment.
+- Raise this misconfiguration to critical because the resource holds customer data.
+- Clear the manual severity override on these findings.
+
 ### `list_datadog_security_findings_automation_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Pipelines Read`*\
@@ -2780,7 +3098,7 @@ Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. U
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], [DORA metrics][66], and [Deployment Gates][2]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -2903,6 +3221,43 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
+
+Deployment Gates tools are read-only. Gates and rules in dry run are evaluated but don't block deployments, so a `fail` status with `dry_run: true` means the deployment proceeded.
+
+### `search_datadog_deployment_gates`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches configured Deployment Gates by service or environment. Returns gate configuration, not evaluation results.
+
+- Which Deployment Gates apply to the `checkout` service in `prod`?
+
+### `get_datadog_deployment_gate`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a configured Deployment Gate by its gate ID, including its rules and settings.
+
+- Show me the rules configured for Deployment Gate `abc123`.
+
+### `search_datadog_deployment_gate_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches Deployment Gate evaluations by service, environment, or status (`in_progress`, `pass`, or `fail`). Searches the last 24 hours by default, up to a maximum of 30 days.
+
+- Show me failed Deployment Gate evaluations for the `checkout` service in `prod` over the last 7 days.
+
+### `get_datadog_deployment_gate_evaluation`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Gets a Deployment Gate evaluation with the result of each rule. Use this to explain why a gate failed.
+
+- Why did Deployment Gate evaluation `abc123` fail?
+
+### `search_datadog_deployment_gate_rule_evaluations`
+*Toolset: **software-delivery***\
+*Permissions Required: `DeploymentGatesRead`*\
+Searches individual rule results across Deployment Gate evaluations. Results include failure evidence, such as triggering monitors or Watchdog insights. Use this to find which rules fail most often for a service.
+
+- Which Deployment Gate rules failed most often for the `payments` service over the last 7 days?
 
 ## Synthetics
 
@@ -3208,6 +3563,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 - Stop workflow instance `00000000-0000-0000-0000-000000000000`.
 
 [1]: /mcp_server/setup#toolsets
+[2]: /deployment_gates/
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
@@ -3259,6 +3615,15 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [84]: /account_management/governance_console/
 [85]: /security/code_security/iac_security/custom_rules/
 [86]: /infrastructure/resource_catalog/
+[87]: /observability_pipelines/
+[88]: /api/latest/observability-pipelines/
+[89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
+[90]: /observability_pipelines/configuration/install_the_worker/
+[91]: /actions/agents/
+[92]: /mcp_server/#data-handling-and-ai-providers
+[93]: /logs/log_configuration/pipelines/
+[94]: /logs/log_configuration/indexes/
+[95]: /logs/log_configuration/archives/
 
 ## Further reading
 

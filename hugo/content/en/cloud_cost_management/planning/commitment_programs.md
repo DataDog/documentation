@@ -11,7 +11,7 @@ further_reading:
   CCM Commitment Programs supports the following cloud commitments:
   <ul>
     <li><strong>AWS:</strong> Reserved Instances and Savings Plans for EC2, RDS, and ElastiCache.</li>
-    <li><strong>Azure:</strong> Virtual Machine reservations.</li>
+    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services. Utilization and unused costs require <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
     <li><strong>Google Cloud:</strong> Compute flexible committed use discounts (CUDs).</li>
   </ul>
 </div>

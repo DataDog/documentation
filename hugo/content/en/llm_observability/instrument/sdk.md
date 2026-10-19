@@ -107,6 +107,10 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _float_ - **default**: `1.0`
 <br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
 
+`DD_LLMOBS_SAMPLING_RULES`
+: optional - _JSON array_
+<br />Requires `ddtrace` 4.16.0 or later. A list of rules that set the sample rate for traces matching a set of tags. A matching rule takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Tag-based sampling rules](#tag-based-sampling-rules).
+
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
@@ -453,6 +457,8 @@ LLMObs.enable(
   sample_rate=0.5,
 )
 {{< /code-block >}}
+
+To vary the sample rate by tag instead of applying one rate to every trace, see [Tag-based sampling rules](#tag-based-sampling-rules).
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -495,6 +501,41 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+### Tag-based sampling rules
+
+<div class="alert alert-info">Tag-based sampling rules are available in the Python SDK (<code>ddtrace</code> 4.16.0 or later).</div>
+
+`DD_LLMOBS_SAMPLE_RATE` applies the same sampling rate to all traces. To use different sampling rates for different parts of your application, set `DD_LLMOBS_SAMPLING_RULES` to a JSON array of rules that match traces by tag. For example, to retain 50% of production traces and 10% of staging traces:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLING_RULES='[{"tags": {"env": "prod"}, "sample_rate": 0.5}, {"tags": {"env": "staging"}, "sample_rate": 0.1}]' \
+ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Each rule is a JSON object with the following fields:
+
+`sample_rate`
+: required - _float_
+<br />The fraction of matching traces to retain, between `0.0` and `1.0`.
+
+`tags`
+: optional - _object_
+<br />A mapping of tag names to patterns matched against their values. A rule with no `tags` matches every trace, making it useful as a final catch-all rule.
+
+Rules behave as follows:
+
+- Rules are evaluated in the order you declare them. The first matching rule's `sample_rate` overrides `DD_LLMOBS_SAMPLE_RATE` for that trace. If no rule matches, `DD_LLMOBS_SAMPLE_RATE` applies.
+- All tags specified in a rule must match for the rule to apply.
+- Tag value patterns are case-insensitive and support glob matching: `*` matches zero or more characters, and `?` matches exactly one character. For example, `{"tags": {"ml_app": "chat-*"}}` matches `chat-prod` and `chat-staging`.
+- Rules can match tags that Datadog sets on the root span, including `ml_app`, `env`, `service`, `version`, and `session_id`, as well as custom tags you set with [`LLMObs.annotate()`](#adding-tags) or `DD_TAGS`.
+- As with `DD_LLMOBS_SAMPLE_RATE`, the sampling decision is made once per trace on the root span and applies to all child spans, including those in downstream services.
+
+Sampling rules can only be configured through the environment variable; `LLMObs.enable()` has no equivalent parameter.
+
+<div class="alert alert-info">
+Rules match the root span's tags at the time of the sampling decision. The decision is final and is made when the root span finishes, or earlier if the trace makes an outbound request, hands work off to another thread or asyncio task, or is partially flushed (see <code>DD_TRACE_PARTIAL_FLUSH_MIN_SPANS</code>). To ensure a tag affects sampling, add it to the root span before any of these events occur.
+</div>
 
 ## Manual instrumentation
 
@@ -3106,7 +3147,7 @@ llmobs.annotationContext({
 
 The Agent Observability SDK provides methods to export and submit your evaluations to Datadog.
 
-<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluator Developer Guide</a>.</div>
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
@@ -3174,7 +3215,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). To migrate, rename your <code>LLMObs.submit_evaluation_for</code> calls with <code>LLMObs.submit_evaluation</code>.</div>
 
-**Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**Agent Observability** > **Settings** > **Evaluations**][1] page in Datadog.
+**Note**: Custom evaluations are produced by evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluators for your application, use the [**Agent Observability** > **Evaluators**][1] page in Datadog.
 
 The `LLMObs.submit_evaluation()` method accepts the following arguments:
 

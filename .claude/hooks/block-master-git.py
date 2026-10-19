@@ -3,7 +3,7 @@
 """
 Claude Code PreToolUse hook that blocks git commits and pushes targeting master.
 
-Enforces the Critical Rules in CLAUDE.md at the harness layer, before git runs.
+Enforces the Critical Rules in AGENTS.md at the harness layer, before git runs.
 This supplements the .husky hooks rather than replacing them: because this hook
 runs before the git process starts, it also catches --no-verify and HUSKY=0,
 which bypass husky entirely.
@@ -58,7 +58,7 @@ def has_force_flag(args):
 
 BRANCH_ADVICE = (
     "Create a feature branch first: git checkout -b <name>/<description>\n"
-    "See the Critical Rules and Branch Naming sections in CLAUDE.md."
+    "See the Critical Rules and Branch Naming sections in AGENTS.md."
 )
 
 
@@ -403,7 +403,7 @@ def check_segment(segment):
     if assigns.get("HUSKY") == "0":
         return (
             "HUSKY=0 disables the repository's git hooks.\n"
-            "CLAUDE.md forbids bypassing the .husky hooks."
+            "AGENTS.md forbids bypassing the .husky hooks."
         )
 
     subcommand, args, global_flags = find_subcommand(tokens[1:])
@@ -418,12 +418,12 @@ def check_segment(segment):
         if has_force_flag(args) or "f" in short_flags:
             return (
                 "force-push is forbidden. It rewrites history and destroys "
-                "commit history in open PRs.\nSee the Critical Rules in CLAUDE.md."
+                "commit history in open PRs.\nSee the Critical Rules in AGENTS.md."
             )
         if "--no-verify" in args:
             return (
                 "--no-verify skips the .husky pre-push guards.\n"
-                "CLAUDE.md forbids bypassing the .husky hooks."
+                "AGENTS.md forbids bypassing the .husky hooks."
             )
         reason = push_targets_protected(args, global_flags=global_flags)
         if reason:
@@ -436,7 +436,7 @@ def check_segment(segment):
         if "--no-verify" in args or "n" in short_flags:
             return (
                 "--no-verify skips the .husky pre-commit guards.\n"
-                "CLAUDE.md forbids bypassing the .husky hooks."
+                "AGENTS.md forbids bypassing the .husky hooks."
             )
         state = current_branch_state(global_flags=global_flags)
         if state:
