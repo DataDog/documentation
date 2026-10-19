@@ -7712,6 +7712,11 @@ menu:
       url: logs/explorer/federated_logs/
       parent: log_explorer
       weight: 517
+    - name: Databricks
+      identifier: log_explorer_federated_logs_databricks
+      url: logs/explorer/federated_logs/databricks/
+      parent: log_explorer_federated_logs
+      weight: 5171
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
