@@ -31,26 +31,13 @@ When you first open the graphing editor, you are on the {{< ui >}}Edit{{< /ui >}
 
 To configure your graph on dashboards, follow this process:
 
-- [Overview](#overview)
-- [Graphing editor](#graphing-editor)
-- [Configuring a graph](#configuring-a-graph)
-  - [Select your visualization](#select-your-visualization)
-  - [Define the metric](#define-the-metric)
-  - [Filter](#filter)
-  - [Aggregate and rollup](#aggregate-and-rollup)
-    - [Aggregation method](#aggregation-method)
-    - [Configure the time aggregation](#configure-the-time-aggregation)
-    - [Configure the space aggregation](#configure-the-space-aggregation)
-  - [Nested Queries](#nested-queries)
-  - [Advanced graphing](#advanced-graphing)
-    - [Hide a query from the visualization](#hide-a-query-from-the-visualization)
-  - [Create an alias](#create-an-alias)
-  - [Create a title](#create-a-title)
-  - [Save](#save)
-- [Additional options](#additional-options)
-  - [Event overlays](#event-overlays)
-  - [Split graph](#split-graph)
-- [Further Reading](#further-reading)
+1. [Select the visualization](#select-your-visualization)
+2. [Define the metric](#define-the-metric)
+3. [Filter your metric](#filter)
+4. [Configure the time aggregation](#configure-the-time-aggregation)
+5. [Configure the space aggregation](#configure-the-space-aggregation)
+6. [Apply function](#advanced-graphing)
+7. [Title the graph](#create-a-title)
 
 ### Select your visualization
 
