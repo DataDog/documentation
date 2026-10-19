@@ -36,6 +36,7 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.id}}` | The incident's public ID. |
 | `{{incident.title}}` | The incident title. |
 | `{{incident.severity}}` | The incident severity (for example, `SEV-1`, `SEV-2`). |
+| `{{incident.severity_number}}` | The numeric part of the incident severity (for example, `1` for `SEV-1`). Empty if the severity has no numeric value. |
 | `{{incident.status}}` | The incident [status level][1]. |
 | `{{incident.created}}` | Timestamp when the incident was created. |
 | `{{incident.detected}}` | Timestamp when the incident was detected. |
