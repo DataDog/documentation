@@ -22,7 +22,7 @@ export interface ApiScopesTableOptions {
   site?: string | URL;
 }
 
-// TODO: localize the column headers once Hugo has i18n keys for them.
+// MISSING_TRANSLATION_LABEL: localize the column headers once Hugo has i18n keys for them.
 const COLUMN_HEADERS = [
   "Scope name",
   "Description",

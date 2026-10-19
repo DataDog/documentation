@@ -33,7 +33,7 @@ export const CHANGELOG_FILTERS = [
 ] as const;
 export type ChangelogFilter = (typeof CHANGELOG_FILTERS)[number];
 
-// TODO: no Hugo i18n keys exist for these strings yet.
+// MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
 export const CHANGELOG_TITLE = "Changelog";
 export const CHANGELOG_INTRO =
   "Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.";
@@ -215,7 +215,7 @@ export function changelogPageTitle(
   filter: ChangelogFilter,
   pageNumber: number,
 ): string {
-  // TODO: no Hugo i18n keys exist for these strings yet.
+  // MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
   const pageQualifier = pageNumber > 1 ? `, page ${pageNumber}` : "";
   if (filter === "all") return `API Changelog${pageQualifier}`;
   return `${CHANGELOG_BUCKET_LABELS[filter]} changes${pageQualifier} - API Changelog`;
