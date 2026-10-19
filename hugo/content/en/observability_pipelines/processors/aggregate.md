@@ -46,7 +46,7 @@ Event time windows start at fixed times based on the interval. For example, with
 
 A metric with a timestamp of 12:00:07 always goes into the first window, as long as the metric arrives within the grace period.
 
-Grouping metrics by timestamp is useful for destinations that use the metric timestamp as a key. For example, Datadog Metrics overwrites earlier values that have the same timestamp.
+Grouping metrics by timestamp is useful for destinations that use the metric timestamp as a key. For example, Datadog Metrics overwrites earlier values that have the same timestamp. Grouping metrics by timestamps prevents distinct samples from overwriting one another.
 
 ### Late metrics
 
