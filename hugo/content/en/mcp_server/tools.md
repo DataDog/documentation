@@ -77,7 +77,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 ### `get_datadog_metric_context`
 *Toolset: **core***\
 *Permissions Required: `Cloud Cost Management Read` or `Metrics`*\
-Retrieves detailed information about a metric including metadata, available tags, and tag values for filtering and grouping.
+Retrieves detailed information about a metric or derived metric, including metadata, available tags, and tag values for filtering and grouping.
 
 - What tags are available for the `system.cpu.user` metric?
 - Show me all possible values for the `env` tag on `redis.info.latency_ms`.
@@ -1190,33 +1190,31 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 
 ## Derived metrics
 
-<div class="alert alert-info">The <code>derived-metrics</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>derived-metrics</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,derived-metrics</code>.</div>
-
-Tools for creating, updating, and deleting [derived metrics][92]. A derived metric saves a formula and named queries for reuse across dashboards, monitors, SLOs, and notebooks. Each query includes a name, a data source such as `metrics`, and a query expression. Use `get_datadog_metric_context` in the `core` toolset to inspect a derived metric's formula and named queries.
+Tools for creating, updating, and deleting [derived metrics][92] from formulas and named metric queries.
 
 ### `create_derived_metric`
 *Toolset: **derived-metrics***\
-*Permissions Required: `Metric Tags Write`*\
-Creates a derived metric from a metric name, formula, and complete set of named queries. The metric name must not already exist. If the name exists, creation fails without changing the existing metric.
+*Permissions Required: `metric_tags_write`*\
+Creates a derived metric from a metric name, formula, and complete set of named queries. If the metric name already exists, creation fails and the existing metric is unchanged.
 
 - Create `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{*}`, using the `metrics` data source.
 - Create `custom.cpu.total` with formula `a + b`. Query `a` is `avg:system.cpu.user{*}` and query `b` is `avg:system.cpu.system{*}`. Both queries use the `metrics` data source.
 
 ### `update_derived_metric`
 *Toolset: **derived-metrics***\
-*Permissions Required: `Metric Tags Write`*\
-Replaces the complete definition of an existing derived metric. Provide the replacement formula and every named query to retain; omitted queries are removed. If the metric does not exist, the update fails without creating it.
+*Permissions Required: `metric_tags_write`*\
+Replaces the complete definition of an existing derived metric. Provide the replacement formula and every named query to keep. The tool removes any query you omit. If the metric does not exist, the update fails without creating it.
 
 - Replace the definition of `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{env:prod}`, using the `metrics` data source.
-- Update `custom.cpu.total` to formula `a + b`, with query `a` = `avg:system.cpu.user{env:prod}` and query `b` = `avg:system.cpu.system{env:prod}`. Both queries use the `metrics` data source. Remove all other queries from the definition.
+- Update `custom.cpu.total` to formula `a + b`. Query `a` is `avg:system.cpu.user{env:prod}` and query `b` is `avg:system.cpu.system{env:prod}`. Both queries use the `metrics` data source. Remove any other queries.
 
 ### `delete_derived_metric`
 *Toolset: **derived-metrics***\
-*Permissions Required: `Metric Tags Write`*\
-Deletes a derived metric definition. Explicitly confirm the exact metric name before deletion; the tool requires `confirm_metric_name` to match `metric_name`. Deletion succeeds if the metric is already absent. Deleting a definition can break dashboards, monitors, and other resources that use the metric.
+*Permissions Required: `metric_tags_write`*\
+Deletes a derived metric definition. Deleting a definition can break dashboards, monitors, and other resources that use the metric. After you explicitly confirm the exact metric name, the agent passes that name in `confirm_metric_name`, matching `metric_name`. Deletion succeeds if the metric is already absent.
 
-- Delete `custom.cpu.user`. Confirmed deletion target: `custom.cpu.user`.
-- Delete `custom.cpu.total` if it exists. Confirmed deletion target: `custom.cpu.total`.
+- Delete the derived metric `custom.cpu.user`.
+- Delete the derived metric `custom.cpu.total` if it exists.
 
 ## Error Tracking
 
