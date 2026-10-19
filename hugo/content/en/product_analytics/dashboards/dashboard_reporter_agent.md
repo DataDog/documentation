@@ -94,7 +94,7 @@ You can start from a dashboard or from the Agents page in Product Analytics.
 
 1. Enter a name that tells readers what the report covers, such as "Checkout Weekly Health." The name appears in the title of every report.
 2. Select one or more dashboards to monitor. You can add more dashboards later.
-3. Select a predefined report format, or write your own. For a custom format, describe the questions the report should answer on each run and any formatting requirements.
+3. Select a predefined report format, such as Team Update or Leadership Update, or write your own. For a custom format, describe the questions the report should answer on each run and any formatting requirements.
 4. Select a Slack channel, a Microsoft Teams channel, or an email address to receive the reports.
 5. Choose how often the agent runs (daily, weekly, or monthly), the time it sends the report, and the time zone.
 6. Click {{< ui >}}Create{{< /ui >}}.
@@ -114,7 +114,7 @@ You can open a report in Datadog and ask the agent follow-up questions. For exam
 
 ### Ask Bits AI in Slack
 
-If your reports go to Slack and the Datadog Slack integration has Bits AI enabled, you can use Bits Chat about a report without leaving Slack. Mention `@Datadog` with your question, for example, `@Datadog Why did checkout conversion drop this week?` For setup, see [Use Bits Chat in Slack][5].
+If your reports go to Slack and the Datadog Slack integration has Bits AI enabled, you can ask Bits Chat about a report without leaving Slack. Mention `@Datadog` with your question, for example, `@Datadog Why did checkout conversion drop this week?` For setup, see [Use Bits Chat in Slack][5].
 
 ## Manage Dashboard Reporter agents
 
