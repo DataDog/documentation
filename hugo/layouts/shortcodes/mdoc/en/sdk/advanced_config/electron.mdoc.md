@@ -19,12 +19,12 @@ Pass these parameters to `init` in the main process.
 | `version` | `string` | No | | Application version. |
 | `sessionSampleRate` | `number` | No | `100` | Percentage of sessions to collect, from `0` to `100`. `0` collects no sessions, and `100` collects all sessions. |
 | `trackingConsent` | `'granted' \| 'pending' \| 'not-granted'` | No | `'granted'` | Initial tracking consent of the end user. See [Tracking consent](#tracking-consent). |
-| `logsSampleRate` | `number` | No | `100` | Percentage of renderer logs to forward, from `0` to `100`, sampled independently for each log. |
+| `logsSampleRate` | `number` | No | `100` | Percentage of renderer logs to forward, from `0` to `100`, sampled independently for each log. See [Electron log collection][3]. |
 | `traceSampleRate` | `number` | No | `100` | Percentage of main process traces to keep when no `traceSamplingRules` rule matches, from `0` to `100`. |
 | `traceSamplingRules` | `TraceSamplingRule[]` | No | `[]` | Ordered sampling rules for main process traces. See [Trace sampling rules](#trace-sampling-rules). |
-| `sessionReplaySampleRate` | `number` | No | `0` | Percentage of sampled sessions that record Session Replay, from `0` to `100`. `0` disables Session Replay. |
-| `profilingSampleRate` | `number` | No | `0` | Percentage of sampled sessions that are profiled, from `0` to `100`. `0` disables renderer profiling. |
-| `defaultPrivacyLevel` | `'mask' \| 'allow' \| 'mask-user-input'` | No | `'mask'` | Default privacy level for Session Replay in renderers. |
+| `sessionReplaySampleRate` | `number` | No | `0` | Percentage of sampled sessions that record Session Replay, from `0` to `100`. `0` disables Session Replay. See [Session Replay][4]. |
+| `profilingSampleRate` | `number` | No | `0` | Percentage of sampled sessions that are profiled, from `0` to `100`. `0` disables renderer profiling. See [Profiling][5]. |
+| `defaultPrivacyLevel` | `'mask' \| 'allow' \| 'mask-user-input'` | No | `'mask'` | Default privacy level for Session Replay in renderers. See [Session Replay privacy options][7]. |
 | `batchSize` | `'SMALL' \| 'MEDIUM' \| 'LARGE'` | No | `'MEDIUM'` | Size threshold that closes a batch file early: `SMALL` is 16 KiB, `MEDIUM` is 512 KiB, and `LARGE` is 4 MiB. |
 | `uploadFrequency` | `'RARE' \| 'NORMAL' \| 'FREQUENT'` | No | `'NORMAL'` | How often the SDK uploads pending batches, and the window over which events accumulate: `RARE` is 30 seconds, `NORMAL` is 10 seconds, and `FREQUENT` is 5 seconds. |
 | `beforeSendRum` | `RumBeforeSend` | No | | Modify or drop RUM events before they are sent. See [Modify or drop RUM events](#modify-or-drop-rum-events). |
@@ -281,8 +281,12 @@ failOperation('upload', 'abandoned', { operationKey: 'cover_photo' });
 - Pair every `startOperation` call with exactly one `succeedOperation` or `failOperation` call, using the same `name` and `operationKey`.
 - `failOperation` takes a failure reason: `error`, `abandoned`, or `other`.
 - All three functions accept the options `operationKey`, `context`, and `description`.
-- In a renderer, use `@datadog/browser-rum` with the Browser SDK [operation monitoring][3] flag enabled in its `init` call. The signatures are the same, so you can start an operation in one process and complete it in the other.
+- In a renderer, use `@datadog/browser-rum` with the Browser SDK [operation monitoring][6] flag enabled in its `init` call. The signatures are the same, so you can start an operation in one process and complete it in the other.
 
 [1]: /real_user_monitoring/application_monitoring/electron/setup
 [2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
-[3]: /real_user_monitoring/operations_monitoring/
+[3]: /logs/log_collection/electron/
+[4]: /session_replay/setup_and_configuration/?platform=electron
+[5]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=electron
+[6]: /real_user_monitoring/operations_monitoring/
+[7]: /session_replay/privacy_options/?platform=electron
