@@ -33,7 +33,7 @@ These are specifics related to particular cloud providers.
 
 ### Alibaba
 
-Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~3-6 minutes, depending on the service.
+Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of up to ~10 minutes.
 
 ### AWS
 
@@ -54,7 +54,7 @@ GCP emits metrics with 1-minute granularity. Therefore, expect metric delays of 
 
 ### OCI
 
-OCI metrics are forwarded to Datadog through [Service Connector Hubs][6] instead of a crawler. Expect metric delays of ~10 minutes.
+OCI metrics are forwarded to Datadog through [Service Connector Hubs][6] instead of a crawler. Expect metric delays of up to ~10 minutes.
 
 ## Monitors
 
