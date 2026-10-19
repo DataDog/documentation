@@ -257,10 +257,13 @@ const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
 Replace the placeholders with the values from your application, and set `allowedRendererHosts` to the hostnames of the renderer pages that are allowed to report through the main process. For the supported values, see [Advanced Configuration][setup-init-1].
 
 {% alert level="info" %}
-Windows opened before `init` completes are not tracked until you reload them. They send nothing, not even the interactions that keep the session alive. If end users only interact with such windows, the session expires after 15 minutes of inactivity and no new session starts.
+Windows opened before `init` completes are not tracked until you reload them. They send nothing, not even the interactions that keep the session alive. If end users only interact with such windows, the session expires after 15 minutes of inactivity and no new session starts. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` instead of deferring it. See [Set tracking consent][setup-init-2].
 {% /alert %}
 
+Call `init` once per launch.
+
 [setup-init-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
+[setup-init-2]: /real_user_monitoring/application_monitoring/electron/setup/#set-tracking-consent
 
 ## Set up renderer processes
 
@@ -391,6 +394,26 @@ await esbuild.build({
 If your packager cannot include external dependencies, pass `{ copyRuntimeDependencies: true }` to the plugin as a fallback. The plugin then copies the SDK, dd-trace-js, and their runtime dependencies into the build output on a best-effort basis.
 
 [setup-bundler-1]: https://www.electronforge.io/cli#usage
+
+## Set tracking consent
+
+To collect data only after the end user consents, for example to comply with GDPR or CCPA, initialize the SDK with the consent known at startup, then update it when the end user answers:
+
+```typescript
+import { init, setTrackingConsent } from '@datadog/electron-sdk';
+
+await init({
+  // ...
+  trackingConsent: 'pending',
+});
+
+// After the end user answers the consent prompt:
+setTrackingConsent(accepted ? 'granted' : 'not-granted');
+```
+
+The SDK does not restore the consent at the next launch, so pass it at each launch. Set the consent in the main process. For the possible values and their effects, see [Tracking consent][setup-consent-1].
+
+[setup-consent-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
 
 ## Next steps
 

@@ -20,23 +20,25 @@ Pass these parameters to `init` in the main process.
 | `env` | `string` | No | | Application environment. |
 | `version` | `string` | No | | Application version. |
 | `sessionSampleRate` | `number` | No | `100` | Percentage of sessions to collect, from `0` to `100`. `0` collects no sessions, and `100` collects all sessions. |
+| `trackingConsent` | `'granted' \| 'pending' \| 'not-granted'` | No | `'granted'` | Initial tracking consent of the end user. See [Tracking consent][ac-init-2]. |
 | `logsSampleRate` | `number` | No | `100` | Percentage of renderer logs to forward, from `0` to `100`, sampled independently for each log. |
 | `traceSampleRate` | `number` | No | `100` | Percentage of main process traces to keep when no `traceSamplingRules` rule matches, from `0` to `100`. |
-| `traceSamplingRules` | `TraceSamplingRule[]` | No | `[]` | Ordered sampling rules for main process traces. See [Trace sampling rules][ac-init-2]. |
+| `traceSamplingRules` | `TraceSamplingRule[]` | No | `[]` | Ordered sampling rules for main process traces. See [Trace sampling rules][ac-init-3]. |
 | `sessionReplaySampleRate` | `number` | No | `0` | Percentage of sampled sessions that record Session Replay, from `0` to `100`. `0` disables Session Replay. |
 | `profilingSampleRate` | `number` | No | `0` | Percentage of sampled sessions that are profiled, from `0` to `100`. `0` disables renderer profiling. |
 | `defaultPrivacyLevel` | `'mask' \| 'allow' \| 'mask-user-input'` | No | `'mask'` | Default privacy level for Session Replay in renderers. |
 | `batchSize` | `'SMALL' \| 'MEDIUM' \| 'LARGE'` | No | `'MEDIUM'` | Size threshold that closes a batch file early: `SMALL` is 16 KiB, `MEDIUM` is 512 KiB, and `LARGE` is 4 MiB. |
 | `uploadFrequency` | `'RARE' \| 'NORMAL' \| 'FREQUENT'` | No | `'NORMAL'` | How often the SDK uploads pending batches, and the window over which events accumulate: `RARE` is 30 seconds, `NORMAL` is 10 seconds, and `FREQUENT` is 5 seconds. |
-| `beforeSendRum` | `RumBeforeSend` | No | | Modify or drop RUM events before they are sent. See [Modify or drop RUM events][ac-init-3]. |
+| `beforeSendRum` | `RumBeforeSend` | No | | Modify or drop RUM events before they are sent. See [Modify or drop RUM events][ac-init-4]. |
 
 {% alert level="info" %}
 `sessionReplaySampleRate` and `profilingSampleRate` apply to sampled sessions only. With `sessionSampleRate: 0`, no session records Session Replay or is profiled.
 {% /alert %}
 
 [ac-init-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
-[ac-init-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#trace-sampling-rules
-[ac-init-3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
+[ac-init-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
+[ac-init-3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#trace-sampling-rules
+[ac-init-4]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
 
 ## Allowed renderer hosts
 
@@ -184,6 +186,47 @@ clearAccountInfo();
 - `addAccountExtraInfo` requires a prior `setAccountInfo` call. It ignores the standard fields `id` and `name`.
 - Set an attribute to `null` to remove it.
 - `getUserInfo` and `getAccountInfo` return a copy of the current value, or `undefined` if none is set.
+
+## Tracking consent
+
+To help you comply with regulations such as GDPR and CCPA, the SDK collects and sends data according to the end user's tracking consent.
+
+| Value | Behavior |
+|-------|----------|
+| `'granted'` (default) | The SDK collects and sends data. |
+| `'pending'` | The SDK collects data and keeps it on disk. It sends the data if consent is granted, and deletes it if consent is refused. |
+| `'not-granted'` | The SDK neither keeps nor sends new data. Data stored earlier with consent is still sent. |
+
+Initialize the SDK with the consent known at startup, and update it with `setTrackingConsent` when the end user answers:
+
+```typescript
+import { init, setTrackingConsent } from '@datadog/electron-sdk';
+
+await init({
+  // ...
+  trackingConsent: 'pending',
+});
+
+// After the end user answers the consent prompt:
+setTrackingConsent(accepted ? 'granted' : 'not-granted');
+```
+
+- Refusing consent ends the session. The next `'pending'` or `'granted'` value starts a new session. Moving between `'pending'` and `'granted'` keeps the session.
+- RUM events, logs, spans, profiles, and Session Replay recordings that start while consent is refused, or pending and then refused, are not sent, even if they are reported after consent is granted again.
+- The SDK does not restore the consent at the next launch, so pass it at each launch. Data kept while consent is pending is deleted at the next launch if no decision was made.
+- Call `setTrackingConsent` after `init` resolves. An earlier call can be ignored.
+- An invalid `trackingConsent` value aborts `init`. An invalid value passed to `setTrackingConsent` is handled as `'not-granted'`.
+- The SDK starts Electron's crash reporter, which writes native crash dumps locally regardless of consent. At the next launch, a crash is evaluated against the consent at the time it happened, then sent, kept, or dropped according to the consent of that launch. Its dump is deleted either way.
+- Requests that the main process makes carry trace headers when consent is `'granted'` or `'pending'`, so their traces link to the data sent if consent is granted. They carry none when consent is refused.
+
+### Renderer processes
+
+Set the consent in the main process. It applies to the renderers allowed by `allowedRendererHosts`, which report through the main process. Other renderers run the Browser SDK on its own, with its own `trackingConsent` setting.
+
+For renderers that report through the main process, the Browser SDK is not informed of the consent and keeps collecting. As a result:
+
+- Requests that the Browser SDK traces (`allowedTracingUrls`) carry trace headers whatever the consent.
+- When consent is granted after a refusal, an open page's view moves to the new session with its next update. As a result, the new session appears in Datadog. Unlike other data, the view is sent even if it started while consent was refused, or pending and then refused. It includes what it measured since it started. The previous session no longer lists it. In the new session, Session Replay plays back the page only from its next view.
 
 ## Custom duration vitals
 

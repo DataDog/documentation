@@ -108,6 +108,8 @@ Attributes set with the global context are sent in the `context` field of events
 
 The SDK stores events on disk before uploading them to Datadog. Events are preserved across application restarts, so data collected before an unexpected shutdown is sent on the next launch.
 
+The [tracking consent][10] decides what the SDK keeps and sends. While consent is `'pending'`, the SDK keeps data on disk until the end user decides. It deletes data kept while consent is pending if no decision is made before the next launch. When consent is `'not-granted'`, the SDK does not store new data.
+
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#global-context
 [3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
@@ -117,3 +119,4 @@ The SDK stores events on disk before uploading them to Datadog. Events are prese
 [7]: /data_security/real_user_monitoring/#geolocation
 [8]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#user-and-account-information
 [9]: /real_user_monitoring/application_monitoring/electron/error_tracking/#prepare-your-source-maps
+[10]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent

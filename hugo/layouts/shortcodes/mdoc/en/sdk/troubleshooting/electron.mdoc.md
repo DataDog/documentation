@@ -13,7 +13,13 @@ If you experience unexpected behavior with the Datadog Electron SDK, use this gu
 
 Windows opened before `init` completes are not tracked until you reload them. They send nothing, not even the interactions that keep the session alive. If end users only interact with such windows, the session expires after 15 minutes of inactivity and no new session starts.
 
-To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes.
+To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` instead of deferring it. See [Tracking consent][7].
+
+### `init` returns `false`
+
+`init` returns `false` if the configuration is invalid.
+
+To fix this, check the configuration passed to `init`. Call `init` once per launch. To change the tracking consent later, call `setTrackingConsent` instead of calling `init` again. See [Tracking consent][7].
 
 ### Renderer events are missing
 
@@ -41,3 +47,4 @@ To fix this, return `false` for events that can be dropped, and modify the edita
 [4]: /real_user_monitoring/application_monitoring/browser/setup/
 [5]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#custom-duration-vitals
 [6]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
+[7]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
