@@ -45,7 +45,7 @@ Remote Configuration is on by default in most environments, but it has to be ena
 
  - **Your organization.** On the [Remote Configuration][9] settings page, confirm Remote Configuration is enabled. Enabling it requires the [`org_management`][11] permission.
  - **The Agent's API key.** The API key the Agent uses must have the Remote Configuration capability. Check it on the [API Keys][10] page. This requires the [`api_keys_write`][12] permission. An Agent using a key without this capability reports an `UNAUTHORIZED` status.
-3. **The Agent.** `remote_configuration.enabled` defaults to `true` in Agent `7.47.0` and later, so usually there is nothing to change. Set it explicitly in [`datadog.yaml`][13] (or through `DD_REMOTE_CONFIGURATION_ENABLED`) in two cases:
+ - **The Agent.** `remote_configuration.enabled` defaults to `true` in Agent `7.47.0` and later, so usually there is nothing to change. Set it explicitly in [`datadog.yaml`][13] (or through `DD_REMOTE_CONFIGURATION_ENABLED`) in two cases:
 
    - It was previously set to `false`.
    - The Agent reports to GovCloud (`ddog-gov.com`) or runs in FIPS mode. Remote Configuration is **disabled by default** in those environments and does not turn on unless you set it.
