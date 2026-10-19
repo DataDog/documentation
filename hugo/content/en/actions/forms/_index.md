@@ -22,54 +22,47 @@ Some ways you can use forms:
 
 ## Create a form
 
-On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}, then select a creation method:
+On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}. The **Build a form with Bits Chat** page opens with a prompt field.
+
+1. Describe the form you want to build. To use one of the rotating example prompts shown in the field, press **Tab**. To use one of the suggested prompts listed below the field, click it. Then submit your prompt.
+1. Your form opens directly in the form editor with [Bits Chat][3], where you can continue describing changes to refine the form.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
+
+You can also ask Bits Chat to create a form from anywhere in Datadog. Or use an AI coding assistant connected to the Datadog MCP Server. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
+
+To start a form another way, under **Get started in other ways**, select one of the following options. Each one takes you directly to the form editor, where you can name your form and add or edit components.
 
 {{< tabs >}}
-{{% tab "Create with AI" %}}
-1. Select {{< ui >}}Create with AI{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}. The form editor opens with [Bits Chat][100].
-1. Describe the form you want to build in the Bits Chat panel.
-1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
-
-You can also ask Bits Chat to create a form from anywhere in Datadog, not only from the Forms editor. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
-
-[100]: /bits_ai/bits_chat/
-
-{{% /tab %}}
-
-{{% tab "Blank form" %}}
-1. Select {{< ui >}}Start with a blank form{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}.
-1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
-1. To add a component, click {{< ui >}}Add Component{{< /ui >}}, or in the {{< ui >}}Fields{{< /ui >}} panel, click the plus **+** icon. See [Form components][3] for the full list of component types and their options.
-1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
-
-[3]: /actions/forms/components/
-
-{{% /tab %}}
-
 {{% tab "Blueprint" %}}
 Blueprints are starter forms for common use cases, pre-loaded with sample questions. Some blueprints include a pre-configured automation. Available blueprints include Developer Experience Survey, IDP Feedback, Work Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
 
-1. Select {{< ui >}}Create from blueprint{{< /ui >}} and browse the available templates.
-1. Select a blueprint and click {{< ui >}}Continue{{< /ui >}}.
-1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
-1. To further customize your form, see [Form components][3].
+1. Select {{< ui >}}View Blueprints{{< /ui >}} and browse the available templates.
+1. Select a blueprint. The form editor opens with the blueprint's fields and, if included, its automation.
+1. To further customize your form, see [Form components][4].
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
 
-[3]: /actions/forms/components/
+[4]: /actions/forms/components/
 {{% /tab %}}
 
 {{% tab "Import" %}}
 You can import an existing form from a PDF or JSON file.
 
 1. Select {{< ui >}}Import a form{{< /ui >}}. An import dialog opens.
-1. Choose a source and follow the prompts.
-1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
-1. To further customize your form, see [Form components][3].
+1. Choose a source and follow the prompts. The form editor opens with the imported fields.
+1. To further customize your form, see [Form components][4].
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
 
-[3]: /actions/forms/components/
+[4]: /actions/forms/components/
+{{% /tab %}}
+
+{{% tab "Start from scratch" %}}
+1. Select {{< ui >}}Start from scratch{{< /ui >}}. An empty form opens in the form editor.
+1. To add a component, click {{< ui >}}Add Component{{< /ui >}}, or in the {{< ui >}}Fields{{< /ui >}} panel, click the plus **+** icon. See [Form components][4] for the full list of component types and their options.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
+
+[4]: /actions/forms/components/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -100,7 +93,7 @@ From the [Forms][2] page, click a form to open it in the editor. In the editor h
 | Import Form | Import fields from a PDF or JSON file into the current form. |
 | Export Form (JSON) | Download the form as a JSON file. |
 
-For more information on managing responses, see [Form responses][4].
+For more information on managing responses, see [Form responses][5].
 
 ## Share a form
 
@@ -117,7 +110,7 @@ Add individual users or teams as recipients. Enable {{< ui >}}Notify added teamm
 
 Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a dashboard.
 
-Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][5] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
+Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][6] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Share with external users" level="h3" expanded=false %}}
@@ -132,7 +125,7 @@ The following options are available:
 
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.
 
-To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][15].
+To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][7].
 
 ## Add a form to a dashboard
 
@@ -142,7 +135,7 @@ To add a form to a dashboard from the form editor:
 1. Under {{< ui >}}Add to Dashboard{{< /ui >}}, select an existing dashboard or create one, then click {{< ui >}}Add{{< /ui >}}.
 
 You can also add a form to a dashboard directly from the dashboard:
-1. Navigate to a [dashboard][6].
+1. Navigate to a [dashboard][8].
 1. Click **Add Widgets** to open the side panel.
 1. Click the **Apps** tab.
 1. Select **Form Widget**.
@@ -150,18 +143,18 @@ You can also add a form to a dashboard directly from the dashboard:
 
 ## Add automation
 
-After creating a form, you can add an [action][7] or [workflow blueprint][8] that triggers automatically when a form is submitted.
+After creating a form, you can add an [action][9] or [workflow blueprint][10] that triggers automatically when a form is submitted.
 1. From the [Forms][2] page, click a form.
 1. At the top of the form, select {{< ui >}}Automation{{< /ui >}}.
 1. Choose an action or blueprint.
-1. The action or blueprint opens in a workflow canvas, where you can [edit it][9].
+1. The action or blueprint opens in a workflow canvas, where you can [edit it][11].
 1. Click {{< ui >}}Create{{< /ui >}}.
 
-**Note**: Automations triggered by forms appear under [Workflow Automation][10].
+**Note**: Automations triggered by forms appear under [Workflow Automation][12].
 
 ## Create and manage forms with MCP
 
-Connect an external AI agent to the [Datadog MCP Server][11] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][12]. You can also ask [Bits Chat][13] to build a form from anywhere in Datadog. See [Forms][14] in the Datadog MCP Server tools reference for the full list of available tools.
+Connect an external AI agent to the [Datadog MCP Server][13] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][14]. You can also ask [Bits Chat][15] to build a form from anywhere in Datadog. For a list of available tools, see [Forms][16] in the Datadog MCP Server tools reference.
 
 ## Manage access
 
@@ -178,16 +171,17 @@ By default, only the creator of a form can access it. To change the permissions 
 
 [1]: /incident_response/work_management/
 [2]: https://app.datadoghq.com/forms
-[3]: /actions/forms/components/
-[4]: /actions/forms/responses/
-[5]: /internal_developer_portal/self_service_actions/
-[6]: /dashboards/
-[7]: https://app.datadoghq.com/actions/action-catalog/
-[8]: https://app.datadoghq.com/workflow/blueprints
-[9]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
-[10]: https://app.datadoghq.com/workflow
-[11]: /mcp_server/
-[12]: /mcp_server/setup/#toolsets
-[13]: /bits_ai/bits_chat/
-[14]: /mcp_server/tools/#forms
-[15]: /actions/forms/guide/prefill/
+[3]: /bits_ai/bits_chat/
+[4]: /actions/forms/components/
+[5]: /actions/forms/responses/
+[6]: /internal_developer_portal/self_service_actions/
+[7]: /actions/forms/guide/prefill/
+[8]: /dashboards/
+[9]: https://app.datadoghq.com/actions/action-catalog/
+[10]: https://app.datadoghq.com/workflow/blueprints
+[11]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
+[12]: https://app.datadoghq.com/workflow
+[13]: /mcp_server/
+[14]: /mcp_server/setup/#toolsets
+[15]: /bits_ai/bits_chat/
+[16]: /mcp_server/tools/#forms

@@ -1,37 +1,28 @@
 ---
 title: Group Product Analytics Events
-further_reading:
-- link: "/real_user_monitoring/explorer/search/"
-  tag: "Documentation"
-  text: "Search for your events"
+description: Add facet breakdowns to split your Product Analytics query into multiple values.
 ---
 
-## Overview
+A query without a breakdown returns a single value, such as a total count of views. Add a *breakdown* to split that value into categories. For example, given a query of total views, you might add a breakdown for country so you can see where views come from.
 
-Product Analytics events are valuable both individually and collectively. The search query contains information to aggregate a subset of events.
+## Add a breakdown
 
-{{< img src="product_analytics/analytics/group/pana_group_search_bar.png" alt="Group into fields section of the Search query" style="width:100%;" >}}
+Click {{< ui >}}Add breakdown{{< /ui >}} to add up to four breakdowns to a single query. Each breakdown appears as a row under {{< ui >}}compared by{{< /ui >}} in the query builder.
 
-Your selection of fields to group, aggregate, and measure your events are preserved as you switch between visualization types.
+Each breakdown you add splits the results into ever smaller values. For example, a query broken down by both browser and country returns one bucket for each browser-and-country combination in your data, such as Chrome/United States and Chrome/Germany.
 
-## Aggregate by fields
+{{< img src="product_analytics/analytics/group/analytics-breakdown-1.png" alt="A query broken down by browser and country in the Analytics chart builder." style="width:90%;" >}}
 
-All Product Analytics events that match your filter query are aggregated into groups based on the value of one or several event facets. You can extract the following measures in addition to the aggregates:
+## Choose a measure
 
-- Count of events per group
+By default, a query measures the count of {{< ui >}}All events{{< /ui >}}.
 
-  {{< img src="product_analytics/analytics/group/pana_group_by_action.png" alt="Group by count of events" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/group/analytics-measure-count-1.png" alt="The default count of all events in the Analytics chart builder." style="width:90%;" >}}
 
-- Unique count of coded values for a facet per group
+Change {{< ui >}}All events{{< /ui >}} to a different value to see a unique count of the specified value. For example, selecting {{< ui >}}Browser Name{{< /ui >}} returns the number of distinct browsers that viewed a page.
 
-  {{< img src="product_analytics/analytics/group/pana_group_by_loading_time.png" alt="Group by unique count of coded values" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/group/analytics-measure-count-unique-1.png" alt="A unique count by browser in the Analytics chart builder." style="width:90%;" >}}
 
-- Statistical operations (such as minimum, maximum, average, and percentiles) on a facet's numerical values per group
+Change the measure to a statistical aggregation of a numerical facet, such as loading time. Choose average, minimum, maximum, median, sum, or a percentile (75th, 90th, 95th, 98th, or 99th).
 
-  {{< img src="product_analytics/analytics/group/pana_group_distribution.png" alt="Group into fields using statistical operations" style="width:90%;" >}}
-
-Individual events with multiple values for a single facet belong to that number of aggregates. For example, an event with the `country:france` and `browser:chrome` attributes are counted once in the `country:france` aggregate and once in the `browser:chrome` aggregate.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+{{< img src="product_analytics/analytics/group/analytics-measure-statistical-1.png" alt="Statistical aggregation options for loading time in the Analytics chart builder." style="width:90%;" >}}

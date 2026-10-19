@@ -18,12 +18,6 @@ further_reading:
   text: Datadog에서 App and API Protection이 작동하는 방식
 title: macOS에서 App and API Protection을 설정하세요.
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection은 정부 기관용 Datadog 사이트 US1-FED에서 미리 보기로 제공되고 있습니다.
-</div>
-{{< /site-region >}}
-
 서비스의 프로그래밍 언어를 선택하여 macOS 서비스에서 App and API Protection(AAP)를 설정하는 방법을 알아보세요.
 
 <div class="alert alert-info">

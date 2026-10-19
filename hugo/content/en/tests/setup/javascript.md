@@ -626,28 +626,46 @@ For more information, see [Code Coverage][6].
 
 The following is a list of the most important configuration settings that can be used with the SDK.
 
-`test_session.name`
-: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`. For `dd-trace` v5, a combination of CI job name and test command.<br/>
-**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
+If you set these as environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
 
-`service`
+`service` (Optional)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: (test framework name)<br/>
+**Default**: When tests run with [Nx][27], the Nx package name. Otherwise, the name in the nearest `package.json`, or `node` if unavailable.<br/>
 **Example**: `my-ui`
 
-`env`
+`env` (Optional)
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
-**Default**: `none`<br/>
+**Default**: `(empty)`<br/>
 **Examples**: `local`, `ci`
 
-`url`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+`site` (Optional for Agentless mode)
+: The [Datadog site][25] to upload test results to. Set this configuration when using a site other than US1.<br/>
+**Environment variable**: `DD_SITE`<br/>
+**Default**: `datadoghq.com`
+
+`url` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
-**Default**: `http://localhost:8126`
+**Default**: `http://127.0.0.1:8126`
+
+### Environment variables
+
+The following settings are available only as environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to authenticate test result uploads. This variable does not enable Agentless mode.<br/>
+**Default**: `(empty)`
+
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
+**Default**: When tests run with [Lage][26], the Lage package name. Otherwise, the CI job name and framework command, or the framework command if the CI job name is unavailable.<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7]. All other [Datadog Tracer configuration][8] options can also be used.
 
@@ -657,7 +675,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 ## Browser testing media upload
 
-Test Optimization can upload test failure screenshots from Cypress, Playwright, and WebdriverIO. It can also upload failed test videos from Cypress and Playwright.
+Test Optimization can upload test failure screenshots and videos from Cypress, Playwright, and WebdriverIO.
 
 {{< tabs >}}
 {{% tab "Cypress" %}}
@@ -668,9 +686,11 @@ When enabled, Test Optimization uploads screenshots that Cypress captures when a
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-Use [`dd-trace` v5.112.0 or later][1] on the v5 release line, or [`dd-trace` v6.1.0 or later][2] on the v6 release line.
+Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][3] is set to `true` (the default).
+When `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` is unset, Test Optimization automatically uploads failure screenshots if [`screenshotOnRunFailure`][3] is `true` in your Cypress configuration (the default). Set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` to enable failure capture and uploads regardless of this setting.
+
+To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`. This does not change Cypress's screenshot capture setting.
 
 ### Upload failed test videos
 
@@ -680,10 +700,12 @@ When enabled, Test Optimization uploads the video that Cypress records for a spe
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-video-player.png" alt="The video player displaying a Cypress failed test video." style="width:100%;" >}}
 
-To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Cypress configuration, set [`video`][4] or `e2e.video` to `true`.
+When `DD_TEST_FAILURE_VIDEOS_ENABLED` is unset, Test Optimization automatically uploads videos from failed test suites if [`video`][4] or `e2e.video` is `true` in your Cypress configuration. Set `DD_TEST_FAILURE_VIDEOS_ENABLED=1` to enable recording and uploads regardless of this setting.
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
+To disable video uploads, set `DD_TEST_FAILURE_VIDEOS_ENABLED=0`. This does not change Cypress's video recording setting.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
 [3]: https://docs.cypress.io/app/references/configuration#Screenshots
 [4]: https://docs.cypress.io/app/guides/screenshots-and-videos#Videos
 {{% /tab %}}
@@ -696,13 +718,17 @@ When enabled, Test Optimization uploads screenshots that Playwright captures whe
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-Use [`dd-trace` v5.116.0 or later][1] on the v5 release line, or [`dd-trace` v6.5.0 or later][2] on the v6 release line.
+Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][3] under `use` to one of the following values:
+When `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` is unset, Test Optimization automatically uploads failure screenshots if [`screenshot`][3] under `use` in your Playwright configuration is set to one of the following values:
 
 - `'on'`: Capture screenshot after each test.
 - `'only-on-failure'`: Capture screenshot after each test failure.
 - `'on-first-failure'`: Capture screenshot after each test's first failure.
+
+With Playwright 1.38 or later, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` to enable failure capture and uploads regardless of the screenshot setting.
+
+To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`. This does not change Playwright's screenshot capture setting.
 
 **Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
 
@@ -714,10 +740,12 @@ When enabled, Test Optimization uploads videos that Playwright records for faile
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-video-player.png" alt="The video player displaying a Playwright failed test video." style="width:100%;" >}}
 
-To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`video`][4] under `use` to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`.
+When `DD_TEST_FAILURE_VIDEOS_ENABLED` is unset, Test Optimization automatically uploads videos from failed tests if [`video`][4] under `use` in your Playwright configuration is set to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`. With Playwright 1.38 or later, set `DD_TEST_FAILURE_VIDEOS_ENABLED=1` to enable recording and uploads regardless of this setting.
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
+To disable video uploads, set `DD_TEST_FAILURE_VIDEOS_ENABLED=0`. This does not change Playwright's video recording setting.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
 [3]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 [4]: https://playwright.dev/docs/videos#record-video
 {{% /tab %}}
@@ -726,16 +754,28 @@ To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` env
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
+Test Optimization automatically captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A browser test failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-Use [`dd-trace` v5.125.0 or later][1] on the v5 release line, or [`dd-trace` v6.14.0 or later][2] on the v6 release line.
+Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. No additional WebdriverIO configuration is required.
+No additional WebdriverIO configuration is required. To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`.
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.125.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.14.0
+### Upload failed test videos
+
+WebdriverIO video recording and uploads are disabled by default. To enable them for WebdriverIO 9 or later with Mocha or Jasmine:
+
+1. Install [FFmpeg][3] with the `libvpx` encoder and make the `ffmpeg` executable available on the test process's `PATH`.
+2. Set `DD_TEST_FAILURE_VIDEOS_ENABLED=1`.
+
+To disable video recording and uploads, unset `DD_TEST_FAILURE_VIDEOS_ENABLED` or set it to `0`.
+
+No additional WebdriverIO configuration is required beyond the steps above.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
+[3]: https://ffmpeg.org/download.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -855,9 +895,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 ## Known limitations
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, `vitest`, and `webdriverio` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, Playwright, or WebdriverIO, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
@@ -948,10 +988,10 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value is:
+If `DD_TEST_SESSION_NAME` is not specified:
 
-- For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`
-- For `dd-trace` v5, a combination of the CI job name and the command used to run the tests (for example, `my-ci-job yarn test`)
+- When tests run with [Lage][26], the default is the Lage package name (for example, `my-package`).
+- Otherwise, the default is the CI job name and framework command (for example, `unit-tests-jest`). If the CI job name is unavailable, the framework command is used (for example, `jest`).
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
@@ -979,3 +1019,6 @@ The test session name should be unique within a repository to help you distingui
 [22]: /tests/flaky_tests/early_flake_detection/
 [23]: /tests/flaky_tests/auto_test_retries/
 [24]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
+[25]: /getting_started/site/
+[26]: https://microsoft.github.io/lage/docs/introduction
+[27]: https://nx.dev/docs/features/run-tasks

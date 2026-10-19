@@ -59,7 +59,7 @@ Esto le permite identificar rápidamente problemas, hacer un seguimiento del ren
 
 ### Correlacione APM y Agent Observability {#correlate-apm-and-agent-observability}
 
-{{< img src="llm_observability/index/llm_apm_example_light.png" alt="Una traza en Datadog APM. La pestaña Overview muestra una sección titulada LLM Observability, con un enlace para ver el tramo en Agent Observability, así como el texto de entrada y salida." style="width:100%">}}
+{{< img src="llm_observability/index/llm_apm_example_light.png" alt="Una traza en Datadog APM. La pestaña Overview muestra una sección titulada LLM Observability, con un enlace para visualizar el tramo en Agent Observability, así como el texto de entrada y salida." style="width:100%">}}
 
 Para aplicaciones instrumentadas con Datadog APM, puede [correlacionar APM y Agent Observability][2] a través del SDK. La correlación de APM con Agent Observability proporciona visibilidad completa de extremo a extremo y un análisis exhaustivo, desde problemas de la aplicación hasta causas raíz específicas de LLM.
 
@@ -77,6 +77,10 @@ Aprenda a hacer un seguimiento de aplicaciones de LLM agénticas, que utilizan m
 
 [Prompt Management][7] proporciona un registro centralizado para los prompts utilizados por sus aplicaciones de LLM. Cree y versione prompts en Datadog, a través del SDK de Python o a través de la API, y luego recupérelos en tiempo de ejecución con el SDK. Esto desacopla la iteración de prompts del ciclo de implementación de su aplicación. Consulte la [documentación de Prompt Management][7] para obtener más detalles.
 
+### Prompt Experimentation {#prompt-experimentation}
+
+[Prompt Experimentation][8] compara versiones de prompts gestionadas con pruebas A/B e implementa versiones de forma progresiva con Guarded Rollouts que se detienen cuando Datadog detecta una regresión.
+
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,3 +92,4 @@ Aprenda a hacer un seguimiento de aplicaciones de LLM agénticas, que utilizan m
 [5]: /es/llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /es/llm_observability/configure/prompt_management
+[8]: /es/llm_observability/configure/prompt_experimentation

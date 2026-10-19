@@ -44,7 +44,7 @@ Debug complex LLM workflows with detailed execution visibility:
 
 {{< img src="llm_observability/index/llm_example_eval_light.png" alt="Detail view of a span in Agent Observability, Evaluations tab. Displays a Hallucination evaluation with 'Confirmed Contradiction', the flagged output, context quote, and an explanation of why this was flagged." style="width:100%">}}
 
-Ensure your LLM agents or applications meets quality standards with online evaluations. For comprehensive information about Datadog-hosted and managed evaluations, ingesting custom evaluations, and safety monitoring capabilities, see the [Evaluations documentation][5].
+Help your LLM agents or applications meet quality standards with online evaluations. For comprehensive information about Datadog-hosted and managed evaluators, ingesting custom evaluations, and safety monitoring capabilities, see the [Evaluations documentation][5].
 
 ### Query your LLM application's traces and spans
 
@@ -79,6 +79,10 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 
 [Prompt Management][7] provides a centralized registry for the prompts used by your LLM applications. Create and version prompts in Datadog, through the Python SDK, or through the API, then retrieve them at runtime with the SDK. This decouples prompt iteration from your application's deployment cycle. See the [Prompt Management documentation][7] for details.
 
+### Prompt Experimentation
+
+[Prompt Experimentation][8] compares managed prompt versions with A/B tests and deploys versions progressively with Guarded Rollouts that pause when Datadog detects a regression.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,3 +94,4 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 [5]: /llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /llm_observability/configure/prompt_management
+[8]: /llm_observability/configure/prompt_experimentation

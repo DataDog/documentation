@@ -162,7 +162,7 @@ Events that match the following queries are marked as notable. You can also retr
 | Changes to APM retention filters | `@evt.name:APM @asset.type:retention_filter` |
 | Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
 | Changes to metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
-| Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:rum_application @action:(created OR deleted)` |
 | Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
 | Activation, deactivation, and modification of Product Analytics for applications | `@evt.name:"Product Analytics" @asset.type:product_analytics @action:(enabled OR disabled OR modified)` |
@@ -190,7 +190,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
-To apply a query filter with Reference Tables, click on the {{< ui >}}+ Add{{< /ui >}} button next to the query editor and select {{< ui >}}Join with Reference Table{{< /ui >}}. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
+To apply a query filter with Reference Tables, click on the {{< ui >}}\+ Add{{< /ui >}} button next to the query editor and select {{< ui >}}Join with Reference Table{{< /ui >}}. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
 
 {{< img src="account_management/audit_logs/reference_tables.png" alt="The Datadog Audit Trail explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
@@ -242,11 +242,6 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
 
-## Audit terminal commands with CoTerm
-
-[CoTerm][14] allows you to record terminal sessions for analysis in Datadog. You can use CoTerm to audit sensitive system changes done through terminals. You can then review these commands and their output as logs and events in Datadog.
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -264,9 +259,7 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [11]: /dashboards/widgets/list/
 [12]: /dashboards/querying/#define-the-metric/
 [13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
-[14]: /coterm
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
 [17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
 [18]: /account_management/audit_trail/guides/track_agentic_usage_in_your_organization/
-

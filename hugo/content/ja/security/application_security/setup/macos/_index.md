@@ -9,26 +9,20 @@ further_reading:
   text: ユーザーアクティビティの追跡
 - link: /security/default_rules/?category=cat-application-security
   tag: ドキュメント
-  text: すぐに使える App and API Protection ルール
+  text: OOTB App and API Protection ルール
 - link: /security/application_security/troubleshooting
   tag: ドキュメント
   text: App and API Protection のトラブルシューティング
 - link: /security/application_security/how-it-works/
   tag: ドキュメント
   text: How App and API Protection Works in Datadog
-title: macOS での App and API Protection のセットアップ
+title: macOSでApp and API Protection (AAP) サービスを設定してください
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection は、Datadog Government サイト US1-FED でプレビュー版として提供されています。
-</div>
-{{< /site-region >}}
-
-macOS サービスで App and API Protection (AAP) をセットアップする方法については、サービスのプログラミング言語を選択してください。
+サービスのプログラミング言語を選択して、macOSサービスでApp and API Protection (AAP) を設定する方法を学びます。
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">環境が見当たりませんか？</p>
-  <span>見当たらない環境については、<a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">こちら</a>からリクエストを送信してください。</span>
+  <span>不足している環境については、<a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">こちら</a>からリクエストを送信してください。</span>
 </div>
 
 {{< appsec-integrations >}}

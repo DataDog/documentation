@@ -32,7 +32,7 @@ You can select multiple providers in the {{< ui >}}Provider{{< /ui >}} field on 
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Explorer page" style="width:40%;" >}}
 
-Dropdown filters like {{< ui >}}Provider{{< /ui >}} and {{< ui >}}Team{{< /ui >}} maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click {{< ui >}}+ Filter{{< /ui >}}.
+Dropdown filters like {{< ui >}}Provider{{< /ui >}} and {{< ui >}}Team{{< /ui >}} maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click {{< ui >}}\+ Filter{{< /ui >}}.
 
 {{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Explorer page" style="width:100%;" >}}
 

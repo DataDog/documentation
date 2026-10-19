@@ -38,7 +38,7 @@ title: 사용자 지정 LLM-as-a-Judge 평가
 
 Agent Observability의 [평가 페이지][1]에서 사용자 지정 평가를 생성하고 관리할 수 있습니다. 평가 설명을 제공하여 평가를 생성하거나, 당사에서 제공하는 기존 [LLM-as-a-judge 평가 템플릿][7]을 사용 및 확장하거나, 처음부터 직접 만들 수도 있습니다. 트레이싱을 활성화하여 평가에서 트레이스를 확인할 수 있습니다.
 
-<div class="alert alert-info">SDK에 이미 <code>LLMJudge</code> 가 정의되어 있다면 UI에서 구성을 다시 만들지 않고 Datadog에 직접 게시할 수 있습니다. 자세한 내용은 <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Datadog 관리형 평가로서 LLMJudge 게시하기</a>를 참조하십시오.</div>
+<div class="alert alert-info">SDK에 이미 <code>LLMJudge</code> 가 정의되어 있다면 UI에서 구성을 다시 만들지 않고 Datadog에 직접 게시할 수 있습니다. <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">LLMJudge를 Datadog 관리형 평가로 게시하기를 참조하세요.</a></div>
 
 [호환성 요구 사항][6]에 대해 자세히 알아보세요.
 
@@ -102,7 +102,7 @@ Span Input: {{span_input}}
    오른쪽 패널({{< ui >}}Filtered Spans{{< /ui >}}은 스팬 범위, {{< ui >}}Filtered Traces{{< /ui >}}는 트레이스 범위, {{< ui >}}Filtered Sessions{{< /ui >}}은 세션 범위)을 사용하여 스팬 데이터를 변수로 추가할 수도 있습니다.
    1. 스팬, 트레이스 또는 세션이 오른쪽에 표시되도록 계정과 애플리케이션을 선택하세요.
    2. 오른쪽에 있는 스팬 중 하나를 선택하여 해당 JSON을 확인하세요.
-   3. 사용자 프롬프트에 JSON을 추가하려면 {{< ui >}}+{{< /ui >}}를 선택하세요.
+   3. 사용자 프롬프트에 JSON을 추가하려면 {{< ui >}}\+{{< /ui >}}를 선택하세요.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="사용자 지정 평가 구성 오른쪽 창에 있는 JSON 뷰의 메뉴 콘텐츠로, '메시지에 변수 추가' 옵션이 표시되어 있습니다." style="width:40%;" >}}
 

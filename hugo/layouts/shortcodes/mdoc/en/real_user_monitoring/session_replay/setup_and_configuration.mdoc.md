@@ -98,6 +98,10 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 
 SessionReplay.enable(sessionReplayConfig)
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Android -->
 
@@ -136,6 +140,10 @@ SessionReplay.enable(
   )
 )
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end iOS -->
@@ -188,6 +196,10 @@ If your app uses Material on Android, add:
 ```kotlin
 SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -344,7 +356,7 @@ DdSdkReactNative.initialize(configuration)
 
 During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
 
-### Step 4 - (iOS only) Update your iOS pods.
+### Step 4 - (iOS only) Update your iOS pods
 
 ```shell
 cd ios && pod install
@@ -352,7 +364,11 @@ cd ios && pod install
 
 ### Step 5 - Rebuild your app
 
-Rebuild your iOS and Android apps
+Rebuild your iOS and Android apps.
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 
@@ -440,6 +456,10 @@ class _MyAppState extends State<MyApp> {
 Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
 
 This setting is under the **Runner** target > **Build Settings** > **Deployment**.
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end Flutter -->
@@ -590,6 +610,21 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+### Disable Session Replay
+
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][35].
+
+**Note**: If you're using a version of the RUM Browser SDK earlier than v5.0.0, set `replaySampleRate` to `0` instead.
+{% /if %}
+<!-- end Browser -->
+
+<!-- Mobile -->
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
+To stop session recordings, set the sample rate shown in the [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) section to `0`.
+{% /if %}
+<!-- end Mobile -->
 
 ### Start or stop the recording manually
 
@@ -719,6 +754,74 @@ SessionReplay.stopRecording();
 {% /if %}
 <!-- end React Native -->
 
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+### Record canvas elements
+
+{% alert level="info" %}
+Canvas recording for Browser Session Replay is in Preview.
+{% /alert %}
+
+Session Replay does not record the contents of `<canvas>` elements by default, so certain charts, maps, 3D visualizations, and similar content does not appear in the replay. To record canvas elements, opt into the Preview with `enableExperimentalFeatures`, then turn on canvas recording with `sessionReplayCanvasRecording`.
+
+Canvas recording requires RUM Browser SDK v7.15.0 or later, and supports the 2D, WebGL, and WebGL2 rendering contexts.
+
+{% tabs %}
+{% tab label="NPM" %}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+   ...
+   enableExperimentalFeatures: ['session_replay_record_canvas'],
+   sessionReplayCanvasRecording: { enable: true },
+   ...
+});
+```
+{% /tab %}
+{% tab label="CDN async" %}
+```javascript
+<script>
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ['session_replay_record_canvas'],
+      sessionReplayCanvasRecording: { enable: true },
+      ...
+    });
+  })
+</script>
+```
+{% /tab %}
+{% tab label="CDN sync" %}
+```javascript
+<script>
+    window.DD_RUM && window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ['session_replay_record_canvas'],
+      sessionReplayCanvasRecording: { enable: true },
+      ...
+    });
+</script>
+```
+{% /tab %}
+{% /tabs %}
+
+#### Set the canvas recording quality
+
+The default canvas recording quality, `medium`, is tuned to provide a reasonable tradeoff between recording quality and resource usage. Set `quality` to `high` for a more detailed recording, or to `low` to minimize resource usage.
+
+```javascript
+datadogRum.init({
+   ...
+   enableExperimentalFeatures: ['session_replay_record_canvas'],
+   sessionReplayCanvasRecording: { enable: true, quality: 'high' },
+   ...
+});
+```
+{% /if %}
+<!-- end Browser -->
+
 ### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK.
@@ -823,7 +926,7 @@ See [Connect Session Replay to your third-party tools][30].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /session_replay/privacy_options/?tab=reactnative
+[17]: /session_replay/privacy_options/?platform=react_native
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
@@ -842,3 +945,4 @@ See [Connect Session Replay to your third-party tools][30].
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
 [34]: /real_user_monitoring/application_monitoring/maui/setup
+[35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products

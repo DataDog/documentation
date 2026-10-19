@@ -55,6 +55,8 @@ GCP emits metrics with 1-minute granularity. Therefore, expect metric delays of 
 
 When creating monitors in Datadog, a warning message displays if you choose a delayed metric. Datadog recommends extending the timeframe and delaying the monitor evaluation for these metrics.
 
+<div class="alert alert-info">For AWS-backed metric monitors, {{< ui >}}Edit{{< /ui >}} can show a recommended evaluation delay (often 900 seconds). That value comes from the AWS integration and is not stored until you click {{< ui >}}Save{{< /ui >}}. To check the saved configuration, open the monitor {{< ui >}}Status{{< /ui >}} page, export the JSON, and look for <code>evaluation_delay</code>. If the field is missing, set the delay in {{< ui >}}Edit{{< /ui >}} and save the monitor.</div>
+
 ## Faster metrics
 
 To obtain system-level metrics with virtually zero delay, install the Datadog Agent on your cloud hosts when possible. For a full list of the benefits of installing the Agent on your cloud instances, refer to the documentation [Why should I install the Datadog Agent on my cloud instances?][1].

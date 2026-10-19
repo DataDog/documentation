@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cuped-adjustments-visualization/"
   tag: "Blog"
   text: "Visualize how CUPED adjusts experiment results with Datadog"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
 ---
 
 ## Overview

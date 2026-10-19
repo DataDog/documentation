@@ -286,7 +286,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Delete Unused RDS Instance
-      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
+      recommendation_description: RDS instance with no client connections and no replica lag.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -461,6 +461,12 @@ multifiltersearch:
       resource_type: Load Balancer
       recommendation_type: Delete Load Balancer
       recommendation_description: Load Balancer with 0 bytes transferred.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no ingested data or user queries that still incur retention or commitment-tier charges, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -678,6 +684,12 @@ multifiltersearch:
       recommendation_type: Transition Cloud Storage Bucket to Autoclass
       recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: GCP
+      resource_type: Vertex AI Project
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Google Cloud projects already using Vertex AI prompt caching below the target hit rate and estimates the input cost savings from reaching the target.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: Kubernetes Cluster
@@ -846,9 +858,10 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
 - **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
+- **Copy Fix Prompt**: For recommendations where a prompt fix is available, click {{< ui >}}Copy Fix Prompt{{< /ui >}} in the recommendation side panel. This copies a ready-to-use prompt to your clipboard, describing the recommendation, the affected resource, and the suggested change. Paste the prompt into the AI coding agent you already use, such as Cursor, GitHub Copilot, or Claude Code. The agent can then implement the change in your repository. This differs from [Bits Code][14], which automatically opens a pull request for a narrower set of recommendation types. No additional setup is required.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
 - **[Cost Optimization Automations][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
-- **[Notifications][16]**: Set up notification rules that send a recurring Slack summary of matching recommendations, without taking any action.
+- **[Notifications][16]**: Set up notification rules that send a recurring Slack or Microsoft Teams summary of matching recommendations, without taking any action.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 

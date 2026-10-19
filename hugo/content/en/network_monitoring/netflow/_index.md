@@ -3,6 +3,9 @@ title: NetFlow Monitoring
 aliases:
 - /network_monitoring/devices/netflow/
 further_reading:
+- link: "https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/"
+  tag: "Architecture Center"
+  text: "Hybrid Multi-cloud Network Observability Reference Architecture"
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
@@ -15,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
   tag: "Blog"
   text: "Monitor and diagnose network performance issues with SNMP Traps"
+- link: "https://www.datadoghq.com/blog/understanding-netflow-duplication/"
+  tag: "Blog"
+  text: "Understanding NetFlow duplication: Why it happens, and how to deduplicate"
 ---
 
 ## Overview
@@ -94,7 +100,7 @@ Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority
 
 You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
-From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
+From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}\+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
 
@@ -102,7 +108,7 @@ From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}+ Ad
 
 You can also add your own custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
-From the [{{< ui >}}Enrichment{{< /ui >}} settings page][10], click {{< ui >}}+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
+From the [{{< ui >}}Enrichment{{< /ui >}} settings page][10], click {{< ui >}}\+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
 
 ### Reverse DNS private IP enrichment
 
@@ -110,7 +116,7 @@ Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames as
 
 By default, the Reverse DNS IP enrichment in your [`datadog.yaml` file][7] is disabled. To enable, see the [Configuration](#configuration) section of this page.
 
-Search for DNS in the {{< ui >}}+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
+Search for DNS in the {{< ui >}}\+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Filter menu enhanced to show the reverse DNS destination and source facets" width="100%" >}}
 

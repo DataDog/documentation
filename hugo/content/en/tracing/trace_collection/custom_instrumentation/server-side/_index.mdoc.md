@@ -246,4 +246,4 @@ Use the Datadog API to programmatically create, modify, or delete traces to send
 {% /if %}
 <!-- END DATADOG API CONTENT -->
 
-[8]: https://opentelemetry.io/docs/languages/beam/
+[8]: https://opentelemetry.io/docs/languages/erlang/

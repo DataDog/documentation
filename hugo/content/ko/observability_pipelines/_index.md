@@ -1,11 +1,11 @@
 ---
-description: Observability Pipelines를 사용하여 자체 인프라 내에서 로그, 메트릭 및 트레이스를 수집, 처리하고 Datadog,
-  Amazon S3, Splunk, Microsoft Sentinel과 같은 목적지로 라우팅하는 방법을 알아보세요.
+description: Observability Pipelines를 사용하면 자체 인프라 내에서 로그와 메트릭을 수집, 처리하고, Datadog,
+  Amazon S3, Splunk, Microsoft Sentinel과 같은 목적지로 라우팅할 수 있는 방법을 알아볼 수 있습니다.
 disable_toc: false
 further_reading:
 - link: /observability_pipelines/configuration/explore_templates/
   tag: 설명서
-  text: Pipelines 설정
+  text: Pipelines 설정하기
 - link: /observability_pipelines/configuration/set_up_pipelines/
   tag: 설명서
   text: 사용 사례 및 템플릿 살펴보기
@@ -79,7 +79,7 @@ title: Observability Pipelines
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="다양한 소스에서 수집된 데이터가 자체 환경의 Observability Pipelines Worker에서 처리 및 보강된 후, 사용자가 선택한 보안, 분석 및 스토리지 전송 목적지로 라우팅되는 과정을 나타내는 그래픽" style="width:100%;" >}}
 
-Datadog Observability Pipelines를 사용하면 자체 인프라 내에서 로그, 메트릭 및 트레이스를 수집하고 처리한 후 {{< tooltip text="logs, metrics, and traces" tooltip="사용 사례 및 가격 책정에 대해 논의하려면 계정 관리자에게 문의하세요." >}} 데이터를 여러 목적지로 라우팅할 수 있습니다. 이를 통해 관측 가능성 데이터가 자체 환경을 벗어나기 전에 이를 제어할 수 있습니다.
+Datadog Observability Pipelines를 사용하면 자체 인프라 내에서 로그와 메트릭을 수집 및 처리한 다음, 해당 데이터를 다양한 목적지로 라우팅할 수 있습니다. 이를 통해 관측 가능성 데이터가 자체 환경을 벗어나기 전에 이를 제어할 수 있습니다.
 
 기본 제공 템플릿을 사용하여 민감한 데이터를 마스킹하고, 데이터를 보강하며, 노이즈가 많은 이벤트를 필터링하고, Datadog, SIEM 도구 또는 클라우드 스토리지와 같은 목적지로 데이터를 라우팅하는 파이프라인을 구축할 수 있습니다.
 
@@ -101,7 +101,7 @@ Observability Pipelines UI는 다음과 같은 작업을 수행할 수 있는 �
 - Observability Pipelines Worker를 배포하고 관리합니다.
 - 모니터를 활성화하여 파이프라인 상태를 추적합니다.
 
-## 시작하기 {#get-started}
+## 시작 {#get-started}
 
 1. [Observability Pipelines][1]로 이동합니다.
 1. 사용 사례에 따라 적합한 [템플릿](#common-use-cases-and-templates)을 선택합니다.
@@ -141,13 +141,6 @@ Observability Pipelines에는 일반적인 데이터 라우팅 및 변환 워크
 | 템플릿 | 설명 |
 |----------|-------------|
 | 메트릭 태그 거버넌스 | 필요한 메트릭만 유지하고, 메트릭 태깅을 표준화하며, 원치 않는 태그를 제거하여 높은 카디널리티를 방지함으로써 메트릭의 품질과 볼륨을 관리합니다. |
-
-{{% /tab %}}
-{{% tab "트레이스" %}}
-
-| 템플릿 | 설명 |
-|----------|-------------|
-| 트레이스 샘플링 | 트레이스를 수집, 처리 및 라우팅하여 문제 해결 및 분석에 필요한 트레이스를 유지하면서 비용을 제어합니다. |
 
 {{% /tab %}}
 {{< /tabs >}}
