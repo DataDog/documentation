@@ -38104,9 +38104,7 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440001
           type: string
         mapkind:
-          description: The type of source map.
-          example: elf
-          type: string
+          $ref: "#/components/schemas/ELFSourcemapMapKind"
         origin:
           description: The origin of the ELF file.
           example: debian
@@ -38145,6 +38143,14 @@ components:
         - type
         - attributes
       type: object
+    ELFSourcemapMapKind:
+      description: The type of source map. Always `elf` for ELF source maps.
+      enum:
+        - elf
+      example: elf
+      type: string
+      x-enum-varnames:
+        - ELF
     ELFSymbolFileEvent:
       description: Metadata for an ELF symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -52999,9 +53005,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: flutter
-          type: string
+          $ref: "#/components/schemas/FlutterSourcemapMapKind"
         service:
           description: The service name associated with the symbol file.
           example: my-flutter-app
@@ -53040,6 +53044,14 @@ components:
         - type
         - attributes
       type: object
+    FlutterSourcemapMapKind:
+      description: The type of source map. Always `flutter` for Flutter source maps.
+      enum:
+        - flutter
+      example: flutter
+      type: string
+      x-enum-varnames:
+        - FLUTTER
     FlutterSymbolFileEvent:
       description: Metadata for a Flutter symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -58946,9 +58958,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: il2cpp
-          type: string
+          $ref: "#/components/schemas/IL2CPPSourcemapMapKind"
         size:
           description: The size of the mapping file in bytes.
           example: 4096
@@ -58975,6 +58985,14 @@ components:
         - type
         - attributes
       type: object
+    IL2CPPSourcemapMapKind:
+      description: The type of source map. Always `il2cpp` for IL2CPP source maps.
+      enum:
+        - il2cpp
+      example: il2cpp
+      type: string
+      x-enum-varnames:
+        - IL2CPP
     IOSSourcemapAttributes:
       description: Attributes of an iOS dSYM source map.
       properties:
@@ -58984,9 +59002,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: ios
-          type: string
+          $ref: "#/components/schemas/IOSSourcemapMapKind"
         size:
           description: The size of the dSYM file in bytes.
           example: 4096
@@ -59017,6 +59033,14 @@ components:
         - type
         - attributes
       type: object
+    IOSSourcemapMapKind:
+      description: The type of source map. Always `ios` for iOS dSYM source maps.
+      enum:
+        - ios
+      example: ios
+      type: string
+      x-enum-varnames:
+        - IOS
     IOSSymbolsEvent:
       description: Metadata for an iOS dSYM file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -66828,9 +66852,7 @@ components:
           example: bundle.min.js
           type: string
         mapkind:
-          description: The type of source map.
-          example: js
-          type: string
+          $ref: "#/components/schemas/JSSourcemapMapKind"
         service:
           description: The service name associated with the source map.
           example: my-web-service
@@ -66873,6 +66895,14 @@ components:
         - type
         - attributes
       type: object
+    JSSourcemapMapKind:
+      description: The type of source map. Always `js` for JavaScript source maps.
+      enum:
+        - js
+      example: js
+      type: string
+      x-enum-varnames:
+        - JS
     JVMMappingFileEvent:
       description: Metadata for a ProGuard or R8 mapping file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -66947,9 +66977,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: jvm
-          type: string
+          $ref: "#/components/schemas/JVMSourcemapMapKind"
         service:
           description: The service name associated with the mapping file.
           example: my-android-app
@@ -66992,6 +67020,14 @@ components:
         - type
         - attributes
       type: object
+    JVMSourcemapMapKind:
+      description: The type of source map. Always `jvm` for JVM source maps.
+      enum:
+        - jvm
+      example: jvm
+      type: string
+      x-enum-varnames:
+        - JVM
     JiraAccountAttributes:
       description: Attributes of a Jira account
       properties:
@@ -82961,9 +82997,7 @@ components:
           example: libmyapp.so
           type: string
         mapkind:
-          description: The type of source map.
-          example: ndk
-          type: string
+          $ref: "#/components/schemas/NDKSourcemapMapKind"
         size:
           description: The size of the symbol file in bytes.
           example: 32768
@@ -82990,6 +83024,14 @@ components:
         - type
         - attributes
       type: object
+    NDKSourcemapMapKind:
+      description: The type of source map. Always `ndk` for Android NDK source maps.
+      enum:
+        - ndk
+      example: ndk
+      type: string
+      x-enum-varnames:
+        - NDK
     NDKSymbolFileEvent:
       description: Metadata for an Android NDK symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -96749,6 +96791,56 @@ components:
           description: Replay track identifier indicating which recording track the session belongs to.
           type: string
       type: object
+    PortablePdbSourcemapAttributes:
+      description: Attributes of a Portable PDB file.
+      properties:
+        build_id:
+          description: The build identifier.
+          example: 550e8400e29b41d4a71644665544000012345678
+          type: string
+        created_at:
+          description: The timestamp when the symbol file was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        file_name:
+          description: The file name of the symbol file.
+          example: MyApplication.pdb
+          type: string
+        mapkind:
+          $ref: "#/components/schemas/PortablePdbSourcemapMapKind"
+        size:
+          description: The size of the symbol file in bytes.
+          example: 4096
+          format: int64
+          type: integer
+      required:
+        - mapkind
+      type: object
+    PortablePdbSourcemapData:
+      description: Portable PDB file data object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PortablePdbSourcemapAttributes"
+        id:
+          description: The unique identifier of the source map.
+          example: "10"
+          type: string
+        type:
+          $ref: "#/components/schemas/SourcemapDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    PortablePdbSourcemapMapKind:
+      description: The type of source map. Always `portable_pdb` for Portable PDB files.
+      enum:
+        - portable_pdb
+      example: portable_pdb
+      type: string
+      x-enum-varnames:
+        - PORTABLE_PDB
     PostmortemAttachmentRequest:
       description: Request body for creating a postmortem attachment.
       properties:
@@ -103008,9 +103100,7 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440000
           type: string
         mapkind:
-          description: The type of source map.
-          example: react
-          type: string
+          $ref: "#/components/schemas/ReactNativeSourcemapMapKind"
         platform:
           description: The platform the source map was built for (e.g., `ios`, `android`).
           example: ios
@@ -103049,6 +103139,14 @@ components:
         - type
         - attributes
       type: object
+    ReactNativeSourcemapMapKind:
+      description: The type of source map. Always `react` for React Native source maps.
+      enum:
+        - react
+      example: react
+      type: string
+      x-enum-varnames:
+        - REACT
     ReadinessGate:
       additionalProperties: false
       description: Used to merge multiple branches into a single branch.
@@ -124551,6 +124649,8 @@ components:
         - $ref: "#/components/schemas/ELFSourcemapData"
         - $ref: "#/components/schemas/NDKSourcemapData"
         - $ref: "#/components/schemas/IL2CPPSourcemapData"
+        - $ref: "#/components/schemas/WASMSourcemapData"
+        - $ref: "#/components/schemas/PortablePdbSourcemapData"
     SourcemapMapKind:
       description: The type of source map.
       enum:
@@ -141657,6 +141757,56 @@ components:
         - X_CONTENT_TYPE_HEADER_MISSING
         - X_PATH_INJECTION
         - XSS
+    WASMSourcemapAttributes:
+      description: Attributes of a WebAssembly symbol file.
+      properties:
+        build_id:
+          description: The build identifier.
+          example: wasm-build-123
+          type: string
+        created_at:
+          description: The timestamp when the symbol file was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        file_name:
+          description: The file name of the symbol file.
+          example: module.wasm
+          type: string
+        mapkind:
+          $ref: "#/components/schemas/WASMSourcemapMapKind"
+        size:
+          description: The size of the symbol file in bytes.
+          example: 4096
+          format: int64
+          type: integer
+      required:
+        - mapkind
+      type: object
+    WASMSourcemapData:
+      description: WebAssembly symbol file data object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WASMSourcemapAttributes"
+        id:
+          description: The unique identifier of the source map.
+          example: "9"
+          type: string
+        type:
+          $ref: "#/components/schemas/SourcemapDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    WASMSourcemapMapKind:
+      description: The type of source map. Always `wasm` for WebAssembly symbol files.
+      enum:
+        - wasm
+      example: wasm
+      type: string
+      x-enum-varnames:
+        - WASM
     Watch:
       description: A single RUM replay session watch resource returned by create operations.
       properties:
