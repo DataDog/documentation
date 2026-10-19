@@ -61,7 +61,7 @@ You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10
 
 ### Supported telemetry types {#supported-telemetry}
 
-- Agent Observability traces, Experiments, Datasets, Annotation Queues, and Evaluators
+- Agent Observability traces, Experiments, Datasets, Annotation Queues, and Evaluator Configs
 - APM traces
 - Cloud costs
 - Custom metrics
@@ -159,7 +159,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 * **Supported telemetry**:
   * Traces, using any tag.
   * Experiments, Datasets, and Annotation Queues, restricted by project. An `ml_app` filter set to a project ID hides that project and its experiments, datasets, dataset records, spans, evaluation metrics, and annotation queues from list views, search, and direct links. An annotation queue that does not belong to a project cannot be restricted. See [Data Access Control in Agent Observability][14].
-  * Evaluators, restricted by application. An `ml_app` filter set to an application name hides the evaluators that target that application, and prevents users outside the granted teams or roles from creating, editing, or deleting them. Filters on other tag keys do not restrict evaluators. See [Data Access Control in Agent Observability][14].
+  * Evaluator Configs, restricted by application. An `ml_app` filter set to an application name prevents users outside the granted teams or roles from viewing, editing, or creating evaluator configs that target that application. Filters on other tag keys do not restrict evaluator configs. See [Data Access Control in Agent Observability][14].
 * **Not supported**: Managed prompts.
 * **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 

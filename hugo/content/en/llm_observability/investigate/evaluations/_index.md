@@ -60,7 +60,7 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 [`Agent Observability Write` permissions][7] are necessary to configure evaluators.
 
-To restrict an application's evaluators to specific teams or roles, see [Data Access Control in Agent Observability][14].
+To restrict an application's evaluator configs to specific teams or roles, see [Data Access Control in Agent Observability][14].
 
 ### Retrieving spans
 
