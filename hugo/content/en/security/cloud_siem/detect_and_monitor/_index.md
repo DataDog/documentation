@@ -54,7 +54,7 @@ In the [Detection Rules explorer][8], and the side panel that appears when you c
 - {{< ui >}}Health Insights{{< /ui >}}: Provides information on whether the fields that are part of a rule appear properly in the logs Cloud SIEM ingests. Datadog categorizes supported rules as either {{< ui >}}Monitoring{{< /ui >}} or {{< ui >}}Needs attention{{< /ui >}}.
 - {{< ui >}}Signal activity{{< /ui >}}: A graph of how many signals the rule has created over the past 30 days.
 
-In the rule side panel, you can view more information about individual fields referenced in the rule. For each scope (the source or service the query is attached to), you can see:
+In the rule side panel, you can view more information about individual fields referenced in the rule. For each scope (the `source` or `service` from the query), you can see:
 - {{< ui >}}Field{{< /ui >}}: The field Datadog evaluated.
 - {{< ui >}}Presence rate{{< /ui >}}: The percentage of logs ingested in that scope over the last 24 hours that contain that field.
 - {{< ui >}}Log count change{{< /ui >}}: The number of times the field has appeared in logs over the last 24 hours, compared to the average number of times over the last 29 days. Indicates whether the presence of that field is increasing, decreasing, or staying the same.
