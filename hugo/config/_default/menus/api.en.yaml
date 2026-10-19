@@ -8047,6 +8047,22 @@ menu:
           - ListDatastores
         unstable: []
         order: 1
+    - name: Agent Health
+      url: /api/latest/agent-health/
+      identifier: agent-health
+      generated: true
+    - name: List active Agent Health issues
+      url: /api/latest/agent-health/list-active-agent-health-issues/
+      identifier: agent-health-list-active-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthHostIssues
+        unstable: []
+        order: 1
     - name: Agent Observability
       url: /api/latest/agent-observability/
       identifier: agent-observability
