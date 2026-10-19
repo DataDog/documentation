@@ -66,12 +66,15 @@
 
 .schema-table__row {
   display: flex;
-  border-bottom: var(--border-width) solid var(--color-surface-border);
+  border-top: var(--border-width) solid var(--color-surface-border);
   line-height: 1.5;
 }
 
-.schema-table__row:last-child {
-  border-bottom: none;
+/* Rows draw their divider on top, not bottom, so the last row of a nested
+   group still separates from the next outer row. Only the first row needs
+   none, since the column header already draws one. */
+.schema-table__columns + .schema-table__row {
+  border-top: none;
 }
 
 .schema-table__row:hover {
