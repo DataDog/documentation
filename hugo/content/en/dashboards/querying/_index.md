@@ -31,13 +31,26 @@ When you first open the graphing editor, you are on the {{< ui >}}Edit{{< /ui >}
 
 To configure your graph on dashboards, follow this process:
 
-1. [Select the visualization](#select-your-visualization)
-2. [Define the metric](#define-the-metric)
-3. [Filter your metric](#filter)
-4. [Configure the time aggregation](#configure-the-time-aggregation)
-5. [Configure the space aggregation](#configure-the-space-aggregation)
-6. [Apply function](#advanced-graphing)
-7. [Title the graph](#create-a-title)
+- [Overview](#overview)
+- [Graphing editor](#graphing-editor)
+- [Configuring a graph](#configuring-a-graph)
+  - [Select your visualization](#select-your-visualization)
+  - [Define the metric](#define-the-metric)
+  - [Filter](#filter)
+  - [Aggregate and rollup](#aggregate-and-rollup)
+    - [Aggregation method](#aggregation-method)
+    - [Configure the time aggregation](#configure-the-time-aggregation)
+    - [Configure the space aggregation](#configure-the-space-aggregation)
+  - [Nested Queries](#nested-queries)
+  - [Advanced graphing](#advanced-graphing)
+    - [Hide a query from the visualization](#hide-a-query-from-the-visualization)
+  - [Create an alias](#create-an-alias)
+  - [Create a title](#create-a-title)
+  - [Save](#save)
+- [Additional options](#additional-options)
+  - [Event overlays](#event-overlays)
+  - [Split graph](#split-graph)
+- [Further Reading](#further-reading)
 
 ### Select your visualization
 
@@ -200,7 +213,7 @@ Here is an example using `maximum()` to find the maximum CPU usage between two a
 maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example-2.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
 
 Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 
