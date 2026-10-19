@@ -71,5 +71,5 @@ To search the table, select {{< ui >}}Databricks{{< /ui >}} under {{< ui >}}Exte
 [2]: https://www.datadoghq.com/product-preview/federated-search/
 [3]: /integrations/databricks/
 [4]: /observability_pipelines/destinations/databricks/
-[5]: /logs/explorer/federated_logs/#permissions
+[5]: /logs/log_configuration/external_sources/#permissions
 [6]: https://app.datadoghq.com/logs/external-sources

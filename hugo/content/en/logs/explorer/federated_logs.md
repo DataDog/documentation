@@ -16,13 +16,13 @@ Federated Logs is in Preview. Use this form to submit your request today.
 
 ## Overview
 
-Federated Logs lets you search logs stored in your own data platform from [Log Explorer][1], without ingesting them into Datadog. Datadog translates your Log Explorer query into the query language of the source and runs it against your table. The data stays in your data platform.
+Federated Logs lets you search logs stored in your own data platform, such as Databricks, from [Log Explorer][1], without ingesting them into Datadog. Datadog translates your Log Explorer query into the query language of the source and runs it against your table. The data stays in your data platform.
 
 Use Federated Logs to investigate logs that you keep outside Datadog for cost, compliance, or analytics reasons.
 
 With a federated source, you can:
 
-- Search and filter logs on mapped fields with the [Log Explorer search syntax][2].
+- Search and filter logs with the [Log Explorer search syntax][2].
 - View results in the list view and in a timeline histogram grouped by status.
 - Open a log in the side panel and share a link to it.
 - Add or remove columns, and export results to CSV.
@@ -34,12 +34,7 @@ With a federated source, you can:
 
 ## Permissions
 
-| Permission | Grants |
-|---|---|
-| Logs Federated Query Read (`logs_federated_query_read`) | Search federated sources in Log Explorer. |
-| Logs Federated Query Write (`logs_federated_query_write`) | Connect, edit, and delete sources on the {{< ui >}}External Sources{{< /ui >}} page. |
-
-For more information, see [Role Based Access Control][5].
+To search federated sources in Log Explorer, you need the Logs Federated Query Read (`logs_federated_query_read`) permission. For more information, see [Role Based Access Control][5].
 
 ## Search federated logs
 
