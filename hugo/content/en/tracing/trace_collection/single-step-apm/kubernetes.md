@@ -345,83 +345,6 @@ Supported values: `init_container`, `csi`.
 By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
 
 {{< tabs >}}
-{{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
-
-Use a `DatadogInstrumentation` custom resource to enable SSI and configure SDKs for a specific set of workloads.
-
-This method requires Datadog Agent and Cluster Agent **v7.85.0 or later** and Datadog Operator **v1.31.0 or later**.
-
-##### Create a resource targeting your workload
-
-Create and apply a `DatadogInstrumentation` resource in the same namespace of the workload you wish to target. This example instruments the `checkout` Deployment in the `apps` namespace with the default Java SDK:
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: checkout-apm
-  namespace: apps
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: checkout
-  config:
-    apm:
-      ddTraceVersions:
-        java: "default"
-      ddTraceConfigs:
-        - name: DD_SERVICE
-          value: checkout
-        - name: DD_ENV
-          value: production
-```
-
-Replace the workload name, namespace, tracer language, and service tags with the correct values for your application. `targetRef` identifies the workload by its API version, kind, and name. Only one `DatadogInstrumentation` custom resource can target a given workload at a time. If a resource already exists for that workload, add `config.apm` to that resource.
-Once applied, new pods part of the targeted workload will be instrumented with the tracer and config defined in your resource.
-
-Supported target kinds are `Deployment`, `StatefulSet`, `DaemonSet`, `Job`, `CronJob`, and Argo `Rollout`.
-
-##### Configuration settings
-
-Set the following fields under `spec.config.apm`:
-
-| Field | Description |
-|-------|-------------|
-| `enabled` | Set to `false` to [disable instrumentation for the workload](#disable-instrumentation-with-datadoginstrumentation). |
-| `ddTraceVersions` | Maps SDK language identifiers to versions. Specify `java`, `js` (Node.js), `python`, `dotnet`, `ruby`, `php`, or `c`, subject to [SSI compatibility requirements][36]. Only the listed SDKs are injected. Use `"default"` for the Agent's default SDK version, or pin a specific version. If omitted, the Agent uses its default set of supported SDKs. |
-| `ddTraceConfigs` | A list of SDK environment variables. Each `name` must start with `DD_`. Use `value` for a literal string or `valueFrom` for a Kubernetes environment variable reference. |
-
-For example, add these entries to `ddTraceConfigs` to enable Continuous Profiler and read the service name from a pod label:
-
-```yaml
-ddTraceConfigs:
-  - name: DD_PROFILING_ENABLED
-    value: "auto"
-  - name: DD_SERVICE
-    valueFrom:
-      fieldRef:
-        fieldPath: metadata.labels['app.kubernetes.io/name']
-```
-
-The referenced label must exist on the application pods. For more SDK options, see [Library configuration][7].
-
-##### Configuration precedence
-
-For pods eligible for admission, the Cluster Agent selects APM configuration in this order, from highest to lowest precedence:
-
-1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
-1. The workload's `DatadogInstrumentation` APM configuration.
-1. Remote Configuration instrumentation policies, if enabled.
-1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`.
-1. Cluster-wide instrumentation, when enabled without targeting rules.
-
-A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with  DDI, remove conflicting annotations from the pod spec.
-
-[7]: /tracing/trace_collection/library_config/
-[36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
-
-{{% /tab %}}
 {{% tab "Targeting Rules (v7.64+)" %}}
 
 Create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
@@ -619,6 +542,84 @@ For a full list of products you can enable through SSI, see [Enable SDK-dependen
 [11]: /profiler/
 [12]: /security/application_security/
 [14]: /tracing/trace_collection/library_config/
+
+{{% /tab %}}
+
+{{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
+
+Use a `DatadogInstrumentation` custom resource to enable SSI and configure SDKs for a specific set of workloads.
+
+This method requires Datadog Agent and Cluster Agent **v7.85.0 or later** and Datadog Operator **v1.31.0 or later**.
+
+##### Create a resource targeting your workload
+
+Create and apply a `DatadogInstrumentation` resource in the same namespace of the workload you wish to target. This example instruments the `checkout` Deployment in the `apps` namespace with the default Java SDK:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: checkout-apm
+  namespace: apps
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: checkout
+  config:
+    apm:
+      ddTraceVersions:
+        java: "default"
+      ddTraceConfigs:
+        - name: DD_SERVICE
+          value: checkout
+        - name: DD_ENV
+          value: production
+```
+
+Replace the workload name, namespace, tracer language, and service tags with the correct values for your application. `targetRef` identifies the workload by its API version, kind, and name. Only one `DatadogInstrumentation` custom resource can target a given workload at a time. If a resource already exists for that workload, add `config.apm` to that resource.
+Once applied, new pods part of the targeted workload will be instrumented with the tracer and config defined in your resource.
+
+Supported target kinds are `Deployment`, `StatefulSet`, `DaemonSet`, `Job`, `CronJob`, and Argo `Rollout`.
+
+##### Configuration settings
+
+Set the following fields under `spec.config.apm`:
+
+| Field | Description |
+|-------|-------------|
+| `enabled` | Set to `false` to [disable instrumentation for the workload](#disable-instrumentation-with-datadoginstrumentation). |
+| `ddTraceVersions` | Maps SDK language identifiers to versions. Specify `java`, `js` (Node.js), `python`, `dotnet`, `ruby`, `php`, or `c`, subject to [SSI compatibility requirements][36]. Only the listed SDKs are injected. Use `"default"` for the Agent's default SDK version, or pin a specific version. If omitted, the Agent uses its default set of supported SDKs. |
+| `ddTraceConfigs` | A list of SDK environment variables. Each `name` must start with `DD_`. Use `value` for a literal string or `valueFrom` for a Kubernetes environment variable reference. |
+
+For example, add these entries to `ddTraceConfigs` to enable Continuous Profiler and read the service name from a pod label:
+
+```yaml
+ddTraceConfigs:
+  - name: DD_PROFILING_ENABLED
+    value: "auto"
+  - name: DD_SERVICE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.labels['app.kubernetes.io/name']
+```
+
+The referenced label must exist on the application pods. For more SDK options, see [Library configuration][7].
+
+##### Configuration precedence
+
+For pods eligible for admission, the Cluster Agent selects APM configuration in this order, from highest to lowest precedence:
+
+1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
+1. The workload's `DatadogInstrumentation` APM configuration.
+1. Remote Configuration instrumentation policies, if enabled.
+1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`.
+1. Cluster-wide instrumentation, when enabled without targeting rules.
+
+A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with  DDI, remove conflicting annotations from the pod spec.
+
+[7]: /tracing/trace_collection/library_config/
+[36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 
 {{% /tab %}}
 
