@@ -7,26 +7,24 @@ further_reading:
   - link: "/llm_observability/"
     tag: "Documentation"
     text: "Agent Observability"
-  - link: "/account_management/api-app-keys/"
+  - link: "/account_management/personal-access-tokens/"
     tag: "Documentation"
-    text: "API and application keys"
+    text: "Personal access tokens"
   - link: "/account_management/org_settings/service_accounts/"
     tag: "Documentation"
     text: "Service accounts"
 
 ---
 
-## Overview
+<div class="alert alert-info"><strong>Preview:</strong> AI Gateway is available in Preview. Request <a href="https://www.datadoghq.com/product-preview/ai-gateway/">preview access</a> or contact your Customer Success Manager.</div>
 
-AI Gateway is a Datadog-hosted endpoint that sits between your applications and your model providers. Send requests to AI Gateway instead of calling each provider directly, and Datadog forwards them to the provider account you configure. Because every request passes through one control point, you can:
+Datadog's AI Gateway lets you govern how your organization uses large language models (LLMs) by routing agent and application traffic through a single endpoint. Because every request passes through one control point, you can:
 
 - Call models from multiple providers through one endpoint and one set of Datadog credentials
 - Give callers a stable model identifier with [routing rules](#route-requests-with-routing-rules) and ordered fallbacks
-- Control which teams, users, and service accounts can use each model with [model groups](#control-model-access)
+- Control which teams, users, and service accounts can use each model with [access policies](#control-model-access)
 - Track and cap spend with [budgets](#set-budgets)
 - Inspect every request as a span in Agent Observability
-
-<div class="alert alert-info"><strong>Preview:</strong> AI Gateway is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
 
 ## Prerequisites
 
@@ -41,40 +39,19 @@ AI Gateway is a Datadog-hosted endpoint that sits between your applications and 
 
 A provider connects an integration account to the models that callers can use through AI Gateway.
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Providers{{< /ui >}}][2] and click {{< ui >}}New Provider{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][2] and click {{< ui >}}New Provider{{< /ui >}}.
 2. Enter a display name and a unique slug. The slug is part of the model identifier that callers send in requests.
 3. Select the integration account that backs the provider. AI Gateway discovers and enables the models returned by that account.
-4. Review the discovered models. Add a model manually only if discovery does not return it. For a manual model, set the Gateway model ID, an optional provider model ID, and the operations the model supports.
-5. Create the provider.
+4. Optional: Set a cost multiplier. AI Gateway uses a custom price from the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11] when you enter one for a model, and it uses that price as entered. For every other model, it uses the auto-discovered price and applies the multiplier. Confirm the price shown for each model in the Model Catalog.
+5. Review the discovered models. To route requests to a model that discovery does not return, add the model manually and set:
+   - **Model ID**: the canonical identifier the client sends in the request, as `<PROVIDER_SLUG>/<MODEL_ID>`.
+   - **Provider model ID**: the identifier sent to the upstream provider. Leave this blank to send the Model ID.
+   - **Supported operations**: the request formats the model accepts. Select Anthropic Messages, OpenAI Chat Completions, OpenAI Responses, or a combination of them.
+6. Create the provider.
 
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
-### Send a request
-
-Send requests to the AI Gateway base URL for your Datadog site:
-
-{{< code-block lang="text" >}}
-https://ai-gateway.datadoghq.com/ai/v1
-{{< /code-block >}}
-
-<div class="alert alert-warning">The base URL above is for the US1 site. To get the base URL for another Datadog site, contact your Customer Success Manager.</div>
-
-Pass the model as `<PROVIDER_SLUG>/<MODEL_ID>` in the `model` field. The following example uses the OpenAI Responses API:
-
-{{< code-block lang="shell" >}}
-curl -X POST "https://ai-gateway.datadoghq.com/ai/v1/responses" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <DATADOG_ACCESS_TOKEN>" \
-  -d '{"model": "<PROVIDER_SLUG>/<MODEL_ID>", "input": "Hello"}'
-{{< /code-block >}}
-
-### Verify the request
-
-1. Check the HTTP response and confirm the model that served the request.
-2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] to see requests, tokens, spend, errors, and latency for the selected time range.
-3. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect the Gateway span in Agent Observability. The content recorded in the span depends on your [data capture](#configure-data-capture) setting.
-
-## Authenticate requests
+### Authenticate requests
 
 AI Gateway accepts the following Datadog credentials. The principal behind the credential must have the `ai_gateway_usage` permission.
 
@@ -82,10 +59,31 @@ AI Gateway accepts the following Datadog credentials. The principal behind the c
 |---|---|
 | [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
 | [Service account token][5] | `Authorization: Bearer <SERVICE_ACCOUNT_TOKEN>` |
-| Datadog OAuth access token | `Authorization: Bearer <OAUTH_ACCESS_TOKEN>` |
-| [API key and application key][6] | `DD-API-KEY: <DATADOG_API_KEY>` and `DD-APPLICATION-KEY: <DATADOG_APP_KEY>` |
 
 For service workloads, use a service account token. Store credentials in your application's secret manager and keep them out of source control and logs.
+
+### Send a request
+
+Send requests to the AI Gateway base URL for your [Datadog site][12] ({{< region-param key="dd_site_name" >}}). The {{< ui >}}Datadog Site{{< /ui >}} selector on this page updates the host.
+
+```text
+https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1
+```
+
+Pass the model as `<PROVIDER_SLUG>/<MODEL_ID>` in the `model` field. The following example uses the OpenAI Responses API:
+
+```shell
+curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/responses" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <DATADOG_ACCESS_TOKEN>" \
+  -d '{"model": "<PROVIDER_SLUG>/<MODEL_ID>", "input": "Woof!"}'
+```
+
+### Verify the request
+
+1. Check the HTTP response and confirm the model that served the request.
+2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] to see requests, tokens, spend, errors, and latency for the selected time range.
+3. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect the Gateway span in Agent Observability. By default, all traces from the gateway appear under the `datadog-ai-gateway` application. You can change this by supplying `dd-tag-ml_app: <value>` in the request. The content recorded in the span depends on your [data capture](#configure-data-capture) setting.
 
 ## Send requests
 
@@ -99,8 +97,6 @@ Append one of the following paths to the base URL. The operations available depe
 | OpenAI Chat Completions | `POST /chat/completions` |
 | Anthropic Messages | `POST /messages` |
 
-Do not repeat `/ai/v1` when you append the path.
-
 ### Select a model
 
 Set the `model` field in the request body to one of the following:
@@ -108,11 +104,17 @@ Set the `model` field in the request body to one of the following:
 - `<PROVIDER_SLUG>/<MODEL_ID>` to call a model on a specific provider.
 - `router/<RULE_SLUG>` to let a [routing rule](#route-requests-with-routing-rules) choose the destination.
 
-The **Model ID** is the identifier AI Gateway uses for routing. The **Provider model ID** is the identifier sent to the upstream provider, and defaults to the Model ID. Copy the exact value from the provider or routing rule page.
-
 ## Manage providers
 
-From a provider's page, you can rename the provider, manage manually added models, review discovered models, and click {{< ui >}}View in Traces{{< /ui >}} to see the provider's requests in Agent Observability.
+AI Gateway supports these model families on each provider. It also supports custom OpenAI-compatible endpoints.
+
+| Model family | OpenAI | Anthropic | GCP Vertex AI | Amazon Bedrock | Azure OpenAI |
+|---|:---:|:---:|:---:|:---:|:---:|
+| OpenAI GPT | ✅ | | | ✅ | ✅ |
+| Anthropic Claude | | ✅ | ✅ | ✅ | |
+| Gemini | | | ✅ | | |
+
+From a model's page, you can rename the provider, manage manually added models, review discovered models, and click {{< ui >}}View in Traces{{< /ui >}} to see the provider's requests in Agent Observability.
 
 The slug, provider type, integration account, and connection configuration cannot be changed after you create the provider. To change them, create a new provider.
 
@@ -132,49 +134,70 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 5. Choose the [data capture](#configure-data-capture) mode for the rule.
 6. Save the rule, then copy its identifier into the `model` field of your requests.
 
+### Model served by any provider
+
+A model served by any configured provider matches every enabled provider in your organization that serves that model and that [model access](#control-model-access) allows for the caller. AI Gateway tries those providers in slug order and sends each one its provider model ID.
+
 ### Fallback behavior
 
-AI Gateway tries fallback destinations in order when the preceding destination is unavailable or returns an error.
+AI Gateway tries the next provider or fallback destination when the current one cannot serve the request, or returns HTTP `401`, `402`, `403`, `408`, `429`, or `5xx`. A successful response, or any other `4xx` response (such as `400`, `404`, or `422`), is returned to the caller. If every attempt returns one of the fallback statuses, the caller receives the last of those responses. If no destination can serve the request, the request fails.
 
-A request rejected by a [budget](#set-budgets) in Block mode does not trigger a fallback. AI Gateway returns HTTP `402` until the budget window resets.
+[Budgets](#set-budgets) in Block mode are checked per destination. If a budget blocks one destination, AI Gateway falls back to the next. If budgets block every destination, AI Gateway returns HTTP `402` until the budget window resets.
 
 ## Control model access
 
+Access policies control who can call each model and routing rule. A policy lists models, routing rules, or both, and the users, [Datadog teams][13], and service accounts who can use them.
+
+A caller can use a model when they have **Runner** or **Editor** access on at least one policy that contains that provider and model. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+
 ### Default policy
 
-The [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Access{{< /ui >}}][8] page defines the default policy for models and routing rules that do not belong to a model group. Review the default policy for your organization before you give callers access to AI Gateway.
+The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It applies to models and routing rules that are not in another policy, and it allows everyone until you restrict it. New models stay available through this policy until you add them to an access policy.
 
-### Model groups
+After you add a model or routing rule to an access policy, the default policy no longer applies to it. Callers who reached it through the default policy need access on the new policy.
 
-A model group overrides the default policy for the models and routing rules it contains.
+### Access policies
 
-1. On the {{< ui >}}Access{{< /ui >}} page, create a model group and enter a name.
-2. Select the models and routing rules to include.
-3. Choose the teams, roles, users, and service accounts that can use the group, and their access level:
-   - **Runner**: Can send requests to the group's models and routing rules.
-   - **Editor**: Can manage the group.
-4. Optional: Configure {{< ui >}}Allow fast mode{{< /ui >}} and the maximum reasoning level for the group's models.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8] and create a policy.
+2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias and that rule's direct targets.
+3. Choose the users, teams, and service accounts, and their access level:
+   - **No access**: Cannot call the policy's models or routing rules.
+   - **Runner**: Can call the policy's models and routing rules.
+   - **Editor**: Can call them and manage who else has access.
+4. Optional: Configure {{< ui >}}Allow fast mode{{< /ui >}} and the maximum reasoning level. A provider may use a different name for fast mode.
 
-If a routing rule routes to another routing rule, include both rules in the model group. A direct `<PROVIDER_SLUG>/<MODEL_ID>` request and a `router/<RULE_SLUG>` request can be subject to different policies, so test each identifier as the calling principal.
+Access to a routing rule follows that rule's targets, so a change to the targets changes what its runners can reach. A routing rule that routes to another routing rule needs its own access. A request to `<PROVIDER_SLUG>/<MODEL_ID>` and a request to `router/<RULE_SLUG>` can be allowed or denied separately. Test both with the user or service account that sends them.
+
+### Recommended setup
+
+For tighter control over who can call models:
+
+- Restrict the default policy so new models are not available to everyone.
+- Create an access policy for each set of approved models.
+- Grant **Runner** only to the users, teams, and service accounts that need it.
+- Before you restrict the default policy, keep an administrator on a policy that can restore access.
+- Review policy membership and routing rule targets regularly.
 
 ## Set budgets
 
-A budget tracks spend for matching AI Gateway traffic over a time window, and can block requests when the limit is reached.
+A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, week, or month, and can block requests when the limit is reached.
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] and click {{< ui >}}New Budget{{< /ui >}}.
-2. Choose the traffic to match. Select {{< ui >}}Everything{{< /ui >}} to track all AI Gateway spend, or combine User, Team, Model, Provider, and request tag filters. The form estimates historical matches and links to the matching spans in Agent Observability.
-3. Enter a spend limit and select a {{< ui >}}Daily{{< /ui >}}, {{< ui >}}Weekly{{< /ui >}}, or {{< ui >}}Monthly{{< /ui >}} window.
-4. Optional: Select {{< ui >}}Track existing spans for current period{{< /ui >}} to count spend that occurred earlier in the current window.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] and click {{< ui >}}New Budget{{< /ui >}}.
+2. Choose the traffic to match. Select {{< ui >}}Everything{{< /ui >}} to track all AI Gateway spend, or match a user, team, model, provider, or custom tag. Send a custom tag in a request header, for example `x-dd-tag-ai_agent: claudecode`. A request matches the budget when it includes every filter you selected. The form estimates historical matches and links to the matching spans in Agent Observability.
+3. Enter a spend limit and select a {{< ui >}}Daily{{< /ui >}}, {{< ui >}}Weekly{{< /ui >}}, or {{< ui >}}Monthly{{< /ui >}} window. The window follows the UTC calendar.
+4. Optional: Select {{< ui >}}Track existing usage for current period{{< /ui >}} to count spend already recorded in the current window. Spend from requests already in progress might not count toward the budget.
 5. Choose an enforcement mode and a warning threshold, then save the budget.
 
 | Enforcement mode | Behavior |
 |---|---|
 | Block | Matching requests are rejected with HTTP `402` until the window resets. |
-| Alert-only | Requests continue. A monitor alerts at the warning threshold and at the limit. |
+| Alert-only | Requests continue. The monitor `AI Gateway budget: <BUDGET_NAME>` alerts at the warning threshold and at the limit. |
 
-Datadog creates a [monitor][10] for each budget in either mode.
+When a budget is scoped to a [Datadog team][13], requests match it only if they include the header `x-ai-gateway-team: <TEAM>`. If a personal budget matches the same request, that personal budget applies instead.
 
-The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that does not match any budget. Use the Team, User, Model, Provider, and Tag filters to review coverage.
+Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for each budget and notifies the budget creator at the warning threshold and when the limit is reached. On the budget's details page, click the monitor icon next to {{< ui >}}Warning threshold{{< /ui >}} to change the recipients and message.
+
+The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that matches no budget. A budget counts spend only after you create it, so earlier spend stays untracked. Use the Team, User, Model, Provider, and Tag filters to review coverage.
 
 ## Observe AI Gateway activity
 
@@ -193,7 +216,7 @@ To investigate a request:
 
 1. Select a time range that contains the request.
 2. Use the model or provider breakdown to find the affected traffic.
-3. Click {{< ui >}}Traces{{< /ui >}} to inspect the Gateway span in Agent Observability.
+3. Click a model, a request bar, or an error. The {{< ui >}}Traces{{< /ui >}} page opens with filters already set for that selection.
 4. For a failed request, review the error type, the provider's error rate, and the request's trace before you change a routing rule or provider.
 
 ## Configure data capture
@@ -218,25 +241,56 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 ### 401 or 403 responses
 
 - Confirm that the credential is valid for the same Datadog organization and site as the base URL.
-- Confirm that the calling principal has the `ai_gateway_usage` permission.
-- Confirm that a model group or the default policy allows the principal to use the requested model or routing rule.
-- If you use an API key and application key, send both the `DD-API-KEY` and `DD-APPLICATION-KEY` headers.
+- Confirm that the user or service account has the `ai_gateway_usage` permission.
+- Confirm that an access policy or the default policy allows that user or service account to use the requested model or routing rule.
+- Send a personal access token or a service account token in the `Authorization: Bearer` header.
 
 ### 402 responses
 
-A budget in Block mode matched the request and its limit is reached. Review the budget's filters, tracked spend, and window on the [{{< ui >}}Budgets{{< /ui >}}][9] page. Routing rules do not fall back when a budget blocks a request.
+Budgets in Block mode blocked every destination for the request. Review the budget's filters, tracked spend, and window on the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] page. AI Gateway falls back when a budget blocks one destination and another destination remains.
 
 ### Model unavailable
 
 - Check the exact `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` value.
 - Confirm that the model is discovered or manually added on the provider, and that it supports the operation you called.
-- Confirm that a model group or the default policy allows access to the model.
+- Confirm that an access policy or the default policy allows access to that provider and model.
 
 A model that is available from the upstream provider might not be enabled on your AI Gateway provider.
 
 ### Request not visible in Agent Observability
 
 Confirm the time range and organization, and that the request reached AI Gateway. Spans include prompt and response content only when full capture applies to the request.
+
+### Error codes
+
+Errors that AI Gateway generates include the `X-Ai-Gateway-Error-Code` response header. For OpenAI and Anthropic, the same code is in the response body's `error.code` field. For Gemini, read the code from the header. Gemini's `error.code` is the numeric HTTP status.
+
+A provider `4xx` or `5xx` response keeps its original status and body and does not include `X-Ai-Gateway-Error-Code`. Those responses are not listed below.
+
+When a row lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemini, in that order.
+
+| `X-Ai-Gateway-Error-Code` | HTTP | What it means |
+|---|---|---|
+| `gateway_team_required` | `400` | The request matches a [Datadog team][13] budget but no matching personal budget. Resend with `x-ai-gateway-team: <TEAM>`. |
+| `invalid_gateway_team` | `400` | `x-ai-gateway-team` is empty, repeated, or not a valid Datadog team slug. |
+| `gateway_team_forbidden` | `403` | The caller is not a member of the selected Datadog team. |
+| `gateway_team_user_required` | `403` | Team selection requires a Datadog user identity. A service account token without user context cannot select a team. |
+| `gateway_team_unavailable` | `503` | Datadog team membership could not be verified. Retry the request. |
+| `gateway_rate_limit` | `429` | A gateway rate-limit rule was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`. |
+| `budget_exceeded` | `402` | A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Raise the budget or wait for the window to reset. |
+| `model_not_found` | `400` | The request's model, router, or provider identifier does not resolve to a known target: unknown model, unknown provider slug, unknown routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. The code is named after OpenAI's `model_not_found`, so clients that already handle that code keep working. |
+| `bad_request` | `400` | A malformed request that AI Gateway rejected before dispatch, such as an invalid JSON body, an invalid category filter, or an unknown action. Use `message` to see which. |
+| `unsupported_operation` | `400` | No eligible target supports the requested operation, for example a Responses field that no translator can map. |
+| `requested_provider_unavailable` | `400` | The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active. |
+| `no_eligible_target` | `400` | Targets failed for mixed reasons: some on access, others on operation support or provider identity. This is not only a permission problem. |
+| `no_permitted_target` | `403` | Every eligible target was denied by an access policy. The caller cannot reach any of them without a policy change. Do not retry. |
+| `zdr_requirement_unavailable` | `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini) | The zero-data-retention requirement could not be read. This is transient. Retry the request. |
+| `config_error` | `500` | A routing rule is misconfigured: a resolution cycle, an expansion limit, or an invalid rule. Contact [Datadog support][14]. |
+| `upstream_timeout` | `504` (OpenAI, Anthropic, and Gemini) | Every eligible upstream target was tried and the last attempt did not answer in time. |
+| `upstream_unreachable` | `500` / `500` / `503` | The connection to the provider failed (refused, reset, DNS, or TLS) or broke mid-response. |
+| `provider_credentials_error` | `500` / `500` / `503` | AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or service account token. Check the provider's integration account. |
+| `upstream_error` | `500` / `500` / `503` | Any other upstream failure before a provider response. Also used when all targets failed with no more specific code. |
+| `internal_error` | `500` | An unclassified internal error. Contact [Datadog support][14] and include the request headers and timestamp. |
 
 ## Further reading
 
@@ -247,8 +301,11 @@ Confirm the time range and organization, and that the request reached AI Gateway
 [3]: https://app.datadoghq.com/llm/gateway
 [4]: /account_management/personal-access-tokens/
 [5]: /account_management/service-access-tokens/
-[6]: /account_management/api-app-keys/
 [7]: https://app.datadoghq.com/llm/gateway/routing
 [8]: https://app.datadoghq.com/llm/gateway/access
 [9]: https://app.datadoghq.com/llm/gateway/budgets
 [10]: /monitors/
+[11]: https://app.datadoghq.com/llm/gateway/model-catalog
+[12]: /getting_started/site/
+[13]: /account_management/teams/manage/
+[14]: https://www.datadoghq.com/support/
