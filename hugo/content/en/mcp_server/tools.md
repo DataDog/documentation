@@ -1190,7 +1190,7 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 
 ## Derived Metrics
 
-Tools for creating, updating, and deleting [derived metrics][93], which let you save metric queries and formulas under a new metric name.
+Tools for creating, updating, and deleting [derived metrics][96], which let you save metric queries and formulas under a new metric name.
 
 ### `create_derived_metric`
 *Toolset: **derived-metrics***\
@@ -1923,6 +1923,123 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 - Disable all logpoints in session `session-12345`.
 - Stop all the logpoints in this debugging session.
+
+## Logs Configuration
+
+Tools for managing the configuration of [log pipelines][93], [indexes][94], and [archives][95]:
+
+- **Pipelines** parse and enrich incoming logs.
+- **Indexes** control indexing and retention.
+- **Archives** route logs to your cloud storage.
+
+Tools that update, delete, or reorder an existing resource return a preview first and apply the change only after you confirm it. Creating a resource does not require confirmation.
+
+To search and analyze logs, use `search_datadog_logs` and `analyze_datadog_logs` in the [Core tools](#core-tools) section.
+
+### `list_datadog_log_pipelines`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Lists your organization's [log pipelines][93] in evaluation order. Returns each pipeline's ID, name, filter query, enabled state, and processor count.
+
+- List my log pipelines in evaluation order.
+
+### `get_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Retrieves a pipeline's complete configuration by ID, including its ordered processors.
+
+- Show the configuration and processors for pipeline `<PIPELINE_ID>`.
+
+### `upsert_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines` or `Logs Write Processors`*\
+Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updated pipelines preserve fields you omit. When you provide a list field, such as processors or tags, the new list replaces the existing one. Integration-managed, read-only pipelines cannot be updated.
+
+- Create a pipeline for `service:checkout` with a Grok parser for these sample logs.
+
+### `delete_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines`*\
+Permanently removes a pipeline from your organization, including its processors and position in the evaluation order. Integration-managed, read-only pipelines cannot be deleted.
+
+- Delete pipeline `<PIPELINE_ID>`.
+
+### `move_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines`*\
+Places a pipeline immediately before or after another pipeline in the evaluation order. Changing this order affects the sequence in which matching pipelines process logs.
+
+- Move the parsing pipeline before the enrichment pipeline.
+
+### `list_datadog_log_indexes`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Lists your organization's [log indexes][94] in evaluation order. Returns each index's name, filter query, retention settings, daily limit, and exclusion filter count.
+
+- List my log indexes with their retention settings and daily limits.
+
+### `get_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Retrieves an index's complete configuration by name, including its filter query, retention settings, daily limit, and exclusion filters.
+
+- Show the configuration and exclusion filters for the production index.
+
+### `upsert_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Creates or updates an index by name. If an index with that name exists, the tool updates it; otherwise, it creates the index. Updated indexes preserve fields you omit. When you provide a list field, such as exclusion filters or tags, the new list replaces the existing one. Creating an index requires a filter query, and the index name cannot be changed after creation.
+
+- Set the daily limit for the staging index to one million logs.
+
+### `delete_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Permanently removes an index from your organization. The index name cannot be reused. Logs that would have matched the deleted index go to the next index in evaluation order whose filter matches them. Logs that match no remaining index are not indexed.
+
+- Delete the `obsolete-staging` index.
+
+### `move_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Places an index immediately before or after another index in the evaluation order. Logs are indexed in the first index whose filter matches, so changing the order can change their destination.
+
+- Move the `production-errors` index before the `production` index.
+
+### `list_datadog_log_archives`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Archives`*\
+Lists your organization's [log archives][95]. Returns each archive's ID, name, filter query, state, and destination type.
+
+- List my log archives and their destination types.
+
+### `get_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Archives`*\
+Retrieves an archive's complete configuration by ID, including its filter query, cloud storage destination, and rehydration settings.
+
+- Show the destination and rehydration settings for archive `<ARCHIVE_ID>`.
+
+### `upsert_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Creates an archive or updates an existing archive's configuration. To update an archive, provide `archive_id`; omit it to create one. Updated archives preserve fields you omit. An archive's destination cannot be changed after creation.
+
+- Update archive `<ARCHIVE_ID>` to archive logs matching `env:prod`.
+
+### `delete_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Permanently removes an archive's configuration and stops routing logs to that destination. Logs already stored in the cloud storage bucket remain intact.
+
+- Delete archive `<ARCHIVE_ID>`.
+
+### `move_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Places an archive immediately before or after another archive in the evaluation order. Logs are routed to the first archive whose filter matches, so changing the order can change their destination.
+
+- Move the production archive before the catch-all archive.
 
 ## Networks
 
@@ -3532,7 +3649,10 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
 [92]: /mcp_server/#data-handling-and-ai-providers
-[93]: /metrics/derived-metrics/
+[93]: /logs/log_configuration/pipelines/
+[94]: /logs/log_configuration/indexes/
+[95]: /logs/log_configuration/archives/
+[96]: /metrics/derived-metrics/
 
 ## Further reading
 
