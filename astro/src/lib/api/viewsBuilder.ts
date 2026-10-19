@@ -42,7 +42,8 @@ import {
   buildRunCommandByRegion,
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
-import { toCategorySlug, toSlug } from "./categorySlug";
+import { toCategorySlug, toOperationSlug } from "./categorySlug";
+import { toScopeAnchor } from "./scopesBuilder";
 import {
   getCodeExamplesForOperation,
   getLanguageRunInfo,
@@ -293,7 +294,7 @@ function collectRawOperationsFromPathItem(
  * one logical operation and render as version tabs on a single page.
  */
 function getOpSlug(op: RawOperation): string {
-  return toSlug(op.operation.summary ?? "");
+  return toOperationSlug(op.operation.summary ?? "");
 }
 
 /** Compare versions newest-first: `v2 < v1` returns -1. */
@@ -530,9 +531,11 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const permissions = extractPermissions(op.operation);
   const permissionsMatch = extractPermissionsMatch(op.operation);
   const oauthScopes = extractOauthScopes(op.operation.security);
-  // Hugo's scopes page anchors each API section by its raw tag name, not by
+  // The scopes page anchors each API section by its raw tag name, not by
   // the (possibly overridden) category slug.
-  const oauthScopesAnchor = oauthScopes ? toSlug(op.primaryTag) : undefined;
+  const oauthScopesAnchor = oauthScopes
+    ? toScopeAnchor(op.primaryTag)
+    : undefined;
 
   const regionUrls = buildRegionUrlsForOperation(spec, op);
 

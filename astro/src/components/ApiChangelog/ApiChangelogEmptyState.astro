@@ -16,7 +16,7 @@ interface Props {
 
 const { lang, filter } = Astro.props;
 const cl = classListFactory(styles);
-// TODO: no Hugo i18n keys exist for these strings yet.
+// MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
 const message =
   filter === "all"
     ? CHANGELOG_EMPTY_MESSAGE

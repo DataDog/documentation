@@ -50,6 +50,10 @@ export default {
     "region-selector": {
       attributes: {},
     },
+    "api-scopes": {
+      attributes: {},
+      selfClosing: true,
+    },
     "whats-next": {
       attributes: {
         desc: { type: String },

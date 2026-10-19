@@ -624,6 +624,91 @@ describe("topLevelSchemaToFields", () => {
     expect(fields).toHaveLength(1);
     expect(fields[0].name).toBe("id");
   });
+
+  it("marks required fields in arrays of objects", () => {
+    const spec = {};
+    const schema = {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["message", "job_id"],
+        properties: {
+          message: { type: "string" },
+          job_id: { type: "string" },
+          status: { type: "string" },
+        },
+      },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields.find((f) => f.name === "message")!.required).toBe(true);
+    expect(fields.find((f) => f.name === "job_id")!.required).toBe(true);
+    expect(fields.find((f) => f.name === "status")!.required).toBe(false);
+  });
+
+  it("marks required fields in arrays of $ref objects", () => {
+    const spec = {
+      components: {
+        schemas: {
+          JobLog: {
+            type: "object",
+            required: ["message"],
+            properties: {
+              message: { type: "string" },
+              status: { type: "string" },
+            },
+          },
+          JobLogs: {
+            type: "array",
+            items: { $ref: "#/components/schemas/JobLog" },
+          },
+        },
+      },
+    };
+    const schema = { $ref: "#/components/schemas/JobLogs" };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields.find((f) => f.name === "message")!.required).toBe(true);
+    expect(fields.find((f) => f.name === "status")!.required).toBe(false);
+  });
+
+  it("marks required fields in arrays of arrays of objects", () => {
+    const spec = {};
+    const schema = {
+      type: "array",
+      items: {
+        type: "array",
+        items: {
+          type: "object",
+          required: ["message"],
+          properties: {
+            message: { type: "string" },
+            status: { type: "string" },
+          },
+        },
+      },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields.find((f) => f.name === "message")!.required).toBe(true);
+    expect(fields.find((f) => f.name === "status")!.required).toBe(false);
+  });
+
+  it("preserves required fields in object bodies", () => {
+    const spec = {};
+    const schema = {
+      type: "object",
+      required: ["message"],
+      properties: {
+        message: { type: "string" },
+        status: { type: "string" },
+      },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields.find((f) => f.name === "message")!.required).toBe(true);
+    expect(fields.find((f) => f.name === "status")!.required).toBe(false);
+  });
 });
 
 describe("getBestDiscriminant", () => {

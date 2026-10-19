@@ -105,12 +105,18 @@ svg {
   vertical-align: middle;
 }
 
+/* Links are body-text colored, with the underline below the descenders. */
 a {
-  color: var(--color-brand);
+  color: var(--color-text);
+  text-decoration-color: var(--color-text-muted);
+  text-decoration-thickness: var(--border-width);
+  text-underline-position: under;
+  text-underline-offset: var(--space-2xs);
 }
 
 a:hover {
-  color: var(--color-brand-hover);
+  color: var(--color-brand);
+  text-decoration-color: var(--color-brand);
 }
 
 /* Inline code */
@@ -247,7 +253,7 @@ table {
   margin-bottom: var(--space-lg);
   border: var(--border-width) solid var(--color-surface-border);
   border-collapse: collapse;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   background-color: var(--color-surface-bg);
 }
 
@@ -280,14 +286,6 @@ table tr:first-child td {
 
 table tbody tr:nth-child(2n) {
   background: var(--color-surface-alt);
-}
-
-table a {
-  border-bottom: var(--border-width) solid var(--color-text-muted);
-}
-
-table a:hover {
-  border-bottom: var(--border-width) solid var(--color-brand);
 }
 
 tbody code {
