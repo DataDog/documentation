@@ -149,6 +149,31 @@ $context = new EvaluationContext(
 
 <div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and Booleans. Nested arrays, objects, and null values are ignored for targeting and exposure reporting.</div>
 
+## Per-subject evaluation telemetry opt-out
+
+This control applies to the PHP 8 OpenFeature provider, not the direct `DDTrace\FeatureFlags\Client` API. See [availability and shared behavior][7].
+
+{{< code-block lang="php" >}}
+<?php
+
+use DDTrace\OpenFeature\DataDogProvider;
+use OpenFeature\implementation\flags\Attributes;
+use OpenFeature\implementation\flags\EvaluationContext;
+use OpenFeature\OpenFeatureAPI;
+
+$api = OpenFeatureAPI::getInstance();
+$api->setProvider(new DataDogProvider(enableEvaluationTelemetryOptOutParameter: true));
+$client = $api->getClient();
+
+$optedOut = true; // Your application determines this value for the subject.
+$context = new EvaluationContext('user-123', new Attributes([
+    'dd_evaluation_telemetry_opt_out' => $optedOut,
+]));
+$enabled = $client->getBooleanValue('new-checkout', false, $context);
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` before PHP starts and use `new DataDogProvider()`. An explicit option overrides the environment variable, including `false`.
+
 ## Evaluate flags
 
 After setting up the client, you can evaluate flags throughout your application. Each flag is identified by a unique string key and evaluated with a typed method that returns a value of the expected type. If the flag does not exist or cannot be evaluated, the SDK returns the provided default value.
@@ -442,3 +467,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [4]: /tracing/trace_collection/dd_libraries/php/
 [5]: /feature_flags/concepts/environments/
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[7]: /feature_flags/concepts/evaluation_telemetry_opt_out/

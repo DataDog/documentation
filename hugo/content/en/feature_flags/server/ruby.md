@@ -118,6 +118,36 @@ context = OpenFeature::SDK::EvaluationContext.new(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Per-subject evaluation telemetry opt-out
+
+Configure the provider once. Supply the subject's decision in each evaluation context, not a shared global context. See [availability and shared behavior][6].
+
+{{< code-block lang="ruby" >}}
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+provider = Datadog::OpenFeature::Provider.new(
+  enable_evaluation_telemetry_opt_out_parameter: true,
+)
+OpenFeature::SDK.set_provider_and_wait(provider)
+client = OpenFeature::SDK.build_client
+
+# In a request handler:
+opted_out = true # Your application determines this value for the subject.
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: opted_out,
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context,
+)
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` and omit the provider option. An explicit option overrides the environment variable, including `false`.
+
 ## Evaluate flags
 
 After creating the `OpenFeature` client, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
@@ -326,3 +356,4 @@ Look for messages about:
 [3]: https://openfeature.dev/
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /feature_flags/concepts/evaluation_telemetry_opt_out/

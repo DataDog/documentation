@@ -190,6 +190,54 @@ evalCtx := openfeature.NewEvaluationContext(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Per-subject evaluation telemetry opt-out
+
+Enable the control when creating the provider, after starting the Datadog tracer. Pass each subject's decision with the evaluation. See [availability and shared behavior][6].
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+    "context"
+    "log"
+
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
+    "github.com/open-feature/go-sdk/openfeature"
+)
+
+func main() {
+    tracer.Start()
+    defer tracer.Stop()
+
+    enableOptOut := true
+    provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{
+        EnableEvaluationTelemetryOptOutParameter: &enableOptOut,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if err := openfeature.SetProviderAndWait(provider); err != nil {
+        log.Fatal(err)
+    }
+    client := openfeature.NewClient("my-service")
+
+    optedOut := true // Your application determines this value for the subject.
+    enabled, err := client.BooleanValue(
+        context.Background(), "new-checkout", false,
+        openfeature.NewEvaluationContext("user-123", map[string]any{
+            "dd_evaluation_telemetry_opt_out": optedOut,
+        }),
+    )
+    if err != nil {
+        log.Print(err)
+    }
+    log.Printf("New checkout enabled: %t", enabled)
+}
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` and omit the provider option. A non-nil option overrides the environment variable, including a pointer to `false`.
+
 ## Evaluate flags
 
 After setting up the provider and creating a client, you can evaluate flags throughout your application. Flag evaluation is local and fast—the SDK uses locally cached configuration data, so no network requests occur during evaluation.
@@ -363,6 +411,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/evaluation_telemetry_opt_out/
 
 ## Further reading
 

@@ -106,6 +106,31 @@ await OpenFeature.setProviderAndWait(provider, evaluationContext);
 
 Most applications run several asynchronous tasks at startup, such as fetching data from another service or loading configuration. This example shows only feature flag initialization. As a best practice, start all of your startup promises together and await them as a group (for example, with `Promise.all`) right before the results are needed, rather than awaiting each one sequentially. This keeps total startup time close to the slowest task instead of the sum of all of them.
 
+## Per-subject evaluation telemetry opt-out
+
+Enable the control when you create the provider. Pass your application's decision as a Boolean in the evaluation context. See [availability and shared behavior][7].
+
+{{< code-block lang="javascript" >}}
+import { DatadogProvider } from '@datadog/openfeature-browser';
+import { OpenFeature } from '@openfeature/web-sdk';
+
+const provider = new DatadogProvider({
+  clientToken: '<CLIENT_TOKEN>',
+  env: '<ENV_NAME>',
+  enableEvaluationTelemetryOptOutParameter: true,
+});
+
+const optedOut = true; // Your application determines this value.
+await OpenFeature.setProviderAndWait(provider, {
+  targetingKey: 'user-123',
+  dd_evaluation_telemetry_opt_out: optedOut,
+});
+
+const enabled = OpenFeature.getClient().getBooleanValue('new-checkout', false);
+{{< /code-block >}}
+
+Use `OpenFeature.setContext()` to update the decision. Keep the subject's targeting key and other required attributes. For application-managed configuration, enable the same option on `DatadogCoreProvider`; Datadog evaluation and RUM tracking hooks honor it. Exposure hooks remain enabled.
+
 ## Evaluate flags
 
 After the provider is initialized, you can evaluate flags anywhere in your application. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags.
@@ -368,3 +393,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /feature_flags/concepts/evaluation_telemetry_opt_out/

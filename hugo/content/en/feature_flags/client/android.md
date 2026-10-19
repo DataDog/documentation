@@ -153,6 +153,61 @@ OpenFeatureAPI.setEvaluationContext(
 
 <div class="alert alert-info">OpenFeature attributes must use flat <code>Value</code> primitives such as <code>Value.String()</code>, <code>Value.Integer()</code>, <code>Value.Double()</code>, or <code>Value.Boolean()</code>. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
 
+## Per-subject evaluation telemetry opt-out
+
+After initializing Datadog and enabling Flags, enable the control when you first create the client. See [availability and shared behavior][4].
+
+### Provider integration
+
+Pass your application's decision as `Value.Boolean`, not a string:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.openfeature.asOpenFeatureProvider
+import dev.openfeature.kotlin.sdk.ImmutableContext
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.Value
+
+val provider = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .build()
+    .asOpenFeatureProvider()
+
+val optedOut = true // Your application determines this value.
+OpenFeatureAPI.setEvaluationContext(
+    ImmutableContext(
+        targetingKey = "user-123",
+        attributes = mapOf("dd_evaluation_telemetry_opt_out" to Value.Boolean(optedOut))
+    )
+)
+OpenFeatureAPI.setProviderAndWait(provider)
+
+val enabled = OpenFeatureAPI.getClient().getBooleanValue("new-checkout", false)
+{{< /code-block >}}
+
+Use `OpenFeatureAPI.setEvaluationContext()` to update the subject's decision.
+
+### Direct client integration
+
+The native client has string-valued context attributes. Use its typed setter to control telemetry:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.model.EvaluationContext
+import com.datadog.android.flags.setEvaluationTelemetryOptOut
+
+val client = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .build()
+
+val optedOut = true // Your application determines this value.
+client.setEvaluationTelemetryOptOut(optedOut)
+client.setEvaluationContext(EvaluationContext(targetingKey = "user-123"))
+val enabled = client.getBooleanValue("new-checkout", false)
+{{< /code-block >}}
+
+A string `"true"` in the native context does not activate opt-out. Update the typed setter when the subject or preference changes. Reusing an existing client name retains its original configuration.
+
 ## Evaluate flags
 
 After setting up your provider and evaluation context, you can read flag values throughout your app. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags. This makes evaluations safe to perform on the main thread.
@@ -602,3 +657,4 @@ class CheckoutFlagsTest {
 [1]: https://openfeature.dev/
 [2]: /account_management/api-app-keys/#client-tokens
 [3]: https://github.com/open-feature/kotlin-sdk/pull/226
+[4]: /feature_flags/concepts/evaluation_telemetry_opt_out/
