@@ -86,8 +86,9 @@ You can connect multiple tables, each with its own schema mapping. After you sav
 ## Search federated logs
 
 1. Go to [Log Explorer][1].
-2. In the data source selector, select {{< ui >}}Databricks{{< /ui >}}, and then select a connected source.
-3. Select a time range and enter a query, such as `service:web status:error`.
+2. Click the data source dropdown on the left of the search bar, which is set to {{< ui >}}Indexes{{< /ui >}} by default.
+3. Under {{< ui >}}External Sources{{< /ui >}}, select {{< ui >}}Databricks{{< /ui >}}, and then select a connected source.
+4. Select a time range and enter a query, such as `service:web status:error`.
 
 Datadog replaces the mapped field names in your query with the corresponding column names.
 
