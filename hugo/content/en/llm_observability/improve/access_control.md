@@ -59,7 +59,7 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 **Note**: The filter key may be locked. Agent Observability uses one tag key, `ml_app`, for both applications and projects, and Data Access Control allows one tag key per telemetry type. If your organization already has an Agent Observability Restricted Dataset, new ones reuse the same key.
 
-The restriction takes effect as soon as it is saved. The project and its experiments, datasets, dataset records, annotation queues, spans, and evaluation metrics are hidden immediately, regardless of when they were created. Spans from experiments run through the SDK are an exception. See [Limitations](#limitations).
+The restriction takes effect as soon as it is saved. The project and its experiments, datasets, dataset records, and annotation queues are hidden immediately, regardless of when they were created. Spans from experiments run through the SDK are an exception. See [Limitations](#limitations).
 
 ## Restrict a project through the API
 
