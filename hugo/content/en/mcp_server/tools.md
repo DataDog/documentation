@@ -1190,7 +1190,7 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 
 ## Derived Metrics
 
-Tools for creating, updating, and deleting derived metrics: which let you save metric queries and formulas under a new metric name.
+Tools for creating, updating, and deleting [derived metrics][92], which let you save metric queries and formulas under a new metric name.
 
 ### `create_derived_metric`
 *Toolset: **derived-metrics***\
@@ -1203,7 +1203,7 @@ Creates a derived metric from a metric name, formula, and complete set of named 
 ### `update_derived_metric`
 *Toolset: **derived-metrics***\
 *Permissions Required: `Metric Tags Write`*\
-Updating replaces the entire definition of an existing derived metric. Include the formula and every named query you want to keep. Any omitted queries are removed.
+Updates an existing derived metric by replacing its entire definition. Include the formula and every named query you want to keep. Any omitted queries are removed. If the metric does not exist, the update fails without creating it.
 
 - Replace the definition of `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{env:prod}`, using the `metrics` data source.
 - Update `custom.cpu.total` to formula `a + b`. Query `a` is `avg:system.cpu.user{env:prod}` and query `b` is `avg:system.cpu.system{env:prod}`. Both queries use the `metrics` data source. Remove any other queries.
@@ -1211,7 +1211,7 @@ Updating replaces the entire definition of an existing derived metric. Include t
 ### `delete_derived_metric`
 *Toolset: **derived-metrics***\
 *Permissions Required: `Metric Tags Write`*\
-Deletes a derived metric definition. Deleting a definition can break dashboards, monitors, and other resources that use the metric. The tool requires explicit confirmation before it deletes the metric.
+Deletes a derived metric definition. Deleting a definition can break dashboards, monitors, and other resources that use the metric. The tool requires explicit confirmation before it deletes the metric. This operation is idempotent.
 
 - Delete the derived metric `custom.cpu.user`.
 - Delete the derived metric `custom.cpu.total` if it exists.
