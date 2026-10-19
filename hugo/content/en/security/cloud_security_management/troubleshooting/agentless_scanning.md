@@ -23,7 +23,7 @@ If no results appear after two hours:
 - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
 - Check that the cloud integration is properly configured. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, verify that your cloud account appears with Agentless Scanning enabled.
 
-### Enable Remote Configuration on the API key
+## Enable Remote Configuration on the API key
 
 To authenticate and authorize the Agent to receive configuration, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
 
