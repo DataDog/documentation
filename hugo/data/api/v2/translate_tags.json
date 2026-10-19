@@ -575,6 +575,10 @@
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
   },
+  "temporal-cloud-openmetrics-integration": {
+    "name": "Temporal Cloud OpenMetrics Integration",
+    "description": "Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources\ndirectly through the Datadog API. See the\n[Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for\nmore information."
+  },
   "test-optimization": {
     "name": "Test Optimization",
     "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."

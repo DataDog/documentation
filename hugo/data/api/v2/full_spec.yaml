@@ -134300,6 +134300,253 @@ components:
           description: Offset type.
           type: string
       type: object
+    TemporalCloudOpenMetricsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Temporal Cloud OpenMetrics integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthRequest"
+    TemporalCloudOpenMetricsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Temporal Cloud OpenMetrics integration account.
+      oneOf:
+        - $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthResponse"
+    TemporalCloudOpenMetricsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Temporal Cloud OpenMetrics integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthUpdate"
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the API key of a Temporal Cloud service account with the Metrics Read-Only account-level role.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Temporal Cloud.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the API key of a Temporal Cloud service account with the Metrics Read-Only account-level role. Only the fields provided are changed; omit `token` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Temporal Cloud.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Temporal Cloud OpenMetrics integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the Temporal Cloud OpenMetrics integration account.
+          example: temporal-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountCreateData:
+      description: Data envelope for creating a Temporal Cloud OpenMetrics integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountCreateRequest:
+      description: Request payload to create a Temporal Cloud OpenMetrics integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountResponse:
+      description: Response payload for a single Temporal Cloud OpenMetrics integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountResponseAttributes:
+      description: Attributes of a Temporal Cloud OpenMetrics integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Temporal Cloud OpenMetrics integration account.
+          example: temporal-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountResponseData:
+      description: Data envelope of a Temporal Cloud OpenMetrics integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Temporal Cloud OpenMetrics integration account.
+          example: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Temporal Cloud OpenMetrics integration account.
+      properties:
+        include_opt_in_labels:
+          description: >-
+            When enabled, Datadog collects Temporal Cloud's [opt-in labels](https://docs.temporal.io/cloud/metrics/openmetrics/metrics-reference#opt-in-labels) (activity type, worker deployment name, and worker build ID) for more granularity on your existing metrics. Enabling them may increase metric collection latency. Defaults to `false`.
+          example: false
+          type: boolean
+        namespaces_to_include:
+          description: >-
+            Comma-separated list of Temporal Cloud namespaces to collect metrics for. An entry can use `*` as a wildcard; for example, `prod-*` matches every namespace starting with `prod-`. Entries may contain only lowercase letters, digits, hyphens, periods and `*`; any other value is rejected with a `422` response. Omit it or leave it empty to collect metrics for all namespaces.
+          example: prod-*,billing.a1b2c
+          type: string
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountSettingsResponse:
+      description: Settings configured on the Temporal Cloud OpenMetrics integration account.
+      properties:
+        include_opt_in_labels:
+          description: >-
+            When enabled, Datadog collects Temporal Cloud's [opt-in labels](https://docs.temporal.io/cloud/metrics/openmetrics/metrics-reference#opt-in-labels) (activity type, worker deployment name, and worker build ID) for more granularity on your existing metrics. Enabling them may increase metric collection latency.
+          example: false
+          type: boolean
+        namespaces_to_include:
+          description: >-
+            Comma-separated list of Temporal Cloud namespaces to collect metrics for. An entry can use `*` as a wildcard; for example, `prod-*` matches every namespace starting with `prod-`. Empty or absent when metrics are collected for all namespaces.
+          example: prod-*,billing.a1b2c
+          type: string
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.
+      properties:
+        include_opt_in_labels:
+          description: >-
+            When enabled, Datadog collects Temporal Cloud's [opt-in labels](https://docs.temporal.io/cloud/metrics/openmetrics/metrics-reference#opt-in-labels) (activity type, worker deployment name, and worker build ID) for more granularity on your existing metrics. Enabling them may increase metric collection latency.
+          example: false
+          type: boolean
+        namespaces_to_include:
+          description: >-
+            Comma-separated list of Temporal Cloud namespaces to collect metrics for. An entry can use `*` as a wildcard; for example, `prod-*` matches every namespace starting with `prod-`. Entries may contain only lowercase letters, digits, hyphens, periods and `*`; any other value is rejected with a `422` response. Omit it or leave it empty to collect metrics for all namespaces.
+          example: prod-*,billing.a1b2c
+          type: string
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Temporal Cloud OpenMetrics integration account. Every field is optional; only the fields provided are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the Temporal Cloud OpenMetrics integration account.
+          example: temporal-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountSettingsUpdate"
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountUpdateData:
+      description: Data envelope for updating a Temporal Cloud OpenMetrics integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Temporal Cloud OpenMetrics integration account to update.
+          example: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountUpdateRequest:
+      description: Request payload to update a Temporal Cloud OpenMetrics integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountsResponse:
+      description: Response payload for a list of Temporal Cloud OpenMetrics integration accounts.
+      properties:
+        data:
+          description: List of Temporal Cloud OpenMetrics integration accounts.
+          items:
+            $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationDataflowsResponse:
+      description: Data Datadog collects from Temporal Cloud OpenMetrics, keyed by dataflow id.
+      properties:
+        temporal-cloud-openmetrics-metrics:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsMetricsIntegrationDataflowResponse"
+      type: object
+    TemporalCloudOpenMetricsMetricsIntegrationDataflowResponse:
+      description: >-
+        Temporal Cloud operational metrics for your namespaces, workflows and task queues, such as workflow and activity rates, task polling, and service request latency, collected from Temporal Cloud's OpenMetrics endpoint. This is the integration's only collection: it is always on and cannot be turned off, which is why it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     TenancyConfig:
       description: Response containing a single OCI tenancy integration configuration.
       example:
@@ -186048,6 +186295,249 @@ paths:
       summary: Update a Snowflake integration account
       tags:
         - Snowflake Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/temporal-cloud-openmetrics/accounts:
+    get:
+      description: List Temporal Cloud OpenMetrics integration accounts.
+      operationId: ListTemporalCloudOpenMetricsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            temporal-cloud-openmetrics-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: temporal-cloud-prod
+                          settings:
+                            include_opt_in_labels: false
+                            namespaces_to_include: prod-*,billing.a1b2c
+                        id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Temporal Cloud OpenMetrics accounts
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Temporal Cloud OpenMetrics integration account.
+      operationId: CreateTemporalCloudOpenMetricsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          temporal-cloud-openmetrics-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: temporal-cloud-prod
+                        settings:
+                          include_opt_in_labels: false
+                          namespaces_to_include: prod-*,billing.a1b2c
+                      id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/temporal-cloud-openmetrics/accounts/{account_id}:
+    delete:
+      description: Delete a Temporal Cloud OpenMetrics integration account.
+      operationId: DeleteTemporalCloudOpenMetricsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Temporal Cloud OpenMetrics integration account.
+      operationId: GetTemporalCloudOpenMetricsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          temporal-cloud-openmetrics-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: temporal-cloud-prod
+                        settings:
+                          include_opt_in_labels: false
+                          namespaces_to_include: prod-*,billing.a1b2c
+                      id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.
+      operationId: UpdateTemporalCloudOpenMetricsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          temporal-cloud-openmetrics-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: temporal-cloud-prod
+                        settings:
+                          include_opt_in_labels: false
+                          namespaces_to_include: prod-*,billing.a1b2c
+                      id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -255184,6 +255674,15 @@ tags:
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
+  - description: |-
+      Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources
+      directly through the Datadog API. See the
+      [Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for
+      more information.
+    externalDocs:
+      description: Temporal Cloud OpenMetrics integration.
+      url: https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/
+    name: Temporal Cloud OpenMetrics Integration
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
