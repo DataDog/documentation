@@ -1,11 +1,12 @@
 ---
 title: Prompt Optimization
 aliases:
+- /llm_observability/improve/experiments/prompt_optimization/
 - /llm_observability/experiments/prompt_optimization/
 description: Automatically improve LLM prompts through iterative refinement and AI-powered evaluation.
 private: true
 further_reading:
-  - link: /llm_observability/improve/experiments/setup
+  - link: /llm_observability/guide/experiments
     tag: "Documentation"
     text: Set up and use Agent Observability Experiments
   - link: /llm_observability/improve/datasets
