@@ -434,7 +434,9 @@ Rules behave as follows:
 
 Sampling rules can only be configured through the environment variable; `LLMObs.enable()` has no equivalent parameter.
 
-**Note**: Rules match against the root span's tags as they stand when the sampling decision is made, and the decision does not change after that. The decision is made when the root span finishes, or earlier if the trace makes an outbound request, hands work off to another thread or asyncio task, or is partially flushed (see `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`). To make sure a tag affects sampling, annotate the root span with it before any of these occur.
+<div class="alert alert-info">
+Rules match the root span's tags at the time of the sampling decision. The decision is final and is made when the root span finishes, or earlier if the trace makes an outbound request, hands work off to another thread or asyncio task, or is partially flushed (see <code>DD_TRACE_PARTIAL_FLUSH_MIN_SPANS</code>). To ensure a tag affects sampling, add it to the root span before any of these events occur.
+</div>
 
 ## Manual instrumentation
 
