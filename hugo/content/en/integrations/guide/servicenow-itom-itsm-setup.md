@@ -258,14 +258,14 @@ For step-by-step instructions on setting up and configuring this integration for
 
 ### Configure Datadog On-Call {#on-call}
 
-Use this integration to create a ServiceNow incident when a Datadog On-Call page triggers, and to page Datadog On-Call from a ServiceNow record.
+Use this integration to create a ServiceNow incident when a Datadog On-Call Page triggers, and to create a Datadog On-Call Page from a ServiceNow record.
 
 **Note**: The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.
 
 1. In Datadog, go to **Incident Response** > **On-Call** > **Settings**. On the left side, select **Integrations**.
 1. Click **ServiceNow**, then click **Add Connection** and configure the settings for the connection with your instance.
 1. Click a [routing rule][13] for a team, and add a rule that creates a ServiceNow incident when an On-Call page triggers.
-1. (Optional) To create a Datadog On-Call page from ServiceNow, see [Create a Datadog On-Call page from ServiceNow](#create-on-call-page).
+1. (Optional) To create a Datadog On-Call Page from ServiceNow, see [Create a Datadog On-Call Page from ServiceNow](#create-on-call-page).
 
 ## Sync data bidirectionally between ServiceNow and Datadog Work/Incident Management and On-Call {#sync-bidirectionally}
 
@@ -379,24 +379,24 @@ To populate data into the ServiceNow incident, you have to modify your script to
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Create a Datadog On-Call page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
-To create a Datadog On-Call page from a ServiceNow record, add a new business rule in ServiceNow that calls the `PublishOnCallPage` script include. The script include uses the credentials from the **Configuration** record you create in [Sync data bidirectionally](#sync-bidirectionally), so complete that section first.
+{{% collapse-content title="Create a Datadog On-Call Page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
+To create a Datadog On-Call Page from a ServiceNow record, add a new business rule in ServiceNow that calls the `PublishOnCallPage` script include. The script include uses the credentials from the **Configuration** record you create in [Sync data bidirectionally](#sync-bidirectionally), so complete that section first.
 
 `PublishOnCallPage` takes three arguments, in order:
 
 | Argument | Required | Description |
 | -------- | -------- | ----------- |
-| Target type | Yes | The kind of target to page: `team_handle`, `team_uuid`, or `user_uuid`. |
-| Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's UUID, or the user's UUID. |
+| Target type | Yes | The kind of target to page: `team_handle`, `team_id`, or `user_id`. |
+| Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's ID, or the user's ID. |
 | Urgency | No | The urgency of the page: `high` or `low`. Defaults to `high`. |
 
-In the following example, the business rule pages the Datadog user with the UUID `<USER_UUID>` at high urgency:
+In the following example, the business rule pages the Datadog user with the ID `<USER_ID>` at high urgency:
 
 ```javascript
 (function executeRule(current, previous /* null when async */) {
     new PublishOnCallPage(
-        "user_uuid",
-        "<USER_UUID>",
+        "user_id",
+        "<USER_ID>",
         "high"
     ).execute(current);
 })(current, previous);
