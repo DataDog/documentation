@@ -1188,13 +1188,13 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
 
-## Derived metrics
+## Derived Metrics
 
 Tools for creating, updating, and deleting [derived metrics][92] from formulas and named metric queries.
 
 ### `create_derived_metric`
 *Toolset: **derived-metrics***\
-*Permissions Required: `metric_tags_write`*\
+*Permissions Required: `Metric Tags Write`*\
 Creates a derived metric from a metric name, formula, and complete set of named queries. If the metric name already exists, creation fails and the existing metric is unchanged.
 
 - Create `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{*}`, using the `metrics` data source.
@@ -1202,7 +1202,7 @@ Creates a derived metric from a metric name, formula, and complete set of named 
 
 ### `update_derived_metric`
 *Toolset: **derived-metrics***\
-*Permissions Required: `metric_tags_write`*\
+*Permissions Required: `Metric Tags Write`*\
 Replaces the complete definition of an existing derived metric. Provide the replacement formula and every named query to keep. The tool removes any query you omit. If the metric does not exist, the update fails without creating it.
 
 - Replace the definition of `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{env:prod}`, using the `metrics` data source.
@@ -1210,8 +1210,8 @@ Replaces the complete definition of an existing derived metric. Provide the repl
 
 ### `delete_derived_metric`
 *Toolset: **derived-metrics***\
-*Permissions Required: `metric_tags_write`*\
-Deletes a derived metric definition. Deleting a definition can break dashboards, monitors, and other resources that use the metric. After you explicitly confirm the exact metric name, the agent passes that name in `confirm_metric_name`, matching `metric_name`. Deletion succeeds if the metric is already absent.
+*Permissions Required: `Metric Tags Write`*\
+Deletes a derived metric definition. Deleting a definition can break dashboards, monitors, and other resources that use the metric. The tool requires explicit confirmation before it deletes the metric. This operation is idempotent.
 
 - Delete the derived metric `custom.cpu.user`.
 - Delete the derived metric `custom.cpu.total` if it exists.
