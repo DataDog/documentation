@@ -426,11 +426,11 @@ Each rule is a JSON object with the following fields:
 
 Rules behave as follows:
 
-- Rules are evaluated in the order you declare them, and the first rule that matches wins. Its `sample_rate` replaces `DD_LLMOBS_SAMPLE_RATE` for that trace. If no rule matches, `DD_LLMOBS_SAMPLE_RATE` applies.
-- Every tag declared in a rule must match for the rule to match.
-- Tag values are matched case-insensitively as glob patterns, where `*` matches any number of characters and `?` matches exactly one. For example, `{"tags": {"ml_app": "chat-*"}}` matches `chat-prod` and `chat-staging`.
-- Rules can match on tags Datadog sets on the root span, including `ml_app`, `env`, `service`, `version`, and `session_id`, as well as any tags you set yourself with [`LLMObs.annotate()`](#adding-tags) or `DD_TAGS`.
-- As with `DD_LLMOBS_SAMPLE_RATE`, the decision is made once per trace on the root span and applies to all of its child spans, including spans in downstream services.
+- Rules are evaluated in the order you declare them. The first matching rule's `sample_rate` overrides `DD_LLMOBS_SAMPLE_RATE` for that trace. If no rule matches, `DD_LLMOBS_SAMPLE_RATE` applies.
+- All tags specified in a rule must match for the rule to apply.
+- Tag value patterns are case-insensitive and support glob matching: `*` matches zero or more characters, and `?` matches exactly one character. For example, `{"tags": {"ml_app": "chat-*"}}` matches `chat-prod` and `chat-staging`.
+- Rules can match tags that Datadog sets on the root span, including `ml_app`, `env`, `service`, `version`, and `session_id`, as well as custom tags you set with [`LLMObs.annotate()`](#adding-tags) or `DD_TAGS`.
+- As with `DD_LLMOBS_SAMPLE_RATE`, the sampling decision is made once per trace on the root span and applies to all child spans, including those in downstream services.
 
 Sampling rules can only be configured through the environment variable; `LLMObs.enable()` has no equivalent parameter.
 
