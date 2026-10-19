@@ -30,12 +30,12 @@ Before you configure the Azure Data Explorer destination, you must have:
 - An ADX cluster with streaming ingestion enabled.
     - See [Create a cluster][3] and [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
 - An ADX database and the tables you want to send logs to.
-    - See [Create a database][4] and [Create a table in Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/create-table-wizard) more information.
+    - See [Create a database][4] and [Create a table in Azure Data Explorer][25] for more information.
 - A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
     ```
     .alter table ['<TABLE_NAME>'] policy streamingingestion enable
     ```
-    -  See [Streaming ingestion policy][5] for more information.
+    - See [Streaming ingestion policy][5] for more information.
 - (Optional) An ingestion mapping on the target table, if you want to map log fields to table columns. See [Ingestion mappings][6] for more information.
 - An Azure identity that the Worker uses to authenticate to ADX. The identity must have ingestion permissions, such as the [Database Ingestor][7] role, on each database the Worker sends logs to.
 
@@ -50,7 +50,7 @@ After you select the Azure Data Explorer destination in the pipeline UI:
 1. Enter the identifier for your Azure Data Explorer ingestion endpoint. This identifier references the ingestion endpoint, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
     - **Note**: Use the cluster URI shown in the Azure portal, **not** the data ingestion URI, which starts with `ingest-`.
 1. In the **Database** field, enter the name of the ADX database, such as `logs_db`.
-1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][12], so you can route logs to different tables based on a log field. A template syntax example: `{{ adx.table }}`.
+1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][12], such as `{{ adx.table }}`, so you can route logs to different tables based on a log field.
     - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of logs.
 1. (Optional) In the **Mapping Reference** field, enter the name of the ingestion mapping to use, such as `logs_json_mapping`. This field supports [template syntax][12], such as `{{ adx.mapping }}`.
     - **Notes**:
@@ -97,7 +97,7 @@ The Azure CLI authentication method uses the credentials of the account signed i
 
 #### Client certificate
 
-The client certificate authentication method uses a [Microsoft Entra application (service principal)][20] client ID and certificate. For the following fields:
+The client certificate authentication method uses a [Microsoft Entra application (service principal)][20] client ID and certificate. Configure the following fields:
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
@@ -106,7 +106,7 @@ The client certificate authentication method uses a [Microsoft Entra application
 
 #### Client secret
 
-The client secret authentication method uses a [Microsoft Entra application (service principal)][20] client ID and client secret. For the following fields:
+The client secret authentication method uses a [Microsoft Entra application (service principal)][20] client ID and client secret. Configure the following fields:
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
@@ -114,14 +114,14 @@ The client secret authentication method uses a [Microsoft Entra application (ser
 
 #### Managed identity
 
-The managed identity authentication method uses an [Azure managed identity][21] assigned to the resource where the Worker runs. For the following fields:
+The managed identity authentication method uses an [Azure managed identity][21] assigned to the resource where the Worker runs. Configure the following fields:
 
 - (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
 - (Optional) **User-assigned managed identity ID type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
 
 #### Managed identity (client assertion)
 
-The managed identity with client assertion authentication method uses a managed identity to get a client assertion, which is then exchanged for an access token for the target application. For the following fields:
+The managed identity (client assertion) authentication method uses a managed identity to get a client assertion. The client assertion is exchanged for an access token for the target application. Configure the following fields:
 
 - **Client assertion client ID**: Enter the client ID of the target application.
 - **Client assertion tenant ID**: Enter the tenant ID of the target application.
@@ -130,7 +130,7 @@ The managed identity with client assertion authentication method uses a managed 
 
 #### Workload identity
 
-The workload identity authentication method uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate. For the following fields:
+The workload identity authentication method uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate. Configure the following fields:
 
 - (Optional) **Client ID**: Enter the client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
 - (Optional) **Tenant ID**: Enter your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
@@ -223,9 +223,9 @@ For [component metrics][16] and [destination buffer metrics][17] emitted by all 
 
 A batch of logs is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][23] for more information.
 
-| Maximum Events | Maximum Bytes (MB) | Timeout (seconds) |
-|----------------|--------------------|-------------------|
-| 1,000          | 2                  | 1                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds) |
+|----------------|-------------------|-------------------|
+| 1,000          | 2                 | 1                 |
 
 
 ## Further reading
@@ -248,7 +248,7 @@ A batch of logs is flushed when one of these parameters is met. Batching is also
 [14]: https://learn.microsoft.com/en-us/kusto/management/update-policy?view=azure-data-explorer
 [15]: https://learn.microsoft.com/en-us/azure/data-explorer/manage-cluster-horizontal-scaling
 [16]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[17]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[17]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [18]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [19]: https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli
 [20]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
@@ -256,3 +256,4 @@ A batch of logs is flushed when one of these parameters is met. Batching is also
 [22]: https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview
 [23]: /observability_pipelines/destinations/#event-batching
 [24]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer#mapping-with-ingestionmappingreference
+[25]: https://learn.microsoft.com/en-us/azure/data-explorer/create-table-wizard
