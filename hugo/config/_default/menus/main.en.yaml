@@ -7707,6 +7707,11 @@ menu:
       url: logs/explorer/findings/
       parent: log_explorer
       weight: 516
+    - name: Federated Logs
+      identifier: log_explorer_federated_logs
+      url: logs/explorer/federated_logs/
+      parent: log_explorer
+      weight: 517
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
