@@ -23,6 +23,7 @@ Select a platform to start instrumenting your application:
   {{< image-card href="/client_sdks/setup/?platform=browser" src="integrations_logos/javascript_large.svg" alt="browser" >}}
   {{< image-card href="/client_sdks/setup/?platform=android" src="integrations_logos/android_large.svg" alt="android" >}}
   {{< image-card href="/client_sdks/setup/?platform=cpp" src="integrations_logos/cpp_large.svg" alt="C / C++" >}}
+  {{< image-card href="/client_sdks/setup/?platform=electron" src="integrations_logos/rum-electron_large.svg" alt="Electron" >}}
   {{< image-card href="/client_sdks/setup/?platform=ios" src="integrations_logos/ios_large.svg" alt="ios" >}}
   {{< image-card href="/client_sdks/setup/?platform=flutter" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
   {{< image-card href="/client_sdks/setup/?platform=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
