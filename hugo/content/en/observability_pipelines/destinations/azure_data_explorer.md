@@ -48,7 +48,7 @@ Configure the Azure Data Explorer destination when you [set up a pipeline][8]. Y
 After you select the Azure Data Explorer destination in the pipeline UI:
 
 1. Enter the identifier for your Azure Data Explorer ingestion endpoint. This identifier references the ingestion endpoint, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
-    - **Note**: The ingestion endpoint is the URI shown in your ADX Cluster and **not** the data ingestion URI.
+    - **Note**: The ingestion endpoint is the URI shown in your ADX Cluster. It is **not** the data ingestion URI, which is prefixed with `ingest-`.
 1. In the **Database** field, enter the name of the ADX database, such as `logs_db`.
 1. In the **Table** field, enter the name of the ADX table to which you want to send logs, such as `application_logs`. This field supports [template syntax][12], so you can route logs to different tables based on a log field. For example, `{{ adx.table }}`.
     - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of events.
@@ -87,6 +87,55 @@ You can configure how the Worker batches events before sending them to ADX.
 
 {{% observability_pipelines/destination_buffer %}}
 
+### Azure authentication
+
+After you select an authentication method in the **Azure Authentication** dropdown menu, the fields you need to fill in depend on the authentication method selected.
+
+#### Azure CLI
+
+Uses the credentials of the account signed in to the [Azure CLI][19] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
+
+#### Client certificate
+
+Uses a [Microsoft Entra application (service principal)][20] client ID and certificate.
+
+- **Client ID**: Enter the client ID of your Microsoft Entra application.
+- **Tenant ID**: Enter your Microsoft Entra tenant ID.
+- **Certificate path**: Enter the path to the PKCS12 certificate file (`.pfx`) that contains the RSA private key, such as `path/to/certificate.pfx`.
+- (Optional) **Certificate password**: If the certificate is password protected, enter the identifier that references the certificate password. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
+
+#### Client secret
+
+Uses a [Microsoft Entra application (service principal)][20] client ID and client secret.
+
+- **Client ID**: Enter the client ID of your Microsoft Entra application.
+- **Tenant ID**: Enter your Microsoft Entra tenant ID.
+- **Client secret**: Enter the identifier that references the client secret of your Microsoft Entra application. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
+
+#### Managed identity
+
+Uses an [Azure managed identity][21] assigned to the resource where the Worker runs.
+
+- (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
+- (Optional) **User-assigned managed identity ID type**: Enter the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
+
+#### Managed identity (client assertion)
+
+Uses a managed identity to get a client assertion, which is then exchanged for an access token for the target application.
+
+- **Client assertion client ID**: Enter the client ID of the target application.
+- **Client assertion tenant ID**: Enter the tenant ID of the target application.
+- (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
+- (Optional) **User-assigned managed identity ID type**: Enter the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
+
+#### Workload identity
+
+Uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate.
+
+- (Optional) **Client ID**: Enter the client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
+- (Optional) **Tenant ID**: Enter your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
+- (Optional) **Token File Path**: Enter the path to the file containing the Kubernetes service account token, such as `/var/run/secrets/azure/tokens/azure-identity-token`. If left blank, the `AZURE_FEDERATED_TOKEN_FILE` environment variable is used.
+
 ## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
@@ -97,6 +146,12 @@ You can configure how the Worker batches events before sending them to ADX.
 - Azure Data Explorer ingestion endpoint identifier:
     - References the URI of your ADX cluster, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
     - The default identifier is `DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT`.
+- Azure client certificate password identifier for the [client certificate](#client-certificate) authentication method:
+    - References the password for the PKCS12 certificate file if the certificate is password protected.
+    - The default identifier is `DESTINATION_AZURE_DATA_EXPLORER_CERTIFICATE_PASSWORD`.
+- Azure client secret identifier for the [client secret](#client-secret) authentication method:
+    - References the client secret of your Microsoft Entra application.
+    - The default identifier is `DESTINATION_AZURE_DATA_EXPLORER_CLIENT_SECRET`.
 
 {{% /tab %}}
 
@@ -163,63 +218,6 @@ If you expect your pipeline to send logs to a large number of tables:
 For [component metrics][16] and [destination buffer metrics][17] emitted by all destinations, see the [Pipelines Usage Metrics][18] documentation. To filter or group by Azure Data Explorer destination metrics, use the tag `component_type:azure_data_explorer`.
 
 ## How the destination works
-
-### Azure authentication
-
-After you select an authentication method in the **Azure Authentication** dropdown menu, the fields you need to fill in depend on the authentication method selected.
-
-#### Azure CLI
-
-Uses the credentials of the account signed in to the [Azure CLI][19] on the host where the Worker runs. No additional fields are required.
-
-#### Client certificate
-
-Uses a [Microsoft Entra application (service principal)][20] client ID and certificate.
-
-- **Client ID**: The client ID of your Microsoft Entra application.
-- **Tenant ID**: Your Microsoft Entra tenant ID.
-- **Certificate path**: The path to the PKCS12 certificate file (`.pfx`) that contains the RSA private key, such as `path/to/certificate.pfx`.
-- (Optional) **Certificate password**: The password for the certificate, if the certificate is password protected.
-
-#### Client secret
-
-Uses a [Microsoft Entra application (service principal)][20] client ID and client secret.
-
-- **Client ID**: The client ID of your Microsoft Entra application.
-- **Tenant ID**: Your Microsoft Entra tenant ID.
-- **Client secret**: The client secret of your Microsoft Entra application.
-
-#### Managed identity
-
-Uses an [Azure managed identity][21] assigned to the resource where the Worker runs.
-
-- (Optional) **User-assigned managed identity ID**: The ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-assigned managed identity ID type**: The type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
-
-#### Managed identity (client assertion)
-
-Uses a managed identity to get a client assertion, which is then exchanged for an access token for the target application.
-
-- **Client assertion client ID**: The client ID of the target application.
-- **Client assertion tenant ID**: The tenant ID of the target application.
-- (Optional) **User-assigned managed identity ID**: The ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-assigned managed identity ID type**: The type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
-
-#### Workload identity
-
-Uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate.
-
-- (Optional) **Client ID**: The client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
-- (Optional) **Tenant ID**: Your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
-- (Optional) **Token File Path**: The path to the file containing the Kubernetes service account token, such as `/var/run/secrets/azure/tokens/azure-identity-token`. If left blank, the `AZURE_FEDERATED_TOKEN_FILE` environment variable is used.
-
-### Routing
-
-When you use template syntax in the **Table** or **Mapping Reference** fields, the Worker groups events into batches by their resolved database, table, and mapping reference. Each batch is sent to one table with one mapping reference.
-
-### Retries
-
-The Worker retries requests that fail because of network errors, timeouts, and HTTP `408`, `429`, and `5xx` responses (except `501`). The Worker doesn't retry other unsuccessful responses, such as a `400` response when the table does not exist. Instead, it drops the batch.
 
 ### Event batching
 

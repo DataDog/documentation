@@ -1,3 +1,9 @@
 - Azure Data Explorer ingestion endpoint:
    - The URI of your Azure Data Explorer cluster, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
    - The default environment variable is `DD_OP_DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT`.
+- Azure client certificate password for the [client certificate](#client-certificate) authentication method:
+   - The password for the PKCS12 certificate file if the certificate is password protected.
+   - The default environment variable is `DD_OP_DESTINATION_AZURE_DATA_EXPLORER_CERTIFICATE_PASSWORD`.
+- Azure client secret for the [client secret](#client-secret) authentication method:
+   - The client secret of your Microsoft Entra application.
+   - The default environment variable is `DD_OP_DESTINATION_AZURE_DATA_EXPLORER_CLIENT_SECRET`.
