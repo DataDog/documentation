@@ -97680,9 +97680,20 @@ components:
         cmdline:
           description: Process command line.
           type: string
+        executable:
+          description: Path to the process executable.
+          type: string
         host:
           description: Host running the process.
           type: string
+        identifying_tags:
+          description: |-
+            Tags that uniquely identify the process: a host identity tag (`host`, `task_arn`,
+            or `eks_fargate_node`) and a `pid` tag. Omitted if either tag is unavailable.
+          items:
+            description: A tag identifying the process.
+            type: string
+          type: array
         pid:
           description: Process ID.
           format: int64
@@ -212848,7 +212859,11 @@ paths:
                     data:
                       - attributes:
                           cmdline: /usr/bin/python3
+                          executable: /usr/bin/python3
                           host: my-host
+                          identifying_tags:
+                            - host:my-host
+                            - pid:123
                           pid: 123
                         id: abc-123
                         type: process
