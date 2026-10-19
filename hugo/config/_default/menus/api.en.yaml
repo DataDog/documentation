@@ -2054,6 +2054,54 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: Update a derived metric
+      url: /api/latest/metrics/update-a-derived-metric/
+      identifier: metrics-update-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDerivedMetric
+        unstable: []
+        order: 32
+    - name: Get a derived metric
+      url: /api/latest/metrics/get-a-derived-metric/
+      identifier: metrics-get-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDerivedMetric
+        unstable: []
+        order: 31
+    - name: Delete a derived metric
+      url: /api/latest/metrics/delete-a-derived-metric/
+      identifier: metrics-delete-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDerivedMetric
+        unstable: []
+        order: 33
+    - name: Create a derived metric
+      url: /api/latest/metrics/create-a-derived-metric/
+      identifier: metrics-create-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDerivedMetric
+        unstable: []
+        order: 30
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -4108,6 +4156,149 @@ menu:
           - ListSecurityMonitoringCriticalAssets
         unstable: []
         order: 52
+    - name: Start a batch migration
+      url: /api/latest/security-monitoring/start-a-batch-migration/
+      identifier: security-monitoring-start-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 187
+    - name: Update a batch migration resource
+      url: /api/latest/security-monitoring/update-a-batch-migration-resource/
+      identifier: security-monitoring-update-a-batch-migration-resource
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigrationResource
+        unstable:
+          - v2
+        order: 186
+    - name: Add resources to a batch migration
+      url: /api/latest/security-monitoring/add-resources-to-a-batch-migration/
+      identifier: security-monitoring-add-resources-to-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 184
+    - name: List batch migration resources
+      url: /api/latest/security-monitoring/list-batch-migration-resources/
+      identifier: security-monitoring-list-batch-migration-resources
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 183
+    - name: Delete resources from a batch migration
+      url: /api/latest/security-monitoring/delete-resources-from-a-batch-migration/
+      identifier: security-monitoring-delete-resources-from-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 185
+    - name: Publish a batch migration
+      url: /api/latest/security-monitoring/publish-a-batch-migration/
+      identifier: security-monitoring-publish-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 182
+    - name: Cancel a batch migration
+      url: /api/latest/security-monitoring/cancel-a-batch-migration/
+      identifier: security-monitoring-cancel-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 181
+    - name: Update a batch migration
+      url: /api/latest/security-monitoring/update-a-batch-migration/
+      identifier: security-monitoring-update-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 179
+    - name: Delete a batch migration
+      url: /api/latest/security-monitoring/delete-a-batch-migration/
+      identifier: security-monitoring-delete-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 180
+    - name: Create a batch migration
+      url: /api/latest/security-monitoring/create-a-batch-migration/
+      identifier: security-monitoring-create-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 178
+    - name: List batch migrations
+      url: /api/latest/security-monitoring/list-batch-migrations/
+      identifier: security-monitoring-list-batch-migrations
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrations
+        unstable:
+          - v2
+        order: 177
     - name: List vulnerable assets
       url: /api/latest/security-monitoring/list-vulnerable-assets/
       identifier: security-monitoring-list-vulnerable-assets
@@ -6455,6 +6646,19 @@ menu:
           - GetUsageSummaryAvailableFields
         unstable: []
         order: 13
+    - name: Cancel a scheduled usage quota limit
+      url: /api/latest/usage-metering/cancel-a-scheduled-usage-quota-limit/
+      identifier: usage-metering-cancel-a-scheduled-usage-quota-limit
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePendingQuota
+        unstable:
+          - v2
+        order: 18
     - name: Update a usage quota
       url: /api/latest/usage-metering/update-a-usage-quota/
       identifier: usage-metering-update-a-usage-quota
@@ -8125,6 +8329,19 @@ menu:
         unstable:
           - v2
         order: 58
+    - name: List patterns templates
+      url: /api/latest/agent-observability/list-patterns-templates/
+      identifier: agent-observability-list-patterns-templates
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTemplates
+        unstable:
+          - v2
+        order: 74
     - name: Get patterns run status
       url: /api/latest/agent-observability/get-patterns-run-status/
       identifier: agent-observability-get-patterns-run-status
@@ -14735,6 +14952,18 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Get a saved filter
+      url: /api/latest/feature-flags/get-a-saved-filter/
+      identifier: feature-flags-get-a-saved-filter
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSavedFilter
+        unstable: []
+        order: 23
     - name: Stop a progressive rollout
       url: /api/latest/feature-flags/stop-a-progressive-rollout/
       identifier: feature-flags-stop-a-progressive-rollout
@@ -18871,7 +19100,7 @@ menu:
           - ListOrgGroupPolicySuggestions
         unstable:
           - v2
-        order: 21
+        order: 24
     - name: Update an org group policy override
       url: /api/latest/org-groups/update-an-org-group-policy-override/
       identifier: org-groups-update-an-org-group-policy-override
@@ -18884,7 +19113,7 @@ menu:
           - UpdateOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 18
+        order: 21
     - name: Get an org group policy override
       url: /api/latest/org-groups/get-an-org-group-policy-override/
       identifier: org-groups-get-an-org-group-policy-override
@@ -18897,7 +19126,7 @@ menu:
           - GetOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 16
+        order: 19
     - name: Delete an org group policy override
       url: /api/latest/org-groups/delete-an-org-group-policy-override/
       identifier: org-groups-delete-an-org-group-policy-override
@@ -18910,7 +19139,7 @@ menu:
           - DeleteOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 19
+        order: 22
     - name: Create an org group policy override
       url: /api/latest/org-groups/create-an-org-group-policy-override/
       identifier: org-groups-create-an-org-group-policy-override
@@ -18923,7 +19152,7 @@ menu:
           - CreateOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 17
+        order: 20
     - name: List org group policy overrides
       url: /api/latest/org-groups/list-org-group-policy-overrides/
       identifier: org-groups-list-org-group-policy-overrides
@@ -18936,7 +19165,7 @@ menu:
           - ListOrgGroupPolicyOverrides
         unstable:
           - v2
-        order: 15
+        order: 18
     - name: List org group policy configs
       url: /api/latest/org-groups/list-org-group-policy-configs/
       identifier: org-groups-list-org-group-policy-configs
@@ -18949,7 +19178,7 @@ menu:
           - ListOrgGroupPolicyConfigs
         unstable:
           - v2
-        order: 20
+        order: 23
     - name: Update an org group policy
       url: /api/latest/org-groups/update-an-org-group-policy/
       identifier: org-groups-update-an-org-group-policy
@@ -18962,7 +19191,7 @@ menu:
           - UpdateOrgGroupPolicy
         unstable:
           - v2
-        order: 13
+        order: 16
     - name: Get an org group policy
       url: /api/latest/org-groups/get-an-org-group-policy/
       identifier: org-groups-get-an-org-group-policy
@@ -18975,7 +19204,7 @@ menu:
           - GetOrgGroupPolicy
         unstable:
           - v2
-        order: 11
+        order: 14
     - name: Delete an org group policy
       url: /api/latest/org-groups/delete-an-org-group-policy/
       identifier: org-groups-delete-an-org-group-policy
@@ -18988,7 +19217,7 @@ menu:
           - DeleteOrgGroupPolicy
         unstable:
           - v2
-        order: 14
+        order: 17
     - name: Create an org group policy
       url: /api/latest/org-groups/create-an-org-group-policy/
       identifier: org-groups-create-an-org-group-policy
@@ -19001,7 +19230,7 @@ menu:
           - CreateOrgGroupPolicy
         unstable:
           - v2
-        order: 12
+        order: 15
     - name: List org group policies
       url: /api/latest/org-groups/list-org-group-policies/
       identifier: org-groups-list-org-group-policies
@@ -19014,7 +19243,7 @@ menu:
           - ListOrgGroupPolicies
         unstable:
           - v2
-        order: 10
+        order: 13
     - name: Update an org group membership
       url: /api/latest/org-groups/update-an-org-group-membership/
       identifier: org-groups-update-an-org-group-membership
@@ -19027,7 +19256,7 @@ menu:
           - UpdateOrgGroupMembership
         unstable:
           - v2
-        order: 8
+        order: 9
     - name: Get an org group membership
       url: /api/latest/org-groups/get-an-org-group-membership/
       identifier: org-groups-get-an-org-group-membership
@@ -19040,7 +19269,33 @@ menu:
           - GetOrgGroupMembership
         unstable:
           - v2
-        order: 7
+        order: 8
+    - name: Delete an org group membership
+      url: /api/latest/org-groups/delete-an-org-group-membership/
+      identifier: org-groups-delete-an-org-group-membership
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupMembership
+        unstable:
+          - v2
+        order: 10
+    - name: Bulk delete org group memberships
+      url: /api/latest/org-groups/bulk-delete-org-group-memberships/
+      identifier: org-groups-bulk-delete-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupMemberships
+        unstable:
+          - v2
+        order: 12
     - name: Bulk update org group memberships
       url: /api/latest/org-groups/bulk-update-org-group-memberships/
       identifier: org-groups-bulk-update-org-group-memberships
@@ -19053,7 +19308,20 @@ menu:
           - BulkUpdateOrgGroupMemberships
         unstable:
           - v2
-        order: 9
+        order: 11
+    - name: Create org group memberships
+      url: /api/latest/org-groups/create-org-group-memberships/
+      identifier: org-groups-create-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroupMemberships
+        unstable:
+          - v2
+        order: 7
     - name: List org group memberships
       url: /api/latest/org-groups/list-org-group-memberships/
       identifier: org-groups-list-org-group-memberships
@@ -20775,8 +21043,7 @@ menu:
           - v2
         operationids:
           - UpdateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: Get a RUM exclusion filter
       url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
@@ -20788,8 +21055,7 @@ menu:
           - v2
         operationids:
           - GetExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Delete a RUM exclusion filter
       url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
@@ -20801,8 +21067,7 @@ menu:
           - v2
         operationids:
           - DeleteExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Create a RUM exclusion filter
       url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
@@ -20814,8 +21079,7 @@ menu:
           - v2
         operationids:
           - CreateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Get all RUM exclusion filters
       url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
@@ -20827,8 +21091,7 @@ menu:
           - v2
         operationids:
           - ListExclusionFilters
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Create a RUM retention filter
       url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/

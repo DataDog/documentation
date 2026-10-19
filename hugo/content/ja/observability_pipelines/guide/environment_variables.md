@@ -1,10 +1,11 @@
 ---
 aliases:
 - /ja/observability_pipelines/environment_variables/
+description: Observability Pipelinesのソース、プロセッサ、デスティネーションで利用可能な環境変数を確認してください。
 disable_toc: false
 title: 環境変数
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 一部の Observability Pipelines コンポーネントは、環境変数を設定する必要があります。このドキュメントでは、各ソース、プロセッサー、および送信先の環境変数をリストで示しています。
 
@@ -41,6 +42,9 @@ title: 環境変数
 
 ### Logstash {#logstash}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
+
+### MySQL {#mysql}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
 
 ### OpenTelemetry {#opentelemetry}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
@@ -85,6 +89,9 @@ title: 環境変数
 
 ### Databricks (Zerobus) {#databricks-zerobus}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
+
+### Datadog APM {#datadog-apm}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Logs {#datadog-logs}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
