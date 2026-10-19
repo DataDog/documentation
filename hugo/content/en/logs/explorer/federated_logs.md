@@ -42,8 +42,8 @@ With a Databricks source, you can:
 
 | Permission | Grants |
 |---|---|
-| `logs_federated_query_write` | Connect, edit, and delete sources on the {{< ui >}}External Sources{{< /ui >}} page. |
-| `logs_federated_query_read` | Search Databricks sources in Log Explorer. |
+| Logs Federated Query Write (`logs_federated_query_write`) | Connect, edit, and delete sources on the {{< ui >}}External Sources{{< /ui >}} page. |
+| Logs Federated Query Read (`logs_federated_query_read`) | Search Databricks sources in Log Explorer. |
 
 For more information, see [Role Based Access Control][5].
 
