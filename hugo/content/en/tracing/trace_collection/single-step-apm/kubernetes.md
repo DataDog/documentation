@@ -549,7 +549,10 @@ For a full list of products you can enable through SSI, see [Enable SDK-dependen
 
 Use a `DatadogInstrumentation` custom resource to enable SSI and configure SDKs for a specific set of workloads.
 
-This method requires Datadog Agent and Cluster Agent **v7.85.0 or later** and Datadog Operator **v1.31.0 or later**.
+This method requires Datadog Agent and Cluster Agent **v7.85.0 or later**, with the `DatadogInstrumentation` CRD installed using either:
+
+- Datadog Operator **v1.31.0 or later**.
+- Datadog Helm chart **v3.255.0 or later**.
 
 ##### Create a resource targeting your workload
 
