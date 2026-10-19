@@ -1190,7 +1190,7 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 
 ## Derived Metrics
 
-Tools for creating, updating, and deleting [derived metrics][92], which let you save metric queries and formulas under a new metric name.
+Tools for creating, updating, and deleting [derived metrics][93], which let you save metric queries and formulas under a new metric name.
 
 ### `create_derived_metric`
 *Toolset: **derived-metrics***\
@@ -1215,6 +1215,28 @@ Deletes a derived metric definition. Deleting a definition can break dashboards,
 
 - Delete the derived metric `custom.cpu.user`.
 - Delete the derived metric `custom.cpu.total` if it exists.
+
+## Documentation
+
+Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+
+### `search_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Searches published Datadog documentation and returns up to 10 matching passages with links to their source pages. Returns source passages, not a generated answer. Supports English, French, Japanese, Korean, and Spanish. Other languages return no results. Search uses AI models to match by meaning. If your organization has [disabled AI providers][92], search matches by keyword only.
+
+- How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
+- What's the difference between a metric monitor and an anomaly monitor?
+- Which Datadog Agent settings control container log collection?
+
+### `read_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Reads a full Datadog documentation page from a `docs.datadoghq.com` URL or a document ID returned by `search_datadog_documentation`. Reads long pages in parts. Site-specific values, such as endpoints, appear as placeholders like `<YOUR_MCP_SERVER_ENDPOINT>`.
+
+- Read `https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/` and explain the matcher syntax.
+- Open the Datadog MCP Server setup page and summarize the toolset options.
+- Search the Datadog docs for log pipeline processors, then read the top result in full.
 
 ## Error Tracking
 
@@ -3509,7 +3531,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
-[92]: /metrics/derived-metrics/
+[92]: /mcp_server/#data-handling-and-ai-providers
+[93]: /metrics/derived-metrics/
 
 ## Further reading
 

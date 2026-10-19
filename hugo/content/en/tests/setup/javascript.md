@@ -895,9 +895,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 ## Known limitations
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, `vitest`, and `webdriverio` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, Playwright, or WebdriverIO, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
