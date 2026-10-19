@@ -42,7 +42,7 @@ With a Databricks source, you can:
 
 | Permission | Grants |
 |---|---|
-| `logs_federated_query_write` | Connect, edit, and delete Databricks sources on the {{< ui >}}External Sources{{< /ui >}} page. |
+| `logs_federated_query_write` | Connect, edit, and delete sources on the {{< ui >}}External Sources{{< /ui >}} page. |
 | `logs_federated_query_read` | Search Databricks sources in Log Explorer. |
 
 For more information, see [Role Based Access Control][5].
@@ -75,10 +75,10 @@ Numeric timestamps, such as epoch values, are not supported.
 
 ## Connect a source
 
-1. Go to the [External Sources][6] page and click {{< ui >}}Connect source{{< /ui >}}.
-2. On the {{< ui >}}Source{{< /ui >}} tab, select {{< ui >}}Databricks{{< /ui >}}, your integration account, and then the catalog, schema, and table that contains your logs.
-3. On the {{< ui >}}Schema mapping{{< /ui >}} tab, map each Datadog field to a column of your table. See [Table requirements](#table-requirements).
-4. Save the source.
+1. Go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > {{< ui >}}External Sources{{< /ui >}}][6] and click {{< ui >}}Connect Source{{< /ui >}}.
+2. On the {{< ui >}}Source{{< /ui >}} tab, select {{< ui >}}Databricks{{< /ui >}} as the source type and your integration account. Then select the catalog, schema, and table that contains your logs. Click {{< ui >}}Next{{< /ui >}}.
+3. On the {{< ui >}}Schema Mapping{{< /ui >}} tab, select the column that each Datadog field is read from. Only columns with a compatible type are listed. See [Table requirements](#table-requirements).
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 You can connect multiple tables, each with its own schema mapping. After you save a source, you can only edit its schema mapping. To change the integration account or the table, delete the source and connect it again.
 
