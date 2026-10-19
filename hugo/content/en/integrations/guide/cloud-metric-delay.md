@@ -33,7 +33,7 @@ These are specifics related to particular cloud providers.
 
 ### Alibaba
 
-Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~4-5 minutes.
+Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~3-6 minutes, depending on the service.
 
 ### AWS
 
