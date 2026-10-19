@@ -96,7 +96,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_SAMPLING_RULES`
 : optional - _JSON array_
-<br />Requires `ddtrace` 4.16.0 or later. A list of rules setting the sample rate for traces matching a set of tags. A matching rule takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Tag-based sampling rules](#tag-based-sampling-rules).
+<br />Requires `ddtrace` 4.16.0 or later. A list of rules that set the sample rate for traces matching a set of tags. A matching rule takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Tag-based sampling rules](#tag-based-sampling-rules).
 
 `DD_API_KEY`
 : optional - _string_
@@ -407,7 +407,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 <div class="alert alert-info">Tag-based sampling rules are available in the Python SDK (<code>ddtrace</code> 4.16.0 or later).</div>
 
-`DD_LLMOBS_SAMPLE_RATE` applies a single rate to every trace. To retain different fractions of traffic for different parts of your application, set `DD_LLMOBS_SAMPLING_RULES` to a JSON array of rules that select traces by tag. For example, to keep 50% of production traces and 10% of staging traces:
+`DD_LLMOBS_SAMPLE_RATE` applies the same sampling rate to all traces. To use different sampling rates for different parts of your application, set `DD_LLMOBS_SAMPLING_RULES` to a JSON array of rules that match traces by tag. For example, to retain 50% of production traces and 10% of staging traces:
 
 {{< code-block lang="shell" >}}
 DD_LLMOBS_SAMPLING_RULES='[{"tags": {"env": "prod"}, "sample_rate": 0.5}, {"tags": {"env": "staging"}, "sample_rate": 0.1}]' \
@@ -422,7 +422,7 @@ Each rule is a JSON object with the following fields:
 
 `tags`
 : optional - _object_
-<br />A mapping of tag name to a pattern matched against that tag's value. A rule with no `tags` matches every trace, which makes it useful as a final catch-all.
+<br />A mapping of tag names to patterns matched against their values. A rule with no `tags` matches every trace, making it useful as a final catch-all rule.
 
 Rules behave as follows:
 
