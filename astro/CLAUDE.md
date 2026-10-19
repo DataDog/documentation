@@ -22,7 +22,7 @@ This site will eventually have tens of thousands of pages, with most of them ren
 
 - Respond concisely. Be blunt.
 - If you recommend a different approach than what was asked for, query the user before proceeding.
-- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass.
+- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass. This isn't necessary for cosmetic changes, like adjusting spacing or font sizes.
 
 ## Formatting
 

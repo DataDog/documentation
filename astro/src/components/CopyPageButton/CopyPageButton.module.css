@@ -38,6 +38,8 @@
    with the leftover space falling to the right of the label. */
 .copy-page-button__label {
   display: inline-grid;
+  /* Optical nudge: at line-height 1, the glyphs sit low against the icon. */
+  translate: 0 -0.5px;
 }
 
 .copy-page-button__label-text {

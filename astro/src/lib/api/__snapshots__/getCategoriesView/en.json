@@ -1034,7 +1034,7 @@
       {
         "operationId": "ListIncidentImpacts",
         "summary": "List an incident's impacts",
-        "slug": "list-an-incident-s-impacts",
+        "slug": "list-an-incidents-impacts",
         "menuOrder": 7,
         "versions": [
           "v2"
@@ -1181,7 +1181,7 @@
       {
         "operationId": "ListIncidentTodos",
         "summary": "Get a list of an incident's todos",
-        "slug": "get-a-list-of-an-incident-s-todos",
+        "slug": "get-a-list-of-an-incidents-todos",
         "menuOrder": 14,
         "versions": [
           "v2"
@@ -1958,7 +1958,7 @@
       {
         "operationId": "ListIncidentIntegrations",
         "summary": "Get a list of an incident's integration metadata",
-        "slug": "get-a-list-of-an-incident-s-integration-metadata",
+        "slug": "get-a-list-of-an-incidents-integration-metadata",
         "menuOrder": 51,
         "versions": [
           "v2"
@@ -2155,7 +2155,7 @@
       {
         "operationId": "GetMonitor",
         "summary": "Get a monitor's details",
-        "slug": "get-a-monitor-s-details",
+        "slug": "get-a-monitors-details",
         "menuOrder": 4,
         "versions": [
           "v1"
