@@ -70,6 +70,46 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.zoom_password}}` | The Zoom meeting password, if one exists. |
 | `{{incident.zoom_link}}` | A Markdown link to the Zoom meeting. The display text is `Zoom Meeting {id}`. |
 
+## Incident duration variables
+
+Use duration variables in postmortem templates to include an incident's response times and compare them with historical averages. Values are formatted as durations, such as `2 hours, 10 minutes and 34 seconds`.
+
+### Individual incident durations
+
+These variables use the incident's timestamps, including timestamp overrides. If a duration cannot be calculated or is zero or negative, the variable renders as `N/A`.
+
+| Variable | Description |
+|---|---|
+| `{{incident.time_to_detect}}` | Time from the earliest impact start to detection. |
+| `{{incident.time_to_internal_response}}` | Time from detection to declaration. |
+| `{{incident.time_to_repair}}` | Time from detection to the latest recorded impact end. |
+| `{{incident.time_to_resolve}}` | Time from declaration to resolution. |
+| `{{incident.time_from_detect_to_resolve}}` | Time from detection to resolution. |
+
+For metric definitions and timestamp overrides, see [Analytics and Reporting][6].
+
+### Mean incident durations
+
+Mean duration variables calculate an average for other incidents in the same organization and of the same incident type. Choose a window in the variable name: `30_days`, `90_days`, or `12_months`. The `12_months` window is a fixed 365 days.
+
+| Metric | Past 30 days | Past 90 days | Past 12 months |
+|---|---|---|---|
+| Time to Detect | `{{incident.mean_time_to_detect_30_days}}` | `{{incident.mean_time_to_detect_90_days}}` | `{{incident.mean_time_to_detect_12_months}}` |
+| Time to Internal Response | `{{incident.mean_time_to_internal_response_30_days}}` | `{{incident.mean_time_to_internal_response_90_days}}` | `{{incident.mean_time_to_internal_response_12_months}}` |
+| Time to Repair | `{{incident.mean_time_to_repair_30_days}}` | `{{incident.mean_time_to_repair_90_days}}` | `{{incident.mean_time_to_repair_12_months}}` |
+| Time to Resolve | `{{incident.mean_time_to_resolve_30_days}}` | `{{incident.mean_time_to_resolve_90_days}}` | `{{incident.mean_time_to_resolve_12_months}}` |
+| Time from Detect to Resolve | `{{incident.mean_time_from_detect_to_resolve_30_days}}` | `{{incident.mean_time_from_detect_to_resolve_90_days}}` | `{{incident.mean_time_from_detect_to_resolve_12_months}}` |
+
+Each window ends when the template is rendered. Incidents qualify based on their declaration time, including any override, rather than their resolution time. The average includes only incidents that:
+
+- Are included in analytics and have not been deleted.
+- Are visible to the user generating the template, including private incidents they can access.
+- Have a positive value for the metric being averaged.
+
+The incident being rendered is excluded. Renders without a user identity exclude private incidents. Because eligibility is evaluated separately for each metric, different means can use different sets of incidents.
+
+Means use indexed analytics values, including timestamp overrides, and are rounded to the nearest second for display. If no eligible incidents have a positive value, the variable renders as `N/A`. A failed lookup returns a rendering error instead of `N/A`.
+
 ## Variables available only in postmortem templates
 
 The following variables work only in postmortem templates. They are not available in notification or Jira templates.
@@ -135,3 +175,4 @@ AI variables are available in notification and postmortem templates. Your organi
 [3]: /incident_response/incident_management/setup_and_configuration/integrations/slack/#incident-channels
 [4]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#automatic-channel-creation
 [5]: /incident_response/incident_management/setup_and_configuration/integrations/google_chat/#incident-spaces
+[6]: /incident_response/incident_management/analytics_and_reporting/#measures
