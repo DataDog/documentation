@@ -59,7 +59,7 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 **Note**: The filter key may be locked. Agent Observability uses one tag key, `ml_app`, for both applications and projects, and Data Access Control allows one tag key per telemetry type. If your organization already has an Agent Observability Restricted Dataset, new ones reuse the same key.
 
-The restriction takes effect as soon as it is saved. The project and its experiments, datasets, dataset records, and annotation queues are hidden immediately, regardless of when they were created. Spans and evaluation metrics are subject to the exceptions in [Limitations](#limitations).
+The restriction takes effect as soon as it is saved. The project and its experiments, datasets, dataset records, annotation queues, spans, and evaluation metrics are hidden immediately, regardless of when they were created. Spans from experiments run through the SDK are an exception. See [Limitations](#limitations).
 
 ## Restrict a project through the API
 
@@ -110,7 +110,6 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 ## Limitations
 
 - **Spans from an experiment run through the SDK are not restricted by a Restricted Dataset on the project.** These spans are attributed to the application that ran the experiment, not to the project. A Restricted Dataset on the project hides the project and its datasets, dataset records, and evaluation metrics, but not the inputs and outputs on those spans. To restrict those spans too, add a second filter for the application's `ml_app` value to the same Restricted Dataset.
-- **Spans and evaluation metrics that were not tagged with the project at ingestion are not restricted.** The project is attached to these events as a tag at ingestion time, and past events are not re-tagged. Events that carry the tag are hidden as soon as the restriction is saved. List views, metadata, and dataset records are hidden regardless of when they were created.
 - **Evaluator configs follow only Restricted Datasets that filter on `ml_app`.** A Restricted Dataset filter on any other tag key does not restrict evaluator configs, even if it restricts the application's traces.
 - **Managed prompts are not supported** by Data Access Control. See [Data Access Control][1] for the full list of supported telemetry.
 - **An annotation queue that does not belong to a project is visible to everyone** with Agent Observability read access, and no Restricted Dataset can hide it. Move the queue into a project, or recreate it in one, to bring it under a restriction.
