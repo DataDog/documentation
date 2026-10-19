@@ -264,6 +264,18 @@
       "description": "Edit an AuthN Mapping returns \"OK\" response"
     }
   ],
+  "SubmitCILog": [
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_4195490686",
+      "description": "Send batched CI job logs returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_1818302850",
+      "description": "Send one CI job log returns \"Request accepted for processing\" response"
+    }
+  ],
   "AggregateCIAppPipelineEvents": [
     {
       "group": "ci_visibility_pipelines",
@@ -357,7 +369,7 @@
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Workload Protection policy returns \"OK\" response"
+      "description": "Create a Workload Protection policy returns \"Created\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -594,27 +606,6 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
-  "ListDORADeployments": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1654201709",
-      "description": "Get a list of deployment events returns deployments with date-time timestamps"
-    }
-  ],
-  "CreateDORADeployment": [
-    {
-      "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send a deployment event returns \"OK\" response"
-    }
-  ],
-  "CreateDORAIncident": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1101664022",
-      "description": "Send a failure event returns \"OK\" response"
-    }
-  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -665,6 +656,27 @@
       "group": "datasets",
       "suffix": "",
       "description": "Edit a dataset returns \"OK\" response"
+    }
+  ],
+  "ListDORADeployments": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
+  "CreateDORADeployment": [
+    {
+      "group": "delivery_performance",
+      "suffix": "",
+      "description": "Send a deployment event returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDeploymentGate": [
@@ -790,6 +802,90 @@
       "group": "execution_policy",
       "suffix": "",
       "description": "Update an execution policy returns \"OK\" response"
+    }
+  ],
+  "CancelExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
+    }
+  ],
+  "CreateExperimentMetricGroup": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment metric group returns \"Created\" response"
+    }
+  ],
+  "CreateExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment returns \"Created\" response"
+    }
+  ],
+  "CreateMetricCollection": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create metric collection returns \"Created\" response"
+    }
+  ],
+  "CreateMetric": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create metric returns \"Created\" response"
+    }
+  ],
+  "CreateSubjectType": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create subject type returns \"Created\" response"
+    }
+  ],
+  "PatchExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Patch experiment returns \"OK\" response"
+    }
+  ],
+  "PatchSubjectType": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Patch subject type returns \"OK\" response"
+    }
+  ],
+  "UpdateExperimentAnalysisPlanAttributes": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment analysis plan attributes returns \"OK\" response"
+    }
+  ],
+  "UpdateExperimentMetricGroup": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "UpdateMetricCollection": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update metric collection returns \"OK\" response"
+    }
+  ],
+  "UpdateMetric": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update metric returns \"OK\" response"
     }
   ],
   "CreateFastlyAccount": [
@@ -1870,6 +1966,13 @@
       "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
@@ -2123,6 +2226,25 @@
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
+  "CreateSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add resources to a batch migration returns \"Created\" response"
+    }
+  ],
+  "UpdateFindingsSeverity": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_412359663",
+      "description": "Apply a severity override to security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1312693410",
+      "description": "Clear the severity override of security findings returns \"Accepted\" response"
+    }
+  ],
   "AttachJiraIssue": [
     {
       "group": "security_monitoring",
@@ -2197,6 +2319,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create Jira issues for security findings returns \"Created\" response"
+    }
+  ],
+  "CreateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a batch migration returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -2367,6 +2496,13 @@
       "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
+  "DeleteSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Delete resources from a batch migration returns \"No Content\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
@@ -2499,6 +2635,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Test a rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigrationResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration resource returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [

@@ -72,7 +72,7 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][10], and additionally, Datadog Agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog Agent for potential vulnerabilities.
 
-If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. 
+If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11].
 To check the status of a specific CVE, see the [Public Artifact Vulnerabilities page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the {{< ui >}}Product type{{< /ui >}} field to {{< ui >}}Vulnerability Inquiry on Datadog Product{{< /ui >}}.
 
 ## Running as an unprivileged user
@@ -214,13 +214,21 @@ agent diagnose show-metadata agent-telemetry
 | **Process Manager**                         |                                                                                                                        |
 | runtime.procmgr_daemon_reachable            | Whether the Agent can reach the `dd-procmgrd` process manager daemon                                                   |
 | runtime.procmgr_daemon_ready                | Whether `dd-procmgrd` reports that it is ready to supervise processes                                                  |
+| runtime.procmgr_daemon_service_state        | OS unit or Windows service state of `dd-procmgrd` (not gRPC readiness), tagged by state                                 |
 | runtime.procmgr_process_running             | Whether a process supervised by `dd-procmgrd` is running, per process                                                  |
 | runtime.procmgr_process_state               | The state `dd-procmgrd` reports for a supervised process, tagged by process and state                                  |
 | runtime.agent_service_installed             | Whether an Agent service is installed on the host, per service                                                         |
 | runtime.agent_service_procmgr_configured    | Whether an Agent service has a `processes.d` configuration file for `dd-procmgrd`, per service                         |
 | runtime.agent_service_management_mode       | Which supervisor manages an Agent service, tagged by service and mode (none, procmgr, systemd, windows_service)        |
+| runtime.agent_service_running               | Whether an Agent service process is up under a supervisor, tagged by service and supervisor (procmgr, systemd, windows_service) |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
+| amd_gpu.device_total                        | Total number of AMD GPUs in the system                                                                                 |
+| gpu.collectors__created                     | Number of GPU metric collectors created, tagged by result (success or error), collector, and GPU properties            |
+| gpu.collectors__collection_runs             | Number of GPU metric collector runs, tagged by collector and GPU properties                                            |
+| gpu.collectors__collection_errors           | Number of failed GPU metric collector runs, tagged by collector and GPU properties                                     |
+| gpu.container_gpu_mapping_failure_pct       | Percentage of GPU containers whose GPUs could not be matched to devices                                                |
+| gpu.driver_events__parse_failures           | Number of NVIDIA driver events that could not be parsed, tagged by reason                                              |
 | **APM**                                     |                                                                                                                        |
 | trace.enabled                               | Whether the trace-agent process is running.                                                                            |
 | trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
@@ -244,6 +252,11 @@ agent diagnose show-metadata agent-telemetry
 | cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
 | cluster_checks.configs_info                 | Names of dispatched cluster checks                                                                             |
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
+| cluster_checks.nodes_reporting              | Number of node agents reporting to the Cluster Agent                                                                   |
+| cluster_checks.rebalancing_decisions        | Number of cluster check rebalancing decisions                                                                          |
+| cluster_checks.successful_rebalancing_moves | Number of successful cluster check rebalancing moves                                                                   |
+| cluster_checks.failed_stats_collection      | Number of failed Cluster Check Runner stats collection attempts                                                        |
+| endpoint_checks.configs_dispatched          | Number of endpoint check configurations dispatched                                                                     |
 | instrumentation_controller.resources        | Number of `DatadogInstrumentation` resources tracked by the controller                                                 |
 | instrumentation_controller.reconciliations  | Number of `DatadogInstrumentation` section reconciliation attempts, tagged by section and status                       |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
@@ -274,6 +287,30 @@ agent diagnose show-metadata agent-telemetry
 | datadog_csi_driver.library_volume_links           | Number of volumes linked to a library, per library                                                              |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
+
+### Troubleshooting metrics
+
+Starting with Agent v7.85.0, Datadog Support can temporarily enable the collection of the following additional metrics on a host to investigate an issue such as missing data.
+These metrics are not collected otherwise, and they are never collected when Agent telemetry or Remote Configuration is disabled.
+
+| Metrics ([source][2])                       | Description                                                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Data delivery**                           |                                                                                                                        |
+| transactions.errors                         | Count of transaction errors, tagged by domain, endpoint, and error type (DNS, connection, TLS, write, or HTTP failure)  |
+| transactions.dropped                        | Count of transactions dropped by the Agent, tagged by domain and endpoint                                              |
+| transactions.retry_queue_size               | Number of transactions waiting to be retried, tagged by domain                                                         |
+| transactions.connection_events              | Count of successful DNS lookups and new connections to Datadog, tagged by event type                                   |
+| **Aggregation**                             |                                                                                                                        |
+| aggregator.flush                            | Count of series, sketches, events, and service checks flushed by the Agent aggregator, tagged by data type and status  |
+| aggregator.processed                        | Count of samples received by the Agent aggregator, tagged by data type                                                 |
+| **DogStatsD**                               |                                                                                                                        |
+| dogstatsd.processed                         | Count of metrics, events, and service checks processed by DogStatsD, tagged by message type and status (ok or error)   |
+| dogstatsd.udp_packets                       | Count of DogStatsD UDP packets, tagged by status (ok or error)                                                         |
+| dogstatsd.uds_packets                       | Count of DogStatsD UDS packets, tagged by transport and status (ok or error)                                           |
+| dogstatsd.uds_origin_detection_error        | Count of DogStatsD UDS origin detection errors, tagged by transport                                                    |
+| **Inputs**                                  |                                                                                                                        |
+| checks.warnings                             | Count of warnings raised by checks, per check                                                                          |
+| checks.metrics_samples                      | Count of metric samples submitted by checks, per check                                                                 |
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221

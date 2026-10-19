@@ -26,6 +26,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/chatgpt-datadog-experiments/
   tag: Blog
   text: Analice sus experimentos en ChatGPT con el complemento Datadog Experiments
+- link: https://www.datadoghq.com/blog/how-we-built-datadog-experiments/
+  tag: Blog
+  text: Cómo creamos Datadog Experiments
 title: Experimentos
 ---
 ## Descripción general {#overview}

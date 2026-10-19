@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), Product Analytics, or your own warehouse to create Datadog Experiments metrics.
+Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), Product Analytics, Agent Observability, or your own warehouse to create Datadog Experiments metrics.
 
 <div class="alert alert-info">If your organization uses custom roles, you must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics permissions</a> to create experiment metrics.</div>
 
@@ -68,6 +68,70 @@ You can filter your metric by selecting an {{< ui >}}Event properties{{< /ui >}}
 If you do not see the property you need, type the property name in the {{< ui >}}Custom property{{< /ui >}} field (for example, `@context.tracking`) and click {{< ui >}}Add{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="The Filter by panel open within the Metric definition section, showing All Properties selected, Event properties such as Application Id, Service, Browser Name, and Country in the center, a By Data Type filter with Numerical, String, and Boolean options on the left, and a Custom property section at the bottom with a text field showing the placeholder 'e.g. @context.tracking' and an Add button." style="width:90%;" >}}
+
+{{% /tab %}}
+{{% tab "Agent Observability" %}}
+
+<div class="alert alert-info"><strong>Note</strong>: Online experiments for Agent Observability are in Preview. Contact your Datadog representative to request access.</div>
+
+### Prerequisites
+
+Before you create an experiment metric from Agent Observability data:
+
+- [Instrument your LLM application with Agent Observability][14] and send traces to Datadog.
+- To use cost or token data, make sure your traces include token usage. Datadog uses token usage, model, and provider information to calculate [estimated costs][15].
+- To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value.
+- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Run an Online Experiment on an LLM Application][17].
+
+<div class="alert alert-warning"><strong>Supported evaluation type</strong>: Experiment metrics support only Agent Observability evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types are not available in the metric picker.</div>
+
+### Create a metric from Agent Observability data
+
+To create the metric:
+
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Select the {{< ui >}}Metrics{{< /ui >}} tab and click {{< ui >}}Create Metric{{< /ui >}}.
+1. Add a {{< ui >}}Metric name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}.
+1. In the {{< ui >}}Metric definition{{< /ui >}} section, click {{< ui >}}Select an event{{< /ui >}}.
+1. Choose one of the following Agent Observability sources.
+
+#### Agent Spans
+
+Select the {{< ui >}}Agent Spans{{< /ui >}} tab, then select one of the following:
+
+- {{< ui >}}Total estimated cost{{< /ui >}}: Average estimated cost across completed Agent Observability traces.
+- {{< ui >}}Total tokens{{< /ui >}}: Average total token usage across completed Agent Observability traces.
+
+The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their corresponding trace property. You can change the aggregation, select another property or custom property path, add filters, or create a ratio.
+
+<div class="alert alert-info">Agent Observability estimated cost values use nanodollars (1 nanodollar = 10⁻⁹ USD). For details about cost calculations and supported models, see <a href="/llm_observability/investigate/cost/">Cost</a>.</div>
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="The Create Metric event picker with Agent Spans selected, showing All agent span events, Total estimated cost, and Total tokens, with Total estimated cost selected and its description displayed." style="width:90%;" >}}
+
+#### Evaluations
+
+Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
+
+1. Search for and select the custom score evaluation you want to measure.
+1. Review the evaluation details, such as its ML application, scope, prompt, and model.
+1. Configure the aggregation and any filters. Evaluation metrics default to the average score.
+
+Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing the faithfulness, user_score, and verbosity score evaluations, with faithfulness selected." style="width:90%;" >}}
+
+#### Save the metric
+
+After you configure either source:
+
+1. (Optional) Under {{< ui >}}Additional settings{{< /ui >}}, mark the metric as certified, adjust its experiment settings, or configure its units.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[14]: /llm_observability/instrument/
+[15]: /llm_observability/investigate/cost/
+[16]: /llm_observability/investigate/evaluations/
+[17]: /experiments/guide/run_online_experiment_on_llm_application/
 
 {{% /tab %}}
 {{% tab "Warehouse" %}}
