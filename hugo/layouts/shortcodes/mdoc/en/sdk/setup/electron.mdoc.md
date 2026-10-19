@@ -203,9 +203,29 @@ const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
 Replace the placeholders with the values from your application, and set `allowedRendererHosts` to the hostnames of the renderer pages that are allowed to report through the main process. For the supported values, see [Advanced Configuration][2].
 
 {% alert level="info" %}
-If you call `init` after some windows are already open, those windows use the default settings, such as the `mask` privacy level, until you reload them. The SDK applies `allowedRendererHosts` to renderer events only after `init` runs.
+If you call `init` after some windows are already open, those windows use the default settings, such as the `mask` privacy level, until you reload them. The SDK applies `allowedRendererHosts` to renderer events only after `init` runs. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` or `'not-granted'` instead of deferring it. See [Set tracking consent](#set-tracking-consent).
 {% /alert %}
-<!-- TODO(resync): confirm the deferred init wording against the v1.0.0 README and PR #257 -->
+
+Call `init` once per launch.
+
+## Set tracking consent
+
+To collect data only after the end user consents, for example to comply with GDPR or CCPA, initialize the SDK with the consent known at startup, then update it when the end user answers:
+
+```typescript
+import { init, setTrackingConsent } from '@datadog/electron-sdk';
+
+await init({
+  // ...
+  trackingConsent: 'pending',
+});
+
+// After the end user answers the consent prompt:
+setTrackingConsent(accepted ? 'granted' : 'not-granted');
+```
+
+The SDK does not restore the consent at the next launch, so pass it at each launch. Set the consent in the main process. For the possible values and their effects, see [Tracking consent][8].
+<!-- TODO(resync): check against merged #257 -->
 
 ## Set up renderer processes
 
@@ -284,7 +304,7 @@ export const mainConfig = {
 {% /tab %}
 {% /tabs %}
 
-Use a package manager layout that Forge supports. For example, use pnpm with a hoisted `node_modules` directory, or Yarn 2 and later with the `node-modules` linker. See the [Electron Forge documentation][8].
+Use a package manager layout that Forge supports. For example, use pnpm with a hoisted `node_modules` directory, or Yarn 2 and later with the `node-modules` linker. See the [Electron Forge documentation][9].
 
 ### Other bundlers and packagers
 
@@ -349,4 +369,5 @@ After you run your app, navigate to the [RUM Explorer][4] to see sessions from y
 [5]: /real_user_monitoring/application_monitoring/electron/error_tracking
 [6]: /real_user_monitoring/application_monitoring/electron/data_collected
 [7]: https://app.datadoghq.com/rum/application/create
-[8]: https://www.electronforge.io/cli#usage
+[8]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
+[9]: https://www.electronforge.io/cli#usage
