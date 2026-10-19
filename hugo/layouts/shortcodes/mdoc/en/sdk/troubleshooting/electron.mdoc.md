@@ -11,9 +11,17 @@ If you experience unexpected behavior with the Datadog Electron SDK, use this gu
 
 ### Browser windows opened before `init` use default settings
 
-If you call `init` after some windows are already open, for example behind a user-consent gate, those windows use the default settings, such as the `mask` privacy level, until you reload them. The SDK applies `allowedRendererHosts` to renderer events only after `init` runs.
+If you call `init` after some windows are already open, those windows use the default settings, such as the `mask` privacy level, until you reload them. What these windows collected before `init` can be dropped or attributed to the previous launch. The SDK applies `allowedRendererHosts` to renderer events only after `init` runs.
+<!-- TODO(resync): check against merged #257 -->
 
-To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes.
+To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` or `'not-granted'` instead of deferring it. See [Tracking consent][7].
+
+### `init` returns `false`
+
+`init` runs once per launch. It returns `false` if the configuration is invalid, or if `init` was already called with a valid configuration.
+
+To fix this, call `init` once at startup and check the configuration if it returns `false`. To change the tracking consent later, call `setTrackingConsent` instead of calling `init` again. See [Tracking consent][7].
+<!-- TODO(resync): check against merged #257 -->
 
 ### Renderer events are missing
 
@@ -41,3 +49,4 @@ To fix this, return `false` for events that can be dropped, and modify the edita
 [4]: /real_user_monitoring/application_monitoring/browser/setup/
 [5]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#custom-duration-vitals
 [6]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
+[7]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
