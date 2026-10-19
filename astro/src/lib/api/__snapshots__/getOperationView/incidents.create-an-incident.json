@@ -72,7 +72,77 @@
                     "required": false,
                     "deprecated": false,
                     "readOnly": false,
-                    "description": "A condensed view of the user-defined fields for which to create initial selections."
+                    "description": "A condensed view of the user-defined fields for which to create initial selections.",
+                    "children": [
+                      {
+                        "name": "<any-key>",
+                        "type": "oneOf",
+                        "required": false,
+                        "deprecated": false,
+                        "readOnly": false,
+                        "description": "Dynamic fields for which selections can be made, with field names as keys.",
+                        "unionOptions": [
+                          {
+                            "label": "Object 1",
+                            "type": "object",
+                            "description": "A field with a single value selected.",
+                            "fields": [
+                              {
+                                "name": "type",
+                                "type": "enum",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "Type of the single value field definitions.",
+                                "enumValues": [
+                                  "dropdown",
+                                  "textbox"
+                                ],
+                                "defaultValue": "dropdown"
+                              },
+                              {
+                                "name": "value",
+                                "type": "string",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "The single value selected for this field."
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Object 2",
+                            "type": "object",
+                            "description": "A field with potentially multiple values selected.",
+                            "fields": [
+                              {
+                                "name": "type",
+                                "type": "enum",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "Type of the multiple value field definitions.",
+                                "enumValues": [
+                                  "multiselect",
+                                  "textarray",
+                                  "metrictag",
+                                  "autocomplete"
+                                ],
+                                "defaultValue": "multiselect"
+                              },
+                              {
+                                "name": "value",
+                                "type": "[string]",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "The multiple values selected for this field."
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "name": "incident_type_uuid",
@@ -396,7 +466,77 @@
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
-                      "description": "A condensed view of the user-defined fields attached to incidents."
+                      "description": "A condensed view of the user-defined fields attached to incidents.",
+                      "children": [
+                        {
+                          "name": "<any-key>",
+                          "type": "oneOf",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Dynamic fields for which selections can be made, with field names as keys.",
+                          "unionOptions": [
+                            {
+                              "label": "Object 1",
+                              "type": "object",
+                              "description": "A field with a single value selected.",
+                              "fields": [
+                                {
+                                  "name": "type",
+                                  "type": "enum",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Type of the single value field definitions.",
+                                  "enumValues": [
+                                    "dropdown",
+                                    "textbox"
+                                  ],
+                                  "defaultValue": "dropdown"
+                                },
+                                {
+                                  "name": "value",
+                                  "type": "string",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "The single value selected for this field."
+                                }
+                              ]
+                            },
+                            {
+                              "label": "Object 2",
+                              "type": "object",
+                              "description": "A field with potentially multiple values selected.",
+                              "fields": [
+                                {
+                                  "name": "type",
+                                  "type": "enum",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Type of the multiple value field definitions.",
+                                  "enumValues": [
+                                    "multiselect",
+                                    "textarray",
+                                    "metrictag",
+                                    "autocomplete"
+                                  ],
+                                  "defaultValue": "multiselect"
+                                },
+                                {
+                                  "name": "value",
+                                  "type": "[string]",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "The multiple values selected for this field."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "name": "incident_type_uuid",

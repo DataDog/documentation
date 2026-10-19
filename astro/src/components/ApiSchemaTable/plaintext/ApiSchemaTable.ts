@@ -9,7 +9,10 @@
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { ANY_KEY_FIELD_NAME } from "@lib/api/refResolver";
 import { tableMd } from "@lib/plaintext/helpers";
+
+type UnionOption = NonNullable<SchemaField["unionOptions"]>[number];
 
 interface SchemaTableRow {
   parent: string;
@@ -19,6 +22,9 @@ interface SchemaTableRow {
 }
 
 const UNNAMED_FIELD_LABEL = "<items>";
+
+/** Hugo's `.md` names the parent of an `<any-key>` row this way. */
+const ANY_KEY_PARENT_LABEL = "additionalProperties";
 
 export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
   if (!fields || fields.length === 0) {
@@ -42,7 +48,7 @@ function schemaFieldsToTableRows(
   const rows: SchemaTableRow[] = [];
   for (const field of fields) {
     rows.push({
-      parent,
+      parent: field.name === ANY_KEY_FIELD_NAME ? ANY_KEY_PARENT_LABEL : parent,
       field: getFieldName(field),
       type: getFieldType(field),
       description: getFieldDescription(field),
@@ -64,7 +70,7 @@ function schemaFieldsToTableRows(
           field: opt.label,
           // The branch's own type: a scalar variant reads `double`, not `object`.
           type: getFieldType({ type: opt.type } as SchemaField),
-          description: opt.description ?? "",
+          description: getOptionDescription(opt),
         });
         rows.push(...schemaFieldsToTableRows(opt.fields, opt.label));
       }
@@ -99,11 +105,26 @@ function getFieldDescription(field: SchemaField): string {
   if (field.readOnly) {
     parts.push("Read-only.");
   }
-  if (field.enumValues && field.enumValues.length > 0) {
-    parts.push(`Allowed values: \`${field.enumValues.join("`, `")}\`.`);
-  }
-  if (field.defaultValue !== undefined) {
-    parts.push(`Default: \`${field.defaultValue}\`.`);
-  }
+  parts.push(...valueParts(field));
   return parts.join(" ");
+}
+
+/** An option row gets the same enum and default parts as a field row. */
+function getOptionDescription(option: UnionOption): string {
+  return [option.description ?? "", ...valueParts(option)]
+    .filter(Boolean)
+    .join(" ");
+}
+
+function valueParts(
+  source: Pick<SchemaField, "enumValues" | "defaultValue">,
+): string[] {
+  const parts: string[] = [];
+  if (source.enumValues && source.enumValues.length > 0) {
+    parts.push(`Allowed values: \`${source.enumValues.join("`, `")}\`.`);
+  }
+  if (source.defaultValue !== undefined) {
+    parts.push(`Default: \`${source.defaultValue}\`.`);
+  }
+  return parts;
 }

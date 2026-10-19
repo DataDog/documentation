@@ -9,12 +9,10 @@ import Self from "./SchemaFieldRow.astro";
 const cl = classListFactory(styles);
 
 const ENUM_INLINE_LIMIT = 10;
+// Hugo's indent: 20px per level, stopping at 7 levels so deep rows (dashboard
+// widgets nest 10+ levels) keep enough of the name column to stay readable.
 const INDENT_PX = 20;
-// How far a toggle pushes its row's name to the right: the 16px button minus
-// its -6px margin (see `.schema-table__toggle`), plus the cell's
-// `var(--space-xs)` gap. Each level adds this so a child's name lands
-// INDENT_PX past its parent's name, not past the parent's chevron.
-const TOGGLE_OFFSET_PX = 10;
+const MAX_INDENT_DEPTH = 7;
 
 interface Props {
   field: SchemaField;
@@ -27,10 +25,10 @@ const hasChildren =
   (field.children !== undefined && field.children.length > 0) ||
   (field.unionOptions !== undefined && field.unionOptions.length > 0);
 
+// The CSS uses this for both the name's padding and the toggle's position.
+const indentDepth = Math.min(depth, MAX_INDENT_DEPTH);
 const cellNameStyle =
-  depth > 0
-    ? `padding-left: calc(var(--space-md) + ${depth} * (${INDENT_PX + TOGGLE_OFFSET_PX}px + var(--space-xs)))`
-    : undefined;
+  depth > 0 ? `--schema-table-indent: ${indentDepth * INDENT_PX}px` : undefined;
 
 const enumValues = field.enumValues ?? [];
 const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);

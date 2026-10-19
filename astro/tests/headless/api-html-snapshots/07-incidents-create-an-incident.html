@@ -490,7 +490,7 @@
                       >
                         <div
                           class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                          style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          style="--schema-table-indent: 20px"
                         >
                           <button
                             type="button"
@@ -525,7 +525,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a"
@@ -552,7 +552,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">customer_impacted</code
@@ -577,9 +577,18 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
-                            <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                            <button
+                              type="button"
+                              class="schema-table__toggle _schema-table__toggle_d7636a"
+                              aria-expanded="false"
+                              aria-label="Toggle fields"
+                            >
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                                <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                              </svg></button
+                            ><span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">fields</code></span
                             >
                           </div>
@@ -592,6 +601,237 @@
                             </div>
                           </div>
                         </div>
+                        <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                          <div
+                            class="schema-table__row _schema-table__row_d7636a"
+                            data-field-name="<any-key>"
+                            data-depth="3"
+                          >
+                            <div
+                              class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                              style="--schema-table-indent: 60px"
+                            >
+                              <button
+                                type="button"
+                                class="schema-table__toggle _schema-table__toggle_d7636a"
+                                aria-expanded="false"
+                                aria-label="Toggle <any-key>"
+                              >
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                </svg></button
+                              ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                ><code class="schema-table__name _schema-table__name_d7636a"
+                                  >&lt;any-key&gt;</code
+                                ></span
+                              >
+                            </div>
+                            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                              <span class="schema-table__type _schema-table__type_d7636a">&lt;oneOf&gt;</span>
+                            </div>
+                            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Dynamic fields for which selections can be made, with field names as keys.</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                            <div
+                              class="schema-table__row _schema-table__row_d7636a"
+                              data-field-name="Object 1"
+                              data-depth="4"
+                            >
+                              <div
+                                class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                style="--schema-table-indent: 80px"
+                              >
+                                <button
+                                  type="button"
+                                  class="schema-table__toggle _schema-table__toggle_d7636a"
+                                  aria-expanded="false"
+                                  aria-label="Toggle Object 1"
+                                >
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      d="M3 1 L7 5 L3 9"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                    ></path>
+                                  </svg></button
+                                ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                  ><code class="schema-table__name _schema-table__name_d7636a">Object 1</code></span
+                                >
+                              </div>
+                              <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                <span class="schema-table__type _schema-table__type_d7636a">object</span>
+                              </div>
+                              <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>A field with a single value selected.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                              <div
+                                class="schema-table__row _schema-table__row_d7636a"
+                                data-field-name="type"
+                                data-depth="5"
+                              >
+                                <div
+                                  class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                  style="--schema-table-indent: 100px"
+                                >
+                                  <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                    ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
+                                  >
+                                </div>
+                                <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                  <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+                                </div>
+                                <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Type of the single value field definitions.</p>
+                                  </div>
+                                  <span class="schema-table__default _schema-table__default_d7636a">
+                                    Default: <code>dropdown</code></span
+                                  >
+                                  <div class="schema-table__enum _schema-table__enum_d7636a">
+                                    Allowed enum values: <code>dropdown, textbox</code>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="schema-table__row _schema-table__row_d7636a"
+                                data-field-name="value"
+                                data-depth="5"
+                              >
+                                <div
+                                  class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                  style="--schema-table-indent: 100px"
+                                >
+                                  <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                    ><code class="schema-table__name _schema-table__name_d7636a">value</code></span
+                                  >
+                                </div>
+                                <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                  <span class="schema-table__type _schema-table__type_d7636a">string</span>
+                                </div>
+                                <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The single value selected for this field.</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="schema-table__row _schema-table__row_d7636a"
+                              data-field-name="Object 2"
+                              data-depth="4"
+                            >
+                              <div
+                                class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                style="--schema-table-indent: 80px"
+                              >
+                                <button
+                                  type="button"
+                                  class="schema-table__toggle _schema-table__toggle_d7636a"
+                                  aria-expanded="false"
+                                  aria-label="Toggle Object 2"
+                                >
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      d="M3 1 L7 5 L3 9"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                    ></path>
+                                  </svg></button
+                                ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                  ><code class="schema-table__name _schema-table__name_d7636a">Object 2</code></span
+                                >
+                              </div>
+                              <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                <span class="schema-table__type _schema-table__type_d7636a">object</span>
+                              </div>
+                              <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>A field with potentially multiple values selected.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                              <div
+                                class="schema-table__row _schema-table__row_d7636a"
+                                data-field-name="type"
+                                data-depth="5"
+                              >
+                                <div
+                                  class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                  style="--schema-table-indent: 100px"
+                                >
+                                  <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                    ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
+                                  >
+                                </div>
+                                <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                  <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+                                </div>
+                                <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Type of the multiple value field definitions.</p>
+                                  </div>
+                                  <span class="schema-table__default _schema-table__default_d7636a">
+                                    Default: <code>multiselect</code></span
+                                  >
+                                  <div class="schema-table__enum _schema-table__enum_d7636a">
+                                    Allowed enum values: <code>multiselect, textarray, metrictag, autocomplete</code>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="schema-table__row _schema-table__row_d7636a"
+                                data-field-name="value"
+                                data-depth="5"
+                              >
+                                <div
+                                  class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                  style="--schema-table-indent: 100px"
+                                >
+                                  <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                    ><code class="schema-table__name _schema-table__name_d7636a">value</code></span
+                                  >
+                                </div>
+                                <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                  <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
+                                </div>
+                                <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The multiple values selected for this field.</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div
                           class="schema-table__row _schema-table__row_d7636a"
                           data-field-name="incident_type_uuid"
@@ -599,7 +839,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a"
@@ -626,7 +866,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <button
                               type="button"
@@ -661,7 +901,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                              style="--schema-table-indent: 60px"
                             >
                               <button
                                 type="button"
@@ -701,7 +941,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 80px"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">cell_type</code
@@ -732,7 +972,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 80px"
                               >
                                 <button
                                   type="button"
@@ -778,7 +1018,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 100px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">content</code></span
@@ -801,7 +1041,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 80px"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">important</code></span
@@ -830,7 +1070,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">is_test</code></span
@@ -852,7 +1092,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <button
                               type="button"
@@ -886,7 +1126,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                              style="--schema-table-indent: 60px"
                             >
                               <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                 ><code class="schema-table__name _schema-table__name_d7636a">display_name</code></span
@@ -908,7 +1148,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                              style="--schema-table-indent: 60px"
                             >
                               <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                 ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -930,7 +1170,7 @@
                         <div class="schema-table__row _schema-table__row_d7636a" data-field-name="title" data-depth="2">
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">title</code
@@ -956,7 +1196,7 @@
                       >
                         <div
                           class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                          style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          style="--schema-table-indent: 20px"
                         >
                           <button
                             type="button"
@@ -988,7 +1228,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                            style="--schema-table-indent: 40px"
                           >
                             <button
                               type="button"
@@ -1023,7 +1263,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                              style="--schema-table-indent: 60px"
                             >
                               <button
                                 type="button"
@@ -1064,7 +1304,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 80px"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -1089,7 +1329,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 80px"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -1119,7 +1359,7 @@
                       <div class="schema-table__row _schema-table__row_d7636a" data-field-name="type" data-depth="1">
                         <div
                           class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                          style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                          style="--schema-table-indent: 20px"
                         >
                           <span class="schema-table__name-group _schema-table__name-group_d7636a"
                             ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -1411,7 +1651,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 20px"
                               >
                                 <button
                                   type="button"
@@ -1454,7 +1694,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">archived</code></span
@@ -1476,7 +1716,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">case_id</code></span
@@ -1498,7 +1738,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">created</code></span
@@ -1520,7 +1760,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1547,7 +1787,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1571,7 +1811,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1595,7 +1835,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1619,7 +1859,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1643,7 +1883,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">declared</code></span
@@ -1665,7 +1905,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -1710,7 +1950,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1734,7 +1974,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -1757,7 +1997,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1781,7 +2021,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">detected</code></span
@@ -1803,9 +2043,29 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
-                                  <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                  <button
+                                    type="button"
+                                    class="schema-table__toggle _schema-table__toggle_d7636a"
+                                    aria-expanded="false"
+                                    aria-label="Toggle fields"
+                                  >
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
+                                      <path
+                                        d="M3 1 L7 5 L3 9"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                      ></path>
+                                    </svg></button
+                                  ><span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">fields</code></span
                                   >
                                 </div>
@@ -1818,6 +2078,259 @@
                                   </div>
                                 </div>
                               </div>
+                              <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                                <div
+                                  class="schema-table__row _schema-table__row_d7636a"
+                                  data-field-name="<any-key>"
+                                  data-depth="3"
+                                >
+                                  <div
+                                    class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                    style="--schema-table-indent: 60px"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="schema-table__toggle _schema-table__toggle_d7636a"
+                                      aria-expanded="false"
+                                      aria-label="Toggle <any-key>"
+                                    >
+                                      <svg
+                                        class="expand-chevron"
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 10 10"
+                                        aria-hidden="true"
+                                      >
+                                        <path
+                                          d="M3 1 L7 5 L3 9"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                        ></path>
+                                      </svg></button
+                                    ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                      ><code class="schema-table__name _schema-table__name_d7636a"
+                                        >&lt;any-key&gt;</code
+                                      ></span
+                                    >
+                                  </div>
+                                  <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                    <span class="schema-table__type _schema-table__type_d7636a">&lt;oneOf&gt;</span>
+                                  </div>
+                                  <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Dynamic fields for which selections can be made, with field names as keys.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                                  <div
+                                    class="schema-table__row _schema-table__row_d7636a"
+                                    data-field-name="Object 1"
+                                    data-depth="4"
+                                  >
+                                    <div
+                                      class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                      style="--schema-table-indent: 80px"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="schema-table__toggle _schema-table__toggle_d7636a"
+                                        aria-expanded="false"
+                                        aria-label="Toggle Object 1"
+                                      >
+                                        <svg
+                                          class="expand-chevron"
+                                          width="10"
+                                          height="10"
+                                          viewBox="0 0 10 10"
+                                          aria-hidden="true"
+                                        >
+                                          <path
+                                            d="M3 1 L7 5 L3 9"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                          ></path>
+                                        </svg></button
+                                      ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                        ><code class="schema-table__name _schema-table__name_d7636a"
+                                          >Object 1</code
+                                        ></span
+                                      >
+                                    </div>
+                                    <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                      <span class="schema-table__type _schema-table__type_d7636a">object</span>
+                                    </div>
+                                    <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A field with a single value selected.</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                                    <div
+                                      class="schema-table__row _schema-table__row_d7636a"
+                                      data-field-name="type"
+                                      data-depth="5"
+                                    >
+                                      <div
+                                        class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                        style="--schema-table-indent: 100px"
+                                      >
+                                        <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                          ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
+                                        >
+                                      </div>
+                                      <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                        <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+                                      </div>
+                                      <div
+                                        class="schema-table__cell-description _schema-table__cell-description_d7636a"
+                                      >
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>Type of the single value field definitions.</p>
+                                        </div>
+                                        <span class="schema-table__default _schema-table__default_d7636a">
+                                          Default: <code>dropdown</code></span
+                                        >
+                                        <div class="schema-table__enum _schema-table__enum_d7636a">
+                                          Allowed enum values: <code>dropdown, textbox</code>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="schema-table__row _schema-table__row_d7636a"
+                                      data-field-name="value"
+                                      data-depth="5"
+                                    >
+                                      <div
+                                        class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                        style="--schema-table-indent: 100px"
+                                      >
+                                        <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                          ><code class="schema-table__name _schema-table__name_d7636a"
+                                            >value</code
+                                          ></span
+                                        >
+                                      </div>
+                                      <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                        <span class="schema-table__type _schema-table__type_d7636a">string</span>
+                                      </div>
+                                      <div
+                                        class="schema-table__cell-description _schema-table__cell-description_d7636a"
+                                      >
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>The single value selected for this field.</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="schema-table__row _schema-table__row_d7636a"
+                                    data-field-name="Object 2"
+                                    data-depth="4"
+                                  >
+                                    <div
+                                      class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                      style="--schema-table-indent: 80px"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="schema-table__toggle _schema-table__toggle_d7636a"
+                                        aria-expanded="false"
+                                        aria-label="Toggle Object 2"
+                                      >
+                                        <svg
+                                          class="expand-chevron"
+                                          width="10"
+                                          height="10"
+                                          viewBox="0 0 10 10"
+                                          aria-hidden="true"
+                                        >
+                                          <path
+                                            d="M3 1 L7 5 L3 9"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                          ></path>
+                                        </svg></button
+                                      ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                        ><code class="schema-table__name _schema-table__name_d7636a"
+                                          >Object 2</code
+                                        ></span
+                                      >
+                                    </div>
+                                    <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                      <span class="schema-table__type _schema-table__type_d7636a">object</span>
+                                    </div>
+                                    <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A field with potentially multiple values selected.</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="schema-table__children _schema-table__children_d7636a" hidden>
+                                    <div
+                                      class="schema-table__row _schema-table__row_d7636a"
+                                      data-field-name="type"
+                                      data-depth="5"
+                                    >
+                                      <div
+                                        class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                        style="--schema-table-indent: 100px"
+                                      >
+                                        <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                          ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
+                                        >
+                                      </div>
+                                      <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                        <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+                                      </div>
+                                      <div
+                                        class="schema-table__cell-description _schema-table__cell-description_d7636a"
+                                      >
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>Type of the multiple value field definitions.</p>
+                                        </div>
+                                        <span class="schema-table__default _schema-table__default_d7636a">
+                                          Default: <code>multiselect</code></span
+                                        >
+                                        <div class="schema-table__enum _schema-table__enum_d7636a">
+                                          Allowed enum values:
+                                          <code>multiselect, textarray, metrictag, autocomplete</code>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="schema-table__row _schema-table__row_d7636a"
+                                      data-field-name="value"
+                                      data-depth="5"
+                                    >
+                                      <div
+                                        class="schema-table__cell-name _schema-table__cell-name_d7636a"
+                                        style="--schema-table-indent: 100px"
+                                      >
+                                        <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                          ><code class="schema-table__name _schema-table__name_d7636a"
+                                            >value</code
+                                          ></span
+                                        >
+                                      </div>
+                                      <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                                        <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
+                                      </div>
+                                      <div
+                                        class="schema-table__cell-description _schema-table__cell-description_d7636a"
+                                      >
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>The multiple values selected for this field.</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                               <div
                                 class="schema-table__row _schema-table__row_d7636a"
                                 data-field-name="incident_type_uuid"
@@ -1825,7 +2338,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1849,7 +2362,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">is_test</code></span
@@ -1871,7 +2384,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">modified</code></span
@@ -1893,7 +2406,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -1938,7 +2451,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1962,7 +2475,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -1985,7 +2498,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -2030,7 +2543,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -2054,7 +2567,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -2080,7 +2593,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">public_id</code></span
@@ -2102,7 +2615,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">resolved</code></span
@@ -2127,7 +2640,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">severity</code></span
@@ -2152,7 +2665,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">state</code></span
@@ -2174,7 +2687,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -2201,7 +2714,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -2228,7 +2741,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -2256,7 +2769,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -2283,7 +2796,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">title</code
@@ -2308,7 +2821,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">visibility</code></span
@@ -2331,7 +2844,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 20px"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2356,7 +2869,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 20px"
                               >
                                 <button
                                   type="button"
@@ -2401,7 +2914,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -2446,7 +2959,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -2492,7 +3005,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2517,7 +3030,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2550,7 +3063,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -2595,7 +3108,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -2641,7 +3154,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2666,7 +3179,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2699,7 +3212,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -2744,7 +3257,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -2790,7 +3303,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2815,7 +3328,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2848,7 +3361,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -2893,7 +3406,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -2939,7 +3452,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2964,7 +3477,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2997,7 +3510,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -3040,7 +3553,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -3086,7 +3599,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3111,7 +3624,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3141,7 +3654,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -3186,7 +3699,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -3232,7 +3745,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3257,7 +3770,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3290,7 +3803,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -3335,7 +3848,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -3381,7 +3894,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3406,7 +3919,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3439,7 +3952,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -3482,7 +3995,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -3528,7 +4041,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3553,7 +4066,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3583,7 +4096,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -3628,7 +4141,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -3674,7 +4187,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3699,7 +4212,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3730,7 +4243,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 20px"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3797,7 +4310,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 20px"
                               >
                                 <button
                                   type="button"
@@ -3842,7 +4355,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -3885,7 +4398,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">email</code></span
@@ -3907,7 +4420,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -3929,7 +4442,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">icon</code></span
@@ -3951,7 +4464,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -3973,7 +4486,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">uuid</code></span
@@ -3996,7 +4509,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">id</code></span
@@ -4018,7 +4531,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
@@ -4047,7 +4560,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
+                                style="--schema-table-indent: 20px"
                               >
                                 <button
                                   type="button"
@@ -4092,7 +4605,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -4138,7 +4651,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -4183,7 +4696,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a"
@@ -4207,7 +4720,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">title</code></span
@@ -4230,7 +4743,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -4257,7 +4770,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">modified</code></span
@@ -4280,7 +4793,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -4305,7 +4818,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <button
                                     type="button"
@@ -4351,7 +4864,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -4394,7 +4907,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <button
                                         type="button"
@@ -4440,7 +4953,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
+                                        style="--schema-table-indent: 100px"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -4467,7 +4980,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
+                                        style="--schema-table-indent: 100px"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -4502,7 +5015,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
+                                    style="--schema-table-indent: 60px"
                                   >
                                     <button
                                       type="button"
@@ -4547,7 +5060,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
+                                      style="--schema-table-indent: 80px"
                                     >
                                       <button
                                         type="button"
@@ -4593,7 +5106,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
+                                        style="--schema-table-indent: 100px"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -4620,7 +5133,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
+                                        style="--schema-table-indent: 100px"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -4656,7 +5169,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
+                                  style="--schema-table-indent: 40px"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">type</code

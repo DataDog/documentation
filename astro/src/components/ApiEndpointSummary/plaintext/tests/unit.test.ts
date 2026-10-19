@@ -52,4 +52,11 @@ describe("apiEndpointSummaryNodes", () => {
     const md = render({ ...baseStub, unstable: true });
     expect(md.toLowerCase()).toContain("preview");
   });
+
+  it("notes both statuses when an operation is deprecated and in preview", () => {
+    const md = render({ ...baseStub, deprecated: true, unstable: true });
+    expect(md).toContain(
+      "## [Get a dashboard](/api/latest/dashboards/get-a-dashboard/) (deprecated) (preview)",
+    );
+  });
 });

@@ -133,6 +133,25 @@ describe("apiEndpointNodes", () => {
     expect(out).toContain("things:read");
   });
 
+  it("links the OAuth scope to its section of the scopes page", () => {
+    const ep = {
+      ...baseEndpoint,
+      oauthScopes: ["things:read"],
+      oauthScopesAnchor: "things",
+    };
+    expect(render(ep)).toContain(
+      "authorization [scope](/api/latest/scopes/#things) to access",
+    );
+    expect(format(documentNode(apiEndpointNodes(ep, "fr")))).toContain(
+      "[scope](/fr/api/latest/scopes/#things)",
+    );
+  });
+
+  it("leaves the OAuth scope unlinked without an anchor", () => {
+    const out = render({ ...baseEndpoint, oauthScopes: ["things:read"] });
+    expect(out).toContain("authorization scope to access");
+  });
+
   it("lists multiple permissions with their any/all match", () => {
     const out = render({
       ...baseEndpoint,

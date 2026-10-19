@@ -24,7 +24,7 @@ Fetch all of your existing dashboard list definitions.
 
 This endpoint requires the `dashboards_read` permission.
 
-OAuth apps require the `dashboards_read` authorization scope to access this endpoint.
+OAuth apps require the `dashboards_read` authorization [scope](https://docs.datadoghq.com/api/latest/scopes.md#dashboard-lists) to access this endpoint.
 
 ### Response
 
