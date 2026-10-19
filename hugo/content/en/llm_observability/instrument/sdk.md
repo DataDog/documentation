@@ -436,14 +436,14 @@ Sampling rules can only be configured through the environment variable; `LLMObs.
 
 #### When the decision is made
 
-A trace's sampling decision has to exist before any span leaves your process, but tags are added to the root span over the course of its lifetime. The SDK therefore delays the decision as long as it safely can, then freezes it. The decision is resolved at whichever of these happens first:
+A trace's sampling decision has to exist before any span leaves your process. However, tags are added to the root span over the course of its lifetime. The SDK therefore delays the decision as long as it safely can, then freezes it. The decision is resolved at whichever of these happens first:
 
 - The root span finishes.
 - The trace is propagated to a downstream service.
 - Work is handed off to another thread or to asyncio.
 - The trace is partially flushed, because it exceeded `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` (default `300`) spans.
 
-Once frozen, the decision never changes: a tag set on the root span after that point does not affect sampling. To make sure a tag is considered, set it before any of the events above occur — for example, pass it when you start the root span rather than when you finish it.
+After the decision is frozen, it never changes: a tag set on the root span after that point does not affect sampling. To make sure a tag is considered, set it before any of the events above occur. For example, pass it when you start the root span rather than when you finish it.
 
 ## Manual instrumentation
 
