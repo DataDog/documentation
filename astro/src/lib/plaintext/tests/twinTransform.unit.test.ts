@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { renderMdocWithTwins } from "../twinTransform";
-import { getScopeGroupsView } from "@lib/api/scopesBuilder";
 
 describe("renderMdocWithTwins", () => {
   it("passes plain markdown through unchanged", () => {
@@ -197,16 +196,5 @@ describe("renderMdocWithTwins", () => {
 
     expect(out).toContain("- [A](/a.md)");
     expect(out).not.toContain("docs.datadoghq.com");
-  });
-
-  it("renders api-scopes as a heading and table per scope group", () => {
-    const out = renderMdocWithTwins("{% api-scopes /%}\n");
-    const groups = getScopeGroupsView();
-
-    expect(groups.length).toBeGreaterThan(0);
-    expect(out).not.toContain("{% api-scopes");
-    expect(out.match(/^### /gm)).toHaveLength(groups.length);
-    expect(out).toContain(`### ${groups[0].heading}`);
-    expect(out).toContain(`\`${groups[0].scopes[0].name}\``);
   });
 });

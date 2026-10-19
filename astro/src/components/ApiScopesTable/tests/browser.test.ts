@@ -68,3 +68,25 @@ test.describe("Endpoint scope link", () => {
     await expect(headingForAnchor(page, "dashboards")).toBeInViewport();
   });
 });
+
+test.describe("ApiScopesTable plaintext twin", () => {
+  test("replaces the tag with tables on the scopes page's .md", async ({
+    request,
+  }) => {
+    const response = await request.get("/api/latest/scopes.md");
+    expect(response.status()).toBe(200);
+
+    const body = await response.text();
+    expect(body).not.toContain("{% api-scopes");
+    expect(body).toMatch(/^\| Scope name +\| Description +\|/m);
+    expect(body).toMatch(/^### /m);
+  });
+
+  test("prefixes endpoint links with the page's language", async ({
+    request,
+  }) => {
+    const body = await (await request.get("/ja/api/latest/scopes.md")).text();
+
+    expect(body).toMatch(/\]\([^)]*\/ja\/api\/latest\/[^)]+\.md#/);
+  });
+});
