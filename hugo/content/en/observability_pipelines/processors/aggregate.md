@@ -36,7 +36,7 @@ If **Use event timestamp** is enabled, in the **Allowed lateness** field, enter 
 
 ### Grouping by timestamp
 
-When **Use event timestamp** is enabled, the processor groups metrics by each metric's timestamp, not by when the Worker processes the metric.
+When **Use event timestamp** is enabled, the processor groups metrics by each metric's timestamp, not by ingestion time (when the Worker processes the metric).
 
 Event time windows start at fixed times based on the interval. For example, with a 10-second interval, the windows are:
 
