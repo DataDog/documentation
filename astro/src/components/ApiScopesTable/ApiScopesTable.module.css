@@ -9,7 +9,7 @@
   );
 }
 
-/* An h3 for the outline (it sits under the page's h2), sized like Hugo's h4. */
+/* An h3 for the outline (it sits under the page's h2), sized like an h4. */
 .api-scopes-table__heading {
   font-size: var(--font-size-h4);
   font-weight: var(--font-weight-semibold);
@@ -20,7 +20,7 @@
   table-layout: fixed;
 }
 
-/* Hugo's 4/3/5 column split. */
+/* A 4/3/5 column split. */
 .api-scopes-table__column--name {
   width: 33.333%;
 }

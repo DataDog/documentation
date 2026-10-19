@@ -1,26 +1,19 @@
 /**
  * Builds the data for the authorization scopes page (`/api/latest/scopes/`).
  *
- * This is a port of Hugo's `api-scopes` shortcode
- * (`hugo/layouts/shortcodes/api-scopes.html`). Its grouping and ordering
- * rules are quirky, but the headings must match the live page, so they are
- * reproduced as-is rather than tidied up:
+ * Grouping and ordering rules:
  *
- *   - Go templates range over maps in sorted key order, so paths, methods,
- *     scope names, and group headings are all visited sorted (bytewise).
+ *   - Paths, methods, scope names, and group headings are all visited in
+ *     sorted (bytewise) order.
  *   - A scope's group is its own tags plus the tags of every scope it shares
  *     a tag with. That is one hop, not a transitive closure, so a tag can
  *     appear under several headings.
- *   - Tags within a heading are sorted with Hugo's `sort`, which collates
- *     rather than comparing bytes ("Identity Providers" before "IP Allowlist").
- *
- * Two deliberate departures from Hugo:
- *
- *   - Hugo emits a tag's anchor under every heading that lists it, producing
- *     duplicate IDs. Here each anchor appears once, under the first such
- *     heading, which is the one browsers resolve to anyway.
- *   - Endpoint links use Astro's routes, including category slug overrides,
- *     and each link is listed once even when v1 and v2 both use the scope.
+ *   - Tags within a heading are sorted by collation rather than by bytes
+ *     ("Identity Providers" before "IP Allowlist").
+ *   - Each tag anchor appears once, under the first heading that lists the
+ *     tag, so IDs stay unique.
+ *   - Endpoint links use the category slug overrides, and each link is listed
+ *     once even when v1 and v2 both use the scope.
  *
  * Reads these OpenAPI keys from each spec:
  *
@@ -49,7 +42,7 @@ export interface ScopeRow {
 export interface ScopeGroup {
   /** The group's tags, sorted and comma-joined, e.g. "Downtimes, Monitors". */
   heading: string;
-  /** Tag anchors (and Hugo-spelling aliases) that belong under this heading. */
+  /** Tag anchors (and their camelCase-split aliases) under this heading. */
   anchors: string[];
   scopes: ScopeRow[];
 }
@@ -63,7 +56,7 @@ interface CollectedScope {
 
 const OAUTH_SCHEME_NAME = "AuthZ";
 
-/** Hugo's `sort` collates strings; `en` collation matches its output. */
+/** Orders tags within a heading. */
 const tagCollator = new Intl.Collator("en");
 
 let scopeGroupsCache: ScopeGroup[] | undefined;
@@ -88,16 +81,15 @@ export function toScopeAnchor(tag: string): string {
 }
 
 /**
- * The anchor Hugo gives a tag (`humanize | lower`, spaces to hyphens).
- * `humanize` splits camelCase words, so "GitHub" becomes "git-hub". Only
- * that split is ported, which is the only way the two rules differ for the
- * tags in the spec.
+ * An alternate anchor for a tag that splits camelCase words, so "GitHub"
+ * becomes "git-hub". Emitted alongside `toScopeAnchor` so links that use
+ * this spelling still resolve.
  */
 export function toHugoScopeAnchor(tag: string): string {
   return toSlug(tag.replace(/([a-z])([A-Z])/g, "$1 $2"));
 }
 
-/** Specs are passed in v1, v2 order, the order Hugo walks them. */
+/** Specs are passed in v1, v2 order. */
 export function buildScopeGroups(specs: OpenAPIV3.Document[]): ScopeGroup[] {
   const scopesByName = collectScopesFromSpecs(specs);
   const tagGroups = groupTagsByOverlappingScopes(scopesByName);
@@ -137,7 +129,7 @@ function collectScopesFromSpecs(
           if (!scope.endpoints.some((known) => known.href === endpoint.href)) {
             scope.endpoints.push(endpoint);
           }
-          // Hugo overwrites the description on every visit, so the spec that
+          // The description is overwritten on every visit, so the spec that
           // last used the scope wins, even when it has no description.
           scope.description = scopeDescriptions[scopeName] ?? "";
           scopesByName.set(scopeName, scope);
@@ -243,7 +235,7 @@ function anchorsForTag(tag: string): string[] {
   return unique([toScopeAnchor(tag), toHugoScopeAnchor(tag)]);
 }
 
-/** Keys in bytewise order, matching Go's sorted map iteration. */
+/** Keys in bytewise order. */
 function sortedKeys(record: object): string[] {
   return Object.keys(record).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 }
@@ -252,7 +244,7 @@ function haveCommonTag(tags: string[], otherTags: string[]): boolean {
   return tags.some((tag) => otherTags.includes(tag));
 }
 
-/** Hugo compares the tag slices with `ne`, which is order-sensitive. */
+/** Order-sensitive: [A, B] and [B, A] are different tag lists. */
 function haveSameTagsInOrder(tags: string[], otherTags: string[]): boolean {
   return (
     tags.length === otherTags.length &&

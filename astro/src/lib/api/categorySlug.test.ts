@@ -35,7 +35,7 @@ describe("toOperationSlug", () => {
     );
   });
 
-  it("drops punctuation rather than turning it into a hyphen, as Hugo does", () => {
+  it("drops punctuation rather than turning it into a hyphen", () => {
     expect(toOperationSlug("Get a monitor's details")).toBe(
       "get-a-monitors-details",
     );

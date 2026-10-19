@@ -1,7 +1,6 @@
 /**
- * Tests for the authorization scopes page data. The grouping rules are a
- * literal port of Hugo's `api-scopes` shortcode, so most cases here use small
- * synthetic specs that isolate one Hugo quirk at a time. The last block runs
+ * Tests for the authorization scopes page data. Most cases here use small
+ * synthetic specs that isolate one grouping or ordering rule at a time. The last block runs
  * against the frozen fixture spec (wired by `vitest.unit.config.ts`).
  */
 
@@ -88,7 +87,7 @@ describe("toScopeAnchor", () => {
 });
 
 describe("toHugoScopeAnchor", () => {
-  it("splits camelCase words the way Hugo's humanize does", () => {
+  it("splits camelCase words", () => {
     expect(toHugoScopeAnchor("CI Visibility GitHub Accounts")).toBe(
       "ci-visibility-git-hub-accounts",
     );
@@ -252,7 +251,7 @@ describe("buildScopeGroups: collection", () => {
 });
 
 describe("buildScopeGroups: grouping", () => {
-  // w=[A], x=[A,B], y=[B,C], z=[C]. Hugo unions a scope's tags with those of
+  // w=[A], x=[A,B], y=[B,C], z=[C]. A scope's tags are unioned with those of
   // the scopes it directly overlaps, one hop only, so this yields three
   // groups rather than one transitive group.
   const oneHopSpec = specWith([
@@ -289,7 +288,7 @@ describe("buildScopeGroups: grouping", () => {
     ]);
   });
 
-  it("orders tags within a heading by collation, like Hugo's sort", () => {
+  it("orders tags within a heading by collation", () => {
     const groups = buildScopeGroups([
       specWith([
         { path: "/1", tags: ["IP Allowlist"], summary: "1", authZ: [["org"]] },
@@ -345,7 +344,7 @@ describe("buildScopeGroups: anchors", () => {
     });
   });
 
-  it("adds the Hugo spelling as a second anchor when it differs", () => {
+  it("adds the camelCase-split spelling as a second anchor when it differs", () => {
     const groups = buildScopeGroups([
       specWith([
         {

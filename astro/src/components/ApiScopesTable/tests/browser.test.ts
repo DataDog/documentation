@@ -1,7 +1,16 @@
 import { test, expect, type Locator, type Page } from "@playwright/test";
 
-// These run against the real scopes page: what matters is how an anchor jump
-// interacts with the site's sticky header, which the e2e pages don't have.
+test.describe("ApiScopesTable — visual", () => {
+  test("matches screenshot", async ({ page }) => {
+    await page.goto("/dd_e2e/components/api-scopes-table");
+    const table = page.locator(".api-scopes-table").first();
+    await expect(table).toHaveScreenshot("api-scopes-table.png");
+  });
+});
+
+// The tests below run against the real scopes page: what matters is how an
+// anchor jump interacts with the site's sticky header, which the e2e pages
+// don't have.
 
 const SCOPES_PATH = "/api/latest/scopes/";
 
@@ -39,16 +48,6 @@ test.describe("ApiScopesTable anchors", () => {
       await expect.poll(() => isUncovered(heading)).toBe(true);
     });
   }
-});
-
-test.describe("ApiScopesTable endpoint links", () => {
-  test("have one underline, below the descenders", async ({ page }) => {
-    await page.goto(SCOPES_PATH, { waitUntil: "domcontentloaded" });
-    const link = page.locator(".api-scopes-table__endpoint a").first();
-
-    await expect(link).toHaveCSS("text-underline-position", "under");
-    await expect(link).toHaveCSS("border-bottom-style", "none");
-  });
 });
 
 test.describe("Endpoint scope link", () => {

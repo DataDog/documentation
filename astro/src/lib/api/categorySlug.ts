@@ -19,7 +19,7 @@ export function toSlug(name: string): string {
     name
       .toLowerCase()
       // Slashes drop out rather than becoming a hyphen, so `CI/CD` slugs as
-      // `cicd` and not `ci-cd`. Matches Hugo's `getTagSlug`.
+      // `cicd` and not `ci-cd`.
       .replace(/\//g, "")
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "")
@@ -27,10 +27,9 @@ export function toSlug(name: string): string {
 }
 
 /**
- * The slug of an operation, from its summary. Matches Hugo's `anchorize`
- * (GitHub-style heading IDs), so the per-operation page and its anchor keep
- * the fragment Hugo's single-page category used: punctuation is dropped, not
- * turned into a hyphen ("Get a monitor's details" is `get-a-monitors-details`).
+ * The slug of an operation, from its summary, in the style of GitHub heading
+ * IDs: punctuation is dropped, not turned into a hyphen ("Get a monitor's
+ * details" is `get-a-monitors-details`).
  */
 export function toOperationSlug(summary: string): string {
   return summary

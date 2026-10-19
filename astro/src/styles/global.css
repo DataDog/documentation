@@ -105,8 +105,7 @@ svg {
   vertical-align: middle;
 }
 
-/* As in Hugo, links are body-text colored. The underline sits below the
-   descenders, where Hugo draws its link border. */
+/* Links are body-text colored, with the underline below the descenders. */
 a {
   color: var(--color-text);
   text-decoration-color: var(--color-text-muted);
