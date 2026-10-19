@@ -1,7 +1,6 @@
 ---
 title: AI Gateway
 description: Route LLM requests through Datadog AI Gateway to control model access, routing, and spend, and to observe every request in Agent Observability.
-private: true
 
 further_reading:
   - link: "/llm_observability/"
