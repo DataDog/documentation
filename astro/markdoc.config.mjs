@@ -289,6 +289,10 @@ export default defineMarkdocConfig({
       ),
       selfClosing: true,
     },
+    "api-scopes": {
+      render: component("./src/components/ApiScopesTable/ApiScopesTable.astro"),
+      ...schema.tags["api-scopes"],
+    },
     "whats-next": {
       render: component("./src/components/WhatsNext/WhatsNext.astro"),
       ...schema.tags["whats-next"],
