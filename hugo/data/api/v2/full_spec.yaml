@@ -4969,6 +4969,91 @@ components:
         - id
         - base_severity
       type: object
+    AgentHealthAgentType:
+      default: node
+      description: Agent type associated with the resource.
+      enum:
+        - node
+        - cluster
+      example: node
+      type: string
+      x-enum-varnames:
+        - NODE
+        - CLUSTER
+    AgentHealthHostIssue:
+      description: An active Agent Health issue associated with a resource.
+      properties:
+        category:
+          description: The category used by the Agent to group and reconcile the issue.
+          example: configuration
+          type: string
+        issue_id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+      required:
+        - issue_id
+        - issue_name
+        - issue_type
+        - category
+      type: object
+    AgentHealthHostIssuesAttributes:
+      description: Active Agent Health issues for a resource.
+      properties:
+        issues:
+          description: The active issues and their reconciliation metadata.
+          example:
+            - category: configuration
+              issue_id: invalid-config:4828e7d6c704c4a3
+              issue_name: Invalid Config
+              issue_type: invalid_config
+          items:
+            $ref: "#/components/schemas/AgentHealthHostIssue"
+          type: array
+      required:
+        - issues
+      type: object
+    AgentHealthHostIssuesData:
+      description: Agent Health issue data for a resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthHostIssuesAttributes"
+        id:
+          description: The resource identifier.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthHostIssuesType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthHostIssuesResponse:
+      description: Response containing the active Agent Health issues for a resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthHostIssuesData"
+      required:
+        - data
+      type: object
+    AgentHealthHostIssuesType:
+      default: agent_health_issues
+      description: The Agent Health issue resource type.
+      enum:
+        - agent_health_issues
+      example: agent_health_issues
+      type: string
+      x-enum-varnames:
+        - AGENT_HEALTH_ISSUES
     AgentTrigger:
       description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
       properties:
@@ -145372,6 +145457,57 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/agenthealth/hosts/{resource_id}/issues:
+    get:
+      description: Returns the active Agent Health issues for a node Agent or Cluster Agent resource.
+      operationId: ListAgentHealthHostIssues
+      parameters:
+        - description: >-
+            Resource identifier whose active Agent Health issues should be returned: a DaemonSet UID for a node Agent or a cluster UUID for a Cluster Agent.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            type: string
+        - description: Agent type associated with the resource. Defaults to `node` when omitted.
+          example: node
+          in: query
+          name: agent_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/AgentHealthAgentType"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        issues:
+                          - category: configuration
+                            issue_id: invalid-config:4828e7d6c704c4a3
+                            issue_name: Invalid Config
+                            issue_type: invalid_config
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      type: agent_health_issues
+              schema:
+                $ref: "#/components/schemas/AgentHealthHostIssuesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+      summary: List active Agent Health issues
+      tags:
+        - Agent Health
+      x-menu-order: 1
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -255002,6 +255138,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
+  - description: View Agent Health issues reported for node Agents and Cluster Agents.
+    name: Agent Health
   - description: >-
       Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
     name: Agent Observability

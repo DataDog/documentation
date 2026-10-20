@@ -157,6 +157,10 @@
     "request_description": "The new execution policy.",
     "request_schema_description": "Request object that includes the execution policy to update."
   },
+  "ListAgentHealthHostIssues": {
+    "description": "Returns the active Agent Health issues for a node Agent or Cluster Agent resource.",
+    "summary": "List active Agent Health issues"
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
