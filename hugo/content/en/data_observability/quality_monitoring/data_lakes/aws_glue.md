@@ -221,7 +221,7 @@ With Athena queries enabled, you can:
 - Apply custom filters to metrics.
 - Monitor Glue tables that don't use the Iceberg table format.
 
-For each monitor, Datadog uses Iceberg metadata when it can calculate the complete requested metric from metadata, and uses Athena only for the remaining work. If Athena queries are not configured, Datadog skips metrics that require a query and continues to calculate metadata-based metrics.
+For each monitor, Datadog uses Iceberg metadata when it can calculate the complete requested metric from metadata, and uses Athena only for the remaining work. If Athena queries are not configured, Datadog skips monitors that require a query and continues to calculate metadata-based metrics.
 
 **Note**: Datadog runs Athena queries in your AWS account. Athena bills these queries to your account based on the workgroup's pricing model.
 
@@ -241,7 +241,9 @@ Athena reads table data files, not only Iceberg metadata. Add the following stat
         "athena:GetQueryResults",
         "athena:GetWorkGroup",
         "athena:StartQueryExecution",
-        "athena:StopQueryExecution"
+        "athena:StopQueryExecution",
+        "glue:GetPartition",
+        "glue:GetPartitions"
       ],
       "Resource": ["*"]
     },
@@ -252,13 +254,16 @@ Athena reads table data files, not only Iceberg metadata. Add the following stat
         "s3:GetBucketLocation",
         "s3:GetObject",
         "s3:ListBucket",
-        "s3:PutObject"
+        "s3:PutObject",
+        "kms:GenerateDataKey"
       ],
       "Resource": ["*"]
     }
   ]
 }
 ```
+
+`glue:GetPartition` and `glue:GetPartitions` are required to query partitioned tables that don't use the Iceberg table format. `kms:GenerateDataKey` is required if your Athena query result location is encrypted with an AWS KMS key.
 
 To restrict access, scope the Athena actions to your workgroup ARN (`arn:aws:athena:<REGION>:<ACCOUNT_ID>:workgroup/<WORKGROUP_NAME>`), `s3:GetObject` to the buckets that store your table data, and `s3:PutObject` to the Athena query result location.
 
@@ -268,8 +273,21 @@ If you use Lake Formation, the `SELECT` permission described in [Configure Lake 
 
 1. In the AWS Glue configuration, under {{< ui >}}Quality Monitoring{{< /ui >}}, enable the {{< ui >}}Enable Athena queries{{< /ui >}} toggle.
 2. Enter the {{< ui >}}Athena workgroup{{< /ui >}} that Datadog uses to run queries.
-3. (Optional) Enter an {{< ui >}}Athena result location{{< /ui >}}, such as `s3://example-bucket/athena-results/`. This field is required if the workgroup does not manage query result locations.
+3. (Optional) Enter an {{< ui >}}Athena result location{{< /ui >}}, such as `s3://example-bucket/athena-results/`. See [Choose a result location](#choose-a-result-location) to decide whether you need this field.
 4. Click {{< ui >}}Save{{< /ui >}}.
+
+#### Choose a result location
+
+Athena writes the results of every query to a location that the workgroup or the caller specifies. Whether you need to enter an {{< ui >}}Athena result location{{< /ui >}} depends on how your workgroup handles query results:
+
+| Workgroup configuration | Athena result location |
+|-------------------------|------------------------|
+| The workgroup uses [Athena managed query results][10]. | Leave the field empty. Athena stores results without an S3 bucket in your account. |
+| The workgroup has a query result location configured, and {{< ui >}}Override client-side settings{{< /ui >}} is enabled. | Leave the field empty. Athena always uses the workgroup's location and ignores this field. |
+| The workgroup has a query result location configured, but {{< ui >}}Override client-side settings{{< /ui >}} is disabled. | Optional. Leave it empty to use the workgroup's location, or enter an S3 path to store Datadog query results separately. |
+| The workgroup has no query result location configured. | Required. Enter an S3 path, such as `s3://example-bucket/datadog-athena-results/`. |
+
+If Datadog writes results to an S3 location, grant `s3:PutObject` on that location in the [Athena IAM permissions](#add-athena-iam-permissions). To control storage costs, add an [S3 lifecycle rule][11] that expires objects under the result location.
 
 This setting controls only the queries that Datadog runs to calculate metrics. To monitor the queries that your own users and pipelines run in Athena, see [Amazon Athena Query History][9].
 
@@ -292,3 +310,5 @@ After the sync completes, your tables appear in the [Data Catalog][3]. You can a
 [7]: /monitors/types/data_observability/
 [8]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-manage-queries-control-costs.html
 [9]: /data_observability/quality_monitoring/data_lakes/amazon_athena/
+[10]: https://docs.aws.amazon.com/athena/latest/ug/managed-results.html
+[11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html

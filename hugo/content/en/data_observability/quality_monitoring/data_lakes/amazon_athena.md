@@ -80,8 +80,6 @@ To stop monitoring a region, remove it from the configuration. To stop monitorin
 - Datadog syncs query history hourly for each configured workgroup.
 - The first sync collects queries submitted in the previous 24 hours. Datadog does not backfill older queries.
 - Datadog collects queries that reach a final state: succeeded, failed, or cancelled. A query that is still queued or running is collected after it finishes.
-- Athena retains query history for 45 days. If query history is disabled for longer than that, contact Datadog support to restart collection for the affected workgroups.
-
 Collected queries can take longer than an hour to appear, depending on when they finish relative to the sync schedule.
 
 ### Collected data
@@ -94,8 +92,6 @@ For each query, Datadog collects:
 - Timing statistics, including total, queue, planning, and engine execution time.
 - Data scanned and, for capacity reservation queries, the DPU count.
 - Whether Athena reused a previous query result.
-
-The Athena API does not return the identity of the user who submitted a query, so query history does not include user attribution.
 
 ## Cost estimates
 
