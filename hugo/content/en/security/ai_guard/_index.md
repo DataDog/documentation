@@ -159,7 +159,7 @@ The AI Guard evaluation API enforces these limits for each Datadog organization:
 
 To request higher limits for your organization, contact [Datadog Support][13].
 
-<!-- TODO: Which usage limit values are correct? Product code shows 2.5 billion tokens per day and 700 requests per minute per organization, as in the table above. The current published docs list 1 billion tokens per day and 12,000 requests per minute per IP address. -->
+<!-- TODO: Which usage limit values are correct? Product code shows 2.5 billion tokens per day and 700 requests per minute per organization, which the draft uses. The current published docs list 1 billion tokens per day and 12,000 requests per minute per IP address. -->
 
 When your organization exceeds a limit, AI Guard stops evaluating requests, and the API returns a `429 Too Many Requests` error. What happens to each request depends on the integration method:
 
