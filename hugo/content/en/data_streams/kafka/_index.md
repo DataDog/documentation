@@ -64,7 +64,7 @@ The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partitio
 
 ### Create and delete topics
 
-Create a topic on a cluster, or delete a topic that is no longer needed, from the same place you monitor its health, lag, and owners, without switching to a separate Kafka admin tool. See [Enable Kafka actions][3] for the required setup and permissions.
+Create a topic on a cluster, or delete a topic you no longer need. You can do both from the same place you monitor a topic's health, lag, and owners, without switching to a separate Kafka admin tool. For the required setup and permissions, see [Enable Kafka actions][3].
 
 [2]: /data_streams/kafka/setup/
 [3]: /data_streams/kafka/setup/#enable-kafka-actions

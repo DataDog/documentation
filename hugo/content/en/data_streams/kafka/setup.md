@@ -73,9 +73,9 @@ Each action requires a user permission:
 | Create a topic | `Data Streams Monitoring Kafka Create Topic` |
 | Delete a topic | `Data Streams Monitoring Kafka Delete Topic` |
 
-Each Kafka action is recorded in [Audit Trail][13] under the Data Streams Monitoring category, with the user, topic, and cluster.
+Datadog records each Kafka action in [Audit Trail][13] under the Data Streams Monitoring category. Each entry includes the user, topic, and cluster.
 
-<div class="alert alert-warning">Deleting a topic is permanent and removes all of its messages. Grant the <code>Data Streams Monitoring Kafka Delete Topic</code> permission only to users who manage your Kafka topics.</div>
+<div class="alert alert-warning">Deleting a topic permanently removes the topic and all of its messages. Grant the <code>Data Streams Monitoring Kafka Delete Topic</code> permission only to users who manage your Kafka topics.</div>
 
 You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a role on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
@@ -89,8 +89,8 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
 3. Enter a descriptive name for your role (for example, "Kafka Actions Access").
-4. In the {{< ui >}}Search Permissions{{< /ui >}} field, type the name of a permission from the [User permissions](#user-permissions) table (for example, `Data Streams Monitoring Capture Messages`).
-5. Select the permission from the search results to enable it for this role. Repeat for each action you want the role to have.
+4. In the {{< ui >}}Search Permissions{{< /ui >}} field, enter the name of a permission from the [User permissions](#user-permissions) table (for example, `Data Streams Monitoring Capture Messages`).
+5. Select the permission from the search results to enable it for this role. Repeat for each permission you want to grant the role.
 6. Click {{< ui >}}Save{{< /ui >}}.
 7. Confirm your role was created successfully by searching for it in the roles list.
 
