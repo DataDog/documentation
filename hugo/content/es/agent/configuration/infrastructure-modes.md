@@ -63,7 +63,7 @@ El Agent admite cuatro modos de infraestructura. Una marca de verificación ({{<
   - [Memoria del kernel de Windows][10]
   - [Contadores de rendimiento de Windows][11] (7.80+)
   - [Registro de Windows][12] (7.80+)
-  - [Servicios de Windows][13]
+  - [Servicios de Windows][13] (7.78+)
   - [Verificación WMI][14] (7.80+)
   - [Verificaciones personalizadas][15] con el prefijo `custom_`
 
@@ -142,7 +142,7 @@ Para verificar el modo de infraestructura establecido en sus servidores:
 1. Haga clic en un grupo de modo para expandirlo y ver los servidores que contiene.
 1. Opcionalmente, use la barra de búsqueda para filtrar por un nombre de servidor específico (por ejemplo, `hostname:worker1`).
 
-{{< img src="agent/configuration/fa_group_by_infra_mode-1.png" alt="Página de Fleet Automation View Agents con Infrastructure Mode seleccionado en el menú desplegable Group by, que muestra el grupo Full expandido con 311 servidores y columnas para hostname, Agent, OTEL, integrations, services y remote configuration status." style="width:90%" >}}
+{{< img src="agent/configuration/fa_group_by_infra_mode-1.png" alt="Página de Fleet Automation View Agents con modo infraestructura seleccionado en el menú desplegable Group by, que muestra el grupo Full expandido con 311 servidores y columnas para hostname, Agent, OTEL, integraciones, servicios y estado de configuración remota." style="width:90%" >}}
 
 ## Lecturas adicionales {#further-reading}
 
