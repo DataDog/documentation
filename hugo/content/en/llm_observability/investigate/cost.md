@@ -4,7 +4,7 @@ aliases:
 - /llm_observability/monitoring/cost/
 description: Monitor your LLM tokens and costs.
 ---
-{{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in Agent Observability." style="width:100%;" >}}
+{{< img src="llm_observability/ao_cost_overview.png" alt="Cost Overview in Agent Observability." style="width:100%;" >}}
 
 Agent Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 
@@ -91,10 +91,19 @@ Many LLM providers cache reused prompt prefixes to reduce repeated processing. T
 {{< img src="llm_observability/cost_tags_cache.png" alt="Dashboard comparing cache read, cache write, and non-cached input tokens grouped by a custom prompt_version tag." style="width:100%;" >}}
 
 ## View costs in Agent Observability
-View your app in Agent Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
-- A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
-- {{< ui >}}Breakdown by Token Type{{< /ui >}}: A breakdown of token usage, along with associated costs
-- {{< ui >}}Breakdown by Provider/Model{{< /ui >}} or {{< ui >}}Prompt ID/Version{{< /ui >}}: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
+In Agent Observability, select {{< ui >}}Cost{{< /ui >}} from the left navigation to open the _Cost Overview_. This page shows your estimated AI spend across all your LLM applications, providers, and models for the selected time range.
+
+The Cost Overview includes:
+- **Spend breakdown**: A Sankey diagram of your {{< ui >}}Total Estimated Spend{{< /ui >}}, compared with the previous period. Switch between {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}}, and {{< ui >}}Custom Tags{{< /ui >}} to analyze which applications, providers, or [custom tags](#custom-tags-on-cost-and-tokens-metrics) account for your spend. Each entry shows the amount spent, its share of the total spen, and the change from the previous period.
+- {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] that identify specific ways to reduce spend, such as prompts that do not use the provider's prompt cache. Each insight lists the affected application and estimated savings.
+- {{< ui >}}Cost Trend{{< /ui >}}: A timeseries of spend across one or all applications. Group it by application, service, model name, model provider, or custom tags, and add filters to narrow the results.
+- {{< ui >}}Wasted Spend{{< /ui >}}: Spend on failed calls, low-quality responses, and issues found by [Insights][8], broken down by application.
+- {{< ui >}}Cache Efficiency{{< /ui >}}: Net savings from prompt caching, along with cache hit ratio, cache reuse ratio, and non-cached input cost. To ensure accurate cache metrics, provide the complete [cache token breakdown](#how-token-counts-are-calculated).
+
+To view cost for a single application, select it from {{< ui >}}Applications{{< /ui >}} and open the {{< ui >}}Cost{{< /ui >}} tab. The application's _Cost view_ features:
+- {{< ui >}}Filter{{< /ui >}}: A cost filter that narrows the Cost view to specific attributes.
+- {{< ui >}}Total Cost (Estimated){{< /ui >}} and {{< ui >}}Total Tokens{{< /ui >}}: Summaries broken down by token type, including output, non-cached input, cache read input, cache write input, and embedding tokens
+- {{< ui >}}Cost Trend{{< /ui >}}: Spend over time, grouped by model, provider, token type, or custom tags
 - {{< ui >}}Most Expensive LLM Calls{{< /ui >}}: A list of your most expensive requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
@@ -168,5 +177,5 @@ How to fix:
 [3]: /llm_observability/instrument/api/#metrics
 [4]: https://github.com/pydantic/genai-prices/tree/main?tab=readme-ov-file#providers
 [5]: /llm_observability/investigate/metrics/#llm-cost-metrics
-[6]: /llm_observability/instrument/prompt_tracking
 [7]: /llm_observability/instrument/sdk/#adding-custom-tags-to-cost-and-tokens-metrics
+[8]: /llm_observability/investigate/insights/
