@@ -3,6 +3,8 @@ import type { OpenAPIV3 } from "openapi-types";
 import {
   buildCurlByRegion,
   buildPlaintextCurl,
+  extractOauthScopes,
+  extractOauthScopesMatch,
   extractPermissionsMatch,
   extractRequestBody,
   extractResponses,
@@ -164,6 +166,43 @@ describe("extractPermissionsMatch", () => {
 
   it("returns undefined when there are no permissions", () => {
     expect(extractPermissionsMatch({ responses: {} })).toBeUndefined();
+  });
+});
+
+describe("extractOauthScopes", () => {
+  // Each entry in `security` is an alternative: any one of them is enough.
+  it("lists every scope when separate AuthZ entries are alternatives", () => {
+    const security = [
+      { AuthZ: ["monitors_write"] },
+      { AuthZ: ["monitors_draft_write"] },
+    ];
+
+    expect(extractOauthScopes(security)).toEqual([
+      "monitors_write",
+      "monitors_draft_write",
+    ]);
+    expect(extractOauthScopesMatch(security)).toBe("any");
+  });
+
+  // Scopes in one entry are all required, so there's no match to state.
+  it("keeps the scopes of a single entry, without a match", () => {
+    const security = [{ AuthZ: ["usage_read", "billing_read"] }];
+
+    expect(extractOauthScopes(security)).toEqual([
+      "usage_read",
+      "billing_read",
+    ]);
+    expect(extractOauthScopesMatch(security)).toBeUndefined();
+  });
+
+  it("ignores security entries other than AuthZ", () => {
+    const security: OpenAPIV3.SecurityRequirementObject[] = [
+      { apiKeyAuth: [], appKeyAuth: [] },
+      { AuthZ: ["dashboards_read"] },
+    ];
+
+    expect(extractOauthScopes(security)).toEqual(["dashboards_read"]);
+    expect(extractOauthScopesMatch(security)).toBeUndefined();
   });
 });
 

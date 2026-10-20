@@ -72,6 +72,7 @@ export const EndpointDataSchema = z
     permissions: z.array(z.string()).optional(),
     permissionsMatch: z.enum(["any", "all"]).optional(),
     oauthScopes: z.array(z.string()).optional(),
+    oauthScopesMatch: z.literal("any").optional(),
     oauthScopesAnchor: z.string().optional(),
     regionUrls: z.record(z.string(), z.string()).optional(),
     pathParams: z.array(SchemaFieldSchema).optional(),

@@ -32,6 +32,7 @@ interface EndpointData {
   permissions?: string[];
   permissionsMatch?: "any" | "all";
   oauthScopes?: string[];
+  oauthScopesMatch?: "any";
   oauthScopesAnchor?: string;
   regionUrls?: Record<string, string>;
   pathParams?: SchemaField[];
@@ -155,16 +156,35 @@ const hasParams =
       {/* OAuth scopes */}
       {ep.oauthScopes && ep.oauthScopes.length > 0 && (
         <div class={cl("api-endpoint__oauth-scopes")}>
-          <p>
-            OAuth apps require the <code>{ep.oauthScopes.join(", ")}</code>{" "}
-            authorization{" "}
-            {ep.oauthScopesAnchor ? (
-              <a href={oauthScopesHref}>scope</a>
-            ) : (
-              "scope"
-            )}{" "}
-            to access this endpoint.
-          </p>
+          {ep.oauthScopesMatch === "any" ? (
+            <p>
+              OAuth apps require one of the following authorization{" "}
+              {ep.oauthScopesAnchor ? (
+                <a href={oauthScopesHref}>scopes</a>
+              ) : (
+                "scopes"
+              )}{" "}
+              to access this endpoint:{" "}
+              {ep.oauthScopes.map((scope, index) => (
+                <>
+                  {index > 0 && ", "}
+                  <code>{scope}</code>
+                </>
+              ))}
+              .
+            </p>
+          ) : (
+            <p>
+              OAuth apps require the <code>{ep.oauthScopes.join(", ")}</code>{" "}
+              authorization{" "}
+              {ep.oauthScopesAnchor ? (
+                <a href={oauthScopesHref}>scope</a>
+              ) : (
+                "scope"
+              )}{" "}
+              to access this endpoint.
+            </p>
+          )}
         </div>
       )}
 

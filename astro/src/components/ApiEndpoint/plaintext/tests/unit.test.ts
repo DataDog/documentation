@@ -165,6 +165,18 @@ describe("apiEndpointNodes", () => {
     );
   });
 
+  it("lists alternative OAuth scopes after one of the following", () => {
+    const out = render({
+      ...baseEndpoint,
+      oauthScopes: ["monitors_write", "monitors_draft_write"],
+      oauthScopesMatch: "any",
+      oauthScopesAnchor: "monitors",
+    });
+    expect(out).toContain(
+      "OAuth apps require one of the following authorization [scopes](/api/latest/scopes/#monitors) to access this endpoint: `monitors_write`, `monitors_draft_write`.",
+    );
+  });
+
   it("leaves the OAuth scope unlinked without an anchor", () => {
     const out = render({ ...baseEndpoint, oauthScopes: ["things:read"] });
     expect(out).toContain("authorization scope to access");

@@ -94,24 +94,53 @@ export function extractPermissionsMatch(
 }
 
 /**
- * Extract OAuth scopes from the `security` block's AuthZ requirement.
+ * Extract OAuth scopes from the `security` block's AuthZ requirements.
+ *
+ * Each `security` entry is an alternative, and the scopes inside one entry
+ * are all required. When every AuthZ entry holds a single scope, the entries
+ * are alternative scopes, so this lists them all (see
+ * `extractOauthScopesMatch`). Otherwise it returns the first entry's scopes.
+ * Hugo keeps only the last entry, which hides the alternatives.
  */
 export function extractOauthScopes(
   security?: OpenAPIV3.SecurityRequirementObject[],
 ): string[] | undefined {
-  if (!security || !Array.isArray(security)) return undefined;
+  const authZEntries = extractAuthZEntries(security);
+  if (authZEntries.length === 0) return undefined;
+  return hasAlternativeScopes(authZEntries)
+    ? authZEntries.flat()
+    : authZEntries[0];
+}
 
-  for (const requirement of security) {
-    if (
-      requirement.AuthZ &&
-      Array.isArray(requirement.AuthZ) &&
-      requirement.AuthZ.length > 0
-    ) {
-      return requirement.AuthZ;
-    }
-  }
+/**
+ * `"any"` when the scopes from `extractOauthScopes` are alternatives, so any
+ * one of them is enough. `undefined` when they're all required.
+ */
+export function extractOauthScopesMatch(
+  security?: OpenAPIV3.SecurityRequirementObject[],
+): "any" | undefined {
+  return hasAlternativeScopes(extractAuthZEntries(security))
+    ? "any"
+    : undefined;
+}
 
-  return undefined;
+function extractAuthZEntries(
+  security?: OpenAPIV3.SecurityRequirementObject[],
+): string[][] {
+  if (!security || !Array.isArray(security)) return [];
+  return security
+    .map((requirement) => requirement.AuthZ)
+    .filter(
+      (scopes): scopes is string[] =>
+        Array.isArray(scopes) && scopes.length > 0,
+    );
+}
+
+function hasAlternativeScopes(authZEntries: string[][]): boolean {
+  return (
+    authZEntries.length > 1 &&
+    authZEntries.every((scopes) => scopes.length === 1)
+  );
 }
 
 function isJsonMediaType(mediaType: string): boolean {

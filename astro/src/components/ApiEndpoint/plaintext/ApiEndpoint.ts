@@ -87,11 +87,18 @@ function oauthScopesNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
   if (!ep.oauthScopes || ep.oauthScopes.length === 0) {
     return NO_CONTENT;
   }
-  const scope = ep.oauthScopesAnchor
-    ? `[scope](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
-    : "scope";
+  const scopesLink = (text: string) =>
+    ep.oauthScopesAnchor
+      ? `[${text}](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
+      : text;
+  if (ep.oauthScopesMatch === "any") {
+    const scopeList = ep.oauthScopes.map((scope) => `\`${scope}\``).join(", ");
+    return nodesFromMd(
+      `OAuth apps require one of the following authorization ${scopesLink("scopes")} to access this endpoint: ${scopeList}.`,
+    );
+  }
   return nodesFromMd(
-    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scope} to access this endpoint.`,
+    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scopesLink("scope")} to access this endpoint.`,
   );
 }
 

@@ -153,6 +153,18 @@ describe("ApiEndpoint permissions and OAuth scopes", () => {
       /authorization <a href="\/api\/latest\/scopes\/#dashboards">scope<\/a> to access this endpoint\./,
     );
   });
+
+  it("lists alternative scopes after one of the following", async () => {
+    const html = await renderEndpoint({
+      oauthScopes: ["monitors_write", "monitors_draft_write"],
+      oauthScopesMatch: "any",
+      oauthScopesAnchor: "monitors",
+    });
+
+    expect(html).toMatch(
+      /OAuth apps require one of the following authorization <a href="\/api\/latest\/scopes\/#monitors">scopes<\/a> to access this endpoint: <code>monitors_write<\/code>, <code>monitors_draft_write<\/code>\./,
+    );
+  });
 });
 
 describe("ApiEndpoint argument tables", () => {
