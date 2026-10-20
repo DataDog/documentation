@@ -8,14 +8,14 @@ import styles from "./Footer.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { HUGO_ORIGIN } from "@config/origins";
 import { localePrefix, resolveLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
 
 const cl = classListFactory(styles);
+const translate = useTranslations(Astro.currentLocale);
 
-// MISSING_TRANSLATION_LABEL: Use translations
-const heading = "Can't find something?";
-const desc =
-  "Our friendly, knowledgeable solutions engineers are here to help!";
-const ctaLabel = "Contact Us";
+const heading = translate("footer_blurb_heading");
+const desc = translate("footer_blurb_desc");
+const ctaLabel = translate("contact_us");
 // The help page is a Hugo docs page, not a corp-site page.
 const ctaHref = `${HUGO_ORIGIN}${localePrefix(resolveLocale(Astro.currentLocale))}/help/`;
 ---

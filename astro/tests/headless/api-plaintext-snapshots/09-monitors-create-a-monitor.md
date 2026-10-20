@@ -256,7 +256,9 @@ This endpoint requires the `monitors_write` permission.
 
 OAuth apps require the `monitors_write` authorization [scope](https://docs.datadoghq.com/api/latest/scopes.md#monitors) to access this endpoint.
 
-### Request Body (required)
+### Request
+
+#### Body Data (required)
 
 Create a monitor request body.
 

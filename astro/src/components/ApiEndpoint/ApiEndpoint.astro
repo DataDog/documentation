@@ -85,7 +85,7 @@ const hasParams =
     >
       {/* Status alerts */}
       {/* MISSING_TRANSLATION_LABEL: translate the deprecation/unstable/region-not-supported messages,
-        permissions label, "Request Body" heading, and "(required)/(optional)"
+        permissions label, "Body Data" subheading, and "(required)/(optional)"
         markers once authoritative translation keys exist in the Hugo i18n
         bundle. */}
       {ep.deprecated && (
@@ -209,9 +209,10 @@ const hasParams =
       {/* Request Body */}
       {ep.requestBody && (
         <div class={cl("api-endpoint__section")}>
-          <h3>
-            Request Body {ep.requestBody.required ? "(required)" : "(optional)"}
-          </h3>
+          <h3>{translate("request")}</h3>
+          <h4>
+            Body Data {ep.requestBody.required ? "(required)" : "(optional)"}
+          </h4>
           {ep.requestBody.description && (
             <p set:html={renderMarkdownInline(ep.requestBody.description)} />
           )}
