@@ -91665,6 +91665,22 @@ components:
         - type
         - method
       type: object
+    OnCallShiftChangeTrigger:
+      description: "Trigger a workflow when an On-Call shift changes. The workflow must be published."
+      properties:
+        rateLimit:
+          $ref: "#/components/schemas/TriggerRateLimit"
+      type: object
+    OnCallShiftChangeTriggerWrapper:
+      description: "Schema for an On-Call shift change trigger."
+      properties:
+        onCallShiftChangeTrigger:
+          $ref: "#/components/schemas/OnCallShiftChangeTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - onCallShiftChangeTrigger
+      type: object
     OnCallTrigger:
       description: "Trigger a workflow from an On-Call Page or On-Call Handover. For automatic triggering a handle must be configured and the workflow must be published."
       properties:
@@ -136782,6 +136798,7 @@ components:
         - $ref: "#/components/schemas/IncidentTriggerWrapper"
         - $ref: "#/components/schemas/MonitorTriggerWrapper"
         - $ref: "#/components/schemas/NotebookTriggerWrapper"
+        - $ref: "#/components/schemas/OnCallShiftChangeTriggerWrapper"
         - $ref: "#/components/schemas/OnCallTriggerWrapper"
         - $ref: "#/components/schemas/ScheduleTriggerWrapper"
         - $ref: "#/components/schemas/SecurityTriggerWrapper"
