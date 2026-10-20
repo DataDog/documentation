@@ -94,11 +94,11 @@ Many LLM providers cache reused prompt prefixes to reduce repeated processing. T
 In Agent Observability, select {{< ui >}}Cost{{< /ui >}} from the left navigation to open the _Cost Overview_. This page shows your estimated AI spend across all your LLM applications, providers, and models for the selected time range.
 
 The Cost Overview includes:
-- **Spend breakdown**: A Sankey diagram of your {{< ui >}}Total Estimated Spend{{< /ui >}}, compared with the previous period. Switch between {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}}, and {{< ui >}}Custom Tags{{< /ui >}} to analyze which applications, providers, or [custom tags](#custom-tags-on-cost-and-tokens-metrics) account for your spend. Each entry shows the amount spent, its share of the total spen, and the change from the previous period.
+- **Spend breakdown**: A Sankey diagram of your {{< ui >}}Total Estimated Spend{{< /ui >}}, compared with the previous period. Switch between {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}}, and {{< ui >}}Custom Tags{{< /ui >}} to analyze which applications, providers, or [custom tags](#custom-tags-on-cost-and-tokens-metrics) account for your spend. Each entry shows the amount spent, its share of the total spend, and the change from the previous period.
 - {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] that identify specific ways to reduce spend, such as prompts that do not use the provider's prompt cache. Each insight lists the affected application and estimated savings.
 - {{< ui >}}Cost Trend{{< /ui >}}: A timeseries of spend across one or all applications. Group it by application, service, model name, model provider, or custom tags, and add filters to narrow the results.
 - {{< ui >}}Wasted Spend{{< /ui >}}: Spend on failed calls, low-quality responses, and issues found by [Insights][8], broken down by application.
-- {{< ui >}}Cache Efficiency{{< /ui >}}: Net savings from prompt caching, along with cache hit ratio, cache reuse ratio, and non-cached input cost. To ensure accurate cache metrics, provide the complete [cache token breakdown](#how-token-counts-are-calculated).
+- {{< ui >}}Cache Efficiency{{< /ui >}}: Net savings from prompt caching, along with cache hit ratio, cache reuse ratio, and non-cached input cost. For accurate cache metrics, provide the complete [cache token breakdown](#how-token-counts-are-calculated).
 
 To view cost for a single application, select it from {{< ui >}}Applications{{< /ui >}} and open the {{< ui >}}Cost{{< /ui >}} tab. The application's _Cost view_ features:
 - {{< ui >}}Filter{{< /ui >}}: A cost filter that narrows the Cost view to specific attributes.
