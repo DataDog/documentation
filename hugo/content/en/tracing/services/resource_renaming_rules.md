@@ -1,6 +1,6 @@
 ---
 title: Resource Renaming Rules
-description: Rewrite APM resource names at intake with regular expressions to collapse high-cardinality resources, without changing tracer or Agent configuration.
+description: Rewrite APM resource names in Datadog with regular expressions to collapse high-cardinality resources, without changing tracer or Agent configuration.
 further_reading:
 - link: "/tracing/services/service_remapping_rules/"
   tag: "Documentation"
@@ -16,7 +16,7 @@ Resource renaming rules are in Preview. To request access, fill out this form.
 
 ## Overview
 
-Collapse resources that differ only by an ID without changing tracer configuration, updating Agent settings, or redeploying code. Resource renaming rules use a regular expression and a replacement to rewrite the `resource_name` of APM data at intake. For example, a rule can rewrite `GET /users/39874984` and `GET /users/4987398` to a single `GET /users/{user_id}` resource, so the service page, trace metrics, and monitors track the endpoint instead of each ID.
+Collapse resources that differ only by an ID without changing tracer configuration, updating Agent settings, or redeploying code. Resource renaming rules use a regular expression and a replacement to rewrite the `resource_name` of APM data in Datadog, as the data is received (at intake). For example, a rule can rewrite `GET /users/39874984` and `GET /users/4987398` to a single `GET /users/{user_id}` resource, so the service page, trace metrics, and monitors track the endpoint instead of each ID.
 
 <div class="alert alert-info">Each organization can contain up to 1,000 resource renaming rules.</div>
 
