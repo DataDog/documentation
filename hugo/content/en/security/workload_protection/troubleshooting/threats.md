@@ -7,7 +7,7 @@ If you experience issues with Workload Protection, use the following troubleshoo
 
 ## Security Agent flare
 
-<div class="alert alert-warning">From Agent <code>7.77</code>, the <code>security-agent</code> runtime component for Workload Protection is deprecated and is no longer required. The standalone <code>security-agent flare</code> command does not work when the Security Agent process is not running. Use the core Agent <code>flare</code> command instead.</div>
+<div class="alert alert-warning">The Security Agent is required for Workload Protection. Without it, no Workload Protection events reach Datadog.</div>
 
 Similar to the [Agent flare][3], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
