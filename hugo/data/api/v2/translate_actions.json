@@ -157,6 +157,10 @@
     "request_description": "The new execution policy.",
     "request_schema_description": "Request object that includes the execution policy to update."
   },
+  "ListAgentHealthHostIssues": {
+    "description": "Returns the active Agent Health issues for a node Agent or Cluster Agent resource.",
+    "summary": "List active Agent Health issues"
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
@@ -2292,6 +2296,10 @@
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
   },
+  "GetSavedFilter": {
+    "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
+    "summary": "Get a saved filter"
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -4023,6 +4031,10 @@
     "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
     "summary": "Get patterns run status"
   },
+  "ListLLMObsPatternsTemplates": {
+    "description": "List all enabled patterns templates.",
+    "summary": "List patterns templates"
+  },
   "ListLLMObsPatternsTopics": {
     "description": "List the topics discovered by a patterns run. When no run is specified,\nthe most recent completed run is used.",
     "summary": "List patterns topics"
@@ -4353,6 +4365,26 @@
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
+  "CreateDerivedMetric": {
+    "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
+    "summary": "Create a derived metric",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a derived metric."
+  },
+  "DeleteDerivedMetric": {
+    "description": "Delete a derived metric by name. Idempotent: returns 204 regardless of whether the derived\nmetric existed. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Delete a derived metric"
+  },
+  "GetDerivedMetric": {
+    "description": "Get the definition of a derived metric by name.",
+    "summary": "Get a derived metric"
+  },
+  "UpdateDerivedMetric": {
+    "description": "Update the definition of an existing derived metric. The `id` in the request body\nmust match the `metric_name` path parameter. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a derived metric",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a derived metric."
+  },
   "CreateHistoricalMetricsConfiguration": {
     "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
     "summary": "Enable historical metrics ingestion",
@@ -4642,10 +4674,6 @@
     "summary": "Update the tags for an interface",
     "request_description": "",
     "request_schema_description": "Response for listing interface tags."
-  },
-  "ListNetworkHealthInsights": {
-    "description": "Return network health insights for the organization within the given time window.\nInsights are produced by analyzing DNS failures pre-classified by `network-dns-logger`,\nTLS certificate metrics, and denied security group connections. Each insight\nidentifies the client and server services involved, the type of issue, and the\nmagnitude of the failure observed during the query window.",
-    "summary": "List network health insights"
   },
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
@@ -6451,6 +6479,62 @@
     "description": "Get a list of vulnerable assets.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.",
     "summary": "List vulnerable assets"
   },
+  "ListSecurityMonitoringBatchMigrations": {
+    "description": "List the batch migrations of your organization. A batch migration groups detection\nrules from another SIEM that the Datadog Detection Agent translates into Cloud SIEM\ndetection rules. To retrieve a single batch migration, filter by its ID with\n`filter[query]=id:<batch_id>`. Poll this endpoint to follow the progress of a batch\nmigration through its `status` and `resourceStatusCounts`.",
+    "summary": "List batch migrations"
+  },
+  "CreateSecurityMonitoringBatchMigration": {
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "summary": "Create a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to create a batch migration."
+  },
+  "DeleteSecurityMonitoringBatchMigration": {
+    "description": "Delete a batch migration and its resources. Detection rules that were already\npublished are not deleted. Returns `409 Conflict` while any resource is `in_progress`\nor `publishing`: cancel the batch migration, or wait for publishing to finish, and\nthen try again.",
+    "summary": "Delete a batch migration"
+  },
+  "UpdateSecurityMonitoringBatchMigration": {
+    "description": "Update the name, description, or tags of a batch migration, in any status. At least\none of these attributes must be provided. Omitted attributes are left unchanged, and\n`tags` replaces the full list of tags.",
+    "summary": "Update a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to update a batch migration."
+  },
+  "CancelSecurityMonitoringBatchMigration": {
+    "description": "Cancel an `in_progress` batch migration. Resources that are `pending` or `in_progress`\nbecome `canceled`. Resources that are already `completed` or `failed` keep their status\nand output, so completed resources can still be published. Canceling a `canceled` batch\nmigration succeeds, so the request can be safely retried. Returns `409 Conflict` if the\nbatch migration is `draft` or `completed`.",
+    "summary": "Cancel a batch migration"
+  },
+  "PublishSecurityMonitoringBatchMigration": {
+    "description": "Create a Cloud SIEM detection rule from the `output` of each selected `completed`\nresource of a batch migration. Completed resources can be published while the rest of\nthe batch migration is still being translated. When `resourceIds` is omitted or empty,\nevery `completed` resource is published. Published rules are created disabled.\n\nEvery requested resource must be publishable: `completed`, or left in `publishing` for\nmore than one minute after an uncertain result. Otherwise, the request returns\n`409 Conflict` and nothing is published. Already published resources are not publishable.\n\nThe response reports the outcome of each resource, and some resources can be published\nwhile others fail. A `failed` result that contains a `ruleId` means the rule was created:\ndo not retry that resource. Publishing a rule with a `block_ip` or `block_user` action\nrequires the `appsec_protect_write` permission.",
+    "summary": "Publish a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to publish the resources of a batch migration."
+  },
+  "DeleteSecurityMonitoringBatchMigrationResources": {
+    "description": "Delete resources from a batch migration. The request is all-or-nothing: it returns\n`404 Not Found` if any resource does not exist, and `409 Conflict` if any resource is\n`in_progress` or `publishing`. In both cases nothing is deleted. Duplicate resource IDs\nare ignored. Detection rules already published from the deleted resources are not deleted.",
+    "summary": "Delete resources from a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to delete resources from a batch migration."
+  },
+  "ListSecurityMonitoringBatchMigrationResources": {
+    "description": "List the resources of a batch migration, including the input of each source rule and,\nonce translated, the proposed Cloud SIEM detection rule in `output`.",
+    "summary": "List batch migration resources"
+  },
+  "CreateSecurityMonitoringBatchMigrationResources": {
+    "description": "Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the\nbatch migration is not `draft`, and `400 Bad Request` if the batch migration would\ncontain more than 1000 resources.",
+    "summary": "Add resources to a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to add resources to a batch migration."
+  },
+  "UpdateSecurityMonitoringBatchMigrationResource": {
+    "description": "Update a resource of a batch migration. At least one of `name`, `description`,\n`inputType`, or `input` must be provided. `name` and `description` can be updated at\nany time. `inputType` and `input` can only be updated while the resource is `pending`;\notherwise, the request returns `409 Conflict`. The translated `output` cannot be edited.",
+    "summary": "Update a batch migration resource",
+    "request_description": "",
+    "request_schema_description": "Request to update a batch migration resource."
+  },
+  "StartSecurityMonitoringBatchMigration": {
+    "description": "Start translating the `pending` resources of a `draft` batch migration into Cloud SIEM\ndetection rules. The batch migration moves to `in_progress`, and its resources are\ntranslated asynchronously. Once no resource is `pending` or `in_progress`, the batch\nmigration moves to `completed`. Starting an `in_progress` batch migration again does not\nqueue duplicate work, so the request can be safely retried, including after a timeout or\na `5xx` error. Returns `409 Conflict` if the batch migration is `completed` or `canceled`.\n\nAn organization can translate up to 2000 resources in total across all of its batch\nmigrations. Resources that were already processed count toward this limit even after\nthey are deleted, and `pending` resources of `in_progress` batch migrations reserve\ncapacity. Returns `409 Conflict` if starting the batch migration would exceed this limit.\nTo request a higher limit for your organization, contact\n[Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Start a batch migration"
+  },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
@@ -7925,7 +8009,7 @@
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
@@ -7935,10 +8019,14 @@
     "summary": "Delete a usage quota"
   },
   "UpdateQuota": {
-    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Update a usage quota",
     "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
     "request_schema_description": "Request containing the usage quota resource to update."
+  },
+  "DeletePendingQuota": {
+    "description": "Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "summary": "Cancel a scheduled usage quota limit"
   },
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",

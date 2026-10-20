@@ -12,6 +12,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
   tag: Learning Center
   text: Define User Behavior with Labeled Actions in Product Analytics
+- link: "https://www.datadoghq.com/blog/product-analytics-visual-labeling/"
+  tag: "Blog"
+  text: "Define user actions on your web app with visual labeling in Product Analytics"
 algolia:
   tags: ['funnel']
 ---
