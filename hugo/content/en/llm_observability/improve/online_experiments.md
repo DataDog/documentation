@@ -24,7 +24,7 @@ Use Online Experiments to validate a change, such as a new model, prompt, or too
 
 Setting up an Online Experiment involves the following steps:
 
-1. Create a Datadog feature flag.
+1. Create a [Datadog feature flag][14].
 1. Evaluate the flag in your application and run the assigned variant.
 1. Report a numeric Agent Observability evaluation score.
 1. Link the feature flag and evaluation score to a Datadog experiment.
@@ -169,3 +169,4 @@ If the experiment reports missing metric data, confirm that:
 [11]: /experiments/defining_metrics/?tab=agentobservability#create-a-metric-from-agent-observability-data
 [12]: /experiments/
 [13]: /experiments/concepts/subject_types/
+[14]: /feature_flags/
