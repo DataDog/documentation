@@ -25,6 +25,8 @@ Automatic integrations work only with specific packages and versions. Check the 
 | Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later in the v5 release line, or 6.11.0 or later. |
 | Ruby | RubyLLM | 2.0.0 or later. With `dd-trace-rb` 2.28.0 through 2.43.x, 1.0.0 or later. | `dd-trace-rb` 2.28.0 or later. |
 
+<!-- TODO: Does it make sense that every package has a different supported Datadog SDK version? Is it possible to align them, for example on one minimum per language? The SDK and manual integrations require `dd-trace-py` 4.13.0 or later, but this table lists lower Python versions: LangChain at 3.19.0 (3.14.0 on the published page), OpenAI at 4.10.0, and Anthropic at 4.11.0. -->
+
 <!-- TODO: Which RubyLLM versions are supported, and with which `dd-trace-rb` versions? Current `dd-trace-rb` sets the RubyLLM minimum to 2.0.0. The v2.44.0 release notes reportedly say `dd-trace-rb` 2.28.0 through 2.43.x support RubyLLM 1.0.0 or later, but that wasn't verified. -->
 
 <!-- TODO: Is AI SDK v7 supported? If so, the AI SDK row can say "v6 or later." The `dd-trace-js` model-call hook has no upper version bound, but other AI SDK hooks stop before 7.0.0. -->

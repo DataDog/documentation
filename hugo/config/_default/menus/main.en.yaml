@@ -1351,27 +1351,6 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoTerm
-      url: coterm/
-      pre: coscreen
-      identifier: coterm
-      parent: essentials_heading
-      weight: 150000
-    - name: Install
-      url: coterm/install
-      identifier: coterm_install
-      parent: coterm
-      weight: 1
-    - name: Using CoTerm
-      url: coterm/usage
-      identifier: coterm_usage
-      parent: coterm
-      weight: 2
-    - name: Configuration Rules
-      url: coterm/rules
-      identifier: coterm_rules
-      parent: coterm
-      weight: 3
     - name: Remote Configuration
       pre: config-2
       url: remote_configuration
@@ -1570,6 +1549,11 @@ menu:
       identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
+    - name: Use Bits Chat
+      url: bits_ai/bits_chat/usage
+      identifier: bits_ai_bits_chat_usage
+      parent: bits_ai_bits_chat
+      weight: 201
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
@@ -1640,21 +1624,26 @@ menu:
       identifier: bits_ai_live_debugger
       parent: bits_ai
       weight: 8
+    - name: Bits Release
+      url: bits_release/
+      identifier: bits_release
+      parent: bits_ai
+      weight: 9
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai
-      weight: 9
+      weight: 10
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 10
+      weight: 11
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 11
+      weight: 12
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2547,11 +2536,16 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
-    - name: Feature Flags
-      url: change_tracking/feature_flags/
+    - name: Change Types
+      url: change_tracking/change_types/
       parent: change_tracking
-      identifier: change_tracking_feature_flags
+      identifier: change_tracking_change_types
       weight: 1
+    - name: Feature Flags
+      url: change_tracking/change_types/feature_flags/
+      parent: change_tracking_change_types
+      identifier: change_tracking_feature_flags
+      weight: 101
     - name: Event Management
       url: events/
       pre: events
@@ -4573,16 +4567,6 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_client_side
       weight: 2032
-    - name: Android
-      url: tracing/trace_collection/custom_instrumentation/client-side/android/otel
-      parent: custom_instrumentation_client_side
-      identifier: custom_instrumentation_android
-      weight: 20321
-    - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/client-side/ios/otel
-      parent: custom_instrumentation_client_side
-      identifier: custom_instrumentation_ios
-      weight: 20322
     - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
@@ -4598,11 +4582,6 @@ menu:
       identifier: dyninst_explang
       parent: dyninst
       weight: 2043
-    - name: Sensitive Data Scrubbing
-      url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
-      identifier: dyninst_sensitive_data_scrubbing
-      parent: dyninst
-      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -4898,6 +4877,11 @@ menu:
       identifier: live_debugger_bits_live_debugger
       parent: live_debugger
       weight: 1
+    - name: Sensitive Data Scrubbing
+      url: tracing/live_debugger/sensitive-data-scrubbing/
+      identifier: live_debugger_sensitive_data_scrubbing
+      parent: live_debugger
+      weight: 2
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
@@ -5849,7 +5833,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 40505
-    - name: Evaluation Developer Guide
+    - name: Evaluator Developer Guide
       url: llm_observability/investigate/evaluations/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
@@ -5889,31 +5873,6 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
-    - name: Setup and Usage
-      url: llm_observability/improve/experiments/setup
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_setup
-      weight: 50301
-    - name: Analyzing Results
-      url: llm_observability/improve/experiments/analyzing_results
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_analyzing_results
-      weight: 50302
-    - name: Advanced Experiment Runs
-      url: llm_observability/improve/experiments/advanced_runs
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_advanced_runs
-      weight: 50303
-    - name: Prompt Optimization
-      url: llm_observability/improve/experiments/prompt_optimization
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_prompt_optimization
-      weight: 50304
-    - name: Experiments API
-      url: llm_observability/improve/experiments/api
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_api
-      weight: 50305
     - name: Data Access Control
       url: llm_observability/improve/access_control
       parent: llm_obs_improve
@@ -5965,21 +5924,31 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_setup
       weight: 1
-    - name: Summary Page
+    - name: Summary
       url: gpu_monitoring/summary/
       parent: gpu_monitoring
       identifier: gpu_monitoring_summary
       weight: 2
-    - name: Fleet Page
-      url: gpu_monitoring/fleet/
+    - name: Explorer
+      url: gpu_monitoring/explorer/
       parent: gpu_monitoring
-      identifier: gpu_monitoring_fleet
+      identifier: gpu_monitoring_explorer
       weight: 3
-    - name: Training Page
+    - name: Capacity Planning
+      url: gpu_monitoring/capacity_planning/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_capacity_planning
+      weight: 4
+    - name: Training
       url: gpu_monitoring/training/
       parent: gpu_monitoring
       identifier: gpu_monitoring_training
-      weight: 4
+      weight: 5
+    - name: Inference
+      url: gpu_monitoring/inference/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_inference
+      weight: 6
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -6553,6 +6522,11 @@ menu:
       parent: delivery_performance
       identifier: delivery_performance_ai_impact
       weight: 2
+    - name: Setup
+      url: delivery_performance/ai_impact/setup/
+      parent: delivery_performance_ai_impact
+      identifier: delivery_performance_ai_impact_setup
+      weight: 1
     - name: Feature Flags
       url: feature_flags/
       pre: signpost
@@ -6729,6 +6703,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
       weight: 316
+    - name: Flag Key Obfuscation
+      url: feature_flags/concepts/flag_key_obfuscation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_key_obfuscation
+      weight: 317
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -8066,21 +8045,31 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
+    - name: Entity Packs
+      url: security/cloud_siem/ingest_and_enrich/entity_packs
+      parent: cloud_siem_content_packs
+      identifier: cloud_siem_entity_packs
+      weight: 1011
     - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
+    - name: Muted Indicators
+      url: security/cloud_siem/ingest_and_enrich/muted_indicators
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_muted_indicators
+      weight: 103
     - name: Open Cybersecurity Schema Framework
       url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_open_cybersecurity_schema_framework
-      weight: 103
+      weight: 104
     - name: OCSF Processor
       url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor
       parent: cloud_siem_open_cybersecurity_schema_framework
       identifier: cloud_siem_ocsf_processor
-      weight: 10301
+      weight: 10401
     - name: Detect and Monitor
       url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
@@ -8161,21 +8150,26 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigate_security_signals
       weight: 301
-    - name: Risk Insights
+    - name: Entity Risks
       url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
+    - name: User Inventory
+      url: security/cloud_siem/triage_and_investigate/user_inventory/
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_user_inventory
+      weight: 303
     - name: IOC Explorer
       url: security/cloud_siem/triage_and_investigate/ioc_explorer
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_ioc_explorer
-      weight: 303
+      weight: 304
     - name: Investigator
       url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
-      weight: 304
+      weight: 305
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem
@@ -9278,6 +9272,11 @@ menu:
       parent: synthetics
       identifier: synthetics_explore
       weight: 10
+    - name: Overview Page
+      url: synthetics/explore/overview
+      parent: synthetics_explore
+      identifier: synthetics_explore_overview
+      weight: 800
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
@@ -9470,41 +9469,46 @@ menu:
       identifier: journey_monitoring
       parent: digital_experience_heading
       weight: 10000
+    - name: Configure Journeys
+      url: journey_monitoring/configuring_journeys/
+      parent: journey_monitoring
+      identifier: journey_monitoring_configure_journeys
+      weight: 1
+    - name: Suggested Journeys
+      url: journey_monitoring/suggested_journeys/
+      parent: journey_monitoring
+      identifier: journey_monitoring_suggested_journeys
+      weight: 2
+    - name: Variants
+      url: journey_monitoring/variants/
+      parent: journey_monitoring
+      identifier: journey_monitoring_variants
+      weight: 3
+    - name: Journey Overview Page
+      url: journey_monitoring/overview/
+      parent: journey_monitoring
+      identifier: journey_monitoring_overview
+      weight: 4
     - name: Map
       url: journey_monitoring/map/
       parent: journey_monitoring
       identifier: journey_monitoring_map
-      weight: 1
-    - name: Suggested Journeys
-      url: journey_monitoring/map/suggested_journeys/
-      parent: journey_monitoring_map
-      identifier: journey_monitoring_map_suggested_journeys
-      weight: 101
+      weight: 5
+    - name: Status
+      url: journey_monitoring/status/
+      parent: journey_monitoring
+      identifier: journey_monitoring_status
+      weight: 6
     - name: Details Report
       url: journey_monitoring/details_report/
       parent: journey_monitoring
       identifier: journey_monitoring_details_report
-      weight: 2
-    - name: Variants
-      url: journey_monitoring/details_report/variants/
-      parent: journey_monitoring_details_report
-      identifier: journey_monitoring_details_report_variants
-      weight: 201
-    - name: Uptime
-      url: journey_monitoring/uptime/
-      parent: journey_monitoring
-      identifier: journey_monitoring_uptime
-      weight: 3
+      weight: 7
     - name: Roles and Permissions
       url: journey_monitoring/roles_and_permissions/
       parent: journey_monitoring
       identifier: journey_monitoring_roles_and_permissions
-      weight: 4
-    - name: Guides
-      url: journey_monitoring/guide/
-      parent: journey_monitoring
-      identifier: journey_monitoring_guides
-      weight: 5
+      weight: 8
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
@@ -10201,25 +10205,25 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
-    - name: AI Investigations
-      url: real_user_monitoring/ai_investigations/
+    - name: Bits in RUM
+      url: real_user_monitoring/bits_ai/
       parent: rum
-      identifier: rum_ai_investigations
+      identifier: rum_bits_ai
       weight: 9
-    - name: Single-View AI Investigation
-      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_single_view
+    - name: Optimize Performance
+      url: real_user_monitoring/bits_ai/optimize_performance/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_optimize_performance
       weight: 901
-    - name: Multi-View AI Investigation
-      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_multi_view
+    - name: Investigate Regressions
+      url: real_user_monitoring/bits_ai/investigate_regressions/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_investigate_regressions
       weight: 902
-    - name: Operation AI Investigation
-      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_operation
+    - name: Bits Chat in RUM
+      url: real_user_monitoring/bits_ai/bits_chat/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_bits_chat
       weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
@@ -10347,6 +10351,11 @@ menu:
       parent: product_analytics
       identifier: pa_dashboard
       weight: 2
+    - name: Dashboard Reporter Agent
+      url: product_analytics/dashboards/dashboard_reporter_agent
+      parent: pa_dashboard
+      identifier: pa_dashboard_reporter_agent
+      weight: 201
     - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
@@ -10760,6 +10769,11 @@ menu:
       url: account_management/teams/github/
       parent: account_management_teams
       weight: 902
+    - name: Provision with ServiceNow
+      identifier: account_management_provision_servicenow
+      url: account_management/teams/servicenow/
+      parent: account_management_teams
+      weight: 903
     - name: Governance Console
       identifier: account_management_governance_console
       url: account_management/governance_console/
@@ -10981,6 +10995,11 @@ menu:
       identifier: disaster_recovery
       parent: administration_heading
       weight: 15000
+    - name: Recommended Settings for DNS Failover
+      identifier: disaster_recovery_recommended_settings
+      url: disaster_recovery/recommended_settings/
+      parent: disaster_recovery
+      weight: 1
     - name: Data Security
       url: data_security/
       pre: security-lock

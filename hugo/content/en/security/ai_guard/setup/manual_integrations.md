@@ -20,8 +20,8 @@ Manual integrations work only with specific framework and Datadog SDK versions. 
 
 | Language | Framework | Framework version | Datadog SDK version |
 | --- | --- | --- | --- |
-| Python | Amazon Strands | `strands-agents` 1.29.0 or later. | `dd-trace-py` 4.7.0 or later. |
-| Python | LiteLLM Proxy | `litellm` 1.78.5 or later. | `dd-trace-py` 4.8.0 or later. |
+| Python | Amazon Strands | `strands-agents` 1.29.0 or later. | `dd-trace-py` 4.13.0 or later. |
+| Python | LiteLLM Proxy | `litellm` 1.78.5 or later. | `dd-trace-py` 4.13.0 or later. |
 
 For LiteLLM Proxy, the language and Datadog SDK version apply to the proxy, not to the agents that route traffic through the proxy.
 
@@ -86,8 +86,6 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
    )
    ```
 
-   With `dd-trace-py` versions earlier than 4.13.0, import `AIGuardStrandsPlugin` from `ddtrace.appsec.ai_guard` instead.
-
    `AIGuardStrandsPlugin()` accepts these optional arguments:
 
    - `detailed_error=True`: Add the AI Guard reason to the blocked message. Default: `False`.
@@ -120,8 +118,6 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
 
    __all__ = ["DatadogAIGuardGuardrail"]
    ```
-
-   With `dd-trace-py` versions earlier than 4.13.0, import `DatadogAIGuardGuardrail` from `ddtrace.appsec.ai_guard.integrations.litellm` instead.
 
 1. Add the guardrail to the `guardrails` section of the LiteLLM Proxy configuration file:
 

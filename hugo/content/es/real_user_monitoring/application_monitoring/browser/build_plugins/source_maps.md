@@ -42,8 +42,7 @@ Las siguientes variables de entorno anulan los valores de configuración:
 
 Elija un método de coincidencia para la carga de mapas del código fuente: ID de depuración o servicio y versión. Estos métodos de carga son mutuamente excluyentes.
 
-{{< tabs >}}
-{{% tab "ID de depuración (Recomendado)" %}}
+### ID de depuración (recomendado) {#debug-id-recommended}
 
 Los ID de depuración asocian cada paquete de JavaScript con su mapa del código fuente sin depender de la URL del paquete, el servicio o la versión. Utilice este método para nuevas configuraciones.
 
@@ -61,7 +60,11 @@ Configure las siguientes opciones en `sourcemaps`:
 
 Establezca `debugId` y `upload` en `true` para inyectar ID de depuración y cargar mapas del código fuente durante la compilación:
 
+{{< tabs >}}
+{{% tab "Webpack" %}}
+
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -81,7 +84,102 @@ module.exports = {
 ```
 
 {{% /tab %}}
-{{% tab "Servicio y versión" %}}
+{{% tab "Vite" %}}
+
+```javascript
+// vite.config.js
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    datadogVitePlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "esbuild" %}}
+
+```javascript
+// esbuild.config.js
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+  plugins: [
+    datadogEsbuildPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "Rollup" %}}
+
+```javascript
+// rollup.config.js
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+  plugins: [
+    datadogRollupPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{% tab "Rspack" %}}
+
+```javascript
+// rspack.config.js
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogRspackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Servicio y versión {#service-and-version}
 
 Configure el objeto `errorTracking.sourcemaps` para cargar mapas del código fuente utilizando la coincidencia de servicio y versión:
 
@@ -95,6 +193,7 @@ Configure el objeto `errorTracking.sourcemaps` para cargar mapas del código fue
 | `maxConcurrency` | Número | No | `20` | Número máximo de cargas simultáneas de mapas del código fuente. |
 
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -116,12 +215,9 @@ module.exports = {
 };
 ```
 
+<div class="alert alert-info">Este ejemplo utiliza webpack. El objeto de configuración es idéntico en todos los empaquetadores compatibles. Solo difieren la importación y el nombre de la función del complemento. Consulte <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> para obtener instrucciones de instalación para su empaquetador.</div>
+
 Para mostrar también el código fuente en línea en los seguimientos de pila de Error Tracking, combine las cargas de mapas del código fuente de servicio y versión con el complemento [Source Code Context][5].
-
-{{% /tab %}}
-{{< /tabs >}}
-
-<div class="alert alert-info">Estos ejemplos utilizan webpack. El objeto de configuración es idéntico en todos los empaquetadores compatibles. Solo difieren la importación y el nombre de la función del complemento. Consulte <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> para obtener instrucciones de instalación para su empaquetador.</div>
 
 ## Lecturas adicionales {#further-reading}
 

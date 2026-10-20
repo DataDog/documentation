@@ -27,7 +27,7 @@ Some setup steps require specific Datadog permissions. An admin might need to cr
 | --- | --- | --- | --- |
 | {{< ui >}}AI Guard Evaluate{{< /ui >}} | `ai_guard_evaluate` | Write | Required to call the AI Guard evaluation API and to create an application key with the `ai_guard_evaluate` scope. |
 | {{< ui >}}AI Guard View{{< /ui >}} | `ai_guard_view` | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings. |
-| {{< ui >}}AI Guard Write{{< /ui >}} | `ai_guard_write` | Write | Required to change AI Guard configuration, such as policies and sensitive data scanning. |
+| {{< ui >}}AI Guard Write{{< /ui >}} | `ai_guard_write` | Write | Required to change AI Guard configuration, such as policies, custom rules, and sensitive data scanning. |
 | {{< ui >}}User Access Manage{{< /ui >}} | `user_access_manage` | Write | Required only to restrict access to AI Guard spans with Data Access Control. |
 
 ### Datadog Agent and Datadog SDK
@@ -38,12 +38,11 @@ AI Guard requires these minimum Datadog SDK versions:
 
 | Language | Datadog SDK | Minimum version |
 | --- | --- | --- |
-| Python | `dd-trace-py` | 3.19.0. |
+| Python | `dd-trace-py` | 4.13.0. |
 | Node.js | `dd-trace-js` | 5.69.0. |
 | Java | `dd-trace-java` | 1.54.0. |
 | Ruby | `dd-trace-rb` | 2.25.0. |
 
-<!-- TODO: What is the minimum `dd-trace-py` version for AI Guard? The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
 
 Some integrations require a later version. Each integration page lists its own requirements.
 

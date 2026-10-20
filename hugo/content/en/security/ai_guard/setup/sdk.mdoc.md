@@ -24,9 +24,8 @@ The AI Guard SDK is available for Python, Node.js, Java, and Ruby. Check the age
 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
-The AI Guard SDK requires `dd-trace-py` 3.19.0 or later.
+The AI Guard SDK requires `dd-trace-py` 4.13.0 or later.
 
-<!-- TODO: What is the minimum `dd-trace-py` version for AI Guard? The published page cites both 3.18.0 and 3.19.0, and neither release's notes mention AI Guard. -->
 {% /if %}
 
 <!-- Node.js -->
@@ -110,8 +109,6 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
        ]
    )
    ```
-
-   With `dd-trace-py` versions earlier than 4.13.0, import from `ddtrace.appsec.ai_guard` instead.
 
    To evaluate images, pass a list of `ContentPart` objects as the message content:
 
@@ -286,7 +283,7 @@ In Ruby, the field is `sds_findings`.
 {% if equals($prog_lang, "python") %}
 The error is `ddtrace.aiguard.AIGuardAbortError`, with the fields `action`, `reason`, `tags`, `sds`, and `tag_probs`.
 
-With `dd-trace-py` 4.9.0 or later, `AIGuardAbortError` derives from `BaseException`, not `Exception`. Catch `AIGuardAbortError` by name, because `except Exception:` doesn't catch the error.
+`AIGuardAbortError` derives from `BaseException`, not `Exception`. Catch `AIGuardAbortError` by name, because `except Exception:` doesn't catch the error.
 {% /if %}
 
 <!-- Node.js -->
