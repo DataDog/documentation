@@ -20,6 +20,8 @@ Continuous tracing with GPU Monitoring is in Early Access Preview.
 
 Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can identify and investigate bottlenecks using detailed execution traces that tie CUDA and NCCL operations back to your model and PyTorch operations.
 
+To trace Slurm batch jobs instead, see [Continuous Tracing with GPU Monitoring on Slurm][4].
+
 {{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
 ## Setup
@@ -196,3 +198,4 @@ After you apply the configuration, GPU metrics are tagged with `training_run_id`
 [1]: /gpu_monitoring/setup
 [2]: /tracing/trace_explorer/
 [3]: /containers/kubernetes/tag/#tag-extraction
+[4]: /gpu_monitoring/tracing_slurm
