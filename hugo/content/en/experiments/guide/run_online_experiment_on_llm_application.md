@@ -2,6 +2,9 @@
 title: Run an Online Experiment on an LLM Application
 description: Compare variants of an LLM application and measure their effect with Agent Observability evaluation scores.
 further_reading:
+- link: "/llm_observability/improve/online_experiments/"
+  tag: "Documentation"
+  text: "Agent Observability Online Experiments"
 - link: "/getting_started/feature_flags/"
   tag: "Documentation"
   text: "Getting Started with Feature Flags"
