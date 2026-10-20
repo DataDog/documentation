@@ -68,6 +68,37 @@ describe("ApiEndpoint region rendering", () => {
   });
 });
 
+describe("ApiEndpoint status alerts", () => {
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  // Hugo shows no alert for a deprecated operation. Its description and the
+  // "(deprecated)" version label already say so.
+  it("shows no alert for a deprecated endpoint", async () => {
+    const html = await renderEndpoint({ deprecated: true });
+
+    expect(html).not.toContain("alert--warning");
+    expect(html).not.toContain("This endpoint is deprecated.");
+  });
+
+  it("shows the unstable alert on a deprecated endpoint, as Hugo does", async () => {
+    const html = await renderEndpoint({
+      deprecated: true,
+      unstable: true,
+      unstableMessage: "Subject to change.",
+    });
+
+    expect(html).toContain("alert--warning");
+    expect(html).toContain("Subject to change.");
+  });
+});
+
 describe("ApiEndpoint permissions and OAuth scopes", () => {
   async function renderEndpoint(overrides: Record<string, unknown>) {
     const container = await AstroContainer.create();

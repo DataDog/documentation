@@ -437,10 +437,6 @@ DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" tsc "examp
 
 ## v1
 
-{% alert level="warning" %}
-This endpoint is deprecated.
-{% /alert %}
-
 | Datadog site      | API endpoint                                             |
 | ----------------- | -------------------------------------------------------- |
 | app.datadoghq.com | GET https://api.datadoghq.com/api/v1/integration/aws     |

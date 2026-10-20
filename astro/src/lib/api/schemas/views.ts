@@ -69,7 +69,6 @@ export const EndpointDataSchema = z
     deprecated: z.boolean(),
     unstable: z.boolean(),
     unstableMessage: z.string().optional(),
-    newerVersionUrl: z.string().optional(),
     permissions: z.array(z.string()).optional(),
     permissionsMatch: z.enum(["any", "all"]).optional(),
     oauthScopes: z.array(z.string()).optional(),

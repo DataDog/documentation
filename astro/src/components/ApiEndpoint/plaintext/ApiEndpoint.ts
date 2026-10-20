@@ -48,13 +48,6 @@ export function apiEndpointNodes(
 }
 
 function statusNotice(ep: EndpointData): MarkdocNode[] {
-  if (ep.deprecated) {
-    const link = ep.newerVersionUrl
-      ? ` [Use the newer version.](${ep.newerVersionUrl})`
-      : "";
-    const body = nodesFromMd(`This endpoint is deprecated.${link}`);
-    return [alertNode("warning", body)];
-  }
   if (ep.unstable) {
     const msg =
       ep.unstableMessage ??

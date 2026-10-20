@@ -31,10 +31,13 @@ test.describe("ApiEndpoint component", () => {
     await expect(code).toBeVisible();
   });
 
-  test("renders deprecated alert on deprecated endpoint", async ({ page }) => {
+  test("renders the unstable alert on a deprecated, unstable endpoint", async ({
+    page,
+  }) => {
     const deprecatedEndpoint = page.locator(".api-endpoint").nth(1);
     const alert = deprecatedEndpoint.locator(".alert--warning");
     await expect(alert).toBeVisible();
+    await expect(alert).toContainText("This endpoint is unstable.");
   });
 
   test("renders response section when responses exist", async ({ page }) => {

@@ -29,7 +29,6 @@ interface EndpointData {
   deprecated: boolean;
   unstable: boolean;
   unstableMessage?: string;
-  newerVersionUrl?: string;
   permissions?: string[];
   permissionsMatch?: "any" | "all";
   oauthScopes?: string[];
@@ -84,22 +83,11 @@ const hasParams =
       data-operation-id={ep.operationId}
     >
       {/* Status alerts */}
-      {/* MISSING_TRANSLATION_LABEL: translate the deprecation/unstable/region-not-supported messages,
+      {/* MISSING_TRANSLATION_LABEL: translate the unstable/region-not-supported messages,
         permissions label, "Request Body" heading, and "(required)/(optional)"
         markers once authoritative translation keys exist in the Hugo i18n
         bundle. */}
-      {ep.deprecated && (
-        <Alert level="warning">
-          This endpoint is deprecated.
-          {ep.newerVersionUrl && (
-            <>
-              {" "}
-              <a href={ep.newerVersionUrl}>Use the newer version.</a>
-            </>
-          )}
-        </Alert>
-      )}
-      {ep.unstable && !ep.deprecated && (
+      {ep.unstable && (
         <Alert level="warning">
           <Fragment
             set:html={renderMarkdownInline(

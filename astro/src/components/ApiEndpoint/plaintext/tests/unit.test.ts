@@ -76,16 +76,21 @@ describe("apiEndpointNodes", () => {
     expect(out).not.toContain("**GET**");
   });
 
-  it("renders a deprecated alert when the endpoint is deprecated", () => {
-    const dep = render({
+  it("renders no alert when the endpoint is deprecated, as Hugo does", () => {
+    const dep = render({ ...baseEndpoint, deprecated: true });
+    expect(dep).not.toContain("{% alert");
+    expect(dep).not.toContain("This endpoint is deprecated.");
+  });
+
+  it("renders the unstable alert on a deprecated endpoint, as Hugo does", () => {
+    const out = render({
       ...baseEndpoint,
       deprecated: true,
-      newerVersionUrl: "/api/latest/foo",
+      unstable: true,
+      unstableMessage: "Subject to change.",
     });
-    expect(dep).toContain("{% alert");
-    expect(dep).toContain('level="warning"');
-    expect(dep).toContain("This endpoint is deprecated.");
-    expect(dep).toContain("/api/latest/foo");
+    expect(out).toContain("{% alert");
+    expect(out).toContain("Subject to change.");
   });
 
   it("renders an unstable alert when the endpoint is unstable", () => {

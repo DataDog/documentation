@@ -10,10 +10,6 @@ breadcrumbs: Docs > API > Get hourly usage for Lambda
 
 ## v1 (deprecated)
 
-{% alert level="warning" %}
-This endpoint is deprecated.
-{% /alert %}
-
 | Datadog site      | API endpoint                                              |
 | ----------------- | --------------------------------------------------------- |
 | app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/aws_lambda     |
