@@ -8,8 +8,4 @@ breadcrumbs: Docs > API > Screenboards
 
 # Screenboards
 
-{% alert level="warning" %}
-This endpoint is deprecated.
-{% /alert %}
-
 This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards.md) instead.

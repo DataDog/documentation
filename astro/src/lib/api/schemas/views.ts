@@ -31,7 +31,6 @@ export const ApiCategoryStubSchema = z
     name: z.string(),
     slug: z.string(),
     description: z.string(),
-    deprecated: z.boolean(),
   })
   .strict();
 

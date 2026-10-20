@@ -8,10 +8,6 @@ breadcrumbs: Docs > API > Dashboard Lists
 
 # Dashboard Lists
 
-{% alert level="warning" %}
-This endpoint is deprecated.
-{% /alert %}
-
 Interact with your dashboard lists through the API to
 organize, find, and share all of your dashboards with your team and
 organization.

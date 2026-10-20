@@ -780,6 +780,5 @@
         "gov": "https://api.ddog-gov.com/api/v1/monthly_custom_reports/{report_id}"
       }
     }
-  ],
-  "deprecated": false
+  ]
 }

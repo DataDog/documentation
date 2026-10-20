@@ -82,7 +82,6 @@ let _logicalGroups: Map<string, RawOperation[]> | null = null;
  * Aggregates categories from these OpenAPI spec keys:
  *   - `tags[].name`
  *   - `tags[].description`
- *   - `tags[].x-deprecated`
  *   - `paths.{path}.{method}.tags` (first tag → category slug)
  *   - `paths.{path}.{method}.operationId`
  *   - `paths.{path}.{method}.summary`
@@ -204,7 +203,6 @@ interface CategoryMetadata {
   name: string;
   slug: string;
   description: string;
-  deprecated: boolean;
 }
 
 /* ------------------------------------------------------------------ */
@@ -347,7 +345,6 @@ function buildCategories(lang: Locale): ApiCategory[] {
       slug: meta.slug,
       description: meta.description,
       operations,
-      deprecated: meta.deprecated,
     };
   });
   categories.sort(compareCategoriesByName);
@@ -391,8 +388,7 @@ function collectCategoryMetadataFromSpecTags(
 ): CategoryMetadata[] {
   const spec = getOpenApiDocument(version);
   const overlay = getTranslationOverlay(version, lang);
-  type ApiTagObject = OpenAPIV3.TagObject & { "x-deprecated"?: boolean };
-  const tags = (spec.tags ?? []) as ApiTagObject[];
+  const tags = spec.tags ?? [];
 
   const result: CategoryMetadata[] = [];
   for (const tag of tags) {
@@ -405,7 +401,6 @@ function collectCategoryMetadataFromSpecTags(
       name: translated.name,
       slug,
       description: translated.description ?? "",
-      deprecated: tag["x-deprecated"] === true,
     });
   }
   return result;
@@ -434,7 +429,6 @@ function collectImplicitCategoryMetadataFromOperations(
       name: translated.name,
       slug: op.categorySlug,
       description: "",
-      deprecated: false,
     });
   }
   return result;
