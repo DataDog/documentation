@@ -1942,6 +1942,47 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringBatchMigrationID:
+      description: The UUID of the batch migration.
+      in: path
+      name: batch_id
+      required: true
+      schema:
+        example: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+        format: uuid
+        type: string
+    SecurityMonitoringBatchMigrationPageNumber:
+      description: Specific page number to return, starting at 1.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 1
+        example: 1
+        format: int64
+        minimum: 1
+        type: integer
+    SecurityMonitoringBatchMigrationPageSize:
+      description: Size for a given page. The maximum allowed value is 500.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 50
+        example: 50
+        format: int64
+        maximum: 500
+        minimum: 1
+        type: integer
+    SecurityMonitoringBatchMigrationResourceID:
+      description: The UUID of the batch migration resource.
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        example: c968cf83-56c2-4d54-a993-6c86dfb83527
+        format: uuid
+        type: string
     SecurityMonitoringCriticalAssetID:
       description: The ID of the critical asset.
       in: path
@@ -2370,6 +2411,42 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Method Not Allowed
+    SecurityMonitoringBatchMigrationBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    SecurityMonitoringBatchMigrationConflictResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Conflict
+    SecurityMonitoringBatchMigrationForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Forbidden
+    SecurityMonitoringBatchMigrationInternalServerErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Internal Server Error
+    SecurityMonitoringBatchMigrationNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
+    SecurityMonitoringBatchMigrationUnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Unauthorized
     SpansBadRequestResponse:
       content:
         application/json:
@@ -4892,6 +4969,91 @@ components:
         - id
         - base_severity
       type: object
+    AgentHealthAgentType:
+      default: node
+      description: Agent type associated with the resource.
+      enum:
+        - node
+        - cluster
+      example: node
+      type: string
+      x-enum-varnames:
+        - NODE
+        - CLUSTER
+    AgentHealthHostIssue:
+      description: An active Agent Health issue associated with a resource.
+      properties:
+        category:
+          description: The category used by the Agent to group and reconcile the issue.
+          example: configuration
+          type: string
+        issue_id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+      required:
+        - issue_id
+        - issue_name
+        - issue_type
+        - category
+      type: object
+    AgentHealthHostIssuesAttributes:
+      description: Active Agent Health issues for a resource.
+      properties:
+        issues:
+          description: The active issues and their reconciliation metadata.
+          example:
+            - category: configuration
+              issue_id: invalid-config:4828e7d6c704c4a3
+              issue_name: Invalid Config
+              issue_type: invalid_config
+          items:
+            $ref: "#/components/schemas/AgentHealthHostIssue"
+          type: array
+      required:
+        - issues
+      type: object
+    AgentHealthHostIssuesData:
+      description: Agent Health issue data for a resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthHostIssuesAttributes"
+        id:
+          description: The resource identifier.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthHostIssuesType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthHostIssuesResponse:
+      description: Response containing the active Agent Health issues for a resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthHostIssuesData"
+      required:
+        - data
+      type: object
+    AgentHealthHostIssuesType:
+      default: agent_health_issues
+      description: The Agent Health issue resource type.
+      enum:
+        - agent_health_issues
+      example: agent_health_issues
+      type: string
+      x-enum-varnames:
+        - AGENT_HEALTH_ISSUES
     AgentTrigger:
       description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
       properties:
@@ -36727,6 +36889,109 @@ components:
         - $ref: "#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitor"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitorIds"
+    DerivedMetricAttributes:
+      description: Attributes of a derived metric.
+      properties:
+        definition:
+          $ref: "#/components/schemas/DerivedMetricDefinition"
+      required:
+        - definition
+      type: object
+    DerivedMetricCreateData:
+      description: Data object for creating or updating a derived metric.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DerivedMetricAttributes"
+        id:
+          description: The derived metric name used as the resource ID.
+          example: my.derived.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/DerivedMetricsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DerivedMetricCreateRequest:
+      description: Request body for creating or updating a derived metric.
+      properties:
+        data:
+          $ref: "#/components/schemas/DerivedMetricCreateData"
+      required:
+        - data
+      type: object
+    DerivedMetricData:
+      description: A derived metric resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DerivedMetricAttributes"
+        id:
+          description: The derived metric name used as the resource ID.
+          example: my.derived.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/DerivedMetricsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DerivedMetricDefinition:
+      description: The definition of a derived metric as a formula over one or more queries.
+      properties:
+        formula:
+          description: The formula that combines the queries into the value of the derived metric.
+          example: a
+          type: string
+        queries:
+          description: The list of queries referenced by the formula.
+          items:
+            $ref: "#/components/schemas/DerivedMetricQuery"
+          minItems: 1
+          type: array
+      required:
+        - formula
+        - queries
+      type: object
+    DerivedMetricQuery:
+      description: A single query used in the definition of a derived metric.
+      properties:
+        data_source:
+          description: The data source that the query is run against.
+          example: metrics
+          type: string
+        name:
+          description: The name used to reference this query from the formula.
+          example: a
+          type: string
+        query:
+          description: The query string executed against the data source.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+        - data_source
+        - name
+        - query
+      type: object
+    DerivedMetricResponse:
+      description: Response containing a single derived metric.
+      properties:
+        data:
+          $ref: "#/components/schemas/DerivedMetricData"
+      readOnly: true
+      required:
+        - data
+      type: object
+    DerivedMetricsType:
+      default: derived_metrics
+      description: The derived metric resource type.
+      enum:
+        - derived_metrics
+      example: derived_metrics
+      type: string
+      x-enum-varnames:
+        - DERIVED_METRICS
     DetachCaseRequest:
       description: Request for detaching security findings from their case.
       properties:
@@ -37924,9 +38189,7 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440001
           type: string
         mapkind:
-          description: The type of source map.
-          example: elf
-          type: string
+          $ref: "#/components/schemas/ELFSourcemapMapKind"
         origin:
           description: The origin of the ELF file.
           example: debian
@@ -37965,6 +38228,14 @@ components:
         - type
         - attributes
       type: object
+    ELFSourcemapMapKind:
+      description: The type of source map. Always `elf` for ELF source maps.
+      enum:
+        - elf
+      example: elf
+      type: string
+      x-enum-varnames:
+        - ELF
     ELFSymbolFileEvent:
       description: Metadata for an ELF symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -52819,9 +53090,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: flutter
-          type: string
+          $ref: "#/components/schemas/FlutterSourcemapMapKind"
         service:
           description: The service name associated with the symbol file.
           example: my-flutter-app
@@ -52860,6 +53129,14 @@ components:
         - type
         - attributes
       type: object
+    FlutterSourcemapMapKind:
+      description: The type of source map. Always `flutter` for Flutter source maps.
+      enum:
+        - flutter
+      example: flutter
+      type: string
+      x-enum-varnames:
+        - FLUTTER
     FlutterSymbolFileEvent:
       description: Metadata for a Flutter symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -58766,9 +59043,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: il2cpp
-          type: string
+          $ref: "#/components/schemas/IL2CPPSourcemapMapKind"
         size:
           description: The size of the mapping file in bytes.
           example: 4096
@@ -58795,6 +59070,14 @@ components:
         - type
         - attributes
       type: object
+    IL2CPPSourcemapMapKind:
+      description: The type of source map. Always `il2cpp` for IL2CPP source maps.
+      enum:
+        - il2cpp
+      example: il2cpp
+      type: string
+      x-enum-varnames:
+        - IL2CPP
     IOSSourcemapAttributes:
       description: Attributes of an iOS dSYM source map.
       properties:
@@ -58804,9 +59087,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: ios
-          type: string
+          $ref: "#/components/schemas/IOSSourcemapMapKind"
         size:
           description: The size of the dSYM file in bytes.
           example: 4096
@@ -58837,6 +59118,14 @@ components:
         - type
         - attributes
       type: object
+    IOSSourcemapMapKind:
+      description: The type of source map. Always `ios` for iOS dSYM source maps.
+      enum:
+        - ios
+      example: ios
+      type: string
+      x-enum-varnames:
+        - IOS
     IOSSymbolsEvent:
       description: Metadata for an iOS dSYM file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -66648,9 +66937,7 @@ components:
           example: bundle.min.js
           type: string
         mapkind:
-          description: The type of source map.
-          example: js
-          type: string
+          $ref: "#/components/schemas/JSSourcemapMapKind"
         service:
           description: The service name associated with the source map.
           example: my-web-service
@@ -66693,6 +66980,14 @@ components:
         - type
         - attributes
       type: object
+    JSSourcemapMapKind:
+      description: The type of source map. Always `js` for JavaScript source maps.
+      enum:
+        - js
+      example: js
+      type: string
+      x-enum-varnames:
+        - JS
     JVMMappingFileEvent:
       description: Metadata for a ProGuard or R8 mapping file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -66767,9 +67062,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: jvm
-          type: string
+          $ref: "#/components/schemas/JVMSourcemapMapKind"
         service:
           description: The service name associated with the mapping file.
           example: my-android-app
@@ -66812,6 +67105,14 @@ components:
         - type
         - attributes
       type: object
+    JVMSourcemapMapKind:
+      description: The type of source map. Always `jvm` for JVM source maps.
+      enum:
+        - jvm
+      example: jvm
+      type: string
+      x-enum-varnames:
+        - JVM
     JiraAccountAttributes:
       description: Attributes of a Jira account
       properties:
@@ -69683,7 +69984,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRecordsDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsRecordType"
+          $ref: "#/components/schemas/LLMObsDatasetType"
       required:
         - type
         - attributes
@@ -69748,7 +70049,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRecordsUpdateDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsRecordType"
+          $ref: "#/components/schemas/LLMObsDatasetType"
       required:
         - type
         - attributes
@@ -70085,7 +70386,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsDeleteDatasetRecordsDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsRecordType"
+          $ref: "#/components/schemas/LLMObsDatasetType"
       required:
         - type
         - attributes
@@ -70324,14 +70625,6 @@ components:
       type: string
       x-enum-varnames:
         - DISPLAY_BLOCK
-    LLMObsEventType:
-      description: Resource type for Agent Observability experiment events.
-      enum:
-        - events
-      example: events
-      type: string
-      x-enum-varnames:
-        - EVENTS
     LLMObsExperimentDataAttributesRequest:
       description: Attributes for creating an Agent Observability experiment.
       properties:
@@ -70587,7 +70880,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsExperimentEventsDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsEventType"
+          $ref: "#/components/schemas/LLMObsExperimentType"
       required:
         - type
         - attributes
@@ -74133,14 +74426,6 @@ components:
       required:
         - data
       type: object
-    LLMObsRecordType:
-      description: Resource type of Agent Observability dataset records.
-      enum:
-        - records
-      example: records
-      type: string
-      x-enum-varnames:
-        - RECORDS
     LLMObsSearchSpansRequest:
       description: Request body for searching Agent Observability spans.
       properties:
@@ -82781,9 +83066,7 @@ components:
           example: libmyapp.so
           type: string
         mapkind:
-          description: The type of source map.
-          example: ndk
-          type: string
+          $ref: "#/components/schemas/NDKSourcemapMapKind"
         size:
           description: The size of the symbol file in bytes.
           example: 32768
@@ -82810,6 +83093,14 @@ components:
         - type
         - attributes
       type: object
+    NDKSourcemapMapKind:
+      description: The type of source map. Always `ndk` for Android NDK source maps.
+      enum:
+        - ndk
+      example: ndk
+      type: string
+      x-enum-varnames:
+        - NDK
     NDKSymbolFileEvent:
       description: Metadata for an Android NDK symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -84338,6 +84629,12 @@ components:
           description: The index to write logs to.
           example: logs-index
           type: string
+        data_stream:
+          $ref: "#/components/schemas/ObservabilityPipelineOpenSearchDestinationDataStream"
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Amazon OpenSearch endpoint URL.
+          example: AMAZON_OPENSEARCH_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -84355,13 +84652,13 @@ components:
         - id
         - type
         - inputs
-        - auth
       type: object
       x-pipeline-types: [logs]
     ObservabilityPipelineAmazonOpenSearchDestinationAuth:
       description: |-
         Authentication settings for the Amazon OpenSearch destination.
         The `strategy` field determines whether basic or AWS-based authentication is used.
+        When `strategy` is `basic`, use `username_key` and `password_key` to reference credentials stored in environment variables or secrets.
       properties:
         assume_role:
           description: The ARN of the role to assume (used with `aws` strategy).
@@ -84372,11 +84669,19 @@ components:
         external_id:
           description: External ID for the assumed role (used with `aws` strategy).
           type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the Amazon OpenSearch password (used when `strategy` is `basic`).
+          example: AMAZON_OPENSEARCH_PASSWORD
+          type: string
         session_name:
           description: Session name for the assumed role (used with `aws` strategy).
           type: string
         strategy:
           $ref: "#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuthStrategy"
+        username_key:
+          description: Name of the environment variable or secret that holds the Amazon OpenSearch username (used when `strategy` is `basic`).
+          example: AMAZON_OPENSEARCH_USERNAME
+          type: string
       required:
         - strategy
       type: object
@@ -91374,6 +91679,22 @@ components:
         - type
         - method
       type: object
+    OnCallShiftChangeTrigger:
+      description: "Trigger a workflow when an On-Call shift changes. The workflow must be published."
+      properties:
+        rateLimit:
+          $ref: "#/components/schemas/TriggerRateLimit"
+      type: object
+    OnCallShiftChangeTriggerWrapper:
+      description: "Schema for an On-Call shift change trigger."
+      properties:
+        onCallShiftChangeTrigger:
+          $ref: "#/components/schemas/OnCallShiftChangeTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - onCallShiftChangeTrigger
+      type: object
     OnCallTrigger:
       description: "Trigger a workflow from an On-Call Page or On-Call Handover. For automatic triggering a handle must be configured and the workflow must be published."
       properties:
@@ -96569,6 +96890,56 @@ components:
           description: Replay track identifier indicating which recording track the session belongs to.
           type: string
       type: object
+    PortablePdbSourcemapAttributes:
+      description: Attributes of a Portable PDB file.
+      properties:
+        build_id:
+          description: The build identifier.
+          example: 550e8400e29b41d4a71644665544000012345678
+          type: string
+        created_at:
+          description: The timestamp when the symbol file was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        file_name:
+          description: The file name of the symbol file.
+          example: MyApplication.pdb
+          type: string
+        mapkind:
+          $ref: "#/components/schemas/PortablePdbSourcemapMapKind"
+        size:
+          description: The size of the symbol file in bytes.
+          example: 4096
+          format: int64
+          type: integer
+      required:
+        - mapkind
+      type: object
+    PortablePdbSourcemapData:
+      description: Portable PDB file data object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PortablePdbSourcemapAttributes"
+        id:
+          description: The unique identifier of the source map.
+          example: "10"
+          type: string
+        type:
+          $ref: "#/components/schemas/SourcemapDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    PortablePdbSourcemapMapKind:
+      description: The type of source map. Always `portable_pdb` for Portable PDB files.
+      enum:
+        - portable_pdb
+      example: portable_pdb
+      type: string
+      x-enum-varnames:
+        - PORTABLE_PDB
     PostmortemAttachmentRequest:
       description: Request body for creating a postmortem attachment.
       properties:
@@ -97408,9 +97779,20 @@ components:
         cmdline:
           description: Process command line.
           type: string
+        executable:
+          description: Path to the process executable.
+          type: string
         host:
           description: Host running the process.
           type: string
+        identifying_tags:
+          description: |-
+            Tags that uniquely identify the process: a host identity tag (`host`, `task_arn`,
+            or `eks_fargate_node`) and a `pid` tag. Omitted if either tag is unavailable.
+          items:
+            description: A tag identifying the process.
+            type: string
+          type: array
         pid:
           description: Process ID.
           format: int64
@@ -102828,9 +103210,7 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440000
           type: string
         mapkind:
-          description: The type of source map.
-          example: react
-          type: string
+          $ref: "#/components/schemas/ReactNativeSourcemapMapKind"
         platform:
           description: The platform the source map was built for (e.g., `ios`, `android`).
           example: ios
@@ -102869,6 +103249,14 @@ components:
         - type
         - attributes
       type: object
+    ReactNativeSourcemapMapKind:
+      description: The type of source map. Always `react` for React Native source maps.
+      enum:
+        - react
+      example: react
+      type: string
+      x-enum-varnames:
+        - REACT
     ReadinessGate:
       additionalProperties: false
       description: Used to merge multiple branches into a single branch.
@@ -113481,6 +113869,725 @@ components:
         - subscription_count
         - error_count
       type: object
+    SecurityMonitoringBatchMigrationAttributes:
+      description: Attributes of a batch migration.
+      properties:
+        createdAt:
+          description: The creation date of the batch migration, in RFC 3339 format.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        createdBy:
+          description: The UUID of the user or service account who created the batch migration.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        description:
+          description: The description of the batch migration.
+          example: Rules imported from Splunk
+          type: string
+        inputSource:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationInputSource"
+        lastUpdatedAt:
+          description: The last update date of the batch migration, in RFC 3339 format.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        lastUpdatedBy:
+          description: |-
+            The UUID of the user or service account who last updated the batch migration,
+            or the name of a system actor.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        name:
+          description: The name of the batch migration.
+          example: Splunk migration
+          type: string
+        orgId:
+          description: The ID of the organization that owns the batch migration.
+          example: 123456
+          format: int64
+          type: integer
+        resourceStatusCounts:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceStatusCounts"
+        status:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationStatus"
+        tags:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationTags"
+      required:
+        - orgId
+        - name
+        - inputSource
+        - status
+        - createdAt
+        - lastUpdatedAt
+        - tags
+        - resourceStatusCounts
+      type: object
+    SecurityMonitoringBatchMigrationCreateAttributes:
+      description: Attributes of the batch migration to create.
+      properties:
+        description:
+          description: The description of the batch migration.
+          example: Rules imported from Splunk
+          maxLength: 4096
+          type: string
+        name:
+          description: The name of the batch migration.
+          example: Splunk migration
+          maxLength: 512
+          type: string
+        resources:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateResources"
+        tags:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationTags"
+      required:
+        - resources
+      type: object
+    SecurityMonitoringBatchMigrationCreateData:
+      description: Data of the batch migration to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationCreateRequest:
+      description: Request to create a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationCreateResources:
+      description: The initial resources of the batch migration. From 1 to 100 resources.
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceCreateItem"
+      maxItems: 100
+      minItems: 1
+      type: array
+    SecurityMonitoringBatchMigrationData:
+      description: A batch migration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationAttributes"
+        id:
+          description: The UUID of the batch migration.
+          example: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationInputSource:
+      description: |-
+        The origin of a batch migration. Always `batch_migration` for batch migrations
+        created through this API.
+      enum:
+        - batch_migration
+        - threat_hunting
+        - user
+      example: batch_migration
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION
+        - THREAT_HUNTING
+        - USER
+    SecurityMonitoringBatchMigrationListMeta:
+      description: Metadata of a list response.
+      properties:
+        totalCount:
+          description: Total number of items matching the request.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - totalCount
+      type: object
+    SecurityMonitoringBatchMigrationPublishAttributes:
+      description: Attributes of the batch migration publish request.
+      properties:
+        resourceIds:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResourceIDs"
+      type: object
+    SecurityMonitoringBatchMigrationPublishData:
+      description: Data of the batch migration publish request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationPublishRequest:
+      description: Request to publish the resources of a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationPublishResourceIDs:
+      description: |-
+        Unique UUIDs of the resources to publish. Up to 1000 IDs. When omitted or empty,
+        every `completed` resource of the batch migration is published.
+      example:
+        - c968cf83-56c2-4d54-a993-6c86dfb83527
+      items:
+        format: uuid
+        type: string
+      maxItems: 1000
+      type: array
+      uniqueItems: true
+    SecurityMonitoringBatchMigrationPublishResponse:
+      description: Response containing the publication outcome of each resource.
+      properties:
+        data:
+          description: The publication outcome of each resource.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceData"
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationPublishType:
+      description: The type of resource for a batch migration publish request.
+      enum:
+        - batchMigrationPublish
+      example: batchMigrationPublish
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_PUBLISH
+    SecurityMonitoringBatchMigrationPublishedResourceAttributes:
+      description: Attributes of the publication outcome of a batch migration resource.
+      properties:
+        error:
+          description: The reason why the resource could not be published.
+          example: failed to create rule
+          type: string
+        ruleId:
+          description: The ID of the created Cloud SIEM detection rule.
+          example: abc-def-ghi
+          type: string
+        status:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceStatus"
+      required:
+        - status
+      type: object
+    SecurityMonitoringBatchMigrationPublishedResourceData:
+      description: The publication outcome of a batch migration resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceAttributes"
+        id:
+          description: The UUID of the batch migration resource.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishedResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationPublishedResourceStatus:
+      description: The outcome of publishing a batch migration resource.
+      enum:
+        - published
+        - failed
+      example: published
+      type: string
+      x-enum-varnames:
+        - PUBLISHED
+        - FAILED
+    SecurityMonitoringBatchMigrationPublishedResourceType:
+      description: The type of resource for a published batch migration resource.
+      enum:
+        - batchMigrationPublishedResource
+      example: batchMigrationPublishedResource
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_PUBLISHED_RESOURCE
+    SecurityMonitoringBatchMigrationResourceAttributes:
+      description: Attributes of a batch migration resource.
+      properties:
+        batchId:
+          description: The UUID of the batch migration that contains the resource.
+          example: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+          format: uuid
+          type: string
+        createdAt:
+          description: The creation date of the resource, in RFC 3339 format.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        createdBy:
+          description: The UUID of the user or service account who created the resource.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        description:
+          description: The description of the resource.
+          example: Detects repeated failed Windows authentication attempts.
+          type: string
+        input:
+          description: The source query or natural language description to translate.
+          example: index=wineventlog EventCode=4625
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceInputType"
+        lastUpdatedAt:
+          description: The last update date of the resource, in RFC 3339 format.
+          example: "2026-09-21T12:02:00Z"
+          format: date-time
+          type: string
+        lastUpdatedBy:
+          description: |-
+            The UUID of the user or service account who last updated the resource,
+            or the name of a system actor.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        name:
+          description: The name of the resource.
+          example: Repeated Windows login failures
+          type: string
+        output:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceOutput"
+        outputType:
+          description: The type of the translation output. Currently always `siem_rule`.
+          example: siem_rule
+          type: string
+        ruleId:
+          description: The ID of the Cloud SIEM detection rule created when the resource was published.
+          example: abc-def-ghi
+          type: string
+        status:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceStatus"
+      required:
+        - batchId
+        - name
+        - inputType
+        - outputType
+        - status
+        - input
+        - output
+        - createdAt
+        - lastUpdatedAt
+      type: object
+    SecurityMonitoringBatchMigrationResourceCreateItem:
+      description: A source rule to translate into a Cloud SIEM detection rule.
+      properties:
+        description:
+          description: The description of the resource.
+          example: Detects repeated failed Windows authentication attempts.
+          maxLength: 4096
+          type: string
+        input:
+          description: The source query or natural language description to translate. Must not be blank.
+          example: index=wineventlog EventCode=4625
+          maxLength: 65536
+          minLength: 1
+          pattern: '^[\s\S]*\S[\s\S]*$'
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceInputType"
+        name:
+          description: The name of the resource.
+          example: Repeated Windows login failures
+          maxLength: 512
+          type: string
+      required:
+        - inputType
+        - input
+      type: object
+    SecurityMonitoringBatchMigrationResourceCreateItems:
+      description: The resources to add. From 1 to 1000 resources.
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceCreateItem"
+      maxItems: 1000
+      minItems: 1
+      type: array
+    SecurityMonitoringBatchMigrationResourceData:
+      description: A batch migration resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceAttributes"
+        id:
+          description: The UUID of the batch migration resource.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourceIDs:
+      description: Unique UUIDs of batch migration resources. From 1 to 1000 IDs.
+      example:
+        - c968cf83-56c2-4d54-a993-6c86dfb83527
+      items:
+        format: uuid
+        type: string
+      maxItems: 1000
+      minItems: 1
+      type: array
+    SecurityMonitoringBatchMigrationResourceInputType:
+      description: |-
+        The type of the source rule: `spl` for a Splunk SPL search or saved search definition,
+        `natural_language` for a plain-English description of the behavior to detect, or `kql`
+        for a Microsoft KQL query. SPL inputs must be self-contained, with search macros expanded.
+      enum:
+        - natural_language
+        - spl
+        - kql
+      example: spl
+      type: string
+      x-enum-varnames:
+        - NATURAL_LANGUAGE
+        - SPL
+        - KQL
+    SecurityMonitoringBatchMigrationResourceOutput:
+      additionalProperties: {}
+      description: |-
+        The translation output. When the resource is `completed`, a Cloud SIEM detection rule
+        definition in the same format as the create detection rule API. When the resource is
+        `failed`, an object with an `error` describing the failure, with `kind` set to
+        `translation_error` or `internal_error`, and optional `type` and `message`. Otherwise, null.
+      example:
+        name: Repeated Windows login failures
+        type: log_detection
+      nullable: true
+      type: object
+    SecurityMonitoringBatchMigrationResourceResponse:
+      description: Response containing a batch migration resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourceStatus:
+      description: |-
+        The status of a batch migration resource. `completed` resources have a translation in
+        `output` that is ready to be published. `duplicate` is reserved for future duplicate rule
+        detection.
+      enum:
+        - pending
+        - in_progress
+        - completed
+        - canceled
+        - failed
+        - publishing
+        - published
+        - duplicate
+      example: completed
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - IN_PROGRESS
+        - COMPLETED
+        - CANCELED
+        - FAILED
+        - PUBLISHING
+        - PUBLISHED
+        - DUPLICATE
+    SecurityMonitoringBatchMigrationResourceStatusCounts:
+      description: The number of resources of a batch migration in each status.
+      properties:
+        canceled:
+          description: Number of resources whose translation was canceled.
+          example: 0
+          format: int64
+          type: integer
+        completed:
+          description: Number of resources translated and ready to be published.
+          example: 0
+          format: int64
+          type: integer
+        duplicate:
+          description: Number of resources identified as duplicates of an existing rule. Reserved for future use.
+          example: 0
+          format: int64
+          type: integer
+        failed:
+          description: Number of resources whose translation failed.
+          example: 0
+          format: int64
+          type: integer
+        inProgress:
+          description: Number of resources being translated.
+          example: 0
+          format: int64
+          type: integer
+        pending:
+          description: Number of resources waiting to be translated.
+          example: 1
+          format: int64
+          type: integer
+        published:
+          description: Number of resources published as Cloud SIEM detection rules.
+          example: 0
+          format: int64
+          type: integer
+        publishing:
+          description: Number of resources being published.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - pending
+        - inProgress
+        - completed
+        - canceled
+        - failed
+        - publishing
+        - published
+        - duplicate
+      type: object
+    SecurityMonitoringBatchMigrationResourceType:
+      description: The type of resource for a batch migration resource.
+      enum:
+        - batchMigrationResource
+      example: batchMigrationResource
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_RESOURCE
+    SecurityMonitoringBatchMigrationResourceUpdateAttributes:
+      additionalProperties: false
+      description: Attributes of the batch migration resource to update. At least one attribute is required.
+      minProperties: 1
+      properties:
+        description:
+          description: The description of the resource.
+          example: Detects repeated failed Windows authentication attempts.
+          maxLength: 4096
+          type: string
+        input:
+          description: The source query or natural language description to translate. Must not be blank.
+          example: index=wineventlog EventCode=4625 | stats count by user
+          maxLength: 65536
+          minLength: 1
+          pattern: '^[\s\S]*\S[\s\S]*$'
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceInputType"
+        name:
+          description: The name of the resource.
+          example: Repeated Windows login failures
+          maxLength: 512
+          type: string
+      type: object
+    SecurityMonitoringBatchMigrationResourceUpdateData:
+      description: Data of the batch migration resource to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourceUpdateRequest:
+      description: Request to update a batch migration resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateAttributes:
+      description: Attributes of the resources to add to a batch migration.
+      properties:
+        resources:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceCreateItems"
+      required:
+        - resources
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateData:
+      description: Data of the resources to add to a batch migration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateRequest:
+      description: Request to add resources to a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesCreateResponse:
+      description: Response containing the batch migration resources that were added.
+      properties:
+        data:
+          description: The added batch migration resources.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceData"
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesDeleteAttributes:
+      description: Attributes of the resources to delete from a batch migration.
+      properties:
+        resourceIds:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceIDs"
+      required:
+        - resourceIds
+      type: object
+    SecurityMonitoringBatchMigrationResourcesDeleteData:
+      description: Data of the resources to delete from a batch migration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesDeleteAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationResourcesDeleteRequest:
+      description: Request to delete resources from a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesDeleteData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationResourcesListResponse:
+      description: Response containing batch migration resources.
+      properties:
+        data:
+          description: The batch migration resources.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationListMeta"
+      required:
+        - data
+        - meta
+      type: object
+    SecurityMonitoringBatchMigrationResourcesType:
+      description: The type of resource for a request on a set of batch migration resources.
+      enum:
+        - batchMigrationResources
+      example: batchMigrationResources
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION_RESOURCES
+    SecurityMonitoringBatchMigrationResponse:
+      description: Response containing a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationStatus:
+      description: |-
+        The status of a batch migration. A batch migration is created as `draft` and moves to
+        `in_progress` when started. It moves to `completed` once no resource is `pending` or
+        `in_progress`, or to `canceled` when canceled.
+      enum:
+        - draft
+        - in_progress
+        - canceled
+        - completed
+      example: draft
+      type: string
+      x-enum-varnames:
+        - DRAFT
+        - IN_PROGRESS
+        - CANCELED
+        - COMPLETED
+    SecurityMonitoringBatchMigrationTags:
+      description: Tags of the batch migration. Up to 50 tags, each up to 256 characters.
+      example:
+        - source:splunk
+      items:
+        maxLength: 256
+        type: string
+      maxItems: 50
+      type: array
+    SecurityMonitoringBatchMigrationType:
+      description: The type of resource for a batch migration.
+      enum:
+        - batchMigration
+      example: batchMigration
+      type: string
+      x-enum-varnames:
+        - BATCH_MIGRATION
+    SecurityMonitoringBatchMigrationUpdateAttributes:
+      additionalProperties: false
+      description: Attributes of the batch migration to update. At least one attribute is required.
+      minProperties: 1
+      properties:
+        description:
+          description: The description of the batch migration.
+          example: Rules imported from Splunk
+          maxLength: 4096
+          type: string
+        name:
+          description: The name of the batch migration.
+          example: Splunk migration - Windows
+          maxLength: 512
+          type: string
+        tags:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationTags"
+      type: object
+    SecurityMonitoringBatchMigrationUpdateData:
+      description: Data of the batch migration to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringBatchMigrationUpdateRequest:
+      description: Request to update a batch migration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringBatchMigrationsListResponse:
+      description: Response containing a page of batch migrations.
+      properties:
+        data:
+          description: The batch migrations.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringBatchMigrationData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SecurityMonitoringBatchMigrationListMeta"
+      required:
+        - data
+        - meta
+      type: object
     SecurityMonitoringContentPackActivation:
       description: The activation status of a content pack.
       enum:
@@ -123652,6 +124759,8 @@ components:
         - $ref: "#/components/schemas/ELFSourcemapData"
         - $ref: "#/components/schemas/NDKSourcemapData"
         - $ref: "#/components/schemas/IL2CPPSourcemapData"
+        - $ref: "#/components/schemas/WASMSourcemapData"
+        - $ref: "#/components/schemas/PortablePdbSourcemapData"
     SourcemapMapKind:
       description: The type of source map.
       enum:
@@ -135703,6 +136812,7 @@ components:
         - $ref: "#/components/schemas/IncidentTriggerWrapper"
         - $ref: "#/components/schemas/MonitorTriggerWrapper"
         - $ref: "#/components/schemas/NotebookTriggerWrapper"
+        - $ref: "#/components/schemas/OnCallShiftChangeTriggerWrapper"
         - $ref: "#/components/schemas/OnCallTriggerWrapper"
         - $ref: "#/components/schemas/ScheduleTriggerWrapper"
         - $ref: "#/components/schemas/SecurityTriggerWrapper"
@@ -138727,7 +139837,7 @@ components:
           type: array
       type: object
     UsageQuotaBulkResultAttributes:
-      description: Attributes of a usage quota bulk write result. On success, all fields except `error` are present. On failure, only `error` is present and the other fields are omitted.
+      description: Attributes of a usage quota bulk write result. On success, quota fields are present as applicable, and pending fields are present only when a change is scheduled. On failure, only `error` is present and the other fields are omitted.
       properties:
         enforced:
           description: Whether usage above the limit is actively blocked instead of only tracked or alerted on. Omitted if this item failed to write.
@@ -138741,6 +139851,16 @@ components:
           description: The public ID of the organization that owns the quota. Omitted if this item failed to write.
           example: abcdef12345
           type: string
+        pending_effective_from:
+          description: The future UTC month when the scheduled limit takes effect, formatted as `YYYY-MM`, starting at 00:00 UTC on its first day. Present only together with `pending_usage_limit` and omitted when no change is scheduled or this item failed to write.
+          example: "2026-11"
+          pattern: '^\d{4}-\d{2}$'
+          type: string
+        pending_usage_limit:
+          description: The usage limit scheduled for the organization-wide quota in the usage units defined by the quota namespace. A value of `0` is valid. At the start of the effective month, this value becomes `usage_limit` and both pending fields are omitted. Omitted when no change is scheduled or this item failed to write.
+          example: 50000
+          format: double
+          type: number
         scope:
           $ref: "#/components/schemas/UsageQuotaResponseScope"
         usage_limit:
@@ -138756,7 +139876,7 @@ components:
           $ref: "#/components/schemas/UsageQuotaBulkResultAttributes"
         id:
           description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
-          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
           type: string
         type:
           $ref: "#/components/schemas/UsageQuotaType"
@@ -138771,23 +139891,30 @@ components:
         $ref: "#/components/schemas/UsageQuotaBulkResultData"
       type: array
     UsageQuotaCreateAttributes:
-      description: Attributes for creating or updating a usage quota by scope.
+      description: Attributes for creating or updating a usage quota by scope. Each item must provide `usage_limit`, `pending_usage_limit`, or both. Providing only `pending_usage_limit` updates an existing organization-wide quota, never creates one, requires `enforced` to be omitted, and fails if the quota does not exist.
+      example:
+        enforced: true
+        pending_usage_limit: 100000
+        usage_limit: 600000
       properties:
         enforced:
-          description: Whether to actively block usage above the limit instead of only tracking or alerting on it.
+          description: Whether to actively block usage above `usage_limit` instead of only tracking or alerting on it. Required when `usage_limit` is provided and must be omitted when only `pending_usage_limit` is provided.
           example: true
           type: boolean
+        pending_usage_limit:
+          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`. Cancel a scheduled change only by deleting the quota's `/pending` sub-resource.
+          example: 50000
+          format: int64
+          minimum: 0
+          type: integer
         scope:
           $ref: "#/components/schemas/UsageQuotaRequestScope"
         usage_limit:
-          description: The quota limit to set in the usage units defined by the quota namespace. For an organization-wide quota (scope omitted), the limit must be greater than the usage already recorded in the current period.
+          description: The non-negative, whole-number quota limit to set in the usage units defined by the quota namespace. For an organization-wide quota (scope omitted), the limit must be greater than usage already recorded in the current period. When this field is provided, `enforced` is required.
           example: 100000
           format: int64
           minimum: 0
           type: integer
-      required:
-        - usage_limit
-        - enforced
       type: object
     UsageQuotaCreateData:
       description: A usage quota resource to create or update by scope.
@@ -138835,6 +139962,19 @@ components:
           description: The public ID of the organization that owns the quota.
           example: abcdef12345
           type: string
+        pending_effective_from:
+          description: The future UTC month when the scheduled limit takes effect, formatted as `YYYY-MM`, starting at 00:00 UTC on its first day. Present only together with `pending_usage_limit` and omitted when no change is scheduled.
+          example: "2026-11"
+          pattern: '^\d{4}-\d{2}$'
+          type: string
+        pending_usage_limit:
+          description: |-
+            The usage limit scheduled for the organization-wide quota in the usage units defined by the quota namespace.
+            A value of `0` is valid. At the start of the effective month, this value becomes `usage_limit` and both pending
+            fields are omitted. Omitted when no change is scheduled.
+          example: 50000
+          format: double
+          type: number
         scope:
           $ref: "#/components/schemas/UsageQuotaResponseScope"
         usage_limit:
@@ -138854,7 +139994,7 @@ components:
           $ref: "#/components/schemas/UsageQuotaResponseAttributes"
         id:
           description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
-          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
           type: string
         type:
           $ref: "#/components/schemas/UsageQuotaType"
@@ -138887,13 +140027,20 @@ components:
       x-enum-varnames:
         - QUOTAS
     UsageQuotaUpdateAttributes:
-      description: Attributes to update on a usage quota. Omitting a property leaves its current value unchanged.
+      description: Attributes to update on a usage quota. At least one of `usage_limit`, `enforced`, or `pending_usage_limit` must be provided. Omitting a property leaves its current value unchanged.
       properties:
         enforced:
           description: Whether to actively block usage above the limit. Omit this field to leave the current enforcement setting unchanged.
           example: false
           nullable: true
           type: boolean
+        pending_usage_limit:
+          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
+          example: 50000
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
         usage_limit:
           description: The new quota limit in the usage units defined by the quota namespace. For an organization-wide quota (empty scope), the limit must be greater than the usage already recorded in the current period. Omit this field to leave the current limit unchanged.
           example: 120000
@@ -138909,7 +140056,7 @@ components:
           $ref: "#/components/schemas/UsageQuotaUpdateAttributes"
         id:
           description: The opaque usage quota identifier, which must match the identifier in the request path.
-          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
           type: string
         type:
           $ref: "#/components/schemas/UsageQuotaType"
@@ -140721,6 +141868,56 @@ components:
         - X_CONTENT_TYPE_HEADER_MISSING
         - X_PATH_INJECTION
         - XSS
+    WASMSourcemapAttributes:
+      description: Attributes of a WebAssembly symbol file.
+      properties:
+        build_id:
+          description: The build identifier.
+          example: wasm-build-123
+          type: string
+        created_at:
+          description: The timestamp when the symbol file was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        file_name:
+          description: The file name of the symbol file.
+          example: module.wasm
+          type: string
+        mapkind:
+          $ref: "#/components/schemas/WASMSourcemapMapKind"
+        size:
+          description: The size of the symbol file in bytes.
+          example: 4096
+          format: int64
+          type: integer
+      required:
+        - mapkind
+      type: object
+    WASMSourcemapData:
+      description: WebAssembly symbol file data object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WASMSourcemapAttributes"
+        id:
+          description: The unique identifier of the source map.
+          example: "9"
+          type: string
+        type:
+          $ref: "#/components/schemas/SourcemapDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    WASMSourcemapMapKind:
+      description: The type of source map. Always `wasm` for WebAssembly symbol files.
+      enum:
+        - wasm
+      example: wasm
+      type: string
+      x-enum-varnames:
+        - WASM
     Watch:
       description: A single RUM replay session watch resource returned by create operations.
       properties:
@@ -144291,6 +145488,57 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/agenthealth/hosts/{resource_id}/issues:
+    get:
+      description: Returns the active Agent Health issues for a node Agent or Cluster Agent resource.
+      operationId: ListAgentHealthHostIssues
+      parameters:
+        - description: >-
+            Resource identifier whose active Agent Health issues should be returned: a DaemonSet UID for a node Agent or a cluster UUID for a Cluster Agent.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            type: string
+        - description: Agent type associated with the resource. Defaults to `node` when omitted.
+          example: node
+          in: query
+          name: agent_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/AgentHealthAgentType"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        issues:
+                          - category: configuration
+                            issue_id: invalid-config:4828e7d6c704c4a3
+                            issue_name: Invalid Config
+                            issue_type: invalid_config
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      type: agent_health_issues
+              schema:
+                $ref: "#/components/schemas/AgentHealthHostIssuesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+      summary: List active Agent Health issues
+      tags:
+        - Agent Health
+      x-menu-order: 1
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -185755,9 +187003,10 @@ paths:
         - AWS Integration
       x-menu-order: 10
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - aws_configuration_edit
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -185864,9 +187113,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 9
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - aws_configuration_edit
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -185931,9 +187181,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 15
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - aws_configuration_edit
+          - cloud_cost_management_write
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -193404,7 +194655,7 @@ paths:
                           start_ns: 1705314600000000000
                           status: ok
                           trace_id: abc123def456
-                    type: events
+                    type: experiments
             schema:
               $ref: "#/components/schemas/LLMObsExperimentEventsRequest"
         description: Experiment events payload.
@@ -196712,7 +197963,7 @@ paths:
                     attributes:
                       records:
                         - id: rec-7c3f5a1b-9e2d-4f8a-b1c6-3d7e9f0a2b4c
-                    type: records
+                    type: datasets
             schema:
               $ref: "#/components/schemas/LLMObsDatasetRecordsUpdateRequest"
         description: Update records payload.
@@ -196788,7 +198039,7 @@ paths:
               default:
                 value:
                   data:
-                    type: records
+                    type: datasets
             schema:
               $ref: "#/components/schemas/LLMObsDatasetRecordsRequest"
         description: Append records payload.
@@ -196888,7 +198139,7 @@ paths:
                     attributes:
                       record_ids:
                         - rec-7c3f5a1b-9e2d-4f8a-b1c6-3d7e9f0a2b4c
-                    type: records
+                    type: datasets
             schema:
               $ref: "#/components/schemas/LLMObsDeleteDatasetRecordsRequest"
         description: Delete records payload.
@@ -200357,6 +201608,249 @@ paths:
         permissions:
           - metric_tags_write
       x-sunset: "2027-01-01"
+  /api/v2/metrics/derived-metrics:
+    post:
+      description: |-
+        Create a derived metric for the org. The metric name is supplied as the resource `id`,
+        and the `definition` sets the formula and the queries the formula is computed from.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: CreateDerivedMetric
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        formula: a
+                        queries:
+                          - data_source: metrics
+                            name: a
+                            query: avg:system.cpu.user{*}
+                    id: my.derived.metric
+                    type: derived_metrics
+            schema:
+              $ref: "#/components/schemas/DerivedMetricCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: Created
+          headers:
+            Location:
+              description: The URL of the newly created derived metric.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Create a derived metric
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+  /api/v2/metrics/derived-metrics/{metric_name}:
+    delete:
+      description: |-
+        Delete a derived metric by name. Idempotent: returns 204 regardless of whether the derived
+        metric existed. Requires the `Manage Tags for Metrics` permission.
+      operationId: DeleteDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Delete a derived metric
+      tags:
+        - Metrics
+      x-menu-order: 33
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+    get:
+      description: Get the definition of a derived metric by name.
+      operationId: GetDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: Get a derived metric
+      tags:
+        - Metrics
+      x-menu-order: 31
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+    put:
+      description: |-
+        Update the definition of an existing derived metric. The `id` in the request body
+        must match the `metric_name` path parameter. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        formula: a
+                        queries:
+                          - data_source: metrics
+                            name: a
+                            query: avg:system.cpu.user{*}
+                    id: my.derived.metric
+                    type: derived_metrics
+            schema:
+              $ref: "#/components/schemas/DerivedMetricCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a derived metric
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 32
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
   /api/v2/metrics/historical-metrics-configurations:
     post:
       description: |-
@@ -211516,7 +213010,11 @@ paths:
                     data:
                       - attributes:
                           cmdline: /usr/bin/python3
+                          executable: /usr/bin/python3
                           host: my-host
+                          identifying_tags:
+                            - host:my-host
+                            - pid:123
                           pid: 123
                         id: abc-123
                         type: process
@@ -218027,9 +219525,6 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 10
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create an exclusion filter for a RUM application.
@@ -218087,9 +219582,6 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 12
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/applications/{app_id}/retention_filters/exclusion/{ef_id}:
     delete:
       description: |-
@@ -218115,9 +219607,6 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 14
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a single exclusion filter for a RUM application.
       operationId: GetExclusionFilter
@@ -218156,9 +219645,6 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 11
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
         Update an exclusion filter for a RUM application.
@@ -218224,9 +219710,6 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 13
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/applications/{app_id}/retention_filters/permanent:
     get:
       description: |-
@@ -229857,6 +231340,793 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is a private preview.
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).
+  /api/v2/security_monitoring/batch-migrations:
+    get:
+      description: |-
+        List the batch migrations of your organization. A batch migration groups detection
+        rules from another SIEM that the Datadog Detection Agent translates into Cloud SIEM
+        detection rules. To retrieve a single batch migration, filter by its ID with
+        `filter[query]=id:<batch_id>`. Poll this endpoint to follow the progress of a batch
+        migration through its `status` and `resourceStatusCounts`.
+      operationId: ListSecurityMonitoringBatchMigrations
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageSize"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageNumber"
+        - description: |-
+            A search query in Datadog search syntax to filter batch migrations, such as
+            `status:completed`. Filterable attributes are `id`, `name`, `description`, `status`,
+            `createdBy`, and `lastUpdatedBy`. Free text matches the batch migration name.
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            example: "status:draft"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          createdAt: "2026-09-21T12:00:00Z"
+                          createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          description: Rules imported from Splunk
+                          inputSource: batch_migration
+                          lastUpdatedAt: "2026-09-21T12:00:00Z"
+                          lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          name: Splunk migration
+                          orgId: 123456
+                          resourceStatusCounts:
+                            canceled: 0
+                            completed: 0
+                            duplicate: 0
+                            failed: 0
+                            inProgress: 0
+                            pending: 1
+                            published: 0
+                            publishing: 0
+                          status: draft
+                          tags:
+                            - source:splunk
+                        id: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                        type: batchMigration
+                    meta:
+                      totalCount: 1
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationsListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+      summary: List batch migrations
+      tags:
+        - Security Monitoring
+      x-menu-order: 177
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    post:
+      description: |-
+        Create a batch migration in the `draft` status, together with 1 to 100 initial
+        resources. Each resource holds one source rule to translate into a Cloud SIEM detection
+        rule. To load more rules, add them with the add resources endpoint before starting the
+        batch migration. A batch migration can hold up to 1000 resources. The response does not
+        include the created resources: list the resources of the batch migration to retrieve them.
+      operationId: CreateSecurityMonitoringBatchMigration
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Rules imported from Splunk
+                      name: Splunk migration
+                      resources:
+                        - description: Detects repeated failed Windows authentication attempts.
+                          input: index=wineventlog EventCode=4625
+                          inputType: spl
+                          name: Repeated Windows login failures
+                        - input: >-
+                            Alert when PowerShell is launched with a command line that downloads and executes a remote script, such as IEX with Net.WebClient or Invoke-WebRequest.
+                          inputType: natural_language
+                          name: Suspicious PowerShell download cradle
+                      tags:
+                        - source:splunk
+                    type: batchMigration
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        createdAt: "2026-09-21T12:00:00Z"
+                        createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        description: Rules imported from Splunk
+                        inputSource: batch_migration
+                        lastUpdatedAt: "2026-09-21T12:00:00Z"
+                        lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        name: Splunk migration
+                        orgId: 123456
+                        resourceStatusCounts:
+                          canceled: 0
+                          completed: 0
+                          duplicate: 0
+                          failed: 0
+                          inProgress: 0
+                          pending: 2
+                          published: 0
+                          publishing: 0
+                        status: draft
+                        tags:
+                          - source:splunk
+                      id: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                      type: batchMigration
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Create a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 178
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}:
+    delete:
+      description: |-
+        Delete a batch migration and its resources. Detection rules that were already
+        published are not deleted. Returns `409 Conflict` while any resource is `in_progress`
+        or `publishing`: cancel the batch migration, or wait for publishing to finish, and
+        then try again.
+      operationId: DeleteSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Delete a batch migration
+      tags:
+        - Security Monitoring
+      x-menu-order: 180
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    patch:
+      description: |-
+        Update the name, description, or tags of a batch migration, in any status. At least
+        one of these attributes must be provided. Omitted attributes are left unchanged, and
+        `tags` replaces the full list of tags.
+      operationId: UpdateSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: Splunk migration - Windows
+                      tags:
+                        - source:splunk
+                        - team:secops
+                    type: batchMigration
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        createdAt: "2026-09-21T12:00:00Z"
+                        createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        description: Rules imported from Splunk
+                        inputSource: batch_migration
+                        lastUpdatedAt: "2026-09-21T12:05:00Z"
+                        lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        name: Splunk migration - Windows
+                        orgId: 123456
+                        resourceStatusCounts:
+                          canceled: 0
+                          completed: 0
+                          duplicate: 0
+                          failed: 0
+                          inProgress: 0
+                          pending: 1
+                          published: 0
+                          publishing: 0
+                        status: draft
+                        tags:
+                          - source:splunk
+                          - team:secops
+                      id: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                      type: batchMigration
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Update a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 179
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/cancel:
+    post:
+      description: |-
+        Cancel an `in_progress` batch migration. Resources that are `pending` or `in_progress`
+        become `canceled`. Resources that are already `completed` or `failed` keep their status
+        and output, so completed resources can still be published. Canceling a `canceled` batch
+        migration succeeds, so the request can be safely retried. Returns `409 Conflict` if the
+        batch migration is `draft` or `completed`.
+      operationId: CancelSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Cancel a batch migration
+      tags:
+        - Security Monitoring
+      x-menu-order: 181
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/publish:
+    post:
+      description: |-
+        Create a Cloud SIEM detection rule from the `output` of each selected `completed`
+        resource of a batch migration. Completed resources can be published while the rest of
+        the batch migration is still being translated. When `resourceIds` is omitted or empty,
+        every `completed` resource is published. Published rules are created disabled.
+
+        Every requested resource must be publishable: `completed`, or left in `publishing` for
+        more than one minute after an uncertain result. Otherwise, the request returns
+        `409 Conflict` and nothing is published. Already published resources are not publishable.
+
+        The response reports the outcome of each resource, and some resources can be published
+        while others fail. A `failed` result that contains a `ruleId` means the rule was created:
+        do not retry that resource. Publishing a rule with a `block_ip` or `block_user` action
+        requires the `appsec_protect_write` permission.
+      operationId: PublishSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              all_completed:
+                summary: Publish every completed resource
+                value:
+                  data:
+                    attributes: {}
+                    type: batchMigrationPublish
+              default:
+                value:
+                  data:
+                    attributes:
+                      resourceIds:
+                        - c968cf83-56c2-4d54-a993-6c86dfb83527
+                    type: batchMigrationPublish
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          ruleId: abc-def-ghi
+                          status: published
+                        id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                        type: batchMigrationPublishedResource
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationPublishResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Publish a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 182
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/resources:
+    delete:
+      description: |-
+        Delete resources from a batch migration. The request is all-or-nothing: it returns
+        `404 Not Found` if any resource does not exist, and `409 Conflict` if any resource is
+        `in_progress` or `publishing`. In both cases nothing is deleted. Duplicate resource IDs
+        are ignored. Detection rules already published from the deleted resources are not deleted.
+      operationId: DeleteSecurityMonitoringBatchMigrationResources
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      resourceIds:
+                        - c968cf83-56c2-4d54-a993-6c86dfb83527
+                    type: batchMigrationResources
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesDeleteRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Delete resources from a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 185
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    get:
+      description: |-
+        List the resources of a batch migration, including the input of each source rule and,
+        once translated, the proposed Cloud SIEM detection rule in `output`.
+      operationId: ListSecurityMonitoringBatchMigrationResources
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageSize"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationPageNumber"
+        - description: |-
+            A search query in Datadog search syntax to filter resources, such as
+            `status:completed`. Filterable attributes are `id`, `name`, `description`, `inputType`,
+            `status`, `input`, `createdBy`, and `lastUpdatedBy`. Free text matches the resource name.
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            example: "status:completed inputType:spl"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          batchId: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                          createdAt: "2026-09-21T12:00:00Z"
+                          createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          description: Detects repeated failed Windows authentication attempts.
+                          input: index=wineventlog EventCode=4625
+                          inputType: spl
+                          lastUpdatedAt: "2026-09-21T12:02:00Z"
+                          lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          name: Repeated Windows login failures
+                          output:
+                            cases:
+                              - condition: failed_logins >= 5
+                                name: Repeated failures
+                                notifications: []
+                                status: medium
+                            isEnabled: false
+                            message: Repeated failed Windows login attempts were detected.
+                            name: Repeated Windows login failures
+                            options:
+                              evaluationWindow: 300
+                              keepAlive: 3600
+                              maxSignalDuration: 86400
+                            queries:
+                              - aggregation: count
+                                groupByFields:
+                                  - "@usr.name"
+                                  - "@network.client.ip"
+                                name: failed_logins
+                                query: "source:windows @evt.id:4625"
+                            tags:
+                              - source:windows
+                              - migration:splunk
+                            type: log_detection
+                          outputType: siem_rule
+                          status: completed
+                        id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                        type: batchMigrationResource
+                    meta:
+                      totalCount: 1
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+      summary: List batch migration resources
+      tags:
+        - Security Monitoring
+      x-menu-order: 183
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    post:
+      description: |-
+        Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the
+        batch migration is not `draft`, and `400 Bad Request` if the batch migration would
+        contain more than 1000 resources.
+      operationId: CreateSecurityMonitoringBatchMigrationResources
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      resources:
+                        - input: index=linux process=sudo "authentication failure" | stats count by user, host
+                          inputType: spl
+                          name: Linux sudo abuse
+                    type: batchMigrationResources
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          batchId: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                          createdAt: "2026-09-21T12:10:00Z"
+                          createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          input: index=linux process=sudo "authentication failure" | stats count by user, host
+                          inputType: spl
+                          lastUpdatedAt: "2026-09-21T12:10:00Z"
+                          lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                          name: Linux sudo abuse
+                          output:
+                          outputType: siem_rule
+                          status: pending
+                        id: 0b3f5e5c-8a2b-4a8f-9f0e-3c1d2e4f5a6b
+                        type: batchMigrationResource
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourcesCreateResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Add resources to a batch migration
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 184
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/resources/{resource_id}:
+    patch:
+      description: |-
+        Update a resource of a batch migration. At least one of `name`, `description`,
+        `inputType`, or `input` must be provided. `name` and `description` can be updated at
+        any time. `inputType` and `input` can only be updated while the resource is `pending`;
+        otherwise, the request returns `409 Conflict`. The translated `output` cannot be edited.
+      operationId: UpdateSecurityMonitoringBatchMigrationResource
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationResourceID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      input: index=wineventlog EventCode=4625 | stats count by user
+                    type: batchMigrationResource
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        batchId: 7cdb3a75-64fb-46ce-9445-41969e78fe8e
+                        createdAt: "2026-09-21T12:00:00Z"
+                        createdBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        input: index=wineventlog EventCode=4625 | stats count by user
+                        inputType: spl
+                        lastUpdatedAt: "2026-09-21T12:15:00Z"
+                        lastUpdatedBy: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        name: Repeated Windows login failures
+                        output:
+                        outputType: siem_rule
+                        status: pending
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: batchMigrationResource
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringBatchMigrationResourceResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Update a batch migration resource
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 186
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/batch-migrations/{batch_id}/start:
+    post:
+      description: |-
+        Start translating the `pending` resources of a `draft` batch migration into Cloud SIEM
+        detection rules. The batch migration moves to `in_progress`, and its resources are
+        translated asynchronously. Once no resource is `pending` or `in_progress`, the batch
+        migration moves to `completed`. Starting an `in_progress` batch migration again does not
+        queue duplicate work, so the request can be safely retried, including after a timeout or
+        a `5xx` error. Returns `409 Conflict` if the batch migration is `completed` or `canceled`.
+
+        An organization can translate up to 2000 resources in total across all of its batch
+        migrations. Resources that were already processed count toward this limit even after
+        they are deleted, and `pending` resources of `in_progress` batch migrations reserve
+        capacity. Returns `409 Conflict` if starting the batch migration would exceed this limit.
+        To request a higher limit for your organization, contact
+        [Datadog support](https://docs.datadoghq.com/help/).
+      operationId: StartSecurityMonitoringBatchMigration
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringBatchMigrationID"
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          $ref: "#/components/responses/SecurityMonitoringBatchMigrationInternalServerErrorResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Start a batch migration
+      tags:
+        - Security Monitoring
+      x-menu-order: 187
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: |-
@@ -250169,7 +252439,15 @@ paths:
                           scope:
                             user_handle: jane@example.com
                           usage_limit: 100000
-                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
+                        type: quotas
+                      - attributes:
+                          enforced: true
+                          org_public_id: abcdef12345
+                          pending_effective_from: "2026-11"
+                          pending_usage_limit: 100000
+                          usage_limit: 600000
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
                         type: quotas
                     meta:
                       page:
@@ -250217,7 +252495,11 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.
+        Otherwise, a quota is created only when `usage_limit` and `enforced` are provided.
+        For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
+        accompany an immediate limit or update an existing quota by itself.
+        Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -250254,6 +252536,15 @@ paths:
                           user_handle: "*"
                         usage_limit: 250000
                       type: quotas
+              schedule_reduction:
+                summary: Set a limit and schedule a reduction
+                value:
+                  data:
+                    - attributes:
+                        enforced: true
+                        pending_usage_limit: 100000
+                        usage_limit: 600000
+                      type: quotas
             schema:
               $ref: "#/components/schemas/UsageQuotasCreateRequest"
         description: The usage quotas to create or update.
@@ -250272,11 +252563,11 @@ paths:
                           scope:
                             user_handle: jane@example.com
                           usage_limit: 100000
-                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
                         type: quotas
                       - attributes:
                           error: usage_limit is out of range
-                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTp1c2VyQGV4YW1wbGUuY29t"
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOnVzZXJAZXhhbXBsZS5jb20"
                         type: quotas
               schema:
                 $ref: "#/components/schemas/UsageQuotasBulkResponse"
@@ -250286,7 +252577,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
+          description: Bad Request. Returned if the request is malformed, including when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a quota that does not exist is reported in that item's `error`; when only the caller's organization is targeted, this failure returns `400`.
         "403":
           content:
             application/json:
@@ -250335,7 +252626,7 @@ paths:
           name: id
           required: true
           schema:
-            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
             type: string
       responses:
         "204":
@@ -250372,7 +252663,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -250387,7 +252678,7 @@ paths:
           name: id
           required: true
           schema:
-            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
             type: string
       requestBody:
         content:
@@ -250399,7 +252690,7 @@ paths:
                     attributes:
                       enforced: false
                       usage_limit: 120000
-                    id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                    id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
                     type: quotas
             schema:
               $ref: "#/components/schemas/UsageQuotaUpdateRequest"
@@ -250416,10 +252707,8 @@ paths:
                       attributes:
                         enforced: false
                         org_public_id: abcdef12345
-                        scope:
-                          user_handle: jane@example.com
                         usage_limit: 120000
-                      id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                      id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
                       type: quotas
               schema:
                 $ref: "#/components/schemas/UsageQuotaResponse"
@@ -250429,7 +252718,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request. Returned if the request is malformed, or if the `id` in the request body does not match the `id` in the request path.
+          description: Bad Request. Returned if the request is malformed, if the `id` in the request body does not match the `id` in the request path, if none of `usage_limit`, `enforced`, or `pending_usage_limit` is provided, or if `pending_usage_limit` is set on a scoped quota.
         "403":
           content:
             application/json:
@@ -250453,6 +252742,65 @@ paths:
       tags:
         - Usage Metering
       x-menu-order: 16
+      "x-permission":
+        operator: OR
+        permissions:
+          - billing_edit
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/usage/quotas/{quota_namespace}/{id}/pending:
+    delete:
+      description: |-
+        Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+      operationId: DeletePendingQuota
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request. Returned if the `id` is malformed or does not belong to the requested quota namespace.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - billing_edit
+      summary: Cancel a scheduled usage quota limit
+      tags:
+        - Usage Metering
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -252821,6 +255169,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
+  - description: View Agent Health issues reported for node Agents and Cluster Agents.
+    name: Agent Health
   - description: >-
       Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
     name: Agent Observability

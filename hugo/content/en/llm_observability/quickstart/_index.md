@@ -26,6 +26,14 @@ further_reading:
 
 This page demonstrates using Datadog's Agent Observability SDK to instrument a Python, Node.js, or Java LLM application.
 
+{{< skill-callout
+    title="Set up Agent Observability with a coding agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, instrument Datadog Agent Observability in my project.
+{{< /skill-callout >}}
+
 ### Prerequisites
 
 Agent Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).

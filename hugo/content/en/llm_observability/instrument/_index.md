@@ -19,6 +19,17 @@ further_reading:
 
 Instrument your LLM application or agent to collect traces, prompts, token usage, latency, and errors in Agent Observability. Use automatic instrumentation for supported providers and frameworks, and add custom spans for other operations. You can follow these steps yourself or give this page to a coding agent.
 
+{{< skill-callout
+    title="Set up Agent Observability with a coding agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, instrument Datadog Agent Observability in my project.
+{{< /skill-callout >}}
+
+## Instrumentation Options
+You can instrument your application with the Python, Node.js, or Java SDKs, or by using the Agent Observability API.
+
 {{< agent-only >}}
 Follow these guidelines throughout this page and its linked setup guides:
 

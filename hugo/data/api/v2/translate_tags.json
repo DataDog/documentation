@@ -31,6 +31,10 @@
     "name": "Actions Datastores",
     "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
   },
+  "agent-health": {
+    "name": "Agent Health",
+    "description": "View Agent Health issues reported for node Agents and Cluster Agents."
+  },
   "agent-observability": {
     "name": "Agent Observability",
     "description": "Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations."
