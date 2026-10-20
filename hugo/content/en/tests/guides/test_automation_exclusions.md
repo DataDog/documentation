@@ -195,6 +195,8 @@ MUnit does not support Datadog test disabling. Its `PREVENT_FAILURE_SUPPRESSION`
 
 **Weaver:** Add the public tag names to a native `TestName`:
 
+**Framework compatibility:** Weaver 0.8.4 and 0.9.0 support these custom string tags. Weaver 0.13.0 does not support this API.
+
 ```scala
 import cats.effect.IO
 import datadog.trace.api.civisibility.TestAutomationExclusions
