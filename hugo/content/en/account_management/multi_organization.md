@@ -52,6 +52,7 @@ Account settings, such as allow-listed IP addresses, are not inherited by child-
     - Enter one or more email addresses.
     - Invited users are assigned the [Datadog Admin role][5]. You can invite more users in
 Organization Settings after creating your organization.
+    - Users are added to one organization at a time. To give a user access to several child-organizations, invite them to each child-organization separately.
     - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
 4. Click {{< ui >}}Create{{< /ui >}}.
 
