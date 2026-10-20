@@ -34993,6 +34993,7 @@ components:
       x-enum-varnames:
         - CREATE_TEST_SUITE_FOR_JOURNEY_REQUEST
     DemInferredJourneyCandidateAttributes:
+      additionalProperties: false
       description: Attributes of an inferred journey candidate.
       properties:
         created_at:
@@ -35058,6 +35059,7 @@ components:
         - attributes
       type: object
     DemInferredJourneyIgnoredAttributes:
+      additionalProperties: false
       description: Attributes of an ignored inferred journey.
       properties:
         created_at:
@@ -35122,6 +35124,11 @@ components:
         - type
         - attributes
       type: object
+    DemInferredJourneyItem:
+      description: A single inferred journey item, either a candidate or an ignored journey.
+      oneOf:
+        - $ref: "#/components/schemas/DemInferredJourneyCandidateData"
+        - $ref: "#/components/schemas/DemInferredJourneyIgnoredData"
     DemInferredJourneyStatus:
       default: candidate
       description: The status of an inferred DEM journey.
@@ -35551,10 +35558,7 @@ components:
         data:
           description: List of inferred journey items matching the search criteria.
           items:
-            anyOf:
-              - $ref: "#/components/schemas/DemInferredJourneyCandidateData"
-              - $ref: "#/components/schemas/DemInferredJourneyIgnoredData"
-            description: A single inferred journey item, either a candidate or an ignored journey.
+            $ref: "#/components/schemas/DemInferredJourneyItem"
           type: array
       required:
         - data
@@ -36456,11 +36460,6 @@ components:
         - DEPLOYMENT_GATES_EVALUATION_RESULT_RESPONSE
     DeploymentGatesEvaluationRule:
       description: A rule to evaluate as part of a deployment gate evaluation.
-      discriminator:
-        mapping:
-          faulty_deployment_detection: "#/components/schemas/DeploymentGatesFDDRule"
-          monitor: "#/components/schemas/DeploymentGatesMonitorRule"
-        propertyName: type
       oneOf:
         - $ref: "#/components/schemas/DeploymentGatesMonitorRule"
         - $ref: "#/components/schemas/DeploymentGatesFDDRule"
@@ -68768,9 +68767,6 @@ components:
           type: string
       type: object
     LLMObsContentBlock:
-      anyOf:
-        - $ref: "#/components/schemas/LLMObsFrontendContentBlock"
-        - $ref: "#/components/schemas/LLMObsLegacyContentBlock"
       description: |-
         A single content block rendered inside a `display_block` interaction.
         `type` discriminates which other fields are meaningful:
@@ -68779,7 +68775,7 @@ components:
         - `header`: `content` must be a string; `level`, when set, must be one of `sm`, `md`, `lg`, `xl`.
         - `json`: `content` must be a well-formed JSON value (object, array, or scalar).
         - `image`: `url` is required.
-        - `widget`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
+        - `univiz`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
         - `llmobs_trace`: `traceId` is required; `interactionType`, when set, must be `trace` or `experiment_trace`.
         - `frontend`: `code` is required and must be a non-empty string; `label` is optional.
 
@@ -68795,7 +68791,7 @@ components:
           description: |-
             Block payload. A string for `markdown`, `header`, and `text`; an
             arbitrary JSON value (object, array, or scalar) for `json`. Omitted
-            for `image`, `widget`, `llmobs_trace`, and `frontend`.
+            for `image`, `univiz`, `llmobs_trace`, and `frontend`.
           example: "## Triage Instructions"
         height:
           description: Optional rendered height. Must be positive when set.
@@ -68812,7 +68808,7 @@ components:
           $ref: "#/components/schemas/LLMObsContentBlockHeaderLevel"
         tileDef:
           description: |-
-            Tile definition for a `widget` block. Required for `widget`. The
+            Tile definition for a `univiz` block. Required for `univiz`. The
             schema is owned by the frontend renderer.
           example:
             requests:
@@ -68835,8 +68831,6 @@ components:
           description: URL of the image. Required for `image` blocks.
           example: "https://example.com/image.png"
           type: string
-      required:
-        - type
       type: object
     LLMObsContentBlockHeaderLevel:
       description: Visual size for a `header` block.
@@ -68891,7 +68885,7 @@ components:
         - text
         - json
         - image
-        - widget
+        - univiz
         - llmobs_trace
         - frontend
       example: markdown
@@ -68902,7 +68896,7 @@ components:
         - TEXT
         - JSON
         - IMAGE
-        - WIDGET
+        - UNIVIZ
         - LLMOBS_TRACE
         - FRONTEND
     LLMObsContentBlocks:
@@ -71824,29 +71818,11 @@ components:
       required:
         - data
       type: object
-    LLMObsFrontendContentBlock:
-      description: Validation requirements for a `frontend` display block.
-      properties:
-        code:
-          $ref: "#/components/schemas/LLMObsFrontendContentBlockCode"
-        type:
-          $ref: "#/components/schemas/LLMObsFrontendContentBlockType"
-      required:
-        - code
-      type: object
     LLMObsFrontendContentBlockCode:
       description: HTML code rendered by a `frontend` block. Required for `frontend` blocks.
       example: '<div class="status-card">Ready for review</div>'
       minLength: 1
       type: string
-    LLMObsFrontendContentBlockType:
-      description: Type discriminator for a `frontend` display block.
-      enum:
-        - frontend
-      example: frontend
-      type: string
-      x-enum-varnames:
-        - FRONTEND
     LLMObsInferenceCode:
       description: A generated code snippet for running an inference request programmatically.
       properties:
@@ -72452,32 +72428,6 @@ components:
         - CATEGORICAL
         - BOOLEAN
         - TEXT
-    LLMObsLegacyContentBlock:
-      description: Validation requirements for an existing non-frontend display block.
-      properties:
-        type:
-          $ref: "#/components/schemas/LLMObsLegacyContentBlockType"
-      type: object
-    LLMObsLegacyContentBlockType:
-      description: Type discriminator for an existing non-frontend display block.
-      enum:
-        - markdown
-        - header
-        - text
-        - json
-        - image
-        - widget
-        - llmobs_trace
-      example: markdown
-      type: string
-      x-enum-varnames:
-        - MARKDOWN
-        - HEADER
-        - TEXT
-        - JSON
-        - IMAGE
-        - WIDGET
-        - LLMOBS_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an Agent Observability experiment metric.
       enum:
@@ -114581,16 +114531,6 @@ components:
       description: |-
         Type-specific details for a content pack state. The set of fields present depends
         on the content pack's `type`. When Cloud SIEM is inactive for the requesting organization, `onboarding` is returned instead of the content pack's usual type, such as `logs` or `vulnerability`.`
-      discriminator:
-        mapping:
-          appsec: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
-          audit: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
-          entity: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
-          logs: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
-          onboarding: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
-          threat_intel: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
-          vulnerability: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
-        propertyName: type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
         - $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
@@ -115807,14 +115747,6 @@ components:
       type: object
     SecurityMonitoringIntegrationConfigCreateAttributes:
       description: The attributes of the entity context sync configuration to create.
-      discriminator:
-        mapping:
-          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
-          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
-          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
-          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
-          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
-        propertyName: integration_type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
@@ -115966,14 +115898,6 @@ components:
         - INITIALIZING
     SecurityMonitoringIntegrationConfigUpdateAttributes:
       description: Fields to update on the entity context sync configuration. All fields other than the integration type are optional.
-      discriminator:
-        mapping:
-          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
-          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
-          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
-          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
-          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
-        propertyName: integration_type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
@@ -116012,14 +115936,6 @@ components:
       type: object
     SecurityMonitoringIntegrationCredentialsValidateAttributes:
       description: The credentials to validate against the external entity source.
-      discriminator:
-        mapping:
-          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
-          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
-          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
-          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
-          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
-        propertyName: integration_type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
@@ -136636,9 +136552,6 @@ components:
         - $ref: "#/components/schemas/SoftwareCatalogTriggerWrapper"
         - $ref: "#/components/schemas/WorkflowTriggerWrapper"
     TriggerAttributes:
-      anyOf:
-        - $ref: "#/components/schemas/MonitorAlertTrigger"
-        - $ref: "#/components/schemas/GeneralInvestigationTrigger"
       description: The trigger definition for starting an investigation.
       example:
         monitor_alert_trigger:
@@ -136646,14 +136559,9 @@ components:
           event_ts: 1700000000000
           monitor_id: 12345678
         type: monitor_alert_trigger
-      properties:
-        general_investigation:
-          $ref: "#/components/schemas/GeneralInvestigationAttributes"
-        monitor_alert_trigger:
-          $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
-        type:
-          $ref: "#/components/schemas/TriggerType"
-      type: object
+      oneOf:
+        - $ref: "#/components/schemas/MonitorAlertTrigger"
+        - $ref: "#/components/schemas/GeneralInvestigationTrigger"
     TriggerInvestigationRequest:
       description: Request to trigger a new investigation.
       properties:
@@ -136754,16 +136662,6 @@ components:
       x-enum-varnames:
         - SECURITY_FINDINGS
         - SECURITY_SIGNALS
-    TriggerType:
-      description: The type of trigger for the investigation.
-      enum:
-        - monitor_alert_trigger
-        - general_investigation
-      example: monitor_alert_trigger
-      type: string
-      x-enum-varnames:
-        - MONITOR_ALERT_TRIGGER
-        - GENERAL_INVESTIGATION
     TriggerWorkflowAutomationAction:
       description: "Triggers a Workflow Automation."
       properties:
