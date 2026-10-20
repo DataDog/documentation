@@ -49,4 +49,36 @@ describe("mdToMetaDescription", () => {
       mdToMetaDescription("Use `as_count()` or `as_rate()` from C# code."),
     ).toBe("Use as_count() or as_rate() from C# code.");
   });
+
+  it("keeps a description that fits whole", () => {
+    expect(mdToMetaDescription("Get a thing. It has two sentences.")).toBe(
+      "Get a thing. It has two sentences.",
+    );
+  });
+
+  it("uses the first sentence of a description that's too long", () => {
+    const long = `Create a monitor using the specified options. ${"More detail. ".repeat(20)}`;
+    expect(mdToMetaDescription(long)).toBe(
+      "Create a monitor using the specified options.",
+    );
+  });
+
+  it("ends the first sentence at a heading or list, so they don't run together", () => {
+    const long = `Create a monitor\n\n#### Monitor Types\n\n- anomaly: query alert\n${"- more: detail\n".repeat(20)}`;
+    expect(mdToMetaDescription(long)).toBe("Create a monitor");
+  });
+
+  it("doesn't end a sentence at a period inside a word", () => {
+    const long = `Patch a test using JSON Patch (RFC 6902), e.g. a v1.2 change. ${"More detail. ".repeat(20)}`;
+    expect(mdToMetaDescription(long)).toBe(
+      "Patch a test using JSON Patch (RFC 6902), e.g. a v1.2 change.",
+    );
+  });
+
+  it("cuts a first sentence that's still too long at a word boundary", () => {
+    const sentence = `${"word ".repeat(40)}end.`;
+    const out = mdToMetaDescription(`${sentence} Next sentence.`);
+    expect(out.length).toBeLessThanOrEqual(156);
+    expect(out).toMatch(/^word( word)*…$/);
+  });
 });

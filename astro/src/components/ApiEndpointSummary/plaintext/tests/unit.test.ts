@@ -36,10 +36,10 @@ describe("apiEndpointSummaryNodes", () => {
     expect(md).toContain("Datadog site");
     expect(md).toContain("API endpoint");
     expect(md).toMatch(
-      /app\.datadoghq\.com.*\*\*GET\*\* https:\/\/api\.datadoghq\.com\/api\/v1\/dashboard\/\{dashboard_id\}/,
+      /app\.datadoghq\.com.*\| GET https:\/\/api\.datadoghq\.com\/api\/v1\/dashboard\/\{dashboard_id\}/,
     );
     expect(md).toMatch(
-      /app\.datadoghq\.eu.*\*\*GET\*\* https:\/\/api\.datadoghq\.eu\/api\/v1\/dashboard\/\{dashboard_id\}/,
+      /app\.datadoghq\.eu.*\| GET https:\/\/api\.datadoghq\.eu\/api\/v1\/dashboard\/\{dashboard_id\}/,
     );
   });
 

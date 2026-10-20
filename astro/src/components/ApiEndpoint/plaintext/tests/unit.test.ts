@@ -72,7 +72,8 @@ describe("apiEndpointNodes", () => {
     expect(out).toContain("API endpoint");
     expect(out).toContain("app.datadoghq.com");
     expect(out).toContain("app.datadoghq.eu");
-    expect(out).toContain("**GET**");
+    expect(out).toContain("| GET https://");
+    expect(out).not.toContain("**GET**");
   });
 
   it("renders a deprecated alert when the endpoint is deprecated", () => {
@@ -100,6 +101,18 @@ describe("apiEndpointNodes", () => {
   it("includes the endpoint description", () => {
     const out = render(baseEndpoint);
     expect(out).toContain("Returns a thing by id.");
+  });
+
+  it("puts the description under an Overview heading after the region table", () => {
+    const out = render(baseEndpoint);
+    expect(out).toMatch(
+      /\| GET https:[^\n]*\n\n### Overview\n\nReturns a thing by id\./,
+    );
+  });
+
+  it("leaves out the Overview heading when there is no description", () => {
+    const out = render({ ...baseEndpoint, description: undefined });
+    expect(out).not.toContain("### Overview");
   });
 
   it("renders an Arguments section with a schema table for path params", () => {

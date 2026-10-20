@@ -51,7 +51,7 @@ describe("apiResponseNode", () => {
     const out = render(responses);
     expect(out).toContain('label="Model"');
     expect(out).toContain('label="Example"');
-    expect(out).toContain("Parent field");
+    expect(out).toContain("| Field");
     expect(out).toContain("```json");
   });
 
@@ -59,7 +59,7 @@ describe("apiResponseNode", () => {
     const schemaOnly = render([
       { statusCode: "200", description: "", schema: responses[0].schema },
     ]);
-    expect(schemaOnly).toContain("Parent field");
+    expect(schemaOnly).toContain("| Field");
     expect(schemaOnly).not.toContain('label="Model"');
 
     const examplesOnly = render([
@@ -91,7 +91,7 @@ describe("apiResponseNode", () => {
     const modelTab = out.slice(out.indexOf('label="Model"'));
     expect(modelTab.indexOf("Dashboard summary response.")).toBeGreaterThan(-1);
     expect(modelTab.indexOf("Dashboard summary response.")).toBeLessThan(
-      modelTab.indexOf("| Parent field"),
+      modelTab.indexOf("| Field"),
     );
   });
 
@@ -106,7 +106,7 @@ describe("apiResponseNode", () => {
     ]);
     expect(out.indexOf("Dashboard summary response.")).toBeGreaterThan(-1);
     expect(out.indexOf("Dashboard summary response.")).toBeLessThan(
-      out.indexOf("| Parent field"),
+      out.indexOf("| Field"),
     );
   });
 });

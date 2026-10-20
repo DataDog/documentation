@@ -3,14 +3,7 @@
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
-import {
-  bold,
-  fence,
-  inline,
-  nodesFromMd,
-  paragraph,
-  plaintext,
-} from "@lib/plaintext/helpers";
+import { fence, heading, nodesFromMd } from "@lib/plaintext/helpers";
 
 interface ApiCodeInstructionsInput {
   language: string;
@@ -25,7 +18,8 @@ export function apiCodeInstructionsNodes({
 }: ApiCodeInstructionsInput): MarkdocNode[] {
   const [runCommand = ""] = Object.values(runCommandByRegion);
   return [
-    paragraph([inline([bold([plaintext("Instructions")])])]),
+    // One level below `### Code Example`, matching the HTML h4.
+    heading(4, "Instructions"),
     ...nodesFromMd(
       `First [install the library and its dependencies](/api/latest/?code-lang=${language}) and then save the example to \`${exampleFile}\` and run following commands:`,
     ),

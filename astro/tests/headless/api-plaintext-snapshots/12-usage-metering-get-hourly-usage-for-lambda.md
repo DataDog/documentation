@@ -1,6 +1,6 @@
 ---
 title: Get hourly usage for Lambda
-description: "Get hourly usage for Lambda. Note: This endpoint has been deprecated. Hourly usage data for all products is now available in the Get hourly usage by…"
+description: Get hourly usage for Lambda.
 breadcrumbs: Docs > API > Get hourly usage for Lambda
 ---
 
@@ -14,18 +14,20 @@ breadcrumbs: Docs > API > Get hourly usage for Lambda
 This endpoint is deprecated.
 {% /alert %}
 
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/aws_lambda     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/aws_lambda |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/aws_lambda |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/aws_lambda      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
+
+### Overview
+
 Get hourly usage for Lambda.
 **Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering.md#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration.md) for the associated migration guide.
-
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/aws_lambda     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/aws_lambda |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/aws_lambda |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/aws_lambda      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
 
 This endpoint requires the `usage_read` permission.
 
@@ -35,10 +37,10 @@ OAuth apps require the `usage_read` authorization [scope](https://docs.datadoghq
 
 #### Query Strings
 
-| Parent field | Field                 | Type   | Description                                                                                               |
-| ------------ | --------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
-|              | start_hr [*required*] | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.      |
-|              | end_hr                | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour. |
+| Field                 | Type   | Description                                                                                               |
+| --------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| start_hr [*required*] | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.      |
+| end_hr                | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour. |
 
 ### Response
 
@@ -66,9 +68,9 @@ Bad Request
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -90,9 +92,9 @@ Forbidden - User is not authorized
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -114,9 +116,9 @@ Too many requests
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -186,7 +188,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -218,7 +220,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 

@@ -10,17 +10,19 @@ breadcrumbs: Docs > API > Get all dashboard lists
 
 ## v1 (latest)
 
-Fetch all of your existing dashboard list definitions.
+| Datadog site      | API endpoint                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/dashboard/lists/manual     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/dashboard/lists/manual      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
 
-| Datadog site      | API endpoint                                                        |
-| ----------------- | ------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/dashboard/lists/manual     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/dashboard/lists/manual      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
+### Overview
+
+Fetch all of your existing dashboard list definitions.
 
 This endpoint requires the `dashboards_read` permission.
 
@@ -74,9 +76,9 @@ Forbidden
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -98,9 +100,9 @@ Too many requests
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -166,7 +168,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -193,7 +195,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 

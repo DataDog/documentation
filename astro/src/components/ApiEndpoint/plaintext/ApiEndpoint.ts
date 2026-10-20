@@ -36,8 +36,8 @@ export function apiEndpointNodes(
 ): MarkdocNode[] {
   return [
     ...statusNotice(ep),
-    ...descriptionNodes(ep),
     ...apiRegionTableNodes(ep.method, ep.regionUrls),
+    ...descriptionNodes(ep),
     ...permissionsNodes(ep),
     ...oauthScopesNodes(ep, lang),
     ...argumentsNodes(ep),
@@ -68,7 +68,7 @@ function descriptionNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.description) {
     return NO_CONTENT;
   }
-  return nodesFromMd(ep.description);
+  return [heading(3, "Overview"), ...nodesFromMd(ep.description)];
 }
 
 function permissionsNodes(ep: EndpointData): MarkdocNode[] {
