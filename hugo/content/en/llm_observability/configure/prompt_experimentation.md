@@ -84,7 +84,7 @@ Complete this setup once for either workflow. If your application already sends 
 
 ### Connect the application
 
-Complete the [Prompt Management setup][15] and set `DD_ENV` to the experiment's environment. Then follow the instructions for your language. This setup uses the [Datadog Agent][14] to report experiment exposures.
+Complete the [Prompt Management setup][15] and set `DD_ENV` to the experiment's environment. Then follow the instructions for your language to configure experiment exposure reporting.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -146,7 +146,7 @@ Alternatively, use [agentless delivery][20] to retrieve prompt assignments and r
 
 ### Match prompt requests to outcomes
 
-Pass the user ID as the targeting key when retrieving a prompt, as illustrated in the following examples. Use a stable, non-empty string that matches the user ID recorded with outcome events. Datadog uses this ID to associate outcomes with the assigned prompt version.
+Pass the user ID as the targeting key when retrieving a prompt, as shown in the following examples. Use a stable, non-empty string that matches the user ID recorded with outcome events. Datadog uses this ID to associate outcomes with the assigned prompt version.
 
 {{< tabs >}}
 {{% tab "Python" %}}
