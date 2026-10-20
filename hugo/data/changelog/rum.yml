@@ -13,3 +13,11 @@ entries:
     operations:
       - GetSourcemaps
     title: Document debug ID lookup for JavaScript source maps
+  - change_type: modified
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40794
+    operations:
+      - DeleteSourcemaps
+      - ListSourcemaps
+      - RestoreSourcemaps
+    title: Validate all source map response kinds with exclusive variants
