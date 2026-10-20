@@ -101,9 +101,10 @@ export function getLocaleDefaults(lang: Locale): LocaleDefaults {
 }
 
 /**
- * Strip Markdown syntax and collapse whitespace, then truncate at a word
- * boundary for use as a meta description. Aim for ~155 chars (search engines
- * truncate around 160).
+ * Strip Markdown syntax and collapse whitespace for use as a meta
+ * description. Aim for ~155 chars (search engines truncate around 160). A
+ * longer description is cut to its first sentence, and a first sentence that's
+ * still too long is truncated at a word boundary.
  */
 export function mdToMetaDescription(
   md: string | undefined | null,
@@ -112,15 +113,43 @@ export function mdToMetaDescription(
   if (!md) {
     return "";
   }
-  const text = md
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/^#+\s*/gm, "")
-    // Emphasis underscores sit at word edges; intraword ones (`as_count`) are
-    // part of an identifier and stay.
-    .replace(/(?<![A-Za-z0-9])_+|_+(?![A-Za-z0-9])/g, "")
-    .replace(/[*`]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+  const text = stripMd(md);
+  if (text.length <= maxLen) {
+    return text;
+  }
+  return truncateAtWord(firstSentence(md), maxLen);
+}
+
+function stripMd(md: string): string {
+  return (
+    md
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/^#+\s*/gm, "")
+      // Emphasis underscores sit at word edges; intraword ones (`as_count`) are
+      // part of an identifier and stay.
+      .replace(/(?<![A-Za-z0-9])_+|_+(?![A-Za-z0-9])/g, "")
+      .replace(/[*`]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
+}
+
+/**
+ * The first sentence of the first block. The block ends at a blank line,
+ * heading or list item, so a heading never runs into the text before it. A
+ * sentence ends at `.`, `!` or `?` followed by a space and a capital letter,
+ * so `e.g.` and `v1.2` don't end it.
+ */
+function firstSentence(md: string): string {
+  const [firstBlock = ""] = md
+    .trim()
+    .split(/\n\s*\n|\n(?=\s*(?:#+\s|[-*+]\s|\d+\.\s))/);
+  const text = stripMd(firstBlock);
+  const sentenceEnd = text.match(/^.+?[.!?](?=\s+[A-Z]|$)/);
+  return sentenceEnd ? sentenceEnd[0] : text;
+}
+
+function truncateAtWord(text: string, maxLen: number): string {
   if (text.length <= maxLen) {
     return text;
   }

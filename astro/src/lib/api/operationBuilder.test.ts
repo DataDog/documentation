@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
 import type { OpenAPIV3 } from "openapi-types";
 import {
+  buildCurlByRegion,
+  buildPlaintextCurl,
+  extractOauthScopes,
+  extractOauthScopesMatch,
   extractPermissionsMatch,
   extractRequestBody,
   extractResponses,
@@ -165,6 +169,43 @@ describe("extractPermissionsMatch", () => {
   });
 });
 
+describe("extractOauthScopes", () => {
+  // Each entry in `security` is an alternative: any one of them is enough.
+  it("lists every scope when separate AuthZ entries are alternatives", () => {
+    const security = [
+      { AuthZ: ["monitors_write"] },
+      { AuthZ: ["monitors_draft_write"] },
+    ];
+
+    expect(extractOauthScopes(security)).toEqual([
+      "monitors_write",
+      "monitors_draft_write",
+    ]);
+    expect(extractOauthScopesMatch(security)).toBe("any");
+  });
+
+  // Scopes in one entry are all required, so there's no match to state.
+  it("keeps the scopes of a single entry, without a match", () => {
+    const security = [{ AuthZ: ["usage_read", "billing_read"] }];
+
+    expect(extractOauthScopes(security)).toEqual([
+      "usage_read",
+      "billing_read",
+    ]);
+    expect(extractOauthScopesMatch(security)).toBeUndefined();
+  });
+
+  it("ignores security entries other than AuthZ", () => {
+    const security: OpenAPIV3.SecurityRequirementObject[] = [
+      { apiKeyAuth: [], appKeyAuth: [] },
+      { AuthZ: ["dashboards_read"] },
+    ];
+
+    expect(extractOauthScopes(security)).toEqual(["dashboards_read"]);
+    expect(extractOauthScopesMatch(security)).toBeUndefined();
+  });
+});
+
 describe("extractRequestBody content types", () => {
   const objectSchema = (field: string) => ({
     type: "object" as const,
@@ -244,6 +285,25 @@ describe("extractResponses content types", () => {
     expect(response.examples).toBeUndefined();
   });
 
+  it("builds the example from the schema, as Hugo does, ignoring the spec's examples", () => {
+    const response = responseFor({
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: { id: { type: "string" } },
+        },
+        examples: { default: { value: { id: "from-spec" } } },
+      },
+    });
+
+    expect(response.examples).toEqual([
+      {
+        name: "Example",
+        value: JSON.stringify({ id: "string" }, null, 2),
+      },
+    ]);
+  });
+
   it("prefers application/json when a response offers several content types", () => {
     const response = responseFor({
       "text/csv": { schema: objectSchema("row") },
@@ -251,5 +311,50 @@ describe("extractResponses content types", () => {
     });
 
     expect(response.schema?.map((field) => field.name)).toEqual(["data"]);
+  });
+});
+
+describe("curl site comment", () => {
+  const twoSiteSpec = {
+    ...spec,
+    servers: [
+      {
+        url: "https://{subdomain}.{site}",
+        variables: {
+          site: {
+            default: "datadoghq.com",
+            enum: ["datadoghq.com", "datadoghq.eu"],
+          },
+          subdomain: { default: "api" },
+        },
+      },
+    ],
+  } as OpenAPIV3.Document;
+  const operation = { responses: {} } as OpenAPIV3.OperationObject;
+  const noParams = { path: [], query: [], header: [] };
+
+  it("lists the operation's other sites after DD_SITE in the .md curl", () => {
+    const curl = buildPlaintextCurl(
+      twoSiteSpec,
+      "get",
+      "/api/v1/validate",
+      operation,
+      noParams,
+    );
+    expect(curl).toContain('export DD_SITE="datadoghq.com" # Or datadoghq.eu');
+  });
+
+  it("leaves the site comment out of the per-site HTML curl", () => {
+    const curlByRegion = buildCurlByRegion(
+      twoSiteSpec,
+      "get",
+      "/api/v1/validate",
+      operation,
+      noParams,
+    );
+    expect(Object.keys(curlByRegion)).toHaveLength(2);
+    for (const curl of Object.values(curlByRegion)) {
+      expect(curl).not.toContain("# Or");
+    }
   });
 });

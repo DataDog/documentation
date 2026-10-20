@@ -24,6 +24,5 @@
         "gov": "https://api.ddog-gov.com/api/v1/validate"
       }
     }
-  ],
-  "deprecated": false
+  ]
 }

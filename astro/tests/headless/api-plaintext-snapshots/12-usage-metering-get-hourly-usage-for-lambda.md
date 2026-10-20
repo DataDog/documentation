@@ -1,6 +1,6 @@
 ---
 title: Get hourly usage for Lambda
-description: "Get hourly usage for Lambda. Note: This endpoint has been deprecated. Hourly usage data for all products is now available in the Get hourly usage by…"
+description: Get hourly usage for Lambda.
 breadcrumbs: Docs > API > Get hourly usage for Lambda
 ---
 
@@ -10,22 +10,20 @@ breadcrumbs: Docs > API > Get hourly usage for Lambda
 
 ## v1 (deprecated)
 
-{% alert level="warning" %}
-This endpoint is deprecated.
-{% /alert %}
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/aws_lambda     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/aws_lambda |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/aws_lambda |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/aws_lambda      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
+
+### Overview
 
 Get hourly usage for Lambda.
 **Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering.md#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration.md) for the associated migration guide.
-
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/aws_lambda     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/aws_lambda |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/aws_lambda |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/aws_lambda      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
 
 This endpoint requires the `usage_read` permission.
 
@@ -35,10 +33,10 @@ OAuth apps require the `usage_read` authorization [scope](https://docs.datadoghq
 
 #### Query Strings
 
-| Parent field | Field                 | Type   | Description                                                                                               |
-| ------------ | --------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
-|              | start_hr [*required*] | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.      |
-|              | end_hr                | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour. |
+| Field                 | Type   | Description                                                                                               |
+| --------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| start_hr [*required*] | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.      |
+| end_hr                | string | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour. |
 
 ### Response
 
@@ -46,6 +44,8 @@ OAuth apps require the `usage_read` authorization [scope](https://docs.datadoghq
 {% tab label="200" %}
 OK
 
+{% tabs %}
+{% tab label="Model" %}
 Response containing the number of Lambda functions and sum of the invocations of all Lambda functions
 for each hour for a given organization.
 
@@ -59,6 +59,24 @@ for each hour for a given organization.
 | usage        | public_id       | string    | The organization public ID.                                                 |
 {% /tab %}
 
+{% tab label="Example" %}
+```json
+{
+  "usage": [
+    {
+      "func_count": "integer",
+      "hour": "2019-09-19T10:00:00.000Z",
+      "invocations_sum": "integer",
+      "org_name": "string",
+      "public_id": "string"
+    }
+  ]
+}
+```
+{% /tab %}
+{% /tabs %}
+{% /tab %}
+
 {% tab label="400" %}
 Bad Request
 
@@ -66,9 +84,9 @@ Bad Request
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -90,9 +108,9 @@ Forbidden - User is not authorized
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -114,9 +132,9 @@ Too many requests
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -141,13 +159,13 @@ Error response object.
 export start_hr="CHANGE_ME"
 
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}" \
--H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
--H "Accept: application/json"
+curl -X GET "https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ${DD_BEARER_TOKEN}"
 ```
 {% /tab %}
 
@@ -186,7 +204,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -218,7 +236,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 

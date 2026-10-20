@@ -10,17 +10,19 @@ breadcrumbs: Docs > API > Get all dashboard lists
 
 ## v1 (latest)
 
-Fetch all of your existing dashboard list definitions.
+| Datadog site      | API endpoint                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/dashboard/lists/manual     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/dashboard/lists/manual      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
 
-| Datadog site      | API endpoint                                                        |
-| ----------------- | ------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/dashboard/lists/manual     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/dashboard/lists/manual      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
+### Overview
+
+Fetch all of your existing dashboard list definitions.
 
 This endpoint requires the `dashboards_read` permission.
 
@@ -57,6 +59,16 @@ Information on your dashboard lists.
 {
   "dashboard_lists": [
     {
+      "author": {
+        "email": "string",
+        "handle": "string",
+        "name": "string"
+      },
+      "created": "2019-09-19T10:00:00.000Z",
+      "dashboard_count": "integer",
+      "id": "integer",
+      "is_favorite": false,
+      "modified": "2019-09-19T10:00:00.000Z",
       "name": "My Dashboard",
       "type": "manual_dashboard_list"
     }
@@ -74,9 +86,9 @@ Forbidden
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -98,9 +110,9 @@ Too many requests
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -122,13 +134,13 @@ Error response object.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/dashboard/lists/manual" \
--H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
--H "Accept: application/json"
+curl -X GET "https://api.${DD_SITE}/api/v1/dashboard/lists/manual" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ${DD_BEARER_TOKEN}"
 ```
 {% /tab %}
 
@@ -166,7 +178,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -193,7 +205,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 

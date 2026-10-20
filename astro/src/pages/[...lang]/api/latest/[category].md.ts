@@ -18,7 +18,6 @@ import {
 import { apiBreadcrumbs, categoryMetaDescription } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
-import { alertNode } from "@components/Alert/plaintext/Alert";
 import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
 import {
   buildPlaintextPage,
@@ -38,12 +37,6 @@ function apiCategoryBody(
     heading(1, category.name),
     ...siteSupportNoteNodes(pathname, lang),
   ];
-
-  if (category.deprecated) {
-    contents.push(
-      alertNode("warning", nodesFromMd("This endpoint is deprecated.")),
-    );
-  }
 
   if (category.description) {
     contents.push(...nodesFromMd(category.description.trim()));

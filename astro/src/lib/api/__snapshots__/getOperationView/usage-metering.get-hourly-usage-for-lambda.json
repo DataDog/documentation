@@ -103,6 +103,12 @@
                 }
               ]
             }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"usage\": [\n    {\n      \"func_count\": \"integer\",\n      \"hour\": \"2019-09-19T10:00:00.000Z\",\n      \"invocations_sum\": \"integer\",\n      \"org_name\": \"string\",\n      \"public_id\": \"string\"\n    }\n  ]\n}"
+            }
           ]
         },
         {
@@ -176,29 +182,29 @@
           "entries": [
             {
               "description": "Get hourly usage for Lambda curl example",
-              "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\"",
+              "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "us3": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "us5": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "eu": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "ap1": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "ap2": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "gov": {
-                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 }
               }
             }

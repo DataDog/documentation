@@ -38,7 +38,9 @@ import {
   extractPermissions,
   extractPermissionsMatch,
   extractOauthScopes,
+  extractOauthScopesMatch,
   buildCurlByRegion,
+  buildPlaintextCurl,
   buildRunCommandByRegion,
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
@@ -82,7 +84,6 @@ let _logicalGroups: Map<string, RawOperation[]> | null = null;
  * Aggregates categories from these OpenAPI spec keys:
  *   - `tags[].name`
  *   - `tags[].description`
- *   - `tags[].x-deprecated`
  *   - `paths.{path}.{method}.tags` (first tag → category slug)
  *   - `paths.{path}.{method}.operationId`
  *   - `paths.{path}.{method}.summary`
@@ -204,7 +205,6 @@ interface CategoryMetadata {
   name: string;
   slug: string;
   description: string;
-  deprecated: boolean;
 }
 
 /* ------------------------------------------------------------------ */
@@ -347,7 +347,6 @@ function buildCategories(lang: Locale): ApiCategory[] {
       slug: meta.slug,
       description: meta.description,
       operations,
-      deprecated: meta.deprecated,
     };
   });
   categories.sort(compareCategoriesByName);
@@ -391,8 +390,7 @@ function collectCategoryMetadataFromSpecTags(
 ): CategoryMetadata[] {
   const spec = getOpenApiDocument(version);
   const overlay = getTranslationOverlay(version, lang);
-  type ApiTagObject = OpenAPIV3.TagObject & { "x-deprecated"?: boolean };
-  const tags = (spec.tags ?? []) as ApiTagObject[];
+  const tags = spec.tags ?? [];
 
   const result: CategoryMetadata[] = [];
   for (const tag of tags) {
@@ -405,7 +403,6 @@ function collectCategoryMetadataFromSpecTags(
       name: translated.name,
       slug,
       description: translated.description ?? "",
-      deprecated: tag["x-deprecated"] === true,
     });
   }
   return result;
@@ -434,7 +431,6 @@ function collectImplicitCategoryMetadataFromOperations(
       name: translated.name,
       slug: op.categorySlug,
       description: "",
-      deprecated: false,
     });
   }
   return result;
@@ -531,6 +527,7 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const permissions = extractPermissions(op.operation);
   const permissionsMatch = extractPermissionsMatch(op.operation);
   const oauthScopes = extractOauthScopes(op.operation.security);
+  const oauthScopesMatch = extractOauthScopesMatch(op.operation.security);
   // The scopes page anchors each API section by its raw tag name, not by
   // the (possibly overridden) category slug.
   const oauthScopesAnchor = oauthScopes
@@ -565,6 +562,7 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     permissions,
     permissionsMatch,
     oauthScopes,
+    oauthScopesMatch,
     oauthScopesAnchor,
     regionUrls,
     pathParams: params.pathFields,
@@ -675,9 +673,15 @@ function buildCodeExamplesForOperation(
     params,
     requestBodyJson,
   );
-  const regionKeys = Object.keys(curlByRegion);
-  const defaultRegionKey = regionKeys[0] ?? "us";
-  const defaultCurl = curlByRegion[defaultRegionKey] ?? "";
+  // The HTML renders `regionVariants`, so `code` only reaches the .md.
+  const plaintextCurl = buildPlaintextCurl(
+    spec,
+    op.method,
+    op.pathStr,
+    op.operation,
+    params,
+    requestBodyJson,
+  );
 
   const curlVariants: Record<string, { code: string }> = {};
   for (const [key, code] of Object.entries(curlByRegion)) {
@@ -697,7 +701,7 @@ function buildCodeExamplesForOperation(
       entries: [
         {
           description: `${summary} curl example`,
-          code: defaultCurl,
+          code: plaintextCurl,
           syntax: "bash",
           regionVariants: curlVariants,
         },

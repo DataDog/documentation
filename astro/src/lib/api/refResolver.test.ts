@@ -108,6 +108,32 @@ describe("schemaToFields", () => {
     expect(fields.length).toBeGreaterThan(0);
   });
 
+  // Hugo cuts a cycle off at the field that repeats, so prod shows that
+  // field with nothing under it.
+  it("leaves a field that repeats its schema with no recursive row under it", () => {
+    const spec = {
+      components: {
+        schemas: {
+          Tree: {
+            type: "object",
+            properties: {
+              children: {
+                type: "array",
+                items: { $ref: "#/components/schemas/Tree" },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const [children] = schemaToFields(spec, {
+      $ref: "#/components/schemas/Tree",
+    });
+    expect(children.name).toBe("children");
+    expect(children).not.toHaveProperty("children");
+  });
+
   it("converts enum values", () => {
     const spec = {};
     const schema = {
@@ -1634,5 +1660,53 @@ describe("a $ref's own description and deprecated flag", () => {
     const [apmQuery] = schemaToFields(spec, schema);
     expect(apmQuery.deprecated).toBe(true);
     expect(apmQuery.description).toBe("The log query.");
+  });
+});
+
+describe("default values", () => {
+  it("keeps false and 0 defaults", () => {
+    const fields = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: {
+          enabled: { type: "boolean", default: false },
+          count: { type: "integer", default: 0 },
+        },
+      },
+    );
+
+    expect(fields.map((field) => field.defaultValue)).toEqual(["false", "0"]);
+  });
+
+  // A bare empty string would render as an empty code span.
+  it("writes an empty-string default as a quoted empty string", () => {
+    const [property] = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: { prefix: { type: "string", default: "" } },
+      },
+    );
+    const [primitive] = schemaToFields({}, { type: "string", default: "" });
+    const [param] = paramsToFields({}, [
+      { name: "prefix", in: "query", schema: { type: "string", default: "" } },
+    ]);
+
+    expect(property.defaultValue).toBe('""');
+    expect(primitive.defaultValue).toBe('""');
+    expect(param.defaultValue).toBe('""');
+  });
+
+  it("leaves other string defaults unquoted", () => {
+    const [field] = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: { kind: { type: "string", default: "account" } },
+      },
+    );
+
+    expect(field.defaultValue).toBe("account");
   });
 });

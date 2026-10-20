@@ -28,7 +28,10 @@ describe("toCategorySlug", () => {
 
   it("applies the slug overrides", () => {
     expect(toCategorySlug("Case Management")).toBe("cases");
-    expect(toCategorySlug("Scorecards")).toBe("service-scorecards");
+  });
+
+  it("keeps Scorecards at its tag slug, which prod treats as canonical", () => {
+    expect(toCategorySlug("Scorecards")).toBe("scorecards");
   });
 });
 

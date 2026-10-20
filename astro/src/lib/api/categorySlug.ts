@@ -11,7 +11,6 @@
 /** Tag slugs whose category page lives at a different slug. */
 const SLUG_OVERRIDES: Record<string, string> = {
   "case-management": "cases",
-  scorecards: "service-scorecards",
 };
 
 /**

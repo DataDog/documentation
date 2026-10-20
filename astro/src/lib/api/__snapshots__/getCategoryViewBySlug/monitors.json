@@ -654,6 +654,5 @@
         "gov": "https://api.ddog-gov.com/api/v2/monitor/template/{template_id}/validate"
       }
     }
-  ],
-  "deprecated": false
+  ]
 }

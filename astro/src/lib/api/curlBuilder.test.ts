@@ -46,7 +46,7 @@ describe("buildCurlCommand", () => {
     });
 
     expect(result).toContain("curl -X GET");
-    expect(result).toContain("https://api.datadoghq.com/api/v1/dashboard");
+    expect(result).toContain("https://api.${DD_SITE}/api/v1/dashboard");
     expect(result).toContain("DD-API-KEY");
     expect(result).toContain("DD-APPLICATION-KEY");
     expect(result).toContain('-H "Accept: application/json"');
@@ -150,8 +150,59 @@ describe("buildCurlCommand", () => {
       site: "datadoghq.eu",
     });
 
-    expect(result).toContain("https://api.datadoghq.eu/api/v1/dashboard");
-    expect(result).toContain('DD_SITE="datadoghq.eu"');
+    expect(result).toContain('export DD_SITE="datadoghq.eu"');
+  });
+
+  it("reads the site from DD_SITE in the URL", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/dashboard",
+      site: "datadoghq.eu",
+    });
+
+    expect(result).toContain('"https://api.${DD_SITE}/api/v1/dashboard"');
+    expect(result).not.toContain("https://api.datadoghq.eu");
+  });
+
+  it("lists the other sites in a comment after DD_SITE", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/dashboard",
+      site: "datadoghq.com",
+      otherSites: ["us3.datadoghq.com", "datadoghq.eu"],
+    });
+
+    expect(result).toContain(
+      'export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, datadoghq.eu',
+    );
+  });
+
+  it("adds no site comment when there are no other sites", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/dashboard",
+      otherSites: [],
+    });
+
+    expect(result).toContain('export DD_SITE="datadoghq.com"\n');
+  });
+
+  it("orders headers as Hugo does: Accept, Content-Type, then auth", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v1/dashboard",
+      requestBodyJson: "{}",
+      security: [{ apiKeyAuth: [] }],
+    });
+
+    expect(result).toContain(
+      [
+        '-H "Accept: application/json" \\',
+        '-H "Content-Type: application/json" \\',
+        '-H "DD-API-KEY: ${DD_API_KEY}" \\',
+        "-d @- << EOF",
+      ].join("\n"),
+    );
   });
 
   it("uses custom subdomain", () => {
@@ -162,7 +213,7 @@ describe("buildCurlCommand", () => {
       subdomain: "http-intake",
     });
 
-    expect(result).toContain("https://http-intake.datadoghq.com/api/v1/logs");
+    expect(result).toContain("https://http-intake.${DD_SITE}/api/v1/logs");
   });
 
   it("respects security requirements for auth headers", () => {

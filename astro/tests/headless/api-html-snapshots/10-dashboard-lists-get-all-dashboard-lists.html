@@ -847,6 +847,16 @@
                               ><code><span class="line"><span style="color:var(--color-panel-text)">{</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">dashboard_lists</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">    {</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">author</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: {</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">email</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">handle</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      },</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">created</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"2019-09-19T10:00:00.000Z"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">dashboard_count</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"integer"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">id</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"integer"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">is_favorite</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-keyword)">false</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">modified</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"2019-09-19T10:00:00.000Z"</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"My Dashboard"</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">type</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"manual_dashboard_list"</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">    }</span></span>
@@ -1168,9 +1178,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -1199,9 +1209,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -1230,9 +1240,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -1261,9 +1271,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.eu/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -1292,9 +1302,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -1323,9 +1333,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -1354,9 +1364,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ddog-gov.com/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>

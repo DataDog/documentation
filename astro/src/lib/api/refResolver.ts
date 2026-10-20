@@ -485,18 +485,9 @@ export function schemaToFields(
   if (schema.$ref) {
     const ref: string = schema.$ref;
 
-    if (visited.has(ref)) {
-      return [
-        {
-          name: "(recursive)",
-          type: refName(ref),
-          required: false,
-          deprecated: false,
-          readOnly: false,
-          description: `Circular reference to ${refName(ref)}.`,
-        },
-      ];
-    }
+    // Hugo cuts a cycle off here, so the field that repeats the schema has
+    // no rows under it.
+    if (visited.has(ref)) return [];
 
     const resolved = resolveRef(spec, ref);
     if (!resolved) return [];
@@ -624,7 +615,7 @@ export function schemaToFields(
     field.enumValues = schema.enum.map(String);
   }
   if (schema.default !== undefined) {
-    field.defaultValue = String(schema.default);
+    field.defaultValue = formatDefault(schema.default);
   }
 
   return [field];
@@ -718,6 +709,14 @@ function stripFields(
 /* ------------------------------------------------------------------ */
 
 /**
+ * The text shown for a schema `default`. An empty string is written as `""`,
+ * since a bare empty string would render as an empty code span.
+ */
+function formatDefault(value: unknown): string {
+  return value === "" ? '""' : String(value);
+}
+
+/**
  * Convert an array of OpenAPI parameter objects (path, query, header)
  * into `SchemaField[]`.
  *
@@ -773,7 +772,7 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
       field.enumValues = paramSchema.enum.map(String);
     }
     if (paramSchema.default !== undefined) {
-      field.defaultValue = String(paramSchema.default);
+      field.defaultValue = formatDefault(paramSchema.default);
     }
 
     return field;
@@ -1036,7 +1035,7 @@ function propertyToField(
     field.enumValues = resolved.enum.map(String);
   }
   if (resolved.default !== undefined) {
-    field.defaultValue = String(resolved.default);
+    field.defaultValue = formatDefault(resolved.default);
   }
 
   return field;
