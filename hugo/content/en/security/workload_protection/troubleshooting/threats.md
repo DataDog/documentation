@@ -7,8 +7,6 @@ If you experience issues with Workload Protection, use the following troubleshoo
 
 ## Security Agent flare
 
-<div class="alert alert-warning">The Security Agent is required for Workload Protection. Without it, no Workload Protection events reach Datadog.</div>
-
 Similar to the [Agent flare][3], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 The flare asks for confirmation before upload, so you may review the content before the Security Agent sends it.
