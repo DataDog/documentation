@@ -22,13 +22,6 @@ Online Experiments compare multiple versions of an LLM application or agent on l
 
 Use Online Experiments to validate a change, such as a new model, prompt, or tool, against real users after you test it offline.
 
-| | [Experiments][14] | Online Experiments |
-|---|---|---|
-| **Traffic** | Records from a dataset | Live production traffic |
-| **Variant assignment** | Each run uses one configuration | Feature flag assigns each subject to a variant |
-| **Measurement** | Evaluators score each dataset record | Evaluation scores on production spans, aggregated per variant |
-| **When to use** | Before you ship a change | When you roll out a change to users |
-
 Setting up an Online Experiment involves the following steps:
 
 1. Create a Datadog feature flag.
@@ -176,5 +169,3 @@ If the experiment reports missing metric data, confirm that:
 [11]: /experiments/defining_metrics/?tab=agentobservability#create-a-metric-from-agent-observability-data
 [12]: /experiments/
 [13]: /experiments/concepts/subject_types/
-[14]: /llm_observability/improve/experiments/
-[15]: /llm_observability/improve/datasets/
