@@ -198,3 +198,41 @@ describe("ApiEndpoint argument tables", () => {
     expect(html).not.toContain("Header Parameters");
   });
 });
+
+describe("ApiEndpoint request heading", () => {
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  const requestBody = (required: boolean) => ({
+    required,
+    description: "Thing payload.",
+    schema: [],
+    examples: [],
+  });
+
+  it("titles a required body Request, then Body Data (required), as Hugo does", async () => {
+    const html = await renderEndpoint({ requestBody: requestBody(true) });
+
+    expect(html).toMatch(
+      /<h3[^>]*>Request<\/h3>\s*<h4[^>]*>Body Data \(required\)<\/h4>/,
+    );
+    expect(html).not.toContain("Request Body");
+  });
+
+  it("leaves the marker off an optional body, as Hugo does", async () => {
+    const html = await renderEndpoint({ requestBody: requestBody(false) });
+
+    expect(html).toMatch(/<h4[^>]*>Body Data<\/h4>/);
+    expect(html).not.toContain("(optional)");
+  });
+});

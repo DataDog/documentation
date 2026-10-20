@@ -49,6 +49,11 @@
   margin: 0 0 var(--space-sm);
 }
 
+/* As in Hugo, "Body Data (required)" shows as "Body Data (Required)". */
+.api-endpoint__body-label {
+  text-transform: capitalize;
+}
+
 .api-endpoint__overview-heading {
   margin-bottom: var(--space-sm);
 }

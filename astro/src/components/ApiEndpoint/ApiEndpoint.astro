@@ -84,9 +84,8 @@ const hasParams =
     >
       {/* Status alerts */}
       {/* MISSING_TRANSLATION_LABEL: translate the unstable/region-not-supported messages,
-        permissions label, "Request Body" heading, and "(required)/(optional)"
-        markers once authoritative translation keys exist in the Hugo i18n
-        bundle. */}
+        permissions label, and the "Body Data" label and "(required)" marker
+        once authoritative translation keys exist in the Hugo i18n bundle. */}
       {ep.unstable && (
         <Alert level="warning">
           <Fragment
@@ -194,12 +193,13 @@ const hasParams =
         </div>
       )}
 
-      {/* Request Body */}
+      {/* Request */}
       {ep.requestBody && (
         <div class={cl("api-endpoint__section")}>
-          <h3>
-            Request Body {ep.requestBody.required ? "(required)" : "(optional)"}
-          </h3>
+          <h3>{translate("request")}</h3>
+          <h4 class={cl("api-endpoint__body-label")}>
+            Body Data{ep.requestBody.required && " (required)"}
+          </h4>
           {ep.requestBody.description && (
             <p set:html={renderMarkdownInline(ep.requestBody.description)} />
           )}

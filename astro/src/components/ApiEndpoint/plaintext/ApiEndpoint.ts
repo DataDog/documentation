@@ -173,8 +173,8 @@ function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.requestBody) {
     return NO_CONTENT;
   }
-  const suffix = ep.requestBody.required ? "(required)" : "(optional)";
-  const contents: MarkdocNode[] = [heading(3, `Request Body ${suffix}`)];
+  const label = ep.requestBody.required ? "Body Data (required)" : "Body Data";
+  const contents: MarkdocNode[] = [heading(3, "Request"), heading(4, label)];
   if (ep.requestBody.description) {
     contents.push(...nodesFromMd(ep.requestBody.description));
   }

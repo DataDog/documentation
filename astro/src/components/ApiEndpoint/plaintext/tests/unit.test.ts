@@ -204,4 +204,28 @@ describe("apiEndpointNodes", () => {
     expect(queryAt).toBeGreaterThan(pathAt);
     expect(headerAt).toBeGreaterThan(queryAt);
   });
+  it("titles a required body Request, then Body Data (required)", () => {
+    const out = render({
+      ...baseEndpoint,
+      requestBody: {
+        required: true,
+        description: "Thing payload.",
+        schema: [],
+        examples: [],
+      },
+    });
+    expect(out).toMatch(
+      /^### Request\n\n#### Body Data \(required\)\n\nThing payload\./m,
+    );
+    expect(out).not.toContain("Request Body");
+  });
+
+  it("leaves the marker off an optional body", () => {
+    const out = render({
+      ...baseEndpoint,
+      requestBody: { required: false, schema: [], examples: [] },
+    });
+    expect(out).toMatch(/^#### Body Data$/m);
+    expect(out).not.toContain("(optional)");
+  });
 });
