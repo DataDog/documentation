@@ -116,7 +116,7 @@ describe("apiEndpointNodes", () => {
   });
 
   it("leaves out the Overview heading when there is no description", () => {
-    const out = render({ ...baseEndpoint, description: undefined });
+    const out = render({ ...baseEndpoint, description: "" });
     expect(out).not.toContain("### Overview");
   });
 
