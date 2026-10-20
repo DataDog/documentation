@@ -14,3 +14,16 @@ entries:
       - ListQuotas
       - UpdateQuota
     title: Promote usage quota pending limits to public unstable
+  - change_type: added
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40866
+    operations:
+      - PublicCancelTemporaryGrantRequest
+      - PublicCreateTemporaryGrantRequest
+      - PublicDecideTemporaryGrantRequest
+      - PublicGetMyTemporaryGrantRequest
+      - PublicGetTemporaryGrantRequest
+      - PublicListMyTemporaryGrantRequests
+      - PublicListTemporaryGrantRequests
+      - PublicRevokeRequestedTemporaryGrant
+    title: Add temporary AI-credit grant request APIs

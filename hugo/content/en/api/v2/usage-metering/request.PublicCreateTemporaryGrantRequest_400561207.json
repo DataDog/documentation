@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "temporary_grant_requests",
+    "attributes": {
+      "total": 200,
+      "justification": "SDK temporary grant request test"
+    }
+  }
+}

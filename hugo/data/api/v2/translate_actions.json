@@ -2300,12 +2300,6 @@
     "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
     "summary": "Get a saved filter"
   },
-  "UpdateSavedFilterAttributes": {
-    "description": "Partially updates a saved filter. Supports both `LIST` and `RULES` filters.\nSupply at least one of `name`, `description`, or `targeting_rules`. Omitted or null fields\nare preserved. Supplying `targeting_rules` replaces the entire collection and propagates\nchanges to every feature flag that references the saved filter.\nMetadata-only updates do not require edit permission or approval on those feature flags.\nRule updates require edit permission on all consumer flags and are rejected when approval\nis required, unless the caller has the `feature_flag_approvals_override` permission.\nThe optional `last_updated_at` field detects stale updates. It does not set the update time.",
-    "summary": "Patch a saved filter",
-    "request_description": "",
-    "request_schema_description": "Request to partially update a saved filter."
-  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -7974,6 +7968,24 @@
     "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
   },
+  "PublicListTemporaryGrantRequests": {
+    "description": "List all request statuses within the authenticated organization. Filter by pending status for the review queue. Requires Billing Edit, including for reads. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "List organization temporary grant requests"
+  },
+  "PublicGetTemporaryGrantRequest": {
+    "description": "Read an organization request, justification, decision, and linked grant state. Requires Billing Edit. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get an organization temporary grant request"
+  },
+  "PublicDecideTemporaryGrantRequest": {
+    "description": "Approve or deny the immutable submitted terms. Approval atomically writes the grant, audit, and request decision. An expired request cannot be approved. Requires Billing Edit. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Decide a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Approve or deny a pending request."
+  },
+  "PublicRevokeRequestedTemporaryGrant": {
+    "description": "Revoke only the grant still associated with this approved request. Request and audit history remain. A stale request cannot revoke a replacement grant. Requires Billing Edit. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Revoke a requested temporary grant"
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
@@ -8037,6 +8049,24 @@
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
+  },
+  "PublicListMyTemporaryGrantRequests": {
+    "description": "List the authenticated user's own requests, including decided requests. Other users' requests are never included. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "List your temporary grant requests"
+  },
+  "PublicCreateTemporaryGrantRequest": {
+    "description": "Submit a request for the authenticated human user with a target monthly limit in positive whole AI credits, justification, and optional expiry. Fractional credits are not accepted. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Create a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Create a request for the authenticated human user."
+  },
+  "PublicCancelTemporaryGrantRequest": {
+    "description": "Cancel an owned pending request. Retains request history and does not create or revoke a grant. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Cancel your temporary grant request"
+  },
+  "PublicGetMyTemporaryGrantRequest": {
+    "description": "Read an owned request, its decision, and its linked grant state. Requires an authenticated human user and the temporary-grants feature enabled for the organization. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get your temporary grant request"
   },
   "GetUsageAttributionTypes": {
     "description": "Get usage attribution types.",
