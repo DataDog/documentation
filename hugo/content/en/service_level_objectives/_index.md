@@ -111,7 +111,7 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 All users can view SLOs and [SLO status corrections](#slo-status-corrections), regardless of their associated [role][10]. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
 
-To create, edit, and delete status corrections, users require the `slos_corrections` permissions. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs. For the full list of permissions, see the [RBAC documentation][11].
+To create, edit, and delete status corrections, users require the `slos_corrections` permission. A user with this permission can make status corrections, even if they do not have the `slos_write` permission. To create a correction for a single SLO that has [granular access controls](#granular-access-controls), a user must also have edit access to that SLO. [Tag-based corrections](#tag-based-corrections) do not check granular access controls, so they apply to all SLOs that match the query, including restricted SLOs. For the full list of permissions, see the [RBAC documentation][11].
 
 ### Granular access controls
 
@@ -323,9 +323,9 @@ The 90-day limits per SLO are as follows:
 | Daily recurring   | 2             |
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
+| Yearly recurring  | 20            |
 
-<!-- TBD: Confirm whether a yearly recurring limit (20 per SLO) is user-facing. If so, add a "Yearly recurring" row. -->
-<!-- TBD: Confirm whether tag-based corrections have their own limits, and add them here if they do. -->
+These limits apply only to corrections created by SLO name. They do not apply to [tag-based corrections](#tag-based-corrections).
 
 You can configure status corrections in the UI, with the [SLO status corrections API][25], or with a [Terraform resource][26].
 
@@ -362,9 +362,10 @@ When you schedule a new [monitor downtime][30] by monitor tags, Datadog checks f
 2. Review the query and the SLOs that match it, select a {{< ui >}}Category{{< /ui >}}, and click {{< ui >}}Apply{{< /ui >}}.
 3. Save the downtime. Datadog creates the SLO correction when you save the downtime.
 
+To create a correction from a downtime, you need the `slos_corrections` permission.
+
 **Note**: The card does not appear when you edit an existing downtime.
 
-<!-- TBD: Confirm whether users need the slos_corrections permission for the correction to be created from a downtime, and add a note if so. -->
 <!-- TBD: Add a screenshot of the downtime card. -->
 
 #### Access in the UI
