@@ -122,7 +122,11 @@ Datadog signs every task it dispatches, and the runner verifies the signature be
 
 ## Rotating private runner credentials
 
-To rotate the credentials of a private runner without redeploying, run `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity` on a host or node Agent, or `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` for the Cluster Agent.
+To rotate the credentials of a private runner without redeploying, run the command for your environment:
+
+- **Linux host:** `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity`
+- **Container (including a node Agent):** `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity`
+- **Cluster Agent:** `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity`
 
 ## Further reading
 

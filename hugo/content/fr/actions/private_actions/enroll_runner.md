@@ -123,7 +123,11 @@ Datadog signe chaque tâche qu'il distribue, et l'exécuteur vérifie la signatu
 
 ## Rotation des identifiants privés de l'exécuteur {#rotating-private-runner-credentials}
 
-Pour faire pivoter les identifiants d'un exécuteur privé sans redéployer, exécutez `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity` sur un host ou un Agent de nœud, ou `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` pour l'Agent de cluster.
+Pour faire pivoter les identifiants d'un exécuteur privé sans redéployer, exécutez la commande correspondant à votre environnement :
+
+- **Host Linux :** `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity`
+- **Conteneur (y compris un Agent de nœud) :** `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity`
+- **Agent de cluster :** `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity`
 
 ## Pour aller plus loin {#further-reading}
 
