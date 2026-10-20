@@ -10361,6 +10361,11 @@ menu:
       parent: product_analytics
       identifier: pa_dashboard
       weight: 2
+    - name: Dashboard Reporter Agent
+      url: product_analytics/dashboards/dashboard_reporter_agent
+      parent: pa_dashboard
+      identifier: pa_dashboard_reporter_agent
+      weight: 201
     - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
