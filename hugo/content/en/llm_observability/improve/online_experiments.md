@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Online Experiments compare two versions of an LLM application or agent on live production traffic. Datadog Feature Flags assigns each [experiment subject][13], such as a user or an autonomous workflow run, to a control or treatment variant. An Agent Observability evaluation score measures the outcome for each subject, and [Datadog Experiments][12] determines whether the difference between variants is statistically significant.
+Online Experiments compare multiple versions of an LLM application or agent on live production traffic. Datadog Feature Flags assigns each [experiment subject][13], such as a user or an autonomous workflow run, to a control or treatment variant. An Agent Observability evaluation score measures the outcome for each subject, and [Datadog Experiments][12] determines whether the difference between variants is statistically significant.
 
 Use Online Experiments to validate a change, such as a new model, prompt, or tool, against real users after you test it offline.
 
