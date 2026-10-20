@@ -41,7 +41,7 @@ A provider connects an integration account to the models that callers can use th
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][2] and click {{< ui >}}New Provider{{< /ui >}}.
 2. Enter a display name and a unique slug. The slug is part of the model identifier that callers send in requests.
 3. Select the integration account that backs the provider. AI Gateway discovers and enables the models returned by that account.
-4. Optional: Set a cost multiplier. AI Gateway uses a custom price from the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11] when you enter one for a model, and it uses that price as entered. For every other model, it uses the auto-discovered price and applies the multiplier. Confirm the price shown for each model in the Model Catalog.
+4. Optional: Set a cost multiplier. For models with a custom price in the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], AI Gateway uses the custom price as entered and does not apply the multiplier. For all other models, AI Gateway uses the auto-discovered price and applies the multiplier. Confirm the price shown for each model in the Model Catalog.
 5. Review the discovered models. To route requests to a model that discovery does not return, add the model manually and set:
    - **Model ID**: the canonical identifier the client sends in the request, as `<PROVIDER_SLUG>/<MODEL_ID>`.
    - **Provider model ID**: the identifier sent to the upstream provider. Leave this blank to send the Model ID.
@@ -82,7 +82,7 @@ curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/
 
 1. Check the HTTP response and confirm the model that served the request.
 2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] to see requests, tokens, spend, errors, and latency for the selected time range.
-3. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect the Gateway span in Agent Observability. By default, all traces from the gateway appear under the `datadog-ai-gateway` application. You can change this by supplying `dd-tag-ml_app: <value>` in the request. The content recorded in the span depends on your [data capture](#configure-data-capture) setting.
+3. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect the Gateway span in Agent Observability. By default, all traces from AI Gateway appear under the `datadog-ai-gateway` application. To change this, send the `x-dd-tag-ml_app: <VALUE>` request header. The content recorded in the span depends on your [data capture](#configure-data-capture) setting.
 
 ## Send requests
 
@@ -139,7 +139,7 @@ A model served by any configured provider matches every enabled provider in your
 
 ### Fallback behavior
 
-AI Gateway tries the next provider or fallback destination when the current one cannot serve the request, or returns HTTP `401`, `402`, `403`, `408`, `429`, or `5xx`. A successful response, or any other `4xx` response (such as `400`, `404`, or `422`), is returned to the caller. If every attempt returns one of the fallback statuses, the caller receives the last of those responses. If no destination can serve the request, the request fails.
+AI Gateway tries the next provider or fallback destination when the current one cannot serve the request or returns HTTP `401`, `402`, `403`, `408`, `429`, or `5xx`. A successful response, or any other `4xx` response (such as `400`, `404`, or `422`), is returned to the caller. If every attempt returns one of the fallback statuses, the caller receives the last of those responses. If no destination can serve the request, the request fails.
 
 [Budgets](#set-budgets) in Block mode are checked per destination. If a budget blocks one destination, AI Gateway falls back to the next. If budgets block every destination, AI Gateway returns HTTP `402` until the budget window resets.
 
@@ -182,7 +182,7 @@ For tighter control over who can call models:
 A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, week, or month, and can block requests when the limit is reached.
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] and click {{< ui >}}New Budget{{< /ui >}}.
-2. Choose the traffic to match. Select {{< ui >}}Everything{{< /ui >}} to track all AI Gateway spend, or match a user, team, model, provider, or custom tag. Send a custom tag in a request header, for example `x-dd-tag-ai_agent: claudecode`. A request matches the budget when it includes every filter you selected. The form estimates historical matches and links to the matching spans in Agent Observability.
+2. Choose the traffic to match. Select {{< ui >}}Everything{{< /ui >}} to track all AI Gateway spend, or match a user, team, model, provider, or custom tag. Send a custom tag in an `x-dd-tag-<KEY>: <VALUE>` request header, for example `x-dd-tag-ai_agent: claudecode`. A request matches the budget when it includes every filter you selected. The form estimates historical matches and links to the matching spans in Agent Observability.
 3. Enter a spend limit and select a {{< ui >}}Daily{{< /ui >}}, {{< ui >}}Weekly{{< /ui >}}, or {{< ui >}}Monthly{{< /ui >}} window. The window follows the UTC calendar.
 4. Optional: Select {{< ui >}}Track existing usage for current period{{< /ui >}} to count spend already recorded in the current window. Spend from requests already in progress might not count toward the budget.
 5. Choose an enforcement mode and a warning threshold, then save the budget.
