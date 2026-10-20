@@ -1,0 +1,10 @@
+entries:
+  - change_type: added
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40771
+    operations:
+      - CreateDerivedMetric
+      - DeleteDerivedMetric
+      - GetDerivedMetric
+      - UpdateDerivedMetric
+    title: Publish derived metrics API documentation

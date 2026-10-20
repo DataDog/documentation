@@ -22,8 +22,8 @@ Before you set up AI Guard, ensure you have everything you need:
   | Permission                                    | Type  | Description                                                                                                                                                                                                     |
   |-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   | **AI Guard Evaluate** (`ai_guard_evaluate`)   | Write | Required to call the AI Guard evaluate API and to create an application key with the `ai_guard_evaluate` scope.                                                                                                 |
-  | **AI Guard View** (`ai_guard_view`)           | Read  | Required to view the AI Guard UI, including signals, spans, and read-only settings (service blocking policies, evaluation sensitivity, tool policies, tool allowlist). Also required to report false positives. |
-  | **AI Guard Write** (`ai_guard_write`)         | Write | Required to modify AI Guard configuration, including blocking policies, sensitive data scanning, tool policies, tool blocking, tool allowlist, and evaluation sensitivity thresholds.                           |
+  | **AI Guard View** (`ai_guard_view`)           | Read  | Required to view the AI Guard UI, including signals, spans, and read-only settings (service blocking policies, custom rules, evaluation sensitivity, tool policies, tool allowlist). Also required to report false positives. |
+  | **AI Guard Write** (`ai_guard_write`)         | Write | Required to modify AI Guard configuration, including blocking policies, custom rules, sensitive data scanning, tool policies, tool blocking, tool allowlist, and evaluation sensitivity thresholds.                           |
   | **User Access Manage** (`user_access_manage`) | Write | Required to create a restricted dataset that [limits access to AI Guard spans](#limit-access) with Data Access Control.                                                                                         |
 
 ### Usage limits
@@ -85,6 +85,7 @@ AI Guard provides settings to control how evaluations are enforced, how sensitiv
 
 On the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
 - [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Monitor only, or block unsafe requests
+- [{{< ui >}}Custom rules{{< /ui >}}](#custom-rules): Keywords and regular expressions that AI Guard always flags as unsafe
 - [{{< ui >}}Sensitive data scanning{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should scan for and redact sensitive data
 - [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): Additional information about the service that AI Guard uses during evaluation to reduce false positives
 
@@ -99,6 +100,18 @@ You can configure blocking at different levels of granularity, with more specifi
 - **Per environment**: Override the organization default for a specific environment.
 - **Per service**: Override the organization default for a specific service.
 - **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+
+#### Custom rules {#custom-rules}
+
+Custom rules flag messages that match a keyword or a regular expression as unsafe. Unlike [evaluation sensitivity](#evaluation-sensitivity) and [evaluation context](#evaluation-context), custom rules are deterministic: a message that matches a rule is always flagged. Custom rules require an exact match, so they don't detect variations of the content you want to block.
+
+AI Guard checks custom rules against the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. When a message matches a rule, AI Guard returns `DENY` with the `regexp-blocked` attack category, and the `reason` names the rule that matched. Whether AI Guard blocks the request depends on the [blocking policy](#blocking-policy).
+
+When you create or edit a policy, add rules under {{< ui >}}Custom Rules{{< /ui >}}:
+- {{< ui >}}Keywords{{< /ui >}}: Words or phrases to flag. Matching ignores case and matches whole words only. For example, `confidential` matches `Confidential` but not `confidentiality`. All keywords combined are limited to 1,000 characters.
+- {{< ui >}}Regular expressions{{< /ui >}}: Click {{< ui >}}Add an Expression{{< /ui >}}, then enter a name and a pattern. Each pattern is limited to 1,000 characters, and uses the [Sensitive Data Scanner regex syntax][21]. The name is optional, but Datadog recommends it: AI Guard displays it when a rule matches.
+
+As with the [blocking policy](#blocking-policy), custom rules follow the same precedence, with more specific settings taking priority. A policy inherits the custom rules of its parent. To replace them, turn on the {{< ui >}}Overridden{{< /ui >}} toggle. The inherited rules stay in the form, so you can keep, edit, or remove them. The policy does not merge its rules with the parent rules.
 
 #### Sensitive data scanning {#sensitive-data-scanning}
 
@@ -208,3 +221,4 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /security/ai_guard/setup/sensitive_data_redaction/
+[21]: /security/sensitive_data_scanner/scanning_rules/custom_rules/

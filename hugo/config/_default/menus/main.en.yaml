@@ -1624,21 +1624,26 @@ menu:
       identifier: bits_ai_live_debugger
       parent: bits_ai
       weight: 8
+    - name: Bits Release
+      url: bits_release/
+      identifier: bits_release
+      parent: bits_ai
+      weight: 9
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai
-      weight: 9
+      weight: 10
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 10
+      weight: 11
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 11
+      weight: 12
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2531,11 +2536,16 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
-    - name: Feature Flags
-      url: change_tracking/feature_flags/
+    - name: Change Types
+      url: change_tracking/change_types/
       parent: change_tracking
-      identifier: change_tracking_feature_flags
+      identifier: change_tracking_change_types
       weight: 1
+    - name: Feature Flags
+      url: change_tracking/change_types/feature_flags/
+      parent: change_tracking_change_types
+      identifier: change_tracking_feature_flags
+      weight: 101
     - name: Event Management
       url: events/
       pre: events
@@ -4557,16 +4567,6 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_client_side
       weight: 2032
-    - name: Android
-      url: tracing/trace_collection/custom_instrumentation/client-side/android/otel
-      parent: custom_instrumentation_client_side
-      identifier: custom_instrumentation_android
-      weight: 20321
-    - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/client-side/ios/otel
-      parent: custom_instrumentation_client_side
-      identifier: custom_instrumentation_ios
-      weight: 20322
     - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
@@ -5873,31 +5873,6 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
-    - name: Setup and Usage
-      url: llm_observability/improve/experiments/setup
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_setup
-      weight: 50301
-    - name: Analyzing Results
-      url: llm_observability/improve/experiments/analyzing_results
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_analyzing_results
-      weight: 50302
-    - name: Advanced Experiment Runs
-      url: llm_observability/improve/experiments/advanced_runs
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_advanced_runs
-      weight: 50303
-    - name: Prompt Optimization
-      url: llm_observability/improve/experiments/prompt_optimization
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_prompt_optimization
-      weight: 50304
-    - name: Experiments API
-      url: llm_observability/improve/experiments/api
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_api
-      weight: 50305
     - name: Data Access Control
       url: llm_observability/improve/access_control
       parent: llm_obs_improve
@@ -8080,16 +8055,21 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
+    - name: Muted Indicators
+      url: security/cloud_siem/ingest_and_enrich/muted_indicators
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_muted_indicators
+      weight: 103
     - name: Open Cybersecurity Schema Framework
       url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_open_cybersecurity_schema_framework
-      weight: 103
+      weight: 104
     - name: OCSF Processor
       url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor
       parent: cloud_siem_open_cybersecurity_schema_framework
       identifier: cloud_siem_ocsf_processor
-      weight: 10301
+      weight: 10401
     - name: Detect and Monitor
       url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
@@ -9302,6 +9282,11 @@ menu:
       parent: synthetics
       identifier: synthetics_explore
       weight: 10
+    - name: Overview Page
+      url: synthetics/explore/overview
+      parent: synthetics_explore
+      identifier: synthetics_explore_overview
+      weight: 800
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
@@ -10376,6 +10361,11 @@ menu:
       parent: product_analytics
       identifier: pa_dashboard
       weight: 2
+    - name: Dashboard Reporter Agent
+      url: product_analytics/dashboards/dashboard_reporter_agent
+      parent: pa_dashboard
+      identifier: pa_dashboard_reporter_agent
+      weight: 201
     - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
@@ -10789,6 +10779,11 @@ menu:
       url: account_management/teams/github/
       parent: account_management_teams
       weight: 902
+    - name: Provision with ServiceNow
+      identifier: account_management_provision_servicenow
+      url: account_management/teams/servicenow/
+      parent: account_management_teams
+      weight: 903
     - name: Governance Console
       identifier: account_management_governance_console
       url: account_management/governance_console/

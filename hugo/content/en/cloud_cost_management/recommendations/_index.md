@@ -420,6 +420,12 @@ multifiltersearch:
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
       resource_type: Managed Disk Snapshot
@@ -461,6 +467,12 @@ multifiltersearch:
       resource_type: Load Balancer
       recommendation_type: Delete Load Balancer
       recommendation_description: Load Balancer with 0 bytes transferred.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no ingested data or user queries that still incur retention or commitment-tier charges, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure

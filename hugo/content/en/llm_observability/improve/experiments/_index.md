@@ -5,7 +5,7 @@ aliases:
   - /llm_observability/experiments_preview
   - /llm_observability/experiments/
 further_reading:
-  - link: /llm_observability/improve/experiments/setup
+  - link: /llm_observability/guide/experiments
     tag: "Documentation"
     text: Set up and use Agent Observability Experiments
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
@@ -42,6 +42,10 @@ Agent Observability [Experiments][1] supports the entire lifecycle of building L
 - Run and manage experiments
 - Compare results to evaluate impact
 
+## Set up experiments
+
+Follow the [Set Up and Use Agent Observability Experiments][3] guide to install the SDK, configure credentials, create datasets, define tasks and evaluators, run experiments, and review results.
+
 ## Cookbooks
 
 For in-depth examples of what you can do with LLM Experiments, see Datadog's provided [Jupyter notebooks][2].
@@ -52,4 +56,5 @@ For in-depth examples of what you can do with LLM Experiments, see Datadog's pro
 
 [1]: https://app.datadoghq.com/llm/testing/experiments
 [2]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
+[3]: /llm_observability/guide/experiments/
 
