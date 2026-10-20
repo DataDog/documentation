@@ -66,7 +66,7 @@ For example, to see the documentation for the Datadog for Government sites, sele
 
 ## Access the Datadog for Government sites
 
-To get started with Datadog for Government, email [fedramp@datadoghq.com][4]. For information about security and compliance controls and frameworks, see the [Security page][1].
+To get started with Datadog for Government, email [fed-sales@datadoghq.com][4]. For information about security and compliance controls and frameworks, see the [Security page][1].
 
 ### US1-FED
 
@@ -83,4 +83,4 @@ The Datadog for Government site (US2-FED) is In Process for IL5 Authorization. U
 [1]: https://www.datadoghq.com/security/
 [2]: /agent/configuration/dual-shipping/
 [3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
-[4]: mailto:fedramp@datadoghq.com
+[4]: mailto:fed-sales@datadoghq.com
