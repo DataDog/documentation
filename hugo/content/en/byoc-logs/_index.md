@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-datadog-byoc-logs/"
   tag: "Blog"
   text: "Store and search logs at petabyte scale in your own infrastructure with Datadog BYOC Logs"
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 aliases:
   - /cloudprem/
 ---
