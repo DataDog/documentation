@@ -93,6 +93,8 @@ Tags on a `Scenario Outline` apply to every example.
 
 Explicit framework retries, such as `jest.retryTimes`, Mocha retries, Playwright retry settings, and Cucumber.js `--retry`, remain available when `noAutoRetry` is present.
 
+In Playwright serial groups, `noAutoRetry` excludes the entire group from Datadog retries so tests run with their prerequisites. Explicit Playwright retry settings still apply.
+
 ## Java
 
 Add a `com.datadoghq:dd-trace-api` dependency that matches the Datadog Java tracer version used by the tests. Import the annotations from `datadog.trace.api.civisibility`.
