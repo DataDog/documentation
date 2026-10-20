@@ -823,11 +823,19 @@ Object describing a monitor.
       "category": "runbook",
       "name": "Monitor Runbook",
       "resource_key": "12345",
-      "resource_type": "notebook",
+      "resource_type": "string",
       "url": "/notebooks/12345"
     }
   ],
-  "draft_status": "draft",
+  "created": "2019-09-19T10:00:00.000Z",
+  "creator": {
+    "email": "string",
+    "handle": "string",
+    "name": "string"
+  },
+  "deleted": "2019-09-19T10:00:00.000Z",
+  "draft_status": "string",
+  "id": "integer",
   "matching_downtimes": [
     {
       "end": 1412792983,
@@ -838,6 +846,9 @@ Object describing a monitor.
       "start": 1412792983
     }
   ],
+  "message": "string",
+  "modified": "2019-09-19T10:00:00.000Z",
+  "multi": false,
   "name": "My monitor",
   "options": {
     "aggregation": {
@@ -845,20 +856,29 @@ Object describing a monitor.
       "metric": "metrics.name",
       "type": "count"
     },
-    "device_ids": [
-      "laptop_large"
-    ],
-    "include_tags": true,
-    "min_failure_duration": 0,
-    "min_location_failed": 1,
-    "new_host_delay": 300,
-    "notification_preset_name": "show_all",
+    "device_ids": [],
+    "enable_logs_sample": false,
+    "enable_samples": false,
+    "escalation_message": "string",
+    "evaluation_delay": "integer",
+    "group_retention_duration": "string",
+    "groupby_simple_monitor": false,
+    "include_tags": false,
+    "locked": false,
+    "min_failure_duration": "integer",
+    "min_location_failed": "integer",
+    "new_group_delay": "integer",
+    "new_host_delay": "integer",
+    "no_data_timeframe": "integer",
+    "notification_preset_name": "string",
     "notify_audit": false,
-    "on_missing_data": "default",
-    "renotify_interval": null,
-    "renotify_statuses": [
-      "alert"
-    ],
+    "notify_by": [],
+    "notify_no_data": false,
+    "on_missing_data": "string",
+    "renotify_interval": "integer",
+    "renotify_occurrences": "integer",
+    "renotify_statuses": [],
+    "require_full_window": false,
     "scheduling_options": {
       "custom_schedule": {
         "recurrences": [
@@ -876,7 +896,23 @@ Object describing a monitor.
         "timezone": "Europe/Paris"
       }
     },
-    "timeout_h": null,
+    "silenced": {
+      "<any-key>": "integer"
+    },
+    "synthetics_check_id": "string",
+    "threshold_windows": {
+      "recovery_window": "string",
+      "trigger_window": "string"
+    },
+    "thresholds": {
+      "critical": "number",
+      "critical_recovery": "number",
+      "ok": "number",
+      "unknown": "number",
+      "warning": "number",
+      "warning_recovery": "number"
+    },
+    "timeout_h": "integer",
     "variables": [
       {
         "compute": {
@@ -891,7 +927,9 @@ Object describing a monitor.
             "facet": "status",
             "limit": 10,
             "sort": {
-              "order": "asc"
+              "aggregation": "avg",
+              "metric": "string",
+              "order": "string"
             }
           }
         ],
@@ -906,8 +944,23 @@ Object describing a monitor.
       }
     ]
   },
-  "overall_state": "Alert",
+  "overall_state": "string",
+  "priority": "integer",
   "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",
+  "restricted_roles": [],
+  "state": {
+    "groups": {
+      "<any-key>": {
+        "last_nodata_ts": "integer",
+        "last_notified_ts": "integer",
+        "last_resolved_ts": "integer",
+        "last_triggered_ts": "integer",
+        "name": "string",
+        "status": "string"
+      }
+    }
+  },
+  "tags": [],
   "type": "query alert"
 }
 ```

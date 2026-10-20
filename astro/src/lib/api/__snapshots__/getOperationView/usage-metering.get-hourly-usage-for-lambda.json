@@ -103,6 +103,12 @@
                 }
               ]
             }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"usage\": [\n    {\n      \"func_count\": \"integer\",\n      \"hour\": \"2019-09-19T10:00:00.000Z\",\n      \"invocations_sum\": \"integer\",\n      \"org_name\": \"string\",\n      \"public_id\": \"string\"\n    }\n  ]\n}"
+            }
           ]
         },
         {

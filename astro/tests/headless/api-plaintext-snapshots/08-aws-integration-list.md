@@ -115,6 +115,7 @@ AWS Accounts response body.
         "aws_regions": {
           "include_all": true
         },
+        "created_at": "2019-09-19T10:00:00.000Z",
         "logs_config": {
           "lambda_forwarder": {
             "lambdas": [
@@ -156,6 +157,7 @@ AWS Accounts response body.
             }
           ]
         },
+        "modified_at": "2019-09-19T10:00:00.000Z",
         "resources_config": {
           "cloud_security_posture_management_collection": false,
           "extended_collection": true
@@ -498,10 +500,10 @@ List of enabled AWS accounts.
 {
   "accounts": [
     {
+      "access_key_id": "string",
       "account_id": "123456789012",
       "account_specific_namespace_rules": {
-        "auto_scaling": false,
-        "opswork": false
+        "<any-key>": false
       },
       "cspm_resource_collection_enabled": true,
       "excluded_regions": [
@@ -517,7 +519,8 @@ List of enabled AWS accounts.
       ],
       "metrics_collection_enabled": false,
       "resource_collection_enabled": true,
-      "role_name": "DatadogAWSIntegrationRole"
+      "role_name": "DatadogAWSIntegrationRole",
+      "secret_access_key": "string"
     }
   ]
 }

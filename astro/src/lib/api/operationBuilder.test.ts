@@ -246,6 +246,25 @@ describe("extractResponses content types", () => {
     expect(response.examples).toBeUndefined();
   });
 
+  it("builds the example from the schema, as Hugo does, ignoring the spec's examples", () => {
+    const response = responseFor({
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: { id: { type: "string" } },
+        },
+        examples: { default: { value: { id: "from-spec" } } },
+      },
+    });
+
+    expect(response.examples).toEqual([
+      {
+        name: "Example",
+        value: JSON.stringify({ id: "string" }, null, 2),
+      },
+    ]);
+  });
+
   it("prefers application/json when a response offers several content types", () => {
     const response = responseFor({
       "text/csv": { schema: objectSchema("row") },

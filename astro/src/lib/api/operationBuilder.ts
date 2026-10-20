@@ -13,6 +13,7 @@ import {
   stripWriteOnlyFields,
 } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
+import { buildSchemaExample } from "./schemaExampleBuilder";
 import { buildRunCommand } from "./runCommandBuilder";
 import type { LanguageRunInfo } from "./codeExampleLoader";
 import { getRegions } from "./regionResolver";
@@ -260,43 +261,16 @@ export function extractResponses(
     const jsonContent =
       mediaType && isJsonMediaType(mediaType) ? mediaContent : undefined;
 
+    // Like Hugo, build the example from the schema and ignore the spec's
+    // `examples`, so fields without an example show a type placeholder.
     let examples: Array<{ name: string; value: string }> | undefined;
-    if (jsonContent?.examples && typeof jsonContent.examples === "object") {
-      examples = [];
-      for (const [name, exampleObj] of Object.entries(jsonContent.examples)) {
-        const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
-          ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
-          : exampleObj;
-
-        if (resolvedExample?.value !== undefined) {
-          examples.push({
-            name: resolvedExample.summary ?? name,
-            value: JSON.stringify(resolvedExample.value, null, 2),
-          });
-        }
-      }
-      if (examples.length === 0) examples = undefined;
-    } else if (jsonContent?.example !== undefined) {
+    const generated = jsonContent?.schema
+      ? buildSchemaExample(spec, "response", jsonContent.schema)
+      : undefined;
+    if (generated !== undefined) {
       examples = [
-        {
-          name: "Example",
-          value: JSON.stringify(jsonContent.example, null, 2),
-        },
+        { name: "Example", value: JSON.stringify(generated, null, 2) },
       ];
-    }
-
-    if (!examples && jsonContent?.schema) {
-      const generated = generateExampleFromSchema(spec, jsonContent.schema, {
-        omitWriteOnly: true,
-      });
-      if (generated !== undefined) {
-        examples = [
-          {
-            name: "Example",
-            value: JSON.stringify(generated, null, 2),
-          },
-        ];
-      }
     }
 
     result.push({
@@ -417,25 +391,6 @@ export function buildRunCommandByRegion(
 /** Maximum structural depth (objects/arrays) for example generation. */
 const EXAMPLE_MAX_DEPTH = 10;
 
-interface ExampleOptions {
-  /**
-   * Skip properties the spec marks `writeOnly`. Set when generating a
-   * response example, where such a field is never returned.
-   */
-  omitWriteOnly?: boolean;
-}
-
-/** Whether a property schema is write-only, following a single `$ref` hop. */
-function isWriteOnly(
-  spec: OpenAPIV3.Document,
-  schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject,
-): boolean {
-  const resolved: OpenAPIV3.SchemaObject | undefined = isReference(schema)
-    ? resolveRef(spec, schema.$ref)
-    : schema;
-  return resolved?.writeOnly === true;
-}
-
 /**
  * Attempt to build a sample JSON value from a schema by using `example`
  * fields on properties. Returns `undefined` if no useful example can
@@ -444,13 +399,10 @@ function isWriteOnly(
  * `depth` tracks structural nesting (object properties, array items).
  * `$ref` resolution does not increment depth — circular refs are guarded
  * by a `seen` set of ref paths instead.
- *
- * `options.omitWriteOnly` drops write-only properties, for response examples.
  */
 function generateExampleFromSchema(
   spec: OpenAPIV3.Document,
   schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject | undefined,
-  options: ExampleOptions = {},
   depth = 0,
   seen: Set<string> = new Set(),
 ): unknown {
@@ -461,7 +413,7 @@ function generateExampleFromSchema(
     seen.add(schema.$ref);
     const resolved = resolveRef(spec, schema.$ref);
     if (!resolved) return undefined;
-    return generateExampleFromSchema(spec, resolved, options, depth, seen);
+    return generateExampleFromSchema(spec, resolved, depth, seen);
   }
 
   if (schema.example !== undefined) return schema.example;
@@ -470,7 +422,7 @@ function generateExampleFromSchema(
     const merged: Record<string, unknown> = {};
     let hasValue = false;
     for (const sub of schema.allOf) {
-      const val = generateExampleFromSchema(spec, sub, options, depth, seen);
+      const val = generateExampleFromSchema(spec, sub, depth, seen);
       if (val !== undefined && typeof val === "object" && !Array.isArray(val)) {
         Object.assign(merged, val);
         hasValue = true;
@@ -487,7 +439,7 @@ function generateExampleFromSchema(
   if (unionKey) {
     const variants = schema[unionKey];
     if (Array.isArray(variants) && variants.length > 0) {
-      return generateExampleFromSchema(spec, variants[0], options, depth, seen);
+      return generateExampleFromSchema(spec, variants[0], depth, seen);
     }
     return undefined;
   }
@@ -500,15 +452,7 @@ function generateExampleFromSchema(
     let hasValue = false;
 
     for (const [propName, propSchema] of Object.entries(properties)) {
-      if (options.omitWriteOnly && isWriteOnly(spec, propSchema)) continue;
-
-      const val = generateExampleFromSchema(
-        spec,
-        propSchema,
-        options,
-        depth + 1,
-        seen,
-      );
+      const val = generateExampleFromSchema(spec, propSchema, depth + 1, seen);
       if (val !== undefined) {
         obj[propName] = val;
         hasValue = true;
@@ -522,7 +466,6 @@ function generateExampleFromSchema(
     const itemExample = generateExampleFromSchema(
       spec,
       schema.items,
-      options,
       depth + 1,
       seen,
     );

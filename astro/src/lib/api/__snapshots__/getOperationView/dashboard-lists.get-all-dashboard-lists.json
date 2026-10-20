@@ -139,7 +139,7 @@
           "examples": [
             {
               "name": "Example",
-              "value": "{\n  \"dashboard_lists\": [\n    {\n      \"name\": \"My Dashboard\",\n      \"type\": \"manual_dashboard_list\"\n    }\n  ]\n}"
+              "value": "{\n  \"dashboard_lists\": [\n    {\n      \"author\": {\n        \"email\": \"string\",\n        \"handle\": \"string\",\n        \"name\": \"string\"\n      },\n      \"created\": \"2019-09-19T10:00:00.000Z\",\n      \"dashboard_count\": \"integer\",\n      \"id\": \"integer\",\n      \"is_favorite\": false,\n      \"modified\": \"2019-09-19T10:00:00.000Z\",\n      \"name\": \"My Dashboard\",\n      \"type\": \"manual_dashboard_list\"\n    }\n  ]\n}"
             }
           ]
         },

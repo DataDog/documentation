@@ -48,6 +48,8 @@ OAuth apps require the `usage_read` authorization [scope](https://docs.datadoghq
 {% tab label="200" %}
 OK
 
+{% tabs %}
+{% tab label="Model" %}
 Response containing the number of Lambda functions and sum of the invocations of all Lambda functions
 for each hour for a given organization.
 
@@ -59,6 +61,24 @@ for each hour for a given organization.
 | usage        | invocations_sum | int64     | Contains the sum of invocations of all functions.                           |
 | usage        | org_name        | string    | The organization name.                                                      |
 | usage        | public_id       | string    | The organization public ID.                                                 |
+{% /tab %}
+
+{% tab label="Example" %}
+```json
+{
+  "usage": [
+    {
+      "func_count": "integer",
+      "hour": "2019-09-19T10:00:00.000Z",
+      "invocations_sum": "integer",
+      "org_name": "string",
+      "public_id": "string"
+    }
+  ]
+}
+```
+{% /tab %}
+{% /tabs %}
 {% /tab %}
 
 {% tab label="400" %}

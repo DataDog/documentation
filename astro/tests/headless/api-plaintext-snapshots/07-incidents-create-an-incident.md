@@ -257,33 +257,47 @@ Response with an incident.
 {
   "data": {
     "attributes": {
+      "archived": "2019-09-19T10:00:00.000Z",
+      "case_id": "integer",
+      "created": "2019-09-19T10:00:00.000Z",
+      "customer_impact_duration": "integer",
+      "customer_impact_end": "2019-09-19T10:00:00.000Z",
       "customer_impact_scope": "An example customer impact scope",
+      "customer_impact_start": "2019-09-19T10:00:00.000Z",
       "customer_impacted": false,
+      "declared": "2019-09-19T10:00:00.000Z",
+      "declared_by": {
+        "image_48_px": "string",
+        "name": "string"
+      },
+      "declared_by_uuid": "string",
+      "detected": "2019-09-19T10:00:00.000Z",
       "fields": {
-        "severity": {
-          "type": "dropdown",
-          "value": "SEV-5"
-        }
+        "<any-key>": "undefined"
       },
       "incident_type_uuid": "00000000-0000-0000-0000-000000000000",
       "is_test": false,
+      "modified": "2019-09-19T10:00:00.000Z",
+      "non_datadog_creator": {
+        "image_48_px": "string",
+        "name": "string"
+      },
       "notification_handles": [
         {
           "display_name": "Jane Doe",
-          "handle": "@user@email.com"
-        },
-        {
-          "display_name": "Slack Channel",
-          "handle": "@slack-channel"
-        },
-        {
-          "display_name": "Incident Workflow",
-          "handle": "@workflow-from-incident"
+          "handle": "@test.user@test.com"
         }
       ],
       "public_id": 1,
+      "resolved": "2019-09-19T10:00:00.000Z",
       "severity": "UNKNOWN",
-      "title": "A test incident title"
+      "state": "string",
+      "time_to_detect": "integer",
+      "time_to_internal_response": "integer",
+      "time_to_repair": "integer",
+      "time_to_resolve": "integer",
+      "title": "A test incident title",
+      "visibility": "string"
     },
     "id": "00000000-0000-0000-1234-000000000000",
     "relationships": {
@@ -303,7 +317,14 @@ Response with an incident.
       },
       "created_by_user": {
         "data": {
-          "id": "00000000-0000-0000-2345-000000000000"
+          "id": "00000000-0000-0000-2345-000000000000",
+          "type": "users"
+        }
+      },
+      "declared_by_user": {
+        "data": {
+          "id": "00000000-0000-0000-2345-000000000000",
+          "type": "users"
         }
       },
       "impacts": {
@@ -317,14 +338,16 @@ Response with an incident.
       "integrations": {
         "data": [
           {
-            "id": "00000000-abcd-0005-0000-000000000000",
-            "type": "incident_integrations"
-          },
-          {
-            "id": "00000000-abcd-0006-0000-000000000000",
+            "id": "00000000-abcd-0001-0000-000000000000",
             "type": "incident_integrations"
           }
         ]
+      },
+      "last_modified_by_user": {
+        "data": {
+          "id": "00000000-0000-0000-2345-000000000000",
+          "type": "users"
+        }
       },
       "responders": {
         "data": [
@@ -344,7 +367,20 @@ Response with an incident.
       }
     },
     "type": "incidents"
-  }
+  },
+  "included": [
+    {
+      "attributes": {
+        "email": "string",
+        "handle": "string",
+        "icon": "string",
+        "name": "string",
+        "uuid": "string"
+      },
+      "id": "string",
+      "type": "users"
+    }
+  ]
 }
 ```
 {% /tab %}

@@ -469,16 +469,34 @@ key performance metrics, which enable you to monitor the health of your infrastr
 {
   "author_handle": "test@datadoghq.com",
   "author_name": "John Doe",
+  "created_at": "2019-09-19T10:00:00.000Z",
+  "description": "string",
   "id": "123-abc-456",
   "is_read_only": false,
   "layout_type": "ordered",
-  "reflow_type": "auto",
+  "modified_at": "2019-09-19T10:00:00.000Z",
+  "notify_list": [],
+  "reflow_type": "string",
+  "restricted_roles": [],
   "tabs": [
     {
       "id": "",
       "name": "L",
       "widget_ids": [
         0
+      ]
+    }
+  ],
+  "tags": [],
+  "template_variable_presets": [
+    {
+      "name": "string",
+      "template_variables": [
+        {
+          "name": "string",
+          "value": "string",
+          "values": []
+        }
       ]
     }
   ],
@@ -510,6 +528,14 @@ key performance metrics, which enable you to monitor the health of your infrastr
           }
         },
         "type": "hostmap"
+      },
+      "id": "integer",
+      "layout": {
+        "height": 0,
+        "is_column_break": false,
+        "width": 0,
+        "x": 0,
+        "y": 0
       }
     }
   ]

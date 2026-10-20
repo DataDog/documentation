@@ -59,6 +59,16 @@ Information on your dashboard lists.
 {
   "dashboard_lists": [
     {
+      "author": {
+        "email": "string",
+        "handle": "string",
+        "name": "string"
+      },
+      "created": "2019-09-19T10:00:00.000Z",
+      "dashboard_count": "integer",
+      "id": "integer",
+      "is_favorite": false,
+      "modified": "2019-09-19T10:00:00.000Z",
       "name": "My Dashboard",
       "type": "manual_dashboard_list"
     }
