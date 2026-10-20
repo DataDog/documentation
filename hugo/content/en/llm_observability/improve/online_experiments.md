@@ -119,6 +119,8 @@ with LLMObs.workflow(name="my_workflow") as span:
     # Run the rest of the instrumented workflow.
 {{< /code-block >}}
 
+For trace-level evaluations, add the tag to the root span of the trace. Session-level evaluations do not support experiment metrics.
+
 ## Step 4: Create and launch the experiment
 
 Follow [Plan and Launch Experiments][3] to create and start the experiment:
