@@ -22,7 +22,7 @@ To push indicators from your own scripts or jobs instead, see [Ingest STIX Threa
 
 ## How it works
 
-A TAXII server hosts one or more collections, and each collection is a feed of STIX 2.1 objects. After you add a server and its collections:
+A TAXII server hosts one or more collections, each of which is a feed of STIX 2.1 objects. After you add a server and its collections:
 
 1. Datadog polls each collection that has polling enabled, at the interval you set for that collection, and fetches new objects incrementally.
 2. Cloud SIEM uses the collection's indicators to enrich logs while polling is enabled.
