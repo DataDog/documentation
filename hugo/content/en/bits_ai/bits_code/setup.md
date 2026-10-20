@@ -169,7 +169,38 @@ The default allowlist includes the following domains. This list will evolve over
 
 Bits Code sessions support Docker and Docker Compose commands. You can build images and run containers as part of repository setup, testing, and validation.
 
-Access to container registries during a session is controlled by your organization's [internet access](#configure-internet-access) policy.
+| Workflow | Supported capabilities |
+|---|---|
+| Build images | Standard Dockerfile builds with `docker build` and Compose. |
+| Run containers | Foreground and background execution, logs, and commands inside running containers with `docker exec`. |
+| Start dependent services | Compose health checks, `up --wait`, and `depends_on` with `condition: service_healthy`. |
+| Connect services | Shared bridge networks, named networks, and service-name DNS. |
+| Share files | Bind mounts for repository files and named volumes for container data. |
+
+You do not need to install or start a Docker daemon. Use an image compatible with the sandbox's CPU architecture. Images and builds share the sandbox's available storage.
+
+Registry access follows your organization's [internet access](#configure-internet-access) policy. Allow the registry and any additional hosts used to download image layers. Private registries also require authentication.
+
+#### Publish container ports
+
+Publish individual TCP ports to make a container service reachable from other processes in the sandbox. For example, add this mapping under a service in your Compose file:
+
+```yaml
+ports:
+  - "127.0.0.1:18080:8080"
+```
+
+Configure the application to listen on `0.0.0.0:8080` inside the container. Other processes in the sandbox can then reach it at `http://127.0.0.1:18080`. This mapping does not expose the service on your computer or create a public internet endpoint.
+
+Omitting the host address, or specifying `0.0.0.0`, also binds the published port to sandbox loopback (`127.0.0.1`). Services on the same container network can communicate using their service names and container ports without publishing ports.
+
+#### Docker limitations
+
+- Port publishing supports IPv4 TCP only. UDP, IPv6, port ranges, and host addresses other than those described above are unsupported.
+- A container with published ports must use a single network.
+- BuildKit-specific features and `docker buildx` are unsupported.
+- Per-container CPU and memory limits are unsupported.
+- Running container processes do not survive sandbox restoration or replacement. Restart services using your container or Compose setup commands. Do not rely on cached images or saved volume data in a new sandbox.
 
 ### Configure repository environment
 
