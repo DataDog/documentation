@@ -22,7 +22,7 @@ Manage your uploaded mobile applications and your parallelization settings on th
 
 ## Create an application
 
-To add a mobile application, navigate to the [{{< ui >}}Mobile Applications List{{< /ui >}} tab][5] and click {{< ui >}}+ Create Application{{< /ui >}}.
+To add a mobile application, navigate to the [{{< ui >}}Mobile Applications List{{< /ui >}} tab][5] and click {{< ui >}}\+ Create Application{{< /ui >}}.
 
 {{< tabs >}}
 {{% tab "Android" %}}

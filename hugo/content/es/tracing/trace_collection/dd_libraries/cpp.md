@@ -12,40 +12,42 @@ code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-trace-cpp
   tag: Código fuente
-  text: Código de origen
+  text: Código fuente
 - link: /tracing/glossary/
   tag: Documentación
-  text: Explorar tus servicios, recursos y trazas (traces)
+  text: Explore sus servicios, recursos y trazas
 - link: /tracing/
   tag: Documentación
   text: Uso avanzado
-title: Rastreo de de aplicaciones C++
+- link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
+  tag: Centro de aprendizaje
+  text: Configure y administre el SDK de APM para sus aplicaciones
+title: Rastreo de aplicaciones C++
 type: multi-code-lang
 ---
-
 <div class="alert alert-danger">
-  <strong>Nota:</strong> C++ no proporciona integraciones para la instrumentación automática, pero es utilizado por el rastreo de proxies como <a href="/tracing/setup/envoy/">Envoy</a> y <a href="/tracing/setup/nginx/">NGINX</a>.
+  <strong>Nota:</strong> C++ no proporciona integraciones para la instrumentación automática, pero se utiliza en la traza de proxy, como <a href="/tracing/setup/envoy/">Envoy</a> y <a href="/tracing/setup/nginx/">Nginx</a>.
 </div>
 
-## Requisitos de compatibilidad
-La biblioteca de rastreo de C++ requiere la cadena de herramientas C++17 para su compilación. Para ver la lista completa de los requisitos para las bibliotecas de rastreo y la compatibilidad de la arquitectura de procesadores de Datadog, consulta la página de [requisitos de compatibilidad][3].
+## Requisitos de compatibilidad {#compatibility-requirements}
+El SDK de C++ requiere una cadena de herramientas C++17 para compilar. Para obtener una lista completa de los requisitos de compatibilidad del SDK de Datadog y la compatibilidad con la arquitectura del procesador, visite la página [Requisitos de compatibilidad][3].
 
-## Empezando
-Antes de empezar, asegúrate de haber [instalado y configurado el Agent][6].
+## Primeros pasos {#getting-started}
+Antes de comenzar, asegúrese de haber [instalado y configurado el Agent][6].
 
-## Instrumentar tu aplicación
+## Instrumente su aplicación {#instrument-your-application}
 
-La siguiente es una aplicación de ejemplo que puede utilizarse para probar `dd-trace-cpp`.
-Esta aplicación crea una instancia de trazador con parámetros predeterminados y genera una traza (trace) con dos tramos (spans), que se informa con el nombre de servicio `my-service` .
+Aquí hay una aplicación de ejemplo que se puede usar para realizar pruebas `dd-trace-cpp`.
+Esta aplicación crea una instancia de rastreador con la configuración predeterminada y genera una traza con dos segmentos, la cual se reporta bajo el nombre de servicio `my-service`.
 
 ```cpp
 // tracer_example.cpp
-#incluye <datadog/span_config.h>
-#incluye <datadog/tracer.h>
-#incluye <datadog/tracer_config.h>
+#include <datadog/span_config.h>
+#include <datadog/tracer.h>
+#include <datadog/tracer_config.h>
 
-#incluye <iostream>
-#incluye <string>
+#include <iostream>
+#include <string>
 
 namespace dd = datadog::tracing;
 
@@ -78,22 +80,22 @@ int main() {
 
 {{% tab "CPM" %}}
 
-[CPM.cmake][1] es un script CMake multiplataforma que añade capacidades de gestión de dependencias a CMake.
+[CPM.cmake][1] es un script de CMake multiplataforma que añade capacidades de gestión de dependencias a CMake.
 
 ````CMake
-# In a CMakeLists.txt
+# In a CMakeLists.txt 
 
 CPMAddPackage("gh:DataDog/dd-trace-cpp#1.0.0")
 
-# Add `tracer_example` target
+# Add `tracer_example` target 
 add_executable(tracer_example tracer_example.cpp)
 
-# Statically link against `dd-trace-cpp`
-# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace::shared` target
+# Statically link against `dd-trace-cpp` 
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace::shared` target 
 target_link_libraries(tracer_example dd_trace::static)
 ````
 
-Crea el ejemplo utilizando los siguientes comandos:
+Compile el ejemplo usando los siguientes comandos:
 
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release .
@@ -107,7 +109,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 {{% /tab %}}
 
 {{% tab "CMake" %}}
-Para integrar la biblioteca `dd-trace-cpp` en tu proyecto C++ utilizando CMake, sigue estos pasos:
+Para integrar la biblioteca `dd-trace-cpp` en su proyecto de C++ usando CMake, siga estos pasos:
 ````CMake
 include(FetchContent)
 
@@ -121,15 +123,15 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(dd-trace-cpp)
 
-# Add `tracer_example` target
+# Add `tracer_example` target 
 add_executable(tracer_example tracer_example.cpp)
 
-# Statically link against `dd-trace-cpp`
-# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
+# Statically link against `dd-trace-cpp` 
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target 
 target_link_libraries(tracer_example dd_trace::static)
 ````
 
-Crea el ejemplo utilizando los siguientes comandos:
+Compile el ejemplo usando los siguientes comandos:
 
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release .
@@ -143,10 +145,11 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 {{% tab "Manual" %}}
 
-Para descargar e instalar manualmente la biblioteca `dd-trace-cpp`, ejecuta el siguiente script bash:
+Para descargar e instalar manualmente la biblioteca `dd-trace-cpp`, ejecute el siguiente script de bash:
+
 ```bash
-# Requiere el comando "jq", que puede instalarse a través del
-# gestor de paquetes:
+# Requires the "jq" command, which can be installed via
+# the package manager:
 #   - APT: `apt install jq`
 #   - APK: `apk add jq`
 #   - YUM: `yum install jq`
@@ -155,33 +158,33 @@ if ! command -v jq >/dev/null 2>&1; then
   exit 1
 fi
 
-# Obtiene el número de versión del último lanzamiento desde GitHub.
+# Gets the latest release version number from GitHub.
 get_latest_release() {
   curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
 }
 
 DD_TRACE_CPP_VERSION="$(get_latest_release DataDog/dd-trace-cpp)"
 
-# Descarga e instala la biblioteca dd-trace-cpp.
+# Download and install dd-trace-cpp library.
 wget https://github.com/DataDog/dd-trace-cpp/archive/${DD_TRACE_CPP_VERSION}.tar.gz -O dd-trace-cpp.tar.gz
 mkdir dd-trace-cpp && tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 cd dd-trace-cpp
 
-# Descarga e instala la versión correcta de dd-trace-cpp.
-# Configura el proyecto, créalo e instálalo.
+# Download and install the correct version of dd-trace-cpp.
+# Configure the project, build it, and install it.
 cmake -B build .
 cmake --build build -j
 cmake --install build
 ```
 
-Por defecto, `cmake --install` coloca los encabezados compartidos públicos y de bibliotecas en los directorios apropiados del sistema (por ejemplo, `/usr/local/[...]`).
-Para instalarlos en una localización específica, utiliza `cmake --install build --prefix <INSTALL_DIR>`.
+De forma predeterminada, `cmake --install` coloca la biblioteca compartida y los encabezados públicos en los directorios del sistema apropiados (por ejemplo, `/usr/local/[...]`).
+Para instalarlos en una ubicación específica, use `cmake --install build --prefix <INSTALL_DIR>` en su lugar.
 
-### Vinculación dinámica
-Vincula a `libdd_trace_cpp.so`, asegurándote de que la biblioteca compartids está en `LD_LIBRARY_PATH`.
+### Enlace dinámico {#dynamic-linking}
+Enlace con `libdd-trace-cpp.so` y asegúrese de que la biblioteca compartida esté en `LD_LIBRARY_PATH`.
 
 ````bash
-clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
+clang -std=c++17 -o tracer_example tracer_example.cpp -ldd-trace-cpp
 LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
 ````
@@ -190,11 +193,11 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 {{< /tabs >}}
 
-## Configuración
+## Configuración {#configuration}
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][5].
+Si es necesario, configure el SDK para enviar datos de telemetría de rendimiento de la aplicación según lo requiera, incluyendo la configuración de Unified Service Tagging. Lea [Configuración de la biblioteca][5] para obtener detalles.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

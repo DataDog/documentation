@@ -25,7 +25,7 @@ Ce guide relève de <strong>Composants personnalisés</strong> <a href="/opentel
 
 ## Prérequis {#prerequisites}
 
-- Un backend compatible OpenTelemetry configuré pour envoyer des données à Datadog. Consultez [Envoyer des données OpenTelemetry à Datadog][4] pour connaître les options de configuration, notamment le collecteur DDOT, le collecteur OTel avec l'exportateur Datadog ou l'ingestion OTLP directe.
+- Un backend compatible OpenTelemetry configuré pour envoyer des données à Datadog. Consultez [Send OpenTelemetry Data to Datadog][4] pour connaître les options de configuration, notamment le collecteur DDOT, le collecteur OpenTelemetry ou l'ingestion OTLP directe.
 - [Bun][2] installé (v1.0 ou version ultérieure).
 - Une application Bun que vous souhaitez instrumenter.
 
@@ -114,7 +114,7 @@ export OTEL_SERVICE_NAME="<YOUR_SERVICE_NAME>"
 ```
 
 La valeur `OTEL_EXPORTER_OTLP_ENDPOINT` dépend de votre configuration :
-- **Collecteur local** (DDOT ou collecteur OTel) : `http://localhost:4318` (HTTP par défaut) ou `http://localhost:4317` (gRPC)
+- **Collecteur local** (DDOT ou OpenTelemetry Collector) : `http://localhost:4318` (HTTP par défaut) ou `http://localhost:4317` (gRPC)
 - **Collecteur distant** : utilisez l'adresse et le port du collecteur
 
 Pour des options de configuration supplémentaires, consultez la [spécification des variables d'environnement OpenTelemetry][5].

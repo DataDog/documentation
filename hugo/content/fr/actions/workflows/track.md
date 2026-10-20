@@ -7,115 +7,119 @@ algolia:
 aliases:
 - /fr/service_management/workflows/track
 description: Surveillez l'activité, les métriques et les coûts des workflows à l'aide
-  de dashboards, d'audit trails, de gestion d'événements et d'attribution de l'utilisation.
+  de dashboards, de pistes d'audit, de la gestion des événements et de l'attribution
+  de l'utilisation.
 disable_toc: false
 further_reading:
-- link: /service_management/workflows/build
+- link: /actions/workflows/build
   tag: Documentation
-  text: Créer des workflows
+  text: Créez des workflows
 - link: /account_management/audit_trail/
   tag: Documentation
-  text: Journal d'audit Datadog
+  text: Datadog Audit Trail
 - link: /account_management/billing/usage_attribution/
   tag: Documentation
-  text: Attribution de l'utilisation
+  text: Usage Attribution
 title: Suivre les workflows
 ---
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation est en préversion sur votre site Datadog sélectionné ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
 
-Cette page explique comment suivre différents types d'activité de workflow et de coûts de workflow.
+Cette page explique comment suivre différents types d'activité et de coûts de workflow.
 
-## Dashboard prêt à l'emploi
+## Dashboard prêt à l'emploi {#out-of-the-box-dashboard}
 
-Le dashboard Workflows Overview fournit une vue d'ensemble de haut niveau de vos workflows et exécutions Datadog. Pour trouver le dashboard, accédez à votre [liste de dashboards][2] et recherchez **Workflows Overview**.
+Le dashboard Workflows Overview fournit une vue d'ensemble de haut niveau de vos workflows et exécutions Datadog. Pour trouver le dashboard, accédez à votre [liste Dashboard][2] et recherchez {{< ui >}}Workflows Overview{{< /ui >}}.
 
 {{< img src="actions/workflows/workflows-dashboard.png" alt="Le dashboard Workflows Overview" style="width:80%;" >}}
 
 
-## Afficher les modifications et les exécutions de workflow dans Audit Trail
+## Afficher les modifications et les exécutions de workflow dans Audit Trail {#view-workflow-edits-and-runs-in-audit-trail}
 
-Vous pouvez afficher les modifications et les exécutions de workflow à l'aide d'Audit Trail.
+Vous pouvez afficher les modifications et les exécutions de workflow à l'aide de Audit Trail.
 
-Par exemple, pour voir qui a modifié un workflow :
+Par exemple, pour voir qui a modifié un workflow :
 
-1. Depuis votre workflow, cliquez sur l'icône <i class="icon-cog-2"></i> **(roue dentée)** dans le coin supérieur droit et cliquez sur **View audit events**.<br>Une recherche Audit Trail filtrée sur votre workflow s'ouvre.
-1. À gauche, sous les filtres **Core**, développez **Action**.
-1. Passez la souris sur **Modified** et cliquez sur **Only** pour filtrer les résultats afin d'afficher uniquement les modifications de workflow.<br>La colonne **User ID** affiche le nom d'utilisateur de la personne qui a effectué chaque modification.
-
-
-## Notifier à propos des exécutions
-
-Consultez la section [Notifications de workflow][3] pour obtenir des instructions sur l'utilisation des notifications de workflow intégrées.
+1. Depuis votre workflow, cliquez sur <i class="icon-cog-2"></i> **(engrenage)** dans le coin supérieur droit et cliquez sur {{< ui >}}View audit events{{< /ui >}}.<br>Une recherche Audit Trail filtrée sur votre workflow s'ouvre.
+1. À gauche, sous les filtres {{< ui >}}Core{{< /ui >}}, développez {{< ui >}}Action{{< /ui >}}.
+1. Survolez {{< ui >}}Modified{{< /ui >}} et cliquez sur {{< ui >}}Only{{< /ui >}} pour filtrer les résultats afin d'afficher uniquement les modifications de workflow.<br>La colonne {{< ui >}}User ID{{< /ui >}} affiche le nom d'utilisateur de la personne ayant effectué chaque modification.
 
 
-## Suivre les métriques de workflow avec un monitor Datadog
+## Notifier les exécutions {#notify-about-runs}
 
-Vous pouvez utiliser les monitors Datadog pour suivre diverses métriques de workflow.
+Consultez [Workflow notifications][3] pour obtenir des instructions sur l'utilisation des notifications de workflow intégrées.
 
-La liste des métriques disponibles est :
 
-| Métrique | Rôle |
+## Suivre les métriques de workflow avec un monitor Datadog {#track-workflow-metrics-with-a-datadog-monitor}
+
+Vous pouvez utiliser des monitors Datadog pour suivre diverses métriques de workflow.
+
+La liste des métriques disponibles est la suivante :
+
+| Métrique | Description |
 | ------ | ----------- |
 | `datadog.workflows.count`                      | Nombre de workflows non supprimés.                       |
-| `datadog.workflows.executions.started`         | Nombre d'instances de workflow qui ont démarré.   |
-| `datadog.workflows.executions.completed`       | Nombre d'instances de workflow qui se sont terminées.      |
-| `datadog.workflows.steps.executions.started`   | Nombre d'étapes d'instance de workflow qui ont démarré.   |
-| `datadog.workflows.steps.executions.completed` | Nombre d'étapes d'instance de workflow qui se sont terminées. |
+| `datadog.workflows.executions.started`         | Nombre d'instances de workflow ayant démarré.   |
+| `datadog.workflows.executions.completed`       | Nombre d'instances de workflow terminées.      |
+| `datadog.workflows.steps.executions.started`   | Nombre d'étapes d'instance de workflow ayant démarré.   |
+| `datadog.workflows.steps.executions.completed` | Nombre d'étapes d'instance de workflow terminées. |
 
-Pour créer un monitor qui suit si les exécutions de workflow quotidiennes dépassent un certain seuil, effectuez les étapes suivantes :
+Pour créer un monitor qui suit si les exécutions quotidiennes de workflow dépassent un certain seuil, effectuez les étapes suivantes :
 
-1. Accédez à [New Monitor][4] et sélectionnez le type de monitor **Metric**.
-1. Sous **Define the metric**, pour **a**, remplissez `datadog.workflows.executions.started`.
-1. _Facultativement_, pour restreindre le monitor à un workflow spécifique, pour **from**, remplissez `workflow_id:[WORKFLOW-ID]`, en remplaçant `[WORKFLOW-ID]` par l'ID de votre workflow.
-1. Pour **Evaluation Details**, utilisez les valeurs suivantes :
-    - **Evaluate the** : `sum`
-    - **Of the query over the** : `last 1 day`.
-1. Pour **Set alert conditions**, choisissez **above**, puis remplissez un seuil d'alerte et d'avertissement. Par exemple, vous pourriez remplir un **Alert threshold** de `200` et un **Warning threshold** de `150`.
-1. Sous **Configure notifications & automations**, nommez votre workflow, puis remplissez le texte du message. Par exemple, vous pourriez utiliser un texte de message comme le suivant :
+1. Accédez à [New Monitor][4] et sélectionnez le type de monitor {{< ui >}}Metric{{< /ui >}}.
+1. Sous {{< ui >}}Define the metric{{< /ui >}}, pour {{< ui >}}a{{< /ui >}}, renseignez `datadog.workflows.executions.started`.
+1. _Optionnellement_, pour restreindre le monitor à un workflow spécifique, pour {{< ui >}}from{{< /ui >}}, renseignez `workflow_id:[WORKFLOW-ID]`, en remplaçant `[WORKFLOW-ID]` par l'ID de votre workflow.
+1. Pour {{< ui >}}Evaluation Details{{< /ui >}}, utilisez les valeurs suivantes :
+    - {{< ui >}}Evaluate the{{< /ui >}} : `sum`
+    - {{< ui >}}Of the query over the{{< /ui >}} : `last 1 day`.
+1. Pour {{< ui >}}Set alert conditions{{< /ui >}}, choisissez {{< ui >}}above{{< /ui >}}, puis renseignez un seuil d'alerte et un seuil d'avertissement. Par exemple, vous pourriez renseigner un {{< ui >}}Alert threshold{{< /ui >}} de `200` et un {{< ui >}}Warning threshold{{< /ui >}} de `150`.
+1. Sous {{< ui >}}Configure notifications & automations{{< /ui >}}, nommez votre workflow, puis renseignez le texte du message. Par exemple, vous pourriez utiliser un texte de message comme le suivant :
 
     {{< code-block lang="none" >}}@slack-alert-channel
 
 {{#is_warning}}
-Le workflow a été exécuté {{warn_threshold}} fois au cours du dernier jour ; une action manuelle pourrait être nécessaire pour éviter l'alerte.
+Workflow has executed {{warn_threshold}} times in the last day; manual action might be needed to avoid alerting.
 {{/is_warning}}
 {{#is_alert}}
-Le workflow a été exécuté {{threshold}} fois au cours du dernier jour, ce qui correspond à notre seuil budgétaire pour les workflows. Nous devrions dépublier le workflow pour éviter d'autres exécutions automatiques pour la journée.
+Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
 {{/is_alert}}
 {{< /code-block >}}
-1. Cliquez sur **Create**.
+1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
 
-## Afficher les événements de workflow dans Event Manager
+## Afficher les événements de workflow dans le Gestionnaire d'événements {#view-workflow-events-in-event-manager}
 
-Vous pouvez utiliser [Event Manager][5] pour afficher les événements de démarrage et de fin de workflow en filtrant sur `source:workflow_automation`.
+Vous pouvez utiliser [Event Manager][5] pour afficher les événements de début et de fin de workflow en filtrant sur `source:workflow_automation`.
 
-Pour voir les événements d'un workflow spécifique, dans la zone **Search facets**, recherchez `workflow.workflow_id`. Vous pouvez sélectionner un ensemble spécifique d'ID pour afficher uniquement les événements de ces workflows.
+Pour voir les événements d'un workflow spécifique, dans la zone {{< ui >}}Search facets{{< /ui >}}, recherchez `workflow.workflow_id`. Vous pouvez sélectionner un ensemble spécifique d'ID pour afficher uniquement les événements de ces workflows.
 
-Vous pouvez également filtrer la sortie par **Status** pour voir uniquement les messages `info`, `warn` ou `error`.
+Vous pouvez également filtrer la sortie par {{< ui >}}Status{{< /ui >}} pour voir uniquement les messages `info`, `warn` ou `error`.
 
 
-## Suivre la facturation des workflows dans Usage Attribution
+## Suivre la facturation des workflows dans l'Attribution d'utilisation {#track-workflow-billing-in-usage-attribution}
 
 <div class="alert alert-danger">
-Usage Attribution est une fonctionnalité avancée incluse dans le plan Enterprise. Pour tous les autres plans, contactez votre représentant de compte ou <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> pour demander cette fonctionnalité.
+L'attribution de l'utilisation est une fonctionnalité avancée incluse dans le forfait Enterprise. Pour tous les autres forfaits, contactez votre responsable de compte ou <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> pour demander cette fonctionnalité.
 </div>
 
-Pour suivre la facturation de vos exécutions de workflow, effectuez les étapes suivantes :
+Pour suivre la facturation de vos exécutions de workflow, effectuez les étapes suivantes :
 
 1. Accédez à la page [Usage Attribution][6].
-1. Sous **Products** à gauche, recherchez **Workflow Executions**.
-1. Passez la souris sur **Workflow Executions** et cliquez sur **Only** pour afficher l'attribution de l'utilisation uniquement pour les workflows.
+1. Sous {{< ui >}}Products{{< /ui >}} à gauche, recherchez {{< ui >}}Workflow Executions{{< /ui >}}.
+1. Survolez {{< ui >}}Workflow Executions{{< /ui >}} et cliquez sur {{< ui >}}Only{{< /ui >}} pour afficher l'attribution de l'utilisation uniquement pour les workflows.
 
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Vous avez des questions ou des commentaires ? Rejoignez le canal **#workflows** sur le [Slack de la communauté Datadog][1].
+<br>Avez-vous des questions ou des commentaires ? Rejoignez le canal **#workflows** sur le [Datadog Community Slack][1].
 
 
-[1]: https://datadoghq.slack.com/
+[1]: https://chat.datadoghq.com/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /fr/service_management/workflows/build/#workflow-notifications
+[3]: /fr/actions/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Aworkflow_automation
 [6]: https://app.datadoghq.com/billing/usage-attribution

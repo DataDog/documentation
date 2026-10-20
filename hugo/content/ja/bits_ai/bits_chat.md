@@ -18,6 +18,15 @@ further_reading:
 - link: /account_management/billing/ai_credits/
   tag: ドキュメント
   text: AI クレジット
+- link: https://www.datadoghq.com/blog/datadog-mcp-apps/
+  tag: ブログ
+  text: 'Datadog MCP Apps: AI ワークフロー向けインタラクティブ体験'
+- link: https://www.datadoghq.com/blog/introducing-bits-chat/
+  tag: ブログ
+  text: Bits Chat を使用して Datadog 全体で検索や操作を行い、より迅速に問題を解決
+- link: https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/
+  tag: ブログ
+  text: Bits Chat の Cloud Cost スキルを使用してコストに関するあらゆる質問により迅速に回答
 title: Bits Chat
 ---
 ## 概要 {#overview}
@@ -125,10 +134,11 @@ Bits Chat Reports ページは、組織が Bits Chat をどのように使用し
 
 ### ウェブアプリケーション {#web-application}
 Datadog ウェブアプリケーションで Bits Chat を開く方法はいくつかあります。
-- ナビゲーションバーの右上で、{{< ui >}}Ask Bits{{< /ui >}} をクリック
-- Bits Chat と統合された Datadog 製品で、{{< ui >}}Ask Bits{{< /ui >}} をクリックする、または {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (きらきら星アイコン)
-- <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> を押す
-- 左側のナビゲーションパネルで、{{< ui >}}Bits AI{{< /ui >}} をクリック
+- [Bits Chat][11] に移動する。
+- ナビゲーションバーの右上で、[{{< ui >}}Ask Bits{{< /ui >}}] (Bits に尋ねる) をクリックする。
+- Bits Chat と統合された Datadog 製品で、{{< ui >}}Ask Bits{{< /ui >}} をクリックする、または {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (きらきら星アイコン) をクリックする。
+- <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> を押す。
+- 左側のナビゲーションパネルで、[{{< ui >}}Bits AI{{< /ui >}}] をクリックする。
 
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="ダッシュボードリストの横に Bits Chat パネルが開く" style="width:40%;">}}
 
@@ -137,7 +147,7 @@ Datadog ウェブアプリケーションで Bits Chat を開く方法はいく�
 Bits にシステムやアクティブなインシデントについて質問してください。Bits は、Datadog の公開ドキュメント、テレメトリ、および所有権に関するコンテキストを持っています。
 
 1. [モバイルアプリをダウンロードしてログイン][2]します。
-2. ホーム画面で、{{< ui >}}Bits Assistant{{< /ui >}} をタップします。
+2. ホーム画面で、[{{< ui >}}Bits Chat{{< /ui >}}] をタップします。
 3. 音声またはテキストで Bits Chat とのチャットを開始します。
 {{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="Bits AI を使用したモバイルアプリホームダッシュボードのビュー" style="width:40%;" >}}
 
@@ -164,3 +174,4 @@ Bits にシステムやアクティブなインシデントについて質問し
 [8]: /ja/ddsql_reference/data_directory/
 [9]: /ja/cloud_cost_management/cloud_cost_skill/
 [10]: https://app.datadoghq.com/ask/usage
+[11]: https://app.datadoghq.com/ask

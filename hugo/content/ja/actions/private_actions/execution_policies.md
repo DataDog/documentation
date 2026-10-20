@@ -16,7 +16,10 @@ further_reading:
   text: コネクション
 title: 実行ポリシー
 ---
-## 概要{#overview}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">実行ポリシーは、お客様の<a href="/getting_started/site">Datadogサイト</a>ではサポートされていません（{{< region-param key="dd_site_name" >}}) では、Incident Management のプッシュ通知のみがサポートされています。</div>
+{{< /site-region >}}
+
+## 概要 {#overview}
 
 実行ポリシーを使用すると、チームが誰に対して、どこで、どのようなアクションを実行できるかを制御できます。各実行ポリシーは、一連のアクションに対する単一の許可または拒否ルールと、それが適用される Agent から構成されます。これらの Agent は、Agent タグによって選択します。実行ポリシーには、Private Actions を認可する際に 2 つの主要な利点があります。
 
@@ -25,7 +28,7 @@ title: 実行ポリシー
 
 実行ポリシーは、**Datadog Agent 内**で実行され、*所有者なし*として登録されたプライベートアクションランナーに適用されます。所有者なしのランナーは、特定のユーザーに紐付けられるのではなく、プライベートアクションランナー機能を持つ API キーで登録されます。ランナーがどのように所有者なしになるかについては、[登録と所有権][2] を参照してください。
 
-## 前提条件{#prerequisites}
+## 前提条件 {#prerequisites}
 
 - 所有者なしとして登録 (プライベートアクションランナー機能を持つ API キーを使用) された、**Datadog Agent 内**で実行されるプライベートアクションランナー。
 - 実行ポリシーの作成、更新、削除を許可する `ExecutionGroupWrite` 権限。[権限](#permissions)を参照してください。

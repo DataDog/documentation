@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/
   tag: 블로그
   text: Observability Pipelines를 사용하여 AI 앱의 OTel 데이터를 ClickHouse 및 Datadog으로 라우팅하기
+- link: https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/
+  tag: 아키텍처 센터
+  text: Observability Pipelines Sensitive Data Scanner 최적화
 products:
 - icon: logs
   name: 로그

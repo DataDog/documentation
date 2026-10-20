@@ -8,6 +8,9 @@ further_reading:
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with Browser Tests"
+- link: "/real_user_monitoring/application_monitoring/browser/optimizing_performance/#lighthouse-audits"
+  tag: "Documentation"
+  text: "Run Lighthouse audits and send scores to RUM"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
@@ -44,7 +47,7 @@ You may create a test using one of the following options:
 ### Create a test from a template
 
   1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, {{< ui >}}Steps{{< /ui >}}, and optionally {{< ui >}}Variables{{< /ui >}}.
-  2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
   3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
@@ -97,6 +100,11 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    * {{< ui >}}Disable CORS{{< /ui >}}: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
    * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
    * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
+
+     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.</div>
+
+     Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
+
    * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
@@ -107,6 +115,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
 [3]: /synthetics/browser_tests/test_results#resources
+[4]: /data_security/data_retention_periods/
    {{% /tab %}}
 
    {{% tab "Certificate" %}}
@@ -261,6 +270,8 @@ You can switch tabs in a browser test recording to perform an action on your app
 
 1. Optionally, select {{< ui >}}Open in a pop-up{{< /ui >}} at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in {{< ui >}}Incognito mode{{< /ui >}} to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
 2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][13].
+
+   With RUM data collection enabled, you can also turn on {{< ui >}}Run Lighthouse audit{{< /ui >}} to collect Lighthouse scores each time the saved test runs. For more information, see [Lighthouse audits in RUM][20].
 3. Click {{< ui >}}Start Recording{{< /ui >}} to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][14] within your browser test scenario on the left.
 5. In addition to the automatically recorded steps, you can also use the [steps][14] available in the upper left corner to enrich your scenario:
@@ -389,3 +400,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [17]: /account_management/rbac/granular_access
 [18]: https://support.microsoft.com/en-us/edge/add-turn-off-or-remove-extensions-in-microsoft-edge
 [19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
+[20]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/#lighthouse-audits

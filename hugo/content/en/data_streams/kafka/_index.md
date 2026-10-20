@@ -5,6 +5,10 @@ aliases:
   - /data_streams/live_messages
   - /data_streams/messages
   - /data_streams/kafka/messages
+further_reading:
+- link: "https://www.datadoghq.com/blog/kafka-console/"
+  tag: "Blog"
+  text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
 ---
 
 With Data Streams Monitoring's Kafka Console, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Console allows you to:
@@ -60,3 +64,7 @@ The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partitio
 [2]: /data_streams/kafka/setup/
 [3]: /data_streams/kafka/setup/#enable-message-inspection
 [4]: /data_streams/kafka/monitors_and_automation/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

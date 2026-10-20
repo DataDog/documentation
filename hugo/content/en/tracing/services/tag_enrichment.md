@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add tags to your logs, APM spans, and trace metrics without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
+Use tag enrichment rules to add tags to your telemetry without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Enabling a default rule applies `team` or `system` to all telemetry of services 
 
 Custom rules let you target a specific set of services and configure exactly how each tag value is sourced and applied.
 
-1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}+ Add Rule{{< /ui >}}.
+1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}\+ Add Rule{{< /ui >}}.
 1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select {{< ui >}}Build Advanced Query{{< /ui >}}.
    {{< img src="tracing/services/tag_enrichment/tag-enrichment-adv-query.png" alt="The Add IDP tag enrichment rule modal with the Build Advanced Query tab selected, showing fields for tag key, operator, and value, with an Add Condition option." >}}
    - Select {{< ui >}}Add Condition{{< /ui >}} to add an `AND` condition to your query.
@@ -45,8 +45,7 @@ Custom rules let you target a specific set of services and configure exactly how
    - Select the `team` tag, `system` tag, `custom` tag, or multiple.
    - For each tag, select whether the tag value comes from Entity Metadata, the value of a different tag, or a fixed value.
    - Choose whether the value is applied only when it doesn't already exist, or is appended to the current list of values for that tag.
-1. By default, tags are added only when the value is missing for a given telemetry item.
-1. Optionally, enter a descriptive name for the rule.
+1. Select the telemetry types to enrich.
 1. Review and save your rule. After you save the rule, it can take up to an hour for enrichment to be fully applied to incoming telemetry.
 
 ### Add a tag enrichment rule from a service page
@@ -61,7 +60,7 @@ Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-po
 
 ## Tag enrichment behavior
 
-- **Impacted telemetry**: Tag enrichment applies only to logs, APM spans, and trace metrics. Because [Data Observability: Jobs Monitoring][3] sends job telemetry as APM spans, that telemetry is enriched as well, but Jobs Monitoring metrics are not. Tag enrichment is not supported for other telemetry types, including custom and infrastructure metrics, Database Monitoring, Profiling, Kubernetes, Universal Service Monitoring, and Events.
+- **Impacted telemetry**: Tag enrichment applies to all telemetry except DSM, Events, and Orchestration.
 - **Historical data**: Tag enrichment rules apply only to telemetry ingested while a rule is active. Past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new telemetry, but does not update previously ingested data.
 - **Metadata updates**: Updating or adding Entity Metadata to services while enrichment rules are enabled, including the default rules, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.

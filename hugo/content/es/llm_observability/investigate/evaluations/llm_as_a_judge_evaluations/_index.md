@@ -104,7 +104,7 @@ Span Input: {{span_input}}
    También puede usar el panel de la derecha ({{< ui >}}Filtered Spans{{< /ui >}} en el ámbito del tramo, {{< ui >}}Filtered Traces{{< /ui >}} en el ámbito de la traza, {{< ui >}}Filtered Sessions{{< /ui >}} en el contexto de la sesión) para agregar datos de tramo como una variable:
    1. Elija una cuenta y una aplicación para que los tramos, trazas o sesiones aparezcan a la derecha.
    2. Seleccione uno de los tramos a la derecha para ver su JSON.
-   3. Seleccione {{< ui >}}+{{< /ui >}} para agregar el JSON a su prompt de usuario.
+   3. Seleccione {{< ui >}}\+{{< /ui >}} para agregar el JSON a su mensaje de usuario.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="El contenido del menú de la visualización JSON en el panel derecho de configuración de evaluación personalizada, que muestra la opción para Agregar variable al mensaje." style="width:40%;" >}}
 
@@ -114,9 +114,9 @@ Para modelos de OpenAI, Azure OpenAI, Vertex AI, Anthropic o Amazon Bedrock, con
 
 Para modelos de Anthropic o Amazon Bedrock, también puede configurar [Búsqueda por palabras clave](#keyword-search-output).
 
-Para AI Gateway, se admiten tanto [Salida estructurada](#structured-output) como [Búsqueda por palabras clave](#keyword-search-output). Datadog recomienda usar Salida estructurada cuando su modelo la admita y, de lo contrario, recurrir a Búsqueda por palabras clave.
+Para proveedores personalizados, se admiten tanto [Salida estructurada](#structured-output) como [Salida de búsqueda por palabra clave](#keyword-search-output). Datadog recomienda usar Salida estructurada cuando su modelo la admita y, de lo contrario, recurrir a Búsqueda por palabras clave.
 
-{{% collapse-content title="Salida estructurada (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Salida estructurada (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Proveedor Personalizado, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Seleccione un tipo de salida de evaluación:
 
    - {{< ui >}}Boolean{{< /ui >}}: Resultados verdadero/falso (por ejemplo, "¿El modelo siguió las instrucciones?")
@@ -362,7 +362,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Posprocesamiento (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="Posprocesamiento (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Proveedor Personalizado, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
 1. Seleccione el tipo de salida {{< ui >}}JSON{{< /ui >}}.
 
 2. Proporcione una función de JavaScript para identificar la evaluación, el valor y el razonamiento del evaluador. El posprocesamiento le permite realizar una evaluación más compleja que simplemente usar una salida estructurada booleana, de puntuación o categórica.
@@ -467,7 +467,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Resultado de búsqueda por palabra clave (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Salida de búsqueda por palabra clave (Anthropic, Amazon Bedrock, Proveedor Personalizado)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Seleccione el tipo de salida {{< ui >}}Boolean{{< /ui >}}.
    <div class="alert alert-info">Para el Resultado de búsqueda por palabra clave, solo está disponible el tipo de salida <strong>Booleano</strong>.</div>
 

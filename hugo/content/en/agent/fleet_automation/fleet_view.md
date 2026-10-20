@@ -49,6 +49,8 @@ Select a Datadog Agent or OTel Collector to view its configuration, connected in
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="The Agent detail panel showing configuration, connected integrations, and audit events." style="width:100%;" >}}
 
+The Agent's **Remote Configuration** status indicates whether it can receive configuration from Datadog. Its **Remote Agent Management** status indicates whether remote management is enabled. An Agent can appear in Fleet View and be connected to Remote Configuration while remote management is **NOT ENABLED**. To enable upgrades and configuration changes on VMs, see [Enable remote Agent management][8].
+
 ## Search and filter
 
 Use the search bar at the top of Fleet View to find specific Agents, OTel Collectors, or clusters across your fleet. You can:
@@ -121,7 +123,7 @@ Most Kubernetes view features are available without version requirements. Specif
 |---|---|
 | View `DatadogAgent` configuration | Datadog Operator v1.24 or later |
 | View Helm Chart values | Datadog Helm Chart v3.157.0 or later |
-| Edit configuration | [Remote Configuration][6] enabled and Datadog Operator v1.27 or later |
+| Edit configuration (Preview) | [Remote Configuration][6] enabled and Datadog Operator v1.27 or later |
 | Edit configuration without setting a cluster name | Datadog Operator v1.30.0 or later |
 | View integrations on a Cluster Agent | Agent v7.72.0 or later |
 | View integration status on a Cluster Agent | Agent v7.79.0 or later |
@@ -159,7 +161,7 @@ Click a cluster to view:
 
 On the {{< ui >}}Configuration{{< /ui >}} tab, you can view configuration:
 
-- **Datadog Operator v1.24 or later**: View the `DatadogAgent` custom resource configuration. With Datadog Operator v1.27 or later, you can also edit the configuration from this tab.
+- **Datadog Operator v1.24 or later**: View the `DatadogAgent` custom resource configuration. With Datadog Operator v1.27 or later, you can also edit the configuration from this tab. Editing is in Preview. For instructions, see [Configure the Agent on Kubernetes][9].
 - **Datadog Helm Chart v3.157.0 or later**: View the Helm Chart values (`values.yaml`).
 
 ### Limitations
@@ -181,3 +183,5 @@ Compared to the default view, the Kubernetes view has the following limitations:
 [5]: /containers/datadog_operator
 [6]: /agent/guide/setup_remote_config
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes

@@ -2,24 +2,23 @@
 aliases:
 - /es/continuous_integration/guides/add_custom_metrics/
 - /es/tests/guides/add_custom_metrics/
-description: Aprende a personalizar medidas en tus tests.
+description: Aprenda a usar medidas personalizadas en sus pruebas.
 further_reading:
 - link: /tests
   tag: Documentación
-  text: Más información sobre Test Optimization
+  text: Aprenda sobre Test Optimization
 - link: /monitors/types/ci
   tag: Documentación
-  text: Más información sobre los monitores de CI
-title: Añadir medidas personalizadas a los tests
+  text: Obtenga información sobre los monitores de CI.
+title: Agregue medidas personalizadas a sus pruebas.
 ---
+## Descripción general {#overview}
 
-## Información general
+Antes de comenzar, asegúrese de que [Test Optimization][1] ya esté configurado para sus pruebas. Esta guía le muestra cómo agregar y usar medidas personalizadas en sus pruebas.
 
-Antes de empezar, asegúrate de que [Test Optimization][1] ya está configurado para tu lenguaje. En esta guía se explica cómo personalizar medidas y añadirlas a los tests.
+## Agregue la medida personalizada a su prueba {#add-the-custom-measure-to-your-test}
 
-## Añadir la medida personalizada a un test
-
-Añade la medida personalizada a tu test. La página de instrumentación nativa te permite utilizar la API programática:
+Agregue la medida personalizada a su prueba. La instrumentación nativa le permite usar la API programática:
 
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
@@ -37,7 +36,7 @@ Añade la medida personalizada a tu test. La página de instrumentación nativa 
 
 {{% tab "Java" %}}
 
-Para añadir métricas personalizadas, incluye la librería [`opentracing-util`][1] como dependencia en tiempo de compilación en tu proyecto.
+Para agregar métricas personalizadas, incluya la biblioteca [`opentracing-util`][1] como una dependencia de tiempo de compilación en su proyecto.
 
 ```java
 import io.opentracing.Span;
@@ -114,9 +113,9 @@ DDTest.current?.setTag(key: "test.memory.usage", value: 1e8)
 
 {{% /tab %}}
 
-{{% tab "JUnit Report Uploads" %}}
+{{% tab "Cargas de informes de JUnit" %}}
 
-Para `datadog-ci`, utiliza la variable de entorno `DD_MEASURES` o el argumento de CLI `--measures`:
+Para `datadog-ci`, use la variable de entorno `DD_MEASURES` o el argumento de CLI `--measures`:
 
 ```
 DD_MEASURES="test.memory.usage:1000" datadog-ci junit upload --service my-service --measures test.request.rate:30 report.xml
@@ -126,41 +125,41 @@ DD_MEASURES="test.memory.usage:1000" datadog-ci junit upload --service my-servic
 
 {{< /tabs >}}
 
-## Crear una faceta
+## Crear una faceta {#create-a-facet}
 
-Crea una faceta para la medida personalizada que añadiste al test desde la página [**Test Runs** (Ejecuciones de tests][2], haciendo clic en **+ Add** (+ Añadir) en la lista de facetas.
+Cree una faceta para la medida personalizada que agregó a la prueba navegando a la [{{< ui >}}Test Runs{{< /ui >}} página][2] y haciendo clic en {{< ui >}}\+ Add{{< /ui >}} en la lista de facetas.
 
-{{< img src="/continuous_integration/facet_creation.png" text="Creación de una faceta en Ejecuciones de tests" style="width:100%" >}}
+{{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 
-Asegúrate de que el tipo de faceta sea **Measure** (Medida), que representa un valor numérico:
+Asegúrese de que el tipo de faceta sea {{< ui >}}Measure{{< /ui >}}, lo cual representa un valor numérico:
 
-{{< img src="/continuous_integration/measure_creation.png" text="Creación de una medida en Ejecuciones de tests" style="width:100%" >}}
+{{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
-Haz clic en **Add** (Añadir) para empezar a utilizar la medida personalizada.
+Haga clic en {{< ui >}}Add{{< /ui >}} para comenzar a usar su medida personalizada.
 
-## Graficar la evolución de la medida
+## Grafique la evolución de su medida {#graph-the-evolution-of-your-measure}
 
-Traza la evolución de tu medida a lo largo del tiempo seleccionando la visualización **Timeseries** (Serie temporal):
+Grafique la evolución de su medida a través del tiempo seleccionando la visualización {{< ui >}}Timeseries{{< /ui >}}:
 
-{{< img src="/continuous_integration/plot_measure.png" text="Trazar la duración media de referencia" style="width:100%" >}}
+{{< img src="/continuous_integration/plot_measure.png" text="Plot benchmark mean duration" style="width:100%" >}}
 
-Por ejemplo, puedes utilizar esta visualización para seguir la evolución del uso de memoria en tus tests.
+Por ejemplo, puede usar esta visualización para rastrear la evolución del uso de memoria en sus pruebas.
 
-## Exportar el gráfico
+## Exportar su gráfico {#export-your-graph}
 
-Puedes exportar tu gráfico a un [dashboard][3] o a un [notebook][4] y crear un [monitor][5] basado en él haciendo clic en el botón **Export** (Exportar).
+Puede exportar su gráfico a un [dashboard][3] o a un [notebook][4], y crear un [monitor][5] basado en él haciendo clic en el botón {{< ui >}}Export{{< /ui >}}.
 
-{{< img src="/continuous_integration/export_measure.png" text="Exportar el gráfico de duración media de referencia" style="width:100%" >}}
+{{< img src="/continuous_integration/export_measure.png" text="Export benchmark mean duration graph" style="width:100%" >}}
 
-## Añadir un monitor
+## Agregar un monitor {#add-a-monitor}
 
-Recibe una alerta si el valor de tu medida supera o no un umbral determinado mediante la creación de un [Monitor de tests de CI][6].
+Reciba alertas si el valor de su medida supera o cae por debajo de un cierto umbral creando un [CI Tests Monitor][6].
 
-{{< img src="/continuous_integration/monitor_measure.png" text="monitorizar la duración media de referencia" style="width:100%" >}}
+{{< img src="/continuous_integration/monitor_measure.png" text="Monitor benchmark mean duration" style="width:100%" >}}
 
-Por ejemplo, puedes utilizar este tipo de alerta para saber que el uso de memoria ha alcanzado un umbral determinado.
+Por ejemplo, puede usar este tipo de alerta para informarle sobre el uso de memoria al alcanzar un cierto umbral.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

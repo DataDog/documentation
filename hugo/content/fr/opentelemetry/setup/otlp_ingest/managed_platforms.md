@@ -21,6 +21,8 @@ Utilisez cette option lorsque vous exécutez des charges de travail sur une plat
 
 <div class="alert alert-danger">Les métadonnées de host envoyées aux endpoints de plateforme gérée ne remplissent pas la <a href="/infrastructure/list/">liste des hosts d'infrastructure</a>.</div>
 
+Pour des recommandations sur les noms d'hôte pour l'ingestion directe d'OTLP, consultez [Hostname and Tagging][19].
+
 Chaque endpoint prend en charge les chemins de signal suivants :
 
 | Signal  | Chemin          |
@@ -122,3 +124,4 @@ Les contrôles d'échantillonnage disponibles dans le Collecteur (échantillonna
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
+[19]: /fr/opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-collector

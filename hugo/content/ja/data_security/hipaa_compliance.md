@@ -7,10 +7,6 @@ further_reading:
 - link: data_security/logs
   tag: ドキュメント
   text: ログ管理のためのデータセキュリティ
-- link: coterm
-  tag: ドキュメント
-  text: 'CoTerm: Monitor terminal sessions and sensitive activities on local and remote
-    systems'
 title: HIPAA コンプライアンス
 ---
 

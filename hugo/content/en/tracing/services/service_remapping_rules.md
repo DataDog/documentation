@@ -3,7 +3,6 @@ title: Service remapping rules
 aliases:
 - /tracing/services/inferred_entity_remapping_rules/
 - /tracing/services/renaming_rules/
-site_support_id: service_remapping_rules
 further_reading:
 - link: "https://www.datadoghq.com/blog/service-remapping/"
   tag: "Blog"
@@ -48,9 +47,10 @@ You can create service remapping rules only for services instrumented with suppo
 1. Choose a remapping action to perform for your new remapping rule.
    - Select {{< ui >}}Remap services{{< /ui >}} to split a single entity, rename an entity, merge multiple entities together, or rename several entities.
    - Select {{< ui >}}Correlate telemetry{{< /ui >}} to identify a service based on an infrastructure tag.
-1. Use the search bar to select the entities you want to remap.
+1. Use the search bar to build a query of the entities you want to remap.
    - You can select one or more entities, but all must be of the same type (service, inferred service, datastore, or queue). Select services based on their `service` or `peer.service` tag, not by their Display Name metadata.
-   - As you select entities, a span query is built in the background. To edit the query, select {{< ui >}}Build Advanced Query{{< /ui >}}.
+   - You can also use wildcards (*) to select multiple entities at once.
+   - The service query supports all tags and the following attributes: `@language`, `@http.endpoint`, `@http.method`, `@peer.*`.
    - If you're correlating a service with infrastructure tags, you can only select _one_ service. Choose infra tag(s) to correlate telemetry on. All telemetry with the same infra tag(s) as the service chosen will be remapped to a single unified service name.
 
 ### Step 2: Specify new entity name
@@ -63,6 +63,9 @@ In the text box, enter a unique name for the selected entity (or entities). Alte
 
 1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
 1. Review and save your remapping rule. After you save your rule, _it may take about a minute for it to take effect_.
+
+## Service remapping with Bits Chat 
+Rename your services with the Bits Chat service remapping skill. To enable the skill, navigate to **Bits AI** > **Bits Chat** > **Settings**. Go to **Skills**, and turn on `service-remapping`. Then, prompt Bits Chat to create, delete, or update remapping rules.
 
 ## Remapping rules behavior
 

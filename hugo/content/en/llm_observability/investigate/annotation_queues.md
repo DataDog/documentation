@@ -13,6 +13,9 @@ further_reading:
   - link: /llm_observability/improve/experiments
     tag: Documentation
     text: Run experiments to test improvements
+  - link: /llm_observability/improve/access_control
+    tag: Documentation
+    text: Restrict a queue to specific teams or roles
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
     tag: "Blog"
     text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
@@ -27,7 +30,7 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 - Review traces with complete context including spans, metadata, tool calls, inputs, outputs, and evaluation results
 - Apply structured labels and free-form observations to traces
 - Identify and categorize failure patterns
-- Validate LLM-as-a-Judge evaluation accuracy
+- Validate LLM-as-a-Judge evaluator accuracy
 - Build golden datasets with human-verified labels for testing and validation
 
 
@@ -147,6 +150,8 @@ Access restrictions apply independently, so you can enable either restriction or
 
 The queue owner retains access and can annotate all interactions.
 
+These settings control who can annotate a queue, not who can see it. To control which teams and roles can see a queue at all, restrict its project with [Data Access Control][17].
+
 ### Filtering traces by annotation labels
 
 use the {{< ui >}}Annotation Labels{{< /ui >}} facet to filter traces by labels applied in annotation queues. This allows you to:
@@ -239,6 +244,7 @@ Transfer annotated traces to datasets for experiment evaluation:
 5. Set the dataset's {{< ui >}}expected output{{< /ui >}}:
    - {{< ui >}}From interaction{{< /ui >}}: use each trace's actual output. For experiment traces, you can also pick {{< ui >}}Expected output{{< /ui >}} to use the original expected output from the experiment's source dataset.
    - {{< ui >}}From annotation label{{< /ui >}}: use the values the annotators applied. Pick one or more labels. The record's `expected_output` is built from your selection.
+   - {{< ui >}}From final score{{< /ui >}}: use the final score recorded for each label instead of values aggregated across annotators. Pick one or more labels. The record's `expected_output` is a JSON object keyed by the selected label names. Traces without a final score for a selected label are still exported, with `null` for that label.
 6. Choose an existing dataset, or create a dataset.
 
 When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": ["neutral"], "topics": ["safety", "policy"] }`. The same shape applies whether you select one label or multiple labels. Categorical labels are always exported as arrays of selected options, whether the label is single-select or multi-select.
@@ -291,7 +297,7 @@ Raw per-annotator values are preserved in each record's metadata, along with ann
 
 {{% /collapse-content %}}
 
-Labels not selected as expected output are also included with each trace as metadata.
+Labels not selected as expected output are also included with each trace as metadata, along with any final scores and their assessment and reasoning.
 
 See [Datasets][3] for more information about using datasets in experiments.
 
@@ -351,7 +357,7 @@ Review failed traces to identify recurring patterns and categorize how your appl
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Validating LLM-as-a-Judge evaluations" level="h3" expanded=true id="example-validating-llm-as-a-judge-evaluations" %}}
+{{% collapse-content title="Validating LLM-as-a-Judge evaluators" level="h3" expanded=true id="example-validating-llm-as-a-judge-evaluations" %}}
 
 Find traces where automated evaluators may be uncertain or incorrect, then have humans provide ground truth.
 
@@ -360,7 +366,7 @@ Find traces where automated evaluators may be uncertain or incorrect, then have 
 3. Annotators review traces and provide human scores for the same criteria
 4. Compare human labels to automated evaluation scores
 5. Identify systematic disagreements (judge too strict, too lenient, or misunderstanding criteria)
-6. Refine evaluation prompts based on disagreements
+6. Refine evaluator prompts based on disagreements
 
 #### Queue configuration
 
@@ -406,3 +412,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
 [16]: /llm_observability/data_governance/
+[17]: /llm_observability/improve/access_control/

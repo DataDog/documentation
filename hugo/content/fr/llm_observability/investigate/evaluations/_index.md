@@ -13,7 +13,7 @@ title: Évaluations
 ---
 ## Présentation {#overview}
 
-Agent Observability propose plusieurs moyens de prendre en charge les évaluations. Elles peuvent être configurées en accédant à [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability propose plusieurs moyens de prendre en charge les évaluations. Ils peuvent être configurés en accédant à [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
 
 ### Évaluations personnalisées LLM-as-a-judge {#custom-llm-as-a-judge-evaluations}
 
@@ -47,7 +47,7 @@ Les [files d'attente d'annotation][11] fournissent un workflow structuré pour l
 
 En plus d'évaluer les entrées et les sorties des requêtes LLM, des agents, des workflows ou de l'application, Agent Observability s'intègre au [Sensitive Data Scanner][6], qui aide à prévenir les fuites de données en identifiant et en masquant toute information sensible. Pour obtenir une liste des règles prêtes à l'emploi incluses avec Sensitive Data Scanner, consultez les [Règles de la bibliothèque][12].
 
-### Sécurité {#security}
+### Security {#security}
 
 {{< learning-center-callout header="Obtenez des garde-fous de sécurité en temps réel pour vos applications et agents d'IA" btn_title="Rejoignez la préversion" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
   AI Guard aide à sécuriser vos applications et agents d'IA en temps réel contre les attaques par injection de prompt, jailbreaking, utilisation abusive d'outils et exfiltration de données sensibles. Essayez-le dès aujourd'hui !

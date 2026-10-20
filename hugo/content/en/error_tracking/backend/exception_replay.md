@@ -142,6 +142,7 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 - Logs with `source:dd_debugger` missing due to [Log Index][6] retention settings or [Exclusion Filters][7] in preceding indexes
 - Exception Replay is not available in the FedRAMP region
 - Java: On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+- .NET: On FIPS-enabled hosts, tracer versions before 3.55.0 do not support Exception Replay. On Linux, the application can crash. Upgrade to tracer 3.55.0 or later to use Exception Replay. On earlier versions, set `DD_EXCEPTION_REPLAY_ENABLED=false` to avoid the crash.
 
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.

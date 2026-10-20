@@ -3,19 +3,19 @@ description: Découvrez comment Datadog autorise les Private Actions à l'aide d
   d'exécution et de connexions.
 disable_toc: false
 further_reading:
-- link: actions/private_actions/
+- link: /actions/private_actions/
   tag: Documentation
   text: Présentation des Private Actions
-- link: actions/private_actions/enroll_runner/
+- link: /actions/private_actions/enroll_runner/
   tag: Documentation
   text: Inscription et propriété
-- link: actions/private_actions/set_up_agent_based/
+- link: /actions/private_actions/set_up_agent_based/
   tag: Documentation
   text: Configurez un exécuteur d'actions privé
-- link: actions/private_actions/execution_policies/
+- link: /actions/private_actions/execution_policies/
   tag: Documentation
   text: Politiques d'exécution
-- link: actions/connections/
+- link: /actions/connections/
   tag: Documentation
   text: Connexions
 title: Autoriser les Private Actions
@@ -28,7 +28,11 @@ Cette page explique comment cette décision d'autorisation est prise. Elle couvr
 
 ## Trouvez votre modèle d'autorisation {#find-your-authorization-model}
 
-Un runner est autorisé à l'aide de l'un des deux modèles : [**politiques d'exécution**](#execution-policies) ou [**connexions**](#connections). Le modèle est déterminé par la propriété du runner, définie une fois lors de l'inscription du runner. Un runner donné utilise exactement l'un de ces modèles pendant toute sa durée de vie ; vous ne pouvez pas combiner les deux sur le même runner. Comme la propriété est définie pour chaque runner, un seul parc basé sur l'Agent peut inclure à la fois des runners sans propriétaire et des runners avec propriétaire, chacun étant autorisé selon son propre modèle.
+Un runner est autorisé à utiliser l'un des modèles suivants, selon votre site Datadog : [**Execution Policies**](#execution-policies) ou [**Connections**](#connections).
+
+<div class="alert alert-danger">Sur US1-FED et US2-FED, <a href="/actions/connections/">Connections</a> est le modèle d'autorisation pris en charge.</div>
+
+Le modèle est déterminé par la propriété du runner, définie une fois lors de l'inscription du runner. Un runner donné utilise exactement l'un de ces modèles pendant toute sa durée de vie ; vous ne pouvez pas combiner les deux sur le même runner. Comme la propriété est définie pour chaque runner, un seul parc basé sur l'Agent peut inclure à la fois des runners sans propriétaire et des runners avec propriétaire, chacun étant autorisé selon son propre modèle.
 
 - **Le runner dans le Datadog Agent** dépend de la manière dont il a été inscrit. Un runner d'Agent sans propriétaire utilise des [politiques d'exécution](#execution-policies) ; un runner d'Agent avec propriétaire utilise des [connexions](#connections).
 - **Le runner autonome** est toujours avec propriétaire, il utilise donc toujours [Connections](#connections).
@@ -45,6 +49,9 @@ Pour savoir comment l'inscription définit la propriété d'un runner, consultez
 | **Control** | Granulaire : autorisez ou refusez des actions spécifiques ou des ensembles d'actions, de même que des périmètres spécifiques à l'intégration, tels que les espaces de noms Kubernetes cibles pour une action Kubernetes | Par runner : une connexion cible un runner spécifique |
 
 ## Politiques d'exécution {#execution-policies}
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Execution Policies n'est pas prise en charge pour votre <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Les **politiques d'exécution** sont un modèle d'autorisation pour les runners dans le Datadog Agent. Chaque politique gère l'accès à un ou plusieurs ensembles de runners à la fois. Au lieu d'une connexion distincte par intégration et par runner, vous utilisez des **tags de l'Agent** pour définir les Agents cibles. Vous leur associez ensuite une règle d'autorisation ou de refus.
 

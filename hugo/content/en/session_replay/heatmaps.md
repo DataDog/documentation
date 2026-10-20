@@ -7,10 +7,10 @@ aliases:
 - /product_analytics/session_replay/heatmaps
 - /product_analytics/heatmaps
 further_reading:
-- link: '/session_replay/browser/'
+- link: '/session_replay/'
   tag: 'Documentation'
   text: 'Session Replay for Browsers'
-- link: '/session_replay/mobile/'
+- link: '/session_replay/?platform=android'
   tag: 'Documentation'
   text: 'Session Replay for Mobile'
 - link: "https://www.datadoghq.com/blog/session-replay-custom-heatmap-backgrounds/"
@@ -31,11 +31,13 @@ A heatmap (or heat map) is a visualization of your user's interactions overlaid 
 
 Use heatmaps to review complex data at a glance and gain insights around optimizing your user experience.
 
+<div class="alert alert-info">Heatmaps are only supported for Browser Session Replay.</div>
+
 ## Prerequisites
 
 To get started with heatmaps:
 
-1. Verify your SDK version:
+1. Verify your Browser SDK version:
    - For Click maps, you must be on the latest version of the SDK (v4.40.0 or later).
    - For Scroll maps, you must be on (v4.50.0 or later).
 2. Enable [Session Replay][1].

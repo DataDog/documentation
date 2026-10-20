@@ -197,10 +197,10 @@ Use `minimum()` and `maximum()` to compare two queries point by point and return
 Here is an example using `maximum()` to find the maximum CPU usage between two availability zones.
 
 ```text
-maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
+maximum(system.cpu.user{availability-zone:us-east-1a}, system.cpu.user{availability-zone:us-east-2a})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example-2.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
 
 Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 

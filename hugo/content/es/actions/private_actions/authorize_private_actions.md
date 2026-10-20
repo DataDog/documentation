@@ -1,21 +1,21 @@
 ---
-description: Aprenda cómo Datadog autoriza Private Actions mediante Políticas de ejecución
-  y Conexiones.
+description: Aprenda cómo Datadog autoriza acciones privadas mediante Políticas de
+  ejecución y Conexiones.
 disable_toc: false
 further_reading:
-- link: actions/private_actions/
+- link: /actions/private_actions/
   tag: Documentación
   text: Descripción general de Private Actions
-- link: actions/private_actions/enroll_runner/
+- link: /actions/private_actions/enroll_runner/
   tag: Documentación
   text: Inscripción y propiedad
-- link: actions/private_actions/set_up_agent_based/
+- link: /actions/private_actions/set_up_agent_based/
   tag: Documentación
   text: Configurar un ejecutor de Private Actions
-- link: actions/private_actions/execution_policies/
+- link: /actions/private_actions/execution_policies/
   tag: Documentación
   text: Políticas de ejecución
-- link: actions/connections/
+- link: /actions/connections/
   tag: Documentación
   text: Conexiones
 title: Autorizar Private Actions
@@ -28,7 +28,11 @@ Esta página explica cómo se toma esa decisión de autorización. Cubre los mod
 
 ## Encuentre su modelo de autorización {#find-your-authorization-model}
 
-Un runner se autoriza mediante uno de dos modelos: [**Políticas de ejecución**](#execution-policies) o [**Conexiones**](#connections). El modelo está determinado por la propiedad del runner, establecida una vez cuando el runner se inscribe. Un runner determinado utiliza exactamente uno de estos modelos durante toda su vida útil; no puede combinar ambos en el mismo runner. Debido a que la propiedad se establece por runner, una sola flota basada en el Agent puede incluir runners sin propietario y con propietario, cada uno autorizado por su propio modelo.
+Un runner se autoriza mediante uno de los siguientes modelos, según su sitio de Datadog: [**Políticas de ejecución**](#execution-policies) o [**Conexiones**](#connections).
+
+<div class="alert alert-danger">En US1-FED y US2-FED, <a href="/actions/connections/">Conexiones</a> es el modelo de autorización compatible.</div>
+
+El modelo está determinado por la propiedad del runner, establecida una vez cuando el runner se inscribe. Un runner determinado utiliza exactamente uno de estos modelos durante toda su vida útil; no puede combinar ambos en el mismo runner. Debido a que la propiedad se establece por runner, una sola flota basada en el Agent puede incluir runners sin propietario y con propietario, cada uno autorizado por su propio modelo.
 
 - **El runner en el Datadog Agent** depende de cómo se inscribió. Un runner de Agent sin propietario utiliza [Políticas de ejecución](#execution-policies); un runner de Agent con propietario utiliza [Conexiones](#connections).
 - **El runner independiente** siempre tiene propietario, por lo que siempre utiliza [Conexiones](#connections).
@@ -41,10 +45,13 @@ Para saber cómo la inscripción establece la propiedad de un runner, consulte [
 |---|---|---|
 | **Funciona con** | Runners solo en el Datadog Agent | Tanto runners independientes como runners en el Datadog Agent |
 | **Cómo se otorga el acceso** | Las Agent tags apuntan a uno o más conjuntos de runners, por lo que una política gestiona el acceso a través de una flota en lugar de una conexión separada por integración por runner | Una conexión almacena credenciales y las empareja con un solo runner |
-| **Credenciales** | Las políticas de ejecución no almacenan credenciales; el acceso se otorga mediante etiquetas de agente. Las acciones que requieren credenciales (por ejemplo, HTTP, GitLab y MongoDB) no son compatibles. | La conexión contiene las credenciales utilizadas para ejecutar la acción |
+| **Credenciales** | Las políticas de ejecución no almacenan credenciales; el acceso se otorga mediante etiquetas de Agent. Las acciones que requieren credenciales (por ejemplo, HTTP, GitLab y MongoDB) no son compatibles. | La conexión contiene las credenciales utilizadas para ejecutar la acción |
 | **Control** | Detallado: permite o deniega acciones específicas o conjuntos de acciones, además de alcances específicos de la integración, como los espacios de nombres de Kubernetes de destino para una acción de Kubernetes | Por runner: una conexión apunta a un runner específico |
 
 ## Políticas de ejecución {#execution-policies}
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Las políticas de ejecución no están soportadas para su <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 **Las políticas de ejecución** son un modelo de autorización para runners en el Datadog Agent. Cada política gestiona el acceso a través de uno o más conjuntos de runners a la vez. En lugar de una conexión independiente por integración por runner, usted utiliza **Agent tags** para definir los Agent de destino. Luego, les adjunta una regla de permitir o denegar.
 

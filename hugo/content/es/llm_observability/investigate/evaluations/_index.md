@@ -14,7 +14,7 @@ title: Evaluaciones
 ---
 ## Descripción general {#overview}
 
-Agent Observability ofrece varias formas de admitir evaluaciones. Se pueden configurar navegando a [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability ofrece varias formas de admitir evaluaciones. Se pueden configurar navegando a [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
 
 ### Evaluaciones personalizadas de LLM-as-a-judge {#custom-llm-as-a-judge-evaluations}
 
