@@ -16,9 +16,7 @@ Federated Logs is in Preview. Use this form to submit your request today.
 
 ## Overview
 
-An external source is a table in your own data platform that contains logs. After you connect it, you can search it from Log Explorer with [Federated Logs][1], without ingesting the logs into Datadog.
-
-The supported source is Databricks.
+An external source is a table that contains logs in your own data platform, such as Databricks. After you connect it, you can search it from Log Explorer with [Federated Logs][1], without ingesting the logs into Datadog.
 
 ## Prerequisites
 
@@ -33,7 +31,7 @@ The supported source is Databricks.
 ### Prerequisites
 
 - A [Databricks integration][1] account configured in Datadog. Note the application (client) ID of the service principal used by the integration.
-- A Databricks table, registered in Unity Catalog, that contains your logs. To send logs to Databricks, you can use the [Observability Pipelines Databricks destination][2].
+- A Databricks table, registered in Unity Catalog, that contains your logs. You can load logs into the table with any tool, such as the [Observability Pipelines Databricks destination][2].
 
 ### Grant access to the service principal
 
@@ -75,7 +73,7 @@ When you [connect the source](#connect-a-source), select {{< ui >}}Databricks{{<
 
 ## Schema mapping
 
-Each log is a row in the table. When you connect a source, you map each Datadog field to a column of your table:
+When you connect a source, you map each Datadog field to a column of your table. Datadog reads each row of the table as one log.
 
 | Datadog field | Required |
 |---|---|
