@@ -27,7 +27,11 @@ Automatic integrations work only with specific packages and versions. Check the 
 
 <!-- TODO: Does it make sense that every package has a different supported Datadog SDK version? Is it possible to align them, for example on one minimum per language? The SDK and manual integrations require `dd-trace-py` 4.13.0 or later, but the automatic integrations table lists lower Python versions: LangChain at 3.19.0 (3.14.0 on the published page), OpenAI at 4.10.0, and Anthropic at 4.11.0. -->
 
-<!-- TODO: Which RubyLLM versions are supported, and with which `dd-trace-rb` versions? Current `dd-trace-rb` sets the RubyLLM minimum to 2.0.0. The v2.44.0 release notes reportedly say `dd-trace-rb` 2.28.0 through 2.43.x support RubyLLM 1.0.0 or later, but that wasn't verified. -->
+<!-- TODO: Which RubyLLM versions should the docs list? Should they keep the older range for `dd-trace-rb` 2.28.0 through 2.43.x, or list only RubyLLM 2.0.0 or later?
+- `dd-trace-rb` 2.28.0 added the RubyLLM integration, according to its release notes. The published docs pair it with RubyLLM 1.0.0 or later.
+- The `dd-trace-rb` 2.44.0 release notes (October 7, 2026) say: "Require `ruby_llm` 2.0 or later for the `RubyLLM` integration." Current `dd-trace-rb` source sets the minimum to 2.0.0.
+- The draft lists both: RubyLLM 2.0.0 or later, and RubyLLM 1.0.0 or later with `dd-trace-rb` 2.28.0 through 2.43.x.
+-->
 
 <!-- TODO: Is AI SDK v7 supported? If so, the AI SDK row can say "v6 or later." The `dd-trace-js` model-call hook has no upper version bound, but other AI SDK hooks stop before 7.0.0. -->
 
@@ -49,26 +53,27 @@ Each automatic integration evaluates a specific set of operations, so check the 
 | Node.js | Anthropic | `client.messages.create()`. With the `@anthropic-ai/sdk` package 0.33.0 or later, also `client.beta.messages.create()`. |
 | Ruby | RubyLLM | `RubyLLM::Chat#ask` and `RubyLLM::Chat#complete`, including the tool calls the model requests. |
 
-### Limitations
+### Streamed responses
 
-Some calls through supported packages aren't evaluated or can't be blocked by default, so review these limits before you rely on automatic integrations alone:
+A streamed response arrives in pieces while the model generates it, instead of all at once. By default, AI Guard doesn't evaluate streamed model responses, so if your agent streams responses, the model's output reaches the user without an evaluation.
 
-- When an agent framework calls Amazon Bedrock, Google Gemini, or Ollama, AI Guard evaluates the calls but can't block them.
+To enable evaluation of streamed responses, set `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`. The Datadog SDK then buffers each streamed response until AI Guard returns a result, and buffering delays the first token.
 
-   <!-- TODO: When an agent framework calls Amazon Bedrock, Google Gemini, or Ollama, is it true that AI Guard evaluates the calls but can't block them? If so, does that apply to every supported framework? The claim came from an earlier draft. No public source was found for it. -->
+<!-- TODO: With `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`, does the SDK hold the whole stream until evaluation finishes, so a blocked response never reaches the client? The page says the SDK buffers each streamed response until AI Guard returns a result. If any part of the stream reaches the client earlier, blocking can't fully stop an unsafe response. -->
 
-- By default, AI Guard doesn't evaluate streamed model responses.
+Streamed response evaluation is supported for these packages at the specified Datadog SDK versions:
 
-   To enable evaluation of streamed responses, set `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`. The Datadog SDK then buffers each streamed response until AI Guard returns a result, and buffering delays the first token. Streamed response evaluation is supported for these packages at the specified Datadog SDK versions:
+| Language | Package | Datadog SDK version |
+| --- | --- | --- |
+| Python | OpenAI and Anthropic | `dd-trace-py` 4.12.0 or later. |
+| Node.js | AI SDK | `dd-trace-js` 6.16.0 or later. |
+| Node.js | OpenAI | `dd-trace-js` 6.17.0 or later. |
+| Node.js | Anthropic | `dd-trace-js` 6.19.0 or later. |
 
-   | Language | Package | Datadog SDK version |
-   | --- | --- | --- |
-   | Python | OpenAI and Anthropic | `dd-trace-py` 4.12.0 or later. |
-   | Node.js | AI SDK | `dd-trace-js` 6.16.0 or later. |
-   | Node.js | OpenAI | `dd-trace-js` 6.17.0 or later. |
-   | Node.js | Anthropic | `dd-trace-js` 6.19.0 or later. |
-
-   <!-- TODO: Does AI Guard evaluate streamed RubyLLM responses? With `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`, does the SDK hold the stream until evaluation finishes, so a blocked response never reaches the client? LangChain doesn't evaluate streamed responses. -->
+<!-- TODO: Which other packages support streamed response evaluation?
+- RubyLLM: Does AI Guard evaluate streamed RubyLLM responses, and does `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED` work in Ruby? If so, add a row for it.
+- LangChain: Which `dd-trace-py` release will add it? The `dd-trace-py` v4.16.0 release notes say streamed LangChain responses aren't evaluated, but `dd-trace-py` main has unreleased code that evaluates them when stream analysis is on.
+-->
 
 ## Enable automatic integrations
 

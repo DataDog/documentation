@@ -305,7 +305,11 @@ The error is `Datadog::AIGuard::AIGuardAbortError`, with the fields `action`, `r
 
 Per-call blocking options change whether a single SDK call raises `AIGuardAbortError`, so one checkpoint can report without blocking while the rest of the agent follows the policy.
 
-<!-- TODO: Should the SDK page keep its per-call options that stop a single evaluation call from blocking, such as `Options(block=False)` in Python? `DD_AI_GUARD_BLOCK` and the LiteLLM `block: false` setting were removed so the policy is the one documented way to control blocking. The per-call SDK options are narrower: one checkpoint, not the whole service. -->
+<!-- TODO: Should the SDK page keep its per-call blocking options, such as `Options(block=False)` in Python?
+- What they do: A per-call option makes one evaluation call return its result instead of raising `AIGuardAbortError`, even when the service's policy blocks unsafe requests.
+- Why they're in question: After a product decision on October 19, the drafts removed two other code-level settings that turn off blocking, `DD_AI_GUARD_BLOCK` and the LiteLLM `block: false` setting, so the policy is the one documented way to control blocking. The per-call options also override the policy in code, so the same decision might apply to them.
+- Why they might stay: They're narrower. They affect one evaluation call, not the whole service, and SDK users already write each evaluation call themselves.
+-->
 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}

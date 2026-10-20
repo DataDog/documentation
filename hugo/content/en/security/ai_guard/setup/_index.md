@@ -116,7 +116,7 @@ You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to
 
 AI Guard spans don't count toward APM ingestion billing, but the spans this filter keeps count toward your APM indexed span usage. If you don't use APM, or you keep a high volume of traces, indexed AI Guard spans can appear on your bill.
 
-<!-- TODO: Can the Intelligent Retention Filters drop AI Guard spans before the custom AI Guard filter applies? If they can, how should customers prevent it? They sit outside the ordered list of custom filters. Step 4 tells customers to drag the AI Guard filter to the top of the custom list. If the intelligent filters only add spans, no change is needed. -->
+<!-- TODO: Can the Intelligent Retention Filters drop AI Guard spans before the custom AI Guard filter keeps them? If so, how should customers prevent it? Docs recommend dragging the AI Guard filter to the top of the custom filter list, because only the first matching filter applies. The Intelligent Retention Filters sit in a separate section that customers can't reorder, as seen in a demo org, and the Trace Retention docs don't say whether they apply first. -->
 
 ## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
@@ -152,7 +152,12 @@ To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluat
 
 If AI Guard spans appear but don't show evaluated messages, set `DD_TRACE_API_VERSION=v0.4` in your application environment. The Datadog SDK sends AI Guard span content only with trace API version `v0.4`.
 
-<!-- TODO: Do Node.js and Java need `DD_TRACE_API_VERSION=v0.4` for AI Guard spans to show their content? `dd-trace-py` uses v0.4 automatically when AI Guard is enabled, so for Python this matters only if someone forces v0.5. -->
+<!-- TODO: Do Node.js, Java, and Ruby need `DD_TRACE_API_VERSION=v0.4` for AI Guard spans to show their content, or do they use v0.4 automatically?
+- Why it matters: AI Guard stores the evaluated messages in the span's `meta_struct` field. Only trace API version v0.4 carries `meta_struct`, so with v0.5, AI Guard spans arrive without their messages.
+- Source: An internal AI Guard troubleshooting page (February 2026) lists "API version is not v0.4" as a cause of missing span content, with the fix `DD_TRACE_API_VERSION=v0.4`.
+- Python: `dd-trace-py` switches its default to v0.4 when AI Guard is enabled, so this matters only if someone sets v0.5.
+- Node.js, Java, and Ruby: not checked. If they all use v0.4 automatically, this troubleshooting section can say so, or be removed.
+-->
 
 [1]: /security/ai_guard/policies/
 [2]: /account_management/api-app-keys/
