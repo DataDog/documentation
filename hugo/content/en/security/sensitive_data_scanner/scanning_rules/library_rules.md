@@ -28,7 +28,7 @@ These rules can also be viewed in Datadog:
 
 ## Reference library rules by ID
 
-Each library rule has a stable **Rule ID** (the standard pattern ID), shown in the table above. Datadog may rename a library rule to correct or clarify it, but the rule ID never changes. When you manage scanning rules with Terraform or the API, reference library rules by rule ID instead of by name so that a rename does not break your configuration.
+Each library rule has a **Rule ID** (also called the standard pattern ID), shown in the library rules table. Datadog may rename a library rule to correct or clarify it, but the rule ID never changes. When you manage scanning rules with Terraform or the API, reference library rules by rule ID instead of by name so that a rename doesn't break your configuration.
 
 ### Terraform
 
