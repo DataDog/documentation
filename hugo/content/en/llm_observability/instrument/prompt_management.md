@@ -1,6 +1,6 @@
 ---
 title: Integrate Prompt Management
-description: Retrieve managed prompts in a Python application, preserve local prompts as fallbacks, and track prompt usage in Agent Observability.
+description: Retrieve managed prompts in a Python or Node.js application, preserve local prompts as fallbacks, and track prompt usage in Agent Observability.
 ---
 
 ## Overview
@@ -22,7 +22,7 @@ If the user's request includes a prompt ID, environment, and variable names, use
 
 ## Prerequisites
 
-Prompt Management runtime retrieval supports Python applications. For other languages, use [Prompt Tracking][2] to record local prompt templates and variables.
+This guide covers Prompt Management runtime retrieval in Python and Node.js applications. To record local prompt templates and variables without runtime retrieval, use [Prompt Tracking][2].
 
 Before changing prompt construction, identify the application's package manager, configuration and secret-management workflow, startup command, Datadog instrumentation, LLM provider, and provider call site.
 
@@ -31,11 +31,11 @@ Keep retrieval at the existing prompt-construction boundary. Preserve the applic
 Creating and deploying a managed prompt is a one-time setup operation. Do not create, update, or deploy prompts from application startup or a request path.
 
 {{< agent-only >}}
-1. Prompt Management runtime retrieval is supported only for Python applications. If the target application is not Python, do not add runtime retrieval. Return to the main [instrumentation guide](/llm_observability/instrument.md) and instrument the selected prompts with structured Prompt Tracking instead. Do not implement a direct HTTP client or rewrite the application in Python.
+1. Use the public Prompt Management APIs for the application's language: `LLMObs` from `ddtrace.llmobs` for Python, or `tracer.llmobs.prompts` from `dd-trace` for Node.js. For another language, check its SDK documentation for runtime retrieval support. If unsupported, return to the main [instrumentation guide](/llm_observability/instrument.md) and use structured Prompt Tracking instead. Do not implement a direct HTTP client or rewrite the application in another language.
 2. Inspect the application before modifying it. Identify its package manager, configuration and secret-management workflow, startup command, existing Datadog instrumentation, LLM provider, prompt construction, and provider call site.
 3. For an existing managed prompt, use the prompt ID, environment, and variable names supplied in the user's prompt without asking the user to confirm them. For a promotion, derive a descriptive prompt ID from the selected prompt's purpose and ask the user to confirm it before creating the prompt.
 4. If multiple prompt or provider call sites are plausible, ask the user which one to modify and wait for an answer before editing.
-5. Preserve the application's existing package manager, configuration workflow, startup command, provider, model, and business behavior. Existing ambient environment-variable usage, such as `os.getenv()`, is a configuration convention even when no `.env` or configuration file exists. Extend that convention without asking. If the repository has no applicable convention, ask the user which approach to use and wait for an answer instead of introducing one.
+5. Preserve the application's existing package manager, configuration workflow, startup command, provider, model, and business behavior. Existing ambient environment-variable usage, such as `os.getenv()` or `process.env`, is a configuration convention even when no `.env` or configuration file exists. Extend that convention without asking. If the repository has no applicable convention, ask the user which approach to use and wait for an answer instead of introducing one.
 6. Keep managed-prompt retrieval at the application's existing prompt-construction boundary. Do not move prompt construction into the provider call site or duplicate it there when a helper, library, or other component already owns it.
 7. When multiple local prompt fragments are composed into one provider call, promote the final provider-facing message list as a single managed prompt. Do not create nested managed-prompt references. If the user explicitly wants a fragment managed independently, preserve the existing composition and track that fragment explicitly.
 8. Follow repository ownership boundaries. If the checked-out repository is a library and an unavailable host application owns runtime configuration, secrets, instrumentation, or startup, still implement the package dependency, prompt construction, and provider-call changes owned by the library. Do not invent host-owned configuration, initialize tracing inside the library, or claim live verification. Report the exact host-side work that remains. Ask for the host application only when a required code change is not owned by the checked-out repository.
@@ -46,7 +46,7 @@ Creating and deploying a managed prompt is a one-time setup operation. Do not cr
 
 ## Install the Prompt Management SDK
 
-Use a `ddtrace` version that supports the public Prompt Management APIs required by the selected workflow. Reuse a compatible installed version. If installation or an update is required, use the application's existing package manager and preserve its dependency-management conventions. The dependency must be available after installation from a clean environment.
+Use a `ddtrace` version for Python or a `dd-trace` version for Node.js that supports the public Prompt Management APIs required by the selected workflow. Reuse a compatible installed version. If installation or an update is required, use the application's existing package manager and preserve its dependency-management conventions. The dependency must be available after installation from a clean environment.
 
 {{< agent-only >}}
 Inspect the installed SDK before changing dependencies. Explain any required installation or update. Ask before updating an existing dependency, and treat this optional integration separately from updates required for instrumentation.
@@ -63,8 +63,11 @@ Skip this section if you use an existing managed prompt.
    - If exactly one environment matches, use its `data[].id` as the Feature Flags environment ID.
    - If multiple environments match, select the intended environment.
    - If no environment matches, create a matching environment with the [Create an environment API][4] before deploying the prompt. Set `queries` to contain the exact `DD_ENV` value, choose a display name, and specify whether the environment represents production. Environment creation requires `feature_flag_environment_config_write`. Use the returned `data.id`.
-5. Check for an exact prompt-ID match with `LLMObs.list_prompts()`. If a managed prompt already uses the ID, integrate that prompt or choose another ID. A tracked prompt that is not yet managed can be promoted with its existing ID.
-6. Create and deploy the first version with `LLMObs.create_prompt()` and `env_ids`:
+5. Check for an exact prompt-ID match with `LLMObs.list_prompts()` in Python or `await tracer.llmobs.prompts.listPrompts()` in Node.js. If a managed prompt already uses the ID, integrate that prompt or choose another ID. A tracked prompt that is not yet managed can be promoted with its existing ID.
+6. Create and deploy the first version with the environment ID:
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -76,9 +79,27 @@ created_prompt = LLMObs.create_prompt(
 )
 ```
 
-Use the public SDK method for promotion. The installed SDK must support `env_ids` to deploy the prompt during creation. If creation reports a conflict, list prompts again and check that the ID belongs to the intended managed prompt before integrating it. Do not overwrite an existing managed prompt.
+{{% /tab %}}
+{{% tab "Node.js" %}}
 
-The returned `created_prompt["id"]` is the prompt UUID used by the Datadog prompt page: `https://<APPLICATION_HOST>/llm/prompts/<PROMPT_UUID>`. Use the application host for your [Datadog site][5].
+With `dd-trace` initialized, run this once in an async setup function:
+
+```javascript
+const tracer = require('dd-trace')
+
+const createdPrompt = await tracer.llmobs.prompts.createPrompt(
+  '<PROMPT_ID>',
+  chatTemplate,
+  { envIds: [environmentId] }
+)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Use the public SDK method for promotion. The installed SDK must support `env_ids` in Python or `envIds` in Node.js to deploy the prompt during creation. If creation reports a conflict, list prompts again and check that the ID belongs to the intended managed prompt before integrating it. Do not overwrite an existing managed prompt.
+
+The returned `created_prompt["id"]` in Python or `createdPrompt.id` in Node.js is the prompt UUID used by the Datadog prompt page: `https://<APPLICATION_HOST>/llm/prompts/<PROMPT_UUID>`. Use the application host for your [Datadog site][5].
 
 After promotion, configure runtime retrieval with a least-privilege application key that has the read permissions in the next section. Remove the one-time write-capable setup key when it is no longer needed.
 
@@ -94,14 +115,14 @@ For environment resolution:
 
 If the prompt ID already belongs to a managed prompt, ask whether to integrate it or choose a different ID. If creation reports a conflict, list prompts again. Integrate only if the confirmed ID belongs to the intended managed prompt; otherwise, ask for a different ID. Do not silently update or replace an existing managed prompt.
 
-If the SDK does not accept `env_ids`, report that it cannot deploy during creation. Do not call private SDK methods or the Prompt Management HTTP API as a workaround.
+If the SDK does not accept `env_ids` in Python or `envIds` in Node.js, report that it cannot deploy during creation. Do not call private SDK methods or the Prompt Management HTTP API as a workaround.
 
-Keep the UUID returned by `LLMObs.create_prompt()`. Determine the application host from `DD_SITE`: use `app.datadoghq.com` for `datadoghq.com`, `app.datadoghq.eu` for `datadoghq.eu`, `app.ddog-gov.com` for `ddog-gov.com`, and the `DD_SITE` value itself for other supported sites. Include the direct prompt-page link after successful promotion. If the host cannot be determined safely, identify the prompt by its prompt ID and ask the user to open it from Prompt Management instead of guessing a URL.
+Keep the UUID returned by `LLMObs.create_prompt()` or `tracer.llmobs.prompts.createPrompt()`. Determine the application host from `DD_SITE`: use `app.datadoghq.com` for `datadoghq.com`, `app.datadoghq.eu` for `datadoghq.eu`, `app.ddog-gov.com` for `ddog-gov.com`, and the `DD_SITE` value itself for other supported sites. Include the direct prompt-page link after successful promotion. If the host cannot be determined safely, identify the prompt by its prompt ID and ask the user to open it from Prompt Management instead of guessing a URL.
 {{< /agent-only >}}
 
 ## Configure the application
 
-Make the following values available before `ddtrace` initializes, using the application's existing configuration and secret-management workflow:
+Make the following values available before `ddtrace` or `dd-trace` initializes, using the application's existing configuration and secret-management workflow:
 
 ```text
 DD_SITE=<DATADOG_SITE>
@@ -121,9 +142,22 @@ If the application does not send data through a Datadog Agent, also set:
 DD_LLMOBS_AGENTLESS_ENABLED=1
 ```
 
+{{< tabs >}}
+{{% tab "Python" %}}
+
 If configuration is available before process startup, preserve the startup workflow and use `ddtrace-run` if needed for automatic instrumentation. If the application loads configuration in Python, load it before importing `ddtrace.auto`, then run the application's normal Python command. Do not combine application-level configuration loading with `ddtrace-run`.
 
 For shell-based startup, export variables, assign them inline on the launch command, or use the application's existing mechanism to pass them to the child Python process. Bare, unexported shell assignments do not pass configuration to that process.
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Load configuration before initializing `dd-trace`, and initialize it before importing the LLM provider. Preserve existing SDK initialization and loader hooks. Follow the [automatic instrumentation setup][6] or the [Next.js guide][7] for the application's framework.
+
+Use the initialized tracer's `tracer.llmobs.prompts` API for Prompt Management. Call its asynchronous methods from an async function in the application's existing workflow.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Use a separate runtime application key with the required read permissions. A write-capable promotion key is a one-time setup credential.
 
@@ -137,8 +171,8 @@ For an existing managed-prompt integration, if the user did not supply credentia
 
 1. Identify the prompt ID and variable names for the existing or promoted prompt.
 2. Make a meaningful value available for every variable at the existing prompt-construction boundary.
-3. Import `LLMObs` from `ddtrace.llmobs` at that boundary.
-4. Replace the prompt construction with `LLMObs.get_prompt()` using the selected prompt ID.
+3. In Python, import `LLMObs` from `ddtrace.llmobs` at that boundary. In Node.js, access `tracer.llmobs.prompts` from the initialized `dd-trace` tracer.
+4. Replace the prompt construction with `LLMObs.get_prompt()` in Python or `await tracer.llmobs.prompts.getPrompt()` in Node.js using the selected prompt ID.
 5. Preserve the existing chat prompt as a message-list `fallback`.
 6. Use `{{variable}}` placeholders in the fallback with the managed prompt's exact variable names. Do not leave Python-style `{variable}` placeholders in the fallback.
 7. Call `prompt.format()` with values for every variable. Pass the formatted messages to the existing provider call without changing the provider, model, or unrelated behavior.
@@ -148,6 +182,9 @@ Use the supplied prompt ID and variable names without asking for confirmation. F
 {{< /agent-only >}}
 
 For example:
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -169,7 +206,35 @@ prompt = LLMObs.get_prompt(
 messages = prompt.format(**variables)
 ```
 
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+With `dd-trace` initialized, retrieve the prompt in an async application function:
+
+```javascript
+const tracer = require('dd-trace')
+
+const defaultMessages = [
+  { role: 'system', content: 'You are a support agent for {{company}}.' },
+  { role: 'user', content: '{{question}}' }
+]
+const variables = { company, question }
+
+const prompt = await tracer.llmobs.prompts.getPrompt('<PROMPT_ID>', {
+  fallback: defaultMessages
+})
+const messages = prompt.format(variables)
+```
+
+Attach the prompt metadata to the provider call as described in [Track prompt usage](#track-prompt-usage).
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Track prompt usage
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 When the formatted value is passed directly to a supported automatically instrumented provider, preserve it unchanged so Datadog can associate the managed prompt with the LLM span automatically. Do not add manual annotations when automatic tracking captures the prompt metadata.
 
@@ -197,11 +262,39 @@ with LLMObs.annotation_context(
 
 `annotation_context()` does not create an LLM span. Use an automatically instrumented provider or preserve the application's existing manual LLM span instrumentation.
 
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Wrap each provider call that uses the managed prompt with `tracer.llmobs.annotationContext()`. Pass the same variables to `prompt.toAnnotation()` that you passed to `prompt.format()`. Formatting a prompt does not attach its metadata to LLM spans automatically.
+
+```javascript
+const messages = prompt.format(variables)
+
+const response = await tracer.llmobs.annotationContext(
+  { prompt: prompt.toAnnotation(variables) },
+  () => client.chat.completions.create({
+    model: 'gpt-4o',
+    messages
+  })
+)
+```
+
+Keep the annotation context around every provider call that uses the prompt, including calls with copied or transformed messages and later turns in a conversation.
+
+`annotationContext()` does not create an LLM span. Use an automatically instrumented provider or preserve the application's existing manual LLM span instrumentation.
+
+{{< agent-only >}}
+Inspect every provider call that uses the managed prompt. Attach metadata with `prompt.toAnnotation(variables)` in `tracer.llmobs.annotationContext()`, including when formatted messages pass directly to the provider. Preserve existing annotations without duplicating them.
+{{< /agent-only >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Verify the integration
 
 1. Run local checks with the application's existing workflow.
 2. Run the application and exercise the modified provider call when you are ready to make provider requests and send telemetry.
-3. Open the prompt page in Datadog and allow a short delay for prompt usage to appear. Use the UUID returned by `LLMObs.create_prompt()` for a promoted prompt.
+3. Open the prompt page in Datadog and allow a short delay for prompt usage to appear. Use the UUID returned by `LLMObs.create_prompt()` or `tracer.llmobs.prompts.createPrompt()` for a promoted prompt.
 4. Check for authentication, authorization, retrieval, or tracking errors.
 
 {{< agent-only >}}
@@ -209,7 +302,7 @@ with LLMObs.annotation_context(
 2. Do not query Datadog or use SDK span-reading methods to verify prompt tracking.
 3. If verification requires running the application, making a provider request, incurring cost, emitting telemetry, or causing another external side effect, do not finish the task merely by providing the run command. Request approval for that exact command through the coding environment's approval mechanism, or ask the user directly and wait for confirmation. A tool execution approval counts as confirmation.
 4. If the user authorizes the run, use the application's normal execution workflow and exercise the modified provider call. If the user declines, give the user the exact command or action needed to do so.
-5. In the final response, state whether the application was run. After a promotion, include the direct prompt-page link constructed from the UUID returned by `LLMObs.create_prompt()`. Otherwise, include a direct prompt-page link when its UUID and application host are known. Ask the user to trigger the modified LLM flow if necessary, return to that prompt page in Datadog, and allow a short delay for prompt usage to appear.
+5. In the final response, state whether the application was run. After a promotion, include the direct prompt-page link constructed from the UUID returned by `LLMObs.create_prompt()` or `tracer.llmobs.prompts.createPrompt()`. Otherwise, include a direct prompt-page link when its UUID and application host are known. Ask the user to trigger the modified LLM flow if necessary, return to that prompt page in Datadog, and allow a short delay for prompt usage to appear.
 6. Report any authentication, authorization, retrieval, or tracking failure accurately. Do not claim that Datadog-side tracking was verified unless the user confirms it.
 
 {{< /agent-only >}}
@@ -219,3 +312,5 @@ with LLMObs.annotation_context(
 [3]: /api/latest/feature-flags/list-environments/
 [4]: /api/latest/feature-flags/create-an-environment/
 [5]: /getting_started/site/
+[6]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs#set-up-automatic-instrumentation
+[7]: /llm_observability/guide/nextjs_guide/

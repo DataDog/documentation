@@ -21,27 +21,44 @@ further_reading:
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
 
-Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and Prompt Tracking are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
+Runtime retrieval is supported in Python through the `ddtrace` SDK and in Node.js through the `dd-trace` SDK. Use `LLMObs.get_prompt()` in Python or `tracer.llmobs.prompts.getPrompt()` in Node.js. Prompt retrieval and Prompt Tracking are separate: retrieval does not require enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
 After creating prompt versions, use [Prompt Experimentation][10] to compare them with an A/B test or deploy one progressively with a Guarded Rollout.
 
-Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans.
+Prompt Management works alongside [Prompt Tracking][1]. In Python, when Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans. In Node.js, attach prompt metadata with `tracer.llmobs.annotationContext()` and `prompt.toAnnotation()`. See [Track prompt usage][13].
 
 ## Prerequisites
 
-- Python 3.9 or later.
-- ddtrace>=4.13.0
+- For Python, Python 3.9 or later and `ddtrace>=4.13.0`.
+- For Node.js, a compatible Node.js runtime and a `dd-trace` version that exposes `tracer.llmobs.prompts`. See the [Node.js integration workflow][12].
 - Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
 - A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
-- To manage prompts through the API or Python SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
+- To manage prompts through the API, Python SDK, or Node.js SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
 
 ## Install the SDK
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 Install or upgrade the latest `ddtrace` package in the Python environment used by your application:
 
 ```shell
 pip install --upgrade ddtrace
 ```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Install a `dd-trace` version with Prompt Management support using the application's package manager:
+
+```shell
+npm install dd-trace
+```
+
+Follow [Integrate Prompt Management][12] for Node.js configuration, retrieval, fallback, and tracking examples.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Use a managed prompt in Python
 
@@ -372,7 +389,7 @@ messages := rendered.Messages
 
 {{% tab "Node.js" %}}
 ```javascript
-const prompt = await tracer.llmobs.getPrompt('support-assistant')
+const prompt = await tracer.llmobs.prompts.getPrompt('support-assistant')
 
 const variables = {
   plan: 'enterprise',
@@ -670,3 +687,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [10]: /llm_observability/configure/prompt_experimentation/
 [11]: /api/latest/agent-observability/create-an-agent-observability-prompt/
 [12]: /llm_observability/instrument/prompt_management/
+[13]: /llm_observability/instrument/prompt_management/#track-prompt-usage

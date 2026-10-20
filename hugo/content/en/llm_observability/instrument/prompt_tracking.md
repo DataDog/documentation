@@ -35,7 +35,9 @@ Include Prompt Tracking in the default Agent Observability instrumentation. For 
 Do not replace local prompts with Datadog Prompt Management retrieval unless the user requested or approved that integration. Preserve existing managed-prompt integrations. If automatic tracking captures the prompt metadata, do not add duplicate manual annotations. For copied or transformed managed prompts, follow [Track prompt usage](/llm_observability/instrument/prompt_management.md#track-prompt-usage).
 {{< /agent-only >}}
 
-When Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()` as described in [Track prompt usage][9]. The following setup options apply to prompts defined outside the registry.
+In Python, when Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()`.
+
+In Node.js, retrieve managed prompts with `tracer.llmobs.prompts.getPrompt()` and attach metadata with `tracer.llmobs.annotationContext()` and `prompt.toAnnotation()`. See [Track prompt usage][9] for examples in both languages. The following setup options apply to prompts defined outside the registry.
 
 ### With structured prompt metadata
 To use Prompt Tracking, you can submit structured prompt metadata (ID, optional version, template, variables).

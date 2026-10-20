@@ -31,17 +31,20 @@ Follow these guidelines throughout this page and its linked setup guides:
 
 ## Prerequisites
 
-- Identify the application's programming language, framework, LLM provider, and startup command.
-- Obtain a [Datadog API key][8] for sending data directly to Datadog. If you send data through a Datadog Agent, use the [SDK configuration][2] for that setup.
+- Obtain a [Datadog API key][8] for sending data directly to Datadog.
 - Select the [Datadog site][9] associated with your account.
 
 {{< agent-only >}}
-Inspect the application to identify its language and framework before choosing a setup guide. For agentless setup, use the API key supplied by the user through the existing secret-management workflow. If the user has not supplied a key and does not want to provide one, continue the code changes. In the final response, explain that data submission requires the key and show where to configure it. Do not claim data submission succeeded without it.
+Inspect the application to identify its language, framework, LLM provider, and startup command before choosing a setup guide. For agentless setup, use the API key supplied by the user through the existing secret-management workflow. If the user has not supplied a key and does not want to provide one, continue the code changes. In the final response, explain that data submission requires the key and show where to configure it. Do not claim data submission succeeded without it.
 {{< /agent-only >}}
 
 ## Configure environment variables
 
-Set environment variables before the application starts or load them before the SDK initializes. Use the application's existing configuration or secret-management workflow. For local development, this can be an existing `.env` file. Keep credentials out of source code.
+Set environment variables before the application starts or load them before the SDK initializes.
+
+{{< agent-only >}}
+Use the application's existing configuration or secret-management workflow. For local development, this can be an existing `.env` file. Keep credentials out of source code.
+{{< /agent-only >}}
 
 The following example sends data directly to Datadog without a Datadog Agent. Replace the placeholders and load these values into the application process:
 
@@ -53,7 +56,14 @@ DD_LLMOBS_ML_APP=<APPLICATION_NAME>
 DD_SITE=<DATADOG_SITE>
 ```
 
-If the application sends data through a Datadog Agent, use the [SDK configuration][2] instead of enabling agentless mode.
+If the application sends data through a Datadog Agent, use the following environment variables instead. Set `DD_TRACE_AGENT_URL` to the URL of your Datadog Agent:
+
+```text
+DD_TRACE_AGENT_URL=<DATADOG_AGENT_URL>
+DD_LLMOBS_ENABLED=true
+DD_LLMOBS_AGENTLESS_ENABLED=false
+DD_LLMOBS_ML_APP=<APPLICATION_NAME>
+```
 
 ### Agent Observability application name
 
@@ -96,13 +106,13 @@ For Python, Node.js, or Java, follow the language-specific setup in the [automat
 
 See [Integrate Prompt Management][7] for prompt instrumentation instructions. You can use an existing managed prompt or promote a local prompt. Keep the local prompt as a fallback.
 
-Complete instrumentation before adding this optional integration. Follow [Track prompt usage][6] to choose between automatic tracking and explicit annotations.
+Follow [Track prompt usage][6] to choose between automatic tracking and explicit annotations.
 
 {{< agent-only >}}
 After reporting the instrumentation results:
 
 - If the user supplied a Datadog managed prompt ID, follow the [Prompt Management integration guide](/llm_observability/instrument/prompt_management.md). Do not ask whether to enable it again.
-- Otherwise, identify the Python application's local prompts and ask whether the user wants to manage them in Datadog. If they agree, follow the guide to promote the selected prompts and integrate runtime retrieval.
+- Otherwise, identify the Python or Node.js application's local prompts and ask whether the user wants to manage them in Datadog. If they agree, follow the guide to promote the selected prompts and integrate runtime retrieval.
 - If the user declines or does not answer, leave the instrumented local prompts unchanged.
 - If Prompt Management requires an SDK update, explain why and ask before changing the dependency. This optional update must not delay core instrumentation or context sharing.
 {{< /agent-only >}}
@@ -200,10 +210,10 @@ Follow these security requirements:
 
 Run the application and exercise an instrumented LLM call. Open [Agent Observability][14] and select the application to inspect its traces.
 
-To link directly to the application's data, use the application host for your [Datadog site][9] and filter by the application name:
+To link directly to the application's data, use the URL for your selected [Datadog site][9] and filter by the application name:
 
 ```text
-https://<APPLICATION_HOST>/llm/applications?query=@ml_app:<APPLICATION_NAME>
+https://{{< region-param key="dd_full_site" >}}/llm/applications?query=@ml_app:<APPLICATION_NAME>
 ```
 
 {{< agent-only >}}
