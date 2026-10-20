@@ -2784,10 +2784,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -2816,10 +2816,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -2848,10 +2848,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -2880,10 +2880,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.eu/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -2912,10 +2912,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -2944,10 +2944,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -2976,10 +2976,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ddog-gov.com/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/integration/aws/accounts?aws_account_id=123456789012"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5635,10 +5635,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.com/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5667,10 +5667,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us3.datadoghq.com/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5699,10 +5699,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us5.datadoghq.com/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5731,10 +5731,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.eu/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5763,10 +5763,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap1.datadoghq.com/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5795,10 +5795,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap2.datadoghq.com/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -5827,10 +5827,10 @@
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_API_KEY>"</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ddog-gov.com/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/integration/aws"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>

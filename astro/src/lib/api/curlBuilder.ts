@@ -58,6 +58,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     method,
     path,
     site = "datadoghq.com",
+    otherSites = [],
     subdomain = "api",
     pathParams,
     queryParams,
@@ -73,7 +74,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   );
   const interpolatedPath = interpolatePath(path, pathParams);
   const queryString = buildQueryString(queryParams, auth.queryParts);
-  const url = `https://${subdomain}.${site}${interpolatedPath}${queryString}`;
+  const url = `https://${subdomain}.\${DD_SITE}${interpolatedPath}${queryString}`;
 
   const lines: string[] = [];
 
@@ -88,20 +89,20 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
 
   // --- Shell variable exports as comments ---
   lines.push(`# Set your Datadog site and credentials`);
-  lines.push(`export DD_SITE="${site}"`);
+  lines.push(buildSiteExportLine(site, otherSites));
   lines.push(...auth.exportLines);
   lines.push("");
 
   // --- curl command ---
   const curlParts: string[] = [];
   curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
-  curlParts.push(...auth.headers);
 
-  // Content-Type and Accept headers
+  // Accept, Content-Type, then auth, in Hugo's order
+  curlParts.push(`-H "Accept: application/json"`);
   if (requestBodyJson || methodHasBody(method)) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
-  curlParts.push(`-H "Accept: application/json"`);
+  curlParts.push(...auth.headers);
 
   // Request body
   if (requestBodyJson) {
@@ -124,6 +125,16 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
+
+/**
+ * `export DD_SITE="datadoghq.com"`, followed by a comment naming the other
+ * sites when there are any, for readers who can't switch sites on the page.
+ */
+function buildSiteExportLine(site: string, otherSites: string[]): string {
+  const exportLine = `export DD_SITE="${site}"`;
+  if (otherSites.length === 0) return exportLine;
+  return `${exportLine} # Or ${otherSites.join(", ")}`;
+}
 
 /**
  * Export each parameter that has no example as `"CHANGE_ME"`, as Hugo does,

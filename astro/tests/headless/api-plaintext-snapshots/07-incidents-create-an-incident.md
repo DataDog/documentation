@@ -476,14 +476,14 @@ API error response.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X POST "https://api.datadoghq.com/api/v2/incidents" \
--H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
--H "Content-Type: application/json" \
+curl -X POST "https://api.${DD_SITE}/api/v2/incidents" \
 -H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
 -d @- << EOF
 {
   "data": {

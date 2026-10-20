@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import type { OpenAPIV3 } from "openapi-types";
 import {
+  buildCurlByRegion,
+  buildPlaintextCurl,
   extractPermissionsMatch,
   extractRequestBody,
   extractResponses,
@@ -251,5 +253,50 @@ describe("extractResponses content types", () => {
     });
 
     expect(response.schema?.map((field) => field.name)).toEqual(["data"]);
+  });
+});
+
+describe("curl site comment", () => {
+  const twoSiteSpec = {
+    ...spec,
+    servers: [
+      {
+        url: "https://{subdomain}.{site}",
+        variables: {
+          site: {
+            default: "datadoghq.com",
+            enum: ["datadoghq.com", "datadoghq.eu"],
+          },
+          subdomain: { default: "api" },
+        },
+      },
+    ],
+  } as OpenAPIV3.Document;
+  const operation = { responses: {} } as OpenAPIV3.OperationObject;
+  const noParams = { path: [], query: [], header: [] };
+
+  it("lists the operation's other sites after DD_SITE in the .md curl", () => {
+    const curl = buildPlaintextCurl(
+      twoSiteSpec,
+      "get",
+      "/api/v1/validate",
+      operation,
+      noParams,
+    );
+    expect(curl).toContain('export DD_SITE="datadoghq.com" # Or datadoghq.eu');
+  });
+
+  it("leaves the site comment out of the per-site HTML curl", () => {
+    const curlByRegion = buildCurlByRegion(
+      twoSiteSpec,
+      "get",
+      "/api/v1/validate",
+      operation,
+      noParams,
+    );
+    expect(Object.keys(curlByRegion)).toHaveLength(2);
+    for (const curl of Object.values(curlByRegion)) {
+      expect(curl).not.toContain("# Or");
+    }
   });
 });

@@ -17,7 +17,11 @@ import { buildRunCommand } from "./runCommandBuilder";
 import type { LanguageRunInfo } from "./codeExampleLoader";
 import { getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
-import type { CurlParam, CurlSecurityScheme } from "./schemas/curl";
+import type {
+  CurlParam,
+  CurlSecurityScheme,
+  GenerateCurlOptions,
+} from "./schemas/curl";
 import type { ResponseData, RequestBodyData } from "./schemas/views";
 import type { SplitParams } from "./schemas/params";
 
@@ -322,27 +326,69 @@ export function buildCurlByRegion(
   splitParams: SplitParams,
   requestBodyJson?: string,
 ): Record<string, string> {
-  const regions = getRegions(spec, operation);
-  const servers = operation?.servers ?? spec?.servers;
-  const subdomain: string =
-    servers?.[0]?.variables?.subdomain?.default ?? "api";
-
+  const options = curlOptionsForOperation(
+    spec,
+    method,
+    path,
+    operation,
+    splitParams,
+    requestBodyJson,
+  );
   const result: Record<string, string> = {};
-  for (const region of regions) {
-    result[region.key] = buildCurlCommand({
-      method,
-      path,
-      site: region.site,
-      subdomain,
-      pathParams: toCurlParams(splitParams.path),
-      queryParams: toCurlParams(splitParams.query),
-      requestBodyJson,
-      security: operation.security,
-      globalSecurity: spec.security,
-      securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
-    });
+  for (const region of getRegions(spec, operation)) {
+    result[region.key] = buildCurlCommand({ ...options, site: region.site });
   }
   return result;
+}
+
+/**
+ * The curl command for the .md, which can't switch sites: it uses the first
+ * region's site, and lists the operation's other sites in a comment.
+ */
+export function buildPlaintextCurl(
+  spec: OpenAPIV3.Document,
+  method: string,
+  path: string,
+  operation: OpenAPIV3.OperationObject,
+  splitParams: SplitParams,
+  requestBodyJson?: string,
+): string {
+  const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
+  return buildCurlCommand({
+    ...curlOptionsForOperation(
+      spec,
+      method,
+      path,
+      operation,
+      splitParams,
+      requestBodyJson,
+    ),
+    site: defaultRegion?.site,
+    otherSites: otherRegions.map((region) => region.site),
+  });
+}
+
+/** Everything `buildCurlCommand` needs except the site. */
+function curlOptionsForOperation(
+  spec: OpenAPIV3.Document,
+  method: string,
+  path: string,
+  operation: OpenAPIV3.OperationObject,
+  splitParams: SplitParams,
+  requestBodyJson: string | undefined,
+): GenerateCurlOptions {
+  const servers = operation?.servers ?? spec?.servers;
+  return {
+    method,
+    path,
+    subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
+    pathParams: toCurlParams(splitParams.path),
+    queryParams: toCurlParams(splitParams.query),
+    requestBodyJson,
+    security: operation.security,
+    globalSecurity: spec.security,
+    securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
+  };
 }
 
 /** SDK run commands for the given operation, keyed by region like curl. */

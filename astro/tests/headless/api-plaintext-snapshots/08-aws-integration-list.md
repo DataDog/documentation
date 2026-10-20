@@ -229,14 +229,14 @@ API error response.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 export DD_API_KEY="<DD_API_KEY>"
 export DD_APP_KEY="<DD_APP_KEY>"
 
-curl -X GET "https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012" \
+curl -X GET "https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012" \
+-H "Accept: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
--H "Accept: application/json"
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 {% /tab %}
 
@@ -601,14 +601,14 @@ Error response object.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 export DD_API_KEY="<DD_API_KEY>"
 export DD_APP_KEY="<DD_APP_KEY>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/integration/aws" \
+curl -X GET "https://api.${DD_SITE}/api/v1/integration/aws" \
+-H "Accept: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
--H "Accept: application/json"
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 {% /tab %}
 

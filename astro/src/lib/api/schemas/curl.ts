@@ -36,6 +36,12 @@ export const GenerateCurlOptionsSchema = z
       .string()
       .optional()
       .describe("Datadog site domain, e.g. 'datadoghq.com'"),
+    otherSites: z
+      .array(z.string())
+      .optional()
+      .describe(
+        "Other sites the operation supports, listed in a comment after DD_SITE. Only the .md sets this: the HTML switches sites itself.",
+      ),
     subdomain: z
       .string()
       .optional()

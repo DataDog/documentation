@@ -599,13 +599,13 @@ Error response object.
 export dashboard_id="CHANGE_ME"
 
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/dashboard/${dashboard_id}" \
--H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
--H "Accept: application/json"
+curl -X GET "https://api.${DD_SITE}/api/v1/dashboard/${dashboard_id}" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ${DD_BEARER_TOKEN}"
 ```
 {% /tab %}
 

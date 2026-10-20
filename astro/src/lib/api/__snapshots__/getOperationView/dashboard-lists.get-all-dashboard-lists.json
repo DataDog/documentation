@@ -193,29 +193,29 @@
           "entries": [
             {
               "description": "Get all dashboard lists curl example",
-              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\"",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "us3": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "us5": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "eu": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "ap1": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "ap2": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "gov": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/dashboard/lists/manual\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/dashboard/lists/manual\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 }
               }
             }

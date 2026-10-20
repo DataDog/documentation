@@ -39,6 +39,7 @@ import {
   extractPermissionsMatch,
   extractOauthScopes,
   buildCurlByRegion,
+  buildPlaintextCurl,
   buildRunCommandByRegion,
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
@@ -669,9 +670,15 @@ function buildCodeExamplesForOperation(
     params,
     requestBodyJson,
   );
-  const regionKeys = Object.keys(curlByRegion);
-  const defaultRegionKey = regionKeys[0] ?? "us";
-  const defaultCurl = curlByRegion[defaultRegionKey] ?? "";
+  // The HTML renders `regionVariants`, so `code` only reaches the .md.
+  const plaintextCurl = buildPlaintextCurl(
+    spec,
+    op.method,
+    op.pathStr,
+    op.operation,
+    params,
+    requestBodyJson,
+  );
 
   const curlVariants: Record<string, { code: string }> = {};
   for (const [key, code] of Object.entries(curlByRegion)) {
@@ -691,7 +698,7 @@ function buildCodeExamplesForOperation(
       entries: [
         {
           description: `${summary} curl example`,
-          code: defaultCurl,
+          code: plaintextCurl,
           syntax: "bash",
           regionVariants: curlVariants,
         },
