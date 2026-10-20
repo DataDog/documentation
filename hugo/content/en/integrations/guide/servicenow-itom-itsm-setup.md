@@ -382,6 +382,8 @@ To populate data into the ServiceNow incident, you have to modify your script to
 {{% collapse-content title="Create a Datadog On-Call Page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
 To create a Datadog On-Call Page from a ServiceNow record, add a new business rule in ServiceNow that calls the `PublishOnCallPage` script include. The script include uses the credentials from the **Configuration** record you create in [Sync data bidirectionally](#sync-bidirectionally), so complete that section first.
 
+**Note**: If the Datadog application key in that **Configuration** record is a scoped application key, it must include the `on_call_page` authorization scope.
+
 `PublishOnCallPage` takes three arguments, in order:
 
 | Argument | Required | Description |
