@@ -47,7 +47,7 @@ Before you begin:
 - Choose the application behavior you want to compare and a numeric evaluation score that measures the outcome.
 - Confirm that you have the permissions listed in [Plan and Launch Experiments][3].
 
-<div class="alert alert-info"><strong>Using an AI coding agent?</strong> Datadog organizations allow read-only MCP tools by default. To let an agent create feature flags and experiments, an organization administrator must enable MCP write access, and your role must have the <code>mcp_write</code> permission. See <a href="/mcp_server/setup/#required-permissions">Required permissions</a> for the Datadog MCP Server.</div>
+<div class="alert alert-info"><strong>Using an AI coding agent?</strong> Datadog organizations allow read-only <a href="/llm_observability/build_with_ai/mcp_server/">MCP tools</a> by default. To let an agent create feature flags and experiments, an organization administrator must enable MCP write access, and your role must have the <code>mcp_write</code> permission. See <a href="/mcp_server/setup/#required-permissions">Required permissions</a> for the Datadog MCP Server.</div>
 
 {{< agent-only >}}
 **Instruction for AI agents**: Before calling an MCP tool that creates or modifies a Datadog resource, confirm that the required write tool is available. If write access is unavailable, direct the human to [Required permissions](/mcp_server/setup/#required-permissions) and wait for them to enable access.
