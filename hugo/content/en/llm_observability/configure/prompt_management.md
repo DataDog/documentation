@@ -39,13 +39,17 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 
 ### Credentials
 
+#### Retrieve prompts
+
 You need your [Datadog site][2] and the credentials required for your retrieval method:
 
 - **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
 - **Retrieve through the Agent**: Provide an API key. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
 - **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
 
-To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires the read permissions listed for direct retrieval, plus `llm_observability_write` and `feature_flag_config_write`.
+#### Manage prompts
+
+To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires `llm_observability_read`, `feature_flag_config_read`, `feature_flag_environment_config_read`, `llm_observability_write`, and `feature_flag_config_write`.
 
 [2]: /getting_started/site/
 [3]: /account_management/api-app-keys/#api-keys
@@ -60,13 +64,17 @@ To create, update, or delete prompts through the API or SDK, provide an API key 
 
 ### Credentials
 
+#### Retrieve prompts
+
 You need your [Datadog site][2] and the credentials required for your retrieval method:
 
 - **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
 - **Retrieve through the Agent**: Neither key is required when retrieval succeeds through the Agent. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
 - **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
 
-To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires the read permissions listed for direct retrieval, plus `llm_observability_write` and `feature_flag_config_write`.
+#### Manage prompts
+
+To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires `llm_observability_read`, `feature_flag_config_read`, `feature_flag_environment_config_read`, `llm_observability_write`, and `feature_flag_config_write`.
 
 [2]: /getting_started/site/
 [3]: /account_management/api-app-keys/#api-keys
@@ -167,7 +175,7 @@ To retrieve an environment's deployed prompt through the Agent, complete the fol
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Follow the [Node.js SDK initialization guide][16] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+Prompt Management uses your application's existing `dd-trace` initialization. Configure one of the retrieval methods in this section before the tracer initializes. If your application does not initialize the tracer yet, follow the [Node.js SDK initialization guide][16] after configuring retrieval.
 
 #### Retrieve directly from Datadog
 
@@ -269,7 +277,9 @@ If retrieval fails and no cached prompt or fallback is available, `getPrompt()` 
 {{% /tab %}}
 {{< /tabs >}}
 
-Without prompt composition, combine prompts in application code or manage the final provider-facing prompt as a single prompt. To include one managed prompt in another, see [Reuse prompts with composition](#reuse-prompts-with-composition). Prompt composition is in Preview.
+Combine prompts in application code or manage the final prompt sent to your model provider as a single managed prompt.
+
+**Preview**: To include one managed prompt in another, use prompt composition, which is available in Preview. See the [Reuse prompts with composition](#reuse-prompts-with-composition) section.
 
 ### Select a version
 
