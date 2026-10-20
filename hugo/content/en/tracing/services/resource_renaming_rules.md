@@ -30,7 +30,7 @@ There is no tracer or Agent version requirement.
 
 ### Step 1: Select the service to target
 
-1. In Datadog, navigate to {{< ui >}}APM{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][2] > {{< ui >}}Resource Rules{{< /ui >}} and click {{< ui >}}Add rule{{< /ui >}}.
+1. In Datadog, navigate to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Resource Rules{{< /ui >}}][2] and click {{< ui >}}Add rule{{< /ui >}}.
 1. Under {{< ui >}}Target an attribute and a service{{< /ui >}}, select the service to target, or leave the {{< ui >}}Service{{< /ui >}} field empty to apply the rule to all services. The {{< ui >}}Attribute{{< /ui >}} field is set to `resource_name`.
    - Select the service name as sent by the tracer, not a name set by a [service remapping rule][3].
    - Scope rules to a single service unless the pattern applies to all of your services.
@@ -71,7 +71,7 @@ Resource renaming rules are applied to APM spans, including indexed spans and sp
 - **Agent-side quantization:** Resource renaming rules are an alternative to [replacing tags with `DD_APM_REPLACE_TAGS`][5] in the Agent. Resource renaming rules apply to all hosts at once, without an Agent configuration change or redeploy.
 
 [1]: /account_management/rbac/permissions/
-[2]: https://app.datadoghq.com/apm/settings/overview
+[2]: https://app.datadoghq.com/apm/settings/renaming-rules
 [3]: /tracing/services/service_remapping_rules/
 [4]: https://github.com/google/re2/wiki/Syntax
 [5]: /tracing/troubleshooting/quantization/
