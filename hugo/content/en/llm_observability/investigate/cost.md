@@ -106,7 +106,7 @@ To view cost for a single application, click the application in the Cost Overvie
 - {{< ui >}}Cost Trend{{< /ui >}}: Spend over time, grouped by model, provider, token type, or custom tags
 - {{< ui >}}Most Expensive LLM Calls{{< /ui >}}: A list of your most expensive requests
 
-{{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
+{{< img src="llm_observability/cost_tracking_trace_v2.png" alt="Cost data in trace detail." style="width:100%;" >}}
 
 Cost data is also available within your application’s traces and spans, allowing you to understand cost at both the request (trace) and operation level (span).
 Click any trace or span to open a detailed side-panel view that includes cost metrics for the full trace and for each individual LLM call.
