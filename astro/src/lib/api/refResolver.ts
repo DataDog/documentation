@@ -485,18 +485,9 @@ export function schemaToFields(
   if (schema.$ref) {
     const ref: string = schema.$ref;
 
-    if (visited.has(ref)) {
-      return [
-        {
-          name: "(recursive)",
-          type: refName(ref),
-          required: false,
-          deprecated: false,
-          readOnly: false,
-          description: `Circular reference to ${refName(ref)}.`,
-        },
-      ];
-    }
+    // Hugo cuts a cycle off here, so the field that repeats the schema has
+    // no rows under it.
+    if (visited.has(ref)) return [];
 
     const resolved = resolveRef(spec, ref);
     if (!resolved) return [];

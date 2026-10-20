@@ -3808,17 +3808,7 @@
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "List of widget groups.",
-                          "children": [
-                            {
-                              "name": "(recursive)",
-                              "type": "Widget",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Circular reference to Widget."
-                            }
-                          ]
+                          "description": "List of widget groups."
                         }
                       ]
                     }

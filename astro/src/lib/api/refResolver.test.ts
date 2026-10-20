@@ -108,6 +108,32 @@ describe("schemaToFields", () => {
     expect(fields.length).toBeGreaterThan(0);
   });
 
+  // Hugo cuts a cycle off at the field that repeats, so prod shows that
+  // field with nothing under it.
+  it("leaves a field that repeats its schema with no recursive row under it", () => {
+    const spec = {
+      components: {
+        schemas: {
+          Tree: {
+            type: "object",
+            properties: {
+              children: {
+                type: "array",
+                items: { $ref: "#/components/schemas/Tree" },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const [children] = schemaToFields(spec, {
+      $ref: "#/components/schemas/Tree",
+    });
+    expect(children.name).toBe("children");
+    expect(children).not.toHaveProperty("children");
+  });
+
   it("converts enum values", () => {
     const spec = {};
     const schema = {
