@@ -1,20 +1,21 @@
 ---
-title: Set Up and Use Agent Observability Experiments
+title: Set Up and Use Agent Observability Offline Experiments
 aliases:
+- /llm_observability/guide/experiments/
 - /llm_observability/improve/experiments/setup/
 - /llm_observability/experiments/setup/
-description: How to set up Agent Observability Experiments and start running experiments.
+description: How to set up Agent Observability Offline Experiments and start running offline experiments.
 further_reading:
 - link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
   tag: "Blog"
   text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
-This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. See [runnable Node.js experiment examples][7].
+This guide describes how to set up and use Agent Observability offline experiments with the Python or Node.js SDK. See [runnable Node.js experiment examples][7].
 
 ## Prerequisites
 
-To run experiments, you need a Datadog [API key][12] and a [Datadog application key][13].
+To run offline experiments, you need a Datadog [API key][12] and a [Datadog application key][13].
 
 ## Set up Agent Observability
 
@@ -57,7 +58,7 @@ LLMObs.enable(
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Set `DD_API_KEY` and `DD_APP_KEY` in your environment. The Experiments client uses these variables for authentication. Then choose one of the following initialization methods.
+Set `DD_API_KEY` and `DD_APP_KEY` in your environment. The Offline Experiments client uses these variables for authentication. Then choose one of the following initialization methods.
 
 **In-code initialization**
 
@@ -79,8 +80,8 @@ const { experiments } = tracer.llmobs
 
 Configure the project and application names independently:
 
-- `projectName` identifies the project that contains your datasets and experiments. If omitted, it defaults to `default-project`.
-- `mlApp` identifies the LLM application used for Agent Observability traces. Neither `mlApp` nor `service` determines the Experiments project name.
+- `projectName` identifies the project that contains your datasets and offline experiments. If omitted, it defaults to `default-project`.
+- `mlApp` identifies the LLM application used for Agent Observability traces. Neither `mlApp` nor `service` determines the Offline Experiments project name.
 
 **Command-line initialization**
 
@@ -141,7 +142,7 @@ To run without a Datadog Agent, set `agentlessEnabled` to `true`. Agentless runs
 
 ## Create a project
 
-Projects organize your datasets and experiments. You can create a project in the Datadog UI or through the API. To create a project with an SDK, specify a project name that does not already exist.
+Projects organize your datasets and offline experiments. You can create a project in the Datadog UI or through the API. To create a project with an SDK, specify a project name that does not already exist.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -167,7 +168,7 @@ const tracer = require('dd-trace').init({
 const { experiments } = tracer.llmobs
 ```
 
-Set the default project with `llmobs.projectName` or the `DD_LLMOBS_PROJECT_NAME` environment variable. The Experiments client creates the project when it first accesses it.
+Set the default project with `llmobs.projectName` or the `DD_LLMOBS_PROJECT_NAME` environment variable. The Offline Experiments client creates the project when it first accesses it.
 
 To use a different project for a specific operation, pass `projectName` to that operation. For example, pass it to `pullDataset()` to retrieve a dataset from another project. When creating a dataset and its experiment, use the same project name for both:
 
@@ -267,7 +268,7 @@ See [Datasets][1] for information about creating, retrieving, and managing datas
 
 ## Create an experiment
 
-An experiment runs your agent across scenarios in a dataset and uses evaluators to measure its performance. Compare experiments to assess how different application configurations perform.
+An experiment runs your agent across scenarios in a dataset and uses evaluators to measure its performance. Compare offline experiments to assess how different application configurations perform.
 
 An experiment has the following components:
 
@@ -367,7 +368,7 @@ For custom tracing, use `llmobs.trace()`. For automatic instrumentation, see the
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Using OpenTelemetry spans inside experiments
+#### Using OpenTelemetry spans inside offline experiments
 
 If your application uses [OpenTelemetry instrumentation][6], you can create OTel spans inside your experiment task. With `DD_TRACE_OTEL_ENABLED=1`, the Datadog tracer acts as the OpenTelemetry TracerProvider, so OTel spans appear as children of the experiment span automatically.
 
@@ -796,7 +797,7 @@ console.log(experiment.url())
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** LLM Experiments traces are retained for 90 days.
+**Note:** Offline Experiments traces are retained for 90 days.
 
 ## Further reading
 

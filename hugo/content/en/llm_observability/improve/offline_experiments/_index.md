@@ -1,13 +1,14 @@
 ---
-title: Experiments
-description: An overview of Agent Observability Experiments feature.
+title: Offline Experiments
+description: An overview of the Agent Observability Offline Experiments feature.
 aliases:
+  - /llm_observability/improve/experiments/
   - /llm_observability/experiments_preview
   - /llm_observability/experiments/
 further_reading:
-  - link: /llm_observability/guide/experiments
+  - link: /llm_observability/guide/offline_experiments
     tag: "Documentation"
-    text: Set up and use Agent Observability Experiments
+    text: Set up and use Agent Observability Offline Experiments
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
     tag: "Blog"
     text: "Create and monitor LLM experiments with Datadog"
@@ -34,21 +35,21 @@ further_reading:
     text: "From traces to experiments: A loop for improving AI agents"
 ---
 
-{{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 offline experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various offline experiments." style="width:100%;" >}}
 
-Agent Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
+Agent Observability [Offline Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 
 - Create and version datasets
-- Run and manage experiments
+- Run and manage offline experiments
 - Compare results to evaluate impact
 
-## Set up experiments
+## Set up offline experiments
 
-Follow the [Set Up and Use Agent Observability Experiments][3] guide to install the SDK, configure credentials, create datasets, define tasks and evaluators, run experiments, and review results.
+Follow the [Set Up and Use Agent Observability Offline Experiments][3] guide to install the SDK, configure credentials, create datasets, define tasks and evaluators, run offline experiments, and review results.
 
 ## Cookbooks
 
-For in-depth examples of what you can do with LLM Experiments, see Datadog's provided [Jupyter notebooks][2].
+For in-depth examples of what you can do with Offline Experiments, see Datadog's provided [Jupyter notebooks][2].
 
 ## Further reading
 
@@ -56,5 +57,4 @@ For in-depth examples of what you can do with LLM Experiments, see Datadog's pro
 
 [1]: https://app.datadoghq.com/llm/testing/experiments
 [2]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
-[3]: /llm_observability/guide/experiments/
-
+[3]: /llm_observability/guide/offline_experiments/

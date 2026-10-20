@@ -1,16 +1,17 @@
 ---
-title: Experiments API
+title: Offline Experiments API
 aliases:
+- /llm_observability/guide/experiments_api/
 - /llm_observability/improve/experiments/api/
 - /llm_observability/experiments/api/
-description: Reference the Agent Observability Experiments HTTP API.
+description: Reference the Agent Observability Offline Experiments HTTP API.
 ---
 
-As an alternative to [using Agent Observability Experiments with the Python SDK][1], you can use the Experiments HTTP API to create and run experiments.
+As an alternative to [using Agent Observability Offline Experiments with the Python SDK][1], you can use the Offline Experiments HTTP API to create and run offline experiments.
 
 ### Postman quickstart
 
-Datadog highly recommends importing the [Experiments Postman collection][2] into [Postman][3]. Postman's {{< ui >}}View documentation{{< /ui >}} feature can help you better understand this API.
+Datadog highly recommends importing the [Offline Experiments Postman collection][2] into [Postman][3]. Postman's {{< ui >}}View documentation{{< /ui >}} feature can help you better understand this API.
 
 ### Request format
 
@@ -385,24 +386,24 @@ Empty body on success.
 
 {{% /collapse-content %}}
 
-### Experiments API
+### Offline Experiments API
 
 **Request type**: `experiments`
 
 {{% collapse-content title="GET /api/v2/llm-obs/v1/experiments" level="h4" expanded=false id="api-experiments-get" %}}
 
-List all experiments, sorted by creation date. The most recently-created experiments are first.
+List all offline experiments, sorted by creation date. The most recently-created offline experiments are first.
 
 **Query parameters**
 
 | Parameter | Type | Description |
 | ---- | ---- | --- |
-| `filter[project_id]` (_required_ if dataset not provided) | string | The ID of a project to retrieve experiments for. |
-| `filter[dataset_id]` | string | The ID of a dataset to retrieve experiments for. |
-| `filter[id]` | string | The ID(s) of an experiment to search for. To query for multiple experiments, use `?filter[id]=<>&filter[id]=<>`. |
+| `filter[project_id]` (_required_ if dataset not provided) | string | The ID of a project to retrieve offline experiments for. |
+| `filter[dataset_id]` | string | The ID of a dataset to retrieve offline experiments for. |
+| `filter[id]` | string | The ID(s) of an experiment to search for. To query for multiple offline experiments, use `?filter[id]=<>&filter[id]=<>`. |
 | `filter[experiment]` | string | Filter by the logical experiment name (the shared pipeline name set across all runs of the same pipeline). Composes with `filter[project_id]` and `filter[dataset_id]`. |
-| `filter[metadata]` | json (string) | Filter experiments whose metadata contains all the provided key-value pairs. Must be a valid JSON object string (for example, `{"commit":"abc123","branch":"main"}`). Composes with `filter[experiment]` and other filters. |
-| `filter[parent_experiment_id]` | string (UUID) | Filter experiments by the ID of their parent (baseline) experiment. Returns all experiments that were run against the given baseline. Can be specified multiple times: `?filter[parent_experiment_id]=<uuid1>&filter[parent_experiment_id]=<uuid2>`. |
+| `filter[metadata]` | json (string) | Filter offline experiments whose metadata contains all the provided key-value pairs. Must be a valid JSON object string (for example, `{"commit":"abc123","branch":"main"}`). Composes with `filter[experiment]` and other filters. |
+| `filter[parent_experiment_id]` | string (UUID) | Filter offline experiments by the ID of their parent (baseline) experiment. Returns all offline experiments that were run against the given baseline. Can be specified multiple times: `?filter[parent_experiment_id]=<uuid1>&filter[parent_experiment_id]=<uuid2>`. |
 | `page[cursor]` | string | List results with a cursor provided in the previous query. |
 | `page[limit]` | int | Limits the number of results. |
 
@@ -410,7 +411,7 @@ List all experiments, sorted by creation date. The most recently-created experim
 
 | Field | Type | Description |
 | ---- | ---- | --- |
-| _within [Data](#object-data)_ | [][Experiment](#object-experiment) | List of experiments. |
+| _within [Data](#object-data)_ | [][Experiment](#object-experiment) | List of offline experiments. |
 
 #### Object: Experiment
 
@@ -491,7 +492,7 @@ Partially update an experiment object. Specify the fields to update in the paylo
 
 {{% collapse-content title="POST /api/v2/llm-obs/v1/experiments/delete" level="h4" expanded=false id="api-experiments-delete" %}}
 
-Delete one or more experiments.
+Delete one or more offline experiments.
 
 **Request**
 
@@ -559,6 +560,6 @@ Empty body on success.
 
 {{% /collapse-content %}}
 
-[1]: /llm_observability/guide/experiments
+[1]: /llm_observability/guide/offline_experiments
 [2]: https://github.com/DataDog/llm-observability/tree/main/experiments
 [3]: https://www.postman.com/

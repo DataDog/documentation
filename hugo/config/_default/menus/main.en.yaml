@@ -5868,8 +5868,8 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments_datasets
       weight: 502
-    - name: Experiments
-      url: llm_observability/improve/experiments
+    - name: Offline Experiments
+      url: llm_observability/improve/offline_experiments
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503

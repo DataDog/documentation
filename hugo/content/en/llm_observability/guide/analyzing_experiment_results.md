@@ -1,27 +1,27 @@
 ---
-title: Analyze Your Experiments Results
+title: Analyze Your Offline Experiments Results
 aliases:
 - /llm_observability/improve/experiments/analyzing_results/
 - /llm_observability/experiments/analyzing_results/
-description: How to analyze Agent Observability Experiments results.
+description: How to analyze Agent Observability Offline Experiments results.
 ---
 
-This page describes how to analyze Agent Observability Experiments results in Datadog's Experiments UI and widgets.
+This page describes how to analyze Agent Observability Offline Experiments results in Datadog's Offline Experiments UI and widgets.
 
-After running an Experiment, you can analyze the results to understand performance patterns and investigate problematic records. 
+After running an Experiment, you can analyze the results to understand performance patterns and investigate problematic records.
 
 ## Using the Experiment page in Datadog
 
-On the Experiments page, click on an experiment to see its details. 
+On the Offline Experiments page, click on an experiment to see its details.
 
 The {{< ui >}}Summary{{< /ui >}} section contains the evaluations, summary evaluations, and metrics that were logged during the execution of your Experiment.
 
-Each value is aggregated based on its type: 
+Each value is aggregated based on its type:
 - **Boolean**: Aggregated as the ratio of `True` over all the values recorded.
 - **Score**: Aggregated as average over all values recorded.
 - **Categorical**: Aggregated as the mode (most frequent value in the distribution).
 
-The {{< ui >}}Records{{< /ui >}} section contains traces related to the execution of your task on the dataset inputs. Each trace contains the list of spans showing the flow of information through your agent. 
+The {{< ui >}}Records{{< /ui >}} section contains traces related to the execution of your task on the dataset inputs. Each trace contains the list of spans showing the flow of information through your agent.
 
 You can use the facets (on the left-hand side) to filter the records based on their evaluation results to uncover patterns.
 
@@ -33,7 +33,7 @@ You can customize the experiment results table to surface the fields that matter
 
 Use the column picker to toggle columns on or off and drag to reorder them. By default, raw JSON blob columns (Input, Output, Expected Output) are hidden to keep the table scannable. You can toggle them back on at any time.
 
-The table includes a {{< ui >}}Record ID{{< /ui >}} column that shows which dataset record each experiment run was executed against. For experiments with multiple runs per record, expand a record to see all runs underneath.
+The table includes a {{< ui >}}Record ID{{< /ui >}} column that shows which dataset record each experiment run was executed against. For offline experiments with multiple runs per record, expand a record to see all runs underneath.
 
 #### Custom columns
 
@@ -76,12 +76,12 @@ You can use the search bar to find specific records, based on their properties (
 
 {{< img src="llm_observability/experiments/exp_details_search.png" alt="Agent Observability, Experiment Details focus. Heading: 'Highlighting the search bar'." style="width:100%;" >}}
 
-<div class="alert alert-info">To have access to the most data, update to <code>ddtrace-py >= 4.1.0</code>, as this version brings the following changes: 
+<div class="alert alert-info">To have access to the most data, update to <code>ddtrace-py >= 4.1.0</code>, as this version brings the following changes:
 
 <ul>
-<li>Experiments spans contain metadata from the dataset record. </li>
-<li>Experiments spans' <code>input</code>, <code>output</code>, and <code>expected_output</code> fields are stored as-is (that is, as queryable JSON if they are emitted as such) </li>
-<li>Experiments spans and children spans are tagged with <code>dataset_name</code>, <code>project_name</code>, <code>project_id</code>, <code>experiment_name</code> for easier search.</li>
+<li>Offline Experiments spans contain metadata from the dataset record. </li>
+<li>Offline Experiments spans' <code>input</code>, <code>output</code>, and <code>expected_output</code> fields are stored as-is (that is, as queryable JSON if they are emitted as such) </li>
+<li>Offline Experiments spans and children spans are tagged with <code>dataset_name</code>, <code>project_name</code>, <code>project_id</code>, <code>experiment_name</code> for easier search.</li>
 </ul></div>
 
 #### Find traces by keyword
@@ -108,7 +108,7 @@ To find a trace by experiment status, search: `@experiment.status:<status>`
 
 #### Find traces by metric
 
-LLM Experiments automatically collects duration, token count, and cost metrics.
+Offline Experiments automatically collects duration, token count, and cost metrics.
 
 | Metric               | Example search term |
 | -------------------- | ------------------- |
@@ -138,8 +138,8 @@ To query a specific key in input, output, expected output, or metadata, you need
 | metadata | `@meta.metadata.<key1>.<subkey1>:<value>` | `@meta.metadata.source:generated` |
 
 
-##### Querying JSON arrays 
-Simple arrays are flattened as strings, and you can query them. 
+##### Querying JSON arrays
+Simple arrays are flattened as strings, and you can query them.
 
 **Example 1**: Queryable JSON array
 
@@ -155,7 +155,7 @@ Simple arrays are flattened as strings, and you can query them.
 
 You can query this example array by searching: `@meta.output.action_matches:"^/cases/settings$"`.
 
-**Example 2**: Non-queryable JSON array 
+**Example 2**: Non-queryable JSON array
 
 ```
 "output": {
@@ -174,28 +174,28 @@ You can query this example array by searching: `@meta.output.action_matches:"^/c
 
 In this example, the array is nested and cannot be queried.
 
-## Using widgets with LLM Experiments data
+## Using widgets with Offline Experiments data
 
-You can build widgets in Dashboards and Notebooks using LLM Experiments data. 
+You can build widgets in Dashboards and Notebooks using Offline Experiments data.
 Datadog suggests that you:
-- Populate the metadata of your dataset records with all extra information that might help you slice your data (for example: difficulty, language, etc.) 
+- Populate the metadata of your dataset records with all extra information that might help you slice your data (for example: difficulty, language, etc.)
 - Ensure that your tasks outputs a JSON object
 - Update `ddtrace-py` version >= 4.1.0
 
 
-To build a widget using LLM Experiments data, use {{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
+To build a widget using Offline Experiments data, use {{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Offline Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot.
 
 For record level data aggregation, use {{< ui >}}Traces{{< /ui >}}; otherwise, use {{< ui >}}All Spans{{< /ui >}}.
 
-Group or filter by `@experiment.status` to compare metrics across running or completed experiments.
+Group or filter by `@experiment.status` to compare metrics across running or completed offline experiments.
 
 ### Widget examples
 #### Plotting performance over time broken down by a metadata field
-{{< img src="llm_observability/experiments/widget-metadata.png" alt="Widget using LLM Experiments data. Graph showing the performance over time broken down by a metadata field." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/widget-metadata.png" alt="Widget using Offline Experiments data. Graph showing the performance over time broken down by a metadata field." style="width:100%;" >}}
 
 <div class="alert alert-info">If you are trying to compute an average of a Boolean evaluation, you must manually compute the percentage of <code>True</code> over all traces.</div>
 
 #### Displaying tool usage stats
 In a situation where your agent is supposed to call a certain tool, and you need to understand how often the tool is called and get some stats about it:
 
-{{< img src="llm_observability/experiments/widget-tool.png" alt="Widget using LLM Experiments data. Graph showing some usage statistics of a tool in multiple experiments." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/widget-tool.png" alt="Widget using Offline Experiments data. Graph showing some usage statistics of a tool in multiple offline experiments." style="width:100%;" >}}
