@@ -4,7 +4,7 @@ description: "Connect Amazon Athena to Datadog Data Observability to monitor que
 further_reading:
   - link: '/data_observability/quality_monitoring/data_lakes/aws_glue/'
     tag: 'Documentation'
-    text: 'Iceberg Tables (AWS Glue)'
+    text: 'AWS Glue'
   - link: '/data_observability/lineage/'
     tag: 'Documentation'
     text: 'Data Observability Lineage'

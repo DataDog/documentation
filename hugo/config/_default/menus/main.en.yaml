@@ -5529,7 +5529,7 @@ menu:
       identifier: data_lakes
       parent: quality_monitoring
       weight: 250000
-    - name: Iceberg Tables (AWS Glue)
+    - name: AWS Glue
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
