@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="false" >}}
-CD Visibility is in Preview and is not accepting new customers.
+CD Visibility is in Preview. Access is limited to organizations already enrolled.
 {{< /callout >}}
 
 CD Visibility collects deployment events so that Datadog can identify key metrics from them. Additionally, it provides a series of features to enhance the Continuous Delivery workflow. Select the following topics for more information.

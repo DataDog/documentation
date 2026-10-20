@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="false" >}}
-CD Visibility is in Preview and is not accepting new customers.
+CD Visibility is in Preview. Access is limited to organizations already enrolled.
 {{< /callout >}}
 
 ## Overview

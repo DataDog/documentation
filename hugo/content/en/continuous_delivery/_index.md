@@ -24,7 +24,7 @@ cascade:
 ---
 
 {{< callout btn_hidden="true" header="false" >}}
-CD Visibility is in Preview and is not accepting new customers.
+CD Visibility is in Preview. Access is limited to organizations already enrolled.
 {{< /callout >}}
 
 Datadog Continuous Delivery (CD) Visibility provides observability on your deployments. CD Visibility brings deployment metrics and data into Datadog so you can communicate the health of your deployments, and focus your efforts in improving your team's ability to deliver quality code every time.
