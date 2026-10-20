@@ -262,12 +262,12 @@ Use this integration to create a ServiceNow incident when a Datadog On-Call Page
 
 **Note**: The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.
 
-1. In Datadog, go to **Incident Response** > **On-Call** > **Settings**. On the left side, select **Integrations**.
-1. Click **ServiceNow**, then click **Add Connection** and configure the settings for the connection with your instance.
-1. Click a [routing rule][13] for a team, and add a rule that creates a ServiceNow incident when an On-Call page triggers.
+1. In Datadog, go to **Incident Response** > **On-Call** > **Settings** and select **Integrations**.
+1. Click **ServiceNow**, then click **Add Connection** and configure the connection to your ServiceNow instance.
+1. Open a team's [routing rules][13] and add a rule that creates a ServiceNow incident when an On-Call Page triggers.
 1. (Optional) To create a Datadog On-Call Page from ServiceNow, see [Create a Datadog On-Call Page from ServiceNow](#create-on-call-page).
 
-## Sync data bidirectionally between ServiceNow and Datadog Work/Incident Management and On-Call {#sync-bidirectionally}
+## Sync data bidirectionally between ServiceNow and Datadog {#sync-bidirectionally}
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Work Management and Incident Management.
 
@@ -380,7 +380,9 @@ To populate data into the ServiceNow incident, you have to modify your script to
 {{% /collapse-content %}}
 
 {{% collapse-content title="Create a Datadog On-Call Page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
-To create a Datadog On-Call Page from a ServiceNow record, add a new business rule in ServiceNow that calls the `PublishOnCallPage` script include. The script include uses the credentials from the **Configuration** record you create in [Sync data bidirectionally](#sync-bidirectionally), so complete that section first.
+To create a Datadog On-Call Page from a ServiceNow record, add a business rule in ServiceNow that calls the `PublishOnCallPage` script include.
+
+Before you start, complete [Sync data bidirectionally](#sync-bidirectionally). The script include uses the credentials from the **Configuration** record you create in that section.
 
 **Note**: If the Datadog application key in that **Configuration** record is a scoped application key, it must include the `on_call_page` and `built_in_features` authorization scopes.
 
@@ -388,7 +390,7 @@ To create a Datadog On-Call Page from a ServiceNow record, add a new business ru
 
 | Argument | Required | Description |
 | -------- | -------- | ----------- |
-| Target type | Yes | The kind of target to page: `team_handle`, `team_id`, or `user_id`. |
+| Target type | Yes | The type of target to page: `team_handle`, `team_id`, or `user_id`. |
 | Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's ID, or the user's ID. |
 | Urgency | No | The urgency of the page: `high` or `low`. Defaults to `high`. |
 
