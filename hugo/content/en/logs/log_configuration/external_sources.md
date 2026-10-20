@@ -35,17 +35,21 @@ The supported source is Databricks.
 - A [Databricks integration][1] account configured in Datadog. Note the application (client) ID of the service principal used by the integration.
 - A Databricks table, registered in Unity Catalog, that contains your logs. To send logs to Databricks, you can use the [Observability Pipelines Databricks destination][2].
 
-### Grant access to the table
+### Grant access to the service principal
 
-The Databricks integration's service principal needs read access to the table. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands. Use the service principal's application (client) ID, not its display name, for `<application_id>`.
+Datadog runs queries with the Databricks SQL Statement Execution API, using the service principal of your Databricks integration. Use the service principal's application (client) ID, not its display name, for `<application_id>`.
 
-```sql
-GRANT USE CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
-GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
-GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
-```
+1. Give the service principal the {{< ui >}}Databricks SQL access{{< /ui >}} entitlement. In your Databricks workspace settings, open the service principal, go to the {{< ui >}}Configurations{{< /ui >}} tab, and select {{< ui >}}Databricks SQL access{{< /ui >}}. New service principals don't inherit this entitlement from the `users` group. For more information, see [Manage entitlements][3] in the Databricks documentation.
+2. Give the service principal the `CAN USE` permission on the SQL warehouse that runs the queries. `CAN MANAGE` is not required.
+3. Grant read access to the table. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands:
 
-The service principal also needs the `CAN USE` permission on the SQL warehouse that runs the queries. Queries run on your SQL warehouse and consume Databricks compute.
+   ```sql
+   GRANT USE CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+   GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
+   GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
+   ```
+
+The {{< ui >}}External Sources{{< /ui >}} page only lists the catalogs, schemas, and tables that the service principal has privileges on. Queries run on your SQL warehouse and consume Databricks compute.
 
 ### Supported column types
 
@@ -65,6 +69,7 @@ When you [connect the source](#connect-a-source), select {{< ui >}}Databricks{{<
 
 [1]: /integrations/databricks/
 [2]: /observability_pipelines/destinations/databricks/
+[3]: https://docs.databricks.com/aws/en/security/auth/entitlements
 {{% /tab %}}
 {{< /tabs >}}
 
