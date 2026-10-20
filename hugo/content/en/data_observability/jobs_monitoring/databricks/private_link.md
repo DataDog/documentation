@@ -10,8 +10,6 @@ further_reading:
       text: 'Private Action Runners'
 ---
 
-<div class="alert alert-info">Monitoring Databricks via Private Link Connectivity is in Preview.</div>
-
 Databricks workspaces deployed using [Private Link Connectivity][1] are isolated from the public internet, which prevents Datadog from accessing the Databricks APIs directly. To monitor these workspaces, deploy a [Private Action Runner][2] (PAR) in your environment. The runner polls Datadog for requests, executes them against the Databricks API locally, and sends the results back through your existing [Datadog VPC Endpoint][3].
 
 ## Architecture
