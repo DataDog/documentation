@@ -174,13 +174,11 @@ val provider = FlagsClient.Builder()
     .asOpenFeatureProvider()
 
 val optedOut = true // Your application determines this value.
-OpenFeatureAPI.setEvaluationContext(
-    ImmutableContext(
-        targetingKey = "user-123",
-        attributes = mapOf("dd_evaluation_telemetry_opt_out" to Value.Boolean(optedOut))
-    )
+val initialContext = ImmutableContext(
+    targetingKey = "user-123",
+    attributes = mapOf("dd_evaluation_telemetry_opt_out" to Value.Boolean(optedOut))
 )
-OpenFeatureAPI.setProviderAndWait(provider)
+OpenFeatureAPI.setProviderAndWait(provider, initialContext = initialContext)
 
 val enabled = OpenFeatureAPI.getClient().getBooleanValue("new-checkout", false)
 {{< /code-block >}}

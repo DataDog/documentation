@@ -7,6 +7,8 @@ description: Suppress new feature flag evaluation telemetry for selected users o
 
 Per-subject evaluation telemetry opt-out lets your application exclude selected users or devices from feature flag monitoring data. A **subject** is the user, account, or device identified by the evaluation context's targeting key.
 
+This control affects feature flag evaluation reporting, not internal Datadog SDK telemetry.
+
 Your application determines who opts out. For example, combine a user's preference with your own eligibility rules. Pass the resulting Boolean to the SDK. You do not need to send the underlying personal information solely for this decision.
 
 ## Availability
@@ -75,6 +77,8 @@ This control is not a general consent system or a deletion mechanism. Assignment
 ## Update a subject's decision
 
 Your application owns the decision and updates it when the subject or preference changes. Client SDKs use the current evaluation context; server SDKs use the context supplied for each evaluation. Set Boolean `false` to resume normal evaluation telemetry for that subject.
+
+For clients that fetch assignments, switching subjects can leave the previous subject's assignments active until the refresh succeeds. If that previous subject opted out, reporting stays suppressed while those assignments remain active. An allowed new subject does not override the previous subject's decision. Changing the decision for the same subject takes effect locally without waiting for the refresh.
 
 Supply the decision before the first evaluation that must honor it. Keep the subject's targeting key and other required attributes when replacing a client context.
 
