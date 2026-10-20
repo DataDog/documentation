@@ -23,12 +23,13 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Give callers a stable model identifier with [routing rules](#route-requests-with-routing-rules) and ordered fallbacks
 - Control which teams, users, and service accounts can use each model with [access policies](#control-model-access)
 - Track and cap spend with [budgets](#set-budgets)
+- Cap requests and tokens per minute with [rate limits](#set-rate-limits)
 - Inspect every request as a span in Agent Observability
 
 ## Prerequisites
 
 - AI Gateway Preview access for your Datadog organization.
-- A Datadog role that can configure AI Gateway providers, routing rules, access, and budgets.
+- A Datadog role that can configure AI Gateway providers, routing rules, access, budgets, and rate limits.
 - A provider [integration account][1] for a supported provider, such as OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, or Vertex AI.
 - A credential for the principal that sends requests. The principal must have the `ai_gateway_usage` permission. See [Authenticate requests](#authenticate-requests).
 
@@ -143,6 +144,8 @@ AI Gateway tries the next provider or fallback destination when the current one 
 
 [Budgets](#set-budgets) in Block mode are checked per destination. If a budget blocks one destination, AI Gateway falls back to the next. If budgets block every destination, AI Gateway returns HTTP `402` until the budget window resets.
 
+[Rate limits](#set-rate-limits) in Enforce mode are also checked per destination. A rate limit scoped to one model or provider makes AI Gateway fall back to the next destination. A rate limit that matches every destination, such as an organization-wide limit, returns HTTP `429`.
+
 ## Control model access
 
 Access policies control who can call each model and routing rule. A policy lists models, routing rules, or both, and the users, [Datadog teams][13], and service accounts who can use them.
@@ -198,6 +201,69 @@ Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for eac
 
 The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that matches no budget. A budget counts spend only after you create it, so earlier spend stays untracked. Use the Team, User, Model, Provider, and Tag filters to review coverage.
 
+## Set rate limits
+
+<div class="alert alert-info">Rate limits are in Preview. To enable them for your organization, contact your Customer Success Manager.</div>
+
+A rate limit caps how many requests, input tokens, or output tokens matching AI Gateway traffic can use per minute. Use rate limits to keep a runaway agent or script from using up your provider quota, to share provider capacity between teams, or to cap traffic to an expensive model. [Budgets](#set-budgets) cap spend over a day, week, or month; rate limits cap traffic within a minute.
+
+### Create a rate limit
+
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Rate limits{{< /ui >}}][15] and click {{< ui >}}New Rate Limit{{< /ui >}}.
+2. Choose the traffic to match. Leave the scope empty to cover all AI Gateway traffic in your organization, or match a user, team, model, provider, or custom tag. Send a custom tag in an `x-dd-tag-<KEY>: <VALUE>` request header. A request matches the rate limit when it includes every filter you selected.
+3. Set at least one limit: {{< ui >}}Requests / minute{{< /ui >}}, {{< ui >}}Input tokens / minute{{< /ui >}}, or {{< ui >}}Output tokens / minute{{< /ui >}}.
+4. Choose a mode, then save the rate limit.
+
+| Mode | Behavior |
+|---|---|
+| Alert | Requests over the limit continue. The rate limit shows the {{< ui >}}Would limit{{< /ui >}} status. This is the default mode. |
+| Enforce | New requests over the limit are rejected with HTTP `429`. Streaming responses that are already running finish. |
+
+Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a few days, then switch to Enforce mode.
+
+### How rate limits are counted
+
+- Each limit applies to a rolling 60-second window, not to calendar minutes.
+- All matching traffic shares one limit. For example, a team rate limit of 600 requests per minute allows 600 requests per minute for the whole team, not for each member.
+- A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has room.
+- Tokens count when a response completes, so requests already in progress can take token usage over a limit.
+- A rate limit scoped to a [Datadog team][13] applies only to requests that include the header `x-ai-gateway-team: <TEAM>`.
+- If a request falls back to another destination, it counts once against each rate limit.
+- Your organization can have up to 100 active rate limits. Changes apply within a few seconds.
+- If AI Gateway cannot check a rate limit, it accepts the request.
+
+AI Gateway rate limits are separate from your model provider's rate limits. A request can stay under every AI Gateway rate limit and still receive a `429` from the provider.
+
+### Rate-limited responses
+
+When a rate limit in Enforce mode rejects a request, AI Gateway returns HTTP `429` in the error format of the API you called (OpenAI, Anthropic, or Gemini), with the `gateway_rate_limit` error code. The response includes these headers:
+
+| Header | Value |
+|---|---|
+| `Retry-After` | Seconds until the request fits within the rate limit. |
+| `X-Ai-Gateway-Error-Code` | `gateway_rate_limit`. A provider `429` does not include this header. |
+| `X-Ai-Gateway-Ratelimit-Id` | The ID of the rate limit that rejected the request. |
+| `X-Ai-Gateway-Ratelimit-Limit-<METRIC>` | The per-minute limit that was exceeded. |
+| `X-Ai-Gateway-Ratelimit-Remaining-<METRIC>` | `0`. |
+| `X-Ai-Gateway-Ratelimit-Reset-<METRIC>` | Time until the request fits, for example `12s`. |
+
+`<METRIC>` is `Requests`, `Input-Tokens`, or `Output-Tokens`, depending on which limit was exceeded. For example, a request that exceeds a requests-per-minute limit returns `X-Ai-Gateway-Ratelimit-Limit-Requests`.
+
+Clients that retry on `429` should wait for the `Retry-After` duration before they retry.
+
+### Monitor rate limit usage
+
+The rate limit list shows, for each rate limit, current usage against each limit in the rolling 60-second window, its status, and the number of requests it limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
+
+| Status | Meaning |
+|---|---|
+| Within limit | Usage is below 80% of every limit. |
+| Near limit | Usage is at 80% or more of at least one limit. |
+| Limiting | An Enforce mode rate limit is full and rejects new requests. |
+| Would limit | An Alert mode rate limit is full. Requests continue. |
+
+The list also includes two summary rows. **Untracked** is traffic that no Enforce mode rate limit matches. **Total** is all AI Gateway traffic in your organization.
+
 ## Observe AI Gateway activity
 
 The [{{< ui >}}Overview{{< /ui >}}][3] page shows, for the selected time range:
@@ -248,6 +314,11 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 
 Budgets in Block mode blocked every destination for the request. Review the budget's filters, tracked spend, and window on the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] page. AI Gateway falls back when a budget blocks one destination and another destination remains.
 
+### 429 responses
+
+- If the response includes `X-Ai-Gateway-Error-Code: gateway_rate_limit`, an AI Gateway [rate limit](#set-rate-limits) in Enforce mode rejected the request. Find the rate limit from the `X-Ai-Gateway-Ratelimit-Id` header on the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Rate limits{{< /ui >}}][15] page, and retry after the `Retry-After` duration.
+- If the response does not include `X-Ai-Gateway-Error-Code`, the model provider returned the `429`. Check the provider's rate limits for your account, or add a [fallback destination](#fallback-behavior) on another provider.
+
 ### Model unavailable
 
 - Check the exact `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` value.
@@ -275,7 +346,7 @@ When a row lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemin
 | `gateway_team_forbidden` | `403` | The caller is not a member of the selected Datadog team. |
 | `gateway_team_user_required` | `403` | Team selection requires a Datadog user identity. A service account token without user context cannot select a team. |
 | `gateway_team_unavailable` | `503` | Datadog team membership could not be verified. Retry the request. |
-| `gateway_rate_limit` | `429` | A gateway rate-limit rule was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`. |
+| `gateway_rate_limit` | `429` | A gateway [rate limit](#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`. |
 | `budget_exceeded` | `402` | A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Raise the budget or wait for the window to reset. |
 | `model_not_found` | `400` | The request's model, router, or provider identifier does not resolve to a known target: unknown model, unknown provider slug, unknown routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. The code is named after OpenAI's `model_not_found`, so clients that already handle that code keep working. |
 | `bad_request` | `400` | A malformed request that AI Gateway rejected before dispatch, such as an invalid JSON body, an invalid category filter, or an unknown action. Use `message` to see which. |
@@ -308,3 +379,4 @@ When a row lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemin
 [12]: /getting_started/site/
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
+[15]: https://app.datadoghq.com/llm/gateway/rate-limits
