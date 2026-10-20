@@ -4969,6 +4969,91 @@ components:
         - id
         - base_severity
       type: object
+    AgentHealthAgentType:
+      default: node
+      description: Agent type associated with the resource.
+      enum:
+        - node
+        - cluster
+      example: node
+      type: string
+      x-enum-varnames:
+        - NODE
+        - CLUSTER
+    AgentHealthHostIssue:
+      description: An active Agent Health issue associated with a resource.
+      properties:
+        category:
+          description: The category used by the Agent to group and reconcile the issue.
+          example: configuration
+          type: string
+        issue_id:
+          description: The unique identifier of the issue.
+          example: invalid-config:4828e7d6c704c4a3
+          type: string
+        issue_name:
+          description: The human-readable name of the issue.
+          example: Invalid Config
+          type: string
+        issue_type:
+          description: The machine-readable type of the issue.
+          example: invalid_config
+          type: string
+      required:
+        - issue_id
+        - issue_name
+        - issue_type
+        - category
+      type: object
+    AgentHealthHostIssuesAttributes:
+      description: Active Agent Health issues for a resource.
+      properties:
+        issues:
+          description: The active issues and their reconciliation metadata.
+          example:
+            - category: configuration
+              issue_id: invalid-config:4828e7d6c704c4a3
+              issue_name: Invalid Config
+              issue_type: invalid_config
+          items:
+            $ref: "#/components/schemas/AgentHealthHostIssue"
+          type: array
+      required:
+        - issues
+      type: object
+    AgentHealthHostIssuesData:
+      description: Agent Health issue data for a resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AgentHealthHostIssuesAttributes"
+        id:
+          description: The resource identifier.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          $ref: "#/components/schemas/AgentHealthHostIssuesType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AgentHealthHostIssuesResponse:
+      description: Response containing the active Agent Health issues for a resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/AgentHealthHostIssuesData"
+      required:
+        - data
+      type: object
+    AgentHealthHostIssuesType:
+      default: agent_health_issues
+      description: The Agent Health issue resource type.
+      enum:
+        - agent_health_issues
+      example: agent_health_issues
+      type: string
+      x-enum-varnames:
+        - AGENT_HEALTH_ISSUES
     AgentTrigger:
       description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
       properties:
@@ -36804,6 +36889,109 @@ components:
         - $ref: "#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitor"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitorIds"
+    DerivedMetricAttributes:
+      description: Attributes of a derived metric.
+      properties:
+        definition:
+          $ref: "#/components/schemas/DerivedMetricDefinition"
+      required:
+        - definition
+      type: object
+    DerivedMetricCreateData:
+      description: Data object for creating or updating a derived metric.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DerivedMetricAttributes"
+        id:
+          description: The derived metric name used as the resource ID.
+          example: my.derived.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/DerivedMetricsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DerivedMetricCreateRequest:
+      description: Request body for creating or updating a derived metric.
+      properties:
+        data:
+          $ref: "#/components/schemas/DerivedMetricCreateData"
+      required:
+        - data
+      type: object
+    DerivedMetricData:
+      description: A derived metric resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DerivedMetricAttributes"
+        id:
+          description: The derived metric name used as the resource ID.
+          example: my.derived.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/DerivedMetricsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DerivedMetricDefinition:
+      description: The definition of a derived metric as a formula over one or more queries.
+      properties:
+        formula:
+          description: The formula that combines the queries into the value of the derived metric.
+          example: a
+          type: string
+        queries:
+          description: The list of queries referenced by the formula.
+          items:
+            $ref: "#/components/schemas/DerivedMetricQuery"
+          minItems: 1
+          type: array
+      required:
+        - formula
+        - queries
+      type: object
+    DerivedMetricQuery:
+      description: A single query used in the definition of a derived metric.
+      properties:
+        data_source:
+          description: The data source that the query is run against.
+          example: metrics
+          type: string
+        name:
+          description: The name used to reference this query from the formula.
+          example: a
+          type: string
+        query:
+          description: The query string executed against the data source.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+        - data_source
+        - name
+        - query
+      type: object
+    DerivedMetricResponse:
+      description: Response containing a single derived metric.
+      properties:
+        data:
+          $ref: "#/components/schemas/DerivedMetricData"
+      readOnly: true
+      required:
+        - data
+      type: object
+    DerivedMetricsType:
+      default: derived_metrics
+      description: The derived metric resource type.
+      enum:
+        - derived_metrics
+      example: derived_metrics
+      type: string
+      x-enum-varnames:
+        - DERIVED_METRICS
     DetachCaseRequest:
       description: Request for detaching security findings from their case.
       properties:
@@ -38001,9 +38189,7 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440001
           type: string
         mapkind:
-          description: The type of source map.
-          example: elf
-          type: string
+          $ref: "#/components/schemas/ELFSourcemapMapKind"
         origin:
           description: The origin of the ELF file.
           example: debian
@@ -38042,6 +38228,14 @@ components:
         - type
         - attributes
       type: object
+    ELFSourcemapMapKind:
+      description: The type of source map. Always `elf` for ELF source maps.
+      enum:
+        - elf
+      example: elf
+      type: string
+      x-enum-varnames:
+        - ELF
     ELFSymbolFileEvent:
       description: Metadata for an ELF symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -52896,9 +53090,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: flutter
-          type: string
+          $ref: "#/components/schemas/FlutterSourcemapMapKind"
         service:
           description: The service name associated with the symbol file.
           example: my-flutter-app
@@ -52937,6 +53129,14 @@ components:
         - type
         - attributes
       type: object
+    FlutterSourcemapMapKind:
+      description: The type of source map. Always `flutter` for Flutter source maps.
+      enum:
+        - flutter
+      example: flutter
+      type: string
+      x-enum-varnames:
+        - FLUTTER
     FlutterSymbolFileEvent:
       description: Metadata for a Flutter symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -58843,9 +59043,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: il2cpp
-          type: string
+          $ref: "#/components/schemas/IL2CPPSourcemapMapKind"
         size:
           description: The size of the mapping file in bytes.
           example: 4096
@@ -58872,6 +59070,14 @@ components:
         - type
         - attributes
       type: object
+    IL2CPPSourcemapMapKind:
+      description: The type of source map. Always `il2cpp` for IL2CPP source maps.
+      enum:
+        - il2cpp
+      example: il2cpp
+      type: string
+      x-enum-varnames:
+        - IL2CPP
     IOSSourcemapAttributes:
       description: Attributes of an iOS dSYM source map.
       properties:
@@ -58881,9 +59087,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: ios
-          type: string
+          $ref: "#/components/schemas/IOSSourcemapMapKind"
         size:
           description: The size of the dSYM file in bytes.
           example: 4096
@@ -58914,6 +59118,14 @@ components:
         - type
         - attributes
       type: object
+    IOSSourcemapMapKind:
+      description: The type of source map. Always `ios` for iOS dSYM source maps.
+      enum:
+        - ios
+      example: ios
+      type: string
+      x-enum-varnames:
+        - IOS
     IOSSymbolsEvent:
       description: Metadata for an iOS dSYM file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -66725,9 +66937,7 @@ components:
           example: bundle.min.js
           type: string
         mapkind:
-          description: The type of source map.
-          example: js
-          type: string
+          $ref: "#/components/schemas/JSSourcemapMapKind"
         service:
           description: The service name associated with the source map.
           example: my-web-service
@@ -66770,6 +66980,14 @@ components:
         - type
         - attributes
       type: object
+    JSSourcemapMapKind:
+      description: The type of source map. Always `js` for JavaScript source maps.
+      enum:
+        - js
+      example: js
+      type: string
+      x-enum-varnames:
+        - JS
     JVMMappingFileEvent:
       description: Metadata for a ProGuard or R8 mapping file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -66844,9 +67062,7 @@ components:
           format: date-time
           type: string
         mapkind:
-          description: The type of source map.
-          example: jvm
-          type: string
+          $ref: "#/components/schemas/JVMSourcemapMapKind"
         service:
           description: The service name associated with the mapping file.
           example: my-android-app
@@ -66889,6 +67105,14 @@ components:
         - type
         - attributes
       type: object
+    JVMSourcemapMapKind:
+      description: The type of source map. Always `jvm` for JVM source maps.
+      enum:
+        - jvm
+      example: jvm
+      type: string
+      x-enum-varnames:
+        - JVM
     JiraAccountAttributes:
       description: Attributes of a Jira account
       properties:
@@ -69760,7 +69984,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRecordsDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsRecordType"
+          $ref: "#/components/schemas/LLMObsDatasetType"
       required:
         - type
         - attributes
@@ -69825,7 +70049,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRecordsUpdateDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsRecordType"
+          $ref: "#/components/schemas/LLMObsDatasetType"
       required:
         - type
         - attributes
@@ -70162,7 +70386,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsDeleteDatasetRecordsDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsRecordType"
+          $ref: "#/components/schemas/LLMObsDatasetType"
       required:
         - type
         - attributes
@@ -70401,14 +70625,6 @@ components:
       type: string
       x-enum-varnames:
         - DISPLAY_BLOCK
-    LLMObsEventType:
-      description: Resource type for Agent Observability experiment events.
-      enum:
-        - events
-      example: events
-      type: string
-      x-enum-varnames:
-        - EVENTS
     LLMObsExperimentDataAttributesRequest:
       description: Attributes for creating an Agent Observability experiment.
       properties:
@@ -70664,7 +70880,7 @@ components:
         attributes:
           $ref: "#/components/schemas/LLMObsExperimentEventsDataAttributesRequest"
         type:
-          $ref: "#/components/schemas/LLMObsEventType"
+          $ref: "#/components/schemas/LLMObsExperimentType"
       required:
         - type
         - attributes
@@ -74210,14 +74426,6 @@ components:
       required:
         - data
       type: object
-    LLMObsRecordType:
-      description: Resource type of Agent Observability dataset records.
-      enum:
-        - records
-      example: records
-      type: string
-      x-enum-varnames:
-        - RECORDS
     LLMObsSearchSpansRequest:
       description: Request body for searching Agent Observability spans.
       properties:
@@ -82858,9 +83066,7 @@ components:
           example: libmyapp.so
           type: string
         mapkind:
-          description: The type of source map.
-          example: ndk
-          type: string
+          $ref: "#/components/schemas/NDKSourcemapMapKind"
         size:
           description: The size of the symbol file in bytes.
           example: 32768
@@ -82887,6 +83093,14 @@ components:
         - type
         - attributes
       type: object
+    NDKSourcemapMapKind:
+      description: The type of source map. Always `ndk` for Android NDK source maps.
+      enum:
+        - ndk
+      example: ndk
+      type: string
+      x-enum-varnames:
+        - NDK
     NDKSymbolFileEvent:
       description: Metadata for an Android NDK symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -91451,6 +91665,22 @@ components:
         - type
         - method
       type: object
+    OnCallShiftChangeTrigger:
+      description: "Trigger a workflow when an On-Call shift changes. The workflow must be published."
+      properties:
+        rateLimit:
+          $ref: "#/components/schemas/TriggerRateLimit"
+      type: object
+    OnCallShiftChangeTriggerWrapper:
+      description: "Schema for an On-Call shift change trigger."
+      properties:
+        onCallShiftChangeTrigger:
+          $ref: "#/components/schemas/OnCallShiftChangeTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - onCallShiftChangeTrigger
+      type: object
     OnCallTrigger:
       description: "Trigger a workflow from an On-Call Page or On-Call Handover. For automatic triggering a handle must be configured and the workflow must be published."
       properties:
@@ -96646,6 +96876,56 @@ components:
           description: Replay track identifier indicating which recording track the session belongs to.
           type: string
       type: object
+    PortablePdbSourcemapAttributes:
+      description: Attributes of a Portable PDB file.
+      properties:
+        build_id:
+          description: The build identifier.
+          example: 550e8400e29b41d4a71644665544000012345678
+          type: string
+        created_at:
+          description: The timestamp when the symbol file was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        file_name:
+          description: The file name of the symbol file.
+          example: MyApplication.pdb
+          type: string
+        mapkind:
+          $ref: "#/components/schemas/PortablePdbSourcemapMapKind"
+        size:
+          description: The size of the symbol file in bytes.
+          example: 4096
+          format: int64
+          type: integer
+      required:
+        - mapkind
+      type: object
+    PortablePdbSourcemapData:
+      description: Portable PDB file data object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PortablePdbSourcemapAttributes"
+        id:
+          description: The unique identifier of the source map.
+          example: "10"
+          type: string
+        type:
+          $ref: "#/components/schemas/SourcemapDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    PortablePdbSourcemapMapKind:
+      description: The type of source map. Always `portable_pdb` for Portable PDB files.
+      enum:
+        - portable_pdb
+      example: portable_pdb
+      type: string
+      x-enum-varnames:
+        - PORTABLE_PDB
     PostmortemAttachmentRequest:
       description: Request body for creating a postmortem attachment.
       properties:
@@ -97485,9 +97765,20 @@ components:
         cmdline:
           description: Process command line.
           type: string
+        executable:
+          description: Path to the process executable.
+          type: string
         host:
           description: Host running the process.
           type: string
+        identifying_tags:
+          description: |-
+            Tags that uniquely identify the process: a host identity tag (`host`, `task_arn`,
+            or `eks_fargate_node`) and a `pid` tag. Omitted if either tag is unavailable.
+          items:
+            description: A tag identifying the process.
+            type: string
+          type: array
         pid:
           description: Process ID.
           format: int64
@@ -102905,9 +103196,7 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440000
           type: string
         mapkind:
-          description: The type of source map.
-          example: react
-          type: string
+          $ref: "#/components/schemas/ReactNativeSourcemapMapKind"
         platform:
           description: The platform the source map was built for (e.g., `ios`, `android`).
           example: ios
@@ -102946,6 +103235,14 @@ components:
         - type
         - attributes
       type: object
+    ReactNativeSourcemapMapKind:
+      description: The type of source map. Always `react` for React Native source maps.
+      enum:
+        - react
+      example: react
+      type: string
+      x-enum-varnames:
+        - REACT
     ReadinessGate:
       additionalProperties: false
       description: Used to merge multiple branches into a single branch.
@@ -124448,6 +124745,8 @@ components:
         - $ref: "#/components/schemas/ELFSourcemapData"
         - $ref: "#/components/schemas/NDKSourcemapData"
         - $ref: "#/components/schemas/IL2CPPSourcemapData"
+        - $ref: "#/components/schemas/WASMSourcemapData"
+        - $ref: "#/components/schemas/PortablePdbSourcemapData"
     SourcemapMapKind:
       description: The type of source map.
       enum:
@@ -136499,6 +136798,7 @@ components:
         - $ref: "#/components/schemas/IncidentTriggerWrapper"
         - $ref: "#/components/schemas/MonitorTriggerWrapper"
         - $ref: "#/components/schemas/NotebookTriggerWrapper"
+        - $ref: "#/components/schemas/OnCallShiftChangeTriggerWrapper"
         - $ref: "#/components/schemas/OnCallTriggerWrapper"
         - $ref: "#/components/schemas/ScheduleTriggerWrapper"
         - $ref: "#/components/schemas/SecurityTriggerWrapper"
@@ -141554,6 +141854,56 @@ components:
         - X_CONTENT_TYPE_HEADER_MISSING
         - X_PATH_INJECTION
         - XSS
+    WASMSourcemapAttributes:
+      description: Attributes of a WebAssembly symbol file.
+      properties:
+        build_id:
+          description: The build identifier.
+          example: wasm-build-123
+          type: string
+        created_at:
+          description: The timestamp when the symbol file was created.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        file_name:
+          description: The file name of the symbol file.
+          example: module.wasm
+          type: string
+        mapkind:
+          $ref: "#/components/schemas/WASMSourcemapMapKind"
+        size:
+          description: The size of the symbol file in bytes.
+          example: 4096
+          format: int64
+          type: integer
+      required:
+        - mapkind
+      type: object
+    WASMSourcemapData:
+      description: WebAssembly symbol file data object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WASMSourcemapAttributes"
+        id:
+          description: The unique identifier of the source map.
+          example: "9"
+          type: string
+        type:
+          $ref: "#/components/schemas/SourcemapDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    WASMSourcemapMapKind:
+      description: The type of source map. Always `wasm` for WebAssembly symbol files.
+      enum:
+        - wasm
+      example: wasm
+      type: string
+      x-enum-varnames:
+        - WASM
     Watch:
       description: A single RUM replay session watch resource returned by create operations.
       properties:
@@ -145124,6 +145474,57 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/agenthealth/hosts/{resource_id}/issues:
+    get:
+      description: Returns the active Agent Health issues for a node Agent or Cluster Agent resource.
+      operationId: ListAgentHealthHostIssues
+      parameters:
+        - description: >-
+            Resource identifier whose active Agent Health issues should be returned: a DaemonSet UID for a node Agent or a cluster UUID for a Cluster Agent.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            type: string
+        - description: Agent type associated with the resource. Defaults to `node` when omitted.
+          example: node
+          in: query
+          name: agent_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/AgentHealthAgentType"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        issues:
+                          - category: configuration
+                            issue_id: invalid-config:4828e7d6c704c4a3
+                            issue_name: Invalid Config
+                            issue_type: invalid_config
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                      type: agent_health_issues
+              schema:
+                $ref: "#/components/schemas/AgentHealthHostIssuesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+      summary: List active Agent Health issues
+      tags:
+        - Agent Health
+      x-menu-order: 1
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -194240,7 +194641,7 @@ paths:
                           start_ns: 1705314600000000000
                           status: ok
                           trace_id: abc123def456
-                    type: events
+                    type: experiments
             schema:
               $ref: "#/components/schemas/LLMObsExperimentEventsRequest"
         description: Experiment events payload.
@@ -197548,7 +197949,7 @@ paths:
                     attributes:
                       records:
                         - id: rec-7c3f5a1b-9e2d-4f8a-b1c6-3d7e9f0a2b4c
-                    type: records
+                    type: datasets
             schema:
               $ref: "#/components/schemas/LLMObsDatasetRecordsUpdateRequest"
         description: Update records payload.
@@ -197624,7 +198025,7 @@ paths:
               default:
                 value:
                   data:
-                    type: records
+                    type: datasets
             schema:
               $ref: "#/components/schemas/LLMObsDatasetRecordsRequest"
         description: Append records payload.
@@ -197724,7 +198125,7 @@ paths:
                     attributes:
                       record_ids:
                         - rec-7c3f5a1b-9e2d-4f8a-b1c6-3d7e9f0a2b4c
-                    type: records
+                    type: datasets
             schema:
               $ref: "#/components/schemas/LLMObsDeleteDatasetRecordsRequest"
         description: Delete records payload.
@@ -201193,6 +201594,249 @@ paths:
         permissions:
           - metric_tags_write
       x-sunset: "2027-01-01"
+  /api/v2/metrics/derived-metrics:
+    post:
+      description: |-
+        Create a derived metric for the org. The metric name is supplied as the resource `id`,
+        and the `definition` sets the formula and the queries the formula is computed from.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: CreateDerivedMetric
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        formula: a
+                        queries:
+                          - data_source: metrics
+                            name: a
+                            query: avg:system.cpu.user{*}
+                    id: my.derived.metric
+                    type: derived_metrics
+            schema:
+              $ref: "#/components/schemas/DerivedMetricCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: Created
+          headers:
+            Location:
+              description: The URL of the newly created derived metric.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Create a derived metric
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+  /api/v2/metrics/derived-metrics/{metric_name}:
+    delete:
+      description: |-
+        Delete a derived metric by name. Idempotent: returns 204 regardless of whether the derived
+        metric existed. Requires the `Manage Tags for Metrics` permission.
+      operationId: DeleteDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Delete a derived metric
+      tags:
+        - Metrics
+      x-menu-order: 33
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+    get:
+      description: Get the definition of a derived metric by name.
+      operationId: GetDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: Get a derived metric
+      tags:
+        - Metrics
+      x-menu-order: 31
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+    put:
+      description: |-
+        Update the definition of an existing derived metric. The `id` in the request body
+        must match the `metric_name` path parameter. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateDerivedMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        formula: a
+                        queries:
+                          - data_source: metrics
+                            name: a
+                            query: avg:system.cpu.user{*}
+                    id: my.derived.metric
+                    type: derived_metrics
+            schema:
+              $ref: "#/components/schemas/DerivedMetricCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        definition:
+                          formula: a
+                          queries:
+                            - data_source: metrics
+                              name: a
+                              query: avg:system.cpu.user{*}
+                      id: my.derived.metric
+                      type: derived_metrics
+              schema:
+                $ref: "#/components/schemas/DerivedMetricResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a derived metric
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 32
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
   /api/v2/metrics/historical-metrics-configurations:
     post:
       description: |-
@@ -212352,7 +212996,11 @@ paths:
                     data:
                       - attributes:
                           cmdline: /usr/bin/python3
+                          executable: /usr/bin/python3
                           host: my-host
+                          identifying_tags:
+                            - host:my-host
+                            - pid:123
                           pid: 123
                         id: abc-123
                         type: process
@@ -254507,6 +255155,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
+  - description: View Agent Health issues reported for node Agents and Cluster Agents.
+    name: Agent Health
   - description: >-
       Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
     name: Agent Observability

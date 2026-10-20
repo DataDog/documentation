@@ -464,6 +464,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no ingested data or user queries that still incur retention or commitment-tier charges, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Delete Unattached Managed Disk
       recommendation_description: Managed disk is unattached and can be deleted.

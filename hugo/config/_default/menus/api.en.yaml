@@ -2049,6 +2049,54 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: Update a derived metric
+      url: /api/latest/metrics/update-a-derived-metric/
+      identifier: metrics-update-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDerivedMetric
+        unstable: []
+        order: 32
+    - name: Get a derived metric
+      url: /api/latest/metrics/get-a-derived-metric/
+      identifier: metrics-get-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDerivedMetric
+        unstable: []
+        order: 31
+    - name: Delete a derived metric
+      url: /api/latest/metrics/delete-a-derived-metric/
+      identifier: metrics-delete-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDerivedMetric
+        unstable: []
+        order: 33
+    - name: Create a derived metric
+      url: /api/latest/metrics/create-a-derived-metric/
+      identifier: metrics-create-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDerivedMetric
+        unstable: []
+        order: 30
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -7997,6 +8045,22 @@ menu:
           - v2
         operationids:
           - ListDatastores
+        unstable: []
+        order: 1
+    - name: Agent Health
+      url: /api/latest/agent-health/
+      identifier: agent-health
+      generated: true
+    - name: List active Agent Health issues
+      url: /api/latest/agent-health/list-active-agent-health-issues/
+      identifier: agent-health-list-active-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthHostIssues
         unstable: []
         order: 1
     - name: Agent Observability
