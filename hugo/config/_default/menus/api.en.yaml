@@ -14963,6 +14963,18 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Patch a saved filter
+      url: /api/latest/feature-flags/patch-a-saved-filter/
+      identifier: feature-flags-patch-a-saved-filter
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSavedFilterAttributes
+        unstable: []
+        order: 24
     - name: Get a saved filter
       url: /api/latest/feature-flags/get-a-saved-filter/
       identifier: feature-flags-get-a-saved-filter
