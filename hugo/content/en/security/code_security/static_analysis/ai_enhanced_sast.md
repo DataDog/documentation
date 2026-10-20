@@ -128,9 +128,9 @@ AI-native SAST uses language-specific rulesets (for example, `python-ai_sast`) i
 
 ## Validation
 
-False positive filtering runs only for Datadog-hosted scans and applies only to security category SAST rules in Datadog's default rulesets. It does not evaluate findings from CI uploads or custom rules.
+False positive filtering applies to SAST rules in the security category of Datadog's default rulesets, and only for Datadog-hosted scans. It doesn't evaluate findings from CI uploads or custom rules.
 
-After a Datadog-hosted scan completes, two layers of filtering are available. Baseline false positive filtering assesses eligible findings, and agentic filtering gathers cross-file context for a subset of rules.
+After a Datadog-hosted scan completes, two layers of filtering run. Baseline false positive filtering evaluates all eligible findings. Agentic filtering gathers cross-file context for a subset of rules.
 
 ### False positive filtering
 
