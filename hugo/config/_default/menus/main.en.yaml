@@ -5534,6 +5534,11 @@ menu:
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: Amazon Athena Query History
+      url: data_observability/quality_monitoring/data_lakes/amazon_athena
+      identifier: amazon_athena_query_history
+      parent: data_lakes
+      weight: 2000000
     - name: Transactional Databases
       url: data_observability/quality_monitoring/transactional_databases
       identifier: transactional_databases
