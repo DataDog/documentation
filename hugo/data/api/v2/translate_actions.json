@@ -2300,6 +2300,12 @@
     "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
     "summary": "Get a saved filter"
   },
+  "UpdateSavedFilterAttributes": {
+    "description": "Partially updates a saved filter. Supports both `LIST` and `RULES` filters.\nSupply at least one of `name`, `description`, or `targeting_rules`. Omitted or null fields\nare preserved. Supplying `targeting_rules` replaces the entire collection and propagates\nchanges to every feature flag that references the saved filter.\nMetadata-only updates do not require edit permission or approval on those feature flags.\nRule updates require edit permission on all consumer flags and are rejected when approval\nis required, unless the caller has the `feature_flag_approvals_override` permission.\nThe optional `last_updated_at` field detects stale updates. It does not set the update time.",
+    "summary": "Patch a saved filter",
+    "request_description": "",
+    "request_schema_description": "Request to partially update a saved filter."
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
