@@ -13,7 +13,7 @@ further_reading:
       text: 'Supabase Self-Hosted Setup (Agent Installation)'
 ---
 
-Database Monitoring for Supabase Cloud provides visibility into your Supabase databases by exposing query performance metrics and query samples — without requiring a self-hosted Datadog Agent.
+Database Monitoring for Supabase Cloud provides visibility into your [Supabase databases](https://supabase.com/docs/guides/database/overview) by exposing query performance metrics and query samples — without requiring a self-hosted Datadog Agent.
 
 <div class="alert alert-info">For self-hosted Supabase deployments that require a Datadog Agent, see <a href="/database_monitoring/setup_postgres/supabase/agent">Supabase Self-Hosted Setup</a>.</div>
 
@@ -22,7 +22,7 @@ Database Monitoring for Supabase Cloud provides visibility into your Supabase da
 - A Supabase project with a Postgres database.
 - Your Supabase {{< ui >}}Project ID{{< /ui >}} (found in your Supabase project settings).
 - Your Supabase {{< ui >}}API key{{< /ui >}} (found in your Supabase project settings under {{< ui >}}API{{< /ui >}}).
-- A Supabase {{< ui >}}Personal Access Token{{< /ui >}} with access to the Management API.
+- A Supabase {{< ui >}}[Personal Access Token](https://supabase.com/docs/guides/platform/personal-access-tokens){{< /ui >}} with access to the Management API.
 
 ## Setup
 
