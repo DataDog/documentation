@@ -31,7 +31,6 @@ To trace Kubernetes workloads instead, see [Continuous Tracing with GPU Monitori
 
 To begin continuously tracing your Slurm jobs, you must first meet the following criteria:
 - Your Slurm compute nodes meet the [GPU Monitoring prerequisites][2].
-- Minimum required CUDA and CUPTI version: 13.
 
 ### 1. Install the Agent with Single Step Instrumentation
 
@@ -53,7 +52,7 @@ Set up the [Slurm integration][6] to collect metrics about your Slurm cluster, p
 
 ### 3. Enable GPU Monitoring
 
-On each Slurm compute node, follow the [Linux (non-containerized) setup instructions][7] to enable GPU Monitoring in the Agent and system-probe.
+On each Slurm compute node, follow the [Linux (non-containerized) setup instructions][7] to enable GPU Monitoring in the Agent.
 
 ### 4. Configure your batch script
 
