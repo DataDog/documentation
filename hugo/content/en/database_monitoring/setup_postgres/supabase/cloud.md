@@ -78,3 +78,5 @@ After setup, navigate to the [Database Monitoring][2] page in Datadog to see you
 
 [1]: https://app.datadoghq.com/integrations/supabase-cloud
 [2]: https://app.datadoghq.com/databases
+[3]: https://supabase.com/docs/guides/database/overview
+[4]: https://supabase.com/docs/guides/platform/personal-access-tokens
