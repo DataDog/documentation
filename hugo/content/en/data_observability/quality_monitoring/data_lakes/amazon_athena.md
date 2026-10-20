@@ -58,8 +58,6 @@ Attach the following policy to the Datadog IAM role configured for your AWS inte
 }
 ```
 
-`athena:ListWorkGroups` is required only if you configure a region without a workgroup list, so that Datadog discovers all workgroups in that region. If you list workgroups explicitly for every region, you can omit this action.
-
 ## Configure query history
 
 1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3].
@@ -68,7 +66,7 @@ Attach the following policy to the Datadog IAM role configured for your AWS inte
 4. Enable the {{< ui >}}Athena query history{{< /ui >}} toggle.
 5. Click {{< ui >}}Add AWS Region{{< /ui >}} and select a region.
 6. (Optional) Enter workgroup names to monitor in that region:
-   - **Leave the list empty** to discover and monitor all workgroups in the region, including workgroups created later. This requires `athena:ListWorkGroups`.
+   - **Leave the list empty** to discover and monitor all workgroups in the region, including workgroups created later.
    - **Enter one or more workgroup names** to monitor only those workgroups.
 
    Datadog does not check workgroup names with AWS during setup, so make sure each name matches an existing workgroup.

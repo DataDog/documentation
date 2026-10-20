@@ -19,7 +19,7 @@ Use these integrations to:
 - **Track table metrics** such as row counts and table sizes over time
 
 {{< whatsnext desc="Connect to these data lake catalogs:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_lakes/amazon_athena" >}}Amazon Athena Query History{{< /nextlink >}}
 {{< /whatsnext >}}
 
