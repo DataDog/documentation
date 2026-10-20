@@ -1,3 +1,3 @@
 ---
-title: Count cases
+title: Count work items
 ---

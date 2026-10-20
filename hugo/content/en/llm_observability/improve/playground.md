@@ -10,7 +10,7 @@ further_reading:
   - link: "/llm_observability/improve/datasets"
     tag: "Documentation"
     text: "Datasets"
-  - link: "/llm_observability/improve/experiments/analyzing_results"
+  - link: "/llm_observability/guide/analyzing_experiment_results"
     tag: "Documentation"
     text: "Analyzing Experiment Results"
 ---
@@ -31,7 +31,7 @@ Supported providers:
 - Azure OpenAI
 - Amazon Bedrock
 - Vertex AI
-- AI Gateway
+- Custom Provider
 
 ## Test a prompt with arbitrary input
 
