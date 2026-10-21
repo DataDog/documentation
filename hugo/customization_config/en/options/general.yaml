@@ -516,6 +516,9 @@ options:
 - label: C++
   id: cpp
 
+- label: Electron
+  id: electron
+
 - label: Elixir
   id: elixir
 

@@ -337,6 +337,7 @@ unsupported_sites:
   continuous_integration: [gov,gov2]
   correlation: [gov,gov2] #Event management correlation and triage inbox
   cpp_log_collection: [gov,gov2]
+  electron_log_collection: [gov,gov2]
   cross_app_access: [gov,gov2]
   csm_jira: [us,us3,us5,eu,ap1,ap2,uk1]
   dashboard_anomaly_detection: [gov,gov2]
@@ -406,6 +407,7 @@ unsupported_sites:
   roku_error_tracking: [gov,gov2]
   roku_log_collection: [gov,gov2]
   rum_cpp: [gov,gov2]
+  rum_electron: [gov,gov2]
   rum_remote_configuration: [gov,gov2]
   rum_roku: [gov,gov2]
   rum_server_apache: [gov,gov2]

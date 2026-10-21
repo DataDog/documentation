@@ -11,8 +11,8 @@ content_filters:
 
 The Datadog SDK supports integration with third-party libraries to extend its functionality.
 
-<!-- Browser, Roku, Unity, .NET MAUI, C / C++: no integrated libraries -->
-{% if includes($platform, ["browser", "roku", "unity", "maui", "cpp"]) %}
+<!-- Browser, Roku, Unity, .NET MAUI, C / C++, Electron: no integrated libraries -->
+{% if includes($platform, ["browser", "roku", "unity", "maui", "cpp", "electron"]) %}
 {% alert %}
 Integrated libraries are not available for the selected SDK.
 {% /alert %}
