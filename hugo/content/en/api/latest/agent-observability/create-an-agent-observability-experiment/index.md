@@ -1,3 +1,3 @@
 ---
-title: Create an Agent Observability offline experiment
+title: Create an Agent Observability experiment
 ---
