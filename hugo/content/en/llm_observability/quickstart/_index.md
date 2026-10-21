@@ -18,13 +18,21 @@ further_reading:
       text: 'Instrument with OpenTelemetry'
     - link: '/llm_observability/investigate/evaluations'
       tag: 'Evaluations'
-      text: 'Configure Evaluations on your application'
+      text: 'Configure Evaluators on your application'
     - link: '/llm_observability/lapdog'
       tag: 'Documentation'
       text: 'Local development tool for Agent Observability'
 ---
 
 This page demonstrates using Datadog's Agent Observability SDK to instrument a Python, Node.js, or Java LLM application.
+
+{{< skill-callout
+    title="Set up Agent Observability with a coding agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, instrument Datadog Agent Observability in my project.
+{{< /skill-callout >}}
 
 ### Prerequisites
 
@@ -151,7 +159,7 @@ If you don't see any traces:
 
 After traces are being submitted from your application, you can:
 
-- [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
+- [Configure evaluators][4] that you can use to assess the effectiveness of your LLM application.
 - Add [manual instrumentation][5] to your application and extract data that automatic instrumentation cannot.
 
 

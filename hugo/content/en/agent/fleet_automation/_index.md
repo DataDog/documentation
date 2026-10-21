@@ -23,8 +23,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/fleet-automation/"
   tag: "Blog"
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
-site_support_id: fleet-automation-standard-features
 ---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED).<br><br>
+Additional Fleet Automation functionality such as Configuring Agents, Upgrading Agents, and Upgrading SDKs are not supported for your selected Datadog site ({{< region-param key=dd_site_name >}}).
+</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -41,6 +47,10 @@ With Fleet Automation, you can:
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
 - **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
+
+## Set up Fleet Automation
+
+An Agent appearing in Fleet View does not necessarily have remote management enabled. To remotely upgrade or configure Agents on Linux or Windows VMs, [enable Remote Configuration and set `remote_updates` to `true`][8]. Check the version and platform requirements for [upgrades][5] and [configuration changes][4].
 
 ## Fleet Automation API
 
@@ -74,3 +84,4 @@ For information on setting up roles and permissions, see [Access Control][2].
 [5]: /agent/fleet_automation/upgrade_agents/
 [6]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [7]: /agent/fleet_automation/fleet_view/#kubernetes-view
+[8]: /agent/guide/setup_remote_config/#enable-remote-agent-management

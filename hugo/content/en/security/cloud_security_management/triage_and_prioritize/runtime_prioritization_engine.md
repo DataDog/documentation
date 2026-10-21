@@ -18,7 +18,10 @@ further_reading:
   text: "Securing the AI era: Outpace AI-powered attacks with unified security and observability"
 - link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
   tag: "Blog"
-  text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
+  text: "How CISA's BOD 26-04 changes vulnerability prioritization"
+- link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
+  tag: "Blog"
+  text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 ---
 
 Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many findings that are never exploited in practice as critical. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
@@ -38,23 +41,6 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 | **Actionability** | Can the right team fix it? | Service owner identified. Fix or mitigation available. |
 
 The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
-
-## CISA BOD 26-04 remediation timelines
-
-The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
-
-Datadog computes each vulnerability's remediation timeline according to the directive and adds it to the finding as one of the following values: 
-- `three_days_and_forensic_triage`
-- `three_days`
-- `fourteen_days`
-- `sixty_days`
-- `fix_on_system_upgrade`
-
-The due date computed from this timeline appears directly on the vulnerability finding. Datadog also records the date the vulnerability's CVE was added to the [CISA KEV catalog][1] as a `@vulnerability.cisa.kev_added_at` timestamp on the finding.
-
-For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
-
-{{< img src="security/cloud_security_management/cisa_bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer filtered to the 3 Days + Forensic Triage CISA BOD 26-04 remediation timeline facet, with a search bar query combining the remediation timeline and kev_added_at attributes, and the time helper dropdown open." width="100%">}}
 
 ## Crown Jewels
 
@@ -118,6 +104,23 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 | **Source of the context** | [Container monitoring][12] data: the containers Datadog observes running on the hosts the Agent monitors. | Agentless Scanning, which records the images running on a resource at the time the scan runs. |
 | **Update frequency** | Hourly, when Datadog re-evaluates the image's findings. | Once per Agentless scan of the resource, every 12 hours. |
 | **Container-level detail** | The side panel of a finding in the [Vulnerability Explorer][11] lists the containers that recently ran the image. | Not available. |
+
+## CISA BOD 26-04 remediation timelines
+
+The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
+
+Datadog computes each vulnerability's remediation timeline according to the directive and adds it to the finding as one of the following values: 
+- `three_days_and_forensic_triage`
+- `three_days`
+- `fourteen_days`
+- `sixty_days`
+- `fix_on_system_upgrade`
+
+The due date computed from this timeline appears directly on the vulnerability finding. Datadog also records the date the vulnerability's CVE was added to the [CISA KEV catalog][1] as a `@vulnerability.cisa.kev_added_at` timestamp on the finding.
+
+For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
+
+{{< img src="security/cloud_security_management/cisa_bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer filtered to the 3 Days + Forensic Triage CISA BOD 26-04 remediation timeline facet, with a search bar query combining the remediation timeline and kev_added_at attributes, and the time helper dropdown open." width="100%">}}
 
 ## Get started
 

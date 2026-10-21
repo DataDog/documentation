@@ -3,7 +3,7 @@ title: Pydantic Evaluations
 aliases:
 - /llm_observability/evaluations/pydantic_evaluations/
 - /llm_observability/configure/evaluations/external_evaluations/pydantic/
-description: Use Pydantic evaluations with Agent Observability Experiments.
+description: Use Pydantic evaluators with Agent Observability Experiments.
 further_reading:
 - link: "/llm_observability/investigate/evaluations/external_evaluations"
   tag: "Documentation"
@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Pydantic is an open source framework that provides ready-to-use evaluations and allows for customizable LLM evaluations. For more information, see [Pydantic's documentation][3].
+Pydantic is an open source framework that provides ready-to-use evaluators and allows for customizable LLM evaluations. For more information, see [Pydantic's documentation][3].
 
-You can use Agent Observability to run Pydantic evaluations and scalar Pydantic report evaluations in [Experiments][1]. Pydantic evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5]. Pydantic report evaluations run on an entire Agent Observability dataset and report one scalar result for the dataset.
+You can use Agent Observability to run Pydantic evaluators and scalar Pydantic report evaluators in [Experiments][1]. Pydantic evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5]. Pydantic report evaluators run on an entire Agent Observability dataset and report one scalar result for the dataset.
 
 ## Setup
 
@@ -132,7 +132,7 @@ print(f"View experiment: {experiment.url}")
 For a working example, see [Datadog's Pydantic demo in GitHub][6].
 
 ### Usage
-After you run an experiment with a Pydantic evaluation, you can view the Pydantic evaluation results per instance in the corresponding experiment run in Datadog. In the following experiment, two Pydantic evaluations (a custom Pydantic evaluator with the name "ComprehensiveCheck" and a built-in evaluator with the name "EqualsExpected") and one Pydantic report evaluator (a custom Pydantic report evaluator with the name "TotalCasesEvaluator") were run:
+After you run an experiment with a Pydantic evaluator, you can view the Pydantic evaluation results per instance in the corresponding experiment run in Datadog. In the following experiment, two Pydantic evaluators (a custom Pydantic evaluator with the name "ComprehensiveCheck" and a built-in evaluator with the name "EqualsExpected") and one Pydantic report evaluator (a custom Pydantic report evaluator with the name "TotalCasesEvaluator") were run:
 
 {{< img src="llm_observability/pydantic-experiment-result.png" alt="An Agent Observability experiment with a Pydantic evaluator." style="width:100%;" >}}
 
@@ -141,8 +141,8 @@ After you run an experiment with a Pydantic evaluation, you can view the Pydanti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/improve/experiments
-[2]: /llm_observability/improve/experiments/setup#create-an-experiment
+[2]: /llm_observability/guide/experiments#create-an-experiment
 [3]: https://ai.pydantic.dev/evals/
-[4]: /llm_observability/improve/experiments/setup#create-a-dataset
+[4]: /llm_observability/guide/experiments#create-a-dataset
 [5]: /llm_observability/improve/datasets
 [6]: https://github.com/DataDog/llm-observability/blob/main/experiments/eval-integrations/2-pydantic-demo.py
