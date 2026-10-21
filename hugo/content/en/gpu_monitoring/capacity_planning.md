@@ -38,6 +38,28 @@ To use the Capacity Planning page, you must meet the following criteria:
 - Your GPU workloads run on Kubernetes.
 - You have enabled the [Kueue integration][3] in Datadog. For details, see the [Kueue integration documentation][4].
 
+## Setup
+
+Enable GPU Monitoring on the node Agents and Kueue metadata collection on the Cluster Agent to associate Kueue data with GPU telemetry. The corresponding Agent configuration settings are:
+
+```yaml
+gpu:
+  enabled: true
+
+cluster_agent:
+  kueue:
+    enabled: true
+```
+
+The [GPU Monitoring setup instructions][1] enable `gpu.enabled` on the node Agents. To enable `cluster_agent.kueue.enabled`, set the `DD_CLUSTER_AGENT_KUEUE_ENABLED` environment variable to `"true"` on the Cluster Agent:
+
+- **Datadog Operator**: Add the environment variable to `spec.override.clusterAgent.env` in the `DatadogAgent` resource.
+- **Helm**: Add the environment variable to `clusterAgent.env` in the `datadog-values.yaml` file.
+
+Apply the updated configuration and restart the Cluster Agent.
+
+Kueue metadata collection enables GPU-related enrichment. Configure the [Kueue cluster check][6] separately to collect Kueue metrics.
+
 ## Explore the Capacity Planning page
 
 To get started, navigate to the [Capacity Planning page][5] in GPU Monitoring.
@@ -79,3 +101,4 @@ Use the {{< ui >}}Workloads{{< /ui >}} tab to check the current state of a workl
 [3]: https://app.datadoghq.com/integrations?search=kueue
 [4]: /integrations/kueue/
 [5]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=capacity-planning
+[6]: /integrations/kueue/#configuration
