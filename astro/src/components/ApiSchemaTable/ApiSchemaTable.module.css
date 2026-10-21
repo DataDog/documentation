@@ -123,9 +123,12 @@
   cursor: pointer;
   padding: 0;
   position: absolute;
-  /* Vertically centered on the name's first line (the cell's 4px top
-     padding, then half of the leftover line height). */
-  top: calc(4px + (1.5 * var(--font-size-sm) - 16px) / 2);
+  /* Vertically centered on the lowercase letters of the name's first line:
+     the cell's 4px top padding, then half of the leftover line height, then
+     down to the middle of the x-height, which sits below the line's middle. */
+  top: calc(
+    4px + (1.5 * var(--font-size-sm) - 16px) / 2 + 0.16 * var(--font-size-sm)
+  );
   left: calc(var(--schema-table-name-left) - 16px - var(--space-xs));
   transition: transform 0.15s ease;
 }

@@ -160,6 +160,46 @@ describe("buildCurlCommand", () => {
     expect(result).toContain("/rows?row_id=${row_id_0}&row_id=${row_id_1}");
   });
 
+  /** Unlike Hugo: bash rejects `export filter[env]=...`. */
+  it("exports a bracketed query parameter under a valid shell variable name", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v2/apm/services",
+      queryParams: [
+        { name: "filter[env]", required: true },
+        { name: "filter[timestamp][start]", required: true },
+      ],
+    });
+
+    expect(result).toContain(
+      '# Required query arguments\nexport filter_env="CHANGE_ME"\nexport filter_timestamp_start="CHANGE_ME"\n',
+    );
+    expect(result).toContain(
+      "/services?filter%5Benv%5D=${filter_env}&filter%5Btimestamp%5D%5Bstart%5D=${filter_timestamp_start}",
+    );
+  });
+
+  it("names each item of a bracketed exploded array with a valid shell variable name", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v2/usage/hourly_usage",
+      queryParams: [
+        {
+          name: "filter[product_families]",
+          required: true,
+          explodedItemCount: 2,
+        },
+      ],
+    });
+
+    expect(result).toContain(
+      'export filter_product_families_0="filter_product_families_0"\nexport filter_product_families_1="filter_product_families_1"\n',
+    );
+    expect(result).toContain(
+      "/hourly_usage?filter%5Bproduct_families%5D=${filter_product_families_0}&filter%5Bproduct_families%5D=${filter_product_families_1}",
+    );
+  });
+
   /** As Hugo does: an optional filter's example would narrow the results. */
   it("leaves out optional query parameters, even with an example", () => {
     const result = buildCurlCommand({

@@ -115,7 +115,29 @@ describe("apiEndpointNodes", () => {
     );
   });
 
-  it("leaves out the Overview heading when there is no description", () => {
+  /** As Hugo does: the permissions and OAuth sentences sit under Overview. */
+  it("shows the Overview heading above the permissions sentence when there is no description", () => {
+    const out = render({
+      ...baseEndpoint,
+      description: "",
+      permissions: ["things_read"],
+    });
+    expect(out).toMatch(
+      /### Overview\n\nThis endpoint requires the `things_read` permission\./,
+    );
+  });
+
+  it("shows the Overview heading above the OAuth sentence when there is no description", () => {
+    const out = render({
+      ...baseEndpoint,
+      description: "",
+      oauthScopes: ["things_read"],
+    });
+    expect(out).toMatch(/### Overview\n\nOAuth apps require the `things_read`/);
+  });
+
+  /** Unlike Hugo, which shows an empty Overview heading. */
+  it("leaves out the Overview heading when nothing goes under it", () => {
     const out = render({ ...baseEndpoint, description: "" });
     expect(out).not.toContain("### Overview");
   });

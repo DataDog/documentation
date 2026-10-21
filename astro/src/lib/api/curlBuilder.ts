@@ -199,7 +199,16 @@ function buildParameterExportLines(
 }
 
 function exportParam(param: CurlParam): string {
-  return `export ${param.name}="${param.example ?? "CHANGE_ME"}"`;
+  return `export ${shellVariableName(param.name)}="${param.example ?? "CHANGE_ME"}"`;
+}
+
+/**
+ * A parameter name as a valid shell variable name. Bash rejects names with
+ * brackets, such as `filter[env]`, so each run of other characters becomes
+ * `_` (`filter_env`). Hugo uses the name as is.
+ */
+function shellVariableName(name: string): string {
+  return name.replace(/[^A-Za-z0-9_]+/g, "_").replace(/_+$/, "");
 }
 
 /**
@@ -216,7 +225,7 @@ function exportQueryParam(param: CurlParam): string[] {
 function explodedItemNames(param: CurlParam): string[] {
   return Array.from(
     { length: param.explodedItemCount ?? 0 },
-    (_, index) => `${param.name}_${index}`,
+    (_, index) => `${shellVariableName(param.name)}_${index}`,
   );
 }
 
@@ -229,7 +238,10 @@ function interpolatePath(path: string, pathParams?: CurlParam[]): string {
 
   let result = path;
   for (const param of pathParams) {
-    result = result.replace(`{${param.name}}`, `\${${param.name}}`);
+    result = result.replace(
+      `{${param.name}}`,
+      `\${${shellVariableName(param.name)}}`,
+    );
   }
   return result;
 }
@@ -249,7 +261,7 @@ function buildQueryString(
     .flatMap((param) => {
       const variableNames =
         param.explodedItemCount === undefined
-          ? [param.name]
+          ? [shellVariableName(param.name)]
           : explodedItemNames(param);
       return variableNames.map(
         (variableName) =>
