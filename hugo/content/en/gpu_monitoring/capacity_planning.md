@@ -50,10 +50,11 @@ Complete the following steps to collect both.
 
 1. In the Kueue configuration, set `metrics.enableClusterQueueResources: true` and restart the Kueue controller manager. Kueue reports ClusterQueue quota and usage metrics, such as `kueue.cluster_queue.nominal_quota.gpu` and `kueue.cluster_queue.resource_usage.gpu`, only when this setting is enabled. The Capacity Planning graphs require these metrics.
 2. Install the [Kueue integration][3] and configure the Kueue check as a cluster check. For instructions, see the [Kueue integration documentation][4].
+3. Confirm that the Kueue check runs successfully on its assigned Agent and reports quota and usage metrics before continuing. For steps to check discovery, dispatching, and Agent status, see [Troubleshooting Cluster and Endpoint Checks][7].
 
 ### Collect Kueue metadata in the Cluster Agent
 
-The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Workload resources, and tags GPU metrics with the Kueue workload, queue, and resource flavor that each GPU is allocated to. To collect this metadata, grant the Cluster Agent read access to Kueue resources, then enable Kueue metadata collection.
+The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Workload resources. It tags GPU metrics with the Kueue workload, queue, and resource flavor that each GPU is allocated to. To collect this metadata, grant the Cluster Agent read access to Kueue resources, then enable Kueue metadata collection.
 
 #### Grant the Cluster Agent access to Kueue resources
 
@@ -143,7 +144,7 @@ The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Work
 2. Upgrade your Helm release. Helm redeploys the Cluster Agent with the new configuration.
 
    ```shell
-   helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+   helm upgrade -n <DATADOG_NAMESPACE> -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
    ```
 
 {{% /tab %}}
@@ -153,8 +154,9 @@ The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Work
 
 After Kueue-managed workloads start running on GPUs:
 
-- In the [Metrics Explorer][6], query `kueue.cluster_queue.nominal_quota.gpu`. If no data appears, check the Kueue check configuration and the `metrics.enableClusterQueueResources` setting.
-- In the Metrics Explorer, query `gpu.gr_engine_active` grouped by `kueue_workload`. If no `kueue_workload` values appear, check the Cluster Agent logs for permission errors on `kueue.x-k8s.io` resources.
+1. In the [Metrics Explorer][6], filter by `kube_cluster_name` and `kueue_cluster_queue` for the cluster and ClusterQueue you configured. Query `kueue.cluster_queue.nominal_quota.gpu` and `kueue.cluster_queue.resource_usage.gpu`. If either metric has no data, check the Kueue check configuration and the `metrics.enableClusterQueueResources` setting.
+2. Using the same filters, query `gpu.gr_engine_active` grouped by `kueue_workload` and `kueue_resource_flavor`. Confirm that your running workload and its resource flavor appear. If either is missing, check that Kueue metadata collection is enabled. Also inspect the Cluster Agent logs for permission errors on `kueue.x-k8s.io` resources.
+3. Open the [Capacity Planning page][5] and filter to the same cluster and ClusterQueue. Confirm that the queue and running workload appear.
 
 ## Explore the Capacity Planning page
 
@@ -198,3 +200,4 @@ Use the {{< ui >}}Workloads{{< /ui >}} tab to check the current state of a workl
 [4]: /integrations/kueue/
 [5]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=capacity-planning
 [6]: /metrics/explorer/
+[7]: /containers/troubleshooting/cluster-and-endpoint-checks/
