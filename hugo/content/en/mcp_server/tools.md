@@ -1672,6 +1672,78 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 - Delete tag rule `abc123`.
 - Permanently delete tag rule `abc123`.
 
+## GPU Monitoring
+
+Tools for [GPU Monitoring][97], including identifying the frameworks a GPU workload runs, mapping its hardware footprint, checking training progress, diagnosing host and GPU hardware health, and analyzing self-hosted LLM inference deployments.
+
+<div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
+
+All tools in this toolset are read-only. The workload tools are designed to be chained: start with `gpu_monitoring_orient_workload_tagging` and `gpu_monitoring_orient_hardware_inventory`, then pass the filters they return to the analysis tools.
+
+### `gpu_monitoring_identify_workload_framework`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Metrics Read` and `Logs Read Data` and `APM Read`*\
+Identifies the orchestrator, training framework, and inference server a GPU workload uses, from metric tags, APM span attributes, and logs. For each detected framework, reports its version, known error signals in its logs, and recommended actions when the framework's integration metrics are missing. A layer with no signal in telemetry is reported as unknown.
+
+- What training framework and orchestrator does this GPU job use?
+- Which inference server is running on these GPUs, and which version?
+
+### `gpu_monitoring_orient_workload_tagging`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries` and `Logs Read Data` and `APM Read`*\
+Resolves which tags identify a GPU workload, which tag key each value came from, and the filters to use against metrics, logs, and traces. Also determines which attempt of the run the time window covers, so later analysis does not combine data from two attempts after a restart.
+
+- Which tags identify my training run `llama-pretrain-42`?
+- Did this job restart during the last 24 hours?
+
+### `gpu_monitoring_orient_hardware_inventory`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Lists the GPU devices, hosts, racks, and NVLink fabric domains a workload occupies, and how many of each. Also returns the host filter and fabric domains to pass to the host health and GPU hardware health tools.
+
+- How many GPUs and hosts is this job running on?
+- Which racks and NVLink domains does this workload span?
+
+### `gpu_monitoring_analyze_training_stepping`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries` and `Logs Read Data` and `APM Read`*\
+Determines whether a training job's step counter is still advancing, judged against a tolerance based on the job's own step cadence. Missing data is reported as unknown rather than as a stall, and a stall is only reported when GPU activity confirms it, because warmup compilation and evaluation phases look the same from the step signal alone.
+
+- Is my training job still making progress?
+- Has this run stalled in the last hour?
+
+### `gpu_monitoring_analyze_host_health`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Identifies which hosts of a workload are running out of a host-level resource or losing time to contention: disk space, memory, OOM kills, pressure on memory, I/O, and CPU, inode and file handle exhaustion, swap activity, and clock skew. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`.
+
+- Are any hosts in this training job running out of disk or memory?
+- Did any of this job's hosts hit OOM kills overnight?
+
+### `gpu_monitoring_analyze_gpu_hardware_health`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries` and `Metrics Read` and `Logs Read Data`*\
+Identifies which GPU hardware categories show a problem on a workload's devices (memory, NVLink, network, PCIe, thermal, power, device, driver, and compute), what each signal points to, and which NVIDIA XID error codes corroborate it. Covers device and fabric hardware; use `gpu_monitoring_analyze_host_health` for host resources.
+
+- Are there any GPU hardware errors on this job's devices?
+- Is a bad NVLink domain slowing down my training run?
+
+### `gpu_monitoring_list_inference_deployments`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Lists self-hosted LLM inference deployments (vLLM, SGLang, and NVIDIA Dynamo) with their throughput, latency, error rate, and KV cache usage over the time window, and a health verdict for each, worst first. Hosted model providers are not covered.
+
+- Which of my inference deployments are unhealthy right now?
+- List the vLLM deployments in `env:prod` from the past hour.
+
+### `gpu_monitoring_get_inference_deployment`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Retrieves the health verdict and key metrics for one self-hosted LLM inference deployment, then summarizes the requested signal groups (latency, throughput, errors, cache, speculative decoding, and pods) with their average, p95, maximum, last value, and largest level shift. Also returns an APM query for the deployment's inference traces.
+
+- Why is my `llama-70b` deployment slow?
+- Show me the latency and KV cache usage for this deployment over the past 3 hours.
+
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
@@ -3653,6 +3725,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [94]: /logs/log_configuration/indexes/
 [95]: /logs/log_configuration/archives/
 [96]: /metrics/derived-metrics/
+[97]: /gpu_monitoring/
 
 ## Further reading
 
