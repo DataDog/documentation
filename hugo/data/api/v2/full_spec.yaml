@@ -80259,11 +80259,15 @@ components:
       enum:
         - non_distribution
         - distribution
+        - exponential_histogram
+        - explicit_histogram
       example: distribution
       type: string
       x-enum-varnames:
         - NON_DISTRIBUTION
         - DISTRIBUTION
+        - EXPONENTIAL_HISTOGRAM
+        - EXPLICIT_HISTOGRAM
     MetricTagConfigurationMetricTypes:
       default: gauge
       description: The metric's type.
@@ -201416,7 +201420,7 @@ paths:
           schema:
             type: boolean
         - description: |-
-            This parameter has no effect unless `filter[queried]` is also set. Only return metrics that have been queried or not queried in the specified window. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 1 second. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
+            The look-back window for `filter[queried]`, in seconds. You must also set `filter[queried]`, or the request returns a 400 error. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 0. With `0`, the window ends now, so `filter[queried]=true` returns almost no metrics and `filter[queried]=false` returns all metrics. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
           example: 15552000
           in: query
           name: filter[queried][window][seconds]
@@ -201425,7 +201429,7 @@ paths:
             default: 2592000
             format: int64
             maximum: 15552000
-            minimum: 1
+            minimum: 0
             type: integer
         - description: |-
             Only return metrics that were submitted with tags matching this expression. You can use AND, OR, IN, and wildcards. For example: `filter[tags]=env IN (staging,test) AND service:web*`.
@@ -201458,7 +201462,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Only return metrics that have been actively reporting in the specified window. The default value is 3600 seconds (1 hour), the maximum value is 2,592,000 seconds (30 days), and the minimum value is 1 second.
+            Only return metrics that have been actively reporting in this window. The default value is 3,600 seconds (1 hour), the maximum value is 5,184,000 seconds (60 days), and the minimum value is 0. With `0`, the API returns only metrics that reported in the last few minutes.
           example: 3600
           in: query
           name: window[seconds]
@@ -201466,8 +201470,8 @@ paths:
           schema:
             default: 3600
             format: int64
-            maximum: 2592000
-            minimum: 1
+            maximum: 5184000
+            minimum: 0
             type: integer
         - description: |-
             Maximum number of results per page. Send `page[size]` on the first request to opt in to pagination. On each subsequent request, send `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. The default value is 10000, the maximum value is 10000, and the minimum value is 1.
