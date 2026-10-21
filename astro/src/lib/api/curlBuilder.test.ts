@@ -104,19 +104,53 @@ describe("buildCurlCommand", () => {
     expect(result).toContain("?start_hr=${start_hr}");
   });
 
-  it("exports nothing for parameters that have examples", () => {
+  it("exports nothing for a path parameter that has an example", () => {
     const result = buildCurlCommand({
       method: "GET",
       path: "/api/v1/dashboard/{dashboard_id}",
       pathParams: [{ name: "dashboard_id", example: "abc-123" }],
-      queryParams: [{ name: "filter", example: "active", required: true }],
     });
 
     expect(result).not.toContain("# Path parameters");
-    expect(result).not.toContain("# Required query arguments");
   });
 
-  it("includes query parameters with example values", () => {
+  /** As Hugo does: the example is exported, and the URL references it by name. */
+  it("exports a required query parameter's example", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/dashboard",
+      queryParams: [{ name: "filter", example: "active", required: true }],
+    });
+
+    expect(result).toContain(
+      '# Required query arguments\nexport filter="active"',
+    );
+    expect(result).toContain("/api/v1/dashboard?filter=${filter}");
+  });
+
+  /** As Hugo does: each item gets its own variable and a repeated key. */
+  it("exports one placeholder per item of an exploded array query parameter", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v2/reference-tables/tables/table-123/rows",
+      queryParams: [
+        {
+          name: "row_id",
+          example: "row1,row2",
+          required: true,
+          explodedItemCount: 2,
+        },
+      ],
+    });
+
+    expect(result).toContain(
+      '# Required query arguments\nexport row_id_0="row_id_0"\nexport row_id_1="row_id_1"\n',
+    );
+    expect(result).toContain("/rows?row_id=${row_id_0}&row_id=${row_id_1}");
+  });
+
+  /** As Hugo does: an optional filter's example would narrow the results. */
+  it("leaves out optional query parameters, even with an example", () => {
     const result = buildCurlCommand({
       method: "GET",
       path: "/api/v1/dashboard",
@@ -126,7 +160,9 @@ describe("buildCurlCommand", () => {
       ],
     });
 
-    expect(result).toContain("?filter=active&page=0");
+    expect(result).not.toContain("filter");
+    expect(result).not.toContain("page");
+    expect(result).toContain('"https://api.${DD_SITE}/api/v1/dashboard"');
   });
 
   it("only includes required query params without examples", () => {
@@ -383,13 +419,13 @@ describe("buildCurlCommand", () => {
       const result = buildCurlCommand({
         method: "GET",
         path: "/api/v1/dashboard",
-        queryParams: [{ name: "filter", example: "active" }],
+        queryParams: [{ name: "filter", example: "active", required: true }],
         security: [{ apiKeyAuthQuery: [], appKeyAuthQuery: [] }],
         securitySchemes,
       });
 
       expect(result).toContain(
-        "/api/v1/dashboard?filter=active&api_key=${DD_API_KEY}&application_key=${DD_APP_KEY}",
+        "/api/v1/dashboard?filter=${filter}&api_key=${DD_API_KEY}&application_key=${DD_APP_KEY}",
       );
       expect(result).toContain('export DD_API_KEY="<DD_API_KEY>"');
       expect(result).not.toContain("DD-API-KEY:");

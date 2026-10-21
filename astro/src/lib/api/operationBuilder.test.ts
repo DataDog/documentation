@@ -381,6 +381,80 @@ describe("curl Accept header", () => {
   });
 });
 
+describe("curl query parameters", () => {
+  const operation = { responses: { "200": { description: "OK" } } };
+  const curlFor = (query: OpenAPIV3.ParameterObject[]) =>
+    buildPlaintextCurl(spec, "get", "/api/v1/graph/snapshot", operation, {
+      path: [],
+      query,
+      header: [],
+    });
+
+  it("treats x-docs-curl-required as required, as Hugo does", () => {
+    const curl = curlFor([
+      {
+        name: "metric_query",
+        in: "query",
+        schema: { type: "string" },
+        "x-docs-curl-required": true,
+      } as OpenAPIV3.ParameterObject,
+    ]);
+
+    expect(curl).toContain('export metric_query="CHANGE_ME"');
+    expect(curl).toContain("?metric_query=${metric_query}");
+  });
+
+  /** Hugo's curl uses the example or `"CHANGE_ME"`, never the default. */
+  it("exports CHANGE_ME, not the default, for a required query parameter with no example", () => {
+    const curl = curlFor([
+      {
+        name: "start",
+        in: "query",
+        required: true,
+        schema: { type: "integer", default: 10 },
+      },
+    ]);
+
+    expect(curl).toContain('export start="CHANGE_ME"');
+  });
+
+  it("splits a required, exploded array query parameter into one variable per item", () => {
+    const curl = curlFor([
+      {
+        name: "row_id",
+        in: "query",
+        required: true,
+        explode: true,
+        example: ["row1", "row2"],
+        schema: { type: "array", items: { type: "string" } },
+      },
+    ]);
+
+    expect(curl).toContain("?row_id=${row_id_0}&row_id=${row_id_1}");
+  });
+
+  /** Hugo splits an array only when `explode` is set explicitly. */
+  it("keeps one variable for an array query parameter without explode", () => {
+    const curl = curlFor([
+      {
+        name: "row_id",
+        in: "query",
+        required: true,
+        example: ["row1", "row2"],
+        schema: { type: "array", items: { type: "string" } },
+      },
+    ]);
+
+    expect(curl).toContain("?row_id=${row_id}");
+  });
+
+  it("leaves out an optional query parameter that has an example", () => {
+    const curl = curlFor([{ name: "title", in: "query", example: "My graph" }]);
+
+    expect(curl).not.toContain("title");
+  });
+});
+
 describe("curl for a multipart body", () => {
   const noParams = { path: [], query: [], header: [] };
   const operation = {

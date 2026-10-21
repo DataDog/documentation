@@ -5,6 +5,12 @@ export const CurlParamSchema = z
     name: z.string(),
     example: z.string().optional(),
     required: z.boolean().optional(),
+    explodedItemCount: z
+      .number()
+      .optional()
+      .describe(
+        "For an `explode: true` query parameter whose example is an array: the number of items, each sent as its own `name=` pair.",
+      ),
   })
   .strict();
 

@@ -84,7 +84,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
 
   const lines: string[] = [];
 
-  // --- Parameters without an example, which the URL references by name ---
+  // --- Parameters the URL references by name ---
   const parameterExportLines = buildParameterExportLines(
     pathParams,
     queryParams,
@@ -176,8 +176,9 @@ function formFieldFlag(field: CurlFormField): string {
 }
 
 /**
- * Export each parameter that has no example as `"CHANGE_ME"`, as Hugo does,
- * so the `${name}` references in the URL are set.
+ * Export each path parameter that has no example, and each required query
+ * parameter, as Hugo does, so the `${name}` references in the URL are set.
+ * A required query parameter exports its example, or `"CHANGE_ME"`.
  */
 function buildParameterExportLines(
   pathParams: CurlParam[] = [],
@@ -188,22 +189,38 @@ function buildParameterExportLines(
     (param) => param.example === undefined,
   );
   if (unsetPathParams.length > 0) {
-    lines.push("# Path parameters", ...unsetPathParams.map(exportPlaceholder));
+    lines.push("# Path parameters", ...unsetPathParams.map(exportParam));
   }
-  const unsetQueryParams = queryParams.filter(
-    (param) => param.example === undefined && param.required,
-  );
-  if (unsetQueryParams.length > 0) {
+  const requiredQueryParams = queryParams.filter((param) => param.required);
+  if (requiredQueryParams.length > 0) {
     lines.push(
       "# Required query arguments",
-      ...unsetQueryParams.map(exportPlaceholder),
+      ...requiredQueryParams.flatMap(exportQueryParam),
     );
   }
   return lines;
 }
 
-function exportPlaceholder(param: CurlParam): string {
-  return `export ${param.name}="CHANGE_ME"`;
+function exportParam(param: CurlParam): string {
+  return `export ${param.name}="${param.example ?? "CHANGE_ME"}"`;
+}
+
+/**
+ * An exploded array exports one placeholder per item, named and set to
+ * `<name>_<index>`, as Hugo does.
+ */
+function exportQueryParam(param: CurlParam): string[] {
+  if (param.explodedItemCount === undefined) return [exportParam(param)];
+  return explodedItemNames(param).map(
+    (itemName) => `export ${itemName}="${itemName}"`,
+  );
+}
+
+function explodedItemNames(param: CurlParam): string[] {
+  return Array.from(
+    { length: param.explodedItemCount ?? 0 },
+    (_, index) => `${param.name}_${index}`,
+  );
 }
 
 /**
@@ -223,24 +240,27 @@ function interpolatePath(path: string, pathParams?: CurlParam[]): string {
 }
 
 /**
- * Build the query string portion of the URL.
- * Only includes required parameters and those with example values,
- * followed by any auth query parts.
+ * Build the query string portion of the URL: each required query parameter
+ * as a `${name}` reference (one per item for an exploded array), as Hugo does, then any auth query parts. Optional
+ * parameters are left out, even with an example, since a copied filter would
+ * narrow the results.
  */
 function buildQueryString(
   queryParams: CurlParam[] = [],
   authQueryParts: string[] = [],
 ): string {
-  const parts: string[] = [];
-  for (const param of queryParams) {
-    if (param.example !== undefined) {
-      parts.push(
-        `${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`,
+  const parts = queryParams
+    .filter((param) => param.required)
+    .flatMap((param) => {
+      const variableNames =
+        param.explodedItemCount === undefined
+          ? [param.name]
+          : explodedItemNames(param);
+      return variableNames.map(
+        (variableName) =>
+          `${encodeURIComponent(param.name)}=\${${variableName}}`,
       );
-    } else if (param.required) {
-      parts.push(`${encodeURIComponent(param.name)}=\${${param.name}}`);
-    }
-  }
+    });
 
   parts.push(...authQueryParts);
 

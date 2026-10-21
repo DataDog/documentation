@@ -528,29 +528,29 @@
           "entries": [
             {
               "description": "List all AWS integrations curl example",
-              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\"",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "us3": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "us5": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "eu": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "ap1": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "ap2": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "gov": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 }
               }
             }

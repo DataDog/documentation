@@ -398,8 +398,8 @@ function curlOptionsForOperation(
     method,
     path,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
-    pathParams: toCurlParams(splitParams.path),
-    queryParams: toCurlParams(splitParams.query),
+    pathParams: toCurlParams(splitParams.path, { useDefault: true }),
+    queryParams: toCurlParams(splitParams.query, { useDefault: false }),
     requestBodyJson,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),
@@ -559,17 +559,33 @@ function generateExampleFromSchema(
 }
 
 /**
- * Build curl params from resolved parameter objects.
+ * Build curl params from resolved parameter objects. With `useDefault`, a
+ * parameter with no example falls back to its schema default. Query
+ * parameters don't, as in Hugo's curl, so they export `"CHANGE_ME"` instead.
  */
-function toCurlParams(params: OpenAPIV3.ParameterObject[]): CurlParam[] {
+function toCurlParams(
+  params: OpenAPIV3.ParameterObject[],
+  { useDefault }: { useDefault: boolean },
+): CurlParam[] {
   return params.map((p) => {
     const schema: OpenAPIV3.SchemaObject | undefined =
       p.schema && !isReference(p.schema) ? p.schema : undefined;
-    const example = p.example ?? schema?.example ?? schema?.default;
+    const example =
+      p.example ??
+      schema?.example ??
+      (useDefault ? schema?.default : undefined);
+    // Hugo splits an array only when `explode` is set explicitly.
+    const explodedItemCount =
+      p.explode === true && Array.isArray(example) ? example.length : undefined;
     return {
       name: p.name,
       example: example !== undefined ? String(example) : undefined,
-      required: p.required === true,
+      explodedItemCount,
+      // Hugo's curl also treats `x-docs-curl-required` as required.
+      required:
+        p.required === true ||
+        (p as { "x-docs-curl-required"?: boolean })["x-docs-curl-required"] ===
+          true,
     };
   });
 }
