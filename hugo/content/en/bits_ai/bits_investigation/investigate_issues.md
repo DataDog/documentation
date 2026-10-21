@@ -143,6 +143,7 @@ Bits uses the following data sources during investigations:
 - [Source code][17] (GitHub only)
 - Watchdog
 - Real User Monitoring
+- Error Tracking
 - Network Path
 - Database Monitoring
 - Continuous Profiler
