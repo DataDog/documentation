@@ -130,9 +130,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
-The following table lists the source attributes for each peer tag in the [Datadog Agent mapping registry][6]. Supported source attributes depend on the Agent version. To check a specific version, select its release tag in the Agent repository. Older releases, such as 7.60.0, store these mappings in `pkg/trace/config/peer_tags.ini` instead of `pkg/trace/semantics/mappings.json`.
-
-Multiple source attributes can map to the same peer tag. For example, `db.system` and `db.type` are both supported sources for `peer.db.system`. The [precedence of peer tags][7] determines which peer tag names an inferred entity.
+The following table lists the source attributes used to derive peer tags for inferred services. For `peer.db.system`, Datadog uses only `db.system`. The [precedence of peer tags][7] determines which peer tag names an inferred entity.
 
 Peer tag | Source attributes
 --------------------|-------------------
@@ -143,7 +141,7 @@ Peer tag | Source attributes
 `peer.cassandra.contact.points` | `db.cassandra.contact.points`
 `peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
 `peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
-`peer.db.system` | `db.system.name`, `db.system`, `active_record.db.vendor`, `db.type`, `sequel.db.vendor`
+`peer.db.system` | `db.system`
 `peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`, `out.host`, `dns.hostname`, `network.destination.ip`
 `peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
 `peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
@@ -183,7 +181,6 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
 [5]: /tracing/services/renaming_rules/
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/trace/semantics/mappings.json
 [7]: #precedence-of-peer-tags
 
 {{< /site-region >}}
