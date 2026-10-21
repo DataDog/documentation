@@ -2,9 +2,9 @@
  * AST twin of `ApiCodeExample.astro`.
  *
  * Wraps code examples in a Markdoc `{% tabs %}` tag with one `{% tab %}`
- * child per language. Each tab contains a sequence of fenced code blocks;
- * when a language has multiple entries, each is preceded by a bold heading
- * paragraph carrying its description.
+ * child per language. Each tab contains a sequence of fenced code blocks,
+ * with no title above each one: prod's `.md` writes none, and each example's
+ * first comment already repeats its description.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
@@ -12,14 +12,7 @@ import type {
   CodeExampleSet,
   CodeExampleEntry,
 } from "@lib/api/schemas/codeExamples";
-import {
-  bold,
-  fence,
-  inline,
-  paragraph,
-  tag,
-  plaintext,
-} from "@lib/plaintext/helpers";
+import { fence, tag } from "@lib/plaintext/helpers";
 import { apiCodeInstructionsNodes } from "@components/ApiCodeInstructions/plaintext/ApiCodeInstructions";
 
 export function apiCodeExampleNode(
@@ -37,11 +30,7 @@ export function apiCodeExampleNode(
 }
 
 function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
-  const includeHeading = set.entries.length > 1;
-  const contents: MarkdocNode[] = [];
-  for (const entry of set.entries) {
-    contents.push(...renderCodeExampleContent(entry, includeHeading));
-  }
+  const contents: MarkdocNode[] = set.entries.map(codeExampleFence);
   if (set.instructions) {
     contents.push(
       ...apiCodeInstructionsNodes({
@@ -53,18 +42,6 @@ function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
   return contents;
 }
 
-function renderCodeExampleContent(
-  entry: CodeExampleEntry,
-  includeHeading: boolean,
-): MarkdocNode[] {
-  const contents: MarkdocNode[] = [];
-  if (includeHeading && entry.description) {
-    contents.push(boldParagraph(entry.description));
-  }
-  contents.push(fence(entry.syntax, entry.code));
-  return contents;
-}
-
-function boldParagraph(text: string): MarkdocNode {
-  return paragraph([inline([bold([plaintext(text)])])]);
+function codeExampleFence(entry: CodeExampleEntry): MarkdocNode {
+  return fence(entry.syntax, entry.code);
 }

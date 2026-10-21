@@ -352,7 +352,8 @@ export function buildCurlByRegion(
 
 /**
  * The curl command for the .md, which can't switch sites: it uses the first
- * region's site, and lists the operation's other sites in a comment.
+ * region's site, and lists the operation's other sites (or, for per-region
+ * hosts, their hosts) in a comment.
  */
 export function buildPlaintextCurl(
   spec: OpenAPIV3.Document,
@@ -363,6 +364,7 @@ export function buildPlaintextCurl(
   requestBodyJson?: string,
 ): string {
   const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
+  const hostsByRegion = getRegionHosts(spec, operation);
   return buildCurlCommand({
     ...curlOptionsForOperation(
       spec,
@@ -374,9 +376,11 @@ export function buildPlaintextCurl(
     ),
     site: defaultRegion?.site,
     otherSites: otherRegions.map((region) => region.site),
-    host: defaultRegion
-      ? getRegionHosts(spec, operation).get(defaultRegion.key)
-      : undefined,
+    host: defaultRegion ? hostsByRegion.get(defaultRegion.key) : undefined,
+    otherHosts: otherRegions.flatMap((region) => {
+      const host = hostsByRegion.get(region.key);
+      return host ? [{ site: region.site, host }] : [];
+    }),
   });
 }
 
@@ -415,8 +419,7 @@ function multipartFormFields(
   operation: OpenAPIV3.OperationObject,
 ): CurlFormField[] | undefined {
   const requestBody = operation.requestBody as
-    | OpenAPIV3.RequestBodyObject
-    | undefined;
+    OpenAPIV3.RequestBodyObject | undefined;
   const multipart = requestBody?.content?.["multipart/form-data"];
   if (!multipart) return undefined;
 

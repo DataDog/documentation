@@ -267,6 +267,36 @@ describe("buildCurlCommand", () => {
     expect(result).toContain('export DD_API_KEY="<DD_API_KEY>"');
   });
 
+  it("lists the other sites' hosts in a comment above a fixed-host curl", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/on-call/pages",
+      site: "datadoghq.com",
+      host: "navy.oncall.datadoghq.com",
+      otherHosts: [
+        { site: "us3.datadoghq.com", host: "teal.oncall.datadoghq.com" },
+        { site: "datadoghq.eu", host: "beige.oncall.datadoghq.eu" },
+      ],
+      security: [{ apiKeyAuth: [] }],
+    });
+
+    expect(result).toContain(
+      "# For sites other than datadoghq.com, replace the host below with: teal.oncall.datadoghq.com (us3.datadoghq.com), beige.oncall.datadoghq.eu (datadoghq.eu)\n" +
+        'curl -X POST "https://navy.oncall.datadoghq.com/api/v2/on-call/pages"',
+    );
+  });
+
+  it("writes no other-hosts comment without other hosts", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/on-call/pages",
+      host: "navy.oncall.datadoghq.com",
+      security: [{ apiKeyAuth: [] }],
+    });
+
+    expect(result).not.toContain("# For sites other than");
+  });
+
   it("uses custom subdomain", () => {
     const result = buildCurlCommand({
       method: "GET",

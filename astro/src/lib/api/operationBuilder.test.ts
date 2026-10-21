@@ -462,4 +462,30 @@ describe("curl for per-region hosts", () => {
     );
     expect(curl).not.toContain("DD_SITE");
   });
+
+  it("lists the other regions' hosts in the .md curl", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/on-call/pages",
+      operation,
+      noParams,
+    );
+
+    expect(curl).toContain(
+      "# For sites other than datadoghq.com, replace the host below with: beige.oncall.datadoghq.eu (datadoghq.eu)",
+    );
+  });
+
+  it("leaves the other-hosts comment out of the HTML curl", () => {
+    const curlByRegion = buildCurlByRegion(
+      spec,
+      "post",
+      "/api/v2/on-call/pages",
+      operation,
+      noParams,
+    );
+
+    expect(curlByRegion.us).not.toContain("# For sites other than");
+  });
 });

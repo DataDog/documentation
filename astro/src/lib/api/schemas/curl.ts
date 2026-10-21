@@ -35,7 +35,9 @@ export const CurlFormFieldSchema = z
     type: z.string().describe("The property's schema type, e.g. 'string'"),
     binary: z
       .boolean()
-      .describe("True for `format: binary`, which curl reads from a file (`@`)"),
+      .describe(
+        "True for `format: binary`, which curl reads from a file (`@`)",
+      ),
   })
   .strict();
 
@@ -58,6 +60,12 @@ export const GenerateCurlOptionsSchema = z
       .optional()
       .describe(
         "A fixed host for the URL, for operations whose regions each have their own host (on-call, browser intake). Replaces the subdomain and DD_SITE.",
+      ),
+    otherHosts: z
+      .array(z.object({ site: z.string(), host: z.string() }).strict())
+      .optional()
+      .describe(
+        "With `host`, the other sites' hosts, listed in a comment above the curl. Only the .md sets this: the HTML switches sites itself.",
       ),
     subdomain: z
       .string()

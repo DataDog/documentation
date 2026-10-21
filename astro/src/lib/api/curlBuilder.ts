@@ -61,6 +61,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     site = "datadoghq.com",
     otherSites = [],
     host,
+    otherHosts = [],
     subdomain = "api",
     pathParams,
     queryParams,
@@ -106,6 +107,9 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   }
 
   // --- curl command ---
+  if (host && otherHosts.length > 0) {
+    lines.push(buildOtherHostsLine(site, otherHosts));
+  }
   const curlParts: string[] = [];
   curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
 
@@ -152,6 +156,18 @@ function buildSiteExportLine(site: string, otherSites: string[]): string {
   const exportLine = `export DD_SITE="${site}"`;
   if (otherSites.length === 0) return exportLine;
   return `${exportLine} # Or ${otherSites.join(", ")}`;
+}
+
+/**
+ * The fixed-host twin of the `# Or <other sites>` comment: each other site's
+ * host, since a reader can't build it from DD_SITE.
+ */
+function buildOtherHostsLine(
+  site: string,
+  otherHosts: NonNullable<GenerateCurlOptions["otherHosts"]>,
+): string {
+  const hostList = otherHosts.map(({ site, host }) => `${host} (${site})`);
+  return `# For sites other than ${site}, replace the host below with: ${hostList.join(", ")}`;
 }
 
 /** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
