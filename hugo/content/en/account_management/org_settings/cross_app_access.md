@@ -21,7 +21,7 @@ Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users yo
 
 A trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from two issuers: Okta and Claude.
 
-Cross-App Access supports Claude as the agent for both issuers. You can trust one issuer or both. For example, trust both while you move from Okta to the Claude issuer.
+Cross-App Access supports Claude as the agent for both issuers. You can trust one issuer or both.
 
 ## Values you exchange
 
