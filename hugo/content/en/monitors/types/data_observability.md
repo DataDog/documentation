@@ -223,9 +223,9 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
 | {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. Configured minimum bound sizes still apply. |
-| {{< ui >}}Model Instructions{{< /ui >}} | Optional plain-language context, up to 500 characters, that describes behavior you expect from this data, for example, `Don't alert on large increases during US holidays`. When the model flags a value as anomalous, Datadog automatically reviews the anomaly against these instructions. If the value matches behavior the instructions describe as expected, Datadog dismisses the anomaly as a false positive. The instructions are not used to calculate the expected bounds. |
+| {{< ui >}}Model Instructions{{< /ui >}} | Optional plain-language context, up to 500 characters, that describes behavior you expect from this data, for example, `Don't alert on large increases during US holidays`. When the model flags a value as anomalous, Datadog's automated false-positive review uses these instructions to decide whether the value is expected. If it matches behavior the instructions describe as expected, the anomaly is classified as a false positive. The instructions are not used to calculate the expected bounds. |
 
-**Note**: Keep {{< ui >}}Model Instructions{{< /ui >}} specific. Broad instructions, such as `Ignore increases`, can suppress alerts for real data quality issues.
+**Note**: Keep {{< ui >}}Model Instructions{{< /ui >}} specific. Broad instructions, such as `Ignore increases`, can cause real data quality issues to be classified as false positives.
 
 ### Monitor schedule
 
