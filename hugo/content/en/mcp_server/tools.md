@@ -1651,7 +1651,7 @@ Updates a governance detection. Use this tool to mark a detection as an exceptio
 ### `create_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create`*\
-Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are always enabled. To disable a rule, create it, then disable it with `update_tag_rule`. The tool requires explicit confirmation before it creates the rule.
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are always enabled. To disable a rule, use `update_tag_rule`. The tool requires explicit confirmation before it creates the rule.
 
 - Create a tag rule that requires the `team` tag on all logs.
 - Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
