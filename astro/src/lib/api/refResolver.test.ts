@@ -882,6 +882,18 @@ describe("type column: enum and format", () => {
     expect(typeOf({ type: "boolean" })).toBe("boolean");
   });
 
+  it("reports any for a field with no type, where Hugo leaves it blank", () => {
+    expect(typeOf({ description: "Accepts any JSON value." })).toBe("any");
+  });
+
+  it("reports [any] for array items with no type, where Hugo shows []", () => {
+    expect(typeOf({ type: "array", items: {} })).toBe("[any]");
+  });
+
+  it("keeps object for a field with properties but no type", () => {
+    expect(typeOf({ properties: { a: { type: "string" } } })).toBe("object");
+  });
+
   it("does NOT apply the format rule to parameters", () => {
     // Parameters render from `layouts/partials/api/arguments.html`, which
     // prints `.schema.type` and ignores `format`. So `list_id` is `integer`,

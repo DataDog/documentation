@@ -371,7 +371,9 @@ function buildUnionOptions(
       label: labels[idx],
       type: leaf ? leaf.type : unionOptionType(spec, variant),
       description: variantDescription(spec, variant),
-      ...(variantDeprecated(spec, variant) ? { deprecated: true as const } : {}),
+      ...(variantDeprecated(spec, variant)
+        ? { deprecated: true as const }
+        : {}),
       ...(leaf?.enumValues ? { enumValues: leaf.enumValues } : {}),
       ...(leaf?.defaultValue !== undefined
         ? { defaultValue: leaf.defaultValue }
@@ -843,7 +845,10 @@ function unionFieldType(schema: any, unionKey: "oneOf" | "anyOf"): string {
 }
 
 function displayType(schema: any): string {
-  const base: string = schema.type ?? "object";
+  // A schema with no `type` accepts any value. Hugo leaves the type cell
+  // blank; `any` says so explicitly, and matches the `[any]` of an array
+  // whose items have no `type`. Object-shaped schemas never reach here.
+  const base: string = schema.type ?? "any";
 
   // An enumerated field reports `enum` rather than its underlying type,
   // matching Hugo's `typeColumn`. The permitted values travel separately in
