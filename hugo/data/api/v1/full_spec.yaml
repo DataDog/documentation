@@ -11613,23 +11613,19 @@ components:
           format: double
           type: number
         estimated_indexed_spans_percentage:
-          deprecated: true
-          description: The percentage of estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
+          description: The percentage of estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_indexed_spans_usage:
-          deprecated: true
-          description: The estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
+          description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_percentage:
-          deprecated: true
-          description: The percentage of estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
+          description: The percentage of estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_usage:
-          deprecated: true
-          description: The estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
+          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -44424,8 +44420,6 @@ paths:
       description: |-
         Get hourly usage attribution. Multi-region data is available starting March 1, 2023.
 
-        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
-
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
         Pseudo code example:
@@ -45037,8 +45031,6 @@ paths:
     get:
       description: |-
         Get monthly usage attribution. Multi-region data is available starting March 1, 2023.
-
-        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
 
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
