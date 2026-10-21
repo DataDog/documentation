@@ -1,0 +1,16 @@
+entries:
+  - change_type: added
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40771
+    operations:
+      - CreateDerivedMetric
+      - DeleteDerivedMetric
+      - GetDerivedMetric
+      - UpdateDerivedMetric
+    title: Publish derived metrics API documentation
+  - change_type: modified
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40906
+    operations:
+      - ListTagConfigurations
+    title: Correct parameter limits and metric types for Get a list of metrics

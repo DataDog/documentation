@@ -45,7 +45,7 @@ AI-native SAST rule IDs use the format `datadog/<rule-name>` (for example, `data
 The `use-default-rulesets` setting applies to both traditional SAST and AI-native SAST rulesets. If you set `use-default-rulesets: false`, include every traditional and AI-native SAST ruleset that you want to run. For example, the following configuration runs the Ruby security and AI-native SAST rulesets:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-default-rulesets: false
   use-rulesets:
@@ -56,7 +56,7 @@ sast:
 To disable a specific AI-native SAST ruleset while retaining the other default rulesets, add it to `ignore-rulesets`:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-default-rulesets: true
   ignore-rulesets:
@@ -70,7 +70,7 @@ The following configuration format applies to all configuration locations: org-l
 The configuration file must begin with a `schema-version` key, followed by a `sast` key containing the analysis configuration. The configuration is structured as shown below:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-default-rulesets: true
   use-rulesets:
@@ -205,7 +205,7 @@ Example configuration:
 Because this example disables the default rulesets, the example explicitly includes `python-ai_sast` to retain AI-native SAST for Python:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   use-default-rulesets: false
   use-rulesets:
@@ -275,7 +275,7 @@ If both files are present, `code-security.datadog.yaml` takes precedence over `s
 Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.0
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   ruleset-configs:
     javascript-express:
@@ -290,7 +290,7 @@ sast:
 Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for a specific file. For more information on how to ignore by path, see [Customize your configuration](#customize-your-configuration).
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.0
+schema-version: {{< version key="code_security_schema_version" >}}
 sast:
   ruleset-configs:
     javascript-express:
