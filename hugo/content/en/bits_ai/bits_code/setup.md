@@ -177,7 +177,7 @@ Bits Code sessions support Docker and Docker Compose commands. You can build ima
 | Connect services | Shared bridge networks, named networks, and service-name DNS. |
 | Share files | Bind mounts for repository files and named volumes for container data. |
 
-You do not need to install or start a Docker daemon. Use an image compatible with the sandbox's CPU architecture. Images and builds share the sandbox's available storage.
+You do not need to install or start a Docker daemon. Images and builds share the sandbox's available storage.
 
 Registry access follows your organization's [internet access](#configure-internet-access) policy. Allow the registry and any additional hosts used to download image layers. Private registries also require authentication.
 
@@ -196,7 +196,7 @@ Omitting the host address, or specifying `0.0.0.0`, also binds the published por
 
 #### Docker limitations
 
-- Port publishing supports IPv4 TCP only. UDP, IPv6, port ranges, and host addresses other than those described above are unsupported.
+- Port publishing supports IPv4 TCP only. UDP, IPv6, and port ranges are unsupported. Omit the host address or specify `127.0.0.1` or `0.0.0.0`; other host addresses are unsupported.
 - A container with published ports must use a single network.
 - BuildKit-specific features and `docker buildx` are unsupported.
 - Per-container CPU and memory limits are unsupported.
