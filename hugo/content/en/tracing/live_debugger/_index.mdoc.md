@@ -414,7 +414,7 @@ The following constraints apply to Live Debugger usage and configuration:
 
 {% if equals($prog_lang, "node_js") %}
 
-- **TypeScript imports**: When TypeScript compiles imports to CommonJS, expressions using imported names can fail with `ReferenceError`, even with source maps. This affects logpoint messages, conditions, and variable capture expressions. Create and use a local alias, such as `const LocalFoo = Foo`, in the logpoint's scope, and reference `LocalFoo` in expressions.
+- **TypeScript imports**: When TypeScript compiles imports to CommonJS, expressions using imported names can fail with `ReferenceError`, even with source maps. This affects logpoint messages, conditions, and variable capture expressions. Create a local alias, such as `const LocalFoo = Foo`, in the logpoint's scope, and reference `LocalFoo` in expressions.
 
 {% /if %}
 
