@@ -105,6 +105,8 @@ The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Work
 
 #### Enable Kueue metadata collection
 
+These examples enable `cluster_agent.kueue.enabled` through the equivalent `DD_CLUSTER_AGENT_KUEUE_ENABLED` environment variable.
+
 Choose the tab that matches how you manage the Cluster Agent. Merge the example into your existing configuration, preserving its other settings.
 
 {{< tabs >}}
