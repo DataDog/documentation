@@ -251,6 +251,7 @@ export function unionOptionLabels(spec: any, variants: any[]): string[] {
  *   no wrapping `[Foo]` row.
  * - Top-level array of arrays → unwrap to the innermost items.
  * - Top-level array of primitives → no rows (Hugo hides the table).
+ * - Top-level `oneOf` → one `Option n` row per branch, at level 0.
  * - Anything else → equivalent to `schemaToFields`.
  *
  * `$ref` and `allOf` are resolved before the array check, matching
@@ -271,6 +272,10 @@ export function topLevelSchemaToFields(spec: any, schema: any): SchemaField[] {
   }
   if (resolved.allOf) {
     resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  if (resolved.oneOf?.length > 0) {
+    return topLevelOptionFields(spec, resolved.oneOf, visited);
   }
 
   if (resolved.type !== "array") {
@@ -304,6 +309,22 @@ export function topLevelSchemaToFields(spec: any, schema: any): SchemaField[] {
   }
 
   return [];
+}
+
+/**
+ * The rows of a top-level `oneOf` body. Hugo's `schemaTable` turns each branch
+ * into an ordinary level-0 row named `Option n`, with no row for the union
+ * itself. Hugo doesn't do this for `anyOf`.
+ */
+function topLevelOptionFields(
+  spec: any,
+  variants: any[],
+  visited: Set<string>,
+): SchemaField[] {
+  // Level -1 puts the option rows at level 0 and their fields at level 1.
+  return buildUnionOptions(spec, variants, visited, -1).map((option, idx) =>
+    optionAsField({ ...option, label: `Option ${idx + 1}` }),
+  );
 }
 
 /**
@@ -350,6 +371,7 @@ function buildUnionOptions(
       label: labels[idx],
       type: leaf ? leaf.type : unionOptionType(spec, variant),
       description: variantDescription(spec, variant),
+      ...(variantDeprecated(spec, variant) ? { deprecated: true as const } : {}),
       ...(leaf?.enumValues ? { enumValues: leaf.enumValues } : {}),
       ...(leaf?.defaultValue !== undefined
         ? { defaultValue: leaf.defaultValue }
@@ -414,7 +436,7 @@ function optionAsField(
     name: option.label,
     type: option.type,
     required: false,
-    deprecated: false,
+    deprecated: option.deprecated === true,
     readOnly: false,
     description: option.description ?? "",
     ...(option.enumValues ? { enumValues: option.enumValues } : {}),
@@ -808,6 +830,18 @@ function parameterType(schema: any): string {
   return schema.type ?? "object";
 }
 
+/**
+ * The type of a union property row. Hugo's `typeColumn` prints the schema's
+ * own `format || type`, then appends `<oneOf>`, so a `oneOf` with a sibling
+ * `type: object` reads `object <oneOf>`. Hugo has no `anyOf` handling, and a
+ * bare union stays the semantic `oneOf`/`anyOf` tag the renderers bracket.
+ */
+function unionFieldType(schema: any, unionKey: "oneOf" | "anyOf"): string {
+  const ownType: string | undefined = schema.format ?? schema.type;
+  if (unionKey === "oneOf" && ownType) return `${ownType} <oneOf>`;
+  return unionKey;
+}
+
 function displayType(schema: any): string {
   const base: string = schema.type ?? "object";
 
@@ -853,6 +887,13 @@ function variantDescription(spec: any, variant: any): string {
     resolved = resolveRef(spec, variant.$ref) ?? variant;
   }
   return resolved?.description ?? "";
+}
+
+/** True when the variant, or the `$ref` that points at it, is deprecated. */
+function variantDeprecated(spec: any, variant: any): boolean {
+  if (variant?.deprecated === true) return true;
+  if (!variant?.$ref) return false;
+  return resolveRef(spec, variant.$ref)?.deprecated === true;
 }
 
 /**
@@ -949,7 +990,7 @@ function propertyToField(
 
     return {
       name,
-      type: unionKey,
+      type: unionFieldType(resolved, unionKey),
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,

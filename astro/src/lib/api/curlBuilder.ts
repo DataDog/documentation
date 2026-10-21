@@ -7,6 +7,7 @@
 
 import type { OpenAPIV3 } from "openapi-types";
 import type {
+  CurlFormField,
   CurlParam,
   CurlSecurityScheme,
   GenerateCurlOptions,
@@ -59,10 +60,13 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     path,
     site = "datadoghq.com",
     otherSites = [],
+    host,
     subdomain = "api",
     pathParams,
     queryParams,
     requestBodyJson,
+    multipartFormFields,
+    hasNoContentResponse = false,
     security,
     globalSecurity,
     securitySchemes = DEFAULT_SECURITY_SCHEMES,
@@ -74,7 +78,8 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   );
   const interpolatedPath = interpolatePath(path, pathParams);
   const queryString = buildQueryString(queryParams, auth.queryParts);
-  const url = `https://${subdomain}.\${DD_SITE}${interpolatedPath}${queryString}`;
+  const origin = host ?? `${subdomain}.\${DD_SITE}`;
+  const url = `https://${origin}${interpolatedPath}${queryString}`;
 
   const lines: string[] = [];
 
@@ -88,24 +93,37 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   }
 
   // --- Shell variable exports as comments ---
-  lines.push(`# Set your Datadog site and credentials`);
-  lines.push(buildSiteExportLine(site, otherSites));
-  lines.push(...auth.exportLines);
-  lines.push("");
+  // A fixed host leaves DD_SITE unused, so it isn't exported.
+  if (!host) {
+    lines.push(`# Set your Datadog site and credentials`);
+    lines.push(buildSiteExportLine(site, otherSites));
+    lines.push(...auth.exportLines);
+    lines.push("");
+  } else if (auth.exportLines.length > 0) {
+    lines.push(`# Set your Datadog credentials`);
+    lines.push(...auth.exportLines);
+    lines.push("");
+  }
 
   // --- curl command ---
   const curlParts: string[] = [];
   curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
 
   // Accept, Content-Type, then auth, in Hugo's order
-  curlParts.push(`-H "Accept: application/json"`);
-  if (requestBodyJson || methodHasBody(method)) {
+  if (!hasNoContentResponse) {
+    curlParts.push(`-H "Accept: application/json"`);
+  }
+  if (multipartFormFields) {
+    curlParts.push(`-H "Content-Type: multipart/form-data"`);
+  } else if (requestBodyJson || methodHasBody(method)) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
   curlParts.push(...auth.headers);
 
   // Request body
-  if (requestBodyJson) {
+  if (multipartFormFields) {
+    curlParts.push(...multipartFormFields.map(formFieldFlag));
+  } else if (requestBodyJson) {
     curlParts.push(`-d @- << EOF`);
   }
 
@@ -114,7 +132,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   lines.push(curlCommand);
 
   // Append body after the command if present
-  if (requestBodyJson) {
+  if (requestBodyJson && !multipartFormFields) {
     lines.push(requestBodyJson);
     lines.push("EOF");
   }
@@ -134,6 +152,11 @@ function buildSiteExportLine(site: string, otherSites: string[]): string {
   const exportLine = `export DD_SITE="${site}"`;
   if (otherSites.length === 0) return exportLine;
   return `${exportLine} # Or ${otherSites.join(", ")}`;
+}
+
+/** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
+function formFieldFlag(field: CurlFormField): string {
+  return `-F ${field.name}=${field.binary ? "@" : ""}${field.type}`;
 }
 
 /**

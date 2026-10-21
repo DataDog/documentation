@@ -151,6 +151,25 @@ describe("apiSchemaTableNode", () => {
     expect(out).toContain("| **DEPRECATED**: Old. |");
   });
 
+  it("puts a DEPRECATED label before a deprecated option's description", () => {
+    const out = render([
+      field({
+        name: "query",
+        type: "oneOf",
+        unionOptions: [
+          {
+            label: "<data_source=apm>",
+            type: "object",
+            description: "APM query.",
+            deprecated: true,
+            fields: [],
+          },
+        ],
+      }),
+    ]);
+    expect(out).toContain("| **DEPRECATED**: APM query. |");
+  });
+
   it("produces an AST table node, not a string", () => {
     const node = apiSchemaTableNode([field({ name: "x", type: "string" })]);
     expect(node?.type).toBe("table");

@@ -14,7 +14,9 @@
  * matching prod means keeping them.
  *
  * Hugo runs on a fully dereferenced spec. Astro reads the raw spec, so
- * `deref` resolves each `$ref` as the walk reaches it.
+ * `deref` resolves each `$ref` as the walk reaches it. In Hugo's spec, a
+ * `$ref` back to a schema on the current path is the string `"[Circular]"`,
+ * so the walk tracks the `$ref`s on its path and stops at the same place.
  */
 
 import type { OpenAPIV3 } from "openapi-types";
@@ -27,6 +29,9 @@ const MAX_LEVEL = 10;
 
 /** Hugo skips a oneOf with this many variants or more. */
 const ONE_OF_LIMIT = 50;
+
+/** What Hugo's dereferenced spec holds where a `$ref` cycle closes. */
+const CIRCULAR = "[Circular]";
 
 /** The date Hugo writes for every `date-time` field without an example. */
 const PLACEHOLDER_DATE_TIME = new Date("19 September 2019 10:00 UTC");
@@ -58,6 +63,8 @@ export function buildSchemaExample(
     actionType,
     initialJsonData(spec, data),
     initialExample(spec, data),
+    0,
+    initialRefPath(spec, schema, data),
   );
 
   try {
@@ -94,6 +101,56 @@ function deref(spec: OpenAPIV3.Document, node: any): any {
         : resolved;
   }
   return current;
+}
+
+/** The `$ref`s that `deref` follows from `node`, in order. */
+function refChain(spec: OpenAPIV3.Document, node: any): string[] {
+  const refs: string[] = [];
+  let current = node;
+  while (
+    current &&
+    typeof current === "object" &&
+    typeof current.$ref === "string" &&
+    !refs.includes(current.$ref)
+  ) {
+    refs.push(current.$ref);
+    current = resolveRef(spec, current.$ref);
+  }
+  return refs;
+}
+
+/**
+ * `deref`, but `"[Circular]"` when the `$ref` points back to a schema on the
+ * current path. Also returns the path to use below the resolved schema.
+ */
+function derefOnPath(
+  spec: OpenAPIV3.Document,
+  node: any,
+  refPath: ReadonlySet<string>,
+): { schema: any; refPath: ReadonlySet<string> } {
+  const refs = refChain(spec, node);
+  if (refs.length === 0) return { schema: deref(spec, node), refPath };
+  if (refs.some((ref) => refPath.has(ref))) {
+    return { schema: CIRCULAR, refPath };
+  }
+  return { schema: deref(spec, node), refPath: new Set([...refPath, ...refs]) };
+}
+
+/** The `$ref`s on the path to the properties the walk starts from. */
+function initialRefPath(
+  spec: OpenAPIV3.Document,
+  schema: unknown,
+  data: Schema,
+): ReadonlySet<string> {
+  const refs = refChain(spec, schema);
+  if (data.type === "array") {
+    refs.push(...refChain(spec, data.items));
+    const items = deref(spec, data.items);
+    if (items?.type === "array") refs.push(...refChain(spec, items.items));
+  } else if (Array.isArray(data.oneOf) && data.oneOf.length > 0) {
+    refs.push(...refChain(spec, data.oneOf[0]));
+  }
+  return new Set(refs);
 }
 
 /** Hugo's `getJsonWrapChars`: the brackets around the top-level string. */
@@ -142,6 +199,7 @@ function filterJson(
   data: any,
   parentExample: unknown = null,
   level = 0,
+  refPath: ReadonlySet<string> = new Set(),
 ): string {
   if (level > MAX_LEVEL) return "";
 
@@ -153,14 +211,23 @@ function filterJson(
   for (const [key, rawValue] of Object.entries(data)) {
     // A oneOf variant without properties is walked as if it were the
     // property list, so a value can be a plain string, as in Hugo.
-    const value: Schema = deref(spec, rawValue) ?? {};
+    const { schema: derefValue, refPath: valuePath } = derefOnPath(
+      spec,
+      rawValue,
+      refPath,
+    );
+    const value: Schema = derefValue ?? {};
     const isObject = typeof value === "object";
     const shouldSkip =
       (actionType === "request" && value.readOnly) ||
       (actionType === "response" && value.writeOnly);
     if (shouldSkip) continue;
 
-    const items = deref(spec, value.items);
+    const { schema: items, refPath: itemsPath } = derefOnPath(
+      spec,
+      value.items,
+      valuePath,
+    );
     let prefixType = "";
     let suffixType = "";
 
@@ -174,10 +241,12 @@ function filterJson(
     }
 
     let childData: any = null;
+    let childPath = valuePath;
     if (value.type === "array") {
       if (items && typeof items === "object") {
         if (items.properties) {
           childData = items.properties;
+          childPath = itemsPath;
           prefixType = "[{";
           suffixType = "}]";
         }
@@ -192,6 +261,10 @@ function filterJson(
             "properties" in firstVariant
               ? firstVariant.properties
               : firstVariant;
+          childPath = new Set([
+            ...itemsPath,
+            ...refChain(spec, items.oneOf[0]),
+          ]);
           prefixType = "[{";
           suffixType = "}]";
         }
@@ -220,6 +293,7 @@ function filterJson(
       const firstVariant = deref(spec, value.oneOf[0]) ?? {};
       childData =
         "properties" in firstVariant ? firstVariant.properties : firstVariant;
+      childPath = new Set([...valuePath, ...refChain(spec, value.oneOf[0])]);
       prefixType = "{";
       suffixType = "}";
     }
@@ -231,6 +305,7 @@ function filterJson(
         childData,
         value.example,
         level + 1,
+        childPath,
       );
       pairs.push(`"${key}": ${prefixType}${childString}${suffixType}`);
       continue;

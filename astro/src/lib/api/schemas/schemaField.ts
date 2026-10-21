@@ -46,6 +46,12 @@ export const SchemaFieldSchema = z.strictObject({
             .string()
             .optional()
             .describe("The variant schema's own description, if any"),
+          deprecated: z
+            .literal(true)
+            .optional()
+            .describe(
+              "Set only when the variant schema is deprecated, so the option row gets the DEPRECATED label.",
+            ),
           enumValues: z
             .array(z.string())
             .optional()

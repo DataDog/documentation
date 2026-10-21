@@ -25,7 +25,11 @@
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "@lib/i18n/locale";
 import { API_VERSIONS, getOpenApiDocument } from "./specParser";
 import type { OpenAPIV3 } from "openapi-types";
-import { getRegions, buildApiUrlFromServers } from "./regionResolver";
+import {
+  getRegions,
+  getRegionHosts,
+  buildApiUrlFromServers,
+} from "./regionResolver";
 import {
   getTranslationOverlay,
   translateAction,
@@ -584,12 +588,13 @@ function buildRegionUrlsForOperation(
   op: RawOperation,
 ): Record<string, string> {
   const regions = getRegions(spec, op.operation);
+  const hostsByRegion = getRegionHosts(spec, op.operation);
   const operationServers = op.operation?.servers ?? spec?.servers;
   const regionUrls: Record<string, string> = {};
   for (const region of regions) {
     regionUrls[region.key] = buildApiUrlFromServers(
       operationServers,
-      region.site,
+      hostsByRegion.get(region.key) ?? region.site,
       op.pathStr,
     );
   }

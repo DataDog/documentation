@@ -28,6 +28,17 @@ export const CurlSecuritySchemeSchema = z
   })
   .passthrough();
 
+/** One `-F` field of a `multipart/form-data` body. */
+export const CurlFormFieldSchema = z
+  .object({
+    name: z.string(),
+    type: z.string().describe("The property's schema type, e.g. 'string'"),
+    binary: z
+      .boolean()
+      .describe("True for `format: binary`, which curl reads from a file (`@`)"),
+  })
+  .strict();
+
 export const GenerateCurlOptionsSchema = z
   .object({
     method: z.string(),
@@ -42,6 +53,12 @@ export const GenerateCurlOptionsSchema = z
       .describe(
         "Other sites the operation supports, listed in a comment after DD_SITE. Only the .md sets this: the HTML switches sites itself.",
       ),
+    host: z
+      .string()
+      .optional()
+      .describe(
+        "A fixed host for the URL, for operations whose regions each have their own host (on-call, browser intake). Replaces the subdomain and DD_SITE.",
+      ),
     subdomain: z
       .string()
       .optional()
@@ -52,6 +69,18 @@ export const GenerateCurlOptionsSchema = z
       .string()
       .optional()
       .describe("Prettified JSON string for the request body"),
+    multipartFormFields: z
+      .array(CurlFormFieldSchema)
+      .optional()
+      .describe(
+        "Set when the request body is `multipart/form-data`: one `-F` per field, in place of a JSON body",
+      ),
+    hasNoContentResponse: z
+      .boolean()
+      .optional()
+      .describe(
+        "True when the operation has a 204 response. Hugo leaves out the Accept header then.",
+      ),
     security: z
       .array(SecurityRequirementSchema)
       .optional()
@@ -72,5 +101,6 @@ export const GenerateCurlOptionsSchema = z
   .strict();
 
 export type CurlParam = z.infer<typeof CurlParamSchema>;
+export type CurlFormField = z.infer<typeof CurlFormFieldSchema>;
 export type CurlSecurityScheme = z.infer<typeof CurlSecuritySchemeSchema>;
 export type GenerateCurlOptions = z.infer<typeof GenerateCurlOptionsSchema>;

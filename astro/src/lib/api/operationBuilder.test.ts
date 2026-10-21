@@ -358,3 +358,108 @@ describe("curl site comment", () => {
     }
   });
 });
+
+describe("curl Accept header", () => {
+  const noParams = { path: [], query: [], header: [] };
+  const curlFor = (responses: OpenAPIV3.ResponsesObject) =>
+    buildPlaintextCurl(
+      spec,
+      "delete",
+      "/api/v2/downtime/{downtime_id}",
+      { responses },
+      noParams,
+    );
+
+  it("leaves out the Accept header when the operation has a 204 response", () => {
+    expect(curlFor({ "204": { description: "OK" } })).not.toContain("Accept:");
+  });
+
+  it("keeps the Accept header when the operation has no 204 response", () => {
+    expect(curlFor({ "200": { description: "OK" } })).toContain(
+      '-H "Accept: application/json"',
+    );
+  });
+});
+
+describe("curl for a multipart body", () => {
+  const noParams = { path: [], query: [], header: [] };
+  const operation = {
+    responses: { "200": { description: "OK" } },
+    requestBody: {
+      content: {
+        "multipart/form-data": {
+          schema: {
+            type: "object",
+            properties: {
+              label: { type: "string" },
+              idp_file: { type: "string", format: "binary" },
+            },
+          },
+        },
+      },
+    },
+  } as OpenAPIV3.OperationObject;
+
+  it("writes one -F per property, in key order, with @ for binary fields", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/saml_configurations/idp_metadata",
+      operation,
+      noParams,
+    );
+
+    expect(curl).toContain('-H "Content-Type: multipart/form-data"');
+    expect(curl).toContain("-F idp_file=@string \\\n-F label=string");
+  });
+});
+
+describe("curl for per-region hosts", () => {
+  const noParams = { path: [], query: [], header: [] };
+  const operation = {
+    responses: { "200": { description: "OK" } },
+    servers: [
+      {
+        url: "https://{site}",
+        variables: {
+          site: {
+            default: "navy.oncall.datadoghq.com",
+            enum: ["navy.oncall.datadoghq.com", "beige.oncall.datadoghq.eu"],
+          },
+        },
+      },
+    ],
+  } as OpenAPIV3.OperationObject;
+
+  it("uses each region's host in its curl", () => {
+    const curlByRegion = buildCurlByRegion(
+      spec,
+      "post",
+      "/api/v2/on-call/pages",
+      operation,
+      noParams,
+    );
+
+    expect(curlByRegion.us).toContain(
+      '"https://navy.oncall.datadoghq.com/api/v2/on-call/pages"',
+    );
+    expect(curlByRegion.eu).toContain(
+      '"https://beige.oncall.datadoghq.eu/api/v2/on-call/pages"',
+    );
+  });
+
+  it("uses the first region's host in the .md curl", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/on-call/pages",
+      operation,
+      noParams,
+    );
+
+    expect(curl).toContain(
+      '"https://navy.oncall.datadoghq.com/api/v2/on-call/pages"',
+    );
+    expect(curl).not.toContain("DD_SITE");
+  });
+});

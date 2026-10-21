@@ -176,14 +176,17 @@ function transformNodes(
   return nodes.flatMap((node) => transformNode(node, adaptersByTag));
 }
 
+/** The body's top-level nodes, with each tag that has a twin rebuilt by it. */
+export function transformMdocWithTwins(
+  body: string,
+  options: TwinRenderOptions = {},
+): MarkdocNode[] {
+  return transformNodes(parse(body).children, buildTwinAdapters(options));
+}
+
 export function renderMdocWithTwins(
   body: string,
   options: TwinRenderOptions = {},
 ): string {
-  const document = parse(body);
-  const transformed = transformNodes(
-    document.children,
-    buildTwinAdapters(options),
-  );
-  return buildMarkdocStr(transformed);
+  return buildMarkdocStr(transformMdocWithTwins(body, options));
 }

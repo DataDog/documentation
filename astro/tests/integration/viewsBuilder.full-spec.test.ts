@@ -91,3 +91,25 @@ describe("viewsBuilder shape validation across full spec", () => {
     }
   });
 });
+
+describe("endpoint URLs for per-region hosts", () => {
+  // The on-call operations list one host per region in their `site` enum,
+  // and Hugo builds each region's URL from its own host.
+  it("uses each region's on-call host", async () => {
+    const view = await getOperationView(
+      "on-call-paging",
+      "create-on-call-page",
+    );
+    const urlsByRegion = view?.variants[0]?.regionUrls ?? {};
+
+    expect(urlsByRegion.us).toBe(
+      "https://navy.oncall.datadoghq.com/api/v2/on-call/pages",
+    );
+    expect(urlsByRegion.us3).toBe(
+      "https://teal.oncall.datadoghq.com/api/v2/on-call/pages",
+    );
+    expect(urlsByRegion.eu).toBe(
+      "https://beige.oncall.datadoghq.eu/api/v2/on-call/pages",
+    );
+  });
+});

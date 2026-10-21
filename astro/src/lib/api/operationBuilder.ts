@@ -16,9 +16,10 @@ import { buildCurlCommand } from "./curlBuilder";
 import { buildSchemaExample } from "./schemaExampleBuilder";
 import { buildRunCommand } from "./runCommandBuilder";
 import type { LanguageRunInfo } from "./codeExampleLoader";
-import { getRegions } from "./regionResolver";
+import { getRegionHosts, getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
 import type {
+  CurlFormField,
   CurlParam,
   CurlSecurityScheme,
   GenerateCurlOptions,
@@ -337,9 +338,14 @@ export function buildCurlByRegion(
     splitParams,
     requestBodyJson,
   );
+  const hostsByRegion = getRegionHosts(spec, operation);
   const result: Record<string, string> = {};
   for (const region of getRegions(spec, operation)) {
-    result[region.key] = buildCurlCommand({ ...options, site: region.site });
+    result[region.key] = buildCurlCommand({
+      ...options,
+      site: region.site,
+      host: hostsByRegion.get(region.key),
+    });
   }
   return result;
 }
@@ -368,6 +374,9 @@ export function buildPlaintextCurl(
     ),
     site: defaultRegion?.site,
     otherSites: otherRegions.map((region) => region.site),
+    host: defaultRegion
+      ? getRegionHosts(spec, operation).get(defaultRegion.key)
+      : undefined,
   });
 }
 
@@ -388,10 +397,45 @@ function curlOptionsForOperation(
     pathParams: toCurlParams(splitParams.path),
     queryParams: toCurlParams(splitParams.query),
     requestBodyJson,
+    multipartFormFields: multipartFormFields(spec, operation),
+    hasNoContentResponse: "204" in (operation.responses ?? {}),
     security: operation.security,
     globalSecurity: spec.security,
     securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
   };
+}
+
+/**
+ * The `-F` fields of a `multipart/form-data` body, or `undefined` when the
+ * body isn't multipart. Hugo ranges over the properties map, which Go
+ * iterates in key order.
+ */
+function multipartFormFields(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+): CurlFormField[] | undefined {
+  const requestBody = operation.requestBody as
+    | OpenAPIV3.RequestBodyObject
+    | undefined;
+  const multipart = requestBody?.content?.["multipart/form-data"];
+  if (!multipart) return undefined;
+
+  const schema = resolveSchema(spec, multipart.schema);
+  const properties: Record<string, any> = schema?.properties ?? {};
+  return Object.keys(properties)
+    .sort()
+    .map((name) => {
+      const property = resolveSchema(spec, properties[name]);
+      return {
+        name,
+        type: String(property?.type ?? ""),
+        binary: property?.format === "binary",
+      };
+    });
+}
+
+function resolveSchema(spec: OpenAPIV3.Document, schema: any): any {
+  return schema?.$ref ? resolveRef(spec, schema.$ref) : schema;
 }
 
 /** SDK run commands for the given operation, keyed by region like curl. */

@@ -205,6 +205,68 @@ describe("buildCurlCommand", () => {
     );
   });
 
+  it("leaves out the Accept header when the operation has a 204 response, as Hugo does", () => {
+    const result = buildCurlCommand({
+      method: "DELETE",
+      path: "/api/v2/downtime/{downtime_id}",
+      hasNoContentResponse: true,
+    });
+
+    expect(result).not.toContain("Accept:");
+  });
+
+  it("sends a multipart body as form fields, as Hugo does", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/saml_configurations/idp_metadata",
+      security: [{ apiKeyAuth: [] }],
+      multipartFormFields: [
+        { name: "idp_file", type: "string", binary: true },
+        { name: "label", type: "string", binary: false },
+      ],
+    });
+
+    expect(result).toContain(
+      [
+        '-H "Accept: application/json" \\',
+        '-H "Content-Type: multipart/form-data" \\',
+        '-H "DD-API-KEY: ${DD_API_KEY}" \\',
+        "-F idp_file=@string \\",
+        "-F label=string",
+      ].join("\n"),
+    );
+    expect(result).not.toContain("-d @-");
+  });
+
+  it("sends the multipart Content-Type even when the body has no properties", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/srcmap",
+      security: [{ apiKeyAuth: [] }],
+      multipartFormFields: [],
+    });
+
+    expect(result).toContain('-H "Content-Type: multipart/form-data"');
+    expect(result).not.toContain("-F ");
+    expect(result.trimEnd()).not.toMatch(/\\$/);
+  });
+
+  it("uses a fixed host in the URL, with no DD_SITE export", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/on-call/pages",
+      host: "navy.oncall.datadoghq.com",
+      otherSites: ["datadoghq.eu"],
+      security: [{ apiKeyAuth: [] }],
+    });
+
+    expect(result).toContain(
+      'curl -X POST "https://navy.oncall.datadoghq.com/api/v2/on-call/pages"',
+    );
+    expect(result).not.toContain("DD_SITE");
+    expect(result).toContain('export DD_API_KEY="<DD_API_KEY>"');
+  });
+
   it("uses custom subdomain", () => {
     const result = buildCurlCommand({
       method: "GET",
