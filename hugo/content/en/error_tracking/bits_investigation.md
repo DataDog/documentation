@@ -55,7 +55,6 @@ To see the full investigation, click {{< ui >}}View Investigation{{< /ui >}}. Th
 
 From the investigation page, you can:
 
-- Rate the conclusion to help improve Bits Investigation.
 - Ask follow-up questions about the investigation in Bits Chat. For details, see [Chat with Bits Investigation][6].
 - Review the suggested next steps, including code fixes.
 
