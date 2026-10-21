@@ -26,7 +26,7 @@ With the Inference page, you get:
 - **Latency and throughput across model deployments**: Compare time to first token (TTFT), inter-token latency (ITL), and output tokens per second across your model deployments, and filter by environment, deployment, or Kubernetes namespace.
 - **Deployment health at a glance**: Review the average concurrent requests, error rate, health status, monitors, and GPU key-value (KV) cache usage of each model deployment to identify which deployments need attention.
 
-{{< img src="gpu_monitoring/inference-page2.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
+{{< img src="gpu_monitoring/inference-page3.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
 
 ## Setup
 
