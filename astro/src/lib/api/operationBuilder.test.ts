@@ -381,6 +381,32 @@ describe("curl Accept header", () => {
   });
 });
 
+describe("curl path parameters", () => {
+  /** Hugo's curl uses the example or `"CHANGE_ME"`, never the default. */
+  it("exports CHANGE_ME, not the default, for a path parameter with no example", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "get",
+      "/api/v2/rum/config/retention-quota/{scope_type}",
+      { responses: { "200": { description: "OK" } } },
+      {
+        path: [
+          {
+            name: "scope_type",
+            in: "path",
+            required: true,
+            schema: { type: "string", default: "application" },
+          },
+        ],
+        query: [],
+        header: [],
+      },
+    );
+
+    expect(curl).toContain('export scope_type="CHANGE_ME"');
+  });
+});
+
 describe("curl query parameters", () => {
   const operation = { responses: { "200": { description: "OK" } } };
   const curlFor = (query: OpenAPIV3.ParameterObject[]) =>

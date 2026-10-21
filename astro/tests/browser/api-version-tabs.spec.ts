@@ -74,18 +74,11 @@ test.describe("API operation page version tabs", () => {
     await expect(buttons).toHaveAttribute("aria-disabled", "true");
   });
 
-  test("legacy -v1 URL redirects to the unified page with the v1 tab active", async ({
-    page,
-  }) => {
-    await page.goto(
+  test("a -v1 URL returns 404, as on prod", async ({ page }) => {
+    const response = await page.goto(
       "/api/latest/aws-integration/list-all-aws-integrations-v1/",
     );
-    await page.waitForURL(
-      /list-all-aws-integrations\/#list-all-aws-integrations-v1$/,
-    );
 
-    const nav = versionTabsNav(page, "list-all-aws-integrations");
-    const v1Button = nav.locator(".tabs__button", { hasText: /^v1$/ });
-    await expect(v1Button).toHaveAttribute("aria-selected", "true");
+    expect(response?.status()).toBe(404);
   });
 });

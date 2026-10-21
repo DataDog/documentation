@@ -398,8 +398,8 @@ function curlOptionsForOperation(
     method,
     path,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
-    pathParams: toCurlParams(splitParams.path, { useDefault: true }),
-    queryParams: toCurlParams(splitParams.query, { useDefault: false }),
+    pathParams: toCurlParams(splitParams.path),
+    queryParams: toCurlParams(splitParams.query),
     requestBodyJson,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),
@@ -559,21 +559,15 @@ function generateExampleFromSchema(
 }
 
 /**
- * Build curl params from resolved parameter objects. With `useDefault`, a
- * parameter with no example falls back to its schema default. Query
- * parameters don't, as in Hugo's curl, so they export `"CHANGE_ME"` instead.
+ * Build curl params from resolved parameter objects. As in Hugo's curl, a
+ * parameter with no example never falls back to its schema default, so it
+ * exports `"CHANGE_ME"` instead.
  */
-function toCurlParams(
-  params: OpenAPIV3.ParameterObject[],
-  { useDefault }: { useDefault: boolean },
-): CurlParam[] {
+function toCurlParams(params: OpenAPIV3.ParameterObject[]): CurlParam[] {
   return params.map((p) => {
     const schema: OpenAPIV3.SchemaObject | undefined =
       p.schema && !isReference(p.schema) ? p.schema : undefined;
-    const example =
-      p.example ??
-      schema?.example ??
-      (useDefault ? schema?.default : undefined);
+    const example = p.example ?? schema?.example;
     // Hugo splits an array only when `explode` is set explicitly.
     const explodedItemCount =
       p.explode === true && Array.isArray(example) ? example.length : undefined;
