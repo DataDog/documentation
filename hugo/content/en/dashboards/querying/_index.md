@@ -236,8 +236,7 @@ To return the result in milliseconds, multiply `time()` by 1000:
 
 `time()` is available only within a formula, so include it in the formula expression rather than adding it as a separate query column.
 
-<!-- TODO(DOCS-15168): SME confirmation pending for the time-window behavior in the next paragraph. Remove this comment once confirmed, and remove the paragraph if the behavior is not accurate. -->
-`time()` resolves to the end of the selected time window. For an accurate "time since" calculation, use a live or rolling time range. A fixed or paused range evaluates `time()` at the end of that window rather than the present moment.
+`time()` uses the queried time range rather than the current time. In scalar widgets, such as query value and table widgets, `time()` returns the end of the selected time range. In timeseries widgets, it returns the timestamp of each point. For an accurate "time since" calculation in a scalar widget, use a live time range. If the time range is paused or fixed, `time()` returns the end of that range.
 
 <!-- TODO(DOCS-15168): Add a screenshot of the scalar table widget example here, using an img shortcode with src "dashboards/querying/time_function_query_table.png" and alt text such as "A query table widget showing time elapsed since each item was last seen, calculated with the time() function". Shortcode delimiters are omitted here so Hugo does not try to resolve the image before it exists. -->
 
