@@ -84394,6 +84394,12 @@ components:
           description: The index to write logs to.
           example: logs-index
           type: string
+        data_stream:
+          $ref: "#/components/schemas/ObservabilityPipelineOpenSearchDestinationDataStream"
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Amazon OpenSearch endpoint URL.
+          example: AMAZON_OPENSEARCH_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -84411,13 +84417,13 @@ components:
         - id
         - type
         - inputs
-        - auth
       type: object
       x-pipeline-types: [logs]
     ObservabilityPipelineAmazonOpenSearchDestinationAuth:
       description: |-
         Authentication settings for the Amazon OpenSearch destination.
         The `strategy` field determines whether basic or AWS-based authentication is used.
+        When `strategy` is `basic`, use `username_key` and `password_key` to reference credentials stored in environment variables or secrets.
       properties:
         assume_role:
           description: The ARN of the role to assume (used with `aws` strategy).
@@ -84428,11 +84434,19 @@ components:
         external_id:
           description: External ID for the assumed role (used with `aws` strategy).
           type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the Amazon OpenSearch password (used when `strategy` is `basic`).
+          example: AMAZON_OPENSEARCH_PASSWORD
+          type: string
         session_name:
           description: Session name for the assumed role (used with `aws` strategy).
           type: string
         strategy:
           $ref: "#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuthStrategy"
+        username_key:
+          description: Name of the environment variable or secret that holds the Amazon OpenSearch username (used when `strategy` is `basic`).
+          example: AMAZON_OPENSEARCH_USERNAME
+          type: string
       required:
         - strategy
       type: object
@@ -111203,6 +111217,7 @@ components:
       example:
         data:
           attributes:
+            max_responders: 1
             name: On-Call Schedule
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -111284,6 +111299,7 @@ components:
                     start_day: monday
                     start_time: "09:00:00"
                 rotation_start: "2025-02-01T00:00:00Z"
+            max_responders: 1
             name: On-Call Schedule
             time_zone: America/New_York
           relationships:
@@ -111319,6 +111335,15 @@ components:
           items:
             $ref: "#/components/schemas/ScheduleCreateRequestDataAttributesLayersItems"
           type: array
+        max_responders:
+          description: |-
+            Maximum number of users who can be on call at the same time.
+            The value must be between 1 and the number of layers, and no greater than 10.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
         name:
           description: A human-readable name for the new schedule.
           example: Team A On-Call
@@ -111412,6 +111437,15 @@ components:
     ScheduleDataAttributes:
       description: Provides core properties of a schedule object such as its name and time zone.
       properties:
+        max_responders:
+          description: |-
+            Maximum number of users who can be on call at the same time.
+            The value is between 1 and the number of layers, and no greater than 10.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
         name:
           description: A short name for the schedule.
           example: Primary On-Call
@@ -111894,6 +111928,7 @@ components:
                     start_day: monday
                     start_time: "09:00:00"
                 rotation_start: "2025-02-01T00:00:00Z"
+            max_responders: 1
             name: On-Call Schedule Updated
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -111936,6 +111971,15 @@ components:
           items:
             $ref: "#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItems"
           type: array
+        max_responders:
+          description: |-
+            Maximum number of users who can be on call at the same time.
+            The value must be between 1 and the number of layers, and no greater than 10.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
         name:
           description: A short name for the schedule.
           example: Primary On-Call
@@ -112065,6 +112109,7 @@ components:
       example:
         data:
           - attributes:
+              max_responders: 1
               name: Primary On-Call
               tags: []
               time_zone: America/New_York
@@ -207673,6 +207718,7 @@ paths:
                   value:
                     data:
                       - attributes:
+                          max_responders: 1
                           name: Primary On-Call
                           tags: []
                           time_zone: America/New_York
@@ -207752,6 +207798,7 @@ paths:
                               start_day: monday
                               start_time: 09:00:00
                           rotation_start: "2025-02-01T00:00:00Z"
+                      max_responders: 1
                       name: On-Call Schedule
                       time_zone: America/New_York
                     relationships:
@@ -207772,6 +207819,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        max_responders: 1
                         name: On-Call Schedule
                         time_zone: America/New_York
                       id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -207868,6 +207916,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        max_responders: 1
                         name: On-Call Schedule
                         time_zone: America/New_York
                       id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -207943,6 +207992,7 @@ paths:
                               start_day: monday
                               start_time: 09:00:00
                           rotation_start: "2025-02-01T00:00:00Z"
+                      max_responders: 1
                       name: On-Call Schedule Updated
                       time_zone: America/New_York
                     id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -207964,6 +208014,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        max_responders: 1
                         name: On-Call Schedule
                         time_zone: America/New_York
                       id: 00000000-0000-0000-0000-000000000001
