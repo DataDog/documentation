@@ -105,6 +105,8 @@ The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Work
 
 #### Enable Kueue metadata collection
 
+Choose the tab that matches how you manage the Cluster Agent. Merge the example into your existing configuration, preserving its other settings.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
@@ -145,6 +147,22 @@ The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Work
 
    ```shell
    helm upgrade -n <DATADOG_NAMESPACE> -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+   ```
+
+{{% /tab %}}
+{{% tab "Kubernetes manifests" %}}
+
+1. In your existing Cluster Agent Deployment manifest, add the following entry to the Cluster Agent container's `env` list under `spec.template.spec.containers`:
+
+   ```yaml
+   - name: DD_CLUSTER_AGENT_KUEUE_ENABLED
+     value: "true"
+   ```
+
+2. Apply the updated manifest. Replace `cluster-agent-deployment.yaml` with your manifest's filename. Kubernetes rolls out the updated Cluster Agent pods.
+
+   ```shell
+   kubectl apply -n <DATADOG_NAMESPACE> -f cluster-agent-deployment.yaml
    ```
 
 {{% /tab %}}
