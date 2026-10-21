@@ -109,7 +109,7 @@ The products differ in the data they capture and how long the instrumentation re
 - [Datadog Node.js SDK (`dd-trace-js`)][33], version 5.109.0 or higher strongly recommended; versions below 5.109.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 5.84.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 5.39.0
-  - Source maps published with the deployed application if source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack)
+  - Source maps published with the deployed application if source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack). See [TypeScript import limitations](#limitations).
 - [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
@@ -411,6 +411,12 @@ The following constraints apply to Live Debugger usage and configuration:
 - **Rate limits**:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
+
+{% if equals($prog_lang, "node_js") %}
+
+- **TypeScript imports**: When TypeScript compiles imports to CommonJS, expressions using imported names can fail with `ReferenceError`, even with source maps. This affects logpoint messages, conditions, and variable capture expressions. Create and use a local alias, such as `const LocalFoo = Foo`, in the logpoint's scope, and reference `LocalFoo` in expressions.
+
+{% /if %}
 
 ## Troubleshooting
 
