@@ -297,6 +297,5 @@
         "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
       }
     }
-  ],
-  "deprecated": false
+  ]
 }

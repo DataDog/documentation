@@ -15,17 +15,19 @@ breadcrumbs: Docs > API > Create an incident
 If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help.md).
 {% /alert %}
 
-Create an incident.
+| Datadog site      | API endpoint                                        |
+| ----------------- | --------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v2/incidents     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v2/incidents |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v2/incidents |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v2/incidents      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/incidents |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/incidents |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/incidents      |
 
-| Datadog site      | API endpoint                                            |
-| ----------------- | ------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v2/incidents     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v2/incidents |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v2/incidents |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v2/incidents      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v2/incidents |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/incidents |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/incidents      |
+### Overview
+
+Create an incident.
 
 This endpoint requires the `incident_write` permission.
 
@@ -39,38 +41,38 @@ Incident payload.
 
 {% tabs %}
 {% tab label="Model" %}
-| Parent field         | Field                          | Type      | Description                                                                                                                                    |
-| -------------------- | ------------------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-|                      | data [*required*]              | object    | Incident data for a create request.                                                                                                            |
-| data                 | attributes [*required*]        | object    | The incident's attributes for a create request.                                                                                                |
-| attributes           | customer_impact_scope          | string    | Required if `customer_impacted:"true"`. A summary of the impact customers experienced during the incident.                                     |
-| attributes           | customer_impacted [*required*] | boolean   | A flag indicating whether the incident caused customer impact.                                                                                 |
-| attributes           | fields                         | object    | A condensed view of the user-defined fields for which to create initial selections.                                                            |
-| additionalProperties | <any-key>                      | <oneOf>   | Dynamic fields for which selections can be made, with field names as keys.                                                                     |
-| <any-key>            | Object 1                       | object    | A field with a single value selected.                                                                                                          |
-| Object 1             | type                           | enum      | Type of the single value field definitions. Allowed values: `dropdown`, `textbox`. Default: `dropdown`.                                        |
-| Object 1             | value                          | string    | The single value selected for this field.                                                                                                      |
-| <any-key>            | Object 2                       | object    | A field with potentially multiple values selected.                                                                                             |
-| Object 2             | type                           | enum      | Type of the multiple value field definitions. Allowed values: `multiselect`, `textarray`, `metrictag`, `autocomplete`. Default: `multiselect`. |
-| Object 2             | value                          | [string]  | The multiple values selected for this field.                                                                                                   |
-| attributes           | incident_type_uuid             | string    | A unique identifier that represents an incident type. The default incident type will be used if this property is not provided.                 |
-| attributes           | initial_cells                  | [<oneOf>] | An array of initial timeline cells to be placed at the beginning of the incident timeline.                                                     |
-| initial_cells        | <cell_type=markdown>           | object    | Timeline cell data for Markdown timeline cells for a create request.                                                                           |
-| <cell_type=markdown> | cell_type [*required*]         | enum      | Type of the Markdown timeline cell. Allowed values: `markdown`. Default: `markdown`.                                                           |
-| <cell_type=markdown> | content [*required*]           | object    | The Markdown timeline cell contents.                                                                                                           |
-| content              | content                        | string    | The Markdown content of the cell.                                                                                                              |
-| <cell_type=markdown> | important                      | boolean   | A flag indicating whether the timeline cell is important and should be highlighted. Default: `false`.                                          |
-| attributes           | is_test                        | boolean   | A flag indicating whether the incident is a test incident.                                                                                     |
-| attributes           | notification_handles           | [object]  | Notification handles that will be notified of the incident at creation.                                                                        |
-| notification_handles | display_name                   | string    | The name of the notified handle.                                                                                                               |
-| notification_handles | handle                         | string    | The handle used for the notification. This includes an email address, Slack channel, or workflow.                                              |
-| attributes           | title [*required*]             | string    | The title of the incident, which summarizes what happened.                                                                                     |
-| data                 | relationships                  | object    | The relationships the incident will have with other resources once created.                                                                    |
-| relationships        | commander_user [*required*]    | object    | Relationship to user.                                                                                                                          |
-| commander_user       | data [*required*]              | object    | Relationship to user object.                                                                                                                   |
-| data                 | id [*required*]                | string    | A unique identifier that represents the user.                                                                                                  |
-| data                 | type [*required*]              | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                |
-| data                 | type [*required*]              | enum      | Incident resource type. Allowed values: `incidents`. Default: `incidents`.                                                                     |
+| Parent field         | Field                          | Type      | Description                                                                                                                                         |
+| -------------------- | ------------------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                      | data [*required*]              | object    | Incident data for a create request.                                                                                                                 |
+| data                 | attributes [*required*]        | object    | The incident's attributes for a create request.                                                                                                     |
+| attributes           | customer_impact_scope          | string    | Required if `customer_impacted:"true"`. A summary of the impact customers experienced during the incident.                                          |
+| attributes           | customer_impacted [*required*] | boolean   | A flag indicating whether the incident caused customer impact.                                                                                      |
+| attributes           | fields                         | object    | A condensed view of the user-defined fields for which to create initial selections.                                                                 |
+| additionalProperties | <any-key>                      | <oneOf>   | Dynamic fields for which selections can be made, with field names as keys.                                                                          |
+| <any-key>            | Object 1                       | object    | A field with a single value selected.                                                                                                               |
+| Object 1             | type                           | enum      | Type of the single value field definitions. Allowed enum values: `dropdown`, `textbox`. Default: `dropdown`.                                        |
+| Object 1             | value                          | string    | The single value selected for this field.                                                                                                           |
+| <any-key>            | Object 2                       | object    | A field with potentially multiple values selected.                                                                                                  |
+| Object 2             | type                           | enum      | Type of the multiple value field definitions. Allowed enum values: `multiselect`, `textarray`, `metrictag`, `autocomplete`. Default: `multiselect`. |
+| Object 2             | value                          | [string]  | The multiple values selected for this field.                                                                                                        |
+| attributes           | incident_type_uuid             | string    | A unique identifier that represents an incident type. The default incident type will be used if this property is not provided.                      |
+| attributes           | initial_cells                  | [<oneOf>] | An array of initial timeline cells to be placed at the beginning of the incident timeline.                                                          |
+| initial_cells        | <cell_type=markdown>           | object    | Timeline cell data for Markdown timeline cells for a create request.                                                                                |
+| <cell_type=markdown> | cell_type [*required*]         | enum      | Type of the Markdown timeline cell. Allowed enum values: `markdown`. Default: `markdown`.                                                           |
+| <cell_type=markdown> | content [*required*]           | object    | The Markdown timeline cell contents.                                                                                                                |
+| content              | content                        | string    | The Markdown content of the cell.                                                                                                                   |
+| <cell_type=markdown> | important                      | boolean   | A flag indicating whether the timeline cell is important and should be highlighted. Default: `false`.                                               |
+| attributes           | is_test                        | boolean   | A flag indicating whether the incident is a test incident.                                                                                          |
+| attributes           | notification_handles           | [object]  | Notification handles that will be notified of the incident at creation.                                                                             |
+| notification_handles | display_name                   | string    | The name of the notified handle.                                                                                                                    |
+| notification_handles | handle                         | string    | The handle used for the notification. This includes an email address, Slack channel, or workflow.                                                   |
+| attributes           | title [*required*]             | string    | The title of the incident, which summarizes what happened.                                                                                          |
+| data                 | relationships                  | object    | The relationships the incident will have with other resources once created.                                                                         |
+| relationships        | commander_user [*required*]    | object    | Relationship to user.                                                                                                                               |
+| commander_user       | data [*required*]              | object    | Relationship to user object.                                                                                                                        |
+| data                 | id [*required*]                | string    | A unique identifier that represents the user.                                                                                                       |
+| data                 | type [*required*]              | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                |
+| data                 | type [*required*]              | enum      | Incident resource type. Allowed enum values: `incidents`. Default: `incidents`.                                                                     |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -159,10 +161,10 @@ Response with an incident.
 | attributes                  | fields                      | object    | A condensed view of the user-defined fields attached to incidents.                                                                                                 |
 | additionalProperties        | <any-key>                   | <oneOf>   | Dynamic fields for which selections can be made, with field names as keys.                                                                                         |
 | <any-key>                   | Object 1                    | object    | A field with a single value selected.                                                                                                                              |
-| Object 1                    | type                        | enum      | Type of the single value field definitions. Allowed values: `dropdown`, `textbox`. Default: `dropdown`.                                                            |
+| Object 1                    | type                        | enum      | Type of the single value field definitions. Allowed enum values: `dropdown`, `textbox`. Default: `dropdown`.                                                       |
 | Object 1                    | value                       | string    | The single value selected for this field.                                                                                                                          |
 | <any-key>                   | Object 2                    | object    | A field with potentially multiple values selected.                                                                                                                 |
-| Object 2                    | type                        | enum      | Type of the multiple value field definitions. Allowed values: `multiselect`, `textarray`, `metrictag`, `autocomplete`. Default: `multiselect`.                     |
+| Object 2                    | type                        | enum      | Type of the multiple value field definitions. Allowed enum values: `multiselect`, `textarray`, `metrictag`, `autocomplete`. Default: `multiselect`.                |
 | Object 2                    | value                       | [string]  | The multiple values selected for this field.                                                                                                                       |
 | attributes                  | incident_type_uuid          | string    | A unique identifier that represents an incident type.                                                                                                              |
 | attributes                  | is_test                     | boolean   | A flag indicating whether the incident is a test incident.                                                                                                         |
@@ -175,7 +177,7 @@ Response with an incident.
 | notification_handles        | handle                      | string    | The handle used for the notification. This includes an email address, Slack channel, or workflow.                                                                  |
 | attributes                  | public_id                   | int64     | The monotonically increasing integer ID for the incident.                                                                                                          |
 | attributes                  | resolved                    | date-time | Timestamp when the incident's state was last changed from active or stable to resolved or completed.                                                               |
-| attributes                  | severity                    | enum      | The incident severity. Allowed values: `UNKNOWN`, `SEV-0`, `SEV-1`, `SEV-2`, `SEV-3`, `SEV-4`, `SEV-5`.                                                            |
+| attributes                  | severity                    | enum      | The incident severity. Allowed enum values: `UNKNOWN`, `SEV-0`, `SEV-1`, `SEV-2`, `SEV-3`, `SEV-4`, `SEV-5`.                                                       |
 | attributes                  | state                       | string    | The state incident.                                                                                                                                                |
 | attributes                  | time_to_detect              | int64     | The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`. Read-only.                             |
 | attributes                  | time_to_internal_response   | int64     | The amount of time in seconds to call incident after detection. Equals the difference of `detected` and `created`. Read-only.                                      |
@@ -188,40 +190,40 @@ Response with an incident.
 | relationships               | attachments                 | object    | A relationship reference for attachments.                                                                                                                          |
 | attachments                 | data [*required*]           | [object]  | An array of incident attachments.                                                                                                                                  |
 | data                        | id [*required*]             | string    | A unique identifier that represents the attachment.                                                                                                                |
-| data                        | type [*required*]           | enum      | The incident attachment resource type. Allowed values: `incident_attachments`. Default: `incident_attachments`.                                                    |
+| data                        | type [*required*]           | enum      | The incident attachment resource type. Allowed enum values: `incident_attachments`. Default: `incident_attachments`.                                               |
 | relationships               | commander_user              | object    | Relationship to user.                                                                                                                                              |
 | commander_user              | data [*required*]           | object    | Relationship to user object.                                                                                                                                       |
 | data                        | id [*required*]             | string    | A unique identifier that represents the user.                                                                                                                      |
-| data                        | type [*required*]           | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                                    |
+| data                        | type [*required*]           | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                               |
 | relationships               | created_by_user             | object    | Relationship to user.                                                                                                                                              |
 | created_by_user             | data [*required*]           | object    | Relationship to user object.                                                                                                                                       |
 | data                        | id [*required*]             | string    | A unique identifier that represents the user.                                                                                                                      |
-| data                        | type [*required*]           | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                                    |
+| data                        | type [*required*]           | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                               |
 | relationships               | declared_by_user            | object    | Relationship to user.                                                                                                                                              |
 | declared_by_user            | data [*required*]           | object    | Relationship to user object.                                                                                                                                       |
 | data                        | id [*required*]             | string    | A unique identifier that represents the user.                                                                                                                      |
-| data                        | type [*required*]           | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                                    |
+| data                        | type [*required*]           | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                               |
 | relationships               | impacts                     | object    | Relationship to impacts.                                                                                                                                           |
 | impacts                     | data [*required*]           | [object]  | An array of incident impacts.                                                                                                                                      |
 | data                        | id [*required*]             | string    | A unique identifier that represents the impact.                                                                                                                    |
-| data                        | type [*required*]           | enum      | The incident impacts type. Allowed values: `incident_impacts`.                                                                                                     |
+| data                        | type [*required*]           | enum      | The incident impacts type. Allowed enum values: `incident_impacts`.                                                                                                |
 | relationships               | integrations                | object    | A relationship reference for multiple integration metadata objects.                                                                                                |
 | integrations                | data [*required*]           | [object]  | Integration metadata relationship array                                                                                                                            |
 | data                        | id [*required*]             | string    | A unique identifier that represents the integration metadata.                                                                                                      |
-| data                        | type [*required*]           | enum      | Integration metadata resource type. Allowed values: `incident_integrations`. Default: `incident_integrations`.                                                     |
+| data                        | type [*required*]           | enum      | Integration metadata resource type. Allowed enum values: `incident_integrations`. Default: `incident_integrations`.                                                |
 | relationships               | last_modified_by_user       | object    | Relationship to user.                                                                                                                                              |
 | last_modified_by_user       | data [*required*]           | object    | Relationship to user object.                                                                                                                                       |
 | data                        | id [*required*]             | string    | A unique identifier that represents the user.                                                                                                                      |
-| data                        | type [*required*]           | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                                    |
+| data                        | type [*required*]           | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                               |
 | relationships               | responders                  | object    | Relationship to incident responders.                                                                                                                               |
 | responders                  | data [*required*]           | [object]  | An array of incident responders.                                                                                                                                   |
 | data                        | id [*required*]             | string    | A unique identifier that represents the responder.                                                                                                                 |
-| data                        | type [*required*]           | enum      | The incident responders type. Allowed values: `incident_responders`.                                                                                               |
+| data                        | type [*required*]           | enum      | The incident responders type. Allowed enum values: `incident_responders`.                                                                                          |
 | relationships               | user_defined_fields         | object    | Relationship to incident user defined fields.                                                                                                                      |
 | user_defined_fields         | data [*required*]           | [object]  | An array of user defined fields.                                                                                                                                   |
 | data                        | id [*required*]             | string    | A unique identifier that represents the responder.                                                                                                                 |
-| data                        | type [*required*]           | enum      | The incident user defined fields type. Allowed values: `user_defined_field`.                                                                                       |
-| data                        | type [*required*]           | enum      | Incident resource type. Allowed values: `incidents`. Default: `incidents`.                                                                                         |
+| data                        | type [*required*]           | enum      | The incident user defined fields type. Allowed enum values: `user_defined_field`.                                                                                  |
+| data                        | type [*required*]           | enum      | Incident resource type. Allowed enum values: `incidents`. Default: `incidents`.                                                                                    |
 |                             | included                    | [<oneOf>] | Included related resources that the user requested. Read-only.                                                                                                     |
 | included                    | <type=users>                | object    | User object returned by the API.                                                                                                                                   |
 | <type=users>                | attributes                  | object    | Attributes of user object returned by the API.                                                                                                                     |
@@ -231,25 +233,25 @@ Response with an incident.
 | attributes                  | name                        | string    | Name of the user.                                                                                                                                                  |
 | attributes                  | uuid                        | string    | UUID of the user.                                                                                                                                                  |
 | <type=users>                | id                          | string    | ID of the user.                                                                                                                                                    |
-| <type=users>                | type                        | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                                    |
+| <type=users>                | type                        | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                               |
 | included                    | <type=incident_attachments> | object    | Attachment data from a response.                                                                                                                                   |
 | <type=incident_attachments> | attributes [*required*]     | object    | The attachment's attributes.                                                                                                                                       |
 | attributes                  | attachment                  | object    | The attachment object.                                                                                                                                             |
 | attachment                  | documentUrl                 | string    | The URL of the attachment.                                                                                                                                         |
 | attachment                  | title                       | string    | The title of the attachment.                                                                                                                                       |
-| attributes                  | attachment_type             | enum      | The type of the attachment. Allowed values: `postmortem`, `link`.                                                                                                  |
+| attributes                  | attachment_type             | enum      | The type of the attachment. Allowed enum values: `postmortem`, `link`.                                                                                             |
 | attributes                  | modified                    | date-time | Timestamp when the attachment was last modified.                                                                                                                   |
 | <type=incident_attachments> | id [*required*]             | string    | The unique identifier of the attachment.                                                                                                                           |
 | <type=incident_attachments> | relationships [*required*]  | object    | The attachment's resource relationships.                                                                                                                           |
 | relationships               | incident                    | object    | Relationship to incident.                                                                                                                                          |
 | incident                    | data [*required*]           | object    | Relationship to incident object.                                                                                                                                   |
 | data                        | id [*required*]             | string    | A unique identifier that represents the incident.                                                                                                                  |
-| data                        | type [*required*]           | enum      | Incident resource type. Allowed values: `incidents`. Default: `incidents`.                                                                                         |
+| data                        | type [*required*]           | enum      | Incident resource type. Allowed enum values: `incidents`. Default: `incidents`.                                                                                    |
 | relationships               | last_modified_by_user       | object    | Relationship to user.                                                                                                                                              |
 | last_modified_by_user       | data [*required*]           | object    | Relationship to user object.                                                                                                                                       |
 | data                        | id [*required*]             | string    | A unique identifier that represents the user.                                                                                                                      |
-| data                        | type [*required*]           | enum      | Users resource type. Allowed values: `users`. Default: `users`.                                                                                                    |
-| <type=incident_attachments> | type [*required*]           | enum      | The incident attachment resource type. Allowed values: `incident_attachments`. Default: `incident_attachments`.                                                    |
+| data                        | type [*required*]           | enum      | Users resource type. Allowed enum values: `users`. Default: `users`.                                                                                               |
+| <type=incident_attachments> | type [*required*]           | enum      | The incident attachment resource type. Allowed enum values: `incident_attachments`. Default: `incident_attachments`.                                               |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -257,33 +259,47 @@ Response with an incident.
 {
   "data": {
     "attributes": {
+      "archived": "2019-09-19T10:00:00.000Z",
+      "case_id": "integer",
+      "created": "2019-09-19T10:00:00.000Z",
+      "customer_impact_duration": "integer",
+      "customer_impact_end": "2019-09-19T10:00:00.000Z",
       "customer_impact_scope": "An example customer impact scope",
+      "customer_impact_start": "2019-09-19T10:00:00.000Z",
       "customer_impacted": false,
+      "declared": "2019-09-19T10:00:00.000Z",
+      "declared_by": {
+        "image_48_px": "string",
+        "name": "string"
+      },
+      "declared_by_uuid": "string",
+      "detected": "2019-09-19T10:00:00.000Z",
       "fields": {
-        "severity": {
-          "type": "dropdown",
-          "value": "SEV-5"
-        }
+        "<any-key>": "undefined"
       },
       "incident_type_uuid": "00000000-0000-0000-0000-000000000000",
       "is_test": false,
+      "modified": "2019-09-19T10:00:00.000Z",
+      "non_datadog_creator": {
+        "image_48_px": "string",
+        "name": "string"
+      },
       "notification_handles": [
         {
           "display_name": "Jane Doe",
-          "handle": "@user@email.com"
-        },
-        {
-          "display_name": "Slack Channel",
-          "handle": "@slack-channel"
-        },
-        {
-          "display_name": "Incident Workflow",
-          "handle": "@workflow-from-incident"
+          "handle": "@test.user@test.com"
         }
       ],
       "public_id": 1,
+      "resolved": "2019-09-19T10:00:00.000Z",
       "severity": "UNKNOWN",
-      "title": "A test incident title"
+      "state": "string",
+      "time_to_detect": "integer",
+      "time_to_internal_response": "integer",
+      "time_to_repair": "integer",
+      "time_to_resolve": "integer",
+      "title": "A test incident title",
+      "visibility": "string"
     },
     "id": "00000000-0000-0000-1234-000000000000",
     "relationships": {
@@ -303,7 +319,14 @@ Response with an incident.
       },
       "created_by_user": {
         "data": {
-          "id": "00000000-0000-0000-2345-000000000000"
+          "id": "00000000-0000-0000-2345-000000000000",
+          "type": "users"
+        }
+      },
+      "declared_by_user": {
+        "data": {
+          "id": "00000000-0000-0000-2345-000000000000",
+          "type": "users"
         }
       },
       "impacts": {
@@ -317,14 +340,16 @@ Response with an incident.
       "integrations": {
         "data": [
           {
-            "id": "00000000-abcd-0005-0000-000000000000",
-            "type": "incident_integrations"
-          },
-          {
-            "id": "00000000-abcd-0006-0000-000000000000",
+            "id": "00000000-abcd-0001-0000-000000000000",
             "type": "incident_integrations"
           }
         ]
+      },
+      "last_modified_by_user": {
+        "data": {
+          "id": "00000000-0000-0000-2345-000000000000",
+          "type": "users"
+        }
       },
       "responders": {
         "data": [
@@ -344,7 +369,20 @@ Response with an incident.
       }
     },
     "type": "incidents"
-  }
+  },
+  "included": [
+    {
+      "attributes": {
+        "email": "string",
+        "handle": "string",
+        "icon": "string",
+        "name": "string",
+        "uuid": "string"
+      },
+      "id": "string",
+      "type": "users"
+    }
+  ]
 }
 ```
 {% /tab %}
@@ -358,9 +396,9 @@ Bad Request
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -382,9 +420,9 @@ Unauthorized
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -406,9 +444,9 @@ Forbidden
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -430,9 +468,9 @@ Not Found
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -454,9 +492,9 @@ Too many requests
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -478,14 +516,14 @@ API error response.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 # Use a Personal Access Token or Service Access Token
 export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
 
-curl -X POST "https://api.datadoghq.com/api/v2/incidents" \
--H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
--H "Content-Type: application/json" \
+curl -X POST "https://api.${DD_SITE}/api/v2/incidents" \
 -H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
 -d @- << EOF
 {
   "data": {
@@ -602,7 +640,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -670,7 +708,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 

@@ -27,7 +27,7 @@ describe("apiSchemaTableNode", () => {
     expect(apiSchemaTableNode([])).toBeNull();
   });
 
-  it("emits a table with the four expected columns", () => {
+  it("leaves out the Parent field column when no row has a parent", () => {
     const out = render([
       field({
         name: "id",
@@ -42,8 +42,8 @@ describe("apiSchemaTableNode", () => {
       }),
     ]);
 
-    expect(out).toContain("Parent field");
-    expect(out).toContain("Field");
+    expect(out).not.toContain("Parent field");
+    expect(out).toMatch(/^\| Field +\| Type +\| Description +\|$/m);
     expect(out).toContain("Type");
     expect(out).toContain("Description");
     expect(out).toContain("id [*required*]");
@@ -68,8 +68,11 @@ describe("apiSchemaTableNode", () => {
       }),
     ]);
 
-    expect(out).toContain("data");
-    expect(out).toContain("attributes [*required*]");
+    expect(out).toMatch(
+      /^\| Parent field +\| Field +\| Type +\| Description +\|$/m,
+    );
+    expect(out).toMatch(/^\| +\| data +\|/m);
+    expect(out).toMatch(/^\| data +\| attributes \[\*required\*\] +\|/m);
     expect(out).toContain("Attrs.");
   });
 
@@ -114,7 +117,7 @@ describe("apiSchemaTableNode", () => {
     ]);
 
     expect(out).toContain("Severity level.");
-    expect(out).toContain("Allowed values:");
+    expect(out).toContain("Allowed enum values: `low`, `medium`, `high`.");
     expect(out).toContain("Default:");
   });
 
@@ -137,15 +140,15 @@ describe("apiSchemaTableNode", () => {
     ]);
 
     expect(out).toMatch(
-      /\| aggregation +\| Object 1 +\| enum +\| Standard aggregation types\. Allowed values: `avg`, `sum`\. Default: `avg`\. +\|/,
+      /\| aggregation +\| Object 1 +\| enum +\| Standard aggregation types\. Allowed enum values: `avg`, `sum`\. Default: `avg`\. +\|/,
     );
   });
 
-  it("marks deprecated fields in the description", () => {
+  it("puts a DEPRECATED label before a deprecated field's description, as Hugo does", () => {
     const out = render([
       field({ name: "old_field", deprecated: true, description: "Old." }),
     ]);
-    expect(out).toContain("Deprecated.");
+    expect(out).toContain("| **DEPRECATED**: Old. |");
   });
 
   it("produces an AST table node, not a string", () => {

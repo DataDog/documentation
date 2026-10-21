@@ -108,6 +108,5 @@
         "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}"
       }
     }
-  ],
-  "deprecated": true
+  ]
 }

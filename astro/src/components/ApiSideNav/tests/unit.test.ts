@@ -19,7 +19,6 @@ const dashboards: ApiCategory = {
   name: "Dashboards",
   slug: "dashboards",
   description: "",
-  deprecated: false,
   operations: [
     {
       operationId: "getDashboard",
@@ -50,7 +49,6 @@ const monitors: ApiCategory = {
   name: "Monitors",
   slug: "monitors",
   description: "",
-  deprecated: false,
   operations: [
     {
       operationId: "createMonitor",

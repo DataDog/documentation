@@ -25,8 +25,7 @@
           "gov": "https://api.ddog-gov.com/api/v1/validate"
         }
       }
-    ],
-    "deprecated": false
+    ]
   },
   {
     "name": "AWS Integration",
@@ -482,8 +481,7 @@
           "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
         }
       }
-    ],
-    "deprecated": false
+    ]
   },
   {
     "name": "Dashboard Lists",
@@ -595,8 +593,7 @@
           "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}"
         }
       }
-    ],
-    "deprecated": true
+    ]
   },
   {
     "name": "Dashboards",
@@ -897,8 +894,7 @@
           "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
         }
       }
-    ],
-    "deprecated": false
+    ]
   },
   {
     "name": "Incidents",
@@ -2081,8 +2077,7 @@
           "gov": "https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id}"
         }
       }
-    ],
-    "deprecated": false
+    ]
   },
   {
     "name": "Monitors",
@@ -2740,15 +2735,13 @@
           "gov": "https://api.ddog-gov.com/api/v2/monitor/template/{template_id}/validate"
         }
       }
-    ],
-    "deprecated": false
+    ]
   },
   {
     "name": "Screenboards",
     "slug": "screenboards",
     "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.",
-    "operations": [],
-    "deprecated": true
+    "operations": []
   },
   {
     "name": "Usage Metering",
@@ -3532,7 +3525,6 @@
           "gov": "https://api.ddog-gov.com/api/v1/monthly_custom_reports/{report_id}"
         }
       }
-    ],
-    "deprecated": false
+    ]
   }
 ]

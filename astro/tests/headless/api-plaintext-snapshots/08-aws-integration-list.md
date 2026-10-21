@@ -10,17 +10,19 @@ breadcrumbs: Docs > API > List all AWS integrations
 
 ## v2 (latest)
 
-Get a list of AWS Account Integration Configs.
+| Datadog site      | API endpoint                                                      |
+| ----------------- | ----------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/integration/aws/accounts     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/integration/aws/accounts |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/integration/aws/accounts |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/integration/aws/accounts      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/integration/aws/accounts      |
 
-| Datadog site      | API endpoint                                                          |
-| ----------------- | --------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/integration/aws/accounts     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/integration/aws/accounts |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/integration/aws/accounts |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/integration/aws/accounts      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/integration/aws/accounts      |
+### Overview
+
+Get a list of AWS Account Integration Configs.
 
 This endpoint requires the `aws_configuration_read` permission.
 
@@ -28,9 +30,9 @@ This endpoint requires the `aws_configuration_read` permission.
 
 #### Query Strings
 
-| Parent field | Field          | Type   | Description                                                                                                |
-| ------------ | -------------- | ------ | ---------------------------------------------------------------------------------------------------------- |
-|              | aws_account_id | string | Optional query parameter to filter accounts by AWS Account ID. If not provided, all accounts are returned. |
+| Field          | Type   | Description                                                                                                |
+| -------------- | ------ | ---------------------------------------------------------------------------------------------------------- |
+| aws_account_id | string | Optional query parameter to filter accounts by AWS Account ID. If not provided, all accounts are returned. |
 
 ### Response
 
@@ -42,58 +44,58 @@ AWS Accounts List object
 {% tab label="Model" %}
 AWS Accounts response body.
 
-| Parent field      | Field                                        | Type      | Description                                                                                                                                                                                                                                                                   |
-| ----------------- | -------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                   | data [*required*]                            | [object]  | List of AWS Account Integration Configs.                                                                                                                                                                                                                                      |
-| data              | attributes                                   | object    | AWS Account response attributes.                                                                                                                                                                                                                                              |
-| attributes        | account_tags                                 | [string]  | Tags to apply to all hosts and metrics reporting for this account. Defaults to `[]`.                                                                                                                                                                                          |
-| attributes        | auth_config                                  | <oneOf>   | AWS Authentication config.                                                                                                                                                                                                                                                    |
-| auth_config       | Object 1                                     | object    | AWS Authentication config to integrate your account using an access key pair.                                                                                                                                                                                                 |
-| Object 1          | access_key_id [*required*]                   | string    | AWS Access Key ID.                                                                                                                                                                                                                                                            |
-| auth_config       | Object 2                                     | object    | AWS Authentication config to integrate your account using an IAM role.                                                                                                                                                                                                        |
-| Object 2          | external_id                                  | string    | AWS IAM External ID for associated role.                                                                                                                                                                                                                                      |
-| Object 2          | role_name [*required*]                       | string    | AWS IAM Role name.                                                                                                                                                                                                                                                            |
-| attributes        | aws_account_id [*required*]                  | string    | AWS Account ID.                                                                                                                                                                                                                                                               |
-| attributes        | aws_partition                                | enum      | AWS partition your AWS account is scoped to. Defaults to `aws`. See [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html) in the AWS documentation for more information. Allowed values: `aws`, `aws-cn`, `aws-us-gov`. |
-| attributes        | aws_regions                                  | <oneOf>   | AWS Regions to collect data from. Defaults to `include_all`.                                                                                                                                                                                                                  |
-| aws_regions       | Object 1                                     | object    | Include all regions. Defaults to `true`.                                                                                                                                                                                                                                      |
-| Object 1          | include_all [*required*]                     | boolean   | Include all regions.                                                                                                                                                                                                                                                          |
-| aws_regions       | Object 2                                     | object    | Include only these regions.                                                                                                                                                                                                                                                   |
-| Object 2          | include_only [*required*]                    | [string]  | Include only these regions.                                                                                                                                                                                                                                                   |
-| attributes        | created_at                                   | date-time | Timestamp of when the account integration was created. Read-only.                                                                                                                                                                                                             |
-| attributes        | logs_config                                  | object    | AWS Logs Collection config.                                                                                                                                                                                                                                                   |
-| logs_config       | lambda_forwarder                             | object    | Log Autosubscription configuration for Datadog Forwarder Lambda functions. Automatically set up triggers for existing and new logs for some services, ensuring no logs from new resources are missed and saving time spent on manual configuration.                           |
-| lambda_forwarder  | lambdas                                      | [string]  | List of Datadog Lambda Log Forwarder ARNs in your AWS account. Defaults to `[]`.                                                                                                                                                                                              |
-| lambda_forwarder  | log_source_config                            | object    | Log source configuration.                                                                                                                                                                                                                                                     |
-| log_source_config | tag_filters                                  | [object]  | List of AWS log source tag filters. Defaults to `[]`.                                                                                                                                                                                                                         |
-| tag_filters       | source                                       | string    | The AWS log source to which the tag filters defined in `tags` are applied.                                                                                                                                                                                                    |
-| tag_filters       | tags                                         | [string]  | The AWS resource tags to filter on for the log source specified by `source`.                                                                                                                                                                                                  |
-| lambda_forwarder  | sources                                      | [string]  | List of service IDs set to enable automatic log collection. Discover the list of available services with the [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration.md#get-list-of-aws-log-ready-services) endpoint.                 |
-| attributes        | metrics_config                               | object    | AWS Metrics Collection config.                                                                                                                                                                                                                                                |
-| metrics_config    | automute_enabled                             | boolean   | Enable EC2 automute for AWS metrics. Defaults to `true`.                                                                                                                                                                                                                      |
-| metrics_config    | collect_cloudwatch_alarms                    | boolean   | Enable CloudWatch alarms collection. Defaults to `false`.                                                                                                                                                                                                                     |
-| metrics_config    | collect_custom_metrics                       | boolean   | Enable custom metrics collection. Defaults to `false`.                                                                                                                                                                                                                        |
-| metrics_config    | enabled                                      | boolean   | Enable AWS metrics collection. Defaults to `true`.                                                                                                                                                                                                                            |
-| metrics_config    | namespace_filters                            | <oneOf>   | AWS Metrics namespace filters. Defaults to `exclude_only`.                                                                                                                                                                                                                    |
-| namespace_filters | Object 1                                     | object    | Exclude only these namespaces from metrics collection. Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`. `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default to reduce your AWS CloudWatch costs from `GetMetricData` API calls.         |
-| Object 1          | exclude_only [*required*]                    | [string]  | Exclude only these namespaces from metrics collection. Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`. `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default to reduce your AWS CloudWatch costs from `GetMetricData` API calls.         |
-| namespace_filters | Object 2                                     | object    | Include only these namespaces.                                                                                                                                                                                                                                                |
-| Object 2          | include_only [*required*]                    | [string]  | Include only these namespaces.                                                                                                                                                                                                                                                |
-| metrics_config    | tag_filters                                  | [object]  | AWS Metrics collection tag filters list. Defaults to `[]`.                                                                                                                                                                                                                    |
-| tag_filters       | namespace                                    | string    | The AWS service for which the tag filters defined in `tags` will be applied.                                                                                                                                                                                                  |
-| tag_filters       | tags                                         | [string]  | The AWS resource tags to filter on for the service specified by `namespace`.                                                                                                                                                                                                  |
-| attributes        | modified_at                                  | date-time | Timestamp of when the account integration was updated. Read-only.                                                                                                                                                                                                             |
-| attributes        | resources_config                             | object    | AWS Resources Collection config.                                                                                                                                                                                                                                              |
-| resources_config  | cloud_security_posture_management_collection | boolean   | Enable Cloud Security Management to scan AWS resources for vulnerabilities, misconfigurations, identity risks, and compliance violations. Defaults to `false`. Requires `extended_collection` to be set to `true`.                                                            |
-| resources_config  | extended_collection                          | boolean   | Whether Datadog collects additional attributes and configuration information about the resources in your AWS account. Defaults to `true`. Required for `cloud_security_posture_management_collection`.                                                                        |
-| attributes        | traces_config                                | object    | AWS Traces Collection config.                                                                                                                                                                                                                                                 |
-| traces_config     | xray_services                                | <oneOf>   | AWS X-Ray services to collect traces from. Defaults to `include_only`.                                                                                                                                                                                                        |
-| xray_services     | Object 1                                     | object    | Include all services.                                                                                                                                                                                                                                                         |
-| Object 1          | include_all [*required*]                     | boolean   | Include all services.                                                                                                                                                                                                                                                         |
-| xray_services     | Object 2                                     | object    | Include only these services. Defaults to `[]`.                                                                                                                                                                                                                                |
-| Object 2          | include_only [*required*]                    | [string]  | Include only these services.                                                                                                                                                                                                                                                  |
-| data              | id [*required*]                              | string    | Unique Datadog ID of the AWS Account Integration Config. To get the config ID for an account, use the [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration.md#list-all-aws-integrations) endpoint and query by AWS Account ID.                   |
-| data              | type [*required*]                            | enum      | AWS Account resource type. Allowed values: `account`. Default: `account`.                                                                                                                                                                                                     |
+| Parent field      | Field                                        | Type      | Description                                                                                                                                                                                                                                                                        |
+| ----------------- | -------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                   | data [*required*]                            | [object]  | List of AWS Account Integration Configs.                                                                                                                                                                                                                                           |
+| data              | attributes                                   | object    | AWS Account response attributes.                                                                                                                                                                                                                                                   |
+| attributes        | account_tags                                 | [string]  | Tags to apply to all hosts and metrics reporting for this account. Defaults to `[]`.                                                                                                                                                                                               |
+| attributes        | auth_config                                  | <oneOf>   | AWS Authentication config.                                                                                                                                                                                                                                                         |
+| auth_config       | Object 1                                     | object    | AWS Authentication config to integrate your account using an access key pair.                                                                                                                                                                                                      |
+| Object 1          | access_key_id [*required*]                   | string    | AWS Access Key ID.                                                                                                                                                                                                                                                                 |
+| auth_config       | Object 2                                     | object    | AWS Authentication config to integrate your account using an IAM role.                                                                                                                                                                                                             |
+| Object 2          | external_id                                  | string    | AWS IAM External ID for associated role.                                                                                                                                                                                                                                           |
+| Object 2          | role_name [*required*]                       | string    | AWS IAM Role name.                                                                                                                                                                                                                                                                 |
+| attributes        | aws_account_id [*required*]                  | string    | AWS Account ID.                                                                                                                                                                                                                                                                    |
+| attributes        | aws_partition                                | enum      | AWS partition your AWS account is scoped to. Defaults to `aws`. See [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html) in the AWS documentation for more information. Allowed enum values: `aws`, `aws-cn`, `aws-us-gov`. |
+| attributes        | aws_regions                                  | <oneOf>   | AWS Regions to collect data from. Defaults to `include_all`.                                                                                                                                                                                                                       |
+| aws_regions       | Object 1                                     | object    | Include all regions. Defaults to `true`.                                                                                                                                                                                                                                           |
+| Object 1          | include_all [*required*]                     | boolean   | Include all regions.                                                                                                                                                                                                                                                               |
+| aws_regions       | Object 2                                     | object    | Include only these regions.                                                                                                                                                                                                                                                        |
+| Object 2          | include_only [*required*]                    | [string]  | Include only these regions.                                                                                                                                                                                                                                                        |
+| attributes        | created_at                                   | date-time | Timestamp of when the account integration was created. Read-only.                                                                                                                                                                                                                  |
+| attributes        | logs_config                                  | object    | AWS Logs Collection config.                                                                                                                                                                                                                                                        |
+| logs_config       | lambda_forwarder                             | object    | Log Autosubscription configuration for Datadog Forwarder Lambda functions. Automatically set up triggers for existing and new logs for some services, ensuring no logs from new resources are missed and saving time spent on manual configuration.                                |
+| lambda_forwarder  | lambdas                                      | [string]  | List of Datadog Lambda Log Forwarder ARNs in your AWS account. Defaults to `[]`.                                                                                                                                                                                                   |
+| lambda_forwarder  | log_source_config                            | object    | Log source configuration.                                                                                                                                                                                                                                                          |
+| log_source_config | tag_filters                                  | [object]  | List of AWS log source tag filters. Defaults to `[]`.                                                                                                                                                                                                                              |
+| tag_filters       | source                                       | string    | The AWS log source to which the tag filters defined in `tags` are applied.                                                                                                                                                                                                         |
+| tag_filters       | tags                                         | [string]  | The AWS resource tags to filter on for the log source specified by `source`.                                                                                                                                                                                                       |
+| lambda_forwarder  | sources                                      | [string]  | List of service IDs set to enable automatic log collection. Discover the list of available services with the [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration.md#get-list-of-aws-log-ready-services) endpoint.                      |
+| attributes        | metrics_config                               | object    | AWS Metrics Collection config.                                                                                                                                                                                                                                                     |
+| metrics_config    | automute_enabled                             | boolean   | Enable EC2 automute for AWS metrics. Defaults to `true`.                                                                                                                                                                                                                           |
+| metrics_config    | collect_cloudwatch_alarms                    | boolean   | Enable CloudWatch alarms collection. Defaults to `false`.                                                                                                                                                                                                                          |
+| metrics_config    | collect_custom_metrics                       | boolean   | Enable custom metrics collection. Defaults to `false`.                                                                                                                                                                                                                             |
+| metrics_config    | enabled                                      | boolean   | Enable AWS metrics collection. Defaults to `true`.                                                                                                                                                                                                                                 |
+| metrics_config    | namespace_filters                            | <oneOf>   | AWS Metrics namespace filters. Defaults to `exclude_only`.                                                                                                                                                                                                                         |
+| namespace_filters | Object 1                                     | object    | Exclude only these namespaces from metrics collection. Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`. `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default to reduce your AWS CloudWatch costs from `GetMetricData` API calls.              |
+| Object 1          | exclude_only [*required*]                    | [string]  | Exclude only these namespaces from metrics collection. Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`. `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default to reduce your AWS CloudWatch costs from `GetMetricData` API calls.              |
+| namespace_filters | Object 2                                     | object    | Include only these namespaces.                                                                                                                                                                                                                                                     |
+| Object 2          | include_only [*required*]                    | [string]  | Include only these namespaces.                                                                                                                                                                                                                                                     |
+| metrics_config    | tag_filters                                  | [object]  | AWS Metrics collection tag filters list. Defaults to `[]`.                                                                                                                                                                                                                         |
+| tag_filters       | namespace                                    | string    | The AWS service for which the tag filters defined in `tags` will be applied.                                                                                                                                                                                                       |
+| tag_filters       | tags                                         | [string]  | The AWS resource tags to filter on for the service specified by `namespace`.                                                                                                                                                                                                       |
+| attributes        | modified_at                                  | date-time | Timestamp of when the account integration was updated. Read-only.                                                                                                                                                                                                                  |
+| attributes        | resources_config                             | object    | AWS Resources Collection config.                                                                                                                                                                                                                                                   |
+| resources_config  | cloud_security_posture_management_collection | boolean   | Enable Cloud Security Management to scan AWS resources for vulnerabilities, misconfigurations, identity risks, and compliance violations. Defaults to `false`. Requires `extended_collection` to be set to `true`.                                                                 |
+| resources_config  | extended_collection                          | boolean   | Whether Datadog collects additional attributes and configuration information about the resources in your AWS account. Defaults to `true`. Required for `cloud_security_posture_management_collection`.                                                                             |
+| attributes        | traces_config                                | object    | AWS Traces Collection config.                                                                                                                                                                                                                                                      |
+| traces_config     | xray_services                                | <oneOf>   | AWS X-Ray services to collect traces from. Defaults to `include_only`.                                                                                                                                                                                                             |
+| xray_services     | Object 1                                     | object    | Include all services.                                                                                                                                                                                                                                                              |
+| Object 1          | include_all [*required*]                     | boolean   | Include all services.                                                                                                                                                                                                                                                              |
+| xray_services     | Object 2                                     | object    | Include only these services. Defaults to `[]`.                                                                                                                                                                                                                                     |
+| Object 2          | include_only [*required*]                    | [string]  | Include only these services.                                                                                                                                                                                                                                                       |
+| data              | id [*required*]                              | string    | Unique Datadog ID of the AWS Account Integration Config. To get the config ID for an account, use the [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration.md#list-all-aws-integrations) endpoint and query by AWS Account ID.                        |
+| data              | type [*required*]                            | enum      | AWS Account resource type. Allowed enum values: `account`. Default: `account`.                                                                                                                                                                                                     |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -113,6 +115,7 @@ AWS Accounts response body.
         "aws_regions": {
           "include_all": true
         },
+        "created_at": "2019-09-19T10:00:00.000Z",
         "logs_config": {
           "lambda_forwarder": {
             "lambdas": [
@@ -154,6 +157,7 @@ AWS Accounts response body.
             }
           ]
         },
+        "modified_at": "2019-09-19T10:00:00.000Z",
         "resources_config": {
           "cloud_security_posture_management_collection": false,
           "extended_collection": true
@@ -181,9 +185,9 @@ Forbidden
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -205,9 +209,9 @@ Too many requests
 {% tab label="Model" %}
 API error response.
 
-| Parent field | Field               | Type     | Description       |
-| ------------ | ------------------- | -------- | ----------------- |
-|              | errors [*required*] | [string] | A list of errors. |
+| Field               | Type     | Description       |
+| ------------------- | -------- | ----------------- |
+| errors [*required*] | [string] | A list of errors. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -229,14 +233,14 @@ API error response.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 export DD_API_KEY="<DD_API_KEY>"
 export DD_APP_KEY="<DD_APP_KEY>"
 
-curl -X GET "https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012" \
+curl -X GET "https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012" \
+-H "Accept: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
--H "Accept: application/json"
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 {% /tab %}
 
@@ -274,7 +278,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -312,7 +316,7 @@ public class Example {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=java) and then save the example to `Example.java` and run following commands:
 
@@ -339,7 +343,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
@@ -358,7 +362,7 @@ api_instance = DatadogAPIClient::V2::AWSIntegrationAPI.new
 p api_instance.list_aws_accounts()
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=ruby) and then save the example to `example.rb` and run following commands:
 
@@ -390,7 +394,7 @@ async fn main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=rust) and then save the example to `src/main.rs` and run following commands:
 
@@ -421,7 +425,7 @@ apiInstance
   .catch((error: any) => console.error(error));
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=typescript) and then save the example to `example.ts` and run following commands:
 
@@ -433,21 +437,19 @@ DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" tsc "examp
 
 ## v1
 
-{% alert level="warning" %}
-This endpoint is deprecated.
-{% /alert %}
+| Datadog site      | API endpoint                                             |
+| ----------------- | -------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/integration/aws     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/integration/aws |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/integration/aws |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/integration/aws      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/integration/aws |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/integration/aws |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/integration/aws      |
+
+### Overview
 
 **This endpoint is deprecated - use the V2 endpoints instead.** List all Datadog-AWS integrations available in your Datadog organization.
-
-| Datadog site      | API endpoint                                                 |
-| ----------------- | ------------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/integration/aws     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/integration/aws |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/integration/aws |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/integration/aws      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/integration/aws |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/integration/aws |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/integration/aws      |
 
 This endpoint requires the `aws_configuration_read` permission.
 
@@ -455,11 +457,11 @@ This endpoint requires the `aws_configuration_read` permission.
 
 #### Query Strings
 
-| Parent field | Field         | Type   | Description                                                 |
-| ------------ | ------------- | ------ | ----------------------------------------------------------- |
-|              | account_id    | string | Only return AWS accounts that matches this `account_id`.    |
-|              | role_name     | string | Only return AWS accounts that matches this role_name.       |
-|              | access_key_id | string | Only return AWS accounts that matches this `access_key_id`. |
+| Field         | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| account_id    | string | Only return AWS accounts that matches this `account_id`.    |
+| role_name     | string | Only return AWS accounts that matches this role_name.       |
+| access_key_id | string | Only return AWS accounts that matches this `access_key_id`. |
 
 ### Response
 
@@ -484,7 +486,7 @@ List of enabled AWS accounts.
 | accounts             | filter_tags                          | [string] | The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only hosts that match one of the defined tags will be imported into Datadog. The rest will be ignored. Host matching a given tag can also be excluded by adding `!` before the tag. For example, `env:production,instance-type:c1.*,!region:us-east-1`                                                                                                            |
 | accounts             | host_tags                            | [string] | Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | accounts             | metrics_collection_enabled           | boolean  | Whether Datadog collects metrics for this AWS account. Default: `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| accounts             | resource_collection_enabled          | boolean  | Deprecated in favor of 'extended_resource_collection_enabled'. Whether Datadog collects a standard set of resources from your AWS account. **Deprecated.** Default: `false`.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| accounts             | resource_collection_enabled          | boolean  | **DEPRECATED**: Deprecated in favor of 'extended_resource_collection_enabled'. Whether Datadog collects a standard set of resources from your AWS account. Default: `false`.                                                                                                                                                                                                                                                                                                                                                                                                              |
 | accounts             | role_name                            | string   | Your Datadog role delegation name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | accounts             | secret_access_key                    | string   | Your AWS secret access key. Only required if your AWS account is a GovCloud or China account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 {% /tab %}
@@ -494,10 +496,10 @@ List of enabled AWS accounts.
 {
   "accounts": [
     {
+      "access_key_id": "string",
       "account_id": "123456789012",
       "account_specific_namespace_rules": {
-        "auto_scaling": false,
-        "opswork": false
+        "<any-key>": false
       },
       "cspm_resource_collection_enabled": true,
       "excluded_regions": [
@@ -513,7 +515,8 @@ List of enabled AWS accounts.
       ],
       "metrics_collection_enabled": false,
       "resource_collection_enabled": true,
-      "role_name": "DatadogAWSIntegrationRole"
+      "role_name": "DatadogAWSIntegrationRole",
+      "secret_access_key": "string"
     }
   ]
 }
@@ -529,9 +532,9 @@ Bad Request
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -553,9 +556,9 @@ Authentication Error
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -577,9 +580,9 @@ Too many requests
 {% tab label="Model" %}
 Error response object.
 
-| Parent field | Field               | Type     | Description                          |
-| ------------ | ------------------- | -------- | ------------------------------------ |
-|              | errors [*required*] | [string] | Array of errors returned by the API. |
+| Field               | Type     | Description                          |
+| ------------------- | -------- | ------------------------------------ |
+| errors [*required*] | [string] | Array of errors returned by the API. |
 {% /tab %}
 
 {% tab label="Example" %}
@@ -601,14 +604,14 @@ Error response object.
 {% tab label="Curl" %}
 ```bash
 # Set your Datadog site and credentials
-export DD_SITE="datadoghq.com"
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
 export DD_API_KEY="<DD_API_KEY>"
 export DD_APP_KEY="<DD_APP_KEY>"
 
-curl -X GET "https://api.datadoghq.com/api/v1/integration/aws" \
+curl -X GET "https://api.${DD_SITE}/api/v1/integration/aws" \
+-H "Accept: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
--H "Accept: application/json"
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 {% /tab %}
 
@@ -646,7 +649,7 @@ func main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
 
@@ -684,7 +687,7 @@ public class Example {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=java) and then save the example to `Example.java` and run following commands:
 
@@ -711,7 +714,7 @@ with ApiClient(configuration) as api_client:
     print(response)
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=python) and then save the example to `example.py` and run following commands:
 
@@ -730,7 +733,7 @@ api_instance = DatadogAPIClient::V1::AWSIntegrationAPI.new
 p api_instance.list_aws_accounts()
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=ruby) and then save the example to `example.rb` and run following commands:
 
@@ -762,7 +765,7 @@ async fn main() {
 }
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=rust) and then save the example to `src/main.rs` and run following commands:
 
@@ -793,7 +796,7 @@ apiInstance
   .catch((error: any) => console.error(error));
 ```
 
-**Instructions**
+#### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=typescript) and then save the example to `example.ts` and run following commands:
 

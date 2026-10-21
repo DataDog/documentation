@@ -13,11 +13,16 @@ import {
   stripWriteOnlyFields,
 } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
+import { buildSchemaExample } from "./schemaExampleBuilder";
 import { buildRunCommand } from "./runCommandBuilder";
 import type { LanguageRunInfo } from "./codeExampleLoader";
 import { getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
-import type { CurlParam, CurlSecurityScheme } from "./schemas/curl";
+import type {
+  CurlParam,
+  CurlSecurityScheme,
+  GenerateCurlOptions,
+} from "./schemas/curl";
 import type { ResponseData, RequestBodyData } from "./schemas/views";
 import type { SplitParams } from "./schemas/params";
 
@@ -89,24 +94,53 @@ export function extractPermissionsMatch(
 }
 
 /**
- * Extract OAuth scopes from the `security` block's AuthZ requirement.
+ * Extract OAuth scopes from the `security` block's AuthZ requirements.
+ *
+ * Each `security` entry is an alternative, and the scopes inside one entry
+ * are all required. When every AuthZ entry holds a single scope, the entries
+ * are alternative scopes, so this lists them all (see
+ * `extractOauthScopesMatch`). Otherwise it returns the first entry's scopes.
+ * Hugo keeps only the last entry, which hides the alternatives.
  */
 export function extractOauthScopes(
   security?: OpenAPIV3.SecurityRequirementObject[],
 ): string[] | undefined {
-  if (!security || !Array.isArray(security)) return undefined;
+  const authZEntries = extractAuthZEntries(security);
+  if (authZEntries.length === 0) return undefined;
+  return hasAlternativeScopes(authZEntries)
+    ? authZEntries.flat()
+    : authZEntries[0];
+}
 
-  for (const requirement of security) {
-    if (
-      requirement.AuthZ &&
-      Array.isArray(requirement.AuthZ) &&
-      requirement.AuthZ.length > 0
-    ) {
-      return requirement.AuthZ;
-    }
-  }
+/**
+ * `"any"` when the scopes from `extractOauthScopes` are alternatives, so any
+ * one of them is enough. `undefined` when they're all required.
+ */
+export function extractOauthScopesMatch(
+  security?: OpenAPIV3.SecurityRequirementObject[],
+): "any" | undefined {
+  return hasAlternativeScopes(extractAuthZEntries(security))
+    ? "any"
+    : undefined;
+}
 
-  return undefined;
+function extractAuthZEntries(
+  security?: OpenAPIV3.SecurityRequirementObject[],
+): string[][] {
+  if (!security || !Array.isArray(security)) return [];
+  return security
+    .map((requirement) => requirement.AuthZ)
+    .filter(
+      (scopes): scopes is string[] =>
+        Array.isArray(scopes) && scopes.length > 0,
+    );
+}
+
+function hasAlternativeScopes(authZEntries: string[][]): boolean {
+  return (
+    authZEntries.length > 1 &&
+    authZEntries.every((scopes) => scopes.length === 1)
+  );
 }
 
 function isJsonMediaType(mediaType: string): boolean {
@@ -256,43 +290,16 @@ export function extractResponses(
     const jsonContent =
       mediaType && isJsonMediaType(mediaType) ? mediaContent : undefined;
 
+    // Like Hugo, build the example from the schema and ignore the spec's
+    // `examples`, so fields without an example show a type placeholder.
     let examples: Array<{ name: string; value: string }> | undefined;
-    if (jsonContent?.examples && typeof jsonContent.examples === "object") {
-      examples = [];
-      for (const [name, exampleObj] of Object.entries(jsonContent.examples)) {
-        const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
-          ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
-          : exampleObj;
-
-        if (resolvedExample?.value !== undefined) {
-          examples.push({
-            name: resolvedExample.summary ?? name,
-            value: JSON.stringify(resolvedExample.value, null, 2),
-          });
-        }
-      }
-      if (examples.length === 0) examples = undefined;
-    } else if (jsonContent?.example !== undefined) {
+    const generated = jsonContent?.schema
+      ? buildSchemaExample(spec, "response", jsonContent.schema)
+      : undefined;
+    if (generated !== undefined) {
       examples = [
-        {
-          name: "Example",
-          value: JSON.stringify(jsonContent.example, null, 2),
-        },
+        { name: "Example", value: JSON.stringify(generated, null, 2) },
       ];
-    }
-
-    if (!examples && jsonContent?.schema) {
-      const generated = generateExampleFromSchema(spec, jsonContent.schema, {
-        omitWriteOnly: true,
-      });
-      if (generated !== undefined) {
-        examples = [
-          {
-            name: "Example",
-            value: JSON.stringify(generated, null, 2),
-          },
-        ];
-      }
     }
 
     result.push({
@@ -322,27 +329,69 @@ export function buildCurlByRegion(
   splitParams: SplitParams,
   requestBodyJson?: string,
 ): Record<string, string> {
-  const regions = getRegions(spec, operation);
-  const servers = operation?.servers ?? spec?.servers;
-  const subdomain: string =
-    servers?.[0]?.variables?.subdomain?.default ?? "api";
-
+  const options = curlOptionsForOperation(
+    spec,
+    method,
+    path,
+    operation,
+    splitParams,
+    requestBodyJson,
+  );
   const result: Record<string, string> = {};
-  for (const region of regions) {
-    result[region.key] = buildCurlCommand({
-      method,
-      path,
-      site: region.site,
-      subdomain,
-      pathParams: toCurlParams(splitParams.path),
-      queryParams: toCurlParams(splitParams.query),
-      requestBodyJson,
-      security: operation.security,
-      globalSecurity: spec.security,
-      securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
-    });
+  for (const region of getRegions(spec, operation)) {
+    result[region.key] = buildCurlCommand({ ...options, site: region.site });
   }
   return result;
+}
+
+/**
+ * The curl command for the .md, which can't switch sites: it uses the first
+ * region's site, and lists the operation's other sites in a comment.
+ */
+export function buildPlaintextCurl(
+  spec: OpenAPIV3.Document,
+  method: string,
+  path: string,
+  operation: OpenAPIV3.OperationObject,
+  splitParams: SplitParams,
+  requestBodyJson?: string,
+): string {
+  const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
+  return buildCurlCommand({
+    ...curlOptionsForOperation(
+      spec,
+      method,
+      path,
+      operation,
+      splitParams,
+      requestBodyJson,
+    ),
+    site: defaultRegion?.site,
+    otherSites: otherRegions.map((region) => region.site),
+  });
+}
+
+/** Everything `buildCurlCommand` needs except the site. */
+function curlOptionsForOperation(
+  spec: OpenAPIV3.Document,
+  method: string,
+  path: string,
+  operation: OpenAPIV3.OperationObject,
+  splitParams: SplitParams,
+  requestBodyJson: string | undefined,
+): GenerateCurlOptions {
+  const servers = operation?.servers ?? spec?.servers;
+  return {
+    method,
+    path,
+    subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
+    pathParams: toCurlParams(splitParams.path),
+    queryParams: toCurlParams(splitParams.query),
+    requestBodyJson,
+    security: operation.security,
+    globalSecurity: spec.security,
+    securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
+  };
 }
 
 /** SDK run commands for the given operation, keyed by region like curl. */
@@ -371,25 +420,6 @@ export function buildRunCommandByRegion(
 /** Maximum structural depth (objects/arrays) for example generation. */
 const EXAMPLE_MAX_DEPTH = 10;
 
-interface ExampleOptions {
-  /**
-   * Skip properties the spec marks `writeOnly`. Set when generating a
-   * response example, where such a field is never returned.
-   */
-  omitWriteOnly?: boolean;
-}
-
-/** Whether a property schema is write-only, following a single `$ref` hop. */
-function isWriteOnly(
-  spec: OpenAPIV3.Document,
-  schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject,
-): boolean {
-  const resolved: OpenAPIV3.SchemaObject | undefined = isReference(schema)
-    ? resolveRef(spec, schema.$ref)
-    : schema;
-  return resolved?.writeOnly === true;
-}
-
 /**
  * Attempt to build a sample JSON value from a schema by using `example`
  * fields on properties. Returns `undefined` if no useful example can
@@ -398,13 +428,10 @@ function isWriteOnly(
  * `depth` tracks structural nesting (object properties, array items).
  * `$ref` resolution does not increment depth — circular refs are guarded
  * by a `seen` set of ref paths instead.
- *
- * `options.omitWriteOnly` drops write-only properties, for response examples.
  */
 function generateExampleFromSchema(
   spec: OpenAPIV3.Document,
   schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject | undefined,
-  options: ExampleOptions = {},
   depth = 0,
   seen: Set<string> = new Set(),
 ): unknown {
@@ -415,7 +442,7 @@ function generateExampleFromSchema(
     seen.add(schema.$ref);
     const resolved = resolveRef(spec, schema.$ref);
     if (!resolved) return undefined;
-    return generateExampleFromSchema(spec, resolved, options, depth, seen);
+    return generateExampleFromSchema(spec, resolved, depth, seen);
   }
 
   if (schema.example !== undefined) return schema.example;
@@ -424,7 +451,7 @@ function generateExampleFromSchema(
     const merged: Record<string, unknown> = {};
     let hasValue = false;
     for (const sub of schema.allOf) {
-      const val = generateExampleFromSchema(spec, sub, options, depth, seen);
+      const val = generateExampleFromSchema(spec, sub, depth, seen);
       if (val !== undefined && typeof val === "object" && !Array.isArray(val)) {
         Object.assign(merged, val);
         hasValue = true;
@@ -441,7 +468,7 @@ function generateExampleFromSchema(
   if (unionKey) {
     const variants = schema[unionKey];
     if (Array.isArray(variants) && variants.length > 0) {
-      return generateExampleFromSchema(spec, variants[0], options, depth, seen);
+      return generateExampleFromSchema(spec, variants[0], depth, seen);
     }
     return undefined;
   }
@@ -454,15 +481,7 @@ function generateExampleFromSchema(
     let hasValue = false;
 
     for (const [propName, propSchema] of Object.entries(properties)) {
-      if (options.omitWriteOnly && isWriteOnly(spec, propSchema)) continue;
-
-      const val = generateExampleFromSchema(
-        spec,
-        propSchema,
-        options,
-        depth + 1,
-        seen,
-      );
+      const val = generateExampleFromSchema(spec, propSchema, depth + 1, seen);
       if (val !== undefined) {
         obj[propName] = val;
         hasValue = true;
@@ -476,7 +495,6 @@ function generateExampleFromSchema(
     const itemExample = generateExampleFromSchema(
       spec,
       schema.items,
-      options,
       depth + 1,
       seen,
     );

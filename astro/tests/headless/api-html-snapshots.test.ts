@@ -107,7 +107,7 @@ const AUDIT_PAGES: AuditPage[] = [
     urlPath: "/api/latest/monitors/create-a-monitor/",
   },
 
-  // dashboard-lists: category-level deprecation (with endpoints).
+  // dashboard-lists: v1 tag has x-deprecated, which the category page ignores.
   {
     name: "10-dashboard-lists-landing",
     component: CategoryPage,
@@ -124,7 +124,7 @@ const AUDIT_PAGES: AuditPage[] = [
     urlPath: "/api/latest/dashboard-lists/get-all-dashboard-lists/",
   },
 
-  // screenboards: empty deprecated category (no operations to sample).
+  // screenboards: empty category (no operations to sample).
   {
     name: "11-screenboards-landing",
     component: CategoryPage,

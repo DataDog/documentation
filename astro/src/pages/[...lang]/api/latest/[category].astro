@@ -2,7 +2,6 @@
 export const prerender = true;
 import ApiLayout from "@layouts/ApiLayout.astro";
 import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
-import Alert from "@components/Alert/Alert.astro";
 import ApiEndpointSummary from "@components/ApiEndpointSummary/ApiEndpointSummary.astro";
 import {
   getCategoryStubsView,
@@ -60,11 +59,6 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   contentPath={hugoCategoryContentPath(slug)}
 >
   <ApiPageHeader title={current.name} />
-  {
-    current.deprecated && (
-      <Alert level="warning">This endpoint is deprecated.</Alert>
-    )
-  }
   {
     current.description && (
       <div set:html={renderMarkdown(current.description)} />

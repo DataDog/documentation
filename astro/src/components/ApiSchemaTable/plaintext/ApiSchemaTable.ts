@@ -2,7 +2,8 @@
  * AST twin of `ApiSchemaTable.tsx`.
  *
  * Walks the SchemaField tree depth-first and builds a Markdown `table` AST
- * node with a leading `Parent field` column. Behavior mirrors the string
+ * node with a leading `Parent field` column, which is left out when no row
+ * has a parent, as Hugo's `.md` does. Behavior mirrors the string
  * renderer: unions appear as a `<oneOf>` / `<anyOf>` row followed by one
  * row per option label, with nested fields attributed to the option label.
  */
@@ -33,12 +34,17 @@ export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
 
   const rows = schemaFieldsToTableRows(fields, "");
 
-  const headers = ["Parent field", "Field", "Type", "Description"];
-  const bodyRows = rows.map((row) => {
-    return [row.parent, row.field, row.type, row.description];
-  });
+  if (!rows.some((row) => row.parent)) {
+    return tableMd(
+      ["Field", "Type", "Description"],
+      rows.map((row) => [row.field, row.type, row.description]),
+    );
+  }
 
-  return tableMd(headers, bodyRows);
+  return tableMd(
+    ["Parent field", "Field", "Type", "Description"],
+    rows.map((row) => [row.parent, row.field, row.type, row.description]),
+  );
 }
 
 function schemaFieldsToTableRows(
@@ -96,11 +102,12 @@ function getFieldType(field: SchemaField): string {
 
 function getFieldDescription(field: SchemaField): string {
   const parts: string[] = [];
+  // Hugo and both HTML pages lead with the label.
+  if (field.deprecated) {
+    parts.push("**DEPRECATED**:");
+  }
   if (field.description) {
     parts.push(field.description);
-  }
-  if (field.deprecated) {
-    parts.push("**Deprecated.**");
   }
   if (field.readOnly) {
     parts.push("Read-only.");
@@ -121,7 +128,7 @@ function valueParts(
 ): string[] {
   const parts: string[] = [];
   if (source.enumValues && source.enumValues.length > 0) {
-    parts.push(`Allowed values: \`${source.enumValues.join("`, `")}\`.`);
+    parts.push(`Allowed enum values: \`${source.enumValues.join("`, `")}\`.`);
   }
   if (source.defaultValue !== undefined) {
     parts.push(`Default: \`${source.defaultValue}\`.`);

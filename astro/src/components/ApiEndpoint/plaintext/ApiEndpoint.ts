@@ -36,8 +36,8 @@ export function apiEndpointNodes(
 ): MarkdocNode[] {
   return [
     ...statusNotice(ep),
-    ...descriptionNodes(ep),
     ...apiRegionTableNodes(ep.method, ep.regionUrls),
+    ...descriptionNodes(ep),
     ...permissionsNodes(ep),
     ...oauthScopesNodes(ep, lang),
     ...argumentsNodes(ep),
@@ -48,13 +48,6 @@ export function apiEndpointNodes(
 }
 
 function statusNotice(ep: EndpointData): MarkdocNode[] {
-  if (ep.deprecated) {
-    const link = ep.newerVersionUrl
-      ? ` [Use the newer version.](${ep.newerVersionUrl})`
-      : "";
-    const body = nodesFromMd(`This endpoint is deprecated.${link}`);
-    return [alertNode("warning", body)];
-  }
   if (ep.unstable) {
     const msg =
       ep.unstableMessage ??
@@ -68,7 +61,7 @@ function descriptionNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.description) {
     return NO_CONTENT;
   }
-  return nodesFromMd(ep.description);
+  return [heading(3, "Overview"), ...nodesFromMd(ep.description)];
 }
 
 function permissionsNodes(ep: EndpointData): MarkdocNode[] {
@@ -94,11 +87,18 @@ function oauthScopesNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
   if (!ep.oauthScopes || ep.oauthScopes.length === 0) {
     return NO_CONTENT;
   }
-  const scope = ep.oauthScopesAnchor
-    ? `[scope](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
-    : "scope";
+  const scopesLink = (text: string) =>
+    ep.oauthScopesAnchor
+      ? `[${text}](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
+      : text;
+  if (ep.oauthScopesMatch === "any") {
+    const scopeList = ep.oauthScopes.map((scope) => `\`${scope}\``).join(", ");
+    return nodesFromMd(
+      `OAuth apps require one of the following authorization ${scopesLink("scopes")} to access this endpoint: ${scopeList}.`,
+    );
+  }
   return nodesFromMd(
-    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scope} to access this endpoint.`,
+    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scopesLink("scope")} to access this endpoint.`,
   );
 }
 
@@ -180,11 +180,8 @@ function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.requestBody) {
     return NO_CONTENT;
   }
-  const suffix = ep.requestBody.required ? "(required)" : "(optional)";
-  const contents: MarkdocNode[] = [
-    heading(3, "Request"),
-    heading(4, `Body Data ${suffix}`),
-  ];
+  const label = ep.requestBody.required ? "Body Data (required)" : "Body Data";
+  const contents: MarkdocNode[] = [heading(3, "Request"), heading(4, label)];
   if (ep.requestBody.description) {
     contents.push(...nodesFromMd(ep.requestBody.description));
   }

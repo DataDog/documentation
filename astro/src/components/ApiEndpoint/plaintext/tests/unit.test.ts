@@ -72,19 +72,25 @@ describe("apiEndpointNodes", () => {
     expect(out).toContain("API endpoint");
     expect(out).toContain("app.datadoghq.com");
     expect(out).toContain("app.datadoghq.eu");
-    expect(out).toContain("**GET**");
+    expect(out).toContain("| GET https://");
+    expect(out).not.toContain("**GET**");
   });
 
-  it("renders a deprecated alert when the endpoint is deprecated", () => {
-    const dep = render({
+  it("renders no alert when the endpoint is deprecated, as Hugo does", () => {
+    const dep = render({ ...baseEndpoint, deprecated: true });
+    expect(dep).not.toContain("{% alert");
+    expect(dep).not.toContain("This endpoint is deprecated.");
+  });
+
+  it("renders the unstable alert on a deprecated endpoint, as Hugo does", () => {
+    const out = render({
       ...baseEndpoint,
       deprecated: true,
-      newerVersionUrl: "/api/latest/foo",
+      unstable: true,
+      unstableMessage: "Subject to change.",
     });
-    expect(dep).toContain("{% alert");
-    expect(dep).toContain('level="warning"');
-    expect(dep).toContain("This endpoint is deprecated.");
-    expect(dep).toContain("/api/latest/foo");
+    expect(out).toContain("{% alert");
+    expect(out).toContain("Subject to change.");
   });
 
   it("renders an unstable alert when the endpoint is unstable", () => {
@@ -100,6 +106,18 @@ describe("apiEndpointNodes", () => {
   it("includes the endpoint description", () => {
     const out = render(baseEndpoint);
     expect(out).toContain("Returns a thing by id.");
+  });
+
+  it("puts the description under an Overview heading after the region table", () => {
+    const out = render(baseEndpoint);
+    expect(out).toMatch(
+      /\| GET https:[^\n]*\n\n### Overview\n\nReturns a thing by id\./,
+    );
+  });
+
+  it("leaves out the Overview heading when there is no description", () => {
+    const out = render({ ...baseEndpoint, description: "" });
+    expect(out).not.toContain("### Overview");
   });
 
   it("renders an Arguments section with a schema table for path params", () => {
@@ -147,6 +165,18 @@ describe("apiEndpointNodes", () => {
     );
   });
 
+  it("lists alternative OAuth scopes after one of the following", () => {
+    const out = render({
+      ...baseEndpoint,
+      oauthScopes: ["monitors_write", "monitors_draft_write"],
+      oauthScopesMatch: "any",
+      oauthScopesAnchor: "monitors",
+    });
+    expect(out).toContain(
+      "OAuth apps require one of the following authorization [scopes](/api/latest/scopes/#monitors) to access this endpoint: `monitors_write`, `monitors_draft_write`.",
+    );
+  });
+
   it("leaves the OAuth scope unlinked without an anchor", () => {
     const out = render({ ...baseEndpoint, oauthScopes: ["things:read"] });
     expect(out).toContain("authorization scope to access");
@@ -185,5 +215,29 @@ describe("apiEndpointNodes", () => {
     expect(pathAt).toBeGreaterThan(-1);
     expect(queryAt).toBeGreaterThan(pathAt);
     expect(headerAt).toBeGreaterThan(queryAt);
+  });
+  it("titles a required body Request, then Body Data (required)", () => {
+    const out = render({
+      ...baseEndpoint,
+      requestBody: {
+        required: true,
+        description: "Thing payload.",
+        schema: [],
+        examples: [],
+      },
+    });
+    expect(out).toMatch(
+      /^### Request\n\n#### Body Data \(required\)\n\nThing payload\./m,
+    );
+    expect(out).not.toContain("Request Body");
+  });
+
+  it("leaves the marker off an optional body", () => {
+    const out = render({
+      ...baseEndpoint,
+      requestBody: { required: false, schema: [], examples: [] },
+    });
+    expect(out).toMatch(/^#### Body Data$/m);
+    expect(out).not.toContain("(optional)");
   });
 });

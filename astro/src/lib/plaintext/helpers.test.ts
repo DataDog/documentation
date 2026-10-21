@@ -5,6 +5,7 @@ import {
   buildMarkdocStr,
   buildPlaintextPage,
   heading,
+  nodesFromMd,
   paragraphFromText,
   parse,
   tableMd,
@@ -110,6 +111,47 @@ describe("buildPlaintextPage", () => {
         undefined,
       ),
     ).toThrow(/`site` must be set/);
+  });
+});
+
+describe("bare URLs in parsed Markdown", () => {
+  const FRONTMATTER = { title: "T", description: "", breadcrumbs: CRUMBS };
+  const bodyOf = (md: string) =>
+    buildPlaintextPage(nodesFromMd(md), FRONTMATTER, SITE);
+
+  it("links a bare docs URL to its .md page, leaving trailing punctuation out", () => {
+    expect(
+      bodyOf(
+        "Palettes are at https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-tag.",
+      ),
+    ).toContain(
+      "Palettes are at [https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-tag](https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope.md#add-tag).",
+    );
+  });
+
+  // Markdoc writes a link whose text is its href as an autolink.
+  it("links a bare URL on another host to itself", () => {
+    expect(bodyOf("See https://vega.github.io/vega-lite/ for more.")).toContain(
+      "See <https://vega.github.io/vega-lite/> for more.",
+    );
+  });
+
+  it("leaves URLs in links and inline code alone", () => {
+    const body = bodyOf(
+      "A [https://example.com/a](https://example.com/a) and `https://example.com/b`.",
+    );
+    expect(body).toContain(
+      "A <https://example.com/a> and `https://example.com/b`.",
+    );
+  });
+
+  it("leaves a bare URL in text that wasn't parsed from Markdown", () => {
+    const body = buildPlaintextPage(
+      [paragraphFromText("GET https://api.datadoghq.com/api/v1/dashboard")],
+      FRONTMATTER,
+      SITE,
+    );
+    expect(body).toContain("GET https://api.datadoghq.com/api/v1/dashboard");
   });
 });
 

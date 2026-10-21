@@ -13628,27 +13628,7 @@
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
                                     style="--schema-table-indent: 60px"
                                   >
-                                    <button
-                                      type="button"
-                                      class="schema-table__toggle _schema-table__toggle_d7636a"
-                                      aria-expanded="false"
-                                      aria-label="Toggle widgets"
-                                    >
-                                      <svg
-                                        class="expand-chevron"
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        aria-hidden="true"
-                                      >
-                                        <path
-                                          d="M3 1 L7 5 L3 9"
-                                          fill="none"
-                                          stroke="currentColor"
-                                          stroke-width="1.5"
-                                        ></path>
-                                      </svg></button
-                                    ><span class="schema-table__name-group _schema-table__name-group_d7636a"
+                                    <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">widgets</code
                                       ><span class="schema-table__required _schema-table__required_d7636a">
                                         [required]</span
@@ -13661,32 +13641,6 @@
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
                                     <div class="schema-table__description _schema-table__description_d7636a">
                                       <p>List of widget groups.</p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="schema-table__children _schema-table__children_d7636a" hidden>
-                                  <div
-                                    class="schema-table__row _schema-table__row_d7636a"
-                                    data-field-name="(recursive)"
-                                    data-depth="4"
-                                  >
-                                    <div
-                                      class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="--schema-table-indent: 80px"
-                                    >
-                                      <span class="schema-table__name-group _schema-table__name-group_d7636a"
-                                        ><code class="schema-table__name _schema-table__name_d7636a"
-                                          >(recursive)</code
-                                        ></span
-                                      >
-                                    </div>
-                                    <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
-                                      <span class="schema-table__type _schema-table__type_d7636a">Widget</span>
-                                    </div>
-                                    <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <div class="schema-table__description _schema-table__description_d7636a">
-                                        <p>Circular reference to Widget.</p>
-                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -13932,16 +13886,34 @@
                               ><code><span class="line"><span style="color:var(--color-panel-text)">{</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">author_handle</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"test@datadoghq.com"</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">author_name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"John Doe"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">created_at</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"2019-09-19T10:00:00.000Z"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">description</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">id</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"123-abc-456"</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">is_read_only</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-keyword)">false</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">layout_type</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"ordered"</span><span style="color:var(--color-panel-text)">,</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">reflow_type</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"auto"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">modified_at</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"2019-09-19T10:00:00.000Z"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">notify_list</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [],</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">reflow_type</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">restricted_roles</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [],</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">tabs</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">    {</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">id</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">""</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"L"</span><span style="color:var(--color-panel-text)">,</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">widget_ids</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [</span></span>
 <span class="line"><span style="color:var(--color-syntax-number)">        0</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      ]</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">    }</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  ],</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">tags</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [],</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">template_variable_presets</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">    {</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">template_variables</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        {</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">          "</span><span style="color:var(--color-syntax-attribute)">name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">          "</span><span style="color:var(--color-syntax-attribute)">value</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"string"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">          "</span><span style="color:var(--color-syntax-attribute)">values</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: []</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        }</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      ]</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">    }</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  ],</span></span>
@@ -13973,6 +13945,14 @@
 <span class="line"><span style="color:var(--color-panel-text)">          }</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">        },</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">type</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"hostmap"</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      },</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">id</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"integer"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">      "</span><span style="color:var(--color-syntax-attribute)">layout</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: {</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">height</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-number)">0</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">is_column_break</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-keyword)">false</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">width</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-number)">0</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">x</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-number)">0</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">        "</span><span style="color:var(--color-syntax-attribute)">y</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-number)">0</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">      }</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">    }</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">  ]</span></span>
@@ -14412,9 +14392,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.com/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -14446,9 +14426,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us3.datadoghq.com/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -14480,9 +14460,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.us5.datadoghq.com/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -14514,9 +14494,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.datadoghq.eu/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -14548,9 +14528,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap1.datadoghq.com/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -14582,9 +14562,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ap2.datadoghq.com/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -14616,9 +14596,9 @@
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.ddog-gov.com/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
-<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span></span></code></pre>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
                       </div>
                     </div>
                   </div>

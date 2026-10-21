@@ -21,7 +21,7 @@ function render(): string {
 describe("apiCodeInstructionsNodes", () => {
   it("renders the heading, install link, and example file", () => {
     const out = render();
-    expect(out).toContain("Instructions");
+    expect(out).toMatch(/^#### Instructions$/m);
     expect(out).toContain(
       "[install the library and its dependencies](/api/latest/?code-lang=python)",
     );

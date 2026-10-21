@@ -136,7 +136,7 @@ Their language coverage is uneven on purpose. `aws-integration/ListAWSAccounts` 
 - If a component is interactive, use Preact.
 - Where possible, each component should have its own isolated scope.
 - In cases when giving a Preact component an isolated scope would require you to pass very large props (like the pre-rendered HTML of a tab, or a very large data blob for an API schema table), use a [hybrid approach](#hybrid-example) where a vanilla Astro component does most of the rendering, and a small Preact component controls interactivity. Do not do this unless the props would be large otherwise, because isolated JS scope is strongly preferred!
-- Some components have a plaintext twin (found in their `plaintext` folder). Keep the plaintext twin in sync with the component.
+- Some components have a plaintext twin (found in their `plaintext` folder). Keep the plaintext twin in sync with the component. Any material change to a component's HTML content (adding, removing, renaming, or reordering headings, text, labels, or sections, as opposed to styling-only changes) likely needs the same change in its plaintext twin. Check the twin, and its tests, in the same change.
 
 ### `cl()` usage example
 
