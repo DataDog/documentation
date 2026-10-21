@@ -28,7 +28,7 @@ Bits Investigation in Error Tracking is in Preview.
 
 ## Prerequisites
 
-- Your role must have the Bits Investigations Read permission to view investigations, and the Bits Investigations Write permission to start them. For details, see [Configure permissions][2].
+- To view investigations, you need the [{{< ui >}}Bits Investigations Read{{< /ui >}} permission][2]. To start investigations, you need the [{{< ui >}}Bits Investigations Write{{< /ui >}} permission][2].
 - To let Bits read the code that was running when the error occurred, set up [Source Code Integration][3]. Bits can investigate without source code access, but the root cause analysis is less precise.
 
 ## Start an investigation
@@ -82,7 +82,7 @@ To generate code fixes, set up [Bits Code][8] with a supported source code provi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/bits_investigation/
-[2]: /bits_ai/bits_investigation/configure/#configure-permissions
+[2]: /account_management/rbac/permissions/#bits-ai
 [3]: /source_code/
 [4]: https://app.datadoghq.com/error-tracking
 [5]: /bits_ai/bits_investigation/investigate_issues/#how-bits-investigates
