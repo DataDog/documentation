@@ -11,3 +11,12 @@ entries:
     operations:
       - CreateTeamMembership
     title: Add team hierarchy members endpoint
+  - change_type: modified
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40817
+    operations:
+      - CreateTeamConnections
+      - GetTeamSync
+      - ListTeamConnections
+      - SyncTeams
+    title: Add ServiceNow to Teams sync and team connections

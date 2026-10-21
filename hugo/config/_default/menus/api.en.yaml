@@ -23795,9 +23795,9 @@ menu:
         unstable:
           - v2
         order: 27
-    - name: Link Teams with GitHub Teams
-      url: /api/latest/teams/link-teams-with-github-teams/
-      identifier: teams-link-teams-with-github-teams
+    - name: Link teams with external teams
+      url: /api/latest/teams/link-teams-with-external-teams/
+      identifier: teams-link-teams-with-external-teams
       parent: teams
       generated: true
       params:
