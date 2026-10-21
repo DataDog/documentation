@@ -3130,7 +3130,7 @@
     {
       "group": "teams",
       "suffix": "",
-      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
+      "description": "Link teams with external teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [

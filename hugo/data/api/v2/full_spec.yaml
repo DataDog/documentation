@@ -22124,7 +22124,10 @@ components:
       description: Reference to connected external team.
       properties:
         id:
-          description: The connected team ID as it is referenced throughout the Datadog ecosystem.
+          description: |-
+            The connected team ID as it is referenced throughout the Datadog ecosystem.
+            For GitHub teams, this is `@<organization>/<team-slug>`.
+            For ServiceNow groups, this is `<instance_name>/<sys_id>`.
           example: "@GitHubOrg/team-handle"
           type: string
         type:
@@ -22138,10 +22141,12 @@ components:
       description: External team resource type.
       enum:
         - github_team
+        - servicenow_team
       example: "github_team"
       type: string
       x-enum-varnames:
         - GITHUB_TEAM
+        - SERVICENOW_TEAM
     Connection:
       description: The definition of `Connection` object.
       properties:
@@ -132618,7 +132623,7 @@ components:
           example: "github_sync"
           type: string
         source:
-          description: The name of the external source.
+          description: The name of the external source, such as `github` or `servicenow`.
           example: "github"
           type: string
       type: object
@@ -133777,13 +133782,15 @@ components:
         $ref: "#/components/schemas/TeamSyncSelectionStateItem"
       type: array
     TeamSyncAttributesSource:
-      description: The external source platform for team synchronization. Only "github" is supported.
+      description: The external source platform for team synchronization.
       enum:
         - github
+        - servicenow
       example: github
       type: string
       x-enum-varnames:
         - GITHUB
+        - SERVICENOW
     TeamSyncAttributesSyncMembership:
       default: false
       description: Whether to sync members from the external team to the Datadog team. Defaults to `false` when not provided.
@@ -133859,8 +133866,10 @@ components:
     TeamSyncSelectionStateExternalIdType:
       description: |-
         The type of external identifier for the selection state item.
-        For GitHub synchronization, the allowed values are `team` and
-        `organization`.
+        For GitHub synchronization, `team` refers to a GitHub team and
+        `organization` refers to a GitHub organization. For ServiceNow
+        synchronization, `team` refers to a ServiceNow group and
+        `organization` refers to a ServiceNow instance.
       enum:
         - team
         - organization
@@ -133874,7 +133883,9 @@ components:
         The external identifier value from the source
         platform. For GitHub, this is the string
         representation of a GitHub organization ID or team
-        ID.
+        ID. For ServiceNow, this is the instance name for
+        `organization`, or `<instance_name>/<sys_id>` of the
+        group for `team`.
       example: "1"
       type: string
     TeamSyncSelectionStateItem:
@@ -249706,7 +249717,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/PageNumber"
-        - description: Filter team connections by external source systems.
+        - description: Filter team connections by external source systems, such as `github` or `servicenow`.
           explode: false
           in: query
           name: filter[sources]
@@ -249856,7 +249867,7 @@ paths:
     get:
       description: |-
         Get all team synchronization configurations.
-        Returns a list of configurations used for linking or provisioning teams with external sources like GitHub.
+        Returns a list of configurations used for linking or provisioning teams with external sources like GitHub or ServiceNow.
       operationId: GetTeamSync
       parameters:
         - description: Filter by the external source platform for team synchronization
@@ -249901,21 +249912,26 @@ paths:
           - teams_read
     post:
       description: |-
-        This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.
-        It evaluates all current Datadog teams and compares them against teams in the GitHub organization
-        connected to your Datadog account, based on Datadog Team handle and GitHub Team slug
-        (lowercased and kebab-cased).
+        This endpoint configures synchronization between your existing Datadog teams and teams from
+        GitHub or ServiceNow by matching team names.
+        It evaluates all current Datadog teams and compares them against teams in the external source
+        connected to your Datadog account.
 
-        This operation is read-only on the GitHub side, no teams will be modified or created.
+        This operation is read-only on the external source side, no teams will be modified or created there.
+        This only creates new teams in Datadog when type is set to `provision`.
 
         Optionally, provide `selection_state` to limit synchronization
         to specific teams or organizations and their subtrees, instead
         of syncing all teams.
 
-        [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
+        **GitHub**: [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
         and the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug
-        using a normalized exact match; case is ignored and spaces are removed. No modifications are made
-        to teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.
+        (lowercased and kebab-cased) using a normalized exact match; case is ignored and spaces are removed.
+
+        **ServiceNow**: [The ServiceNow integration must be configured for your Datadog account](https://docs.datadoghq.com/integrations/servicenow/).
+        Active assignment groups from every configured ServiceNow instance are synchronized, and the ServiceNow
+        group hierarchy is preserved. When `sync_membership` is enabled, group members are matched to Datadog
+        users by email address.
       operationId: SyncTeams
       requestBody:
         content:
@@ -249951,7 +249967,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - teams_manage
-      summary: Link Teams with GitHub Teams
+      summary: Link teams with external teams
       tags:
         - Teams
       x-codegen-request-body-name: body
