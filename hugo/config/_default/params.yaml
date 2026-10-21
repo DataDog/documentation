@@ -379,6 +379,7 @@ unsupported_sites:
   jetbrains-ides: [gov,gov2]
   jira-service-management-ops: [gov,gov2]
   jira_error_tracking: [gov,gov2]
+  journey_monitoring: [gov,gov2]
   launchdarkly: [gov,gov2]
   linear: [gov,gov2]
   linear_error_tracking: [gov,gov2]
