@@ -20,6 +20,7 @@ You can launch a Bits investigation from several entry points:
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
 - [Synthetic test details page](#from-the-synthetic-test-details-page)
 - [Real User Monitoring](#real-user-monitoring)
+- [Error Tracking](#error-tracking)
 - [General prompt](#general-prompt)
 
 ### Monitor alerts {#manual-monitor-alerts}
@@ -64,6 +65,14 @@ You can launch a Bits investigation from several places in Real User Monitoring 
 - Recommendation cards on the RUM **Optimization** page and in Operations Monitoring. For details, see [Optimize Performance with Bits AI][19].
 - The **Anomaly · Investigate** button on a RUM vital chart. For details, see [Investigate Regressions and Alerts with Bits AI][20].
 - RUM monitors, which support the same monitor-based entry points as other supported monitor types, including [automatic investigations](#enable-automatic-investigations). For details, see [Investigate Regressions and Alerts with Bits][20].
+
+### Error Tracking
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Bits Investigation in Error Tracking is in Preview.
+{{< /callout >}}
+
+From an Error Tracking issue, click {{< ui >}}Investigate this issue{{< /ui >}} on the {{< ui >}}Review{{< /ui >}} tab of the issue panel. Bits analyzes the error, its stack trace, and related telemetry, as well as your source code if [Source Code Integration][17] is set up. It then summarizes the root cause and impact in the issue panel. For details, see [Bits Investigation in Error Tracking][21].
 
 ### General prompt
 
@@ -179,6 +188,7 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /real_user_monitoring/bits_ai/optimize_performance/
 [20]: /real_user_monitoring/bits_ai/investigate_regressions/
+[21]: /error_tracking/bits_investigation/
 
 ## Further reading
 
