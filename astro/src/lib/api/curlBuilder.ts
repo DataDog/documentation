@@ -176,20 +176,17 @@ function formFieldFlag(field: CurlFormField): string {
 }
 
 /**
- * Export each path parameter that has no example, and each required query
- * parameter, as Hugo does, so the `${name}` references in the URL are set.
- * A required query parameter exports its example, or `"CHANGE_ME"`.
+ * Export each path parameter and each required query parameter, as Hugo
+ * does, so the `${name}` references in the URL are set. Each exports its
+ * example, or `"CHANGE_ME"`.
  */
 function buildParameterExportLines(
   pathParams: CurlParam[] = [],
   queryParams: CurlParam[] = [],
 ): string[] {
   const lines: string[] = [];
-  const unsetPathParams = pathParams.filter(
-    (param) => param.example === undefined,
-  );
-  if (unsetPathParams.length > 0) {
-    lines.push("# Path parameters", ...unsetPathParams.map(exportParam));
+  if (pathParams.length > 0) {
+    lines.push("# Path parameters", ...pathParams.map(exportParam));
   }
   const requiredQueryParams = queryParams.filter((param) => param.required);
   if (requiredQueryParams.length > 0) {
@@ -224,17 +221,15 @@ function explodedItemNames(param: CurlParam): string[] {
 }
 
 /**
- * Replace `{param_name}` placeholders in the path with example values or
- * `${param_name}` shell variables.
+ * Replace `{param_name}` placeholders in the path with `${param_name}` shell
+ * variables, as Hugo does. The values are exported above the command.
  */
 function interpolatePath(path: string, pathParams?: CurlParam[]): string {
   if (!pathParams || pathParams.length === 0) return path;
 
   let result = path;
   for (const param of pathParams) {
-    const placeholder = `{${param.name}}`;
-    const value = param.example ?? `\${${param.name}}`;
-    result = result.replace(placeholder, value);
+    result = result.replace(`{${param.name}}`, `\${${param.name}}`);
   }
   return result;
 }

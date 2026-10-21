@@ -67,15 +67,19 @@ describe("buildCurlCommand", () => {
     expect(result).toContain("EOF");
   });
 
-  it("interpolates path parameters with example values", () => {
+  /** As Hugo does: the example is exported, and the URL references it by name. */
+  it("exports a path parameter's example", () => {
     const result = buildCurlCommand({
       method: "GET",
       path: "/api/v1/dashboard/{dashboard_id}",
       pathParams: [{ name: "dashboard_id", example: "abc-123" }],
     });
 
-    expect(result).toContain("/api/v1/dashboard/abc-123");
-    expect(result).not.toContain("{dashboard_id}");
+    expect(result).toContain(
+      '# Path parameters\nexport dashboard_id="abc-123"',
+    );
+    expect(result).toContain("/api/v1/dashboard/${dashboard_id}");
+    expect(result).not.toContain("/api/v1/dashboard/abc-123");
   });
 
   it("exports a path parameter that has no example", () => {
@@ -104,14 +108,21 @@ describe("buildCurlCommand", () => {
     expect(result).toContain("?start_hr=${start_hr}");
   });
 
-  it("exports nothing for a path parameter that has an example", () => {
+  it("exports every path parameter, with or without an example", () => {
     const result = buildCurlCommand({
       method: "GET",
-      path: "/api/v1/dashboard/{dashboard_id}",
-      pathParams: [{ name: "dashboard_id", example: "abc-123" }],
+      path: "/api/v2/org/{org_id}/user/{user_id}",
+      pathParams: [{ name: "org_id", example: "abc123" }, { name: "user_id" }],
     });
 
-    expect(result).not.toContain("# Path parameters");
+    expect(result).toContain(
+      [
+        "# Path parameters",
+        'export org_id="abc123"',
+        'export user_id="CHANGE_ME"',
+      ].join("\n"),
+    );
+    expect(result).toContain("/api/v2/org/${org_id}/user/${user_id}");
   });
 
   /** As Hugo does: the example is exported, and the URL references it by name. */
