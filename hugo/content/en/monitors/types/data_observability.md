@@ -101,6 +101,33 @@ In addition to your own tags, Datadog computes attributes for your data assets t
 
 `lineage_score` is bucketed into the discrete tiers listed above rather than taking a continuous value, so filter on one of those exact values. Match a single tier, or combine tiers with `OR`. For example, `lineage_score:1.00` returns your most depended-on assets, and `lineage_score:(0.90 OR 1.00)` returns the top two tiers.
 
+**Filter by freshness or row count:**
+
+<div class="alert alert-info">Filtering on freshness and row count is in Preview. Contact your Datadog representative to request access.</div>
+
+When you monitor tables, you can also filter on each table's latest freshness and row count. For example, monitor only the tables in a schema that were updated in the last two weeks, or only tables with more than a million rows.
+
+| Filter | Example | Description |
+|---|---|---|
+| `freshness_days` | `freshness_days:<14` | Days since the table was last modified. |
+| `freshness_hours` | `freshness_hours:<=6` | Hours since the table was last modified. |
+| `freshness_minutes` | `freshness_minutes:<90` | Minutes since the table was last modified. |
+| `row_count` | `row_count:>1000000` | The table's most recently reported row count. |
+
+These filters work as follows:
+
+- They apply to tables only.
+- Use whole numbers with `<`, `<=`, `>`, or `>=`, or an inclusive range such as `row_count:[100 TO 1000]`. `row_count` also accepts an exact value, such as `row_count:0`. The freshness filters do not.
+- To set two bounds on the same filter, use a range or join the bounds with `AND`, for example `freshness_days:>=1 AND freshness_days:<7`.
+- Values are read as of each table's latest crawl. A table with no value reported in the last 48 hours matches only a negated filter such as `-freshness_days:*`. To keep those tables in scope, write `(freshness_days:<14 OR -freshness_days:*)`.
+- For Snowflake and BigQuery tables, Datadog reads these values for every table it crawls. On other platforms, a table has a value only when a Freshness or Row Count monitor collects it.
+- These filters choose which tables a monitor covers. They are separate from the Freshness and Row Count metric types, which set what the monitor measures.
+- If the rest of the scope matches too many tables, the monitor cannot evaluate it. Narrow the scope with filters such as `schema` or `database`.
+
+Because these values change, the tables a monitor covers change with them, about an hour behind the data. When a table leaves the scope, it behaves like any group that stops reporting: the monitor sends a no-data alert if those are enabled, and otherwise the group stops alerting and later drops off the monitor. Graphs of past time windows show the tables that are in scope now.
+
+Avoid filtering on the metric the monitor measures. For example, a Freshness monitor scoped with `freshness_days:<7` stops covering a table as soon as the table is seven days stale, which is when you want the alert. On platforms other than Snowflake and BigQuery, the table's value may then stop being collected, so the table does not come back into scope.
+
 Combine any of these filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
 
 **Examples:**
@@ -112,6 +139,7 @@ Combine any of these filters with `AND` or `OR`, use parentheses to group condit
 | Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
 | Tables owned by a specific team | `owner:data-platform-team` |
 | The most depended-on tables in a database | `database:ANALYTICS_DB AND lineage_score:1.00` |
+| Tables in the PROD schema updated in the last two weeks | `schema:PROD AND freshness_days:<14` |
 
 **Filter by lineage relationship:**
 
