@@ -203,6 +203,12 @@ Flaky Tests Management uses AI to automatically assign a root cause category to 
 | {{< ui >}}Environment Dependency{{< /ui >}} | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
 | {{< ui >}}Unknown{{< /ui >}}             | Test is flaky for an unknown reason. |
 
+## How code owners are assigned
+
+Flaky Test Management assigns code owners to each flaky test based on your CODEOWNERS file, as reported by your test runs. When a flaky test runs on the default branch, its code owners are updated to match that run. After you change your CODEOWNERS file, the code owners of a flaky test update the next time the test runs on the default branch.
+
+If a flaky test has not run on the default branch, it keeps the code owners from the runs where it flaked.
+
 ## Receive notifications
 
 Set up notifications to track changes to your flaky tests. Notifications are sent when:
@@ -210,7 +216,7 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 - A user or policy changes the state of a flaky test.
 - The remediation flow for a flaky test succeeds or fails.
 
-You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [{{< ui >}}Flaky Test Policies{{< /ui >}}][13] side panel in CI/CD Optimization settings.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [{{< ui >}}Flaky Test Policies{{< /ui >}}][13] side panel in CI/CD Optimization settings. For how Datadog determines the code owners of a flaky test, see [How code owners are assigned](#how-code-owners-are-assigned).
 
 Notifications are bundled over a short period to reduce noise. The weekly digest summary is only sent to notification rules that have code owners configured.
 
@@ -243,6 +249,13 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 | [Swift][12]     | 2.6.1+                        | 2.6.1+                       |
 
 ## Troubleshooting
+
+### Code owners on a flaky test are out of date
+
+The code owners of a flaky test update when the test runs on the default branch. If a flaky test still shows old code owners after you change your CODEOWNERS file, check the following:
+
+- **The test has not run on the default branch since the change.** Run your test suite on the default branch.
+- **Your test runs do not report code owners.** Make sure the CODEOWNERS file is in a location that your Datadog test library or `datadog-ci` can find.
 
 ### Disabled flaky tests are not automatically moved to Fixed
 
