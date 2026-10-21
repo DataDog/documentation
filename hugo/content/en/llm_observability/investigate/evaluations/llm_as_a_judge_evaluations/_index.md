@@ -542,9 +542,9 @@ You can:
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
-## Using in experiments
+## Using in offline experiments
 
-To reuse a custom LLM-as-a-judge evaluator in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+To reuse a custom LLM-as-a-judge evaluator in a local [offline experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, RemoteEvaluator
@@ -602,7 +602,7 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/investigate/evaluations/compatibility
 [7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations/
-[8]: /llm_observability/improve/experiments
+[8]: /llm_observability/improve/offline_experiments
 [9]: /llm_observability/investigate/evaluations/evaluation_developer_guide/#using-managed-evaluators
 [10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [11]: /api/latest/agent-observability/#get-a-custom-evaluator-configuration

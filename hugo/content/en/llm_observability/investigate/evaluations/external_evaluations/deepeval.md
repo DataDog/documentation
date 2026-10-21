@@ -3,7 +3,7 @@ title: DeepEval Evaluations
 aliases:
 - /llm_observability/evaluations/deepeval_evaluations/
 - /llm_observability/configure/evaluations/external_evaluations/deepeval/
-description: Use DeepEval evaluators with Agent Observability Experiments.
+description: Use DeepEval evaluators with Agent Observability Offline Experiments.
 further_reading:
 - link: "/llm_observability/investigate/evaluations/external_evaluations"
   tag: "Documentation"
@@ -17,14 +17,14 @@ further_reading:
 
 DeepEval is an open source framework that provides ready-to-use LLM metrics and allows for customizable LLM evaluations. For more information, see [DeepEval's documentation][3].
 
-You can use Agent Observability to run DeepEval evaluators in [Experiments][1]. DeepEval evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5].
+You can use Agent Observability to run DeepEval evaluators in [Offline Experiments][1]. DeepEval evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5].
 
 ## Setup
 
-1. Set up an [Agent Observability Experiment][2] and an [Agent Observability Dataset][4].
+1. Set up an [Agent Observability offline experiment][2] and an [Agent Observability Dataset][4].
 2. Provide a DeepEval evaluator to the `evaluators` parameter in an LLMObs `Experiment` as demonstrated in the following code sample. For a working example, see [Datadog's DeepEval demo in GitHub][6].
 
-```python 
+```python
 
 from deepeval.metrics import GEval
 from deepeval.test_case import LLMTestCaseParams
@@ -85,7 +85,7 @@ def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
 
 experiment = LLMObs.experiment(
     name="<EXPERIMENT_NAME>",
-    task=my_task, 
+    task=my_task,
     dataset=dataset,
     evaluators=[deepeval_evaluator],
     summary_evaluators=[num_exact_matches], # optional
@@ -102,15 +102,15 @@ print(f"View experiment: {experiment.url}")
 ### Usage
 After you run an experiment with a DeepEval evaluator, you can view the DeepEval evaluation results per instance in the corresponding experiment run in Datadog. In the experiment below, a DeepEval evaluator with the name "Correctness" was run:
 
-{{< img src="llm_observability/deepeval-experiment-result.png" alt="An Agent Observability experiment with a DeepEval evaluator." style="width:100%;" >}}
+{{< img src="llm_observability/deepeval-experiment-result.png" alt="An Agent Observability offline experiment with a DeepEval evaluator." style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/improve/experiments
-[2]: /llm_observability/guide/experiments#create-an-experiment
+[1]: /llm_observability/improve/offline_experiments
+[2]: /llm_observability/guide/offline_experiments#create-an-experiment
 [3]: https://deepeval.com/docs/metrics-introduction
-[4]: /llm_observability/guide/experiments#create-a-dataset
+[4]: /llm_observability/guide/offline_experiments#create-a-dataset
 [5]: /llm_observability/improve/datasets
 [6]: https://github.com/DataDog/llm-observability/blob/main/experiments/eval-integrations/1-deepeval-demo.py
