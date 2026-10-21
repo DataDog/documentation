@@ -148,17 +148,6 @@ If expected evaluations don't appear in AI Guard, check these causes in order:
 
 To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.
 
-### Troubleshooting: AI Guard spans are empty
-
-If AI Guard spans appear but don't show evaluated messages, set `DD_TRACE_API_VERSION=v0.4` in your application environment. The Datadog SDK sends AI Guard span content only with trace API version `v0.4`.
-
-<!-- TODO: Do Node.js, Java, and Ruby need `DD_TRACE_API_VERSION=v0.4` for AI Guard spans to show their content, or do they use v0.4 automatically?
-- Why it matters: AI Guard stores the evaluated messages in the span's `meta_struct` field. Only trace API version v0.4 carries `meta_struct`, so with v0.5, AI Guard spans arrive without their messages.
-- Source: An internal AI Guard troubleshooting page (February 2026) lists "API version is not v0.4" as a cause of missing span content, with the fix `DD_TRACE_API_VERSION=v0.4`.
-- Python: `dd-trace-py` switches its default to v0.4 when AI Guard is enabled, so this matters only if someone sets v0.5.
-- Node.js, Java, and Ruby: not checked. If they all use v0.4 automatically, this troubleshooting section can say so, or be removed.
--->
-
 [1]: /security/ai_guard/policies/
 [2]: /account_management/api-app-keys/
 [3]: /account_management/api-app-keys/#scopes

@@ -75,8 +75,6 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    Run the application with the Datadog Java agent (`-javaagent`). Without the agent, the evaluate method returns `ALLOW` without calling AI Guard.
    {% /if %}
 
-   <!-- TODO: Must Python applications start with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog? Does the answer differ between the SDK and the Amazon Strands integration? The Python `evaluate` call works without it, but span delivery wasn't checked. If it's required, the docs will add it as a setup step. -->
-
 1. At each point you want AI Guard to check, call the SDK's evaluate method with the conversation so far. Evaluate user prompts before each model call, and evaluate tool calls before the agent runs the tool. Include the system prompt, so AI Guard can judge each request in context.
 
    <!-- Python -->
@@ -231,8 +229,6 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    ```
 
    With `dd-trace-rb` versions earlier than 2.44.0, pass the tool call as keywords instead: `Datadog::AIGuard.assistant(tool_name: "shell", id: "call_1", arguments: '{"command": "shutdown"}')`.
-
-   <!-- TODO: Does the block-form tool-call example run on `dd-trace-rb` 2.44.0 and later? Does the keyword form still work on 2.25.0 through 2.43.x? Version 2.44.0 changed the method signature to `assistant(content: nil, &block)`, so the earlier keyword form raises an error there. The block usage was inferred from source and not run. -->
 
    To evaluate images, build the message content with a block:
 

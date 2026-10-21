@@ -48,8 +48,6 @@ The LiteLLM Proxy integration evaluates traffic in each mode that you set in the
 | `during_call` | The request messages, in parallel with the model call. | The proxy rejects the request. |
 | `post_call` | The model's response, together with the request messages from a `pre_call` or `during_call` evaluation. | The proxy rejects the response. |
 
-<!-- TODO: When the guardrail blocks a request, what HTTP status and body does the client receive? Is it the same as what the SDK reports? In `dd-trace-py`, the guardrail raises an exception with status 403 and the message "Datadog AI Guard: request blocked '<reason>'", but the client might instead receive a 200 with an error in the response body. -->
-
 ### Limitations
 
 Some activity through manual integrations isn't evaluated or can't be blocked, so review these limits before you rely on a manual integration alone:
@@ -90,8 +88,6 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
    - `detailed_error=True`: Add the AI Guard reason to the blocked message. Default: `False`.
    - `raise_error_on_tool_calls=True`: Raise `AIGuardAbortError` for blocked tool calls, instead of canceling the tool call or replacing the tool result. Default: `False`.
-
-<!-- TODO: Must Python applications start with `ddtrace-run` or `import ddtrace.auto` for AI Guard spans to reach Datadog? Does the answer differ between the SDK and the Amazon Strands integration? The Python `evaluate` call works without it, but span delivery wasn't checked. If it's required, the docs will add it as a setup step. -->
 
 **What's next?** [Create a retention filter for AI Guard spans][5], optionally [limit access to AI Guard spans][6], then [verify the setup][7].
 

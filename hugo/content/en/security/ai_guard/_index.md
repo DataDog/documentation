@@ -166,10 +166,9 @@ When your organization exceeds a limit, AI Guard stops evaluating requests, and 
 - Automatic and manual integrations let the LLM call or tool call proceed without an evaluation.
 - SDK calls raise an `AIGuardClientError`. Catch this error to decide whether your agent proceeds or stops.
 
-<!-- TODO: Over the rate limit, integrations let calls proceed without evaluation, but SDK calls raise `AIGuardClientError`, so the customer's code decides. Is that intended, and do all four SDKs behave this way?
+<!-- TODO: Over the rate limit, integrations let calls proceed without evaluation, but SDK calls raise `AIGuardClientError`, so the customer's code decides. Is that intended?
 - Integrations: The October 19 product review confirmed AI Guard fails safe, letting calls proceed without evaluation. In the `dd-trace-py` source, the Python automatic integrations catch the error, log it, and let the LLM call go ahead.
-- SDK: In the `dd-trace-py` SDK client, any non-200 response, including a 429, raises `AIGuardClientError`. The Node.js, Java, and Ruby SDKs weren't checked, but the draft states this behavior for all of them.
-- If SDK calls should also proceed without evaluation, the docs, and possibly the SDKs, need to change.
+- SDK: In the source code of all four SDKs, an error response, including a 429, raises `AIGuardClientError`.
 -->
 
 <!-- TODO: How does a customer limit AI Guard to tool calls, or a subset of tool calls, to reduce cost? Is it a policy setting, an integration setting, or only possible with the SDK? -->

@@ -23,17 +23,11 @@ Automatic integrations work only with specific packages and versions. Check the 
 | Node.js | AI SDK | v6. | `dd-trace-js` 5.96.0 or later. |
 | Node.js | OpenAI | 4.87.0 or later. | `dd-trace-js` 5.105.0 or later. |
 | Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later in the v5 release line, or 6.11.0 or later. |
-| Ruby | RubyLLM | 2.0.0 or later. With `dd-trace-rb` 2.28.0 through 2.43.x, 1.0.0 or later. | `dd-trace-rb` 2.28.0 or later. |
+| Ruby | RubyLLM | 2.0.0 or later. | `dd-trace-rb` 2.44.0 or later. |
 
 <!-- TODO: Does it make sense that every package has a different supported Datadog SDK version? Is it possible to align them, for example on one minimum per language? The SDK and manual integrations require `dd-trace-py` 4.13.0 or later, but the automatic integrations table lists lower Python versions: LangChain at 3.19.0 (3.14.0 on the published page), OpenAI at 4.10.0, and Anthropic at 4.11.0. -->
 
-<!-- TODO: Which RubyLLM versions should the docs list? Should they keep the older range for `dd-trace-rb` 2.28.0 through 2.43.x, or list only RubyLLM 2.0.0 or later?
-- `dd-trace-rb` 2.28.0 added the RubyLLM integration, according to its release notes. The published docs pair it with RubyLLM 1.0.0 or later.
-- The `dd-trace-rb` 2.44.0 release notes (October 7, 2026) say: "Require `ruby_llm` 2.0 or later for the `RubyLLM` integration." Current `dd-trace-rb` source sets the minimum to 2.0.0.
-- The draft lists both: RubyLLM 2.0.0 or later, and RubyLLM 1.0.0 or later with `dd-trace-rb` 2.28.0 through 2.43.x.
--->
-
-<!-- TODO: Is AI SDK v7 supported? If so, the AI SDK row can say "v6 or later." The `dd-trace-js` model-call hook has no upper version bound, but other AI SDK hooks stop before 7.0.0. -->
+<!-- TODO: Is AI SDK v7 supported, and from which `dd-trace-js` version? If so, the AI SDK row can say "v6 or later." AI SDK v7 is the default npm version since June 2026, and `dd-trace-js` main has v7-specific instrumentation. -->
 
 Automatic integrations don't support Java. For Java agents, use the [SDK][1]. For Amazon Strands and LiteLLM Proxy, use [manual integrations][2].
 
@@ -58,8 +52,6 @@ Each automatic integration evaluates a specific set of operations, so check the 
 A streamed response arrives in pieces while the model generates it, instead of all at once. By default, AI Guard doesn't evaluate streamed model responses, so if your agent streams responses, the model's output reaches the user without an evaluation.
 
 To enable evaluation of streamed responses, set `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`. The Datadog SDK then buffers each streamed response until AI Guard returns a result, and buffering delays the first token.
-
-<!-- TODO: With `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`, does the SDK hold the whole stream until evaluation finishes, so a blocked response never reaches the client? The page says the SDK buffers each streamed response until AI Guard returns a result. If any part of the stream reaches the client earlier, blocking can't fully stop an unsafe response. -->
 
 Streamed response evaluation is supported for these packages at the specified Datadog SDK versions:
 
