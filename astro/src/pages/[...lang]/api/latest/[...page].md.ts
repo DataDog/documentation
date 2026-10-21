@@ -24,7 +24,11 @@ function withScopesTables(
 ): MarkdocNode[] {
   return nodes.flatMap((node) =>
     node.type === "tag" && node.tag === "api-scopes"
-      ? apiScopesTableNodes(getScopeGroupsView(), { lang, site })
+      ? apiScopesTableNodes(getScopeGroupsView(), {
+          lang,
+          site,
+          headingLevel: node.attributes.headingLevel,
+        })
       : [node],
   );
 }
