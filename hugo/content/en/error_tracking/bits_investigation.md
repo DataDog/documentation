@@ -59,7 +59,7 @@ From the investigation page, you can:
 - Ask follow-up questions about the investigation in Bits Chat. For details, see [Chat with Bits Investigation][6].
 - Review the suggested next steps.
 
-## Fix the issue with Bits Code
+## Generate a code fix
 
 When a suggested next step is a code change, Bits Investigation can hand off the fix to [Bits Code][7]. Bits Code uses the findings of the investigation to generate a code change and open a pull or merge request in your repository. You can review the change, ask for updates, and merge it when it is ready. Bits Code never merges changes automatically.
 
