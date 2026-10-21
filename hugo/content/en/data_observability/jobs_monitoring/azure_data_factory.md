@@ -30,7 +30,10 @@ Before you begin, make sure you have:
 - Permission to create role assignments on the subscription or on individual data factories.
 
 {{% site-region region="us3" %}}
-**Note**: If you use Datadog's **US3** site and set up the [Azure native integration][5] through a Datadog resource in the Azure portal, [create an App Registration][6] to enable Jobs Monitoring for Azure Data Factory.
+**Note**: If you use the US3 site and set up the [Azure native integration][1] through a Datadog resource in the Azure portal, you must also [set up the Azure integration with an App Registration][2] to use Jobs Monitoring for Azure Data Factory.
+
+[1]: /integrations/guide/azure-native-integration/
+[2]: /integrations/azure/?tab=azurecliv20#setup
 {{% /site-region %}}
 
 ## Add required Azure permissions
@@ -195,5 +198,3 @@ Not every activity carries the information Datadog needs to resolve the datasets
 [2]: /integrations/azure/
 [3]: https://app.datadoghq.com/data-obs/settings/integrations
 [4]: /data_observability/lineage/
-[5]: /integrations/guide/azure-native-integration/
-[6]: /integrations/azure/?tab=azurecliv20#setup
