@@ -49,3 +49,13 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Add missing Amazon OpenSearch destination fields
+  - change_type: modified
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40882
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add spike protection processor to Observability Pipelines
