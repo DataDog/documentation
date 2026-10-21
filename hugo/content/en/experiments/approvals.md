@@ -17,7 +17,7 @@ further_reading:
 
 Experiment approvals let teams review experiment starts, traffic increases, winner rollouts, and cancellations before they affect traffic. Experiments that use Datadog Feature Flags follow the approval requirements on their flag and environment.
 
-**Submitting or approving a request does not change traffic.** Applying the request performs the action with the reviewed settings.
+**Submitting a request or approving it without applying does not change traffic.** Applying the request performs the action with the reviewed settings.
 
 ## Set up approvals
 
@@ -48,7 +48,7 @@ Configure flag approvals before linking an experiment, because a linked experime
 
 Requesters cannot approve their own requests unless they have **Feature Flag Approvals Override**. With that permission, select **Override & Apply** to proceed without another reviewer's approval. Override does not bypass resource access, unsupported configurations, or conflicts.
 
-To change a submitted proposal, use **Discard** or **Delete suggestion**, then submit a new request. This removes the proposal, not the experiment. Pending and approved requests block conflicting changes until applied or discarded; pending requests can also be rejected. Applied requests cannot be discarded.
+To change a submitted proposal, use **Discard** or **Delete suggestion**, then submit a new request. This removes the proposal, not the experiment. Pending and approved requests block conflicting changes until applied or discarded; pending requests can also be rejected. Applied requests cannot be discarded. Further changes to a running experiment's traffic still require approval.
 
 ## Permissions
 
@@ -74,7 +74,7 @@ The following requirements are additional to that baseline. Configure flag acces
 
 `feature_flag_approvals_override` also allows approval or rejection without flag Editor access. It does not replace the baseline permissions or the permissions needed to apply an experiment change.
 
-### Allow submission without approval
+### Allow submission but not approval
 
 Grant the baseline permissions, `product_analytics_experiments_write`, experiment **Editor** access, and **Contributor** access on a restricted flag. Do not grant flag **Editor** access or `feature_flag_approvals_override` through any role, team, or direct assignment.
 
