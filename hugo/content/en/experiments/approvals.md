@@ -15,15 +15,17 @@ further_reading:
 
 ## Overview
 
-Experiment approvals let teams review experiment starts, traffic increases, winner rollouts, and cancellations before they affect traffic. Experiments that use Datadog Feature Flags follow the approval requirements on their flag and environment.
+Use experiment approvals to require review before starting an experiment, increasing traffic, rolling out a winner, or canceling. Experiments that use Datadog Feature Flags follow the approval requirements on their flag and environment. The UI also calls an approval request a *suggestion*.
 
 **Submitting a request or approving it without applying does not change traffic.** Applying the request performs the action with the reviewed settings.
 
-## Set up approvals
+## Prerequisites
 
-[Require approvals][1] on the feature flag for production environments, or on the experiment's environment. Either setting requires approval; disabling one does not override the other.
+- Use a standard A/B experiment with **Datadog Feature Flags**. For setup, see [Plan and Launch Experiments][4].
+- [Require approvals][1] on the flag for production environments, or on the experiment's environment. Either setting requires approval; disabling one does not override the other. Configure flag approvals before linking an experiment, because a linked experiment prevents changes to that setting.
+- Give requesters and reviewers the [permissions][5] for their actions. Notifications do not grant access.
 
-Configure flag approvals before linking an experiment, because a linked experiment prevents changes to that setting. Enabling flag approvals requires `feature_flag_config_write` and flag Contributor or Editor access; disabling them also requires `feature_flag_approvals_override`. Environment settings require `feature_flag_environment_config_write`.
+Enabling flag approvals requires `feature_flag_config_write` and flag Contributor or Editor access; disabling them also requires `feature_flag_approvals_override`. Environment settings require `feature_flag_environment_config_write`.
 
 ## Submit a request
 
@@ -33,26 +35,43 @@ Configure flag approvals before linking an experiment, because a linked experime
    |---|---|---|
    | Start | [Create a draft][4], configure it, and click **Preview Experiment Setup**. | Starts the experiment and its configured duration. |
    | Increase traffic | Edit traffic exposure in the targeting and randomization settings. | Increases exposure while preserving targeting and the relative variant split. |
-   | Roll out a winner | Open **Propose Decision for Approval** and choose the winning variant. | Ends the experiment and serves the winner to the reviewed targeting and exposure, not necessarily all traffic. |
-   | Cancel | Open **Propose Decision for Approval** and select **Cancel experiment due to a bug or configuration issue**. | Removes the experiment's targeting rule and marks it canceled. Other flag rules and the default variant determine subsequent evaluations. |
+   | Roll out a winner | Open **Propose Decision for Approval** and choose the winning variant. | Ends the experiment and serves the winning variant using the reviewed targeting rules and traffic exposure, not necessarily all traffic. |
+   | Cancel | Open **Propose Decision for Approval** and select **Cancel experiment due to a bug or configuration issue**. | Removes the experiment's targeting rule and marks it canceled. Other flag rules and the default variant determine which variant is served. |
 
-2. Review the proposed settings and their effect on the flag. For a start request, also check the duration, flag enablement, and any removal of a variant override.
-3. Describe the change, select at least one notification recipient, and submit the request for review.
+2. Review the proposed settings and their effect on the flag. For a start request, also check the duration and any changes to flag enablement or variant overrides. A variant override forces a single variant.
+3. Describe the change, select at least one notification recipient, and click **Submit for Review**.
+
+The request is pending. A start request leaves the experiment in draft; other requests leave the running experiment unchanged.
 
 ## Review and apply
 
 1. Open the request from its notification, experiment, or flag page.
 2. Review the requester, description, environment, and proposed changes.
 3. Select **Approve** to approve without applying, **Approve & Apply** to perform both actions, or **Reject** to reject the request.
-4. For a request approved without applying, an authorized user can select **Apply Changes**, or **Start Experiment** for a start request.
+4. To apply an approved request, select **Apply Changes** or, for a start request, **Start Experiment**.
 
-Requesters cannot approve their own requests unless they have **Feature Flag Approvals Override**. With that permission, select **Override & Apply** to proceed without another reviewer's approval. Override does not bypass resource access, unsupported configurations, or conflicts.
+Requesters cannot approve their own requests unless they have **Feature Flag Approvals Override**. With that permission, select **Override & Apply** to proceed without another reviewer's approval. Override still requires access to the experiment and flag and cannot apply unsupported or conflicting changes.
 
-To change a submitted proposal, use **Discard** or **Delete suggestion**, then submit a new request. This removes the proposal, not the experiment. Pending and approved requests block conflicting changes until applied or discarded; pending requests can also be rejected. Applied requests cannot be discarded. Further changes to a running experiment's traffic still require approval.
+After applying the request, check that the experiment's status and traffic settings match the reviewed settings. For a start request, the configured duration begins when you apply it.
+
+For example, consider an experiment using 20% of traffic that matches its targeting rules, split equally between two variants. Requesting an increase to 40% leaves exposure at 20%, even after **Approve**. Applying the approved request raises exposure to 40% and keeps the 50/50 variant split.
+
+### Request statuses
+
+| Status | Meaning | Traffic changed by this request? |
+|---|---|---|
+| Pending | Awaiting review. | No |
+| Approved | Approved but awaiting application. | No |
+| Applied | The reviewed action has taken effect. | Yes, as described in the action table above. |
+| Rejected | A reviewer declined the request. | No |
+| Withdrawn | The pending request was removed. | No |
+| Discarded | The approved request was removed before application. | No |
+
+To change a pending or approved proposal, use **Discard** or **Delete suggestion**, then submit a new request. This removes the proposal, not the experiment. Pending and approved requests block conflicting changes until applied or removed; pending requests can also be rejected. Applied requests cannot be discarded.
 
 ## Permissions
 
-[Organization permissions][2] and access to the individual experiment and flag both apply. Notifications do not grant access.
+Users need both [organization permissions][2] and access to the experiment and feature flag.
 
 The workflow requires these organization permissions and permission to view both resources:
 
@@ -61,7 +80,7 @@ The workflow requires these organization permissions and permission to view both
 - `feature_flag_environment_config_read`
 - `feature_flag_config_write`
 
-The following requirements are additional to that baseline. Configure flag access under [**Settings > Permissions**][3] and experiment access under **Experiment actions > Permissions**.
+Each action also requires the access listed below. Configure flag access under [**Settings > Permissions**][3] and experiment access under **Experiment actions > Permissions**.
 
 | Action | Additional organization permission | Experiment access | Feature flag access |
 |---|---|---|---|
@@ -80,11 +99,11 @@ Grant the baseline permissions, `product_analytics_experiments_write`, experimen
 
 This user can submit requests and apply approved requests, but cannot approve or reject them. An unrestricted flag does not enforce this separation.
 
-## Supported configurations
+## Limitations
 
-- Use standard A/B experiments with **Datadog Feature Flags**. Canary deployments, bandits, and externally managed randomization are outside this workflow.
+- Canary deployments, bandits, and externally managed randomization are outside this workflow.
 - Start requests require immediate starts and fixed traffic, without progressive or paused steps, automated guardrail actions, or APM retention actions.
-- Traffic increases and winner rollouts require active, fixed traffic, an enabled flag without a forced variant, and no automated guardrail or APM retention actions. Winner requests cannot have a scheduled traffic stop; a planned analysis duration is supported.
+- Traffic increases and winner rollouts require active, fixed traffic. The flag must be enabled without a forced variant, and the experiment cannot use automated guardrail or APM retention actions. Winner requests cannot have a scheduled traffic stop; a planned analysis duration is supported.
 - Traffic increases cannot change targeting or the relative variant split. Traffic decreases and arbitrary edits to running experiments are not supported.
 - Cancellation also supports progressive and paused traffic configurations.
 
@@ -104,3 +123,4 @@ Secondary metrics used to evaluate experiment health are supported; they are dis
 [2]: /account_management/rbac/
 [3]: /feature_flags/concepts/permissions/#granular-access-on-individual-flags
 [4]: /experiments/plan_and_launch_experiments/
+[5]: #permissions
