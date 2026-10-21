@@ -34,31 +34,127 @@ With the Capacity Planning page, you can answer questions such as:
 
 To use the Capacity Planning page, you must meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- You are running Datadog Agent version 7.84.1 or later. To upgrade, see [Upgrade the Agent with Fleet Automation][2].
-- Your GPU workloads run on Kubernetes.
-- You have enabled the [Kueue integration][3] in Datadog. For details, see the [Kueue integration documentation][4].
+- You are running Datadog Agent and Cluster Agent version 7.84.1 or later. To upgrade, see [Upgrade the Agent with Fleet Automation][2].
+- Your GPU workloads run on Kubernetes and are managed by Kueue.
 
 ## Setup
 
-Enable GPU Monitoring on the node Agents and Kueue metadata collection on the Cluster Agent to associate Kueue data with GPU telemetry. The corresponding Agent configuration settings are:
+The Capacity Planning page combines two sources of data:
 
-```yaml
-gpu:
-  enabled: true
+- **Kueue metrics**, such as GPU quota and usage for each ClusterQueue. The Kueue integration collects these metrics.
+- **GPU Monitoring metrics tagged with Kueue metadata**, such as the Kueue workload and resource flavor that each GPU is allocated to. The Cluster Agent collects this metadata.
 
-cluster_agent:
-  kueue:
-    enabled: true
-```
+Complete the following steps to collect both.
 
-The [GPU Monitoring setup instructions][1] enable `gpu.enabled` on the node Agents. To enable `cluster_agent.kueue.enabled`, set the `DD_CLUSTER_AGENT_KUEUE_ENABLED` environment variable to `"true"` on the Cluster Agent:
+### Collect Kueue metrics
 
-- **Datadog Operator**: Add the environment variable to `spec.override.clusterAgent.env` in the `DatadogAgent` resource.
-- **Helm**: Add the environment variable to `clusterAgent.env` in the `datadog-values.yaml` file.
+1. In the Kueue configuration, set `metrics.enableClusterQueueResources: true` and restart the Kueue controller manager. Kueue reports ClusterQueue quota and usage metrics, such as `kueue.cluster_queue.nominal_quota.gpu` and `kueue.cluster_queue.resource_usage.gpu`, only when this setting is enabled. The Capacity Planning graphs require these metrics.
+2. Install the [Kueue integration][3] and configure the Kueue check as a cluster check. For instructions, see the [Kueue integration documentation][4].
 
-Apply the updated configuration and restart the Cluster Agent.
+### Collect Kueue metadata in the Cluster Agent
 
-Kueue metadata collection enables GPU-related enrichment. Configure the [Kueue cluster check][6] separately to collect Kueue metrics.
+The Cluster Agent reads Kueue ClusterQueue, LocalQueue, ResourceFlavor, and Workload resources, and tags GPU metrics with the Kueue workload, queue, and resource flavor that each GPU is allocated to. To collect this metadata, grant the Cluster Agent read access to Kueue resources, then enable Kueue metadata collection.
+
+#### Grant the Cluster Agent access to Kueue resources
+
+1. Find the name of the Cluster Agent service account. The Cluster Agent deployment name ends in `-cluster-agent`:
+
+   ```shell
+   kubectl get deployments -n <DATADOG_NAMESPACE> -o custom-columns=NAME:.metadata.name,SERVICE_ACCOUNT:.spec.template.spec.serviceAccountName
+   ```
+
+2. Create a file named `datadog-cluster-agent-kueue-rbac.yaml` with the following content. Replace `<CLUSTER_AGENT_SERVICE_ACCOUNT>` with the service account name from the previous step, and `<DATADOG_NAMESPACE>` with the namespace where the Datadog Agent is installed.
+
+   ```yaml
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRole
+   metadata:
+     name: datadog-cluster-agent-kueue
+   rules:
+     - apiGroups:
+         - kueue.x-k8s.io
+       resources:
+         - clusterqueues
+         - localqueues
+         - resourceflavors
+         - workloads
+       verbs:
+         - list
+         - watch
+   ---
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRoleBinding
+   metadata:
+     name: datadog-cluster-agent-kueue
+   roleRef:
+     apiGroup: rbac.authorization.k8s.io
+     kind: ClusterRole
+     name: datadog-cluster-agent-kueue
+   subjects:
+     - kind: ServiceAccount
+       name: <CLUSTER_AGENT_SERVICE_ACCOUNT>
+       namespace: <DATADOG_NAMESPACE>
+   ```
+
+3. Apply the file:
+
+   ```shell
+   kubectl apply -f datadog-cluster-agent-kueue-rbac.yaml
+   ```
+
+#### Enable Kueue metadata collection
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+1. In your `DatadogAgent` resource, set the `DD_CLUSTER_AGENT_KUEUE_ENABLED` environment variable on the Cluster Agent:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     override:
+       clusterAgent:
+         env:
+           - name: DD_CLUSTER_AGENT_KUEUE_ENABLED
+             value: "true"
+   ```
+
+2. Apply your changes. The Datadog Operator redeploys the Cluster Agent with the new configuration.
+
+   ```shell
+   kubectl apply -n <DATADOG_NAMESPACE> -f datadog-agent.yaml
+   ```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+1. In your `datadog-values.yaml` file, set the `DD_CLUSTER_AGENT_KUEUE_ENABLED` environment variable on the Cluster Agent:
+
+   ```yaml
+   clusterAgent:
+     env:
+       - name: DD_CLUSTER_AGENT_KUEUE_ENABLED
+         value: "true"
+   ```
+
+2. Upgrade your Helm release. Helm redeploys the Cluster Agent with the new configuration.
+
+   ```shell
+   helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Verify the setup
+
+After Kueue-managed workloads start running on GPUs:
+
+- In the [Metrics Explorer][6], query `kueue.cluster_queue.nominal_quota.gpu`. If no data appears, check the Kueue check configuration and the `metrics.enableClusterQueueResources` setting.
+- In the Metrics Explorer, query `gpu.gr_engine_active` grouped by `kueue_workload`. If no `kueue_workload` values appear, check the Cluster Agent logs for permission errors on `kueue.x-k8s.io` resources.
 
 ## Explore the Capacity Planning page
 
@@ -101,4 +197,4 @@ Use the {{< ui >}}Workloads{{< /ui >}} tab to check the current state of a workl
 [3]: https://app.datadoghq.com/integrations?search=kueue
 [4]: /integrations/kueue/
 [5]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=capacity-planning
-[6]: /integrations/kueue/#configuration
+[6]: /metrics/explorer/
