@@ -14,3 +14,11 @@ entries:
       - ListQuotas
       - UpdateQuota
     title: Promote usage quota pending limits to public unstable
+  - change_type: modified
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40859
+    operations:
+      - GetHourlyUsageAttribution
+      - GetMonthlyUsageAttribution
+    title: Add deprecation notice for estimated usage types in Usage Metering 
+      API endpoints
