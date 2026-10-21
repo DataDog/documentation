@@ -150,6 +150,12 @@ Configure Bits Code's runtime environment, including network access policies and
 
 By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], and find the {{< ui >}}Internet Access{{< /ui >}} section. Choose from the following access policies: {{< ui >}}No Internet Access{{< /ui >}}, {{< ui >}}Default Allowlist{{< /ui >}}, {{< ui >}}Custom + Default Allowlist{{< /ui >}}, or {{< ui >}}Custom Allowlist{{< /ui >}}.
 
+Custom allowlists support leading wildcards for subdomains, subject to the following rules:
+
+- The wildcard must be the complete leftmost subdomain, followed by a dot. For example, `*.example.com` is allowed, but `*example.com` is not.
+- Wildcards in the middle of a domain, such as `foo.*.example.com`, are not allowed.
+- For security reasons, wildcards on top-level domains (TLDs), such as `*.com`, or public suffixes are not allowed. Public suffixes are domains under which any user can register subdomains.
+
 The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
 | Language | Domains |
