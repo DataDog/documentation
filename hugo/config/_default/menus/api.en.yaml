@@ -2049,6 +2049,54 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: Update a derived metric
+      url: /api/latest/metrics/update-a-derived-metric/
+      identifier: metrics-update-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDerivedMetric
+        unstable: []
+        order: 32
+    - name: Get a derived metric
+      url: /api/latest/metrics/get-a-derived-metric/
+      identifier: metrics-get-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDerivedMetric
+        unstable: []
+        order: 31
+    - name: Delete a derived metric
+      url: /api/latest/metrics/delete-a-derived-metric/
+      identifier: metrics-delete-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDerivedMetric
+        unstable: []
+        order: 33
+    - name: Create a derived metric
+      url: /api/latest/metrics/create-a-derived-metric/
+      identifier: metrics-create-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDerivedMetric
+        unstable: []
+        order: 30
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -4103,6 +4151,149 @@ menu:
           - ListSecurityMonitoringCriticalAssets
         unstable: []
         order: 52
+    - name: Start a batch migration
+      url: /api/latest/security-monitoring/start-a-batch-migration/
+      identifier: security-monitoring-start-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 187
+    - name: Update a batch migration resource
+      url: /api/latest/security-monitoring/update-a-batch-migration-resource/
+      identifier: security-monitoring-update-a-batch-migration-resource
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigrationResource
+        unstable:
+          - v2
+        order: 186
+    - name: Add resources to a batch migration
+      url: /api/latest/security-monitoring/add-resources-to-a-batch-migration/
+      identifier: security-monitoring-add-resources-to-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 184
+    - name: List batch migration resources
+      url: /api/latest/security-monitoring/list-batch-migration-resources/
+      identifier: security-monitoring-list-batch-migration-resources
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 183
+    - name: Delete resources from a batch migration
+      url: /api/latest/security-monitoring/delete-resources-from-a-batch-migration/
+      identifier: security-monitoring-delete-resources-from-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 185
+    - name: Publish a batch migration
+      url: /api/latest/security-monitoring/publish-a-batch-migration/
+      identifier: security-monitoring-publish-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 182
+    - name: Cancel a batch migration
+      url: /api/latest/security-monitoring/cancel-a-batch-migration/
+      identifier: security-monitoring-cancel-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 181
+    - name: Update a batch migration
+      url: /api/latest/security-monitoring/update-a-batch-migration/
+      identifier: security-monitoring-update-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 179
+    - name: Delete a batch migration
+      url: /api/latest/security-monitoring/delete-a-batch-migration/
+      identifier: security-monitoring-delete-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 180
+    - name: Create a batch migration
+      url: /api/latest/security-monitoring/create-a-batch-migration/
+      identifier: security-monitoring-create-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 178
+    - name: List batch migrations
+      url: /api/latest/security-monitoring/list-batch-migrations/
+      identifier: security-monitoring-list-batch-migrations
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrations
+        unstable:
+          - v2
+        order: 177
     - name: List vulnerable assets
       url: /api/latest/security-monitoring/list-vulnerable-assets/
       identifier: security-monitoring-list-vulnerable-assets
@@ -6450,6 +6641,19 @@ menu:
           - GetUsageSummaryAvailableFields
         unstable: []
         order: 13
+    - name: Cancel a scheduled usage quota limit
+      url: /api/latest/usage-metering/cancel-a-scheduled-usage-quota-limit/
+      identifier: usage-metering-cancel-a-scheduled-usage-quota-limit
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePendingQuota
+        unstable:
+          - v2
+        order: 18
     - name: Update a usage quota
       url: /api/latest/usage-metering/update-a-usage-quota/
       identifier: usage-metering-update-a-usage-quota
@@ -7843,11 +8047,27 @@ menu:
           - ListDatastores
         unstable: []
         order: 1
+    - name: Agent Health
+      url: /api/latest/agent-health/
+      identifier: agent-health
+      generated: true
+    - name: List active Agent Health issues
+      url: /api/latest/agent-health/list-active-agent-health-issues/
+      identifier: agent-health-list-active-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthHostIssues
+        unstable: []
+        order: 1
     - name: Agent Observability
       url: /api/latest/agent-observability/
       identifier: agent-observability
       generated: true
-    - name: List events for an Agent Observability experiment
+    - name: List events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/list-events-for-an-agent-observability-experiment/
       identifier: agent-observability-list-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -7873,7 +8093,7 @@ menu:
         unstable:
           - v2
         order: 48
-    - name: List Agent Observability experiment events (v2)
+    - name: List Agent Observability offline experiment events (v2)
       url: /api/latest/agent-observability/list-agent-observability-experiment-events-v2/
       identifier: agent-observability-list-agent-observability-experiment-events-v2
       parent: agent-observability
@@ -8471,7 +8691,7 @@ menu:
         unstable:
           - v2
         order: 36
-    - name: Push events for an Agent Observability experiment
+    - name: Push events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/push-events-for-an-agent-observability-experiment/
       identifier: agent-observability-push-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -8484,7 +8704,7 @@ menu:
         unstable:
           - v2
         order: 17
-    - name: List Agent Observability experiment spans (v1)
+    - name: List Agent Observability offline experiment spans (v1)
       url: /api/latest/agent-observability/list-agent-observability-experiment-spans-v1/
       identifier: agent-observability-list-agent-observability-experiment-spans-v1
       parent: agent-observability
@@ -8497,7 +8717,7 @@ menu:
         unstable:
           - v2
         order: 49
-    - name: Update an Agent Observability experiment
+    - name: Update an Agent Observability offline experiment
       url: /api/latest/agent-observability/update-an-agent-observability-experiment/
       identifier: agent-observability-update-an-agent-observability-experiment
       parent: agent-observability
@@ -8510,7 +8730,7 @@ menu:
         unstable:
           - v2
         order: 15
-    - name: Delete Agent Observability experiments
+    - name: Delete Agent Observability offline experiments
       url: /api/latest/agent-observability/delete-agent-observability-experiments/
       identifier: agent-observability-delete-agent-observability-experiments
       parent: agent-observability
@@ -8523,7 +8743,7 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Create an Agent Observability experiment
+    - name: Create an Agent Observability offline experiment
       url: /api/latest/agent-observability/create-an-agent-observability-experiment/
       identifier: agent-observability-create-an-agent-observability-experiment
       parent: agent-observability
@@ -8536,7 +8756,7 @@ menu:
         unstable:
           - v2
         order: 14
-    - name: List Agent Observability experiments
+    - name: List Agent Observability offline experiments
       url: /api/latest/agent-observability/list-agent-observability-experiments/
       identifier: agent-observability-list-agent-observability-experiments
       parent: agent-observability
@@ -8549,7 +8769,7 @@ menu:
         unstable:
           - v2
         order: 13
-    - name: Simple search experimentation entities
+    - name: Simple search offline experiment entities
       url: /api/latest/agent-observability/simple-search-experimentation-entities/
       identifier: agent-observability-simple-search-experimentation-entities
       parent: agent-observability
@@ -8562,7 +8782,7 @@ menu:
         unstable:
           - v2
         order: 32
-    - name: Search Agent Observability experimentation
+    - name: Search Agent Observability offline experiments
       url: /api/latest/agent-observability/search-agent-observability-experimentation/
       identifier: agent-observability-search-agent-observability-experimentation
       parent: agent-observability
@@ -8575,7 +8795,7 @@ menu:
         unstable:
           - v2
         order: 31
-    - name: Aggregate Agent Observability experimentation
+    - name: Aggregate Agent Observability offline experiments
       url: /api/latest/agent-observability/aggregate-agent-observability-experimentation/
       identifier: agent-observability-aggregate-agent-observability-experimentation
       parent: agent-observability
@@ -14743,6 +14963,18 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Patch a saved filter
+      url: /api/latest/feature-flags/patch-a-saved-filter/
+      identifier: feature-flags-patch-a-saved-filter
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSavedFilterAttributes
+        unstable: []
+        order: 24
     - name: Get a saved filter
       url: /api/latest/feature-flags/get-a-saved-filter/
       identifier: feature-flags-get-a-saved-filter
@@ -17875,23 +18107,6 @@ menu:
           - ListDevices
         unstable: []
         order: 1
-    - name: Network Health Insights
-      url: /api/latest/network-health-insights/
-      identifier: network-health-insights
-      generated: true
-    - name: List network health insights
-      url: /api/latest/network-health-insights/list-network-health-insights/
-      identifier: network-health-insights-list-network-health-insights
-      parent: network-health-insights
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListNetworkHealthInsights
-        unstable:
-          - v2
-        order: 1
     - name: OAuth2 Client Public
       url: /api/latest/oauth2-client-public/
       identifier: oauth2-client-public
@@ -20834,8 +21049,7 @@ menu:
           - v2
         operationids:
           - UpdateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: Get a RUM exclusion filter
       url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
@@ -20847,8 +21061,7 @@ menu:
           - v2
         operationids:
           - GetExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Delete a RUM exclusion filter
       url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
@@ -20860,8 +21073,7 @@ menu:
           - v2
         operationids:
           - DeleteExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Create a RUM exclusion filter
       url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
@@ -20873,8 +21085,7 @@ menu:
           - v2
         operationids:
           - CreateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Get all RUM exclusion filters
       url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
@@ -20886,8 +21097,7 @@ menu:
           - v2
         operationids:
           - ListExclusionFilters
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Create a RUM retention filter
       url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
@@ -23585,9 +23795,9 @@ menu:
         unstable:
           - v2
         order: 27
-    - name: Link Teams with GitHub Teams
-      url: /api/latest/teams/link-teams-with-github-teams/
-      identifier: teams-link-teams-with-github-teams
+    - name: Link teams with external teams
+      url: /api/latest/teams/link-teams-with-external-teams/
+      identifier: teams-link-teams-with-external-teams
       parent: teams
       generated: true
       params:

@@ -10,8 +10,6 @@ further_reading:
   text: "Learn about custom LLM-as-a-judge evaluators"
 ---
 
-## Connect your LLM provider account
-
 Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
 
 {{< tabs >}}

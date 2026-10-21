@@ -33,7 +33,8 @@ With the Capacity Planning page, you can answer questions such as:
 ## Prerequisites
 
 To use the Capacity Planning page, you must meet the following criteria:
-- You are running Datadog Agent version 7.84.1 or later with [GPU Monitoring enabled][1]. To upgrade, see [Upgrade the Agent with Fleet Automation][2].
+- You have [GPU Monitoring enabled][1].
+- You are running Datadog Agent version 7.84.1 or later. To upgrade, see [Upgrade the Agent with Fleet Automation][2].
 - Your GPU workloads run on Kubernetes.
 - You have enabled the [Kueue integration][3] in Datadog. For details, see the [Kueue integration documentation][4].
 

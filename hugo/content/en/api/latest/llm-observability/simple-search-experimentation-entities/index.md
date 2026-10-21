@@ -1,3 +1,3 @@
 ---
-title: Simple search experimentation entities
+title: Simple search offline experiment entities
 ---

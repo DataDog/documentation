@@ -1,7 +1,7 @@
 ---
-description: Configurez les points de terminaison AWS PrivateLink pour envoyer des
-  données de télémétrie à Datadog de manière sécurisée via des connexions VPC internes,
-  y compris pour les configurations inter-régions.
+description: Configurez les endpoints AWS PrivateLink pour envoyer des données de
+  télémétrie à Datadog de manière sécurisée via des connexions VPC internes, y compris
+  pour les configurations inter-régions.
 further_reading:
 - link: https://www.datadoghq.com/architecture/using-cross-region-aws-privatelink-to-send-telemetry-to-datadog/
   tag: Architecture Center
@@ -17,7 +17,7 @@ further_reading:
   tag: Architecture Center
   text: Connexion à Datadog via AWS PrivateLink
 - link: https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-transit-gateway/
-  tag: Centre d'architecture
+  tag: Architecture Center
   text: Connexion à Datadog via AWS PrivateLink en utilisant AWS Transit Gateway
 - link: https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-vpc-peering/
   tag: Architecture Center
@@ -36,20 +36,20 @@ title: Connexion à Datadog via AWS PrivateLink
 
 ## Présentation {#overview}
 
-Ce guide vous explique comment configurer [AWS PrivateLink][11] pour une utilisation avec Datadog. Le processus global consiste à configurer un point de terminaison interne dans votre VPC vers lequel les agents Datadog locaux peuvent envoyer des données. Votre point de terminaison VPC est ensuite appairé avec le point de terminaison au sein du VPC de Datadog.
+Ce guide vous explique comment configurer [AWS PrivateLink][11] pour une utilisation avec Datadog. Le processus global consiste à configurer un endpoint interne dans votre VPC vers lequel les Agents Datadog locaux peuvent envoyer des données. Votre endpoint VPC est ensuite appairé avec l'endpoint au sein du VPC de Datadog.
 
 {{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="Schéma du diagramme VPC" >}}
 
-Datadog expose des points de terminaison AWS PrivateLink dans **{{< region-param key="aws_region" >}}**.
-- Si vous devez acheminer le trafic Datadog dans la même région, suivez les étapes de [Connexion depuis la même région](#connect-from-the-same-region) pour configurer votre point de terminaison.
-- Pour acheminer le trafic vers l'offre PrivateLink de Datadog dans {{< region-param key="aws_region" >}} depuis d'autres régions, Datadog recommande les [points de terminaison PrivateLink inter-régions](?tab=crossregionprivatelinkendpoints#connect-from-other-regions). [Cross-region PrivateLink][11] vous permet d'établir des connexions entre des VPC dans différentes régions AWS. Cela permet aux ressources VPC situées dans différentes régions de communiquer entre elles à l'aide d'adresses IP privées. Alternativement, utilisez [l'appairage VPC](?tab=vpcpeering#connect-from-other-regions).
+Datadog expose les endpoints AWS PrivateLink dans **{{< region-param key="aws_region" >}}**.
+- Si vous devez acheminer le trafic Datadog dans la même région, suivez les étapes de [Connexion depuis la même région](#connect-from-the-same-region) pour configurer votre endpoint.
+- Pour acheminer le trafic vers l'offre PrivateLink de Datadog dans {{< region-param key="aws_region" >}} depuis d'autres régions, Datadog recommande les [endpoints PrivateLink inter-régions](?tab=crossregionprivatelinkendpoints#connect-from-other-regions). Le [PrivateLink interrégional][11] vous permet d'établir des connexions entre des VPC dans différentes régions AWS. Cela permet aux ressources VPC situées dans différentes régions de communiquer entre elles à l'aide d'adresses IP privées. Alternativement, utilisez l'[appairage VPC](?tab=vpcpeering#connect-from-other-regions).
 
 ## Connexion depuis la même région {#connect-from-the-same-region}
 
 1. Connectez la console de gestion AWS à la région de votre choix.
-1. Depuis le tableau de bord VPC, sous {{< ui >}}PrivateLink and Lattice{{< /ui >}}, sélectionnez {{< ui >}}Endpoints{{< /ui >}}.
+1. Depuis le dashboard VPC, sous {{< ui >}}PrivateLink and Lattice{{< /ui >}}, sélectionnez {{< ui >}}Endpoints{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Create Endpoint{{< /ui >}} :
-   {{< img src="agent/guide/private-link-vpc.png" alt="La page des points de terminaison sur le tableau de bord VPC" style="width:90%;" >}}
+   {{< img src="agent/guide/private-link-vpc.png" alt="La page des endpoints sur le dashboard VPC" style="width:90%;" >}}
 1. Sélectionnez {{< ui >}}Find service by name{{< /ui >}}.
 1. Remplissez la zone de texte _Service Name_ en fonction du service pour lequel vous souhaitez établir AWS PrivateLink :
 
@@ -58,48 +58,48 @@ Datadog expose des points de terminaison AWS PrivateLink dans **{{< region-param
 {{% site-region region="ap1" %}}
 | Datadog | Nom du service PrivateLink | Nom DNS privé |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
-| Logs (User HTTP intake) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
-| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
-| Métriques | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
-| Conteneurs | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
-| Processus | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
-| Profilage | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
-| Traces | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
-| Surveillance de base de données | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
-| Configuration à distance | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
+| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="us" %}}
-Pour la liste complète des enregistrements DNS et des points de terminaison de service VPC US1, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC US1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-Pour la liste complète des enregistrements DNS et des points de terminaison de service VPC AP2, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC AP2, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-Pour la liste complète des enregistrements DNS et des points de terminaison de service VPC UK1, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC UK1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
-4. Cliquez sur {{< ui >}}Verify{{< /ui >}}. Si cela ne renvoie pas _Nom de service trouvé_, contactez le [support Datadog][14].
-5. Choisissez le VPC et les sous-réseaux qui doivent être appairés avec le point de terminaison de service VPC Datadog.
-6. Assurez-vous que pour {{< ui >}}Enable DNS name{{< /ui >}}, _Activer pour ce point de terminaison_ est coché :
+4. Cliquez sur {{< ui >}}Verify{{< /ui >}}. Si cela ne renvoie pas _Service name found_, contactez le [support Datadog][14].
+5. Choisissez le VPC et les sous-réseaux qui doivent être appairés avec l'endpoint de service VPC Datadog.
+6. Assurez-vous que pour {{< ui >}}Enable DNS name{{< /ui >}}, _Enable for this endpoint_ est coché :
 
-   {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Activer DNS privé" style="width:80%;" >}}
+   {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Activer le DNS privé" style="width:80%;" >}}
 
-7. Choisissez le groupe de sécurité de votre choix pour contrôler ce qui peut envoyer du trafic vers ce point de terminaison VPC.
+7. Choisissez le groupe de sécurité de votre choix pour contrôler ce qui peut envoyer du trafic vers cet endpoint VPC.
 
     **Remarque** : **Le groupe de sécurité doit accepter le trafic entrant sur le port TCP `443`**.
 
 8. Cliquez sur {{< ui >}}Create endpoint{{< /ui >}} en bas de l'écran. Si l'opération réussit, ce qui suit s'affiche :
 
-   {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="Point de terminaison VPC créé" style="width:60%;" >}}
+   {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="Endpoint VPC créé" style="width:60%;" >}}
 
-9. Cliquez sur l'ID du point de terminaison VPC pour vérifier son état.
-10. Attendez que l'état passe de _En attente_ à _Disponible_. Cela peut prendre jusqu'à 10 minutes. Une fois qu'il indique _Disponible_, vous pouvez utiliser AWS PrivateLink.
+9. Cliquez sur l'ID de l'endpoint VPC pour vérifier son état.
+10. Attendez que l'état passe de _Pending_ à _Available_. Cela peut prendre jusqu'à 10 minutes. Une fois qu'il indique _Available_, vous pouvez utiliser AWS PrivateLink.
 
     {{< img src="agent/guide/private_link/vpc_status.png" alt="État du VPC" style="width:60%;" >}}
 
-11. Si vous exécutez une version de l'Agent Datadog antérieure à la v6.19 ou v7.19, pour collecter des données de logs, assurez-vous que votre Agent est configuré pour envoyer les logs via HTTPS. Si les données ne s'y trouvent pas déjà, ajoutez ce qui suit au [fichier de configuration de l'Agent `datadog.yaml`][15] :
+11. Si vous exécutez une version du Datadog Agent antérieure à la v6.19 ou v7.19, pour collecter des données de logs, assurez-vous que votre Agent est configuré pour envoyer les logs via HTTPS. Si les données ne s'y trouvent pas déjà, ajoutez ce qui suit au [fichier de configuration de l'Agent `datadog.yaml`][15] :
 
     ```yaml
     logs_config:
@@ -114,77 +114,77 @@ Pour la liste complète des enregistrements DNS et des points de terminaison de 
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][16].
 
-12. Si votre extension Lambda charge la clé d'API Datadog depuis AWS Secrets Manager en utilisant l'ARN spécifié par la variable d'environnement `DD_API_KEY_SECRET_ARN`, vous devez [créer un point de terminaison VPC pour Secrets Manager][17].
+12. Si votre Lambda Extension charge la clé d'API Datadog depuis AWS Secrets Manager en utilisant l'ARN spécifié par la variable d'environnement `DD_API_KEY_SECRET_ARN`, vous devez [créer un endpoint VPC pour Secrets Manager][17].
 
 13. [Redémarrez votre Agent][13] pour envoyer des données à Datadog via AWS PrivateLink.
 
 ## Connexion depuis d'autres régions {#connect-from-other-regions}
 
 {{< tabs >}}
-{{% tab "Points de terminaison PrivateLink inter-régions" %}}
-1. Connectez-vous à la console de gestion AWS dans la région de votre choix.
-1. Depuis le tableau de bord VPC, sous {{< ui >}}PrivateLink and Lattice{{< /ui >}}, sélectionnez {{< ui >}}Endpoints{{< /ui >}}.
+{{% tab "Endpoints PrivateLink inter-régions" %}}
+1. Connectez la console de gestion AWS à la région de votre choix.
+1. Depuis le dashboard VPC, sous {{< ui >}}PrivateLink and Lattice{{< /ui >}}, sélectionnez {{< ui >}}Endpoints{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Create Endpoint{{< /ui >}} :
-   {{< img src="agent/guide/private-link-vpc.png" alt="La page des points de terminaison sur le tableau de bord VPC" style="width:90%;" >}}
-1. Configurez les paramètres du point de terminaison d'interface VPC
+   {{< img src="agent/guide/private-link-vpc.png" alt="La page des endpoints sur le dashboard VPC" style="width:90%;" >}}
+1. Configurez les paramètres de l'endpoint d'interface VPC
    1. Optionnellement, remplissez le {{< ui >}}Name tag{{< /ui >}}.
    1. Sous {{< ui >}}Type{{< /ui >}}, sélectionnez {{< ui >}}PrivateLink Ready partner services{{< /ui >}}.
-1. Découvrez et configurez le point de terminaison d'interface avec la prise en charge inter-régions :
+1. Découvrez et configurez l'endpoint d'interface avec la prise en charge inter-régions :
    1. Sous {{< ui >}}Service name{{< /ui >}}, remplissez le nom du service avec un nom de service PrivateLink valide provenant du [tableau](#privatelink-service-names) ci-dessous.
    1. Sous {{< ui >}}Service region{{< /ui >}}, cliquez sur {{< ui >}}Enable Cross Region endpoint{{< /ui >}} et sélectionnez **{{< region-param key="aws_private_link_cross_region" >}}**.
-   1. Cliquez sur {{< ui >}}Verify service{{< /ui >}} et attendez une notification _Nom de service vérifié_.
+   1. Cliquez sur {{< ui >}}Verify service{{< /ui >}} et attendez une notification _Service name verified_.
       **Remarque :** Si vous ne parvenez pas à vérifier le service après avoir suivi les étapes ci-dessus, contactez le [support Datadog][1].
-1. Sous {{< ui >}}Network Settings{{< /ui >}}, sélectionnez un VPC pour déployer le point de terminaison d'interface VPC.
+1. Sous {{< ui >}}Network Settings{{< /ui >}}, sélectionnez un VPC pour déployer l'endpoint d'interface VPC.
 1. Assurez-vous que l'option {{< ui >}}Enable DNS name{{< /ui >}} est cochée.
-1. Sous {{< ui >}}Subnets{{< /ui >}}, sélectionnez un ou plusieurs sous-réseaux dans votre VPC pour le point de terminaison d'interface.
-1. Sous {{< ui >}}Security Groups{{< /ui >}}, sélectionnez un groupe de sécurité pour contrôler ce qui peut envoyer du trafic vers le point de terminaison VPC.
+1. Sous {{< ui >}}Subnets{{< /ui >}}, sélectionnez un ou plusieurs sous-réseaux dans votre VPC pour l'endpoint d'interface.
+1. Sous {{< ui >}}Security Groups{{< /ui >}}, sélectionnez un groupe de sécurité pour contrôler ce qui peut envoyer du trafic vers l'endpoint VPC.
 
    **Remarque** : Le groupe de sécurité doit accepter le trafic entrant sur le port TCP 443.
 1. Optionnellement, fournissez un {{< ui >}}Name tag{{< /ui >}} et cliquez sur {{< ui >}}Create endpoint{{< /ui >}}.
-1. Attendez quelques minutes que le statut du point de terminaison passe de {{< ui >}}Pending{{< /ui >}} à {{< ui >}}Available{{< /ui >}}. Cela peut prendre jusqu'à 10 minutes. Si cela prend plus de temps que prévu, contactez le [support Datadog][1].
+1. Attendez quelques minutes que le statut de l'endpoint passe de {{< ui >}}Pending{{< /ui >}} à {{< ui >}}Available{{< /ui >}}. Cela peut prendre jusqu'à 10 minutes. Si cela prend plus de temps que prévu, contactez le [support Datadog][1].
 
-Une fois le statut du point de terminaison mis à jour sur {{< ui >}}Available{{< /ui >}}, vous pouvez utiliser ce point de terminaison pour envoyer des données de télémétrie à Datadog en utilisant le point de terminaison AWS PrivateLink inter-région.
+Une fois le statut de l'endpoint mis à jour sur {{< ui >}}Available{{< /ui >}}, vous pouvez utiliser cet endpoint pour envoyer des données de télémétrie à Datadog en utilisant l'endpoint AWS PrivateLink inter-région.
 
 ## Noms de service PrivateLink {#privatelink-service-names}
 
 {{% site-region region="ap1" %}}
 | Datadog | Nom du service PrivateLink | Nom DNS privé |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
-| Logs (User HTTP intake) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
-| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
-| Métriques | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
-| Conteneurs | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
-| Processus | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
-| Profilage | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
-| Traces | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
-| Surveillance de base de données | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
-| Configuration à distance | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
+| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-Pour la liste complète des enregistrements DNS et des points de terminaison de service VPC AP2, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC AP2, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
-Pour la liste complète des enregistrements DNS et des points de terminaison de service VPC US1, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC US1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 {{% site-region region="uk1" %}}
-Pour la liste complète des enregistrements DNS et des points de terminaison de service VPC UK1, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC UK1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
-**Remarque** : PrivateLink interrégional n'émet pas de métriques CloudWatch. Consultez [Métriques CloudWatch pour AWS PrivateLink][2] pour plus d’informations.
+**Remarque** : Le PrivateLink interrégional n'émet pas de métriques CloudWatch. Consultez [Métriques CloudWatch pour AWS PrivateLink][2] pour plus d'informations.
 
 [1]: /fr/help/
 [2]: https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-cloudwatch-metrics.html
 {{% /tab %}}
 
 {{% tab "Appairage VPC" %}}
-1. Connectez-vous à la console AWS dans la région **{{< region-param key="aws_region" >}}** et créez un point de terminaison VPC.
+1. Connectez-vous à la console AWS dans la région **{{< region-param key="aws_region" >}}** et créez un endpoint VPC.
 
-{{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Créer un point de terminaison VPC" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Créer un endpoint VPC" style="width:80%;" >}}
 
 2. Sélectionnez {{< ui >}}Find service by name{{< /ui >}}.
-3. Remplissez la zone de texte _Nom du service_ en fonction du service pour lequel vous souhaitez établir AWS PrivateLink :
+3. Remplissez la zone de texte _Service Name_ en fonction du service pour lequel vous souhaitez établir AWS PrivateLink :
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="Nom du service VPC" style="width:90%;" >}}
 
@@ -192,48 +192,48 @@ Pour la liste complète des enregistrements DNS et des points de terminaison de 
 | Datadog                   | Nom du service PrivateLink                                                               |
 |---------------------------|----------------------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        |
-| Logs (User HTTP intake) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         |
-| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               |
-| Métriques | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           |
-| Conteneurs | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        |
-| Processus | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           |
-| Profilage | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         |
-| Traces | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
-| Surveillance de base de données | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
-| Configuration à distance | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
+| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="us" %}}
-Pour la liste complète des enregistrements DNS US1 et des points de terminaison de service VPC, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC US1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-Pour la liste complète des enregistrements DNS AP2 et des points de terminaison de service VPC, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC AP2, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-Pour la liste complète des enregistrements DNS UK1 et des points de terminaison de service VPC, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC UK1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
-4. Cliquez sur {{< ui >}}Verify{{< /ui >}}. Si cela ne renvoie pas _Nom du service trouvé_, contactez le [support Datadog][1].
+4. Cliquez sur {{< ui >}}Verify{{< /ui >}}. Si cela ne renvoie pas _Service name found_, contactez le [support Datadog][1].
 
-5. Ensuite, choisissez le VPC et les sous-réseaux qui doivent être appairés avec le point de terminaison de service VPC Datadog. Ne sélectionnez pas {{< ui >}}Enable DNS name{{< /ui >}} car l'appairage VPC nécessite une configuration manuelle du DNS.
+5. Ensuite, choisissez le VPC et les sous-réseaux qui doivent être appairés avec l'endpoint de service VPC Datadog. Ne sélectionnez pas {{< ui >}}Enable DNS name{{< /ui >}} car l'appairage VPC nécessite une configuration manuelle du DNS.
 
-6. Choisissez le groupe de sécurité de votre choix pour contrôler ce qui peut envoyer du trafic vers ce point de terminaison VPC.
+6. Choisissez le groupe de sécurité de votre choix pour contrôler ce qui peut envoyer du trafic vers cet endpoint VPC.
 
-    **Remarque** : **Le groupe de sécurité doit accepter le trafic entrant sur le port TCP `443`**.
+    **Remarque** : **Le groupe de sécurité doit accepter le trafic entrant sur le port TCP `443`**.
 
-7. Cliquez sur {{< ui >}}Create endpoint{{< /ui >}} en bas de l'écran. Si l’opération réussit, ce qui suit s’affiche :
+7. Cliquez sur {{< ui >}}Create endpoint{{< /ui >}} en bas de l'écran. Si l'opération réussit, ce qui suit s'affiche :
 
-{{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="Point de terminaison VPC créé" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="Endpoint VPC créé" style="width:80%;" >}}
 
-8. Cliquez sur l'ID du point de terminaison VPC pour vérifier son état.
-9. Attendez que l'état passe de _En attente_ à _Disponible_. Cela peut prendre jusqu'à 10 minutes.
-10. Après avoir créé le point de terminaison, utilisez l'appairage VPC pour rendre le point de terminaison PrivateLink disponible dans une autre région afin d'envoyer des données de télémétrie à Datadog via PrivateLink. Pour plus d'informations, lisez la page [Travailler avec les connexions d'appairage VPC][2] dans AWS.
+8. Cliquez sur l'ID de l'endpoint VPC pour vérifier son état.
+9. Attendez que l'état passe de _Pending_ à _Available_. Cela peut prendre jusqu'à 10 minutes.
+10. Après avoir créé l'endpoint, utilisez l'appairage VPC pour rendre l'endpoint PrivateLink disponible dans une autre région afin d'envoyer des données de télémétrie à Datadog via PrivateLink. Pour plus d'informations, lisez la page [Travailler avec les connexions d'appairage VPC][2] dans AWS.
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="État du VPC" style="width:80%;" >}}
 
 ### Amazon Route53 {#amazon-route53}
 
-1. Créez une [zone hébergée privée Route53][3] pour chaque service pour lequel vous avez créé un point de terminaison AWS PrivateLink. Attachez la zone hébergée privée au VPC dans {{< region-param key="aws_region" code="true" >}}.
+1. Créez une [zone hébergée privée Route53][3] pour chaque service pour lequel vous avez créé un endpoint AWS PrivateLink. Attachez la zone hébergée privée au VPC dans {{< region-param key="aws_region" code="true" >}}.
 
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Créez une zone hébergée privée Route53" style="width:80%;" >}}
 
@@ -242,26 +242,26 @@ La liste ci-dessous vous permet de mapper les noms de services et de DNS à diff
 {{% site-region region="ap1" %}}
   | Datadog | Nom du service PrivateLink | Nom DNS privé |
   |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-  | Logs (Agent HTTP intake) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
-  | Logs (User HTTP intake) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
-  | API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
-  | Métriques | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
-  | Conteneurs | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
-  | Processus | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
-  | Profilage | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
-  | Traces | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
-  | Surveillance de base de données | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
-  | Configuration à distance | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+  | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
+  | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
+  | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
+  | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
+  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
+  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
+  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
+  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
+  | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
+  | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="us" %}}
-Pour la liste complète des enregistrements DNS US1 et des points de terminaison de service VPC, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC US1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-Pour la liste complète des enregistrements DNS AP2 et des points de terminaison de service VPC, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC AP2, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-Pour la liste complète des enregistrements DNS UK1 et des points de terminaison de service VPC, consultez [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+Pour la liste complète des enregistrements DNS et des endpoints de service VPC UK1, consultez [ID des endpoints de service VPC](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
   Vous pouvez également trouver ces informations en interrogeant l'API AWS, `DescribeVpcEndpointServices`, ou en utilisant la commande suivante :
@@ -270,7 +270,7 @@ Pour la liste complète des enregistrements DNS UK1 et des points de terminaison
   aws ec2 describe-vpc-endpoint-services --service-names <service-name>`
   ```
 
-  Par exemple, dans le cas du point de terminaison des métriques Datadog pour {{< region-param key="aws_region" code="true" >}}:
+  Par exemple, dans le cas de l'endpoint des métriques Datadog pour {{< region-param key="aws_region" code="true" >}}:
 
 <div class="site-region-container">
   <div class="highlight">
@@ -278,17 +278,17 @@ Pour la liste complète des enregistrements DNS UK1 et des points de terminaison
   </div>
 </div>
 
-Ceci renvoie <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, le nom de la zone hébergée privée dont vous avez besoin pour l'associer au VPC d'où provient le trafic de l'Agent. Le remplacement de cet enregistrement capture tous les noms d'hôte d'ingestion liés aux métriques.
+Ceci renvoie <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, le nom de la zone hébergée privée dont vous avez besoin pour l'associer au VPC d'où provient le trafic de l'Agent. Le remplacement de cet enregistrement capture tous les noms de host d'ingestion liés aux métriques.
 
-2. Au sein de chaque nouvelle zone hébergée privée Route53, créez un enregistrement A avec le même nom. Activez l'option {{< ui >}}Alias{{< /ui >}}, puis sous {{< ui >}}Route traffic to{{< /ui >}}, choisissez {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**, et saisissez le nom DNS du point de terminaison VPC associé au nom DNS.**Remarques** :
-      - Pour récupérer votre nom DNS, consultez la [documentation sur la configuration du nom DNS privé du service de point de terminaison.][4]
-      - L'Agent envoie la télémétrie vers des points de terminaison versionnés, par exemple, <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> qui se résout en <code>metrics.agent.{{< region-param key="dd_site" >}}</code> via un alias CNAME. Par conséquent, vous n'avez besoin de configurer une zone hébergée privée que pour <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
+2. Au sein de chaque nouvelle zone hébergée privée Route53, créez un enregistrement A avec le même nom. Activez l'option {{< ui >}}Alias{{< /ui >}}, puis sous {{< ui >}}Route traffic to{{< /ui >}}, choisissez {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**, et saisissez le nom DNS de l'endpoint VPC associé au nom DNS.**Remarques** :
+      - Pour récupérer votre nom DNS, consultez la [documentation relative à l'affichage de la configuration du nom DNS privé du service d'endpoint][4].
+      - L'Agent envoie les données de télémétrie à des endpoints versionnés, par exemple, <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> qui se résout en <code>metrics.agent.{{< region-param key="dd_site" >}}</code> via un alias CNAME. Par conséquent, vous n'avez besoin de configurer une zone hébergée privée que pour <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Créez un enregistrement A" style="width:90%;" >}}
 
-3. Configurez l'appairage VPC et le routage entre le VPC dans {{< region-param key="aws_region" code="true" >}} qui contient les points de terminaison Datadog PrivateLink et le VPC dans la région où les agents Datadog s'exécutent.
+3. Configurez l'appairage VPC et le routage entre le VPC dans {{< region-param key="aws_region" code="true" >}} qui contient les endpoints Datadog PrivateLink et le VPC dans la région où les Datadog Agents s'exécutent.
 
-4. Si les VPC se trouvent dans des comptes AWS différents, le VPC contenant l'Agent Datadog doit être autorisé à s'associer aux zones hébergées privées Route53 avant de continuer. Créez une [autorisation d'association de VPC][5] pour chaque zone hébergée privée Route53 en utilisant la région et l'ID de VPC du VPC où l'Agent Datadog s'exécute. Cette option n'est pas disponible dans la console AWS. Elle doit être configurée à l'aide de l'AWS CLI, du SDK ou de l'API.
+4. Si les VPC se trouvent dans des comptes AWS différents, le VPC contenant le Datadog Agent doit être autorisé à s'associer aux zones hébergées privées Route53 avant de continuer. Créez une [autorisation d'association de VPC][5] pour chaque zone hébergée privée Route53 en utilisant la région et l'ID de VPC du VPC où le Datadog Agent s'exécute. Cette option n'est pas disponible dans la console AWS. Elle doit être configurée à l'aide de la CLI, du SDK ou de l'API AWS.
 
 5. Modifiez la zone hébergée Route53 pour ajouter des VPC pour d'autres régions.
 
@@ -306,9 +306,9 @@ Les noms DNS doivent se résoudre en adresses IP contenues dans le bloc CIDR du 
 
 Si le DNS se résout en adresses IP publiques, alors la zone Route53 **n'a pas** été associée au VPC dans la région alternative, ou l'enregistrement A n'existe pas.
 
-Si le DNS se résout correctement, mais que les connexions à `port 443` échouent, alors le peering VPC ou le routage est peut-être mal configuré, ou le port 443 n'est peut-être pas autorisé en sortie vers le bloc CIDR du VPC dans {{< region-param key="aws_region" code="true" >}}.
+Si le DNS se résout correctement, mais que les connexions à `port 443` échouent, alors l'appairage VPC ou le routage est peut-être mal configuré, ou le port 443 n'est peut-être pas autorisé en sortie vers le bloc CIDR du VPC dans {{< region-param key="aws_region" code="true" >}}.
 
-Les VPC auxquels la zone hébergée privée (PHZ) est attachée doivent avoir quelques paramètres activés. Plus précisément, `enableDnsHostnames` et `enableDnsSupport` doivent être activés dans les VPC auxquels la PHZ est associée. Consultez [Paramètres Amazon VPC][6].
+Les VPC auxquels la zone hébergée privée (PHZ) est attachée doivent avoir quelques paramètres activés. Plus précisément, `enableDnsHostnames` et `enableDnsSupport` doivent être activés dans les VPC auxquels la PHZ est associée. Consultez [Paramètres VPC Amazon][6].
 
 ### Datadog Agent {#datadog-agent}
 
@@ -327,7 +327,7 @@ Les VPC auxquels la zone hébergée privée (PHZ) est attachée doivent avoir qu
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][9].
 
-2. Si votre extension Lambda charge la clé d'API Datadog depuis AWS Secrets Manager en utilisant l'ARN spécifié par la variable d'environnement `DD_API_KEY_SECRET_ARN`, vous devez [créer un point de terminaison VPC pour Secrets Manager][10].
+2. Si votre Lambda Extension charge la clé d'API Datadog depuis AWS Secrets Manager en utilisant l'ARN spécifié par la variable d'environnement `DD_API_KEY_SECRET_ARN`, vous devez [créer un endpoint VPC pour Secrets Manager][10].
 
 3. [Redémarrez l'Agent][7].
 
@@ -353,14 +353,14 @@ Les VPC auxquels la zone hébergée privée (PHZ) est attachée doivent avoir qu
 [17]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 
 {{% site-region region="us" %}}
-## IDs de points de terminaison de service VPC {#vpc-endpoint-service-ids}
+## ID des endpoints de service VPC {#vpc-endpoint-service-ids}
 
-US1 utilise une architecture DNS à deux niveaux pour PrivateLink. Chaque enregistrement DNS orienté client est mappé à une adresse de point de terminaison VPC `color.intake.datadoghq.com` dédiée. La configuration d'un point de terminaison VPC pour une adresse d'ancrage donnée couvre tous les enregistrements orientés client qui y sont mappés.
+US1 utilise une architecture DNS à deux niveaux pour PrivateLink. Chaque enregistrement DNS orienté client est mappé à une adresse d'endpoint VPC `color.intake.datadoghq.com` dédiée. La configuration d'un endpoint VPC pour une adresse d'ancrage donnée couvre tous les enregistrements orientés client qui y sont mappés.
 
-Utilisez le tableau suivant pour identifier les points de terminaison VPC à configurer pour les fonctionnalités Datadog que vous utilisez. Les entrées génériques correspondent à tout sous-domaine non listé par ailleurs.
+Utilisez le tableau suivant pour identifier les endpoints VPC à configurer pour les fonctionnalités Datadog que vous utilisez. Les entrées génériques correspondent à tout sous-domaine non listé par ailleurs.
 
-**Remarque** : dans le tableau ci-dessous, `---` indique un point de terminaison de service VPC direct sans adresse d'ancrage intermédiaire.
-| Nom | Ancre | ID de point de terminaison de service VPC |
+**Remarque** : dans le tableau ci-dessous, `---` indique un endpoint de service VPC direct sans adresse d'ancrage intermédiaire.
+| Nom | Ancre | ID d'endpoint de service VPC |
 |---|---|---|
 | `webhook-intake.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
 | `webhooks-http-intake.logs.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
@@ -419,13 +419,13 @@ Utilisez le tableau suivant pour identifier les points de terminaison VPC à con
 {{% /site-region %}}
 
 {{% site-region region="ap2" %}}
-## IDs de points de terminaison de service VPC {#vpc-endpoint-service-ids-1}
+## ID des endpoints de service VPC {#vpc-endpoint-service-ids-1}
 
-AP2 utilise une architecture DNS à deux niveaux pour PrivateLink. Chaque enregistrement DNS orienté client est mappé à une adresse de point de terminaison VPC `color.intake.ap2.datadoghq.com` dédiée. La configuration d'un point de terminaison VPC pour une adresse d'ancrage donnée couvre tous les enregistrements orientés client qui y sont mappés.
+AP2 utilise une architecture DNS à deux niveaux pour PrivateLink. Chaque enregistrement DNS orienté client est mappé à une adresse d'endpoint VPC `color.intake.ap2.datadoghq.com` dédiée. La configuration d'un endpoint VPC pour une adresse d'ancrage donnée couvre tous les enregistrements orientés client qui y sont mappés.
 
-Utilisez le tableau suivant pour identifier les points de terminaison VPC à configurer pour les fonctionnalités Datadog que vous utilisez. Les enregistrements DNS plus spécifiques prévalent sur les entrées génériques ; par exemple, `trace.agent.ap2.datadoghq.com` se résout en `lime.intake.ap2.datadoghq.com` même si `*.agent.ap2.datadoghq.com` pointe vers `beige.intake.ap2.datadoghq.com`.
+Utilisez le tableau suivant pour identifier les endpoints VPC à configurer pour les fonctionnalités Datadog que vous utilisez. Les enregistrements DNS plus spécifiques prévalent sur les entrées génériques ; par exemple, `trace.agent.ap2.datadoghq.com` se résout en `lime.intake.ap2.datadoghq.com` même si `*.agent.ap2.datadoghq.com` pointe vers `beige.intake.ap2.datadoghq.com`.
 
-| Nom | Ancre | ID de point de terminaison de service VPC |
+| Nom | Ancre | ID d'endpoint de service VPC |
 |---|---|---|
 | `gcp-intake.logs.ap2.datadoghq.com` | `aqua.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273` |
 | `*.agent.ap2.datadoghq.com` | `beige.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff` |
@@ -489,13 +489,13 @@ Utilisez le tableau suivant pour identifier les points de terminaison VPC à con
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-## IDs de points de terminaison de service VPC {#vpc-endpoint-service-ids-2}
+## ID des endpoints de service VPC {#vpc-endpoint-service-ids-2}
 
-UK1 utilise une architecture DNS à deux niveaux pour PrivateLink. Chaque enregistrement DNS orienté client est mappé à une adresse de point de terminaison VPC `color.intake.uk1.datadoghq.com` dédiée. La configuration d'un point de terminaison VPC pour une adresse d'ancrage donnée couvre tous les enregistrements orientés client qui y sont mappés.
+UK1 utilise une architecture DNS à deux niveaux pour PrivateLink. Chaque enregistrement DNS orienté client est mappé à une adresse d'endpoint VPC `color.intake.uk1.datadoghq.com` dédiée. La configuration d'un endpoint VPC pour une adresse d'ancrage donnée couvre tous les enregistrements orientés client qui y sont mappés.
 
-Utilisez le tableau suivant pour identifier les points de terminaison VPC à configurer pour les fonctionnalités Datadog que vous utilisez. Les enregistrements DNS plus spécifiques priment sur les wildcards — par exemple, `trace.agent.uk1.datadoghq.com` se résout en `lime.intake.uk1.datadoghq.com` même si `*.agent.uk1.datadoghq.com` pointe vers `beige.intake.uk1.datadoghq.com`.
+Utilisez le tableau suivant pour identifier les endpoints VPC à configurer pour les fonctionnalités Datadog que vous utilisez. Les enregistrements DNS plus spécifiques prévalent sur les entrées génériques ; par exemple, `trace.agent.uk1.datadoghq.com` se résout en `lime.intake.uk1.datadoghq.com` même si `*.agent.uk1.datadoghq.com` pointe vers `beige.intake.uk1.datadoghq.com`.
 
-| Nom | Ancre | ID de point de terminaison de service VPC |
+| Nom | Ancre | ID d'endpoint de service VPC |
 |---|---|---|
 | `gcp-intake.logs.uk1.datadoghq.com` | `aqua.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-099b74a86151e7f91` |
 | `*.agent.uk1.datadoghq.com` | `beige.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9` |
@@ -557,15 +557,17 @@ Utilisez le tableau suivant pour identifier les points de terminaison VPC à con
 | `dbquery-intake.uk1.datadoghq.com` | `white.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029` |
 {{% /site-region %}}
 
+{{% site-region region="us,ap1,ap2,uk1" %}}
+
 ## Vérifiez que les données sont envoyées via PrivateLink {#verify-that-data-is-being-sent-using-privatelink}
 
-Après avoir configuré PrivateLink, pour vérifier que les données sont bien envoyées via PrivateLink, exécutez la commande `dig` sur une machine située sur ce VPC. Par exemple, exécutez cette commande si vous avez configuré un PrivateLink pour le point de terminaison `http-intake.logs.datadoghq.com` :
+Après avoir configuré PrivateLink, pour vérifier que les données sont bien envoyées via PrivateLink, exécutez la commande `dig` sur une machine située sur ce VPC. Par exemple, exécutez cette commande si vous avez configuré un PrivateLink pour l'endpoint `http-intake.logs.datadoghq.com` :
 
 ```
 dig http-intake.logs.datadoghq.com
 ```
 
-Si les journaux sont envoyés via PrivateLink, la section `ANSWER Section` de la sortie affiche `http-intake.logs.datadoghq.com` comme dans l'exemple suivant. **Remarque** : Les adresses IP que vous obtenez doivent se trouver dans [l'espace IP privé][1].
+Si les logs sont envoyés via PrivateLink, la section `ANSWER Section` de la sortie affiche `http-intake.logs.datadoghq.com` comme dans l'exemple suivant. **Remarque** : Les adresses IP que vous obtenez doivent se trouver dans l'[espace IP privé][1].
 
 ```
 ;; ANSWER SECTION:
@@ -575,7 +577,7 @@ http-intake.logs.datadoghq.com.	60 IN	A	172.31.20.174
 http-intake.logs.datadoghq.com.	60 IN	A	172.31.34.135
 ```
 
-Si les journaux ne sont pas envoyés via PrivateLink, le `ANSWER SECTION` de la sortie indique l'équilibreur de charge (`4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com`) vers lequel les journaux sont envoyés.
+Si les logs ne sont pas envoyés via PrivateLink, la `ANSWER SECTION` de la sortie indique l'équilibreur de charge (`4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com`) vers lequel les logs sont envoyés.
 
 ```
 ;; ANSWER SECTION:
@@ -585,6 +587,7 @@ l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.
 l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.49
 l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.50
 ```
+{{% /site-region %}}
 
 ## Pour aller plus loin {#further-reading}
 

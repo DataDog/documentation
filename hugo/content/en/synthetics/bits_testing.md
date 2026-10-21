@@ -28,6 +28,10 @@ further_reading:
   text: "Synthetic Monitoring pricing"
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Bits Testing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Bits Testing is an AI agent that explores your application to map its most critical user journeys. It recommends ways to increase test coverage, and it can generate the Synthetic tests needed to close coverage gaps.

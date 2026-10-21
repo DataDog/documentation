@@ -96,7 +96,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
 <br />**Note**: Before version `ddtrace==3.14.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -106,6 +106,10 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 `DD_LLMOBS_SAMPLE_RATE`
 : optional - _float_ - **default**: `1.0`
 <br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
+
+`DD_LLMOBS_SAMPLING_RULES`
+: optional - _JSON array_
+<br />Requires `ddtrace` 4.16.0 or later. A list of rules that set the sample rate for traces matching a set of tags. A matching rule takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Tag-based sampling rules](#tag-based-sampling-rules).
 
 `DD_API_KEY`
 : optional - _string_
@@ -141,7 +145,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
 <br />**Note**: Before version `dd-trace@5.66.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -182,7 +186,7 @@ You can supply the following parameters as environment variables (for example, `
 
 `DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
 <br />**Note**: Before version 1.54.0 of `dd-trace-java`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED` or `dd.llmobs.agentless.enabled`
@@ -219,7 +223,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1]. Equivalent to `tracer.WithLLMObsMLApp()`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1]. Equivalent to `tracer.WithLLMObsMLApp()`.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
@@ -227,7 +231,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_PROJECT_NAME`
 : optional - _string_
-<br />The name of the project that [datasets and experiments](/llm_observability/improve/experiments/) are grouped under. Equivalent to `tracer.WithLLMObsProjectName()`.
+<br />The name of the project that [datasets and offline experiments](/llm_observability/improve/offline_experiments/) are grouped under. Equivalent to `tracer.WithLLMObsProjectName()`.
 
 `DD_API_KEY`
 : optional - _string_
@@ -268,7 +272,7 @@ LLMObs.enable(
 
 `ml_app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_
@@ -330,7 +334,7 @@ const llmobs = tracer.llmobs;
 
 `mlApp`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `agentlessEnabled`
 : optional - _boolean_ - **default**: `false`
@@ -397,7 +401,7 @@ func main() {
 
 `tracer.WithLLMObsMLApp`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `tracer.WithLLMObsAgentlessEnabled`
 : optional - _bool_ - **default**: `false`
@@ -405,11 +409,11 @@ func main() {
 
 `tracer.WithLLMObsProjectName`
 : optional - _string_
-<br />The name of the project that [datasets and experiments](/llm_observability/improve/experiments/) are grouped under. If not provided, this defaults to the value of `DD_LLMOBS_PROJECT_NAME`.
+<br />The name of the project that [datasets and offline experiments](/llm_observability/improve/offline_experiments/) are grouped under. If not provided, this defaults to the value of `DD_LLMOBS_PROJECT_NAME`.
 
 Set `DD_SITE`, `DD_API_KEY`, `DD_ENV`, and `DD_SERVICE` as environment variables. `DD_API_KEY` is only required if you are not using the Datadog Agent.
 
-**Note**: Agent mode requires Datadog Agent v7.72.0 or later when using [datasets and experiments](/llm_observability/improve/experiments/). Earlier Agent versions do not proxy the datasets and experiments endpoints correctly.
+**Note**: Agent mode requires Datadog Agent v7.72.0 or later when using [datasets and offline experiments](/llm_observability/improve/offline_experiments/). Earlier Agent versions do not proxy the datasets and offline experiments endpoints correctly.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -453,6 +457,8 @@ LLMObs.enable(
   sample_rate=0.5,
 )
 {{< /code-block >}}
+
+To vary the sample rate by tag instead of applying one rate to every trace, see [Tag-based sampling rules](#tag-based-sampling-rules).
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -495,6 +501,41 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+### Tag-based sampling rules
+
+<div class="alert alert-info">Tag-based sampling rules are available in the Python SDK (<code>ddtrace</code> 4.16.0 or later).</div>
+
+`DD_LLMOBS_SAMPLE_RATE` applies the same sampling rate to all traces. To use different sampling rates for different parts of your application, set `DD_LLMOBS_SAMPLING_RULES` to a JSON array of rules that match traces by tag. For example, to retain 50% of production traces and 10% of staging traces:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLING_RULES='[{"tags": {"env": "prod"}, "sample_rate": 0.5}, {"tags": {"env": "staging"}, "sample_rate": 0.1}]' \
+ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Each rule is a JSON object with the following fields:
+
+`sample_rate`
+: required - _float_
+<br />The fraction of matching traces to retain, between `0.0` and `1.0`.
+
+`tags`
+: optional - _object_
+<br />A mapping of tag names to patterns matched against their values. A rule with no `tags` matches every trace, making it useful as a final catch-all rule.
+
+Rules behave as follows:
+
+- Rules are evaluated in the order you declare them. The first matching rule's `sample_rate` overrides `DD_LLMOBS_SAMPLE_RATE` for that trace. If no rule matches, `DD_LLMOBS_SAMPLE_RATE` applies.
+- All tags specified in a rule must match for the rule to apply.
+- Tag value patterns are case-insensitive and support glob matching: `*` matches zero or more characters, and `?` matches exactly one character. For example, `{"tags": {"ml_app": "chat-*"}}` matches `chat-prod` and `chat-staging`.
+- Rules can match tags that Datadog sets on the root span, including `ml_app`, `env`, `service`, `version`, and `session_id`, as well as custom tags you set with [`LLMObs.annotate()`](#adding-tags) or `DD_TAGS`.
+- As with `DD_LLMOBS_SAMPLE_RATE`, the sampling decision is made once per trace on the root span and applies to all child spans, including those in downstream services.
+
+Sampling rules can only be configured through the environment variable; `LLMObs.enable()` has no equivalent parameter.
+
+<div class="alert alert-info">
+Rules match the root span's tags at the time of the sampling decision. The decision is final and is made when the root span finishes, or earlier if the trace makes an outbound request, hands work off to another thread or asyncio task, or is partially flushed (see <code>DD_TRACE_PARTIAL_FLUSH_MIN_SPANS</code>). To ensure a tag affects sampling, add it to the root span before any of these events occur.
+</div>
 
 ## Manual instrumentation
 
