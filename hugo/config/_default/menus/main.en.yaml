@@ -6708,6 +6708,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_key_obfuscation
       weight: 317
+    - name: Evaluation Telemetry Opt-Out
+      url: feature_flags/concepts/evaluation_telemetry_opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_telemetry_opt_out
+      weight: 318
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts

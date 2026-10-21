@@ -227,6 +227,32 @@ EvaluationContext context = new MutableContext("user-123")
 
 The `targetingKey` (for example, `user-123`) is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.
 
+## Per-subject evaluation telemetry opt-out
+
+Configure the provider once. Supply the subject's decision in each evaluation context, not a shared global context. See [availability and shared behavior][18].
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.openfeature.Provider;
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.ImmutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.Value;
+import java.util.Collections;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProviderAndWait(new Provider(
+    new Provider.Options().enableEvaluationTelemetryOptOutParameter(true)));
+Client client = api.getClient();
+
+// In a request handler:
+boolean optedOut = true; // Your application determines this value for the subject.
+boolean enabled = client.getBooleanValue("new-checkout", false,
+    new ImmutableContext("user-123", Collections.singletonMap(
+        "dd_evaluation_telemetry_opt_out", new Value(optedOut))));
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` and use `new Provider()`. An explicit provider option overrides the environment variable, including `false`.
+
 ## Evaluate flags
 
 Evaluate feature flags using the OpenFeature client. All flag types are supported: Boolean, string, integer, double, and object.
@@ -664,3 +690,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [15]: /serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /serverless/google_cloud_run/containers/in_container/java/
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /feature_flags/concepts/evaluation_telemetry_opt_out/

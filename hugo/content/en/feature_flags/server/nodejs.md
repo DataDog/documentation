@@ -176,6 +176,35 @@ Define who or what the flag evaluation applies to using an `EvaluationContext`. 
 
 <div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
+## Per-subject evaluation telemetry opt-out
+
+Enable the control in the existing tracer initialization, before accessing `tracer.openfeature`. See [availability and shared behavior][12].
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  featureFlags: {
+    enableEvaluationTelemetryOptOutParameter: true,
+  },
+});
+const { OpenFeature } = require('@openfeature/server-sdk');
+
+async function main() {
+  await OpenFeature.setProviderAndWait(tracer.openfeature);
+  const client = OpenFeature.getClient();
+
+  const optedOut = true; // Your application determines this value for the subject.
+  const enabled = await client.getBooleanValue('new-checkout', false, {
+    targetingKey: 'user-123',
+    dd_evaluation_telemetry_opt_out: optedOut,
+  });
+  console.log(enabled);
+}
+
+main().catch(console.error);
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` and omit this option from `tracer.init()`. An explicit option overrides the environment variable, including `false`.
+
 ## Evaluate flags
 
 After creating the `OpenFeature` client as described in the [Installing and initializing](#installing-and-initializing) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
@@ -384,3 +413,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [9]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[12]: /feature_flags/concepts/evaluation_telemetry_opt_out/

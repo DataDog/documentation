@@ -126,6 +126,30 @@ eval_ctx = EvaluationContext(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Per-subject evaluation telemetry opt-out
+
+Configure the provider once. Supply the subject's decision in each evaluation context, not a shared global context. See [availability and shared behavior][12].
+
+{{< code-block lang="python" >}}
+from ddtrace.openfeature import DataDogProvider
+from openfeature import api
+from openfeature.evaluation_context import EvaluationContext
+
+api.set_provider(DataDogProvider(
+    enable_evaluation_telemetry_opt_out_parameter=True,
+))
+client = api.get_client()
+
+# In a request handler:
+opted_out = True  # Your application determines this value for the subject.
+enabled = client.get_boolean_value("new-checkout", False, EvaluationContext(
+    targeting_key="user-123",
+    attributes={"dd_evaluation_telemetry_opt_out": opted_out},
+))
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` and use `DataDogProvider()`. An explicit option overrides the environment variable, including `False`.
+
 ## Evaluate flags
 
 After setting up the provider and creating a client, you can evaluate flags throughout your application. Flag evaluation is local and fast—the SDK uses locally cached configuration data, so no network requests occur during evaluation.
@@ -351,6 +375,7 @@ Verify the following:
 [9]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[12]: /feature_flags/concepts/evaluation_telemetry_opt_out/
 
 ## Further reading
 

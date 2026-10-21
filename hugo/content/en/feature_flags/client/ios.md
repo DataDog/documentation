@@ -442,6 +442,58 @@ final class FeatureFlagEventObserver {
 }
 {{< /code-block >}}
 
+## Per-subject evaluation telemetry opt-out
+
+After initializing Datadog and enabling Flags, enable the control when you first create the client or provider. See [availability and shared behavior][3].
+
+### Native client
+
+Pass your application's decision as a typed Boolean in the context:
+
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+let client = FlagsClient.create(
+    configuration: .init(enableEvaluationTelemetryOptOutParameter: true)
+)
+let optedOut = true // Your application determines this value.
+client.setEvaluationContext(
+    FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: ["dd_evaluation_telemetry_opt_out": .bool(optedOut)]
+    )
+)
+
+let enabled = client.getBooleanValue(key: "new-checkout", defaultValue: false)
+{{< /code-block >}}
+
+### Provider integration
+
+Enable the option on `DatadogProvider` and supply the initial context:
+
+{{< code-block lang="swift" >}}
+import DatadogOpenFeatureProvider
+import OpenFeature
+
+let provider = DatadogProvider(enableEvaluationTelemetryOptOutParameter: true)
+let optedOut = true // Your application determines this value.
+let context = MutableContext(
+    targetingKey: "user-123",
+    structure: MutableStructure(attributes: [
+        "dd_evaluation_telemetry_opt_out": .boolean(optedOut)
+    ])
+)
+await OpenFeatureAPI.shared.setProviderAndWait(
+    provider: provider,
+    initialContext: context
+)
+
+let enabled = OpenFeatureAPI.shared.getClient()
+    .getBooleanValue(key: "new-checkout", defaultValue: false)
+{{< /code-block >}}
+
+Update the context with `setEvaluationContext` for the native client or `setEvaluationContextAndWait` for OpenFeature. Reusing an existing client name retains its original configuration.
+
 ## Advanced configuration
 
 The `Flags.enable()` API accepts optional configuration with options listed below.
@@ -563,3 +615,4 @@ final class CheckoutFlagTests: XCTestCase {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /account_management/api-app-keys/#client-tokens
+[3]: /feature_flags/concepts/evaluation_telemetry_opt_out/

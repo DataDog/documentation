@@ -293,6 +293,66 @@ print(details.error?.code);
 
 `FlagDetails.error` is set when the SDK returns the default value because the provider is not ready, the flag is not found, or the assignment value does not match the typed evaluation method. Successful details include the evaluated value plus assignment metadata, such as `variant` and `reason`, when Datadog returned it.
 
+## Per-subject evaluation telemetry opt-out
+
+Enable the control in `DatadogFlagsConfiguration` before initializing the SDK. See [availability and shared behavior][20].
+
+### Flutter plugin
+
+Use this plugin configuration instead of the `addPlugin` call in the SDK initialization example. Do not register the plugin twice:
+
+{{< code-block lang="dart" >}}
+configuration.addPlugin(
+  const DatadogFlagsPluginConfiguration(
+    flagsConfiguration: DatadogFlagsConfiguration(
+      enableEvaluationTelemetryOptOutParameter: true,
+    ),
+  ),
+);
+await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
+
+final client = DatadogSdk.instance.flags!.sharedClient();
+final optedOut = true; // Your application determines this value.
+await client.initialize(FlagsEvaluationContext(
+  targetingKey: 'user-123',
+  attributes: {'dd_evaluation_telemetry_opt_out': optedOut},
+));
+
+final enabled = client.getBooleanDetails(
+  key: 'new-checkout',
+  defaultValue: false,
+).value;
+{{< /code-block >}}
+
+### Standalone package
+
+For the `datadog_flags` package without the Flutter plugin, pass the same option when enabling Flags:
+
+{{< code-block lang="dart" >}}
+await DatadogFlags.instance.enable(
+  configuration: DatadogFlagsConfiguration(
+    datadogConfig: datadogConfig,
+    enableEvaluationTelemetryOptOutParameter: true,
+  ),
+);
+
+final client = DatadogFlags.instance.sharedClient();
+final optedOut = true; // Your application determines this value.
+await client.initialize(FlagsEvaluationContext(
+  targetingKey: 'user-123',
+  attributes: {'dd_evaluation_telemetry_opt_out': optedOut},
+));
+
+final enabled = client.getBooleanDetails(
+  key: 'new-checkout',
+  defaultValue: false,
+).value;
+{{< /code-block >}}
+
+In both integrations, update the decision with `client.initialize()` and the complete subject context. Keep the initialization error handling described in the setup instructions.
+
+[20]: /feature_flags/concepts/evaluation_telemetry_opt_out/
+
 ## Advanced configuration
 
 `DatadogFlagsConfiguration` controls SDK behavior:

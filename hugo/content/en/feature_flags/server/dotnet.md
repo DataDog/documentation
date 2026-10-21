@@ -166,6 +166,33 @@ var evalCtx = EvaluationContext.Builder()
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
+## Per-subject evaluation telemetry opt-out
+
+Configure the provider once. Supply the subject's decision in each evaluation context, not a shared global context. See [availability and shared behavior][10].
+
+{{< code-block lang="csharp" >}}
+using Datadog.FeatureFlags.OpenFeature;
+using OpenFeature;
+using OpenFeature.Model;
+
+var provider = new DatadogProvider(new DatadogProviderOptions
+{
+    EnableEvaluationTelemetryOptOutParameter = true,
+});
+await Api.Instance.SetProviderAsync(provider);
+var client = Api.Instance.GetClient();
+
+// In a request handler:
+var optedOut = true; // Your application determines this value for the subject.
+var context = EvaluationContext.Builder()
+    .SetTargetingKey("user-123")
+    .Set("dd_evaluation_telemetry_opt_out", optedOut)
+    .Build();
+var enabled = await client.GetBooleanValueAsync("new-checkout", false, context);
+{{< /code-block >}}
+
+Alternatively, set `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true` and use `new DatadogProvider()`. An explicit option overrides the environment variable, including `false`.
+
 ## Evaluate flags
 
 After setting up the provider and creating a client, you can evaluate flags throughout your application. Flag evaluation is local and fast—the SDK uses locally cached configuration data, so no network requests occur during evaluation.
@@ -403,6 +430,7 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [7]: /feature_flags/concepts/flag_graphs/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
 [9]: /feature_flags/concepts/configuration_sources/
+[10]: /feature_flags/concepts/evaluation_telemetry_opt_out/
 
 ## Further reading
 
