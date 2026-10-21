@@ -30,6 +30,7 @@ Bits Investigation in Error Tracking is in Preview.
 
 - To view investigations, you need the [{{< ui >}}Bits Investigations Read{{< /ui >}} permission][2]. To start investigations, you need the [{{< ui >}}Bits Investigations Write{{< /ui >}} permission][2].
 - To let Bits read the code that was running when the error occurred, set up [Source Code Integration][3]. Bits can investigate without source code access, but the root cause analysis is less precise.
+- To generate code fixes, set up [Bits Code][8] with a supported source code provider.
 
 ## Start an investigation
 
@@ -73,8 +74,6 @@ From the next step, you can:
 - Click {{< ui >}}View in Bits Code{{< /ui >}} to iterate on the fix in a Bits Code session.
 
 Bits Code never merges changes automatically. Review and test generated code before you merge it.
-
-To generate code fixes, set up [Bits Code][8] with a supported source code provider.
 
 ## Further reading
 
