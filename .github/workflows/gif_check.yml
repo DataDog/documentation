@@ -14,16 +14,11 @@ jobs:
   look-for-gifs:
     permissions:
       contents: read
-    
+      pull-requests: read
+
     if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
-      with:
-          fetch-depth: 1
-          persist-credentials: false
-
     # Branch Name Validation to be run prior to workflow
     - name: Validate branch name and set output
       id: validate
@@ -41,10 +36,19 @@ jobs:
           echo "::error::Invalid branch name detected. Branch names must only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
         fi
 
+    # List changed files with the GitHub API instead of cloning the repository
     - name: Find changed files
       id: changed_files
       if: steps.validate.outputs.valid == 'true'
-      uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
+      env:
+        GH_TOKEN: ${{ github.token }}
+        REPO: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      run: |
+        set -o pipefail
+        FILES=$(gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files?per_page=100" \
+          --jq '.[] | select(.status != "removed") | .filename' | tr '\n' ' ')
+        echo "all_changed_files=$FILES" >> "$GITHUB_OUTPUT"
 
     - name: Look for gifs
       if: steps.validate.outputs.valid == 'true'

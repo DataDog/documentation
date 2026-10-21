@@ -18,17 +18,34 @@ jobs:
     if: github.head_ref != 'guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      # List changed files with the GitHub API; a shallow clone lacks the history `git diff` needs
+      - name: Get changed markdown files
+        id: changed_files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -o pipefail
+          LIST="$RUNNER_TEMP/changed_files.txt"
+          gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files?per_page=100" \
+            --jq '.[] | select(.status != "removed") | .filename | select(test("^hugo/content/en/.+\\.md$"))' > "$LIST"
+          echo "files=$(tr '\n' ' ' < "$LIST")" >> "$GITHUB_OUTPUT"
+          {
+            echo 'patterns<<EOF'
+            sed 's|^|/|' "$LIST"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      # Sparse checkout downloads only the changed files instead of the full repository
+      - name: Checkout changed files
+        if: steps.changed_files.outputs.files != ''
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           fetch-depth: 1
           persist-credentials: false
-
-      - name: Get changed markdown files
-        id: changed_files
-        run: |
-          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'hugo/content/en/**/*.md' | xargs)
-          echo "files=$FILES" >> $GITHUB_OUTPUT
+          sparse-checkout: ${{ steps.changed_files.outputs.patterns }}
+          sparse-checkout-cone-mode: false
 
       - name: Check for site-region at top of page with support language
         id: check
