@@ -1,5 +1,5 @@
 ---
-title: Analyze Your Offline Experiments Results
+title: Analyze Your Offline Experiment Results
 aliases:
 - /llm_observability/improve/experiments/analyzing_results/
 - /llm_observability/experiments/analyzing_results/
