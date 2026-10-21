@@ -186,9 +186,9 @@ describe("resolveChangelogEntries", () => {
     ]);
   });
 
-  it("finds a product whose category page has an overridden slug", () => {
+  it("finds Case Management at its tag slug", () => {
     const categories = [
-      { slug: "cases", name: "Case Management", operations: [] },
+      { slug: "case-management", name: "Case Management", operations: [] },
     ];
     const [entry] = resolveChangelogEntries(
       [makeEntry({ productSlug: "case-management" })],
@@ -197,7 +197,7 @@ describe("resolveChangelogEntries", () => {
     );
     expect(entry.product).toEqual({
       name: "Case Management",
-      href: "/api/latest/cases/",
+      href: "/api/latest/case-management/",
     });
   });
 

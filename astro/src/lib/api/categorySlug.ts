@@ -8,10 +8,11 @@
  * disagree about a category's slug.
  */
 
-/** Tag slugs whose category page lives at a different slug. */
-const SLUG_OVERRIDES: Record<string, string> = {
-  "case-management": "cases",
-};
+/**
+ * Tag slugs whose category page lives at a different slug. Empty: prod puts
+ * every category at its tag slug.
+ */
+const SLUG_OVERRIDES: Record<string, string> = {};
 
 /**
  * Matches Hugo's `anchorize` (and `getTagSlug`): punctuation is deleted, so
