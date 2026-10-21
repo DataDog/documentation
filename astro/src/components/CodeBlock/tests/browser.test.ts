@@ -39,7 +39,7 @@ test.describe("CodeBlock component", () => {
     }
   });
 
-  test("copy button appears on hover and shows Copied! after click", async ({
+  test("copy button appears on hover and shows Copied after click", async ({
     page,
     context,
   }) => {
@@ -56,7 +56,7 @@ test.describe("CodeBlock component", () => {
     await expect(copyBtn).toBeVisible();
 
     await copyBtn.click();
-    await expect(copyBtn).toContainText("Copied!");
+    await expect(copyBtn).toContainText("Copied");
   });
 
   // === Filename ===

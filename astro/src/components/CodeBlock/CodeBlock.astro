@@ -48,12 +48,11 @@ const containerClass = wrap
   ? cl("code-block", "code-block--wrap")
   : cl("code-block");
 
-// MISSING_TRANSLATION_LABEL: replace hardcoded English with i18n() once authoritative translation
-// keys exist for these strings in the Hugo i18n bundle.
+// MISSING_TRANSLATION_LABEL: Hugo has no key for "Copy code" yet.
 const copyLabels: CopyButtonLabels = {
   "Copy code": "Copy code",
   Copy: translate("copy"),
-  "Copied!": "Copied!",
+  "Copied!": translate("copied"),
 };
 
 const collapseLabels: CollapseToggleLabels = {
