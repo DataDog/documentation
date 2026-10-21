@@ -57,7 +57,13 @@ From the investigation page, you can:
 
 - Rate the conclusion to help improve Bits Investigation.
 - Ask follow-up questions about the investigation in Bits Chat. For details, see [Chat with Bits Investigation][6].
-- Generate a code fix with [Bits Code][7] when a suggested next step is a code change.
+- Review the suggested next steps.
+
+## Fix the issue with Bits Code
+
+When a suggested next step is a code change, Bits Investigation can hand off the fix to [Bits Code][7]. Bits Code uses the findings of the investigation to generate a code change and open a pull or merge request in your repository. You can review the change, ask for updates, and merge it when it is ready. Bits Code never merges changes automatically.
+
+To generate code fixes, set up [Bits Code][8] with a supported source code provider.
 
 ## Further reading
 
@@ -70,3 +76,4 @@ From the investigation page, you can:
 [5]: /bits_ai/bits_investigation/investigate_issues/#how-bits-investigates
 [6]: /bits_ai/bits_investigation/chat_bits_investigation/
 [7]: /bits_ai/bits_code/
+[8]: /bits_ai/bits_code/setup/

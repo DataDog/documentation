@@ -2390,11 +2390,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_bits_investigation
       weight: 5
-    - name: Bits Code
-      url: bits_ai/bits_code
-      parent: error_tracking
-      identifier: error_tracking_bits_ai_dev_agent
-      weight: 5
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
