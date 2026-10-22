@@ -110,6 +110,7 @@ The products differ in the data they capture and how long the instrumentation re
   - Minimum for [in-app enablement](#enable-in-app): 5.84.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 5.39.0
   - Source maps published with the deployed application if source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack)
+- **Node.js** runtime only; Bun and Deno are not supported
 - [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
