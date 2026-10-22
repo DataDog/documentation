@@ -412,7 +412,7 @@ datadog-code-security-mcp promote-sast-rule --user-confirmed \
   --code-file rule.js --query-file rule.scm
 ```
 
-Scans use the saved rule only after the repository configuration lists its ruleset under `sast.use-rulesets`. See [Static Code Analysis configuration][31].
+Scans use the saved rule only after the repository configuration lists its ruleset. Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. A new `code-security.datadog.yaml` hides that legacy file. See [Static Code Analysis configuration][31].
 
 Add `--json` to the scan and SBOM commands for JSON output:
 
