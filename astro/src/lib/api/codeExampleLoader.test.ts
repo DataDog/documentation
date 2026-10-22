@@ -65,6 +65,26 @@ describe("getCodeExamplesForOperation", () => {
 });
 
 /**
+ * Suffixes in CodeExamples.json already start with an underscore
+ * (`_1716720881`), and Hugo appends them to the operationId as they are.
+ */
+describe("getCodeExamplesForOperation with suffixed examples", () => {
+  const examples = getCodeExamplesForOperation(
+    "CreateAWSAccount",
+    "v2",
+    "aws-integration",
+  );
+
+  it("loads both the suffixed and the unsuffixed example", () => {
+    const goExamples = examples.find((set) => set.language === "go");
+    expect(goExamples?.entries.map((entry) => entry.description)).toEqual([
+      'Create an AWS account returns "AWS Account object" response',
+      'Create an AWS integration returns "AWS Account object" response',
+    ]);
+  });
+});
+
+/**
  * The glob that feeds the loader is the only source of example code, and an
  * empty match renders exactly like a corpus where no operation has examples:
  * every API page gets its Curl tab and nothing else, and the build succeeds.

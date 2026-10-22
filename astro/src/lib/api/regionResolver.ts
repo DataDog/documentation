@@ -102,6 +102,34 @@ export function getRegions(
 }
 
 /**
+ * The fully-qualified host each region uses, keyed by region key, for an
+ * operation whose `site` enum holds per-region hosts (pass 2 of
+ * `getRegions`). Empty when the enum holds bare site domains.
+ *
+ * As in Hugo, the enum is walked in order and a later match for a region
+ * replaces an earlier one.
+ */
+export function getRegionHosts(
+  spec: Pick<OpenAPIV3.Document, "servers">,
+  operation?: Pick<OpenAPIV3.OperationObject, "servers">,
+): Map<string, string> {
+  const hosts = new Map<string, string>();
+  const servers = operation?.servers ?? spec.servers;
+  const siteEnum = servers?.[0]?.variables?.site?.enum;
+  if (!Array.isArray(siteEnum)) return hosts;
+
+  const sites = new Set(getDefaultRegions().map((region) => region.site));
+  if (siteEnum.some((domain) => sites.has(domain))) return hosts;
+
+  for (const domain of siteEnum) {
+    for (const [regionKey, exactDomains] of getExactDomains()) {
+      if (exactDomains.includes(domain)) hosts.set(regionKey, domain);
+    }
+  }
+  return hosts;
+}
+
+/**
  * Builds an endpoint URL from a server block (or falls back to `api.{site}{path}`).
  * Resolves the `{subdomain}` and `{site}` variables in the server URL template.
  */

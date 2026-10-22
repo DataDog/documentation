@@ -307,6 +307,32 @@ describe("ApiSchemaTable — modifiers and content", () => {
     expect(html).toContain("A value");
   });
 
+  it("marks a deprecated union option's row DEPRECATED", async () => {
+    const html = await renderTable({
+      fields: [
+        {
+          name: "query",
+          type: "oneOf",
+          required: false,
+          deprecated: false,
+          readOnly: false,
+          description: "",
+          unionOptions: [
+            {
+              label: "Option A",
+              type: "object",
+              description: "APM query.",
+              deprecated: true,
+              fields: [],
+            },
+          ],
+        },
+      ],
+    });
+    expect(html).toContain("schema-table__row--deprecated");
+    expect(html).toMatch(/DEPRECATED<\/strong> APM query\./);
+  });
+
   it("escapes HTML in field names and types", async () => {
     const html = await renderTable({
       fields: [

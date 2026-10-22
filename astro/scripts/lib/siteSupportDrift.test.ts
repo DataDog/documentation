@@ -102,7 +102,7 @@ describe("collectApiCategorySlugs", () => {
       },
     };
     expect([...collectApiCategorySlugs([spec])].sort()).toEqual([
-      "cases",
+      "case-management",
       "experiments",
     ]);
   });

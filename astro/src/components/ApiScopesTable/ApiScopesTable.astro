@@ -14,9 +14,12 @@ import { getScopeGroupsView, type ScopeGroup } from "@lib/api/scopesBuilder";
 interface Props {
   /** Defaults to the groups built from the spec. Passed only by tests. */
   groups?: ScopeGroup[];
+  /** The level of each group's heading. Defaults to 3. */
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
 }
 
-const { groups = getScopeGroupsView() } = Astro.props;
+const { groups = getScopeGroupsView(), headingLevel = 3 } = Astro.props;
+const HeadingTag = `h${headingLevel}` as const;
 const lang = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(lang);
 const cl = classListFactory(styles);
@@ -29,7 +32,9 @@ const cl = classListFactory(styles);
         {group.anchors.map((anchor) => (
           <span id={anchor} class={cl("api-scopes-table__anchor")} />
         ))}
-        <h3 class={cl("api-scopes-table__heading")}>{group.heading}</h3>
+        <HeadingTag class={cl("api-scopes-table__heading")}>
+          {group.heading}
+        </HeadingTag>
         <table class={cl("api-scopes-table__table")}>
           <thead>
             <tr>

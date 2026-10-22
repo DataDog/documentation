@@ -51,7 +51,9 @@ export default {
       attributes: {},
     },
     "api-scopes": {
-      attributes: {},
+      attributes: {
+        headingLevel: { type: Number, matches: [2, 3, 4, 5, 6] },
+      },
       selfClosing: true,
     },
     "whats-next": {

@@ -16,7 +16,12 @@
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
-import { buildMarkdocStr, parse } from "@lib/plaintext/helpers";
+import {
+  buildMarkdocStr,
+  nodesFromMd,
+  parse,
+  plaintext,
+} from "@lib/plaintext/helpers";
 import type { HeadingLevel } from "@lib/componentUtils/headingLevels";
 import { collapseContentNode } from "@components/CollapseContent/plaintext/CollapseContent";
 import { alertNode, type AlertLevel } from "@components/Alert/plaintext/Alert";
@@ -69,6 +74,49 @@ function* unwrapChildParagraphs(node: MarkdocNode): Generator<MarkdocNode> {
   }
 }
 
+// MISSING_TRANSLATION_LABEL: the table hint is not in the i18n file yet.
+const MARKDOC_TABLE_HINT =
+  "The next table uses Markdoc table syntax: the first row is the header, `---` separates rows, and each list item is one cell, in column order.";
+
+/** Every `th` and `td` under `node`. */
+function* tableCells(node: MarkdocNode): Generator<MarkdocNode> {
+  for (const child of node.children) {
+    if (child.type === "th" || child.type === "td") {
+      yield child;
+    } else {
+      yield* tableCells(child);
+    }
+  }
+}
+
+function containsNodeType(node: MarkdocNode, type: string): boolean {
+  return node.children.some(
+    (child) => child.type === type || containsNodeType(child, type),
+  );
+}
+
+/**
+ * A pipe-table row can't span lines, so a table fits one only when every cell
+ * is inline content with no hard line break. A soft break is just authored
+ * line wrapping, so it becomes a space.
+ */
+function fitsPipeTable(table: MarkdocNode): boolean {
+  for (const cell of tableCells(table)) {
+    const isInlineOnly = cell.children.every(
+      (child) => child.type === "inline",
+    );
+    if (!isInlineOnly || containsNodeType(cell, "hardbreak")) return false;
+  }
+  return true;
+}
+
+function replaceSoftBreaksWithSpaces(node: MarkdocNode): void {
+  node.children = node.children.map((child) =>
+    child.type === "softbreak" ? plaintext(" ") : child,
+  );
+  node.children.forEach(replaceSoftBreaksWithSpaces);
+}
+
 function buildTwinAdapters(
   options: TwinRenderOptions,
 ): Record<string, TwinAdapter> {
@@ -90,6 +138,20 @@ function buildTwinAdapters(
       ),
 
     "agent-only": (node) => agentOnlyNode(descend(node.children)),
+
+    // Markdoc parses `{% table %}` as a tag around a real `table` node. A table
+    // of one-line cells unwraps to that node, which `format()` writes as a
+    // Markdown pipe table, as prod's `.md` has. A cell with block content
+    // (a list, a code block, several paragraphs) can't fit a pipe table, so
+    // that table stays in Markdoc syntax, after a hint that explains it.
+    table: (node) => {
+      node.children = descend(node.children);
+      if (node.children.every(fitsPipeTable)) {
+        node.children.forEach(replaceSoftBreaksWithSpaces);
+        return node.children;
+      }
+      return [...nodesFromMd(MARKDOC_TABLE_HINT), node];
+    },
 
     img: (node) => {
       if (attr(node, "inline")) return []; // Drop inline images from plaintext
@@ -176,14 +238,17 @@ function transformNodes(
   return nodes.flatMap((node) => transformNode(node, adaptersByTag));
 }
 
+/** The body's top-level nodes, with each tag that has a twin rebuilt by it. */
+export function transformMdocWithTwins(
+  body: string,
+  options: TwinRenderOptions = {},
+): MarkdocNode[] {
+  return transformNodes(parse(body).children, buildTwinAdapters(options));
+}
+
 export function renderMdocWithTwins(
   body: string,
   options: TwinRenderOptions = {},
 ): string {
-  const document = parse(body);
-  const transformed = transformNodes(
-    document.children,
-    buildTwinAdapters(options),
-  );
-  return buildMarkdocStr(transformed);
+  return buildMarkdocStr(transformMdocWithTwins(body, options));
 }

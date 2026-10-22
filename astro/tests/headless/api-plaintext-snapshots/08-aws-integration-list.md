@@ -237,7 +237,7 @@ export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datado
 export DD_API_KEY="<DD_API_KEY>"
 export DD_APP_KEY="<DD_APP_KEY>"
 
-curl -X GET "https://api.${DD_SITE}/api/v2/integration/aws/accounts?aws_account_id=123456789012" \
+curl -X GET "https://api.${DD_SITE}/api/v2/integration/aws/accounts" \
 -H "Accept: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"

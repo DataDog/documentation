@@ -59,7 +59,11 @@ describe("apiCodeExampleNode", () => {
     expect(out).not.toContain("**Get a thing**");
   });
 
-  it("includes per-entry headings when there are multiple entries per language", () => {
+  /**
+   * Prod's `.md` writes no title above an SDK example, and each example's
+   * first comment already repeats its description.
+   */
+  it("writes no per-entry headings when there are multiple entries per language", () => {
     const multiEntry: CodeExampleSet[] = [
       {
         language: "curl",
@@ -75,8 +79,10 @@ describe("apiCodeExampleNode", () => {
       },
     ];
     const out = render(multiEntry);
-    expect(out).toContain("**Basic**");
-    expect(out).toContain("**With auth**");
+    expect(out).not.toContain("**Basic**");
+    expect(out).not.toContain("**With auth**");
+    expect(out).toContain("curl -X GET ...");
+    expect(out).toContain('curl -H "DD-API-KEY: ..." -X GET ...');
   });
 
   it("appends run instructions when a set has them", () => {

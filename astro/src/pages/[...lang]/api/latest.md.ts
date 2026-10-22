@@ -16,22 +16,20 @@ import { apiBreadcrumbs } from "@lib/api/pageMeta";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
-import { buildPlaintextPage, heading, parse } from "@lib/plaintext/helpers";
+import { buildPlaintextPage, heading } from "@lib/plaintext/helpers";
+import { transformMdocWithTwins } from "@lib/plaintext/twinTransform";
 
 function apiLandingBody(
   rootEntry: CollectionEntry<"en">,
   lang: Locale,
   pathname: string,
+  site: URL | undefined,
 ): MarkdocNode[] {
   return [
     heading(1, rootEntry.data.title),
     ...siteSupportNoteNodes(pathname, lang, rootEntry.data.site_support_id),
-    ...overviewContentNodes(rootEntry),
+    ...transformMdocWithTwins(rootEntry.body ?? "", { site }),
   ];
-}
-
-function overviewContentNodes(rootEntry: CollectionEntry<"en">): MarkdocNode[] {
-  return parse(rootEntry.body ?? "").children;
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -52,7 +50,7 @@ export const GET: APIRoute = async ({ params, url, site }) => {
   }
 
   const body = buildPlaintextPage(
-    apiLandingBody(rootEntry, lang, url.pathname),
+    apiLandingBody(rootEntry, lang, url.pathname, site),
     {
       title: rootEntry.data.title,
       description: rootEntry.data.description ?? "",

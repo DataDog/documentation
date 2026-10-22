@@ -269,15 +269,13 @@ export function getCodeExamplesForOperation(
 /*  Internal helpers                                                   */
 /* ------------------------------------------------------------------ */
 
+/** Suffixes already start with an underscore (`_1716720881`), as in Hugo. */
 function buildExampleFilename(
   operationId: string,
   suffix: string,
   ext: string,
 ): string {
-  if (suffix) {
-    return `${operationId}_${suffix}${ext}`;
-  }
-  return `${operationId}${ext}`;
+  return `${operationId}${suffix}${ext}`;
 }
 
 function findExampleCode(

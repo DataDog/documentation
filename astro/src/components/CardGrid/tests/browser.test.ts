@@ -55,6 +55,34 @@ async function waitForGridImages(grid: import("@playwright/test").Locator) {
   }
 }
 
+/**
+ * Ready a grid for a hover whose tooltip position is checked: its images are
+ * decoded, and it has stopped moving.
+ *
+ * The tooltip is `position: fixed` at viewport coordinates measured once, on
+ * show (CardGridTooltips.tsx). If the page shifts after that, as when lazy
+ * images above the grid finish loading, the card moves but the bubble stays,
+ * and ends up over the card instead of above it. So the grid's position must
+ * be the same on two reads a frame apart before the hover.
+ */
+async function waitForSettledGrid(grid: import("@playwright/test").Locator) {
+  await waitForGridImages(grid);
+  await expect
+    .poll(() =>
+      grid.evaluate(
+        (element) =>
+          new Promise<boolean>((resolve) => {
+            const before = element.getBoundingClientRect();
+            requestAnimationFrame(() => {
+              const after = element.getBoundingClientRect();
+              resolve(before.top === after.top && before.left === after.left);
+            });
+          }),
+      ),
+    )
+    .toBe(true);
+}
+
 test.describe("CardGrid component", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/dd_e2e/components/card-grid");
@@ -80,7 +108,7 @@ test.describe("CardGrid component", () => {
 
     await waitForTooltipHydration(grid);
     const card = grid.locator(".image-card").first();
-    await card.scrollIntoViewIfNeeded();
+    await waitForSettledGrid(grid);
     await card.hover();
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
 
@@ -262,6 +290,7 @@ test.describe("CardGrid visual snapshots", () => {
     const tooltip = grid.locator(".card-grid__tooltip");
 
     await waitForTooltipHydration(grid);
+    await waitForSettledGrid(grid);
     await grid.locator(".image-card").first().hover();
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
 

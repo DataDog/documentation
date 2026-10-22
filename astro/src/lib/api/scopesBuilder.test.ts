@@ -195,7 +195,7 @@ describe("buildScopeGroups: collection", () => {
     ]);
   });
 
-  it("links endpoints to the overridden category slug", () => {
+  it("links Case Management endpoints to its tag slug", () => {
     const [group] = buildScopeGroups([
       specWith([
         {
@@ -207,7 +207,10 @@ describe("buildScopeGroups: collection", () => {
       ]),
     ]);
     expect(group.scopes[0].endpoints).toEqual([
-      { summary: "Get a case", href: "/api/latest/cases/#get-a-case" },
+      {
+        summary: "Get a case",
+        href: "/api/latest/case-management/#get-a-case",
+      },
     ]);
   });
 

@@ -116,9 +116,13 @@ function getFieldDescription(field: SchemaField): string {
   return parts.join(" ");
 }
 
-/** An option row gets the same enum and default parts as a field row. */
+/** An option row gets the same label, enum and default parts as a field row. */
 function getOptionDescription(option: UnionOption): string {
-  return [option.description ?? "", ...valueParts(option)]
+  return [
+    option.deprecated ? "**DEPRECATED**:" : "",
+    option.description ?? "",
+    ...valueParts(option),
+  ]
     .filter(Boolean)
     .join(" ");
 }

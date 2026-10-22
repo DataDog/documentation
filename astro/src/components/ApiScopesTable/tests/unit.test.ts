@@ -47,10 +47,13 @@ const syntheticGroups: ScopeGroup[] = [
   },
 ];
 
-const renderTable = async (groups?: ScopeGroup[]) => {
+const renderTable = async (groups?: ScopeGroup[], headingLevel?: number) => {
   const container = await AstroContainer.create();
   return container.renderToString(ApiScopesTable, {
-    props: groups ? { groups } : {},
+    props: {
+      ...(groups ? { groups } : {}),
+      ...(headingLevel ? { headingLevel } : {}),
+    },
   });
 };
 
@@ -69,6 +72,16 @@ describe("ApiScopesTable", () => {
     ).toBe(2);
     expect(html).toMatch(/>CI Visibility GitHub Accounts, Monitors<\/h3>/);
     expect(html).toMatch(/>Monitors, Synthetics<\/h3>/);
+  });
+
+  it("renders the group headings at the given heading level", async () => {
+    const html = await renderTable(syntheticGroups, 2);
+
+    expect(countOf(html, /<h2[^>]*class="[^"]*api-scopes-table__heading/)).toBe(
+      2,
+    );
+    expect(countOf(html, /<h3/)).toBe(0);
+    expect(html).toMatch(/>Monitors, Synthetics<\/h2>/);
   });
 
   it("renders the three column headers", async () => {

@@ -167,6 +167,41 @@ describe("ApiEndpoint permissions and OAuth scopes", () => {
   });
 });
 
+describe("ApiEndpoint Overview heading", () => {
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  /** As Hugo does: the permissions and OAuth sentences sit under Overview. */
+  it("shows the heading above the permissions sentence when there is no description", async () => {
+    const html = await renderEndpoint({ permissions: ["dashboards_read"] });
+
+    expect(html).toMatch(
+      /api-endpoint__overview-heading[^>]*>Overview<\/h3>[\s\S]*This endpoint requires the/,
+    );
+  });
+
+  it("shows the heading above the OAuth sentence when there is no description", async () => {
+    const html = await renderEndpoint({ oauthScopes: ["dashboards_read"] });
+
+    expect(html).toMatch(
+      /api-endpoint__overview-heading[^>]*>Overview<\/h3>[\s\S]*OAuth apps require the/,
+    );
+  });
+
+  /** Unlike Hugo, which shows an empty Overview heading. */
+  it("leaves out the heading when nothing goes under it", async () => {
+    const html = await renderEndpoint({});
+
+    expect(html).not.toContain("api-endpoint__overview-heading");
+  });
+});
+
 describe("ApiEndpoint argument tables", () => {
   const field = (name: string) => ({
     name,

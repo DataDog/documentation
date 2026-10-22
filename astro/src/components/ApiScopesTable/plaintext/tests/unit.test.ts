@@ -69,6 +69,16 @@ describe("apiScopesTableNodes", () => {
     ]);
   });
 
+  it("emits the group headings at the given heading level", () => {
+    const md = renderGroups(syntheticGroups, { headingLevel: 2 });
+    const headings = md.split("\n").filter((line) => line.startsWith("#"));
+
+    expect(headings).toEqual([
+      "## CI Visibility GitHub Accounts, Monitors",
+      "## Monitors, Synthetics",
+    ]);
+  });
+
   it("emits the HTML table's column headers", () => {
     const md = renderGroups(syntheticGroups);
 

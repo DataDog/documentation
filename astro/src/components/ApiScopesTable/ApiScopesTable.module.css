@@ -9,7 +9,7 @@
   );
 }
 
-/* An h3 for the outline (it sits under the page's h2), sized like an h4. */
+/* Sized like an h4, whatever its level in the outline. */
 .api-scopes-table__heading {
   font-size: var(--font-size-h4);
   font-weight: var(--font-weight-semibold);

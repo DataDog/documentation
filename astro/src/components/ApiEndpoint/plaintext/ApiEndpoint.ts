@@ -37,9 +37,7 @@ export function apiEndpointNodes(
   return [
     ...statusNotice(ep),
     ...apiRegionTableNodes(ep.method, ep.regionUrls),
-    ...descriptionNodes(ep),
-    ...permissionsNodes(ep),
-    ...oauthScopesNodes(ep, lang),
+    ...overviewNodes(ep, lang),
     ...argumentsNodes(ep),
     ...requestBodyNodes(ep),
     ...responseNodes(ep),
@@ -57,11 +55,27 @@ function statusNotice(ep: EndpointData): MarkdocNode[] {
   return NO_CONTENT;
 }
 
+/**
+ * The description, permissions, and OAuth scopes, under an Overview heading.
+ * Hugo shows the heading even with nothing under it; this leaves it out.
+ */
+function overviewNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
+  const overviewContent = [
+    ...descriptionNodes(ep),
+    ...permissionsNodes(ep),
+    ...oauthScopesNodes(ep, lang),
+  ];
+  if (overviewContent.length === 0) {
+    return NO_CONTENT;
+  }
+  return [heading(3, "Overview"), ...overviewContent];
+}
+
 function descriptionNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.description) {
     return NO_CONTENT;
   }
-  return [heading(3, "Overview"), ...nodesFromMd(ep.description)];
+  return nodesFromMd(ep.description);
 }
 
 function permissionsNodes(ep: EndpointData): MarkdocNode[] {

@@ -882,6 +882,18 @@ describe("type column: enum and format", () => {
     expect(typeOf({ type: "boolean" })).toBe("boolean");
   });
 
+  it("reports any for a field with no type, where Hugo leaves it blank", () => {
+    expect(typeOf({ description: "Accepts any JSON value." })).toBe("any");
+  });
+
+  it("reports [any] for array items with no type, where Hugo shows []", () => {
+    expect(typeOf({ type: "array", items: {} })).toBe("[any]");
+  });
+
+  it("keeps object for a field with properties but no type", () => {
+    expect(typeOf({ properties: { a: { type: "string" } } })).toBe("object");
+  });
+
   it("does NOT apply the format rule to parameters", () => {
     // Parameters render from `layouts/partials/api/arguments.html`, which
     // prints `.schema.type` and ignores `format`. So `list_id` is `integer`,
@@ -1708,5 +1720,142 @@ describe("default values", () => {
     );
 
     expect(field.defaultValue).toBe("account");
+  });
+});
+
+describe("a deprecated union variant", () => {
+  const spec = {
+    components: {
+      schemas: {
+        ApmResourceStatsQuery: {
+          type: "object",
+          deprecated: true,
+          description: "APM resource stats query.",
+          properties: { data_source: { type: "string", enum: ["apm"] } },
+        },
+        MetricsQuery: {
+          type: "object",
+          description: "Metrics query.",
+          properties: { data_source: { type: "string", enum: ["metrics"] } },
+        },
+      },
+    },
+  };
+  const variants = [
+    { $ref: "#/components/schemas/ApmResourceStatsQuery" },
+    { $ref: "#/components/schemas/MetricsQuery" },
+  ];
+
+  it("marks its option deprecated, as Hugo does", () => {
+    const schema = {
+      type: "object",
+      properties: { query: { oneOf: variants } },
+    };
+
+    const [query] = schemaToFields(spec, schema);
+    expect(query.unionOptions?.map((option) => option.deprecated)).toEqual([
+      true,
+      undefined,
+    ]);
+  });
+
+  it("marks an inner option row deprecated", () => {
+    const schema = {
+      type: "object",
+      properties: { query: { oneOf: [{ oneOf: variants }] } },
+    };
+
+    const [query] = schemaToFields(spec, schema);
+    const [outer] = query.unionOptions ?? [];
+    expect(outer.fields.map((field) => field.deprecated)).toEqual([
+      true,
+      false,
+    ]);
+  });
+});
+
+describe("a oneOf with a sibling type", () => {
+  // NotebookCellTime: `type: object` beside its `oneOf`. Hugo's typeColumn
+  // prints `format || type`, then appends `<oneOf>`.
+  const spec = {
+    components: {
+      schemas: {
+        NotebookCellTime: {
+          type: "object",
+          description: "Timeframe for the notebook cell.",
+          oneOf: [{ type: "string" }, { type: "object" }],
+        },
+      },
+    },
+  };
+
+  it("keeps the type before <oneOf>", () => {
+    const schema = {
+      type: "object",
+      properties: { time: { $ref: "#/components/schemas/NotebookCellTime" } },
+    };
+
+    const [time] = schemaToFields(spec, schema);
+    expect(time.type).toBe("object <oneOf>");
+    expect(time.unionOptions).toHaveLength(2);
+  });
+
+  it("leaves a oneOf without a type as a bare oneOf", () => {
+    const schema = {
+      type: "object",
+      properties: { time: { oneOf: [{ type: "string" }, { type: "object" }] } },
+    };
+
+    const [time] = schemaToFields({}, schema);
+    expect(time.type).toBe("oneOf");
+  });
+});
+
+describe("a top-level oneOf body", () => {
+  // SecurityMonitoringRuleCreatePayload. Hugo's schemaTable turns each branch
+  // into a top-level row named `Option n`.
+  const spec = {
+    components: {
+      schemas: {
+        StandardRule: {
+          type: "object",
+          description: "Create a new rule.",
+          properties: {
+            type: { type: "string", enum: ["log_detection"] },
+            name: { type: "string" },
+          },
+        },
+        SignalRule: {
+          type: "object",
+          description: "Create a new signal correlation rule.",
+          properties: {
+            type: { type: "string", enum: ["signal_correlation"] },
+          },
+        },
+        RulePayload: {
+          oneOf: [
+            { $ref: "#/components/schemas/StandardRule" },
+            { $ref: "#/components/schemas/SignalRule" },
+          ],
+        },
+      },
+    },
+  };
+
+  it("lists each branch as a top-level Option row, with no root row", () => {
+    const fields = topLevelSchemaToFields(spec, {
+      $ref: "#/components/schemas/RulePayload",
+    });
+
+    expect(
+      fields.map((field) => [field.name, field.type, field.description]),
+    ).toEqual([
+      ["Option 1", "object", "Create a new rule."],
+      ["Option 2", "object", "Create a new signal correlation rule."],
+    ]);
+    expect(fields[0].children?.map((child) => child.name)).toEqual([
+      "type",
+      "name",
+    ]);
   });
 });

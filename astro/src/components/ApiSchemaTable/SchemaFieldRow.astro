@@ -65,7 +65,7 @@ const optionFields: SchemaField[] =
     // `object`. Scalar variants carry no nested rows.
     type: option.type,
     required: false,
-    deprecated: false,
+    deprecated: option.deprecated === true,
     readOnly: false,
     description: option.description ?? "",
     ...(option.enumValues ? { enumValues: option.enumValues } : {}),

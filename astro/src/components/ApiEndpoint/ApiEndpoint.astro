@@ -74,6 +74,14 @@ const hasParams =
   ((ep.pathParams && ep.pathParams.length > 0) ||
     (ep.queryParams && ep.queryParams.length > 0) ||
     (ep.headerParams && ep.headerParams.length > 0));
+
+// Hugo shows the Overview heading on every operation, even with nothing
+// under it. Show it only when a description, permissions, or scopes follow.
+const hasOverview =
+  ep &&
+  (Boolean(ep.description) ||
+    (ep.permissions && ep.permissions.length > 0) ||
+    (ep.oauthScopes && ep.oauthScopes.length > 0));
 ---
 
 {
@@ -121,7 +129,7 @@ const hasParams =
       </div>
 
       {/* Description — rendered as slot content from the parent page */}
-      {ep.description && (
+      {hasOverview && (
         <h3 class={cl("api-endpoint__overview-heading")}>
           {translate("overview")}
         </h3>
