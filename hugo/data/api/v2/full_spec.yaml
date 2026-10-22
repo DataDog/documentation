@@ -136786,6 +136786,10 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/TimeseriesResponseAttributes"
+        id:
+          description: The identifier of the timeseries response resource.
+          example: "0"
+          type: string
         type:
           $ref: "#/components/schemas/TimeseriesFormulaResponseType"
       type: object
@@ -137644,24 +137648,29 @@ components:
       properties:
         family:
           description: Unit family, allows for conversion between units of the same family, for scaling.
-          example: time
+          example: percentage
           type: string
+        id:
+          description: The identifier of the unit.
+          example: 17
+          format: int64
+          type: integer
         name:
-          description: Unit name
-          example: minute
+          description: Unit name.
+          example: percent
           type: string
         plural:
           description: Plural form of the unit name.
-          example: minutes
+          example: percent
           type: string
         scale_factor:
           description: Factor for scaling between units of the same family.
-          example: 60.0
+          example: 1.0
           format: double
           type: number
         short_name:
           description: Abbreviation of the unit.
-          example: min
+          example: "%"
           type: string
       type: object
     UnitCostCreateRequest:

@@ -21,3 +21,10 @@ entries:
       - QueryMetrics
     title: Document missing response fields for the v1 Query timeseries points 
       endpoint
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40935
+    operations:
+      - QueryScalarData
+      - QueryTimeseriesData
+    title: Fix OpenAPI response schema for POST /api/v2/query/timeseries
