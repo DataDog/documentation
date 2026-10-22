@@ -424,7 +424,7 @@ function multipartFormFields(
   if (!multipart) return undefined;
 
   const schema = resolveSchema(spec, multipart.schema);
-  const properties: Record<string, any> = schema?.properties ?? {};
+  const properties = schema?.properties ?? {};
   return Object.keys(properties)
     .sort()
     .map((name) => {
@@ -437,8 +437,11 @@ function multipartFormFields(
     });
 }
 
-function resolveSchema(spec: OpenAPIV3.Document, schema: any): any {
-  return schema?.$ref ? resolveRef(spec, schema.$ref) : schema;
+function resolveSchema(
+  spec: OpenAPIV3.Document,
+  schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject | undefined,
+): OpenAPIV3.SchemaObject | undefined {
+  return isReference(schema) ? resolveRef(spec, schema.$ref) : schema;
 }
 
 /** SDK run commands for the given operation, keyed by region like curl. */
