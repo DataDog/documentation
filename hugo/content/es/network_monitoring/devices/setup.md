@@ -1,132 +1,136 @@
 ---
 aliases:
 - /es/network_monitoring/devices/getting_started/
-description: Comience con sus dispositivos conectados a la red, como enrutadores,
-  conmutadores, servidores y cortafuegos.
+description: Comience a utilizar sus dispositivos conectados a la red, como enrutadores,
+  switches, servidores y firewalls.
 further_reading:
 - link: /network_monitoring/devices/supported_devices
   tag: doc
   text: Dispositivos NDM compatibles
 - link: network_monitoring/devices/data/
   tag: Doc
-  text: Datos NDM recopilados
+  text: Datos recopilados de NDM
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: Blog
-  text: Monitoree y diagnostique problemas de rendimiento de la red con Traps SNMP
+  text: Haga un seguimiento y un diagnóstico de problemas de rendimiento de la red
+    con capturas SNMP
 title: Configuración
 ---
 ## Descripción general {#overview}
 
-El Monitoreo de Dispositivos de Red le ayuda a obtener información sobre la salud y el rendimiento de sus enrutadores, conmutadores y cortafuegos locales. Después de que el Agente de Datadog esté instalado en un host que tenga acceso a la red, el Agente puede detectar automáticamente los dispositivos de red y recopilar métricas de inmediato.
+Network Device Monitoring le ayuda a obtener información sobre el estado y el rendimiento de sus enrutadores, switches y firewalls locales. Después de instalar el Datadog Agent en un servidor que tiene acceso a la red, el Agent puede detectar automáticamente los dispositivos de red y recopilar métricas de inmediato.
 
-Esta guía cubre la configuración de Network Device Monitoring en sus hosts, enriqueciendo las etiquetas de los dispositivos, configurando y visualizando perfiles de dispositivos, visualizando datos en NetFlow Monitoring y validando datos en los tableros y el Mapa de Topología de Dispositivos proporcionados.
+Esta guía cubre la configuración de Network Device Monitoring en sus servidores, el enriquecimiento de etiquetas de dispositivos, la configuración y visualización de perfiles de dispositivos, la visualización de datos en NetFlow Monitoring y la validación de datos en los dashboards y el mapa de topología de dispositivos proporcionados.
 
-{{< img src="network_device_monitoring/getting_started/ndm_landing_page_2.png" alt="La página de inicio de Network Device Monitoring, mostrando gráficos e interfaces." style="width:100%;" >}}
+{{< img src="network_device_monitoring/getting_started/ndm_landing_page_2.png" alt="La página de inicio de Network Device Monitoring, que muestra gráficos e interfaces." style="width:100%;" >}}
 
 ## Cómo funciona {#how-it-works}
 
-El siguiente diagrama ilustra el flujo de datos entre Syslog, traps SNMP e información de NetFlow. Los dispositivos envían la información relevante al Agente de Datadog a través de los puertos como se muestra en el diagrama (los puertos se pueden cambiar si es necesario mediante la configuración en el Agente). Para integraciones basadas en API, el Agente de Datadog se conecta con los controladores o administradores de software del proveedor de dispositivos de red en las instalaciones o en la nube según las instrucciones específicas `https` de integraciones API por proveedor. El Agente de Datadog, configurado con NDM y desplegado en las instalaciones o en la nube, consolida todos los datos de dispositivos y red recopilados de su red y los envía a Datadog a través de HTTPS en el puerto `443`. Esto proporciona una observabilidad unificada y de pila completa de métricas, registros, trazas, monitores y tableros.
+El siguiente diagrama ilustra el flujo de datos entre Syslog, SNMP traps e información de NetFlow. Los dispositivos envían la información relevante al Datadog Agent a través de los puertos como se muestra en el diagrama (los puertos se pueden cambiar si es necesario mediante la configuración en el Agent). Para las integraciones basadas en API, el Datadog Agent se conecta con los controladores o administradores de software del proveedor del dispositivo de red, ya sea de forma local o en la nube, según las `https` instrucciones de integración de API por proveedor. El Datadog Agent, configurado con NDM e implementado de forma local o en la nube, consolida todos los datos recopilados de los dispositivos y la red desde su red y los envía a Datadog a través de HTTPS en el puerto `443`. Esto proporciona una observabilidad unificada de pila completa de métricas, logs, trazas, monitores y dashboards.
 
-  {{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="Diagrama NDM mostrando el flujo para la recopilación de Syslog, traps y Netflow." style="width:90%;" >}}
+  {{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="Diagrama de NDM que muestra el flujo para la recopilación de Syslog, traps y Netflow." style="width:90%;" >}}
 
 ## Próximos pasos {#next-steps}
 
-Siga las instrucciones a continuación para configurar Datadog para monitorear sus dispositivos de red.
+Siga las instrucciones a continuación para configurar Datadog para hacer un seguimiento de sus dispositivos de red.
 
 ## Requisitos previos {#prerequisites}
 
-### Instalar el Agente {#install-the-agent}
+### Instale el Agent {#install-the-agent}
 
-Navegue a la [página de instalación del Agente][1] e instale el [Agente de Datadog][2] en su host (generalmente un servidor que **no** es el dispositivo monitoreado).</br>
+Navegue a la [página de instalación del Agent][1] e instale el [Datadog Agent][2] en su servidor (generalmente un servidor que **no** es el dispositivo monitoreado).</br>
 
-{{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="La página de configuración del Agente, destacando la instalación en Ubuntu." style="width:100%;" >}}
+{{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="La página de configuración del Agent, destacando la instalación en Ubuntu." style="width:100%;" >}}
 
 ## Configuración {#setup}
 
-### Alta Disponibilidad {#high-availability}
+### Alta disponibilidad {#high-availability}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">El soporte de Alta Disponibilidad del Agente de Datadog no está disponible para su <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger"> El soporte de alta disponibilidad del Datadog Agent no es compatible con su <a href="/getting_started/site">sitio de Datadog</a> seleccionado ("{{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-El soporte de Alta Disponibilidad (HA) del Agente de Datadog en el Monitoreo de Dispositivos de Red le permite designar un Agente activo y un Agente en espera, asegurando un failover automático si el Agente activo encuentra un problema. Esta configuración elimina al Agente como un único punto de falla, manteniendo un monitoreo continuo durante incidentes inesperados o mantenimiento programado, como actualizaciones de sistema operativo y actualizaciones del Agente.
+El soporte de alta disponibilidad (HA) del Datadog Agent en Network Device Monitoring le permite designar un Agent activo y un Agent en espera, lo que garantiza una conmutación por error automática si el Agent activo encuentra un problema. Esta configuración elimina al Agent como un punto único de falla, manteniendo el monitoreo continuo durante incidentes inesperados o mantenimiento planificado, como actualizaciones del SO y actualizaciones del Agent.
 
-Puede configurar Agentes activos y en espera para funcionar como un par de HA en NDM. Si el Agente activo falla, el Agente en espera toma el control en 90 segundos, convirtiéndose en el nuevo Agente activo. Además, puede designar un Agente activo preferido, permitiendo que NDM vuelva automáticamente a él una vez que esté disponible nuevamente. Esta función permite el cambio proactivo de Agentes antes del mantenimiento programado.
+Puede configurar Agents activos y en espera para que funcionen como un par de alta disponibilidad (HA) en NDM. Si el Agent activo falla, el Agent en espera toma el control en un plazo de 90 segundos, convirtiéndose en el nuevo Agent activo. Además, puede designar un Agent activo preferido, lo que permite que NDM vuelva a él automáticamente una vez que esté disponible nuevamente. Esta función permite el cambio proactivo de Agent antes del mantenimiento programado.
 
-Para más información, consulte el [soporte de Alta Disponibilidad del Agente de Datadog][20].
+Para obtener más información, consulte [High Availability support of the Datadog Agent][20].
 
 ### Configuración {#configuration}
 
-Para comenzar a monitorear sus dispositivos de red, habilite el monitoreo SNMP utilizando uno de los siguientes métodos:
+Para comenzar a monitorear sus dispositivos de red, habilite el monitoreo SNMP usando uno de los siguientes métodos:
 
 [Dispositivos individuales][3]
-: Configura el seguimiento SNMP en sus dispositivos individuales.
+: Configure el monitoreo SNMP en sus dispositivos individuales.
 
 [Autodiscovery][4]
-: Configura el seguimiento SNMP utilizando Autodiscovery.
+: Configure el monitoreo SNMP usando Autodiscovery.
 
 [Ping][5]
-: Configura la verificación SNMP para enviar pings ICMP a tus dispositivos.
+: Configure la verificación SNMP para enviar pings ICMP a sus dispositivos.
 
 [Syslog][22]
-: Configura tus dispositivos para enviar mensajes Syslog.
+: Configure sus dispositivos para enviar mensajes de Syslog.
 
 [VPN Monitoring][21]
-: Configura el seguimiento de VPN para comenzar a realizar el seguimiento de los túneles VPN de sus dispositivos.
+: Configure el monitoreo de VPN para comenzar a monitorear los túneles VPN de sus dispositivos.
 
-### Enriquece los dispositivos de red con etiquetas {#enrich-network-devices-with-tags}
+### Enriquezca los dispositivos de red con etiquetas {#enrich-network-devices-with-tags}
 
-Después de que NDM esté configurado en tus dispositivos, puedes enriquecerlos aún más agregando etiquetas de dispositivos de red utilizando los siguientes métodos:
+Después de configurar NDM en sus dispositivos, puede enriquecerlos aún más agregando etiquetas de dispositivos de red usando los siguientes métodos:
 
 [Datadog Agent][2]
-: El Agente puede recopilar etiquetas de dispositivos al configurar [dispositivos individuales][3] o con [Autodiscovery][4].
+: El Agent puede recopilar etiquetas de dispositivo al configurar [dispositivos individuales][3] o con [Autodiscovery][4].
 
-[Device profiles][6]
-: Configura el Agente para recopilar y personalizar métricas y etiquetas específicas creando perfiles de dispositivos directamente en la aplicación.
+[Perfiles de dispositivo][6]
+: Configure el Agent para recopilar y personalizar métricas y etiquetas específicas creando perfiles de dispositivo directamente en la aplicación.
 
-[ServiceNow integration][7]
-: Enriquece dinámicamente los dispositivos de red monitoreados por Datadog Network Device Monitoring con datos definidos en la CMDB (Base de Datos de Gestión de Configuración) de ServiceNow.
+[Integración de ServiceNow][7]
+: Enriquezca dinámicamente los dispositivos de red monitoreados por Datadog Network Device Monitoring con datos definidos en la CMDB (Base de datos de gestión de configuración) de ServiceNow.
+
+Página del dispositivo
+: En la página de un dispositivo, haga clic en {{< ui >}}Device Settings{{< /ui >}}, abra la pestaña {{< ui >}}Tags{{< /ui >}} y haga clic en {{< ui >}}Edit Tags{{< /ui >}} en la sección {{< ui >}}User{{< /ui >}}. Un dispositivo admite hasta 20 etiquetas de usuario de forma predeterminada. Para solicitar un límite mayor para su organización, [contacte a Soporte][23].
 
 [Network Device Monitoring API](#use-the-network-api)
-: Utiliza la Network Device Monitoring API para agregar etiquetas a tus dispositivos de red de manera programática.
+: Utilice la API de Network Device Monitoring para agregar etiquetas a sus dispositivos de red mediante programación.
 
-### Personaliza métricas y etiquetas {#customize-metrics-and-tags}
+### Personalice métricas y etiquetas {#customize-metrics-and-tags}
 
-Personaliza métricas y etiquetas en tus dispositivos consultando la página de [Dispositivos Soportados][9] para ver los perfiles de dispositivo listos para usar. Si deseas editar o agregar más métricas, las siguientes opciones están disponibles:
+Personalice las métricas y etiquetas en sus dispositivos consultando la página [Dispositivos compatibles][9] para ver los perfiles de dispositivo predeterminados. Si desea editar o agregar más métricas, las siguientes opciones están disponibles:
 
 [Perfiles de dispositivo][10]
-: Edita directamente métricas y etiquetas en el archivo del Datadog Agent `yaml` con perfiles de dispositivo.
+: Edite directamente las métricas y etiquetas en el archivo `yaml` del Datadog Agent con perfiles de dispositivo.
 
-[Autorización de perfil basada en GUI][6]
-: Aprovecha la experiencia de incorporación de dispositivos basada en GUI de Datadog Network Monitoring, donde puedes agregar métricas y etiquetas personalizadas a tus dispositivos.
+[Creación de perfiles basada en GUI][6]
+: Aproveche la experiencia de incorporación de dispositivos basada en la interfaz gráfica de usuario de Datadog Network Monitoring, donde puede agregar métricas y etiquetas personalizadas a sus dispositivos.
 
 ### NetFlow Monitoring {#netflow-monitoring}
 
-Configura [NetFlow Monitoring][11] para visualizar y monitorear tus registros de flujo desde tus dispositivos habilitados para NetFlow.
+Configure [NetFlow Monitoring][11] para visualizar y monitorear sus registros de flujo desde sus dispositivos habilitados para NetFlow.
 
-{{< img src="network_device_monitoring/netflow/home.png" alt="La página de NetFlow Monitoring contiene pestañas para las principales fuentes, destinos, protocolos, puertos de origen, puertos de destino y tendencias de dispositivos." style="width:100%;" >}}
+{{< img src="network_device_monitoring/netflow/home.png" alt="La página de NetFlow Monitoring que contiene pestañas para los principales orígenes, destinos, protocolos, puertos de origen, puertos de destino y tendencias de dispositivos" style="width:100%;" >}}
 
-## Valida tus datos {#validate-your-data}
+## Valide sus datos {#validate-your-data}
 
-- Comienza a monitorear toda tu infraestructura de red en la página de [Dispositivos de Red][12].
-- Consulta las métricas recopiladas en los paneles listos para usar de Datadog:
-  - [Resumen de todos los dispositivos monitoreados][13]
-  - [Rendimiento de las interfaces en tus dispositivos de red][14]
-- Utiliza el [Mapa de Topología de Dispositivos de Red][15] para identificar y solucionar problemas con tus dispositivos.
+- Comience a hacer un seguimiento de toda su infraestructura de red en la página [Dispositivos de red][12].
+- Vea las métricas recopiladas en los tableros preconfigurados de Datadog:
+  - [Descripción general de todos los dispositivos monitoreados][13]
+  - [Rendimiento de las interfaces en sus dispositivos de red][14]
+- Utilice el [Mapa de topología de dispositivos][15] de red para identificar y solucionar problemas con sus dispositivos.
 
-## Utiliza la API de Red {#use-the-network-api}
+## Utilice la API de red {#use-the-network-api}
 
-- Utiliza la [API de Red][8] para extraer la siguiente información sobre tus dispositivos de red:
-  * [Obtén la lista de interfaces para tus dispositivos.][16]
-  - [Obtén la lista de etiquetas para tus dispositivos.][17]
-  - [Actualiza la lista de etiquetas para tus dispositivos.][18]
+- Utilice la [API de red][8] para extraer la siguiente información sobre sus dispositivos de red:
+  * [Obtenga la lista de interfaces para sus dispositivos.][16]
+  - [Obtenga la lista de etiquetas para sus dispositivos.][17]
+  - [Actualice la lista de etiquetas para sus dispositivos.][18]
 
 ## Solución de problemas {#troubleshooting}
 
-- Consulte la página de [Solución de problemas][19] de Network Device Monitoring para obtener más información sobre cómo resolver los problemas de NDM.
+- Consulte la página de [Solución de problemas][19] de dispositivos de red para obtener más información sobre cómo solucionar sus problemas de NDM.
 
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -152,3 +156,4 @@ Configura [NetFlow Monitoring][11] para visualizar y monitorear tus registros de
 [20]: /es/integrations/guide/high_availability
 [21]: /es/network_monitoring/devices/vpn_monitoring
 [22]: /es/network_monitoring/devices/syslog
+[23]: /es/help/

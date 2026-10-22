@@ -1,54 +1,72 @@
 ---
+description: Aprenda a extraer registros de Google Cloud Pub/Sub utilizando Observability
+  Pipelines Worker.
 disable_toc: false
 products:
 - icon: logs
-  name: Logs
+  name: Registros
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-title: Fuente Google Pub/Sub
+title: Fuente de Google Pub/Sub
 ---
-
 {{< product-availability >}}
 
-Utiliza la fuente Google Pub/Sub de Observability Pipelines para extraer logs del sistema de mensajería Google Cloud Pub/Sub. Selecciona y configura esta fuente cuando [configures un pipeline][1].
+## Descripción general {#overview}
 
-## Requisitos previos
+Utilice la fuente de Google Pub/Sub de Observability Pipelines para extraer registros del sistema de mensajería de Google Cloud Pub/Sub.
+
+## Requisitos previos {#prerequisites}
 
 {{% observability_pipelines/prerequisites/google_pubsub %}}
 
-## Configurar la fuente en la interfaz de usuario del pipeline
+## Configuración {#setup}
 
-Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguiente información corresponde a la configuración de la fuente en la interfaz de usuario del pipeline.
+Configure esta fuente cuando [configure una canalización][1]. Puede configurar un pipeline en la [UI][5], utilizando la [API][6] o con [Terraform][7]. Las instrucciones de esta sección son para configurar la fuente en la interfaz de usuario.
 
-1. Introduce el nombre del proyecto fuente.
-1. Si tienes un archivo JSON de credenciales, introduce la ruta a tu archivo JSON de credenciales. El archivo de credenciales debe colocarse en `DD_OP_DATA_DIR/config`. También puedes utilizar la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS` para proporcionar la ruta a las credenciales.
-    - Si utilizas la [identidad de cargas de trabajo][2] en Google Kubernetes Engine (GKE), se te proporcionará la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS`.
-    - El worker utiliza [métodos de autenticación de Google][4] estándar.
-1. Introduce el nombre de la suscripción.
-1. Selecciona el decodificador que deseas utilizar (Bytes, GELF, JSON, syslog).
-1. Opcionalmente, alterna al interruptor para activar TLS. Si activas TLS, se requieren los siguientes archivos de certificados y claves.<br>**Nota**: Todas las rutas a los archivos son relativas al directorio de datos de configuración, que es `/var/lib/observability-pipelines-worker/config/` por defecto. Consulta [Configuraciones avanzadas del worker][3] para obtener más información. El archivo debe ser propiedad del usuario `observability-pipelines-worker group` y `observability-pipelines-worker` o al menos legible por el grupo o usuario.
-    - `Server Certificate Path`: La ruta al archivo del certificado que ha sido firmado por el archivo raíz de tu autoridad de certificación (CA) en DER o PEM (X.509).
-    - `CA Certificate Path`: La ruta al archivo del certificado que es el archivo raíz de tu autoridad de certificación (CA) en DER o PEM (X.509).
-    - `Private Key Path`: la ruta al archivo de clave privada `.key` que pertenece a la ruta de tu certificado de servidor en formato DER o PEM (PKCS #8).
+Después de seleccionar la fuente de Google Pub/Sub en la pipeline UI:
 
-## Configurar secretos
+1. Ingrese el nombre del proyecto fuente.
+1. Si tiene un archivo JSON de credenciales, ingrese la ruta a su archivo JSON de credenciales. El archivo de credenciales debe colocarse en `DD_OP_DATA_DIR/config`. Alternativamente, puede usar la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS` para proporcionar la ruta de la credencial.
+    - Si está utilizando [workload identity][2] en Google Kubernetes Engine (GKE), el `GOOGLE_APPLICATION_CREDENTIALS` se proporciona para usted.
+    - El Worker utiliza los [Google authentication methods] estándar.
+1. Ingrese el nombre de la suscripción.
+1. Seleccione el decodificador que desea utilizar (Bytes, GELF, JSON, syslog).
+
+### Configuración de TLS opcional {#optional-tls-settings}
+
+<div class="alert alert-danger">Para la administración de secretos: solo ingrese el identificador de la frase de contraseña de la clave TLS. <b>No</b> ingrese el valor real.</div>
+
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Gestión de secretos" %}}
 
-No hay identificadores secretos por defecto para esta fuente.
+No hay identificadores de secreto predeterminados para esta fuente.
 
 {{% /tab %}}
 
-{{% tab "Environment Variables" %}}
+{{% tab "Variables de entorno" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Métricas de salud {#health-metrics}
+
+Para [métricas de componente][8] y [métricas de búfer de fuente][9] emitidas por todas las fuentes, consulte la documentación de [Pipelines Usage Metrics][10]. Para filtrar o agrupar por métricas de fuente de Google Pub/Sub, utilice la etiqueta `component_type:gcp_pubsub`.
+
 [1]: /es/observability_pipelines/configuration/set_up_pipelines/
 [2]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[3]: /es/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [4]: https://cloud.google.com/docs/authentication#auth-flowchart
+[5]: https://app.datadoghq.com/observability-pipelines
+[6]: /es/api/latest/observability-pipelines/
+[7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[8]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[9]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[10]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
