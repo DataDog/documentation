@@ -2390,10 +2390,10 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits Code
-      url: bits_ai/bits_code
+    - name: Bits Investigation
+      url: error_tracking/bits_investigation
       parent: error_tracking
-      identifier: error_tracking_bits_ai_dev_agent
+      identifier: error_tracking_bits_investigation
       weight: 5
     - name: Monitors
       url: error_tracking/monitors
@@ -7036,6 +7036,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
+    - name: Prometheus
+      url: observability_pipelines/sources/prometheus/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_prometheus
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
@@ -7316,11 +7321,16 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 422
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry/metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 423
     - name: Prometheus
       url: /observability_pipelines/destinations/prometheus/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_prometheus
-      weight: 423
+      weight: 424
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
