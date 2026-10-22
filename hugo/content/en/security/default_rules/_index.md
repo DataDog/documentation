@@ -54,4 +54,4 @@ Click the following buttons to filter the detection rules. Security detection ru
 [4]: /security/workload_protection/
 [5]: /security/application_security/
 [6]: /security/cloud_security_management/identity_risks/
-[7]: /security/security_inbox/#investigate-attack-paths-with-context-graph
+[7]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox

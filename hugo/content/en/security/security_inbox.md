@@ -173,7 +173,7 @@ The **Reporting** tab shows a dashboard of Security Inbox trends over time, so y
 
 For supported Cloud Security attack-path findings, the **Context Graph** in the finding side panel shows the resources and relationships involved in the detected risk.
 
-1. In the **Finding Type** list, beside **attack_path**, click **Only** to filter the Security Inbox findings.
+1. In the **Finding Type** list,  beside **attack_path**, click **Only** to filter the Security Inbox findings.
 1. Click a finding to view it in a side panel. If the Security Inbox has grouping applied, open a group, then click a finding in the group to view it.
 1. Scroll to the **Context Graph** to inspect the resources and relationships associated with the finding.
 
@@ -196,7 +196,7 @@ For more information, see [Add to Security Inbox Rules][11] and [Set Due Date Ru
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/?category=cat-attack-paths
+[1]: /security/default_rules/?category=all#all
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/cloud_security_management/identity_risks/
 [4]: /security/code_security/software_composition_analysis

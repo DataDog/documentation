@@ -148,7 +148,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
 [8]: /security/automation_pipelines
 [9]: /security/cloud_security_management/misconfigurations/
 [10]: /security/cloud_security_management/identity_risks/
-[11]: /security/security_inbox/#investigate-attack-paths-with-context-graph
+[11]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox
 [12]: /security/code_security/iac_security/
 [13]: /security/application_security/api_posture/api_findings/
 [14]: /help
