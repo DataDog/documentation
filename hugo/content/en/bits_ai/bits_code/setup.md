@@ -89,9 +89,7 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
 {{% /tab %}}
 
 {{% tab "Bitbucket" %}}
-Bits Code requires a Bitbucket Cloud Premium workspace on Bitbucket.org.
-
-Install the [Bitbucket Cloud Source Code integration][101]. For full installation and configuration steps, see the [Bitbucket Cloud Source Code integration guide][102].
+1. Install the [Bitbucket Cloud Source Code integration][101]. For full installation and configuration steps, see the [Bitbucket Cloud Source Code integration guide][102].
 
 [101]: https://app.datadoghq.com/integrations/bitbucket-source-code/
 [102]: /integrations/bitbucket-source-code/
