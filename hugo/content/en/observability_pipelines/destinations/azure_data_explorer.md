@@ -21,21 +21,22 @@ The Azure Data Explorer destination is in Preview. Contact your account manager 
 
 ## Overview
 
-Use Observability Pipelines' Azure Data Explorer destination to send logs to [Azure Data Explorer][1] (ADX). The destination sends logs to your ADX cluster using [streaming ingestion][2].
+Use Observability Pipelines' Azure Data Explorer destination to send logs to [Azure Data Explorer][1] (ADX). The destination sends logs to your ADX cluster using streaming or queued ingestion. See [Ingestion modes](#ingestion-modes) for more information.
 
 ## Prerequisites
 
 Before you configure the Azure Data Explorer destination, you must have:
 
-- An ADX cluster with streaming ingestion enabled.
-    - See [Create a cluster][3] and [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
+- An ADX cluster. See [Create a cluster][3] for more information.
 - An ADX database and the tables you want to send logs to.
     - See [Create a database][4] and [Create a table in Azure Data Explorer][25] for more information.
-- A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
-    ```
-    .alter table ['<TABLE_NAME>'] policy streamingingestion enable
-    ```
-    - See [Streaming ingestion policy][5] for more information.
+- If you use the streaming ingestion mode, you must have:
+    - Streaming ingestion enabled on your cluster. See [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
+    - A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
+        ```
+        .alter table ['<TABLE_NAME>'] policy streamingingestion enable
+        ```
+        See [Streaming ingestion policy][5] for more information.
 - (Optional) An ingestion mapping on the target table, if you want to map log fields to table columns. See [Ingestion mappings][6] for more information.
 - An Azure identity that the Worker uses to authenticate to ADX. The identity must have ingestion permissions, such as the [Database Ingestor][7] role, on each database the Worker sends logs to.
 
@@ -47,8 +48,12 @@ Configure the Azure Data Explorer destination when you [set up a pipeline][8]. Y
 
 After you select the Azure Data Explorer destination in the pipeline UI:
 
-1. Enter the identifier for your Azure Data Explorer ingestion endpoint. This identifier references the ingestion endpoint, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
-    - **Note**: Use the cluster URI shown in the Azure portal, **not** the data ingestion URI, which starts with `ingest-`.
+1. In the **Ingestion Mode** dropdown menu, select one of the following:
+    - **Streaming** (default): Use streaming ingestion when you need low latency between ingestion and query. See [Streaming ingestion](#streaming-ingestion) for more information.
+    - **Queued**: Use queued ingestion if the stream of data into each table is more than 4 GB per hour. See [Queued ingestion](#queued-ingestion) for more information.
+1. Enter the identifier for your Azure Data Explorer ingestion endpoint. If you leave the identifier field blank, the [default](#secret-defaults) is used. The endpoint the identifier references depends on the ingestion mode you selected:
+    - **Streaming**: The cluster URI shown in the Azure portal, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
+    - **Queued**: The data ingestion URI shown in the Azure portal, such as `https://ingest-<CLUSTER>.<REGION>.kusto.windows.net`.
 1. In the **Database** field, enter the name of the ADX database, such as `logs_db`.
 1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][12], such as `{{ adx.table }}`, so you can route logs to different tables based on a log field.
     - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of logs.
@@ -74,14 +79,20 @@ Toggle **Enable Compression** to compress requests with gzip. Optionally, select
 
 #### Batching
 
-You can configure how the Worker batches logs before sending them to ADX.
+You can configure how the Worker batches logs before sending them to ADX. The defaults and limits depend on the ingestion mode.
 
 1. In the **Batch Max Bytes** field, enter the maximum batch size in bytes.
-    - The default is 2,000,000 bytes (2 MB).
-    - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][13] for more information.
-    - **Note**: Data created by [update policies][14] is included in the ingestion data size limit. Datadog recommends keeping the default batch size of 2 MB to leave room for this additional data.
-1. In the **Batch Max Events** field, enter the maximum number of logs in a batch. The default is 1,000.
-1. In the **Batch Timeout** field, enter the maximum number of seconds before a batch is flushed. The default is `1` second.
+    - **Streaming**:
+        - The default is 2,000,000 bytes (2 MB).
+        - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][13] for more information.
+        - **Note**: Data created by [update policies][14] is included in the ingestion data size limit. Datadog recommends keeping the default batch size of 2 MB to leave room for this additional data.
+    - **Queued**: The default is 100,000,000 bytes (100 MB). The maximum is 1 GB.
+1. In the **Batch Max Events** field, enter the maximum number of logs in a batch.
+    - **Streaming**: The default is 1,000.
+    - **Queued**: There is no limit by default.
+1. In the **Batch Timeout** field, enter the maximum number of seconds before a batch is flushed.
+    - **Streaming**: The default is `1` second.
+    - **Queued**: The default is `10` seconds.
 
 #### Buffering
 
@@ -144,7 +155,9 @@ The workload identity authentication method uses a [Microsoft Entra Workload ID]
 {{% tab "Secrets Management" %}}
 
 - Azure Data Explorer ingestion endpoint identifier:
-    - References the URI of your ADX cluster, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
+    - References the ADX endpoint for the ingestion mode you selected:
+        - Streaming: The cluster URI, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
+        - Queued: The data ingestion URI, such as `https://ingest-<CLUSTER>.<REGION>.kusto.windows.net`.
     - The default identifier is `DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT`.
 - Azure client certificate password identifier for the [client certificate](#client-certificate) authentication method:
     - References the password for the PKCS12 certificate file if the certificate is password protected.
@@ -219,14 +232,30 @@ For [component metrics][16] and [destination buffer metrics][17] emitted by all 
 
 ## How the destination works
 
+### Ingestion modes
+
+The Azure Data Explorer destination supports two ingestion modes. In both modes, the Worker considers a batch delivered when ADX accepts the request, not when the logs are ingested. A delivered batch doesn't mean the logs were successfully ingested or are queryable. Use ADX metrics to monitor the status of ingestion.
+
+#### Streaming ingestion
+
+Streaming ingestion is the default mode. Use it when you need low latency between ingestion and query. The Worker sends each batch of logs directly to the ADX cluster endpoint. Streaming ingestion must be enabled on your cluster and on the target tables or database. See [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
+
+The Worker considers a batch delivered after it sends the logs to the ADX cluster endpoint.
+
+#### Queued ingestion
+
+Use queued ingestion if the stream of data into each table is more than 4 GB per hour. For each batch of logs, the Worker compresses the batch, uploads it to Azure Blob Storage, and submits an ingestion request to the ADX data ingestion endpoint. See [Azure Data Explorer data ingestion overview][26] for more information.
+
+The Worker considers a batch delivered after the batch is uploaded to Azure Blob Storage and the ingestion request is submitted. Logs sent with queued ingestion can take about five minutes to become queryable.
+
 ### Event batching
 
 A batch of logs is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][23] for more information.
 
-| Maximum Events | Maximum Size (MB) | Timeout (seconds) |
-|----------------|-------------------|-------------------|
-| 1,000          | 2                 | 1                 |
-
+| Ingestion mode | Maximum Events | Maximum Size (MB) | Timeout (seconds) |
+|----------------|----------------|-------------------|-------------------|
+| Streaming      | 1,000          | 2                 | 1                 |
+| Queued         | No limit       | 100               | 10                |
 
 ## Further reading
 
@@ -257,3 +286,4 @@ A batch of logs is flushed when one of these parameters is met. Batching is also
 [23]: /observability_pipelines/destinations/#event-batching
 [24]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer#mapping-with-ingestionmappingreference
 [25]: https://learn.microsoft.com/en-us/azure/data-explorer/create-table-wizard
+[26]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-overview

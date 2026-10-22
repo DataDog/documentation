@@ -1,5 +1,7 @@
 - Azure Data Explorer ingestion endpoint:
-   - The URI of your Azure Data Explorer cluster, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
+   - The ADX endpoint for the ingestion mode you selected:
+      - Streaming: The cluster URI, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
+      - Queued: The data ingestion URI, such as `https://ingest-<CLUSTER>.<REGION>.kusto.windows.net`.
    - The default environment variable is `DD_OP_DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT`.
 - Azure client certificate password for the client certificate authentication method:
    - The password for the PKCS12 certificate file if the certificate is password protected.
