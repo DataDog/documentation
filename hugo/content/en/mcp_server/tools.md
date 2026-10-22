@@ -2604,7 +2604,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Updates an existing RUM retention or exclusion filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. The built-in Error Tracking exclusion filter can only be enabled or disabled. Confirm the change before applying.
+Updates an existing RUM retention or exclusion filter's attributes in place, such as its name, event type, query, enabled state, or, for retention filters, sample rate. The built-in Error Tracking exclusion filter can only be enabled or disabled. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
 - Disable the "long tasks" retention filter on my main RUM app.
