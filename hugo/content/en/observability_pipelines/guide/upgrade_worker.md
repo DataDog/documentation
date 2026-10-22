@@ -46,7 +46,7 @@ Worker version 2.23.1 gives you access to the following:
 
 #### Security
 
-- Updated the bundled secret generic connector (`sgc`) binary to the version shipped with Datadog Agent 7.84.1, which addresses [CVE-2026-56854][59].
+- Updated the bundled secret generic connector (`sgc`) binary to the version shipped with Datadog Agent 7.84.1, which addresses CVE-2026-56854.
 
 ## Worker version 2.23.0
 
@@ -902,4 +902,3 @@ Worker version 2.7.0 gives you access to the following:
 [56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
 [57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
 [58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
-[59]: https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe
