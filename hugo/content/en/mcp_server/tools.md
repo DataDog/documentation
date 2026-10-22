@@ -2613,7 +2613,7 @@ Updates an existing RUM retention or exclusion filter's attributes in place, suc
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Sets the full evaluation order of a RUM application's retention filters (exclusion filters are not reordered). Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+Sets the full evaluation order of a RUM application's retention filters. Exclusion filters are not reordered. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
 - Reorder my retention filters so the specific filters are evaluated before the broad ones.
