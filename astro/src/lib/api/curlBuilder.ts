@@ -67,6 +67,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     queryParams,
     headerParams,
     requestBodyJson,
+    hasRequestBody = false,
     multipartFormFields,
     hasNoContentResponse = false,
     security,
@@ -120,7 +121,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   }
   if (multipartFormFields) {
     curlParts.push(`-H "Content-Type: multipart/form-data"`);
-  } else if (requestBodyJson || methodHasBody(method)) {
+  } else if (requestBodyJson || hasRequestBody) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
   curlParts.push(...buildHeaderParamFlags(headerParams));
@@ -172,7 +173,6 @@ function buildOtherHostsLine(
   return `# For sites other than ${site}, replace the host below with: ${hostList.join(", ")}`;
 }
 
-/** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
 /**
  * Hugo's curl sends header parameters with their example, except
  * `Content-Encoding`. It sends optional ones too, but only with a body, so
@@ -187,6 +187,7 @@ function buildHeaderParamFlags(headerParams: CurlParam[] = []): string[] {
     .map((param) => `-H "${param.name}: ${param.example ?? "CHANGE_ME"}"`);
 }
 
+/** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
 function formFieldFlag(field: CurlFormField): string {
   return `-F ${field.name}=${field.binary ? "@" : ""}${field.type}`;
 }
@@ -367,12 +368,4 @@ function requirementAuth(
     (envName) => `export ${envName}="<${envName}>"`,
   );
   return { exportLines, headers, queryParts };
-}
-
-/**
- * Determine whether the method typically sends a request body.
- */
-function methodHasBody(method: string): boolean {
-  const upper = method.toUpperCase();
-  return upper === "POST" || upper === "PUT" || upper === "PATCH";
 }

@@ -418,6 +418,18 @@ function optionFields(
   }
 
   const items = resolved?.type === "array" ? resolved.items : undefined;
+  const itemsUnion = items ? resolveUnion(spec, items, optionVisited) : null;
+  if (itemsUnion) {
+    // As Hugo does, the items' options sit right under this option, with no
+    // row for the array in between.
+    return buildUnionOptions(
+      spec,
+      itemsUnion.variants,
+      itemsUnion.visited,
+      fieldLevel - 1,
+    ).map(optionAsField);
+  }
+
   const itemTypeName = items ? resolveItemTypeName(items, spec) : undefined;
   const itemsAreObjects =
     items &&
@@ -428,6 +440,25 @@ function optionFields(
   return itemsAreObjects
     ? schemaToFields(spec, items, optionVisited, fieldLevel)
     : schemaToFields(spec, variant, new Set(visited), fieldLevel);
+}
+
+/** A schema's `oneOf` or `anyOf` variants, following a `$ref` and `allOf`. */
+function resolveUnion(
+  spec: any,
+  schema: any,
+  visited: Set<string>,
+): { variants: any[]; visited: Set<string> } | null {
+  const unionVisited = new Set(visited);
+  let resolved = schema;
+  if (schema?.$ref && !visited.has(schema.$ref)) {
+    unionVisited.add(schema.$ref);
+    resolved = resolveRef(spec, schema.$ref) ?? schema;
+  }
+  if (resolved?.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+  const variants = resolved?.oneOf ?? resolved?.anyOf;
+  return variants ? { variants, visited: unionVisited } : null;
 }
 
 /** An inner union option, as a row under its outer option. */

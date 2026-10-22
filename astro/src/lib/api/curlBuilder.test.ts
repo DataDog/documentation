@@ -292,6 +292,25 @@ describe("buildCurlCommand", () => {
     );
   });
 
+  it("leaves out Content-Type on a POST with no request body, as Hugo does", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v1/monitor/unmute_all",
+    });
+
+    expect(result).not.toContain("Content-Type");
+  });
+
+  it("sends Content-Type when the operation has a request body but no JSON example", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/example",
+      hasRequestBody: true,
+    });
+
+    expect(result).toContain('-H "Content-Type: application/json"');
+  });
+
   it("sends a required header parameter's example after Content-Type, before auth", () => {
     const result = buildCurlCommand({
       method: "POST",

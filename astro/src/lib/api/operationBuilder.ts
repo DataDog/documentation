@@ -402,6 +402,7 @@ function curlOptionsForOperation(
     queryParams: toCurlParams(spec, splitParams.query),
     headerParams: toCurlParams(spec, splitParams.header),
     requestBodyJson,
+    hasRequestBody: operation.requestBody !== undefined,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),
     security: operation.security,

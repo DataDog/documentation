@@ -381,6 +381,39 @@ describe("curl Accept header", () => {
   });
 });
 
+describe("curl Content-Type header", () => {
+  const noParams = { path: [], query: [], header: [] };
+
+  it("leaves out Content-Type when the operation has no request body", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v1/monitor/unmute_all",
+      { responses: { "200": { description: "OK" } } },
+      noParams,
+    );
+
+    expect(curl).not.toContain("Content-Type");
+  });
+
+  it("sends Content-Type when the operation has a request body", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/example",
+      {
+        requestBody: {
+          content: { "text/plain": { schema: { type: "string" } } },
+        },
+        responses: { "200": { description: "OK" } },
+      },
+      noParams,
+    );
+
+    expect(curl).toContain('-H "Content-Type: application/json"');
+  });
+});
+
 describe("curl header parameters", () => {
   it("sends a required header parameter with its example", () => {
     const curl = buildPlaintextCurl(

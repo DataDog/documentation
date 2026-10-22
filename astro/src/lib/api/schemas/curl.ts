@@ -89,6 +89,12 @@ export const GenerateCurlOptionsSchema = z
       .string()
       .optional()
       .describe("Prettified JSON string for the request body"),
+    hasRequestBody: z
+      .boolean()
+      .optional()
+      .describe(
+        "True when the operation has a request body, even one with no JSON example. Hugo sends Content-Type only then.",
+      ),
     multipartFormFields: z
       .array(CurlFormFieldSchema)
       .optional()
