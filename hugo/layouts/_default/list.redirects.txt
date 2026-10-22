@@ -31,7 +31,7 @@
 {{- end -}}
 
 {{- /* Removed rules have no Hugo page, so retain their URLs independently of page aliases. */ -}}
-{{- $retiredRules := .Site.Data.security_rules_retired | default (dict) -}}
+{{- $retiredRules := .Site.Params.security_rules_retired | default (dict) -}}
 {{- range $site := .Sites -}}
     {{- $prefix := "" -}}
     {{- if ne $site.Language.Lang "en" -}}

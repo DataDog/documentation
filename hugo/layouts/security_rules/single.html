@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ $dot := .}}
-{{ $retiredRules := .Site.Data.security_rules_retired | default (dict) }}
+{{ $retiredRules := .Site.Params.security_rules_retired | default (dict) }}
 {{ $inactive := in ($retiredRules.inactive | default (slice)) .File.TranslationBaseName }}
 	<div class="row">
 		<div class="col-12 order-1">
