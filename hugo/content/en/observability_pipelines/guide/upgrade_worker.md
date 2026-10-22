@@ -31,7 +31,7 @@ Worker version 2.23.2 gives you access to the following:
 
 #### Fixes
 
-- Fixed the Docker images so the secret generic connector helper is executable by the `observability-pipelines-worker` service user.
+- Fixed the Docker images so the secret generic connector (`sgc`) binary is executable by the `observability-pipelines-worker` service user.
 
 ## Worker version 2.23.1
 
