@@ -116,7 +116,7 @@ How each type of evaluation reports its result:
 - **Score**: no `value` tag. The score is reported in `ml_obs.eval.score`.
 - **JSON**: no `value` tag, unless post-processing returns a `value`. A boolean or string becomes the `value` tag, and a number is reported in `ml_obs.eval.score`.
 
-String values are lowercased and limited to 20 distinct values per evaluation. Additional values are reported as `other`.
+String values are lowercased.
 
 Evaluation metrics include production evaluation results that completed successfully. They do not include:
 - Evaluation results from [experiments][2]
