@@ -412,6 +412,8 @@ datadog-code-security-mcp promote-sast-rule --user-confirmed \
   --code-file rule.js --query-file rule.scm
 ```
 
+Scans use the saved rule only after the repository configuration lists its ruleset under `sast.use-rulesets`. See [Static Code Analysis configuration][31].
+
 Add `--json` to the scan and SBOM commands for JSON output:
 
 ```shell
@@ -470,3 +472,4 @@ The collected fields are listed in the project's [telemetry reference][27]. See 
 [28]: https://www.datadoghq.com/legal/privacy/
 [29]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_ephemeral_sast_scan
 [30]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_promote_sast_rule
+[31]: /security/code_security/static_analysis/configuration/
