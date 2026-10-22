@@ -9026,6 +9026,11 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          additionalProperties: {}
+          description: Additional read-only attributes returned for the series.
+          readOnly: true
+          type: object
         display_name:
           description: Display name of the metric.
           example: system.cpu.idle
@@ -9131,6 +9136,12 @@ components:
           example: time_series
           readOnly: true
           type: string
+        resp_version:
+          description: Version of the response format.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
         series:
           description: List of timeseries queried.
           items:
@@ -9142,11 +9153,27 @@ components:
           example: ok
           readOnly: true
           type: string
+        times:
+          description: |-
+            Legacy field, always returned as an empty list. Timestamps are returned
+            in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy timestamp.
+          readOnly: true
+          type: array
         to_date:
           description: End of requested time window, milliseconds since Unix epoch.
           format: int64
           readOnly: true
           type: integer
+        values:
+          description: |-
+            Legacy field, always returned as an empty list. Timeseries values are
+            returned in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy value.
+          readOnly: true
+          type: array
       type: object
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and short name.
@@ -9154,28 +9181,34 @@ components:
       properties:
         family:
           description: Unit family, allows for conversion between units of the same family, for scaling.
-          example: time
+          example: percentage
           readOnly: true
           type: string
+        id:
+          description: Unit identifier.
+          example: 17
+          format: int64
+          readOnly: true
+          type: integer
         name:
           description: Unit name
-          example: minute
+          example: percent
           readOnly: true
           type: string
         plural:
           description: Plural form of the unit name.
-          example: minutes
+          example: percent
           readOnly: true
           type: string
         scale_factor:
           description: Factor for scaling between units of the same family.
-          example: 60.0
+          example: 1.0
           format: double
           readOnly: true
           type: number
         short_name:
           description: Abbreviation of the unit.
-          example: min
+          example: "%"
           readOnly: true
           type: string
       type: object
