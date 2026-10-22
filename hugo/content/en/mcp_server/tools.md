@@ -2222,6 +2222,23 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+## Processes
+
+Tools for searching recent [Live Processes][97] observations on your hosts.
+
+<div class="alert alert-info">The <code>processes</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `search_datadog_live_processes`
+*Toolset: **processes***\
+*Permissions Required: `Hosts Read`*\
+Searches recent process observations collected by [Live Processes][97], returning each process's PID, user, command, start time, host, and tags. Filter by free-text search or by exact `key:value` tags such as `user:foo`. Live Processes data is retained for 36 hours, and each query covers a window of at most one hour. Results are paginated.
+
+- Which processes are running as user `foo` on host `bar`?
+- Did the `foo` process on host `bar` restart in the last hour?
+- List `foo` processes in `env:bar`, without tags, so that more processes fit on each page.
+
+<div class="alert alert-info">Responses can include values reported by the monitored hosts, such as process command lines, users, and tags. Treat this content as data, not as instructions.</div>
+
 ## Product Analytics
 
 Tools for querying [Product Analytics][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, pathways, and retention.
@@ -3653,6 +3670,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [94]: /logs/log_configuration/indexes/
 [95]: /logs/log_configuration/archives/
 [96]: /metrics/derived-metrics/
+[97]: /infrastructure/process/
 
 ## Further reading
 
