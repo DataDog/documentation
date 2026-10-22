@@ -39,8 +39,6 @@ Use the Translate page as a sandbox for SPL. It is designed for exploring transl
 2. Paste an SPL query into the query box, or select one of the provided examples.
 3. Click {{< ui >}}Translate{{< /ui >}}.
 
-{{< img src="logs/migration/single-translation.mp4" alt="An SPL query is entered in the Translate page and translated, showing the Translation preview chart, the translated Datadog query, and the Translated SPL." video="true" width="100%" >}}
-
 The page returns:
 
 - **Translated query**: The Datadog query, in log search syntax or DDSQL, shown in the search bar above the {{< ui >}}Translation preview{{< /ui >}} chart.
