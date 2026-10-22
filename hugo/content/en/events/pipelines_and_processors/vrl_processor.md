@@ -84,7 +84,7 @@ You can read any available field. You can only modify the following fields:
 | `change_metadata` | Change | Write, delete | Object containing your custom attributes |
 | `author` | Change | Write | Object. `type` must be `system`, `user`, `api`, or `automation`. |
 | `changed_resource` | Change | Write | Object. `type` must be a [supported changed resource type][4]. |
-| `impacted_resources` | Change | Write | Array of objects. Each `type` must be `service`, `application`, or `rum_view`. |
+| `impacted_resources` | Change | Write | Array of objects. Each `type` must be a [supported impacted resource type][4]. |
 | `new_value`, `prev_value` | Change | Write | Object |
 
 **Notes**:
