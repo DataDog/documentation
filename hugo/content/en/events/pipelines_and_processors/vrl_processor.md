@@ -146,7 +146,7 @@ if is_string(.message) {
 
 ## Limitations
 
-- Scripts can be up to 10,000 bytes. This is about 10,000 characters unless your script contains non-ASCII characters.
+- Scripts can be up to 10,000 bytes. For ASCII-only scripts this is approximately 10,000 characters; non-ASCII characters use more than one byte each, which reduces the character count.
 - Fallible functions must handle their errors, for example with `!` (such as `parse_json!`), `??`, or `result, err = ...`. Scripts with unhandled errors do not compile.
 - The `get_secret`, `set_secret`, `remove_secret`, and `set_semantic_meaning` functions are not available.
 - Metadata written with the `%` path is not saved to the event.
