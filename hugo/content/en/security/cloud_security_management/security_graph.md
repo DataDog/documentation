@@ -1,12 +1,12 @@
 ---
 title: Investigate attack paths with Security Graph
 further_reading:
-  - link: "https://www.datadoghq.com/blog/datadog-security-graph/"
-    tag: "Blog"
-    text: "Visualize cloud security relationships with Datadog Security Graph"
-  - link: https://www.datadoghq.com/blog/security-graph-attack-paths
-    tag: Blog
-    text: Trace exposure routes between resources with Datadog Cloud Security
+  - link: "/security/security_inbox/"
+    tag: "Documentation"
+    text: "Investigate findings in Security Inbox"
+  - link: "/security/default_rules/?category=cat-attack-paths"
+    tag: "Documentation"
+    text: "Explore Attack Path detection rules"
 ---
 
 {{< site-region region="gov,gov2" >}}
@@ -22,7 +22,7 @@ The graph shows context for the selected finding. The resources and relationship
 ## Open an attack path's Context Graph
 
 1. In Datadog, go to **Security** > [**Inbox**][1].
-1. In the **Finding Type** list,  beside **attack_path**, click **Only** to filter the Security Inbox findings.
+1. In the **Finding Type** list, beside **attack_path**, click **Only** to filter the Security Inbox findings.
 1. Click a finding to view it in a side panel. If the Security Inbox has grouping applied, open a group, then click a finding in the group to view it.
 1. Scroll to the **Context Graph** to inspect the resources and relationships associated with the finding.
 1. Click a resource in the graph to view its details.

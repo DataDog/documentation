@@ -2,6 +2,8 @@
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
+    {{ $retiredRules := .Site.Data.security_rules_retired | default (dict) }}
+    {{ $inactiveRules := $retiredRules.inactive | default (slice) }}
     {{- /* Type=api pages are normally excluded (indexed via api-pages-full-index.json by spec tag). These specific API guide pages have real markdown content but no matching spec tag, so index them through the standard content loop. */ -}}
     {{ $apiGuidePages := slice "/api/latest" "/api/latest/using-the-api" "/api/latest/scopes" "/api/latest/rate-limits" }}
     {{ $contentPages := where (where .Site.AllPages "Kind" "!=" "home") "Type" "!=" "api" }}
@@ -19,6 +21,11 @@
             {{ end }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
+            {{ with $page.File }}
+                {{ if in $inactiveRules .TranslationBaseName }}
+                    {{ $title = printf "%s (inactive)" $title }}
+                {{ end }}
+            {{ end }}
             {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
             {{ $rank := $page.Params.algolia.rank | default 70 }}
