@@ -620,6 +620,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
+      resource_type: BigQuery Dataset
+      recommendation_type: Delete Idle BigQuery Dataset
+      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days. Recommends deleting them after confirming that nothing still reads them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
       resource_type: Compute Address
       recommendation_type: Delete Unused Compute IP Address
       recommendation_description: Unused compute IP addresses can be deleted.
