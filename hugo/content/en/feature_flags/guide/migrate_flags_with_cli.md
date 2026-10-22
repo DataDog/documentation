@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-The [Datadog Flag Migration CLI][1] is a command-line tool that helps you migrate feature flags from other providers to [Datadog Feature Flags][2]. The CLI reads flag definitions from a source provider and recreates them in Datadog, preserving targeting rules, variations, and rollout configurations where possible. Flags migrated from Eppo keep Eppo-compatible bucketing, so existing subjects continue to receive the same variants after you switch flag evaluation to Datadog.
+The [Datadog Flag Migration CLI][1] is a command-line tool that helps you migrate feature flags from other providers to [Datadog Feature Flags][2]. The CLI reads flag definitions from a source provider and recreates them in Datadog, preserving targeting rules, variations, and rollout configurations where possible.
+
+<div class="alert alert-info">If you migrate flags from Eppo, they keep Eppo-compatible bucketing. Existing subjects continue to receive the same variants after you switch flag evaluation to Datadog.</div>
 
 ## Prerequisites
 
