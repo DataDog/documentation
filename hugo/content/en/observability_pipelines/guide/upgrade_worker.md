@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.22.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.24.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,69 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.24.1
+
+To upgrade to Worker version 2.24.1:
+
+- Docker: Run the `docker pull` command for the [2.24.1 image][61].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.24.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.1`.
+
+Worker version 2.24.1 gives you access to the following:
+
+#### Security
+
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eight eMudhra intermediate certificate authorities (CAs) whose private keys were reported compromised, even when the issuing root CA is trusted. This applies to components that use rustls 0.23.
+- Components that use OpenSSL, the Amazon Security Lake destination's AWS account lookup, and the Google Cloud Pub/Sub source rely on the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3` root CA. This covers these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
+- For APT and RPM package installations, distrust `emSign ECC Root CA - G3` until your distribution ships an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which is shipped as `Comodo_AAA_Services_root` on Debian and Ubuntu.
+
+#### Fixes
+
+- Fixed search queries with `OR` groups that mix exact values with other operands, such as wildcards, ranges, or other attributes, silently dropping operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss events they should have matched.
+- Regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in glob patterns are now treated as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
+
+## Worker version 2.24.0
+
+To upgrade to Worker version 2.24.0:
+
+- Docker: Run the `docker pull` command for the [2.24.0 image][60].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.24.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.0`.
+
+Worker version 2.24.0 gives you access to the following:
+
+#### Security
+
+- The Datadog BYOC Logs destination no longer forwards the Worker's Datadog API key to BYOC Logs.
+
+#### Enhancements
+
+- The Enrichment Table processor:
+    - Reports the `enrichment_distinct_lookup_keys_total` metric, which is an estimate of distinct lookup keys summed across one-second windows.
+    - Has improved performance during large cache fills.
+    - Reloads table values every 30 seconds. If a reload fails, the processor keeps using the last valid table until a reload succeeds.
+    - Keeps Reference Table rows in its cache for one hour.
+    - Can hold up to one million rows in its local Reference Table cache, which improves handling of large tables.
+    - Adds an `outcome` tag to the fetched keys metric for failed lookup attempts.
+    - Has updated buffer limits of 20,000 events and 100 MiB, with a hard limit of 100,000 events.
+- The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option. When aggregation is enabled, generated metrics are tagged with `worker_uuid:<worker_UUID>`. This lets Datadog aggregate metrics from different Workers instead of deduplicating them.
+- The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
+- The Grok Parser processor has been updated to match ISO dates, URLs, query strings, and data separators before date alternations.
+- The Custom Processor's performance has been improved, including more efficient field lookups and string functions.
+- The Worker's configuration startup performance has been improved.
+
+#### Fixes
+
+- Sensitive Data Scanner processor library rules now use pattern capture groups, which were previously ignored, to preserve non-sensitive context around the captured value. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
+- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse, because this reflects unexpected input data instead of a problem with the Worker. The Parse JSON processor's error message also names the field that failed to parse instead of the generic word `source`.
+- The `pipelines.quota_fill` metric now has a `quota_name` tag. The legacy `name` tag is kept for backward compatibility.
+- Fixed issues with disk buffers and configuration reloads.
+- The OpenTelemetry source now preserves native OTLP log event names.
+- The Prometheus Remote Write source now interprets metrics ending with `_total` as counters.
+- Fixed issues with filter fields in the Custom Processor's `parse_grok` and `parse_groks` functions.
 
 ## Worker version 2.22.0
 
@@ -832,3 +895,5 @@ Worker version 2.7.0 gives you access to the following:
 [53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4
 [54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
 [55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
+[60]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.0
+[61]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.1
