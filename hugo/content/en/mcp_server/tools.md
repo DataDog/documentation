@@ -2586,7 +2586,7 @@ Permanently deletes a custom RUM metric by ID. This operation is idempotent.
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
-Lists retention filters configured on a RUM application. Read-only; available for [RUM without Limits][59] customers.
+Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against retention filters. Read-only; available for [RUM without Limits][59] customers.
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
@@ -2594,31 +2594,33 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Can also create an exclusion filter (`filter_type: exclusion`), which supports event type `all` and has no sample rate or cross-product sampling. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
 - Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+- Exclude bot traffic (`@device.type:Bot`) from retention on "checkout-web".
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write`*\
-Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
+Updates an existing RUM retention or exclusion filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. The built-in Error Tracking exclusion filter can only be enabled or disabled. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
 - Disable the "long tasks" retention filter on my main RUM app.
+- Disable the Error Tracking exclusion filter on my main RUM app.
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+Sets the full evaluation order of a RUM application's retention filters (exclusion filters are not reordered). Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
 - Reorder my retention filters so the specific filters are evaluated before the broad ones.
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write`*\
-Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
+Permanently deletes a RUM retention or exclusion filter by ID. The built-in Error Tracking exclusion filter cannot be deleted. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
 - Remove the retention filter with ID `abc-123-def` from my main RUM app.
