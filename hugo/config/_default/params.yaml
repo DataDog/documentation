@@ -312,6 +312,7 @@ unsupported_sites:
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2,uk1]
   backstage: [gov,gov2]
   bitbucket-source-code: [gov,gov2]
+  bits_agent_builder: [gov,gov2]
   bits_ai: [gov,gov2]
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
