@@ -34,7 +34,7 @@ Worker version 2.23.0 gives you access to the following:
 
 #### Enhancements
 
-- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default, across both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
+- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default across both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
 - The Prometheus source now supports configuring HTTP request headers.
 - The Databricks Zerobus destination now identifies the Worker in its user-agent header.
 - For the Custom Processor:
