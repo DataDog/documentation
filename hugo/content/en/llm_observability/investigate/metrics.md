@@ -121,7 +121,7 @@ Pass rate of an evaluation:
 
 ```text
 sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass}.as_count()
-  / sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass OR assessment:fail}.as_count()
+  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)}.as_count()
 ```
 
 Distribution of results for a categorical evaluation:
@@ -140,7 +140,7 @@ Pass rate by evaluation version, to compare a new version of a managed evaluatio
 
 ```text
 sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass} by {eval_version}.as_count()
-  / sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass OR assessment:fail} by {eval_version}.as_count()
+  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)} by {eval_version}.as_count()
 ```
 
 ### Estimated usage metrics
