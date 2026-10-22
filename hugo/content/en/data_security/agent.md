@@ -153,8 +153,8 @@ agent diagnose show-metadata agent-telemetry
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **Checks**                                  |                                                                                                                        |
 | checks.execution_time                       | Check's execution time in milliseconds                                                                                 |
-| checks.metadata_message_oversized           | Count of check error and warning messages exceeding the size cap of the check metadata payload, per check              |
-| checks.metadata_message_oversized_bytes     | Original size in bytes of check messages exceeding the size cap of the check metadata payload, per check               |
+| checks.metadata_message_oversized           | Number of error and warning messages per check that exceed the size limit for the check metadata payload              |
+| checks.metadata_message_oversized_bytes     | Original size, in bytes, of error and warning messages per check that exceed the size limit for the check metadata payload               |
 | pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                                                    |
 | **Logs and metrics**                        |                                                                                                                        |
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
