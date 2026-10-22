@@ -128,6 +128,17 @@ Cloud Security Vulnerabilities uses Common Vulnerability Scoring System version 
 - Whether there is an active exploit for a given vulnerability from sources such as [CISA KEV catalog][6].
 - The exploitation probability, calculated and verified using [EPSS][7].
 
+### Unknown severity
+
+A vulnerability has an **Unknown** severity when neither the vendor advisory nor the [National Vulnerability Database (NVD)][8] provides a CVSS score. Unknown severity is most common for:
+
+- CVEs that were never scored, which is common for very old CVEs.
+- Vulnerabilities from advisory sources that don't publish CVSS scores, such as the Go vulnerability database.
+
+Because Datadog's risk-based adjustments are applied on top of the base CVSS score, the Datadog severity is also **Unknown** in these cases.
+
+You can assign a severity to these findings by creating a [severity modifier rule][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -139,3 +150,5 @@ Cloud Security Vulnerabilities uses Common Vulnerability Scoring System version 
 [5]: https://www.first.org/cvss/v4-0/
 [6]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [7]: https://www.first.org/epss/
+[8]: https://nvd.nist.gov/
+[9]: /security/automation_pipelines/modify_severity/
