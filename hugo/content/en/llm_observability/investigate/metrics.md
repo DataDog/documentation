@@ -117,17 +117,19 @@ Evaluation metrics count the evaluation results that your application produces. 
 
 #### Example queries
 
+Evaluation results often arrive in bursts, which leaves many empty intervals. Add `.fill(null)` to `ml_obs.eval.count` queries so that empty intervals are not [interpolated][3] with nearby values, which would inflate the counts.
+
 Pass rate of an evaluation:
 
 ```text
-sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass}.as_count()
-  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)}.as_count()
+sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass}.as_count().fill(null)
+  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)}.as_count().fill(null)
 ```
 
 Distribution of results for a categorical evaluation:
 
 ```text
-sum:ml_obs.eval.count{evaluation_name:answer_quality} by {value}.as_count()
+sum:ml_obs.eval.count{evaluation_name:answer_quality} by {value}.as_count().fill(null)
 ```
 
 90th percentile of a score evaluation by application:
@@ -139,8 +141,8 @@ p90:ml_obs.eval.score{evaluation_name:relevance} by {ml_app}
 Pass rate by evaluation version, to compare a new version of a managed evaluation with the previous one:
 
 ```text
-sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass} by {eval_version}.as_count()
-  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)} by {eval_version}.as_count()
+sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass} by {eval_version}.as_count().fill(null)
+  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)} by {eval_version}.as_count().fill(null)
 ```
 
 ### Estimated usage metrics
@@ -174,3 +176,4 @@ The following metrics are deprecated, and are maintained only for backward compa
 
 [1]: /llm_observability/investigate/evaluations/
 [2]: /llm_observability/improve/offline_experiments/
+[3]: /dashboards/functions/interpolation/
