@@ -185,7 +185,7 @@ describe("resolveChangelogEntries", () => {
       "ja",
     );
     expect(entry.product).toEqual({
-      name: "Dora Metrics",
+      name: "DORA Metrics",
       href: "/ja/api/latest/delivery-performance/",
     });
   });
@@ -196,7 +196,16 @@ describe("resolveChangelogEntries", () => {
       [],
       "en",
     );
-    expect(entry.product).toEqual({ name: "Dora Metrics" });
+    expect(entry.product).toEqual({ name: "DORA Metrics" });
+  });
+
+  it("keeps known acronyms uppercase in a title-cased slug", () => {
+    const [entry] = resolveChangelogEntries(
+      [makeEntry({ productSlug: "ai-impact" })],
+      [],
+      "en",
+    );
+    expect(entry.product).toEqual({ name: "AI Impact" });
   });
 
   it("links known operations and leaves unknown ones unlinked", async () => {

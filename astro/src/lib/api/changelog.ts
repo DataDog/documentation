@@ -336,11 +336,24 @@ function resolveProduct(
   };
 }
 
-/** `service-level-objectives` → `Service Level Objectives`. */
+/** Slug words that title-case wrong, mapped to their display form. */
+const ACRONYMS_BY_SLUG_WORD: Record<string, string> = {
+  ai: "AI",
+  dora: "DORA",
+};
+
+/**
+ * `service-level-objectives` → `Service Level Objectives`, and
+ * `dora-metrics` → `DORA Metrics`.
+ */
 function titleCaseSlug(slug: string): string {
   return slug
     .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(
+      (word) =>
+        ACRONYMS_BY_SLUG_WORD[word] ??
+        word.charAt(0).toUpperCase() + word.slice(1),
+    )
     .join(" ");
 }
 
