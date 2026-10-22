@@ -36,6 +36,14 @@ Before using Metric Sync, you need:
 - The Product Analytics permissions required to create and update experiment metrics. Synced metrics are certified by default, so custom roles also need the Product Analytics Certified Metrics Write permission. See [Product Analytics permissions][2].
 - A Datadog API key and application key for CI authentication. See [API and application keys][3].
 
+### Permissions for plans and execution
+
+The `plan`, `execute`, `status`, and `result` commands require both `product_analytics_warehouse_model_write` and `product_analytics_metrics_write`. A server-side plan does not change definitions, but it requires the same write permissions as execution. There is no plan-only application key scope.
+
+For `plan` and `execute`, `options.is_certified: true` also requires `product_analytics_certified_metrics_write`. This option defaults to `true`. Setting it to `false` does not remove the other write-permission requirements.
+
+Use `metric-sync validate ./metrics` for checks without credentials. Local validation does not replace a server-side plan. Give the write-capable application key only to trusted CI jobs, including jobs that run `plan`.
+
 ## Install the CLI
 
 Install the latest Metric Sync CLI release:
@@ -178,6 +186,26 @@ The commands do the following:
 
 Use `--timeout 20m` to change the default 10-minute command timeout. If a command times out after submission, check the printed operation ID with `status` before submitting again. To submit without waiting, use `--no-poll`, then check `status` and `result`. A successful `--no-poll` command confirms submission only.
 
+### Atomicity and cancellation
+
+An execute operation applies its source and metric definition changes together. If a definition write fails, the operation rolls back those changes instead of leaving a partially updated set of definitions. Proposed changes in a failed result are not a list of applied changes.
+
+After Datadog accepts the submission, the operation runs independently of the CLI. Stopping the CLI, canceling a CI job, or reaching the command timeout does not cancel the server operation. A polling error does not establish that the operation failed. Save the returned `metric_sync_id` and use `status` and `result` to confirm the outcome. This operation ID differs from the stable `sync_id` values in YAML.
+
+### Retry a submission
+
+If submission succeeds but polling fails, check the existing operation before submitting again. To repeat a submission safely, send the same definitions and options with the same `--idempotency-key`:
+
+```shell
+metric-sync execute ./metrics --idempotency-key <EXECUTION_KEY>
+```
+
+Save the key before submission and reuse it for retries of that request. Datadog returns the existing operation for a matching key and request. Reusing the key with a different request returns a conflict. Use separate keys for `plan` and `execute`.
+
+The CLI generates a key when you omit `--idempotency-key`. In CI, that key includes the run identity and, where available, the job or attempt identity. A rerun can therefore generate a different key. Outside CI, each invocation uses a fresh nonce. Use an explicit key to retry across CI attempts or local invocations.
+
+Keep the `sync_tag` and each object's `sync_id` stable across submissions. These values identify the managed objects; an idempotency key identifies a submission. If the server operation itself failed, reusing its key returns that failed operation. Correct the cause and choose a different key for a new execution attempt.
+
 ## GitHub Actions example
 
 The following workflow runs `plan` on pull requests and `execute` after changes merge to `main`:
@@ -226,12 +254,14 @@ jobs:
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-        run: metric-sync execute ./metrics
+        run: metric-sync execute ./metrics --idempotency-key "example-checkout-execute-${GITHUB_RUN_ID}"
 ```
 
 Store your Datadog API and application keys as GitHub Actions secrets. If your organization uses a Datadog site other than `datadoghq.com`, add `DD_SITE` to the workflow environment.
 
 Use a concurrency group for each sync tag to prevent overlapping executions from this workflow. The plan job runs only for pull requests from the same repository. Fork pull requests do not receive these secrets; run `validate` without credentials for those contributions, then run `plan` in a trusted workflow.
+
+The execute key includes the sync tag, command, and GitHub run ID. It stays the same when you rerun jobs in that workflow run. Keep the definitions and options unchanged for such retries. A new workflow run uses a different key. If an earlier operation is still running, check its outcome before starting another.
 
 ## Definition reference {#yaml-reference}
 
@@ -258,6 +288,10 @@ To manage an existing manual source or metric with YAML:
 3. Set `options.upgrade_mode: by_id` in every submitted file, then run `plan` and review the changes before `execute`.
 
 Adoption applies the YAML definition and assigns sync ownership to the existing object. Later syncs identify it by the same `sync_tag` and `sync_id`. Include the settings and source mappings you want to keep; omitted fields can use defaults or remove mappings.
+
+Adoption preserves the existing source and metric UUIDs, but it is not a metadata-only operation. It also applies `options.is_certified`, which defaults to `true`, even when the metric calculation is unchanged. Set this option explicitly to the intended certification state. One value applies to all sources and metrics in the submission; it does not preserve a different certification state for each object.
+
+Adoption does not itself recompute stored experiment results. Review all definition settings before adopting objects used by running experiments. After execution, check the object IDs, settings, and certification in Datadog. A later certification-only sync can report success without applying the certification change; see [CLI limitations][6].
 
 ### Top-level fields
 
@@ -562,6 +596,8 @@ The sync API does not support `warehouse_metric_measure_id`. Replace raw measure
 
 ## CLI limitations
 
+Metric Sync manages warehouse metric sources and metrics. It does not manage warehouse assignment (exposure) sources. Continue managing exposure sources in the UI.
+
 Changing only `options.is_certified` does not update certification on an otherwise unchanged existing source or metric. Check certification in Datadog after managing existing definitions with YAML; a successful sync alone does not confirm a certification change.
 
 The CLI does not export existing definitions or convert Eppo YAML automatically. Create and review the full definitions before managing existing metrics with YAML.
@@ -572,7 +608,8 @@ For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upg
 
 | Error | What to check |
 | ----- | ------------- |
-| The API returns `403`. | Confirm the API/application key has the Product Analytics permissions required to write metrics. If `is_certified` is enabled, confirm the role also has Product Analytics Certified Metrics Write. |
+| The API returns `403`, including for `plan`, `status`, or `result`. | Check the [permissions for plans and execution][7]. These commands require write permissions. Plans with `is_certified: true` also require Product Analytics Certified Metrics Write. |
+| Polling fails, the CLI times out, or a CI job is canceled. | The submitted server operation can continue. Check `status` and `result` with the saved operation ID. To repeat the submission, reuse the same request and explicit idempotency key. |
 | A warehouse connection was not found. | Confirm the target Datadog organization has a warehouse connection configured. If you set `warehouse_connection_id`, confirm that it belongs to the target organization. |
 | A subject type was not found. | Confirm the `subject_types[].name` value matches an existing Datadog subject type. |
 | A successful result shows no changes. | The service detected no changes to apply. If you changed only `options.is_certified`, check certification in Datadog; a successful sync does not confirm that this setting changed. A failed operation does not establish that the YAML matches Datadog. |
@@ -585,3 +622,5 @@ For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upg
 [3]: /account_management/api-app-keys/
 [4]: #measure-references
 [5]: #filters
+[6]: #cli-limitations
+[7]: #permissions-for-plans-and-execution
