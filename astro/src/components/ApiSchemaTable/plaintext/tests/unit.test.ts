@@ -144,6 +144,28 @@ describe("apiSchemaTableNode", () => {
     );
   });
 
+  it("rewrites a description's reference links as inline links, since a table cell can't hold their definitions", () => {
+    const out = render([
+      field({
+        name: "query",
+        description: [
+          "See the [Triggered Monitors page][1] and the [Manage Monitors documentation][2].",
+          "",
+          "[1]: https://app.datadoghq.com/monitors/triggered",
+          "[2]: /monitors/manage/#triggered-monitors",
+        ].join("\n"),
+      }),
+    ]);
+    expect(out).toContain(
+      "[Triggered Monitors page](https://app.datadoghq.com/monitors/triggered)",
+    );
+    expect(out).toContain(
+      "[Manage Monitors documentation](/monitors/manage/#triggered-monitors)",
+    );
+    expect(out).not.toContain("[1]");
+    expect(out).not.toContain("[2]");
+  });
+
   it("puts a DEPRECATED label before a deprecated field's description, as Hugo does", () => {
     const out = render([
       field({ name: "old_field", deprecated: true, description: "Old." }),

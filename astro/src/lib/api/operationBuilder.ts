@@ -398,9 +398,11 @@ function curlOptionsForOperation(
     method,
     path,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
-    pathParams: toCurlParams(splitParams.path),
-    queryParams: toCurlParams(splitParams.query),
+    pathParams: toCurlParams(spec, splitParams.path),
+    queryParams: toCurlParams(spec, splitParams.query),
+    headerParams: toCurlParams(spec, splitParams.header),
     requestBodyJson,
+    hasRequestBody: operation.requestBody !== undefined,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),
     security: operation.security,
@@ -564,12 +566,15 @@ function generateExampleFromSchema(
 /**
  * Build curl params from resolved parameter objects. As in Hugo's curl, a
  * parameter with no example never falls back to its schema default, so it
- * exports `"CHANGE_ME"` instead.
+ * exports `"CHANGE_ME"` instead. Hugo reads the spec with every `$ref`
+ * resolved, so a schema reference's example counts too.
  */
-function toCurlParams(params: OpenAPIV3.ParameterObject[]): CurlParam[] {
+function toCurlParams(
+  spec: OpenAPIV3.Document,
+  params: OpenAPIV3.ParameterObject[],
+): CurlParam[] {
   return params.map((p) => {
-    const schema: OpenAPIV3.SchemaObject | undefined =
-      p.schema && !isReference(p.schema) ? p.schema : undefined;
+    const schema = resolveSchema(spec, p.schema);
     const example = p.example ?? schema?.example;
     // Hugo splits an array only when `explode` is set explicitly.
     const explodedItemCount =

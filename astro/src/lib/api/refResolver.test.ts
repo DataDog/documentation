@@ -1074,6 +1074,44 @@ describe("union option types", () => {
       schemaToFields(spec, schema)[0].unionOptions?.map((o) => o.type),
     ).toEqual(["<oneOf>", "string"]);
   });
+
+  it("lists the inner options of an array-of-union variant right under it, as Hugo does", () => {
+    const spec = {
+      components: {
+        schemas: {
+          AnyValue: {
+            oneOf: [
+              { type: "string" },
+              { $ref: "#/components/schemas/AnyValueArray" },
+            ],
+          },
+          AnyValueArray: {
+            type: "array",
+            description: "An array of arbitrary values.",
+            items: { $ref: "#/components/schemas/AnyValueItem" },
+          },
+          AnyValueItem: {
+            oneOf: [
+              { type: "string", description: "A scalar string." },
+              { type: "number", description: "A scalar number." },
+            ],
+          },
+        },
+      },
+    };
+    const schema = {
+      type: "object",
+      properties: { input: { $ref: "#/components/schemas/AnyValue" } },
+    };
+    const arrayOption = schemaToFields(spec, schema)[0].unionOptions?.[1];
+    expect(arrayOption?.type).toBe("[<oneOf>]");
+    expect(
+      arrayOption?.fields.map((field) => [field.name, field.type]),
+    ).toEqual([
+      ["Object 1", "string"],
+      ["Object 2", "number"],
+    ]);
+  });
 });
 
 describe("stripReadOnlyFields", () => {

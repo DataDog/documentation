@@ -24,6 +24,8 @@ If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/h
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/incidents |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/incidents |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/incidents      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region            |
 
 ### Overview
 

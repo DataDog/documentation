@@ -381,7 +381,65 @@ describe("curl Accept header", () => {
   });
 });
 
-describe("curl path parameters", () => {
+describe("curl Content-Type header", () => {
+  const noParams = { path: [], query: [], header: [] };
+
+  it("leaves out Content-Type when the operation has no request body", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v1/monitor/unmute_all",
+      { responses: { "200": { description: "OK" } } },
+      noParams,
+    );
+
+    expect(curl).not.toContain("Content-Type");
+  });
+
+  it("sends Content-Type when the operation has a request body", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/example",
+      {
+        requestBody: {
+          content: { "text/plain": { schema: { type: "string" } } },
+        },
+        responses: { "200": { description: "OK" } },
+      },
+      noParams,
+    );
+
+    expect(curl).toContain('-H "Content-Type: application/json"');
+  });
+});
+
+describe("curl header parameters", () => {
+  it("sends a required header parameter with its example", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/security/threat-intel-feed",
+      { responses: { "200": { description: "OK" } } },
+      {
+        path: [],
+        query: [],
+        header: [
+          {
+            name: "ti_vendor",
+            in: "header",
+            required: true,
+            schema: { type: "string", example: "acme" },
+          },
+        ],
+      },
+    );
+
+    expect(curl).toContain('-H "ti_vendor: acme"');
+  });
+});
+
+describe("curl parameter examples", () => {
   /** Hugo's curl uses the example or `"CHANGE_ME"`, never the default. */
   it("exports CHANGE_ME, not the default, for a path parameter with no example", () => {
     const curl = buildPlaintextCurl(
@@ -404,6 +462,39 @@ describe("curl path parameters", () => {
     );
 
     expect(curl).toContain('export scope_type="CHANGE_ME"');
+  });
+
+  it("exports the example from a parameter's $ref schema, as Hugo does", () => {
+    const specWithMapKind = {
+      ...spec,
+      components: {
+        ...spec.components,
+        schemas: {
+          ...spec.components?.schemas,
+          SourcemapMapKind: { type: "string", example: "js" },
+        },
+      },
+    } as OpenAPIV3.Document;
+    const curl = buildPlaintextCurl(
+      specWithMapKind,
+      "delete",
+      "/api/v2/rum/sourcemaps",
+      { responses: { "200": { description: "OK" } } },
+      {
+        path: [],
+        query: [
+          {
+            name: "mapkind",
+            in: "query",
+            required: true,
+            schema: { $ref: "#/components/schemas/SourcemapMapKind" },
+          },
+        ],
+        header: [],
+      },
+    );
+
+    expect(curl).toContain('export mapkind="js"');
   });
 });
 

@@ -19,6 +19,8 @@ breadcrumbs: Docs > API > List all AWS integrations
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/integration/aws/accounts      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ### Overview
 
@@ -446,6 +448,8 @@ DD_SITE="datadoghq.com" DD_API_KEY="<API-KEY>" DD_APP_KEY="<APP-KEY>" tsc "examp
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/integration/aws |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/integration/aws |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/integration/aws      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                      |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                  |
 
 ### Overview
 

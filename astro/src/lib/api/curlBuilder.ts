@@ -65,7 +65,9 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     subdomain = "api",
     pathParams,
     queryParams,
+    headerParams,
     requestBodyJson,
+    hasRequestBody = false,
     multipartFormFields,
     hasNoContentResponse = false,
     security,
@@ -113,15 +115,16 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   const curlParts: string[] = [];
   curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
 
-  // Accept, Content-Type, then auth, in Hugo's order
+  // Accept, Content-Type, header parameters, then auth, in Hugo's order
   if (!hasNoContentResponse) {
     curlParts.push(`-H "Accept: application/json"`);
   }
   if (multipartFormFields) {
     curlParts.push(`-H "Content-Type: multipart/form-data"`);
-  } else if (requestBodyJson || methodHasBody(method)) {
+  } else if (requestBodyJson || hasRequestBody) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
+  curlParts.push(...buildHeaderParamFlags(headerParams));
   curlParts.push(...auth.headers);
 
   // Request body
@@ -168,6 +171,20 @@ function buildOtherHostsLine(
 ): string {
   const hostList = otherHosts.map(({ site, host }) => `${host} (${site})`);
   return `# For sites other than ${site}, replace the host below with: ${hostList.join(", ")}`;
+}
+
+/**
+ * Hugo's curl sends header parameters with their example, except
+ * `Content-Encoding`. It sends optional ones too, but only with a body, so
+ * sending only the required ones matches prod across the spec.
+ */
+function buildHeaderParamFlags(headerParams: CurlParam[] = []): string[] {
+  return headerParams
+    .filter(
+      (param) =>
+        param.required && param.name.toLowerCase() !== "content-encoding",
+    )
+    .map((param) => `-H "${param.name}: ${param.example ?? "CHANGE_ME"}"`);
 }
 
 /** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
@@ -351,12 +368,4 @@ function requirementAuth(
     (envName) => `export ${envName}="<${envName}>"`,
   );
   return { exportLines, headers, queryParts };
-}
-
-/**
- * Determine whether the method typically sends a request body.
- */
-function methodHasBody(method: string): boolean {
-  const upper = method.toUpperCase();
-  return upper === "POST" || upper === "PUT" || upper === "PATCH";
 }

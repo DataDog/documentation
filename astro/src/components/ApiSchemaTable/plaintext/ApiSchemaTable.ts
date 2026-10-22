@@ -107,7 +107,7 @@ function getFieldDescription(field: SchemaField): string {
     parts.push("**DEPRECATED**:");
   }
   if (field.description) {
-    parts.push(field.description);
+    parts.push(inlineReferenceLinks(field.description));
   }
   if (field.readOnly) {
     parts.push("Read-only.");
@@ -120,11 +120,39 @@ function getFieldDescription(field: SchemaField): string {
 function getOptionDescription(option: UnionOption): string {
   return [
     option.deprecated ? "**DEPRECATED**:" : "",
-    option.description ?? "",
+    inlineReferenceLinks(option.description ?? ""),
     ...valueParts(option),
   ]
     .filter(Boolean)
     .join(" ");
+}
+
+const LINK_DEFINITION_LINE = /^ {0,3}\[([^\]]+)\]:\s*<?([^\s>]+)>?.*$/gm;
+
+/**
+ * A table cell is one line, so reference link definitions (`[1]: https://...`)
+ * can't be on lines of their own there. Rewrite each `[text][label]` as
+ * `[text](url)` and drop the definitions.
+ */
+function inlineReferenceLinks(description: string): string {
+  const urlsByLabel = new Map<string, string>();
+  const withoutDefinitions = description.replace(
+    LINK_DEFINITION_LINE,
+    (_line, label: string, url: string) => {
+      urlsByLabel.set(label.toLowerCase(), url);
+      return "";
+    },
+  );
+  if (urlsByLabel.size === 0) return description;
+  return withoutDefinitions
+    .replace(
+      /\[([^\]]+)\]\[([^\]]*)\]/g,
+      (link, text: string, label: string) => {
+        const url = urlsByLabel.get((label || text).toLowerCase());
+        return url ? `[${text}](${url})` : link;
+      },
+    )
+    .trim();
 }
 
 function valueParts(

@@ -3,8 +3,9 @@
  *
  * Emits an outer `{% tabs %}` tag with one `{% tab %}` per status code.
  * Each panel may include a description (parsed as markdown) and then an
- * inner `{% tabs %}` tag with Model and Example tabs when both schema and
- * examples are present; otherwise it includes whichever is available.
+ * inner `{% tabs %}` tag with Model and Example tabs when both a model (schema
+ * rows or a schema description) and examples are present; otherwise it
+ * includes whichever is available.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
@@ -39,12 +40,15 @@ function panelNodes(r: ResponseData): MarkdocNode[] {
 function innerNodes(r: ResponseData): MarkdocNode[] {
   const hasSchema = (r.schema?.length ?? 0) > 0;
   const hasExamples = (r.examples?.length ?? 0) > 0;
+  // A top-level array of primitives has no rows, but Hugo still shows its
+  // Model tab, with the schema description and no table.
+  const hasModel = hasSchema || Boolean(r.schemaDescription);
 
   if (!hasSchema && !hasExamples) {
     return NO_CONTENT;
   }
 
-  if (hasSchema && hasExamples) {
+  if (hasModel && hasExamples) {
     return [
       tag("tabs", {}, [
         tag("tab", { label: "Model" }, modelNodes(r)),
@@ -66,7 +70,7 @@ function modelNodes(r: ResponseData): MarkdocNode[] {
   if (r.schemaDescription) {
     nodes.push(...nodesFromMd(r.schemaDescription));
   }
-  const table = apiSchemaTableNode(r.schema!);
+  const table = r.schema?.length ? apiSchemaTableNode(r.schema) : null;
   if (table) {
     nodes.push(table);
   }

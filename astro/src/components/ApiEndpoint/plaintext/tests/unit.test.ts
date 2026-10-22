@@ -76,6 +76,24 @@ describe("apiEndpointNodes", () => {
     expect(out).not.toContain("**GET**");
   });
 
+  it("lists unsupported regions last, labeled from the region config", () => {
+    const out = render(baseEndpoint);
+    const regionTable = out.slice(0, out.indexOf("\n\n"));
+    const rows = regionTable.split("\n");
+    expect(rows.slice(-3)).toEqual([
+      expect.stringMatching(
+        /^\| uk1\.datadoghq\.com +\| GET Not supported in the UK1 region +\|$/,
+      ),
+      expect.stringMatching(
+        /^\| app\.ddog-gov\.com +\| GET Not supported in the US1-FED region +\|$/,
+      ),
+      expect.stringMatching(
+        /^\| us2\.ddog-gov\.com +\| GET Not supported in the US2-FED region +\|$/,
+      ),
+    ]);
+    expect(out).not.toMatch(/app\.datadoghq\.com +\| GET Not supported/);
+  });
+
   it("renders no alert when the endpoint is deprecated, as Hugo does", () => {
     const dep = render({ ...baseEndpoint, deprecated: true });
     expect(dep).not.toContain("{% alert");
@@ -111,7 +129,7 @@ describe("apiEndpointNodes", () => {
   it("puts the description under an Overview heading after the region table", () => {
     const out = render(baseEndpoint);
     expect(out).toMatch(
-      /\| GET https:[^\n]*\n\n### Overview\n\nReturns a thing by id\./,
+      /\| GET [^\n]*\n\n### Overview\n\nReturns a thing by id\./,
     );
   });
 

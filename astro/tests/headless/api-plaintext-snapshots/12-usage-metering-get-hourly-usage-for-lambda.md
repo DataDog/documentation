@@ -19,6 +19,8 @@ breadcrumbs: Docs > API > Get hourly usage for Lambda
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ### Overview
 

@@ -292,6 +292,69 @@ describe("buildCurlCommand", () => {
     );
   });
 
+  it("leaves out Content-Type on a POST with no request body, as Hugo does", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v1/monitor/unmute_all",
+    });
+
+    expect(result).not.toContain("Content-Type");
+  });
+
+  it("sends Content-Type when the operation has a request body but no JSON example", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/example",
+      hasRequestBody: true,
+    });
+
+    expect(result).toContain('-H "Content-Type: application/json"');
+  });
+
+  it("sends a required header parameter's example after Content-Type, before auth", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/security/threat-intel-feed",
+      headerParams: [{ name: "ti_vendor", example: "acme", required: true }],
+      requestBodyJson: "{}",
+      security: [{ apiKeyAuth: [] }],
+    });
+
+    expect(result).toContain(
+      [
+        '-H "Content-Type: application/json" \\',
+        '-H "ti_vendor: acme" \\',
+        '-H "DD-API-KEY: ${DD_API_KEY}" \\',
+      ].join("\n"),
+    );
+  });
+
+  it("sends CHANGE_ME for a required header parameter with no example", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/security/threat-intel-feed",
+      headerParams: [{ name: "ti_vendor", required: true }],
+      requestBodyJson: "{}",
+    });
+
+    expect(result).toContain('-H "ti_vendor: CHANGE_ME" \\');
+  });
+
+  it("leaves out optional header parameters and Content-Encoding, as Hugo's curl does", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v2/security/threat-intel-feed",
+      headerParams: [
+        { name: "If-None-Match", example: "abc" },
+        { name: "Content-Encoding", example: "gzip", required: true },
+      ],
+      requestBodyJson: "{}",
+    });
+
+    expect(result).not.toContain("If-None-Match");
+    expect(result).not.toContain("Content-Encoding");
+  });
+
   it("leaves out the Accept header when the operation has a 204 response, as Hugo does", () => {
     const result = buildCurlCommand({
       method: "DELETE",

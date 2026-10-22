@@ -56,6 +56,15 @@ describe("getCodeExamplesForOperation", () => {
     expect(codeByLanguage["ruby-legacy"]).toContain("require 'dogapi'");
   });
 
+  it("keeps the first 3 examples per language, as Hugo does", () => {
+    const goExamples = examples.find((set) => set.language === "go");
+    expect(goExamples?.entries.map((entry) => entry.description)).toEqual([
+      'Create a monitor returns "OK" response',
+      'Create a monitor with aggregate augmented query variables returns "OK" response',
+      'Create a monitor with aggregate filtered query variables returns "OK" response',
+    ]);
+  });
+
   it("highlights a legacy example as its base language", () => {
     const pythonLegacy = examples.find(
       (set) => set.language === "python-legacy",

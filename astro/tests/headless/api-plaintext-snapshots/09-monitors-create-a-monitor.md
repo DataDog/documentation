@@ -19,6 +19,8 @@ breadcrumbs: Docs > API > Create a monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region              |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region          |
 
 ### Overview
 
@@ -1125,6 +1127,24 @@ func main() {
 	responseContent, _ := json.MarshalIndent(resp, "", "  ")
 	fmt.Fprintf(os.Stdout, "Response from `MonitorsApi.CreateMonitor`:\n%s\n", responseContent)
 }
+```
+
+```go
+// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.
+// Create a monitor with aggregate augmented query variables returns "OK" response
+
+package main
+
+func main() {}
+```
+
+```go
+// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.
+// Create a monitor with aggregate filtered query variables returns "OK" response
+
+package main
+
+func main() {}
 ```
 
 #### Instructions
