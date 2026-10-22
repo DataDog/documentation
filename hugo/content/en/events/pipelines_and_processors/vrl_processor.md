@@ -32,6 +32,8 @@ Use the VRL processor to run a custom [Vector Remap Language (VRL)][1] script on
 1. Optionally, [test your script against a sample event](#test-your-script-against-a-sample-event).
 1. Click {{< ui >}}Add{{< /ui >}} (or {{< ui >}}Save{{< /ui >}} when editing an existing processor).
 
+**Note**: The VRL processor does not have its own filter. It runs on every event that matches the [pipeline filter][3]. Use VRL conditions such as `if` blocks in your script to apply changes to a subset of those events.
+
 {{< img src="events/pipelines/vrl_processor_create.png" alt="VRL processor form with the processor type, name, and a VRL script" style="width:80%;" >}}
 
 ### Test your script against a sample event
@@ -54,8 +56,6 @@ The script is validated when you save the processor. If the script doesn't compi
 [E701] call to undefined variable
 line 1, column 8: undefined variable; did you mean "false"?
 ```
-
-**Note**: The VRL processor does not have its own filter. It runs on every event that matches the [pipeline filter][3]. Use VRL conditions such as `if` blocks in your script to apply changes to a subset of those events.
 
 ## Event fields in a VRL script
 
@@ -92,7 +92,7 @@ You can read any available field. You can only modify the following fields:
 - Add your own attributes under `.custom` for alert events and under `.change_metadata` for change events.
 - Fields with a fixed list of values, such as `status` and `priority`, accept values in any case. The value is stored in lowercase, so `.status = "ERROR"` sets the status to `error`.
 - A write must keep the field's existing type. For example, you cannot set a string attribute to a number.
-- You can delete individual keys or array elements inside a writable field, such as `del(.custom.raw_payload)` or `del(.tags[0])`. You can only delete a whole field for `custom` and `change_metadata`.
+- You can delete attributes inside `.custom` and `.change_metadata`, such as `del(.custom.raw_payload)`, or delete the whole `.custom` or `.change_metadata` object. Other fields can't be deleted, but you can remove keys or array elements inside a writable field, such as `del(.tags[0])`.
 - Fields that belong to another event category are not available to the script. For example, `.status` is not available on change events. Writes to these fields are skipped, and the rest of the script still applies.
 
 ## How changes are applied
