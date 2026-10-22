@@ -94,7 +94,7 @@ Evaluation metrics aggregate the results of your [evaluations][1] so you can tra
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.eval.count` | Number of evaluation results | Count | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `eval_source`, `eval_version`, `value` |
-| `ml_obs.eval.score` | Value of score evaluation results | Distribution | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `eval_source`, `eval_version` |
+| `ml_obs.eval.score` | Value of score evaluation results, and of JSON evaluation results whose post-processing returns a numeric `value` | Distribution | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `eval_source`, `eval_version` |
 
 The evaluation metric tags have the following values:
 
@@ -105,7 +105,7 @@ The evaluation metric tags have the following values:
 | `assessment` | `pass` or `fail` when the evaluation has pass/fail criteria, otherwise `none` |
 | `eval_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations; `external` for evaluations you submit through the SDK or API |
 | `eval_version` | The version of a managed evaluation. Not set for evaluations you submit through the SDK or API. |
-| `value` | On `ml_obs.eval.count` only, for boolean (`true` or `false`) and categorical evaluations. Categorical values are lowercased and limited to 20 distinct values per evaluation; additional values are reported as `other`. |
+| `value` | On `ml_obs.eval.count` only, for boolean (`true` or `false`) and categorical evaluations, and for JSON evaluations whose post-processing returns a boolean or string `value`. String values are lowercased and limited to 20 distinct values per evaluation; additional values are reported as `other`. |
 | `env`, `service`, `version` | Taken from the evaluated span |
 
 Evaluation metrics include production evaluation results that completed successfully. They do not include:
