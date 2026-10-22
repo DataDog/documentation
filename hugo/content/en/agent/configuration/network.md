@@ -190,6 +190,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP). See [default NTP targets][29].<br>For information on troubleshooting NTP, see [NTP issues][30].                                                                |
 | Connectivity test                                                                                                                                                        | 8042                                           | TCP              | Remote configuration connectivity test.<br>**Note**: this is a telemetry endpoint containing no customer data for protocol development, and is only used when [Remote Config][17] is enabled.
 
+[17]: /remote_configuration
 [27]: /containers/guide/cluster_agent_autoscaling_metrics
 [28]: /logs/log_collection/#logging-endpoints
 [29]: /integrations/ntp/#overview
@@ -325,7 +326,6 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [14]: /real_user_monitoring/
 [15]: /security/cloud_security_management/vulnerabilities/
 [16]: /synthetics/private_locations
-[17]: /remote_configuration
 [20]: /logs/
 [21]: /data_security/logs/#hipaa-enabled-customers
 [22]: /logs/log_collection/#logging-endpoints
