@@ -389,7 +389,6 @@ unsupported_sites:
   mobile_app_testing: [gov,gov2]
   nebius-cloud: [gov,gov2]
   network_config_management: [gov,gov2]
-  observability_pipelines: [gov,gov2]
   on-call: [gov2]
   opentelemetry_collector_otlp_export: [gov,gov2]
   oracle-fusion: [gov,gov2]

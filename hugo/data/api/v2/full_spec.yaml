@@ -2381,6 +2381,18 @@ components:
           schema:
             $ref: "#/components/schemas/HTTPCDRulesNotFoundResponse"
       description: Deployment rule not found.
+    NDMBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    NDMNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
     NotAuthorizedResponse:
       content:
         "application/json":
@@ -22223,8 +22235,21 @@ components:
           description: The first page number.
           format: int64
           type: integer
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
         last_number:
           description: The last page number.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: The page limit, when offset pagination is used.
           format: int64
           type: integer
         next_number:
@@ -22232,12 +22257,26 @@ components:
           format: int64
           nullable: true
           type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          nullable: true
+          type: integer
         number:
           description: The current page number.
           format: int64
           type: integer
+        offset:
+          description: The current offset, when offset pagination is used.
+          format: int64
+          type: integer
         prev_number:
           description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        prev_offset:
+          description: The previous offset.
           format: int64
           nullable: true
           type: integer
@@ -76876,12 +76915,16 @@ components:
         - -name
         - user_count
         - -user_count
+        - link_count
+        - -link_count
       type: string
       x-enum-varnames:
         - NAME
         - _NAME
         - USER_COUNT
         - _USER_COUNT
+        - LINK_COUNT
+        - _LINK_COUNT
     ListVulnerabilitiesResponse:
       description: The expected response schema when listing vulnerabilities.
       properties:
@@ -80259,11 +80302,15 @@ components:
       enum:
         - non_distribution
         - distribution
+        - exponential_histogram
+        - explicit_histogram
       example: distribution
       type: string
       x-enum-varnames:
         - NON_DISTRIBUTION
         - DISTRIBUTION
+        - EXPONENTIAL_HISTOGRAM
+        - EXPLICIT_HISTOGRAM
     MetricTagConfigurationMetricTypes:
       default: gauge
       description: The metric's type.
@@ -124786,6 +124833,8 @@ components:
         - elf
         - ndk
         - il2cpp
+        - wasm
+        - portable_pdb
       example: js
       type: string
       x-enum-varnames:
@@ -124797,6 +124846,8 @@ components:
         - ELF
         - NDK
         - IL2CPP
+        - WASM
+        - PORTABLE_PDB
     SourcemapSearchBy:
       description: The search mode for listing JavaScript source maps.
       enum:
@@ -132555,6 +132606,14 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        handles:
+          description: Collection of handles associated with the team.
+          items:
+            description: A team handle.
+            type: string
+          nullable: true
+          readOnly: true
+          type: array
         hidden_modules:
           description: Collection of hidden modules for the team
           items:
@@ -132564,6 +132623,10 @@ components:
           type: array
         is_managed:
           description: Whether the team is managed from an external source
+          type: boolean
+        is_open_membership:
+          description: Whether any user can join the team without an invitation.
+          readOnly: true
           type: boolean
         link_count:
           description: The number of links belonging to the team
@@ -132579,6 +132642,13 @@ components:
           description: The name of the team
           example: Example Team
           maxLength: 200
+          type: string
+        provisioned_by:
+          description: |-
+            The mechanism that created the team, such as `teams_api`, `teams_terraform`, or `teams_ui`.
+            Omitted when unknown.
+          example: teams_api
+          readOnly: true
           type: string
         summary:
           description: A brief summary of the team, derived from the `description`
@@ -133551,6 +133621,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/Team"
+        included:
+          description: Resources related to the team.
+          items:
+            $ref: "#/components/schemas/TeamIncluded"
+          type: array
       type: object
     TeamRoutingRules:
       description: Represents a complete set of team routing rules, including data and optionally included related resources.
@@ -134044,6 +134119,8 @@ components:
         - link_count
         - team_links
         - user_team_permissions
+        - is_managed
+        - provisioned_by
       type: string
       x-enum-varnames:
         - ID
@@ -134061,6 +134138,8 @@ components:
         - LINK_COUNT
         - TEAM_LINKS
         - USER_TEAM_PERMISSIONS
+        - IS_MANAGED
+        - PROVISIONED_BY
     TeamsHierarchyLinksResponseLinks:
       description: When querying team hierarchy links, a set of links for navigation between different pages is included
       properties:
@@ -134097,8 +134176,21 @@ components:
           description: First page number.
           format: int64
           type: integer
+        first_offset:
+          description: First offset.
+          format: int64
+          type: integer
         last_number:
           description: Last page number.
+          format: int64
+          type: integer
+        last_offset:
+          description: Last offset.
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Page limit, when offset pagination is used.
           format: int64
           type: integer
         next_number:
@@ -134106,12 +134198,26 @@ components:
           format: int64
           nullable: true
           type: integer
+        next_offset:
+          description: Next offset.
+          format: int64
+          nullable: true
+          type: integer
         number:
           description: Page number.
           format: int64
           type: integer
+        offset:
+          description: Current offset, when offset pagination is used.
+          format: int64
+          type: integer
         prev_number:
           description: Previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        prev_offset:
+          description: Previous offset.
           format: int64
           nullable: true
           type: integer
@@ -134601,9 +134707,18 @@ components:
     TeamsResponseMetaPagination:
       description: Teams response metadata.
       properties:
+        first_number:
+          description: The first page number.
+          format: int64
+          type: integer
         first_offset:
           description: The first offset.
           format: int64
+          type: integer
+        last_number:
+          description: The last page number.
+          format: int64
+          nullable: true
           type: integer
         last_offset:
           description: The last offset.
@@ -134613,16 +134728,34 @@ components:
           description: Pagination limit.
           format: int64
           type: integer
+        next_number:
+          description: The next page number.
+          format: int64
+          nullable: true
+          type: integer
         next_offset:
           description: The next offset.
+          format: int64
+          type: integer
+        number:
+          description: The current page number, when page-number pagination is used.
           format: int64
           type: integer
         offset:
           description: The offset.
           format: int64
           type: integer
+        prev_number:
+          description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
         prev_offset:
           description: The previous offset.
+          format: int64
+          type: integer
+        size:
+          description: The page size, when page-number pagination is used.
           format: int64
           type: integer
         total:
@@ -134630,7 +134763,7 @@ components:
           format: int64
           type: integer
         type:
-          description: Offset type.
+          description: Pagination type. One of `offset_limit` or `number_size`.
           type: string
       type: object
     TenancyConfig:
@@ -143097,6 +143230,7 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            agent_builder_run: Run agents created with Agent Builder.
             ai_gateway_config_read: View AI Gateway configuration.
             ai_gateway_config_write: Create, update, and delete AI Gateway configuration.
             ai_gateway_usage: Use AI Gateway and view configuration applicable to the authenticated user.
@@ -143107,11 +143241,14 @@ components:
             apm_service_catalog_write: >-
               Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
+            assistant_access: Access Bits Chat.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
             billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
+            bits_dev_write: Create and interact with Bits Code sessions.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
+            bits_security_analyst_write: Create and manage Bits AI Security Analyst investigations.
             cases_read: View Cases.
             cases_shared_settings_write: Update shared case management settings.
             cases_write: Create and update cases.
@@ -201412,7 +201549,7 @@ paths:
           schema:
             type: boolean
         - description: |-
-            This parameter has no effect unless `filter[queried]` is also set. Only return metrics that have been queried or not queried in the specified window. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 1 second. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
+            The look-back window for `filter[queried]`, in seconds. You must also set `filter[queried]`, or the request returns a 400 error. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 0. With `0`, the window ends now, so `filter[queried]=true` returns almost no metrics and `filter[queried]=false` returns all metrics. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
           example: 15552000
           in: query
           name: filter[queried][window][seconds]
@@ -201421,7 +201558,7 @@ paths:
             default: 2592000
             format: int64
             maximum: 15552000
-            minimum: 1
+            minimum: 0
             type: integer
         - description: |-
             Only return metrics that were submitted with tags matching this expression. You can use AND, OR, IN, and wildcards. For example: `filter[tags]=env IN (staging,test) AND service:web*`.
@@ -201454,7 +201591,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Only return metrics that have been actively reporting in the specified window. The default value is 3600 seconds (1 hour), the maximum value is 2,592,000 seconds (30 days), and the minimum value is 1 second.
+            Only return metrics that have been actively reporting in this window. The default value is 3,600 seconds (1 hour), the maximum value is 5,184,000 seconds (60 days), and the minimum value is 0. With `0`, the API returns only metrics that reported in the last few minutes.
           example: 3600
           in: query
           name: window[seconds]
@@ -201462,11 +201599,11 @@ paths:
           schema:
             default: 3600
             format: int64
-            maximum: 2592000
-            minimum: 1
+            maximum: 5184000
+            minimum: 0
             type: integer
         - description: |-
-            Maximum number of results per page. Send `page[size]` on the first request to opt in to pagination. On each subsequent request, send `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. The default value is 10000, the maximum value is 10000, and the minimum value is 1.
+            Maximum number of results per page. Send `page[size]` on the first request to opt in to pagination. On subsequent requests, send `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. To retain a custom page size, include `page[size]` on every request. The default value is 10000, the maximum value is 10000, and the minimum value is 1.
           in: query
           name: page[size]
           required: false
@@ -205762,7 +205899,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/NDMPageSize"
         - $ref: "#/components/parameters/NDMPageNumber"
-        - description: The field to sort the devices by. Defaults to `name`.
+        - description: The field to sort devices by. Defaults to `name`. Prefix the field with `-` to sort in descending order, for example, `-name`.
           example: status
           in: query
           name: sort
@@ -205800,7 +205937,7 @@ paths:
                 $ref: "#/components/schemas/ListDevicesResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/NDMBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "429":
@@ -205849,7 +205986,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the device details
@@ -205948,7 +206085,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the list of tags for a device
@@ -206001,10 +206138,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListTagsResponse"
           description: OK
+        "400":
+          $ref: "#/components/responses/NDMBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update the tags for a device
@@ -206043,7 +206182,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List tags for an interface
@@ -206094,10 +206233,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListInterfaceTagsResponse"
           description: OK
+        "400":
+          $ref: "#/components/responses/NDMBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update the tags for an interface
@@ -239901,7 +240042,7 @@ paths:
       parameters:
         - description: |-
             The type of source map. Valid values are `js`, `jvm`, `ios`,
-            `react`, `flutter`, `elf`, `ndk`, `il2cpp`.
+            `react`, `flutter`, `elf`, `ndk`, `il2cpp`, `wasm`, `portable_pdb`.
           in: query
           name: mapkind
           required: true
@@ -239961,7 +240102,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, and `il2cpp`.
+        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
           explode: true
           in: query
           name: filter[build_id]
@@ -240044,7 +240185,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by filename (single value). Supported for `js`, `elf`, and `ndk`.
+        - description: Filter by filename (single value). Supported for `js`, `elf`, `ndk`, `wasm`, and `portable_pdb`.
           in: query
           name: filter[filename]
           schema:
@@ -240423,7 +240564,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, and `il2cpp`.
+        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
           explode: true
           in: query
           name: filter[build_id]
@@ -240506,7 +240647,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by filename (single value). Supported for `js`, `elf`, and `ndk`.
+        - description: Filter by filename (single value). Supported for `js`, `elf`, `ndk`, `wasm`, and `portable_pdb`.
           in: query
           name: filter[filename]
           schema:
@@ -240616,7 +240757,7 @@ paths:
       parameters:
         - description: |-
             The type of source map. Valid values are `js`, `jvm`, `ios`,
-            `react`, `flutter`, `elf`, `ndk`, `il2cpp`.
+            `react`, `flutter`, `elf`, `ndk`, `il2cpp`, `wasm`, `portable_pdb`.
           in: query
           name: mapkind
           required: true
@@ -240676,7 +240817,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, and `il2cpp`.
+        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
           explode: true
           in: query
           name: filter[build_id]
@@ -240759,7 +240900,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by filename (single value). Supported for `js`, `elf`, and `ndk`.
+        - description: Filter by filename (single value). Supported for `js`, `elf`, `ndk`, `wasm`, and `portable_pdb`.
           in: query
           name: filter[filename]
           schema:
