@@ -132,6 +132,9 @@ Some Observability Pipelines components require setting up environment variables
 ### OpenTelemetry
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
 
+### Prometheus
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
+
 ### SentinelOne
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
 
