@@ -2586,7 +2586,7 @@ Permanently deletes a custom RUM metric by ID. This operation is idempotent.
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
-Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against retention filters. Read-only; available for [RUM without Limits][59] customers.
+Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against custom retention filters; permanent retention filters still apply, and the session is still retained if another of its events is. Read-only; available for [RUM without Limits][59] customers.
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
@@ -2595,7 +2595,7 @@ Lists retention filters and exclusion filters configured on a RUM application. E
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Can also create an exclusion filter (`filter_type: exclusion`), which supports event type `all` and has no sample rate or cross-product sampling. Confirm the change before applying.
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Can also create an exclusion filter (`filter_type: exclusion`), which can target a single event type or all event types (`all`) and has no sample rate or [cross-product retention][98] settings. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
 - Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
@@ -3674,6 +3674,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [95]: /logs/log_configuration/archives/
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
+[98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 
 ## Further reading
 
