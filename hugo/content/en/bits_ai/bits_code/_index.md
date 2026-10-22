@@ -62,7 +62,7 @@ Bits Code supports the following source code providers:
 
 The following plans are not supported:
 - **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
-- **Bitbucket Data Center and Bitbucket Server**: On-premises deployments are not supported by Bits Code or Datadog [Source Code Integration][37].
+- **Bitbucket**: Data Center and Server on-premises deployments are not supported by Bits Code or Datadog [Source Code Integration][37].
 
 ## Supported Datadog products
 
