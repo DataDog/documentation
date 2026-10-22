@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.22.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.23.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,40 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.23.0
+
+To upgrade to Worker version 2.23.0:
+
+- Docker: Run the `docker pull` command for the [2.23.0 image][56].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.0`.
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects only Custom Processor scripts that use the <code>contains_all</code>, <code>encode_key_value</code>, <code>encode_logfmt</code>, <code>ip_cidr_contains</code>, <code>join</code>, <code>parse_groks</code>, or <code>tally</code> functions.<br><br>These functions now check the element types of their array arguments when the script compiles. Passing an array with the wrong element type, such as <code>join([1, 2, 3])</code>, is now a compile error instead of a runtime failure. When the Worker can confirm the elements are the correct type, the function is infallible, so the <code>!</code> suffix is no longer needed and triggers a warning. For example, use <code>join(["sources", "transforms", "sinks"], separator: ", ")</code> instead of <code>join!(["sources", "transforms", "sinks"], separator: ", ")</code>.</div>
+
+Worker version 2.23.0 gives you access to the following:
+
+#### New features
+
+- The Enrichment Table processor now supports CSV files and Reference Tables for metrics pipelines.
+- The Custom Processor now supports the `break` statement to exit a `for_each` loop early.
+
+#### Enhancements
+
+- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default, across both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
+- The Prometheus source now supports configuring HTTP request headers.
+- The Databricks Zerobus destination now identifies the Worker in its user-agent header.
+- For the Custom Processor:
+    - The performance of the processor has been improved.
+    - The `for_each` function's performance has been improved and its memory usage reduced by iterating over collections directly.
+    - The runtime performance of the `md5`, `sha1`, `sha2`, and `sha3` functions has been improved.
+
+#### Fixes
+
+- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable, the Worker looked for these files in the default data directory and rejected valid files as missing.
+- TCP acknowledgment and TLS connection error logs for sources now include the remote `peer_addr`.
+- The Custom Processor's `uuid_v7` function now preserves the supplied timestamp at millisecond precision.
 
 ## Worker version 2.22.0
 
@@ -832,3 +866,4 @@ Worker version 2.7.0 gives you access to the following:
 [53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4
 [54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
 [55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
+[56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
