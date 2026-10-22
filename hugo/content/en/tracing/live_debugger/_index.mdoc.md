@@ -96,7 +96,7 @@ The products differ in the data they capture and how long the instrumentation re
 {% if equals($prog_lang, "dot_net") %}
 
 - [Datadog .NET SDK][32], version 3.46.0 or higher strongly recommended; versions below 3.46.0 may result in unexpected errors and a degraded experience
-  - Minimum for [in-app enablement](#enable-in-app): 3.29.0
+  - Minimum for [in-app enablement](#enable-in-app): 3.57.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 3.9.0
 - [Datadog Agent][2], version 7.49.0 or higher
 
