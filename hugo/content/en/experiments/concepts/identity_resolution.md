@@ -60,6 +60,10 @@ FROM analytics.experiment_exposures
 1. Map **Timestamp column** to `exposed_at`, **Experiment key column** to `experiment_key`, and **Variant ID column** to `variant_id`.
 1. Click **Create exposure SQL model**, or **Update exposure SQL model** when editing an existing model.
 
+The screenshots use synthetic checkout data. The subject named **Anonymous user** corresponds to **Anonymous** in this guide.
+
+{{< img src="experiments/concepts/identity_resolution/exposure-model.png" alt="Exposure SQL Model showing Anonymous user mapped to ANONYMOUS_ID and User mapped to USER_ID, with timestamp, experiment key, and variant mappings." caption="The exposure model maps both anonymous and user IDs. Click Run to refresh the preview before editing the mappings." >}}
+
 Keep exposure rows where `user_id` is null. Removing them excludes participants who have not signed in. If the relationship is stored in another table, use a `LEFT JOIN` to retain unmatched exposures.
 
 Preserve the original exposure timestamp when joining identity data into the model. Replacing it with a sign-in timestamp can exclude metric activity that occurred after exposure but before sign-in.
@@ -81,7 +85,11 @@ Changing or removing a subject can make existing metrics incompatible. Review th
 
 ### Add metrics and start the experiment
 
-Add warehouse metrics and complete the [experiment setup][6]. Each metric uses one subject to match events to exposures:
+Add warehouse metrics and complete the [experiment setup][6]. The purchase Metric SQL Model maps events to the **User** subject:
+
+{{< img src="experiments/concepts/identity_resolution/purchase-model.png" alt="Purchase revenue Metric SQL Model showing User mapped to USER_ID, EVENT_TS as the timestamp, and REVENUE as a measure." caption="The purchase model maps User to USER_ID and records revenue events. Click Run before editing the mappings." >}}
+
+Each metric uses one subject to match events to exposures:
 
 | Subject types supported by a metric's SQL model | Subject selected for a newly added metric |
 |---|---|
@@ -93,6 +101,8 @@ Add warehouse metrics and complete the [experiment setup][6]. Each metric uses o
 For example, a click metric that supports only **Anonymous** uses the randomization subject. A purchase metric that supports only **User** uses the additional subject. A metric that supports both uses **Anonymous** when first added; Datadog does not calculate it twice.
 
 Metrics already in the experiment keep their selected subject if it remains compatible. For a ratio metric, both the numerator and denominator must support that subject.
+
+{{< img src="experiments/concepts/identity_resolution/experiment-setup.png" alt="Draft experiment setup with Anonymous user and User subject roles, purchase revenue as the primary metric, and checkout clicks as a secondary metric." caption="In this draft, Anonymous user is the randomization subject and User is the additional subject. Purchase revenue and checkout clicks are selected as decision metrics." >}}
 
 After analysis completes, [review experiment results][5]. Events matched through the additional ID contribute to the original randomization subject's result.
 
