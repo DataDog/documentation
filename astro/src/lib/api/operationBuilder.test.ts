@@ -381,6 +381,31 @@ describe("curl Accept header", () => {
   });
 });
 
+describe("curl header parameters", () => {
+  it("sends a required header parameter with its example", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/security/threat-intel-feed",
+      { responses: { "200": { description: "OK" } } },
+      {
+        path: [],
+        query: [],
+        header: [
+          {
+            name: "ti_vendor",
+            in: "header",
+            required: true,
+            schema: { type: "string", example: "acme" },
+          },
+        ],
+      },
+    );
+
+    expect(curl).toContain('-H "ti_vendor: acme"');
+  });
+});
+
 describe("curl path parameters", () => {
   /** Hugo's curl uses the example or `"CHANGE_ME"`, never the default. */
   it("exports CHANGE_ME, not the default, for a path parameter with no example", () => {

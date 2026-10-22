@@ -79,6 +79,12 @@ export const GenerateCurlOptionsSchema = z
       .describe("Subdomain of the API host, e.g. 'api'. Defaults to 'api'."),
     pathParams: z.array(CurlParamSchema).optional(),
     queryParams: z.array(CurlParamSchema).optional(),
+    headerParams: z
+      .array(CurlParamSchema)
+      .optional()
+      .describe(
+        "Header parameters. Each required one except Content-Encoding is sent with its example.",
+      ),
     requestBodyJson: z
       .string()
       .optional()

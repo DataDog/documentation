@@ -65,6 +65,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     subdomain = "api",
     pathParams,
     queryParams,
+    headerParams,
     requestBodyJson,
     multipartFormFields,
     hasNoContentResponse = false,
@@ -113,7 +114,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   const curlParts: string[] = [];
   curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
 
-  // Accept, Content-Type, then auth, in Hugo's order
+  // Accept, Content-Type, header parameters, then auth, in Hugo's order
   if (!hasNoContentResponse) {
     curlParts.push(`-H "Accept: application/json"`);
   }
@@ -122,6 +123,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   } else if (requestBodyJson || methodHasBody(method)) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
+  curlParts.push(...buildHeaderParamFlags(headerParams));
   curlParts.push(...auth.headers);
 
   // Request body
@@ -171,6 +173,20 @@ function buildOtherHostsLine(
 }
 
 /** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
+/**
+ * Hugo's curl sends header parameters with their example, except
+ * `Content-Encoding`. It sends optional ones too, but only with a body, so
+ * sending only the required ones matches prod across the spec.
+ */
+function buildHeaderParamFlags(headerParams: CurlParam[] = []): string[] {
+  return headerParams
+    .filter(
+      (param) =>
+        param.required && param.name.toLowerCase() !== "content-encoding",
+    )
+    .map((param) => `-H "${param.name}: ${param.example ?? "CHANGE_ME"}"`);
+}
+
 function formFieldFlag(field: CurlFormField): string {
   return `-F ${field.name}=${field.binary ? "@" : ""}${field.type}`;
 }

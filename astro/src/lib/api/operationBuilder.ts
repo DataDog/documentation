@@ -400,6 +400,7 @@ function curlOptionsForOperation(
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
     pathParams: toCurlParams(splitParams.path),
     queryParams: toCurlParams(splitParams.query),
+    headerParams: toCurlParams(splitParams.header),
     requestBodyJson,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),
