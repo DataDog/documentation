@@ -208,7 +208,7 @@ The scanner's JSON results for the supplied rule: one entry per file, each with 
 
 ### Required binary
 
-`datadog-static-analyzer` version `<MIN_ANALYZER_VERSION>` or later. Earlier versions do not support the `--rules-with-config` flag, and the tool returns an upgrade error. See [Troubleshooting][2].
+`datadog-static-analyzer` version 0.9.10 or later. Earlier versions do not support the `--rules-with-config` flag, and the tool returns an upgrade error. See [Troubleshooting][2].
 
 ## `datadog_promote_sast_rule`
 

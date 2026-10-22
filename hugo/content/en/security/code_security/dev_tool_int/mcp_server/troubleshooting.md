@@ -27,7 +27,7 @@ Install a missing binary with the instructions in [Install security binaries][1]
 
 ## Scanner upgrade required
 
-`datadog_ephemeral_sast_scan` and the `ephemeral-scan` command return a `PREREQUISITE REQUIRED: Scanner Upgrade` error when the installed `datadog-static-analyzer` does not support the `--rules-with-config` flag. Ephemeral scans require version `<MIN_ANALYZER_VERSION>` or later.
+`datadog_ephemeral_sast_scan` and the `ephemeral-scan` command return a `PREREQUISITE REQUIRED: Scanner Upgrade` error when the installed `datadog-static-analyzer` does not support the `--rules-with-config` flag. Ephemeral scans require version 0.9.10 or later.
 
 Check the installed version:
 
