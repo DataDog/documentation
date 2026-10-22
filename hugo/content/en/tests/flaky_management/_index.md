@@ -205,7 +205,7 @@ Flaky Tests Management uses AI to automatically assign a root cause category to 
 
 ## How code owners are assigned
 
-Flaky Test Management assigns code owners to each flaky test based on your CODEOWNERS file, as reported by your test runs. When a flaky test runs on the default branch, its code owners are updated to match that run. After you change your CODEOWNERS file, the code owners of a flaky test update the next time the test runs on the default branch.
+Flaky Tests Management assigns code owners to each flaky test based on the `CODEOWNERS` file that your test runs report. Each time a flaky test runs on the default branch, Flaky Tests Management updates the test's code owners to match that run. After you change your `CODEOWNERS` file, the new code owners appear the next time the test runs on the default branch.
 
 If a flaky test has not run on the default branch, it keeps the code owners from the runs where it flaked.
 
