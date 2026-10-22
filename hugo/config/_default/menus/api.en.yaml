@@ -8067,7 +8067,7 @@ menu:
       url: /api/latest/agent-observability/
       identifier: agent-observability
       generated: true
-    - name: List events for an Agent Observability experiment
+    - name: List events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/list-events-for-an-agent-observability-experiment/
       identifier: agent-observability-list-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -8093,7 +8093,7 @@ menu:
         unstable:
           - v2
         order: 48
-    - name: List Agent Observability experiment events (v2)
+    - name: List Agent Observability offline experiment events (v2)
       url: /api/latest/agent-observability/list-agent-observability-experiment-events-v2/
       identifier: agent-observability-list-agent-observability-experiment-events-v2
       parent: agent-observability
@@ -8691,7 +8691,7 @@ menu:
         unstable:
           - v2
         order: 36
-    - name: Push events for an Agent Observability experiment
+    - name: Push events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/push-events-for-an-agent-observability-experiment/
       identifier: agent-observability-push-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -8704,7 +8704,7 @@ menu:
         unstable:
           - v2
         order: 17
-    - name: List Agent Observability experiment spans (v1)
+    - name: List Agent Observability offline experiment spans (v1)
       url: /api/latest/agent-observability/list-agent-observability-experiment-spans-v1/
       identifier: agent-observability-list-agent-observability-experiment-spans-v1
       parent: agent-observability
@@ -8717,7 +8717,7 @@ menu:
         unstable:
           - v2
         order: 49
-    - name: Update an Agent Observability experiment
+    - name: Update an Agent Observability offline experiment
       url: /api/latest/agent-observability/update-an-agent-observability-experiment/
       identifier: agent-observability-update-an-agent-observability-experiment
       parent: agent-observability
@@ -8730,7 +8730,7 @@ menu:
         unstable:
           - v2
         order: 15
-    - name: Delete Agent Observability experiments
+    - name: Delete Agent Observability offline experiments
       url: /api/latest/agent-observability/delete-agent-observability-experiments/
       identifier: agent-observability-delete-agent-observability-experiments
       parent: agent-observability
@@ -8743,7 +8743,7 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Create an Agent Observability experiment
+    - name: Create an Agent Observability offline experiment
       url: /api/latest/agent-observability/create-an-agent-observability-experiment/
       identifier: agent-observability-create-an-agent-observability-experiment
       parent: agent-observability
@@ -8756,7 +8756,7 @@ menu:
         unstable:
           - v2
         order: 14
-    - name: List Agent Observability experiments
+    - name: List Agent Observability offline experiments
       url: /api/latest/agent-observability/list-agent-observability-experiments/
       identifier: agent-observability-list-agent-observability-experiments
       parent: agent-observability
@@ -8769,7 +8769,7 @@ menu:
         unstable:
           - v2
         order: 13
-    - name: Simple search experimentation entities
+    - name: Simple search offline experiment entities
       url: /api/latest/agent-observability/simple-search-experimentation-entities/
       identifier: agent-observability-simple-search-experimentation-entities
       parent: agent-observability
@@ -8782,7 +8782,7 @@ menu:
         unstable:
           - v2
         order: 32
-    - name: Search Agent Observability experimentation
+    - name: Search Agent Observability offline experiments
       url: /api/latest/agent-observability/search-agent-observability-experimentation/
       identifier: agent-observability-search-agent-observability-experimentation
       parent: agent-observability
@@ -8795,7 +8795,7 @@ menu:
         unstable:
           - v2
         order: 31
-    - name: Aggregate Agent Observability experimentation
+    - name: Aggregate Agent Observability offline experiments
       url: /api/latest/agent-observability/aggregate-agent-observability-experimentation/
       identifier: agent-observability-aggregate-agent-observability-experimentation
       parent: agent-observability
@@ -23795,9 +23795,9 @@ menu:
         unstable:
           - v2
         order: 27
-    - name: Link Teams with GitHub Teams
-      url: /api/latest/teams/link-teams-with-github-teams/
-      identifier: teams-link-teams-with-github-teams
+    - name: Link teams with external teams
+      url: /api/latest/teams/link-teams-with-external-teams/
+      identifier: teams-link-teams-with-external-teams
       parent: teams
       generated: true
       params:

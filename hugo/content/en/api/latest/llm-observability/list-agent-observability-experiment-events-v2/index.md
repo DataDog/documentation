@@ -1,3 +1,3 @@
 ---
-title: List Agent Observability experiment events (v2)
+title: List Agent Observability offline experiment events (v2)
 ---

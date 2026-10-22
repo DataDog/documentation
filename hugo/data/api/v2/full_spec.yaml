@@ -2381,6 +2381,18 @@ components:
           schema:
             $ref: "#/components/schemas/HTTPCDRulesNotFoundResponse"
       description: Deployment rule not found.
+    NDMBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    NDMNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
     NotAuthorizedResponse:
       content:
         "application/json":
@@ -4200,6 +4212,10 @@ components:
           type: boolean
         collect_custom_metrics:
           description: Enable custom metrics collection. Defaults to `false`.
+          example: false
+          type: boolean
+        collect_service_quotas:
+          description: Enable Service Quotas collection. Defaults to `false`.
           example: false
           type: boolean
         enabled:
@@ -22124,7 +22140,10 @@ components:
       description: Reference to connected external team.
       properties:
         id:
-          description: The connected team ID as it is referenced throughout the Datadog ecosystem.
+          description: |-
+            The connected team ID as it is referenced throughout the Datadog ecosystem.
+            For GitHub teams, this is `@<organization>/<team-slug>`.
+            For ServiceNow groups, this is `<instance_name>/<sys_id>`.
           example: "@GitHubOrg/team-handle"
           type: string
         type:
@@ -22138,10 +22157,12 @@ components:
       description: External team resource type.
       enum:
         - github_team
+        - servicenow_team
       example: "github_team"
       type: string
       x-enum-varnames:
         - GITHUB_TEAM
+        - SERVICENOW_TEAM
     Connection:
       description: The definition of `Connection` object.
       properties:
@@ -22214,8 +22235,21 @@ components:
           description: The first page number.
           format: int64
           type: integer
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
         last_number:
           description: The last page number.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: The page limit, when offset pagination is used.
           format: int64
           type: integer
         next_number:
@@ -22223,12 +22257,26 @@ components:
           format: int64
           nullable: true
           type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          nullable: true
+          type: integer
         number:
           description: The current page number.
           format: int64
           type: integer
+        offset:
+          description: The current offset, when offset pagination is used.
+          format: int64
+          type: integer
         prev_number:
           description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        prev_offset:
+          description: The previous offset.
           format: int64
           nullable: true
           type: integer
@@ -34993,6 +35041,7 @@ components:
       x-enum-varnames:
         - CREATE_TEST_SUITE_FOR_JOURNEY_REQUEST
     DemInferredJourneyCandidateAttributes:
+      additionalProperties: false
       description: Attributes of an inferred journey candidate.
       properties:
         created_at:
@@ -35058,6 +35107,7 @@ components:
         - attributes
       type: object
     DemInferredJourneyIgnoredAttributes:
+      additionalProperties: false
       description: Attributes of an ignored inferred journey.
       properties:
         created_at:
@@ -35122,6 +35172,11 @@ components:
         - type
         - attributes
       type: object
+    DemInferredJourneyItem:
+      description: A single inferred journey item, either a candidate or an ignored journey.
+      oneOf:
+        - $ref: "#/components/schemas/DemInferredJourneyCandidateData"
+        - $ref: "#/components/schemas/DemInferredJourneyIgnoredData"
     DemInferredJourneyStatus:
       default: candidate
       description: The status of an inferred DEM journey.
@@ -35551,10 +35606,7 @@ components:
         data:
           description: List of inferred journey items matching the search criteria.
           items:
-            anyOf:
-              - $ref: "#/components/schemas/DemInferredJourneyCandidateData"
-              - $ref: "#/components/schemas/DemInferredJourneyIgnoredData"
-            description: A single inferred journey item, either a candidate or an ignored journey.
+            $ref: "#/components/schemas/DemInferredJourneyItem"
           type: array
       required:
         - data
@@ -36456,11 +36508,6 @@ components:
         - DEPLOYMENT_GATES_EVALUATION_RESULT_RESPONSE
     DeploymentGatesEvaluationRule:
       description: A rule to evaluate as part of a deployment gate evaluation.
-      discriminator:
-        mapping:
-          faulty_deployment_detection: "#/components/schemas/DeploymentGatesFDDRule"
-          monitor: "#/components/schemas/DeploymentGatesMonitorRule"
-        propertyName: type
       oneOf:
         - $ref: "#/components/schemas/DeploymentGatesMonitorRule"
         - $ref: "#/components/schemas/DeploymentGatesFDDRule"
@@ -68768,9 +68815,6 @@ components:
           type: string
       type: object
     LLMObsContentBlock:
-      anyOf:
-        - $ref: "#/components/schemas/LLMObsFrontendContentBlock"
-        - $ref: "#/components/schemas/LLMObsLegacyContentBlock"
       description: |-
         A single content block rendered inside a `display_block` interaction.
         `type` discriminates which other fields are meaningful:
@@ -68779,7 +68823,7 @@ components:
         - `header`: `content` must be a string; `level`, when set, must be one of `sm`, `md`, `lg`, `xl`.
         - `json`: `content` must be a well-formed JSON value (object, array, or scalar).
         - `image`: `url` is required.
-        - `widget`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
+        - `univiz`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
         - `llmobs_trace`: `traceId` is required; `interactionType`, when set, must be `trace` or `experiment_trace`.
         - `frontend`: `code` is required and must be a non-empty string; `label` is optional.
 
@@ -68795,7 +68839,7 @@ components:
           description: |-
             Block payload. A string for `markdown`, `header`, and `text`; an
             arbitrary JSON value (object, array, or scalar) for `json`. Omitted
-            for `image`, `widget`, `llmobs_trace`, and `frontend`.
+            for `image`, `univiz`, `llmobs_trace`, and `frontend`.
           example: "## Triage Instructions"
         height:
           description: Optional rendered height. Must be positive when set.
@@ -68812,7 +68856,7 @@ components:
           $ref: "#/components/schemas/LLMObsContentBlockHeaderLevel"
         tileDef:
           description: |-
-            Tile definition for a `widget` block. Required for `widget`. The
+            Tile definition for a `univiz` block. Required for `univiz`. The
             schema is owned by the frontend renderer.
           example:
             requests:
@@ -68835,8 +68879,6 @@ components:
           description: URL of the image. Required for `image` blocks.
           example: "https://example.com/image.png"
           type: string
-      required:
-        - type
       type: object
     LLMObsContentBlockHeaderLevel:
       description: Visual size for a `header` block.
@@ -68891,7 +68933,7 @@ components:
         - text
         - json
         - image
-        - widget
+        - univiz
         - llmobs_trace
         - frontend
       example: markdown
@@ -68902,7 +68944,7 @@ components:
         - TEXT
         - JSON
         - IMAGE
-        - WIDGET
+        - UNIVIZ
         - LLMOBS_TRACE
         - FRONTEND
     LLMObsContentBlocks:
@@ -71824,29 +71866,11 @@ components:
       required:
         - data
       type: object
-    LLMObsFrontendContentBlock:
-      description: Validation requirements for a `frontend` display block.
-      properties:
-        code:
-          $ref: "#/components/schemas/LLMObsFrontendContentBlockCode"
-        type:
-          $ref: "#/components/schemas/LLMObsFrontendContentBlockType"
-      required:
-        - code
-      type: object
     LLMObsFrontendContentBlockCode:
       description: HTML code rendered by a `frontend` block. Required for `frontend` blocks.
       example: '<div class="status-card">Ready for review</div>'
       minLength: 1
       type: string
-    LLMObsFrontendContentBlockType:
-      description: Type discriminator for a `frontend` display block.
-      enum:
-        - frontend
-      example: frontend
-      type: string
-      x-enum-varnames:
-        - FRONTEND
     LLMObsInferenceCode:
       description: A generated code snippet for running an inference request programmatically.
       properties:
@@ -72452,32 +72476,6 @@ components:
         - CATEGORICAL
         - BOOLEAN
         - TEXT
-    LLMObsLegacyContentBlock:
-      description: Validation requirements for an existing non-frontend display block.
-      properties:
-        type:
-          $ref: "#/components/schemas/LLMObsLegacyContentBlockType"
-      type: object
-    LLMObsLegacyContentBlockType:
-      description: Type discriminator for an existing non-frontend display block.
-      enum:
-        - markdown
-        - header
-        - text
-        - json
-        - image
-        - widget
-        - llmobs_trace
-      example: markdown
-      type: string
-      x-enum-varnames:
-        - MARKDOWN
-        - HEADER
-        - TEXT
-        - JSON
-        - IMAGE
-        - WIDGET
-        - LLMOBS_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an Agent Observability experiment metric.
       enum:
@@ -76917,12 +76915,16 @@ components:
         - -name
         - user_count
         - -user_count
+        - link_count
+        - -link_count
       type: string
       x-enum-varnames:
         - NAME
         - _NAME
         - USER_COUNT
         - _USER_COUNT
+        - LINK_COUNT
+        - _LINK_COUNT
     ListVulnerabilitiesResponse:
       description: The expected response schema when listing vulnerabilities.
       properties:
@@ -80300,11 +80302,15 @@ components:
       enum:
         - non_distribution
         - distribution
+        - exponential_histogram
+        - explicit_histogram
       example: distribution
       type: string
       x-enum-varnames:
         - NON_DISTRIBUTION
         - DISTRIBUTION
+        - EXPONENTIAL_HISTOGRAM
+        - EXPLICIT_HISTOGRAM
     MetricTagConfigurationMetricTypes:
       default: gauge
       description: The metric's type.
@@ -111267,6 +111273,7 @@ components:
       example:
         data:
           attributes:
+            max_responders: 1
             name: On-Call Schedule
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -111348,6 +111355,7 @@ components:
                     start_day: monday
                     start_time: "09:00:00"
                 rotation_start: "2025-02-01T00:00:00Z"
+            max_responders: 1
             name: On-Call Schedule
             time_zone: America/New_York
           relationships:
@@ -111383,6 +111391,15 @@ components:
           items:
             $ref: "#/components/schemas/ScheduleCreateRequestDataAttributesLayersItems"
           type: array
+        max_responders:
+          description: |-
+            Maximum number of users who can be on call at the same time.
+            The value must be between 1 and the number of layers, and no greater than 10.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
         name:
           description: A human-readable name for the new schedule.
           example: Team A On-Call
@@ -111476,6 +111493,15 @@ components:
     ScheduleDataAttributes:
       description: Provides core properties of a schedule object such as its name and time zone.
       properties:
+        max_responders:
+          description: |-
+            Maximum number of users who can be on call at the same time.
+            The value is between 1 and the number of layers, and no greater than 10.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
         name:
           description: A short name for the schedule.
           example: Primary On-Call
@@ -111958,6 +111984,7 @@ components:
                     start_day: monday
                     start_time: "09:00:00"
                 rotation_start: "2025-02-01T00:00:00Z"
+            max_responders: 1
             name: On-Call Schedule Updated
             time_zone: America/New_York
           id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -112000,6 +112027,15 @@ components:
           items:
             $ref: "#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItems"
           type: array
+        max_responders:
+          description: |-
+            Maximum number of users who can be on call at the same time.
+            The value must be between 1 and the number of layers, and no greater than 10.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
         name:
           description: A short name for the schedule.
           example: Primary On-Call
@@ -112129,6 +112165,7 @@ components:
       example:
         data:
           - attributes:
+              max_responders: 1
               name: Primary On-Call
               tags: []
               time_zone: America/New_York
@@ -114824,16 +114861,6 @@ components:
       description: |-
         Type-specific details for a content pack state. The set of fields present depends
         on the content pack's `type`. When Cloud SIEM is inactive for the requesting organization, `onboarding` is returned instead of the content pack's usual type, such as `logs` or `vulnerability`.`
-      discriminator:
-        mapping:
-          appsec: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
-          audit: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
-          entity: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
-          logs: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
-          onboarding: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
-          threat_intel: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
-          vulnerability: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
-        propertyName: type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
         - $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
@@ -116050,14 +116077,6 @@ components:
       type: object
     SecurityMonitoringIntegrationConfigCreateAttributes:
       description: The attributes of the entity context sync configuration to create.
-      discriminator:
-        mapping:
-          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
-          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
-          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
-          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
-          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
-        propertyName: integration_type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
@@ -116209,14 +116228,6 @@ components:
         - INITIALIZING
     SecurityMonitoringIntegrationConfigUpdateAttributes:
       description: Fields to update on the entity context sync configuration. All fields other than the integration type are optional.
-      discriminator:
-        mapping:
-          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
-          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
-          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
-          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
-          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
-        propertyName: integration_type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
@@ -116255,14 +116266,6 @@ components:
       type: object
     SecurityMonitoringIntegrationCredentialsValidateAttributes:
       description: The credentials to validate against the external entity source.
-      discriminator:
-        mapping:
-          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
-          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
-          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
-          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
-          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
-        propertyName: integration_type
       oneOf:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
@@ -124830,6 +124833,8 @@ components:
         - elf
         - ndk
         - il2cpp
+        - wasm
+        - portable_pdb
       example: js
       type: string
       x-enum-varnames:
@@ -124841,6 +124846,8 @@ components:
         - ELF
         - NDK
         - IL2CPP
+        - WASM
+        - PORTABLE_PDB
     SourcemapSearchBy:
       description: The search mode for listing JavaScript source maps.
       enum:
@@ -132599,6 +132606,14 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        handles:
+          description: Collection of handles associated with the team.
+          items:
+            description: A team handle.
+            type: string
+          nullable: true
+          readOnly: true
+          type: array
         hidden_modules:
           description: Collection of hidden modules for the team
           items:
@@ -132608,6 +132623,10 @@ components:
           type: array
         is_managed:
           description: Whether the team is managed from an external source
+          type: boolean
+        is_open_membership:
+          description: Whether any user can join the team without an invitation.
+          readOnly: true
           type: boolean
         link_count:
           description: The number of links belonging to the team
@@ -132623,6 +132642,13 @@ components:
           description: The name of the team
           example: Example Team
           maxLength: 200
+          type: string
+        provisioned_by:
+          description: |-
+            The mechanism that created the team, such as `teams_api`, `teams_terraform`, or `teams_ui`.
+            Omitted when unknown.
+          example: teams_api
+          readOnly: true
           type: string
         summary:
           description: A brief summary of the team, derived from the `description`
@@ -132671,7 +132697,7 @@ components:
           example: "github_sync"
           type: string
         source:
-          description: The name of the external source.
+          description: The name of the external source, such as `github` or `servicenow`.
           example: "github"
           type: string
       type: object
@@ -133595,6 +133621,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/Team"
+        included:
+          description: Resources related to the team.
+          items:
+            $ref: "#/components/schemas/TeamIncluded"
+          type: array
       type: object
     TeamRoutingRules:
       description: Represents a complete set of team routing rules, including data and optionally included related resources.
@@ -133830,13 +133861,15 @@ components:
         $ref: "#/components/schemas/TeamSyncSelectionStateItem"
       type: array
     TeamSyncAttributesSource:
-      description: The external source platform for team synchronization. Only "github" is supported.
+      description: The external source platform for team synchronization.
       enum:
         - github
+        - servicenow
       example: github
       type: string
       x-enum-varnames:
         - GITHUB
+        - SERVICENOW
     TeamSyncAttributesSyncMembership:
       default: false
       description: Whether to sync members from the external team to the Datadog team. Defaults to `false` when not provided.
@@ -133912,8 +133945,10 @@ components:
     TeamSyncSelectionStateExternalIdType:
       description: |-
         The type of external identifier for the selection state item.
-        For GitHub synchronization, the allowed values are `team` and
-        `organization`.
+        For GitHub synchronization, `team` refers to a GitHub team and
+        `organization` refers to a GitHub organization. For ServiceNow
+        synchronization, `team` refers to a ServiceNow group and
+        `organization` refers to a ServiceNow instance.
       enum:
         - team
         - organization
@@ -133927,7 +133962,9 @@ components:
         The external identifier value from the source
         platform. For GitHub, this is the string
         representation of a GitHub organization ID or team
-        ID.
+        ID. For ServiceNow, this is the instance name for
+        `organization`, or `<instance_name>/<sys_id>` of the
+        group for `team`.
       example: "1"
       type: string
     TeamSyncSelectionStateItem:
@@ -134082,6 +134119,8 @@ components:
         - link_count
         - team_links
         - user_team_permissions
+        - is_managed
+        - provisioned_by
       type: string
       x-enum-varnames:
         - ID
@@ -134099,6 +134138,8 @@ components:
         - LINK_COUNT
         - TEAM_LINKS
         - USER_TEAM_PERMISSIONS
+        - IS_MANAGED
+        - PROVISIONED_BY
     TeamsHierarchyLinksResponseLinks:
       description: When querying team hierarchy links, a set of links for navigation between different pages is included
       properties:
@@ -134135,8 +134176,21 @@ components:
           description: First page number.
           format: int64
           type: integer
+        first_offset:
+          description: First offset.
+          format: int64
+          type: integer
         last_number:
           description: Last page number.
+          format: int64
+          type: integer
+        last_offset:
+          description: Last offset.
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Page limit, when offset pagination is used.
           format: int64
           type: integer
         next_number:
@@ -134144,12 +134198,26 @@ components:
           format: int64
           nullable: true
           type: integer
+        next_offset:
+          description: Next offset.
+          format: int64
+          nullable: true
+          type: integer
         number:
           description: Page number.
           format: int64
           type: integer
+        offset:
+          description: Current offset, when offset pagination is used.
+          format: int64
+          type: integer
         prev_number:
           description: Previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        prev_offset:
+          description: Previous offset.
           format: int64
           nullable: true
           type: integer
@@ -134639,9 +134707,18 @@ components:
     TeamsResponseMetaPagination:
       description: Teams response metadata.
       properties:
+        first_number:
+          description: The first page number.
+          format: int64
+          type: integer
         first_offset:
           description: The first offset.
           format: int64
+          type: integer
+        last_number:
+          description: The last page number.
+          format: int64
+          nullable: true
           type: integer
         last_offset:
           description: The last offset.
@@ -134651,16 +134728,34 @@ components:
           description: Pagination limit.
           format: int64
           type: integer
+        next_number:
+          description: The next page number.
+          format: int64
+          nullable: true
+          type: integer
         next_offset:
           description: The next offset.
+          format: int64
+          type: integer
+        number:
+          description: The current page number, when page-number pagination is used.
           format: int64
           type: integer
         offset:
           description: The offset.
           format: int64
           type: integer
+        prev_number:
+          description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
         prev_offset:
           description: The previous offset.
+          format: int64
+          type: integer
+        size:
+          description: The page size, when page-number pagination is used.
           format: int64
           type: integer
         total:
@@ -134668,7 +134763,7 @@ components:
           format: int64
           type: integer
         type:
-          description: Offset type.
+          description: Pagination type. One of `offset_limit` or `number_size`.
           type: string
       type: object
     TenancyConfig:
@@ -136879,9 +136974,6 @@ components:
         - $ref: "#/components/schemas/SoftwareCatalogTriggerWrapper"
         - $ref: "#/components/schemas/WorkflowTriggerWrapper"
     TriggerAttributes:
-      anyOf:
-        - $ref: "#/components/schemas/MonitorAlertTrigger"
-        - $ref: "#/components/schemas/GeneralInvestigationTrigger"
       description: The trigger definition for starting an investigation.
       example:
         monitor_alert_trigger:
@@ -136889,14 +136981,9 @@ components:
           event_ts: 1700000000000
           monitor_id: 12345678
         type: monitor_alert_trigger
-      properties:
-        general_investigation:
-          $ref: "#/components/schemas/GeneralInvestigationAttributes"
-        monitor_alert_trigger:
-          $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
-        type:
-          $ref: "#/components/schemas/TriggerType"
-      type: object
+      oneOf:
+        - $ref: "#/components/schemas/MonitorAlertTrigger"
+        - $ref: "#/components/schemas/GeneralInvestigationTrigger"
     TriggerInvestigationRequest:
       description: Request to trigger a new investigation.
       properties:
@@ -136997,16 +137084,6 @@ components:
       x-enum-varnames:
         - SECURITY_FINDINGS
         - SECURITY_SIGNALS
-    TriggerType:
-      description: The type of trigger for the investigation.
-      enum:
-        - monitor_alert_trigger
-        - general_investigation
-      example: monitor_alert_trigger
-      type: string
-      x-enum-varnames:
-        - MONITOR_ALERT_TRIGGER
-        - GENERAL_INVESTIGATION
     TriggerWorkflowAutomationAction:
       description: "Triggers a Workflow Automation."
       properties:
@@ -140916,7 +140993,7 @@ components:
           type: array
       type: object
     UserTeamRole:
-      description: The user's role within the team
+      description: The user's role within the team. A value of `null` represents a regular member.
       enum:
         - admin
       nullable: true
@@ -143153,6 +143230,7 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            agent_builder_run: Run agents created with Agent Builder.
             ai_gateway_config_read: View AI Gateway configuration.
             ai_gateway_config_write: Create, update, and delete AI Gateway configuration.
             ai_gateway_usage: Use AI Gateway and view configuration applicable to the authenticated user.
@@ -143163,11 +143241,14 @@ components:
             apm_service_catalog_write: >-
               Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
+            assistant_access: Access Bits Chat.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
             billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
+            bits_dev_write: Create and interact with Bits Code sessions.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
+            bits_security_analyst_write: Create and manage Bits AI Security Analyst investigations.
             cases_read: View Cases.
             cases_shared_settings_write: Update shared case management settings.
             cases_write: Create and update cases.
@@ -186967,6 +187048,7 @@ paths:
                         automute_enabled: true
                         collect_cloudwatch_alarms: false
                         collect_custom_metrics: false
+                        collect_service_quotas: false
                         enabled: true
                         metric_name_filters:
                           - include_only:
@@ -187112,6 +187194,7 @@ paths:
                         automute_enabled: true
                         collect_cloudwatch_alarms: false
                         collect_custom_metrics: false
+                        collect_service_quotas: false
                         enabled: true
                         metric_name_filters:
                           - include_only:
@@ -201466,7 +201549,7 @@ paths:
           schema:
             type: boolean
         - description: |-
-            This parameter has no effect unless `filter[queried]` is also set. Only return metrics that have been queried or not queried in the specified window. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 1 second. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
+            The look-back window for `filter[queried]`, in seconds. You must also set `filter[queried]`, or the request returns a 400 error. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 0. With `0`, the window ends now, so `filter[queried]=true` returns almost no metrics and `filter[queried]=false` returns all metrics. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
           example: 15552000
           in: query
           name: filter[queried][window][seconds]
@@ -201475,7 +201558,7 @@ paths:
             default: 2592000
             format: int64
             maximum: 15552000
-            minimum: 1
+            minimum: 0
             type: integer
         - description: |-
             Only return metrics that were submitted with tags matching this expression. You can use AND, OR, IN, and wildcards. For example: `filter[tags]=env IN (staging,test) AND service:web*`.
@@ -201508,7 +201591,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Only return metrics that have been actively reporting in the specified window. The default value is 3600 seconds (1 hour), the maximum value is 2,592,000 seconds (30 days), and the minimum value is 1 second.
+            Only return metrics that have been actively reporting in this window. The default value is 3,600 seconds (1 hour), the maximum value is 5,184,000 seconds (60 days), and the minimum value is 0. With `0`, the API returns only metrics that reported in the last few minutes.
           example: 3600
           in: query
           name: window[seconds]
@@ -201516,11 +201599,11 @@ paths:
           schema:
             default: 3600
             format: int64
-            maximum: 2592000
-            minimum: 1
+            maximum: 5184000
+            minimum: 0
             type: integer
         - description: |-
-            Maximum number of results per page. Send `page[size]` on the first request to opt in to pagination. On each subsequent request, send `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. The default value is 10000, the maximum value is 10000, and the minimum value is 1.
+            Maximum number of results per page. Send `page[size]` on the first request to opt in to pagination. On subsequent requests, send `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. To retain a custom page size, include `page[size]` on every request. The default value is 10000, the maximum value is 10000, and the minimum value is 1.
           in: query
           name: page[size]
           required: false
@@ -205816,7 +205899,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/NDMPageSize"
         - $ref: "#/components/parameters/NDMPageNumber"
-        - description: The field to sort the devices by. Defaults to `name`.
+        - description: The field to sort devices by. Defaults to `name`. Prefix the field with `-` to sort in descending order, for example, `-name`.
           example: status
           in: query
           name: sort
@@ -205854,7 +205937,7 @@ paths:
                 $ref: "#/components/schemas/ListDevicesResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          $ref: "#/components/responses/NDMBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "429":
@@ -205903,7 +205986,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the device details
@@ -206002,7 +206085,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the list of tags for a device
@@ -206055,10 +206138,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListTagsResponse"
           description: OK
+        "400":
+          $ref: "#/components/responses/NDMBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update the tags for a device
@@ -206097,7 +206182,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List tags for an interface
@@ -206148,10 +206233,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListInterfaceTagsResponse"
           description: OK
+        "400":
+          $ref: "#/components/responses/NDMBadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          $ref: "#/components/responses/NDMNotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update the tags for an interface
@@ -207789,6 +207876,7 @@ paths:
                   value:
                     data:
                       - attributes:
+                          max_responders: 1
                           name: Primary On-Call
                           tags: []
                           time_zone: America/New_York
@@ -207868,6 +207956,7 @@ paths:
                               start_day: monday
                               start_time: 09:00:00
                           rotation_start: "2025-02-01T00:00:00Z"
+                      max_responders: 1
                       name: On-Call Schedule
                       time_zone: America/New_York
                     relationships:
@@ -207888,6 +207977,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        max_responders: 1
                         name: On-Call Schedule
                         time_zone: America/New_York
                       id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -207984,6 +208074,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        max_responders: 1
                         name: On-Call Schedule
                         time_zone: America/New_York
                       id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -208059,6 +208150,7 @@ paths:
                               start_day: monday
                               start_time: 09:00:00
                           rotation_start: "2025-02-01T00:00:00Z"
+                      max_responders: 1
                       name: On-Call Schedule Updated
                       time_zone: America/New_York
                     id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
@@ -208080,6 +208172,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        max_responders: 1
                         name: On-Call Schedule
                         time_zone: America/New_York
                       id: 00000000-0000-0000-0000-000000000001
@@ -239949,7 +240042,7 @@ paths:
       parameters:
         - description: |-
             The type of source map. Valid values are `js`, `jvm`, `ios`,
-            `react`, `flutter`, `elf`, `ndk`, `il2cpp`.
+            `react`, `flutter`, `elf`, `ndk`, `il2cpp`, `wasm`, `portable_pdb`.
           in: query
           name: mapkind
           required: true
@@ -240009,7 +240102,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, and `il2cpp`.
+        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
           explode: true
           in: query
           name: filter[build_id]
@@ -240092,7 +240185,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by filename (single value). Supported for `js`, `elf`, and `ndk`.
+        - description: Filter by filename (single value). Supported for `js`, `elf`, `ndk`, `wasm`, and `portable_pdb`.
           in: query
           name: filter[filename]
           schema:
@@ -240471,7 +240564,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, and `il2cpp`.
+        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
           explode: true
           in: query
           name: filter[build_id]
@@ -240554,7 +240647,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by filename (single value). Supported for `js`, `elf`, and `ndk`.
+        - description: Filter by filename (single value). Supported for `js`, `elf`, `ndk`, `wasm`, and `portable_pdb`.
           in: query
           name: filter[filename]
           schema:
@@ -240664,7 +240757,7 @@ paths:
       parameters:
         - description: |-
             The type of source map. Valid values are `js`, `jvm`, `ios`,
-            `react`, `flutter`, `elf`, `ndk`, `il2cpp`.
+            `react`, `flutter`, `elf`, `ndk`, `il2cpp`, `wasm`, `portable_pdb`.
           in: query
           name: mapkind
           required: true
@@ -240724,7 +240817,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, and `il2cpp`.
+        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
           explode: true
           in: query
           name: filter[build_id]
@@ -240807,7 +240900,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by filename (single value). Supported for `js`, `elf`, and `ndk`.
+        - description: Filter by filename (single value). Supported for `js`, `elf`, `ndk`, `wasm`, and `portable_pdb`.
           in: query
           name: filter[filename]
           schema:
@@ -249771,7 +249864,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/PageNumber"
-        - description: Filter team connections by external source systems.
+        - description: Filter team connections by external source systems, such as `github` or `servicenow`.
           explode: false
           in: query
           name: filter[sources]
@@ -249921,7 +250014,7 @@ paths:
     get:
       description: |-
         Get all team synchronization configurations.
-        Returns a list of configurations used for linking or provisioning teams with external sources like GitHub.
+        Returns a list of configurations used for linking or provisioning teams with external sources like GitHub or ServiceNow.
       operationId: GetTeamSync
       parameters:
         - description: Filter by the external source platform for team synchronization
@@ -249966,21 +250059,26 @@ paths:
           - teams_read
     post:
       description: |-
-        This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.
-        It evaluates all current Datadog teams and compares them against teams in the GitHub organization
-        connected to your Datadog account, based on Datadog Team handle and GitHub Team slug
-        (lowercased and kebab-cased).
+        This endpoint configures synchronization between your existing Datadog teams and teams from
+        GitHub or ServiceNow by matching team names.
+        It evaluates all current Datadog teams and compares them against teams in the external source
+        connected to your Datadog account.
 
-        This operation is read-only on the GitHub side, no teams will be modified or created.
+        This operation is read-only on the external source side, no teams will be modified or created there.
+        This only creates new teams in Datadog when type is set to `provision`.
 
         Optionally, provide `selection_state` to limit synchronization
         to specific teams or organizations and their subtrees, instead
         of syncing all teams.
 
-        [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
+        **GitHub**: [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
         and the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug
-        using a normalized exact match; case is ignored and spaces are removed. No modifications are made
-        to teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.
+        (lowercased and kebab-cased) using a normalized exact match; case is ignored and spaces are removed.
+
+        **ServiceNow**: [The ServiceNow integration must be configured for your Datadog account](https://docs.datadoghq.com/integrations/servicenow/).
+        Active assignment groups from every configured ServiceNow instance are synchronized, and the ServiceNow
+        group hierarchy is preserved. When `sync_membership` is enabled, group members are matched to Datadog
+        users by email address.
       operationId: SyncTeams
       requestBody:
         content:
@@ -250016,7 +250114,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - teams_manage
-      summary: Link Teams with GitHub Teams
+      summary: Link teams with external teams
       tags:
         - Teams
       x-codegen-request-body-name: body
@@ -250712,6 +250810,10 @@ paths:
                       - attributes:
                           role: admin
                         id: TeamMembership-aeadc05e-98a8-11ec-ac2c-da7ad0900001-38835
+                        type: team_memberships
+                      - attributes:
+                          role:
+                        id: TeamMembership-b8626d7e-cedd-11eb-abf5-da7ad0900001-38835
                         type: team_memberships
               schema:
                 $ref: "#/components/schemas/UserTeamsResponse"
