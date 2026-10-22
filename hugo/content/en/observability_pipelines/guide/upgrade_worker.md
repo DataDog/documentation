@@ -27,13 +27,14 @@ Worker version 2.24.1 gives you access to the following:
 
 #### Security
 
-- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eight eMudhra intermediate certificate authorities (CAs) whose private keys were reported compromised, even when the issuing root CA is trusted. This applies to components that use rustls 0.23.<br><br>Components that use OpenSSL, as well as the Amazon Security Lake destination's AWS account lookup and the Google Cloud Pub/Sub source, rely on the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3` root CA, protecting these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
-- For APT and RPM package installations, distrust `emSign ECC Root CA - G3` until your distribution rovides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which is shipped as `Comodo_AAA_Services_root` on Debian and Ubuntu.
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised, even when the issuing root CA is trusted. This applies to components that use rustls.
+<br><br>Components that use OpenSSL, the Amazon Security Lake destination's AWS account lookup, and the Google Cloud Pub/Sub source use the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3` root CA, which protects these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
+<br><br>**Note**: For APT and RPM package installations, distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
 
 #### Fixes
 
-- Fixed search queries with `OR` groups that mix exact values with other operands, such as wildcards, ranges, or other attributes, silently dropping operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss events they should have matched.
-- Regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in glob patterns are now treated as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
+- Fixed an issue where search queries with `OR` groups that mix exact values with other operands, such as wildcards, ranges, or other attributes, silently dropped operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss events they should have matched.
+- In search queries, regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in wildcard patterns are now treated as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
 
 ## Worker version 2.24.0
 
@@ -56,11 +57,10 @@ Worker version 2.24.0 gives you access to the following:
     - Reports the `enrichment_distinct_lookup_keys_total` metric, which is an estimate of distinct lookup keys summed across one-second windows.
     - Has improved performance during large cache fills.
     - Reloads table values every 30 seconds. If a reload fails, the processor keeps using the last valid table until a reload succeeds.
-    - Keeps Reference Table rows in its cache for one hour.
-    - Can hold up to one million rows in its local Reference Table cache, which improves handling of large tables.
-    - Adds an `outcome` tag to the fetched keys metric for failed lookup attempts.
-    - Has updated buffer limits of 20,000 events and 100 MiB, with a hard limit of 100,000 events.
-- The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option. When aggregation is enabled, generated metrics are tagged with `worker_uuid:<worker_UUID>`. This lets Datadog aggregate metrics from different Workers instead of deduplicating them.
+    - Caches up to one million Reference Table rows locally for one hour, which improves handling of large tables.
+    - Adds an `outcome` tag to its fetched-keys metric to identify failed lookup attempts.
+    - Has a default buffer size of 20,000 events or 100 MiB, and a maximum of 100,000 events.
+- The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option. When aggregation is enabled, generated metrics are tagged with `worker_uuid:<worker_UUID>`. The tag lets Datadog aggregate metrics from different Workers instead of deduplicating them.
 - The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
 - The Grok Parser processor has been updated to match ISO dates, URLs, query strings, and data separators before date alternations.
 - The Custom Processor's performance has been improved, including more efficient field lookups and string functions.
@@ -68,8 +68,8 @@ Worker version 2.24.0 gives you access to the following:
 
 #### Fixes
 
-- Sensitive Data Scanner processor library rules now use pattern capture groups, which were previously ignored, to preserve non-sensitive context around the captured value. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
-- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse, because this is unexpected input data instead of a problem with the Worker. The Parse JSON processor's error message also names the field that failed to parse instead of the generic word `source`.
+- The Sensitive Data Scanner processor's library rules now use pattern capture groups, which were previously ignored, to preserve non-sensitive context around the captured value. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
+- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse, because the cause is unexpected input data, not a Worker problem. The Parse JSON processor's error message also names the field that failed to parse, rather than the generic word `source`.
 - The `pipelines.quota_fill` metric now has a `quota_name` tag. The legacy `name` tag is kept for backward compatibility.
 - Fixed issues with disk buffers and configuration reloads.
 - The OpenTelemetry source now preserves native OTLP log event names.
