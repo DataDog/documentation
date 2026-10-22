@@ -63,22 +63,22 @@ Worker version 2.23.0 gives you access to the following:
 
 #### New features
 
-- The Enrichment Table processor now supports CSV files and Reference Tables for metrics pipelines.
+- The Enrichment Table processor now supports CSV files and Reference Tables in metrics pipelines.
 - The Custom Processor now supports the `break` statement to exit a `for_each` loop early.
 
 #### Enhancements
 
-- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default across both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
-- The Databricks Zerobus destination now identifies the Worker in its user-agent header.
+- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default. The limits apply to both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
+- The Databricks Zerobus destination now identifies the Worker in its `User-Agent` header.
 - For the Custom Processor:
-    - The performance of the processor has been improved.
-    - The `for_each` function's performance has been improved and its memory usage reduced by iterating over collections directly.
-    - The runtime performance of the `md5`, `sha1`, `sha2`, and `sha3` functions has been improved.
+    - The processor's overall performance has been improved.
+    - The `for_each` function now iterates over collections directly, which improves performance and reduces memory usage.
+    - The `md5`, `sha1`, `sha2`, and `sha3` functions now run faster.
 
 #### Fixes
 
 - Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable, the Worker looked for these files in the default data directory and rejected valid files as missing.
-- TCP acknowledgment and TLS connection error logs for sources now include the remote `peer_addr`.
+- Sources now include the remote `peer_addr` in TCP acknowledgment error logs and TLS connection error logs.
 - The Custom Processor's `uuid_v7` function now preserves the supplied timestamp at millisecond precision.
 
 ## Worker version 2.22.0
@@ -96,7 +96,6 @@ Worker version 2.22.0 gives you access to the following:
 
 #### New features
 
-- The Integration Pipelines processor is now available for logs pipelines.
 - The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period includes late-arriving metrics in their event-time window.
 
 #### Enhancements
