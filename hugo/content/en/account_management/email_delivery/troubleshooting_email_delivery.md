@@ -38,6 +38,8 @@ Trace a failure from the Email Delivery dashboard to the underlying audit event:
 2. Select **View audit events** to open the full Audit Trail for that delivery attempt.
 3. Click an individual audit event to inspect delivery details, including the SMTP code, mail server response, and recipient information.
 
+{{< img src="/account_management/email_delivery/view_audit_events.png" alt="The View audit events option selected in the Audit Logs widget menu, shown alongside the Email Delivery Failures dashboard." style="width:100%;" >}}
+
 ## Common reasons emails fail to deliver
 
 | Reason                                        | What it means                                                                                                                                                          | What to do                                                                                                                                                                                          |
