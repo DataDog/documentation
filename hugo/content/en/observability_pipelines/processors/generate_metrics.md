@@ -23,7 +23,7 @@ To set up the processor:
 1. Enter a filter query. See [Logs Search Syntax][5] for more information.
     - Only logs that match the filter query are processed.
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
-1. {{< ui >}}Aggregate generated metrics{{< /ui >}} is enabled by default. Toggle off the option if you don't want the metrics aggregated. When enabled, the Worker:
+1. Toggle off {{< ui >}}Aggregate generated metrics{{< /ui >}} if you don't want metrics aggregated. When enabled, the Worker:
     - Combines generated metric points with the same series and timestamp before sending them to the metrics destination, which prevents undercounting.
     - Adds the `worker_uuid` tag to the generated metrics.
 1. Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing metrics. This opens a side panel.
