@@ -406,7 +406,7 @@ describe("curl header parameters", () => {
   });
 });
 
-describe("curl path parameters", () => {
+describe("curl parameter examples", () => {
   /** Hugo's curl uses the example or `"CHANGE_ME"`, never the default. */
   it("exports CHANGE_ME, not the default, for a path parameter with no example", () => {
     const curl = buildPlaintextCurl(
@@ -429,6 +429,39 @@ describe("curl path parameters", () => {
     );
 
     expect(curl).toContain('export scope_type="CHANGE_ME"');
+  });
+
+  it("exports the example from a parameter's $ref schema, as Hugo does", () => {
+    const specWithMapKind = {
+      ...spec,
+      components: {
+        ...spec.components,
+        schemas: {
+          ...spec.components?.schemas,
+          SourcemapMapKind: { type: "string", example: "js" },
+        },
+      },
+    } as OpenAPIV3.Document;
+    const curl = buildPlaintextCurl(
+      specWithMapKind,
+      "delete",
+      "/api/v2/rum/sourcemaps",
+      { responses: { "200": { description: "OK" } } },
+      {
+        path: [],
+        query: [
+          {
+            name: "mapkind",
+            in: "query",
+            required: true,
+            schema: { $ref: "#/components/schemas/SourcemapMapKind" },
+          },
+        ],
+        header: [],
+      },
+    );
+
+    expect(curl).toContain('export mapkind="js"');
   });
 });
 
