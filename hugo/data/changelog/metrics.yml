@@ -14,3 +14,10 @@ entries:
     operations:
       - ListTagConfigurations
     title: Correct parameter limits and metric types for Get a list of metrics
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40849
+    operations:
+      - QueryMetrics
+    title: Document missing response fields for the v1 Query timeseries points 
+      endpoint
