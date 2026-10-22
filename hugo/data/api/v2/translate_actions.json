@@ -519,7 +519,7 @@
     "request_schema_description": "The request for a Audit Logs events list."
   },
   "ListAuthNMappings": {
-    "description": "List all AuthN Mappings in the organization.",
+    "description": "List all AuthN Mappings in the org.",
     "summary": "List all AuthN Mappings"
   },
   "CreateAuthNMapping": {
