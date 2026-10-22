@@ -109,4 +109,36 @@ describe("apiResponseNode", () => {
       out.indexOf("| Field"),
     );
   });
+
+  /** As Hugo's HTML does: a primitive array's Model tab has no table. */
+  it("renders Model/Example tabs with the schema description when a response has no rows", () => {
+    const out = render([
+      {
+        statusCode: "200",
+        description: "OK",
+        schema: [],
+        schemaDescription: "List of location names.",
+        examples: [{ name: "Example", value: '["aws:eu-west-3"]' }],
+      },
+    ]);
+    const modelTab = out.slice(
+      out.indexOf('label="Model"'),
+      out.indexOf('label="Example"'),
+    );
+    expect(modelTab).toContain("List of location names.");
+    expect(modelTab).not.toContain("| Field");
+  });
+
+  it("renders only the example when a response has no rows and no schema description", () => {
+    const out = render([
+      {
+        statusCode: "200",
+        description: "OK",
+        schema: [],
+        examples: [{ name: "Example", value: '["namespace1"]' }],
+      },
+    ]);
+    expect(out).toContain("namespace1");
+    expect(out).not.toContain('label="Model"');
+  });
 });
