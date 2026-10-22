@@ -16,7 +16,7 @@ further_reading:
   text: Métricas de uso de Observability Pipelines
 - link: https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/
   tag: Blog
-  text: Enrutar datos de OTel de aplicaciones de IA a ClickHouse y Datadog usando
+  text: Envíe datos de OTel desde aplicaciones de IA a ClickHouse y Datadog usando
     Observability Pipelines
 title: Monitoreo de pipelines
 ---
@@ -24,16 +24,16 @@ title: Monitoreo de pipelines
 
 Un pipeline consta de componentes que recopilan, procesan y enrutan sus datos de observabilidad. Puede hacer un seguimiento del estado de sus pipelines y componentes de las siguientes maneras:
 
-- Ver gráficos de estado de sus [pipelines](#view-the-status-of-your-pipelines), [Workers](#view-the-status-of-your-workers) y [componentes](#view-the-status-of-your-pipeline-components) (fuentes, procesadores y destinos).
+- Visualizar gráficos de estado de sus [pipelines](#view-the-status-of-your-pipelines), [Workers](#view-the-status-of-your-workers) y [componentes](#view-the-status-of-your-pipeline-components) (fuentes, procesadores y destinos).
 - Habilite [out-of-the-box monitors](#out-of-the-box-monitors) que le alerten si:
-    - Un Worker de Observability Pipelines tiene un uso elevado de CPU o memoria, o está descartando datos.
+    - Un Observability Pipelines Worker tiene un uso elevado de CPU o memoria, o está descartando datos.
     - Un componente está emitiendo errores.
     - Se ha alcanzado una cuota definida.
 - Cree sus propios paneles, notebooks y monitores con las [métricas de Observability Pipelines][5] disponibles.
 
 {{< img src="observability_pipelines/monitoring_and_troubleshooting/pipelines_list.png" alt="La página de lista de pipelines que muestra el estado, eventos/s y bytes/s para cada pipeline." style="width:100%;" >}}
 
-## Ver el estado de sus pipelines {#view-the-status-of-your-pipelines}
+## Visualizar el estado de sus pipelines {#view-the-status-of-your-pipelines}
 
 1. Navegue a [Observability Pipelines][1] para ver cuántos eventos o bytes están recibiendo y enviando sus pipelines. Las métricas {{< ui >}}events/s{{< /ui >}} y {{< ui >}}bytes/s{{< /ui >}} que se muestran en esta página se basan en un promedio de 15 minutos.
 1. Seleccione un pipeline.
@@ -45,9 +45,9 @@ Un pipeline consta de componentes que recopilan, procesan y enrutan sus datos de
 
 Puede exportar un gráfico de estado a un dashboard, notebook o monitor. El gráfico exportado le muestra que la métrica está agrupada por las etiquetas específicas de pipeline y componente.
 
-## Ver el estado de sus Workers {#view-the-status-of-your-workers}
+## Visualizar el estado de sus Workers {#view-the-status-of-your-workers}
 
-Para ver gráficos del uso de recursos y datos enviados a través de Observability Pipelines Workers:
+Para visualizar gráficos del uso de recursos y datos enviados a través de Observability Pipelines Workers:
 
 1. Navegue a [Observability Pipelines][1].
 1. Seleccione un pipeline.
@@ -56,13 +56,14 @@ Para ver gráficos del uso de recursos y datos enviados a través de Observabili
 1. Haga clic en la pestaña {{< ui >}}Latest Deployment & Setup{{< /ui >}} para ver el estado de implementación de sus Workers.
     {{< img src="observability_pipelines/monitoring_and_troubleshooting/worker_deployment_status.png" alt="La pestaña Latest Deployment and Setup muestra un estado de implementado para cada Worker." style="width:100%;" >}}
 
-## Ver el estado de los componentes de su pipeline {#view-the-status-of-your-pipeline-components}
+## Visualizar el estado de los componentes de su pipeline {#view-the-status-of-your-pipeline-components}
 
-Para ver las métricas de una fuente, proceso o destino:
+Para visualizar las métricas de una fuente, procesador o destino:
 
 1. Navegue a [Observability Pipelines][1].
 1. Seleccione un pipeline.
-1. Haga clic en el engranaje junto al nombre de la fuente, del procesador o del destino y, a continuación, seleccione {{< ui >}}View details{{< /ui >}}. Datadog muestra gráficos de estado para el componente que seleccionó.
+1. Haga clic en el engranaje junto al nombre de la fuente, del procesador o del destino y, a continuación, seleccione {{< ui >}}View details{{< /ui >}}. La pestaña {{< ui >}}Metrics{{< /ui >}} del panel lateral muestra gráficos de estado para el componente que seleccionó.
+1. Para copiar el ID del componente, haga clic en el icono de copiar junto al nombre del componente en la parte superior del panel lateral. Utilice el ID con la etiqueta `component_id` para filtrar o agrupar [métricas de Observability Pipelines][5] para ese componente.
 1. Si desea exportar un gráfico a un [incidente][2], [dashboard][3] o [notebook][4], haga clic en el icono de exportar en el gráfico. El gráfico exportado muestra que la métrica está agrupada por las etiquetas específicas de pipeline y componente.
 
 {{< img src="observability_pipelines/monitoring_and_troubleshooting/pipeline_health_graphs.png" alt="Gráficos de salud que muestran eventos de entrada y salida, bytes de entrada y salida, errores, datos descartados, utilización y eventos de búfer para un pipeline." style="width:35%;" >}}

@@ -5,7 +5,7 @@ description: 'OAuth 또는 개인 액세스 토큰 인증과 Datadog Agent 설�
   Observability: Jobs Monitoring을 활성화합니다.'
 further_reading:
 - link: /data_jobs
-  tag: 설명서
+  tag: 문서
   text: 'Data Observability: Jobs Monitoring'
 - link: https://www.datadoghq.com/blog/databricks-serverless-jobs-datadog/
   tag: 블로그
@@ -34,11 +34,17 @@ Databricks 작업 공간에 대해 1. [Datadog-Databricks 통합](#configure-the
 
 #### Databricks에서 서비스 주체 생성 및 구성 {#create-and-configure-the-service-principal-in-databricks}
 
+1. Microsoft Entra ID에서 관리하는 **서비스 프린시펄**을 Databricks에서 관리하는 **서비스 프린시펄** 대신 사용하려면, 먼저 Microsoft Entra ID에 애플리케이션을 등록하십시오([Microsoft Entra 설명서][22]).
+   1. [Microsoft Entra 관리 센터][23]에 최소 클라우드 애플리케이션 관리자 권한으로 로그인하십시오. 조직에 테넌트가 여러 개인 경우 **디렉터리 + 구독**을 사용하여 올바른 테넌트로 전환하십시오.
+   1. **Entra ID > 앱 등록**으로 이동한 다음 **새 등록**을 클릭하십시오.
+   1. 이름을 입력하고 **이 조직 디렉터리의 계정만(단일 테넌트)**을 선택한 다음 **등록**을 클릭하십시오.
+   1. 애플리케이션의 **개요** 페이지에서 **애플리케이션(클라이언트) ID** 및 **디렉터리(테넌트) ID**를 기록하십시오.
+   1. **인증서 및 비밀 > 클라이언트 비밀 > 새 클라이언트 비밀**을 클릭하십시오. 설명을 입력하고 만료 기간을 허용되는 최대 기간(730일)으로 설정한 다음 **추가**를 클릭하십시오. 생성된 비밀 값을 복사하십시오. 한 번만 표시됩니다.
 1. **Databricks 작업 공간 관리자** 권한으로 작업 공간 오른쪽 상단의 프로필을 클릭하여 {{< ui >}}Settings{{< /ui >}}로 이동합니다.
 1. {{< ui >}}Identity and access{{< /ui >}} 탭에서 {{< ui >}}Service principals{{< /ui >}} 옆의 {{< ui >}}Manage{{< /ui >}}를 클릭합니다.
 1. {{< ui >}}Add service principal{{< /ui >}}을 클릭한 다음 {{< ui >}}Add new{{< /ui >}}를 클릭합니다.
 
-   <div class="alert alert-warning">Azure Databricks의 경우 관리 유형으로 'Databricks managed'를 선택하세요. Datadog은 'Microsoft Entra ID managed' 서비스 주체를 지원하지 않습니다.</div>
+   <div class="alert alert-warning">Azure Databricks의 경우 관리 유형으로 'Databricks managed'를 선택하세요. 위에서 Microsoft Entra ID 애플리케이션을 등록한 경우, 대신 "Microsoft Entra ID 관리"를 선택하고 기록해 둔 <strong>애플리케이션(클라이언트) ID</strong>를 붙여넣으십시오.</div>
 1. 이름을 입력하고 서비스 주체에 대해 다음 작업 공간 권한을 활성화합니다.
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
@@ -47,7 +53,7 @@ Databricks 작업 공간에 대해 1. [Datadog-Databricks 통합](#configure-the
    <div class="alert alert-info"><strong>관리자 액세스</strong> 권한을 부여할 수 없는 경우, '고급 구성'의 <a href="#permissions">권한</a> 섹션에 설명된 대로 세분화된 액세스 권한을 대신 프로비저닝하세요.</div>
 1. **Add**를 클릭합니다.
 
-1. 새로 생성한 서비스 주체의 이름을 클릭합니다. {{< ui >}}Secrets{{< /ui >}} 탭에서 {{< ui >}}Generate secret{{< /ui >}}을 클릭합니다.
+1. **Databricks 관리** 서비스 주체를 만든 경우 해당 이름을 클릭하십시오. {{< ui >}}Secrets{{< /ui >}} 탭에서 {{< ui >}}Generate secret{{< /ui >}}을 클릭합니다.
    1. {{< ui >}}Lifetime (days){{< /ui >}} 값을 허용되는 최대값(730)으로 설정합니다.
 
    1. {{< ui >}}Generate{{< /ui >}}를 클릭합니다.
@@ -55,6 +61,8 @@ Databricks 작업 공간에 대해 1. [Datadog-Databricks 통합](#configure-the
    1. 클라이언트 ID와 클라이언트 시크릿을 기록해 둡니다.
 
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="Databricks에서는 새 OAuth 시크릿과 연결된 클라이언트 ID 및 시크릿을 표시하는 모달 창이 나타납니다." style="width:70%;" >}}
+
+   **Microsoft Entra ID 관리** 서비스 주체를 만든 경우 Microsoft Entra ID에서 생성한 클라이언트 ID와 비밀을 사용하십시오.
 
 1. {{< ui >}}Permissions{{< /ui >}} 탭에서 {{< ui >}}Grant access{{< /ui >}}를 클릭합니다. 새 서비스 주체를 검색한 후 {{< ui >}}Manage{{< /ui >}} 권한을 부여하고 {{< ui >}}Save{{< /ui >}}를 클릭합니다.
 
@@ -64,7 +72,8 @@ Databricks 작업 공간에 대해 1. [Datadog-Databricks 통합](#configure-the
 1. {{< ui >}}Configure{{< /ui >}} 탭에서 {{< ui >}}Add Databricks Workspace{{< /ui >}}를 클릭합니다.
 1. 작업 공간 이름, Databricks 작업 공간 URL, 그리고 생성한 클라이언트 ID 및 시크릿을 입력합니다.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="Datadog-Databricks 통합 타일에는 Databricks 작업 공간이 표시됩니다. 이 작업 공간에는 이름, URL, 클라이언트 ID 및 클라이언트 시크릿이 포함됩니다." style="width:100%;" >}}
-1. Datadog이 쿼리할 [Databricks SQL Warehouse][19]의 ID를 제공하세요. 이를 통해 Jobs Monitoring 또는 [Cloud Cost Management][18]에서 Databricks 비용을 파악할 수 있으며 [Quality Monitoring][21] 기능에 대한 지원이 제공됩니다.
+1. **Microsoft Entra ID 관리** 서비스 주체를 만든 경우 **Microsoft Entra ID 관리 서비스 주체 사용** 확인란을 선택하고 이전에 기록해 둔 **디렉터리(테넌트) ID**를 입력하십시오.
+1. Datadog이 쿼리할 [Databricks SQL Warehouse][19]의 ID를 제공하세요. Datadog은 이 웨어하우스를 사용하여 Unity Catalog [시스템 테이블][20]을 읽습니다. 이 테이블은 Jobs Monitoring 및 [Cloud Cost Management][18], Serverless 작업 모니터링, SQL 웨어하우스 및 쿼리 모니터링, [Quality Monitoring][21]에서 Databricks 비용 가시성을 제공합니다.
    1. Databricks에서 {{< ui >}}SQL Warehouses{{< /ui >}}로 이동하여 Datadog이 사용할 웨어하우스를 선택합니다. Pro 또는 Serverless여야 합니다. Classic Warehouse는 지원되지 않습니다. 비용을 절감하려면 Auto Stop을 5~10분으로 구성한 전용 2XS 웨어하우스를 사용하세요.
    1. 웨어하우스의 개요 페이지에서 ID를 복사하여(웨어하우스 URL의 마지막 세그먼트이기도 함) 통합 타일에 입력합니다.
    1. 웨어하우스의 {{< ui >}}Permissions{{< /ui >}} 탭(오른쪽 상단)에서 서비스 주체에 `CAN USE`를 부여합니다.
@@ -77,6 +86,7 @@ Databricks 작업 공간에 대해 1. [Datadog-Databricks 통합](#configure-the
       ```
 
       <div class="alert alert-info">이 명령을 실행하는 사용자는 <code>MANAGE</code> 권한을 <code>CATALOG system</code>에서 보유해야 합니다.</div>
+   1. 서비스 주체를 `databricks_pii_access` 계정 수준 그룹에 추가합니다. 서버리스 작업 모니터링과 SQL 웨어하우스 및 쿼리 모니터링에는 이 멤버 자격이 필요합니다. Databricks는 그룹 외부의 주체에 대해 SQL 쿼리 텍스트를 마스킹하기 때문입니다. 전체 요구 사항은 [쿼리 텍스트 액세스](#query-text-access)를 참조하십시오.
 1. **Select products to set up integration** 섹션에서 Data Observability: Jobs Monitoring이 {{< ui >}}Enabled{{< /ui >}} 상태인지 확인합니다.
 1. {{< ui >}}Datadog Agent Setup{{< /ui >}} 섹션에서 다음 중 하나를 선택합니다.
     - [Datadog에서 관리(권장)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog이 작업 공간에 전역 초기화 스크립트를 설치하고 Agent를 관리합니다.
@@ -86,6 +96,8 @@ Databricks 작업 공간에 대해 1. [Datadog-Databricks 통합](#configure-the
 [19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
 [21]: /ko/data_observability/quality_monitoring/data_warehouses/databricks/
+[22]: https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal
+[23]: https://entra.microsoft.com
 
 {{% /tab %}}
 
@@ -117,7 +129,7 @@ Databricks 작업 공간이 [Private Link Connectivity][25]를 사용하여 배�
 1. {{< ui >}}Configure{{< /ui >}} 탭에서 {{< ui >}}Add Databricks Workspace{{< /ui >}}를 클릭합니다.
 1. 작업 공간 이름, Databricks 작업 공간 URL 및 생성한 Databricks 토큰을 입력합니다.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="Datadog-Databricks 통합 타일에는 Databricks 작업 공간이 표시됩니다. 이 작업 공간에는 이름, URL 및 API 토큰이 포함됩니다." style="width:100%;" >}}
-1. Datadog이 쿼리할 [Databricks SQL Warehouse][19]의 ID를 제공하세요. 이를 통해 Jobs Monitoring 또는 [Cloud Cost Management][18]에서 Databricks 비용을 파악할 수 있으며 [Quality Monitoring][21] 기능에 대한 지원이 제공됩니다.
+1. Datadog이 쿼리할 [Databricks SQL Warehouse][19]의 ID를 제공하세요. Datadog은 이 웨어하우스를 사용하여 Unity Catalog [시스템 테이블][20]을 읽습니다. 이 테이블은 Jobs Monitoring 및 [Cloud Cost Management][18], Serverless 작업 모니터링, SQL 웨어하우스 및 쿼리 모니터링, [Quality Monitoring][21]에서 Databricks 비용 가시성을 제공합니다.
    1. Databricks에서 {{< ui >}}SQL Warehouses{{< /ui >}}로 이동하여 Datadog이 사용할 웨어하우스를 선택합니다. Pro 또는 Serverless여야 합니다. Classic Warehouse는 지원되지 않습니다. 비용을 절감하려면 Auto Stop을 5~10분으로 구성한 전용 2XS 웨어하우스를 사용하세요.
    1. 웨어하우스의 개요 페이지에서 ID를 복사하여(웨어하우스 URL의 마지막 세그먼트이기도 함) 통합 타일에 입력합니다.
    1. 웨어하우스의 {{< ui >}}Permissions{{< /ui >}} 탭(오른쪽 상단)에서 토큰의 주체에 `CAN USE`를 부여합니다.
@@ -130,6 +142,7 @@ Databricks 작업 공간이 [Private Link Connectivity][25]를 사용하여 배�
       ```
 
       <div class="alert alert-info">이 명령을 실행하는 사용자는 <code>MANAGE</code> 권한을 <code>CATALOG system</code>에서 보유해야 합니다.</div>
+   1. 토큰의 주체를 `databricks_pii_access` 계정 수준 그룹에 추가하십시오. 서버리스 작업 모니터링과 SQL 웨어하우스 및 쿼리 모니터링에는 이 멤버 자격이 필요합니다. Databricks는 그룹 외부의 주체에 대해 SQL 쿼리 텍스트를 마스킹하기 때문입니다. 전체 요구 사항은 [쿼리 텍스트 액세스](#query-text-access)를 참조하십시오.
 1.  **Select products to set up integration** 섹션에서 Data Observability: Jobs Monitoring 제품이 **Enabled** 상태인지 확인합니다.
 1. {{< ui >}}Datadog Agent Setup{{< /ui >}} 섹션에서 다음 중 하나를 선택합니다.
     - [Datadog에서 관리(권장)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog이 작업 공간에 전역 초기화 스크립트를 설치하고 Agent를 관리합니다.
@@ -493,6 +506,32 @@ Databricks 작업 공간에 연결하는 사용자 또는 서비스 주체에 �
    ```
    이 권한을 부여하는 사용자는 `CATALOG system`에 대한 `MANAGE` 권한을 보유해야 합니다.
 
+#### 쿼리 텍스트 액세스 {#query-text-access}
+
+Databricks는 계정 관리자가 아니거나 `databricks_pii_access` 계정 수준 그룹의 구성원이 아닌 모든 주체에 대해 SQL 쿼리 텍스트를 마스킹합니다. 마스킹된 주체의 경우, 쿼리 텍스트는 다음에서 `<Redacted>`(으)로 반환됩니다:
+
+- [`statement_text`][30] 시스템 테이블의 `system.query.history` 열
+- [쿼리 기록 API][31]
+- [쿼리 목록 API][32]
+- SQL 문 텍스트를 캡처하는 감사 로그 이벤트
+
+쿼리 텍스트를 읽는 다음 기능을 사용하려면 서비스 주체를 `databricks_pii_access`에 추가하세요.
+
+- **Serverless 작업 모니터링**: 클러스터에서 Datadog Agent가 실행되지 않는 [Serverless compute][34]에서 실행되는 작업을 모니터링합니다.
+- **SQL 웨어하우스 및 쿼리 모니터링**: SQL 웨어하우스에서 실행되는 쿼리에 대한 가시성과 Datadog에서 생성한 최적화 권장 사항을 제공합니다.
+
+Databricks 비용 데이터, 범용 및 작업 클러스터에서의 Jobs Monitoring, 그리고 테이블 수준 [Quality Monitoring][35] 메트릭은 쿼리 텍스트에 의존하지 않으며 영향을 받지 않습니다.
+
+[시스템 테이블 권한](#cost-data-permissions) 외에도 그룹 멤버십이 필요합니다. 그룹에는 속해 있지만 `CATALOG system`에 대한 `SELECT` 권한이 없는 주체는 여전히 쿼리 기록을 읽을 수 없습니다.
+
+그룹을 생성하고 서비스 주체를 추가하려면 다음을 수행하세요.
+
+1. `databricks_pii_access` 그룹은 기본적으로 Databricks 계정에 존재하지 않으며, 워크스페이스 관리자가 자동으로 해당 그룹의 구성원이 되지는 않습니다. 대소문자를 구분하는 정확한 이름 `databricks_pii_access`로 생성하세요.
+   - SCIM 또는 외부 ID 공급자로 그룹을 관리하지 않는 경우 {{< ui >}}Account Console{{< /ui >}} > {{< ui >}}User Management{{< /ui >}} > {{< ui >}}Groups{{< /ui >}} > {{< ui >}}Add Group{{< /ui >}}로 이동합니다.
+   - SCIM 또는 외부 ID 공급자로 그룹을 관리하는 경우 대신 해당 위치에서 그룹을 생성합니다.
+1. Datadog-Databricks 통합에서 사용하는 서비스 주체 또는 토큰 주체를 그룹에 추가하십시오.
+
+자세한 내용은 [계정 수준 그룹 관리][33]에 대한 Databricks 설명서를 참조하십시오.
 
 ### 런타임 시 스팬 태그 지정 {#tag-spans-at-runtime}
 
@@ -576,3 +615,9 @@ DD_TAGS=env:staging,team:data_engineering
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /ko/getting_started/tagging/
 [29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
+[30]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
+[31]: https://docs.databricks.com/api/workspace/queryhistory/list
+[32]: https://docs.databricks.com/api/workspace/queries/list
+[33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[34]: https://docs.databricks.com/aws/en/compute/serverless/
+[35]: /ko/data_observability/quality_monitoring/data_warehouses/databricks/
