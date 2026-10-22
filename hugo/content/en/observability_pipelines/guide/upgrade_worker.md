@@ -27,7 +27,7 @@ Worker version 2.23.2 gives you access to the following:
 
 #### Enhancements
 
-- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log's non-message fields leave no room for a truncated message, or the log has no string message, the log is forwarded unchanged when it fits the payload limit. The Datadog intake then truncates it.
+- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log has no string message, or its non-message fields leave no room for a truncated message, the Worker forwards the log unchanged as long as it fits within the payload limit. The Datadog intake then truncates the log.
 
 #### Fixes
 
