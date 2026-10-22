@@ -120,7 +120,7 @@ The MCP server calls the following Datadog security binaries to perform scans. I
 
 <div class="alert alert-info"><code>datadog-security-cli</code> is not available on Windows, so SCA scans are not supported there. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
 
-Ephemeral SAST scans require `datadog-static-analyzer` version 0.9.10 or later, which supports the `--rules-with-config` flag.
+Ephemeral SAST scans require `datadog-static-analyzer` version 0.9.10 or later.
 
 ### Configure your client
 
@@ -298,7 +298,7 @@ datadog-code-security-mcp setup
 
 `dd-codesec-setup-toolchain` covers the wrapper CLI and `datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-iac-scanner`, and `datadog-security-cli`.
 
-`dd-codesec-find-security-variants` reads the uncommitted fix from your local Git changes and asks you to confirm the invariant before it searches. It runs the temporary rule with [`datadog_ephemeral_sast_scan`][29], which needs no Datadog keys. If you ask to keep the rule, the skill shows the exact rule and saves it with [`datadog_promote_sast_rule`][30] only after you approve it. Rules go to the `security-variants` ruleset unless you name another one. If a rule with the same name exists, the skill asks before replacing it.
+`dd-codesec-find-security-variants` asks you to confirm the invariant before it searches, and saves a rule only after you approve it.
 
 The `setup` command installs skills into `~/.agents/skills`, the shared directory used by Cursor and other clients that follow the Agent Skills convention. It also installs into `~/.claude/skills` (or `$CLAUDE_CONFIG_DIR/skills`) and `~/.codex/skills` when it detects Claude Code or Codex. Restart updated clients after setup.
 
@@ -396,7 +396,7 @@ Generate an SBOM:
 datadog-code-security-mcp generate-sbom .
 ```
 
-Run one local SAST rule without publishing it. The rule source is a JavaScript file and a tree-sitter query file. This command does not require Datadog keys:
+Run one local SAST rule without publishing it. This command does not require Datadog keys:
 
 ```shell
 datadog-code-security-mcp ephemeral-scan \
@@ -404,15 +404,13 @@ datadog-code-security-mcp ephemeral-scan \
   --code-file rule.js --query-file rule.scm
 ```
 
-Save an approved rule as a Datadog custom rule in the `security-variants` ruleset. `--user-confirmed` is required, and the command uses `DD_API_KEY` and `DD_APP_KEY` from the shell. Add `--overwrite` only to replace a rule that already exists:
+Save an approved rule as a Datadog custom rule. This command uses `DD_API_KEY` and `DD_APP_KEY` from the shell:
 
 ```shell
 datadog-code-security-mcp promote-sast-rule --user-confirmed \
   --language TYPESCRIPT --rule-name missing-admin-check \
   --code-file rule.js --query-file rule.scm
 ```
-
-For all flags of both commands, see [`datadog_ephemeral_sast_scan`][29] and [`datadog_promote_sast_rule`][30] in the Tools Reference.
 
 Add `--json` to the scan and SBOM commands for JSON output:
 
