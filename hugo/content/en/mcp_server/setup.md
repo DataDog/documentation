@@ -65,7 +65,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 1. When prompted for a URL, enter:
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -123,7 +123,7 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
        }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -156,7 +156,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools](#toolsets), define a header `X-Datadog-MCP-Toolsets` in the `config.toml` file on the line after the URL. For example, this header enables _only_ APM and Agent Observability tools (use `X-Datadog-MCP-Toolsets = "all"` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), define a header `X-Datadog-MCP-Toolsets` in the `config.toml` file on the line after the URL. For example, this header enables _only_ APM and Agent Observability tools (or use `X-Datadog-MCP-Toolsets = "all"`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
    <pre><code>http_headers = { "X-Datadog-MCP-Toolsets" = "apm,llmobs" }</code></pre>
 
@@ -219,7 +219,7 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
        }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -302,7 +302,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-    To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+    Alternatively, use `toolsets=all`, which works best for clients that support tool filtering. See [Toolsets][1] for details.
 
 1. On first session launch, choose your Datadog account when prompted to authenticate.
 
@@ -365,7 +365,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -391,7 +391,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -414,7 +414,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -464,7 +464,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -527,7 +527,7 @@ To enable [product-specific tools](#toolsets), include the `toolsets` query para
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+Alternatively, use `toolsets=all`, which works best for clients that support tool filtering. See [Toolsets](#toolsets) for details.
 {{% /collapse-content %}}
 
 [1]: /getting_started/site/
@@ -586,7 +586,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -624,7 +624,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (or use `toolsets=all`, best for clients that support tool filtering; see [Toolsets](#toolsets)):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -646,7 +646,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool search.
+`toolsets=all` enables every generally available toolset except those marked as not included in `toolsets=all`. Preview toolsets are never included. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool search.
 
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
@@ -659,7 +659,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
 
-- Retrieve all generally available tools:
+- Retrieve all tools included in `toolsets=all`:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
@@ -680,7 +680,7 @@ Examples for your selected site ({{< region-param key="dd_site_name" >}}):
 - Select toolsets, then omit one tool:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,software-delivery&omit_tools=search_datadog_incidents</code></pre>
 
-- Start from all generally available toolsets, then omit write tools:
+- Start from `toolsets=all`, then omit write tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all&omit_tools=create_datadog_notebook,edit_datadog_notebook</code></pre>
 {{< /site-region >}}
 

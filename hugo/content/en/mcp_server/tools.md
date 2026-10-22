@@ -24,7 +24,7 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. Use `toolsets=all` to enable all generally available toolsets (best for clients that support tool filtering to reduce context window usage).
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server, or use `toolsets=all` (best for clients that support tool filtering to reduce context window usage). See [Toolsets][1] for details.
 
 For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
@@ -32,6 +32,7 @@ For example, based on your selected [Datadog site][2] ({{< region-param key="dd_
 
 You can also exclude specific tools with the `omit_tools` query parameter.
 
+[1]: /mcp_server/setup#toolsets
 [2]: /getting_started/site/
 {{< /site-region >}}
 
