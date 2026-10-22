@@ -8047,11 +8047,27 @@ menu:
           - ListDatastores
         unstable: []
         order: 1
+    - name: Agent Health
+      url: /api/latest/agent-health/
+      identifier: agent-health
+      generated: true
+    - name: List active Agent Health issues
+      url: /api/latest/agent-health/list-active-agent-health-issues/
+      identifier: agent-health-list-active-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthHostIssues
+        unstable: []
+        order: 1
     - name: Agent Observability
       url: /api/latest/agent-observability/
       identifier: agent-observability
       generated: true
-    - name: List events for an Agent Observability experiment
+    - name: List events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/list-events-for-an-agent-observability-experiment/
       identifier: agent-observability-list-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -8077,7 +8093,7 @@ menu:
         unstable:
           - v2
         order: 48
-    - name: List Agent Observability experiment events (v2)
+    - name: List Agent Observability offline experiment events (v2)
       url: /api/latest/agent-observability/list-agent-observability-experiment-events-v2/
       identifier: agent-observability-list-agent-observability-experiment-events-v2
       parent: agent-observability
@@ -8675,7 +8691,7 @@ menu:
         unstable:
           - v2
         order: 36
-    - name: Push events for an Agent Observability experiment
+    - name: Push events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/push-events-for-an-agent-observability-experiment/
       identifier: agent-observability-push-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -8688,7 +8704,7 @@ menu:
         unstable:
           - v2
         order: 17
-    - name: List Agent Observability experiment spans (v1)
+    - name: List Agent Observability offline experiment spans (v1)
       url: /api/latest/agent-observability/list-agent-observability-experiment-spans-v1/
       identifier: agent-observability-list-agent-observability-experiment-spans-v1
       parent: agent-observability
@@ -8701,7 +8717,7 @@ menu:
         unstable:
           - v2
         order: 49
-    - name: Update an Agent Observability experiment
+    - name: Update an Agent Observability offline experiment
       url: /api/latest/agent-observability/update-an-agent-observability-experiment/
       identifier: agent-observability-update-an-agent-observability-experiment
       parent: agent-observability
@@ -8714,7 +8730,7 @@ menu:
         unstable:
           - v2
         order: 15
-    - name: Delete Agent Observability experiments
+    - name: Delete Agent Observability offline experiments
       url: /api/latest/agent-observability/delete-agent-observability-experiments/
       identifier: agent-observability-delete-agent-observability-experiments
       parent: agent-observability
@@ -8727,7 +8743,7 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Create an Agent Observability experiment
+    - name: Create an Agent Observability offline experiment
       url: /api/latest/agent-observability/create-an-agent-observability-experiment/
       identifier: agent-observability-create-an-agent-observability-experiment
       parent: agent-observability
@@ -8740,7 +8756,7 @@ menu:
         unstable:
           - v2
         order: 14
-    - name: List Agent Observability experiments
+    - name: List Agent Observability offline experiments
       url: /api/latest/agent-observability/list-agent-observability-experiments/
       identifier: agent-observability-list-agent-observability-experiments
       parent: agent-observability
@@ -8753,7 +8769,7 @@ menu:
         unstable:
           - v2
         order: 13
-    - name: Simple search experimentation entities
+    - name: Simple search offline experiment entities
       url: /api/latest/agent-observability/simple-search-experimentation-entities/
       identifier: agent-observability-simple-search-experimentation-entities
       parent: agent-observability
@@ -8766,7 +8782,7 @@ menu:
         unstable:
           - v2
         order: 32
-    - name: Search Agent Observability experimentation
+    - name: Search Agent Observability offline experiments
       url: /api/latest/agent-observability/search-agent-observability-experimentation/
       identifier: agent-observability-search-agent-observability-experimentation
       parent: agent-observability
@@ -8779,7 +8795,7 @@ menu:
         unstable:
           - v2
         order: 31
-    - name: Aggregate Agent Observability experimentation
+    - name: Aggregate Agent Observability offline experiments
       url: /api/latest/agent-observability/aggregate-agent-observability-experimentation/
       identifier: agent-observability-aggregate-agent-observability-experimentation
       parent: agent-observability
@@ -14947,6 +14963,18 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Patch a saved filter
+      url: /api/latest/feature-flags/patch-a-saved-filter/
+      identifier: feature-flags-patch-a-saved-filter
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSavedFilterAttributes
+        unstable: []
+        order: 24
     - name: Get a saved filter
       url: /api/latest/feature-flags/get-a-saved-filter/
       identifier: feature-flags-get-a-saved-filter
@@ -18078,23 +18106,6 @@ menu:
         operationids:
           - ListDevices
         unstable: []
-        order: 1
-    - name: Network Health Insights
-      url: /api/latest/network-health-insights/
-      identifier: network-health-insights
-      generated: true
-    - name: List network health insights
-      url: /api/latest/network-health-insights/list-network-health-insights/
-      identifier: network-health-insights-list-network-health-insights
-      parent: network-health-insights
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListNetworkHealthInsights
-        unstable:
-          - v2
         order: 1
     - name: OAuth2 Client Public
       url: /api/latest/oauth2-client-public/
@@ -23784,9 +23795,9 @@ menu:
         unstable:
           - v2
         order: 27
-    - name: Link Teams with GitHub Teams
-      url: /api/latest/teams/link-teams-with-github-teams/
-      identifier: teams-link-teams-with-github-teams
+    - name: Link teams with external teams
+      url: /api/latest/teams/link-teams-with-external-teams/
+      identifier: teams-link-teams-with-external-teams
       parent: teams
       generated: true
       params:
