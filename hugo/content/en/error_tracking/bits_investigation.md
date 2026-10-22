@@ -1,5 +1,5 @@
 ---
-title: Bits Investigation
+title: Investigate Errors with Bits AI
 description: Investigate Error Tracking issues with Bits Investigation to find the root cause and impact of an error.
 further_reading:
 - link: '/bits_ai/bits_investigation/'
@@ -22,50 +22,53 @@ Bits Investigation in Error Tracking is in Preview.
 
 ## Overview
 
-[Bits Investigation][1] is an autonomous AI agent that investigates production issues. In Error Tracking, you can start a Bits investigation from an issue. Bits analyzes the error, its stack trace, and related telemetry, as well as your source code if [Source Code Integration][3] is set up. It then reports the likely root cause and the impact of the issue.
+[Bits Investigation][1] is an autonomous AI agent that investigates production issues. When you start an investigation from an Error Tracking issue, Bits analyzes the error, including its stack trace and related telemetry. If you set up [Source Code Integration][3], Bits also analyzes your source code. It then reports the likely root cause and the impact of the issue.
 
-{{< img src="error_tracking/bits_investigation/investigation_summary.png" alt="The Review tab of an Error Tracking issue, showing the root cause and impact found by Bits Investigation" style="width:100%;" >}}
+To list all investigations triggered from Error Tracking, open [Investigations][9] and filter on {{< ui >}}Source{{< /ui >}}: {{< ui >}}Error Tracking Issue{{< /ui >}}.
 
 ## Prerequisites
 
 - To view investigations, you need the [{{< ui >}}Bits Investigations Read{{< /ui >}} permission][2]. To start investigations, you need the [{{< ui >}}Bits Investigations Write{{< /ui >}} permission][2].
 - To let Bits read the code that was running when the error occurred, set up [Source Code Integration][3]. Bits can investigate without source code access, but the root cause analysis is less precise.
-- To generate code fixes, set up [Bits Code][8] with a supported source code provider.
+- To generate code fixes, set up [Bits Code][8], which needs write access to your repository and the [{{< ui >}}Bits Code Write{{< /ui >}} permission][2].
 
-## Start an investigation
+## Investigate an Error Tracking issue
+
+To investigate an Error Tracking issue with Bits Investigation:
 
 1. In the [Error Tracking Explorer][4], click an issue to open the issue panel.
 1. On the {{< ui >}}Review{{< /ui >}} tab, click {{< ui >}}Investigate this issue{{< /ui >}} in the {{< ui >}}Bits Investigation{{< /ui >}} banner.
 
-{{< img src="error_tracking/bits_investigation/start_investigation.png" alt="The Bits Investigation banner on the Review tab of an Error Tracking issue, with the Investigate this issue button" style="width:100%;" >}}
+   {{< img src="error_tracking/bits_investigation/start_investigation.png" alt="The Bits Investigation banner on the Review tab of an Error Tracking issue, with the Investigate this issue button." style="width:100%;" >}}
 
-The banner shows the progress of the investigation and who started it. An investigation usually takes a few minutes.
+   While the investigation runs, the banner shows its progress and who triggered it. An investigation usually takes a few minutes.
+1. When the investigation completes, review the findings in the banner:
 
-## Review the results
+   - **Root cause**: The most likely cause of the error, based on the evidence Bits gathered.
+   - **Impact**: How the error affects your users and services.
 
-When the investigation completes, the banner on the {{< ui >}}Review{{< /ui >}} tab summarizes the findings:
+   For a completed investigation, the banner displays the root cause and impact side by side:
 
-- **Root cause**: The most likely cause of the error, based on the evidence Bits gathered.
-- **Impact**: How the error affects your users and services.
+   {{< img src="error_tracking/bits_investigation/investigation_summary.png" alt="The Review tab of an Error Tracking issue, showing the root cause and impact found by Bits Investigation." style="width:100%;" >}}
 
-If the available data is insufficient to support a conclusion, Bits marks the investigation as inconclusive.
+   If the available data is insufficient to support a conclusion, Bits marks the investigation as inconclusive.
+1. (Optional) To see the full investigation, click {{< ui >}}View Investigation{{< /ui >}} in the banner.
 
-To see the full investigation, click {{< ui >}}View Investigation{{< /ui >}}. The investigation page shows the conclusion, suggested next steps, a timeline of the evidence, and every step Bits took to reach its conclusion. For details on investigation display modes, see [How Bits investigates][5].
+   The investigation page shows the conclusion, suggested next steps, and a timeline of the evidence:
 
-{{< img src="error_tracking/bits_investigation/investigation_report.png" alt="The Bits Investigation page for an Error Tracking issue, showing the conclusion, root cause, impact, a suggested next step, and the timeline" style="width:100%;" >}}
+   {{< img src="error_tracking/bits_investigation/investigation_report.png" alt="The Bits Investigation page for an Error Tracking issue, showing the conclusion, root cause, impact, a suggested next step, and the timeline." style="width:100%;" >}}
 
-From the investigation page, you can:
+To ask follow-up questions about the investigation, use Bits Chat. For more information, see [Chat with Bits Investigation][6].
 
-- Ask follow-up questions about the investigation in Bits Chat. For details, see [Chat with Bits Investigation][6].
-- Review the suggested next steps, including code fixes.
-
-To list all investigations started from Error Tracking, open [Investigations][9] and filter on {{< ui >}}Source{{< /ui >}}: {{< ui >}}Error Tracking Issue{{< /ui >}}.
+For more information about how Bits reaches its conclusion and how to explore the investigation steps, see [How Bits investigates][5] in Investigate Issues.
 
 ## Fix the issue in code
 
-When the root cause is in your code, Bits Investigation uses [Bits Code][7] to generate a fix and suggests it as a next step. The next step shows a summary of the change and its diff.
+When the root cause is in your code, Bits Investigation uses [Bits Code][7] to generate a fix. The fix appears as a suggested next step on the investigation page, with a summary of the change and its diff.
 
-{{< img src="error_tracking/bits_investigation/code_fix_next_step.png" alt="A suggested next step with a code fix generated by Bits Code, showing a summary, a diff, and the Create PR and View in Bits Code buttons" style="width:100%;" >}}
+A code fix next step includes actions to open a pull request or keep working on the fix:
+
+{{< img src="error_tracking/bits_investigation/code_fix_next_step.png" alt="A suggested next step with a code fix generated by Bits Code, showing a summary, a diff, and the Create PR and View in Bits Code buttons." style="width:100%;" >}}
 
 From the next step, you can:
 

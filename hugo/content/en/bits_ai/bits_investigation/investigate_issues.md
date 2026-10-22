@@ -72,7 +72,7 @@ You can launch a Bits investigation from several places in Real User Monitoring 
 Bits Investigation in Error Tracking is in Preview.
 {{< /callout >}}
 
-From an Error Tracking issue, click {{< ui >}}Investigate this issue{{< /ui >}} on the {{< ui >}}Review{{< /ui >}} tab of the issue panel. Bits analyzes the error, its stack trace, and related telemetry, as well as your source code if [Source Code Integration][17] is set up. It then summarizes the root cause and impact in the issue panel. For details, see [Bits Investigation in Error Tracking][21].
+You can launch a Bits investigation from an Error Tracking issue. To start an investigation, click {{< ui >}}Investigate this issue{{< /ui >}} on the {{< ui >}}Review{{< /ui >}} tab of the issue panel. Bits analyzes the error, its stack trace, and related telemetry. If you set up [Source Code Integration][17], Bits also analyzes your source code. It then summarizes the root cause and impact in the issue panel. For details, see [Investigate Errors with Bits AI][21].
 
 ### General prompt
 
