@@ -27,7 +27,7 @@ Install a missing binary with the instructions in [Install security binaries][1]
 
 ## Scanner upgrade required
 
-Ephemeral SAST scans require `datadog-static-analyzer` version 0.9.10 or later. With an earlier version, the scan returns a `Scanner Upgrade` error. Upgrade the binary and retry:
+Ephemeral SAST scans and custom rule saves require `datadog-static-analyzer` version 0.9.10 or later. With an earlier version, they return a `Scanner Upgrade` error. Upgrade the binary and retry:
 
 ```shell
 brew upgrade datadog-static-analyzer
@@ -45,6 +45,8 @@ If the values are set but scans still fail, verify your keys have the correct pe
 ## Custom SAST rule not saved
 
 Ephemeral scans work without Datadog keys, but saving a rule requires `DD_API_KEY` and `DD_APP_KEY`. See [Authentication errors](#authentication-errors).
+
+If the rule does not report the expected number of findings on its two examples, nothing is saved. A rule with a syntax error, or one that times out, reports 0 findings on both. Fix the rule or the examples and retry.
 
 If a rule with the same name already exists, nothing is saved. Choose another rule name, or retry with `overwrite: true` (`--overwrite` in the CLI) to replace the existing rule.
 

@@ -190,7 +190,7 @@ The scan runs only the supplied rule, but still follows the repository's [Static
 
 ### Output
 
-Violations reported by the rule, grouped by file.
+Violations reported by the rule, grouped by file. If the rule throws an error, the tool returns that error instead.
 
 ### Required binary
 
@@ -198,7 +198,7 @@ Violations reported by the rule, grouped by file.
 
 ## `datadog_promote_sast_rule`
 
-Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
+Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. Before saving, the tool runs the rule on the two `tests` examples and saves nothing if a finding count differs or the rule throws an error. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
 
 Scans use the saved rule only after the repository configuration lists its ruleset. Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. A new `code-security.datadog.yaml` hides that legacy file. See [Static Code Analysis configuration][4].
 
@@ -217,7 +217,7 @@ Requires `DD_API_KEY` and `DD_APP_KEY`.
 | `ruleset_name`      | `string`        |    No    | Lowercase ruleset name, 5 to 32 characters. Default: `security-variants`.                                     |
 | `short_description` | `string`        |    No    | One-line summary, at most 60 characters                                                                       |
 | `description`       | `string`        |    No    | Description stored on the rule                                                                                |
-| `tests`             | `array[object]` |    No    | Up to two examples saved as rule tests. Each object uses the fields in the table below.                       |
+| `tests`             | `array[object]` |   Yes    | Exactly two examples: the fixed code and the code before the fix. Each object uses the fields in the table below. |
 
 Rule and ruleset names can contain lowercase letters, digits, and single hyphens. They cannot start or end with a hyphen.
 
@@ -227,11 +227,15 @@ Each entry in `tests`:
 | ------------------ | --------- | :------: | -------------------------------------------------------------------------------- |
 | `filename`         | `string`  |   Yes    | Example filename, a single path segment                                          |
 | `code`             | `string`  |   Yes    | Example source, not base64-encoded                                               |
-| `annotation_count` | `integer` |   Yes    | Number of findings the rule reports on this example: `0` for the fixed code, `1` for the code before the fix |
+| `annotation_count` | `integer` |   Yes    | Number of findings the rule must report on this example: `0` for the fixed code, and a positive number (usually `1`) for the code before the fix |
 
 ### Output
 
 The ruleset name, rule name, and revision ID of the saved rule.
+
+### Required binary
+
+`datadog-static-analyzer` version 0.9.10 or later, to run the rule on the examples before saving.
 
 ## Further reading
 
