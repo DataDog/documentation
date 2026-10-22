@@ -149762,7 +149762,7 @@ paths:
           - audit_logs_read
   /api/v2/authn_mappings:
     get:
-      description: List all AuthN Mappings in the org.
+      description: List all AuthN Mappings in the organization.
       operationId: ListAuthNMappings
       parameters:
         - $ref: "#/components/parameters/PageSize"
