@@ -169,4 +169,4 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
 [39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops
 [40]: /bits_ai/bits_code/slack_code_channels/
-[41]: https://bitbucket.org/
+[41]: https://bitbucket.org/product/premium
