@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Centro de aprendizaje
   text: Introducción a Product Analytics
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: Centro de aprendizaje
+  text: Defina el comportamiento del usuario con acciones etiquetadas en Product Analytics
 title: Embudo
 ---
 El análisis de embudo le ayuda a realizar un seguimiento de las tasas de conversión en flujos de trabajo clave para identificar y abordar cualquier cuello de botella en las rutas de recorrido de extremo a extremo. Específicamente, usted puede:
