@@ -57353,13 +57353,14 @@ components:
         - attributes
       type: object
     GovernanceControlDetectionAssignmentSource:
-      description: How the detection's current assignment was determined. Possible values are `auto_resolved`, `manual`, `reassigned`, and `cleared`.
+      description: How the detection's current assignment was determined. Possible values are `auto_resolved`, `manual`, `reassigned`, and `cleared`. `null` when not set.
       enum:
         - auto_resolved
         - manual
         - reassigned
         - cleared
       example: "manual"
+      nullable: true
       type: string
       x-enum-varnames:
         - AUTO_RESOLVED
@@ -57372,10 +57373,12 @@ components:
         assigned_team:
           description: The identifier of the team the detection is assigned to, if any.
           example: "platform-security"
+          nullable: true
           type: string
         assigned_to:
           description: The identifier of the user the detection is assigned to, if any.
           example: "11111111-2222-3333-4444-555555555555"
+          nullable: true
           type: string
         assignment_source:
           $ref: "#/components/schemas/GovernanceControlDetectionAssignmentSource"
@@ -57398,15 +57401,18 @@ components:
         display_name:
           description: The human-readable name of the detected resource.
           example: "CI Deploy Key"
+          nullable: true
           type: string
         exception_at:
           description: The date and time when the detection was marked as an exception, if applicable.
           example: "2024-03-05T09:00:00Z"
           format: date-time
+          nullable: true
           type: string
         exception_by:
           description: The identifier of the user who marked the detection as an exception, if applicable.
           example: "11111111-2222-3333-4444-555555555555"
+          nullable: true
           type: string
         metadata:
           description: Free-form metadata associated with the detection.
@@ -57416,16 +57422,19 @@ components:
           description: The date and time after which the detection is scheduled to be mitigated, if applicable.
           example: "2024-03-15T00:00:00Z"
           format: date-time
+          nullable: true
           type: string
         mitigated_at:
           description: The date and time when the detection was mitigated, if applicable.
           example: "2024-03-10T15:30:00Z"
           format: date-time
+          nullable: true
           type: string
         priority:
           description: The priority of the detection, if set.
           example: 1
           format: int64
+          nullable: true
           type: integer
         resource_id:
           description: The identifier of the resource the detection applies to.
@@ -57434,6 +57443,7 @@ components:
         resource_type:
           description: The type of resource the detection applies to, for example `api_key` or `dashboard`.
           example: "api_key"
+          nullable: true
           type: string
         state:
           $ref: "#/components/schemas/GovernanceControlDetectionState"
@@ -149762,7 +149772,7 @@ paths:
           - audit_logs_read
   /api/v2/authn_mappings:
     get:
-      description: List all AuthN Mappings in the org.
+      description: List all AuthN Mappings in the organization.
       operationId: ListAuthNMappings
       parameters:
         - $ref: "#/components/parameters/PageSize"
