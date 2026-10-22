@@ -81,7 +81,7 @@ You can read any available field. You can only modify the following fields:
 | `status` | Alert | Write | `ok`, `warn`, or `error` |
 | `priority` | Alert | Write | `"1"`, `"2"`, `"3"`, `"4"`, or `"5"` (as a string) |
 | `links` | Alert | Write | Array of objects. Each `category` must be `runbook`, `documentation`, `dashboard`, or `resource`. |
-| `change_metadata` | Change | Write, delete | Object containing your custom attributes |
+| `change_metadata` | Change | Write, Delete | Object containing your custom attributes |
 | `author` | Change | Write | Object. `type` must be `system`, `user`, `api`, or `automation`. |
 | `changed_resource` | Change | Write | Object. `type` must be a [supported changed resource type][4]. |
 | `impacted_resources` | Change | Write | Array of objects. Each `type` must be a [supported impacted resource type][4]. |
