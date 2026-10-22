@@ -63,16 +63,22 @@ Grant the required permissions on system tables:
 GRANT SELECT ON system.metrics TO datadog;
 GRANT SELECT ON system.events TO datadog;
 GRANT SELECT ON system.asynchronous_metrics TO datadog;
+GRANT SELECT ON system.errors TO datadog;
 GRANT SELECT ON system.parts TO datadog;
+GRANT SELECT ON system.replicas TO datadog;
+GRANT SELECT ON system.dictionaries TO datadog;
+GRANT SELECT ON system.macros TO datadog;
+GRANT SELECT ON system.clusters TO datadog;
+GRANT SELECT ON system.settings TO datadog;
+GRANT SELECT ON system.table_engines TO datadog;
+GRANT SELECT ON system.one TO datadog;
+GRANT SELECT ON system.query_log TO datadog;
+GRANT SELECT ON system.processes TO datadog;
 GRANT SELECT ON system.detached_parts TO datadog;
 GRANT SELECT ON system.merges TO datadog;
 GRANT SELECT ON system.mutations TO datadog;
 GRANT SELECT ON system.replication_queue TO datadog;
 GRANT SELECT ON system.merge_tree_settings TO datadog;
-GRANT SELECT ON system.replicas TO datadog;
-GRANT SELECT ON system.dictionaries TO datadog;
-GRANT SELECT ON system.processes TO datadog;
-GRANT SELECT ON system.query_log TO datadog;
 GRANT SHOW ON *.* TO datadog;
 ```
 

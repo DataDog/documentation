@@ -14,6 +14,9 @@ further_reading:
 - link: "/database_monitoring/guide/database_identifier/"
   tag: "Documentation"
   text: "Specifying a Database Identifier"
+- link: "/database_monitoring/guide/clickhouse_agent_upgrade"
+  tag: "Documentation"
+  text: "Upgrading your agent to 7.84+"
 ---
 
 <div class="alert alert-info">
@@ -68,16 +71,22 @@ Grant the required permissions on system tables:
 GRANT SELECT ON system.metrics TO datadog;
 GRANT SELECT ON system.events TO datadog;
 GRANT SELECT ON system.asynchronous_metrics TO datadog;
+GRANT SELECT ON system.errors TO datadog;
 GRANT SELECT ON system.parts TO datadog;
+GRANT SELECT ON system.replicas TO datadog;
+GRANT SELECT ON system.dictionaries TO datadog;
+GRANT SELECT ON system.macros TO datadog;
+GRANT SELECT ON system.clusters TO datadog;
+GRANT SELECT ON system.settings TO datadog;
+GRANT SELECT ON system.table_engines TO datadog;
+GRANT SELECT ON system.one TO datadog;
+GRANT SELECT ON system.query_log TO datadog;
+GRANT SELECT ON system.processes TO datadog;
 GRANT SELECT ON system.detached_parts TO datadog;
 GRANT SELECT ON system.merges TO datadog;
 GRANT SELECT ON system.mutations TO datadog;
 GRANT SELECT ON system.replication_queue TO datadog;
 GRANT SELECT ON system.merge_tree_settings TO datadog;
-GRANT SELECT ON system.replicas TO datadog;
-GRANT SELECT ON system.dictionaries TO datadog;
-GRANT SELECT ON system.processes TO datadog;
-GRANT SELECT ON system.query_log TO datadog;
 ```
 
 The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
