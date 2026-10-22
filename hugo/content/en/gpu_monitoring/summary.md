@@ -5,9 +5,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
       tag: "Blog"
       text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
-    - link: "/gpu_monitoring/fleet"
+    - link: "/gpu_monitoring/explorer"
       tag: "Documentation"
-      text: "GPU Monitoring Fleet Page"
+      text: "GPU Monitoring Explorer"
 ---
 
 ## Overview
@@ -36,7 +36,7 @@ This visualization provides a breakdown of your entire GPU fleet across any majo
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
-{{< img src="gpu_monitoring/funnel-4.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-5.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices, Kubernetes allocation, and device allocation over time with a one-week forecast." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
 - {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
@@ -45,27 +45,25 @@ The steps of the funnel are defined as follows:
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
-## Cost & Utilization
-
-{{< img src="gpu_monitoring/cost-and-utilization.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
-
-Use this section to track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
-
-**Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
-
-Click on either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can also break these down by key tags like service or cluster over 1-week, 1-month, or 3-month time frames. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click on any entity to open it in the [Fleet Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Fleet Explorer][1] page to shut down pods or resize your cluster.
-
-## Allocation and Provisioning
-
-Use this section to gain insights into GPU allocation and capacity. This helps you to troubleshoot failed workloads due to GPU constraints, and improve the operational efficiency of your fleet.
-
 ### Device allocation over time
 
 AI workloads can experience unpredictable spikes in resource usage. As a result, it's important to align available GPUs with incoming workloads. This section helps you to identify if you're overallocating GPUs that end up sitting idle, or underprovisioning resources that stall critical jobs.
 
 For example, if you see a spike in the forecasted values for the number of allocated devices, your future workloads may require additional GPU devices.
 
-{{< img src="gpu_monitoring/allocation.png" alt="Total, Allocated and Active device counts over time" style="width:90%;" >}}
+## Cost & Utilization
+
+{{< img src="gpu_monitoring/cost-and-utilization2.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
+
+Use this section to track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
+
+**Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
+
+Click either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can also break these down by key tags such as service or cluster over 1-week, 1-month, or 3-month time frames. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click any entity to open it in the [Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Explorer][1] page to shut down pods or resize your cluster.
+
+## Allocation and Provisioning
+
+Use this section to gain insights into GPU allocation and capacity. This helps you to troubleshoot failed workloads due to GPU constraints, and improve the operational efficiency of your fleet.
 
 ### Cloud provider instance breakdown
 

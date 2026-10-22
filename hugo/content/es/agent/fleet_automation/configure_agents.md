@@ -11,7 +11,7 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 title: Configurar Agents
 ---
-Utilice [Fleet Automation][3] para implementar y gestionar la configuración del Datadog Agent a escala. Aplique cambios de configuración a través de flujos de trabajo guiados en la interfaz de usuario o con archivos YAML personalizados.
+Utilice [Fleet Automation][3] para implementar y gestionar la configuración del Datadog Agent a escala. Aplique cambios de configuración a través de flujos de trabajo guiados en la interfaz de usuario o con archivos YAML personalizados. Para gestionar los ajustes del Agent con Fleet Automation, consulte [Campos de configuración de datadog.yaml admitidos][11].
 
 ## Requisitos previos {#prerequisites}
 
@@ -63,7 +63,7 @@ El ejemplo a continuación muestra el campo `logs_enabled` cambiado de `false` a
 
 Fleet Automation proporciona una API para aplicar actualizaciones de configuración mediante programación. Implemente cambios en cualquier grupo de servidores con consultas de filtro, proporcionando archivos de configuración completos o parches específicos. Envíe la configuración bajo demanda o intégrela en sus flujos de trabajo de automatización existentes. Para obtener todos los detalles, consulte la [Fleet Automation API][4].
 
-**Nota**: La API no admite todos los campos de configuración del Agent. La configuración relacionada con la conexión del Agent o los secretos (`site`, `api_key` y otros parámetros de autenticación) no se puede administrar a través de la API.
+**Nota**: La API no admite todos los campos de configuración del Agent. La configuración relacionada con la conexión del Agent o los secretos (`site`, `api_key` y otros parámetros de autenticación) no se puede administrar a través de la API. Para gestionar los campos, consulte [Campos de configuración de datadog.yaml admitidos][11].
 
 ## Precedencia de configuración {#configuration-precedence}
 
@@ -102,3 +102,4 @@ Para obtener instrucciones sobre el uso de repositorios reflejados o aislados (a
 [8]: /es/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: /es/agent/guide/setup_remote_config
 [10]: /es/agent/fleet_automation/upgrade_agents/
+[11]: /es/agent/fleet_automation/supported_datadog_yaml_fields/

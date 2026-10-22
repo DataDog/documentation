@@ -21,6 +21,10 @@ further_reading:
   tag: Blog
   text: 'Presentamos Bits Agent Builder: cree flujos de trabajo agénticos para la
     respuesta y remediación de alertas'
+- link: https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/
+  tag: Blog
+  text: Construya y ejecute flujos de trabajo de Datadog desde Bits Chat o agentes
+    de IA
 title: Bits Agent Builder
 ---
 ## Descripción general {#overview}

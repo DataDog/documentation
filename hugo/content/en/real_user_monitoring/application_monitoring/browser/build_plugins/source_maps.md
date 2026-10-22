@@ -38,8 +38,7 @@ The following environment variables override configuration values:
 
 Choose one source map upload matching method: debug ID or service and version. These upload methods are mutually exclusive.
 
-{{< tabs >}}
-{{% tab "Debug ID (Recommended)" %}}
+### Debug ID (recommended)
 
 Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
 
@@ -57,7 +56,11 @@ Configure the following options in `sourcemaps`:
 
 Set `debugId` and `upload` to `true` to inject debug IDs and upload source maps during the build:
 
+{{< tabs >}}
+{{% tab "Webpack" %}}
+
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -77,7 +80,102 @@ module.exports = {
 ```
 
 {{% /tab %}}
-{{% tab "Service and version" %}}
+{{% tab "Vite" %}}
+
+```javascript
+// vite.config.js
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    datadogVitePlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "esbuild" %}}
+
+```javascript
+// esbuild.config.js
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+  plugins: [
+    datadogEsbuildPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "Rollup" %}}
+
+```javascript
+// rollup.config.js
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+  plugins: [
+    datadogRollupPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{% tab "Rspack" %}}
+
+```javascript
+// rspack.config.js
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogRspackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Service and version
 
 Configure the `errorTracking.sourcemaps` object to upload source maps using service and version matching:
 
@@ -91,6 +189,7 @@ Configure the `errorTracking.sourcemaps` object to upload source maps using serv
 | `maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
 
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -112,12 +211,9 @@ module.exports = {
 };
 ```
 
+<div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers, only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
+
 To also display inline source code in Error Tracking stack traces, pair service and version source map uploads with the [Source Code Context][5] plugin.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-<div class="alert alert-info">These examples use webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
 ## Further reading
 

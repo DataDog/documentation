@@ -1,70 +1,71 @@
 ---
-description: Aprende a crear un test HTTP con HMAC.
+description: Aprenda cómo crear una prueba HTTP con HMAC.
 further_reading:
 - link: /synthetics/api_tests/http_tests
   tag: Documentación
-  text: Más información sobre los tests HTTP
+  text: Obtenga información sobre las pruebas HTTP
 - link: /synthetics/api_tests/http_tests#variables
   tag: Documentación
-  text: Más información sobre las variables de test Synthetic
-title: Creación de tests HTTP con autenticación HMAC
+  text: Obtenga información sobre las variables de prueba Synthetic
+title: Creación de pruebas HTTP con autenticación HMAC
 ---
+## Descripción general {#overview}
 
-## Información general
+Synthetic Monitoring le permite generar variables a partir de scripts de JavaScript para que pueda definir autenticaciones personalizadas o codificar parámetros.
 
-La monitorización Synthetic te permite generar variables a partir de scripts de JavaScript para que puedas definir autenticaciones personalizadas o codificar parámetros.
+{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="Prueba HTTP con autenticación HMAC" style="width:100%;" >}}
 
-{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="Test HTTP test con autenticación HMAC" style="width:100%;" >}}
+Esta guía le muestra cómo crear una prueba HTTP con una firma HMAC, utilizando variables de script.
 
-Esta guía te muestra cómo crear un test HTTP con una firma HMAC, utilizando las variables de un script.
+**Nota**: No existe una autenticación HMAC estándar, su propia autenticación HMAC puede ser ligeramente diferente. Por ejemplo, puede usar un nombre de encabezado diferente.
 
-**Nota**: No existe una autenticación HMAC estándar, por lo que tu propia autenticación HMAC puede ser ligeramente diferente. Por ejemplo, puedes utilizar un nombre de cabecera diferente.
+## Configuración {#setup}
 
-## Configuración
+### Cree los componentes básicos de la autenticación HMAC usando variables locales {#create-the-building-blocks-of-hmac-authentication-using-local-variables}
 
-### Crear los componentes básicos de la autenticación HMAC utilizando variables locales
-
-Crea un [test HTTP Synthetic][3] y haz clic en **Create a Local Variable** (Crear una variable local) para añadir las siguientes variables:
+Cree una [prueba Synthetic HTTP][3] y haga clic en {{< ui >}}Create a Local Variable{{< /ui >}} para agregar las siguientes variables:
 
 `MY_SECRET_KEY`
-: La clave codificada en UTF-8 que se utiliza para firmar el mensaje (que también puede importarse desde una [variable global][4]).
+: La clave codificada en UTF-8 que se utiliza para firmar el mensaje (que también se puede importar desde una [variable global][4]).
 
 `BODY`
-: El cuerpo de la solicitud (que se define en el **Cuerpo de la solicitud**) y se utiliza para calcular la autenticación HMAC.
+: El cuerpo de la solicitud (que se establece en {{< ui >}}Request Body{{< /ui >}}) y se utiliza para calcular la autenticación HMAC.
 
 `DATETIME`
-: Un parámetro para calcular la firma HMAC. Puedes crearlo como una [variable local][1] o crearlo y exportarlo dentro de la [variable de script](#compute-the-hmac-signature-with-javascript) con `dd.variable.set('DATETIME', new Date().toISOString())`.
+: Un parámetro para calcular la firma HMAC. Cree esto como una [variable local][1] o créelo y expórtelo dentro de la [variable de script](#compute-the-hmac-signature-with-javascript) con `dd.variable.set('DATETIME', new Date().toISOString())`.
 
-### Definir un cuerpo de solicitud y una URL de test
+### Defina una URL de prueba y el cuerpo de la solicitud {#define-a-test-url-and-request-body}
 
-Define la URL y el tipo de solicitud para el test HTTP. A continuación, haz clic en **Advanced Options** > **Request Body** (Opciones avanzadas > Cuerpo de la solicitud) para añadir la variable `{{ BODY }}` como cuerpo de la solicitud.
+Defina la URL y el tipo de solicitud para la prueba HTTP. Luego, haga clic en {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Request Body{{< /ui >}} para agregar la variable `{{ BODY }}` como el cuerpo de la solicitud.
 
-{{< img src="synthetics/guide/http-tests-with-hmac/request_body.png" alt="Variable local definida como cuerpo de la solicitud de un test HTTP" style="width:80%;" >}}
+{{< img src="synthetics/guide/http-tests-with-hmac/request_body.png" alt="Una variable local establecida como el cuerpo de la solicitud para una prueba HTTP" style="width:80%;" >}}
 
-### Calcular la firma HMAC con JavaScript
+### Calcule la firma HMAC con JavaScript {#compute-the-hmac-signature-with-javascript}
 
-Haz clic en **Variable From Script** (Variable del script) para generar la firma HMAC para tu solicitud HTTP.
+Haga clic en {{< ui >}}Variable From Script{{< /ui >}} para generar la firma HMAC para su solicitud HTTP.
 
-{{< img src="synthetics/guide/http-tests-with-hmac/variables_from_script.png" alt="Variable local generada con JavaScript" style="width:80%;" >}}
+{{< img src="synthetics/guide/http-tests-with-hmac/variables_from_script.png" alt="Una variable local generada con JavaScript" style="width:80%;" >}}
 
-* Para importar variables a tu script, utiliza `dd.variable.get("<variable_name>")`.
-* Para definir una variable, utiliza `dd.variable.set("<variable_name>", <value>)` o `dd.variable.setObfuscated("<variable_name>", <value>)`.
+Este script se ejecuta antes de que Datadog envíe la solicitud HTTP. Para validar los datos de respuesta JSON después de que se complete la solicitud, use [aserciones de JavaScript][7] y `dd.response.body`.
 
-También tienes acceso a funciones de ayuda, como:
-* La mayoría de las [bibliotecas `std`][5], accesibles con `std.*`. Por ejemplo, para llamar a la función `encodeHex` definida en `<std>/encoding/hex.ts`, utiliza `std.encoding.hex.encodeHex`.
-* API estándar JavaScript, como la [API Web Crypto][6].
+* Para importar variables a su script, use `dd.variable.get("<variable_name>")`.
+* Para definir una variable, use `dd.variable.set("<variable_name>", <value>)` o `dd.variable.setObfuscated("<variable_name>", <value>)`.
 
-**Nota**: Algunas de estas API están deshabilitadas por motivos de seguridad.
+También tiene acceso a funciones auxiliares, tales como:
+* La mayor parte de la [biblioteca `std`][5], accesible con `std.*`. Por ejemplo, para llamar a la función `encodeHex` definida en `@std/encoding/hex.ts`, use `std.encoding.hex.encodeHex`.
+* APIs estándar de JavaScript, tales como la [Web Crypto API][6].
+
+**Nota**: Algunas de estas APIs están deshabilitadas por razones de seguridad.
 
 Por ejemplo:
 
 {{< code-block lang="JavaScript" filename="Variable from Script" collapsible="true" >}}
 const datetime = new Date().toISOString();
-// Definir una cabecera HTTP de "fecha" utilizando DATETIME como su valor en la interfaz de usuario
+// Set a "date" HTTP header using DATETIME as its value in the UI
 dd.variable.set("DATETIME", datetime);
 
-const message = "¡Hola, mundo!";
-// Utilizar BODY como el cuerpo de la solicitud en la interfaz de usuario
+const message = "Hello, World!";
+// Use BODY as the request body in the UI
 dd.variable.set("BODY", message);
 
 const secretKeyUtf8 = dd.variable.get("MY_SECRET_KEY");
@@ -82,22 +83,22 @@ const rawSignature = await crypto.subtle.sign(
   new TextEncoder().encode(datetime + "." + message)
 );
 
-// Definir una cabecera HTTP de "autenticación" utilizando SIGNATURE como su valor en la interfaz de usuario
+// Set an "authentication" HTTP header using SIGNATURE as its value in the UI
 dd.variable.set("SIGNATURE", std.encoding.hex.encodeHex(rawSignature));
 
-// Alternativa:
+// Alternative:
 dd.variable.set("SIGNATURE_BASE64", std.encoding.base64.encode(rawSignature));
 {{< /code-block >}}
 
-### Añadir la firma HMAC a la cabecera de la solicitud
+### Agregue la firma HMAC al encabezado de la solicitud {#add-the-hmac-signature-to-the-request-header}
 
-Utiliza la variable exportada `SIGNATURE` para crear la cabecera de la solicitud HTTP.
+Utilice la variable exportada `SIGNATURE` para construir el encabezado de la solicitud HTTP.
 
-En la pestaña **Opciones de solicitud**, añade una cabecera con `Name` definido en `Authentication` y `Value` definido en  `{{ SIGNATURE }}`, y otra, con `Name` definido en  `Date` y `Value` definido en  `{{ DATETIME }}`. Puedes definir una cabecera diferente como `Authorization`.
+En la pestaña {{< ui >}}Request Options{{< /ui >}}, agregue un encabezado con {{< ui >}}Name{{< /ui >}} establecido en `Authentication` y {{< ui >}}Value{{< /ui >}} establecido en `{{ SIGNATURE }}`, and another one with {{< ui >}}Name{{< /ui >}} establecido en `Date` and {{< ui >}}Value{{< /ui >}} establecido en `{{ DATETIME }}`. You can define a different header such as `Authorization`.
 
-Configura el resto de tu test HTTP y haz clic en **Create** (Crear) para guardarlo.
+Configure el resto de su prueba HTTP y haga clic en {{< ui >}}Create{{< /ui >}} para guardar.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -105,5 +106,6 @@ Configura el resto de tu test HTTP y haz clic en **Create** (Crear) para guardar
 [2]: /es/synthetics/api_tests/http_tests/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /es/synthetics/settings/?tab=specifyvalue#global-variables
-[5]: https://deno.land/std@0.206.0?doc
+[5]: https://jsr.io/@std
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Crypto
+[7]: /es/synthetics/api_tests/http_tests/#define-assertions
