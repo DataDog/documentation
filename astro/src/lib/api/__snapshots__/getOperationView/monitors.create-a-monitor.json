@@ -5302,6 +5302,16 @@
               "description": "Create a monitor returns \"OK\" response",
               "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
+            },
+            {
+              "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create a monitor with aggregate augmented query variables returns \"OK\" response\n\npackage main\n\nfunc main() {}\n",
+              "syntax": "go"
+            },
+            {
+              "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create a monitor with aggregate filtered query variables returns \"OK\" response\n\npackage main\n\nfunc main() {}\n",
+              "syntax": "go"
             }
           ],
           "instructions": {

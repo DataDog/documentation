@@ -1127,6 +1127,24 @@ func main() {
 }
 ```
 
+```go
+// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.
+// Create a monitor with aggregate augmented query variables returns "OK" response
+
+package main
+
+func main() {}
+```
+
+```go
+// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.
+// Create a monitor with aggregate filtered query variables returns "OK" response
+
+package main
+
+func main() {}
+```
+
 #### Instructions
 
 First [install the library and its dependencies](https://docs.datadoghq.com/api/latest.md?code-lang=go) and then save the example to `main.go` and run following commands:
