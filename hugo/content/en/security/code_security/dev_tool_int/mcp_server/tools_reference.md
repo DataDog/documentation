@@ -175,7 +175,7 @@ Vulnerabilities with CVE ID, GHSA ID, severity, CVSS score, affected library, re
 
 Run one local, unpublished SAST rule against a repository. The caller supplies the rule JavaScript and the tree-sitter query. The tool does not require `DD_API_KEY` or `DD_APP_KEY`.
 
-The scan runs only the supplied rule, but still follows the repository's Static Analysis configuration for ignored paths, `only` paths, file size, and gitignore.
+The scan runs only the supplied rule, but still follows the repository's [Static Code Analysis configuration][4]: `ignore-paths`, `only-paths`, `max-file-size-kb`, and `use-gitignore`.
 
 ### Parameters
 
@@ -200,6 +200,8 @@ Violations reported by the rule, grouped by file.
 
 Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
 
+Scans use the saved rule only after the repository configuration lists its ruleset under `sast.use-rulesets`. See [Static Code Analysis configuration][4].
+
 Requires `DD_API_KEY` and `DD_APP_KEY`.
 
 ### Parameters
@@ -216,6 +218,8 @@ Requires `DD_API_KEY` and `DD_APP_KEY`.
 | `short_description` | `string`        |    No    | One-line summary, at most 60 characters                                                                       |
 | `description`       | `string`        |    No    | Description stored on the rule                                                                                |
 | `tests`             | `array[object]` |    No    | Up to two examples saved as rule tests. Each object uses the fields in the table below.                       |
+
+Rule and ruleset names can contain lowercase letters, digits, and single hyphens. They cannot start or end with a hyphen.
 
 Each entry in `tests`:
 
@@ -236,3 +240,4 @@ The ruleset name, rule name, and revision ID of the saved rule.
 [1]: /security/code_security/dev_tool_int/mcp_server/
 [2]: /security/code_security/dev_tool_int/mcp_server/troubleshooting/#scanner-upgrade-required
 [3]: /security/code_security/static_analysis/custom_rules/
+[4]: /security/code_security/static_analysis/configuration/
