@@ -105,19 +105,28 @@ The evaluation metric tags have the following values:
 | `assessment` | `pass` or `fail` when the evaluation has pass/fail criteria, otherwise `none` |
 | `eval_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations; `external` for evaluations you submit through the SDK or API |
 | `eval_version` | The version of a managed evaluation. Not set for evaluations you submit through the SDK or API. |
-| `value` | On `ml_obs.eval.count` only, for boolean (`true` or `false`) and categorical evaluations, and for JSON evaluations whose post-processing returns a boolean or string `value`. String values are lowercased and limited to 20 distinct values per evaluation; additional values are reported as `other`. |
+| `value` | The evaluation result, on `ml_obs.eval.count` only. See [the `value` tag](#the-value-tag). |
 | `env`, `service`, `version` | Taken from the evaluated span |
+
+#### The value tag
+
+How each type of evaluation reports its result:
+- **Boolean**: `value` is `true` or `false`.
+- **Categorical**: `value` is the category.
+- **Score**: no `value` tag. The score is reported in `ml_obs.eval.score`.
+- **JSON**: no `value` tag, unless post-processing returns a `value`. A boolean or string becomes the `value` tag, and a number is reported in `ml_obs.eval.score`.
+
+String values are lowercased and limited to 20 distinct values per evaluation. Additional values are reported as `other`.
 
 Evaluation metrics include production evaluation results that completed successfully. They do not include:
 - Evaluation results from [experiments][2]
 - Evaluations that were skipped or that failed to run
-- Evaluations submitted through the SDK or API that cannot be joined to a span
 
 Evaluation metrics count the evaluation results that your application produces. When a managed evaluation samples a portion of your traffic, `ml_obs.eval.count` reflects the sampled results, so it does not match `ml_obs.span` one to one. Rates, such as pass rate, and score distributions are not affected by sampling.
 
 #### Example queries
 
-Evaluation results often arrive in bursts, which leaves many empty intervals. Add `.fill(null)` to `ml_obs.eval.count` queries so that empty intervals are not [interpolated][3] with nearby values, which would inflate the counts.
+<div class="alert alert-info">Add <code>.fill(null)</code> to <code>ml_obs.eval.count</code> queries so that empty intervals are not <a href="/dashboards/functions/interpolation/">interpolated</a> with nearby values, which would inflate counts.</div>
 
 Pass rate of an evaluation:
 
@@ -136,13 +145,6 @@ sum:ml_obs.eval.count{evaluation_name:answer_quality} by {value}.as_count().fill
 
 ```text
 p90:ml_obs.eval.score{evaluation_name:relevance} by {ml_app}
-```
-
-Pass rate by evaluation version, to compare a new version of a managed evaluation with the previous one:
-
-```text
-sum:ml_obs.eval.count{evaluation_name:faithfulness,assessment:pass} by {eval_version}.as_count().fill(null)
-  / sum:ml_obs.eval.count{evaluation_name:faithfulness AND assessment IN (pass,fail)} by {eval_version}.as_count().fill(null)
 ```
 
 ### Estimated usage metrics
@@ -176,4 +178,3 @@ The following metrics are deprecated, and are maintained only for backward compa
 
 [1]: /llm_observability/investigate/evaluations/
 [2]: /llm_observability/improve/offline_experiments/
-[3]: /dashboards/functions/interpolation/
