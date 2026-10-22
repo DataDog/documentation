@@ -77,7 +77,7 @@ You can read any available field. You can only modify the following fields:
 | `title` | All | Write | String |
 | `service` | All | Write | String |
 | `aggregation_key` | All | Write | String |
-| `custom` | Alert | Write, delete | Object containing your custom attributes |
+| `custom` | Alert | Write, Delete | Object containing your custom attributes |
 | `status` | Alert | Write | `ok`, `warn`, or `error` |
 | `priority` | Alert | Write | `"1"`, `"2"`, `"3"`, `"4"`, or `"5"` (as a string) |
 | `links` | Alert | Write | Array of objects. Each `category` must be `runbook`, `documentation`, `dashboard`, or `resource`. |
