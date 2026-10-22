@@ -24,7 +24,7 @@ title: Trace Explorer
 
 계측된 애플리케이션은 구성한 [Ingestion Control][2]에 따라 Datadog에 트레이스를 전송합니다. 수집된 트레이스는 15분 동안 라이브 트레이스로 사용할 수 있습니다.
 
-Trace Explorer는 라이브 모드에 있을 때마다 **Live Search - All ingested data** 인디케이터를 표시합니다.
+Trace Explorer는 라이브 모드일 때 {{< ui >}}Live Search - All ingested data{{< /ui >}} 표시기를 보여줍니다:
 
 {{< img src="tracing/trace_explorer/live_search.png" alt="Live Search 인디케이터" style="width:75%;" >}}
 
@@ -32,7 +32,7 @@ Trace Explorer는 라이브 모드에 있을 때마다 **Live Search - All inges
 - [사용자 정의 보존 필터][3]: 어떤 스팬을 인덱싱할지 결정합니다. 사용자 정의 보존 필터를 통해 인덱싱된 후에는 트레이스가 **15일** 동안 유지됩니다.
 - [지능형 보존 필터][4]: 다양한 트레이스 세트를 유지하는 기본 필터입니다. 지능형 보존 필터를 통해 인덱싱된 후에는 트레이스가 **30일** 동안 유지됩니다.
 
-Trace Explorer는 [인덱싱된 스팬][5]을 검색할 때마다 **Search - Only Indexed Data** 인디케이터를 표시합니다.
+Trace Explorer는 [인덱싱된 스팬][5]을 검색할 때 {{< ui >}}Search - Only Indexed Data{{< /ui >}} 표시기를 보여줍니다:
 
 {{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data 인디케이터" style="width:75%;" >}}
 
@@ -72,7 +72,7 @@ Live Search를 사용하면 Datadog은 Datadog Agent에서 전송하자마자 �
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search 목록 보기" video="true" >}}
 
-**목록 보기**로 다음을 수행할 수 있습니다.
+{{< ui >}}List view{{< /ui >}}을(를) 사용하여 다음을 수행할 수 있습니다:
 
 - 모든 태그의 `version_id`를 필터링하여 새 배포가 원활하게 진행되었는지 모니터링합니다.
 - 수집된 트레이스를 100% 검색하여 문제가 있는 하위 스팬과 연결된 특정 `org_id` 또는 `customer_id`에 대한 중단 관련 정보를 실시간으로 확인합니다.
@@ -81,7 +81,7 @@ Live Search를 사용하면 Datadog은 Datadog Agent에서 전송하자마자 �
 - 트레이스 패널 보기에서 직접 모든 스팬 또는 태그에 대해 원클릭 검색 쿼리를 실행하세요.
 - 사용자 맞춤 보기를 위해 스팬 태그에서 열을 추가, 제거 및 정렬합니다.
 
-초당 수신된 스팬의 수는 트레이스 표 상단에 표시됩니다. 초당 수천 개의 스팬 스트림은 사람이 모두 읽기 어려우므로, 처리량이 높은 스팬 스트림에서는 가독성을 높이기 위해 일부 스팬만 표시합니다. 검색 쿼리에서 사용 가능한 모든 스팬을 검색할 수 있습니다. 라이브 검색 쿼리 바 필터링 기능을 사용하여 스팬 스트림을 필터링하고 화면 오른쪽 상단의 **일시 중지/재생** 버튼을 사용하여 스트림을 일시 중지하거나 재개합니다.
+초당 수신된 스팬의 수는 트레이스 표 상단에 표시됩니다. 초당 수천 개의 스팬 스트림은 사람이 모두 읽기 어려우므로, 처리량이 높은 스팬 스트림에서는 가독성을 높이기 위해 일부 스팬만 표시합니다. 검색 쿼리에서 사용 가능한 모든 스팬을 검색할 수 있습니다. 라이브 검색 쿼리 바 필터링 기능을 사용하여 스팬 스트림을 필터링하고 화면 오른쪽 상단의 {{< ui >}}Pause/Play{{< /ui >}} 버튼을 사용하여 스트림을 일시 중지하거나 재개합니다.
 
 {{< img src="tracing/live_search/play-pause-button.png" alt="라이브 스트림 일시 중지 또는 재생" style="width:75%;" >}}
 
@@ -92,7 +92,7 @@ Live Search를 사용하면 Datadog은 Datadog Agent에서 전송하자마자 �
 
 {{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search 시계열 보기" video="true" >}}
 
-**시계열 보기**를 사용하여 스팬을 목록 대신 시계열로 시각화합니다. Live Search 시계열 보기는 다음과 같이 지정된 기준에 해당하는 요청 또는 오류를 그래프로 표시하는 데 유용합니다.
+{{< ui >}}Timeseries view{{< /ui >}}을(를) 사용하여 스팬을 목록 대신 시계열로 시각화합니다. Live Search 시계열 보기는 다음과 같이 지정된 기준에 해당하는 요청 또는 오류를 그래프로 표시하는 데 유용합니다.
 
 - 장바구니 값이 최소 `$100`인 `ShoppingCart##checkout` 서비스 및 엔드포인트에 대한 오류이며 이러한 기준과 일치하는 트레이스를 개별적으로 볼 수 있는 기능이 있습니다.
 
@@ -133,6 +133,8 @@ Trace Explorer는 자동화된 Watchdog 이상치 탐지와 태그 분석을 결
 - **RED 메트릭**: 오류 및 대기 시간 그래프 옆의 '분석' 버튼은 관련 이상치가 감지되면 강조 표시됩니다.
 
 {{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="통합 인사이트를 사용하여 이상 분석" video="true" >}}
+
+<div class="alert alert-tip">트레이스 목록을 <strong>기간</strong>(으)로 정렬할 때 <strong>Bits AI로 조사</strong>를 클릭하여 자동화된 지연 시간 조사를 시작합니다. Bits AI는 표시된 트레이스 전반의 병목 현상과 태그 차이를 분석합니다. 자세한 내용은 <a href="/bits_ai/bits_chat/">Bits Chat</a>을(를) 참조하십시오.</div>
 
 ## 15일 보존되는 인덱싱된 스팬 검색{#indexed-spans-search-with-15-day-retention}
 
