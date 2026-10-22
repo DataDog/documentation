@@ -398,6 +398,7 @@ unsupported_sites:
   ownership_of_views: [gov,gov2]
   pr_gates: [gov,gov2]
   product_analytics: [gov,gov2]
+  query_translation: [gov,gov2]
   recorded-future: [gov,gov2]
   remediate_with_ai: [gov,gov2]
   remote_config_for_fa: [gov,gov2] #For the Guides page
