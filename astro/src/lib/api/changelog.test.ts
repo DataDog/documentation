@@ -171,6 +171,34 @@ describe("resolveChangelogEntries", () => {
     expect(entry.product).toEqual({ name: "Deployment Gates" });
   });
 
+  it("links a renamed product to its legacy redirect's destination", () => {
+    const categories = [
+      {
+        slug: "delivery-performance",
+        name: "Delivery Performance",
+        operations: [],
+      },
+    ];
+    const [entry] = resolveChangelogEntries(
+      [makeEntry({ productSlug: "dora-metrics" })],
+      categories,
+      "ja",
+    );
+    expect(entry.product).toEqual({
+      name: "Dora Metrics",
+      href: "/ja/api/latest/delivery-performance/",
+    });
+  });
+
+  it("leaves a renamed product unlinked when its destination has no category page", () => {
+    const [entry] = resolveChangelogEntries(
+      [makeEntry({ productSlug: "dora-metrics" })],
+      [],
+      "en",
+    );
+    expect(entry.product).toEqual({ name: "Dora Metrics" });
+  });
+
   it("links known operations and leaves unknown ones unlinked", async () => {
     const [entry] = resolveChangelogEntries(
       [makeEntry({ operationIds: ["ListDashboards", "GetDashboardUsage"] })],
