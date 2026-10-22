@@ -27,21 +27,11 @@ Install a missing binary with the instructions in [Install security binaries][1]
 
 ## Scanner upgrade required
 
-`datadog_ephemeral_sast_scan` and the `ephemeral-scan` command return a `PREREQUISITE REQUIRED: Scanner Upgrade` error when the installed `datadog-static-analyzer` does not support the `--rules-with-config` flag. Ephemeral scans require version 0.9.10 or later.
-
-Check the installed version:
-
-```shell
-datadog-static-analyzer --version
-```
-
-Upgrade the binary, then retry the scan. If you installed it with Homebrew:
+Ephemeral SAST scans require `datadog-static-analyzer` version 0.9.10 or later. With an earlier version, the scan returns a `Scanner Upgrade` error. Upgrade the binary and retry:
 
 ```shell
 brew upgrade datadog-static-analyzer
 ```
-
-The error message repeats the install commands for your platform. `dd-codesec-setup-toolchain` can also run the upgrade for you.
 
 ## Authentication errors
 
@@ -54,24 +44,9 @@ If the values are set but scans still fail, verify your keys have the correct pe
 
 ## Custom SAST rule not saved
 
-`datadog_promote_sast_rule` and the `promote-sast-rule` command return an error instead of saving the rule in the following cases:
+Ephemeral scans work without Datadog keys, but saving a rule requires `DD_API_KEY` and `DD_APP_KEY`. See [Authentication errors](#authentication-errors).
 
-| Error | Cause and fix |
-| ----- | ------------- |
-| `user_confirmed must be true before saving a custom rule` | The user has not approved the rule. Review the rule, then pass `user_confirmed: true` or the `--user-confirmed` flag. |
-| `DD_API_KEY and DD_APP_KEY are required to save a custom rule` | The keys are missing. Set them in the MCP client configuration or export them in the shell. See [Authentication errors](#authentication-errors). |
-| `rule "<RULE>" already exists in ruleset "<RULESET>"` | A rule with that name exists, and nothing was saved. To publish a new revision over it, retry with `overwrite: true` or the `--overwrite` flag after the user agrees to replace it. Otherwise, choose another rule name. |
-| `check existing rule returned status <CODE>`, `create ruleset returned status <CODE>`, `create rule returned status <CODE>`, or `create rule revision returned status <CODE>` | Datadog rejected the request. For `401` or `403`, confirm that `DD_SITE` matches the organization of the keys and that the application key can manage Static Analysis custom rules. |
-| `rule name: ...` or `ruleset name: ...` | The name is not a lowercase slug of 5 to 32 characters with single hyphens. Rename it and retry. |
-| `short description is longer than 60 characters` | Shorten `short_description` to one line of at most 60 characters. |
-
-`ephemeral-scan` does not use Datadog keys. If a temporary rule runs but cannot be saved, check the keys for `promote-sast-rule` only.
-
-If the save succeeds but the reply has a `warning` instead of a `revision_id`, the rule is saved. Open the rule page in Datadog to see the revision.
-
-## Ephemeral scan misses a known match
-
-The ephemeral scan follows the repository's Static Analysis configuration. It does not report code under ignored paths, outside `only` paths, above the file size limit, or excluded by gitignore. Check the configuration if a match you expect is in one of those files.
+If a rule with the same name already exists, nothing is saved. Choose another rule name, or retry with `overwrite: true` (`--overwrite` in the CLI) to replace the existing rule.
 
 ## MCP server not responding
 
