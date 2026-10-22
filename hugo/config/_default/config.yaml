@@ -7,8 +7,6 @@ enableRobotsTXT: true
 
 # don't publish cdocs source files
 ignoreFiles:
-  # Keep removed rule pages out of every generated language and index.
-  - '(^|/)security/default_rules/(def-000-zyx|def-002-s3d)\.md$'
   - "\\.mdoc\\.md$"
   - "\\.tempAst\\.json$"
   - "^integrations_data/"

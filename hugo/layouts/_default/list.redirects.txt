@@ -29,22 +29,3 @@
         {{- printf "%s/ /security/default_rules/\n" $alias -}}
     {{- end -}}
 {{- end -}}
-
-{{- /* Removed rules have no Hugo page, so retain their URLs independently of page aliases. */ -}}
-{{- $retiredRules := .Site.Params.security_rules_retired | default (dict) -}}
-{{- range $site := .Sites -}}
-    {{- $prefix := "" -}}
-    {{- if ne $site.Language.Lang "en" -}}
-        {{- $prefix = printf "%s/" $site.Language.Lang -}}
-    {{- end -}}
-    {{- $target := printf "/%ssecurity/default_rules/" $prefix -}}
-    {{- range $id := $retiredRules.removed -}}
-        {{- $aliases := index ($retiredRules.aliases | default (dict)) $id | default (slice) -}}
-        {{- range $name := union (slice $id) $aliases -}}
-            {{- range $path := slice "security/default_rules" "security_monitoring/default_rules" "security_platform/default_rules" "cloud_siem/default_rules" -}}
-                {{- printf "%s%s/%s/ %s\n" $prefix $path $name $target -}}
-                {{- printf "%s%s/%s.md %s\n" $prefix $path $name $target -}}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- end -}}

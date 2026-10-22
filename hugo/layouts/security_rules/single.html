@@ -1,7 +1,5 @@
 {{ define "main" }}
 {{ $dot := .}}
-{{ $retiredRules := .Site.Params.security_rules_retired | default (dict) }}
-{{ $inactive := in ($retiredRules.inactive | default (slice)) .File.TranslationBaseName }}
 	<div class="row">
 		<div class="col-12 order-1">
 			<h1 id="pagetitle">{{ .Title }}</h1>
@@ -11,10 +9,6 @@
 		</div>
 	</div>
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
-
-  {{ if $inactive }}
-  <p>This rule no longer generates new findings. The information below applies to existing findings.</p>
-  {{ end }}
 
   {{- with .Params.is_beta -}}
   <div class="alert alert-danger">This rule is part of a beta feature. To learn more, <a href="{{ "help/" | absLangURL }}">contact Support</a>.</div>
@@ -67,9 +61,7 @@
 			{{ $source := .Params.source }}
 			{{ $view_findings_text := "View Signals"}}
 
-			{{ if eq $rule_category "Attack Paths" }}
-				{{ $view_findings_text = "View Findings" }}
-			{{ else if eq $rule_category "Cloud Security Identity Risks"}}
+			{{ if eq $rule_category "Cloud Security Identity Risks"}}
 				{{ $view_findings_text = "View Identity Risks"}}
 			{{ else if strings.Contains $rule_category "Cloud Security Misconfigurations"}}
 				{{ $view_findings_text = "View Misconfigurations"}}
@@ -77,12 +69,10 @@
 				{{ $view_findings_text = "View Findings"}}
 			{{ end }}
 			
-			{{ if not $inactive }}
 			{{ with .Params.view_rule_url }}
 			<button class="mt-1 me-1 btn btn-sm-tag btn-outline-secondary position-relative">
 				<a href="{{.}}" class="stretched-link" target="_blank">VIEW RULE IN DATADOG</a>
 			</button>
-			{{ end }}
 			{{ end }}
 			{{ with .Params.view_findings_url }}
 			<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">

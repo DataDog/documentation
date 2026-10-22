@@ -4,9 +4,7 @@
 {{ $scratch := .Scratch }}
 
 <!-- From data file -->
-{{ $retiredRules := .Site.Params.security_rules_retired | default (dict) }}
-{{ $excludedRules := union ($retiredRules.removed | default (slice)) ($retiredRules.inactive | default (slice)) }}
-{{ $list := sort (where .Pages "File.TranslationBaseName" "not in" $excludedRules) }}
+{{ $list := sort .Pages }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
