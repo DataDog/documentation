@@ -29,3 +29,5 @@ If you are on the Datadog EU site, set the environment variable `DATADOG_HOST` t
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/validate |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/validate |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/validate      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region           |

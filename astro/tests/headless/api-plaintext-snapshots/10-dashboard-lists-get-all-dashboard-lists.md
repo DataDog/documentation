@@ -19,6 +19,8 @@ breadcrumbs: Docs > API > Get all dashboard lists
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                         |
 
 ### Overview
 

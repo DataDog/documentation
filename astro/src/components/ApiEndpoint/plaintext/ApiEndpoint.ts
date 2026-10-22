@@ -116,7 +116,11 @@ function oauthScopesNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
   );
 }
 
-/** One row per default region that has a URL. Shared with category summaries. */
+/**
+ * One row per default region that has a URL, then one "Not supported" row per
+ * region that doesn't, labeled as the HTML labels it. Shared with category
+ * summaries.
+ */
 export function apiRegionTableNodes(
   method: string,
   regionUrls: Record<string, string> | undefined,
@@ -124,18 +128,24 @@ export function apiRegionTableNodes(
   const regions = getDefaultRegions();
 
   type Row = { site: string; url: string };
-  const rows: Row[] = [];
+  const supportedRows: Row[] = [];
+  const unsupportedRows: Row[] = [];
   for (const region of regions) {
-    const url = regionUrls?.[region.key];
-    if (!url) {
-      continue;
-    }
     const site = appHost(region.key) ?? region.site;
-    rows.push({ site, url });
+    const url = regionUrls?.[region.key];
+    if (url) {
+      supportedRows.push({ site, url });
+    } else {
+      unsupportedRows.push({
+        site,
+        url: `Not supported in the ${region.label} region`,
+      });
+    }
   }
-  if (rows.length === 0) {
+  if (supportedRows.length === 0) {
     return NO_CONTENT;
   }
+  const rows = [...supportedRows, ...unsupportedRows];
 
   const th = (text: string): MarkdocNode => {
     return new Ast.Node("th", {}, [inline([plaintext(text)])]);

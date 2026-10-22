@@ -26,6 +26,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region              |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region          |
 
 ## [Get all monitors](https://docs.datadoghq.com/api/latest/monitors/get-all-monitors.md)
 
@@ -38,6 +40,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region              |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region          |
 
 ## [Edit a monitor](https://docs.datadoghq.com/api/latest/monitors/edit-a-monitor.md)
 
@@ -50,6 +54,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
 | ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                       |
 
 ## [Get a monitor's details](https://docs.datadoghq.com/api/latest/monitors/get-a-monitors-details.md)
 
@@ -62,6 +68,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Delete a monitor](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor.md)
 
@@ -74,6 +82,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                       |
 
 ## [Check if a monitor can be deleted](https://docs.datadoghq.com/api/latest/monitors/check-if-a-monitor-can-be-deleted.md)
 
@@ -86,6 +96,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/can_delete |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/can_delete |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/can_delete      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                         |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                     |
 
 ## [Validate a monitor](https://docs.datadoghq.com/api/latest/monitors/validate-a-monitor.md)
 
@@ -98,6 +110,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/validate |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/validate |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                   |
 
 ## [Validate an existing monitor](https://docs.datadoghq.com/api/latest/monitors/validate-an-existing-monitor.md)
 
@@ -110,6 +124,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                    |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                                |
 
 ## [Get a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-configuration-policy.md)
 
@@ -122,6 +138,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                             |
 
 ## [Monitors search](https://docs.datadoghq.com/api/latest/monitors/monitors-search.md)
 
@@ -134,6 +152,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/search |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/search |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/search      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                 |
 
 ## [Get all monitor configuration policies](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-configuration-policies.md)
 
@@ -146,6 +166,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/policy |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/policy |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/policy      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                 |
 
 ## [Monitors group search](https://docs.datadoghq.com/api/latest/monitors/monitors-group-search.md)
 
@@ -158,6 +180,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/groups/search |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/groups/search |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/groups/search      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                            |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                        |
 
 ## [Create a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-configuration-policy.md)
 
@@ -170,6 +194,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/policy |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/policy |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/policy      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                 |
 
 ## [Unmute a monitor](https://docs.datadoghq.com/api/latest/monitors/unmute-a-monitor.md)
 
@@ -182,6 +208,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/unmute      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                  |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                              |
 
 ## [Edit a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/edit-a-monitor-configuration-policy.md)
 
@@ -194,6 +222,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | PATCH https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | ap2.datadoghq.com | PATCH https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | app.ddog-gov.com  | PATCH https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| uk1.datadoghq.com | PATCH Not supported in the UK1 region                                 |
+| us2.ddog-gov.com  | PATCH Not supported in the US2-FED region                             |
 
 ## [Mute a monitor](https://docs.datadoghq.com/api/latest/monitors/mute-a-monitor.md)
 
@@ -206,6 +236,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/mute      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                            |
 
 ## [Delete a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-configuration-policy.md)
 
@@ -218,6 +250,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                 |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                             |
 
 ## [Unmute all monitors](https://docs.datadoghq.com/api/latest/monitors/unmute-all-monitors.md) (deprecated)
 
@@ -230,6 +264,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/v1/monitor/unmute_all |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/v1/monitor/unmute_all |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/v1/monitor/unmute_all      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                 |
 
 ## [Get a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-notification-rule.md)
 
@@ -242,6 +278,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                      |
 
 ## [Mute all monitors](https://docs.datadoghq.com/api/latest/monitors/mute-all-monitors.md) (deprecated)
 
@@ -254,6 +292,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/v1/monitor/mute_all |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/v1/monitor/mute_all |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/v1/monitor/mute_all      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                   |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region               |
 
 ## [Get all monitor notification rules](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-notification-rules.md)
 
@@ -266,6 +306,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                            |
 
 ## [Create a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-notification-rule.md)
 
@@ -278,6 +320,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                            |
 
 ## [Update a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/update-a-monitor-notification-rule.md)
 
@@ -290,6 +334,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | PATCH https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | ap2.datadoghq.com | PATCH https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | app.ddog-gov.com  | PATCH https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| uk1.datadoghq.com | PATCH Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | PATCH Not supported in the US2-FED region                                      |
 
 ## [Delete a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-notification-rule.md)
 
@@ -302,6 +348,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                                      |
 
 ## [Get a monitor user template](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-user-template.md) (preview)
 
@@ -314,6 +362,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                     |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                 |
 
 ## [Get all monitor user templates](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-user-templates.md) (preview)
 
@@ -326,6 +376,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/template |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/template |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/template      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Create a monitor user template](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-user-template.md) (preview)
 
@@ -338,6 +390,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/template |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/template |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/template      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                   |
 
 ## [Update a monitor user template to a new version](https://docs.datadoghq.com/api/latest/monitors/update-a-monitor-user-template-to-a-new-version.md) (preview)
 
@@ -350,6 +404,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
 | ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
 | app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                                     |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                                 |
 
 ## [Delete a monitor user template](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-user-template.md) (preview)
 
@@ -362,6 +418,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                     |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                                 |
 
 ## [Validate a monitor user template](https://docs.datadoghq.com/api/latest/monitors/validate-a-monitor-user-template.md) (preview)
 
@@ -374,6 +432,8 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/template/validate |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/template/validate |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/template/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                            |
 
 ## [Validate an existing monitor user template](https://docs.datadoghq.com/api/latest/monitors/validate-an-existing-monitor-user-template.md) (preview)
 
@@ -386,3 +446,5 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/template/{template_id}/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                              |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                                          |

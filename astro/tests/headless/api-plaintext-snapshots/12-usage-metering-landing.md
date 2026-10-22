@@ -30,6 +30,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/hourly-attribution |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/hourly-attribution |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/hourly-attribution      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ## [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/get-monthly-usage-attribution.md)
 
@@ -42,6 +44,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/monthly-attribution |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/monthly-attribution |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/monthly-attribution      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                            |
 
 ## [Get billable usage across your account](https://docs.datadoghq.com/api/latest/usage-metering/get-billable-usage-across-your-account.md)
 
@@ -54,6 +58,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/billable-summary |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/billable-summary |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/billable-summary      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                         |
 
 ## [Get all custom metrics by hourly average](https://docs.datadoghq.com/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average.md)
 
@@ -66,6 +72,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/top_avg_metrics |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/top_avg_metrics |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/top_avg_metrics      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                            |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                        |
 
 ## [Get usage across your account](https://docs.datadoghq.com/api/latest/usage-metering/get-usage-across-your-account.md)
 
@@ -78,6 +86,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/summary |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/summary |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/summary      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                    |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                |
 
 ## [Get hourly usage for logs by index](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-logs-by-index.md)
 
@@ -90,6 +100,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/logs_by_index |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/logs_by_index |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/logs_by_index      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly logs usage by retention](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-logs-usage-by-retention.md) (deprecated)
 
@@ -102,6 +114,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/logs-by-retention |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/logs-by-retention |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/logs-by-retention      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                              |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                          |
 
 ## [Get hourly usage for hosts and containers](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers.md) (deprecated)
 
@@ -114,6 +128,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/hosts |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/hosts |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/hosts      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                  |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region              |
 
 ## [Get hourly usage for logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-logs.md) (deprecated)
 
@@ -126,6 +142,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/logs |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/logs |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/logs      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region             |
 
 ## [Get hourly usage for custom metrics](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-custom-metrics.md) (deprecated)
 
@@ -138,6 +156,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/timeseries |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/timeseries |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/timeseries      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get hourly usage for indexed spans](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-indexed-spans.md) (deprecated)
 
@@ -150,6 +170,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/indexed-spans |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/indexed-spans |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/indexed-spans      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly usage for synthetics checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks.md) (deprecated)
 
@@ -162,6 +184,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/synthetics |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/synthetics |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/synthetics      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get hourly usage for synthetics API checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks.md) (deprecated)
 
@@ -174,6 +198,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/synthetics_api |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/synthetics_api |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/synthetics_api      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get hourly usage for synthetics browser checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks.md) (deprecated)
 
@@ -186,6 +212,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/synthetics_browser |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/synthetics_browser |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/synthetics_browser      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ## [Get hourly usage for Fargate](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-fargate.md) (deprecated)
 
@@ -198,6 +226,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/fargate |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/fargate |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/fargate      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                    |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                |
 
 ## [Get hourly usage for Lambda](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-lambda.md) (deprecated)
 
@@ -210,6 +240,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get hourly usage for RUM sessions](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-rum-sessions.md) (deprecated)
 
@@ -222,6 +254,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/rum_sessions |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/rum_sessions |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/rum_sessions      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                         |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                     |
 
 ## [Get hourly usage for network hosts](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-network-hosts.md) (deprecated)
 
@@ -234,6 +268,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/network_hosts |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/network_hosts |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/network_hosts      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [get hourly usage for network flows](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-network-flows.md) (deprecated)
 
@@ -246,6 +282,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/network_flows |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/network_flows |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/network_flows      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly usage for analyzed logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs.md) (deprecated)
 
@@ -258,6 +296,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/analyzed_logs |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/analyzed_logs |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/analyzed_logs      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly usage for SNMP devices](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-snmp-devices.md) (deprecated)
 
@@ -270,6 +310,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/snmp |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/snmp |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/snmp      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region             |
 
 ## [Get hourly usage for ingested spans](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-ingested-spans.md) (deprecated)
 
@@ -282,6 +324,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/ingested-spans |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/ingested-spans |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/ingested-spans      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get hourly usage for incident management](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-incident-management.md) (deprecated)
 
@@ -294,6 +338,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/incident-management |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/incident-management |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/incident-management      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                            |
 
 ## [Get hourly usage for IoT](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-iot.md) (deprecated)
 
@@ -306,6 +352,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/iot |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/iot |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/iot      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for CSM Pro](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-csm-pro.md) (deprecated)
 
@@ -318,6 +366,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/cspm |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/cspm |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/cspm      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region             |
 
 ## [Get hourly usage for cloud workload security](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security.md) (deprecated)
 
@@ -330,6 +380,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/cws |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/cws |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/cws      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for database monitoring](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-database-monitoring.md) (deprecated)
 
@@ -342,6 +394,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/dbm |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/dbm |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/dbm      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for sensitive data scanner](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner.md) (deprecated)
 
@@ -354,6 +408,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/sds |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/sds |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/sds      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for RUM units](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-rum-units.md) (deprecated)
 
@@ -366,6 +422,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/rum |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/rum |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/rum      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for profiled hosts](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts.md) (deprecated)
 
@@ -378,6 +436,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/profiling |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/profiling |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/profiling      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                      |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                  |
 
 ## [Get hourly usage for CI visibility](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-ci-visibility.md) (deprecated)
 
@@ -390,6 +450,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/ci-app |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/ci-app |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/ci-app      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                   |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region               |
 
 ## [Get hourly usage for online archive](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-online-archive.md) (deprecated)
 
@@ -402,6 +464,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/online-archive |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/online-archive |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/online-archive      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get hourly usage for audit logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-audit-logs.md) (deprecated)
 
@@ -414,6 +478,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/audit_logs |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/audit_logs |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/audit_logs      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get the list of available daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports.md) (deprecated)
 
@@ -426,6 +492,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/daily_custom_reports |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/daily_custom_reports |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/daily_custom_reports      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-specified-daily-custom-reports.md) (deprecated)
 
@@ -438,6 +506,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/daily_custom_reports/{report_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                   |
 
 ## [Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports.md) (deprecated)
 
@@ -450,6 +520,8 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monthly_custom_reports      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                         |
 
 ## [Get specified monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-specified-monthly-custom-reports.md) (deprecated)
 
@@ -462,3 +534,5 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monthly_custom_reports/{report_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                         |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                     |

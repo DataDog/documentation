@@ -21,6 +21,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/dashboard |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/dashboard |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/dashboard      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region            |
 
 ## [Get a dashboard](https://docs.datadoghq.com/api/latest/dashboards/get-a-dashboard.md)
 
@@ -33,6 +35,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ## [Get all dashboards](https://docs.datadoghq.com/api/latest/dashboards/get-all-dashboards.md)
 
@@ -45,6 +49,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Update a dashboard](https://docs.datadoghq.com/api/latest/dashboards/update-a-dashboard.md)
 
@@ -57,6 +63,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id} |
 | ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id} |
 | app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                           |
 
 ## [Delete a dashboard](https://docs.datadoghq.com/api/latest/dashboards/delete-a-dashboard.md)
 
@@ -69,6 +77,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                           |
 
 ## [Delete dashboards](https://docs.datadoghq.com/api/latest/dashboards/delete-dashboards.md)
 
@@ -81,6 +91,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/dashboard |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/dashboard |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/dashboard      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region            |
 
 ## [Restore deleted dashboards](https://docs.datadoghq.com/api/latest/dashboards/restore-deleted-dashboards.md)
 
@@ -93,6 +105,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | PATCH https://api.ap1.datadoghq.com/api/v1/dashboard |
 | ap2.datadoghq.com | PATCH https://api.ap2.datadoghq.com/api/v1/dashboard |
 | app.ddog-gov.com  | PATCH https://api.ddog-gov.com/api/v1/dashboard      |
+| uk1.datadoghq.com | PATCH Not supported in the UK1 region                |
+| us2.ddog-gov.com  | PATCH Not supported in the US2-FED region            |
 
 ## [Create a shared dashboard](https://docs.datadoghq.com/api/latest/dashboards/create-a-shared-dashboard.md)
 
@@ -105,6 +119,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/dashboard/public |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/dashboard/public |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/dashboard/public      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                   |
 
 ## [Get a shared dashboard](https://docs.datadoghq.com/api/latest/dashboards/get-a-shared-dashboard.md)
 
@@ -117,6 +133,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/public/{token}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ## [Update a shared dashboard](https://docs.datadoghq.com/api/latest/dashboards/update-a-shared-dashboard.md)
 
@@ -129,6 +147,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token} |
 | ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token} |
 | app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v1/dashboard/public/{token}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                           |
 
 ## [Send shared dashboard invitation email](https://docs.datadoghq.com/api/latest/dashboards/send-shared-dashboard-invitation-email.md)
 
@@ -141,6 +161,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                                      |
 
 ## [Get all invitations for a shared dashboard](https://docs.datadoghq.com/api/latest/dashboards/get-all-invitations-for-a-shared-dashboard.md)
 
@@ -153,6 +175,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                      |
 
 ## [Revoke a shared dashboard URL](https://docs.datadoghq.com/api/latest/dashboards/revoke-a-shared-dashboard-url.md)
 
@@ -165,6 +189,8 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/dashboard/public/{token}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                           |
 
 ## [Revoke shared dashboard invitations](https://docs.datadoghq.com/api/latest/dashboards/revoke-shared-dashboard-invitations.md)
 
@@ -177,3 +203,5 @@ Manage all your dashboards, as well as access to your shared dashboards, through
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                                      |

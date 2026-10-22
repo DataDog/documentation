@@ -23,6 +23,8 @@ organization.
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                         |
 
 ## [Create a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/create-a-dashboard-list.md)
 
@@ -35,6 +37,8 @@ organization.
 | ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual |
 | ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual |
 | app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/dashboard/lists/manual      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                         |
 
 ## [Get a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/get-a-dashboard-list.md)
 
@@ -47,6 +51,8 @@ organization.
 | ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                   |
 
 ## [Update a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/update-a-dashboard-list.md)
 
@@ -59,6 +65,8 @@ organization.
 | ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                                       |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                                   |
 
 ## [Delete a dashboard list](https://docs.datadoghq.com/api/latest/dashboard-lists/delete-a-dashboard-list.md)
 
@@ -71,3 +79,5 @@ organization.
 | ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id} |
 | app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                       |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                                   |
