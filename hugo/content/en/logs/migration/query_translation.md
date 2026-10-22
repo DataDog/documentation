@@ -123,8 +123,6 @@ The same instructions, with screenshots of the Splunk UI, are available in the i
 4. In {{< ui >}}Name your import{{< /ui >}}, give the import a name that identifies it later.
 5. Click {{< ui >}}Import{{< /ui >}}.
 
-{{< img src="logs/migration/import-wizard.png" alt="The Import page, with steps for uploading assets from Splunk, uploading a macros file, and naming the import." style="width:100%;" >}}
-
 Translation starts as soon as the import is created and runs in the background. You can close the page and come back to it.
 
 ### Review and publish
@@ -142,8 +140,6 @@ Open an import to see every resource it contains and the state of its translatio
 Click a resource to see its original SPL, the translated query, and the explanation of the translation. A translated query is not guaranteed to return the same results as the Splunk original. Review each translation before you publish the monitor or dashboard.
 
 A dashboard shows a status for each of its widgets and publishes as a single dashboard. Open it to see which widgets were translated and which returned an error.
-
-{{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in an import, showing a summary of three translated widgets and two errors, above a table listing the status of each widget." style="width:100%;" >}}
 
 Monitors and dashboards with the Skipped status cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a skipped resource, or a dashboard widget that returned an error, fix it at the source and import it again:
 
