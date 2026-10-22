@@ -131850,15 +131850,37 @@ components:
           example: user@datadoghq.com
           readOnly: true
           type: string
+        estimated_change_in_volume:
+          description: |-
+            Estimated change in indexed cardinality or points if the exemption is removed and the matching tag indexing
+            rule applies to the metric. A negative value indicates a reduction in indexed volume, a positive value
+            indicates an increase, and zero indicates no change. A `null` value indicates that the estimate is unavailable.
+          example: 45
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
         kind:
           description: >-
             Discriminates between an explicit exemption (`exemption`) and a pre-existing legacy tag configuration acting as an implicit exclusion (`legacy_tag_configuration`).
           example: exemption
           type: string
+        missing_indexed_tags:
+          description: |-
+            Tag keys used to query this metric in monitors, dashboards, notebooks, and SLOs that the matching rule would
+            remove or not include if the exemption is removed.
+          example:
+            - service
+          items:
+            type: string
+          readOnly: true
+          type: array
         reason:
           description: The reason the metric is exempt from tag indexing rules.
           example: This metric has a pre-existing tag configuration.
           type: string
+        volume_status:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionVolumeStatus"
       type: object
     TagIndexingRuleExemptionCreateAttributes:
       description: Attributes for creating a tag indexing rule exemption.
@@ -131917,6 +131939,22 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionVolumeStatus:
+      description: |-
+        Indicates whether `estimated_change_in_volume` is available and, if not, why. `ok` indicates a fresh estimate.
+        `unindexed_tags` indicates that the matching rule uses tags that are not indexed for the metric.
+        `unavailable` indicates that the estimate is stale, was not computed, or could not be retrieved.
+      enum:
+        - ok
+        - unindexed_tags
+        - unavailable
+      example: unavailable
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - OK
+        - UNINDEXED_TAGS
+        - UNAVAILABLE
     TagIndexingRuleMetricMatch:
       description: Criteria for matching metrics based on query state.
       properties:
@@ -149762,7 +149800,7 @@ paths:
           - audit_logs_read
   /api/v2/authn_mappings:
     get:
-      description: List all AuthN Mappings in the org.
+      description: List all AuthN Mappings in the organization.
       operationId: ListAuthNMappings
       parameters:
         - $ref: "#/components/parameters/PageSize"
@@ -203221,8 +203259,12 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume: 45
                         kind: exemption
+                        missing_indexed_tags:
+                          - service
                         reason: This metric has a pre-existing tag configuration.
+                        volume_status: ok
                       id: dd.test.metric
                       type: tag_indexing_rule_exemptions
               schema:
@@ -203299,8 +203341,11 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume:
                         kind: exemption
+                        missing_indexed_tags: []
                         reason: This metric has a pre-existing tag configuration.
+                        volume_status: unavailable
                       id: dd.test.metric
                       type: tag_indexing_rule_exemptions
               schema:
