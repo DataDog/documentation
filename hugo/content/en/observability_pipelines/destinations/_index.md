@@ -6,7 +6,6 @@ aliases:
   - /observability_pipelines/destinations/datadog_apm/
   - /observability_pipelines/destinations/opentelemetry/traces/
   - /observability_pipelines/destinations/opentelemetry/metrics/
-  - /observability_pipelines/destinations/prometheus/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -87,12 +86,14 @@ These are the available destinations:
 - [Datadog Metrics][1]
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
+- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
 [2]: /observability_pipelines/destinations/elasticsearch/
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
+[6]: /observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -112,7 +113,7 @@ The following table lists the destinations and fields that support template synt
 | Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Elasticsearch     | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
-| Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
+| Google SecOps     | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs if any of these fields cannot be resolved. |
 | Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
