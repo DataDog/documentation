@@ -22,24 +22,24 @@ Query Translation, part of the Migration App, translates Splunk Processing Langu
 
 | Tool | Use case |
 |------|-----------|
-| [Single Translation][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
-| [Bulk Migration][3] | Import CSV exports of Splunk alerts and dashboards, and translate their queries to log search syntax. Review the results, then create the matching Datadog monitors and dashboards. |
+| [Translate][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
+| [Import][3] | Import CSV exports of Splunk alerts and dashboards, and translate their queries to log search syntax. Review the results, then create the matching Datadog monitors and dashboards. |
 
 Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Permissions
 
-Bulk Migration requires the `logs_read_config` permission. Publishing a translated resource also requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Datadog Role Permissions][5].
+Importing Splunk assets requires the `logs_read_config` permission. Publishing a translated resource also requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Datadog Role Permissions][5].
 
 ## Translate a single query
 
-Use Single Translation as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
+Use the Translate page as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
 
-1. Go to [Logs > Single Translation][2].
+1. Go to [Logs > Translate][2].
 2. Paste an SPL query into the query box, or select one of the provided examples.
 3. Click {{< ui >}}Translate{{< /ui >}}.
 
-{{< img src="logs/migration/single-translation.mp4" alt="An SPL query is entered in the Single Translation page and translated, showing the Translation preview chart, the translated Datadog query, and the Translated SPL." video="true" width="100%" >}}
+{{< img src="logs/migration/single-translation.mp4" alt="An SPL query is entered in the Translate page and translated, showing the Translation preview chart, the translated Datadog query, and the Translated SPL." video="true" width="100%" >}}
 
 The page returns:
 
@@ -48,9 +48,11 @@ The page returns:
 - {{< ui >}}Translated SPL{{< /ui >}}: Your original SPL, annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
 - {{< ui >}}How did we translate?{{< /ui >}}: An explanation of which SPL command maps to which part of the Datadog query.
 
+To build a monitor on the translated query, click {{< ui >}}Create Monitor{{< /ui >}}.
+
 ## Migrate assets in bulk
 
-The Bulk Migration tool migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named import. It translates the queries in each asset to Datadog syntax and builds the matching Datadog monitor or dashboard. You review each result, then publish it to create the asset in Datadog. The following resource types are supported:
+The Import page migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named import. It translates the queries in each asset to Datadog syntax and builds the matching Datadog monitor or dashboard. You review each result, then publish it to create the asset in Datadog. The following resource types are supported:
 
 | Splunk resource | Datadog equivalent | Notes |
 |-----------------|--------------------|-------|
@@ -117,11 +119,12 @@ The same instructions, with screenshots of the Splunk UI, are available in the i
 
 ### Import your assets into Datadog
 
-1. Go to [Logs > Bulk Migration][3] and click {{< ui >}}Get Started{{< /ui >}}.
-2. In {{< ui >}}Upload your assets from Splunk{{< /ui >}}, add your alert and dashboard CSV files. Upload as many files as you need, but leave the macros file out of this step.
-3. In {{< ui >}}Macros file{{< /ui >}}, upload the macros CSV, if you have one.
-4. In {{< ui >}}Name your import{{< /ui >}}, give the import a name that identifies it later.
-5. Click {{< ui >}}Import{{< /ui >}}.
+1. Go to [Logs > Import][3] and click {{< ui >}}Get Started{{< /ui >}}.
+2. In {{< ui >}}Select source{{< /ui >}}, select {{< ui >}}Splunk Processing Language (SPL){{< /ui >}}.
+3. In {{< ui >}}Upload your assets from Splunk{{< /ui >}}, add your alert and dashboard CSV files. Upload as many files as you need, but leave the macros file out of this step.
+4. In {{< ui >}}Macros file{{< /ui >}}, upload the macros CSV, if you have one.
+5. In {{< ui >}}Name your import{{< /ui >}}, give the import a name that identifies it later.
+6. Click {{< ui >}}Import{{< /ui >}}.
 
 Translation starts as soon as the import is created and runs in the background. You can close the page and come back to it.
 
@@ -131,8 +134,7 @@ Open an import to see every resource it contains and the state of its translatio
 
 | Status | Meaning |
 |--------|---------|
-| Pending | The resource is queued for translation. |
-| In progress | The resource is being translated. |
+| In Progress | The resource is being translated. |
 | Translated | A Datadog equivalent is ready to review and publish. |
 | Published | The resource exists in Datadog. The import links to it. |
 | Skipped | The resource could not be translated. |
@@ -144,7 +146,7 @@ A dashboard shows a status for each of its widgets and publishes as a single das
 Monitors and dashboards with the Skipped status cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a skipped resource, or a dashboard widget that returned an error, fix it at the source and import it again:
 
 1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
-2. (Optional) Delete the original import to reuse its name. On the [Bulk Migration][3] page, hover over the import, click the trash can icon, and then click {{< ui >}}Delete Current Migration{{< /ui >}}.
+2. (Optional) Delete the original import to reuse its name. On the [Import][3] page, hover over the import, click the trash can icon, and then click {{< ui >}}Delete current migration{{< /ui >}}.
 3. Upload the corrected file as a new import.
 
 ## Translation gaps
@@ -168,7 +170,7 @@ The SPL command is not supported
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/search_syntax/
-[2]: https://app.datadoghq.com/logs/query-translator
+[2]: https://app.datadoghq.com/logs/query-translator/translator
 [3]: https://app.datadoghq.com/logs/batch-migration
 [4]: /ddsql_editor/
 [5]: /account_management/rbac/permissions/
