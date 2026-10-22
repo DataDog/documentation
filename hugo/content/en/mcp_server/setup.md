@@ -705,7 +705,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
-- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules. This toolset is not included in `toolsets=all`; request `governance` by name.
+- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules. This toolset is not included in `toolsets=all`, so request it by name.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
 - `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][82], [indexes][83], and [archives][84].
