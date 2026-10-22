@@ -35,6 +35,8 @@ Shared roles are always {{< ui >}}Group Managed{{< /ui >}}. Unlike [organization
 
 Role assignment stays with each member organization's administrators. Administrators in the owner organization cannot assign roles to users in member organizations, or see which users in member organizations have a shared role.
 
+If an organization leaves the group, its shared roles become regular custom roles.
+
 ## Role exclusivity
 
 Role exclusivity controls whether member organizations can create their own custom roles in addition to using the group's shared roles. Set it in the {{< ui >}}Role Exclusivity{{< /ui >}} section of the group's {{< ui >}}Roles{{< /ui >}} tab.
