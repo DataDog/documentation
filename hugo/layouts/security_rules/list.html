@@ -4,7 +4,8 @@
 {{ $scratch := .Scratch }}
 
 <!-- From data file -->
-{{ $list := sort .Pages }}
+{{ $excludedRules := .Site.Data.security_rules_excluded_from_catalog | default (slice) }}
+{{ $list := sort (where .Pages "File.TranslationBaseName" "not in" $excludedRules) }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
