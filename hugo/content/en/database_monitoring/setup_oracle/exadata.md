@@ -42,6 +42,12 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 {{% dbm-create-oracle-user %}}
 
+### Grant the user access to the database
+
+Log on as `sysdba`, and grant the following permissions:
+{{% dbm-oracle-non-cdb-permissions-grant-sql %}}
+
+
 ### Securely store your password
 {{% dbm-secret %}}
 
