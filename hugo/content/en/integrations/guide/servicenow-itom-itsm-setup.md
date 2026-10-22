@@ -248,13 +248,15 @@ Send work items from Datadog to the Datadog Cases ITSM table in ServiceNow. Serv
 1. Beside **Case Table**, choose to send work items to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Work Management.
 1. Navigate to the [**Work Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
+For step-by-step instructions on setting up and configuring this integration for Work Management, see [Work Management notifications and integrations][6].
+
 ### Configure Datadog Incident Management {#incident-management}
 
 The Datadog ServiceNow integration allows you to create incidents in ServiceNow from Datadog incidents and [sync data bidirectionally](#sync-bidirectionally) between the two platforms. This integration with Datadog Incident Management provides improved visibility, automatic bidirectional sync of the incident's state, severity, and any status updates, and support for your existing ServiceNow workflows.
 
 After installing the integration, in Datadog, go to the [Integration Settings][9] page. Click the **ServiceNow** tile to configure ServiceNow incident creation.
 
-For step-by-step instructions on setting up and configuring this integration for incident management, see [Integrate ServiceNow with Datadog Incident Management][12].
+For step-by-step instructions on setting up and configuring this integration for Incident Management, see [Integrate ServiceNow with Datadog Incident Management][12].
 
 ### Configure Datadog On-Call {#on-call}
 
@@ -267,7 +269,7 @@ Use this integration to create a ServiceNow incident when a Datadog On-Call Page
 1. Open a team's [routing rules][13] and add a rule that creates a ServiceNow incident when an On-Call Page triggers.
 1. (Optional) To create a Datadog On-Call Page from ServiceNow, see [Create a Datadog On-Call Page from ServiceNow](#create-on-call-page).
 
-For more information, see [Integrate ServiceNow with Datadog On-Call][14].
+For step-by-step instructions on setting up and configuring this integration for On-Call, see [Integrate ServiceNow with Datadog On-Call][14].
 
 ## Sync data bidirectionally between ServiceNow and Datadog {#sync-bidirectionally}
 
