@@ -44,7 +44,7 @@ You can start a Bits Investigation from recommendation cards for the following v
 
 The Bits Investigation opens in a new tab, scoped to the page, vital, and time window of the card.
 
-{{< img src="real_user_monitoring/bits_ai/optimization-recommendation-cards.png" alt="The Optimization page for the Largest Contentful Paint of a page, showing recommendation cards ranked by impact, each with an Investigate button." style="width:100%;" >}}
+{{< img src="real_user_monitoring/bits_ai/optimization-recommendation-cards-2.png" alt="The Optimization page for the Largest Contentful Paint of a page, showing recommendation cards ranked by impact, each with an Investigate button." style="width:100%;" >}}
 
 ### What Bits investigates
 

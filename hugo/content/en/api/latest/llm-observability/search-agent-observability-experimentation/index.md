@@ -1,3 +1,3 @@
 ---
-title: Search Agent Observability experimentation
+title: Search Agent Observability offline experiments
 ---

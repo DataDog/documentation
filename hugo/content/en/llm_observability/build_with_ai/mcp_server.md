@@ -2,14 +2,14 @@
 title: Agent Observability MCP and Skills
 aliases:
 - /llm_observability/mcp_server/
-description: "Connect AI agents to your Agent Observability traces and experiments using the Datadog MCP Server."
+description: "Connect AI agents to your Agent Observability traces and offline experiments using the Datadog MCP Server."
 further_reading:
 - link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "/llm_observability/improve/experiments"
+- link: "/llm_observability/improve/offline_experiments"
   tag: "Documentation"
-  text: "Set up and use Agent Observability Experiments"
+  text: "Set up and use Agent Observability Offline Experiments"
 - link: "/llm_observability/investigate/insights/"
   tag: "Documentation"
   text: "Review Agent Observability Insights"
@@ -117,7 +117,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing offline experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
@@ -146,10 +146,10 @@ Restart Claude Code after running both commands for the skills to appear.
 |-------|-------------|-------------|
 | Session classify | `/agent-observability-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
 | Trace RCA | `/agent-observability-trace-rca` | Root cause analysis on failing production traces |
-| Experiment analyzer | `/agent-observability-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment analyzer | `/agent-observability-experiment-analyzer` | Analyze and compare offline experiment results |
 | Experiment Python codegen | `/agent-observability-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
-| Eval bootstrap | `/agent-observability-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
-| Eval pipeline | `/agent-observability-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
+| Evaluator bootstrap | `/agent-observability-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
+| Eval pipeline | `/agent-observability-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, offline experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
 
@@ -207,7 +207,7 @@ The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a 
 
 #### End-to-end eval pipeline
 
-`/agent-observability-eval-pipeline` walks from production traces through evaluators, datasets, experiments, and analysis in six narrated phases, with a user checkpoint between each:
+`/agent-observability-eval-pipeline` walks from production traces through evaluators, datasets, offline experiments, and analysis in six narrated phases, with a user checkpoint between each:
 
 1. **Classify ml_app traces** — sample and classify recent traces from your `ml_app`
 2. **Root cause analysis** — diagnose why failing traces are failing
@@ -227,7 +227,7 @@ Each phase has a canonical short name — the same value accepted by `--start-at
 | 5 | Generate and run experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`experiment`</span> | `list_llmobs_evals` (one-shot startup beacon — connectivity + telemetry); runtime uses the ddtrace SDK | Introspects your app for LLM call sites, emits a self-contained `.py` or `.ipynb` wiring `task_fn` to a real entry point, then runs it. |
 | 6 | Analyze experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`analyze`</span> | `get_llmobs_experiment_summary`, `get_llmobs_experiment_metric_values`, `list_llmobs_experiment_events`, `get_llmobs_experiment_event`, `get_llmobs_experiment_dimension_values` | Pulls top-line metrics, per-record scores, segment dimensions, and drill-down events; synthesizes a structured analysis report. |
 
-You can `stop` cleanly at any checkpoint and resume later with `--start-at <stage-name>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
+You can `stop` cleanly at any checkpoint and resume later with `--start-at <stage-name>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase evaluator-only behavior.
 
 ```
 /agent-observability-eval-pipeline my-chatbot --project-name my-chatbot
@@ -246,12 +246,12 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Reviewing Insights**: Prioritize recurring cost and reliability problems that Datadog identified, inspect their evidence and recommended fixes, update their status, and optionally submit feedback.
-- **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
-- **Creating experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
+- **Evaluating offline experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
+- **Creating offline experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 - **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
-- **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in experiments.
+- **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in offline experiments.
 
 ## Available tools
 
@@ -299,7 +299,7 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 ### Experiment tools
 
 `create_llmobs_experiment`
-: Create a new Agent Observability experiment object in a project. Records the experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
+: Create a new Agent Observability offline experiment object in a project. Records the offline experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
 
 `get_llmobs_experiment_summary`
 : Get a high-level experiment summary with pre-computed statistics for all evaluation metrics. Start here before using other experiment tools.
@@ -342,10 +342,10 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 ### Project and dataset tools
 
 `list_llmobs_projects`
-: List all Agent Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
+: List all Agent Observability projects for offline experiments in the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
 
 `get_llmobs_project`
-: Look up an Agent Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
+: Look up an Agent Observability project for offline experiments by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
 
 `list_llmobs_datasets`
 : List datasets within a project, with optional ID or name filter. Returns dataset metadata and pagination fields. Use this before `get_llmobs_dataset_records` or `add_llmobs_dataset_records` — those tools require a dataset UUID.
@@ -486,7 +486,7 @@ The `core` toolset included in the setup URL gives your AI agent access to addit
 
 ### Export analysis to Datadog Notebooks
 
-The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. You can export findings from agent chats into a collaborative, shareable notebook that lives in Datadog alongside your traces and experiments.
+The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. You can export findings from agent chats into a collaborative, shareable notebook that lives in Datadog alongside your traces and offline experiments.
 
 Try prompts like:
 
