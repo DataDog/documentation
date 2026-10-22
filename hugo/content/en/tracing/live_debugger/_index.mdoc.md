@@ -414,7 +414,15 @@ The following constraints apply to Live Debugger usage and configuration:
 
 {% if equals($prog_lang, "node_js") %}
 
-- **TypeScript imports**: When TypeScript compiles imports to CommonJS, expressions using imported names can fail with `ReferenceError`, even with source maps. This affects logpoint messages, conditions, and variable capture expressions. Create a local alias, such as `const LocalFoo = Foo`, in the logpoint's scope, and reference `LocalFoo` in expressions.
+- **TypeScript imports**: When TypeScript compiles named or default imports to CommonJS, expressions using imported names can fail with `ReferenceError`, even with source maps. This affects logpoint messages, conditions, and variable capture expressions.
+
+  To reference the imported value without redeploying, inspect the JavaScript from the deployed build or captured variables to find the generated module name. For example, if `import { LIMIT } from './limits'` compiles to `const limits_1 = require('./limits')`, update the condition:
+
+  **Before:** `count > LIMIT`
+
+  **After:** `count > limits_1.LIMIT`
+
+  The generated name must be in scope at the logpoint and can change between builds. This workaround does not apply to `instanceof`, which does not support qualified class names such as `foo_1.Foo`.
 
 {% /if %}
 
