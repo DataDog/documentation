@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
-    <rect width="128" height="128" rx="32" fill="#FF354C"/>
-    <text x="64" y="64" text-anchor="middle" dominant-baseline="central"
-          fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-          font-size="54" font-weight="700">CR</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+    <g transform="matrix(.12902 0 0 .12902 22.069 15.36)">
+        <path fill="#0B0021" d="M376.491 753.352C168.976 753.352 0 584.376 0 376.491S168.976 0 376.491 0c89.676 0 176.387 31.868 244.2 90.047L512.116 217.149c-37.797-32.239-85.97-50.026-135.996-50.026-154.154 0-270.139 167.494-174.905 330.171 14.822 25.198 36.315 45.95 62.254 59.66 97.087 50.767 199.733 32.239 264.952-36.685l121.544 114.874c-70.407 75.224-170.088 118.209-273.474 118.209"/>
+        <circle cx="381.677" cy="377.973" r="107.463" fill="#00FC8F"/>
+    </g>
 </svg>
