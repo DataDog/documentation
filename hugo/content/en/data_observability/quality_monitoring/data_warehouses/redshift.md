@@ -39,30 +39,27 @@ Connect to your Redshift cluster as a superuser and run the following SQL to cre
    GRANT SELECT ON svv_table_info TO ROLE datadog_role;
    ```
 
-2. Grant read-only access to your data.
+2. Grant read-only access to your data. Choose one option.
 
-   Run the following for each schema you want Datadog to monitor:
+   **Option A: All schemas (recommended, required for dbt CI/CD)**
+
+   Gives Datadog read access to every current and future schema, table, and view in the database, including the schemas dbt creates for pull requests:
+
+   ```sql
+   GRANT USAGE FOR SCHEMAS IN DATABASE "<YOUR_DATABASE>" TO ROLE datadog_role;
+   GRANT SELECT FOR TABLES IN DATABASE "<YOUR_DATABASE>" TO ROLE datadog_role;
+   ```
+
+   **Option B: Specific schemas**
+
+   Run the following for each schema you want Datadog to monitor. It covers current and future tables and views in the schema, including ones created by other users such as dbt:
 
    ```sql
    GRANT USAGE ON SCHEMA "<YOUR_SCHEMA>" TO ROLE datadog_role;
-   GRANT SELECT ON ALL TABLES IN SCHEMA "<YOUR_SCHEMA>" TO ROLE datadog_role;
-   ALTER DEFAULT PRIVILEGES IN SCHEMA "<YOUR_SCHEMA>"
-     GRANT SELECT ON TABLES TO ROLE datadog_role;
+   GRANT SELECT FOR TABLES IN SCHEMA "<YOUR_SCHEMA>" TO ROLE datadog_role;
    ```
 
-   To generate grant statements for all schemas at once, run:
-
-   ```sql
-   SELECT
-       'GRANT USAGE ON SCHEMA "' || schema_name || '" TO ROLE datadog_role;' || '\n' ||
-       'GRANT SELECT ON ALL TABLES IN SCHEMA "' || schema_name || '" TO ROLE datadog_role;' || '\n' ||
-       'ALTER DEFAULT PRIVILEGES IN SCHEMA "' || schema_name || '" GRANT SELECT ON TABLES TO ROLE datadog_role;'
-         AS grant_statement
-   FROM svv_all_schemas
-   WHERE schema_name NOT IN ('information_schema', 'pg_catalog', 'pg_internal', 'catalog_history');
-   ```
-
-   Copy and run the output to apply grants to all schemas.
+   Schemas created later, such as dbt CI schemas, are not covered. Use Option A for dbt CI/CD.
 
 3. Create or assign the Datadog database user.
 
