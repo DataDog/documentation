@@ -113,14 +113,14 @@ The MCP server calls the following Datadog security binaries to perform scans. I
 
 | Binary                    | Used For      | Install Method                                |
 | ------------------------- | ------------- | --------------------------------------------- |
-| `datadog-static-analyzer` | SAST, Secrets, ephemeral SAST | `brew install datadog-static-analyzer` |
+| `datadog-static-analyzer` | SAST, Secrets, ephemeral SAST, custom rule saves | `brew install datadog-static-analyzer` |
 | `datadog-sbom-generator`  | SBOM, SCA     | [GitHub releases][10]                         |
 | `datadog-security-cli`    | SCA           | `brew install --cask datadog-security-cli`    |
 | `datadog-iac-scanner`     | IaC           | [GitHub releases][11]                         |
 
 <div class="alert alert-info"><code>datadog-security-cli</code> is not available on Windows, so SCA scans are not supported there. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
 
-Ephemeral SAST scans require `datadog-static-analyzer` version 0.9.10 or later.
+Ephemeral SAST scans and custom rule saves require `datadog-static-analyzer` version 0.9.10 or later.
 
 ### Configure your client
 
@@ -404,12 +404,12 @@ datadog-code-security-mcp ephemeral-scan \
   --code-file rule.js --query-file rule.scm
 ```
 
-Save an approved rule as a Datadog custom rule. This command uses `DD_API_KEY` and `DD_APP_KEY` from the shell:
+Save an approved rule as a Datadog custom rule. `--tests-file` is a JSON array with two examples, the fixed code and the code before the fix. This command uses `DD_API_KEY` and `DD_APP_KEY` from the shell:
 
 ```shell
 datadog-code-security-mcp promote-sast-rule --user-confirmed \
   --language TYPESCRIPT --rule-name missing-admin-check \
-  --code-file rule.js --query-file rule.scm
+  --code-file rule.js --query-file rule.scm --tests-file tests.json
 ```
 
 Scans use the saved rule only after the repository configuration lists its ruleset. Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. A new `code-security.datadog.yaml` hides that legacy file. See [Static Code Analysis configuration][31].
