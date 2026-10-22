@@ -44,7 +44,9 @@ This table shows the mapping of concepts between Datadog CI Visibility and Azure
 | Pipeline                   | Pipeline        |
 | Stage                      | Stage           |
 | Job                        | Job             |
-| _Not available in Datadog_ | Step            |
+| Step                       | Step            |
+
+**Note**: Steps are only available with the Datadog Integration setup method, not with Service Hook Subscriptions. Steps are collected on a best-effort basis because Datadog retrieves them from the Azure DevOps API, which enforces [rate limits][24]. Organizations with a high volume of pipeline executions may have some executions without steps. Missing steps are not backfilled, and pipeline, stage, and job data is not affected.
 
 ## Configure the Datadog integration
 {{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
@@ -202,3 +204,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[24]: https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops
