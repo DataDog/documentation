@@ -727,6 +727,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
+- `gpu-monitoring`: Tools for [GPU Monitoring][86], including identifying the frameworks a GPU workload runs, mapping its hardware footprint, checking training progress, diagnosing host and GPU hardware health, and analyzing self-hosted LLM inference deployments.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
@@ -999,3 +1000,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [83]: /logs/log_configuration/indexes/
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
+[86]: /gpu_monitoring/
