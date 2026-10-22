@@ -2590,6 +2590,7 @@ Lists retention filters and exclusion filters configured on a RUM application. E
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+- List the exclusion filters on my main RUM app.
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
