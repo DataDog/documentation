@@ -130,9 +130,9 @@ Cloud Security Vulnerabilities uses Common Vulnerability Scoring System version 
 
 ### Unknown severity
 
-A vulnerability has an **Unknown** severity when no CVSS score is available for it, from either the advisory or the [National Vulnerability Database (NVD)][8]. This is most common for:
+A vulnerability has an **Unknown** severity when neither the vendor advisory nor the [National Vulnerability Database (NVD)][8] provides a CVSS score. Unknown severity is most common for:
 
-- Old CVEs that don't have a CVSS score.
+- CVEs that were never scored, which is common for very old CVEs.
 - Vulnerabilities from advisory sources that don't publish CVSS scores, such as the Go vulnerability database.
 
 Because Datadog's risk-based adjustments are applied on top of the base CVSS score, the Datadog severity is also **Unknown** in these cases.
