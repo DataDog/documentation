@@ -32,6 +32,8 @@ Use the VRL processor to run a custom [Vector Remap Language (VRL)][1] script on
 1. Optionally, [test your script against a sample event](#test-your-script-against-a-sample-event).
 1. Click {{< ui >}}Add{{< /ui >}} (or {{< ui >}}Save{{< /ui >}} when editing an existing processor).
 
+{{< img src="events/pipelines/vrl_processor_create.png" alt="VRL processor form with the processor type, name, and a VRL script" style="width:80%;" >}}
+
 ### Test your script against a sample event
 
 Use the {{< ui >}}Test your script against a sample event{{< /ui >}} section to preview what your script does before you save it:
@@ -39,6 +41,8 @@ Use the {{< ui >}}Test your script against a sample event{{< /ui >}} section to 
 1. Paste a sample event as JSON in the {{< ui >}}Input{{< /ui >}} pane. You can use the JSON object from the {{< ui >}}Event Attributes{{< /ui >}} tab of the event side panel, and add the `message` and `tags` fields at the top level if your script uses them. To start from an example alert event, press <kbd>Tab</kbd> in the empty input.
 1. Click {{< ui >}}Run{{< /ui >}}.
 1. Review the result in the {{< ui >}}Output{{< /ui >}} tab. Messages from logging functions such as `log` appear in the {{< ui >}}Console{{< /ui >}} tab, and compile or runtime errors appear in the {{< ui >}}Errors{{< /ui >}} tab and are highlighted in the script editor.
+
+{{< img src="events/pipelines/vrl_processor_test_sample.png" alt="Testing a VRL script against a sample alert event, with the transformed event in the Output tab" style="width:80%;" >}}
 
 <div class="alert alert-warning">The test runs your script in your browser without any of the processor's validation. It does not check which fields can be modified, allowed values, value types, blocked functions, or the script size limit, so a script that works in the test can still be rejected when you save it, or leave events unchanged in the pipeline. Some functions, such as <code>get_hostname</code> and <code>parse_proto</code>, can't be simulated in the browser; when your script uses them, a warning indicates that the output might not match the pipeline.</div>
 
