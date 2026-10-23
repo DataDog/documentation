@@ -1,4 +1,5 @@
 .code-block {
+  margin-bottom: var(--space-md);
   border: var(--border-width) solid var(--color-panel-border);
   border-top: var(--border-width-highlight) solid var(--color-panel-accent);
   border-radius: var(--border-radius);
