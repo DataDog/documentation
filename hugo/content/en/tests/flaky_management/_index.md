@@ -304,5 +304,5 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [17]: /integrations/guide/source-code-integration/
 [18]: /api/latest/test-optimization/
 [19]: /tests/explorer/
-[20]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
+[20]: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [21]: /tests/setup/junit_xml/#adding-code-owners
