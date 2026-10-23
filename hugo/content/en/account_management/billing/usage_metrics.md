@@ -80,7 +80,7 @@ Estimated usage metrics are generally available for the following usage types:
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
 | Events Ingested               | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
-| Sensitive Data Scanner Scanned Bytes | `datadog.estimated_usage.sds.scanned_bytes` | Volume of data scanned by [Sensitive Data Scanner][8], in bytes. Applies to Logs, APM, RUM, and Events. |
+| Sensitive Data Scanner Scanned Bytes | `datadog.estimated_usage.sds.scanned_bytes` | Volume of data scanned by Sensitive Data Scanner, in bytes. Applies to Logs, APM, RUM, and Events. See [Monitor Sensitive Data Scanner usage][8]. |
 | Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
 | Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
 | Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
@@ -90,19 +90,6 @@ Estimated usage metrics are generally available for the following usage types:
 | Incident Management Monthly Active Users  | `datadog.estimated_usage.incident_management.monthly_active_users`  | Incident Management unique active users seen from (calendar) month-to-date (legacy billing).  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
-
-## Sensitive Data Scanner usage
-
-The `datadog.estimated_usage.sds.scanned_bytes` metric can be split by `product`, `service`, and `scanning_group_id`.
-
-- `scanning_group_id:global` can be ignored. It exists to avoid counting the same event multiple times when it is scanned by different scanning groups. Ignore or exclude it in your monitors and dashboards. It does not impact billing.
-- `service:unknown` groups all data that does not have a `service` tag.
-
-For example, to view scanned bytes by product and service while excluding the global scanning group, use the following query:
-
-```
-sum:datadog.estimated_usage.sds.scanned_bytes{!scanning_group_id:global} by {product,service}.as_count()
-```
 
 ## Setting tags for your by_tag Estimated Usage Metrics
 To set tag breakdowns in your by_tag Estimated Usage Metrics, configure your desired tags—such as team or env—on the [Usage Attribution][6] page (If you're on a PRO plan, you can request access to this feature through your [Customer Success Manager][2]). Changes take effect at the next 00:00 UTC.
@@ -136,5 +123,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
 [6]: /account_management/billing/usage_attribution/
 [7]: /account_management/billing/metric_name_pricing/
-[8]: /security/sensitive_data_scanner/
+[8]: /security/sensitive_data_scanner/guide/monitor-sds-usage/
 
