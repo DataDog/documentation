@@ -9,9 +9,6 @@ aliases:
 - '/developers/ide_plugins/idea/logs/'
 - '/ide_plugins/idea/logs/'
 further_reading:
-- link: "/tracing/error_tracking/"
-  tag: "Documentation"
-  text: "Learn more about Error Tracking"
 - link: "/security/code_security/"
   tag: "Documentation"
   text: "Learn more about Code Security"
@@ -22,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers who use Datadog products, such as [Code Security][24] and [Error Tracking][25], to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers who use Datadog products, such as [Code Security][24], to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
 
 {{< img src="/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -49,7 +46,7 @@ After installing the Datadog plugin and restarting the IDE, log in to Datadog:
 1. Click **Log in...**.
 1. In the browser window that opens, select your site and organization, then authorize access to the platform.
 
-**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
 
 ### Link a service
 
@@ -77,21 +74,9 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 
 {{< img src="/ide_plugins/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
-<div class="alert alert-info">To make the most of this feature, ensure that Source Code Integration is configured for your service.</div>
+<div class="alert alert-info">To make the most of this feature, configure Source Code Integration for your service.</div>
 
 ## Other features
-
-### Error Tracking
-
-<div class="alert alert-info">This feature is in limited support.</div>
-
-The [**Error Tracking**][25] integration helps you find and fix runtime errors from Error Tracking.
-
-{{< img src="/ide_plugins/idea/error_tracking/editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
-
-Click the gutter icon to open the Datadog tool window and inspect details of the runtime error.
-
-Find out more in the [Error Tracking][25] sub-section.
 
 ### Code Origin for Spans
 
@@ -130,7 +115,7 @@ If you don't wish to send this data to Datadog, you can disable the collection a
 
 ## Feedback
 
-You can give feedback in the [discussion forum][1], or send an e-mail to [team-ide-integration@datadoghq.com][11].
+You can give feedback in the [discussion forum][1], or send an email to [team-ide-integration@datadoghq.com][11].
 
 ## Further reading
 
@@ -160,4 +145,3 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [19]: /continuous_integration/
 [22]: /tracing/code_origin?tab=java
 [24]: /ide_plugins/idea/code_security/
-[25]: /ide_plugins/idea/error_tracking/
