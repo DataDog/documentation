@@ -8,9 +8,12 @@ further_reading:
   - link: '/integrations/anthropic-usage-and-costs/'
     tag: 'Documentation'
     text: 'Anthropic Usage and Costs integration'
-  - link: '/integrations/openai-usage-and-costs/'
+  - link: '/integrations/openai-codex/'
     tag: 'Documentation'
-    text: 'OpenAI Usage and Costs integration'
+    text: 'OpenAI Codex integration'
+  - link: '/integrations/openai/'
+    tag: 'Documentation'
+    text: 'OpenAI integration'
   - link: '/integrations/cursor/'
     tag: 'Documentation'
     text: 'Cursor integration'
@@ -38,9 +41,9 @@ The [Agent Console][1] provides centralized monitoring for AI tools across your 
 | Claude Code | Coding agent | [Anthropic Usage and Costs][2] integration or OpenTelemetry |
 | Cursor | Coding agent | [Cursor][3] integration |
 | GitHub Copilot | Coding agent | [GitHub Copilot][4] integration |
-| Codex | Coding agent | [OpenAI Usage and Costs][5] integration |
+| Codex | Coding agent | [OpenAI Codex][5] integration |
 | Claude Chat, Claude Cowork, Claude Design | Knowledge agent | [Anthropic Usage and Costs][2] integration |
-| ChatGPT Work | Knowledge agent | [OpenAI Usage and Costs][5] integration |
+| ChatGPT Work | Knowledge agent | [OpenAI][13] integration |
 | Microsoft Copilot 365 (Preview) | Knowledge agent | Microsoft Copilot integration. To request access, contact your Datadog account team. |
 | Other coding and desktop agents | Coding agent | [Trajectory][6] |
 
@@ -86,7 +89,7 @@ The {{< ui >}}My Usage{{< /ui >}} tab shows your own AI usage. It includes your 
 
 {{< img src="/ai_agents_console/agent_console_my_usage.png" alt="My Usage tab showing a personal daily spend chart stacked by provider and a task breakdown chart" style="width:100%;" >}}
 
-Use the side navigation to switch between {{< ui >}}Overview{{< /ui >}}, {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Productivity{{< /ui >}}, {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}}. The Models, Skills, Tools, and Sessions views use session data from [Trajectory][6].
+Use the side navigation to switch between {{< ui >}}Overview{{< /ui >}}, {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Productivity{{< /ui >}}, {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}}. The Tasks, Skills, Tools, and Sessions views use session data from [Trajectory][6]. The Models view uses data from your connected integrations.
 
 ## Usage
 
@@ -94,7 +97,7 @@ The {{< ui >}}Usage{{< /ui >}} tab provides the same views as My Usage, aggregat
 
 ### Tasks
 
-Agent Console classifies agent sessions into task categories, such as code implementation, engineering operations, and knowledge artifacts, and into more specific subcategories. The {{< ui >}}Tasks{{< /ui >}} view plots each category by its share of tasks and spend per active user, and lists the cost, cost per task, and number of tasks for each one.
+Agent Console classifies agent sessions captured with [Trajectory][6] into task categories, such as code implementation, engineering operations, and knowledge artifacts, and into more specific subcategories. The {{< ui >}}Tasks{{< /ui >}} view plots each category by its share of tasks and spend per active user, and lists the cost, cost per task, and number of tasks for each one.
 
 {{< img src="/ai_agents_console/agent_console_tasks.png" alt="Tasks view with a bubble chart of task categories by share of tasks and spend per active user, and a table of cost, cost per task, and task count" style="width:100%;" >}}
 
@@ -114,7 +117,9 @@ The {{< ui >}}Productivity{{< /ui >}} view gives you visibility into how individ
 
 ### Models, skills, tools, and sessions
 
-For agents captured with [Trajectory][6], the {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views show which models, skills, and tools agents use, and let you examine individual agent sessions.
+The {{< ui >}}Models{{< /ui >}} view shows which models your organization uses, based on data from your connected integrations.
+
+For agents captured with [Trajectory][6], the {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views show which skills and tools agents use, and let you examine individual agent sessions.
 
 ## Bits AI agents
 
@@ -132,7 +137,7 @@ Individual cards summarize activity for each Bits AI agent, including [Bits Inve
 [2]: /integrations/anthropic-usage-and-costs/
 [3]: /integrations/cursor/
 [4]: /integrations/github-copilot/
-[5]: /integrations/openai-usage-and-costs/
+[5]: /integrations/openai-codex/
 [6]: https://github.com/datadog-labs/trajectory
 [7]: https://github.com/datadog-labs/trajectory/blob/main/docs/SUPPORTED-CLIENTS.md
 [8]: /ai_agents_console/setup/
@@ -140,3 +145,4 @@ Individual cards summarize activity for each Bits AI agent, including [Bits Inve
 [10]: /bits_ai/bits_investigation/
 [11]: /bits_ai/bits_code/
 [12]: /actions/agents/
+[13]: /integrations/openai/?tab=apikey

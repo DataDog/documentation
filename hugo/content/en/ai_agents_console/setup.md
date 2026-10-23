@@ -8,9 +8,12 @@ further_reading:
   - link: '/integrations/anthropic-usage-and-costs/'
     tag: 'Documentation'
     text: 'Anthropic Usage and Costs integration'
-  - link: '/integrations/openai-usage-and-costs/'
+  - link: '/integrations/openai-codex/'
     tag: 'Documentation'
-    text: 'OpenAI Usage and Costs integration'
+    text: 'OpenAI Codex integration'
+  - link: '/integrations/openai/'
+    tag: 'Documentation'
+    text: 'OpenAI integration'
   - link: '/integrations/cursor/'
     tag: 'Documentation'
     text: 'Cursor integration'
@@ -122,9 +125,13 @@ To set up Agent Console for Claude Code across your organization, your IT team c
 
 After you restart Claude Code, metrics (usage, cost, latency, errors) appear in Agent Console within a few minutes.
 
-### Codex and ChatGPT Work
+### Codex
 
-To monitor Codex and ChatGPT Work, set up the [OpenAI Usage and Costs][5] integration. The integration collects daily usage, credits, code attribution, and review analytics for Codex, and activity, token, and estimated cost analytics for ChatGPT Work.
+To monitor Codex, set up the [OpenAI Codex][5] integration. The integration collects daily usage, credits, code attribution, and review analytics.
+
+### ChatGPT Work
+
+To monitor ChatGPT Work, set up the [OpenAI][12] integration. The integration collects activity, token, and estimated cost analytics.
 
 ### Cursor
 
@@ -146,7 +153,7 @@ The Microsoft Copilot integration collects daily Microsoft 365 Copilot adoption 
 
 [Trajectory][8] is an open source tool that captures sessions from more than 30 coding and desktop agents, such as Claude Code, Claude Desktop, Codex CLI, Cursor, Cline, Windsurf, and Zed, and sends them to Datadog. For the full list and version requirements, see [Supported Clients][9].
 
-Trajectory session data powers the {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views in Agent Console.
+Trajectory session data powers the {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views in Agent Console.
 
 {{< tabs >}}
 {{% tab "Individual developers" %}}
@@ -220,10 +227,11 @@ After you connect your tools, open the [Agent Console][1] and check that each co
 [2]: https://app.datadoghq.com/organization-settings/roles
 [3]: /integrations/anthropic-usage-and-costs/
 [4]: https://code.claude.com/docs/en/server-managed-settings
-[5]: /integrations/openai-usage-and-costs/
+[5]: /integrations/openai-codex/
 [6]: /integrations/cursor/?tab=datadogextensionforcursor
 [7]: /integrations/github-copilot/
 [8]: https://github.com/datadog-labs/trajectory
 [9]: https://github.com/datadog-labs/trajectory/blob/main/docs/SUPPORTED-CLIENTS.md
 [10]: /integrations/github/
 [11]: /integrations/jira/
+[12]: /integrations/openai/?tab=apikey
