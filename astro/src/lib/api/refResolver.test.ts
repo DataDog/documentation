@@ -1529,6 +1529,27 @@ describe("row levels under an array of oneOf", () => {
     const belowCap = deepestNext(schemaToFields({}, nestedUnion(10)));
     expect(belowCap.unionOptions).toHaveLength(2);
   });
+
+  it("keeps a scalar option's enum values on an option row at the cap, as Hugo does", () => {
+    const enumBranch = { type: "string", enum: ["avg", "max"], default: "avg" };
+    /** `next` rows down to `depth`, then a oneOf with an enum branch. */
+    const nestedEnumUnion = (depth: number): any =>
+      depth === 0
+        ? { oneOf: [enumBranch, { type: "integer" }] }
+        : { type: "object", properties: { next: nestedEnumUnion(depth - 1) } };
+    const deepestNext = (fields: SchemaField[]): SchemaField =>
+      fields[0].children ? deepestNext(fields[0].children) : fields[0];
+
+    const [enumOption, integerOption] =
+      deepestNext(schemaToFields({}, nestedEnumUnion(10))).unionOptions ?? [];
+    expect(enumOption).toMatchObject({
+      type: "enum",
+      enumValues: ["avg", "max"],
+      defaultValue: "avg",
+      fields: [],
+    });
+    expect(integerOption).toMatchObject({ type: "integer", fields: [] });
+  });
 });
 
 describe("$ref chains", () => {
