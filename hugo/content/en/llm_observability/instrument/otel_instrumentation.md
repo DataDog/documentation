@@ -25,9 +25,9 @@ To send [external evaluations directly to the API](/llm_observability/investigat
 
 For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt Tracking - OpenTelemetry Instrumentation](/llm_observability/instrument/prompt_tracking#opentelemetry-instrumentation).
 
-### Experiments
+### Offline Experiments
 
-You can use OpenTelemetry spans inside [Agent Observability Experiments][55]. By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+You can use OpenTelemetry spans inside [Agent Observability Offline Experiments][55]. By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
 ### Multimodal support
 
@@ -498,7 +498,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
    | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
    | Header | `dd-api-key`: `<YOUR_API_KEY>` |
    | Header | `dd-otlp-source`: `llmobs` |
-   
+
    The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
    ```typescript
@@ -1205,4 +1205,4 @@ with tracer.start_as_current_span("my-span") as span:
 [17]: https://sdk.vercel.ai/
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
-[55]: /llm_observability/guide/experiments#using-opentelemetry-spans-inside-experiments
+[55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
