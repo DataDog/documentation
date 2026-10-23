@@ -649,7 +649,9 @@ components:
       schema:
         type: string
     GetIssueIncludeQueryParameter:
-      description: Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `case`, and `team_owners`.
+      description: |-
+        Comma-separated list of relationship objects that should be included in the response.
+        Possible values are `assignee`, `case`, `team_owners`, and `samples`.
       explode: false
       in: query
       name: include
@@ -657,6 +659,18 @@ components:
       schema:
         items:
           $ref: "#/components/schemas/GetIssueIncludeQueryParameterItem"
+        type: array
+    GetIssueSamplesBiasesFilterParameter:
+      description: |-
+        Comma-separated list of biases used to pick the samples returned with `include=samples`.
+        Requires `include=samples`. Defaults to all biases.
+      explode: false
+      in: query
+      name: filter[samples.biases]
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/IssueSampleBias"
         type: array
     GoogleChatHandleIdPathParameter:
       description: Your organization handle ID.
@@ -55598,12 +55612,14 @@ components:
         - assignee
         - case
         - team_owners
+        - samples
       example: "case"
       type: string
       x-enum-varnames:
         - ASSIGNEE
         - CASE
         - TEAM_OWNERS
+        - SAMPLES
     GetMappingResponse:
       description: Response containing the entity attribute mapping configuration including all available attributes and their properties.
       example:
@@ -66260,6 +66276,7 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssueSample"
     IssueLanguage:
       description: Programming language associated with the issue.
       enum:
@@ -66383,6 +66400,8 @@ components:
           $ref: "#/components/schemas/IssueAssigneeRelationship"
         case:
           $ref: "#/components/schemas/IssueCaseRelationship"
+        samples:
+          $ref: "#/components/schemas/IssueSamplesRelationship"
         team_owners:
           $ref: "#/components/schemas/IssueTeamOwnersRelationship"
       type: object
@@ -66396,6 +66415,293 @@ components:
           items:
             $ref: "#/components/schemas/IssueIncluded"
           type: array
+      type: object
+    IssueSample:
+      description: An error event of the issue, picked because it satisfies one or more sample biases.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueSampleAttributes"
+        id:
+          description: Sample identifier.
+          example: "AwAAAZPHnBVMDCSmFgAAABhBWlBIbkJWTUFBRDVnUkhKTmY0WmhRQUEAAAAkMDE5M2M3OWMtMTg1OC00ZTE1LWFhMmItOTQ1N2ZkOGVlMzQyAAAAAA"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueSampleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueSampleAttributes:
+      description: Object containing the information of a sample.
+      properties:
+        application_id:
+          description: RUM application identifier of the error.
+          example: "40d8ca4b-2ac0-481f-b16e-f110699ecff6"
+          type: string
+        biases:
+          description: Biases the sample satisfies. A single error can satisfy several biases.
+          example: ["latest", "git_metadata"]
+          items:
+            $ref: "#/components/schemas/IssueSampleBias"
+          type: array
+        build_id:
+          description: Build identifier of the mobile application.
+          example: "a1b2c3"
+          type: string
+        bundle_version:
+          description: Bundle version of the mobile application.
+          example: "42"
+          type: string
+        data_source:
+          $ref: "#/components/schemas/IssueSampleDataSource"
+        debug_id:
+          description: Debug identifier used to resolve the stack trace of the error to source code.
+          example: "9d8c7b6a-5f4e-3d2c-1b0a-9f8e7d6c5b4a"
+          type: string
+        debug_info_captured:
+          description: Whether an Exception Replay snapshot was captured for the error.
+          example: false
+          type: boolean
+        error_source_type:
+          description: Source type set by the SDK or tracer that reported the error, such as `browser` for RUM browser errors or `Crashtracking` for backend crash reports. Usually not set for APM and logs errors.
+          example: "browser"
+          type: string
+        error_stack:
+          $ref: "#/components/schemas/IssueSampleErrorStack"
+        event:
+          $ref: "#/components/schemas/IssueSampleEvent"
+        git_commit_sha:
+          description: Git commit SHA of the service version.
+          example: "b6199f80b6199f80b6199f80b6199f80b6199f80"
+          type: string
+        git_repository_id:
+          description: Git repository identifier of the service.
+          example: "github.com/company/email-api-py"
+          type: string
+        git_repository_url:
+          description: Git repository URL of the service.
+          example: "https://github.com/company/email-api-py"
+          type: string
+        has_session_replay:
+          description: Whether a RUM session replay is available for the error.
+          example: true
+          type: boolean
+        language:
+          description: Programming language of the service.
+          example: "python"
+          type: string
+        links:
+          description: Source code locations of the stack frames that resolve to a repository file.
+          items:
+            $ref: "#/components/schemas/IssueSampleFrameLink"
+          type: array
+        os_name:
+          description: Operating system of the device that reported the error.
+          example: "iOS"
+          type: string
+        service:
+          description: Service name.
+          example: "email-api-py"
+          type: string
+        session_id:
+          description: RUM session identifier of the error.
+          example: "72d11fa0-7f59-408a-95ff-9af7d4f8d7db"
+          type: string
+        session_replay_url:
+          description: URL of the RUM session replay of the error.
+          example: "https://app.datadoghq.com/rum/replay/sessions/72d11fa0-7f59-408a-95ff-9af7d4f8d7db"
+          type: string
+        snapshot_id:
+          description: Identifier of the Exception Replay snapshot of the error.
+          example: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+          type: string
+        span_id:
+          description: APM span identifier of the error.
+          example: "3906394766563720946"
+          type: string
+        timestamp:
+          description: Timestamp of the error.
+          example: "2024-01-01T10:00:00Z"
+          format: date-time
+          type: string
+        trace_id:
+          description: APM trace identifier of the error.
+          example: "6730183925457637287"
+          type: string
+        variant:
+          description: Build variant of the mobile application.
+          example: "release"
+          type: string
+        version:
+          description: Version of the service.
+          example: "1.2.3"
+          type: string
+        view_id:
+          description: RUM view identifier of the error.
+          example: "c5c02423-c03a-400a-993f-731bebf1732b"
+          type: string
+      required:
+        - timestamp
+        - error_stack
+      type: object
+    IssueSampleBias:
+      description: |-
+        Criterion used to pick a sample. `latest` picks the most recent error. `git_metadata` picks the most
+        recent error with source code metadata, whose stack trace is parsed. `trace` picks the most recent error
+        with an APM trace. `session_replay` picks the most recent error with a RUM session replay.
+        `exception_replay` picks the most recent error with an Exception Replay snapshot.
+      enum:
+        - latest
+        - git_metadata
+        - trace
+        - session_replay
+        - exception_replay
+      example: "latest"
+      type: string
+      x-enum-varnames:
+        - LATEST
+        - GIT_METADATA
+        - TRACE
+        - SESSION_REPLAY
+        - EXCEPTION_REPLAY
+    IssueSampleCodeSnippet:
+      description: Source code around a stack frame. Empty when the source code is unavailable.
+      properties:
+        lines:
+          description: Lines of source code.
+          example: ["def filter_forbidden_tags(tags):", "    return len(tags)"]
+          items:
+            type: string
+          type: array
+        offset:
+          description: Line number of the first line of the snippet, starting at 1.
+          example: 37
+          format: int64
+          type: integer
+      type: object
+    IssueSampleDataSource:
+      description: Product that reported the error. `NONE` when the error has no known origin.
+      enum:
+        - APM
+        - LOGS
+        - RUM
+        - LLMOBS
+        - SYNTHETICS
+        - NONE
+      example: "APM"
+      type: string
+      x-enum-varnames:
+        - APM
+        - LOGS
+        - RUM
+        - LLMOBS
+        - SYNTHETICS
+        - NONE
+    IssueSampleErrorStack:
+      description: Parsed stack trace of the error. Only the sample picked by the `git_metadata` bias has frames.
+      properties:
+        frames:
+          description: Stack frames, from the top of the stack.
+          items:
+            $ref: "#/components/schemas/IssueSampleStackFrame"
+          type: array
+        language:
+          description: Language the stack trace was parsed as.
+          example: "go"
+          type: string
+      type: object
+    IssueSampleEvent:
+      additionalProperties: {}
+      description: Raw error event, as stored by its data source. Its fields differ between APM, logs, and RUM.
+      type: object
+    IssueSampleFrameLink:
+      description: Source code location of a stack frame.
+      properties:
+        code_location:
+          $ref: "#/components/schemas/IssueSampleGitFileLocation"
+        frame_id:
+          description: Index of the frame in the stack trace, starting at 0.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - frame_id
+        - code_location
+      type: object
+    IssueSampleGitFileLocation:
+      description: Location of a stack frame in a repository file. Empty when the source code is unavailable.
+      properties:
+        column:
+          description: Column of the location, starting at 1.
+          example: 13
+          format: int64
+          type: integer
+        filepath:
+          description: Path of the file in the repository.
+          example: "conduit/apps/core/utils.py"
+          type: string
+        first_line:
+          description: First line of the location, starting at 1.
+          example: 42
+          format: int64
+          type: integer
+        last_line:
+          description: Last line of the location, starting at 1.
+          example: 42
+          format: int64
+          type: integer
+        ref:
+          description: Git reference of the file, usually a commit SHA.
+          example: "b6199f80b6199f80b6199f80b6199f80b6199f80"
+          type: string
+        repo_id:
+          description: Repository identifier.
+          example: "github.com/company/email-api-py"
+          type: string
+      type: object
+    IssueSampleReference:
+      description: A curated error sample of the issue.
+      properties:
+        id:
+          description: Sample identifier.
+          example: "AwAAAZPHnBVMDCSmFgAAABhBWlBIbkJWTUFBRDVnUkhKTmY0WmhRQUEAAAAkMDE5M2M3OWMtMTg1OC00ZTE1LWFhMmItOTQ1N2ZkOGVlMzQyAAAAAA"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueSampleType"
+      required:
+        - id
+        - type
+      type: object
+    IssueSampleStackFrame:
+      description: A stack frame.
+      properties:
+        code_snippet:
+          $ref: "#/components/schemas/IssueSampleCodeSnippet"
+        git_file_location:
+          $ref: "#/components/schemas/IssueSampleGitFileLocation"
+        text:
+          description: Text of the frame, as it appears in the stack trace.
+          example: "main.handler(0xc000123456)\n\t/go/src/app/main.go:42 +0x1d"
+          type: string
+      type: object
+    IssueSampleType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_sample"]
+      example: "error_tracking_issue_sample"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_SAMPLE
+    IssueSamplesRelationship:
+      description: Relationship between the issue and its curated error samples.
+      properties:
+        data:
+          description: Array of curated error samples of the issue.
+          items:
+            $ref: "#/components/schemas/IssueSampleReference"
+          type: array
+      required:
+        - data
       type: object
     IssueState:
       description: State of the issue
@@ -169142,6 +169448,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/IssueIDPathParameter"
         - $ref: "#/components/parameters/GetIssueIncludeQueryParameter"
+        - $ref: "#/components/parameters/GetIssueSamplesBiasesFilterParameter"
       responses:
         "200":
           content:
