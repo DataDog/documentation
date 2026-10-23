@@ -18,7 +18,7 @@ This guide goes over how to upgrade to a specific Worker version and the updates
 
 To upgrade to Worker version 2.24.1:
 
-- Docker: Run the `docker pull` command for the [2.24.1 image][61].
+- Docker: Run the `docker pull` command for the [2.24.1 image][58].
 - Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.24.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.1`.
@@ -27,20 +27,20 @@ Worker version 2.24.1 gives you access to the following:
 
 #### Security
 
-- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the [eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised](https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe), even when the issuing root CA is trusted. This applies to components that use rustls.
-<br><br>Components that use OpenSSL, the Amazon Security Lake destination's AWS account lookup, and the Google Cloud Pub/Sub source use the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3` root CA, which protects these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were [reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted. This applies to components that use rustls.
+<br><br>Components that use OpenSSL, the Amazon Security Lake destination's AWS account lookup, and the Google Cloud Pub/Sub source use the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3`, which protects these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
 <br><br>For APT and RPM package installations, distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
 
 #### Fixes
 
-- Fixed an issue where search queries with `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes, silently dropped operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss events it should have matched because of the wildcard.
-- In search queries, regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in wildcard patterns are now treated as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
+- Fixed an issue where search queries with `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes, silently dropped operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss matching events because of the wildcard.
+- The Worker now treats regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in search query wildcard patterns as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
 
 ## Worker version 2.24.0
 
 To upgrade to Worker version 2.24.0:
 
-- Docker: Run the `docker pull` command for the [2.24.0 image][60].
+- Docker: Run the `docker pull` command for the [2.24.0 image][57].
 - Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.24.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.0`.
@@ -54,22 +54,22 @@ Worker version 2.24.0 gives you access to the following:
 #### Enhancements
 
 - The Enrichment Table processor:
-    - Reports the `enrichment_distinct_lookup_keys_total` metric, which is an estimate of distinct lookup keys summed across one-second windows.
+    - Reports the `enrichment_distinct_lookup_keys_total` metric, which is an estimate of distinct lookup keys summed across 1-second windows.
     - Has improved performance during large cache fills.
     - Reloads table values every 30 seconds. If a reload fails, the processor keeps using the last valid table until a reload succeeds.
-    - Caches up to one million Reference Table rows locally for one hour, which improves handling of large tables.
+    - Caches up to 1 million Reference Table rows locally for 1 hour, which improves handling of large tables.
     - Adds an `outcome` tag to its fetched-keys metric to identify failed lookup attempts.
     - Has a default buffer size of 20,000 events or 100 MiB, and a maximum of 100,000 events.
 - The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option.
 - The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
-- The Custom Processor's performance has been improved, including more efficient field lookups and string functions.
-- The Worker's configuration startup performance has been improved.
+- The Custom Processor has improved performance, including more efficient field lookups and string functions.
+- The Worker has improved configuration startup performance.
+- The `pipelines.quota_fill` metric now has a `quota_name` tag. The Worker keeps the legacy `name` tag for backward compatibility.
 
 #### Fixes
 
-- The Sensitive Data Scanner processor's library rules now use pattern capture groups, which were previously ignored, to preserve non-sensitive context around the captured value. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
-- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse, because the cause is unexpected input data, not a Worker problem. The Parse JSON processor's error message also names the field that failed to parse, rather than the generic word `source`.
-- The `pipelines.quota_fill` metric now has a `quota_name` tag. The legacy `name` tag is kept for backward compatibility.
+- The Sensitive Data Scanner processor's library rules now use pattern capture groups to preserve non-sensitive context around the captured value. Previously, the Worker ignored capture groups. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
+- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse. The Parse JSON processor's error message also names the field that failed to parse, rather than the generic word `source`.
 - Fixed issues with disk buffers and configuration reloads.
 - The OpenTelemetry source now preserves native OTLP log event names.
 - The Prometheus source now identifies metrics ending with `_total` as counters.
@@ -104,7 +104,7 @@ Worker version 2.23.0 gives you access to the following:
 
 #### Fixes
 
-- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable, the Worker looked for these files in the default data directory and rejected valid files as missing.
+- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, the Worker looked for these files in the default data directory if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable. As a result, the Worker rejected valid files as missing.
 - TCP acknowledgment and TLS connection error logs for sources now include the remote `peer_addr`.
 - The Custom Processor's `uuid_v7` function now preserves the supplied timestamp at millisecond precision.
 
@@ -924,5 +924,6 @@ Worker version 2.7.0 gives you access to the following:
 [54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
 [55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
 [56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
-[60]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.0
-[61]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.1
+[57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.0
+[58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.1
+[59]: https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe
