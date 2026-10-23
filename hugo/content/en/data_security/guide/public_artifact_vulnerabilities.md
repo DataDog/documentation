@@ -22,7 +22,7 @@ Open the [Public Artifact Vulnerabilities page][1], or go to the Help page and c
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">The Public Artifact Vulnerabilities page is not available on the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Use the page on the US1 site instead: <code>https://app.datadoghq.com/public-artifact-vulnerabilities</code>. You don't need a US1 account to view it.</div>
+<div class="alert alert-warning">The Public Artifact Vulnerabilities page is not available on the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). View it at <code>https://app.datadoghq.com/public-artifact-vulnerabilities</code> instead. You don't need to log in to view this page.</div>
 {{< /site-region >}}
 
 ## Using the page
