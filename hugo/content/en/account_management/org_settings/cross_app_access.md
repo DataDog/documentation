@@ -176,7 +176,7 @@ Okta does not filter scopes. With {{< ui >}}Allow all{{< /ui >}}, Okta copies wh
 
 To set the scopes Claude is allowed:
 
-1. Navigate to [{{< ui >}}Organization Settings > Mobile and Third-Party Access{{< /ui >}}](https://app.datadoghq.com/organization-settings/mobile-third-party-access). You can also click {{< ui >}}Manage app{{< /ui >}} next to Claude in the {{< ui >}}Registered client IDs{{< /ui >}} table on the Cross-App Access page.
+1. Navigate to [{{< ui >}}Organization Settings > Mobile and Third-Party Access{{< /ui >}}](https://app.datadoghq.com/organization-settings/oauth-applications). You can also click {{< ui >}}Manage app{{< /ui >}} next to Claude in the {{< ui >}}Registered client IDs{{< /ui >}} table on the Cross-App Access page.
 2. Select the Claude application, then select the {{< ui >}}Scopes{{< /ui >}} tab.
 3. Use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control what Claude reaches.
 4. Click {{< ui >}}Enable{{< /ui >}} to save.
