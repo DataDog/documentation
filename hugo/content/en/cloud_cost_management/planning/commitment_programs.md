@@ -11,7 +11,7 @@ further_reading:
   CCM Commitment Programs supports the following cloud commitments:
   <ul>
     <li><strong>AWS:</strong> Reserved Instances and Savings Plans for EC2, RDS, and ElastiCache.</li>
-    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services. Utilization and unused costs require <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>. Also supports <a href="#azure-databricks-pre-purchase-plans">Azure Databricks pre-purchase plans</a>.</li>
+    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services, with <a href="#azure-databricks-pre-purchase-plans">pre-purchase plans available for Azure Databricks</a>. Viewing utilization and unused costs for reservations and savings plans requires <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
     <li><strong>Google Cloud:</strong> Compute flexible committed use discounts (CUDs).</li>
   </ul>
 </div>
