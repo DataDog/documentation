@@ -106256,6 +106256,8 @@ components:
         id:
           description: The `RoleTemplateData` `id`.
           type: string
+        relationships:
+          $ref: "#/components/schemas/RoleResponseRelationships"
         type:
           $ref: "#/components/schemas/RoleTemplateDataType"
       required:
@@ -219057,8 +219059,14 @@ paths:
                   value:
                     data:
                       - attributes:
+                          description: Role template with permissions for standard access.
                           name: Datadog Standard Role
-                        id: 00000000-0000-0000-0000-000000000012
+                        id: "2"
+                        relationships:
+                          permissions:
+                            data:
+                              - id: 984d2ee2-dbb1-11e8-a1b5-1b33e7f4e7a0
+                                type: permissions
                         type: roles
               schema:
                 $ref: "#/components/schemas/RoleTemplateArray"
