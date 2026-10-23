@@ -125,7 +125,7 @@ Users in the selected roles receive the Datadog connector the first time they lo
 
 ## Finish the setup for the Okta issuer
 
-Follow these steps if you use the Okta issuer. Complete them in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. See [Okta's Cross-App Access documentation][6] for more details.
+If you use the Okta issuer, complete the following steps in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. See [Okta's Cross-App Access documentation][6] for more details.
 
 ### Configure the Datadog application as a resource server
 
@@ -179,7 +179,7 @@ On the Claude AI Agent, add the Claude SAML application as a delegated caller, t
 2. Find **Datadog** in the directory and enable the connector.
 3. Complete the sign-in flow when prompted.
 
-Use the Datadog connector from the directory, not a custom connector.
+**Note**: Use the Datadog connector from the directory, not a custom connector.
 
 ## Control scopes in Datadog
 
@@ -193,12 +193,12 @@ If you use the Claude issuer, the scopes you select in Claude's {{< ui >}}Scopes
 
 To set the scopes Claude is allowed in Datadog:
 
-1. Navigate to [{{< ui >}}Organization Settings > Mobile and Third-Party Access{{< /ui >}}][7]. You can also click {{< ui >}}Manage app{{< /ui >}} next to Claude in the {{< ui >}}Registered client IDs{{< /ui >}} table on the Cross-App Access page.
+1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Mobile and Third-Party Access{{< /ui >}}][7]. You can also click {{< ui >}}Manage app{{< /ui >}} next to Claude in the {{< ui >}}Registered client IDs{{< /ui >}} table on the Cross-App Access page.
 2. Select the Claude application, then select the {{< ui >}}Scopes{{< /ui >}} tab.
 3. Use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control what Claude reaches.
 4. Click {{< ui >}}Enable{{< /ui >}} to save.
 
-Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][8].
+**Note**: Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][8].
 
 ## Verify the configuration
 
