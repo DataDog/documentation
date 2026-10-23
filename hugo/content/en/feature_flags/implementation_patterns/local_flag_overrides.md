@@ -302,7 +302,7 @@ func initializeFeatureFlags() error {
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-info">The Java Multi-Provider API is experimental and may change in future releases.</div>
+<div class="alert alert-info">The Java Multi-Provider API is experimental and may change in future releases. For Datadog exposure delivery and repeat detection, use OpenFeature SDK 1.23.0 or later. See <a href="/feature_flags/server/java/#customer-exposure-hooks">Customer exposure hooks</a>.</div>
 
 {{< code-block lang="java" >}}
 private static final String OVERRIDE_ENV_PREFIX = "FF_";
