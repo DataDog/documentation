@@ -151,8 +151,6 @@ Track Azure Databricks pre-purchase plans using your existing Azure Cloud Cost M
 
 If a plan is missing, check that its purchase is included in your [historical Azure cost data][6].
 
-> **Screenshot placeholder:** Add an Azure Databricks pre-purchase plan inventory screenshot showing balances and expiration dates. Replace this placeholder before publication.
-
 ## Example use cases
 
 ### Identify underutilized commitments
