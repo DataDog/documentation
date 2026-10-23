@@ -2,7 +2,7 @@ import { parse as parseYaml } from "yaml";
 import { z } from "zod";
 import PARAMS_EN_YAML_RAW from "@hugo-site/config/_default/params.en.yaml?raw";
 
-const BannerParamsSchema = z.object({
+export const BannerParamsSchema = z.object({
   desktop_message: z.string().optional(),
   mobile_message: z.string().optional(),
   background_color: z.string().optional(),
@@ -15,6 +15,7 @@ const BannerParamsSchema = z.object({
   icon_color: z.string().optional(),
   custom_event_banner: z.boolean().optional(),
   html: z.boolean().optional(),
+  hide_on_mobile: z.boolean().optional(),
 });
 
 export type BannerParams = z.infer<typeof BannerParamsSchema>;

@@ -145,6 +145,35 @@ describe("AnnouncementBanner", () => {
       );
     });
 
+    it("marks the banner hidden on mobile when hide_on_mobile is set", async () => {
+      // Mirrors Hugo's `announcement-banner--hide-mobile` class and
+      // `data-hide-on-mobile` attribute from websites-modules.
+      const container = await AstroContainer.create();
+      const html = await container.renderToString(AnnouncementBanner, {
+        props: {
+          override: {
+            desktop_message: "Desktop only",
+            hide_on_mobile: true,
+          },
+        },
+      });
+
+      expect(html).toMatch(
+        /<div[^>]*class="[^"]*\bannouncement-banner--hide-mobile\b/,
+      );
+      expect(html).toMatch(/<div[^>]*data-hide-on-mobile="true"/);
+    });
+
+    it("does not mark the banner hidden on mobile by default", async () => {
+      const container = await AstroContainer.create();
+      const html = await container.renderToString(AnnouncementBanner, {
+        props: { override: { desktop_message: "Everywhere" } },
+      });
+
+      expect(html).not.toContain("announcement-banner--hide-mobile");
+      expect(html).not.toContain("data-hide-on-mobile");
+    });
+
     it("renders a custom-event banner as a <p> without a link", async () => {
       const container = await AstroContainer.create();
       const html = await container.renderToString(AnnouncementBanner, {

@@ -7,14 +7,16 @@ import BaseLayout from "./BaseLayout.astro";
 
 const parserWindow = new Window();
 
-async function renderBaseLayout(): Promise<Document> {
+async function renderBaseLayout(
+  props: Record<string, unknown> = {},
+): Promise<Document> {
   const container = await AstroContainer.create();
   container.addServerRenderer({
     renderer: preactRenderer,
     name: "@astrojs/preact",
   });
   const html = await container.renderToString(BaseLayout, {
-    props: { title: "Test page" },
+    props: { title: "Test page", ...props },
   });
   return new parserWindow.DOMParser().parseFromString(
     html,
@@ -33,5 +35,28 @@ describe("BaseLayout.astro", () => {
     const html = doc.querySelector("html");
     expect(html).not.toBeNull();
     expect(html?.getAttribute("data-commit-ref")).toBeNull();
+  });
+
+  it("adds announcement--hide-mobile to <body> for a hide_on_mobile banner", async () => {
+    // The body class zeroes the banner offset below 768px (tokens/hugo.css).
+    const doc = await renderBaseLayout({
+      announcementBanner: {
+        desktop_message: "Desktop only",
+        hide_on_mobile: true,
+      },
+    });
+    const bodyClasses = doc.body.classList;
+    expect(bodyClasses.contains("announcement")).toBe(true);
+    expect(bodyClasses.contains("announcement--hide-mobile")).toBe(true);
+  });
+
+  it("omits announcement--hide-mobile for a banner shown everywhere", async () => {
+    const doc = await renderBaseLayout({
+      announcementBanner: { desktop_message: "Everywhere" },
+    });
+    expect(doc.body.classList.contains("announcement")).toBe(true);
+    expect(doc.body.classList.contains("announcement--hide-mobile")).toBe(
+      false,
+    );
   });
 });
