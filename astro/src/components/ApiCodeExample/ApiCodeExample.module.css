@@ -37,17 +37,14 @@
 }
 
 .api-code-example__accordion-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  width: 100%;
   background: var(--color-bg-hover);
   border: none;
   cursor: pointer;
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
   padding: var(--space-sm) var(--space-md);
   text-align: left;
-  color: var(--color-text);
+  color: var(--color-text-muted);
   list-style: none;
 }
 
@@ -67,8 +64,16 @@
 
 .api-code-example__accordion-icon {
   flex-shrink: 0;
+  font-size: var(--font-size-base);
   color: var(--color-text-muted);
   transition: transform 0.15s ease;
+}
+
+.api-code-example__accordion-header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
 }
 
 .api-code-example__accordion .api-code-example__code-block {
