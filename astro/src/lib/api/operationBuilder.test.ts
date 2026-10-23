@@ -252,6 +252,48 @@ describe("extractRequestBody content types", () => {
   });
 });
 
+describe("extractRequestBody request files", () => {
+  const body = {
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object" as const,
+          properties: { title: { type: "string" as const } },
+        },
+        examples: { spec: { summary: "Spec", value: { title: "from-spec" } } },
+      },
+    },
+  } as OpenAPIV3.RequestBodyObject;
+  const requestFileExamples = [
+    { name: "First file", value: '{\n  "title": "first"\n}' },
+    { name: "Second file", value: '{\n  "title": "second"\n}' },
+  ];
+
+  // Prod's Example tab shows Hugo's request files, never the spec's examples.
+  it("shows the request files in place of the spec's examples", () => {
+    const extracted = extractRequestBody(
+      spec,
+      { responses: {}, requestBody: body },
+      requestFileExamples,
+    );
+
+    expect(extracted?.examples).toEqual(requestFileExamples);
+  });
+
+  it("falls back to the spec's examples when there are no request files", () => {
+    const extracted = extractRequestBody(
+      spec,
+      { responses: {}, requestBody: body },
+      [],
+    );
+
+    expect(extracted?.examples.map((example) => example.name)).toEqual([
+      "Spec",
+    ]);
+  });
+});
+
 describe("extractResponses content types", () => {
   const objectSchema = (field: string) => ({
     type: "object" as const,

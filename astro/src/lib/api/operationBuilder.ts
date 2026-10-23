@@ -154,6 +154,7 @@ function isJsonMediaType(mediaType: string): boolean {
 export function extractRequestBody(
   spec: OpenAPIV3.Document,
   operation: OpenAPIV3.OperationObject,
+  requestFileExamples: Array<{ name: string; value: string }> = [],
 ): RequestBodyData | undefined {
   const rb = operation.requestBody;
   if (!rb) return undefined;
@@ -194,7 +195,11 @@ export function extractRequestBody(
     };
   }
 
-  if (bodyContent.examples && typeof bodyContent.examples === "object") {
+  // Prod's Example tab shows Hugo's request files when the operation has any,
+  // and never the spec's examples alongside them.
+  if (requestFileExamples.length > 0) {
+    examples.push(...requestFileExamples);
+  } else if (bodyContent.examples && typeof bodyContent.examples === "object") {
     for (const [name, exampleObj] of Object.entries(bodyContent.examples)) {
       const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
         ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)

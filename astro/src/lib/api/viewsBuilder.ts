@@ -60,6 +60,7 @@ import {
   getCodeExamplesForOperation,
   getLanguageRunInfo,
 } from "./codeExampleLoader";
+import { getRequestFileExamples } from "./requestFileLoader";
 import type { CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
@@ -669,7 +670,15 @@ function buildLocalizedRequestBodyForOperation(
   op: RawOperation,
   action: ActionTranslation,
 ): RequestBodyData | undefined {
-  const requestBody = extractRequestBody(spec, op.operation);
+  const requestBody = extractRequestBody(
+    spec,
+    op.operation,
+    getRequestFileExamples(
+      op.operation.operationId,
+      op.version,
+      op.categorySlug,
+    ),
+  );
   if (!requestBody) return undefined;
 
   if (action.request_description !== undefined) {
