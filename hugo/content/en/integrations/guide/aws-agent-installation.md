@@ -159,7 +159,7 @@ Lambda instrumentation needs no Secrets Manager, Systems Manager, or IAM write p
 
 ## How it works
 
-Instrumentation is based on an **instrumentation rule**: an AWS account paired with a query that describes which resources to cover. Datadog evaluates the query, instruments each covered resource inside your own account, and keeps it instrumented:
+An **instrumentation rule** is the saved **Scope to** selection for an AWS account. It determines which resources Datadog automatically instruments, including resources that match the selection later. Datadog evaluates the selection, instruments each covered resource inside your own account, and keeps it instrumented:
 
 1. You write a query describing the resources to cover, select specific resources, or add all eligible resources.
 1. Datadog evaluates the rule against your account and records which resources it covers.
@@ -207,6 +207,8 @@ Datadog preserves your existing layers and environment variables. For Node.js an
 To tune what the extension collects, set the standard Datadog environment variables on the function. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
 
 ## Install Datadog instrumentation
+
+<div class="alert alert-info">This feature is available only to trial customers and customers who enabled it during their trial. This applies to both AWS integration setup and Fleet Automation.</div>
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 

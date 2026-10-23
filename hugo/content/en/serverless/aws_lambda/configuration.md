@@ -817,7 +817,7 @@ To use Workload Identity Federation:
 1. In Datadog, configure an AWS intake mapping that authorizes your function's execution role ARN. For setup steps, see [Set up Workload Identity Federation for the Datadog Agent][59].
 2. Set the `DD_ORG_UUID` environment variable on your function to your Datadog organization UUID. To find it, call the [{{< region-param key="dd_api" >}}/api/v2/current_user][60] endpoint. When `DD_ORG_UUID` is set, the extension authenticates with Workload Identity Federation, which takes precedence over other API key environment variables.
 
-This is available for version 96+ of the Datadog Lambda Extension. Workload Identity Federation for the Agent is available for Enterprise plans only.
+This is available for version 96+ of the Datadog Lambda Extension.
 
 ## Reload API key secret periodically
 

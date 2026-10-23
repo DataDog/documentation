@@ -44,7 +44,7 @@ Puede iniciar una Bits Investigation desde las tarjetas de recomendación para l
 
 La Bits Investigation se abre en una nueva pestaña, con el alcance de la página, la métrica vital y la ventana de tiempo de la tarjeta.
 
-{{< img src="real_user_monitoring/bits_ai/optimization-recommendation-cards.png" alt="La página de optimización para el Largest Contentful Paint de una página, que muestra tarjetas de recomendación clasificadas por impacto, cada una con un botón Investigar." style="width:100%;" >}}
+{{< img src="real_user_monitoring/bits_ai/optimization-recommendation-cards-2.png" alt="La página de optimización para el Largest Contentful Paint de una página, que muestra tarjetas de recomendación clasificadas por impacto, cada una con un botón Investigar." style="width:100%;" >}}
 
 ### Qué investiga Bits {#what-bits-investigates}
 
