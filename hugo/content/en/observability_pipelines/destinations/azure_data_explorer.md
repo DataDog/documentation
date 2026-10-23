@@ -27,24 +27,24 @@ Use Observability Pipelines' Azure Data Explorer destination to send logs to [Az
 
 Before you configure the Azure Data Explorer destination, you must have:
 
-- An ADX cluster. See [Create a cluster][3] for more information.
+- An ADX cluster. See [Create a cluster][2] for more information.
 - An ADX database and the tables you want to send logs to.
-    - See [Create a database][4] and [Create a table in Azure Data Explorer][25] for more information.
+    - See [Create a database][3] and [Create a table in Azure Data Explorer][4] for more information.
 - If you use the streaming ingestion mode, you must have:
-    - Streaming ingestion enabled on your cluster. See [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
+    - Streaming ingestion enabled on your cluster. See [Configure streaming ingestion on your Azure Data Explorer cluster][5] for more information.
     - A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
         ```
         .alter table ['<TABLE_NAME>'] policy streamingingestion enable
         ```
-        See [Streaming ingestion policy][5] for more information.
-- (Optional) An ingestion mapping on the target table, if you want to map log fields to table columns. See [Ingestion mappings][6] for more information.
-- An Azure identity that the Worker uses to authenticate to ADX. The identity must have ingestion permissions, such as the [Database Ingestor][7] role, on each database the Worker sends logs to.
+        See [Streaming ingestion policy][6] for more information.
+- (Optional) An ingestion mapping on the target table, if you want to map log fields to table columns. See [Ingestion mappings][7] for more information.
+- An Azure identity that the Worker uses to authenticate to ADX. The identity must have ingestion permissions, such as the [Database Ingestor][8] role, on each database the Worker sends logs to.
 
 ## Setup
 
 <div class="alert alert-danger">Only enter the identifiers for the Azure Data Explorer ingestion endpoint and, if applicable, the Azure authentication client secret and certificate password. Do <b>not</b> enter the actual values.</div>
 
-Configure the Azure Data Explorer destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][9], using the [API][10], or with [Terraform][11]. The steps in this section are configured in the UI.
+Configure the Azure Data Explorer destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
 After you select the Azure Data Explorer destination in the pipeline UI:
 
@@ -55,13 +55,13 @@ After you select the Azure Data Explorer destination in the pipeline UI:
     - **Streaming**: The cluster URI shown in the Azure portal, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
     - **Queued**: The data ingestion URI shown in the Azure portal, such as `https://ingest-<CLUSTER>.<REGION>.kusto.windows.net`.
 1. In the **Database** field, enter the name of the ADX database, such as `logs_db`.
-1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][12], such as `{{ adx.table }}`, so you can route logs to different tables based on a log field.
+1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][13], such as `{{ adx.table }}`, so you can route logs to different tables based on a log field.
     - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of logs.
-1. (Optional) In the **Mapping Reference** field, enter the name of the ingestion mapping to use, such as `logs_json_mapping`. This field supports [template syntax][12], such as `{{ adx.mapping }}`.
+1. (Optional) In the **Mapping Reference** field, enter the name of the ingestion mapping to use, such as `logs_json_mapping`. This field supports [template syntax][13], such as `{{ adx.mapping }}`.
     - **Notes**:
         - The resolved mapping must already exist in your cluster.
         - If the field is left blank or the template doesn't resolve to a value, the Worker sends the logs without a mapping reference and ADX ingests the logs as is.
-        - See [Mapping with ingestionMappingReference][24] for more information.
+        - See [Mapping with ingestionMappingReference][14] for more information.
 1. In the **Azure Authentication** dropdown menu, select the authentication method for the Worker to use.
 1. Enter the credentials for the authentication method you selected. See [Azure authentication](#azure-authentication) for the fields that each method requires.
 
@@ -84,8 +84,8 @@ You can configure how the Worker batches logs before sending them to ADX. The de
 1. In the **Batch Max Bytes** field, enter the maximum batch size in bytes.
     - **Streaming**:
         - The default is 2,000,000 bytes (2 MB).
-        - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][13] for more information.
-        - **Note**: Data created by [update policies][14] is included in the ingestion data size limit. Datadog recommends keeping the default batch size of 2 MB to leave room for this additional data.
+        - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][15] for more information.
+        - **Note**: Data created by [update policies][16] is included in the ingestion data size limit. Datadog recommends keeping the default batch size of 2 MB to leave room for this additional data.
     - **Queued**: The default is 100,000,000 bytes (100 MB). The maximum is 1 GB.
 1. In the **Batch Max Events** field, enter the maximum number of logs in a batch.
     - **Streaming**: The default is 1,000.
@@ -104,11 +104,11 @@ When you set up the Azure Data Explorer destination, the credential fields you f
 
 #### Azure CLI
 
-The Azure CLI authentication method uses the credentials of the account signed in to the [Azure CLI][19] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
+The Azure CLI authentication method uses the credentials of the account signed in to the [Azure CLI][17] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
 
 #### Client certificate
 
-The client certificate authentication method uses a [Microsoft Entra application (service principal)][20] client ID and certificate. Configure the following fields:
+The client certificate authentication method uses a [Microsoft Entra application (service principal)][18] client ID and certificate. Configure the following fields:
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
@@ -117,7 +117,7 @@ The client certificate authentication method uses a [Microsoft Entra application
 
 #### Client secret
 
-The client secret authentication method uses a [Microsoft Entra application (service principal)][20] client ID and client secret. Configure the following fields:
+The client secret authentication method uses a [Microsoft Entra application (service principal)][18] client ID and client secret. Configure the following fields:
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
@@ -125,7 +125,7 @@ The client secret authentication method uses a [Microsoft Entra application (ser
 
 #### Managed identity
 
-The managed identity authentication method uses an [Azure managed identity][21] assigned to the resource where the Worker runs. Configure the following fields:
+The managed identity authentication method uses an [Azure managed identity][19] assigned to the resource where the Worker runs. Configure the following fields:
 
 - (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
 - (Optional) **User-assigned managed identity ID type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
@@ -141,7 +141,7 @@ The managed identity (client assertion) authentication method uses a managed ide
 
 #### Workload identity
 
-The workload identity authentication method uses a [Microsoft Entra Workload ID][22] federated token, such as a Kubernetes service account token, to authenticate. Configure the following fields:
+The workload identity authentication method uses a [Microsoft Entra Workload ID][20] federated token, such as a Kubernetes service account token, to authenticate. Configure the following fields:
 
 - (Optional) **Client ID**: Enter the client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
 - (Optional) **Tenant ID**: Enter your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
@@ -201,7 +201,7 @@ If the Worker logs an error similar to the following, the Worker couldn't resolv
 Failed to render template for "table". error=Missing fields on event: ["adx.table"] error_type="template_failed" stage="processing"
 ```
 
-This error occurs when a log doesn't have the field referenced in the template. The Worker drops logs whose table template syntax cannot be resolved. To resolve this issue, make sure all logs sent to the destination contain the field referenced in the template. See [Template syntax][12] for more information.
+This error occurs when a log doesn't have the field referenced in the template. The Worker drops logs whose table template syntax cannot be resolved. To resolve this issue, make sure all logs sent to the destination contain the field referenced in the template. See [Template syntax][13] for more information.
 
 ### Throttling when sending logs to many tables
 
@@ -223,34 +223,34 @@ As long as your ADX cluster remains available, throttled requests are retried, s
 
 If you expect your pipeline to send logs to a large number of tables:
 
-- [Scale your ADX cluster][15] to handle the volume of requests.
-- Monitor your source and destination [buffer metrics][17] to make sure the buffers don't fill up, which could lead to logs getting rejected at the source.
+- [Scale your ADX cluster][21] to handle the volume of requests.
+- Monitor your source and [destination buffer metrics][22] to make sure the buffers don't fill up, which could lead to logs getting rejected at the source.
 
 ## Health metrics
 
-For [component metrics][16] and [destination buffer metrics][17] emitted by all destinations, see the [Pipelines Usage Metrics][18] documentation. To filter or group by Azure Data Explorer destination metrics, use the tag `component_type:azure_data_explorer`.
+See [Destination buffer metrics][22] for more information on metrics emitted by all destinations. To filter or group by Azure Data Explorer destination metrics, use the tag `component_type:azure_data_explorer`.
 
 ## How the destination works
 
 ### Ingestion modes
 
-The Azure Data Explorer destination supports two ingestion modes. In both modes, the Worker considers a batch delivered when ADX accepts the request, not when the logs are ingested. A delivered batch doesn't mean the logs were successfully ingested or are queryable. Use ADX metrics to monitor the status of ingestion.
+The Azure Data Explorer destination supports two ingestion modes: [streaming](#streaming-ingestion) and [queued](#queued-ingestion). In both modes, the Worker considers a batch delivered when ADX accepts the request, not when the logs are ingested. A delivered batch doesn't mean the logs were successfully ingested or are queryable. Use ADX metrics to monitor the status of ingestion. See [Kusto.Ingest ingestion status reporting][23] for more information.
 
 #### Streaming ingestion
 
-Streaming ingestion is the default mode. Use it when you need low latency between ingestion and query. The Worker sends each batch of logs directly to the ADX cluster endpoint. Streaming ingestion must be enabled on your cluster and on the target tables or database. See [Configure streaming ingestion on your Azure Data Explorer cluster][2] for more information.
+Streaming ingestion is the default mode. Use it when you need low latency between ingestion and query. The Worker sends each batch of logs directly to the ADX cluster endpoint. Streaming ingestion must be enabled on your cluster and on the target tables or database. See [Configure streaming ingestion on your Azure Data Explorer cluster][5] for more information.
 
 The Worker considers a batch delivered after it sends the logs to the ADX cluster endpoint.
 
 #### Queued ingestion
 
-Use queued ingestion if the stream of data into each table is more than 4 GB per hour. For each batch of logs, the Worker compresses the batch, uploads it to Azure Blob Storage, and submits an ingestion request to the ADX data ingestion endpoint. See [Azure Data Explorer data ingestion overview][26] for more information.
+Use queued ingestion if the stream of data into each table is more than 4 GB per hour. For each batch of logs, the Worker compresses the batch, uploads it to Azure Blob Storage, and submits an ingestion request to the ADX data ingestion endpoint. See [Azure Data Explorer data ingestion overview][24] for more information.
 
 The Worker considers a batch delivered after the batch is uploaded to Azure Blob Storage and the ingestion request is submitted. Logs sent with queued ingestion can take about five minutes to become queryable.
 
 ### Event batching
 
-A batch of logs is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][23] for more information.
+A batch of logs is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][25] for more information.
 
 | Ingestion mode | Maximum Events | Maximum Size (MB) | Timeout (seconds) |
 |----------------|----------------|-------------------|-------------------|
@@ -262,28 +262,27 @@ A batch of logs is flushed when one of these parameters is met. Batching is also
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://learn.microsoft.com/en-us/azure/data-explorer/data-explorer-overview
-[2]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-streaming
-[3]: https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database#create-a-cluster
-[4]: https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database#create-a-database
-[5]: https://learn.microsoft.com/en-us/kusto/management/streaming-ingestion-policy?view=azure-data-explorer
-[6]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer
-[7]: https://learn.microsoft.com/en-us/kusto/access-control/role-based-access-control?view=azure-data-explorer
-[8]: /observability_pipelines/configuration/set_up_pipelines/
-[9]: https://app.datadoghq.com/observability-pipelines
-[10]: /api/latest/observability-pipelines/
-[11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[12]: /observability_pipelines/destinations/#template-syntax
-[13]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-streaming?tabs=azure-portal%2Ccsharp#performance-and-operational-considerations
-[14]: https://learn.microsoft.com/en-us/kusto/management/update-policy?view=azure-data-explorer
-[15]: https://learn.microsoft.com/en-us/azure/data-explorer/manage-cluster-horizontal-scaling
-[16]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[17]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[18]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
-[19]: https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli
-[20]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
-[21]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
-[22]: https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview
-[23]: /observability_pipelines/destinations/#event-batching
-[24]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer#mapping-with-ingestionmappingreference
-[25]: https://learn.microsoft.com/en-us/azure/data-explorer/create-table-wizard
-[26]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-overview
+[2]: https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database#create-a-cluster
+[3]: https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database#create-a-database
+[4]: https://learn.microsoft.com/en-us/azure/data-explorer/create-table-wizard
+[5]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-streaming
+[6]: https://learn.microsoft.com/en-us/kusto/management/streaming-ingestion-policy?view=azure-data-explorer
+[7]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer
+[8]: https://learn.microsoft.com/en-us/kusto/access-control/role-based-access-control?view=azure-data-explorer
+[9]: /observability_pipelines/configuration/set_up_pipelines/
+[10]: https://app.datadoghq.com/observability-pipelines
+[11]: /api/latest/observability-pipelines/
+[12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[13]: /observability_pipelines/destinations/#template-syntax
+[14]: https://learn.microsoft.com/en-us/kusto/management/mappings?view=azure-data-explorer#mapping-with-ingestionmappingreference
+[15]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-streaming?tabs=azure-portal%2Ccsharp#performance-and-operational-considerations
+[16]: https://learn.microsoft.com/en-us/kusto/management/update-policy?view=azure-data-explorer
+[17]: https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli
+[18]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
+[19]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
+[20]: https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview
+[21]: https://learn.microsoft.com/en-us/azure/data-explorer/manage-cluster-horizontal-scaling
+[22]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=destinations#component-metrics
+[23]: https://learn.microsoft.com/en-us/kusto/api/netfx/kusto-ingest-client-status?view=microsoft-fabric
+[24]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-overview
+[25]: /observability_pipelines/destinations/#event-batching
