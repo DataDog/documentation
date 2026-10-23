@@ -369,7 +369,7 @@
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Workload Protection policy returns \"OK\" response"
+      "description": "Create a Workload Protection policy returns \"Created\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -606,27 +606,6 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
-  "ListDORADeployments": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1654201709",
-      "description": "Get a list of deployment events returns deployments with date-time timestamps"
-    }
-  ],
-  "CreateDORADeployment": [
-    {
-      "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send a deployment event returns \"OK\" response"
-    }
-  ],
-  "CreateDORAIncident": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1101664022",
-      "description": "Send a failure event returns \"OK\" response"
-    }
-  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -677,6 +656,27 @@
       "group": "datasets",
       "suffix": "",
       "description": "Edit a dataset returns \"OK\" response"
+    }
+  ],
+  "ListDORADeployments": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
+  "CreateDORADeployment": [
+    {
+      "group": "delivery_performance",
+      "suffix": "",
+      "description": "Send a deployment event returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDeploymentGate": [
@@ -921,6 +921,53 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create an environment returns \"Created\" response"
+    }
+  ],
+  "UpdateSavedFilterAttributes": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3817543566",
+      "description": "Patch a saved filter accepts the current timestamp for metadata"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2658080376",
+      "description": "Patch a saved filter accepts the current timestamp for rules"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_4162852827",
+      "description": "Patch a saved filter clears the description with an empty string"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_3212710506",
+      "description": "Patch a saved filter preserves a null description"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_1937053112",
+      "description": "Patch a saved filter replaces rules and preserves metadata"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_727520235",
+      "description": "Patch a saved filter replaces the rules of a saved list"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Patch a saved filter returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_1194333410",
+      "description": "Patch a saved filter updates metadata and rules together"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_281483245",
+      "description": "Patch a saved filter updates only the description of a saved list"
     }
   ],
   "UpdateFeatureFlag": [
@@ -1410,6 +1457,13 @@
       "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
+  "CreateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a derived metric returns \"Created\" response"
+    }
+  ],
   "CreateTagConfiguration": [
     {
       "group": "metrics",
@@ -1650,6 +1704,13 @@
       "group": "metrics",
       "suffix": "_1116544040",
       "description": "Timeseries cross product query with spans data source returns \"OK\" response"
+    }
+  ],
+  "UpdateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a derived metric returns \"OK\" response"
     }
   ],
   "UpdateTagConfiguration": [
@@ -1966,11 +2027,23 @@
       "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
       "description": "Create On-Call schedule returns \"Created\" response"
+    },
+    {
+      "group": "on-call",
+      "suffix": "_2169247120",
+      "description": "Create additive On-Call schedule returns \"Created\" response"
     }
   ],
   "CreateUserNotificationChannel": [
@@ -2219,6 +2292,25 @@
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
+  "CreateSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add resources to a batch migration returns \"Created\" response"
+    }
+  ],
+  "UpdateFindingsSeverity": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_412359663",
+      "description": "Apply a severity override to security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1312693410",
+      "description": "Clear the severity override of security findings returns \"Accepted\" response"
+    }
+  ],
   "AttachJiraIssue": [
     {
       "group": "security_monitoring",
@@ -2293,6 +2385,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create Jira issues for security findings returns \"Created\" response"
+    }
+  ],
+  "CreateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a batch migration returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -2463,6 +2562,13 @@
       "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
+  "DeleteSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Delete resources from a batch migration returns \"No Content\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
@@ -2595,6 +2701,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Test a rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigrationResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration resource returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -3010,7 +3130,7 @@
     {
       "group": "teams",
       "suffix": "",
-      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
+      "description": "Link teams with external teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [

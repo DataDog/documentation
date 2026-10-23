@@ -1,3 +1,3 @@
 ---
-title: Delete LLM Observability experiments
+title: Delete LLM Observability offline experiments
 ---

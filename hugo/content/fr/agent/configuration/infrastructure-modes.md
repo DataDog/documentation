@@ -63,7 +63,7 @@ L'Agent prend en charge quatre modes d'infrastructure. Une coche ({{< X >}}) ind
   - [Mémoire noyau Windows][10]
   - [Compteurs de performance Windows][11] (7.80+)
   - [Registre Windows][12] (7.80+)
-  - [Services Windows][13]
+  - [Windows Services][13] (7.78+)
   - [Check WMI][14] (7.80+)
   - [Checks personnalisés][15] préfixés par `custom_`
 
