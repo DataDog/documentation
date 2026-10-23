@@ -1,178 +1,112 @@
 ---
 title: Automatic Integrations
-further_reading:
-- link: /security/ai_guard/setup/manual_integrations/
-  tag: Documentation
-  text: Manual Integrations
-- link: /security/ai_guard/setup/sdk/
-  tag: Documentation
-  text: SDK
+description: Protect agents built on supported LLM frameworks and client libraries with AI Guard, without changing application code.
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard can automatically evaluate LLM calls made through supported AI ecosystem packages, without requiring manual API calls. If your application uses a supported package, the Datadog SDK instruments it to evaluate calls through AI Guard automatically. No code changes are required.
+AI Guard automatic integrations protect agents built on supported LLM frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you can enable AI Guard with environment variables instead of adding evaluation calls by hand.
+
+When the application starts with the Datadog SDK loaded, the SDK detects supported packages and instruments them. Each instrumented model call and tool call goes to AI Guard for evaluation before the call proceeds.
 
 ## Supported frameworks and libraries
 
-<div class="alert alert-tip">Automatic integration is supported only for these frameworks. For Amazon Strands and LiteLLM Proxy, see <a href="/security/ai_guard/setup/manual_integrations/">Manual Integrations</a>. For any other framework, or for custom LLM or tool call code, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> to call <code>evaluate()</code> in your code.</div>
+Automatic integrations work only with specific packages and versions. Check the agent's packages to confirm that an automatic integration applies.
 
-{{< tabs >}}
-{{% tab "Python" %}}
-| Package                      | Supported Versions | SDK Version |
-|------------------------------|--------------------|-------------|
-| [LangChain](#python)         | >= 0.1.20          | >= 3.14.0   |
-| [OpenAI](#python)            | >= 1.102.0         | >= 4.10.0   |
-| [Anthropic](#python)         | >= 0.28.0          | >= 4.11.0   |
+| Language | Package | Package version | Datadog SDK version |
+| --- | --- | --- | --- |
+| Python | LangChain | 0.1.20 or later. | `dd-trace-py` 3.19.0 or later. |
+| Python | OpenAI | 1.102.0 or later. | `dd-trace-py` 4.10.0 or later. |
+| Python | Anthropic | 0.28.0 or later. | `dd-trace-py` 4.11.0 or later. |
+| Node.js | AI SDK | v6. | `dd-trace-js` 5.96.0 or later. |
+| Node.js | OpenAI | 4.87.0 or later. | `dd-trace-js` 5.105.0 or later. |
+| Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later in the v5 release line, or 6.11.0 or later. |
+| Ruby | RubyLLM | 2.0.0 or later. | `dd-trace-rb` 2.44.0 or later. |
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
-| Package                          | Supported Versions | SDK Version |
-|----------------------------------|--------------------|-------------|
-| [AI SDK](#nodejs)                | v6                 | >= 5.95.0   |
-| [OpenAI](#nodejs)                | >= 4.87.0          | >= 5.105.0  |
-| [Anthropic](#nodejs)             | >= 0.14.0          | >= 6.11.0   |
+<!-- TODO: Does it make sense that every package has a different supported Datadog SDK version? Is it possible to align them, for example on one minimum per language? The SDK and manual integrations require `dd-trace-py` 4.13.0 or later, but the automatic integrations table lists lower Python versions: LangChain at 3.19.0 (3.14.0 on the published page), OpenAI at 4.10.0, and Anthropic at 4.11.0. -->
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-| Package                          | Supported Versions | SDK Version |
-|----------------------------------|--------------------|-------------|
-| [RubyLLM](#ruby)                 | >= 1.0.0           | >= 2.28.0   |
+<!-- TODO: Is AI SDK v7 supported, and from which `dd-trace-js` version? If so, the AI SDK row can say "v6 or later." AI SDK v7 is the default npm version since June 2026, and `dd-trace-js` main has v7-specific instrumentation. -->
 
-{{% /tab %}}
-{{< /tabs >}}
+Automatic integrations don't support Java. For Java agents, use the [SDK][1]. For Amazon Strands and LiteLLM Proxy, use [manual integrations][2].
 
-{{< partial name="security-platform/aiguard-sdk-setup.html" target="automatic" >}}
+In Python, if LangChain calls a supported provider SDK such as OpenAI, AI Guard evaluates the call once, through the LangChain integration. Duplicate-evaluation prevention requires `dd-trace-py` 4.9.0 or later.
 
-## Integrations
+### Evaluated operations
 
-### Python
+Each automatic integration evaluates a specific set of operations, so check the operations your agent calls to confirm that AI Guard covers them. To evaluate calls not shown here, add [SDK][1] calls in your code.
 
-{{< tabs >}}
-{{% tab "LangChain" %}}
-The LangChain integration automatically applies AI Guard evaluations to calls made through the [LangChain Python SDK][1].
+| Language | Package | Evaluated operations |
+| --- | --- | --- |
+| Python | LangChain | LLM `invoke()` and `ainvoke()`, chat model `invoke()` and `ainvoke()`, and the tool calls that LangChain agents decide to run: AgentExecutor agents, and `create_agent` agents in LangChain 1.0 and later (`dd-trace-py` 4.12.0 or later). |
+| Python | OpenAI | `client.chat.completions.create()`, `client.chat.completions.parse()`, `client.responses.create()`, and `client.responses.parse()`. |
+| Python | Anthropic | `client.messages.create()` and `client.messages.stream()`. With the `anthropic` package 0.37.0 or later, also `client.beta.messages.create()` and `client.beta.messages.stream()`. |
+| Node.js | AI SDK | Model calls from `generateText`, `streamText`, `generateObject`, and `streamObject`, including the tool calls and tool results they carry. |
+| Node.js | OpenAI | `client.chat.completions.create()`, `client.chat.completions.parse()`, and `client.responses.create()`. |
+| Node.js | Anthropic | `client.messages.create()`. With the `@anthropic-ai/sdk` package 0.33.0 or later, also `client.beta.messages.create()`. |
+| Ruby | RubyLLM | `RubyLLM::Chat#ask` and `RubyLLM::Chat#complete`, including the tool calls the model requests. |
 
-#### Traced operations
+### Streamed responses
 
-AI Guard automatically evaluates the following LangChain operations:
+A streamed response arrives in pieces while the model generates it, instead of all at once. By default, AI Guard doesn't evaluate streamed model responses, so if your agent streams responses, the model's output reaches the user without an evaluation.
 
-- LLMs:
-  - `llm.invoke()`, `llm.ainvoke()`
-- [Chat models][2]:
-  - `chat_model.invoke()`, `chat_model.ainvoke()`
-- [Tools][3]:
-  - `BaseTool.invoke()`, `BaseTool.ainvoke()`
+To enable evaluation of streamed responses, set `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED=true`. The Datadog SDK then buffers each streamed response until AI Guard returns a result, and buffering delays the first token.
 
-[1]: https://docs.langchain.com/oss/python/langchain/overview
-[2]: https://docs.langchain.com/oss/python/langchain/models
-[3]: https://docs.langchain.com/oss/python/langchain/tools
-{{% /tab %}}
-{{% tab "OpenAI" %}}
-The OpenAI integration automatically applies AI Guard evaluations to calls made through the [OpenAI Python SDK][1].
+Streamed response evaluation is supported for these packages at the specified Datadog SDK versions:
 
-#### Traced operations
+| Language | Package | Datadog SDK version |
+| --- | --- | --- |
+| Python | OpenAI and Anthropic | `dd-trace-py` 4.12.0 or later. |
+| Node.js | AI SDK | `dd-trace-js` 6.16.0 or later. |
+| Node.js | OpenAI | `dd-trace-js` 6.17.0 or later. |
+| Node.js | Anthropic | `dd-trace-js` 6.19.0 or later. |
 
-AI Guard automatically evaluates the following OpenAI operations:
+<!-- TODO: Which other packages support streamed response evaluation?
+- RubyLLM: Does AI Guard evaluate streamed RubyLLM responses, and does `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED` work in Ruby? If so, add a row for it.
+- LangChain: Which `dd-trace-py` release will add it? The `dd-trace-py` v4.16.0 release notes say streamed LangChain responses aren't evaluated, but `dd-trace-py` main has unreleased code that evaluates them when stream analysis is on.
+-->
 
-- [Chat completions][2]:
-  - `client.chat.completions.create()`
-  - `client.chat.completions.parse()`
-- [Responses API][3]:
-  - `client.responses.create()`
-  - `client.responses.parse()`
+## Enable automatic integrations
 
-[1]: https://github.com/openai/openai-python
-[2]: https://platform.openai.com/docs/api-reference/chat
-[3]: https://platform.openai.com/docs/api-reference/responses
-{{% /tab %}}
-{{% tab "Anthropic" %}}
-The Anthropic integration automatically applies AI Guard evaluations to calls made through the [Anthropic Python SDK][1].
+Enable automatic integrations so the Datadog SDK sends every supported model call and tool call from the agent to AI Guard for evaluation.
 
-#### Traced operations
+**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the application.
 
-AI Guard automatically evaluates the following Anthropic operations:
+1. Set these environment variables in the application's environment:
 
-- [Messages][2]:
-  - `client.messages.create()`
-  - `client.messages.stream()`
+   - `DD_AI_GUARD_ENABLED=true`. Without this value, AI Guard evaluates nothing.
+   - `DD_API_KEY=<DATADOG_API_KEY>`.
+   - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
+   - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
+   - `DD_ENV=<ENVIRONMENT>`.
+   - `DD_TRACE_ENABLED=true`.
 
-For the `anthropic` package >= 0.37.0, AI Guard also evaluates the following beta messages operations:
+   To turn off APM tracing but keep AI Guard, set `DD_APM_TRACING_ENABLED=false`. Don't set `DD_TRACE_ENABLED` to `false`, because it breaks AI Guard in various ways depending on your agent's language.
 
-- Beta messages:
-  - `client.beta.messages.create()`
-  - `client.beta.messages.stream()`
+   <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code> to <code>false</code>.</div>
 
-[1]: https://github.com/anthropics/anthropic-sdk-python
-[2]: https://docs.anthropic.com/en/api/messages
-{{% /tab %}}
-{{< /tabs >}}
+1. Start the application with the Datadog SDK loaded:
 
-### Node.js
+   - **Python**: Run the application with `ddtrace-run`, or add `import ddtrace.auto` as the first import in the application.
+   - **Node.js**: Start the application with `node --require dd-trace/init`, or call `require('dd-trace').init()` before any other module loads.
+   - **Ruby**: Enable the RubyLLM integration in your Datadog configuration. RubyLLM isn't instrumented automatically, so `require 'datadog/auto_instrument'` alone doesn't enable it:
 
-{{< tabs >}}
-{{% tab "AI SDK" %}}
-The [AI SDK][1] integration automatically applies AI Guard evaluations to text and object generation, embeddings, and tool calls.
+     ```ruby
+     Datadog.configure do |config|
+       config.ai_guard.instrument :ruby_llm
+     end
+     ```
 
-#### Traced operations
+   For other loading options, see [tracing setup for your language][5].
 
-- [Text generation][2]:
-  - `generateText`
-  - `streamText`
-- [Object generation][3]:
-  - `generateObject`
-  - `streamObject`
-- [Tool calling][4]:
-  - `tool.execute`
+**What's next?** [Create a retention filter for AI Guard spans][6], optionally [limit access to AI Guard spans][7], then [verify the setup][8].
 
-[1]: https://ai-sdk.dev/docs/introduction
-[2]: https://ai-sdk.dev/docs/ai-sdk-core/generating-text
-[3]: https://ai-sdk.dev/docs/ai-sdk-core/generating-structured-data
-[4]: https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling
-{{% /tab %}}
-{{% tab "OpenAI" %}}
-The OpenAI integration automatically applies AI Guard evaluations to calls made through the [OpenAI Node.js SDK][1].
-
-#### Traced operations
-
-AI Guard automatically evaluates the following OpenAI operations:
-
-- [Chat completions][2]:
-  - `client.chat.completions.create()`
-  - `client.chat.completions.parse()`
-- [Responses API][3]:
-  - `client.responses.create()`
-
-**Note:** Streaming requests (`stream: true`) are not evaluated by AI Guard.
-
-[1]: https://github.com/openai/openai-node
-[2]: https://platform.openai.com/docs/api-reference/chat
-[3]: https://platform.openai.com/docs/api-reference/responses
-{{% /tab %}}
-{{< /tabs >}}
-
-### Ruby
-
-{{< tabs >}}
-{{% tab "RubyLLM" %}}
-The [RubyLLM][1] integration automatically applies AI Guard evaluations to chat messages and tool calls.
-
-#### Traced operations
-
-AI Guard automatically evaluates the following RubyLLM operations:
-
-- [Chat][2]:
-  - `RubyLLM::Chat#ask`
-  - `RubyLLM::Chat#complete`
-- [Tool calling][3]:
-  - `RubyLLM::Chat#handle_tool_calls`
-
-[1]: https://rubyllm.com/
-[2]: https://rubyllm.com/chat/
-[3]: https://rubyllm.com/tools/
-{{% /tab %}}
-{{< /tabs >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[1]: /security/ai_guard/setup/sdk/
+[2]: /security/ai_guard/setup/manual_integrations/
+[3]: /security/ai_guard/setup/#prerequisites
+[4]: /security/ai_guard/setup/#create-keys
+[5]: /tracing/trace_collection/
+[6]: /security/ai_guard/setup/#retention-filter
+[7]: /security/ai_guard/setup/#limit-access
+[8]: /security/ai_guard/setup/#verify

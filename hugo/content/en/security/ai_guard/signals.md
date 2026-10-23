@@ -4,9 +4,9 @@ further_reading:
 - link: /security/ai_guard/
   tag: Documentation
   text: AI Guard
-- link: /security/ai_guard/onboarding/
+- link: /security/ai_guard/setup/
   tag: Documentation
-  text: Get Started with AI Guard
+  text: Set Up AI Guard
 - link: /security/detection_rules/
   tag: Documentation
   text: Detection Rules
