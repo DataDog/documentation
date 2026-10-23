@@ -27,18 +27,20 @@ Worker version 2.24.1 gives you access to the following:
 
 #### Security
 
-- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were [reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted. This applies to components that use rustls. The following components use the system CA trust store instead:
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were [reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted.
+
+  This protection applies only to components that use rustls. The following components use the system CA trust store instead:
     - Components that use OpenSSL
     - The Amazon Security Lake destination's AWS account lookup
     - The Google Cloud Pub/Sub source
 
-    To protect components that use the system CA trust store:
-    - **Container image**: The Worker container image distrusts the affected `emSign ECC Root CA - G3`. This protection does not apply if you mount your own CA bundle or set `SSL_CERT_FILE`.
+  To protect components that use the system CA trust store:
+    - **Container image**: No action is needed unless you mount your own CA bundle or set `SSL_CERT_FILE`. The Worker container image distrusts `emSign ECC Root CA - G3`.
     - **APT and RPM packages**: Distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
 
 #### Fixes
 
-- Fixed an issue where search queries with `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes, silently dropped operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss matching events because of the wildcard.
+- Fixed an issue where search queries silently dropped operands in `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss matching events because of the wildcard.
 - The Worker now treats regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in search query wildcard patterns as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
 
 ## Worker version 2.24.0
@@ -67,7 +69,7 @@ Worker version 2.24.0 gives you access to the following:
     - Has a default buffer size of 20,000 events or 100 MiB, and a maximum of 100,000 events.
 - The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option.
 - The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
-- The Custom Processor has improved performance, including more efficient field lookups and string functions.
+- The Custom Processor has improved performance, including more efficient field lookups and more efficient string functions.
 - The Worker has improved configuration startup performance.
 - The `pipelines.quota_fill` metric now has a `quota_name` tag. The Worker keeps the legacy `name` tag for backward compatibility.
 
@@ -75,10 +77,10 @@ Worker version 2.24.0 gives you access to the following:
 
 - The Sensitive Data Scanner processor's library rules now use pattern capture groups to preserve non-sensitive context around the captured value. Previously, the Worker ignored capture groups. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
 - The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse. The Parse JSON processor's error message also names the field that failed to parse, rather than the generic word `source`.
-- Fixed issues with disk buffers and configuration reloads.
+- Fixed an issue where reloading specific components after configuration updates could cause them to restart unnecessarily during subsequent configuration updates, resetting their state.
 - The OpenTelemetry source now preserves native OTLP log event names.
 - The Prometheus source now identifies metrics ending with `_total` as counters.
-- Fixed issues with filter fields in the Custom Processor's `parse_grok` and `parse_groks` functions.
+- Fixed an issue with the `keyvalue` filter in the Custom Processor's `parse_grok` and `parse_groks` functions. The filter no longer panics when processing unquoted `NaN` values, such as `ratio=NaN`.
 
 ## Worker version 2.23.0
 
@@ -103,13 +105,13 @@ Worker version 2.23.0 gives you access to the following:
 - The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default across both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
 - The Databricks Zerobus destination now identifies the Worker in its user-agent header.
 - For the Custom Processor:
-    - The performance of the processor has been improved.
-    - The `for_each` function's performance has been improved and its memory usage reduced by iterating over collections directly.
-    - The runtime performance of the `md5`, `sha1`, `sha2`, and `sha3` functions has been improved.
+    - Improved overall performance.
+    - Improved `for_each` performance and reduced its memory usage by iterating over collections directly.
+    - Improved the runtime performance of the `md5`, `sha1`, `sha2`, and `sha3` functions.
 
 #### Fixes
 
-- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, the Worker looked for these files in the default data directory if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable. As a result, the Worker rejected valid files as missing.
+- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, now resolve against the `data_dir` set in `bootstrap.yaml`. Previously, if you set `data_dir` only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable, the Worker looked for these files in the default data directory and rejected valid files as missing.
 - TCP acknowledgment and TLS connection error logs for sources now include the remote `peer_addr`.
 - The Custom Processor's `uuid_v7` function now preserves the supplied timestamp at millisecond precision.
 
