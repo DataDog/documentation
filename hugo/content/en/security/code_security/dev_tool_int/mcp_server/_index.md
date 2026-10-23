@@ -47,8 +47,12 @@ The MCP server exposes the following tools that AI coding assistants can call to
 | [`datadog_iac_scan`][5]                   | Infrastructure-as-Code security scanning                 |      Yes      |
 | [`datadog_generate_sbom`][6]              | Software Bill of Materials generation                    |      No       |
 | [`datadog_library_vulnerability_scan`][7] | Library vulnerability lookup by package URL              |      Yes      |
+| [`datadog_ephemeral_sast_scan`][29]       | Run one local, unpublished SAST rule                     |      No       |
+| [`datadog_promote_sast_rule`][30]         | Save an approved SAST rule as a Datadog custom rule      |      Yes      |
 
 `datadog_code_security_scan` and `datadog_sast_scan` accept optional `min_sast_severity` (`LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`). It applies to SAST only, defaults to `LOW`, and does not return in-source suppressed findings.
+
+`datadog_ephemeral_sast_scan` and `datadog_promote_sast_rule` support the `dd-codesec-find-security-variants` skill. The skill writes a temporary rule from a local security fix, scans the repository with it, and saves the rule only after you approve it. See [Install agent skills](#install-agent-skills).
 
 For detailed parameters, required binaries, and output formats for each tool, see the [Tools Reference][8].
 
@@ -56,7 +60,7 @@ For detailed parameters, required binaries, and output formats for each tool, se
 
 ### Prerequisites
 
-The MCP server supports Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning, all of which require a Datadog API key and application key. For instructions on creating them, see [API and Application Keys][9]. Library vulnerability lookup also requires both keys. SBOM generation works without authentication.
+The MCP server supports Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning, all of which require a Datadog API key and application key. For instructions on creating them, see [API and Application Keys][9]. Library vulnerability lookup and saving a custom SAST rule also require both keys. SBOM generation and ephemeral SAST scans work without authentication.
 
 ### Install the MCP server
 
@@ -109,12 +113,14 @@ The MCP server calls the following Datadog security binaries to perform scans. I
 
 | Binary                    | Used For      | Install Method                                |
 | ------------------------- | ------------- | --------------------------------------------- |
-| `datadog-static-analyzer` | SAST, Secrets | `brew install datadog-static-analyzer`        |
+| `datadog-static-analyzer` | SAST, Secrets, ephemeral SAST, custom rule saves | `brew install datadog-static-analyzer` |
 | `datadog-sbom-generator`  | SBOM, SCA     | [GitHub releases][10]                         |
 | `datadog-security-cli`    | SCA           | `brew install --cask datadog-security-cli`    |
 | `datadog-iac-scanner`     | IaC           | [GitHub releases][11]                         |
 
 <div class="alert alert-info"><code>datadog-security-cli</code> is not available on Windows, so SCA scans are not supported there. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
+
+Ephemeral SAST scans and custom rule saves require `datadog-static-analyzer` version 0.9.10 or later.
 
 ### Configure your client
 
@@ -126,7 +132,7 @@ Each client configuration requires the following environment variables:
 | `DD_APP_KEY` |  Yes\*   | Your [Datadog application key][9]                                                |
 | `DD_SITE`    |    No    | Your [Datadog site][12] domain (defaults to `datadoghq.com` for US1)             |
 
-\*Required for SAST, Secrets, SCA, IaC scanning, and library vulnerability lookup. SBOM generation works without authentication.
+\*Required for SAST, Secrets, SCA, IaC scanning, library vulnerability lookup, and saving custom SAST rules. SBOM generation and ephemeral SAST scans work without authentication.
 
 Keys in this MCP configuration are available to the MCP server process. A direct CLI command does not inherit them. Export `DD_API_KEY` and `DD_APP_KEY` in the shell when you run the CLI.
 
@@ -274,11 +280,11 @@ For any other MCP-compatible client, use the following configuration pattern:
 
 ## Install agent skills
 
-The server includes three agent skills for compatible AI coding clients.
+The server includes four agent skills for compatible AI coding clients.
 
 {{< skill-callout
     title="Install the Code Security skills"
-    text="Install `dd-codesec-scan-and-fix`, `dd-codesec-verify-findings`, and `dd-codesec-setup-toolchain`."
+    text="Install `dd-codesec-scan-and-fix`, `dd-codesec-verify-findings`, `dd-codesec-setup-toolchain`, and `dd-codesec-find-security-variants`."
     action_name="copy_dd_codesec_setup" >}}
 datadog-code-security-mcp setup
 {{< /skill-callout >}}
@@ -288,8 +294,11 @@ datadog-code-security-mcp setup
 | `dd-codesec-scan-and-fix`    | Scans local code, explains SAST, secrets, SCA, or IaC findings, and applies fixes you approve                    |
 | `dd-codesec-verify-findings` | Compares a local finding with Datadog platform context when the remote Datadog MCP Server is available           |
 | `dd-codesec-setup-toolchain` | Installs, updates, and diagnoses `datadog-code-security-mcp` and the scanner binaries it uses                    |
+| `dd-codesec-find-security-variants` | After an uncommitted security fix, infers the security invariant, scans with a temporary SAST rule, and reports other places that break the same invariant |
 
 `dd-codesec-setup-toolchain` covers the wrapper CLI and `datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-iac-scanner`, and `datadog-security-cli`.
+
+`dd-codesec-find-security-variants` asks you to confirm the invariant before it searches, and saves a rule only after you approve it.
 
 The `setup` command installs skills into `~/.agents/skills`, the shared directory used by Cursor and other clients that follow the Agent Skills convention. It also installs into `~/.claude/skills` (or `$CLAUDE_CONFIG_DIR/skills`) and `~/.codex/skills` when it detects Claude Code or Codex. Restart updated clients after setup.
 
@@ -354,6 +363,7 @@ After configuration, ask your AI assistant to perform scans using natural langua
 | SCA               | "Check if the project's dependencies have any known CVEs" |
 | IaC               | "Check the Terraform files for misconfigurations"       |
 | SBOM generation   | "Generate an SBOM for this project"                     |
+| Security variants | "I fixed a missing authorization check. Is the same check missing anywhere else?" |
 
 ### CLI commands
 
@@ -386,7 +396,25 @@ Generate an SBOM:
 datadog-code-security-mcp generate-sbom .
 ```
 
-Add `--json` to any command for JSON output:
+Run one local SAST rule without publishing it. This command does not require Datadog keys:
+
+```shell
+datadog-code-security-mcp ephemeral-scan \
+  --language TYPESCRIPT --directory . \
+  --code-file rule.js --query-file rule.scm
+```
+
+Save an approved rule as a Datadog custom rule. `--tests-file` is a JSON array with two examples, the fixed code and the code before the fix. This command uses `DD_API_KEY` and `DD_APP_KEY` from the shell:
+
+```shell
+datadog-code-security-mcp promote-sast-rule --user-confirmed \
+  --language TYPESCRIPT --rule-name missing-admin-check \
+  --code-file rule.js --query-file rule.scm --tests-file tests.json
+```
+
+Scans use the saved rule only after the repository configuration lists its ruleset. Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. A new `code-security.datadog.yaml` hides that legacy file. See [Static Code Analysis configuration][31].
+
+Add `--json` to the scan and SBOM commands for JSON output:
 
 ```shell
 datadog-code-security-mcp scan all ./src --json
@@ -442,3 +470,6 @@ The collected fields are listed in the project's [telemetry reference][27]. See 
 [26]: /security/guide/findings-schema/?tab=iacmisconfiguration
 [27]: https://github.com/datadog-labs/datadog-code-security-mcp/blob/main/docs/TELEMETRY.md
 [28]: https://www.datadoghq.com/legal/privacy/
+[29]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_ephemeral_sast_scan
+[30]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_promote_sast_rule
+[31]: /security/code_security/static_analysis/configuration/
