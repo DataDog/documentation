@@ -50,6 +50,8 @@ These are the available processors:
 - [Tags][18]
 - [Throttle][19]
 
+**Note**: The Generate Metrics processor and the Quota processor with an overflow destination aren't available as [per-source or shared processors](#per-source-and-shared-processors).
+
 [1]: /observability_pipelines/processors/add_environment_variables/
 [2]: /observability_pipelines/processors/add_hostname/
 [3]: /observability_pipelines/processors/custom_processor/
@@ -88,11 +90,44 @@ These are the available processors:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Per-source and shared processors for multiple sources {#per-source-and-shared-processors}
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+Per-source and shared processors are in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
+When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches, which have their own processor groups. By using per-source and shared processors, you can avoid having to add the same processors to each branch's processor group.
+
+For example, the log pipeline in this image has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client.
+
+{{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources and two branches that send logs to Datadog, Datadog Archives, and CrowdStrike NG-SIEM." style="width:100%;" >}}
+
+The Worker sends all logs in this pipeline to two different branches. Suppose you want to:
+
+- Sample all logs from the Datadog Agent source
+- Deduplicate logs from all sources
+
+Instead of adding the same processors to each branch's processor group, add a per-source processor for the Datadog Agent and a shared processor to deduplicate logs from all sources.
+
+{{< img src="observability_pipelines/processors/per_source_shared_processors_tab.png" alt="The Datadog Agent source panel with per-source Sample and Tags processors and a shared Dedupe processor." style="width:50%;" >}}
+
+The Worker sends logs through the per-source processors first, then through the shared processors.
+
+{{< img src="observability_pipelines/processors/per_source_shared_processors_diagram.png" alt="A diagram showing logs sent from three sources through per-source and shared processors, then to branches and destinations." style="width:100%;" >}}
+
+The following aren't available as per-source or shared processors:
+
+- Generate Metrics processor
+- Quota processor with an overflow destination
+- Packs
+
+**Note**: Per-source and shared processor groups count toward the 25 processor group limit per canvas.
+
 ## Processor groups
 
 <div class="alert alert-info">Configuring a pipeline with processor groups is only available for Worker versions 2.7 and later.</div>
 
-{{< img src="observability_pipelines/processors/processor_groups.png" alt="A pipeline with a Splunk HEC source sending logs to three processor groups, each with its own filter and processors, which then send logs to Microsoft Sentinel and Splunk HEC destinations." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/processor_groups.png" alt="A Splunk HEC source sending logs to three filtered processor groups, then to Microsoft Sentinel and Splunk HEC." style="width:100%;" >}}
 
 You can organize your processors into logical groups to help you manage them. Each processor group has a Group Filter so that those processors are only applied to specific events. For example, if you want the group processors to only process events coming from `vpc`, then use the group filter `source:vpc`. You can also add filters for each individual processor.
 
