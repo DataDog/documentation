@@ -44,9 +44,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and Azure
 | Pipeline                   | Pipeline        |
 | Stage                      | Stage           |
 | Job                        | Job             |
-| Step                       | Step            |
-
-**Note**: Steps are only available with the Datadog Integration setup method, not with Service Hook Subscriptions. Steps are collected on a best-effort basis because Datadog retrieves them from the Azure DevOps API, which enforces [rate limits][24]. Organizations with a high volume of pipeline executions may have some executions without steps. Missing steps are not backfilled, and pipeline, stage, and job data is not affected.
+| Step ([requires the Datadog Integration](#collect-job-steps)) | Step |
 
 ## Configure the Datadog integration
 {{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
@@ -153,6 +151,13 @@ Example for enabling the hooks in specified projects:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect job steps
+
+Datadog creates a step for each step in an Azure Pipelines job. Each step appears under its job, with the step's name and duration.
+
+Steps require the Datadog Integration setup method. No additional configuration is required: after you enable CI Visibility for an organization or project, Datadog collects steps automatically. Steps are not available with Service Hook Subscriptions.
+
+<div class="alert alert-warning">Datadog retrieves steps through the Azure DevOps API, which enforces <a href="https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops">rate limits</a>. Steps are collected on a best-effort basis, so organizations with a high volume of pipeline executions may have some executions without steps. Missing steps are not backfilled. Pipeline, stage, and job data is not affected.</div>
 
 ## Advanced configuration
 
@@ -204,4 +209,3 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
-[24]: https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops
