@@ -622,7 +622,7 @@ multifiltersearch:
       cloud_provider: GCP
       resource_type: BigQuery Dataset
       recommendation_type: Delete Idle BigQuery Dataset
-      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days. Recommends deleting them after confirming that nothing still reads them.
+      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
