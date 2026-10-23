@@ -1,13 +1,13 @@
 ---
-title: Infrastructure Monitoring (Basic)
+title: Infrastructure Basic
 description: Monitor system metrics and limited process and service information for on-premises and lower-tier cloud workloads.
 ---
 
 ## Overview
 
-Infrastructure Monitoring (Basic) is intended for monitoring on-premises hosts. If you only need basic system metrics (CPU, RAM, disk, network, and select processes), Infrastructure Basic can be a cost-effective way to monitor your physical servers and on-premises VMs.
+Infrastructure Basic is intended for monitoring on-premises hosts. If you only need basic system metrics (CPU, RAM, disk, network, and select processes), Infrastructure Basic can be a cost-effective way to monitor your physical servers and on-premises VMs.
 
-<div class="alert alert-info">Contact your Datadog account team to get access to Infrastructure Basic. Your contract must include an Infrastructure Basic subscription; configuring Basic mode alone does not enroll you in the product.</div>
+<div class="alert alert-info">Contact your Datadog account team to get access to Infrastructure Basic. Configuring Basic mode alone does not enroll you in the product.</div>
 
 ## Use cases
 
@@ -19,7 +19,7 @@ Use the [Process check][3] to collect metrics for specific, named application pr
 
 You can use Infrastructure Basic alongside one other Infrastructure Monitoring tier in the same Datadog organization. For example, use Basic for on-premises development VMs and a more comprehensive tier for production workloads that require container monitoring or broader process visibility. The same dashboards and queries can cover supported system metrics from both sets of hosts.
 
-For cloud workloads with similarly limited monitoring requirements, contact your Datadog account team to discuss eligibility. Cloud hosts must have the Datadog Agent installed to use Infrastructure Basic.
+Cloud hosts must have the Datadog Agent installed to use Infrastructure Basic.
 
 ## Capabilities
 
@@ -44,7 +44,7 @@ Infrastructure Basic does not support the following:
 - Most Agent integrations, including database, IIS, and Kafka integrations. See the [supported integrations][1] for the limited set available in Basic mode.
 - Hosts monitored only through cloud integrations, without the Datadog Agent
 
-**OpenTelemetry:** Hosts monitored with OpenTelemetry must also have the Datadog Agent installed and configured in Basic mode to use Infrastructure Basic. OpenTelemetry-only hosts are not supported.
+**OpenTelemetry:** Infrastructure Basic requires the Datadog Agent and can't be configured for an OpenTelemetry Collector. You can still collect OTLP-formatted telemetry using [OTLP Ingestion by the Datadog Agent] when the Agent is in Basic mode.
 
 **Operating system compatibility:** Agent-based monitoring requires an operating system that supports the minimum Agent version for Infrastructure Basic. See [Agent supported platforms][5] for compatibility details. Hosts that cannot run the required Agent version may still be monitored through a [supported virtualization integration][6], such as VMware vSphere.
 
@@ -61,3 +61,4 @@ Before configuring your hosts, contact your Datadog account team to add Infrastr
 [4]: /infrastructure/hostmap/
 [5]: /agent/supported_platforms/
 [6]: /agent/configuration/infrastructure-modes/#configure-basic-mode-for-virtualization-integrations
+[7]: /opentelemetry/setup/otlp_ingest_in_the_agent/

@@ -141,7 +141,15 @@ infrastructure_mode: <MODE>
 
 ## Configure Basic mode for virtualization integrations
 
-To report hosts through a virtualization integration as Infrastructure Basic, configure `infrastructure_mode: basic` in the integration instance. This is a separate setting from the host Agent's top-level `infrastructure_mode` setting in `datadog.yaml`.
+Set `infrastructure_mode: basic` in the virtualization integration instance to report the hosts and VMs it discovers as Basic, including VMs that don't run the Datadog Agent. This setting is separate from the mode configured in `datadog.yaml` on the host running the integration. That host's Agent must use Full mode, because an Agent in Basic mode can't run virtualization integrations.
+
+If a monitored VM also runs the Datadog Agent in Full or Basic mode, the Agent's mode takes precedence over the integration's mode. Configure that Agent to use Basic mode. The following table shows the effective mode for a monitored VM:
+
+| Agent on the monitored VM | Effective mode for the VM |
+|---|---|
+| No Agent, or Agent in None mode | The integration's mode |
+| Agent in Basic mode | Basic |
+| Agent in Full mode | Full |
 
 The examples below show the fields to add or update in an existing integration configuration. Retain the authentication settings and other required options from the integration's setup instructions. After updating the configuration, [restart the Agent][24] running the integration.
 
@@ -155,8 +163,6 @@ instances:
     infrastructure_mode: basic
     # Retain the other required settings for this instance.
 ```
-
-The vSphere integration can report ESXi hosts and VMs without an Agent installed on each monitored host. If a monitored host also runs the Datadog Agent, configure that Agent to use Basic mode as well. If the integration and the Agent report different modes for the same host, the Agent's mode takes precedence.
 
 ### Proxmox
 
