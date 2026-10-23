@@ -125,7 +125,7 @@ See the [librdkafka documentation][7] for more information and to ensure your va
 
 ## Health metrics
 
-For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation.
+See [Component metrics][13] and [Destination buffer metrics][14] for more information on metrics emitted by all destinations.
 
 ### Kafka metrics
 
@@ -178,10 +178,9 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [4]: https://learn.microsoft.com/en-us/azure/event-hubs/azure-event-hubs-apache-kafka-overview
 [5]: https://app.datadoghq.com/observability-pipelines
 [7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
-[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [9]: /observability_pipelines/destinations/#event-batching
 [10]: /observability_pipelines/configuration/set_up_pipelines/
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[14]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
