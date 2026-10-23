@@ -16,45 +16,40 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM validates a sample of logs that contain OCSF data against the OCSF schema declared in each log. Use the **Cloud SIEM - OCSF Log Quality** dashboard to find sources with invalid records, inspect field coverage, and track quality after changing a log pipeline. For background on the schema and supported pipelines, see [Open Cybersecurity Schema Framework in Cloud SIEM][1].
-
-Validation reports whether a sampled record conforms to its OCSF schema. A record is **valid** when the validator finds no errors. A valid record can still have warnings. Validation results do not measure whether the underlying security event is accurate or whether every incoming log has an OCSF mapping.
+Cloud SIEM validates samples of security logs mapped to OCSF against the schema declared in each log. The [Cloud SIEM - OCSF Log Quality dashboard][3] helps you identify sources with mapping issues and track log quality after making changes. For background on the schema and supported pipelines, see [Open Cybersecurity Schema Framework in Cloud SIEM][1].
 
 ## Configure validation outputs
 
-1. Navigate to [**Cloud SIEM > Configuration > OCSF Validation**][2].
+1. Navigate to [**Security > Cloud SIEM > Settings > OCSF Validation**][2].
 1. Turn on **Enable OCSF validation outputs** to send validation metrics to your organization. This setting is on by default.
 1. Optionally, turn on **Send detailed finding logs** to receive a log for each validation error or warning found in sampled records. This setting is off by default.
 
-The finding logs setting is available only when validation outputs are enabled. Turning off validation outputs stops both customer-facing metrics and finding logs, and also turns off the finding logs setting. Re-enabling validation outputs does not automatically re-enable finding logs. Existing metrics and logs remain available according to their retention settings. Changes take effect on subsequent validation runs.
+{{< img src="security/security_monitoring/ocsf/validation_settings.png" alt="OCSF validation settings with validation outputs enabled and detailed finding logs disabled" style="width:100%;" >}}
+
+Finding logs require validation outputs to be enabled. Turning off validation outputs stops both metrics and finding logs. Changes affect subsequent validation results; existing metrics and logs remain available according to their retention settings.
 
 ## Explore the OCSF Log Quality dashboard
 
-Open [Dashboards][3] and search for **Cloud SIEM - OCSF Log Quality**. Set a time range that includes recent validation runs. Use the `source` and `ocsf_version` filters to focus on a log source and schema version. The `error_type` and `warning_type` filters narrow the corresponding analysis widgets.
+Open the [Cloud SIEM - OCSF Log Quality dashboard][3] and select a time range with validation results. Use the `source` and `ocsf_version` filters to focus on a log source and schema version. The `error_type` and `warning_type` filters narrow the corresponding analysis widgets. Dashboard counts and percentages describe sampled logs, not all logs from a source.
+
+{{< img src="security/security_monitoring/ocsf/validation_dashboard.png" alt="Top of the Cloud SIEM OCSF Log Quality dashboard showing filters and Validation Quality widgets" style="width:100%;" >}}
 
 | Dashboard section | What it shows | How to use it |
 | --- | --- | --- |
-| Validation Quality | Sampled log counts, validation success rate, active OCSF sources, and average required-field coverage. | Check overall quality and whether it changes between runs. |
-| Attribute Coverage | Average coverage over time and average and minimum coverage for required and recommended fields by source. | Find sources whose sampled records are missing expected fields. |
-| Failed Log Validation Groups | Sources with the most invalid sampled records and patterns in validation error logs. | Prioritize a source, then inspect a pattern for repeated failures. The log patterns require detailed finding logs. |
-| Error Analysis | Error counts by type and by source. | Identify the schema failure to correct in a pipeline or source mapping. |
-| Warning Analysis | Warning counts by type and source. | Review possible data-quality gaps, including warnings on otherwise valid records. |
+| Validation Quality | Counts of sampled, valid, and invalid logs; active OCSF sources; validation success rate; and average required-field coverage. **Validation Success Rate** is the percentage of sampled logs without errors. **Avg Required Fields %** is the average proportion of required OCSF fields present in sampled logs. | Compare the success-rate trend with the counts and field coverage to see whether quality is improving. |
+| Attribute Coverage | Average required- and recommended-field coverage over time, plus average and minimum coverage by source. Coverage measures whether fields are present, not whether their values are correct. | Find sources with missing fields and compare their average coverage with the lowest observed coverage. |
+| Failed Log Validation Groups | Sources with the most invalid sampled logs and recurring validation error log patterns. | Identify an affected source and inspect repeated failures. Log patterns require detailed finding logs to be enabled. |
+| Error Analysis | Validation error counts by type and source, including a trend by error type. A log with an error is invalid, and one log can produce multiple errors. | Find the most common schema failures and the sources they affect. Error counts can exceed invalid-log counts. |
+| Warning Analysis | Warning counts by type and source. Warnings can occur on otherwise valid logs, and one log can produce multiple warnings. | Review potential quality gaps after addressing validation errors. |
 
-**Validation success rate** is the number of valid sampled logs divided by the total number of valid and invalid sampled logs. **Required fields %** and **Recommended fields %** measure the proportion of fields present in each sampled record for those field categories. The dashboard averages those percentages; the per-source tables also show the minimum observed percentage. An error can make a record invalid even when its required-field coverage is high.
+If the dashboard has no data, check the selected time range, whether the source has OCSF-mapped logs, and whether validation outputs are enabled. No data does not mean that all logs are valid.
 
 ### Investigate a failed source
 
 1. In the dashboard, set the `source` filter to a source with invalid logs or low field coverage.
 1. Use **Error Analysis** to find the most common error type. If detailed finding logs are enabled, inspect **Validation Error Log Patterns** or search Logs Explorer for `service:ocsf-runtime-validation` and the source. Finding logs include the validation message, type, OCSF attribute path, and a `log_url` link to the sampled original log.
-1. Open the original log and inspect its `ocsf` attributes. Compare the affected field with the OCSF schema for that log's class and version.
-1. Correct the relevant [integration pipeline][4] or [custom OCSF processor][5], then compare the source's results after a later validation run.
-
-## Understand the data and its limits
-
-- Validation runs every four hours and examines the preceding 60 minutes of OCSF-mapped logs. It samples up to 200 logs per source in that window. Counts and percentages describe those samples, not the full volume of logs or a continuous four-hour period.
-- A source appears when its logs contain OCSF version metadata in the sampled window. No dashboard data can mean there were no matching logs, the selected time range excludes a run, customer-facing outputs are disabled, or a run did not produce results. It does not establish that all logs are valid.
-- A single sampled log can produce multiple errors or warnings. Error and warning counts therefore need not equal the number of invalid logs.
-- Detailed finding logs are separate from the source logs they describe. The `log_url` link points to the sampled source log; access depends on that log's availability and your permissions.
+1. Open the original log and inspect its `ocsf` attributes. Compare the affected field with the OCSF schema for that log's class and version. The `log_url` link points to the original log, which must still be available and accessible to you.
+1. Correct an editable source mapping, such as a [custom OCSF processor][5], or review the source data and relevant [integration pipeline][4]. Then compare the source's results after a later validation run.
 
 ## Further reading
 
@@ -62,6 +57,6 @@ Open [Dashboards][3] and search for **Cloud SIEM - OCSF Log Quality**. Set a tim
 
 [1]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
 [2]: https://app.datadoghq.com/security/configuration/siem/ocsf
-[3]: https://app.datadoghq.com/dashboard/lists
+[3]: https://app.datadoghq.com/dash/integration/32530/cloud-siem---ocsf-log-quality
 [4]: /logs/log_configuration/pipelines/?tab=source#integration-pipelines
 [5]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor/
