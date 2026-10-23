@@ -15,7 +15,15 @@ The Public Artifact Vulnerabilities page lets you view vulnerability and respons
 
 ## How to access
 
-The Public Artifact Vulnerabilities page is accessible through the Help page under {{< ui >}}Public Artifact Vulnerabilities{{< /ui >}}.
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Open the [Public Artifact Vulnerabilities page][1], or go to the Help page and click {{< ui >}}Public Artifact Vulnerabilities{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/public-artifact-vulnerabilities
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">The Public Artifact Vulnerabilities page is not available on the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Use the page on the US1 site instead: <code>https://app.datadoghq.com/public-artifact-vulnerabilities</code>. You don't need a US1 account to view it.</div>
+{{< /site-region >}}
 
 ## Using the page
 
