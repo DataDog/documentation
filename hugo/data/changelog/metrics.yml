@@ -15,6 +15,12 @@ entries:
       - ListTagConfigurations
     title: Correct parameter limits and metric types for Get a list of metrics
   - change_type: modified
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40694
+    operations:
+      - CreateTagIndexingRuleExemption
+      - GetTagIndexingRuleExemption
+    title: Add impact fields to tag indexing rule exemptions
     date: '2026-10-22'
     link: https://github.com/DataDog/documentation/pull/40849
     operations:
