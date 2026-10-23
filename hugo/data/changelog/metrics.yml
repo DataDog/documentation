@@ -27,3 +27,10 @@ entries:
       - QueryMetrics
     title: Document missing response fields for the v1 Query timeseries points 
       endpoint
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40908
+    operations:
+      - QueryScalarData
+      - QueryTimeseriesData
+    title: Document Processes API time window, retention, and filter semantics

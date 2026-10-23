@@ -97697,7 +97697,9 @@ components:
       x-enum-varnames:
         - PROCESS
     ProcessScalarQuery:
-      description: A query for host-level process metrics such as CPU and memory usage.
+      description: |-
+        Per-process metrics from Live Processes. Queries without `aggregator` fail. To scope to one process,
+        set `tag_filters` to its `identifying_tags` from `GET /api/v2/processes`.
       properties:
         aggregator:
           $ref: "#/components/schemas/MetricsAggregator"
@@ -97709,11 +97711,15 @@ components:
           description: Whether CPU metrics should be normalized by core count.
           type: boolean
         limit:
-          description: Maximum number of results to return.
+          description: |-
+            Maximum number of processes or groups to return. Large values can fail with an `Unprocessable
+            Content` error. If so, retry with a smaller limit.
           format: int64
           type: integer
         metric:
-          description: The process metric to query.
+          description: |-
+            The process metric to query, such as `process.stat.cpu.total_pct`, `process.stat.memory.rss`, or
+            `process.stat.memory.vms`.
           example: process.stat.cpu.total_pct
           type: string
         name:
@@ -97723,7 +97729,9 @@ components:
         sort:
           $ref: "#/components/schemas/QuerySortOrder"
         tag_filters:
-          description: Tag filters to narrow down processes.
+          description: |-
+            Tags to narrow down processes. To scope to one process, use its `identifying_tags` from
+            `GET /api/v2/processes`, for example `host:web-01` and `pid:1234`.
           items:
             description: A tag filter value.
             example: "env:prod"
@@ -97835,7 +97843,9 @@ components:
       x-enum-varnames:
         - PROCESS
     ProcessTimeseriesQuery:
-      description: A query for host-level process metrics such as CPU and memory usage.
+      description: |-
+        Per-process metrics from Live Processes over time, such as CPU and memory usage. To scope to one
+        process, set `tag_filters` to its `identifying_tags` from `GET /api/v2/processes`.
       properties:
         cross_org_uuids:
           $ref: "#/components/schemas/CrossOrgUuids"
@@ -97845,11 +97855,15 @@ components:
           description: Whether CPU metrics should be normalized by core count.
           type: boolean
         limit:
-          description: Maximum number of results to return.
+          description: |-
+            Maximum number of processes or groups to return. Large values can fail with an `Unprocessable
+            Content` error. If so, retry with a smaller limit.
           format: int64
           type: integer
         metric:
-          description: The process metric to query.
+          description: |-
+            The process metric to query, such as `process.stat.cpu.total_pct`, `process.stat.memory.rss`, or
+            `process.stat.memory.vms`.
           example: process.stat.cpu.total_pct
           type: string
         name:
@@ -97859,7 +97873,9 @@ components:
         sort:
           $ref: "#/components/schemas/QuerySortOrder"
         tag_filters:
-          description: Tag filters to narrow down processes.
+          description: |-
+            Tags to narrow down processes. To scope to one process, use its `identifying_tags` from
+            `GET /api/v2/processes`, for example `host:web-01` and `pid:1234`.
           items:
             description: A tag filter value.
             example: "env:prod"
@@ -213403,16 +213419,28 @@ paths:
           - dashboards_write
   /api/v2/processes:
     get:
-      description: Get all processes for your organization.
+      description: |-
+        Get processes collected by Live Processes for your organization. One request covers a window of
+        at most 1 hour that starts within the past 36 hours. To cover a longer period, make one request
+        per hour. Older data is not available from this endpoint.
+
+        When a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source
+        query to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that
+        one process. If absent, don't substitute an empty filter, which would query all processes.
       operationId: ListProcesses
       parameters:
-        - description: String to search processes by.
+        - description: |-
+            Free-text search over process fields such as the executable and user. When it contains several
+            words, a process must match all of them. Use `tags` for exact values such as host.
           in: query
           name: search
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to filter processes by.
+        - description: |-
+            Comma-separated `key:value` tags. A process must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
+            request per host.
           example: account:prod,user:admin
           in: query
           name: tags
@@ -213420,9 +213448,9 @@ paths:
           schema:
             type: string
         - description: |-
-            Unix timestamp (number of seconds since epoch) of the start of the query window.
-            If not provided, the start of the query window will be 15 minutes before the `to` timestamp. If neither
-            `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+            Start of the query window, in Unix seconds. Must be within the past 36 hours and at most 1 hour
+            before `to`. If not provided, the start of the query window is 15 minutes before the `to` timestamp.
+            If neither `from` nor `to` is provided, the query window is `[now - 15m, now]`.
           in: query
           name: from
           required: false
@@ -213430,9 +213458,9 @@ paths:
             format: int64
             type: integer
         - description: |-
-            Unix timestamp (number of seconds since epoch) of the end of the query window.
-            If not provided, the end of the query window will be 15 minutes after the `from` timestamp. If neither
-            `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+            End of the query window, in Unix seconds. Must be at most 1 hour after `from`. If not provided, the
+            end of the query window is 15 minutes after the `from` timestamp. If neither `from` nor `to` is
+            provided, the query window is `[now - 15m, now]`.
           in: query
           name: to
           required: false
