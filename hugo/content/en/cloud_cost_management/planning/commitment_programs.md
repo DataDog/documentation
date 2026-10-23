@@ -99,10 +99,11 @@ Azure Databricks pre-purchase plans provide a prepaid balance that eligible usag
 
 ### View your plans
 
-1. Configure [Azure cost exports][6], including historical data covering the plan's purchase and subsequent usage.
-2. Go to [**Cloud Cost > Planning > Commitment Programs**][1] and select Azure Databricks to view pre-purchase plans.
-3. Select a reporting period. The inventory includes plans that were active during any part of that period, including plans that have since expired.
-4. Compare each plan's remaining balance with its expiration date to identify balances to use before the plan ends.
+Pre-purchase plans use your existing [Azure Cloud Cost Management setup][6]. No additional setup is required.
+
+1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] and select Azure Databricks to view pre-purchase plans.
+2. Select a reporting period. The inventory includes plans that were active during any part of that period, including plans that have since expired.
+3. Compare each plan's remaining balance with its expiration date to identify balances to use before the plan ends.
 
 > **Screenshot placeholder:** Add an Azure Databricks pre-purchase plan inventory screenshot showing balances and expiration dates for the selected reporting period. Replace this placeholder before publication.
 
@@ -223,5 +224,5 @@ Results appear in two sections:
 [3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
 [5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
-[6]: /cloud_cost_management/setup/azure/#pre-purchase-plan-data
+[6]: /cloud_cost_management/setup/azure/
 [7]: /cloud_cost_management/setup/azure/#getting-historical-data
