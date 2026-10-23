@@ -305,6 +305,83 @@
       >
     </div>
   </div>
+  <script>
+    (function () {
+      const selector = ".api-toolbar";
+
+      {
+        const bar = document.querySelector(selector);
+        if (bar) {
+          const root = document.documentElement;
+          const publishContentHeight = (height) => root.style.setProperty("--sticky-bar-content-height", `${height}px`);
+
+          // True from a jump until the reader takes over.
+          let realignAllowed = location.hash !== "";
+
+          const anchorTarget = () => {
+            const id = decodeURIComponent(location.hash.slice(1));
+            return id ? document.getElementById(id) : null;
+          };
+
+          const realignCoveredTarget = () => {
+            if (!realignAllowed) return;
+            const target = anchorTarget();
+            if (!target) return;
+            const targetTop = target.getBoundingClientRect().top;
+            const barBottom = bar.getBoundingClientRect().bottom;
+            // `scrollIntoView` honors the updated `scroll-padding-top`.
+            if (targetTop < barBottom) target.scrollIntoView({ block: "start" });
+          };
+
+          for (const type of ["wheel", "touchstart", "pointerdown", "keydown"]) {
+            window.addEventListener(
+              type,
+              () => {
+                realignAllowed = false;
+              },
+              { capture: true, passive: true },
+            );
+          }
+          // A click on an in-page link comes after its pointerdown or keydown,
+          // and before the jump. The bar can grow before hashchange fires, so
+          // waiting for hashchange would be too late. This also covers a link to
+          // the hash already in the URL, which jumps without a hashchange.
+          document.addEventListener(
+            "click",
+            (event) => {
+              const link = event.target.closest?.("a[href*='#']");
+              if (link && link.hash && link.pathname === location.pathname) {
+                realignAllowed = true;
+              }
+            },
+            { capture: true },
+          );
+          // Hash changes without a click (back, forward, or a script). The bar
+          // may already have grown, so check right away too.
+          window.addEventListener("hashchange", () => {
+            realignAllowed = true;
+            realignCoveredTarget();
+          });
+
+          const style = getComputedStyle(bar);
+          let contentHeight =
+            bar.getBoundingClientRect().height - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+          publishContentHeight(contentHeight);
+
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(([entry]) => {
+              const height = entry.contentRect.height;
+              if (height === contentHeight) return;
+              const grew = height > contentHeight;
+              contentHeight = height;
+              publishContentHeight(height);
+              if (grew) realignCoveredTarget();
+            }).observe(bar);
+          }
+        }
+      }
+    })();
+  </script>
   <div class="prose" data-astro-cid-q6ulih72>
     <div class="api-page-header _api-page-header_f3b303">
       <h1 class="api-page-header__title _api-page-header__title_f3b303">Dashboards</h1>

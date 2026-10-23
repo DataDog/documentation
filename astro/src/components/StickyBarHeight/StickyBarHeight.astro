@@ -1,0 +1,106 @@
+---
+/**
+ * Publishes a sticky bar's content height (without padding) on <html> as
+ * `--sticky-bar-content-height`, for layouts whose sticky bar sizes to its
+ * content. The layout adds the bar's padding to get `--sticky-bar-height`,
+ * which `global.css` adds to the anchor scroll offset.
+ *
+ * Rendered right AFTER the bar, so the bar is parsed when the script runs.
+ * Kept inline (via `define:vars`, which forces an inline script) so the
+ * height is set before the browser jumps to a URL's anchor. A bundled module
+ * script would run after that jump.
+ *
+ * Measures the content, not the whole bar, because the bar's padding can
+ * change on scroll; the layout knows which padding applies after a jump. A
+ * ResizeObserver keeps the value current when the content resizes or wraps.
+ *
+ * The bar can grow right after a jump (for example, when the API toolbar's
+ * copy icon appears and the title wraps again). The browser doesn't redo a
+ * jump that already happened, so when the bar grows over the anchor target,
+ * this scrolls the target back into view. It stops once the reader scrolls,
+ * taps, clicks, or presses a key, and starts again on the next jump.
+ */
+interface Props {
+  /** Selector for the sticky bar. */
+  selector: string;
+}
+
+const { selector } = Astro.props;
+---
+
+<script is:inline define:vars={{ selector }}>
+  {
+    const bar = document.querySelector(selector);
+    if (bar) {
+      const root = document.documentElement;
+      const publishContentHeight = (height) =>
+        root.style.setProperty("--sticky-bar-content-height", `${height}px`);
+
+      // True from a jump until the reader takes over.
+      let realignAllowed = location.hash !== "";
+
+      const anchorTarget = () => {
+        const id = decodeURIComponent(location.hash.slice(1));
+        return id ? document.getElementById(id) : null;
+      };
+
+      const realignCoveredTarget = () => {
+        if (!realignAllowed) return;
+        const target = anchorTarget();
+        if (!target) return;
+        const targetTop = target.getBoundingClientRect().top;
+        const barBottom = bar.getBoundingClientRect().bottom;
+        // `scrollIntoView` honors the updated `scroll-padding-top`.
+        if (targetTop < barBottom) target.scrollIntoView({ block: "start" });
+      };
+
+      for (const type of ["wheel", "touchstart", "pointerdown", "keydown"]) {
+        window.addEventListener(
+          type,
+          () => {
+            realignAllowed = false;
+          },
+          { capture: true, passive: true },
+        );
+      }
+      // A click on an in-page link comes after its pointerdown or keydown,
+      // and before the jump. The bar can grow before hashchange fires, so
+      // waiting for hashchange would be too late. This also covers a link to
+      // the hash already in the URL, which jumps without a hashchange.
+      document.addEventListener(
+        "click",
+        (event) => {
+          const link = event.target.closest?.("a[href*='#']");
+          if (link && link.hash && link.pathname === location.pathname) {
+            realignAllowed = true;
+          }
+        },
+        { capture: true },
+      );
+      // Hash changes without a click (back, forward, or a script). The bar
+      // may already have grown, so check right away too.
+      window.addEventListener("hashchange", () => {
+        realignAllowed = true;
+        realignCoveredTarget();
+      });
+
+      const style = getComputedStyle(bar);
+      let contentHeight =
+        bar.getBoundingClientRect().height -
+        parseFloat(style.paddingTop) -
+        parseFloat(style.paddingBottom);
+      publishContentHeight(contentHeight);
+
+      if ("ResizeObserver" in window) {
+        new ResizeObserver(([entry]) => {
+          const height = entry.contentRect.height;
+          if (height === contentHeight) return;
+          const grew = height > contentHeight;
+          contentHeight = height;
+          publishContentHeight(height);
+          if (grew) realignCoveredTarget();
+        }).observe(bar);
+      }
+    }
+  }
+</script>

@@ -57,8 +57,11 @@ const ANCHORS = [
   },
 ];
 
+// The toolbar's height follows its content: the breadcrumb title wraps more
+// as the window narrows, so the narrowest desktop width gets its own case.
 const VIEWPORTS = [
   { name: "desktop", width: 1440, height: 900 },
+  { name: "narrow desktop", width: 992, height: 800 },
   { name: "mobile", width: 375, height: 812 },
 ];
 
@@ -84,8 +87,65 @@ for (const viewport of VIEWPORTS) {
           .poll(() => gapBelowToolbar(page, anchor.id))
           .toBeLessThanOrEqual(MAX_GAP_PX);
       });
+
+      // A click fires pointerdown, which stops StickyBarHeight's re-align,
+      // so the new jump has to start it again.
+      test(`clicking an in-page link to the ${anchor.name} lands just below the sticky toolbar`, async ({
+        page,
+      }) => {
+        await page.goto(anchor.path);
+        await clickInPageLink(page, anchor.id);
+
+        await expect
+          .poll(() => stickyCoverAtTopEdge(page, anchor.id))
+          .toBeNull();
+        await expect
+          .poll(() => gapBelowToolbar(page, anchor.id))
+          .toBeLessThanOrEqual(MAX_GAP_PX);
+      });
+
+      // The browser jumps again but fires no hashchange. Only a case where the
+      // toolbar grows during the jump (mobile scopes) depends on the click
+      // starting the re-align; the other cases pass without it.
+      test(`clicking a link to the ${anchor.name} already in the URL lands just below the sticky toolbar`, async ({
+        page,
+      }) => {
+        await page.goto(`${anchor.path}#${anchor.id}`);
+        await expect
+          .poll(() => stickyCoverAtTopEdge(page, anchor.id))
+          .toBeNull();
+
+        // Back to the top, so the jump starts from there. `scrollTo` is
+        // instant: an animated wheel scroll would keep running after the
+        // click and pull the page back up. The key press is reader input,
+        // which stops the re-align, so only the click can start it again.
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.keyboard.press("Shift");
+
+        await clickInPageLink(page, anchor.id);
+
+        await expect
+          .poll(() => stickyCoverAtTopEdge(page, anchor.id))
+          .toBeNull();
+        await expect
+          .poll(() => gapBelowToolbar(page, anchor.id))
+          .toBeLessThanOrEqual(MAX_GAP_PX);
+      });
     }
   });
+}
+
+/** Adds a link to the target at the top of the page content and clicks it,
+ * with real pointer events, as a reader would. */
+async function clickInPageLink(page: Page, id: string) {
+  await page.evaluate((targetId) => {
+    const link = document.createElement("a");
+    link.id = "test-in-page-link";
+    link.href = `#${targetId}`;
+    link.textContent = "Jump";
+    document.querySelector(".prose")!.prepend(link);
+  }, id);
+  await page.click("#test-in-page-link");
 }
 
 test.describe("Overview page headings", () => {
