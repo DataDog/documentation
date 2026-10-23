@@ -9,9 +9,6 @@ aliases:
 - '/developers/ide_plugins/idea/logs/'
 - '/ide_plugins/idea/logs/'
 further_reading:
-- link: "/tracing/error_tracking/"
-  tag: "Documentation"
-  text: "Learn more about Error Tracking"
 - link: "/security/code_security/"
   tag: "Documentation"
   text: "Learn more about Code Security"
@@ -22,13 +19,13 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers who use Datadog products, such as [Code Security][24] and [Error Tracking][25], to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers who use Datadog products, such as [Code Security][24], to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
 
 {{< img src="/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 ## Requirements
 
-- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn about Datadog's observability tools. You can sign up for a free trial there.
 
 ## Setup
 
@@ -49,7 +46,7 @@ After installing the Datadog plugin and restarting the IDE, log in to Datadog:
 1. Click **Log in...**.
 1. In the browser window that opens, select your site and organization, then authorize access to the platform.
 
-**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
 
 ### Link a service
 
@@ -64,7 +61,7 @@ To remove a service, select it in the **Services** table and click the minus ico
 
 ## Core features
 
-### Code Security
+### Code security
 The [**Code Security**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes as you edit to detect quality and security issues prior to commit.
 
 {{< img src="/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
@@ -77,23 +74,11 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 
 {{< img src="/ide_plugins/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
-<div class="alert alert-info">To make the most of this feature, ensure that Source Code Integration is configured for your service.</div>
+<div class="alert alert-info">To make the most of this feature, configure Source Code Integration for your service.</div>
 
 ## Other features
 
-### Error Tracking
-
-<div class="alert alert-info">This feature is in limited support.</div>
-
-The [**Error Tracking**][25] integration helps you find and fix runtime errors from Error Tracking.
-
-{{< img src="/ide_plugins/idea/error_tracking/editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
-
-Click the gutter icon to open the Datadog tool window and inspect details of the runtime error.
-
-Find out more in the [Error Tracking][25] sub-section.
-
-### Code Origin for Spans
+### Code origin for spans
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
@@ -103,7 +88,7 @@ The [**Code Origin for Spans**][22] integration shows you metrics for entry span
 
 Click the inlay to open the Datadog tool window and inspect the span details.
 
-### Flaky Tests
+### Flaky tests
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
@@ -113,7 +98,7 @@ The [**Flaky Tests**][7] integration shows you flaky tests detected by [Test Opt
 
 Click the inlay to open the Datadog tool window and inspect the test details.
 
-### CI Test Runs
+### CI test runs
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
@@ -124,13 +109,13 @@ You can view recent test runs in the [CI Visibility Explorer][12] by navigating 
 Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
 
 ## Data and telemetry
-Datadog collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][16] and [Datadog's EULA][17].
+Datadog collects information about your usage of this IDE. This includes how you interact with it, whether errors occurred, and what caused those errors. Collection follows the [Datadog Privacy Policy][16] and [Datadog's EULA][17].
 
-If you don't wish to send this data to Datadog, you can disable the collection at any time in the settings: `Settings > Tools > Datadog > Data Sharing` and disable the `Send usage statistics` option.
+If you don't want to send this data to Datadog, turn off collection in the settings. Go to `Settings > Tools > Datadog > Data Sharing` and disable `Send usage statistics`.
 
 ## Feedback
 
-You can give feedback in the [discussion forum][1], or send an e-mail to [team-ide-integration@datadoghq.com][11].
+You can give feedback in the [discussion forum][1], or send an email to [team-ide-integration@datadoghq.com][11].
 
 ## Further reading
 
@@ -160,4 +145,3 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [19]: /continuous_integration/
 [22]: /tracing/code_origin?tab=java
 [24]: /ide_plugins/idea/code_security/
-[25]: /ide_plugins/idea/error_tracking/
