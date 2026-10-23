@@ -92566,12 +92566,16 @@ components:
         - logs
         - metrics
         - audit
+        - ci_pipelines
+        - ci_tests
       example: "logs"
       type: string
       x-enum-varnames:
         - LOGS
         - METRICS
         - AUDIT
+        - CI_PIPELINES
+        - CI_TESTS
     OrgConnectionUpdate:
       description: Org connection update data.
       properties:
