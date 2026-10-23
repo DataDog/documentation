@@ -94047,6 +94047,8 @@ components:
           $ref: "#/components/schemas/OutcomesResponseIncluded"
         links:
           $ref: "#/components/schemas/OutcomesResponseLinks"
+        meta:
+          $ref: "#/components/schemas/PaginatedResponseMeta"
       type: object
     OutcomesResponseData:
       description: List of rule outcomes.
@@ -94094,11 +94096,27 @@ components:
           type: string
       type: object
     OutcomesResponseLinks:
-      description: Links attributes.
+      description: Pagination links for rule outcomes.
       properties:
+        first:
+          description: Link for the first set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=0"
+          type: string
+        last:
+          description: Link for the last set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=200"
+          type: string
         next:
           description: |-
             Link for the next set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=200"
+          type: string
+        previous:
+          description: Link for the previous set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=0"
+          type: string
+        self:
+          description: Link for the current set of results.
           example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100"
           type: string
       type: object
