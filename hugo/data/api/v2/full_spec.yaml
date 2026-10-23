@@ -237019,8 +237019,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 107
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
+          - security_monitoring_signals_read
           - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/bulk/state:
     patch:
@@ -237085,8 +237086,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 106
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
+          - security_monitoring_signals_read
           - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/bulk/update:
     patch:
@@ -237155,8 +237157,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 108
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
+          - security_monitoring_signals_read
           - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/search:
     post:
@@ -237332,8 +237335,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 109
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
+          - security_monitoring_signals_read
           - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/{signal_id}/entities:
     get:
@@ -237556,8 +237560,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 104
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
+          - security_monitoring_signals_read
           - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/{signal_id}/suggested_actions:
     get:
@@ -237677,8 +237682,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 110
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
+          - security_monitoring_signals_read
           - security_monitoring_signals_write
   /api/v2/security_monitoring/terraform/{resource_type}/bulk:
     post:
