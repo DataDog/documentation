@@ -15,6 +15,7 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
   text: Real User Monitoring
+site_support_id: rum_remote_configuration
 title: RUM Remote Configuration
 ---
 ## Présentation {#overview}

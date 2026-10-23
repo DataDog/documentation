@@ -15,8 +15,9 @@ Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet
 
 ## Prerequisites
 
-- [Remote Configuration][7] enabled for your organization
-- Agent version 7.71 for Windows and 7.69 for Linux
+- [Remote Configuration][7] enabled for your organization and the Agent's API key
+- [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
+- Agent version 7.71.1 or later for Windows and 7.69.0 or later for Linux
 - Linux VMs or Windows VMs
 - At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
 
@@ -95,6 +96,12 @@ Datadog recommends managing upgrades from one source at a time. Use either Fleet
 
 ## Troubleshooting
 
+### Remote Agent Management is not enabled
+
+If the Agent's side panel shows **Remote Agent Management: NOT ENABLED**, follow [Enable remote Agent management][8] to enable `remote_updates` on the host and restart the Agent. Remote Configuration can be connected while remote updates are disabled.
+
+If the Agent is still unavailable for upgrades, verify the [prerequisites](#prerequisites), Remote Configuration connectivity, and whether the Datadog Installer is running.
+
 ### Newly released Agent version is not yet available for upgrade
 
 After a new Agent version is released, it can take up to 24 hours before it appears as an upgrade target in Fleet Automation. If a recently released version is missing from the upgrade picker, wait up to 24 hours and retry.
@@ -111,9 +118,9 @@ To diagnose and fix the issue:
    ```txt
    support_remote_upgrade:datadog-installer
    ```
-1. If your setup is impacted, [re-run the install script][6] on each affected Agent to upgrade to Agent 7.66 or later.
+1. If your setup is impacted, [re-run the install script][6] on each affected Agent to upgrade to an Agent version that meets the [prerequisites](#prerequisites).
 
-After updating to 7.66 or later, future upgrades are handled automatically. If you do not upgrade, the existing Agent continues to function, but remote upgrades remain unavailable.
+After updating, [enable remote Agent management][8] to use Fleet Automation for future upgrades. If you do not upgrade, the existing Agent continues to function, but remote upgrades remain unavailable.
 
 ## Further Reading
 
@@ -126,3 +133,4 @@ After updating to 7.66 or later, future upgrades are handled automatically. If y
 [5]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [7]: /agent/guide/setup_remote_config
+[8]: /agent/guide/setup_remote_config/#enable-remote-agent-management

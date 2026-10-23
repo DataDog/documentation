@@ -11,6 +11,13 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 }
 
+// Banner hidden on mobile via `hide_on_mobile`: back to the no-banner offset
+@include media-breakpoint-down(md) {
+    body:has(.announcement-banner--hide-mobile) .mobile-toc-toggle {
+        top: 100px;
+    }
+}
+
 .mobile-toc-toggle {
     position: fixed;
     display: flex;
