@@ -358,7 +358,7 @@ Annotations work as follows:
 
 Annotations are independent of the summary comment: `comments.enabled: false` does not disable them. With comments disabled and annotations enabled, the summary comment appears only when there are more uncovered ranges than annotations, and it reports only the number of uncovered ranges.
 
-Inline annotations are supported on GitHub, GitLab, and Azure DevOps. They are not available on Bitbucket.
+Inline annotations are not available on Bitbucket.
 
 ## Carryforward
 
