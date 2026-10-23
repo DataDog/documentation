@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40976
+    operations:
+      - AcknowledgeOnCallPage
+      - CreateOnCallPage
+      - EscalateOnCallPage
+      - ResolveOnCallPage
+    title: Add on-call GET pages endpoints

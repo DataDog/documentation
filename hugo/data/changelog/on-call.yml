@@ -57,3 +57,29 @@ entries:
       - UpdateOnCallEscalationPolicy
       - UpdateUserNotificationRule
     title: Add list escalation policies endpoint
+  - change_type: added
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40976
+    operations:
+      - GetOnCallPage
+      - ListOnCallPages
+    title: Add on-call GET pages endpoints
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40976
+    operations:
+      - CreateScheduleOverrides
+      - CreateUserNotificationChannel
+      - CreateUserNotificationRule
+      - GetOnCallTeamRoutingRules
+      - GetScheduleOnCallResponders
+      - GetScheduleOnCallUser
+      - GetUserNotificationChannel
+      - GetUserNotificationRule
+      - ListOnCallSchedules
+      - ListScheduleOverrides
+      - ListUserNotificationChannels
+      - ListUserNotificationRules
+      - SetOnCallTeamRoutingRules
+      - UpdateUserNotificationRule
+    title: Add on-call GET pages endpoints
