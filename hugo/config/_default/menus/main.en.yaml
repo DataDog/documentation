@@ -2612,6 +2612,11 @@ menu:
       identifier: string_builder_processor
       parent: overview
       weight: 210
+    - name: VRL Processor
+      url: events/pipelines_and_processors/vrl_processor
+      identifier: vrl_processor
+      parent: overview
+      weight: 211
     - name: Explorer
       url: events/explorer/
       identifier: events_explorer
