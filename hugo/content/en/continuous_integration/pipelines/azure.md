@@ -153,7 +153,7 @@ Example for enabling the hooks in specified projects:
 
 ### Collect job steps
 
-Datadog creates a step for each step in an Azure Pipelines job. Each step appears under its job, with the step's name and duration.
+For each step in an Azure Pipelines job, Datadog collects a corresponding step. Each step appears under its job, with the step's name and duration.
 
 Steps require the Datadog Integration setup method. After you enable CI Visibility for an organization or project, Datadog collects steps automatically. Steps are not available with Service Hook Subscriptions.
 
