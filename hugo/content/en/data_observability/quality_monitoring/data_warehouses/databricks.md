@@ -105,6 +105,39 @@ To create the group and add the service principal:
 
 For more details, see the Databricks documentation on [managing account-level groups][8].
 
+## Data access and security FAQ
+
+### Does Datadog extract row-level data from my tables?
+
+No. Quality Monitoring runs aggregate queries in your SQL warehouse, such as `COUNT(*)`, `MAX(<timestamp_column>)`, null counts, and distinct counts. Only the resulting metric values are sent to Datadog.
+
+[Custom SQL monitors][3] are the exception. Because you write the query, you decide what it returns. Datadog stores the results of Custom SQL queries that return a value aliased as `dd_value`. Queries that do not match this format, such as `SELECT *`, fail validation and are not stored.
+
+If a Custom SQL query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column, because each group is evaluated as a separate series. For example, the following query stores each distinct `region` value alongside its count:
+
+```sql
+SELECT region, COUNT(*) AS dd_value
+FROM <catalog_name>.<schema_name>.orders
+WHERE status = 'FAILED'
+GROUP BY region
+```
+
+Grouping by a column that contains sensitive data, such as `email` or `user_id`, sends those values to Datadog. To avoid this, group only by non-sensitive columns, or apply a column mask so the service principal reads masked values.
+
+### How can I limit what the service principal can read?
+
+- **Scope the grants**: Use the {{< ui >}}Specific tables{{< /ui >}} option in [Step 2](#step-2---grant-access), or grant access to a dedicated schema only.
+- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][9] to sensitive columns for the Datadog service principal. Freshness and row count checks do not read column values, so they are unaffected. Column-level metrics on masked columns reflect the masked values.
+- **Configure only the monitors you need**: Datadog runs column-level and Custom SQL queries only for the monitors you configure.
+
+### How can I audit the queries Datadog runs?
+
+Every query that the service principal runs is recorded in `system.query.history`. Filter on `executed_by` equal to the service principal's application ID to review them.
+
+### Can I use more than one service principal for a workspace?
+
+No. Each Databricks workspace supports one service principal for Data Observability, so you cannot assign separate service principals to different monitor types in the same workspace.
+
 ## Next steps
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
@@ -123,3 +156,4 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 [6]: https://docs.databricks.com/api/workspace/queries/list
 [7]: https://docs.databricks.com/aws/en/compute/serverless/
 [8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[9]: https://docs.databricks.com/aws/en/tables/row-and-column-filters
