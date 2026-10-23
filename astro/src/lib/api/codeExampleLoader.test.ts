@@ -56,11 +56,40 @@ describe("getCodeExamplesForOperation", () => {
     expect(codeByLanguage["ruby-legacy"]).toContain("require 'dogapi'");
   });
 
+  it("keeps the first 3 examples per language, as Hugo does", () => {
+    const goExamples = examples.find((set) => set.language === "go");
+    expect(goExamples?.entries.map((entry) => entry.description)).toEqual([
+      'Create a monitor returns "OK" response',
+      'Create a monitor with aggregate augmented query variables returns "OK" response',
+      'Create a monitor with aggregate filtered query variables returns "OK" response',
+    ]);
+  });
+
   it("highlights a legacy example as its base language", () => {
     const pythonLegacy = examples.find(
       (set) => set.language === "python-legacy",
     );
     expect(pythonLegacy?.entries[0].syntax).toBe("python");
+  });
+});
+
+/**
+ * Suffixes in CodeExamples.json already start with an underscore
+ * (`_1716720881`), and Hugo appends them to the operationId as they are.
+ */
+describe("getCodeExamplesForOperation with suffixed examples", () => {
+  const examples = getCodeExamplesForOperation(
+    "CreateAWSAccount",
+    "v2",
+    "aws-integration",
+  );
+
+  it("loads both the suffixed and the unsuffixed example", () => {
+    const goExamples = examples.find((set) => set.language === "go");
+    expect(goExamples?.entries.map((entry) => entry.description)).toEqual([
+      'Create an AWS account returns "AWS Account object" response',
+      'Create an AWS integration returns "AWS Account object" response',
+    ]);
   });
 });
 

@@ -27,7 +27,7 @@ describe("apiSchemaTableNode", () => {
     expect(apiSchemaTableNode([])).toBeNull();
   });
 
-  it("emits a table with the four expected columns", () => {
+  it("leaves out the Parent field column when no row has a parent", () => {
     const out = render([
       field({
         name: "id",
@@ -42,8 +42,8 @@ describe("apiSchemaTableNode", () => {
       }),
     ]);
 
-    expect(out).toContain("Parent field");
-    expect(out).toContain("Field");
+    expect(out).not.toContain("Parent field");
+    expect(out).toMatch(/^\| Field +\| Type +\| Description +\|$/m);
     expect(out).toContain("Type");
     expect(out).toContain("Description");
     expect(out).toContain("id [*required*]");
@@ -68,8 +68,11 @@ describe("apiSchemaTableNode", () => {
       }),
     ]);
 
-    expect(out).toContain("data");
-    expect(out).toContain("attributes [*required*]");
+    expect(out).toMatch(
+      /^\| Parent field +\| Field +\| Type +\| Description +\|$/m,
+    );
+    expect(out).toMatch(/^\| +\| data +\|/m);
+    expect(out).toMatch(/^\| data +\| attributes \[\*required\*\] +\|/m);
     expect(out).toContain("Attrs.");
   });
 
@@ -114,19 +117,105 @@ describe("apiSchemaTableNode", () => {
     ]);
 
     expect(out).toContain("Severity level.");
-    expect(out).toContain("Allowed values:");
+    expect(out).toContain("Allowed enum values: `low`, `medium`, `high`.");
     expect(out).toContain("Default:");
   });
 
-  it("marks deprecated fields in the description", () => {
+  it("inlines an option's enum values and default into its description", () => {
+    const out = render([
+      field({
+        name: "aggregation",
+        type: "oneOf",
+        unionOptions: [
+          {
+            label: "Object 1",
+            type: "enum",
+            description: "Standard aggregation types.",
+            enumValues: ["avg", "sum"],
+            defaultValue: "avg",
+            fields: [],
+          },
+        ],
+      }),
+    ]);
+
+    expect(out).toMatch(
+      /\| aggregation +\| Object 1 +\| enum +\| Standard aggregation types\. Allowed enum values: `avg`, `sum`\. Default: `avg`\. +\|/,
+    );
+  });
+
+  it("rewrites a description's reference links as inline links, since a table cell can't hold their definitions", () => {
+    const out = render([
+      field({
+        name: "query",
+        description: [
+          "See the [Triggered Monitors page][1] and the [Manage Monitors documentation][2].",
+          "",
+          "[1]: https://app.datadoghq.com/monitors/triggered",
+          "[2]: /monitors/manage/#triggered-monitors",
+        ].join("\n"),
+      }),
+    ]);
+    expect(out).toContain(
+      "[Triggered Monitors page](https://app.datadoghq.com/monitors/triggered)",
+    );
+    expect(out).toContain(
+      "[Manage Monitors documentation](/monitors/manage/#triggered-monitors)",
+    );
+    expect(out).not.toContain("[1]");
+    expect(out).not.toContain("[2]");
+  });
+
+  it("puts a DEPRECATED label before a deprecated field's description, as Hugo does", () => {
     const out = render([
       field({ name: "old_field", deprecated: true, description: "Old." }),
     ]);
-    expect(out).toContain("Deprecated.");
+    expect(out).toContain("| **DEPRECATED**: Old. |");
+  });
+
+  it("puts a DEPRECATED label before a deprecated option's description", () => {
+    const out = render([
+      field({
+        name: "query",
+        type: "oneOf",
+        unionOptions: [
+          {
+            label: "<data_source=apm>",
+            type: "object",
+            description: "APM query.",
+            deprecated: true,
+            fields: [],
+          },
+        ],
+      }),
+    ]);
+    expect(out).toContain("| **DEPRECATED**: APM query. |");
   });
 
   it("produces an AST table node, not a string", () => {
     const node = apiSchemaTableNode([field({ name: "x", type: "string" })]);
     expect(node?.type).toBe("table");
+  });
+
+  it("puts additionalProperties in the parent column of an <any-key> row, as Hugo does", () => {
+    const out = render([
+      field({
+        name: "node_objects",
+        type: "object",
+        children: [
+          field({
+            name: "<any-key>",
+            type: "object",
+            description: "Base query.",
+            children: [field({ name: "search", type: "string" })],
+          }),
+        ],
+      }),
+    ]);
+
+    expect(out).toMatch(
+      /\| additionalProperties +\| <any-key> +\| object +\| Base query\. +\|/,
+    );
+    expect(out).toMatch(/\| <any-key> +\| search +\| string +\|/);
   });
 });

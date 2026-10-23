@@ -37,11 +37,11 @@ const cl = classListFactory(styles);
 
 const overviewLabel = translate("overview");
 const overviewHref = localizedHref(lang, "/api/latest/");
-// TODO: no Hugo i18n key exists for this string yet.
+// MISSING_TRANSLATION_LABEL: no Hugo i18n key exists for this string yet.
 const changelogLabel = "Changelog";
 const changelogHref = localizedHref(lang, CHANGELOG_ROOT_PATH);
 
-// TODO: replace hardcoded English with i18n() once authoritative translation
+// MISSING_TRANSLATION_LABEL: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
 const searchLabels: SearchBarLabels = {
   Search: "Search",
@@ -54,7 +54,7 @@ const searchLabels: SearchBarLabels = {
 <nav class={cl("api-side-nav")}>
   <a href={localizedHref(lang, "/")} class={cl("api-side-nav__title")}>
     {translate("datadog_docs")}&nbsp;&nbsp;<span
-      class={cl("api-side-nav__title-api")}>API</span
+      class={cl("api-side-nav__title-api")}>{translate("api")}</span
     >
   </a>
   <div class={cl("api-side-nav__search")}>

@@ -24,11 +24,12 @@ export function apiEndpointSummaryNodes(
 
 function headingNode(stub: ApiOperationStub, href: string): MarkdocNode {
   const children: MarkdocNode[] = [link(href, stub.summary)];
-  // TODO: replace the literal "deprecated"/"preview" suffixes with i18n keys
+  // MISSING_TRANSLATION_LABEL: replace the literal "deprecated"/"preview" suffixes with i18n keys
   // once authoritative translations exist in the Hugo i18n bundle.
   if (stub.deprecated) {
     children.push(plaintext(" (deprecated)"));
-  } else if (stub.unstable) {
+  }
+  if (stub.unstable) {
     children.push(plaintext(" (preview)"));
   }
   return new Ast.Node("heading", { level: 2 }, [inline(children)]);

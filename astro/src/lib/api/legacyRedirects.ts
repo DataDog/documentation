@@ -1,12 +1,16 @@
 /**
  * Hugo-owned `/api` paths that Astro's route tree doesn't cover: the bare
- * `/api/` root and five alias redirects, both sourced from
+ * `/api/` root and the alias redirects, originally copied from
  * `hugo/content/en/api/_index.md`'s cascade. Astro must emit these itself —
  * once its upload deletes stale keys under `api/latest/**`, these paths would
  * otherwise 404.
  *
- * Kept as one exported table so `legacyRedirects.test.ts` can assert it still
- * matches Hugo's cascade, and so a single prerendered route
+ * Nothing keeps this table in sync with Hugo's cascade. When the spec renames
+ * or moves a category, add a row for the old URL here.
+ * `tests/integration/legacyRedirects.full-spec.test.ts` checks that every row
+ * still points at a built page, but it can't tell when a row is missing.
+ *
+ * Kept as one exported table so a single prerendered route
  * (`src/pages/[...lang]/api/[...legacyPath].astro`) can generate every entry in
  * every locale. Adding a redirect means adding a row here — no new page file.
  */
@@ -32,6 +36,11 @@ export const LEGACY_REDIRECTS: LegacyRedirect[] = [
     to: "/api/latest/csm-threats/",
   },
   { from: "/api/latest/service-scorecards", to: "/api/latest/scorecards/" },
+  {
+    from: "/api/latest/dora-metrics",
+    to: "/api/latest/delivery-performance/",
+  },
+  { from: "/api/latest/ai-impact", to: "/api/latest/delivery-performance/" },
 ];
 
 export interface LegacyRedirectStaticPath {

@@ -171,6 +171,43 @@ describe("resolveChangelogEntries", () => {
     expect(entry.product).toEqual({ name: "Deployment Gates" });
   });
 
+  it("links a renamed product to its legacy redirect's destination", () => {
+    const categories = [
+      {
+        slug: "delivery-performance",
+        name: "Delivery Performance",
+        operations: [],
+      },
+    ];
+    const [entry] = resolveChangelogEntries(
+      [makeEntry({ productSlug: "dora-metrics" })],
+      categories,
+      "ja",
+    );
+    expect(entry.product).toEqual({
+      name: "DORA Metrics",
+      href: "/ja/api/latest/delivery-performance/",
+    });
+  });
+
+  it("leaves a renamed product unlinked when its destination has no category page", () => {
+    const [entry] = resolveChangelogEntries(
+      [makeEntry({ productSlug: "dora-metrics" })],
+      [],
+      "en",
+    );
+    expect(entry.product).toEqual({ name: "DORA Metrics" });
+  });
+
+  it("keeps known acronyms uppercase in a title-cased slug", () => {
+    const [entry] = resolveChangelogEntries(
+      [makeEntry({ productSlug: "ai-impact" })],
+      [],
+      "en",
+    );
+    expect(entry.product).toEqual({ name: "AI Impact" });
+  });
+
   it("links known operations and leaves unknown ones unlinked", async () => {
     const [entry] = resolveChangelogEntries(
       [makeEntry({ operationIds: ["ListDashboards", "GetDashboardUsage"] })],
@@ -186,9 +223,9 @@ describe("resolveChangelogEntries", () => {
     ]);
   });
 
-  it("finds a product whose category page has an overridden slug", () => {
+  it("finds Case Management at its tag slug", () => {
     const categories = [
-      { slug: "cases", name: "Case Management", operations: [] },
+      { slug: "case-management", name: "Case Management", operations: [] },
     ];
     const [entry] = resolveChangelogEntries(
       [makeEntry({ productSlug: "case-management" })],
@@ -197,7 +234,7 @@ describe("resolveChangelogEntries", () => {
     );
     expect(entry.product).toEqual({
       name: "Case Management",
-      href: "/api/latest/cases/",
+      href: "/api/latest/case-management/",
     });
   });
 

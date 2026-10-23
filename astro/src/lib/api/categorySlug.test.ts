@@ -10,6 +10,10 @@ describe("toSlug", () => {
     expect(toSlug("  On-Call / Paging  ")).toBe("on-call-paging");
   });
 
+  it("deletes apostrophes instead of hyphenating them, as Hugo does", () => {
+    expect(toSlug("Get a monitor's details")).toBe("get-a-monitors-details");
+  });
+
   it("drops slashes instead of hyphenating them", () => {
     expect(toSlug("Trigger tests from CI/CD pipelines")).toBe(
       "trigger-tests-from-cicd-pipelines",
@@ -22,9 +26,12 @@ describe("toCategorySlug", () => {
     expect(toCategorySlug("Experiments")).toBe("experiments");
   });
 
-  it("applies the slug overrides", () => {
-    expect(toCategorySlug("Case Management")).toBe("cases");
-    expect(toCategorySlug("Scorecards")).toBe("service-scorecards");
+  it("keeps Case Management at its tag slug, which prod treats as canonical", () => {
+    expect(toCategorySlug("Case Management")).toBe("case-management");
+  });
+
+  it("keeps Scorecards at its tag slug, which prod treats as canonical", () => {
+    expect(toCategorySlug("Scorecards")).toBe("scorecards");
   });
 });
 

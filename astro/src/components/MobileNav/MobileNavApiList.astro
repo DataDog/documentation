@@ -23,6 +23,7 @@ import { CHANGELOG_ROOT_PATH } from "@lib/api/changelogPaths";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import SvgIcon from "@components/SvgIcon/SvgIcon.astro";
 import MobileNavOperationItems from "./MobileNavOperationItems";
@@ -50,16 +51,17 @@ const {
   isChangelogSection = false,
 } = Astro.props;
 const lang = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(lang);
 const cl = classListFactory(styles);
 
 const overviewHref = localizedHref(lang, "/api/latest/");
 const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
-// TODO: no Hugo i18n key exists for this string yet.
+// MISSING_TRANSLATION_LABEL: no Hugo i18n key exists for this string yet.
 const changelogLabel = "Changelog";
 const changelogHref = localizedHref(lang, CHANGELOG_ROOT_PATH);
 
 const listId = "mobile-nav-api-list";
-// TODO: replace with i18n keys once Hugo has them.
+// MISSING_TRANSLATION_LABEL: replace with i18n keys once Hugo has them.
 const loaderLabels = {
   Loading: "Loading",
   "View category page": "View category page",
@@ -83,7 +85,7 @@ const loaderLabels = {
             class={cl("mobile-nav__section-toggle")}
             aria-current={isApiRootPage ? "page" : undefined}
           >
-            <span>Overview</span>
+            <span>{translate("overview")}</span>
             <span class={cl("mobile-nav__caret")} aria-hidden="true">
               <SvgIcon src="caret-down.svg" />
             </span>

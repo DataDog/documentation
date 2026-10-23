@@ -36,10 +36,10 @@ describe("apiEndpointSummaryNodes", () => {
     expect(md).toContain("Datadog site");
     expect(md).toContain("API endpoint");
     expect(md).toMatch(
-      /app\.datadoghq\.com.*\*\*GET\*\* https:\/\/api\.datadoghq\.com\/api\/v1\/dashboard\/\{dashboard_id\}/,
+      /app\.datadoghq\.com.*\| GET https:\/\/api\.datadoghq\.com\/api\/v1\/dashboard\/\{dashboard_id\}/,
     );
     expect(md).toMatch(
-      /app\.datadoghq\.eu.*\*\*GET\*\* https:\/\/api\.datadoghq\.eu\/api\/v1\/dashboard\/\{dashboard_id\}/,
+      /app\.datadoghq\.eu.*\| GET https:\/\/api\.datadoghq\.eu\/api\/v1\/dashboard\/\{dashboard_id\}/,
     );
   });
 
@@ -51,5 +51,12 @@ describe("apiEndpointSummaryNodes", () => {
   it("notes preview status in the heading", () => {
     const md = render({ ...baseStub, unstable: true });
     expect(md.toLowerCase()).toContain("preview");
+  });
+
+  it("notes both statuses when an operation is deprecated and in preview", () => {
+    const md = render({ ...baseStub, deprecated: true, unstable: true });
+    expect(md).toContain(
+      "## [Get a dashboard](/api/latest/dashboards/get-a-dashboard/) (deprecated) (preview)",
+    );
   });
 });

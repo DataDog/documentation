@@ -6,6 +6,7 @@ import {
   hugoCategoryContentPath,
   hugoOperationContentPath,
   hugoOverviewContentPath,
+  variantLabel,
 } from "./pageMeta";
 
 describe("apiBreadcrumbs", () => {
@@ -91,5 +92,23 @@ describe("Hugo content paths", () => {
     expect(hugoOverviewContentPath("api/latest/rate-limits")).toBe(
       "api/latest/rate-limits/_index.md",
     );
+  });
+});
+
+describe("variantLabel", () => {
+  it("marks the first variant as latest", () => {
+    expect(variantLabel({ version: "v2", deprecated: false }, 0)).toBe(
+      "v2 (latest)",
+    );
+  });
+
+  it("marks a deprecated first variant as deprecated, as Hugo does", () => {
+    expect(variantLabel({ version: "v1", deprecated: true }, 0)).toBe(
+      "v1 (deprecated)",
+    );
+  });
+
+  it("leaves later variants unlabeled", () => {
+    expect(variantLabel({ version: "v1", deprecated: false }, 1)).toBe("v1");
   });
 });

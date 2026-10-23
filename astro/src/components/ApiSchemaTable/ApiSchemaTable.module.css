@@ -66,29 +66,33 @@
 
 .schema-table__row {
   display: flex;
-  border-bottom: var(--border-width) solid var(--color-surface-border);
+  border-top: var(--border-width) solid var(--color-surface-border);
   line-height: 1.5;
 }
 
-.schema-table__row:last-child {
-  border-bottom: none;
+/* Rows draw their divider on top, not bottom, so the last row of a nested
+   group still separates from the next outer row. Only the first row needs
+   none, since the column header already draws one. */
+.schema-table__columns + .schema-table__row {
+  border-top: none;
 }
 
 .schema-table__row:hover {
   background: var(--color-bg-hover);
 }
 
-.schema-table__row--readonly {
-  opacity: 0.7;
-  font-style: italic;
-}
-
+/* Like Hugo, the toggle hangs in the gutter left of the name instead of
+   pushing it, so every name at a depth starts at the same x whether or not
+   its row has a toggle. `--schema-table-indent` is set per row. */
 .schema-table__cell-name {
+  --schema-table-name-left: calc(
+    var(--space-xl) + var(--schema-table-indent, 0px)
+  );
+  position: relative;
   flex: 0 0 33.33%;
   display: flex;
   align-items: baseline;
-  gap: var(--space-xs);
-  padding: 4px var(--space-md);
+  padding: 4px var(--space-md) 4px var(--schema-table-name-left);
   border-right: var(--border-width) solid var(--color-surface-border);
   min-width: 0;
 }
@@ -118,8 +122,14 @@
   color: var(--color-text-muted);
   cursor: pointer;
   padding: 0;
-  flex-shrink: 0;
-  margin-left: -6px;
+  position: absolute;
+  /* Vertically centered on the lowercase letters of the name's first line:
+     the cell's 4px top padding, then half of the leftover line height, then
+     down to the middle of the x-height, which sits below the line's middle. */
+  top: calc(
+    4px + (1.5 * var(--font-size-sm) - 16px) / 2 + 0.08 * var(--font-size-sm)
+  );
+  left: calc(var(--schema-table-name-left) - 16px - var(--space-xs));
   transition: transform 0.15s ease;
 }
 
@@ -139,7 +149,7 @@
 .schema-table__name {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: var(--font-weight-regular);
   background: none;
   padding: 0;
 }

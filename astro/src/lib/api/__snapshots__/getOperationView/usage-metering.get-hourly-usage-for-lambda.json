@@ -50,19 +50,129 @@
       "responses": [
         {
           "statusCode": "200",
-          "description": "OK"
+          "description": "OK",
+          "schemaDescription": "Response containing the number of Lambda functions and sum of the invocations of all Lambda functions\nfor each hour for a given organization.",
+          "schema": [
+            {
+              "name": "usage",
+              "type": "[object]",
+              "required": false,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Get hourly usage for Lambda.",
+              "children": [
+                {
+                  "name": "func_count",
+                  "type": "int64",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Contains the number of different functions for each region and AWS account."
+                },
+                {
+                  "name": "hour",
+                  "type": "date-time",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The hour for the usage."
+                },
+                {
+                  "name": "invocations_sum",
+                  "type": "int64",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Contains the sum of invocations of all functions."
+                },
+                {
+                  "name": "org_name",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The organization name."
+                },
+                {
+                  "name": "public_id",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The organization public ID."
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"usage\": [\n    {\n      \"func_count\": \"integer\",\n      \"hour\": \"2019-09-19T10:00:00.000Z\",\n      \"invocations_sum\": \"integer\",\n      \"org_name\": \"string\",\n      \"public_id\": \"string\"\n    }\n  ]\n}"
+            }
+          ]
         },
         {
           "statusCode": "400",
-          "description": "Bad Request"
+          "description": "Bad Request",
+          "schemaDescription": "Error response object.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
         },
         {
           "statusCode": "403",
-          "description": "Forbidden - User is not authorized"
+          "description": "Forbidden - User is not authorized",
+          "schemaDescription": "Error response object.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
         },
         {
           "statusCode": "429",
-          "description": "Too many requests"
+          "description": "Too many requests",
+          "schemaDescription": "Error response object.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
         }
       ],
       "codeExamples": [
@@ -72,29 +182,29 @@
           "entries": [
             {
               "description": "Get hourly usage for Lambda curl example",
-              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\"",
+              "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "us3": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "us5": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "eu": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "ap1": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "ap2": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 },
                 "gov": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Required query arguments\nexport start_hr=\"CHANGE_ME\"\n\n# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/usage/aws_lambda?start_hr=${start_hr}\" \\\n-H \"Accept: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\""
                 }
               }
             }

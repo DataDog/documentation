@@ -5,7 +5,8 @@ import type { APIRoute, GetStaticPaths } from "astro";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { getCollection, getEntry } from "astro:content";
 import { LOCALES, parseLangParam, type Locale } from "@lib/i18n/locale";
-import { buildPlaintextPage, parse } from "@lib/plaintext/helpers";
+import { buildPlaintextPage, heading } from "@lib/plaintext/helpers";
+import { transformMdocWithTwins } from "@lib/plaintext/twinTransform";
 import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
 import { apiBreadcrumbs } from "@lib/api/pageMeta";
@@ -13,8 +14,8 @@ import { getScopeGroupsView } from "@lib/api/scopesBuilder";
 import { apiScopesTableNodes } from "@components/ApiScopesTable/plaintext/ApiScopesTable";
 
 /**
- * Swap each `{% api-scopes /%}` for its twin. Other tags pass through as
- * authored; this route has never run the full twin transform.
+ * Swap each `{% api-scopes /%}` for its twin. The twin transform doesn't know
+ * this tag, because it needs the scopes view rather than the tag's attributes.
  */
 function withScopesTables(
   nodes: MarkdocNode[],
@@ -23,7 +24,11 @@ function withScopesTables(
 ): MarkdocNode[] {
   return nodes.flatMap((node) =>
     node.type === "tag" && node.tag === "api-scopes"
-      ? apiScopesTableNodes(getScopeGroupsView(), { lang, site })
+      ? apiScopesTableNodes(getScopeGroupsView(), {
+          lang,
+          site,
+          headingLevel: node.attributes.headingLevel,
+        })
       : [node],
   );
 }
@@ -62,8 +67,13 @@ export const GET: APIRoute = async ({ params, url, site }) => {
 
   const body = buildPlaintextPage(
     [
+      heading(1, entry.data.title),
       ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
-      ...withScopesTables(parse(entry.body ?? "").children, lang, site),
+      ...withScopesTables(
+        transformMdocWithTwins(entry.body ?? "", { site }),
+        lang,
+        site,
+      ),
     ],
     {
       title: entry.data.title,

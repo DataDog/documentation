@@ -2,14 +2,18 @@
  * AST twin of `ApiSchemaTable.tsx`.
  *
  * Walks the SchemaField tree depth-first and builds a Markdown `table` AST
- * node with a leading `Parent field` column. Behavior mirrors the string
+ * node with a leading `Parent field` column, which is left out when no row
+ * has a parent, as Hugo's `.md` does. Behavior mirrors the string
  * renderer: unions appear as a `<oneOf>` / `<anyOf>` row followed by one
  * row per option label, with nested fields attributed to the option label.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { ANY_KEY_FIELD_NAME } from "@lib/api/refResolver";
 import { tableMd } from "@lib/plaintext/helpers";
+
+type UnionOption = NonNullable<SchemaField["unionOptions"]>[number];
 
 interface SchemaTableRow {
   parent: string;
@@ -20,6 +24,9 @@ interface SchemaTableRow {
 
 const UNNAMED_FIELD_LABEL = "<items>";
 
+/** Hugo's `.md` names the parent of an `<any-key>` row this way. */
+const ANY_KEY_PARENT_LABEL = "additionalProperties";
+
 export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
   if (!fields || fields.length === 0) {
     return null;
@@ -27,12 +34,17 @@ export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
 
   const rows = schemaFieldsToTableRows(fields, "");
 
-  const headers = ["Parent field", "Field", "Type", "Description"];
-  const bodyRows = rows.map((row) => {
-    return [row.parent, row.field, row.type, row.description];
-  });
+  if (!rows.some((row) => row.parent)) {
+    return tableMd(
+      ["Field", "Type", "Description"],
+      rows.map((row) => [row.field, row.type, row.description]),
+    );
+  }
 
-  return tableMd(headers, bodyRows);
+  return tableMd(
+    ["Parent field", "Field", "Type", "Description"],
+    rows.map((row) => [row.parent, row.field, row.type, row.description]),
+  );
 }
 
 function schemaFieldsToTableRows(
@@ -42,7 +54,7 @@ function schemaFieldsToTableRows(
   const rows: SchemaTableRow[] = [];
   for (const field of fields) {
     rows.push({
-      parent,
+      parent: field.name === ANY_KEY_FIELD_NAME ? ANY_KEY_PARENT_LABEL : parent,
       field: getFieldName(field),
       type: getFieldType(field),
       description: getFieldDescription(field),
@@ -64,7 +76,7 @@ function schemaFieldsToTableRows(
           field: opt.label,
           // The branch's own type: a scalar variant reads `double`, not `object`.
           type: getFieldType({ type: opt.type } as SchemaField),
-          description: opt.description ?? "",
+          description: getOptionDescription(opt),
         });
         rows.push(...schemaFieldsToTableRows(opt.fields, opt.label));
       }
@@ -90,20 +102,68 @@ function getFieldType(field: SchemaField): string {
 
 function getFieldDescription(field: SchemaField): string {
   const parts: string[] = [];
-  if (field.description) {
-    parts.push(field.description);
-  }
+  // Hugo and both HTML pages lead with the label.
   if (field.deprecated) {
-    parts.push("**Deprecated.**");
+    parts.push("**DEPRECATED**:");
+  }
+  if (field.description) {
+    parts.push(inlineReferenceLinks(field.description));
   }
   if (field.readOnly) {
     parts.push("Read-only.");
   }
-  if (field.enumValues && field.enumValues.length > 0) {
-    parts.push(`Allowed values: \`${field.enumValues.join("`, `")}\`.`);
-  }
-  if (field.defaultValue !== undefined) {
-    parts.push(`Default: \`${field.defaultValue}\`.`);
-  }
+  parts.push(...valueParts(field));
   return parts.join(" ");
+}
+
+/** An option row gets the same label, enum and default parts as a field row. */
+function getOptionDescription(option: UnionOption): string {
+  return [
+    option.deprecated ? "**DEPRECATED**:" : "",
+    inlineReferenceLinks(option.description ?? ""),
+    ...valueParts(option),
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+const LINK_DEFINITION_LINE = /^ {0,3}\[([^\]]+)\]:\s*<?([^\s>]+)>?.*$/gm;
+
+/**
+ * A table cell is one line, so reference link definitions (`[1]: https://...`)
+ * can't be on lines of their own there. Rewrite each `[text][label]` as
+ * `[text](url)` and drop the definitions.
+ */
+function inlineReferenceLinks(description: string): string {
+  const urlsByLabel = new Map<string, string>();
+  const withoutDefinitions = description.replace(
+    LINK_DEFINITION_LINE,
+    (_line, label: string, url: string) => {
+      urlsByLabel.set(label.toLowerCase(), url);
+      return "";
+    },
+  );
+  if (urlsByLabel.size === 0) return description;
+  return withoutDefinitions
+    .replace(
+      /\[([^\]]+)\]\[([^\]]*)\]/g,
+      (link, text: string, label: string) => {
+        const url = urlsByLabel.get((label || text).toLowerCase());
+        return url ? `[${text}](${url})` : link;
+      },
+    )
+    .trim();
+}
+
+function valueParts(
+  source: Pick<SchemaField, "enumValues" | "defaultValue">,
+): string[] {
+  const parts: string[] = [];
+  if (source.enumValues && source.enumValues.length > 0) {
+    parts.push(`Allowed enum values: \`${source.enumValues.join("`, `")}\`.`);
+  }
+  if (source.defaultValue !== undefined) {
+    parts.push(`Default: \`${source.defaultValue}\`.`);
+  }
+  return parts;
 }

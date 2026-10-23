@@ -1,7 +1,7 @@
 /**
  * AST twin of the `{% api-scopes /%}` component (`ApiScopesTable.astro`).
  *
- * Each scope group becomes an h3 followed by a Markdown table. The anchor
+ * Each scope group becomes a heading (h3 by default) followed by a Markdown table. The anchor
  * spans are dropped: plaintext has no element IDs to jump to.
  */
 
@@ -20,9 +20,11 @@ export interface ApiScopesTableOptions {
   lang?: Locale;
   /** Astro's `site`, used to make endpoint links absolute. */
   site?: string | URL;
+  /** The level of each group's heading, as on the HTML table. Defaults to 3. */
+  headingLevel?: number;
 }
 
-// TODO: localize the column headers once Hugo has i18n keys for them.
+// MISSING_TRANSLATION_LABEL: localize the column headers once Hugo has i18n keys for them.
 const COLUMN_HEADERS = [
   "Scope name",
   "Description",
@@ -61,7 +63,7 @@ export function apiScopesTableNodes(
   options: ApiScopesTableOptions = {},
 ): MarkdocNode[] {
   return groups.flatMap((group) => [
-    heading(3, group.heading),
+    heading(options.headingLevel ?? 3, group.heading),
     tableMd(
       COLUMN_HEADERS,
       group.scopes.map((scope) => scopeRowCells(scope, options)),

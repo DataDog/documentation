@@ -31,7 +31,6 @@ export const ApiCategoryStubSchema = z
     name: z.string(),
     slug: z.string(),
     description: z.string(),
-    deprecated: z.boolean(),
   })
   .strict();
 
@@ -70,10 +69,10 @@ export const EndpointDataSchema = z
     deprecated: z.boolean(),
     unstable: z.boolean(),
     unstableMessage: z.string().optional(),
-    newerVersionUrl: z.string().optional(),
     permissions: z.array(z.string()).optional(),
     permissionsMatch: z.enum(["any", "all"]).optional(),
     oauthScopes: z.array(z.string()).optional(),
+    oauthScopesMatch: z.literal("any").optional(),
     oauthScopesAnchor: z.string().optional(),
     regionUrls: z.record(z.string(), z.string()).optional(),
     pathParams: z.array(SchemaFieldSchema).optional(),

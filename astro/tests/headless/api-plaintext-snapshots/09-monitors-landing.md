@@ -1,6 +1,6 @@
 ---
 title: Monitors
-description: Monitors allow you to watch a metric or check that you care about and notifies your team when a defined threshold has exceeded. For more information, see…
+description: Monitors allow you to watch a metric or check that you care about and notifies your team when a defined threshold has exceeded.
 breadcrumbs: Docs > API > Monitors
 ---
 
@@ -17,372 +17,434 @@ For more information, see [Creating Monitors](https://docs.datadoghq.com/monitor
 
 ## [Create a monitor](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor.md)
 
-| Datadog site      | API endpoint                                          |
-| ----------------- | ----------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v1/monitor     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v1/monitor |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v1/monitor |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v1/monitor      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v1/monitor |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor      |
+| Datadog site      | API endpoint                                      |
+| ----------------- | ------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v1/monitor     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v1/monitor |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v1/monitor |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v1/monitor      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region              |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region          |
 
 ## [Get all monitors](https://docs.datadoghq.com/api/latest/monitors/get-all-monitors.md)
 
-| Datadog site      | API endpoint                                         |
-| ----------------- | ---------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monitor     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monitor |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monitor |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monitor      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monitor |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor      |
+| Datadog site      | API endpoint                                     |
+| ----------------- | ------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monitor     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monitor |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monitor |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monitor      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region              |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region          |
 
 ## [Edit a monitor](https://docs.datadoghq.com/api/latest/monitors/edit-a-monitor.md)
 
-| Datadog site      | API endpoint                                                      |
-| ----------------- | ----------------------------------------------------------------- |
-| app.datadoghq.com | **PUT** https://api.datadoghq.com/api/v1/monitor/{monitor_id}     |
-| us3.datadoghq.com | **PUT** https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id} |
-| us5.datadoghq.com | **PUT** https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id} |
-| app.datadoghq.eu  | **PUT** https://api.datadoghq.eu/api/v1/monitor/{monitor_id}      |
-| ap1.datadoghq.com | **PUT** https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
-| ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
-| app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| Datadog site      | API endpoint                                                  |
+| ----------------- | ------------------------------------------------------------- |
+| app.datadoghq.com | PUT https://api.datadoghq.com/api/v1/monitor/{monitor_id}     |
+| us3.datadoghq.com | PUT https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id} |
+| us5.datadoghq.com | PUT https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id} |
+| app.datadoghq.eu  | PUT https://api.datadoghq.eu/api/v1/monitor/{monitor_id}      |
+| ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
+| ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
+| app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                       |
 
 ## [Get a monitor's details](https://docs.datadoghq.com/api/latest/monitors/get-a-monitors-details.md)
 
-| Datadog site      | API endpoint                                                      |
-| ----------------- | ----------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monitor/{monitor_id}     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id} |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id} |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monitor/{monitor_id}      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| Datadog site      | API endpoint                                                  |
+| ----------------- | ------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monitor/{monitor_id}     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id} |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id} |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monitor/{monitor_id}      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Delete a monitor](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor.md)
 
-| Datadog site      | API endpoint                                                         |
-| ----------------- | -------------------------------------------------------------------- |
-| app.datadoghq.com | **DELETE** https://api.datadoghq.com/api/v1/monitor/{monitor_id}     |
-| us3.datadoghq.com | **DELETE** https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id} |
-| us5.datadoghq.com | **DELETE** https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id} |
-| app.datadoghq.eu  | **DELETE** https://api.datadoghq.eu/api/v1/monitor/{monitor_id}      |
-| ap1.datadoghq.com | **DELETE** https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
-| ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
-| app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| Datadog site      | API endpoint                                                     |
+| ----------------- | ---------------------------------------------------------------- |
+| app.datadoghq.com | DELETE https://api.datadoghq.com/api/v1/monitor/{monitor_id}     |
+| us3.datadoghq.com | DELETE https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id} |
+| us5.datadoghq.com | DELETE https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id} |
+| app.datadoghq.eu  | DELETE https://api.datadoghq.eu/api/v1/monitor/{monitor_id}      |
+| ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id} |
+| ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id} |
+| app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v1/monitor/{monitor_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                       |
 
 ## [Check if a monitor can be deleted](https://docs.datadoghq.com/api/latest/monitors/check-if-a-monitor-can-be-deleted.md)
 
-| Datadog site      | API endpoint                                                    |
-| ----------------- | --------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monitor/can_delete     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monitor/can_delete |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monitor/can_delete |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monitor/can_delete      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monitor/can_delete |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/can_delete |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/can_delete      |
+| Datadog site      | API endpoint                                                |
+| ----------------- | ----------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monitor/can_delete     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monitor/can_delete |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monitor/can_delete |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monitor/can_delete      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/can_delete |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/can_delete |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/can_delete      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                         |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                     |
 
 ## [Validate a monitor](https://docs.datadoghq.com/api/latest/monitors/validate-a-monitor.md)
 
-| Datadog site      | API endpoint                                                   |
-| ----------------- | -------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v1/monitor/validate     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v1/monitor/validate |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v1/monitor/validate |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v1/monitor/validate      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v1/monitor/validate |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/validate |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/validate      |
+| Datadog site      | API endpoint                                               |
+| ----------------- | ---------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v1/monitor/validate     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v1/monitor/validate |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v1/monitor/validate |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v1/monitor/validate      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/validate |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/validate |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                   |
 
 ## [Validate an existing monitor](https://docs.datadoghq.com/api/latest/monitors/validate-an-existing-monitor.md)
 
-| Datadog site      | API endpoint                                                                |
-| ----------------- | --------------------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v1/monitor/{monitor_id}/validate     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/validate      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/validate      |
+| Datadog site      | API endpoint                                                            |
+| ----------------- | ----------------------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v1/monitor/{monitor_id}/validate     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/validate      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/validate |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                    |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                                |
 
 ## [Get a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-configuration-policy.md)
 
-| Datadog site      | API endpoint                                                            |
-| ----------------- | ----------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| Datadog site      | API endpoint                                                        |
+| ----------------- | ------------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                             |
 
 ## [Monitors search](https://docs.datadoghq.com/api/latest/monitors/monitors-search.md)
 
-| Datadog site      | API endpoint                                                |
-| ----------------- | ----------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monitor/search     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monitor/search |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monitor/search |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monitor/search      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monitor/search |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/search |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/search      |
+| Datadog site      | API endpoint                                            |
+| ----------------- | ------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monitor/search     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monitor/search |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monitor/search |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monitor/search      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/search |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/search |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/search      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                 |
 
 ## [Get all monitor configuration policies](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-configuration-policies.md)
 
-| Datadog site      | API endpoint                                                |
-| ----------------- | ----------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/monitor/policy     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/monitor/policy |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/monitor/policy |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/monitor/policy      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/monitor/policy |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/policy |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/policy      |
+| Datadog site      | API endpoint                                            |
+| ----------------- | ------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/monitor/policy     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/monitor/policy |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/monitor/policy |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/monitor/policy      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/policy |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/policy |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/policy      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                 |
 
 ## [Monitors group search](https://docs.datadoghq.com/api/latest/monitors/monitors-group-search.md)
 
-| Datadog site      | API endpoint                                                       |
-| ----------------- | ------------------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monitor/groups/search     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monitor/groups/search |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monitor/groups/search |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monitor/groups/search      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monitor/groups/search |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monitor/groups/search |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monitor/groups/search      |
+| Datadog site      | API endpoint                                                   |
+| ----------------- | -------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monitor/groups/search     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monitor/groups/search |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monitor/groups/search |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monitor/groups/search      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monitor/groups/search |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monitor/groups/search |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monitor/groups/search      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                            |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                        |
 
 ## [Create a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-configuration-policy.md)
 
-| Datadog site      | API endpoint                                                 |
-| ----------------- | ------------------------------------------------------------ |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v2/monitor/policy     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v2/monitor/policy |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v2/monitor/policy |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v2/monitor/policy      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v2/monitor/policy |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/policy |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/policy      |
+| Datadog site      | API endpoint                                             |
+| ----------------- | -------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v2/monitor/policy     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v2/monitor/policy |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v2/monitor/policy |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v2/monitor/policy      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/policy |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/policy |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/policy      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                 |
 
 ## [Unmute a monitor](https://docs.datadoghq.com/api/latest/monitors/unmute-a-monitor.md)
 
-| Datadog site      | API endpoint                                                              |
-| ----------------- | ------------------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v1/monitor/{monitor_id}/unmute     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/unmute      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/unmute      |
+| Datadog site      | API endpoint                                                          |
+| ----------------- | --------------------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v1/monitor/{monitor_id}/unmute     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/unmute      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/unmute |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/unmute      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                  |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                              |
 
 ## [Edit a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/edit-a-monitor-configuration-policy.md)
 
-| Datadog site      | API endpoint                                                              |
-| ----------------- | ------------------------------------------------------------------------- |
-| app.datadoghq.com | **PATCH** https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}     |
-| us3.datadoghq.com | **PATCH** https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| us5.datadoghq.com | **PATCH** https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| app.datadoghq.eu  | **PATCH** https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}      |
-| ap1.datadoghq.com | **PATCH** https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| Datadog site      | API endpoint                                                          |
+| ----------------- | --------------------------------------------------------------------- |
+| app.datadoghq.com | PATCH https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}     |
+| us3.datadoghq.com | PATCH https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| us5.datadoghq.com | PATCH https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| app.datadoghq.eu  | PATCH https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}      |
+| ap1.datadoghq.com | PATCH https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| ap2.datadoghq.com | PATCH https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| app.ddog-gov.com  | PATCH https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| uk1.datadoghq.com | PATCH Not supported in the UK1 region                                 |
+| us2.ddog-gov.com  | PATCH Not supported in the US2-FED region                             |
 
 ## [Mute a monitor](https://docs.datadoghq.com/api/latest/monitors/mute-a-monitor.md)
 
-| Datadog site      | API endpoint                                                            |
-| ----------------- | ----------------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v1/monitor/{monitor_id}/mute     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/mute      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/mute      |
+| Datadog site      | API endpoint                                                        |
+| ----------------- | ------------------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v1/monitor/{monitor_id}/mute     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/mute      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/mute |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/mute      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                            |
 
 ## [Delete a monitor configuration policy](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-configuration-policy.md)
 
-| Datadog site      | API endpoint                                                               |
-| ----------------- | -------------------------------------------------------------------------- |
-| app.datadoghq.com | **DELETE** https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}     |
-| us3.datadoghq.com | **DELETE** https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| us5.datadoghq.com | **DELETE** https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| app.datadoghq.eu  | **DELETE** https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}      |
-| ap1.datadoghq.com | **DELETE** https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
-| app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| Datadog site      | API endpoint                                                           |
+| ----------------- | ---------------------------------------------------------------------- |
+| app.datadoghq.com | DELETE https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}     |
+| us3.datadoghq.com | DELETE https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| us5.datadoghq.com | DELETE https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| app.datadoghq.eu  | DELETE https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}      |
+| ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id} |
+| app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                 |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                             |
 
 ## [Unmute all monitors](https://docs.datadoghq.com/api/latest/monitors/unmute-all-monitors.md) (deprecated)
 
-| Datadog site      | API endpoint                                                 |
-| ----------------- | ------------------------------------------------------------ |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/v1/monitor/unmute_all     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/v1/monitor/unmute_all |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/v1/monitor/unmute_all |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/v1/monitor/unmute_all      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/v1/monitor/unmute_all |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/v1/monitor/unmute_all |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/v1/monitor/unmute_all      |
+| Datadog site      | API endpoint                                             |
+| ----------------- | -------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/v1/monitor/unmute_all     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/v1/monitor/unmute_all |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/v1/monitor/unmute_all |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/v1/monitor/unmute_all      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/v1/monitor/unmute_all |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/v1/monitor/unmute_all |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/v1/monitor/unmute_all      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                     |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                 |
 
 ## [Get a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-notification-rule.md)
 
-| Datadog site      | API endpoint                                                                     |
-| ----------------- | -------------------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| Datadog site      | API endpoint                                                                 |
+| ----------------- | ---------------------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                      |
 
 ## [Mute all monitors](https://docs.datadoghq.com/api/latest/monitors/mute-all-monitors.md) (deprecated)
 
-| Datadog site      | API endpoint                                               |
-| ----------------- | ---------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/v1/monitor/mute_all     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/v1/monitor/mute_all |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/v1/monitor/mute_all |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/v1/monitor/mute_all      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/v1/monitor/mute_all |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/v1/monitor/mute_all |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/v1/monitor/mute_all      |
+| Datadog site      | API endpoint                                           |
+| ----------------- | ------------------------------------------------------ |
+| app.datadoghq.com | POST https://api.datadoghq.com/v1/monitor/mute_all     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/v1/monitor/mute_all |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/v1/monitor/mute_all |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/v1/monitor/mute_all      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/v1/monitor/mute_all |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/v1/monitor/mute_all |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/v1/monitor/mute_all      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                   |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region               |
 
 ## [Get all monitor notification rules](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-notification-rules.md)
 
-| Datadog site      | API endpoint                                                           |
-| ----------------- | ---------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/monitor/notification_rule     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/monitor/notification_rule |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/monitor/notification_rule |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/monitor/notification_rule      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
+| Datadog site      | API endpoint                                                       |
+| ----------------- | ------------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/monitor/notification_rule     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/monitor/notification_rule |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/monitor/notification_rule |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/monitor/notification_rule      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                            |
 
 ## [Create a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-notification-rule.md)
 
-| Datadog site      | API endpoint                                                            |
-| ----------------- | ----------------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v2/monitor/notification_rule     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v2/monitor/notification_rule |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v2/monitor/notification_rule |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v2/monitor/notification_rule      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
+| Datadog site      | API endpoint                                                        |
+| ----------------- | ------------------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v2/monitor/notification_rule     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v2/monitor/notification_rule |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v2/monitor/notification_rule |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v2/monitor/notification_rule      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/notification_rule      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                            |
 
 ## [Update a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/update-a-monitor-notification-rule.md)
 
-| Datadog site      | API endpoint                                                                       |
-| ----------------- | ---------------------------------------------------------------------------------- |
-| app.datadoghq.com | **PATCH** https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}     |
-| us3.datadoghq.com | **PATCH** https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| us5.datadoghq.com | **PATCH** https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| app.datadoghq.eu  | **PATCH** https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}      |
-| ap1.datadoghq.com | **PATCH** https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| ap2.datadoghq.com | **PATCH** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| app.ddog-gov.com  | **PATCH** https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| Datadog site      | API endpoint                                                                   |
+| ----------------- | ------------------------------------------------------------------------------ |
+| app.datadoghq.com | PATCH https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}     |
+| us3.datadoghq.com | PATCH https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| us5.datadoghq.com | PATCH https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| app.datadoghq.eu  | PATCH https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}      |
+| ap1.datadoghq.com | PATCH https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| ap2.datadoghq.com | PATCH https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| app.ddog-gov.com  | PATCH https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| uk1.datadoghq.com | PATCH Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | PATCH Not supported in the US2-FED region                                      |
 
 ## [Delete a monitor notification rule](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-notification-rule.md)
 
-| Datadog site      | API endpoint                                                                        |
-| ----------------- | ----------------------------------------------------------------------------------- |
-| app.datadoghq.com | **DELETE** https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}     |
-| us3.datadoghq.com | **DELETE** https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| us5.datadoghq.com | **DELETE** https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| app.datadoghq.eu  | **DELETE** https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}      |
-| ap1.datadoghq.com | **DELETE** https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
-| app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| Datadog site      | API endpoint                                                                    |
+| ----------------- | ------------------------------------------------------------------------------- |
+| app.datadoghq.com | DELETE https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}     |
+| us3.datadoghq.com | DELETE https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| us5.datadoghq.com | DELETE https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| app.datadoghq.eu  | DELETE https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}      |
+| ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id} |
+| app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                          |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                                      |
 
 ## [Get a monitor user template](https://docs.datadoghq.com/api/latest/monitors/get-a-monitor-user-template.md) (preview)
 
-| Datadog site      | API endpoint                                                                |
-| ----------------- | --------------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/monitor/template/{template_id}     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id} |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id} |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/monitor/template/{template_id}      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| Datadog site      | API endpoint                                                            |
+| ----------------- | ----------------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/monitor/template/{template_id}     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id} |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id} |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/monitor/template/{template_id}      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                     |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                 |
 
 ## [Get all monitor user templates](https://docs.datadoghq.com/api/latest/monitors/get-all-monitor-user-templates.md) (preview)
 
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/monitor/template     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v2/monitor/template |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v2/monitor/template |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v2/monitor/template      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v2/monitor/template |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v2/monitor/template |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v2/monitor/template      |
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/monitor/template     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v2/monitor/template |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v2/monitor/template |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v2/monitor/template      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v2/monitor/template |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v2/monitor/template |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v2/monitor/template      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Create a monitor user template](https://docs.datadoghq.com/api/latest/monitors/create-a-monitor-user-template.md) (preview)
 
-| Datadog site      | API endpoint                                                   |
-| ----------------- | -------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v2/monitor/template     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v2/monitor/template |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v2/monitor/template |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v2/monitor/template      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v2/monitor/template |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/template |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/template      |
+| Datadog site      | API endpoint                                               |
+| ----------------- | ---------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v2/monitor/template     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v2/monitor/template |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v2/monitor/template |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v2/monitor/template      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/template |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/template |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/template      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                   |
 
 ## [Update a monitor user template to a new version](https://docs.datadoghq.com/api/latest/monitors/update-a-monitor-user-template-to-a-new-version.md) (preview)
 
-| Datadog site      | API endpoint                                                                |
-| ----------------- | --------------------------------------------------------------------------- |
-| app.datadoghq.com | **PUT** https://api.datadoghq.com/api/v2/monitor/template/{template_id}     |
-| us3.datadoghq.com | **PUT** https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id} |
-| us5.datadoghq.com | **PUT** https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id} |
-| app.datadoghq.eu  | **PUT** https://api.datadoghq.eu/api/v2/monitor/template/{template_id}      |
-| ap1.datadoghq.com | **PUT** https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
-| ap2.datadoghq.com | **PUT** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
-| app.ddog-gov.com  | **PUT** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| Datadog site      | API endpoint                                                            |
+| ----------------- | ----------------------------------------------------------------------- |
+| app.datadoghq.com | PUT https://api.datadoghq.com/api/v2/monitor/template/{template_id}     |
+| us3.datadoghq.com | PUT https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id} |
+| us5.datadoghq.com | PUT https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id} |
+| app.datadoghq.eu  | PUT https://api.datadoghq.eu/api/v2/monitor/template/{template_id}      |
+| ap1.datadoghq.com | PUT https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
+| ap2.datadoghq.com | PUT https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
+| app.ddog-gov.com  | PUT https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| uk1.datadoghq.com | PUT Not supported in the UK1 region                                     |
+| us2.ddog-gov.com  | PUT Not supported in the US2-FED region                                 |
 
 ## [Delete a monitor user template](https://docs.datadoghq.com/api/latest/monitors/delete-a-monitor-user-template.md) (preview)
 
-| Datadog site      | API endpoint                                                                   |
-| ----------------- | ------------------------------------------------------------------------------ |
-| app.datadoghq.com | **DELETE** https://api.datadoghq.com/api/v2/monitor/template/{template_id}     |
-| us3.datadoghq.com | **DELETE** https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id} |
-| us5.datadoghq.com | **DELETE** https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id} |
-| app.datadoghq.eu  | **DELETE** https://api.datadoghq.eu/api/v2/monitor/template/{template_id}      |
-| ap1.datadoghq.com | **DELETE** https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
-| ap2.datadoghq.com | **DELETE** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
-| app.ddog-gov.com  | **DELETE** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| Datadog site      | API endpoint                                                               |
+| ----------------- | -------------------------------------------------------------------------- |
+| app.datadoghq.com | DELETE https://api.datadoghq.com/api/v2/monitor/template/{template_id}     |
+| us3.datadoghq.com | DELETE https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id} |
+| us5.datadoghq.com | DELETE https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id} |
+| app.datadoghq.eu  | DELETE https://api.datadoghq.eu/api/v2/monitor/template/{template_id}      |
+| ap1.datadoghq.com | DELETE https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id} |
+| ap2.datadoghq.com | DELETE https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id} |
+| app.ddog-gov.com  | DELETE https://api.ddog-gov.com/api/v2/monitor/template/{template_id}      |
+| uk1.datadoghq.com | DELETE Not supported in the UK1 region                                     |
+| us2.ddog-gov.com  | DELETE Not supported in the US2-FED region                                 |
 
 ## [Validate a monitor user template](https://docs.datadoghq.com/api/latest/monitors/validate-a-monitor-user-template.md) (preview)
 
-| Datadog site      | API endpoint                                                            |
-| ----------------- | ----------------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v2/monitor/template/validate     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v2/monitor/template/validate |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v2/monitor/template/validate |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v2/monitor/template/validate      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v2/monitor/template/validate |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/template/validate |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/template/validate      |
+| Datadog site      | API endpoint                                                        |
+| ----------------- | ------------------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v2/monitor/template/validate     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v2/monitor/template/validate |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v2/monitor/template/validate |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v2/monitor/template/validate      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/template/validate |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/template/validate |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/template/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                            |
 
 ## [Validate an existing monitor user template](https://docs.datadoghq.com/api/latest/monitors/validate-an-existing-monitor-user-template.md) (preview)
 
-| Datadog site      | API endpoint                                                                          |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| app.datadoghq.com | **POST** https://api.datadoghq.com/api/v2/monitor/template/{template_id}/validate     |
-| us3.datadoghq.com | **POST** https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
-| us5.datadoghq.com | **POST** https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
-| app.datadoghq.eu  | **POST** https://api.datadoghq.eu/api/v2/monitor/template/{template_id}/validate      |
-| ap1.datadoghq.com | **POST** https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
-| ap2.datadoghq.com | **POST** https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
-| app.ddog-gov.com  | **POST** https://api.ddog-gov.com/api/v2/monitor/template/{template_id}/validate      |
+| Datadog site      | API endpoint                                                                      |
+| ----------------- | --------------------------------------------------------------------------------- |
+| app.datadoghq.com | POST https://api.datadoghq.com/api/v2/monitor/template/{template_id}/validate     |
+| us3.datadoghq.com | POST https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
+| us5.datadoghq.com | POST https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
+| app.datadoghq.eu  | POST https://api.datadoghq.eu/api/v2/monitor/template/{template_id}/validate      |
+| ap1.datadoghq.com | POST https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
+| ap2.datadoghq.com | POST https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}/validate |
+| app.ddog-gov.com  | POST https://api.ddog-gov.com/api/v2/monitor/template/{template_id}/validate      |
+| uk1.datadoghq.com | POST Not supported in the UK1 region                                              |
+| us2.ddog-gov.com  | POST Not supported in the US2-FED region                                          |

@@ -10,6 +10,7 @@ import { parse as parseYaml } from "yaml";
 import { localizedHref, type Locale } from "@lib/i18n/locale";
 import { toCategorySlug } from "./categorySlug";
 import { CHANGELOG_ROOT_PATH } from "./changelogPaths";
+import { LEGACY_REDIRECTS } from "./legacyRedirects";
 import { getCategoriesView } from "./viewsBuilder";
 import { ChangelogFileSchema } from "./schemas/changelog";
 import type { ApiCategory, ApiOperationStub } from "./schemas/views";
@@ -33,7 +34,7 @@ export const CHANGELOG_FILTERS = [
 ] as const;
 export type ChangelogFilter = (typeof CHANGELOG_FILTERS)[number];
 
-// TODO: no Hugo i18n keys exist for these strings yet.
+// MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
 export const CHANGELOG_TITLE = "Changelog";
 export const CHANGELOG_INTRO =
   "Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by the API product team and collected here in one changelog.";
@@ -215,7 +216,7 @@ export function changelogPageTitle(
   filter: ChangelogFilter,
   pageNumber: number,
 ): string {
-  // TODO: no Hugo i18n keys exist for these strings yet.
+  // MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
   const pageQualifier = pageNumber > 1 ? `, page ${pageNumber}` : "";
   if (filter === "all") return `API Changelog${pageQualifier}`;
   return `${CHANGELOG_BUCKET_LABELS[filter]} changes${pageQualifier} - API Changelog`;
@@ -292,24 +293,67 @@ function compareEntries(a: ChangelogEntry, b: ChangelogEntry): number {
   );
 }
 
+/**
+ * Retired category slug → the slug it redirects to, from the
+ * `/api/latest/<slug>` rows of `LEGACY_REDIRECTS`. Lets changelog entries for
+ * a renamed product (such as `dora-metrics`) link to the page that replaced it.
+ */
+const REDIRECTED_CATEGORY_SLUGS = new Map(
+  LEGACY_REDIRECTS.flatMap(({ from, to }) => {
+    const fromSlug = toLatestCategorySlug(from);
+    const toSlug = toLatestCategorySlug(to);
+    return fromSlug && toSlug ? [[fromSlug, toSlug] as const] : [];
+  }),
+);
+
+/** `/api/latest/dora-metrics` → `dora-metrics`; anything else → `undefined`. */
+function toLatestCategorySlug(path: string): string | undefined {
+  return path.match(/^\/api\/latest\/([^/]+)\/?$/)?.[1];
+}
+
 function resolveProduct(
   productSlug: string,
   categoriesBySlug: Map<string, CategoryForChangelog>,
   lang: Locale,
 ): ResolvedChangelogEntry["product"] {
-  const category = categoriesBySlug.get(toCategorySlug(productSlug));
-  if (!category) return { name: titleCaseSlug(productSlug) };
+  const categorySlug = toCategorySlug(productSlug);
+  const category = categoriesBySlug.get(categorySlug);
+  if (category) {
+    return {
+      name: category.name,
+      href: localizedHref(lang, `/api/latest/${category.slug}/`),
+    };
+  }
+  // A retired product keeps its own name but links to the page that replaced it.
+  const name = titleCaseSlug(productSlug);
+  const redirectedCategory = categoriesBySlug.get(
+    REDIRECTED_CATEGORY_SLUGS.get(categorySlug) ?? "",
+  );
+  if (!redirectedCategory) return { name };
   return {
-    name: category.name,
-    href: localizedHref(lang, `/api/latest/${category.slug}/`),
+    name,
+    href: localizedHref(lang, `/api/latest/${redirectedCategory.slug}/`),
   };
 }
 
-/** `service-level-objectives` → `Service Level Objectives`. */
+/** Slug words that title-case wrong, mapped to their display form. */
+const ACRONYMS_BY_SLUG_WORD: Record<string, string> = {
+  ai: "AI",
+  dora: "DORA",
+};
+
+/**
+ * `service-level-objectives` → `Service Level Objectives`, and
+ * `dora-metrics` → `DORA Metrics`.
+ */
 function titleCaseSlug(slug: string): string {
   return slug
     .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(
+      (word) =>
+        ACRONYMS_BY_SLUG_WORD[word] ??
+        word.charAt(0).toUpperCase() + word.slice(1),
+    )
     .join(" ");
 }
 

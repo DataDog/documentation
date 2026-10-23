@@ -63,7 +63,6 @@ describe("viewsBuilder snapshots", () => {
         expect(stubs[i].slug).toBe(full[i].slug);
         expect(stubs[i].name).toBe(full[i].name);
         expect(stubs[i].description).toBe(full[i].description);
-        expect(stubs[i].deprecated).toBe(full[i].deprecated);
       }
     });
   });

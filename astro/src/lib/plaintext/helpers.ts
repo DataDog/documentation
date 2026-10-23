@@ -92,26 +92,34 @@ export function tag(
  * Parse a markdown string and return the block-level children of the
  * resulting document. Use this for free-form markdown content (descriptions,
  * etc.) where the structure isn't known up front.
+ *
+ * Bare URLs become links, as in Hugo's `.md`, so `buildPlaintextPage` can
+ * point the docs ones at their `.md` pages.
  */
 export function nodesFromMd(md: string): MarkdocNode[] {
   if (!md) {
     return [];
   }
-  return parse(md).children;
+  const nodes = parse(md).children;
+  linkBareUrls(nodes);
+  return nodes;
 }
 
 /**
  * Build a Markdown table whose cells can contain inline markdown. Each cell
  * is parsed; if it parses to a single paragraph, its inline children are
  * inlined into the cell. Otherwise the cell falls back to plain text.
+ *
+ * A table row can't span lines, so line breaks in a cell collapse to spaces.
  */
 export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
   const cellChildren = (text: string): MarkdocNode[] => {
-    const parsed = nodesFromMd(text);
+    const oneLineText = text.replace(/\s*\n\s*/g, " ");
+    const parsed = nodesFromMd(oneLineText);
     if (parsed.length === 1 && parsed[0].type === "paragraph") {
       return parsed[0].children;
     }
-    return [inline([plaintext(text)])];
+    return [inline([plaintext(oneLineText)])];
   };
   const th = (text: string): MarkdocNode => {
     return new Ast.Node("th", {}, cellChildren(text));
@@ -202,6 +210,40 @@ export function mdLinkHref(href: string, site: string | URL): string {
   }
   url.pathname = `${url.pathname.replace(/\/+$/, "")}.md`;
   return url.href;
+}
+
+/** A bare URL, stopping at whitespace and the brackets around it. */
+const BARE_URL = /https?:\/\/[^\s<>()[\]]+/g;
+
+/** Punctuation that ends a sentence, not the URL before it. */
+const TRAILING_PUNCTUATION = /[.,;:!?'"]+$/;
+
+/** Turn bare URLs in text into links. Text inside a link stays as is. */
+function linkBareUrls(nodes: MarkdocNode[]): void {
+  for (const node of nodes) {
+    if (node.type === "link") continue;
+    node.children = node.children.flatMap((child) => {
+      return child.type === "text" ? textWithLinks(child) : [child];
+    });
+    linkBareUrls(node.children);
+  }
+}
+
+function textWithLinks(textNode: MarkdocNode): MarkdocNode[] {
+  const content = textNode.attributes.content;
+  if (typeof content !== "string") return [textNode];
+
+  const pieces: MarkdocNode[] = [];
+  let textStart = 0;
+  for (const match of content.matchAll(BARE_URL)) {
+    const url = match[0].replace(TRAILING_PUNCTUATION, "");
+    pieces.push(plaintext(content.slice(textStart, match.index)));
+    pieces.push(link(url, url));
+    textStart = match.index + url.length;
+  }
+  if (pieces.length === 0) return [textNode];
+  pieces.push(plaintext(content.slice(textStart)));
+  return pieces.filter((piece) => piece.attributes.content !== "");
 }
 
 function pointDocsLinksAtMd(nodes: MarkdocNode[], site: string | URL): void {

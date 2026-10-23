@@ -474,7 +474,7 @@
           "examples": [
             {
               "name": "Example",
-              "value": "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"account_tags\": [\n          \"env:prod\"\n        ],\n        \"auth_config\": {\n          \"access_key_id\": \"AKIAIOSFODNN7EXAMPLE\"\n        },\n        \"aws_account_id\": \"123456789012\",\n        \"aws_partition\": \"aws\",\n        \"aws_regions\": {\n          \"include_all\": true\n        },\n        \"logs_config\": {\n          \"lambda_forwarder\": {\n            \"lambdas\": [\n              \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n            ],\n            \"log_source_config\": {\n              \"tag_filters\": [\n                {\n                  \"source\": \"s3\",\n                  \"tags\": [\n                    \"env:prod\"\n                  ]\n                }\n              ]\n            },\n            \"sources\": [\n              \"s3\"\n            ]\n          }\n        },\n        \"metrics_config\": {\n          \"automute_enabled\": true,\n          \"collect_cloudwatch_alarms\": false,\n          \"collect_custom_metrics\": false,\n          \"enabled\": true,\n          \"namespace_filters\": {\n            \"exclude_only\": [\n              \"AWS/SQS\",\n              \"AWS/ElasticMapReduce\",\n              \"AWS/Usage\"\n            ]\n          },\n          \"tag_filters\": [\n            {\n              \"namespace\": \"AWS/EC2\",\n              \"tags\": [\n                \"datadog:true\"\n              ]\n            }\n          ]\n        },\n        \"resources_config\": {\n          \"cloud_security_posture_management_collection\": false,\n          \"extended_collection\": true\n        },\n        \"traces_config\": {\n          \"xray_services\": {\n            \"include_all\": false\n          }\n        }\n      },\n      \"id\": \"00000000-abcd-0001-0000-000000000000\",\n      \"type\": \"account\"\n    }\n  ]\n}"
+              "value": "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"account_tags\": [\n          \"env:prod\"\n        ],\n        \"auth_config\": {\n          \"access_key_id\": \"AKIAIOSFODNN7EXAMPLE\"\n        },\n        \"aws_account_id\": \"123456789012\",\n        \"aws_partition\": \"aws\",\n        \"aws_regions\": {\n          \"include_all\": true\n        },\n        \"created_at\": \"2019-09-19T10:00:00.000Z\",\n        \"logs_config\": {\n          \"lambda_forwarder\": {\n            \"lambdas\": [\n              \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n            ],\n            \"log_source_config\": {\n              \"tag_filters\": [\n                {\n                  \"source\": \"s3\",\n                  \"tags\": [\n                    \"env:prod\"\n                  ]\n                }\n              ]\n            },\n            \"sources\": [\n              \"s3\"\n            ]\n          }\n        },\n        \"metrics_config\": {\n          \"automute_enabled\": true,\n          \"collect_cloudwatch_alarms\": false,\n          \"collect_custom_metrics\": false,\n          \"enabled\": true,\n          \"namespace_filters\": {\n            \"exclude_only\": [\n              \"AWS/SQS\",\n              \"AWS/ElasticMapReduce\",\n              \"AWS/Usage\"\n            ]\n          },\n          \"tag_filters\": [\n            {\n              \"namespace\": \"AWS/EC2\",\n              \"tags\": [\n                \"datadog:true\"\n              ]\n            }\n          ]\n        },\n        \"modified_at\": \"2019-09-19T10:00:00.000Z\",\n        \"resources_config\": {\n          \"cloud_security_posture_management_collection\": false,\n          \"extended_collection\": true\n        },\n        \"traces_config\": {\n          \"xray_services\": {\n            \"include_all\": false\n          }\n        }\n      },\n      \"id\": \"00000000-abcd-0001-0000-000000000000\",\n      \"type\": \"account\"\n    }\n  ]\n}"
             }
           ]
         },
@@ -528,29 +528,29 @@
           "entries": [
             {
               "description": "List all AWS integrations curl example",
-              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\"",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "us3": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "us5": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "eu": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "ap1": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "ap2": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "gov": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 }
               }
             }
@@ -780,7 +780,17 @@
                   "required": false,
                   "deprecated": false,
                   "readOnly": false,
-                  "description": "An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) containing user-supplied overrides\nfor AWS namespace metric collection. **Important**: This field only contains namespaces explicitly configured through API calls,\nnot the comprehensive enabled or disabled status of all namespaces. If a namespace is absent from this field, it uses Datadog's\ninternal defaults (all namespaces enabled by default, except `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage`).\nFor a complete view of all namespace statuses, use the V2 AWS Integration API instead."
+                  "description": "An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) containing user-supplied overrides\nfor AWS namespace metric collection. **Important**: This field only contains namespaces explicitly configured through API calls,\nnot the comprehensive enabled or disabled status of all namespaces. If a namespace is absent from this field, it uses Datadog's\ninternal defaults (all namespaces enabled by default, except `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage`).\nFor a complete view of all namespace statuses, use the V2 AWS Integration API instead.",
+                  "children": [
+                    {
+                      "name": "<any-key>",
+                      "type": "boolean",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A list of additional properties."
+                    }
+                  ]
                 },
                 {
                   "name": "cspm_resource_collection_enabled",
@@ -864,7 +874,7 @@
           "examples": [
             {
               "name": "Example",
-              "value": "{\n  \"accounts\": [\n    {\n      \"account_id\": \"123456789012\",\n      \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opswork\": false\n      },\n      \"cspm_resource_collection_enabled\": true,\n      \"excluded_regions\": [\n        \"us-east-1\",\n        \"us-west-2\"\n      ],\n      \"extended_resource_collection_enabled\": true,\n      \"filter_tags\": [\n        \"$KEY:$VALUE\"\n      ],\n      \"host_tags\": [\n        \"$KEY:$VALUE\"\n      ],\n      \"metrics_collection_enabled\": false,\n      \"resource_collection_enabled\": true,\n      \"role_name\": \"DatadogAWSIntegrationRole\"\n    }\n  ]\n}"
+              "value": "{\n  \"accounts\": [\n    {\n      \"access_key_id\": \"string\",\n      \"account_id\": \"123456789012\",\n      \"account_specific_namespace_rules\": {\n        \"<any-key>\": false\n      },\n      \"cspm_resource_collection_enabled\": true,\n      \"excluded_regions\": [\n        \"us-east-1\",\n        \"us-west-2\"\n      ],\n      \"extended_resource_collection_enabled\": true,\n      \"filter_tags\": [\n        \"$KEY:$VALUE\"\n      ],\n      \"host_tags\": [\n        \"$KEY:$VALUE\"\n      ],\n      \"metrics_collection_enabled\": false,\n      \"resource_collection_enabled\": true,\n      \"role_name\": \"DatadogAWSIntegrationRole\",\n      \"secret_access_key\": \"string\"\n    }\n  ]\n}"
             }
           ]
         },
@@ -939,29 +949,29 @@
           "entries": [
             {
               "description": "List all AWS integrations curl example",
-              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\"",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "us3": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "us5": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "eu": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "ap1": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "ap2": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 },
                 "gov": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\""
                 }
               }
             }

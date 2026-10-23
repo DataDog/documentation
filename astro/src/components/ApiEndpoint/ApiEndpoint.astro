@@ -29,10 +29,10 @@ interface EndpointData {
   deprecated: boolean;
   unstable: boolean;
   unstableMessage?: string;
-  newerVersionUrl?: string;
   permissions?: string[];
   permissionsMatch?: "any" | "all";
   oauthScopes?: string[];
+  oauthScopesMatch?: "any";
   oauthScopesAnchor?: string;
   regionUrls?: Record<string, string>;
   pathParams?: SchemaField[];
@@ -74,6 +74,14 @@ const hasParams =
   ((ep.pathParams && ep.pathParams.length > 0) ||
     (ep.queryParams && ep.queryParams.length > 0) ||
     (ep.headerParams && ep.headerParams.length > 0));
+
+// Hugo shows the Overview heading on every operation, even with nothing
+// under it. Show it only when a description, permissions, or scopes follow.
+const hasOverview =
+  ep &&
+  (Boolean(ep.description) ||
+    (ep.permissions && ep.permissions.length > 0) ||
+    (ep.oauthScopes && ep.oauthScopes.length > 0));
 ---
 
 {
@@ -82,22 +90,10 @@ const hasParams =
       {/* No id: the operation page's `{slug}-{version}` tab panel is the
         anchor, and a bare-slug id here would repeat once per version. */}
       {/* Status alerts */}
-      {/* TODO: translate the deprecation/unstable/region-not-supported messages,
-        permissions label, "Request Body" heading, and "(required)/(optional)"
-        markers once authoritative translation keys exist in the Hugo i18n
-        bundle. */}
-      {ep.deprecated && (
-        <Alert level="warning">
-          This endpoint is deprecated.
-          {ep.newerVersionUrl && (
-            <>
-              {" "}
-              <a href={ep.newerVersionUrl}>Use the newer version.</a>
-            </>
-          )}
-        </Alert>
-      )}
-      {ep.unstable && !ep.deprecated && (
+      {/* MISSING_TRANSLATION_LABEL: translate the unstable/region-not-supported messages,
+        permissions label, and the "Body Data" label and "(required)" marker
+        once authoritative translation keys exist in the Hugo i18n bundle. */}
+      {ep.unstable && (
         <Alert level="warning">
           <Fragment
             set:html={renderMarkdownInline(
@@ -131,7 +127,7 @@ const hasParams =
       </div>
 
       {/* Description — rendered as slot content from the parent page */}
-      {ep.description && (
+      {hasOverview && (
         <h3 class={cl("api-endpoint__overview-heading")}>
           {translate("overview")}
         </h3>
@@ -166,16 +162,35 @@ const hasParams =
       {/* OAuth scopes */}
       {ep.oauthScopes && ep.oauthScopes.length > 0 && (
         <div class={cl("api-endpoint__oauth-scopes")}>
-          <p>
-            OAuth apps require the <code>{ep.oauthScopes.join(", ")}</code>{" "}
-            authorization{" "}
-            {ep.oauthScopesAnchor ? (
-              <a href={oauthScopesHref}>scope</a>
-            ) : (
-              "scope"
-            )}{" "}
-            to access this endpoint.
-          </p>
+          {ep.oauthScopesMatch === "any" ? (
+            <p>
+              OAuth apps require one of the following authorization{" "}
+              {ep.oauthScopesAnchor ? (
+                <a href={oauthScopesHref}>scopes</a>
+              ) : (
+                "scopes"
+              )}{" "}
+              to access this endpoint:{" "}
+              {ep.oauthScopes.map((scope, index) => (
+                <>
+                  {index > 0 && ", "}
+                  <code>{scope}</code>
+                </>
+              ))}
+              .
+            </p>
+          ) : (
+            <p>
+              OAuth apps require the <code>{ep.oauthScopes.join(", ")}</code>{" "}
+              authorization{" "}
+              {ep.oauthScopesAnchor ? (
+                <a href={oauthScopesHref}>scope</a>
+              ) : (
+                "scope"
+              )}{" "}
+              to access this endpoint.
+            </p>
+          )}
         </div>
       )}
 
@@ -204,12 +219,13 @@ const hasParams =
         </div>
       )}
 
-      {/* Request Body */}
+      {/* Request */}
       {ep.requestBody && (
         <div class={cl("api-endpoint__section")}>
-          <h3>
-            Request Body {ep.requestBody.required ? "(required)" : "(optional)"}
-          </h3>
+          <h3>{translate("request")}</h3>
+          <h4 class={cl("api-endpoint__body-label")}>
+            Body Data{ep.requestBody.required && " (required)"}
+          </h4>
           {ep.requestBody.description && (
             <p set:html={renderMarkdownInline(ep.requestBody.description)} />
           )}

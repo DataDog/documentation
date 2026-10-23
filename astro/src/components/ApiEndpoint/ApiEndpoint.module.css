@@ -49,6 +49,11 @@
   margin: 0 0 var(--space-sm);
 }
 
+/* As in Hugo, "Body Data (required)" shows as "Body Data (Required)". */
+.api-endpoint__body-label {
+  text-transform: capitalize;
+}
+
 .api-endpoint__overview-heading {
   margin-bottom: var(--space-sm);
 }
@@ -58,4 +63,25 @@
    unlike Hugo, where paragraphs have no top margin. */
 .api-endpoint__overview-heading + * {
   margin-top: 0;
+}
+
+/* A code fence in the description, styled like CodeBlock (Hugo renders it
+   as a Chroma block). */
+.api-endpoint > :global(pre) {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm);
+  background-color: var(--color-panel-bg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+}
+
+.api-endpoint > :global(pre) :global(code) {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
+  color: var(--color-text-muted);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

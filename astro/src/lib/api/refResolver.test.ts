@@ -108,6 +108,32 @@ describe("schemaToFields", () => {
     expect(fields.length).toBeGreaterThan(0);
   });
 
+  // Hugo cuts a cycle off at the field that repeats, so prod shows that
+  // field with nothing under it.
+  it("leaves a field that repeats its schema with no recursive row under it", () => {
+    const spec = {
+      components: {
+        schemas: {
+          Tree: {
+            type: "object",
+            properties: {
+              children: {
+                type: "array",
+                items: { $ref: "#/components/schemas/Tree" },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const [children] = schemaToFields(spec, {
+      $ref: "#/components/schemas/Tree",
+    });
+    expect(children.name).toBe("children");
+    expect(children).not.toHaveProperty("children");
+  });
+
   it("converts enum values", () => {
     const spec = {};
     const schema = {
@@ -856,6 +882,18 @@ describe("type column: enum and format", () => {
     expect(typeOf({ type: "boolean" })).toBe("boolean");
   });
 
+  it("reports any for a field with no type, where Hugo leaves it blank", () => {
+    expect(typeOf({ description: "Accepts any JSON value." })).toBe("any");
+  });
+
+  it("reports [any] for array items with no type, where Hugo shows []", () => {
+    expect(typeOf({ type: "array", items: {} })).toBe("[any]");
+  });
+
+  it("keeps object for a field with properties but no type", () => {
+    expect(typeOf({ properties: { a: { type: "string" } } })).toBe("object");
+  });
+
   it("does NOT apply the format rule to parameters", () => {
     // Parameters render from `layouts/partials/api/arguments.html`, which
     // prints `.schema.type` and ignores `format`. So `list_id` is `integer`,
@@ -1035,6 +1073,44 @@ describe("union option types", () => {
     expect(
       schemaToFields(spec, schema)[0].unionOptions?.map((o) => o.type),
     ).toEqual(["<oneOf>", "string"]);
+  });
+
+  it("lists the inner options of an array-of-union variant right under it, as Hugo does", () => {
+    const spec = {
+      components: {
+        schemas: {
+          AnyValue: {
+            oneOf: [
+              { type: "string" },
+              { $ref: "#/components/schemas/AnyValueArray" },
+            ],
+          },
+          AnyValueArray: {
+            type: "array",
+            description: "An array of arbitrary values.",
+            items: { $ref: "#/components/schemas/AnyValueItem" },
+          },
+          AnyValueItem: {
+            oneOf: [
+              { type: "string", description: "A scalar string." },
+              { type: "number", description: "A scalar number." },
+            ],
+          },
+        },
+      },
+    };
+    const schema = {
+      type: "object",
+      properties: { input: { $ref: "#/components/schemas/AnyValue" } },
+    };
+    const arrayOption = schemaToFields(spec, schema)[0].unionOptions?.[1];
+    expect(arrayOption?.type).toBe("[<oneOf>]");
+    expect(
+      arrayOption?.fields.map((field) => [field.name, field.type]),
+    ).toEqual([
+      ["Object 1", "string"],
+      ["Object 2", "number"],
+    ]);
   });
 });
 
@@ -1275,5 +1351,549 @@ describe("stripWriteOnlyFields", () => {
     stripWriteOnlyFields(fields);
 
     expect(fields[0].children).toHaveLength(2);
+  });
+});
+
+describe("additionalProperties", () => {
+  const fieldNamed = (fields: SchemaField[], name: string) =>
+    fields.find((field) => field.name === name)!;
+
+  it("resolves additionalProperties into an <any-key> child", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        rules: {
+          type: "object",
+          description: "Rules by namespace.",
+          additionalProperties: {
+            type: "boolean",
+            description: "A list of additional properties.",
+          },
+        },
+      },
+    };
+
+    const rules = fieldNamed(schemaToFields({}, schema), "rules");
+    expect(rules.type).toBe("object");
+    expect(rules.children).toEqual([
+      expect.objectContaining({
+        name: "<any-key>",
+        type: "boolean",
+        description: "A list of additional properties.",
+      }),
+    ]);
+  });
+
+  it("resolves a $ref'd object under <any-key>", () => {
+    const spec = {
+      components: {
+        schemas: {
+          Query: {
+            type: "object",
+            description: "Base query.",
+            properties: { search: { type: "string" } },
+          },
+        },
+      },
+    };
+    const schema = {
+      type: "object",
+      properties: {
+        node_objects: {
+          type: "object",
+          additionalProperties: { $ref: "#/components/schemas/Query" },
+        },
+      },
+    };
+
+    const anyKey = fieldNamed(schemaToFields(spec, schema), "node_objects")
+      .children![0];
+    expect(anyKey.name).toBe("<any-key>");
+    expect(anyKey.type).toBe("object");
+    expect(anyKey.description).toBe("Base query.");
+    expect(anyKey.children?.map((child) => child.name)).toEqual(["search"]);
+  });
+
+  it("resolves a oneOf under <any-key> into union options", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        fields: {
+          type: "object",
+          additionalProperties: {
+            description: "Dynamic fields.",
+            oneOf: [
+              { type: "object", properties: { value: { type: "string" } } },
+              {
+                type: "object",
+                properties: {
+                  value: { type: "array", items: { type: "string" } },
+                },
+              },
+            ],
+          },
+        },
+      },
+    };
+
+    const anyKey = fieldNamed(schemaToFields({}, schema), "fields")
+      .children![0];
+    expect(anyKey.name).toBe("<any-key>");
+    expect(anyKey.type).toBe("oneOf");
+    expect(anyKey.unionOptions?.map((option) => option.label)).toEqual([
+      "Object 1",
+      "Object 2",
+    ]);
+  });
+
+  it("adds no child for `true` or an empty additionalProperties", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        open: { type: "object", additionalProperties: true },
+        empty: { type: "object", additionalProperties: {} },
+      },
+    };
+
+    const fields = schemaToFields({}, schema);
+    expect(fieldNamed(fields, "open").children).toBeUndefined();
+    expect(fieldNamed(fields, "empty").children).toBeUndefined();
+  });
+
+  it("ignores additionalProperties when the object has properties, as Hugo does", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        mixed: {
+          type: "object",
+          properties: { id: { type: "string" } },
+          additionalProperties: { type: "string" },
+        },
+      },
+    };
+
+    const mixed = fieldNamed(schemaToFields({}, schema), "mixed");
+    expect(mixed.children?.map((child) => child.name)).toEqual(["id"]);
+  });
+});
+
+describe("row levels under an array of oneOf", () => {
+  /** An object `depth` levels deep, each level a single `next` property. */
+  const nestedObject = (depth: number): any =>
+    depth === 0
+      ? { type: "string" }
+      : { type: "object", properties: { next: nestedObject(depth - 1) } };
+
+  /** How many `next` rows deep the deepest branch goes. */
+  const nextRowDepth = (fields: SchemaField[]): number =>
+    Math.max(
+      0,
+      ...fields.map((field) => {
+        const below = [
+          ...(field.children ?? []),
+          ...(field.unionOptions ?? []).flatMap((option) => option.fields),
+        ];
+        return (field.name === "next" ? 1 : 0) + nextRowDepth(below);
+      }),
+    );
+
+  it("counts a oneOf in array items at the array's level, as Hugo does", () => {
+    const variant = nestedObject(15);
+    const propertyOneOf = {
+      type: "object",
+      properties: { union: { oneOf: [variant] } },
+    };
+    const arrayOfOneOf = {
+      type: "object",
+      properties: { union: { type: "array", items: { oneOf: [variant] } } },
+    };
+
+    const propertyDepth = nextRowDepth(schemaToFields({}, propertyOneOf));
+    expect(propertyDepth).toBe(9);
+    expect(nextRowDepth(schemaToFields({}, arrayOfOneOf))).toBe(propertyDepth);
+  });
+
+  it("drops option rows that would land past the depth cap, as Hugo does", () => {
+    /** `next` rows down to `depth`, then a two-option oneOf. */
+    const nestedUnion = (depth: number): any =>
+      depth === 0
+        ? { oneOf: [{ type: "string" }, { type: "integer" }] }
+        : { type: "object", properties: { next: nestedUnion(depth - 1) } };
+    const deepestNext = (fields: SchemaField[]): SchemaField =>
+      fields[0].children ? deepestNext(fields[0].children) : fields[0];
+
+    const atCap = deepestNext(schemaToFields({}, nestedUnion(11)));
+    expect(atCap.type).toBe("oneOf");
+    expect(atCap.unionOptions ?? []).toEqual([]);
+
+    const belowCap = deepestNext(schemaToFields({}, nestedUnion(10)));
+    expect(belowCap.unionOptions).toHaveLength(2);
+  });
+});
+
+describe("$ref chains", () => {
+  const spec = {
+    components: {
+      schemas: {
+        BaseQuery: {
+          $ref: "#/components/schemas/EventQuery",
+          description: "Base query.",
+        },
+        EventQuery: {
+          type: "object",
+          description: "Event query.",
+          properties: {
+            data_source: { type: "string" },
+            search: {
+              type: "object",
+              properties: { query: { type: "string" } },
+            },
+          },
+        },
+        Loop: { $ref: "#/components/schemas/Loop" },
+      },
+    },
+  };
+
+  it("follows a schema that is only a reference to another schema", () => {
+    const schema = {
+      type: "object",
+      properties: { base_query: { $ref: "#/components/schemas/BaseQuery" } },
+    };
+
+    const [baseQuery] = schemaToFields(spec, schema);
+    expect(baseQuery.type).toBe("object");
+    expect(baseQuery.description).toBe("Base query.");
+    expect(baseQuery.children?.map((child) => child.name)).toEqual([
+      "data_source",
+      "search",
+    ]);
+  });
+
+  it("stops at a reference that points back at itself", () => {
+    const schema = {
+      type: "object",
+      properties: { loop: { $ref: "#/components/schemas/Loop" } },
+    };
+
+    const [loop] = schemaToFields(spec, schema);
+    expect(loop.description).toBe("Circular reference to Loop.");
+  });
+});
+
+describe("array options of a oneOf", () => {
+  const groupBy = {
+    type: "array",
+    description: "List of objects used to group by.",
+    items: {
+      type: "object",
+      required: ["facet"],
+      properties: { facet: { type: "string" }, limit: { type: "integer" } },
+    },
+  };
+
+  it("puts the item fields directly under the option, as Hugo does", () => {
+    const schema = {
+      type: "object",
+      properties: { group_by: { oneOf: [groupBy, { type: "string" }] } },
+    };
+
+    const [field] = schemaToFields({}, schema);
+    const [arrayOption] = field.unionOptions ?? [];
+    expect(arrayOption.type).toBe("[object]");
+    expect(arrayOption.fields.map((child) => child.name)).toEqual([
+      "facet",
+      "limit",
+    ]);
+    expect(arrayOption.fields[0].required).toBe(true);
+  });
+
+  it("counts the item fields at the option's field level", () => {
+    /** An object `depth` levels deep, each level a single `next` property. */
+    const nestedObject = (depth: number): any =>
+      depth === 0
+        ? { type: "string" }
+        : { type: "object", properties: { next: nestedObject(depth - 1) } };
+    const nextRowDepth = (fields: SchemaField[]): number =>
+      Math.max(
+        0,
+        ...fields.map((field) => {
+          const below = [
+            ...(field.children ?? []),
+            ...(field.unionOptions ?? []).flatMap((option) => option.fields),
+          ];
+          return (field.name === "next" ? 1 : 0) + nextRowDepth(below);
+        }),
+      );
+    const variant = nestedObject(15);
+    const objectOption = {
+      type: "object",
+      properties: { union: { oneOf: [variant] } },
+    };
+    const arrayOption = {
+      type: "object",
+      properties: { union: { oneOf: [{ type: "array", items: variant }] } },
+    };
+
+    expect(nextRowDepth(schemaToFields({}, arrayOption))).toBe(
+      nextRowDepth(schemaToFields({}, objectOption)),
+    );
+  });
+});
+
+describe("union options of a oneOf", () => {
+  const definition = {
+    oneOf: [
+      {
+        description: "Topology map widget.",
+        oneOf: [
+          {
+            type: "object",
+            description: "Data streams.",
+            properties: { title: { type: "string" } },
+          },
+          { type: "object", description: "Service map." },
+        ],
+      },
+    ],
+  };
+
+  it("puts the inner options directly under the option, as Hugo does", () => {
+    const schema = { type: "object", properties: { definition } };
+
+    const [field] = schemaToFields({}, schema);
+    const [option] = field.unionOptions ?? [];
+    expect(option.type).toBe("<oneOf>");
+    expect(
+      option.fields.map((inner) => [inner.name, inner.type, inner.description]),
+    ).toEqual([
+      ["Object 1", "object", "Data streams."],
+      ["Object 2", "object", "Service map."],
+    ]);
+    expect(option.fields[0].children?.map((child) => child.name)).toEqual([
+      "title",
+    ]);
+  });
+});
+
+describe("a $ref's own description and deprecated flag", () => {
+  const spec = {
+    components: {
+      schemas: {
+        LogQuery: {
+          type: "object",
+          description: "The log query.",
+          properties: { index: { type: "string" } },
+        },
+      },
+    },
+  };
+  const ref = "#/components/schemas/LogQuery";
+
+  it("uses the property's own description over the target's", () => {
+    const schema = {
+      type: "object",
+      properties: { query: { $ref: ref, description: "Own description." } },
+    };
+
+    const [query] = schemaToFields(spec, schema);
+    expect(query.description).toBe("Own description.");
+    expect(query.children?.map((child) => child.name)).toEqual(["index"]);
+  });
+
+  it("marks the property deprecated when the $ref says so", () => {
+    const schema = {
+      type: "object",
+      properties: { apm_query: { $ref: ref, deprecated: true } },
+    };
+
+    const [apmQuery] = schemaToFields(spec, schema);
+    expect(apmQuery.deprecated).toBe(true);
+    expect(apmQuery.description).toBe("The log query.");
+  });
+});
+
+describe("default values", () => {
+  it("keeps false and 0 defaults", () => {
+    const fields = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: {
+          enabled: { type: "boolean", default: false },
+          count: { type: "integer", default: 0 },
+        },
+      },
+    );
+
+    expect(fields.map((field) => field.defaultValue)).toEqual(["false", "0"]);
+  });
+
+  // A bare empty string would render as an empty code span.
+  it("writes an empty-string default as a quoted empty string", () => {
+    const [property] = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: { prefix: { type: "string", default: "" } },
+      },
+    );
+    const [primitive] = schemaToFields({}, { type: "string", default: "" });
+    const [param] = paramsToFields({}, [
+      { name: "prefix", in: "query", schema: { type: "string", default: "" } },
+    ]);
+
+    expect(property.defaultValue).toBe('""');
+    expect(primitive.defaultValue).toBe('""');
+    expect(param.defaultValue).toBe('""');
+  });
+
+  it("leaves other string defaults unquoted", () => {
+    const [field] = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: { kind: { type: "string", default: "account" } },
+      },
+    );
+
+    expect(field.defaultValue).toBe("account");
+  });
+});
+
+describe("a deprecated union variant", () => {
+  const spec = {
+    components: {
+      schemas: {
+        ApmResourceStatsQuery: {
+          type: "object",
+          deprecated: true,
+          description: "APM resource stats query.",
+          properties: { data_source: { type: "string", enum: ["apm"] } },
+        },
+        MetricsQuery: {
+          type: "object",
+          description: "Metrics query.",
+          properties: { data_source: { type: "string", enum: ["metrics"] } },
+        },
+      },
+    },
+  };
+  const variants = [
+    { $ref: "#/components/schemas/ApmResourceStatsQuery" },
+    { $ref: "#/components/schemas/MetricsQuery" },
+  ];
+
+  it("marks its option deprecated, as Hugo does", () => {
+    const schema = {
+      type: "object",
+      properties: { query: { oneOf: variants } },
+    };
+
+    const [query] = schemaToFields(spec, schema);
+    expect(query.unionOptions?.map((option) => option.deprecated)).toEqual([
+      true,
+      undefined,
+    ]);
+  });
+
+  it("marks an inner option row deprecated", () => {
+    const schema = {
+      type: "object",
+      properties: { query: { oneOf: [{ oneOf: variants }] } },
+    };
+
+    const [query] = schemaToFields(spec, schema);
+    const [outer] = query.unionOptions ?? [];
+    expect(outer.fields.map((field) => field.deprecated)).toEqual([
+      true,
+      false,
+    ]);
+  });
+});
+
+describe("a oneOf with a sibling type", () => {
+  // NotebookCellTime: `type: object` beside its `oneOf`. Hugo's typeColumn
+  // prints `format || type`, then appends `<oneOf>`.
+  const spec = {
+    components: {
+      schemas: {
+        NotebookCellTime: {
+          type: "object",
+          description: "Timeframe for the notebook cell.",
+          oneOf: [{ type: "string" }, { type: "object" }],
+        },
+      },
+    },
+  };
+
+  it("keeps the type before <oneOf>", () => {
+    const schema = {
+      type: "object",
+      properties: { time: { $ref: "#/components/schemas/NotebookCellTime" } },
+    };
+
+    const [time] = schemaToFields(spec, schema);
+    expect(time.type).toBe("object <oneOf>");
+    expect(time.unionOptions).toHaveLength(2);
+  });
+
+  it("leaves a oneOf without a type as a bare oneOf", () => {
+    const schema = {
+      type: "object",
+      properties: { time: { oneOf: [{ type: "string" }, { type: "object" }] } },
+    };
+
+    const [time] = schemaToFields({}, schema);
+    expect(time.type).toBe("oneOf");
+  });
+});
+
+describe("a top-level oneOf body", () => {
+  // SecurityMonitoringRuleCreatePayload. Hugo's schemaTable turns each branch
+  // into a top-level row named `Option n`.
+  const spec = {
+    components: {
+      schemas: {
+        StandardRule: {
+          type: "object",
+          description: "Create a new rule.",
+          properties: {
+            type: { type: "string", enum: ["log_detection"] },
+            name: { type: "string" },
+          },
+        },
+        SignalRule: {
+          type: "object",
+          description: "Create a new signal correlation rule.",
+          properties: {
+            type: { type: "string", enum: ["signal_correlation"] },
+          },
+        },
+        RulePayload: {
+          oneOf: [
+            { $ref: "#/components/schemas/StandardRule" },
+            { $ref: "#/components/schemas/SignalRule" },
+          ],
+        },
+      },
+    },
+  };
+
+  it("lists each branch as a top-level Option row, with no root row", () => {
+    const fields = topLevelSchemaToFields(spec, {
+      $ref: "#/components/schemas/RulePayload",
+    });
+
+    expect(
+      fields.map((field) => [field.name, field.type, field.description]),
+    ).toEqual([
+      ["Option 1", "object", "Create a new rule."],
+      ["Option 2", "object", "Create a new signal correlation rule."],
+    ]);
+    expect(fields[0].children?.map((child) => child.name)).toEqual([
+      "type",
+      "name",
+    ]);
   });
 });

@@ -452,6 +452,5 @@
         "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
       }
     }
-  ],
-  "deprecated": false
+  ]
 }

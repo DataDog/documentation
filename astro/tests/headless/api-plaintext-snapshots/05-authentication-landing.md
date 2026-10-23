@@ -1,6 +1,6 @@
 ---
 title: Authentication
-description: All requests to Datadog’s API must be authenticated. Requests that write data require reporting access and require an API key. Requests that read data…
+description: All requests to Datadog’s API must be authenticated.
 breadcrumbs: Docs > API > Authentication
 ---
 
@@ -20,12 +20,14 @@ If you are on the Datadog EU site, set the environment variable `DATADOG_HOST` t
 
 ## [Validate API key](https://docs.datadoghq.com/api/latest/authentication/validate-api-key.md)
 
-| Datadog site      | API endpoint                                          |
-| ----------------- | ----------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/validate     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/validate |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/validate |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/validate      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/validate |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/validate |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/validate      |
+| Datadog site      | API endpoint                                      |
+| ----------------- | ------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/validate     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/validate |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/validate |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/validate      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/validate |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/validate |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/validate      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region           |

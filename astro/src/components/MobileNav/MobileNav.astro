@@ -109,7 +109,7 @@ const activePageId = isApiContext
   ? undefined
   : (findActivePageIdentifier(tree, Astro.url.pathname) ?? undefined);
 
-// TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
+// MISSING_TRANSLATION_LABEL: replace hardcoded English fallbacks with i18n() keys once authoritative
 // translations exist in the Hugo i18n bundle.
 const translate = useTranslations(pageLang);
 const quicknav = [
@@ -132,7 +132,7 @@ const quicknav = [
     alt: "api",
   },
 ];
-// TODO: replace hardcoded English with i18n() once authoritative translation
+// MISSING_TRANSLATION_LABEL: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
 const searchLabels: SearchBarLabels = {
   Search: "Search",

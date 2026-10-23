@@ -37,7 +37,7 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
       data-hydrated={hydrated ? "true" : undefined}
     >
       <span id="language-select-label" class={cl("language-selector__label")}>
-        {/* TODO: replace with i18n() once the helper exposes the singular form
+        {/* MISSING_TRANSLATION_LABEL: replace with i18n() once the helper exposes the singular form
             of the `language` key in i18n/en.json (currently returns plural). */}
         Language
       </span>

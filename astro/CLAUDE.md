@@ -54,7 +54,7 @@ Everything outside this folder belongs to the live Hugo site — do not edit it,
 - `hugo/local/bin/py/preview_links.py` and `hugo/local/bin/py/preview-links-template.mako`.
 - Only at the later Hugo-`/api`-cutover step (see the router plan's Handoff section): `hugo/config/{preview,live}/config.yaml` and `hugo/content/en/api/_index.md`.
 
-Beyond that list, this applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `TODO` comment so the key can be added authoritatively later.
+Beyond that list, this applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `MISSING_TRANSLATION_LABEL` comment (for example, `MISSING_TRANSLATION_LABEL: These headings are not in the i18n file yet.`) so the key can be added authoritatively later.
 
 If a task seems to require any other Hugo-side change, stop and ask first.
 
@@ -130,13 +130,13 @@ Their language coverage is uneven on purpose. `aws-integration/ListAWSAccounts` 
 ## Components
 
 - Use CSS modules with full BEM classes, for compatibility with `classListFactory` (which generates the `cl` function that applies hashed BEM classes automatically based on a static BEM class name). Name every class `block`, `block__element`, or `block__element--modifier` — never a shorthand or camelCase name.
-- Use `i18n` to localize strings where possible, or use a `TODO` comment if Hugo does not yet have the desired i18n string. Pass `i18n` labels to Preact using a `labels` prop.
+- Use `i18n` to localize strings where possible, or use a `MISSING_TRANSLATION_LABEL` comment if Hugo does not yet have the desired i18n string. Pass `i18n` labels to Preact using a `labels` prop.
 - Pass inline svgs to Preact using an `svgs` prop.
 - If a component is static (not interactive, no JS needed), use vanilla Astro.
 - If a component is interactive, use Preact.
 - Where possible, each component should have its own isolated scope.
 - In cases when giving a Preact component an isolated scope would require you to pass very large props (like the pre-rendered HTML of a tab, or a very large data blob for an API schema table), use a [hybrid approach](#hybrid-example) where a vanilla Astro component does most of the rendering, and a small Preact component controls interactivity. Do not do this unless the props would be large otherwise, because isolated JS scope is strongly preferred!
-- Some components have a plaintext twin (found in their `plaintext` folder). Keep the plaintext twin in sync with the component.
+- Some components have a plaintext twin (found in their `plaintext` folder). Keep the plaintext twin in sync with the component. Any material change to a component's HTML content (adding, removing, renaming, or reordering headings, text, labels, or sections, as opposed to styling-only changes) likely needs the same change in its plaintext twin. Check the twin, and its tests, in the same change.
 
 ### `cl()` usage example
 

@@ -198,3 +198,48 @@ describe("renderMdocWithTwins", () => {
     expect(out).not.toContain("docs.datadoghq.com");
   });
 });
+
+describe("renderMdocWithTwins: tables", () => {
+  it("writes a table of one-line cells as a Markdown pipe table", () => {
+    const source = [
+      "{% table %}",
+      "* Header",
+      "* Description",
+      "---",
+      "* `X-RateLimit-Limit`",
+      "* number of requests allowed",
+      "  in a time period.",
+      "---",
+      "{% /table %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).not.toContain("{% table");
+    expect(out).toMatch(/^\| Header +\| Description +\|$/m);
+    expect(out).toMatch(
+      /^\| `X-RateLimit-Limit` \| number of requests allowed in a time period\. \|$/m,
+    );
+  });
+
+  it("keeps a table with block content in a cell as Markdoc, after a hint", () => {
+    const source = [
+      "{% table %}",
+      "* Name",
+      "* Steps",
+      "---",
+      "* Setup",
+      "* First paragraph.",
+      "",
+      "  - step one",
+      "  - step two",
+      "---",
+      "{% /table %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    const hintIndex = out.indexOf("Markdoc table syntax");
+    expect(hintIndex).toBeGreaterThan(-1);
+    expect(out.indexOf("{% table %}")).toBeGreaterThan(hintIndex);
+    expect(out).toContain("step two");
+  });
+});

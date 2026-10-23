@@ -95,29 +95,29 @@
           "entries": [
             {
               "description": "Validate API key curl example",
-              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\"",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\"",
               "syntax": "bash",
               "regionVariants": {
                 "us": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 },
                 "us3": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 },
                 "us5": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 },
                 "eu": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 },
                 "ap1": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 },
                 "ap2": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 },
                 "gov": {
-                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/validate\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"Accept: application/json\""
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/validate\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\""
                 }
               }
             }

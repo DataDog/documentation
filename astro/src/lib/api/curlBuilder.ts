@@ -7,6 +7,7 @@
 
 import type { OpenAPIV3 } from "openapi-types";
 import type {
+  CurlFormField,
   CurlParam,
   CurlSecurityScheme,
   GenerateCurlOptions,
@@ -58,10 +59,17 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     method,
     path,
     site = "datadoghq.com",
+    otherSites = [],
+    host,
+    otherHosts = [],
     subdomain = "api",
     pathParams,
     queryParams,
+    headerParams,
     requestBodyJson,
+    hasRequestBody = false,
+    multipartFormFields,
+    hasNoContentResponse = false,
     security,
     globalSecurity,
     securitySchemes = DEFAULT_SECURITY_SCHEMES,
@@ -73,29 +81,56 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   );
   const interpolatedPath = interpolatePath(path, pathParams);
   const queryString = buildQueryString(queryParams, auth.queryParts);
-  const url = `https://${subdomain}.${site}${interpolatedPath}${queryString}`;
+  const origin = host ?? `${subdomain}.\${DD_SITE}`;
+  const url = `https://${origin}${interpolatedPath}${queryString}`;
 
   const lines: string[] = [];
 
+  // --- Parameters the URL references by name ---
+  const parameterExportLines = buildParameterExportLines(
+    pathParams,
+    queryParams,
+  );
+  if (parameterExportLines.length > 0) {
+    lines.push(...parameterExportLines, "");
+  }
+
   // --- Shell variable exports as comments ---
-  lines.push(`# Set your Datadog site and credentials`);
-  lines.push(`export DD_SITE="${site}"`);
-  lines.push(...auth.exportLines);
-  lines.push("");
+  // A fixed host leaves DD_SITE unused, so it isn't exported.
+  if (!host) {
+    lines.push(`# Set your Datadog site and credentials`);
+    lines.push(buildSiteExportLine(site, otherSites));
+    lines.push(...auth.exportLines);
+    lines.push("");
+  } else if (auth.exportLines.length > 0) {
+    lines.push(`# Set your Datadog credentials`);
+    lines.push(...auth.exportLines);
+    lines.push("");
+  }
 
   // --- curl command ---
+  if (host && otherHosts.length > 0) {
+    lines.push(buildOtherHostsLine(site, otherHosts));
+  }
   const curlParts: string[] = [];
   curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
-  curlParts.push(...auth.headers);
 
-  // Content-Type and Accept headers
-  if (requestBodyJson || methodHasBody(method)) {
+  // Accept, Content-Type, header parameters, then auth, in Hugo's order
+  if (!hasNoContentResponse) {
+    curlParts.push(`-H "Accept: application/json"`);
+  }
+  if (multipartFormFields) {
+    curlParts.push(`-H "Content-Type: multipart/form-data"`);
+  } else if (requestBodyJson || hasRequestBody) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
-  curlParts.push(`-H "Accept: application/json"`);
+  curlParts.push(...buildHeaderParamFlags(headerParams));
+  curlParts.push(...auth.headers);
 
   // Request body
-  if (requestBodyJson) {
+  if (multipartFormFields) {
+    curlParts.push(...multipartFormFields.map(formFieldFlag));
+  } else if (requestBodyJson) {
     curlParts.push(`-d @- << EOF`);
   }
 
@@ -104,7 +139,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   lines.push(curlCommand);
 
   // Append body after the command if present
-  if (requestBodyJson) {
+  if (requestBodyJson && !multipartFormFields) {
     lines.push(requestBodyJson);
     lines.push("EOF");
   }
@@ -117,42 +152,139 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
 /* ------------------------------------------------------------------ */
 
 /**
- * Replace `{param_name}` placeholders in the path with example values or
- * shell-friendly uppercase placeholders.
+ * `export DD_SITE="datadoghq.com"`, followed by a comment naming the other
+ * sites when there are any, for readers who can't switch sites on the page.
+ */
+function buildSiteExportLine(site: string, otherSites: string[]): string {
+  const exportLine = `export DD_SITE="${site}"`;
+  if (otherSites.length === 0) return exportLine;
+  return `${exportLine} # Or ${otherSites.join(", ")}`;
+}
+
+/**
+ * The fixed-host twin of the `# Or <other sites>` comment: each other site's
+ * host, since a reader can't build it from DD_SITE.
+ */
+function buildOtherHostsLine(
+  site: string,
+  otherHosts: NonNullable<GenerateCurlOptions["otherHosts"]>,
+): string {
+  const hostList = otherHosts.map(({ site, host }) => `${host} (${site})`);
+  return `# For sites other than ${site}, replace the host below with: ${hostList.join(", ")}`;
+}
+
+/**
+ * Hugo's curl sends header parameters with their example, except
+ * `Content-Encoding`. It sends optional ones too, but only with a body, so
+ * sending only the required ones matches prod across the spec.
+ */
+function buildHeaderParamFlags(headerParams: CurlParam[] = []): string[] {
+  return headerParams
+    .filter(
+      (param) =>
+        param.required && param.name.toLowerCase() !== "content-encoding",
+    )
+    .map((param) => `-H "${param.name}: ${param.example ?? "CHANGE_ME"}"`);
+}
+
+/** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
+function formFieldFlag(field: CurlFormField): string {
+  return `-F ${field.name}=${field.binary ? "@" : ""}${field.type}`;
+}
+
+/**
+ * Export each path parameter and each required query parameter, as Hugo
+ * does, so the `${name}` references in the URL are set. Each exports its
+ * example, or `"CHANGE_ME"`.
+ */
+function buildParameterExportLines(
+  pathParams: CurlParam[] = [],
+  queryParams: CurlParam[] = [],
+): string[] {
+  const lines: string[] = [];
+  if (pathParams.length > 0) {
+    lines.push("# Path parameters", ...pathParams.map(exportParam));
+  }
+  const requiredQueryParams = queryParams.filter((param) => param.required);
+  if (requiredQueryParams.length > 0) {
+    lines.push(
+      "# Required query arguments",
+      ...requiredQueryParams.flatMap(exportQueryParam),
+    );
+  }
+  return lines;
+}
+
+function exportParam(param: CurlParam): string {
+  return `export ${shellVariableName(param.name)}="${param.example ?? "CHANGE_ME"}"`;
+}
+
+/**
+ * A parameter name as a valid shell variable name. Bash rejects names with
+ * brackets, such as `filter[env]`, so each run of other characters becomes
+ * `_` (`filter_env`). Hugo uses the name as is.
+ */
+function shellVariableName(name: string): string {
+  return name.replace(/[^A-Za-z0-9_]+/g, "_").replace(/_+$/, "");
+}
+
+/**
+ * An exploded array exports one placeholder per item, named and set to
+ * `<name>_<index>`, as Hugo does.
+ */
+function exportQueryParam(param: CurlParam): string[] {
+  if (param.explodedItemCount === undefined) return [exportParam(param)];
+  return explodedItemNames(param).map(
+    (itemName) => `export ${itemName}="${itemName}"`,
+  );
+}
+
+function explodedItemNames(param: CurlParam): string[] {
+  return Array.from(
+    { length: param.explodedItemCount ?? 0 },
+    (_, index) => `${shellVariableName(param.name)}_${index}`,
+  );
+}
+
+/**
+ * Replace `{param_name}` placeholders in the path with `${param_name}` shell
+ * variables, as Hugo does. The values are exported above the command.
  */
 function interpolatePath(path: string, pathParams?: CurlParam[]): string {
   if (!pathParams || pathParams.length === 0) return path;
 
   let result = path;
   for (const param of pathParams) {
-    const placeholder = `{${param.name}}`;
-    const value = param.example ?? `\${${param.name.toUpperCase()}}`;
-    result = result.replace(placeholder, value);
+    result = result.replace(
+      `{${param.name}}`,
+      `\${${shellVariableName(param.name)}}`,
+    );
   }
   return result;
 }
 
 /**
- * Build the query string portion of the URL.
- * Only includes required parameters and those with example values,
- * followed by any auth query parts.
+ * Build the query string portion of the URL: each required query parameter
+ * as a `${name}` reference (one per item for an exploded array), as Hugo does, then any auth query parts. Optional
+ * parameters are left out, even with an example, since a copied filter would
+ * narrow the results.
  */
 function buildQueryString(
   queryParams: CurlParam[] = [],
   authQueryParts: string[] = [],
 ): string {
-  const parts: string[] = [];
-  for (const param of queryParams) {
-    if (param.example !== undefined) {
-      parts.push(
-        `${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`,
+  const parts = queryParams
+    .filter((param) => param.required)
+    .flatMap((param) => {
+      const variableNames =
+        param.explodedItemCount === undefined
+          ? [shellVariableName(param.name)]
+          : explodedItemNames(param);
+      return variableNames.map(
+        (variableName) =>
+          `${encodeURIComponent(param.name)}=\${${variableName}}`,
       );
-    } else if (param.required) {
-      parts.push(
-        `${encodeURIComponent(param.name)}=\${${param.name.toUpperCase()}}`,
-      );
-    }
-  }
+    });
 
   parts.push(...authQueryParts);
 
@@ -236,12 +368,4 @@ function requirementAuth(
     (envName) => `export ${envName}="<${envName}>"`,
   );
   return { exportLines, headers, queryParts };
-}
-
-/**
- * Determine whether the method typically sends a request body.
- */
-function methodHasBody(method: string): boolean {
-  const upper = method.toUpperCase();
-  return upper === "POST" || upper === "PUT" || upper === "PATCH";
 }

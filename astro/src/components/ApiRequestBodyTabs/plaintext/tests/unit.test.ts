@@ -31,7 +31,7 @@ describe("apiRequestBodyTabsNodes", () => {
 
   it("returns just the schema table when no examples are present", () => {
     const out = render({ schema, examples: [] });
-    expect(out).toContain("Parent field");
+    expect(out).toContain("| Field");
     expect(out).not.toContain("{% tabs %}");
   });
 
@@ -47,7 +47,7 @@ describe("apiRequestBodyTabsNodes", () => {
     expect(out).toContain("{% tabs %}");
     expect(out).toContain('label="Model"');
     expect(out).toContain('label="Example"');
-    expect(out).toContain("Parent field");
+    expect(out).toContain("| Field");
     expect(out).toContain("```json");
   });
 

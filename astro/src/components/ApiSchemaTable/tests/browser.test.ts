@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 test.describe("ApiSchemaTable component", () => {
   test.beforeEach(async ({ page }) => {
@@ -54,34 +54,37 @@ test.describe("ApiSchemaTable component", () => {
     }
   });
 
-  test("indents a child's name well past its parent's name", async ({
-    page,
-  }) => {
+  // Spacing, dividers, toggle position, and deprecated styling are checked by
+  // screenshot, so they can change without rewriting assertions.
+  test("nested rows look right when expanded", async ({ page }) => {
+    const table = await expandAllInTable(page, "after_deep");
+    await expect(table).toHaveScreenshot("api-schema-table-deep-expanded.png");
+  });
+
+  test("deprecated and required rows look right", async ({ page }) => {
     const table = page
       .locator('.schema-table[data-hydrated="true"]', {
-        has: page.locator('[data-field-name="data"]'),
+        has: page.locator('[data-field-name="old_field"]'),
       })
       .first();
     await expect(table).toBeVisible();
-    await table.locator(".schema-table__expand-all").click();
-
-    const parentName = table.locator(
-      '[data-field-name="data"] .schema-table__name',
+    await expect(table).toHaveScreenshot(
+      "api-schema-table-deprecated-required-rows.png",
     );
-    const childName = table.locator(
-      '[data-field-name="type"][data-depth="1"] .schema-table__name',
-    );
-    await expect(childName).toBeVisible();
-
-    const parentBox = await parentName.boundingBox();
-    const childBox = await childName.boundingBox();
-    // Hugo offsets each level ~22px past the parent's name text.
-    expect(childBox!.x - parentBox!.x).toBeGreaterThanOrEqual(18);
-  });
-
-  test("does not fade deprecated rows", async ({ page }) => {
-    const row = page.locator(".schema-table__row--deprecated").first();
-    await expect(row).toBeVisible();
-    await expect(row).toHaveCSS("opacity", "1");
   });
 });
+
+/** Clicks Expand All on the table holding a field with this name. */
+async function expandAllInTable(page: Page, fieldName: string) {
+  const table = page
+    .locator('.schema-table[data-hydrated="true"]', {
+      has: page.locator(`[data-field-name="${fieldName}"]`),
+    })
+    .first();
+  await expect(table).toBeVisible();
+  await table.locator(".schema-table__expand-all").click();
+  await expect(table.locator(".schema-table__children").last()).toBeVisible();
+  // Move off the table so no row is captured in its hover state.
+  await page.mouse.move(0, 0);
+  return table;
+}

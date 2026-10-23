@@ -94,6 +94,12 @@ type CodeExampleMeta = z.infer<typeof CodeExampleMetaSchema>;
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Hugo renders at most this many examples per language
+ * (`$myItems | first 3` in layouts/partials/api/code-example.html).
+ */
+const MAX_EXAMPLES_PER_LANGUAGE = 3;
+
 const CODE_EXAMPLES: Record<"v1" | "v2", Record<string, CodeExampleMeta[]>> = {
   v1: CodeExamplesJsonSchema.parse(API_V1_CODE_EXAMPLES),
   v2: CodeExamplesJsonSchema.parse(API_V2_CODE_EXAMPLES),
@@ -220,7 +226,8 @@ export function getLanguageRunInfo(
  * @param operationId   The OpenAPI operationId (e.g. 'GetActionConnection')
  * @param version       The API version ('v1' or 'v2')
  * @param categorySlug  Slugified primary tag (e.g. 'action-connection')
- * @returns An array of CodeExampleSets, one per language that has at least one example
+ * @returns An array of CodeExampleSets, one per language that has at least one
+ *          example, each holding at most MAX_EXAMPLES_PER_LANGUAGE entries
  */
 export function getCodeExamplesForOperation(
   operationId: string,
@@ -237,6 +244,9 @@ export function getCodeExamplesForOperation(
     const entries: CodeExampleEntry[] = [];
 
     for (const meta of exampleMetas) {
+      if (entries.length === MAX_EXAMPLES_PER_LANGUAGE) {
+        break;
+      }
       const code = findExampleCode(
         operationId,
         meta.suffix,
@@ -269,15 +279,13 @@ export function getCodeExamplesForOperation(
 /*  Internal helpers                                                   */
 /* ------------------------------------------------------------------ */
 
+/** Suffixes already start with an underscore (`_1716720881`), as in Hugo. */
 function buildExampleFilename(
   operationId: string,
   suffix: string,
   ext: string,
 ): string {
-  if (suffix) {
-    return `${operationId}_${suffix}${ext}`;
-  }
-  return `${operationId}${ext}`;
+  return `${operationId}${suffix}${ext}`;
 }
 
 function findExampleCode(

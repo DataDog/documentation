@@ -124,7 +124,7 @@ const AUDIT_PAGES: AuditPage[] = [
   categoryPage("09-monitors-landing", "monitors"),
   operationPage("09-monitors-create-a-monitor", "monitors", "create-a-monitor"),
 
-  // dashboard-lists: category-level deprecation (with endpoints).
+  // dashboard-lists: v1 tag has x-deprecated, which the category page ignores.
   categoryPage("10-dashboard-lists-landing", "dashboard-lists"),
   operationPage(
     "10-dashboard-lists-get-all-dashboard-lists",
@@ -132,7 +132,7 @@ const AUDIT_PAGES: AuditPage[] = [
     "get-all-dashboard-lists",
   ),
 
-  // screenboards: empty deprecated category (no operations to sample).
+  // screenboards: empty category (no operations to sample).
   categoryPage("11-screenboards-landing", "screenboards"),
 
   categoryPage("12-usage-metering-landing", "usage-metering"),

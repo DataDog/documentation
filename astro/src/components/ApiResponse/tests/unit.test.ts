@@ -154,4 +154,43 @@ describe("ApiResponse (astro)", () => {
     expect(html).toContain("api-response__schema-description");
     expect(html).toContain("Dashboard summary response.");
   });
+
+  /**
+   * A top-level array of primitives has no rows. Hugo still shows its Model
+   * tab, with the schema description and the table hidden.
+   */
+  it("renders Model/Example tabs with the schema description when a response has no rows", async () => {
+    const html = await renderComponent({
+      responses: [
+        {
+          statusCode: "200",
+          description: "OK",
+          schema: [],
+          schemaDescription: "List of location names.",
+          examples: [{ name: "Example", value: '["aws:eu-west-3"]' }],
+        },
+      ],
+    });
+
+    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
+    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
+    expect(html).toContain("List of location names.");
+    expect(html).not.toContain("schema-table__table");
+  });
+
+  it("renders only the example when a response has no rows and no schema description", async () => {
+    const html = await renderComponent({
+      responses: [
+        {
+          statusCode: "200",
+          description: "OK",
+          schema: [],
+          examples: [{ name: "Example", value: '["namespace1"]' }],
+        },
+      ],
+    });
+
+    expect(html).toContain("api-response__example");
+    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
+  });
 });

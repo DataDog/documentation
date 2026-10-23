@@ -109,7 +109,7 @@ interface AskAiRowProps {
  * The searchbar's entry point into Ask AI. Its label tracks the query, matching
  * `setAskAISuggestionContent` in Hugo's `searchbarHits.js`.
  *
- * TODO: hardcoded English, as in Hugo. Localize once `shared/i18n` carries the
+ * MISSING_TRANSLATION_LABEL: hardcoded English, as in Hugo. Localize once `shared/i18n` carries the
  * keys — they cannot be added from this side of the repo.
  */
 function AskAiRow({ query, selected, onAsk }: AskAiRowProps) {

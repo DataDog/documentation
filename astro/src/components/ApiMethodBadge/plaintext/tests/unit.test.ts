@@ -4,13 +4,13 @@ import { documentNode } from "@lib/plaintext/helpers";
 import { apiMethodBadgeNode } from "../ApiMethodBadge";
 
 describe("apiMethodBadgeNode", () => {
-  it("renders the method uppercased and bold", () => {
+  it("renders the method uppercased, without bold, as Hugo's .md does", () => {
     const node = apiMethodBadgeNode("get");
-    expect(format(documentNode([node])).trim()).toBe("**GET**");
+    expect(format(documentNode([node])).trim()).toBe("GET");
   });
 
   it("preserves already uppercased methods", () => {
     const node = apiMethodBadgeNode("DELETE");
-    expect(format(documentNode([node])).trim()).toBe("**DELETE**");
+    expect(format(documentNode([node])).trim()).toBe("DELETE");
   });
 });

@@ -78,7 +78,8 @@ test.describe("ApiScopesTable plaintext twin", () => {
     const body = await response.text();
     expect(body).not.toContain("{% api-scopes");
     expect(body).toMatch(/^\| Scope name +\| Description +\|/m);
-    expect(body).toMatch(/^### /m);
+    // The scopes page passes headingLevel=2.
+    expect(body).toMatch(/^## API Management/m);
   });
 
   test("prefixes endpoint links with the page's language", async ({

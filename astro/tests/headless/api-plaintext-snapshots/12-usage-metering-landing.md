@@ -1,6 +1,6 @@
 ---
 title: Usage Metering
-description: The usage metering API allows you to get hourly, daily, and monthly usage across multiple facets of Datadog. This API is available to all Pro and…
+description: The usage metering API allows you to get hourly, daily, and monthly usage across multiple facets of Datadog.
 breadcrumbs: Docs > API > Usage Metering
 ---
 
@@ -21,444 +21,518 @@ Learn more on the [usage details documentation](https://docs.datadoghq.com/accou
 
 ## [Get hourly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-attribution.md)
 
-| Datadog site      | API endpoint                                                          |
-| ----------------- | --------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/hourly-attribution     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/hourly-attribution |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/hourly-attribution |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/hourly-attribution      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/hourly-attribution |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/hourly-attribution |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/hourly-attribution      |
+| Datadog site      | API endpoint                                                      |
+| ----------------- | ----------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/hourly-attribution     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/hourly-attribution |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/hourly-attribution |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/hourly-attribution      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/hourly-attribution |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/hourly-attribution |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/hourly-attribution      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ## [Get monthly usage attribution](https://docs.datadoghq.com/api/latest/usage-metering/get-monthly-usage-attribution.md)
 
-| Datadog site      | API endpoint                                                           |
-| ----------------- | ---------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/monthly-attribution     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/monthly-attribution |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/monthly-attribution |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/monthly-attribution      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/monthly-attribution |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/monthly-attribution |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/monthly-attribution      |
+| Datadog site      | API endpoint                                                       |
+| ----------------- | ------------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/monthly-attribution     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/monthly-attribution |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/monthly-attribution |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/monthly-attribution      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/monthly-attribution |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/monthly-attribution |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/monthly-attribution      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                            |
 
 ## [Get billable usage across your account](https://docs.datadoghq.com/api/latest/usage-metering/get-billable-usage-across-your-account.md)
 
-| Datadog site      | API endpoint                                                        |
-| ----------------- | ------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/billable-summary     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/billable-summary |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/billable-summary |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/billable-summary      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/billable-summary |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/billable-summary |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/billable-summary      |
+| Datadog site      | API endpoint                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/billable-summary     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/billable-summary |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/billable-summary |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/billable-summary      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/billable-summary |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/billable-summary |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/billable-summary      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                         |
 
 ## [Get all custom metrics by hourly average](https://docs.datadoghq.com/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average.md)
 
-| Datadog site      | API endpoint                                                       |
-| ----------------- | ------------------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/top_avg_metrics     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/top_avg_metrics |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/top_avg_metrics |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/top_avg_metrics      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/top_avg_metrics |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/top_avg_metrics |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/top_avg_metrics      |
+| Datadog site      | API endpoint                                                   |
+| ----------------- | -------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/top_avg_metrics     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/top_avg_metrics |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/top_avg_metrics |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/top_avg_metrics      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/top_avg_metrics |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/top_avg_metrics |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/top_avg_metrics      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                            |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                        |
 
 ## [Get usage across your account](https://docs.datadoghq.com/api/latest/usage-metering/get-usage-across-your-account.md)
 
-| Datadog site      | API endpoint                                               |
-| ----------------- | ---------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/summary     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/summary |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/summary |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/summary      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/summary |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/summary |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/summary      |
+| Datadog site      | API endpoint                                           |
+| ----------------- | ------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/summary     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/summary |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/summary |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/summary      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/summary |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/summary |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/summary      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                    |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                |
 
 ## [Get hourly usage for logs by index](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-logs-by-index.md)
 
-| Datadog site      | API endpoint                                                     |
-| ----------------- | ---------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/logs_by_index     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/logs_by_index |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/logs_by_index |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/logs_by_index      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/logs_by_index |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/logs_by_index |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/logs_by_index      |
+| Datadog site      | API endpoint                                                 |
+| ----------------- | ------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/logs_by_index     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/logs_by_index |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/logs_by_index |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/logs_by_index      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/logs_by_index |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/logs_by_index |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/logs_by_index      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly logs usage by retention](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-logs-usage-by-retention.md) (deprecated)
 
-| Datadog site      | API endpoint                                                         |
-| ----------------- | -------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/logs-by-retention     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/logs-by-retention |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/logs-by-retention |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/logs-by-retention      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/logs-by-retention |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/logs-by-retention |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/logs-by-retention      |
+| Datadog site      | API endpoint                                                     |
+| ----------------- | ---------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/logs-by-retention     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/logs-by-retention |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/logs-by-retention |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/logs-by-retention      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/logs-by-retention |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/logs-by-retention |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/logs-by-retention      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                              |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                          |
 
 ## [Get hourly usage for hosts and containers](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers.md) (deprecated)
 
-| Datadog site      | API endpoint                                             |
-| ----------------- | -------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/hosts     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/hosts |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/hosts |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/hosts      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/hosts |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/hosts |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/hosts      |
+| Datadog site      | API endpoint                                         |
+| ----------------- | ---------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/hosts     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/hosts |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/hosts |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/hosts      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/hosts |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/hosts |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/hosts      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                  |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region              |
 
 ## [Get hourly usage for logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-logs.md) (deprecated)
 
-| Datadog site      | API endpoint                                            |
-| ----------------- | ------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/logs     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/logs |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/logs |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/logs      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/logs |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/logs |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/logs      |
+| Datadog site      | API endpoint                                        |
+| ----------------- | --------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/logs     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/logs |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/logs |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/logs      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/logs |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/logs |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/logs      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region             |
 
 ## [Get hourly usage for custom metrics](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-custom-metrics.md) (deprecated)
 
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/timeseries     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/timeseries |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/timeseries |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/timeseries      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/timeseries |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/timeseries |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/timeseries      |
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/timeseries     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/timeseries |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/timeseries |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/timeseries      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/timeseries |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/timeseries |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/timeseries      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get hourly usage for indexed spans](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-indexed-spans.md) (deprecated)
 
-| Datadog site      | API endpoint                                                     |
-| ----------------- | ---------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/indexed-spans     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/indexed-spans |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/indexed-spans |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/indexed-spans      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/indexed-spans |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/indexed-spans |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/indexed-spans      |
+| Datadog site      | API endpoint                                                 |
+| ----------------- | ------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/indexed-spans     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/indexed-spans |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/indexed-spans |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/indexed-spans      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/indexed-spans |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/indexed-spans |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/indexed-spans      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly usage for synthetics checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks.md) (deprecated)
 
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/synthetics     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/synthetics |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/synthetics |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/synthetics      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/synthetics |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/synthetics |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/synthetics      |
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/synthetics     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/synthetics |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/synthetics |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/synthetics      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/synthetics |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/synthetics |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/synthetics      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get hourly usage for synthetics API checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks.md) (deprecated)
 
-| Datadog site      | API endpoint                                                      |
-| ----------------- | ----------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/synthetics_api     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/synthetics_api |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/synthetics_api |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/synthetics_api      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/synthetics_api |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/synthetics_api |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/synthetics_api      |
+| Datadog site      | API endpoint                                                  |
+| ----------------- | ------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/synthetics_api     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/synthetics_api |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/synthetics_api |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/synthetics_api      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/synthetics_api |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/synthetics_api |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/synthetics_api      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get hourly usage for synthetics browser checks](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks.md) (deprecated)
 
-| Datadog site      | API endpoint                                                          |
-| ----------------- | --------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/synthetics_browser     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/synthetics_browser |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/synthetics_browser |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/synthetics_browser      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/synthetics_browser |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/synthetics_browser |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/synthetics_browser      |
+| Datadog site      | API endpoint                                                      |
+| ----------------- | ----------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/synthetics_browser     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/synthetics_browser |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/synthetics_browser |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/synthetics_browser      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/synthetics_browser |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/synthetics_browser |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/synthetics_browser      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                               |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                           |
 
 ## [Get hourly usage for Fargate](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-fargate.md) (deprecated)
 
-| Datadog site      | API endpoint                                               |
-| ----------------- | ---------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/fargate     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/fargate |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/fargate |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/fargate      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/fargate |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/fargate |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/fargate      |
+| Datadog site      | API endpoint                                           |
+| ----------------- | ------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/fargate     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/fargate |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/fargate |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/fargate      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/fargate |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/fargate |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/fargate      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                    |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                |
 
 ## [Get hourly usage for Lambda](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-lambda.md) (deprecated)
 
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/aws_lambda     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/aws_lambda |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/aws_lambda |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/aws_lambda      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/aws_lambda     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/aws_lambda |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/aws_lambda |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/aws_lambda      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/aws_lambda      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get hourly usage for RUM sessions](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-rum-sessions.md) (deprecated)
 
-| Datadog site      | API endpoint                                                    |
-| ----------------- | --------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/rum_sessions     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/rum_sessions |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/rum_sessions |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/rum_sessions      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/rum_sessions |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/rum_sessions |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/rum_sessions      |
+| Datadog site      | API endpoint                                                |
+| ----------------- | ----------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/rum_sessions     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/rum_sessions |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/rum_sessions |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/rum_sessions      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/rum_sessions |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/rum_sessions |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/rum_sessions      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                         |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                     |
 
 ## [Get hourly usage for network hosts](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-network-hosts.md) (deprecated)
 
-| Datadog site      | API endpoint                                                     |
-| ----------------- | ---------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/network_hosts     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/network_hosts |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/network_hosts |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/network_hosts      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/network_hosts |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/network_hosts |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/network_hosts      |
+| Datadog site      | API endpoint                                                 |
+| ----------------- | ------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/network_hosts     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/network_hosts |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/network_hosts |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/network_hosts      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/network_hosts |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/network_hosts |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/network_hosts      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [get hourly usage for network flows](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-network-flows.md) (deprecated)
 
-| Datadog site      | API endpoint                                                     |
-| ----------------- | ---------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/network_flows     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/network_flows |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/network_flows |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/network_flows      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/network_flows |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/network_flows |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/network_flows      |
+| Datadog site      | API endpoint                                                 |
+| ----------------- | ------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/network_flows     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/network_flows |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/network_flows |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/network_flows      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/network_flows |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/network_flows |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/network_flows      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly usage for analyzed logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs.md) (deprecated)
 
-| Datadog site      | API endpoint                                                     |
-| ----------------- | ---------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/analyzed_logs     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/analyzed_logs |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/analyzed_logs |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/analyzed_logs      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/analyzed_logs |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/analyzed_logs |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/analyzed_logs      |
+| Datadog site      | API endpoint                                                 |
+| ----------------- | ------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/analyzed_logs     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/analyzed_logs |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/analyzed_logs |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/analyzed_logs      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/analyzed_logs |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/analyzed_logs |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/analyzed_logs      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                          |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                      |
 
 ## [Get hourly usage for SNMP devices](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-snmp-devices.md) (deprecated)
 
-| Datadog site      | API endpoint                                            |
-| ----------------- | ------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/snmp     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/snmp |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/snmp |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/snmp      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/snmp |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/snmp |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/snmp      |
+| Datadog site      | API endpoint                                        |
+| ----------------- | --------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/snmp     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/snmp |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/snmp |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/snmp      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/snmp |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/snmp |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/snmp      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region             |
 
 ## [Get hourly usage for ingested spans](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-ingested-spans.md) (deprecated)
 
-| Datadog site      | API endpoint                                                      |
-| ----------------- | ----------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/ingested-spans     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/ingested-spans |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/ingested-spans |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/ingested-spans      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/ingested-spans |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/ingested-spans |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/ingested-spans      |
+| Datadog site      | API endpoint                                                  |
+| ----------------- | ------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/ingested-spans     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/ingested-spans |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/ingested-spans |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/ingested-spans      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/ingested-spans |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/ingested-spans |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/ingested-spans      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get hourly usage for incident management](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-incident-management.md) (deprecated)
 
-| Datadog site      | API endpoint                                                           |
-| ----------------- | ---------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/incident-management     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/incident-management |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/incident-management |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/incident-management      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/incident-management |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/incident-management |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/incident-management      |
+| Datadog site      | API endpoint                                                       |
+| ----------------- | ------------------------------------------------------------------ |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/incident-management     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/incident-management |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/incident-management |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/incident-management      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/incident-management |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/incident-management |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/incident-management      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                            |
 
 ## [Get hourly usage for IoT](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-iot.md) (deprecated)
 
-| Datadog site      | API endpoint                                           |
-| ----------------- | ------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/iot     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/iot |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/iot |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/iot      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/iot |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/iot |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/iot      |
+| Datadog site      | API endpoint                                       |
+| ----------------- | -------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/iot     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/iot |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/iot |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/iot      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/iot |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/iot |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/iot      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for CSM Pro](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-csm-pro.md) (deprecated)
 
-| Datadog site      | API endpoint                                            |
-| ----------------- | ------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/cspm     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/cspm |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/cspm |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/cspm      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/cspm |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/cspm |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/cspm      |
+| Datadog site      | API endpoint                                        |
+| ----------------- | --------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/cspm     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/cspm |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/cspm |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/cspm      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/cspm |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/cspm |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/cspm      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                 |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region             |
 
 ## [Get hourly usage for cloud workload security](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security.md) (deprecated)
 
-| Datadog site      | API endpoint                                           |
-| ----------------- | ------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/cws     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/cws |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/cws |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/cws      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/cws |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/cws |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/cws      |
+| Datadog site      | API endpoint                                       |
+| ----------------- | -------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/cws     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/cws |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/cws |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/cws      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/cws |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/cws |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/cws      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for database monitoring](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-database-monitoring.md) (deprecated)
 
-| Datadog site      | API endpoint                                           |
-| ----------------- | ------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/dbm     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/dbm |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/dbm |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/dbm      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/dbm |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/dbm |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/dbm      |
+| Datadog site      | API endpoint                                       |
+| ----------------- | -------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/dbm     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/dbm |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/dbm |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/dbm      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/dbm |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/dbm |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/dbm      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for sensitive data scanner](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner.md) (deprecated)
 
-| Datadog site      | API endpoint                                           |
-| ----------------- | ------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/sds     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/sds |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/sds |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/sds      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/sds |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/sds |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/sds      |
+| Datadog site      | API endpoint                                       |
+| ----------------- | -------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/sds     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/sds |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/sds |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/sds      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/sds |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/sds |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/sds      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for RUM units](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-rum-units.md) (deprecated)
 
-| Datadog site      | API endpoint                                           |
-| ----------------- | ------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/rum     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/rum |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/rum |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/rum      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/rum |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/rum |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/rum      |
+| Datadog site      | API endpoint                                       |
+| ----------------- | -------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/rum     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/rum |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/rum |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/rum      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/rum |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/rum |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/rum      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region            |
 
 ## [Get hourly usage for profiled hosts](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts.md) (deprecated)
 
-| Datadog site      | API endpoint                                                 |
-| ----------------- | ------------------------------------------------------------ |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/profiling     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/profiling |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/profiling |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/profiling      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/profiling |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/profiling |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/profiling      |
+| Datadog site      | API endpoint                                             |
+| ----------------- | -------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/profiling     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/profiling |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/profiling |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/profiling      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/profiling |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/profiling |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/profiling      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                      |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                  |
 
 ## [Get hourly usage for CI visibility](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-ci-visibility.md) (deprecated)
 
-| Datadog site      | API endpoint                                              |
-| ----------------- | --------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/ci-app     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/ci-app |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/ci-app |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/ci-app      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/ci-app |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/ci-app |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/ci-app      |
+| Datadog site      | API endpoint                                          |
+| ----------------- | ----------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/ci-app     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/ci-app |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/ci-app |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/ci-app      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/ci-app |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/ci-app |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/ci-app      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                   |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region               |
 
 ## [Get hourly usage for online archive](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-online-archive.md) (deprecated)
 
-| Datadog site      | API endpoint                                                      |
-| ----------------- | ----------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/online-archive     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/online-archive |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/online-archive |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/online-archive      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/online-archive |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/online-archive |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/online-archive      |
+| Datadog site      | API endpoint                                                  |
+| ----------------- | ------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/online-archive     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/online-archive |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/online-archive |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/online-archive      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/online-archive |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/online-archive |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/online-archive      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get hourly usage for audit logs](https://docs.datadoghq.com/api/latest/usage-metering/get-hourly-usage-for-audit-logs.md) (deprecated)
 
-| Datadog site      | API endpoint                                                  |
-| ----------------- | ------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/usage/audit_logs     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/usage/audit_logs |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/usage/audit_logs |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/usage/audit_logs      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/usage/audit_logs |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/usage/audit_logs |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/usage/audit_logs      |
+| Datadog site      | API endpoint                                              |
+| ----------------- | --------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/usage/audit_logs     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/usage/audit_logs |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/usage/audit_logs |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/usage/audit_logs      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/usage/audit_logs |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/usage/audit_logs |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/usage/audit_logs      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                   |
 
 ## [Get the list of available daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports.md) (deprecated)
 
-| Datadog site      | API endpoint                                                      |
-| ----------------- | ----------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/daily_custom_reports     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/daily_custom_reports |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/daily_custom_reports |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/daily_custom_reports      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/daily_custom_reports |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/daily_custom_reports |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/daily_custom_reports      |
+| Datadog site      | API endpoint                                                  |
+| ----------------- | ------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/daily_custom_reports     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/daily_custom_reports |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/daily_custom_reports |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/daily_custom_reports      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/daily_custom_reports |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/daily_custom_reports |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/daily_custom_reports      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                           |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                       |
 
 ## [Get specified daily custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-specified-daily-custom-reports.md) (deprecated)
 
-| Datadog site      | API endpoint                                                                  |
-| ----------------- | ----------------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/daily_custom_reports/{report_id}     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/daily_custom_reports/{report_id}      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/daily_custom_reports/{report_id}      |
+| Datadog site      | API endpoint                                                              |
+| ----------------- | ------------------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/daily_custom_reports/{report_id}     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/daily_custom_reports/{report_id}      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/daily_custom_reports/{report_id} |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/daily_custom_reports/{report_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                       |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                   |
 
 ## [Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports.md) (deprecated)
 
-| Datadog site      | API endpoint                                                        |
-| ----------------- | ------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monthly_custom_reports     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monthly_custom_reports |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monthly_custom_reports |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monthly_custom_reports      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monthly_custom_reports      |
+| Datadog site      | API endpoint                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monthly_custom_reports     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monthly_custom_reports |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monthly_custom_reports |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monthly_custom_reports      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monthly_custom_reports      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                             |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                         |
 
 ## [Get specified monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/get-specified-monthly-custom-reports.md) (deprecated)
 
-| Datadog site      | API endpoint                                                                    |
-| ----------------- | ------------------------------------------------------------------------------- |
-| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v1/monthly_custom_reports/{report_id}     |
-| us3.datadoghq.com | **GET** https://api.us3.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
-| us5.datadoghq.com | **GET** https://api.us5.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
-| app.datadoghq.eu  | **GET** https://api.datadoghq.eu/api/v1/monthly_custom_reports/{report_id}      |
-| ap1.datadoghq.com | **GET** https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
-| ap2.datadoghq.com | **GET** https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
-| app.ddog-gov.com  | **GET** https://api.ddog-gov.com/api/v1/monthly_custom_reports/{report_id}      |
+| Datadog site      | API endpoint                                                                |
+| ----------------- | --------------------------------------------------------------------------- |
+| app.datadoghq.com | GET https://api.datadoghq.com/api/v1/monthly_custom_reports/{report_id}     |
+| us3.datadoghq.com | GET https://api.us3.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
+| us5.datadoghq.com | GET https://api.us5.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
+| app.datadoghq.eu  | GET https://api.datadoghq.eu/api/v1/monthly_custom_reports/{report_id}      |
+| ap1.datadoghq.com | GET https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
+| ap2.datadoghq.com | GET https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports/{report_id} |
+| app.ddog-gov.com  | GET https://api.ddog-gov.com/api/v1/monthly_custom_reports/{report_id}      |
+| uk1.datadoghq.com | GET Not supported in the UK1 region                                         |
+| us2.ddog-gov.com  | GET Not supported in the US2-FED region                                     |

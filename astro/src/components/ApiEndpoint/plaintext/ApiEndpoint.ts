@@ -14,6 +14,7 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { EndpointData } from "@lib/api/schemas/views";
 import { getDefaultRegions } from "@lib/api/regionResolver";
 import { appHost } from "@config/regions";
+import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
 import {
   Ast,
   NO_CONTENT,
@@ -29,13 +30,14 @@ import { apiRequestBodyTabsNodes } from "@components/ApiRequestBodyTabs/plaintex
 import { apiResponseNode } from "@components/ApiResponse/plaintext/ApiResponse";
 import { apiCodeExampleNode } from "@components/ApiCodeExample/plaintext/ApiCodeExample";
 
-export function apiEndpointNodes(ep: EndpointData): MarkdocNode[] {
+export function apiEndpointNodes(
+  ep: EndpointData,
+  lang: Locale = DEFAULT_LOCALE,
+): MarkdocNode[] {
   return [
     ...statusNotice(ep),
-    ...descriptionNodes(ep),
     ...apiRegionTableNodes(ep.method, ep.regionUrls),
-    ...permissionsNodes(ep),
-    ...oauthScopesNodes(ep),
+    ...overviewNodes(ep, lang),
     ...argumentsNodes(ep),
     ...requestBodyNodes(ep),
     ...responseNodes(ep),
@@ -44,13 +46,6 @@ export function apiEndpointNodes(ep: EndpointData): MarkdocNode[] {
 }
 
 function statusNotice(ep: EndpointData): MarkdocNode[] {
-  if (ep.deprecated) {
-    const link = ep.newerVersionUrl
-      ? ` [Use the newer version.](${ep.newerVersionUrl})`
-      : "";
-    const body = nodesFromMd(`This endpoint is deprecated.${link}`);
-    return [alertNode("warning", body)];
-  }
   if (ep.unstable) {
     const msg =
       ep.unstableMessage ??
@@ -58,6 +53,22 @@ function statusNotice(ep: EndpointData): MarkdocNode[] {
     return [alertNode("warning", nodesFromMd(msg))];
   }
   return NO_CONTENT;
+}
+
+/**
+ * The description, permissions, and OAuth scopes, under an Overview heading.
+ * Hugo shows the heading even with nothing under it; this leaves it out.
+ */
+function overviewNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
+  const overviewContent = [
+    ...descriptionNodes(ep),
+    ...permissionsNodes(ep),
+    ...oauthScopesNodes(ep, lang),
+  ];
+  if (overviewContent.length === 0) {
+    return NO_CONTENT;
+  }
+  return [heading(3, "Overview"), ...overviewContent];
 }
 
 function descriptionNodes(ep: EndpointData): MarkdocNode[] {
@@ -86,16 +97,30 @@ function permissionsNodes(ep: EndpointData): MarkdocNode[] {
   );
 }
 
-function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
+function oauthScopesNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
   if (!ep.oauthScopes || ep.oauthScopes.length === 0) {
     return NO_CONTENT;
   }
+  const scopesLink = (text: string) =>
+    ep.oauthScopesAnchor
+      ? `[${text}](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
+      : text;
+  if (ep.oauthScopesMatch === "any") {
+    const scopeList = ep.oauthScopes.map((scope) => `\`${scope}\``).join(", ");
+    return nodesFromMd(
+      `OAuth apps require one of the following authorization ${scopesLink("scopes")} to access this endpoint: ${scopeList}.`,
+    );
+  }
   return nodesFromMd(
-    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization scope to access this endpoint.`,
+    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scopesLink("scope")} to access this endpoint.`,
   );
 }
 
-/** One row per default region that has a URL. Shared with category summaries. */
+/**
+ * One row per default region that has a URL, then one "Not supported" row per
+ * region that doesn't, labeled as the HTML labels it. Shared with category
+ * summaries.
+ */
 export function apiRegionTableNodes(
   method: string,
   regionUrls: Record<string, string> | undefined,
@@ -103,18 +128,24 @@ export function apiRegionTableNodes(
   const regions = getDefaultRegions();
 
   type Row = { site: string; url: string };
-  const rows: Row[] = [];
+  const supportedRows: Row[] = [];
+  const unsupportedRows: Row[] = [];
   for (const region of regions) {
-    const url = regionUrls?.[region.key];
-    if (!url) {
-      continue;
-    }
     const site = appHost(region.key) ?? region.site;
-    rows.push({ site, url });
+    const url = regionUrls?.[region.key];
+    if (url) {
+      supportedRows.push({ site, url });
+    } else {
+      unsupportedRows.push({
+        site,
+        url: `Not supported in the ${region.label} region`,
+      });
+    }
   }
-  if (rows.length === 0) {
+  if (supportedRows.length === 0) {
     return NO_CONTENT;
   }
+  const rows = [...supportedRows, ...unsupportedRows];
 
   const th = (text: string): MarkdocNode => {
     return new Ast.Node("th", {}, [inline([plaintext(text)])]);
@@ -173,8 +204,8 @@ function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.requestBody) {
     return NO_CONTENT;
   }
-  const suffix = ep.requestBody.required ? "(required)" : "(optional)";
-  const contents: MarkdocNode[] = [heading(3, `Request Body ${suffix}`)];
+  const label = ep.requestBody.required ? "Body Data (required)" : "Body Data";
+  const contents: MarkdocNode[] = [heading(3, "Request"), heading(4, label)];
   if (ep.requestBody.description) {
     contents.push(...nodesFromMd(ep.requestBody.description));
   }

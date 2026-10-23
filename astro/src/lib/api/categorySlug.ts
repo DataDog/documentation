@@ -8,22 +8,23 @@
  * disagree about a category's slug.
  */
 
-/** Tag slugs whose category page lives at a different slug. */
-const SLUG_OVERRIDES: Record<string, string> = {
-  "case-management": "cases",
-  scorecards: "service-scorecards",
-};
+/**
+ * Tag slugs whose category page lives at a different slug. Empty: prod puts
+ * every category at its tag slug.
+ */
+const SLUG_OVERRIDES: Record<string, string> = {};
 
+/**
+ * Matches Hugo's `anchorize` (and `getTagSlug`): punctuation is deleted, so
+ * "monitor's" becomes "monitors" and "CI/CD" becomes "cicd", and only spaces
+ * and hyphens separate words.
+ */
 export function toSlug(name: string): string {
-  return (
-    name
-      .toLowerCase()
-      // Slashes drop out rather than becoming a hyphen, so `CI/CD` slugs as
-      // `cicd` and not `ci-cd`.
-      .replace(/\//g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
-  );
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/[ -]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 /**

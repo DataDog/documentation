@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   getDefaultRegions,
   getRegions,
+  getRegionHosts,
   buildApiUrl,
   buildApiUrlFromServers,
 } from "@lib/api/regionResolver";
@@ -216,6 +217,33 @@ describe("getRegions", () => {
         },
       );
       expect(regions).toEqual([]);
+    });
+
+    it("maps each region to its own host, as Hugo does", () => {
+      const hosts = getRegionHosts({}, { servers: oncallServers });
+      expect(hosts.get("us")).toBe("navy.oncall.datadoghq.com");
+      expect(hosts.get("gov")).toBe("navy.oncall.datadoghq.com");
+      expect(hosts.get("us3")).toBe("teal.oncall.datadoghq.com");
+      expect(hosts.get("eu")).toBe("beige.oncall.datadoghq.eu");
+      expect(hosts.size).toBe(getDefaultRegions().length);
+    });
+
+    it("maps no hosts when a bare domain matched", () => {
+      const hosts = getRegionHosts(
+        {},
+        {
+          servers: [
+            {
+              url: "https://{subdomain}.{site}",
+              variables: {
+                site: { default: "datadoghq.com", enum: ["datadoghq.com"] },
+                subdomain: { default: "api" },
+              },
+            },
+          ],
+        },
+      );
+      expect(hosts.size).toBe(0);
     });
 
     it("builds the endpoint URL from the fully-qualified host", () => {
