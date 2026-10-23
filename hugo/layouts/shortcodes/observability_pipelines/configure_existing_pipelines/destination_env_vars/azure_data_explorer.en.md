@@ -1,5 +1,5 @@
 - Azure Data Explorer ingestion endpoint:
-   - The ADX endpoint for the ingestion mode you selected:
+   - The Azure Data Explorer endpoint for the ingestion mode you selected:
       - Streaming: The cluster URI, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
       - Queued: The data ingestion URI, such as `https://ingest-<CLUSTER>.<REGION>.kusto.windows.net`.
    - The default environment variable is `DD_OP_DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT`.

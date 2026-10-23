@@ -21,19 +21,18 @@ The Azure Data Explorer destination is in Preview. Contact your account manager 
 
 ## Overview
 
-Use Observability Pipelines' Azure Data Explorer destination to send logs to [Azure Data Explorer][1] (ADX). The destination sends logs to your ADX cluster using streaming or queued ingestion. See [Ingestion modes](#ingestion-modes) for more information.
+Use Observability Pipelines' Azure Data Explorer destination to send logs to [Azure Data Explorer][1] (ADX). The destination sends logs to your ADX cluster using streaming or queued ingestion. See the [Ingestion modes](#ingestion-modes) section for more information.
 
 ## Prerequisites
 
 Before you configure the Azure Data Explorer destination, you must have:
 
 - An ADX cluster. See [Create a cluster][2] for more information.
-- An ADX database and the tables you want to send logs to.
-    - See [Create a database][3] and [Create a table in Azure Data Explorer][4] for more information.
+- An ADX database and the tables you want to send logs to. See [Create a database][3] and [Create a table in Azure Data Explorer][4] for more information.
 - If you use the streaming ingestion mode, you must have:
     - Streaming ingestion enabled on your cluster. See [Configure streaming ingestion on your Azure Data Explorer cluster][5] for more information.
     - A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
-        ```
+        ```bash
         .alter table ['<TABLE_NAME>'] policy streamingingestion enable
         ```
         See [Streaming ingestion policy][6] for more information.
@@ -49,21 +48,21 @@ Configure the Azure Data Explorer destination when you [set up a pipeline][9]. Y
 After you select the Azure Data Explorer destination in the pipeline UI:
 
 1. In the **Ingestion Mode** dropdown menu, select one of the following:
-    - **Streaming** (default): Use streaming ingestion when you need low latency between ingestion and query. See [Streaming ingestion](#streaming-ingestion) for more information.
-    - **Queued**: Use queued ingestion if the stream of data into each table is more than 4 GB per hour. See [Queued ingestion](#queued-ingestion) for more information.
+    - **Streaming** (default): Use streaming ingestion when you need low latency between ingestion and query. See the [Streaming ingestion](#streaming-ingestion) section for more information.
+    - **Queued**: Use queued ingestion if the stream of data into each table is more than 4 GB per hour. See the [Queued ingestion](#queued-ingestion) section for more information.
 1. Enter the identifier for your Azure Data Explorer ingestion endpoint. If you leave the identifier field blank, the [default](#secret-defaults) is used. The endpoint the identifier references depends on the ingestion mode you selected:
     - **Streaming**: The cluster URI shown in the Azure portal, such as `https://<CLUSTER>.<REGION>.kusto.windows.net`.
     - **Queued**: The data ingestion URI shown in the Azure portal, such as `https://ingest-<CLUSTER>.<REGION>.kusto.windows.net`.
 1. In the **Database** field, enter the name of the ADX database, such as `logs_db`.
 1. In the **Table** field, enter the name of the ADX table you want to send logs to, such as `application_logs`. This field supports [template syntax][13], such as `{{ adx.table }}`, so you can route logs to different tables based on a log field.
-    - **Note**: The resolved table must already exist in your cluster. If the table does not exist, or if the template resolves to an empty or null value, the Worker drops the batch of logs.
+    - **Note**: The resolved table must already exist in your cluster. If the table doesn't exist, or if the template resolves to an empty or null value, the Worker drops the batch of logs.
 1. (Optional) In the **Mapping Reference** field, enter the name of the ingestion mapping to use, such as `logs_json_mapping`. This field supports [template syntax][13], such as `{{ adx.mapping }}`.
     - **Notes**:
         - The resolved mapping must already exist in your cluster.
-        - If the field is left blank or the template doesn't resolve to a value, the Worker sends the logs without a mapping reference and ADX ingests the logs as is.
+        - If the field is left blank or the template doesn't resolve to a value, the Worker sends the logs without a mapping reference. ADX then ingests the logs as is.
         - See [Mapping with ingestionMappingReference][14] for more information.
 1. In the **Azure Authentication** dropdown menu, select the authentication method for the Worker to use.
-1. Enter the credentials for the authentication method you selected. See [Azure authentication](#azure-authentication) for the fields that each method requires.
+1. Enter the credentials for the authentication method you selected. See the [Azure authentication](#azure-authentication) section for the fields that each method requires.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
@@ -75,7 +74,7 @@ In the **Token Scope** field, enter the scope used to request access tokens for 
 
 #### Compression
 
-Toggle **Enable Compression** to compress requests with gzip. Optionally, select the compression level. If left unset, the default is `3`.
+Toggle **Enable Compression** to compress requests with gzip. Optionally, select the compression level. If left unset, the default is 3.
 
 #### Batching
 
@@ -91,8 +90,8 @@ You can configure how the Worker batches logs before sending them to ADX. The de
     - **Streaming**: The default is 1,000.
     - **Queued**: There is no limit by default.
 1. In the **Batch Timeout** field, enter the maximum number of seconds before a batch is flushed.
-    - **Streaming**: The default is `1` second.
-    - **Queued**: The default is `10` seconds.
+    - **Streaming**: The default is 1 second.
+    - **Queued**: The default is 10 seconds.
 
 #### Buffering
 
@@ -100,7 +99,7 @@ You can configure how the Worker batches logs before sending them to ADX. The de
 
 ### Azure authentication
 
-When you set up the Azure Data Explorer destination, the credential fields you fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
+The credential fields you fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
 
 #### Azure CLI
 
@@ -112,8 +111,8 @@ The client certificate authentication method uses a [Microsoft Entra application
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
-- **Certificate path**: Enter the path to the PKCS12 certificate file (`.pfx`) that contains the RSA private key, such as `path/to/certificate.pfx`.
-- (Optional) **Certificate password**: If the certificate is password protected, enter the identifier that references the certificate password. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
+- **Certificate Path**: Enter the path to the PKCS12 certificate file (`.pfx`) that contains the RSA private key, such as `path/to/certificate.pfx`.
+- (Optional) **Certificate Password**: If the certificate is password protected, enter the identifier that references the certificate password. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
 
 #### Client secret
 
@@ -121,23 +120,23 @@ The client secret authentication method uses a [Microsoft Entra application (ser
 
 - **Client ID**: Enter the client ID of your Microsoft Entra application.
 - **Tenant ID**: Enter your Microsoft Entra tenant ID.
-- **Client secret**: Enter the identifier that references the client secret of your Microsoft Entra application. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
+- **Client Secret**: Enter the identifier that references the client secret of your Microsoft Entra application. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
 
 #### Managed identity
 
 The managed identity authentication method uses an [Azure managed identity][19] assigned to the resource where the Worker runs. Configure the following fields:
 
-- (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-assigned managed identity ID type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
+- (Optional) **User-Assigned Managed Identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
+- (Optional) **User-Assigned Managed Identity ID Type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. The default is **Client ID**.
 
 #### Managed identity (client assertion)
 
 The managed identity (client assertion) authentication method uses a managed identity to get a client assertion. The client assertion is exchanged for an access token for the target application. Configure the following fields:
 
-- **Client assertion client ID**: Enter the client ID of the target application.
-- **Client assertion tenant ID**: Enter the tenant ID of the target application.
-- (Optional) **User-assigned managed identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-assigned managed identity ID type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. Defaults to **Client ID**.
+- **Client Assertion Client ID**: Enter the client ID of the target application.
+- **Client Assertion Tenant ID**: Enter the tenant ID of the target application.
+- (Optional) **User-Assigned Managed Identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
+- (Optional) **User-Assigned Managed Identity ID Type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. The default is **Client ID**.
 
 #### Workload identity
 
@@ -188,7 +187,7 @@ Not retriable; dropping the request. reason="Default retry strategy: Bad Request
 Internal log [Service call failed. No retries or retries exhausted.] has been suppressed 63 times.
 ```
 
-The Worker does not retry `400` responses, so the batch is dropped. This error typically occurs when the table in the **Table** field, or the table that the template resolves to, does not exist in your ADX database. To resolve this issue:
+The Worker doesn't retry `400` responses, so the batch is dropped. This error typically occurs when the table in the **Table** field doesn't exist in your ADX database. If you use template syntax, the error occurs when the table that the template resolves to doesn't exist. To resolve this issue:
 
 - Verify that the table name is spelled correctly and that the table exists in the database specified in the **Database** field.
 - If you use template syntax, verify that the values in your logs resolve to tables that exist in the database.
@@ -201,7 +200,7 @@ If the Worker logs an error similar to the following, the Worker couldn't resolv
 Failed to render template for "table". error=Missing fields on event: ["adx.table"] error_type="template_failed" stage="processing"
 ```
 
-This error occurs when a log doesn't have the field referenced in the template. The Worker drops logs whose table template syntax cannot be resolved. To resolve this issue, make sure all logs sent to the destination contain the field referenced in the template. See [Template syntax][13] for more information.
+This error occurs when a log doesn't have the field referenced in the template. The Worker drops logs whose table template syntax can't be resolved. To resolve this issue, make sure all logs sent to the destination contain the field referenced in the template. See [Template syntax][13] for more information.
 
 ### Throttling when sending logs to many tables
 
@@ -240,13 +239,11 @@ The Azure Data Explorer destination supports two ingestion modes: [streaming](#s
 
 Streaming ingestion is the default mode. Use it when you need low latency between ingestion and query. The Worker sends each batch of logs directly to the ADX cluster endpoint. Streaming ingestion must be enabled on your cluster and on the target tables or database. See [Configure streaming ingestion on your Azure Data Explorer cluster][5] for more information.
 
-The Worker considers a batch delivered after it sends the logs to the ADX cluster endpoint.
-
 #### Queued ingestion
 
-Use queued ingestion if the stream of data into each table is more than 4 GB per hour. For each batch of logs, the Worker compresses the batch, uploads it to Azure Blob Storage, and submits an ingestion request to the ADX data ingestion endpoint. See [Azure Data Explorer data ingestion overview][24] for more information.
+Use queued ingestion if the stream of data into each table is more than 4 GB per hour. For each batch of logs, the Worker compresses the batch and uploads it to Azure Blob Storage. The Worker then submits an ingestion request to the ADX data ingestion endpoint. See [Azure Data Explorer data ingestion overview][24] for more information.
 
-The Worker considers a batch delivered after the batch is uploaded to Azure Blob Storage and the ingestion request is submitted. Logs sent with queued ingestion can take about five minutes to become queryable.
+The Worker considers a batch delivered after the batch is uploaded to Azure Blob Storage and the ingestion request is submitted. Logs sent with queued ingestion can take about 5 minutes to become queryable.
 
 ### Event batching
 
@@ -255,7 +252,7 @@ A batch of logs is flushed when one of these parameters is met. Batching is also
 | Ingestion mode | Maximum Events | Maximum Size (MB) | Timeout (seconds) |
 |----------------|----------------|-------------------|-------------------|
 | Streaming      | 1,000          | 2                 | 1                 |
-| Queued         | No limit       | 100               | 10                |
+| Queued         | None           | 100               | 10                |
 
 ## Further reading
 
