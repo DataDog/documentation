@@ -44,6 +44,8 @@ To remotely upgrade or configure Agents on Linux or Windows VMs, enable Remote C
 
 Starting with Agent version 7.73.0, `remote_updates` defaults to `true`. On earlier supported versions, explicitly set it to `true`.
 
+Agents that report to GovCloud (`ddog-gov.com`) or run in FIPS mode require explicit Remote Configuration enablement. Set `remote_configuration.enabled` to `true` using the steps below; enabling `remote_updates` alone does not enable Remote Configuration.
+
 1. Enable Remote Configuration for your organization and [on the Agent's API key](#enable-remote-configuration-on-the-api-key).
 1. In the Agent's [configuration file][16], enable the following settings. `remote_updates` is a top-level setting:
 
@@ -86,7 +88,7 @@ Disable the API key of your choice on the [API Keys][5] page. You need the [`api
 
 ### At the Agent level
 
-Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
+Starting with Agent version 7.47.0, Remote Configuration is enabled by default, except for Agents that report to GovCloud or run in FIPS mode. For those Agents, explicitly enable it as described in [Enable remote Agent management](#enable-remote-agent-management).
 
 If you don't want your Agent to send configuration requests to Datadog, you can set `remote_configuration.enabled` to `false` in the Agent.
 
