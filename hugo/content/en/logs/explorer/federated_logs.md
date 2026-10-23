@@ -18,7 +18,7 @@ Federated Logs is in Preview. Use this form to submit your request today.
 
 Federated Logs lets you search logs stored in your own data platform, such as Databricks, from [Log Explorer][1], without ingesting them into Datadog. Datadog translates your Log Explorer query into the query language of the source and runs it against your table. The data stays in your data platform.
 
-Use Federated Logs to investigate logs that you keep in your data platform, for example for compliance or analytics.
+Use Federated Logs to investigate logs that you keep in your data platform, for example, for compliance or analytics.
 
 With a federated source, you can:
 

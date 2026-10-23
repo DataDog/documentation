@@ -21,7 +21,7 @@ An external source is a table that contains logs in your own data platform, such
 ## Prerequisites
 
 - Access to the Federated Logs Preview. To request access, complete the [Preview form][2].
-- The Logs Federated Query Write (`logs_federated_query_write`) permission, to connect, edit, and delete sources. For more information, see [Role Based Access Control][3].
+- The Logs Federated Query Write (`logs_federated_query_write`) permission, which lets you connect, edit, and delete sources. For more information, see [Role Based Access Control][3].
 
 ## Set up your source
 
@@ -47,7 +47,7 @@ Datadog runs queries with the Databricks SQL Statement Execution API, using the 
    GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
    ```
 
-The {{< ui >}}External Sources{{< /ui >}} page only lists the catalogs, schemas, and tables that the service principal has privileges on. Queries consume compute on your SQL warehouse.
+The {{< ui >}}External Sources{{< /ui >}} page only lists the catalogs, schemas, and tables that the service principal has access to. Queries consume compute on your SQL warehouse.
 
 ### Supported column types
 
@@ -89,7 +89,7 @@ Only columns with a compatible type are listed for each field. For the supported
 
 1. Go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > {{< ui >}}External Sources{{< /ui >}}][4] and click {{< ui >}}Connect Source{{< /ui >}}.
 2. On the {{< ui >}}Source{{< /ui >}} tab, select the source type and the table that contains your logs. The fields depend on the source. Click {{< ui >}}Next{{< /ui >}}.
-3. On the {{< ui >}}Schema Mapping{{< /ui >}} tab, select the column that each Datadog field is read from. See [Schema mapping](#schema-mapping).
+3. On the {{< ui >}}Schema Mapping{{< /ui >}} tab, select the column to read each Datadog field from. See [Schema mapping](#schema-mapping).
 4. Click {{< ui >}}Save{{< /ui >}}.
 
 You can connect multiple tables, each with its own schema mapping. After you save a source, you can only edit its schema mapping. To change the integration account or the table, delete the source and connect it again.
