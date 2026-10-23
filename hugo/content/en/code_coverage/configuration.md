@@ -46,6 +46,8 @@ gates:
 comments:
   enabled: true
   file_breakdown: true
+annotations:
+  enabled: true
 ```
 
 ## Services configuration
@@ -330,6 +332,33 @@ comments:
 
 The breakdown has no effect when `comments.enabled` is `false`.
 
+## Inline annotations
+
+Set `annotations.enabled` to `true` to have Datadog add review comments on added lines in the pull request diff that are not covered by tests:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+annotations:
+  enabled: true
+{{< /code-block >}}
+
+The `annotations` block accepts the following fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `enabled` | Boolean | `false` | Whether Datadog annotates uncovered lines on the pull request diff. |
+
+Annotations work as follows:
+
+- Only executable lines that the pull request adds are annotated. [Partially covered][5] lines count as uncovered.
+- Consecutive uncovered lines are grouped into a single annotation, so a block of untested code receives one comment.
+- Datadog posts up to 30 annotations per pull request. When there are more uncovered ranges, the summary comment reports the total number and links to the full report in Datadog.
+- When the annotated lines become covered, Datadog resolves the annotations.
+
+Annotations are independent of the summary comment: setting `comments.enabled` to `false` does not disable annotations. When comments are disabled but annotations are enabled, Datadog still posts a summary comment if the number of uncovered ranges exceeds the 30-annotation limit. In that case, the comment reports only the total number of uncovered ranges.
+
+Inline annotations are not available on Bitbucket.
+
 ## Carryforward
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
@@ -411,3 +440,4 @@ Simple path prefixes without special characters are treated as prefix matches:
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/flags
 [4]: /code_coverage/carryforward
+[5]: /code_coverage/coverage_calculation#partial-coverage
