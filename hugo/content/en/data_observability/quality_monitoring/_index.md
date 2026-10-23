@@ -44,7 +44,7 @@ With Quality Monitoring, you can:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these data lake catalogs:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these transactional databases:" >}}
