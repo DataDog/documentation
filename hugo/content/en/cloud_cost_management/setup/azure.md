@@ -267,6 +267,15 @@ Datadog automatically discovers and ingests this data, and it should appear in D
 
 You can also create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7]. Ensure the file structure and partitioning follows the format of scheduled exports.
 
+### Pre-purchase plan data
+
+To track Azure Databricks pre-purchase plans in [Commitment Programs][20], provide both actual and amortized cost exports:
+
+- **Actual cost exports** provide the purchase record and purchase cost used to identify each plan.
+- **Amortized cost exports** provide the usage paid for by the plan, used to calculate its consumed and remaining balances.
+
+Include historical data covering the purchase date and usage since purchase. A plan can be missing from the inventory if its purchase record is absent, and incomplete usage history can overstate its remaining balance. If the plan predates your exports, follow [Getting historical data](#getting-historical-data) to backfill the available history.
+
 ### Cost types
 
 You can visualize your ingested data using the following cost types:
@@ -371,3 +380,4 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [17]: ?tab=manual#generate-cost-exports
 [18]: #migrate-exports-from-an-ea-to-an-mca
 [19]: ?tab=terraform
+[20]: /cloud_cost_management/planning/commitment_programs/#pre-purchase-plans

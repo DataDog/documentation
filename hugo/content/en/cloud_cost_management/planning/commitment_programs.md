@@ -11,7 +11,7 @@ further_reading:
   CCM Commitment Programs supports the following cloud commitments:
   <ul>
     <li><strong>AWS:</strong> Reserved Instances and Savings Plans for EC2, RDS, and ElastiCache.</li>
-    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services. Utilization and unused costs require <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
+    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services, and pre-purchase plans for Azure Databricks. Utilization and unused costs require <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
     <li><strong>Google Cloud:</strong> Compute flexible committed use discounts (CUDs).</li>
   </ul>
 </div>
@@ -35,6 +35,7 @@ Use Commitment Programs to understand and optimize your cloud commitments.
    - Review KPIs in the [Commitments overview](#commitments-overview) section.
    - Analyze areas of on-demand spend to understand how to improve your coverage in the [On-demand hot-spots](#on-demand-hot-spots) section.
    - View active commitments by type in the [Commitments inventory](#commitments-inventory) table.
+   - Track purchased balances and usage for [Azure Databricks pre-purchase plans](#pre-purchase-plans).
    - Identify savings plans generating the most waste in [Least used savings plans](#least-used-savings-plans).
 4. Take action based on these insights:
    - Adjust workloads to better use your commitments and avoid extra on-demand charges.
@@ -69,7 +70,7 @@ Commitments Inventory provides a detailed view of commitments active during the 
 
 {{< img src="cloud_cost/planning/commitments-inventory-1.png" alt="Commitments Inventory section showing the Savings Plans tab with a utilization chart and a table of EC2 savings plan commitments." style="width:100%;" >}}
 
-Use the {{< ui >}}Savings Plans{{< /ui >}} and {{< ui >}}Reserved Instances{{< /ui >}} tabs to switch between commitment types. Each tab shows:
+Use the {{< ui >}}Savings Plans{{< /ui >}} and {{< ui >}}Reserved Instances{{< /ui >}} tabs to switch between these commitment types. For Azure Databricks balances, see [Pre-purchase plans](#pre-purchase-plans). The Savings Plans and Reserved Instances tabs show:
 
 - {{< ui >}}Utilization{{< /ui >}}: Percentage of the commitment type being used during the selected period.
 - {{< ui >}}Unused spend{{< /ui >}}: Total spend on unused commitments.
@@ -91,6 +92,44 @@ The table lists your active commitments. Columns vary depending on the product a
 | Utilization | Percentage of the commitment used during the selected period. |
 
 Use the {{< ui >}}Columns{{< /ui >}} button to show or hide additional columns.
+
+## Pre-purchase plans
+
+Azure Databricks pre-purchase plans provide a prepaid balance that eligible usage consumes over the plan's term. Use Commitment Programs to track how much of each plan has been used, how much remains, and when it expires.
+
+### View your plans
+
+1. Configure [Azure cost exports][6], including historical data covering the plan's purchase and subsequent usage.
+2. Go to [**Cloud Cost > Planning > Commitment Programs**][1] and select Azure Databricks to view pre-purchase plans.
+3. Select a reporting period. The inventory includes plans that were active during any part of that period, including plans that have since expired.
+4. Compare each plan's remaining balance with its expiration date to identify balances to use before the plan ends.
+
+> **Screenshot placeholder:** Add an Azure Databricks pre-purchase plan inventory screenshot showing balances and expiration dates for the selected reporting period. Replace this placeholder before publication.
+
+### Understand balances and savings
+
+Amounts are expressed in the billing currency. Cumulative balances and selected-period values cover different time ranges:
+
+| Value | Description |
+|---|---|
+| Purchase cost | Amount paid for the plan. |
+| Used | Cost of usage paid for by the plan, from purchase through the end of the selected period. |
+| Remaining | Purchase cost minus the cumulative used amount, measured at the end of the selected period. |
+| Remaining percentage | Remaining balance as a percentage of the purchase cost. |
+| Used in period | Cost of usage paid for by the plan during the selected period only. |
+| Realized savings in period | Retail on-demand cost of the covered usage minus its cost under the plan, during the selected period only. |
+
+For example, a plan costs $10,000 and has covered $3,000 of usage by the end of June, including $1,000 in June. With June selected, used is $3,000, remaining is $7,000 (70%), and used in period is $1,000. If that June usage would have cost $1,200 at retail on-demand rates, realized savings in period is $200.
+
+A remaining balance is available to cover eligible usage until the plan expires. Review it alongside the expiration date when assessing whether a plan is likely to go unused.
+
+### Interpret dates and missing data
+
+The start date is the purchase date, and the expiration date is the last day covered by the plan. Status reflects the selected reporting period: a plan that expires after that period is shown as active for that period, even when viewed after expiration.
+
+Plan visibility depends on the purchase appearing in the available cost history. Incomplete usage history can also understate the used balance and overstate the remaining balance. See [Getting historical Azure cost data][7] for backfill instructions.
+
+When the purchase cost is unavailable, the remaining amount and percentage are unavailable. Realized savings are unavailable when retail on-demand pricing is missing for usage in the selected period. Missing values do not mean zero cost or zero savings.
 
 ## Least used savings plans
 
@@ -184,3 +223,5 @@ Results appear in two sections:
 [3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
 [5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
+[6]: /cloud_cost_management/setup/azure/#pre-purchase-plan-data
+[7]: /cloud_cost_management/setup/azure/#getting-historical-data
