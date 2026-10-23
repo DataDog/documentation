@@ -66,6 +66,67 @@ After you select the Azure Data Explorer destination in the pipeline UI:
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
+### Azure authentication
+
+The credential fields you fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
+
+{{% collapse-content title="Azure CLI" level="h4" expanded=false id="azure-cli" %}}
+
+The Azure CLI authentication method uses the credentials of the account signed in to the [Azure CLI][17] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Client certificate" level="h4" expanded=false id="client-certificate" %}}
+
+The client certificate authentication method uses a [Microsoft Entra application (service principal)][18] client ID and certificate. Configure the following fields:
+
+- **Client ID**: Enter the client ID of your Microsoft Entra application.
+- **Tenant ID**: Enter your Microsoft Entra tenant ID.
+- **Certificate Path**: Enter the path to the PKCS12 certificate file (`.pfx`) that contains the RSA private key, such as `path/to/certificate.pfx`.
+- (Optional) **Certificate Password**: If the certificate is password protected, enter the identifier that references the certificate password. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Client secret" level="h4" expanded=false id="client-secret" %}}
+
+The client secret authentication method uses a [Microsoft Entra application (service principal)][18] client ID and client secret. Configure the following fields:
+
+- **Client ID**: Enter the client ID of your Microsoft Entra application.
+- **Tenant ID**: Enter your Microsoft Entra tenant ID.
+- **Client Secret**: Enter the identifier that references the client secret of your Microsoft Entra application. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Managed identity" level="h4" expanded=false id="managed-identity" %}}
+
+The managed identity authentication method uses an [Azure managed identity][19] assigned to the resource where the Worker runs. Configure the following fields:
+
+- (Optional) **User-Assigned Managed Identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
+- (Optional) **User-Assigned Managed Identity ID Type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. The default is **Client ID**.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Managed identity (client assertion)" level="h4" expanded=false id="managed-identity-client-assertion" %}}
+
+The managed identity (client assertion) authentication method uses a managed identity to get a client assertion. The client assertion is exchanged for an access token for the target application. Configure the following fields:
+
+- **Client Assertion Client ID**: Enter the client ID of the target application.
+- **Client Assertion Tenant ID**: Enter the tenant ID of the target application.
+- (Optional) **User-Assigned Managed Identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
+- (Optional) **User-Assigned Managed Identity ID Type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. The default is **Client ID**.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Workload identity" level="h4" expanded=false id="workload-identity" %}}
+
+The workload identity authentication method uses a [Microsoft Entra Workload ID][20] federated token, such as a Kubernetes service account token, to authenticate. Configure the following fields:
+
+- (Optional) **Client ID**: Enter the client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
+- (Optional) **Tenant ID**: Enter your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
+- (Optional) **Token File Path**: Enter the path to the file containing the Kubernetes service account token, such as `/var/run/secrets/azure/tokens/azure-identity-token`. If left blank, the `AZURE_FEDERATED_TOKEN_FILE` environment variable is used.
+
+{{% /collapse-content %}}
+
 ### Optional settings
 
 #### Token scope
@@ -96,55 +157,6 @@ You can configure how the Worker batches logs before sending them to ADX. The de
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
-
-### Azure authentication
-
-The credential fields you fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
-
-#### Azure CLI
-
-The Azure CLI authentication method uses the credentials of the account signed in to the [Azure CLI][17] on the host where the Worker runs. No additional fields are required to configure Azure authentication for the Azure Data Explorer destination.
-
-#### Client certificate
-
-The client certificate authentication method uses a [Microsoft Entra application (service principal)][18] client ID and certificate. Configure the following fields:
-
-- **Client ID**: Enter the client ID of your Microsoft Entra application.
-- **Tenant ID**: Enter your Microsoft Entra tenant ID.
-- **Certificate Path**: Enter the path to the PKCS12 certificate file (`.pfx`) that contains the RSA private key, such as `path/to/certificate.pfx`.
-- (Optional) **Certificate Password**: If the certificate is password protected, enter the identifier that references the certificate password. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
-
-#### Client secret
-
-The client secret authentication method uses a [Microsoft Entra application (service principal)][18] client ID and client secret. Configure the following fields:
-
-- **Client ID**: Enter the client ID of your Microsoft Entra application.
-- **Tenant ID**: Enter your Microsoft Entra tenant ID.
-- **Client Secret**: Enter the identifier that references the client secret of your Microsoft Entra application. Do **not** enter the actual value. If you leave the field blank, the [default](#secret-defaults) is used.
-
-#### Managed identity
-
-The managed identity authentication method uses an [Azure managed identity][19] assigned to the resource where the Worker runs. Configure the following fields:
-
-- (Optional) **User-Assigned Managed Identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-Assigned Managed Identity ID Type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. The default is **Client ID**.
-
-#### Managed identity (client assertion)
-
-The managed identity (client assertion) authentication method uses a managed identity to get a client assertion. The client assertion is exchanged for an access token for the target application. Configure the following fields:
-
-- **Client Assertion Client ID**: Enter the client ID of the target application.
-- **Client Assertion Tenant ID**: Enter the tenant ID of the target application.
-- (Optional) **User-Assigned Managed Identity ID**: Enter the ID of the user-assigned managed identity to use. If left blank, the system-assigned managed identity is used.
-- (Optional) **User-Assigned Managed Identity ID Type**: Select the type of ID you entered for the user-assigned managed identity: **Client ID**, **Object ID**, or **Resource ID**. The default is **Client ID**.
-
-#### Workload identity
-
-The workload identity authentication method uses a [Microsoft Entra Workload ID][20] federated token, such as a Kubernetes service account token, to authenticate. Configure the following fields:
-
-- (Optional) **Client ID**: Enter the client ID of your Microsoft Entra application or managed identity. If left blank, the `AZURE_CLIENT_ID` environment variable is used.
-- (Optional) **Tenant ID**: Enter your Microsoft Entra tenant ID. If left blank, the `AZURE_TENANT_ID` environment variable is used.
-- (Optional) **Token File Path**: Enter the path to the file containing the Kubernetes service account token, such as `/var/run/secrets/azure/tokens/azure-identity-token`. If left blank, the `AZURE_FEDERATED_TOKEN_FILE` environment variable is used.
 
 ## Secret defaults
 
