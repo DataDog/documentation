@@ -52,6 +52,13 @@ Grouping metrics by timestamp is useful for destinations that use the metric tim
 
 The **Allowed lateness** grace period starts at a window's end time and is based on the Worker's system clock. After the grace period, the window stops accepting metrics, the aggregated metrics are sent, and the window is permanently closed. Any late metrics for that window are dropped and counted in the `pipelines.component_discarded_events_total` metric. See [Pipeline Usage Metrics][3] for more information.
 
+For example, with a 10-second interval and an allowed lateness of 5 seconds, the 12:00:00 to 12:00:10 window accepts metrics until 12:00:15 on the Worker's system clock. For a metric with a timestamp of 12:00:07:
+
+- If the metric arrives at 12:00:13, it is added to the 12:00:00 to 12:00:10 window.
+- If the metric arrives at 12:00:16, it is dropped because the window closed at 12:00:15.
+
+At 12:00:15, the processor sends the aggregated metrics for the 12:00:00 to 12:00:10 window.
+
 ## Modes
 
 The Aggregate processor can combine metrics into a single metric based on the following modes. Some modes are available only for specific [metric kinds][2], incremental or absolute.
