@@ -58,7 +58,8 @@ Before you start, verify you have:
    sum:datadog.estimated_usage.sds.scanned_bytes{!scanning_group_id:global} by {product,service}.as_count()
    ```
 
-1. In the {{< ui >}}Set alert conditions{{< /ui >}} section, set a threshold above your normal scanned volume. Monitor the metric for 1-2 weeks to establish a baseline before you choose a threshold.
+1. Set the monitor query aggregation to {{< ui >}}sum{{< /ui >}} and choose an evaluation window, for example the last 1 hour. The `sum` prefix in the query aggregates across tags only. By default, the monitor averages values over the window. Queries that use `as_count()` require `sum` to evaluate the total bytes in the window.
+1. In the {{< ui >}}Set alert conditions{{< /ui >}} section, set a threshold in bytes for the evaluation window. To establish a baseline, review the scanned bytes for the same window size over 1-2 weeks, then set the threshold above that baseline.
 1. Configure [notifications][7] and add a monitor message that names the team responsible for the affected service.
 
 ## Further reading
