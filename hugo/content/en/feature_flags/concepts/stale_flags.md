@@ -19,15 +19,11 @@ Creating feature flags is straightforward, but decommissioning them is not. Over
 
 ## How Datadog detects stale flags
 
-Datadog uses an organization-wide **staleness window**, which defaults to 30 days. [Configure the staleness window][2] to match your team's flag life cycle.
+A flag is evaluated for staleness only if it is not archived, not marked as permanent, and not tied to a running experiment. A flag is marked `STALE` when any of the following signals are true:
 
-Permanent flags are excluded from automatic stale detection. A temporary flag remains active for the staleness window after it is created or updated. After that period, it is marked `STALE` when any of the following signals are true, unless detection is temporarily dismissed:
-
-- **Fully rolled out**: Datadog has observed only one variant across recorded evaluations for longer than the staleness window. This indicates the flag is behaving like static code and may no longer provide value as a runtime control.
-- **No evaluations**: No evaluation events have been recorded for the flag during the staleness window. This may indicate that the flag is no longer referenced in your application code.
-- **No activity**: The flag has not been modified during the staleness window. This may indicate that the rollout has been deprioritized or completed.
-
-Detection considers recorded evaluations across environments, not only production environments.
+- **Fully rolled out**: The same variant has been served to 100% of traffic in all production environments for the past 30 days. This indicates the flag is behaving like static code and may no longer provide value as a runtime control.
+- **No evaluations**: No evaluation events have been recorded for the flag in the past 30 days across all environments. This may indicate that the flag is no longer referenced in your application code.
+- **No activity**: The flag has not been modified in the past 30 days across all environments. This may indicate that the rollout has been deprioritized or completed.
 
 **Note**: Evaluation logging is not supported by every SDK, and some customers opt out. As a result, the **No evaluations** signal is a strong but imperfect indicator that a flag is ready to be archived.
 
@@ -72,15 +68,15 @@ If a flag is temporarily inactive or cleanup is intentionally deferred, select {
 
 ## Configure the staleness window
 
-Set one staleness window for all temporary flags in your organization. The same value applies to all three detection signals and the grace period after flag creation or updates. It is not a per-flag or per-environment setting.
+A single staleness window applies to all temporary flags in your organization. The same value applies to all three detection signals and the grace period after flag creation or updates. It is not a per-flag or per-environment setting.
 
-1. Navigate to [**Feature Flags > Settings > Stale Flag Detection**][3].
-2. Enter a whole number from **1 to 3650 days** in the days field. The default is **30 days**.
+1. Navigate to [**Feature Flags > Settings > Stale Flag Detection**][2].
+2. Enter a whole number from **1 to 3650** days. The default is **30 days**.
 3. Click **Save**.
 
 For example, set the window to 14 days to identify inactive flags sooner. Set it to 60 days to allow more time before flags become eligible for cleanup. To return to the default window, enter **30** and click **Save**.
 
-Datadog refreshes evaluation and activity signals daily. Status uses the configured window and the latest available signals. Changing the window can affect a flag's status before the next signal refresh.
+Datadog refreshes evaluation and activity signals daily. A flag's staleness status is based on the configured window and the latest available signals. Changing the window can affect a flag's status before the next signal refresh.
 
 Changing the window does not disable stale detection or change the 30-day dismissal duration. To exclude an individual flag from automatic detection, mark it as permanent.
 
@@ -93,5 +89,4 @@ The `FeatureFlagConfigWrite` permission is required to mark a flag as permanent.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/feature-flags
-[2]: #configure-the-staleness-window
-[3]: https://app.datadoghq.com/feature-flags/settings/stale-flag-detection
+[2]: https://app.datadoghq.com/feature-flags/settings/stale-flag-detection
