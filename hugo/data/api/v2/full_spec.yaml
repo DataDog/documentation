@@ -2190,13 +2190,18 @@ components:
         type: integer
     TraceIDPathParameter:
       description: |-
-        The trace ID. Accepts either a 32-character hexadecimal string (128-bit trace ID)
-        or a decimal string of up to 39 digits.
+        The trace ID. Accepts either a hexadecimal string of up to 32 characters (128-bit trace ID)
+        or a decimal string of up to 39 digits. Hexadecimal IDs are case-insensitive, and shorter
+        values are left-padded with zeros.
+        Use the `trace_id` attribute of a span returned by the search spans or list spans endpoints.
+        Values in any other format, such as UUIDs, return `400 Bad Request`. A well-formed ID with
+        no matching trace returns `404 Not Found`.
       example: "0000000000000000abc1230000000000"
       in: path
       name: trace_id
       required: true
       schema:
+        pattern: "^([0-9a-fA-F]{1,32}|[0-9]{1,39})$"
         type: string
     UnitCostID:
       description: The UUID of the unit cost.
@@ -125190,8 +125195,11 @@ components:
       type: string
       x-enum-varnames: ["DONE", "TIMEOUT"]
     SpansAggregateSort:
-      description: A sort rule.
-      example: {"aggregation": "count", "order": "asc"}
+      description: |-
+        A sort rule. With `type: alphabetical` (the default), buckets are sorted by facet value
+        and only `order` is allowed. With `type: measure`, buckets are sorted by a computed value:
+        set `aggregation`, and set `metric` unless the aggregation is `count`.
+      example: {"aggregation": "pc90", "metric": "@duration", "order": "desc", "type": "measure"}
       properties:
         aggregation:
           $ref: "#/components/schemas/SpansAggregationFunction"
@@ -125301,7 +125309,10 @@ components:
           type: string
       type: object
     SpansCompute:
-      description: A compute rule to compute metrics or timeseries.
+      description: |-
+        A compute rule to compute metrics or timeseries.
+        All computes in a request must have the same `type`, and `timeseries` computes must use the same `interval`.
+        To get both totals and timeseries, send separate requests.
       properties:
         aggregation:
           $ref: "#/components/schemas/SpansAggregationFunction"
@@ -125355,7 +125366,12 @@ components:
           $ref: "#/components/schemas/SpansGroupByHistogram"
         limit:
           default: 10
-          description: The maximum buckets to return for this group by.
+          description: |-
+            The maximum buckets to return for this group by.
+            A request can generate at most 10,000 groups. Nested `group_by` entries multiply, so the
+            product of their limits must stay within that bound. For example, two entries with a limit of 100 each
+            produce up to 10,000 groups. With a `timeseries` compute, the number of groups multiplied by
+            the number of time buckets must not exceed 400,000.
           format: int64
           type: integer
         missing:
@@ -215209,6 +215225,8 @@ paths:
         Retrieve a pruned, hierarchical view of an APM trace by its trace ID.
         The trace is summarized as a tree of spans rooted at the trace root and reduced in size
         to keep rendering large traces in the UI practical.
+        A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
+        no trace with this ID is available, for example because the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
       operationId: GetPrunedTraceByID
       parameters:
@@ -215321,6 +215339,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/PrunedTraceResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           content:
             application/json:
@@ -241475,6 +241499,11 @@ paths:
       description: |-
         The API endpoint to aggregate spans into buckets and compute metrics and timeseries.
         This endpoint is rate limited to `300` requests per hour.
+
+        A request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups
+        including time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry
+        to stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive
+        and can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.
       operationId: AggregateSpans
       requestBody:
         content:
@@ -241494,14 +241523,13 @@ paths:
                         query: service:web* AND @http.status_code:[200 TO 299]
                         to: now
                       group_by:
-                        - facet: host
-                          histogram:
-                            interval: 10
-                            max: 100
-                            min: 50
+                        - facet: service
+                          limit: 20
                           sort:
-                            aggregation: count
-                            order: asc
+                            aggregation: pc90
+                            metric: "@duration"
+                            order: desc
+                            type: measure
                       options:
                         timezone: GMT
                     type: aggregate_request
@@ -252014,6 +252042,8 @@ paths:
       description: |-
         Retrieve a full APM trace by its trace ID, including every span in the trace.
         Traces are returned from live storage when available and fall back to longer-term storage.
+        A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
+        no trace with this ID is available, for example because the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
       operationId: GetTraceByID
       parameters:
@@ -252064,6 +252094,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/TraceResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           content:
             application/json:
