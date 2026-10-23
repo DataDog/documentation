@@ -83,10 +83,10 @@ You can configure how the Worker batches logs before sending them to ADX. The de
 
 1. In the **Batch Max Bytes** field, enter the maximum batch size in bytes.
     - **Streaming**:
-        - The default is 2,000,000 bytes (2 MB).
+        - The default is 2 MB.
         - The maximum is 4 MB, which is the ADX streaming ingestion data size limit. See [Performance and operational considerations][15] for more information.
         - **Note**: Data created by [update policies][16] is included in the ingestion data size limit. Datadog recommends keeping the default batch size of 2 MB to leave room for this additional data.
-    - **Queued**: The default is 100,000,000 bytes (100 MB). The maximum is 1 GB.
+    - **Queued**: The default is 100 MB. The maximum is 1 GB.
 1. In the **Batch Max Events** field, enter the maximum number of logs in a batch.
     - **Streaming**: The default is 1,000.
     - **Queued**: There is no limit by default.
