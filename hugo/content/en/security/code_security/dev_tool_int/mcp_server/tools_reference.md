@@ -186,11 +186,11 @@ The scan runs only the supplied rule, but still follows the repository's [Static
 | `language`          | `string`        |   Yes    | Language of the rule, for example `TYPESCRIPT`, `JAVASCRIPT`, `PYTHON`, `GO`, or `JAVA`          |
 | `directory`         | `string`        |    No    | Repository directory to scan (defaults to the current directory)                                 |
 | `rule_name`         | `string`        |    No    | Rule name inside the temporary ruleset                                                           |
-| `paths`             | `array[string]` |    No    | Subdirectories of `directory` to scan. Omit to scan the whole directory.                         |
+| `paths`             | `array[string]` |    No    | Files or subdirectories inside `directory` to scan. Omit to scan the whole directory.            |
 
 ### Output
 
-Violations reported by the rule, grouped by file. If the rule throws an error, the tool returns that error instead.
+Violations reported by the rule, grouped by file. If the rule throws, fails to compile, or times out on any file, the tool returns an error that lists those files instead.
 
 ### Required binary
 
@@ -198,7 +198,7 @@ Violations reported by the rule, grouped by file. If the rule throws an error, t
 
 ## `datadog_promote_sast_rule`
 
-Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. Before saving, the tool runs the rule on the two `tests` examples and saves nothing if a finding count differs or the rule throws an error. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
+Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. Before saving, the tool runs the rule on the two `tests` examples and saves nothing if a finding count differs or the rule fails. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
 
 Scans use the saved rule only after the repository configuration lists its ruleset. Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. A new `code-security.datadog.yaml` hides that legacy file. See [Static Code Analysis configuration][4].
 
@@ -225,7 +225,7 @@ Each entry in `tests`:
 
 | Field              | Type      | Required | Description                                                                      |
 | ------------------ | --------- | :------: | -------------------------------------------------------------------------------- |
-| `filename`         | `string`  |   Yes    | Example filename, a single path segment                                          |
+| `filename`         | `string`  |   Yes    | File name without directories. Its extension must match the rule's `language`, for example `.ts` for `TYPESCRIPT`. |
 | `code`             | `string`  |   Yes    | Example source, not base64-encoded                                               |
 | `annotation_count` | `integer` |   Yes    | Number of findings the rule must report on this example: `0` for the fixed code, and a positive number (usually `1`) for the code before the fix |
 
