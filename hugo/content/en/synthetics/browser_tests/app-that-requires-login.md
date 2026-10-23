@@ -67,6 +67,8 @@ Create a Virtual Authenticator global variable and import it in your test. Then,
 
 Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][5], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
 
+For authentication codes delivered by email, use a [persistent email global variable][11]. Register an application account with its Datadog-managed address once. Record steps that request a fresh OTP, extract it from the email body, and submit it during each login. This tests email delivery and authentication while letting subsequent steps use the same account across runs. For sign-up flows that need a new account each run, use a temporary email address instead.
+
 Browser tests can reproduce any actions a regular user take inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser.
 
 Some MFA providers may detect Datadog's browser tests as bots and prevent them from logging in, for instance, by adding a reCAPTCHA. In this case, contact your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers).
@@ -118,3 +120,4 @@ For more information about account security, see [Synthetic Monitoring Data Secu
 [8]: /synthetics/browser_tests/test_steps#a-global-variable
 [9]: /data_security/synthetics
 [10]: /synthetics/guide/authentication-protocols/?tab=basicaccess#authentication-methods
+[11]: /synthetics/guide/persistent-email-otp/

@@ -243,6 +243,23 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 [1]: /synthetics/guide/browser-tests-passkeys
 [2]: /account_management/rbac/?tab=datadogapplication#custom-roles
 {{% /tab %}}
+{{% tab "Email Address" %}}
+
+Create an email global variable to receive emails at the same Datadog-managed address across browser test runs. Register an application account with this address once, then reuse it for email workflows, such as password resets, order confirmations, or OTP login. Mobile app tests do not support email address variables.
+
+1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email address{{< /ui >}}.
+2. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
+3. Configure access in the permissions section and save the variable.
+4. Copy the generated address from the saved variable to register the account in your application. The address displayed before creation is an example.
+
+{{< img src="synthetics/settings/persistent_email_variable.png" alt="Create an email global variable with Email Address selected and configure its name, tags, and access permissions" style="width:80%;" >}}
+
+Datadog generates the address when you create the variable. The saved address is read-only: you cannot supply a custom mailbox or change the address. Editing the name, description, or tags preserves the address.
+
+In the browser recorder, select {{< ui >}}Email Address{{< /ui >}} > {{< ui >}}Persistent{{< /ui >}} and choose the saved variable. A test can use one email address variable. For setup instructions and the differences from temporary email, see [Use persistent email addresses in browser tests][1].
+
+[1]: /synthetics/guide/persistent-email-otp/
+{{% /tab %}}
 {{< /tabs >}}
 
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click {{< ui >}}\+ Variables{{< /ui >}}, type `{{` in a field you want to add the variable, and select your global variable.
@@ -276,6 +293,8 @@ Use [granular access control][22] to limit who has access to your test based on 
 | No access    |               |                  |                |                         |
 | Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
 | Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
+
+For email address variables, Editors can update metadata, but the generated address remains read-only.
 
 **Note**: Restricting a variable prevents other users from adding it to a test and using it; it does not hide the name of the variable if it is already used in an existing test.
 
