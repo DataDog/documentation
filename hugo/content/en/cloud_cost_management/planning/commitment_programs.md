@@ -27,6 +27,8 @@ With Commitment Programs, you can:
 
 ## Getting started
 
+For the Azure Overview, Coverage, and Inventory views, see [Azure Commitment Programs][6].
+
 Use Commitment Programs to understand and optimize your cloud commitments.
 
 1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] in Cloud Cost Management.
@@ -184,3 +186,4 @@ Results appear in two sections:
 [3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
 [5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
+[6]: /cloud_cost_management/planning/azure_commitment_programs/
