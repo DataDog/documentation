@@ -2,7 +2,7 @@
 title: Telemetry Rules
 is_beta: true
 private: true
-description: Use telemetry rules to govern tags, indexing, and other characteristics of your metrics, logs, and spans.
+description: Use telemetry rules to govern tags, indexing, and other characteristics of your metrics, logs, spans, and events.
 further_reading:
 - link: '/api/latest/tag-rules/'
   tag: 'Documentation'
@@ -22,12 +22,14 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Telemetry rules are in Preview. If you see an issue or want to propose a new feature, use the Give Feedback button in the product UI.
+Telemetry rules are in Preview. Events support is limited to select organizations on the US1 site. If you see an issue or want to propose a new feature, use the Give Feedback button in the product UI.
 {{< /callout >}}
 
 ## Overview
 
-Telemetry rules help admins govern characteristics of their metrics, logs, and spans from the Governance Console, to reduce costs for unwanted telemetry. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry.
+Telemetry rules help admins govern characteristics of their metrics, logs, spans, and events from the Governance Console, to reduce costs for unwanted telemetry. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry.
+
+<div class="alert alert-warning">When <strong>Filter data at ingest</strong> is enabled for an Events rule, Datadog drops in-scope events that do not meet the rule's requirements at intake. For example, a rule that requires the <code>service</code> tag drops events in its scope that lack that tag. If events appear to be missing, check Telemetry Rules in the Governance Console for filtering rules that apply to them.</div>
 
 ## Prerequisites
 
@@ -39,7 +41,7 @@ You need the `governance_console_read` permission to view telemetry rules. To cr
 
 | Rule type | Telemetry type(s) | Applied at | Description |
 |---|---|---|---|
-| Tag Visibility and Enforcement | Metrics, logs, spans | Ingest | Determines whether telemetry tags and values are compliant, and optionally drops non-compliant telemetry at ingest. |
+| Tag Visibility and Enforcement | Metrics, logs, spans, events (Preview) | Ingest | Determines whether telemetry tags and values are compliant, and optionally drops non-compliant telemetry at ingest. |
 | Tag Indexing | Metrics | Ingest | Determines custom metric tags that should be indexed for a given metric. |
 | Metric Name Filtering | Metrics | Agent | Drops custom metrics of a given name directly in the Datadog Agent, prior to ingestion. |
 
@@ -48,8 +50,8 @@ You need the `governance_console_read` permission to view telemetry rules. To cr
 ### Create a tag visibility rule
 
 1. Navigate to [Governance Console > Telemetry](https://app.datadoghq.com/governance/telemetry) and click **+ Create New Rule**.
-2. Select the signal type (**Metrics**, **APM**, or **Logs**) and the **Tag Visibility and Enforcement** rule type.
-3. Select the scope. Choose **All [Spans/Metrics/Logs]** to apply the rule to all telemetry of the selected type. Choose **Selected [Spans/Metrics/Logs]** to scope the rule to a subset, then enter a tag query, for example, `service:web-store` or `env:prod AND team:payments`. The same query syntax used in Datadog monitors and dashboards applies here.
+2. Select the signal type (**Metrics**, **APM**, **Logs**, or **Events**) and the **Tag Visibility and Enforcement** rule type.
+3. Select the scope. Choose **All [Spans/Metrics/Logs/Events]** to apply the rule to all telemetry of the selected type. Choose **Selected [Spans/Metrics/Logs/Events]** to scope the rule to a subset, then enter a tag query, for example, `service:web-store` or `env:prod AND team:payments`. The same query syntax used in Datadog monitors and dashboards applies here.
 4. Define the tag key. Enter the tag key you want to enforce (for example, `env` or `team`). Select **Tag key must be present** to flag telemetry missing the key as non-compliant.
 
    <div class="alert alert-info">If <strong>Tag key must be present</strong> isn't selected, a rule only evaluates telemetry that already has the specified tag key. Telemetry without the key isn't evaluated and is considered compliant.</div>
@@ -65,9 +67,9 @@ You need the `governance_console_read` permission to view telemetry rules. To cr
 
 After you create a tag visibility rule, Datadog begins tracking compliance across all matching telemetry. Open a rule to see:
 
-- **Compliance score**: The percentage of in-scope spans, metrics, or log events that satisfy the rule, calculated over the selected time window. A compliance score of 100% means all matching telemetry is compliant with the rule. A score of 0% means none of the matching telemetry is compliant with the rule.
+- **Compliance score**: The percentage of in-scope spans, metrics, logs, or events that satisfy the rule, calculated over the selected time window. A compliance score of 100% means all matching telemetry is compliant with the rule. A score of 0% means none of the matching telemetry is compliant with the rule.
 - **Score over time**: A chart showing how compliance has trended. Use the time selector to view the trend over your preferred time frame. This chart isn't available for metrics, and metric history is limited to the last 8 hours.
-- **Non-compliant telemetry**: A table showing individual spans, metrics, or log events that violate the rule, with service name, resource, and additional signal-specific details. Click a row to view more details about the telemetry in question. For rules on spans, click **View in Trace** to open non-compliant spans directly in the trace explorer.
+- **Non-compliant telemetry**: A table showing individual spans, metrics, logs, or events that violate the rule, with service name, resource, and additional signal-specific details. Click a row to view more details about the telemetry in question. For rules on spans, click **View in Trace** to open non-compliant spans directly in the trace explorer.
 
 ### Enforce tag compliance through filtering
 
@@ -99,9 +101,9 @@ You can create and manage specific rules for metrics from the Governance Console
 
 ## Limitations
 
-- You can create up to 10 rules per signal type (spans, metrics, and logs each have a separate limit of 10).
+- You can create up to 10 rules each for spans, metrics, and logs.
 - A Tag Visibility and Enforcement rule can specify up to 30 tag values.
-- Telemetry rules aren't available for telemetry types outside metrics, logs, and spans.
+- Telemetry rules support metrics, logs, spans, and events (Preview). Events support is limited to select US1 organizations.
 
 If your tagging strategy requires more rules or tag values, contact your Datadog account team to request a higher limit.
 
