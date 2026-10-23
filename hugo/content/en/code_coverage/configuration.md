@@ -355,7 +355,7 @@ Annotations work as follows:
 - Datadog posts up to 30 annotations per pull request. When there are more uncovered ranges, the summary comment reports the total number and links to the full report in Datadog.
 - When the annotated lines become covered, Datadog resolves the annotations.
 
-Annotations are independent of the summary comment: setting `comments.enabled` to `false` does not disable them. When comments are disabled and annotations are enabled, Datadog still posts a summary comment if the number of uncovered ranges exceeds the 30-annotation limit, and that comment reports only the total number of uncovered ranges.
+Annotations are independent of the summary comment: setting `comments.enabled` to `false` does not disable annotations. When comments are disabled but annotations are enabled, Datadog still posts a summary comment if the number of uncovered ranges exceeds the 30-annotation limit. In that case, the comment reports only the total number of uncovered ranges.
 
 Inline annotations are not available on Bitbucket.
 
