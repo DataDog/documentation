@@ -75,6 +75,10 @@ Monitor big data processing frameworks:
 
 - [Apache Spark Metrics][13] - Track Apache Spark performance metrics
 
+## Request an integration or share feedback
+
+To request support for an integration not listed on this page, or to share feedback about an existing integration, fill out the [OpenTelemetry Integrations Product Preview form][21].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -99,3 +103,4 @@ Monitor big data processing frameworks:
 [18]: /opentelemetry/integrations/kubernetes_metrics/
 [19]: /opentelemetry/integrations/postgres_metrics/
 [20]: /opentelemetry/integrations/sqlserver_metrics/
+[21]: https://www.datadoghq.com/product-preview/otel-integrations/
