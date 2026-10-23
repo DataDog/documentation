@@ -77239,12 +77239,12 @@ components:
         - destination
       type: object
     LogsArchiveAttributesCompressionMethod:
-      default: GZIP
+      default: ZSTD
       description: The type of compression for the archive.
       enum:
         - GZIP
         - ZSTD
-      example: GZIP
+      example: ZSTD
       type: string
       x-enum-varnames:
         - GZIP
@@ -199553,7 +199553,7 @@ paths:
                 value:
                   data:
                     attributes:
-                      compression_method: GZIP
+                      compression_method: ZSTD
                       destination:
                         container: container-name
                         storage_account: account-name
@@ -199757,7 +199757,7 @@ paths:
                 value:
                   data:
                     attributes:
-                      compression_method: GZIP
+                      compression_method: ZSTD
                       destination:
                         container: container-name
                         storage_account: account-name
