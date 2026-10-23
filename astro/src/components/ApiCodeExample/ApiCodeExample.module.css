@@ -42,7 +42,9 @@
   block-size: 0;
   overflow: hidden;
   /* Code Example transition: Keep content visible through closing phase. */
-  transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete;
+  transition:
+    block-size 0.35s ease,
+    content-visibility 0.35s allow-discrete;
 }
 
 /* Code Example transition: Show the content when the accordion is open */
@@ -89,7 +91,6 @@
   height: 18px;
   color: var(--color-text-muted);
   transition: transform 0.25s ease;
-
 }
 
 .api-code-example__accordion-header-content {
