@@ -14,6 +14,40 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.23.2
+
+To upgrade to Worker version 2.23.2:
+
+- Docker: Run the `docker pull` command for the [2.23.2 image][58].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.2`.
+
+Worker version 2.23.2 gives you access to the following:
+
+#### Enhancements
+
+- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log has no string message, or its non-message fields leave no room for a truncated message, the Worker forwards the log unchanged as long as it fits within the payload limit. The Datadog intake then truncates the log.
+
+#### Fixes
+
+- Fixed the Docker images so the secret generic connector (`sgc`) binary is executable by the `observability-pipelines-worker` service user.
+
+## Worker version 2.23.1
+
+To upgrade to Worker version 2.23.1:
+
+- Docker: Run the `docker pull` command for the [2.23.1 image][57].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.1`.
+
+Worker version 2.23.1 gives you access to the following:
+
+#### Security
+
+- Updated the bundled secret generic connector (`sgc`) binary to the version shipped with Datadog Agent 7.84.1, which addresses CVE-2026-56854.
+
 ## Worker version 2.23.0
 
 To upgrade to Worker version 2.23.0:
@@ -865,3 +899,5 @@ Worker version 2.7.0 gives you access to the following:
 [54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
 [55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
 [56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
+[57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
+[58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
