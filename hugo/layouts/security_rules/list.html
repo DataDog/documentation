@@ -4,7 +4,42 @@
 {{ $scratch := .Scratch }}
 
 <!-- From data file -->
-{{ $list := sort .Pages }}
+{{/* Exclude retired Attack Path rules from the public OOTB catalog. */}}
+{{ $retiredRules := slice
+    "def-000-zyx"
+    "def-002-s3d"
+    "def-000-02e"
+    "def-000-1vr"
+    "def-000-5je"
+    "def-000-6mw"
+    "def-000-a3f"
+    "def-000-an3"
+    "def-000-asx"
+    "def-000-d94"
+    "def-000-elx"
+    "def-000-hdi"
+    "def-000-hec"
+    "def-000-hsi"
+    "def-000-i9l"
+    "def-000-j5y"
+    "def-000-jzg"
+    "def-000-ke9"
+    "def-000-kr2"
+    "def-000-l9d"
+    "def-000-oh9"
+    "def-000-ott"
+    "def-000-p0c"
+    "def-000-qb9"
+    "def-000-s4m"
+    "def-000-sjl"
+    "def-000-tml"
+    "def-000-uco"
+    "def-000-x7x"
+    "def-000-xny"
+    "def-000-zup"
+    "def-001-hec"
+}}
+{{ $list := sort (where .Pages "File.TranslationBaseName" "not in" $retiredRules) }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
