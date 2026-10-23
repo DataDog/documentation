@@ -122,7 +122,7 @@ await DatadogSdk.instance.initialize(
   DatadogConfiguration(
     clientToken: '<CLIENT_TOKEN>',
     env: '<ENV_NAME>',
-    site: DatadogSite.{{< region-param key="dd_site_name" code="true" >}},
+    site: DatadogSite.{{< region-param key="dd_datacenter_lowercase" code="true" >}},
     service: '<SERVICE_NAME>',
     version: '<APP_VERSION>',
     rumConfiguration: DatadogRumConfiguration(
@@ -218,7 +218,7 @@ await api.setEvaluationContextAndWait(
 
 The `targetingKey` identifies the randomization subject for percentage rollouts. It is optional. Without a targeting key, the provider sends an empty string in the assignment request.
 
-A normal context change keeps the previous assignments active until assignments for the new context are usable. If the change fails, the operation throws and OpenFeature retains the previous active context. To clear assignments immediately during every identity switch, register a replacement provider.
+A context change keeps previous assignments active until new assignments are usable. If the change fails, OpenFeature retains the previous active context.
 
 To sign out, clear the context:
 
@@ -293,10 +293,10 @@ Register event handlers before provider registration to observe initial availabi
 final readySubscription = client.addHandler(ProviderEventType.ready, (_) {
   // Reevaluate flags and update the UI.
 });
-final changedSubscription = client.addHandler(
-  ProviderEventType.configurationChanged,
+final contextSubscription = client.addHandler(
+  ProviderEventType.contextChanged,
   (_) {
-    // Reevaluate flags after a refresh.
+    // Reevaluate flags and update the UI after a context change.
   },
 );
 
@@ -304,12 +304,12 @@ await provider.refresh();
 
 // Remove handlers when the subscribing component is disposed.
 readySubscription.cancel();
-changedSubscription.cancel();
+contextSubscription.cancel();
 {{< /code-block >}}
 
-`ready` signals usable assignments after initialization or recovery. `stale` means assignments remain usable while fresh assignments are unavailable. An `error` event reports a failed load or refresh. Events do not rebuild Flutter widgets automatically; update application state in the handlers.
+`ready` signals usable assignments after initialization, refresh, or recovery. `contextChanged` signals that assignments for the new context are available. A successful refresh emits both `ready` and `configurationChanged`; this example uses only `ready` for reevaluation. `stale` means assignments remain usable while fresh assignments are unavailable. An `error` event reports a failed load or refresh. Events do not rebuild Flutter widgets automatically; update application state in the handlers.
 
-`refresh()` reloads assignments for the active context. A successful refresh emits `configurationChanged`. A failed refresh emits an error and preserves usable active assignments. The provider does not poll automatically. Setting an unchanged context does not trigger a refresh.
+`refresh()` reloads assignments for the active context. A successful refresh emits `configurationChanged`. A failed refresh emits an error and preserves usable active assignments. The provider does not poll automatically. Reapplying an unchanged context also fetches assignments. Use `refresh()` to reload assignments for the active context explicitly.
 
 ## Advanced configuration
 
@@ -330,7 +330,7 @@ DatadogFlagsConfiguration(
 : Defaults to `true`. Records exposure events for successful evaluations whose assignments permit logging. Failed evaluations do not emit exposures. Set to `false` to disable exposure tracking.
 
 `trackEvaluations`
-: Defaults to `true`. Records aggregated telemetry for successes, defaults, and errors. Set to `false` to disable evaluation telemetry.
+: Defaults to `true`. Records aggregated telemetry for evaluations against active assignments, including missing-flag and type-mismatch defaults. Defaults returned before assignments become available are not recorded. Set to `false` to disable evaluation telemetry.
 
 `initializationTimeout`
 : Defaults to 5 seconds. The OpenFeature provider requires a positive duration of at most 20 seconds. Do not use the legacy API's disabled-timeout values. If using an isolated OpenFeature API with a shorter life cycle deadline, choose a smaller provider timeout.
