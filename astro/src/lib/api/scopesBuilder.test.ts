@@ -20,6 +20,8 @@ interface SyntheticOperation {
   method?: string;
   tags: string[];
   summary: string;
+  /** The operation's `x-displayName`. */
+  displayName?: string;
   /** One entry per AuthZ alternative in the `security` block. */
   authZ: string[][];
 }
@@ -27,6 +29,7 @@ interface SyntheticOperation {
 function specWith(
   operations: SyntheticOperation[],
   scopeDescriptions: Record<string, string> = {},
+  tagDisplayNames: Record<string, string> = {},
 ): OpenAPIV3.Document {
   const paths: Record<string, Record<string, unknown>> = {};
   for (const operation of operations) {
@@ -34,6 +37,9 @@ function specWith(
     paths[operation.path][operation.method ?? "get"] = {
       tags: operation.tags,
       summary: operation.summary,
+      ...(operation.displayName
+        ? { "x-displayName": operation.displayName }
+        : {}),
       security: operation.authZ.map((scopes) => ({ AuthZ: scopes })),
       responses: {},
     };
@@ -41,6 +47,10 @@ function specWith(
   return {
     openapi: "3.0.0",
     info: { title: "synthetic", version: "1" },
+    tags: Object.entries(tagDisplayNames).map(([name, displayName]) => ({
+      name,
+      "x-displayName": displayName,
+    })),
     paths,
     components: {
       securitySchemes: {
@@ -212,6 +222,46 @@ describe("buildScopeGroups: collection", () => {
         href: "/api/latest/case-management/#get-a-case",
       },
     ]);
+  });
+
+  it("labels endpoints with x-displayName but links to the canonical slug", () => {
+    const [group] = buildScopeGroups([
+      specWith([
+        {
+          path: "/cases",
+          method: "post",
+          tags: ["Case Management"],
+          summary: "Create a case",
+          displayName: "Create a work item",
+          authZ: [["cases_write"]],
+        },
+      ]),
+    ]);
+    expect(group.scopes[0].endpoints).toEqual([
+      {
+        summary: "Create a work item",
+        href: "/api/latest/case-management/#create-a-case",
+      },
+    ]);
+  });
+
+  it("labels headings with x-displayName but keeps canonical anchors", () => {
+    const [group] = buildScopeGroups([
+      specWith(
+        [
+          {
+            path: "/cases",
+            tags: ["Case Management"],
+            summary: "Get a case",
+            authZ: [["cases_read"]],
+          },
+        ],
+        {},
+        { "Case Management": "Work Management" },
+      ),
+    ]);
+    expect(group.heading).toBe("Work Management");
+    expect(group.anchors).toEqual(["case-management"]);
   });
 
   it("links to the endpoint's operation slug, which drops punctuation", () => {

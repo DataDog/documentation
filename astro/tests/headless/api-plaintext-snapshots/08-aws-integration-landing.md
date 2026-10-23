@@ -151,7 +151,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | uk1.datadoghq.com | GET Not supported in the UK1 region                                      |
 | us2.ddog-gov.com  | GET Not supported in the US2-FED region                                  |
 
-## [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/list-all-aws-integrations.md)
+## [List all AWS accounts](https://docs.datadoghq.com/api/latest/aws-integration/list-all-aws-integrations.md)
 
 | Datadog site      | API endpoint                                                      |
 | ----------------- | ----------------------------------------------------------------- |
@@ -179,7 +179,7 @@ For more information, see the [AWS integration page](https://docs.datadoghq.com/
 | uk1.datadoghq.com | GET Not supported in the UK1 region                                               |
 | us2.ddog-gov.com  | GET Not supported in the US2-FED region                                           |
 
-## [Create an AWS integration](https://docs.datadoghq.com/api/latest/aws-integration/create-an-aws-integration.md)
+## [Connect an AWS account](https://docs.datadoghq.com/api/latest/aws-integration/create-an-aws-integration.md)
 
 | Datadog site      | API endpoint                                                       |
 | ----------------- | ------------------------------------------------------------------ |
