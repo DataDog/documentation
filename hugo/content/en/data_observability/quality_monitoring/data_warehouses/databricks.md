@@ -105,13 +105,13 @@ To create the group and add the service principal:
 
 For more details, see the Databricks documentation on [managing account-level groups][8].
 
-## Data access and security FAQ
+## FAQs
 
 ### Does Datadog extract row-level data from your tables?
 
 No. Quality Monitoring runs aggregate queries in your SQL warehouse, such as `COUNT(*)`, `MAX(<timestamp_column>)`, null counts, and distinct counts. Only the resulting metric values are sent to Datadog.
 
-[Custom SQL monitors][10] are the exception. Because you write the query, you decide what it returns. Datadog stores the results of Custom SQL queries that return a value aliased as `dd_value`. Queries that do not match this format, such as `SELECT *`, fail validation and are not stored.
+[Custom SQL monitors][10] are the exception. Because you write the query, you decide what it returns. A Custom SQL query must return a value aliased as `dd_value`, and Datadog stores that value. Queries that do not match this format, such as `SELECT *`, fail validation and are not stored.
 
 If a Custom SQL query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column. Each group is evaluated as a separate series. For example, the following query stores each distinct `region` value alongside its count:
 
@@ -122,7 +122,7 @@ WHERE status = 'FAILED'
 GROUP BY region
 ```
 
-Grouping by a column that contains sensitive data, such as `email` or `user_id`, sends those values to Datadog. To avoid this, group only by non-sensitive columns, or apply a column mask so the service principal reads masked values.
+If you group by a column that contains sensitive data, such as `email` or `user_id`, those values are sent to Datadog. To avoid this, group only by non-sensitive columns, or apply a column mask so the service principal reads masked values.
 
 ### How do you limit what the service principal can read?
 
