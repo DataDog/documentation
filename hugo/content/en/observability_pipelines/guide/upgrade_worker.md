@@ -145,6 +145,10 @@ Worker version 2.21.0 gives you access to the following:
 
 #### New features
 
+- For metrics pipelines:
+    - The [Prometheus source][59] is now available.
+    - The [Prometheus destination][60] is now available.
+    - The [OpenTelemetry destination][61] is now available.
 - The Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage) now support a configurable `compression` option (`gzip` or `zstd`).
 - The Remap to OCSF processor now includes:
     - The AWS Config Rules OCSF mapping.
@@ -901,3 +905,6 @@ Worker version 2.7.0 gives you access to the following:
 [56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
 [57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
 [58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
+[59]: /observability_pipelines/sources/prometheus/
+[60]: /observability_pipelines/destinations/prometheus/
+[61]: /observability_pipelines/destinations/opentelemetry/metrics/
