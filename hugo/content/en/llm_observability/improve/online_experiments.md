@@ -24,7 +24,7 @@ Online Experiments compare multiple versions of an LLM application or agent on l
 
 Use Online Experiments to validate a change, such as a new model, prompt, or tool, against real users after you test it offline.
 
-Setting up an Online Experiment involves the following steps:
+Setting up an online experiment involves the following steps:
 
 1. Create a [Datadog feature flag][14].
 1. Evaluate the flag in your application and run the assigned variant.
