@@ -64,7 +64,21 @@ Some flags are intentionally long-lived, such as kill switches or permission gat
 
 ### Dismiss for 30 days
 
-If a flag is temporarily inactive or cleanup is intentionally deferred, select {{< ui >}}Dismiss for 30 days{{< /ui >}} to silence the staleness indicator. The flag is re-evaluated for staleness after 30 days, so you do not need to manually reverse the dismissal.
+If a flag is temporarily inactive or cleanup is intentionally deferred, select {{< ui >}}Dismiss for 30 days{{< /ui >}} to silence the staleness indicator. The dismissal expires automatically after 30 days, regardless of the organization's staleness window. The flag must still meet the staleness criteria before the indicator returns.
+
+## Configure the staleness window
+
+A single staleness window applies to all temporary flags in your organization. The same value applies to all three detection signals and the grace period after flag creation or updates. It is not a per-flag or per-environment setting.
+
+1. Navigate to [**Feature Flags > Settings > Stale Flag Detection**][2].
+2. Enter a whole number from **1 to 3650** days. The default is **30 days**.
+3. Click **Save**.
+
+For example, set the window to 14 days to identify inactive flags sooner. Set it to 60 days to allow more time before flags become eligible for cleanup. To return to the default window, enter **30** and click **Save**.
+
+Datadog refreshes evaluation and activity signals daily. A flag's staleness status is based on the configured window and the latest available signals. Changing the window can affect a flag's status before the next signal refresh.
+
+Changing the window does not disable stale detection or change the 30-day dismissal duration. To exclude an individual flag from automatic detection, mark it as permanent.
 
 ## Permissions
 
@@ -75,3 +89,4 @@ The `FeatureFlagConfigWrite` permission is required to mark a flag as permanent.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/feature-flags
+[2]: https://app.datadoghq.com/feature-flags/settings/stale-flag-detection
