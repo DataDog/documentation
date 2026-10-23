@@ -20,4 +20,5 @@ aliases:
   {{< image-card href="ddprof/" src="integrations_logos/rust.png" alt="Rust" >}}
   {{< image-card href="ddprof/" src="integrations_logos/c.png" alt="C" >}}
   {{< image-card href="ddprof/" src="integrations_logos/cpp.png" alt="C++" >}}
+  {{< image-card href="full_host/" src="integrations_logos/otel.png" alt="Full-Host Profiler" >}}
 {{< /card-grid >}}
