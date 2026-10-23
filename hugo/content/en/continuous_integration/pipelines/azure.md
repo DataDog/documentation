@@ -157,7 +157,7 @@ Datadog creates a step for each step in an Azure Pipelines job. Each step appear
 
 Steps require the Datadog Integration setup method. No additional configuration is required: after you enable CI Visibility for an organization or project, Datadog collects steps automatically. Steps are not available with Service Hook Subscriptions.
 
-<div class="alert alert-warning">Datadog retrieves steps through the Azure DevOps API, which enforces <a href="https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops">rate limits</a>. Steps are collected on a best-effort basis, so organizations with a high volume of pipeline executions may have some executions without steps. Missing steps are not backfilled. Pipeline, stage, and job data is not affected.</div>
+<div class="alert alert-warning">Datadog retrieves steps through the Azure DevOps API, which enforces <a href="https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops">rate limits</a>. Steps are collected on a best-effort basis, so organizations with a high volume of pipeline runs may be missing steps for some executions. Missing steps are not backfilled. Pipeline, stage, and job data is not affected.</div>
 
 ## Advanced configuration
 
