@@ -40,10 +40,6 @@ Incidents carry three timestamp attributes that influence analytics:
 * Detection time (`detected`): When the underlying resource from which the incident was declared was created. For example, if a monitor alert fires at 2 p.m. and the incident is declared at 2:30 p.m., the detected time is 2 p.m. If the incident wasn't declared from another Datadog resource, `detected` is the same as `declared`.
 * Resolution time (`resolved`): When the incident was most recently resolved.
 
-View the five incident duration metrics in the incident's **Timestamps** section. A duration is hidden if it cannot be calculated or is zero or negative. These durations use timestamp overrides when present.
-
-To include these durations and historical averages in a postmortem, use [incident duration variables][12].
-
 ### Measures
 
 Incident Management reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
