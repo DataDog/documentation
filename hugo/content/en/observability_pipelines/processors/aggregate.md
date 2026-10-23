@@ -48,7 +48,7 @@ A metric with a timestamp of 12:00:07 always goes into the first window, as long
 
 Grouping metrics by timestamp is useful for destinations that use the metric timestamp as a key. For example, Datadog Metrics overwrites earlier values that have the same timestamp. Grouping metrics by timestamps prevents distinct samples from overwriting one another.
 
-### Late metrics
+#### Late metrics
 
 The **Allowed lateness** grace period starts at a window's end time and is based on the Worker's system clock. After the grace period, the window stops accepting metrics, the aggregated metrics are sent, and the window is permanently closed. Any late metrics for that window are dropped and counted in the `pipelines.component_discarded_events_total` metric. See [Pipeline Usage Metrics][3] for more information.
 
