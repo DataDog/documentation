@@ -1,0 +1,33 @@
+// Keep Language as pills while leaving the Java-only Runtime filter as a dropdown.
+html[data-relpermalink$="/profiler/enabling/"] {
+  #cdoc-filters-pill-menu {
+    white-space: normal;
+
+    &.cdoc-offscreen {
+      position: static;
+      left: auto;
+      visibility: visible;
+    }
+
+    .cdoc-pills-container {
+      display: block;
+      margin-right: 0;
+
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+
+  #cdoc-filters-dropdown-menu {
+    &.cdoc-offscreen {
+      position: static;
+      left: auto;
+      visibility: visible;
+    }
+
+    .cdoc-dropdown-container:first-child {
+      display: none;
+    }
+  }
+}

@@ -38,6 +38,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/home";
 @import "pages/glossary";
 @import "pages/reference";
+@import "pages/profiler-enabling";
 
 // Components
 @import 'base/iconfont'; // imported from websites-modules
