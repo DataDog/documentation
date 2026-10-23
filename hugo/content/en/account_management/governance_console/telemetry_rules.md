@@ -29,8 +29,6 @@ Telemetry rules are in Preview. If you see an issue or want to propose a new fea
 
 Telemetry rules help admins govern characteristics of their metrics, logs, spans, and events from the Governance Console, to reduce costs for unwanted telemetry. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry.
 
-<div class="alert alert-warning">When <strong>Filter data at ingest</strong> is enabled for an Events rule, Datadog drops in-scope events that do not meet the rule's requirements at intake. For example, a rule that requires the <code>service</code> tag drops events in its scope that lack that tag. If events appear to be missing, check Telemetry Rules in the Governance Console for filtering rules that apply to them.</div>
-
 ## Prerequisites
 
 You need the `governance_console_read` permission to view telemetry rules. To create, edit, or delete rules, you need the `telemetry_rules_write` permission or the Datadog Admin role. To enable filtering on a rule, you need the `telemetry_rules_enforcement_write` permission.
