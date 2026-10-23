@@ -27,9 +27,14 @@ Worker version 2.24.1 gives you access to the following:
 
 #### Security
 
-- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were [reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted. This applies to components that use rustls.
-<br><br>Components that use OpenSSL, the Amazon Security Lake destination's AWS account lookup, and the Google Cloud Pub/Sub source use the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3`, which protects these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
-<br><br>For APT and RPM package installations, distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were [reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted. This applies to components that use rustls. The following components use the system CA trust store instead:
+    - Components that use OpenSSL
+    - The Amazon Security Lake destination's AWS account lookup
+    - The Google Cloud Pub/Sub source
+
+    To protect components that use the system CA trust store:
+    - **Container image**: The Worker container image distrusts the affected `emSign ECC Root CA - G3`. This protection does not apply if you mount your own CA bundle or set `SSL_CERT_FILE`.
+    - **APT and RPM packages**: Distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
 
 #### Fixes
 
