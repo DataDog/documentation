@@ -13076,6 +13076,7 @@ paths:
       summary: List all AWS integrations
       tags:
         - AWS Integration
+      x-displayName: List all AWS accounts
       x-menu-order: 6
       x-permission:
         operator: OR
@@ -13132,6 +13133,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
+      x-displayName: Add an AWS account
       x-menu-order: 8
       x-permission:
         operator: OR
@@ -17199,6 +17201,7 @@ tags:
       page](https://docs.datadoghq.com/account_management/api-app-keys/) in the
       documentation.
     name: Authentication
+    x-displayName: API Keys
   - description: |-
       Interact with your dashboard lists through the API to
       organize, find, and share all of your dashboards with your team and

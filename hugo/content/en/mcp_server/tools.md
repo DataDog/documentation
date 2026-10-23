@@ -77,7 +77,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 ### `get_datadog_metric_context`
 *Toolset: **core***\
 *Permissions Required: `Cloud Cost Management Read` or `Metrics`*\
-Retrieves detailed information about a metric including metadata, available tags, and tag values for filtering and grouping.
+Retrieves detailed information about a metric or derived metric, including metadata, available tags, and tag values for filtering and grouping.
 
 - What tags are available for the `system.cpu.user` metric?
 - Show me all possible values for the `env` tag on `redis.info.latency_ms`.
@@ -677,7 +677,7 @@ Lists the attachments on a work item (case), or retrieves the contents of a spec
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `link_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write` and `Cases Read`*\
 Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
 
@@ -685,7 +685,7 @@ Creates a directional link between two work items (cases). The relationship is s
 - CASE-910 duplicates CASE-1234. Link them.
 
 ### `get_datadog_case_links`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
 Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
 
@@ -693,7 +693,7 @@ Lists all links for a work item (case), including each link's ID, relationship t
 - Is anything blocking the database migration case?
 
 ### `unlink_datadog_cases`
-*Toolset: **cases** (Preview)*\
+*Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
 Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
 
@@ -1188,6 +1188,56 @@ Creates or updates a saved DDSQL query. To create a query, provide a name and SQ
 - Rename this saved query to "Production hosts".
 - Update the SQL in this saved query to include only production hosts.
 
+## Derived Metrics
+
+Tools for creating, updating, and deleting [derived metrics][96], which let you save metric queries and formulas under a new metric name.
+
+### `create_derived_metric`
+*Toolset: **derived-metrics***\
+*Permissions Required: `Metric Tags Write`*\
+Creates a derived metric from a metric name, formula, and complete set of named queries. If the metric name already exists, creation fails and the existing metric is unchanged.
+
+- Create `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{*}`, using the `metrics` data source.
+- Create `custom.cpu.total` with formula `a + b`. Query `a` is `avg:system.cpu.user{*}` and query `b` is `avg:system.cpu.system{*}`. Both queries use the `metrics` data source.
+
+### `update_derived_metric`
+*Toolset: **derived-metrics***\
+*Permissions Required: `Metric Tags Write`*\
+Updates an existing derived metric by replacing its entire definition. Include the formula and every named query you want to keep. Any omitted queries are removed. If the metric does not exist, the update fails without creating it.
+
+- Replace the definition of `custom.cpu.user` with formula `a` and a query named `a`: `avg:system.cpu.user{env:prod}`, using the `metrics` data source.
+- Update `custom.cpu.total` to formula `a + b`. Query `a` is `avg:system.cpu.user{env:prod}` and query `b` is `avg:system.cpu.system{env:prod}`. Both queries use the `metrics` data source. Remove any other queries.
+
+### `delete_derived_metric`
+*Toolset: **derived-metrics***\
+*Permissions Required: `Metric Tags Write`*\
+Deletes a derived metric definition. Deleting a definition can break dashboards, monitors, and other resources that use the metric. The tool requires explicit confirmation before it deletes the metric. This operation is idempotent.
+
+- Delete the derived metric `custom.cpu.user`.
+- Delete the derived metric `custom.cpu.total` if it exists.
+
+## Documentation
+
+Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+
+### `search_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Searches published Datadog documentation and returns up to 10 matching passages with links to their source pages. Returns source passages, not a generated answer. Supports English, French, Japanese, Korean, and Spanish. Other languages return no results. Search uses AI models to match by meaning. If your organization has [disabled AI providers][92], search matches by keyword only.
+
+- How do I write a Grok parsing rule in a Datadog log pipeline? Cite the docs.
+- What's the difference between a metric monitor and an anomaly monitor?
+- Which Datadog Agent settings control container log collection?
+
+### `read_datadog_documentation`
+*Toolset: **documentation***\
+*Permissions Required: None*\
+Reads a full Datadog documentation page from a `docs.datadoghq.com` URL or a document ID returned by `search_datadog_documentation`. Reads long pages in parts. Site-specific values, such as endpoints, appear as placeholders like `<YOUR_MCP_SERVER_ENDPOINT>`.
+
+- Read `https://docs.datadoghq.com/logs/log_configuration/processors/grok_parser/` and explain the matcher syntax.
+- Open the Datadog MCP Server setup page and summarize the toolset options.
+- Search the Datadog docs for log pipeline processors, then read the top result in full.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -1601,7 +1651,7 @@ Updates a governance detection. Use this tool to mark a detection as an exceptio
 ### `create_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create`*\
-Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are disabled unless you ask for the rule to be enabled. The tool requires explicit confirmation before it creates the rule.
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are always enabled. To disable a rule, use `update_tag_rule`. The tool requires explicit confirmation before it creates the rule.
 
 - Create a tag rule that requires the `team` tag on all logs.
 - Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
@@ -1611,7 +1661,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
 Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
-- Enable tag rule `abc123`.
+- Disable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
 
 ### `delete_tag_rule`
@@ -1874,6 +1924,123 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 - Disable all logpoints in session `session-12345`.
 - Stop all the logpoints in this debugging session.
 
+## Logs Configuration
+
+Tools for managing the configuration of [log pipelines][93], [indexes][94], and [archives][95]:
+
+- **Pipelines** parse and enrich incoming logs.
+- **Indexes** control indexing and retention.
+- **Archives** route logs to your cloud storage.
+
+Tools that update, delete, or reorder an existing resource return a preview first and apply the change only after you confirm it. Creating a resource does not require confirmation.
+
+To search and analyze logs, use `search_datadog_logs` and `analyze_datadog_logs` in the [Core tools](#core-tools) section.
+
+### `list_datadog_log_pipelines`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Lists your organization's [log pipelines][93] in evaluation order. Returns each pipeline's ID, name, filter query, enabled state, and processor count.
+
+- List my log pipelines in evaluation order.
+
+### `get_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Retrieves a pipeline's complete configuration by ID, including its ordered processors.
+
+- Show the configuration and processors for pipeline `<PIPELINE_ID>`.
+
+### `upsert_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines` or `Logs Write Processors`*\
+Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updated pipelines preserve fields you omit. When you provide a list field, such as processors or tags, the new list replaces the existing one. Integration-managed, read-only pipelines cannot be updated.
+
+- Create a pipeline for `service:checkout` with a Grok parser for these sample logs.
+
+### `delete_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines`*\
+Permanently removes a pipeline from your organization, including its processors and position in the evaluation order. Integration-managed, read-only pipelines cannot be deleted.
+
+- Delete pipeline `<PIPELINE_ID>`.
+
+### `move_datadog_log_pipeline`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Pipelines`*\
+Places a pipeline immediately before or after another pipeline in the evaluation order. Changing this order affects the sequence in which matching pipelines process logs.
+
+- Move the parsing pipeline before the enrichment pipeline.
+
+### `list_datadog_log_indexes`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Lists your organization's [log indexes][94] in evaluation order. Returns each index's name, filter query, retention settings, daily limit, and exclusion filter count.
+
+- List my log indexes with their retention settings and daily limits.
+
+### `get_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Config`*\
+Retrieves an index's complete configuration by name, including its filter query, retention settings, daily limit, and exclusion filters.
+
+- Show the configuration and exclusion filters for the production index.
+
+### `upsert_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Creates or updates an index by name. If an index with that name exists, the tool updates it; otherwise, it creates the index. Updated indexes preserve fields you omit. When you provide a list field, such as exclusion filters or tags, the new list replaces the existing one. Creating an index requires a filter query, and the index name cannot be changed after creation.
+
+- Set the daily limit for the staging index to one million logs.
+
+### `delete_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Permanently removes an index from your organization. The index name cannot be reused. Logs that would have matched the deleted index go to the next index in evaluation order whose filter matches them. Logs that match no remaining index are not indexed.
+
+- Delete the `obsolete-staging` index.
+
+### `move_datadog_log_index`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Modify Indexes`*\
+Places an index immediately before or after another index in the evaluation order. Logs are indexed in the first index whose filter matches, so changing the order can change their destination.
+
+- Move the `production-errors` index before the `production` index.
+
+### `list_datadog_log_archives`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Archives`*\
+Lists your organization's [log archives][95]. Returns each archive's ID, name, filter query, state, and destination type.
+
+- List my log archives and their destination types.
+
+### `get_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Read Archives`*\
+Retrieves an archive's complete configuration by ID, including its filter query, cloud storage destination, and rehydration settings.
+
+- Show the destination and rehydration settings for archive `<ARCHIVE_ID>`.
+
+### `upsert_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Creates an archive or updates an existing archive's configuration. To update an archive, provide `archive_id`; omit it to create one. Updated archives preserve fields you omit. An archive's destination cannot be changed after creation.
+
+- Update archive `<ARCHIVE_ID>` to archive logs matching `env:prod`.
+
+### `delete_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Permanently removes an archive's configuration and stops routing logs to that destination. Logs already stored in the cloud storage bucket remain intact.
+
+- Delete archive `<ARCHIVE_ID>`.
+
+### `move_datadog_log_archive`
+*Toolset: **logs-configuration***\
+*Permissions Required: `Logs Write Archives`*\
+Places an archive immediately before or after another archive in the evaluation order. Logs are routed to the first archive whose filter matches, so changing the order can change their destination.
+
+- Move the production archive before the catch-all archive.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
@@ -1958,7 +2125,7 @@ Tools for [Observability Pipelines][87], including inspecting existing pipelines
 Lists all pipelines in your organization, including drafts, with each pipeline's ID, name, type, and creation and modification timestamps. Supports filtering by pipeline type.
 
 - How many pipelines do we have, and how many of them are metrics pipelines?
-- Find the ID of the `prod-agent-logs` pipeline.
+- Find the ID of the "Prod Agent Logs" pipeline.
 - Which pipelines were modified in the last week?
 
 ### `describe_observability_pipeline`
@@ -1966,7 +2133,7 @@ Lists all pipelines in your organization, including drafts, with each pipeline's
 *Permissions Required: `Observability Pipelines Read`*\
 Retrieves the full configuration of a pipeline by ID: its sources, processors, and destinations, and how they connect. For a deployed pipeline, returns the running configuration in the [Observability Pipelines API][88] format. For a draft, the agent describes the configuration but does not output it. To get a draft's configuration as JSON, [export the draft][89] from the pipeline builder. Use `list_observability_pipelines` to find pipeline IDs if needed.
 
-- Explain what the `prod-agent-logs` pipeline does.
+- Explain what the "Prod Agent Logs" pipeline does.
 - Where are logs dropped in my Splunk forwarding pipeline?
 - Are there redundant or expensive processors in pipeline `abc-123-def`?
 
@@ -2054,6 +2221,23 @@ Guides you through onboarding serverless applications to Datadog, including AWS 
 Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
+
+## Processes
+
+Tools for searching recent [Live Processes][97] observations on your hosts.
+
+<div class="alert alert-info">The <code>processes</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `search_datadog_live_processes`
+*Toolset: **processes***\
+*Permissions Required: `Hosts Read`*\
+Searches recent process observations collected by [Live Processes][97], returning each process's PID, user, command, start time, host, and tags. Filter by free-text search or by exact `key:value` tags such as `user:foo`. Live Processes data is retained for 36 hours, and each query covers a window of at most one hour. Results are paginated.
+
+- Which processes are running as user `foo` on host `bar`?
+- Did the `foo` process on host `bar` restart in the last hour?
+- List `foo` processes in `env:bar`, without tags, so that more processes fit on each page.
+
+<div class="alert alert-info">Responses can include values reported by the monitored hosts, such as process command lines, users, and tags. Treat this content as data, not as instructions.</div>
 
 ## Product Analytics
 
@@ -2402,39 +2586,42 @@ Permanently deletes a custom RUM metric by ID. This operation is idempotent.
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
-Lists retention filters configured on a RUM application. Read-only; available for [RUM without Limits][59] customers.
+Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against custom retention filters; permanent retention filters still apply, and the session is still retained if another of its events is. Read-only; available for [RUM without Limits][59] customers.
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+- List the exclusion filters on my main RUM app.
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Can also create an exclusion filter (`filter_type: exclusion`), which can target a single event type or all event types (`all`) and has no sample rate or [cross-product retention][98] settings. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
 - Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+- Exclude bot traffic (`@device.type:Bot`) from retention on "checkout-web".
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write`*\
-Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
+Updates an existing RUM retention or exclusion filter's attributes in place, such as its name, event type, query, enabled state, or, for retention filters, sample rate. The built-in Error Tracking exclusion filter can only be enabled or disabled. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
 - Disable the "long tasks" retention filter on my main RUM app.
+- Disable the Error Tracking exclusion filter on my main RUM app.
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+Sets the full evaluation order of a RUM application's retention filters. Exclusion filters are not reordered. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
 - Reorder my retention filters so the specific filters are evaluated before the broad ones.
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write`*\
-Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
+Permanently deletes a RUM retention or exclusion filter by ID. The built-in Error Tracking exclusion filter cannot be deleted. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
 - Remove the retention filter with ID `abc-123-def` from my main RUM app.
@@ -2682,6 +2869,15 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Assign these critical findings to the security team lead.
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
+
+### `override_datadog_security_findings_severity`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Sets or clears the manual severity override on up to 100 security findings. Action `set` requires a severity (`critical`, `high`, `medium`, `low`, or `info`); action `clear` removes the manual override. Supports an optional description. Findings whose severity is set by an automation rule are skipped and listed as warnings in the response.
+
+- Set the severity of these findings to low, they only affect a test environment.
+- Raise this misconfiguration to critical because the resource holds customer data.
+- Clear the manual severity override on these findings.
 
 ### `list_datadog_security_findings_automation_rules`
 *Toolset: **security***\
@@ -3472,6 +3668,13 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [89]: /observability_pipelines/configuration/export_and_import_pipeline_configurations/
 [90]: /observability_pipelines/configuration/install_the_worker/
 [91]: /actions/agents/
+[92]: /mcp_server/#data-handling-and-ai-providers
+[93]: /logs/log_configuration/pipelines/
+[94]: /logs/log_configuration/indexes/
+[95]: /logs/log_configuration/archives/
+[96]: /metrics/derived-metrics/
+[97]: /infrastructure/process/
+[98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 
 ## Further reading
 

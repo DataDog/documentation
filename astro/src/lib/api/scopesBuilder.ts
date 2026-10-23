@@ -26,6 +26,11 @@
 import type { OpenAPIV3 } from "openapi-types";
 import { API_VERSIONS, getOpenApiDocument } from "./specParser";
 import { toCategorySlug, toOperationSlug, toSlug } from "./categorySlug";
+import {
+  collectDisplayNames,
+  toOperationKey,
+  type DisplayNames,
+} from "./displayNames";
 
 export interface ScopeEndpoint {
   summary: string;
@@ -91,13 +96,15 @@ export function toHugoScopeAnchor(tag: string): string {
 
 /** Specs are passed in v1, v2 order. */
 export function buildScopeGroups(specs: OpenAPIV3.Document[]): ScopeGroup[] {
-  const scopesByName = collectScopesFromSpecs(specs);
+  const displayNames = collectDisplayNames(specs);
+  const scopesByName = collectScopesFromSpecs(specs, displayNames);
   const tagGroups = groupTagsByOverlappingScopes(scopesByName);
-  return buildGroupsWithAnchors(tagGroups, scopesByName);
+  return buildGroupsWithAnchors(tagGroups, scopesByName, displayNames);
 }
 
 function collectScopesFromSpecs(
   specs: OpenAPIV3.Document[],
+  displayNames: DisplayNames,
 ): Map<string, CollectedScope> {
   const scopesByName = new Map<string, CollectedScope>();
 
@@ -114,8 +121,12 @@ function collectScopesFromSpecs(
         if (!tag) continue;
 
         const summary = operation.summary ?? "";
+        // The label may be relabeled; the link always targets the canonical slug.
         const endpoint: ScopeEndpoint = {
-          summary,
+          summary:
+            displayNames.operationSummariesByKey.get(
+              toOperationKey(tag, summary),
+            ) ?? summary,
           href: `/api/latest/${toCategorySlug(tag)}/#${toOperationSlug(summary)}`,
         };
 
@@ -191,8 +202,11 @@ function groupTagsByOverlappingScopes(
 function buildGroupsWithAnchors(
   tagsByHeading: Map<string, string[]>,
   scopesByName: Map<string, CollectedScope>,
+  displayNames: DisplayNames,
 ): ScopeGroup[] {
   const scopeNamesByTag = groupScopeNamesByTag(scopesByName);
+  const tagLabel = (tag: string) =>
+    displayNames.categoryNamesBySlug.get(toCategorySlug(tag)) ?? tag;
   const anchoredTags = new Set<string>();
 
   return sortedKeys(Object.fromEntries(tagsByHeading)).map((heading) => {
@@ -204,7 +218,8 @@ function buildGroupsWithAnchors(
     newTags.forEach((tag) => anchoredTags.add(tag));
 
     return {
-      heading,
+      // Grouping and ordering use canonical tags; only the label is relabeled.
+      heading: tags.map(tagLabel).join(", "),
       anchors: newTags.flatMap(anchorsForTag),
       scopes: scopeNames.map((name) => {
         const scope = scopesByName.get(name)!;

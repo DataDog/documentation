@@ -49,6 +49,12 @@ import {
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
 import { toCategorySlug, toOperationSlug } from "./categorySlug";
+import {
+  getDisplayNames,
+  relabelCaption,
+  resolveLabel,
+  toOperationKey,
+} from "./displayNames";
 import { toScopeAnchor } from "./scopesBuilder";
 import {
   getCodeExamplesForOperation,
@@ -301,6 +307,13 @@ function getOpSlug(op: RawOperation): string {
   return toOperationSlug(op.operation.summary ?? "");
 }
 
+/** The operation's `x-displayName`, shared across its version variants. */
+function getDisplaySummary(op: RawOperation): string | undefined {
+  return getDisplayNames().operationSummariesByKey.get(
+    toOperationKey(op.primaryTag, op.operation.summary ?? ""),
+  );
+}
+
 /** Compare versions newest-first: `v2 < v1` returns -1. */
 function compareVersionsNewestFirst(a: ApiVersion, b: ApiVersion): number {
   return versionOrdinal(b) - versionOrdinal(a);
@@ -400,7 +413,7 @@ function collectCategoryMetadataFromSpecTags(
   for (const tag of tags) {
     const slug = toCategorySlug(tag.name);
     const translated = translateTag(overlay, slug, {
-      name: tag.name,
+      name: getDisplayNames().categoryNamesBySlug.get(slug) ?? tag.name,
       description: tag.description,
     });
     result.push({
@@ -429,7 +442,9 @@ function collectImplicitCategoryMetadataFromOperations(
     seen.add(op.categorySlug);
     const overlay = getTranslationOverlay(op.version, lang);
     const translated = translateTag(overlay, op.categorySlug, {
-      name: op.primaryTag,
+      name:
+        getDisplayNames().categoryNamesBySlug.get(op.categorySlug) ??
+        op.primaryTag,
     });
     result.push({
       name: translated.name,
@@ -486,7 +501,11 @@ function buildOperationStub(
   const spec = getOpenApiDocument(latest.version);
   return {
     operationId,
-    summary: action.summary ?? latest.operation.summary ?? "",
+    summary: resolveLabel(
+      action.summary,
+      getDisplaySummary(latest),
+      latest.operation.summary ?? "",
+    ),
     slug: getOpSlug(latest),
     menuOrder: Number.isFinite(menuOrder) ? menuOrder : 999,
     versions: group.map((op) => op.version),
@@ -518,7 +537,12 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const operationId: string = op.operation.operationId;
   const action = translateAction(overlay, operationId);
 
-  const summary: string = action.summary ?? op.operation.summary ?? "";
+  const displaySummary = getDisplaySummary(op);
+  const summary: string = resolveLabel(
+    action.summary,
+    displaySummary,
+    op.operation.summary ?? "",
+  );
   const description: string =
     action.description ?? op.operation.description ?? "";
   const deprecated: boolean = op.operation.deprecated === true;
@@ -550,6 +574,8 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     params.split,
     requestBody?.examples?.[0]?.value,
     summary,
+    // Matches Hugo: only English SDK captions are relabeled.
+    lang === DEFAULT_LOCALE ? displaySummary : undefined,
   );
 
   return {
@@ -669,6 +695,7 @@ function buildCodeExamplesForOperation(
   params: SplitParams,
   requestBodyJson: string | undefined,
   summary: string,
+  sdkCaptionLabel: string | undefined,
 ): CodeExampleSet[] {
   const curlByRegion = buildCurlByRegion(
     spec,
@@ -697,7 +724,11 @@ function buildCodeExamplesForOperation(
     op.operation.operationId,
     op.version,
     op.categorySlug,
-  ).map((set) => withRunInstructions(spec, op.operation, set));
+  )
+    .map((set) =>
+      withRelabeledCaptions(set, op.operation.summary ?? "", sdkCaptionLabel),
+    )
+    .map((set) => withRunInstructions(spec, op.operation, set));
 
   return [
     {
@@ -714,6 +745,25 @@ function buildCodeExamplesForOperation(
     },
     ...sdkExamples,
   ];
+}
+
+function withRelabeledCaptions(
+  set: CodeExampleSet,
+  canonicalSummary: string,
+  displayName: string | undefined,
+): CodeExampleSet {
+  if (!displayName) return set;
+  return {
+    ...set,
+    entries: set.entries.map((entry) => ({
+      ...entry,
+      description: relabelCaption(
+        entry.description,
+        canonicalSummary,
+        displayName,
+      ),
+    })),
+  };
 }
 
 function withRunInstructions(
