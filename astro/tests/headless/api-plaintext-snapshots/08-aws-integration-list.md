@@ -1,12 +1,12 @@
 ---
-title: List all AWS integrations
+title: List all AWS accounts
 description: Get a list of AWS Account Integration Configs.
-breadcrumbs: Docs > API > List all AWS integrations
+breadcrumbs: Docs > API > List all AWS accounts
 ---
 
 > For the complete documentation index, see [llms.txt](https://docs.datadoghq.com/llms.txt).
 
-# List all AWS integrations
+# List all AWS accounts
 
 ## v2 (latest)
 

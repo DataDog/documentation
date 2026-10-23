@@ -1,11 +1,11 @@
 {
   "slug": "list-all-aws-integrations",
-  "summary": "List all AWS integrations",
+  "summary": "List all AWS accounts",
   "deprecated": false,
   "variants": [
     {
       "operationId": "ListAWSAccounts",
-      "summary": "List all AWS integrations",
+      "summary": "List all AWS accounts",
       "slug": "list-all-aws-integrations",
       "method": "GET",
       "path": "/api/v2/integration/aws/accounts",
@@ -527,7 +527,7 @@
           "label": "Curl",
           "entries": [
             {
-              "description": "List all AWS integrations curl example",
+              "description": "List all AWS accounts curl example",
               "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v2/integration/aws/accounts\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\"",
               "syntax": "bash",
               "regionVariants": {
@@ -698,7 +698,7 @@
     },
     {
       "operationId": "ListAWSAccounts",
-      "summary": "List all AWS integrations",
+      "summary": "List all AWS accounts",
       "slug": "list-all-aws-integrations",
       "method": "GET",
       "path": "/api/v1/integration/aws",
@@ -948,7 +948,7 @@
           "label": "Curl",
           "entries": [
             {
-              "description": "List all AWS integrations curl example",
+              "description": "List all AWS accounts curl example",
               "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.${DD_SITE}/api/v1/integration/aws\" \\\n-H \"Accept: application/json\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\"",
               "syntax": "bash",
               "regionVariants": {

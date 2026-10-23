@@ -91,3 +91,72 @@ describe("viewsBuilder snapshots", () => {
     }
   });
 });
+
+describe("viewsBuilder x-displayName labels", () => {
+  it("labels a category without changing its slug", async () => {
+    const category = await getCategoryViewBySlug("authentication");
+    expect(category?.name).toBe("API Keys");
+    expect(category?.slug).toBe("authentication");
+  });
+
+  it("applies a v1-only operation label to every variant", async () => {
+    const view = await getOperationView(
+      "aws-integration",
+      "list-all-aws-integrations",
+    );
+    expect(view?.slug).toBe("list-all-aws-integrations");
+    expect(view?.summary).toBe("List all AWS accounts");
+    expect(view?.variants.map((variant) => variant.version)).toEqual([
+      "v2",
+      "v1",
+    ]);
+    for (const variant of view?.variants ?? []) {
+      expect(variant.summary).toBe("List all AWS accounts");
+      expect(variant.slug).toBe("list-all-aws-integrations");
+      expect(variant.operationId).toBe("ListAWSAccounts");
+    }
+  });
+
+  it("prefers the v2 label when versions disagree", async () => {
+    const view = await getOperationView(
+      "aws-integration",
+      "create-an-aws-integration",
+    );
+    expect(view?.summary).toBe("Connect an AWS account");
+    for (const variant of view?.variants ?? []) {
+      expect(variant.summary).toBe("Connect an AWS account");
+    }
+  });
+
+  it("labels the category's operation stub with a canonical slug", async () => {
+    const category = await getCategoryViewBySlug("aws-integration");
+    const stub = category?.operations.find(
+      (operation) => operation.operationId === "ListAWSAccounts",
+    );
+    expect(stub?.summary).toBe("List all AWS accounts");
+    expect(stub?.slug).toBe("list-all-aws-integrations");
+  });
+
+  it("relabels code example captions that contain the canonical summary", async () => {
+    const view = await getOperationView(
+      "aws-integration",
+      "create-an-aws-integration",
+    );
+    const v2 = view?.variants.find((variant) => variant.version === "v2");
+    const descriptionsByLanguage = Object.fromEntries(
+      (v2?.codeExamples ?? []).map((set) => [
+        set.language,
+        set.entries.map((entry) => entry.description),
+      ]),
+    );
+    expect(descriptionsByLanguage.curl).toEqual([
+      "Connect an AWS account curl example",
+    ]);
+    expect(descriptionsByLanguage.go).toEqual(
+      expect.arrayContaining([
+        'Connect an AWS account returns "AWS Account object" response',
+        'Create an AWS account returns "AWS Account object" response',
+      ]),
+    );
+  });
+});

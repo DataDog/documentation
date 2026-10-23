@@ -218,7 +218,7 @@
     },
     {
       "operationId": "ListAWSAccounts",
-      "summary": "List all AWS integrations",
+      "summary": "List all AWS accounts",
       "slug": "list-all-aws-integrations",
       "menuOrder": 6,
       "versions": [
@@ -261,7 +261,7 @@
     },
     {
       "operationId": "CreateAWSAccount",
-      "summary": "Create an AWS integration",
+      "summary": "Connect an AWS account",
       "slug": "create-an-aws-integration",
       "menuOrder": 8,
       "versions": [
