@@ -11,7 +11,7 @@ further_reading:
   CCM Commitment Programs supports the following cloud commitments:
   <ul>
     <li><strong>AWS:</strong> Reserved Instances and Savings Plans for EC2, RDS, and ElastiCache.</li>
-    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services, with <a href="#azure-databricks-pre-purchase-plans">pre-purchase plans available for Azure Databricks</a>. Viewing utilization and unused costs for reservations and savings plans requires <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
+    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services, with pre-purchase plans available for Azure Databricks. Viewing utilization and unused costs for reservations and savings plans requires <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
     <li><strong>Google Cloud:</strong> Compute flexible committed use discounts (CUDs).</li>
   </ul>
 </div>
@@ -138,19 +138,6 @@ Results appear in two sections:
 - {{< ui >}}Estimated Impact{{< /ui >}}: Compares your key metrics before and after the simulated commitment, alongside a {{< ui >}}Simulated Cost{{< /ui >}} chart over the selected period.
 - {{< ui >}}Estimated Service Breakdown{{< /ui >}}: Breaks down the estimated cost and coverage by AWS service.
 
-<!-- Databricks is a product name. -->
-<!-- vale Datadog.headings = NO -->
-## Azure Databricks pre-purchase plans
-<!-- vale Datadog.headings = YES -->
-
-Track Azure Databricks pre-purchase plans using your existing Azure Cloud Cost Management setup. In [**Cloud Cost > Planning > Commitment Programs**][1], select Azure Databricks and a reporting period to review plans, balances, and expiration dates.
-
-- **Used** is the cost of usage paid for by the plan, from purchase through the end of the selected period.
-- **Remaining** is the purchase cost minus that cumulative used amount. Compare it with the expiration date to identify balances to use before the plan ends.
-- **Used in period** and **Realized savings in period** cover only the selected reporting period.
-
-If a plan is missing, check that its purchase is included in your [historical Azure cost data][6].
-
 ## Example use cases
 
 ### Identify underutilized commitments
@@ -197,4 +184,3 @@ If a plan is missing, check that its purchase is included in your [historical Az
 [3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
 [5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
-[6]: /cloud_cost_management/setup/azure/#getting-historical-data
