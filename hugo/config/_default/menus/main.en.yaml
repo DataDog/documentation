@@ -3366,7 +3366,7 @@ menu:
       url: infrastructure/basic/
       parent: infrastructure_heading
       weight: 55000
-      pre: host-map
+      pre: server
     - name: Containers
       url: containers/
       identifier: containers
