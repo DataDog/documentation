@@ -106313,6 +106313,11 @@ components:
             description: Name of a managed role to inherit permissions from.
             type: string
           type: array
+        team_count:
+          description: Number of teams with that role.
+          format: int64
+          readOnly: true
+          type: integer
         user_count:
           description: The user count.
           format: int32
@@ -219199,6 +219204,7 @@ paths:
                     data:
                       attributes:
                         name: developers
+                        team_count: 0
                       id: 00000000-0000-0000-0000-000000000004
                       type: roles
               schema:
