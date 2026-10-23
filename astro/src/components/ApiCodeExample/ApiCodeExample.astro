@@ -82,7 +82,13 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
                     <div
                       class={cl("api-code-example__accordion-header-content")}
                     >
-                      <span>{entry.description}</span>
+                      <span
+                        class={cl(
+                          "api-code-example__accordion-header-description",
+                        )}
+                      >
+                        {entry.description}
+                      </span>
                       <ExpandChevron
                         class={cl("api-code-example__accordion-icon")}
                       />
