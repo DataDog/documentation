@@ -133174,6 +133174,360 @@ components:
         meta:
           $ref: "#/components/schemas/TeamsHierarchyLinksResponseMeta"
       type: object
+    TeamHierarchyMember:
+      description: A user relationship to the requested team.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamHierarchyMemberAttributes"
+        id:
+          description: Relationship identifier containing the team UUID and user UUID.
+          example: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+          type: string
+        relationships:
+          $ref: "#/components/schemas/TeamHierarchyMemberRelationships"
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    TeamHierarchyMemberAttributes:
+      description: Membership attributes relative to the requested team.
+      properties:
+        direct_role:
+          description: "Role on the requested team: admin or member. Null for inherited members."
+          example: member
+          nullable: true
+          type: string
+        is_direct:
+          description: Whether the user belongs directly to the requested team.
+          example: true
+          type: boolean
+        provisioned_by:
+          description: Membership provisioner. Null for inherited members.
+          example: manual
+          nullable: true
+          type: string
+        provisioned_by_id:
+          description: Identifier supplied by the membership provisioner. Null when unavailable or for inherited members.
+          example: 00000000-0000-0000-0000-000000000003
+          nullable: true
+          type: string
+      required:
+        - is_direct
+        - direct_role
+        - provisioned_by
+        - provisioned_by_id
+      type: object
+    TeamHierarchyMemberIncluded:
+      description: An included user or the requested team, distinguished by resource type.
+      oneOf:
+        - $ref: "#/components/schemas/TeamHierarchyMemberUser"
+        - $ref: "#/components/schemas/TeamHierarchyMemberTeam"
+    TeamHierarchyMemberRelationships:
+      description: User and requested team linkage.
+      properties:
+        team:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamRelationship"
+        user:
+          $ref: "#/components/schemas/TeamHierarchyMemberUserRelationship"
+      required:
+        - user
+        - team
+      type: object
+    TeamHierarchyMemberTeam:
+      description: The requested team, included at most once. Descendant teams are not included.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamAttributes"
+        id:
+          description: UUID of the requested team.
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberTeamAttributes:
+      description: Available attributes of the requested team.
+      properties:
+        handle:
+          description: Handle of the team.
+          example: platform
+          type: string
+        name:
+          description: Name of the team.
+          example: Platform
+          type: string
+      type: object
+    TeamHierarchyMemberTeamData:
+      description: Team resource identifier.
+      properties:
+        id:
+          description: UUID of the team.
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberTeamRelationship:
+      description: Linkage to the requested team.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamData"
+      required:
+        - data
+      type: object
+    TeamHierarchyMemberTeamType:
+      default: teams
+      description: Requested team resource type.
+      enum:
+        - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+        - TEAMS
+    TeamHierarchyMemberType:
+      default: user_team_relationship
+      description: Team hierarchy membership resource type.
+      enum:
+        - user_team_relationship
+      example: user_team_relationship
+      type: string
+      x-enum-varnames:
+        - USER_TEAM_RELATIONSHIP
+    TeamHierarchyMemberUser:
+      description: A user included in the hierarchy members response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UserAttributes"
+        id:
+          description: UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/UsersType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamHierarchyMemberUserData:
+      description: User resource identifier.
+      properties:
+        id:
+          description: UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/UsersType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberUserRelationship:
+      description: Linkage to the user.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamHierarchyMemberUserData"
+      required:
+        - data
+      type: object
+    TeamHierarchyMembersNumberPage:
+      description: Pagination metadata using number and size.
+      properties:
+        first_number:
+          description: First page number.
+          example: 0
+          format: int64
+          type: integer
+        last_number:
+          description: Last page number. Null when unavailable.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        next_number:
+          description: Next page number. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: Current zero-based page number.
+          example: 0
+          format: int64
+          type: integer
+        prev_number:
+          description: Previous page number. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: Maximum number of members per page.
+          example: 100
+          format: int64
+          type: integer
+        total:
+          description: Total number of members matching the filters.
+          example: 2
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMembersNumberPageType"
+      required:
+        - type
+        - number
+        - size
+        - total
+        - first_number
+        - prev_number
+        - next_number
+        - last_number
+      type: object
+    TeamHierarchyMembersNumberPageType:
+      default: number_size
+      description: Pagination mode.
+      enum:
+        - number_size
+      example: number_size
+      type: string
+      x-enum-varnames:
+        - NUMBER_SIZE
+    TeamHierarchyMembersOffsetPage:
+      description: Pagination metadata using offset and limit.
+      properties:
+        first_offset:
+          description: First offset.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Last offset. Null when unavailable.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Maximum number of members per page.
+          example: 100
+          format: int64
+          type: integer
+        next_offset:
+          description: Next offset. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Current offset.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Previous offset. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total number of members matching the filters.
+          example: 2
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMembersOffsetPageType"
+      required:
+        - type
+        - offset
+        - limit
+        - total
+        - first_offset
+        - prev_offset
+        - next_offset
+        - last_offset
+      type: object
+    TeamHierarchyMembersOffsetPageType:
+      default: offset_limit
+      description: Pagination mode.
+      enum:
+        - offset_limit
+      example: offset_limit
+      type: string
+      x-enum-varnames:
+        - OFFSET_LIMIT
+    TeamHierarchyMembersPage:
+      description: Pagination metadata for the selected pagination mode.
+      oneOf:
+        - $ref: "#/components/schemas/TeamHierarchyMembersOffsetPage"
+        - $ref: "#/components/schemas/TeamHierarchyMembersNumberPage"
+    TeamHierarchyMembersResponse:
+      description: Direct and inherited members of the requested team.
+      properties:
+        data:
+          description: >-
+            Membership relationships for users who belong to the requested team or inherit membership through its descendant teams. Each user appears once, even if they belong to multiple teams in the hierarchy. Each relationship identifies the user and requested team, and indicates whether the user is a direct member of the requested team.
+          items:
+            $ref: "#/components/schemas/TeamHierarchyMember"
+          type: array
+        included:
+          description: Requested users and the team. May be absent when the result is empty, even if requested.
+          items:
+            $ref: "#/components/schemas/TeamHierarchyMemberIncluded"
+          type: array
+        links:
+          $ref: "#/components/schemas/TeamHierarchyMembersResponseLinks"
+        meta:
+          $ref: "#/components/schemas/TeamHierarchyMembersResponseMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    TeamHierarchyMembersResponseLinks:
+      description: Page navigation links. Unavailable links are omitted.
+      properties:
+        first:
+          description: First page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        last:
+          description: Last page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        next:
+          description: Next page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        prev:
+          description: Previous page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        self:
+          description: Current page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+      type: object
+    TeamHierarchyMembersResponseMeta:
+      description: Pagination metadata for the filtered members.
+      properties:
+        page:
+          $ref: "#/components/schemas/TeamHierarchyMembersPage"
+      required:
+        - page
+      type: object
     TeamIncluded:
       description: Included resources related to the team
       oneOf:
@@ -251025,6 +251379,269 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/team/{team_id}/members:
+    get:
+      description: |-
+        List the direct and inherited members of a team, deduplicated by user.
+        Members of descendant teams are included unless `filter[is_direct_only]` is true.
+        Datadog support users are always excluded.
+
+        Use `page[number]` and `page[size]` to paginate through the results.
+        Invalid query parameters return a JSON:API error with status 400.
+        Invalid or unknown team UUIDs return status 404.
+      operationId: ListTeamHierarchyMembers
+      parameters:
+        - description: UUID of the requested root team.
+          in: path
+          name: team_id
+          required: true
+          schema:
+            example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+            type: string
+        - description: Return only direct members. By default, members inherited from descendant teams are also returned.
+          in: query
+          name: filter[is_direct_only]
+          required: false
+          schema:
+            default: false
+            example: false
+            type: boolean
+        - description: Include service accounts. Datadog support users are always excluded.
+          in: query
+          name: filter[include_service_accounts]
+          required: false
+          schema:
+            default: true
+            example: true
+            type: boolean
+        - description: Filter by a case-insensitive substring of the user name, handle, or email.
+          in: query
+          name: filter[keyword]
+          required: false
+          schema:
+            example: alice
+            type: string
+        - description: "Comma-separated resources to include: `user` and `team`. The included team is the requested team. Whitespace is trimmed, and duplicate or empty entries are ignored."
+          in: query
+          name: include
+          required: false
+          schema:
+            example: user,team
+            pattern: ^\s*((user|team)\s*)?(,\s*((user|team)\s*)?)*$
+            type: string
+        - description: "Comma-separated sort fields: `name`, `handle`, `is_direct`, and `provisioned_by`. Fields are applied in order, each optionally prefixed with `-` for descending order. By default, team admins come first, followed by other direct members, then inherited members, sorted by name within each group."
+          in: query
+          name: sort
+          required: false
+          schema:
+            example: is_direct,-name
+            type: string
+        - description: Zero-based page number. Negative values become 0. Defaults to 0.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Requested number of members per page. Defaults to and maxes out at 100.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            example: 100
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Direct and inherited members with number pagination
+                  value:
+                    data:
+                      - attributes:
+                          direct_role: admin
+                          is_direct: true
+                          provisioned_by: manual
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        type: user_team_relationship
+                      - attributes:
+                          direct_role:
+                          is_direct: false
+                          provisioned_by:
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000002
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: users
+                        type: user_team_relationship
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 2
+                        type: number_size
+                empty:
+                  summary: No matching members, with included resources omitted
+                  value:
+                    data: []
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 0
+                        type: number_size
+                included_resources:
+                  summary: Users and the team with number pagination
+                  value:
+                    data:
+                      - attributes:
+                          direct_role: admin
+                          is_direct: true
+                          provisioned_by: manual
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        type: user_team_relationship
+                      - attributes:
+                          direct_role:
+                          is_direct: false
+                          provisioned_by:
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000002
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: users
+                        type: user_team_relationship
+                    included:
+                      - attributes:
+                          email: alice@example.com
+                          handle: alice@example.com
+                          name: Alice
+                          title:
+                        id: 00000000-0000-0000-0000-000000000001
+                        type: users
+                      - attributes:
+                          email: bob@example.com
+                          handle: bob@example.com
+                          name:
+                          title:
+                        id: 00000000-0000-0000-0000-000000000002
+                        type: users
+                      - attributes:
+                          handle: platform
+                          name: Platform
+                        id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                        type: teams
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 2
+                        type: number_size
+              schema:
+                $ref: "#/components/schemas/TeamHierarchyMembersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - teams_read
+      summary: Get team hierarchy members
+      tags:
+        - Teams
+      x-menu-order: 35
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+          - teams_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
