@@ -27,13 +27,13 @@ Worker version 2.24.1 gives you access to the following:
 
 #### Security
 
-- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised, even when the issuing root CA is trusted. This applies to components that use rustls.
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the [eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised](https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe), even when the issuing root CA is trusted. This applies to components that use rustls.
 <br><br>Components that use OpenSSL, the Amazon Security Lake destination's AWS account lookup, and the Google Cloud Pub/Sub source use the system CA trust store instead. The Worker container image now distrusts the affected `emSign ECC Root CA - G3` root CA, which protects these components unless you mount your own CA bundle or set `SSL_CERT_FILE`.
 <br><br>For APT and RPM package installations, distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
 
 #### Fixes
 
-- Fixed an issue where search queries with `OR` groups that mix exact values with other operands, such as wildcards, ranges, or other attributes, silently dropped operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss events they should have matched.
+- Fixed an issue where search queries with `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes, silently dropped operands. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss events it should have matched because of the wildcard.
 - In search queries, regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in wildcard patterns are now treated as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
 
 ## Worker version 2.24.0
@@ -249,9 +249,6 @@ Worker version 2.20.2 gives you access to the following:
 #### Fixes
 
 - Fixed an issue where non-finite (NaN or Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
-
-
-
 
 ## Worker version 2.20.0
 
