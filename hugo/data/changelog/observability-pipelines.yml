@@ -39,3 +39,23 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Shorten Azure Data Explorer auth model names for RubyGems
+  - change_type: modified
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40814
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add missing Amazon OpenSearch destination fields
+  - change_type: modified
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40845
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add traces pipeline type to Observability Pipelines
