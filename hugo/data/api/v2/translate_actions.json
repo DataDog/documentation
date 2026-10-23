@@ -519,7 +519,7 @@
     "request_schema_description": "The request for a Audit Logs events list."
   },
   "ListAuthNMappings": {
-    "description": "List all AuthN Mappings in the org.",
+    "description": "List all AuthN Mappings in the organization.",
     "summary": "List all AuthN Mappings"
   },
   "CreateAuthNMapping": {
@@ -7842,12 +7842,12 @@
     "request_schema_description": "Request for creating team connections."
   },
   "GetTeamSync": {
-    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub.",
+    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub or ServiceNow.",
     "summary": "Get team sync configurations"
   },
   "SyncTeams": {
-    "description": "This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
-    "summary": "Link Teams with GitHub Teams",
+    "description": "This endpoint configures synchronization between your existing Datadog teams and teams from\nGitHub or ServiceNow by matching team names.\nIt evaluates all current Datadog teams and compares them against teams in the external source\nconnected to your Datadog account.\n\nThis operation is read-only on the external source side, no teams will be modified or created there.\nThis only creates new teams in Datadog when type is set to `provision`.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n**GitHub**: [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\n(lowercased and kebab-cased) using a normalized exact match; case is ignored and spaces are removed.\n\n**ServiceNow**: [The ServiceNow integration must be configured for your Datadog account](https://docs.datadoghq.com/integrations/servicenow/).\nActive assignment groups from every configured ServiceNow instance are synchronized, and the ServiceNow\ngroup hierarchy is preserved. When `sync_membership` is enabled, group members are matched to Datadog\nusers by email address.",
+    "summary": "Link teams with external teams",
     "request_description": "",
     "request_schema_description": "Team sync request."
   },

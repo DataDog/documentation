@@ -21,3 +21,11 @@ entries:
       - ListSourcemaps
       - RestoreSourcemaps
     title: Validate all source map response kinds with exclusive variants
+  - change_type: modified
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40793
+    operations:
+      - DeleteSourcemaps
+      - ListSourcemaps
+      - RestoreSourcemaps
+    title: Accept WASM and Portable PDB source map kinds
