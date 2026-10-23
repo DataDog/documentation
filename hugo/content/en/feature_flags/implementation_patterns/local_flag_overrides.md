@@ -238,7 +238,7 @@ export async function initializeFeatureFlags() {
 {{% /tab %}}
 {{% tab "Go" %}}
 
-<div class="alert alert-info">The Go Multi-Provider package is experimental and may change in future releases.</div>
+<div class="alert alert-info">The Go Multi-Provider package is experimental and may change in future releases. Go flag evaluation still works through <code>MultiProvider</code>, but Datadog exposure delivery and customer exposure callbacks are disabled. If you require exposure delivery, register the Datadog provider directly. See <a href="/feature_flags/server/go/#customer-exposure-hooks">Customer exposure hooks</a>.</div>
 
 {{< code-block lang="go" >}}
 const overrideEnvPrefix = "FF_"
