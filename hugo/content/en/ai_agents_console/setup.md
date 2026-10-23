@@ -1,6 +1,6 @@
 ---
 title: Set Up Agent Console
-description: Connect coding agents, work agents, and productivity tools to Datadog Agent Console, and map user identities across tools.
+description: Connect coding agents, knowledge agents, and productivity tools to Datadog Agent Console, and map user identities across tools.
 further_reading:
   - link: '/ai_agents_console/'
     tag: 'Documentation'

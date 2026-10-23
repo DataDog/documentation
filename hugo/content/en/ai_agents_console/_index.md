@@ -1,6 +1,6 @@
 ---
 title: Agent Console
-description: Monitor and analyze AI agent usage, cost, and productivity across your organization in Datadog Agent Console, including coding agents, work agents, and Bits AI agents.
+description: Monitor and analyze AI agent usage, cost, and productivity across your organization in Datadog Agent Console, including coding agents, knowledge agents, and Bits AI agents.
 further_reading:
   - link: '/ai_agents_console/setup/'
     tag: 'Documentation'
@@ -29,7 +29,7 @@ further_reading:
 Agent Console is in Preview and available to all Datadog customers.
 {{< /callout >}}
 
-The [Agent Console][1] provides centralized monitoring for AI tools across your organization. It collects usage, cost, and activity data from coding agents, work and chat agents, desktop agents, and Datadog's own [Bits AI agents](#bits-ai-agents). Use it to understand where your AI spend goes, who uses which tools, and how AI-assisted work affects delivery.
+The [Agent Console][1] provides centralized monitoring for AI tools across your organization. It collects usage, cost, and activity data from coding agents, knowledge agents, desktop agents, and Datadog's own [Bits AI agents](#bits-ai-agents). Use it to understand where your AI spend goes, who uses which tools, and how AI-assisted work affects delivery.
 
 ## Supported AI tools
 
@@ -39,9 +39,9 @@ The [Agent Console][1] provides centralized monitoring for AI tools across your 
 | Cursor | Coding agent | [Cursor][3] integration |
 | GitHub Copilot | Coding agent | [GitHub Copilot][4] integration |
 | Codex | Coding agent | [OpenAI Usage and Costs][5] integration |
-| Claude Chat, Claude Cowork, Claude Design | Work agent | [Anthropic Usage and Costs][2] integration |
-| ChatGPT Work | Work agent | [OpenAI Usage and Costs][5] integration |
-| Microsoft Copilot 365 (Preview) | Work agent | Microsoft Copilot integration. To request access, contact your Datadog account team. |
+| Claude Chat, Claude Cowork, Claude Design | Knowledge agent | [Anthropic Usage and Costs][2] integration |
+| ChatGPT Work | Knowledge agent | [OpenAI Usage and Costs][5] integration |
+| Microsoft Copilot 365 (Preview) | Knowledge agent | Microsoft Copilot integration. To request access, contact your Datadog account team. |
 | Other coding and desktop agents | Coding agent | [Trajectory][6] |
 
 [Trajectory][6] is an open source tool that captures sessions from more than 30 coding and desktop agents, including Claude Desktop, Cline, Windsurf, Zed, and Goose. For the full list, see [Supported Clients][7].
