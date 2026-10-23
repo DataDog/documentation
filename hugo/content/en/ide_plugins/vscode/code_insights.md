@@ -18,7 +18,7 @@ The extension identifies vulnerabilities in the code with colored squiggles; hov
 
 {{< img src="/ide_plugins/vscode/code-insights-inline-hover.mp4" alt="Hovering over inline code insights" style="width:100%" video=true >}}
 
-The **Code Insights** view in the Datadog sidebar lists all the issues found in the repository. Select an item to view the full insight, and use the links to jump to the related source code location or open the code insight in Datadog.
+The **Code Insights** view in the Datadog sidebar lists all the issues found in the repository. Select an item to view the full insight. Use the links to open the related source code or the insight in Datadog.
 
 You can group code insights by kind, file, priority, or service. You can also ignore individual code insights and set filters to view the ones you're most interested in.
 
