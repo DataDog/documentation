@@ -1,0 +1,7 @@
+entries:
+  - change_type: removed
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40481
+    operations:
+      - ListNetworkHealthInsights
+    title: Mark Network Health Insights API as private

@@ -37,9 +37,9 @@ jobs:
     - name: Validate branch name and set output
       id: validate
       env:
-        BRANCH: ${{ github.head_ref }}
+        BRANCH_NAME: ${{ github.head_ref }}
       run: |
-        BRANCH="${{ env.BRANCH }}"
+        BRANCH="$BRANCH_NAME"
         # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
         # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
         if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]] && [[ "$BRANCH" == *"/"* ]]; then
