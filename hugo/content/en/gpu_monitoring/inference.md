@@ -32,7 +32,7 @@ With the Inference page, you get:
 
 Inference monitoring supports the following inference engines and deployments:
 - [vLLM][1]: standalone, with NVIDIA Dynamo as the inference router, or on Ray.
-- [SGLang][3]: standalone, or as the model server behind an inference router such as llm-d.
+- [SGLang][3]: standalone.
 
 Other inference engines and routers are not supported. To request support for them, contact your Datadog representative.
 
@@ -501,7 +501,7 @@ To begin monitoring your inference workloads, you must meet the following criter
 - You have [GPU Monitoring enabled][1].
 - You are running the inference Agent image (`7.85.0-rc.5`).
 - Your inference workloads run on Kubernetes.
-- You are serving models with SGLang, either standalone or as the model server behind an inference router such as llm-d.
+- You are serving models with standalone SGLang.
 
 ### 0. Enable GPU Monitoring
 
@@ -549,9 +549,7 @@ The SGLang integration collects metrics from the following endpoint:
 
 SGLang serves metrics on the same port as its HTTP server, which is `30000` by default. If you start SGLang with a different `--port`, substitute it in the annotation in Step 3.
 
-If you run disaggregated prefill and decode workers, for example with llm-d, each prefill and decode worker serves its own metrics endpoint. Configure the integration on every worker pod template. The integration collects KV transfer and disaggregation queue metrics as `sglang.disaggregation.*`.
-
-<div class="alert alert-info">The SGLang integration collects engine metrics only. Metrics from the inference router, such as the llm-d endpoint picker, are not collected.</div>
+If you run disaggregated prefill and decode workers, each prefill and decode worker serves its own metrics endpoint. Configure the integration on every worker pod template. The integration collects KV transfer and disaggregation queue metrics as `sglang.disaggregation.*`.
 
 ### 3. Configure the integration
 
