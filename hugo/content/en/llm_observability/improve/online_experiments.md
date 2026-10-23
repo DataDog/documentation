@@ -76,7 +76,7 @@ You use this same value as the `subject_identifier` when you report the evaluati
 
 ## Step 3: Report an evaluation
 
-<div class="alert alert-warning"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw boolean and categorical values cannot be used directly as experiment metrics.</div>
+<div class="alert alert-warning"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw Boolean and categorical values cannot be used directly as experiment metrics.</div>
 
 Choose one of the following methods.
 
