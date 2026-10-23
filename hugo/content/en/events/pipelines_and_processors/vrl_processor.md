@@ -38,15 +38,15 @@ Use the VRL processor to run a custom [Vector Remap Language (VRL)][1] script on
 
 ### Test your script against a sample event
 
-Use the {{< ui >}}Test your script against a sample event{{< /ui >}} section to preview what your script does before you save it:
+Before you save the processor, you can preview what your script does to a sample event:
 
-1. Paste a sample event as JSON in the {{< ui >}}Input{{< /ui >}} pane. You can use the JSON object from the {{< ui >}}Event Attributes{{< /ui >}} tab of the event side panel, and add the `message` and `tags` fields at the top level if your script uses them. To start from an example alert event, press <kbd>Tab</kbd> in the empty input.
+1. Paste a sample event as JSON in the input pane. You can use the JSON object from the Event Attributes tab of the event side panel, and add the `message` and `tags` fields at the top level if your script uses them. To start from an example alert event, press the Tab key in the empty input.
 1. Click {{< ui >}}Run{{< /ui >}}.
-1. Review the result in the {{< ui >}}Output{{< /ui >}} tab. Messages from logging functions such as `log` appear in the {{< ui >}}Console{{< /ui >}} tab, and compile or runtime errors appear in the {{< ui >}}Errors{{< /ui >}} tab and are highlighted in the script editor.
+1. Review the transformed event in the output pane. Messages from logging functions such as `log` appear in the console tab, and compile or runtime errors appear in the errors tab and are highlighted in the script editor.
 
 {{< img src="events/pipelines/vrl_processor_test_sample.png" alt="Testing a VRL script against a sample alert event, with the transformed event in the Output tab" style="width:80%;" >}}
 
-<div class="alert alert-warning">The test runs your script in your browser without any of the processor's validation. It does not check which fields can be modified, allowed values, value types, blocked functions, or the script size limit, so a script that works in the test can still be rejected when you save it, or leave events unchanged in the pipeline. Some functions, such as <code>get_hostname</code> and <code>parse_proto</code>, can't be simulated in the browser; when your script uses them, a warning indicates that the output might not match the pipeline.</div>
+<div class="alert alert-warning">The test runs your script in your browser without any of the processor's validation. It does not check which fields can be modified, allowed values, value types, blocked functions, or the script size limit, so a script that works in the test can still be rejected when you save it, or leave events unchanged in the pipeline. Some functions, such as <code>get_hostname</code> and <code>parse_proto</code>, can't run in the browser. If your script uses one of them, the test shows a warning, and the test output might differ from what the processor produces in the pipeline.</div>
 
 ### Script validation
 
@@ -104,8 +104,6 @@ The processor applies the result of a script to an event all at once:
 
 In both cases, the event is not dropped. It continues through the rest of the pipeline without the changes from this processor.
 
-If a script fails on most of the events it processes, Datadog temporarily skips the processor for a few minutes before running it again.
-
 ## Examples
 
 ### Enrich an alert event
@@ -160,4 +158,4 @@ if is_string(.message) {
 [1]: https://vector.dev/docs/reference/vrl/
 [2]: https://app.datadoghq.com/event/settings/pipelines
 [3]: /events/pipelines_and_processors/#create-a-pipeline
-[4]: /api/latest/events/#post-an-event
+[4]: /api/latest/events/post-an-event/
