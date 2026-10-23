@@ -4747,6 +4747,10 @@
     "request_description": "",
     "request_schema_description": "Top-level schema representing a pipeline."
   },
+  "ListOnCallEscalationPolicies": {
+    "description": "Retrieve a paginated list of On-Call escalation policies, sorted by name.",
+    "summary": "List On-Call escalation policies"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
