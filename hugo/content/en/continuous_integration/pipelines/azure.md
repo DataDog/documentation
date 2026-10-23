@@ -44,7 +44,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and Azure
 | Pipeline                   | Pipeline        |
 | Stage                      | Stage           |
 | Job                        | Job             |
-| Step ([requires the Datadog Integration](#collect-job-steps)) | Step |
+| Step ([Datadog Integration](#collect-job-steps) only) | Step |
 
 ## Configure the Datadog integration
 {{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
