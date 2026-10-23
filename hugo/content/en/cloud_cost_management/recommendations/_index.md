@@ -534,6 +534,12 @@ multifiltersearch:
       recommendation_type: Downsize SQL Server Database Storage
       recommendation_description: SQL Server Database using less than 20% of provisioned storage capacity.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Downsize SQL Managed Instance
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay below the configured threshold on a smaller vCore size. Recommends downsizing them by up to two sizes at a time to reduce compute and SQL license costs.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Storage Account
