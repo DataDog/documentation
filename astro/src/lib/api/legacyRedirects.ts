@@ -10,7 +10,7 @@
  * `tests/integration/legacyRedirects.full-spec.test.ts` checks that every row
  * still points at a built page, but it can't tell when a row is missing.
  *
- * Kept as one exported table so a single prerendered route
+ * Kept in one exported table so a single prerendered route
  * (`src/pages/[...lang]/api/[...legacyPath].astro`) can generate every entry in
  * every locale. Adding a redirect means adding a row here — no new page file.
  */
