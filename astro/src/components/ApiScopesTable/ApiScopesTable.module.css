@@ -1,0 +1,45 @@
+/* Table borders, header, and stripes come from the global `table` styles. */
+
+/* Clears the sticky header and API toolbar (about 133px once scrolled). The
+   resting desktop header height is the closest token that covers both. */
+.api-scopes-table__anchor {
+  display: block;
+  scroll-margin-top: calc(
+    var(--hugo-active-banner-height) + var(--hugo-header-height-desktop)
+  );
+}
+
+/* Sized like an h4, whatever its level in the outline. */
+.api-scopes-table__heading {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  margin-top: 0.778rem;
+}
+
+.api-scopes-table__table {
+  table-layout: fixed;
+}
+
+/* A 4/3/5 column split. */
+.api-scopes-table__column--name {
+  width: 33.333%;
+}
+
+.api-scopes-table__column--description {
+  width: 25%;
+}
+
+.api-scopes-table__column--endpoints {
+  width: 41.667%;
+}
+
+.api-scopes-table__scope-name {
+  overflow-wrap: anywhere;
+}
+
+/* Nested under the block to outrank the global `.prose ul` padding. */
+.api-scopes-table .api-scopes-table__endpoints {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

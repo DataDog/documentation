@@ -1,0 +1,25 @@
+.language-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-xs);
+}
+
+.language-selector__label {
+  color: var(--color-text);
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* Below Hugo's `sm` breakpoint (576px), stack the label above the dropdown —
+   matching Hugo's `.language-region-select-container` (`display: block` at
+   `media-breakpoint-down(sm)`). This keeps the language + site selectors
+   narrow enough to sit side by side instead of overflowing the viewport. */
+@media (max-width: 575.98px) {
+  .language-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+}

@@ -1,0 +1,87 @@
+.api-endpoint {
+  margin-bottom: var(--space-xl);
+}
+
+.api-endpoint__url-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.api-endpoint__path {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  background: var(--color-highlight-bg);
+  padding: 3px var(--space-sm);
+  border-radius: var(--border-radius);
+  word-break: break-all;
+}
+
+.api-endpoint__path--unsupported {
+  color: var(--color-text-muted);
+  font-style: italic;
+  background: transparent;
+}
+
+.api-endpoint__permissions {
+  margin-bottom: var(--space-md);
+}
+
+.api-endpoint__permissions code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+}
+
+.api-endpoint__oauth-scopes code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+}
+
+.api-endpoint__section {
+  margin-bottom: var(--space-xl);
+}
+
+.api-endpoint__section h3 {
+  margin: 0 0 var(--space-sm);
+}
+
+/* As in Hugo, "Body Data (required)" shows as "Body Data (Required)". */
+.api-endpoint__body-label {
+  text-transform: capitalize;
+}
+
+.api-endpoint__overview-heading {
+  margin-bottom: var(--space-sm);
+}
+
+/* The description is slot content, usually a <p> with a default top margin.
+   Without this, that margin collapses with the heading's and widens the gap,
+   unlike Hugo, where paragraphs have no top margin. */
+.api-endpoint__overview-heading + * {
+  margin-top: 0;
+}
+
+/* A code fence in the description, styled like CodeBlock (Hugo renders it
+   as a Chroma block). */
+.api-endpoint > :global(pre) {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm);
+  background-color: var(--color-panel-bg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+}
+
+.api-endpoint > :global(pre) :global(code) {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
+  color: var(--color-text-muted);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

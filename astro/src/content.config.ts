@@ -1,0 +1,46 @@
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+// Imported from `zod` rather than re-exported from `astro:content`, which
+// deprecated its `z` in Astro 7. Same zod instance either way — it is already a
+// direct dependency here.
+import { z } from "zod";
+
+// A single filter entry from a cdoc's `content_filters` frontmatter. Mirrors
+// the shape cdocs-data validates (RawFilterConfig), trimmed to the fields the
+// Astro port currently uses. `show_if`/`hide_if` are preserved so authored docs
+// validate, but conditional-display resolution is not implemented in the PoC.
+const contentFilterSchema = z.object({
+  trait_id: z.string(),
+  option_group_id: z.string(),
+  label: z.string().optional(),
+  default_value: z.string().optional(),
+  show_if: z.array(z.record(z.string(), z.array(z.string()))).optional(),
+  hide_if: z.array(z.record(z.string(), z.array(z.string()))).optional(),
+});
+
+const en = defineCollection({
+  loader: glob({ pattern: "**/*.mdoc", base: "./src/content/en" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    // Social-share image, as a path under `images/` (Hugo's `meta_image`).
+    meta_image: z.string().optional(),
+    type: z.enum(["static", "interactive"]).optional(),
+    // cdocs (filterable product docs) fields:
+    content_filters: z.array(contentFilterSchema).optional(),
+    // Preserved from Hugo but unused in the PoC (redirects handled later).
+    aliases: z.array(z.string()).optional(),
+    // Names a key in `shared/site_support.yaml`, for the site-support banner.
+    // Pages under a path covered by that key's `url_paths` need not set it.
+    site_support_id: z.string().optional(),
+    // Pages only reachable through a filtered parent view.
+    private: z.boolean().optional(),
+    further_reading: z
+      .array(
+        z.object({ link: z.string().optional(), text: z.string().optional() }),
+      )
+      .optional(),
+  }),
+});
+
+export const collections = { en };

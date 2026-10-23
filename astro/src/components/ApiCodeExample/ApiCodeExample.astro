@@ -1,0 +1,121 @@
+---
+import Tabs from "@components/Tabs/Tabs.astro";
+import TabPanel from "@components/Tab/TabPanel.astro";
+import CodeBlock from "@components/CodeBlock/CodeBlock.astro";
+import ExpandChevron from "@components/ExpandChevron/ExpandChevron.astro";
+import styles from "./ApiCodeExample.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+import ApiCodeInstructions from "@components/ApiCodeInstructions/ApiCodeInstructions.astro";
+import { useTranslations } from "@lib/i18n/i18n";
+import type { CodeExampleSet } from "@lib/api/schemas/codeExamples";
+
+export type {
+  CodeExampleEntry,
+  CodeExampleSet,
+} from "@lib/api/schemas/codeExamples";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  examples: CodeExampleSet[];
+}
+
+const { examples } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
+
+const groupId = generateElementId("api-code-example");
+const labels = examples.map((ex) => ex.label);
+const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
+---
+
+{
+  examples.length > 0 && (
+    <div class={cl("api-code-example")}>
+      <h3 class={cl("api-code-example__heading")}>
+        {translate("code_example")}
+      </h3>
+
+      <Tabs
+        id={groupId}
+        variant="pills"
+        labels={labels}
+        panelIds={panelIds}
+        sync={{
+          group: "code-lang",
+          keys: examples.map((ex) => ex.language),
+          fallbackToFirstTab: true,
+        }}
+      >
+        {examples.map((ex, tabIdx) => (
+          <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
+            {ex.entries.length === 1 ? (
+              ex.entries[0].regionVariants ? (
+                Object.entries(ex.entries[0].regionVariants).map(
+                  ([regionKey, variant]) => (
+                    <div
+                      data-region={regionKey}
+                      class={cl("api-code-example__code-block")}
+                    >
+                      <CodeBlock
+                        content={variant.code}
+                        language={ex.entries[0].syntax}
+                      />
+                    </div>
+                  ),
+                )
+              ) : (
+                <div class={cl("api-code-example__code-block")}>
+                  <CodeBlock
+                    content={ex.entries[0].code}
+                    language={ex.entries[0].syntax}
+                  />
+                </div>
+              )
+            ) : (
+              ex.entries.map((entry, i) => (
+                <details
+                  class={cl("api-code-example__accordion")}
+                  open={i === 0}
+                >
+                  <summary class={cl("api-code-example__accordion-header")}>
+                    <ExpandChevron
+                      class={cl("api-code-example__accordion-icon")}
+                    />
+                    <span>{entry.description}</span>
+                  </summary>
+                  {entry.regionVariants ? (
+                    Object.entries(entry.regionVariants).map(
+                      ([regionKey, variant]) => (
+                        <div
+                          data-region={regionKey}
+                          class={cl("api-code-example__code-block")}
+                        >
+                          <CodeBlock
+                            content={variant.code}
+                            language={entry.syntax}
+                          />
+                        </div>
+                      ),
+                    )
+                  ) : (
+                    <div class={cl("api-code-example__code-block")}>
+                      <CodeBlock content={entry.code} language={entry.syntax} />
+                    </div>
+                  )}
+                </details>
+              ))
+            )}
+            {ex.instructions && (
+              <ApiCodeInstructions
+                language={ex.language}
+                exampleFile={ex.instructions.exampleFile}
+                runCommandByRegion={ex.instructions.runCommandByRegion}
+              />
+            )}
+          </TabPanel>
+        ))}
+      </Tabs>
+    </div>
+  )
+}

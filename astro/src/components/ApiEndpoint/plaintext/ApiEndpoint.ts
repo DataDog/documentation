@@ -1,0 +1,241 @@
+/**
+ * AST twin of `ApiEndpoint.astro`.
+ *
+ * Builds the block-level Markdoc nodes for a single API endpoint variant.
+ * Returns an array of top-level nodes (alerts, paragraphs, headings, tables,
+ * tags) that callers compose into a document.
+ *
+ * Like the string renderer, this does NOT emit the operation summary heading
+ * — the page-level route composes a single `# Summary` plus per-variant
+ * `## v{N} (latest?)` sub-headings around each call.
+ */
+
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { EndpointData } from "@lib/api/schemas/views";
+import { getDefaultRegions } from "@lib/api/regionResolver";
+import { appHost } from "@config/regions";
+import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import {
+  Ast,
+  NO_CONTENT,
+  heading,
+  inline,
+  nodesFromMd,
+  plaintext,
+} from "@lib/plaintext/helpers";
+import { alertNode } from "@components/Alert/plaintext/Alert";
+import { apiMethodBadgeNode } from "@components/ApiMethodBadge/plaintext/ApiMethodBadge";
+import { apiSchemaTableNode } from "@components/ApiSchemaTable/plaintext/ApiSchemaTable";
+import { apiRequestBodyTabsNodes } from "@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs";
+import { apiResponseNode } from "@components/ApiResponse/plaintext/ApiResponse";
+import { apiCodeExampleNode } from "@components/ApiCodeExample/plaintext/ApiCodeExample";
+
+export function apiEndpointNodes(
+  ep: EndpointData,
+  lang: Locale = DEFAULT_LOCALE,
+): MarkdocNode[] {
+  return [
+    ...statusNotice(ep),
+    ...apiRegionTableNodes(ep.method, ep.regionUrls),
+    ...overviewNodes(ep, lang),
+    ...argumentsNodes(ep),
+    ...requestBodyNodes(ep),
+    ...responseNodes(ep),
+    ...codeExampleNodes(ep),
+  ];
+}
+
+function statusNotice(ep: EndpointData): MarkdocNode[] {
+  if (ep.unstable) {
+    const msg =
+      ep.unstableMessage ??
+      "This endpoint is unstable and may change without notice.";
+    return [alertNode("warning", nodesFromMd(msg))];
+  }
+  return NO_CONTENT;
+}
+
+/**
+ * The description, permissions, and OAuth scopes, under an Overview heading.
+ * Hugo shows the heading even with nothing under it; this leaves it out.
+ */
+function overviewNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
+  const overviewContent = [
+    ...descriptionNodes(ep),
+    ...permissionsNodes(ep),
+    ...oauthScopesNodes(ep, lang),
+  ];
+  if (overviewContent.length === 0) {
+    return NO_CONTENT;
+  }
+  return [heading(3, "Overview"), ...overviewContent];
+}
+
+function descriptionNodes(ep: EndpointData): MarkdocNode[] {
+  if (!ep.description) {
+    return NO_CONTENT;
+  }
+  return nodesFromMd(ep.description);
+}
+
+function permissionsNodes(ep: EndpointData): MarkdocNode[] {
+  if (!ep.permissions || ep.permissions.length === 0) {
+    return NO_CONTENT;
+  }
+  if (ep.permissions.length === 1) {
+    return nodesFromMd(
+      `This endpoint requires the \`${ep.permissions[0]}\` permission.`,
+    );
+  }
+  const list = ep.permissions.map((permission) => `- \`${permission}\``);
+  return nodesFromMd(
+    [
+      `This endpoint requires ${ep.permissionsMatch ?? "all"} of the following permissions:`,
+      "",
+      ...list,
+    ].join("\n"),
+  );
+}
+
+function oauthScopesNodes(ep: EndpointData, lang: Locale): MarkdocNode[] {
+  if (!ep.oauthScopes || ep.oauthScopes.length === 0) {
+    return NO_CONTENT;
+  }
+  const scopesLink = (text: string) =>
+    ep.oauthScopesAnchor
+      ? `[${text}](${localizedHref(lang, `/api/latest/scopes/#${ep.oauthScopesAnchor}`)})`
+      : text;
+  if (ep.oauthScopesMatch === "any") {
+    const scopeList = ep.oauthScopes.map((scope) => `\`${scope}\``).join(", ");
+    return nodesFromMd(
+      `OAuth apps require one of the following authorization ${scopesLink("scopes")} to access this endpoint: ${scopeList}.`,
+    );
+  }
+  return nodesFromMd(
+    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization ${scopesLink("scope")} to access this endpoint.`,
+  );
+}
+
+/**
+ * One row per default region that has a URL, then one "Not supported" row per
+ * region that doesn't, labeled as the HTML labels it. Shared with category
+ * summaries.
+ */
+export function apiRegionTableNodes(
+  method: string,
+  regionUrls: Record<string, string> | undefined,
+): MarkdocNode[] {
+  const regions = getDefaultRegions();
+
+  type Row = { site: string; url: string };
+  const supportedRows: Row[] = [];
+  const unsupportedRows: Row[] = [];
+  for (const region of regions) {
+    const site = appHost(region.key) ?? region.site;
+    const url = regionUrls?.[region.key];
+    if (url) {
+      supportedRows.push({ site, url });
+    } else {
+      unsupportedRows.push({
+        site,
+        url: `Not supported in the ${region.label} region`,
+      });
+    }
+  }
+  if (supportedRows.length === 0) {
+    return NO_CONTENT;
+  }
+  const rows = [...supportedRows, ...unsupportedRows];
+
+  const th = (text: string): MarkdocNode => {
+    return new Ast.Node("th", {}, [inline([plaintext(text)])]);
+  };
+
+  const siteCell = (site: string): MarkdocNode => {
+    return new Ast.Node("td", {}, [inline([plaintext(site)])]);
+  };
+
+  const urlCell = (url: string): MarkdocNode => {
+    return new Ast.Node("td", {}, [
+      inline([apiMethodBadgeNode(method), plaintext(` ${url}`)]),
+    ]);
+  };
+
+  const headRow = new Ast.Node("tr", {}, [
+    th("Datadog site"),
+    th("API endpoint"),
+  ]);
+  const thead = new Ast.Node("thead", {}, [headRow]);
+  const bodyRows = rows.map((r) => {
+    return new Ast.Node("tr", {}, [siteCell(r.site), urlCell(r.url)]);
+  });
+  const tbody = new Ast.Node("tbody", {}, bodyRows);
+  const table = new Ast.Node("table", {}, [thead, tbody]);
+
+  return [table];
+}
+
+function argumentsNodes(ep: EndpointData): MarkdocNode[] {
+  const tables: MarkdocNode[] = [
+    ...titledTableNodes("Path Parameters", ep.pathParams),
+    ...titledTableNodes("Query Strings", ep.queryParams),
+    ...titledTableNodes("Header Parameters", ep.headerParams),
+  ];
+  if (tables.length === 0) {
+    return NO_CONTENT;
+  }
+  return [heading(3, "Arguments"), ...tables];
+}
+
+// A parameter-location heading followed by its schema table, matching the
+// `<h4>` titles the Astro component renders.
+function titledTableNodes(
+  title: string,
+  fields: EndpointData["pathParams"],
+): MarkdocNode[] {
+  if (!fields || fields.length === 0) {
+    return NO_CONTENT;
+  }
+  const table = apiSchemaTableNode(fields);
+  return table ? [heading(4, title), table] : NO_CONTENT;
+}
+
+function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
+  if (!ep.requestBody) {
+    return NO_CONTENT;
+  }
+  const label = ep.requestBody.required ? "Body Data (required)" : "Body Data";
+  const contents: MarkdocNode[] = [heading(3, "Request"), heading(4, label)];
+  if (ep.requestBody.description) {
+    contents.push(...nodesFromMd(ep.requestBody.description));
+  }
+  contents.push(
+    ...apiRequestBodyTabsNodes({
+      schema: ep.requestBody.schema,
+      examples: ep.requestBody.examples,
+    }),
+  );
+  return contents;
+}
+
+function responseNodes(ep: EndpointData): MarkdocNode[] {
+  if (!ep.responses || ep.responses.length === 0) {
+    return NO_CONTENT;
+  }
+  const tabs = apiResponseNode(ep.responses);
+  if (!tabs) {
+    return NO_CONTENT;
+  }
+  return [heading(3, "Response"), tabs];
+}
+
+function codeExampleNodes(ep: EndpointData): MarkdocNode[] {
+  if (!ep.codeExamples || ep.codeExamples.length === 0) {
+    return NO_CONTENT;
+  }
+  const tabs = apiCodeExampleNode(ep.codeExamples);
+  if (!tabs) {
+    return NO_CONTENT;
+  }
+  return [heading(3, "Code Example"), tabs];
+}

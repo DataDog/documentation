@@ -1,0 +1,250 @@
+---
+import ApiMethodBadge from "@components/ApiMethodBadge/ApiMethodBadge.astro";
+import Alert from "@components/Alert/Alert.astro";
+import ApiSchemaTable from "@components/ApiSchemaTable/ApiSchemaTable.astro";
+import ApiResponse from "@components/ApiResponse/ApiResponse.astro";
+import ApiCodeExample from "@components/ApiCodeExample/ApiCodeExample.astro";
+import ApiRequestBodyTabs from "@components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import type { ResponseData } from "@components/ApiResponse/ApiResponse.astro";
+import type { CodeExampleSet } from "@components/ApiCodeExample/ApiCodeExample.astro";
+import { getDefaultRegions } from "@lib/api/regionResolver";
+import { renderMarkdownInline } from "@lib/api/markdownRenderer";
+import styles from "./ApiEndpoint.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { useTranslations } from "@lib/i18n/i18n";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
+
+const allRegions = getDefaultRegions();
+const cl = classListFactory(styles);
+
+interface EndpointData {
+  operationId: string;
+  summary: string;
+  slug: string;
+  method: string;
+  path: string;
+  description: string;
+  version: "v1" | "v2";
+  deprecated: boolean;
+  unstable: boolean;
+  unstableMessage?: string;
+  permissions?: string[];
+  permissionsMatch?: "any" | "all";
+  oauthScopes?: string[];
+  oauthScopesMatch?: "any";
+  oauthScopesAnchor?: string;
+  regionUrls?: Record<string, string>;
+  pathParams?: SchemaField[];
+  queryParams?: SchemaField[];
+  headerParams?: SchemaField[];
+  requestBody?: {
+    required: boolean;
+    description?: string;
+    schema: SchemaField[];
+    examples: Array<{ name: string; value: string }>;
+  };
+  responses: ResponseData[];
+  codeExamples: CodeExampleSet[];
+}
+
+interface Props {
+  data: string; // JSON string of EndpointData
+}
+
+const { data: dataJson } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
+
+let ep: EndpointData | null = null;
+try {
+  ep = JSON.parse(dataJson);
+} catch {
+  // invalid JSON
+}
+
+const oauthScopesHref =
+  ep?.oauthScopesAnchor &&
+  localizedHref(
+    resolveLocale(Astro.currentLocale),
+    `/api/latest/scopes/#${ep.oauthScopesAnchor}`,
+  );
+
+const hasParams =
+  ep &&
+  ((ep.pathParams && ep.pathParams.length > 0) ||
+    (ep.queryParams && ep.queryParams.length > 0) ||
+    (ep.headerParams && ep.headerParams.length > 0));
+
+// Hugo shows the Overview heading on every operation, even with nothing
+// under it. Show it only when a description, permissions, or scopes follow.
+const hasOverview =
+  ep &&
+  (Boolean(ep.description) ||
+    (ep.permissions && ep.permissions.length > 0) ||
+    (ep.oauthScopes && ep.oauthScopes.length > 0));
+---
+
+{
+  ep && (
+    <section
+      id={ep.slug}
+      class={cl("api-endpoint")}
+      data-operation-id={ep.operationId}
+    >
+      {/* Status alerts */}
+      {/* MISSING_TRANSLATION_LABEL: translate the unstable/region-not-supported messages,
+        permissions label, and the "Body Data" label and "(required)" marker
+        once authoritative translation keys exist in the Hugo i18n bundle. */}
+      {ep.unstable && (
+        <Alert level="warning">
+          <Fragment
+            set:html={renderMarkdownInline(
+              ep.unstableMessage ??
+                "This endpoint is unstable and may change without notice.",
+            )}
+          />
+        </Alert>
+      )}
+
+      <div class={cl("api-endpoint__url-line")}>
+        <ApiMethodBadge method={ep.method} />
+        {allRegions.map((region) => {
+          const url = ep.regionUrls?.[region.key];
+          return url ? (
+            <code class={cl("api-endpoint__path")} data-region={region.key}>
+              {url}
+            </code>
+          ) : (
+            <code
+              class={cl(
+                "api-endpoint__path",
+                "api-endpoint__path--unsupported",
+              )}
+              data-region={region.key}
+            >
+              Not supported in the {region.label} region
+            </code>
+          );
+        })}
+      </div>
+
+      {/* Description — rendered as slot content from the parent page */}
+      {hasOverview && (
+        <h3 class={cl("api-endpoint__overview-heading")}>
+          {translate("overview")}
+        </h3>
+      )}
+      <slot />
+
+      {/* Permissions */}
+      {ep.permissions && ep.permissions.length === 1 && (
+        <div class={cl("api-endpoint__permissions")}>
+          <p>
+            This endpoint requires the <code>{ep.permissions[0]}</code>{" "}
+            permission.
+          </p>
+        </div>
+      )}
+      {ep.permissions && ep.permissions.length > 1 && (
+        <div class={cl("api-endpoint__permissions")}>
+          <p>
+            This endpoint requires {ep.permissionsMatch ?? "all"} of the
+            following permissions:
+          </p>
+          <ul>
+            {ep.permissions.map((permission) => (
+              <li>
+                <code>{permission}</code>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* OAuth scopes */}
+      {ep.oauthScopes && ep.oauthScopes.length > 0 && (
+        <div class={cl("api-endpoint__oauth-scopes")}>
+          {ep.oauthScopesMatch === "any" ? (
+            <p>
+              OAuth apps require one of the following authorization{" "}
+              {ep.oauthScopesAnchor ? (
+                <a href={oauthScopesHref}>scopes</a>
+              ) : (
+                "scopes"
+              )}{" "}
+              to access this endpoint:{" "}
+              {ep.oauthScopes.map((scope, index) => (
+                <>
+                  {index > 0 && ", "}
+                  <code>{scope}</code>
+                </>
+              ))}
+              .
+            </p>
+          ) : (
+            <p>
+              OAuth apps require the <code>{ep.oauthScopes.join(", ")}</code>{" "}
+              authorization{" "}
+              {ep.oauthScopesAnchor ? (
+                <a href={oauthScopesHref}>scope</a>
+              ) : (
+                "scope"
+              )}{" "}
+              to access this endpoint.
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Arguments */}
+      {hasParams && (
+        <div class={cl("api-endpoint__section")}>
+          <h3>{translate("arguments")}</h3>
+          {ep.pathParams && ep.pathParams.length > 0 && (
+            <ApiSchemaTable
+              fields={ep.pathParams}
+              title={translate("path_parameters")}
+            />
+          )}
+          {ep.queryParams && ep.queryParams.length > 0 && (
+            <ApiSchemaTable
+              fields={ep.queryParams}
+              title={translate("query_strings")}
+            />
+          )}
+          {ep.headerParams && ep.headerParams.length > 0 && (
+            <ApiSchemaTable
+              fields={ep.headerParams}
+              title={translate("header_parameters")}
+            />
+          )}
+        </div>
+      )}
+
+      {/* Request */}
+      {ep.requestBody && (
+        <div class={cl("api-endpoint__section")}>
+          <h3>{translate("request")}</h3>
+          <h4 class={cl("api-endpoint__body-label")}>
+            Body Data{ep.requestBody.required && " (required)"}
+          </h4>
+          {ep.requestBody.description && (
+            <p set:html={renderMarkdownInline(ep.requestBody.description)} />
+          )}
+          <ApiRequestBodyTabs
+            schema={ep.requestBody.schema}
+            examples={ep.requestBody.examples}
+          />
+        </div>
+      )}
+
+      {/* Response */}
+      {ep.responses.length > 0 && <ApiResponse responses={ep.responses} />}
+
+      {/* Code Examples */}
+      {ep.codeExamples.length > 0 && (
+        <ApiCodeExample examples={ep.codeExamples} />
+      )}
+    </section>
+  )
+}

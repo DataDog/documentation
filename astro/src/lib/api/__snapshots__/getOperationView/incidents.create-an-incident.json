@@ -1,0 +1,1555 @@
+{
+  "slug": "create-an-incident",
+  "summary": "Create an incident",
+  "deprecated": false,
+  "variants": [
+    {
+      "operationId": "CreateIncident",
+      "summary": "Create an incident",
+      "slug": "create-an-incident",
+      "method": "POST",
+      "path": "/api/v2/incidents",
+      "description": "Create an incident.",
+      "version": "v2",
+      "deprecated": false,
+      "unstable": true,
+      "unstableMessage": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+      "permissions": [
+        "incident_write"
+      ],
+      "oauthScopes": [
+        "incident_write"
+      ],
+      "oauthScopesAnchor": "incidents",
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents"
+      },
+      "requestBody": {
+        "required": true,
+        "description": "Incident payload.",
+        "schema": [
+          {
+            "name": "data",
+            "type": "object",
+            "required": true,
+            "deprecated": false,
+            "readOnly": false,
+            "description": "Incident data for a create request.",
+            "children": [
+              {
+                "name": "attributes",
+                "type": "object",
+                "required": true,
+                "deprecated": false,
+                "readOnly": false,
+                "description": "The incident's attributes for a create request.",
+                "children": [
+                  {
+                    "name": "customer_impact_scope",
+                    "type": "string",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "Required if `customer_impacted:\"true\"`. A summary of the impact customers experienced during the incident."
+                  },
+                  {
+                    "name": "customer_impacted",
+                    "type": "boolean",
+                    "required": true,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "A flag indicating whether the incident caused customer impact."
+                  },
+                  {
+                    "name": "fields",
+                    "type": "object",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "A condensed view of the user-defined fields for which to create initial selections.",
+                    "children": [
+                      {
+                        "name": "<any-key>",
+                        "type": "oneOf",
+                        "required": false,
+                        "deprecated": false,
+                        "readOnly": false,
+                        "description": "Dynamic fields for which selections can be made, with field names as keys.",
+                        "unionOptions": [
+                          {
+                            "label": "Object 1",
+                            "type": "object",
+                            "description": "A field with a single value selected.",
+                            "fields": [
+                              {
+                                "name": "type",
+                                "type": "enum",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "Type of the single value field definitions.",
+                                "enumValues": [
+                                  "dropdown",
+                                  "textbox"
+                                ],
+                                "defaultValue": "dropdown"
+                              },
+                              {
+                                "name": "value",
+                                "type": "string",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "The single value selected for this field."
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Object 2",
+                            "type": "object",
+                            "description": "A field with potentially multiple values selected.",
+                            "fields": [
+                              {
+                                "name": "type",
+                                "type": "enum",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "Type of the multiple value field definitions.",
+                                "enumValues": [
+                                  "multiselect",
+                                  "textarray",
+                                  "metrictag",
+                                  "autocomplete"
+                                ],
+                                "defaultValue": "multiselect"
+                              },
+                              {
+                                "name": "value",
+                                "type": "[string]",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "The multiple values selected for this field."
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "incident_type_uuid",
+                    "type": "string",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "A unique identifier that represents an incident type. The default incident type will be used if this property is not provided."
+                  },
+                  {
+                    "name": "initial_cells",
+                    "type": "[<oneOf>]",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "An array of initial timeline cells to be placed at the beginning of the incident timeline.",
+                    "unionOptions": [
+                      {
+                        "label": "<cell_type=markdown>",
+                        "type": "object",
+                        "description": "Timeline cell data for Markdown timeline cells for a create request.",
+                        "fields": [
+                          {
+                            "name": "cell_type",
+                            "type": "enum",
+                            "required": true,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "Type of the Markdown timeline cell.",
+                            "enumValues": [
+                              "markdown"
+                            ],
+                            "defaultValue": "markdown"
+                          },
+                          {
+                            "name": "content",
+                            "type": "object",
+                            "required": true,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "The Markdown timeline cell contents.",
+                            "children": [
+                              {
+                                "name": "content",
+                                "type": "string",
+                                "required": false,
+                                "deprecated": false,
+                                "readOnly": false,
+                                "description": "The Markdown content of the cell."
+                              }
+                            ]
+                          },
+                          {
+                            "name": "important",
+                            "type": "boolean",
+                            "required": false,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "A flag indicating whether the timeline cell is important and should be highlighted.",
+                            "defaultValue": "false"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "is_test",
+                    "type": "boolean",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "A flag indicating whether the incident is a test incident."
+                  },
+                  {
+                    "name": "notification_handles",
+                    "type": "[object]",
+                    "required": false,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "Notification handles that will be notified of the incident at creation.",
+                    "children": [
+                      {
+                        "name": "display_name",
+                        "type": "string",
+                        "required": false,
+                        "deprecated": false,
+                        "readOnly": false,
+                        "description": "The name of the notified handle."
+                      },
+                      {
+                        "name": "handle",
+                        "type": "string",
+                        "required": false,
+                        "deprecated": false,
+                        "readOnly": false,
+                        "description": "The handle used for the notification. This includes an email address, Slack channel, or workflow."
+                      }
+                    ]
+                  },
+                  {
+                    "name": "title",
+                    "type": "string",
+                    "required": true,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "The title of the incident, which summarizes what happened."
+                  }
+                ]
+              },
+              {
+                "name": "relationships",
+                "type": "object",
+                "required": false,
+                "deprecated": false,
+                "readOnly": false,
+                "description": "The relationships the incident will have with other resources once created.",
+                "children": [
+                  {
+                    "name": "commander_user",
+                    "type": "object",
+                    "required": true,
+                    "deprecated": false,
+                    "readOnly": false,
+                    "description": "Relationship to user.",
+                    "children": [
+                      {
+                        "name": "data",
+                        "type": "object",
+                        "required": true,
+                        "deprecated": false,
+                        "readOnly": false,
+                        "description": "Relationship to user object.",
+                        "children": [
+                          {
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "A unique identifier that represents the user."
+                          },
+                          {
+                            "name": "type",
+                            "type": "enum",
+                            "required": true,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "Users resource type.",
+                            "enumValues": [
+                              "users"
+                            ],
+                            "defaultValue": "users"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "type",
+                "type": "enum",
+                "required": true,
+                "deprecated": false,
+                "readOnly": false,
+                "description": "Incident resource type.",
+                "enumValues": [
+                  "incidents"
+                ],
+                "defaultValue": "incidents"
+              }
+            ]
+          }
+        ],
+        "examples": [
+          {
+            "name": "Example",
+            "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"
+          }
+        ]
+      },
+      "responses": [
+        {
+          "statusCode": "201",
+          "description": "CREATED",
+          "schemaDescription": "Response with an incident.",
+          "schema": [
+            {
+              "name": "data",
+              "type": "object",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Incident data from a response.",
+              "children": [
+                {
+                  "name": "attributes",
+                  "type": "object",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The incident's attributes from a response.",
+                  "children": [
+                    {
+                      "name": "archived",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Timestamp of when the incident was archived."
+                    },
+                    {
+                      "name": "case_id",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The incident case id."
+                    },
+                    {
+                      "name": "created",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Timestamp when the incident was created."
+                    },
+                    {
+                      "name": "customer_impact_duration",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`."
+                    },
+                    {
+                      "name": "customer_impact_end",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Timestamp when customers were no longer impacted by the incident."
+                    },
+                    {
+                      "name": "customer_impact_scope",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A summary of the impact customers experienced during the incident."
+                    },
+                    {
+                      "name": "customer_impact_start",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Timestamp when customers began being impacted by the incident."
+                    },
+                    {
+                      "name": "customer_impacted",
+                      "type": "boolean",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A flag indicating whether the incident caused customer impact."
+                    },
+                    {
+                      "name": "declared",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Timestamp when the incident was declared."
+                    },
+                    {
+                      "name": "declared_by",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Incident's non Datadog creator.",
+                      "children": [
+                        {
+                          "name": "image_48_px",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Non Datadog creator `48px` image."
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Non Datadog creator name."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "declared_by_uuid",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "UUID of the user who declared the incident."
+                    },
+                    {
+                      "name": "detected",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Timestamp when the incident was detected."
+                    },
+                    {
+                      "name": "fields",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A condensed view of the user-defined fields attached to incidents.",
+                      "children": [
+                        {
+                          "name": "<any-key>",
+                          "type": "oneOf",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Dynamic fields for which selections can be made, with field names as keys.",
+                          "unionOptions": [
+                            {
+                              "label": "Object 1",
+                              "type": "object",
+                              "description": "A field with a single value selected.",
+                              "fields": [
+                                {
+                                  "name": "type",
+                                  "type": "enum",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Type of the single value field definitions.",
+                                  "enumValues": [
+                                    "dropdown",
+                                    "textbox"
+                                  ],
+                                  "defaultValue": "dropdown"
+                                },
+                                {
+                                  "name": "value",
+                                  "type": "string",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "The single value selected for this field."
+                                }
+                              ]
+                            },
+                            {
+                              "label": "Object 2",
+                              "type": "object",
+                              "description": "A field with potentially multiple values selected.",
+                              "fields": [
+                                {
+                                  "name": "type",
+                                  "type": "enum",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Type of the multiple value field definitions.",
+                                  "enumValues": [
+                                    "multiselect",
+                                    "textarray",
+                                    "metrictag",
+                                    "autocomplete"
+                                  ],
+                                  "defaultValue": "multiselect"
+                                },
+                                {
+                                  "name": "value",
+                                  "type": "[string]",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "The multiple values selected for this field."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "incident_type_uuid",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A unique identifier that represents an incident type."
+                    },
+                    {
+                      "name": "is_test",
+                      "type": "boolean",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A flag indicating whether the incident is a test incident."
+                    },
+                    {
+                      "name": "modified",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Timestamp when the incident was last modified."
+                    },
+                    {
+                      "name": "non_datadog_creator",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Incident's non Datadog creator.",
+                      "children": [
+                        {
+                          "name": "image_48_px",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Non Datadog creator `48px` image."
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Non Datadog creator name."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "notification_handles",
+                      "type": "[object]",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Notification handles that will be notified of the incident during update.",
+                      "children": [
+                        {
+                          "name": "display_name",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "The name of the notified handle."
+                        },
+                        {
+                          "name": "handle",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "The handle used for the notification. This includes an email address, Slack channel, or workflow."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "public_id",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The monotonically increasing integer ID for the incident."
+                    },
+                    {
+                      "name": "resolved",
+                      "type": "date-time",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Timestamp when the incident's state was last changed from active or stable to resolved or completed."
+                    },
+                    {
+                      "name": "severity",
+                      "type": "enum",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The incident severity.",
+                      "enumValues": [
+                        "UNKNOWN",
+                        "SEV-0",
+                        "SEV-1",
+                        "SEV-2",
+                        "SEV-3",
+                        "SEV-4",
+                        "SEV-5"
+                      ]
+                    },
+                    {
+                      "name": "state",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The state incident."
+                    },
+                    {
+                      "name": "time_to_detect",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`."
+                    },
+                    {
+                      "name": "time_to_internal_response",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "The amount of time in seconds to call incident after detection. Equals the difference of `detected` and `created`."
+                    },
+                    {
+                      "name": "time_to_repair",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "The amount of time in seconds to resolve customer impact after detecting the issue. Equals the difference between `customer_impact_end` and `detected`."
+                    },
+                    {
+                      "name": "time_to_resolve",
+                      "type": "int64",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "The amount of time in seconds to resolve the incident after it was created. Equals the difference between `created` and `resolved`."
+                    },
+                    {
+                      "name": "title",
+                      "type": "string",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The title of the incident, which summarizes what happened."
+                    },
+                    {
+                      "name": "visibility",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The incident visibility status."
+                    }
+                  ]
+                },
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": true,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The incident's ID."
+                },
+                {
+                  "name": "relationships",
+                  "type": "object",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The incident's relationships from a response.",
+                  "children": [
+                    {
+                      "name": "attachments",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A relationship reference for attachments.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "[object]",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "An array of incident attachments.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the attachment."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The incident attachment resource type.",
+                              "enumValues": [
+                                "incident_attachments"
+                              ],
+                              "defaultValue": "incident_attachments"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "commander_user",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to user.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "object",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to user object.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the user."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Users resource type.",
+                              "enumValues": [
+                                "users"
+                              ],
+                              "defaultValue": "users"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "created_by_user",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to user.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "object",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to user object.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the user."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Users resource type.",
+                              "enumValues": [
+                                "users"
+                              ],
+                              "defaultValue": "users"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "declared_by_user",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to user.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "object",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to user object.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the user."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Users resource type.",
+                              "enumValues": [
+                                "users"
+                              ],
+                              "defaultValue": "users"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "impacts",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to impacts.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "[object]",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "An array of incident impacts.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the impact."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The incident impacts type.",
+                              "enumValues": [
+                                "incident_impacts"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "integrations",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "A relationship reference for multiple integration metadata objects.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "[object]",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Integration metadata relationship array",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the integration metadata."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Integration metadata resource type.",
+                              "enumValues": [
+                                "incident_integrations"
+                              ],
+                              "defaultValue": "incident_integrations"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "last_modified_by_user",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to user.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "object",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to user object.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the user."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Users resource type.",
+                              "enumValues": [
+                                "users"
+                              ],
+                              "defaultValue": "users"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "responders",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to incident responders.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "[object]",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "An array of incident responders.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the responder."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The incident responders type.",
+                              "enumValues": [
+                                "incident_responders"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "user_defined_fields",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Relationship to incident user defined fields.",
+                      "children": [
+                        {
+                          "name": "data",
+                          "type": "[object]",
+                          "required": true,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "An array of user defined fields.",
+                          "children": [
+                            {
+                              "name": "id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "A unique identifier that represents the responder."
+                            },
+                            {
+                              "name": "type",
+                              "type": "enum",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The incident user defined fields type.",
+                              "enumValues": [
+                                "user_defined_field"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "type",
+                  "type": "enum",
+                  "required": true,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Incident resource type.",
+                  "enumValues": [
+                    "incidents"
+                  ],
+                  "defaultValue": "incidents"
+                }
+              ]
+            },
+            {
+              "name": "included",
+              "type": "[<oneOf>]",
+              "required": false,
+              "deprecated": false,
+              "readOnly": true,
+              "description": "Included related resources that the user requested.",
+              "unionOptions": [
+                {
+                  "label": "<type=users>",
+                  "type": "object",
+                  "description": "User object returned by the API.",
+                  "fields": [
+                    {
+                      "name": "attributes",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Attributes of user object returned by the API.",
+                      "children": [
+                        {
+                          "name": "email",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Email of the user."
+                        },
+                        {
+                          "name": "handle",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Handle of the user."
+                        },
+                        {
+                          "name": "icon",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "URL of the user's icon."
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Name of the user."
+                        },
+                        {
+                          "name": "uuid",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "UUID of the user."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "id",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "ID of the user."
+                    },
+                    {
+                      "name": "type",
+                      "type": "enum",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Users resource type.",
+                      "enumValues": [
+                        "users"
+                      ],
+                      "defaultValue": "users"
+                    }
+                  ]
+                },
+                {
+                  "label": "<type=incident_attachments>",
+                  "type": "object",
+                  "description": "Attachment data from a response.",
+                  "fields": [
+                    {
+                      "name": "attributes",
+                      "type": "object",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The attachment's attributes.",
+                      "children": [
+                        {
+                          "name": "attachment",
+                          "type": "object",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "The attachment object.",
+                          "children": [
+                            {
+                              "name": "documentUrl",
+                              "type": "string",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The URL of the attachment."
+                            },
+                            {
+                              "name": "title",
+                              "type": "string",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The title of the attachment."
+                            }
+                          ]
+                        },
+                        {
+                          "name": "attachment_type",
+                          "type": "enum",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "The type of the attachment.",
+                          "enumValues": [
+                            "postmortem",
+                            "link"
+                          ]
+                        },
+                        {
+                          "name": "modified",
+                          "type": "date-time",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Timestamp when the attachment was last modified."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "id",
+                      "type": "string",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The unique identifier of the attachment."
+                    },
+                    {
+                      "name": "relationships",
+                      "type": "object",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The attachment's resource relationships.",
+                      "children": [
+                        {
+                          "name": "incident",
+                          "type": "object",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to incident.",
+                          "children": [
+                            {
+                              "name": "data",
+                              "type": "object",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Relationship to incident object.",
+                              "children": [
+                                {
+                                  "name": "id",
+                                  "type": "string",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "A unique identifier that represents the incident."
+                                },
+                                {
+                                  "name": "type",
+                                  "type": "enum",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Incident resource type.",
+                                  "enumValues": [
+                                    "incidents"
+                                  ],
+                                  "defaultValue": "incidents"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "last_modified_by_user",
+                          "type": "object",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to user.",
+                          "children": [
+                            {
+                              "name": "data",
+                              "type": "object",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Relationship to user object.",
+                              "children": [
+                                {
+                                  "name": "id",
+                                  "type": "string",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "A unique identifier that represents the user."
+                                },
+                                {
+                                  "name": "type",
+                                  "type": "enum",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Users resource type.",
+                                  "enumValues": [
+                                    "users"
+                                  ],
+                                  "defaultValue": "users"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "type",
+                      "type": "enum",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The incident attachment resource type.",
+                      "enumValues": [
+                        "incident_attachments"
+                      ],
+                      "defaultValue": "incident_attachments"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"archived\": \"2019-09-19T10:00:00.000Z\",\n      \"case_id\": \"integer\",\n      \"created\": \"2019-09-19T10:00:00.000Z\",\n      \"customer_impact_duration\": \"integer\",\n      \"customer_impact_end\": \"2019-09-19T10:00:00.000Z\",\n      \"customer_impact_scope\": \"An example customer impact scope\",\n      \"customer_impact_start\": \"2019-09-19T10:00:00.000Z\",\n      \"customer_impacted\": false,\n      \"declared\": \"2019-09-19T10:00:00.000Z\",\n      \"declared_by\": {\n        \"image_48_px\": \"string\",\n        \"name\": \"string\"\n      },\n      \"declared_by_uuid\": \"string\",\n      \"detected\": \"2019-09-19T10:00:00.000Z\",\n      \"fields\": {\n        \"<any-key>\": \"undefined\"\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"is_test\": false,\n      \"modified\": \"2019-09-19T10:00:00.000Z\",\n      \"non_datadog_creator\": {\n        \"image_48_px\": \"string\",\n        \"name\": \"string\"\n      },\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@test.user@test.com\"\n        }\n      ],\n      \"public_id\": 1,\n      \"resolved\": \"2019-09-19T10:00:00.000Z\",\n      \"severity\": \"UNKNOWN\",\n      \"state\": \"string\",\n      \"time_to_detect\": \"integer\",\n      \"time_to_internal_response\": \"integer\",\n      \"time_to_repair\": \"integer\",\n      \"time_to_resolve\": \"integer\",\n      \"title\": \"A test incident title\",\n      \"visibility\": \"string\"\n    },\n    \"id\": \"00000000-0000-0000-1234-000000000000\",\n    \"relationships\": {\n      \"attachments\": {\n        \"data\": [\n          {\n            \"id\": \"00000000-0000-abcd-1000-000000000000\",\n            \"type\": \"incident_attachments\"\n          }\n        ]\n      },\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"created_by_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-2345-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"declared_by_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-2345-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"impacts\": {\n        \"data\": [\n          {\n            \"id\": \"00000000-0000-0000-2345-000000000000\",\n            \"type\": \"incident_impacts\"\n          }\n        ]\n      },\n      \"integrations\": {\n        \"data\": [\n          {\n            \"id\": \"00000000-abcd-0001-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          }\n        ]\n      },\n      \"last_modified_by_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-2345-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"responders\": {\n        \"data\": [\n          {\n            \"id\": \"00000000-0000-0000-2345-000000000000\",\n            \"type\": \"incident_responders\"\n          }\n        ]\n      },\n      \"user_defined_fields\": {\n        \"data\": [\n          {\n            \"id\": \"00000000-0000-0000-2345-000000000000\",\n            \"type\": \"user_defined_field\"\n          }\n        ]\n      }\n    },\n    \"type\": \"incidents\"\n  },\n  \"included\": [\n    {\n      \"attributes\": {\n        \"email\": \"string\",\n        \"handle\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"uuid\": \"string\"\n      },\n      \"id\": \"string\",\n      \"type\": \"users\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "400",
+          "description": "Bad Request",
+          "schemaDescription": "API error response.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "401",
+          "description": "Unauthorized",
+          "schemaDescription": "API error response.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "403",
+          "description": "Forbidden",
+          "schemaDescription": "API error response.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "404",
+          "description": "Not Found",
+          "schemaDescription": "API error response.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "429",
+          "description": "Too many requests",
+          "schemaDescription": "API error response.",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        }
+      ],
+      "codeExamples": [
+        {
+          "language": "curl",
+          "label": "Curl",
+          "entries": [
+            {
+              "description": "Create an incident curl example",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF",
+              "syntax": "bash",
+              "regionVariants": {
+                "us": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                },
+                "us3": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                },
+                "us5": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                },
+                "eu": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                },
+                "ap1": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                },
+                "ap2": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                },
+                "gov": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"00000000-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"00000000-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "language": "go",
+          "label": "Go",
+          "entries": [
+            {
+              "description": "Create an incident returns \"CREATED\" response",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create an incident returns \"CREATED\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2\"\n)\n\nfunc main() {\n\t// there is a valid \"user\" in the system\n\tUserDataID := os.Getenv(\"USER_DATA_ID\")\n\n\tbody := datadogV2.IncidentCreateRequest{\n\t\tData: datadogV2.IncidentCreateData{\n\t\t\tType: datadogV2.INCIDENTTYPE_INCIDENTS,\n\t\t\tAttributes: datadogV2.IncidentCreateAttributes{\n\t\t\t\tTitle:            \"Example-Incident\",\n\t\t\t\tCustomerImpacted: false,\n\t\t\t\tFields: map[string]datadogV2.IncidentFieldAttributes{\n\t\t\t\t\t\"state\": datadogV2.IncidentFieldAttributes{\n\t\t\t\t\t\tIncidentFieldAttributesSingleValue: &datadogV2.IncidentFieldAttributesSingleValue{\n\t\t\t\t\t\t\tType:  datadogV2.INCIDENTFIELDATTRIBUTESSINGLEVALUETYPE_DROPDOWN.Ptr(),\n\t\t\t\t\t\t\tValue: *datadog.NewNullableString(datadog.PtrString(\"resolved\")),\n\t\t\t\t\t\t}},\n\t\t\t\t},\n\t\t\t},\n\t\t\tRelationships: &datadogV2.IncidentCreateRelationships{\n\t\t\t\tCommanderUser: *datadogV2.NewNullableNullableRelationshipToUser(&datadogV2.NullableRelationshipToUser{\n\t\t\t\t\tData: *datadogV2.NewNullableNullableRelationshipToUserData(&datadogV2.NullableRelationshipToUserData{\n\t\t\t\t\t\tType: datadogV2.USERSTYPE_USERS,\n\t\t\t\t\t\tId:   UserDataID,\n\t\t\t\t\t}),\n\t\t\t\t}),\n\t\t\t},\n\t\t},\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tconfiguration.SetUnstableOperationEnabled(\"v2.CreateIncident\", true)\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV2.NewIncidentsApi(apiClient)\n\tresp, r, err := api.CreateIncident(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `IncidentsApi.CreateIncident`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `IncidentsApi.CreateIncident`:\\n%s\\n\", responseContent)\n}\n",
+              "syntax": "go"
+            }
+          ],
+          "instructions": {
+            "exampleFile": "main.go",
+            "runCommandByRegion": {
+              "us": "DD_SITE=\"datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\"",
+              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\"",
+              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\"",
+              "eu": "DD_SITE=\"datadoghq.eu\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\"",
+              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\"",
+              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\"",
+              "gov": "DD_SITE=\"ddog-gov.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" go run \"main.go\""
+            }
+          }
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "Create an incident returns \"CREATED\" response",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nCreate an incident returns \"CREATED\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v2.api.incidents_api import IncidentsApi\nfrom datadog_api_client.v2.model.incident_create_attributes import IncidentCreateAttributes\nfrom datadog_api_client.v2.model.incident_create_data import IncidentCreateData\nfrom datadog_api_client.v2.model.incident_create_relationships import IncidentCreateRelationships\nfrom datadog_api_client.v2.model.incident_create_request import IncidentCreateRequest\nfrom datadog_api_client.v2.model.incident_field_attributes_single_value import IncidentFieldAttributesSingleValue\nfrom datadog_api_client.v2.model.incident_field_attributes_single_value_type import (\n    IncidentFieldAttributesSingleValueType,\n)\nfrom datadog_api_client.v2.model.incident_type import IncidentType\nfrom datadog_api_client.v2.model.nullable_relationship_to_user import NullableRelationshipToUser\nfrom datadog_api_client.v2.model.nullable_relationship_to_user_data import NullableRelationshipToUserData\nfrom datadog_api_client.v2.model.users_type import UsersType\n\n# there is a valid \"user\" in the system\nUSER_DATA_ID = environ[\"USER_DATA_ID\"]\n\nbody = IncidentCreateRequest(\n    data=IncidentCreateData(\n        type=IncidentType.INCIDENTS,\n        attributes=IncidentCreateAttributes(\n            title=\"Example-Incident\",\n            customer_impacted=False,\n            fields=dict(\n                state=IncidentFieldAttributesSingleValue(\n                    type=IncidentFieldAttributesSingleValueType.DROPDOWN,\n                    value=\"resolved\",\n                ),\n            ),\n        ),\n        relationships=IncidentCreateRelationships(\n            commander_user=NullableRelationshipToUser(\n                data=NullableRelationshipToUserData(\n                    type=UsersType.USERS,\n                    id=USER_DATA_ID,\n                ),\n            ),\n        ),\n    ),\n)\n\nconfiguration = Configuration()\nconfiguration.unstable_operations[\"create_incident\"] = True\nwith ApiClient(configuration) as api_client:\n    api_instance = IncidentsApi(api_client)\n    response = api_instance.create_incident(body=body)\n\n    print(response)\n",
+              "syntax": "python"
+            }
+          ],
+          "instructions": {
+            "exampleFile": "example.py",
+            "runCommandByRegion": {
+              "us": "DD_SITE=\"datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\"",
+              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\"",
+              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\"",
+              "eu": "DD_SITE=\"datadoghq.eu\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\"",
+              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\"",
+              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\"",
+              "gov": "DD_SITE=\"ddog-gov.com\" DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\" python3 \"example.py\""
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

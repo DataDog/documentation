@@ -1,0 +1,36 @@
+---
+/**
+ * Every legacy `/api` redirect, in every locale, from one route.
+ *
+ * The paths come from `LEGACY_REDIRECTS` (pinned to Hugo's `api/_index.md`
+ * cascade), so adding a redirect is a one-line table edit rather than a new
+ * stub page. This deliberately does *not* use Astro's config-level `redirects`
+ * map: the site is `output: "server"`, and config redirects inherit
+ * `prerender: config.output !== "server"` — they would be handled by the
+ * adapter at request time and emit nothing into `dist/client`, which 404s on a
+ * static host. `prerender = true` here is what writes the files.
+ *
+ * The route sits below the real `/api/latest/...` pages in Astro's route
+ * priority (static segments outrank rest params), and `getStaticPaths` only
+ * ever emits the table's own paths, so it can't shadow a real API page.
+ */
+import { legacyRedirectStaticPaths } from "@lib/api/legacyRedirects";
+import { localizedHref, parseLangParam } from "@lib/i18n/locale";
+
+export const prerender = true;
+
+export const getStaticPaths = legacyRedirectStaticPaths;
+
+interface Props {
+  to: string;
+}
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+// `localizedHref` applies the preview branch prefix itself, so it stands in for
+// the bare `prefixed()` call the English-only stubs used.
+return Astro.redirect(localizedHref(lang, Astro.props.to));
+---
