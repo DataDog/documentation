@@ -1544,6 +1544,11 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 1
+    - name: Improve agents using traces
+      url: actions/agents/improve_agents_with_traces/
+      identifier: bits_ai_agent_builder_improve_with_traces
+      parent: bits_ai_agent_builder
+      weight: 101
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat

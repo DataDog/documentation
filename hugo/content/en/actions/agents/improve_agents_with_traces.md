@@ -21,7 +21,11 @@ This guide shows how to use [Agent Observability][1] and the agent's own improve
 
 ## Before you begin
 
-Your agent should have:
+Tracing must be enabled on the agent before any runs are recorded. Open the agent in [Bits Agent Builder][3] and select **Enable Tracing**. Tracing is included with Bits Agent Builder at no additional cost.
+
+{{< callout >}} Agent tracing is in Preview. {{< /callout >}}
+
+Your agent should also have:
 
 - Recent runs that represent real usage
 - Access to the [Datadog MCP Server][2] so it can inspect its traces
@@ -69,7 +73,13 @@ Review the evidence and proposed changes carefully. Select **Accept** to apply t
 
 ## Pin parameters that rarely change
 
-Repeated parameters do not need to be selected or generated during every run. Pinning them as defaults reduces unnecessary reasoning and makes tool calls more consistent.
+Pinning a parameter sets its value in the agent's tool configuration instead of leaving the agent to supply it on each run. When a parameter is pinned:
+
+- The same value is sent on every call to that tool.
+- The agent no longer reasons about what to pass, which removes tokens from each run and shortens the decision path.
+- The agent cannot override the value, so a malformed or incorrect argument is no longer possible for that parameter.
+
+This is the same mechanism as hardcoding a parameter from the [tool configuration panel][4]—for example, locking a Slack tool to a single channel. Traces tell you *which* parameters are worth pinning, because the run history shows which values never vary.
 
 Ask the agent:
 
@@ -80,7 +90,7 @@ Pin those as default parameters.
 
 The agent reviews recent tool calls, identifies parameters with consistent values, checks the corresponding tool schemas, and proposes updated tool configurations.
 
-Before accepting the change, verify that each value is truly universal. Do not pin values that vary by environment, repository, service, user, or request type.
+Because a pinned value applies to every run, verify that each one is truly universal before accepting the change. Do not pin values that vary by environment, repository, service, user, or request type: pinning those makes the agent silently wrong on any request that needs a different value.
 
 ## Move conditional instructions into skills
 
@@ -147,3 +157,4 @@ Make one focused improvement at a time. Small, trace-backed changes take less ef
 [1]: /llm_observability/
 [2]: /mcp_server/
 [3]: https://app.datadoghq.com/actions/agents
+[4]: /actions/agents/#tools
