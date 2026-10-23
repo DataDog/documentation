@@ -22,7 +22,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Telemetry rules are in Preview. Events support is limited to select organizations on the US1 site. If you see an issue or want to propose a new feature, use the Give Feedback button in the product UI.
+Telemetry rules are in Preview. If you see an issue or want to propose a new feature, use the Give Feedback button in the product UI.
 {{< /callout >}}
 
 ## Overview
@@ -41,7 +41,7 @@ You need the `governance_console_read` permission to view telemetry rules. To cr
 
 | Rule type | Telemetry type(s) | Applied at | Description |
 |---|---|---|---|
-| Tag Visibility and Enforcement | Metrics, logs, spans, events (Preview) | Ingest | Determines whether telemetry tags and values are compliant, and optionally drops non-compliant telemetry at ingest. |
+| Tag Visibility and Enforcement | Metrics, logs, spans, events | Ingest | Determines whether telemetry tags and values are compliant, and optionally drops non-compliant telemetry at ingest. |
 | Tag Indexing | Metrics | Ingest | Determines custom metric tags that should be indexed for a given metric. |
 | Metric Name Filtering | Metrics | Agent | Drops custom metrics of a given name directly in the Datadog Agent, prior to ingestion. |
 
@@ -103,7 +103,7 @@ You can create and manage specific rules for metrics from the Governance Console
 
 - You can create up to 10 rules each for spans, metrics, and logs.
 - A Tag Visibility and Enforcement rule can specify up to 30 tag values.
-- Telemetry rules support metrics, logs, spans, and events (Preview). Events support is limited to select US1 organizations.
+- Telemetry rules support metrics, logs, spans, and events.
 
 If your tagging strategy requires more rules or tag values, contact your Datadog account team to request a higher limit.
 
