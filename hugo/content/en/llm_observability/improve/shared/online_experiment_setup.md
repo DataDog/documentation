@@ -11,8 +11,8 @@ Edit this file to update both pages. -->
 
 1. Create a [Datadog feature flag][12].
 1. Evaluate the flag in your application and run the assigned variant.
-1. Report a numeric Agent Observability evaluation score.
-1. Link the feature flag and evaluation score to a Datadog experiment.
+1. Report an Agent Observability evaluation.
+1. Link the feature flag and evaluation to a Datadog experiment.
 1. Run the experiment and review the results.
 
 {{< skill-callout
@@ -29,7 +29,7 @@ Before you begin:
 
 - [Instrument your LLM application with Agent Observability][1].
 - Install and initialize a [Datadog Feature Flags SDK][2] in the application.
-- Choose the application behavior you want to compare and a numeric evaluation score that measures the outcome.
+- Choose the application behavior you want to compare and an evaluation that measures the outcome. The evaluation must return a numeric score or a pass or fail assessment.
 - Confirm that you have the permissions listed in [Plan and Launch Experiments][3].
 
 <div class="alert alert-info"><strong>Using an AI coding agent?</strong> Datadog organizations allow read-only <a href="/llm_observability/build_with_ai/mcp_server/">MCP tools</a> by default. To let an agent create feature flags and experiments, an organization administrator must enable MCP write access, and your role must have the <code>mcp_write</code> permission. See <a href="/mcp_server/setup/#required-permissions">Required permissions</a> for the Datadog MCP Server.</div>
@@ -55,9 +55,9 @@ Set the Feature Flags evaluation context `targetingKey` to a stable identifier f
 - For an application with a human user, use a stable user identifier.
 - For an autonomous workflow without a human user, generate a UUID at the start of the run and retain it for the entire run.
 
-You use this same value as the `subject_identifier` when you report the evaluation score in [Step 3](#step-3-report-an-evaluation-score). If the values do not match, Datadog cannot associate the score with the subject's experiment exposure. For more information, see [The targeting key][6].
+You use this same value as the `subject_identifier` when you report the evaluation in [Step 3](#step-3-report-an-evaluation). If the values do not match, Datadog cannot associate the evaluation with the subject's experiment exposure. For more information, see [The targeting key][6].
 
-## Step 3: Report an evaluation score
+## Step 3: Report an evaluation
 
 <div class="alert alert-warning"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw boolean and categorical values cannot be used directly as experiment metrics.</div>
 
@@ -110,7 +110,7 @@ For trace-level evaluations, add the tag to the root span of the trace. Session-
 
 Follow [Plan and Launch Experiments][3] to create and start the experiment:
 
-1. Select the Agent Observability evaluation score from [Step 3](#step-3-report-an-evaluation-score) as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
+1. Select a metric based on the Agent Observability evaluation from [Step 3](#step-3-report-an-evaluation) as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
 1. Add the feature flag from [Step 1](#step-1-create-a-feature-flag).
 1. Configure how traffic is split between the control and treatment variants.
 1. Start the experiment.
@@ -125,9 +125,9 @@ Starting the experiment adds the experiment targeting rule to the selected flag 
 
 ## Step 5: Run the experiment and review results
 
-Send traffic through the application. For each subject, the application must evaluate the feature flag and report an evaluation score with the same subject identifier.
+Send traffic through the application. For each subject, the application must evaluate the feature flag and report an evaluation with the same subject identifier.
 
-As exposures and evaluation scores arrive, Datadog populates the experiment results. Follow [Reading Experiment Results][10] to interpret the metric scorecard and compare the variants.
+As exposures and evaluations arrive, Datadog populates the experiment results. Follow [Reading Experiment Results][10] to interpret the metric scorecard and compare the variants.
 
 {{< img src="/product_analytics/experiment/guide/llm_experiment_results.png" alt="A completed LLM application experiment showing the rollout decision and relative lift for quality, token usage, and estimated cost metrics across the control and treatment variants." style="width:90%;" >}}
 
@@ -136,7 +136,7 @@ As exposures and evaluation scores arrive, Datadog populates the experiment resu
 If the experiment reports missing metric data, confirm that:
 
 - The application evaluated the experiment's feature flag for the subject.
-- The evaluation has a numeric `score` value.
+- The evaluation has a numeric `score` value or a `pass` or `fail` assessment.
 - The evaluation's `subject_identifier` exactly matches the feature flag evaluation's `targetingKey`.
 
 [1]: /llm_observability/instrument/
