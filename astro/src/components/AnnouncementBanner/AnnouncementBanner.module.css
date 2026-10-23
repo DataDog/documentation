@@ -23,6 +23,14 @@
   font-weight: var(--hugo-nav-item-font-weight);
 }
 
+/* `hide_on_mobile`: Hugo's `d-none d-md-block`. BaseLayout zeroes the banner
+   offset at the same breakpoint (tokens/hugo.css). */
+@media (max-width: 767.98px) {
+  .announcement-banner--hide-mobile {
+    display: none;
+  }
+}
+
 .announcement-banner a {
   font-size: var(--hugo-banner-font-size);
   color: var(--hugo-banner-text-color);
