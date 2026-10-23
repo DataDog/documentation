@@ -93,7 +93,7 @@ Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can instal
 
 ## Core features
 
-### Code Security
+### Code security
 
 The [**Code Security**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
 
@@ -123,7 +123,7 @@ You can also use this feature to open your source files from an insight (such as
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
-### Fix in Chat
+### Fix in chat
 
 The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
 
@@ -133,7 +133,7 @@ The extension also handles the {{< ui >}}Fix with Cursor{{< /ui >}} deep link us
 
 ## Data and telemetry
 
-Datadog collects certain information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. This data is used to help improve the extension's performance and features, including transitions to and from the extension and the applicable Datadog login page for accessing the Services.
+Datadog collects information about your use of this IDE. This includes how you interact with it, whether errors occurred, what caused those errors, and user identifiers. Collection follows the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. Datadog uses this data to improve the extension's performance and features. It also covers moves between the extension and the Datadog login page.
 
 If you don't wish to send this data to [Datadog][3], you can disable this at any time in the extension's settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
