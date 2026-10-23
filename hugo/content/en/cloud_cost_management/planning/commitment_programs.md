@@ -143,42 +143,15 @@ Results appear in two sections:
 ## Azure Databricks pre-purchase plans
 <!-- vale Datadog.headings = YES -->
 
-Azure Databricks pre-purchase plans provide a prepaid balance that eligible usage consumes over the plan's term. Use Commitment Programs to track how much of each plan has been used, how much remains, and when it expires.
+Track Azure Databricks pre-purchase plans using your existing Azure Cloud Cost Management setup. In [**Cloud Cost > Planning > Commitment Programs**][1], select Azure Databricks and a reporting period to review plans, balances, and expiration dates.
 
-### View your plans
+- **Used** is the cost of usage paid for by the plan, from purchase through the end of the selected period.
+- **Remaining** is the purchase cost minus that cumulative used amount. Compare it with the expiration date to identify balances to use before the plan ends.
+- **Used in period** and **Realized savings in period** cover only the selected reporting period.
 
-Pre-purchase plans use your existing [Azure Cloud Cost Management setup][6]. No additional setup is required.
+If a plan is missing, check that its purchase is included in your [historical Azure cost data][6].
 
-1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] and select Azure Databricks to view pre-purchase plans.
-2. Select a reporting period. The inventory includes plans that were active during any part of that period, including plans that have since expired.
-3. Compare each plan's remaining balance with its expiration date to identify balances to use before the plan ends.
-
-> **Screenshot placeholder:** Add an Azure Databricks pre-purchase plan inventory screenshot showing balances and expiration dates for the selected reporting period. Replace this placeholder before publication.
-
-### Understand balances and savings
-
-Amounts are expressed in the billing currency. Cumulative balances and selected-period values cover different time ranges:
-
-| Value | Description |
-|---|---|
-| Purchase cost | Amount paid for the plan. |
-| Used | Cost of usage paid for by the plan, from purchase through the end of the selected period. |
-| Remaining | Purchase cost minus the cumulative used amount, measured at the end of the selected period. |
-| Remaining percentage | Remaining balance as a percentage of the purchase cost. |
-| Used in period | Cost of usage paid for by the plan during the selected period only. |
-| Realized savings in period | Retail on-demand cost of the covered usage minus its cost under the plan, during the selected period only. |
-
-For example, a plan costs $10,000 and has covered $3,000 of usage by the end of June, including $1,000 in June. With June selected, used is $3,000, remaining is $7,000 (70%), and used in period is $1,000. If that June usage would have cost $1,200 at retail on-demand rates, realized savings in period is $200.
-
-A remaining balance is available to cover eligible usage until the plan expires. Review it alongside the expiration date when assessing whether a plan is likely to go unused.
-
-### Interpret dates and missing data
-
-The start date is the purchase date, and the expiration date is the last day covered by the plan. Status reflects the selected reporting period: a plan that expires after that period is shown as active for that period, even when viewed after expiration.
-
-Plan visibility depends on the purchase appearing in the available cost history. Incomplete usage history can also understate the used balance and overstate the remaining balance. See [Getting historical Azure cost data][7] for backfill instructions.
-
-When the purchase cost is unavailable, the remaining amount and percentage are unavailable. Realized savings are unavailable when retail on-demand pricing is missing for usage in the selected period. Missing values do not mean zero cost or zero savings.
+> **Screenshot placeholder:** Add an Azure Databricks pre-purchase plan inventory screenshot showing balances and expiration dates. Replace this placeholder before publication.
 
 ## Example use cases
 
@@ -226,5 +199,4 @@ When the purchase cost is unavailable, the remaining amount and percentage are u
 [3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
 [5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
-[6]: /cloud_cost_management/setup/azure/
-[7]: /cloud_cost_management/setup/azure/#getting-historical-data
+[6]: /cloud_cost_management/setup/azure/#getting-historical-data
