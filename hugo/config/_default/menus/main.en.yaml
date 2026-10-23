@@ -2390,10 +2390,10 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits Code
-      url: bits_ai/bits_code
+    - name: Bits Investigation
+      url: error_tracking/bits_investigation
       parent: error_tracking
-      identifier: error_tracking_bits_ai_dev_agent
+      identifier: error_tracking_bits_investigation
       weight: 5
     - name: Monitors
       url: error_tracking/monitors
@@ -7036,6 +7036,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
+    - name: Prometheus
+      url: observability_pipelines/sources/prometheus/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_prometheus
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
@@ -7311,6 +7316,11 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry/metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 422
     - name: Prometheus
       url: /observability_pipelines/destinations/prometheus/
       parent: observability_pipelines_destinations
@@ -7732,26 +7742,36 @@ menu:
       parent: log_management
       identifier: log_reports
       weight: 8
+    - name: Migration
+      url: logs/migration/
+      parent: log_management
+      identifier: log_migration
+      weight: 9
+    - name: Query Translation
+      url: logs/migration/query_translation/
+      parent: log_migration
+      identifier: log_migration_query_translation
+      weight: 901
     - name: Guides
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 9
+      weight: 10
     - name: Data Security
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 11
+      weight: 12
     - name: Live Tail
       url: logs/troubleshooting/live_tail
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
-      weight: 1101
+      weight: 1201
     - name: BYOC Logs
       pre: upload-wui
       url: byoc-logs/

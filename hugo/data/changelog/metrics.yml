@@ -21,3 +21,9 @@ entries:
       - CreateTagIndexingRuleExemption
       - GetTagIndexingRuleExemption
     title: Add impact fields to tag indexing rule exemptions
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40849
+    operations:
+      - QueryMetrics
+    title: Document missing response fields for the v1 Query timeseries points 
+      endpoint

@@ -3,35 +3,39 @@ aliases:
 - /ja/security_platform/application_security/add-user-info
 - /ja/security/application_security/add-user-info
 - /ja/security/application_security/threats/add-user-info/
-title: ユーザーのモニターと保護
+further_reading:
+- link: https://www.datadoghq.com/blog/app-api-protection-python-lambda-monitoring/
+  tag: ブログ
+  text: Datadog AAP を使用して Python Lambda 関数のランタイム脅威を検出する
+title: ユーザーのモニタリングと保護
 ---
-## 概要
+## 概要 {#overview}
 
-サービスをインスツルメンテーションし、ユーザーのアクティビティを追跡することで、悪質なユーザーを検出、ブロックします。
+サービスをインスツルメントし、ユーザーのアクティビティを追跡することで、悪質なユーザーを検出およびブロックします。
 
-[認証されたユーザー情報をトレースに追加](#addingauthenticateduserinformationtotracesandenablinguserblockingcapability) し、認証された攻撃面を狙う悪意のある行為者を特定しブロックします。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、認証された攻撃者を AAP がブロックするために必要なインスツルメンテーションを提供します。これにより、AAP は攻撃とビジネスロジックイベントをユーザーに関連付けることができます。
+[認証済みユーザー情報をトレースに追加する](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability)ことで、認証された攻撃対象領域を狙う悪質なユーザーを特定およびブロックします。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、認証された攻撃者を AAP がブロックするために必要なインスツルメンテーションを提供します。これにより、AAP は攻撃とビジネスロジックイベントをユーザーに関連付けることができます。
 
-[ユーザーログインとアクティビティを追跡](#addingbusinesslogicinformationloginsuccessloginfailureanybusinesslogictotraces) し、すぐに使える検出ルールを使用してアカウント乗っ取りやビジネスロジックの悪用を検出して最終的に攻撃者をブロックします。
+[ユーザーのログインとアクティビティを追跡](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces)し、すぐに使える検出ルールでアカウントの乗っ取りやビジネスロジックの乱用を検出し、最終的に攻撃者をブロックします。
 
-すぐに使える検出ルールが利用可能なカスタムユーザーアクティビティは以下の通りです。
+すぐに使える検出ルールとして、以下のようなカスタムユーザーアクティビティがあります。
 
-|組み込みイベント名   | 必要なメタデータ                                    | 関連ルール                                                                                                                                                                                                       |
-||||
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [IP からのレート制限対象アクティビティ][4]<br>[未承認のアクティビティが検出されました][5] |
-| `users.login.success`  | ユーザー ID は必須であり、オプションのメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]<br>[ブルートフォース攻撃][12]<br>[分散クレデンシャルスタッフィング][13]               |
-| `users.login.failure`  | ユーザー ID と `usr.exists` は必須であり、オプションのメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]<br>[ブルートフォース攻撃][12]<br>[分散クレデンシャルスタッフィング][13]  |
+| 組み込みイベント名   | 必要なメタデータ                                    | 関連ルール                                                                                                                                                                                                       |
+|------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [IP からのレート制限アクティビティ][4]<br>[不正なアクティビティの検出][5] |
+| `users.login.success`  | ユーザー ID は必須であり、オプションのメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]<br>[ブルートフォース攻撃][12]<br>[分散型クレデンシャルスタッフィング][13]               |
+| `users.login.failure`  | ユーザー ID および `usr.exists` は必須であり、オプションのメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]<br>[ブルートフォース攻撃][12]<br>[分散型クレデンシャルスタッフィング][13]  |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント作成][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント削除][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [パスワードリセットのブルートフォース試行][9]                                                                                                         |
-| `payment.failure`      | なし                                                 | [IP からの支払いエラーが頻発している][10]                                                                                                        |
+| `payment.failure`      | なし                                                 | [IP からの過剰な支払い失敗][10]                                                                                                        |
 
-## 認証済みユーザー情報のトレース追加とユーザーブロック機能の有効化
+## 認証済みユーザー情報のトレース追加とユーザーブロック機能の有効化 {#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability}
 
 <div class="alert alert-info">
-<strong>ユーザーアクティビティの自動検出:</strong> Datadog トレースライブラリは、ユーザーアクティビティイベントを自動的に検出し報告しようとします。詳細については、<a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">自動ユーザーアクティビティイベントトラッキングの無効化</a>を参照してください。
+<strong>ユーザーイベントの自動検出:</strong> Datadog SDK は、ユーザーアクティビティイベントを自動的に検出および報告しようとします。詳細については、<a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">自動ユーザーアクティビティイベントトラッキングの無効化</a>を参照してください。
 </div>
 
-[ルートスパンにカスタムタグを追加する][3] 方法と、後述のインスツルメンテーション関数を利用する方法があります。
+[ルートスパンにカスタムタグを追加する][3]方法と、後述のインスツルメンテーション関数を利用する方法があります。
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -41,7 +45,7 @@ title: ユーザーのモニターと保護
 
 ユーザー監視タグはルートスパンに適用され、プレフィックス `usr` の後にフィールド名が続きます。たとえば、`usr.name` はユーザーの名前を追跡するユーザー監視タグです。
 
-**注**: アプリケーションに [必要な依存関係][1] が追加されていることを確認してください。
+**注**: アプリケーションに[必要な依存関係][1]が追加されていることを確認してください。
 
 以下の例では、ルートスパンを取得し、関連するユーザー監視タグを追加し、ユーザーブロック機能を有効にする方法を示しています。
 
@@ -101,15 +105,15 @@ using Datadog.Trace;
     Tracer.Instance.ActiveScope?.Span.SetUser(userDetails);
 ```
 
-情報およびオプションについては、[.NET トレーサーのドキュメント][1] をお読みください。
+情報およびオプションについては、[.NET トレーサーのドキュメント][1]を参照してください。
 
-[1]: https://github.com/DataDog/ddtracedotnet/tree/master/docs/Datadog.Trace#useridentification
+[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
 
-Go トレーサーパッケージは `SetUser()` 関数を提供し、トレースにユーザー情報を追加することで認証されたリクエストを監視できるようにします。他のオプションについては、[Go トレーサーのドキュメント][2] (または [v1 ドキュメント][1]) をご覧ください。
+Go トレーサーパッケージは `SetUser()` 関数を提供し、トレースにユーザー情報を追加することで認証されたリクエストを監視できるようにします。他のオプションについては、[Go トレーサーのドキュメント][2] (または [v1 ドキュメント][1]) を参照してください。
 
 この例では、現在のトレーサースパンを取得し、それを使用してユーザー監視タグを設定し、ユーザーのブロック機能を有効にする方法を示します。{{% tracing-go-v2 %}}
 
@@ -127,8 +131,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/ddtracego.v1/ddtrace/tracer#SetUser
-[2]: https://pkg.go.dev/github.com/DataDog/ddtracego/v2/ddtrace/tracer#SetUser
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
 
 {{< /programming-lang >}}
 
@@ -136,9 +140,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 以下の API のいずれかを使用して、トレースにユーザー情報を追加し、アプリケーションで認証されたリクエストを監視できるようにします。
 
-{{% collapse-content title="set_user" level="h4" expanded="true" %}}
+{{% collapse-content title="set_user" level="h3" expanded="true" %}}
 
-`ddtrace` 1.1.0 以降、`Datadog::Kit::Identity.set_user` メソッドが利用可能です。これは、トレースにユーザー情報を追加するための推奨 API です：
+`ddtrace` 1.1.0 以降、`Datadog::Kit::Identity.set_user` メソッドが利用可能です。これは、トレースにユーザー情報を追加するための推奨 API です。
 
 ```ruby
 # Get the active trace
@@ -156,8 +160,8 @@ Datadog::Kit::Identity.set_user(
 
   # optional tags with known semantics
   name: 'Jean Example',
-  email:, 'jean.example@example.com',
-  session_id:, '987654321',
+  email: 'jean.example@example.com',
+  session_id: '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
@@ -167,17 +171,17 @@ Datadog::Kit::Identity.set_user(
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="set_tag" level="h4" expanded="false" id="ruby-set-tag" %}}
+{{% collapse-content title="set_tag" level="h3" expanded="false" id="ruby-set-tag" %}}
 
-`Datadog::Kit::Identity.set_user` がニーズに合わない場合は、代わりに `set_tag` を使用することができます。
+`Datadog::Kit::Identity.set_user` がニーズに合わない場合は、代わりに `set_tag` を使用できます。
 
 ユーザー監視タグはトレースに適用され、プレフィックス `usr.` の後にフィールド名が続きます。たとえば、`usr.name` はユーザーの名前を追跡するユーザー監視タグです。
 
 以下の例では、アクティブトレースを取得し、関連するユーザー監視タグを追加する方法を示しています。
 
 **注**:
- タグの値は文字列でなければなりません。
-`usr.id` タグは必須です。
+- タグの値は文字列でなければなりません。
+- `usr.id` タグは必須です。
 
 ```ruby
 # Get the active trace
@@ -204,7 +208,7 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 PHP トレーサーは `\DDTrace\set_user()` 関数を提供し、認証されたリクエストを監視したりブロックしたりすることができます。
 
-`\DDTrace\set_user()` はトレースに関連するユーザータグとメタデータを追加し、ユーザーブロックを自動的に実行します。
+`\DDTrace\set_user()`トレースに関連するユーザータグとメタデータを追加し、ユーザーブロックを自動的に実行します。
 
 以下の例では、ユーザー監視タグを設定し、ユーザーブロックを有効にする方法を示します。
 
@@ -261,22 +265,22 @@ if (tracer.appsec.isUserBlocked(user)) {  // also set the currently authenticate
 }
 ```
 
-情報およびオプションについては、[Node.js トレーサーのドキュメント][1] をお読みください。
+情報およびオプションについては、[Node.js トレーサーのドキュメント][1]を参照してください。
 
 
 
-[1]: https://datadoghq.dev/ddtracejs/#setuser
+[1]: https://datadoghq.dev/dd-trace-js/#set-user
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-ddtracepy v3.7 からは、新しい Python トレーサーの SDK を使用してユーザーおよびユーザーイベントを追跡することができます。
+dd-trace-py v3.7 からは、新しい Python トレーサーの SDK を使用してユーザーおよびユーザーイベントを追跡することができます。
 
 以前のバージョンでは、Python トレーサーパッケージが提供する `set_user` 関数を用いて、トレースにユーザー情報を追加することで認証されたリクエストを監視できます。
 
-{{% collapse-content title="ユーザー追跡 SDK" level="h4" expanded="true" id="python-user-info-sdk" %}}
+{{% collapse-content title="ユーザー追跡 SDK" level="h3" expanded="true" id="python-user-info-sdk" %}}
 
-ddtracepy v3.7 からは、この例ではユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を示します。
+dd-trace-py v3.7 以降、この例ではユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を示します。
 
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
@@ -314,7 +318,7 @@ track_user(
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="レガシー API" level="h4" expanded="false" id="python-user-info-legacy" %}}
+{{% collapse-content title="レガシー API" level="h3" expanded="false" id="python-user-info-legacy" %}}
 
 この例では、レガシー API を使用してユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を示します。ただし、上記で説明した新しいユーザートラッキング SDK の使用が推奨されます。
 
@@ -333,10 +337,10 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 {{< /programming-lang-wrapper >}}
 
-## ビジネスロジック情報 (ログイン成功、ログイン失敗、任意のビジネスロジック) のトレース追加
+## ビジネスロジック情報 (ログイン成功、ログイン失敗、任意のビジネスロジック) のトレース追加 {#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces}
 
 <div class="alert alert-info">
-<strong> usr.id と usr.login に関する注意事項: </strong>ログインの悪用調査は、似て非なる 2 つの概念に基づいています。usr.id にはデータベース内のユーザーアカウントの一意の識別子が含まれています。それは一意で不変です。存在しないアカウントにログインしようとする際には利用できません。ユーザーブロックは usr.id を対象とします。</br>
+<strong> usr.id と usr.login に関する注意事項:</strong> ログインの悪用調査は、似て非なる 2 つの概念に基づいています。usr.id にはデータベース内のユーザーアカウントの一意の識別子が含まれています。それは一意で不変です。存在しないアカウントにログインしようとする際には利用できません。ユーザーブロックは usr.id を対象とします。</br>
 ユーザーは一般的に自分のユーザー ID を認識していません。代わりに、可変の識別子 (電話番号、ユーザー名、メールアドレスなど) を利用します。ユーザーがアカウントにログインするために使用する文字列は、ログインイベントで usr.login として報告されるべきです。</br>
 usr.login が提供されない場合は、代わりに usr.id が使用されます。</a>
 </div>
@@ -344,11 +348,11 @@ usr.login が提供されない場合は、代わりに usr.id が使用され�
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-ddtracejava v1.8.0 からは、Java トレーサーの API を使用してユーザーイベントを追跡することができます。
+dd-trace-java v1.8.0 からは、Java トレーサーの API を使用してユーザーイベントを追跡することができます。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h3" expanded="true" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -378,7 +382,7 @@ public class LoginController {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="java-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h3" expanded="false" id="java-login-failure" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -395,8 +399,8 @@ public class LoginController {
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
         metadata.put("usr.login", userName);
-        if (userExists != null) {
-            userId = getUserId(userName)
+        if (userExists) {
+            userId = getUserId(userName);
             metadata.put("email", user.getEmail());
         } else {
             userId = userName;
@@ -411,7 +415,7 @@ public class LoginController {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタムビジネスロジック" level="h4" expanded="false" id="java-custom-business" %}}
+{{% collapse-content title="カスタムビジネスロジック" level="h3" expanded="false" id="java-custom-business" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -440,11 +444,11 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-ddtracedotnet v2.23.0 からは、.NET トレーサーの API を使用してユーザーイベントを追跡することができます。
+dd-trace-dotnet v2.23.0 からは、.NET トレーサーの API を使用してユーザーイベントを追跡することができます。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h3" expanded="true" %}}
 
 ```csharp
 using Datadog.Trace.AppSec;
@@ -463,7 +467,7 @@ void OnLogonSuccess(string userId, string login...)
 
 ```
 {{% /collapse-content %}}
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="dotnet-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h3" expanded="false" id="dotnet-login-failure" %}}
 
 ```csharp
 using Datadog.Trace.AppSec;
@@ -483,7 +487,7 @@ void OnLogonFailure(string userId, string login, bool userExists, ...)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタムビジネスロジック" level="h4" expanded="false" id="dotnet-custom-business" %}}
+{{% collapse-content title="カスタムビジネスロジック" level="h3" expanded="false" id="dotnet-custom-business" %}}
 
 ```csharp
 void OnUserSignupComplete(string userId, ...)
@@ -504,11 +508,11 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-ddtracego v1.47.0 からは、Go トレーサーの API を使用してユーザーイベントを追跡することができます。
+dd-trace-go v1.47.0 からは、Go トレーサーの API を使用してユーザーイベントを追跡することができます。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。{{% tracing-go-v2 %}}
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h3" expanded="true" %}}
 
 ```go
 import (
@@ -530,7 +534,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 {{% /collapse-content %}}
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="go-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h3" expanded="false" id="go-login-failure" %}}
 
 ```go
 import (
@@ -548,7 +552,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタムビジネスロジック" level="h4" expanded="false" id="go-custom-business" %}}
+{{% collapse-content title="カスタムビジネスロジック" level="h3" expanded="false" id="go-custom-business" %}}
 
 ```go
 import (
@@ -567,11 +571,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-ddtracerb v1.9.0 からは、Ruby トレーサーの API を使用してユーザーイベントを追跡することができます。ddtracerb v2.19.0 のバージョンでは、`Datadog::Kit::AppSec::Events::V2` ネームスペースの下に新しいメソッドが導入されました。既存のイベント追跡メソッドは互換性のために保持されています。
+dd-trace-rb v1.9.0 からは、Ruby トレーサーの API を使用してユーザーイベントを追跡することができます。dd-trace-rb のバージョン v2.19.0 では、`Datadog::Kit::AppSec::Events::V2` ネームスペースの下に新しいメソッドが導入されています。既存のイベント追跡メソッドは互換性のために保持されています。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h3" expanded="true" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -588,7 +592,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="ruby-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h3" expanded="false" id="ruby-login-failure" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -601,7 +605,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタムビジネスロジック" level="h4" expanded="false" id="ruby-custom-business" %}}
+{{% collapse-content title="カスタムビジネスロジック" level="h3" expanded="false" id="ruby-custom-business" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events'
@@ -615,20 +619,20 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
-#### 新しいログイン成功および失敗メソッドへの移行
+#### 新しいログイン成功および失敗メソッドへの移行 {#migrating-to-the-new-login-success-and-failure-methods}
 
-`Datadog::Kit::AppSec::Events::V2` に追加された新しいメソッドは、パラメーターの順序がより直感的で、関心の分離もより明確になっています。主な変更点は以下の通りです。
+`Datadog::Kit::AppSec::Events::V2` の新しいメソッドは、パラメーターの順序がより直感的で、関心の分離もより明確になっています。主な変更点は以下の通りです。
 
-1. ログイン識別子 (メールアドレス、ユーザー名) が最初のパラメーターであり、必須です。
-2. ユーザーオブジェクト/ID は成功イベントでは任意であり、失敗イベントからは削除されています。
+1.  ログイン識別子 (メールアドレス、ユーザー名) が最初のパラメーターであり、必須です。
+2.  ユーザーオブジェクト/ID は成功イベントでは任意であり、失敗イベントからは削除されています。
 3. メタデータは簡素化され、`usr.login` フィールドは不要になりました。
 4. トレースおよびスパンパラメーターは不要になり、自動的に推測されます。
 
-**注意**: 従来のメソッド `track_login_success` と `track_login_failure` は非推奨となり、それぞれ新しいメソッド `track_user_login_success` と `track_user_login_failure` が推奨されます。
+**注**: 従来のメソッド `track_login_success` および `track_login_failure` は非推奨となり、それぞれ新しいメソッド `track_user_login_success` および `track_user_login_failure` が推奨されます。
 
 以下の例では、コメントされたコードは不要になりました。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+{{% collapse-content title="ログイン成功" level="h5" expanded="true" id="ruby-v2-migration-login-success" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -650,7 +654,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h5" expanded="false" id="ruby-v2-migration-login-failure" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events/v2'
@@ -672,11 +676,11 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-ddtracephp v0.84.0 からは、PHP トレーサーの API を使用してユーザーイベントを追跡することができます。ddtracephp v1.11.0 では、`\datadog\appsec\v2\` ネームスペースの下に新しいメソッドが導入されました。既存のイベント追跡メソッドは互換性のために保持されています。
+dd-trace-php v0.84.0 からは、PHP トレーサーの API を使用してユーザーイベントを追跡することができます。dd-trace-php のバージョン v1.11.0 では、`\datadog\appsec\v2\` ネームスペースの下に新しいメソッドが導入されています。既存のイベント追跡メソッドは互換性のために保持されています。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h3" expanded="true" %}}
 
 ```php
 <?php
@@ -695,7 +699,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="php-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h3" expanded="false" id="php-login-failure" %}}
 
 ```php
 <?php
@@ -711,7 +715,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタムビジネスロジック" level="h4" expanded="false" id="php-custom-business" %}}
+{{% collapse-content title="カスタムビジネスロジック" level="h3" expanded="false" id="php-custom-business" %}}
 
 ```php
 <?php
@@ -722,19 +726,19 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-#### 新しいログイン成功および失敗メソッドへの移行
+#### 新しいログイン成功および失敗メソッドへの移行 {#migrating-to-the-new-login-success-and-failure-methods-1}
 
 `\datadog\appsec\v2\` ネームスペースの新しいメソッドは、パラメーターの順序がより直感的で、関心の分離もより明確になっています。主な変更点は以下の通りです。
 
-1. ログイン識別子 (メールアドレス、ユーザー名) が最初のパラメーターであり、必須です。
+1.  ログイン識別子 (メールアドレス、ユーザー名) が最初のパラメーターであり、必須です。
 2. ユーザー配列/ID は成功イベントでは任意であり、失敗イベントからは削除されています。
 3. メタデータは簡素化され、`usr.login` フィールドは不要になりました。
 
-**注意**: 従来のメソッド `\datadog\appsec\track_user_login_success_event` と `\datadog\appsec\track_user_login_failure_event` は非推奨となり、それぞれ新しいメソッド `\datadog\appsec\v2\track_user_login_success` と `\datadog\appsec\v2\track_user_login_failure` が推奨されます。
+**注**: 従来のメソッド `\datadog\appsec\track_user_login_success_event` および `\datadog\appsec\track_user_login_failure_event` は非推奨となり、それぞれ新しいメソッド `\datadog\appsec\v2\track_user_login_success` および `\datadog\appsec\v2\track_user_login_failure` が推奨されます。
 
 以下の例では、コメントされたコードは不要になりました。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h5" expanded="true" %}}
 
 ```php
 <?php
@@ -757,7 +761,7 @@ $metadata = [
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="php-migration-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h5" expanded="false" id="php-migration-login-failure" %}}
 
 ```php
 <?php
@@ -779,22 +783,22 @@ $metadata = [
 
 {{< programming-lang lang="nodejs" >}}
 
-ddtracejs v3.13.1 からは、Node.js トレーサー API を使用してユーザーイベントを追跡することができます。ddtracejs のバージョン v5.48.0 では、`eventTrackingV2` ネームスペースの下に新しいメソッドが導入されています。既存のイベント追跡メソッドは互換性のために保持されています。
+dd-trace-js v3.13.1 からは、Node.js トレーサー API を使用してユーザーイベントを追跡することができます。dd-trace-js のバージョン v5.48.0 では、`eventTrackingV2` ネームスペースの下に新しいメソッドが導入されています。既存のイベント追跡メソッドは互換性のために保持されています。
 
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h3" expanded="true" %}}
 
 ```javascript
 const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
+  id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const user = 'user-id' // user could be just the ID
+// Alternatively: const user = 'user-id' (user can be just the ID string)
 const login = 'user@email.com'
 const metadata = { 'key': 'value' } // you can add arbitrary fields
 
@@ -804,7 +808,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="nodejs-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h3" expanded="false" id="nodejs-login-failure" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -821,7 +825,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタムビジネスロジック" level="h4" expanded="false" id="nodejs-custom-business" %}}
+{{% collapse-content title="カスタムビジネスロジック" level="h3" expanded="false" id="nodejs-custom-business" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -834,19 +838,19 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 ```
 {{% /collapse-content %}}
 
-####新しいログイン成功および失敗メソッドへの移行
+#### 新しいログイン成功および失敗メソッドへの移行 {#migrating-to-the-new-login-success-and-failure-methods-2}
 
 `eventTrackingV2` の新しいメソッドは、パラメーターの順序がより直感的で、関心の分離もより明確になっています。主な変更点は以下の通りです。
 
-1. ログイン識別子 (メールアドレス、ユーザー名) が最初のパラメーターであり、必須です。
-2. ユーザーオブジェクト/ID は成功イベントでは任意であり、失敗イベントからは削除されています。
+1.  ログイン識別子 (メールアドレス、ユーザー名) が最初のパラメーターであり、必須です。
+2.  ユーザーオブジェクト/ID は成功イベントでは任意であり、失敗イベントからは削除されています。
 3. メタデータは簡素化され、`usr.login` フィールドは不要になりました。
 
-**注意**: 従来のメソッド `trackUserLoginSuccessEvent` と `trackUserLoginFailureEvent` は非推奨となり、それぞれ新しいメソッド `eventTrackingV2.trackUserLoginSuccess` と `eventTrackingV2.trackUserLoginFailure` が推奨されます。
+**注**: 従来のメソッド `trackUserLoginSuccessEvent` および `trackUserLoginFailureEvent` は非推奨となり、それぞれ新しいメソッド `eventTrackingV2.trackUserLoginSuccess` および `eventTrackingV2.trackUserLoginFailure` が推奨されます。
 
 以下の例では、コメントされたコードは不要になりました。
 
-{{% collapse-content title="ログイン成功" level="h4" expanded="true" %}}
+{{% collapse-content title="ログイン成功" level="h5" expanded="true" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -869,7 +873,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="ログイン失敗" level="h4" expanded="false" id="nodejs-migration-login-failure" %}}
+{{% collapse-content title="ログイン失敗" level="h5" expanded="false" id="nodejs-migration-login-failure" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -894,25 +898,25 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 {{< programming-lang lang="python" >}}
 
 
-ddtracepy v1.9.0 からは、Python トレーサーの API を使用してユーザーイベントを追跡することができます。
+dd-trace-py v1.9.0 からは、Python トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-ddtracepy v3.7 からは、新しい Python トレーサーの SDK を使用してユーザーおよびユーザーイベントを追跡することができます。
+dd-trace-py v3.7 からは、新しい Python トレーサーの SDK を使用してユーザーおよびユーザーイベントを追跡することができます。
 
 次の例は、ログインイベント、サインアップイベント、またはカスタムイベントを追跡する方法を示しています。
 
-{{% collapse-content title="ユーザー追跡 SDK" level="h4" expanded="true" id="python-business-logic-sdk" %}}
+{{% collapse-content title="ユーザー追跡 SDK" level="h3" expanded="true" id="python-business-logic-sdk" %}}
 
-ddtracepy v3.7 以降、`track_user_sdk` は以下に示す 5 つの関数を提供します。
+dd-trace-py v3.7 以降、`track_user_sdk` は以下に示す 5 つの関数を提供します。
 
- `track_login_success`
- `track_login_failure`
- `track_signup`
- `track_custom_event`
- `track_user`
+- `track_login_success`
+- `track_login_failure`
+- `track_signup`
+- `track_custom_event`
+- `track_user`
 
-ddtracepy v3.17 以降、`track_user_sdk` はこの追加の関数を提供します。
+dd-trace-py v3.17 以降、`track_user_sdk` はこの追加の関数を提供します。
 
- `tracker_user_id`
+- `track_user_id`
 
 
 ```python
@@ -981,7 +985,7 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="FastAPI トイアプリケーションと SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
+{{% collapse-content title="FastAPI トイアプリケーションと SDK" level="h3" expanded="false" id="python-business-logic-example" %}}
 
 次の例は、メモリベースのユーザーデータベースを使用してユーザートラッキング SDK を利用する、フル機能を備えたトイアプリケーションです。この例は SDK の可能な使用法を示しています。ただし、永続的なデータモデルや安全な認証システムなど、実際のアプリケーションに必要な要件を提供していません。
 
@@ -1089,9 +1093,9 @@ async def whoami(request: Request) -> User:
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="レガシー API" level="h4" expanded="false" id="python-business-logic-legacy" %}}
+{{% collapse-content title="レガシー API" level="h3" expanded="false" id="python-business-logic-legacy" %}}
 
-推奨される方法は、従来の API の代わりに新しいユーザートラッキング SDK (ddtracepy v1.9 以降利用可能) を使用することです。
+推奨される方法は、従来の API の代わりに新しいユーザートラッキング SDK (dd-trace-py v1.9 以降利用可能) を使用することです。
 
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
@@ -1121,15 +1125,15 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
-###コードを変更せずにビジネスロジック情報を追跡
+### コードを変更せずにビジネスロジック情報を追跡する {#tracking-business-logic-information-without-modifying-the-code}
 
-サービスに AAP が有効で、[リモート構成][1] が有効な場合、カスタムビジネスロジックタグで一致するリクエストをフラグ付けするカスタム WAF ルールを作成できます。これにはアプリケーションの変更は必要なく、Datadog のみで完結します。
+サービスに AAP が有効で、[リモート構成][1]が有効な場合、カスタムビジネスロジックタグで一致するリクエストをフラグ付けするカスタム WAF ルールを作成できます。これにはアプリケーションの変更は必要なく、Datadog のみで完結します。
 
-まず、[Custom WAF Rule ページ][2] に移動し、"Create New Rule" をクリックします。
+まず、[Custom WAF Rule ページ][2] に移動し、{{< ui >}}Create New Rule{{< /ui >}} をクリックします。
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="AAP ホームページから保護をクリックし、次に InApp WAF とカスタムルールを選択してカスタム WAF ルールメニューにアクセスします。" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="AAP ホームページから保護をクリックし、次に In-App WAF とカスタムルールを選択してカスタム WAF ルールメニューにアクセスします。" style="width:100%;" >}}
 
-これにより、カスタム WAF ルールを定義できるメニューが開きます。「ビジネスロジック」カテゴリを選択することで、イベントタイプを設定できるようになります (たとえば、`users.password_reset`)。その後、追跡したいサービスと特定のエンドポイントを選択できます。ルール条件を使用して、特定のパラメーターをターゲットにし、_インスツルメント_ したいコードフローを特定することもできます。条件が一致すると、ライブラリはトレースにタグを付け、AAP に転送されるようにフラグを立てます。条件が不要な場合は、すべてに一致する広範な条件を設定できます。
+これにより、カスタム WAF ルールを定義できるメニューが開きます。{{< ui >}}Business Logic{{< /ui >}} カテゴリーを選択することで、イベントタイプを構成できるようになります (例: `users.password_reset`)。その後、追跡したいサービスと特定のエンドポイントを選択できます。ルール条件を使用して、特定のパラメーターをターゲットにし、_インスツルメント_したいコードフローを特定することもできます。条件が一致すると、ライブラリはトレースにタグを付け、AAP に転送されるようにフラグを立てます。条件が不要な場合は、すべてに一致する広範な条件を設定できます。
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="新しいルールを作成するボタンをクリックしたときに表示されるフォームのスクリーンショット" style="width:50%;" >}}
 
@@ -1137,75 +1141,79 @@ track_custom_event(tracer, event_name, metadata)
 
 
 [1]: /ja/tracing/guide/remote_config
-[2]: https://app.datadoghq.com/security/appsec/inappwaf?config_by=customrules
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
-##ユーザーアクティビティイベントの自動追跡
+## ユーザーアクティビティイベントの自動追跡 {#automatic-user-activity-event-tracking}
 
-AAP が有効になると、Datadog トレーシングライブラリはユーザーアクティビティイベントを自動的に検出しようとします。
+AAP が有効になると、Datadog SDK はユーザーアクティビティイベントを自動的に検出しようとします。
 
 自動検出できるイベントは以下の通りです。
 
- `users.login.success`
- `users.login.failure`
- `users.signup`
+- `users.login.success`
+- `users.login.failure`
+- `users.signup`
 
-###ユーザーアクティビティイベント追跡モード
+### ユーザーアクティビティイベント自動追跡モード {#automatic-user-activity-event-tracking-modes}
 
 ユーザーアクティビティ追跡には、以下のモードがあります。
 
- `identification` モード (短縮名: `ident`):
-   このモードはデフォルトで有効となっており、ユーザー ID、もしくは可能な範囲で最適な識別情報を常に収集します。
-   ユーザー ID は、ログイン成功時とログイン失敗時に収集されます。失敗時には、ユーザーが存在するかどうかに関わらずユーザー ID が収集されます。
-  インスツルメンテーション済みのフレームワークが明確なユーザー ID を提供しない場合、代わりに構造化されたユーザーオブジェクトが提示され、そのフィールド名に基づいてユーザー ID が可能な限りで決定されます。このフィールド名のリストは、以下の優先順位に従って考慮されます。
-     `id`
-     `email`
-     `username`
-     `login`
-     `user`
-   ユーザー ID が利用できない場合、ユーザーイベントは発生しません。
-`anonymization` モード (短縮名: `anon`):
-   このモードは `identification` と同じですが、ユーザー ID をハッシュ化 (SHA256) して結果のハッシュを切り取ることで匿名化します。
-`disabled` モード:
-   AAP ライブラリは *ユーザー ID を*自動インスツルメンテーションから収集しません。
-   ユーザーログインイベントは発生しません。
+- `identification` モード (短縮名: `ident`):
+  - このモードはデフォルトで有効となっており、ユーザー ID、もしくは可能な範囲で最適な識別情報を常に収集します。
+  - ユーザー ID は、ログイン成功時とログイン失敗時に収集されます。失敗時には、ユーザーが存在するかどうかに関わらずユーザー ID が収集されます。
+  - インスツルメンテーション済みのフレームワークが明確なユーザー ID を提供しない場合、代わりに構造化されたユーザーオブジェクトが提示され、そのフィールド名に基づいてユーザー ID が可能な限り決定されます。このフィールド名のリストは、以下の優先順位に従って考慮されます。
+    - `id`
+    - `email`
+    - `username`
+    - `login`
+    - `user`
+  - ユーザー ID が利用できない場合、ユーザーイベントは発生しません。
+- `anonymization`モード (短縮名: `anon`):
+  - このモードは `identification` と同じですが、ユーザー ID をハッシュ化 (SHA256) して結果のハッシュを切り取ることで匿名化します。
+- `disabled`モード:
+  - AAP ライブラリは*ユーザー ID を*自動インスツルメンテーションから収集しません。
+  - ユーザーログインイベントは発生しません。
 
 <div class="alert alert-info">すべてのモードは自動インスツルメンテーションにのみ影響します。手動収集には適用されません。手動収集は SDK を使用して設定され、自動インスツルメンテーションによってその設定は上書きされません。</div>
 
-###手動構成
+### 手動構成 {#manual-configuration}
 
-Datadog ライブラリでは、`DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` 環境変数にモードの短縮名 (`ident`|`anon`|`disabled`) を指定することで、自動インスツルメンテーションを設定できます。
+Datadog ライブラリでは、`DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` 環境変数にモードの短縮名 (`ident`|`anon`|`disabled`) を指定することで、自動インスツルメンテーションを構成できます。
 
-デフォルトモードは、`identification` モード (短縮名: `ident`) です。
+デフォルトモードは `identification` モード (短縮名: `ident`) です。
 
-例: `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`
+例: `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`。
 
-###非推奨のモード
+### 非推奨のモード {#deprecated-modes}
 
 <div class="alert alert-info">以前のモードは廃止されましたが、次のメジャーリリースまで互換性は維持されます。</div>
 
 以下のモードは廃止されています。
 
- `safe`モード: トレースライブラリはイベントメタデータに PII 情報を含めません。トレーサーライブラリはユーザー ID を収集しようとし、ユーザー ID が有効な [GUID][10] である場合のみ収集します。
- `extended`モード: トレースライブラリはユーザー ID とユーザーのメールアドレスを収集しようとします。このモードでは、Datadog はユーザー ID のタイプが GUID であるかどうかを確認しません。トレースライブラリはイベントから抽出できる値を報告します。
+- `safe` モード: トレースライブラリはイベントメタデータに PII 情報を含めません。トレーサーはユーザー ID を収集しようとし、ユーザー ID が有効な [GUID][11] である場合のみ収集します。
+- `extended` モード: トレースライブラリはユーザー ID とユーザーのメールアドレスを収集しようとします。このモードでは、Datadog はユーザー ID のタイプが GUID であるかどうかを確認しません。トレースライブラリはイベントから抽出できる値を報告します。
 
-**注意**: トレースライブラリがユーザーイベントから情報を抽出できない場合があります。イベントは空のメタデータで報告されます。その場合は、[SDK](#addingbusinesslogicinformationloginsuccessloginfailureanybusinesslogictotraces) を使用してユーザーイベントを手動でインスツルメンテーションしてください。
+**注**: トレースライブラリがユーザーイベントから情報を抽出できない場合があります。イベントは空のメタデータで報告されます。その場合は、[SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) を使用してユーザーイベントを手動でインスツルメンテーションしてください。
 
-##ユーザーアクティビティイベント追跡の無効化
+## ユーザーアクティビティイベント追跡の無効化 {#disabling-user-activity-event-tracking}
 
-自動ユーザーアクティビティ検出を無効にするには、[AAP ソフトウェアカタログ][14] を通じて、無効にしたいサービスの自動追跡モード環境変数 `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` を`disabled` に変更します。すべてのモードは自動インスツルメンテーションにのみ影響し、[Remote Configuration][15] が有効である必要があります。
+自動ユーザーアクティビティ検出を無効にするには、[AAP カタログ][14]を通じて、無効にしたいサービスの自動追跡モード環境変数 `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` を `disabled` に変更します。すべてのモードは自動インスツルメンテーションにのみ影響し、[Remote Configuration][15] が有効である必要があります。
 
-手動で設定する場合は、サービス上で環境変数 `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` を `false` に設定し、再起動してください。これは Datadog トレーシングライブラリをホストしているアプリケーションで設定する必要があり、Datadog Agent では設定しないでください。
+手動構成の場合は、サービス上で環境変数 `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` を `false` に設定し、サービスを再起動してください。これは Datadog SDK をホストしているアプリケーションで設定する必要があり、Datadog Agent では設定しないでください。
 
 [3]: /ja/tracing/trace_collection/custom_instrumentation/
-[4]: /ja/security/default_rules/blratelimiting/
-[5]: /ja/security/default_rules/blprivilegeviolationuser/
-[6]: /ja/security/default_rules/appsecatogroupbyip/
-[7]: /ja/security/default_rules/blsignupratelimit/
-[8]: /ja/security/default_rules/blaccountdeletionratelimit/
-[9]: /ja/security/default_rules/blpasswordreset/
-[10]: /ja/security/default_rules/blpaymentfailures/
+[4]: /ja/security/default_rules/bl-rate-limiting/
+[5]: /ja/security/default_rules/bl-privilege-violation-user/
+[6]: /ja/security/default_rules/appsec-ato-groupby-ip/
+[7]: /ja/security/default_rules/bl-signup-ratelimit/
+[8]: /ja/security/default_rules/bl-account-deletion-ratelimit/
+[9]: /ja/security/default_rules/bl-password-reset/
+[10]: /ja/security/default_rules/bl-payment-failures/
 [11]: https://guid.one/guid
-[12]: /ja/security/default_rules/appsecatobf/
-[13]: /ja/security/default_rules/distributedatouaasn/
+[12]: /ja/security/default_rules/appsec-ato-bf/
+[13]: /ja/security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
 [15]: /ja/tracing/guide/remote_config
+
+## 参考資料 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
