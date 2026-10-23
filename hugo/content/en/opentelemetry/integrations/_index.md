@@ -75,9 +75,9 @@ Monitor big data processing frameworks:
 
 - [Apache Spark Metrics][13] - Track Apache Spark performance metrics
 
-## Share feedback
+## Request an integration or share feedback
 
-To share feedback about an existing integration, fill out the [OpenTelemetry Integrations Product Preview form][21].
+To request a new integration or share feedback about an existing one, fill out the [OpenTelemetry Integrations Product Preview form][21].
 
 ## Further reading
 
