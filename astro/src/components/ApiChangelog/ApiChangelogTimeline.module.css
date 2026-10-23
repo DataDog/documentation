@@ -103,13 +103,3 @@
     text-align: end;
   }
 }
-
-/* A pagination jump scrolls the page, so the desktop header has already
-   collapsed to its scrolled height by the time the timeline lands. */
-@media (min-width: 992px) {
-  .api-changelog-timeline {
-    scroll-margin-top: calc(
-      var(--hugo-header-height-desktop-scrolled) + var(--space-md)
-    );
-  }
-}

@@ -86,11 +86,9 @@ const hasOverview =
 
 {
   ep && (
-    <section
-      id={ep.slug}
-      class={cl("api-endpoint")}
-      data-operation-id={ep.operationId}
-    >
+    <section class={cl("api-endpoint")} data-operation-id={ep.operationId}>
+      {/* No id: the operation page's `{slug}-{version}` tab panel is the
+        anchor, and a bare-slug id here would repeat once per version. */}
       {/* Status alerts */}
       {/* MISSING_TRANSLATION_LABEL: translate the unstable/region-not-supported messages,
         permissions label, and the "Body Data" label and "(required)" marker

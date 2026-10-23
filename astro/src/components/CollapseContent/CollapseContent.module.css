@@ -2,7 +2,6 @@
   border: var(--border-width) solid var(--color-brand-border);
   border-radius: var(--border-radius-lg);
   margin-bottom: var(--space-md);
-  scroll-margin-top: 100px;
 }
 
 .collapse-content__header {

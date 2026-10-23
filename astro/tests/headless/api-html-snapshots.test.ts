@@ -227,6 +227,10 @@ async function normalize(html: string): Promise<string> {
   // are stable across machines.
   out = out.replace(/\s+component-url="[^"]*"/g, "");
 
+  // Bundled component scripts get the same absolute path in their `src`.
+  // Keep the path from `src/` on, so the snapshot still names the script.
+  out = out.replace(/(<script\b[^>]*?\ssrc=")[^"]*?\/(src\/[^"]*")/g, "$1/$2");
+
   // Each island also carries a counter over the module graph, so adding or
   // removing an import anywhere renumbers every island in every snapshot. The
   // uid above already identifies an island; this carries no page content.
