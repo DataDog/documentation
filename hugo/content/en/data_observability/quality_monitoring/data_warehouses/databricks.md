@@ -80,7 +80,7 @@ These permissions are needed for the following reasons:
 
 - `GRANT USE CATALOG` is required to navigate into the catalog and discover schemas.
 - `GRANT USE SCHEMA` is required to enumerate tables and monitor schema-level health.
-- `GRANT SELECT` is required for data quality monitoring, such as custom SQL or distribution checks.
+- `GRANT SELECT` is required for data quality monitoring, such as Custom SQL or distribution checks.
 
 ### Step 3 - Grant access to query text
 
@@ -111,7 +111,7 @@ For more details, see the Databricks documentation on [managing account-level gr
 
 No. Quality Monitoring runs aggregate queries in your SQL warehouse, such as `COUNT(*)`, `MAX(<timestamp_column>)`, null counts, and distinct counts. Only the resulting metric values are sent to Datadog.
 
-[Custom SQL monitors][3] are the exception. Because you write the query, you decide what it returns. Datadog stores the results of Custom SQL queries that return a value aliased as `dd_value`. Queries that do not match this format, such as `SELECT *`, fail validation and are not stored.
+[Custom SQL monitors][10] are the exception. Because you write the query, you decide what it returns. Datadog stores the results of Custom SQL queries that return a value aliased as `dd_value`. Queries that do not match this format, such as `SELECT *`, fail validation and are not stored.
 
 If a Custom SQL query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column. Each group is evaluated as a separate series. For example, the following query stores each distinct `region` value alongside its count:
 
@@ -127,7 +127,7 @@ Grouping by a column that contains sensitive data, such as `email` or `user_id`,
 ### How do you limit what the service principal can read?
 
 - **Scope the grants**: Use the {{< ui >}}Specific tables{{< /ui >}} option in [Step 2](#step-2---grant-access), or grant access to a dedicated schema only.
-- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][9] to sensitive columns for the Datadog service principal. Freshness and row count checks do not read column values, so they are unaffected. Column-level metrics on masked columns reflect the masked values.
+- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][9] to sensitive columns for the Datadog service principal. Freshness and row count checks do not read column values, so they are unaffected. **Note**: Column-level metrics on masked columns reflect the masked values, not the originals.
 - **Configure only the monitors you need**: Datadog runs column-level queries and Custom SQL queries only for the monitors you configure.
 
 ### How do you audit the queries Datadog runs?
@@ -142,7 +142,7 @@ No. Each Databricks workspace supports one service principal for Data Observabil
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
-After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and Custom SQL metrics.
 
 ## Further reading
 
@@ -157,3 +157,4 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 [7]: https://docs.databricks.com/aws/en/compute/serverless/
 [8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
 [9]: https://docs.databricks.com/aws/en/tables/row-and-column-filters
+[10]: /monitors/types/data_observability/#select-your-metric-type
