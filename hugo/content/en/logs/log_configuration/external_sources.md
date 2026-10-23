@@ -28,7 +28,7 @@ An external source is a table that contains logs in your own data platform, such
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-### Prerequisites
+### Databricks prerequisites
 
 - A [Databricks integration][1] account configured in Datadog. Note the application (client) ID of the service principal used by the integration.
 - A Databricks table, registered in Unity Catalog, that contains your logs. You can load logs into the table with any tool, such as the [Observability Pipelines Databricks destination][2].
