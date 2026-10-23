@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
   tag: "Blog"
   text: "Unify and correlate frontend and backend data with retention filters"
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview

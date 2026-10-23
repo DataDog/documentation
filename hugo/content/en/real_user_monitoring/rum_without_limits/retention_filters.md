@@ -2,9 +2,6 @@
 title: Retain Data with Retention Filters
 description: Learn how retention filters work in RUM without Limits.
 further_reading:
-  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
-    tag: Guide
-    text: Retention Filter Best Practices
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
     text: RUM without Limits
@@ -14,12 +11,18 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
     tag: Documentation
     text: Control Costs with Retention Quotas
-  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
-    tag: "Blog"
-    text: "Unify and correlate frontend and backend data with retention filters"
+  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
+    tag: Guide
+    text: Retention Filter Best Practices
   - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
     tag: 'Learning Center'
     text: 'Interactive Lab: RUM Retention Filters'
+  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+    tag: "Blog"
+    text: "Unify and correlate frontend and backend data with retention filters"
+  - link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+    tag: "Blog"
+    text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 {{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
