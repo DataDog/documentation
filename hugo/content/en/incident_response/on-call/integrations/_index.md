@@ -28,7 +28,7 @@ Datadog On-Call includes native paging support for the following tools:
   {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" integration_id="azure-monitor" alt="Azure Monitor" title="Azure Monitor" style="catalog" >}}
   {{< image-card href="/integrations/bugsnag/#page-a-datadog-on-call-team" integration_id="bugsnag" alt="Bugsnag" title="Bugsnag" style="catalog" >}}
   {{< image-card href="/integrations/catchpoint/#trigger-on-call-pages" integration_id="catchpoint" alt="Catchpoint" title="Catchpoint" style="catalog" >}}
-  {{< image-card href="https://cronitor.io/docs/using-datadog-on-call-with-cronitor" integration_id="cronitor" alt="Cronitor" title="Cronitor" style="catalog" >}}
+  {{< image-card href="https://cronitor.io/docs/using-datadog-on-call-with-cronitor" integration_id="cronitor-v2" alt="Cronitor" title="Cronitor" style="catalog" >}}
   {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" integration_id="microsoft-teams" alt="Microsoft Teams" title="Microsoft Teams" style="catalog" >}}
   {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" integration_id="nagios" alt="Nagios" title="Nagios" style="catalog" >}}
   {{< image-card href="/integrations/new-relic/#trigger-on-call-pages" integration_id="new-relic" alt="New Relic" title="New Relic" style="catalog" >}}
