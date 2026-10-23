@@ -334,7 +334,7 @@ The breakdown has no effect when `comments.enabled` is `false`.
 
 ## Inline annotations
 
-Set `annotations.enabled` to `true` to have Datadog add review comments to the pull request diff on the lines it adds that are not covered by tests:
+Set `annotations.enabled` to `true` to have Datadog add review comments on added lines in the pull request diff that are not covered by tests:
 
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
@@ -352,7 +352,6 @@ Annotations work as follows:
 
 - Only executable lines that the pull request adds are annotated. [Partially covered][5] lines count as uncovered.
 - Consecutive uncovered lines are grouped into a single annotation, so a block of untested code receives one comment.
-- Only lines inside the pull request diff are annotated.
 - Datadog posts up to 30 annotations per pull request. When there are more uncovered ranges, the summary comment reports the total number and links to the full report in Datadog.
 - When the annotated lines become covered, Datadog resolves the annotations.
 
