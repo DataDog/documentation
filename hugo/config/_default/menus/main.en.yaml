@@ -2989,6 +2989,11 @@ menu:
       identifier: agents
       parent: actions_heading
       weight: 20000
+    - name: Improve agents using traces
+      url: actions/agents/improve_agents_with_traces/
+      parent: agents
+      identifier: agents_improve_with_traces
+      weight: 1
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
