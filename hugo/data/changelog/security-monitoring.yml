@@ -45,3 +45,10 @@ entries:
       - UpdateSecurityMonitoringIntegrationConfig
       - ValidateSecurityMonitoringIntegrationCredentials
     title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40976
+    operations:
+      - AttachJiraIssue
+      - CreateJiraIssues
+    title: Add on-call GET pages endpoints

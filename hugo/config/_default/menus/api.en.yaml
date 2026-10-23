@@ -18673,6 +18673,42 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Get On-Call page
+      url: /api/latest/on-call/get-on-call-page/
+      identifier: on-call-get-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallPage
+        unstable: []
+        order: 29
+    - name: Create On-Call Page
+      url: /api/latest/on-call/create-on-call-page/
+      identifier: on-call-create-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
+        unstable: []
+        order: 1
+    - name: List On-Call pages
+      url: /api/latest/on-call/list-on-call-pages/
+      identifier: on-call-list-on-call-pages
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallPages
+        unstable: []
+        order: 28
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18773,18 +18809,6 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
-    - name: Create On-Call Page
-      url: /api/latest/on-call-paging/create-on-call-page/
-      identifier: on-call-paging-create-on-call-page
-      parent: on-call-paging
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateOnCallPage
-        unstable: []
-        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration
