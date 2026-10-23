@@ -519,7 +519,7 @@
     "request_schema_description": "The request for a Audit Logs events list."
   },
   "ListAuthNMappings": {
-    "description": "List all AuthN Mappings in the org.",
+    "description": "List all AuthN Mappings in the organization.",
     "summary": "List all AuthN Mappings"
   },
   "CreateAuthNMapping": {
@@ -2003,7 +2003,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\nSupported event categories are `change` and `alert`. For more information about change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking).",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -4747,6 +4747,10 @@
     "request_description": "",
     "request_schema_description": "Top-level schema representing a pipeline."
   },
+  "ListOnCallEscalationPolicies": {
+    "description": "Retrieve a paginated list of On-Call escalation policies, sorted by name.",
+    "summary": "List On-Call escalation policies"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -5144,7 +5148,7 @@
     "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
   },
   "ListProcesses": {
-    "description": "Get all processes for your organization.",
+    "description": "Get processes collected by Live Processes for your organization. One request covers a window of\nat most 1 hour that starts within the past 36 hours. To cover a longer period, make one request\nper hour. Older data is not available from this endpoint.\n\nWhen a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source\nquery to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that\none process. If absent, don't substitute an empty filter, which would query all processes.",
     "summary": "Get all processes"
   },
   "SubmitProductAnalyticsEvent": {
@@ -5590,7 +5594,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.\n\nOmitting the `permissions` relationship from the request leaves the role's existing permissions\nunchanged. Sending `\"permissions\": {\"data\": []}` removes all permissions except restricted default\npermissions, which remain unless `default_permissions_opt_out` is `true`. Some restricted permissions\ncan only be excluded after Minimal Access Roles is enabled for the organization.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
