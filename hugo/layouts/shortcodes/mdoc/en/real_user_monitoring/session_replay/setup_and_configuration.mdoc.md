@@ -115,17 +115,7 @@ Make sure you've [set up and initialized the Datadog iOS RUM SDK][6] with views 
 
 ### Step 2 - Declare the Datadog Session Replay as a dependency
 
-{% tabs %}
-{% tab label="Swift Package Manager" %}
-Add `DatadogSessionReplay` library as a dependency to your app target.  
-{% /tab %}
-{% tab label="CocoaPods" %}
-Add `pod 'DatadogSessionReplay` to your `Podfile`.
-{% /tab %}
-{% tab label="Carthage" %}
-Add `DatadogSessionReplay.xcframework` as a dependency to your app target.
-{% /tab %}
-{% /tabs %}
+Add `DatadogSessionReplay` library as a dependency to your app target.
 
 ### Step 3 - Enable Session Replay {% #enable-ios %}
 
