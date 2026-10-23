@@ -62,7 +62,6 @@ Worker version 2.24.0 gives you access to the following:
     - Has a default buffer size of 20,000 events or 100 MiB, and a maximum of 100,000 events.
 - The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option.
 - The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
-- The Grok Parser processor has been updated to match ISO dates, URLs, query strings, and data separators before date alternations.
 - The Custom Processor's performance has been improved, including more efficient field lookups and string functions.
 - The Worker's configuration startup performance has been improved.
 
