@@ -128,7 +128,7 @@ Grouping by a column that contains sensitive data, such as `email` or `user_id`,
 
 - **Scope the grants**: Use the {{< ui >}}Specific tables{{< /ui >}} option in [Step 2](#step-2---grant-access), or grant access to a dedicated schema only.
 - **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][9] to sensitive columns for the Datadog service principal. Freshness and row count checks do not read column values, so they are unaffected. Column-level metrics on masked columns reflect the masked values.
-- **Configure only the monitors you need**: Datadog runs column-level and Custom SQL queries only for the monitors you configure.
+- **Configure only the monitors you need**: Datadog runs column-level queries and Custom SQL queries only for the monitors you configure.
 
 ### How do you audit the queries Datadog runs?
 
