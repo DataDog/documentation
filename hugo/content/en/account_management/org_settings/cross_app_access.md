@@ -40,7 +40,7 @@ Setup moves values in both directions between Datadog and the issuer. Confirm yo
 
 | Value                     | Direction           | Where you enter it |
 | ------------------------- | ------------------- | ------------------ |
-| Datadog organization UUID | Datadog to Claude   | Datadog connector, {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude issued{{< /ui >}} > {{< ui >}}Tenant ID{{< /ui >}} |
+| Datadog organization UUID | Datadog to Claude   | Datadog connector, {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude-issued{{< /ui >}} > {{< ui >}}Tenant ID{{< /ui >}} |
 | Claude issuer URL         | Claude to Datadog   | {{< ui >}}Organization Settings > Cross-App Access{{< /ui >}} > {{< ui >}}Trusted issuers{{< /ui >}} |
 
 ## Prerequisites
@@ -58,7 +58,7 @@ For the Okta issuer:
 
 For the Claude issuer:
 
-- You are an account owner on your organization's Claude plan, with access to set up managed authorization.
+- You are an admin on your organization's Claude plan, with access to set up managed authorization.
 - Each user's email address in Claude matches the email address provisioned for their Datadog user (their Datadog user handle). Datadog matches users on this value, so a user whose addresses differ cannot connect.
 
 ## Configure Cross-App Access in Datadog
@@ -80,7 +80,7 @@ Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Trusted issuers{{
 | Issuer | Issuer URL to enter |
 | ------ | ------------------- |
 | Okta   | The issuer URL of your own Okta tenant, for example `https://<YOUR_OKTA_SUBDOMAIN>.okta.com`. See [Finish the setup for the Okta issuer](#finish-the-setup-for-the-okta-issuer). |
-| Claude | The {{< ui >}}Issuer URL{{< /ui >}} shown in the Datadog connector in Claude, under {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude issued{{< /ui >}}. See [Finish the setup for the Claude issuer](#finish-the-setup-for-the-claude-issuer). |
+| Claude | The {{< ui >}}Issuer URL{{< /ui >}} shown in the Datadog connector in Claude, under {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude-issued{{< /ui >}}. See [Finish the setup for the Claude issuer](#finish-the-setup-for-the-claude-issuer). |
 
 Every issuer URL must use `https` and must not contain a port, query, or fragment. Datadog also applies these rules for each issuer, and rejects a URL that breaks them:
 
@@ -105,13 +105,13 @@ To enable or disable Cross-App Access programmatically, see [Update a specific O
 
 ## Finish the setup for the Claude issuer
 
-Follow these steps if you use the Claude issuer. Complete them in Claude as an account owner. See [Authorize MCP connectors for your entire organization][4] in the Claude Help Center for more details.
+Follow these steps if you use the Claude issuer. Complete them in Claude as an admin. See [Authorize MCP connectors for your entire organization][4] in the Claude Help Center for more details.
 
 1. In Claude, navigate to [{{< ui >}}Organization settings > Connectors{{< /ui >}}][5] and select **Datadog**.
 2. On the {{< ui >}}Configuration{{< /ui >}} tab, click {{< ui >}}Set up{{< /ui >}} next to {{< ui >}}Managed authorization{{< /ui >}}.
-3. In the {{< ui >}}Connect{{< /ui >}} step, select {{< ui >}}Claude issued{{< /ui >}}.
+3. In the {{< ui >}}Connect{{< /ui >}} step, under {{< ui >}}Identity source{{< /ui >}}, select {{< ui >}}Claude-issued{{< /ui >}}.
 4. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter the Datadog organization UUID you [copied from Datadog](#copy-your-organization-uuid). Claude does not need the agent client ID or the Datadog resource and issuer URLs.
-5. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude issued{{< /ui >}}, then add it to the {{< ui >}}Trusted issuers{{< /ui >}} list in Datadog. See [Add your trusted issuers](#add-your-trusted-issuers).
+5. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Trusted issuers{{< /ui >}} list in Datadog. See [Add your trusted issuers](#add-your-trusted-issuers).
 6. Click {{< ui >}}Run test{{< /ui >}}. Every step in the test shows green when the connection works.
 7. In the {{< ui >}}Roles{{< /ui >}} step, select who receives the Datadog connector. To pilot with one team, select only that team's custom role and leave the built-in roles cleared.
 8. In the {{< ui >}}Scopes{{< /ui >}} step, select the Datadog scopes Claude can request. See [Control scopes in Datadog](#control-scopes-in-datadog).
