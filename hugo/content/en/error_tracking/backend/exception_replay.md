@@ -58,6 +58,8 @@ below for details.
 | **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.57.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
 
+**Note**: For .NET, Exception Replay is enabled by default from SDK 3.43.0 for services with no other Remote Configuration settings. Enabling or disabling Exception Replay by environment, and keeping it enabled by default when other Remote Configuration settings apply to the service (for example, Fleet Automation SDK settings or Live Debugger enablement), require SDK 3.57.0 or later.
+
 To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in Error Tracking, select the
 desired environment or service, and toggle it to {{< ui >}}Enabled{{< /ui >}}.
 
