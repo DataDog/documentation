@@ -519,7 +519,7 @@
     "request_schema_description": "The request for a Audit Logs events list."
   },
   "ListAuthNMappings": {
-    "description": "List all AuthN Mappings in the org.",
+    "description": "List all AuthN Mappings in the organization.",
     "summary": "List all AuthN Mappings"
   },
   "CreateAuthNMapping": {
@@ -2003,7 +2003,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\nSupported event categories are `change` and `alert`. For more information about change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking).",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -2299,6 +2299,12 @@
   "GetSavedFilter": {
     "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
     "summary": "Get a saved filter"
+  },
+  "UpdateSavedFilterAttributes": {
+    "description": "Partially updates a saved filter. Supports both `LIST` and `RULES` filters.\nSupply at least one of `name`, `description`, or `targeting_rules`. Omitted or null fields\nare preserved. Supplying `targeting_rules` replaces the entire collection and propagates\nchanges to every feature flag that references the saved filter.\nMetadata-only updates do not require edit permission or approval on those feature flags.\nRule updates require edit permission on all consumer flags and are rejected when approval\nis required, unless the caller has the `feature_flag_approvals_override` permission.\nThe optional `last_updated_at` field detects stale updates. It does not set the update time.",
+    "summary": "Patch a saved filter",
+    "request_description": "",
+    "request_schema_description": "Request to partially update a saved filter."
   },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
@@ -4675,10 +4681,6 @@
     "request_description": "",
     "request_schema_description": "Response for listing interface tags."
   },
-  "ListNetworkHealthInsights": {
-    "description": "Return network health insights for the organization within the given time window.\nInsights are produced by analyzing DNS failures pre-classified by `network-dns-logger`,\nTLS certificate metrics, and denied security group connections. Each insight\nidentifies the client and server services involved, the type of issue, and the\nmagnitude of the failure observed during the query window.",
-    "summary": "List network health insights"
-  },
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
@@ -4744,6 +4746,10 @@
     "summary": "Update a pipeline",
     "request_description": "",
     "request_schema_description": "Top-level schema representing a pipeline."
+  },
+  "ListOnCallEscalationPolicies": {
+    "description": "Retrieve a paginated list of On-Call escalation policies, sorted by name.",
+    "summary": "List On-Call escalation policies"
   },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
@@ -7840,12 +7846,12 @@
     "request_schema_description": "Request for creating team connections."
   },
   "GetTeamSync": {
-    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub.",
+    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub or ServiceNow.",
     "summary": "Get team sync configurations"
   },
   "SyncTeams": {
-    "description": "This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
-    "summary": "Link Teams with GitHub Teams",
+    "description": "This endpoint configures synchronization between your existing Datadog teams and teams from\nGitHub or ServiceNow by matching team names.\nIt evaluates all current Datadog teams and compares them against teams in the external source\nconnected to your Datadog account.\n\nThis operation is read-only on the external source side, no teams will be modified or created there.\nThis only creates new teams in Datadog when type is set to `provision`.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n**GitHub**: [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\n(lowercased and kebab-cased) using a normalized exact match; case is ignored and spaces are removed.\n\n**ServiceNow**: [The ServiceNow integration must be configured for your Datadog account](https://docs.datadoghq.com/integrations/servicenow/).\nActive assignment groups from every configured ServiceNow instance are synchronized, and the ServiceNow\ngroup hierarchy is preserved. When `sync_membership` is enabled, group members are matched to Datadog\nusers by email address.",
+    "summary": "Link teams with external teams",
     "request_description": "",
     "request_schema_description": "Team sync request."
   },

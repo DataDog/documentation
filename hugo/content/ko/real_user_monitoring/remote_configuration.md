@@ -14,7 +14,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: 문서
   text: Real User Monitoring
-site_support_id: rum_remote_configuration
 title: RUM Remote Configuration
 ---
 ## 개요 {#overview}
@@ -31,7 +30,7 @@ title: RUM Remote Configuration
 - iOS SDK 버전 3.17.0 이상
 - Android SDK 버전 3.14.1 이상
 
-<div class="alert alert-danger">네트워크나 프록시에서 허용 목록을 사용하는 경우 애플리케이션에 <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> 을 추가하세요. 이 항목은 RUM 데이터 수집과 SDK의 원격 구성 요청을 모두 포함하며, 원격 구성 요청에서는 <code>sdk-configuration.</code> 하위 도메인을 사용합니다. 브라우저 애플리케이션의 경우, 이 도메인을 콘텐츠 보안 정책(Content Security Policy)에도 추가하세요.
+<div class="alert alert-danger">네트워크나 프록시에서 허용 목록을 사용하는 경우 애플리케이션에 <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> 주소를 추가하세요. 이 항목은 RUM 데이터 수집과 SDK의 원격 구성 요청을 모두 포함하며, 원격 구성 요청에서는 <code>sdk-configuration.</code> 하위 도메인을 사용합니다. 브라우저 애플리케이션의 경우, 이 도메인을 콘텐츠 보안 정책(Content Security Policy)에도 추가하세요.
 <br><br> 이 도메인이 차단되면 SDK는 원격 설정을 검색할 수 없으며 별도의 오류 표시 없이 로컬 구성을 계속 사용합니다.</div>
 
 ## 작동 방식 {#how-it-works}
@@ -105,6 +104,10 @@ SDK가 초기화될 때 캐시된 원격 설정을 적용합니다. 캐시된 �
 
 2. 상태를 선택하거나, 샘플링 비율을 변경하거나, 데이터를 추가하여 설정을 구성합니다.
 3. 수정 사항을 저장합니다.
+
+## Audit Trail에서 변경 사항 조회 {#view-changes-in-audit-trail}
+
+RUM 원격 구성의 변경 사항은 [Datadog Audit Trail][3]에 표시되며, 여기에서 각 변경 사항을 누가 언제 적용했는지 확인할 수 있습니다.
 
 ## 구성 가능한 설정 {#configurable-settings}
 
@@ -242,3 +245,4 @@ SDK가 초기화될 때 캐시된 원격 설정을 적용합니다. 캐시된 �
 
 [1]: /ko/account_management/rbac/permissions/#real-user-monitoring
 [2]: /ko/remote_configuration/
+[3]: /ko/account_management/audit_trail/

@@ -472,7 +472,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Log Analytics Workspace
       recommendation_type: Delete Idle Log Analytics Workspace
-      recommendation_description: Identifies Log Analytics workspaces with no ingested data or user queries that still incur retention or commitment-tier charges, and recommends deleting them.
+      recommendation_description: Identifies Log Analytics workspaces with no billed data volume, ingested data, or user queries that still incur retention charges, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure

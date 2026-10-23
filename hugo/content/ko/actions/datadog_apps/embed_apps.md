@@ -3,10 +3,10 @@ description: 게시된 Datadog 앱을 대시보드, 노트북, Internal Develope
   패널에 임베드합니다.
 further_reading:
 - link: /actions/datadog_apps/
-  tag: 설명서
+  tag: 문서
   text: Datadog 앱
 - link: /actions/app_builder/embedded_apps/
-  tag: 설명서
+  tag: 문서
   text: App Builder 앱 임베드
 - link: https://www.npmjs.com/package/@datadog/apps-frontend
   tag: 외부 사이트
@@ -14,7 +14,7 @@ further_reading:
 title: 앱 임베드
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="미리 보기에 참여하세요!">}}
-Datadog Apps는 미리 보기로 제공되고 있습니다. 액세스를 요청하려면 이 양식을 사용하세요.
+Datadog Apps는 미리 보기 상태입니다. 액세스를 요청하려면 이 양식을 사용하세요.
 {{< /callout >}}
 
 [Datadog 앱][1]을 다른 Datadog 제품에 임베드하여 사용자가 문제를 조사하고 조치를 취하는 화면에 운영 도구를 직접 배치합니다. 임베드된 앱은 기존 환경을 표시하거나 대시보드의 시간 범위 및 템플릿 변수 등 호스트에서 제공하는 실시간 컨텍스트에 따라 동작할 수 있습니다.
@@ -24,7 +24,7 @@ Datadog Apps는 미리 보기로 제공되고 있습니다. 액세스를 요청�
 - 빌드, 업로드 및 게시된 Datadog 앱
 - 앱을 사용하고 대상 화면을 편집할 수 있는 권한
 
-앱 빌드, 업로드 및 게시 방법에 대한 자세한 내용은 [Datadog Apps][1]을 참조하세요.
+앱 빌드, 업로드 및 게시 방법에 대한 자세한 내용은 [Datadog 앱][1]을 참조하세요.
 
 ## 앱 임베드 {#embed-an-app}
 
@@ -46,7 +46,8 @@ Datadog Apps는 미리 보기로 제공되고 있습니다. 액세스를 요청�
 {{% tab "대시보드" %}}
 
 1. 앱을 추가하려는 대시보드를 엽니다.
-1. 위젯 트레이에서 **Actions and Remediations** 아래에 있는 **Apps** 위젯을 찾아 대시보드로 드래그합니다.
+1. **Add Widgets**를 클릭하여 위젯 트레이를 엽니다.
+1. **Apps** 탭을 선택한 다음 **Apps** 위젯을 대시보드로 드래그합니다.
 1. 편집기에서 **Select app** 드롭다운을 사용하여 앱을 선택합니다. 본인이 소유한 앱만 목록에 표시하려면 **My Apps Only**를 활성화합니다.
 1. 위젯의 크기를 조절한 다음 대시보드를 저장합니다.
 
@@ -300,7 +301,7 @@ const servicePanel = useDatadogAppInput(datadogServicePanel);
 
 ## 공유 링크에서 상태 유지 {#preserve-state-in-shared-links}
 
-`DatadogAppProvider`는 공유 Datadog 링크에서 앱의 쿼리 문자열과 URL 프래그먼트를 유지합니다. 선택한 서비스, 필터, 레코드 또는 앱 내 경로 등 공유 가능한 상태를 URL에 저장합니다. 다른 사용자가 공유 링크를 열면 임베드된 앱이 동일한 상태를 복원할 수 있습니다. [Deep links][5]는 앱이 `DatadogAppProvider`로 래핑되어 있는 한 추가 구성 없이 특정 앱 상태로 연결됩니다.
+`DatadogAppProvider`는 공유 Datadog 링크에서 앱의 쿼리 문자열과 URL 프래그먼트를 유지합니다. 선택한 서비스, 필터, 레코드 또는 앱 내 경로 등 공유 가능한 상태를 URL에 저장합니다. 다른 사용자가 공유 링크를 열면 임베드된 앱이 동일한 상태를 복원할 수 있습니다. [Deep links][5]는 앱이 `DatadogAppProvider`로 래핑되어 있는 한 추가 구성없이 특정 앱 상태로 연결됩니다.
 
 ## 앱 검증 {#verify-the-app}
 

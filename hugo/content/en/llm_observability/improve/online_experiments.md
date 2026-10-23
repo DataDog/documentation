@@ -2,9 +2,9 @@
 title: Online Experiments
 description: Compare variants of an LLM application on live traffic and measure their effect with Agent Observability evaluation scores.
 further_reading:
-- link: "/llm_observability/improve/experiments"
+- link: "/llm_observability/improve/offline_experiments"
   tag: "Documentation"
-  text: "Agent Observability Experiments"
+  text: "Agent Observability Offline Experiments"
 - link: "/llm_observability/investigate/evaluations/"
   tag: "Documentation"
   text: "Agent Observability Evaluations"

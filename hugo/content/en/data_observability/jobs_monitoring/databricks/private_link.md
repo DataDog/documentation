@@ -10,8 +10,6 @@ further_reading:
       text: 'Private Action Runners'
 ---
 
-<div class="alert alert-info">Monitoring Databricks via Private Link Connectivity is in Preview.</div>
-
 Databricks workspaces deployed using [Private Link Connectivity][1] are isolated from the public internet, which prevents Datadog from accessing the Databricks APIs directly. To monitor these workspaces, deploy a [Private Action Runner][2] (PAR) in your environment. The runner polls Datadog for requests, executes them against the Databricks API locally, and sends the results back through your existing [Datadog VPC Endpoint][3].
 
 ## Architecture
@@ -154,7 +152,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Update the existing `values.yaml` (referencing the [Helm chart values][4]):
    1. Set `image.repository` to `gcr.io/datadoghq/dd-data-observability-par`.
-   1. Set `image.tag` to `1.22.0-0`.
+   1. Set `image.tag` to `1.21.0-3`.
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. If you use a Microsoft Entra ID managed Service Principal, also set `DATABRICKS_AZURE_TENANT_ID`. Leave "Secret Path" in the integration tile blank.
     - Use cloud secret storage. Ensure an identity is assigned to the pod ([Azure Workload Identity][5], [AWS IAM Role][6], or [GKE Workload Identity][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
@@ -177,7 +175,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. Select the **Script** option, then click **Next**.
    1. Follow the instructions under **Docker**.
 
-      **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.22.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.22.0-0`.
+      **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.21.0-3`.
 
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
