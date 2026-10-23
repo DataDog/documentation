@@ -59,3 +59,13 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Add traces pipeline type to Observability Pipelines
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40975
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add ingestion_mode to ADX destination
