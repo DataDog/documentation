@@ -27,7 +27,7 @@ Worker version 2.24.1 gives you access to the following:
 
 #### Security
 
-- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the eMudhra intermediate certificate authorities (CAs) whose private keys were [reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted.
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the [eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised][59]. The Worker rejects these chains even when the issuing root CA is trusted.
 
   This protection applies only to components that use rustls. The following components use the system CA trust store instead:
     - Components that use OpenSSL
