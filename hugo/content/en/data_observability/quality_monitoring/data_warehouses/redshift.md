@@ -41,16 +41,18 @@ Connect to your Redshift cluster as a superuser and run the following SQL to cre
 
 2. Grant read-only access to your data. Choose one option.
 
-   **Option A: All schemas (recommended, required for dbt CI/CD)**
+   {{< tabs >}}
+   {{% tab "All schemas (Recommended)" %}}
 
-   Gives Datadog read access to every current and future schema, table, and view in the database, including the schemas dbt creates for pull requests:
+   Gives Datadog read access to every current and future schema, table, and view in the database, including the schemas dbt creates for pull requests. This option is required for dbt CI/CD.
 
    ```sql
    GRANT USAGE FOR SCHEMAS IN DATABASE "<YOUR_DATABASE>" TO ROLE datadog_role;
    GRANT SELECT FOR TABLES IN DATABASE "<YOUR_DATABASE>" TO ROLE datadog_role;
    ```
 
-   **Option B: Specific schemas**
+   {{% /tab %}}
+   {{% tab "Specific schemas" %}}
 
    Run the following for each schema you want Datadog to monitor. It covers current and future tables and views in the schema, including ones created by other users such as dbt:
 
@@ -59,35 +61,38 @@ Connect to your Redshift cluster as a superuser and run the following SQL to cre
    GRANT SELECT FOR TABLES IN SCHEMA "<YOUR_SCHEMA>" TO ROLE datadog_role;
    ```
 
-   Schemas created later, such as dbt CI schemas, are not covered. Use Option A for dbt CI/CD.
+   Schemas created later, such as dbt CI schemas, are not covered. For dbt CI/CD, use the **All schemas** option.
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
 3. Create or assign the Datadog database user.
 
-{{< tabs >}}
-{{% tab "Provisioned Cluster" %}}
+   {{< tabs >}}
+   {{% tab "Provisioned Cluster" %}}
 
-Create a dedicated database user and assign the role:
+   Create a dedicated database user and assign the role:
 
-```sql
--- Replace <STRONG_PASSWORD> with a secure password
-CREATE USER datadog_user PASSWORD '<STRONG_PASSWORD>' SYSLOG ACCESS UNRESTRICTED;
-GRANT ROLE datadog_role TO datadog_user;
-```
+   ```sql
+   -- Replace <STRONG_PASSWORD> with a secure password
+   CREATE USER datadog_user PASSWORD '<STRONG_PASSWORD>' SYSLOG ACCESS UNRESTRICTED;
+   GRANT ROLE datadog_role TO datadog_user;
+   ```
 
-{{% /tab %}}
-{{% tab "Serverless" %}}
+   {{% /tab %}}
+   {{% tab "Serverless" %}}
 
-In Redshift Serverless, database users are automatically mapped from IAM identities. For example, an IAM role named `DatadogIntegrationRole` maps to the database user `IAMR:DatadogIntegrationRole`.
+   In Redshift Serverless, database users are automatically mapped from IAM identities. For example, an IAM role named `DatadogIntegrationRole` maps to the database user `IAMR:DatadogIntegrationRole`.
 
-Grant the `datadog_role` to your IAM-mapped database user:
+   Grant the `datadog_role` to your IAM-mapped database user:
 
-```sql
-GRANT ROLE datadog_role TO "IAMR:<YOUR_IAM_ROLE_NAME>";
-ALTER USER "IAMR:<YOUR_IAM_ROLE_NAME>" SYSLOG ACCESS UNRESTRICTED;
-```
+   ```sql
+   GRANT ROLE datadog_role TO "IAMR:<YOUR_IAM_ROLE_NAME>";
+   ALTER USER "IAMR:<YOUR_IAM_ROLE_NAME>" SYSLOG ACCESS UNRESTRICTED;
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Configure IAM policies
 
@@ -149,23 +154,23 @@ To configure the Redshift integration in Datadog:
 
 4. Enter your cluster connection details:
 
-{{< tabs >}}
-{{% tab "Provisioned Cluster" %}}
+   {{< tabs >}}
+   {{% tab "Provisioned Cluster" %}}
 
-- {{< ui >}}Cluster identifier{{< /ui >}}: Your Redshift cluster identifier.
-- {{< ui >}}Region{{< /ui >}}: The AWS region where your cluster is hosted (for example, `us-east-1`).
-- {{< ui >}}Database user{{< /ui >}}: The Datadog user created during setup (for example, `datadog_user`).
-- {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
+   - {{< ui >}}Cluster identifier{{< /ui >}}: Your Redshift cluster identifier.
+   - {{< ui >}}Region{{< /ui >}}: The AWS region where your cluster is hosted (for example, `us-east-1`).
+   - {{< ui >}}Database user{{< /ui >}}: The Datadog user created during setup (for example, `datadog_user`).
+   - {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
 
-{{% /tab %}}
-{{% tab "Serverless" %}}
+   {{% /tab %}}
+   {{% tab "Serverless" %}}
 
-- {{< ui >}}Workgroup name{{< /ui >}}: Your Redshift Serverless workgroup name.
-- {{< ui >}}Region{{< /ui >}}: The AWS region where your workgroup is hosted (for example, `us-east-1`).
-- {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
+   - {{< ui >}}Workgroup name{{< /ui >}}: Your Redshift Serverless workgroup name.
+   - {{< ui >}}Region{{< /ui >}}: The AWS region where your workgroup is hosted (for example, `us-east-1`).
+   - {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
    {{< img src="data_observability/redshift/data_obs_redshift_add_credentials.png" alt="Input fields for Redshift credentials for Data Observability integrations" style="width:100%;" >}}
 
