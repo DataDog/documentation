@@ -22235,8 +22235,21 @@ components:
           description: The first page number.
           format: int64
           type: integer
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
         last_number:
           description: The last page number.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: The page limit, when offset pagination is used.
           format: int64
           type: integer
         next_number:
@@ -22244,12 +22257,26 @@ components:
           format: int64
           nullable: true
           type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          nullable: true
+          type: integer
         number:
           description: The current page number.
           format: int64
           type: integer
+        offset:
+          description: The current offset, when offset pagination is used.
+          format: int64
+          type: integer
         prev_number:
           description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        prev_offset:
+          description: The previous offset.
           format: int64
           nullable: true
           type: integer
@@ -76979,12 +77006,16 @@ components:
         - -name
         - user_count
         - -user_count
+        - link_count
+        - -link_count
       type: string
       x-enum-varnames:
         - NAME
         - _NAME
         - USER_COUNT
         - _USER_COUNT
+        - LINK_COUNT
+        - _LINK_COUNT
     ListVulnerabilitiesResponse:
       description: The expected response schema when listing vulnerabilities.
       properties:
@@ -132666,6 +132697,14 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        handles:
+          description: Collection of handles associated with the team.
+          items:
+            description: A team handle.
+            type: string
+          nullable: true
+          readOnly: true
+          type: array
         hidden_modules:
           description: Collection of hidden modules for the team
           items:
@@ -132675,6 +132714,10 @@ components:
           type: array
         is_managed:
           description: Whether the team is managed from an external source
+          type: boolean
+        is_open_membership:
+          description: Whether any user can join the team without an invitation.
+          readOnly: true
           type: boolean
         link_count:
           description: The number of links belonging to the team
@@ -132690,6 +132733,13 @@ components:
           description: The name of the team
           example: Example Team
           maxLength: 200
+          type: string
+        provisioned_by:
+          description: |-
+            The mechanism that created the team, such as `teams_api`, `teams_terraform`, or `teams_ui`.
+            Omitted when unknown.
+          example: teams_api
+          readOnly: true
           type: string
         summary:
           description: A brief summary of the team, derived from the `description`
@@ -133662,6 +133712,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/Team"
+        included:
+          description: Resources related to the team.
+          items:
+            $ref: "#/components/schemas/TeamIncluded"
+          type: array
       type: object
     TeamRoutingRules:
       description: Represents a complete set of team routing rules, including data and optionally included related resources.
@@ -134155,6 +134210,8 @@ components:
         - link_count
         - team_links
         - user_team_permissions
+        - is_managed
+        - provisioned_by
       type: string
       x-enum-varnames:
         - ID
@@ -134172,6 +134229,8 @@ components:
         - LINK_COUNT
         - TEAM_LINKS
         - USER_TEAM_PERMISSIONS
+        - IS_MANAGED
+        - PROVISIONED_BY
     TeamsHierarchyLinksResponseLinks:
       description: When querying team hierarchy links, a set of links for navigation between different pages is included
       properties:
@@ -134208,8 +134267,21 @@ components:
           description: First page number.
           format: int64
           type: integer
+        first_offset:
+          description: First offset.
+          format: int64
+          type: integer
         last_number:
           description: Last page number.
+          format: int64
+          type: integer
+        last_offset:
+          description: Last offset.
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Page limit, when offset pagination is used.
           format: int64
           type: integer
         next_number:
@@ -134217,12 +134289,26 @@ components:
           format: int64
           nullable: true
           type: integer
+        next_offset:
+          description: Next offset.
+          format: int64
+          nullable: true
+          type: integer
         number:
           description: Page number.
           format: int64
           type: integer
+        offset:
+          description: Current offset, when offset pagination is used.
+          format: int64
+          type: integer
         prev_number:
           description: Previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        prev_offset:
+          description: Previous offset.
           format: int64
           nullable: true
           type: integer
@@ -134712,9 +134798,18 @@ components:
     TeamsResponseMetaPagination:
       description: Teams response metadata.
       properties:
+        first_number:
+          description: The first page number.
+          format: int64
+          type: integer
         first_offset:
           description: The first offset.
           format: int64
+          type: integer
+        last_number:
+          description: The last page number.
+          format: int64
+          nullable: true
           type: integer
         last_offset:
           description: The last offset.
@@ -134724,16 +134819,34 @@ components:
           description: Pagination limit.
           format: int64
           type: integer
+        next_number:
+          description: The next page number.
+          format: int64
+          nullable: true
+          type: integer
         next_offset:
           description: The next offset.
+          format: int64
+          type: integer
+        number:
+          description: The current page number, when page-number pagination is used.
           format: int64
           type: integer
         offset:
           description: The offset.
           format: int64
           type: integer
+        prev_number:
+          description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
         prev_offset:
           description: The previous offset.
+          format: int64
+          type: integer
+        size:
+          description: The page size, when page-number pagination is used.
           format: int64
           type: integer
         total:
@@ -134741,7 +134854,7 @@ components:
           format: int64
           type: integer
         type:
-          description: Offset type.
+          description: Pagination type. One of `offset_limit` or `number_size`.
           type: string
       type: object
     TenancyConfig:
