@@ -1,6 +1,6 @@
 ---
 title: Agent Console
-description: Monitor and analyze coding agent and Bits AI agent usage, cost, and performance across your organization in Datadog Agent Console.
+description: Monitor and analyze AI agent usage, cost, and productivity across your organization in Datadog Agent Console, including coding agents, work agents, and Bits AI agents.
 further_reading:
   - link: '/ai_agents_console/setup/'
     tag: 'Documentation'
@@ -8,9 +8,15 @@ further_reading:
   - link: '/integrations/anthropic-usage-and-costs/'
     tag: 'Documentation'
     text: 'Anthropic Usage and Costs integration'
+  - link: '/integrations/openai-usage-and-costs/'
+    tag: 'Documentation'
+    text: 'OpenAI Usage and Costs integration'
   - link: '/integrations/cursor/'
     tag: 'Documentation'
     text: 'Cursor integration'
+  - link: "https://github.com/datadog-labs/trajectory"
+    tag: "Source Code"
+    text: "Trajectory"
   - link: "https://www.datadoghq.com/blog/claude-code-monitoring"
     tag: "Blog"
     text: "Monitor Claude Code adoption in your organization with Datadog's Agent Console"
@@ -23,92 +29,114 @@ further_reading:
 Agent Console is in Preview and available to all Datadog customers.
 {{< /callout >}}
 
-The [Agent Console][1] provides centralized monitoring for AI agents across your organization. It collects logs and metrics from coding agents and Datadog's own [Bits AI agents](#bits-ai-agents), surfacing them in real time to give you visibility into usage, cost, latency, productivity impact, and emerging problem patterns.
+The [Agent Console][1] provides centralized monitoring for AI tools across your organization. It collects usage, cost, and activity data from coding agents, work and chat agents, desktop agents, and Datadog's own [Bits AI agents](#bits-ai-agents). Use it to understand where your AI spend goes, who uses which tools, and how AI-assisted work affects delivery.
 
-Agent Console supports the following coding agents:
+## Supported AI tools
 
-| Tool | Description |
-|------|-------------|
-| [Claude Code][2] | Anthropic's agentic coding tool |
-| [Cursor][3] | AI-powered code editor |
-| [GitHub Copilot][4] | GitHub's AI-powered code completion tool |
+| Tool | Type | Data source |
+|------|------|-------------|
+| Claude Code | Coding agent | [Anthropic Usage and Costs][2] integration or OpenTelemetry |
+| Cursor | Coding agent | [Cursor][3] integration |
+| GitHub Copilot | Coding agent | [GitHub Copilot][4] integration |
+| Codex | Coding agent | [OpenAI Usage and Costs][5] integration |
+| Claude Chat, Claude Cowork, Claude Design | Work agent | [Anthropic Usage and Costs][2] integration |
+| ChatGPT Work | Work agent | [OpenAI Usage and Costs][5] integration |
+| Microsoft Copilot 365 (Preview) | Work agent | Microsoft Copilot integration. To request access, contact your Datadog account team. |
+| Other coding and desktop agents | Coding agent | [Trajectory][6] |
 
+[Trajectory][6] is an open source tool that captures sessions from more than 30 coding and desktop agents, including Claude Desktop, Cline, Windsurf, Zed, and Goose. For the full list, see [Supported Clients][7].
 
-## Coding agents
+To connect these tools, see [Set Up Agent Console][8].
 
-The {{< ui >}}Coding Agents{{< /ui >}} tab gives you a top-level view of coding agent activity across your organization. By default, the view aggregates all coding agents and can be filtered to a single agent.
+## Overview
 
-{{< img src="/ai_agents_console/agent_console_agent_findings.png" alt="Agent Console Coding Agents tab showing summary of agent findings with metrics and trends for Claude Code, Cursor, and GitHub Copilot" style="width:100%;" >}}
+The {{< ui >}}Overview{{< /ui >}} tab shows your organization's AI spend, adoption, and productivity in one place.
 
-### Agent findings
+{{< img src="/ai_agents_console/agent_console_overview.png" alt="Agent Console Overview tab showing tracked AI cost, total users, cost per observed PR, and a breakdown of tracked cost by product area and top cost contributors" style="width:100%;" >}}
 
-The {{< ui >}}Agent Findings{{< /ui >}} panel summarizes high-level activity for the selected time range, including total spend, total users, sessions, time to merge, lines of code, and average turns per session. The stacked chart breaks down activity by agent (for example, Claude Code and Cursor) so you can compare adoption over time.
+The summary tiles at the top show tracked AI cost, total users, and cost per observed pull request, each compared with the previous period.
 
-### Impact metrics
+The {{< ui >}}Tracked AI cost{{< /ui >}} chart shows how spend is distributed across product areas, such as coding agents and other agents, and which tools contribute the most. Switch to {{< ui >}}Trend{{< /ui >}} to see how cost changes over time, and select a product area to see more details.
 
-The {{< ui >}}Impact Metrics{{< /ui >}} panel measures the effect of AI-assisted development on your software delivery lifecycle using DORA-style metrics, with side-by-side comparisons between AI-assisted and non-AI work.
+### Productivity
 
-- **Adoption**: track how much code is being produced by AI, including AI-assisted commits and AI-assisted PRs.
-- **Velocity**: measure how fast changes reach production, including change lead time and PR review time.
-- **Stability**: track how reliable changes are after release, including change failure rate and recovery time.
+The {{< ui >}}Productivity{{< /ui >}} section shows merged pull requests, time to merge, cost per observed pull request, and resolved Jira issues, plotted against AI cost. These metrics come from your connected [productivity tools][9], such as GitHub and Jira.
 
-### Detected problems
+{{< img src="/ai_agents_console/agent_console_productivity_overview.png" alt="Productivity section showing merged PRs, time to merge, cost per observed PR, and Jira issues resolved, each plotted against cost" style="width:100%;" >}}
 
-The {{< ui >}}Detected Problems{{< /ui >}} panel highlights common problem patterns your team is encountering and recommends fixes. The Sankey diagram shows how problem patterns (such as skipped checks, retry loops, and file rereads) flow from individual agents into specific repositories, with an estimated monthly cost for each pattern.
+### Integrations
 
-{{< img src="/ai_agents_console/detected_problems_skipped_checks.png" alt="Detected Problems Sankey diagram showing how sessions from Claude Code, Cursor, and GitHub Copilot map to problem patterns, highlighting skipped checks" style="width:90%;" >}}
+The {{< ui >}}Integrations{{< /ui >}} section displays a card for each connected data source, with its status, total users, estimated cost, and token usage. Enable {{< ui >}}Group by Provider{{< /ui >}} to combine products from the same provider, such as Claude Code, Chat, Design, and Cowork under Anthropic.
 
-Click a {{< ui >}}Problem Pattern{{< /ui >}} node to open a detail view that includes the pattern definition, estimated monthly cost across your organization, a list of flagged sessions, and a recommended fix.
+{{< img src="/ai_agents_console/agent_console_integrations_overview.png" alt="Integrations section with cards for Anthropic, OpenAI, Cursor, Claude Code (OTel), GitHub Copilot, Microsoft Copilot, GitHub, and Jira" style="width:100%;" >}}
 
-### Individual agent dashboards
+Click {{< ui >}}View Dashboard{{< /ui >}} on a card to open a dedicated dashboard for that integration. Filter each dashboard by team, user, and model.
 
-The {{< ui >}}Coding Agents{{< /ui >}} tab displays a tile for each connected coding agent (such as Claude Code, GitHub Copilot, and Cursor). Each tile shows a summary of that agent's activity, including total users, total spend, and cost per line of code.
+For example, the Anthropic dashboard breaks down estimated cost and tokens by Claude product and model:
 
-{{< img src="/ai_agents_console/coding_agent_dashboard_claude.png" alt="The Claude Code dashboard displays widgets for lines added, sessions, commits, and performance metrics" style="width:100%;" >}}
+{{< img src="/ai_agents_console/agent_console_integrations_anthropic.png" alt="Anthropic dashboard showing enterprise estimated cost and tokens, cost by Claude product (Claude Code, Chat, Design, and Cowork), cost over time, and tokens by model" style="width:100%;" >}}
 
-Click an agent tile, or select from the {{< ui >}}All Coding Agents{{< /ui >}} dropdown at the top of the page, to open a dedicated dashboard for that agent. The dedicated dashboard includes summary tiles for total spend, sessions, commits, and lines added, along with performance charts covering request volume, latency, model usage patterns, lines added vs. removed, and tool accepts vs. rejects.
+The Codex dashboard shows estimated cost, active users, sessions, credits, and tokens, along with usage and adoption trends and top users:
 
-## Analyze agent usage
+{{< img src="/ai_agents_console/agent_console_codex_integration.png" alt="Codex dashboard showing estimated cost, active users, sessions, credits, total tokens, sessions and turns over time, tokens by type, and top users by turns and credits" style="width:100%;" >}}
 
-The {{< ui >}}Analytics{{< /ui >}} tab provides granular details for individuals and teams, helping you identify power users, outliers, and team-level adoption patterns.
+## My Usage
 
-{{< img src="/ai_agents_console/agent_console_analytics.png" alt="Agent Console Analytics tab displaying detailed user and team analytics for coding agent usage, including leaderboards and charts" style="width:100%;" >}}
+The {{< ui >}}My Usage{{< /ui >}} tab shows your own AI usage. It includes your daily spend, stacked by provider, and a breakdown of the tasks you used AI agents for. Filter by provider and model.
 
-### Team comparison
+{{< img src="/ai_agents_console/agent_console_my_usage.png" alt="My Usage tab showing a personal daily spend chart stacked by provider and a task breakdown chart" style="width:100%;" >}}
 
-The {{< ui >}}Comparison{{< /ui >}} panel helps you identify teams that are over- or under-investing in AI tooling relative to their output. Compare spend, cost per line, and model usage across teams and against your organization baseline to find where efficiency gains are possible or where costs are running unexpectedly high.
+Use the side navigation to switch between {{< ui >}}Overview{{< /ui >}}, {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Productivity{{< /ui >}}, {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}}. The Models, Skills, Tools, and Sessions views use session data from [Trajectory][6].
 
-### User analytics
+## Usage
 
-{{< img src="/ai_agents_console/user_analytics_user_detail_panel.png" alt="Agent Console User Analytics panel showing detailed breakdown for a selected user, including spend by agent, model mix, and PR history" style="width:100%;" >}}
+The {{< ui >}}Usage{{< /ui >}} tab provides the same views as My Usage, aggregated across your organization. Use it to understand what teams use AI agents for, identify power users and outliers, and compare adoption across teams.
 
-The {{< ui >}}User Analytics{{< /ui >}} panel gives you visibility into how individual engineers are using AI tooling across your organization. Use the panel to:
+### Tasks
+
+Agent Console classifies agent sessions into task categories, such as code implementation, engineering operations, and knowledge artifacts, and into more specific subcategories. The {{< ui >}}Tasks{{< /ui >}} view plots each category by its share of tasks and spend per active user, and lists the cost, cost per task, and number of tasks for each one.
+
+{{< img src="/ai_agents_console/agent_console_tasks.png" alt="Tasks view with a bubble chart of task categories by share of tasks and spend per active user, and a table of cost, cost per task, and task count" style="width:100%;" >}}
+
+Select a task category to open a detail panel with its subcategories, cost per task, total task cost, number of tasks, and average turns.
+
+{{< img src="/ai_agents_console/agent_console_tasks_view.png" alt="Task category detail panel for Engineering Operations showing tasks by subcategory, cost per task, total task cost, number of tasks, and average turns" style="width:100%;" >}}
+
+### Productivity and user analytics
+
+The {{< ui >}}Productivity{{< /ui >}} view gives you visibility into how individual engineers and teams use AI tooling. Use it to:
 - Identify your highest spenders and most productive contributors
-- Spot efficiency outliers — engineers with high spend but low output, or vice versa
+- Spot efficiency outliers, such as engineers with high spend but low output
 - See a full cost breakdown by user, agent, and model
-- Examine any individual's spend, PR history, and model mix
+- Examine any individual's spend, pull request history, and model mix
+
+{{< img src="/ai_agents_console/user_analytics_user_detail_panel.png" alt="User detail panel showing a breakdown for a selected user, including spend by agent, model mix, and PR history" style="width:100%;" >}}
+
+### Models, skills, tools, and sessions
+
+For agents captured with [Trajectory][6], the {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views show which models, skills, and tools agents use, and let you examine individual agent sessions.
 
 ## Bits AI agents
 
 {{< img src="/ai_agents_console/bits_ai_agents.png" alt="Bits AI Agents tab with a combined agent activity chart over time and individual cards for Bits Investigation, Bits Code, and Bits Agent Builder showing recent investigations, sessions, and executions" style="width:100%;" >}}
 
-The {{< ui >}}Bits AI Agents{{< /ui >}} tab shows usage of Datadog's built-in AI agents alongside your coding agents. The combined view of investigations, sessions, and executions across all Datadog agents lets you correlate Bits AI activity with the rest of your organization.
+The {{< ui >}}Bits AI Agents{{< /ui >}} tab shows usage of Datadog's built-in AI agents alongside your other AI tools. The combined view of investigations, sessions, and executions across all Datadog agents lets you correlate Bits AI activity with the rest of your organization.
 
-Individual cards summarize activity for each Bits AI agent, including [Bits Investigation][5], [Bits Code][6], and [Bits Agent Builder][7]. Click {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
-
-## Set up
-
-To start sending data to Agent Console, see [Set Up Agent Console][8].
+Individual cards summarize activity for each Bits AI agent, including [Bits Investigation][10], [Bits Code][11], and [Bits Agent Builder][12]. Click {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/ai-agents-console
-[2]: https://docs.claude.com/en/docs/claude-code/overview
-[3]: https://www.cursor.com/
+[2]: /integrations/anthropic-usage-and-costs/
+[3]: /integrations/cursor/
 [4]: /integrations/github-copilot/
-[5]: /bits_ai/bits_investigation/
-[6]: /bits_ai/bits_code/
-[7]: /actions/agents/
+[5]: /integrations/openai-usage-and-costs/
+[6]: https://github.com/datadog-labs/trajectory
+[7]: https://github.com/datadog-labs/trajectory/blob/main/docs/SUPPORTED-CLIENTS.md
 [8]: /ai_agents_console/setup/
+[9]: /ai_agents_console/setup/#connect-productivity-tools
+[10]: /bits_ai/bits_investigation/
+[11]: /bits_ai/bits_code/
+[12]: /actions/agents/
