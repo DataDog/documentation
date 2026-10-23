@@ -85774,7 +85774,7 @@ components:
             Set to `true` to continue using the legacy search syntax while migrating filter queries. After migrating all queries to the new syntax, set to `false`.
             The legacy syntax is deprecated and will eventually be removed.
             Requires Observability Pipelines Worker 2.11 or later.
-            Only applies to `logs` pipelines. This field is ignored for `metrics` pipelines.
+            Only applies to `logs` pipelines. This field is ignored for `metrics` and `traces` pipelines.
             See [Upgrade Your Filter Queries to the New Search Syntax](https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/) for more information.
           type: boolean
       required:
@@ -85811,18 +85811,20 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogMetricsDestination"
-        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineDatadogTracesDestination"
     ObservabilityPipelineConfigPipelineType:
       default: logs
       description: The type of data being ingested. Defaults to `logs` if not specified.
-      enum: [logs, metrics]
+      enum: [logs, metrics, traces]
       example: logs
       type: string
       x-enum-varnames:
         - LOGS
         - METRICS
+        - TRACES
     ObservabilityPipelineConfigProcessorGroup:
       description: "A group of processors."
       example: {"enabled": true, "id": "my-processor-group", "include": "service:my-service", "inputs": ["datadog-agent-source"], "processors": [{"enabled": true, "fields": [{"name": "env", "value": "prod"}], "id": "add-fields-processor", "include": "*", "type": "add_fields"}, {"enabled": true, "id": "filter-processor", "include": "status:error", "type": "filter"}]}
@@ -85868,12 +85870,10 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineAddEnvVarsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddHostnameProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineDedupeProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineGenerateMetricsV2Processor"
         - $ref: "#/components/schemas/ObservabilityPipelineOcsfMapperProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineParseJSONProcessor"
@@ -85882,10 +85882,12 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineReduceProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameFieldsProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineSampleProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineSplitArrayProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineGenerateMetricsV2Processor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSampleProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableProcessor"
@@ -85896,6 +85898,7 @@ components:
       description: "A data source for the pipeline."
       oneOf:
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogAgentSource"
+        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3Source"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentBitSource"
@@ -85912,7 +85915,6 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSumoLogicSource"
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
-        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
@@ -86002,7 +86004,7 @@ components:
       description: |-
         The `custom_processor` processor transforms events using [Vector Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with advanced filtering capabilities.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -86016,7 +86018,7 @@ components:
           type: string
         include:
           default: "*"
-          description: A Datadog search query used to determine which logs this processor targets. This field should always be set to `*` for the custom_processor processor.
+          description: A Datadog search query used to determine which events this processor targets. This field should always be set to `*` for the custom_processor processor.
           example: "*"
           type: string
         remaps:
@@ -86034,7 +86036,7 @@ components:
         - remaps
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation logic.
       properties:
@@ -86173,9 +86175,9 @@ components:
         - DATABRICKS_ZEROBUS
     ObservabilityPipelineDatadogAgentSource:
       description: |-
-        The `datadog_agent` source collects logs/metrics from the Datadog Agent.
+        The `datadog_agent` source collects logs, metrics, or traces from the Datadog Agent.
 
-        **Supported pipeline types:** logs, metrics
+        **Supported pipeline types:** logs, metrics, traces
       properties:
         address_key:
           description: Name of the environment variable or secret that holds the listen address for the Datadog Agent source.
@@ -86193,7 +86195,7 @@ components:
         - id
         - type
       type: object
-      x-pipeline-types: [logs, metrics]
+      x-pipeline-types: [logs, metrics, traces]
     ObservabilityPipelineDatadogAgentSourceType:
       default: datadog_agent
       description: The source type. The value should always be `datadog_agent`.
@@ -86370,6 +86372,42 @@ components:
       type: string
       x-enum-varnames:
         - DATADOG_TAGS
+    ObservabilityPipelineDatadogTracesDestination:
+      description: |-
+        The `datadog_traces` destination forwards traces to Datadog.
+
+        **Supported pipeline types:** traces
+      properties:
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        id:
+          description: The unique identifier for this component.
+          example: datadog-traces-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for this component.
+          example: ["trace-processor-group"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineDatadogTracesDestinationType"
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [traces]
+    ObservabilityPipelineDatadogTracesDestinationType:
+      default: datadog_traces
+      description: The destination type. The value should always be `datadog_traces`.
+      enum:
+        - datadog_traces
+      example: datadog_traces
+      type: string
+      x-enum-varnames:
+        - DATADOG_TRACES
     ObservabilityPipelineDecoding:
       description: The decoding format used to interpret incoming logs.
       enum:
@@ -86862,9 +86900,9 @@ components:
       type: object
     ObservabilityPipelineFilterProcessor:
       description: |-
-        The `filter` processor allows conditional processing of logs/metrics based on a Datadog search query. Logs/metrics that match the `include` query are passed through; others are discarded.
+        The `filter` processor allows conditional processing of logs, metrics, or traces based on a Datadog search query. Events that match the `include` query are passed through; others are discarded.
 
-        **Supported pipeline types:** logs, metrics
+        **Supported pipeline types:** logs, metrics, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -86877,7 +86915,7 @@ components:
           example: "filter-processor"
           type: string
         include:
-          description: A Datadog search query used to determine which logs/metrics should pass through the filter. Logs/metrics that match this query continue to downstream components; others are dropped.
+          description: A Datadog search query used to determine which events should pass through the filter. Events that match this query continue to downstream components; others are dropped.
           example: "service:my-service"
           type: string
         type:
@@ -86888,7 +86926,7 @@ components:
         - include
         - enabled
       type: object
-      x-pipeline-types: [logs, metrics]
+      x-pipeline-types: [logs, metrics, traces]
     ObservabilityPipelineFilterProcessorType:
       default: filter
       description: The processor type. The value should always be `filter`.
@@ -87021,12 +87059,12 @@ components:
         - GENERATE_DATADOG_METRICS
     ObservabilityPipelineGenerateMetricsV2Processor:
       description: |-
-        The `generate_metrics` processor creates custom metrics from logs.
-        Metrics can be counters, gauges, or distributions and optionally grouped by log fields.
+        The `generate_metrics` processor creates custom metrics from logs or traces.
+        Metrics can be counters, gauges, or distributions and optionally grouped by event fields.
 
-        There must be a destination whose `inputs` reference this processor with the `<processor-id>.metrics` suffix to route the generated metrics. All destination types normally supported for `metrics` pipelines are also supported as metrics destinations in `logs` pipelines.
+        There must be a destination whose `inputs` reference this processor with the `<processor-id>.metrics` suffix to route the generated metrics. All destination types normally supported for `metrics` pipelines are also supported as metrics destinations in `logs` and `traces` pipelines.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -87045,7 +87083,7 @@ components:
           example: generate-metrics-processor
           type: string
         include:
-          description: A Datadog search query used to determine which logs this processor targets.
+          description: A Datadog search query used to determine which events this processor targets.
           example: "service:my-service"
           type: string
         metrics:
@@ -87060,7 +87098,7 @@ components:
         - type
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineGenerateMetricsV2ProcessorType:
       default: generate_metrics
       description: The processor type. Always `generate_metrics`.
@@ -87072,18 +87110,18 @@ components:
         - GENERATE_METRICS
     ObservabilityPipelineGeneratedMetric:
       description: |-
-        Defines a log-based custom metric, including its name, type, filter, value computation strategy,
+        Defines a custom metric generated from logs or traces, including its name, type, filter, value computation strategy,
         and optional grouping fields.
       properties:
         group_by:
           description: Optional fields used to group the metric series.
           example: ["service", "env"]
           items:
-            description: A log field name used to group the metric series.
+            description: A field name used to group the metric series.
             type: string
           type: array
         include:
-          description: Datadog filter query to match logs for metric generation.
+          description: Datadog filter query to match events for metric generation.
           example: service:billing
           type: string
         metric_type:
@@ -87101,10 +87139,10 @@ components:
         - value
       type: object
     ObservabilityPipelineGeneratedMetricIncrementByField:
-      description: Strategy that increments a generated metric based on the value of a log field.
+      description: Strategy that increments a generated metric based on the value of an event field.
       properties:
         field:
-          description: Name of the log field containing the numeric value to increment the metric by.
+          description: Name of the field containing the numeric value to increment the metric by.
           example: "errors"
           type: string
         strategy:
@@ -88653,22 +88691,22 @@ components:
       type: string
       x-enum-varnames:
         - OPENSEARCH
-    ObservabilityPipelineOpentelemetryMetricsDestination:
+    ObservabilityPipelineOpentelemetryDestination:
       description: |-
-        The `opentelemetry` destination forwards metrics using the OpenTelemetry Protocol (OTLP) over HTTP.
+        The `opentelemetry` destination forwards metrics or traces using the OpenTelemetry Protocol (OTLP) over HTTP.
 
-        **Supported pipeline types:** metrics
+        **Supported pipeline types:** metrics, traces
       properties:
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         http_client_uri_key:
           default: DESTINATION_OTEL_HTTP_CLIENT_URI
-          description: Environment variable name containing the URI of the OTLP HTTP endpoint to send metrics to.
+          description: Environment variable name containing the URI of the OTLP HTTP endpoint to send metrics or traces to.
           example: DESTINATION_OTEL_HTTP_CLIENT_URI
           type: string
         id:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
-          example: opentelemetry-metrics-destination
+          example: opentelemetry-destination
           type: string
         inputs:
           description: A list of component IDs whose output is used as the `input` for this component.
@@ -88680,14 +88718,14 @@ components:
         tls:
           $ref: "#/components/schemas/ObservabilityPipelineTls"
         type:
-          $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestinationType"
+          $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryDestinationType"
       required:
         - id
         - type
         - inputs
       type: object
-      x-pipeline-types: [metrics]
-    ObservabilityPipelineOpentelemetryMetricsDestinationType:
+      x-pipeline-types: [metrics, traces]
+    ObservabilityPipelineOpentelemetryDestinationType:
       default: opentelemetry
       description: The destination type. Always `opentelemetry`.
       enum:
@@ -88700,7 +88738,7 @@ components:
       description: |-
         The `opentelemetry` source receives telemetry data using the OpenTelemetry Protocol (OTLP) over gRPC and HTTP.
 
-        **Supported pipeline types:** logs, metrics
+        **Supported pipeline types:** logs, metrics, traces
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address for receiving OTLP data. Must be a valid environment variable name (alphanumeric characters and underscores only).
@@ -88722,7 +88760,7 @@ components:
         - id
         - type
       type: object
-      x-pipeline-types: [logs, metrics]
+      x-pipeline-types: [logs, metrics, traces]
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -89630,9 +89668,9 @@ components:
         - RSYSLOG
     ObservabilityPipelineSampleProcessor:
       description: |-
-        The `sample` processor allows probabilistic sampling of logs at a fixed rate.
+        The `sample` processor allows probabilistic sampling of logs or traces at a fixed rate.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -89644,7 +89682,7 @@ components:
           description: Optional list of fields to group events by. Each group is sampled independently.
           example: ["service", "host"]
           items:
-            description: A log field name used to group events for independent sampling.
+            description: A field name used to group events for independent sampling.
             type: string
           minItems: 1
           type: array
@@ -89653,11 +89691,11 @@ components:
           example: "sample-processor"
           type: string
         include:
-          description: A Datadog search query used to determine which logs this processor targets.
+          description: A Datadog search query used to determine which events this processor targets.
           example: "service:my-service"
           type: string
         percentage:
-          description: The percentage of logs to sample.
+          description: The percentage of events to sample.
           example: 10.0
           format: double
           type: number
@@ -89670,7 +89708,7 @@ components:
         - percentage
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineSampleProcessorType:
       default: sample
       description: The processor type. The value should always be `sample`.
@@ -89681,9 +89719,9 @@ components:
         - SAMPLE
     ObservabilityPipelineSensitiveDataScannerProcessor:
       description: |-
-        The `sensitive_data_scanner` processor detects and optionally redacts sensitive data in log events.
+        The `sensitive_data_scanner` processor detects and optionally redacts sensitive data in log or trace events.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -89696,7 +89734,7 @@ components:
           example: "sensitive-scanner"
           type: string
         include:
-          description: A Datadog search query used to determine which logs this processor targets.
+          description: A Datadog search query used to determine which events this processor targets.
           example: "source:prod"
           type: string
         rules:
@@ -89713,7 +89751,7 @@ components:
         - rules
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
       oneOf:
