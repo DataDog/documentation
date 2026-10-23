@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.22.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.23.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,73 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.23.2
+
+To upgrade to Worker version 2.23.2:
+
+- Docker: Run the `docker pull` command for the [2.23.2 image][58].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.2`.
+
+Worker version 2.23.2 gives you access to the following:
+
+#### Enhancements
+
+- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log has no string message, or its non-message fields leave no room for a truncated message, the Worker forwards the log unchanged as long as it fits within the payload limit. The Datadog intake then truncates the log.
+
+#### Fixes
+
+- Fixed the Docker images so the secret generic connector (`sgc`) binary is executable by the `observability-pipelines-worker` service user.
+
+## Worker version 2.23.1
+
+To upgrade to Worker version 2.23.1:
+
+- Docker: Run the `docker pull` command for the [2.23.1 image][57].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.1`.
+
+Worker version 2.23.1 gives you access to the following:
+
+#### Security
+
+- Updated the bundled secret generic connector (`sgc`) binary to the version shipped with Datadog Agent 7.84.1, which addresses CVE-2026-56854.
+
+## Worker version 2.23.0
+
+To upgrade to Worker version 2.23.0:
+
+- Docker: Run the `docker pull` command for the [2.23.0 image][56].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.0`.
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects only Custom Processor scripts that use the <code>contains_all</code>, <code>encode_key_value</code>, <code>encode_logfmt</code>, <code>ip_cidr_contains</code>, <code>join</code>, <code>parse_groks</code>, or <code>tally</code> functions.<br><br>These functions now check the element types of their array arguments when the script compiles. Passing an array with the wrong element type, such as <code>join([1, 2, 3])</code>, is now a compile error instead of a runtime failure. When the Worker can confirm the elements are the correct type, the <code>!</code> suffix is no longer needed and triggers a warning. For example, use <code>join(["sources", "transforms", "sinks"], separator: ", ")</code> instead of <code>join!(["sources", "transforms", "sinks"], separator: ", ")</code>.</div>
+
+Worker version 2.23.0 gives you access to the following:
+
+#### New features
+
+- The Enrichment Table processor now supports CSV files and Reference Tables in metrics pipelines.
+- The Custom Processor now supports the `break` statement to exit a `for_each` loop early.
+
+#### Enhancements
+
+- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default. The limits apply to both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
+- The Databricks Zerobus destination now identifies the Worker in its `User-Agent` header.
+- For the Custom Processor:
+    - The processor's overall performance has been improved.
+    - The `for_each` function now iterates over collections directly, which improves performance and reduces memory usage.
+    - The `md5`, `sha1`, `sha2`, and `sha3` functions now run faster.
+
+#### Fixes
+
+- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable, the Worker looked for these files in the default data directory and rejected valid files as missing.
+- Sources now include the remote `peer_addr` in TCP acknowledgment error logs and TLS connection error logs.
+- The Custom Processor's `uuid_v7` function now preserves the supplied timestamp at millisecond precision.
 
 ## Worker version 2.22.0
 
@@ -29,7 +96,6 @@ Worker version 2.22.0 gives you access to the following:
 
 #### New features
 
-- The Integration Pipelines processor is now available for logs pipelines.
 - The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period includes late-arriving metrics in their event-time window.
 
 #### Enhancements
@@ -80,9 +146,9 @@ Worker version 2.21.0 gives you access to the following:
 #### New features
 
 - For metrics pipelines:
-    - The [Prometheus source][56] is now available.
-    - The [Prometheus destination][57] is now available.
-    - The [OpenTelemetry destination][58] is now available.
+    - The [Prometheus source][59] is now available.
+    - The [Prometheus destination][60] is now available.
+    - The [OpenTelemetry destination][61] is now available.
 - The Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage) now support a configurable `compression` option (`gzip` or `zstd`).
 - The Remap to OCSF processor now includes:
     - The AWS Config Rules OCSF mapping.
@@ -836,6 +902,9 @@ Worker version 2.7.0 gives you access to the following:
 [53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4
 [54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
 [55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
-[56]: /observability_pipelines/sources/prometheus/
-[57]: /observability_pipelines/destinations/prometheus/
-[58]: /observability_pipelines/destinations/opentelemetry/metrics/
+[56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
+[57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
+[58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
+[59]: /observability_pipelines/sources/prometheus/
+[60]: /observability_pipelines/destinations/prometheus/
+[61]: /observability_pipelines/destinations/opentelemetry/metrics/
