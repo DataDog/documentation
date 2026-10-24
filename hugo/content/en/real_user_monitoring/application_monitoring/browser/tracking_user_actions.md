@@ -56,19 +56,20 @@ To control which information is sent to Datadog, you can [mask action names with
 
 ### Mask all action names
 
-To mask all action names by default, use the `enablePrivacyForActionName` initialization parameter:
+To mask all action names by default, set `enablePrivacyForActionName` to `true` and `defaultPrivacyLevel` to `mask`:
 
 ```javascript
 window.DD_RUM.init({
     ...
     trackUserInteractions: true,
     enablePrivacyForActionName: true,
+    defaultPrivacyLevel: 'mask',
 });
 ```
 
-When enabled, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
+With these settings, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
 
-<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation">Action Name Deobfuscation build plugin</a> automatically restores readable action names in minified builds.</div>
+<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy/">privacy plugin</a> generates an allowlist of safe strings at build time so the RUM Browser SDK can keep useful action names while masking sensitive data.</div>
 
 ## Action timing telemetry
 
