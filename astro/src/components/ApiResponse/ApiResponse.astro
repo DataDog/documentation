@@ -18,6 +18,7 @@ const cl = classListFactory(styles);
 interface Example {
   name: string;
   value: string;
+  language?: string;
 }
 
 export interface ResponseData {
@@ -26,7 +27,14 @@ export interface ResponseData {
   schemaDescription?: string;
   schema?: SchemaField[];
   examples?: Example[];
+  contentType?: string;
+  emptyBody?: boolean;
 }
+
+// MISSING_TRANSLATION_LABEL: These labels are not in the i18n file yet.
+const contentTypeLabel = (contentType: string) =>
+  `Content type: \`${contentType}\``;
+const NO_RESPONSE_BODY_LABEL = "No response body";
 
 interface Props {
   responses: ResponseData[];
@@ -60,7 +68,12 @@ const innerPanelIds = responses.map((_, i) => [
           const hasExamples = (r.examples?.length ?? 0) > 0;
           // A top-level array of primitives has no rows, but Hugo still
           // shows its Model tab, with the schema description and no table.
-          const hasModel = hasSchema || Boolean(r.schemaDescription);
+          // A non-JSON body's Model is its content type.
+          const hasModel =
+            hasSchema ||
+            Boolean(r.schemaDescription) ||
+            Boolean(r.contentType) ||
+            Boolean(r.emptyBody);
           const showInnerTabs = hasModel && hasExamples;
           return (
             <TabPanel id={outerPanelIds[i]} isActive={i === 0}>
@@ -88,6 +101,19 @@ const innerPanelIds = responses.map((_, i) => [
                           set:html={renderMarkdown(r.schemaDescription)}
                         />
                       )}
+                      {r.contentType && (
+                        <div
+                          class={cl("api-response__schema-description")}
+                          set:html={renderMarkdown(
+                            contentTypeLabel(r.contentType),
+                          )}
+                        />
+                      )}
+                      {r.emptyBody && (
+                        <p class={cl("api-response__schema-description")}>
+                          {NO_RESPONSE_BODY_LABEL}
+                        </p>
+                      )}
                       {hasSchema && (
                         <ApiSchemaTable
                           fields={r.schema!}
@@ -98,11 +124,21 @@ const innerPanelIds = responses.map((_, i) => [
                     <TabPanel id={innerPanelIds[i][1]}>
                       {r.examples!.map((ex) => (
                         <div class={cl("api-response__example")}>
-                          <CodeBlock content={ex.value} language="json" />
+                          <CodeBlock
+                            content={ex.value}
+                            language={ex.language ?? "json"}
+                          />
                         </div>
                       ))}
                     </TabPanel>
                   </Tabs>
+                )}
+
+                {!showInnerTabs && r.contentType && (
+                  <div
+                    class={cl("api-response__schema-description")}
+                    set:html={renderMarkdown(contentTypeLabel(r.contentType))}
+                  />
                 )}
 
                 {!showInnerTabs && hasSchema && r.schemaDescription && (
@@ -120,7 +156,10 @@ const innerPanelIds = responses.map((_, i) => [
                   hasExamples &&
                   r.examples!.map((ex) => (
                     <div class={cl("api-response__example")}>
-                      <CodeBlock content={ex.value} language="json" />
+                      <CodeBlock
+                        content={ex.value}
+                        language={ex.language ?? "json"}
+                      />
                     </div>
                   ))}
               </div>

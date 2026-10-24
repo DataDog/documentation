@@ -31,7 +31,8 @@ async function createContainer() {
 
 async function renderComponent(props: {
   schema: typeof schema;
-  examples: typeof examples;
+  examples: { name: string; value: string; language?: string }[];
+  showExampleTitles?: boolean;
 }) {
   const container = await createContainer();
   return container.renderToString(ApiRequestBodyTabs, { props });
@@ -71,21 +72,67 @@ describe("ApiRequestBodyTabs (astro)", () => {
     expect(html).toContain("code-block");
   });
 
-  it("renders example labels only when multiple examples are provided", async () => {
+  // Hugo's request-body.html: a collapsible card per example, titled, with
+  // the first one open.
+  it("renders a titled accordion entry per example when titles are shown", async () => {
+    const html = await renderComponent({
+      schema,
+      examples: multipleExamples,
+      showExampleTitles: true,
+    });
+
+    const entries =
+      html.match(/<details[^>]*request-body-tabs__accordion[^>]*>/g) ?? [];
+    expect(entries).toHaveLength(2);
+    expect(entries[0]).toContain("open");
+    expect(entries[1]).not.toContain("open");
+    expect(html).toMatch(
+      /request-body-tabs__accordion-header[^>]*>[\s\S]*?<span>First<\/span>/,
+    );
+    expect(html).toMatch(/<span>Second<\/span>/);
+  });
+
+  it("renders untitled code blocks when titles aren't shown", async () => {
+    const html = await renderComponent({
+      schema,
+      examples: multipleExamples,
+      showExampleTitles: false,
+    });
+
+    expect(html).not.toContain("<details");
+    expect(html).not.toContain("First");
+    expect(html.match(/class="[^"]*code-block[ "]/g)?.length).toBeGreaterThan(
+      0,
+    );
+  });
+
+  it("titles the examples only when there is more than one, by default", async () => {
     const htmlMultiple = await renderComponent({
       schema,
       examples: multipleExamples,
     });
-    expect(htmlMultiple).toMatch(/<strong[^>]*>First<\/strong>/);
-    expect(htmlMultiple).toMatch(/<strong[^>]*>Second<\/strong>/);
+    expect(htmlMultiple).toContain("request-body-tabs__accordion");
 
     const htmlSingle = await renderComponent({ schema, examples });
-    expect(htmlSingle).not.toMatch(/<strong[^>]*>Example<\/strong>/);
+    expect(htmlSingle).not.toContain("request-body-tabs__accordion");
   });
 
   it("labels the schema table's first column Field, as Hugo does", async () => {
     const html = await renderComponent({ schema, examples });
 
     expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
+  });
+
+  it("highlights an example in its own language, defaulting to JSON", async () => {
+    const formExample = {
+      name: "Example",
+      value: "-F 'idp_file=@metadata.xml'",
+      language: "bash",
+    };
+    const htmlForm = await renderComponent({ schema, examples: [formExample] });
+    expect(htmlForm).toContain('data-language="bash"');
+
+    const htmlJson = await renderComponent({ schema, examples });
+    expect(htmlJson).toContain('data-language="json"');
   });
 });

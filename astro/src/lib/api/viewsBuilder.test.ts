@@ -149,14 +149,55 @@ describe("viewsBuilder x-displayName labels", () => {
         set.entries.map((entry) => entry.description),
       ]),
     );
-    expect(descriptionsByLanguage.curl).toEqual([
-      "Connect an AWS account curl example",
-    ]);
+    expect(descriptionsByLanguage.curl).toEqual(["Connect an AWS account"]);
     expect(descriptionsByLanguage.go).toEqual(
       expect.arrayContaining([
         'Connect an AWS account returns "AWS Account object" response',
         'Create an AWS account returns "AWS Account object" response',
       ]),
     );
+  });
+});
+
+describe("viewsBuilder code example titles", () => {
+  // Hugo titles an example with the operation summary when it has no
+  // CodeExamples.json description (or, for curl, no request file).
+  it("falls back to the summary for untitled SDK and curl examples", async () => {
+    const view = await getOperationView(
+      "usage-metering",
+      "get-hourly-usage-for-lambda",
+    );
+    const descriptions = (view?.variants[0].codeExamples ?? []).flatMap((set) =>
+      set.entries.map((entry) => entry.description),
+    );
+    expect(descriptions.length).toBeGreaterThan(1);
+    for (const description of descriptions) {
+      expect(description).toBe("Get hourly usage for Lambda");
+    }
+  });
+});
+
+describe("viewsBuilder curl examples", () => {
+  // Decision A: one curl per request file, each sending its own file.
+  it("builds one titled curl per request file, in every region", async () => {
+    const view = await getOperationView("monitors", "create-a-monitor");
+    const curlEntries =
+      view?.variants[0].codeExamples.find((set) => set.language === "curl")
+        ?.entries ?? [];
+
+    expect(curlEntries.map((entry) => entry.description)).toEqual([
+      'Create a Cost Monitor returns "OK" response',
+      'Create a RUM formula and functions monitor returns "OK" response',
+    ]);
+    const monitorTypes = ["cost alert", "rum alert"];
+    curlEntries.forEach((entry, index) => {
+      const regionCodes = Object.values(entry.regionVariants ?? {}).map(
+        (variant) => variant.code,
+      );
+      expect(regionCodes.length).toBeGreaterThan(0);
+      for (const code of [entry.code, ...regionCodes]) {
+        expect(code).toContain(`"type": "${monitorTypes[index]}"`);
+      }
+    });
   });
 });

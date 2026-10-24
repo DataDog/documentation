@@ -14,6 +14,7 @@ import {
 } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
 import { buildSchemaExample } from "./schemaExampleBuilder";
+import { multipartFormExamples } from "./multipartFormExamples";
 import { buildRunCommand } from "./runCommandBuilder";
 import type { LanguageRunInfo } from "./codeExampleLoader";
 import { getRegionHosts, getRegions } from "./regionResolver";
@@ -25,6 +26,7 @@ import type {
   GenerateCurlOptions,
 } from "./schemas/curl";
 import type { ResponseData, RequestBodyData } from "./schemas/views";
+import type { RequestFileExamples } from "./requestFileLoader";
 import type { SplitParams } from "./schemas/params";
 
 type ParameterOrRef = OpenAPIV3.ParameterObject | OpenAPIV3.ReferenceObject;
@@ -149,12 +151,20 @@ function isJsonMediaType(mediaType: string): boolean {
 }
 
 /**
- * Extract request body schema and examples from the operation.
+ * The operation's request body object and the media type its examples use.
+ * Hugo renders a body whatever its content type. Prefer JSON, then fall back
+ * to the first declared type (e.g. `text/json`, `multipart/form-data`).
  */
-export function extractRequestBody(
+function resolveRequestBodyContent(
   spec: OpenAPIV3.Document,
   operation: OpenAPIV3.OperationObject,
-): RequestBodyData | undefined {
+):
+  | {
+      resolved: OpenAPIV3.RequestBodyObject;
+      mediaType: string;
+      bodyContent: OpenAPIV3.MediaTypeObject;
+    }
+  | undefined {
   const rb = operation.requestBody;
   if (!rb) return undefined;
 
@@ -165,14 +175,29 @@ export function extractRequestBody(
   const content = resolved.content;
   if (!content) return undefined;
 
-  // Hugo renders a body whatever its content type. Prefer JSON, then fall
-  // back to the first declared type (e.g. `text/json`, `multipart/form-data`).
   const mediaType =
     "application/json" in content
       ? "application/json"
       : Object.keys(content)[0];
   if (!mediaType) return undefined;
-  const bodyContent = content[mediaType];
+  return { resolved, mediaType, bodyContent: content[mediaType] };
+}
+
+/**
+ * Extract request body schema and examples from the operation.
+ */
+export function extractRequestBody(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  requestFileExamples: RequestFileExamples = {
+    examples: [],
+    showTitles: false,
+    isFallbackFile: false,
+  },
+): RequestBodyData | undefined {
+  const requestBodyContent = resolveRequestBodyContent(spec, operation);
+  if (!requestBodyContent) return undefined;
+  const { resolved, mediaType, bodyContent } = requestBodyContent;
 
   // Read-only fields are omitted from request bodies: a client cannot send
   // them. Responses keep theirs, so the filter belongs here rather than in
@@ -184,38 +209,30 @@ export function extractRequestBody(
   const examples: Array<{ name: string; value: string }> = [];
 
   // A JSON example would misrepresent a non-JSON body (and feed a JSON `-d`
-  // into the generated curl command), so those bodies show the schema only.
+  // into the generated curl command). A multipart body's example is the
+  // curl `-F` fields that send it. Other non-JSON bodies show the schema only.
   if (!isJsonMediaType(mediaType)) {
+    const formExamples =
+      mediaType === "multipart/form-data"
+        ? multipartFormExamples(spec, bodyContent)
+        : { examples, showTitles: false };
     return {
       required: resolved.required === true,
       description: resolved.description || undefined,
       schema,
-      examples,
+      examples: formExamples.examples,
+      showExampleTitles: formExamples.showTitles,
     };
   }
 
-  if (bodyContent.examples && typeof bodyContent.examples === "object") {
-    for (const [name, exampleObj] of Object.entries(bodyContent.examples)) {
-      const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
-        ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
-        : exampleObj;
-
-      if (resolvedExample?.value !== undefined) {
-        examples.push({
-          name: resolvedExample.summary ?? name,
-          value: JSON.stringify(resolvedExample.value, null, 2),
-        });
-      }
-    }
-  } else if (bodyContent.example !== undefined) {
-    examples.push({
-      name: "Example",
-      value: JSON.stringify(bodyContent.example, null, 2),
-    });
-  }
-
-  if (examples.length === 0 && bodyContent.schema) {
-    const generated = generateExampleFromSchema(spec, bodyContent.schema);
+  // Prod's Example tab shows Hugo's request files when the operation has any,
+  // and otherwise the example Hugo builds from the schema. It never shows the
+  // spec's examples.
+  const hasRequestFiles = requestFileExamples.examples.length > 0;
+  if (hasRequestFiles) {
+    examples.push(...requestFileExamples.examples);
+  } else if (bodyContent.schema) {
+    const generated = buildSchemaExample(spec, "request", bodyContent.schema);
     if (generated !== undefined) {
       examples.push({
         name: "Example",
@@ -229,7 +246,173 @@ export function extractRequestBody(
     description: resolved.description || undefined,
     schema,
     examples,
+    showExampleTitles: hasRequestFiles && requestFileExamples.showTitles,
   };
+}
+
+/**
+ * One curl command: the body it sends, the comment lines above it, and the
+ * encoding it compresses the body with, if any.
+ */
+export interface CurlBody {
+  requestBodyJson: string | undefined;
+  commentLines: string[];
+  contentEncoding?: CurlContentEncoding;
+}
+
+type CurlContentEncoding = NonNullable<GenerateCurlOptions["contentEncoding"]>;
+
+/**
+ * One entry in the Curl tab. `title` is the request file's CodeExamples
+ * description, or `undefined` for the fallback request file and the
+ * operation's own entry.
+ */
+export interface CurlExample {
+  title: string | undefined;
+  bodies: CurlBody[];
+}
+
+/**
+ * The Curl tab's entries. Prod's curl repeats every spec example in every
+ * request-file card (decision A treats that as a mistake), so Astro builds one
+ * curl per request file, sending that file. Without request files, there's
+ * one entry with a curl per spec example, as on prod.
+ */
+export function extractCurlExamples(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  requestFileExamples: RequestFileExamples = {
+    examples: [],
+    showTitles: false,
+    isFallbackFile: false,
+  },
+): CurlExample[] {
+  const requestBodyContent = resolveRequestBodyContent(spec, operation);
+  if (!requestBodyContent || !isJsonMediaType(requestBodyContent.mediaType)) {
+    return [{ title: undefined, bodies: [curlBody(undefined)] }];
+  }
+  const encodingForTitle = (cardTitle: string | undefined) =>
+    curlContentEncoding(spec, operation, cardTitle ?? "");
+  if (requestFileExamples.examples.length > 0) {
+    return requestFileExamples.examples.map((example) => ({
+      title: requestFileExamples.isFallbackFile ? undefined : example.name,
+      bodies: [
+        withContentEncoding(
+          curlBody(example.value),
+          encodingForTitle(example.name),
+        ),
+      ],
+    }));
+  }
+  const contentEncoding = encodingForTitle(operation.summary);
+  return [
+    {
+      title: undefined,
+      bodies: specExampleCurlBodies(spec, requestBodyContent.bodyContent).map(
+        (body) => withContentEncoding(body, contentEncoding),
+      ),
+    },
+  ];
+}
+
+function withContentEncoding(
+  body: CurlBody,
+  contentEncoding: CurlContentEncoding | undefined,
+): CurlBody {
+  return contentEncoding ? { ...body, contentEncoding } : body;
+}
+
+/**
+ * Hugo's curl.html reads the encoding from the card's title (the request
+ * file's description, else the operation's summary): the last
+ * `Content-Encoding` enum value the title contains, else the header's example
+ * when the header is required or the title says "compression". Hugo has a
+ * curl shape only for gzip and deflate. For any other value, it sends the
+ * header but no body, so other values are ignored.
+ */
+function curlContentEncoding(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  cardTitle: string,
+): CurlContentEncoding | undefined {
+  const header = splitParameters(spec, operation.parameters).header.find(
+    (param) => param.name === "Content-Encoding",
+  );
+  if (!header) return undefined;
+  const schema = resolveSchema(spec, header.schema);
+  const enumValues: unknown[] = schema?.enum ?? [];
+  const encodingInTitle = enumValues
+    .filter(
+      (enumValue): enumValue is string =>
+        typeof enumValue === "string" && cardTitle.includes(enumValue),
+    )
+    .at(-1);
+  let encoding: unknown = encodingInTitle;
+  if (
+    encoding === undefined &&
+    ((schema?.example !== undefined && header.required) ||
+      cardTitle.includes("compression"))
+  ) {
+    encoding = header.example ?? schema?.example;
+  }
+  return encoding === "gzip" || encoding === "deflate" ? encoding : undefined;
+}
+
+function curlBody(requestBodyJson: string | undefined): CurlBody {
+  return { requestBodyJson, commentLines: [] };
+}
+
+/**
+ * One curl per inline spec example, in key order, as Hugo ranges over the
+ * examples map. With several, each is headed by its summary (or id) and its
+ * description lines, as on prod. A lone example gets no heading, since that
+ * would add prod's `## default` line to most operations (K21).
+ */
+function specExampleCurlBodies(
+  spec: OpenAPIV3.Document,
+  bodyContent: OpenAPIV3.MediaTypeObject,
+): CurlBody[] {
+  const inlineExamples = Object.entries(bodyContent.examples ?? {})
+    .sort(([idA], [idB]) => (idA < idB ? -1 : idA > idB ? 1 : 0))
+    .flatMap(([exampleId, exampleObj]) => {
+      const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
+        ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
+        : exampleObj;
+      return resolvedExample?.value === undefined
+        ? []
+        : [{ exampleId, example: resolvedExample }];
+    });
+  if (inlineExamples.length === 0) {
+    return [curlBody(fallbackRequestExampleJson(spec, bodyContent))];
+  }
+  return inlineExamples.map(({ exampleId, example }) => ({
+    requestBodyJson: JSON.stringify(example.value, null, 2),
+    commentLines:
+      inlineExamples.length > 1 ? exampleCommentLines(exampleId, example) : [],
+  }));
+}
+
+/** Hugo's `## <summary or id>`, then a `# <line>` per description line. */
+function exampleCommentLines(
+  exampleId: string,
+  example: OpenAPIV3.ExampleObject,
+): string[] {
+  const descriptionLines = example.description
+    ? example.description.split("\n").map((line) => `# ${line}`)
+    : [];
+  return [`## ${example.summary || exampleId}`, ...descriptionLines];
+}
+
+/**
+ * The spec's `example`, then one generated from the schema's `example` fields.
+ */
+function fallbackRequestExampleJson(
+  spec: OpenAPIV3.Document,
+  bodyContent: OpenAPIV3.MediaTypeObject,
+): string | undefined {
+  const example =
+    bodyContent.example ?? generateExampleFromSchema(spec, bodyContent.schema);
+  return example === undefined ? undefined : JSON.stringify(example, null, 2);
 }
 
 /**
@@ -244,6 +427,54 @@ function resolveSchemaDescription(
     ? resolveRef(spec, schema.$ref)
     : schema;
   return resolved?.description || undefined;
+}
+
+function isEmptyObject(value: unknown): boolean {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value) &&
+    Object.keys(value).length === 0
+  );
+}
+
+/**
+ * The spec's example of a non-JSON response, such as a CSV report, in a code
+ * block of its type. A binary body (a zip or other file) has no text to show,
+ * so it has no example.
+ */
+function textResponseExamples(
+  spec: OpenAPIV3.Document,
+  mediaType: string,
+  mediaContent: OpenAPIV3.MediaTypeObject,
+): Array<{ name: string; value: string; language: string }> | undefined {
+  if (mediaContent.schema) {
+    const schema = resolveSchema(spec, mediaContent.schema);
+    if (schema?.format === "binary") return undefined;
+  }
+  const value = firstSpecExampleValue(spec, mediaContent);
+  if (typeof value !== "string" || value === "") return undefined;
+  return [
+    { name: "Example", value, language: languageForMediaType(mediaType) },
+  ];
+}
+
+function firstSpecExampleValue(
+  spec: OpenAPIV3.Document,
+  mediaContent: OpenAPIV3.MediaTypeObject,
+): unknown {
+  if (mediaContent.example !== undefined) return mediaContent.example;
+  const [exampleOrRef] = Object.values(mediaContent.examples ?? {});
+  const example: OpenAPIV3.ExampleObject | undefined = isReference(exampleOrRef)
+    ? resolveRef(spec, exampleOrRef.$ref)
+    : exampleOrRef;
+  return example?.value;
+}
+
+/** `text/csv` highlights as `csv`, `application/yaml` as `yaml`. */
+function languageForMediaType(mediaType: string): string {
+  const subtype = mediaType.split(";")[0].split("/")[1] ?? "";
+  return subtype === "plain" ? "text" : subtype;
 }
 
 /**
@@ -276,6 +507,21 @@ export function extractResponses(
         ? "application/json"
         : Object.keys(content)[0];
     const mediaContent = mediaType ? content[mediaType] : undefined;
+    const isJson = mediaType !== undefined && isJsonMediaType(mediaType);
+
+    // A non-JSON body has no fields to list: it's described by its content
+    // type, with the spec's example when that example is text.
+    if (mediaType && mediaContent && !isJson) {
+      const examples = textResponseExamples(spec, mediaType, mediaContent);
+      result.push({
+        statusCode,
+        description,
+        contentType: mediaType,
+        ...(examples ? { examples } : {}),
+      });
+      continue;
+    }
+
     if (mediaContent?.schema) {
       // Write-only fields are omitted from responses: the server accepts them
       // but never returns them. Requests keep theirs, so the filter belongs
@@ -286,16 +532,11 @@ export function extractResponses(
       schemaDescription = resolveSchemaDescription(spec, mediaContent.schema);
     }
 
-    // A JSON example would misrepresent a non-JSON response, so those show
-    // the schema only.
-    const jsonContent =
-      mediaType && isJsonMediaType(mediaType) ? mediaContent : undefined;
-
     // Like Hugo, build the example from the schema and ignore the spec's
     // `examples`, so fields without an example show a type placeholder.
     let examples: Array<{ name: string; value: string }> | undefined;
-    const generated = jsonContent?.schema
-      ? buildSchemaExample(spec, "response", jsonContent.schema)
+    const generated = mediaContent?.schema
+      ? buildSchemaExample(spec, "response", mediaContent.schema)
       : undefined;
     if (generated !== undefined) {
       examples = [
@@ -303,12 +544,17 @@ export function extractResponses(
       ];
     }
 
+    // Like Hugo, an empty object still gets a Model tab, which says there's
+    // no response body.
+    const emptyBody = schema?.length === 0 && isEmptyObject(generated);
+
     result.push({
       statusCode,
       description,
       ...(schemaDescription ? { schemaDescription } : {}),
       schema,
       examples,
+      ...(emptyBody ? { emptyBody } : {}),
     });
   }
 
@@ -328,7 +574,7 @@ export function buildCurlByRegion(
   path: string,
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
-  requestBodyJson?: string,
+  body: CurlBody = curlBody(undefined),
 ): Record<string, string> {
   const options = curlOptionsForOperation(
     spec,
@@ -336,7 +582,7 @@ export function buildCurlByRegion(
     path,
     operation,
     splitParams,
-    requestBodyJson,
+    body,
   );
   const hostsByRegion = getRegionHosts(spec, operation);
   const result: Record<string, string> = {};
@@ -361,7 +607,7 @@ export function buildPlaintextCurl(
   path: string,
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
-  requestBodyJson?: string,
+  body: CurlBody = curlBody(undefined),
 ): string {
   const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
   const hostsByRegion = getRegionHosts(spec, operation);
@@ -372,7 +618,7 @@ export function buildPlaintextCurl(
       path,
       operation,
       splitParams,
-      requestBodyJson,
+      body,
     ),
     site: defaultRegion?.site,
     otherSites: otherRegions.map((region) => region.site),
@@ -391,17 +637,19 @@ function curlOptionsForOperation(
   path: string,
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
-  requestBodyJson: string | undefined,
+  body: CurlBody,
 ): GenerateCurlOptions {
   const servers = operation?.servers ?? spec?.servers;
   return {
     method,
     path,
+    commentLines: body.commentLines,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
     pathParams: toCurlParams(spec, splitParams.path),
     queryParams: toCurlParams(spec, splitParams.query),
     headerParams: toCurlParams(spec, splitParams.header),
-    requestBodyJson,
+    requestBodyJson: body.requestBodyJson,
+    contentEncoding: body.contentEncoding,
     hasRequestBody: operation.requestBody !== undefined,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),

@@ -81,51 +81,25 @@ Incident payload.
 ```json
 {
   "data": {
+    "type": "incidents",
     "attributes": {
-      "customer_impact_scope": "Example customer impact scope",
+      "title": "Example-Incident",
       "customer_impacted": false,
       "fields": {
-        "severity": {
+        "state": {
           "type": "dropdown",
-          "value": "SEV-5"
+          "value": "resolved"
         }
-      },
-      "incident_type_uuid": "00000000-0000-0000-0000-000000000000",
-      "initial_cells": [
-        {
-          "cell_type": "markdown",
-          "content": {
-            "content": "An example timeline cell message."
-          },
-          "important": false
-        }
-      ],
-      "is_test": false,
-      "notification_handles": [
-        {
-          "display_name": "Jane Doe",
-          "handle": "@user@email.com"
-        },
-        {
-          "display_name": "Slack Channel",
-          "handle": "@slack-channel"
-        },
-        {
-          "display_name": "Incident Workflow",
-          "handle": "@workflow-from-incident"
-        }
-      ],
-      "title": "A test incident title"
+      }
     },
     "relationships": {
       "commander_user": {
         "data": {
-          "id": "00000000-0000-0000-0000-000000000000",
-          "type": "users"
+          "type": "users",
+          "id": "string"
         }
       }
-    },
-    "type": "incidents"
+    }
   }
 }
 ```
@@ -529,51 +503,25 @@ curl -X POST "https://api.${DD_SITE}/api/v2/incidents" \
 -d @- << EOF
 {
   "data": {
+    "type": "incidents",
     "attributes": {
-      "customer_impact_scope": "Example customer impact scope",
+      "title": "Example-Incident",
       "customer_impacted": false,
       "fields": {
-        "severity": {
+        "state": {
           "type": "dropdown",
-          "value": "SEV-5"
+          "value": "resolved"
         }
-      },
-      "incident_type_uuid": "00000000-0000-0000-0000-000000000000",
-      "initial_cells": [
-        {
-          "cell_type": "markdown",
-          "content": {
-            "content": "An example timeline cell message."
-          },
-          "important": false
-        }
-      ],
-      "is_test": false,
-      "notification_handles": [
-        {
-          "display_name": "Jane Doe",
-          "handle": "@user@email.com"
-        },
-        {
-          "display_name": "Slack Channel",
-          "handle": "@slack-channel"
-        },
-        {
-          "display_name": "Incident Workflow",
-          "handle": "@workflow-from-incident"
-        }
-      ],
-      "title": "A test incident title"
+      }
     },
     "relationships": {
       "commander_user": {
         "data": {
-          "id": "00000000-0000-0000-0000-000000000000",
-          "type": "users"
+          "type": "users",
+          "id": "string"
         }
       }
-    },
-    "type": "incidents"
+    }
   }
 }
 EOF

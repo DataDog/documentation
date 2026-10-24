@@ -37,6 +37,8 @@ import {
 } from "./translationsLoader";
 import {
   splitParameters,
+  extractCurlExamples,
+  type CurlExample,
   extractRequestBody,
   extractResponses,
   extractPermissions,
@@ -60,7 +62,11 @@ import {
   getCodeExamplesForOperation,
   getLanguageRunInfo,
 } from "./codeExampleLoader";
-import type { CodeExampleSet } from "./schemas/codeExamples";
+import {
+  getRequestFileExamples,
+  type RequestFileExamples,
+} from "./requestFileLoader";
+import type { CodeExampleEntry, CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
 import type { SplitParams } from "./schemas/params";
@@ -565,14 +571,24 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const regionUrls = buildRegionUrlsForOperation(spec, op);
 
   const params = collectParametersForOperation(spec, op);
-  const requestBody = buildLocalizedRequestBodyForOperation(spec, op, action);
+  const requestFileExamples = getRequestFileExamples(
+    op.operation.operationId,
+    op.version,
+    op.categorySlug,
+  );
+  const requestBody = buildLocalizedRequestBodyForOperation(
+    spec,
+    op,
+    action,
+    requestFileExamples,
+  );
   const responses = extractResponses(spec, op.operation);
 
   const codeExamples = buildCodeExamplesForOperation(
     spec,
     op,
     params.split,
-    requestBody?.examples?.[0]?.value,
+    extractCurlExamples(spec, op.operation, requestFileExamples),
     summary,
     // Matches Hugo: only English SDK captions are relabeled.
     lang === DEFAULT_LOCALE ? displaySummary : undefined,
@@ -668,8 +684,13 @@ function buildLocalizedRequestBodyForOperation(
   spec: OpenAPIV3.Document,
   op: RawOperation,
   action: ActionTranslation,
+  requestFileExamples: RequestFileExamples,
 ): RequestBodyData | undefined {
-  const requestBody = extractRequestBody(spec, op.operation);
+  const requestBody = extractRequestBody(
+    spec,
+    op.operation,
+    requestFileExamples,
+  );
   if (!requestBody) return undefined;
 
   if (action.request_description !== undefined) {
@@ -685,41 +706,17 @@ function buildLocalizedRequestBodyForOperation(
 }
 
 /**
- * Assembles the code-examples panel: a curl block (one entry with per-
- * region variants) followed by any SDK examples discovered for this
- * operation.
+ * Assembles the code-examples panel: the curl entries (each with per-region
+ * variants) followed by any SDK examples discovered for this operation.
  */
 function buildCodeExamplesForOperation(
   spec: OpenAPIV3.Document,
   op: RawOperation,
   params: SplitParams,
-  requestBodyJson: string | undefined,
+  curlExamples: CurlExample[],
   summary: string,
   sdkCaptionLabel: string | undefined,
 ): CodeExampleSet[] {
-  const curlByRegion = buildCurlByRegion(
-    spec,
-    op.method,
-    op.pathStr,
-    op.operation,
-    params,
-    requestBodyJson,
-  );
-  // The HTML renders `regionVariants`, so `code` only reaches the .md.
-  const plaintextCurl = buildPlaintextCurl(
-    spec,
-    op.method,
-    op.pathStr,
-    op.operation,
-    params,
-    requestBodyJson,
-  );
-
-  const curlVariants: Record<string, { code: string }> = {};
-  for (const [key, code] of Object.entries(curlByRegion)) {
-    curlVariants[key] = { code };
-  }
-
   const sdkExamples = getCodeExamplesForOperation(
     op.operation.operationId,
     op.version,
@@ -728,23 +725,55 @@ function buildCodeExamplesForOperation(
     .map((set) =>
       withRelabeledCaptions(set, op.operation.summary ?? "", sdkCaptionLabel),
     )
+    .map((set) => withSummaryFallbackCaptions(set, summary))
     .map((set) => withRunInstructions(spec, op.operation, set));
 
   return [
     {
       language: "curl",
       label: "Curl",
-      entries: [
-        {
-          description: `${summary} curl example`,
-          code: plaintextCurl,
-          syntax: "bash",
-          regionVariants: curlVariants,
-        },
-      ],
+      entries: curlExamples.map((curlExample) =>
+        buildCurlEntry(spec, op, params, curlExample, summary),
+      ),
     },
     ...sdkExamples,
   ];
+}
+
+/**
+ * One curl entry. An entry with several bodies shows their curls in one
+ * block, separated by a blank line, as prod does.
+ */
+function buildCurlEntry(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+  params: SplitParams,
+  curlExample: CurlExample,
+  summary: string,
+): CodeExampleEntry {
+  const curlsByRegion = curlExample.bodies.map((body) =>
+    buildCurlByRegion(spec, op.method, op.pathStr, op.operation, params, body),
+  );
+  // The HTML renders `regionVariants`, so `code` only reaches the .md.
+  const plaintextCurls = curlExample.bodies.map((body) =>
+    buildPlaintextCurl(spec, op.method, op.pathStr, op.operation, params, body),
+  );
+
+  const regionVariants: Record<string, { code: string }> = {};
+  for (const regionKey of Object.keys(curlsByRegion[0] ?? {})) {
+    regionVariants[regionKey] = {
+      code: curlsByRegion
+        .map((curlByRegion) => curlByRegion[regionKey])
+        .join("\n\n"),
+    };
+  }
+
+  return {
+    description: curlExample.title ?? summary,
+    code: plaintextCurls.join("\n\n"),
+    syntax: "bash",
+    regionVariants,
+  };
 }
 
 function withRelabeledCaptions(
@@ -762,6 +791,23 @@ function withRelabeledCaptions(
         canonicalSummary,
         displayName,
       ),
+    })),
+  };
+}
+
+/**
+ * Titles untitled examples (no CodeExamples.json entry) with the operation
+ * summary, as Hugo does.
+ */
+function withSummaryFallbackCaptions(
+  set: CodeExampleSet,
+  summary: string,
+): CodeExampleSet {
+  return {
+    ...set,
+    entries: set.entries.map((entry) => ({
+      ...entry,
+      description: entry.description || summary,
     })),
   };
 }

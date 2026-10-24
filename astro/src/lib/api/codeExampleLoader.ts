@@ -212,6 +212,17 @@ export function getLanguageRunInfo(
   return LANGUAGES.find((language) => language.id === languageId);
 }
 
+/**
+ * The operation's CodeExamples.json entries, in order. Each entry's `suffix`
+ * names its example files, and its `description` titles them.
+ */
+export function getCodeExampleMetas(
+  operationId: string,
+  version: "v1" | "v2",
+): CodeExampleMeta[] {
+  return CODE_EXAMPLES[version][operationId] ?? [];
+}
+
 /* ------------------------------------------------------------------ */
 /*  Main export                                                        */
 /* ------------------------------------------------------------------ */

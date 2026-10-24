@@ -7,6 +7,8 @@ const ExampleSchema = z
   .object({
     name: z.string(),
     value: z.string(),
+    /** The code block's language. Defaults to JSON. */
+    language: z.string().optional(),
   })
   .strict();
 
@@ -45,6 +47,10 @@ export const ResponseDataSchema = z
     schemaDescription: z.string().optional(),
     schema: z.array(SchemaFieldSchema).optional(),
     examples: z.array(ExampleSchema).optional(),
+    /** Set when the body isn't JSON, which is described by its type alone. */
+    contentType: z.string().optional(),
+    /** Set when the body is an empty JSON object, which has no fields. */
+    emptyBody: z.boolean().optional(),
   })
   .strict();
 
@@ -54,6 +60,7 @@ export const RequestBodyDataSchema = z
     description: z.string().optional(),
     schema: z.array(SchemaFieldSchema),
     examples: z.array(ExampleSchema),
+    showExampleTitles: z.boolean(),
   })
   .strict();
 

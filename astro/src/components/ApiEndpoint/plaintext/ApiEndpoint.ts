@@ -213,6 +213,7 @@ function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
     ...apiRequestBodyTabsNodes({
       schema: ep.requestBody.schema,
       examples: ep.requestBody.examples,
+      showExampleTitles: ep.requestBody.showExampleTitles,
     }),
   );
   return contents;

@@ -264,6 +264,7 @@ describe("apiEndpointNodes", () => {
         description: "Thing payload.",
         schema: [],
         examples: [],
+        showExampleTitles: false,
       },
     });
     expect(out).toMatch(
@@ -275,7 +276,12 @@ describe("apiEndpointNodes", () => {
   it("leaves the marker off an optional body", () => {
     const out = render({
       ...baseEndpoint,
-      requestBody: { required: false, schema: [], examples: [] },
+      requestBody: {
+        required: false,
+        schema: [],
+        examples: [],
+        showExampleTitles: false,
+      },
     });
     expect(out).toMatch(/^#### Body Data$/m);
     expect(out).not.toContain("(optional)");
