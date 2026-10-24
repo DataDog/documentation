@@ -325,6 +325,10 @@ View metrics from the DDOT Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 
+## Next steps
+
+{{% opentelemetry/setup-next-steps %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -40,6 +40,10 @@ Datadog enforces a maximum payload size per request on each OTLP intake endpoint
 | Logs    | `/v1/logs`      | 5.1 MiB (uncompressed)  |
 | Traces  | `/v1/traces`    | 15 MiB (uncompressed)   |
 
+## Next steps
+
+{{% opentelemetry/setup-next-steps %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
