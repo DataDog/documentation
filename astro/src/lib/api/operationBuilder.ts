@@ -14,6 +14,7 @@ import {
 } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
 import { buildSchemaExample } from "./schemaExampleBuilder";
+import { multipartFormExamples } from "./multipartFormExamples";
 import { buildRunCommand } from "./runCommandBuilder";
 import type { LanguageRunInfo } from "./codeExampleLoader";
 import { getRegionHosts, getRegions } from "./regionResolver";
@@ -208,14 +209,19 @@ export function extractRequestBody(
   const examples: Array<{ name: string; value: string }> = [];
 
   // A JSON example would misrepresent a non-JSON body (and feed a JSON `-d`
-  // into the generated curl command), so those bodies show the schema only.
+  // into the generated curl command). A multipart body's example is the
+  // curl `-F` fields that send it. Other non-JSON bodies show the schema only.
   if (!isJsonMediaType(mediaType)) {
+    const formExamples =
+      mediaType === "multipart/form-data"
+        ? multipartFormExamples(spec, bodyContent)
+        : { examples, showTitles: false };
     return {
       required: resolved.required === true,
       description: resolved.description || undefined,
       schema,
-      examples,
-      showExampleTitles: false,
+      examples: formExamples.examples,
+      showExampleTitles: formExamples.showTitles,
     };
   }
 
@@ -423,6 +429,54 @@ function resolveSchemaDescription(
   return resolved?.description || undefined;
 }
 
+function isEmptyObject(value: unknown): boolean {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value) &&
+    Object.keys(value).length === 0
+  );
+}
+
+/**
+ * The spec's example of a non-JSON response, such as a CSV report, in a code
+ * block of its type. A binary body (a zip or other file) has no text to show,
+ * so it has no example.
+ */
+function textResponseExamples(
+  spec: OpenAPIV3.Document,
+  mediaType: string,
+  mediaContent: OpenAPIV3.MediaTypeObject,
+): Array<{ name: string; value: string; language: string }> | undefined {
+  if (mediaContent.schema) {
+    const schema = resolveSchema(spec, mediaContent.schema);
+    if (schema?.format === "binary") return undefined;
+  }
+  const value = firstSpecExampleValue(spec, mediaContent);
+  if (typeof value !== "string" || value === "") return undefined;
+  return [
+    { name: "Example", value, language: languageForMediaType(mediaType) },
+  ];
+}
+
+function firstSpecExampleValue(
+  spec: OpenAPIV3.Document,
+  mediaContent: OpenAPIV3.MediaTypeObject,
+): unknown {
+  if (mediaContent.example !== undefined) return mediaContent.example;
+  const [exampleOrRef] = Object.values(mediaContent.examples ?? {});
+  const example: OpenAPIV3.ExampleObject | undefined = isReference(exampleOrRef)
+    ? resolveRef(spec, exampleOrRef.$ref)
+    : exampleOrRef;
+  return example?.value;
+}
+
+/** `text/csv` highlights as `csv`, `application/yaml` as `yaml`. */
+function languageForMediaType(mediaType: string): string {
+  const subtype = mediaType.split(";")[0].split("/")[1] ?? "";
+  return subtype === "plain" ? "text" : subtype;
+}
+
 /**
  * Extract response data for all status codes defined on the operation.
  */
@@ -453,6 +507,21 @@ export function extractResponses(
         ? "application/json"
         : Object.keys(content)[0];
     const mediaContent = mediaType ? content[mediaType] : undefined;
+    const isJson = mediaType !== undefined && isJsonMediaType(mediaType);
+
+    // A non-JSON body has no fields to list: it's described by its content
+    // type, with the spec's example when that example is text.
+    if (mediaType && mediaContent && !isJson) {
+      const examples = textResponseExamples(spec, mediaType, mediaContent);
+      result.push({
+        statusCode,
+        description,
+        contentType: mediaType,
+        ...(examples ? { examples } : {}),
+      });
+      continue;
+    }
+
     if (mediaContent?.schema) {
       // Write-only fields are omitted from responses: the server accepts them
       // but never returns them. Requests keep theirs, so the filter belongs
@@ -463,16 +532,11 @@ export function extractResponses(
       schemaDescription = resolveSchemaDescription(spec, mediaContent.schema);
     }
 
-    // A JSON example would misrepresent a non-JSON response, so those show
-    // the schema only.
-    const jsonContent =
-      mediaType && isJsonMediaType(mediaType) ? mediaContent : undefined;
-
     // Like Hugo, build the example from the schema and ignore the spec's
     // `examples`, so fields without an example show a type placeholder.
     let examples: Array<{ name: string; value: string }> | undefined;
-    const generated = jsonContent?.schema
-      ? buildSchemaExample(spec, "response", jsonContent.schema)
+    const generated = mediaContent?.schema
+      ? buildSchemaExample(spec, "response", mediaContent.schema)
       : undefined;
     if (generated !== undefined) {
       examples = [
@@ -480,12 +544,17 @@ export function extractResponses(
       ];
     }
 
+    // Like Hugo, an empty object still gets a Model tab, which says there's
+    // no response body.
+    const emptyBody = schema?.length === 0 && isEmptyObject(generated);
+
     result.push({
       statusCode,
       description,
       ...(schemaDescription ? { schemaDescription } : {}),
       schema,
       examples,
+      ...(emptyBody ? { emptyBody } : {}),
     });
   }
 

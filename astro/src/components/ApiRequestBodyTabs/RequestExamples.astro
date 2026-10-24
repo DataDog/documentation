@@ -9,6 +9,8 @@ const cl = classListFactory(styles);
 interface Example {
   name: string;
   value: string;
+  /** Defaults to JSON. */
+  language?: string;
 }
 
 interface Props {
@@ -34,9 +36,11 @@ const { examples, showTitles, accordionName } = Astro.props;
               <ExpandChevron class={cl("request-body-tabs__accordion-icon")} />
               <span>{ex.name}</span>
             </summary>
-            <CodeBlock content={ex.value} language="json" />
+            <CodeBlock content={ex.value} language={ex.language ?? "json"} />
           </details>
         ))
-      : examples.map((ex) => <CodeBlock content={ex.value} language="json" />)
+      : examples.map((ex) => (
+          <CodeBlock content={ex.value} language={ex.language ?? "json"} />
+        ))
   }
 </div>

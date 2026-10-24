@@ -231,7 +231,7 @@ describe("extractRequestBody content types", () => {
     expect(body?.examples.length).toBeGreaterThan(0);
   });
 
-  it("reads a multipart/form-data body's schema, without a JSON example", () => {
+  it("reads a multipart/form-data body's schema, with its example as curl form fields", () => {
     const body = bodyFor({
       "multipart/form-data": {
         schema: objectSchema("idp_file"),
@@ -240,6 +240,24 @@ describe("extractRequestBody content types", () => {
     });
 
     expect(body?.schema.map((field) => field.name)).toEqual(["idp_file"]);
+    expect(body?.examples).toEqual([
+      {
+        name: "Example",
+        value: "-F 'idp_file=metadata.xml'",
+        language: "bash",
+      },
+    ]);
+    expect(body?.showExampleTitles).toBe(false);
+  });
+
+  it("gives other non-JSON bodies no example", () => {
+    const body = bodyFor({
+      "application/x-www-form-urlencoded": {
+        schema: objectSchema("name"),
+        example: { name: "x" },
+      },
+    });
+
     expect(body?.examples).toEqual([]);
   });
 
@@ -621,13 +639,65 @@ describe("extractResponses content types", () => {
     expect(response.examples?.length).toBeGreaterThan(0);
   });
 
-  it("reads a text/csv response's schema, without a JSON example", () => {
+  it("describes a text/csv response by its content type, with the spec's CSV example", () => {
     const response = responseFor({
-      "text/csv": { schema: objectSchema("row") },
+      "text/csv": {
+        schema: { type: "string" },
+        examples: { default: { value: "name,id\nMy SLO,abc-123" } },
+      },
     });
 
-    expect(response.schema?.map((field) => field.name)).toEqual(["row"]);
+    expect(response.schema).toBeUndefined();
+    expect(response.contentType).toBe("text/csv");
+    expect(response.examples).toEqual([
+      { name: "Example", value: "name,id\nMy SLO,abc-123", language: "csv" },
+    ]);
+  });
+
+  it("gives a text response no example when the spec has none", () => {
+    const response = responseFor({
+      "text/csv": { schema: { type: "string" } },
+    });
+
+    expect(response.contentType).toBe("text/csv");
     expect(response.examples).toBeUndefined();
+  });
+
+  it("describes a binary response by its content type, with no example", () => {
+    const response = responseFor({
+      "application/zip": {
+        schema: { type: "string", format: "binary" },
+        examples: { default: { value: "<binary zip data>" } },
+      },
+    });
+
+    expect(response.schema).toBeUndefined();
+    expect(response.contentType).toBe("application/zip");
+    expect(response.examples).toBeUndefined();
+  });
+
+  it("marks a JSON response with an empty object schema as having no body", () => {
+    const response = responseFor({
+      "application/json": { schema: { type: "object" } },
+    });
+
+    expect(response.emptyBody).toBe(true);
+    expect(response.examples).toEqual([{ name: "Example", value: "{}" }]);
+  });
+
+  it("doesn't mark a JSON response with fields, or a primitive array, as having no body", () => {
+    const withFields = responseFor({
+      "application/json": { schema: objectSchema("id") },
+    });
+    const primitiveArray = responseFor({
+      "application/json": {
+        schema: { type: "array", items: { type: "string" } },
+      },
+    });
+
+    expect(withFields.emptyBody).toBeUndefined();
+    expect(withFields.contentType).toBeUndefined();
+    expect(primitiveArray.emptyBody).toBeUndefined();
   });
 
   it("builds the example from the schema, as Hugo does, ignoring the spec's examples", () => {

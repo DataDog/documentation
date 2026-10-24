@@ -2,7 +2,7 @@
  * AST twin of `ApiRequestBodyTabs.astro`.
  *
  * - Schema only:   the schema table.
- * - Examples only: a sequence of JSON fenced blocks, each under its bold
+ * - Examples only: a sequence of fenced blocks (JSON by default), each under its bold
  *                  name when titles are shown.
  * - Both:          a `{% tabs %}` tag with Model and Example tabs.
  */
@@ -23,6 +23,8 @@ import { apiSchemaTableNode } from "@components/ApiSchemaTable/plaintext/ApiSche
 interface Example {
   name: string;
   value: string;
+  /** Defaults to JSON. */
+  language?: string;
 }
 
 interface Props {
@@ -75,7 +77,7 @@ export function exampleNodes(
     if (showTitles) {
       contents.push(paragraph([inline([bold([plaintext(ex.name)])])]));
     }
-    contents.push(fence("json", ex.value));
+    contents.push(fence(ex.language ?? "json", ex.value));
   }
   return contents;
 }

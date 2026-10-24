@@ -31,7 +31,7 @@ async function createContainer() {
 
 async function renderComponent(props: {
   schema: typeof schema;
-  examples: typeof examples;
+  examples: { name: string; value: string; language?: string }[];
   showExampleTitles?: boolean;
 }) {
   const container = await createContainer();
@@ -121,5 +121,18 @@ describe("ApiRequestBodyTabs (astro)", () => {
     const html = await renderComponent({ schema, examples });
 
     expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
+  });
+
+  it("highlights an example in its own language, defaulting to JSON", async () => {
+    const formExample = {
+      name: "Example",
+      value: "-F 'idp_file=@metadata.xml'",
+      language: "bash",
+    };
+    const htmlForm = await renderComponent({ schema, examples: [formExample] });
+    expect(htmlForm).toContain('data-language="bash"');
+
+    const htmlJson = await renderComponent({ schema, examples });
+    expect(htmlJson).toContain('data-language="json"');
   });
 });
