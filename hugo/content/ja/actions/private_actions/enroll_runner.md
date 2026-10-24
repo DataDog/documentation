@@ -121,7 +121,7 @@ Datadog はディスパッチするすべてのタスクに署名し、ランナ
 
 ## プライベートランナーの認証情報のローテーション{#rotating-private-runner-credentials}
 
-再デプロイせずにプライベートランナーの認証情報をローテーションするには、ホストまたは Node Agent で `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity` を実行するか、Cluster Agent の場合は `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` を実行します。
+再デプロイせずにプライベートランナーの認証情報をローテーションするには、ホストまたは Node Agent で `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity` を実行するか、Cluster Agent の場合は `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` を実行します。
 
 ## 参考資料 {#further-reading}
 

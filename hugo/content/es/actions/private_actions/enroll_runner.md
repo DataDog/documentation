@@ -123,7 +123,7 @@ Datadog firma cada tarea que envía, y el runner verifica la firma antes de ejec
 
 ## Rotación de credenciales de runner privado{#rotating-private-runner-credentials}
 
-Para rotar las credenciales de un runner privado sin volver a implementar, ejecute `/opt/datadog-agent/embedded/bin/privateactionrunner rotate-identity` en un servidor o en un Node Agent, o `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` para el Cluster Agent.
+Para rotar las credenciales de un runner privado sin volver a implementar, ejecute `/opt/datadog-packages/datadog-agent/stable/embedded/bin/privateactionrunner rotate-identity` en un servidor o en un Node Agent, o `/opt/datadog-agent/bin/datadog-cluster-agent rotate-par-identity` para el Cluster Agent.
 
 ## Lecturas adicionales {#further-reading}
 
