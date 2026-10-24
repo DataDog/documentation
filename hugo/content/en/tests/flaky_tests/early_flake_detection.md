@@ -37,6 +37,10 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 You can choose to block the merge of the feature branch with a [PR Gate][4]. For more information, see the [PR Gates documentation][5].
 
+## Exclude individual tests from retries
+
+Apply the `no_auto_retry` annotation to prevent Early Flake Detection from retrying an individual test. This also excludes Auto Test Retries and Attempt to Fix retries while preserving explicit retries configured in the test framework. For JavaScript, Java, and Python examples, see [Control Test Automation with Code Annotations](/tests/guides/test_automation_exclusions/).
+
 ## Setup
 
 Before implementing Early Flake Detection, you must configure [Test Optimization][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
