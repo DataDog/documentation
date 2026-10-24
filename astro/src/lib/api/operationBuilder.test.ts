@@ -272,6 +272,7 @@ describe("extractRequestBody request files", () => {
       { name: "Second file", value: '{\n  "title": "second"\n}' },
     ],
     showTitles: true,
+    isFallbackFile: false,
   };
 
   // Prod's Example tab shows Hugo's request files, never the spec's examples.
@@ -301,7 +302,7 @@ describe("extractRequestBody request files", () => {
     const extracted = extractRequestBody(
       spec,
       { responses: {}, requestBody: body },
-      { examples: [], showTitles: true },
+      { examples: [], showTitles: true, isFallbackFile: false },
     );
 
     expect(extracted?.examples).toEqual([
@@ -358,6 +359,7 @@ describe("extractCurlExamples", () => {
       { name: "Create a RUM monitor", value: '{\n  "title": "rum"\n}' },
     ],
     showTitles: true,
+    isFallbackFile: false,
   };
 
   // Decision A: prod repeats every spec example in every request-file card.
@@ -385,15 +387,37 @@ describe("extractCurlExamples", () => {
     ]);
   });
 
-  it("leaves the curl untitled when the request file is untitled", () => {
+  it("leaves the curl untitled when the request file is the fallback file", () => {
     const curlExamples = extractCurlExamples(
       spec,
       { responses: {}, requestBody: bodyWithExamples(specExample) },
-      { examples: [{ name: "Example", value: "{}" }], showTitles: false },
+      {
+        examples: [{ name: "Example", value: "{}" }],
+        showTitles: false,
+        isFallbackFile: true,
+      },
     );
 
     expect(curlExamples.map((curlExample) => curlExample.title)).toEqual([
       undefined,
+    ]);
+  });
+
+  // Hugo's curl label bar shows the description even when the Example tab
+  // leaves a single request example untitled.
+  it("titles a single request file's curl with its CodeExamples description", () => {
+    const curlExamples = extractCurlExamples(
+      spec,
+      { responses: {}, requestBody: bodyWithExamples(specExample) },
+      {
+        examples: [{ name: "Update a thing returns OK", value: "{}" }],
+        showTitles: false,
+        isFallbackFile: false,
+      },
+    );
+
+    expect(curlExamples.map((curlExample) => curlExample.title)).toEqual([
+      "Update a thing returns OK",
     ]);
   });
 
@@ -511,6 +535,7 @@ describe("extractCurlExamples", () => {
     const requestFilesTitled = (...names: string[]) => ({
       examples: names.map((name) => ({ name, value: "[]" })),
       showTitles: true,
+      isFallbackFile: false,
     });
     const encodings = (curlExamples: ReturnType<typeof extractCurlExamples>) =>
       curlExamples.map((curlExample) => curlExample.bodies[0].contentEncoding);

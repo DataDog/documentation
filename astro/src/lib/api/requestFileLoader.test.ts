@@ -58,7 +58,7 @@ describe("getRequestFileExamples", () => {
   // When none of the first 3 entries has a file, Hugo shows
   // `request.<operationId>.json`, untitled.
   it("falls back to the file without a suffix when no CodeExamples entry has a file", () => {
-    const { examples, showTitles } = getRequestFileExamples(
+    const { examples, showTitles, isFallbackFile } = getRequestFileExamples(
       "UpdateRole",
       "v2",
       "roles",
@@ -69,6 +69,14 @@ describe("getRequestFileExamples", () => {
       "developers-updated",
     );
     expect(showTitles).toBe(false);
+    expect(isFallbackFile).toBe(true);
+  });
+
+  it("doesn't mark CodeExamples request files as the fallback", () => {
+    expect(
+      getRequestFileExamples("CreateIncident", "v2", "incidents")
+        .isFallbackFile,
+    ).toBe(false);
   });
 
   // Hugo titles the examples when the operation has more than one

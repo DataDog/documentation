@@ -1475,7 +1475,7 @@
           "label": "Curl",
           "entries": [
             {
-              "description": "Create an incident",
+              "description": "Create an incident returns \"CREATED\" response",
               "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com\n# Use a Personal Access Token or Service Access Token\nexport DD_BEARER_TOKEN=\"<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>\"\n\ncurl -X POST \"https://api.${DD_SITE}/api/v2/incidents\" \\\n-H \"Accept: application/json\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Authorization: Bearer ${DD_BEARER_TOKEN}\" \\\n-d @- << EOF\n{\n  \"data\": {\n    \"type\": \"incidents\",\n    \"attributes\": {\n      \"title\": \"Example-Incident\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"state\": {\n          \"type\": \"dropdown\",\n          \"value\": \"resolved\"\n        }\n      }\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"string\"\n        }\n      }\n    }\n  }\n}\nEOF",
               "syntax": "bash",
               "regionVariants": {

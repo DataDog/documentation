@@ -191,6 +191,7 @@ export function extractRequestBody(
   requestFileExamples: RequestFileExamples = {
     examples: [],
     showTitles: false,
+    isFallbackFile: false,
   },
 ): RequestBodyData | undefined {
   const requestBodyContent = resolveRequestBodyContent(spec, operation);
@@ -257,7 +258,8 @@ type CurlContentEncoding = NonNullable<GenerateCurlOptions["contentEncoding"]>;
 
 /**
  * One entry in the Curl tab. `title` is the request file's CodeExamples
- * description, or `undefined` for the operation's own entry.
+ * description, or `undefined` for the fallback request file and the
+ * operation's own entry.
  */
 export interface CurlExample {
   title: string | undefined;
@@ -276,6 +278,7 @@ export function extractCurlExamples(
   requestFileExamples: RequestFileExamples = {
     examples: [],
     showTitles: false,
+    isFallbackFile: false,
   },
 ): CurlExample[] {
   const requestBodyContent = resolveRequestBodyContent(spec, operation);
@@ -286,7 +289,7 @@ export function extractCurlExamples(
     curlContentEncoding(spec, operation, cardTitle ?? "");
   if (requestFileExamples.examples.length > 0) {
     return requestFileExamples.examples.map((example) => ({
-      title: requestFileExamples.showTitles ? example.name : undefined,
+      title: requestFileExamples.isFallbackFile ? undefined : example.name,
       bodies: [
         withContentEncoding(
           curlBody(example.value),

@@ -45,6 +45,11 @@ export interface RequestFileExamples {
    * CodeExamples.json entry, counting every entry, not only those with a file.
    */
   showTitles: boolean;
+  /**
+   * The examples are `request.<operationId>.json`, used when no CodeExamples
+   * entry has a file. Hugo titles its curl with the operation summary.
+   */
+  isFallbackFile: boolean;
 }
 
 /**
@@ -75,7 +80,11 @@ export function getRequestFileExamples(
         : [{ name: meta.description, value: content }];
     });
   if (examples.length > 0) {
-    return { examples, showTitles: codeExampleMetas.length > 1 };
+    return {
+      examples,
+      showTitles: codeExampleMetas.length > 1,
+      isFallbackFile: false,
+    };
   }
   const fallback = requestFilesByLocation.get(
     `${version}/${categorySlug}/request.${operationId}.json`,
@@ -84,5 +93,6 @@ export function getRequestFileExamples(
     examples:
       fallback === undefined ? [] : [{ name: "Example", value: fallback }],
     showTitles: false,
+    isFallbackFile: true,
   };
 }
