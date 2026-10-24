@@ -5,7 +5,7 @@ import { getRequestFileExamples } from "./requestFileLoader";
 // README), through the alias override in vitest.unit.config.ts.
 describe("getRequestFileExamples", () => {
   it("returns the operation's request file, named by its CodeExamples description", () => {
-    const examples = getRequestFileExamples(
+    const { examples } = getRequestFileExamples(
       "CreateIncident",
       "v2",
       "incidents",
@@ -20,11 +20,9 @@ describe("getRequestFileExamples", () => {
   });
 
   it("keeps the file's text as written", () => {
-    const [example] = getRequestFileExamples(
-      "CreateIncident",
-      "v2",
-      "incidents",
-    );
+    const {
+      examples: [example],
+    } = getRequestFileExamples("CreateIncident", "v2", "incidents");
 
     expect(example.value.startsWith('{\n  "data": {\n')).toBe(true);
   });
@@ -32,7 +30,11 @@ describe("getRequestFileExamples", () => {
   // Hugo takes the first 3 CodeExamples entries, then skips any without a
   // file. It doesn't reach further down the list to make up the 3.
   it("reads only the first 3 CodeExamples entries, skipping those without a file", () => {
-    const examples = getRequestFileExamples("CreateMonitor", "v1", "monitors");
+    const { examples } = getRequestFileExamples(
+      "CreateMonitor",
+      "v1",
+      "monitors",
+    );
 
     expect(examples.map((example) => example.name)).toEqual([
       'Create a Cost Monitor returns "OK" response',
@@ -41,15 +43,29 @@ describe("getRequestFileExamples", () => {
   });
 
   it("returns nothing for an operation without request files", () => {
-    expect(getRequestFileExamples("ListIncidents", "v2", "incidents")).toEqual(
-      [],
-    );
+    expect(
+      getRequestFileExamples("ListIncidents", "v2", "incidents").examples,
+    ).toEqual([]);
   });
 
   // Some v2 filenames exist in two tag folders, so the folder is part of the key.
   it("reads only from the operation's own tag folder", () => {
-    expect(getRequestFileExamples("CreateIncident", "v2", "monitors")).toEqual(
-      [],
-    );
+    expect(
+      getRequestFileExamples("CreateIncident", "v2", "monitors").examples,
+    ).toEqual([]);
+  });
+
+  // Hugo titles the examples when the operation has more than one
+  // CodeExamples entry, counting entries without a file and past the first 3.
+  it("titles the examples when the operation has more than one CodeExamples entry", () => {
+    expect(
+      getRequestFileExamples("CreateMonitor", "v1", "monitors").showTitles,
+    ).toBe(true);
+  });
+
+  it("doesn't title the example of an operation with one CodeExamples entry", () => {
+    expect(
+      getRequestFileExamples("CreateIncident", "v2", "incidents").showTitles,
+    ).toBe(false);
   });
 });

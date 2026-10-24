@@ -38,6 +38,15 @@ for (const [key, content] of Object.entries(requestFiles)) {
 /** `first 3` in request-body.html. */
 const MAX_REQUEST_EXAMPLES = 3;
 
+export interface RequestFileExamples {
+  examples: Array<{ name: string; value: string }>;
+  /**
+   * Hugo titles the examples when the operation has more than one
+   * CodeExamples.json entry, counting every entry, not only those with a file.
+   */
+  showTitles: boolean;
+}
+
 /**
  * The operation's request files, each named by its CodeExamples.json
  * description. As in Hugo, only the first 3 entries are read, and an entry
@@ -47,8 +56,9 @@ export function getRequestFileExamples(
   operationId: string,
   version: "v1" | "v2",
   categorySlug: string,
-): Array<{ name: string; value: string }> {
-  return getCodeExampleMetas(operationId, version)
+): RequestFileExamples {
+  const codeExampleMetas = getCodeExampleMetas(operationId, version);
+  const examples = codeExampleMetas
     .slice(0, MAX_REQUEST_EXAMPLES)
     .flatMap((meta) => {
       const content = requestFilesByLocation.get(
@@ -58,4 +68,5 @@ export function getRequestFileExamples(
         ? []
         : [{ name: meta.description, value: content }];
     });
+  return { examples, showTitles: codeExampleMetas.length > 1 };
 }

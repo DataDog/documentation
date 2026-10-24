@@ -54,6 +54,7 @@ export const RequestBodyDataSchema = z
     description: z.string().optional(),
     schema: z.array(SchemaFieldSchema),
     examples: z.array(ExampleSchema),
+    showExampleTitles: z.boolean(),
   })
   .strict();
 

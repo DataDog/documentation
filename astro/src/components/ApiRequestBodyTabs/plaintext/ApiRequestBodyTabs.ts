@@ -2,7 +2,8 @@
  * AST twin of `ApiRequestBodyTabs.astro`.
  *
  * - Schema only:   the schema table.
- * - Examples only: a sequence of JSON fenced blocks.
+ * - Examples only: a sequence of JSON fenced blocks, each under its bold
+ *                  name when titles are shown.
  * - Both:          a `{% tabs %}` tag with Model and Example tabs.
  */
 
@@ -27,11 +28,14 @@ interface Example {
 interface Props {
   schema: SchemaField[];
   examples: Example[];
+  /** Defaults to titling the examples when there is more than one. */
+  showExampleTitles?: boolean;
 }
 
 export function apiRequestBodyTabsNodes({
   schema,
   examples,
+  showExampleTitles = examples.length > 1,
 }: Props): MarkdocNode[] {
   const hasSchema = schema.length > 0;
   const hasExamples = examples.length > 0;
@@ -42,7 +46,7 @@ export function apiRequestBodyTabsNodes({
   }
 
   if (!hasSchema && hasExamples) {
-    return exampleNodes(examples);
+    return exampleNodes(examples, showExampleTitles);
   }
 
   if (hasSchema && hasExamples) {
@@ -50,7 +54,11 @@ export function apiRequestBodyTabsNodes({
     const modelChildren = table ? [table] : NO_CONTENT;
     const tabs = tag("tabs", {}, [
       tag("tab", { label: "Model" }, modelChildren),
-      tag("tab", { label: "Example" }, exampleNodes(examples)),
+      tag(
+        "tab",
+        { label: "Example" },
+        exampleNodes(examples, showExampleTitles),
+      ),
     ]);
     return [tabs];
   }
@@ -58,11 +66,13 @@ export function apiRequestBodyTabsNodes({
   return NO_CONTENT;
 }
 
-export function exampleNodes(examples: Example[]): MarkdocNode[] {
-  const includeHeading = examples.length > 1;
+export function exampleNodes(
+  examples: Example[],
+  showTitles = examples.length > 1,
+): MarkdocNode[] {
   const contents: MarkdocNode[] = [];
   for (const ex of examples) {
-    if (includeHeading) {
+    if (showTitles) {
       contents.push(paragraph([inline([bold([plaintext(ex.name)])])]));
     }
     contents.push(fence("json", ex.value));

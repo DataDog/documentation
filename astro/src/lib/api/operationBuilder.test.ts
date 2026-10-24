@@ -265,10 +265,13 @@ describe("extractRequestBody request files", () => {
       },
     },
   } as OpenAPIV3.RequestBodyObject;
-  const requestFileExamples = [
-    { name: "First file", value: '{\n  "title": "first"\n}' },
-    { name: "Second file", value: '{\n  "title": "second"\n}' },
-  ];
+  const requestFileExamples = {
+    examples: [
+      { name: "First file", value: '{\n  "title": "first"\n}' },
+      { name: "Second file", value: '{\n  "title": "second"\n}' },
+    ],
+    showTitles: true,
+  };
 
   // Prod's Example tab shows Hugo's request files, never the spec's examples.
   it("shows the request files in place of the spec's examples", () => {
@@ -278,19 +281,51 @@ describe("extractRequestBody request files", () => {
       requestFileExamples,
     );
 
-    expect(extracted?.examples).toEqual(requestFileExamples);
+    expect(extracted?.examples).toEqual(requestFileExamples.examples);
+  });
+
+  it("takes the request files' titling", () => {
+    const extracted = extractRequestBody(
+      spec,
+      { responses: {}, requestBody: body },
+      { ...requestFileExamples, showTitles: false },
+    );
+
+    expect(extracted?.showExampleTitles).toBe(false);
   });
 
   it("falls back to the spec's examples when there are no request files", () => {
     const extracted = extractRequestBody(
       spec,
       { responses: {}, requestBody: body },
-      [],
+      { examples: [], showTitles: true },
     );
 
     expect(extracted?.examples.map((example) => example.name)).toEqual([
       "Spec",
     ]);
+    expect(extracted?.showExampleTitles).toBe(false);
+  });
+
+  it("titles the spec's examples when there is more than one", () => {
+    const twoSpecExamples = {
+      ...body,
+      content: {
+        "application/json": {
+          ...body.content["application/json"],
+          examples: {
+            one: { summary: "One", value: { title: "one" } },
+            two: { summary: "Two", value: { title: "two" } },
+          },
+        },
+      },
+    };
+    const extracted = extractRequestBody(spec, {
+      responses: {},
+      requestBody: twoSpecExamples,
+    });
+
+    expect(extracted?.showExampleTitles).toBe(true);
   });
 });
 

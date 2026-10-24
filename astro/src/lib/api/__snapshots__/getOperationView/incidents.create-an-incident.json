@@ -322,7 +322,8 @@
             "name": "Create an incident returns \"CREATED\" response",
             "value": "{\n  \"data\": {\n    \"type\": \"incidents\",\n    \"attributes\": {\n      \"title\": \"Example-Incident\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"state\": {\n          \"type\": \"dropdown\",\n          \"value\": \"resolved\"\n        }\n      }\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"type\": \"users\",\n          \"id\": \"string\"\n        }\n      }\n    }\n  }\n}"
           }
-        ]
+        ],
+        "showExampleTitles": false
       },
       "responses": [
         {

@@ -25,6 +25,7 @@ import type {
   GenerateCurlOptions,
 } from "./schemas/curl";
 import type { ResponseData, RequestBodyData } from "./schemas/views";
+import type { RequestFileExamples } from "./requestFileLoader";
 import type { SplitParams } from "./schemas/params";
 
 type ParameterOrRef = OpenAPIV3.ParameterObject | OpenAPIV3.ReferenceObject;
@@ -154,7 +155,10 @@ function isJsonMediaType(mediaType: string): boolean {
 export function extractRequestBody(
   spec: OpenAPIV3.Document,
   operation: OpenAPIV3.OperationObject,
-  requestFileExamples: Array<{ name: string; value: string }> = [],
+  requestFileExamples: RequestFileExamples = {
+    examples: [],
+    showTitles: false,
+  },
 ): RequestBodyData | undefined {
   const rb = operation.requestBody;
   if (!rb) return undefined;
@@ -192,13 +196,15 @@ export function extractRequestBody(
       description: resolved.description || undefined,
       schema,
       examples,
+      showExampleTitles: false,
     };
   }
 
   // Prod's Example tab shows Hugo's request files when the operation has any,
   // and never the spec's examples alongside them.
-  if (requestFileExamples.length > 0) {
-    examples.push(...requestFileExamples);
+  const hasRequestFiles = requestFileExamples.examples.length > 0;
+  if (hasRequestFiles) {
+    examples.push(...requestFileExamples.examples);
   } else if (bodyContent.examples && typeof bodyContent.examples === "object") {
     for (const [name, exampleObj] of Object.entries(bodyContent.examples)) {
       const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
@@ -234,6 +240,9 @@ export function extractRequestBody(
     description: resolved.description || undefined,
     schema,
     examples,
+    showExampleTitles: hasRequestFiles
+      ? requestFileExamples.showTitles
+      : examples.length > 1,
   };
 }
 

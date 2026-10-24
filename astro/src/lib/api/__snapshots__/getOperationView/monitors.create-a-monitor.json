@@ -2499,7 +2499,8 @@
             "name": "Create a RUM formula and functions monitor returns \"OK\" response",
             "value": "{\n  \"name\": \"Example-Monitor\",\n  \"type\": \"rum alert\",\n  \"query\": \"formula(\\\"query2 / query1 * 100\\\").last(\\\"15m\\\") >= 0.8\",\n  \"message\": \"some message Notify: @hipchat-channel\",\n  \"tags\": [\n    \"test:examplemonitor\",\n    \"env:ci\"\n  ],\n  \"priority\": 3,\n  \"options\": {\n    \"thresholds\": {\n      \"critical\": 0.8\n    },\n    \"variables\": [\n      {\n        \"data_source\": \"rum\",\n        \"name\": \"query2\",\n        \"search\": {\n          \"query\": \"\"\n        },\n        \"indexes\": [\n          \"*\"\n        ],\n        \"compute\": {\n          \"aggregation\": \"count\"\n        },\n        \"group_by\": []\n      },\n      {\n        \"data_source\": \"rum\",\n        \"name\": \"query1\",\n        \"search\": {\n          \"query\": \"status:error\"\n        },\n        \"indexes\": [\n          \"*\"\n        ],\n        \"compute\": {\n          \"aggregation\": \"count\"\n        },\n        \"group_by\": []\n      }\n    ]\n  }\n}"
           }
-        ]
+        ],
+        "showExampleTitles": true
       },
       "responses": [
         {
