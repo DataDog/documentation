@@ -50,28 +50,35 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
         {examples.map((ex, tabIdx) => (
           <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
             {ex.entries.length === 1 ? (
-              ex.entries[0].regionVariants ? (
-                Object.entries(ex.entries[0].regionVariants).map(
-                  ([regionKey, variant]) => (
-                    <div
-                      data-region={regionKey}
-                      class={cl("api-code-example__code-block")}
-                    >
-                      <CodeBlock
-                        content={variant.code}
-                        language={ex.entries[0].syntax}
-                      />
-                    </div>
-                  ),
-                )
-              ) : (
-                <div class={cl("api-code-example__code-block")}>
-                  <CodeBlock
-                    content={ex.entries[0].code}
-                    language={ex.entries[0].syntax}
-                  />
-                </div>
-              )
+              <div class={cl("api-code-example__card")}>
+                {ex.entries[0].description && (
+                  <div class={cl("api-code-example__label")}>
+                    {ex.entries[0].description}
+                  </div>
+                )}
+                {ex.entries[0].regionVariants ? (
+                  Object.entries(ex.entries[0].regionVariants).map(
+                    ([regionKey, variant]) => (
+                      <div
+                        data-region={regionKey}
+                        class={cl("api-code-example__code-block")}
+                      >
+                        <CodeBlock
+                          content={variant.code}
+                          language={ex.entries[0].syntax}
+                        />
+                      </div>
+                    ),
+                  )
+                ) : (
+                  <div class={cl("api-code-example__code-block")}>
+                    <CodeBlock
+                      content={ex.entries[0].code}
+                      language={ex.entries[0].syntax}
+                    />
+                  </div>
+                )}
+              </div>
             ) : (
               ex.entries.map((entry, i) => (
                 <details

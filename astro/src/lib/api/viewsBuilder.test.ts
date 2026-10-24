@@ -149,15 +149,31 @@ describe("viewsBuilder x-displayName labels", () => {
         set.entries.map((entry) => entry.description),
       ]),
     );
-    expect(descriptionsByLanguage.curl).toEqual([
-      "Connect an AWS account curl example",
-    ]);
+    expect(descriptionsByLanguage.curl).toEqual(["Connect an AWS account"]);
     expect(descriptionsByLanguage.go).toEqual(
       expect.arrayContaining([
         'Connect an AWS account returns "AWS Account object" response',
         'Create an AWS account returns "AWS Account object" response',
       ]),
     );
+  });
+});
+
+describe("viewsBuilder code example titles", () => {
+  // Hugo titles an example with the operation summary when it has no
+  // CodeExamples.json description (or, for curl, no request file).
+  it("falls back to the summary for untitled SDK and curl examples", async () => {
+    const view = await getOperationView(
+      "usage-metering",
+      "get-hourly-usage-for-lambda",
+    );
+    const descriptions = (view?.variants[0].codeExamples ?? []).flatMap((set) =>
+      set.entries.map((entry) => entry.description),
+    );
+    expect(descriptions.length).toBeGreaterThan(1);
+    for (const description of descriptions) {
+      expect(description).toBe("Get hourly usage for Lambda");
+    }
   });
 });
 

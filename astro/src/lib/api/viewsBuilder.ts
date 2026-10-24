@@ -725,6 +725,7 @@ function buildCodeExamplesForOperation(
     .map((set) =>
       withRelabeledCaptions(set, op.operation.summary ?? "", sdkCaptionLabel),
     )
+    .map((set) => withSummaryFallbackCaptions(set, summary))
     .map((set) => withRunInstructions(spec, op.operation, set));
 
   return [
@@ -768,7 +769,7 @@ function buildCurlEntry(
   }
 
   return {
-    description: curlExample.title ?? `${summary} curl example`,
+    description: curlExample.title ?? summary,
     code: plaintextCurls.join("\n\n"),
     syntax: "bash",
     regionVariants,
@@ -790,6 +791,23 @@ function withRelabeledCaptions(
         canonicalSummary,
         displayName,
       ),
+    })),
+  };
+}
+
+/**
+ * Titles untitled examples (no CodeExamples.json entry) with the operation
+ * summary, as Hugo does.
+ */
+function withSummaryFallbackCaptions(
+  set: CodeExampleSet,
+  summary: string,
+): CodeExampleSet {
+  return {
+    ...set,
+    entries: set.entries.map((entry) => ({
+      ...entry,
+      description: entry.description || summary,
     })),
   };
 }
