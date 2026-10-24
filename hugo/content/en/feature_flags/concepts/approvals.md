@@ -43,7 +43,7 @@ When creating a flag, toggle **Require approval on changes to this flag for all 
 ### Existing flag
 
 <div class="alert alert-info">
-Enabling or disabling approvals on an existing flag requires the organization permission <strong>Feature Flag Approvals Override</strong>, in addition to edit access on the flag. The same permission allows users to bypass or override the approvals workflow; see <a href="#override-approvals">Override approvals</a>.
+Enabling approvals on an existing flag requires <code>feature_flag_config_write</code> and Contributor or Editor access to the flag. Disabling approvals also requires <strong>Feature Flag Approvals Override</strong>. That permission also allows an authorized user to override the approval workflow; see <a href="#override-approvals">Override approvals</a>.
 </div>
 
 1. Navigate to your flag's details page.
@@ -83,10 +83,16 @@ After a change is approved, apply it when you are ready for it to take effect in
 
 The **Feature Flag Approvals Override** organization permission serves two purposes:
 
-- **Existing flags:** Required to enable approvals for a flag that already exists (in addition to [granular edit access][1] on that flag).
+- **Existing flags:** Required to disable approvals on a flag, in addition to `feature_flag_config_write` and [Contributor or Editor access][1].
 - **Workflow bypass:** Allows holders to bypass the approvals workflow where that option is available, so changes can proceed without the usual review and approval steps.
 
 Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles][4]. For related Feature Flags permissions, see [Permissions and Access Control][1].
+
+## Experiment approvals
+
+Experiments that use Datadog Feature Flags follow the approval requirements on the flag and its environment. Request approval to start an experiment, increase traffic, roll out a winner, or cancel. Submitting or approving a request without applying it leaves traffic unchanged. See [Experiment Approvals][5] for supported configurations, permissions, and instructions.
+
+Configure flag approval requirements before linking an experiment. A linked experiment prevents changes to the flag's approval setting.
 
 ## Find flags with pending approvals
 
@@ -100,3 +106,4 @@ On the Feature Flags search page, toggle the **Pending Approvals** filter to vie
 [2]: https://app.datadoghq.com/feature-flags/settings/environments
 [3]: /feature_flags/concepts/environments/#production-environments
 [4]: /account_management/rbac/
+[5]: /experiments/approvals/

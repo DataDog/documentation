@@ -10462,21 +10462,26 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 3
+    - name: Experiment Approvals
+      url: experiments/approvals/
+      parent: pa_experiments
+      identifier: pa_experiments_approvals
+      weight: 4
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 4
+      weight: 5
     - name: Experiment Diagnostics
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 5
+      weight: 6
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 6
+      weight: 7
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10501,7 +10506,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 7
+      weight: 8
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10531,22 +10536,22 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 10
+      weight: 11
     - name: Experiments MCP Tools
       url: experiments/mcp_tools
       parent: pa_experiments
       identifier: pa_experiments_mcp_tools
-      weight: 11
+      weight: 12
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 12
+      weight: 13
     - name: Session Replay
       url: session_replay/
       pre: play-circle

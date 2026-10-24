@@ -179,6 +179,8 @@ To configure split-by dimensions:
 
 ## Launch your experiment
 
+If the flag or environment requires approval, follow [Experiment Approvals][14] to submit the setup for review. Submitting a request or approving it without applying does not start the experiment. An authorized user must apply it. The steps below apply to experiments that do not require approval.
+
 To launch your experiment:
 
 1. Click {{< ui >}}Start Experiment{{< /ui >}} to open the {{< ui >}}Confirm starting the experiment{{< /ui >}} dialog.
@@ -209,3 +211,4 @@ See [Reading Experiment Results][5] to review your data.
 [11]: /experiments/statistics/analysis_methods
 [12]: /experiments/statistics/cuped
 [13]: /experiments/statistics/multiple_testing_correction
+[14]: /experiments/approvals/
