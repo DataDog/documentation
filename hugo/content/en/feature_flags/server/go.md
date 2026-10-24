@@ -292,6 +292,40 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Customer exposure hooks
+
+Use customer exposure hooks to send feature flag exposure data to an application-owned destination. After creating the Datadog provider, register it directly with OpenFeature, then add a reusable hook to the client:
+
+{{< code-block lang="go" >}}
+if err := openfeature.SetProviderAndWait(provider); err != nil {
+    log.Fatalf("Failed to set provider: %v", err)
+}
+
+client := openfeature.NewClient("my-service")
+exposureHook := ddopenfeature.NewExposureHook(func(e ddopenfeature.ExposureEvaluation) {
+    if !e.ShouldSend() {
+        return
+    }
+
+    allocation, hasAllocation := e.AllocationKey()
+    serialID, hasSerialID := e.SplitSerialID()
+    // enqueueExposure is application code that copies values into a background queue.
+    enqueueExposure(
+        e.Details.FlagKey, e.Context.TargetingKey(), e.Details.Variant,
+        allocation, hasAllocation, serialID, hasSerialID, e.Features(),
+    )
+})
+client.AddHooks(exposureHook)
+{{< /code-block >}}
+
+Callbacks include errors, non-exposures, and repeated exposures. `IsExposure()` identifies a successful evaluation eligible for exposure logging. `IsCacheHit()` identifies a repeat of the cached allocation, variant, and optional split serial ID for the same flag and targeting key. `ShouldSend()` selects eligible new or changed exposures. All hooks share this decision. It does not acknowledge successful delivery to Datadog or your destination.
+
+`Features()` returns scalar metadata (strings, numbers, and Booleans) intended for customer hooks, including holdout metadata when available. Preserve the presence Boolean from `SplitSerialID()` to distinguish a zero ID from a missing ID.
+
+Callbacks run synchronously during evaluation and may run concurrently. Avoid blocking, copy values needed for asynchronous processing, and manage queueing, retries, and shutdown in application code.
+
+Using `MultiProvider` disables Datadog exposure delivery and customer exposure callbacks while flag evaluation continues. If you upgrade from an earlier SDK version that delivered exposures through `MultiProvider`, register the Datadog provider directly to retain exposure delivery.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
