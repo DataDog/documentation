@@ -484,6 +484,92 @@ describe("extractCurlExamples", () => {
       },
     ]);
   });
+
+  describe("content encoding", () => {
+    const contentEncodingParam = (
+      schema: OpenAPIV3.SchemaObject,
+    ): OpenAPIV3.ParameterObject => ({
+      name: "Content-Encoding",
+      in: "header",
+      required: false,
+      schema,
+    });
+    const compressibleOperation = (
+      schema: OpenAPIV3.SchemaObject,
+      summary = "Send logs",
+    ): OpenAPIV3.OperationObject => ({
+      summary,
+      responses: {},
+      parameters: [contentEncodingParam(schema)],
+      requestBody: bodyWithExamples(specExample),
+    });
+    const encodingSchema: OpenAPIV3.SchemaObject = {
+      type: "string",
+      enum: ["deflate", "zstd1", "gzip"],
+      example: "deflate",
+    };
+    const requestFilesTitled = (...names: string[]) => ({
+      examples: names.map((name) => ({ name, value: "[]" })),
+      showTitles: true,
+    });
+    const encodings = (curlExamples: ReturnType<typeof extractCurlExamples>) =>
+      curlExamples.map((curlExample) => curlExample.bodies[0].contentEncoding);
+
+    // Hugo reads the encoding from the card's title.
+    it("compresses a request file whose title names an encoding", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema),
+        requestFilesTitled(
+          "Send deflate logs returns OK",
+          "Send gzip logs returns OK",
+          "Send logs returns OK",
+        ),
+      );
+
+      expect(encodings(curlExamples)).toEqual(["deflate", "gzip", undefined]);
+    });
+
+    it("compresses with the header's example when the title says compression", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema),
+        requestFilesTitled("Submit metrics with compression returns OK"),
+      );
+
+      expect(encodings(curlExamples)).toEqual(["deflate"]);
+    });
+
+    it("compresses with a required header's example", () => {
+      const operation = compressibleOperation(encodingSchema);
+      (operation.parameters![0] as OpenAPIV3.ParameterObject).required = true;
+
+      expect(encodings(extractCurlExamples(spec, operation))).toEqual([
+        "deflate",
+      ]);
+    });
+
+    // Without request files, Hugo's card is titled with the summary.
+    it("reads the operation's summary when there are no request files", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema, "Send gzip logs"),
+      );
+
+      expect(encodings(curlExamples)).toEqual(["gzip"]);
+    });
+
+    // Hugo has a curl shape only for gzip and deflate.
+    it("ignores other encodings", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema),
+        requestFilesTitled("Send zstd1 logs returns OK"),
+      );
+
+      expect(encodings(curlExamples)).toEqual([undefined]);
+    });
+  });
 });
 
 describe("extractResponses content types", () => {
@@ -590,6 +676,34 @@ describe("curl site comment", () => {
     for (const curl of Object.values(curlByRegion)) {
       expect(curl).not.toContain("# Or");
     }
+  });
+});
+
+describe("compressed curl", () => {
+  const params = {
+    path: [],
+    query: [],
+    header: [
+      {
+        name: "Content-Encoding",
+        in: "header",
+        schema: { type: "string" as const, enum: ["gzip", "deflate"] },
+      },
+    ],
+  };
+
+  it("compresses the body with the body's content encoding", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/logs",
+      { responses: { "202": { description: "OK" } } },
+      params,
+      { requestBodyJson: "[]", commentLines: [], contentEncoding: "gzip" },
+    );
+
+    expect(curl).toContain('-H "Content-Encoding: gzip"');
+    expect(curl).toContain("--data-binary @-");
   });
 });
 

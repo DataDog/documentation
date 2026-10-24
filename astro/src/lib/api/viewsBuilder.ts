@@ -751,27 +751,11 @@ function buildCurlEntry(
   summary: string,
 ): CodeExampleEntry {
   const curlsByRegion = curlExample.bodies.map((body) =>
-    buildCurlByRegion(
-      spec,
-      op.method,
-      op.pathStr,
-      op.operation,
-      params,
-      body.requestBodyJson,
-      body.commentLines,
-    ),
+    buildCurlByRegion(spec, op.method, op.pathStr, op.operation, params, body),
   );
   // The HTML renders `regionVariants`, so `code` only reaches the .md.
   const plaintextCurls = curlExample.bodies.map((body) =>
-    buildPlaintextCurl(
-      spec,
-      op.method,
-      op.pathStr,
-      op.operation,
-      params,
-      body.requestBodyJson,
-      body.commentLines,
-    ),
+    buildPlaintextCurl(spec, op.method, op.pathStr, op.operation, params, body),
   );
 
   const regionVariants: Record<string, { code: string }> = {};

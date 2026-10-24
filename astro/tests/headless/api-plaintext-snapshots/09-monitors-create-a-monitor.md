@@ -1153,6 +1153,66 @@ curl -X POST "https://api.${DD_SITE}/api/v1/monitor" \
 }
 EOF
 ```
+
+```bash
+# Set your Datadog site and credentials
+export DD_SITE="datadoghq.com" # Or us3.datadoghq.com, us5.datadoghq.com, datadoghq.eu, ap1.datadoghq.com, ap2.datadoghq.com, ddog-gov.com
+# Use a Personal Access Token or Service Access Token
+export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"
+
+curl -X POST "https://api.${DD_SITE}/api/v1/monitor" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer ${DD_BEARER_TOKEN}" \
+-d @- << EOF
+{
+  "name": "Example-Monitor",
+  "type": "rum alert",
+  "query": "formula(\"query2 / query1 * 100\").last(\"15m\") >= 0.8",
+  "message": "some message Notify: @hipchat-channel",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "priority": 3,
+  "options": {
+    "thresholds": {
+      "critical": 0.8
+    },
+    "variables": [
+      {
+        "data_source": "rum",
+        "name": "query2",
+        "search": {
+          "query": ""
+        },
+        "indexes": [
+          "*"
+        ],
+        "compute": {
+          "aggregation": "count"
+        },
+        "group_by": []
+      },
+      {
+        "data_source": "rum",
+        "name": "query1",
+        "search": {
+          "query": "status:error"
+        },
+        "indexes": [
+          "*"
+        ],
+        "compute": {
+          "aggregation": "count"
+        },
+        "group_by": []
+      }
+    ]
+  }
+}
+EOF
+```
 {% /tab %}
 
 {% tab label="Go" %}

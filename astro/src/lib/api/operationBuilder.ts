@@ -243,11 +243,17 @@ export function extractRequestBody(
   };
 }
 
-/** One curl command: the body it sends, and the comment lines above it. */
+/**
+ * One curl command: the body it sends, the comment lines above it, and the
+ * encoding it compresses the body with, if any.
+ */
 export interface CurlBody {
   requestBodyJson: string | undefined;
   commentLines: string[];
+  contentEncoding?: CurlContentEncoding;
 }
+
+type CurlContentEncoding = NonNullable<GenerateCurlOptions["contentEncoding"]>;
 
 /**
  * One entry in the Curl tab. `title` is the request file's CodeExamples
@@ -276,18 +282,71 @@ export function extractCurlExamples(
   if (!requestBodyContent || !isJsonMediaType(requestBodyContent.mediaType)) {
     return [{ title: undefined, bodies: [curlBody(undefined)] }];
   }
+  const encodingForTitle = (cardTitle: string | undefined) =>
+    curlContentEncoding(spec, operation, cardTitle ?? "");
   if (requestFileExamples.examples.length > 0) {
     return requestFileExamples.examples.map((example) => ({
       title: requestFileExamples.showTitles ? example.name : undefined,
-      bodies: [curlBody(example.value)],
+      bodies: [
+        withContentEncoding(
+          curlBody(example.value),
+          encodingForTitle(example.name),
+        ),
+      ],
     }));
   }
+  const contentEncoding = encodingForTitle(operation.summary);
   return [
     {
       title: undefined,
-      bodies: specExampleCurlBodies(spec, requestBodyContent.bodyContent),
+      bodies: specExampleCurlBodies(spec, requestBodyContent.bodyContent).map(
+        (body) => withContentEncoding(body, contentEncoding),
+      ),
     },
   ];
+}
+
+function withContentEncoding(
+  body: CurlBody,
+  contentEncoding: CurlContentEncoding | undefined,
+): CurlBody {
+  return contentEncoding ? { ...body, contentEncoding } : body;
+}
+
+/**
+ * Hugo's curl.html reads the encoding from the card's title (the request
+ * file's description, else the operation's summary): the last
+ * `Content-Encoding` enum value the title contains, else the header's example
+ * when the header is required or the title says "compression". Hugo has a
+ * curl shape only for gzip and deflate. For any other value, it sends the
+ * header but no body, so other values are ignored.
+ */
+function curlContentEncoding(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  cardTitle: string,
+): CurlContentEncoding | undefined {
+  const header = splitParameters(spec, operation.parameters).header.find(
+    (param) => param.name === "Content-Encoding",
+  );
+  if (!header) return undefined;
+  const schema = resolveSchema(spec, header.schema);
+  const enumValues: unknown[] = schema?.enum ?? [];
+  const encodingInTitle = enumValues
+    .filter(
+      (enumValue): enumValue is string =>
+        typeof enumValue === "string" && cardTitle.includes(enumValue),
+    )
+    .at(-1);
+  let encoding: unknown = encodingInTitle;
+  if (
+    encoding === undefined &&
+    ((schema?.example !== undefined && header.required) ||
+      cardTitle.includes("compression"))
+  ) {
+    encoding = header.example ?? schema?.example;
+  }
+  return encoding === "gzip" || encoding === "deflate" ? encoding : undefined;
 }
 
 function curlBody(requestBodyJson: string | undefined): CurlBody {
@@ -443,8 +502,7 @@ export function buildCurlByRegion(
   path: string,
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
-  requestBodyJson?: string,
-  commentLines: string[] = [],
+  body: CurlBody = curlBody(undefined),
 ): Record<string, string> {
   const options = curlOptionsForOperation(
     spec,
@@ -452,8 +510,7 @@ export function buildCurlByRegion(
     path,
     operation,
     splitParams,
-    requestBodyJson,
-    commentLines,
+    body,
   );
   const hostsByRegion = getRegionHosts(spec, operation);
   const result: Record<string, string> = {};
@@ -478,8 +535,7 @@ export function buildPlaintextCurl(
   path: string,
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
-  requestBodyJson?: string,
-  commentLines: string[] = [],
+  body: CurlBody = curlBody(undefined),
 ): string {
   const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
   const hostsByRegion = getRegionHosts(spec, operation);
@@ -490,8 +546,7 @@ export function buildPlaintextCurl(
       path,
       operation,
       splitParams,
-      requestBodyJson,
-      commentLines,
+      body,
     ),
     site: defaultRegion?.site,
     otherSites: otherRegions.map((region) => region.site),
@@ -510,19 +565,19 @@ function curlOptionsForOperation(
   path: string,
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
-  requestBodyJson: string | undefined,
-  commentLines: string[],
+  body: CurlBody,
 ): GenerateCurlOptions {
   const servers = operation?.servers ?? spec?.servers;
   return {
     method,
     path,
-    commentLines,
+    commentLines: body.commentLines,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
     pathParams: toCurlParams(spec, splitParams.path),
     queryParams: toCurlParams(spec, splitParams.query),
     headerParams: toCurlParams(spec, splitParams.header),
-    requestBodyJson,
+    requestBodyJson: body.requestBodyJson,
+    contentEncoding: body.contentEncoding,
     hasRequestBody: operation.requestBody !== undefined,
     multipartFormFields: multipartFormFields(spec, operation),
     hasNoContentResponse: "204" in (operation.responses ?? {}),

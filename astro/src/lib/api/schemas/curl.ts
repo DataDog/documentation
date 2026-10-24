@@ -95,6 +95,12 @@ export const GenerateCurlOptionsSchema = z
       .string()
       .optional()
       .describe("Prettified JSON string for the request body"),
+    contentEncoding: z
+      .enum(["gzip", "deflate"])
+      .optional()
+      .describe(
+        "Compress the body before sending it, with this `Content-Encoding`, as Hugo's curl does",
+      ),
     hasRequestBody: z
       .boolean()
       .optional()

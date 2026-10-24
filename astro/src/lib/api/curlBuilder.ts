@@ -68,6 +68,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     queryParams,
     headerParams,
     requestBodyJson,
+    contentEncoding,
     hasRequestBody = false,
     multipartFormFields,
     hasNoContentResponse = false,
@@ -116,8 +117,16 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   if (host && otherHosts.length > 0) {
     lines.push(buildOtherHostsLine(site, otherHosts));
   }
+  // A compressed body comes first, piped into curl
+  const compressed = contentEncoding !== undefined && !!requestBodyJson;
+  let curlPipePrefix = "";
+  if (compressed) {
+    const compressedBody = compressedBodyPipe(contentEncoding, requestBodyJson);
+    lines.push(...compressedBody.lines);
+    curlPipePrefix = compressedBody.curlPipePrefix;
+  }
   const curlParts: string[] = [];
-  curlParts.push(`curl -X ${method.toUpperCase()} "${url}"`);
+  curlParts.push(`${curlPipePrefix}curl -X ${method.toUpperCase()} "${url}"`);
 
   // Accept, Content-Type, header parameters, then auth, in Hugo's order
   if (!hasNoContentResponse) {
@@ -128,12 +137,19 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   } else if (requestBodyJson || hasRequestBody) {
     curlParts.push(`-H "Content-Type: application/json"`);
   }
-  curlParts.push(...buildHeaderParamFlags(headerParams));
+  curlParts.push(
+    ...buildHeaderParamFlags(
+      headerParams,
+      compressed ? contentEncoding : undefined,
+    ),
+  );
   curlParts.push(...auth.headers);
 
   // Request body
   if (multipartFormFields) {
     curlParts.push(...multipartFormFields.map(formFieldFlag));
+  } else if (compressed) {
+    curlParts.push(`--data-binary @-`);
   } else if (requestBodyJson) {
     curlParts.push(`-d @- << EOF`);
   }
@@ -143,7 +159,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   lines.push(curlCommand);
 
   // Append body after the command if present
-  if (requestBodyJson && !multipartFormFields) {
+  if (requestBodyJson && !multipartFormFields && !compressed) {
     lines.push(requestBodyJson);
     lines.push("EOF");
   }
@@ -178,17 +194,45 @@ function buildOtherHostsLine(
 }
 
 /**
- * Hugo's curl sends header parameters with their example, except
- * `Content-Encoding`. It sends optional ones too, but only with a body, so
- * sending only the required ones matches prod across the spec.
+ * Hugo's compressed body: a heredoc piped through gzip or zlib, and the text
+ * before `curl` on the line that closes it. Prod's gzip shape leaves `$(...)`
+ * unquoted, so bash word-splits and globs the body; it's kept as on prod.
  */
-function buildHeaderParamFlags(headerParams: CurlParam[] = []): string[] {
-  return headerParams
-    .filter(
-      (param) =>
-        param.required && param.name.toLowerCase() !== "content-encoding",
-    )
-    .map((param) => `-H "${param.name}: ${param.example ?? "CHANGE_ME"}"`);
+function compressedBodyPipe(
+  contentEncoding: NonNullable<GenerateCurlOptions["contentEncoding"]>,
+  requestBodyJson: string,
+): { lines: string[]; curlPipePrefix: string } {
+  if (contentEncoding === "gzip") {
+    return {
+      lines: ["echo $(cat << EOF", requestBodyJson, "EOF"],
+      curlPipePrefix: ") | gzip | ",
+    };
+  }
+  return {
+    lines: ["printf '%s' \"$(cat <<'EOF'", requestBodyJson, "EOF"],
+    curlPipePrefix:
+      ")\" | python3 -c 'import sys, zlib; sys.stdout.buffer.write(zlib.compress(sys.stdin.buffer.read()))' | ",
+  };
+}
+
+/**
+ * Hugo's curl sends header parameters with their example. It sends optional
+ * ones too, but only with a body, so sending only the required ones matches
+ * prod across the spec. `Content-Encoding` is sent only for a compressed
+ * body, with the body's encoding.
+ */
+function buildHeaderParamFlags(
+  headerParams: CurlParam[] = [],
+  contentEncoding?: string,
+): string[] {
+  return headerParams.flatMap((param) => {
+    if (param.name.toLowerCase() === "content-encoding") {
+      return contentEncoding ? [`-H "${param.name}: ${contentEncoding}"`] : [];
+    }
+    return param.required
+      ? [`-H "${param.name}: ${param.example ?? "CHANGE_ME"}"`]
+      : [];
+  });
 }
 
 /** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
