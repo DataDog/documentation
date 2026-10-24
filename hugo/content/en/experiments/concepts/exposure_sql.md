@@ -95,6 +95,8 @@ After you save an Exposure SQL Model, Datadog scans the model for distinct exper
 
 {{< img src="/product_analytics/experiment/exposure-sql/select-exposure-sql.png" alt="The experiment setup page with a dropdown to select which Exposure SQL Model tracks a manually entered experiment ID." style="width:80%;" >}}
 
+To analyze only the subjects who reached a specific event after assignment, such as a checkout page view, add an [entry point][6] after you select the Exposure SQL Model.
+
 ## How Datadog computes results
 
 After you create an experiment from an Exposure SQL Model, Datadog runs a data pipeline that:
@@ -124,3 +126,4 @@ To view a simplified version of the pipeline logic, click {{< ui >}}Copy SQL{{< 
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /experiments/plan_and_launch_experiments/
 [5]: /experiments/concepts/sql_template_variables/
+[6]: /experiments/concepts/entry_points/
