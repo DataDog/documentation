@@ -55,6 +55,22 @@ describe("getRequestFileExamples", () => {
     ).toEqual([]);
   });
 
+  // When none of the first 3 entries has a file, Hugo shows
+  // `request.<operationId>.json`, untitled.
+  it("falls back to the file without a suffix when no CodeExamples entry has a file", () => {
+    const { examples, showTitles } = getRequestFileExamples(
+      "UpdateRole",
+      "v2",
+      "roles",
+    );
+
+    expect(examples).toHaveLength(1);
+    expect(JSON.parse(examples[0].value).data.attributes.name).toBe(
+      "developers-updated",
+    );
+    expect(showTitles).toBe(false);
+  });
+
   // Hugo titles the examples when the operation has more than one
   // CodeExamples entry, counting entries without a file and past the first 3.
   it("titles the examples when the operation has more than one CodeExamples entry", () => {

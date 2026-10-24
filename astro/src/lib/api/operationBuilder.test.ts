@@ -6,6 +6,7 @@ import {
   extractOauthScopes,
   extractOauthScopesMatch,
   extractPermissionsMatch,
+  extractCurlRequestBodyJson,
   extractRequestBody,
   extractResponses,
 } from "./operationBuilder";
@@ -294,38 +295,98 @@ describe("extractRequestBody request files", () => {
     expect(extracted?.showExampleTitles).toBe(false);
   });
 
-  it("falls back to the spec's examples when there are no request files", () => {
+  // Without request files, prod shows the example Hugo builds from the
+  // schema (examples.json), never the spec's examples.
+  it("builds the example from the schema when there are no request files", () => {
     const extracted = extractRequestBody(
       spec,
       { responses: {}, requestBody: body },
       { examples: [], showTitles: true },
     );
 
-    expect(extracted?.examples.map((example) => example.name)).toEqual([
-      "Spec",
+    expect(extracted?.examples).toEqual([
+      { name: "Example", value: '{\n  "title": "string"\n}' },
     ]);
     expect(extracted?.showExampleTitles).toBe(false);
   });
 
-  it("titles the spec's examples when there is more than one", () => {
-    const twoSpecExamples = {
+  it("leaves read-only fields out of the schema-built example", () => {
+    const withReadOnlyField = {
       ...body,
       content: {
         "application/json": {
-          ...body.content["application/json"],
-          examples: {
-            one: { summary: "One", value: { title: "one" } },
-            two: { summary: "Two", value: { title: "two" } },
+          schema: {
+            type: "object" as const,
+            properties: {
+              id: { type: "string" as const, readOnly: true },
+              title: { type: "string" as const },
+            },
           },
         },
       },
     };
     const extracted = extractRequestBody(spec, {
       responses: {},
-      requestBody: twoSpecExamples,
+      requestBody: withReadOnlyField,
     });
 
-    expect(extracted?.showExampleTitles).toBe(true);
+    expect(JSON.parse(extracted!.examples[0].value)).toEqual({
+      title: "string",
+    });
+  });
+});
+
+describe("extractCurlRequestBodyJson", () => {
+  const body = {
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object" as const,
+          properties: { title: { type: "string" as const } },
+        },
+        examples: { spec: { summary: "Spec", value: { title: "from-spec" } } },
+      },
+    },
+  } as OpenAPIV3.RequestBodyObject;
+
+  it("sends the first request file", () => {
+    const json = extractCurlRequestBodyJson(
+      spec,
+      { responses: {}, requestBody: body },
+      {
+        examples: [{ name: "File", value: '{\n  "title": "file"\n}' }],
+        showTitles: false,
+      },
+    );
+
+    expect(json).toBe('{\n  "title": "file"\n}');
+  });
+
+  // Prod's curl sends the spec's example, not the Example tab's body.
+  it("sends the spec's example when there are no request files", () => {
+    const json = extractCurlRequestBodyJson(spec, {
+      responses: {},
+      requestBody: body,
+    });
+
+    expect(JSON.parse(json!)).toEqual({ title: "from-spec" });
+  });
+
+  it("sends no JSON body for a non-JSON request body", () => {
+    const json = extractCurlRequestBodyJson(spec, {
+      responses: {},
+      requestBody: {
+        content: {
+          "multipart/form-data": {
+            schema: body.content["application/json"].schema,
+            example: { title: "upload" },
+          },
+        },
+      },
+    });
+
+    expect(json).toBeUndefined();
   });
 });
 

@@ -50,7 +50,13 @@ export interface RequestFileExamples {
 /**
  * The operation's request files, each named by its CodeExamples.json
  * description. As in Hugo, only the first 3 entries are read, and an entry
- * without a file is skipped rather than replaced by a later one.
+ * without a file is skipped rather than replaced by a later one. When none of
+ * them has a file, Hugo shows `request.<operationId>.json`, untitled.
+ *
+ * Hugo's fallback check compares the missing files among the first 3 entries
+ * with the count of all entries, so an operation with more than 3 entries and
+ * no file among the first 3 shows nothing. No operation hits that, and it
+ * looks unintended, so this falls back regardless.
  */
 export function getRequestFileExamples(
   operationId: string,
@@ -68,5 +74,15 @@ export function getRequestFileExamples(
         ? []
         : [{ name: meta.description, value: content }];
     });
-  return { examples, showTitles: codeExampleMetas.length > 1 };
+  if (examples.length > 0) {
+    return { examples, showTitles: codeExampleMetas.length > 1 };
+  }
+  const fallback = requestFilesByLocation.get(
+    `${version}/${categorySlug}/request.${operationId}.json`,
+  );
+  return {
+    examples:
+      fallback === undefined ? [] : [{ name: "Example", value: fallback }],
+    showTitles: false,
+  };
 }

@@ -37,6 +37,7 @@ import {
 } from "./translationsLoader";
 import {
   splitParameters,
+  extractCurlRequestBodyJson,
   extractRequestBody,
   extractResponses,
   extractPermissions,
@@ -60,7 +61,10 @@ import {
   getCodeExamplesForOperation,
   getLanguageRunInfo,
 } from "./codeExampleLoader";
-import { getRequestFileExamples } from "./requestFileLoader";
+import {
+  getRequestFileExamples,
+  type RequestFileExamples,
+} from "./requestFileLoader";
 import type { CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
@@ -566,14 +570,24 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const regionUrls = buildRegionUrlsForOperation(spec, op);
 
   const params = collectParametersForOperation(spec, op);
-  const requestBody = buildLocalizedRequestBodyForOperation(spec, op, action);
+  const requestFileExamples = getRequestFileExamples(
+    op.operation.operationId,
+    op.version,
+    op.categorySlug,
+  );
+  const requestBody = buildLocalizedRequestBodyForOperation(
+    spec,
+    op,
+    action,
+    requestFileExamples,
+  );
   const responses = extractResponses(spec, op.operation);
 
   const codeExamples = buildCodeExamplesForOperation(
     spec,
     op,
     params.split,
-    requestBody?.examples?.[0]?.value,
+    extractCurlRequestBodyJson(spec, op.operation, requestFileExamples),
     summary,
     // Matches Hugo: only English SDK captions are relabeled.
     lang === DEFAULT_LOCALE ? displaySummary : undefined,
@@ -669,15 +683,12 @@ function buildLocalizedRequestBodyForOperation(
   spec: OpenAPIV3.Document,
   op: RawOperation,
   action: ActionTranslation,
+  requestFileExamples: RequestFileExamples,
 ): RequestBodyData | undefined {
   const requestBody = extractRequestBody(
     spec,
     op.operation,
-    getRequestFileExamples(
-      op.operation.operationId,
-      op.version,
-      op.categorySlug,
-    ),
+    requestFileExamples,
   );
   if (!requestBody) return undefined;
 

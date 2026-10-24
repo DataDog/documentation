@@ -150,16 +150,20 @@ function isJsonMediaType(mediaType: string): boolean {
 }
 
 /**
- * Extract request body schema and examples from the operation.
+ * The operation's request body object and the media type its examples use.
+ * Hugo renders a body whatever its content type. Prefer JSON, then fall back
+ * to the first declared type (e.g. `text/json`, `multipart/form-data`).
  */
-export function extractRequestBody(
+function resolveRequestBodyContent(
   spec: OpenAPIV3.Document,
   operation: OpenAPIV3.OperationObject,
-  requestFileExamples: RequestFileExamples = {
-    examples: [],
-    showTitles: false,
-  },
-): RequestBodyData | undefined {
+):
+  | {
+      resolved: OpenAPIV3.RequestBodyObject;
+      mediaType: string;
+      bodyContent: OpenAPIV3.MediaTypeObject;
+    }
+  | undefined {
   const rb = operation.requestBody;
   if (!rb) return undefined;
 
@@ -170,14 +174,28 @@ export function extractRequestBody(
   const content = resolved.content;
   if (!content) return undefined;
 
-  // Hugo renders a body whatever its content type. Prefer JSON, then fall
-  // back to the first declared type (e.g. `text/json`, `multipart/form-data`).
   const mediaType =
     "application/json" in content
       ? "application/json"
       : Object.keys(content)[0];
   if (!mediaType) return undefined;
-  const bodyContent = content[mediaType];
+  return { resolved, mediaType, bodyContent: content[mediaType] };
+}
+
+/**
+ * Extract request body schema and examples from the operation.
+ */
+export function extractRequestBody(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  requestFileExamples: RequestFileExamples = {
+    examples: [],
+    showTitles: false,
+  },
+): RequestBodyData | undefined {
+  const requestBodyContent = resolveRequestBodyContent(spec, operation);
+  if (!requestBodyContent) return undefined;
+  const { resolved, mediaType, bodyContent } = requestBodyContent;
 
   // Read-only fields are omitted from request bodies: a client cannot send
   // them. Responses keep theirs, so the filter belongs here rather than in
@@ -201,32 +219,13 @@ export function extractRequestBody(
   }
 
   // Prod's Example tab shows Hugo's request files when the operation has any,
-  // and never the spec's examples alongside them.
+  // and otherwise the example Hugo builds from the schema. It never shows the
+  // spec's examples.
   const hasRequestFiles = requestFileExamples.examples.length > 0;
   if (hasRequestFiles) {
     examples.push(...requestFileExamples.examples);
-  } else if (bodyContent.examples && typeof bodyContent.examples === "object") {
-    for (const [name, exampleObj] of Object.entries(bodyContent.examples)) {
-      const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
-        ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
-        : exampleObj;
-
-      if (resolvedExample?.value !== undefined) {
-        examples.push({
-          name: resolvedExample.summary ?? name,
-          value: JSON.stringify(resolvedExample.value, null, 2),
-        });
-      }
-    }
-  } else if (bodyContent.example !== undefined) {
-    examples.push({
-      name: "Example",
-      value: JSON.stringify(bodyContent.example, null, 2),
-    });
-  }
-
-  if (examples.length === 0 && bodyContent.schema) {
-    const generated = generateExampleFromSchema(spec, bodyContent.schema);
+  } else if (bodyContent.schema) {
+    const generated = buildSchemaExample(spec, "request", bodyContent.schema);
     if (generated !== undefined) {
       examples.push({
         name: "Example",
@@ -240,10 +239,51 @@ export function extractRequestBody(
     description: resolved.description || undefined,
     schema,
     examples,
-    showExampleTitles: hasRequestFiles
-      ? requestFileExamples.showTitles
-      : examples.length > 1,
+    showExampleTitles: hasRequestFiles && requestFileExamples.showTitles,
   };
+}
+
+/**
+ * The JSON body the curl sends: the first request file, or else the spec's
+ * first example, as prod's curl does. `undefined` for a non-JSON body.
+ */
+export function extractCurlRequestBodyJson(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  requestFileExamples: RequestFileExamples = {
+    examples: [],
+    showTitles: false,
+  },
+): string | undefined {
+  const requestBodyContent = resolveRequestBodyContent(spec, operation);
+  if (!requestBodyContent || !isJsonMediaType(requestBodyContent.mediaType)) {
+    return undefined;
+  }
+  return (
+    requestFileExamples.examples[0]?.value ??
+    specRequestExampleJson(spec, requestBodyContent.bodyContent)
+  );
+}
+
+/**
+ * The spec's first inline example, then its `example`, then one generated
+ * from the schema's `example` fields.
+ */
+function specRequestExampleJson(
+  spec: OpenAPIV3.Document,
+  bodyContent: OpenAPIV3.MediaTypeObject,
+): string | undefined {
+  for (const exampleObj of Object.values(bodyContent.examples ?? {})) {
+    const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
+      ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
+      : exampleObj;
+    if (resolvedExample?.value !== undefined) {
+      return JSON.stringify(resolvedExample.value, null, 2);
+    }
+  }
+  const example =
+    bodyContent.example ?? generateExampleFromSchema(spec, bodyContent.schema);
+  return example === undefined ? undefined : JSON.stringify(example, null, 2);
 }
 
 /**
