@@ -1,6 +1,7 @@
 /**
  * Docs AI internal streaming client.
- * SSE endpoint returning `thinking` status events and `markdown_fragment` tokens.
+ * SSE endpoint returning `thinking` status events, `markdown_fragment` tokens, and an
+ * optional `error` event ({ content, retryable, discard_partial }).
  */
 export async function streamDocsAiChat({
     config,
@@ -12,6 +13,7 @@ export async function streamDocsAiChat({
     signal,
     onToken,
     onThinking,
+    onServerError,
     onError
 }) {
     const attributes = { query };
@@ -66,7 +68,9 @@ export async function streamDocsAiChat({
             try {
                 const parsed = JSON.parse(payload);
                 if (parsed.type === 'thinking' && onThinking) {
-                    onThinking(parsed.content);
+                    onThinking(parsed.content, parsed);
+                } else if (parsed.type === 'error' && onServerError) {
+                    onServerError(parsed);
                 } else if (parsed.type === 'markdown_fragment') {
                     fullMessage += parsed.content;
                     if (onToken) onToken(parsed.content, fullMessage);
