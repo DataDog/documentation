@@ -37,7 +37,8 @@ import {
 } from "./translationsLoader";
 import {
   splitParameters,
-  extractCurlRequestBodyJson,
+  extractCurlExamples,
+  type CurlExample,
   extractRequestBody,
   extractResponses,
   extractPermissions,
@@ -65,7 +66,7 @@ import {
   getRequestFileExamples,
   type RequestFileExamples,
 } from "./requestFileLoader";
-import type { CodeExampleSet } from "./schemas/codeExamples";
+import type { CodeExampleEntry, CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
 import type { SplitParams } from "./schemas/params";
@@ -587,7 +588,7 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     spec,
     op,
     params.split,
-    extractCurlRequestBodyJson(spec, op.operation, requestFileExamples),
+    extractCurlExamples(spec, op.operation, requestFileExamples),
     summary,
     // Matches Hugo: only English SDK captions are relabeled.
     lang === DEFAULT_LOCALE ? displaySummary : undefined,
@@ -705,41 +706,17 @@ function buildLocalizedRequestBodyForOperation(
 }
 
 /**
- * Assembles the code-examples panel: a curl block (one entry with per-
- * region variants) followed by any SDK examples discovered for this
- * operation.
+ * Assembles the code-examples panel: the curl entries (each with per-region
+ * variants) followed by any SDK examples discovered for this operation.
  */
 function buildCodeExamplesForOperation(
   spec: OpenAPIV3.Document,
   op: RawOperation,
   params: SplitParams,
-  requestBodyJson: string | undefined,
+  curlExamples: CurlExample[],
   summary: string,
   sdkCaptionLabel: string | undefined,
 ): CodeExampleSet[] {
-  const curlByRegion = buildCurlByRegion(
-    spec,
-    op.method,
-    op.pathStr,
-    op.operation,
-    params,
-    requestBodyJson,
-  );
-  // The HTML renders `regionVariants`, so `code` only reaches the .md.
-  const plaintextCurl = buildPlaintextCurl(
-    spec,
-    op.method,
-    op.pathStr,
-    op.operation,
-    params,
-    requestBodyJson,
-  );
-
-  const curlVariants: Record<string, { code: string }> = {};
-  for (const [key, code] of Object.entries(curlByRegion)) {
-    curlVariants[key] = { code };
-  }
-
   const sdkExamples = getCodeExamplesForOperation(
     op.operation.operationId,
     op.version,
@@ -754,17 +731,64 @@ function buildCodeExamplesForOperation(
     {
       language: "curl",
       label: "Curl",
-      entries: [
-        {
-          description: `${summary} curl example`,
-          code: plaintextCurl,
-          syntax: "bash",
-          regionVariants: curlVariants,
-        },
-      ],
+      entries: curlExamples.map((curlExample) =>
+        buildCurlEntry(spec, op, params, curlExample, summary),
+      ),
     },
     ...sdkExamples,
   ];
+}
+
+/**
+ * One curl entry. An entry with several bodies shows their curls in one
+ * block, separated by a blank line, as prod does.
+ */
+function buildCurlEntry(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+  params: SplitParams,
+  curlExample: CurlExample,
+  summary: string,
+): CodeExampleEntry {
+  const curlsByRegion = curlExample.bodies.map((body) =>
+    buildCurlByRegion(
+      spec,
+      op.method,
+      op.pathStr,
+      op.operation,
+      params,
+      body.requestBodyJson,
+      body.commentLines,
+    ),
+  );
+  // The HTML renders `regionVariants`, so `code` only reaches the .md.
+  const plaintextCurls = curlExample.bodies.map((body) =>
+    buildPlaintextCurl(
+      spec,
+      op.method,
+      op.pathStr,
+      op.operation,
+      params,
+      body.requestBodyJson,
+      body.commentLines,
+    ),
+  );
+
+  const regionVariants: Record<string, { code: string }> = {};
+  for (const regionKey of Object.keys(curlsByRegion[0] ?? {})) {
+    regionVariants[regionKey] = {
+      code: curlsByRegion
+        .map((curlByRegion) => curlByRegion[regionKey])
+        .join("\n\n"),
+    };
+  }
+
+  return {
+    description: curlExample.title ?? `${summary} curl example`,
+    code: plaintextCurls.join("\n\n"),
+    syntax: "bash",
+    regionVariants,
+  };
 }
 
 function withRelabeledCaptions(

@@ -51,6 +51,12 @@ export const GenerateCurlOptionsSchema = z
   .object({
     method: z.string(),
     path: z.string(),
+    commentLines: z
+      .array(z.string())
+      .optional()
+      .describe(
+        "Lines above the command, such as a spec example's `## <summary>` and `# <description>` lines",
+      ),
     site: z
       .string()
       .optional()

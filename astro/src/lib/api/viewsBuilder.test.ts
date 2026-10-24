@@ -160,3 +160,28 @@ describe("viewsBuilder x-displayName labels", () => {
     );
   });
 });
+
+describe("viewsBuilder curl examples", () => {
+  // Decision A: one curl per request file, each sending its own file.
+  it("builds one titled curl per request file, in every region", async () => {
+    const view = await getOperationView("monitors", "create-a-monitor");
+    const curlEntries =
+      view?.variants[0].codeExamples.find((set) => set.language === "curl")
+        ?.entries ?? [];
+
+    expect(curlEntries.map((entry) => entry.description)).toEqual([
+      'Create a Cost Monitor returns "OK" response',
+      'Create a RUM formula and functions monitor returns "OK" response',
+    ]);
+    const monitorTypes = ["cost alert", "rum alert"];
+    curlEntries.forEach((entry, index) => {
+      const regionCodes = Object.values(entry.regionVariants ?? {}).map(
+        (variant) => variant.code,
+      );
+      expect(regionCodes.length).toBeGreaterThan(0);
+      for (const code of [entry.code, ...regionCodes]) {
+        expect(code).toContain(`"type": "${monitorTypes[index]}"`);
+      }
+    });
+  });
+});

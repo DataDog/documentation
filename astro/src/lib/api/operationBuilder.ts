@@ -243,44 +243,105 @@ export function extractRequestBody(
   };
 }
 
+/** One curl command: the body it sends, and the comment lines above it. */
+export interface CurlBody {
+  requestBodyJson: string | undefined;
+  commentLines: string[];
+}
+
 /**
- * The JSON body the curl sends: the first request file, or else the spec's
- * first example, as prod's curl does. `undefined` for a non-JSON body.
+ * One entry in the Curl tab. `title` is the request file's CodeExamples
+ * description, or `undefined` for the operation's own entry.
  */
-export function extractCurlRequestBodyJson(
+export interface CurlExample {
+  title: string | undefined;
+  bodies: CurlBody[];
+}
+
+/**
+ * The Curl tab's entries. Prod's curl repeats every spec example in every
+ * request-file card (decision A treats that as a mistake), so Astro builds one
+ * curl per request file, sending that file. Without request files, there's
+ * one entry with a curl per spec example, as on prod.
+ */
+export function extractCurlExamples(
   spec: OpenAPIV3.Document,
   operation: OpenAPIV3.OperationObject,
   requestFileExamples: RequestFileExamples = {
     examples: [],
     showTitles: false,
   },
-): string | undefined {
+): CurlExample[] {
   const requestBodyContent = resolveRequestBodyContent(spec, operation);
   if (!requestBodyContent || !isJsonMediaType(requestBodyContent.mediaType)) {
-    return undefined;
+    return [{ title: undefined, bodies: [curlBody(undefined)] }];
   }
-  return (
-    requestFileExamples.examples[0]?.value ??
-    specRequestExampleJson(spec, requestBodyContent.bodyContent)
-  );
+  if (requestFileExamples.examples.length > 0) {
+    return requestFileExamples.examples.map((example) => ({
+      title: requestFileExamples.showTitles ? example.name : undefined,
+      bodies: [curlBody(example.value)],
+    }));
+  }
+  return [
+    {
+      title: undefined,
+      bodies: specExampleCurlBodies(spec, requestBodyContent.bodyContent),
+    },
+  ];
+}
+
+function curlBody(requestBodyJson: string | undefined): CurlBody {
+  return { requestBodyJson, commentLines: [] };
 }
 
 /**
- * The spec's first inline example, then its `example`, then one generated
- * from the schema's `example` fields.
+ * One curl per inline spec example, in key order, as Hugo ranges over the
+ * examples map. With several, each is headed by its summary (or id) and its
+ * description lines, as on prod. A lone example gets no heading, since that
+ * would add prod's `## default` line to most operations (K21).
  */
-function specRequestExampleJson(
+function specExampleCurlBodies(
+  spec: OpenAPIV3.Document,
+  bodyContent: OpenAPIV3.MediaTypeObject,
+): CurlBody[] {
+  const inlineExamples = Object.entries(bodyContent.examples ?? {})
+    .sort(([idA], [idB]) => (idA < idB ? -1 : idA > idB ? 1 : 0))
+    .flatMap(([exampleId, exampleObj]) => {
+      const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
+        ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
+        : exampleObj;
+      return resolvedExample?.value === undefined
+        ? []
+        : [{ exampleId, example: resolvedExample }];
+    });
+  if (inlineExamples.length === 0) {
+    return [curlBody(fallbackRequestExampleJson(spec, bodyContent))];
+  }
+  return inlineExamples.map(({ exampleId, example }) => ({
+    requestBodyJson: JSON.stringify(example.value, null, 2),
+    commentLines:
+      inlineExamples.length > 1 ? exampleCommentLines(exampleId, example) : [],
+  }));
+}
+
+/** Hugo's `## <summary or id>`, then a `# <line>` per description line. */
+function exampleCommentLines(
+  exampleId: string,
+  example: OpenAPIV3.ExampleObject,
+): string[] {
+  const descriptionLines = example.description
+    ? example.description.split("\n").map((line) => `# ${line}`)
+    : [];
+  return [`## ${example.summary || exampleId}`, ...descriptionLines];
+}
+
+/**
+ * The spec's `example`, then one generated from the schema's `example` fields.
+ */
+function fallbackRequestExampleJson(
   spec: OpenAPIV3.Document,
   bodyContent: OpenAPIV3.MediaTypeObject,
 ): string | undefined {
-  for (const exampleObj of Object.values(bodyContent.examples ?? {})) {
-    const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
-      ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
-      : exampleObj;
-    if (resolvedExample?.value !== undefined) {
-      return JSON.stringify(resolvedExample.value, null, 2);
-    }
-  }
   const example =
     bodyContent.example ?? generateExampleFromSchema(spec, bodyContent.schema);
   return example === undefined ? undefined : JSON.stringify(example, null, 2);
@@ -383,6 +444,7 @@ export function buildCurlByRegion(
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   requestBodyJson?: string,
+  commentLines: string[] = [],
 ): Record<string, string> {
   const options = curlOptionsForOperation(
     spec,
@@ -391,6 +453,7 @@ export function buildCurlByRegion(
     operation,
     splitParams,
     requestBodyJson,
+    commentLines,
   );
   const hostsByRegion = getRegionHosts(spec, operation);
   const result: Record<string, string> = {};
@@ -416,6 +479,7 @@ export function buildPlaintextCurl(
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   requestBodyJson?: string,
+  commentLines: string[] = [],
 ): string {
   const [defaultRegion, ...otherRegions] = getRegions(spec, operation);
   const hostsByRegion = getRegionHosts(spec, operation);
@@ -427,6 +491,7 @@ export function buildPlaintextCurl(
       operation,
       splitParams,
       requestBodyJson,
+      commentLines,
     ),
     site: defaultRegion?.site,
     otherSites: otherRegions.map((region) => region.site),
@@ -446,11 +511,13 @@ function curlOptionsForOperation(
   operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   requestBodyJson: string | undefined,
+  commentLines: string[],
 ): GenerateCurlOptions {
   const servers = operation?.servers ?? spec?.servers;
   return {
     method,
     path,
+    commentLines,
     subdomain: servers?.[0]?.variables?.subdomain?.default ?? "api",
     pathParams: toCurlParams(spec, splitParams.path),
     queryParams: toCurlParams(spec, splitParams.query),

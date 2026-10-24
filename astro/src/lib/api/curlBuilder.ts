@@ -58,6 +58,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   const {
     method,
     path,
+    commentLines = [],
     site = "datadoghq.com",
     otherSites = [],
     host,
@@ -85,6 +86,9 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   const url = `https://${origin}${interpolatedPath}${queryString}`;
 
   const lines: string[] = [];
+  if (commentLines.length > 0) {
+    lines.push(...commentLines, "");
+  }
 
   // --- Parameters the URL references by name ---
   const parameterExportLines = buildParameterExportLines(

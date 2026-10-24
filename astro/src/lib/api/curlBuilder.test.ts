@@ -67,6 +67,18 @@ describe("buildCurlCommand", () => {
     expect(result).toContain("EOF");
   });
 
+  it("starts with the comment lines, then a blank line, as Hugo does", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v1/dashboard",
+      commentLines: ["## Weekly update", "# Runs every week."],
+    });
+
+    expect(result.startsWith("## Weekly update\n# Runs every week.\n\n")).toBe(
+      true,
+    );
+  });
+
   /** As Hugo does: the example is exported, and the URL references it by name. */
   it("exports a path parameter's example", () => {
     const result = buildCurlCommand({

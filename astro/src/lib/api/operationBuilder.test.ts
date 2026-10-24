@@ -6,7 +6,7 @@ import {
   extractOauthScopes,
   extractOauthScopesMatch,
   extractPermissionsMatch,
-  extractCurlRequestBodyJson,
+  extractCurlExamples,
   extractRequestBody,
   extractResponses,
 } from "./operationBuilder";
@@ -336,57 +336,153 @@ describe("extractRequestBody request files", () => {
   });
 });
 
-describe("extractCurlRequestBodyJson", () => {
-  const body = {
-    required: true,
-    content: {
-      "application/json": {
-        schema: {
-          type: "object" as const,
-          properties: { title: { type: "string" as const } },
-        },
-        examples: { spec: { summary: "Spec", value: { title: "from-spec" } } },
-      },
-    },
-  } as OpenAPIV3.RequestBodyObject;
+describe("extractCurlExamples", () => {
+  const schema = {
+    type: "object" as const,
+    properties: { title: { type: "string" as const, example: "from-schema" } },
+  };
+  const bodyWithExamples = (
+    examples: Record<string, OpenAPIV3.ExampleObject>,
+  ) =>
+    ({
+      required: true,
+      content: { "application/json": { schema, examples } },
+    }) as OpenAPIV3.RequestBodyObject;
+  const specExample = {
+    spec: { summary: "Spec", value: { title: "from-spec" } },
+  };
 
-  it("sends the first request file", () => {
-    const json = extractCurlRequestBodyJson(
+  const requestFiles = {
+    examples: [
+      { name: "Create a cost monitor", value: '{\n  "title": "cost"\n}' },
+      { name: "Create a RUM monitor", value: '{\n  "title": "rum"\n}' },
+    ],
+    showTitles: true,
+  };
+
+  // Decision A: prod repeats every spec example in every request-file card.
+  // Astro sends each card's own request file instead.
+  it("builds one curl per request file, titled with its CodeExamples description", () => {
+    const curlExamples = extractCurlExamples(
       spec,
-      { responses: {}, requestBody: body },
-      {
-        examples: [{ name: "File", value: '{\n  "title": "file"\n}' }],
-        showTitles: false,
-      },
+      { responses: {}, requestBody: bodyWithExamples(specExample) },
+      requestFiles,
     );
 
-    expect(json).toBe('{\n  "title": "file"\n}');
+    expect(curlExamples).toEqual([
+      {
+        title: "Create a cost monitor",
+        bodies: [
+          { requestBodyJson: '{\n  "title": "cost"\n}', commentLines: [] },
+        ],
+      },
+      {
+        title: "Create a RUM monitor",
+        bodies: [
+          { requestBodyJson: '{\n  "title": "rum"\n}', commentLines: [] },
+        ],
+      },
+    ]);
+  });
+
+  it("leaves the curl untitled when the request file is untitled", () => {
+    const curlExamples = extractCurlExamples(
+      spec,
+      { responses: {}, requestBody: bodyWithExamples(specExample) },
+      { examples: [{ name: "Example", value: "{}" }], showTitles: false },
+    );
+
+    expect(curlExamples.map((curlExample) => curlExample.title)).toEqual([
+      undefined,
+    ]);
   });
 
   // Prod's curl sends the spec's example, not the Example tab's body.
-  it("sends the spec's example when there are no request files", () => {
-    const json = extractCurlRequestBodyJson(spec, {
+  it("sends the spec's example, without comment lines, when it's the only one", () => {
+    const curlExamples = extractCurlExamples(spec, {
       responses: {},
-      requestBody: body,
+      requestBody: bodyWithExamples(specExample),
     });
 
-    expect(JSON.parse(json!)).toEqual({ title: "from-spec" });
+    expect(curlExamples).toHaveLength(1);
+    expect(curlExamples[0].title).toBeUndefined();
+    expect(curlExamples[0].bodies).toHaveLength(1);
+    expect(JSON.parse(curlExamples[0].bodies[0].requestBodyJson!)).toEqual({
+      title: "from-spec",
+    });
+    expect(curlExamples[0].bodies[0].commentLines).toEqual([]);
+  });
+
+  // Hugo ranges over the examples map, which Go iterates in key order, and
+  // heads each curl with the example's summary (or id) and description.
+  it("sends each of several spec examples in key order, headed by its summary or id", () => {
+    const curlExamples = extractCurlExamples(spec, {
+      responses: {},
+      requestBody: bodyWithExamples({
+        weekly: {
+          summary: "Weekly update",
+          description: "Runs every week.\nOn Mondays.",
+          value: { title: "weekly" },
+        },
+        default: { value: { title: "default" } },
+      }),
+    });
+
+    expect(curlExamples).toHaveLength(1);
+    expect(
+      curlExamples[0].bodies.map((body) => ({
+        title: JSON.parse(body.requestBodyJson!).title,
+        commentLines: body.commentLines,
+      })),
+    ).toEqual([
+      { title: "default", commentLines: ["## default"] },
+      {
+        title: "weekly",
+        commentLines: [
+          "## Weekly update",
+          "# Runs every week.",
+          "# On Mondays.",
+        ],
+      },
+    ]);
+  });
+
+  it("builds the body from the schema when there are no examples", () => {
+    const curlExamples = extractCurlExamples(spec, {
+      responses: {},
+      requestBody: bodyWithExamples({}),
+    });
+
+    expect(JSON.parse(curlExamples[0].bodies[0].requestBodyJson!)).toEqual({
+      title: "from-schema",
+    });
   });
 
   it("sends no JSON body for a non-JSON request body", () => {
-    const json = extractCurlRequestBodyJson(spec, {
+    const curlExamples = extractCurlExamples(spec, {
       responses: {},
       requestBody: {
         content: {
-          "multipart/form-data": {
-            schema: body.content["application/json"].schema,
-            example: { title: "upload" },
-          },
+          "multipart/form-data": { schema, example: { title: "upload" } },
         },
       },
     });
 
-    expect(json).toBeUndefined();
+    expect(curlExamples).toEqual([
+      {
+        title: undefined,
+        bodies: [{ requestBodyJson: undefined, commentLines: [] }],
+      },
+    ]);
+  });
+
+  it("builds one curl without a body when the operation has none", () => {
+    expect(extractCurlExamples(spec, { responses: {} })).toEqual([
+      {
+        title: undefined,
+        bodies: [{ requestBodyJson: undefined, commentLines: [] }],
+      },
+    ]);
   });
 });
 
