@@ -18420,7 +18420,7 @@ menu:
         operationids:
           - UpdateUserNotificationRule
         unstable: []
-        order: 21
+        order: 22
     - name: Get an On-Call notification rule for a user
       url: /api/latest/on-call/get-an-on-call-notification-rule-for-a-user/
       identifier: on-call-get-an-on-call-notification-rule-for-a-user
@@ -18432,7 +18432,7 @@ menu:
         operationids:
           - GetUserNotificationRule
         unstable: []
-        order: 20
+        order: 21
     - name: Delete an On-Call notification rule for a user
       url: /api/latest/on-call/delete-an-on-call-notification-rule-for-a-user/
       identifier: on-call-delete-an-on-call-notification-rule-for-a-user
@@ -18444,7 +18444,7 @@ menu:
         operationids:
           - DeleteUserNotificationRule
         unstable: []
-        order: 19
+        order: 20
     - name: Create an On-Call notification rule for a user
       url: /api/latest/on-call/create-an-on-call-notification-rule-for-a-user/
       identifier: on-call-create-an-on-call-notification-rule-for-a-user
@@ -18456,7 +18456,7 @@ menu:
         operationids:
           - CreateUserNotificationRule
         unstable: []
-        order: 17
+        order: 18
     - name: List On-Call notification rules for a user
       url: /api/latest/on-call/list-on-call-notification-rules-for-a-user/
       identifier: on-call-list-on-call-notification-rules-for-a-user
@@ -18468,7 +18468,7 @@ menu:
         operationids:
           - ListUserNotificationRules
         unstable: []
-        order: 18
+        order: 19
     - name: Get an On-Call notification channel for a user
       url: /api/latest/on-call/get-an-on-call-notification-channel-for-a-user/
       identifier: on-call-get-an-on-call-notification-channel-for-a-user
@@ -18480,7 +18480,7 @@ menu:
         operationids:
           - GetUserNotificationChannel
         unstable: []
-        order: 14
+        order: 15
     - name: Delete an On-Call notification channel for a user
       url: /api/latest/on-call/delete-an-on-call-notification-channel-for-a-user/
       identifier: on-call-delete-an-on-call-notification-channel-for-a-user
@@ -18492,7 +18492,7 @@ menu:
         operationids:
           - DeleteUserNotificationChannel
         unstable: []
-        order: 13
+        order: 14
     - name: Create an On-Call notification channel for a user
       url: /api/latest/on-call/create-an-on-call-notification-channel-for-a-user/
       identifier: on-call-create-an-on-call-notification-channel-for-a-user
@@ -18504,7 +18504,7 @@ menu:
         operationids:
           - CreateUserNotificationChannel
         unstable: []
-        order: 16
+        order: 17
     - name: List On-Call notification channels for a user
       url: /api/latest/on-call/list-on-call-notification-channels-for-a-user/
       identifier: on-call-list-on-call-notification-channels-for-a-user
@@ -18516,7 +18516,7 @@ menu:
         operationids:
           - ListUserNotificationChannels
         unstable: []
-        order: 15
+        order: 16
     - name: Set On-Call team routing rules
       url: /api/latest/on-call/set-on-call-team-routing-rules/
       identifier: on-call-set-on-call-team-routing-rules
@@ -18528,7 +18528,7 @@ menu:
         operationids:
           - SetOnCallTeamRoutingRules
         unstable: []
-        order: 10
+        order: 11
     - name: Get On-Call team routing rules
       url: /api/latest/on-call/get-on-call-team-routing-rules/
       identifier: on-call-get-on-call-team-routing-rules
@@ -18540,7 +18540,7 @@ menu:
         operationids:
           - GetOnCallTeamRoutingRules
         unstable: []
-        order: 9
+        order: 10
     - name: Get team on-call users
       url: /api/latest/on-call/get-team-on-call-users/
       identifier: on-call-get-team-on-call-users
@@ -18552,7 +18552,7 @@ menu:
         operationids:
           - GetTeamOnCallUsers
         unstable: []
-        order: 12
+        order: 13
     - name: Get on-call responders for a schedule
       url: /api/latest/on-call/get-on-call-responders-for-a-schedule/
       identifier: on-call-get-on-call-responders-for-a-schedule
@@ -18564,7 +18564,7 @@ menu:
         operationids:
           - GetScheduleOnCallResponders
         unstable: []
-        order: 22
+        order: 23
     - name: Delete On-Call schedule override
       url: /api/latest/on-call/delete-on-call-schedule-override/
       identifier: on-call-delete-on-call-schedule-override
@@ -18576,7 +18576,7 @@ menu:
         operationids:
           - DeleteScheduleOverride
         unstable: []
-        order: 26
+        order: 27
     - name: Create On-Call schedule overrides
       url: /api/latest/on-call/create-on-call-schedule-overrides/
       identifier: on-call-create-on-call-schedule-overrides
@@ -18588,7 +18588,7 @@ menu:
         operationids:
           - CreateScheduleOverrides
         unstable: []
-        order: 25
+        order: 26
     - name: List On-Call schedule overrides
       url: /api/latest/on-call/list-on-call-schedule-overrides/
       identifier: on-call-list-on-call-schedule-overrides
@@ -18600,7 +18600,7 @@ menu:
         operationids:
           - ListScheduleOverrides
         unstable: []
-        order: 24
+        order: 25
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user
@@ -18612,7 +18612,7 @@ menu:
         operationids:
           - GetScheduleOnCallUser
         unstable: []
-        order: 11
+        order: 12
     - name: Update On-Call schedule
       url: /api/latest/on-call/update-on-call-schedule/
       identifier: on-call-update-on-call-schedule
@@ -18672,7 +18672,7 @@ menu:
         operationids:
           - ListOnCallSchedules
         unstable: []
-        order: 23
+        order: 24
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18684,7 +18684,7 @@ menu:
         operationids:
           - UpdateOnCallEscalationPolicy
         unstable: []
-        order: 6
+        order: 7
     - name: Get On-Call escalation policy
       url: /api/latest/on-call/get-on-call-escalation-policy/
       identifier: on-call-get-on-call-escalation-policy
@@ -18696,7 +18696,7 @@ menu:
         operationids:
           - GetOnCallEscalationPolicy
         unstable: []
-        order: 7
+        order: 8
     - name: Delete On-Call escalation policy
       url: /api/latest/on-call/delete-on-call-escalation-policy/
       identifier: on-call-delete-on-call-escalation-policy
@@ -18708,7 +18708,7 @@ menu:
         operationids:
           - DeleteOnCallEscalationPolicy
         unstable: []
-        order: 8
+        order: 9
     - name: Create On-Call escalation policy
       url: /api/latest/on-call/create-on-call-escalation-policy/
       identifier: on-call-create-on-call-escalation-policy
@@ -18719,6 +18719,18 @@ menu:
           - v2
         operationids:
           - CreateOnCallEscalationPolicy
+        unstable: []
+        order: 6
+    - name: List On-Call escalation policies
+      url: /api/latest/on-call/list-on-call-escalation-policies/
+      identifier: on-call-list-on-call-escalation-policies
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallEscalationPolicies
         unstable: []
         order: 5
     - name: On-Call Paging

@@ -8003,7 +8003,7 @@ components:
           type: integer
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         sort:
           $ref: "#/components/schemas/LogsSort"
@@ -32618,7 +32618,10 @@ paths:
         permissions:
           - events_read
     post:
+      deprecated: true
       description: |-
+        This endpoint is deprecated and is available only to organizations that have previously used it. Use the V2 endpoint instead.
+
         This endpoint allows you to post events to the stream.
         Tag them, set priority and event aggregate them with other events.
       operationId: CreateEvent
@@ -35925,7 +35928,7 @@ paths:
                 value:
                   index: "retention-3,retention-15"
                   limit: 25
-                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  query: "service:web-api AND @http.status_code:[200 TO 299]"
                   sort: desc
                   time:
                     from: "2020-02-02T02:02:02.202Z"

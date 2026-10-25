@@ -13,57 +13,75 @@ further_reading:
   text: CI Visibility のトラブルシューティング
 - link: /continuous_integration/pipelines/custom_tags_and_measures/
   tag: ドキュメント
-  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
-title: CircleCI ワークフローにトレースを設定する
+  text: カスタムタグと測定値を追加して Pipeline Visibility を拡張する
+title: CI Visibility 向け CircleCI セットアップ
 ---
+## 概要{#overview}
 
-## Overview
+[CircleCI][1] は、チームがソフトウェアのビルド、テスト、デプロイを大規模に実施することができる、継続的インテグレーションおよびデリバリープラットフォームです。
 
-[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.
+パイプラインのパフォーマンスを最適化し、チーム間のコラボレーションを改善し、一貫性のある、各種標準に準拠したビルドプロセスを実現できるように、CircleCI 用の CI Visibility をセットアップします。
 
-Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
+### 互換性 {#compatibility}
 
-### Compatibility
-
-| Pipeline Visibility | Platform | Definition |
+| Pipeline Visibility | プラットフォーム | 定義 |
 |---|---|---|
-| [Partial retries][12] | Partial pipelines | View partially retried pipeline executions. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
-| [Custom spans][13] | Custom spans | Configure custom spans for your pipelines. |
-| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][6] to all generated pipeline and job spans. |
-| [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
+| [部分的なリトライ][12] | 部分パイプライン | 部分的にリトライされたパイプライン実行を表示します。|
+| [ログ分析][20] | ログ分析 | 関連するログに対して LLM モデルを使用して、失敗した CI ジョブの根本原因を分析します。|
+| ログの相関付け | ログの相関付け | パイプラインとジョブのスパンをログに関連付けます。[ログストレージ][10]が必要です。|
+| [カスタムスパン][13] | カスタムスパン | パイプラインのカスタムスパンを構成します。|
+| カスタム事前定義タグ | カスタム事前定義タグ | 生成されたすべてのパイプラインスパンとジョブスパンに[カスタムタグ][6]を設定します。|
+| [実行時のカスタムタグ][14][およびメジャー][15] | 実行時のカスタムタグおよびメジャー | 実行時の[カスタムタグおよびメジャー][7]を構成します。|
+| [クリティカルパスで CI ジョブをフィルタリングする][18] | クリティカルパスで CI ジョブをフィルタリングする | クリティカルパスのジョブでフィルタリングします。|
+| [実行時間][19] | 実行時間  | パイプラインによるジョブ実行時間を表示します。|
 
-## Configure the Datadog integration
+### 用語 {#terminology}
 
-The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send data to Datadog.
+次の表に、Datadog CI Visibility と CircleCI の概念の対応を示します。
 
-1. For each project, go to **Project Settings > Webhooks** in CircleCI and add a new webhook:
-   * **Webhook URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> where `<API_KEY>` is your [Datadog API key][3].
-   * **Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
-   * **Events**: Select `Workflow Completed` and `Job Completed`.
-   * **Certificate verifications**: Enable this check.
+| Datadog                    | CircleCI  |
+|----------------------------|-----------|
+| パイプライン                   | ワークフロー  |
+| ジョブ                        | ジョブ       |
+| _Datadog では利用不可_ | ステップ      |
 
-2. Click **Add Webhook** to save the new webhook.
+## Datadog インテグレーションの構成 {#configure-the-datadog-integration}
 
-### Configure multiple projects in bulk
+Datadog の [CircleCI][1] インテグレーションは、[Webhooks][2] を使用することでデータを Datadog に送信します。
 
-You can enable the hooks for many or all of your CircleCI projects in bulk, using [this Python script][9] which calls the Circle CI API.
+1. 各プロジェクトについて、CircleCI の [{{< ui >}}Project Settings{{< /ui >}}] (プロジェクト設定) > [{{< ui >}}Webhooks{{< /ui >}}] で、新しい Webhook を追加します。
 
-The script requires:
-- Python 3 and the requests package. For more info, run:
-  ```shell
-  ./service_hooks.py --help
-  ```
-- Your Datadog API key
-- A Circle CI personal API token
+   * [{{< ui >}}Webhook Name{{< /ui >}}] (Webhook 名): `Datadog CI Visibility` または指定するその他の識別子名。
+   * [{{< ui >}}Receiver URL{{< /ui >}}] (レシーバー URL):<code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> ここで `<API_KEY>` はお使いの [Datadog API キー][3]です。
+   * [{{< ui >}}Certificate verifications{{< /ui >}}] (認証情報検証): このチェックを有効にします。
+   * [{{< ui >}}Events{{< /ui >}}] (イベント): [{{< ui >}}Workflow Completed{{< /ui >}}] (完了したワークフロー) と [{{< ui >}}Job Completed{{< /ui >}}] (完了したジョブ) を選択します。
 
-To bulk-configure hooks for your projects:
+2. [{{< ui >}}Add Webhook{{< /ui >}}] (Webhook を追加) をクリックして、新しい Webhook を保存します。
 
-1. Log in to your Circle CI account and follow all the projects for which you want to enable the hooks. Optionally, use the **Follow All** button on the Projects page.
+## 高度な構成 {#advanced-configuration}
 
-2. Run the script either using environment variables `DD_API_KEY` and `DD_SITE`, or passing in flag parameters `--dd-api-key` and `--dd-site`:
+### 複数プロジェクトの一括構成 {#configure-multiple-projects-in-bulk}
 
-   For example:
+Datadog は、CircleCI API を使用して複数またはすべての CircleCI プロジェクトでサービスフックを有効にするために役立つ[スクリプト][9]を提供しています。このスクリプトには Python 3 と `requests` パッケージが必要です。
+
+このスクリプトを実行するには、以下が必要です。
+
+- Datadog API キー
+- CircleCI 個人 API トークン
+
+詳細については、次のコマンドを実行してください。
+
+```shell
+./service_hooks.py --help
+```
+
+プロジェクトのフックを一括構成するには、以下を行います。
+
+1. CircleCI アカウントにログインし、フックを有効にするすべてのプロジェクトをフォローします。オプションで、[Projects] (プロジェクト) ページの [{{< ui >}}Follow All{{< /ui >}}] (すべてフォロー) ボタンを使用します。
+
+2. 環境変数 `DD_API_KEY` と `DD_SITE` を使用するか、フラグパラメーター `--dd-api-key` と `--dd-site` を渡してスクリプトを実行します。
+
+   例:
 
    ```shell
    ./service_hooks.py \
@@ -73,31 +91,41 @@ To bulk-configure hooks for your projects:
        --threads 4
    ```
 
-### Set custom tags
-To set custom tags to all the pipeline and job spans generated by the integration, add to the **Webhook URL** a URL-encoded query parameter `tags`, with `key:value` pairs separated by commas. If a key:value pair contains any commas, surround it with quotes. For example, to add `key1:value1,"key2: value with , comma",key3:value3`, the following string would need to be appended to the **Webhook URL**:
+### Set custom tags 
 
-`?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
+To set custom tags to all the pipeline and job spans generated by the integration, add to the {{< ui >}}Receiver URL{{< /ui >}} a URL-encoded query parameter `tags` with `key:value` pairs separated by commas.
 
-#### Integrate with Datadog Teams
+If a `key:value` pair contains any commas, surround it with quotes. For example, to add `key1:value1,"key2: value with , comma",key3:value3`, the following string would need to be appended to the {{< ui >}}Receiver URL{{< /ui >}}: `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`.
+
+
+
+#### Integrate with Datadog Teams 
+
 To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][8] team handle exactly.
 
-### Enable log collection
+### Manage job logs 
 
-The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog.
+#### Logs Analysis 
 
-<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from CircleCI.
 
-To install and configure this integration, follow the [CircleCI setup guide][11].
+For a full explanation, see the guide on [using Logs Analysis][20].
 
-<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for CircleCI jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:circleci</code> tags.</div>
+Logs Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Logs Analysis settings, go to [CI/CD Repository settings][21], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
-## Datadog でパイプラインデータを視覚化する
+#### Logs Storage 
+
+To enable Logs Storage, go to [CI/CD Repository settings][21], and enable Logs Storage at the Datadog organization level or for the desired repositories.
+
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
+
+## Visualize pipeline data in Datadog 
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository.
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][17].
 
-## 参考資料
+## Further reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -110,9 +138,15 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /ja/account_management/teams/
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
-[10]: /ja/continuous_integration/pipelines/circleci/#enable-log-collection
+[10]: /ja/continuous_integration/pipelines/circleci/#logs-storage
 [11]: /ja/integrations/circleci/#setup
 [12]: /ja/glossary/#partial-retry
 [13]: /ja/glossary/#custom-span
 [14]: /ja/glossary/#custom-tag
 [15]: /ja/glossary/#custom-measure
+[16]: /ja/logs/guide/best-practices-for-log-management/
+[17]: /ja/continuous_integration/search/#search-for-pipelines
+[18]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[19]: /ja/glossary/#pipeline-execution-time
+[20]: /ja/continuous_integration/guides/use_ci_jobs_failure_analysis/
+[21]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
