@@ -253845,6 +253845,15 @@ paths:
           schema:
             example: Active
             type: string
+        - description: |-
+            Filter on the exact user handle. This filter also returns Datadog-managed users,
+            which the list otherwise excludes. Defaults to no filtering.
+          in: query
+          name: filter[handle]
+          required: false
+          schema:
+            example: example-handle
+            type: string
       responses:
         "200":
           content:
