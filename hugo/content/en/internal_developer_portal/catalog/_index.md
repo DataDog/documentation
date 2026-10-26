@@ -21,9 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
   text: Turn feedback into action across your engineering org with Datadog Forms
-- link: "https://www.datadoghq.com/blog/how-datadog-defines-service-criticality-at-scale/"
-  tag: "Blog"
-  text: "How Datadog defines service criticality at scale"
 algolia:
   tags: ['software catalog', 'catalog']
 ---
