@@ -21,8 +21,8 @@ Maintaining a great user experience on your website includes ensuring that your 
 
 Choose the email address type for your workflow:
 
-- **Temporary** creates a unique mailbox for each test execution to avoid email conflicts between test runs. Use it for sign-up flows that register a different account each run.
-- **Persistent** reuses the same Datadog-managed address across executions. Create an account once and reuse it for login, password reset, and other emails sent to an existing user. Parallel tests sharing the inbox can interfere with each other; see [Concurrent executions][2]. Follow [Use persistent email addresses in browser tests][1] to create the email global variable and register the account.
+- **Temporary**: Creates a unique mailbox for each test execution to avoid email conflicts between test runs. Use it for sign-up flows that register a different account each run.
+- **Persistent**: Reuses the same Datadog-managed address across executions. Create an account once and reuse it for login, password reset, and other emails sent to an existing user. Parallel tests sharing the inbox can interfere with each other; see [Concurrent executions][2]. Follow [Use persistent email addresses in browser tests][1] to create the email global variable and register the account.
 
 To add a temporary email variable called `EMAIL`:
 
