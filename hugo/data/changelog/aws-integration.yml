@@ -1,0 +1,18 @@
+entries:
+  - change_type: modified
+    date: '2026-10-15'
+    link: https://github.com/DataDog/documentation/pull/40737
+    operations:
+      - CreateAWSAccountCCMConfig
+      - DeleteAWSAccountCCMConfig
+      - UpdateAWSAccountCCMConfig
+    title: Fix documented permissions for AWS CCM config mutations
+  - change_type: modified
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40871
+    operations:
+      - CreateAWSAccount
+      - GetAWSAccount
+      - ListAWSAccounts
+      - UpdateAWSAccount
+    title: Add collect_service_quotas to AWS metrics config

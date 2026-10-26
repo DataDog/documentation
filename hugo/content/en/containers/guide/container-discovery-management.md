@@ -249,7 +249,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+In environments where you are not using Helm, the following environment variables can be passed to the Agent container at startup.
 
 Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 {{% /tab %}}
@@ -538,7 +538,7 @@ metadata:
 
 ## Security configuration
 
-In **Agent v7.70+**, you can restrict security monitoring for specific containers, so you only get billed for the containers you want to have monitored. This functionality is not supported for the Datadog Operator.
+In **Agent v7.70+**, you can restrict security monitoring for specific containers, so you only get billed for the containers you want to have monitored.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -566,7 +566,7 @@ sbom:
 [1]: /security/cloud_security_management/vulnerabilities
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
-In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+In environments where you are not using Helm or the configuration file, the following environment variables can be configured or passed to the Agent container at startup.
 
 | Feature                               | Include container                              | Exclude container                              |
 |---------------------------------------|------------------------------------------------|------------------------------------------------|

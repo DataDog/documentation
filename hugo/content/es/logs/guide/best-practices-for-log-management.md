@@ -1,222 +1,244 @@
 ---
 algolia:
   tags:
-  - Uso de logs
+  - log usage
   - grok
-  - analizador de grok
-  - análisis de logs
-  - Extracción de atributos
-  - Reasignación de atributos
-  - análisis
+  - grok parser
+  - logs parsing
+  - Extracting Attributes
+  - Remapping attributes
+  - parsing
 aliases:
 - /es/logs/guide/logs-monitors-on-volumes/
+description: Prácticas recomendadas para administrar y hacer un seguimiento de sus
+  registros de manera eficiente en Datadog.
 further_reading:
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Centro de arquitectura
+  text: Una guía sobre estrategias de indexación para Log Management con Datadog
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprender a procesar tus logs
+  text: Aprenda a procesar sus registros
 - link: /logs/log_configuration/parsing
   tag: Documentación
-  text: Obtener más información sobre el análisis
+  text: Obtenga más información sobre el parseo
 - link: https://www.datadoghq.com/blog/log-management-policies/
   tag: Blog
-  text: Cómo implementar las políticas de gestión de logs con tus equipos
+  text: Cómo implementar políticas de Log Management con sus equipos
 - link: https://www.datadoghq.com/blog/volkswagen-organizations/
   tag: Blog
-  text: Mejores prácticas para gestionar organizaciones de Datadog a escala
-title: Prácticas recomendadas para la gestión de logs
+  text: Prácticas recomendadas para administrar organizaciones de Datadog a escala
+- link: https://www.youtube.com/watch?v=2OEzAE7c2c0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=1&pp=iAQB
+  tag: Video
+  text: 'Consejos y trucos de Datadog: mejore la utilización de registros con filtros
+    de exclusión de registros de Datadog'
+- link: https://learn.datadoghq.com/courses/debugging-log-pipelines
+  tag: Centro de aprendizaje
+  text: Depuración de pipelines de registros
+title: Prácticas recomendadas para Log Management
 ---
+## Descripción general {#overview}
 
-## Información general
+Datadog Log Management recopila, procesa, archiva, explora y hace un seguimiento de sus registros, para que tenga visibilidad de los problemas de su sistema. Sin embargo, puede ser difícil obtener el nivel correcto de visibilidad de sus registros y el rendimiento de los registros puede variar mucho, lo que genera un uso inesperado de recursos.
 
-Datadog Log Management recopila, procesa, archiva, explora y monitoriza tus logs para que puedas visualizar los problemas de tu sistema. Sin embargo, puede ser difícil obtener el nivel adecuado de visibilidad de tus logs y el rendimiento de los logs puede variar mucho, lo que crea un uso inesperado de los recursos.
+Por lo tanto, esta guía lo guía a través de varias prácticas recomendadas de Log Management y configuraciones de cuenta que le brindan flexibilidad en la gobernanza, la atribución de uso y el control de presupuesto. Más específicamente, cómo:
 
-Por tal motivo, esta guía te mostrará varias prácticas recomendadas para la gestión de logs y configuraciones de cuenta que te brindan flexibilidad para la gestión, la atribución de uso y el control del presupuesto. Más concretamente, verás cómo puedes:
+- [Configurar múltiples índices para segmentar sus registros](#set-up-multiple-indexes-for-log-segmentation)
+- [Configurar múltiples archivos para almacenamiento a largo plazo](#set-up-multiple-archives-for-long-term-storage)
+- [Configurar RBAC para roles personalizados](#set-up-rbac-for-custom-roles)
 
-- [Configurar varios índices para segmentar tus logs](#set-up-multiple-indexes-for-log-segmentation)
-- [Configurar varios archivos para el almacenamiento a largo plazo](#set-up-multiple-archives-for-long-term-storage)
-- [Configurar el control de acceso basado en roles (RBAC) para roles personalizados](#set-up-rbac-for-custom-roles)
+Esta guía también explica cómo hacer un seguimiento del uso de sus registros mediante:
 
-Esta guía también explica cómo puedes monitorizar el uso de logs:
+- [Alerting sobre picos inesperados de tráfico de registros](#alert-on-unexpected-log-traffic-spikes)
+- [Alerting sobre logs indexados cuando el volumen supera un umbral especificado](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
+- [Hacer un seguimiento de qué índices se consultan activamente](#monitor-which-indexes-are-queried-actively)
+- [Configurar filtros de exclusión en registros de alto volumen](#set-up-exclusion-filters-on-high-volume-logs)
 
-- [Con alertas para picos inesperados de tráfico de logs](#alert-on-unexpected-log-traffic-spikes)
-- [Con alertas para logs indexados cuando el volumen supera un umbral especificado](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
-- [Configurando filtros de exclusión en logs de gran volumen](#set-up-exclusion-filters-on-high-volume-logs)
+Si desea transformar sus registros o redactar datos confidenciales en sus registros antes de que salgan de su entorno, vea cómo [agregar, procesar y transformar sus datos de registro con Observability Pipelines][29].
 
-Si quieres transformar tus logs u ocultar datos confidenciales en tus logs antes de que abandonen tu entorno, consulta cómo puedes [agregar, procesar y transformar tus datos de logs con pipelines de observabilidad][29].
+## Configuración de la cuenta de registros {#log-account-configuration}
 
-## Configuración de la cuenta de logs
+### Configurar múltiples índices para la segmentación de registros {#set-up-multiple-indexes-for-log-segmentation}
 
-### Configurar varios índices para la segmentación de logs
+Configure varios índices si desea segmentar sus registros para diferentes períodos de retención o cuotas diarias, para el seguimiento de uso y facturación.
 
-Configura varios índices si deseas segmentar tus logs para diferentes periodos de retención o cuotas diarias, monitorización de uso y facturación.
-
-Por ejemplo, si tienes logs que sólo deben conservarse durante 7 días, mientras que otros deben conservarse durante 30 días, utiliza varios índices para separar los logs según los dos periodos de conservación.
+Por ejemplo, si tiene registros que solo necesitan conservarse durante 7 días, mientras que otros registros necesitan conservarse durante 30 días, utilice varios índices para separar los registros según los dos períodos de retención.
 
 Para configurar varios índices:
 
-1. Ve a [Índices de logs][1].
-2. Haz clic en **New Index** (Nuevo índice) o en **Add a new index** (Añadir un nuevo índice).
-3. Introduce un nombre para el índice.
-4. Introduce la consulta de búsqueda para filtrar los logs que quieres tener en este índice.
-5. Establece la cuota diaria para limitar el número de logs que se almacenan en un índice por día.
-6. Establece el periodo durante el cual queres conservar estos logs.
-7. Haz clic en **Save** (Guardar).
+1. Navegue a [Log Indexes][1].
+2. Haga clic en {{< ui >}}New Index{{< /ui >}} o {{< ui >}}Add a new index{{< /ui >}}.
+3. Ingrese un nombre para el índice.
+4. Ingrese la consulta de búsqueda para filtrar los registros que desea en este índice.
+5. Establezca la cuota diaria para limitar la cantidad de registros que se almacenan en un índice por día.
+6. Establezca el período de retención según cuánto tiempo desea conservar estos registros.
+7. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Establecer cuotas diarias en tus índices puede ayudar a evitar excesos en la facturación cuando se añaden nuevos orígenes de logs o si un desarrollador cambia involuntariamente los niveles de gestión de logs al modo de depuración. Consulta [Alerta de índices que alcanzan su cuota diaria](#alert-on-indexes-reaching-their-daily-quota) para conocer cómo configurar una monitorización que avise cuando se alcanza un porcentaje de la cuota diaria dentro de las últimas 24 horas.
+Establecer cuotas diarias en sus índices puede ayudar a evitar excesos de facturación cuando se agregan nuevas fuentes de registro o si un desarrollador cambia involuntariamente los niveles de registro al modo de depuración. Consulte [Alertar sobre índices que alcanzan su cuota diaria](#alert-on-indexes-reaching-their-daily-quota) para saber cómo configurar un seguimiento que alerte cuando se alcance un porcentaje de la cuota diaria en las últimas 24 horas.
 
-### Configurar el almacenamiento para una retención prolongada
+### Configure el almacenamiento para la retención a largo plazo {#set-up-storage-for-long-term-retention}
 
-Si deseas retener logs durante un tiempo prolongado mientras mantienes velocidades de consulta similares a las de la indexación estándar, configura [Flex Logs][30]. Este nivel es el más adecuado para logs, que requiere una retención más prolongada y ocasionalmente necesita consultas urgentes. Flex Logs desvincula los costos de almacenamiento de los de cálculo, por lo que puedes retener de forma rentable más logs durante más tiempo sin sacrificar la visibilidad. Los logs que deben consultarse con frecuencia deben almacenarse en índices estándar.
+Si desea retener registros durante un tiempo prolongado mientras mantiene velocidades de consulta similares a las de la indexación estándar, configure [Flex Logs][30]. Este nivel es el más adecuado para registros que requieren una retención más larga y que ocasionalmente necesitan ser consultados con urgencia. Flex Logs desacopla el almacenamiento de los costos de cómputo para que pueda retener más registros de manera rentable durante más tiempo sin sacrificar la visibilidad. Los registros que necesitan ser consultados con frecuencia deben almacenarse en índices estándar.
 
-### Crear varios archivos para el almacenamiento a largo plazo
+### Configure varios archivos para el almacenamiento a largo plazo {#set-up-multiple-archives-for-long-term-storage}
 
-Si quieres almacenar tus logs durante periodos de tiempo más prolongados, configura [Archivos de logs][2] para enviar tus logs a un sistema optimizado para el almacenamiento, como Amazon S3, Azure Storage o Google Cloud Storage. Cuando quieras utilizar Datadog para analizar esos logs, utiliza [Log Rehydration][3]TM para recuperar esos logs de nuevo en Datadog. Con varios archivos, puedes segmentar logs por motivos de cumplimiento y mantener un control sobre los costes de recuperación.
+Si desea almacenar sus registros durante períodos de tiempo más largos, configure [Log Archives][2] para enviar sus registros a un sistema optimizado para almacenamiento, como Amazon S3, Azure Storage o Google Cloud Storage. Utilice [Archive Search][32] para consultar estos registros directamente desde el almacenamiento en tiempo real. Cuando necesite acceso completo a la plataforma o una retención más larga, use el modo **Search & Rehydration** de Archive Search. Con múltiples archivos, puede segmentar registros por razones de cumplimiento y mantener los costos bajo control.
 
-#### Configura el tamaño máximo de escaneado para gestionar las costosas rehidrataciones
+#### Configure el tamaño máximo de escaneo para gestionar los costos {#set-up-max-scan-size-to-manage-costs}
 
-Establece un límite para el volumen de logs que pueden recuperarse al mismo tiempo. Al configurar un archivo, puedes definir el volumen máximo de datos de logs que se pueden analizar para su recuperación. Para obtener más información, consulta [Definir el tamaño máximo de análisis][4].
+Establezca un límite en el volumen de registros que se pueden escanear a la vez. Al configurar un archivo, puede definir el volumen máximo de datos de registro que se pueden escanear por consulta de Archive Search o rehidratación. Consulte [Define maximum scan size][4] para obtener más información.
 
-### Configurar el control de acceso basado en roles (RBAC) para roles personalizados
+### Configure RBAC para roles personalizados {#set-up-rbac-for-custom-roles}
 
-Existen tres [roles predeterminados de Datadog][5]: Administrador, Estándar y Solo lectura. También puedes crear roles personalizados con conjuntos de permisos únicos. Por ejemplo, puedes crear un rol que restrinja la modificación de las políticas de conservación de índices para los usuarios, a fin de evitar picos de costes no deseados. Del mismo modo, puedes restringir quién puede modificar las configuraciones de análisis de logs para evitar cambios no deseados en formatos y estructuras bien definidos de logs.
+Existen tres [roles predeterminados de Datadog][5]: Admin, Standard y Read-only. También puede crear roles personalizados con conjuntos de permisos únicos. Por ejemplo, puede crear un rol que restrinja a los usuarios la modificación de las políticas de retención de índices para evitar picos de costos no deseados. De manera similar, puede restringir quién puede modificar las configuraciones de parseo de registros para evitar cambios no deseados en estructuras y formatos de registro bien definidos.
 
 Para configurar roles personalizados con permisos:
 
-1. Inicia sesión en [Datadog][6] como administrador.
-2. Ve a [Organization Settings > Roles (Parámetros de organización > Roles)][7].
-3. Para habilitar los roles personalizados, haz clic en el engranaje de la parte superior izquierda y, a continuación, en **Enable** (Habilitar).
-4. Una vez habilitados, haz clic en **New Role** (Nuevo rol).
-5. Introduce un nombre para el nuevo rol.
-6. Selecciona los permisos para el rol. Esto te permite restringir el acceso a determinadas acciones, como la recuperación de logs y la creación de métricas basadas en logs. Para obtener más información, consulta los [permisos de Log Management][8].
-7. Haz clic en **Save** (Guardar).
+1. Inicie sesión en [Datadog][6] como administrador.
+2. Navegue a [Organization Settings > Roles][7].
+3. Para habilitar roles personalizados, haga clic en el engranaje en la parte superior izquierda y luego haga clic en {{< ui >}}Enable{{< /ui >}}.
+4. Una vez habilitado, haga clic en {{< ui >}}New Role{{< /ui >}}.
+5. Ingrese un nombre para el nuevo rol.
+6. Seleccione los permisos para el rol. Esto le permite restringir el acceso a ciertas acciones, como la rehidratación de registros y la creación de métricas basadas en registros. Consulte [Log Management Permissions][8] para obtener más detalles.
+7. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Consulta [Cómo configurar el control de acceso basado en roles (RBAC) para logs][9] para obtener una guía paso a paso sobre cómo configurar y asignar un rol con permisos específicos para un ejemplo de caso de uso.
+Consulte [How to Set Up RBAC for Logs][9] para obtener una guía paso a paso sobre cómo configurar y asignar un rol con permisos específicos para un caso de uso de ejemplo.
 
-## Monitorizar el uso de logs
+## Hacer un seguimiento del uso de registros {#monitor-log-usage}
 
-Puedes monitorizar el uso de logs configurando lo siguiente:
+Puede hacer un seguimiento de su uso de registros configurando lo siguiente:
 
-- [Alertas para picos inesperados de tráfico de logs](#alert-on-unexpected-log-traffic-spikes)
-- [Alertas cuando un volumen de logs indexados supera un umbral especificado](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
+- [Alerts para picos inesperados de tráfico de registros](#alert-on-unexpected-log-traffic-spikes)
+- [Alertar cuando un volumen de log indexado supere un umbral especificado](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 
-### Alertas para picos inesperados de tráfico de logs
+### Alertar sobre picos inesperados de tráfico de registros {#alert-on-unexpected-log-traffic-spikes}
 
-#### Métricas de uso de logs
+#### Métricas de uso de registros {#log-usage-metrics}
 
-Por defecto, [las métricas de uso de logs][10] están disponibles para realizar un seguimiento del número de logs consumidos, bytes consumidos y logs indexados. Estas métricas son gratuitas y se conservan durante 15 meses:
+De forma predeterminada, las [métricas de uso de registros][10] están disponibles para realizar un seguimiento del número de registros ingeridos, bytes ingeridos y logs indexados. Estas métricas son gratuitas y se conservan durante 15 meses:
 
 - `datadog.estimated_usage.logs.ingested_bytes`
 - `datadog.estimated_usage.logs.ingested_events`
 
-Consulta [Monitores para la detección de anomalías][11] para conocer cómo puedes crear monitores de anomalías utilizando métricas de uso.
+Consulte [Anomaly detection monitors][11] para conocer los pasos sobre cómo crear monitor de anomalía con las métricas de uso.
 
 **Nota**: Datadog recomienda establecer la unidad en `byte` para `datadog.estimated_usage.logs.ingested_bytes` en la [página de resumen de métricas][12]:
 
-{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="La página de resumen de métricas muestra el panel lateral de uso estimado de logs y bytes consumidos de Datadog" style="width:70%;">}}
+{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="La página de resumen de métricas que muestra el panel lateral datadog.estimated_usage.logs.ingested_bytes con la unidad establecida en byte" style="width:70%;">}}
 
-#### Monitores de detección de anomalías
+#### Monitores de detección de anomalías {#anomaly-detection-monitors}
 
-Crea un monitor para la detección de anomalías a fin de alertar sobre cualquier pico inesperado de indexación de logs:
+Cree un monitor de detección de anomalías para alertar sobre cualquier pico inesperado en la indexación de registros:
 
-1. Ve a [Monitors > New Monitor (Monitores > Nuevo monitor)][13] y selecciona **Anomaly** (Anomalía).
-2. En la sección **Define the metric** (Definir la métrica), selecciona la métrica `datadog.estimated_usage.logs.ingested_events`.
-3. En el campo **from** (de), añade la etiqueta (tag) `datadog_is_excluded:false` para monitorizar los logs indexados y no los consumidos.
-4. En el campo **sum by** (sumar por), añade las etiquetas `service` y `datadog_index` para recibir una notificación si un servicio específico se dispara o deja de enviar logs en cualquier índice.
-5. Configura las condiciones de alerta para que coincidan con tu caso de uso. Por ejemplo, configura el monitor para que alerte si los valores evaluados están fuera de un rango esperado.
-6. Añade un título para la notificación y un mensaje con instrucciones para actuar. Por ejemplo, esta es una notificación con enlaces contextuales:
+1. Navegue a [Monitors > New Monitor][13] y seleccione {{< ui >}}Anomaly{{< /ui >}}.
+2. En la sección **Define the metric**, seleccione la métrica `datadog.estimated_usage.logs.ingested_events`.
+3. En el campo **from**, agregue la etiqueta `datadog_is_excluded:false` para hacer un seguimiento de los logs indexados y no de los ingeridos.
+4. En el campo **sum by**, agregue las etiquetas `service` y `datadog_index`, para que se le notifique si un servicio específico presenta picos o deja de enviar registros en cualquier índice.
+5. Establezca las condiciones de alerta para que coincidan con su caso de uso. Por ejemplo, configure el seguimiento para alertar si los valores evaluados están fuera del rango esperado.
+6. Agregue un título para la notificación y un mensaje con instrucciones prácticas. Por ejemplo, esta es una notificación con enlaces contextuales:
     ```text
     An unexpected amount of logs has been indexed in the index: {{datadog_index.name}}
 
     1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
-    2. [Add an exclusion filter on the noisy pattern](https://app.datadoghq.com/logs/pipelines/indexes)
+    2. [Agregue un filtro de exclusión en el patrón ruidoso](https://app.datadoghq.com/logs/pipelines/indexes)
     ```
-7. Haz clic en **Create** (Crear).
+7. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
-### Alerta cuando un volumen de logs indexados supera un umbral especificado
+### Alertar cuando un volumen de log indexado supere un umbral especificado {#alert-when-an-indexed-log-volume-passes-a-specified-threshold}
 
-Configura un monitor para alertar si un volumen de logs indexados en cualquier contexto de tu infraestructura (por ejemplo, `service`, `availability-zone`, etc.) está aumentando inesperadamente.
+Configure un seguimiento para alertar si el volumen de log indexado en cualquier contexto de su infraestructura (por ejemplo, `service`, `availability-zone`) aumenta inesperadamente.
 
-1. Ve al [Explorador de logs][14].
-2. Introduce una [consulta de búsqueda][15] que incluya el nombre del índice (por ejemplo, `index:main`) para capturar el volumen de logs que quieres monitorizar.
-3. Haz clic en **More...** (Más) y selecciona **Create monitor** (Crear monitor).
-4. Añade etiquetas (por ejemplo, servicios `host, `, etc.) al campo **group by** (agrupar por).
-5. Completa **Alert threshold** (Umbral de alerta) para tu caso de uso. Opcionalmente, completa **Warning threshold** (Umbral de alerta).
-6. Añade un título de notificación, por ejemplo:
+1. Navegue al Log Explorer [14].
+2. Ingrese una [consulta de búsqueda][15] que incluya el nombre del índice (por ejemplo, `index:main`) para capturar el volumen de registros que desea hacer un seguimiento.
+3. Haga clic en {{< ui >}}More...{{< /ui >}} y seleccione {{< ui >}}Create monitor{{< /ui >}}.
+4. Agregue etiquetas (por ejemplo, `host, `servicios, etcétera) al campo {{< ui >}}group by{{< /ui >}}.
+5. Ingrese el {{< ui >}}Alert threshold{{< /ui >}} para su caso de uso. Opcionalmente, ingrese un {{< ui >}}Warning threshold{{< /ui >}}.
+6. Agregue un título de notificación, por ejemplo:
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
-6. Añade un mensaje, por ejemplo:
+6. Add a message, for example:
     ```
-    The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
+    El volumen en este servicio superó el umbral. Defina un filtro de exclusión adicional o aumente la tasa de muestreo para reducir el volumen.
     ```
-7. Haz clic en **Create** (Crear).
+7. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
-#### Alerta sobre el volumen de logs indexados desde principios de mes
+#### Alertar sobre el volumen de logs indexados desde el comienzo del mes {#alert-on-indexed-logs-volume-since-the-beginning-of-the-month}
 
-Aproveche la métrica `datadog.estimated_usage.logs.ingested_events` filtrada en `datadog_is_excluded:false` para contar solo los logs indexados y la [ventana acumulativa de monitor (noun) de métricas][28] para monitorizar el número desde principios de mes.
+Aproveche la métrica `datadog.estimated_usage.logs.ingested_events` filtrada en `datadog_is_excluded:false` para contar solo los logs indexados y la [ventana acumulativa del seguimiento de métricas][28] para hacer un seguimiento del conteo desde el comienzo del mes.
 
-{{< img src="logs/guide/monthly_usage_monitor.png" alt="Configurar un monitor para alertar del recuento de logs indexados desde principios de mes" style="width:70%;">}}
+{{< img src="logs/guide/monthly_usage_monitor.png" alt="Configure un seguimiento para alertar sobre el conteo de logs indexados desde el comienzo del mes" style="width:70%;">}}
 
-#### Alertas de índices que alcanzan su cuota diaria
+#### Alertar sobre índices que alcanzan su cuota diaria {#alert-on-indexes-reaching-their-daily-quota}
 
-[Establece una cuota diaria][16] en los índices para evitar indexar más de un número determinado de logs al día. Si un índice tiene una cuota diaria, Datadog recomienda que se configure el [monitor que notifica sobre el volumen de ese índice](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) para alertar cuando se alcance el 80% de esta cuota en las últimas 24 horas.
+[Configure una cuota diaria][16] en los índices para evitar indexar más de una cantidad determinada de registros por día. Si un índice tiene una cuota diaria, Datadog recomienda que configure el [seguimiento que notifica sobre el volumen de ese índice](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) para alertar cuando se alcance el 80% de esta cuota en las últimas 24 horas.
 
-Se genera un evento cuando se alcanza la cuota diaria. Estos eventos tienen la tag (etiqueta) `datadog_index` que incluye el nombre del índice. Por lo tanto, cuando se haya generado este evento, puedes [crear una faceta][17] en la tag (etiqueta) `datadog_index`, de modo que puedas utilizar `datadog_index` en el step (UI) / paso (generic) `group by` para configurar un monitor (noun) de varias alertas.
+Se genera un evento cuando se alcanza la cuota diaria. Estos eventos tienen la etiqueta `datadog_index`, la cual incluye el nombre del índice. Por lo tanto, cuando se haya generado este evento, puede [crear una faceta][17] en la etiqueta `datadog_index`, para que pueda usar `datadog_index` en el paso `group by` para configurar un seguimiento de alerta múltiple.
 
-Para configurar un monitor que alerte cuando se alcanza la cuota diaria para un índice:
+Para configurar un seguimiento que alerte cuando se alcance la cuota diaria de un índice:
 
-1. Ve a [Monitors > New Monitor (Monitores > Nuevo monitor)][13] y selecciona **Event** (Evento).
-2. Introduce: `source (fuente):datadog datadog_index:* "daily quota reached"` en la sección **Define the search query** (Definir la consulta de búsqueda). Incluye `datadog_index:*` para asegurarte de que solo se seleccionen los eventos relacionados con el índice.
-3. En el campo **Count of** (Número de), añade `datadog_index` para agrupar por índice. Esto actualiza la consulta de modo que se lea `Show Count of * by datadog_index (datadog_index)`.
-4. Para **Evaluate the query over** (Evaluar la consulta sobre), selecciona **current day** (día actual). Para **Starting at** (Iniciar a las), selecciona la hora a la que se reinician los índices. Esto mantiene el monitor (noun) en estado de alerta hasta el reinicio de la cuota. Este es un ejemplo de cómo se ve la consulta de búsqueda cuando se define en Datadog:
-   {{< img src="logs/guide/daily_quota_notification_search_query.png" alt="La configuración de la alerta de Datadog sobre la consulta de búsqueda que alcanzó la cuota de índice" style="width:100%;">}}
-5. En la sección **Set alert conditions** (Establecer condiciones de alerta), selecciona `above or equal to` e introduce `1` para **Alert threshold** (Umbral de alerta).
-6. Añade un título de notificación y un mensaje en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones). El botón **Multi Alert** (Alerta múltiple) se selecciona automáticamente porque el monitor está agrupado por `datadog_index(datadog_index)`.
-7. Haz clic en **Save** (Guardar).
+1. Vaya a [Monitors > New Monitor][13] y haga clic en {{< ui >}}Event{{< /ui >}}.
+2. Ingrese: `source:datadog datadog_index:* "daily quota reached"` en la sección **Define the search query**. Incluya `datadog_index:*` para asegurarse de que solo se seleccionen los eventos relacionados con el índice.
+3. En el campo **Count of**, agregue `datadog_index` para agrupar por índice. Esto actualiza la consulta para que diga `Show Count of * by datadog_index (datadog_index)`.
+4. Para **Evaluate the query over**, seleccione **current day**. Para **Starting at**, seleccione la hora en la que se restablecen los índices. Esto mantiene el seguimiento en estado de alerta hasta que se restablezca la cuota. Este es un ejemplo de cómo se ve la consulta de búsqueda cuando se define en Datadog:
+   {{< img src="logs/guide/daily_quota_notification_search_query.png" alt="La configuración de la consulta de búsqueda de la alerta de Datadog sobre el límite de cuota de índice alcanzado" style="width:100%;">}}
+5. En la sección **Establecer condiciones de alerta**, seleccione `above or equal to` e ingrese `1` para el **Umbral de alerta**.
+6. Agregue un título y un mensaje de notificación en la sección {{< ui >}}Configure notifications and automations{{< /ui >}}. El botón {{< ui >}}Multi Alert{{< /ui >}} se selecciona automáticamente porque el seguimiento está agrupado por `datadog_index(datadog_index)`.
+7. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-**Nota**: La tag (etiqueta) `datadog_index(datadog_index)` solo está disponible cuando ya se ha generado un evento.
+**Nota**: La etiqueta `datadog_index(datadog_index)` solo está disponible cuando ya se ha generado un evento.
 
-Este es un ejemplo del aspecto de la notificación en Slack:
+Este es un ejemplo de cómo se ve la notificación en Slack:
 
 {{< img src="logs/guide/daily_quota_notification.png" alt="Una notificación de Slack sobre la cuota diaria alcanzada en datadog_index:retention-7" style="width:70%;">}}
 
-### Revisar el dashboard de uso estimado
+### Revise el dashboard de uso estimado {#review-the-estimated-usage-dashboard}
 
-Una vez que empieces a consumir logs, se instalará automáticamente en tu cuenta un [dashboard][18] listo para utilizar que resume las métricas del uso de logs.
+Una vez que comience a ingerir registros, se instalará automáticamente en su cuenta un [dashboard][18] preconfigurado que resume sus métricas de uso de registros.
 
-{{< img src="logs/guide/logslight.png" alt="El dashboard de uso estimado de logs que muestra el desglose de logs indexados y consumidos en diferentes widgets" style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="El dashboard de uso estimado de registros que muestra el desglose de lo indexado e ingerido en diferentes widgets" style="width:70%;">}}
 
-**Nota**: Las métricas utilizadas en este dashboard son estimaciones y pueden diferir de las cifras de facturación oficiales.
+**Nota**: Las métricas utilizadas en este dashboard son estimaciones y pueden diferir de las cifras oficiales de facturación.
 
-Para encontrar este dashboard, ve a **Dashboards > Dashboards List** (Dashboards > Listas de dashboards) y busca [Log Management - Estimated Usage (Log Management - Uso estimado)][19].
+Para encontrar este dashboard, vaya a {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}} y busque [Log Management - Estimated Usage][19].
 
-### Establecer filtros de exclusión en logs de gran volumen
+### Haga un seguimiento de qué índices se consultan activamente{#monitor-which-indexes-are-queried-actively}
 
-Cuando haya alertas de los monitores de uso, puedes configurar filtros de exclusión y aumentar la frecuencia de muestreo para reducir el volumen. Consulta [Filtros de exclusión][20] para saber cómo configurarlos. También puedes utilizar [Patrones de logs][21] para agrupar e identificar logs de gran volumen. A continuación, en el panel lateral del patrón de logs, haz clic en **Add Exclusion Filter** (Añadir filtro de exclusión) para añadir un filtro que impida la indexación de esos logs.
+Hacer un seguimiento de la actividad de consultas le ayuda a evaluar el valor de sus datos indexados y a optimizar los costos. Por ejemplo, puede identificar índices que rara vez se consultan para reducir la retención o mover datos a Flex Logs o archivos.
 
-{{< img src="logs/guide/patterns_exclusion.png" alt="La página del explorador de logs muestra los detalles del panel lateral de un patrón con el botón para añadir filtros de exclusión en la parte superior" style="width:80%;">}}
+Para analizar qué índices se consultan activamente:
 
-Incluso si utilizas filtros de exclusión, puedes visualizar tendencias y anomalías sobre todos tus datos de logs, utilizando las métricas basadas en logs. Para obtener más información, consulta [Generar métricas a partir de logs consumidos][22].
+1. Navegue al [Audit Trail][31]. Este enlace completa previamente la consulta y la agrupación requeridas.
+2. Verifique que la consulta esté configurada en `@evt.name:"Log Management" @action:queried`.
+3. Seleccione la visualización {{< ui >}}Table{{< /ui >}} para ver una lista clasificada de los índices más y menos utilizados para el marco de tiempo seleccionado.
+4. En la sección {{< ui >}}By{{< /ui >}}, agrupe los registros por `@asset.new_value.query.indexes`.
 
-### Habilitar Sensitive Data Scanner para la detección de información de identificación personal (PII)
+### Configure filtros de exclusión en registros de alto volumen {#set-up-exclusion-filters-on-high-volume-logs}
 
-Si deseas evitar fugas de datos y limitar los riesgos de incumplimiento, utiliza Sensitive Data Scanner para identificar, etiquetar y, opcionalmente, redactar o aplicar hash a los datos confidenciales. Por ejemplo, puedes buscar números de tarjetas de crédito, números de ruta bancaria y claves de API en tus logs, spans (tramos) de APM y eventos de RUM. Consulta [Sensitive Data Scanner][23] para saber cómo configurar reglas de análisis para determinar qué datos analizar.
+Cuando sus seguimientos de uso envíen alertas, puede configurar filtros de exclusión y aumentar la tasa de muestreo para reducir el volumen. Consulte [Filtros de exclusión][20] sobre cómo configurarlos. También puede utilizar [Log Patterns][21] para agrupar e identificar registros de alto volumen. Luego, en el panel lateral de Log Patterns, haga clic en {{< ui >}}Add Exclusion Filter{{< /ui >}} para agregar un filtro para dejar de indexar esos registros.
 
-**Nota**: [Sensitive Data Scanner][24] es un producto que se factura por separado.
+{{< img src="logs/guide/patterns_exclusion.png" alt="La página del Log Explorer que muestra los detalles del panel lateral de un patrón con el botón para agregar filtro de exclusión en la parte superior" style="width:80%;">}}
 
-### Habilitar Audit Trail para ver las actividades de los usuarios
+Incluso si utiliza filtros de exclusión, aún puede visualizar tendencias y anomalías en todos sus datos de registro utilizando métricas basadas en registros. Consulte [Generar métricas a partir de registros ingeridos][22] para obtener más información.
 
-Si quieres ver las actividades de los usuarios, como quién ha cambiado las opciones de conservación de un índice o quién ha modificado un filtro de exclusión, habilita Audit Trail para ver estos eventos. Consulta [Eventos de Audit Trail][25] para obtener una lista de los eventos específicos de plataformas y productos que están disponibles. Para habilitar y configurar Audit Trail, sigue los pasos que se indican en la [documentación de Audit Trail][26].
+### Habilite Sensitive Data Scanner para la detección de información de identificación personal (PII) {#enable-sensitive-data-scanner-for-personally-identifiable-information-pii-detection}
 
-**Nota**: [Audit Trail][27] es un producto que se factura por separado.
+Si desea evitar fugas de datos y limitar los riesgos de incumplimiento, utilice Sensitive Data Scanner para identificar, etiquetar y, opcionalmente, redactar o aplicar hash a los datos confidenciales. Por ejemplo, puede buscar números de tarjetas de crédito, números de ruta bancaria y claves de API en sus registros, trazas de APM y eventos de RUM. Consulte [Sensitive Data Scanner][23] sobre cómo configurar reglas de escaneo para determinar qué datos escanear.
 
-## Referencias adicionales
+**Nota**: [Sensitive Data Scanner][24] es un producto facturable por separado.
+
+### Habilite Audit Trail para ver las actividades del usuario {#enable-audit-trail-to-see-user-activities}
+
+Si desea ver las actividades del usuario, como quién cambió la retención de un índice o quién modificó un filtro de exclusión, habilite Audit Trail para ver estos eventos. Consulte [Eventos de Audit Trail][25] para obtener una lista de los eventos específicos de la plataforma y del producto que están disponibles. Para habilitar y configurar Audit Trail, siga los pasos en la [documentación de Audit Trail][26].
+
+**Nota**: [Audit Trail][27] es un producto facturable por separado.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
 [2]: /es/logs/log_configuration/archives/
-[3]: /es/logs/log_configuration/rehydrating/
 [4]: /es/logs/log_configuration/archives/?tab=awss3#define-maximum-scan-size
 [5]: /es/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [6]: https://app.datadoghq.com/
@@ -244,3 +266,5 @@ Si quieres ver las actividades de los usuarios, como quién ha cambiado las opci
 [28]: /es/monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /es/observability_pipelines/
 [30]: /es/logs/log_configuration/flex_logs/
+[31]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&agg_m=count&agg_m_source=base&agg_q=%40asset.new_value.query.indexes&agg_q_source=base&agg_t=count&audit__diff=unified&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=query_table&x_missing=true&live=true
+[32]: /es/logs/explorer/archive_search/

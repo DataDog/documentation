@@ -64,21 +64,21 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 
 ## Configure metrics
 
-The recommended entry point for the SNMP Profile Manager is from a single device in NDM. Every device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version of that profile on your behalf, so you never need to create a profile from scratch.
+The recommended entry point for the SNMP Profile Manager is from an SNMP device in NDM. Each SNMP device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version, so you do not need to create a profile from scratch.
 
 1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Network Devices{{< /ui >}}][15].
-2. Click on a device to open the device side panel.
+2. Click a device monitored through SNMP to open the device side panel.
 3. Click {{< ui >}}View all metrics{{< /ui >}} to view the list of metrics being automatically collected for the device.
 
    {{< img src="/network_device_monitoring/profile_onboarding/ndm_view_all_metrics.png" alt="The NDM device side panel showing the Metrics section with the View all metrics button highlighted" style="width:90%;">}}
 
 4. The {{< ui >}}Metrics{{< /ui >}} tab opens, showing all metrics collected for the device. Use the left sidebar to browse by category: {{< ui >}}Alerting Metrics{{< /ui >}}, {{< ui >}}Starred Metrics{{< /ui >}}, {{< ui >}}Key Metrics{{< /ui >}}, and {{< ui >}}Additional Metrics{{< /ui >}}. 
 
-   {{< img src="/network_device_monitoring/profile_onboarding/profile_manager_metrics_tab.png" alt="The NDM device Metrics tab showing metric graphs and a left sidebar with categories including Alerting Metrics, Starred Metrics, Key Metrics, Additional Metrics, and SNMP Profile" style="width:90%;">}}
+   {{< img src="/network_device_monitoring/profile_onboarding/profile_manager_metrics_tab.png" alt="The NDM device Metrics tab showing metric graphs and a left sidebar with Alerting Metrics, Starred Metrics, Key Metrics, and Additional Metrics categories" style="width:90%;">}}
 
-5. To open the profile editor and manage which metrics are collected, click {{< ui >}}SNMP Profile{{< /ui >}} in the sidebar.
+5. To open the profile editor and manage which metrics are collected, click {{< ui >}}Configure metrics{{< /ui >}} in the left sidebar.
 
-   {{< img src="/network_device_monitoring/profile_onboarding/ndm_metrics_tab.png" alt="The NDM device Metrics tab with the SNMP Profile option highlighted in the left sidebar" style="width:90%;">}}
+   {{< img src="/network_device_monitoring/profile_onboarding/ndm_configure_metrics_2026_10.png" alt="The NDM device Metrics tab with Configure metrics highlighted in the left sidebar" style="width:90%;">}}
 
    This opens the profile editor in the {{< ui >}}Metrics{{< /ui >}} tab, containing the list of all available metrics for the devices covered by the profile, organized by name, MIB, OID, category, and compatibility. This is the primary view for controlling what data Datadog collects from your devices. You can filter the metric list by category or use the search bar to find specific metrics by name or OID.
 
@@ -235,9 +235,9 @@ The device scan may take up to 10 minutes to complete. You can monitor the scan'
 
 If a device is not being scanned, it may be due to the following reasons:
 
-- **Default device scan is disabled**: Device scan is disabled by default in Agent 7.75.2+. Set `network_devices.default_scan.enabled: true` in `datadog.yaml`.
+- **Default device scan is disabled**: Device scanning is disabled by default. Set `network_devices.default_scan.enabled: true` in `datadog.yaml`.
 - **Infinite loop detected**: The scan detected an infinite loop and was terminated. Check the Agent logs for `next OID 'X' is not after last OID 'Y'`. This can occur with some device firmware.
-- **Known issue: EXOS 33.1.1 firmware bug**: EXOS 33.1.1 devices may crash when device scan is enabled. As a workaround, keep device scan disabled or upgrade the device firmware. Contact [Datadog Support][21] for assistance.
+- **Device firmware**: Before enabling device scanning, review the firmware warning in [Setup](#setup).
 
 {{< site-region region="gov,gov2" >}}
 - **GovCloud**: Device scans cannot be triggered from the UI. Enable the default device scan (`network_devices.default_scan.enabled: true`) and trigger scans manually from the Agent for specific devices.
@@ -247,7 +247,7 @@ If a device is not being scanned, it may be due to the following reasons:
 
 The Profile Manager requires:
 
-- Agent version `7.75.2` or later
+- Agent version `7.77.0` or later
 - [Remote Configuration][14] enabled
 - `use_remote_config_profiles: true` in your SNMP configuration
 - `network_devices.default_scan.enabled: true` for device scanning

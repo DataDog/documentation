@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - security
+  - datadog security
+  - cloud siem
+  - cloud security
+  - application security
+  - threat detection
 aliases:
 - /es/compliance_monitoring
 - /es/cloud_siem
@@ -14,154 +22,183 @@ cascade:
   algolia:
     rank: 70
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance
-  tag: Notas de la versión
-  text: Consulta las últimas versiones de Datadog Security. (Es necesario iniciar
-    sesión en la aplicación).
-- link: https://www.datadoghq.com/guided-tour/security/
-  tag: Visita guiada
-  text: Ver una visita guiada del producto
 - link: /getting_started/cloud_siem
   tag: Documentación
-  text: Comenzar a detectar amenazas con Cloud SIEM
+  text: Comience a detectar amenazas con Cloud SIEM
 - link: /security/cloud_security_management/misconfigurations/
   tag: Documentación
-  text: Empezar a rastrear errores de configuración con Cloud Security Misconfigurations
+  text: Comience a rastrear las configuraciones incorrectas con Cloud Security Misconfigurations
 - link: /security/workload_protection/
   tag: Documentación
-  text: Descubrir amenazas a nivel de kernel con Workload Protection
+  text: Descubra amenazas a nivel de kernel con Workload Protection
+- link: https://www.datadoghq.com/guided-tour/security/
+  tag: Visita guiada
+  text: Vea una visita guiada del producto
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Únase a una sesión interactiva para elevar su seguridad y detección de amenazas
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
-  text: Lee sobre temas relacionados con la seguridad en el blog de los Security Labs
-    de Datadog.
-- link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
-  text: Participar en una sesión interactiva para mejorar tu seguridad y la detección
-    de amenazas
+  text: Lea sobre temas relacionados con la seguridad en el blog de Security Labs
+    de Datadog
 - link: https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/
   tag: Blog
-  text: Mejorar la detección de amenazas en AWS con Stratus Red Team
+  text: Mejore la detección de amenazas en AWS con Stratus Red Team
 - link: https://www.datadoghq.com/blog/kubernetes-security-best-practices/
   tag: Blog
-  text: Prácticas recomendadas para proteger las aplicaciones Kubernetes
+  text: Mejores prácticas para asegurar aplicaciones de Kubernetes
 - link: https://www.datadoghq.com/blog/securing-cloud-native-infrastructure-network-perimeter/
   tag: Blog
-  text: Prácticas recomendadas para la seguridad perimetral de la red en entornos
-    nativos en la nube
+  text: Mejores prácticas para la seguridad del perímetro de red en entornos nativos
+    de la nube
 - link: https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/
   tag: Blog
-  text: Prácticas recomendadas para la seguridad de los datos en infraestructuras
-    nativas en la nube
+  text: Mejores prácticas para la seguridad de datos en infraestructura nativa de
+    la nube
 - link: https://www.datadoghq.com/blog/chaos-engineering-for-security/
   tag: Blog
-  text: Experimentos de ingeniería del caos centrados en la seguridad para la nube
+  text: Experimentos de ingeniería del caos enfocados en la seguridad para la nube
 - link: https://www.datadoghq.com/blog/datadogs-approach-devsecops/
   tag: Blog
-  text: Enfoque de Datadog sobre el desarrollo, la seguridad y las operaciones (DevSecOps)
+  text: El enfoque de Datadog para DevSecOps
 - link: https://www.datadoghq.com/blog/investigate-denial-of-service-attacks/
   tag: Blog
-  text: Investigación de un ataque de denegación de servicio complejo
+  text: Investigación de un ataque complejo de denegación de servicio
 - link: https://www.datadoghq.com/blog/optimize-and-secure-azure-functions/
   tag: Blog
-  text: Consejos para optimizar y proteger funciones de Azure
+  text: Consejos para optimizar y proteger Azure Functions
 - link: https://www.datadoghq.com/blog/datadog-detection-as-code/
   tag: Blog
-  text: Cómo utilizamos Datadog para la detección como código
+  text: Cómo usamos Datadog para la detección como código
 - link: https://www.datadoghq.com/blog/lateral-movement-entra-id-azure/
   tag: Blog
-  text: Detectar el movimiento lateral en entornos Azure híbridos
+  text: Detecte el movimiento lateral en entornos híbridos de Azure
 - link: https://www.datadoghq.com/blog/secrets-management/
   tag: Blog
-  text: Identificar los secretos que hacen que tu entorno de nube sea más vulnerable
+  text: Identifique los secretos que hacen que su entorno en la nube sea más vulnerable
     a un ataque
 - link: https://www.datadoghq.com/blog/cloud-security-roundup-infrastructure-identity/
   tag: Blog
-  text: 'Resumen de guías e investigación sobre seguridad en la nube: Infraestructura
-    y acceso'
+  text: 'Resumen de investigación y guías de Cloud Security: Infraestructura y acceso'
 - link: https://www.datadoghq.com/blog/cloud-security-roundup-devsecops-threat-detection-ai/
   tag: Blog
-  text: 'Resumen de guías e investigación sobre seguridad en la nube: DevSecOps, detección
+  text: 'Resumen de investigación y guías de Cloud Security: DevSecOps, detección
     de amenazas e IA'
 - link: https://www.datadoghq.com/blog/key-security-metrics/
   tag: Blog
-  text: Métricas clave para medir la seguridad de tu organización
+  text: Métricas clave para medir la postura de seguridad de su organización
 - link: https://www.datadoghq.com/blog/datadogs-approach-sre-security/
   tag: Blog
-  text: 'Seguridad y SRE: Enfoque combinado de Datadog para afrontar los retos de
-    seguridad y fiabilidad'
+  text: 'Seguridad y SRE: Cómo el enfoque combinado de Datadog busca abordar los desafíos
+    de seguridad y confiabilidad'
+- link: https://www.datadoghq.com/blog/cloud-security-roundup-2025
+  tag: Blog
+  text: 'Resumen de seguridad en la nube de 2025: Cómo los atacantes abusaron de identidades,
+    cadenas de suministro e IA'
+- link: https://www.datadoghq.com/blog/nodejs-vulnerability-apm
+  tag: Blog
+  text: Mitigación para la vulnerabilidad de denegación de servicio en Node.js que
+    afecta a Datadog APM
+- link: https://www.datadoghq.com/blog/devsecops-2026-study-learnings
+  tag: Blog
+  text: Aprendizajes clave del estudio State of DevSecOps 2026
+- link: https://www.datadoghq.com/blog/datadog-observability-data-and-security
+  tag: Blog
+  text: Cómo utiliza Datadog los datos de observabilidad para proteger su plataforma
+- link: https://www.datadoghq.com/blog/ai-powered-threat-analysis
+  tag: Blog
+  text: 'IA en investigaciones de seguridad en la nube: el papel de UEBA y telemetría
+    mejorada'
+- link: https://www.datadoghq.com/blog/ci-cd-threat-matrix/
+  tag: Blog
+  text: 'Seguridad de CI/CD: modelado de amenazas mediante una matriz de amenazas
+    al estilo MITRE'
+- link: https://www.datadoghq.com/blog/secure-your-github-ecosystem/
+  tag: Blog
+  text: 'Seguridad en CI/CD: Cómo proteger su ecosistema de GitHub'
+- link: https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance
+  tag: Notas de la versión
+  text: ¡Eche un vistazo a los últimos lanzamientos de Datadog Security! (Se requiere
+    inicio de sesión en la aplicación).
 title: Datadog Security
 ---
+## Descripción general {#overview}
 
-## Información general
-
-Aporta velocidad y escala tus operaciones de seguridad de producción. Datadog Security ofrece una detección de amenazas en tiempo real y auditorías de configuración continuas en aplicaciones, hosts, contenedores e infraestructura en la nube. Junto con la mayor plataforma de observabilidad de Datadog, Datadog Security aporta una integración sin precedentes entre la seguridad y las operaciones, alineada con los objetivos compartidos de tu organización.
+Aporte velocidad y escala a sus operaciones de seguridad de producción. Datadog Security ofrece detección de amenazas en tiempo real y auditorías de configuración continuas en aplicaciones, hosts, contenedores e infraestructura en la nube. Junto con la plataforma de observabilidad más amplia de Datadog, Datadog Security brinda una integración sin precedentes entre la seguridad y las operaciones, alineada con los objetivos compartidos de su organización.
 
 Datadog Security incluye: 
 - [Cloud SIEM](#cloud-siem)
 - [Code Security](#code-security)
 - [Cloud Security](#cloud-security)
 - [App and API Protection](#app-and-api-protection)
+- [AI Guard](#ai-guard)
 - [Workload Protection](#workload-protection)
 - [Sensitive Data Scanner](#sensitive-data-scanner)
+ 
+Para obtener más información, eche un vistazo a la visita guiada del producto de 30 segundos [14].
 
-Para obtener más información, consulta la [visita guiada del producto de 30 segundos][14].
+## Cloud SIEM {#cloud-siem}
 
-## Cloud SIEM
+[Cloud SIEM][4] (Security Information and Event Management) detecta amenazas en tiempo real para su aplicación e infraestructura, como un ataque dirigido, una IP que se comunica con sus sistemas y coincide con una lista, o una configuración insegura. Cloud SIEM funciona con [Datadog Log Management][5]. Al combinar estas áreas, puede [automatizar la remediación de amenazas detectadas por Datadog Cloud SIEM][6] para acelerar su flujo de trabajo de respuesta a amenazas. Consulte la [visita guiada](https://www.datadoghq.com/guided-tour/security/cloud-siem/) dedicada para ver más.
 
-[Cloud SIEM][4] (Security Information and Event Management) detecta amenazas en tiempo real para tu aplicación y tu infraestructura, como un ataque dirigido, una IP que se comunica con tus sistemas y que coincide con una lista de información sobre amenazas o una configuración insegura. Cloud SIEM utiliza la tecnología de [Datadog Log Management][5]. Con estas áreas combinadas, puedes [automatizar la corrección de las amenazas detectadas por Datadog Cloud SIEM][6] para acelerar tu flujo de trabajo de respuesta a amenazas. Para obtener más información, consulta la [visita guiada](https://www.datadoghq.com/guided-tour/security/cloud-siem/).
+{{< img src="security/security_monitoring/cloud_siem_overview_2025.png" alt="La página de inicio de Cloud SIEM que muestra la sección Security Overview con widgets para señales importantes, actores sospechosos, recursos afectados, threat intel y tendencias de señales." width="100%">}}
 
-{{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="Página principal de Cloud SIEM que muestra la sección de información general de seguridad con widgets para señales importantes, actores sospechosos, recursos afectados, información sobre amenazas y tendencias de señales" width="100%">}}
+## Code Security {#code-security}
 
-## Code Security
+[Code Security][20] escanea su código propio y las bibliotecas de código abierto utilizadas en sus aplicaciones, tanto en sus repositorios como en los servicios en ejecución, proporcionando visibilidad de extremo a extremo desde el desarrollo hasta la producción. Abarca las siguientes capacidades:
 
-[Code Security][20] analiza tu código de origen y tus bibliotecas de código abierto utilizados en tus aplicaciones, tanto en tus repositorios como en tus servicios en ejecución, proporcionando visibilidad de extremo a extremo desde el desarrollo hasta la producción. Abarca las siguientes capacidades:
+- [Static Code Analysis (SAST)][27] para identificar problemas de seguridad y calidad en su código propio
+- [Software Composition Analysis (SCA)][28] para identificar dependencias de código abierto tanto en sus repositorios como en sus servicios
+- [Runtime Code Analysis (IAST)][29] para identificar vulnerabilidades en el código propio dentro de sus servicios
+- [Secret Scanning][30] para identificar y validar secretos filtrados (en vista previa)
 
-- [Static Code Analysis (SAST)][27] para identificar problemas de seguridad y calidad en el código de origen
-- [Software Composition Analysis (SCA)][28] para identificar dependencias de código abierto tanto en tus repositorios como en tus servicios
-- [Runtime Code Analysis (IAST)][29] para identificar vulnerabilidades en el código de origen dentro de tus servicios
-- [Secret Scanning][30] para identificar y validar secretos filtrados (en Vista previa)
+Con integraciones de IDE, comentarios en solicitudes de extracción y puertas de CI/CD, Code Security ayuda a los equipos a implementar DevSecOps en toda la organización:
+- **Desarrolladores:** detección temprana de vulnerabilidades, mejoras en la calidad del código, desarrollo más rápido ya que los desarrolladores pasan menos tiempo depurando y aplicando parches.
+- **Administradores de seguridad:** postura de seguridad mejorada, gestión de parches optimizada en respuesta a alertas tempranas de vulnerabilidad y monitoreo de cumplimiento.
+- **Ingenieros de confiabilidad del sitio (SRE):** verificaciones de seguridad automatizadas en todo el flujo de trabajo de CI/CD, cumplimiento de seguridad y resiliencia del sistema. SAST reduce la carga manual para los SRE y garantiza que cada versión se pruebe exhaustivamente en busca de vulnerabilidades.  
 
-Con las integraciones de IDE, los comentarios de las solicitudes pull y las puertas de Continuous Integration Continuous Delivery, Code Security ayuda a los equipos a implementar DevSecOps en toda la organización:
-- **Desarrolladores:** detección temprana de vulnerabilidades, mejoras en la calidad del código, desarrollo más rápido, ya que los desarrolladores pasan menos tiempo depurando y parcheando.
-- **Administradores de seguridad:** postura de seguridad mejorada, gestión de parches mejorada en respuesta a alertas tempranas de vulnerabilidad y monitorización del cumplimiento.
-- **Ingenieros de fiabilidad del sitio (SRE):** checks de seguridad automatizadas a través del proceso de Continuous Integration Continuous Delivery, cumplimiento de la seguridad y resistencia del sistema. Las pruebas de seguridad de aplicaciones estáticas (SAST) reducen la sobrecarga manual de los SRE y garantiza que cada versión se someta a tests exhaustivos para detectar vulnerabilidades.  
+{{< img src="code_security/gitlab_integration_light.png" alt="Un hallazgo de SAST dentro de un repositorio de GitLab" width="100%">}}
 
-{{< img src="code_security/gitlab_integration_light.png" alt="Un resultado de pruebas de seguridad de aplicaciones estáticas (SAST) en un resultado de GitLab" width="100%">}}
+## Cloud Security {#cloud-security}
 
-## Cloud Security
+[Cloud Security][10] ofrece detección de amenazas en tiempo real y auditorías de configuración continuas en toda su infraestructura en la nube, todo en una vista unificada para una colaboración fluida y una remediación más rápida. Impulsados por datos de observabilidad, los equipos de seguridad pueden determinar el impacto de una amenaza rastreando el flujo del ataque e identificar al propietario del recurso donde se activó una vulnerabilidad.
 
-[Cloud Security][10] ofrece una detección de amenazas en tiempo real y auditorías continuas de configuración en toda tu infraestructura de nube, todo ello en una vista unificada para una colaboración ininterrumpida y una corrección más rápida. Gracias a los datos de observabilidad, los equipos de seguridad pueden determinar el impacto de una amenaza rastreando el flujo completo del ataque e identificar al propietario del recurso en el que se activó una vulnerabilidad.
+Cloud Security incluye [Workload Protection][12], [Misconfigurations][11], [Identity Risks][15] y [Vulnerabilities][16]. Para obtener más información, consulte la visita guiada dedicada [13].
 
-Cloud Security incluye [Workload Protection][12], [Misconfigurations][11], [Identity Risks][15] y [Vulnerabilities][16]. Para obtener más información, consulta la [visita guiada][13].
+{{< img src="security/csm/csm_overview_3.png" alt="El Security Inbox en la descripción general de Cloud Security muestra una lista de problemas de seguridad priorizados." width="100%">}}
 
-{{< img src="security/csm/csm_overview_3.png" alt="El buzón de seguridad en la información general de Cloud Security muestra una lista de los problemas de seguridad organizada por prioridades" width="100%">}}
+Para comenzar con Datadog Security, navegue a la página [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][9] en Datadog, que tiene información detallada para una o varias configuraciones, o siga las secciones de introducción a continuación para obtener más información sobre cada área de la plataforma.
 
-Para empezar a utilizar Datadog Security, ve a la página [**Seguridad** > **Configuración**][9] en Datadog, que contiene información detallada para usuarios individuales o configuraciones múltiples, o, para obtener más información sobre cada área de la plataforma, consulta las siguientes secciones que te guían para empezar a utilizar las funciones.
+##  App and API Protection {#app-and-api-protection}
 
-##  App and API Protection
+Datadog [App and API Protection (AAP)][1] proporciona observabilidad sobre ataques a nivel de aplicación que tienen como objetivo explotar vulnerabilidades a nivel de código, como Server-Side-Request-Forgery (SSRF), inyección SQL, Log4Shell y Reflected Cross-Site-Scripting (XSS). AAP aprovecha [Datadog APM][2], el [Datadog Agent][3] y reglas de detección en la aplicación para detectar amenazas en su entorno de aplicaciones. Consulte la [visita guiada](https://www.datadoghq.com/guided-tour/security/application-security-management/) del producto para ver más.
 
-[App and API Protection (AAP)][1] de Datadog proporciona una observabilidad de los ataques a nivel de aplicación, cuyo objetivo es explotar vulnerabilidades a nivel de código, como Server-Side-Request-Forgery (SSRF), Inyección SQL, Log4Shell y Reflected Cross-Site-Scripting (XSS). AAP aprovecha [Datadog APM][2], el [Datadog Agent][3] y las reglas de detección en la aplicación para detectar amenazas en el entorno de tu aplicación. Para obtener más información, consulta la [visita guiada] del producto (https://www.datadoghq.com/guided-tour/security/application-security-management/).
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="Un panel de señales de seguridad en Datadog, que muestra flujos de ataque y gráficos de llama." width="75%">}}
 
-{{< img src="/security/application_security/app-sec-landing-page.png" alt="Panel de señales de seguridad en Datadog, que muestra flujos de ataque y gráficas de llamas" width="75%">}}
+## AI Guard {#ai-guard}
 
-## Workload Protection
+[AI Guard][35] inspecciona, bloquea y gobierna el comportamiento de la IA en tiempo real. Se integra en línea con su aplicación o agente de IA para proteger contra la inyección de prompt, el jailbreaking y los ataques de exfiltración de datos confidenciales, utilizando Protección de Prompt, Protección de Herramientas y Protección de Datos Confidenciales. Estas protecciones funcionan para cualquier modelo de IA de destino, incluidos OpenAI, Anthropic, Bedrock, VertexAI y Azure.
 
-[Workload Protection][26] monitoriza la actividad de archivos, redes y procesos en todo tu entorno para detectar amenazas a tu infraestructura en tiempo real. Como parte de la plataforma Datadog, puedes combinar la detección de amenazas en tiempo real de la Protección de cargas de trabajo con métricas, logs, trazas (traces) y otros datos de telemetría para ver el contexto completo de un posible ataque a tus cargas de trabajo.
+{{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="Explorador de reglas de detección de AI Guard" width="100%">}}
 
-- Bloquea de forma proactiva las amenazas con [Active Protection][31].
-- Gestiona [reglas de detección][32] predefinidas y personalizadas.
-- Configura [notificaciones][33] en tiempo real.
-- Investiga y corrige [señales de seguridad][34].
+## Workload Protection {#workload-protection}
 
-## Sensitive Data Scanner
+[Workload Protection][26] monitorea la actividad de archivos, red y procesos en todo su entorno para detectar amenazas en tiempo real a su infraestructura. Como parte de la plataforma Datadog, puede combinar la detección de amenazas en tiempo real de Workload Protection con métricas, logs, trazas y otra telemetría para ver el contexto completo que rodea a un posible ataque en sus cargas de trabajo.
 
-[Sensitive Data Scanner][24] puede ayudar a prevenir fugas de datos confidenciales y limitar los riesgos de incumplimiento detectando, clasificando y, opcionalmente, redactando los datos confidenciales. Puede analizar en busca de datos confidenciales en tus datos de telemetría, como logs de aplicación, tramos (spans) APM, eventos RUM y eventos de Event Management. También puede analizar en busca de información confidencial en tus recursos de almacenamiento en la nube.
+- Bloquee amenazas de forma proactiva con [Automated response][31].
+- Administre [detection rules] listas para usar y personalizadas [32].
+- Configure [notifications] en tiempo real [33].
+- Investigue y remedie [security signals][34].
 
-Después de [configurar Sensitive Data Scanner][25], utiliza la página de resultados para ver los detalles de los resultados de datos confidenciales que se han identificado, de modo que puedas clasificar, investigar y corregir los resultados.
+## Sensitive Data Scanner {#sensitive-data-scanner}
 
-{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="Página de resumen que muestra información general sobre hallazgos de información confidencial, desglosados por prioridad" style="width:100%;" >}}
+[Sensitive Data Scanner][24] puede ayudar a prevenir fugas de datos sensibles y limitar los riesgos de incumplimiento al descubrir, clasificar y, opcionalmente, redactar datos sensibles. Puede buscar datos confidenciales en sus datos de telemetría, como registros de aplicaciones, spans de APM, eventos de RUM y eventos de Event Management. También puede buscar información confidencial dentro de sus recursos de almacenamiento en la nube. 
 
-## Referencias adicionales
+Después de [configurar Sensitive Data Scanner][25], utilice la página {{< ui >}}Findings{{< /ui >}} para ver los detalles de los hallazgos de datos sensibles que se han identificado, de modo que pueda clasificar, investigar y remediar los hallazgos.
+
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="La página de resumen que muestra una descripción general de los hallazgos sensibles desglosados por prioridad" style="width:100%;" >}}
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -193,7 +230,8 @@ Después de [configurar Sensitive Data Scanner][25], utiliza la página de resul
 [28]: /es/security/code_security/software_composition_analysis/
 [29]: /es/security/code_security/iast/
 [30]: /es/security/code_security/secret_scanning/
-[31]: /es/security/workload_protection/guide/active-protection
-[32]: /es/security/workload_protection/workload_security_rules
+[31]: /es/security/workload_protection/respond_and_report/
+[32]: /es/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
 [33]: /es/security/notifications/
 [34]: /es/security/workload_protection/security_signals
+[35]: /es/security/ai_guard/

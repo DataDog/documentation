@@ -31,6 +31,10 @@
     "name": "Actions Datastores",
     "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
   },
+  "agent-health": {
+    "name": "Agent Health",
+    "description": "View Agent Health issues reported for node Agents and Cluster Agents."
+  },
   "agent-observability": {
     "name": "Agent Observability",
     "description": "Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations."
@@ -67,6 +71,10 @@
     "name": "CI Visibility GitHub Accounts",
     "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
   },
+  "ci-visibility-logs": {
+    "name": "CI Visibility Logs",
+    "description": "Send CI job logs over HTTP for CI Visibility."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
@@ -96,16 +104,16 @@
     "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
-    "name": "Case Management",
-    "description": "**Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.\n\nView and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
+    "name": "Work Management",
+    "description": "View and manage work items and projects within Work Management. API paths, resource types, and permissions retain `case` terminology. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
   },
   "case-management-attribute": {
-    "name": "Case Management Attribute",
-    "description": "View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Attribute",
+    "description": "View and configure custom attributes within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "case-management-type": {
-    "name": "Case Management Type",
-    "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Type",
+    "description": "View and configure work item types within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "change-management": {
     "name": "Change Management",
@@ -113,7 +121,7 @@
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS and GitHub cloud authentication mappings for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
@@ -159,10 +167,6 @@
     "name": "DEM",
     "description": "Manage Digital Experience Monitoring journeys."
   },
-  "dora-metrics": {
-    "name": "DORA Metrics",
-    "description": "Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
-  },
   "dashboard-lists": {
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
@@ -194,6 +198,10 @@
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
+  },
+  "delivery-performance": {
+    "name": "Delivery Performance",
+    "description": "Search, send, or delete events for Delivery Performance (formerly DORA Metrics) to measure and improve your software delivery performance. See the [Delivery Performance page](https://docs.datadoghq.com/delivery_performance/) for more information.\n\n**Note**: Delivery Performance is not available in the US1-FED site."
   },
   "deployment-gates": {
     "name": "Deployment Gates",
@@ -230,6 +238,10 @@
   "execution-policy": {
     "name": "Execution Policy",
     "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
+  },
+  "experiments": {
+    "name": "Experiments",
+    "description": "Create and manage experiments, metrics, subject types, SQL models, and protocols."
   },
   "fastly-integration": {
     "name": "Fastly Integration",
@@ -291,6 +303,10 @@
     "name": "Logs",
     "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
   },
+  "logs-archive-searches": {
+    "name": "Logs Archive Searches",
+    "description": "Archive Search queries logs directly from long-term storage archives without prior\nrehydration and charges only for the data scanned.\n\nA search runs in one of two modes. By default, it scans the archive and retains up to\n100,000 matching logs for 24 hours on a dedicated results page. Include a `rehydration`\nobject to run a Search & Rehydration instead, which retains the matches for a longer\ncustom retention period and makes them available beyond Log Explorer, such as in Dashboards and Notebooks.\n\nA search requires the `logs_write_historical_view` or `logs_write_archive_search`\npermission. Rehydration requires `logs_write_historical_view`."
+  },
   "logs-archives": {
     "name": "Logs Archives",
     "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
@@ -326,10 +342,6 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
-  },
-  "network-health-insights": {
-    "name": "Network Health Insights",
-    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
   },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
@@ -405,7 +417,7 @@
   },
   "rum-operations": {
     "name": "RUM Operations",
-    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their strong links\nto features. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
+    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their links\nto journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
   },
   "rum-remote-config": {
     "name": "RUM Remote Config",

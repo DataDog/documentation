@@ -1,6 +1,6 @@
 ---
 title: Language Mismatch
-description: Learn about Datadog's Language Mismatch evaluation.
+description: Learn about Datadog's Language Mismatch evaluator.
 further_reading:
 - link: "/llm_observability/quickstart/terms/"
   tag: "Documentation"
