@@ -11,23 +11,27 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 title: Configurer les Agents
 ---
-Utilisez [Fleet Automation][3] pour déployer et gérer la configuration du Datadog Agent à grande échelle. Appliquez des modifications de configuration via des workflows guidés dans l'interface utilisateur ou avec des fichiers YAML personnalisés. Pour les paramètres de l'Agent que vous pouvez gérer avec Fleet Automation, consultez [Supported datadog.yaml Configuration Fields][11].
+Utilisez [Fleet Automation][3] pour déployer et gérer la configuration du Datadog Agent à grande échelle. Appliquez des modifications de configuration via des workflows guidés dans l'interface utilisateur ou avec des fichiers YAML personnalisés. Vous pouvez également appliquer des mises à jour de configuration [via l'API Fleet Automation](#configure-agents-with-the-api). Pour les paramètres de l'Agent que vous pouvez gérer avec Fleet Automation, consultez [Supported datadog.yaml Configuration Fields][11].
 
-## Prérequis {#prerequisites}
+Vous pouvez configurer :
 
-- [Remote Configuration][9] activée pour votre organisation
+* [Agents s'exécutant sur des hosts](#configure-host-based-agents)
+* (En version préliminaire) [Agents s'exécutant dans des clusters Kubernetes gérés par le Datadog Operator](#configure-the-agent-on-kubernetes)
+
+## Configurez les Agents exécutés sur des hosts {#configure-host-based-agents}
+
+### Prérequis {#prerequisites}
+
+- [Remote Configuration][9] activée pour votre organisation et la clé d'API de l'Agent
+- [Remote updates][12] activées sur chaque Agent de VM cible (`remote_updates: true`)
 - Agent version 7.73+ pour la configuration de l'Agent et du collecteur OTel (version 7.76+ pour la configuration des intégrations et des secrets). Pour mettre à niveau vos Agents, consultez [Mettre à niveau les Agents][10].
 - VM Linux installées avec le script d'installation ou le rôle Ansible Datadog, ou VM Windows
-
-{{< callout url="https://www.datadoghq.com/product-preview/configure-agent-kubernetes-operator/" header="Rejoignez la Preview !" >}}
-La Remote Configuration des Agents dans les charges de travail conteneurisées est en version préliminaire. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
-{{< /callout >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/" header="Rejoignez la Preview !" >}}
 La gestion des tags du Datadog Agent avec Fleet Automation est en version préliminaire. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
 {{< /callout >}}
 
-## Configurer plusieurs Agents {#configure-multiple-agents}
+### Configurez plusieurs Agents {#configure-multiple-agents}
 
 1. Dans Fleet Automation, ouvrez l'onglet [Configuration][1] et cliquez sur {{< ui >}}Configure Agents{{< /ui >}}.
 1. Définissez le périmètre de la configuration pour les Agents cibles. Filtrez par informations du host ou par tags pour cibler un groupe spécifique.
@@ -41,7 +45,7 @@ La gestion des tags du Datadog Agent avec Fleet Automation est en version préli
 1. Examinez le plan de déploiement pour confirmer les Agents inclus dans le périmètre et les paramètres de déploiement, tels que la simultanéité du déploiement.
 1. Cliquez sur {{< ui >}}Deploy Configuration{{< /ui >}} pour démarrer le déploiement et suivre sa progression depuis la [Deployments page][2].
 
-## Modifier la configuration d'un seul Agent {#edit-the-configuration-of-a-single-agent}
+### Modifiez la configuration d'un seul Agent {#edit-the-configuration-of-a-single-agent}
 
 1. Accédez à [Fleet View][3]. 
 
@@ -58,6 +62,33 @@ La gestion des tags du Datadog Agent avec Fleet Automation est en version préli
 L'exemple ci-dessous montre le champ `logs_enabled` modifié de `false` à `true`, ce qui active la collecte des logs sur l'Agent après le déploiement.
 
 {{< img src="/agent/fleet_automation/agent_remote_management_single_agent_config2.png" alt="Modifiez et déployez la configuration de l'Agent." style="width:90%;" >}}
+
+## Configurez l'Agent sur Kubernetes {#configure-the-agent-on-kubernetes}
+
+{{< callout url="https://www.datadoghq.com/product-preview/configure-agent-kubernetes-operator/" header="Rejoignez la Preview !" >}}
+La configuration des Agents Kubernetes avec le Datadog Operator dans Fleet Automation est en version préliminaire. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
+{{< /callout >}}
+
+Utilisez Fleet Automation pour modifier la ressource personnalisée `DatadogAgent` d'un cluster Kubernetes géré par le Datadog Operator. Par exemple, vous pouvez activer ou ajuster APM, la collecte de logs et la surveillance des processus sans appliquer manuellement un manifeste mis à jour au cluster.
+
+### Prérequis {#prerequisites-1}
+
+- Le Datadog Agent est en cours d'exécution dans le cluster Kubernetes.
+- Le Datadog Operator v1.27 ou version ultérieure gère le déploiement de l'Agent.
+- Remote Configuration est activée pour la clé d'API utilisée par l'Agent.
+- L'Operator est configuré pour accepter les mises à jour à distance. Pour connaître les paramètres requis pour l'Operator, les clés d'API et d'application, ainsi que les exigences relatives au nom du cluster, consultez [Prérequis pour la vue Kubernetes][13].
+
+### Modifiez la configuration du cluster {#edit-the-cluster-configuration}
+
+1. Accédez à [Fleet View][3].
+1. Sous {{< ui >}}View by infra type{{< /ui >}}, passez à la vue Kubernetes.
+1. Sélectionnez le cluster que vous souhaitez configurer, puis ouvrez l'onglet {{< ui >}}Configuration{{< /ui >}}.
+1. Cliquez sur {{< ui >}}Edit{{< /ui >}} et mettez à jour la configuration `DatadogAgent`.
+1. Examinez les modifications, puis cliquez sur {{< ui >}}Deploy Changes{{< /ui >}}.
+
+Fleet Automation lance la modification et Remote Configuration la transmet au cluster. Le Datadog Operator met à jour la ressource `DatadogAgent` et déploie la configuration sur les pods de l'Agent. Si le déploiement ne s'effectue pas correctement, l'Operator restaure automatiquement la configuration précédente.
+
+**Remarque** : Fleet Automation ne prend pas en charge la modification des valeurs des charts Helm.
 
 ## Configurer les Agents avec l'API {#configure-agents-with-the-api}
 
@@ -103,3 +134,5 @@ Pour obtenir des instructions sur l'utilisation de dépôts miroirs ou isolés (
 [9]: /fr/agent/guide/setup_remote_config
 [10]: /fr/agent/fleet_automation/upgrade_agents/
 [11]: /fr/agent/fleet_automation/supported_datadog_yaml_fields/
+[12]: /fr/agent/guide/setup_remote_config/#enable-remote-agent-management
+[13]: /fr/agent/fleet_automation/fleet_view/#prerequisites-for-kubernetes-view

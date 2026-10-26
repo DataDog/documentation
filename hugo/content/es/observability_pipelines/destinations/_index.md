@@ -109,7 +109,7 @@ La siguiente tabla enumera los destinos y campos que admiten la sintaxis de plan
 | [Datadog Archives]  | Prefijo                              | El Worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe los registros allí.                                |
 | Azure Blob        | Prefijo                              | El Worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe los registros allí.                                |
 | Elasticsearch     | Índice (modo Bulk)<br><br>Tipo, conjunto de datos, espacio de nombres (modo Data streams) | El Worker escribe los registros en el índice `datadog-op`.<br><br>El Worker descarta los registros si alguno de estos campos no se puede resolver. |
-| Google Chronicle  | Tipo de registro                            | Utiliza el tipo de registro `DATADOG` de forma predeterminada.                                                                                            |
+| Google SecOps     | Tipo de registro                            | De forma predeterminada, se usa `DATADOG` como tipo de registro.                                                                                            |
 | Google Cloud      | Prefijo                              | El Worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe los registros allí.                                |
 | Opensearch        | Índice (modo Bulk)<br><br>Tipo, conjunto de datos, espacio de nombres (modo Data streams) | El Worker escribe los registros en el índice `datadog-op`.<br><br>El Worker descarta los registros si alguno de estos campos no se puede resolver. |
 | Prometheus*        | Tenant ID                           | El Worker descarta la métrica.  |
@@ -127,7 +127,7 @@ Si desea enrutar registros según el campo de ID de aplicación del registro (po
 
 #### Campos de evento {#event-fields}
 
-Use `{{ <field_name> }}` para acceder a campos individuales de registro de eventos. Por ejemplo:
+Use `{{ <field_name> }}` para acceder a los campos individuales de los eventos de registro. Por ejemplo:
 
 ```
 {{ application_id }}
