@@ -17,7 +17,7 @@ private: true
 
 Infrastructure modes determine which infrastructure monitoring capabilities the Datadog Agent enables on a host. Use these modes to match the Agent's behavior to the host's role: full infrastructure monitoring, basic system resource metrics, no infrastructure monitoring, or End User Device monitoring.
 
-Selecting an infrastructure mode controls Agent behavior; it does not enroll your organization in a product or change your subscription. For product capabilities and access requirements, see [Infrastructure Basic][32] or [End User Device Monitoring][33].
+Selecting an infrastructure mode controls Agent behavior; it does not enroll your organization in a product or change your subscription. For End User Device Monitoring capabilities and access requirements, see [End User Device Monitoring][32].
 
 ## Available modes
 
@@ -42,8 +42,6 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 : The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. If you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
 
 ### Basic
-
-For product capabilities, limitations, and access requirements, see [Infrastructure Basic][32].
 
 `basic`
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
@@ -86,7 +84,7 @@ To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Config
   - Windows Crash Detection
   - Network Path Monitoring
 
-: For full descriptions, see [Key capabilities][18]. For device-specific requirements and installation instructions, see [Set up End User Device Monitoring][34].
+: For full descriptions, see [Key capabilities][18]. For device-specific requirements and installation instructions, see [Set up End User Device Monitoring][33].
 
 ### None
 
@@ -232,6 +230,5 @@ To verify the infrastructure mode set on your hosts:
 [29]: /integrations/vsphere/#setup
 [30]: /integrations/proxmox/#setup
 [31]: /integrations/nutanix/#setup
-[32]: /infrastructure/basic/
-[33]: /infrastructure/end_user_device_monitoring/
-[34]: /infrastructure/end_user_device_monitoring/setup/
+[32]: /infrastructure/end_user_device_monitoring/
+[33]: /infrastructure/end_user_device_monitoring/setup/

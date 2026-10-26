@@ -3385,12 +3385,6 @@ menu:
       url: infrastructure/list/
       parent: hosts
       weight: 1
-    - name: Infrastructure Basic
-      identifier: infrastructure_basic
-      url: infrastructure/basic/
-      parent: infrastructure_heading
-      weight: 55000
-      pre: server
     - name: Containers
       url: containers/
       identifier: containers
