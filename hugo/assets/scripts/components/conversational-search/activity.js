@@ -166,7 +166,7 @@ export function reduceActivity(state, action, now = Date.now()) {
         case 'done':
             return { ...endResearch(state, now), phase: 'done', steps: settle(state.steps) };
         case 'error':
-            return { ...endResearch(state, now), phase: 'error', steps: settle(state.steps, 'cancelled') };
+            return { ...endResearch(state, now), phase: 'error', steps: settle(state.steps, 'failed') };
         case 'stopped':
             return { ...endResearch(state, now), phase: 'stopped', steps: settle(state.steps, 'cancelled') };
         default:
@@ -176,7 +176,29 @@ export function reduceActivity(state, action, now = Date.now()) {
 
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
+// Steps cut short by an error or by the reader stopping the answer.
+function describeInterruptedStep(step) {
+    const failed = step.status === 'failed';
+    switch (step.kind) {
+        case 'search': {
+            const search = step.query ? `Search for “${step.query}”` : 'Search';
+            return `${search} ${failed ? "didn't finish" : 'stopped'}`;
+        }
+        case 'read':
+            return failed ? "Reading didn't finish" : 'Reading stopped';
+        case 'write':
+            return failed ? 'Answer interrupted' : 'Writing stopped';
+        case 'understand':
+            return failed ? "Couldn't finish understanding your question" : 'Stopped';
+        default:
+            return step.label || '';
+    }
+}
+
 export function describeStep(step) {
+    if ((step.status === 'failed' || step.status === 'cancelled') && !step.resolved) {
+        return describeInterruptedStep(step);
+    }
     const active = step.status === 'active';
     switch (step.kind) {
         case 'understand':
@@ -260,6 +282,7 @@ export class ActivityTimeline {
         this.userToggled = false;
         this.stepNodes = new Map();
         this.lastAnnounced = '';
+        this.announcedThinking = false;
 
         timelineCount += 1;
         const bodyId = `conv-search-activity-${timelineCount}`;
@@ -318,6 +341,14 @@ export class ActivityTimeline {
         this.expanded = expanded;
         this.root.classList.toggle('is-collapsed', !expanded);
         this.header.setAttribute('aria-expanded', String(expanded));
+        // Keeps the collapsed page chips out of the tab order and the accessibility tree.
+        if (expanded) {
+            this.body.removeAttribute('inert');
+            this.body.removeAttribute('aria-hidden');
+        } else {
+            this.body.setAttribute('inert', '');
+            this.body.setAttribute('aria-hidden', 'true');
+        }
     }
 
     summary() {
@@ -349,9 +380,30 @@ export class ActivityTimeline {
         this.timer.textContent = researching ? `${researchSeconds(this.state)}s` : '';
         this.meta.textContent = researching || phase === 'error' ? '' : summarizeActivity(this.state);
 
-        if (headline !== this.lastAnnounced && !headline.startsWith('Researched')) {
-            this.live.textContent = headline;
-            this.lastAnnounced = headline;
+        const announcement = this.announcement(headline);
+        if (announcement && announcement !== this.lastAnnounced) {
+            this.live.textContent = announcement;
+            this.lastAnnounced = announcement;
+        }
+    }
+
+    // Screen readers hear each research step once and when the answer is ready. Errors are
+    // announced by the error message itself (role="alert").
+    announcement(headline) {
+        switch (this.state.phase) {
+            case 'writing':
+                return 'Writing the answer';
+            case 'done':
+                return 'Answer ready';
+            case 'stopped':
+                return 'Stopped';
+            case 'error':
+                return '';
+            default:
+                if (headline !== 'Thinking') return headline;
+                if (this.announcedThinking) return '';
+                this.announcedThinking = true;
+                return headline;
         }
     }
 

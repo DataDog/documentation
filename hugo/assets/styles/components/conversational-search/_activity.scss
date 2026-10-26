@@ -4,6 +4,8 @@ $conv-activity-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 $conv-error-text: #8a2a2a;
 $conv-error-border: #f3c4c4;
 $conv-error-bg: #fff6f6;
+// Text accent that keeps at least 4.5:1 contrast on the tinted dialog background.
+$conv-activity-accent-text: #632ca6;
 
 .conv-search-turn {
     gap: 12px;
@@ -172,7 +174,7 @@ $conv-error-bg: #fff6f6;
 .conv-search-activity-timer {
     flex-shrink: 0;
     font-size: 13px;
-    color: $conv-neutral-500;
+    color: $conv-neutral-600;
     white-space: nowrap;
 
     &:empty {
@@ -192,7 +194,7 @@ $conv-error-bg: #fff6f6;
 .conv-search-activity-chevron {
     display: inline-flex;
     flex-shrink: 0;
-    color: $conv-neutral-500;
+    color: $conv-neutral-600;
     transition: transform 0.25s $conv-activity-ease;
 
     .conv-search-activity.is-collapsed & {
@@ -283,8 +285,14 @@ $conv-error-bg: #fff6f6;
     }
 
     [data-status='cancelled'] > & {
-        color: $conv-neutral-500;
+        color: $conv-neutral-600;
         border-color: $conv-neutral-400;
+    }
+
+    [data-status='failed'] > & {
+        background: $conv-error-bg;
+        border-color: $conv-error-border;
+        color: $conv-error-text;
     }
 }
 
@@ -349,7 +357,7 @@ $conv-error-bg: #fff6f6;
     &:focus-visible {
         border-color: $conv-primary-400;
         background: #fff;
-        color: $conv-search-purple-dark;
+        color: $conv-activity-accent-text;
     }
 
     &.is-overflow {
@@ -371,7 +379,7 @@ $conv-error-bg: #fff6f6;
 .conv-search-activity-more {
     border-style: dashed;
     background: transparent;
-    color: $conv-search-purple-dark;
+    color: $conv-activity-accent-text;
     cursor: pointer;
 
     &:hover {
@@ -425,7 +433,7 @@ $conv-error-bg: #fff6f6;
     border: 1px solid $conv-primary-300;
     border-radius: 999px;
     background: #fff;
-    color: $conv-search-purple-dark;
+    color: $conv-activity-accent-text;
     font-family: inherit;
     font-size: 14px;
     cursor: pointer;

@@ -125,11 +125,34 @@ describe('reduceActivity', () => {
     it('settles active steps on errors and stops', () => {
         const failed = run([[thinking(SEARCHING), 100], [{ type: 'error' }, 300]]);
         expect(failed.phase).toBe('error');
-        expect(failed.steps[0].status).toBe('cancelled');
+        expect(failed.steps[0].status).toBe('failed');
         expect(describeHeadline(failed)).toBe('Something went wrong');
 
         const stopped = run([[thinking(SEARCHING), 100], [{ type: 'stopped' }, 300]]);
+        expect(stopped.steps[0].status).toBe('cancelled');
         expect(describeHeadline(stopped)).toBe('Stopped');
+    });
+
+    it('labels steps that an error or a stop cut short', () => {
+        const research = [
+            [thinking(SEARCHING), 100],
+            [thinking(REVIEWING, { retrieved_pages: [page('a')] }), 200],
+            [thinking(REVIEWING), 300]
+        ];
+        const labels = (actions) => run(actions).steps.map(describeStep);
+
+        expect(labels([...research, [{ type: 'error' }, 400]])).toEqual(['Found 1 page', "Reading didn't finish"]);
+        expect(labels([...research, [{ type: 'stopped' }, 400]])).toEqual(['Found 1 page', 'Reading stopped']);
+
+        // The read finished when the next search started; only the search was cut short.
+        const searching = [...research, [thinking(SEARCHING, { query: 'log indexes' }), 400]];
+        expect(labels([...searching, [{ type: 'error' }, 500]]))
+            .toEqual(['Found 1 page', 'Read 1 page', "Search for “log indexes” didn't finish"]);
+        expect(labels([...searching, [{ type: 'stopped' }, 500]]))
+            .toEqual(['Found 1 page', 'Read 1 page', 'Search for “log indexes” stopped']);
+
+        const writing = run([[thinking(GENERATING), 100], [{ type: 'error' }, 200]]);
+        expect(describeStep(writing.steps[0])).toBe('Answer interrupted');
     });
 
     it('only links to http(s) documentation pages', () => {
@@ -188,6 +211,48 @@ describe('ActivityTimeline', () => {
         expect(timeline.root.dataset.phase).toBe('done');
         expect(timeline.headline.textContent).toMatch(/^Researched for \d+s$/);
         expect(timeline.meta.textContent).toBe('1 search · 6 pages found');
+        timeline.destroy();
+    });
+
+    it('takes collapsed steps out of the tab order', () => {
+        const timeline = new ActivityTimeline();
+        timeline.dispatch(thinking(SEARCHING));
+        expect(timeline.body.hasAttribute('inert')).toBe(false);
+
+        timeline.dispatch({ type: 'answer' });
+        expect(timeline.body.hasAttribute('inert')).toBe(true);
+        expect(timeline.body.getAttribute('aria-hidden')).toBe('true');
+
+        timeline.header.click();
+        expect(timeline.body.hasAttribute('inert')).toBe(false);
+        expect(timeline.body.hasAttribute('aria-hidden')).toBe(false);
+        timeline.destroy();
+    });
+
+    it('announces each step once and when the answer is ready', () => {
+        const timeline = new ActivityTimeline();
+        const heard = [];
+        const listen = () => {
+            if (heard[heard.length - 1] !== timeline.live.textContent) heard.push(timeline.live.textContent);
+        };
+        listen();
+        [
+            thinking(SEARCHING),
+            thinking(REVIEWING, { retrieved_pages: [page('a')] }),
+            thinking(REVIEWING),
+            thinking(SEARCHING),
+            thinking(REVIEWING, { retrieved_pages: [page('b')] }),
+            thinking(GENERATING),
+            { type: 'answer' },
+            { type: 'done' }
+        ].forEach((action) => {
+            timeline.dispatch(action);
+            listen();
+        });
+
+        expect(heard).toEqual([
+            'Thinking', 'Searching the docs', 'Reading a page', 'Searching the docs', 'Writing the answer', 'Answer ready'
+        ]);
         timeline.destroy();
     });
 

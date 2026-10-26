@@ -121,6 +121,8 @@ function forEachResizable(callback) {
 
 const DEFAULT_ERROR_MESSAGE = 'Something went wrong while answering. Try again in a moment.';
 const EMPTY_RESPONSE_MESSAGE = 'No response received. Try again.';
+// Retrying the same request can't help, so this copy must not invite a retry.
+const NON_RETRYABLE_MESSAGE = "Docs AI can't answer this request. Start a new question instead.";
 const RETRY_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"></path></svg>';
 
 // Places the streaming caret at the end of the last block of the partially rendered answer.
@@ -921,7 +923,8 @@ class ConversationalSearch {
         box.setAttribute('role', 'alert');
 
         const text = document.createElement('p');
-        text.textContent = typeof message === 'string' && message.trim() ? message : DEFAULT_ERROR_MESSAGE;
+        if (!retryable) text.textContent = NON_RETRYABLE_MESSAGE;
+        else text.textContent = typeof message === 'string' && message.trim() ? message : DEFAULT_ERROR_MESSAGE;
         box.appendChild(text);
 
         if (retryable) {
