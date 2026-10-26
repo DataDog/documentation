@@ -66,7 +66,7 @@ Two paths use the same [Datadog account][1]:
 Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Azure Container Apps service:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=azure-container-apps
+npx @datadog/pup setup --product serverless --serverless-compute-type=azure-container-apps
 ```
 
 Omit `--product` to run interactively, or add `--site` to target your Datadog site.

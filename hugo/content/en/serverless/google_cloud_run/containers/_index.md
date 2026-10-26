@@ -38,7 +38,7 @@ Use agentic onboarding to set up monitoring for your Cloud Run containers with A
 Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run
 ```
 
 Omit `--product` to run interactively, or add `--site` to target your Datadog site.

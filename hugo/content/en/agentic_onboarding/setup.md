@@ -60,7 +60,7 @@ Run the CLI with `npx`, passing `--site` to target your [Datadog site][16] ({{< 
 1. Use this option if you don't have a Datadog account, or if you want the CLI to recommend products based on your code analysis. The CLI steps you through account setup, repository analysis, and product recommendations.
 
    ```shell
-   npx @datadog/ai-setup-cli --site datadoghq.com
+   npx @datadog/pup setup --site datadoghq.com
    ```
    Replace the value of `--site` with the Datadog site for your account: ({{< region-param key=dd_site code="true" >}}).
 
@@ -75,7 +75,7 @@ Run the CLI with `npx`, passing `--site` to target your [Datadog site][16] ({{< 
 1. Use this option if you already have a Datadog account and know which product you want to install. Add the `--product` flag to go straight to setup and skip repository analysis and product recommendations.
 
    ```shell
-   npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
+   npx @datadog/pup setup --site datadoghq.com --product <PRODUCT>
    ```
 
    - Replace the value of `--site` with the Datadog site for your account: ({{< region-param key=dd_site code="true" >}}).
@@ -106,7 +106,7 @@ Use `--headless` to skip the interactive UI. It requires both `--site` and `--pr
 
 ```shell
 DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
-  npx @datadog/ai-setup-cli \
+  npx @datadog/pup setup \
   --headless \
   --site datadoghq.com \
   --product rum
@@ -228,22 +228,22 @@ Send the prompt that matches the product you want to set up:
 **AWS Lambda**
 {{< code-block lang="text" >}}Add Datadog for AWS Lambda to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
 
 **GCP Cloud Run containers**
 {{< code-block lang="text" >}}Add Datadog for GCP Cloud Run containers to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
 
 **GCP Cloud Run functions**
 {{< code-block lang="text" >}}Add Datadog for GCP Cloud Run functions to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
 
 **Azure Container Apps**
 {{< code-block lang="text" >}}Add Datadog for Azure Container Apps to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=azure-container-apps{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=azure-container-apps{{< /code-block >}}
 
 {{% /tab %}}
 

@@ -32,7 +32,7 @@ Use agentic onboarding to set up monitoring for your Cloud Run functions with AI
 Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run function:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions
+npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run-functions
 ```
 
 Omit `--product` to run interactively, or add `--site` to target your Datadog site.
