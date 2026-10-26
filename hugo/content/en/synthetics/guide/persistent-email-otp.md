@@ -47,7 +47,7 @@ A [multi-factor authentication (MFA) token variable][1] serves a different authe
 You need [access to global variables][2] to create and select persistent email variables.
 
 1. Open [Synthetic Monitoring & Continuous Testing > Settings > Global Variables][3] and click {{< ui >}}+ New Global Variable{{< /ui >}}.
-2. Under {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email address{{< /ui >}}.
+2. Under {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email Address{{< /ui >}}.
 3. Enter a variable name, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
 4. In the permissions section, configure who can view and use the variable and who can edit it. See [Restrict access][4].
 
