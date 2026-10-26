@@ -584,14 +584,14 @@ Use two terminals to confirm that the SGLang endpoint responds and that the Agen
 **Terminal 1**: Forward the SGLang metrics endpoint, and leave it running.
 
 ```shell
-kubectl port-forward pod/<SGLANG_POD> 30000:30000
+kubectl port-forward pod/<SGLANG_POD> 18080:30000
 ```
 
 **Terminal 2**: Verify the endpoint and the Agent check.
 
 ```shell
 # Show SGLang metrics from the endpoint
-curl -fsS http://localhost:30000/metrics | grep '^sglang:'
+curl -fsS http://localhost:18080/metrics | grep '^sglang:'
 
 # Look for "sglang" under Checks
 kubectl exec -n <DATADOG_NAMESPACE> <AGENT_POD> -c agent -- agent status
