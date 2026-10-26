@@ -425,6 +425,20 @@ These metrics provide information about the adaptive concurrency controller, whi
 : **Description**: The historical mean RTT, in seconds, for HTTP requests to this destination, used as the long-term baseline for adaptive concurrency adjustments.
 : **Metric type**: distribution
 
+## Log signature metrics
+
+These metrics are emitted when log signature collection is enabled on the Worker. Log signature collection groups the logs sent to each destination into signature buckets for anomaly detection.
+
+- Use the `output_component_id` tag to filter or group by the destination the signatures are collected for.
+
+`pipelines.log_signatures_dropped_logs_total`
+: **Description**: The number of logs not counted in log signature collection because the limit on unflushed signature buckets for a destination was reached. Tagged by `reason`, such as `max_buckets_reached`.
+: **Metric type**: count
+
+`pipelines.log_signatures_flushed_buckets`
+: **Description**: The number of distinct signature buckets held for a destination right before they are flushed.
+: **Metric type**: gauge
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
