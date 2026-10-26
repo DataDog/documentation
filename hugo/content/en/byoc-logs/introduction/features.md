@@ -74,8 +74,8 @@ BYOC Logs does not support the following features:
   - Calculated fields
   - Grok extraction (query-time parsing)
 
-[1]: /api/latest/logs-restriction-queries/
-
-## Further reading
+  ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/latest/logs-restriction-queries/
