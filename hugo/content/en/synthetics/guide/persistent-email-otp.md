@@ -88,7 +88,7 @@ Keep a separate temporary email test if you also want to monitor sign-up.
 
 4. Inject `{{ LOGIN_EMAIL }}` into the application's email field and record the action that requests an OTP. If the application also requires a password, store it in a separate obfuscated variable.
 5. Add an email assertion if you want to check the email's subject or body.
-6. Add a variable extracted from the email body, name it `LOGIN_OTP`, and configure a regular expression or XPath that matches the code. For example, `\b[0-9]{6}\b` matches a six-digit code. Use a more specific pattern if the message contains other numbers.
+6. Add a variable extracted from the email body, name it `LOGIN_OTP`, and configure a regular expression or XPath that matches the code. For example, `\b[0-9]{6}\b` matches a six-digit code. Use a more specific pattern if the message contains other numbers. If other tests share the inbox, see the [Concurrent executions](#concurrent-executions) section.
 7. Use `{{ LOGIN_OTP }}` in the step that enters the code, then submit the login form.
 8. Add an assertion that confirms successful authentication and record the remaining journey.
 
