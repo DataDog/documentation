@@ -4405,6 +4405,10 @@
     "description": "Get the historical metrics ingestion configuration for a metric. Existence of the\nresource means historical metrics ingestion is enabled; returns 404 when it is not\nenabled for the metric.",
     "summary": "Get a historical metrics configuration"
   },
+  "ListTagIndexingRuleExemptions": {
+    "description": "Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.\nYou can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching\ntag indexing rule. You can sort results by metric name or by estimated change in indexed volume.",
+    "summary": "List tag indexing rule exemptions"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -7906,10 +7910,6 @@
     "summary": "Update a team link",
     "request_description": "",
     "request_schema_description": "Team link create request"
-  },
-  "ListTeamHierarchyMembers": {
-    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
-    "summary": "Get team hierarchy members"
   },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",

@@ -2010,6 +2010,19 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: List tag indexing rule exemptions
+      url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
+      identifier: metrics-list-tag-indexing-rule-exemptions
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRuleExemptions
+        unstable:
+          - v2
+        order: 34
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -23672,19 +23685,6 @@ menu:
           - GetTeamMemberships
         unstable: []
         order: 9
-    - name: Get team hierarchy members
-      url: /api/latest/teams/get-team-hierarchy-members/
-      identifier: teams-get-team-hierarchy-members
-      parent: teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListTeamHierarchyMembers
-        unstable:
-          - v2
-        order: 35
     - name: Update a team link
       url: /api/latest/teams/update-a-team-link/
       identifier: teams-update-a-team-link
