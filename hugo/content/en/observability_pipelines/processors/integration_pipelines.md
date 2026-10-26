@@ -127,29 +127,7 @@ All available integration pipelines are enabled by default when you first add an
 
 ## Health metrics
 
-For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see [Pipelines Usage Metrics][4]. To filter or group by this processor, use `component_type:integration_pipelines`.
-
-The processor also emits the following metrics for each integration pipeline. Each metric is tagged with `integration_id`, such as `integration_id:apache` or `integration_id:nginx`:
-
-Ingested events
-: **Metric**: `pipelines.integration_pipelines_ingested_events_total`
-: **Description**: Number of events sent to the integration pipeline, regardless of whether they are modified.
-
-Ingested event bytes
-: **Metric**: `pipelines.integration_pipelines_ingested_event_bytes_total`
-: **Description**: Estimated JSON size, in bytes, of events sent to the integration pipeline. Event size is measured after normalization and before integration pipeline processing.
-
-Modified events
-: **Metric**: `pipelines.integration_pipelines_modified_events_total`
-: **Description**: Number of events modified by the integration pipeline.
-
-Modified event bytes
-: **Metric**: `pipelines.integration_pipelines_modified_event_bytes_total`
-: **Description**: Estimated JSON size, in bytes, of events modified by the integration pipeline. Event size is measured after normalization and before integration pipeline processing. This metric measures the total size of modified events, not the number of bytes changed or their size after processing.
-
-The integration pipeline metrics count only logs that match an enabled integration pipeline. Changes made only by common normalization do not count as integration pipeline modifications. To identify the integrations processing the most logs, group by `integration_id` and compare the number of ingested and modified events. The `pipeline_id` tag identifies the overall Observability Pipelines pipeline, not an integration pipeline.
+See [Processor buffer metrics][2] for more information on metrics emitted by all processors. To filter or group by this processor, use `component_type:integration_pipelines`.
 
 [1]: /observability_pipelines/search_syntax/logs/
-[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
-[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#component-metrics
