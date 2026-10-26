@@ -2190,18 +2190,13 @@ components:
         type: integer
     TraceIDPathParameter:
       description: |-
-        The trace ID. Accepts either a hexadecimal string of up to 32 characters (128-bit trace ID)
-        or a decimal string of up to 39 digits. Hexadecimal IDs are case-insensitive, and shorter
-        values are left-padded with zeros.
-        Use the `trace_id` attribute of a span returned by the Search spans or Get a list of spans endpoints.
-        Values in any other format, such as UUIDs, return `400 Bad Request`. A well-formed ID with
-        no matching trace returns `404 Not Found`.
+        The trace ID. Accepts either a 32-character hexadecimal string (128-bit trace ID)
+        or a decimal string of up to 39 digits.
       example: "0000000000000000abc1230000000000"
       in: path
       name: trace_id
       required: true
       schema:
-        pattern: "^([0-9a-fA-F]{1,32}|[0-9]{1,39})$"
         type: string
     UnitCostID:
       description: The UUID of the unit cost.
@@ -42619,48 +42614,6 @@ components:
       required:
         - metric_id
       type: object
-    ExperimentsCreateExperimentProtocolRequest:
-      description: Create a draft protocol with the organization default subject type.
-      properties:
-        data:
-          $ref: "#/components/schemas/ExperimentsCreateExperimentProtocolRequestData"
-      required:
-        - data
-      type: object
-    ExperimentsCreateExperimentProtocolRequestData:
-      description: JSON:API protocol request resource.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/ExperimentsCreateExperimentProtocolRequestDataAttributes"
-        type:
-          $ref: "#/components/schemas/ExperimentsPublicProtocolResponseDataType"
-      required:
-        - type
-        - attributes
-      type: object
-    ExperimentsCreateExperimentProtocolRequestDataAttributes:
-      description: Create a draft protocol with the organization default subject type.
-      properties:
-        description:
-          description: Optional text that explains the protocol.
-          nullable: true
-          type: string
-        migration_metadata:
-          additionalProperties: {}
-          description: >-
-            Metadata for imported resources. Must encode to at most 4096 bytes. Null clears it; omission preserves it on update.
-          nullable: true
-          type: object
-        name:
-          description: >-
-            Protocol name. Leading and trailing spaces are removed. The trimmed name must contain 1 to 255 characters.
-          example: Checkout conversion
-          minLength: 1
-          pattern: .*\S.*
-          type: string
-      required:
-        - name
-      type: object
     ExperimentsCreateExperimentV2Request:
       description: "Request to create an experiment draft."
       example:
@@ -46314,148 +46267,6 @@ components:
       type: string
       x-enum-varnames:
         - EXPERIMENT_METRIC_GROUPS
-    ExperimentsPatchExperimentProtocolRequest:
-      description: >-
-        Partial protocol update. Omitted attributes remain unchanged. Published protocols accept only name, description, and migration_metadata; archived protocols reject updates.
-      properties:
-        data:
-          $ref: "#/components/schemas/ExperimentsPatchExperimentProtocolRequestData"
-      required:
-        - data
-      type: object
-    ExperimentsPatchExperimentProtocolRequestData:
-      description: JSON:API protocol request resource.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/ExperimentsPatchExperimentProtocolRequestDataAttributes"
-        id:
-          description: Protocol ID. If supplied, must match the path protocol_id.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          type: string
-        type:
-          $ref: "#/components/schemas/ExperimentsPublicProtocolResponseDataType"
-      required:
-        - type
-      type: object
-    ExperimentsPatchExperimentProtocolRequestDataAttributes:
-      description: >-
-        Partial protocol update. Omitted attributes remain unchanged. Published protocols accept only name, description, and migration_metadata; archived protocols reject updates.
-      properties:
-        analysis_plan:
-          $ref: "#/components/schemas/ExperimentsPatchProtocolAnalysisPlanInput"
-        assignment_source_default_properties:
-          description: Assignment properties. Omission or null preserves them; an array replaces them.
-          items:
-            $ref: >-
-              #/components/schemas/ExperimentsPublicProtocolResponseDataAttributesAssignmentSourceDefaultPropertiesItems
-          nullable: true
-          type: array
-        assignment_source_id:
-          description: >-
-            ID of the assignment source selected by the protocol. Omission or null keeps the current value. An empty string clears it.
-          nullable: true
-          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
-          type: string
-        default_duration_days:
-          description: >-
-            Default experiment duration supplied by the protocol, in days. Omission preserves it; null clears it. Sets analysis_plan.target_duration_days on experiments created from this protocol.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        description:
-          description: Description. Empty string clears it; omission or null preserves it.
-          nullable: true
-          type: string
-        enforcement:
-          $ref: "#/components/schemas/ExperimentsPatchProtocolEnforcementInput"
-        environment_id:
-          description: >-
-            ID of the feature flag environment used by the experiment. Omission or null keeps the current value. An empty string clears it.
-          nullable: true
-          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
-          type: string
-        exposure_schedule:
-          $ref: "#/components/schemas/ExperimentsPatchProtocolExposureScheduleInput"
-        is_duration_required_to_start:
-          description: >-
-            Whether the protocol requires a duration before an experiment can start. Omission or null preserves it.
-          example: false
-          nullable: true
-          type: boolean
-        is_equal_split_enforced:
-          description: >-
-            Whether the protocol requires equal traffic allocation across variants. Omission or null preserves it.
-          example: false
-          nullable: true
-          type: boolean
-        is_metric_limit_enabled:
-          description: Whether the protocol limits the number of metrics. Omission or null preserves it.
-          example: false
-          nullable: true
-          type: boolean
-        is_minimum_duration_enabled:
-          description: Whether the protocol enforces a minimum experiment duration. Omission or null preserves it.
-          example: false
-          nullable: true
-          type: boolean
-        metric_groups:
-          description: Metric groups. Omission or null preserves them; an array replaces them.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolMetricGroupInput"
-          nullable: true
-          type: array
-        metric_limit:
-          description: Maximum number of metrics allowed by the protocol. Omission preserves it; null clears it.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        migration_metadata:
-          additionalProperties: {}
-          description: >-
-            Metadata for imported resources. Must encode to at most 4096 bytes. Null clears it; omission preserves it on update.
-          nullable: true
-          type: object
-        minimum_duration_unit:
-          description: Minimum duration unit, `DAYS` or `WEEKS`. Empty string clears it. Omission or null preserves it.
-          nullable: true
-          pattern: ^(DAYS|WEEKS)?$
-          type: string
-        minimum_duration_value:
-          description: Minimum experiment duration in the specified unit. Omission preserves it; null clears it.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        name:
-          description: >-
-            Protocol name. Leading and trailing spaces are removed. The trimmed name must contain 1 to 255 characters.
-          example: Checkout conversion
-          minLength: 1
-          nullable: true
-          pattern: .*\S.*
-          type: string
-        primary_metric_id:
-          description: >-
-            ID of the primary metric supplied by the protocol. Omission or null keeps the current value. An empty string clears it.
-          nullable: true
-          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
-          type: string
-        subject_type_id:
-          description: >-
-            ID of the subject type used by this configuration. Omission or null keeps the current value. An empty string clears it.
-          nullable: true
-          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
-          type: string
-        targeting_rules:
-          description: Targeting rules. Omission or null preserves them; an array replaces them.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolTargetingRuleInput"
-          nullable: true
-          type: array
-      type: object
     ExperimentsPatchExperimentV2MetaDTO:
       description: "Refresh requirements and warnings returned by an experiment update."
       properties:
@@ -47261,144 +47072,6 @@ components:
       type: string
       x-enum-varnames:
         - METRIC_COLLECTIONS
-    ExperimentsPatchProtocolAnalysisPlanInput:
-      description: >-
-        Partial statistical settings. Omitted fields remain unchanged. Null clears the whole plan. Null clears nullable fields; null or an empty string clears confidence_interval_method.
-      nullable: true
-      properties:
-        compute_cuped:
-          description: Whether to use pre-experiment data to reduce variance with CUPED.
-          nullable: true
-          type: boolean
-        confidence_interval_method:
-          description: >-
-            Confidence interval method: `Sequential`, `FixedSample`, `Bayesian`, or `SequentialFixedHybrid`. An empty string leaves the method unset.
-          nullable: true
-          pattern: ^(Sequential|FixedSample|Bayesian|SequentialFixedHybrid)?$
-          type: string
-        confidence_level:
-          description: Confidence level used by the statistical analysis.
-          format: double
-          maximum: 1
-          minimum: 0
-          nullable: true
-          type: number
-        multiple_testing_correction_method:
-          description: Method used to adjust for testing multiple metrics.
-          nullable: true
-          type: string
-      type: object
-    ExperimentsPatchProtocolEnforcementInput:
-      description: >-
-        Partial lock map. Omitted fields remain unchanged. Null clears the whole map. Empty or null field values become `EDITABLE`, except `subject_type`, `flag_source`, and `confidence_interval_method`, which remain `LOCKED`.
-      nullable: true
-      properties:
-        confidence_interval_method:
-          description: Always `LOCKED`. The server keeps this setting locked regardless of the supplied value.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        confidence_level:
-          description: LOCKED prevents changes to confidence level. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        cuped_calculation:
-          description: LOCKED prevents changes to CUPED variance reduction. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        default_duration:
-          description: LOCKED prevents changes to default duration. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        environment:
-          description: LOCKED prevents changes to environment. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        flag_source:
-          description: Always LOCKED. The server keeps this setting locked regardless of the supplied value.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        multiple_testing_correction:
-          description: LOCKED prevents changes to multiple testing correction. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        notifications:
-          description: LOCKED prevents changes to notifications. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        primary_metric:
-          description: LOCKED prevents changes to primary metric. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        secondary_metrics:
-          description: LOCKED prevents changes to secondary metrics. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        split_by_exploration_dimensions:
-          description: LOCKED prevents changes to result exploration dimensions. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        subject_type:
-          description: Always LOCKED. The server keeps this setting locked regardless of the supplied value.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        targeting_rules:
-          description: LOCKED prevents changes to targeting rules. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        traffic_exposure:
-          description: LOCKED prevents changes to traffic exposure. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-        warehouse_exposure_source:
-          description: LOCKED prevents changes to warehouse exposure source. EDITABLE permits changes.
-          nullable: true
-          pattern: ^(LOCKED|EDITABLE)?$
-          type: string
-      type: object
-    ExperimentsPatchProtocolExposureScheduleInput:
-      description: >-
-        Partial traffic schedule. Omitted fields remain unchanged. Null clears the whole schedule. Null clears nullable fields and rollout_steps; null sets strategy to an empty string and `autostart` to false.
-      nullable: true
-      properties:
-        autostart:
-          description: Whether the exposure schedule starts automatically.
-          nullable: true
-          type: boolean
-        guardrail_triggered_action:
-          description: Action taken when a guardrail triggers during the exposure schedule.
-          nullable: true
-          type: string
-        rollout_steps:
-          description: Rollout steps, replaced when supplied.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolExposureStepInput"
-          nullable: true
-          type: array
-        selection_interval_ms:
-          description: Interval between traffic selections, in milliseconds.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        strategy:
-          description: Method used to increase traffic exposure over the schedule.
-          nullable: true
-          type: string
-      type: object
     ExperimentsPatchSubjectTypeV2Request:
       description: "Request to update the subject type."
       example:
@@ -47562,156 +47235,6 @@ components:
       x-enum-varnames:
         - IS_NULL
         - IS_NOT_NULL
-    ExperimentsProtocolAnalysisPlanInput:
-      description: >-
-        Statistical settings. Use `default_duration_days` for duration; `target_duration_days` is not accepted here.
-      nullable: true
-      properties:
-        compute_cuped:
-          description: Whether to use pre-experiment data to reduce variance with CUPED.
-          nullable: true
-          type: boolean
-        confidence_interval_method:
-          description: >-
-            Confidence interval method: `Sequential`, `FixedSample`, `Bayesian`, or `SequentialFixedHybrid`. An empty string leaves the method unset.
-          pattern: ^(Sequential|FixedSample|Bayesian|SequentialFixedHybrid)?$
-          type: string
-        confidence_level:
-          description: Confidence level used by the statistical analysis.
-          format: double
-          maximum: 1
-          minimum: 0
-          nullable: true
-          type: number
-        multiple_testing_correction_method:
-          description: Method used to adjust for testing multiple metrics.
-          nullable: true
-          type: string
-      type: object
-    ExperimentsProtocolConditionInput:
-      description: >-
-        Protocol targeting condition. Publishing and replacement require a saved filter or a valid inline attribute, operator, and values.
-      properties:
-        attribute:
-          description: Subject attribute evaluated by the targeting condition.
-          type: string
-        operator:
-          description: Comparison applied to the subject attribute.
-          type: string
-        order_position:
-          description: Position of this entry in the ordered configuration.
-          format: int64
-          minimum: 0
-          type: integer
-        saved_filter_id:
-          description: >-
-            Saved filter UUID. Null selects an inline condition. An empty string skips the saved-filter lookup.
-          nullable: true
-          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?$
-          type: string
-        value:
-          description: Values compared with the subject attribute in this condition.
-          items:
-            description: One value compared with the subject attribute.
-            type: string
-          nullable: true
-          type: array
-      type: object
-    ExperimentsProtocolExposureScheduleInput:
-      description: >-
-        Traffic schedule. Publishing and replacement require `NO_ROLLOUT` with exactly one step, or `UNIFORM_INTERVALS` with a positive selection interval and at least one step. Requires `environment_id`.
-      nullable: true
-      properties:
-        autostart:
-          description: Whether the exposure schedule starts automatically.
-          type: boolean
-        guardrail_triggered_action:
-          description: Action taken when a guardrail triggers during the exposure schedule.
-          nullable: true
-          type: string
-        rollout_steps:
-          description: Rollout steps, replaced when supplied.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolExposureStepInput"
-          nullable: true
-          type: array
-        selection_interval_ms:
-          description: Interval between traffic selections, in milliseconds.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        strategy:
-          description: Method used to increase traffic exposure over the schedule.
-          type: string
-      type: object
-    ExperimentsProtocolExposureStepInput:
-      description: A traffic exposure step in the protocol template.
-      properties:
-        exposure_ratio:
-          description: Fraction of traffic exposed during this rollout step.
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-        grouped_step_index:
-          description: Index of the group that contains this rollout step.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        interval_ms:
-          description: Duration of this rollout step, in milliseconds.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        is_pause_record:
-          description: Whether this schedule entry represents a pause.
-          type: boolean
-        order_position:
-          description: Position of this entry in the ordered configuration.
-          format: int64
-          minimum: 0
-          type: integer
-      type: object
-    ExperimentsProtocolMetricGroupInput:
-      description: A metric group supplied by the protocol. Empty decision groups are removed.
-      properties:
-        is_decision:
-          description: Whether this group contains decision metrics.
-          type: boolean
-        metrics:
-          description: Metrics in the group.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolMetricInput"
-          nullable: true
-          type: array
-        name:
-          description: Metric group name.
-          type: string
-      type: object
-    ExperimentsProtocolMetricInput:
-      description: A metric included in a protocol. Select the primary metric with `primary_metric_id`, not `is_primary`.
-      properties:
-        metric_id:
-          description: Metric UUID.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          type: string
-      required:
-        - metric_id
-      type: object
-    ExperimentsProtocolTargetingRuleInput:
-      description: A targeting rule in the protocol template.
-      properties:
-        conditions:
-          description: Conditions in this rule.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolConditionInput"
-          nullable: true
-          type: array
-      type: object
     ExperimentsPublicProtocolListResponseArray:
       description: "List of protocol resources with pagination information."
       properties:
@@ -47750,13 +47273,6 @@ components:
         description:
           description: "Text that explains the protocol."
           type: string
-        experiment_count:
-          description: >-
-            Number of experiments in the organization that use this protocol, excluding deleted experiments.
-          example: 0
-          format: int64
-          minimum: 0
-          type: integer
         name:
           description: "Display name of the protocol."
           example: Checkout conversion
@@ -47774,13 +47290,10 @@ components:
           description: "ID of the subject type used by this configuration."
           type: string
         updated_at:
-          description: |-
-            RFC3339 update time. Preserve all fractional seconds when passing this value as
-            `expected_updated_at`.
+          description: "RFC3339 update time. Preserve all fractional seconds when passing this value as expected_updated_at."
           example: "2026-01-01T00:00:00Z"
           type: string
       required:
-        - experiment_count
         - name
         - status
         - updated_at
@@ -47814,11 +47327,6 @@ components:
       properties:
         analysis_plan:
           $ref: "#/components/schemas/ExperimentsPublicProtocolResponseDataAttributesAnalysisPlan"
-        archived_at:
-          description: "Time when the protocol was archived. Omitted if it has not been archived."
-          example: "2026-07-31T14:00:00Z"
-          format: date-time
-          type: string
         assignment_source_default_properties:
           description: "Default properties supplied by the protocol's assignment source."
           items:
@@ -47827,11 +47335,6 @@ components:
           type: array
         assignment_source_id:
           description: "ID of the assignment source selected by the protocol."
-          type: string
-        created_at:
-          description: "Time when the protocol was created."
-          example: "2026-07-31T12:00:00Z"
-          format: date-time
           type: string
         default_duration_days:
           description: "Default experiment duration supplied by the protocol, in days."
@@ -47845,13 +47348,6 @@ components:
         environment_id:
           description: "ID of the feature flag environment used by the experiment."
           type: string
-        experiment_count:
-          description: >-
-            Number of experiments in the organization that use this protocol, excluding deleted experiments. Omitted if the count cannot be retrieved. An omitted count does not mean zero.
-          example: 0
-          format: int64
-          minimum: 0
-          type: integer
         exposure_schedule:
           $ref: "#/components/schemas/ExperimentsPublicProtocolResponseDataAttributesExposureSchedule"
         is_duration_required_to_start:
@@ -47915,13 +47411,10 @@ components:
             $ref: "#/components/schemas/ExperimentsPublicProtocolResponseDataAttributesTargetingRulesItems"
           type: array
         updated_at:
-          description: |-
-            RFC3339 update time. Preserve all fractional seconds when passing this value as
-            `expected_updated_at`.
+          description: "RFC3339 update time. Preserve all fractional seconds when passing this value as expected_updated_at."
           example: "2026-01-01T00:00:00Z"
           type: string
       required:
-        - created_at
         - is_duration_required_to_start
         - is_equal_split_enforced
         - is_metric_limit_enabled
@@ -47965,7 +47458,7 @@ components:
       description: "Controls that determine which protocol settings can be changed in an experiment."
       properties:
         confidence_interval_method:
-          description: "Always LOCKED. The server keeps this setting locked regardless of the supplied value."
+          description: "LOCKED prevents changes to confidence interval method. EDITABLE permits changes."
           type: string
         confidence_level:
           description: "LOCKED prevents changes to confidence level. EDITABLE permits changes."
@@ -47980,7 +47473,7 @@ components:
           description: "LOCKED prevents changes to environment. EDITABLE permits changes."
           type: string
         flag_source:
-          description: "Always LOCKED. The server keeps this setting locked regardless of the supplied value."
+          description: "LOCKED prevents changes to feature flag source. EDITABLE permits changes."
           type: string
         multiple_testing_correction:
           description: "LOCKED prevents changes to multiple testing correction. EDITABLE permits changes."
@@ -47998,7 +47491,7 @@ components:
           description: "LOCKED prevents changes to result exploration dimensions. EDITABLE permits changes."
           type: string
         subject_type:
-          description: "Always LOCKED. The server keeps this setting locked regardless of the supplied value."
+          description: "LOCKED prevents changes to subject type. EDITABLE permits changes."
           type: string
         targeting_rules:
           description: "LOCKED prevents changes to targeting rules. EDITABLE permits changes."
@@ -48227,230 +47720,6 @@ components:
       type: string
       x-enum-varnames:
         - EXPERIMENT_RESULTS_REFRESH
-    ExperimentsReplaceExperimentProtocolRequest:
-      description: >-
-        Replace a published protocol template. Omitted optional template fields are cleared. Omitted enforcement and migration_metadata are preserved. Enabled limits require their values; allocation settings require environment_id.
-      properties:
-        data:
-          $ref: "#/components/schemas/ExperimentsReplaceExperimentProtocolRequestData"
-      required:
-        - data
-      type: object
-    ExperimentsReplaceExperimentProtocolRequestData:
-      description: JSON:API protocol request resource.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/ExperimentsReplaceExperimentProtocolRequestDataAttributes"
-        id:
-          description: Protocol ID. If supplied, must match the path protocol_id.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          type: string
-        type:
-          $ref: "#/components/schemas/ExperimentsPublicProtocolResponseDataType"
-      required:
-        - type
-        - attributes
-      type: object
-    ExperimentsReplaceExperimentProtocolRequestDataAttributes:
-      description: >-
-        Replace a published protocol template. Omitted optional template fields are cleared. Omitted enforcement and migration_metadata are preserved. Enabled limits require their values; allocation settings require environment_id.
-      properties:
-        analysis_plan:
-          $ref: "#/components/schemas/ExperimentsProtocolAnalysisPlanInput"
-        assignment_source_default_properties:
-          description: Assignment properties.
-          items:
-            $ref: >-
-              #/components/schemas/ExperimentsPublicProtocolResponseDataAttributesAssignmentSourceDefaultPropertiesItems
-          type: array
-        assignment_source_id:
-          description: ID of the assignment source selected by the protocol.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          nullable: true
-          type: string
-        default_duration_days:
-          description: Default experiment duration supplied by the protocol, in days.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        enforcement:
-          $ref: "#/components/schemas/ExperimentsReplaceProtocolEnforcementInput"
-        environment_id:
-          description: ID of the feature flag environment used by the experiment.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          nullable: true
-          type: string
-        exposure_schedule:
-          $ref: "#/components/schemas/ExperimentsProtocolExposureScheduleInput"
-        is_duration_required_to_start:
-          description: Whether the protocol requires a duration before an experiment can start.
-          example: false
-          type: boolean
-        is_equal_split_enforced:
-          description: Whether the protocol requires equal traffic allocation across variants.
-          example: false
-          type: boolean
-        is_metric_limit_enabled:
-          description: Whether the protocol limits the number of metrics.
-          example: false
-          type: boolean
-        is_minimum_duration_enabled:
-          description: Whether the protocol enforces a minimum experiment duration.
-          example: false
-          type: boolean
-        metric_groups:
-          description: Metric groups.
-          example: []
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolMetricGroupInput"
-          type: array
-        metric_limit:
-          description: Maximum number of metrics allowed by the protocol.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        migration_metadata:
-          additionalProperties: {}
-          description: >-
-            Metadata for imported resources. Must encode to at most 4096 bytes. Null clears it; omission preserves it on update.
-          nullable: true
-          type: object
-        minimum_duration_unit:
-          description: Minimum duration unit, DAYS or WEEKS.
-          nullable: true
-          pattern: ^(DAYS|WEEKS)$
-          type: string
-        minimum_duration_value:
-          description: Minimum experiment duration in the specified unit.
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        primary_metric_id:
-          description: ID of the primary metric supplied by the protocol.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          nullable: true
-          type: string
-        subject_type_id:
-          description: ID of the subject type used by this configuration.
-          example: 550e8400-e29b-41d4-a716-446655440000
-          format: uuid
-          type: string
-        targeting_rules:
-          description: Targeting rules.
-          items:
-            $ref: "#/components/schemas/ExperimentsProtocolTargetingRuleInput"
-          type: array
-      required:
-        - subject_type_id
-        - is_equal_split_enforced
-        - is_minimum_duration_enabled
-        - is_duration_required_to_start
-        - is_metric_limit_enabled
-        - metric_groups
-      type: object
-    ExperimentsReplaceProtocolEnforcementInput:
-      description: >-
-        Complete lock map. Omit this object to preserve current locks. Null is rejected; every field is required.
-      properties:
-        confidence_interval_method:
-          description: Always LOCKED. The server keeps this setting locked regardless of the supplied value.
-          example: LOCKED
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        confidence_level:
-          description: LOCKED prevents changes to confidence level. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        cuped_calculation:
-          description: LOCKED prevents changes to CUPED variance reduction. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        default_duration:
-          description: LOCKED prevents changes to default duration. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        environment:
-          description: LOCKED prevents changes to environment. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        flag_source:
-          description: Always LOCKED. The server keeps this setting locked regardless of the supplied value.
-          example: LOCKED
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        multiple_testing_correction:
-          description: LOCKED prevents changes to multiple testing correction. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        notifications:
-          description: LOCKED prevents changes to notifications. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        primary_metric:
-          description: LOCKED prevents changes to primary metric. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        secondary_metrics:
-          description: LOCKED prevents changes to secondary metrics. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        split_by_exploration_dimensions:
-          description: LOCKED prevents changes to result exploration dimensions. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        subject_type:
-          description: Always LOCKED. The server keeps this setting locked regardless of the supplied value.
-          example: LOCKED
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        targeting_rules:
-          description: LOCKED prevents changes to targeting rules. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        traffic_exposure:
-          description: LOCKED prevents changes to traffic exposure. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-        warehouse_exposure_source:
-          description: LOCKED prevents changes to warehouse exposure source. EDITABLE permits changes.
-          example: EDITABLE
-          pattern: ^(LOCKED|EDITABLE)$
-          type: string
-      required:
-        - confidence_interval_method
-        - confidence_level
-        - cuped_calculation
-        - default_duration
-        - environment
-        - flag_source
-        - multiple_testing_correction
-        - notifications
-        - primary_metric
-        - secondary_metrics
-        - split_by_exploration_dimensions
-        - subject_type
-        - targeting_rules
-        - traffic_exposure
-        - warehouse_exposure_source
-      type: object
     ExperimentsSQLModelPropertyInput:
       description: A property column defined by an exposure SQL model.
       example:
@@ -93297,16 +92566,12 @@ components:
         - logs
         - metrics
         - audit
-        - ci_pipelines
-        - ci_tests
       example: "logs"
       type: string
       x-enum-varnames:
         - LOGS
         - METRICS
         - AUDIT
-        - CI_PIPELINES
-        - CI_TESTS
     OrgConnectionUpdate:
       description: Org connection update data.
       properties:
@@ -125992,11 +125257,8 @@ components:
       type: string
       x-enum-varnames: ["DONE", "TIMEOUT"]
     SpansAggregateSort:
-      description: |-
-        A sort rule. With `type: alphabetical` (the default), buckets are sorted by facet value
-        and only `order` is allowed. With `type: measure`, buckets are sorted by a computed value:
-        set `aggregation`, and set `metric` unless the aggregation is `count`.
-      example: {"aggregation": "pc90", "metric": "@duration", "order": "desc", "type": "measure"}
+      description: A sort rule.
+      example: {"aggregation": "count", "order": "asc"}
       properties:
         aggregation:
           $ref: "#/components/schemas/SpansAggregationFunction"
@@ -126106,10 +125368,7 @@ components:
           type: string
       type: object
     SpansCompute:
-      description: |-
-        A compute rule to compute metrics or timeseries.
-        All computes in a request must have the same `type`, and `timeseries` computes must use the same `interval`.
-        To get both totals and timeseries, send separate requests.
+      description: A compute rule to compute metrics or timeseries.
       properties:
         aggregation:
           $ref: "#/components/schemas/SpansAggregationFunction"
@@ -126163,12 +125422,7 @@ components:
           $ref: "#/components/schemas/SpansGroupByHistogram"
         limit:
           default: 10
-          description: |-
-            The maximum buckets to return for this group by.
-            A request can generate at most 10,000 groups. Nested `group_by` entries multiply, so the
-            product of their limits must stay within that bound. For example, two entries with a limit of 100 each
-            produce up to 10,000 groups. With a `timeseries` compute, the number of groups multiplied by
-            the number of time buckets must not exceed 400,000.
+          description: The maximum buckets to return for this group by.
           format: int64
           type: integer
         missing:
@@ -132872,6 +132126,21 @@ components:
           $ref: "#/components/schemas/TagIndexingRuleExemptionData"
       readOnly: true
       type: object
+    TagIndexingRuleExemptionSort:
+      default: estimated_change_in_volume
+      description: Sort field for tag indexing rule exemptions.
+      enum:
+        - name
+        - -name
+        - estimated_change_in_volume
+        - -estimated_change_in_volume
+      example: estimated_change_in_volume
+      type: string
+      x-enum-varnames:
+        - NAME
+        - NAME_DESCENDING
+        - ESTIMATED_CHANGE_IN_VOLUME
+        - ESTIMATED_CHANGE_IN_VOLUME_DESCENDING
     TagIndexingRuleExemptionType:
       default: tag_indexing_rule_exemptions
       description: The tag indexing rule exemption resource type.
@@ -132897,6 +132166,20 @@ components:
         - OK
         - UNINDEXED_TAGS
         - UNAVAILABLE
+    TagIndexingRuleExemptionsResponse:
+      description: Response containing a page of tag indexing rule exemptions.
+      properties:
+        data:
+          description: Array of tag indexing rule exemption objects.
+          items:
+            $ref: "#/components/schemas/TagIndexingRuleExemptionData"
+          type: array
+        links:
+          $ref: "#/components/schemas/MetricsListResponseLinks"
+        meta:
+          $ref: "#/components/schemas/MetricPaginationMeta"
+      readOnly: true
+      type: object
     TagIndexingRuleMetricMatch:
       description: Criteria for matching metrics based on query state.
       properties:
@@ -172919,14 +172202,7 @@ paths:
               examples:
                 default:
                   value:
-                    data:
-                      - attributes:
-                          experiment_count: 0
-                          name: Checkout protocol
-                          status: DRAFT
-                          updated_at: "2026-07-31T12:00:00Z"
-                        id: e4d5f6a7-0000-0000-0000-000000000000
-                        type: protocols
+                    data: []
               schema:
                 $ref: "#/components/schemas/ExperimentsPublicProtocolListResponseArray"
           description: OK
@@ -172963,195 +172239,7 @@ paths:
         operator: AND
         permissions:
           - product_analytics_experiments_read
-    post:
-      description: >-
-        Create a draft protocol with a name and optional description and migration metadata. The organization's default subject type is selected. Use PATCH to configure the draft, then publish it before creating experiments from it.
-      operationId: CreateExperimentProtocol
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: Defaults for checkout experiments.
-                      name: Checkout protocol
-                    type: protocols
-            schema:
-              $ref: "#/components/schemas/ExperimentsCreateExperimentProtocolRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-07-31T12:00:00Z"
-                        description: Defaults for checkout experiments.
-                        enforcement:
-                          confidence_interval_method: LOCKED
-                          confidence_level: EDITABLE
-                          cuped_calculation: EDITABLE
-                          default_duration: EDITABLE
-                          environment: EDITABLE
-                          flag_source: LOCKED
-                          multiple_testing_correction: EDITABLE
-                          notifications: EDITABLE
-                          primary_metric: EDITABLE
-                          secondary_metrics: EDITABLE
-                          split_by_exploration_dimensions: EDITABLE
-                          subject_type: LOCKED
-                          targeting_rules: EDITABLE
-                          traffic_exposure: EDITABLE
-                          warehouse_exposure_source: EDITABLE
-                        experiment_count: 0
-                        is_duration_required_to_start: false
-                        is_equal_split_enforced: false
-                        is_metric_limit_enabled: false
-                        is_minimum_duration_enabled: false
-                        metric_groups: []
-                        name: Checkout protocol
-                        status: DRAFT
-                        subject_type:
-                          id: c2b3d4e5-0000-0000-0000-000000000000
-                          name: User
-                        subject_type_id: c2b3d4e5-0000-0000-0000-000000000000
-                        updated_at: "2026-07-31T12:00:00Z"
-                      id: e4d5f6a7-0000-0000-0000-000000000000
-                      type: protocols
-              schema:
-                $ref: "#/components/schemas/ExperimentsPublicProtocolResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Invalid request or protocol settings.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Missing or invalid authentication.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The caller lacks the product_analytics_experiments_write permission.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: A protocol with this name already exists.
-        "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unsupported request content type.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Internal Server Error
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - product_analytics_experiments_write
-      summary: Create experiment protocol
-      tags:
-        - Experiments
-      x-menu-order: 49
-      x-permission:
-        operator: AND
-        permissions:
-          - product_analytics_experiments_write
   /api/v2/experiments/protocols/{protocol_id}:
-    delete:
-      description: >-
-        Delete a protocol with no linked experiments. Draft, published, and archived protocols can be deleted. Returns 204 with no response body.
-      operationId: DeleteExperimentProtocol
-      parameters:
-        - description: The UUID of the protocol.
-          in: path
-          name: protocol_id
-          required: true
-          schema:
-            description: The UUID of the protocol.
-            example: 550e8400-e29b-41d4-a716-446655440000
-            format: uuid
-            type: string
-        - description: >-
-            The updated_at value from the last read. Include the full timestamp, with fractional seconds. Returns 409 if another write changed the protocol. Omit to skip this check.
-          in: query
-          name: expected_updated_at
-          schema:
-            type: string
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Invalid request or protocol settings.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Missing or invalid authentication.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The caller lacks the product_analytics_experiments_write permission.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: No protocol with this ID exists in the organization.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The protocol has linked experiments or expected_updated_at is stale.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Internal Server Error
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - product_analytics_experiments_write
-      summary: Delete experiment protocol
-      tags:
-        - Experiments
-      x-menu-order: 52
-      x-permission:
-        operator: AND
-        permissions:
-          - product_analytics_experiments_write
     get:
       description: Get a draft, published, or archived experiment protocol by ID.
       operationId: GetExperimentProtocol
@@ -173174,7 +172262,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        created_at: "2026-07-31T12:00:00Z"
                         description: Default settings for checkout experiments.
                         enforcement:
                           confidence_interval_method: LOCKED
@@ -173192,7 +172279,6 @@ paths:
                           targeting_rules: EDITABLE
                           traffic_exposure: EDITABLE
                           warehouse_exposure_source: EDITABLE
-                        experiment_count: 0
                         is_duration_required_to_start: false
                         is_equal_split_enforced: false
                         is_metric_limit_enabled: false
@@ -173254,520 +172340,6 @@ paths:
         operator: AND
         permissions:
           - product_analytics_experiments_read
-    patch:
-      description: >-
-        Update the supplied fields of a draft protocol. Published protocols accept only name, description, and migration_metadata changes through PATCH. Use PUT to replace their settings. Archived protocols cannot be edited.
-
-
-        Omitted fields keep their current values, including fields inside analysis_plan, exposure_schedule, and enforcement. Arrays replace the stored arrays. Supported null values clear fields; see the request schema. Use primary_metric_id to select the primary metric and default_duration_days to set the experiment analysis duration. Nested metric is_primary and analysis_plan.target_duration_days fields are rejected.
-      operationId: PatchExperimentProtocol
-      parameters:
-        - description: The UUID of the protocol.
-          in: path
-          name: protocol_id
-          required: true
-          schema:
-            description: The UUID of the protocol.
-            example: 550e8400-e29b-41d4-a716-446655440000
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: Updated defaults for checkout experiments.
-                    type: protocols
-            schema:
-              $ref: "#/components/schemas/ExperimentsPatchExperimentProtocolRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-07-31T12:00:00Z"
-                        description: Updated defaults for checkout experiments.
-                        enforcement:
-                          confidence_interval_method: LOCKED
-                          confidence_level: EDITABLE
-                          cuped_calculation: EDITABLE
-                          default_duration: EDITABLE
-                          environment: EDITABLE
-                          flag_source: LOCKED
-                          multiple_testing_correction: EDITABLE
-                          notifications: EDITABLE
-                          primary_metric: EDITABLE
-                          secondary_metrics: EDITABLE
-                          split_by_exploration_dimensions: EDITABLE
-                          subject_type: LOCKED
-                          targeting_rules: EDITABLE
-                          traffic_exposure: EDITABLE
-                          warehouse_exposure_source: EDITABLE
-                        experiment_count: 0
-                        is_duration_required_to_start: false
-                        is_equal_split_enforced: false
-                        is_metric_limit_enabled: false
-                        is_minimum_duration_enabled: false
-                        metric_groups: []
-                        name: Checkout protocol
-                        status: DRAFT
-                        subject_type:
-                          id: c2b3d4e5-0000-0000-0000-000000000000
-                          name: User
-                        subject_type_id: c2b3d4e5-0000-0000-0000-000000000000
-                        updated_at: "2026-07-31T12:00:00Z"
-                      id: e4d5f6a7-0000-0000-0000-000000000000
-                      type: protocols
-              schema:
-                $ref: "#/components/schemas/ExperimentsPublicProtocolResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Invalid request or protocol settings.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Missing or invalid authentication.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The caller lacks the product_analytics_experiments_write permission.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: No protocol with this ID exists in the organization.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: >-
-            The protocol is archived, a published protocol receives settings changes, or the name is already in use.
-        "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unsupported request content type.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Internal Server Error
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - product_analytics_experiments_write
-      summary: Update experiment protocol
-      tags:
-        - Experiments
-      x-menu-order: 50
-      x-permission:
-        operator: AND
-        permissions:
-          - product_analytics_experiments_write
-    put:
-      description: >-
-        Replace the template of a published protocol. Draft and archived protocols return 409. Send subject_type_id, all four required boolean settings, and metric_groups. Omitted optional template fields are cleared. Omitted enforcement keeps the existing locks.
-
-
-        Use primary_metric_id to select the primary metric. Use default_duration_days to set target_duration_days on experiments created from the protocol. The nested metric is_primary and analysis_plan.target_duration_days fields are rejected. An unchanged GET response can be sent as the request body. Response-only fields are ignored.
-
-
-        Independent configuration errors are returned together in the JSON:API errors array. Each error identifies the field in source.pointer. Earlier request and reference checks can stop on the first error. A failed request leaves the protocol unchanged. Changes apply to future experiments; existing experiments keep their settings.
-      operationId: ReplaceExperimentProtocol
-      parameters:
-        - description: The UUID of the protocol.
-          in: path
-          name: protocol_id
-          required: true
-          schema:
-            description: The UUID of the protocol.
-            example: 550e8400-e29b-41d4-a716-446655440000
-            format: uuid
-            type: string
-        - description: >-
-            The updated_at value from the last read. Include the full timestamp, with fractional seconds. Returns 409 if another write changed the protocol. Omit to skip this check.
-          in: query
-          name: expected_updated_at
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      is_duration_required_to_start: false
-                      is_equal_split_enforced: false
-                      is_metric_limit_enabled: false
-                      is_minimum_duration_enabled: false
-                      metric_groups: []
-                      subject_type_id: c2b3d4e5-0000-0000-0000-000000000000
-                    type: protocols
-            schema:
-              $ref: "#/components/schemas/ExperimentsReplaceExperimentProtocolRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-07-31T12:00:00Z"
-                        description: Defaults for checkout experiments.
-                        enforcement:
-                          confidence_interval_method: LOCKED
-                          confidence_level: EDITABLE
-                          cuped_calculation: EDITABLE
-                          default_duration: EDITABLE
-                          environment: EDITABLE
-                          flag_source: LOCKED
-                          multiple_testing_correction: EDITABLE
-                          notifications: EDITABLE
-                          primary_metric: EDITABLE
-                          secondary_metrics: EDITABLE
-                          split_by_exploration_dimensions: EDITABLE
-                          subject_type: LOCKED
-                          targeting_rules: EDITABLE
-                          traffic_exposure: EDITABLE
-                          warehouse_exposure_source: EDITABLE
-                        experiment_count: 0
-                        is_duration_required_to_start: false
-                        is_equal_split_enforced: false
-                        is_metric_limit_enabled: false
-                        is_minimum_duration_enabled: false
-                        metric_groups: []
-                        name: Checkout protocol
-                        published_at: "2026-07-31T12:00:00Z"
-                        status: PUBLISHED
-                        subject_type:
-                          id: c2b3d4e5-0000-0000-0000-000000000000
-                          name: User
-                        subject_type_id: c2b3d4e5-0000-0000-0000-000000000000
-                        updated_at: "2026-07-31T12:00:00Z"
-                      id: e4d5f6a7-0000-0000-0000-000000000000
-                      type: protocols
-              schema:
-                $ref: "#/components/schemas/ExperimentsPublicProtocolResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Invalid request or protocol settings.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Missing or invalid authentication.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The caller lacks the product_analytics_experiments_write permission.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: No protocol with this ID exists in the organization.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The protocol is not published or expected_updated_at is stale.
-        "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unsupported request content type.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Internal Server Error
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - product_analytics_experiments_write
-      summary: Replace experiment protocol
-      tags:
-        - Experiments
-      x-menu-order: 51
-      x-permission:
-        operator: AND
-        permissions:
-          - product_analytics_experiments_write
-  /api/v2/experiments/protocols/{protocol_id}/archive:
-    post:
-      description: >-
-        Archive a draft or published protocol. Archived protocols cannot be edited or used to create new experiments. Existing experiments keep their settings. Archiving an already archived protocol returns 409.
-      operationId: ArchiveExperimentProtocol
-      parameters:
-        - description: The UUID of the protocol.
-          in: path
-          name: protocol_id
-          required: true
-          schema:
-            description: The UUID of the protocol.
-            example: 550e8400-e29b-41d4-a716-446655440000
-            format: uuid
-            type: string
-        - description: >-
-            The updated_at value from the last read. Include the full timestamp, with fractional seconds. Returns 409 if another write changed the protocol. Omit to skip this check.
-          in: query
-          name: expected_updated_at
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        archived_at: "2026-07-31T14:00:00Z"
-                        created_at: "2026-07-31T12:00:00Z"
-                        description: Defaults for checkout experiments.
-                        enforcement:
-                          confidence_interval_method: LOCKED
-                          confidence_level: EDITABLE
-                          cuped_calculation: EDITABLE
-                          default_duration: EDITABLE
-                          environment: EDITABLE
-                          flag_source: LOCKED
-                          multiple_testing_correction: EDITABLE
-                          notifications: EDITABLE
-                          primary_metric: EDITABLE
-                          secondary_metrics: EDITABLE
-                          split_by_exploration_dimensions: EDITABLE
-                          subject_type: LOCKED
-                          targeting_rules: EDITABLE
-                          traffic_exposure: EDITABLE
-                          warehouse_exposure_source: EDITABLE
-                        experiment_count: 0
-                        is_duration_required_to_start: false
-                        is_equal_split_enforced: false
-                        is_metric_limit_enabled: false
-                        is_minimum_duration_enabled: false
-                        metric_groups: []
-                        name: Checkout protocol
-                        published_at: "2026-07-31T12:00:00Z"
-                        status: ARCHIVED
-                        subject_type:
-                          id: c2b3d4e5-0000-0000-0000-000000000000
-                          name: User
-                        subject_type_id: c2b3d4e5-0000-0000-0000-000000000000
-                        updated_at: "2026-07-31T14:00:00Z"
-                      id: e4d5f6a7-0000-0000-0000-000000000000
-                      type: protocols
-              schema:
-                $ref: "#/components/schemas/ExperimentsPublicProtocolResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Invalid request or protocol settings.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Missing or invalid authentication.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The caller lacks the product_analytics_experiments_write permission.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: No protocol with this ID exists in the organization.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The protocol is already archived or expected_updated_at is stale.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Internal Server Error
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - product_analytics_experiments_write
-      summary: Archive experiment protocol
-      tags:
-        - Experiments
-      x-menu-order: 54
-      x-permission:
-        operator: AND
-        permissions:
-          - product_analytics_experiments_write
-  /api/v2/experiments/protocols/{protocol_id}/publish:
-    post:
-      description: >-
-        Publish a valid draft protocol. The protocol must have a name and subject type. Supplied references and settings must be valid. An exposure schedule or targeting rules require an environment. Enabled limits require their values. Configurable template fields must have a value before they can be locked.
-
-
-        Independent configuration errors are returned together in the JSON:API errors array with source.pointer values that identify the fields. Earlier request and reference checks can stop on the first error. A failed request leaves the protocol unchanged.
-      operationId: PublishExperimentProtocol
-      parameters:
-        - description: The UUID of the protocol.
-          in: path
-          name: protocol_id
-          required: true
-          schema:
-            description: The UUID of the protocol.
-            example: 550e8400-e29b-41d4-a716-446655440000
-            format: uuid
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-07-31T12:00:00Z"
-                        description: Defaults for checkout experiments.
-                        enforcement:
-                          confidence_interval_method: LOCKED
-                          confidence_level: EDITABLE
-                          cuped_calculation: EDITABLE
-                          default_duration: EDITABLE
-                          environment: EDITABLE
-                          flag_source: LOCKED
-                          multiple_testing_correction: EDITABLE
-                          notifications: EDITABLE
-                          primary_metric: EDITABLE
-                          secondary_metrics: EDITABLE
-                          split_by_exploration_dimensions: EDITABLE
-                          subject_type: LOCKED
-                          targeting_rules: EDITABLE
-                          traffic_exposure: EDITABLE
-                          warehouse_exposure_source: EDITABLE
-                        experiment_count: 0
-                        is_duration_required_to_start: false
-                        is_equal_split_enforced: false
-                        is_metric_limit_enabled: false
-                        is_minimum_duration_enabled: false
-                        metric_groups: []
-                        name: Checkout protocol
-                        published_at: "2026-07-31T12:00:00Z"
-                        status: PUBLISHED
-                        subject_type:
-                          id: c2b3d4e5-0000-0000-0000-000000000000
-                          name: User
-                        subject_type_id: c2b3d4e5-0000-0000-0000-000000000000
-                        updated_at: "2026-07-31T12:00:00Z"
-                      id: e4d5f6a7-0000-0000-0000-000000000000
-                      type: protocols
-              schema:
-                $ref: "#/components/schemas/ExperimentsPublicProtocolResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Invalid request or protocol settings.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Missing or invalid authentication.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: The caller lacks the product_analytics_experiments_write permission.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: No protocol with this ID exists in the organization.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Only draft protocols can be published.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Internal Server Error
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - product_analytics_experiments_write
-      summary: Publish experiment protocol
-      tags:
-        - Experiments
-      x-menu-order: 53
-      x-permission:
-        operator: AND
-        permissions:
-          - product_analytics_experiments_write
   /api/v2/experiments/results/refresh:
     post:
       description: >-
@@ -203979,6 +202551,138 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/metrics/list-tag-indexing-rule-exemptions:
+    get:
+      description: |-
+        Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.
+        You can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching
+        tag indexing rule. You can sort results by metric name or by estimated change in indexed volume.
+      operationId: ListTagIndexingRuleExemptions
+      parameters:
+        - description: |-
+            Filter exemptions to metrics whose names start with this literal prefix.
+            Matching is case-sensitive. Wildcard characters are treated literally.
+          example: dd.test.
+          in: query
+          name: filter[metric_prefix]
+          schema:
+            type: string
+        - description: |-
+            Filter exemptions by whether they are safe to remove. An exemption is considered safe when a fresh, usable
+            estimate indicates that removing it would not increase indexed volume and would not drop tags used to query
+            the metric in monitors, dashboards, notebooks, or SLOs. Set to `true` to return safe-to-remove exemptions,
+            or `false` to return all other exemptions, including those with unavailable or stale estimates.
+          example: true
+          in: query
+          name: filter[safe]
+          schema:
+            type: boolean
+        - description: Filter exemptions to metrics matched by the tag indexing rule with this UUID.
+          example: 00000000-0000-0000-0000-000000000001
+          in: query
+          name: filter[tag_indexing_rule_id]
+          schema:
+            format: uuid
+            type: string
+        - description: |-
+            Sort field. Prefix the field with `-` for descending order. The default is `estimated_change_in_volume` in ascending order, with the largest reductions (most negative values) first.
+          example: estimated_change_in_volume
+          in: query
+          name: sort
+          schema:
+            $ref: "#/components/schemas/TagIndexingRuleExemptionSort"
+        - description: |-
+            Maximum number of results per page. Defaults to 10000; accepts values from 1 to 10000. If
+            `meta.pagination.next_cursor` is non-null, request the next page by passing that value as `page[cursor]`.
+            Continue until `next_cursor` is null.
+          example: 100
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 10000
+            format: int32
+            maximum: 10000
+            minimum: 1
+            type: integer
+        - description: |-
+            Cursor for pagination. Use `page[size]` to opt-in to pagination and get the first page; for subsequent pages, use the value from `meta.pagination.next_cursor` in the response. Pagination is complete when `next_cursor` is null.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-15T12:00:00.000Z"
+                          created_by_handle: user@datadoghq.com
+                          estimated_change_in_volume: 45
+                          kind: exemption
+                          missing_indexed_tags:
+                            - service
+                          reason: This metric has a pre-existing tag configuration.
+                          volume_status: ok
+                        id: dd.test.metric
+                        type: tag_indexing_rule_exemptions
+                    links:
+                      first: /api/v2/metrics/list-tag-indexing-rule-exemptions?page[size]=100
+                      next: /api/v2/metrics/list-tag-indexing-rule-exemptions?page[size]=100&page[cursor]=next-page-cursor
+                      self: /api/v2/metrics/list-tag-indexing-rule-exemptions?page[size]=100
+                    meta:
+                      pagination:
+                        cursor:
+                        limit: 1
+                        next_cursor: next-page-cursor
+                        type: cursor_limit
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: List tag indexing rule exemptions
+      tags:
+        - Metrics
+      x-menu-order: 34
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules:
     get:
       description: List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.
@@ -216790,8 +215494,6 @@ paths:
         Retrieve a pruned, hierarchical view of an APM trace by its trace ID.
         The trace is summarized as a tree of spans rooted at the trace root and reduced in size
         to keep rendering large traces in the UI practical.
-        A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
-        no trace with this ID is available, such as when the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
       operationId: GetPrunedTraceByID
       parameters:
@@ -216904,12 +215606,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/PrunedTraceResponse"
           description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
         "403":
           content:
             application/json:
@@ -243076,11 +241772,6 @@ paths:
       description: |-
         The API endpoint to aggregate spans into buckets and compute metrics and timeseries.
         This endpoint is rate limited to `300` requests per hour.
-
-        A request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups
-        including time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry
-        to stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive
-        and can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.
       operationId: AggregateSpans
       requestBody:
         content:
@@ -243100,13 +241791,14 @@ paths:
                         query: service:web* AND @http.status_code:[200 TO 299]
                         to: now
                       group_by:
-                        - facet: service
-                          limit: 20
+                        - facet: host
+                          histogram:
+                            interval: 10
+                            max: 100
+                            min: 50
                           sort:
-                            aggregation: pc90
-                            metric: "@duration"
-                            order: desc
-                            type: measure
+                            aggregation: count
+                            order: asc
                       options:
                         timezone: GMT
                     type: aggregate_request
@@ -253619,8 +252311,6 @@ paths:
       description: |-
         Retrieve a full APM trace by its trace ID, including every span in the trace.
         Traces are returned from live storage when available and fall back to longer-term storage.
-        A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
-        no trace with this ID is available, such as when the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
       operationId: GetTraceByID
       parameters:
@@ -253671,12 +252361,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/TraceResponse"
           description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
         "403":
           content:
             application/json:

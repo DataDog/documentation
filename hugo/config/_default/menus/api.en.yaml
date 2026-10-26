@@ -2010,6 +2010,19 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: List tag indexing rule exemptions
+      url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
+      identifier: metrics-list-tag-indexing-rule-exemptions
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRuleExemptions
+        unstable:
+          - v2
+        order: 34
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -14415,54 +14428,6 @@ menu:
           - RefreshExperimentResultsForOrg
         unstable: []
         order: 42
-    - name: Publish experiment protocol
-      url: /api/latest/experiments/publish-experiment-protocol/
-      identifier: experiments-publish-experiment-protocol
-      parent: experiments
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - PublishExperimentProtocol
-        unstable: []
-        order: 53
-    - name: Archive experiment protocol
-      url: /api/latest/experiments/archive-experiment-protocol/
-      identifier: experiments-archive-experiment-protocol
-      parent: experiments
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ArchiveExperimentProtocol
-        unstable: []
-        order: 54
-    - name: Replace experiment protocol
-      url: /api/latest/experiments/replace-experiment-protocol/
-      identifier: experiments-replace-experiment-protocol
-      parent: experiments
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ReplaceExperimentProtocol
-        unstable: []
-        order: 51
-    - name: Update experiment protocol
-      url: /api/latest/experiments/update-experiment-protocol/
-      identifier: experiments-update-experiment-protocol
-      parent: experiments
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - PatchExperimentProtocol
-        unstable: []
-        order: 50
     - name: Get experiment protocol
       url: /api/latest/experiments/get-experiment-protocol/
       identifier: experiments-get-experiment-protocol
@@ -14475,30 +14440,6 @@ menu:
           - GetExperimentProtocol
         unstable: []
         order: 41
-    - name: Delete experiment protocol
-      url: /api/latest/experiments/delete-experiment-protocol/
-      identifier: experiments-delete-experiment-protocol
-      parent: experiments
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteExperimentProtocol
-        unstable: []
-        order: 52
-    - name: Create experiment protocol
-      url: /api/latest/experiments/create-experiment-protocol/
-      identifier: experiments-create-experiment-protocol
-      parent: experiments
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateExperimentProtocol
-        unstable: []
-        order: 49
     - name: List experiment protocols
       url: /api/latest/experiments/list-experiment-protocols/
       identifier: experiments-list-experiment-protocols
