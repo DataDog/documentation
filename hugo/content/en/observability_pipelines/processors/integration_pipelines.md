@@ -18,6 +18,8 @@ The Integration Pipelines processor is in Preview. Contact your account manager 
 
 The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations.
 
+<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
+
 The catalog of integration pipelines is updated through Worker releases. See [Update the integration pipelines catalog](#update-the-integration-pipelines-catalog) for more information.
 
 For every log that matches the processor's filter:
@@ -28,8 +30,6 @@ For every log that matches the processor's filter:
 1. The Worker groups attributes that aren't [reserved attributes](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) under `attributes`.
 
 {{< img src="observability_pipelines/processors/integration_pipelines.png" alt="The Manage Integration Pipelines panel listing enabled integration pipelines with their source filters and processor counts." style="width:100%;" >}}
-
-<div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
 **Notes**:
 
