@@ -49,7 +49,7 @@ You need [access to global variables][2] to create and select persistent email v
 1. Open [Synthetic Monitoring & Continuous Testing > Settings > Global Variables][3] and click {{< ui >}}+ New Global Variable{{< /ui >}}.
 2. Under {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email Address{{< /ui >}}.
 3. Enter a variable name, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
-4. In the permissions section, configure who can view and use the variable and who can edit it. See [Restrict access][4].
+4. Under {{< ui >}}Permission settings{{< /ui >}}, click {{< ui >}}Edit Access{{< /ui >}} to set who can view and use the variable and who can edit it. See [Restrict access][4].
 
    {{< img src="synthetics/settings/persistent_email_variable.png" alt="Create an email global variable with Email Address selected and configure its name, tags, and access permissions" style="width:80%;" >}}
 
