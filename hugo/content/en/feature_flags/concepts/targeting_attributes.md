@@ -18,7 +18,7 @@ Each targeting attribute includes the following:
 
 - **Attribute key**: The identifier you reference in targeting rules, for example `country` or `user.plan`. Keys are unique within your organization and are case-sensitive.
 - **Data type**: `Boolean`, `String`, `Number`, or `Semver`. The data type determines which operators are available when you use the attribute in a targeting rule.
-- **Distribution channel**: Which SDKs report this attribute in their evaluation context: **Client and Server**, **Client Only**, or **Server Only**. Semver attributes are available for client SDKs and [supported server SDKs][2].
+- **Distribution channel**: Which SDKs report this attribute in their evaluation context: **Client and Server**, **Client Only**, or **Server Only**.
 - **Description** (optional): Notes for other users about what the attribute represents.
 
 Targeting attributes are organization-wide: after they're defined, an attribute is available to targeting rules across all flags and environments.
@@ -68,33 +68,8 @@ Semver comparisons support [Semantic Versioning 2.0.0][1] values. Although the s
 
 If you change a condition's attribute to one with an incompatible data type, Datadog resets the operator and value to defaults for the new type. Attributes that haven't been saved to the catalog yet (only observed in evaluation data) don't restrict the available operators.
 
-### Semver support in server SDKs
-
-Server SDKs evaluate Semver conditions starting with the following versions:
-
-| SDK | Minimum version for Semver targeting | Minimum version for values with more or fewer than three numeric components |
-|-----|--------------------------------------|------------------------------------------------------------------------------|
-| [Go][3] (`dd-trace-go`) | 2.11.0 | 2.11.0 |
-| [Java][4] (`dd-trace-java`) | 1.66.0 | 1.66.0 |
-| [.NET][5] (`dd-trace-dotnet`) | 3.52.0 | 3.53.0 |
-| [Node.js][6] (`dd-trace-js`) | 5.124.0 (5.x) or 6.13.0 (6.x) | 5.128.0 (5.x) or 6.17.0 (6.x) |
-| [Python][7] (`dd-trace-py`) | 4.9.0 | 4.15.0 |
-| [Ruby][8] (`dd-trace-rb`) | 2.33.0 | 2.44.0 |
-| [PHP][9] (`dd-trace-php`) | 1.21.0 | 1.25.0 |
-
-- Older SDK versions don't receive flags that use Semver conditions. Evaluating those flags returns the default value provided in your code.
-- Python 4.9 through 4.14, Ruby 2.33 through 2.43, and PHP 1.21 through 1.24 don't ignore build metadata in comparisons, so they treat values such as `1.2.3+a` and `1.2.3+b` as different versions. For full Semantic Versioning precedence, upgrade to the version in the last column.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://semver.org/spec/v2.0.0.html
-[2]: #semver-support-in-server-sdks
-[3]: /feature_flags/server/go/
-[4]: /feature_flags/server/java/
-[5]: /feature_flags/server/dotnet/
-[6]: /feature_flags/server/nodejs/
-[7]: /feature_flags/server/python/
-[8]: /feature_flags/server/ruby/
-[9]: /feature_flags/server/php/
