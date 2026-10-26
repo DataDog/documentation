@@ -110,7 +110,7 @@ connectors:
 To configure additional peer tags with a Collector version below v0.95.0, upgrade to v0.95.0 or later. Add `datadog/connector` to the trace pipeline exporters and metric pipeline receivers, as shown in the [complete Collector configuration][2]. Apply the peer-tag settings above to the connector.
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: /opentelemetry/setup/collector_exporter/datadog_exporter/#2-configure-the-datadog-exporter-and-connector
+[2]: /opentelemetry/setup/collector_exporter/datadog_exporter/#2---configure-the-datadog-exporter-and-connector
 [6]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 {{% /tab %}}
 {{< /tabs >}}
