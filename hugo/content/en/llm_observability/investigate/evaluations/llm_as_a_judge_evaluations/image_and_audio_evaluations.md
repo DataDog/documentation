@@ -26,7 +26,7 @@ A custom LLM-as-a-judge evaluator can send the images and audio attached to your
   | Images | Anthropic | Claude 3, Claude Haiku, Claude Sonnet, and Claude Opus model families |
   | Audio | OpenAI | `gpt-audio`, `gpt-audio-mini`, and `gpt-audio-1.5` |
 
-  Other providers, including Azure OpenAI, Amazon Bedrock, and Vertex AI, do not send attachments to the judge.
+  Datadog doesn't send attachments to models from other providers, including Azure OpenAI, Amazon Bedrock, and Vertex AI.
 - The media uses a supported format:
   - Images: JPEG, PNG, GIF, or WebP
   - Audio: WAV or MP3, for every clip on the evaluated spans, including output audio. A clip in another format, such as `audio/ogg` or `audio/webm`, can play in the trace view, but it causes the evaluation to fail.
@@ -35,7 +35,7 @@ An evaluator can include images or audio, but not both, because the supported au
 
 ## Configure an image or audio evaluator
 
-1. Navigate to the Agent Observability [Evaluators page][2] and select {{< ui >}}Create Evaluator{{< /ui >}}. Start from an [audio or image template](#templates), or start from scratch by selecting the {{< ui >}}Span{{< /ui >}}, {{< ui >}}Trace{{< /ui >}}, or {{< ui >}}Session{{< /ui >}} scope. Images and audio are available at all three scopes. Session scope requires spans tagged with a `session_id`, and the evaluation runs after 30 minutes of session inactivity. See [Session-Level Evaluators][8].
+1. Navigate to the Agent Observability [Evaluators page][2] and select {{< ui >}}Create Evaluator{{< /ui >}}. Start from an [audio or image template](#templates), or start from scratch at {{< ui >}}Span{{< /ui >}}, {{< ui >}}Trace{{< /ui >}}, or [{{< ui >}}Session{{< /ui >}}][8] scope.
 1. Select an {{< ui >}}Account{{< /ui >}} and a {{< ui >}}Model{{< /ui >}} that support the attachment type. To connect a new account, see [Connect an LLM provider][3].
 1. In the {{< ui >}}Instructions{{< /ui >}} field, describe what the judge must evaluate in the attachments and what it must return.
 1. Next to {{< ui >}}Evaluated Variables{{< /ui >}}, select {{< ui >}}Attachments{{< /ui >}}, then select {{< ui >}}Include images{{< /ui >}} or {{< ui >}}Include audio{{< /ui >}}. If the selected model does not support an attachment type, its option is disabled and shows the reason. **Note**: Attachments may increase evaluation cost.
@@ -100,7 +100,7 @@ When you apply a template, Datadog includes its attachment type and keeps your m
 
 ## View results
 
-Image and audio evaluation results appear across Agent Observability with your other evaluations. For span evaluators that include audio, the {{< ui >}}Content{{< /ui >}} column of the evaluator's results lets you play the evaluated audio. For trace evaluators, the column plays only the audio on the trace's root span.
+Image and audio evaluation results appear across Agent Observability with your other evaluations. For span evaluators that include audio, the {{< ui >}}Content{{< /ui >}} column of the evaluator's results lets you play the evaluated audio. For trace evaluators, the column plays only the audio on the trace's root span. Session evaluator results have no {{< ui >}}Content{{< /ui >}} column.
 
 ## Permissions
 
