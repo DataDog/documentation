@@ -247,7 +247,7 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 
 Create an email global variable to receive emails at the same Datadog-managed address across browser test runs. Register an application account with this address once, then reuse it for email workflows, such as password resets, order confirmations, or OTP login. Mobile app tests do not support email address variables.
 
-1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email address{{< /ui >}}.
+1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email Address{{< /ui >}}.
 2. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
 3. Configure access in the permissions section and save the variable.
 4. Copy the generated address from the saved variable to register the account in your application. The address displayed before creation is an example.
