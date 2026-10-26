@@ -533,7 +533,7 @@ To install the Agent while keeping your existing configuration, run the followin
 DD_UPGRADE=true ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
 ```
 
-For a full list of the available installation script environment variables, see [Basic Agent Usage for AIX][1].
+For more information, see [Datadog UNIX Agent for AIX][1].
 
 ### Multi-step install
 

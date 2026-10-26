@@ -19,7 +19,7 @@ This page covers Agent 7 on AIX. For AIX versions earlier than 7.2 TL5, see the 
 ## Overview
 The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-Agent 7.85.0 and later supports AIX 7.2 TL5 and later. See [Supported Platforms][5] for details.
+Agent 7.85.0 and later support AIX 7.2 TL5 and later. See [Supported Platforms][5] for details.
 
 This page walks you through installing, operating, and removing the Datadog Agent on AIX.
 
@@ -65,7 +65,7 @@ The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/data
 
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste.
 
-Alternatively, see the [datadog.yaml.example file][10] for all available configuration options.
+Alternatively, see the [datadog-agent_aix.yaml.example file][10] for all available configuration options.
 
 
 ### Integration files
