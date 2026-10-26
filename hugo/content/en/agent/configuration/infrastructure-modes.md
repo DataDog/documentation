@@ -10,7 +10,6 @@ further_reading:
   text: "Upgrade your Datadog Agent"
 algolia:
   tags: ['infrastructure modes']
-private: true
 ---
 
 ## Overview
