@@ -17,13 +17,13 @@ further_reading:
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
+AI Guard evaluates the prompts, model responses, and tool calls in your AI applications and agents in real time, and blocks calls that carry an attack or expose sensitive data. AI Guard runs inline with your agent, works with any large language model (LLM) provider, and records every evaluation in Datadog so you can investigate threats alongside the rest of your application traces.
+
+AI Guard protects two kinds of agents: custom agents that your team builds and runs, and coding agents, such as Claude Code, that your developers use. Unless a section says otherwise, the AI Guard documentation covers custom agents.
+
 {{< callout url="https://www.datadoghq.com/product-preview/coding-agent-security-guardrails/" header="false" >}}
 AI Guard for coding agents is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
-
-AI Guard evaluates the prompts, model responses, and tool calls in your AI applications and agents in real time, and blocks calls that carry an attack or expose sensitive data. AI Guard runs inline with your agent, works with any LLM provider, and records every evaluation in Datadog so you can investigate threats alongside the rest of your application traces.
-
-AI Guard protects two kinds of agents: custom agents that your team builds and runs, and coding agents, such as Claude Code, that your developers use. Unless a section says otherwise, the AI Guard documentation covers custom agents.
 
 AI Guard protects against prompt injection and jailbreaking, tool misuse, and sensitive data exfiltration. Together, these protections address the [agentic lethal trifecta][1]: privileged system access, exposure to untrusted data, and outbound communication.
 
@@ -38,7 +38,7 @@ AI Guard sits in the critical path of LLM interactions, so it can stop unsafe pr
    - A plugin on an AI gateway, which evaluates LLM traffic from every agent that routes through the gateway.
 
 1. AI Guard evaluates the full conversation, including the system prompt, against the applicable security policy.
-1. AI Guard returns an `ALLOW` or `DENY` with a reason. For `DENY` results, the subsequent action depends on the enforcement mode specified in the policy:
+1. AI Guard returns an `ALLOW` or `DENY` action with a reason. For a `DENY` action, what happens next depends on the enforcement mode in the policy:
 
    - In the default {{< ui >}}Monitor only{{< /ui >}} mode, AI Guard reports the action without blocking.
    - In {{< ui >}}Block unsafe{{< /ui >}} mode, AI Guard stops the request.
@@ -58,7 +58,7 @@ Datadog manages the detection models. To adjust how AI Guard applies them to a s
 Each evaluation runs in up to two passes:
 
 1. A fast classifier screens the conversation. Most evaluations finish in this pass.
-1. If the classifier flags the conversation as suspicious, AI Guard escalates it to a large language model for a deeper assessment.
+1. If the classifier flags the conversation as suspicious, AI Guard escalates the conversation to an LLM for a deeper assessment.
 
 Images skip the classifier and always go to the second pass, so image evaluation has higher latency than text evaluation.
 
@@ -66,7 +66,7 @@ Sensitive data scanning works differently. It uses Sensitive Data Scanner rules,
 
 ### Key terms: spans, traces, and signals
 
-Knowing these AI Guard concepts helps you triage, evaluate, and remediate AI Guard data. 
+Knowing how traces, AI Guard spans, and signals relate helps you triage signals, evaluate AI Guard decisions, and remediate threats.
 
 Trace
 : The full record of one request to your agent, from the incoming request to the response. A trace includes every model call and tool call the agent makes along the way.
@@ -90,7 +90,7 @@ AI Guard supports the full life cycle of securing AI agents, from finding unprot
 1. [Triage signals][7] that detection rules create from AI Guard evaluation outcomes.
 1. [Investigate spans][8] to filter AI Guard evaluations for a specific service, user, or concern.
 
-AI Guard works with any target model, including models from OpenAI, Anthropic, Amazon Bedrock, Google Vertex AI, and Azure. It can be especially useful for open source and self-hosted models with fewer built-in security protections.
+AI Guard works with any target model, including models from OpenAI, Anthropic, Amazon Bedrock, Google Vertex AI, and Azure. AI Guard can be especially useful for open source and self-hosted models that have fewer built-in security protections.
 
 AI Guard complements Agent Observability by adding runtime security to LLM applications and agents you already monitor. Agent Observability gives developers and researchers visibility into LLM and agent usage, including cost, model usage, and traces. AI Guard gives security teams runtime protection, threat detection, and governance features such as policies that control what agents are allowed to do.
 
@@ -134,10 +134,10 @@ Learn what content AI Guard evaluates, how fast it responds, how much traffic it
 
 ### Content types and languages
 
-AI Guard evaluates text and images only.
+Knowing which content AI Guard evaluates helps you predict which parts of a conversation get checked. AI Guard evaluates only text and images.
 
 - AI Guard doesn't parse document files, such as `.docx` or PDF files. To evaluate a document, extract its text in your application and send the text, or send the content as an image.
-- Image evaluation has higher latency than text evaluation, because the fast filtering model doesn't support images.
+- Image evaluation has higher latency than text evaluation, because the classifier doesn't support images.
 - AI Guard supports most languages. Datadog has verified AI Guard detection in these languages: Arabic, Chinese (Simplified), Chinese (Traditional), Dutch, English, French, German, Japanese, Korean, Polish, Portuguese, Russian, and Spanish.
 
 ### Latency
@@ -149,6 +149,8 @@ AI Guard evaluations typically complete in under 100 milliseconds. Latency varie
 Image evaluation takes longer, and its latency varies more.
 
 ### Usage limits
+
+AI Guard usage limits cap how much evaluation traffic each Datadog organization can send. Knowing the limits helps you plan for requests that exceed them.
 
 The AI Guard evaluation API enforces these limits for each Datadog organization:
 
@@ -169,6 +171,8 @@ To reduce how many evaluations your agent sends, use the [SDK][11] and call the 
 <!-- TODO: Do tool calls set to Pass in a policy (Tools policies > Individual policies) count toward the usage limits and cost? The Pass option lets tool calls through without evaluating them, so it might reduce cost without code changes. Answers to draft questions on October 23 indicated that limiting evaluations to tool calls is only possible with the SDK today. If Pass reduces cost, the docs can recommend it alongside the SDK. -->
 
 ### Data residency, retention, and privacy
+
+AI Guard data residency, retention, and privacy details help you assess whether AI Guard fits your data handling requirements.
 
 AI Guard processes all evaluations in the US, regardless of your Datadog site.
 

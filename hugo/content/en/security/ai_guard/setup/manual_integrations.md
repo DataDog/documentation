@@ -50,7 +50,7 @@ The LiteLLM Proxy integration evaluates traffic in each mode that you set in the
 
 ### Limitations
 
-Some activity through manual integrations isn't evaluated or can't be blocked, so review these limits before you rely on a manual integration alone:
+Some activity through manual integrations isn't evaluated or can't be blocked. Review these limits before you rely on a manual integration alone:
 
 - If AI Guard returns an error or doesn't respond, both integrations allow the request to proceed.
 - The Amazon Strands plugin doesn't evaluate images, documents, or video. With `dd-trace-py` 4.12.0 or later, the plugin sends a placeholder for non-text content. With earlier versions, non-text content can cause AI Guard to skip the evaluation.
@@ -95,9 +95,9 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
 Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluates the LLM traffic of every agent that routes through the proxy, whatever language the agent uses.
 
-**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy's environment. The agents you want to protect must send their LLM requests through the proxy.
+**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy environment. The agents you want to protect must send their LLM requests through the proxy.
 
-1. Set these environment variables in the LiteLLM Proxy's environment:
+1. Set these environment variables in the LiteLLM Proxy environment:
 
    - `DD_AI_GUARD_ENABLED=true`.
    - `DD_API_KEY=<DATADOG_API_KEY>`.

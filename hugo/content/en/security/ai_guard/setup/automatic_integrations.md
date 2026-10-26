@@ -37,7 +37,7 @@ Each automatic integration evaluates a specific set of operations, so check the 
 
 | Language | Package | Evaluated operations |
 | --- | --- | --- |
-| Python | LangChain | LLM `invoke()` and `ainvoke()`, chat model `invoke()` and `ainvoke()`, and the tool calls that LangChain agents decide to run: AgentExecutor agents, and `create_agent` agents in LangChain 1.0 and later (`dd-trace-py` 4.12.0 or later). |
+| Python | LangChain | LLM `invoke()` and `ainvoke()`, chat model `invoke()` and `ainvoke()`, and the tool calls that LangChain agents decide to run. Tool call evaluation covers AgentExecutor agents and, with `dd-trace-py` 4.12.0 or later, `create_agent` agents in LangChain 1.0 and later. |
 | Python | OpenAI | `client.chat.completions.create()`, `client.chat.completions.parse()`, `client.responses.create()`, and `client.responses.parse()`. |
 | Python | Anthropic | `client.messages.create()` and `client.messages.stream()`. With the `anthropic` package 0.37.0 or later, also `client.beta.messages.create()` and `client.beta.messages.stream()`. |
 | Node.js | AI SDK | Model calls from `generateText`, `streamText`, `generateObject`, and `streamObject`, including the tool calls and tool results they carry. |
@@ -82,7 +82,7 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
 
    - **Python**: Run the application with `ddtrace-run`, or add `import ddtrace.auto` as the first import in the application.
    - **Node.js**: Start the application with `node --require dd-trace/init`, or call `require('dd-trace').init()` before any other module loads.
-   - **Ruby**: Enable the RubyLLM integration in your Datadog configuration. RubyLLM isn't instrumented automatically, so `require 'datadog/auto_instrument'` alone doesn't enable it:
+   - **Ruby**: Enable the RubyLLM integration in your Datadog configuration. RubyLLM isn't instrumented automatically, so `require 'datadog/auto_instrument'` alone doesn't enable the RubyLLM integration. Add this block to your Datadog configuration:
 
      ```ruby
      Datadog.configure do |config|

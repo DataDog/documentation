@@ -131,14 +131,14 @@ To evaluate a tool result after the tool runs, end the conversation with the too
     "attributes": {
       "messages": [
         { "role": "system", "content": "You are an AI Assistant that can do anything." },
-        { "role": "user", "content": "RUN: fetch http://my.site" },
+        { "role": "user", "content": "RUN: fetch http://example.com" },
         {
           "role": "assistant",
           "content": "",
           "tool_calls": [
             {
               "id": "call_abc",
-              "function": { "name": "http_get", "arguments": "{\"url\":\"http://my.site\"}" }
+              "function": { "name": "http_get", "arguments": "{\"url\":\"http://example.com\"}" }
             }
           ]
         },
@@ -163,9 +163,9 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | `data.attributes.reason` | A natural language summary of the decision, for auditing and logging. Don't pass `reason` back to the model or the end user. |
 | `data.attributes.tags` | The attack categories AI Guard detected. |
 | `data.attributes.tag_probs` | The confidence score for each attack category. |
-| `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use it to decide whether to stop a request when the action is `DENY`. |
+| `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use `is_blocking_enabled` to decide whether to stop a request when the action is `DENY`. |
 | `data.attributes.global_prob` | The overall threat probability, between `0` and `1`. Included only when AI Guard computes it. |
-| `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` (`path`, `start_index`, `end_index_exclusive`). |
+| `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` fields. The `location` field has `path`, `start_index`, and `end_index_exclusive` values. |
 
 [1]: /security/ai_guard/setup/sdk/
 [2]: /security/ai_guard/setup/manual_integrations/
