@@ -36,11 +36,17 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Databri
 
 #### Cree y configure la entidad de servicio en Databricks {#create-and-configure-the-service-principal-in-databricks}
 
+1. Si desea utilizar una entidad de servicio **administrada por Microsoft Entra ID** en lugar de una **administrada por Databricks**, primero registre una aplicación en Microsoft Entra ID ([documentación de Microsoft Entra][22]):
+   1. Inicie sesión en el [centro de administración de Microsoft Entra][23] al menos como Administrador de aplicaciones en la nube. Si su organización tiene varios inquilinos, cambie al correcto utilizando **Directorios + suscripciones**.
+   1. Vaya a **Entra ID > App registrations**, luego haga clic en **New registration**.
+   1. Ingrese un nombre, seleccione **Accounts in this organizational directory only (Single tenant)** y haga clic en **Register**.
+   1. En la página **Información general** de la aplicación, anote el **ID de aplicación (cliente)** y el **ID de directorio (inquilino)**.
+   1. Haga clic en **Certificates & secrets > Client secrets > New client secret**. Ingrese una descripción, establezca la expiración al máximo permitido (730 días) y haga clic en **Add**. Copie el valor del secreto generado. Se muestra solo una vez.
 1. Como **administrador del espacio de trabajo de Databricks**, vaya a {{< ui >}}Settings{{< /ui >}} haciendo clic en su perfil en la esquina superior derecha del espacio de trabajo.
 1. En la pestaña {{< ui >}}Identity and access{{< /ui >}}, haga clic en {{< ui >}}Manage{{< /ui >}} junto a {{< ui >}}Service principals{{< /ui >}}.
 1. Haga clic en {{< ui >}}Add service principal{{< /ui >}}, luego haga clic en {{< ui >}}Add new{{< /ui >}}.
 
-   <div class="alert alert-warning">Para Azure Databricks, seleccione el tipo de administración "Databricks managed". Datadog NO admite entidades de servicio "Microsoft Entra ID managed".</div>
+   <div class="alert alert-warning">Para Azure Databricks, seleccione el tipo de administración "Databricks managed". Si registró una aplicación de Microsoft Entra ID anteriormente, seleccione "Microsoft Entra ID managed" en su lugar y pegue el <strong>ID de aplicación (cliente)</strong> que anotó.</div>
 1. Ingrese un nombre y habilite los siguientes derechos de espacio de trabajo para la entidad de servicio:
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
@@ -49,7 +55,7 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Databri
    <div class="alert alert-info">Si no puede otorgar el derecho de <strong>Acceso de administrador</strong>, proporcione acceso granular en su lugar, como se describe en la sección <a href="#permissions">Permisos</a> en Configuración avanzada.</div>
 1. Haga clic en **Agregar**.
 
-1. Haga clic en el nombre de su nueva entidad de servicio. En la pestaña {{< ui >}}Secrets{{< /ui >}}, haga clic en {{< ui >}}Generate secret{{< /ui >}}.
+1. Si creó un service principal **Databricks managed**, haga clic en su nombre. En la pestaña {{< ui >}}Secrets{{< /ui >}}, haga clic en {{< ui >}}Generate secret{{< /ui >}}.
    1. Establezca {{< ui >}}Lifetime (days){{< /ui >}} en el valor máximo permitido (730).
 
    1. Haga clic en {{< ui >}}Generate{{< /ui >}}.
@@ -57,6 +63,8 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Databri
    1. Tome nota de su ID de cliente y secreto de cliente.
 
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="En Databricks, se muestra un modal que indica el ID de cliente y el secreto asociados con un nuevo secreto de OAuth." style="width:70%;" >}}
+
+   Si creó un service principal **Microsoft Entra ID managed**, utilice el ID de cliente y el secreto que generó en Microsoft Entra ID.
 
 1. En la pestaña {{< ui >}}Permissions{{< /ui >}}, haga clic en {{< ui >}}Grant access{{< /ui >}}. Busque la nueva entidad de servicio, asígnele el permiso {{< ui >}}Manage{{< /ui >}} y haga clic en {{< ui >}}Save{{< /ui >}}.
 
@@ -66,7 +74,8 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Databri
 1. En la pestaña {{< ui >}}Configure{{< /ui >}}, haga clic en {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Ingrese un nombre de espacio de trabajo, la URL de su espacio de trabajo de Databricks y el ID de cliente y el secreto que generó.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="En el mosaico de integración de Datadog-Databricks, se muestra un espacio de trabajo de Databricks. Este espacio de trabajo tiene un nombre, una URL, un ID de cliente y un secreto de cliente." style="width:100%;" >}}
-1. Proporcione el ID de un [Databricks SQL Warehouse][19] para que Datadog realice consultas. Esto le brinda visibilidad de sus costos de Databricks en Jobs Monitoring o [Cloud Cost Management][18] y potencia [Quality Monitoring][21].
+1. Si creó un service principal **Microsoft Entra ID managed**, seleccione la casilla **Use Microsoft Entra ID managed service principal** e ingrese el **ID de directorio (inquilino)** que anotó anteriormente.
+1. Proporcione el ID de un [Databricks SQL Warehouse][19] para que Datadog realice consultas. Datadog utiliza este almacén para leer las [tablas del sistema][20] de Unity Catalog. Estas tablas potencian la visibilidad de costos de Databricks en Jobs Monitoring y [Cloud Cost Management][18], Serverless job monitoring, SQL warehouse and query monitoring, y [Quality Monitoring][21].
    1. En Databricks, vaya a {{< ui >}}SQL Warehouses{{< /ui >}} y seleccione el almacén que Datadog debe usar. Debe ser Pro o Serverless. Los almacenes Classic no son compatibles. Para reducir costos, utilice un almacén 2XS dedicado, con Auto Stop configurado de 5 a 10 minutos.
    1. Copie el ID de la página de descripción general del almacén (también es el último segmento de la URL del almacén) e ingréselo en el mosaico de integración.
    1. En la pestaña {{< ui >}}Permissions{{< /ui >}} del almacén (arriba a la derecha), otorgue a la entidad de servicio `CAN USE`.
@@ -79,6 +88,7 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Databri
       ```
 
       <div class="alert alert-info">El usuario que ejecuta estos comandos debe tener el <code>MANAGE</code> privilegio en <code>CATALOG system</code>.</div>
+   1. Agregue la entidad de servicio al grupo de nivel de cuenta `databricks_pii_access`. Serverless job monitoring y el monitoreo de almacenes SQL y consultas requieren esta membresía, porque Databricks enmascara el texto de las consultas SQL para principals fuera del grupo. Consulte [Acceso al texto de la consulta](#query-text-access) para conocer los requisitos completos.
 1. En la sección **Seleccionar productos para configurar la integración**, asegúrese de que Data Observability: Jobs Monitoring esté {{< ui >}}Enabled{{< /ui >}}.
 1. En la sección {{< ui >}}Datadog Agent Setup{{< /ui >}}, elija entre
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog instala y administra el Datadog Agent con un script de inicio global en el espacio de trabajo.
@@ -88,6 +98,8 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Databri
 [19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
 [21]: /es/data_observability/quality_monitoring/data_warehouses/databricks/
+[22]: https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal
+[23]: https://entra.microsoft.com
 
 {{% /tab %}}
 
@@ -119,7 +131,7 @@ Consulte [Private Link Connectivity (Preview)][15] para obtener las instruccione
 1. En la pestaña {{< ui >}}Configure{{< /ui >}}, haga clic en {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Ingrese un nombre de espacio de trabajo, la URL de su espacio de trabajo de Databricks y el token de Databricks que generó.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="En el mosaico de integración de Datadog-Databricks, se muestra un espacio de trabajo de Databricks. Este espacio de trabajo tiene un nombre, una URL y un token de API." style="width:100%;" >}}
-1. Proporcione el ID de un [Databricks SQL Warehouse][19] para que Datadog realice consultas. Esto le brinda visibilidad de sus costos de Databricks en Jobs Monitoring o [Cloud Cost Management][18] y potencia [Quality Monitoring][21].
+1. Proporcione el ID de un [Databricks SQL Warehouse][19] para que Datadog realice consultas. Datadog utiliza este almacén para leer las [tablas del sistema][20] de Unity Catalog. Estas tablas potencian la visibilidad de costos de Databricks en Jobs Monitoring y [Cloud Cost Management][18], Serverless job monitoring, SQL warehouse and query monitoring, y [Quality Monitoring][21].
    1. En Databricks, vaya a {{< ui >}}SQL Warehouses{{< /ui >}} y seleccione el almacén que Datadog debe usar. Debe ser Pro o Serverless. Los almacenes Classic no son compatibles. Para reducir costos, utilice un almacén 2XS dedicado, con Auto Stop configurado de 5 a 10 minutos.
    1. Copie el ID de la página de descripción general del almacén (también es el último segmento de la URL del almacén) e ingréselo en el mosaico de integración.
    1. En la pestaña {{< ui >}}Permissions{{< /ui >}} del almacén (arriba a la derecha), otorgue al principal del token `CAN USE`.
@@ -132,6 +144,7 @@ Consulte [Private Link Connectivity (Preview)][15] para obtener las instruccione
       ```
 
       <div class="alert alert-info">El usuario que ejecuta estos comandos debe tener el <code>MANAGE</code> privilegio en <code>CATALOG system</code>.</div>
+   1. Agregue el principal del token al grupo de nivel de cuenta `databricks_pii_access`. Serverless job monitoring y el monitoreo de almacenes SQL y consultas requieren esta membresía, porque Databricks enmascara el texto de las consultas SQL para principals fuera del grupo. Consulte [Acceso al texto de la consulta](#query-text-access) para conocer los requisitos completos.
 1. En la sección **Seleccionar productos para configurar la integración**, asegúrese de que el producto Data Observability: Jobs Monitoring esté **Habilitado**.
 1. En la sección {{< ui >}}Datadog Agent Setup{{< /ui >}}, elija entre
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog instala y administra el Datadog Agent con un script de inicio global en el espacio de trabajo.
@@ -495,6 +508,32 @@ Además, para que Datadog acceda a sus datos de costos de Databricks en Data Obs
    ```
    El usuario que los otorgue debe tener el privilegio `MANAGE` en `CATALOG system`.
 
+#### Acceso al texto de la consulta {#query-text-access}
+
+Databricks enmascara el texto de la consulta SQL para cualquier principal que no sea un administrador de cuenta o un miembro del grupo a nivel de cuenta `databricks_pii_access`. Para un principal enmascarado, el texto de la consulta se devuelve como `<Redacted>` en:
+
+- La columna `statement_text` de la tabla del sistema [`system.query.history`][30]
+- The [Query History API][31]
+- The [List Queries API][32]
+- Eventos de registro de auditoría que capturan el texto de la sentencia SQL
+
+Agregue la entidad de servicio a `databricks_pii_access` para usar las siguientes capacidades, que leen el texto de la consulta:
+
+- **Serverless job monitoring**: Supervisión de trabajos que se ejecutan en [Serverless compute][34], donde no se ejecuta ningún Datadog Agent en el clúster.
+- **SQL warehouse & query monitoring**: Visibilidad de las consultas que se ejecutan en sus SQL warehouses y recomendaciones de optimización generadas por Datadog.
+
+Los datos de costos de Databricks, Jobs Monitoring en clústeres all-purpose y job, y las métricas de [Quality Monitoring][35] a nivel de tabla no dependen del texto de la consulta y no se ven afectados.
+
+La membresía al grupo es necesaria además de las concesiones de [tabla del sistema](#cost-data-permissions). Una entidad que está en el grupo pero carece de `SELECT` en `CATALOG system` aún no puede leer el historial de consultas.
+
+Para crear el grupo y agregar la entidad de servicio:
+
+1. El grupo `databricks_pii_access` no existe en una cuenta de Databricks de forma predeterminada, y los administradores del espacio de trabajo no son miembros de él automáticamente. Créelo con el nombre exacto `databricks_pii_access`, el cual distingue entre mayúsculas y minúsculas.
+   - Si no administra grupos con SCIM o un proveedor de identidad externo, vaya a {{< ui >}}Account Console{{< /ui >}} > {{< ui >}}User Management{{< /ui >}} > {{< ui >}}Groups{{< /ui >}} > {{< ui >}}Add Group{{< /ui >}}.
+   - Si administra grupos con SCIM o un proveedor de identidad externo, cree el grupo allí en su lugar.
+1. Agregue el service principal o el token principal utilizado por la integración de Datadog-Databricks al grupo.
+
+Para obtener más detalles, consulte la documentación de Databricks sobre [la administración de grupos a nivel de cuenta][33].
 
 ### Etiquetar tramos en tiempo de ejecución {#tag-spans-at-runtime}
 
@@ -578,3 +617,9 @@ Para hacer un seguimiento de las áreas de trabajo que utilizan [Databricks Priv
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /es/getting_started/tagging/
 [29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
+[30]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
+[31]: https://docs.databricks.com/api/workspace/queryhistory/list
+[32]: https://docs.databricks.com/api/workspace/queries/list
+[33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[34]: https://docs.databricks.com/aws/en/compute/serverless/
+[35]: /es/data_observability/quality_monitoring/data_warehouses/databricks/

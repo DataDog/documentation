@@ -18,7 +18,8 @@ Fleet Automation can deploy, update, and remove [integration][1] configuration f
 
 ## Prerequisites
 
-- [Remote Configuration][2] enabled for your organization
+- [Remote Configuration][2] enabled for your organization and the Agent's API key
+- [Remote updates][7] enabled on each target VM Agent (`remote_updates: true`)
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][6].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
 
@@ -78,3 +79,4 @@ Each operation applies changes to the integration's `conf.d` configuration file 
 [4]: https://app.datadoghq.com/fleet/deployments
 [5]: https://www.rfc-editor.org/rfc/rfc7386
 [6]: /agent/fleet_automation/upgrade_agents/
+[7]: /agent/guide/setup_remote_config/#enable-remote-agent-management

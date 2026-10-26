@@ -6,10 +6,10 @@ aliases:
 - /ko/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: 설명서
+  tag: 문서
   text: Agent 디버그 모드
 - link: /agent/troubleshooting/agent_check_status/
-  tag: 설명서
+  tag: 문서
   text: Agent 검사 상태 확인
 title: Agent Flare
 ---
@@ -29,7 +29,7 @@ Agent에 대해 Remote Configuration이 활성화된 상태에서 Datadog 지원
 ## Datadog 사이트에서 플레어 전송 {#send-a-flare-from-the-datadog-site}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">Fleet Automation을 통한 Agent Flare 전송은 선택한 Datadog 사이트({{< region-param key="dd_datacenter" >}})에 대해 지원되지 않습니다. 대신 <a href="#manual-submission">수동 플레어 제출</a>을 사용하세요.</div>
+<div class="alert alert-warning">Fleet Automation을 통한 Agent Flare 전송은 선택한 Datadog 사이트({{< region-param key="dd_datacenter" >}})에서 지원되지 않습니다. 대신 <a href="#manual-submission">수동 플레어 제출</a>을 사용하세요.</div>
 {{< /site-region >}}
 
 Datadog 사이트에서 플레어를 전송하려면 Agent에서 [Fleet Automation][2]과 [Remote Configuration][3]이 활성화되어 있어야 합니다.
@@ -41,7 +41,7 @@ Datadog 사이트에서 플레어를 전송하려면 Agent에서 [Fleet Automati
 ## `flare` 명령을 사용하여 플레어 전송 {#send-a-flare-using-the-flare-command}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning"> <code>flare</code> 하위 명령을 사용한 Agent Flare 전송은 선택한 Datadog 사이트({{< region-param key="dd_datacenter" >}})에 대해 지원되지 않습니다. 대신 <a href="#manual-submission">수동 플레어 제출</a>을 사용하세요.</div>
+<div class="alert alert-warning"> <code>flare</code> 하위 명령을 사용한 Agent Flare 전송은 선택한 Datadog 사이트({{< region-param key="dd_datacenter" >}})에서 지원되지 않습니다. 대신 <a href="#manual-submission">수동 플레어 제출</a>을 사용하세요.</div>
 {{< /site-region >}}
 
 플레어를 전송하려면 `flare` 하위 명령을 사용합니다. 아래 명령에서 지원 케이스 ID가 있는 경우 `<CASE_ID>`를 해당 Datadog 지원 케이스 ID로 바꾸고, 이후 해당 케이스에 연결된 이메일 주소를 입력합니다.
@@ -114,7 +114,14 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 
 ## ECS Fargate {#ecs-fargate}
 
-ECS Fargate 플랫폼 v1.4.0을 사용하는 경우 [Amazon ECS Exec][5]을 활성화하여 실행 중인 Linux 컨테이너에 접근할 수 있도록 ECS 작업 및 서비스를 구성할 수 있습니다. Amazon ECS Exec을 활성화한 후 다음 명령을 실행하여 플레어를 전송합니다.
+ECS Fargate의 경우, Datadog은 [Datadog 사이트에서 flare를 전송하는 것을 권장합니다](#send-a-flare-from-the-datadog-site). Fleet Automation에서는 Task ARN으로 작업을 식별합니다. 이 프로세스는 ECS Task 또는 Service를 변경할 필요가 없습니다.
+
+또는 Remote Configuration을 사용할 수 없거나 다른 Agent 명령어를 실행해야 하는 경우 [Amazon ECS Exec][5]를 사용합니다. ECS Fargate 플랫폼 v1.4.0. 사용하려면 다음 단계를 따르세요.
+
+1. 작업 정의에 ECS Exec 권한을 추가합니다.
+2. 서비스에서 ECS Exec을 활성화합니다.
+3. 작업을 재배포합니다.
+4. flare를 전송하려면 다음 명령어를 실행합니다.
 
 ```bash
 aws ecs execute-command --cluster <CLUSTER_NAME> \
@@ -123,8 +130,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
     --interactive \
     --command "agent flare <CASE_ID>"
 ```
-
-**참고:** ECS Exec은 새 작업에만 활성화할 수 있습니다. 기존 작업은 ECS Exec을 사용하려면 다시 생성해야 합니다.
 
 [1]: /ko/agent/basic_agent_usage/#gui
 [2]: /ko/agent/basic_agent_usage/windows/#agent-v6
