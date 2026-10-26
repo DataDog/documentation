@@ -22,12 +22,10 @@ Automatic integrations work only with specific packages and versions. Check the 
 | Python | Anthropic | 0.28.0 or later. | `dd-trace-py` 4.11.0 or later. |
 | Node.js | AI SDK | v6. | `dd-trace-js` 5.96.0 or later. |
 | Node.js | OpenAI | 4.87.0 or later. | `dd-trace-js` 5.105.0 or later. |
-| Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later in the v5 release line, or 6.11.0 or later. |
+| Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later, or 6.11.0 or later. |
 | Ruby | RubyLLM | 2.0.0 or later. | `dd-trace-rb` 2.44.0 or later. |
 
-<!-- TODO: Does it make sense that every package has a different supported Datadog SDK version? Is it possible to align them, for example on one minimum per language? The SDK and manual integrations require `dd-trace-py` 4.13.0 or later, but the automatic integrations table lists lower Python versions: LangChain at 3.19.0 (3.14.0 on the published page), OpenAI at 4.10.0, and Anthropic at 4.11.0. -->
-
-<!-- TODO: Is AI SDK v7 supported, and from which `dd-trace-js` version? If so, the AI SDK row can say "v6 or later." AI SDK v7 is the default npm version since June 2026, and `dd-trace-js` main has v7-specific instrumentation. -->
+<!-- TODO: Does AI Guard support AI SDK v7 starting with `dd-trace-js` 5.112.0 and 6.1.0, the releases that added v7 support for LLM Observability? When integration tests confirm it, change the AI SDK row to "v6 or later" with that version. -->
 
 Automatic integrations don't support Java. For Java agents, use the [SDK][1]. For Amazon Strands and LiteLLM Proxy, use [manual integrations][2].
 
@@ -58,14 +56,11 @@ Streamed response evaluation is supported for these packages at the specified Da
 | Language | Package | Datadog SDK version |
 | --- | --- | --- |
 | Python | OpenAI and Anthropic | `dd-trace-py` 4.12.0 or later. |
-| Node.js | AI SDK | `dd-trace-js` 6.16.0 or later. |
-| Node.js | OpenAI | `dd-trace-js` 6.17.0 or later. |
-| Node.js | Anthropic | `dd-trace-js` 6.19.0 or later. |
+| Node.js | AI SDK | `dd-trace-js` 5.127.0 or later, or 6.16.0 or later. |
+| Node.js | OpenAI | `dd-trace-js` 5.128.0 or later, or 6.17.0 or later. |
+| Node.js | Anthropic | `dd-trace-js` 5.130.0 or later, or 6.19.0 or later. |
 
-<!-- TODO: Which other packages support streamed response evaluation?
-- RubyLLM: Does AI Guard evaluate streamed RubyLLM responses, and does `DD_AI_GUARD_ANALYZE_STREAM_RESPONSES_ENABLED` work in Ruby? If so, add a row for it.
-- LangChain: Which `dd-trace-py` release will add it? The `dd-trace-py` v4.16.0 release notes say streamed LangChain responses aren't evaluated, but `dd-trace-py` main has unreleased code that evaluates them when stream analysis is on.
--->
+AI Guard doesn't evaluate streamed responses from LangChain or RubyLLM.
 
 ## Enable automatic integrations
 

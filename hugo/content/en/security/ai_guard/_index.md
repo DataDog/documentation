@@ -154,39 +154,27 @@ The AI Guard evaluation API enforces these limits for each Datadog organization:
 
 | Limit | Value |
 | --- | --- |
-| Tokens evaluated per day | 2.5 billion. |
+| Tokens evaluated per minute | 14 million. |
 | Requests per minute | 700. |
 
 To request higher limits for your organization, contact [Datadog Support][13].
-
-<!-- TODO: Which usage limit values are correct? Internal AI Guard service code, checked October 6, sets 2.5 billion tokens per day and 700 requests per minute per organization, which the draft uses. The published docs list 1 billion tokens per day and 12,000 requests per minute per IP address, and the 12,000 limit doesn't appear in the service code. -->
 
 When your organization exceeds a limit, AI Guard stops evaluating requests, and the API returns a `429 Too Many Requests` error. What happens to each request depends on the integration method:
 
 - Automatic and manual integrations let the LLM call or tool call proceed without an evaluation.
 - SDK calls raise an `AIGuardClientError`. Catch this error to decide whether your agent proceeds or stops.
 
-<!-- TODO: Over the rate limit, integrations let calls proceed without evaluation, but SDK calls raise `AIGuardClientError`, so the customer's code decides. Is that intended?
-- Integrations: The October 19 product review confirmed AI Guard fails safe, letting calls proceed without evaluation. In the `dd-trace-py` source, the Python automatic integrations catch the error, log it, and let the LLM call go ahead.
-- SDK: In the source code of all four SDKs, an error response, including a 429, raises `AIGuardClientError`.
--->
+To reduce how many evaluations your agent sends, for example to evaluate only tool calls or only some tool calls, use the [SDK][11] and call the evaluate method only where you want AI Guard to check.
 
-<!-- TODO: How does a customer limit AI Guard to tool calls, or a subset of tool calls, to reduce cost? Is it a policy setting, an integration setting, or only possible with the SDK? -->
+<!-- TODO: Do tool calls set to Pass in a policy (Tools policies > Individual policies) count toward the usage limits and cost? The Pass option lets tool calls through without evaluating them, so it might reduce cost without code changes. Answers to draft questions on October 23 indicated that limiting evaluations to tool calls is only possible with the SDK today. If Pass reduces cost, the docs can recommend it alongside the SDK. -->
 
 ### Data residency, retention, and privacy
 
 AI Guard processes all evaluations in the US, regardless of your Datadog site.
 
-After a retention filter indexes AI Guard spans, Datadog keeps them for 15 days. To restrict which users can view AI Guard spans, see [Limit access to AI Guard spans][12].
+Indexed AI Guard spans follow your organization's [APM retention][14] settings. By default, Datadog keeps indexed spans for 15 days. To restrict which users can view AI Guard spans, see [Limit access to AI Guard spans][12].
 
 External model providers that AI Guard uses for evaluation operate under zero data retention. Datadog doesn't train models on your data. AI Guard encrypts data in transit with TLS.
-
-<!-- TODO: Can customers change how long Datadog keeps indexed AI Guard spans? If so, how, and what range is allowed?
-- The October 19 product review notes say customers set retention in APM settings, from 1 day to 15 months, with 15 days as the default.
-- In a demo org, the APM settings pages have no retention period control, and the retention filter form has no retention period field. The span flow diagram shows indexed spans kept for 15 days.
-- The public Trace Retention docs say retention filters keep spans for 15 days, and retention filters control only which spans are kept.
-- The draft says 15 days for now.
--->
 
 ## Further reading
 
@@ -205,3 +193,4 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [11]: /security/ai_guard/setup/sdk/
 [12]: /security/ai_guard/setup/#limit-access
 [13]: /help/
+[14]: /tracing/trace_pipeline/trace_retention/

@@ -116,8 +116,6 @@ You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to
 
 AI Guard spans don't count toward APM ingestion billing, but the spans this filter keeps count toward your APM indexed span usage. If you don't use APM, or you keep a high volume of traces, indexed AI Guard spans can appear on your bill.
 
-<!-- TODO: Can the Intelligent Retention Filters drop AI Guard spans before the custom AI Guard filter keeps them? If so, how should customers prevent it? Docs recommend dragging the AI Guard filter to the top of the custom filter list, because only the first matching filter applies. The Intelligent Retention Filters sit in a separate section that customers can't reorder, as seen in a demo org, and the Trace Retention docs don't say whether they apply first. -->
-
 ## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
 Optionally restrict who can view AI Guard spans, because they can contain sensitive prompts, responses, and tool call data from your agents.

@@ -105,7 +105,7 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
    - `DD_SERVICE=<SERVICE_NAME>`.
    - `DD_ENV=<ENVIRONMENT>`.
 
-   <!-- TODO: Do all agents behind the proxy share the AI Guard policy for the proxy's service and environment? If so, do their spans all appear under the proxy's service, and is there a way to apply a different policy to each agent? AI Guard is set up on the proxy with one `DD_SERVICE` and `DD_ENV`, and internal AI Guard service code picks a policy by service and environment. If every agent shares that policy, customers can't block for one agent and only monitor another, and Discover may show the agents themselves as unprotected. -->
+   All agents that route through the proxy share these `DD_SERVICE` and `DD_ENV` values, so AI Guard applies the same policy to all of them, and their AI Guard spans appear under the proxy's service.
 
 1. In the directory of the LiteLLM Proxy configuration file, create a `guardrails.py` file that imports the AI Guard guardrail:
 

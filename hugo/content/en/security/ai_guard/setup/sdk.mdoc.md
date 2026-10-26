@@ -301,12 +301,6 @@ The error is `Datadog::AIGuard::AIGuardAbortError`, with the fields `action`, `r
 
 Per-call blocking options change whether a single SDK call raises `AIGuardAbortError`, so one checkpoint can report without blocking while the rest of the agent follows the policy.
 
-<!-- TODO: Should the SDK page keep its per-call blocking options, such as `Options(block=False)` in Python?
-- What they do: A per-call option makes one evaluation call return its result instead of raising `AIGuardAbortError`, even when the service's policy blocks unsafe requests.
-- Why they're in question: After a product decision on October 19, the drafts removed two other code-level settings that turn off blocking, `DD_AI_GUARD_BLOCK` and the LiteLLM `block: false` setting, so the policy is the one documented way to control blocking. The per-call options also override the policy in code, so the same decision might apply to them.
-- Why they might stay: They're narrower. They affect one evaluation call, not the whole service, and SDK users already write each evaluation call themselves.
--->
-
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 Pass `options=Options(block=False)` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode. Import `Options` from `ddtrace.aiguard`.
@@ -326,6 +320,8 @@ Pass `new AIGuard.Options().block(false)` to make a call return an evaluation an
 {% if equals($prog_lang, "ruby") %}
 Pass `allow_raise: false` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
+
+To let calls to a specific tool through without evaluating them, in the service's AI Guard policy, under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Unlike the per-call options, {% ui %}Pass{% /ui %} skips the evaluation, not only the block.
 
 [1]: /security/ai_guard/setup/automatic_integrations/
 [2]: /security/ai_guard/setup/manual_integrations/
