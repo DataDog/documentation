@@ -98,6 +98,7 @@ Additional integrations
 : `ibm_db2`
 : `ibm_i`
 : `ibm_mq`
+: `ibm_was` (WebSphere Application Server)
 : `lparstats`
 : `openmetrics`
 : `process`
