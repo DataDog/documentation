@@ -5610,9 +5610,10 @@ components:
           format: int64
           type: integer
         resources:
-          description: Network resources in chronological waterfall order.
+          description: Network resources in chronological waterfall order, or null when the sampled views have no resources in their initial load window.
           items:
             $ref: "#/components/schemas/AggregatedResource"
+          nullable: true
           type: array
         sampled_view_ids:
           description: List of RUM view IDs sampled for this aggregation, capped at 50.

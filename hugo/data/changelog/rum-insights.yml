@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41007
+    operations:
+      - QueryAggregatedWaterfall
+    title: Mark aggregated waterfall resources as nullable
