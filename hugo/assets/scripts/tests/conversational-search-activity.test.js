@@ -321,6 +321,12 @@ describe('streamDocsAiChat', () => {
         });
     }
 
+    it('rejects with the HTTP status when the request fails', async () => {
+        global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 400 });
+        await expect(streamDocsAiChat({ config: { apiUrl: 'https://example.test', apiKey: 'key' }, query: 'q' }))
+            .rejects.toMatchObject({ status: 400 });
+    });
+
     it('forwards thinking payloads, server errors and answer tokens', async () => {
         mockStream([
             'data: {"type": "thinking", "content": "Reviewing relevant pages", "retrieved_pages": [{"title": "A"',

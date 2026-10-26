@@ -123,6 +123,7 @@ const DEFAULT_ERROR_MESSAGE = 'Something went wrong while answering. Try again i
 const EMPTY_RESPONSE_MESSAGE = 'No response received. Try again.';
 // Retrying the same request can't help, so this copy must not invite a retry.
 const NON_RETRYABLE_MESSAGE = "Docs AI can't answer this request. Start a new question instead.";
+const REJECTED_REQUEST_MESSAGE = "Docs AI couldn't process this question. Try shortening or rephrasing it.";
 const RETRY_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"></path></svg>';
 
 // Places the streaming caret at the end of the last block of the partially rendered answer.
@@ -868,15 +869,19 @@ class ConversationalSearch {
                 return;
             }
             this.logErr('Conversational Search Response Error', error);
-            this.failTurn(turn, query, { retryable: true });
+            // A rejected request (for example, a question that is too long) fails the same way on retry.
+            const rejected = error.status >= 400 && error.status < 500 && ![408, 429].includes(error.status);
+            this.failTurn(turn, query, rejected ? { message: REJECTED_REQUEST_MESSAGE, retryable: false } : {});
             return;
         }
 
         if (serverError) {
             this.logErr('Docs AI Server Error', new Error(serverError.code || 'server_error'));
+            const retryable = serverError.retryable !== false;
             this.failTurn(turn, query, {
-                message: serverError.content,
-                retryable: serverError.retryable !== false,
+                // The server's copy invites a retry, so it is only shown when a retry can help.
+                message: retryable ? serverError.content : undefined,
+                retryable,
                 discardPartial: serverError.discard_partial !== false
             });
             return;
@@ -923,8 +928,8 @@ class ConversationalSearch {
         box.setAttribute('role', 'alert');
 
         const text = document.createElement('p');
-        if (!retryable) text.textContent = NON_RETRYABLE_MESSAGE;
-        else text.textContent = typeof message === 'string' && message.trim() ? message : DEFAULT_ERROR_MESSAGE;
+        const fallback = retryable ? DEFAULT_ERROR_MESSAGE : NON_RETRYABLE_MESSAGE;
+        text.textContent = typeof message === 'string' && message.trim() ? message : fallback;
         box.appendChild(text);
 
         if (retryable) {

@@ -42,7 +42,9 @@ export async function streamDocsAiChat({
     });
 
     if (!response.ok) {
-        throw new Error(`Docs AI request failed: ${response.status}`);
+        const error = new Error(`Docs AI request failed: ${response.status}`);
+        error.status = response.status;
+        throw error;
     }
 
     const reader = response.body.getReader();
