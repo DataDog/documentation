@@ -76,6 +76,7 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
               ex.entries.map((entry, i) => (
                 <details
                   class={cl("api-code-example__accordion")}
+                  name={entry.syntax}
                   open={i === 0}
                 >
                   <summary class={cl("api-code-example__accordion-header")}>
