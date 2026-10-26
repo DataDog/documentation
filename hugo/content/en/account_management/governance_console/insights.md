@@ -40,9 +40,6 @@ Hover over a card to show its action icons:
 
 {{< img src="account_management/governance_console/governance-console-individual-insight-card.png" alt="Active notebook authors insight card, which includes icons that appear when you hover." style="width:50%;" >}}
 
-
-*\[Screenshot placeholder: insight card showing metric value, percentage change, time range label, and trend chart\]*
-
 ### Time range
 
 To change the time range on the Products page, select {{< ui >}}1 Week{{< /ui >}}, {{< ui >}}1 Month{{< /ui >}}, {{< ui >}}3 Months{{< /ui >}}, or {{< ui >}}6 Months{{< /ui >}}. The default is {{< ui >}}1 Month{{< /ui >}}.
