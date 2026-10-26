@@ -44,7 +44,7 @@ Infrastructure Basic does not support the following:
 - Most Agent integrations, including database, IIS, and Kafka integrations. See the [supported integrations][1] for the limited set available in Basic mode.
 - Hosts monitored only through cloud integrations, without the Datadog Agent
 
-**OpenTelemetry:** Infrastructure Basic requires the Datadog Agent and can't be configured for an OpenTelemetry Collector. You can still collect OTLP-formatted telemetry using [OTLP Ingestion by the Datadog Agent] when the Agent is in Basic mode.
+**OpenTelemetry:** Infrastructure Basic requires the Datadog Agent and can't be configured for an OpenTelemetry Collector. You can still collect OTLP-formatted telemetry using [OTLP Ingestion by the Datadog Agent][7] when the Agent is in Basic mode.
 
 **Operating system compatibility:** Agent-based monitoring requires an operating system that supports the minimum Agent version for Infrastructure Basic. See [Agent supported platforms][5] for compatibility details. Hosts that cannot run the required Agent version may still be monitored through a [supported virtualization integration][6], such as VMware vSphere.
 
