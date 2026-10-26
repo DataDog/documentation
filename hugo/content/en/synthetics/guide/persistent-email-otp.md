@@ -135,7 +135,7 @@ To avoid interference:
 
 | Symptom | What to check |
 | --- | --- |
-| The variable is missing from the recorder's list. | Save it as an **Email address** global variable, check its access permissions, and refresh the list. |
+| The variable is missing from the recorder's list. | Save it as an {{< ui >}}Email Address{{< /ui >}} global variable, check its access permissions, and click {{< ui >}}Refresh Variables{{< /ui >}}. |
 | The application says the account does not exist. | Register the generated address in your application before running the login test. Creating the Datadog variable does not create an application account. |
 | No OTP is found. | Check that the test requests a new email, sends it to the selected address, and uses a parser that matches the message body. |
 | The code is expired or invalid. | Check whether a broad extraction pattern matched another test's email in the shared inbox. Use temporary addresses or separate persistent inboxes for parallel tests. Also check additional OTP requests and application-specific expiration rules. |
