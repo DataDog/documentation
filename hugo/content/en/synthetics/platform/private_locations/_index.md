@@ -936,7 +936,7 @@ docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json
 
 To pin a worker to a specific weekly build, use the dated, immutable tag published alongside it, in the form `X.Y.Z-rc.N-browsers-YYYY-MM-DD`. A FIPS-compliant image is published as `datadog/synthetics-private-location-worker-fips:browsers-latest`.
 
-**Note**: The `browsers-latest` browsers are not validated on Datadog-managed locations, so browser tests can be less stable than on the `latest` image. The browsers-latest image trades stability for the newest browser versions.
+**Note**: The `browsers-latest` image trades stability for the newest browser versions. These browsers are not validated on Datadog-managed locations, so browser tests may be less stable than those using the latest image.
 
 ### Test your internal endpoint
 

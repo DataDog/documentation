@@ -5,6 +5,13 @@ $ddpurple: #632ca6;
         margin-top: 30px !important;
     }
 }
+
+// Banner hidden on mobile via `hide_on_mobile`: no header offset below md
+@include media-breakpoint-down(md) {
+    body:has(.announcement-banner--hide-mobile) header {
+        margin-top: 0 !important;
+    }
+}
 // NOTE: exception style for Docs due to reboot styles
 .main-nav {
     .product-menu p {

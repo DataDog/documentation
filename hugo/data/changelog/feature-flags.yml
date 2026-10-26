@@ -17,3 +17,9 @@ entries:
     operations:
       - GetSavedFilter
     title: publish GetSavedFilter
+  - change_type: added
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40816
+    operations:
+      - UpdateSavedFilterAttributes
+    title: publish PATCH saved filter API
