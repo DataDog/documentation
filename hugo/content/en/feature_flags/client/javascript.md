@@ -237,11 +237,11 @@ The web provider also supports these optional settings:
 | Option | Default | Use |
 | --- | --- | --- |
 | `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
-| `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
+| `enableFlagEvaluationTracking` | `true` | Send aggregated flag evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
-| `enableEvaluationTelemetryOptOutParameter` | `false` | Honor the Boolean `dd_evaluation_telemetry_opt_out` context attribute. See [Evaluation telemetry opt-out](#evaluation-telemetry-opt-out). |
+| `enableEvaluationTelemetryOptOutParameter` | `false` | Honor the Boolean `dd_evaluation_telemetry_opt_out` context attribute. See [Flag evaluation opt-out](#flag-evaluation-opt-out). |
 | `experimentationOptOutMode` | `ExperimentationOptOutMode.Disabled` | Select how to honor the `dd_experimentation_opt_out_at` context timestamp. See [Experimentation opt-out](#experimentation-opt-out). |
-| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
+| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for flag evaluation telemetry. |
 | `initialFlagsConfiguration` | unset | Supply context-matching precomputed data as a fallback if fetching fails. See [Supply initial precomputed fallback data](#supply-initial-precomputed-fallback-data). |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
@@ -306,11 +306,11 @@ const provider = new DatadogProvider({
 
 In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
 
-## Control telemetry and experiment participation
+## Control flag evaluation telemetry and experiment participation
 
-Use separate controls to manage evaluation telemetry and experiment participation for each subject. Both controls are disabled by default. For shared behavior and policy selection across client SDKs, see [Evaluation Telemetry and Experimentation Opt-Out][7].
+Use separate controls to manage flag evaluation telemetry and experiment participation for each subject. Both controls are disabled by default. For shared behavior and policy selection across client SDKs, see [Flag Evaluation and Experimentation Opt-Out][7].
 
-### Evaluation telemetry opt-out
+### Flag evaluation opt-out
 
 Set `enableEvaluationTelemetryOptOutParameter` to `true` when you create the provider. Then set `dd_evaluation_telemetry_opt_out` to Boolean `true` in the subject's evaluation context:
 
@@ -338,7 +338,7 @@ The control does not change flag results or experiment participation. It does no
 
 The attribute remains in assignment requests and exposure attributes. Targeting rules can use it, which can change assignments. Changing it follows the normal context refresh process and can produce another exposure under the existing deduplication rules.
 
-To resume evaluation telemetry, preserve the other context attributes and set the value to `false`:
+To resume flag evaluation telemetry, preserve the other context attributes and set the value to `false`:
 
 ```javascript
 await OpenFeature.setContext({
@@ -398,11 +398,11 @@ await OpenFeature.setContext(context);
 
 With either enabled mode, context changes withhold previous assignments until matching assignments arrive. This also applies to subjects without an opt-out timestamp. Evaluations return the application default with `PROVIDER_NOT_READY` while waiting, including after a failed refresh. The provider rejects responses that do not confirm the requested opt-out policy.
 
-Experimentation opt-out does not suppress evaluation telemetry. Enable evaluation telemetry opt-out separately if both controls are needed. Immediate withdrawal can change a subject's experience during an experiment; account for this when interpreting experiment results.
+Experimentation opt-out does not suppress flag evaluation telemetry. Enable flag evaluation opt-out separately if both controls are needed. Immediate withdrawal can change a subject's experience during an experiment; account for this when interpreting experiment results.
 
 ### Application-managed configuration
 
-`DatadogCoreProvider` accepts both controls and applies experimentation exclusion locally to rules-based configuration. Datadog evaluation and RUM tracking hooks honor its telemetry policy; exposure hooks remain enabled.
+`DatadogCoreProvider` accepts both controls and applies experimentation exclusion locally to rules-based configuration. Datadog evaluation and RUM tracking hooks honor its flag evaluation telemetry policy; exposure hooks remain enabled.
 
 For precomputed configuration, pass the same `experimentationOptOutMode` to `fetchPrecomputedConfiguration` and the provider. Pass the same context, including opt-out attributes, to the fetch function and OpenFeature. Your application must fetch replacement assignments when the context changes. Precomputed experimentation opt-out requires backend support for the selected mode.
 

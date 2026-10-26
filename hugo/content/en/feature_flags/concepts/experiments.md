@@ -44,7 +44,7 @@ Datadog joins exposures and metrics by subject identifier. The `targetingKey` yo
 
 ## Subject preferences
 
-Experimentation opt-out can exclude a subject from experiment allocations immediately or based on allocation activation time. Evaluation telemetry opt-out is separate and does not prevent experiment assignment. See [Evaluation Telemetry and Experimentation Opt-Out][8].
+Experimentation opt-out can exclude a subject from experiment allocations immediately or based on allocation activation time. Flag evaluation opt-out is separate and does not prevent experiment assignment. See [Flag Evaluation and Experimentation Opt-Out][8].
 
 ## Bring your own randomization
 

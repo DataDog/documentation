@@ -38,7 +38,7 @@ The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscati
 
 ## Subject-level opt-out
 
-Evaluation telemetry opt-out and experimentation opt-out control different behaviors for a subject. See [Evaluation Telemetry and Experimentation Opt-Out][3] for the shared concepts and SDK support considerations.
+Flag evaluation opt-out and experimentation opt-out control different behaviors for a subject. See [Flag Evaluation and Experimentation Opt-Out][3] for the shared concepts and SDK support considerations.
 
 ## Telemetry options by platform
 
@@ -59,7 +59,7 @@ Default: `true`. Set to `false` to disable.
 - **React Native**: `trackExposures`
 - **Unity**: `trackExposures`
 
-### Send aggregated evaluation telemetry
+### Send aggregated flag evaluation telemetry
 
 Default: `true`. Set to `false` to disable.
 

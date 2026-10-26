@@ -1,6 +1,6 @@
 ---
-title: Evaluation Telemetry and Experimentation Opt-Out
-description: Understand subject-level controls for evaluation telemetry and experiment participation in client applications.
+title: Flag Evaluation and Experimentation Opt-Out
+description: Understand subject-level controls for flag evaluation telemetry and experiment participation in client applications.
 further_reading:
 - link: "/feature_flags/client/"
   tag: "Documentation"
@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Client applications can have separate preferences for telemetry collection and experiment participation. Evaluation telemetry opt-out controls the collection of flag evaluation data. Experimentation opt-out controls which experiment allocations can assign variants to a subject.
+Client applications can have separate preferences for flag evaluation telemetry collection and experiment participation. Flag evaluation opt-out controls the collection of flag evaluation data. Experimentation opt-out controls which experiment allocations can assign variants to a subject.
 
-These controls are independent. Suppressing evaluation telemetry does not exclude a subject from experiments. Excluding a subject from experiments does not suppress evaluation telemetry.
+These controls are independent. Suppressing flag evaluation telemetry does not exclude a subject from experiments. Excluding a subject from experiments does not suppress flag evaluation telemetry.
 
 This page describes the shared concepts for client SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Check the platform's [client SDK guide][1] before using a control. For browser configuration, see [JavaScript opt-out setup][2].
 
@@ -27,27 +27,27 @@ An *evaluation* reads a flag value. An *exposure* records the experiment variant
 
 | Goal | Control | Effect on flag values | Effect on experiment exposures |
 | --- | --- | --- | --- |
-| Suppress evaluation telemetry for a subject | Evaluation telemetry opt-out | The control does not override flag values. | Exposures remain enabled. |
+| Suppress flag evaluation telemetry for a subject | Flag evaluation opt-out | The control does not override flag values. | Exposures remain enabled. |
 | Withdraw a subject from experiment allocations | Immediate experimentation opt-out | Skip experiment allocations and continue through ordinary feature allocations. | Skipped allocations do not produce exposures. |
 | Exclude experiment allocations activated at or after a subject's preference timestamp | Future-experiments-only opt-out | Earlier experiment allocations remain eligible; skip later allocations. | Eligible earlier allocations can still produce exposures. |
 
 Use both controls if the application requires both behaviors. Do not use exposure logging settings as a substitute for experimentation opt-out. Disabling exposure logging stops records, but does not prevent experiment assignment.
 
-## Evaluation telemetry opt-out
+## Flag evaluation opt-out
 
-Subject-level telemetry opt-out requires explicit SDK activation and Boolean `true` in the `dd_evaluation_telemetry_opt_out` evaluation context attribute. Missing attributes, `false`, and other types do not activate suppression. For example, the string `'true'` is not Boolean `true`.
+Subject-level flag evaluation opt-out requires explicit SDK activation and Boolean `true` in the `dd_evaluation_telemetry_opt_out` evaluation context attribute. Missing attributes, `false`, and other types do not activate suppression. For example, the string `'true'` is not Boolean `true`.
 
 The control suppresses new evaluation events, aggregated evaluation counts, and automatic RUM flag annotations where the SDK provides those integrations. It does not suppress exposures or change experiment eligibility. It does not remove queued events or existing RUM annotations.
 
 The control itself does not change targeting or flag values. If targeting rules use the opt-out attribute, changing its value can change assignments. Context refresh behavior depends on the SDK.
 
-To resume evaluation telemetry, set the attribute to `false` or remove it through the SDK's context update API. Preserve the subject identifier and other targeting attributes.
+To resume flag evaluation telemetry, set the attribute to `false` or remove it through the SDK's context update API. Preserve the subject identifier and other targeting attributes.
 
 ### Client-wide telemetry settings
 
-Client-wide settings determine which telemetry integrations run for the client. Subject-level opt-out selectively suppresses evaluation telemetry for a subject. It does not enable an integration that the application disabled.
+Client-wide settings determine which telemetry integrations run for the client. Subject-level opt-out selectively suppresses flag evaluation telemetry for a subject. It does not enable an integration that the application disabled.
 
-For example, disabling aggregated evaluation tracking for the client stops those counts for every subject. Subject-level telemetry opt-out leaves tracking available for subjects who have not opted out.
+For example, disabling aggregated evaluation tracking for the client stops those counts for every subject. Subject-level flag evaluation opt-out leaves tracking available for subjects who have not opted out.
 
 See [Telemetry options by platform][3] for client-wide settings.
 
@@ -103,5 +103,5 @@ Assignment requests and permitted exposures can still contain subject data. Neit
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/client/
-[2]: /feature_flags/client/javascript/#control-telemetry-and-experiment-participation
+[2]: /feature_flags/client/javascript/#control-flag-evaluation-telemetry-and-experiment-participation
 [3]: /feature_flags/client/#telemetry-options-by-platform
