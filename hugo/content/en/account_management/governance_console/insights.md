@@ -29,12 +29,12 @@ Each insight is displayed as a card. A card shows:
 - **Time range**: The period the value covers, shown as a label next to the insight name, such as `1w` or `1mo`. See [Time range](#time-range).
 - **Trend**: A chart of the value over the time range.
 
-Hover over a card to show its actions:
+Hover over a card to show its action icons:
 
-- **Expand**: Opens a larger view of the insight.
-- **More information**: Shows a description of the insight.
-- **Open in new tab**: Opens the underlying Datadog page. Not every insight has a link.
-- **Export**: Copies the graph, saves it to a dashboard, adds it to an incident, or creates a monitor from it, depending on the insight.
+- **Expand** (<i class="icon-resize-expand-wui"></i>): Opens a larger view of the insight.
+- **More information** (<i class="icon-info-fill"></i>): Shows a description of the insight.
+- **Open in new tab** (<i class="icon-external-link"></i>): Opens the underlying Datadog page. Not every insight has a link.
+- **Export** (<i class="icon-export"></i>): Copies the graph, saves it to a dashboard, adds it to an incident, or creates a monitor from it, depending on the insight.
 
 *\[Screenshot placeholder: insight card showing metric value, percentage change, time range label, and trend chart\]*
 
