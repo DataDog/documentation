@@ -56,7 +56,7 @@ You need [access to global variables][2] to create and select persistent email v
 5. Save the variable. Datadog generates its email address when the variable is created.
 6. Open the saved variable and click the copy icon next to {{< ui >}}Email address{{< /ui >}}. The create form shows only an example address.
 
-   {{< img src="synthetics/settings/saved_persistent_email_variable.png" alt="Saved email global variable showing its read-only generated email address and the copy button" style="width:80%;" >}}
+   {{< img src="synthetics/settings/saved_persistent_email_variable.png" alt="Saved email global variable showing its read-only generated email address and the copy button." style="width:80%;" >}}
 
 The generated address is read-only. You can edit the variable's metadata, but cannot replace its address with your own mailbox. You also cannot convert an existing text global variable into an email variable. Create a separate email global variable when you need another address.
 
