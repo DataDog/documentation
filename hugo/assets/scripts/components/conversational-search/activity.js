@@ -98,16 +98,21 @@ function startWriting(state, now) {
     return { ...addStep(endResearch(settled, now), { kind: 'write' }), phase: 'writing' };
 }
 
-function applyResults(state, pages) {
+const cleanQuery = (query) => (typeof query === 'string' ? query.trim() : '');
+
+function applyResults(state, pages, rawQuery) {
     const steps = [...state.steps];
-    const index = steps.findIndex((step) => step.kind === 'search' && !step.resolved);
+    const query = cleanQuery(rawQuery);
+    // Parallel searches finish in any order; results that name their query go to that search.
+    let index = query ? steps.findIndex((step) => isPendingSearch(step) && step.query === query) : -1;
+    if (index === -1) index = steps.findIndex(isPendingSearch);
     const normalized = normalizePages(pages);
     const next = { ...state, pages: mergePages(state.pages, normalized) };
     if (index === -1) {
         // Results without a visible search (older backends): show them as a completed search.
         const withSearch = addStep(
             { ...next, steps: settleForNewStep(next.steps), searches: next.searches + 1 },
-            { kind: 'search' }
+            { kind: 'search', query }
         );
         const last = withSearch.steps.length - 1;
         withSearch.steps[last] = { ...withSearch.steps[last], status: 'done', resolved: true, pages: normalized };
@@ -117,9 +122,16 @@ function applyResults(state, pages) {
     return { ...next, steps, phase: 'researching' };
 }
 
+const pageKey = (page) => page.url || page.title;
+
 function applyRead(state, page) {
     const last = state.steps[state.steps.length - 1];
     const opened = normalizePages(page ? [page] : []);
+    // Continuing a long page, or reading it again, is not a new page.
+    const alreadyRead = opened.length > 0 && state.steps.some(
+        (step) => step.kind === 'read' && step.pages.some((p) => pageKey(p) === pageKey(opened[0]))
+    );
+    if (alreadyRead) return { ...state, phase: 'researching' };
     const next = { ...state, reads: state.reads + 1, phase: 'researching' };
     if (last && last.kind === 'read' && last.status === 'active') {
         const steps = [...next.steps];
@@ -140,13 +152,13 @@ export function reduceActivity(state, action, now = Date.now()) {
         case 'thinking': {
             const stage = SERVER_STAGES[action.content];
             if (stage === 'search') {
-                const query = typeof action.query === 'string' ? action.query.trim() : '';
+                const query = cleanQuery(action.query);
                 const next = { ...state, steps: settleForNewStep(state.steps), searches: state.searches + 1 };
                 return { ...addStep(next, { kind: 'search', query }), phase: 'researching' };
             }
             if (stage === 'review') {
                 return Array.isArray(action.retrieved_pages)
-                    ? applyResults(state, action.retrieved_pages)
+                    ? applyResults(state, action.retrieved_pages, action.query)
                     : applyRead(state, action.page);
             }
             if (stage === 'write') return startWriting(state, now);

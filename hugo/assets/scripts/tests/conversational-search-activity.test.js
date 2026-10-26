@@ -89,6 +89,19 @@ describe('reduceActivity', () => {
         expect(describeStep(state.steps[2])).toBe('Writing the answer');
     });
 
+    it('matches results to the search that names their query', () => {
+        const state = run([
+            [thinking(SEARCHING, { query: 'log pipelines' }), 100],
+            [thinking(SEARCHING, { query: 'log indexes' }), 120],
+            [thinking(REVIEWING, { query: 'log indexes', retrieved_pages: [page('indexes')] }), 900],
+            [thinking(REVIEWING, { query: 'log pipelines', retrieved_pages: [page('pipelines')] }), 950]
+        ]);
+
+        expect(state.steps.map(describeStep)).toEqual(['Found 1 page for “log pipelines”', 'Found 1 page for “log indexes”']);
+        expect(state.steps[0].pages[0].title).toBe('Page pipelines');
+        expect(state.steps[1].pages[0].title).toBe('Page indexes');
+    });
+
     it('matches results to parallel searches in order', () => {
         const state = run([
             [thinking(SEARCHING, { query: 'log pipelines' }), 100],
@@ -104,6 +117,22 @@ describe('reduceActivity', () => {
         expect(describeStep(second)).toBe('Found 2 pages for “log indexes”');
         expect(read.kind).toBe('read');
         expect(second.status).toBe('done');
+    });
+
+    it('names opened pages and counts each page once', () => {
+        const opened = (slug) => thinking(REVIEWING, { page: { title: `Page ${slug}`, distinct_base_url: `/${slug}/` } });
+        const state = run([
+            [thinking(SEARCHING, { query: 'log pipelines' }), 100],
+            [thinking(REVIEWING, { retrieved_pages: [page('a'), page('b')] }), 200],
+            [opened('a'), 300],
+            [opened('a'), 400],
+            [opened('b'), 500]
+        ]);
+
+        expect(describeStep(state.steps[0])).toBe('Found 2 pages for “log pipelines”');
+        expect(state.steps[1].pages.map((p) => p.title)).toEqual(['Page a', 'Page b']);
+        expect(describeStep(state.steps[1])).toBe('Reading 2 pages');
+        expect(state.reads).toBe(2);
     });
 
     it('shows a search for results that arrive without one, and empty results', () => {
