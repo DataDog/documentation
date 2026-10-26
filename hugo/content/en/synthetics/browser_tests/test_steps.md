@@ -440,7 +440,7 @@ Create a variable from content such as a `span` or `div` by extracting the eleme
 
 #### Email body
 
-Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12]. This works with both temporary and persistent email address variables. For example, extract an OTP into a variable and inject it into a later login step.
+Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12]. This works with both temporary and persistent email address variables. For example, extract a one-time passcode (OTP) into a variable and inject it into a later login step.
 
 * [`Regex`][13] searches and returns the first matching pattern (for example, `/*./`) from the email's plain text body. If the pattern is not found, it then searches the HTML body.
 
