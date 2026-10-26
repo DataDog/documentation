@@ -68,7 +68,7 @@ Insights surface a metric. [Controls][3] automate detection and remediation for 
 
 ## Available insights
 
-Insights are grouped by product area.
+Insights are grouped by product area on the [Products page][2].
 
 ### Access Controls
 
