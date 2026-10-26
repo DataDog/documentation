@@ -13,7 +13,7 @@ Set up AI Guard to start evaluating agent prompts, responses, and tool calls for
 
 AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
 
-AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for every method. In step 3, you choose the method that fits your agent's language and libraries.
+AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for each of these methods. In step 3, you choose the method that fits your agent's language and libraries.
 
 ## 1. Check prerequisites {#prerequisites}
 
@@ -38,20 +38,20 @@ AI Guard requires these minimum Datadog SDK versions:
 
 | Language | Datadog SDK | Minimum version |
 | --- | --- | --- |
-| Python | `dd-trace-py` | 4.13.0. |
+| Python | `dd-trace-py` | 3.19.0. |
 | Node.js | `dd-trace-js` | 5.69.0. |
 | Java | `dd-trace-java` | 1.54.0. |
 | Ruby | `dd-trace-rb` | 2.25.0. |
 
 
-Some integrations require a later version. Each integration page lists its own requirements.
+Some integration methods require a later version, such as the Python SDK and manual integrations, which require `dd-trace-py` 4.13.0. Each integration page lists its own requirements.
 
 To take advantage of all AI Guard features, use the latest version of the Datadog SDK for your language.
 
 <div class="alert alert-info">
 <p>By default, running the Datadog SDK and the Agent turns on other Datadog products, which are billed separately from AI Guard:</p>
 <ul>
-<li>The Datadog SDK sends full APM traces. To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>.</li>
+<li>The Datadog SDK sends full APM traces. To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>. Don't set <code>DD_TRACE_ENABLED=false</code>, because that setting turns off AI Guard spans and integrations too.</li>
 <li>The Agent reports Infrastructure Monitoring data. To turn it off, set <code>DD_INFRASTRUCTURE_MODE=none</code>. This setting requires Agent 7.77.0 or later.</li>
 </ul>
 <p>AI Guard spans are billed either way.</p>

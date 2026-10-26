@@ -95,6 +95,8 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    # Evaluate a tool call before the agent runs the tool.
    result = client.evaluate(
        messages=[
+           Message(role="system", content="You are an AI Assistant"),
+           Message(role="user", content="Clean up the temporary files on the server."),
            Message(
                role="assistant",
                tool_calls=[
@@ -144,6 +146,8 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
    // Evaluate a tool call before the agent runs the tool.
    result = await tracer.aiguard.evaluate([
+     { role: 'system', content: 'You are an AI Assistant' },
+     { role: 'user', content: 'Clean up the temporary files on the server.' },
      {
        role: 'assistant',
        tool_calls: [
@@ -165,7 +169,6 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    ```java
    import datadog.trace.api.aiguard.AIGuard;
    import java.util.Arrays;
-   import java.util.Collections;
 
    // Evaluate a user prompt before the model call.
    AIGuard.Evaluation evaluation = AIGuard.evaluate(
@@ -177,7 +180,9 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
    // Evaluate a tool call before the agent runs the tool.
    evaluation = AIGuard.evaluate(
-       Collections.singletonList(
+       Arrays.asList(
+           AIGuard.Message.message("system", "You are an AI Assistant"),
+           AIGuard.Message.message("user", "Clean up the temporary files on the server."),
            AIGuard.Message.assistant(
                AIGuard.ToolCall.toolCall("call_1", "shell", "{\"command\": \"shutdown\"}")
            )
@@ -187,6 +192,8 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    // Evaluate a tool result after the tool runs.
    evaluation = AIGuard.evaluate(
        Arrays.asList(
+           AIGuard.Message.message("system", "You are an AI Assistant"),
+           AIGuard.Message.message("user", "Summarize the page at http://my.site."),
            AIGuard.Message.assistant(
                AIGuard.ToolCall.toolCall("call_1", "http_get", "{\"url\":\"http://my.site\"}")
            ),
@@ -222,6 +229,8 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
    # Evaluate a tool call before the agent runs the tool.
    result = Datadog::AIGuard.evaluate(
+     Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
+     Datadog::AIGuard.message(role: :user, content: "Clean up the temporary files on the server."),
      Datadog::AIGuard.assistant do |message|
        message.tool_call(name: "shell", id: "call_1", arguments: '{"command": "shutdown"}')
      end
@@ -243,7 +252,13 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    {% /if %}
    <!-- end Ruby -->
 
-1. Handle the result. Proceed with the request when the action is `ALLOW`. If the SDK raises `AIGuardAbortError`, stop the request and return a safe response instead. For how the SDK reports each decision, see the [Handling evaluation outcomes](#handling-evaluation-outcomes) section.
+1. Handle the result:
+
+   - If the action is `ALLOW`, proceed with the request.
+   - If the SDK raises `AIGuardAbortError`, stop the request and return a safe response instead.
+   - If the SDK returns a `DENY` action without raising an error, blocking is turned off for that call, either by {% ui %}Monitor only{% /ui %} mode in the policy or by a per-call blocking option. Your code decides whether to proceed.
+
+   To learn how the SDK reports each decision, see the [Handling evaluation outcomes](#handling-evaluation-outcomes) section.
 
 **What's next?** [Create a retention filter for AI Guard spans][6], optionally [limit access to AI Guard spans][7], then [verify the setup][8].
 
@@ -277,7 +292,7 @@ In Ruby, the field is `sds_findings`.
 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
-The error is `ddtrace.aiguard.AIGuardAbortError`, with the fields `action`, `reason`, `tags`, `sds`, and `tag_probs`.
+The error is `ddtrace.aiguard.AIGuardAbortError`, with the fields `action`, `reason`, `tags`, `tag_probs`, and `sds`.
 
 `AIGuardAbortError` derives from `BaseException`, not `Exception`. Catch `AIGuardAbortError` by name, because `except Exception:` doesn't catch the error.
 {% /if %}
@@ -308,12 +323,12 @@ Pass `options=Options(block=False)` to make a call return an evaluation and neve
 
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
-Pass `{ block: false }` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
+Pass `{ block: false }` to make a call return an evaluation and never reject the promise with `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
-Pass `new AIGuard.Options().block(false)` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
+Pass `new AIGuard.Options().block(false)` to make a call return an evaluation and never throw `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
 <!-- Ruby -->

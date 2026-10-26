@@ -81,7 +81,7 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
    }
    ```
 
-1. If the action is `ALLOW`, proceed with the request. If the action is `DENY`, stop the request and return a safe response.
+1. If the action is `ALLOW`, proceed with the request. If the action is `DENY` and `is_blocking_enabled` is `true`, stop the request and return a safe response.
 
 ## Request format
 
@@ -164,7 +164,7 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | `data.attributes.tags` | The attack categories AI Guard detected. |
 | `data.attributes.tag_probs` | The confidence score for each attack category. |
 | `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use it to decide whether to stop a request when the action is `DENY`. |
-| `data.attributes.global_prob` | The overall threat score. Present only for some evaluations. |
+| `data.attributes.global_prob` | The overall threat probability, between `0` and `1`. Included only when AI Guard computes it. |
 | `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` (`path`, `start_index`, `end_index_exclusive`). |
 
 [1]: /security/ai_guard/setup/sdk/

@@ -1,13 +1,13 @@
 ---
 title: Automatic Integrations
-description: Protect agents built on supported LLM frameworks and client libraries with AI Guard, without changing application code.
+description: Protect agents built on supported LLM frameworks and client libraries with AI Guard, without adding evaluation calls to your code.
 ---
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard automatic integrations protect agents built on supported LLM frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you can enable AI Guard with environment variables instead of adding evaluation calls by hand.
+AI Guard automatic integrations protect agents built on supported LLM frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you enable AI Guard through environment variables and Datadog SDK configuration, instead of adding evaluation calls by hand.
 
 When the application starts with the Datadog SDK loaded, the SDK detects supported packages and instruments them. Each instrumented model call and tool call goes to AI Guard for evaluation before the call proceeds.
 
@@ -75,9 +75,6 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
    - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
    - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
    - `DD_ENV=<ENVIRONMENT>`.
-   - `DD_TRACE_ENABLED=true`.
-
-   To turn off APM tracing but keep AI Guard, set `DD_APM_TRACING_ENABLED=false`. Don't set `DD_TRACE_ENABLED` to `false`, because it breaks AI Guard in various ways depending on your agent's language.
 
    <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code> to <code>false</code>.</div>
 

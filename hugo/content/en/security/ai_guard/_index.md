@@ -136,9 +136,9 @@ Learn what content AI Guard evaluates, how fast it responds, how much traffic it
 
 AI Guard evaluates text and images only.
 
-- Only extracted text is evaluated. AI Guard doesn't parse documents, and `.docx` files aren't supported. 
+- AI Guard doesn't parse document files, such as `.docx` or PDF files. To evaluate a document, extract its text in your application and send the text, or send the content as an image.
 - Image evaluation has higher latency than text evaluation, because the fast filtering model doesn't support images.
-- AI Guard supports most languages, but Datadog evaluates a subset of languages, including Arabic, Chinese (Simplified), Chinese (Traditional), Dutch, English, French, German, Japanese, Korean, Polish, Portuguese, Russian, and Spanish.
+- AI Guard supports most languages. Datadog has verified AI Guard detection in these languages: Arabic, Chinese (Simplified), Chinese (Traditional), Dutch, English, French, German, Japanese, Korean, Polish, Portuguese, Russian, and Spanish.
 
 ### Latency
 
