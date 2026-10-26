@@ -76,7 +76,7 @@ Forms can include a start page shown before the first question, and an end page 
 
 To add or customize a start or end page:
 1. From the [Forms][2] page, click a form to open it in the editor.
-1. In the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}Start Page{{< /ui >}} or {{< ui >}}End Page{{< /ui >}}. If no start page exists, click {{< ui >}}\+ Start Page{{< /ui >}} to add one.
+1. In the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}Start Page{{< /ui >}} or {{< ui >}}End Page{{< /ui >}}.
 1. Edit the title and message.
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to apply your changes.
 

@@ -95,7 +95,7 @@ To add a section:
 
 Pages split a form into multiple screens that respondents complete in order. Use pages to break up a long form, or to show a whole screen of questions only when a respondent's earlier answer calls for it.
 
-A page can contain both fields and [sections](#sections). Pages are all-or-nothing: once a form has any pages, it cannot also have fields at the root of the form. Adding a first page moves the form's existing fields onto it.
+A page can contain both fields and [sections](#sections). Pages are all-or-nothing. A form with pages cannot have fields at the root of the form. Adding a first page moves the form's existing fields onto it.
 
 Pages appear in the {{< ui >}}Pages{{< /ui >}} panel on the left side of the form editor, alongside the form's [start and end pages][2]. Click a page to show only that page in the canvas.
 
