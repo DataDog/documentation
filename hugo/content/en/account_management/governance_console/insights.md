@@ -33,10 +33,10 @@ Each insight is displayed as a card. A card shows:
 
 Hover over a card to show its action icons:
 
-- **Expand** (<i class="icon-resize-expand-wui" style="position:relative; top:3px;"></i>): Opens a larger view of the insight with its description, current value, and a chart of the value over time. When available, a button opens the underlying data in Metrics Explorer, Audit Trail, or Event Explorer.
-- **More information** (<i class="icon-info-fill" style="position:relative; top:3px;"></i>): Shows a description of the insight.
-- **Open in new tab** (<i class="icon-external-link" style="position:relative; top:3px;"></i>): Opens the underlying Datadog page. Not every insight has a link.
-- **Export** (<i class="icon-export" style="position:relative; top:3px;"></i>): Copies the graph, saves it to a dashboard, adds it to an incident, or creates a monitor from it, depending on the insight.
+- **Expand** (<i class="icon-resize-expand-wui"></i>): Opens a larger view of the insight with its description, current value, and a chart of the value over time. When available, a button opens the underlying data in Metrics Explorer, Audit Trail, or Event Explorer.
+- **More information** (<i class="icon-info-fill"></i>): Shows a description of the insight.
+- **Open in new tab** (<i class="icon-external-link"></i>): Opens the underlying Datadog page. Not every insight has a link.
+- **Export** (<i class="icon-export"></i>): Copies the graph, saves it to a dashboard, adds it to an incident, or creates a monitor from it, depending on the insight.
 
 {{< img src="account_management/governance_console/governance-console-individual-insight-card.png" alt="Active notebook authors insight card, which includes icons that appear when you hover." style="width:50%;" >}}
 
@@ -70,7 +70,7 @@ Insights surface a metric. [Controls][3] automate detection and remediation for 
 
 ## Available insights
 
-Insights are grouped by product area on the [Products page][2].
+Insights are grouped by product area on the [Products][2] page.
 
 ### Access Controls
 
@@ -118,7 +118,7 @@ Insights are grouped by product area on the [Products page][2].
 | Percentage of hosts with "team" tag | Percentage of all detected hosts with a `team` tag. |
 | Percentage of hosts without "env" tag | Percentage of all detected hosts that are missing an `env` tag. |
 
-### Logs
+### Log Management
 
 | Insight | Description |
 | :---- | :---- |
@@ -190,7 +190,9 @@ Insights are grouped by product area on the [Products page][2].
 | Security log volume | Total bytes of log data analyzed by Cloud SIEM detection rules. |
 | Users using security | Users interacting with Cloud Security Platform features, such as security rules, signals, or suppressions. |
 
-### Usage
+### Org Usage Summary
+
+These insights are only viewable on the [Summary][1] page.
 
 | Insight | Description |
 | :---- | :---- |
