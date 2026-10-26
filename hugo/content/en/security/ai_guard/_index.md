@@ -84,8 +84,8 @@ One trace can contain several AI Guard spans, and one signal can summarize spans
 AI Guard supports the full life cycle of securing AI agents, from finding unprotected services to responding to active attacks.
 
 1. [Set up AI Guard][2] for target agents. The default security policy starts monitoring agent calls immediately. 
-1. [Explore AI security][3] to find additional unprotected agents and onboard them.
-1. [Manage AI Guard policies][4] as needed, optionally [previewing evaluations][5] before applying changes.
+1. Explore AI security to find additional unprotected agents and onboard them.
+1. [Manage AI Guard policies][4] as needed, optionally previewing evaluations before applying changes.
 1. [Redact sensitive data][6] that AI Guard detects in prompts and responses.
 1. [Triage signals][7] that detection rules create from AI Guard evaluation outcomes.
 1. [Investigate spans][8] to filter AI Guard evaluations for a specific service, user, or concern.
@@ -164,7 +164,7 @@ When your organization exceeds a limit, AI Guard stops evaluating requests, and 
 - Automatic and manual integrations let the LLM call or tool call proceed without an evaluation.
 - SDK calls raise an `AIGuardClientError`. Catch this error to decide whether your agent proceeds or stops.
 
-To reduce how many evaluations your agent sends, for example to evaluate only tool calls or only some tool calls, use the [SDK][11] and call the evaluate method only where you want AI Guard to check.
+To reduce how many evaluations your agent sends, use the [SDK][11] and call the evaluate method only where you want an evaluation. For example, evaluate only tool calls, or only some tool calls.
 
 <!-- TODO: Do tool calls set to Pass in a policy (Tools policies > Individual policies) count toward the usage limits and cost? The Pass option lets tool calls through without evaluating them, so it might reduce cost without code changes. Answers to draft questions on October 23 indicated that limiting evaluations to tool calls is only possible with the SDK today. If Pass reduces cost, the docs can recommend it alongside the SDK. -->
 
@@ -182,12 +182,11 @@ External model providers that AI Guard uses for evaluation operate under zero da
 
 [1]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 [2]: /security/ai_guard/setup/
-[3]: /security/ai_guard/discover/
+<!-- Restore links when these pages are published: [3]: /security/ai_guard/discover/ [5]: /security/ai_guard/simulator/ -->
 [4]: /security/ai_guard/policies/
-[5]: /security/ai_guard/simulator/
-[6]: /security/ai_guard/sensitive_data_redaction/
-[7]: /security/ai_guard/signals/#triage-signals
-[8]: /security/ai_guard/signals/#investigate-spans
+[6]: /security/ai_guard/setup/sensitive_data_redaction/
+[7]: /security/ai_guard/signals/#investigate-signals
+[8]: /security/ai_guard/signals/#get-additional-context-with-spans
 [9]: /security/ai_guard/setup/automatic_integrations/
 [10]: /security/ai_guard/setup/manual_integrations/
 [11]: /security/ai_guard/setup/sdk/

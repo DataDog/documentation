@@ -105,7 +105,7 @@ Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluat
    - `DD_SERVICE=<SERVICE_NAME>`.
    - `DD_ENV=<ENVIRONMENT>`.
 
-   All agents that route through the proxy share these `DD_SERVICE` and `DD_ENV` values, so AI Guard applies the same policy to all of them, and their AI Guard spans appear under the proxy's service.
+   All agents that route through the proxy share these `DD_SERVICE` and `DD_ENV` values. AI Guard applies the same policy to every agent behind the proxy, and AI Guard spans from those agents appear under the proxy service.
 
 1. In the directory of the LiteLLM Proxy configuration file, create a `guardrails.py` file that imports the AI Guard guardrail:
 

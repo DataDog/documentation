@@ -146,7 +146,7 @@ If expected evaluations don't appear in AI Guard, check these causes in order:
 
 To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.
 
-[1]: /security/ai_guard/policies/
+[1]: /security/ai_guard/policies/#blocking-policy
 [2]: /account_management/api-app-keys/
 [3]: /account_management/api-app-keys/#scopes
 [4]: /security/ai_guard/setup/manual_integrations/#litellm-proxy

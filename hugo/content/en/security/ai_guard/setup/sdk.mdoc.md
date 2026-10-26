@@ -321,7 +321,7 @@ Pass `new AIGuard.Options().block(false)` to make a call return an evaluation an
 Pass `allow_raise: false` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
-To let calls to a specific tool through without evaluating them, in the service's AI Guard policy, under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Unlike the per-call options, {% ui %}Pass{% /ui %} skips the evaluation, not only the block.
+To let calls to a specific tool through without an evaluation, open the service's AI Guard policy. Under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Unlike the per-call options, {% ui %}Pass{% /ui %} skips the evaluation, not only the block.
 
 [1]: /security/ai_guard/setup/automatic_integrations/
 [2]: /security/ai_guard/setup/manual_integrations/
@@ -331,4 +331,4 @@ To let calls to a specific tool through without evaluating them, in the service'
 [6]: /security/ai_guard/setup/#retention-filter
 [7]: /security/ai_guard/setup/#limit-access
 [8]: /security/ai_guard/setup/#verify
-[9]: /security/ai_guard/sensitive_data_redaction/
+[9]: /security/ai_guard/setup/sensitive_data_redaction/
