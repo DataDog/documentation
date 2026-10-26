@@ -75,6 +75,7 @@ const {
 // with whether a banner actually renders. Mirrors Hugo's `hasAnnouncementBanner`.
 const bannerParams = announcementBanner ?? getBannerParams();
 const hasBanner = Object.keys(bannerParams).length > 0;
+const hidesBannerOnMobile = hasBanner && bannerParams.hide_on_mobile === true;
 
 const lang: Locale = resolveLocale(Astro.currentLocale);
 const localeDefaults = getLocaleDefaults(lang);
@@ -224,7 +225,14 @@ const activeRegionSelectors = allowedRegions
     <GoogleTagManager />
     <Hotjar />
   </head>
-  <body class:list={[{ announcement: hasBanner }]}>
+  <body
+    class:list={[
+      {
+        announcement: hasBanner,
+        "announcement--hide-mobile": hidesBannerOnMobile,
+      },
+    ]}
+  >
     {markdownUrl && <AgentHint markdownUrl={markdownUrl} />}
     <GoogleTagManagerFallback />
     <AnnouncementBanner override={announcementBanner} />

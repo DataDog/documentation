@@ -42,7 +42,12 @@ const cl = classListFactory(styles);
 {
   hasBanner && (
     <div
-      class:list={[cl("announcement-banner"), params.custom_classes]}
+      class:list={[
+        cl("announcement-banner"),
+        params.hide_on_mobile && cl("announcement-banner--hide-mobile"),
+        params.custom_classes,
+      ]}
+      data-hide-on-mobile={params.hide_on_mobile ? "true" : undefined}
       style={backgroundStyle || undefined}
     >
       {params.custom_event_banner ? (
