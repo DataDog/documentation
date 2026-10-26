@@ -250,7 +250,7 @@ Create an email global variable to receive emails at the same Datadog-managed ad
 1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email Address{{< /ui >}}.
 2. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
 3. Under {{< ui >}}Permission settings{{< /ui >}}, click {{< ui >}}Edit Access{{< /ui >}} to configure access, then save the variable.
-4. Copy the generated address from the saved variable to register the account in your application. The address displayed before creation is an example.
+4. Copy the generated address from the saved variable to register the account in your application. The create form shows only an example address.
 
 {{< img src="synthetics/settings/persistent_email_variable.png" alt="Create an email global variable with Email Address selected and configure its name, tags, and access permissions" style="width:80%;" >}}
 
