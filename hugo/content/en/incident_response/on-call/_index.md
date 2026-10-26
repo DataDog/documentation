@@ -18,9 +18,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/fedramp-high-incident-response/"
   tag: "Blog"
   text: "Run incident response in your FedRAMP High environment"
-- link: "https://www.datadoghq.com/blog/how-datadog-defines-service-criticality-at-scale/"
-  tag: "Blog"
-  text: "How Datadog defines service criticality at scale"
 cascade:
     algolia:
         rank: 70
