@@ -16,15 +16,6 @@ test.describe("ApiEndpoint component", () => {
     await expect(badge.first()).toBeVisible();
   });
 
-  test("exposes the operation slug as the section anchor", async ({ page }) => {
-    // ApiEndpoint stopped rendering its own summary heading once the
-    // operation page took over the version-tabs layout (the page renders
-    // a single H1 above the tabs). The slug anchor moved onto the section.
-    const endpoint = page.locator(".api-endpoint").first();
-    const id = await endpoint.getAttribute("id");
-    expect(id).toBeTruthy();
-  });
-
   test("renders the URL path", async ({ page }) => {
     const endpoint = page.locator(".api-endpoint").first();
     const code = endpoint.locator("code").first();

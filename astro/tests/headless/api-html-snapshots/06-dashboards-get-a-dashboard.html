@@ -41,7 +41,7 @@
   index is available at <a href="/llms.txt">/llms.txt</a>.
 </div>
 <main class="api-main" data-astro-cid-q6ulih72>
-  <div class="api-toolbar" data-astro-cid-q6ulih72>
+  <div class="api-toolbar" data-sticky-bar data-astro-cid-q6ulih72>
     <div class="api-toolbar__left" data-astro-cid-q6ulih72>
       <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_325516">
         <ol class="breadcrumbs__list _breadcrumbs__list_325516">
@@ -298,6 +298,10 @@
       >
     </div>
   </div>
+  <script
+    type="module"
+    src="/src/components/StickyBarHeight/StickyBarHeight.astro?astro&type=script&index=0&lang.ts"
+  ></script>
   <div class="prose" data-astro-cid-q6ulih72>
     <div class="api-page-header _api-page-header_f3b303">
       <h1 class="api-page-header__title _api-page-header__title_f3b303">Get a dashboard</h1>
@@ -353,7 +357,7 @@
         <!--astro:end--></astro-island
       >
       <div id="get-a-dashboard-v1" class="tabs__panel tabs__panel--active" role="tabpanel">
-        <section id="get-a-dashboard" class="api-endpoint _api-endpoint_071384" data-operation-id="GetDashboard">
+        <section class="api-endpoint _api-endpoint_071384" data-operation-id="GetDashboard">
           <div class="api-endpoint__url-line _api-endpoint__url-line_071384">
             <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62"
               >GET</span
@@ -14365,26 +14369,28 @@
                 role="tabpanel"
                 class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
               >
-                <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X53" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X53-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X19"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                <div class="api-code-example__card _api-code-example__card_c15178">
+                  <div class="api-code-example__label _api-code-example__label_c15178">Get a dashboard</div>
+                  <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X53" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X53-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X19"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14395,30 +14401,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X54" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X54-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X20"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                  <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X54" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X54-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X20"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14429,30 +14435,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X55" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X55-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X21"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                  <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X55" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X55-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X21"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14463,30 +14469,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X56" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X56-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X22"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                  <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X56" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X56-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X22"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14497,30 +14503,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X57" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X57-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X23"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                  <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X57" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X57-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X23"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14531,30 +14537,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X58" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X58-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X24"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                  <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X58" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X58-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X24"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14565,30 +14571,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X59" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X59-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X25"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
+                  <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X59" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X59-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X25"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Path parameters</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> dashboard_id=</span><span style="color:var(--color-syntax-string)">"CHANGE_ME"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
@@ -14599,32 +14605,35 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/</span><span style="color:var(--color-panel-text)">${dashboard_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div id="api-code-example-X52-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X60" class="code-block _code-block_961fb8" data-language="go">
-                    <div id="code-block-X60-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X26"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+                <div class="api-code-example__card _api-code-example__card_c15178">
+                  <div class="api-code-example__label _api-code-example__label_c15178">Get a dashboard</div>
+                  <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X60" class="code-block _code-block_961fb8" data-language="go">
+                      <div id="code-block-X60-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X26"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)">// Get a dashboard returns "OK" response</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">package</span><span style="color:var(--color-syntax-class)"> main</span></span>
@@ -14658,6 +14667,7 @@
 <span class="line"><span style="color:var(--color-panel-text)">	fmt.Fprintf(os.Stdout, </span><span style="color:var(--color-syntax-string)">"Response from `DashboardsApi.GetDashboard`:\n%s\n"</span><span style="color:var(--color-panel-text)">, responseContent)</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">}</span></span>
 <span class="line"></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -14860,26 +14870,28 @@
                 </div>
               </div>
               <div id="api-code-example-X52-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X68" class="code-block _code-block_961fb8" data-language="python">
-                    <div id="code-block-X68-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X34"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># </span><span style="color:var(--color-syntax-keyword)">NOTE</span><span style="color:var(--color-syntax-comment)">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+                <div class="api-code-example__card _api-code-example__card_c15178">
+                  <div class="api-code-example__label _api-code-example__label_c15178">Get a dashboard</div>
+                  <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X68" class="code-block _code-block_961fb8" data-language="python">
+                      <div id="code-block-X68-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X34"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># </span><span style="color:var(--color-syntax-keyword)">NOTE</span><span style="color:var(--color-syntax-comment)">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
 <span class="line"><span style="color:var(--color-syntax-string)">"""</span></span>
 <span class="line"><span style="color:var(--color-syntax-string)">Get a dashboard returns "OK" response</span></span>
 <span class="line"><span style="color:var(--color-syntax-string)">"""</span></span>
@@ -14900,6 +14912,7 @@
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">    print</span><span style="color:var(--color-panel-text)">(response)</span></span>
 <span class="line"></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>

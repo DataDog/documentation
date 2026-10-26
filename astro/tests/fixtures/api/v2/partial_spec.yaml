@@ -10802,6 +10802,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
+      x-displayName: Connect an AWS account
       x-menu-order: 13
       x-permission:
         operator: OR

@@ -31,6 +31,10 @@
     "name": "Actions Datastores",
     "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
   },
+  "agent-health": {
+    "name": "Agent Health",
+    "description": "View Agent Health issues reported for node Agents and Cluster Agents."
+  },
   "agent-observability": {
     "name": "Agent Observability",
     "description": "Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations."
@@ -338,10 +342,6 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
-  },
-  "network-health-insights": {
-    "name": "Network Health Insights",
-    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
   },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",

@@ -151,3 +151,11 @@
 body.announcement {
   --hugo-active-banner-height: var(--hugo-banner-height);
 }
+
+/* `hide_on_mobile` hides the banner below 768px, so every offset that reads
+   this token falls back to its no-banner value there. */
+@media (max-width: 767.98px) {
+  body.announcement--hide-mobile {
+    --hugo-active-banner-height: 0px;
+  }
+}

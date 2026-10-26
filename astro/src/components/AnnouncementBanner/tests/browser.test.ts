@@ -45,6 +45,43 @@ test.describe("AnnouncementBanner component — visual", () => {
     });
   });
 
+  test.describe("when the banner is hidden on mobile", () => {
+    test.beforeEach(async ({ page }) => {
+      // This test page renders a `hide_on_mobile` banner via `override`.
+      await page.goto("/dd_e2e/components/announcement-banner-hide-mobile");
+    });
+
+    test("is hidden below 768px and the header moves to the top", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 500, height: 900 });
+      await expect(page.locator(".announcement-banner")).toBeHidden();
+
+      const headerBox = await page
+        .locator(".header__wrapper .header__nav")
+        .boundingBox();
+      expect(headerBox).not.toBeNull();
+      expect(Math.round(headerBox!.y)).toBe(0);
+    });
+
+    test("still shows at 768px and offsets the header below it", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 768, height: 900 });
+      const bannerBox = await page
+        .locator(".announcement-banner")
+        .boundingBox();
+      expect(bannerBox).not.toBeNull();
+      expect(Math.round(bannerBox!.height)).toBe(30);
+
+      const headerBox = await page
+        .locator(".header__wrapper .header__nav")
+        .boundingBox();
+      expect(headerBox).not.toBeNull();
+      expect(Math.round(headerBox!.y)).toBe(30);
+    });
+  });
+
   test.describe("when no banner is configured", () => {
     test("renders no banner on a normal page", async ({ page }) => {
       // The Test Pages index has no banner override, so `BaseLayout` falls back

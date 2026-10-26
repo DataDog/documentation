@@ -4,13 +4,13 @@
  * Emits an outer `{% tabs %}` tag with one `{% tab %}` per status code.
  * Each panel may include a description (parsed as markdown) and then an
  * inner `{% tabs %}` tag with Model and Example tabs when both a model (schema
- * rows or a schema description) and examples are present; otherwise it
- * includes whichever is available.
+ * rows, a schema description, a non-JSON content type, or an empty body) and
+ * examples are present; otherwise it includes whichever is available.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { ResponseData } from "@lib/api/schemas/views";
-import { NO_CONTENT, nodesFromMd, tag } from "@lib/plaintext/helpers";
+import { NO_CONTENT, nodesFromMd, tableMd, tag } from "@lib/plaintext/helpers";
 import { apiSchemaTableNode } from "@components/ApiSchemaTable/plaintext/ApiSchemaTable";
 import { exampleNodes } from "@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs";
 
@@ -41,11 +41,16 @@ function innerNodes(r: ResponseData): MarkdocNode[] {
   const hasSchema = (r.schema?.length ?? 0) > 0;
   const hasExamples = (r.examples?.length ?? 0) > 0;
   // A top-level array of primitives has no rows, but Hugo still shows its
-  // Model tab, with the schema description and no table.
-  const hasModel = hasSchema || Boolean(r.schemaDescription);
+  // Model tab, with the schema description and no table. A non-JSON body's
+  // Model is its content type.
+  const hasModel =
+    hasSchema ||
+    Boolean(r.schemaDescription) ||
+    Boolean(r.contentType) ||
+    Boolean(r.emptyBody);
 
   if (!hasSchema && !hasExamples) {
-    return NO_CONTENT;
+    return r.contentType ? modelNodes(r) : NO_CONTENT;
   }
 
   if (hasModel && hasExamples) {
@@ -69,6 +74,14 @@ function modelNodes(r: ResponseData): MarkdocNode[] {
   const nodes: MarkdocNode[] = [];
   if (r.schemaDescription) {
     nodes.push(...nodesFromMd(r.schemaDescription));
+  }
+  if (r.contentType) {
+    // MISSING_TRANSLATION_LABEL: This label is not in the i18n file yet.
+    nodes.push(...nodesFromMd(`Content type: \`${r.contentType}\``));
+  }
+  // Like Hugo's `.md`, an empty JSON object's Model is a header-only table.
+  if (r.emptyBody) {
+    nodes.push(tableMd(["Field", "Type", "Description"], []));
   }
   const table = r.schema?.length ? apiSchemaTableNode(r.schema) : null;
   if (table) {

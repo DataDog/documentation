@@ -51,6 +51,12 @@ export const GenerateCurlOptionsSchema = z
   .object({
     method: z.string(),
     path: z.string(),
+    commentLines: z
+      .array(z.string())
+      .optional()
+      .describe(
+        "Lines above the command, such as a spec example's `## <summary>` and `# <description>` lines",
+      ),
     site: z
       .string()
       .optional()
@@ -89,6 +95,12 @@ export const GenerateCurlOptionsSchema = z
       .string()
       .optional()
       .describe("Prettified JSON string for the request body"),
+    contentEncoding: z
+      .enum(["gzip", "deflate"])
+      .optional()
+      .describe(
+        "Compress the body before sending it, with this `Content-Encoding`, as Hugo's curl does",
+      ),
     hasRequestBody: z
       .boolean()
       .optional()

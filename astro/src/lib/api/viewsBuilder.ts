@@ -37,6 +37,8 @@ import {
 } from "./translationsLoader";
 import {
   splitParameters,
+  extractCurlExamples,
+  type CurlExample,
   extractRequestBody,
   extractResponses,
   extractPermissions,
@@ -49,12 +51,22 @@ import {
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
 import { toCategorySlug, toOperationSlug } from "./categorySlug";
+import {
+  getDisplayNames,
+  relabelCaption,
+  resolveLabel,
+  toOperationKey,
+} from "./displayNames";
 import { toScopeAnchor } from "./scopesBuilder";
 import {
   getCodeExamplesForOperation,
   getLanguageRunInfo,
 } from "./codeExampleLoader";
-import type { CodeExampleSet } from "./schemas/codeExamples";
+import {
+  getRequestFileExamples,
+  type RequestFileExamples,
+} from "./requestFileLoader";
+import type { CodeExampleEntry, CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
 import type { SplitParams } from "./schemas/params";
@@ -301,6 +313,13 @@ function getOpSlug(op: RawOperation): string {
   return toOperationSlug(op.operation.summary ?? "");
 }
 
+/** The operation's `x-displayName`, shared across its version variants. */
+function getDisplaySummary(op: RawOperation): string | undefined {
+  return getDisplayNames().operationSummariesByKey.get(
+    toOperationKey(op.primaryTag, op.operation.summary ?? ""),
+  );
+}
+
 /** Compare versions newest-first: `v2 < v1` returns -1. */
 function compareVersionsNewestFirst(a: ApiVersion, b: ApiVersion): number {
   return versionOrdinal(b) - versionOrdinal(a);
@@ -400,7 +419,7 @@ function collectCategoryMetadataFromSpecTags(
   for (const tag of tags) {
     const slug = toCategorySlug(tag.name);
     const translated = translateTag(overlay, slug, {
-      name: tag.name,
+      name: getDisplayNames().categoryNamesBySlug.get(slug) ?? tag.name,
       description: tag.description,
     });
     result.push({
@@ -429,7 +448,9 @@ function collectImplicitCategoryMetadataFromOperations(
     seen.add(op.categorySlug);
     const overlay = getTranslationOverlay(op.version, lang);
     const translated = translateTag(overlay, op.categorySlug, {
-      name: op.primaryTag,
+      name:
+        getDisplayNames().categoryNamesBySlug.get(op.categorySlug) ??
+        op.primaryTag,
     });
     result.push({
       name: translated.name,
@@ -486,7 +507,11 @@ function buildOperationStub(
   const spec = getOpenApiDocument(latest.version);
   return {
     operationId,
-    summary: action.summary ?? latest.operation.summary ?? "",
+    summary: resolveLabel(
+      action.summary,
+      getDisplaySummary(latest),
+      latest.operation.summary ?? "",
+    ),
     slug: getOpSlug(latest),
     menuOrder: Number.isFinite(menuOrder) ? menuOrder : 999,
     versions: group.map((op) => op.version),
@@ -518,7 +543,12 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const operationId: string = op.operation.operationId;
   const action = translateAction(overlay, operationId);
 
-  const summary: string = action.summary ?? op.operation.summary ?? "";
+  const displaySummary = getDisplaySummary(op);
+  const summary: string = resolveLabel(
+    action.summary,
+    displaySummary,
+    op.operation.summary ?? "",
+  );
   const description: string =
     action.description ?? op.operation.description ?? "";
   const deprecated: boolean = op.operation.deprecated === true;
@@ -541,15 +571,27 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const regionUrls = buildRegionUrlsForOperation(spec, op);
 
   const params = collectParametersForOperation(spec, op);
-  const requestBody = buildLocalizedRequestBodyForOperation(spec, op, action);
+  const requestFileExamples = getRequestFileExamples(
+    op.operation.operationId,
+    op.version,
+    op.categorySlug,
+  );
+  const requestBody = buildLocalizedRequestBodyForOperation(
+    spec,
+    op,
+    action,
+    requestFileExamples,
+  );
   const responses = extractResponses(spec, op.operation);
 
   const codeExamples = buildCodeExamplesForOperation(
     spec,
     op,
     params.split,
-    requestBody?.examples?.[0]?.value,
+    extractCurlExamples(spec, op.operation, requestFileExamples),
     summary,
+    // Matches Hugo: only English SDK captions are relabeled.
+    lang === DEFAULT_LOCALE ? displaySummary : undefined,
   );
 
   return {
@@ -642,8 +684,13 @@ function buildLocalizedRequestBodyForOperation(
   spec: OpenAPIV3.Document,
   op: RawOperation,
   action: ActionTranslation,
+  requestFileExamples: RequestFileExamples,
 ): RequestBodyData | undefined {
-  const requestBody = extractRequestBody(spec, op.operation);
+  const requestBody = extractRequestBody(
+    spec,
+    op.operation,
+    requestFileExamples,
+  );
   if (!requestBody) return undefined;
 
   if (action.request_description !== undefined) {
@@ -659,61 +706,110 @@ function buildLocalizedRequestBodyForOperation(
 }
 
 /**
- * Assembles the code-examples panel: a curl block (one entry with per-
- * region variants) followed by any SDK examples discovered for this
- * operation.
+ * Assembles the code-examples panel: the curl entries (each with per-region
+ * variants) followed by any SDK examples discovered for this operation.
  */
 function buildCodeExamplesForOperation(
   spec: OpenAPIV3.Document,
   op: RawOperation,
   params: SplitParams,
-  requestBodyJson: string | undefined,
+  curlExamples: CurlExample[],
   summary: string,
+  sdkCaptionLabel: string | undefined,
 ): CodeExampleSet[] {
-  const curlByRegion = buildCurlByRegion(
-    spec,
-    op.method,
-    op.pathStr,
-    op.operation,
-    params,
-    requestBodyJson,
-  );
-  // The HTML renders `regionVariants`, so `code` only reaches the .md.
-  const plaintextCurl = buildPlaintextCurl(
-    spec,
-    op.method,
-    op.pathStr,
-    op.operation,
-    params,
-    requestBodyJson,
-  );
-
-  const curlVariants: Record<string, { code: string }> = {};
-  for (const [key, code] of Object.entries(curlByRegion)) {
-    curlVariants[key] = { code };
-  }
-
   const sdkExamples = getCodeExamplesForOperation(
     op.operation.operationId,
     op.version,
     op.categorySlug,
-  ).map((set) => withRunInstructions(spec, op.operation, set));
+  )
+    .map((set) =>
+      withRelabeledCaptions(set, op.operation.summary ?? "", sdkCaptionLabel),
+    )
+    .map((set) => withSummaryFallbackCaptions(set, summary))
+    .map((set) => withRunInstructions(spec, op.operation, set));
 
   return [
     {
       language: "curl",
       label: "Curl",
-      entries: [
-        {
-          description: `${summary} curl example`,
-          code: plaintextCurl,
-          syntax: "bash",
-          regionVariants: curlVariants,
-        },
-      ],
+      entries: curlExamples.map((curlExample) =>
+        buildCurlEntry(spec, op, params, curlExample, summary),
+      ),
     },
     ...sdkExamples,
   ];
+}
+
+/**
+ * One curl entry. An entry with several bodies shows their curls in one
+ * block, separated by a blank line, as prod does.
+ */
+function buildCurlEntry(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+  params: SplitParams,
+  curlExample: CurlExample,
+  summary: string,
+): CodeExampleEntry {
+  const curlsByRegion = curlExample.bodies.map((body) =>
+    buildCurlByRegion(spec, op.method, op.pathStr, op.operation, params, body),
+  );
+  // The HTML renders `regionVariants`, so `code` only reaches the .md.
+  const plaintextCurls = curlExample.bodies.map((body) =>
+    buildPlaintextCurl(spec, op.method, op.pathStr, op.operation, params, body),
+  );
+
+  const regionVariants: Record<string, { code: string }> = {};
+  for (const regionKey of Object.keys(curlsByRegion[0] ?? {})) {
+    regionVariants[regionKey] = {
+      code: curlsByRegion
+        .map((curlByRegion) => curlByRegion[regionKey])
+        .join("\n\n"),
+    };
+  }
+
+  return {
+    description: curlExample.title ?? summary,
+    code: plaintextCurls.join("\n\n"),
+    syntax: "bash",
+    regionVariants,
+  };
+}
+
+function withRelabeledCaptions(
+  set: CodeExampleSet,
+  canonicalSummary: string,
+  displayName: string | undefined,
+): CodeExampleSet {
+  if (!displayName) return set;
+  return {
+    ...set,
+    entries: set.entries.map((entry) => ({
+      ...entry,
+      description: relabelCaption(
+        entry.description,
+        canonicalSummary,
+        displayName,
+      ),
+    })),
+  };
+}
+
+/**
+ * Titles untitled examples (no CodeExamples.json entry) with the operation
+ * summary, as Hugo does.
+ */
+function withSummaryFallbackCaptions(
+  set: CodeExampleSet,
+  summary: string,
+): CodeExampleSet {
+  return {
+    ...set,
+    entries: set.entries.map((entry) => ({
+      ...entry,
+      description: entry.description || summary,
+    })),
+  };
 }
 
 function withRunInstructions(

@@ -67,6 +67,61 @@ describe("buildCurlCommand", () => {
     expect(result).toContain("EOF");
   });
 
+  it("starts with the comment lines, then a blank line, as Hugo does", () => {
+    const result = buildCurlCommand({
+      method: "POST",
+      path: "/api/v1/dashboard",
+      commentLines: ["## Weekly update", "# Runs every week."],
+    });
+
+    expect(result.startsWith("## Weekly update\n# Runs every week.\n\n")).toBe(
+      true,
+    );
+  });
+
+  const compressedOptions = {
+    method: "POST",
+    path: "/api/v2/logs",
+    headerParams: [{ name: "Content-Encoding", example: "gzip" }],
+    requestBodyJson: '[\n  {\n    "message": "Example-Log"\n  }\n]',
+  };
+
+  it("pipes a gzip body through gzip, as Hugo does", () => {
+    const result = buildCurlCommand({
+      ...compressedOptions,
+      contentEncoding: "gzip",
+    });
+
+    expect(result).toContain(
+      'echo $(cat << EOF\n[\n  {\n    "message": "Example-Log"\n  }\n]\nEOF\n) | gzip | curl -X POST "https://api.${DD_SITE}/api/v2/logs"',
+    );
+    expect(result).toContain(
+      '-H "Content-Type: application/json" \\\n-H "Content-Encoding: gzip" \\\n',
+    );
+    expect(result.endsWith("\\\n--data-binary @-")).toBe(true);
+    expect(result).not.toContain("-d @-");
+  });
+
+  it("pipes a deflate body through zlib, as Hugo does", () => {
+    const result = buildCurlCommand({
+      ...compressedOptions,
+      contentEncoding: "deflate",
+    });
+
+    expect(result).toContain(
+      "printf '%s' \"$(cat <<'EOF'\n[\n  {\n    \"message\": \"Example-Log\"\n  }\n]\nEOF\n)\" | python3 -c 'import sys, zlib; sys.stdout.buffer.write(zlib.compress(sys.stdin.buffer.read()))' | curl -X POST",
+    );
+    expect(result).toContain('-H "Content-Encoding: deflate" \\\n');
+    expect(result.endsWith("\\\n--data-binary @-")).toBe(true);
+  });
+
+  it("leaves the body uncompressed without a content encoding", () => {
+    const result = buildCurlCommand(compressedOptions);
+
+    expect(result).not.toContain("Content-Encoding");
+    expect(result).toContain("-d @- << EOF");
+  });
+
   /** As Hugo does: the example is exported, and the URL references it by name. */
   it("exports a path parameter's example", () => {
     const result = buildCurlCommand({

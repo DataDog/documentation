@@ -68,6 +68,22 @@ describe("ApiEndpoint region rendering", () => {
   });
 });
 
+describe("ApiEndpoint anchor", () => {
+  // The operation page wraps each version in a tab panel with a unique
+  // `{slug}-{version}` id. A section id from the bare slug would repeat once
+  // per version on the same page.
+  it("does not set an id on the section", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(ApiEndpoint, {
+      props: { data: JSON.stringify(endpointWithTwoRegions) },
+    });
+
+    const section = html.match(/<section[^>]*class="[^"]*api-endpoint[^>]*>/);
+    expect(section).not.toBeNull();
+    expect(section![0]).not.toMatch(/\sid=/);
+  });
+});
+
 describe("ApiEndpoint status alerts", () => {
   async function renderEndpoint(overrides: Record<string, unknown>) {
     const container = await AstroContainer.create();

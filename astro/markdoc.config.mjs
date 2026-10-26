@@ -59,6 +59,12 @@ export default defineMarkdocConfig({
     },
   },
   nodes: {
+    // Spread the integration's heading node, not Markdoc's: config nodes merge
+    // shallowly, so leaving out its transform would drop the generated ids.
+    heading: {
+      ...nodes.heading,
+      render: component("./src/components/Heading/Heading.astro"),
+    },
     fence: {
       render: component("./src/components/CodeBlock/CodeBlock.astro"),
       attributes: {

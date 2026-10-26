@@ -1,12 +1,12 @@
 ---
-title: Authentication
+title: API Keys
 description: All requests to Datadog’s API must be authenticated.
-breadcrumbs: Docs > API > Authentication
+breadcrumbs: Docs > API > API Keys
 ---
 
 > For the complete documentation index, see [llms.txt](https://docs.datadoghq.com/llms.txt).
 
-# Authentication
+# API Keys
 
 All requests to Datadog’s API must be authenticated.
 Requests that write data require reporting access and require an `API key`.

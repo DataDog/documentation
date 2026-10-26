@@ -9,6 +9,7 @@ import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIslan
 import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelectorIsland.astro";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
+import StickyBarHeight from "@components/StickyBarHeight/StickyBarHeight.astro";
 import { resolveLocale, stripLocalePrefix } from "@lib/i18n/locale";
 import { buildHreflangAlternates } from "@lib/seo";
 import { rewriteInternalDocLink } from "@lib/plaintext/rewriteDocLink";
@@ -76,7 +77,7 @@ const isChangelogSection = isChangelogPath(unprefixedPath);
       isChangelogSection={isChangelogSection}
     />
     <main class="api-main">
-      <div class="api-toolbar">
+      <div class="api-toolbar" data-sticky-bar>
         <div class="api-toolbar__left">
           {
             breadcrumbs && (
@@ -94,6 +95,7 @@ const isChangelogSection = isChangelogPath(unprefixedPath);
           <RegionSelectorIsland />
         </div>
       </div>
+      <StickyBarHeight />
       <SiteSupportBanner
         pathname={Astro.url.pathname}
         siteSupportId={siteSupportId}
@@ -106,6 +108,28 @@ const isChangelogSection = isChangelogPath(unprefixedPath);
 </BaseLayout>
 
 <style>
+  /* Height of the sticky .api-toolbar after an anchor jump, which global.css
+     adds to the anchor scroll offset. The content height is measured by
+     StickyBarHeight, because the breadcrumb wraps with the title and window
+     width. The padding added here must match the .api-toolbar padding rules
+     below once the page has scrolled. The fallbacks are the content heights
+     with a one-line breadcrumb, for when the script hasn't run. */
+  :global(html) {
+    --sticky-bar-height: calc(
+      var(--sticky-bar-content-height, 101px) + var(--space-sm) +
+        var(--space-md)
+    );
+  }
+
+  /* Desktop: the scrolled padding (`[data-scrolled] .api-toolbar`). */
+  @media (min-width: 992px) {
+    :global(html) {
+      --sticky-bar-height: calc(
+        var(--sticky-bar-content-height, 32px) + 2 * var(--space-md)
+      );
+    }
+  }
+
   .api-shell {
     display: flex;
     max-width: var(--content-max-width);

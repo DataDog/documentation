@@ -25,7 +25,8 @@
   padding: 0;
 }
 
-.api-code-example__accordion {
+.api-code-example__accordion,
+.api-code-example__card {
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -101,7 +102,16 @@
   color: var(--color-brand)
 }
 
-.api-code-example__accordion .api-code-example__code-block {
+.api-code-example__label {
+  background: var(--color-bg-hover);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+}
+
+.api-code-example__accordion .api-code-example__code-block,
+.api-code-example__card .api-code-example__code-block {
   margin: 0;
 }
 
@@ -111,7 +121,8 @@
   margin-bottom: 0;
 }
 
-.api-code-example__accordion .api-code-example__pre {
+.api-code-example__accordion .api-code-example__pre,
+.api-code-example__card .api-code-example__pre {
   border: none;
   border-bottom: var(--border-width-highlight) solid var(--color-panel-accent);
   border-radius: 0;

@@ -6,6 +6,7 @@ import {
   extractOauthScopes,
   extractOauthScopesMatch,
   extractPermissionsMatch,
+  extractCurlExamples,
   extractRequestBody,
   extractResponses,
 } from "./operationBuilder";
@@ -230,7 +231,7 @@ describe("extractRequestBody content types", () => {
     expect(body?.examples.length).toBeGreaterThan(0);
   });
 
-  it("reads a multipart/form-data body's schema, without a JSON example", () => {
+  it("reads a multipart/form-data body's schema, with its example as curl form fields", () => {
     const body = bodyFor({
       "multipart/form-data": {
         schema: objectSchema("idp_file"),
@@ -239,6 +240,24 @@ describe("extractRequestBody content types", () => {
     });
 
     expect(body?.schema.map((field) => field.name)).toEqual(["idp_file"]);
+    expect(body?.examples).toEqual([
+      {
+        name: "Example",
+        value: "-F 'idp_file=metadata.xml'",
+        language: "bash",
+      },
+    ]);
+    expect(body?.showExampleTitles).toBe(false);
+  });
+
+  it("gives other non-JSON bodies no example", () => {
+    const body = bodyFor({
+      "application/x-www-form-urlencoded": {
+        schema: objectSchema("name"),
+        example: { name: "x" },
+      },
+    });
+
     expect(body?.examples).toEqual([]);
   });
 
@@ -249,6 +268,350 @@ describe("extractRequestBody content types", () => {
     });
 
     expect(body?.schema.map((field) => field.name)).toEqual(["data"]);
+  });
+});
+
+describe("extractRequestBody request files", () => {
+  const body = {
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object" as const,
+          properties: { title: { type: "string" as const } },
+        },
+        examples: { spec: { summary: "Spec", value: { title: "from-spec" } } },
+      },
+    },
+  } as OpenAPIV3.RequestBodyObject;
+  const requestFileExamples = {
+    examples: [
+      { name: "First file", value: '{\n  "title": "first"\n}' },
+      { name: "Second file", value: '{\n  "title": "second"\n}' },
+    ],
+    showTitles: true,
+    isFallbackFile: false,
+  };
+
+  // Prod's Example tab shows Hugo's request files, never the spec's examples.
+  it("shows the request files in place of the spec's examples", () => {
+    const extracted = extractRequestBody(
+      spec,
+      { responses: {}, requestBody: body },
+      requestFileExamples,
+    );
+
+    expect(extracted?.examples).toEqual(requestFileExamples.examples);
+  });
+
+  it("takes the request files' titling", () => {
+    const extracted = extractRequestBody(
+      spec,
+      { responses: {}, requestBody: body },
+      { ...requestFileExamples, showTitles: false },
+    );
+
+    expect(extracted?.showExampleTitles).toBe(false);
+  });
+
+  // Without request files, prod shows the example Hugo builds from the
+  // schema (examples.json), never the spec's examples.
+  it("builds the example from the schema when there are no request files", () => {
+    const extracted = extractRequestBody(
+      spec,
+      { responses: {}, requestBody: body },
+      { examples: [], showTitles: true, isFallbackFile: false },
+    );
+
+    expect(extracted?.examples).toEqual([
+      { name: "Example", value: '{\n  "title": "string"\n}' },
+    ]);
+    expect(extracted?.showExampleTitles).toBe(false);
+  });
+
+  it("leaves read-only fields out of the schema-built example", () => {
+    const withReadOnlyField = {
+      ...body,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object" as const,
+            properties: {
+              id: { type: "string" as const, readOnly: true },
+              title: { type: "string" as const },
+            },
+          },
+        },
+      },
+    };
+    const extracted = extractRequestBody(spec, {
+      responses: {},
+      requestBody: withReadOnlyField,
+    });
+
+    expect(JSON.parse(extracted!.examples[0].value)).toEqual({
+      title: "string",
+    });
+  });
+});
+
+describe("extractCurlExamples", () => {
+  const schema = {
+    type: "object" as const,
+    properties: { title: { type: "string" as const, example: "from-schema" } },
+  };
+  const bodyWithExamples = (
+    examples: Record<string, OpenAPIV3.ExampleObject>,
+  ) =>
+    ({
+      required: true,
+      content: { "application/json": { schema, examples } },
+    }) as OpenAPIV3.RequestBodyObject;
+  const specExample = {
+    spec: { summary: "Spec", value: { title: "from-spec" } },
+  };
+
+  const requestFiles = {
+    examples: [
+      { name: "Create a cost monitor", value: '{\n  "title": "cost"\n}' },
+      { name: "Create a RUM monitor", value: '{\n  "title": "rum"\n}' },
+    ],
+    showTitles: true,
+    isFallbackFile: false,
+  };
+
+  // Decision A: prod repeats every spec example in every request-file card.
+  // Astro sends each card's own request file instead.
+  it("builds one curl per request file, titled with its CodeExamples description", () => {
+    const curlExamples = extractCurlExamples(
+      spec,
+      { responses: {}, requestBody: bodyWithExamples(specExample) },
+      requestFiles,
+    );
+
+    expect(curlExamples).toEqual([
+      {
+        title: "Create a cost monitor",
+        bodies: [
+          { requestBodyJson: '{\n  "title": "cost"\n}', commentLines: [] },
+        ],
+      },
+      {
+        title: "Create a RUM monitor",
+        bodies: [
+          { requestBodyJson: '{\n  "title": "rum"\n}', commentLines: [] },
+        ],
+      },
+    ]);
+  });
+
+  it("leaves the curl untitled when the request file is the fallback file", () => {
+    const curlExamples = extractCurlExamples(
+      spec,
+      { responses: {}, requestBody: bodyWithExamples(specExample) },
+      {
+        examples: [{ name: "Example", value: "{}" }],
+        showTitles: false,
+        isFallbackFile: true,
+      },
+    );
+
+    expect(curlExamples.map((curlExample) => curlExample.title)).toEqual([
+      undefined,
+    ]);
+  });
+
+  // Hugo's curl label bar shows the description even when the Example tab
+  // leaves a single request example untitled.
+  it("titles a single request file's curl with its CodeExamples description", () => {
+    const curlExamples = extractCurlExamples(
+      spec,
+      { responses: {}, requestBody: bodyWithExamples(specExample) },
+      {
+        examples: [{ name: "Update a thing returns OK", value: "{}" }],
+        showTitles: false,
+        isFallbackFile: false,
+      },
+    );
+
+    expect(curlExamples.map((curlExample) => curlExample.title)).toEqual([
+      "Update a thing returns OK",
+    ]);
+  });
+
+  // Prod's curl sends the spec's example, not the Example tab's body.
+  it("sends the spec's example, without comment lines, when it's the only one", () => {
+    const curlExamples = extractCurlExamples(spec, {
+      responses: {},
+      requestBody: bodyWithExamples(specExample),
+    });
+
+    expect(curlExamples).toHaveLength(1);
+    expect(curlExamples[0].title).toBeUndefined();
+    expect(curlExamples[0].bodies).toHaveLength(1);
+    expect(JSON.parse(curlExamples[0].bodies[0].requestBodyJson!)).toEqual({
+      title: "from-spec",
+    });
+    expect(curlExamples[0].bodies[0].commentLines).toEqual([]);
+  });
+
+  // Hugo ranges over the examples map, which Go iterates in key order, and
+  // heads each curl with the example's summary (or id) and description.
+  it("sends each of several spec examples in key order, headed by its summary or id", () => {
+    const curlExamples = extractCurlExamples(spec, {
+      responses: {},
+      requestBody: bodyWithExamples({
+        weekly: {
+          summary: "Weekly update",
+          description: "Runs every week.\nOn Mondays.",
+          value: { title: "weekly" },
+        },
+        default: { value: { title: "default" } },
+      }),
+    });
+
+    expect(curlExamples).toHaveLength(1);
+    expect(
+      curlExamples[0].bodies.map((body) => ({
+        title: JSON.parse(body.requestBodyJson!).title,
+        commentLines: body.commentLines,
+      })),
+    ).toEqual([
+      { title: "default", commentLines: ["## default"] },
+      {
+        title: "weekly",
+        commentLines: [
+          "## Weekly update",
+          "# Runs every week.",
+          "# On Mondays.",
+        ],
+      },
+    ]);
+  });
+
+  it("builds the body from the schema when there are no examples", () => {
+    const curlExamples = extractCurlExamples(spec, {
+      responses: {},
+      requestBody: bodyWithExamples({}),
+    });
+
+    expect(JSON.parse(curlExamples[0].bodies[0].requestBodyJson!)).toEqual({
+      title: "from-schema",
+    });
+  });
+
+  it("sends no JSON body for a non-JSON request body", () => {
+    const curlExamples = extractCurlExamples(spec, {
+      responses: {},
+      requestBody: {
+        content: {
+          "multipart/form-data": { schema, example: { title: "upload" } },
+        },
+      },
+    });
+
+    expect(curlExamples).toEqual([
+      {
+        title: undefined,
+        bodies: [{ requestBodyJson: undefined, commentLines: [] }],
+      },
+    ]);
+  });
+
+  it("builds one curl without a body when the operation has none", () => {
+    expect(extractCurlExamples(spec, { responses: {} })).toEqual([
+      {
+        title: undefined,
+        bodies: [{ requestBodyJson: undefined, commentLines: [] }],
+      },
+    ]);
+  });
+
+  describe("content encoding", () => {
+    const contentEncodingParam = (
+      schema: OpenAPIV3.SchemaObject,
+    ): OpenAPIV3.ParameterObject => ({
+      name: "Content-Encoding",
+      in: "header",
+      required: false,
+      schema,
+    });
+    const compressibleOperation = (
+      schema: OpenAPIV3.SchemaObject,
+      summary = "Send logs",
+    ): OpenAPIV3.OperationObject => ({
+      summary,
+      responses: {},
+      parameters: [contentEncodingParam(schema)],
+      requestBody: bodyWithExamples(specExample),
+    });
+    const encodingSchema: OpenAPIV3.SchemaObject = {
+      type: "string",
+      enum: ["deflate", "zstd1", "gzip"],
+      example: "deflate",
+    };
+    const requestFilesTitled = (...names: string[]) => ({
+      examples: names.map((name) => ({ name, value: "[]" })),
+      showTitles: true,
+      isFallbackFile: false,
+    });
+    const encodings = (curlExamples: ReturnType<typeof extractCurlExamples>) =>
+      curlExamples.map((curlExample) => curlExample.bodies[0].contentEncoding);
+
+    // Hugo reads the encoding from the card's title.
+    it("compresses a request file whose title names an encoding", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema),
+        requestFilesTitled(
+          "Send deflate logs returns OK",
+          "Send gzip logs returns OK",
+          "Send logs returns OK",
+        ),
+      );
+
+      expect(encodings(curlExamples)).toEqual(["deflate", "gzip", undefined]);
+    });
+
+    it("compresses with the header's example when the title says compression", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema),
+        requestFilesTitled("Submit metrics with compression returns OK"),
+      );
+
+      expect(encodings(curlExamples)).toEqual(["deflate"]);
+    });
+
+    it("compresses with a required header's example", () => {
+      const operation = compressibleOperation(encodingSchema);
+      (operation.parameters![0] as OpenAPIV3.ParameterObject).required = true;
+
+      expect(encodings(extractCurlExamples(spec, operation))).toEqual([
+        "deflate",
+      ]);
+    });
+
+    // Without request files, Hugo's card is titled with the summary.
+    it("reads the operation's summary when there are no request files", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema, "Send gzip logs"),
+      );
+
+      expect(encodings(curlExamples)).toEqual(["gzip"]);
+    });
+
+    // Hugo has a curl shape only for gzip and deflate.
+    it("ignores other encodings", () => {
+      const curlExamples = extractCurlExamples(
+        spec,
+        compressibleOperation(encodingSchema),
+        requestFilesTitled("Send zstd1 logs returns OK"),
+      );
+
+      expect(encodings(curlExamples)).toEqual([undefined]);
+    });
   });
 });
 
@@ -276,13 +639,65 @@ describe("extractResponses content types", () => {
     expect(response.examples?.length).toBeGreaterThan(0);
   });
 
-  it("reads a text/csv response's schema, without a JSON example", () => {
+  it("describes a text/csv response by its content type, with the spec's CSV example", () => {
     const response = responseFor({
-      "text/csv": { schema: objectSchema("row") },
+      "text/csv": {
+        schema: { type: "string" },
+        examples: { default: { value: "name,id\nMy SLO,abc-123" } },
+      },
     });
 
-    expect(response.schema?.map((field) => field.name)).toEqual(["row"]);
+    expect(response.schema).toBeUndefined();
+    expect(response.contentType).toBe("text/csv");
+    expect(response.examples).toEqual([
+      { name: "Example", value: "name,id\nMy SLO,abc-123", language: "csv" },
+    ]);
+  });
+
+  it("gives a text response no example when the spec has none", () => {
+    const response = responseFor({
+      "text/csv": { schema: { type: "string" } },
+    });
+
+    expect(response.contentType).toBe("text/csv");
     expect(response.examples).toBeUndefined();
+  });
+
+  it("describes a binary response by its content type, with no example", () => {
+    const response = responseFor({
+      "application/zip": {
+        schema: { type: "string", format: "binary" },
+        examples: { default: { value: "<binary zip data>" } },
+      },
+    });
+
+    expect(response.schema).toBeUndefined();
+    expect(response.contentType).toBe("application/zip");
+    expect(response.examples).toBeUndefined();
+  });
+
+  it("marks a JSON response with an empty object schema as having no body", () => {
+    const response = responseFor({
+      "application/json": { schema: { type: "object" } },
+    });
+
+    expect(response.emptyBody).toBe(true);
+    expect(response.examples).toEqual([{ name: "Example", value: "{}" }]);
+  });
+
+  it("doesn't mark a JSON response with fields, or a primitive array, as having no body", () => {
+    const withFields = responseFor({
+      "application/json": { schema: objectSchema("id") },
+    });
+    const primitiveArray = responseFor({
+      "application/json": {
+        schema: { type: "array", items: { type: "string" } },
+      },
+    });
+
+    expect(withFields.emptyBody).toBeUndefined();
+    expect(withFields.contentType).toBeUndefined();
+    expect(primitiveArray.emptyBody).toBeUndefined();
   });
 
   it("builds the example from the schema, as Hugo does, ignoring the spec's examples", () => {
@@ -356,6 +771,34 @@ describe("curl site comment", () => {
     for (const curl of Object.values(curlByRegion)) {
       expect(curl).not.toContain("# Or");
     }
+  });
+});
+
+describe("compressed curl", () => {
+  const params = {
+    path: [],
+    query: [],
+    header: [
+      {
+        name: "Content-Encoding",
+        in: "header",
+        schema: { type: "string" as const, enum: ["gzip", "deflate"] },
+      },
+    ],
+  };
+
+  it("compresses the body with the body's content encoding", () => {
+    const curl = buildPlaintextCurl(
+      spec,
+      "post",
+      "/api/v2/logs",
+      { responses: { "202": { description: "OK" } } },
+      params,
+      { requestBodyJson: "[]", commentLines: [], contentEncoding: "gzip" },
+    );
+
+    expect(curl).toContain('-H "Content-Encoding: gzip"');
+    expect(curl).toContain("--data-binary @-");
   });
 });
 
