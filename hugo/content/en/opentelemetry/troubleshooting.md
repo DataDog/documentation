@@ -302,6 +302,7 @@ To verify the configuration:
 **Resolution**: Check the item that matches your setup:
 
 - **Upstream OpenTelemetry Collector**: Add the `span_metrics` connector to your traces pipeline. It generates the trace metrics that power the Catalog and service pages. See [Span metrics connector][10].
+- **DDOT Collector**: Keep the Datadog Connector in your configuration. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Datadog connector][14].
 - **Datadog Exporter**: Add the Datadog Connector to your traces pipeline to calculate trace metrics. See [Datadog Exporter and Connector][11].
 - **Direct OTLP ingest**: Datadog doesn't compute trace metrics by default for traces sent to the OTLP traces intake endpoint. Add the `compute_stats=true` header to your exporter configuration. See [Traces endpoint][12].
 - **All setups**: Set the `service.name` and `deployment.environment.name` resource attributes. Without `service.name`, OpenTelemetry SDKs report a default name such as `unknown_service`. See [Unified service tagging][13].
@@ -367,3 +368,4 @@ features:
 [11]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [12]: /opentelemetry/setup/otlp_ingest/traces/
 [13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
+[14]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/#datadog-connector
