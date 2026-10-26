@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview 
 
-<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, see the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section.</a></div>
+<div class="alert alert-info">If you are interested in testing applications sitting behind multi-factor authentication (MFA), see the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section.</a></div>
 
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
@@ -65,9 +65,9 @@ Create a Virtual Authenticator global variable and import it in your test. Then,
 
 ### Multi-factor authentication
 
-Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][5], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
+Datadog Synthetic Monitoring supports [time-based one-time passwords (TOTPs)][5]. This multi-factor authentication method combines a secret key and the current time to generate a one-time password.
 
-For authentication codes delivered by email, use a [persistent email global variable][11]. Register an application account with its Datadog-managed address once. Record steps that request a fresh one-time passcode (OTP), extract it from the email body, and submit it during each login. This tests email delivery and authentication while letting subsequent steps use the same account across runs. For sign-up flows that need a new account each run, use a temporary email address instead.
+For authentication codes delivered by email, use a [persistent email global variable][11]. Register an application account with its Datadog-managed address once. Record steps that request a fresh one-time password (OTP), extract it from the email body, and submit it during each login. This tests email delivery and authentication while letting subsequent steps use the same account across runs. For sign-up flows that need a new account each run, use a temporary email address instead.
 
 Browser tests can reproduce any actions a regular user take inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser.
 

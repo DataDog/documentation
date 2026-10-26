@@ -210,7 +210,7 @@ Variable values are updated whenever the test they are extracted from runs.
 
 {{% tab "MFA Token" %}}
 
-To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider. **Note:** Currently, only the SHA1 hashing algorithm is supported for TOTP.
+To use multi-factor authentication (MFA) in your tests, create a global variable that generates a time-based one-time password (TOTP). Enter a secret key or upload a QR code from your authentication provider. **Note:** Only the SHA1 hashing algorithm is supported for TOTP.
 
 1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}MFA Token{{< /ui >}}.
 2. In {{< ui >}}Define Variable{{< /ui >}}, enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores.

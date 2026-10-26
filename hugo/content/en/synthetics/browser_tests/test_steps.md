@@ -440,7 +440,7 @@ Create a variable from content such as a `span` or `div` by extracting the eleme
 
 #### Email body
 
-Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12]. This works with both temporary and persistent email address variables. For example, extract a one-time passcode (OTP) into a variable and inject it into a later login step.
+Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12]. This works with both temporary and persistent email address variables. For example, extract a one-time password (OTP) into a variable and inject it into a later login step.
 
 * [`Regex`][13] searches and returns the first matching pattern (for example, `/*./`) from the email's plain text body. If the pattern is not found, it then searches the HTML body.
 
@@ -484,9 +484,9 @@ Select any global variables defined in [Synthetic Monitoring Settings][5].
 
 #### Global variable - MFA
 
-Select any MFA global variables defined in [Synthetic Monitoring Settings][5].
+Select any multi-factor authentication (MFA) global variables defined in [Synthetic Monitoring Settings][5].
 
-This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][6].
+This type of global variable stores time-based one-time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][6].
 
 #### Email
 

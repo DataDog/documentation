@@ -1,6 +1,6 @@
 ---
-title: Extract a One-Time Passcode from an Email Body using Synthetic Browser Tests
-description: Learn how to extract a OTP from an email body using Synthetic Browser Tests.
+title: Extract a One-Time Password from an Email Body using Synthetic Browser Tests
+description: Learn how to extract a one-time password (OTP) from an email body using Synthetic Browser Tests.
 further_reading:
 - link: "/synthetics/browser_tests/?tab=requestoptions#overview"
   tag: "Documentation"
@@ -27,7 +27,7 @@ products:
 
 ## Overview
 
-Synthetic Browser Tests are used to monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time passcode (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
+Synthetic Browser Tests are used to monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time password (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
 
 For sign-up flows, use a temporary email address generated for each run. For login with an existing user, use a [persistent email global variable][12]. Create the application account once and reuse its address across runs. Each run still requests and extracts a new OTP.
 

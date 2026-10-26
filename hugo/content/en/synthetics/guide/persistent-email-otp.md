@@ -7,7 +7,7 @@ further_reading:
   text: "Create and manage global variables"
 - link: "/synthetics/guide/otp-email-synthetics-test/"
   tag: "Guide"
-  text: "Extract a one-time passcode from an email body in a browser test"
+  text: "Extract a one-time password from an email body in a browser test"
 - link: "/synthetics/guide/email-validation/"
   tag: "Documentation"
   text: "Validate emails in browser tests"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-A persistent email variable provides a Datadog-managed email address that stays the same across test runs. Create a user account in your application with that address once. Reuse the account in browser tests for email workflows, such as order confirmations, password resets, and login with an emailed one-time passcode (OTP).
+A persistent email variable provides a Datadog-managed email address that stays the same across test runs. Create a user account in your application with that address once. Reuse the account in browser tests for email workflows, such as order confirmations, password resets, and login with an emailed one-time password (OTP).
 
 Each run triggers an email from your application, then checks its content, extracts a value, or follows a link. For example, an OTP login test requests a fresh code, extracts it from the email, and uses it to log in. The address persists; your application generates the OTP for each authentication attempt.
 
@@ -94,7 +94,7 @@ Keep a separate temporary email test if you also want to monitor sign-up.
 
 During recording, request a fresh OTP before configuring and trying the email extraction step. Save variable references in the test instead of the literal address or code shown during recording.
 
-For extraction and input examples, see [Extract a one-time passcode from an email body][5]. For email assertions and navigation steps, see [Use email validation in browser tests][6].
+For extraction and input examples, see [Extract a one-time password from an email body][5]. For email assertions and navigation steps, see [Use email validation in browser tests][6].
 
 ## Reuse and run the test
 
