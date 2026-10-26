@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Use Azure Commitment Programs to understand your savings, identify usage that could benefit from commitments, and review commitments before they expire. Datadog supports Azure reservations and savings plans for all eligible services. You can also track Azure Databricks pre-purchase plans.
+Explore Azure commitments across all eligible services. Review overall savings, investigate uncovered usage across products, and review commitments before they expire. Datadog supports Azure reservations and savings plans for all eligible services. You can also track Azure Databricks pre-purchase plans.
 
 The Azure navigation separates these tasks into three views:
 
@@ -30,7 +30,7 @@ Viewing utilization, unused costs, and pre-purchase plan balances requires **bil
 
 ## Get started
 
-1. Go to [**Cloud Cost > Planning > Commitment Programs**][1].
+1. Open [**Commitment Programs**][1] in Cloud Cost Management.
 2. In the {{< ui >}}Azure{{< /ui >}} navigation, select {{< ui >}}Overview{{< /ui >}}, {{< ui >}}Coverage{{< /ui >}}, or {{< ui >}}Inventory{{< /ui >}}.
 3. Select the {{< ui >}}Billing Account{{< /ui >}} values and reporting period to investigate. Dates use UTC.
 
@@ -74,11 +74,22 @@ Use the {{< ui >}}Status{{< /ui >}} filter to focus on {{< ui >}}Expiring soon{{
 
 ### Savings plans and reservations
 
-Each section includes utilization and unused spend summaries, a daily chart, and an inventory table.
+Each section includes utilization and unused spend summaries, a daily chart, and an inventory table. The chart tracks used and unused commitment spend alongside utilization over time. The inventory can include commitments that were active during the reporting period but have since expired.
 
 - In {{< ui >}}Savings Plans{{< /ui >}}, use {{< ui >}}Type{{< /ui >}} to choose {{< ui >}}All types{{< /ui >}}, {{< ui >}}Compute{{< /ui >}}, or {{< ui >}}Database{{< /ui >}}.
 - In {{< ui >}}Reserved Instances{{< /ui >}}, use {{< ui >}}Product{{< /ui >}} to focus on reservations for a particular Azure service.
 - Search the tables for a commitment ID or benefit name. Review {{< ui >}}Utilization{{< /ui >}} to identify underused commitments, and {{< ui >}}End Date{{< /ui >}} to plan renewals. Use {{< ui >}}Columns{{< /ui >}} to show additional details.
+
+Common inventory columns include:
+
+| Column | Description |
+|---|---|
+| Commitment ID | Unique identifier for the commitment. |
+| Benefit Name | Name of the Azure savings plan or reservation benefit. |
+| Term | Duration of the commitment. |
+| Committed Spend/Hr | Hourly spend committed under a savings plan. |
+| End Date | Date the commitment expires. |
+| Utilization | Percentage of the commitment used during the reporting period. |
 
 {{< callout header="false" btn_hidden="true" respect-site-support="false" >}}
 Screenshot placeholder: Azure Inventory with the Status filter and the type and product selectors. Include utilization charts and inventory tables. Use sanitized example data.
