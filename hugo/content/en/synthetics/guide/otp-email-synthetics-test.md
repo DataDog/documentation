@@ -47,7 +47,7 @@ Add an email variable to the [browser test][3]. Choose its type based on whether
 
    The following images show a temporary email variable:
 
-   {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a temporary email variable" style="width:80%;" >}}
+   {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a temporary email variable." style="width:80%;" >}}
 
    This adds the email variable to the {{< ui >}}Variables{{< /ui >}} section in the UI:
 
