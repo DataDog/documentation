@@ -97,6 +97,10 @@
   width: 100%;
 }
 
+.api-code-example__accordion[open] .api-code-example__accordion-header-content {
+  color: var(--color-brand)
+}
+
 .api-code-example__accordion .api-code-example__code-block {
   margin: 0;
 }
