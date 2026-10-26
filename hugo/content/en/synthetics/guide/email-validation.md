@@ -38,7 +38,7 @@ The following sign-up example uses a temporary address. The same email assertion
 
 ## Record steps
 
-After you have added an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger. Trigger a new email during each run, including when using a persistent address.
+After you add an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) when an in-app trigger sends it. Trigger a new email during each run, including when using a persistent address.
 
 Click {{< ui >}}Start Recording{{< /ui >}} and record all of the steps leading up to the email being triggered with your email variable. Click the hand icon in a variable to inject its value into the text input of a form or field.
 
