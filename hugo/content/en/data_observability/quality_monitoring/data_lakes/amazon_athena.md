@@ -80,6 +80,7 @@ To stop monitoring a region, remove it from the configuration. To stop monitorin
 - Datadog syncs query history hourly for each configured workgroup.
 - The first sync collects queries submitted in the previous 24 hours. Datadog does not backfill older queries.
 - Datadog collects queries that reach a final state: succeeded, failed, or canceled. A query that is still queued or running is collected after it finishes.
+
 Collected queries can take longer than an hour to appear, depending on when they finish relative to the sync schedule.
 
 ### Collected data
