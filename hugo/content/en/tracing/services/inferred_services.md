@@ -155,7 +155,7 @@ Database | `peer.db.name` > `peer.aws.s3.bucket` (for Amazon S3) / `peer.aws.dyn
 Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for Amazon SQS) / `peer.aws.kinesis.stream` (for Amazon Kinesis) > `peer.messaging.system`
 Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
-If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
+If instrumentation does not capture the highest-priority tag, Datadog uses the next available tag in the order shown above.
 
 **Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it takes precedence over all other attributes.
 
@@ -163,7 +163,7 @@ If the highest priority tag, such as `peer.db.name`, is not captured as part of 
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to prevent Datadog integrations from setting service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported languages and integrations.
+Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` to use the global default service name instead of integration-specific service names. Check the [minimum software development kit (SDK) versions](/tracing/services/integration_override_removal/#sdk-version-requirements) before enabling this setting. Custom service-name overrides are not affected.
 
 <div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
