@@ -66,9 +66,13 @@ After you select the Azure Data Explorer destination in the pipeline UI:
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
+{{< img src="observability_pipelines/destinations/azure_data_explorer_settings.png" alt="The Azure Data Explorer destination with sample values and the Workload identity authentication method." style="width:50%;" >}}
+
 ### Azure authentication
 
 The credential fields you fill in depend on the authentication method you select in the **Azure Authentication** dropdown menu.
+
+{{< img src="observability_pipelines/destinations/azure_data_explorer_client_secret.png" alt="The Azure authentication settings highlighted, with Client secret selected." style="width:50%;" >}}
 
 {{% collapse-content title="Azure CLI" level="h4" expanded=false id="azure-cli" %}}
 
