@@ -1,23 +1,23 @@
 ---
 title: Infrastructure Basic
-description: Monitor system metrics and limited process and service information for on-premises and lower-tier cloud workloads.
+description: Monitor system metrics and limited process and service information for lower-tier workloads with limited observability needs.
 ---
 
 ## Overview
 
-Infrastructure Basic is intended for monitoring on-premises hosts. If you only need basic system metrics (CPU, RAM, disk, network, and select processes), Infrastructure Basic can be a cost-effective way to monitor your physical servers and on-premises VMs.
+Infrastructure Basic is intended for lower-tier workloads with limited observability needs. If you only need basic system metrics (CPU, RAM, disk, network, and select processes), Infrastructure Basic can be a cost-effective way to monitor your servers and VMs.
 
 <div class="alert alert-info">Contact your Datadog account team to get access to Infrastructure Basic. Configuring Basic mode alone does not enroll you in the product.</div>
 
 ## Use cases
 
-Use Infrastructure Basic for on-premises physical servers and virtual machines where you need to understand whether a host is running, whether it is running out of resources, and whether specific application processes are running.
+Use Infrastructure Basic for physical servers and virtual machines where you need to understand whether a host is running, whether it is running out of resources, and whether specific application processes are running.
 
 Examples include legacy and back-office servers, development and staging VMs, and internal systems that need host health monitoring without application-level instrumentation. You can create monitors for conditions such as low available disk space on a back-office server, high CPU utilization, or a selected application process that has stopped running.
 
 Use the [Process check][3] to collect metrics for specific, named application processes. This does not provide Live Processes visibility into all processes running on the host.
 
-You can use Infrastructure Basic alongside one other Infrastructure Monitoring tier in the same Datadog organization. For example, use Basic for on-premises development VMs and a more comprehensive tier for production workloads that require container monitoring or broader process visibility. The same dashboards and queries can cover supported system metrics from both sets of hosts.
+You can use Infrastructure Basic alongside one other Infrastructure Monitoring tier in the same Datadog organization. For example, use Basic for development VMs and Infrastructure Pro for production workloads that require container monitoring or broader process visibility. The same dashboards and queries can cover supported system metrics from both sets of hosts.
 
 Cloud hosts must have the Datadog Agent installed to use Infrastructure Basic.
 
