@@ -688,7 +688,7 @@ Test Optimization uploads screenshots that Cypress captures when a test fails. U
 
 Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-Cypress captures failure screenshots by default because [`screenshotOnRunFailure`][3] defaults to `true`. Use `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to control uploads:
+[`screenshotOnRunFailure`][3] defaults to `true`, so Cypress captures failure screenshots by default. Use `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to control uploads:
 
 - Unset (default): Upload the failure screenshots that Cypress captures.
 - `1`: Capture and upload failure screenshots, even if `screenshotOnRunFailure` is `false`.
@@ -706,7 +706,7 @@ To record videos, set [`video`][4] to `true` in your Cypress configuration. Use 
 
 - Unset (default): Upload the videos that Cypress records for failed test suites.
 - `1`: Record and upload videos from failed test suites, even if `video` in Cypress is `false`.
-- `0`: Don't upload videos. Cypress still records them according to your configuration.
+- `0`: Don't upload videos. Cypress may still record them according to your configuration.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
@@ -748,7 +748,7 @@ Playwright doesn't record videos by default. To record them, set [`video`][4] un
 
 - Unset (default): Upload the videos that Playwright records for failed tests.
 - `1`: Record and upload videos from failed tests, regardless of the `video` setting. Requires Playwright 1.38 or later.
-- `0`: Don't upload videos. Playwright still records them according to your configuration.
+- `0`: Don't upload videos. Playwright may still record them according to your configuration.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
