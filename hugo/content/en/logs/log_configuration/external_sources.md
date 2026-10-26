@@ -37,7 +37,7 @@ An external source is a table that contains logs in your own data platform, such
 
 Datadog runs queries with the Databricks SQL Statement Execution API, using the service principal of your Databricks integration. Use the service principal's application (client) ID, not its display name, for `<application_id>`.
 
-1. Give the service principal the {{< ui >}}Databricks SQL access{{< /ui >}} entitlement. In your Databricks workspace settings, open the service principal, go to the {{< ui >}}Configurations{{< /ui >}} tab, and select {{< ui >}}Databricks SQL access{{< /ui >}}. New service principals don't inherit this entitlement from the `users` group. For more information, see [Manage entitlements][3] in the Databricks documentation.
+1. In your Databricks workspace settings, open the service principal, go to the {{< ui >}}Configurations{{< /ui >}} tab, and select {{< ui >}}Databricks SQL access{{< /ui >}}. New service principals don't inherit this entitlement from the `users` group. For more information, see [Manage entitlements][3] in the Databricks documentation.
 2. Give the service principal the `CAN USE` permission on the SQL warehouse configured in your Databricks integration. Datadog runs queries on this warehouse. `CAN MANAGE` is not required.
 3. Grant read access to the table. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands:
 
@@ -47,7 +47,7 @@ Datadog runs queries with the Databricks SQL Statement Execution API, using the 
    GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
    ```
 
-The {{< ui >}}External Sources{{< /ui >}} page only lists the catalogs, schemas, and tables that the service principal has access to. Queries consume compute on your SQL warehouse.
+The {{< ui >}}External Sources{{< /ui >}} page lists only the catalogs, schemas, and tables that the service principal has access to. Queries consume compute on your SQL warehouse.
 
 ### Supported column types
 
@@ -83,16 +83,16 @@ When you connect a source, you map each Datadog field to a column of your table.
 | Message, Host, Service, Source | No |
 | Tags | No |
 
-Only columns with a compatible type are listed for each field. For the supported column types, see the tab for your source in [Set up your source](#set-up-your-source).
+Only columns with a compatible type are listed for each field. For the supported column types, see the tab for your source in the [Set up your source](#set-up-your-source) section.
 
 ## Connect a source
 
 1. Go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > {{< ui >}}External Sources{{< /ui >}}][4] and click {{< ui >}}Connect Source{{< /ui >}}.
 2. On the {{< ui >}}Source{{< /ui >}} tab, select the source type and the table that contains your logs. The fields depend on the source. Click {{< ui >}}Next{{< /ui >}}.
-3. On the {{< ui >}}Schema Mapping{{< /ui >}} tab, select the column to read each Datadog field from. See [Schema mapping](#schema-mapping).
+3. On the {{< ui >}}Schema Mapping{{< /ui >}} tab, select the column to read each Datadog field from. See the [Schema mapping](#schema-mapping) section.
 4. Click {{< ui >}}Save{{< /ui >}}.
 
-You can connect multiple tables, each with its own schema mapping. After you save a source, you can only edit its schema mapping. To change the integration account or the table, delete the source and connect it again.
+You can connect multiple tables, each with its own schema mapping. After you save a source, you can edit only its schema mapping. To change the integration account or the table, delete the source and connect it again.
 
 To search a connected source, see [Federated Logs][1].
 

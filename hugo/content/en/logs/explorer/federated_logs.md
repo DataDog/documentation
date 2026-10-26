@@ -20,7 +20,7 @@ Federated Logs lets you search logs stored in your own data platform, such as Da
 
 Use Federated Logs to investigate logs that you keep in your data platform, such as logs retained for compliance or analytics.
 
-With a federated source, you can:
+With an external source, you can:
 
 - Search and filter logs with the [Log Explorer search syntax][2].
 - View results in the list view and in a timeline histogram grouped by status.
@@ -30,16 +30,13 @@ With a federated source, you can:
 ## Prerequisites
 
 - Access to the Federated Logs Preview. To request access, complete the [Preview form][3].
-- At least one connected source. See [External Sources][4].
-
-## Permissions
-
-To search federated sources in Log Explorer, you need the Logs Federated Query Read (`logs_federated_query_read`) permission. For more information, see [Role Based Access Control][5].
+- At least one external source. See [External Sources][4].
+- The Logs Federated Query Read (`logs_federated_query_read`) permission, which lets you search external sources in Log Explorer. For more information, see [Role Based Access Control][5].
 
 ## Search federated logs
 
 1. Go to [Log Explorer][1].
-2. Click the data source dropdown on the left of the search bar, which is set to {{< ui >}}Indexes{{< /ui >}} by default.
+2. Click the data source dropdown next to the search bar, which is set to {{< ui >}}Indexes{{< /ui >}} by default.
 3. Under {{< ui >}}External Sources{{< /ui >}}, select your source type, and then select a connected source.
 4. Select a time range and enter a query, such as `service:web status:error`.
 
