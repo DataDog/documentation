@@ -163,7 +163,7 @@ If instrumentation does not capture the highest-priority tag, Datadog uses the n
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` to use the global default service name instead of integration-specific service names. Check the [minimum software development kit (SDK) versions](/tracing/services/integration_override_removal/#sdk-version-requirements) before enabling this setting. Custom service-name overrides are not affected.
+Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` to use the global default service name instead of integration-specific service names. Check the [minimum version requirements](/tracing/services/integration_override_removal/#sdk-version-requirements) before enabling this setting. Custom service-name overrides are not affected.
 
 <div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
