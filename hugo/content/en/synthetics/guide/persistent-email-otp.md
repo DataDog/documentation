@@ -82,7 +82,7 @@ Keep a separate temporary email test if you also want to monitor sign-up.
 
 1. Open a browser test in the recorder.
 2. Under {{< ui >}}Variables{{< /ui >}}, add a variable and select {{< ui >}}Email Address{{< /ui >}}.
-3. Select {{< ui >}}Persistent{{< /ui >}}, choose `LOGIN_EMAIL`, and click {{< ui >}}Done{{< /ui >}}. The list contains email global variables you have access to. If you created the variable while the recorder was open, refresh the list.
+3. Select {{< ui >}}Persistent{{< /ui >}}, choose `LOGIN_EMAIL`, and click {{< ui >}}Done{{< /ui >}}. The list contains email global variables you have access to. If you created the variable while the recorder was open, click {{< ui >}}Refresh Variables{{< /ui >}}.
 
    {{< img src="synthetics/guide/email-validation/persistent-email-variable-picker.png" alt="Browser recorder with Persistent selected, an email global variable chosen, and the Done button" style="width:100%;" >}}
 
