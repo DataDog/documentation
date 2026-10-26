@@ -94,7 +94,7 @@ Only columns with a compatible type are listed for each field. For the supported
 
 You can connect multiple tables, each with its own schema mapping. After you save a source, you can edit only its schema mapping. To change the integration account or the table, delete the source and connect it again.
 
-To search a connected source, see [Federated Logs][1].
+To search an external source, see [Federated Logs][1].
 
 ## Further reading
 

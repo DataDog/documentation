@@ -37,7 +37,7 @@ With an external source, you can:
 
 1. Go to [Log Explorer][1].
 2. Click the data source dropdown next to the search bar, which is set to {{< ui >}}Indexes{{< /ui >}} by default.
-3. Under {{< ui >}}External Sources{{< /ui >}}, select your source type, and then select a connected source.
+3. Under {{< ui >}}External Sources{{< /ui >}}, select your source type, and then select an external source.
 4. Select a time range and enter a query, such as `service:web status:error`.
 
 Datadog replaces the mapped field names in your query with the corresponding column names. See [Schema mapping][6].
