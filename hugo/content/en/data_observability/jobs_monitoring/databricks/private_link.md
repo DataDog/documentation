@@ -152,7 +152,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Update the existing `values.yaml` (referencing the [Helm chart values][4]):
    1. Set `image.repository` to `gcr.io/datadoghq/dd-data-observability-par`.
-   1. Set `image.tag` to `1.22.0-0`.
+   1. Set `image.tag` to `1.22.1-0`.
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. If you use a Microsoft Entra ID managed Service Principal, also set `DATABRICKS_AZURE_TENANT_ID`. Leave "Secret Path" in the integration tile blank.
     - Use cloud secret storage. Ensure an identity is assigned to the pod ([Azure Workload Identity][5], [AWS IAM Role][6], or [GKE Workload Identity][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
@@ -175,7 +175,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. Select the **Script** option, then click **Next**.
    1. Follow the instructions under **Docker**.
 
-      **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.22.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.22.0-0`.
+      **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.22.1-large` with `gcr.io/datadoghq/dd-data-observability-par:1.22.1-0`.
 
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
