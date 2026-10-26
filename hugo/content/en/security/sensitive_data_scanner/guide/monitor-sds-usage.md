@@ -25,7 +25,7 @@ The metric includes the following tags:
 : The product the scanned data comes from: Logs, APM, RUM, or Events.
 
 `service`
-: The service the scanned data comes from. Data without a `service` tag is grouped under `service:unknown`.
+: The service the scanned data comes from. Data without a `service` tag is grouped under `service:unknown`. Some Events and Logs data appears under `service:undefined` instead. Treat both values as data without a service when you read the breakdown.
 
 `scanning_group_id`
 : The scanning group that scanned the data. The `scanning_group_id:global` value prevents the same event from being counted multiple times when different scanning groups scan it. Exclude it from your queries. It does not impact billing.
