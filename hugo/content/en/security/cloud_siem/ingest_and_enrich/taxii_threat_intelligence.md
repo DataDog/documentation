@@ -6,7 +6,7 @@ further_reading:
 - link: "/security/cloud_siem/ingest_and_enrich/threat_intelligence/"
   tag: "Documentation"
   text: "Bring your own threat intelligence to Cloud SIEM"
-- link: "/security/cloud_siem/guide/ingest-stix-threat-intelligence/"
+- link: "/security/cloud_siem/ingest_and_enrich/stix_threat_intelligence/"
   tag: "Documentation"
   text: "Ingest STIX Threat Intelligence"
 - link: "/security/cloud_siem/triage_and_investigate/ioc_explorer/"
@@ -104,5 +104,5 @@ To stop enrichment but keep the indicators, [disable polling](#disable-or-enable
 
 [1]: https://docs.oasis-open.org/cti/taxii/v2.1/taxii-v2.1.html
 [2]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
-[3]: /security/cloud_siem/guide/ingest-stix-threat-intelligence/
-[4]: /security/cloud_siem/guide/ingest-stix-threat-intelligence/#supported-indicator-types-and-patterns
+[3]: /security/cloud_siem/ingest_and_enrich/stix_threat_intelligence/
+[4]: /security/cloud_siem/ingest_and_enrich/stix_threat_intelligence/#supported-indicator-types-and-patterns

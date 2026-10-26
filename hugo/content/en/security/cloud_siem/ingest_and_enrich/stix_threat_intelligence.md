@@ -2,6 +2,8 @@
 title: Ingest STIX Threat Intelligence
 description: Send your own threat intelligence to Cloud SIEM as STIX 2.1 bundles. Covers the ingestion endpoint, authentication, supported indicator types and patterns, the reference tables Datadog generates for each indicator type, and how to configure or remove them.
 disable_toc: false
+aliases:
+  - /security/cloud_siem/guide/ingest-stix-threat-intelligence/
 further_reading:
 - link: "/security/cloud_siem/ingest_and_enrich/threat_intelligence/"
   tag: "Documentation"
