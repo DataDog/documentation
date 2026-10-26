@@ -66,7 +66,14 @@ Create a dedicated test account in your application using the generated address.
 
 Keep this account for subsequent runs. Record the recurring test from the login page and omit the account creation steps. For example, provision a user with access to an order history page once. Have each run log in with an emailed OTP and assert that the order history loads.
 
-If you are updating an existing sign-up test, create the persistent variable and register its address first. Remove the temporary email variable, select the persistent variable, update references to the email variable in the test, and replace registration steps with login steps. Keep a separate temporary email test if you also want to monitor sign-up.
+To convert an existing sign-up test:
+
+1. Create the persistent variable and register its address in your application.
+2. In the test, remove the temporary email variable and select the persistent variable.
+3. Update any references to the email variable.
+4. Replace the registration steps with login steps.
+
+Keep a separate temporary email test if you also want to monitor sign-up.
 
 ## Example: record an OTP login flow
 
