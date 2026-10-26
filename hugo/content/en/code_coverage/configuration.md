@@ -334,7 +334,7 @@ The breakdown has no effect when `comments.enabled` is `false`.
 
 ## Inline annotations
 
-Set `annotations.enabled` to `true` to have Datadog add review comments on added lines in the pull request diff that are not covered by tests:
+Set `annotations.enabled` to `true` to have Datadog comment on lines added in the pull request that aren't covered by tests:
 
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
@@ -348,16 +348,15 @@ The `annotations` block accepts the following fields:
 |---|---|---|---|
 | `enabled` | Boolean | `false` | Whether Datadog annotates uncovered lines on the pull request diff. |
 
-Annotations work as follows:
+When annotations are enabled, Datadog:
 
-- Only executable lines that the pull request adds are annotated. [Partially covered][5] lines count as uncovered.
-- Consecutive uncovered lines are grouped into a single annotation, so a block of untested code receives one comment.
-- Datadog posts up to 30 annotations per pull request. When there are more uncovered ranges, the summary comment reports the total number and links to the full report in Datadog.
-- When the annotated lines become covered, Datadog resolves the annotations.
+- Annotates only executable lines that the pull request adds, and counts [partially covered][5] lines as uncovered.
+- Groups consecutive uncovered lines into a single annotation, so each uncovered range gets one comment.
+- Posts up to 30 annotations per pull request. If there are more uncovered ranges, the summary comment reports the total and links to the full report in Datadog.
+- Resolves an annotation after its lines are covered.
+- Posts annotations independently of the summary comment. Setting `comments.enabled` to `false` does not disable annotations. If comments are disabled and the 30-annotation limit is exceeded, Datadog still posts a summary comment that reports only the total number of uncovered ranges.
 
-Annotations are independent of the summary comment: setting `comments.enabled` to `false` does not disable annotations. When comments are disabled but annotations are enabled, Datadog still posts a summary comment if the number of uncovered ranges exceeds the 30-annotation limit. In that case, the comment reports only the total number of uncovered ranges.
-
-Inline annotations are not available on Bitbucket.
+**Note**: Inline annotations are not supported on Bitbucket.
 
 ## Carryforward
 
