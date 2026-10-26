@@ -39,7 +39,7 @@ If using Kubernetes, the following additional requirements must be met:
 
 If using Google Kubernetes Engine (GKE) with Container-Optimized OS (COS) nodes, the following additional requirements must be met:
 
-- **Datadog Operator**: version 1.29, _or_ **Datadog Helm chart**: version 3.231.4
+- [**Datadog Operator**][5]: version 1.29, _or_ [**Datadog Helm chart**][6]: version 3.231.4
 - The GKE COS [provider][14] is set, as shown in the GKE examples on this page. This setting mounts the NVIDIA driver libraries that GKE installs on COS nodes into the Agent containers.
 
 ## Setting up GPU Monitoring
@@ -93,7 +93,7 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
          enabled: true
          privilegedMode: true # Required for GKE
          patchCgroupPermissions: true # Only for GKE
-         requiredRuntimeClassName: "" # Only for GKE-managed GPU drivers, AWS EKS, or Oracle Cloud
+         requiredRuntimeClassName: "" # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
    ```
 
 3. Apply your changes and restart the Datadog Agent.
@@ -132,7 +132,7 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
        enabled: true
        privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for GKE-managed GPU drivers, Oracle Cloud, and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
 
    providers:
      gke:
@@ -279,7 +279,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
-       agent.datadoghq.com/cluster-provider: gke-cos # Only for GKE where all nodes use Container-Optimized OS
+       agent.datadoghq.com/cluster-provider: gke-cos # Only when every node in the cluster uses Container-Optimized OS
    ```
 
 3. Apply your changes to the `DatadogAgent` resource. These changes are safe to apply to all Datadog Agents, regardless of whether they run on GPU nodes.
@@ -466,7 +466,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
        enabled: true
        privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for GKE-managed GPU drivers, Oracle Cloud, and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
 
    providers:
      gke:
