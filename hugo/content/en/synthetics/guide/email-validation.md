@@ -31,7 +31,6 @@ To add a temporary email variable called `EMAIL`:
 
 To reuse a persistent address, select {{< ui >}}Persistent{{< /ui >}}, choose the email global variable, and click {{< ui >}}Done{{< /ui >}}. A test can use one email address variable.
 
-The following video shows how to select a persistent email variable and insert its address into an email field in the browser recorder.
 
 {{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable and insert its address into an email field." video="true" width="100%" >}}
 
