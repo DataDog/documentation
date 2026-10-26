@@ -61,3 +61,10 @@ entries:
       - UpdateSecurityMonitoringRule
       - ValidateSecurityMonitoringRule
     title: Add SQL rule fields to security monitoring rule queries
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41026
+    operations:
+      - CreateStaticAnalysisServerAnalysis
+    title: Fix static analysis analyze request and custom rule response spec 
+      drift
