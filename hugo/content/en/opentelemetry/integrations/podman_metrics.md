@@ -20,6 +20,8 @@ For more information, see the OpenTelemetry project documentation for the [Podma
 
 This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
+The Podman receiver reads the Podman API socket, so it doesn't run on Windows. Before you start, turn on the Podman API service: run `sudo systemctl enable --now podman.socket` for rootful Podman, or `systemctl --user enable --now podman.socket` for rootless Podman. Run the Collector as a user that can read the socket.
+
 Add the following lines to your Collector configuration:
 
 ```yaml
