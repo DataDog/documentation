@@ -6678,6 +6678,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_experiments
       weight: 310
+    - name: Telemetry and Experimentation Opt-Out
+      url: feature_flags/concepts/opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_opt_out
+      weight: 310
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts

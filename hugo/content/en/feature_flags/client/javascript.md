@@ -308,7 +308,7 @@ In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has
 
 ## Control telemetry and experiment participation
 
-Use separate controls to manage evaluation telemetry and experiment participation for each subject. Both controls are disabled by default.
+Use separate controls to manage evaluation telemetry and experiment participation for each subject. Both controls are disabled by default. For shared behavior and policy selection across client SDKs, see [Evaluation Telemetry and Experimentation Opt-Out][7].
 
 ### Evaluation telemetry opt-out
 
@@ -472,3 +472,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /feature_flags/concepts/opt_out/
