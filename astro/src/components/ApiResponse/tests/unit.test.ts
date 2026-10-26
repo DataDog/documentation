@@ -193,4 +193,55 @@ describe("ApiResponse (astro)", () => {
     expect(html).toContain("api-response__example");
     expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
   });
+
+  it("names a non-JSON response's content type in its Model tab, beside its example", async () => {
+    const html = await renderComponent({
+      responses: [
+        {
+          statusCode: "200",
+          description: "OK",
+          contentType: "text/csv",
+          examples: [{ name: "Example", value: "a,b\n1,2", language: "csv" }],
+        },
+      ],
+    });
+
+    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
+    expect(html).toMatch(/Content type: <code>text\/csv<\/code>/);
+    expect(html).toContain('data-language="csv"');
+    expect(html).not.toContain("schema-table__table");
+  });
+
+  it("names a binary response's content type without inner tabs", async () => {
+    const html = await renderComponent({
+      responses: [
+        {
+          statusCode: "200",
+          description: "OK",
+          contentType: "application/zip",
+        },
+      ],
+    });
+
+    expect(html).toMatch(/Content type: <code>application\/zip<\/code>/);
+    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
+  });
+
+  it("shows No response body in the Model tab of an empty JSON response", async () => {
+    const html = await renderComponent({
+      responses: [
+        {
+          statusCode: "202",
+          description: "Accepted",
+          schema: [],
+          emptyBody: true,
+          examples: [{ name: "Example", value: "{}" }],
+        },
+      ],
+    });
+
+    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
+    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
+    expect(html).toContain("No response body");
+  });
 });

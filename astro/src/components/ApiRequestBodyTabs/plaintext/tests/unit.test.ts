@@ -18,7 +18,8 @@ const examples = [{ name: "Default", value: '{"id":"abc"}' }];
 
 function render(props: {
   schema: SchemaField[];
-  examples: { name: string; value: string }[];
+  examples: { name: string; value: string; language?: string }[];
+  showExampleTitles?: boolean;
 }): string {
   const contents = apiRequestBodyTabsNodes(props);
   return format(documentNode(contents));
@@ -59,5 +60,38 @@ describe("apiRequestBodyTabsNodes", () => {
     const out = render({ schema: [], examples: multi });
     expect(out).toContain("**First**");
     expect(out).toContain("**Second**");
+  });
+
+  it("leaves the examples untitled when titles aren't shown", () => {
+    const multi = [
+      { name: "First", value: "{}" },
+      { name: "Second", value: "{}" },
+    ];
+    const out = render({
+      schema: [],
+      examples: multi,
+      showExampleTitles: false,
+    });
+    expect(out).not.toContain("First");
+  });
+
+  it("titles a single example when titles are shown", () => {
+    const out = render({ schema, examples, showExampleTitles: true });
+    expect(out).toContain("**Default**");
+  });
+
+  it("fences an example in its own language, defaulting to JSON", () => {
+    const out = render({
+      schema,
+      examples: [
+        {
+          name: "Form",
+          value: "-F 'idp_file=@metadata.xml'",
+          language: "bash",
+        },
+      ],
+    });
+    expect(out).toContain("```bash\n-F 'idp_file=@metadata.xml'");
+    expect(render({ schema, examples })).toContain("```json");
   });
 });

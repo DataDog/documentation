@@ -357,15 +357,15 @@ function buildUnionOptions(
   return variants.map((variant: any, idx: number) => {
     const fields = optionFields(spec, variant, visited, level + 2);
 
-    // A scalar branch yields one anonymous leaf and nothing else; its type
-    // belongs on the option row rather than on a nested unnamed row.
+    // A scalar branch's type, enum values and default are text on the option
+    // row itself, so Hugo shows them even when the row sits at the cap and
+    // `fields` came back empty. Resolve the branch at the row's own level to
+    // recover them.
     const leaf =
-      fields.length === 1 &&
-      fields[0].name === "" &&
-      !fields[0].children &&
-      !fields[0].unionOptions
-        ? fields[0]
-        : undefined;
+      scalarLeaf(fields) ??
+      (level + 2 > MAX_DEPTH
+        ? scalarLeaf(optionFields(spec, variant, visited, level + 1))
+        : undefined);
 
     return {
       label: labels[idx],
@@ -381,6 +381,19 @@ function buildUnionOptions(
       fields: leaf ? [] : fields,
     };
   });
+}
+
+/**
+ * The single anonymous leaf a scalar branch yields, if `fields` is one. Its
+ * type belongs on the option row rather than on a nested unnamed row.
+ */
+function scalarLeaf(fields: SchemaField[]): SchemaField | undefined {
+  return fields.length === 1 &&
+    fields[0].name === "" &&
+    !fields[0].children &&
+    !fields[0].unionOptions
+    ? fields[0]
+    : undefined;
 }
 
 /**

@@ -1154,26 +1154,28 @@
                 role="tabpanel"
                 class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
               >
-                <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X47" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X47-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X16"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                <div class="api-code-example__card _api-code-example__card_c15178">
+                  <div class="api-code-example__label _api-code-example__label_c15178">Get all dashboard lists</div>
+                  <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X47" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X47-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X16"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"datadoghq.com"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1181,30 +1183,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X48" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X48-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X17"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                  <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X48" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X48-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X17"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"us3.datadoghq.com"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1212,30 +1214,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X49" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X49-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X18"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                  <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X49" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X49-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X18"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"us5.datadoghq.com"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1243,30 +1245,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X50" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X50-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X19"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                  <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X50" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X50-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X19"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"datadoghq.eu"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1274,30 +1276,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X51" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X51-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X20"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                  <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X51" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X51-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X20"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"ap1.datadoghq.com"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1305,30 +1307,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X52" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X52-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X21"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                  <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X52" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X52-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X21"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"ap2.datadoghq.com"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1336,30 +1338,30 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X53" class="code-block _code-block_961fb8" data-language="bash">
-                    <div id="code-block-X53-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X22"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+                  <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X53" class="code-block _code-block_961fb8" data-language="bash">
+                      <div id="code-block-X53-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X22"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"ddog-gov.com"</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)"># Use a Personal Access Token or Service Access Token</span></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_BEARER_TOKEN=</span><span style="color:var(--color-syntax-string)">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
@@ -1367,32 +1369,35 @@
 <span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v1/dashboard/lists/manual"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Authorization: Bearer </span><span style="color:var(--color-panel-text)">${DD_BEARER_TOKEN}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div id="api-code-example-X46-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X54" class="code-block _code-block_961fb8" data-language="go">
-                    <div id="code-block-X54-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X23"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+                <div class="api-code-example__card _api-code-example__card_c15178">
+                  <div class="api-code-example__label _api-code-example__label_c15178">Get all dashboard lists</div>
+                  <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X54" class="code-block _code-block_961fb8" data-language="go">
+                      <div id="code-block-X54-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X23"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
 <span class="line"><span style="color:var(--color-syntax-comment)">// Get all dashboard lists returns "OK" response</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">package</span><span style="color:var(--color-syntax-class)"> main</span></span>
@@ -1423,6 +1428,7 @@
 <span class="line"><span style="color:var(--color-panel-text)">	fmt.Fprintf(os.Stdout, </span><span style="color:var(--color-syntax-string)">"Response from `DashboardListsApi.ListDashboardLists`:\n%s\n"</span><span style="color:var(--color-panel-text)">, responseContent)</span></span>
 <span class="line"><span style="color:var(--color-panel-text)">}</span></span>
 <span class="line"></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1625,26 +1631,28 @@
                 </div>
               </div>
               <div id="api-code-example-X46-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X62" class="code-block _code-block_961fb8" data-language="python">
-                    <div id="code-block-X62-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X31"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:var(--color-syntax-comment)"># </span><span style="color:var(--color-syntax-keyword)">NOTE</span><span style="color:var(--color-syntax-comment)">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+                <div class="api-code-example__card _api-code-example__card_c15178">
+                  <div class="api-code-example__label _api-code-example__label_c15178">Get all dashboard lists</div>
+                  <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                    <div id="code-block-X62" class="code-block _code-block_961fb8" data-language="python">
+                      <div id="code-block-X62-content" class="code-block__content _code-block__content_961fb8">
+                        <astro-island
+                          uid="X31"
+                          ssr
+                          client="idle"
+                          before-hydration-url="astro:scripts/before-hydration.js"
+                          opts='{"name":"CopyButton","value":true}'
+                          await-children
+                          ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                            <span>Copy</span></button
+                          ><!--astro:end--></astro-island
+                        >
+                        <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                          <pre
+                            class="shiki datadog-chroma"
+                            style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                            tabindex="0"
+                          ><code><span class="line"><span style="color:var(--color-syntax-comment)"># </span><span style="color:var(--color-syntax-keyword)">NOTE</span><span style="color:var(--color-syntax-comment)">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
 <span class="line"><span style="color:var(--color-syntax-string)">"""</span></span>
 <span class="line"><span style="color:var(--color-syntax-string)">Get all dashboard lists returns "OK" response</span></span>
 <span class="line"><span style="color:var(--color-syntax-string)">"""</span></span>
@@ -1659,6 +1667,7 @@
 <span class="line"></span>
 <span class="line"><span style="color:var(--color-syntax-keyword)">    print</span><span style="color:var(--color-panel-text)">(response)</span></span>
 <span class="line"></span></code></pre>
+                        </div>
                       </div>
                     </div>
                   </div>

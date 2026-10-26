@@ -2,12 +2,42 @@
   margin-top: var(--space-sm);
 }
 
-.request-body-tabs__examples details {
+/* Matches the SDK examples' accordion in ApiCodeExample.module.css. */
+.request-body-tabs__accordion {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
   margin-bottom: var(--space-sm);
+  overflow: hidden;
 }
 
-.request-body-tabs__examples summary {
+.request-body-tabs__accordion-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-bg-hover);
   cursor: pointer;
-  color: var(--color-brand);
   font-size: var(--font-size-sm);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+  list-style: none;
+}
+
+.request-body-tabs__accordion-header::-webkit-details-marker {
+  display: none;
+}
+
+.request-body-tabs__accordion-header:hover {
+  background: var(--color-border-strong);
+}
+
+.request-body-tabs__accordion[open]
+  > .request-body-tabs__accordion-header
+  .request-body-tabs__accordion-icon {
+  transform: rotate(90deg);
+}
+
+.request-body-tabs__accordion-icon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transition: transform 0.15s ease;
 }

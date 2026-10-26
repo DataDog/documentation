@@ -66,6 +66,16 @@ describe("ApiCodeExample (astro)", () => {
     expect(html).not.toContain("api-code-example__accordion");
   });
 
+  it("titles a single-entry language tab with a static label bar", async () => {
+    const html = await renderComponent({ examples: [examples[0]] });
+    expect(html).toMatch(/api-code-example__label[^>]*>Basic call</);
+  });
+
+  it("renders no label bar for a multi-entry language tab", async () => {
+    const html = await renderComponent({ examples: [examples[1]] });
+    expect(html).not.toContain("api-code-example__label");
+  });
+
   it("renders an accordion <details> per entry when a language has multiple entries", async () => {
     const html = await renderComponent({ examples: [examples[1]] });
     const detailsMatches =

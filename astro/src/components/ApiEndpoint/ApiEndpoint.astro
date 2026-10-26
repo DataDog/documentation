@@ -43,6 +43,7 @@ interface EndpointData {
     description?: string;
     schema: SchemaField[];
     examples: Array<{ name: string; value: string }>;
+    showExampleTitles?: boolean;
   };
   responses: ResponseData[];
   codeExamples: CodeExampleSet[];
@@ -232,6 +233,7 @@ const hasOverview =
           <ApiRequestBodyTabs
             schema={ep.requestBody.schema}
             examples={ep.requestBody.examples}
+            showExampleTitles={ep.requestBody.showExampleTitles}
           />
         </div>
       )}

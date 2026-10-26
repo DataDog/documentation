@@ -141,4 +141,49 @@ describe("apiResponseNode", () => {
     expect(out).toContain("namespace1");
     expect(out).not.toContain('label="Model"');
   });
+
+  it("names a non-JSON response's content type in its Model tab, beside its example", () => {
+    const out = render([
+      {
+        statusCode: "200",
+        description: "OK",
+        contentType: "text/csv",
+        examples: [{ name: "Example", value: "a,b\n1,2", language: "csv" }],
+      },
+    ]);
+    const modelTab = out.slice(
+      out.indexOf('label="Model"'),
+      out.indexOf('label="Example"'),
+    );
+    expect(modelTab).toContain("Content type: `text/csv`");
+    expect(out).toContain("```csv\na,b\n1,2");
+  });
+
+  it("names a binary response's content type without inner tabs", () => {
+    const out = render([
+      { statusCode: "200", description: "OK", contentType: "application/zip" },
+    ]);
+    expect(out).toContain("Content type: `application/zip`");
+    expect(out).not.toContain('label="Model"');
+  });
+
+  /** As Hugo's `.md` does: a header-only table. */
+  it("gives an empty JSON response a header-only Model table", () => {
+    const out = render([
+      {
+        statusCode: "202",
+        description: "Accepted",
+        schema: [],
+        emptyBody: true,
+        examples: [{ name: "Example", value: "{}" }],
+      },
+    ]);
+    const modelTab = out.slice(
+      out.indexOf('label="Model"'),
+      out.indexOf('label="Example"'),
+    );
+    expect(modelTab).toMatch(
+      /\| Field \| Type \| Description \|\n\| -+ \| -+ \| -+ \|\n\{% \/tab/,
+    );
+  });
 });
