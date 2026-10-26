@@ -16,6 +16,8 @@ Governance Console insights are metrics about how your organization uses and con
 
 Insights appear on the Governance Console [Summary][1] and [Products][2] pages. Each insight shows a current value, the change from the previous period, and a trend chart. Most insights also link to the underlying Datadog page.
 
+{{< img src="account_management/governance_console/governance-console-notebooks-insight-cards.png" alt="Governance Console Products page for Notebooks, showing various insight cards." style="width:100%;" >}}
+
 ### Required permissions
 
 The `governance_console_read` permission controls access to insights. Users with `governance_console_read` assigned to their role can view all insights in the Governance Console.
@@ -31,10 +33,13 @@ Each insight is displayed as a card. A card shows:
 
 Hover over a card to show its action icons:
 
-- **Expand** (<i class="icon-resize-expand-wui"></i>): Opens a larger view of the insight.
+- **Expand** (<i class="icon-resize-expand-wui"></i>): Opens a larger view of the insight with its description, current value, and a chart of the value over time. When available, a button opens the underlying data in Metrics Explorer, Audit Trail, or Event Explorer.
 - **More information** (<i class="icon-info-fill"></i>): Shows a description of the insight.
 - **Open in new tab** (<i class="icon-external-link"></i>): Opens the underlying Datadog page. Not every insight has a link.
 - **Export** (<i class="icon-export"></i>): Copies the graph, saves it to a dashboard, adds it to an incident, or creates a monitor from it, depending on the insight.
+
+{{< img src="account_management/governance_console/governance-console-individual-insight-card.png" alt="Active notebook authors insight card, which includes icons that appear when you hover." style="width:50%;" >}}
+
 
 *\[Screenshot placeholder: insight card showing metric value, percentage change, time range label, and trend chart\]*
 
