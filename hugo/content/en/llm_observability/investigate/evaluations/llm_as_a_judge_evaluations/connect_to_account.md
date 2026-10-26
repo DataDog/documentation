@@ -7,10 +7,8 @@ description: How to connect to your LLM provider account to support judge LLM ba
 further_reading:
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
-  text: "Learn about custom LLM-as-a-judge evaluations"
+  text: "Learn about custom LLM-as-a-judge evaluators"
 ---
-
-## Connect your LLM provider account
 
 Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
 
@@ -117,7 +115,7 @@ Connect Vertex AI to Agent Observability with your Google Cloud Platform account
 
 Your custom provider endpoint must be compatible with the [OpenAI API specification][2].
 
-Connect your custom provider to Agent Observability with your base URL, API key, and headers.
+Connect your custom provider to Agent Observability with your base URL, a way to authenticate, and optional headers. Datadog can authenticate with an API key, or with short-lived OAuth 2.0 access tokens from your identity provider.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select the {{< ui >}}Custom Provider for Agent Observability{{< /ui >}} tile.
@@ -126,10 +124,46 @@ Connect your custom provider to Agent Observability with your base URL, API key,
    - Enter a name for your provider.
    - Select your provider.
    - Provide your base URL.
-   - Provide your API key and optionally any headers.
+   - Choose an authentication method and provide its credentials, as described below.
+   - Optionally, add any headers.
+
+#### Authenticate with an API key
+
+Select {{< ui >}}API key{{< /ui >}} and provide your API key. Datadog sends it to your provider as `Authorization: Bearer <API_KEY>`.
+
+#### Authenticate with OAuth 2.0 client credentials
+
+<div class="alert alert-info">OAuth 2.0 client credentials authentication is in Preview. Contact your Datadog representative to request access.</div>
+
+Some providers, such as AI gateways, accept OAuth 2.0 access tokens from your identity provider (IdP). For these providers, Datadog can obtain short-lived tokens with the [client credentials grant][3] instead of using a static API key. Datadog authenticates to your IdP's token endpoint with a client ID and client secret. It caches the access token until shortly before it expires, and sends it to your provider as `Authorization: Bearer <ACCESS_TOKEN>`. The client secret is sent only to your IdP's token URL, never to your provider.
+
+Select {{< ui >}}OAuth 2.0 client credentials{{< /ui >}} and provide:
+
+- {{< ui >}}Token URL{{< /ui >}}: Your IdP's token endpoint. Must use HTTPS.
+- {{< ui >}}Client ID{{< /ui >}} and {{< ui >}}Client secret{{< /ui >}}: The credentials of the application that represents Datadog in your IdP.
+- {{< ui >}}Scope{{< /ui >}} (optional): Space-separated scopes that your provider requires.
+- {{< ui >}}Audience{{< /ui >}} (optional): Only for IdPs that require an `audience` parameter.
+
+When you save the provider, Datadog requests an access token and calls your provider's `/models` endpoint to verify the connection.
+
+To rotate the client secret, generate a new secret in your IdP, update it in Datadog, and then deactivate the old secret. To revoke Datadog's access, deactivate the application in your IdP. Access tokens that were already issued remain valid until they expire, so keep token lifetimes short.
+
+##### Okta example
+
+The client credentials grant on an Okta custom authorization server requires an Okta plan that supports it.
+
+1. In Okta, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}API{{< /ui >}} > {{< ui >}}Authorization Servers{{< /ui >}} and use a custom authorization server whose audience matches what your provider validates. Your token URL is `<ISSUER>/v1/token`.
+1. On the authorization server's {{< ui >}}Scopes{{< /ui >}} tab, add a scope for provider access, such as `gateway.invoke`. Okta requires at least one scope for client credentials requests.
+1. Go to {{< ui >}}Applications{{< /ui >}} > {{< ui >}}Create App Integration{{< /ui >}}, select {{< ui >}}API Services{{< /ui >}}, and select {{< ui >}}Use Okta-generated client ID{{< /ui >}}.
+   - Under {{< ui >}}Client Credentials{{< /ui >}}, set {{< ui >}}Client authentication{{< /ui >}} to {{< ui >}}Client secret{{< /ui >}}.
+   - Under {{< ui >}}General Settings{{< /ui >}}, turn off {{< ui >}}Require Demonstrating Proof of Possession (DPoP) header in token requests{{< /ui >}}.
+   - Copy the client ID and client secret.
+1. On the authorization server's {{< ui >}}Access Policies{{< /ui >}} tab, add a policy assigned to the application, with a rule that allows the {{< ui >}}Client Credentials{{< /ui >}} grant type and the scope from step 2.
+1. In Datadog, enter the token URL, client ID, client secret, and scope. Leave {{< ui >}}Audience{{< /ui >}} empty.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/api-reference/introduction
+[3]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.4
 {{% /tab %}}
 {{< /tabs >}}
 

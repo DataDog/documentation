@@ -11,6 +11,9 @@ further_reading:
 - link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
   tag: 'Guide'
   text: 'Best practices for creating SLOs for RUM operations'  
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview

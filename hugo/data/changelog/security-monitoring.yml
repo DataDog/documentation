@@ -11,3 +11,60 @@ entries:
     operations:
       - UpdateFindingsAssignee
     title: Add endpoint to override the severity of security findings
+  - change_type: modified
+    date: '2026-09-29'
+    link: https://github.com/DataDog/documentation/pull/40282
+    operations:
+      - CreateCases
+      - CreateJiraIssues
+      - CreateLinearIssues
+      - CreateServiceNowTickets
+    title: Rename Case Management API documentation to Work Management
+  - change_type: added
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40745
+    operations:
+      - CancelSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - DeleteSecurityMonitoringBatchMigration
+      - DeleteSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrations
+      - PublishSecurityMonitoringBatchMigration
+      - StartSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigrationResource
+    title: Add Cloud SIEM batch migration endpoints as unstable
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - CreateSecurityMonitoringIntegrationConfig
+      - GetContentPacksStates
+      - UpdateSecurityMonitoringIntegrationConfig
+      - ValidateSecurityMonitoringIntegrationCredentials
+    title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-10-09'
+    link: https://github.com/DataDog/documentation/pull/40506
+    operations:
+      - ConvertSecurityMonitoringRuleFromJSONToTerraform
+      - CreateSecurityMonitoringRule
+      - GetRuleVersionHistory
+      - GetSecurityMonitoringRule
+      - GetSuppressionsAffectingFutureRule
+      - ListSecurityMonitoringRules
+      - RestoreSecurityMonitoringRule
+      - TestExistingSecurityMonitoringRule
+      - TestSecurityMonitoringRule
+      - UpdateSecurityMonitoringRule
+      - ValidateSecurityMonitoringRule
+    title: Add SQL rule fields to security monitoring rule queries
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41026
+    operations:
+      - CreateStaticAnalysisServerAnalysis
+    title: Fix static analysis analyze request and custom rule response spec 
+      drift

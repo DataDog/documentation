@@ -5,3 +5,9 @@ entries:
     operations:
       - CreateAIImpactUserActivity
     title: Add AI Impact user activity endpoint
+  - change_type: removed
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40555
+    operations:
+      - CreateAIImpactUserActivity
+    title: Document AI Impact user activity endpoint under DORA Metrics
