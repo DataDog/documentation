@@ -106,7 +106,7 @@ For application setup, see the [Python SDK guide][17].
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Use `dd-trace` **5.128.0 or later in the 5.x release line**, or **6.17.0 or later**. Set the following before [initializing the tracer][18]:
+Use `dd-trace` 5.128.0 or later in the 5.x release line, or 6.17.0 or later. Set the following before [initializing the tracer][18]:
 
 ```shell
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -114,7 +114,7 @@ export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
-Alternatively, use [agentless delivery][20] to retrieve prompt assignments and report exposures without an Agent. This setup requires `DD_API_KEY` in the application.
+Alternatively, use [agentless delivery][20] to retrieve prompt assignments and report exposures without an Agent. Agentless delivery requires `DD_API_KEY`.
 
 [16]: /remote_configuration/
 [18]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
@@ -122,7 +122,7 @@ Alternatively, use [agentless delivery][20] to retrieve prompt assignments and r
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Use `dd-trace-go/v2` **2.12.0 or later**, including the `openfeature` package. Set the following before [starting the tracer][19]:
+Use `dd-trace-go/v2` 2.12.0 or later, including the `openfeature` package. Set the following before [starting the tracer][19]:
 
 ```shell
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -136,7 +136,7 @@ import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
 
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
-Alternatively, use [agentless delivery][20] to retrieve prompt assignments and report exposures without an Agent. This setup requires `DD_API_KEY` in the application.
+Alternatively, use [agentless delivery][20] to retrieve prompt assignments and report exposures without an Agent. Agentless delivery requires `DD_API_KEY`.
 
 [16]: /remote_configuration/
 [19]: /tracing/trace_collection/dd_libraries/go/#getting-started
@@ -236,9 +236,9 @@ To configure and launch an A/B test in Product Analytics, see [Product Analytics
 
 ### I do not see assignments or results
 
-- **Only the fallback is returned, or assignments are missing:** check the SDK installation, `DD_ENV`, Agent connectivity, and that retrieval does not specify `version`.
-- **The Agent is unavailable:** backup credentials can keep prompt retrieval working, but the Agent-based setup does not automatically switch to agentless exposure reporting.
-- **Outcomes are missing:** check matching subject IDs, metric scope, and that events occur after exposure. Allow enough data to accumulate; see [Experiment Diagnostics][13].
+- **Only the fallback is returned, or assignments are missing:** Check the SDK installation, `DD_ENV`, Agent connectivity, and that retrieval does not specify `version`.
+- **The Agent is unavailable:** If you configured an API key and an application key, prompt retrieval can continue directly from Datadog. The Agent-based setup does not automatically switch to agentless exposure reporting.
+- **Outcomes are missing:** Check matching subject IDs, metric scope, and that events occur after exposure. Allow enough data to accumulate; see [Experiment Diagnostics][13].
 
 ### I cannot control or inspect a rollout
 
@@ -262,6 +262,4 @@ Review each environment's deployment strategy: saved guarded settings may alread
 [11]: /experiments/plan_and_launch_experiments/
 [12]: /experiments/reading_results/
 [13]: /experiments/diagnostics/
-[14]: /getting_started/agent/
 [15]: /llm_observability/configure/prompt_management/#configure-prompt-retrieval
-[16]: /remote_configuration/

@@ -157,6 +157,10 @@
     "request_description": "The new execution policy.",
     "request_schema_description": "Request object that includes the execution policy to update."
   },
+  "ListAgentHealthHostIssues": {
+    "description": "Returns the active Agent Health issues for a node Agent or Cluster Agent resource.",
+    "summary": "List active Agent Health issues"
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
@@ -515,7 +519,7 @@
     "request_schema_description": "The request for a Audit Logs events list."
   },
   "ListAuthNMappings": {
-    "description": "List all AuthN Mappings in the org.",
+    "description": "List all AuthN Mappings in the organization.",
     "summary": "List all AuthN Mappings"
   },
   "CreateAuthNMapping": {
@@ -1999,7 +2003,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\nSupported event categories are `change` and `alert`. For more information about change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking).",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -2291,6 +2295,16 @@
   "StopExposureSchedule": {
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
+  },
+  "GetSavedFilter": {
+    "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
+    "summary": "Get a saved filter"
+  },
+  "UpdateSavedFilterAttributes": {
+    "description": "Partially updates a saved filter. Supports both `LIST` and `RULES` filters.\nSupply at least one of `name`, `description`, or `targeting_rules`. Omitted or null fields\nare preserved. Supplying `targeting_rules` replaces the entire collection and propagates\nchanges to every feature flag that references the saved filter.\nMetadata-only updates do not require edit permission or approval on those feature flags.\nRule updates require edit permission on all consumer flags and are rejected when approval\nis required, unless the caller has the `feature_flag_approvals_override` permission.\nThe optional `last_updated_at` field detects stale updates. It does not set the update time.",
+    "summary": "Patch a saved filter",
+    "request_description": "",
+    "request_schema_description": "Request to partially update a saved filter."
   },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
@@ -4023,6 +4037,10 @@
     "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
     "summary": "Get patterns run status"
   },
+  "ListLLMObsPatternsTemplates": {
+    "description": "List all enabled patterns templates.",
+    "summary": "List patterns templates"
+  },
   "ListLLMObsPatternsTopics": {
     "description": "List the topics discovered by a patterns run. When no run is specified,\nthe most recent completed run is used.",
     "summary": "List patterns topics"
@@ -4353,6 +4371,26 @@
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
+  "CreateDerivedMetric": {
+    "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
+    "summary": "Create a derived metric",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a derived metric."
+  },
+  "DeleteDerivedMetric": {
+    "description": "Delete a derived metric by name. Idempotent: returns 204 regardless of whether the derived\nmetric existed. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Delete a derived metric"
+  },
+  "GetDerivedMetric": {
+    "description": "Get the definition of a derived metric by name.",
+    "summary": "Get a derived metric"
+  },
+  "UpdateDerivedMetric": {
+    "description": "Update the definition of an existing derived metric. The `id` in the request body\nmust match the `metric_name` path parameter. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a derived metric",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a derived metric."
+  },
   "CreateHistoricalMetricsConfiguration": {
     "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
     "summary": "Enable historical metrics ingestion",
@@ -4643,10 +4681,6 @@
     "request_description": "",
     "request_schema_description": "Response for listing interface tags."
   },
-  "ListNetworkHealthInsights": {
-    "description": "Return network health insights for the organization within the given time window.\nInsights are produced by analyzing DNS failures pre-classified by `network-dns-logger`,\nTLS certificate metrics, and denied security group connections. Each insight\nidentifies the client and server services involved, the type of issue, and the\nmagnitude of the failure observed during the query window.",
-    "summary": "List network health insights"
-  },
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
@@ -4712,6 +4746,10 @@
     "summary": "Update a pipeline",
     "request_description": "",
     "request_schema_description": "Top-level schema representing a pipeline."
+  },
+  "ListOnCallEscalationPolicies": {
+    "description": "Retrieve a paginated list of On-Call escalation policies, sorted by name.",
+    "summary": "List On-Call escalation policies"
   },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
@@ -4937,11 +4975,27 @@
     "description": "List organization group memberships. Filter by org group ID or org UUID. At least one of `filter[org_group_id]` or `filter[org_uuid]` must be provided. When filtering by org UUID, returns a single-item list with the membership for that org.",
     "summary": "List org group memberships"
   },
+  "CreateOrgGroupMemberships": {
+    "description": "Add a batch of organizations to an existing organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. This is an atomic operation: either all organizations are added or none are. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization. The requesting organization must own the organization group.",
+    "summary": "Create org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to add organizations to an org group."
+  },
   "BulkUpdateOrgGroupMemberships": {
-    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.",
+    "description": "Move a batch of organizations from one organization group to another. This is an atomic operation. Each request must include between 1 and 100 organizations. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization.",
     "summary": "Bulk update org group memberships",
     "request_description": "",
     "request_schema_description": "Request to bulk update org group memberships."
+  },
+  "DeleteOrgGroupMemberships": {
+    "description": "Delete a batch of memberships from an organization group. This operation is not supported for organization groups with `group_type` set to `config_management`. The memberships to delete are provided as membership resource identifiers, and the organization group they belong to must be specified using `filter[org_group_id]`. Each request must include between 1 and 100 unique membership IDs, and the requesting organization must own the organization group. The request does not fail if a membership ID refers to a membership that has already been deleted, does not exist, or does not belong to the organization group.",
+    "summary": "Bulk delete org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to delete a batch of org group memberships."
+  },
+  "DeleteOrgGroupMembership": {
+    "description": "Remove an organization from an organization group by deleting its membership. This operation is not supported for organization groups with `group_type` set to `config_management`. The organization group that the membership belongs to must be specified using `filter[org_group_id]`, and the requesting organization must own that organization group. Returns `404` if the membership does not exist, was already removed, or does not belong to the organization group.",
+    "summary": "Delete an org group membership"
   },
   "GetOrgGroupMembership": {
     "description": "Get a specific organization group membership by its ID.",
@@ -5094,7 +5148,7 @@
     "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
   },
   "ListProcesses": {
-    "description": "Get all processes for your organization.",
+    "description": "Get processes collected by Live Processes for your organization. One request covers a window of\nat most 1 hour that starts within the past 36 hours. To cover a longer period, make one request\nper hour. Older data is not available from this endpoint.\n\nWhen a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source\nquery to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that\none process. If absent, don't substitute an empty filter, which would query all processes.",
     "summary": "Get all processes"
   },
   "SubmitProductAnalyticsEvent": {
@@ -5540,7 +5594,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.\n\nOmitting the `permissions` relationship from the request leaves the role's existing permissions\nunchanged. Sending `\"permissions\": {\"data\": []}` removes all permissions except restricted default\npermissions, which remain unless `default_permissions_opt_out` is `true`. Some restricted permissions\ncan only be excluded after Minimal Access Roles is enabled for the organization.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
@@ -6434,6 +6488,62 @@
   "ListVulnerableAssets": {
     "description": "Get a list of vulnerable assets.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.",
     "summary": "List vulnerable assets"
+  },
+  "ListSecurityMonitoringBatchMigrations": {
+    "description": "List the batch migrations of your organization. A batch migration groups detection\nrules from another SIEM that the Datadog Detection Agent translates into Cloud SIEM\ndetection rules. To retrieve a single batch migration, filter by its ID with\n`filter[query]=id:<batch_id>`. Poll this endpoint to follow the progress of a batch\nmigration through its `status` and `resourceStatusCounts`.",
+    "summary": "List batch migrations"
+  },
+  "CreateSecurityMonitoringBatchMigration": {
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "summary": "Create a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to create a batch migration."
+  },
+  "DeleteSecurityMonitoringBatchMigration": {
+    "description": "Delete a batch migration and its resources. Detection rules that were already\npublished are not deleted. Returns `409 Conflict` while any resource is `in_progress`\nor `publishing`: cancel the batch migration, or wait for publishing to finish, and\nthen try again.",
+    "summary": "Delete a batch migration"
+  },
+  "UpdateSecurityMonitoringBatchMigration": {
+    "description": "Update the name, description, or tags of a batch migration, in any status. At least\none of these attributes must be provided. Omitted attributes are left unchanged, and\n`tags` replaces the full list of tags.",
+    "summary": "Update a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to update a batch migration."
+  },
+  "CancelSecurityMonitoringBatchMigration": {
+    "description": "Cancel an `in_progress` batch migration. Resources that are `pending` or `in_progress`\nbecome `canceled`. Resources that are already `completed` or `failed` keep their status\nand output, so completed resources can still be published. Canceling a `canceled` batch\nmigration succeeds, so the request can be safely retried. Returns `409 Conflict` if the\nbatch migration is `draft` or `completed`.",
+    "summary": "Cancel a batch migration"
+  },
+  "PublishSecurityMonitoringBatchMigration": {
+    "description": "Create a Cloud SIEM detection rule from the `output` of each selected `completed`\nresource of a batch migration. Completed resources can be published while the rest of\nthe batch migration is still being translated. When `resourceIds` is omitted or empty,\nevery `completed` resource is published. Published rules are created disabled.\n\nEvery requested resource must be publishable: `completed`, or left in `publishing` for\nmore than one minute after an uncertain result. Otherwise, the request returns\n`409 Conflict` and nothing is published. Already published resources are not publishable.\n\nThe response reports the outcome of each resource, and some resources can be published\nwhile others fail. A `failed` result that contains a `ruleId` means the rule was created:\ndo not retry that resource. Publishing a rule with a `block_ip` or `block_user` action\nrequires the `appsec_protect_write` permission.",
+    "summary": "Publish a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to publish the resources of a batch migration."
+  },
+  "DeleteSecurityMonitoringBatchMigrationResources": {
+    "description": "Delete resources from a batch migration. The request is all-or-nothing: it returns\n`404 Not Found` if any resource does not exist, and `409 Conflict` if any resource is\n`in_progress` or `publishing`. In both cases nothing is deleted. Duplicate resource IDs\nare ignored. Detection rules already published from the deleted resources are not deleted.",
+    "summary": "Delete resources from a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to delete resources from a batch migration."
+  },
+  "ListSecurityMonitoringBatchMigrationResources": {
+    "description": "List the resources of a batch migration, including the input of each source rule and,\nonce translated, the proposed Cloud SIEM detection rule in `output`.",
+    "summary": "List batch migration resources"
+  },
+  "CreateSecurityMonitoringBatchMigrationResources": {
+    "description": "Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the\nbatch migration is not `draft`, and `400 Bad Request` if the batch migration would\ncontain more than 1000 resources.",
+    "summary": "Add resources to a batch migration",
+    "request_description": "",
+    "request_schema_description": "Request to add resources to a batch migration."
+  },
+  "UpdateSecurityMonitoringBatchMigrationResource": {
+    "description": "Update a resource of a batch migration. At least one of `name`, `description`,\n`inputType`, or `input` must be provided. `name` and `description` can be updated at\nany time. `inputType` and `input` can only be updated while the resource is `pending`;\notherwise, the request returns `409 Conflict`. The translated `output` cannot be edited.",
+    "summary": "Update a batch migration resource",
+    "request_description": "",
+    "request_schema_description": "Request to update a batch migration resource."
+  },
+  "StartSecurityMonitoringBatchMigration": {
+    "description": "Start translating the `pending` resources of a `draft` batch migration into Cloud SIEM\ndetection rules. The batch migration moves to `in_progress`, and its resources are\ntranslated asynchronously. Once no resource is `pending` or `in_progress`, the batch\nmigration moves to `completed`. Starting an `in_progress` batch migration again does not\nqueue duplicate work, so the request can be safely retried, including after a timeout or\na `5xx` error. Returns `409 Conflict` if the batch migration is `completed` or `canceled`.\n\nAn organization can translate up to 2000 resources in total across all of its batch\nmigrations. Resources that were already processed count toward this limit even after\nthey are deleted, and `pending` resources of `in_progress` batch migrations reserve\ncapacity. Returns `409 Conflict` if starting the batch migration would exceed this limit.\nTo request a higher limit for your organization, contact\n[Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Start a batch migration"
   },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
@@ -7736,12 +7846,12 @@
     "request_schema_description": "Request for creating team connections."
   },
   "GetTeamSync": {
-    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub.",
+    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub or ServiceNow.",
     "summary": "Get team sync configurations"
   },
   "SyncTeams": {
-    "description": "This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
-    "summary": "Link Teams with GitHub Teams",
+    "description": "This endpoint configures synchronization between your existing Datadog teams and teams from\nGitHub or ServiceNow by matching team names.\nIt evaluates all current Datadog teams and compares them against teams in the external source\nconnected to your Datadog account.\n\nThis operation is read-only on the external source side, no teams will be modified or created there.\nThis only creates new teams in Datadog when type is set to `provision`.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n**GitHub**: [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\n(lowercased and kebab-cased) using a normalized exact match; case is ignored and spaces are removed.\n\n**ServiceNow**: [The ServiceNow integration must be configured for your Datadog account](https://docs.datadoghq.com/integrations/servicenow/).\nActive assignment groups from every configured ServiceNow instance are synchronized, and the ServiceNow\ngroup hierarchy is preserved. When `sync_membership` is enabled, group members are matched to Datadog\nusers by email address.",
+    "summary": "Link teams with external teams",
     "request_description": "",
     "request_schema_description": "Team sync request."
   },
@@ -7909,7 +8019,7 @@
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
@@ -7919,10 +8029,14 @@
     "summary": "Delete a usage quota"
   },
   "UpdateQuota": {
-    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Update a usage quota",
     "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
     "request_schema_description": "Request containing the usage quota resource to update."
+  },
+  "DeletePendingQuota": {
+    "description": "Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "summary": "Cancel a scheduled usage quota limit"
   },
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",

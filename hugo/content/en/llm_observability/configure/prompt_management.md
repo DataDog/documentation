@@ -1122,7 +1122,7 @@ To configure this:
 
 4. Save the rule. Calls with `tag=unstable` resolve to the matched version; all other calls fall back to the default version.
 
-Pass the attributes used by your targeting rule, as shown above. Use string, number, or Boolean values. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
+Pass the attributes used by your targeting rule, as shown in the previous code examples. Use string, number, or Boolean values. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
@@ -1141,7 +1141,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
 [11]: /remote_configuration/
-[13]: /llm_observability/instrument/sdk/?tab=nodejs
-[14]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/
-[15]: /llm_observability/instrument/sdk/?tab=go

@@ -1,0 +1,39 @@
+entries:
+  - change_type: added
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40697
+    operations:
+      - GetTeamHierarchyMembers
+    title: Add team hierarchy members endpoint
+  - change_type: modified
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40697
+    operations:
+      - CreateTeamMembership
+    title: Add team hierarchy members endpoint
+  - change_type: modified
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40817
+    operations:
+      - CreateTeamConnections
+      - GetTeamSync
+      - ListTeamConnections
+      - SyncTeams
+    title: Add ServiceNow to Teams sync and team connections
+  - change_type: modified
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40911
+    operations:
+      - CreateTeam
+      - CreateTeamConnections
+      - CreateTeamMembership
+      - GetTeam
+      - GetTeamMemberships
+      - GetUserMemberships
+      - ListMemberTeams
+      - ListTeamConnections
+      - ListTeamHierarchyLinks
+      - ListTeams
+      - UpdateTeam
+      - UpdateTeamMembership
+    title: Add missing Teams response fields and pagination metadata

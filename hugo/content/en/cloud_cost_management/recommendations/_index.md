@@ -420,6 +420,12 @@ multifiltersearch:
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
       resource_type: Managed Disk Snapshot
@@ -461,6 +467,12 @@ multifiltersearch:
       resource_type: Load Balancer
       recommendation_type: Delete Load Balancer
       recommendation_description: Load Balancer with 0 bytes transferred.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no billed data volume, ingested data, or user queries that still incur retention charges, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -521,6 +533,12 @@ multifiltersearch:
       resource_type: SQL Server Database
       recommendation_type: Downsize SQL Server Database Storage
       recommendation_description: SQL Server Database using less than 20% of provisioned storage capacity.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Downsize SQL Managed Instance
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay below the configured threshold on a smaller vCore size. Recommends downsizing them by up to two sizes at a time to reduce compute and SQL license costs.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -605,6 +623,12 @@ multifiltersearch:
       resource_type: Databricks Cluster
       recommendation_type: Downsize Databricks Job
       recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: BigQuery Dataset
+      recommendation_type: Delete Idle BigQuery Dataset
+      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP

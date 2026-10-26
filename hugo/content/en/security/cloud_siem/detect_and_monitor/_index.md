@@ -42,6 +42,46 @@ You can edit OOTB detection rules and do the following:
 - Change the severity setting in the {{< ui >}}Set conditions{{< /ui >}} section.
 - Modify the playbook.
 
+#### Assess rule health
+
+{{< callout url="#" btn_hidden="true" header="Preview">}}
+Rule health insights are in Preview.
+{{< /callout >}}
+
+Rules may become less effective as your business needs change over time. Monitoring rules for drifting logic is inherently difficult: if a rule results in few signals, that might be by design, or it might be missing issues it was intended to catch.
+
+In the [Detection Rules explorer][8], and the side panel that appears when you click an out-of-the-box rule in that explorer, you can view information about the health of the rule:
+- {{< ui >}}Health Insights{{< /ui >}}: Provides information on whether the fields that are part of a rule appear properly in the logs Cloud SIEM ingests. Datadog categorizes supported rules as either {{< ui >}}Monitoring{{< /ui >}} or {{< ui >}}Needs attention{{< /ui >}}.
+- {{< ui >}}Signal activity{{< /ui >}}: A graph of how many signals the rule has created over the past 30 days.
+
+In the rule side panel, you can view more information about individual fields referenced in the rule. For each scope (the `source` or `service` from the query), you can see:
+- {{< ui >}}Field{{< /ui >}}: The field Datadog evaluated.
+- {{< ui >}}Presence rate{{< /ui >}}: The percentage of logs ingested in that scope over the last 24 hours that contain that field.
+- {{< ui >}}Log count change{{< /ui >}}: The number of times the field has appeared in logs over the last 24 hours, compared to the average number of times over the last 29 days. Indicates whether the presence of that field is increasing, decreasing, or staying the same.
+- {{< ui >}}Status{{< /ui >}}: Indicates Datadog's assessment of the field. Values include:
+  - {{< ui >}}Monitoring{{< /ui >}}: Datadog is still collecting information about the field and has not identified any issues that require action.
+  - {{< ui >}}All zero{{< /ui >}}: Over the last 30 days, all values have been zero. This could indicate that the detection was never active, or that it has become inactive after the rule was created.
+  - {{< ui >}}Trailing silence{{< /ui >}}: The field appeared more frequently earlier in the 30-day lookback, but appeared significantly fewer times over the last 15 consecutive business days.
+  - {{< ui >}}Drifting{{< /ui >}}: For three consecutive days, the number of times the field appeared in logs was below 5% of its median number of appearances over the previous 27 days. This indicates that there was data for the field, but that it has since experienced a steep decline.
+
+If a field's status is either {{< ui >}}Trailing silence{{< /ui >}} or {{< ui >}}Drifting{{< /ui >}}, under {{< ui >}}Health Insights{{< /ui >}}, Datadog marks the rule as {{< ui >}}Needs attention{{< /ui >}} so you can investigate whether missing or anomalous values indicate a problem.
+
+<div class="alert alert-info">The service that analyzes field status runs once a day. If you edit a rule, the updated status appears after the service runs again.</div>
+
+##### Investigate rule health alerts
+
+In the side panel of the [Detection Rules explorer][8], you can click {{< ui >}}View{{< /ui >}} beside a specific scope or field to view its appearances in the Logs Explorer. With this information, you can explore whether the scope or field changed, or if the problem might have another cause, such as an issue with your pipelines.
+
+##### Mute or unmute rule health alerts
+
+To mute the alerts associated with a rule:
+1. In the {{< ui >}}Health Insights{{< /ui >}} section of the rule side panel, click {{< ui >}}Mute Alerts{{< /ui >}}. The Mute alerts window opens.
+1. Choose to mute alerts either {{< ui >}}For 30 days{{< /ui >}} or {{< ui >}}Until this rule is updated{{< /ui >}}.
+1. Optionally, add a note to explain why you're muting alerts.
+1. Click {{< ui >}}Mute Alerts{{< /ui >}}.
+
+If a rule is muted, you can click {{< ui >}}Unmute Alerts{{< /ui >}} to start getting alerts for it again.
+
 ### Custom detection rules
 
 OOTB detection rules cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. For custom detection rules, use the log search syntax to build and join log queries so you can target individual services, accounts, or events that you want to monitor. You can also enhance those queries with information such as the geolocation of an IP address or the status code of an HTTP request.
@@ -95,3 +135,4 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [5]: /security/cloud_siem/detection_rules/mitre_attack_map/
 [6]: /security/cloud_siem/guide/determine-cloud-siem-product/
 [7]: /security/cloud_siem/detect_and_monitor/dynamic_severity
+[8]: https://app.datadoghq.com/security/siem/rules
