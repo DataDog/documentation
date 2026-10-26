@@ -60,7 +60,7 @@ Columns in the table widget are queried independently from one another. Overlapp
 
 ## Export to CSV
 
-You can download the data in a table widget as a CSV file. CSV export works on one widget at a time and can be disabled for your organization. For details, see [Export widget data to CSV][12].
+You can download the data in a table widget as a CSV file. CSV export works on one widget at a time, and Datadog Support can disable it for your organization. For details, see [Export widget data to CSV][12].
 
 ## API
 

@@ -164,7 +164,7 @@ To comment on a graph or an image, click on the comment icon to the right of the
 | **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking {{< ui >}}Resolve{{< /ui >}}. |
 | **Linking to Comments**    | Link to a specific comment by clicking the link icon in the top right corner of the comment to copy its link.      |
 | **Editing or Deleting Comments** | Edit or delete your comments by clicking the three-dot ellipsis menu in the top right corner of the comment.                 |
-| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the vertical ellipsis menu (<i class="icon-kebab-wui"></i>), select {{< ui >}}Notifications{{< /ui >}}. |
+| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the three-dot ellipsis menu (<i class="icon-kebab-wui"></i>), select {{< ui >}}Notifications{{< /ui >}}. |
 
 ## Multiplayer experience in Notebooks
 
@@ -264,9 +264,9 @@ You must have edit access to restore general access to a restricted notebook. Co
 
 ## Downloading a notebook
 
-To download a notebook as a PDF, click the vertical ellipsis menu (<i class="icon-kebab-wui"></i>) in the upper right of the notebook. Then, select a {{< ui >}}Download as PDF{{< /ui >}} option. All graphs in the notebook must finish loading before you can download it.
+To download a notebook as a PDF, click the three-dot ellipsis menu (<i class="icon-kebab-wui"></i>) in the upper right of the notebook. Then, select a {{< ui >}}Download as PDF{{< /ui >}} option. All graphs in the notebook must finish loading before you can download it.
 
-**Note**: PDF export is available only in the Datadog UI, for one notebook at a time. There is no API for exporting notebooks to PDF, and you can't export more than one notebook in a single download.
+**Note**: PDF export is available only in the Datadog UI, for one notebook at a time. There is no API for exporting notebooks to PDF.
 
 ## Finding notebooks
 
