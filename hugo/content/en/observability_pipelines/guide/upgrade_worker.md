@@ -46,7 +46,7 @@ Worker version 2.25.0 gives you access to the following:
 
 #### Fixes
 
-- The Worker now reports the underlying error when a source or destination fails while running. Previously, the Worker only logged `the task completed with an error`. Examples include failing to bind a listening socket (such as `Address already in use`), broker subscribe and consume errors, checkpoint file errors, and destination errors. When a component panics, the Worker's logs now also include the panic message.
+- The Worker now reports the underlying error when a source or destination fails while running. Examples include failing to bind a listening socket (such as `Address already in use`), broker subscribe and consume errors, checkpoint file errors, and destination errors. Previously, the Worker only logged `the task completed with an error`. When a component panics, the Worker's logs now also include the panic message.
 - The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull. Previously, the source logged an error and waited before reconnecting. The source also now trusts every certificate in the configured CA file, not only the last one.
 - The OpenTelemetry source now responds to gRPC requests for unsupported services with the gRPC status `UNIMPLEMENTED` instead of HTTP 404. These requests no longer log an error or increment the `component_errors_total` metric.
 - The Worker no longer silently drops its own internal logs under high load. Internal logs that the Worker drops are now counted in the `component_discarded_events_total` metric with the `intentional:false` tag.
