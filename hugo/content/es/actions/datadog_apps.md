@@ -6,7 +6,7 @@ description: Cree e implemente aplicaciones personalizadas localmente utilizando
   y una CLI.
 further_reading:
 - link: https://www.datadoghq.com/blog/internal-applications-datadog-apps/
-  tag: blog
+  tag: Blog
   text: Envíe aplicaciones internas desde su AI Agent con Datadog Apps
 - link: https://www.youtube.com/watch?v=HEDjpMyqkSE
   tag: Video
@@ -242,6 +242,42 @@ Las siguientes funciones de App Builder no están disponibles para aplicaciones 
 Para cambiar la UI o la lógica de una aplicación, actualice el código en su proyecto local y vuelva a cargar.
 </div>
 
+## Comparta el estado de la aplicación integrada con enlaces profundos {#share-embedded-app-state-with-deep-links}
+
+Cuando una aplicación está [integrada][3], el estado de su URL se refleja en la URL de la página del servidor. Esto incluye rutas, pestañas, valores hash y parámetros de consulta. Copiar y compartir esa URL del servidor abre la aplicación en el mismo estado interno.
+
+Los enlaces profundos son compatibles automáticamente con el contenedor `DatadogAppProvider`. Si los enlaces profundos no funcionan en su aplicación, instale [`@datadog/apps-frontend`][25] y envuelva la aplicación en `DatadogAppProvider` en `main.tsx`:
+
+```shell
+npm install @datadog/apps-frontend@latest
+```
+
+```tsx
+import { DatadogAppProvider } from '@datadog/apps-frontend/embedding/react';
+
+function App() {
+  return (
+    <DatadogAppProvider>
+      {/* your app */}
+    </DatadogAppProvider>
+  );
+}
+```
+
+No se requieren cambios en el código. Cualquier navegación de `history.pushState`, `history.replaceState` o hash en la aplicación se refleja automáticamente en la URL de la página del servidor.
+
+Para desactivar los enlaces profundos, pase el módulo `datadog.deep-links` a `disabledModules`:
+
+```tsx
+<DatadogAppProvider disabledModules={['datadog.deep-links']}>
+  {/* your app */}
+</DatadogAppProvider>
+```
+
+<div class="alert alert-info">
+Los enlaces profundos capturan solo el estado almacenado en la URL de la aplicación. No capturan el estado de los componentes de React ni los datos en el almacenamiento local.
+</div>
+
 ## Configure CI/CD con GitHub Actions {#set-up-cicd-with-github-actions}
 
 Para cargar automáticamente su aplicación en cada push a la rama `main`, utilice la GitHub Action [`DataDog/apps-github-action`][11]. Esta acción compila su aplicación y la carga en Datadog.
@@ -346,3 +382,4 @@ La herramienta de scaffolding requiere Node.js 20.12.0 o una versión posterior.
 [22]: https://github.com/vercel-labs/skills
 [23]: https://www.npmjs.com/package/@datadog/druids
 [24]: https://www.npmjs.com/package/@datadog/apps-backend
+[25]: https://www.npmjs.com/package/@datadog/apps-frontend

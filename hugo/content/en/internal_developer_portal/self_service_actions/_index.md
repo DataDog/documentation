@@ -50,7 +50,7 @@ To get started quickly, explore [App Builder Blueprints][9] and [Workflow Automa
 
 For example, you can use App Builder Blueprints to:
 
-- **Scaffold new services from templates:** Configure a form to collect inputs from a developer, integrate with a template in source code management (for example, Github), and generate a new repository or PR for a developer. Read the [Software Templates documentation][16] to learn more.
+- **Scaffold new services from templates:** Configure a form to collect inputs from a developer, integrate with a template in source code management (for example, GitHub or GitLab), and generate a new repository, pull request, or merge request for a developer. Read the [Software Templates documentation][16] to learn more.
 - **Provision infrastructure:** Enable developers to spin up new infrastructure (for example, an S3 bucket) with a few inputs and one click. Collect approvals from an SRE or platform engineering team through source control or Approval actions within Workflow Automation.
 - **Remediate issues:** Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
 - **Manage code changes and deployments:** Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog and track their status and approvals.

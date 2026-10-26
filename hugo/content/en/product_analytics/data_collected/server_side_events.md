@@ -23,8 +23,6 @@ Use server-side events to:
 - Track backend actions with no client-side equivalent, such as a payment confirmation or subscription renewal
 - Supplement client-side data with server-side context
 
-<div class="alert alert-warning">Datadog bills server-side events separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
-
 ## Prerequisites
 
 Before sending server-side events, [set up the Datadog SDK][2] for your application and [enable Product Analytics][3].

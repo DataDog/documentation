@@ -4,18 +4,18 @@ aliases:
 - /continuous_integration/intelligent_test_runner/
 - /intelligent_test_runner
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-    tag: "Release Notes"
-    text: "Check out the latest Software Delivery releases! (App login required)"
+  - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+    tag: "Learning Center"
+    text: "Getting Started with Test Optimization"
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
     text: "Streamline CI testing with Datadog Intelligent Test Runner"
   - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
-  - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
-    tag: "Learning Center"
-    text: "Getting Started with Test Optimization"
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+    tag: "Release Notes"
+    text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
 <div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>

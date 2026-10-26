@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
   tag: "Blog"
   text: "Enforce custom rules in Datadog IaC Security scanning"
+- link: "/security/mcp_server/"
+  tag: "Documentation"
+  text: "Datadog MCP Server Security Tools"
 ---
 
 Create custom security rules to enforce requirements specific to your organization.
@@ -24,7 +27,7 @@ Custom rules are available for these platforms:
 
 Creating, editing, or publishing custom rules requires the `appsec_vm_write` permission. For more information, see [Role Based Access Control][6]. For details about rule contract, parsed inputs, and platform-specific patterns, see the [IaC Custom Rule Reference][2].
 
-There are two options for creating custom rules: cloning an existing rule or creating a rule from scratch.
+There are two options for creating custom rules: cloning an existing rule or creating a rule from scratch. You can also use an AI agent connected to the Datadog MCP Server. See [Create and manage rules with MCP](#create-and-manage-rules-with-mcp).
 
 ## Clone an existing rule
 
@@ -160,6 +163,10 @@ Set `versioning_configuration.status` to `Enabled`.
 
 By default, published rules run in subsequent IaC scans where the specified platform applies. To refine how rules are applied, see [IaC Security Configuration][5].
 
+## Create and manage rules with MCP
+
+Connect an AI agent to the [Datadog MCP Server][7] to generate, validate, create, update, publish, and delete IaC custom rules from a natural-language description or your own Rego. Enable the `security` toolset when you [connect to the MCP Server][8]. For a list of available tools and their required permissions, see [Infrastructure as Code custom rules][9] in the Datadog MCP Server security tools reference.
+
 ## Rule revisions
 
 Editing a rule creates a new revision. From the rule's details panel, you can:
@@ -178,3 +185,6 @@ Editing a rule creates a new revision. From the rule's details panel, you can:
 [4]: /security/code_security/iac_security/custom_rules/guide/#validation
 [5]: /security/code_security/iac_security/configuration/#rule-configuration
 [6]: /account_management/rbac/permissions/#cloud-security-platform
+[7]: /mcp_server/
+[8]: /security/mcp_server/#quickstart
+[9]: /security/mcp_server/#infrastructure-as-code-custom-rules

@@ -4,9 +4,9 @@ further_reading:
 - link: "/gpu_monitoring/summary"
   tag: "Documentation"
   text: "GPU Monitoring Summary Page"
-- link: "/gpu_monitoring/fleet"
+- link: "/gpu_monitoring/explorer"
   tag: "Documentation"
-  text: "GPU Monitoring Fleet Page"
+  text: "GPU Monitoring Explorer"
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
@@ -232,10 +232,10 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
    datadogAgentInternal:
      enabled: true
 
-    datadogCRDs:
-      crds:
-        datadogAgentProfiles: true
-        datadogAgentInternal: true
+   datadogCRDs:
+     crds:
+       datadogAgentProfiles: true
+       datadogAgentInternal: true
    ```
 
    Then re-deploy the Datadog Operator with: `helm upgrade --install <release-name> datadog/datadog-operator -f datadog-operator.yaml`.
