@@ -16,7 +16,7 @@ further_reading:
   text: "How Bits Database Optimization proves a query rewrite is faster"
 ---
 
-<div class="alert alert-info">Bits Database Optimization is only available for PostgreSQL and MySQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
+<div class="alert alert-info">Bits Database Optimization is available for PostgreSQL and MySQL, and in Preview for SQL Server. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
 
 ## Overview
 
@@ -70,7 +70,7 @@ To filter the query list by optimization type, select an option from **Optimizat
 The Optimization panel includes a summary of the query issue, the optimized query used in the simulation, and a visualization of the Simulated Performance Impact.
 
 Explore the Simulated Performance Impact visualization for more details about improvements:
-  - Hover over the improvement summary (for example, "96.9x faster") to view before-and-after execution times, logical reads, and shared blocks dirtied. The table shows the average, median, P95, and maximum for each metric.
+  - Hover over the improvement summary (for example, "96.9x faster") to view before-and-after execution times, logical reads, and write activity (dirtied blocks for PostgreSQL, write work for MySQL, or logical writes for SQL Server). The table shows the average, median, P95, and maximum for each metric.
   - Hover over each item in the visualization to view more details.
 
 {{< img src="database_monitoring/database_optimization_simulated_performance_impact.png" alt="An example Simulated Performance Impact visualization, showing a query optimized to 96.9x faster." style="width:100%;">}}
