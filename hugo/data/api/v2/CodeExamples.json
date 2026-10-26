@@ -818,6 +818,13 @@
       "description": "Create experiment metric group returns \"Created\" response"
     }
   ],
+  "CreateExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment protocol returns \"Created\" response"
+    }
+  ],
   "CreateExperiment": [
     {
       "group": "experiments",
@@ -860,6 +867,13 @@
       "description": "Patch subject type returns \"OK\" response"
     }
   ],
+  "ReplaceExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
   "UpdateExperimentAnalysisPlanAttributes": [
     {
       "group": "experiments",
@@ -872,6 +886,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "PatchExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment protocol returns \"OK\" response"
     }
   ],
   "UpdateMetricCollection": [
