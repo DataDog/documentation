@@ -77839,10 +77839,10 @@ components:
           type: string
         limit:
           default: 10
-          description: Maximum number of logs in the response.
+          description: Requested maximum number of logs in the response.
           example: 25
           format: int32
-          maximum: 1000
+          maximum: 5000
           type: integer
       type: object
     LogsListResponse:
@@ -77937,7 +77937,7 @@ components:
         query:
           default: "*"
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
       type: object
     LogsMetricGroupBy:
@@ -78010,7 +78010,7 @@ components:
       properties:
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
       type: object
     LogsMetricResponseGroupBy:
@@ -78099,7 +78099,7 @@ components:
         query:
           default: "*"
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         storage_tier:
           $ref: "#/components/schemas/LogsStorageTier"
@@ -92566,12 +92566,16 @@ components:
         - logs
         - metrics
         - audit
+        - ci_pipelines
+        - ci_tests
       example: "logs"
       type: string
       x-enum-varnames:
         - LOGS
         - METRICS
         - AUDIT
+        - CI_PIPELINES
+        - CI_TESTS
     OrgConnectionUpdate:
       description: Org connection update data.
       properties:
@@ -94047,6 +94051,8 @@ components:
           $ref: "#/components/schemas/OutcomesResponseIncluded"
         links:
           $ref: "#/components/schemas/OutcomesResponseLinks"
+        meta:
+          $ref: "#/components/schemas/PaginatedResponseMeta"
       type: object
     OutcomesResponseData:
       description: List of rule outcomes.
@@ -94094,11 +94100,27 @@ components:
           type: string
       type: object
     OutcomesResponseLinks:
-      description: Links attributes.
+      description: Pagination links for rule outcomes.
       properties:
+        first:
+          description: Link for the first set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=0"
+          type: string
+        last:
+          description: Link for the last set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=200"
+          type: string
         next:
           description: |-
             Link for the next set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=200"
+          type: string
+        previous:
+          description: Link for the previous set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=0"
+          type: string
+        self:
+          description: Link for the current set of results.
           example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100"
           type: string
       type: object
@@ -97697,7 +97719,9 @@ components:
       x-enum-varnames:
         - PROCESS
     ProcessScalarQuery:
-      description: A query for host-level process metrics such as CPU and memory usage.
+      description: |-
+        Per-process metrics from Live Processes. Queries without `aggregator` fail. To scope to one process,
+        set `tag_filters` to its `identifying_tags` from `GET /api/v2/processes`.
       properties:
         aggregator:
           $ref: "#/components/schemas/MetricsAggregator"
@@ -97709,11 +97733,15 @@ components:
           description: Whether CPU metrics should be normalized by core count.
           type: boolean
         limit:
-          description: Maximum number of results to return.
+          description: |-
+            Maximum number of processes or groups to return. Large values can fail with an `Unprocessable
+            Content` error. If so, retry with a smaller limit.
           format: int64
           type: integer
         metric:
-          description: The process metric to query.
+          description: |-
+            The process metric to query, such as `process.stat.cpu.total_pct`, `process.stat.memory.rss`, or
+            `process.stat.memory.vms`.
           example: process.stat.cpu.total_pct
           type: string
         name:
@@ -97723,7 +97751,9 @@ components:
         sort:
           $ref: "#/components/schemas/QuerySortOrder"
         tag_filters:
-          description: Tag filters to narrow down processes.
+          description: |-
+            Tags to narrow down processes. To scope to one process, use its `identifying_tags` from
+            `GET /api/v2/processes`, for example `host:web-01` and `pid:1234`.
           items:
             description: A tag filter value.
             example: "env:prod"
@@ -97835,7 +97865,9 @@ components:
       x-enum-varnames:
         - PROCESS
     ProcessTimeseriesQuery:
-      description: A query for host-level process metrics such as CPU and memory usage.
+      description: |-
+        Per-process metrics from Live Processes over time, such as CPU and memory usage. To scope to one
+        process, set `tag_filters` to its `identifying_tags` from `GET /api/v2/processes`.
       properties:
         cross_org_uuids:
           $ref: "#/components/schemas/CrossOrgUuids"
@@ -97845,11 +97877,15 @@ components:
           description: Whether CPU metrics should be normalized by core count.
           type: boolean
         limit:
-          description: Maximum number of results to return.
+          description: |-
+            Maximum number of processes or groups to return. Large values can fail with an `Unprocessable
+            Content` error. If so, retry with a smaller limit.
           format: int64
           type: integer
         metric:
-          description: The process metric to query.
+          description: |-
+            The process metric to query, such as `process.stat.cpu.total_pct`, `process.stat.memory.rss`, or
+            `process.stat.memory.vms`.
           example: process.stat.cpu.total_pct
           type: string
         name:
@@ -97859,7 +97895,9 @@ components:
         sort:
           $ref: "#/components/schemas/QuerySortOrder"
         tag_filters:
-          description: Tag filters to narrow down processes.
+          description: |-
+            Tags to narrow down processes. To scope to one process, use its `identifying_tags` from
+            `GET /api/v2/processes`, for example `host:web-01` and `pid:1234`.
           items:
             description: A tag filter value.
             example: "env:prod"
@@ -106222,6 +106260,8 @@ components:
         id:
           description: The `RoleTemplateData` `id`.
           type: string
+        relationships:
+          $ref: "#/components/schemas/RoleResponseRelationships"
         type:
           $ref: "#/components/schemas/RoleTemplateDataType"
       required:
@@ -106277,6 +106317,11 @@ components:
             description: Name of a managed role to inherit permissions from.
             type: string
           type: array
+        team_count:
+          description: Number of teams with that role.
+          format: int64
+          readOnly: true
+          type: integer
         user_count:
           description: The user count.
           format: int32
@@ -118763,6 +118808,19 @@ components:
           type: string
         dataSource:
           $ref: "#/components/schemas/SecurityMonitoringStandardDataSource"
+        datasetIds:
+          description: IDs of the datasets queried by the rule. Only used when `queryLanguage` is `sql`.
+          items:
+            description: Dataset ID.
+            type: string
+          type: array
+        datasetVersions:
+          additionalProperties:
+            description: Dataset version.
+            format: int64
+            type: integer
+          description: Version of each dataset used by the rule, keyed by dataset ID. Only used when `queryLanguage` is `sql`.
+          type: object
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -118805,6 +118863,10 @@ components:
         query:
           description: Query to run on logs.
           example: a > 3
+          type: string
+        queryLanguage:
+          description: Language of the query. Use `sql` for SQL-based rules over datasets. Defaults to `event_query`.
+          example: sql
           type: string
       type: object
     SecurityMonitoringStandardRuleResponse:
@@ -120242,6 +120304,8 @@ components:
           maximum: 5
           minimum: 1
           type: integer
+        suppressions:
+          $ref: "#/components/schemas/SensitiveDataScannerSuppressions"
         tags:
           description: List of tags.
           items:
@@ -120288,7 +120352,9 @@ components:
       type: object
     SensitiveDataScannerSuppressions:
       description: |-
-        Object describing the suppressions for a rule. There are three types of suppressions, `starts_with`, `ends_with`, and `exact_match`.
+        Object describing suppressions for a rule, or the recommended suppression lists published by a standard pattern.
+        There are three types of suppressions, `starts_with`, `ends_with`, and `exact_match`.
+        Rules based on the Datadog library can use recommended or custom suppressions. Custom rules can only use custom suppressions.
         Suppressed matches are not obfuscated, counted in metrics, or displayed in the Findings page.
       properties:
         ends_with:
@@ -120312,6 +120378,11 @@ components:
             description: A string prefix; matches starting with this value are suppressed.
             type: string
           type: array
+        use_recommended_suppressions:
+          description: |-
+            Should the rule use the underlying standard pattern suppression configuration. If set to `true`, the rule must be tied
+            to a standard pattern. If set to `false`, the specified suppressions are applied.
+          type: boolean
       type: object
     SensitiveDataScannerTextReplacement:
       description: Object describing how the scanned event will be replaced.
@@ -131979,15 +132050,37 @@ components:
           example: user@datadoghq.com
           readOnly: true
           type: string
+        estimated_change_in_volume:
+          description: |-
+            Estimated change in indexed cardinality or points if the exemption is removed and the matching tag indexing
+            rule applies to the metric. A negative value indicates a reduction in indexed volume, a positive value
+            indicates an increase, and zero indicates no change. A `null` value indicates that the estimate is unavailable.
+          example: 45
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
         kind:
           description: >-
             Discriminates between an explicit exemption (`exemption`) and a pre-existing legacy tag configuration acting as an implicit exclusion (`legacy_tag_configuration`).
           example: exemption
           type: string
+        missing_indexed_tags:
+          description: |-
+            Tag keys used to query this metric in monitors, dashboards, notebooks, and SLOs that the matching rule would
+            remove or not include if the exemption is removed.
+          example:
+            - service
+          items:
+            type: string
+          readOnly: true
+          type: array
         reason:
           description: The reason the metric is exempt from tag indexing rules.
           example: This metric has a pre-existing tag configuration.
           type: string
+        volume_status:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionVolumeStatus"
       type: object
     TagIndexingRuleExemptionCreateAttributes:
       description: Attributes for creating a tag indexing rule exemption.
@@ -132046,6 +132139,22 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionVolumeStatus:
+      description: |-
+        Indicates whether `estimated_change_in_volume` is available and, if not, why. `ok` indicates a fresh estimate.
+        `unindexed_tags` indicates that the matching rule uses tags that are not indexed for the metric.
+        `unavailable` indicates that the estimate is stale, was not computed, or could not be retrieved.
+      enum:
+        - ok
+        - unindexed_tags
+        - unavailable
+      example: unavailable
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - OK
+        - UNINDEXED_TAGS
+        - UNAVAILABLE
     TagIndexingRuleMetricMatch:
       description: Criteria for matching metrics based on query state.
       properties:
@@ -199305,7 +199414,7 @@ paths:
                     indexes:
                       - main
                       - web
-                    query: service:web* AND @http.status_code:[200 TO 299]
+                    query: service:web-api AND @http.status_code:[200 TO 299]
                     storage_tier: indexes
                     to: now
                   group_by:
@@ -200416,7 +200525,7 @@ paths:
                             include_percentiles: true
                             path: "@duration"
                           filter:
-                            query: "service:web* AND @http.status_code:[200 TO 299]"
+                            query: "service:web-api AND @http.status_code:[200 TO 299]"
                           group_by:
                             - path: "@http.status_code"
                               tag_name: status_code
@@ -200455,7 +200564,7 @@ paths:
                         include_percentiles: true
                         path: "@duration"
                       filter:
-                        query: service:web* AND @http.status_code:[200 TO 299]
+                        query: service:web-api AND @http.status_code:[200 TO 299]
                       group_by:
                         - path: "@http.status_code"
                           tag_name: status_code
@@ -200479,7 +200588,7 @@ paths:
                           include_percentiles: true
                           path: "@duration"
                         filter:
-                          query: "service:web* AND @http.status_code:[200 TO 299]"
+                          query: "service:web-api AND @http.status_code:[200 TO 299]"
                         group_by:
                           - path: "@http.status_code"
                             tag_name: status_code
@@ -200547,7 +200656,7 @@ paths:
                           include_percentiles: true
                           path: "@duration"
                         filter:
-                          query: "service:web* AND @http.status_code:[200 TO 299]"
+                          query: "service:web-api AND @http.status_code:[200 TO 299]"
                         group_by:
                           - path: "@http.status_code"
                             tag_name: status_code
@@ -200588,7 +200697,7 @@ paths:
                       compute:
                         include_percentiles: true
                       filter:
-                        query: service:web* AND @http.status_code:[200 TO 299]
+                        query: service:web-api AND @http.status_code:[200 TO 299]
                       group_by:
                         - path: "@http.status_code"
                           tag_name: status_code
@@ -200611,7 +200720,7 @@ paths:
                           include_percentiles: true
                           path: "@duration"
                         filter:
-                          query: "service:web* AND @http.status_code:[200 TO 299]"
+                          query: "service:web-api AND @http.status_code:[200 TO 299]"
                         group_by:
                           - path: "@http.status_code"
                             tag_name: status_code
@@ -201315,7 +201424,7 @@ paths:
           schema:
             default: 10
             format: int32
-            maximum: 1000
+            maximum: 5000
             type: integer
       responses:
         "200":
@@ -201383,7 +201492,7 @@ paths:
                     indexes:
                       - main
                       - web
-                    query: service:web* AND @http.status_code:[200 TO 299]
+                    query: service:web-api AND @http.status_code:[200 TO 299]
                     storage_tier: indexes
                     to: now
                   options:
@@ -203348,8 +203457,12 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume: 45
                         kind: exemption
+                        missing_indexed_tags:
+                          - service
                         reason: This metric has a pre-existing tag configuration.
+                        volume_status: ok
                       id: dd.test.metric
                       type: tag_indexing_rule_exemptions
               schema:
@@ -203426,8 +203539,11 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume:
                         kind: exemption
+                        missing_indexed_tags: []
                         reason: This metric has a pre-existing tag configuration.
+                        volume_status: unavailable
                       id: dd.test.metric
                       type: tag_indexing_rule_exemptions
               schema:
@@ -213358,16 +213474,28 @@ paths:
           - dashboards_write
   /api/v2/processes:
     get:
-      description: Get all processes for your organization.
+      description: |-
+        Get processes collected by Live Processes for your organization. One request covers a window of
+        at most 1 hour that starts within the past 36 hours. To cover a longer period, make one request
+        per hour. Older data is not available from this endpoint.
+
+        When a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source
+        query to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that
+        one process. If absent, don't substitute an empty filter, which would query all processes.
       operationId: ListProcesses
       parameters:
-        - description: String to search processes by.
+        - description: |-
+            Free-text search over process fields such as the executable and user. When it contains several
+            words, a process must match all of them. Use `tags` for exact values such as host.
           in: query
           name: search
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to filter processes by.
+        - description: |-
+            Comma-separated `key:value` tags. A process must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
+            request per host.
           example: account:prod,user:admin
           in: query
           name: tags
@@ -213375,9 +213503,9 @@ paths:
           schema:
             type: string
         - description: |-
-            Unix timestamp (number of seconds since epoch) of the start of the query window.
-            If not provided, the start of the query window will be 15 minutes before the `to` timestamp. If neither
-            `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+            Start of the query window, in Unix seconds. Must be within the past 36 hours and at most 1 hour
+            before `to`. If not provided, the start of the query window is 15 minutes before the `to` timestamp.
+            If neither `from` nor `to` is provided, the query window is `[now - 15m, now]`.
           in: query
           name: from
           required: false
@@ -213385,9 +213513,9 @@ paths:
             format: int64
             type: integer
         - description: |-
-            Unix timestamp (number of seconds since epoch) of the end of the query window.
-            If not provided, the end of the query window will be 15 minutes after the `from` timestamp. If neither
-            `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+            End of the query window, in Unix seconds. Must be at most 1 hour after `from`. If not provided, the
+            end of the query window is 15 minutes after the `from` timestamp. If neither `from` nor `to` is
+            provided, the query window is `[now - 15m, now]`.
           in: query
           name: to
           required: false
@@ -218966,8 +219094,14 @@ paths:
                   value:
                     data:
                       - attributes:
+                          description: Role template with permissions for standard access.
                           name: Datadog Standard Role
-                        id: 00000000-0000-0000-0000-000000000012
+                        id: "2"
+                        relationships:
+                          permissions:
+                            data:
+                              - id: 984d2ee2-dbb1-11e8-a1b5-1b33e7f4e7a0
+                                type: permissions
                         type: roles
               schema:
                 $ref: "#/components/schemas/RoleTemplateArray"
@@ -219068,6 +219202,11 @@ paths:
         [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
         such as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from
         the request. To exclude them, set `default_permissions_opt_out` to `true`.
+
+        Omitting the `permissions` relationship from the request leaves the role's existing permissions
+        unchanged. Sending `"permissions": {"data": []}` removes all permissions except restricted default
+        permissions, which remain unless `default_permissions_opt_out` is `true`. Some restricted permissions
+        can only be excluded after Minimal Access Roles is enabled for the organization.
       operationId: UpdateRole
       parameters:
         - $ref: "#/components/parameters/RoleID"
@@ -219095,6 +219234,7 @@ paths:
                     data:
                       attributes:
                         name: developers
+                        team_count: 0
                       id: 00000000-0000-0000-0000-000000000004
                       type: roles
               schema:
