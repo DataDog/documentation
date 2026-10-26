@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [Apach
 
 ## Setup
 
-This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports. Earlier versions name this receiver `apachespark`.
+This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers your distribution supports. Earlier versions name this receiver `apachespark`.
 
 The Apache Spark receiver reads the REST API that a running Spark application serves on its web UI port.
 

@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [IIS r
 
 ## Setup
 
-This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
+This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers your distribution supports.
 
 The IIS receiver reads Windows performance counters, so it runs only on Windows. Run the Collector on the IIS host.
 
@@ -43,5 +43,5 @@ For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTe
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/iisreceiver
 [2]: /opentelemetry/guide/metrics_mapping/
-[4]: https://app.datadoghq.com/screen/integration/243/iis---overview
+[4]: https://app.datadoghq.com/dash/integration/243/iis---overview
 [5]: /opentelemetry/setup/collector_exporter/

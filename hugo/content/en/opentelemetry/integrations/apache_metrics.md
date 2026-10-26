@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [Apach
 
 ## Setup
 
-This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
+This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers your distribution supports.
 
 The Apache receiver reads your server's `server-status?auto` page. Before you start, [enable `mod_status`][5] on your Apache server. Limit access to the status page, for example to localhost, because it shows details about your server and its requests.
 

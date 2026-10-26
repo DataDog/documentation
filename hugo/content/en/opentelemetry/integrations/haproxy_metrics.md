@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [HAPro
 
 ## Setup
 
-This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
+This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers your distribution supports.
 
 Add the following lines to your Collector configuration. The receiver has no default endpoint, so set `endpoint` to the URL of your HAProxy stats page or the path to its stats socket, such as `/var/run/haproxy.sock`. Limit access to the stats page or socket, for example to localhost, because it shows details about your servers.
 
