@@ -123,7 +123,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. The order in the [Precedence of peer tags](#precedence-of-peer-tags) section determines which peer tag names an inferred entity.
 
-The available source attributes depend on your Agent version and collection configuration. An attribute must be present on the span and included in peer-tag aggregation to contribute to inferred-service naming.
+The available source attributes depend on your collection version and configuration. For the Datadog Agent and Datadog Connector, span attributes must be included in peer-tag aggregation. For the `span_metrics` connector, include the span attributes as dimensions in the [connector configuration](/opentelemetry/setup/collector_exporter/#span-metrics-connector).
 
 Peer tag | Source attributes
 --------------------|-------------------
