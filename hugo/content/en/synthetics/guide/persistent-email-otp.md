@@ -78,7 +78,7 @@ Keep a separate temporary email test if you also want to monitor sign-up.
 ## Example: record an OTP login flow
 
 
-{{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable in the browser recorder and use it to request an OTP" video="true" width="100%" >}}
+{{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable in the browser recorder and use it to request an OTP." video="true" width="100%" >}}
 
 1. Open a browser test in the recorder.
 2. Under {{< ui >}}Variables{{< /ui >}}, add a variable and select {{< ui >}}Email Address{{< /ui >}}.
