@@ -96,7 +96,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
 <br />**Note**: Before version `ddtrace==3.14.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -145,7 +145,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
 <br />**Note**: Before version `dd-trace@5.66.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -186,7 +186,7 @@ You can supply the following parameters as environment variables (for example, `
 
 `DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
 <br />**Note**: Before version 1.54.0 of `dd-trace-java`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED` or `dd.llmobs.agentless.enabled`
@@ -223,7 +223,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1]. Equivalent to `tracer.WithLLMObsMLApp()`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1]. Equivalent to `tracer.WithLLMObsMLApp()`.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
@@ -231,7 +231,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_PROJECT_NAME`
 : optional - _string_
-<br />The name of the project that [datasets and experiments](/llm_observability/improve/experiments/) are grouped under. Equivalent to `tracer.WithLLMObsProjectName()`.
+<br />The name of the project that [datasets and offline experiments](/llm_observability/improve/offline_experiments/) are grouped under. Equivalent to `tracer.WithLLMObsProjectName()`.
 
 `DD_API_KEY`
 : optional - _string_
@@ -272,7 +272,7 @@ LLMObs.enable(
 
 `ml_app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_
@@ -334,7 +334,7 @@ const llmobs = tracer.llmobs;
 
 `mlApp`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `agentlessEnabled`
 : optional - _boolean_ - **default**: `false`
@@ -401,7 +401,7 @@ func main() {
 
 `tracer.WithLLMObsMLApp`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or offline experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `tracer.WithLLMObsAgentlessEnabled`
 : optional - _bool_ - **default**: `false`
@@ -409,11 +409,11 @@ func main() {
 
 `tracer.WithLLMObsProjectName`
 : optional - _string_
-<br />The name of the project that [datasets and experiments](/llm_observability/improve/experiments/) are grouped under. If not provided, this defaults to the value of `DD_LLMOBS_PROJECT_NAME`.
+<br />The name of the project that [datasets and offline experiments](/llm_observability/improve/offline_experiments/) are grouped under. If not provided, this defaults to the value of `DD_LLMOBS_PROJECT_NAME`.
 
 Set `DD_SITE`, `DD_API_KEY`, `DD_ENV`, and `DD_SERVICE` as environment variables. `DD_API_KEY` is only required if you are not using the Datadog Agent.
 
-**Note**: Agent mode requires Datadog Agent v7.72.0 or later when using [datasets and experiments](/llm_observability/improve/experiments/). Earlier Agent versions do not proxy the datasets and experiments endpoints correctly.
+**Note**: Agent mode requires Datadog Agent v7.72.0 or later when using [datasets and offline experiments](/llm_observability/improve/offline_experiments/). Earlier Agent versions do not proxy the datasets and offline experiments endpoints correctly.
 {{% /tab %}}
 {{< /tabs >}}
 
