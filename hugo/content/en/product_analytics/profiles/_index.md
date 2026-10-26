@@ -54,6 +54,28 @@ First Seen
 Last Seen
 : `type:timestamp`  <br> The date of the user's most recent session.
 
+<!-- #### First touch attribution  -->
+First Referrer
+: `type:string`  <br> The URL of the page that referred the user in their first session. N/A if user navigated directly to the application.
+
+First Referrer Host
+: `type:string`  <br> The hostname of the page that referred the user in their first session. N/A if user navigated directly to the application.
+
+First UTM Campaign
+: `type:string`  <br> The utm_campaign value from the URL of the user’s first session.
+
+First UTM Content
+: `type:string`  <br> The utm_content value from the URL of the user’s first session.
+
+First UTM Medium
+: `type:string`  <br> The utm_medium value from the URL of the user’s first session.
+
+First UTM Source
+: `type:string`  <br> The utm_source value from the URL of the user’s first session.
+
+First UTM Term
+: `type:string`  <br> The utm_term value from the URL of the user’s first session.
+
 
 <!-- #### application based attributes  -->
 First Seen Application
