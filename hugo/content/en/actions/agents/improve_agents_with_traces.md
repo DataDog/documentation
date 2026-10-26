@@ -23,8 +23,6 @@ This guide shows how to use [Agent Observability][1] and the agent's own improve
 
 Tracing must be enabled on the agent before any runs are recorded. Open the agent in [Bits Agent Builder][3] and select **Enable Tracing**. Tracing is included with Bits Agent Builder at no additional cost.
 
-{{< callout >}} Agent tracing is in Preview. {{< /callout >}}
-
 Your agent should also have:
 
 - Recent runs that represent real usage
