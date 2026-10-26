@@ -27,7 +27,9 @@ Worker version 2.25.0 gives you access to the following:
 
 #### Security
 
-- Updated the Worker's bundled Mozilla root certificate store. The store no longer includes the `emSign ECC Root CA - G3` root, following the eMudhra intermediate certificate compromise, or other roots that Mozilla has since distrusted. Components that use the built-in root store no longer trust certificate chains through the distrusted emSign intermediates, and TLS connections to servers whose certificate chains end at a removed root now fail validation.
+- Updated the Worker's bundled Mozilla root certificate store. The store no longer includes `emSign ECC Root CA - G3`, which was removed after the [eMudhra intermediate certificate compromise][61], or other roots that Mozilla has distrusted. As a result:
+    - Components that use the built-in root store no longer trust certificate chains through the distrusted emSign intermediates.
+    - TLS connections to servers whose certificate chains end at a removed root fail validation.
 - The Sample processor now limits the memory it uses to track sampling groups to 128 MiB. When it reaches the limit, the processor evicts the least recently used groups. This prevents unbounded memory growth when group-by values have high cardinality or are very large.
 - Error messages that the Worker reports to Datadog when a component crashes now go through the same sensitive data redaction rules as the Worker's logs.
 
