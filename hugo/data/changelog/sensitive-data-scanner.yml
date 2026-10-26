@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40963
+    operations:
+      - CreateScanningRule
+      - ListScanningGroups
+      - ListStandardPatterns
+      - UpdateScanningRule
+    title: Expose recommended Sensitive Data Scanner suppressions

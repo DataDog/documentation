@@ -1309,6 +1309,11 @@
       "group": "logs",
       "suffix": "_3138392594",
       "description": "Search logs returns \"OK\" response with pagination"
+    },
+    {
+      "group": "logs",
+      "suffix": "_2789021011",
+      "description": "Search logs with a page limit above 1000 returns \"OK\" response"
     }
   ],
   "SubmitLog": [

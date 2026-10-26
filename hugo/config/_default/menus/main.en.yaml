@@ -2909,6 +2909,11 @@ menu:
       parent: oncall
       identifier: oncall_integrations
       weight: 8
+    - name: ServiceNow
+      url: incident_response/on-call/integrations/servicenow/
+      parent: oncall_integrations
+      identifier: oncall_integrations_servicenow
+      weight: 801
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
@@ -5868,11 +5873,16 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
+    - name: Online Experiments
+      url: llm_observability/improve/online_experiments
+      parent: llm_obs_improve
+      identifier: llm_obs_online_experiments
+      weight: 504
     - name: Data Access Control
       url: llm_observability/improve/access_control
       parent: llm_obs_improve
       identifier: llm_obs_improve_access_control
-      weight: 504
+      weight: 505
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs

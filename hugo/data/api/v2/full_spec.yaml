@@ -77839,10 +77839,10 @@ components:
           type: string
         limit:
           default: 10
-          description: Maximum number of logs in the response.
+          description: Requested maximum number of logs in the response.
           example: 25
           format: int32
-          maximum: 1000
+          maximum: 5000
           type: integer
       type: object
     LogsListResponse:
@@ -77937,7 +77937,7 @@ components:
         query:
           default: "*"
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
       type: object
     LogsMetricGroupBy:
@@ -78010,7 +78010,7 @@ components:
       properties:
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
       type: object
     LogsMetricResponseGroupBy:
@@ -78099,7 +78099,7 @@ components:
         query:
           default: "*"
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         storage_tier:
           $ref: "#/components/schemas/LogsStorageTier"
@@ -85774,7 +85774,7 @@ components:
             Set to `true` to continue using the legacy search syntax while migrating filter queries. After migrating all queries to the new syntax, set to `false`.
             The legacy syntax is deprecated and will eventually be removed.
             Requires Observability Pipelines Worker 2.11 or later.
-            Only applies to `logs` pipelines. This field is ignored for `metrics` pipelines.
+            Only applies to `logs` pipelines. This field is ignored for `metrics` and `traces` pipelines.
             See [Upgrade Your Filter Queries to the New Search Syntax](https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/) for more information.
           type: boolean
       required:
@@ -85811,18 +85811,20 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogMetricsDestination"
-        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineDatadogTracesDestination"
     ObservabilityPipelineConfigPipelineType:
       default: logs
       description: The type of data being ingested. Defaults to `logs` if not specified.
-      enum: [logs, metrics]
+      enum: [logs, metrics, traces]
       example: logs
       type: string
       x-enum-varnames:
         - LOGS
         - METRICS
+        - TRACES
     ObservabilityPipelineConfigProcessorGroup:
       description: "A group of processors."
       example: {"enabled": true, "id": "my-processor-group", "include": "service:my-service", "inputs": ["datadog-agent-source"], "processors": [{"enabled": true, "fields": [{"name": "env", "value": "prod"}], "id": "add-fields-processor", "include": "*", "type": "add_fields"}, {"enabled": true, "id": "filter-processor", "include": "status:error", "type": "filter"}]}
@@ -85868,12 +85870,10 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineAddEnvVarsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddHostnameProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineDedupeProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineGenerateMetricsV2Processor"
         - $ref: "#/components/schemas/ObservabilityPipelineOcsfMapperProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineParseJSONProcessor"
@@ -85882,10 +85882,12 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineReduceProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameFieldsProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineSampleProcessor"
-        - $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineSplitArrayProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineGenerateMetricsV2Processor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSampleProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableProcessor"
@@ -85896,6 +85898,7 @@ components:
       description: "A data source for the pipeline."
       oneOf:
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogAgentSource"
+        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3Source"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentBitSource"
@@ -85912,7 +85915,6 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSumoLogicSource"
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
-        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
@@ -86002,7 +86004,7 @@ components:
       description: |-
         The `custom_processor` processor transforms events using [Vector Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with advanced filtering capabilities.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -86016,7 +86018,7 @@ components:
           type: string
         include:
           default: "*"
-          description: A Datadog search query used to determine which logs this processor targets. This field should always be set to `*` for the custom_processor processor.
+          description: A Datadog search query used to determine which events this processor targets. This field should always be set to `*` for the custom_processor processor.
           example: "*"
           type: string
         remaps:
@@ -86034,7 +86036,7 @@ components:
         - remaps
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation logic.
       properties:
@@ -86173,9 +86175,9 @@ components:
         - DATABRICKS_ZEROBUS
     ObservabilityPipelineDatadogAgentSource:
       description: |-
-        The `datadog_agent` source collects logs/metrics from the Datadog Agent.
+        The `datadog_agent` source collects logs, metrics, or traces from the Datadog Agent.
 
-        **Supported pipeline types:** logs, metrics
+        **Supported pipeline types:** logs, metrics, traces
       properties:
         address_key:
           description: Name of the environment variable or secret that holds the listen address for the Datadog Agent source.
@@ -86193,7 +86195,7 @@ components:
         - id
         - type
       type: object
-      x-pipeline-types: [logs, metrics]
+      x-pipeline-types: [logs, metrics, traces]
     ObservabilityPipelineDatadogAgentSourceType:
       default: datadog_agent
       description: The source type. The value should always be `datadog_agent`.
@@ -86370,6 +86372,42 @@ components:
       type: string
       x-enum-varnames:
         - DATADOG_TAGS
+    ObservabilityPipelineDatadogTracesDestination:
+      description: |-
+        The `datadog_traces` destination forwards traces to Datadog.
+
+        **Supported pipeline types:** traces
+      properties:
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        id:
+          description: The unique identifier for this component.
+          example: datadog-traces-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for this component.
+          example: ["trace-processor-group"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineDatadogTracesDestinationType"
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [traces]
+    ObservabilityPipelineDatadogTracesDestinationType:
+      default: datadog_traces
+      description: The destination type. The value should always be `datadog_traces`.
+      enum:
+        - datadog_traces
+      example: datadog_traces
+      type: string
+      x-enum-varnames:
+        - DATADOG_TRACES
     ObservabilityPipelineDecoding:
       description: The decoding format used to interpret incoming logs.
       enum:
@@ -86862,9 +86900,9 @@ components:
       type: object
     ObservabilityPipelineFilterProcessor:
       description: |-
-        The `filter` processor allows conditional processing of logs/metrics based on a Datadog search query. Logs/metrics that match the `include` query are passed through; others are discarded.
+        The `filter` processor allows conditional processing of logs, metrics, or traces based on a Datadog search query. Events that match the `include` query are passed through; others are discarded.
 
-        **Supported pipeline types:** logs, metrics
+        **Supported pipeline types:** logs, metrics, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -86877,7 +86915,7 @@ components:
           example: "filter-processor"
           type: string
         include:
-          description: A Datadog search query used to determine which logs/metrics should pass through the filter. Logs/metrics that match this query continue to downstream components; others are dropped.
+          description: A Datadog search query used to determine which events should pass through the filter. Events that match this query continue to downstream components; others are dropped.
           example: "service:my-service"
           type: string
         type:
@@ -86888,7 +86926,7 @@ components:
         - include
         - enabled
       type: object
-      x-pipeline-types: [logs, metrics]
+      x-pipeline-types: [logs, metrics, traces]
     ObservabilityPipelineFilterProcessorType:
       default: filter
       description: The processor type. The value should always be `filter`.
@@ -87021,12 +87059,12 @@ components:
         - GENERATE_DATADOG_METRICS
     ObservabilityPipelineGenerateMetricsV2Processor:
       description: |-
-        The `generate_metrics` processor creates custom metrics from logs.
-        Metrics can be counters, gauges, or distributions and optionally grouped by log fields.
+        The `generate_metrics` processor creates custom metrics from logs or traces.
+        Metrics can be counters, gauges, or distributions and optionally grouped by event fields.
 
-        There must be a destination whose `inputs` reference this processor with the `<processor-id>.metrics` suffix to route the generated metrics. All destination types normally supported for `metrics` pipelines are also supported as metrics destinations in `logs` pipelines.
+        There must be a destination whose `inputs` reference this processor with the `<processor-id>.metrics` suffix to route the generated metrics. All destination types normally supported for `metrics` pipelines are also supported as metrics destinations in `logs` and `traces` pipelines.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -87045,7 +87083,7 @@ components:
           example: generate-metrics-processor
           type: string
         include:
-          description: A Datadog search query used to determine which logs this processor targets.
+          description: A Datadog search query used to determine which events this processor targets.
           example: "service:my-service"
           type: string
         metrics:
@@ -87060,7 +87098,7 @@ components:
         - type
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineGenerateMetricsV2ProcessorType:
       default: generate_metrics
       description: The processor type. Always `generate_metrics`.
@@ -87072,18 +87110,18 @@ components:
         - GENERATE_METRICS
     ObservabilityPipelineGeneratedMetric:
       description: |-
-        Defines a log-based custom metric, including its name, type, filter, value computation strategy,
+        Defines a custom metric generated from logs or traces, including its name, type, filter, value computation strategy,
         and optional grouping fields.
       properties:
         group_by:
           description: Optional fields used to group the metric series.
           example: ["service", "env"]
           items:
-            description: A log field name used to group the metric series.
+            description: A field name used to group the metric series.
             type: string
           type: array
         include:
-          description: Datadog filter query to match logs for metric generation.
+          description: Datadog filter query to match events for metric generation.
           example: service:billing
           type: string
         metric_type:
@@ -87101,10 +87139,10 @@ components:
         - value
       type: object
     ObservabilityPipelineGeneratedMetricIncrementByField:
-      description: Strategy that increments a generated metric based on the value of a log field.
+      description: Strategy that increments a generated metric based on the value of an event field.
       properties:
         field:
-          description: Name of the log field containing the numeric value to increment the metric by.
+          description: Name of the field containing the numeric value to increment the metric by.
           example: "errors"
           type: string
         strategy:
@@ -88653,22 +88691,22 @@ components:
       type: string
       x-enum-varnames:
         - OPENSEARCH
-    ObservabilityPipelineOpentelemetryMetricsDestination:
+    ObservabilityPipelineOpentelemetryDestination:
       description: |-
-        The `opentelemetry` destination forwards metrics using the OpenTelemetry Protocol (OTLP) over HTTP.
+        The `opentelemetry` destination forwards metrics or traces using the OpenTelemetry Protocol (OTLP) over HTTP.
 
-        **Supported pipeline types:** metrics
+        **Supported pipeline types:** metrics, traces
       properties:
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         http_client_uri_key:
           default: DESTINATION_OTEL_HTTP_CLIENT_URI
-          description: Environment variable name containing the URI of the OTLP HTTP endpoint to send metrics to.
+          description: Environment variable name containing the URI of the OTLP HTTP endpoint to send metrics or traces to.
           example: DESTINATION_OTEL_HTTP_CLIENT_URI
           type: string
         id:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
-          example: opentelemetry-metrics-destination
+          example: opentelemetry-destination
           type: string
         inputs:
           description: A list of component IDs whose output is used as the `input` for this component.
@@ -88680,14 +88718,14 @@ components:
         tls:
           $ref: "#/components/schemas/ObservabilityPipelineTls"
         type:
-          $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestinationType"
+          $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryDestinationType"
       required:
         - id
         - type
         - inputs
       type: object
-      x-pipeline-types: [metrics]
-    ObservabilityPipelineOpentelemetryMetricsDestinationType:
+      x-pipeline-types: [metrics, traces]
+    ObservabilityPipelineOpentelemetryDestinationType:
       default: opentelemetry
       description: The destination type. Always `opentelemetry`.
       enum:
@@ -88700,7 +88738,7 @@ components:
       description: |-
         The `opentelemetry` source receives telemetry data using the OpenTelemetry Protocol (OTLP) over gRPC and HTTP.
 
-        **Supported pipeline types:** logs, metrics
+        **Supported pipeline types:** logs, metrics, traces
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address for receiving OTLP data. Must be a valid environment variable name (alphanumeric characters and underscores only).
@@ -88722,7 +88760,7 @@ components:
         - id
         - type
       type: object
-      x-pipeline-types: [logs, metrics]
+      x-pipeline-types: [logs, metrics, traces]
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -89630,9 +89668,9 @@ components:
         - RSYSLOG
     ObservabilityPipelineSampleProcessor:
       description: |-
-        The `sample` processor allows probabilistic sampling of logs at a fixed rate.
+        The `sample` processor allows probabilistic sampling of logs or traces at a fixed rate.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -89644,7 +89682,7 @@ components:
           description: Optional list of fields to group events by. Each group is sampled independently.
           example: ["service", "host"]
           items:
-            description: A log field name used to group events for independent sampling.
+            description: A field name used to group events for independent sampling.
             type: string
           minItems: 1
           type: array
@@ -89653,11 +89691,11 @@ components:
           example: "sample-processor"
           type: string
         include:
-          description: A Datadog search query used to determine which logs this processor targets.
+          description: A Datadog search query used to determine which events this processor targets.
           example: "service:my-service"
           type: string
         percentage:
-          description: The percentage of logs to sample.
+          description: The percentage of events to sample.
           example: 10.0
           format: double
           type: number
@@ -89670,7 +89708,7 @@ components:
         - percentage
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineSampleProcessorType:
       default: sample
       description: The processor type. The value should always be `sample`.
@@ -89681,9 +89719,9 @@ components:
         - SAMPLE
     ObservabilityPipelineSensitiveDataScannerProcessor:
       description: |-
-        The `sensitive_data_scanner` processor detects and optionally redacts sensitive data in log events.
+        The `sensitive_data_scanner` processor detects and optionally redacts sensitive data in log or trace events.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, traces
       properties:
         display_name:
           $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
@@ -89696,7 +89734,7 @@ components:
           example: "sensitive-scanner"
           type: string
         include:
-          description: A Datadog search query used to determine which logs this processor targets.
+          description: A Datadog search query used to determine which events this processor targets.
           example: "source:prod"
           type: string
         rules:
@@ -89713,7 +89751,7 @@ components:
         - rules
         - enabled
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, traces]
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
       oneOf:
@@ -92528,12 +92566,16 @@ components:
         - logs
         - metrics
         - audit
+        - ci_pipelines
+        - ci_tests
       example: "logs"
       type: string
       x-enum-varnames:
         - LOGS
         - METRICS
         - AUDIT
+        - CI_PIPELINES
+        - CI_TESTS
     OrgConnectionUpdate:
       description: Org connection update data.
       properties:
@@ -94009,6 +94051,8 @@ components:
           $ref: "#/components/schemas/OutcomesResponseIncluded"
         links:
           $ref: "#/components/schemas/OutcomesResponseLinks"
+        meta:
+          $ref: "#/components/schemas/PaginatedResponseMeta"
       type: object
     OutcomesResponseData:
       description: List of rule outcomes.
@@ -94056,11 +94100,27 @@ components:
           type: string
       type: object
     OutcomesResponseLinks:
-      description: Links attributes.
+      description: Pagination links for rule outcomes.
       properties:
+        first:
+          description: Link for the first set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=0"
+          type: string
+        last:
+          description: Link for the last set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=200"
+          type: string
         next:
           description: |-
             Link for the next set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=200"
+          type: string
+        previous:
+          description: Link for the previous set of results.
+          example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=0"
+          type: string
+        self:
+          description: Link for the current set of results.
           example: "/api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100"
           type: string
       type: object
@@ -97659,7 +97719,9 @@ components:
       x-enum-varnames:
         - PROCESS
     ProcessScalarQuery:
-      description: A query for host-level process metrics such as CPU and memory usage.
+      description: |-
+        Per-process metrics from Live Processes. Queries without `aggregator` fail. To scope to one process,
+        set `tag_filters` to its `identifying_tags` from `GET /api/v2/processes`.
       properties:
         aggregator:
           $ref: "#/components/schemas/MetricsAggregator"
@@ -97671,11 +97733,15 @@ components:
           description: Whether CPU metrics should be normalized by core count.
           type: boolean
         limit:
-          description: Maximum number of results to return.
+          description: |-
+            Maximum number of processes or groups to return. Large values can fail with an `Unprocessable
+            Content` error. If so, retry with a smaller limit.
           format: int64
           type: integer
         metric:
-          description: The process metric to query.
+          description: |-
+            The process metric to query, such as `process.stat.cpu.total_pct`, `process.stat.memory.rss`, or
+            `process.stat.memory.vms`.
           example: process.stat.cpu.total_pct
           type: string
         name:
@@ -97685,7 +97751,9 @@ components:
         sort:
           $ref: "#/components/schemas/QuerySortOrder"
         tag_filters:
-          description: Tag filters to narrow down processes.
+          description: |-
+            Tags to narrow down processes. To scope to one process, use its `identifying_tags` from
+            `GET /api/v2/processes`, for example `host:web-01` and `pid:1234`.
           items:
             description: A tag filter value.
             example: "env:prod"
@@ -97797,7 +97865,9 @@ components:
       x-enum-varnames:
         - PROCESS
     ProcessTimeseriesQuery:
-      description: A query for host-level process metrics such as CPU and memory usage.
+      description: |-
+        Per-process metrics from Live Processes over time, such as CPU and memory usage. To scope to one
+        process, set `tag_filters` to its `identifying_tags` from `GET /api/v2/processes`.
       properties:
         cross_org_uuids:
           $ref: "#/components/schemas/CrossOrgUuids"
@@ -97807,11 +97877,15 @@ components:
           description: Whether CPU metrics should be normalized by core count.
           type: boolean
         limit:
-          description: Maximum number of results to return.
+          description: |-
+            Maximum number of processes or groups to return. Large values can fail with an `Unprocessable
+            Content` error. If so, retry with a smaller limit.
           format: int64
           type: integer
         metric:
-          description: The process metric to query.
+          description: |-
+            The process metric to query, such as `process.stat.cpu.total_pct`, `process.stat.memory.rss`, or
+            `process.stat.memory.vms`.
           example: process.stat.cpu.total_pct
           type: string
         name:
@@ -97821,7 +97895,9 @@ components:
         sort:
           $ref: "#/components/schemas/QuerySortOrder"
         tag_filters:
-          description: Tag filters to narrow down processes.
+          description: |-
+            Tags to narrow down processes. To scope to one process, use its `identifying_tags` from
+            `GET /api/v2/processes`, for example `host:web-01` and `pid:1234`.
           items:
             description: A tag filter value.
             example: "env:prod"
@@ -106184,6 +106260,8 @@ components:
         id:
           description: The `RoleTemplateData` `id`.
           type: string
+        relationships:
+          $ref: "#/components/schemas/RoleResponseRelationships"
         type:
           $ref: "#/components/schemas/RoleTemplateDataType"
       required:
@@ -106239,6 +106317,11 @@ components:
             description: Name of a managed role to inherit permissions from.
             type: string
           type: array
+        team_count:
+          description: Number of teams with that role.
+          format: int64
+          readOnly: true
+          type: integer
         user_count:
           description: The user count.
           format: int32
@@ -118725,6 +118808,19 @@ components:
           type: string
         dataSource:
           $ref: "#/components/schemas/SecurityMonitoringStandardDataSource"
+        datasetIds:
+          description: IDs of the datasets queried by the rule. Only used when `queryLanguage` is `sql`.
+          items:
+            description: Dataset ID.
+            type: string
+          type: array
+        datasetVersions:
+          additionalProperties:
+            description: Dataset version.
+            format: int64
+            type: integer
+          description: Version of each dataset used by the rule, keyed by dataset ID. Only used when `queryLanguage` is `sql`.
+          type: object
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -118767,6 +118863,10 @@ components:
         query:
           description: Query to run on logs.
           example: a > 3
+          type: string
+        queryLanguage:
+          description: Language of the query. Use `sql` for SQL-based rules over datasets. Defaults to `event_query`.
+          example: sql
           type: string
       type: object
     SecurityMonitoringStandardRuleResponse:
@@ -120204,6 +120304,8 @@ components:
           maximum: 5
           minimum: 1
           type: integer
+        suppressions:
+          $ref: "#/components/schemas/SensitiveDataScannerSuppressions"
         tags:
           description: List of tags.
           items:
@@ -120250,7 +120352,9 @@ components:
       type: object
     SensitiveDataScannerSuppressions:
       description: |-
-        Object describing the suppressions for a rule. There are three types of suppressions, `starts_with`, `ends_with`, and `exact_match`.
+        Object describing suppressions for a rule, or the recommended suppression lists published by a standard pattern.
+        There are three types of suppressions, `starts_with`, `ends_with`, and `exact_match`.
+        Rules based on the Datadog library can use recommended or custom suppressions. Custom rules can only use custom suppressions.
         Suppressed matches are not obfuscated, counted in metrics, or displayed in the Findings page.
       properties:
         ends_with:
@@ -120274,6 +120378,11 @@ components:
             description: A string prefix; matches starting with this value are suppressed.
             type: string
           type: array
+        use_recommended_suppressions:
+          description: |-
+            Should the rule use the underlying standard pattern suppression configuration. If set to `true`, the rule must be tied
+            to a standard pattern. If set to `false`, the specified suppressions are applied.
+          type: boolean
       type: object
     SensitiveDataScannerTextReplacement:
       description: Object describing how the scanned event will be replaced.
@@ -131941,15 +132050,37 @@ components:
           example: user@datadoghq.com
           readOnly: true
           type: string
+        estimated_change_in_volume:
+          description: |-
+            Estimated change in indexed cardinality or points if the exemption is removed and the matching tag indexing
+            rule applies to the metric. A negative value indicates a reduction in indexed volume, a positive value
+            indicates an increase, and zero indicates no change. A `null` value indicates that the estimate is unavailable.
+          example: 45
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
         kind:
           description: >-
             Discriminates between an explicit exemption (`exemption`) and a pre-existing legacy tag configuration acting as an implicit exclusion (`legacy_tag_configuration`).
           example: exemption
           type: string
+        missing_indexed_tags:
+          description: |-
+            Tag keys used to query this metric in monitors, dashboards, notebooks, and SLOs that the matching rule would
+            remove or not include if the exemption is removed.
+          example:
+            - service
+          items:
+            type: string
+          readOnly: true
+          type: array
         reason:
           description: The reason the metric is exempt from tag indexing rules.
           example: This metric has a pre-existing tag configuration.
           type: string
+        volume_status:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionVolumeStatus"
       type: object
     TagIndexingRuleExemptionCreateAttributes:
       description: Attributes for creating a tag indexing rule exemption.
@@ -132008,6 +132139,22 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionVolumeStatus:
+      description: |-
+        Indicates whether `estimated_change_in_volume` is available and, if not, why. `ok` indicates a fresh estimate.
+        `unindexed_tags` indicates that the matching rule uses tags that are not indexed for the metric.
+        `unavailable` indicates that the estimate is stale, was not computed, or could not be retrieved.
+      enum:
+        - ok
+        - unindexed_tags
+        - unavailable
+      example: unavailable
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - OK
+        - UNINDEXED_TAGS
+        - UNAVAILABLE
     TagIndexingRuleMetricMatch:
       description: Criteria for matching metrics based on query state.
       properties:
@@ -133135,6 +133282,360 @@ components:
           $ref: "#/components/schemas/TeamsHierarchyLinksResponseLinks"
         meta:
           $ref: "#/components/schemas/TeamsHierarchyLinksResponseMeta"
+      type: object
+    TeamHierarchyMember:
+      description: A user relationship to the requested team.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamHierarchyMemberAttributes"
+        id:
+          description: Relationship identifier containing the team UUID and user UUID.
+          example: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+          type: string
+        relationships:
+          $ref: "#/components/schemas/TeamHierarchyMemberRelationships"
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    TeamHierarchyMemberAttributes:
+      description: Membership attributes relative to the requested team.
+      properties:
+        direct_role:
+          description: "Role on the requested team: admin or member. Null for inherited members."
+          example: member
+          nullable: true
+          type: string
+        is_direct:
+          description: Whether the user belongs directly to the requested team.
+          example: true
+          type: boolean
+        provisioned_by:
+          description: Membership provisioner. Null for inherited members.
+          example: manual
+          nullable: true
+          type: string
+        provisioned_by_id:
+          description: Identifier supplied by the membership provisioner. Null when unavailable or for inherited members.
+          example: 00000000-0000-0000-0000-000000000003
+          nullable: true
+          type: string
+      required:
+        - is_direct
+        - direct_role
+        - provisioned_by
+        - provisioned_by_id
+      type: object
+    TeamHierarchyMemberIncluded:
+      description: An included user or the requested team, distinguished by resource type.
+      oneOf:
+        - $ref: "#/components/schemas/TeamHierarchyMemberUser"
+        - $ref: "#/components/schemas/TeamHierarchyMemberTeam"
+    TeamHierarchyMemberRelationships:
+      description: User and requested team linkage.
+      properties:
+        team:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamRelationship"
+        user:
+          $ref: "#/components/schemas/TeamHierarchyMemberUserRelationship"
+      required:
+        - user
+        - team
+      type: object
+    TeamHierarchyMemberTeam:
+      description: The requested team, included at most once. Descendant teams are not included.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamAttributes"
+        id:
+          description: UUID of the requested team.
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberTeamAttributes:
+      description: Available attributes of the requested team.
+      properties:
+        handle:
+          description: Handle of the team.
+          example: platform
+          type: string
+        name:
+          description: Name of the team.
+          example: Platform
+          type: string
+      type: object
+    TeamHierarchyMemberTeamData:
+      description: Team resource identifier.
+      properties:
+        id:
+          description: UUID of the team.
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberTeamRelationship:
+      description: Linkage to the requested team.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamData"
+      required:
+        - data
+      type: object
+    TeamHierarchyMemberTeamType:
+      default: teams
+      description: Requested team resource type.
+      enum:
+        - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+        - TEAMS
+    TeamHierarchyMemberType:
+      default: user_team_relationship
+      description: Team hierarchy membership resource type.
+      enum:
+        - user_team_relationship
+      example: user_team_relationship
+      type: string
+      x-enum-varnames:
+        - USER_TEAM_RELATIONSHIP
+    TeamHierarchyMemberUser:
+      description: A user included in the hierarchy members response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UserAttributes"
+        id:
+          description: UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/UsersType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamHierarchyMemberUserData:
+      description: User resource identifier.
+      properties:
+        id:
+          description: UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/UsersType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberUserRelationship:
+      description: Linkage to the user.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamHierarchyMemberUserData"
+      required:
+        - data
+      type: object
+    TeamHierarchyMembersNumberPage:
+      description: Pagination metadata using number and size.
+      properties:
+        first_number:
+          description: First page number.
+          example: 0
+          format: int64
+          type: integer
+        last_number:
+          description: Last page number. Null when unavailable.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        next_number:
+          description: Next page number. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: Current zero-based page number.
+          example: 0
+          format: int64
+          type: integer
+        prev_number:
+          description: Previous page number. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: Maximum number of members per page.
+          example: 100
+          format: int64
+          type: integer
+        total:
+          description: Total number of members matching the filters.
+          example: 2
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMembersNumberPageType"
+      required:
+        - type
+        - number
+        - size
+        - total
+        - first_number
+        - prev_number
+        - next_number
+        - last_number
+      type: object
+    TeamHierarchyMembersNumberPageType:
+      default: number_size
+      description: Pagination mode.
+      enum:
+        - number_size
+      example: number_size
+      type: string
+      x-enum-varnames:
+        - NUMBER_SIZE
+    TeamHierarchyMembersOffsetPage:
+      description: Pagination metadata using offset and limit.
+      properties:
+        first_offset:
+          description: First offset.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Last offset. Null when unavailable.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Maximum number of members per page.
+          example: 100
+          format: int64
+          type: integer
+        next_offset:
+          description: Next offset. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Current offset.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Previous offset. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total number of members matching the filters.
+          example: 2
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMembersOffsetPageType"
+      required:
+        - type
+        - offset
+        - limit
+        - total
+        - first_offset
+        - prev_offset
+        - next_offset
+        - last_offset
+      type: object
+    TeamHierarchyMembersOffsetPageType:
+      default: offset_limit
+      description: Pagination mode.
+      enum:
+        - offset_limit
+      example: offset_limit
+      type: string
+      x-enum-varnames:
+        - OFFSET_LIMIT
+    TeamHierarchyMembersPage:
+      description: Pagination metadata for the selected pagination mode.
+      oneOf:
+        - $ref: "#/components/schemas/TeamHierarchyMembersOffsetPage"
+        - $ref: "#/components/schemas/TeamHierarchyMembersNumberPage"
+    TeamHierarchyMembersResponse:
+      description: Direct and inherited members of the requested team.
+      properties:
+        data:
+          description: >-
+            Membership relationships for users who belong to the requested team or inherit membership through its descendant teams. Each user appears once, even if they belong to multiple teams in the hierarchy. Each relationship identifies the user and requested team, and indicates whether the user is a direct member of the requested team.
+          items:
+            $ref: "#/components/schemas/TeamHierarchyMember"
+          type: array
+        included:
+          description: Requested users and the team. May be absent when the result is empty, even if requested.
+          items:
+            $ref: "#/components/schemas/TeamHierarchyMemberIncluded"
+          type: array
+        links:
+          $ref: "#/components/schemas/TeamHierarchyMembersResponseLinks"
+        meta:
+          $ref: "#/components/schemas/TeamHierarchyMembersResponseMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    TeamHierarchyMembersResponseLinks:
+      description: Page navigation links. Unavailable links are omitted.
+      properties:
+        first:
+          description: First page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        last:
+          description: Last page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        next:
+          description: Next page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        prev:
+          description: Previous page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        self:
+          description: Current page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+      type: object
+    TeamHierarchyMembersResponseMeta:
+      description: Pagination metadata for the filtered members.
+      properties:
+        page:
+          $ref: "#/components/schemas/TeamHierarchyMembersPage"
+      required:
+        - page
       type: object
     TeamIncluded:
       description: Included resources related to the team
@@ -199267,7 +199768,7 @@ paths:
                     indexes:
                       - main
                       - web
-                    query: service:web* AND @http.status_code:[200 TO 299]
+                    query: service:web-api AND @http.status_code:[200 TO 299]
                     storage_tier: indexes
                     to: now
                   group_by:
@@ -200378,7 +200879,7 @@ paths:
                             include_percentiles: true
                             path: "@duration"
                           filter:
-                            query: "service:web* AND @http.status_code:[200 TO 299]"
+                            query: "service:web-api AND @http.status_code:[200 TO 299]"
                           group_by:
                             - path: "@http.status_code"
                               tag_name: status_code
@@ -200417,7 +200918,7 @@ paths:
                         include_percentiles: true
                         path: "@duration"
                       filter:
-                        query: service:web* AND @http.status_code:[200 TO 299]
+                        query: service:web-api AND @http.status_code:[200 TO 299]
                       group_by:
                         - path: "@http.status_code"
                           tag_name: status_code
@@ -200441,7 +200942,7 @@ paths:
                           include_percentiles: true
                           path: "@duration"
                         filter:
-                          query: "service:web* AND @http.status_code:[200 TO 299]"
+                          query: "service:web-api AND @http.status_code:[200 TO 299]"
                         group_by:
                           - path: "@http.status_code"
                             tag_name: status_code
@@ -200509,7 +201010,7 @@ paths:
                           include_percentiles: true
                           path: "@duration"
                         filter:
-                          query: "service:web* AND @http.status_code:[200 TO 299]"
+                          query: "service:web-api AND @http.status_code:[200 TO 299]"
                         group_by:
                           - path: "@http.status_code"
                             tag_name: status_code
@@ -200550,7 +201051,7 @@ paths:
                       compute:
                         include_percentiles: true
                       filter:
-                        query: service:web* AND @http.status_code:[200 TO 299]
+                        query: service:web-api AND @http.status_code:[200 TO 299]
                       group_by:
                         - path: "@http.status_code"
                           tag_name: status_code
@@ -200573,7 +201074,7 @@ paths:
                           include_percentiles: true
                           path: "@duration"
                         filter:
-                          query: "service:web* AND @http.status_code:[200 TO 299]"
+                          query: "service:web-api AND @http.status_code:[200 TO 299]"
                         group_by:
                           - path: "@http.status_code"
                             tag_name: status_code
@@ -201277,7 +201778,7 @@ paths:
           schema:
             default: 10
             format: int32
-            maximum: 1000
+            maximum: 5000
             type: integer
       responses:
         "200":
@@ -201345,7 +201846,7 @@ paths:
                     indexes:
                       - main
                       - web
-                    query: service:web* AND @http.status_code:[200 TO 299]
+                    query: service:web-api AND @http.status_code:[200 TO 299]
                     storage_tier: indexes
                     to: now
                   options:
@@ -203310,8 +203811,12 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume: 45
                         kind: exemption
+                        missing_indexed_tags:
+                          - service
                         reason: This metric has a pre-existing tag configuration.
+                        volume_status: ok
                       id: dd.test.metric
                       type: tag_indexing_rule_exemptions
               schema:
@@ -203388,8 +203893,11 @@ paths:
                       attributes:
                         created_at: "2024-01-15T12:00:00.000Z"
                         created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume:
                         kind: exemption
+                        missing_indexed_tags: []
                         reason: This metric has a pre-existing tag configuration.
+                        volume_status: unavailable
                       id: dd.test.metric
                       type: tag_indexing_rule_exemptions
               schema:
@@ -213320,16 +213828,28 @@ paths:
           - dashboards_write
   /api/v2/processes:
     get:
-      description: Get all processes for your organization.
+      description: |-
+        Get processes collected by Live Processes for your organization. One request covers a window of
+        at most 1 hour that starts within the past 36 hours. To cover a longer period, make one request
+        per hour. Older data is not available from this endpoint.
+
+        When a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source
+        query to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that
+        one process. If absent, don't substitute an empty filter, which would query all processes.
       operationId: ListProcesses
       parameters:
-        - description: String to search processes by.
+        - description: |-
+            Free-text search over process fields such as the executable and user. When it contains several
+            words, a process must match all of them. Use `tags` for exact values such as host.
           in: query
           name: search
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to filter processes by.
+        - description: |-
+            Comma-separated `key:value` tags. A process must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
+            request per host.
           example: account:prod,user:admin
           in: query
           name: tags
@@ -213337,9 +213857,9 @@ paths:
           schema:
             type: string
         - description: |-
-            Unix timestamp (number of seconds since epoch) of the start of the query window.
-            If not provided, the start of the query window will be 15 minutes before the `to` timestamp. If neither
-            `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+            Start of the query window, in Unix seconds. Must be within the past 36 hours and at most 1 hour
+            before `to`. If not provided, the start of the query window is 15 minutes before the `to` timestamp.
+            If neither `from` nor `to` is provided, the query window is `[now - 15m, now]`.
           in: query
           name: from
           required: false
@@ -213347,9 +213867,9 @@ paths:
             format: int64
             type: integer
         - description: |-
-            Unix timestamp (number of seconds since epoch) of the end of the query window.
-            If not provided, the end of the query window will be 15 minutes after the `from` timestamp. If neither
-            `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+            End of the query window, in Unix seconds. Must be at most 1 hour after `from`. If not provided, the
+            end of the query window is 15 minutes after the `from` timestamp. If neither `from` nor `to` is
+            provided, the query window is `[now - 15m, now]`.
           in: query
           name: to
           required: false
@@ -218928,8 +219448,14 @@ paths:
                   value:
                     data:
                       - attributes:
+                          description: Role template with permissions for standard access.
                           name: Datadog Standard Role
-                        id: 00000000-0000-0000-0000-000000000012
+                        id: "2"
+                        relationships:
+                          permissions:
+                            data:
+                              - id: 984d2ee2-dbb1-11e8-a1b5-1b33e7f4e7a0
+                                type: permissions
                         type: roles
               schema:
                 $ref: "#/components/schemas/RoleTemplateArray"
@@ -219030,6 +219556,11 @@ paths:
         [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
         such as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from
         the request. To exclude them, set `default_permissions_opt_out` to `true`.
+
+        Omitting the `permissions` relationship from the request leaves the role's existing permissions
+        unchanged. Sending `"permissions": {"data": []}` removes all permissions except restricted default
+        permissions, which remain unless `default_permissions_opt_out` is `true`. Some restricted permissions
+        can only be excluded after Minimal Access Roles is enabled for the organization.
       operationId: UpdateRole
       parameters:
         - $ref: "#/components/parameters/RoleID"
@@ -219057,6 +219588,7 @@ paths:
                     data:
                       attributes:
                         name: developers
+                        team_count: 0
                       id: 00000000-0000-0000-0000-000000000004
                       type: roles
               schema:
@@ -250987,6 +251519,269 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/team/{team_id}/members:
+    get:
+      description: |-
+        List the direct and inherited members of a team, deduplicated by user.
+        Members of descendant teams are included unless `filter[is_direct_only]` is true.
+        Datadog support users are always excluded.
+
+        Use `page[number]` and `page[size]` to paginate through the results.
+        Invalid query parameters return a JSON:API error with status 400.
+        Invalid or unknown team UUIDs return status 404.
+      operationId: ListTeamHierarchyMembers
+      parameters:
+        - description: UUID of the requested root team.
+          in: path
+          name: team_id
+          required: true
+          schema:
+            example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+            type: string
+        - description: Return only direct members. By default, members inherited from descendant teams are also returned.
+          in: query
+          name: filter[is_direct_only]
+          required: false
+          schema:
+            default: false
+            example: false
+            type: boolean
+        - description: Include service accounts. Datadog support users are always excluded.
+          in: query
+          name: filter[include_service_accounts]
+          required: false
+          schema:
+            default: true
+            example: true
+            type: boolean
+        - description: Filter by a case-insensitive substring of the user name, handle, or email.
+          in: query
+          name: filter[keyword]
+          required: false
+          schema:
+            example: alice
+            type: string
+        - description: "Comma-separated resources to include: `user` and `team`. The included team is the requested team. Whitespace is trimmed, and duplicate or empty entries are ignored."
+          in: query
+          name: include
+          required: false
+          schema:
+            example: user,team
+            pattern: ^\s*((user|team)\s*)?(,\s*((user|team)\s*)?)*$
+            type: string
+        - description: "Comma-separated sort fields: `name`, `handle`, `is_direct`, and `provisioned_by`. Fields are applied in order, each optionally prefixed with `-` for descending order. By default, team admins come first, followed by other direct members, then inherited members, sorted by name within each group."
+          in: query
+          name: sort
+          required: false
+          schema:
+            example: is_direct,-name
+            type: string
+        - description: Zero-based page number. Negative values become 0. Defaults to 0.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Requested number of members per page. Defaults to and maxes out at 100.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            example: 100
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Direct and inherited members with number pagination
+                  value:
+                    data:
+                      - attributes:
+                          direct_role: admin
+                          is_direct: true
+                          provisioned_by: manual
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        type: user_team_relationship
+                      - attributes:
+                          direct_role:
+                          is_direct: false
+                          provisioned_by:
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000002
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: users
+                        type: user_team_relationship
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 2
+                        type: number_size
+                empty:
+                  summary: No matching members, with included resources omitted
+                  value:
+                    data: []
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 0
+                        type: number_size
+                included_resources:
+                  summary: Users and the team with number pagination
+                  value:
+                    data:
+                      - attributes:
+                          direct_role: admin
+                          is_direct: true
+                          provisioned_by: manual
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        type: user_team_relationship
+                      - attributes:
+                          direct_role:
+                          is_direct: false
+                          provisioned_by:
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000002
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: users
+                        type: user_team_relationship
+                    included:
+                      - attributes:
+                          email: alice@example.com
+                          handle: alice@example.com
+                          name: Alice
+                          title:
+                        id: 00000000-0000-0000-0000-000000000001
+                        type: users
+                      - attributes:
+                          email: bob@example.com
+                          handle: bob@example.com
+                          name:
+                          title:
+                        id: 00000000-0000-0000-0000-000000000002
+                        type: users
+                      - attributes:
+                          handle: platform
+                          name: Platform
+                        id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                        type: teams
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 2
+                        type: number_size
+              schema:
+                $ref: "#/components/schemas/TeamHierarchyMembersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - teams_read
+      summary: Get team hierarchy members
+      tags:
+        - Teams
+      x-menu-order: 35
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+          - teams_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
