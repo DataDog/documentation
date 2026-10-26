@@ -92,6 +92,7 @@ Insights are grouped by product area on the [Products page][2].
 | Hosts | Hosts running a Datadog Agent with APM tracing enabled and sending application traces to Datadog. |
 | Indexed spans | Spans indexed and retained beyond the live 15-minute search window, based on your trace retention filters. |
 | Ingested spans | Total spans ingested by Datadog APM from all instrumented services before any retention filters are applied. |
+| Instrumented services | Services that are actively instrumented with APM and sending traces to Datadog. |
 
 ### Dashboards
 
