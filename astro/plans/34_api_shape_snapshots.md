@@ -99,7 +99,24 @@ The test always passes. It prints one `console.warn` listing each gap, with up t
 
 ### 6. Trim the whole-page snapshots
 
-When the shape snapshots are in place, reduce `api-html-snapshots` to the pages that guard page structure: one category landing, one multi-version operation, the empty category and the changelog. Drop the large operation pages whose content the shape cases now cover. Keep the plaintext twins in step.
+When the shape snapshots are in place, reduce `api-html-snapshots` to the pages that guard page structure: the multi-version operation (`aws-integration`), the empty category, the changelog, and two or three category landings. Drop the large operation pages whose content the shape cases now cover. Keep the plaintext twins in step.
+
+Category landings stay because the shape cases cover operation pages only. The landings, and `ApiEndpointSummary`, which renders only on them, have no other page-level guard.
+
+The `getOperationView` JSON snapshots in `src/lib/api/__snapshots__/` also hold SDK and request-file data that the trimmed cases don't have. Remove them only together with the operation pages they mirror, and only after you've checked that the remaining tests cover that data. Keep the category view snapshots.
+
+### 7. Prune redundant tests
+
+After every class has a case, delete the existing tests that a fragment snapshot now covers. A survey of the API test files estimated about 260 tests and 3,900 lines, mostly in `refResolver`, `operationBuilder`, `curlBuilder`, and the HTML and plaintext tests for `ApiSchemaTable`, `ApiEndpoint`, `ApiResponse` and `ApiRequestBodyTabs`.
+
+Rules:
+
+- **Delete a test only when the shape it asserts maps to a class that has a case,** and that case's fragment would visibly change if the asserted behavior broke. For each batch, list the deleted tests and the class that covers each in the compaction-point status note.
+- **Keep tests for shapes that don't occur in the live spec.** No case will ever cover them. Known examples: a required header with no example, query-parameter API key auth, AuthZ combined with other schemes, required exploded bracketed arrays, `additionalProperties: true`, responses with several content types, and a required `Content-Encoding` header. Run the detector to confirm before deleting anything that looks unusual.
+- **Keep logic tests a snapshot can't localize:** `$ref` resolution and circular guards, depth caps, discriminant-threshold rules, the readOnly and writeOnly strip functions, request-file logic, shell escaping, `x-displayName`, ordering and tie-break rules, null returns and thrown errors.
+- **Keep SDK-driven tests** (`ApiCodeExample` multi-language tabs, accordion, run instructions), because the trimmed cases have no SDK files.
+- **Keep browser tests.** They cover interaction, not shapes.
+- **Collapse near-duplicates that survive** into `test.each`, for example the 14 strip-function tests in `refResolver`.
 
 ## Implementation steps
 
@@ -130,8 +147,14 @@ Write each test first and confirm it fails before implementing. Snapshot steps a
 > **Compaction point 4:** every class has a case. **Stop here and ask the user to compact.**
 
 11. [ ] **Coverage check.** Unit test the gap-finding function first: an unmapped shape and a caseless class are reported, and a fully mapped input reports nothing. Then add `tests/integration/specShapes.full-spec.test.ts` and confirm it passes, printing a warning only if there are real gaps.
-12. [ ] **Trim the whole-page snapshots.** Reduce `api-html-snapshots` and the plaintext twins as described in design step 6.
+12. [ ] **Trim the whole-page snapshots.** Reduce `api-html-snapshots` and the plaintext twins as described in design step 6, keeping two or three category landings.
 
-> **Compaction point 5:** the feature is done. Only the regression run is left. **Stop here and ask the user to compact.**
+> **Compaction point 5:** the new coverage is complete and the whole-page snapshots are trimmed. Only pruning and the regression run are left. **Stop here and ask the user to compact.**
 
-13. [ ] **Regression run.** Run `yarn test-ai` once. Then recommend that the user runs the prod build. Don't run it.
+13. [ ] **Prune `src/lib/api` tests.** Apply the design step 7 rules to `refResolver`, `operationBuilder`, `curlBuilder`, `schemaExampleBuilder`, `regionResolver` and `multipartFormExamples`. Run each file's tests after pruning it.
+14. [ ] **Prune component tests.** Apply the same rules to the HTML and plaintext unit tests for `ApiSchemaTable`, `ApiEndpoint`, `ApiResponse`, `ApiRequestBodyTabs` and `ApiCodeExample`. Run each component's tests after pruning it.
+15. [ ] **Collapse survivors.** Merge the remaining near-duplicates into `test.each`. Record the final deleted test and line counts in this plan.
+
+> **Compaction point 6:** pruning is done. Only the regression run is left. **Stop here and ask the user to compact.**
+
+16. [ ] **Regression run.** Run `yarn test-ai` once. Then recommend that the user runs the prod build. Don't run it.
