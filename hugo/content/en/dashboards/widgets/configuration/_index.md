@@ -166,7 +166,7 @@ Click on the export icon of any dashboard graph to open an options menu:
 |-----------------|------------------------------------|
 | Download as PNG | Download the widget in PNG format. |
 | Download as SVG | Download the widget in SVG format. |
-| Download as CSV | Download the widget in CSV format. |
+| Download as CSV | Download the widget in CSV format. See [Export widget data to CSV](#export-widget-data-to-csv). |
 
 ### Edit
 
@@ -186,6 +186,25 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 | Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page. |
 | Delete                            | Delete the graph.                                                                                                          |
 
+## Export widget data to CSV
+
+To download the data behind a single widget as a CSV file, click the export icon on the widget and select **Download as CSV**. You can also download CSV data from the widget's [full screen](#full-screen) view.
+
+CSV export is available for the following widget types:
+
+* Bar Chart
+* List
+* Pie Chart
+* Scatter Plot
+* Table
+* Timeseries
+* Top List
+* Treemap
+
+**Note**: CSV export works on one widget at a time. You can't export the data from all widgets on a dashboard in a single file.
+
+If **Download as CSV** doesn't appear for a supported widget, CSV export might be disabled for your organization. Datadog Support can disable CSV export for all users in an organization. This restriction applies to dashboard widgets and to CSV export in other Datadog products. CSV export is enabled by default, and you can't change this restriction from the Datadog UI. To disable or re-enable CSV export for your organization, contact [Datadog Support][12].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -200,3 +219,4 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [8]: /dashboards/guide/custom_time_frames/
 [10]: /dashboards/widgets/split_graph/
 [11]: /dashboards/sharing/widget_public_urls/
+[12]: /help/

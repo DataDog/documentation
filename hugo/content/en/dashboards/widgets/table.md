@@ -58,6 +58,10 @@ Columns in the table widget are queried independently from one another. Overlapp
   * Extend the limit of queries to higher numbers, to maximize overlap between columns
   * Sort tables according to the one column that you could consider as "driving" the insight
 
+## Export to CSV
+
+You can download the data in a table widget as a CSV file. CSV export works on one widget at a time and can be disabled for your organization. For details, see [Export widget data to CSV][12].
+
 ## API
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
@@ -81,3 +85,4 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [9]: /dashboards/graphing_json/widget_json/
 [10]: /dashboards/guide/context-links/
 [11]: /dashboards/querying/#advanced-graphing
+[12]: /dashboards/widgets/configuration/#export-widget-data-to-csv
