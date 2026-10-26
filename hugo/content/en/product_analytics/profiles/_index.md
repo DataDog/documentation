@@ -62,19 +62,19 @@ First Referrer Host
 : `type:string`  <br> The hostname of the page that referred the user in their first session. N/A if user navigated directly to the application.
 
 First UTM Campaign
-: `type:string`  <br> The utm_campaign value from the URL of the user’s first session.
+: `type:string`  <br> The value of the `utm_campaign` parameter in the URL of the user's first session.
 
 First UTM Content
-: `type:string`  <br> The utm_content value from the URL of the user’s first session.
+: `type:string`  <br> The value of the `utm_content` parameter in the URL of the user's first session.
 
 First UTM Medium
-: `type:string`  <br> The utm_medium value from the URL of the user’s first session.
+: `type:string`  <br> The value of the `utm_medium` parameter in the URL of the user's first session.
 
 First UTM Source
-: `type:string`  <br> The utm_source value from the URL of the user’s first session.
+: `type:string`  <br> The value of the `utm_source` parameter in the URL of the user's first session.
 
 First UTM Term
-: `type:string`  <br> The utm_term value from the URL of the user’s first session.
+: `type:string`  <br> The value of the `utm_term` parameter in the URL of the user's first session.
 
 
 <!-- #### application based attributes  -->
