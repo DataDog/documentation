@@ -99,7 +99,7 @@ You can create and manage specific rules for metrics from the Governance Console
 
 ## Limitations
 
-- You can create up to 10 rules each for spans, metrics, and logs.
+- You can create up to 10 rules each for spans, metrics, logs, and events.
 - A Tag Visibility and Enforcement rule can specify up to 30 tag values.
 - Telemetry rules support metrics, logs, spans, and events.
 
