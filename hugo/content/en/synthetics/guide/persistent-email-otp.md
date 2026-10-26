@@ -40,7 +40,7 @@ Reusing the account lets you:
 
 Both types support email assertions, extracting values from an email body, and following links in received emails. Use a persistent address when the account must already exist before the test starts.
 
-An [MFA token variable][1] serves a different authentication method: it generates a time-based one-time password (TOTP) from an authenticator secret. An email variable receives the code sent by your application and tests the email delivery path as part of authentication.
+A [multi-factor authentication (MFA) token variable][1] serves a different authentication method: it generates a time-based one-time password (TOTP) from an authenticator secret. An email variable receives the code sent by your application and tests the email delivery path as part of authentication.
 
 ## Create a persistent email variable
 
