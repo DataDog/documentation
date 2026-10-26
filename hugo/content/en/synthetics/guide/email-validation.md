@@ -33,7 +33,7 @@ To reuse a persistent address, select {{< ui >}}Persistent{{< /ui >}}, choose th
 
 The following video shows how to select a persistent email variable and insert its address into an email field in the browser recorder.
 
-{{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable and insert its address into an email field" video="true" width="100%" >}}
+{{< img src="synthetics/guide/email-validation/adding-persistent-email-variable.mp4" alt="Select a persistent email variable and insert its address into an email field." video="true" width="100%" >}}
 
 The following sign-up example uses a temporary address. The same email assertion and navigation steps also work with a persistent address. Persistent addresses share a mailbox across runs, so [plan for concurrent executions][2] when reusing an account.
 
