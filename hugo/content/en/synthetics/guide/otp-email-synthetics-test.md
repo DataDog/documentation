@@ -29,7 +29,7 @@ products:
 
 Synthetic Browser Tests are used to monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time password (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
 
-For sign-up flows, use a temporary email address generated for each run. For login with an existing user, use a [persistent email global variable][12]. Create the application account once and reuse its address across runs. Each run still requests and extracts a new OTP.
+For sign-up flows, use a temporary email address generated for each run. For login with an existing user, use a [persistent email variable][12]. Create the application account once and reuse its address across runs. Each run still requests and extracts a new OTP.
 
 This guide walks you through how to configure the OTP extraction for a Synthetic Browser Test.
 
@@ -43,7 +43,7 @@ Add an email variable to the [browser test][3]. Choose its type based on whether
 2. Select {{< ui >}}Email Address{{< /ui >}} from the dropdown menu.
 3. Choose the email type for your workflow:
    - For a sign-up test, select {{< ui >}}Temporary{{< /ui >}}. Name the variable and click {{< ui >}}Create{{< /ui >}}.
-   - For a login test, [create a persistent email global variable and register its application account][12]. Select {{< ui >}}Persistent{{< /ui >}}, choose that variable, and click {{< ui >}}Done{{< /ui >}}.
+   - For a login test, [create a persistent email variable and register its application account][12]. Select {{< ui >}}Persistent{{< /ui >}}, choose that variable, and click {{< ui >}}Done{{< /ui >}}.
 
    The following images show a temporary email variable:
 
@@ -90,7 +90,7 @@ The OTP will be stored in the variable for use in your Browser Test.
 
 Extraction uses the first value that matches the configured pattern and fails if no email yields a match.
 
-<div class="alert alert-warning">Tests using the same persistent address share an inbox. Broad patterns can extract another parallel test's OTP and cause login failures. Use temporary email addresses or different persistent addresses to isolate tests. See <a href="/synthetics/guide/persistent-email-otp/#limitations">Persistent email limitations</a>.</div>
+<div class="alert alert-warning">Tests using the same persistent email variable share an inbox. Broad patterns can extract another parallel test's OTP and cause login failures. Use temporary email variables or different persistent email variables to isolate tests. See <a href="/synthetics/guide/persistent-email-otp/#limitations">Persistent email variable limitations</a>.</div>
 
 ### Step 4 - Use a JavaScript assertion to insert the OTP
 
@@ -137,7 +137,7 @@ Below is a visual example of an OTP setup with separately defined fields that th
 
 ## Next steps
 
-After the OTP is inserted and verified, add steps to confirm that the user completed sign-up or login. For example, [assert][6] that specific text is present on the page. With a persistent address, retain the application account for later runs and continue testing the journeys available after login.
+After the OTP is inserted and verified, add steps to confirm that the user completed sign-up or login. For example, [assert][6] that specific text is present on the page. With a persistent email variable, retain the application account for later runs and continue testing the journeys available after login.
 From here, you can continue [recording the rest of your Browser Test][9] and then verify your [Browser Test results][10].
 
 ## Further Reading
