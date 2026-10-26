@@ -38,7 +38,7 @@ The ServiceNow integration for Datadog On-Call connects On-Call Pages with Servi
 
 ### Create a ServiceNow connection
 
-A connection defines which ServiceNow instance receives incidents and how Pages and incidents stay in sync. You can create more than one connection, such as one for each assignment group.
+A connection defines which ServiceNow instance receives incidents and how Pages and incidents stay in sync. You can create more than one connection, for example, one for each assignment group.
 
 1. In Datadog, go to [**On-Call > Settings > Integrations**][4].
 1. Select **ServiceNow** and click **Add Connection**.
@@ -63,7 +63,7 @@ When the rule matches an alert, Datadog creates the Page and a ServiceNow incide
 
 ## Trigger Pages from ServiceNow incidents
 
-The ITOM/ITSM Integration for Datadog includes a `PublishOnCallPage` script include. Call it from a ServiceNow business rule to trigger an On-Call Page, such as when an incident is created.
+The ITOM/ITSM Integration for Datadog includes a `PublishOnCallPage` script. Call it from a ServiceNow business rule to trigger an On-Call Page, for example, when an incident is created.
 
 1. In ServiceNow, go to **System Definition > Business Rules** and click **New**.
 1. Configure the business rule's table, when it runs, and its filter conditions to define which records trigger a Page. Select the **Advanced** checkbox to enable scripting.

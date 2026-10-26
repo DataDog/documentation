@@ -262,12 +262,14 @@ For step-by-step setup instructions, see [Integrate ServiceNow with Datadog Inci
 
 Use this integration to create a ServiceNow incident when a Datadog On-Call Page triggers, and to create a Datadog On-Call Page from a ServiceNow record.
 
-**Note**: The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.
+<div class="alert alert-info">The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.</div>
 
 1. In Datadog, go to **Incident Response** > **On-Call** > **Settings** and select **Integrations**.
 1. Click **ServiceNow**, then click **Add Connection** and configure the connection to your ServiceNow instance.
 1. Open a team's [routing rules][13] and add a rule that creates a ServiceNow incident when an On-Call Page triggers.
 1. (Optional) To create a Datadog On-Call Page from ServiceNow, see [Create a Datadog On-Call Page from ServiceNow](#create-on-call-page).
+
+For step-by-step setup instructions, see [Integrate ServiceNow with Datadog On-Call][14].
 
 ## Sync data bidirectionally between ServiceNow and Datadog {#sync-bidirectionally}
 
@@ -451,3 +453,4 @@ Need additional help? Contact [Datadog support][10].
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
 [12]: /incident_response/incident_management/integrations/servicenow
 [13]: /incident_response/on-call/routing_rules/
+[14]: /incident_response/on-call/integrations/servicenow/
