@@ -618,6 +618,8 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
 {{% /tab %}}
 
 {{% tab "AIX" %}}
+**Note**: This tab covers the Datadog UNIX Agent. For AIX 7.2 TL5 and later, see [Agent 7 on AIX][103].
+
 ### One-step install
 
 The one-step command installs the latest BFF package for the Datadog Agent and prompts you for your password if necessary. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
@@ -675,8 +677,9 @@ For a full list of the available installation script environment variables, see 
    sudo startsrc -s datadog-agent
    ```
 
-[101]: /agent/basic_agent_usage/aix/#installation
+[101]: /agent/guide/install-unix-agent-aix/#installation
 [102]: https://github.com/DataDog/datadog-unix-agent/releases
+[103]: /agent/supported_platforms/aix/
 {{% /tab %}}
 
 {{< /tabs >}}

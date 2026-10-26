@@ -515,6 +515,8 @@ sudo userdel dd-agent \
 {{% /tab %}}
 
 {{% tab "AIX" %}}
+**Note**: This tab covers the Datadog UNIX Agent. For AIX 7.2 TL5 and later, see [Agent 7 on AIX][3].
+
 ### One-step install
 
 The one-step command installs the latest BFF package for the Datadog Agent and prompts you for your password if necessary. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
@@ -573,8 +575,9 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 
 Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 
-[1]: /agent/basic_agent_usage/aix/#installation
+[1]: /agent/guide/install-unix-agent-aix/#installation
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
+[3]: /agent/supported_platforms/aix/
 {{% /tab %}}
 
 {{< /tabs >}}

@@ -1,6 +1,6 @@
 ---
 title: AIX
-description: "Install and manage the Datadog UNIX Agent on IBM AIX systems for infrastructure monitoring and custom metrics collection."
+description: "Install and manage the Datadog Agent on IBM AIX systems."
 further_reading:
 - link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
@@ -8,21 +8,20 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
-- link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
-  tag: "Blog"
-  text: "Monitor AIX with the Datadog UNIX Agent"
 aliases:
   - /agent/basic_agent_usage/aix/
 algolia:
   tags: ['uninstall', 'uninstalling']
 ---
 
+This page covers Agent 7 on AIX. For AIX versions earlier than 7.2 TL5, see the [Datadog UNIX Agent][12].
+
 ## Overview
-The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
+The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
+Agent 7.85.0 and later supports AIX 7.2 TL5 and later. See [Supported Platforms][5] for details.
 
-This page walks you through installing, operating, and removing the Datadog UNIX Agent on AIX.
+This page walks you through installing, operating, and removing the Datadog Agent on AIX.
 
 ## Installation
 
@@ -48,9 +47,9 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 
 | Description   | Command (as root)           |
 |---------------|-----------------------------|
-| Start Agent   | `startsrc -s datadog-agent` |
-| Stop Agent    | `stopsrc -s datadog-agent`  |
-| Status of Agent service | `lssrc -s datadog-agent`|
+| Start Agent   | `startsrc -g datadog-agent` |
+| Stop Agent    | `stopsrc -g datadog-agent`  |
+| Status of Agent services | `lssrc -g datadog-agent`|
 | Agent status page | `datadog-agent status`      |
 | Send flare | `datadog-agent flare` |
 | Show all commands | `datadog-agent --help`  |
@@ -81,21 +80,31 @@ Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
 
 Out of the box integrations
 : `cpu`
-: `filesystem`
-: `iostat`
+: `disk`
+: `io`
 : `load`
 : `memory`
-: `uptime`
-: `disk`
 : `network`
+: `ntp`
+: `oracle`
+: `snmp`
+: `uptime`
 
 Additional integrations
-: `process`
+: `apache`
+: `dns_check`
+: `http_check`
+: `ibm_ace`
+: `ibm_db2`
+: `ibm_i`
+: `ibm_mq`
 : `lparstats`
-: `ibm_was` (WebSphere Application Server)
+: `openmetrics`
+: `process`
+: `tcp_check`
 
 
-**Note:** Metric coverage can differ from the UNIX, Linux, Windows, and macOS integrations.
+**Note:** Metric coverage on AIX can differ from the Linux, Windows, and macOS integrations.
 
 
 ## Monitor Agent uptime
@@ -107,21 +116,20 @@ You can use the metric `datadog.agent.running` to monitor the uptime of an Agent
 To remove an installed Agent, run the following `installp` command:
 
 {{< code-block lang="shell" >}}
-installp -e dd-aix-uninstall.log -uv datadog-unix-agent
+installp -u datadog-agent
 {{< /code-block >}}
 
-**Note:** Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
+Uninstalling the Agent removes the Agent services and the boot entry.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/#access-the-datadog-site
-[4]: https://github.com/DataDog/datadog-unix-agent/blob/master/README.md
-[5]: /agent/supported_platforms/?tab=unix
+[5]: /agent/supported_platforms/?tab=aix
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aix
 [7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
-[10]: https://github.com/DataDog/datadog-unix-agent/blob/master/docs/datadog.yaml.example
-[11]: /extend/dogstatsd/?tab=hostagent
+[10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_aix.yaml.example
+[12]: /agent/guide/install-unix-agent-aix/
