@@ -102,6 +102,7 @@ export default getViteConfig({
     name: "fixture",
     include: [
       "tests/headless/**/*.test.ts",
+      "tests/lib/**/*.test.ts",
       "src/components/**/tests/unit.test.ts",
       "src/components/**/tests/*.unit.test.ts",
       "src/lib/**/*.test.ts",

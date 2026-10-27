@@ -49,47 +49,6 @@ describe("ApiResponse (astro)", () => {
     expect(html).not.toContain('role="tablist"');
   });
 
-  it("renders the BEM root, heading, and an outer tab per status code", async () => {
-    const html = await renderComponent({ responses });
-
-    expect(html).toContain("api-response");
-    expect(html).toMatch(/api-response__heading[^>]*>Response</);
-    expect(html).toMatch(/data-tab-index="0"[^>]*>200</);
-    expect(html).toMatch(/data-tab-index="1"[^>]*>404</);
-  });
-
-  it("renders a status-scoped panel wrapper for each response", async () => {
-    const html = await renderComponent({ responses });
-
-    expect(html).toContain("api-response__panel--200");
-    expect(html).toContain("api-response__panel--404");
-  });
-
-  it("renders descriptions with the BEM description class", async () => {
-    const html = await renderComponent({ responses });
-
-    expect(html).toMatch(/api-response__description[^>]*>OK response</);
-    expect(html).toMatch(/api-response__description[^>]*>Not found response</);
-  });
-
-  it("renders Model/Example inner tabs when a response has both schema and examples", async () => {
-    const html = await renderComponent({ responses });
-
-    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
-    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
-    expect(html).toContain("schema-table");
-    expect(html).toContain("code-block");
-    expect(html).toContain("api-response__example");
-  });
-
-  it("omits the Model/Example inner tabs when a response has neither schema nor examples", async () => {
-    const html = await renderComponent({ responses: [responses[1]] });
-
-    expect(html).toMatch(/data-tab-index="0"[^>]*>404</);
-    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
-    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Example</);
-  });
-
   it("renders a schema table without inner tabs when a response has only a schema", async () => {
     const html = await renderComponent({
       responses: [
@@ -119,24 +78,6 @@ describe("ApiResponse (astro)", () => {
     });
 
     expect(html).toContain("Hello <em>world</em>");
-  });
-
-  it("labels the schema table's first column Field, as Hugo does", async () => {
-    const html = await renderComponent({ responses });
-
-    expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
-  });
-
-  it("renders the schema description above the table in the Model panel", async () => {
-    const html = await renderComponent({
-      responses: [
-        { ...responses[0], schemaDescription: "Dashboard summary response." },
-      ],
-    });
-
-    expect(html).toMatch(
-      /api-response__schema-description[^>]*>(<p>)?Dashboard summary response\.(<\/p>)?[\s\S]*schema-table__table/,
-    );
   });
 
   it("renders the schema description when there are no inner tabs", async () => {
@@ -192,56 +133,5 @@ describe("ApiResponse (astro)", () => {
 
     expect(html).toContain("api-response__example");
     expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
-  });
-
-  it("names a non-JSON response's content type in its Model tab, beside its example", async () => {
-    const html = await renderComponent({
-      responses: [
-        {
-          statusCode: "200",
-          description: "OK",
-          contentType: "text/csv",
-          examples: [{ name: "Example", value: "a,b\n1,2", language: "csv" }],
-        },
-      ],
-    });
-
-    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
-    expect(html).toMatch(/Content type: <code>text\/csv<\/code>/);
-    expect(html).toContain('data-language="csv"');
-    expect(html).not.toContain("schema-table__table");
-  });
-
-  it("names a binary response's content type without inner tabs", async () => {
-    const html = await renderComponent({
-      responses: [
-        {
-          statusCode: "200",
-          description: "OK",
-          contentType: "application/zip",
-        },
-      ],
-    });
-
-    expect(html).toMatch(/Content type: <code>application\/zip<\/code>/);
-    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
-  });
-
-  it("shows No response body in the Model tab of an empty JSON response", async () => {
-    const html = await renderComponent({
-      responses: [
-        {
-          statusCode: "202",
-          description: "Accepted",
-          schema: [],
-          emptyBody: true,
-          examples: [{ name: "Example", value: "{}" }],
-        },
-      ],
-    });
-
-    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
-    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
-    expect(html).toContain("No response body");
   });
 });

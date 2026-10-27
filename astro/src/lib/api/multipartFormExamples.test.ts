@@ -21,26 +21,6 @@ const spec = {
 const binaryField = { type: "string", format: "binary" } as const;
 
 describe("multipartFormExamples", () => {
-  it("writes the spec's example as curl -F fields, with @ for a file", () => {
-    const result = multipartFormExamples(spec, {
-      schema: { $ref: "#/components/schemas/IdpForm" },
-      examples: {
-        default: { value: { idp_file: "@/path/to/idp_metadata.xml" } },
-      },
-    });
-
-    expect(result).toEqual({
-      examples: [
-        {
-          name: "default",
-          value: "-F 'idp_file=@/path/to/idp_metadata.xml'",
-          language: "bash",
-        },
-      ],
-      showTitles: false,
-    });
-  });
-
   it("adds the @ when the example names a file without it", () => {
     const result = multipartFormExamples(spec, {
       schema: { $ref: "#/components/schemas/IdpForm" },
@@ -61,33 +41,6 @@ describe("multipartFormExamples", () => {
 
     expect(result.examples[0].value).toBe(
       "-F 'name=my-app'\n-F 'upload=@app.zip'",
-    );
-  });
-
-  it("writes an object field as JSON, typed by the field's encoding", () => {
-    const result = multipartFormExamples(spec, {
-      schema: {
-        oneOf: [
-          {
-            type: "object",
-            properties: {
-              event: { type: "object" },
-              source_map: binaryField,
-            },
-          },
-        ],
-      },
-      encoding: { event: { contentType: "application/json" } },
-      examples: {
-        default: {
-          value: { event: { type: "js_sourcemap" }, source_map: "main.js.map" },
-        },
-      },
-    });
-
-    expect(result.examples[0].value).toBe(
-      `-F 'event={"type":"js_sourcemap"};type=application/json'\n` +
-        "-F 'source_map=@main.js.map'",
     );
   });
 

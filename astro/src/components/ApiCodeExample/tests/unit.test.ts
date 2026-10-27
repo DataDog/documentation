@@ -48,12 +48,6 @@ describe("ApiCodeExample (astro)", () => {
     expect(html).not.toContain('role="tablist"');
   });
 
-  it("renders the BEM root and heading", async () => {
-    const html = await renderComponent({ examples });
-    expect(html).toContain("api-code-example");
-    expect(html).toMatch(/api-code-example__heading[^>]*>Code Example</);
-  });
-
   it("renders a language tab for each example set", async () => {
     const html = await renderComponent({ examples });
     expect(html).toMatch(/data-tab-index="0"[^>]*>cURL</);
@@ -91,34 +85,6 @@ describe("ApiCodeExample (astro)", () => {
     const details = [...html.matchAll(/<details([^>]*)>/g)].map((m) => m[1]);
     expect(details[0]).toMatch(/\bopen\b/);
     expect(details[1]).not.toMatch(/\bopen\b/);
-  });
-
-  it("renders per-region code blocks with data-region when an entry has regionVariants", async () => {
-    const html = await renderComponent({
-      examples: [
-        {
-          language: "curl",
-          label: "cURL",
-          entries: [
-            {
-              description: "Regional",
-              code: "fallback",
-              syntax: "shell",
-              regionVariants: {
-                us: { code: "curl us.example.com" },
-                eu: { code: "curl eu.example.com" },
-              },
-            },
-          ],
-        },
-      ],
-    });
-
-    expect(html).toContain('data-region="us"');
-    expect(html).toContain('data-region="eu"');
-    // Shiki wraps the code in syntax-highlighted spans, so match the unique hostname only.
-    expect(html).toContain("us.example.com");
-    expect(html).toContain("eu.example.com");
   });
 
   it("renders run instructions when a set has them", async () => {

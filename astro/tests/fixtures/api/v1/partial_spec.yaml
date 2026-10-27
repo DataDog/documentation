@@ -17132,6 +17132,348 @@ paths:
         - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 13
+  # Rendering Shapes: live operations, trimmed to the part their rendering
+  # class shows. tests/fixtures/api-shapes/shapeCases.ts names each one's class.
+  /:
+    get:
+      description: Get information about Datadog IP ranges.
+      operationId: GetIPRanges
+      responses:
+        '200':
+          description: OK
+      summary: List IP Ranges
+      tags:
+        - Rendering Shapes
+      servers:
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: The regional site for Datadog customers.
+              enum:
+                - datadoghq.com
+                - us3.datadoghq.com
+                - us5.datadoghq.com
+                - ap1.datadoghq.com
+                - ap2.datadoghq.com
+                - uk1.datadoghq.com
+                - datadoghq.eu
+                - ddog-gov.com
+                - us2.ddog-gov.com
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - UK1
+                - EU1
+                - GOV
+                - US2_GOV
+            subdomain:
+              default: ip-ranges
+              description: The subdomain where the API is deployed.
+        - url: '{protocol}://{name}'
+          variables:
+            name:
+              default: ip-ranges.datadoghq.com
+              description: Full site DNS name.
+            protocol:
+              default: https
+              description: The protocol for accessing the API.
+        - url: https://{subdomain}.datadoghq.com
+          variables:
+            subdomain:
+              default: ip-ranges
+              description: The subdomain where the API is deployed.
+      security: []
+  /api/v1/check_run:
+    post:
+      description: |-
+        Submit a list of Service Checks.
+        **Notes**:
+        - A valid API key is required.
+        - Service checks can be submitted up to 10 minutes in the past.
+      operationId: SubmitServiceCheck
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: The service checks.
+              items:
+                description: An object containing service check and status.
+                properties:
+                  check:
+                    description: The check.
+                    example: app.ok
+                    type: string
+                  host_name:
+                    description: The host name correlated with the check.
+                    example: app.host1
+                    type: string
+                  message:
+                    description: Message containing check status.
+                    example: app is running
+                    type: string
+                  status:
+                    description: The status of a service check. Set to `0` for OK, `1` for warning, `2` for critical, and `3` for unknown.
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                      - 3
+                    example: 0
+                    format: int32
+                    type: integer
+                  tags:
+                    description: Tags related to a check.
+                    example:
+                      - environment:test
+                    items:
+                      description: Items related to a check.
+                      type: string
+                    type: array
+                  timestamp:
+                    description: Time of check.
+                    format: int64
+                    type: integer
+                required:
+                  - check
+                  - status
+                  - tags
+                  - host_name
+                type: object
+              type: array
+        description: Service Check request body.
+        required: true
+      responses:
+        "202":
+          description: Payload accepted
+      summary: Submit a Service Check
+      tags:
+        - Rendering Shapes
+  /api/v1/distribution_points:
+    post:
+      description: The distribution points end-point allows you to post distribution data that can be graphed on Datadog’s dashboards.
+      operationId: SubmitDistributionPoints
+      requestBody:
+        content:
+          text/json:
+            examples:
+              default:
+                value:
+                  series:
+                    - host: test.example.com
+                      metric: system.load.1
+            schema:
+              description: The distribution points payload.
+              properties:
+                series:
+                  description: A list of distribution points series to submit to Datadog.
+                  items:
+                    description: A distribution points metric to submit to Datadog.
+                    properties:
+                      host:
+                        description: The name of the host that produced the distribution point metric.
+                        example: test.example.com
+                        type: string
+                      metric:
+                        description: The name of the distribution points metric.
+                        example: system.load.1
+                        type: string
+                    required:
+                      - metric
+                    type: object
+                  type: array
+              required:
+                - series
+              type: object
+        required: true
+      responses:
+        "202":
+          description: Payload accepted
+      summary: Submit distribution points
+      tags:
+        - Rendering Shapes
+  /api/v1/integration/webhooks/configuration/webhooks/{webhook_name}:
+    delete:
+      description: Deletes the endpoint with the name `<WEBHOOK NAME>`. This action cannot be undone.
+      operationId: DeleteWebhooksIntegration
+      parameters:
+        - description: The name of the webhook.
+          in: path
+          name: webhook_name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+      summary: Delete a webhook
+      tags:
+        - Rendering Shapes
+  /api/v1/service_dependencies:
+    get:
+      description: |-
+        Get a list of services from APM and their dependencies. The services retrieved are filtered by environment and a
+        primary tag, if one is defined.
+      operationId: ListServiceDependencies
+      parameters:
+        - description: Specify what APM environment to query service dependencies by.
+          in: query
+          name: env
+          required: true
+          schema:
+            example: prod
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  description: An object containing an APM service's dependencies.
+                  properties:
+                    calls:
+                      description: A list of dependencies.
+                      example: []
+                      items:
+                        description: APM Service names.
+                        type: string
+                      type: array
+                  required:
+                    - calls
+                  type: object
+                description: An object containing a list of APM services and their dependencies.
+                example:
+                  servica_a:
+                    calls:
+                      - service_b
+                      - service_c
+                  service_b:
+                    calls:
+                      - service_o
+                  service_c:
+                    calls:
+                      - service_o
+                  service_o:
+                    calls: []
+                type: object
+          description: OK
+      summary: Get all APM service dependencies
+      tags:
+        - Rendering Shapes
+  /api/v1/synthetics/settings/default_locations:
+    get:
+      description: Get the default locations settings.
+      operationId: GetSyntheticsDefaultLocations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: List of Synthetics default locations settings.
+                example:
+                  - aws:eu-west-3
+                items:
+                  description: Name of the location.
+                  type: string
+                type: array
+          description: OK
+      summary: Get the default locations
+      tags:
+        - Rendering Shapes
+  /api/v1/synthetics/tests/uptimes:
+    post:
+      description: Fetch uptime for multiple Synthetic tests by ID.
+      operationId: FetchUptimes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Object containing IDs of Synthetic tests and a timeframe.
+              properties:
+                from_ts:
+                  description: Timestamp in seconds (Unix epoch) for the start of uptime.
+                  example: 0
+                  format: int64
+                  type: integer
+              required:
+                - from_ts
+              type: object
+        description: Public ID list of the Synthetic tests and timeframe.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  description: Object containing the uptime for a Synthetic test ID.
+                  properties:
+                    overall:
+                      description: Object containing the uptime information.
+                      properties:
+                        history:
+                          description: |-
+                            The state transition history for the monitor, represented as an array of
+                            pairs. Each pair is an array where the first element is the transition timestamp
+                            in Unix epoch format (integer) and the second element is the state (integer).
+                            For the state, an integer value of `0` indicates uptime, `1` indicates downtime,
+                            and `2` indicates no data.
+                          example:
+                            - - 1579212382
+                              - 0
+                          items:
+                            description: An array of transitions
+                            example:
+                              - 1579212382
+                              - 0
+                            items:
+                              description: A timeseries data point which is a tuple of (timestamp, value).
+                              format: double
+                              type: number
+                            maxItems: 2
+                            minItems: 2
+                            type: array
+                          type: array
+                      type: object
+                    public_id:
+                      description: A Synthetic test ID.
+                      example: abc-def-123
+                      type: string
+                  type: object
+                type: array
+          description: OK.
+      summary: Fetch uptime for multiple tests
+      tags:
+        - Rendering Shapes
+  /api/v1/tags/hosts:
+    get:
+      description: Returns a mapping of tags to hosts. For each tag, the response returns a list of host names that contain this tag. There is a restriction of 10k total host names from the org that can be attached to tags and returned.
+      operationId: ListHostTags
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: In this object, the key is the tag, and the value is a list of host names that are reporting that tag.
+                properties:
+                  tags:
+                    additionalProperties:
+                      description: A list of host names which contain this tag
+                      items:
+                        description: A given tag in a list.
+                        example: test.metric.host
+                        type: string
+                      type: array
+                    description: A mapping of tags to host names
+                    type: object
+                type: object
+          description: OK
+      summary: Get All Host Tags
+      tags:
+        - Rendering Shapes
 security:
   - apiKeyAuth: []
     appKeyAuth: []
@@ -17251,4 +17593,8 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/account_management/billing/usage_details/
     name: Usage Metering
+  - description: >-
+      Trimmed live operations for the spec-shape snapshot tests. Each one shows
+      one rendering class.
+    name: Rendering Shapes
 x-group-parameters: true
