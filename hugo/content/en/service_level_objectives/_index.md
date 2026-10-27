@@ -350,9 +350,9 @@ A query cannot be empty or consist only of `*`.
 
 #### Manage corrections across your organization
 
-The {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. From this page, you can create corrections and edit or delete existing ones.
+The [{{< ui >}}Corrections{{< /ui >}} tab][31] on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. From this page, you can create, edit, and delete corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. 
 
-<!-- TBD: Add a screenshot of the Corrections page. -->
+{{< img src="service_level_objectives/slo-corrections-tab.png" alt="The Corrections tab on the SLOs page." style="width:80%;">}}
 
 #### Create corrections from monitor downtimes
 
@@ -366,14 +366,12 @@ To create a correction from a downtime, you need the `slos_corrections` permissi
 
 **Note**: The card does not appear when you edit an existing downtime.
 
-<!-- TBD: Add a screenshot of the downtime card. -->
-
 #### Access in the UI
 
 To create a status correction in the UI:
 
 1. Open the correction form in one of the following ways:
-   - On the {{< ui >}}Corrections{{< /ui >}} tab of the [SLO manage page][2], click {{< ui >}}New Correction{{< /ui >}}.
+   - On the [{{< ui >}}Corrections{{< /ui >}} tab][31] of the [SLO manage page][2], click {{< ui >}}New Correction{{< /ui >}}.
    - In an SLO's details side panel, under the gear icon, select {{< ui >}}Correct status{{< /ui >}}. The form opens with that SLO selected.
 2. Under {{< ui >}}Select SLOs and category{{< /ui >}}, choose the correction scope:
    - {{< ui >}}By Tags{{< /ui >}}: Enter a tag query. The form displays the SLOs that match the query.
@@ -383,8 +381,7 @@ To create a status correction in the UI:
 5. Optionally, add notes under {{< ui >}}Add any notes{{< /ui >}}.
 6. Click {{< ui >}}Apply{{< /ui >}}.
 
-<!-- TBD: Replace slo-corrections-ui.png with a screenshot of the current correction form. -->
-{{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="A blank form for a new SLO correction." style="width:80%;">}}
 
 **Note**: After you create a correction, you cannot change its scope or switch it between one-time and recurring.
 
@@ -436,3 +433,4 @@ The SLO Calendar View is available on the [SLO manage page][2]. On the top right
 [28]: /monitors/types/event/
 [29]: /events/explorer/searching/
 [30]: /monitors/downtimes/
+[31]: https://app.datadoghq.com/slo/corrections
