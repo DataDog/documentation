@@ -70,6 +70,8 @@ cascade:
 
 Datadog recommends one of two setups. Both use standard OpenTelemetry instrumentation and tooling.
 
+{{< img src="/opentelemetry/setup/otel-golden-paths.png" alt="Two setups send OpenTelemetry data to Datadog. DDOT uses the DDOT SDK and DDOT Collector, with the Full-Host Profiler and an optional Datadog Agent. Upstream uses the OpenTelemetry SDK and the upstream OpenTelemetry Collector." style="width:100%;" >}}
+
 ### DDOT
 
 Use Datadog's OpenTelemetry components: the [DDOT SDK][4] (Preview), the [DDOT Collector][5] (Preview), and the [Full-Host Profiler][13] (Preview). They work with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. Add the [Datadog Agent][6] only if you need features that require it.
