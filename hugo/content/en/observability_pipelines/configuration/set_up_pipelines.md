@@ -27,7 +27,7 @@ further_reading:
 <div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
 
 In Observability Pipelines, a pipeline is a sequential path with three types of components:
-- [Source][1]: Receives data from your data source (for example, the Datadog Agent).
+- [Sources][1]: Receive data from your data sources (for example, the Datadog Agent).
 - [Processors][2]: Enrich and transform your data.
 - [Destinations][3]: Where your processed data is sent.
 
@@ -50,7 +50,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
-1. Select and set up a [log source][3].
+1. Select and set up your [log sources][3].
 1. Select and set up [destinations][5] for your processed logs.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:

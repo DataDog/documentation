@@ -6,6 +6,9 @@ aliases:
 - /ko/network_performance_monitoring/devices/
 description: 라우터, 스위치, 서버 및 방화벽과 같은 네트워크 연결 장치에 대한 가시성을 확보합니다.
 further_reading:
+- link: /network_monitoring/devices/glossary
+  tag: 설명서
+  text: NDM 용어 및 개념
 - link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
   tag: 지식 센터
   text: SNMP 모니터링 개요
@@ -23,27 +26,34 @@ further_reading:
   text: 네트워크 장치 모니터링 소개하기
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: 블로그
-  text: SNMP 트랩으로 네트워크 성능 문제 모니터링 및 진단
-title: 네트워크 장치 모니터링
+  text: SNMP 트랩을 사용하여 네트워크 성능 문제 모니터링 및 진단하기
+- link: https://www.datadoghq.com/blog/velocloud-sdwan-integration
+  tag: 블로그
+  text: Datadog으로 Arista VeloCloud SD-WAN 성능 모니터링하기
+title: Network Device Monitoring
 ---
-
-## 개요
+## 개요 {#overview}
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
 <br/>
 
-Network Device Monitoring (NDM)은 라우터, 스위치, 방화벽과 같은 온프레미스 및 가상 네트워크 장치에 대한 가시성을 제공합니다. 모든 네트워크에서 장치를 자동으로 검색하고 대역폭 활용도, 전송된 바이트 볼륨과 같은 메트릭 수집을 시작하며 장치가 작동 중인지 또는 중지되었는지를 확인합니다.
+Network Device Monitoring(NDM)을 통해 라우터, 스위치, 방화벽과 같은 온프레미스 및 가상 네트워크 장치에 대한 가시성을 확보할 수 있습니다. 모든 네트워크에서 장치를 자동으로 검색하고, 대역폭 사용률 및 전송된 바이트 수와 같은 메트릭을 수집하며, 장치의 가동 여부를 확인합니다.
 
 {{< whatsnext desc="이 섹션에는 다음 주제가 포함되어 있습니다.">}}
-    {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>시작하기</u>: 네트워크 디바이스 모니터링 시작하기{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>지원되는 디바이스</u>: 지원되는 NDM 디바이스 보기{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>SNMP 메트릭</u>: 네트워크 디바이스에서 SNMP 메트릭 수집{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/device_topology_map" >}}<u>디바이스 토폴로지 맵</u>: 내 네트워크의 실물 연결 보기{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>디바이스 온보딩 경험</u>: 디바이스 프로필 시작하기{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>시작하기</u>: Network Device Monitoring 시작하기{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/summary" >}}<u>요약 페이지</u>: 네트워크 상태를 한눈에 평가하기{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>지원되는 장치</u>: 지원되는 NDM 장치 조회{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>SNMP 메트릭</u>: 네트워크 장치에서 SNMP 메트릭 수집하기 {{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>SNMP 프로필 관리자</u>: 장치 프로필 시작하기{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/integrations/" >}}<u>Integrations</u>: 지원되는 NDM Integrations{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/device_health/" >}}<u>장치 상태</u>: 장치 문제를 탐지하고 구성 변경 사항과의 상관관계 분석하기{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/config_management/" >}}<u>구성 관리</u>: 장치 구성 변경 사항 검토하기{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/topology" >}}<u>장치 맵</u>: 네트워크의 물리적 및 지리적 연결 조회{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/integrations/" >}}<u>Integrations</u>: 지원되는 NDM Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
-## 참고 자료
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

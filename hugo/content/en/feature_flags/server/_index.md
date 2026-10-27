@@ -49,7 +49,7 @@ Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not req
 
 Agentless delivery changes only the flag configuration source. Java and Node.js support direct exposure delivery. Java, Node.js, and Python can also use a compatible local telemetry relay.
 
-The listed versions provide the current capabilities described on each language page. .NET 3.54.0 and Ruby 2.46.0 support agentless configuration but require a compatible local telemetry relay for experiment exposures. Ruby also sends aggregated EVP flag evaluation events through that relay. Other server SDKs use Agent Remote Configuration.
+The listed versions provide the current capabilities described on each language page. .NET 3.54.0 and Ruby 2.46.0 support agentless configuration but require a compatible local telemetry relay for experiment exposures. Ruby also sends aggregated Event Platform Proxy (EVP) flag evaluation events through that relay. Other server SDKs use Agent Remote Configuration.
 
 ## Choose a language
 
@@ -98,7 +98,7 @@ No Feature Flags enablement or source setting is required. See the [language set
 
 ## Agent Remote Configuration
 
-For the SDK versions listed above, set the source explicitly to retain Agent-managed delivery:
+For the SDK versions listed in the [Configuration delivery](#configuration-delivery) section, set the source explicitly to retain Agent-managed delivery:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config

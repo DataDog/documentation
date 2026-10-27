@@ -40,7 +40,7 @@ For the default agentless setup, you need:
 - **Datadog Ruby SDK** `datadog` version **2.46.0 or later**
 - **Ruby runtime** version 3.1 or later to use the full Datadog Feature Flags OpenFeature integration
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later for provider hooks, exposure logging, and flag evaluation metrics support
-- A Datadog [**API key**][4] and the site that hosts your organization
+- **Datadog [API key][4] and site**: The API key and the Datadog site that hosts your organization
 - **Service and environment configured** - Feature flags are targeted by service and environment
 - **Supported operating system** - Production support is limited to [Linux operating systems][2]. macOS and Windows are not natively supported production targets, but Dockerized Linux environments running on those operating systems are. For local development on macOS, you can use a compatible prebuilt native artifact when one is available.
 
@@ -59,7 +59,7 @@ gem 'openfeature-sdk', '>= 0.5.1'
 
 Set these environment variables in the application process before startup:
 
-{{< code-block lang="shell" >}}
+{{< code-block lang="bash" >}}
 DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -91,9 +91,9 @@ end
 client = OpenFeature::SDK.build_client
 ```
 
-`set_provider_and_wait` blocks until the provider receives its first valid configuration or initialization fails. The default initialization timeout is 30 seconds. Configure it with `config.feature_flags.initialization_timeout_ms` or `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS`; the OpenFeature method does not accept a `timeout:` argument.
+`set_provider_and_wait` blocks until the provider receives its first valid configuration or initialization fails. The default initialization timeout is 30 seconds. Configure it with `config.feature_flags.initialization_timeout_ms` or `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS`. The OpenFeature method does not accept a `timeout:` argument.
 
-The example catches `ProviderInitializationError` so the application can continue with caller-provided default values. If a temporary delivery failure causes initialization to time out, polling continues and the provider can recover when valid configuration arrives. For non-blocking initialization, use `OpenFeature::SDK.set_provider` instead; evaluations return defaults until configuration is available.
+The example catches `ProviderInitializationError` so the application can continue with caller-provided default values. If a temporary delivery failure causes initialization to time out, polling continues and the provider can recover when valid configuration arrives. For non-blocking initialization, use `OpenFeature::SDK.set_provider` instead. Evaluations return defaults until configuration is available.
 
 The SDK polls every 30 seconds and uses a 5-second request timeout by default. After receiving valid configuration, it retains that configuration during temporary delivery errors. See [Configuration Sources][6] for polling and custom endpoint settings. Ruby accepts positive integer polling intervals without an upper limit; request timeouts must be between 1 and 300 seconds.
 
@@ -101,14 +101,14 @@ The SDK polls every 30 seconds and uses a 5-second request timeout by default. A
 
 For Agent-managed flag delivery, use Datadog Agent 7.55 or later with [Remote Configuration][1] enabled and an API key configured on the Agent. With `datadog` 2.46.0 or later, select the source explicitly:
 
-```shell
+```bash
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 DD_REMOTE_CONFIGURATION_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
-Use the same provider initialization code above. Selecting `remote_config` enables the Feature Flags subscription when the tracer starts, even before the application registers a provider. The API key for configuration delivery belongs on the Agent.
+Use the provider initialization code from the [Initialize the provider](#initialize-the-provider) section. Selecting `remote_config` enables the Feature Flags subscription when the tracer starts, even before the application registers a provider. The API key for configuration delivery belongs on the Agent.
 
 Earlier `datadog` versions, starting with 2.24.0, use `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` or `config.open_feature.enabled = true` for Agent Remote Configuration.
 
@@ -318,7 +318,54 @@ end
 
 To mutate flag state during a test, call `add_flag(flag_key:, value:)` on the provider instance. The same pattern applies to Minitest — replace the `around` hook with `setup`/`teardown` methods.
 
+## Use the Java SDK on JRuby
+
+The Ruby SDK does not support Feature Flags on JRuby. On JRuby, the Ruby SDK writes a warning to the log and does not enable Feature Flags. Use the [Java SDK][8] instead. JRuby calls the Java SDK through its Java integration.
+
+Use the versions in the [Java SDK compatibility requirements][9].
+
+1. Get the `dd-openfeature` JAR file, the OpenFeature Java SDK JAR file, and their dependencies. For example, use Maven to copy them to a directory.
+2. Load the JAR files in your application with `require`.
+3. Set the environment variables for your configuration source. See [Server SDK Configuration Sources][6].
+4. Start JRuby with `dd-java-agent`. Use the `-J` option to send the `-javaagent` option to the JVM.
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+# Use Agent Remote Configuration. Agentless delivery is the default.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+
+jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb
+```
+
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'datadog.trace.api.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+The JAR files alone do not enable flag delivery. The Datadog provider uses classes from `dd-java-agent`. If the JVM does not load `dd-java-agent`, the provider does not initialize. Flag evaluations then return the default values.
+
+For provider events, error handling, and the evaluation methods, see the [Java SDK][8] page. JRuby uses the same classes and methods.
+
 ## Troubleshooting
+
+If the application runs on JRuby, use the Java SDK. See [Use the Java SDK on JRuby][10].
 
 ### Agentless configuration not working
 
@@ -331,10 +378,11 @@ To mutate flag state during a test, call `add_flag(flag_key:, value:)` on the pr
 
 Before the first valid configuration, evaluations return caller-provided defaults. After successful initialization, temporary delivery errors retain the last valid configuration.
 
-### Remote Configuration connection issues
+### Remote configuration connection issues
 
-- Select `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` on `datadog` 2.46.0 or later.
+- On `datadog` 2.46.0 or later, confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is set to `remote_config`.
 - Verify that Remote Configuration is enabled in the Agent and the Ruby tracer.
+- Verify that the Datadog Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][11].
 - Check the API key on the Agent and `DD_SERVICE` and `DD_ENV` in the application.
 - Confirm that the application can reach the Agent. Enable `DD_TRACE_DEBUG=true` and check the tracer logs for Remote Configuration errors.
 
@@ -349,3 +397,7 @@ Before the first valid configuration, evaluations return caller-provided default
 [5]: /feature_flags/guide/server_flag_evaluation_metrics/
 [6]: /feature_flags/concepts/configuration_sources/
 [7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[8]: /feature_flags/server/java/
+[9]: /feature_flags/server/java/#compatibility-requirements
+[10]: #use-the-java-sdk-on-jruby
+[11]: /feature_flags/concepts/configuration_sources/#agent-availability
