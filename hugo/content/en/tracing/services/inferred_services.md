@@ -107,10 +107,23 @@ connectors:
 
 {{< /code-block >}}
 
-To configure additional peer tags with a Collector version below v0.95.0, upgrade to v0.95.0 or later. Add `datadog/connector` to the trace pipeline exporters and metric pipeline receivers, as shown in the [complete Collector configuration][2]. Apply the peer-tag settings above to the connector.
+If your Collector version is below v0.95.0, update the following Collector configuration:
+
+{{< code-block lang="yaml" collapsible="true" >}}
+
+exporters:
+  datadog:
+    traces:
+      compute_stats_by_span_kind: true
+      peer_tags_aggregation: true
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+
+{{< /code-block >}}
+
+**Example**: [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: /opentelemetry/setup/collector_exporter/datadog_exporter/#2---configure-the-datadog-exporter-and-connector
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
 [6]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,7 +138,7 @@ The following table lists the source attributes that Datadog uses to derive peer
 
 The available source attributes depend on your collection version and configuration. For the Datadog Agent and Datadog Connector, span attributes must be included in peer-tag aggregation. For the `span_metrics` connector, include the span attributes as dimensions in the [connector configuration](/opentelemetry/setup/collector_exporter/#span-metrics-connector).
 
-Peer tag | Source attributes
+Peer Tag | Source Attributes
 --------------------|-------------------
 `peer.aws.dynamodb.table` | `tablename`
 `peer.aws.kinesis.stream` | `streamname`
@@ -151,11 +164,11 @@ To assign the name to inferred entities, Datadog uses a specific order of preced
 
 Entity type | Order of precedence
 -----------|----------------
-Database | `peer.db.name` > `peer.aws.s3.bucket` (for Amazon S3) / `peer.aws.dynamodb.table` (for Amazon DynamoDB) / `peer.cassandra.contact.points` (for Cassandra) / `peer.couchbase.seed.nodes` (for Couchbase) > `peer.hostname` > `peer.db.system`
-Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for Amazon SQS) / `peer.aws.kinesis.stream` (for Amazon Kinesis) > `peer.messaging.system`
+Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
 Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
-If instrumentation does not capture the highest-priority tag, Datadog uses the next available tag in the order shown above.
+If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
 
 **Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it takes precedence over all other attributes.
 
@@ -163,7 +176,7 @@ If instrumentation does not capture the highest-priority tag, Datadog uses the n
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` to use the global default service name instead of integration-specific service names. Check the [minimum version requirements](/tracing/services/integration_override_removal/#sdk-version-requirements) before enabling this setting. Custom service-name overrides are not affected.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported SDK languages and integrations.
 
 <div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
@@ -177,7 +190,7 @@ For instructions on how to remove service overrides and migrate to inferred serv
 
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">The Inferred Services feature is not available by default in your data center. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
+<div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
 
 {{< /site-region >}}
 
