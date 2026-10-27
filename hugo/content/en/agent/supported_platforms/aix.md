@@ -48,7 +48,7 @@ See [Supported Platforms][5] for the complete list of supported AIX versions.
 ### Prerequisites
 - Root privileges (or sudo) on each host
 - Outbound HTTPS (443) to `.datadoghq.com`
-- curl or ksh (shipped on AIX by default)
+- `curl` or `wget`, and `ksh` (shipped on AIX by default)
 - Verify your host is running a [Supported AIX version][5]
 
 ### Install the Agent
