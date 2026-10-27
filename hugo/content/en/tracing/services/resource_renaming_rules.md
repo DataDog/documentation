@@ -53,6 +53,7 @@ There is no tracer or Agent version requirement.
 
 1. Review the monitors listed under {{< ui >}}Review the impact{{< /ui >}}. These are APM monitors and `trace.*` metric monitors that filter or group on `resource_name`, and _might_ be affected by the rule. Update any monitor that references a resource name the rule rewrites.
 1. Click {{< ui >}}Enable{{< /ui >}} to save the rule and apply it to new data, or click {{< ui >}}Save as draft{{< /ui >}} to save the rule without applying it. After you enable a rule, _it may take a few minutes for it to take effect_.
+1. After the rule takes effect, confirm that it works. In the Trace Explorer, search for `service:<SERVICE_NAME> @renaming_rules.resource_name.original:*` and check that the matching spans show the new resource name.
 
 ## Resource renaming rules behavior
 
