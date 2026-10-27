@@ -179,6 +179,8 @@ To configure split-by dimensions:
 
 ## Launch your experiment
 
+Check whether the experiment belongs to a [holdout][14] before starting it. Global holdouts add eligible experiments automatically. Add the experiment to a selective holdout while it is a draft. Both holdout groups receive the control experience until the winner's rollout completes.
+
 To launch your experiment:
 
 1. Click {{< ui >}}Start Experiment{{< /ui >}} to open the {{< ui >}}Confirm starting the experiment{{< /ui >}} dialog.
@@ -209,3 +211,4 @@ See [Reading Experiment Results][5] to review your data.
 [11]: /experiments/statistics/analysis_methods
 [12]: /experiments/statistics/cuped
 [13]: /experiments/statistics/multiple_testing_correction
+[14]: /experiments/holdouts/
