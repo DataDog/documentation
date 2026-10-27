@@ -25,8 +25,8 @@ AI Guard uses Sensitive Data Scanner to identify sensitive data, such as persona
 |------------|---------------------|
 | Python     | dd-trace-py 4.14.0  |
 | JavaScript | dd-trace-js 6.13.0  |
-| Java       | Coming soon         |
-| Ruby       | Coming soon         |
+| Java       | dd-trace-java 1.67.0 |
+| Ruby       | dd-trace-rb 2.44.0  |
 
 ## Setup
 
@@ -199,7 +199,7 @@ messages.push({ role: 'assistant', content: answer })
 On the blocking path, a `DENY` decision rejects the promise with `AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
 {{% /tab %}}
 {{% tab "Java" %}}
-<div class="alert alert-info">Sensitive data redaction support in dd-trace-java is coming soon.</div>
+<div class="alert alert-info">Sensitive data redaction requires dd-trace-java v1.67.0 or later.</div>
 
 When sensitive data scanning and redaction are enabled for your service, the evaluation result carries the full conversation you passed in, with the sensitive data in the last message replaced. Read it with `getMessages()`:
 
@@ -256,6 +256,43 @@ messages.add(AIGuard.Message.message("assistant", answer));
 ```
 
 On the blocking path, a `DENY` decision throws `AIGuard.AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
+{{% /tab %}}
+{{% tab "Ruby" %}}
+<div class="alert alert-info">Sensitive data redaction requires dd-trace-rb v2.44.0 or later.</div>
+
+When sensitive data scanning and redaction are enabled for your service, the evaluation result carries the full conversation you passed in, with the sensitive data in the last message replaced. Read it with `messages`:
+
+```ruby
+result = Datadog::AIGuard.evaluate(
+  Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
+  Datadog::AIGuard.message(role: :user, content: "My SSN is 123-45-6789")
+)
+
+# The full conversation, with the sensitive data in the last message replaced
+redacted_messages = result.messages
+```
+
+To inspect what Sensitive Data Scanner matched, read `sds_findings`. Each finding reports the rule that matched, its category, and the location of the match in the messages you sent. The `redaction_replacements` field lists each replacement AI Guard applied, with its `path` and `replacement`. Because findings can hold sensitive data, don't log them.
+
+AI Guard doesn't rescan messages from earlier turns, so replace the conversation in your application with its redacted version before you send it to the model and before you build the next turn:
+
+```ruby
+messages = [
+  Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
+  Datadog::AIGuard.message(role: :user, content: "My SSN is 123-45-6789")
+]
+
+result = Datadog::AIGuard.evaluate(*messages)
+
+# Replace the conversation with its redacted version, so the sensitive data
+# neither reaches the model nor is carried into the next evaluation
+messages = result.messages.dup
+
+answer = call_model(messages)
+messages << Datadog::AIGuard.message(role: :assistant, content: answer)
+```
+
+On the blocking path, a `DENY` decision raises `Datadog::AIGuard::AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
 {{% /tab %}}
 {{< /tabs >}}
 

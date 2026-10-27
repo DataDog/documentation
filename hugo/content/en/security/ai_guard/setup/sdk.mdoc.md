@@ -344,6 +344,23 @@ Pass `allow_raise: false` to make a call return an evaluation and never raise `A
 
 To let calls to a specific tool through without an evaluation, open the service's AI Guard policy. Under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Unlike the per-call options, {% ui %}Pass{% /ui %} skips the evaluation, not only the block.
 
+## Optional SDK settings
+
+The default AI Guard SDK settings work for most applications. Change them when your application needs a different evaluation endpoint, more time for evaluation requests, or more of the conversation recorded on AI Guard spans.
+
+Every Datadog SDK that supports AI Guard uses these environment variables:
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `DD_AI_GUARD_ENDPOINT` | Derived from `DD_SITE` | The AI Guard evaluation endpoint. |
+| `DD_AI_GUARD_TIMEOUT` | 10,000 | The timeout for evaluation requests, in milliseconds. |
+| `DD_AI_GUARD_MAX_CONTENT_SIZE` | 524,288 | The maximum size of each message's content recorded on the AI Guard span, in bytes. Longer content is truncated on the span. |
+| `DD_AI_GUARD_MAX_MESSAGES_LENGTH` | 16 | The maximum number of messages recorded on the AI Guard span. The span keeps the most recent messages. |
+
+{% if equals($prog_lang, "node_js") %}
+With `dd-trace-js` 5.130.0 or later, or 6.19.0 or later, the SDK sends evaluation requests through the proxy set in `HTTPS_PROXY`.
+{% /if %}
+
 [1]: /security/ai_guard/setup/automatic_integrations/
 [2]: /security/ai_guard/setup/manual_integrations/
 [3]: /security/ai_guard/setup/http_api/

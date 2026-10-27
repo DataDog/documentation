@@ -166,6 +166,7 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use `is_blocking_enabled` to decide whether to stop a request when the action is `DENY`. |
 | `data.attributes.global_prob` | The overall threat probability, between `0` and `1`. Included only when AI Guard computes it. |
 | `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` fields. The `location` field has `path`, `start_index`, and `end_index_exclusive` values. |
+| `data.attributes.redaction_replacements` | The replacements AI Guard applied when sensitive data redaction is enabled. Each replacement has a `path`, the location of the redacted value in the request, and a `replacement`, the redacted text. Included only when redaction applies. |
 
 [1]: /security/ai_guard/setup/sdk/
 [2]: /security/ai_guard/setup/manual_integrations/

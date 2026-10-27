@@ -67,6 +67,8 @@ To create AI Guard detection rules:
              <li><code>obfuscation</code></li>
              <li><code>system-prompt-extraction</code></li>
              <li><code>data-exfiltration</code></li>
+             <li><code>tool-blocked</code> and <code>tool-allowed</code>, added by tool policies</li>
+             <li><code>regexp-blocked</code>, added by custom rules</li>
            </ul>
          </td>
        </tr>
