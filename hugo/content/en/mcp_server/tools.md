@@ -1674,7 +1674,7 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
 
-<div class="alert alert-info">The <code>investigator</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+The `investigator` toolset is generally available (GA).
 
 ### `trigger_bits_ai_investigation`
 *Toolset: **investigator***\
