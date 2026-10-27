@@ -64,7 +64,7 @@
       "json": {
         "index": "retention-3,retention-15",
         "limit": "integer",
-        "query": "service:web* AND @http.status_code:[200 TO 299]",
+        "query": "service:web-api AND @http.status_code:[200 TO 299]",
         "sort": "string",
         "startAt": "string",
         "time": {

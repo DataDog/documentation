@@ -1,3 +1,3 @@
 ---
-title: Agent Observability実験のイベントをプッシュします
+title: Agent Observability 実験のイベントのプッシュ
 ---
