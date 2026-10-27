@@ -2,9 +2,11 @@
  * Typesense connection details, mirrored from Hugo's
  * `assets/scripts/config/config-docs.js`. The Astro site reads from the same
  * cluster so docs/api/partners search results stay in sync with the Hugo site.
+ * `typesense.test.ts` reads the upstream file and fails on drift.
  *
  * The public_key here is read-only and safe to ship to the browser.
  */
+import type { SiteEnv } from "@lib/site/siteEnv";
 
 export interface TypesenseEnv {
   host: string;
@@ -27,7 +29,17 @@ const preview: TypesenseEnv = {
   partnersIndex: "docs_partners_alias",
 };
 
-export function getTypesenseConfig(): TypesenseEnv {
-  if (import.meta.env.PROD) return live;
-  return preview;
+const TYPESENSE_ENVS: Record<SiteEnv, TypesenseEnv> = {
+  live,
+  preview,
+  development: preview,
+};
+
+/**
+ * Keyed by deploy environment rather than `import.meta.env.PROD`, which is
+ * true for preview builds too and would send their searches to the live
+ * cluster.
+ */
+export function getTypesenseConfig(env: SiteEnv): TypesenseEnv {
+  return TYPESENSE_ENVS[env];
 }
