@@ -381,6 +381,7 @@ Verify the following to ensure that Remote Configuration is working:
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
 - The SDK can communicate with the Agent
+- The Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][10].
 
 ### Async evaluation errors
 
@@ -403,6 +404,7 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [7]: /feature_flags/concepts/flag_graphs/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
 [9]: /feature_flags/concepts/configuration_sources/
+[10]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 
