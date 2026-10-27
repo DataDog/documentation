@@ -45,12 +45,13 @@ See the [list of permissions][2] for Security products.
 
 ## Restrict access to security data
 
-Use [Data Access Control][4] to restrict which security data a user can view, based on the tags and attributes in the data. Define a Restricted Dataset with a query, then grant access to specific teams or roles. Two security options are available when you create a Restricted Dataset:
+Use [Data Access Control][4] to restrict which security data a user can view, based on the tags and attributes in the data. Define a Restricted Dataset with a query, then grant access to specific teams or roles. Three security options are available when you create a Restricted Dataset:
 
-- **Security signals**: Cloud SIEM signals, Workload Protection signals, and Workload Protection Agent Events.
-- **Security findings** (in Preview, available upon request): Cloud Security, Code Security, Workload Protection, and App and API Protection findings.
+- **Security Signals**: Cloud SIEM and Workload Protection signals.
+- **Workload Protection Agent Events**.
+- **Security Findings** (in Preview, available upon request): Cloud Security, Code Security, Workload Protection, and App and API Protection findings.
 
-Signals and findings outside every Restricted Dataset stay visible to all users with the appropriate permissions, unless you switch that data to [Restricted][5].
+Security data outside every Restricted Dataset stays visible to all users with the appropriate permissions, unless you switch it to [Restricted][5].
 
 ### Restrict findings by team ownership
 
