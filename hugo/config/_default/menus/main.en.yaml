@@ -752,11 +752,6 @@ menu:
       identifier: otel-setup-ddot
       parent: otel_collect
       weight: 401
-    - name: DDOT Collector on Kubernetes
-      url: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone
-      identifier: otel-setup-ddot-k8s-standalone
-      parent: otel-setup-ddot
-      weight: 4010
     - name: Install the DDOT Collector
       url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
       identifier: otel-setup-ddot-install
