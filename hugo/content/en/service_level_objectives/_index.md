@@ -366,6 +366,8 @@ To create a correction from a downtime, you need the `slos_corrections` permissi
 
 **Note**: The card does not appear when you edit an existing downtime.
 
+{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="The Schedule Downtime UI with matching SLOs highlighted." style="width:80%;">}}
+
 #### Access in the UI
 
 To create a status correction in the UI:
