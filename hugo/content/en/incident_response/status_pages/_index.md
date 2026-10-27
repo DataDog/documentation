@@ -419,6 +419,8 @@ Then, from a published page with Microsoft Teams subscriptions enabled:
 1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
 1. Click **Subscribe**.
 
+   {{< img src="incident_response/status_pages/status_pages_microsoft_teams_subscription_modal.png" alt="Subscribe To Updates modal with the Microsoft Teams tab selected, a Microsoft Teams URL field, and a Subscribe button" style="width:70%;" >}}
+
 The URL must use HTTPS and be a Power Automate workflow URL, with a host that ends in `.logic.azure.com` or `.environment.api.powerplatform.com`. The **Subscribe** button stays disabled until the URL is valid. A URL can be subscribed to a page only once. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
 
 ### Notifications
