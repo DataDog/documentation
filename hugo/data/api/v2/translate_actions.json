@@ -7225,6 +7225,20 @@
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
   },
+  "GetSPARecommendationsV2": {
+    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA recommendations v2",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
+  },
+  "GetSPARecommendations": {
+    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
+    "summary": "Get SPA Recommendations"
+  },
+  "GetSPARecommendationsWithShard": {
+    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA Recommendations with a shard parameter"
+  },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
     "summary": "Aggregate spans",
