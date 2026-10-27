@@ -49,7 +49,7 @@ After you select **Write a DDSQL Query**:
 4. Save the rule.
 5. View the query and an overview of outcomes on the rule page.
 
-<!-- TODO: Add screenshot of rule creation -->
+{{< img src="tracing/internal_developer_portal/custom_rule_ddsql.png" alt="A custom rule written with DDSQL, evaluating whether a service has docs defined." style="width:100%;" >}}
 
 The query template contains the following: 
 ```sql
