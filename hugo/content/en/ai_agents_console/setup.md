@@ -28,7 +28,7 @@ Agent Console is available to all Datadog customers in Preview.
 
 To set up [Agent Console][1], connect the AI tools you want to monitor, optionally connect productivity tools, and map user identities across tools. The {{< ui >}}Setup{{< /ui >}} page in Agent Console {{< ui >}}Settings{{< /ui >}} tracks your progress through each step.
 
-{{< img src="/ai_agents_console/setup_agent_console.png" alt="Agent Console Settings Setup page with a progress bar and steps to validate your data, map identities, connect your first agent, and connect productivity tools" style="width:100%;" >}}
+{{< img src="/ai_agents_console/setup_agent_console.png" alt="Agent Console Settings Setup page with a progress bar and a checklist of setup steps." style="width:100%;" >}}
 
 ## Permissions
 
@@ -43,19 +43,19 @@ Agent Console access is controlled by the following role permissions. Assign the
 
 Select the AI tools to connect from the {{< ui >}}Set up your AI tools{{< /ui >}} page, which appears the first time you open Agent Console. Connect at least one tool to start seeing data. You can add more tools later.
 
-{{< img src="/ai_agents_console/agent_console_onboarding.png" alt="Set up your AI tools page with cards for Trajectory, Cursor, Anthropic Products, GitHub Copilot, Codex, Microsoft Copilot, ChatGPT Work, and Another Integration" style="width:100%;" >}}
+{{< img src="/ai_agents_console/agent_console_onboarding.png" alt="Set up your AI tools page with a card for each AI tool you can connect, such as Trajectory, Cursor, and Codex." style="width:100%;" >}}
 
 ### Anthropic products
 
 To monitor Claude Code, Claude Chat, Claude Cowork, and Claude Design, set up the [Anthropic Usage and Costs][3] integration. The integration collects daily spend and user analytics for each Claude product.
 
-If your organization uses a Claude Team plan, send Claude Code telemetry to Datadog with [OpenTelemetry](#claude-code-with-opentelemetry) instead.
+If your organization uses a Claude Team plan, send Claude Code telemetry to Datadog with OpenTelemetry instead. See the [Claude Code with OpenTelemetry](#claude-code-with-opentelemetry) section.
 
 ### Claude Code with OpenTelemetry
 
-Use OpenTelemetry (OTLP) to send Claude Code telemetry to Datadog if your organization uses a Claude Team plan. Data collected this way appears on the {{< ui >}}Claude Code (OTel){{< /ui >}} card in Agent Console.
+Use the OpenTelemetry protocol (OTLP) to send Claude Code telemetry to Datadog if your organization uses a Claude Team plan. Data collected this way appears on the {{< ui >}}Claude Code (OTel){{< /ui >}} card in Agent Console.
 
-To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or [server-managed settings][4] to distribute the Claude Code settings file across all managed devices.
+To set up Agent Console for Claude Code across your organization, your IT team can use a mobile device management (MDM) system or [server-managed settings][4] to distribute the Claude Code settings file across all managed devices.
 
 {{< tabs >}}
 {{% tab "Send directly to Datadog" %}}
@@ -131,15 +131,15 @@ To monitor Codex, set up the [OpenAI Codex][5] integration. The integration coll
 
 ### ChatGPT Work
 
-To monitor ChatGPT Work, set up the [OpenAI][12] integration. The integration collects activity, token, and estimated cost analytics.
+To monitor ChatGPT Work, set up the [OpenAI][6] integration. The integration collects activity, token, and estimated cost analytics.
 
 ### Cursor
 
-To monitor Cursor, set up the [Cursor][6] integration using the Datadog Extension for Cursor. The integration collects spend metrics and user analytics once a day.
+To monitor Cursor, set up the [Cursor][7] integration using the Datadog Extension for Cursor. The integration collects spend metrics and user analytics once a day.
 
 ### GitHub Copilot
 
-To monitor GitHub Copilot, set up the [GitHub Copilot][7] integration. The integration collects spend metrics and user analytics once a day.
+To monitor GitHub Copilot, set up the [GitHub Copilot][8] integration. The integration collects spend metrics and user analytics once a day.
 
 ### Microsoft Copilot 365
 
@@ -151,14 +151,14 @@ The Microsoft Copilot integration collects daily Microsoft 365 Copilot adoption 
 
 ### Other coding and desktop agents with Trajectory
 
-[Trajectory][8] is an open source tool that captures sessions from more than 30 coding and desktop agents, such as Claude Code, Claude Desktop, Codex CLI, Cursor, Cline, Windsurf, and Zed, and sends them to Datadog. For the full list and version requirements, see [Supported Clients][9].
+[Trajectory][9] is an open source tool that captures sessions from more than 30 coding and desktop agents, such as Claude Code, Claude Desktop, Codex CLI, Cursor, Cline, Windsurf, and Zed, and sends them to Datadog. For the full list and version requirements, see [Supported Clients][10].
 
 Trajectory session data powers the {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views in Agent Console.
 
 {{< tabs >}}
 {{% tab "Individual developers" %}}
 
-Run the installer to install Trajectory for the current user:
+Install Trajectory for the current user by running the installer:
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh)
@@ -178,7 +178,7 @@ To upgrade Trajectory, rerun the installer.
 {{% /tab %}}
 {{% tab "Managed fleets (MDM)" %}}
 
-To deploy Trajectory to developer computers with an MDM or UEM product such as Jamf Pro or Microsoft Intune, follow the [Managed Endpoint Administrator Guide][1]. The guide covers package preparation, policy deployment, coding agent selection, and verification.
+To deploy Trajectory to developer computers with an MDM or unified endpoint management (UEM) product, such as Jamf Pro or Microsoft Intune, follow the [Managed Endpoint Administrator Guide][1]. The guide covers package preparation, policy deployment, coding agent selection, and verification.
 
 [1]: https://github.com/datadog-labs/trajectory/blob/main/docs/MANAGED-ENDPOINTS.md
 {{% /tab %}}
@@ -192,8 +192,8 @@ If the tool you want to monitor isn't listed, click {{< ui >}}Request an Integra
 
 Optionally, connect productivity tools so Agent Console can show merged pull requests, time to merge, cost per pull request, and resolved issues alongside AI spend.
 
-- **GitHub**: Set up the [GitHub][10] integration to collect pull request data.
-- **Jira**: Set up the [Jira][11] integration to collect issue data.
+- **GitHub**: Set up the [GitHub][11] integration to collect pull request data.
+- **Jira**: Set up the [Jira][12] integration to collect issue data.
 
 ## Map identities
 
@@ -213,7 +213,7 @@ Each AI tool identifies users differently, for example by email address, GitHub 
    Separate multiple email aliases, GitHub logins, or Jira account IDs with semicolons. The first email is the canonical email. You can choose any unique column, such as an employee ID, as the primary identifier.
 3. Upload the CSV file (maximum 10 MiB), preview the mapping, and save it.
 
-{{< img src="/ai_agents_console/agent_console_identity_mapping.png" alt="Set up identity mappings dialog showing the required and optional CSV columns and a CSV upload area" style="width:100%;" >}}
+{{< img src="/ai_agents_console/agent_console_identity_mapping.png" alt="Set up identity mappings dialog showing the required and optional CSV columns and a CSV upload area." style="width:100%;" >}}
 
 ## Validate your data
 
@@ -228,10 +228,10 @@ After you connect your tools, open the [Agent Console][1] and check that each co
 [3]: /integrations/anthropic-usage-and-costs/
 [4]: https://code.claude.com/docs/en/server-managed-settings
 [5]: /integrations/openai-codex/
-[6]: /integrations/cursor/?tab=datadogextensionforcursor
-[7]: /integrations/github-copilot/
-[8]: https://github.com/datadog-labs/trajectory
-[9]: https://github.com/datadog-labs/trajectory/blob/main/docs/SUPPORTED-CLIENTS.md
-[10]: /integrations/github/
-[11]: /integrations/jira/
-[12]: /integrations/openai/?tab=apikey
+[6]: /integrations/openai/?tab=apikey
+[7]: /integrations/cursor/?tab=datadogextensionforcursor
+[8]: /integrations/github-copilot/
+[9]: https://github.com/datadog-labs/trajectory
+[10]: https://github.com/datadog-labs/trajectory/blob/main/docs/SUPPORTED-CLIENTS.md
+[11]: /integrations/github/
+[12]: /integrations/jira/
