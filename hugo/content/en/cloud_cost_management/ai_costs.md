@@ -67,6 +67,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
 | Databricks Mosaic AI     | [SaaS integration][19] |
+| Snowflake AI | [SaaS integration][20] |
 
 ## AI cost summary
 
@@ -171,3 +172,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [17]: /cloud_cost_management/recommendations
 [18]: /cloud_cost_management/setup/azure/?tab=terraform
 [19]: /cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
+[20]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
