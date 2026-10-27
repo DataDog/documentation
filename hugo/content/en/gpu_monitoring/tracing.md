@@ -1,7 +1,5 @@
 ---
 title: Continuous Tracing with GPU Monitoring
-is_beta: true
-private: true
 description: Enable GPU activity tracing for selected Kubernetes workloads.
 further_reading:
 - link: "/gpu_monitoring/setup"
@@ -12,22 +10,31 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Continuous tracing with GPU Monitoring is in Early Access Preview.
-{{< /callout >}}
-
 ## Overview
 
 Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can identify and investigate bottlenecks using detailed execution traces that tie CUDA and NCCL operations back to your model and PyTorch operations.
 
 {{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
+With continuous tracing, you can increase the throughput of your AI workloads and get more out of every GPU:
+
+- **Speed up training runs**: Find the communication, data loading, and kernel bottlenecks that slow down each training step. Use traces with the [Training page][4] to see how each training run used its GPUs.
+- **Serve more requests per GPU**: See where inference requests spend time on the GPU. Use traces with the [Inference page][5] to compare latency and throughput across your model deployments.
+- **Improve GPU efficiency**: Spot idle and underused GPU time so you can right-size workloads and reduce wasted GPU hours.
+
 ## Setup
+
+<div class="alert alert-info">Continuous tracing requires GPU Monitoring. Before you configure tracing, <a href="/gpu_monitoring/setup">enable GPU Monitoring on your Datadog Agent</a>.</div>
 
 ### Prerequisites
 
 To begin continuously tracing your workloads, you must first meet the following criteria:
-- You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
+- You have [GPU Monitoring enabled][1] on your Datadog Agent.
+- You are running the Datadog Cluster Agent version 7.80 or later.
+
+### 0. Enable GPU Monitoring
+
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. GPU tracing does not work unless GPU Monitoring is enabled on the Datadog Agent that runs on the same hosts as your GPU workloads.
 
 ### 1. Configure GPU tracing
 
@@ -195,3 +202,5 @@ After you apply the configuration, GPU metrics are tagged with `training_run_id`
 [1]: /gpu_monitoring/setup
 [2]: /tracing/trace_explorer/
 [3]: /containers/kubernetes/tag/#tag-extraction
+[4]: /gpu_monitoring/training
+[5]: /gpu_monitoring/inference
