@@ -55,17 +55,12 @@ To install the Agent on AIX, follow the [in-app instructions in Fleet Automation
 
 {{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
 
-### Installation logs
-
-If the installation fails, the install script prints the `installp` log. The install script does not keep an installation log file.
-
 ## Commands
 
 | Description              | Command (as root)           |
 |--------------------------|-----------------------------|
 | Start Agent              | `startsrc -g datadog-agent` |
 | Stop Agent               | `stopsrc -g datadog-agent`  |
-| Restart Agent            | `stopsrc -g datadog-agent`, then `startsrc -g datadog-agent` |
 | Status of Agent services | `lssrc -g datadog-agent`    |
 | Agent status page        | `datadog-agent status`      |
 | Send flare               | `datadog-agent flare`       |
