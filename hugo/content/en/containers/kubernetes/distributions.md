@@ -563,7 +563,7 @@ The Operator has detected OpenShift from the node's `node.openshift.io/os_id` la
 - `kubelet.tlsVerify: false`
 - [Control Plane monitoring][4]
 
-Detection needs no annotation. On `1.31.0+`, the following manifest is equivalent to the preceding one:
+Detection needs no annotation. The following manifest produces the same Agent configuration as the full example earlier in this tab. The `serviceAccountName`, `securityContext`, `tolerations`, and `kubelet.tlsVerify` settings are omitted because Datadog Operator `1.31.0+` applies them:
 
 ```yaml
 kind: DatadogAgent
@@ -592,10 +592,11 @@ spec:
     clusterName: <CLUSTER_NAME>
   override:
     nodeAgent:
+      # Optional, as described in the requirements for this section
       hostNetwork: true
 ```
 
-Keep `hostNetwork: true` only if you want the Agent to reach cloud provider metadata services. If detection does not resolve, for example because the Operator pod runs on a node without the OpenShift label, set the provider explicitly with the `agent.datadoghq.com/cluster-provider: openshift-rhcos` annotation on the `DatadogAgent`. To override any of these values, use the full configuration shown previously. For the complete provider behavior, see the [providers documentation][3].
+If detection does not resolve, for example because the Operator pod runs on a node without the OpenShift label, set the provider explicitly with the `agent.datadoghq.com/cluster-provider: openshift-rhcos` annotation. For the settings each provider applies and how to override them, see the [providers documentation][3].
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 [2]: https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#role-based-access-to-ssc_configuring-internal-oauth
