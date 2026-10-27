@@ -34,11 +34,11 @@ This page walks you through installing, operating, and removing the Datadog UNIX
 
 ### Install the Agent
 
-To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
+To install the Agent on AIX, run the following command, replacing `<DATADOG_API_KEY>` with your [Datadog API key][8]:
 
-{{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
-
-
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
+```
 
 ### Installation log files
 
@@ -119,7 +119,6 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 [1]: /getting_started/site/#access-the-datadog-site
 [4]: https://github.com/DataDog/datadog-unix-agent/blob/master/README.md
 [5]: /agent/supported_platforms/?tab=aix
-[6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aix
 [7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
