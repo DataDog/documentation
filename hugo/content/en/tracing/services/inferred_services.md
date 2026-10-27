@@ -130,9 +130,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
-The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. Source attributes must be present on spans and collected for these mappings to apply.
-
-Datadog Agent v7.60.0+ collects all listed source attributes by default. For earlier Agent versions and OpenTelemetry Collector setups, collection depends on the version and configuration. The explicit `peer_tags` lists in the Agent v7.50.3 through v7.54.1 and Collector examples omit `out.host`, `dns.hostname`, and `network.destination.ip`. These attributes require collection through your version's defaults or additional configuration.
+The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. These mappings require the source attributes to be collected from your spans. Datadog Agent v7.60.0+ collects all listed source attributes by default.
 
 Peer Tag | Source Attributes
 --------------------|-------------------
