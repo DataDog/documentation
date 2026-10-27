@@ -103152,6 +103152,14 @@ components:
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
+        create_default_retention_filters:
+          default: true
+          description: |-
+            Whether to create the default retention filters when the application is created: `Sessions with errors` and `Sessions`, each with a 100% retention rate.
+            Set to `false` to create the application without them, for example when you add your own retention filters right after creating it. Until you add retention filters, the application only retains sessions matched by its [permanent retention filters](https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters).
+            This setting doesn't affect permanent retention filters (sessions with forced replays, Synthetics sessions and RUM-APM flat sampling).
+          example: false
+          type: boolean
         name:
           description: Name of the RUM application.
           example: my_new_rum_application
@@ -222273,7 +222281,7 @@ paths:
               $ref: "#/components/schemas/RUMApplicationCreateRequest"
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               examples:
@@ -222294,7 +222302,7 @@ paths:
                       type: rum_application
               schema:
                 $ref: "#/components/schemas/RUMApplicationResponse"
-          description: OK
+          description: Created
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "429":
