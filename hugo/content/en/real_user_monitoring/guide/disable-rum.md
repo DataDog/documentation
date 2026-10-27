@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-You can disable RUM for an application from its settings in Datadog. Disabling RUM stops billing for the application's RUM data and does not require a code change.
+You can disable Real User Monitoring (RUM) for an application from its settings in Datadog. For organizations using RUM without Limits, disabling RUM stops billing for the application's RUM data. Disabling RUM does not require a code change.
 
 RUM has two parts that you manage separately: the SDK in your application, which sends data, and the RUM application in Datadog, which receives it. Changing one part does not change the other.
 
@@ -30,7 +30,7 @@ To remove RUM completely, [remove the SDK](#remove-the-sdk-from-your-application
 2. Under {{< ui >}}Product Settings{{< /ui >}}, click {{< ui >}}Real User Monitoring{{< /ui >}}.
 3. Click {{< ui >}}Disable{{< /ui >}}.
 
-{{< img src="real_user_monitoring/guide/disable-rum/disable-rum.png" alt="The Real User Monitoring settings page for a RUM application, showing the status 'Real User Monitoring is enabled' with the Disable button highlighted" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/disable-rum/disable-rum.png" alt="The Real User Monitoring settings page for a RUM application, showing that RUM is enabled and highlighting the Disable button." style="width:100%;" >}}
 
 To re-enable RUM, return to the same page and click {{< ui >}}Enable{{< /ui >}}.
 
@@ -40,7 +40,7 @@ For organizations using [RUM without Limits][2], after you disable RUM for an ap
 
 - Datadog continues to ingest RUM data from the SDK, but does not bill for it.
 - No data is indexed, and retention filters do not apply.
-- If [Product Analytics][3] is enabled, the ingested events may be used for Product Analytics.
+- If [Product Analytics][3] is enabled, Product Analytics can use the ingested events.
 
 ## Remove the SDK from your application
 
