@@ -2010,6 +2010,19 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: List tag indexing rule exemptions
+      url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
+      identifier: metrics-list-tag-indexing-rule-exemptions
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRuleExemptions
+        unstable:
+          - v2
+        order: 34
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -22367,49 +22380,6 @@ menu:
           - ListCatalogEntity
         unstable: []
         order: 1
-    - name: Spa
-      url: /api/latest/spa/
-      identifier: spa
-      generated: true
-    - name: Get SPA Recommendations with a shard parameter
-      url: /api/latest/spa/get-spa-recommendations-with-a-shard-parameter/
-      identifier: spa-get-spa-recommendations-with-a-shard-parameter
-      parent: spa
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSPARecommendationsWithShard
-        unstable:
-          - v2
-        order: 1
-    - name: Get SPA Recommendations
-      url: /api/latest/spa/get-spa-recommendations/
-      identifier: spa-get-spa-recommendations
-      parent: spa
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSPARecommendations
-        unstable:
-          - v2
-        order: 2
-    - name: Get SPA recommendations v2
-      url: /api/latest/spa/get-spa-recommendations-v2/
-      identifier: spa-get-spa-recommendations-v2
-      parent: spa
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSPARecommendationsV2
-        unstable:
-          - v2
-        order: 3
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -23744,6 +23714,19 @@ menu:
           - GetTeamMemberships
         unstable: []
         order: 9
+    - name: Get team hierarchy members
+      url: /api/latest/teams/get-team-hierarchy-members/
+      identifier: teams-get-team-hierarchy-members
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamHierarchyMembers
+        unstable:
+          - v2
+        order: 35
     - name: Update a team link
       url: /api/latest/teams/update-a-team-link/
       identifier: teams-update-a-team-link

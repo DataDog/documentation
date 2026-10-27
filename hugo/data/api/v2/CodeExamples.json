@@ -2028,6 +2028,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3666485614",
+      "description": "Validate an observability pipeline with spike protection processor returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3654691150",
+      "description": "Validate an observability pipeline with spike protection processor threshold overrides returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_337125830",
       "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
@@ -2174,12 +2184,17 @@
     {
       "group": "rum",
       "suffix": "",
-      "description": "Create a new RUM application returns \"OK\" response"
+      "description": "Create a new RUM application returns \"Created\" response"
     },
     {
       "group": "rum",
-      "suffix": "_1946294560",
-      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
+      "suffix": "_4210432830",
+      "description": "Create a new RUM application with Product Scales returns \"Created\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_3241419056",
+      "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
   "SearchRUMEvents": [

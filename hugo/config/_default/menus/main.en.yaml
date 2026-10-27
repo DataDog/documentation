@@ -550,6 +550,11 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
+    - name: Infrastructure Modes
+      identifier: agent_configuration_infrastructure_modes
+      url: agent/configuration/infrastructure-modes/
+      parent: agent_configuration
+      weight: 610
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -3913,6 +3918,11 @@ menu:
       parent: serverless_container_apps
       identifier: serverless_container_apps_manual
       weight: 1
+    - name: Managed OpenTelemetry Agent
+      url: serverless/azure_container_apps/otel_managed_agent
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_otel_managed_agent
+      weight: 2
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -7597,6 +7607,11 @@ menu:
       parent: log_configuration
       identifier: log_optimizer
       weight: 213
+    - name: External Sources
+      url: logs/log_configuration/external_sources/
+      parent: log_configuration
+      identifier: log_configuration_external_sources
+      weight: 214
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
@@ -7692,6 +7707,11 @@ menu:
       url: logs/explorer/findings/
       parent: log_explorer
       weight: 516
+    - name: Federated Logs
+      identifier: log_explorer_federated_logs
+      url: logs/explorer/federated_logs/
+      parent: log_explorer
+      weight: 517
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management

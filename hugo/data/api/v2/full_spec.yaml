@@ -649,7 +649,9 @@ components:
       schema:
         type: string
     GetIssueIncludeQueryParameter:
-      description: Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `case`, and `team_owners`.
+      description: |-
+        Comma-separated list of relationship objects that should be included in the response.
+        Possible values are `assignee`, `case`, `team_owners`, and `samples`.
       explode: false
       in: query
       name: include
@@ -657,6 +659,18 @@ components:
       schema:
         items:
           $ref: "#/components/schemas/GetIssueIncludeQueryParameterItem"
+        type: array
+    GetIssueSamplesBiasesFilterParameter:
+      description: |-
+        Comma-separated list of biases used to pick the samples returned with `include=samples`.
+        Requires `include=samples`. Defaults to all biases.
+      explode: false
+      in: query
+      name: filter[samples.biases]
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/IssueSampleBias"
         type: array
     GoogleChatHandleIdPathParameter:
       description: Your organization handle ID.
@@ -7039,6 +7053,8 @@ components:
           description: The programming language of the source code.
           example: python
           type: string
+        options:
+          $ref: "#/components/schemas/AnalysisRequestOptions"
         rules:
           description: The list of static analysis rules to apply during analysis.
           items:
@@ -7060,6 +7076,20 @@ components:
       type: string
       x-enum-varnames:
         - ANALYSIS_REQUEST
+    AnalysisRequestOptions:
+      description: |-
+        Analyzer options sent by browser-based clients. Accepted but ignored: the API always runs
+        the analysis with tree-sitter enabled and rule output logged.
+      properties:
+        log_output:
+          description: Whether to capture the output logged by rules during execution. Ignored by this operation.
+          example: true
+          type: boolean
+        use_tree_sitter:
+          description: Whether to use tree-sitter to parse the source code. Ignored by this operation.
+          example: true
+          type: boolean
+      type: object
     AnalysisRequestRule:
       additionalProperties: {}
       description: |-
@@ -21511,13 +21541,6 @@ components:
         - description: "If this is a string, it must be a valid JavaScript expression that evaluates to a boolean."
           example: "${true}"
           type: string
-    ComponentRecommendation:
-      description: Resource recommendation for a single Spark component (driver or executor). Contains estimation data used to patch Spark job specs.
-      properties:
-        estimation:
-          $ref: "#/components/schemas/Estimation"
-      required: [estimation]
-      type: object
     ComponentType:
       description: The UI component type.
       enum:
@@ -24272,23 +24295,6 @@ components:
       type: string
       x-enum-varnames:
         - CI_APP_COVERAGE_SUMMARY
-    Cpu:
-      description: CPU usage statistics derived from historical Spark job metrics. Provides multiple estimates so users can choose between conservative and cost-saving risk profiles.
-      properties:
-        max:
-          description: Maximum CPU usage observed for the job, expressed in millicores. This represents the upper bound of usage.
-          format: int64
-          type: integer
-        p75:
-          description: 75th percentile of CPU usage (millicores). Represents a cost-saving configuration while covering most workloads.
-          format: int64
-          type: integer
-        p95:
-          description: 95th percentile of CPU usage (millicores). Balances performance and cost, providing a safer margin than p75.
-          format: int64
-          type: integer
-      type: object
-      x-model-simple-name: SpaCpu
     CreateActionConnectionRequest:
       description: Request used to create an action connection.
       properties:
@@ -29880,9 +29886,7 @@ components:
           example: foobarbaz
           type: string
         last_revision:
-          $ref: "#/components/schemas/CustomRuleRevisionEmbedded"
-          description: Most recent revision of the rule, or null when the rule has no revisions.
-          nullable: true
+          $ref: "#/components/schemas/CustomRuleNullableRevisionEmbedded"
         name:
           description: Rule name
           example: my-rule
@@ -29907,6 +29911,125 @@ components:
       type: string
       x-enum-varnames:
         - CUSTOM_RULE
+    CustomRuleNullableRevisionEmbedded:
+      description: The most recent revision of the rule, or null when the rule has no revisions.
+      nullable: true
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: "#/components/schemas/Argument"
+          nullable: true
+          type: array
+        category:
+          $ref: "#/components/schemas/CustomRuleRevisionAttributesCategory"
+        checksum:
+          description: Code checksum
+          example: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+          type: string
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: "2026-01-09T13:00:57.473141Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE. Omitted when the revision has no associated CVE.
+          example: CVE-2024-1234
+          type: string
+        cwe:
+          description: Associated CWE. Omitted when the revision has no associated CWE.
+          example: CWE-79
+          type: string
+        description:
+          description: Full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL. Omitted when the revision has no documentation URL.
+          example: https://docs.example.com/rules/my-rule
+          type: string
+        id:
+          description: Revision identifier
+          example: revision-123
+          type: string
+        is_published:
+          description: Whether the revision is published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: "#/components/schemas/Language"
+        severity:
+          $ref: "#/components/schemas/CustomRuleRevisionAttributesSeverity"
+        short_description:
+          description: Short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+            - security
+            - custom
+          items:
+            description: A tag attached to the rule.
+            type: string
+          nullable: true
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: "#/components/schemas/CustomRuleRevisionTest"
+          nullable: true
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        version_id:
+          description: Monotonically increasing version number of the revision.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - id
+        - version_id
+        - creation_message
+        - short_description
+        - description
+        - code
+        - checksum
+        - language
+        - tree_sitter_query
+        - created_at
+        - created_by
+        - severity
+        - category
+        - arguments
+        - tests
+        - tags
+        - is_published
+        - should_use_ai_fix
+        - is_testing
+      type: object
     CustomRuleRequest:
       description: Request body for creating or updating a custom rule.
       properties:
@@ -30673,9 +30796,7 @@ components:
           example: my-rule
           type: string
         last_revision:
-          $ref: "#/components/schemas/CustomRuleRevisionEmbedded"
-          description: Most recent revision of the rule, or null when the rule has no revisions.
-          nullable: true
+          $ref: "#/components/schemas/CustomRuleNullableRevisionEmbedded"
         name:
           description: Rule name
           example: my-rule
@@ -40994,28 +41115,6 @@ components:
       type: string
       x-enum-varnames:
         - ESCALATION_POLICY_STEPS
-    Estimation:
-      description: Recommended resource values for a Spark driver or executor, derived from recent real usage metrics. Used by SPA to propose more efficient pod sizing.
-      properties:
-        cpu:
-          $ref: "#/components/schemas/Cpu"
-        ephemeral_storage:
-          description: Recommended ephemeral storage allocation (in MiB). Derived from job temporary storage patterns.
-          format: int64
-          type: integer
-        heap:
-          description: Recommended JVM heap size (in MiB).
-          format: int64
-          type: integer
-        memory:
-          description: Recommended total memory allocation (in MiB). Includes both heap and overhead.
-          format: int64
-          type: integer
-        overhead:
-          description: Recommended JVM overhead (in MiB). Computed as total memory - heap.
-          format: int64
-          type: integer
-      type: object
     Event:
       additionalProperties: {}
       description: The metadata associated with a request.
@@ -56329,12 +56428,14 @@ components:
         - assignee
         - case
         - team_owners
+        - samples
       example: "case"
       type: string
       x-enum-varnames:
         - ASSIGNEE
         - CASE
         - TEAM_OWNERS
+        - SAMPLES
     GetMappingResponse:
       description: Response containing the entity attribute mapping configuration including all available attributes and their properties.
       example:
@@ -59551,6 +59652,33 @@ components:
       type: string
       x-enum-varnames:
         - HISTORICALDETECTIONSJOB
+    HistoricalJobFailure:
+      description: |-
+        Details about why the job failed. Only present when the job has failed and won't be retried.
+      properties:
+        hint:
+          description: A suggestion to fix the failure.
+          example: Narrow the time range or reduce the data scanned.
+          type: string
+        reason:
+          $ref: "#/components/schemas/HistoricalJobFailureReason"
+      type: object
+    HistoricalJobFailureReason:
+      description: The reason why the job failed.
+      enum:
+        - rule_configuration
+        - query_too_expensive
+        - internal_error
+      example: query_too_expensive
+      type: string
+      x-enum-descriptions:
+        - The rule, or the dataset it references, can't run as written.
+        - The query scans too much data.
+        - An internal error occurred. These are usually temporary.
+      x-enum-varnames:
+        - RULE_CONFIGURATION
+        - QUERY_TOO_EXPENSIVE
+        - INTERNAL_ERROR
     HistoricalJobListMeta:
       description: Metadata about the list of jobs.
       properties:
@@ -59677,6 +59805,8 @@ components:
         createdFromRuleId:
           description: ID of the rule used to create the job (if it is created from a rule).
           type: string
+        failure:
+          $ref: "#/components/schemas/HistoricalJobFailure"
         jobDefinition:
           $ref: "#/components/schemas/JobDefinition"
         jobName:
@@ -66991,6 +67121,7 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssueSample"
     IssueLanguage:
       description: Programming language associated with the issue.
       enum:
@@ -67114,6 +67245,8 @@ components:
           $ref: "#/components/schemas/IssueAssigneeRelationship"
         case:
           $ref: "#/components/schemas/IssueCaseRelationship"
+        samples:
+          $ref: "#/components/schemas/IssueSamplesRelationship"
         team_owners:
           $ref: "#/components/schemas/IssueTeamOwnersRelationship"
       type: object
@@ -67127,6 +67260,295 @@ components:
           items:
             $ref: "#/components/schemas/IssueIncluded"
           type: array
+      type: object
+    IssueSample:
+      description: An error event of the issue, picked because it satisfies one or more sample biases.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueSampleAttributes"
+        id:
+          description: Sample identifier.
+          example: "AwAAAZPHnBVMDCSmFgAAABhBWlBIbkJWTUFBRDVnUkhKTmY0WmhRQUEAAAAkMDE5M2M3OWMtMTg1OC00ZTE1LWFhMmItOTQ1N2ZkOGVlMzQyAAAAAA"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueSampleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueSampleAttributes:
+      description: Object containing the information of a sample.
+      properties:
+        application_id:
+          description: RUM application identifier of the error.
+          example: "40d8ca4b-2ac0-481f-b16e-f110699ecff6"
+          type: string
+        biases:
+          description: Biases the sample satisfies. A single error can satisfy several biases.
+          example: ["latest", "git_metadata"]
+          items:
+            $ref: "#/components/schemas/IssueSampleBias"
+          type: array
+        build_id:
+          description: Build identifier of the mobile application.
+          example: "a1b2c3"
+          type: string
+        bundle_version:
+          description: Bundle version of the mobile application.
+          example: "42"
+          type: string
+        data_source:
+          $ref: "#/components/schemas/IssueSampleDataSource"
+        debug_id:
+          description: Debug identifier used to resolve the stack trace of the error to source code.
+          example: "9d8c7b6a-5f4e-3d2c-1b0a-9f8e7d6c5b4a"
+          type: string
+        debug_info_captured:
+          description: Whether an Exception Replay snapshot was captured for the error.
+          example: false
+          type: boolean
+        error_source_type:
+          description: |-
+            Source type set by the SDK or tracer that reported the error, such as `browser` for RUM browser errors
+            or `Crashtracking` for backend crash reports. Usually not set for APM and logs errors.
+          example: "browser"
+          type: string
+        error_stack:
+          $ref: "#/components/schemas/IssueSampleErrorStack"
+        event:
+          $ref: "#/components/schemas/IssueSampleEvent"
+        git_commit_sha:
+          description: Git commit SHA of the service version.
+          example: "b6199f80b6199f80b6199f80b6199f80b6199f80"
+          type: string
+        git_repository_id:
+          description: Git repository identifier of the service.
+          example: "github.com/company/email-api-py"
+          type: string
+        git_repository_url:
+          description: Git repository URL of the service.
+          example: "https://github.com/company/email-api-py"
+          type: string
+        has_session_replay:
+          description: Whether a RUM session replay is available for the error.
+          example: true
+          type: boolean
+        language:
+          description: Programming language of the service.
+          example: "python"
+          type: string
+        links:
+          description: Source code locations of the stack frames that resolve to a repository file.
+          items:
+            $ref: "#/components/schemas/IssueSampleFrameLink"
+          type: array
+        os_name:
+          description: Operating system of the device that reported the error.
+          example: "iOS"
+          type: string
+        service:
+          description: Service name.
+          example: "email-api-py"
+          type: string
+        session_id:
+          description: RUM session identifier of the error.
+          example: "72d11fa0-7f59-408a-95ff-9af7d4f8d7db"
+          type: string
+        session_replay_url:
+          description: URL of the RUM session replay of the error.
+          example: "https://app.datadoghq.com/rum/replay/sessions/72d11fa0-7f59-408a-95ff-9af7d4f8d7db"
+          type: string
+        snapshot_id:
+          description: Identifier of the Exception Replay snapshot of the error.
+          example: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+          type: string
+        span_id:
+          description: APM span identifier of the error.
+          example: "3906394766563720946"
+          type: string
+        timestamp:
+          description: Timestamp of the error.
+          example: "2024-01-01T10:00:00Z"
+          format: date-time
+          type: string
+        trace_id:
+          description: APM trace identifier of the error.
+          example: "6730183925457637287"
+          type: string
+        variant:
+          description: Build variant of the mobile application.
+          example: "release"
+          type: string
+        version:
+          description: Version of the service.
+          example: "1.2.3"
+          type: string
+        view_id:
+          description: RUM view identifier of the error.
+          example: "c5c02423-c03a-400a-993f-731bebf1732b"
+          type: string
+      required:
+        - timestamp
+        - error_stack
+      type: object
+    IssueSampleBias:
+      description: |-
+        Criterion used to pick a sample. `latest` picks the most recent error. `git_metadata` picks the most
+        recent error with source code metadata, whose stack trace is parsed. `trace` picks the most recent error
+        with an APM trace. `session_replay` picks the most recent error with a RUM session replay.
+        `exception_replay` picks the most recent error with an Exception Replay snapshot.
+      enum:
+        - latest
+        - git_metadata
+        - trace
+        - session_replay
+        - exception_replay
+      example: "latest"
+      type: string
+      x-enum-varnames:
+        - LATEST
+        - GIT_METADATA
+        - TRACE
+        - SESSION_REPLAY
+        - EXCEPTION_REPLAY
+    IssueSampleCodeSnippet:
+      description: Source code around a stack frame. Empty when the source code is unavailable.
+      properties:
+        lines:
+          description: Lines of source code.
+          example: ["def filter_forbidden_tags(tags):", "    return len(tags)"]
+          items:
+            type: string
+          type: array
+        offset:
+          description: Line number of the first line of the snippet, starting at 1.
+          example: 37
+          format: int64
+          type: integer
+      type: object
+    IssueSampleDataSource:
+      description: Product that reported the error. The value is `NONE` when the error has no known origin.
+      enum:
+        - APM
+        - LOGS
+        - RUM
+        - LLMOBS
+        - SYNTHETICS
+        - NONE
+      example: "APM"
+      type: string
+      x-enum-varnames:
+        - APM
+        - LOGS
+        - RUM
+        - LLMOBS
+        - SYNTHETICS
+        - NONE
+    IssueSampleErrorStack:
+      description: Parsed stack trace of the error. Only the sample picked by the `git_metadata` bias has frames.
+      properties:
+        frames:
+          description: Stack frames, from the top of the stack.
+          items:
+            $ref: "#/components/schemas/IssueSampleStackFrame"
+          type: array
+        language:
+          description: Programming language used to parse the stack trace.
+          example: "go"
+          type: string
+      type: object
+    IssueSampleEvent:
+      additionalProperties: {}
+      description: Raw error event, as stored by its data source. Its fields differ between APM, logs, and RUM.
+      type: object
+    IssueSampleFrameLink:
+      description: Source code location of a stack frame.
+      properties:
+        code_location:
+          $ref: "#/components/schemas/IssueSampleGitFileLocation"
+        frame_id:
+          description: Index of the frame in the stack trace, starting at 0.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - frame_id
+        - code_location
+      type: object
+    IssueSampleGitFileLocation:
+      description: Location of a stack frame in a repository file. Empty when the source code is unavailable.
+      properties:
+        column:
+          description: Column of the location, starting at 1.
+          example: 13
+          format: int64
+          type: integer
+        filepath:
+          description: Path of the file in the repository.
+          example: "conduit/apps/core/utils.py"
+          type: string
+        first_line:
+          description: First line of the location, starting at 1.
+          example: 42
+          format: int64
+          type: integer
+        last_line:
+          description: Last line of the location, starting at 1.
+          example: 42
+          format: int64
+          type: integer
+        ref:
+          description: Git reference of the file, usually a commit SHA.
+          example: "b6199f80b6199f80b6199f80b6199f80b6199f80"
+          type: string
+        repo_id:
+          description: Repository identifier.
+          example: "github.com/company/email-api-py"
+          type: string
+      type: object
+    IssueSampleReference:
+      description: A curated error sample of the issue.
+      properties:
+        id:
+          description: Sample identifier.
+          example: "AwAAAZPHnBVMDCSmFgAAABhBWlBIbkJWTUFBRDVnUkhKTmY0WmhRQUEAAAAkMDE5M2M3OWMtMTg1OC00ZTE1LWFhMmItOTQ1N2ZkOGVlMzQyAAAAAA"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueSampleType"
+      required:
+        - id
+        - type
+      type: object
+    IssueSampleStackFrame:
+      description: A stack frame.
+      properties:
+        code_snippet:
+          $ref: "#/components/schemas/IssueSampleCodeSnippet"
+        git_file_location:
+          $ref: "#/components/schemas/IssueSampleGitFileLocation"
+        text:
+          description: Text of the frame, as it appears in the stack trace.
+          example: "main.handler(0xc000123456)\n\t/go/src/app/main.go:42 +0x1d"
+          type: string
+      type: object
+    IssueSampleType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_sample"]
+      example: "error_tracking_issue_sample"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_SAMPLE
+    IssueSamplesRelationship:
+      description: Relationship between the issue and its curated error samples.
+      properties:
+        data:
+          description: Array of curated error samples of the issue.
+          items:
+            $ref: "#/components/schemas/IssueSampleReference"
+          type: array
+      required:
+        - data
       type: object
     IssueState:
       description: State of the issue
@@ -86613,6 +87035,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineReduceProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameFieldsProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineSplitArrayProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
@@ -91105,6 +91528,169 @@ components:
         - type
         - attributes
       type: object
+    ObservabilityPipelineSpikeProtectionProcessor:
+      description: |-
+        The `spike_protection` processor learns the normal ingestion volume for the logs that match a specified filter and takes action when the volume spikes unexpectedly.
+
+        **Supported pipeline types:** logs
+      properties:
+        action_when_missing_partitions:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorActionWhenMissingPartitions"
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: "spike-protection-processor"
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor targets.
+          example: "service:my-service"
+          type: string
+        minimal_threshold:
+          description: The minimum volume, in bytes, that must be observed within 24 hours before spike protection can activate. Defaults to 100 GiB.
+          example: 107374182400
+          format: int64
+          type: integer
+        minimal_threshold_overrides:
+          description: A list of per-partition overrides for the minimal threshold, identified by matching field values. Requires `partition_fields` to be set.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorThresholdOverride"
+          type: array
+        name:
+          description: Name of the spike protection rule.
+          example: MySpikeProtection
+          type: string
+        partition_fields:
+          description: A list of fields used to segment log traffic. Volume is learned and evaluated independently for each unique combination of these field values. A maximum of five fields is supported.
+          items:
+            description: The name of a log field used to partition spike detection.
+            maxLength: 128
+            type: string
+          maxItems: 5
+          type: array
+          uniqueItems: true
+        spike_action:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorSpikeAction"
+        spike_threshold:
+          description: The number of standard deviations above the learned mean volume that must be exceeded before a spike is detected. Defaults to `5`.
+          example: 5
+          format: double
+          type: number
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - name
+        - spike_action
+        - enabled
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineSpikeProtectionProcessorActionWhenMissingPartitions:
+      default: ignore
+      description: |-
+        How to handle logs that are missing one of the `partition_fields`. Options:
+        - `ignore`: Forward the event without applying spike protection.
+        - `default_bucket`: Assign the event to a default partition.
+      enum:
+        - ignore
+        - default_bucket
+      example: ignore
+      type: string
+      x-enum-varnames:
+        - IGNORE
+        - DEFAULT_BUCKET
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThreshold:
+      description: The minimal threshold to apply to the matching partition.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytes"
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeep"
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeep:
+      description: Never activates spike protection for the matching partition, regardless of volume.
+      properties:
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeepType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeepType:
+      default: always_keep
+      description: The minimal threshold type. The value should always be `always_keep`.
+      enum:
+        - always_keep
+      example: always_keep
+      type: string
+      x-enum-varnames:
+        - ALWAYS_KEEP
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytes:
+      description: Sets a specific byte threshold for the matching partition.
+      properties:
+        bytes:
+          description: The minimal threshold, in bytes, for the matching partition.
+          example: 107374182400
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytesType"
+      required:
+        - type
+        - bytes
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytesType:
+      default: threshold
+      description: The minimal threshold type. The value should always be `threshold`.
+      enum:
+        - threshold
+      example: threshold
+      type: string
+      x-enum-varnames:
+        - THRESHOLD
+    ObservabilityPipelineSpikeProtectionProcessorSpikeAction:
+      description: |-
+        The action to take with matching logs while spike protection is active. Options:
+        - `drop`: Drop the event.
+        - `no_action`: Let the event pass through.
+        - `overflow_routing`: Route to an overflow destination.
+
+        When `overflow_routing` is used, there must be a destination whose `inputs` reference this processor with the `<processor-id>.overflow_events` suffix to route the overflowing events.
+      enum:
+        - drop
+        - no_action
+        - overflow_routing
+      example: drop
+      type: string
+      x-enum-varnames:
+        - DROP
+        - NO_ACTION
+        - OVERFLOW_ROUTING
+    ObservabilityPipelineSpikeProtectionProcessorThresholdOverride:
+      description: Defines a minimal threshold that applies to a specific partition instead of the processor-wide `minimal_threshold`.
+      properties:
+        fields:
+          description: The set of field matchers that identifies the partition this override applies to. Every field name listed must also appear in `partition_fields`.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineFieldValue"
+          type: array
+        minimal_threshold:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThreshold"
+      required:
+        - fields
+        - minimal_threshold
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorType:
+      default: spike_protection
+      description: The processor type. The value should always be `spike_protection`.
+      enum:
+        - spike_protection
+      example: spike_protection
+      type: string
+      x-enum-varnames:
+        - SPIKE_PROTECTION
     ObservabilityPipelineSplitArrayProcessor:
       description: |-
         The `split_array` processor splits array fields into separate events based on configured rules.
@@ -102713,6 +103299,14 @@ components:
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
+        create_default_retention_filters:
+          default: true
+          description: |-
+            Whether to create the default retention filters when the application is created: `Sessions with errors` and `Sessions`, each with a 100% retention rate.
+            Set to `false` to create the application without them, for example when you add your own retention filters right after creating it. Until you add retention filters, the application only retains sessions matched by its [permanent retention filters](https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters).
+            This setting doesn't affect permanent retention filters (sessions with forced replays, Synthetics sessions and RUM-APM flat sampling).
+          example: false
+          type: boolean
         name:
           description: Name of the RUM application.
           example: my_new_rum_application
@@ -104064,96 +104658,6 @@ components:
       required:
         - data
       type: object
-    RecommendationAttributes:
-      description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
-      properties:
-        confidence_level:
-          description: The confidence level of the recommendation, expressed as a value between 0.0 (low confidence) and 1.0 (high confidence).
-          format: double
-          type: number
-        driver:
-          $ref: "#/components/schemas/ComponentRecommendation"
-        executor:
-          $ref: "#/components/schemas/ComponentRecommendation"
-        matched_params:
-          description: |-
-            Only returned by the v2 endpoint. The job parameters whose values the recommendation was matched on, as `parameter=value` pairs joined by `|`.
-            An empty string means the service-wide (coarse) recommendation was used.
-          example: "detailed_metrics=false|Region=US1"
-          type: string
-      required: [driver, executor]
-      type: object
-    RecommendationData:
-      description: JSON:API resource object for SPA Recommendation. Includes type, optional ID, and resource attributes with structured recommendations.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RecommendationAttributes"
-        id:
-          description: Resource identifier for the recommendation. Optional in responses.
-          type: string
-        type:
-          $ref: "#/components/schemas/RecommendationType"
-      required: [type, attributes]
-      type: object
-    RecommendationDocument:
-      description: JSON:API document containing a single Recommendation resource. Returned by SPA when the Spark Gateway requests recommendations.
-      properties:
-        data:
-          $ref: "#/components/schemas/RecommendationData"
-      required: [data]
-      type: object
-    RecommendationType:
-      default: recommendation
-      description: JSON:API resource type for Spark Pod Autosizing recommendations. Identifies the Recommendation resource returned by SPA.
-      enum:
-        - recommendation
-      example: recommendation
-      type: string
-      x-enum-varnames:
-        - RECOMMENDATION
-    RecommendationV2RequestAttributes:
-      description: |-
-        Attributes for requesting SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a pre-computed shard.
-      properties:
-        arguments:
-          description: |-
-            Raw, unfiltered Spark job arguments as submitted (for example, `--org_id=2`).
-            SPA determines which arguments are relevant for the given service.
-          example:
-            - ""
-          items:
-            type: string
-          type: array
-      required: [arguments]
-      type: object
-    RecommendationV2RequestBody:
-      description: |-
-        Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a pre-computed shard.
-      properties:
-        data:
-          $ref: "#/components/schemas/RecommendationV2RequestData"
-      required: [data]
-      type: object
-    RecommendationV2RequestData:
-      description: JSON:API resource object for the SPA v2 recommendation request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RecommendationV2RequestAttributes"
-        type:
-          $ref: "#/components/schemas/RecommendationV2RequestType"
-      required: [type, attributes]
-      type: object
-    RecommendationV2RequestType:
-      default: recommendation_v2_request
-      description: JSON:API resource type for the SPA v2 recommendation request.
-      enum:
-        - recommendation_v2_request
-      example: recommendation_v2_request
-      type: string
-      x-enum-varnames:
-        - RECOMMENDATION_V2_REQUEST
     RecommendationsFilterRequest:
       description: JSON:API request body for filtering cost recommendations.
       example:
@@ -132872,6 +133376,21 @@ components:
           $ref: "#/components/schemas/TagIndexingRuleExemptionData"
       readOnly: true
       type: object
+    TagIndexingRuleExemptionSort:
+      default: estimated_change_in_volume
+      description: Sort field for tag indexing rule exemptions.
+      enum:
+        - name
+        - -name
+        - estimated_change_in_volume
+        - -estimated_change_in_volume
+      example: estimated_change_in_volume
+      type: string
+      x-enum-varnames:
+        - NAME
+        - NAME_DESCENDING
+        - ESTIMATED_CHANGE_IN_VOLUME
+        - ESTIMATED_CHANGE_IN_VOLUME_DESCENDING
     TagIndexingRuleExemptionType:
       default: tag_indexing_rule_exemptions
       description: The tag indexing rule exemption resource type.
@@ -132897,6 +133416,20 @@ components:
         - OK
         - UNINDEXED_TAGS
         - UNAVAILABLE
+    TagIndexingRuleExemptionsResponse:
+      description: Response containing a page of tag indexing rule exemptions.
+      properties:
+        data:
+          description: Array of tag indexing rule exemption objects.
+          items:
+            $ref: "#/components/schemas/TagIndexingRuleExemptionData"
+          type: array
+        links:
+          $ref: "#/components/schemas/MetricsListResponseLinks"
+        meta:
+          $ref: "#/components/schemas/MetricPaginationMeta"
+      readOnly: true
+      type: object
     TagIndexingRuleMetricMatch:
       description: Criteria for matching metrics based on query state.
       properties:
@@ -134024,6 +134557,360 @@ components:
           $ref: "#/components/schemas/TeamsHierarchyLinksResponseLinks"
         meta:
           $ref: "#/components/schemas/TeamsHierarchyLinksResponseMeta"
+      type: object
+    TeamHierarchyMember:
+      description: A user relationship to the requested team.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamHierarchyMemberAttributes"
+        id:
+          description: Relationship identifier containing the team UUID and user UUID.
+          example: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+          type: string
+        relationships:
+          $ref: "#/components/schemas/TeamHierarchyMemberRelationships"
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    TeamHierarchyMemberAttributes:
+      description: Membership attributes relative to the requested team.
+      properties:
+        direct_role:
+          description: "Role on the requested team: admin or member. Null for inherited members."
+          example: member
+          nullable: true
+          type: string
+        is_direct:
+          description: Whether the user belongs directly to the requested team.
+          example: true
+          type: boolean
+        provisioned_by:
+          description: Membership provisioner. Null for inherited members.
+          example: manual
+          nullable: true
+          type: string
+        provisioned_by_id:
+          description: Identifier supplied by the membership provisioner. Null when unavailable or for inherited members.
+          example: 00000000-0000-0000-0000-000000000003
+          nullable: true
+          type: string
+      required:
+        - is_direct
+        - direct_role
+        - provisioned_by
+        - provisioned_by_id
+      type: object
+    TeamHierarchyMemberIncluded:
+      description: An included user or the requested team, distinguished by resource type.
+      oneOf:
+        - $ref: "#/components/schemas/TeamHierarchyMemberUser"
+        - $ref: "#/components/schemas/TeamHierarchyMemberTeam"
+    TeamHierarchyMemberRelationships:
+      description: User and requested team linkage.
+      properties:
+        team:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamRelationship"
+        user:
+          $ref: "#/components/schemas/TeamHierarchyMemberUserRelationship"
+      required:
+        - user
+        - team
+      type: object
+    TeamHierarchyMemberTeam:
+      description: The requested team, included at most once. Descendant teams are not included.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamAttributes"
+        id:
+          description: UUID of the requested team.
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberTeamAttributes:
+      description: Available attributes of the requested team.
+      properties:
+        handle:
+          description: Handle of the team.
+          example: platform
+          type: string
+        name:
+          description: Name of the team.
+          example: Platform
+          type: string
+      type: object
+    TeamHierarchyMemberTeamData:
+      description: Team resource identifier.
+      properties:
+        id:
+          description: UUID of the team.
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberTeamRelationship:
+      description: Linkage to the requested team.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamHierarchyMemberTeamData"
+      required:
+        - data
+      type: object
+    TeamHierarchyMemberTeamType:
+      default: teams
+      description: Requested team resource type.
+      enum:
+        - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+        - TEAMS
+    TeamHierarchyMemberType:
+      default: user_team_relationship
+      description: Team hierarchy membership resource type.
+      enum:
+        - user_team_relationship
+      example: user_team_relationship
+      type: string
+      x-enum-varnames:
+        - USER_TEAM_RELATIONSHIP
+    TeamHierarchyMemberUser:
+      description: A user included in the hierarchy members response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UserAttributes"
+        id:
+          description: UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/UsersType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamHierarchyMemberUserData:
+      description: User resource identifier.
+      properties:
+        id:
+          description: UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/UsersType"
+      required:
+        - id
+        - type
+      type: object
+    TeamHierarchyMemberUserRelationship:
+      description: Linkage to the user.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamHierarchyMemberUserData"
+      required:
+        - data
+      type: object
+    TeamHierarchyMembersNumberPage:
+      description: Pagination metadata using number and size.
+      properties:
+        first_number:
+          description: First page number.
+          example: 0
+          format: int64
+          type: integer
+        last_number:
+          description: Last page number. Null when unavailable.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        next_number:
+          description: Next page number. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: Current zero-based page number.
+          example: 0
+          format: int64
+          type: integer
+        prev_number:
+          description: Previous page number. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: Maximum number of members per page.
+          example: 100
+          format: int64
+          type: integer
+        total:
+          description: Total number of members matching the filters.
+          example: 2
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMembersNumberPageType"
+      required:
+        - type
+        - number
+        - size
+        - total
+        - first_number
+        - prev_number
+        - next_number
+        - last_number
+      type: object
+    TeamHierarchyMembersNumberPageType:
+      default: number_size
+      description: Pagination mode.
+      enum:
+        - number_size
+      example: number_size
+      type: string
+      x-enum-varnames:
+        - NUMBER_SIZE
+    TeamHierarchyMembersOffsetPage:
+      description: Pagination metadata using offset and limit.
+      properties:
+        first_offset:
+          description: First offset.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Last offset. Null when unavailable.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Maximum number of members per page.
+          example: 100
+          format: int64
+          type: integer
+        next_offset:
+          description: Next offset. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Current offset.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Previous offset. Null when unavailable.
+          example:
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total number of members matching the filters.
+          example: 2
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/TeamHierarchyMembersOffsetPageType"
+      required:
+        - type
+        - offset
+        - limit
+        - total
+        - first_offset
+        - prev_offset
+        - next_offset
+        - last_offset
+      type: object
+    TeamHierarchyMembersOffsetPageType:
+      default: offset_limit
+      description: Pagination mode.
+      enum:
+        - offset_limit
+      example: offset_limit
+      type: string
+      x-enum-varnames:
+        - OFFSET_LIMIT
+    TeamHierarchyMembersPage:
+      description: Pagination metadata for the selected pagination mode.
+      oneOf:
+        - $ref: "#/components/schemas/TeamHierarchyMembersOffsetPage"
+        - $ref: "#/components/schemas/TeamHierarchyMembersNumberPage"
+    TeamHierarchyMembersResponse:
+      description: Direct and inherited members of the requested team.
+      properties:
+        data:
+          description: >-
+            Membership relationships for users who belong to the requested team or inherit membership through its descendant teams. Each user appears once, even if they belong to multiple teams in the hierarchy. Each relationship identifies the user and requested team, and indicates whether the user is a direct member of the requested team.
+          items:
+            $ref: "#/components/schemas/TeamHierarchyMember"
+          type: array
+        included:
+          description: Requested users and the team. May be absent when the result is empty, even if requested.
+          items:
+            $ref: "#/components/schemas/TeamHierarchyMemberIncluded"
+          type: array
+        links:
+          $ref: "#/components/schemas/TeamHierarchyMembersResponseLinks"
+        meta:
+          $ref: "#/components/schemas/TeamHierarchyMembersResponseMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    TeamHierarchyMembersResponseLinks:
+      description: Page navigation links. Unavailable links are omitted.
+      properties:
+        first:
+          description: First page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        last:
+          description: Last page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        next:
+          description: Next page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        prev:
+          description: Previous page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+        self:
+          description: Current page URL.
+          example: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+          type: string
+      type: object
+    TeamHierarchyMembersResponseMeta:
+      description: Pagination metadata for the filtered members.
+      properties:
+        page:
+          $ref: "#/components/schemas/TeamHierarchyMembersPage"
+      required:
+        - page
       type: object
     TeamIncluded:
       description: Included resources related to the team
@@ -169993,6 +170880,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/IssueIDPathParameter"
         - $ref: "#/components/parameters/GetIssueIncludeQueryParameter"
+        - $ref: "#/components/parameters/GetIssueSamplesBiasesFilterParameter"
       responses:
         "200":
           content:
@@ -203979,6 +204867,138 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/metrics/list-tag-indexing-rule-exemptions:
+    get:
+      description: |-
+        Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.
+        You can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching
+        tag indexing rule. You can sort results by metric name or by estimated change in indexed volume.
+      operationId: ListTagIndexingRuleExemptions
+      parameters:
+        - description: |-
+            Filter exemptions to metrics whose names start with this literal prefix.
+            Matching is case-sensitive. Wildcard characters are treated literally.
+          example: dd.test.
+          in: query
+          name: filter[metric_prefix]
+          schema:
+            type: string
+        - description: |-
+            Filter exemptions by whether they are safe to remove. An exemption is considered safe when a fresh, usable
+            estimate indicates that removing it would not increase indexed volume and would not drop tags used to query
+            the metric in monitors, dashboards, notebooks, or SLOs. Set to `true` to return safe-to-remove exemptions,
+            or `false` to return all other exemptions, including those with unavailable or stale estimates.
+          example: true
+          in: query
+          name: filter[safe]
+          schema:
+            type: boolean
+        - description: Filter exemptions to metrics matched by the tag indexing rule with this UUID.
+          example: 00000000-0000-0000-0000-000000000001
+          in: query
+          name: filter[tag_indexing_rule_id]
+          schema:
+            format: uuid
+            type: string
+        - description: |-
+            Sort field. Prefix the field with `-` for descending order. The default is `estimated_change_in_volume` in ascending order, with the largest reductions (most negative values) first.
+          example: estimated_change_in_volume
+          in: query
+          name: sort
+          schema:
+            $ref: "#/components/schemas/TagIndexingRuleExemptionSort"
+        - description: |-
+            Maximum number of results per page. Defaults to 10000; accepts values from 1 to 10000. If
+            `meta.pagination.next_cursor` is non-null, request the next page by passing that value as `page[cursor]`.
+            Continue until `next_cursor` is null.
+          example: 100
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 10000
+            format: int32
+            maximum: 10000
+            minimum: 1
+            type: integer
+        - description: |-
+            Cursor for pagination. Use `page[size]` to opt-in to pagination and get the first page; for subsequent pages, use the value from `meta.pagination.next_cursor` in the response. Pagination is complete when `next_cursor` is null.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-15T12:00:00.000Z"
+                          created_by_handle: user@datadoghq.com
+                          estimated_change_in_volume: 45
+                          kind: exemption
+                          missing_indexed_tags:
+                            - service
+                          reason: This metric has a pre-existing tag configuration.
+                          volume_status: ok
+                        id: dd.test.metric
+                        type: tag_indexing_rule_exemptions
+                    links:
+                      first: /api/v2/metrics/list-tag-indexing-rule-exemptions?page[size]=100
+                      next: /api/v2/metrics/list-tag-indexing-rule-exemptions?page[size]=100&page[cursor]=next-page-cursor
+                      self: /api/v2/metrics/list-tag-indexing-rule-exemptions?page[size]=100
+                    meta:
+                      pagination:
+                        cursor:
+                        limit: 1
+                        next_cursor: next-page-cursor
+                        type: cursor_limit
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: List tag indexing rule exemptions
+      tags:
+        - Metrics
+      x-menu-order: 34
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules:
     get:
       description: List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.
@@ -221318,7 +222338,7 @@ paths:
               $ref: "#/components/schemas/RUMApplicationCreateRequest"
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               examples:
@@ -221339,7 +222359,7 @@ paths:
                       type: rum_application
               schema:
                 $ref: "#/components/schemas/RUMApplicationResponse"
-          description: OK
+          description: Created
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "429":
@@ -242889,188 +243909,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/spa/recommendations-v2/{service}:
-    post:
-      description: |-
-        This endpoint is experimental and restricted to Datadog internal use only.
-        Retrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides
-        a service name and the job's raw arguments. SPA determines which arguments are relevant
-        for the service and returns structured recommendations for driver and executor resources.
-      operationId: GetSPARecommendationsV2
-      parameters:
-        - description: The service name for a Spark job
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RecommendationV2RequestBody"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                    matched_params: "detailed_metrics=false"
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA recommendations v2
-      tags:
-        - Spa
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
-  /api/v2/spa/recommendations/{service}:
-    get:
-      description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.
-      operationId: GetSPARecommendations
-      parameters:
-        - description: The recommendation service should not use its metrics cache.
-          in: query
-          name: bypass_cache
-          schema:
-            type: string
-        - description: The service name for a spark job.
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA Recommendations
-      tags:
-        - Spa
-      x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
-  /api/v2/spa/recommendations/{service}/{shard}:
-    get:
-      description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.
-      operationId: GetSPARecommendationsWithShard
-      parameters:
-        - description: The shard tag for a spark job, which differentiates jobs within the same service that have different resource needs
-          in: path
-          name: shard
-          required: true
-          schema:
-            type: string
-        - description: The service name for a spark job
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-        - description: The recommendation service should not use its metrics cache.
-          in: query
-          name: bypass_cache
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA Recommendations with a shard parameter
-      tags:
-        - Spa
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
   /api/v2/spans/analytics/aggregate:
     post:
       description: |-
@@ -252630,6 +253468,269 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/team/{team_id}/members:
+    get:
+      description: |-
+        List the direct and inherited members of a team, deduplicated by user.
+        Members of descendant teams are included unless `filter[is_direct_only]` is true.
+        Datadog support users are always excluded.
+
+        Use `page[number]` and `page[size]` to paginate through the results.
+        Invalid query parameters return a JSON:API error with status 400.
+        Invalid or unknown team UUIDs return status 404.
+      operationId: ListTeamHierarchyMembers
+      parameters:
+        - description: UUID of the requested root team.
+          in: path
+          name: team_id
+          required: true
+          schema:
+            example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+            type: string
+        - description: Return only direct members. By default, members inherited from descendant teams are also returned.
+          in: query
+          name: filter[is_direct_only]
+          required: false
+          schema:
+            default: false
+            example: false
+            type: boolean
+        - description: Include service accounts. Datadog support users are always excluded.
+          in: query
+          name: filter[include_service_accounts]
+          required: false
+          schema:
+            default: true
+            example: true
+            type: boolean
+        - description: Filter by a case-insensitive substring of the user name, handle, or email.
+          in: query
+          name: filter[keyword]
+          required: false
+          schema:
+            example: alice
+            type: string
+        - description: "Comma-separated resources to include: `user` and `team`. The included team is the requested team. Whitespace is trimmed, and duplicate or empty entries are ignored."
+          in: query
+          name: include
+          required: false
+          schema:
+            example: user,team
+            pattern: ^\s*((user|team)\s*)?(,\s*((user|team)\s*)?)*$
+            type: string
+        - description: "Comma-separated sort fields: `name`, `handle`, `is_direct`, and `provisioned_by`. Fields are applied in order, each optionally prefixed with `-` for descending order. By default, team admins come first, followed by other direct members, then inherited members, sorted by name within each group."
+          in: query
+          name: sort
+          required: false
+          schema:
+            example: is_direct,-name
+            type: string
+        - description: Zero-based page number. Negative values become 0. Defaults to 0.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Requested number of members per page. Defaults to and maxes out at 100.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            example: 100
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Direct and inherited members with number pagination
+                  value:
+                    data:
+                      - attributes:
+                          direct_role: admin
+                          is_direct: true
+                          provisioned_by: manual
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        type: user_team_relationship
+                      - attributes:
+                          direct_role:
+                          is_direct: false
+                          provisioned_by:
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000002
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: users
+                        type: user_team_relationship
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 2
+                        type: number_size
+                empty:
+                  summary: No matching members, with included resources omitted
+                  value:
+                    data: []
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 0
+                        type: number_size
+                included_resources:
+                  summary: Users and the team with number pagination
+                  value:
+                    data:
+                      - attributes:
+                          direct_role: admin
+                          is_direct: true
+                          provisioned_by: manual
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000001
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        type: user_team_relationship
+                      - attributes:
+                          direct_role:
+                          is_direct: false
+                          provisioned_by:
+                          provisioned_by_id:
+                        id: UserTeamRelationship:692e8073-12c4-4c71-8408-5090bd44c9c8:00000000-0000-0000-0000-000000000002
+                        relationships:
+                          team:
+                            data:
+                              id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                              type: teams
+                          user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: users
+                        type: user_team_relationship
+                    included:
+                      - attributes:
+                          email: alice@example.com
+                          handle: alice@example.com
+                          name: Alice
+                          title:
+                        id: 00000000-0000-0000-0000-000000000001
+                        type: users
+                      - attributes:
+                          email: bob@example.com
+                          handle: bob@example.com
+                          name:
+                          title:
+                        id: 00000000-0000-0000-0000-000000000002
+                        type: users
+                      - attributes:
+                          handle: platform
+                          name: Platform
+                        id: 692e8073-12c4-4c71-8408-5090bd44c9c8
+                        type: teams
+                    links:
+                      first: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      last: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                      self: https://api.datadoghq.com/api/v2/team/692e8073-12c4-4c71-8408-5090bd44c9c8/members?include=user%2Cteam&page%5Bnumber%5D=0&page%5Bsize%5D=100
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 2
+                        type: number_size
+              schema:
+                $ref: "#/components/schemas/TeamHierarchyMembersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - teams_read
+      summary: Get team hierarchy members
+      tags:
+        - Teams
+      x-menu-order: 35
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+          - teams_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
@@ -253630,7 +254731,7 @@ paths:
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
             - service
-            - resource_name
+            - resource
           in: query
           name: include_fields
           required: false
@@ -257833,8 +258934,6 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
     name: Software Catalog
-  - description: SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations.
-    name: Spa
   - description: |-
       Search and aggregate your spans from your Datadog platform over HTTP.
     name: Spans

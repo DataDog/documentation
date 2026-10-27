@@ -29,3 +29,10 @@ entries:
       - ListSourcemaps
       - RestoreSourcemaps
     title: Accept WASM and Portable PDB source map kinds
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41000
+    operations:
+      - CreateRUMApplication
+    title: Add create_default_retention_filters to RUM application creation and 
+      document its 201 response
