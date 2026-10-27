@@ -212,12 +212,12 @@ export type HeaderData = {
 // ---------------------------------------------------------------------------
 
 const categoryIconMap: Record<string, string> = import.meta.glob<string>(
-  "../../mocked-dependencies/websites_modules/static/icons/*.svg",
+  "../../assets/images/websites-modules/*.svg",
   { query: "?raw", import: "default", eager: true },
 );
 
 export function iconHtml(name: string): string {
-  const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
+  const key = `../../assets/images/websites-modules/${name}.svg`;
   return categoryIconMap[key] ?? "";
 }
 

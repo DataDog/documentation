@@ -120,19 +120,13 @@ For local setup, see [README.md](README.md).
 - When a component or function has deeply nested elements or loops, look for opportunities to break it up into subcomponents (especially in Preact, where subcomponents can be included in the same file) or private functions.
 - When possible, aim for highly readable top-level driver code, which should mostly be invocations of clearly named functions that provide a narrative to a human reader.
 
-## Mocked dependencies vs. test fixtures
+## websites-modules icons
 
-These are two different things, both used to decouple this site from external state. Don't conflate them.
+Some components need SVGs from the `websites-modules` icon font, which the Astro site doesn't load yet. Put these SVGs in [src/assets/images/websites-modules/](./src/assets/images/websites-modules/), named after the icon's font class (for example, `twitter-x.svg` for `icon-twitter-x`).
 
-### Mocked dependencies — dev-time placeholders
+## Test fixtures
 
-The [mocked-dependencies folder](./src/mocked-dependencies/) contains stand-ins for external resources that aren't yet available to us at runtime. For example, [mocked-dependencies/websites_modules/](./src/mocked-dependencies/websites_modules/) holds placeholder data the dev server reads when the real `websites-modules` source isn't wired up.
-
-Anytime you're building a feature that depends on some external resource that isn't yet plumbed in, add a placeholder for it to `mocked-dependencies/` so the dev server and build can run.
-
-### Test fixtures — frozen test inputs
-
-Test fixtures live under [tests/fixtures/](./tests/fixtures/), **not** in `mocked-dependencies/`. They are intentionally small, frozen snapshots of real upstream data, kept stable so unit tests don't churn every time the live source changes. For example, [tests/fixtures/api/](./tests/fixtures/api/) is a trimmed copy of the live Hugo API spec.
+Test fixtures live under [tests/fixtures/](./tests/fixtures/). They are intentionally small, frozen snapshots of real upstream data, kept stable so unit tests don't churn every time the live source changes. For example, [tests/fixtures/api/](./tests/fixtures/api/) is a trimmed copy of the live Hugo API spec.
 
 These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `yarn test:headless -u`. Treat the fixture as the source of truth, not a derived artifact.
 
