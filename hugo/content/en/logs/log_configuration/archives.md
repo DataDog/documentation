@@ -257,15 +257,17 @@ Lookup attributes create a fast path to logs with specific values. Use them for 
 
 You can configure up to **2 lookup attributes** per archive.
 
-* **Use for**: High-cardinality attributes such as `trace_id`, `container_id`, `user_id`, or `request_id`.
+* **Use for**: High-cardinality attributes such as `trace_id`, `@container_id`, `@usr.id`, or `@http.request_id`.
 * **How it works**: Datadog builds an index for these attributes at write time, allowing Archive Search to pinpoint specific logs without scanning the full archive.
+
+Enter [reserved attributes][19] such as `trace_id` without the `@` prefix. Prefix all other attributes with `@`, for example `@usr.id` or `@http.request_id`.
 
 **Partition vs. Lookup attributes**
 
 | | Partition | Lookup |
 |---|---|---|
 | **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
-| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
+| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `@container_id`, `@usr.id`, `@transaction_id` |
 | **How it helps** | Skips entire partitions that don't match your query | Pinpoints specific log entries without scanning the full archive |
 | **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
 | **Limit** | Up to 2 per archive | Up to 2 per archive |
@@ -496,5 +498,6 @@ This directory structure simplifies the process of querying your historical log 
 [16]: /logs/explorer/archive_search/?tab=amazons3
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[19]: /logs/explorer/search_syntax/#reserved-attributes
 
 
