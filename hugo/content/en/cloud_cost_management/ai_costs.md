@@ -187,7 +187,7 @@ A provider is available to allocate only if its bill is connected to Cloud Cost 
 
 The flow creates one allocation rule for each provider and token type, such as input, output, cache read, and cache write tokens.
 
-After you create the rules, the tags you selected are added to your provider costs. Use these tags across Cloud Cost Management, including [Cloud Cost Explorer][11], dashboards, [Cost Reports][14], [monitors][8], and [budgets][9].
+After the rules are processed, the tags you selected are added to your provider costs. Use these tags across Cloud Cost Management, including [Cloud Cost Explorer][11], dashboards, [Cost Reports][14], [monitors][8], and [budgets][9].
 
 ### How gateway costs are allocated
 
