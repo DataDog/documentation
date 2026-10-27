@@ -242,4 +242,4 @@ kubectl delete crd podmonitors.monitoring.coreos.com probes.monitoring.coreos.co
 [16]: /opentelemetry/troubleshooting/
 [17]: /opentelemetry/setup/collector_exporter/
 [18]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
-[19]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[19]: /opentelemetry/setup/ddot_collector/kubernetes/
