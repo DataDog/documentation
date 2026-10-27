@@ -11,9 +11,9 @@ further_reading:
   - link: "/llm_observability/improve/playground"
     tag: "Documentation"
     text: "Playground"
-  - link: "/llm_observability/improve/online_experiments/#experiment-with-managed-prompts"
+  - link: "/llm_observability/improve/online_experiments/prompt_experimentation/"
     tag: "Documentation"
-    text: "Experiment with managed prompts"
+    text: "Prompt Experimentation"
   - link: "/llm_observability/instrument/sdk/?tab=python"
     tag: "Documentation"
     text: "Agent Observability SDK"
@@ -26,7 +26,7 @@ Prompt Management provides a centralized registry for the prompts used by your L
 
 Prompt retrieval and Prompt Tracking are separate: you can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
-After creating prompt versions, use [Online Experiments][10] to compare them with an A/B test or deploy one progressively with a Guarded Rollout.
+After creating prompt versions, use [Prompt Experimentation][10] to compare them with an A/B test or deploy one progressively with a Guarded Rollout.
 
 Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. See [Track prompt usage](#track-prompt-usage) for setup.
 
@@ -909,7 +909,7 @@ Pass the attributes used by your targeting rule, as shown in the previous code e
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
-To measure which version performs better, or to roll out a version gradually with automatic regression checks, see [Experiment with managed prompts][10].
+To measure which version performs better, or to roll out a version gradually with automatic regression checks, see [Prompt Experimentation][10].
 
 ## Further reading
 
@@ -924,6 +924,6 @@ To measure which version performs better, or to roll out a version gradually wit
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
-[10]: /llm_observability/improve/online_experiments/#experiment-with-managed-prompts
+[10]: /llm_observability/improve/online_experiments/prompt_experimentation/
 [11]: /remote_configuration/
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/
