@@ -40,7 +40,7 @@ There is no tracer or Agent version requirement.
 1. In the {{< ui >}}Pattern{{< /ui >}} field, enter a regular expression that matches the resource names to rewrite. For example, `(\w+) /api/v1/users/[0-9a-fA-F-]{36}/orders/\d+`.
    - The pattern must match the entire resource name. For example, `/users/\d+` does not match `GET /users/123`. Use `.*` or capture groups to cover the parts of the resource name you want to keep.
    - Patterns use [RE2 syntax][4]. Lookarounds and backreferences are not supported.
-   - Write the pattern against the resource name as it appears in Datadog.
+   - Write the pattern against the resource name as it appears in Datadog, after [quantization][5]. For example, Datadog replaces GUIDs with `{guid}` and numeric IDs of six or more digits with `{num}` before rules run.
    - Toggle {{< ui >}}See examples{{< /ui >}} to view sample patterns.
 1. In the {{< ui >}}Replacement{{< /ui >}} field, enter the new resource name. For example, `$1 /api/v1/users/{user_id}/orders/{order_id}`.
    - Reference capture groups with `$1` through `$9`, or with `${name}` for named groups. To place a digit directly after a group reference, use braces, for example `${1}2`.
