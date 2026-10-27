@@ -62,8 +62,6 @@ export function buildRumInitOptions({
     service: TELEMETRY_SERVICE,
     ...optional("version", version),
     trackUserInteractions: true,
-    // TODO: `feature_flags` is inert until OpenFeature feature flags are wired
-    // up and a flag resolver is supplied — nothing here evaluates a flag yet.
     enableExperimentalFeatures: ["zero_lcp_telemetry", "feature_flags"],
     sessionSampleRate: 100,
     sessionReplaySampleRate: 50,
