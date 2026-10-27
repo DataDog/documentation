@@ -333,7 +333,7 @@ To create a tag-based correction with the API or Terraform, set the `slo_query` 
 
 #### Tag-based corrections
 
-A tag-based correction uses a query to select SLOs by their tags, so you can apply one correction across many SLOs. For example, use a tag-based correction to cover scheduled maintenance for every SLO owned by a team, or every SLO in an environment.
+A tag-based correction uses a query to select SLOs by their tags, so you can apply one correction across many SLOs. For example, use a tag-based correction to cover outside business hours for every SLO owned by a team, or every SLO in an environment.
 
 Tag-based corrections are evaluated when the SLO status is calculated, so the correction applies to all SLOs that match the query at that time. If you create a new SLO or add tags to an existing SLO that match the query, the correction applies to that SLO as well.
 
