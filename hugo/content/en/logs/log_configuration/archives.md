@@ -240,7 +240,9 @@ Use this optional configuration step to define the maximum volume of log data (i
 
 For archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
 
-**Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries. For both attribute types, enter [reserved attributes][19] such as `service` or `trace_id` without the `@` prefix, and prefix all other attributes with `@`.
+**Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
+
+For both attribute types, enter tags and [reserved attributes][19] such as `env`, `service`, or `trace_id` without the `@` prefix, and prefix all other attributes with `@`.
 
 #### Archive Partition Attribute {#archive-partition-attribute}
 
