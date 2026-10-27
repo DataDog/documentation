@@ -17,7 +17,6 @@ playwright-report/
 # Hand-authored prose. Prettier's markdown rules are cosmetic here (it rewrites
 # `*emphasis*` to `_emphasis_` and renormalizes lists and tables), and applying
 # them churns documents people edit by hand for no readability gain.
-docs/
 CLAUDE.md
 AGENTS.md
 

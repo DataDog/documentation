@@ -1,14 +1,37 @@
-# Astro Docs
+# Astro docs
 
 This file guides AI coding agents, such as Claude Code, Codex, and Cursor, when they work in the `astro/` folder. `CLAUDE.md` imports this file, so make all edits here, not in `CLAUDE.md`.
 
-## About this project
+# Warning: This site is in development
 
-We intend to eventually deprecate Hugo (located in the `hugo` folder), having moved all of its content into this Astro site.
+These docs are not live yet, and updating them has no impact on [the production site](https://docs.datadoghq.com). 
 
-The scope of this new Astro site is just the API docs. In Hugo, the HTML for the API docs can be found in [public/api](../hugo/public/api/). Those docs are generated from [the spec YAML in this folder](./../hugo/data/api). The Astro site does not read that folder: it reads the same files from the published API docs bundle, which `yarn fetch:spec` stages into `api-spec/` (the `@api-spec` alias). The committed `hugo/data/api` is on its way out; the bundle is the source of truth.
+If someone who has never contributed to the `astro` folder asks you to revise these docs, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead.
 
-Prompts often refer to the "Hugo docs". This refers either to the general Hugo site setup (footer, header, etc.) or the API docs content specifically, depending on the context of the request.
+## About the Astro site
+
+We're migrating some of our docs content from Hugo (located in the `hugo` folder) to Astro. The site contains two types of docs:
+
+| Doc type | Description | Status |
+| --- | --- | --- |
+| API docs | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | In QA against the Hugo API docs. Not live. |
+| Product docs | All other docs. `.mdoc` files in `src/content/en/`, rendered on demand (SSR). Pages with `content_filters` are filterable docs (cdocs). | Proof of concept. Only test fixtures in `dd_e2e/`. |
+
+## The Hugo site
+
+You may sometimes be asked to implement something "similar to the Hugo site" or "matching the Hugo site." Unless otherwise stated, this instruction does **not** require an exact cosmetic match to Hugo, and it does not represent a request to ignore any of the Astro-specific conventions below. 
+
+Instead, aim to provide a similar layout and user experience, but use Astro conventions, such as BEM classes and design tokens. Even when an exact cosmetic match is requested, Astro conventions can still apply, but you may need to create special `--hugo` prefixed tokens to indicate legacy measurements.
+
+If the user has built the Hugo site, the rendered Hugo HTML can be found in the [hugo/public](../hugo/public/) folder.
+
+## Hugo dependencies
+
+The Astro site is not fully decoupled from the Hugo site yet; it still loads resources from the `hugo` folder. These shared dependencies will gradually be migrated to a more appropriate location (for example, the `shared` folder).
+
+Site code should only import `hugo` files through the `@hugo-site` alias, so these dependencies are easy to find. 
+
+A few build scripts and the [`websites-modules` lookup](src/lib/site/websitesModulesPath.ts) read from `hugo/` directly, since the alias cannot be used in those contexts.
 
 ## Future site scope
 
@@ -16,15 +39,14 @@ This site will eventually have tens of thousands of pages, with most of them ren
 
 ## Disallowed actions: Do not do these
 
-- Don't run the prod build. Instead, recommend running the prod build to the user as a next or final step.
-- Don't read anything in `astro/docs`. That's for humans.
+- Don't run the prod build. Instead, recommend running the prod build to the user as a next or final step. If `yarn build:en` will suffice, recommend that instead of the full build.
 - Do not run irrelevant tests until you're finished with a feature and checking for all regressions.
 
 ## Global operating instructions
 
 - Respond concisely. Be blunt.
 - If you recommend a different approach than what was asked for, query the user before proceeding.
-- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass. This isn't necessary for cosmetic changes, like adjusting spacing or font sizes.
+- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass. For cosmetic changes, like adjusting spacing or font sizes, snapshot coverage is preferred over programmatic tests, since snapshots are easier for humans to verify when they break.
 
 ## Formatting
 
@@ -45,27 +67,23 @@ This site will eventually have tens of thousands of pages, with most of them ren
 
 - Where possible, use design tokens, not hardcoded values. This is to support dark mode (a planned feature), alternative views offering larger font sizes, etc.
 - In terms of their names, design tokens should be reusable, not tightly coupled to a specific component. Follow the existing naming conventions.
+- Only when an exact cosmetic match with the Hugo site is explicitly requested, use (or add) a legacy token with the `--hugo-` prefix in [src/styles/tokens/hugo.css](src/styles/tokens/hugo.css). These replicate Hugo's exact pixel values and will be deprecated along with Hugo, so don't use them otherwise.
 
-## Stay inside `astro/`
+## Stay inside `astro/`, aside from the listed exceptions
 
-Everything outside this folder belongs to the live Hugo site — do not edit it, with the following exceptions, needed to route/deploy the Astro `/api` app alongside Hugo:
+Everything outside this folder belongs to the live Hugo site. In the course of Astro docs development work, do not edit anything outside of the `astro` folder without permission, with the following exceptions, needed to route/deploy the Astro `/api` app alongside Hugo:
 
 - Root `Caddyfile` (local dev router).
-- `hugo/Makefile` — dev/deploy targets only (e.g. `start-proxied`), never content or build-script targets.
+- `hugo/Makefile`: dev/deploy targets only (e.g. `start-proxied`), never content or build-script targets.
 - `.github/workflows/preview_link.yml`.
 - `hugo/local/bin/py/preview_links.py` and `hugo/local/bin/py/preview-links-template.mako`.
-- Only at the later Hugo-`/api`-cutover step (see the router plan's Handoff section): `hugo/config/{preview,live}/config.yaml` and `hugo/content/en/api/_index.md`.
-
-Beyond that list, this applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `MISSING_TRANSLATION_LABEL` comment (for example, `MISSING_TRANSLATION_LABEL: These headings are not in the i18n file yet.`) so the key can be added authoritatively later.
+- `shared/i18n`, to add new translation labels used in components or other Astro objects.
 
 If a task seems to require any other Hugo-side change, stop and ask first.
 
 ## No deploy code in this repo
 
-This repository is public and holds no execution logic for deployment. Hugo's deploy
-is *declared* in `hugo/config/{preview,live}/config.yaml` and *executed* entirely by
-tooling from the CI image. Astro's deploy follows the same rule: it lives as job
-`script:` steps in `DataDog/documentation-ci`.
+This repository is public and holds no execution logic for deployment. Hugo's deploy is *declared* in `hugo/config/{preview,live}/config.yaml` and *executed* entirely by tooling from the CI image. Astro's deploy follows the same rule: it lives as job `script:` steps in `DataDog/documentation-ci`.
 
 Nothing under `astro/` may contain:
 
@@ -74,18 +92,13 @@ Nothing under `astro/` may contain:
 - CloudFront distribution IDs, or invalidation logic
 - IAM role ARNs, role assumption, or any credential handling
 
-`astro/scripts/verifyDist.mjs` is the boundary: it verifies the *shape* of
-`dist/client` and knows nothing about where that output is uploaded. Build-output
-verification belongs here; anything that talks to a cloud provider does not.
+`astro/scripts/verifyDist.mjs` is the boundary: it verifies the *shape* of `dist/client` and knows nothing about where that output is uploaded. Build-output verification belongs here; anything that talks to a cloud provider does not.
 
-One exception: `scripts/lib/websitesSourcesData.ts` reads two public tarballs from
-the `websites-sources` bucket — the data tarball, for the SDK versions
-`yarn fetch:examples` clones at, and the API docs bundle (`latest-api-docs.tar.gz`),
-which `yarn fetch:spec` stages into `api-spec/`. Keep those reads confined to this
-one file — nothing else under `astro/` should import `tar` or know a tarball's URL.
-Both are anonymous HTTPS GETs; everything above still applies.
+One exception: `scripts/lib/websitesSourcesData.ts` reads two public tarballs from the `websites-sources` bucket — the data tarball, for the SDK versions `yarn fetch:examples` clones at, and the API docs bundle (`latest-api-docs.tar.gz`), which `yarn fetch:spec` stages into `api-spec/`. Keep those reads confined to this one file — nothing else under `astro/` should import `tar` or know a tarball's URL. Both are anonymous HTTPS GETs; everything above still applies.
 
 ## Commands
+
+For local setup, see [README.md](README.md).
 
 - `yarn dev` — Start dev server on port 4321
 - `yarn build` — Production build to `dist/`
