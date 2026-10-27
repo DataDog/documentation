@@ -181,7 +181,7 @@ A provider is available to allocate only if its bill is connected to Cloud Cost 
    - Filter the usage metric to your gateway traffic (for example, `service:ai_gateway`). For LiteLLM, you can instead select **Allocate my costs based on the entire metric**.
    - Choose up to three tags to break your AI spend down by, such as `team`, `user`, or `service`.
 3. **Match to bills**: Select the provider bills to split. For each provider, add a bill filter that identifies the gateway's spend on that bill (for example, `api_key_name:gateway_api_key` for Anthropic or `project_name:ai_gateway` for OpenAI). Bill filters support the `is` operator.
-4. **Confirm coverage**: Review the percentage of provider-reported tokens that your usage source accounts for, for each token type, over a recent seven-day window. If coverage exceeds 100% for a token type, check that your usage filter and bill filter cover the same API key or project. For more information, see [How gateway costs are allocated](#how-gateway-costs-are-allocated).
+4. **Confirm coverage**: Review the percentage of provider-reported tokens that your usage source accounts for, for each token type, over a seven-day window. If coverage exceeds 100% for a token type, check that your usage filter and bill filter cover the same API key or project. For more information, see [How gateway costs are allocated](#how-gateway-costs-are-allocated).
 
    {{< img src="cloud_cost/ai_costs/ccm-ai-gateway-coverage.png" alt="The Confirm coverage step of the Connect your AI Gateway flow, showing Anthropic coverage percentages for output, input, cache read, and cache write tokens." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
