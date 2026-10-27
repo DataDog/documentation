@@ -34,23 +34,22 @@ Worker version 2.25.0 gives you access to the following:
 
 #### Enhancements
 
-- The Grok Parser processor's warning logs for events that fail to parse, and its rule compilation error logs, now include:
-    - A `rule` field that identifies the rule, when available. For source-based rules and library rules, this field is the rule's source.
-    - A `rule_kind` field, set to `custom` or `library`.
+- The Grok Parser processor's logs now include:
+    - A `rule` field that identifies the rule's source.
+    - A `rule_kind` field that indicates whether the rule is `custom` or `library`.
 
   Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
 - The Datadog BYOC Logs destination now presents a rotated mTLS client certificate on the next request after it detects the rotation. Previously, the destination kept using the old certificate until existing connections reached their maximum age, which could take up to an hour. Connections are still re-established at least once an hour.
 - The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group. The variable applies to every Reduce processor on the Worker and accepts values from 1 to 300 seconds. The default is 10 seconds. A longer window lets events that arrive further apart merge, but the processor holds more groups in memory.
-- The Sample processor now limits the memory it uses to track sampling groups to 128 MiB. When it reaches the limit, the processor evicts the least recently used groups. This limit prevents unbounded memory growth when group-by values have high cardinality or are large.
+- The Sample processor now limits the memory it uses to track sampling groups to 128 MiB. When it reaches the limit, the processor evicts the least recently used groups.
 - The Worker has improved log ingestion performance.
 
 #### Fixes
 
-- The Worker now reports the underlying error when a source or destination fails while running. Examples include failing to bind a listening socket (such as `Address already in use`), broker subscribe and consume errors, checkpoint file errors, and destination errors. Previously, the Worker only logged `the task completed with an error`. When a component panics, the Worker's logs now also include the panic message.
-- The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull. Previously, the source logged an error and waited before reconnecting.
+- When a source or destination fails, the Worker now logs the underlying error, such as `Address already in use`, instead of only `the task completed with an error`. If a component panics, the logs also include the panic message.
+- The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull.
 - The Google Pub/Sub source now trusts every certificate in the configured CA file, not only the last one.
 - The OpenTelemetry source now responds to gRPC requests for unsupported services with the gRPC status `UNIMPLEMENTED` instead of HTTP 404. These requests no longer log an error or increment the `component_errors_total` metric.
-- The Worker no longer silently drops its own internal logs under high load. Internal logs that the Worker drops are now counted in the `component_discarded_events_total` metric with the `intentional:false` tag.
 
 ## Worker version 2.24.1
 
