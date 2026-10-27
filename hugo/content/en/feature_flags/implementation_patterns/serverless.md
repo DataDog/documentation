@@ -18,31 +18,32 @@ further_reading:
 
 ## Overview
 
-The Datadog Feature Flags Java, Node.js, Python, .NET, and Ruby SDKs can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source simplifies onboarding because it does not require a Datadog Agent for flag configuration. It also supports serverless applications that cannot connect to a Datadog Agent.
+The Datadog Feature Flags Java, Node.js, Python, Go, .NET, and Ruby SDKs can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source simplifies onboarding because it does not require a Datadog Agent for flag configuration. It also supports serverless applications that cannot connect to a Datadog Agent.
 
 After configuration is loaded, flag evaluation happens locally in the application. The SDK does not make a network request for each evaluation.
 
 The following table shows the Feature Flags functionality available in each SDK version:
 
-| SDK | Minimum version | Agentless configuration and local evaluation | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events | Event delivery |
+| SDK | Recommended version | Agentless configuration and local evaluation | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events | Event delivery |
 |---|---|---|---|---|---|
-| Java `dd-openfeature` and `dd-java-agent` | 1.66.0 | Supported | Supported | Supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
-| Node.js `dd-trace` | 6.12.0 | Supported | Supported | Not supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
-| Python `ddtrace` | 4.14.0 | Supported | Supported | Supported | Compatible local telemetry relay |
-| .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 | Supported | Supported with a compatible relay | Not supported | Compatible local telemetry relay; no direct fallback |
-| Ruby `datadog` | 2.46.0 | Supported | Supported with a compatible relay | Supported with a compatible relay | Compatible local telemetry relay; no direct fallback |
+| Java `dd-openfeature` and `dd-java-agent` | 1.68.0 | Supported | Supported | Supported | Local relay with direct fallback |
+| Node.js `dd-trace` | 6.21.0 | Supported | Supported | Supported | Local relay with direct fallback |
+| Python `ddtrace` | 4.16.0 | Supported | Supported | Supported | Local relay with direct fallback |
+| Go `dd-trace-go/v2` | 2.11.2 | Supported | Supported | Supported | Local relay with direct fallback |
+| .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.56.0 and 2.3.1 | Supported | Supported | Not supported | Local relay with direct fallback |
+| Ruby `datadog` | 2.47.0 | Supported | Supported with a compatible relay | Supported with a compatible relay | Local relay required; no direct fallback |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. The Java runtime must support loading `dd-java-agent` with the `-javaagent` JVM option. You can pass this option in the Java command or through `JAVA_TOOL_OPTIONS`.
 
 .NET CDN delivery requires the Datadog .NET tracer to be loaded with [automatic instrumentation][12], alongside the OpenFeature provider. Installing the provider alone is not sufficient.
 
-The listed versions provide the capabilities shown in the table. Other server SDKs use Agent Remote Configuration for flag delivery.
+The listed versions provide the capabilities shown in the table, including evaluation-event privacy controls where supported. Earlier versions can support a subset of these capabilities; see the language setup pages. PHP uses Agent Remote Configuration for flag delivery.
 
 Agentless delivery changes only the flag configuration source. Feature Flags events use a separate connection to a compatible local telemetry relay or the supported direct path.
 
 ## Agentless architecture
 
-Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog. The runtime must support loading the language tracer:
+Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog. Use the language-specific initialization requirements:
 
 1. Use a [supported SDK version](#overview).
 2. For Java, load `dd-java-agent` with `-javaagent` or `JAVA_TOOL_OPTIONS`. See the Java setup for [Cloud Run Functions][7] or [Cloud Run containers][8] for examples. For .NET, load the tracer with [automatic instrumentation][12].
@@ -53,7 +54,7 @@ Use agentless delivery when the serverless runtime can make outbound HTTPS reque
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-4. Initialize or access the Datadog OpenFeature provider as described in the [Java][6], [Node.js][3], [Python][9], [.NET][13], or [Ruby][14] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
+4. Initialize or access the Datadog OpenFeature provider as described in the [Java][6], [Node.js][3], [Python][9], [Go][15], [.NET][13], or [Ruby][14] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
 5. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
 The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.
@@ -68,13 +69,13 @@ Agentless mode removes the Datadog Agent dependency for _flag configuration_. It
 
 Do not use `serverless-init` as a replacement for the Datadog Agent when you select `remote_config`. Agent Remote Configuration requires a Datadog Agent.
 
-Direct fallback means the SDK sends authenticated EVP events to Datadog when it cannot use a compatible local relay.
+Direct fallback means the SDK can send authenticated EVP events to Datadog when it cannot use a compatible local relay. It requires the application's `DD_API_KEY`, a valid `DD_SITE`, and outbound HTTPS to `event-platform-intake.<DD_SITE>`. It is available only with the `agentless` source. See [Server-Side Evaluation Events and Privacy][16] for collection controls and delivery limits.
 
 Note the following behavior:
 
 - Experiment exposure events are emitted only for flags associated with an experiment.
-- Java, Python, and Ruby aggregate EVP flag evaluation events and send them by default. Ruby requires a compatible local telemetry relay for both event types and does not support direct fallback.
-- .NET 3.54.0 sends experiment exposures through the configured Agent transport. It does not provide direct EVP fallback or aggregated EVP flag evaluation events. Without a compatible relay, exposures are not delivered.
+- Java, Node.js, Python, Go, and Ruby aggregate EVP flag evaluation events and send them by default in the versions listed above. Ruby requires a compatible local telemetry relay for both event types and does not support direct fallback.
+- .NET 3.56.0 supports direct fallback for experiment exposures. It does not emit aggregated EVP flag evaluation events. Earlier tracer version 3.54.0 requires a compatible local relay for exposures.
 - To disable only the EVP flag evaluation event path, set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`.
 
 The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure the OTLP endpoint for this metric. For no-Agent serverless environments, configure the serverless telemetry path for your platform before you enable this metric. See [Set Up Server-Side Flag Evaluation Metrics][10].
@@ -87,14 +88,14 @@ The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal.
    - Use `serverless-init` 1.9.13 or later. Earlier versions do not support the required EVP route.
    - Keep `DD_API_KEY` and `DD_SITE` in the application environment for agentless CDN configuration delivery. A sidecar also needs them for telemetry egress.
    - Do not configure an endpoint specific to Feature Flags. The SDK uses the standard tracer connection configured by the Serverless Monitoring setup.
-   - Node.js and Java call `GET /info` on the tracer URL to discover the local EVP proxy. Python, .NET 3.54.0, and Ruby send supported EVP events to the same URL without this discovery request.
+   - In the versions listed above, Node.js, Java, Python, Go, and .NET discover the local EVP route through `GET /info` on the tracer URL. Ruby sends supported EVP events to that URL without this discovery request.
 
 ### Verify telemetry egress
 
 1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
 2. Evaluate a flag associated with an experiment, then confirm that the experiment receives an exposure event.
 3. When you use a local relay, check the application and `serverless-init` logs for connection errors to port 8126.
-4. For Java, Python, and Ruby, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
+4. For Java, Node.js, Python, Go, and Ruby, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
 5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with [Set Up Server-Side Flag Evaluation Metrics][10].
 
 ## Agent-backed Remote Configuration
@@ -140,7 +141,7 @@ If your deployment uses `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`, see [Migrat
 
 ### AWS Lambda
 
-Java, Node.js, and Python Lambda functions can use agentless configuration delivery when they run a minimum SDK version and can reach Datadog over HTTPS. Java functions must load `dd-java-agent` with `-javaagent`, either directly or through `JAVA_TOOL_OPTIONS`. A Java tracing layer can provide this setup. The Datadog Lambda Extension is not required for flag configuration.
+Java, Node.js, and Python Lambda functions can use agentless configuration delivery when they run a supported SDK version and can reach Datadog over HTTPS. Java functions must load `dd-java-agent` with `-javaagent`, either directly or through `JAVA_TOOL_OPTIONS`. A Java tracing layer can provide this setup. The Datadog Lambda Extension is not required for flag configuration.
 
 ### Google Cloud serverless environments
 
@@ -164,7 +165,7 @@ Do not query Datadog APIs from each serverless invocation to evaluate flags. Use
 
 Before enabling Feature Flags in production:
 
-1. Confirm the application uses a [minimum supported SDK version](#overview). For Java, confirm that the JVM loads `dd-java-agent`. For .NET, confirm that automatic instrumentation loads the tracer.
+1. Confirm the application uses a [supported SDK version](#overview). For Java, confirm that the JVM loads `dd-java-agent`. For .NET, confirm that automatic instrumentation loads the tracer.
 2. For agentless delivery, confirm the application has `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. For Agent Remote Configuration, confirm the Agent has its API key and Remote Configuration enabled.
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
 4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
@@ -189,3 +190,5 @@ Before enabling Feature Flags in production:
 [12]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
 [13]: /feature_flags/server/dotnet/
 [14]: /feature_flags/server/ruby/
+[15]: /feature_flags/server/go/
+[16]: /feature_flags/guide/server_evaluation_events/

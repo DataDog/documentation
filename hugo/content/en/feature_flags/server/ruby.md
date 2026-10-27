@@ -273,6 +273,10 @@ if maintenance_mode
 end
 ```
 
+## Evaluation-event privacy
+
+Use `datadog` 2.47.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][12] for the data collected, opt-out scope, and delivery requirements.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `Datadog::OpenFeature::Provider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships with `openfeature-sdk`, so no additional gem is required.
@@ -401,3 +405,4 @@ Before the first valid configuration, evaluations return caller-provided default
 [9]: /feature_flags/server/java/#compatibility-requirements
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
+[12]: /feature_flags/guide/server_evaluation_events/

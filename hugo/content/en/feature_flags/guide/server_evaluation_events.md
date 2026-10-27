@@ -1,0 +1,107 @@
+---
+title: Server-Side Evaluation Events and Privacy
+description: Understand flag evaluation events, their privacy controls, and event delivery with Datadog Feature Flags server SDKs.
+further_reading:
+- link: "/feature_flags/server/"
+  tag: "Documentation"
+  text: "Server-Side Feature Flags"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+---
+
+## Overview
+
+Datadog Feature Flags server SDKs can send aggregated flag evaluation events to Datadog through the Event Platform Proxy (EVP) or direct intake. These events count evaluations, including evaluations that return the caller-provided default value. The SDK batches and sends events in the background; flag evaluation uses local configuration.
+
+Use these SDK versions or later for the evaluation-event privacy behavior described in this guide:
+
+| SDK | Recommended version | Event delivery with the `agentless` configuration source |
+|---|---|---|
+| Node.js `dd-trace` | 6.21.0 | Local relay with direct fallback |
+| Java `dd-openfeature` and `dd-java-agent` | 1.68.0 | Local relay with direct fallback |
+| Python `ddtrace` | 4.16.0 | Local relay with direct fallback |
+| Go `dd-trace-go/v2` | 2.11.2 | Local relay with direct fallback |
+| Ruby `datadog` | 2.47.0 | Local relay required; no direct fallback |
+
+.NET tracer 3.56.0 supports direct fallback for experiment exposures, but does not emit these aggregated evaluation events. This guide does not describe client-side SDK telemetry.
+
+## Choose the telemetry you need
+
+| Signal | Purpose | Configuration |
+|---|---|---|
+| EVP flag evaluation events | Count flag evaluations and report evaluation outcomes | Enabled by default in the versions listed above. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable collection. |
+| Experiment exposure events | Associate a subject with an experiment variation | Separate from evaluation counts; emitted for flags associated with experiments. |
+| `feature_flag.evaluations` OTLP metric | Graph evaluations as an OpenTelemetry metric | Configure the separate [metrics export path][1]. |
+| APM trace enrichment | Attach evaluated flags to traces | Configure [APM trace enrichment][2] separately. |
+
+To disable only EVP flag evaluation events, set this variable before starting the application, then restart it:
+
+{{< code-block lang="bash" >}}
+DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false
+{{< /code-block >}}
+
+This setting leaves local flag evaluation, experiment exposures, trace enrichment, and OTLP evaluation metrics unchanged. It does not stop configuration polling or the associated [configuration requests][3]. To disable the provider and configuration delivery as well, set `DD_FEATURE_FLAGS_ENABLED=false`.
+
+## Evaluation-event privacy
+
+The SDK reads the environment's full-evaluation-data setting from the flag configuration used for each evaluation. The [Feature Flags API][4] exposes this setting as `observe_full_evaluation_data`; the configuration delivered to the SDK uses `observeFullEvaluationData`. Adding an attribute with either name to an OpenFeature evaluation context does not enable full data collection.
+
+| Setting in the delivered configuration | Targeting key in evaluation events | Evaluation context in evaluation events |
+|---|---|---|
+| `false`, absent, or not a Boolean `true` | Non-empty targeting keys are represented by an unsalted SHA-256 digest with a `sha256_` prefix. | Omitted. |
+| `true` | Events can include the original targeting key. | Events can include a bounded snapshot of evaluation attributes. |
+
+The SDK uses the setting captured at evaluation time. A later configuration change does not rewrite events already queued for delivery. When aggregation limits are reached, the SDK can omit targeting keys and context while retaining aggregate counts, even when full data collection is enabled.
+
+Use non-empty targeting keys with valid Unicode text. Hashing uses the UTF-8 representation without trimming or changing case. Identical keys produce identical hashes, and predictable identifiers can be guessed and hashed. Hashing pseudonymizes identifiers; it does not make them anonymous.
+
+These controls apply to EVP flag evaluation events. They do not redact application logs, experiment exposure payloads, or other telemetry. Review the attributes you put in evaluation contexts before enabling full data collection. Do not include passwords, API keys, or other secrets.
+
+## Event delivery and direct fallback
+
+Configuration delivery and event delivery use separate connections. Successfully loading flags from the CDN does not confirm that telemetry can reach Datadog.
+
+With `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, the SDKs that support direct fallback prefer a compatible local EVP relay. If no compatible route is available, they can send events directly to `https://event-platform-intake.<DD_SITE>` using the application's `DD_API_KEY`.
+
+For direct delivery:
+
+1. Use a version listed above. For .NET experiment exposures, use tracer 3.56.0 or later with `Datadog.FeatureFlags.OpenFeature` 2.3.1 or later.
+2. Configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process, as described in [agentless setup][5]. Store the API key in a secret manager.
+3. Allow outbound HTTPS to the event intake for the selected Datadog site, in addition to the flag configuration endpoint.
+4. Initialize the provider using the language-specific setup instructions.
+
+The custom `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` setting changes only the configuration endpoint. It does not redirect event delivery. Without an application API key, a custom configuration endpoint can serve flags, but direct event delivery is unavailable.
+
+With `remote_config`, event delivery remains Agent-backed. Supplying an application API key does not enable direct fallback in this mode. Ruby 2.47.0 requires a compatible local relay for events with either configuration source. See [serverless telemetry setup][6] for relay requirements.
+
+### Delivery limits
+
+Event delivery is best effort. Pending events can be lost when a process exits abruptly, a runtime freezes, a buffer fills, or the network is unavailable.
+
+Python 4.16.0, Go 2.11.2, and .NET 3.56.0 can retry a batch directly after a local HTTP `404` or `405`. A confirmed connection failure before sending can also trigger this retry. A timeout or connection reset can leave delivery uncertain. The SDK does not replay that batch through direct intake when the local receiver might already have accepted it. Later batches can use direct intake. Do not treat direct fallback as a durable event queue or a guarantee that every evaluation is delivered.
+
+For Node.js, keep `dd-trace` external to a single-file application bundle and make its installed package available at runtime. The evaluation-event worker needs its JavaScript file and dependencies. If it cannot load, evaluation events are disabled for that provider while local flag evaluation and experiment exposures continue.
+
+## Verify the setup
+
+1. Confirm the SDK version and selected configuration source.
+2. Initialize the provider and evaluate a non-production flag with a non-sensitive targeting key.
+3. Check application logs for event transport errors. A ready provider confirms configuration delivery, not event delivery.
+4. Confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not `false` when you need evaluation events.
+5. Check the environment's `observe_full_evaluation_data` value in the [environment API response][4] when troubleshooting missing targeting attributes. Allow the configuration polling interval for changes to reach the SDK.
+6. Validate experiment exposures and the OTLP metric separately if your application uses them.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/guide/server_flag_evaluation_metrics/
+[2]: /feature_flags/guide/apm_trace_enrichment/
+[3]: /feature_flags/concepts/configuration_sources/#activation-and-billing
+[4]: /api/latest/feature-flags/#get-an-environment
+[5]: /feature_flags/concepts/configuration_sources/#use-agentless-delivery
+[6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

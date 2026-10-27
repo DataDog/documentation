@@ -22,7 +22,9 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
-<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP event egress use the standard tracer URL on port 8126. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP events use a compatible local relay or, in supported agentless SDK versions, direct intake. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+
+For EVP event versions, privacy controls, and direct delivery, see [Server-Side Evaluation Events and Privacy][8].
 
 ## Prerequisites
 
@@ -230,3 +232,4 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [5]: /dashboards/
 [6]: /feature_flags/server/java/#installation
 [7]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[8]: /feature_flags/guide/server_evaluation_events/

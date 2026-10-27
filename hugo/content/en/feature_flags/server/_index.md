@@ -42,14 +42,13 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
 | Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
+| Go `dd-trace-go/v2` | 2.11.2 |
 | .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
 | Ruby `datadog` | 2.46.0 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
-Agentless delivery changes only the flag configuration source. Java and Node.js support direct exposure delivery. Java, Node.js, and Python can also use a compatible local telemetry relay.
-
-The listed versions provide the current capabilities described on each language page. .NET 3.54.0 and Ruby 2.46.0 support agentless configuration but require a compatible local telemetry relay for experiment exposures. Ruby also sends aggregated Event Platform Proxy (EVP) flag evaluation events through that relay. Other server SDKs use Agent Remote Configuration.
+Agentless delivery changes only the flag configuration source. Event delivery support depends on the SDK version. See [Serverless Environments][5] for the version table and direct-delivery requirements. PHP uses Agent Remote Configuration for flag configuration.
 
 ## Choose a language
 
@@ -108,7 +107,7 @@ Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Ag
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
 
-Existing Java, Node.js, Python, .NET, and Ruby implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+Existing Java, Node.js, Python, Go, .NET, and Ruby implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
 ### Remote Configuration polling interval
 
@@ -141,6 +140,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 For telemetry, metrics, and graphing options, see:
 
 - <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Send feature flag telemetry</a> for exposure and Event Platform Proxy (EVP) flag evaluation event delivery
+- <a href="/feature_flags/guide/server_evaluation_events/">Server-Side Evaluation Events and Privacy</a> for event collection controls, targeting-key hashing, and direct-delivery limits
 - <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the separate <code>feature_flag.evaluations</code> OTLP metric
 - <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for graphing options
 - <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment for Feature Flags</a> for attaching evaluation data to APM traces

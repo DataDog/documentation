@@ -48,6 +48,7 @@ Use these versions or later with agentless delivery:
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
 | Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
+| Go `dd-trace-go/v2` | 2.11.2 |
 | .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
 | Ruby `datadog` | 2.46.0 |
 
@@ -61,7 +62,7 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], [.NET][7], or [Ruby][8] setup instructions.
+Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], [Go][9], [.NET][7], or [Ruby][8] setup instructions.
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
@@ -74,8 +75,8 @@ Set `DD_SITE` to your organization's Datadog site. For the site selected on this
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Java and Ruby do not impose an upper limit on this interval. Node.js, Python, and .NET cap values at 3600 seconds. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Java and Ruby do not impose an upper limit on this interval. Node.js, Python, and .NET cap values at 3600 seconds. Go accepts values up to 3600 seconds and falls back to 30 seconds for invalid or out-of-range values. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. Go accepts values up to 300 seconds and falls back to 5 seconds for invalid or out-of-range values. |
 
 The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source does the following:
 
@@ -185,3 +186,4 @@ Server Feature Flags billing is based on configuration requests made through Rem
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [7]: /feature_flags/server/dotnet/
 [8]: /feature_flags/server/ruby/
+[9]: /feature_flags/server/go/

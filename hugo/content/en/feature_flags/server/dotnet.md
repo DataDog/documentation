@@ -25,7 +25,7 @@ This page describes how to instrument your .NET application with the Datadog Fea
 
 Starting in tracer version 3.54.0, new setups load flag configuration from the Datadog-managed CDN by default. This guide explains how to install the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
-<div class="alert alert-warning">In version 3.54.0, agentless mode changes only flag configuration. Experiment exposure events still require a compatible local Agent or telemetry relay; direct Event Platform Proxy (EVP) fallback is not supported. Evaluation metrics require a separately configured OpenTelemetry export path. Without a telemetry path, only configuration delivery and local flag evaluation work.</div>
+<div class="alert alert-info">Use tracer 3.56.0 or later for direct experiment exposure delivery in agentless mode. Tracer 3.54.0 requires a compatible local Agent or telemetry relay for exposures. Evaluation metrics use a separately configured OpenTelemetry export path.</div>
 
 ## Prerequisites
 
@@ -304,6 +304,12 @@ When your application exits, shut down the OpenFeature API to clean up resources
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
 
+## Experiment exposure delivery
+
+With tracer 3.56.0 or later and the `agentless` source, experiment exposures prefer a compatible local EVP relay. If no compatible route is available, the tracer can send exposures directly using the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed delivery.
+
+Tracer 3.56.0 does not emit aggregated EVP flag evaluation events. See [Server-Side Evaluation Events and Privacy][11] for direct-delivery setup and retry limits. The `feature_flag.evaluations` OTLP metric remains a separate signal.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
@@ -409,3 +415,5 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[11]: /feature_flags/guide/server_evaluation_events/

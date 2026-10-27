@@ -21,33 +21,36 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Go tracer (`dd-trace-go`).
+This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management. It receives flag updates from the Datadog-managed CDN or Agent Remote Configuration. Use `dd-trace-go/v2` 2.11.2 or later for the agentless setup and telemetry behavior described here.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
 ## Prerequisites
 
-Before setting up the Go Feature Flags SDK, ensure you have:
+For agentless delivery, install **`dd-trace-go/v2` 2.11.2 or later** and configure a Datadog [API key][3] in the application. A Datadog Agent is not required to fetch flag configuration.
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog [API key][3]** configured on the Agent
-- **Datadog Go SDK** `dd-trace-go` version 2.4.0 or later
-
-Set the following environment variables:
+Set these environment variables before starting the application:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-
-# Required: Service identification
+DD_API_KEY=<DATADOG_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+The default configuration source is `agentless`. Creating the provider with `NewDatadogProvider` starts CDN polling. Starting the tracer alone does not start agentless flag configuration requests.
+
+### Choose Agent delivery
+
+For Agent-based delivery, use Datadog Agent 7.55 or later with [Remote Configuration][2] enabled and an API key configured on the Agent. Select the source explicitly:
+
+{{< code-block lang="bash" >}}
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+Existing applications with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` retain Remote Configuration when no source is selected. See [configuration source migration][7] before removing that deprecated setting. Set `DD_FEATURE_FLAGS_ENABLED=false` to disable the provider and return caller-provided default values.
 
 To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
@@ -67,9 +70,9 @@ go get github.com/open-feature/go-sdk/openfeature
 
 ## Initialize the SDK
 
-Start the Datadog Go tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
+Register the Datadog OpenFeature provider. Starting the Datadog Go tracer first is recommended when you also use tracing. The provider can fetch flag configuration without starting the tracer.
 
-Start the Datadog Agent before the application. If the application starts first, restart it after the Agent is available. See [Agent availability][6].
+When using Remote Configuration, start the Datadog Agent before the application. If the application starts first, restart it after the Agent is available. See [Agent availability][6].
 
 ### Blocking initialization
 
@@ -87,7 +90,7 @@ import (
 )
 
 func main() {
-    // Start the Datadog tracer (enables Remote Config)
+    // Start the Datadog tracer if the application also uses tracing
     tracer.Start()
     defer tracer.Stop()
 
@@ -100,7 +103,7 @@ func main() {
         defer ddProvider.Shutdown()
     }
 
-    // Register the provider and wait for initialization (default 30s timeout)
+    // Register the provider and wait for initialization (default 10s timeout)
     if err := openfeature.SetProviderAndWait(provider); err != nil {
         log.Fatalf("Failed to set provider: %v", err)
     }
@@ -139,7 +142,7 @@ import (
 )
 
 func main() {
-    // Start the Datadog tracer (enables Remote Config)
+    // Start the Datadog tracer if the application also uses tracing
     tracer.Start()
     defer tracer.Stop()
 
@@ -292,6 +295,18 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Advanced configuration
+
+See [Server SDK Configuration Sources][8] for custom endpoints, source selection, and migration. Agentless polling defaults to 30 seconds, with a 5-second request timeout. Go falls back to those defaults for invalid values; supported upper limits are 3600 seconds for polling and 300 seconds for requests.
+
+Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to a positive number of milliseconds to change the default 10-second initialization wait. A deadline passed to `SetProviderAndWaitWithContext` takes precedence.
+
+## Evaluation events and privacy
+
+Go sends aggregated EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. In agentless mode, both evaluation events and experiment exposures prefer a compatible local relay. They can fall back to direct intake with the application's `DD_API_KEY` and `DD_SITE`.
+
+See [Server-Side Evaluation Events and Privacy][9] for targeting-key hashing, context collection, and direct-delivery limits. Event delivery is separate from the `feature_flag.evaluations` OTLP metric.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
@@ -370,3 +385,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[8]: /feature_flags/concepts/configuration_sources/
+[9]: /feature_flags/guide/server_evaluation_events/
