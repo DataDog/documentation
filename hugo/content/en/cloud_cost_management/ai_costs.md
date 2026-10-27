@@ -187,6 +187,8 @@ A provider is available to allocate only if its bill is connected to Cloud Cost 
 
 The flow creates one allocation rule for each provider and token type, such as input, output, cache read, and cache write tokens.
 
+After you create the rules, the tags you selected are added to your provider costs. Use these tags across Cloud Cost Management, including [Cloud Cost Explorer][11], dashboards, [Cost Reports][14], [monitors][8], and [budgets][9].
+
 ### How gateway costs are allocated
 
 Gateway allocation rules compare your gateway's token usage against the token usage reported by the provider for the same bill scope. For each model and day, **coverage** is the gateway's tokens divided by the provider-reported tokens. For example, 80,000 output tokens reported by your gateway out of 100,000 output tokens reported by the provider is 80% coverage.
