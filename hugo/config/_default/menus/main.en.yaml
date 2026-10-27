@@ -5893,11 +5893,6 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
-    - name: Prompt Experimentation
-      url: llm_observability/configure/prompt_experimentation
-      parent: llm_obs_configure
-      identifier: llm_obs_prompt_experimentation
-      weight: 602
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
