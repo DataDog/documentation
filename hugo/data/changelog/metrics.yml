@@ -35,3 +35,27 @@ entries:
       - QueryScalarData
       - QueryTimeseriesData
     title: Document Processes API time window, retention, and filter semantics
+  - change_type: added
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41029
+    operations:
+      - ListTagIndexingRuleExemptions
+    title: Add tag indexing rule exemptions list endpoint
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41029
+    operations:
+      - CreateTagIndexingRuleExemption
+    title: Add tag indexing rule exemptions list endpoint
+  - change_type: added
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41055
+    operations:
+      - UpdateTagIndexingRuleExemption
+    title: Add tag indexing rule exemption update endpoint
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41055
+    operations:
+      - DeleteTagIndexingRuleExemption
+    title: Add tag indexing rule exemption update endpoint

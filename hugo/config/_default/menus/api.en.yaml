@@ -1833,6 +1833,19 @@ menu:
         unstable:
           - v2
         order: 23
+    - name: Update a tag indexing rule exemption
+      url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
+      identifier: metrics-update-a-tag-indexing-rule-exemption
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagIndexingRuleExemption
+        unstable:
+          - v2
+        order: 26
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
       identifier: metrics-create-a-tag-indexing-rule-exemption
@@ -1871,7 +1884,7 @@ menu:
           - DeleteTagIndexingRuleExemption
         unstable:
           - v2
-        order: 26
+        order: 35
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
       identifier: metrics-get-tag-key-cardinality-details
@@ -2010,6 +2023,19 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: List tag indexing rule exemptions
+      url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
+      identifier: metrics-list-tag-indexing-rule-exemptions
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRuleExemptions
+        unstable:
+          - v2
+        order: 34
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -17306,6 +17332,32 @@ menu:
       url: /api/latest/logs-archive-searches/
       identifier: logs-archive-searches
       generated: true
+    - name: Cancel an Archive Search
+      url: /api/latest/logs-archive-searches/cancel-an-archive-search/
+      identifier: logs-archive-searches-cancel-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelArchiveSearch
+        unstable:
+          - v2
+        order: 5
+    - name: Rehydrate an Archive Search
+      url: /api/latest/logs-archive-searches/rehydrate-an-archive-search/
+      identifier: logs-archive-searches-rehydrate-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RehydrateArchiveSearch
+        unstable:
+          - v2
+        order: 4
     - name: Get an Archive Search
       url: /api/latest/logs-archive-searches/get-an-archive-search/
       identifier: logs-archive-searches-get-an-archive-search
@@ -17332,6 +17384,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List Archive Searches
+      url: /api/latest/logs-archive-searches/list-archive-searches/
+      identifier: logs-archive-searches-list-archive-searches
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListArchiveSearches
+        unstable:
+          - v2
+        order: 3
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -23744,6 +23809,19 @@ menu:
           - GetTeamMemberships
         unstable: []
         order: 9
+    - name: Get team hierarchy members
+      url: /api/latest/teams/get-team-hierarchy-members/
+      identifier: teams-get-team-hierarchy-members
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamHierarchyMembers
+        unstable:
+          - v2
+        order: 35
     - name: Update a team link
       url: /api/latest/teams/update-a-team-link/
       identifier: teams-update-a-team-link

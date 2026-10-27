@@ -4193,6 +4193,10 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "ListArchiveSearches": {
+    "description": "List the organization's Archive Searches that haven't expired, up to 5,000. When more\nexist, `meta.truncated` is `true`.",
+    "summary": "List Archive Searches"
+  },
   "CreateArchiveSearch": {
     "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
     "summary": "Create an Archive Search",
@@ -4202,6 +4206,16 @@
   "GetArchiveSearch": {
     "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
     "summary": "Get an Archive Search"
+  },
+  "RehydrateArchiveSearch": {
+    "description": "Turn a plain Archive Search into a Search & Rehydration by indexing the matched logs into a\nretained historical view. Rehydration is the only thing this endpoint can change, and it only\napplies to a search that has already finished scanning.",
+    "summary": "Rehydrate an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to rehydrate an Archive Search."
+  },
+  "CancelArchiveSearch": {
+    "description": "Cancel a running Archive Search. Cancelling an Archive Search that has already finished is a\nno-op: it returns the resource unchanged instead of returning an error.",
+    "summary": "Cancel an Archive Search"
   },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
@@ -4435,6 +4449,10 @@
     "description": "Get the historical metrics ingestion configuration for a metric. Existence of the\nresource means historical metrics ingestion is enabled; returns 404 when it is not\nenabled for the metric.",
     "summary": "Get a historical metrics configuration"
   },
+  "ListTagIndexingRuleExemptions": {
+    "description": "Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.\nYou can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching\ntag indexing rule. You can sort results by metric name or by estimated change in indexed volume.",
+    "summary": "List tag indexing rule exemptions"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -4498,6 +4516,12 @@
     "summary": "Create a tag indexing rule exemption",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule exemption."
+  },
+  "UpdateTagIndexingRuleExemption": {
+    "description": "Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and\n`created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has\nonly a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a tag indexing rule exemption",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a tag indexing rule exemption."
   },
   "ListTagIndexingRulesForMetric": {
     "description": "List the tag indexing rules that apply to a given metric, sorted by `rule_order`.\nMatching is performed server-side using each rule's `metric_name_matches` glob patterns.",
@@ -7936,6 +7960,10 @@
     "summary": "Update a team link",
     "request_description": "",
     "request_schema_description": "Team link create request"
+  },
+  "ListTeamHierarchyMembers": {
+    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
+    "summary": "Get team hierarchy members"
   },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
