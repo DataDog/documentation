@@ -46,6 +46,10 @@ With OTLP Ingest in the Agent, applications instrumented with OpenTelemetry SDKs
 
 OTel in the Agent is an OpenTelemetry Collector that runs inside the Datadog Agent. You configure it with standard OpenTelemetry Collector configuration.
 
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
+Remote Configuration for OTel in the Agent is <strong>in Preview</strong>. Use this form to request access.
+{{< /callout >}}
+
 {{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview of OTel in the Agent, an OpenTelemetry Collector that runs inside the Datadog Agent." style="width:100%;" >}}
 
 **Choose OTel in the Agent if**:
@@ -56,7 +60,7 @@ OTel in the Agent is an OpenTelemetry Collector that runs inside the Datadog Age
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Set up OTel in the Agent{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}Use custom OpenTelemetry components{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate from an upstream Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to OTel in the Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

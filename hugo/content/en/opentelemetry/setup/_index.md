@@ -19,32 +19,32 @@ further_reading:
 
 ## Overview
 
-Datadog accepts OpenTelemetry traces, metrics, and logs over OTLP. You can send them through a Collector, straight from your applications, or through the Datadog Agent. None of these options needs a Datadog SDK, and only the last one needs the Datadog Agent.
+Datadog accepts OpenTelemetry traces, metrics, and logs over OTLP. You can send them through a Collector, straight from your applications, or through the Datadog Agent. Each option works with any OpenTelemetry SDK, and only the last one needs the Datadog Agent.
 
 To try OpenTelemetry on a test cluster first, see [Getting Started][1].
 
 ## Compare the options
 
-| Option | What you run | Datadog software in your pipeline | Datadog Agent | Platforms | Start here |
+| Option | What you run | Who builds the Collector | Datadog Agent | Platforms | Start here |
 |---|---|---|---|---|---|
-| [DDOT Collector](#ddot-collector) | Datadog's distribution of the OpenTelemetry Collector | The DDOT Collector | Optional | Kubernetes | [Install the DDOT Collector on Kubernetes][2] |
-| [Upstream OpenTelemetry Collector](#upstream-opentelemetry-collector) | The OpenTelemetry Collector from the OpenTelemetry project, or your own build | None | Not used | Any platform the Collector runs on | [Set up the OpenTelemetry Collector][3] |
-| [Direct OTLP ingest](#direct-otlp-ingest) | Nothing extra: your applications send OTLP to Datadog | None | Not used | Serverless, managed platforms, and any application that can reach Datadog | [Datadog OTLP intake endpoint][4] |
-| [Datadog Agent](#datadog-agent) | The Datadog Agent, which receives OTLP or runs a Collector inside the Agent | The Datadog Agent | Required | Linux, Windows, Kubernetes, and Amazon ECS and EKS Fargate | [Send data through the Datadog Agent][5] |
+| [DDOT Collector](#ddot-collector) (Preview) | An OpenTelemetry Collector that Datadog builds | Datadog | Optional | Kubernetes | [Install the DDOT Collector on Kubernetes][2] |
+| [Upstream OpenTelemetry Collector](#upstream-opentelemetry-collector) | The OpenTelemetry Collector from the OpenTelemetry project, or your own build | The OpenTelemetry project, or you | Not used | Hosts, VMs, Docker, and Kubernetes | [Set up the OpenTelemetry Collector][3] |
+| [Direct OTLP ingest](#direct-otlp-ingest) | Nothing extra: your applications send OTLP to Datadog | No Collector | Not used | Serverless, managed platforms, and any application that can reach Datadog | [Datadog OTLP intake endpoint][4] |
+| [Datadog Agent](#datadog-agent) | The Datadog Agent, which receives OTLP or runs a Collector inside the Agent | Datadog | Required | Wherever you run the Agent | [Send data through the Datadog Agent][5] |
 
 ## DDOT Collector
 
-The DDOT Collector is Datadog's distribution of the OpenTelemetry Collector. You deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts, and it sends your telemetry to Datadog. Datadog builds and supports it. You can [add the Datadog Agent][6] later for features that need the Agent.
+The DDOT Collector is an OpenTelemetry Collector that Datadog builds. You deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent. You can [add the Datadog Agent][6] later for features that need it.
 
-**Choose the DDOT Collector if** you want a Collector that Datadog supports, and you run Kubernetes.
+**Choose the DDOT Collector if** you want a Collector that Datadog builds, and you run Kubernetes.
 
 To get started, see [Install the DDOT Collector on Kubernetes][2].
 
 ## Upstream OpenTelemetry Collector
 
-Use the OpenTelemetry Collector you already run or build, and export to Datadog over OTLP. No Datadog software runs in your pipeline. If your configuration already uses the [Datadog Exporter][7], it keeps working.
+Use the OpenTelemetry Collector you already run or build, and export to Datadog over OTLP. Your pipeline uses only components from the OpenTelemetry project. For existing configurations that use the Datadog Exporter, see [Datadog Exporter][7].
 
-**Choose the upstream Collector if** you already run an OpenTelemetry Collector, or you want a pipeline with no Datadog software in it.
+**Choose the upstream Collector if** you already run an OpenTelemetry Collector, or you want a pipeline built only from OpenTelemetry project components.
 
 To get started, see [Set up the OpenTelemetry Collector][3].
 
@@ -58,7 +58,7 @@ To get started, see [Datadog OTLP intake endpoint][4].
 
 ## Datadog Agent
 
-If you run the Datadog Agent, it can receive OTLP from your applications ([OTLP Ingest in the Agent][8]), or run an OpenTelemetry Collector inside the Agent ([OTel in the Agent][9]). The Agent adds Datadog features that need it, such as integrations and Live Containers.
+The Datadog Agent can receive OTLP from your applications ([OTLP Ingest in the Agent][8]). It can also run an OpenTelemetry Collector inside the Agent ([OTel in the Agent][9]). The Agent adds Datadog features that need it, such as integrations and Live Containers.
 
 **Choose the Datadog Agent if** you already run the Agent and want to add OpenTelemetry data to it.
 
