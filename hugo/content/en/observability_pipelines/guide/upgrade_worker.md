@@ -36,7 +36,7 @@ Worker version 2.25.0 gives you access to the following:
 
 - The Grok Parser processor's logs now include:
     - A `rule` field that identifies the rule's source.
-    - A `rule_kind` field that indicates whether the rule is `custom` or `library`.
+    - A `rule_kind` field that indicates whether the rule is a `custom` or `library` rule.
 
   Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
 - The Datadog BYOC Logs destination now presents a rotated mTLS client certificate on the next request after it detects the rotation. Previously, the destination kept using the old certificate until existing connections reached their maximum age, which could take up to an hour. Connections are still re-established at least once an hour.
