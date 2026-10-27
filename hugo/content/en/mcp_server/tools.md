@@ -1674,8 +1674,6 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
 
-The `investigator` toolset is generally available (GA).
-
 ### `trigger_bits_ai_investigation`
 *Toolset: **investigator***\
 *Permissions Required: `Bits Investigations Write`*\
