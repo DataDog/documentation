@@ -195,7 +195,6 @@
 
 .schema-table__enum {
   margin-top: var(--space-xs);
-  font-size: var(--font-size-xs);
   color: var(--color-text-muted);
 }
 
