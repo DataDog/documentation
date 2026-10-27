@@ -77,7 +77,7 @@ For each field, the table shows:
 
 ### Delete fields or attributes
 
-Use `del()` to delete a field, an attribute inside a field, or an element in an array.
+You can delete custom fields, attributes within custom fields, or elements in an array.
 
 `.custom` and `.change_metadata` are the only fields that you can delete entirely. You can also delete any attribute inside these fields, such as `del(.custom.raw_payload)`.
 
