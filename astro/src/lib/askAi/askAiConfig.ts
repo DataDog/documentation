@@ -1,5 +1,6 @@
 import type { AskAiConfig } from "@dd/ask-ai";
 import { fetchDatadogUserStatus } from "@lib/telemetry/datadogUserStatus";
+import { isDocsAiEnabled } from "@lib/featureFlags/featureFlags";
 
 /**
  * The config every Ask AI mount site passes.
@@ -10,7 +11,10 @@ import { fetchDatadogUserStatus } from "@lib/telemetry/datadogUserStatus";
  * first mounts the widget, and hydration order is not fixed — so both must pass
  * the same capabilities, or the loser's config is silently discarded.
  *
- * `isEnabled` is deliberately absent; see the TODO at the mount site.
+ * `isEnabled` is the `docs-ai-enabled` kill switch, supplied on every hostname.
+ * The package mounts optimistically and tears the widget down if it resolves to
+ * false; `isDocsAiEnabled` itself falls back to true when the flag cannot be
+ * read.
  *
  * The Datadog-user lookup is supplied on Datadog's own domain only. It is a
  * credentialed cross-origin request that CORS blocks from anywhere else —
@@ -21,9 +25,12 @@ import { fetchDatadogUserStatus } from "@lib/telemetry/datadogUserStatus";
 export function createAskAiConfig(
   hostname: string = window.location.hostname,
 ): AskAiConfig {
-  return isDatadogHostname(hostname)
-    ? { getIsDatadogUser: fetchDatadogUserStatus }
-    : {};
+  return {
+    isEnabled: isDocsAiEnabled,
+    ...(isDatadogHostname(hostname)
+      ? { getIsDatadogUser: fetchDatadogUserStatus }
+      : {}),
+  };
 }
 
 function isDatadogHostname(hostname: string): boolean {

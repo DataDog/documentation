@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createAskAiConfig } from "./askAiConfig";
 import { fetchDatadogUserStatus } from "@lib/telemetry/datadogUserStatus";
+import { isDocsAiEnabled } from "@lib/featureFlags/featureFlags";
 
 describe("createAskAiConfig", () => {
   it.each(["docs.datadoghq.com", "docs-staging.datadoghq.com"])(
@@ -21,6 +22,15 @@ describe("createAskAiConfig", () => {
     "omits the Datadog-user lookup on %s",
     (hostname) => {
       expect(createAskAiConfig(hostname).getIsDatadogUser).toBeUndefined();
+    },
+  );
+
+  // The kill switch applies everywhere, local development included, which
+  // reads preview's flags.
+  it.each(["docs.datadoghq.com", "localhost"])(
+    "resolves the widget's kill switch from the docs-ai-enabled flag on %s",
+    (hostname) => {
+      expect(createAskAiConfig(hostname).isEnabled).toBe(isDocsAiEnabled);
     },
   );
 });

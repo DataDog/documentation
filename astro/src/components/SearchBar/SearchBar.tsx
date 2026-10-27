@@ -27,6 +27,7 @@ import { usePopupPosition } from "./hooks/usePopupPosition";
 import { useGlobalSearchShortcuts } from "./hooks/useGlobalSearchShortcuts";
 import { useOutsideClick } from "./hooks/useOutsideClick";
 import { useSearchQuerySync } from "./hooks/useSearchQuerySync";
+import { useDocsAiEnabled } from "./hooks/useDocsAiEnabled";
 
 export interface SearchBarLabels {
   Search: string;
@@ -89,6 +90,7 @@ export default function SearchBar({
   // A null rect means the form isn't laid out (this island is hidden at the
   // current breakpoint), so there's nothing to anchor the popup to.
   const popupVisible = popupRequested && popupRect !== null;
+  const askAiEnabled = useDocsAiEnabled(popupRequested);
 
   // `grouped` is used by SearchResultsPopup to render hits under category
   // headings. `flatHits` is the same hits in CATEGORY_ORDER sequence so that
@@ -112,6 +114,14 @@ export default function SearchBar({
   useEffect(() => {
     setSelection({ kind: "none" });
   }, [hits]);
+
+  // The kill switch can resolve while the Ask AI row is selected, and a
+  // selection on a row that is no longer rendered would send Enter to it.
+  useEffect(() => {
+    if (!askAiEnabled) {
+      setSelection((s) => (s.kind === "ai" ? { kind: "none" } : s));
+    }
+  }, [askAiEnabled]);
 
   // The input is controlled, so anything typed into the server-rendered markup
   // before this island mounts is discarded on the first render. Advertising
@@ -185,11 +195,11 @@ export default function SearchBar({
   const onInputKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelection((s) => nextSelection(s, totalHits));
+      setSelection((s) => nextSelection(s, totalHits, askAiEnabled));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setSelection((s) => {
-        const prev = previousSelection(s);
+        const prev = previousSelection(s, askAiEnabled);
         // Arrow-up from the first result returns selection to "none" and
         // refocuses the input so the user can keep typing.
         if (prev.kind === "none") {
@@ -271,6 +281,7 @@ export default function SearchBar({
             variant={variant}
             grouped={grouped}
             selectedHit={selectedHit}
+            askAiEnabled={askAiEnabled}
             aiSelected={selection.kind === "ai"}
             noResultsLabel={labels["No results."]}
             totalHits={totalHits}
@@ -283,10 +294,16 @@ export default function SearchBar({
   );
 }
 
-// Selection grid is linear: none → ai → hit 0 → hit 1 → … → hit N-1.
-function nextSelection(s: Selection, totalHits: number): Selection {
+// Selection grid is linear: none → ai → hit 0 → hit 1 → … → hit N-1. When the
+// Ask AI row is hidden, `ai` drops out: none → hit 0.
+function nextSelection(
+  s: Selection,
+  totalHits: number,
+  askAiEnabled: boolean,
+): Selection {
   if (s.kind === "none") {
-    return { kind: "ai" };
+    if (askAiEnabled) return { kind: "ai" };
+    return totalHits > 0 ? { kind: "hit", index: 0 } : s;
   }
   if (s.kind === "ai") {
     return totalHits > 0 ? { kind: "hit", index: 0 } : s;
@@ -294,12 +311,13 @@ function nextSelection(s: Selection, totalHits: number): Selection {
   return s.index < totalHits - 1 ? { kind: "hit", index: s.index + 1 } : s;
 }
 
-function previousSelection(s: Selection): Selection {
+function previousSelection(s: Selection, askAiEnabled: boolean): Selection {
   if (s.kind === "none") {
     return s;
   }
   if (s.kind === "ai") {
     return { kind: "none" };
   }
-  return s.index === 0 ? { kind: "ai" } : { kind: "hit", index: s.index - 1 };
+  if (s.index > 0) return { kind: "hit", index: s.index - 1 };
+  return askAiEnabled ? { kind: "ai" } : { kind: "none" };
 }

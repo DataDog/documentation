@@ -31,6 +31,8 @@ interface Props {
   variant: "default" | "mobile";
   grouped: Map<string, NormalizedHit[]> | null;
   selectedHit: NormalizedHit | null;
+  /** False when the `docs-ai-enabled` kill switch is off: no Ask AI row. */
+  askAiEnabled: boolean;
   aiSelected: boolean;
   noResultsLabel: string;
   totalHits: number;
@@ -46,6 +48,7 @@ export default function SearchResultsPopup({
   variant,
   grouped,
   selectedHit,
+  askAiEnabled,
   aiSelected,
   noResultsLabel,
   totalHits,
@@ -70,7 +73,9 @@ export default function SearchResultsPopup({
       role="listbox"
       style={style}
     >
-      <AskAiRow query={query} selected={aiSelected} onAsk={onAskAi} />
+      {askAiEnabled && (
+        <AskAiRow query={query} selected={aiSelected} onAsk={onAskAi} />
+      )}
 
       {totalHits === 0 ? (
         <div class={cl("search-bar__no-hits")}>{noResultsLabel}</div>

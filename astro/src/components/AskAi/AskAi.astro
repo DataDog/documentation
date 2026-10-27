@@ -34,10 +34,6 @@
     }
     const { mountAskAi } = await import("@dd/ask-ai");
 
-    // TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
-    // Astro — the package falls back to its `true` default. Flipping the flag off
-    // disables Ask AI on Hugo only. Supply a resolver once Astro has a feature-flag
-    // client, or if the kill switch is ever needed on Astro before then.
     mountAskAi(createAskAiConfig());
   };
 
