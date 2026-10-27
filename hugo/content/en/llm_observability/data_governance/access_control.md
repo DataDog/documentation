@@ -1,5 +1,7 @@
 ---
 title: Data Access Control in Agent Observability
+aliases:
+- /llm_observability/improve/access_control/
 description: Use Data Access Control to restrict an Agent Observability project, and everything inside it, to specific teams or roles.
 further_reading:
 - link: "/account_management/rbac/data_access/"

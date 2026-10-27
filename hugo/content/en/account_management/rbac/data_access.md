@@ -287,4 +287,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
 [13]: /llm_observability/instrument/otel_instrumentation/
-[14]: /llm_observability/improve/access_control/
+[14]: /llm_observability/data_governance/access_control/

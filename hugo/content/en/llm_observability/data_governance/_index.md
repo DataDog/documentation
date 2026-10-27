@@ -136,4 +136,4 @@ For the full list of available metrics, see [Agent Observability metrics][8].
 [11]: /account_management/rbac/data_access
 [12]: /llm_observability/instrument/sdk/#span-processing
 [13]: /security/sensitive_data_scanner/
-[14]: /llm_observability/improve/access_control/
+[14]: /llm_observability/data_governance/access_control/

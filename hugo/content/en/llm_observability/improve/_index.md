@@ -10,7 +10,3 @@ Iterate on your LLM application with datasets, experiments, and the playground. 
     {{< nextlink href="/llm_observability/improve/datasets" >}}Datasets{{< /nextlink >}}
     {{< nextlink href="/llm_observability/improve/experiments" >}}Experiments{{< /nextlink >}}
 {{< /whatsnext >}}
-
-{{< whatsnext desc="Control who can see your data:" >}}
-    {{< nextlink href="/llm_observability/improve/access_control" >}}Data Access Control{{< /nextlink >}}
-{{< /whatsnext >}}
