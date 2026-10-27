@@ -1,6 +1,6 @@
 ---
 title: Manual Integrations
-description: Protect agents built on Amazon Strands, and LLM traffic that passes through LiteLLM Proxy, with AI Guard by adding a plugin or guardrail.
+description: Protect agents built on Amazon Strands, and model traffic that passes through LiteLLM Proxy, with AI Guard by adding a plugin or guardrail.
 ---
 
 {{< site-region region="gov,gov2" >}}
@@ -12,7 +12,7 @@ AI Guard manual integrations protect agents built on frameworks that the Datadog
 AI Guard provides two manual integrations:
 
 - **Amazon Strands**: A plugin that you add to a Strands agent in your application code.
-- **LiteLLM Proxy**: A guardrail that you add to the LiteLLM Proxy configuration. LiteLLM Proxy evaluates the LLM traffic of every agent that routes through the proxy, so agents behind the proxy can be written in any language.
+- **LiteLLM Proxy**: A guardrail that you add to the LiteLLM Proxy configuration. LiteLLM Proxy evaluates the model traffic of every agent that routes through the proxy, so agents behind the proxy can be written in any language.
 
 ## Supported frameworks and libraries
 
@@ -20,8 +20,8 @@ Manual integrations work only with specific framework and Datadog SDK versions. 
 
 | Language | Framework | Framework version | Datadog SDK version |
 | --- | --- | --- | --- |
-| Python | Amazon Strands | `strands-agents` 1.29.0 or later. | `dd-trace-py` 4.13.0 or later. |
-| Python | LiteLLM Proxy | `litellm` 1.78.5 or later. | `dd-trace-py` 4.13.0 or later. |
+| Python | Amazon Strands | `strands-agents` 1.29.0 or later | `dd-trace-py` 4.13.0 or later |
+| Python | LiteLLM Proxy | `litellm` 1.78.5 or later | `dd-trace-py` 4.13.0 or later |
 
 For LiteLLM Proxy, the language and Datadog SDK version apply to the proxy, not to the agents that route traffic through the proxy.
 
@@ -65,11 +65,13 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
 1. Set these environment variables in the application's environment:
 
-   - `DD_AI_GUARD_ENABLED=true`.
-   - `DD_API_KEY=<DATADOG_API_KEY>`.
-   - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
-   - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
-   - `DD_ENV=<ENVIRONMENT>`.
+   | Variable | Value |
+   | --- | --- |
+   | `DD_AI_GUARD_ENABLED` | `true`. Without this value, AI Guard spans don't include the evaluated messages. |
+   | `DD_API_KEY` | Your Datadog API key. |
+   | `DD_APP_KEY` | An application key with the `ai_guard_evaluate` scope. |
+   | `DD_SERVICE` | The service name the agent reports to APM. |
+   | `DD_ENV` | The environment name. |
 
 1. In the application code, add the AI Guard plugin to each Strands agent you create:
 
@@ -93,17 +95,19 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
 ## Enable LiteLLM Proxy integrations {#litellm-proxy}
 
-Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluates the LLM traffic of every agent that routes through the proxy, whatever language the agent uses.
+Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluates the model traffic of every agent that routes through the proxy, whatever language the agent uses.
 
-**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy environment. The agents you want to protect must send their LLM requests through the proxy.
+**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy environment. The agents you want to protect must send their model requests through the proxy.
 
 1. Set these environment variables in the LiteLLM Proxy environment:
 
-   - `DD_AI_GUARD_ENABLED=true`.
-   - `DD_API_KEY=<DATADOG_API_KEY>`.
-   - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
-   - `DD_SERVICE=<SERVICE_NAME>`.
-   - `DD_ENV=<ENVIRONMENT>`.
+   | Variable | Value |
+   | --- | --- |
+   | `DD_AI_GUARD_ENABLED` | `true`. Without this value, AI Guard spans don't include the evaluated messages. |
+   | `DD_API_KEY` | Your Datadog API key. |
+   | `DD_APP_KEY` | An application key with the `ai_guard_evaluate` scope. |
+   | `DD_SERVICE` | The service name for the proxy. |
+   | `DD_ENV` | The environment name. |
 
    All agents that route through the proxy share these `DD_SERVICE` and `DD_ENV` values. AI Guard applies the same policy to every agent behind the proxy, and AI Guard spans from those agents appear under the proxy service.
 

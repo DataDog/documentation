@@ -38,11 +38,10 @@ AI Guard requires these minimum Datadog SDK versions:
 
 | Language | Datadog SDK | Minimum version |
 | --- | --- | --- |
-| Python | `dd-trace-py` | 3.19.0. |
-| Node.js | `dd-trace-js` | 5.69.0. |
-| Java | `dd-trace-java` | 1.54.0. |
-| Ruby | `dd-trace-rb` | 2.25.0. |
-
+| Python | `dd-trace-py` | 3.19.0 |
+| Node.js | `dd-trace-js` | 5.69.0 |
+| Java | `dd-trace-java` | 1.54.0 |
+| Ruby | `dd-trace-rb` | 2.25.0 |
 
 Some integration methods require a later version, such as the Python SDK and manual integrations, which require `dd-trace-py` 4.13.0. Each integration page lists its own requirements.
 
@@ -51,10 +50,9 @@ To take advantage of all AI Guard features, use the latest version of the Datado
 <div class="alert alert-info">
 <p>By default, running the Datadog SDK and the Agent turns on other Datadog products, which are billed separately from AI Guard:</p>
 <ul>
-<li>The Datadog SDK sends full APM traces. To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>. Don't set <code>DD_TRACE_ENABLED=false</code>, because that setting turns off AI Guard spans and integrations too.</li>
+<li>The Datadog SDK sends full APM traces. To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>. AI Guard spans still reach Datadog, and indexed AI Guard spans count toward your APM indexed span usage. See <a href="#retention-filter">Create a retention filter for AI Guard spans</a>. Don't set <code>DD_TRACE_ENABLED=false</code>, because that setting turns off AI Guard spans and integrations too.</li>
 <li>The Agent reports Infrastructure Monitoring data. To turn off Infrastructure Monitoring, set <code>DD_INFRASTRUCTURE_MODE=none</code>. This setting requires Agent 7.77.0 or later.</li>
 </ul>
-<p>AI Guard spans are billed either way.</p>
 </div>
 
 ## 2. Create API and application keys {#create-keys}
@@ -67,42 +65,40 @@ AI Guard authenticates every evaluation with a Datadog API key and application k
 
 ## 3. Instrument your application {#instrumentation}
 
-Instrument each agent with the integration method that matches its language and libraries, so AI Guard can evaluate LLM traffic.
+Instrument each agent with the integration method that matches its language and libraries, so AI Guard can evaluate model traffic.
 
-AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values. Use the same service name that the agent reports to APM. Discover reports protection status for that service, and policies apply to that service and environment.
+AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values, and applies policies by service and environment. Use the same service name that the agent reports to APM. The AI Guard {{< ui >}}Discover{{< /ui >}} page lists the AI agent services in your organization and shows which ones AI Guard protects, matched by service name.
 
 ### Find the agent language and libraries
 
-If you don't know which language or LLM libraries an agent uses, check its APM service page.
+If you don't know which language or AI libraries an agent uses, check its APM service page.
 
 1. In Datadog, go to {{< ui >}}APM{{< /ui >}} and open the agent's service page.
 1. Find the language icon next to the service name.
-1. Open the {{< ui >}}operation{{< /ui >}} dropdown. Operations such as `openai.request`, `anthropic.request`, `langchain.request`, or `litellm.request` show which LLM libraries the agent calls.
+1. Open the {{< ui >}}operation{{< /ui >}} dropdown. Operations such as `openai.request`, `anthropic.request`, `langchain.request`, or `litellm.request` show which AI libraries the agent calls.
 
 ### Choose an integration method
 
-The right integration method depends on how the agent reaches its LLM and which language and libraries the agent uses. Choose the first integration method that applies to the agent:
+The appropriate integration method depends on how an agent reaches its model and which language and libraries the agent uses. Choose the first integration method that applies to the agent:
 
-1. If the agent's LLM traffic goes through LiteLLM Proxy, use the [LiteLLM Proxy integration][4].
-1. If the agent uses a supported framework or LLM client, use the matching [automatic integration][5] or [manual integration][6].
+1. If the agent's model traffic goes through LiteLLM Proxy, use the [LiteLLM Proxy integration][4].
+1. If the agent uses one of these AI frameworks or client libraries, use the matching [automatic integration][5] or [manual integration][6]:
+
+   | Framework or library | Language | Method |
+   | --- | --- | --- |
+   | LangChain | Python | Automatic integration |
+   | OpenAI SDK | Python, Node.js | Automatic integration |
+   | Anthropic SDK | Python, Node.js | Automatic integration |
+   | AI SDK | Node.js | Automatic integration |
+   | RubyLLM | Ruby | Automatic integration |
+   | Amazon Strands | Python | Manual integration |
+
 1. If no integration covers the agent's framework, but the agent is written in Python, Node.js, Java, or Ruby, use the [SDK][7].
-1. If none of these apply, use the [HTTP API][8]. HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog. Skip the remaining setup steps.
-
-These frameworks and libraries have an AI Guard integration:
-
-| Framework or library | Language | Method |
-| --- | --- | --- |
-| LangChain | Python | Automatic integration. |
-| OpenAI SDK | Python, Node.js | Automatic integration. |
-| Anthropic SDK | Python, Node.js | Automatic integration. |
-| AI SDK | Node.js | Automatic integration. |
-| RubyLLM | Ruby | Automatic integration. |
-| Amazon Strands | Python | Manual integration. |
-| LiteLLM Proxy | Any language. LiteLLM Proxy runs on Python. | Manual integration. |
+1. If none of these apply, use the [HTTP API][8]. HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog and don't generate signals. Skip the remaining setup steps.
 
 ## 4. Create a retention filter for AI Guard spans {#retention-filter}
 
-Create a retention filter so Datadog keeps every AI Guard span. By default, APM samples spans. Without a retention filter, Datadog can drop AI Guard spans, and dropped spans never appear in AI Guard, even though AI Guard is still evaluating your agent's requests.
+Create a retention filter so Datadog keeps every AI Guard span. By default, APM samples spans. Without a retention filter, Datadog can drop AI Guard spans, and dropped spans never appear in AI Guard, even though AI Guard still evaluates your agent's requests.
 
 You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to complete this task.
 
@@ -114,7 +110,7 @@ You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to
 
 1. Drag the AI Guard filter to the top of the {{< ui >}}Custom Retention Filters{{< /ui >}} list. New filters are added to the bottom of the list, and Datadog applies only the first filter that matches a span, so a filter higher in the list with a lower rate can drop AI Guard spans.
 
-AI Guard spans don't count toward APM ingestion billing, but the spans this filter keeps count toward your APM indexed span usage. If you don't use APM, or you keep a high volume of traces, indexed AI Guard spans can appear on your bill.
+Keeping AI Guard spans can add to your APM bill. APM bills separately for spans that Datadog receives, called *ingestion*, and spans that a retention filter keeps for search, called *indexing*. AI Guard spans aren't billed for ingestion. The AI Guard spans this filter keeps are indexed spans, so they count toward your APM indexed span usage. Organizations that don't use APM, or that already index a high volume of traces, are the most likely to see indexed AI Guard spans on their bill.
 
 ## 5. (Optional) Limit access to AI Guard spans {#limit-access}
 
@@ -136,7 +132,7 @@ Confirm that AI Guard is evaluating agent traffic.
 
 ### Troubleshooting: AI Guard spans don't appear
 
-If AI Guard spans for the agent don't appear, the service doesn't show as protected in Discover, and you can't review its evaluations. Check these causes in order:
+If AI Guard spans for the agent don't appear, check these causes in order:
 
 1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When the variable is unset, integrations don't evaluate anything, and in Node.js, Java, and Ruby, SDK calls return `ALLOW` without calling AI Guard. Set `DD_AI_GUARD_ENABLED=true`.
 1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.

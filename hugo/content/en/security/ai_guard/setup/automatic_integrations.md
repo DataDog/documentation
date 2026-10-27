@@ -1,15 +1,15 @@
 ---
 title: Automatic Integrations
-description: Protect agents built on supported LLM frameworks and client libraries with AI Guard, without adding evaluation calls to your code.
+description: Protect agents built on supported AI frameworks and client libraries with AI Guard, without adding evaluation calls to your code.
 ---
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard automatic integrations protect agents built on supported LLM frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you enable AI Guard through environment variables and Datadog SDK configuration, instead of adding evaluation calls by hand.
+AI Guard automatic integrations protect agents built on supported AI frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you enable AI Guard through environment variables and Datadog SDK configuration, instead of adding evaluation calls by hand.
 
-When the application starts with the Datadog SDK loaded, the SDK detects supported packages and instruments them. Each instrumented model call and tool call goes to AI Guard for evaluation before the call proceeds.
+When the application starts with the Datadog SDK loaded, the SDK detects supported packages and instruments them. The SDK sends each instrumented model call and tool call to AI Guard for evaluation.
 
 ## Supported frameworks and libraries
 
@@ -17,13 +17,13 @@ Automatic integrations work only with specific packages and versions. Check the 
 
 | Language | Package | Package version | Datadog SDK version |
 | --- | --- | --- | --- |
-| Python | LangChain | 0.1.20 or later. | `dd-trace-py` 3.19.0 or later. |
-| Python | OpenAI | 1.102.0 or later. | `dd-trace-py` 4.10.0 or later. |
-| Python | Anthropic | 0.28.0 or later. | `dd-trace-py` 4.11.0 or later. |
-| Node.js | AI SDK | v6. | `dd-trace-js` 5.96.0 or later. |
-| Node.js | OpenAI | 4.87.0 or later. | `dd-trace-js` 5.105.0 or later. |
-| Node.js | Anthropic | 0.14.0 or later. | `dd-trace-js` 5.122.0 or later, or 6.11.0 or later. |
-| Ruby | RubyLLM | 2.0.0 or later. | `dd-trace-rb` 2.44.0 or later. |
+| Python | LangChain | 0.1.20 or later | `dd-trace-py` 3.19.0 or later |
+| Python | OpenAI | 1.102.0 or later | `dd-trace-py` 4.10.0 or later |
+| Python | Anthropic | 0.28.0 or later | `dd-trace-py` 4.11.0 or later |
+| Node.js | AI SDK | v6 | `dd-trace-js` 5.96.0 or later |
+| Node.js | OpenAI | 4.87.0 or later | `dd-trace-js` 5.105.0 or later |
+| Node.js | Anthropic | 0.14.0 or later | `dd-trace-js` 5.122.0 or later, or 6.11.0 or later |
+| Ruby | RubyLLM | 2.0.0 or later | `dd-trace-rb` 2.44.0 or later |
 
 <!-- TODO: Does AI Guard support AI SDK v7 starting with `dd-trace-js` 5.112.0 and 6.1.0, the releases that added v7 support for LLM Observability? When integration tests confirm it, change the AI SDK row to "v6 or later" with that version. -->
 
@@ -33,7 +33,7 @@ In Python, if LangChain calls a supported provider SDK such as OpenAI, AI Guard 
 
 ### Evaluated operations
 
-Each automatic integration evaluates a specific set of operations, so check the operations your agent calls to confirm that AI Guard covers them. To evaluate calls not shown here, add [SDK][1] calls in your code.
+Each automatic integration evaluates a specific set of operations, so check the operations your agent calls to confirm that AI Guard covers them. To evaluate other calls, add [SDK][1] calls in your code.
 
 | Language | Package | Evaluated operations |
 | --- | --- | --- |
@@ -55,10 +55,10 @@ Streamed response evaluation is supported for these packages at the specified Da
 
 | Language | Package | Datadog SDK version |
 | --- | --- | --- |
-| Python | OpenAI and Anthropic | `dd-trace-py` 4.12.0 or later. |
-| Node.js | AI SDK | `dd-trace-js` 5.127.0 or later, or 6.16.0 or later. |
-| Node.js | OpenAI | `dd-trace-js` 5.128.0 or later, or 6.17.0 or later. |
-| Node.js | Anthropic | `dd-trace-js` 5.130.0 or later, or 6.19.0 or later. |
+| Python | OpenAI and Anthropic | `dd-trace-py` 4.12.0 or later |
+| Node.js | AI SDK | `dd-trace-js` 5.127.0 or later, or 6.16.0 or later |
+| Node.js | OpenAI | `dd-trace-js` 5.128.0 or later, or 6.17.0 or later |
+| Node.js | Anthropic | `dd-trace-js` 5.130.0 or later, or 6.19.0 or later |
 
 AI Guard doesn't evaluate streamed responses from LangChain or RubyLLM.
 
@@ -70,13 +70,15 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
 
 1. Set these environment variables in the application's environment:
 
-   - `DD_AI_GUARD_ENABLED=true`. Without this value, AI Guard evaluates nothing.
-   - `DD_API_KEY=<DATADOG_API_KEY>`.
-   - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
-   - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
-   - `DD_ENV=<ENVIRONMENT>`.
+   | Variable | Value |
+   | --- | --- |
+   | `DD_AI_GUARD_ENABLED` | `true`. Without this value, AI Guard evaluates nothing. |
+   | `DD_API_KEY` | Your Datadog API key. |
+   | `DD_APP_KEY` | An application key with the `ai_guard_evaluate` scope. |
+   | `DD_SERVICE` | The service name the agent reports to APM. |
+   | `DD_ENV` | The environment name. |
 
-   <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code> to <code>false</code>.</div>
+   <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set any of these variables to <code>false</code>: <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code>.</div>
 
 1. Start the application with the Datadog SDK loaded:
 

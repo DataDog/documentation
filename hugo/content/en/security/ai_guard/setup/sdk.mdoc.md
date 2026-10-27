@@ -43,7 +43,7 @@ The AI Guard SDK requires `dd-trace-java` 1.54.0 or later.
 The AI Guard SDK requires `dd-trace-rb` 2.25.0 or later.
 {% /if %}
 
-For languages that the SDK doesn't support, AI Guard provides an [HTTP API][3]. HTTP API evaluations don't create spans, so they don't appear on AI Guard pages in Datadog.
+For languages that the SDK doesn't support, AI Guard provides an [HTTP API][3]. HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog and don't generate signals.
 
 ## Evaluate messages with the SDK
 
@@ -53,11 +53,17 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
 1. Set these environment variables in the application's environment:
 
-   - `DD_AI_GUARD_ENABLED=true`.
-   - `DD_API_KEY=<DATADOG_API_KEY>`.
-   - `DD_APP_KEY=<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope.
-   - `DD_SERVICE=<SERVICE_NAME>`. Use the name the agent reports to APM.
-   - `DD_ENV=<ENVIRONMENT>`.
+   | Variable | Value |
+   | --- | --- |
+   | `DD_AI_GUARD_ENABLED` | `true` |
+   | `DD_API_KEY` | Your Datadog API key. |
+   | `DD_APP_KEY` | An application key with the `ai_guard_evaluate` scope. |
+   | `DD_SERVICE` | The service name the agent reports to APM. |
+   | `DD_ENV` | The environment name. |
+
+   {% if equals($prog_lang, "python") %}
+   In Python, the SDK calls AI Guard even without `DD_AI_GUARD_ENABLED=true`, but AI Guard spans don't include the evaluated messages.
+   {% /if %}
 
    {% if includes($prog_lang, ["node_js", "java", "ruby"]) %}
    {% alert level="warning" %}
@@ -275,7 +281,7 @@ An evaluation tells your code what AI Guard decided and why, so your agent can r
 
 | Field | Description |
 | --- | --- |
-| `action` | `ALLOW` or `DENY`. |
+| `action` | `ALLOW` or `DENY` |
 | `reason` | A natural language summary of the decision. |
 | `tags` | The attack categories AI Guard detected, such as `indirect-prompt-injection` or `destructive-tool-call`. |
 | `sds` | The Sensitive Data Scanner findings. |
