@@ -153,6 +153,8 @@ agent diagnose show-metadata agent-telemetry
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **Checks**                                  |                                                                                                                        |
 | checks.execution_time                       | Check's execution time in milliseconds                                                                                 |
+| checks.metadata_message_oversized           | Number of error and warning messages per check that exceed the size limit for the check metadata payload              |
+| checks.metadata_message_oversized_bytes     | Original size, in bytes, of error and warning messages per check that exceed the size limit for the check metadata payload               |
 | pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                                                    |
 | **Logs and metrics**                        |                                                                                                                        |
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
@@ -179,6 +181,8 @@ agent diagnose show-metadata agent-telemetry
 | logs_destination.destination_workers        | Maximum number of active HTTP connections per log destination                                                          |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
+| serializer.metadata_payload_dropped         | Number of metadata payloads dropped for exceeding the payload size limits, tagged by limit exceeded (compressed, uncompressed, or both) |
+| serializer.metadata_payload_dropped_bytes   | Size in bytes of the metadata payloads dropped for exceeding the payload size limits, tagged by compressed or uncompressed size |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
 | transactions.input_bytes                    | Incoming transaction payload size in bytes                                                                             |
 | transactions.success                        | Successful transaction count                                                                                           |

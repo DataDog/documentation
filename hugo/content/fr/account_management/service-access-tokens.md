@@ -14,8 +14,8 @@ further_reading:
   text: Fédération d'identités de charges de travail
 - link: https://www.datadoghq.com/blog/datadog-api-authentication/
   tag: Blog
-  text: Modernisez l’authentification à la Datadog API avec des identifiants à portée
-    définie.
+  text: Modernisez l'authentification à la Datadog API avec des identifiants à périmètre
+    défini.
 title: Les Jetons d'accès de service
 ---
 ## Présentation {#overview}
@@ -36,7 +36,7 @@ Avec les SAT, vous pouvez :
 |---|---|---|---|
 | Propriétaire | Compte de service | Utilisateur individuel | Utilisateur individuel ou compte de service |
 | Durée de vie (TTL) | Optionnel ; 1 jour, 1 mois, 1 an, Jamais ou Personnalisé | Requis ; 1 jour à 1 an | Aucune expiration |
-| À portée définie par défaut | Oui ; les portées sont obligatoires | Oui ; les portées sont obligatoires | Optionnel ; sans portée par défaut |
+| À périmètre défini par défaut | Oui ; les périmètres sont obligatoires | Oui ; les périmètres sont obligatoires | Optionnel ; sans périmètre par défaut |
 | Authentification autonome | Oui ; aucune association de clé d'API nécessaire | Oui ; aucune association de clé d'API nécessaire | Non ; nécessite une clé d'API |
 | Préfixe identifiable | `ddsat_` | `ddpat_` | `ddapp_` (nouveau) |
 | Visible dans | Détails du compte de service, Paramètres de l'organisation > Jetons d'accès | Paramètres personnels > Jetons d'accès, Paramètres de l'organisation > Jetons d'accès | Paramètres personnels > Clés d'application, Paramètres de l'organisation > Clés d'application |
@@ -52,18 +52,20 @@ Pour les jetons d'accès personnels, consultez [Jetons d'accès personnels][2].
 ## Créer un jeton d'accès de service {#create-a-service-access-token}
 
 1. Accédez à [**Paramètres de l'organisation** > **Comptes de service**][3] et cliquez sur un compte de service.
-2. Dans le panneau des détails, sous **Jetons d'accès**, cliquez sur {{< ui >}}+ New Token{{< /ui >}}.
+2. Dans le panneau de détails, sous **Access Tokens**, cliquez sur {{< ui >}}\+ New Token{{< /ui >}}.
 3. Saisissez un {{< ui >}}Name{{< /ui >}} pour le jeton.
 4. Sélectionnez un {{< ui >}}Expiration Date{{< /ui >}} : **1 jour**, **1 mois**, **1 an**, **Jamais**,
    ou **Personnalisé**. Sélectionnez **Jamais** pour un jeton sans expiration.
 5. Cliquez sur {{< ui >}}Select Scopes{{< /ui >}} pour définir ce à quoi le jeton peut accéder. N'accordez que les
    autorisations requises par votre workflow, puis cliquez sur {{< ui >}}Save{{< /ui >}}.
 
+**Remarque :** Chaque compte de service peut avoir jusqu'à 500 SAT.
+
 <div class="alert alert-warning">Datadog affiche le secret du jeton une seule fois au moment de la création.
 Copiez-le et stockez-le en toute sécurité. Vous ne pourrez pas le récupérer ultérieurement.</div>
 
 Après l'enregistrement, un panneau de détails affiche le secret du jeton, le nom, l'ID du jeton, le propriétaire, les rôles du propriétaire,
-la date d'expiration et les portées.
+la date d'expiration et les périmètres.
 
 Si vous configurez un SAT avec une longue expiration ou si vous sélectionnez **Jamais**, stockez le secret dans un gestionnaire de secrets
 tel qu'AWS Secrets Manager, HashiCorp Vault ou Azure Key Vault, au lieu de le stocker dans le code source
@@ -80,7 +82,7 @@ Transmettez le jeton d'accès de service en tant que jeton Bearer dans l'en-têt
 Clé d'API :
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "Authorization: Bearer <YOUR_SAT>"
 ```
 
@@ -89,7 +91,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 Transmettez le SAT dans l'en-tête `dd-application-key` :
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "dd-application-key: <YOUR_SAT>"
 ```
 
@@ -101,7 +103,7 @@ uniquement avec le SAT. L'en-tête `dd-api-key` est facultatif et sa valeur n'es
 Pour empêcher l'élévation de privilèges, Datadog restreint les actions possibles pour un appel d'API authentifié avec un SAT. Ces restrictions s'appliquent quel que soit le client API effectuant l'appel :
 
 - **Clés d'application** : un jeton d'accès de service ne peut pas créer ni mettre à jour de clés d'application. La révocation des clés d'application est autorisée.
-- **Portées sur les nouveaux jetons** : un jeton d'accès de service peut créer ou mettre à jour un autre jeton d'accès de service uniquement si les portées du nouveau jeton sont un sous-ensemble de ses propres portées.
+- **Périmètres sur les nouveaux jetons** : un jeton d'accès de service peut créer ou mettre à jour un autre jeton d'accès de service uniquement si les périmètres du nouveau jeton sont un sous-ensemble de ses propres périmètres.
 - **Durée de vie (TTL) sur les nouveaux jetons** : un jeton d'accès de service ne peut pas créer un jeton d'accès de service avec une durée de vie qui dépasse sa propre expiration.
 
 Un appel qui enfreint l'une de ces restrictions renvoie une réponse `403 Forbidden`.
@@ -129,7 +131,7 @@ Les jetons révoqués ne peuvent plus authentifier les appels d'API. La révocat
 
 ### Modifier un jeton {#edit-a-token}
 
-Vous pouvez mettre à jour le nom et les portées d'un SAT existant. Vous ne pouvez pas modifier la date d'expiration
+Vous pouvez mettre à jour le nom et les périmètres d'un SAT existant. Vous ne pouvez pas modifier la date d'expiration
 après la création. Pour modifier l'expiration, révoquez le jeton et créez-en un nouveau.
 
 ## Autorisations {#permissions}
@@ -170,7 +172,7 @@ unifié :
 GET /api/v2/personal_access_tokens
 ```
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

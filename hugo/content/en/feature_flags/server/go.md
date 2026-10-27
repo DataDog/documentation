@@ -69,6 +69,8 @@ go get github.com/open-feature/go-sdk/openfeature
 
 Start the Datadog Go tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
 
+Start the Datadog Agent before the application. If the application starts first, restart it after the Agent is available. See [Agent availability][6].
+
 ### Blocking initialization
 
 Use `SetProviderAndWait` to block evaluation until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
@@ -363,6 +365,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 

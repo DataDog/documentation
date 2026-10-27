@@ -28,7 +28,7 @@ Agent Observability allows you to restrict access to potentially sensitive data 
 
 Access controls in Agent Observability are built on Datadog's [Data Access Control][11] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific AI applications within your organization.
 
-You can also restrict individual Agent Observability projects, including their experiments, datasets, dataset records, and annotation queues. See [Data Access Control in Agent Observability][14].
+You can also restrict individual Agent Observability projects, including their offline experiments, datasets, dataset records, and annotation queues. The `ml_app` tag also restricts the evaluator configs that target an application. See [Data Access Control in Agent Observability][14].
 
 ## Redacting data with span processors
 
@@ -49,12 +49,12 @@ By proactively scanning for sensitive data, Agent Observability helps ensure tha
 
 ## Data retention
 
-Retention periods in Agent Observability depend on the type of data and on your plan. Traces from your instrumented applications follow the span retention period in your plan, while experiments, datasets, and prompts have their own periods.
+Retention periods in Agent Observability depend on the type of data and on your plan. Traces from your instrumented applications follow the span retention period in your plan, while offline experiments, datasets, and prompts have their own periods.
 
 | Data                                         | Retention period                                                                          |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Traces and spans                             | 15 days; 30, 60, or 90 days with a retention add-on                                       |
-| Experiments                                  | Free tier and on-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months |
+| Offline Experiments                                  | Free tier and on-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months |
 | Annotated interactions and labels            | 90 days from the time of annotation, or your span retention period if that is longer      |
 | Dataset records                              | Current version: 3 years. Previous versions: 90 days, reset when used                     |
 | Prompts in the prompt registry               | 3 years, extended each time the prompt is pulled                                          |
@@ -68,11 +68,11 @@ A retention add-on extends this to **30, 60, or 90 days**. Add-ons are not avail
 
 Retention applies to the raw spans you query in the Trace Explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
 
-### Experiments
+### Offline Experiments
 
-On committed plans, [experiments][3] are retained longer than production traces.
+On committed plans, [offline experiments][3] are retained longer than production traces.
 
-| Plan                                | Experiment retention |
+| Plan                                | Offline experiment retention |
 | ----------------------------------- | -------------------- |
 | Free tier                           | 15 days              |
 | On-demand                           | 15 days              |
@@ -125,7 +125,7 @@ For the full list of available metrics, see [Agent Observability metrics][8].
 
 [1]: /help/
 [2]: /llm_observability/investigate/annotation_queues/
-[3]: /llm_observability/improve/experiments/
+[3]: /llm_observability/improve/offline_experiments/
 [4]: /llm_observability/improve/datasets/
 [5]: /llm_observability/improve/datasets/#dataset-versioning
 [6]: /metrics/

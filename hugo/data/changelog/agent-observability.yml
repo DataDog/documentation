@@ -5,3 +5,12 @@ entries:
     operations:
       - ListLLMObsPatternsTemplates
     title: Document ListLLMObsPatternsTemplates endpoint
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - CreateLLMObsAnnotationQueueInteractions
+      - GetLLMObsAnnotatedInteraction
+      - GetLLMObsAnnotatedInteractions
+      - GetLLMObsAnnotatedInteractionsByTraceIDs
+    title: Remove discriminator and anyOf usage

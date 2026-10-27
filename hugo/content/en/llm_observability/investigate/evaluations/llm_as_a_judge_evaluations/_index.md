@@ -34,6 +34,8 @@ Custom LLM-as-a-judge evaluators use an LLM to judge the performance of another 
 - **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluators][16] for the full walkthrough, use cases, and prompt examples.
 - **Session scope**—feed every trace in a user session (and every span in those traces) to the LLM judge in a single prompt, so the evaluation can reason across an entire multi-turn interaction. See [Session-Level Evaluators][17] for the full walkthrough, use cases, and prompt examples.
 
+Evaluators can also send the images and audio attached to your spans to the LLM judge. See [Image and Audio Evaluators][19].
+
 ## Create a custom LLM-as-a-judge evaluator
 
 You can create and manage custom evaluators from the [Evaluators page][1] in Agent Observability. You can provide an evaluator description to generate an evaluator, use and build on existing [LLM-as-a-judge evaluator templates][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
@@ -110,6 +112,8 @@ Span Input: {{span_input}}
 For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
 
 For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
+
+Evaluators that include audio use OpenAI audio models and require [Keyword Search Output](#keyword-search-output). See [Image and Audio Evaluators][19].
 
 For custom providers, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
@@ -542,9 +546,9 @@ You can:
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
-## Using in experiments
+## Using in offline experiments
 
-To reuse a custom LLM-as-a-judge evaluator in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+To reuse a custom LLM-as-a-judge evaluator in a local [offline experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, RemoteEvaluator
@@ -602,7 +606,7 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/investigate/evaluations/compatibility
 [7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations/
-[8]: /llm_observability/improve/experiments
+[8]: /llm_observability/improve/offline_experiments
 [9]: /llm_observability/investigate/evaluations/evaluation_developer_guide/#using-managed-evaluators
 [10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [11]: /api/latest/agent-observability/#get-a-custom-evaluator-configuration
@@ -613,3 +617,4 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [16]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
 [17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
+[19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations

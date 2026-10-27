@@ -2010,6 +2010,19 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: List tag indexing rule exemptions
+      url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
+      identifier: metrics-list-tag-indexing-rule-exemptions
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRuleExemptions
+        unstable:
+          - v2
+        order: 34
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -2049,6 +2062,54 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: Update a derived metric
+      url: /api/latest/metrics/update-a-derived-metric/
+      identifier: metrics-update-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDerivedMetric
+        unstable: []
+        order: 32
+    - name: Get a derived metric
+      url: /api/latest/metrics/get-a-derived-metric/
+      identifier: metrics-get-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDerivedMetric
+        unstable: []
+        order: 31
+    - name: Delete a derived metric
+      url: /api/latest/metrics/delete-a-derived-metric/
+      identifier: metrics-delete-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDerivedMetric
+        unstable: []
+        order: 33
+    - name: Create a derived metric
+      url: /api/latest/metrics/create-a-derived-metric/
+      identifier: metrics-create-a-derived-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDerivedMetric
+        unstable: []
+        order: 30
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -4103,6 +4164,149 @@ menu:
           - ListSecurityMonitoringCriticalAssets
         unstable: []
         order: 52
+    - name: Start a batch migration
+      url: /api/latest/security-monitoring/start-a-batch-migration/
+      identifier: security-monitoring-start-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 187
+    - name: Update a batch migration resource
+      url: /api/latest/security-monitoring/update-a-batch-migration-resource/
+      identifier: security-monitoring-update-a-batch-migration-resource
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigrationResource
+        unstable:
+          - v2
+        order: 186
+    - name: Add resources to a batch migration
+      url: /api/latest/security-monitoring/add-resources-to-a-batch-migration/
+      identifier: security-monitoring-add-resources-to-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 184
+    - name: List batch migration resources
+      url: /api/latest/security-monitoring/list-batch-migration-resources/
+      identifier: security-monitoring-list-batch-migration-resources
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 183
+    - name: Delete resources from a batch migration
+      url: /api/latest/security-monitoring/delete-resources-from-a-batch-migration/
+      identifier: security-monitoring-delete-resources-from-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigrationResources
+        unstable:
+          - v2
+        order: 185
+    - name: Publish a batch migration
+      url: /api/latest/security-monitoring/publish-a-batch-migration/
+      identifier: security-monitoring-publish-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 182
+    - name: Cancel a batch migration
+      url: /api/latest/security-monitoring/cancel-a-batch-migration/
+      identifier: security-monitoring-cancel-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 181
+    - name: Update a batch migration
+      url: /api/latest/security-monitoring/update-a-batch-migration/
+      identifier: security-monitoring-update-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 179
+    - name: Delete a batch migration
+      url: /api/latest/security-monitoring/delete-a-batch-migration/
+      identifier: security-monitoring-delete-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 180
+    - name: Create a batch migration
+      url: /api/latest/security-monitoring/create-a-batch-migration/
+      identifier: security-monitoring-create-a-batch-migration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringBatchMigration
+        unstable:
+          - v2
+        order: 178
+    - name: List batch migrations
+      url: /api/latest/security-monitoring/list-batch-migrations/
+      identifier: security-monitoring-list-batch-migrations
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringBatchMigrations
+        unstable:
+          - v2
+        order: 177
     - name: List vulnerable assets
       url: /api/latest/security-monitoring/list-vulnerable-assets/
       identifier: security-monitoring-list-vulnerable-assets
@@ -6450,6 +6654,19 @@ menu:
           - GetUsageSummaryAvailableFields
         unstable: []
         order: 13
+    - name: Cancel a scheduled usage quota limit
+      url: /api/latest/usage-metering/cancel-a-scheduled-usage-quota-limit/
+      identifier: usage-metering-cancel-a-scheduled-usage-quota-limit
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePendingQuota
+        unstable:
+          - v2
+        order: 18
     - name: Update a usage quota
       url: /api/latest/usage-metering/update-a-usage-quota/
       identifier: usage-metering-update-a-usage-quota
@@ -7843,11 +8060,27 @@ menu:
           - ListDatastores
         unstable: []
         order: 1
+    - name: Agent Health
+      url: /api/latest/agent-health/
+      identifier: agent-health
+      generated: true
+    - name: List active Agent Health issues
+      url: /api/latest/agent-health/list-active-agent-health-issues/
+      identifier: agent-health-list-active-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthHostIssues
+        unstable: []
+        order: 1
     - name: Agent Observability
       url: /api/latest/agent-observability/
       identifier: agent-observability
       generated: true
-    - name: List events for an Agent Observability experiment
+    - name: List events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/list-events-for-an-agent-observability-experiment/
       identifier: agent-observability-list-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -7873,7 +8106,7 @@ menu:
         unstable:
           - v2
         order: 48
-    - name: List Agent Observability experiment events (v2)
+    - name: List Agent Observability offline experiment events (v2)
       url: /api/latest/agent-observability/list-agent-observability-experiment-events-v2/
       identifier: agent-observability-list-agent-observability-experiment-events-v2
       parent: agent-observability
@@ -8471,7 +8704,7 @@ menu:
         unstable:
           - v2
         order: 36
-    - name: Push events for an Agent Observability experiment
+    - name: Push events for an Agent Observability offline experiment
       url: /api/latest/agent-observability/push-events-for-an-agent-observability-experiment/
       identifier: agent-observability-push-events-for-an-agent-observability-experiment
       parent: agent-observability
@@ -8484,7 +8717,7 @@ menu:
         unstable:
           - v2
         order: 17
-    - name: List Agent Observability experiment spans (v1)
+    - name: List Agent Observability offline experiment spans (v1)
       url: /api/latest/agent-observability/list-agent-observability-experiment-spans-v1/
       identifier: agent-observability-list-agent-observability-experiment-spans-v1
       parent: agent-observability
@@ -8497,7 +8730,7 @@ menu:
         unstable:
           - v2
         order: 49
-    - name: Update an Agent Observability experiment
+    - name: Update an Agent Observability offline experiment
       url: /api/latest/agent-observability/update-an-agent-observability-experiment/
       identifier: agent-observability-update-an-agent-observability-experiment
       parent: agent-observability
@@ -8510,7 +8743,7 @@ menu:
         unstable:
           - v2
         order: 15
-    - name: Delete Agent Observability experiments
+    - name: Delete Agent Observability offline experiments
       url: /api/latest/agent-observability/delete-agent-observability-experiments/
       identifier: agent-observability-delete-agent-observability-experiments
       parent: agent-observability
@@ -8523,7 +8756,7 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Create an Agent Observability experiment
+    - name: Create an Agent Observability offline experiment
       url: /api/latest/agent-observability/create-an-agent-observability-experiment/
       identifier: agent-observability-create-an-agent-observability-experiment
       parent: agent-observability
@@ -8536,7 +8769,7 @@ menu:
         unstable:
           - v2
         order: 14
-    - name: List Agent Observability experiments
+    - name: List Agent Observability offline experiments
       url: /api/latest/agent-observability/list-agent-observability-experiments/
       identifier: agent-observability-list-agent-observability-experiments
       parent: agent-observability
@@ -8549,7 +8782,7 @@ menu:
         unstable:
           - v2
         order: 13
-    - name: Simple search experimentation entities
+    - name: Simple search offline experiment entities
       url: /api/latest/agent-observability/simple-search-experimentation-entities/
       identifier: agent-observability-simple-search-experimentation-entities
       parent: agent-observability
@@ -8562,7 +8795,7 @@ menu:
         unstable:
           - v2
         order: 32
-    - name: Search Agent Observability experimentation
+    - name: Search Agent Observability offline experiments
       url: /api/latest/agent-observability/search-agent-observability-experimentation/
       identifier: agent-observability-search-agent-observability-experimentation
       parent: agent-observability
@@ -8575,7 +8808,7 @@ menu:
         unstable:
           - v2
         order: 31
-    - name: Aggregate Agent Observability experimentation
+    - name: Aggregate Agent Observability offline experiments
       url: /api/latest/agent-observability/aggregate-agent-observability-experimentation/
       identifier: agent-observability-aggregate-agent-observability-experimentation
       parent: agent-observability
@@ -14195,6 +14428,54 @@ menu:
           - RefreshExperimentResultsForOrg
         unstable: []
         order: 42
+    - name: Publish experiment protocol
+      url: /api/latest/experiments/publish-experiment-protocol/
+      identifier: experiments-publish-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishExperimentProtocol
+        unstable: []
+        order: 53
+    - name: Archive experiment protocol
+      url: /api/latest/experiments/archive-experiment-protocol/
+      identifier: experiments-archive-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ArchiveExperimentProtocol
+        unstable: []
+        order: 54
+    - name: Replace experiment protocol
+      url: /api/latest/experiments/replace-experiment-protocol/
+      identifier: experiments-replace-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReplaceExperimentProtocol
+        unstable: []
+        order: 51
+    - name: Update experiment protocol
+      url: /api/latest/experiments/update-experiment-protocol/
+      identifier: experiments-update-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchExperimentProtocol
+        unstable: []
+        order: 50
     - name: Get experiment protocol
       url: /api/latest/experiments/get-experiment-protocol/
       identifier: experiments-get-experiment-protocol
@@ -14207,6 +14488,30 @@ menu:
           - GetExperimentProtocol
         unstable: []
         order: 41
+    - name: Delete experiment protocol
+      url: /api/latest/experiments/delete-experiment-protocol/
+      identifier: experiments-delete-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExperimentProtocol
+        unstable: []
+        order: 52
+    - name: Create experiment protocol
+      url: /api/latest/experiments/create-experiment-protocol/
+      identifier: experiments-create-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExperimentProtocol
+        unstable: []
+        order: 49
     - name: List experiment protocols
       url: /api/latest/experiments/list-experiment-protocols/
       identifier: experiments-list-experiment-protocols
@@ -14743,6 +15048,18 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Patch a saved filter
+      url: /api/latest/feature-flags/patch-a-saved-filter/
+      identifier: feature-flags-patch-a-saved-filter
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSavedFilterAttributes
+        unstable: []
+        order: 24
     - name: Get a saved filter
       url: /api/latest/feature-flags/get-a-saved-filter/
       identifier: feature-flags-get-a-saved-filter
@@ -17002,6 +17319,32 @@ menu:
       url: /api/latest/logs-archive-searches/
       identifier: logs-archive-searches
       generated: true
+    - name: Cancel an Archive Search
+      url: /api/latest/logs-archive-searches/cancel-an-archive-search/
+      identifier: logs-archive-searches-cancel-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelArchiveSearch
+        unstable:
+          - v2
+        order: 5
+    - name: Rehydrate an Archive Search
+      url: /api/latest/logs-archive-searches/rehydrate-an-archive-search/
+      identifier: logs-archive-searches-rehydrate-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RehydrateArchiveSearch
+        unstable:
+          - v2
+        order: 4
     - name: Get an Archive Search
       url: /api/latest/logs-archive-searches/get-an-archive-search/
       identifier: logs-archive-searches-get-an-archive-search
@@ -17028,6 +17371,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List Archive Searches
+      url: /api/latest/logs-archive-searches/list-archive-searches/
+      identifier: logs-archive-searches-list-archive-searches
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListArchiveSearches
+        unstable:
+          - v2
+        order: 3
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -17875,23 +18231,6 @@ menu:
           - ListDevices
         unstable: []
         order: 1
-    - name: Network Health Insights
-      url: /api/latest/network-health-insights/
-      identifier: network-health-insights
-      generated: true
-    - name: List network health insights
-      url: /api/latest/network-health-insights/list-network-health-insights/
-      identifier: network-health-insights-list-network-health-insights
-      parent: network-health-insights
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListNetworkHealthInsights
-        unstable:
-          - v2
-        order: 1
     - name: OAuth2 Client Public
       url: /api/latest/oauth2-client-public/
       identifier: oauth2-client-public
@@ -18205,7 +18544,7 @@ menu:
         operationids:
           - UpdateUserNotificationRule
         unstable: []
-        order: 21
+        order: 22
     - name: Get an On-Call notification rule for a user
       url: /api/latest/on-call/get-an-on-call-notification-rule-for-a-user/
       identifier: on-call-get-an-on-call-notification-rule-for-a-user
@@ -18217,7 +18556,7 @@ menu:
         operationids:
           - GetUserNotificationRule
         unstable: []
-        order: 20
+        order: 21
     - name: Delete an On-Call notification rule for a user
       url: /api/latest/on-call/delete-an-on-call-notification-rule-for-a-user/
       identifier: on-call-delete-an-on-call-notification-rule-for-a-user
@@ -18229,7 +18568,7 @@ menu:
         operationids:
           - DeleteUserNotificationRule
         unstable: []
-        order: 19
+        order: 20
     - name: Create an On-Call notification rule for a user
       url: /api/latest/on-call/create-an-on-call-notification-rule-for-a-user/
       identifier: on-call-create-an-on-call-notification-rule-for-a-user
@@ -18241,7 +18580,7 @@ menu:
         operationids:
           - CreateUserNotificationRule
         unstable: []
-        order: 17
+        order: 18
     - name: List On-Call notification rules for a user
       url: /api/latest/on-call/list-on-call-notification-rules-for-a-user/
       identifier: on-call-list-on-call-notification-rules-for-a-user
@@ -18253,7 +18592,7 @@ menu:
         operationids:
           - ListUserNotificationRules
         unstable: []
-        order: 18
+        order: 19
     - name: Get an On-Call notification channel for a user
       url: /api/latest/on-call/get-an-on-call-notification-channel-for-a-user/
       identifier: on-call-get-an-on-call-notification-channel-for-a-user
@@ -18265,7 +18604,7 @@ menu:
         operationids:
           - GetUserNotificationChannel
         unstable: []
-        order: 14
+        order: 15
     - name: Delete an On-Call notification channel for a user
       url: /api/latest/on-call/delete-an-on-call-notification-channel-for-a-user/
       identifier: on-call-delete-an-on-call-notification-channel-for-a-user
@@ -18277,7 +18616,7 @@ menu:
         operationids:
           - DeleteUserNotificationChannel
         unstable: []
-        order: 13
+        order: 14
     - name: Create an On-Call notification channel for a user
       url: /api/latest/on-call/create-an-on-call-notification-channel-for-a-user/
       identifier: on-call-create-an-on-call-notification-channel-for-a-user
@@ -18289,7 +18628,7 @@ menu:
         operationids:
           - CreateUserNotificationChannel
         unstable: []
-        order: 16
+        order: 17
     - name: List On-Call notification channels for a user
       url: /api/latest/on-call/list-on-call-notification-channels-for-a-user/
       identifier: on-call-list-on-call-notification-channels-for-a-user
@@ -18301,7 +18640,7 @@ menu:
         operationids:
           - ListUserNotificationChannels
         unstable: []
-        order: 15
+        order: 16
     - name: Set On-Call team routing rules
       url: /api/latest/on-call/set-on-call-team-routing-rules/
       identifier: on-call-set-on-call-team-routing-rules
@@ -18313,7 +18652,7 @@ menu:
         operationids:
           - SetOnCallTeamRoutingRules
         unstable: []
-        order: 10
+        order: 11
     - name: Get On-Call team routing rules
       url: /api/latest/on-call/get-on-call-team-routing-rules/
       identifier: on-call-get-on-call-team-routing-rules
@@ -18325,7 +18664,7 @@ menu:
         operationids:
           - GetOnCallTeamRoutingRules
         unstable: []
-        order: 9
+        order: 10
     - name: Get team on-call users
       url: /api/latest/on-call/get-team-on-call-users/
       identifier: on-call-get-team-on-call-users
@@ -18337,7 +18676,7 @@ menu:
         operationids:
           - GetTeamOnCallUsers
         unstable: []
-        order: 12
+        order: 13
     - name: Get on-call responders for a schedule
       url: /api/latest/on-call/get-on-call-responders-for-a-schedule/
       identifier: on-call-get-on-call-responders-for-a-schedule
@@ -18349,7 +18688,7 @@ menu:
         operationids:
           - GetScheduleOnCallResponders
         unstable: []
-        order: 22
+        order: 23
     - name: Delete On-Call schedule override
       url: /api/latest/on-call/delete-on-call-schedule-override/
       identifier: on-call-delete-on-call-schedule-override
@@ -18361,7 +18700,7 @@ menu:
         operationids:
           - DeleteScheduleOverride
         unstable: []
-        order: 26
+        order: 27
     - name: Create On-Call schedule overrides
       url: /api/latest/on-call/create-on-call-schedule-overrides/
       identifier: on-call-create-on-call-schedule-overrides
@@ -18373,7 +18712,7 @@ menu:
         operationids:
           - CreateScheduleOverrides
         unstable: []
-        order: 25
+        order: 26
     - name: List On-Call schedule overrides
       url: /api/latest/on-call/list-on-call-schedule-overrides/
       identifier: on-call-list-on-call-schedule-overrides
@@ -18385,7 +18724,7 @@ menu:
         operationids:
           - ListScheduleOverrides
         unstable: []
-        order: 24
+        order: 25
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user
@@ -18397,7 +18736,7 @@ menu:
         operationids:
           - GetScheduleOnCallUser
         unstable: []
-        order: 11
+        order: 12
     - name: Update On-Call schedule
       url: /api/latest/on-call/update-on-call-schedule/
       identifier: on-call-update-on-call-schedule
@@ -18457,7 +18796,7 @@ menu:
         operationids:
           - ListOnCallSchedules
         unstable: []
-        order: 23
+        order: 24
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18469,7 +18808,7 @@ menu:
         operationids:
           - UpdateOnCallEscalationPolicy
         unstable: []
-        order: 6
+        order: 7
     - name: Get On-Call escalation policy
       url: /api/latest/on-call/get-on-call-escalation-policy/
       identifier: on-call-get-on-call-escalation-policy
@@ -18481,7 +18820,7 @@ menu:
         operationids:
           - GetOnCallEscalationPolicy
         unstable: []
-        order: 7
+        order: 8
     - name: Delete On-Call escalation policy
       url: /api/latest/on-call/delete-on-call-escalation-policy/
       identifier: on-call-delete-on-call-escalation-policy
@@ -18493,7 +18832,7 @@ menu:
         operationids:
           - DeleteOnCallEscalationPolicy
         unstable: []
-        order: 8
+        order: 9
     - name: Create On-Call escalation policy
       url: /api/latest/on-call/create-on-call-escalation-policy/
       identifier: on-call-create-on-call-escalation-policy
@@ -18504,6 +18843,18 @@ menu:
           - v2
         operationids:
           - CreateOnCallEscalationPolicy
+        unstable: []
+        order: 6
+    - name: List On-Call escalation policies
+      url: /api/latest/on-call/list-on-call-escalation-policies/
+      identifier: on-call-list-on-call-escalation-policies
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallEscalationPolicies
         unstable: []
         order: 5
     - name: On-Call Paging
@@ -20834,8 +21185,7 @@ menu:
           - v2
         operationids:
           - UpdateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: Get a RUM exclusion filter
       url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
@@ -20847,8 +21197,7 @@ menu:
           - v2
         operationids:
           - GetExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Delete a RUM exclusion filter
       url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
@@ -20860,8 +21209,7 @@ menu:
           - v2
         operationids:
           - DeleteExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Create a RUM exclusion filter
       url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
@@ -20873,8 +21221,7 @@ menu:
           - v2
         operationids:
           - CreateExclusionFilter
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Get all RUM exclusion filters
       url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
@@ -20886,8 +21233,7 @@ menu:
           - v2
         operationids:
           - ListExclusionFilters
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Create a RUM retention filter
       url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
@@ -22073,49 +22419,6 @@ menu:
           - ListCatalogEntity
         unstable: []
         order: 1
-    - name: Spa
-      url: /api/latest/spa/
-      identifier: spa
-      generated: true
-    - name: Get SPA Recommendations with a shard parameter
-      url: /api/latest/spa/get-spa-recommendations-with-a-shard-parameter/
-      identifier: spa-get-spa-recommendations-with-a-shard-parameter
-      parent: spa
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSPARecommendationsWithShard
-        unstable:
-          - v2
-        order: 1
-    - name: Get SPA Recommendations
-      url: /api/latest/spa/get-spa-recommendations/
-      identifier: spa-get-spa-recommendations
-      parent: spa
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSPARecommendations
-        unstable:
-          - v2
-        order: 2
-    - name: Get SPA recommendations v2
-      url: /api/latest/spa/get-spa-recommendations-v2/
-      identifier: spa-get-spa-recommendations-v2
-      parent: spa
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSPARecommendationsV2
-        unstable:
-          - v2
-        order: 3
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -23450,6 +23753,19 @@ menu:
           - GetTeamMemberships
         unstable: []
         order: 9
+    - name: Get team hierarchy members
+      url: /api/latest/teams/get-team-hierarchy-members/
+      identifier: teams-get-team-hierarchy-members
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamHierarchyMembers
+        unstable:
+          - v2
+        order: 35
     - name: Update a team link
       url: /api/latest/teams/update-a-team-link/
       identifier: teams-update-a-team-link
@@ -23585,9 +23901,9 @@ menu:
         unstable:
           - v2
         order: 27
-    - name: Link Teams with GitHub Teams
-      url: /api/latest/teams/link-teams-with-github-teams/
-      identifier: teams-link-teams-with-github-teams
+    - name: Link teams with external teams
+      url: /api/latest/teams/link-teams-with-external-teams/
+      identifier: teams-link-teams-with-external-teams
       parent: teams
       generated: true
       params:

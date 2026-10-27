@@ -223,6 +223,7 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
 | {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. Configured minimum bound sizes still apply. |
+| {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
 
 ### Monitor schedule
 

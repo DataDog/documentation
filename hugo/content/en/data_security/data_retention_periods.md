@@ -58,7 +58,7 @@ attributes:
     data_type: |
        - **Open findings**: Retained while still detected
        - **Resolved vulnerabilities**: 30 days after the resource was last scanned
-       - **Resolved misconfigurations, identity risks, and attack paths**: 15 months
+       - **Misconfigurations, identity risks, and attack paths**: 15 months
   - product: Cloud SIEM
     data_type: |
        - **Signals**: 15 months

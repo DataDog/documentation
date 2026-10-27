@@ -15,7 +15,17 @@ The Public Artifact Vulnerabilities page lets you view vulnerability and respons
 
 ## How to access
 
-The Public Artifact Vulnerabilities page is accessible through the Help page under {{< ui >}}Public Artifact Vulnerabilities{{< /ui >}}.
+The Public Artifact Vulnerabilities page is public. You don't need to log in to view it.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Open the [Public Artifact Vulnerabilities page][1], or go to the Help page and click {{< ui >}}View Public Artifact Vulnerabilities{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/public-artifact-vulnerabilities
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+Open the Public Artifact Vulnerabilities page at `https://app.datadoghq.com/public-artifact-vulnerabilities`.
+{{< /site-region >}}
 
 ## Using the page
 

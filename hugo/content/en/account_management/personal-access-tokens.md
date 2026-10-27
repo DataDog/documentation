@@ -57,7 +57,7 @@ PATs support two authentication methods.
 Pass the PAT as a Bearer token in the `Authorization` header. This method does not require an API key:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "Authorization: Bearer <YOUR_PAT>"
 ```
 
@@ -66,7 +66,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 Pass the PAT in the `dd-application-key` header. This is useful for migrating existing integrations that already use the application key header format:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "dd-application-key: <YOUR_PAT>"
 ```
 
@@ -135,7 +135,7 @@ PATs use the same permissions as application keys:
 |------------|-------------|
 | `user_app_keys` | Create and manage your own PATs |
 | `org_app_keys_read` | View PATs for all users in the organization |
-| `org_app_keys_write` | Create, edit, and revoke PATs for any user in the organization |
+| `org_app_keys_write` | Edit and revoke PATs for any user in the organization |
 
 For more information about permissions, see [Role Based Access Control][3].
 

@@ -1,0 +1,13 @@
+entries:
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41026
+    operations:
+      - CreateCustomRule
+      - CreateCustomRuleset
+      - GetCustomRule
+      - GetCustomRuleset
+      - ListCustomRulesets
+      - UpdateCustomRuleset
+    title: Fix static analysis analyze request and custom rule response spec 
+      drift
