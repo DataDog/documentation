@@ -91,7 +91,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.m
 
 To install the Agent on Azure, follow the [Microsoft Azure documentation][8].
 
-## Linux and Unix
+## Linux
 
 {{< tabs >}}
 

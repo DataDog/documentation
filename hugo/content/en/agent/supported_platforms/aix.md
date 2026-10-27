@@ -57,7 +57,7 @@ To install the Agent on AIX, follow the [in-app instructions in Fleet Automation
 
 ## Commands
 
-| Description              | Command (as root)           |
+| Description              | Command                     |
 |--------------------------|-----------------------------|
 | Start Agent              | `startsrc -g datadog-agent` |
 | Stop Agent               | `stopsrc -g datadog-agent`  |
