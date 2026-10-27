@@ -25,7 +25,7 @@ The installer script uses Helm to install these components:
 - Two Collectors. The `cluster` Collector collects cluster-level metrics and Kubernetes objects. The `daemon` Collector runs on every node, collects node metrics and logs, and receives your application's telemetry.
 - [cert-manager][2], which the Operator needs for its admission webhook.
 
-Choose a path. Both paths use the same steps except step 2.
+Choose a path. Where a step differs by path, it shows an **Upstream** tab and a **DDOT** tab.
 
 | Path | What runs in your cluster | How data reaches Datadog |
 |---|---|---|
@@ -112,7 +112,28 @@ kubectl rollout status deployment/opentelemetry-kube-stack-opentelemetry-operato
 kubectl get pods -n opentelemetry-operator-system
 ```
 
-The output lists the Operator, kube-state-metrics, the `cluster` Collector, and one `daemon` Collector pod for each node. Each pod shows `Running` with all its containers ready, such as `1/1`. The Collectors can take a minute to be ready.
+The output lists the Operator, kube-state-metrics, the `cluster` Collector, and one `daemon` Collector pod for each node. The Collectors can take a minute to be ready. On a one-node cluster, the output looks like this:
+
+```text
+NAME                                                              READY   STATUS    RESTARTS   AGE
+kube-state-metrics-574848497d-b7g79                               1/1     Running   0          2m
+opentelemetry-kube-stack-cluster-collector-848ff96d77-trdsp       1/1     Running   0          2m
+opentelemetry-kube-stack-daemon-collector-zv6lx                   1/1     Running   0          2m
+opentelemetry-kube-stack-opentelemetry-operator-5ccfd8f959fjmvm   1/1     Running   0          2m
+```
+
+### What the installer set up
+
+| Component | Where | What it does |
+|---|---|---|
+| `datadog-secret` | `opentelemetry-operator-system` namespace | Stores your API key and site. |
+| cert-manager | `cert-manager` namespace | Issues the certificate for the Operator's admission webhook. |
+| `opentelemetry-kube-stack` Helm release | `opentelemetry-operator-system` namespace | Runs the OpenTelemetry Operator, kube-state-metrics, and the two Collectors. |
+| `cluster` Collector | Deployment | Collects cluster-level metrics and Kubernetes objects. |
+| `daemon` Collector | DaemonSet | Collects node metrics and container logs, and receives your application's telemetry. |
+| `opentelemetry-kube-stack` instrumentation settings | `Instrumentation` resource | Tells the Operator how to instrument annotated pods and where they send data. |
+
+The Collectors' configuration comes from the values files in the installer's folder, such as `values-otlp-http.yaml` for the Upstream path.
 
 ## 4. Instrument your application
 
@@ -136,9 +157,9 @@ Data appears in Datadog within a few minutes. In the searches below, replace `<S
 
 - **Services**: In the [Software Catalog][9], set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. Its service page shows requests, errors, and latency.
 - **Traces**: In the [Trace Explorer][10], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>` and open a trace to see its spans. Traces can take about five minutes to appear.
-- **Hosts**: In the [Host List][11], each node appears once. With `K8S_CLUSTER_TYPE=other`, the name is `<NODE_NAME>-<CLUSTER_NAME>`. For more about hostnames, see [Hostname and Tagging][12].
+- **Hosts**: In the [Host List][11], each node appears once. With `K8S_CLUSTER_TYPE=other`, the name is `<NODE_NAME>-<CLUSTER_NAME>`.
 - **Kubernetes**: In [Kubernetes Explorer][13], filter by your cluster name. The resource sections list your pods, Deployments, and nodes.
-- **Metrics**: In the [Metrics Explorer][14], graph `k8s.node.cpu.usage` and filter by `k8s.cluster.name:<CLUSTER_NAME>`.
+- **Metrics**: In the [Metrics Explorer][14], graph `k8s.node.cpu.usage`. On the Upstream path, filter by `k8s.cluster.name:<CLUSTER_NAME>`. On the DDOT path, filter by **[Placeholder: DDOT cluster tag]**.
 - **Logs**: In the [Log Explorer][15], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`.
 
 ## Troubleshooting
@@ -197,7 +218,7 @@ kubectl delete crd podmonitors.monitoring.coreos.com probes.monitoring.coreos.co
 - Instrument more services, or add custom spans and metrics: [Instrument Your Applications][8].
 - Install for production without the script:
   - Upstream: [Set up the OpenTelemetry Collector][17].
-  - DDOT: **[Placeholder: DDOT production install page]**
+  - DDOT: [Install the DDOT Collector on Kubernetes][19].
 - Learn how Datadog uses `service.name`, `deployment.environment.name`, and `service.version`: [Unified service tagging][18].
 
 ## Further reading
@@ -215,10 +236,10 @@ kubectl delete crd podmonitors.monitoring.coreos.com probes.monitoring.coreos.co
 [9]: https://app.datadoghq.com/software
 [10]: https://app.datadoghq.com/apm/traces
 [11]: https://app.datadoghq.com/infrastructure
-[12]: /opentelemetry/config/hostname_tagging/
 [13]: https://app.datadoghq.com/orchestration/overview
 [14]: https://app.datadoghq.com/metric/explorer
 [15]: https://app.datadoghq.com/logs
 [16]: /opentelemetry/troubleshooting/
 [17]: /opentelemetry/setup/collector_exporter/
 [18]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
+[19]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
