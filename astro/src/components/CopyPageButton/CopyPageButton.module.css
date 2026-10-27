@@ -54,7 +54,7 @@
 }
 
 /* Below the xl breakpoint the full-label button collapses to an icon-only
-   control, matching the Hugo API docs. The label is dropped entirely so the
+   control. The label is dropped entirely so the
    button shrinks to the icon and the flex `gap` has nothing to reserve space
    for. (Custom properties can't be read inside a media query, so the 1200px
    value from --hugo-breakpoint-xl is hardcoded here; keep the two in sync.) */

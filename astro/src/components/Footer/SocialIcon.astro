@@ -1,11 +1,10 @@
 ---
 /**
  * Maps a social-icon key (e.g. "twitter-x", "linkedin-new", "youtube-tetra",
- * "instagram") to an inlined SVG from websites_modules/static/icons. Replaces
- * the Hugo icon-font approach (<i class="icon-twitter-x">) with real SVGs.
+ * "instagram") to an inlined SVG from src/assets/images/websites-modules.
  */
 const icons = import.meta.glob<string>(
-  "../../mocked-dependencies/websites_modules/static/icons/*.svg",
+  "../../assets/images/websites-modules/*.svg",
   { query: "?raw", import: "default", eager: true },
 );
 
@@ -16,7 +15,7 @@ interface Props {
 }
 
 const { name, class: className, size } = Astro.props;
-const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
+const key = `../../assets/images/websites-modules/${name}.svg`;
 const raw: string | undefined = icons[key];
 const style = size ? `width:${size};height:${size}` : undefined;
 ---

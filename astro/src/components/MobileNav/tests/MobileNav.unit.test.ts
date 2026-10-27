@@ -143,8 +143,7 @@ describe("MobileNav.astro", () => {
   });
 
   it("replaces the main docs menu with the API nav on API pages", async () => {
-    // Mirrors Hugo's mobile-documentation.html: on `/api/` pages the menu is
-    // the API category/operation tree, not the main docs accordion.
+    // On `/api/` pages the menu is the API category/operation tree, not the main docs accordion.
     const [category] = await getCategoriesWithOperations();
     const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
 

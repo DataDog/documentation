@@ -180,7 +180,7 @@
   content: "";
 }
 
-/* Top-level sections read as headings, matching Hugo's uppercase, semibold. */
+/* Top-level sections read as headings: uppercase, semibold. */
 .mobile-nav__section[data-level="0"] > .mobile-nav__section-toggle {
   text-transform: uppercase;
   font-weight: var(--font-weight-semibold);
@@ -241,7 +241,7 @@
   font-size: var(--font-size-base);
 }
 
-/* Sub-level links use black, matching Hugo's $black color for sub-menus. */
+/* Sub-level links use black. */
 .mobile-nav__link:not([data-level="0"]) {
   color: var(--color-text);
 }

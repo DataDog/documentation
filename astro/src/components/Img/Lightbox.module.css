@@ -1,6 +1,3 @@
-/* Ported from hugo/layouts/partials/global-modals/global-modals.html +
-   hugo/assets/scripts/components/global-modals.js (Bootstrap 5 Modal). */
-
 /* The trigger link that opens the lightbox. Lives here rather than in
    ImgController.module.css because Lightbox renders the link itself. */
 .img__link--popup {

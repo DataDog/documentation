@@ -5,7 +5,7 @@
    The banner adds no bottom margin of its own. It sits directly above the page
    title, and that title already carries a top margin (`.prose h1:first-child`
    in ApiLayout.astro). Adding one here would stack with the title's and double
-   the gap, which is what Hugo shows as a single margin.
+   the gap.
 
    The inner Alert's own bottom margin collapses through this wrapper, so
    zeroing the wrapper alone has no effect — the child is what has to be

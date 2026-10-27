@@ -7,7 +7,7 @@ import {
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 
 interface Props {
-  /** Optional override, mirroring Hugo's page-level `announcement_banner` param. */
+  /** Optional page-level override of the site-wide banner params. */
   override?: BannerParams;
 }
 
@@ -15,8 +15,7 @@ const { override } = Astro.props;
 const site = getBannerParams();
 const params: BannerParams = override ?? site;
 
-// Mirror Hugo's `{{ if $announce }}` guard in the header partial: when no
-// banner is configured, `getBannerParams()` returns `{}` and nothing renders.
+// When no banner is configured, `getBannerParams()` returns `{}` and nothing renders.
 const hasBanner = Object.keys(params).length > 0;
 
 let backgroundStyle = "";

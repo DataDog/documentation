@@ -16,9 +16,8 @@ import {
   groupHits,
   type NormalizedHit,
 } from "@lib/search/normalize";
-// Same magnifying-glass shape Hugo's side-nav search uses (Hugo loads it as an
-// icomoon font glyph; here we inline it as SVG so the icon scales freely and
-// inherits the input-bar text color via `currentColor`).
+// Magnifying-glass icon, inlined as SVG so it scales freely and inherits the
+// input-bar text color via `currentColor`.
 import searchIconSvg from "../../assets/images/svg-icons/searchbar_search.svg?raw";
 import SearchResultsPopup, { type Selection } from "./SearchResultsPopup";
 import { createAskAiConfig } from "@lib/askAi/askAiConfig";
@@ -256,7 +255,7 @@ export default function SearchBar({
           onKeyDown={onInputKeyDown}
         />
         {/* Visual hint that the user can press `/` to focus the input. Hidden
-            on focus and on narrow viewports — matches Hugo's behavior. */}
+            on focus and on narrow viewports. */}
         <span class={cl("search-bar__shortcut")} aria-hidden="true">
           /
         </span>

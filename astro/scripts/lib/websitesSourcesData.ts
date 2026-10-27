@@ -9,7 +9,7 @@
  *     the source of truth the spec is moving to.
  *
  * This is the only file under `astro/` that knows the bucket or imports `tar`
- * (see "No deploy code in this repo" in CLAUDE.md). Both reads are anonymous
+ * (see "No deploy code in this repo" in AGENTS.md). Both reads are anonymous
  * HTTPS GETs of public objects — no AWS SDK, no credentials.
  */
 

@@ -1,5 +1,4 @@
-/* Ported from Hugo's `.main h2 > a` rule (hugo/assets/styles/pages/_global.scss):
-   the heading keeps its own color and shows an underline only on hover. */
+/* The heading keeps its own color and shows an underline only on hover. */
 .heading__link {
   color: inherit;
   text-decoration: none;

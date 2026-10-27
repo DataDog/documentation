@@ -38,8 +38,7 @@ function* unwrapChildParagraphs(node) {
 
 export default defineMarkdocConfig({
   variables: {
-    // `{% $sdkVersions.datadog-api-client-java %}` → "2.62.0". Hugo's
-    // `{{< sdk-version "datadog-api-client-java" >}}`.
+    // `{% $sdkVersions.datadog-api-client-java %}` → "2.62.0".
     sdkVersions: SDK_VERSIONS,
   },
   // Custom Markdoc functions for cdocs conditionals. Markdoc's built-in

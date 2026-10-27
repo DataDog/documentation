@@ -26,7 +26,6 @@ test.describe("ApiRequestBodyTabs — titled examples", () => {
     await expect(entries(page).nth(1).locator(".code-block")).toBeHidden();
   });
 
-  // Hugo's accordion keeps one example open at a time.
   test("opening another example closes the open one", async ({ page }) => {
     await entries(page)
       .nth(1)

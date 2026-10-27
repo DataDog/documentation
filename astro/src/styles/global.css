@@ -116,8 +116,7 @@ b {
   font-weight: 600;
 }
 
-/* Center images and icons on the text line, as Hugo does through Bootstrap's
-   reboot (`img, svg { vertical-align: middle }`). The browser default,
+/* Center images and icons on the text line. The browser default,
    `baseline`, puts an image in a line of text too high. */
 img,
 svg {
@@ -164,8 +163,8 @@ h4,
 h5,
 h6 {
   font-weight: 600;
-  /* Hugo's Bootstrap reboot sets 0.5rem. Without this, browser defaults
-     (about 1–1.67em) put three times as much space under each heading. */
+  /* Without this, browser defaults (about 1–1.67em) put three times as much
+     space under each heading. */
   margin-bottom: var(--space-sm);
 }
 
@@ -223,8 +222,8 @@ h6 {
   margin-top: 0;
 }
 
-/* Hugo's Bootstrap reboot zeroes paragraph margin-top. The browser default
-   (1em) would collapse with a heading's smaller margin-bottom and win. */
+/* Zero paragraph margin-top. The browser default (1em) would collapse with
+   a heading's smaller margin-bottom and win. */
 .prose p {
   margin-top: 0;
 }
@@ -283,7 +282,7 @@ table td {
   vertical-align: top;
 }
 
-/* Row lines, as in Hugo. The first body row's top border is removed below,
+/* Row lines. The first body row's top border is removed below,
    since the header sits directly above it. */
 table td {
   border-top: var(--border-width) solid var(--color-surface-border);

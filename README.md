@@ -1,6 +1,8 @@
 # Documentation site for Datadog
 
-Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
+Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool. 
+
+Content that is stored in, or rendered by, the `astro` folder is not published. See the [Astro README][22] for details.
 
 ## Contribute to the docs
 
@@ -93,3 +95,4 @@ Merging to `master` triggers an automatic deployment. This process typically beg
 [19]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
 [20]: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/3960766866/Build+setup+guide
 [21]: https://www.highviewapps.com/kb/how-do-i-find-my-slack-username/
+[22]: /astro/README.md

@@ -1,10 +1,9 @@
 ---
 /**
- * Inlines an SVG asset by filename, mirroring Hugo's svg.html partial. Sources
- * from both `images/svg-icons/` and `images/icons/` (matching Hugo's two icon
- * folders), keyed by bare filename. Replaces `default-size` / `default-fill` /
- * `default-opacity` placeholders with the props passed in, matching the
- * behavior Hugo uses to color world.svg etc. at render time.
+ * Inlines an SVG asset by filename. Sources from both `images/svg-icons/` and
+ * `images/icons/`, keyed by bare filename. Replaces `default-size` /
+ * `default-fill` / `default-opacity` placeholders with the props passed in,
+ * which is how world.svg etc. are colored at render time.
  */
 const iconModules = import.meta.glob<string>(
   ["../../assets/images/svg-icons/*.svg", "../../assets/images/icons/*.svg"],

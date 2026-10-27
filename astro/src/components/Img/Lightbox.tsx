@@ -21,8 +21,7 @@ interface LightboxProps {
 
 /**
  * Resizes an element/container pair to a max-90vw/90vh box, preserving the
- * image's aspect ratio. Ported from Hugo's global-modals.js `resize()` so
- * the lightbox scales images identically to the Bootstrap modal it replaces.
+ * image's aspect ratio.
  */
 function applyLightboxResize(
   imageElement: HTMLImageElement,
@@ -60,7 +59,7 @@ function applyLightboxResize(
 /**
  * Builds a lightbox image URL sized to the current viewport (capped by DPR),
  * so opening the lightbox doesn't download the full original resolution just
- * to shrink it with CSS. Ported from Hugo's global-modals.js.
+ * to shrink it with CSS.
  */
 function buildViewportSizedUrl(imageUrl: string): string {
   const width = Math.round(window.innerWidth);
@@ -96,8 +95,7 @@ export default function Lightbox({
         setOpen(false);
         return;
       }
-      // The dialog has no focusable content (Hugo's modal has no close
-      // button either), so trap Tab on the dialog itself rather than
+      // The dialog has no focusable content, so trap Tab on the dialog itself rather than
       // cycling between real elements.
       if (e.key === "Tab") {
         e.preventDefault();

@@ -65,8 +65,7 @@
   margin-top: 0;
 }
 
-/* A code fence in the description, styled like CodeBlock (Hugo renders it
-   as a Chroma block). */
+/* A code fence in the description, styled like CodeBlock. */
 .api-endpoint > :global(pre) {
   margin: 0 0 var(--space-md);
   padding: var(--space-sm);

@@ -72,8 +72,8 @@ test.describe("CopyPageButton component", () => {
 });
 
 test.describe("CopyPageButton responsive collapse", () => {
-  // Mirrors Hugo's API copy button: below the xl breakpoint (1200px) the
-  // text label collapses, leaving an icon-only button.
+  // Below the xl breakpoint (1200px) the text label collapses, leaving an
+  // icon-only button.
   test("shows the text label on wide viewports", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/api/latest/");

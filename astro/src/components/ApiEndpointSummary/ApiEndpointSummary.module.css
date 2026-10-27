@@ -7,7 +7,7 @@
 }
 
 .api-endpoint-summary__link {
-  /* Keep the heading's own color rather than the link color (Hugo parity). */
+  /* Keep the heading's own color rather than the link color. */
   color: inherit;
   text-decoration: none;
 }
@@ -22,7 +22,7 @@
   margin-left: var(--space-xs);
   /* Smaller than the heading text, matching Hugo's `fs-4` arrow. */
   font-size: 0.7em;
-  /* Nudge up so it sits on the heading's optical center (Hugo parity). */
+  /* Nudge up so it sits on the heading's optical center. */
   vertical-align: 0.1em;
 }
 

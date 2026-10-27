@@ -12,8 +12,8 @@ interface Props {
 }
 
 /**
- * The cdocs customization menu: one group of "pills" per filter, mirroring the
- * Hugo `cdocs-hugo-integration` menu (selected pill in Datadog purple).
+ * The cdocs customization menu: one group of "pills" per filter, with the
+ * selected pill in Datadog purple.
  *
  * Selecting a pill sets the matching URL query param and does a client-side
  * navigation via `navigate()` from astro:transitions/client, so the freshly

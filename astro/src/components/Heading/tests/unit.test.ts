@@ -23,7 +23,7 @@ describe("Heading", () => {
     });
   }
 
-  // Hugo only links h2–h5, so h1 and h6 stay plain.
+  // Only h2–h5 are linked, so h1 and h6 stay plain.
   for (const level of [1, 6]) {
     it(`renders an h${level} with its id but no link`, async () => {
       const html = await render({ id: "some-heading", level });

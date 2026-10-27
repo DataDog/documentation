@@ -1,5 +1,5 @@
 /**
- * i18n helper. Mirrors Hugo's `i18n(key)` call: resolves a lang_key into its
+ * i18n helper: resolves a lang_key into its
  * "other" string from the per-locale bundle.
  *
  * Two sources are merged: `shared/i18n/*.json` at the repo root, which Hugo

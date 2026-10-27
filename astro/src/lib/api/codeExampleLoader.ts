@@ -290,7 +290,7 @@ export function getCodeExamplesForOperation(
 /*  Internal helpers                                                   */
 /* ------------------------------------------------------------------ */
 
-/** Suffixes already start with an underscore (`_1716720881`), as in Hugo. */
+/** Suffixes already start with an underscore (`_1716720881`). */
 function buildExampleFilename(
   operationId: string,
   suffix: string,

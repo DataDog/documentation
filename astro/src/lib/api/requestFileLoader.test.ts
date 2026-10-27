@@ -27,8 +27,8 @@ describe("getRequestFileExamples", () => {
     expect(example.value.startsWith('{\n  "data": {\n')).toBe(true);
   });
 
-  // Hugo takes the first 3 CodeExamples entries, then skips any without a
-  // file. It doesn't reach further down the list to make up the 3.
+  // Entries without a file are skipped, not replaced by entries further down
+  // the list to make up the 3.
   it("reads only the first 3 CodeExamples entries, skipping those without a file", () => {
     const { examples } = getRequestFileExamples(
       "CreateMonitor",
@@ -55,8 +55,8 @@ describe("getRequestFileExamples", () => {
     ).toEqual([]);
   });
 
-  // When none of the first 3 entries has a file, Hugo shows
-  // `request.<operationId>.json`, untitled.
+  // When none of the first 3 entries has a file, `request.<operationId>.json`
+  // is shown, untitled.
   it("falls back to the file without a suffix when no CodeExamples entry has a file", () => {
     const { examples, showTitles, isFallbackFile } = getRequestFileExamples(
       "UpdateRole",
@@ -79,7 +79,7 @@ describe("getRequestFileExamples", () => {
     ).toBe(false);
   });
 
-  // Hugo titles the examples when the operation has more than one
+  // The examples are titled when the operation has more than one
   // CodeExamples entry, counting entries without a file and past the first 3.
   it("titles the examples when the operation has more than one CodeExamples entry", () => {
     expect(

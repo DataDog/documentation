@@ -252,7 +252,7 @@ export default defineConfig({
         "@config": fileURLToPath(new URL("./src/config", import.meta.url)),
         "@lib": fileURLToPath(new URL("./src/lib", import.meta.url)),
         "@utils": fileURLToPath(new URL("./src/lib/utils", import.meta.url)),
-        // Shared Markdoc partials, mirroring Hugo's layouts/shortcodes/mdoc/en.
+        // Shared Markdoc partials.
         // Referenced from .mdoc files as `{% partial file="@partials/..." /%}`;
         // @astrojs/markdoc resolves the `file` attribute through Vite, so the
         // alias applies. Partials live outside src/content so the docs glob

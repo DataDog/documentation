@@ -23,7 +23,7 @@ import type { SchemaField } from "./schemas/schemaField";
  */
 const MAX_DEPTH = 10;
 
-/** Name of the row Hugo shows for an object's `additionalProperties`. */
+/** Name of the row shown for an object's `additionalProperties`. */
 export const ANY_KEY_FIELD_NAME = "<any-key>";
 
 /* ------------------------------------------------------------------ */
@@ -84,12 +84,12 @@ export function resolveRef(spec: any, refString: string): any {
 /*  support"). Instead of positional `Option N` labels, a union branch  */
 /*  is labeled `<type=toplist>` when the branches can be told apart by  */
 /*  a single-value string enum property. Branches that can't be named   */
-/*  uniquely fall back to `Object N`, matching Hugo.                    */
+/*  uniquely fall back to `Object N`.                                   */
 /* ------------------------------------------------------------------ */
 
 /**
  * Group items by a derived key. Stands in for `Map.groupBy()` (ES2024), which
- * isn't in this project's TS lib target; mirrors the Hugo-side shim.
+ * isn't in this project's TS lib target.
  */
 function groupBy<T, K>(
   items: T[],
@@ -250,7 +250,7 @@ export function unionOptionLabels(spec: any, variants: any[]): string[] {
  * - Top-level array → render the items' fields directly at level 0,
  *   no wrapping `[Foo]` row.
  * - Top-level array of arrays → unwrap to the innermost items.
- * - Top-level array of primitives → no rows (Hugo hides the table).
+ * - Top-level array of primitives → no rows (the table is hidden).
  * - Top-level `oneOf` → one `Option n` row per branch, at level 0.
  * - Anything else → equivalent to `schemaToFields`.
  *
@@ -348,8 +348,8 @@ function buildUnionOptions(
   visited: Set<string>,
   level: number,
 ): NonNullable<SchemaField["unionOptions"]> {
-  // The option rows sit one level below the union; past the cap Hugo renders
-  // none of them.
+  // The option rows sit one level below the union, so past the cap there are
+  // none.
   if (level + 1 > MAX_DEPTH) return [];
 
   const labels = unionOptionLabels(spec, variants);
@@ -358,7 +358,7 @@ function buildUnionOptions(
     const fields = optionFields(spec, variant, visited, level + 2);
 
     // A scalar branch's type, enum values and default are text on the option
-    // row itself, so Hugo shows them even when the row sits at the cap and
+    // row itself, so they show even when the row sits at the cap and
     // `fields` came back empty. Resolve the branch at the row's own level to
     // recover them.
     const leaf =
@@ -433,8 +433,8 @@ function optionFields(
   const items = resolved?.type === "array" ? resolved.items : undefined;
   const itemsUnion = items ? resolveUnion(spec, items, optionVisited) : null;
   if (itemsUnion) {
-    // As Hugo does, the items' options sit right under this option, with no
-    // row for the array in between.
+    // The items' options sit right under this option, with no row for the
+    // array in between.
     return buildUnionOptions(
       spec,
       itemsUnion.variants,
@@ -537,7 +537,7 @@ function unionOptionType(spec: any, variant: any): string {
  * @param spec     The full parsed OpenAPI spec object.
  * @param schema   The schema object (or object with `$ref`) to convert.
  * @param visited  Set of `$ref` strings already seen on this path (for cycle detection).
- * @param level    Hugo-equivalent row-nesting level (0 at the schema root).
+ * @param level    Row-nesting level (0 at the schema root; see `MAX_DEPTH`).
  * @returns A flat array of `SchemaField` objects, possibly with nested children.
  */
 export function schemaToFields(
@@ -553,7 +553,7 @@ export function schemaToFields(
   if (schema.$ref) {
     const ref: string = schema.$ref;
 
-    // Hugo cuts a cycle off here, so the field that repeats the schema has
+    // Cut a cycle off here, so the field that repeats the schema has
     // no rows under it.
     if (visited.has(ref)) return [];
 
@@ -894,14 +894,14 @@ function displayType(schema: any): string {
   // whose items have no `type`. Object-shaped schemas never reach here.
   const base: string = schema.type ?? "any";
 
-  // An enumerated field reports `enum` rather than its underlying type,
-  // matching Hugo's `typeColumn`. The permitted values travel separately in
-  // `enumValues` and render in the description column.
+  // An enumerated field reports `enum` rather than its underlying type. The
+  // permitted values travel separately in `enumValues` and render in the
+  // description column.
   if (schema.enum) {
     return "enum";
   }
 
-  // A `format` supersedes the base type, as in Hugo's `format || type`.
+  // A `format` supersedes the base type.
   // OpenAPI defines `format` as a refinement of `type`, and every format in
   // these specs implies exactly one base type (`int64` → integer,
   // `date-time` → string), so reporting the format alone loses nothing while
@@ -925,8 +925,8 @@ function refName(refString: string): string {
 
 /**
  * The description shown for a `oneOf`/`anyOf` option row. Option labels are
- * derived from a discriminant property or fall back to `Object N` (matching
- * Hugo), so the variant's own description (e.g. "The definition of
+ * derived from a discriminant property or fall back to `Object N`, so the
+ * variant's own description (e.g. "The definition of
  * `AWSIntegration` object.") is the only place the underlying schema name
  * survives. Resolves a single `$ref` hop to reach it.
  */
@@ -950,9 +950,8 @@ function variantDeprecated(spec: any, variant: any): boolean {
  *
  * `schemaToFields` represents a `oneOf`/`anyOf` as one synthetic nameless
  * field carrying `unionOptions`. As an array's only child that renders an
- * extra blank row between the array and its options, which Hugo does not
- * have: Hugo hangs the option rows directly off the array. Lifting the
- * options onto the array field reproduces that shape.
+ * extra blank row between the array and its options. Lifting the options
+ * onto the array field hangs them directly off the array instead.
  *
  * @param children  Fields produced from the array's `items`.
  * @returns The partial `SchemaField` to spread — either `unionOptions` or
@@ -992,8 +991,8 @@ function propertyToField(
   }
 
   // Resolve $ref first so we can inspect the real schema. A target can itself
-  // be only a `$ref` (`ProductAnalyticsBaseQuery`), so follow the chain, as
-  // Hugo's dereferenced spec does, keeping the first description found.
+  // be only a `$ref` (`ProductAnalyticsBaseQuery`), so follow the chain,
+  // keeping the first description found.
   let resolved = schema;
   let chainDescription: string | undefined;
   let chainDeprecated = false;

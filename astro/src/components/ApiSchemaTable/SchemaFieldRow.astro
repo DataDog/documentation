@@ -9,7 +9,7 @@ import Self from "./SchemaFieldRow.astro";
 const cl = classListFactory(styles);
 
 const ENUM_INLINE_LIMIT = 10;
-// Hugo's indent: 20px per level, stopping at 7 levels so deep rows (dashboard
+// Indent 20px per level, stopping at 7 levels so deep rows (dashboard
 // widgets nest 10+ levels) keep enough of the name column to stay readable.
 const INDENT_PX = 20;
 const MAX_INDENT_DEPTH = 7;
@@ -35,7 +35,7 @@ const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);
 const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
 
 // Block-level, so multi-paragraph spec descriptions keep their breaks. The
-// DEPRECATED label goes inside the first paragraph, as Hugo does.
+// DEPRECATED label goes inside the first paragraph.
 const deprecatedLabelHtml = `<strong class="${cl("schema-table__deprecated-label")}">DEPRECATED</strong>`;
 const descriptionHtml = renderMarkdown(field.description ?? "");
 const descriptionWithLabelHtml = !field.deprecated
@@ -45,8 +45,8 @@ const descriptionWithLabelHtml = !field.deprecated
     : `<p>${deprecatedLabelHtml}</p>${descriptionHtml}`;
 
 // `oneOf`/`anyOf` are carried as bare semantic tags on the field so other
-// consumers can branch on them; the type column shows them bracketed, as
-// Hugo's `typeColumn` does. Array items are already bracketed upstream
+// consumers can branch on them; the type column shows them bracketed.
+// Array items are already bracketed upstream
 // (`[<oneOf>]`), so only the bare tags need wrapping here. The plaintext
 // twin applies the same mapping in its own `getFieldType`.
 const displayType =
@@ -54,7 +54,7 @@ const displayType =
     ? `<${field.type}>`
     : field.type;
 
-// Render each oneOf/anyOf option as its own collapsible row (matching Hugo),
+// Render each oneOf/anyOf option as its own collapsible row,
 // rather than a flat always-visible banner. Each option becomes a synthetic
 // object field whose children are the option's fields, so it reuses the same
 // toggle + hidden-children construction the nav island already drives.

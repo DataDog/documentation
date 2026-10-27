@@ -41,13 +41,13 @@ interface Props {
    * default social-share image the same way Hugo does. See `ogImageUrl`.
    */
   contentPath?: string;
-  /** OpenGraph type; defaults to "article" to match Hugo. */
+  /** OpenGraph type; defaults to "article". */
   ogType?: "website" | "article";
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
   /** Absolute path of the page's `.md` twin, for `<link rel="alternate" type="text/markdown">`. */
   markdownHref?: string;
-  /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
+  /** Per-page banner override, from the page-level `announcement_banner`. */
   announcementBanner?: BannerParams;
   /**
    * Opt into Astro view transitions (adds <ClientRouter />). Used by cdocs so
@@ -72,7 +72,7 @@ const {
 
 // Resolve the banner the same way the component does, so the body's
 // `announcement` class (which drives the header/body offset) stays in lockstep
-// with whether a banner actually renders. Mirrors Hugo's `hasAnnouncementBanner`.
+// with whether a banner actually renders.
 const bannerParams = announcementBanner ?? getBannerParams();
 const hasBanner = Object.keys(bannerParams).length > 0;
 const hidesBannerOnMobile = hasBanner && bannerParams.hide_on_mobile === true;

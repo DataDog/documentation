@@ -24,8 +24,6 @@ interface Props {
 /**
  * Hover-open dropdown island. Opens on mouse-enter with no delay; closes on
  * mouse-leave after ~150ms so the user can travel between trigger and menu.
- * Hugo's Bootstrap-driven dropdowns use the same "hover to open, slight close
- * delay" behavior; we reproduce it without Bootstrap or Alpine.
  */
 export default function NavDropdown({
   labels,

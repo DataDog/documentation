@@ -10,7 +10,7 @@ interface Props {
 const { markdownUrl } = Astro.props;
 const cl = classListFactory(styles);
 
-// Mirrors Hugo's `page-agent-hint-block.html`. Unlike AgentOnly, this is
+// Unlike AgentOnly, this is
 // visually hidden rather than `display: none`, so it stays in the
 // accessibility tree and reaches agents that read the rendered page.
 // `/llms.txt` is served by Hugo at the site root.

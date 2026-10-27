@@ -63,8 +63,7 @@ describe("ApiRequestBodyTabs (astro)", () => {
     expect(html).not.toContain('role="tablist"');
   });
 
-  // Hugo's request-body.html: a collapsible card per example, titled, with
-  // the first one open.
+  // A collapsible card per example, titled, with the first one open.
   it("renders a titled accordion entry per example when titles are shown", async () => {
     const html = await renderComponent({
       schema,

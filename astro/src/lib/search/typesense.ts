@@ -27,7 +27,7 @@ export interface MultiSearchResponse {
 /**
  * Typesense returns `grouped_hits[]` instead of `hits[]` when the search uses
  * `group_by` (which the `docs_alias_*` presets do for distinct results).
- * Flatten one hit per group — equivalent to Hugo's `distinct: 1`.
+ * Flatten one hit per group.
  */
 export function flattenSearchResult(raw: any): TypesenseSearchResult {
   if (!raw) return { found: 0, hits: [] };

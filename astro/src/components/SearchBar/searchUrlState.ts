@@ -1,8 +1,6 @@
 /**
- * URL state helpers for the search query: the Astro equivalent of Hugo's
- * InstantSearch `routing.stateMapping`
- * (`hugo/assets/scripts/components/instantsearch.js`), which syncs the query
- * to `?s=` and restores it on load.
+ * URL state helpers for the search query, which sync the query to `?s=` and
+ * restore it on load.
  *
  * Pure builders plus one impure writer, like `Tabs/tabSync.ts`.
  */
@@ -18,7 +16,7 @@ export function readSearchQueryFromUrl(search: string): string {
 /**
  * `href` with `?s=<query>` set, or the param removed when `query` is blank.
  * Other params and the hash are kept. The query is trimmed before it is
- * written, matching Hugo's `stateToRoute`.
+ * written.
  */
 export function buildSearchUrl(href: string, query: string): string {
   const url = new URL(href);
