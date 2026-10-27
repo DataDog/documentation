@@ -22,7 +22,7 @@ Installing the standalone DDOT Collector with OpenTelemetry tooling is in Previe
 Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector on Kubernetes without the Datadog Agent. You can use the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart.
 
 <div class="alert alert-info">
-  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend DDOT's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
+  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend DDOT's capabilities. For a list of components included by default, see <a href="/opentelemetry/setup/ddot_collector/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
 </div>
 
 ## Requirements
@@ -906,55 +906,9 @@ No data in Datadog
   kubectl logs daemonset/<DAEMONSET_NAME> | grep -i "exporting failed"
   ```
 
-## Explore observability data in Datadog
-
-Use Datadog to explore the observability data for your application.
-
-### Fleet automation
-
-Explore your Collector configuration.
-
-{{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Review your Collector configuration from the Fleet Automation page." style="width:100%;" >}}
-
-### Live container monitoring
-
-Monitor your container health using Live Container Monitoring capabilities.
-
-{{< img src="/opentelemetry/embedded_collector/containers.png" alt="Monitor your container health from the Containers page." style="width:100%;" >}}
-
-### Infrastructure node health
-
-View runtime and infrastructure metrics to visualize, monitor, and measure the performance of your nodes.
-
-{{< img src="/opentelemetry/embedded_collector/infrastructure.png" alt="View runtime and infrastructure metrics from the Host List." style="width:100%;" >}}
-
-### Logs
-
-View logs to monitor and troubleshoot application and system operations.
-
-{{< img src="/opentelemetry/embedded_collector/logs.png" alt="View logs from the Log Explorer." style="width:100%;" >}}
-
-### Traces
-
-View traces and spans to observe the status and performance of requests processed by your application, with infrastructure metrics correlated in the same trace.
-
-{{< img src="/opentelemetry/embedded_collector/traces.png" alt="View traces from the Trace Explorer." style="width:100%;" >}}
-
-### Runtime metrics
-
-Monitor your runtime (JVM) metrics for your applications.
-
-{{< img src="/opentelemetry/embedded_collector/metrics.png" alt="View JVM metrics from the JVM Metrics dashboard" style="width:100%;" >}}
-
-### Collector health metrics
-
-View metrics from the DDOT Collector to monitor the Collector health.
-
-{{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
-
 ## Add the Datadog Agent (optional)
 
-If you want to run the core Datadog Agent on the same nodes as the DDOT Collector—for example, to collect infrastructure metrics, APM, or logs through the core Agent while DDOT handles OTLP ingestion—you can install it separately using the [Datadog Operator][57].
+Some Datadog features need the Datadog Agent alongside the DDOT Collector. To add the Agent, install it separately with the [Datadog Operator][57].
 
 By default, the Datadog Operator Helm chart watches <code>DatadogAgent</code> resources only in the namespace where the Operator is installed (<code>watchNamespaces: []</code>). If the <code>DatadogAgent</code> resource is in a different namespace than the Operator, for example, to keep it separate from the <code>OpenTelemetryCollector</code> resource's namespace, set <code>watchNamespaces</code> to include the namespace where the <code>DatadogAgent</code> resource is created:
 <pre><code>helm upgrade datadog-operator datadog/datadog-operator \
