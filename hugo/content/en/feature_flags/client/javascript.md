@@ -245,6 +245,82 @@ The web provider also supports these optional settings:
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
 | `flagConfigurationFetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
+| `flagSelection` | unset | Load only the flags that match a set of tags or key patterns. See [Load a subset of flags](#load-a-subset-of-flags). |
+
+### Load a subset of flags
+
+<!-- TODO: version. Replace X.Y.Z with the first @datadog/openfeature-browser release that includes flagSelection. -->
+In `@datadog/openfeature-browser` X.Y.Z and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Selecting a subset reduces the size of the flag configuration the SDK downloads and caches, which helps when an environment contains flags for many applications.
+
+`flagSelection` accepts two optional lists:
+
+`tags`
+: Flag tags to match, such as `app:checkout-web`. A flag matches if it has any of the listed tags. Tags match exactly and are case-sensitive.
+
+`keyPatterns`
+: Patterns to match against the whole flag key. `*` matches any sequence of characters, including none, anywhere in the pattern. Every other character, including `?`, `[`, `]`, `{`, and `}`, matches only itself. For example, `checkout-*` matches `checkout-banner` but not `new-checkout-banner`, and `*-checkout-*` matches `new-checkout-banner`.
+
+A flag loads if it matches any listed tag **or** any key pattern. In the following example, the SDK loads every flag tagged `app:checkout-web` and every flag whose key starts with `checkout-`:
+
+```javascript
+import { DatadogProvider } from '@datadog/openfeature-browser';
+
+const provider = new DatadogProvider({
+  applicationId: '<APPLICATION_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
+  env: '<ENV_NAME>',
+  flagSelection: {
+    tags: ['app:checkout-web'],
+    keyPatterns: ['checkout-*'],
+  },
+});
+```
+
+The selection is fixed when you create the provider. To load a different set of flags, create a new provider.
+
+<div class="alert alert-info">Add tags to your flags specifically for selection, such as <code>app:checkout-web</code>, rather than selecting by team tags. A flag's team tags can change when ownership changes, which would change the flags your application loads.</div>
+
+#### Limits and validation
+
+Before sending the selection, the SDK trims leading and trailing whitespace from each value, removes empty values and duplicates, and sorts each list. After this processing, the selection must meet these limits:
+
+- Each list (`tags` and `keyPatterns`) contains at most 31 values.
+- Each tag and each key pattern is at most 200 bytes when encoded as UTF-8.
+
+If the selection is malformed or exceeds a limit, the SDK does not send it, logs an error to the browser console, and loads the full flag configuration.
+
+Datadog can also ignore a selection and return the full flag configuration. In that case, the response includes a `DD-Flag-Selection-Ignored` header with one of the following reasons, and the SDK logs an error to the browser console:
+
+| Reason | Meaning |
+| --- | --- |
+| `too_many_values` | A list contains more than 31 values. |
+| `invalid_tag` | A tag is longer than 200 bytes. |
+| `invalid_key_pattern` | A key pattern is longer than 200 bytes. |
+| `malformed_selection` | The selection could not be parsed. |
+| `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
+
+If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][7] for the header your proxy must pass through.
+
+#### Evaluate flags outside the selection
+
+When Datadog applies the selection, flags outside it are not loaded. Evaluating one of these flags returns the default value you supply, with the error code `FLAG_NOT_FOUND`:
+
+{{< code-block lang="javascript" >}}
+// 'search-ranking' has no app:checkout-web tag and does not match checkout-*
+const details = client.getBooleanDetails('search-ranking', false);
+
+console.log(details.value);     // false (the supplied default)
+console.log(details.errorCode); // 'FLAG_NOT_FOUND'
+{{< /code-block >}}
+
+#### Initial configuration is not filtered
+
+`flagSelection` applies only to configuration that the SDK fetches. The SDK does not filter configuration you supply with `initialFlagsConfiguration`, so flags in that configuration remain available even if they are outside the selection.
+
+#### Rules-based configuration
+
+`fetchRulesConfiguration()` from `@datadog/openfeature-browser/rules-based` accepts the same `flagSelection` option, with the same matching rules and limits. If the selection would make the request URL too long, the SDK does not send it and loads the full configuration. See [Browser Rules-Based Evaluation][4].
 
 ### Supply initial precomputed fallback data
 
@@ -368,3 +444,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /feature_flags/guide/proxy_sdk_traffic/
