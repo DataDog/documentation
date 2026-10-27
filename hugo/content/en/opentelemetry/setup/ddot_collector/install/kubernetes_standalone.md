@@ -17,7 +17,7 @@ Installing the standalone DDOT Collector with OpenTelemetry tooling is in Previe
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector on Kubernetes without the Datadog Agent. You can use the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart.
+Follow this guide to deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes without the Datadog Agent. You can use the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend DDOT's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -44,7 +44,7 @@ Install and set up the following on your machine:
 | gRPC     | TCP       | 4317 |
 | HTTP     | TCP       | 4318 |
 
-## Install the Datadog Distribution of the OpenTelemetry Collector
+## Install the DDOT Collector
 
 The commands in this guide use your current namespace. Run every step in the same namespace.
 
