@@ -220355,6 +220355,10 @@ paths:
       tags:
         - Rum Replay Heatmaps
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     post:
       description: Create a heatmap snapshot.
       operationId: CreateReplayHeatmapSnapshot
@@ -222560,6 +222564,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     post:
       description: |-
         Create a RUM retention filter for a RUM application.
@@ -222665,6 +222673,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     post:
       description: |-
         Create an exclusion filter for a RUM application.
@@ -222785,6 +222797,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update an exclusion filter for a RUM application.
@@ -222908,6 +222924,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
   /api/v2/rum/applications/{app_id}/retention_filters/permanent/{permanent_rf_id}:
     get:
       description: Get a permanent RUM retention filter for a RUM application by its identifier.
@@ -222946,6 +222966,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.
@@ -223064,6 +223088,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update a RUM retention filter for a RUM application.
@@ -223303,6 +223331,10 @@ paths:
       tags:
         - RUM Config
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -223456,6 +223488,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     post:
       description: |-
         Create a metric based on your organization's RUM data.
@@ -223586,6 +223622,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     patch:
       description: |-
         Update a specific RUM-based metric from your organization.
@@ -223892,6 +223932,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224109,6 +224153,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224155,6 +224203,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224480,6 +224532,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
   /api/v2/rum/operations/search:
     get:
       description: |-
@@ -224605,6 +224661,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
   /api/v2/rum/operations/strong_links:
     get:
       description: |-
@@ -224682,6 +224742,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     post:
       description: |-
         Create a link between a RUM operation and a journey, confirming that the journey
@@ -224943,6 +225007,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     put:
       description: |-
         Update an existing RUM operation. Fields omitted from the request body keep their existing value,
@@ -225303,6 +225371,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     post:
       description: Create a playlist.
       operationId: CreateRumReplayPlaylist
@@ -225411,6 +225483,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     put:
       description: Update a playlist.
       operationId: UpdateRumReplayPlaylist
@@ -225554,6 +225630,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/playlists/{playlist_id}/sessions/{session_id}:
     delete:
       description: Remove a session from a playlist.
@@ -225717,6 +225797,10 @@ paths:
       tags:
         - Rum Replay Sessions
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/sessions/{session_id}/watchers:
     get:
       description: List session watchers.
@@ -225770,6 +225854,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/sessions/{session_id}/watches:
     delete:
       description: Delete session watch history.
@@ -225924,6 +226012,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/saml_configurations:
     get:
       description: Get the list of SAML configurations for the current organization. An organization has at most one SAML configuration.
