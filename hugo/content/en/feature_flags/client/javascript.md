@@ -143,6 +143,7 @@ If you route flag configuration requests through a proxy, see [Proxy Feature Fla
 When Datadog applies the selection, flags outside it are not loaded. Evaluating one of these flags returns the default value you supply, with the error code `FLAG_NOT_FOUND`:
 
 {{< code-block lang="javascript" >}}
+const client = OpenFeature.getClient();
 // 'search-ranking' has no app:checkout-web tag and does not match checkout-*
 const details = client.getBooleanDetails('search-ranking', false);
 
