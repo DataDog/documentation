@@ -11004,6 +11004,68 @@ components:
         - type
         - attributes
       type: object
+    ArchiveSearchListResponse:
+      description: Response containing multiple Archive Searches.
+      properties:
+        data:
+          description: Array of Archive Searches.
+          items:
+            $ref: "#/components/schemas/ArchiveSearchResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/ArchiveSearchListResponseMeta"
+      required:
+        - data
+      type: object
+    ArchiveSearchListResponseMeta:
+      description: Metadata of the Archive Searches response.
+      properties:
+        truncated:
+          description: Whether more Archive Searches exist beyond the ones returned.
+          example: false
+          type: boolean
+      type: object
+    ArchiveSearchRehydrateRequest:
+      description: Request to rehydrate an Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchRehydrateRequestData"
+      required:
+        - data
+      type: object
+    ArchiveSearchRehydrateRequestAttributes:
+      description: Attributes accepted when rehydrating an Archive Search.
+      properties:
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchRehydrateRequestRehydration"
+      required:
+        - rehydration
+      type: object
+    ArchiveSearchRehydrateRequestData:
+      description: Archive Search object to rehydrate.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchRehydrateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ArchiveSearchRehydrateRequestRehydration:
+      description: Rehydration settings to apply.
+      properties:
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+      type: object
     ArchiveSearchRehydration:
       description: |-
         Rehydration settings of the Archive Search. Absent when the search only scans the archive
@@ -201813,6 +201875,61 @@ paths:
         permissions:
           - logs_read_data
   /api/v2/logs/archive_searches:
+    get:
+      description: |-
+        List the organization's Archive Searches that haven't expired, up to 5,000. When more
+        exist, `meta.truncated` is `true`.
+      operationId: ListArchiveSearches
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          archive_id: mhmyYmyLTOaFYKvhNadu1w
+                          bytes_scanned: 0
+                          created_at: "2026-01-02T12:00:00Z"
+                          description: Investigating the checkout latency spike.
+                          events_scanned: 0
+                          expected_duration: 120
+                          from: "2026-01-01T00:00:00Z"
+                          name: checkout-latency-investigation
+                          query: service:checkout status:error
+                          status: RUNNING
+                          to: "2026-01-02T00:00:00Z"
+                        id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                        type: archive_search
+                    meta:
+                      truncated: false
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchListResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List Archive Searches
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Start a search over the logs stored in an archive.
@@ -201961,6 +202078,170 @@ paths:
         operator: OR
         permissions:
           - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Turn a plain Archive Search into a Search & Rehydration by indexing the matched logs into a
+        retained historical view. Rehydration is the only thing this endpoint can change, and it only
+        applies to a search that has already finished scanning.
+      operationId: RehydrateArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveSearchRehydrateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 402764439
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 1500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        rehydration:
+                          max_rehydrated_events: 100000
+                          retention_days: 15
+                          tier: standard
+                        status: RUNNING
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Precondition Failed
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Rehydrate an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/logs/archive_searches/{archive_search_id}/cancel:
+    post:
+      description: |-
+        Cancel a running Archive Search. Cancelling an Archive Search that has already finished is a
+        no-op: it returns the resource unchanged instead of returning an error.
+      operationId: CancelArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 102400
+                        completed_at: "2026-01-02T12:05:00Z"
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        status: CANCELLED
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Cancel an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+          - logs_write_archive_search
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
