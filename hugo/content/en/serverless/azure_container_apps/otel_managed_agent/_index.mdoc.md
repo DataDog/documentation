@@ -27,12 +27,12 @@ further_reading:
 
 {% if equals($api_type, "dd_api") %}
 {% alert level="info" %}
-OTLP trace export from Datadog SDKs is in Preview. For the status of the managed OpenTelemetry agent, see the [Azure documentation][1].
+OTLP trace export from Datadog SDKs and the Azure Container Apps managed OpenTelemetry agent are in Preview.
 {% /alert %}
 {% /if %}
 {% if equals($api_type, "otel_api") %}
 {% alert level="info" %}
-For the status of the managed OpenTelemetry agent, see the [Azure documentation][1].
+The Azure Container Apps managed OpenTelemetry agent is in Preview.
 {% /alert %}
 {% /if %}
 
@@ -40,26 +40,16 @@ The Azure Container Apps managed OpenTelemetry agent receives OTLP data from you
 
 You can send traces to the managed agent with a Datadog SDK or an OpenTelemetry SDK. Select your SDK at the top of this page.
 
-```text
-Your app + Datadog SDK or OpenTelemetry SDK
-        |
-        |  OTLP over gRPC
-        v
-Azure managed OpenTelemetry agent
-        |
-        |  Datadog destination (site and API key)
-        v
-Datadog APM
-```
+Your app sends traces in OTLP format over gRPC to the managed agent. The managed agent forwards them to Datadog using the Datadog site and API key configured on your Container Apps environment.
 
 Other ways to send traces from Azure Container Apps to Datadog include:
 
-- [`serverless-init`][2], which adds distributed tracing, enhanced metrics, and logs.
+- [`serverless-init`][2], the Datadog-native option, which collects traces plus enhanced metrics, custom metrics, and logs.
 - [Direct OTLP intake][3], which sends traces from an OpenTelemetry SDK straight to Datadog over HTTP.
 
 ## Prerequisites
 
-- A Container Apps environment with the managed OpenTelemetry agent enabled. See the [Azure documentation][1].
+- An Azure Container Apps environment. You configure its managed OpenTelemetry agent in the first Setup step.
 - A [Datadog API key][4] and your [Datadog site][5].
 {% if equals($api_type, "dd_api") %}
 - A Java application using the Datadog Java tracer v1.62.0 or later.
@@ -73,7 +63,7 @@ Other ways to send traces from Azure Container Apps to Datadog include:
 The managed agent accepts only the gRPC protocol.
 
 {% if equals($api_type, "dd_api") %}
-This page documents Java, which supports exporting OTLP traces over gRPC. Other Datadog SDKs do not support gRPC for OTLP trace export, so they cannot send traces to the managed agent:
+This page documents Java, the only Datadog SDK that exports OTLP traces over gRPC. Other Datadog SDKs export OTLP traces only over HTTP or do not support OTLP trace export, so they cannot send traces to the managed agent:
 
 | SDK | Supported OTLP protocols |
 |---|---|
@@ -81,6 +71,8 @@ This page documents Java, which supports exporting OTLP traces over gRPC. Other 
 | Node.js | `http/json` |
 | Go | `http/protobuf` |
 | .NET | `http/json`, `http/protobuf` |
+| Ruby | Not supported |
+| PHP | Not supported |
 
 For the latest protocol support, see [Export Traces from Datadog SDKs in OTLP Format][6].
 
@@ -97,7 +89,18 @@ Use any OpenTelemetry SDK whose OTLP trace exporter supports gRPC. For SDKs by l
 {% step title="Configure Datadog as a destination" %}
 Configure the managed agent on your Container Apps environment to send traces to Datadog. You need your Datadog site ({% region-param key="dd_site" code=true /%}) and API key.
 
-For instructions, see [Export OpenTelemetry data to Datadog in Azure Container Apps][7] in the Azure documentation.
+To configure it with the Azure CLI, run:
+
+```shell
+az containerapp env telemetry data-dog set \
+  --resource-group <RESOURCE_GROUP> \
+  --name <ENVIRONMENT_NAME> \
+  --site <DATADOG_SITE> \
+  --key <DATADOG_API_KEY> \
+  --enable-open-telemetry-traces true
+```
+
+For other options, such as Bicep, see [Export OpenTelemetry data to Datadog in Azure Container Apps][7] in the Azure documentation.
 {% /step %}
 {% step title="Instrument your app with the Datadog Java tracer" %}
 Add the Datadog Java tracer to your application image and attach it with the `-javaagent` JVM flag. For instructions, see [Tracing Java applications][11].
@@ -119,9 +122,25 @@ Set `OTEL_RESOURCE_ATTRIBUTES` with the following required attributes:
 cloud.provider=azure,cloud.platform=azure.container_apps,cloud.resource_id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.App/containerApps/<APP_NAME>
 ```
 
+To set all of these variables in one command with the Azure CLI, run:
+
+```shell
+az containerapp update \
+  --resource-group <RESOURCE_GROUP> \
+  --name <APP_NAME> \
+  --set-env-vars \
+    DD_SERVICE=<SERVICE_NAME> \
+    DD_ENV=<ENV> \
+    DD_VERSION=<VERSION> \
+    DD_TRACE_OTEL_ENABLED=true \
+    OTEL_TRACES_EXPORTER=otlp \
+    OTEL_EXPORTER_OTLP_PROTOCOL=grpc \
+    OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure.container_apps,cloud.resource_id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.App/containerApps/<APP_NAME>"
+```
+
 {% /step %}
 {% step title="Confirm the OTLP endpoint" %}
-The Datadog SDK sends traces to the URL in `OTEL_EXPORTER_OTLP_ENDPOINT`. Azure documents this variable as injected automatically (see [Environment variables][13] in the Azure documentation), but it may be missing from your container. If it is missing, the SDK sends traces to its default endpoint (`http://localhost:4318/v1/traces`), where nothing listens, and traces are dropped without errors.
+The Datadog SDK sends traces to the URL in `OTEL_EXPORTER_OTLP_ENDPOINT`. Azure documents this variable as injected automatically (see [Environment variables][13] in the Azure documentation), but it may be missing from your container. If it is missing, the SDK sends traces to its default endpoint on `localhost`, where nothing listens, and traces are dropped without errors.
 
 After you deploy, list the environment variables in your running container:
 
@@ -145,7 +164,18 @@ Use the hostname from your own container's variables, not from documentation exa
 {% step title="Configure Datadog as a destination" %}
 Configure the managed agent on your Container Apps environment to send traces to Datadog. You need your Datadog site ({% region-param key="dd_site" code=true /%}) and API key.
 
-For instructions, see [Export OpenTelemetry data to Datadog in Azure Container Apps][7] in the Azure documentation.
+To configure it with the Azure CLI, run:
+
+```shell
+az containerapp env telemetry data-dog set \
+  --resource-group <RESOURCE_GROUP> \
+  --name <ENVIRONMENT_NAME> \
+  --site <DATADOG_SITE> \
+  --key <DATADOG_API_KEY> \
+  --enable-open-telemetry-traces true
+```
+
+For other options, such as Bicep, see [Export OpenTelemetry data to Datadog in Azure Container Apps][7] in the Azure documentation.
 {% /step %}
 {% step title="Instrument your app with an OpenTelemetry SDK" %}
 Add the OpenTelemetry SDK and OTLP trace exporter for your language to your application, and configure the exporter to use gRPC. For instructions, see the [OpenTelemetry documentation][14] for your language.
@@ -164,6 +194,19 @@ Set `OTEL_RESOURCE_ATTRIBUTES` with the following required attributes. To set th
 
 ```text
 cloud.provider=azure,cloud.platform=azure.container_apps,cloud.resource_id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.App/containerApps/<APP_NAME>,deployment.environment.name=<ENV>,service.version=<VERSION>
+```
+
+To set all of these variables in one command with the Azure CLI, run:
+
+```shell
+az containerapp update \
+  --resource-group <RESOURCE_GROUP> \
+  --name <APP_NAME> \
+  --set-env-vars \
+    OTEL_SERVICE_NAME=<SERVICE_NAME> \
+    OTEL_TRACES_EXPORTER=otlp \
+    OTEL_EXPORTER_OTLP_PROTOCOL=grpc \
+    OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure.container_apps,cloud.resource_id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.App/containerApps/<APP_NAME>,deployment.environment.name=<ENV>,service.version=<VERSION>"
 ```
 
 {% /step %}
