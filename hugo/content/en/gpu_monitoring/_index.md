@@ -79,7 +79,7 @@ Identify total spend on GPU infrastructure and attribute those costs to specific
 - Identify the key drivers of wasted GPU spend and inefficiencies (for example, the most wasteful teams) to support internal chargebacks and data-driven quota management decisions.
 - Make cost optimization part of daily operations by giving teams clear reporting on GPU usage and spend.
 
-{{< img src="gpu_monitoring/fleet_costs.png" alt="Detail view of a cluster, displaying funnel visualization of devices (total/allocated/active/effective), total cloud cost, idle cloud cost, and visualizations and details of various connected entitles (pods, processors, SLURM jobs)." style="width:100%;" >}}
+{{< img src="gpu_monitoring/cost-and-utilization2.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:100%;" >}}
 
 ## Ready to start?
 
