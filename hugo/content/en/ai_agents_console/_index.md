@@ -32,7 +32,7 @@ further_reading:
 Agent Console is in Preview and available to all Datadog customers.
 {{< /callout >}}
 
-The [Agent Console][1] provides centralized monitoring for AI tools across your organization. It collects usage, cost, and activity data from coding agents, knowledge agents, desktop agents, and Datadog's own Bits AI agents (see the [Bits AI agents](#bits-ai-agents) section). Use it to understand where your AI spend goes, who uses which tools, and how AI-assisted work affects delivery.
+The [Agent Console][1] provides centralized monitoring for AI tools across your organization. It collects usage, cost, and activity data from coding agents, knowledge agents, desktop agents, and Datadog's own [Bits AI agents](#bits-ai-agents). Use it to understand where your AI spend goes, who uses which tools, and how AI-assisted work affects delivery.
 
 ## Supported AI tools
 
