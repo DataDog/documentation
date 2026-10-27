@@ -23,7 +23,8 @@ Creating, editing, or deleting env remapping rules requires the **APM Service Re
 
 1. In Datadog, navigate to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > {{< ui >}}Service Tags Remapping{{< /ui >}}.
 1. Click {{< ui >}}Add Env Rule{{< /ui >}}.
-1. Use the search bar to select one or more environments to remap.
+1. Use the search bar to build a query of the environments to remap.
+  - The query supports all tags and the following attributes: `@language`, `@http.endpoint`, `@http.method`, `@peer.*`. 
 1. Enter a unique environment name in the text box. A preview of the environment names appears as you type.
 
     To name environments based on their tags, use the `{{tagName}}` syntax. If tag values follow a pattern, apply a regular expression to extract the portion you want in the name.

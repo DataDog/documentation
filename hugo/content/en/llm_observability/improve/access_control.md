@@ -1,6 +1,6 @@
 ---
 title: Data Access Control in Agent Observability
-description: Use Data Access Control to restrict an Agent Observability project, and everything inside it, to specific teams or roles.
+description: Use Data Access Control to restrict Agent Observability projects, and the evaluator configs for an application, to specific teams or roles.
 further_reading:
 - link: "/account_management/rbac/data_access/"
   tag: "Documentation"
@@ -19,14 +19,16 @@ Agent Observability projects can hold sensitive material, including dataset prom
 
 When a project is restricted, users outside the teams or roles you granted access to cannot:
 
-- See the project, or its experiments, datasets, and annotation queues, in any list view or search result
+- See the project, or its offline experiments, datasets, and annotation queues, in any list view or search result
 - Read the project's dataset records, including inputs and expected outputs
 - Read the evaluation metrics produced by the project's experiment runs
-- Read the spans produced by those runs, except for experiments run through the SDK (see [Limitations](#limitations))
+- Read the spans produced by those runs, except for offline experiments run through the SDK (see [Limitations](#limitations))
 - Read the project's annotation queues, including the traces under review and the labels applied to them
 - Create, modify, or delete anything inside the project, even with an ID they obtained earlier
 
 Users outside those teams or roles receive a *not found* response when they open a direct link to the project or to anything inside it.
+
+You can also restrict the evaluator configs that run on an application's traces. See [Evaluator configs](#evaluator-configs).
 
 Restrictions apply in the Datadog UI and in the API. Application keys are subject to the same restrictions as the user who owns them.
 
@@ -44,12 +46,12 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 2. Create a restriction that covers a subset of data:
    - On the Data Access Controls page, click **New Restricted Dataset**.
    - On the Access Control page, click **New Policy > Sensitive Data Partition**.
-3. Name it something that identifies the project it protects, for example `Experiments - Fraud Detection`.
+3. Name it something that identifies the project it protects, for example `Offline Experiments - Fraud Detection`.
 4. Add a filter on the **Agent Observability** product, then specify the project:
    - On the Access Control page, select the project from the list of values. The list has two groups: your projects, and the applications that send traces to Agent Observability. Select from the projects group.
-       
-       <div class="alert alert-warning"><ul><li>Typing the project name, even in part or with a typo, matches no Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
-   
+
+       <div class="alert alert-warning"><ul><li>Typing the project name, even in part or with a typo, matches no Offline Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
+
    - On the Data Access Controls page, enter the project ID as the `ml_app` value. See [Find a project's ID](#find-a-projects-id).
 
 5. Grant access to the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one Restricted Dataset.
@@ -57,7 +59,7 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 **Note**: The filter key may be locked. Agent Observability uses one tag key, `ml_app`, for both applications and projects, and Data Access Control allows one tag key per telemetry type. If your organization already has an Agent Observability Restricted Dataset, new ones reuse the same key.
 
-The restriction takes effect as soon as it is saved. The project and its experiments, datasets, dataset records, and annotation queues are hidden immediately, regardless of when they were created. Spans and evaluation metrics are subject to the exceptions in [Limitations](#limitations).
+The restriction takes effect as soon as it is saved. The project and its offline experiments, datasets, dataset records, and annotation queues are hidden immediately, regardless of when they were created. Spans from offline experiments run through the SDK are an exception. See [Limitations](#limitations).
 
 ## Restrict a project through the API
 
@@ -68,7 +70,7 @@ You can also create a restriction with the Data Access Control [Datasets API][5]
   "data": {
     "type": "dataset",
     "attributes": {
-      "name": "Experiments - Fraud Detection",
+      "name": "Offline Experiments - Fraud Detection",
       "product_filters": [
         {
           "product": "ml_obs",
@@ -89,9 +91,15 @@ A queue's own [access settings][7] are separate: the reviewer and assignee restr
 
 Every annotation queue you create must belong to a project. Queues created before this requirement took effect may have no project. See [Limitations](#limitations).
 
+## Evaluator configs
+
+[Evaluator configs][8], including custom LLM-as-a-judge and managed evaluator configs, are restricted by application rather than by project. Each evaluator config targets one application, and it follows the Restricted Dataset whose `ml_app` value is that application's name. Matching on the application name is not case-sensitive.
+
+Users outside the granted teams or roles cannot view, edit, or create evaluator configs that target a restricted `ml_app` or project.
+
 ## Find a project's ID
 
-The Data Access Controls page and the Datasets API take a project ID as the `ml_app` value, not a project name. Take the project ID from the URL of the project in Experiments, or from the `id` field returned by the [Experiments API][4] when listing projects.
+The Data Access Controls page and the Datasets API take a project ID as the `ml_app` value, not a project name. Take the project ID from the URL of the project in Offline Experiments, or from the `id` field returned by the [Offline Experiments API][4] when listing projects.
 
 ## Grant and revoke access
 
@@ -102,11 +110,11 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 ## Limitations
 
 - **Spans from an experiment run through the SDK are not restricted by a Restricted Dataset on the project.** These spans are attributed to the application that ran the experiment, not to the project. A Restricted Dataset on the project hides the project and its datasets, dataset records, and evaluation metrics, but not the inputs and outputs on those spans. To restrict those spans too, add a second filter for the application's `ml_app` value to the same Restricted Dataset.
-- **Spans and evaluation metrics that were not tagged with the project at ingestion are not restricted.** The project is attached to these events as a tag at ingestion time, and past events are not re-tagged. Events that carry the tag are hidden as soon as the restriction is saved. List views, metadata, and dataset records are hidden regardless of when they were created.
+- **Evaluator configs follow only Restricted Datasets that filter on `ml_app`.** A Restricted Dataset filter on any other tag key does not restrict evaluator configs, even if it restricts the application's traces.
 - **Managed prompts are not supported** by Data Access Control. See [Data Access Control][1] for the full list of supported telemetry.
 - **An annotation queue that does not belong to a project is visible to everyone** with Agent Observability read access, and no Restricted Dataset can hide it. Move the queue into a project, or recreate it in one, to bring it under a restriction.
-- **A project with no Restricted Dataset is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization has enabled [Strict Mode][6] for Agent Observability. A Restricted Dataset whose value matches no project silently restricts nothing. Confirm every new restriction with a user outside the granted teams or roles.
-- **In [Strict Mode][6], a project is visible only if a Restricted Dataset names its project ID.** An `ml_app` value that is an application name grants nothing in Experiments, so the project stays hidden from everyone, including the teams and roles on your other Restricted Datasets. See [Find a project's ID](#find-a-projects-id).
+- **A project with no Restricted Dataset is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization sets Agent Observability data outside Restricted Datasets to [Restricted][6]. A Restricted Dataset whose value matches no project silently restricts nothing. Confirm every new restriction with a user outside the granted teams or roles.
+- **When Agent Observability is set to [Restricted][6], a project is visible only if a Restricted Dataset names its project ID.** An `ml_app` value that is an application name grants nothing in Offline Experiments, so the project stays hidden from everyone, including the teams and roles on your other Restricted Datasets. See [Find a project's ID](#find-a-projects-id).
 
 ## Further reading
 
@@ -115,7 +123,8 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 [1]: /account_management/rbac/data_access/
 [2]: /account_management/rbac/permissions/#access-management
 [3]: https://app.datadoghq.com/organization-settings/data-access-controls/
-[4]: /llm_observability/improve/experiments/api/
+[4]: /llm_observability/guide/offline_experiments_api/
 [5]: /api/latest/datasets/
 [6]: /account_management/rbac/data_access/#strict-mode
 [7]: /llm_observability/investigate/annotation_queues/#managing-queue-access
+[8]: /llm_observability/investigate/evaluations/

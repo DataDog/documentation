@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.20.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.24.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,232 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.24.1
+
+To upgrade to Worker version 2.24.1:
+
+- Docker: Run the `docker pull` command for the [2.24.1 image][60].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.24.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.1`.
+
+Worker version 2.24.1 gives you access to the following:
+
+#### Security
+
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the [eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised][61]. The Worker rejects these chains even when the issuing root CA is trusted.
+
+  This protection applies only to components that use rustls. The following components use the system CA trust store instead:
+    - Components that use OpenSSL
+    - The Amazon Security Lake destination's AWS account lookup
+    - The Google Cloud Pub/Sub source
+
+  To protect components that use the system CA trust store:
+    - **Container image**: No action is needed unless you mount your own CA bundle or set `SSL_CERT_FILE`. The Worker container image distrusts `emSign ECC Root CA - G3`.
+    - **APT and RPM packages**: Distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
+
+#### Fixes
+
+- Fixed an issue where search queries silently dropped operands in `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss matching events because of the wildcard.
+- The Worker now treats regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in search query wildcard patterns as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
+
+## Worker version 2.24.0
+
+To upgrade to Worker version 2.24.0:
+
+- Docker: Run the `docker pull` command for the [2.24.0 image][59].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.24.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.0`.
+
+Worker version 2.24.0 gives you access to the following:
+
+#### Security
+
+- The Datadog BYOC Logs destination no longer forwards the Worker's Datadog API key to BYOC Logs.
+
+#### Enhancements
+
+- The Enrichment Table processor:
+    - Reports the `enrichment_distinct_lookup_keys_total` metric, which is an estimate of distinct lookup keys summed across 1-second windows.
+    - Has improved performance during large cache fills.
+    - Reloads table values every 30 seconds. If a reload fails, the processor keeps using the last valid table until a reload succeeds.
+    - Caches up to 1 million Reference Table rows locally for 1 hour, which improves handling of large tables.
+    - Adds an `outcome` tag to its fetched-keys metric to identify failed lookup attempts.
+    - Has a default buffer size of 20,000 events or 100 MiB, and a maximum of 100,000 events.
+- The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option.
+- The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
+- The Custom Processor has improved performance, including more efficient field lookups and more efficient string functions.
+- The Worker has improved configuration startup performance.
+- The `pipelines.quota_fill` metric now has a `quota_name` tag. The Worker keeps the legacy `name` tag for backward compatibility.
+
+#### Fixes
+
+- The Sensitive Data Scanner processor's library rules now use pattern capture groups to preserve non-sensitive context around the captured value. Previously, the Worker ignored capture groups. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
+- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse. The Parse JSON processor's error message also names the field that failed to parse, rather than the generic word `source`.
+- Fixed an issue where reloading specific components after configuration updates could cause them to restart unnecessarily during subsequent configuration updates, resetting their state.
+- The OpenTelemetry source now preserves native OTLP log event names.
+- The Prometheus source now identifies metrics ending with `_total` as counters.
+- Fixed an issue with the `keyvalue` filter in the Custom Processor's `parse_grok` and `parse_groks` functions. The filter no longer panics when processing unquoted `NaN` values, such as `ratio=NaN`.
+## Worker version 2.23.2
+
+To upgrade to Worker version 2.23.2:
+
+- Docker: Run the `docker pull` command for the [2.23.2 image][58].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.2`.
+
+Worker version 2.23.2 gives you access to the following:
+
+#### Enhancements
+
+- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log has no string message, or its non-message fields leave no room for a truncated message, the Worker forwards the log unchanged as long as it fits within the payload limit. The Datadog intake then truncates the log.
+
+#### Fixes
+
+- Fixed the Docker images so the secret generic connector (`sgc`) binary is executable by the `observability-pipelines-worker` service user.
+
+## Worker version 2.23.1
+
+To upgrade to Worker version 2.23.1:
+
+- Docker: Run the `docker pull` command for the [2.23.1 image][57].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.1`.
+
+Worker version 2.23.1 gives you access to the following:
+
+#### Security
+
+- Updated the bundled secret generic connector (`sgc`) binary to the version shipped with Datadog Agent 7.84.1, which addresses CVE-2026-56854.
+
+## Worker version 2.23.0
+
+To upgrade to Worker version 2.23.0:
+
+- Docker: Run the `docker pull` command for the [2.23.0 image][56].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.23.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.23.0`.
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects only Custom Processor scripts that use the <code>contains_all</code>, <code>encode_key_value</code>, <code>encode_logfmt</code>, <code>ip_cidr_contains</code>, <code>join</code>, <code>parse_groks</code>, or <code>tally</code> functions.<br><br>These functions now check the element types of their array arguments when the script compiles. Passing an array with the wrong element type, such as <code>join([1, 2, 3])</code>, is now a compile error instead of a runtime failure. When the Worker can confirm the elements are the correct type, the <code>!</code> suffix is no longer needed and triggers a warning. For example, use <code>join(["sources", "transforms", "sinks"], separator: ", ")</code> instead of <code>join!(["sources", "transforms", "sinks"], separator: ", ")</code>.</div>
+
+Worker version 2.23.0 gives you access to the following:
+
+#### New features
+
+- The Enrichment Table processor now supports CSV files and Reference Tables in metrics pipelines.
+- The Custom Processor now supports the `break` statement to exit a `for_each` loop early.
+
+#### Enhancements
+
+- The OpenTelemetry source now limits concurrent requests to 100 and request processing time to 30 seconds by default. The limits apply to both the HTTP and gRPC endpoints. Requests that cannot be handled in time receive a retryable response. Use the `DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` and `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` environment variables to override these limits.
+- The Databricks Zerobus destination now identifies the Worker in its `User-Agent` header.
+- For the Custom Processor:
+    - The processor's overall performance has been improved.
+    - The `for_each` function now iterates over collections directly, which improves performance and reduces memory usage.
+    - The `md5`, `sha1`, `sha2`, and `sha3` functions now run faster.
+
+#### Fixes
+
+- Configuration file paths, such as TLS certificates, enrichment tables, and GCP credentials files, are now resolved against the `data_dir` set in `bootstrap.yaml`. Previously, if `data_dir` was set only in `bootstrap.yaml` and not with the `DD_OP_DATA_DIR` environment variable, the Worker looked for these files in the default data directory and rejected valid files as missing.
+- Sources now include the remote `peer_addr` in TCP acknowledgment error logs and TLS connection error logs.
+- The Custom Processor's `uuid_v7` function now preserves the supplied timestamp at millisecond precision.
+
+## Worker version 2.22.0
+
+To upgrade to Worker version 2.22.0:
+
+- Docker: Run the `docker pull` command for the [2.22.0 image][55].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.22.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.22.0`.
+
+<div class="alert alert-warning"><strong>Breaking change:</strong> This change affects only logs that contain a top-level <code>attributes</code> object and are sent to the Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage). The change is particularly relevant to logs from the OpenTelemetry source, which commonly include a top-level <code>attributes</code> object.<br><br>The Datadog Archives destinations store non-<a href="/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved</a> log attributes within an <code>attributes</code> object. Starting with Worker 2.22.0, if a log already has an <code>attributes</code> object, the Datadog Archives destinations reuse that object instead of nesting it one level deeper. If you use queries with the syntax <code>@attributes.&lt;field_name&gt;</code> on logs rehydrated from an Observability Pipelines archive, use <code>@&lt;field_name&gt;</code> instead.</div>
+
+Worker version 2.22.0 gives you access to the following:
+
+#### New features
+
+- The Aggregate processor now supports event-time aggregation, which uses metric timestamps instead of processing time. A configurable grace period includes late-arriving metrics in their event-time window.
+
+#### Enhancements
+
+- The Generate Metrics processor for logs pipelines now has an option to enable metric aggregation. When the option is enabled, generated metrics are rolled up by event timestamp into 1-second buckets. This prevents the Datadog metrics intake from dropping metrics generated within the same second because of last-point-wins behavior.
+- Configuration parse errors for a source, processor, or destination now include the component's ID and type, and the field causing the error when it can be determined.
+- Reference Table lookup errors caused by a failed HTTP request, such as a timeout, DNS failure, or connection reset, now report the underlying cause instead of a generic `error sending request` message.
+- The Datadog BYOC Logs destination now supports a configurable HTTP payload size limit with the `DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES` environment variable.
+- The following sources now have TCP keepalive enabled by default with a 60-second idle timeout, which helps to detect dead connections when clients disconnect without sending FIN or RST packets:
+    - Datadog Agent
+    - Fluentd and Fluent Bit
+    - Logstash
+    - OpenTelemetry (HTTP)
+    - Socket (TCP mode)
+    - Splunk HEC
+    - Syslog (TCP mode)
+- The Enrichment Table processor (CSV or file) no longer copies the entire table for every batch of events, which reduces memory and CPU usage for large enrichment tables.
+
+#### Fixes
+
+- The Syslog destination no longer shuts down the Worker when a log's `timestamp` field is not a timestamp value, such as a JSON string. These logs now use the current UTC time in the syslog header.
+- The `chunked_gelf` framing decoder now limits the payload buffered across incomplete messages to 128 MiB. Previously, an unauthenticated sender could exhaust memory by sending chunks for messages it never completed, especially with the Socket source in UDP mode.
+- The Logstash source now rejects frames larger than the configured maximum instead of buffering them indefinitely. Previously, a sender could declare an extremely large frame and force the source to hold its bytes in memory until it ran out of memory.
+- The Splunk TCP source now truncates frames that exceed the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` limit instead of dropping the events. This matches Splunk's `TRUNCATE` behavior.
+- Fixed an issue in the `chunked_gelf` framing decoder that caused the source to shut down when a one-byte message arrived and trace-level logging was enabled for the decoder. The decoder now rejects these messages, as it does other malformed payloads.
+- Fixed an issue where the internal buffer usage reporter outlived the buffer it reported on, which caused the reporter for the old buffer to keep publishing stale metrics under the same `buffer_id` as its replacement. Metrics for a buffer that was removed, rather than replaced, also now age out under `expire_metrics_secs`, which the continuously republished values previously prevented.
+- Fixed the following issues with the `chunked_gelf` framing decoder's limits:
+    - `pending_messages_limit` was applied to every chunk instead of only to new messages. After the limit was reached, chunks of messages that were already pending were rejected, so those messages could never complete.
+    - Dropping a message for exceeding `max_length` left its timeout task running, so `pending_messages_limit` capped the number of pending messages but not the number of live timeout tasks.
+- The FIPS endpoint setting now applies to STS AssumeRole clients. When `AWS_USE_FIPS_ENDPOINT=true` is set, the Worker uses FIPS endpoints, such as `sts-fips.<region>.amazonaws.com`, for STS operations as well as for the primary service client.
+- When a compressed request payload fails to decompress, the OpenTelemetry source's gRPC mode now includes the underlying error instead of the generic `reached impossible error during decompressor finalization` message.
+
+#### Removed metrics
+
+- The deprecated `pipelines.buffer_byte_size` and `pipelines.buffer_events` gauge metrics have been removed. Use `pipelines.buffer_size_bytes` and `pipelines.buffer_size_events` instead.
+
+## Worker version 2.21.0
+
+To upgrade to Worker version 2.21.0:
+
+- Docker: Run the `docker pull` command for the [2.21.0 image][54].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.21.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.21.0`.
+
+Worker version 2.21.0 gives you access to the following:
+
+#### New features
+
+- The Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage) now support a configurable `compression` option (`gzip` or `zstd`).
+- The Remap to OCSF processor now includes:
+    - The AWS Config Rules OCSF mapping.
+    - The `concat_strings` OCSF mapping function, which joins the string representations of multiple source fields or constant values.
+- The Splunk HEC destination now supports an `endpoint_target` option (`event` or `raw`) to determine which Splunk HEC endpoint events are sent to.
+
+#### Enhancements
+
+- The Splunk TCP source now supports configuring TCP keepalive and the connection limit.
+- Internal Worker logs and traces are now enriched with the pipeline name (`op_worker.pipeline_name:<pipeline_name>`), matching the tag already present on metrics.
+- The Worker's logging during graceful shutdown has been improved.
+- The validation of destination endpoints has been improved to check for incomplete or empty URLs.
+- The `parse_aws_vpc_flow_log` function in the Custom Processor now recognizes all fields introduced in Amazon VPC Flow Logs versions 7 through 11, including:
+    - Version 7: ECS metadata fields
+    - Version 8: `reject_reason`
+    - Version 9: `resource_id`
+    - Version 10: `encryption_status`
+    - Version 11: Tag, interface, and next-hop fields
+- The Enrichment Table processor now:
+    - Keeps rows in its cache for approximately 30 minutes, regardless of whether the lookup was positive or negative
+    - Splits the events it yields into batches based on the source sender's batch size
+
+#### Fixes
+
+- Fixed case-insensitive glob matching in search queries containing UTF-8 text, which caused panics and incorrect results for non-ASCII input.
+- Fixed Azure Blob Storage uploads larger than 4 MiB when using an account-key connection string.
+- Fixed an unrecoverable Worker error that occurred when a record exceeded the buffer's maximum record size. The error is now logged and reflected in the `buffer_discarded_events_total` and `buffer_discarded_bytes_total` health metrics (with `intentional="false"`).
 
 ## Worker version 2.20.4
 
@@ -61,9 +287,6 @@ Worker version 2.20.2 gives you access to the following:
 #### Fixes
 
 - Fixed an issue where non-finite (NaN or Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
-
-
-
 
 ## Worker version 2.20.0
 
@@ -737,3 +960,11 @@ Worker version 2.7.0 gives you access to the following:
 [51]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.2
 [52]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.3
 [53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4
+[54]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.21.0
+[55]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.22.0
+[56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
+[57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
+[58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
+[59]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.0
+[60]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.1
+[61]: https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe

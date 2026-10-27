@@ -1,0 +1,74 @@
+entries:
+  - change_type: modified
+    date: '2026-09-29'
+    link: https://github.com/DataDog/documentation/pull/40282
+    operations:
+      - AddCaseInsights
+      - AggregateCases
+      - ArchiveCase
+      - AssignCase
+      - BulkUpdateCases
+      - CommentCase
+      - CountCases
+      - CreateCase
+      - CreateCaseAutomationRule
+      - CreateCaseJiraIssue
+      - CreateCaseLink
+      - CreateCaseNotebook
+      - CreateCaseServiceNowTicket
+      - CreateCaseView
+      - CreateMaintenanceWindow
+      - CreateProject
+      - CreateProjectNotificationRule
+      - DeleteCaseComment
+      - DeleteCaseCustomAttribute
+      - DeleteCaseLink
+      - DeleteCaseView
+      - DisableCaseAutomationRule
+      - EnableCaseAutomationRule
+      - FavoriteCaseProject
+      - GetCase
+      - GetCaseAutomationRule
+      - GetCaseView
+      - GetProject
+      - GetProjectNotificationRules
+      - GetProjects
+      - LinkIncident
+      - LinkJiraIssueToCase
+      - ListCaseAutomationRules
+      - ListCaseLinks
+      - ListCaseTimeline
+      - ListCaseViews
+      - ListCaseWatchers
+      - ListMaintenanceWindows
+      - ListUserCaseProjectFavorites
+      - MoveCaseToProject
+      - RemoveCaseInsights
+      - SearchCases
+      - UnarchiveCase
+      - UnassignCase
+      - UnfavoriteCaseProject
+      - UnlinkJiraIssue
+      - UnwatchCase
+      - UpdateAttributes
+      - UpdateCaseAutomationRule
+      - UpdateCaseComment
+      - UpdateCaseCustomAttribute
+      - UpdateCaseDescription
+      - UpdateCaseDueDate
+      - UpdateCaseResolvedReason
+      - UpdateCaseTitle
+      - UpdateCaseView
+      - UpdateMaintenanceWindow
+      - UpdatePriority
+      - UpdateProject
+      - UpdateProjectNotificationRule
+      - UpdateStatus
+      - WatchCase
+    title: Rename Case Management API documentation to Work Management
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41030
+    operations:
+      - CreateCaseNotebook
+    title: Rename Case Management notebook models

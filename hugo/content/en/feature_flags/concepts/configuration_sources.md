@@ -133,6 +133,15 @@ For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java
 
 Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
 
+### Agent availability
+
+With Agent Remote Configuration, the SDK receives flag configuration from the Datadog Agent. The SDK also sends experiment exposure events through the Agent. Agent availability has these effects:
+
+- **Start the Agent before the application.** If the application starts before the Agent is available, restart the application after the Agent is available. Some SDKs can fail to load flag configuration, or to send experiment exposure events, after the Agent becomes available.
+- **Before the first configuration arrives, flag evaluations return the default values.**
+- **If the Agent stops after the SDK receives configuration, the SDK keeps the last configuration.** Flag evaluations continue to use this configuration.
+- **The SDK can lose exposure events while the Agent is not available.** Do not assume that the SDK sends these events after the Agent becomes available.
+
 ## Advanced configuration
 
 ### Enable or disable feature flags

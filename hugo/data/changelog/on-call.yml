@@ -1,0 +1,59 @@
+entries:
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40542
+    operations:
+      - GetOnCallTeamRoutingRules
+      - SetOnCallTeamRoutingRules
+    title: Add reroute_to_team action to On-Call team routing rules
+  - change_type: added
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40460
+    operations:
+      - CreateScheduleOverrides
+      - DeleteScheduleOverride
+      - ListScheduleOverrides
+    title: Add on-call endpoints for overrides to the spec
+  - change_type: modified
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40460
+    operations:
+      - CreateOnCallSchedule
+      - GetOnCallSchedule
+      - GetScheduleOnCallResponders
+      - GetScheduleOnCallUser
+      - UpdateOnCallSchedule
+    title: Add on-call endpoints for overrides to the spec
+  - change_type: added
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40896
+    operations:
+      - ListOnCallEscalationPolicies
+    title: Add list escalation policies endpoint
+  - change_type: modified
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40896
+    operations:
+      - CreateOnCallEscalationPolicy
+      - CreateScheduleOverrides
+      - CreateUserNotificationChannel
+      - CreateUserNotificationRule
+      - DeleteOnCallEscalationPolicy
+      - DeleteScheduleOverride
+      - DeleteUserNotificationChannel
+      - DeleteUserNotificationRule
+      - GetOnCallEscalationPolicy
+      - GetOnCallTeamRoutingRules
+      - GetScheduleOnCallResponders
+      - GetScheduleOnCallUser
+      - GetTeamOnCallUsers
+      - GetUserNotificationChannel
+      - GetUserNotificationRule
+      - ListOnCallSchedules
+      - ListScheduleOverrides
+      - ListUserNotificationChannels
+      - ListUserNotificationRules
+      - SetOnCallTeamRoutingRules
+      - UpdateOnCallEscalationPolicy
+      - UpdateUserNotificationRule
+    title: Add list escalation policies endpoint

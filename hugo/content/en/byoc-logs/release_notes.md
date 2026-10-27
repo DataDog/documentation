@@ -42,7 +42,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ### v0.1.34 — 2026-09-23
 
-*Bundled in chart: `0.5.3`.*
+*Bundled in chart: `0.5.5`.*
 
 #### Changed
 
@@ -56,7 +56,8 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 #### Helm chart changes
 
 - Enables availability zone-aware scheduling by default, and populates the availability zone from pod labels on all Kubernetes versions.
-- Sets `QW_ENABLE_IN_MEMORY_INDEXING=true` and `QW_DISABLE_LOAD_ESTIMATION=true` on indexers by default, and sets `QW_INDEXING_MAX_WRITE_THROUGHPUT` based on `indexer.podSize`. Values in `indexer.extraEnv` or `environment` take precedence.
+- Sets `QW_ENABLE_IN_MEMORY_INDEXING=true` on indexers by default, and sets `QW_INDEXING_MAX_WRITE_THROUGHPUT` based on `indexer.podSize` unless `indexer.resources` is set. Values in `indexer.extraEnv` or `environment` take precedence.
+- Fixes the load-estimation configuration in chart `0.5.5`: sets `QW_DISABLE_LOAD_ESTIMATION=true` on searchers by default and removes it from indexer defaults. This disables search load estimation to improve search latency under load; setting the variable on indexers had no effect. Explicit values in `searcher.extraEnv` or `environment` take precedence.
 - Uses the readiness endpoint for startup probes, removes default readiness probes, and sets liveness probe timeouts to 5 seconds.
 - Increases the compactor termination grace period to 300 seconds.
 
