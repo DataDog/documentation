@@ -26,6 +26,8 @@ The Amazon Athena integration collects the history of queries that run in your A
 - Estimate Athena query compute cost.
 - Build lineage between the AWS Glue tables that your queries read and write.
 
+{{< img src="data_observability/amazon_athena/query-history-explorer.png" alt="Athena queries in Data Observability, showing normalized queries with workgroup, count, duration, bytes scanned, and estimated cost" style="width:100%;" >}}
+
 Datadog collects query metadata from the Athena API. It does not read query results or access your query result location in Amazon S3.
 
 ## Prerequisites
@@ -71,6 +73,9 @@ Attach the following policy to the Datadog IAM role configured for your AWS inte
 
    Datadog does not check workgroup names with AWS during setup, so make sure each name matches an existing workgroup.
 7. Repeat steps 5 and 6 for each additional region.
+
+   {{< img src="data_observability/amazon_athena/query-history-configuration.png" alt="Amazon Athena configuration with query history enabled, a region selected, and the required IAM permissions" style="width:100%;" >}}
+
 8. Click {{< ui >}}Save{{< /ui >}}.
 
 To stop monitoring a region, remove it from the configuration. To stop monitoring all regions, disable the {{< ui >}}Athena query history{{< /ui >}} toggle.
