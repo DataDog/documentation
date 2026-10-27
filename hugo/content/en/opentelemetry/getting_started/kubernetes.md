@@ -73,6 +73,8 @@ export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 
 **[Placeholder: DDOT settings]**
 
+On the DDOT path, the installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. To install without the Agent, also set `DD_AGENT_ENABLED=false`.
+
 ```shell
 export DD_API_KEY="<DATADOG_API_KEY>"
 export DD_SITE="{{< region-param key="dd_site" >}}"
@@ -92,7 +94,7 @@ Replace the placeholder values, and set `K8S_CLUSTER_TYPE` for your cluster:
 | `DD_API_KEY` | Your Datadog API key. |
 | `DD_SITE` | The domain of your [Datadog site][6]. For your site, {{< region-param key=dd_datacenter code="true" >}}, the value is {{< region-param key="dd_site" code="true" >}}. |
 | `K8S_CLUSTER_TYPE` | `eks`, `gcp`, `aks`, or `other`. For `eks`, `gcp`, and `aks`, the Collectors detect the cluster name, so you can leave out `K8S_CLUSTER_NAME`. |
-| `K8S_CLUSTER_NAME` | A name for your cluster, using lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer. With `other`, Datadog also adds it to each node's hostname. Set it when `K8S_CLUSTER_TYPE` is `other`. |
+| `K8S_CLUSTER_NAME` | A name for your cluster, using lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer. With `other`, each node's hostname in Datadog includes it. Set it when `K8S_CLUSTER_TYPE` is `other`. |
 | `DEPLOYMENT_ENVIRONMENT_NAME` | The environment name, such as `staging`, using lowercase letters, numbers, and hyphens. It becomes the `env` tag on all your data. If you leave it out, the installer uses `production`. |
 
 ## 3. Run the installer
@@ -132,6 +134,7 @@ opentelemetry-kube-stack-opentelemetry-operator-5ccfd8f959fjmvm   1/1     Runnin
 | `cluster` Collector | Deployment | Collects cluster-level metrics and Kubernetes objects. |
 | `daemon` Collector | DaemonSet | Collects node metrics and container logs, and receives your application's telemetry. |
 | `opentelemetry-kube-stack` instrumentation settings | `Instrumentation` resource | Tells the Operator how to instrument annotated pods and where they send data. |
+| Datadog Operator and Datadog Agent (DDOT path only) | `datadog` namespace | Installed unless you set `DD_AGENT_ENABLED=false`. |
 
 The Collectors' configuration comes from the values files in the installer's folder, such as `values-otlp-http.yaml` for the Upstream path.
 
