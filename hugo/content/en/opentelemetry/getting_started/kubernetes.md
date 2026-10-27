@@ -159,7 +159,7 @@ Data appears in Datadog within a few minutes. In the searches below, replace `<S
 - **Traces**: In the [Trace Explorer][10], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>` and open a trace to see its spans. Traces can take about five minutes to appear.
 - **Hosts**: In the [Host List][11], each node appears once. With `K8S_CLUSTER_TYPE=other`, the name is `<NODE_NAME>-<CLUSTER_NAME>`.
 - **Kubernetes**: In [Kubernetes Explorer][13], filter by your cluster name. The resource sections list your pods, Deployments, and nodes.
-- **Metrics**: In the [Metrics Explorer][14], graph `k8s.node.cpu.usage`. On the Upstream path, filter by `k8s.cluster.name:<CLUSTER_NAME>`. On the DDOT path, filter by **[Placeholder: DDOT cluster tag]**.
+- **Metrics**: In the [Metrics Explorer][14], graph `k8s.node.cpu.usage`. On the Upstream path, filter by `k8s.cluster.name:<CLUSTER_NAME>`. On the DDOT path, filter by `kube_cluster_name:<CLUSTER_NAME>`.
 - **Logs**: In the [Log Explorer][15], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`.
 
 ## Troubleshooting
