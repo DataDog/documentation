@@ -14,11 +14,14 @@ further_reading:
   text: "Learn about DORA Metrics"
 ---
 
-As of **January 31, 2027**, DORA Metrics does not ingest new incidents, and the DORA incident tracking view is removed. This affects the following:
+As of **January 31, 2027**, DORA Metrics does not ingest new incidents. This affects the following:
 
-- The incident tracking view in DORA Metrics
-- The DORA failure and incident ingestion and deletion APIs
-- The PagerDuty and Datadog Incidents data sources in [DORA Metrics settings][1]
+- The DORA incident tracking view, which is removed
+- The DORA failure and incident ingestion and deletion APIs, which are disabled and return a 4xx error
+- The **PagerDuty** data source in [DORA Metrics settings][1], which stops forwarding incidents
+- The **Datadog Incidents** data source in DORA Metrics settings, which stops pulling new incidents into DORA Metrics
+
+Datadog also removes the incident configurations from [DORA Metrics settings][1].
 
 Incidents ingested before this date remain available in custom dashboards, and you can still query them with the DORA API [list][5] and [get][9] endpoints.
 
@@ -60,12 +63,6 @@ You do not need to export your incident history. Incidents ingested before this 
 | Custom incident events sent through the API | The [Datadog Events API][7], to send events to the Events Explorer for querying and dashboards. To declare and manage incidents in Datadog, use [Datadog Incident Management][3]. |
 
 <div class="alert alert-info">These alternatives support incident reporting only. They do not feed DORA stability metrics, which use <a href="/delivery_performance/dora_metrics/change_failure_detection/">Change Failure Detection</a>.</div>
-
-## Timeline
-
-| Date | Change |
-| --- | --- |
-| January&nbsp;31,&nbsp;2027 | DORA Metrics stops accepting incidents: <br>- The failure and incident ingestion and deletion APIs are disabled and return a 4xx error.<br>- The PagerDuty data source in DORA Metrics stops forwarding incidents.<br>- New Datadog Incidents are no longer pulled into DORA Metrics.<br>- The DORA incident tracking view is removed, and Datadog removes incident configurations from [DORA Metrics settings][1].<br>Incidents ingested before this date remain available in custom dashboards and through the DORA API [list][5] and [get][9] endpoints. |
 
 ## Get help
 
