@@ -80,7 +80,7 @@ Pass the SAT as a Bearer token in the `Authorization` header. This method does n
 API key:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "Authorization: Bearer <YOUR_SAT>"
 ```
 
@@ -89,7 +89,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 Pass the SAT in the `dd-application-key` header:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "dd-application-key: <YOUR_SAT>"
 ```
 

@@ -166,7 +166,7 @@ Click on the export icon of any dashboard graph to open an options menu:
 |-----------------|------------------------------------|
 | Download as PNG | Download the widget in PNG format. |
 | Download as SVG | Download the widget in SVG format. |
-| Download as CSV | Download the widget in CSV format. |
+| Download as CSV | Download the widget in CSV format. See the [Export widget data to CSV](#export-widget-data-to-csv) section. |
 
 ### Edit
 
@@ -186,6 +186,25 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 | Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page. |
 | Delete                            | Delete the graph.                                                                                                          |
 
+## Export widget data to CSV
+
+To download the data behind a single widget as a CSV file, click the export icon on the widget and select {{< ui >}}Download as CSV{{< /ui >}}. You can also download CSV data when you view the widget in [full screen mode](#full-screen).
+
+CSV export is available for the following widget types:
+
+* Bar Chart
+* List
+* Pie Chart
+* Scatter Plot
+* Table
+* Timeseries
+* Top List
+* Treemap
+
+**Note**: CSV export works on one widget at a time. You can't export the data from all widgets on a dashboard in a single file.
+
+CSV export is enabled by default. If {{< ui >}}Download as CSV{{< /ui >}} doesn't appear for a supported widget, Datadog Support might have disabled CSV export for your organization. This restriction applies to all users in the organization, and to CSV export in other Datadog products as well as dashboard widgets. You can't change this setting from the Datadog UI. To disable or re-enable CSV export, contact [Datadog Support][12].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -200,3 +219,4 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [8]: /dashboards/guide/custom_time_frames/
 [10]: /dashboards/widgets/split_graph/
 [11]: /dashboards/sharing/widget_public_urls/
+[12]: /help/

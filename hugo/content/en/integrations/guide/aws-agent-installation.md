@@ -208,6 +208,8 @@ To tune what the extension collects, set the standard Datadog environment variab
 
 ## Install Datadog instrumentation
 
+<div class="alert alert-info">This feature is available only to trial customers and customers who enabled it during their trial. This applies to both AWS integration setup and Fleet Automation.</div>
+
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
 - **AWS integration setup (instrument all eligible resources)**: When you [set up the AWS integration][5], enable the instrumentation toggle on the [AWS integration page][7], next to log and resource collection. Then select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear.
