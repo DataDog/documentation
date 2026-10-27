@@ -165,7 +165,7 @@ Scripts for VRL processors have the following limitations:
 - The `get_secret`, `set_secret`, `remove_secret`, and `set_semantic_meaning` functions are not available.
 - Fields that belong to another event category are not available to the script. For example, `.status` is not available on change events. Writes to these fields are skipped, and the rest of the script still applies.
 - Metadata written with the `%` path is not saved to the event.
-- Timestamp values can't be stored in the event. For example, `.custom.processed_at = now()` causes the event to be left unchanged. Convert timestamps to strings first, such as `format_timestamp!(now(), "%+")`.
+- Timestamp values can't be stored in the event. For example, `.custom.processed_at = now()` causes a runtime error, which means that any changes from this processor are not applied. Convert timestamps to strings first, such as `format_timestamp!(now(), "%+")`.
 - Results nested more than 19 levels deep are not applied.
 - Attributes whose names start with an underscore (`_`) are reserved for Datadog and are not available to the script.
 
