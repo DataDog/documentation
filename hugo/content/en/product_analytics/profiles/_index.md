@@ -35,7 +35,7 @@ The [User Profiles][7] page lists the users who are interacting with your applic
 Each profile has attributes to help you better segment your users. You can conduct a full-text search or sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the [Custom Attributes section](#use-custom-attributes-to-enrich-profiles) to learn how.
 
 
-{{% collapse-content title="List of user profile attributes" level="h4" expanded=true id="user-profile-attributes" %}}
+{{% collapse-content title="List of user profile attributes" level="h4" expanded=false id="user-profile-attributes" %}}
 
 <!-- #### User attributes  -->
 User ID `REQUIRED`
@@ -56,10 +56,10 @@ Last Seen
 
 <!-- #### First touch attribution  -->
 First Referrer
-: `type:string`  <br> The URL of the page that referred the user in their first session. N/A if user navigated directly to the application.
+: `type:string`  <br> The URL of the page that referred the user in their first session. Empty if the user navigated directly to the application.
 
 First Referrer Host
-: `type:string`  <br> The hostname of the page that referred the user in their first session. N/A if user navigated directly to the application.
+: `type:string`  <br> The hostname of the page that referred the user in their first session. Empty if the user navigated directly to the application.
 
 First UTM Campaign
 : `type:string`  <br> The value of the `utm_campaign` parameter in the URL of the user's first session.
