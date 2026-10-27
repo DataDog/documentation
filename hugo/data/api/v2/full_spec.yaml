@@ -255049,7 +255049,7 @@ paths:
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
             - service
-            - resource_name
+            - resource
           in: query
           name: include_fields
           required: false
