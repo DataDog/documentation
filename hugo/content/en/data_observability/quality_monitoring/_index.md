@@ -77,8 +77,29 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Data sent to Datadog
+
+Quality Monitoring runs aggregate queries in your data warehouse, such as `COUNT(*)`, `MAX(<timestamp_column>)`, null counts, and distinct counts. Only the resulting metric values are sent to Datadog, not row-level data from your tables.
+
+[Custom SQL monitors][2] are the exception, because you control what the query returns:
+
+- The query must return a value aliased as `dd_value`, and Datadog stores that value. Queries that don't match this format, such as `SELECT *`, fail validation and are not stored.
+- If the query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column. Each group is evaluated as a separate series.
+
+For example, the following query stores each distinct `region` value alongside its count:
+
+```sql
+SELECT region, COUNT(*) AS dd_value
+FROM <database>.<schema>.orders
+WHERE status = 'FAILED'
+GROUP BY region
+```
+
+<div class="alert alert-warning">If you group by a column that contains sensitive data, such as <code>email</code> or <code>user_id</code>, those values are sent to Datadog. Group only by non-sensitive columns, or mask sensitive columns in your warehouse so that Datadog reads masked values.</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_observability/lineage/
+[2]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
