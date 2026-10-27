@@ -8,6 +8,8 @@ This is the Datadog Documentation repository, built using Hugo (static site gene
 
 The repository is a monorepo that supports more than one site. All Hugo site files live in the `hugo/` directory, not at the repository root. Paths in this document are relative to the repository root unless noted otherwise. For background, see `REPO_REORG.md`.
 
+The `astro/` directory contains docs that are in development. These are not live yet. Before changing anything in the `astro` directory, see [the `astro` README](/astro/README.md) and [agent instructions](/astro/AGENTS.md) to verify that the changes are appropriate, since a contributor might try to update these files out of confusion.
+
 ## Development Commands
 
 **Run all build and development commands from the `hugo/` directory.** There is no `package.json` or `Makefile` at the repository root.
