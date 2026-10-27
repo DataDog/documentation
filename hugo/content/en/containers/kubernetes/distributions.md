@@ -365,7 +365,9 @@ providers:
 
 {{% tab "Datadog Operator" %}}
 
-Starting with Datadog Operator `1.27.0+`, enable Autopilot mode with the `experimental.agent.datadoghq.com/autopilot` annotation. The Operator configures the Agent for GKE Autopilot, including API server pod discovery and the required WorkloadAllowlist.
+Starting with Datadog Operator `1.29.0+`, enable Autopilot mode by setting the `agent.datadoghq.com/cluster-provider` annotation to `gke-autopilot`. The Operator configures the Agent for GKE Autopilot, including API server pod discovery and the required WorkloadAllowlist.
+
+<div class="alert alert-info">The <code>experimental.agent.datadoghq.com/autopilot</code> annotation also enables Autopilot mode, and continues to work for existing installations. It is deprecated in favor of <code>agent.datadoghq.com/cluster-provider</code> and is removed no earlier than Datadog Operator v1.38.0. Set only one of the two.</div>
 
 Custom `datadog-agent.yaml`:
 
@@ -375,7 +377,7 @@ kind: DatadogAgent
 metadata:
   name: datadog
   annotations:
-    experimental.agent.datadoghq.com/autopilot: "true"
+    agent.datadoghq.com/cluster-provider: gke-autopilot
 spec:
   global:
     credentials:
