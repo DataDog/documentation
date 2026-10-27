@@ -6,7 +6,7 @@ This file guides AI coding agents, such as Claude Code, Codex, and Cursor, when 
 
 These docs are not live yet, and updating them has no impact on [the production site](https://docs.datadoghq.com). 
 
-If someone who has never contributed to the `astro` folder asks you to revise these docs, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead.
+If someone who has never contributed to the `astro` folder asks you to revise these docs, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead. If the contributor is changing the `/api/` docs on Hugo, it may be appropriate for them to update the `astro` files as well, in order to avoid drift between the two.
 
 ## About the Astro site
 
