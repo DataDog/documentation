@@ -5880,14 +5880,14 @@ menu:
       weight: 504
     - name: Prompt Experimentation
       url: llm_observability/improve/online_experiments/prompt_experimentation
-      parent: llm_obs_online_experiments
+      parent: llm_obs_improve
       identifier: llm_obs_prompt_experimentation
-      weight: 50401
+      weight: 505
     - name: Data Access Control
       url: llm_observability/improve/access_control
       parent: llm_obs_improve
       identifier: llm_obs_improve_access_control
-      weight: 505
+      weight: 506
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs
