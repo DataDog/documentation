@@ -90,7 +90,7 @@ The products differ in the data they capture and how long the instrumentation re
 {% if equals($prog_lang, "dot_net") %}
 
 - **Datadog .NET SDK** ([.NET Framework][22] or [.NET Core][20])
-  - Minimum for [in-app enablement](#enable-in-app): 3.29.0
+  - Minimum for [in-app enablement](#enable-in-app): 3.57.0
   - Minimum for [manual enablement](#enable-manually): 2.54.0
 
 {% /if %}
