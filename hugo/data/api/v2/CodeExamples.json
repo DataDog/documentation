@@ -2028,16 +2028,6 @@
     },
     {
       "group": "observability_pipelines",
-      "suffix": "_3666485614",
-      "description": "Validate an observability pipeline with spike protection processor returns \"OK\" response"
-    },
-    {
-      "group": "observability_pipelines",
-      "suffix": "_3654691150",
-      "description": "Validate an observability pipeline with spike protection processor threshold overrides returns \"OK\" response"
-    },
-    {
-      "group": "observability_pipelines",
       "suffix": "_337125830",
       "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
@@ -3104,6 +3094,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Create a test suite returns \"OK\" response"
+    }
+  ],
+  "PatchGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_3138656940",
+      "description": "Patch a persistent email global variable preserves its address and type"
     }
   ],
   "SetOnDemandConcurrencyCap": [
