@@ -621,4 +621,4 @@ processors:
 [21]: /opentelemetry/setup/collector_exporter/
 [22]: /opentelemetry/setup/otlp_ingest/
 [24]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
-[25]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[25]: /opentelemetry/setup/ddot_collector/kubernetes/
