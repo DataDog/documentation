@@ -17319,6 +17319,32 @@ menu:
       url: /api/latest/logs-archive-searches/
       identifier: logs-archive-searches
       generated: true
+    - name: Cancel an Archive Search
+      url: /api/latest/logs-archive-searches/cancel-an-archive-search/
+      identifier: logs-archive-searches-cancel-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelArchiveSearch
+        unstable:
+          - v2
+        order: 5
+    - name: Rehydrate an Archive Search
+      url: /api/latest/logs-archive-searches/rehydrate-an-archive-search/
+      identifier: logs-archive-searches-rehydrate-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RehydrateArchiveSearch
+        unstable:
+          - v2
+        order: 4
     - name: Get an Archive Search
       url: /api/latest/logs-archive-searches/get-an-archive-search/
       identifier: logs-archive-searches-get-an-archive-search
@@ -17345,6 +17371,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List Archive Searches
+      url: /api/latest/logs-archive-searches/list-archive-searches/
+      identifier: logs-archive-searches-list-archive-searches
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListArchiveSearches
+        unstable:
+          - v2
+        order: 3
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
