@@ -391,9 +391,11 @@ Visitors can subscribe a Microsoft Teams channel to status page updates through 
 
 ### Enable Microsoft Teams subscriptions
 
-1. From your status page, click **Settings**, then select **MS Teams** under **Subscriptions**.
-1. Turn on the **Enable MS Teams subscriptions** toggle.
+1. From your status page, click **Settings**, then select **Microsoft Teams** under **Subscriptions**.
+1. Turn on the **Enable Microsoft Teams subscriptions** toggle.
 1. Click **Save**.
+
+{{< img src="incident_response/status_pages/status_pages_enable_microsoft_teams.png" alt="Status page settings showing the Enable Microsoft Teams subscriptions toggle" style="width:80%;" >}}
 
 Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type.
 
@@ -407,8 +409,13 @@ Microsoft Teams subscriptions use a workflow webhook URL from the channel that r
 
 Then, from a published page with Microsoft Teams subscriptions enabled:
 
-1. Click **Subscribe** and open the **MS Teams** tab.
-1. In **MS Teams URL**, paste the workflow webhook URL.
+1. Click **Subscribe** and open the **Microsoft Teams** tab.
+1. In **Microsoft Teams URL**, paste the workflow webhook URL. For example:
+
+   ```text
+   https://default0a1b2c3d4e5f.0a.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/01/workflows/0123456789abcdef0123456789abcdef/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EXAMPLE_SIGNATURE
+   ```
+
 1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
 1. Click **Subscribe**.
 
@@ -428,7 +435,7 @@ Each Microsoft Teams notification is an Adaptive Card that includes:
 
 Subscribers can change the components they follow or unsubscribe at any time with the **Manage subscription** and **Unsubscribe** buttons in any notification.
 
-Status page owners can review subscribers in the status page settings. For a published page, the **MS Teams Subscribers** list shows the URL, components, subscription date, and status of each subscription, and can be filtered by status. Hover over a truncated URL to see the full value.
+Status page owners can review subscribers in the status page settings. For a published page, the **Microsoft Teams Subscribers** list shows the URL, components, subscription date, and status of each subscription, and can be filtered by status. Hover over a truncated URL to see the full value. To remove subscribers, select one or more rows and click **Unsubscribe**.
 
 A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, subscribe a new workflow URL.
 
