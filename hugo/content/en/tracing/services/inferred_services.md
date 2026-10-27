@@ -130,7 +130,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
-The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. For `peer.db.system`, Datadog uses only `db.system`.
+The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. Source attributes must be collected for these mappings to apply. The available attributes depend on your instrumentation, collection version, and configuration.
 
 Peer Tag | Source Attributes
 --------------------|-------------------
@@ -141,8 +141,8 @@ Peer Tag | Source Attributes
 `peer.cassandra.contact.points` | `db.cassandra.contact.points`
 `peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
 `peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
-`peer.db.system` | `db.system`
-`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`
+`peer.db.system` | `db.system`, `active_record.db.vendor`, `db.type`, `sequel.db.vendor`
+`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`, `out.host`, `dns.hostname`, `network.destination.ip`
 `peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
 `peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
 `peer.messaging.system` | `messaging.system`
