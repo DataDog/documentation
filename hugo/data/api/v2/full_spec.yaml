@@ -88335,7 +88335,6 @@ components:
           example: true
           type: boolean
         enabled_metric_aggregation:
-          default: true
           description: >-
             [Recommended] Indicates whether generated metrics are automatically aggregated and enriched with the `worker_uuid` tag before being sent to the metric destination.
           example: true
