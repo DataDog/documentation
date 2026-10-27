@@ -33,6 +33,11 @@ You can access insights into your GPU fleet by deploying the Datadog Agent on yo
 ## Key capabilities
 
 ### Capacity plan with confidence
+
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-capacity-planning/" >}}
+[Capacity Planning](/gpu_monitoring/capacity_planning) in GPU Monitoring is in Early Access Preview. Complete the form to request access.
+{{< /callout >}}
+
 Understand your entire fleet's size and spend across hyperscalers, on-premises, and neocloud providers in one unified view.
 
 {{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
@@ -44,6 +49,11 @@ Understand your entire fleet's size and spend across hyperscalers, on-premises, 
 {{< img src="gpu_monitoring/device_allocation.png" alt="Charts to help visualize GPU allocation. A line graph titled 'Device Allocation Over Time', plotting counts of total/allocated/active devices, including a 4-week future forecast. A donut chart titled 'Cloud Provider Instance Breakdown', displaying prevalence of cloud provider instances across the fleet. A 'Device Type Breakdown' displaying allocated/total for various GPU devices." style="width:100%;" >}}
 
 ### Maximize AI workload throughput
+
+{{< callout btn_hidden="true" >}}
+[Training](/gpu_monitoring/training) and [Inference](/gpu_monitoring/inference) in GPU Monitoring are in Early Access Preview. To request access, complete the form on each page.
+{{< /callout >}}
+
 Analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) by host, node, or pod over time to understand how your devices affect model and application performance.
 
 - Troubleshoot stalled workloads with shared context for both platform and ML teams, instead of switching between siloed tools.
@@ -51,7 +61,9 @@ Analyze trends in GPU resources and metrics (including GPU utilization, power, a
 - Detect bottlenecks in your training and inference workloads with lightweight, continuous tracing.
 - Discover recommendations on the optimizations that produce the largest throughput improvements.
 
-{{< img src="gpu_monitoring/device_metrics.png" alt="Detail view of a device, displaying configurable timeseries visualizations for SM activity, memory utilization, power, and engine activity." style="width:100%;" >}}
+{{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring showing training run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
+
+{{< img src="gpu_monitoring/inference-page3.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
 
 ### Safeguard device reliability
 GPUs are an expensive and scarce resource with higher failure rates than standard servers. GPU Monitoring provides out-of-the-box monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
@@ -69,36 +81,6 @@ Identify total spend on GPU infrastructure and attribute those costs to specific
 
 {{< img src="gpu_monitoring/fleet_costs.png" alt="Detail view of a cluster, displaying funnel visualization of devices (total/allocated/active/effective), total cloud cost, idle cloud cost, and visualizations and details of various connected entitles (pods, processors, SLURM jobs)." style="width:100%;" >}}
 
-## Preview capabilities
-The following GPU Monitoring capabilities are in Preview. To request access, use the form linked on each page.
-
-### Manage GPU quotas and capacity
-The [Capacity Planning][3] page gives platform teams and workload owners one shared view of GPU provisioning across Kueue-managed queues.
-
-- **Identify key inefficiency drivers**: Know which teams or projects are over- or underusing their quotas so you can reallocate compute.
-- **Detect resource contention**: Understand which GPU types are oversubscribed so you can add capacity.
-- **Diagnose workload evictions and delays**: Pinpoint preempted or evicted workloads and understand why they're delayed.
-
-{{< img src="gpu_monitoring/capacity-planning-page-3.png" alt="Capacity Planning page in GPU Monitoring showing GPU quota, idle allocated GPU, preemption, fleet coverage, and saturation graphs above a list of workloads." style="width:100%;" >}}
-
-### Debug and optimize training
-The [Training][4] page ties each training run to the health of the GPU hardware and network interconnect it ran on.
-
-- **Reduce the time it takes to train models**: Share context across platform, MLOps, and ML engineering teams instead of switching between siloed tools.
-- **Troubleshoot stalled runs with agentic root cause analysis**: Pinpoint why workloads are slowing down, whether the cause is unhealthy hardware, communication bottlenecks, memory bandwidth, or scheduling.
-- **Increase training throughput**: Discover recommendations on the optimizations that produce the largest throughput improvements, such as GPU kernel fusions.
-
-{{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring showing training run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
-
-### Optimize inference throughput
-The [Inference][5] page shows the performance of each model deployment alongside the health of the GPUs it runs on.
-
-- **Understand whether your models are healthy**: Use out-of-the-box alerts on the health of your model deployments.
-- **Detect and remediate inference performance issues**: Investigate high time to first token (TTFT) or inter-token latency (ITL) and resolve the underlying issues.
-- **Increase inference throughput**: Discover recommendations on the optimizations that produce the largest throughput improvements through updates to your inference configuration.
-
-{{< img src="gpu_monitoring/inference-page3.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
-
 ## Ready to start?
 
 See [Set up GPU Monitoring][2] for instructions on how to set up Datadog's GPU Monitoring.
@@ -109,6 +91,3 @@ See [Set up GPU Monitoring][2] for instructions on how to set up Datadog's GPU M
 
 [1]: https://app.datadoghq.com/gpu-monitoring
 [2]: /gpu_monitoring/setup
-[3]: /gpu_monitoring/capacity_planning
-[4]: /gpu_monitoring/training
-[5]: /gpu_monitoring/inference
