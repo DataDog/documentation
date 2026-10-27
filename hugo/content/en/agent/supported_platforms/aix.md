@@ -36,8 +36,6 @@ The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you ca
 
 **Note**: Agent 7 on AIX does not support the following:
 - JMX-based integrations
-- Container and Kubernetes checks
-- eBPF-based checks
 - Cloud Network Monitoring
 - Remote Agent configuration and upgrades with Fleet Automation
 
