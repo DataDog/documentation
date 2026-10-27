@@ -359,3 +359,5 @@ Write each test first and confirm it fails before implementing. Snapshot steps a
 16. [x] **Regression run.** Run `yarn test-ai` once. Then recommend that the user runs the prod build. Don't run it.
 
 **Status (step 16):** Typecheck has 0 errors, the headless suite passes 1,880 of 1,880 tests, and the browser suite passes 306 with 5 skipped. The scratch helpers are deleted. The prod build hasn't been run yet.
+
+**Follow-up:** Trimming the pages in step 12 dropped the only snapshot of the `ApiCodeExample` accordion, which was on `09-monitors-create-a-monitor`. A new `code-example-accordion` class covers it, and its case snapshots the curl tab of `monitors/create-a-monitor`. That operation's request files give the tab two titled accordion entries. Like `operation-no-sdk-examples`, the class isn't a spec shape.

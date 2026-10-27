@@ -476,6 +476,12 @@ export const SHAPE_CASES: ShapeCase[] = [
     operation: "get-an-ownership-inference-by-owner-type",
     fragment: { sections: ["code-tabs"] },
   },
+  {
+    classId: "code-example-accordion",
+    category: "monitors",
+    operation: "create-a-monitor",
+    fragment: { sections: ["curl"] },
+  },
 
   // ── Operation description ────────────────────────────────────────
   {

@@ -47,6 +47,8 @@ export const SHAPE_CLASS_PATHS = {
     "operationBuilder AuthZ requirement → OAuth scopes list, and curlBuilder's token note for AuthZ-only operations",
   "operation-no-sdk-examples":
     "ApiCodeExample with no SDK example files → curl only. Not a spec shape: covered by every trimmed case's tag",
+  "code-example-accordion":
+    "ApiCodeExample accordion: one entry per request file, so a language tab holds several titled entries. Not a spec shape: request files drive it",
 
   // ── Operation description (Markdoc, rendered as the page's slot) ─
   "op-desc-inline": "Markdoc inline marks and paragraphs: bold, inline code, several paragraphs",
