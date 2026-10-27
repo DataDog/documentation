@@ -240,7 +240,7 @@ Use this optional configuration step to define the maximum volume of log data (i
 
 For archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
 
-**Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
+**Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries. For both attribute types, enter [reserved attributes][19] such as `service` or `trace_id` without the `@` prefix, and prefix all other attributes with `@`.
 
 #### Archive Partition Attribute {#archive-partition-attribute}
 
@@ -257,17 +257,15 @@ Lookup attributes create a fast path to logs with specific values. Use them for 
 
 You can configure up to **2 lookup attributes** per archive.
 
-* **Use for**: High-cardinality attributes such as `trace_id`, `@container_id`, `@usr.id`, or `@http.request_id`.
+* **Use for**: High-cardinality attributes such as `trace_id`, `@usr.id`, `@http.request_id`, or `@transaction_id`.
 * **How it works**: Datadog builds an index for these attributes at write time, allowing Archive Search to pinpoint specific logs without scanning the full archive.
-
-Enter [reserved attributes][19] such as `trace_id` without the `@` prefix. Prefix all other attributes with `@`, for example `@usr.id` or `@http.request_id`.
 
 **Partition vs. Lookup attributes**
 
 | | Partition | Lookup |
 |---|---|---|
 | **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
-| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `@container_id`, `@usr.id`, `@transaction_id` |
+| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `@usr.id`, `@http.request_id`, `@transaction_id` |
 | **How it helps** | Skips entire partitions that don't match your query | Pinpoints specific log entries without scanning the full archive |
 | **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
 | **Limit** | Up to 2 per archive | Up to 2 per archive |
