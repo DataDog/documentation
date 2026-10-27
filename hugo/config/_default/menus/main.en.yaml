@@ -692,6 +692,11 @@ menu:
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
+    - name: Quickstart on Kubernetes
+      url: /opentelemetry/getting_started/kubernetes/
+      parent: otel_guides_getting_started
+      weight: 100
+      identifier: otel_guides_getting_started_kubernetes
     - name: Datadog Example Application
       url: /opentelemetry/getting_started/datadog_example
       parent: otel_guides_getting_started

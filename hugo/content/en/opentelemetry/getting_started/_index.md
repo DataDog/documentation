@@ -24,11 +24,15 @@ further_reading:
 
 OpenTelemetry is an open source framework that provides standardized tools for collecting observability data from your applications. Datadog fully supports OpenTelemetry, allowing you to send your metrics, traces, and logs for powerful analysis and monitoring.
 
-For a new OpenTelemetry Collector configuration, start with the recommended OTLP HTTP exporter and `span_metrics` connector setup. The additional tutorials use the Datadog Exporter and Datadog Connector to demonstrate OpenTelemetry concepts and sample applications.
+To try OpenTelemetry on a Kubernetes cluster, start with the [Kubernetes quickstart][1]. To configure your own Collector, start with the recommended [OTLP HTTP exporter and `span_metrics` connector setup][2]. The other tutorials use the Datadog Exporter and Datadog Connector to demonstrate OpenTelemetry concepts and sample applications.
 
 ## Getting started tutorials
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/getting_started/kubernetes/" >}}
+    <h3>Quickstart: OpenTelemetry on Kubernetes</h3>
+    Install OpenTelemetry on a Kubernetes cluster with an installer script, then send traces, metrics, and logs to Datadog.
+    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
     <h3>Set up the OpenTelemetry Collector</h3>
     Configure the OpenTelemetry Collector to send telemetry to Datadog with the recommended OTLP HTTP exporter and <code>span_metrics</code> connector setup.
@@ -47,3 +51,6 @@ For a new OpenTelemetry Collector configuration, start with the recommended OTLP
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /opentelemetry/getting_started/kubernetes/
+[2]: /opentelemetry/setup/collector_exporter/
