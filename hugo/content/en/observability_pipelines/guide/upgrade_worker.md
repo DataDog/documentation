@@ -35,7 +35,7 @@ Worker version 2.25.0 gives you access to the following:
 #### Enhancements
 
 - The Grok Parser processor's warning logs for events that fail to parse, and its rule compilation error logs, now include:
-    - A `rule` field that identifies the rule, when available. For source-based rules and library rules, this is the rule's source.
+    - A `rule` field that identifies the rule, when available. For source-based rules and library rules, this field is the rule's source.
     - A `rule_kind` field, set to `custom` or `library`.
 
   Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
