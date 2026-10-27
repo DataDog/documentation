@@ -156,7 +156,7 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
