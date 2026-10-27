@@ -54,14 +54,13 @@
   pointer-events: none;
 }
 
-/* Flip to ▴ while open, like Hugo's `.chevron-up`. -25% mirrors the -75%
+/* Flip to ▴ while open. -25% mirrors the -75%
    centroid offset above. */
 .select--open::after {
   transform: translateY(-25%) rotate(-135deg);
 }
 
-/* Modeled on Hugo's `.language-region-select-container .dropdown-menu`: just
-   below the button, at least the button's width. */
+/* Just below the button, at least the button's width. */
 .select__menu {
   position: absolute;
   top: calc(100% + var(--space-sm));

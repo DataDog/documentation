@@ -346,7 +346,6 @@ describe("extractCurlExamples", () => {
     const encodings = (curlExamples: ReturnType<typeof extractCurlExamples>) =>
       curlExamples.map((curlExample) => curlExample.bodies[0].contentEncoding);
 
-    // Hugo reads the encoding from the card's title.
     it("compresses a request file whose title names an encoding", () => {
       const curlExamples = extractCurlExamples(
         spec,
@@ -380,7 +379,7 @@ describe("extractCurlExamples", () => {
       ]);
     });
 
-    // Without request files, Hugo's card is titled with the summary.
+    // Without request files, the card is titled with the summary.
     it("reads the operation's summary when there are no request files", () => {
       const curlExamples = extractCurlExamples(
         spec,
@@ -390,7 +389,7 @@ describe("extractCurlExamples", () => {
       expect(encodings(curlExamples)).toEqual(["gzip"]);
     });
 
-    // Hugo has a curl shape only for gzip and deflate.
+    // Only gzip and deflate have a curl shape.
     it("ignores other encodings", () => {
       const curlExamples = extractCurlExamples(
         spec,

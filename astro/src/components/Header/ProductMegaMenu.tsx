@@ -37,8 +37,7 @@ interface Props {
 
 /**
  * Product mega-menu. Category hover with a 160ms debounce, resets to
- * "observability" when the dropdown closes. Replaces Hugo's Alpine
- * `x-data` + MutationObserver scheme with local Preact state.
+ * "observability" when the dropdown closes.
  */
 export default function ProductMegaMenu({
   labels,
@@ -80,7 +79,7 @@ export default function ProductMegaMenu({
   };
 
   useEffect(() => {
-    // Matches Hugo's MutationObserver: when the dropdown closes, reset to the default.
+    // When the dropdown closes, reset to the default.
     if (!open) setOpenCategory(categories[0]?.identifier ?? "observability");
   }, [open, categories]);
 
@@ -211,7 +210,7 @@ function CategoryDetail({
 }
 
 /**
- * The gradient banner at the top of a category. Like Hugo, it becomes a link
+ * The gradient banner at the top of a category. It becomes a link
  * with a "Learn more" label when the category has a `cta_url`, and can swap to
  * a 3-stop gradient on hover. Both gradients go through CSS variables so the
  * stylesheet owns the hover state.

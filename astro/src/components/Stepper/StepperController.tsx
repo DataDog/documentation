@@ -27,7 +27,7 @@ interface StepperControllerProps {
 // / Step.astro; this component never receives step content. It loads the root
 // element by id, then manages active-step state, expand/collapse, and progress
 // persistence by toggling BEM modifier classes and `data-hidden` on the
-// existing DOM — mirroring the Hugo stepper's client script.
+// existing DOM.
 export function StepperController({ externalContext }: StepperControllerProps) {
   const ref = useRef<HTMLSpanElement>(null);
 

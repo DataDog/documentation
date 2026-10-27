@@ -172,7 +172,7 @@ const PATH_MATCHERS: { id: string; isMatch: (p: string) => boolean }[] =
  *
  * Two tiers:
  *   1. `siteSupportId` from the page's frontmatter. An ID absent from the
- *      dataset throws, mirroring Hugo's `errorf`.
+ *      dataset throws.
  *   2. A `url_paths` glob match on the pathname.
  *
  * The locale prefix is stripped first, so `/fr/api/latest/on-call` matches the

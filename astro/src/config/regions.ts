@@ -148,7 +148,7 @@ export function isAllowedRegionKey(key: string | null | undefined): boolean {
   return BY_KEY.has(key);
 }
 
-/** Fallback region when nothing else resolves. Matches Hugo's default. */
+/** Fallback region when nothing else resolves. */
 export const DEFAULT_REGION_KEY = "us";
 
 /**

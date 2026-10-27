@@ -3,9 +3,8 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { CATEGORY_ORDER, type NormalizedHit } from "@lib/search/normalize";
 import SearchHit from "./SearchHit";
 import type { PopupRect } from "./hooks/usePopupPosition";
-// The same spark Hugo puts on its Ask AI row (and the one the widget's own
-// floating button carries), inlined as SVG so it takes the row's `currentColor`
-// instead of Hugo's filter-based recolor of an <img>.
+// The same spark the Ask AI widget's own floating button carries, inlined as
+// SVG so it takes the row's `currentColor`.
 //
 // This is a second copy of the path data in `@dd/ask-ai`'s `sparkAiIcon`, and
 // the two can drift. Importing that one instead would pull the package into
@@ -106,10 +105,9 @@ interface AskAiRowProps {
 }
 
 /**
- * The searchbar's entry point into Ask AI. Its label tracks the query, matching
- * `setAskAISuggestionContent` in Hugo's `searchbarHits.js`.
+ * The searchbar's entry point into Ask AI. Its label tracks the query.
  *
- * MISSING_TRANSLATION_LABEL: hardcoded English, as in Hugo. Localize once `shared/i18n` carries the
+ * MISSING_TRANSLATION_LABEL: hardcoded English. Localize once `shared/i18n` carries the
  * keys — they cannot be added from this side of the repo.
  */
 function AskAiRow({ query, selected, onAsk }: AskAiRowProps) {

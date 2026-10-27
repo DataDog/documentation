@@ -22,8 +22,7 @@ export interface SelectProps {
 }
 
 /**
- * A dropdown that opens a styled menu below its button, matching the Hugo
- * Bootstrap dropdown. Follows the WAI-ARIA listbox button pattern: a native
+ * A dropdown that opens a styled menu below its button. Follows the WAI-ARIA listbox button pattern: a native
  * <select> can't be used because its popup is drawn by the OS, which on macOS
  * opens over the current value and ignores CSS.
  */

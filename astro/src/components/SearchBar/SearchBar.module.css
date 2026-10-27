@@ -37,8 +37,8 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* Hide the browser-default clear button (Hugo strips it the same way in
-   `searchbar-with-dropdown.scss`) so the input behaves like a plain text box. */
+/* Hide the browser-default clear button so the input behaves like a plain
+   text box. */
 .search-bar__input::-webkit-search-decoration,
 .search-bar__input::-webkit-search-cancel-button,
 .search-bar__input::-webkit-search-results-button,
@@ -46,9 +46,8 @@
   display: none;
 }
 
-/* Submit button is positioned to the left of the input (matching Hugo's side
-   nav: `searchbar-sidenav.scss` uses `order: -1`) and styled as an icon-only
-   button. The inlined SVG inherits color from `currentColor`. */
+/* Submit button is positioned to the left of the input and styled as an
+   icon-only button. The inlined SVG inherits color from `currentColor`. */
 .search-bar__submit {
   display: inline-flex;
   align-items: center;
@@ -73,8 +72,7 @@
   padding-left: var(--hugo-mobile-nav-search-submit-padding-start);
 }
 
-/* Visual hint that `/` focuses the input. Ported from Hugo's
-   `.ais-SearchBox::after` (with the side-nav `right: 10px` override). */
+/* Visual hint that `/` focuses the input. */
 .search-bar__shortcut {
   position: absolute;
   right: var(--space-sm);
@@ -112,8 +110,8 @@
 
 /* `position: fixed` so the popup escapes the side nav's `overflow: auto` clip
    and isn't trapped inside an ancestor's stacking context. Coordinates are
-   computed from the input's bounding rect at runtime. Width matches Hugo's
-   `searchbar-sidenav.scss` (50vw, capped to keep the popup on screen). */
+   computed from the input's bounding rect at runtime. Width is 50vw, capped
+   to keep the popup on screen. */
 .search-bar__popup {
   position: fixed;
   margin-top: var(--space-2xs);
@@ -149,7 +147,7 @@
   box-shadow: none;
 }
 
-/* Match Hugo's mobile results: a narrow first column (subcategory) at a quarter
+/* Mobile results: a narrow first column (subcategory) at a quarter
    of the row, the rest for the title/snippet — vs. the wider side-nav column. */
 .search-bar__popup--mobile .search-hit__link {
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
@@ -164,8 +162,7 @@
   font-size: var(--font-size-sm);
 }
 
-/* A full-width row rather than a card: matches Hugo's Ask AI suggestion, which
-   sits above the results and stays visible even when there are none.
+/* A full-width row rather than a card. It sits above the results and stays visible even when there are none.
 
    Sized against Hugo's `.ask-docs-ai-link`: a 36px-tall row of 13px medium
    text. `min-height` carries that 36px rather than padding, since the token
@@ -266,8 +263,7 @@
   margin-bottom: 0;
 }
 
-/* Two-column row: subcategory on the left, title+snippet on the right.
-   Mirrors Hugo's `.ais-Hits-item` layout in the search popup. */
+/* Two-column row: subcategory on the left, title+snippet on the right. */
 .search-hit__link {
   display: grid;
   grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
@@ -319,8 +315,8 @@
   line-height: 1.5;
 }
 
-/* Hugo highlights query terms with a brand-tinted pill. Use the existing
-   brand tokens so the look adapts to dark mode. */
+/* Highlight query terms with a brand-tinted pill. Use the existing brand
+   tokens so the look adapts to dark mode. */
 .search-hit__snippet :global(mark),
 .search-hit__title :global(mark),
 .search-hit__section :global(mark) {

@@ -94,7 +94,7 @@ describe("viewsBuilder shape validation across full spec", () => {
 
 describe("endpoint URLs for per-region hosts", () => {
   // The on-call operations list one host per region in their `site` enum,
-  // and Hugo builds each region's URL from its own host.
+  // and each region's URL is built from its own host.
   it("uses each region's on-call host", async () => {
     const view = await getOperationView(
       "on-call-paging",

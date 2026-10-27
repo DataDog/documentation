@@ -81,7 +81,7 @@
   background: var(--color-bg-hover);
 }
 
-/* Like Hugo, the toggle hangs in the gutter left of the name instead of
+/* The toggle hangs in the gutter left of the name instead of
    pushing it, so every name at a depth starts at the same x whether or not
    its row has a toggle. `--schema-table-indent` is set per row. */
 .schema-table__cell-name {

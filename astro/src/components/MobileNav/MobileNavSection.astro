@@ -3,8 +3,7 @@
  * Renders one node of the documentation nav tree as part of the mobile
  * accordion. A node with children becomes a native `<details>` (zero-JS,
  * accessible, multiple-open) whose `<summary>` is the toggle; a leaf becomes a
- * plain link. Recurses into itself for arbitrary depth, mirroring Hugo's
- * `mobile-documentation.html`.
+ * plain link. Recurses into itself for arbitrary depth.
  */
 import type { DocsNavNode } from "@lib/componentUtils/docsNavMenu";
 import styles from "./MobileNav.module.css";
@@ -56,7 +55,7 @@ function resolveNavHref(href: string | null): string {
       </summary>
       <ul class={cl("mobile-nav__sublist")}>
         {/* A section that is itself a page stays reachable via its own link,
-            matching Hugo's "add parent url as a child nav item". */}
+            added as the first child item. */}
         {node.href && (
           <li>
             <a

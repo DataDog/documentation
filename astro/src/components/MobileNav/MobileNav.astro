@@ -1,6 +1,6 @@
 ---
 /**
- * Mobile navigation overlay, ported from Hugo's `mobile-documentation.html`:
+ * Mobile navigation overlay:
  * a quick-links row (Home / Docs / API with icons), a search box, and the full
  * documentation menu rendered as a `<details>` accordion, all sections collapsed
  * by default.
@@ -60,8 +60,7 @@ function navIconUrl(name: string): string {
 const cl = classListFactory(styles);
 
 // On `/api/` pages, swap the main docs accordion for the API category/operation
-// tree so the current API page is visible and navigable — mirroring Hugo's
-// mobile-documentation.html. The data is derived from the URL at build time
+// tree so the current API page is visible and navigable. The data is derived from the URL at build time
 // (the same builders the API pages use), so no props need to thread through the
 // global header.
 const pageLang = resolveLocale(Astro.currentLocale);
@@ -96,8 +95,7 @@ const isChangelogSection = isChangelogPath(unprefixedPath);
 // can never disagree.
 const tree = isApiContext ? [] : getDocsNavTree(pageLang);
 
-// Expand the section that owns the current page by default, matching Hugo's
-// mobile nav. Computed at build time from the page URL, so it stays correct as
+// Expand the section that owns the current page by default. Computed at build time from the page URL, so it stays correct as
 // the site grows beyond API docs (no per-page hardcoding).
 const activeSectionId = isApiContext
   ? null

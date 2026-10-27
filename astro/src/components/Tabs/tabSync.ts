@@ -27,7 +27,7 @@ export interface TabSync {
   /**
    * When a click elsewhere selects a key this group lacks, switch to the first
    * tab instead of staying put. API code examples use this to fall back to
-   * Curl, as Hugo does; content tabs leave it off so unrelated groups that
+   * Curl; content tabs leave it off so unrelated groups that
    * happen to share the group name do not reset on every click.
    */
   fallbackToFirstTab?: boolean;

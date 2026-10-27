@@ -117,8 +117,8 @@ function makeSnippet(
 ): string {
   const limit = 180;
   if (!highlightedContent) return "";
-  // Prefer a window around the first <mark> when present (matches Hugo's
-  // `truncateContentAtHighlight`); otherwise truncate from the start.
+  // Prefer a window around the first <mark> when present; otherwise
+  // truncate from the start.
   const markIdx = highlightedContent.indexOf("<mark>");
   if (markIdx === -1) {
     return truncate(highlightedContent, limit);

@@ -38,9 +38,8 @@
   fill: currentColor;
 }
 
-/* Below Hugo's `sm` breakpoint (576px), stack the label above the dropdown —
-   matching Hugo's `.language-region-select-container` (`display: block` at
-   `media-breakpoint-down(sm)`). This keeps the language + site selectors
+/* Below the `sm` breakpoint (576px), stack the label above the dropdown. This
+   keeps the language + site selectors
    narrow enough to sit side by side instead of overflowing the viewport. */
 @media (max-width: 575.98px) {
   .region-selector {

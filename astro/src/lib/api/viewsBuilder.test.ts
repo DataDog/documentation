@@ -168,7 +168,7 @@ describe("viewsBuilder x-displayName labels", () => {
 });
 
 describe("viewsBuilder code example titles", () => {
-  // Hugo titles an example with the operation summary when it has no
+  // An example is titled with the operation summary when it has no
   // CodeExamples.json description (or, for curl, no request file).
   it("falls back to the summary for untitled SDK and curl examples", async () => {
     const view = await getOperationView(

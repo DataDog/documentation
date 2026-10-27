@@ -53,7 +53,7 @@ describe("Header", () => {
     // Every logo <img> must carry a 1x/2x srcset so retina displays render a
     // crisp logo instead of upscaling the 1x PNG. (The mobile-nav quicknav
     // icons are excluded: they ship as native 42×42 PNGs rendered at 21×21, so
-    // they are already retina-crisp without a srcset, matching Hugo.)
+    // they are already retina-crisp without a srcset.)
     const logoImgTags = (html.match(/<img[^>]*>/g) ?? []).filter((img) =>
       /class="[^"]*logo/.test(img),
     );

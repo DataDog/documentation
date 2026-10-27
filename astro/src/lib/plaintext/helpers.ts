@@ -93,7 +93,7 @@ export function tag(
  * resulting document. Use this for free-form markdown content (descriptions,
  * etc.) where the structure isn't known up front.
  *
- * Bare URLs become links, as in Hugo's `.md`, so `buildPlaintextPage` can
+ * Bare URLs become links, so `buildPlaintextPage` can
  * point the docs ones at their `.md` pages.
  */
 export function nodesFromMd(md: string): MarkdocNode[] {

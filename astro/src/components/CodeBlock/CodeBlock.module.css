@@ -7,7 +7,7 @@
   position: relative;
 }
 
-/* ── Header (matches Hugo filename header bar) ── */
+/* ── Header (filename bar) ── */
 
 .code-block__header {
   display: flex;
@@ -93,7 +93,7 @@
   justify-content: center;
 }
 
-/* ── Chevron (pure CSS border-triangle, matching Hugo) ── */
+/* ── Chevron (pure CSS border-triangle) ── */
 
 .code-block__chevron {
   display: inline-block;
@@ -129,7 +129,7 @@
   white-space: normal !important;
 }
 
-/* ── Pre / code (matches Hugo pre styling) ── */
+/* ── Pre / code ── */
 
 .code-block__pre {
   margin: 0;

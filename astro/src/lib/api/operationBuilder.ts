@@ -85,8 +85,8 @@ export function extractPermissions(
 
 /**
  * Whether a caller needs `any` or `all` of an operation's permissions. Only
- * meaningful with more than one permission. Hugo treats every operator other
- * than `OR` as `all`.
+ * meaningful with more than one permission. Every operator other than `OR`
+ * counts as `all`.
  */
 export function extractPermissionsMatch(
   operation: OperationWithExtensions,
@@ -152,7 +152,7 @@ function isJsonMediaType(mediaType: string): boolean {
 
 /**
  * The operation's request body object and the media type its examples use.
- * Hugo renders a body whatever its content type. Prefer JSON, then fall back
+ * A body is rendered whatever its content type. Prefer JSON, then fall back
  * to the first declared type (e.g. `text/json`, `multipart/form-data`).
  */
 function resolveRequestBodyContent(
@@ -363,9 +363,8 @@ function curlBody(requestBodyJson: string | undefined): CurlBody {
 }
 
 /**
- * One curl per inline spec example, in key order, as Hugo ranges over the
- * examples map. With several, each is headed by its summary (or id) and its
- * description lines, as on prod. A lone example gets no heading, since that
+ * One curl per inline spec example, in key order. With several, each is
+ * headed by its summary (or id) and its description lines, as on prod. A lone example gets no heading, since that
  * would add prod's `## default` line to most operations (K21).
  */
 function specExampleCurlBodies(
@@ -392,7 +391,7 @@ function specExampleCurlBodies(
   }));
 }
 
-/** Hugo's `## <summary or id>`, then a `# <line>` per description line. */
+/** A `## <summary or id>` line, then a `# <line>` per description line. */
 function exampleCommentLines(
   exampleId: string,
   example: OpenAPIV3.ExampleObject,
@@ -416,7 +415,7 @@ function fallbackRequestExampleJson(
 }
 
 /**
- * The description of a (possibly `$ref`'d) schema. Hugo shows it above the
+ * The description of a (possibly `$ref`'d) schema, shown above the
  * response's Model table.
  */
 function resolveSchemaDescription(
@@ -544,7 +543,7 @@ export function extractResponses(
       ];
     }
 
-    // Like Hugo, an empty object still gets a Model tab, which says there's
+    // An empty object still gets a Model tab, which says there's
     // no response body.
     const emptyBody = schema?.length === 0 && isEmptyObject(generated);
 
@@ -831,7 +830,7 @@ function toCurlParams(
       name: p.name,
       example: example !== undefined ? String(example) : undefined,
       explodedItemCount,
-      // Hugo's curl also treats `x-docs-curl-required` as required.
+      // `x-docs-curl-required` also counts as required.
       required:
         p.required === true ||
         (p as { "x-docs-curl-required"?: boolean })["x-docs-curl-required"] ===

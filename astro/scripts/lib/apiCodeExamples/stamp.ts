@@ -66,13 +66,11 @@ export async function readStampIfAny(
 
 /**
  * SDK client name → release version, for `{% $sdkVersions.<client> %}` in
- * content (Hugo's `{{< sdk-version "<client>" >}}`). Empty when no tree is
- * staged.
+ * content. Empty when no tree is staged.
  *
  * The stamp records git refs, whose tag conventions differ by repo (`v2.67.0`,
  * `datadog-api-client-2.62.0`, `2.62.0`). Stripping everything before the
- * first digit is the same rule as Hugo's shortcode
- * (`hugo/layouts/shortcodes/sdk-version.html`).
+ * first digit normalizes all three to a bare version.
  */
 export function sdkVersionsFromStamp(
   stamp: StageStamp | null,

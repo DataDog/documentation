@@ -28,8 +28,8 @@ const MenuEntrySchema = z.object({
   url: z.string().optional(),
   parent: z.string().optional(),
   weight: z.number().optional(),
-  // `pre` (an icon name) exists on some entries but Hugo's mobile nav doesn't
-  // render it, so we accept and ignore it.
+  // `pre` (an icon name) exists on some entries but the nav doesn't render
+  // it, so we accept and ignore it.
   pre: z.string().optional(),
 });
 
@@ -107,7 +107,7 @@ function buildTree(entries: MenuEntry[], lang: Locale): DocsNavNode[] {
     return {
       identifier: entry.identifier ?? `${entry.name}-${index}`,
       label: entry.name,
-      // Childless, link-less items mirror Hugo's fallback to the docs home.
+      // Childless, link-less items fall back to the docs home.
       href:
         resolveUrl(entry.url, lang) ??
         (children.length ? null : `${localePrefix(lang)}/`),
@@ -168,7 +168,7 @@ function bestMatchLength(node: DocsNavNode, pathname: string): number {
 /**
  * Identifier of the top-level section that owns the current page, or `null` if
  * no section's subtree contains a nav item matching `pathname`. Used to expand
- * the active section by default (mirroring Hugo's mobile nav). Matching is by
+ * the active section by default. Matching is by
  * longest path-prefix, so the most specific link wins and the page is
  * attributed to that link's top-level ancestor.
  */

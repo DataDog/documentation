@@ -3,8 +3,7 @@
  * `assets/scripts/config/config-docs.js`. The Astro site reads from the same
  * cluster so docs/api/partners search results stay in sync with the Hugo site.
  *
- * The public_key here is read-only and safe to ship to the browser — same
- * convention Hugo uses.
+ * The public_key here is read-only and safe to ship to the browser.
  */
 
 export interface TypesenseEnv {

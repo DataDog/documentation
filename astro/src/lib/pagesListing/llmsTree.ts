@@ -4,8 +4,8 @@ import type { LlmsIndex, PlaintextPage, PlaintextSection } from "./types";
 import { absoluteUrl } from "../site/siteUrl";
 
 /**
- * Firm ceiling on any single generated llms.txt file's length, mirroring
- * Hugo's `html-to-mdoc` default. A section detail file that exceeds this is
+ * Firm ceiling on any single generated llms.txt file's length, matching the
+ * `html-to-mdoc` default. A section detail file that exceeds this is
  * split into numbered `part_N` files.
  */
 export const DEFAULT_HARD_CHAR_LIMIT = 50_000;

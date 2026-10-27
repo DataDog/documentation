@@ -797,7 +797,7 @@ function withRelabeledCaptions(
 
 /**
  * Titles untitled examples (no CodeExamples.json entry) with the operation
- * summary, as Hugo does.
+ * summary.
  */
 function withSummaryFallbackCaptions(
   set: CodeExampleSet,

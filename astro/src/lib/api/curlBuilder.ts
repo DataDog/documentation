@@ -128,7 +128,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   const curlParts: string[] = [];
   curlParts.push(`${curlPipePrefix}curl -X ${method.toUpperCase()} "${url}"`);
 
-  // Accept, Content-Type, header parameters, then auth, in Hugo's order
+  // Accept, Content-Type, header parameters, then auth
   if (!hasNoContentResponse) {
     curlParts.push(`-H "Accept: application/json"`);
   }
@@ -194,7 +194,7 @@ function buildOtherHostsLine(
 }
 
 /**
- * Hugo's compressed body: a heredoc piped through gzip or zlib, and the text
+ * The compressed body: a heredoc piped through gzip or zlib, and the text
  * before `curl` on the line that closes it. Prod's gzip shape leaves `$(...)`
  * unquoted, so bash word-splits and globs the body; it's kept as on prod.
  */
@@ -235,14 +235,14 @@ function buildHeaderParamFlags(
   });
 }
 
-/** Hugo's `-F <name>=<type>`, with `@` when curl should read a file. */
+/** `-F <name>=<type>`, with `@` when curl should read a file. */
 function formFieldFlag(field: CurlFormField): string {
   return `-F ${field.name}=${field.binary ? "@" : ""}${field.type}`;
 }
 
 /**
- * Export each path parameter and each required query parameter, as Hugo
- * does, so the `${name}` references in the URL are set. Each exports its
+ * Export each path parameter and each required query parameter, so the
+ * `${name}` references in the URL are set. Each exports its
  * example, or `"CHANGE_ME"`.
  */
 function buildParameterExportLines(
@@ -278,7 +278,7 @@ function shellVariableName(name: string): string {
 
 /**
  * An exploded array exports one placeholder per item, named and set to
- * `<name>_<index>`, as Hugo does.
+ * `<name>_<index>`.
  */
 function exportQueryParam(param: CurlParam): string[] {
   if (param.explodedItemCount === undefined) return [exportParam(param)];
@@ -296,7 +296,7 @@ function explodedItemNames(param: CurlParam): string[] {
 
 /**
  * Replace `{param_name}` placeholders in the path with `${param_name}` shell
- * variables, as Hugo does. The values are exported above the command.
+ * variables. The values are exported above the command.
  */
 function interpolatePath(path: string, pathParams?: CurlParam[]): string {
   if (!pathParams || pathParams.length === 0) return path;
@@ -313,7 +313,7 @@ function interpolatePath(path: string, pathParams?: CurlParam[]): string {
 
 /**
  * Build the query string portion of the URL: each required query parameter
- * as a `${name}` reference (one per item for an exploded array), as Hugo does, then any auth query parts. Optional
+ * as a `${name}` reference (one per item for an exploded array), then any auth query parts. Optional
  * parameters are left out, even with an example, since a copied filter would
  * narrow the results.
  */

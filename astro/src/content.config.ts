@@ -23,7 +23,7 @@ const en = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    // Social-share image, as a path under `images/` (Hugo's `meta_image`).
+    // Social-share image, as a path under `images/`.
     meta_image: z.string().optional(),
     type: z.enum(["static", "interactive"]).optional(),
     // cdocs (filterable product docs) fields:

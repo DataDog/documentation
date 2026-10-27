@@ -41,22 +41,22 @@ const MAX_REQUEST_EXAMPLES = 3;
 export interface RequestFileExamples {
   examples: Array<{ name: string; value: string }>;
   /**
-   * Hugo titles the examples when the operation has more than one
-   * CodeExamples.json entry, counting every entry, not only those with a file.
+   * True when the operation has more than one CodeExamples.json entry,
+   * counting every entry, not only those with a file.
    */
   showTitles: boolean;
   /**
    * The examples are `request.<operationId>.json`, used when no CodeExamples
-   * entry has a file. Hugo titles its curl with the operation summary.
+   * entry has a file. The curl is then titled with the operation summary.
    */
   isFallbackFile: boolean;
 }
 
 /**
  * The operation's request files, each named by its CodeExamples.json
- * description. As in Hugo, only the first 3 entries are read, and an entry
- * without a file is skipped rather than replaced by a later one. When none of
- * them has a file, Hugo shows `request.<operationId>.json`, untitled.
+ * description. Only the first 3 entries are read, and an entry without a
+ * file is skipped rather than replaced by a later one. When none of them has
+ * a file, `request.<operationId>.json` is shown, untitled.
  *
  * Hugo's fallback check compares the missing files among the first 3 entries
  * with the count of all entries, so an operation with more than 3 entries and

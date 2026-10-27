@@ -27,9 +27,8 @@ interface Props {
   svgs: LogoDownloadPanelSvgs;
 }
 
-// Hidden popover that appears when the Datadog logo is clicked. Mirrors Hugo's
-// `.js-logo-download` click behavior: first click opens the panel and cancels
-// navigation; a second click (panel already open) lets the anchor navigate;
+// Hidden popover that appears when the Datadog logo is clicked. The first
+// click opens the panel and cancels navigation; a second click (panel already open) lets the anchor navigate;
 // clicks outside the trigger and panel close it.
 export function LogoDownloadPanel({ externalContext, labels, svgs }: Props) {
   const [open, setOpen] = useState(false);

@@ -75,7 +75,7 @@ describe("getCodeExamplesForOperation", () => {
 
 /**
  * Suffixes in CodeExamples.json already start with an underscore
- * (`_1716720881`), and Hugo appends them to the operationId as they are.
+ * (`_1716720881`), and are appended to the operationId as they are.
  */
 describe("getCodeExamplesForOperation with suffixed examples", () => {
   const examples = getCodeExamplesForOperation(

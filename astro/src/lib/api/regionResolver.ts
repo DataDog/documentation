@@ -89,7 +89,7 @@ export function getRegions(
   if (matchedRegions.length > 0) return matchedRegions;
 
   // Pass 2: fully-qualified per-region hosts. Guarded so it runs only when
-  // pass 1 found nothing, matching Hugo's `if eq (len regions) 0`.
+  // pass 1 found nothing.
   //
   // This iterates regions and tests membership rather than building a
   // host-to-region map. A map would be lossy: `navy.oncall.datadoghq.com` is
@@ -106,8 +106,8 @@ export function getRegions(
  * operation whose `site` enum holds per-region hosts (pass 2 of
  * `getRegions`). Empty when the enum holds bare site domains.
  *
- * As in Hugo, the enum is walked in order and a later match for a region
- * replaces an earlier one.
+ * The enum is walked in order, and a later match for a region replaces an
+ * earlier one.
  */
 export function getRegionHosts(
   spec: Pick<OpenAPIV3.Document, "servers">,

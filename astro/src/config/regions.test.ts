@@ -94,7 +94,7 @@ describe("config/regions", () => {
   });
 
   it("defaults to a region that exists", () => {
-    expect(DEFAULT_REGION_KEY).toBe("us"); // matches Hugo
+    expect(DEFAULT_REGION_KEY).toBe("us");
     expect(isAllowedRegionKey(DEFAULT_REGION_KEY)).toBe(true);
   });
 });

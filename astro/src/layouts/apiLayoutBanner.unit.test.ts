@@ -54,7 +54,7 @@ describe("ApiLayout site-support banner", () => {
     expect(bannerIndex).toBeGreaterThan(-1);
     expect(proseIndex).toBeGreaterThan(-1);
     // The order in the markup is what keeps the banner inside the content
-    // column, below the breadcrumb, matching Hugo.
+    // column, below the breadcrumb.
     expect(bannerIndex).toBeGreaterThan(toolbarIndex);
     expect(bannerIndex).toBeLessThan(proseIndex);
   });

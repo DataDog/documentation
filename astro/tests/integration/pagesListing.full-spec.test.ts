@@ -2,7 +2,7 @@
  * Coverage validation against the full live spec.
  *
  * Unlike the frozen-fixture unit tests, this builds pages.json from the real
- * pageSources against the actual Hugo API data (this file is picked up by
+ * pageSources against the live API spec (this file is picked up by
  * vitest.integration.config.ts, which omits the frozen-fixture plugin). It
  * confirms every category and operation the live spec exports is represented.
  */

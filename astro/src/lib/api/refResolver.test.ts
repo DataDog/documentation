@@ -143,7 +143,7 @@ describe("schemaToFields", () => {
 
   it("resolves $ref discriminant properties, as the live spec uses", () => {
     // The real spec never inlines the discriminant enum — it points at a
-    // dedicated `*DefinitionType` schema. Hugo sees these pre-dereferenced.
+    // dedicated `*DefinitionType` schema.
     const spec = {
       components: {
         schemas: {
@@ -206,7 +206,7 @@ describe("schemaToFields", () => {
     const option = fields[0].unionOptions?.[0];
     expect(option?.label).toBe("Object 1");
     expect(option?.label).not.toBe("AWSIntegration");
-    // Ref name is preserved via the variant's description, as in Hugo.
+    // Ref name is preserved via the variant's description.
     expect(option?.description).toBe(
       "The definition of `AWSIntegration` object.",
     );

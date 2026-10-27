@@ -74,7 +74,6 @@ export function setActiveRegion(key: string): void {
 /**
  * If the user navigated here from a Datadog app subdomain (e.g. app.datadoghq.eu),
  * set the region to match so docs links back to the app stay on the same site.
- * Mirrors the behavior of Hugo's `region-redirects.js`.
  */
 export function syncRegionFromReferrer(): boolean {
   if (typeof document === "undefined" || !document.referrer) return false;

@@ -54,7 +54,7 @@ export function operationMetaDescription(operation: {
 
 /**
  * The version tab label (and `.md` heading) for one variant of an operation.
- * The first variant is the latest, unless it's deprecated, which Hugo labels
+ * The first variant is the latest, unless it's deprecated, which is labeled
  * instead.
  */
 export function variantLabel(

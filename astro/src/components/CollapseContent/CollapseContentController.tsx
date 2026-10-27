@@ -12,7 +12,7 @@ interface CollapseContentControllerProps {
 // details/summary markup; this component never receives its content. It loads
 // the root <details> by id, then progressively enhances the native disclosure:
 // it keeps aria-expanded in sync with the open state and supports deep-linking
-// to a section by its id (mirroring Hugo's accordion-auto-open.js). The
+// to a section by its id. The
 // open/close toggle itself stays native — no JS needed for the core behavior.
 export function CollapseContentController({
   externalContext,
