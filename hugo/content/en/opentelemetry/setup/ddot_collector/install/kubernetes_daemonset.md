@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector as a Kubernetes DaemonSet
+title: Set Up OTel in the Agent as a Kubernetes DaemonSet
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
 - "/opentelemetry/setup/ddot_collector/install/kubernetes"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector as a Kubernetes DaemonSet using Helm or the Datadog Operator.
+Follow this guide to deploy the Datadog Agent with OTel in the Agent as a Kubernetes DaemonSet, using Helm or the Datadog Operator. OTel in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. To run the DDOT Collector without the Agent, see [Install the DDOT Collector on Kubernetes][59].
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -977,3 +977,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
 [58]: /opentelemetry/config/hostname_tagging/#ddot-collector-exporting-directly-to-datadog
+[59]: /opentelemetry/setup/ddot_collector/kubernetes/

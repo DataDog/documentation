@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector on ECS Fargate
+title: Set Up OTel in the Agent on ECS Fargate
 code_lang: ecs_fargate
 type: multi-code-lang
 code_lang_weight: 6
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector alongside the Datadog Agent on Amazon ECS Fargate. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
+Follow this guide to deploy the Datadog Agent with OTel in the Agent on Amazon ECS Fargate. OTel in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.

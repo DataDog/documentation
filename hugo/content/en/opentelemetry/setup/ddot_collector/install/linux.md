@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector on Linux
+title: Set Up OTel in the Agent on Linux
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 4
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector on Linux-based bare-metal hosts and virtual machines.
+Follow this guide to install the Datadog Agent with OTel in the Agent on Linux-based bare-metal hosts and virtual machines. OTel in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Requirements
 
