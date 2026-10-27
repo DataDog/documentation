@@ -1833,6 +1833,19 @@ menu:
         unstable:
           - v2
         order: 23
+    - name: Update a tag indexing rule exemption
+      url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
+      identifier: metrics-update-a-tag-indexing-rule-exemption
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagIndexingRuleExemption
+        unstable:
+          - v2
+        order: 26
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
       identifier: metrics-create-a-tag-indexing-rule-exemption
@@ -1871,7 +1884,7 @@ menu:
           - DeleteTagIndexingRuleExemption
         unstable:
           - v2
-        order: 26
+        order: 35
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
       identifier: metrics-get-tag-key-cardinality-details
