@@ -1,11 +1,11 @@
 ---
-title: Statistical nitty gritty
+title: Statistical Nitty-Gritty
 description: How Datadog estimates absolute and relative lift and calculates fixed-sample, sequential, and Bayesian intervals.
 ---
 
 {{< jqmath-vanilla >}}
 
-Datadog Experimentation estimates how a treatment changes a metric compared with a control. The result includes a point estimate of the effect and an interval describing its uncertainty.
+Datadog Experiments estimates how a treatment changes a metric compared with a control. The result includes a point estimate of the effect and an interval describing its uncertainty.
 
 Fixed-sample, sequential, and Bayesian analysis start with the same observed effect and estimated sampling variance. Fixed-sample and sequential analysis report the observed effect as the point estimate. Bayesian analysis combines this evidence with a prior and reports the posterior mean.
 
@@ -247,6 +247,6 @@ Ratio calculations require a denominator sufficiently far from zero. Datadog fla
 
 $$\text\"SE\"(m\_C)/|m\_C|>0.1$$
 
-For ratio metrics, checks also apply to the within-group denominators. A zero denominator prevents the corresponding ratio calculation. Zero numerator variance can also prevent estimation in the current calculation pipeline.
+For ratio metrics, checks also apply to the within-group denominators. A zero denominator prevents the corresponding ratio calculation. Zero numerator variance can also prevent estimation.
 
 A narrow interval is only informative when the experiment design, data, and statistical approximations are appropriate. Neither a different interval method nor a prior resolves a denominator that is too close to zero for a reliable relative-lift approximation.
