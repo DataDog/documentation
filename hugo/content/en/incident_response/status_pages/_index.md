@@ -307,7 +307,7 @@ For **internal** status pages, the subscription process is the same, but users m
 
 Two settings control email subscriptions:
 
-- **Notify subscribers**: Sends an email to all subscribers when new updates are published. When disabled, notices still go to other subscription types, such as Slack.
+- **Notify subscribers**: Sends an email to all subscribers when new updates are published. When disabled, notices still go to other subscription types, such as Slack and Microsoft Teams.
 - **Show subscribe option to visitors**: Adds a **Subscribe** option to the published page.
 
 1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
@@ -397,15 +397,16 @@ Visitors can subscribe a Microsoft Teams channel to status page updates through 
 
 {{< img src="incident_response/status_pages/status_pages_enable_microsoft_teams.png" alt="Status page settings showing the Enable Microsoft Teams subscriptions toggle" style="width:80%;" >}}
 
-Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type.
+Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type. Turn off **Enable Microsoft Teams subscriptions** to remove the **Microsoft Teams** tab and stop sending Microsoft Teams notifications.
 
 ### Subscribe in Microsoft Teams
 
 Microsoft Teams subscriptions use a workflow webhook URL from the channel that receives updates. Create the URL in Microsoft Teams first:
 
 1. In Microsoft Teams, open the channel that should receive updates.
-1. Click the **More options** (`...`) menu for the channel, select **Workflows**, and search for the **Send webhook alerts to a channel** template.
-1. Follow the prompts to create the workflow, then copy the webhook URL.
+1. Click the **More options** (`...`) menu for the channel, select **Workflows**, and search for the **Send webhook alerts to** template, which is named after the channel (for example, **Send webhook alerts to devops**).
+1. Select the team and the channel, follow the prompts to create the workflow, then copy the webhook URL.
+   {{< img src="incident_response/status_pages/status_pages_microsoft_teams_workflow_config.png" alt="Microsoft Teams Send webhook alerts workflow configuration with the team and channel fields" style="width:80%;" >}}
 
 Then, from a published page with Microsoft Teams subscriptions enabled:
 
@@ -418,8 +419,9 @@ Then, from a published page with Microsoft Teams subscriptions enabled:
 
 1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
 1. Click **Subscribe**.
-
    {{< img src="incident_response/status_pages/status_pages_microsoft_teams_subscription_modal.png" alt="Subscribe To Updates modal with the Microsoft Teams tab selected, a Microsoft Teams URL field, and a Subscribe button" style="width:70%;" >}}
+
+After subscribing, a confirmation message appears.
 
 The URL must use HTTPS and be a Power Automate workflow URL, with a host that ends in `.logic.azure.com` or `.environment.api.powerplatform.com`. The **Subscribe** button stays disabled until the URL is valid. A URL can be subscribed to a page only once. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
 
@@ -427,11 +429,13 @@ The URL must use HTTPS and be a Power Automate workflow URL, with a host that en
 
 Each Microsoft Teams notification is an Adaptive Card that includes:
 
-- The notice title, linked to the notice on your status page, and the type of event: **New Degradation**, **Degradation Updated**, **Scheduled Maintenance**, **Maintenance Schedule Changed**, **Maintenance Canceled**, or **Maintenance Updated**.
-- The message of the update.
+- The page name, and the notice title linked to the notice on your status page, followed by the type of event: **New Degradation**, **Degradation Updated**, **Scheduled Maintenance**, **Maintenance Schedule Changed**, **Maintenance Canceled**, or **Maintenance Updated**.
+- The message of the update, if there is one.
 - The **Status** of the notice. For maintenance windows, the card also shows the **Start** and **End** times, and the previous times when a window is rescheduled.
-- The impacted components. Long lists of components are shortened with a **+N more** row.
+- A **Components Impacted** list. Each component shows its status, except in scheduled maintenance notifications, which list component names only. Long lists are shortened with a **+N more** row.
 - **Manage subscription** and **Unsubscribe** buttons.
+
+Only **Active** subscriptions receive notifications.
 
 ### Manage subscriptions
 
@@ -439,7 +443,7 @@ Subscribers can change the components they follow or unsubscribe at any time wit
 
 Status page owners can review subscribers in the status page settings. For a published page, the **Microsoft Teams Subscribers** list shows the URL, components, subscription date, and status of each subscription, and can be filtered by status. Hover over a truncated URL to see the full value. To remove subscribers, select one or more rows and click **Unsubscribe**.
 
-A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, subscribe a new workflow URL.
+A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, remove the subscription from the list, then subscribe again with a working URL.
 
 ## Set a custom domain
 
