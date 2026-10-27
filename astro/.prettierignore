@@ -17,9 +17,9 @@ playwright-report/
 # Hand-authored prose. Prettier's markdown rules are cosmetic here (it rewrites
 # `*emphasis*` to `_emphasis_` and renormalizes lists and tables), and applying
 # them churns documents people edit by hand for no readability gain.
-plans/
 docs/
 CLAUDE.md
+AGENTS.md
 
 # Frozen test inputs, seeded from the live Hugo API spec and trimmed by hand.
 # Keeping Prettier off them means a fixture still diffs cleanly against the

@@ -20,7 +20,7 @@ Read [docs/api/reference/pipeline.md](../reference/pipeline.md) first to underst
 
 - Translation overlays are keyed by tag slug and operation ID and mirror the Hugo JSON format. Missing files and missing keys fall through to English by design — do not add warnings or errors for translation gaps. Coverage is owned upstream. See [translationsLoader.ts](../../../src/lib/api/translationsLoader.ts).
 
-- New display text sourced from the spec is routed through the translation overlay where an equivalent Hugo key exists, following the project's i18n fallback order. Do not add keys to the Hugo side; hardcode English with a `TODO` if no key exists yet (see [the root CLAUDE.md](../../../CLAUDE.md)).
+- New display text sourced from the spec is routed through the translation overlay where an equivalent Hugo key exists, following the project's i18n fallback order. Do not add keys to the Hugo side; hardcode English with a `MISSING_TRANSLATION_LABEL` comment if no key exists yet (see [AGENTS.md](../../../AGENTS.md)).
 
 ### Memoization correctness
 
