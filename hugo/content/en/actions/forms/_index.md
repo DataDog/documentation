@@ -136,7 +136,11 @@ To share a form in Slack:
 1. Search for the form by name, then select it.
 1. Click {{< ui >}}Send to Channel{{< /ui >}}.
 
+You can also paste a form link, such as `https://app.datadoghq.com/forms/<FORM_ID>`, in a channel that includes the Datadog app. Datadog unfurls the link into a form card.
+
 Datadog posts a card with the form's title and description. Respondents click {{< ui >}}Fill Out{{< /ui >}} to complete the form in a Slack modal, or {{< ui >}}Open in Datadog{{< /ui >}} to complete it in the browser.
+
+{{< img src="/actions/forms/slack_form_link.png" alt="A form link unfurled in Slack, showing the form title, response type, and the Fill Out and Open in Datadog buttons" style="width:90%;" >}}
 
 **Note**: Sharing a form is not supported in direct messages.
 
