@@ -29,7 +29,7 @@ Use Status Pages to:
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
 * Announce scheduled maintenance and planned downtime in advance
-* Reduce inbound support volume with proactive email and Slack notifications
+* Reduce inbound support volume with proactive email, Slack, and Microsoft Teams notifications
 
 ## Configure permissions
 
@@ -82,7 +82,7 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email and Slack subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions), [Slack](#slack-subscriptions), or [Microsoft Teams](#microsoft-teams-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
@@ -384,6 +384,53 @@ After subscribing, the selected channel receives a welcome message confirming th
 Subscribers can change the components they follow or unsubscribe at any time from the **Manage Preferences** link in any Slack notification.
 
 Status page owners can review subscribers in the status page settings, which lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page.
+
+## Microsoft Teams subscriptions
+
+Visitors can subscribe a Microsoft Teams channel to status page updates through a Teams workflow. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, Datadog posts an Adaptive Card to each subscribed channel for the components it follows. Microsoft Teams subscriptions are configured independently of [email](#email-subscriptions) and [Slack](#slack-subscriptions) subscriptions.
+
+### Enable Microsoft Teams subscriptions
+
+1. From your status page, click **Settings**, then select **MS Teams** under **Subscriptions**.
+1. Turn on the **Enable MS Teams subscriptions** toggle.
+1. Click **Save**.
+
+Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type.
+
+### Subscribe in Microsoft Teams
+
+Microsoft Teams subscriptions use a workflow webhook URL from the channel that receives updates. Create the URL in Microsoft Teams first:
+
+1. In Microsoft Teams, open the channel that should receive updates.
+1. Click the **More options** (`...`) menu for the channel, select **Workflows**, and search for the **Send webhook alerts to a channel** template.
+1. Follow the prompts to create the workflow, then copy the webhook URL.
+
+Then, from a published page with Microsoft Teams subscriptions enabled:
+
+1. Click **Subscribe** and open the **MS Teams** tab.
+1. In **MS Teams URL**, paste the workflow webhook URL.
+1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
+1. Click **Subscribe**.
+
+The URL must use HTTPS and be a Power Automate workflow URL, with a host that ends in `.logic.azure.com` or `.environment.api.powerplatform.com`. The **Subscribe** button stays disabled until the URL is valid. A URL can be subscribed to a page only once. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
+
+### Notifications
+
+Each Microsoft Teams notification is an Adaptive Card that includes:
+
+- The notice title, linked to the notice on your status page, and the type of event: **New Degradation**, **Degradation Updated**, **Scheduled Maintenance**, **Maintenance Schedule Changed**, **Maintenance Canceled**, or **Maintenance Updated**.
+- The message of the update.
+- The **Status** of the notice. For maintenance windows, the card also shows the **Start** and **End** times, and the previous times when a window is rescheduled.
+- The impacted components. Long lists of components are shortened with a **+N more** row.
+- **Manage subscription** and **Unsubscribe** buttons.
+
+### Manage subscriptions
+
+Subscribers can change the components they follow or unsubscribe at any time with the **Manage subscription** and **Unsubscribe** buttons in any notification.
+
+Status page owners can review subscribers in the status page settings. For a published page, the **MS Teams Subscribers** list shows the URL, components, subscription date, and status of each subscription, and can be filtered by status. Hover over a truncated URL to see the full value.
+
+A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, subscribe a new workflow URL.
 
 ## Set a custom domain
 
