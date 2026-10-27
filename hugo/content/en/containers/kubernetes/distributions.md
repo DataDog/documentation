@@ -550,8 +550,48 @@ spec:
 
 **Note**: The `nodeAgent.securityContext.seLinuxOptions` override is necessary for log collection when deploying with the Operator. If log collection is not enabled, you can omit this override.
 
+#### Simplified configuration
+
+Starting with Datadog Operator `1.31.0+`, the Operator detects OpenShift from the node's `node.openshift.io/os_id` label and applies the platform configuration itself: the `datadog-agent-scc` ServiceAccount (when it is authorized to use the `privileged` SCC), SELinux type `spc_t`, the `master` and `infra` tolerations, and `kubelet.tlsVerify: false`. It also enables [Control Plane monitoring][4].
+
+Detection needs no annotation. The manifest below is equivalent to the one above on v1.31.0 and later:
+
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+  namespace: openshift-operators # set as the same namespace where the Datadog Operator was deployed
+spec:
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+    apm:
+      enabled: true
+      hostPortConfig:
+        enabled: true
+      unixDomainSocketConfig:
+        enabled: false
+    dogstatsd:
+      unixDomainSocketConfig:
+        enabled: false
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+  override:
+    nodeAgent:
+      hostNetwork: true
+```
+
+Keep `hostNetwork: true` only if you want the Agent to reach cloud provider metadata services. If detection does not resolve, for example because the Operator pod runs on a node without the OpenShift label, set the provider explicitly with the `agent.datadoghq.com/cluster-provider: openshift-rhcos` annotation on the `DatadogAgent`. Use the full configuration above to override any of these values. For the complete provider behavior, see the [providers documentation][3].
+
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 [2]: https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#role-based-access-to-ssc_configuring-internal-oauth
+[3]: /containers/datadog_operator/providers
+[4]: /containers/kubernetes/control_plane/?tab=datadogoperator#OpenShift4
 {{% /tab %}}
 {{% tab "Helm" %}}
 
