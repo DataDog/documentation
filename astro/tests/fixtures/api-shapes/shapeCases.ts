@@ -1,3 +1,18 @@
+/**
+ * The cases for the shape snapshot test (`tests/headless/api-shape-snapshots.test.ts`).
+ *
+ * Each case names a rendering class from `shapeClasses.ts`, a small operation in
+ * the frozen fixture that shows that class, and the part of the page to
+ * snapshot. Most operations are trimmed copies of live ones under the fixture's
+ * `Rendering Shapes` tag. The test renders each operation page, cuts out the
+ * fragment, and compares it to a stored HTML and plaintext snapshot.
+ *
+ * To cover a new class, add its operation to the fixture and a case here, then
+ * run `yarn test:headless -u` and review the new snapshot. The full-spec
+ * coverage check (`tests/integration/specShapes.full-spec.test.ts`) warns
+ * when a class has no case.
+ */
+
 import type { FragmentSelector } from "../../lib/apiFragment";
 import type { ShapeClassId } from "./shapeClasses";
 
