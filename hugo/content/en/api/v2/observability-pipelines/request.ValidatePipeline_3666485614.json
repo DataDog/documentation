@@ -1,0 +1,47 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "spike-protection-processor",
+                "include": "*",
+                "type": "spike_protection",
+                "name": "MySpikeProtection",
+                "spike_action": "drop",
+                "spike_threshold": 5,
+                "minimal_threshold": 107374182400
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Pipeline with Spike Protection"
+    },
+    "type": "pipelines"
+  }
+}

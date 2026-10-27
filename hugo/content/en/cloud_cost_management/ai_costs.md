@@ -62,7 +62,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Anthropic   | [SaaS integration][3] |
 | Azure Foundry   | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
-| OpenAI     | [SaaS integration][5] |
+| OpenAI (Platform only)     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
