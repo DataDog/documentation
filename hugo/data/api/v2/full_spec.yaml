@@ -87052,6 +87052,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineReduceProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameFieldsProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineSplitArrayProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
@@ -91544,6 +91545,169 @@ components:
         - type
         - attributes
       type: object
+    ObservabilityPipelineSpikeProtectionProcessor:
+      description: |-
+        The `spike_protection` processor learns the normal ingestion volume for the logs that match a specified filter and takes action when the volume spikes unexpectedly.
+
+        **Supported pipeline types:** logs
+      properties:
+        action_when_missing_partitions:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorActionWhenMissingPartitions"
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: "spike-protection-processor"
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor targets.
+          example: "service:my-service"
+          type: string
+        minimal_threshold:
+          description: The minimum volume, in bytes, that must be observed within 24 hours before spike protection can activate. Defaults to 100 GiB.
+          example: 107374182400
+          format: int64
+          type: integer
+        minimal_threshold_overrides:
+          description: A list of per-partition overrides for the minimal threshold, identified by matching field values. Requires `partition_fields` to be set.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorThresholdOverride"
+          type: array
+        name:
+          description: Name of the spike protection rule.
+          example: MySpikeProtection
+          type: string
+        partition_fields:
+          description: A list of fields used to segment log traffic. Volume is learned and evaluated independently for each unique combination of these field values. A maximum of five fields is supported.
+          items:
+            description: The name of a log field used to partition spike detection.
+            maxLength: 128
+            type: string
+          maxItems: 5
+          type: array
+          uniqueItems: true
+        spike_action:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorSpikeAction"
+        spike_threshold:
+          description: The number of standard deviations above the learned mean volume that must be exceeded before a spike is detected. Defaults to `5`.
+          example: 5
+          format: double
+          type: number
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - name
+        - spike_action
+        - enabled
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineSpikeProtectionProcessorActionWhenMissingPartitions:
+      default: ignore
+      description: |-
+        How to handle logs that are missing one of the `partition_fields`. Options:
+        - `ignore`: Forward the event without applying spike protection.
+        - `default_bucket`: Assign the event to a default partition.
+      enum:
+        - ignore
+        - default_bucket
+      example: ignore
+      type: string
+      x-enum-varnames:
+        - IGNORE
+        - DEFAULT_BUCKET
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThreshold:
+      description: The minimal threshold to apply to the matching partition.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytes"
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeep"
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeep:
+      description: Never activates spike protection for the matching partition, regardless of volume.
+      properties:
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeepType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeepType:
+      default: always_keep
+      description: The minimal threshold type. The value should always be `always_keep`.
+      enum:
+        - always_keep
+      example: always_keep
+      type: string
+      x-enum-varnames:
+        - ALWAYS_KEEP
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytes:
+      description: Sets a specific byte threshold for the matching partition.
+      properties:
+        bytes:
+          description: The minimal threshold, in bytes, for the matching partition.
+          example: 107374182400
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytesType"
+      required:
+        - type
+        - bytes
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytesType:
+      default: threshold
+      description: The minimal threshold type. The value should always be `threshold`.
+      enum:
+        - threshold
+      example: threshold
+      type: string
+      x-enum-varnames:
+        - THRESHOLD
+    ObservabilityPipelineSpikeProtectionProcessorSpikeAction:
+      description: |-
+        The action to take with matching logs while spike protection is active. Options:
+        - `drop`: Drop the event.
+        - `no_action`: Let the event pass through.
+        - `overflow_routing`: Route to an overflow destination.
+
+        When `overflow_routing` is used, there must be a destination whose `inputs` reference this processor with the `<processor-id>.overflow_events` suffix to route the overflowing events.
+      enum:
+        - drop
+        - no_action
+        - overflow_routing
+      example: drop
+      type: string
+      x-enum-varnames:
+        - DROP
+        - NO_ACTION
+        - OVERFLOW_ROUTING
+    ObservabilityPipelineSpikeProtectionProcessorThresholdOverride:
+      description: Defines a minimal threshold that applies to a specific partition instead of the processor-wide `minimal_threshold`.
+      properties:
+        fields:
+          description: The set of field matchers that identifies the partition this override applies to. Every field name listed must also appear in `partition_fields`.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineFieldValue"
+          type: array
+        minimal_threshold:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThreshold"
+      required:
+        - fields
+        - minimal_threshold
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorType:
+      default: spike_protection
+      description: The processor type. The value should always be `spike_protection`.
+      enum:
+        - spike_protection
+      example: spike_protection
+      type: string
+      x-enum-varnames:
+        - SPIKE_PROTECTION
     ObservabilityPipelineSplitArrayProcessor:
       description: |-
         The `split_array` processor splits array fields into separate events based on configured rules.
