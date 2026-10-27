@@ -1,5 +1,8 @@
 ---
 title: Integrate Prompt Management
+aliases:
+- /llm_observability/instrument/agentic/prompt_management/
+- /llm_observability/instrumentation/agentic/prompt_management/
 description: Retrieve managed prompts in a Python or Node.js application, preserve local prompts as fallbacks, and track prompt usage in Agent Observability.
 ---
 
@@ -11,8 +14,8 @@ Prompt Management is optional. Complete [instrumentation][1] before starting thi
 
 ## Select the workflow
 
-- **Use an existing managed prompt:** Retrieve a prompt from the Datadog registry using its prompt ID, deployment environment, and variable names.
-- **Promote a local prompt:** Create a managed version of a local chat prompt, deploy its first version to the target environment, and then integrate runtime retrieval.
+- **Use an existing managed prompt**: Retrieve a prompt from the Datadog registry using its prompt ID, deployment environment, and variable names.
+- **Promote a local prompt**: Create a managed version of a local text or chat prompt, deploy its first version to the target environment, and then integrate runtime retrieval.
 
 {{< agent-only >}}
 Complete instrumentation and any requested context sharing before starting this integration. Prompt Management is not required for context sharing or check recommendations.
@@ -48,15 +51,18 @@ Creating and deploying a managed prompt is a one-time setup operation. Do not cr
 
 Use a `ddtrace` version for Python or a `dd-trace` version for Node.js that supports the public Prompt Management APIs required by the selected workflow. Reuse a compatible installed version. If installation or an update is required, use the application's existing package manager and preserve its dependency-management conventions. The dependency must be available after installation from a clean environment.
 
+- **Python**: Use `ddtrace` version 4.13.0 or later.
+- **Node.js**: Use `dd-trace` version 5.128.0 or later in the 5.x release line, or 6.17.0 or later in the 6.x release line.
+
 {{< agent-only >}}
-Inspect the installed SDK before changing dependencies. Explain any required installation or update. Ask before updating an existing dependency, and treat this optional integration separately from updates required for instrumentation.
+Inspect the installed SDK before changing dependencies. Explain any required installation or update. Ask before updating an existing dependency, and treat this optional integration separately from updates required for instrumentation. For Node.js, preserve the application's module system and async control flow.
 {{< /agent-only >}}
 
 ## Promote a local prompt
 
 Skip this section if you use an existing managed prompt.
 
-1. At the existing prompt-construction boundary, separate the static chat-message template from its dynamic values. Use `{{variable}}` placeholders and keep a value available for every variable.
+1. At the existing prompt-construction boundary, separate the static text or chat-message template from its dynamic values. Use `{{variable}}` placeholders and keep a value available for every variable.
 2. Choose a stable, descriptive prompt ID and the deployment environment.
 3. Obtain a Datadog API key and a one-time application key with the `llm_observability_write`, `feature_flag_config_write`, and `feature_flag_environment_config_read` permissions. Keep this setup credential out of the application's runtime configuration.
 4. Follow the [List environments API][3] and call `GET /api/v2/feature-flags/environments?dd_env=<URL_ENCODED_DD_ENV>`. The `dd_env` filter matches `DD_ENV` exactly against each environment's `attributes.queries`.
@@ -97,11 +103,13 @@ const createdPrompt = await tracer.llmobs.prompts.createPrompt(
 {{% /tab %}}
 {{< /tabs >}}
 
+For a text prompt, pass the existing text template instead of a message array.
+
 Use the public SDK method for promotion. The installed SDK must support `env_ids` in Python or `envIds` in Node.js to deploy the prompt during creation. If creation reports a conflict, list prompts again and check that the ID belongs to the intended managed prompt before integrating it. Do not overwrite an existing managed prompt.
 
 The returned `created_prompt["id"]` in Python or `createdPrompt.id` in Node.js is the prompt UUID used by the Datadog prompt page: `https://<APPLICATION_HOST>/llm/prompts/<PROMPT_UUID>`. Use the application host for your [Datadog site][5].
 
-After promotion, configure runtime retrieval with a least-privilege application key that has the read permissions in the next section. Remove the one-time write-capable setup key when it is no longer needed.
+After promotion, configure runtime retrieval. If retrieval requires an application key, use a separate key with the read permissions in the next section. Remove the one-time write-capable setup key when it is no longer needed.
 
 {{< agent-only >}}
 Before promotion, propose a prompt ID based on its purpose and wait for confirmation. If the deployment environment is missing, ask for it at the same time. If the user did not supply a suitable application key, ask for one.
@@ -122,7 +130,7 @@ Keep the UUID returned by `LLMObs.create_prompt()` or `tracer.llmobs.prompts.cre
 
 ## Configure the application
 
-Make the following values available before `ddtrace` or `dd-trace` initializes, using the application's existing configuration and secret-management workflow:
+For direct retrieval of an environment's deployed prompt, make the following values available before `ddtrace` or `dd-trace` initializes, using the application's existing configuration and secret-management workflow:
 
 ```text
 DD_SITE=<DATADOG_SITE>
@@ -134,7 +142,9 @@ DD_LLMOBS_ENABLED=1
 
 Preserve the application's existing identity. If `DD_SERVICE` or `DD_LLMOBS_ML_APP` is configured, keep that value. If neither is configured, set `DD_SERVICE` to a name based on the application, service, or project.
 
-`DD_API_KEY` is required for prompt retrieval. When `DD_ENV` is set, `DD_APP_KEY` is required to resolve the prompt version deployed to that environment. The application key must have the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+Direct retrieval of an environment's deployed prompt requires both keys. The application key must have the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+
+For retrieval through the Agent, follow [Configure prompt retrieval][6] for your language. Python requires `DD_API_KEY`. Node.js requires neither key when retrieval succeeds through the Agent. Both languages require `DD_API_KEY` to retrieve an exact or latest version. Retain any keys required by other application features or Agentless span export.
 
 If the application does not send data through a Datadog Agent, also set:
 
@@ -147,19 +157,21 @@ DD_LLMOBS_AGENTLESS_ENABLED=1
 
 If configuration is available before process startup, preserve the startup workflow and use `ddtrace-run` if needed for automatic instrumentation. If the application loads configuration in Python, load it before importing `ddtrace.auto`, then run the application's normal Python command. Do not combine application-level configuration loading with `ddtrace-run`.
 
-For shell-based startup, export variables, assign them inline on the launch command, or use the application's existing mechanism to pass them to the child Python process. Bare, unexported shell assignments do not pass configuration to that process.
-
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Load configuration before initializing `dd-trace`, and initialize it before importing the LLM provider. Preserve existing SDK initialization and loader hooks. Follow the [automatic instrumentation setup][6] or the [Next.js guide][7] for the application's framework.
+Load configuration before initializing `dd-trace`, and initialize it before importing the LLM provider. Reuse existing SDK initialization and loader hooks; do not initialize the tracer a second time. Follow the [automatic instrumentation setup][1] or the [Next.js guide][2] for the application's framework.
 
 Use the initialized tracer's `tracer.llmobs.prompts` API for Prompt Management. Call its asynchronous methods from an async function in the application's existing workflow.
 
+[1]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs#set-up-automatic-instrumentation
+[2]: /llm_observability/guide/nextjs_guide/
 {{% /tab %}}
 {{< /tabs >}}
 
-Use a separate runtime application key with the required read permissions. A write-capable promotion key is a one-time setup credential.
+For shell-based startup, export variables, assign them inline on the launch command, or use the application's existing mechanism to pass them to the child process. Bare, unexported shell assignments do not pass configuration to that process.
+
+If runtime retrieval requires an application key, use a separate key with the required read permissions. A write-capable promotion key is a one-time setup credential.
 
 {{< agent-only >}}
 Do not add the promotion key to runtime configuration unless the user explicitly selected it for runtime use and it also has the required read permissions.
@@ -173,9 +185,9 @@ For an existing managed-prompt integration, if the user did not supply credentia
 2. Make a meaningful value available for every variable at the existing prompt-construction boundary.
 3. In Python, import `LLMObs` from `ddtrace.llmobs` at that boundary. In Node.js, access `tracer.llmobs.prompts` from the initialized `dd-trace` tracer.
 4. Replace the prompt construction with `LLMObs.get_prompt()` in Python or `await tracer.llmobs.prompts.getPrompt()` in Node.js using the selected prompt ID.
-5. Preserve the existing chat prompt as a message-list `fallback`.
+5. Preserve the existing text or chat prompt as the `fallback`.
 6. Use `{{variable}}` placeholders in the fallback with the managed prompt's exact variable names. Do not leave Python-style `{variable}` placeholders in the fallback.
-7. Call `prompt.format()` with values for every variable. Pass the formatted messages to the existing provider call without changing the provider, model, or unrelated behavior.
+7. Call `prompt.format()` with values for every variable. Pass the formatted value to the existing provider call without changing the provider, model, or unrelated behavior. In Node.js, await retrieval but not formatting.
 
 {{< agent-only >}}
 Use the supplied prompt ID and variable names without asking for confirmation. For a promoted prompt, use the values confirmed during promotion. Ask for missing metadata instead of guessing. If a required variable has no meaningful value at the prompt-construction boundary, ask how to map it and wait for an answer.
@@ -312,5 +324,4 @@ Inspect every provider call that uses the managed prompt. Attach metadata with `
 [3]: /api/latest/feature-flags/list-environments/
 [4]: /api/latest/feature-flags/create-an-environment/
 [5]: /getting_started/site/
-[6]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs#set-up-automatic-instrumentation
-[7]: /llm_observability/guide/nextjs_guide/
+[6]: /llm_observability/configure/prompt_management/#configure-prompt-retrieval

@@ -7,6 +7,12 @@ aliases:
     - /llm_observability/setup/auto_instrumentation
     - /llm_observability/sdk/auto_instrumentation
     - /llm_observability/instrumentation/auto_instrumentation/
+    - /llm_observability/instrument/agentic/python/
+    - /llm_observability/instrument/agentic/nodejs/
+    - /llm_observability/instrument/agentic/java/
+    - /llm_observability/instrumentation/agentic/python/
+    - /llm_observability/instrumentation/agentic/nodejs/
+    - /llm_observability/instrumentation/agentic/java/
 further_reading:
     - link: '/llm_observability/instrument/sdk/'
       tag: 'Documentation'
@@ -69,7 +75,7 @@ Use the existing configuration-loading mechanism; the example does not require a
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-The Datadog Node.js SDK supports Node.js runtimes. For Next.js applications, follow the [Next.js instrumentation guide][1] instead of the steps below.
+The Datadog Node.js SDK requires Node.js 22 or later for `dd-trace` 6.x, or Node.js 18 or later for `dd-trace` 5.x. See [Node.js compatibility requirements][3]. For Node.js versions earlier than 20.6, follow the [SDK command-line setup][2] instead of the loader setup below. For Next.js applications, follow the [Next.js instrumentation guide][1] instead of the steps below.
 
 1. Install `dd-trace` with the application's package manager if it is not installed:
 
@@ -80,6 +86,8 @@ The Datadog Node.js SDK supports Node.js runtimes. For Next.js applications, fol
    # Or, for Yarn:
    yarn add dd-trace
    ```
+
+   For Node.js 18 or 20, install `dd-trace@5` instead.
 
 2. Configure loader hooks before the Node.js process starts. The hooks instrument supported frameworks that use ESM and TypeScript imports. For example, set `NODE_OPTIONS` in the existing `package.json` startup command:
 
@@ -112,6 +120,7 @@ When using the loader-hook and entrypoint-import method above, set `NODE_OPTIONS
 
 [1]: /llm_observability/guide/nextjs_guide/
 [2]: /llm_observability/instrument/sdk/?tab=nodejs#command-line-setup
+[3]: /tracing/trace_collection/compatibility/nodejs/
 {{% /tab %}}
 {{% tab "Java" %}}
 

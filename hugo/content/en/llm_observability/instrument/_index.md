@@ -2,6 +2,8 @@
 title: Agent Observability Instrumentation
 aliases:
 - /llm_observability/instrumentation/
+- /llm_observability/instrument/agentic/
+- /llm_observability/instrumentation/agentic/
 description: Instrument an LLM application with Datadog SDKs, OpenTelemetry, or the HTTP API, and track prompts and traces in Agent Observability.
 further_reading:
     - link: '/llm_observability/instrument/auto_instrumentation/'
@@ -26,9 +28,6 @@ Instrument your LLM application or agent to collect traces, prompts, token usage
     lang="text" >}}
 Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, instrument Datadog Agent Observability in my project.
 {{< /skill-callout >}}
-
-## Instrumentation Options
-You can instrument your application with the Python, Node.js, or Java SDKs, or by using the Agent Observability API.
 
 {{< agent-only >}}
 Follow these guidelines throughout this page and its linked setup guides:

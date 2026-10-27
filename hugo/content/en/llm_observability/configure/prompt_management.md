@@ -2,7 +2,7 @@
 title: Prompt Management
 aliases:
 - /llm_observability/monitoring/prompt_management/
-description: Create, version, and retrieve managed prompts in Python, Go, and JavaScript applications with Prompt Management.
+description: Create, version, and retrieve managed prompts in your applications with Prompt Management.
 
 further_reading:
   - link: "/llm_observability/instrument/prompt_tracking"
@@ -21,52 +21,106 @@ further_reading:
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
 
-Runtime retrieval is supported in Python through the `ddtrace` SDK and in Node.js through the `dd-trace` SDK. Use `LLMObs.get_prompt()` in Python or `tracer.llmobs.prompts.getPrompt()` in Node.js. Prompt retrieval and Prompt Tracking are separate: retrieval does not require enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
+Prompt retrieval and Prompt Tracking are separate: you can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
 After creating prompt versions, use [Prompt Experimentation][10] to compare them with an A/B test or deploy one progressively with a Guarded Rollout.
 
-Prompt Management works alongside [Prompt Tracking][1]. In Python, when Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans. In Node.js, attach prompt metadata with `tracer.llmobs.annotationContext()` and `prompt.toAnnotation()`. See [Track prompt usage][13].
+Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. See [Track prompt usage](#track-prompt-usage) for setup.
 
 ## Prerequisites
-
-- For Python, Python 3.9 or later and `ddtrace>=4.13.0`.
-- For Node.js, a compatible Node.js runtime and a `dd-trace` version that exposes `tracer.llmobs.prompts`. See the [Node.js integration workflow][12].
-- Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
-- A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
-- To manage prompts through the API, Python SDK, or Node.js SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
-
-## Install the SDK
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Install or upgrade the latest `ddtrace` package in the Python environment used by your application:
+### Supported versions
+
+- Python 3.9 or later
+- `ddtrace` version 4.13.0 or later
+
+### Credentials
+
+#### Retrieve prompts
+
+You need your [Datadog site][2] and the credentials required for your retrieval method:
+
+- **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+- **Retrieve through the Agent**: Provide an API key. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
+- **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
+
+#### Manage prompts
+
+To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires `llm_observability_read`, `feature_flag_config_read`, `feature_flag_environment_config_read`, `llm_observability_write`, and `feature_flag_config_write`.
+
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+### Supported versions
+
+- Node.js 18 or later for `dd-trace` 5.x, or 22 or later for 6.x
+- `dd-trace` version 5.128.0 or later in the 5.x release line, or 6.17.0 or later
+
+### Credentials
+
+#### Retrieve prompts
+
+You need your [Datadog site][2] and the credentials required for your retrieval method:
+
+- **Retrieve an environment's deployed prompt directly from Datadog**: Provide an [API key][3] and an [application key][4]. The application key requires the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
+- **Retrieve through the Agent**: Neither key is required when retrieval succeeds through the Agent. Follow the [Configure prompt retrieval](#configure-prompt-retrieval) section.
+- **Retrieve an exact or latest version**: Provide an API key, even when the application uses an Agent.
+
+#### Manage prompts
+
+To create, update, or delete prompts through the API or SDK, provide an API key and an application key. The application key requires `llm_observability_read`, `feature_flag_config_read`, `feature_flag_environment_config_read`, `llm_observability_write`, and `feature_flag_config_write`.
+
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
+{{% /tab %}}
+{{< /tabs >}}
+
+## Install the SDK
+
+Install or upgrade the SDK in your application's environment to a [supported version](#prerequisites):
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```shell
 pip install --upgrade ddtrace
 ```
 
+For installation and application setup, see the [Python SDK guide][18].
+
+[18]: /tracing/trace_collection/dd_libraries/python/#getting-started
 {{% /tab %}}
 {{% tab "Node.js" %}}
-
-Install a `dd-trace` version with Prompt Management support using the application's package manager:
 
 ```shell
 npm install dd-trace
 ```
 
-Follow [Integrate Prompt Management][12] for Node.js configuration, retrieval, fallback, and tracking examples.
+For applications using the 5.x release line, install `dd-trace@^5.128.0` instead.
 
+For installation and application setup, see the [Node.js SDK guide][19].
+
+Follow [Integrate Prompt Management][1] for the full Node.js integration workflow.
+
+[1]: /llm_observability/instrument/prompt_management/
+[19]: /tracing/trace_collection/dd_libraries/nodejs/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
-## Use a managed prompt in Python
+## Use a managed prompt
 
 For the full integration workflow, including promoting a local prompt and preserving a fallback, see [Integrate Prompt Management][12].
 
 ### Integrate Prompt Management with a coding agent
 
-Integrate a managed prompt with a coding agent of your choice by pasting in the following prompt:
+Paste the following prompt into your coding agent:
 
 ```text
 Follow the instructions at https://docs.datadoghq.com/llm_observability/instrument.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
@@ -96,7 +150,16 @@ After the integration is complete, run your application and trigger the modified
 
 ### Configure prompt retrieval
 
-Provide the Datadog site, credentials, and deployment environment through the configuration and secret-management workflow already used by your application. For example, use the application's environment file, Docker Compose or Kubernetes configuration, deployment platform, or secret manager. At runtime, the following environment variables must be set before importing `ddtrace`:
+Configure prompt retrieval through your application's existing workflow, such as its environment file, Docker Compose or Kubernetes configuration, deployment platform, or secrets manager. Set the configuration before initializing the SDK.
+
+Retrieve deployed prompts directly from Datadog or through a Datadog Agent with [Remote Configuration][11] enabled. For either method, set `DD_ENV` to an environment where the prompt is deployed.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+#### Retrieve directly from Datadog
+
+Replace the placeholders and set the following environment variables before importing `ddtrace`:
 
 {{< code-block lang="shell" >}}
 export DD_SITE="<DATADOG_SITE>"
@@ -105,13 +168,49 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-`DD_ENV` selects the environment used to resolve the prompt version and must match an environment where the prompt is deployed.
+#### Retrieve through the Agent
+
+To retrieve an environment's deployed prompt through the Agent, complete the following setup before importing `ddtrace`:
+
+1. Install `ddtrace[openfeature]`.
+2. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`.
+
+**Note**: Prompt retrieval requires `DD_API_KEY`. `DD_APP_KEY` is not required when retrieval succeeds through the Agent. To allow direct retrieval if the Agent is unavailable, also configure `DD_APP_KEY`.
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Prompt Management uses your application's existing `dd-trace` initialization. Configure one of the retrieval methods in this section before the tracer initializes. If your application does not initialize the tracer yet, follow the [Node.js SDK initialization guide][16] after configuring retrieval.
+
+#### Retrieve directly from Datadog
+
+Replace the placeholders and set the following environment variables before initializing `dd-trace`:
+
+{{< code-block lang="shell" >}}
+export DD_SITE="<DATADOG_SITE>"
+export DD_API_KEY="<DATADOG_API_KEY>"
+export DD_APP_KEY="<DATADOG_APP_KEY>"
+export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
+{{< /code-block >}}
+
+#### Retrieve through the Agent
+
+To retrieve an environment's deployed prompt through the Agent, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` before initializing `dd-trace`. Neither key is required when retrieval succeeds through the Agent.
+
+Configure `DD_API_KEY` if you also retrieve exact or latest versions. To allow direct retrieval if the Agent is unavailable, configure both keys.
+
+[16]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Retrieve, format, and use a prompt
 
-Preserve the prompt already used by your application as the fallback. The fallback keeps the application working if registry, environment-resolution, network, or server failures occur.
+Preserve the prompt already used by your application as the fallback. The fallback keeps the application working if the managed prompt cannot be retrieved.
 
-The following example retrieves and formats a chat prompt, then passes the formatted messages directly to OpenAI:
+The following examples show how to retrieve and format a chat prompt, then pass its messages to OpenAI:
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -123,7 +222,7 @@ default_messages = [
 ]
 
 variables = {
-    "company": "Acme Inc.",
+    "company": "Acme",
     "question": "How do I reset my password?",
 }
 
@@ -143,64 +242,93 @@ response = client.chat.completions.create(
 
 `prompt.format()` returns a string for a text prompt and a list of messages for a chat prompt. Pass the formatted value to the corresponding text or messages parameter of your LLM provider call.
 
-If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
+If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace the API-key requirement described in [Prerequisites](#prerequisites).
 
-Without prompt composition, combine prompts in application code or manage the final provider-facing prompt as a single prompt. To include one managed prompt in another, see [Reuse prompts with composition](#reuse-prompts-with-composition). Prompt composition is in Preview.
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+The following example assumes the tracer is initialized and the code runs inside an async application function:
+
+```javascript
+const tracer = require('dd-trace')
+const OpenAI = require('openai')
+
+const defaultMessages = [
+  { role: 'system', content: 'You are a support agent for {{company}}.' },
+  { role: 'user', content: '{{question}}' },
+]
+const variables = {
+  company: 'Acme',
+  question: 'How do I reset my password?',
+}
+
+const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-greeting', {
+  fallback: defaultMessages,
+})
+const messages = prompt.format(variables)
+
+const client = new OpenAI()
+
+const response = await client.chat.completions.create({
+  model: 'gpt-4o',
+  messages,
+})
+```
+
+`prompt.format()` returns a string for a text prompt and an array of messages for a chat prompt. Pass the formatted value to the corresponding text or messages parameter of your LLM provider call.
+
+If retrieval fails and no cached prompt or fallback is available, `getPrompt()` rejects with an error.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Combine prompts in application code or manage the final prompt sent to your model provider as a single managed prompt.
+
+**Preview**: To include one managed prompt in another, use prompt composition, which is available in Preview. See the [Reuse prompts with composition](#reuse-prompts-with-composition) section.
 
 ### Select a version
 
-Without `DD_ENV`, `get_prompt()` retrieves the latest prompt version:
+By default, the SDK selects the prompt version as follows:
+
+- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or A/B test assignment
+- **Without `DD_ENV`**: The latest prompt version
+
+To select an exact numeric version, set the `version` option. This option takes precedence over `DD_ENV` and targeting rules. Retrieving either an exact version or the latest version requires `DD_API_KEY`, even when the application uses an Agent. For environment-specific credential requirements, see the [Prerequisites](#prerequisites) section.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
-prompt = LLMObs.get_prompt("customer-support-greeting")
+prompt = LLMObs.get_prompt(
+    "customer-support-greeting",
+    version=2,
+    fallback="You are a helpful support agent.",
+)
 ```
 
-With `DD_ENV`, `get_prompt()` resolves the prompt version for that environment. This requires `DD_APP_KEY` with the read permissions listed in [Prerequisites](#prerequisites).
+{{% /tab %}}
+{{% tab "Node.js" %}}
 
-To retrieve an exact numeric version independently of `DD_ENV`, pass `version`:
-
-```python
-prompt = LLMObs.get_prompt("customer-support-greeting", version=2)
+```javascript
+const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-greeting', {
+  version: 2,
+  fallback: 'You are a helpful support agent.',
+})
 ```
 
-The `version` argument takes precedence over environment resolution.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Track prompt usage
 
-To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation through its existing execution workflow.
+The following examples show how to track a managed system prompt when combining it with a user's question for an OpenAI Responses call. Pass the same variables to the formatting and tracking methods.
 
-If the application receives its configuration before the Python process starts, use `ddtrace-run`. For example, the equivalent shell command is:
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< code-block lang="shell" >}}
-DD_SITE="<DATADOG_SITE>" \
-DD_API_KEY="<DATADOG_API_KEY>" \
-DD_APP_KEY="<DATADOG_APP_KEY>" \
-DD_ENV="<DEPLOYMENT_ENVIRONMENT>" \
-DD_SERVICE="<SERVICE_NAME>" \
-DD_LLMOBS_ENABLED=1 \
-ddtrace-run python app.py
-{{< /code-block >}}
+[Enable Agent Observability][5] and [automatic instrumentation][6] for your model client. For supported, automatically instrumented clients, Datadog tracks the managed prompt when you pass the formatted value directly to the client.
 
-If the application loads its configuration in Python, load the configuration first, then import `ddtrace.auto` before importing the LLM provider or other application modules:
-
-```python
-from dotenv import load_dotenv
-
-load_dotenv()
-
-import ddtrace.auto
-
-from ddtrace.llmobs import LLMObs
-from openai import OpenAI
-```
-
-Run this setup with the application's normal Python command, such as `python app.py`. Do not also use `ddtrace-run`; it initializes `ddtrace` before the application can load its configuration.
-
-If the application does not send data through a Datadog Agent, also set `DD_LLMOBS_AGENTLESS_ENABLED=1`.
-
-For a [supported automatically instrumented provider][6], pass the value returned by `prompt.format()` directly to the provider call, as shown in [Retrieve, format, and use a prompt](#retrieve-format-and-use-a-prompt). This automatically associates the managed prompt with the resulting span.
-
-Copying, rebuilding, or converting the formatted value can discard its prompt-tracking metadata. For example, concatenating a managed system prompt with a user question creates a new string without that metadata. Use `LLMObs.annotation_context()` to associate the managed prompt with the resulting LLM span:
+If you modify the formatted prompt, as in this example, use `LLMObs.annotation_context()` to associate it with the LLM call:
 
 ```python
 prompt = LLMObs.get_prompt(
@@ -224,9 +352,42 @@ Pass the same variables to `to_annotation_dict()` that you pass to `format()` so
 
 `annotation_context()` associates metadata with an LLM span created inside the context; it does not create the span. For providers that are not automatically instrumented, first [manually instrument the LLM call][7] to create an LLM span. An explicit `annotation_context()` takes precedence over automatic prompt tracking. See [Prompt Tracking][1] for more information.
 
+[5]: /llm_observability/instrument/sdk/?tab=python
+[6]: /llm_observability/instrument/auto_instrumentation/?tab=python
+[7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
+[1]: /llm_observability/instrument/prompt_tracking
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+[Enable Agent Observability][13] and initialize the tracer before importing a [supported model client][14]. Formatting a managed prompt does not automatically track it in Node.js. Use `annotationContext()` to associate the managed prompt with the resulting LLM span:
+
+```javascript
+const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-system-prompt', {
+  fallback: 'You are a helpful support agent writing for a {{audience}} audience.',
+})
+const variables = { audience }
+const systemPrompt = prompt.format(variables)
+const combinedPrompt = `${systemPrompt}\n\nUser question: ${question}`
+
+const response = await tracer.llmobs.annotationContext(
+  { prompt: prompt.toAnnotation(variables) },
+  () => client.responses.create({
+    model: 'gpt-4o',
+    input: combinedPrompt,
+  }),
+)
+```
+
+The context associates metadata with LLM spans created inside the callback; it does not create a span. For model clients without automatic instrumentation, [create an LLM span manually][13].
+
+[13]: /llm_observability/instrument/sdk/?tab=nodejs
+[14]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Create and manage prompts
 
-Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, through the Python SDK, or through the API.
+Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, through a supported SDK, or through the API.
 
 ### Create a prompt
 
@@ -254,7 +415,7 @@ In the save dialog:
 
 | Field | Description |
 |-------|-------------|
-| {{< ui >}}Prompt ID{{< /ui >}} | A unique identifier for the prompt, such as `customer-support-greeting`. Use this ID to retrieve the prompt with `LLMObs.get_prompt()`. |
+| {{< ui >}}Prompt ID{{< /ui >}} | A unique identifier for the prompt, such as `customer-support-greeting`. Use this ID to retrieve the prompt with the SDK. |
 | {{< ui >}}Description{{< /ui >}} | Optional notes about this version. |
 | {{< ui >}}Deployment{{< /ui >}} | The environment to which this version is deployed. |
 
@@ -270,9 +431,18 @@ Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 - **Deploy a version to another environment**: Select a version and update its {{< ui >}}Deployment{{< /ui >}} environments.
 - **Delete a prompt**: Select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
 
-### Use the Python SDK
+### Manage prompts programmatically
 
-Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments. The `env_ids` values are Feature Flags environment IDs, which you can obtain from the [List environments API][9]:
+Use the SDK to create prompts, publish versions, and manage deployments. Perform these operations during setup. Do not run them during application startup or request handling.
+
+These methods require the API and application key permissions listed in the [Prerequisites](#prerequisites) section. The `env_ids` or `envIds` values are Feature Flags environment IDs from the [List environments API][9], not environment names.
+
+The following examples create chat prompts from message arrays. To create a text prompt, pass a string instead.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments:
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -299,11 +469,53 @@ created_version = LLMObs.create_prompt_version(
 )
 ```
 
-Treat prompt creation, versioning, and deployment as setup operations. Do not perform them during application startup or from a request path. At runtime, retrieve deployed prompts with `LLMObs.get_prompt()`.
+| Operation | Method |
+|-----------|--------|
+| List prompts | `LLMObs.list_prompts()` |
+| List a prompt's versions | `LLMObs.list_prompt_versions()` |
+| Update prompt metadata | `LLMObs.update_prompt()` |
+| Update version metadata or deployments | `LLMObs.update_prompt_version()` |
+| Delete a prompt and all its versions | `LLMObs.delete_prompt()` |
 
-These methods require the API and application key permissions listed in [Prerequisites](#prerequisites).
+{{% /tab %}}
+{{% tab "Node.js" %}}
 
-Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect managed prompts, `LLMObs.update_prompt()` and `LLMObs.update_prompt_version()` to update metadata or deployments, and `LLMObs.delete_prompt()` to delete a prompt and all of its versions.
+Use `createPrompt()` to create a prompt and deploy its first version to one or more environments. The following example assumes the tracer is initialized and the code runs inside an async setup function:
+
+```javascript
+const prompts = tracer.llmobs.prompts
+const chatTemplate = [
+  { role: 'system', content: 'You are a support agent for {{company}}.' },
+  { role: 'user', content: '{{question}}' },
+]
+
+const createdPrompt = await prompts.createPrompt('customer-support-greeting', chatTemplate, {
+  envIds: ['<FEATURE_FLAG_ENVIRONMENT_ID>'],
+})
+```
+
+To publish and deploy another version, use `createPromptVersion()`:
+
+```javascript
+const createdVersion = await prompts.createPromptVersion(
+  'customer-support-greeting',
+  updatedChatTemplate,
+  { envIds: ['<FEATURE_FLAG_ENVIRONMENT_ID>'] },
+)
+```
+
+| Operation | Method |
+|-----------|--------|
+| List prompts | `prompts.listPrompts()` |
+| List a prompt's versions | `prompts.listPromptVersions()` |
+| Update prompt metadata | `prompts.updatePrompt()` |
+| Update version metadata or deployments | `prompts.updatePromptVersion()` |
+| Delete a prompt and all its versions | `prompts.deletePrompt()` |
+
+Use `await` with these methods.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Use the API
 
@@ -317,7 +529,11 @@ Message placeholders insert conversation history or tool interactions into a sav
 
 The prompt version stores the placeholder's name and position, not the messages you pass at runtime. To move the history within the prompt, publish a new prompt version. You do not need to change application code.
 
-**Preview SDK access:** Contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager for the SDK version to use for your language.
+**SDK requirements:**
+
+- **Python:** `ddtrace` 4.16.0 or later.
+- **Node.js:** `dd-trace` 5.129.0 or later in the 5.x release line, or 6.18.0 or later.
+- **Go:** `dd-trace-go/v2` 2.12.0 or later.
 
 ### Define the placeholder
 
@@ -341,7 +557,7 @@ LLMObs.create_prompt(
 )
 ```
 
-The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see the [Use the Python SDK](#use-the-python-sdk) section.
+The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see [Manage prompts programmatically](#manage-prompts-programmatically).
 
 ### Supply runtime values
 
@@ -491,7 +707,11 @@ Deploy the version to an environment when it is ready. Applications retrieving t
 
 Retrieve the prompt deployed to your application's environment, then pass its configuration to your model client.
 
-**Preview SDK access:** Contact Datadog Support or your Customer Success Manager for the SDK version to use for your language.
+**SDK requirements:**
+
+- **Python:** `ddtrace` 4.16.0 or later.
+- **Node.js:** `dd-trace` 5.129.0 or later in the 5.x release line, or 6.18.0 or later.
+- **Go:** `dd-trace-go/v2` 2.12.0 or later.
 
 These examples use a prompt named `summarizer` with the configuration shown above.
 
@@ -609,7 +829,7 @@ Use an `include` object in `template.messages` to reference a specific version o
 }
 ```
 
-For authentication and message-selection options, see [Create an Agent Observability prompt][11].
+For authentication and message-selection options, see [Create an Agent Observability prompt][21].
 
 ### Include text in a message
 
@@ -641,15 +861,35 @@ When a shared policy changes, use its {{< ui >}}Used By{{< /ui >}} tab to find p
 
 ### Serve multiple versions from one environment
 
-Prompt Management builds on Datadog's Feature Flags product. Each environment resolves `get_prompt()` calls to a default version, and can also serve a different version to calls that match a targeting rule.
+Prompt Management builds on Datadog's Feature Flags product. Each environment resolves prompt retrieval calls to a default version, and can also serve a different version to calls that match a targeting rule.
 
 For example, roll out an unstable prompt version to a subset of users in `production` with a targeting rule, while everyone else keeps getting the stable version:
 
+{{< tabs >}}
+{{% tab "Python" %}}
+
 ```python
-## DD_ENV=production
-prompt = LLMObs.get_prompt("my-prompt")               # resolves to the stable version
-prompt = LLMObs.get_prompt("my-prompt", tag="unstable") # resolves to the unstable version
+# DD_ENV=production
+prompt = LLMObs.get_prompt(
+    "my-prompt",
+    tag="unstable",
+    fallback="You are a helpful assistant.",
+)
 ```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+// DD_ENV=production
+const prompt = await tracer.llmobs.prompts.getPrompt('my-prompt', {
+  attributes: { tag: 'unstable' },
+  fallback: 'You are a helpful assistant.',
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 To configure this:
 
@@ -661,13 +901,13 @@ To configure this:
 
    {{< img src="llm_observability/monitoring/prompt-targeting-rules-default-version.png" alt="The Targeting Rules panel for an environment, showing the default version served when no rules match and an Add Targeting Rule button." style="width:100%;" >}}
 
-3. Define the rule filter. For example, match calls to `get_prompt()` that pass the attribute `tag=unstable`, and set the resulting variant to the unstable prompt version.
+3. Define the rule filter. For example, match calls that pass the attribute `tag=unstable`, and set the resulting variant to the unstable prompt version.
 
    {{< img src="llm_observability/monitoring/prompt-targeting-rule-tag-filter.png" alt="The targeting rule filter builder, matching a tag attribute set to unstable." style="width:100%;" >}}
 
 4. Save the rule. Calls with `tag=unstable` resolve to the matched version; all other calls fall back to the default version.
 
-Pass the attributes referenced by your targeting rules as keyword arguments to `get_prompt()`. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
+Pass the attributes used by your targeting rule, as shown in the previous code examples. Use string, number, or Boolean values. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
@@ -685,6 +925,6 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
-[11]: /api/latest/agent-observability/create-an-agent-observability-prompt/
+[11]: /remote_configuration/
 [12]: /llm_observability/instrument/prompt_management/
-[13]: /llm_observability/instrument/prompt_management/#track-prompt-usage
+[21]: /api/latest/agent-observability/create-an-agent-observability-prompt/

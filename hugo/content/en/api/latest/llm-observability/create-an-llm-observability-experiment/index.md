@@ -1,3 +1,3 @@
 ---
-title: Create an LLM Observability experiment
+title: Create an LLM Observability offline experiment
 ---
