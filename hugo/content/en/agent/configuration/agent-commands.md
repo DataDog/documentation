@@ -54,7 +54,7 @@ List of commands to restart the Datadog Agent:
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
-| AIX        | Stop the Agent with `stopsrc -g datadog-agent`, then start it with `startsrc -g datadog-agent`. |
+| AIX        | `stopsrc -g datadog-agent`, then `startsrc -g datadog-agent`                    |
 | Linux      | See the [Agent documentation][1] for your OS.                                    |
 | Docker     | Use the [installation command][2].                                               |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |

@@ -345,7 +345,7 @@ Agent 7.85.0 and later support the following [AIX][1] versions:
 
 ## Datadog UNIX Agent
 
-The [Datadog UNIX Agent][2] is a separate Agent for AIX. It supports the following AIX versions:
+The [Datadog UNIX Agent][2] is the legacy Agent for AIX. It supports the following AIX versions:
 
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3

@@ -183,9 +183,9 @@ Finally, start the Datadog Agent service to apply the changes.
 
 ### AIX (UNIX Agent)
 
-This section applies only to the [Datadog UNIX Agent][7]. For AIX versions earlier than 7.2 TL5, the UNIX Agent is the only supported Datadog Agent.
+This section applies only to the legacy [Datadog UNIX Agent][7].
 
-`Jmxfetch.jar` is included in the UNIX Agent install bundle, but there is no code in the UNIX Agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
+`jmxfetch.jar` is included in the UNIX Agent install bundle, but there is no code in the UNIX Agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
 
 ### Containerized ecosystems
 
@@ -282,9 +282,9 @@ Instructions are different depending on the Linux distribution:
 
 ### AIX (UNIX Agent)
 
-This section applies only to the [Datadog UNIX Agent][7]. For AIX versions earlier than 7.2 TL5, the UNIX Agent is the only supported Datadog Agent.
+This section applies only to the legacy [Datadog UNIX Agent][7].
 
-`Jmxfetch.jar` is included in the UNIX Agent install bundle, but there is no code in the UNIX Agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
+`jmxfetch.jar` is included in the UNIX Agent install bundle, but there is no code in the UNIX Agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
 
 If you are manually running the `jmxfetch.jar`, pass the following flag to the Java process: `‐Dlog4j2.formatMsgNoLookups=True`
 

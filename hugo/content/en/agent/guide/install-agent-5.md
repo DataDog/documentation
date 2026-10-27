@@ -515,7 +515,7 @@ sudo userdel dd-agent \
 {{% /tab %}}
 
 {{% tab "AIX" %}}
-**Note**: This tab covers the Datadog UNIX Agent. For AIX 7.2 TL5 and later, see [Agent 7 on AIX][3].
+**Note**: This tab covers the legacy Datadog UNIX Agent. For the AIX versions that Agent 7 supports, see [Agent 7 on AIX][3].
 
 ### One-step install
 

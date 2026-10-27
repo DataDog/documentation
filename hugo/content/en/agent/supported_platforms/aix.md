@@ -29,7 +29,7 @@ algolia:
   tags: ['uninstall', 'uninstalling']
 ---
 
-This page covers Agent 7 on AIX. For AIX versions earlier than 7.2 TL5, see the legacy [Datadog UNIX Agent][12].
+This page covers Agent 7 on AIX. For AIX versions that Agent 7 does not support, see the legacy [Datadog UNIX Agent][12].
 
 ## Overview
 The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
@@ -39,11 +39,9 @@ The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you ca
 - Container and Kubernetes checks
 - eBPF-based checks
 - Cloud Network Monitoring
-- Remote configuration updates and remote Agent updates
+- Remote Agent configuration and upgrades with Fleet Automation
 
 See [Supported Platforms][5] for the complete list of supported AIX versions.
-
-This page walks you through installing, operating, and removing the Datadog Agent on AIX.
 
 ## Installation
 
@@ -59,23 +57,20 @@ To install the Agent on AIX, follow the [in-app instructions in Fleet Automation
 
 {{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
 
-
-
 ### Installation log files
 
 You can find the Agent installation log in the `dd-aix-install.log` file. To disable this logging, remove the `-e dd-aix-install.log` parameter in the installation command.
 
 ## Commands
 
-| Description   | Command (as root)           |
-|---------------|-----------------------------|
-| Start Agent   | `startsrc -g datadog-agent` |
-| Stop Agent    | `stopsrc -g datadog-agent`  |
-| Status of Agent services | `lssrc -g datadog-agent`|
-| Agent status page | `datadog-agent status`      |
-| Send flare | `datadog-agent flare` |
-| Show all commands | `datadog-agent --help`  |
-
+| Description              | Command (as root)           |
+|--------------------------|-----------------------------|
+| Start Agent              | `startsrc -g datadog-agent` |
+| Stop Agent               | `stopsrc -g datadog-agent`  |
+| Status of Agent services | `lssrc -g datadog-agent`    |
+| Agent status page        | `datadog-agent status`      |
+| Send flare               | `datadog-agent flare`       |
+| Show all commands        | `datadog-agent --help`      |
 
 ## Configure the Agent
 
@@ -88,7 +83,6 @@ The [Datadog Agent configuration file][7] is located in `/etc/datadog-agent/data
 A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste.
 
 Alternatively, see the [datadog-agent_aix.yaml.example file][10] for all available configuration options.
-
 
 ### Integration files
 
