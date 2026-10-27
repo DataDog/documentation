@@ -91,7 +91,13 @@ React to a message in an incident Slack channel with an emoji to act on it witho
 To configure emoji quick actions for each incident type, go to **Incidents** > **Settings** > [**Integrations**][3] > **Slack Settings** and open **Emoji quick actions**. You can:
 
 * Turn each action on or off. All actions are on by default except **Pin To Timeline**.
-* Replace an action's default emoji with another emoji from your workspace. Each emoji can trigger only one action.
+* Replace an action's default emoji with a standard emoji or a custom emoji from your Slack workspace. Each emoji can trigger only one action, and 👀 and ✅ are reserved.
+
+#### Use custom workspace emoji
+
+To choose custom emoji from your Slack workspace, the Datadog Slack app needs permission to read your workspace's emoji. If it doesn't have it yet, the settings page shows only built-in emoji and a **Reinstall the Slack app** link. Reinstall the app to grant the permission, then select any custom emoji in the picker.
+
+If a custom emoji used by an action is removed from your workspace, the settings page flags it and you need to choose a different emoji before saving.
 
 If you react with an action's emoji while the action is turned off, Datadog replies with a message that only you can see, explaining how to turn it on.
 
