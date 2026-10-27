@@ -918,7 +918,7 @@ The Datadog Operator detects Talos automatically from the node's OS image, which
 
 With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
 
-Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
+By default, Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
 
 ```shell
 kubectl label --overwrite ns <namespace> \
@@ -929,7 +929,7 @@ kubectl label --overwrite ns <namespace> \
 
 The API server integration is automatically configured. The Datadog Agent discovers it automatically.
 
-### Etcd
+### Etcd {#TalosEtcd}
 
 By providing read access to the etcd certificates located on the host, the Datadog Agent check can communicate with etcd and start collecting etcd metrics.
 
@@ -938,7 +938,7 @@ On Talos, those certificates exist only on control-plane nodes, so the Agent mus
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Control plane monitoring is enabled by default. Adding the toleration below is the only change needed: the Operator creates the etcd check configuration and mounts the host certificates for you.
+Control plane monitoring is enabled by default, and the Operator creates the etcd check configuration and mounts the host certificates for you. Adding the following toleration is the only change needed.
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -1022,9 +1022,9 @@ Secure ports allow authentication and authorization to protect your Control Plan
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Operator configures the API server, Controller Manager, and Scheduler checks as cluster checks, which run regardless of where the Agent is scheduled. No extra configuration is required beyond the manifest in the [Etcd](#etcd) section above; the toleration there applies to the etcd check only.
+The Operator runs the API server, Controller Manager, and Scheduler checks as cluster checks, so they need no toleration and no Agent configuration. The toleration in the [Etcd](#TalosEtcd) section applies to the etcd check only.
 
-Both components still need `bind-address` set to `0.0.0.0`, as described in the notes below.
+The Controller Manager and Scheduler still need `bind-address` set to `0.0.0.0`, as described in the following notes.
 
 {{% /tab %}}
 {{% tab "Helm" %}}

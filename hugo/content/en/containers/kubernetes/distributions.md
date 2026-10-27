@@ -106,7 +106,7 @@ spec:
 
 Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
 
-**Note**: Datadog Operator `1.29.0+` detects AKS from the node labels and sets `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS` for you, so the `clusterAgent` override above can be omitted. Keep it on earlier versions, or if detection does not resolve, for example because the Operator pod runs on a node without AKS labels. You can also set the provider explicitly with the `agent.datadoghq.com/cluster-provider: aks` annotation on the `DatadogAgent`. See the [providers documentation][2].
+**Note**: Datadog Operator `1.29.0+` detects AKS from the node labels and sets `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS` for you, so the `clusterAgent` override in the preceding manifest can be omitted. Keep it on earlier versions, or if detection does not resolve, for example because the Operator pod runs on a node without AKS labels. You can also set the provider explicitly with the `agent.datadoghq.com/cluster-provider: aks` annotation on the `DatadogAgent`. See the [providers documentation][2].
 
 [1]: /getting_started/site
 [2]: /containers/datadog_operator/providers
@@ -368,9 +368,9 @@ providers:
 
 {{% tab "Datadog Operator" %}}
 
-Starting with Datadog Operator `1.29.0+`, enable Autopilot mode by setting the `agent.datadoghq.com/cluster-provider` annotation to `gke-autopilot`. The Operator configures the Agent for GKE Autopilot, including API server pod discovery and the required WorkloadAllowlist.
+Datadog Operator `1.29.0+` enables Autopilot mode when you set the `agent.datadoghq.com/cluster-provider` annotation to `gke-autopilot`. The Operator configures the Agent for GKE Autopilot, including API server pod discovery and the required WorkloadAllowlist. On versions `1.27.0` through `1.28.x`, use the `experimental.agent.datadoghq.com/autopilot` annotation instead.
 
-<div class="alert alert-info">The <code>experimental.agent.datadoghq.com/autopilot</code> annotation also enables Autopilot mode, and continues to work for existing installations. It is deprecated in favor of <code>agent.datadoghq.com/cluster-provider</code> and is removed no earlier than Datadog Operator v1.38.0. Set only one of the two.</div>
+<div class="alert alert-info">The <code>experimental.agent.datadoghq.com/autopilot</code> annotation also enables Autopilot mode, and continues to work for existing installations. It is deprecated in favor of <code>agent.datadoghq.com/cluster-provider</code> and will not be removed before Datadog Operator v1.38.0. Set only one of the two.</div>
 
 Custom `datadog-agent.yaml`:
 
@@ -553,11 +553,17 @@ spec:
 
 **Note**: The `nodeAgent.securityContext.seLinuxOptions` override is necessary for log collection when deploying with the Operator. If log collection is not enabled, you can omit this override.
 
-#### Simplified configuration
+### Configure OpenShift with automatic detection
 
-The Operator has detected OpenShift from the node's `node.openshift.io/os_id` label since `1.29.0+`. Starting with Datadog Operator `1.31.0+`, it also applies the platform configuration itself: the `datadog-agent-scc` ServiceAccount (when it is authorized to use the `privileged` SCC), SELinux type `spc_t`, the `master` and `infra` tolerations, and `kubelet.tlsVerify: false`. It also enables [Control Plane monitoring][4].
+The Operator has detected OpenShift from the node's `node.openshift.io/os_id` label since version `1.29.0`. Datadog Operator `1.31.0+` also applies the platform configuration itself:
 
-Detection needs no annotation. The manifest below is equivalent to the one above on v1.31.0 and later:
+- The `datadog-agent-scc` ServiceAccount, when it is authorized to use the `privileged` SCC
+- SELinux type `spc_t`
+- The `master` and `infra` tolerations
+- `kubelet.tlsVerify: false`
+- [Control Plane monitoring][4]
+
+Detection needs no annotation. On `1.31.0+`, the following manifest is equivalent to the preceding one:
 
 ```yaml
 kind: DatadogAgent
@@ -589,7 +595,7 @@ spec:
       hostNetwork: true
 ```
 
-Keep `hostNetwork: true` only if you want the Agent to reach cloud provider metadata services. If detection does not resolve, for example because the Operator pod runs on a node without the OpenShift label, set the provider explicitly with the `agent.datadoghq.com/cluster-provider: openshift-rhcos` annotation on the `DatadogAgent`. Use the full configuration above to override any of these values. For the complete provider behavior, see the [providers documentation][3].
+Keep `hostNetwork: true` only if you want the Agent to reach cloud provider metadata services. If detection does not resolve, for example because the Operator pod runs on a node without the OpenShift label, set the provider explicitly with the `agent.datadoghq.com/cluster-provider: openshift-rhcos` annotation on the `DatadogAgent`. To override any of these values, use the full configuration shown previously. For the complete provider behavior, see the [providers documentation][3].
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 [2]: https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#role-based-access-to-ssc_configuring-internal-oauth
@@ -726,7 +732,7 @@ Talos Linux is an immutable OS with no shell and no host user database, and it m
 
 The Datadog Operator detects Talos automatically from the node's OS image and applies that configuration, which requires Datadog Operator version 1.31.0 or later. With Helm, set `providers.talos.enabled` to `true`.
 
-Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
+By default, Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
 
 ```shell
 kubectl label --overwrite ns <namespace> \
@@ -735,7 +741,7 @@ kubectl label --overwrite ns <namespace> \
 
 **Note**: If the DaemonSet was rejected before the label was applied, its controller backs off and does not retry for several minutes. Run `kubectl rollout restart ds <DAEMONSET_NAME> -n <namespace>` to apply the change immediately.
 
-eBPF-based features, including Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP queue length, and Workload Protection, read tracefs from the host. Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.259.0 or later mount it at the location Talos uses. On earlier versions, the Agent reports as healthy while these probes fail to attach; check `agent status` to confirm they are running.
+eBPF-based features, including Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP queue length, and Workload Protection, read tracefs from the host. Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.261.0 or later mount it at the location Talos uses. On earlier versions, the Agent reports as healthy while these probes fail to attach; check `agent status` to confirm they are running.
 
 For Control Plane metrics, see [Kubernetes on Talos Linux][14].
 
