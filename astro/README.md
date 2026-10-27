@@ -1,11 +1,11 @@
 # Astro docs
 
+This folder contains the Astro-rendered portion of the docs site. The Astro docs are in development, and will gradually go live in sections.
+
 > [!IMPORTANT]
 > These docs are not live. Changing something in this folder does not update the Datadog documentation site. To revise the live docs, update the [`hugo`][1] folder instead.
 >
 > If you revise the API Reference docs on Hugo, we recommend revising the unpublished Astro version as well, to avoid losing your changes in the upcoming migration.
-
-This folder contains the Astro-rendered portion of the docs site. The Astro docs are in development, and will gradually go live in sections.
 
 ## Status of the migration from Hugo to Astro
 
