@@ -26,8 +26,8 @@ Tracing must be enabled on the agent before any runs are recorded. Open the agen
 Your agent should also have:
 
 - Recent runs that represent real usage
-- Access to the [Datadog MCP Server][2] so it can inspect its traces
-- Permission to propose updates to its configuration
+- Access to the Datadog MCP Server [trace and span tools][2] so it can inspect its traces. If your configuration does not enable all Datadog MCP Server tools, confirm that these are enabled.
+- Edit permission for the agent, so it can propose updates to its own configuration
 - Enough run history to distinguish recurring behavior from a one-time issue
 
 All proposed configuration changes require your approval before they are applied.
@@ -42,7 +42,6 @@ In Agent Observability, review both successful and unsuccessful runs. Pay partic
 - Repeated calls to the same tool
 - Tools that consistently return errors
 - Parameters that receive the same value in every run
-- Answers that are unsupported, incomplete, or unnecessarily expensive
 - Long execution paths that could be simplified
 
 Open individual traces to inspect the original input, the agent's response, and the sequence of tool calls that produced it.
@@ -153,6 +152,6 @@ Make one focused improvement at a time. Small, trace-backed changes take less ef
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/
-[2]: /mcp_server/
+[2]: /llm_observability/build_with_ai/mcp_server/#trace-and-span-tools
 [3]: https://app.datadoghq.com/actions/agents
 [4]: /actions/agents/#tools
