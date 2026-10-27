@@ -1,3 +1,3 @@
 ---
-title: Enviar eventos para un experimento de Agent Observability
+title: Envíe eventos para un experimento de Agent Observability
 ---
