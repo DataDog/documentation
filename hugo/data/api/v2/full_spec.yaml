@@ -59698,6 +59698,33 @@ components:
       type: string
       x-enum-varnames:
         - HISTORICALDETECTIONSJOB
+    HistoricalJobFailure:
+      description: |-
+        Details about why the job failed. Only present when the job has failed and won't be retried.
+      properties:
+        hint:
+          description: A suggestion to fix the failure.
+          example: Narrow the time range or reduce the data scanned.
+          type: string
+        reason:
+          $ref: "#/components/schemas/HistoricalJobFailureReason"
+      type: object
+    HistoricalJobFailureReason:
+      description: The reason why the job failed.
+      enum:
+        - rule_configuration
+        - query_too_expensive
+        - internal_error
+      example: query_too_expensive
+      type: string
+      x-enum-descriptions:
+        - The rule, or the dataset it references, can't run as written.
+        - The query scans too much data.
+        - An internal error occurred. These are usually temporary.
+      x-enum-varnames:
+        - RULE_CONFIGURATION
+        - QUERY_TOO_EXPENSIVE
+        - INTERNAL_ERROR
     HistoricalJobListMeta:
       description: Metadata about the list of jobs.
       properties:
@@ -59824,6 +59851,8 @@ components:
         createdFromRuleId:
           description: ID of the rule used to create the job (if it is created from a rule).
           type: string
+        failure:
+          $ref: "#/components/schemas/HistoricalJobFailure"
         jobDefinition:
           $ref: "#/components/schemas/JobDefinition"
         jobName:
