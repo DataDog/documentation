@@ -106,7 +106,10 @@ spec:
 
 Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
 
+**Note**: Datadog Operator `1.29.0+` detects AKS from the node labels and sets `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS` for you, so the `clusterAgent` override above can be omitted. Keep it on earlier versions, or if detection does not resolve, for example because the Operator pod runs on a node without AKS labels. You can also set the provider explicitly with the `agent.datadoghq.com/cluster-provider: aks` annotation on the `DatadogAgent`. See the [providers documentation][2].
+
 [1]: /getting_started/site
+[2]: /containers/datadog_operator/providers
 {{% /tab %}}
 {{% tab "Helm" %}}
 
