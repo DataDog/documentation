@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-You can disable Real User Monitoring (RUM) for an application from its settings in Datadog. For organizations using RUM without Limits, disabling RUM stops billing for the application's RUM data. Disabling RUM does not require a code change.
+You can disable Real User Monitoring (RUM) for an application from its settings in Datadog. For organizations using RUM without Limits™, disabling RUM stops billing for the application's RUM data. Disabling RUM does not require a code change.
 
 RUM has two parts that you manage separately: the SDK in your application, which sends data, and the RUM application in Datadog, which receives it. Changing one part does not change the other.
 
