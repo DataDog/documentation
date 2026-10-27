@@ -555,7 +555,7 @@ spec:
 
 #### Simplified configuration
 
-Starting with Datadog Operator `1.31.0+`, the Operator detects OpenShift from the node's `node.openshift.io/os_id` label and applies the platform configuration itself: the `datadog-agent-scc` ServiceAccount (when it is authorized to use the `privileged` SCC), SELinux type `spc_t`, the `master` and `infra` tolerations, and `kubelet.tlsVerify: false`. It also enables [Control Plane monitoring][4].
+The Operator has detected OpenShift from the node's `node.openshift.io/os_id` label since `1.29.0+`. Starting with Datadog Operator `1.31.0+`, it also applies the platform configuration itself: the `datadog-agent-scc` ServiceAccount (when it is authorized to use the `privileged` SCC), SELinux type `spc_t`, the `master` and `infra` tolerations, and `kubelet.tlsVerify: false`. It also enables [Control Plane monitoring][4].
 
 Detection needs no annotation. The manifest below is equivalent to the one above on v1.31.0 and later:
 
