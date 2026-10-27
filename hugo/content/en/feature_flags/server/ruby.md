@@ -287,13 +287,60 @@ end
 
 To mutate flag state during a test, call `add_flag(flag_key:, value:)` on the provider instance. The same pattern applies to Minitest — replace the `around` hook with `setup`/`teardown` methods.
 
+## Use the Java SDK on JRuby
+
+The Ruby SDK does not support Feature Flags on JRuby. On JRuby, the Ruby SDK writes a warning to the log and does not enable Feature Flags. Use the [Java SDK][6] instead. JRuby calls the Java SDK through its Java integration.
+
+Use the versions in the [Java SDK compatibility requirements][7].
+
+1. Get the `dd-openfeature` JAR file, the OpenFeature Java SDK JAR file, and their dependencies. For example, use Maven to copy them to a directory.
+2. Load the JAR files in your application with `require`.
+3. Set the environment variables for your configuration source. See [Server SDK Configuration Sources][8].
+4. Start JRuby with `dd-java-agent`. Use the `-J` option to send the `-javaagent` option to the JVM.
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+# Use Agent Remote Configuration. Agentless delivery is the default.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+
+jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb
+```
+
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'datadog.trace.api.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+The JAR files alone do not enable flag delivery. The Datadog provider uses classes from `dd-java-agent`. If the JVM does not load `dd-java-agent`, the provider does not initialize. Flag evaluations then return the default values.
+
+For provider events, error handling, and the evaluation methods, see the [Java SDK][6] page. JRuby uses the same classes and methods.
+
 ## Troubleshooting
 
 ### Feature flags always return default values
 
 If feature flags unexpectedly always return default values, check the following:
 
+- If the application runs on JRuby, use the Java SDK. See [Use the Java SDK on JRuby][9].
 - Verify Remote Configuration is enabled in your Datadog Agent configuration
+- Verify that the Datadog Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][10].
 - Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
 - Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
 - Verify the `datadog` gem version includes OpenFeature support (2.24.0 or later)
@@ -326,3 +373,8 @@ Look for messages about:
 [3]: https://openfeature.dev/
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /feature_flags/server/java/
+[7]: /feature_flags/server/java/#compatibility-requirements
+[8]: /feature_flags/concepts/configuration_sources/
+[9]: #use-the-java-sdk-on-jruby
+[10]: /feature_flags/concepts/configuration_sources/#agent-availability

@@ -119,7 +119,7 @@ El conjunto de datos capturado por el muestreo de diversidad no se muestrea de m
 
 #### Muestreo plano del 1% {#one-percent-flat-sampling}
 
-El muestreo plano del 1% captura:
+Los datos del muestreo uniforme del 1 % se conservan durante 30 días e incluyen:
 1. Todas las trazas correlacionadas con el 1% de las sesiones RUM ingeridas**que tuvieron trazas ingeridas**, lo que garantiza que siempre pueda encontrar algunas sesiones indexadas que tengan datos de rastreo asociados. Esto mejora la [correlación entre APM y RUM][20], lo que le permite depurar problemas de usuario al visualizar tanto las sesiones de frontend como las trazas de backend juntas. La muestra se aplica según el `session_id`, lo que significa que todas las trazas vinculadas a la misma sesión RUM comparten una decisión de indexación coherente.
 2. Una **muestra uniforme del 1%** de los [tramos ingeridos][12], aplicada según el `trace_id` para que todos los tramos en la misma traza compartan la misma decisión de muestreo. Utilice esta muestra para el monitoreo general del estado del sistema y el análisis de tendencias.
 

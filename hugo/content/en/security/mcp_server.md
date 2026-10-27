@@ -33,6 +33,8 @@ The [Datadog MCP Server][1] lets AI agents query your security data through the 
 
 <div class="alert alert-info">This page covers the <code>security</code> toolset of the remote Datadog MCP Server. For the Code Security MCP Server, which runs locally and scans source code during development, see <a href="/security/code_security/dev_tool_int/mcp_server/">Code Security MCP Server</a>.</div>
 
+Query Code Security findings (SAST, secrets, library vulnerabilities, and IaC misconfigurations) with this same `security` toolset. See [Query findings already in Datadog][7].
+
 ### Use cases
 
 You can use the `security` toolset to:
@@ -138,6 +140,10 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 `assign_datadog_security_findings`
 : Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
+: *Permissions required: `Security Monitoring Findings Write`*
+
+`override_datadog_security_findings_severity`
+: Sets or clears the manual severity override on up to 100 security findings. Action `set` requires a severity (`critical`, `high`, `medium`, `low`, or `info`); action `clear` removes the manual override. Supports an optional description. Findings whose severity is set by an automation rule are skipped and listed as warnings in the response.
 : *Permissions required: `Security Monitoring Findings Write`*
 
 `list_datadog_security_findings_automation_rules`
@@ -286,3 +292,4 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 [4]: /mcp_server/setup/
 [5]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
 [6]: /security/code_security/iac_security/custom_rules/
+[7]: /security/code_security/dev_tool_int/mcp_server/#query-findings-already-in-datadog

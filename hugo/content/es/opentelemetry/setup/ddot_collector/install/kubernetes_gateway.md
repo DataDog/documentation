@@ -2,77 +2,80 @@
 code_lang: kubernetes_gateway
 code_lang_weight: 2
 further_reading:
-- link: https://www.datadoghq.com/blog/ddot-gateway
-  tag: Blog
-  text: Centralizar y controlar tu pipeline de OpenTelemetry con la puerta de enlace
-    DDOT
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: Documentación
-  text: Uso de componentes personalizados de OpenTelemetry con el Datadog Agent
+  text: Utilice componentes personalizados de OpenTelemetry con el Datadog Agent
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralice y gobierne su canalización de OpenTelemetry con el gateway DDOT
+- link: https://www.datadoghq.com/blog/otel-gateway-topology-view/
+  tag: Blog
+  text: Solucione problemas de gateways de OTel con Datadog Fleet Automation
 - link: https://opentelemetry.io/docs/collector/deployment/gateway/
   tag: OpenTelemetry
-  text: 'Despliegue del recopilador: Puerta de enlace'
+  text: 'Implementación del Collector: Gateway'
 - link: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/loadbalancingexporter
   tag: OpenTelemetry
-  text: Exportador de balanceos de carga
+  text: Exportador de balanceo de carga
 - link: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor
   tag: OpenTelemetry
-  text: Procesador de muestreo del seguimiento
-title: Instalar el recopilador de DDOT como puerta de enlace en Kubernetes
+  text: Procesador de muestreo basado en seguimiento de las últimas líneas
+title: Instale el Collector de DDOT como un Gateway en Kubernetes
 type: multi-code-lang
 ---
-
 <div class="alert alert-info">
-Esta guía asume que tienes conocimientos del despliegue del recopilador de DDOT como DaemonSet. Para obtener más información, consulta <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Instalar el recopilador de DDOT como DaemonSet en Kubernetes</a>.
+Esta guía asume que usted está familiarizado con la implementación del Collector de DDOT como un DaemonSet. Para obtener más información, consulte <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Instale el Collector de DDOT como un DaemonSet en Kubernetes</a>.
 </div>
 
-## Información general
+## Descripción general {#overview}
 
-El recopilador de OpenTelemetry puede desplegarse de varias formas. El patrón *daemonset* es un despliegue frecuente en el que una instancia del recopilador se ejecuta en cada nodo Kubernetes junto con el Datadog Agent principal.
+El Collector de OpenTelemetry se puede implementar de varias maneras. El patrón *daemonset* es una implementación común donde una instancia del Collector se ejecuta en cada nodo de Kubernetes junto al Datadog Agent principal.
 
-{{< img src="opentelemetry/embedded_collector/ddot_daemonset.png" alt="Diagrama de arquitectura de un patrón daemonset del recopilador de OpenTelemetry. Un clúster Kubernetes contiene tres nodos. En cada nodo, una aplicación instrumentada con OpenTelemetry envía datos de OTLP a un DaemonSet del Agent local. El DaemonSet del Agent envía a continuación estos datos directamente al backend Datadog." style="width:100%;" >}}
+{{< img src="opentelemetry/embedded_collector/ddot_daemonset.png" alt="Diagrama de arquitectura del patrón daemonset del Collector de OpenTelemetry. Un clúster de Kubernetes contiene tres nodos. En cada nodo, una aplicación instrumentada con OpenTelemetry envía datos OTLP a un DaemonSet de Agent local. El DaemonSet de Agent luego reenvía estos datos directamente al backend de Datadog." style="width:100%;" >}}
 
-El patrón de [puerta de enlace][6] proporciona una opción de despliegue adicional que utiliza un servicio de recopilador centralizado e independiente. Esta capa de puerta de enlace puede realizar acciones como el muestreo basado en el seguimiento, la agregación, el filtrado y el enrutamiento, antes de exportar los datos a uno o más backends como Datadog. Actúa como punto central para la gestión y la aplicación de políticas de observabilidad.
+El patrón [gateway][6] proporciona una opción de implementación adicional que utiliza un servicio de Collector centralizado e independiente. Esta capa de gateway puede realizar acciones como el muestreo basado en seguimiento de las últimas líneas, agregación, filtrado y enrutamiento antes de exportar los datos a uno o más backends, como Datadog. Actúa como un punto central para gestionar y aplicar políticas de observabilidad.
 
-{{< img src="opentelemetry/embedded_collector/ddot_gateway.png" alt="Diagrama de arquitectura de un patrón de puerta de enlace del recopilador de OpenTelemetry. Las aplicaciones envían datos de OTLP a DaemonSets del Agent local que se ejecutan en cada nodo. Los DaemonSets reenvían estos datos a un balanceador de carga central, que los distribuye a un despliegue de pods del recopilador de puerta de enlace. Estos pods de puerta de enlace a continuación procesan y envían los datos de telemetría a Datadog." style="width:100%;" >}}
+{{< img src="opentelemetry/embedded_collector/ddot_gateway_diagram.png" alt="Diagrama de arquitectura del patrón gateway del Collector de OpenTelemetry. Las aplicaciones envían datos OTLP a los DaemonSets de DDOT locales que se ejecutan en cada nodo. Los DaemonSets reenvían estos datos a un balanceador de carga central, el cual los distribuye a una implementación separada de pods de gateway de DDOT. Estos pods de gateway envían entonces los datos de telemetría a Datadog." style="width:100%;" >}}
 
-Al activar la puerta de enlace:
-1.  Un despliegue Kubernetes (`<RELEASE_NAME>-datadog-otel-agent-gateway-deployment`) gestiona **pods del recopilador de puerta de enlace** independiente.
-2.  Un servicio Kubernetes (`<RELEASE_NAME>-datadog-otel-agent-gateway`) expone los pods de puerta de enlace y proporciona un balanceo de carga.
-3.  Los **pods del recopilador de DaemonSet** existentes están configurados por defecto para enviar tus datos de telemetría al servicio de puerta de enlace en lugar de directamente a Datadog.
+Cuando habilite el gateway:
+1.  Un Deployment de Kubernetes (`<RELEASE_NAME>-datadog-otel-agent-gateway-deployment`) gestiona los pods del **Collector gateway** independientes.
+2.  Un Service de Kubernetes (`<RELEASE_NAME>-datadog-otel-agent-gateway`) expone los pods del gateway y proporciona balanceo de carga.
+3.  Los pods del **DaemonSet Collector** existentes están configurados por defecto para enviar sus datos de telemetría al servicio del gateway en lugar de directamente a Datadog.
 
-## Requisitos
+En un despliegue de gateway, adjunte la información del servidor antes de que la telemetría llegue al gateway. Para la configuración de hostname recomendada, consulte [Hostname and Tagging][12].
 
-Antes de empezar, asegúrate de tener lo siguiente:
+## Requisitos {#requirements}
+
+Antes de comenzar, asegúrese de tener lo siguiente:
 
 * **Cuenta de Datadog**:
     * Una [cuenta de Datadog][1].
-    * Tu [clave de API][2] de Datadog.
+    * Su [clave de API de Datadog][2].
 * **Software**:
-    * Un clúster Kubernetes (v1.29 o posterior). EKS Fargate y GKE Autopilot no son compatibles.
-    * [Helm][3] (v3 o posterior).
-    * Datadog Helm chart versión 3.160.1 o posterior o Datadog Operator versión 1.23.0 o posterior.
+    * Un clúster de Kubernetes (v1.29+). EKS Fargate y GKE Autopilot no son compatibles.
+    * [Helm][3] (v3+).
+    ​* Versión 3.160.1+ del chart de Helm de Datadog o versión 1.23.0+ del Datadog Operator.
     * [kubectl][4].
 * **Red**:
   {{% otel-network-requirements %}}
 
-## Instalación y configuración
+## Instalación y configuración {#installation-and-configuration}
 
-Esta guía muestra cómo configurar la puerta de enlace del recopilador de DDOT utilizando el Datadog Operator o Helm chart.
+Esta guía muestra cómo configurar el gateway del Collector DDOT utilizando el Datadog Operator o el chart de Helm.
 
-<div class="alert alert-info">Esta instalación es necesaria para las siguientes configuraciones de Datadog: SDK + DDOT y SDK OpenTelemetry + DDOT. Aunque el SDK Datadog implementa la API OpenTelemetry, sigue necesitando que el recopilador de DDOT procese y reenvíe métricas y logs de OTLP.</div>
+<div class="alert alert-info">Esta instalación es necesaria tanto para las configuraciones de Datadog SDK + DDOT como de OpenTelemetry SDK + DDOT. Aunque el Datadog SDK implementa la API de OpenTelemetry, todavía requiere el DDOT Collector para procesar y reenviar métricas y registros de OTLP.</div>
 
-Elige uno de los siguientes métodos de instalación:
+Elija uno de los siguientes métodos de instalación:
 
-- **Datadog Operator**: Estrategia nativa de Kubernetes que concilia y conserva automáticamente tu configuración de Datadog. Informa del estado del despliegue, de la salud y de los errores en su estado de recurso personalizado, y limita el riesgo de configuraciones incorrectas gracias a opciones de configuración de alto nivel.
-- **Helm chart**: Forma sencilla de desplegar el Datadog Agent. Proporciona capacidades de versionado, rollback y plantillas, lo que hace que los despliegues sean consistentes y más fáciles de replicar.
+- **Datadog Operator**: Un enfoque nativo de Kubernetes que reconcilia y mantiene automáticamente su configuración de Datadog. Informa el estado de la implementación, el estado de salud y los errores en el estado de su Custom Resource, y limita el riesgo de una configuración incorrecta gracias a opciones de configuración de nivel superior.
+- **Helm chart**: Una forma sencilla de implementar el Datadog Agent. Proporciona capacidades de control de versiones, reversión y creación de plantillas, lo que hace que las implementaciones sean consistentes y más fáciles de replicar.
 
-### Instalar el Datadog Operator o Helm
+### Instale el Datadog Operator o Helm {#install-the-datadog-operator-or-helm}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Si aún no has instalado el Datadog Operator, puedes instalarlo en tu clúster utilizando el Helm chart del Datadog Operator:
+Si aún no ha instalado el Datadog Operator, puede instalarlo en su clúster utilizando el Helm chart del Datadog Operator:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -80,35 +83,35 @@ helm repo update
 helm install datadog-operator datadog/datadog-operator
 ```
 
-Para obtener más información, consulta la [documentación del Datadog Operator][1].
+Para obtener más información, consulte la [documentación del Datadog Operator][1].
 
 [1]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Si aún no has añadido el repositorio Helm de Datadog, añádelo ahora:
+Si aún no ha agregado el repositorio de Helm de Datadog, agréguelo ahora:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 
-Para obtener más información sobre las opciones de configuración de Helm, consulta el [README Helm chart de Datadog][1].
+Para obtener más información sobre las opciones de configuración de Helm, consulte el [README del chart de Helm de Datadog][1].
 
 [1]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Despliegue de la puerta de enlace con un DaemonSet
+### Implementación del gateway con un DaemonSet {#deploying-the-gateway-with-a-daemonset}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Para empezar, activa tanto la puerta de enlace como el recopilador de DaemonSet en tu recurso `DatadogAgent`. Esta es la configuración más frecuente.
+Para comenzar, habilite tanto el gateway como el Collector de DaemonSet en su recurso `DatadogAgent`. Esta es la configuración más común.
 
-Crea un archivo llamado `datadog-agent.yaml`:
+Cree un archivo llamado `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -123,24 +126,24 @@ spec:
         keyName: api-key
 
   features:
-    # Activar el recopilador en el DaemonSet del Agent
+    # Enable the Collector in the Agent DaemonSet
     otelCollector:
       enabled: true
 
-    # Activar el despliegue de la puerta de enlace independiente
+    # Enable the standalone Gateway Deployment
     otelAgentGateway:
       enabled: true
 
   override:
     otelAgentGateway:
-      # Número de réplicas
+      # Number of replicas
       replicas: 3
-      # Controlar el posicionamiento de pods de puerta de enlace
+      # Control placement of gateway pods
       nodeSelector:
         gateway: "true"
 ```
 
-Aplica la configuración:
+Aplique la configuración:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
@@ -149,7 +152,7 @@ kubectl apply -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Para empezar, activa tanto la puerta de enlace como el recopilador de DaemonSet en tu recurso `values.yaml`. Esta es la configuración más frecuente.
+Para comenzar, habilite tanto el gateway como el Collector de DaemonSet en su archivo `values.yaml`. Esta es la configuración más común.
 
 ```yaml
 # values.yaml
@@ -157,23 +160,23 @@ targetSystem: "linux"
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Activar el recopilador en el DaemonSet del Agent
+  # Enable the Collector in the Agent Daemonset
   otelCollector:
     enabled: true
 
-# Activar el despliegue de la puerta de enlace independiente
+# Enable the standalone Gateway Deployment
 otelAgentGateway:
   enabled: true
   replicas: 3
   nodeSelector:
-    # Ejemplo de selector de posicionamiento de pods de puerta de enlace en nodos específicos
+    # Example selector to place gateway pods on specific nodes
     gateway: "true"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-En este caso, el recopilador de DaemonSet utiliza una configuración por defecto que envía datos de OTLP al servicio Kubernetes de la puerta de enlace:
+En este caso, el Collector de DaemonSet utiliza una configuración predeterminada que envía datos OTLP al servicio de Kubernetes del gateway:
 
 ```yaml
 receivers:
@@ -218,7 +221,7 @@ service:
       exporters: [otlphttp]
 ```
 
-El recopilador de puerta de enlace utiliza una configuración por defecto que escucha en los puertos de servicio y envía datos a Datadog:
+El Collector del gateway utiliza una configuración predeterminada que escucha en los puertos del servicio y envía datos a Datadog:
 
 ```yaml
 receivers:
@@ -257,15 +260,15 @@ service:
 ```
 
 <div class="alert alert-tip">
-<strong>Para usuarios de Helm:</strong> Configura <code>otelAgentGateway.affinity</code> o <code>otelAgentGateway.nodeSelector</code> para controlar el posicionamiento de los pods y ajusta <code>otelAgentGateway.replicas</code> para escalar la puerta de enlace.<br>
-<strong>Para usuarios del Operator:</strong> Utiliza <code>override.otelAgentGateway.affinity</code>, <code>override.otelAgentGateway.nodeSelector</code> y <code>override.otelAgentGateway.replicas</code> para esos parámetros.</div>
+<strong>Para usuarios de Helm:</strong> Configure <code>otelAgentGateway.affinity</code> o <code>otelAgentGateway.nodeSelector</code> para controlar la ubicación de los pods y ajuste <code>otelAgentGateway.replicas</code> para escalar el gateway.<br>
+<strong>Para usuarios de tipo Operador:</strong> Utilice <code>override.otelAgentGateway.affinity</code>, <code>override.otelAgentGateway.nodeSelector</code>, y <code>override.otelAgentGateway.replicas</code> para estos ajustes.</div>
 
-### Despliegue de una puerta de enlace independiente
+### Implementación de un gateway independiente {#deploying-a-standalone-gateway}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Si ya dispones de un despliegue de DaemonSet, puedes desplegar la puerta de enlace de forma independiente desactivando otros componentes:
+Si tiene una implementación de DaemonSet existente, puede implementar el gateway de forma independiente deshabilitando otros componentes:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -285,26 +288,26 @@ spec:
 
   override:
     otelAgentGateway:
-      # Número de réplicas
+      # Number of replicas
       replicas: 3
-      # Controlar el posicionamiento de pods de puerta de enlace
+      # Control placement of gateway pods
       nodeSelector:
         gateway: "true"
 
-    # Desactivar el DaemonSet del Agent
+    # Disable the Agent DaemonSet
     nodeAgent:
       disabled: true
-    # Desactivar el Cluster Agent
+    # Disable the Cluster Agent
     clusterAgent:
       disabled: true
 ```
 
-Después de desplegar la puerta de enlace, debes actualizar la configuración de los recopiladores de DaemonSet existentes para enviar datos al nuevo endpoint del servicio de puerta de enlace (por ejemplo, `http://datadog-gateway-otel-agent-gateway:4318`).
+Después de implementar el gateway, debe actualizar la configuración de sus Collectors de DaemonSet existentes para enviar datos al nuevo punto de conexión del servicio de gateway (por ejemplo, `http://datadog-gateway-otel-agent-gateway:4318`).
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Si ya dispones de un despliegue de DaemonSet, puedes desplegar la puerta de enlace de forma independiente.
+Si tiene una implementación de DaemonSet existente, puede implementar el gateway de forma independiente.
 
 ```yaml
 # values.yaml
@@ -324,17 +327,17 @@ otelAgentGateway:
     gateway: "true"
 ```
 
-Después de desplegar la puerta de enlace, debes actualizar la configuración de tus recopiladores DaemonSet existentes para enviar datos al nuevo endpoint del servicio de puerta de enlace (por ejemplo, `http://gw-only-otel-agent-gateway:4318`).
+Después de implementar el gateway, debe actualizar la configuración de sus Collectors de DaemonSet existentes para enviar datos al nuevo punto de conexión del servicio de gateway (por ejemplo, `http://gw-only-otel-agent-gateway:4318`).
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Personalización de las configuraciones del recopilador
+### Personalización de las configuraciones del Collector {#customizing-collector-configurations}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Puedes personalizar la configuración del recopilador de puerta de enlace utilizando ConfigMaps. Crea un ConfigMap con tu configuración personalizada:
+Puede personalizar la configuración del Collector del gateway mediante ConfigMaps. Cree un ConfigMap con su configuración personalizada:
 
 ```yaml
 apiVersion: v1
@@ -370,7 +373,7 @@ data:
           exporters: [datadog]
 ```
 
-A continuación, menciónalo en tu recurso `DatadogAgent`:
+Luego, haga referencia a él en su recurso `DatadogAgent`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -387,7 +390,7 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
-      # Mencionar el ConfigMap personalizado
+      # Reference the custom ConfigMap
       config:
         configMap:
           name: otel-gateway-config
@@ -397,14 +400,14 @@ spec:
       replicas: 3
 ```
 
-Para ConfigMaps de varios elementos o configuración en línea, consulta los [ejemplos de Datadog Agent][1].
+Para ConfigMaps de varios elementos o configuración en línea, consulte los [ejemplos de DatadogAgent][1].
 
 [1]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Puedes anular las configuraciones por defecto de los recopiladores DaemonSet y puerta de enlace utilizando los valores `datadog.otelCollector.config` y `otelAgentGateway.config`, respectivamente.
+Puede anular las configuraciones predeterminadas tanto para los Collectors de DaemonSet como del gateway utilizando los valores `datadog.otelCollector.config` y `otelAgentGateway.config`, respectivamente.
 
 ```yaml
 # values.yaml
@@ -413,7 +416,7 @@ fullnameOverride: "my-gw"
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Activar y configurar el recopilador de DaemonSet
+  # Enable and configure the DaemonSet Collector
   otelCollector:
     enabled: true
     config: |
@@ -439,7 +442,7 @@ datadog:
             receivers: [otlp]
             exporters: [otlp]
 
-# Activar y configurar el recopilador de puerta de enlace
+# Enable and configure the gateway Collector
 otelAgentGateway:
   enabled: true
   replicas: 3
@@ -477,20 +480,20 @@ otelAgentGateway:
 {{% otel-infraattributes-prereq %}}
 
 <div class="alert alert-info">
-Si configuras <code>fullnameOverride</code>, el nombre de servicio Kubernetes de la puerta de enlace se convierte en <code><fullnameOverride>-otel-agent-gateway</code>. Los puertos definidos en <code>otelAgentGateway.ports</code> están expuestos en este servicio. Asegúrate de que estos puertos coinciden con la configuración del receptor OTLP en la configuración de la puerta de enlace y del exportador OTLP en el DaemonSet.
+Si establece <code>fullnameOverride</code>, el nombre del servicio de Kubernetes de la puerta de enlace se convierte en <code><fullnameOverride>-otel-agent-gateway</code>. Los puertos definidos en <code>otelAgentGateway.ports</code> se exponen en este servicio. Asegúrese de que estos puertos coincidan con la configuración del receptor OTLP en la puerta de enlace y la configuración del exportador OTLP en el DaemonSet.
 </div>
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Las configuraciones de ejemplo utilizan TLS inseguro por simplicidad. Sigue las [instrucciones de OTel configtls][7] si quieres activar TLS.
+Las configuraciones de ejemplo utilizan TLS inseguro por simplicidad. Siga las [instrucciones de configtls de OTel][7] si desea habilitar TLS.
 
-### Opciones avanzadas de configuración
+### Opciones de configuración avanzada {#advanced-configuration-options}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-El Datadog Operator proporciona opciones de configuración adicionales para la puerta de enlace del Agent de OTel en `override.otelAgentGateway` (**NO** `features.otelAgentGateway`, excepto `featureGates`):
+El Datadog Operator proporciona opciones de configuración adicionales para el OTel Agent Gateway bajo `override.otelAgentGateway` (**NO** `features.otelAgentGateway` excepto `featureGates`):
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -508,20 +511,20 @@ spec:
     otelAgentGateway:
       enabled: true
 
-      # Puertas de funciones del recopilador de OTel (configuración específica de la función)
+      # Feature gates for OTel collector (feature-specific configuration)
       featureGates: "telemetry.UseLocalHostAsDefaultMetricsAddress"
 
   override:
     otelAgentGateway:
-      # Número de réplicas
+      # Number of replicas
       replicas: 3
 
-      # Selector de nodo para el posicionamiento de pods
+      # Node selector for pod placement
       nodeSelector:
         kubernetes.io/os: linux
         gateway: "true"
 
-      # Configuración de afinidades
+      # Affinity configuration
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -535,39 +538,39 @@ spec:
                   - datadog-otel-agent-gateway
               topologyKey: kubernetes.io/hostname
 
-      # Tolerancias de nodos contaminados
+      # Tolerations for tainted nodes
       tolerations:
       - key: "dedicated"
         operator: "Equal"
         value: "otel-gateway"
         effect: "NoSchedule"
 
-      # Clase de prioridad para la programación
+      # Priority class for scheduling
       priorityClassName: high-priority
 
-      # Variables de entorno
+      # Environment variables
       env:
       - name: OTEL_LOG_LEVEL
         value: "info"
 
-      # Variables de entorno de ConfigMaps or secretos
+      # Environment variables from ConfigMaps or Secrets
       envFrom:
       - configMapRef:
           name: otel-gateway-config
 
-      # Imagen personalizada (opcional)
+      # Custom image (optional)
       image:
         name: ddot-collector
         tag: "{{< version key="ddot_gateway_version" >}}"
         pullPolicy: IfNotPresent
 
-      # Contexto de seguridad a nivel de pod
+      # Pod-level security context
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
 
-      # Configurar recursos
+      # Configure resources
       containers:
         otel-agent:
           resources:
@@ -578,41 +581,41 @@ spec:
               cpu: 500m
               memory: 1Gi
 
-      # Etiquetas (labels) y anotaciones adicionales
+      # Additional labels and annotations
       labels:
         team: observability
       annotations:
         prometheus.io/scrape: "true"
 ```
 
-Para ver una referencia completa de todas las opciones disponibles, consulta la [documentación de configuración de Datadog Agent v2alpha1][1].
+Para obtener una referencia completa de todas las opciones disponibles, consulte la [documentación de configuración de DatadogAgent v2alpha1][1].
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Para despliegues basados en Helm, muchas de estas opciones de configuración avanzadas pueden configurarse directamente en el archivo `values.yaml` en la sección `otelAgentGateway`. Para ver una referencia completa, consulta el [README Helm chart de Datadog][1].
+Para implementaciones basadas en Helm, muchas de estas opciones de configuración avanzada se pueden establecer directamente en el archivo `values.yaml` bajo la sección `otelAgentGateway`. Para obtener una referencia completa, consulte el [README del chart de Helm de Datadog][1].
 
 [1]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Casos de uso avanzados
+## Casos de uso avanzado {#advanced-use-cases}
 
-### Muestreo del seguimiento con el exportador de balanceos de carga
+### Muestreo basado en seguimiento de las últimas líneas con el exportador de balanceo de carga {#tail-sampling-with-the-load-balancing-exporter}
 
-Un caso de uso primario de la puerta de enlace es el muestreo basado en el seguimiento. Para garantizar que todos los tramos (spans) de una traza (trace) determinada sean procesados por el mismo pod de puerta de enlace, utiliza el **exportador de balanceos de carga** en tus recopiladores de DaemonSet. Este exportador enruta de forma consistente los tramos en función de una clave, como `traceID`.
+Un caso de uso principal para el gateway es el muestreo basado en seguimiento de las últimas líneas. Para asegurarse de que todos los spans de una traza determinada sean procesados por el mismo pod del gateway, utilice el **load balancing exporter** en sus DaemonSet Collectors. Este exportador enruta los spans de manera consistente según una clave, como `traceID`.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-El recopilador de DaemonSet está configurado con el exportador de `loadbalancing`, que utiliza el resolver del servicio Kubernetes para detectar y enrutar datos a pods de puerta de enlace. El recopilador de puerta de enlace utiliza el procesador de `tail_sampling` para muestrear trazas en función de políticas definidas antes de exportarlas a Datadog.
+El DaemonSet Collector se configura con el exportador `loadbalancing`, que utiliza el resolvedor de servicios de Kubernetes para descubrir y enrutar datos a los pods del gateway. El Collector del gateway utiliza el procesador `tail_sampling` para muestrear trazas según políticas definidas antes de exportarlas a Datadog.
 
-**Nota**: Se requieren permisos de configuración del control de acceso basado en roles (RBAC) para el resolver de k8s en el exportador de balanceos de carga.
+**Nota**: Se requieren permisos RBAC para el resolvedor de k8s en el exportador de balanceo de carga.
 
-Crea un ConfigMap para la configuración del recopilador de DaemonSet con el exportador de balanceos de carga:
+Cree un ConfigMap para la configuración del DaemonSet Collector con el exportador de balanceo de carga:
 
 ```yaml
 apiVersion: v1
@@ -645,7 +648,7 @@ data:
           exporters: [loadbalancing]
 ```
 
-Crea un ConfigMap para la configuración del recopilador de puerta de enlace con el muestreo del seguimiento:
+Cree un ConfigMap para la configuración del Collector de la puerta de enlace con seguimiento de las últimas líneas:
 
 ```yaml
 apiVersion: v1
@@ -663,7 +666,7 @@ data:
       tail_sampling:
         decision_wait: 10s
         policies:
-          # Añadir tus políticas de muestreo aquí
+          # Add your sampling policies here
           - name: sample-errors
             type: status_code
             status_code:
@@ -692,7 +695,7 @@ data:
           exporters: [datadog]
 ```
 
-Aplica la configuración del Datadog Agent:
+Aplique la configuración de DatadogAgent:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -709,17 +712,17 @@ spec:
   features:
     otelCollector:
       enabled: true
-      # Mencionar la configuración personalizada del DaemonSet
+      # Reference the custom DaemonSet config
       config:
         configMap:
           name: otel-daemonset-config
-      # Permisos de RBAC para el resolver de k8s
+      # RBAC permissions for the k8s resolver
       rbac:
         create: true
 
     otelAgentGateway:
       enabled: true
-      # Mencionar la configuración personalizada de la puerta de enlace
+      # Reference the custom gateway config
       config:
         configMap:
           name: otel-gateway-tailsampling-config
@@ -729,7 +732,7 @@ spec:
       replicas: 3
 ```
 
-Crea un ClusterRole para que el DaemonSet acceda a los endpoints:
+Cree un ClusterRole para que el DaemonSet acceda a los endpoints:
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -738,10 +741,10 @@ metadata:
   name: otel-collector-k8s-resolver
 rules:
 - apiGroups: [""]
-  resources: ["endpoints"] # para la v0.139.0 y anteriores
+  resources: ["endpoints"] # for v0.139.0 and before
   verbs: ["get", "watch", "list"]
 - apiGroups: ["discovery.k8s.io"]
-  resources: ["endpointslices"] # para la v0.140.0 y posteriores
+  resources: ["endpointslices"] # for v0.140.0 and after
   verbs: ["get", "watch", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -759,16 +762,16 @@ subjects:
 ```
 
 <div class="alert alert-warning">
-Para asegurarse de que las estadísticas de APM se calculan en el 100% de tus trazas antes del muestreo, el <code>datadog/conector</code> se ejecuta en un pipeline separado sin el procesador <code>tail_sampling</code>. El conector puede ejecutarse en el DaemonSet o en la capa de la puerta de enlace.
+Para asegurarse de que las estadísticas de APM se calculen en el 100% de sus trazas antes del muestreo, el <code>datadog/connector</code> se ejecuta en una canalización separada sin el <code>tail_sampling</code> procesador. El conector puede ejecutarse en el DaemonSet o en la capa de puerta de enlace.
 </div>
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-En la configuración de abajo:
+En la configuración a continuación:
 
-1.  El recopilador de DaemonSet (`datadog.otelCollector`) está configurado con el exportador de`loadbalancing`, que utiliza el resolver del servicio Kubernetes para detectar y enrutar datos a pods de puerta de enlace.
-2.  El recopilador de puerta de enlace (`otelAgentGateway`) utiliza el procesador de `tail_sampling` para muestrear trazas basadas en políticas definidas antes de exportarlas a Datadog.
+1.  El Collector de tipo daemonset (`datadog.otelCollector`) está configurado con el exportador `loadbalancing`, que utiliza el resolvedor de servicios de Kubernetes para descubrir y enrutar datos a los pods de la puerta de enlace.
+2.  El Collector de puerta de enlace (`otelAgentGateway`) utiliza el procesador `tail_sampling` para muestrear trazas según políticas definidas antes de exportarlas a Datadog.
 
 ```yaml
 # values.yaml
@@ -779,15 +782,15 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   otelCollector:
     enabled: true
-    # Los permisos de RBAC son necesarios para el resolver de k8s en el exportador de balanceo de cargas
+    # RBAC permissions are required for the k8s resolver in the loadbalancing exporter
     rbac:
       create: true
       rules:
         - apiGroups: [""]
-          resources: ["endpoints"] # para la v0.139.0 y anteriores
+          resources: ["endpoints"] # for v0.139.0 and before
           verbs: ["get", "watch", "list"]
         - apiGroups: ["discovery.k8s.io"]
-          resources: ["endpointslices"] # para la v0.140.0 y posteriores
+          resources: ["endpointslices"] # for v0.140.0 and after
           verbs: ["get", "watch", "list"]
     config: |
       receivers:
@@ -850,24 +853,24 @@ otelAgentGateway:
 ```
 
 <div class="alert alert-warning">
-Para asegurarse de que las estadísticas de APM se calculan en el 100% de tus trazas antes del muestreo, el <code>datadog/conector</code> se ejecuta en un pipeline separado sin el procesador <code>tail_sampling</code>. El conector puede ejecutarse en el DaemonSet o en la capa de la puerta de enlace.
+Para asegurarse de que las estadísticas de APM se calculen en el 100% de sus trazas antes del muestreo, el <code>datadog/connector</code> se ejecuta en una canalización separada sin el <code>tail_sampling</code> procesador. El conector puede ejecutarse en el DaemonSet o en la capa de puerta de enlace.
 </div>
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Utilizar una imagen personalizada del recopilador
+### Uso de una imagen de Collector personalizada {#using-a-custom-collector-image}
 
-Para utilizar una imagen personalizada del recopilador para tu puerta de enlace, especifica el repositorio de imágenes y la etiqueta (tag). Si necesitas instrucciones sobre cómo crear imágenes personalizadas, consulta [Uso de componentes personalizados de OpenTelemetry][5].
+Para utilizar una imagen de Collector personalizada para su puerta de enlace, especifique el repositorio y la etiqueta de la imagen. Si necesita instrucciones sobre cómo crear las imágenes personalizadas, consulte [Use Custom OpenTelemetry Components][5].
 
 <div class="alert alert-info">
 <strong>Nota:</strong> El Datadog Operator admite los siguientes formatos de nombre de imagen:
 <ul>
-  <li><code>name</code> - Nombre de imagen (por ejemplo, <code>ddot-collector</code>)</li>
-  <li><code>name:tag</code> - Nombre de imagen con etiqueta (por ejemplo, <code>ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
+  <li><code>name</code> - El nombre de la imagen (por ejemplo, <code>ddot-collector</code>)</li>
+  <li><code>name:tag</code> - Nombre de la imagen con etiqueta (por ejemplo, <code>ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
   <li><code>registry/name:tag</code> - Referencia completa de la imagen (por ejemplo, <code>gcr.io/datadoghq/ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
 </ul>
-El formato del <code>registro/nombre</code> (sin etiqueta en el campo de nombre) no <strong>es compatible</strong> cuando se utiliza un campo de <code>etiqueta</code> diferente. Incluye la referencia completa de la imagen con etiqueta en el campo de <code>nombre</code> o utiliza el nombre de imagen con un campo de <code>etiqueta</code> diferente.
+El <code>registry/name</code> el formato (sin etiqueta en el campo de nombre) <strong>no es compatible</strong> cuando se utiliza un separado <code>tag</code> campo. Incluya la referencia completa de la imagen con la etiqueta en el <code>name</code> campo, o utilice el nombre de la imagen con una etiqueta separada <code>tag</code> campo.
 </div>
 
 {{< tabs >}}
@@ -920,16 +923,16 @@ otelAgentGateway:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Activar Autoscaling con Horizontal Pod Autoscaler (HPA)
+### Habilite el escalado automático con Horizontal Pod Autoscaler (HPA) {#enable-autoscaling-with-horizontal-pod-autoscaler-hpa}
 
-La puerta de enlace del recopilador de DDOT admite el escalado automático con la función Kubernetes Horizontal Pod Autoscaler (HPA).
+La puerta de enlace DDOT Collector admite el escalado automático con la función Horizontal Pod Autoscaler (HPA) de Kubernetes.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-**Nota**: El Datadog Operator no gestiona directamente recursos HPA. Debes crear el recurso HPA por separado y configurarlo para que apunte al despliegue de la puerta de enlace del Agent de OpenTelemetry.
+**Nota**: El Datadog Operator no administra directamente los recursos de HPA. Debe crear el recurso HPA por separado y configurarlo para que apunte a la implementación de OTel Agent Gateway.
 
-Crea un recurso HPA:
+Cree un recurso HPA:
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -944,7 +947,7 @@ spec:
   minReplicas: 2
   maxReplicas: 10
   metrics:
-  # Intentar alcanzar un uso de CPU elevado para un mayor rendimiento
+  # Aim for high CPU utilization for higher throughput
   - type: Resource
     resource:
       name: cpu
@@ -958,7 +961,7 @@ spec:
       stabilizationWindowSeconds: 60
 ```
 
-Aplica la configuración del Datadog Agent con solicitudes/límites de recursos (necesario para HPA):
+Aplique la configuración de DatadogAgent con solicitudes/límites de recursos (necesarios para HPA):
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -978,7 +981,7 @@ spec:
 
   override:
     otelAgentGateway:
-      replicas: 4  # Réplicas iniciales, HPA sustituirá en función de las métricas
+      replicas: 4  # Initial replicas, HPA will override based on metrics
       containers:
         otel-agent:
           resources:
@@ -993,7 +996,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Para activar HPA, configura `otelAgentGateway.autoscaling`:
+Para habilitar HPA, configure `otelAgentGateway.autoscaling`:
 
 ```yaml
 # values.yaml
@@ -1008,13 +1011,13 @@ otelAgentGateway:
     - containerPort: "4317"
       name: "otel-grpc"
   config: | <YOUR CONFIG>
-  replicas: 4  # 4 réplicas para empezar y HPA puede sustituir en función de las métricas
+  replicas: 4  # 4 replicas to begin with and HPA may override it based on the metrics
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 10
     metrics:
-      # Intentar alcanzar un uso de CPU elevado para un mayor rendimiento
+      # Aim for high CPU utilization for higher throughput
       - type: Resource
         resource:
           name: cpu
@@ -1031,18 +1034,18 @@ otelAgentGateway:
 {{% /tab %}}
 {{< /tabs >}}
 
-Puedes utilizar métricas de recursos (CPU o memoria), métricas personalizadas (pod u objeto Kubernetes) o métricas externas como entradas de escalado automático. Para las métricas de recursos, asegúrate de que el [servidor de métricas Kubernetes][9] se está ejecutando en tu clúster. Para métricas personalizadas o externas, considera configurar el [proveedor de métricas del Datadog Cluster Agent][10].
+Puede utilizar métricas de recursos (CPU o memoria), métricas personalizadas (pod u objeto de Kubernetes) o métricas externas como entradas de escalado automático. Para métricas de recursos, asegúrese de que el [servidor de métricas de Kubernetes][9] se esté ejecutando en su clúster. Para métricas personalizadas o externas, considere configurar el [proveedor de métricas del Datadog Cluster Agent][10].
 
-### Despliegue de una puerta de enlace de varias capas
+### Implemente una puerta de enlace de varias capas {#deploying-a-multi-layer-gateway}
 
-Para escenarios avanzados, puedes desplegar varias capas de puerta de enlace para crear una cadena de procesamiento.
+Para escenarios avanzados, puede implementar varias capas de puerta de enlace para crear una cadena de procesamiento.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Despliega cada capa como un recurso `DatadogAgent` independiente, empezando por la última capa y trabajando hacia atrás.
+Implemente cada capa como un recurso `DatadogAgent` independiente, comenzando desde la capa final y trabajando hacia atrás.
 
-1.  **Despliegue de la capa 1 (capa final):** Esta capa recibe de la capa 2 y exporta a Datadog.
+1.  **Implemente la capa 1 (capa final):** Esta capa recibe datos de la capa 2 y los exporta a Datadog.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -1102,7 +1105,7 @@ data:
           exporters: [datadog]
 ```
 
-2.  **Despliegue de la capa 2 (capa intermedia):** Esta capa recibe del DaemonSet y exporta a la capa 1.
+2.  **Implemente la capa 2 (capa intermedia):** Esta capa recibe datos del DaemonSet y los exporta a la capa 1.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -1163,7 +1166,7 @@ data:
           exporters: [otlp]
 ```
 
-3.  **Despliegue del DaemonSet:** Configura el DaemonSet para exportar a la capa 2.
+3.  **Implemente DaemonSet:** Configure el DaemonSet para exportar a la capa 2.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -1216,9 +1219,9 @@ data:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Despliega cada capa como una versión separada de Helm, empezando por la última capa y trabajando hacia atrás.
+Implemente cada capa como una versión de Helm independiente, comenzando desde la capa final y trabajando hacia atrás.
 
-1.  **Despliegue de la capa 1 (capa final):** Esta capa recibe de la capa 2 y exporta a Datadog.
+1.  **Implemente la capa 1 (capa final):** Esta capa recibe datos de la capa 2 y los exporta a Datadog.
 
     ```yaml
     # layer-1-values.yaml
@@ -1260,7 +1263,7 @@ Despliega cada capa como una versión separada de Helm, empezando por la última
               exporters: [datadog]
     ```
 
-2.  **Despliegue de la capa 2 (capa intermedia):** Esta capa recibe del DaemonSet y exporta a la capa 1.
+2.  **Implemente la capa 2 (capa intermedia):** Esta capa recibe datos del DaemonSet y los exporta a la capa 1.
 
     ```yaml
     # layer-2-values.yaml
@@ -1303,7 +1306,7 @@ Despliega cada capa como una versión separada de Helm, empezando por la última
               exporters: [otlp]
     ```
 
-3.  **Despliegue del DaemonSet:** Configura el DaemonSet para exportar a la capa 2.
+3.  **Implemente DaemonSet:** Configure el DaemonSet para exportar a la capa 2.
 
     ```yaml
     # daemonset-values.yaml
@@ -1340,25 +1343,25 @@ Despliega cada capa como una versión separada de Helm, empezando por la última
 {{% /tab %}}
 {{< /tabs >}}
 
-## Visualizar pods de puerta de enlace en Fleet Automation
+## Visualizar pods de puerta de enlace en Fleet Automation {#view-gateway-pods-on-fleet-automation}
 
-La puerta de enlace del recopilador de DDOT incluye la [extensión Datadog][11] por defecto. Esta extensión exporta información de compilación y configuraciones del recopilador a Datadog, lo que te permite monitorizar tu pipeline de telemetría desde Infrastructure Monitoring y Fleet Automation.
+La puerta de enlace DDOT Collector incluye la [extensión de Datadog][11] de forma predeterminada. Esta extensión exporta información y configuraciones de compilación del Collector a Datadog, lo que le permite hacer un seguimiento de su canalización de telemetría desde Infrastructure Monitoring y Fleet Automation.
 
-Para visualizar tus pods de puerta de enlace:
+Para visualizar sus pods de la puerta de enlace:
 
-1. Ve a **Integrations > Fleet Automation** (Integraciones > Fleet Automation).
+1. Navegue a {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}.
 
-  {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Página de Fleet Automation que muestra pods de puerta de enlace de DDOT" style="width:100%;" >}}
+  {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Página de Fleet Automation que muestra los pods de la puerta de enlace de DDOT" style="width:100%;" >}}
 
-2. Selecciona un pod de puerta de enlace para ver información detallada sobre la compilación y la configuración del recopilador en ejecución.
+2. Seleccione un pod de la puerta de enlace para visualizar información detallada de la compilación y la configuración del Collector en ejecución.
 
-  {{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Página de Fleet Automation que muestra la configuración del recopilador en un pod de puerta de enlace DDOT" style="width:100%;" >}}
+  {{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Página de Fleet Automation que muestra la configuración del Collector de un pod de la puerta de enlace de DDOT" style="width:100%;" >}}
 
-## Limitaciones conocidas
+## Limitaciones conocidas {#known-limitations}
 
-  * **Condición de carrera de inicio**: Al desplegar el DaemonSet y la puerta de enlace en la misma versión, los pods del DaemonSet pueden iniciarse antes de que el servicio de puerta de enlace esté listo, provocando logs de error de conexión inicial. El exportador OTLP sigue reintentando automáticamente, por lo que estos logs pueden ser ignorados. También puedes desplegar primero la puerta de enlace y esperar a que esté lista antes de desplegar el DaemonSet.
+  * **Condición de carrera de inicio**: Al implementar el DaemonSet y la puerta de enlace en la misma versión, los pods del DaemonSet podrían iniciarse antes de que el servicio de la puerta de enlace esté listo, lo que provoca registros de error de conexión iniciales. El exportador OTLP vuelve a intentarlo automáticamente, por lo que estos registros pueden ignorarse de forma segura. Alternativamente, implemente la puerta de enlace primero y espere a que esté lista antes de implementar el DaemonSet.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1372,3 +1375,4 @@ Para visualizar tus pods de puerta de enlace:
 [9]: http://github.com/kubernetes-sigs/metrics-server
 [10]: /es/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension
+[12]: /es/opentelemetry/config/hostname_tagging/#collector-exporting-through-a-gateway

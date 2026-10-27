@@ -14,3 +14,9 @@ cascade:
 {{< /nextlink >}}
 
 {{< /whatsnext >}}
+
+{{< whatsnext desc="Agent Observability experiments:" >}}
+    {{< nextlink href="llm_observability/improve/online_experiments" >}}Run an online experiment on an LLM application using Agent Observability
+{{< /nextlink >}}
+
+{{< /whatsnext >}}

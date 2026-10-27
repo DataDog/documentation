@@ -121,7 +121,6 @@ Incident Management は、サードパーティアプリケーションと統合
 
 - [Atlassian Statuspage][25]: Statuspage のインシデントを作成および更新します。
 - [Confluence][22]: インシデントの [事後分析][34] を生成します。
-- [CoTerm][21]: ターミナルベースのインシデント修復アクティビティをリアルタイムで追跡します。
 - [Jira][15]: インシデントの Jira チケットを作成します。
 - [Microsoft Teams][23]: インシデント用のチャネルとビデオ会議を作成します。
 - [PagerDuty][12] および [OpsGenie][13]: オンコールエンジニアを呼び出し、インシデント解決時にページを自動解決します。
@@ -153,7 +152,6 @@ Incident Management は、サードパーティアプリケーションと統合
 [18]: /ja/integrations/statuspage/
 [19]: /ja/integrations/servicenow/
 [20]: /ja/incident_response/incident_management/investigate/describe
-[21]: /ja/coterm
 [22]: /ja/integrations/confluence/
 [23]: /ja/integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [24]: /ja/integrations/zoom-incident-management/

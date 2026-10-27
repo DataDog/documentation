@@ -19,69 +19,54 @@ title: クラスターサイジング
 
 ## 概要 {#overview}
 
-適切なクラスターサイジングは、BYOC (Bring Your Own Cloud) Logs デプロイメントにおける最適なパフォーマンス、コスト効率、および信頼性の確保に役立ちます。サイジング要件は、ログの取り込み量、クエリパターン、保持期間、ログデータの複雑さなど、複数の要因によって異なります。
+BYOC (Bring Your Own Cloud) Logs クラスターのサイズを 3 つのステップで決定します。
 
-以下の[サイジング例](#sizing-examples)は、一般的な 1 日あたりのログ量に対する開始点となる構成を提供します。各コンポーネントの詳細なガイダンスについては、後続のセクションを参照してください。
+1. 1 日あたりの取り込み量を TB/日単位で推定します。
+2. その取り込み量に対する [スターター構成](#starter-configurations) を選択します。
+3. クラスターを監視し、レプリカ数と Pod サイズを調整します。
 
-<div class="alert alert-tip">
-予想される 1 日あたりのログ量とピーク時の取り込み率を開始点として使用し、クラスターのパフォーマンスを監視して、必要に応じてサイジングを調整してください。
-</div>
+サーチャーの容量は、取り込み量だけでなく、クエリの同時実行数、クエリの複雑さ、およびスキャンするデータ量によって決まります。
 
-## サイジング例 {#sizing-examples}
+これらの推奨事項は、AWS M6 インスタンスタイプで使用されているような最新の x86 CPU、または他のクラウドプロバイダーが提供する同等の CPU を前提としています。AWS Graviton のような ARM ベースの CPU は、同等のスループットでより高いコスト効率を実現できる可能性があります。
 
-以下のテーブルは、一般的な 1 日あたりのログ量に対するベースライン構成を示しています。これらの推奨事項は開始点としての意図であり、観測されたリソース使用率とクエリパフォーマンスに基づいて調整する必要があります。
+## スターター構成 {#starter-configurations}
 
-開始点として、概ね以下を計画してください。
+これらの合計値を出発点として使用します。
 
-- 1 日に取り込まれる 1 TB のログごとに、2 indexer vCPU を割り当てます。
-- 1 日に取り込まれる 2 TB のログごとに、1 compactor vCPU を割り当てます。
+- **インデクサー:** 1 TB/日の取り込み量につき 2 vCPU
+- **コンパクター:** 2 TB/日の取り込み量につき 1 vCPU
+- **サーチャー:** インデクサーの vCPU 合計の約 2 倍。分析負荷の高いワークロードでは、テーブルに示す値の最大 2 倍が必要になる場合があります。
 
-Searcher の容量は、クエリの同時実行数、クエリの複雑さ、およびスキャンされるデータ量に依存します。そのため、取り込み量のみではなく、予想される検索ワークロードに基づいてサイズを決定する必要があります。分析負荷の高いワークロードでは、以下に示すベースラインの検索容量の最大 2 倍が必要になる場合があります。
+オブジェクトストレージの合計値は、30 日間の保持期間と 6 倍の圧縮率を前提としています。
 
-これらの推奨事項は、AWS M6 インスタンスタイプで使用されているような最新の x86 CPU、または他のクラウドプロバイダーの同等の CPU を前提としています。AWS Graviton などの ARM ベースの CPU は、同等のスループットでより優れたコスト効率を提供する可能性があります。
+|   1 日あたりの取り込み量 |  インデクサー | コンパクター |  サーチャー | オブジェクトストレージ |
+|---------------:|----------:|-----------:|-----------:|---------------:|
+|   **1 TB/日** |   2 vCPU |   0.5 vCPU |    4 vCPU |          ～ 5 TB|
+|  **10 TB/日** |  20 vCPU |     5 vCPU |   40 vCPU |         ～ 50 TB|
+| **100 TB/日** | 200 vCPU |    50 vCPU |  400 vCPU |        ～ 500 TB|
 
-以下のテーブルは、各コンポーネントの合計 vCPU 容量を示しています。
+各 Pod の推奨サイズ:
 
-|   1 日あたりの量 | Indexer 合計 vCPU | Compactor 合計 vCPU | Searcher 合計 vCPU |
-|---------------:|--------------------:|----------------------:|---------------------:|
-|   **1 TB/日** |                   2 |                   0.5 |                    4 |
-|  **10 TB/日** |                  20 |                     5 |                   40 |
-| **100 TB/day** |                 200 |                    50 |                  400 |
-
-Pod間で合計容量を分散させるための開始点として、以下のPodあたりのCPUおよびメモリ割り当てを使用してください。
-
-| 1 日あたりの量    | Indexer Podあたり | Compactor Podあたり | Searcher Podあたり |
-|-----------------|----------------:|------------------:|-----------------:|
-| **30 TB/日以下** |  4 vCPU、16 GB |    4 vCPU、16 GB |  16 vCPU、64 GB |
-| **30 TB/日超** |  8 vCPU、32 GB |    8 vCPU、32 GB | 64 vCPU、256 GB |
+| 1 日あたりの取り込み量 | インデクサー | コンパクター | サーチャー |
+|---------------------|----------------:|----------------:|-----------------:|
+| **30 TB/日以下** |  4 vCPU、16 GB |  4 vCPU、16 GB |  16 vCPU、64 GB |
+| **30 TB/日超** |  8 vCPU、32 GB |  8 vCPU、32 GB | 64 vCPU、256 GB |
 
 <div class="alert alert-info">
 <strong>請求とプロビジョニング:</strong> プロビジョニングされた vCPU と請求対象の vCPU は異なります。本番環境のクラスターは、取り込みと検索の急増を吸収するために、意図的に過剰プロビジョニングされています。請求に関するガイダンスについては、Datadog の担当者にお問い合わせください。
 </div>
 
-## インデクサー {#indexers}
+## 各コンポーネントのサイズを設定します{#size-each-component}
 
-インデクサーは Datadog Agent からログを受信し、それらを処理、インデックス化して、インデックスファイル (_splits_ と呼ばれます) としてオブジェクトストレージに保存します。適切なサイジングは、取り込みスループットを維持し、クラスターがログ量を処理できるようにするために不可欠です。
+スターター構成をコンポーネントごとに調整します。各コンポーネントの役割については、[アーキテクチャ][2]を参照してください。
 
-| 仕様        | 推奨事項                 | 注記                                                                                                                                                                                                                                                                                                                                                                  |
-|----------------------|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **パフォーマンス**      | vCPU あたり 8 MB/s| 初期サイジングを決定するためのベースラインスループット。実際のパフォーマンスは、ログの特性 (サイズ、属性数、ネストレベル) に依存します|
-| **メモリ**           | vCPU あたり 4 GB RAM|                                                                                                                                                                                                                                                                                                                                                                        |
-| **最小 Pod サイズ** | 2 vCPU、8 GB RAM| インデクサー Pod の推奨最小構成|
-| **ストレージ容量** | 30 GB 以上| インデックスファイルの作成およびマージ中に一時データを保存するために必要|
-| **ストレージタイプ**     | ネットワーク接続型ブロックストレージ| 例: Amazon EBS gp3、Azure Managed Disks、または GCP Persistent Disk。データは、オブジェクトストレージにアップロードされる前に、先行書き込みログ (WAL) に一時的に保存されます。WAL はレプリケートされないため、ローカル (エフェメラル) SSD を使用すると、ディスク障害時に数分間のデータが失われるリスクが高まります。ネットワーク接続型ブロックストレージは、組み込みの冗長性を提供します。|
-| **ディスク I/O**         | 約 20 MB/s/vCPU| Amazon EBS の場合、vCPU あたり 320 IOPS に相当します (64 KB IOPS と仮定)。例えば、Amazon EBS gp3 のデフォルトスループットである 125 MiB/s は、4 vCPU のインデクサーには十分です。|
+### インデクサー{#indexers}
 
+- **パフォーマンス:** 1 TB/日あたり 2 vCPU
+- **メモリ:** vCPU あたり 4 GB RAM
+- **ストレージタイプ:** 先行書き込みログ用のネットワーク接続型ブロックストレージ。[インデクサーの永続ストレージの設定][3]を参照してください。
 
-{{% collapse-content title="例: 1 日あたり 100 TB のログのサイジング" level="h3" expanded=false %}}
-1 日あたり 100 TB のログ (約 1,160 MB/s) をインデックス化するには、以下の手順に従ってください。
-
-1. **vCPU の計算:** `1,160 MB/s ÷ 8 MB/s per vCPU ≈ 145 vCPUs`
-2. **RAM の計算:** `145 vCPUs × 4 GB RAM per vCPU ≈ 580 GB RAM`
-3. **ヘッドルームの追加:** **4 vCPU、16 GB RAM、30 GB ディスク**で構成されたインデクサー Pod 50 個から開始します。これらの値は、実際のパフォーマンスと冗長性の要件に基づいて調整してください。
-{{% /collapse-content %}}
-
-{{% collapse-content title="イベント数によるサイジング" level="h3" expanded=false %}}
+{{% collapse-content title="イベント数によるサイジング" level="h4" expanded=false %}}
 1 日あたりのイベント数はわかっているが、バイト量がわからない場合は、この式を使用して推定します。
 
 $$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size (bytes)"} / 10^{12}$$
@@ -93,27 +78,22 @@ $$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size 
 一般的なログイベントのサイズは、500 バイト (短い syslog) から 2〜3 KB (Kubernetes タグ付きの JSON) の範囲です。正確な平均値を得るために、代表的なログサンプルを測定してください。
 {{% /collapse-content %}}
 
-## コンパクター {#compactors}
+### コンパクター{#compactors}
 
-コンパクターは、小さなインデックス分割をより大きなものにマージして、断片化を減らし、検索効率を向上させます。また、不要になった分割を削除してストレージを再利用します。
+- **パフォーマンス:** 2 TB/日あたり 1 vCPU
+- **メモリ:** vCPU あたり 4 GB RAM
+- **ストレージタイプ:** ローカル SSD。AWS M8gd などのローカル SSD を備えたインスタンスを使用してください。
 
-| 仕様 | 推奨事項 | 注記 |
-|------------------|---------------------|--------------------------------------------------------------|
-| **パフォーマンス**  | 2 TB/日あたり 1 vCPU | 初期サイジングのベースライン |
-| **メモリ**       | vCPU あたり 4 GB RAM |                                                              |
-| **ストレージタイプ** | ローカル SSD | AWS M8gd などのローカル SSD を備えたインスタンスが推奨されます |
+### サーチャー{#searchers}
 
-## サーチャー {#searchers}
+サーチャーのサイズは、取り込み量だけでなく、想定される検索ワークロードに合わせて決定してください。開始時の目安は、インデクサーの vCPU 合計の約 2 倍です。
 
-サーチャーは、Datadog UI からの検索クエリを処理し、Metastore からメタデータを読み取り、オブジェクトストレージからデータを取得します。
-
-一般的な開始点として、インデクサーに割り当てられた vCPU の合計数の約 2 倍をプロビジョニングします。サイジング例を参照してください。
-
-- **パフォーマンス:** 検索パフォーマンスは、ワークロード (クエリの複雑さ、同時実行数、スキャンされるデータ量) に大きく依存します。たとえば、タームクエリ (`status:error AND message:exception`) は、通常、ワイルドカード検索やイベント全体検索クエリよりも計算コストが低くなります。
+- **パフォーマンス:** タームクエリ (`status:error AND message:exception`) は通常、ワイルドカード検索やイベント全体検索よりも CPU 使用率が低くなります。集計クエリには、より多くの CPU とメモリが必要です。
 - **メモリ:** サーチャー vCPU あたり 4 GB の RAM。同時集計リクエストが多数発生すると予想される場合は、より多くの RAM をプロビジョニングしてください。
 
+検索レイテンシが高い場合は、サーチャーレプリカを追加するか、Pod あたりのメモリを増やしてください。[クエリパターンに基づくサーチャーのスケール][4]を参照してください。
 
-## その他のサービス {#other-services}
+### その他のサービス {#other-services}
 
 これらの軽量コンポーネントには、以下のリソースを割り当ててください。
 
@@ -123,73 +103,68 @@ $$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size 
 | **メタストア** | 2 | 4GB | 2 |
 | **Janitor** | 2 | 4GB | 1 |
 
-## オブジェクトストレージの見積もり {#object-storage-estimation}
+### PostgreSQL データベース {#postgresql-database}
 
-BYOC Logs は、ログデータをオブジェクトストレージに保存する前に、圧縮およびインデックス化を行います。圧縮率は、ログの形式、構造、およびデータ内の冗長性によって異なります。
+- **インスタンスサイズ:** ほとんどのユースケースでは、1 vCPU および 4 GB の RAM を搭載した PostgreSQL インスタンスで十分です。
+- **Amazon RDS の推奨事項:** Amazon RDS では、`t4g.medium` インスタンスタイプから開始してください。
+- **高可用性:** 1 つのスタンバイレプリカを備えた Multi-AZ デプロイメントを有効にしてください。
 
-| メトリック | 一般的な範囲 |
-|--------|---------------|
-| **圧縮率** | 5 倍〜8 倍 (生データから保存サイズ) |
-| **1 日あたりの取り込み TB あたりのストレージ** | オブジェクトストレージ上で 1 日あたり 125〜200 GB |
+メタストアデータベースで自動バックアップを有効にしてください。[メタストアデータベースで自動バックアップを有効にする][5]を参照してください。
 
-オブジェクトストレージの要件を見積もるには、以下を行います。
+### オブジェクトストレージ {#object-storage}
+
+BYOC Logs は、ログデータをオブジェクトストレージに保存する前に、圧縮およびインデックス化を行います。圧縮率は通常 5 倍から 8 倍であり、これは 1 日あたり 1 TB の取り込みに対して約 125 ～ 200 GB のストレージ容量に相当します。
 
 $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
 $$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
 
-以下の例では、30日間の保持期間と6倍の圧縮率を想定しています。
-
-|   1日あたりの容量 | オブジェクトストレージ |
-|---------------:|---------------:|
-|   **1 TB/日** |          ~5 TB |
-|  **10 TB/日** |         ~50 TB |
-| **100 TB/日** |        ~500 TB |
-
-{{% collapse-content title="例: 30 日間の保持期間で 1 日あたり 10 TB の場合のストレージ" level="h3" expanded=false %}}
-圧縮率を 6 倍と仮定した場合:
-
-1. **1 日あたりの保存量:** `10 TB / 6 ≈ 1.67 TB/day`
-2. **30 日間の合計:** `1.67 TB × 30 ≈ 50 TB`
-
+<div class="alert alert-info">
 アクティブなデータには、標準ティアのオブジェクトストレージ (例: S3 Standard、GCS Standard) を使用してください。S3 Infrequent Access や GCS Nearline などの低コストティアは、BYOC Logs での使用が検証されていません。
-{{% /collapse-content %}}
+</div>
 
-## PostgreSQL データベース {#postgresql-database}
-
-- **インスタンスサイズ:** ほとんどのユースケースでは、1 vCPU および 4 GB の RAM を搭載した PostgreSQL インスタンスで十分です。
-- **AWS RDS の推奨事項:** AWS RDS を使用する場合、`t4g.medium` インスタンスタイプは適切な開始点です。
-- **高可用性:** 高可用性を実現するために、1 つのスタンバイレプリカを備えた Multi-AZ デプロイメントを有効にしてください。
+PUT リクエストのボリュームとコストを見積もるには、[オブジェクトストレージのリクエスト見積もり][6]を参照してください。
 
 ## Helm チャートのサイジングティア {#helm-chart-sizing-tiers}
 
-BYOC Logs Helm チャートは、`indexer.podSize` および `searcher.podSize` パラメーターを通じて、事前定義されたリソースティアを提供します。`podSize` は、Pod のリソース要件と関連する Quickwit チューニングパラメーターを選択します。デフォルトの `podSize` は、両方のコンポーネントで `xlarge` です。各プリセットは、Kubernetes システムコンポーネント、DaemonSet、およびアドオンのために、対応するノード上に余裕を残すように設計されています。
+[スターター構成](#starter-configurations)の Pod ごとの CPU およびメモリに合わせて、`indexer.podSize` と `searcher.podSize` を設定してください。デフォルトは `xlarge` です。各プリセットは、取り込みキューと検索キャッシュのサイズにも適用されます。
 
-プリセットは、Kubernetes システムコンポーネント用に予約されたリソースを考慮しています。予約量は、[GKE ノード予約計算](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations)に基づいています。DaemonSet およびアドオン用に、ノードあたり追加で 250m CPU と 512Mi メモリが予約されています。
+| `podSize` | CPU | メモリ |
+|---|---:|---:|
+| `large` | 2 | 8Gi |
+| `xlarge` | 4 | 16Gi |
+| `2xlarge` | 8 | 32Gi |
+| `4xlarge` | 16 | 64Gi |
+| `6xlarge` | 24 | 96Gi |
+| `8xlarge` | 32 | 128Gi |
+
+{{% collapse-content title="実際の Kubernetes リクエスト" level="h3" expanded=false %}}
+各 `podSize` は、kube-system、DaemonSets、およびアドオンのための余地を残すため、公称 CPU およびメモリよりも少ない量を要求します。予約量は [GKE ノード予約計算](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations) に従い、さらに DaemonSet およびアドオン用にノードあたり 250m の CPU と 512 Mi のメモリが追加されます。
+
+| `podSize` | 実際の CPU リクエスト | 実際のメモリリクエスト/制限 |
+|---|---:|---:|
+| `large` | 1600m | 5700Mi |
+| `xlarge` | 3600m | 13100Mi |
+| `2xlarge` | 7600m | 28500Mi |
+| `4xlarge` | 15600m | 59300Mi |
+| `6xlarge` | 23600m | 90100Mi |
+| `8xlarge` | 31600m | 120900Mi |
 
 ```text
 Actual CPU request = (nominal pod CPU - Kubernetes system CPU reservation - 250m), rounded down to the nearest 100m
 Actual memory request/limit = (nominal pod memory - Kubernetes system memory reservation - 512Mi), rounded down to the nearest 100Mi
 ```
+{{% /collapse-content %}}
 
-| `podSize` | 公称 CPU リクエスト | 実際の CPU リクエスト | 公称メモリリクエスト/制限 | 実際のメモリリクエスト/制限 |
-|---|---:|---:|---:|---:|
-| `large` | 2 | 1600m | 8Gi | 5700Mi |
-| `xlarge` | 4 | 3600m | 16Gi | 13100Mi |
-| `2xlarge` | 8 | 7600m | 32Gi | 28500Mi |
-| `4xlarge` | 16 | 15600m | 64Gi | 59300Mi |
-| `6xlarge` | 24 | 23600m | 96Gi | 90100Mi |
-| `8xlarge` | 32 | 31600m | 128Gi | 120900Mi |
-
-プリセットでは CPU 制限を設定しないため、Pod はスロットリングされることなく、ノード上のアイドル CPU を使用できます。メモリ使用量を割り当て可能なノード容量内に収めるため、メモリリクエストと制限は同じ値に設定されています。
-
-取り込みキューサイズと検索キャッシュサイズを定義する値は、選択したティアに対して自動的に適用されます。完全な構成については、[Helm チャートのサイジングマップ][1] を参照してください。各パラメーターの詳細については、Quickwit ドキュメントの [インデクサーパラメーター][2]、[インジェスト API パラメーター][3]、および [サーチャーパラメーター][4] を参照してください。
+完全な構成については、[Helm チャートのサイジングマップ][1] を参照してください。
 
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/sizing-map.yaml
-[2]: https://quickwit.io/docs/configuration/node-config#indexer-configuration
-[3]: https://quickwit.io/docs/configuration/node-config#ingest-api-configuration
-[4]: https://quickwit.io/docs/configuration/node-config#searcher-configuration
+[2]: /ja/byoc-logs/introduction/architecture/
+[3]: /ja/byoc-logs/operate/best_practices/#configure-persistent-storage-for-indexers
+[4]: /ja/byoc-logs/operate/best_practices/#scale-searchers-based-on-your-query-patterns
+[5]: /ja/byoc-logs/operate/best_practices/#enable-automated-backups-on-your-metastore-database
+[6]: /ja/byoc-logs/operate/object_storage_requests/

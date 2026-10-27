@@ -1,0 +1,54 @@
+{
+  "title": "Example-Dashboard",
+  "layout_type": "ordered",
+  "widgets": [
+    {
+      "definition": {
+        "type": "heatgrid",
+        "requests": [
+          {
+            "response_format": "timeseries",
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*} by {host}"
+              }
+            ],
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "sort": {
+          "nesting_display": "flat",
+          "sort_by": {
+            "property": "label",
+            "order": "asc"
+          }
+        },
+        "color": {
+          "mode": "discrete",
+          "source": "custom",
+          "bins": [
+            {
+              "color": "#00FF00"
+            },
+            {
+              "color": "#FF0000",
+              "lower_bound": 80
+            }
+          ]
+        },
+        "legend": {
+          "show_caption": true
+        },
+        "label_column": {
+          "width": "m"
+        }
+      }
+    }
+  ]
+}
