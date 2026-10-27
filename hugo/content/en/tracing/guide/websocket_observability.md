@@ -31,14 +31,15 @@ The following tracer versions support WebSocket observability out of the box:
 
 The following library versions are supported:
 
-| Language | Library             | Version   |
-|----------|---------------------|-----------|
-| Node.js  | `ws`                | `>=8.0.0` |
-| Python   | ASGI                | `>=2.0`   |
-| Java     | `javax.websocket`   | `>=1.0`   |
-| Java     | `jakarta.websocket` | `>=2.0`   |
-| PHP      | `ratchet/pawl`      | `>=0.4`   |
-| PHP      | `cboden/ratchet`    | `>=0.4`   |
+| Language | Library                       | Version   |
+|----------|-------------------------------|-----------|
+| Node.js  | `ws`                          | `>=8.0.0` |
+| Python   | ASGI                          | `>=2.0`   |
+| Java     | `javax.websocket`             | `>=1.0`   |
+| Java     | `jakarta.websocket`           | `>=2.0`   |
+| Java     | `org.eclipse.jetty.websocket` | `>=12`    |
+| PHP      | `ratchet/pawl`                | `>=0.4`   |
+| PHP      | `cboden/ratchet`              | `>=0.4`   |
 
 ## How it works
 
