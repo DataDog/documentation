@@ -14,6 +14,9 @@ further_reading:
 - link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Send custom metrics with DogStatsD"
+- link: "/extend/custom_checks/"
+  tag: "Documentation"
+  text: "Write a custom Agent check"
 - link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
@@ -31,7 +34,12 @@ This page covers Agent 7 on AIX. For AIX versions earlier than 7.2 TL5, see the 
 ## Overview
 The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-**Note**: JMX-based integrations, container and Kubernetes checks, eBPF-based checks, Cloud Network Monitoring, remote configuration updates, and remote Agent updates are not supported on AIX.
+**Note**: The following are not supported on AIX:
+- JMX-based integrations
+- Container and Kubernetes checks
+- eBPF-based checks
+- Cloud Network Monitoring
+- Remote configuration updates and remote Agent updates
 
 See [Supported Platforms][5] for the complete list of supported AIX versions.
 
