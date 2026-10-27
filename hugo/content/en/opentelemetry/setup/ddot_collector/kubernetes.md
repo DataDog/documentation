@@ -1,5 +1,7 @@
 ---
 title: Install the DDOT Collector on Kubernetes
+aliases:
+- /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
 description: Deploy the DDOT Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart.
 # code_lang: kubernetes_standalone
 # type: multi-code-lang
