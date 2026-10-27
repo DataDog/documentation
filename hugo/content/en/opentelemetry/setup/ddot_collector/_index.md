@@ -56,6 +56,8 @@ The following table shows which OpenTelemetry Collector versions are included in
 
 | DDOT version | Beta version | Stable version |
 |--------------|--------------|----------------|
+| 7.84.x       | v0.159.0     | v1.65.0        |
+| 7.83.x       | v0.158.0     | v1.64.0        |
 | 7.82.x       | v0.155.0     | v1.61.0        |
 | 7.81.x       | v0.154.0     | v1.60.0        |
 | 7.80.x       | v0.152.0     | v1.58.0        |
