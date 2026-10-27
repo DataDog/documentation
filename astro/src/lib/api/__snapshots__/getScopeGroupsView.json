@@ -437,6 +437,24 @@
     ]
   },
   {
+    "heading": "Rendering Shapes",
+    "anchors": [
+      "rendering-shapes"
+    ],
+    "scopes": [
+      {
+        "name": "status_pages_settings_write",
+        "description": "",
+        "endpoints": [
+          {
+            "summary": "Delete status page",
+            "href": "/api/latest/rendering-shapes/#delete-status-page"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "heading": "Usage Metering",
     "anchors": [
       "usage-metering"

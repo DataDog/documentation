@@ -81,14 +81,22 @@ describe("viewsBuilder snapshots", () => {
 
   describe("getOperationView", () => {
     for (const { catSlug, opSlug, label } of ENDPOINT_AUDIT_CASES) {
-      it(`${catSlug}/${opSlug} (${label})`, async () => {
-        const result = await getOperationView(catSlug, opSlug);
-        ApiOperationViewSchema.parse(result);
-        await expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
-          `./__snapshots__/getOperationView/${catSlug}.${opSlug}.json`,
-        );
+      it(`${catSlug}/${opSlug} (${label}) matches the view schema`, async () => {
+        ApiOperationViewSchema.parse(await getOperationView(catSlug, opSlug));
       });
     }
+
+    // The shape snapshots cover operation content. Only the multi-version
+    // operation keeps a view snapshot, beside its whole-page snapshot.
+    it("aws-integration/list-all-aws-integrations matches the view snapshot", async () => {
+      const result = await getOperationView(
+        "aws-integration",
+        "list-all-aws-integrations",
+      );
+      await expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
+        "./__snapshots__/getOperationView/aws-integration.list-all-aws-integrations.json",
+      );
+    });
   });
 });
 

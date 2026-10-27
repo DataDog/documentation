@@ -91,27 +91,9 @@ const AUDIT_PAGES: AuditPage[] = [
     urlPath: "/api/latest.md",
   },
 
-  // One landing page + one representative operation per dynamic category.
+  // Page structure only. The shape snapshots cover operation content, so
+  // operation pages are limited to the multi-version case.
   categoryPage("05-authentication-landing", "authentication"),
-  operationPage(
-    "05-authentication-validate-api-key",
-    "authentication",
-    "validate-api-key",
-  ),
-
-  categoryPage("06-dashboards-landing", "dashboards"),
-  operationPage(
-    "06-dashboards-get-a-dashboard",
-    "dashboards",
-    "get-a-dashboard",
-  ),
-
-  categoryPage("07-incidents-landing", "incidents"),
-  operationPage(
-    "07-incidents-create-an-incident",
-    "incidents",
-    "create-an-incident",
-  ),
 
   // aws-integration: multi-version case — v1 and v2 share one page.
   categoryPage("08-aws-integration-landing", "aws-integration"),
@@ -121,26 +103,11 @@ const AUDIT_PAGES: AuditPage[] = [
     "list-all-aws-integrations",
   ),
 
-  categoryPage("09-monitors-landing", "monitors"),
-  operationPage("09-monitors-create-a-monitor", "monitors", "create-a-monitor"),
-
   // dashboard-lists: v1 tag has x-deprecated, which the category page ignores.
   categoryPage("10-dashboard-lists-landing", "dashboard-lists"),
-  operationPage(
-    "10-dashboard-lists-get-all-dashboard-lists",
-    "dashboard-lists",
-    "get-all-dashboard-lists",
-  ),
 
   // screenboards: empty category (no operations to sample).
   categoryPage("11-screenboards-landing", "screenboards"),
-
-  categoryPage("12-usage-metering-landing", "usage-metering"),
-  operationPage(
-    "12-usage-metering-get-hourly-usage-for-lambda",
-    "usage-metering",
-    "get-hourly-usage-for-lambda",
-  ),
 
   // The whole changelog, from tests/fixtures/api/changelog/.
   {

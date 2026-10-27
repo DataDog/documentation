@@ -2738,6 +2738,1445 @@
     ]
   },
   {
+    "name": "Rendering Shapes",
+    "slug": "rendering-shapes",
+    "description": "Trimmed live operations for the spec-shape snapshot tests. Each one shows one rendering class.",
+    "operations": [
+      {
+        "operationId": "AggregateLogs",
+        "summary": "Aggregate events",
+        "slug": "aggregate-events",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/logs/analytics/aggregate",
+          "us3": "https://api.us3.datadoghq.com/api/v2/logs/analytics/aggregate",
+          "us5": "https://api.us5.datadoghq.com/api/v2/logs/analytics/aggregate",
+          "eu": "https://api.datadoghq.eu/api/v2/logs/analytics/aggregate",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/logs/analytics/aggregate",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/logs/analytics/aggregate",
+          "gov": "https://api.ddog-gov.com/api/v2/logs/analytics/aggregate"
+        }
+      },
+      {
+        "operationId": "MakeGCPSTSDelegate",
+        "summary": "Create a Datadog GCP principal",
+        "slug": "create-a-datadog-gcp-principal",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/integration/gcp/sts_delegate",
+          "us3": "https://api.us3.datadoghq.com/api/v2/integration/gcp/sts_delegate",
+          "us5": "https://api.us5.datadoghq.com/api/v2/integration/gcp/sts_delegate",
+          "eu": "https://api.datadoghq.eu/api/v2/integration/gcp/sts_delegate",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/gcp/sts_delegate",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/gcp/sts_delegate",
+          "gov": "https://api.ddog-gov.com/api/v2/integration/gcp/sts_delegate"
+        }
+      },
+      {
+        "operationId": "CreateWorkflow",
+        "summary": "Create a Workflow",
+        "slug": "create-a-workflow",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/workflows",
+          "us3": "https://api.us3.datadoghq.com/api/v2/workflows",
+          "us5": "https://api.us5.datadoghq.com/api/v2/workflows",
+          "eu": "https://api.datadoghq.eu/api/v2/workflows",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/workflows",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/workflows",
+          "gov": "https://api.ddog-gov.com/api/v2/workflows"
+        }
+      },
+      {
+        "operationId": "CreateCases",
+        "summary": "Create cases for security findings",
+        "slug": "create-cases-for-security-findings",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/security/findings/cases",
+          "us3": "https://api.us3.datadoghq.com/api/v2/security/findings/cases",
+          "us5": "https://api.us5.datadoghq.com/api/v2/security/findings/cases",
+          "eu": "https://api.datadoghq.eu/api/v2/security/findings/cases",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/security/findings/cases",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/security/findings/cases",
+          "gov": "https://api.ddog-gov.com/api/v2/security/findings/cases"
+        }
+      },
+      {
+        "operationId": "UpsertCatalogEntity",
+        "summary": "Create or update entities",
+        "slug": "create-or-update-entities",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/catalog/entity",
+          "us3": "https://api.us3.datadoghq.com/api/v2/catalog/entity",
+          "us5": "https://api.us5.datadoghq.com/api/v2/catalog/entity",
+          "eu": "https://api.datadoghq.eu/api/v2/catalog/entity",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/catalog/entity",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/catalog/entity",
+          "gov": "https://api.ddog-gov.com/api/v2/catalog/entity"
+        }
+      },
+      {
+        "operationId": "UpsertCatalogKind",
+        "summary": "Create or update kinds",
+        "slug": "create-or-update-kinds",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/catalog/kind",
+          "us3": "https://api.us3.datadoghq.com/api/v2/catalog/kind",
+          "us5": "https://api.us5.datadoghq.com/api/v2/catalog/kind",
+          "eu": "https://api.datadoghq.eu/api/v2/catalog/kind",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/catalog/kind",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/catalog/kind",
+          "gov": "https://api.ddog-gov.com/api/v2/catalog/kind"
+        }
+      },
+      {
+        "operationId": "DeleteRUMApplication",
+        "summary": "Delete a RUM application",
+        "slug": "delete-a-rum-application",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/rum/applications/{id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/rum/applications/{id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/rum/applications/{id}",
+          "eu": "https://api.datadoghq.eu/api/v2/rum/applications/{id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/rum/applications/{id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/rum/applications/{id}",
+          "gov": "https://api.ddog-gov.com/api/v2/rum/applications/{id}"
+        }
+      },
+      {
+        "operationId": "DeleteRumQuotaConfig",
+        "summary": "Delete a RUM retention quota configuration",
+        "slug": "delete-a-rum-retention-quota-configuration",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/rum/config/retention-quota/{scope_type}/{scope_id}"
+        }
+      },
+      {
+        "operationId": "DeleteRumMetric",
+        "summary": "Delete a RUM-based metric",
+        "slug": "delete-a-rum-based-metric",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/rum/config/metrics/{metric_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/rum/config/metrics/{metric_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/rum/config/metrics/{metric_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/rum/config/metrics/{metric_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/rum/config/metrics/{metric_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/rum/config/metrics/{metric_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/rum/config/metrics/{metric_id}"
+        }
+      },
+      {
+        "operationId": "DeleteIncidentTemplate",
+        "summary": "Delete a Salesforce incident template",
+        "slug": "delete-a-salesforce-incident-template",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": true,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}"
+        }
+      },
+      {
+        "operationId": "DeleteWebhooksIntegration",
+        "summary": "Delete a webhook",
+        "slug": "delete-a-webhook",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}",
+          "us3": "https://api.us3.datadoghq.com/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}",
+          "us5": "https://api.us5.datadoghq.com/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}",
+          "eu": "https://api.datadoghq.eu/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}",
+          "gov": "https://api.ddog-gov.com/api/v1/integration/webhooks/configuration/webhooks/{webhook_name}"
+        }
+      },
+      {
+        "operationId": "DeleteCaseType",
+        "summary": "Delete a work item type",
+        "slug": "delete-a-case-type",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/cases/types/{case_type_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/cases/types/{case_type_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/cases/types/{case_type_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/cases/types/{case_type_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/cases/types/{case_type_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/cases/types/{case_type_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/cases/types/{case_type_id}"
+        }
+      },
+      {
+        "operationId": "DeleteCSMThreatsAgentPolicy",
+        "summary": "Delete a Workload Protection policy",
+        "slug": "delete-a-workload-protection-policy",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/remote_config/products/cws/policy/{policy_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/remote_config/products/cws/policy/{policy_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/remote_config/products/cws/policy/{policy_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/remote_config/products/cws/policy/{policy_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/remote_config/products/cws/policy/{policy_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/remote_config/products/cws/policy/{policy_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/remote_config/products/cws/policy/{policy_id}"
+        }
+      },
+      {
+        "operationId": "DeleteServiceAccountApplicationKey",
+        "summary": "Delete an application key for this service account",
+        "slug": "delete-an-application-key-for-this-service-account",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}"
+        }
+      },
+      {
+        "operationId": "DeleteWorkflow",
+        "summary": "Delete an existing Workflow",
+        "slug": "delete-an-existing-workflow",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/workflows/{workflow_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/workflows/{workflow_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/workflows/{workflow_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/workflows/{workflow_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/workflows/{workflow_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/workflows/{workflow_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/workflows/{workflow_id}"
+        }
+      },
+      {
+        "operationId": "DeleteJiraIssueTemplate",
+        "summary": "Delete Jira issue template",
+        "slug": "delete-jira-issue-template",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": true,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/integration/jira/issue-templates/{issue_template_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/integration/jira/issue-templates/{issue_template_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/integration/jira/issue-templates/{issue_template_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/integration/jira/issue-templates/{issue_template_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/jira/issue-templates/{issue_template_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/jira/issue-templates/{issue_template_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/integration/jira/issue-templates/{issue_template_id}"
+        }
+      },
+      {
+        "operationId": "DeleteRumReplayPlaylist",
+        "summary": "Delete RUM replay playlist",
+        "slug": "delete-rum-replay-playlist",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/rum/replay/playlists/{playlist_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/rum/replay/playlists/{playlist_id}"
+        }
+      },
+      {
+        "operationId": "DeleteStatusPage",
+        "summary": "Delete status page",
+        "slug": "delete-status-page",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/statuspages/{page_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/statuspages/{page_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/statuspages/{page_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/statuspages/{page_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/statuspages/{page_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/statuspages/{page_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/statuspages/{page_id}"
+        }
+      },
+      {
+        "operationId": "DeleteSCIMUser",
+        "summary": "Delete user",
+        "slug": "delete-user",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+          "eu": "https://api.datadoghq.eu/api/v2/scim/Users/{user_uuid}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+          "gov": "https://api.ddog-gov.com/api/v2/scim/Users/{user_uuid}"
+        }
+      },
+      {
+        "operationId": "DownloadCSMThreatsPolicy",
+        "summary": "Download the Workload Protection policy",
+        "slug": "download-the-workload-protection-policy",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/remote_config/products/cws/policy/download",
+          "us3": "https://api.us3.datadoghq.com/api/v2/remote_config/products/cws/policy/download",
+          "us5": "https://api.us5.datadoghq.com/api/v2/remote_config/products/cws/policy/download",
+          "eu": "https://api.datadoghq.eu/api/v2/remote_config/products/cws/policy/download",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/remote_config/products/cws/policy/download",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/remote_config/products/cws/policy/download",
+          "gov": "https://api.ddog-gov.com/api/v2/remote_config/products/cws/policy/download"
+        }
+      },
+      {
+        "operationId": "FetchUptimes",
+        "summary": "Fetch uptime for multiple tests",
+        "slug": "fetch-uptime-for-multiple-tests",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/synthetics/tests/uptimes",
+          "us3": "https://api.us3.datadoghq.com/api/v1/synthetics/tests/uptimes",
+          "us5": "https://api.us5.datadoghq.com/api/v1/synthetics/tests/uptimes",
+          "eu": "https://api.datadoghq.eu/api/v1/synthetics/tests/uptimes",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/synthetics/tests/uptimes",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/synthetics/tests/uptimes",
+          "gov": "https://api.ddog-gov.com/api/v1/synthetics/tests/uptimes"
+        }
+      },
+      {
+        "operationId": "GetLogsCustomDestination",
+        "summary": "Get a custom destination",
+        "slug": "get-a-custom-destination",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/logs/config/custom-destinations/{custom_destination_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/logs/config/custom-destinations/{custom_destination_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/logs/config/custom-destinations/{custom_destination_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/logs/config/custom-destinations/{custom_destination_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/logs/config/custom-destinations/{custom_destination_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/logs/config/custom-destinations/{custom_destination_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/logs/config/custom-destinations/{custom_destination_id}"
+        }
+      },
+      {
+        "operationId": "GetDowntime",
+        "summary": "Get a downtime",
+        "slug": "get-a-downtime",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/downtime/{downtime_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/downtime/{downtime_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/downtime/{downtime_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/downtime/{downtime_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/downtime/{downtime_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/downtime/{downtime_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/downtime/{downtime_id}"
+        }
+      },
+      {
+        "operationId": "GetApmRetentionFilter",
+        "summary": "Get a given APM retention filter",
+        "slug": "get-a-given-apm-retention-filter",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/apm/config/retention-filters/{filter_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/apm/config/retention-filters/{filter_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/apm/config/retention-filters/{filter_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/apm/config/retention-filters/{filter_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/apm/config/retention-filters/{filter_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/apm/config/retention-filters/{filter_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/apm/config/retention-filters/{filter_id}"
+        }
+      },
+      {
+        "operationId": "GetRestrictionQuery",
+        "summary": "Get a restriction query",
+        "slug": "get-a-restriction-query",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/logs/config/restriction_queries/{restriction_query_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/logs/config/restriction_queries/{restriction_query_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/logs/config/restriction_queries/{restriction_query_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/logs/config/restriction_queries/{restriction_query_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/logs/config/restriction_queries/{restriction_query_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/logs/config/restriction_queries/{restriction_query_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/logs/config/restriction_queries/{restriction_query_id}"
+        }
+      },
+      {
+        "operationId": "GetFleetScheduleV2",
+        "summary": "Get a schedule by ID",
+        "slug": "get-a-schedule-by-id",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/fleet/schedules/{id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/fleet/schedules/{id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/fleet/schedules/{id}",
+          "eu": "https://api.datadoghq.eu/api/v2/fleet/schedules/{id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/fleet/schedules/{id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/fleet/schedules/{id}",
+          "gov": "https://api.ddog-gov.com/api/v2/fleet/schedules/{id}"
+        }
+      },
+      {
+        "operationId": "GetPipeline",
+        "summary": "Get a specific pipeline",
+        "slug": "get-a-specific-pipeline",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/obs-pipelines/pipelines/{pipeline_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/obs-pipelines/pipelines/{pipeline_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/obs-pipelines/pipelines/{pipeline_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/obs-pipelines/pipelines/{pipeline_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/obs-pipelines/pipelines/{pipeline_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/obs-pipelines/pipelines/{pipeline_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/obs-pipelines/pipelines/{pipeline_id}"
+        }
+      },
+      {
+        "operationId": "GetWorkflowInstance",
+        "summary": "Get a workflow instance",
+        "slug": "get-a-workflow-instance",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/workflows/{workflow_id}/instances/{instance_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/workflows/{workflow_id}/instances/{instance_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/workflows/{workflow_id}/instances/{instance_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/workflows/{workflow_id}/instances/{instance_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/workflows/{workflow_id}/instances/{instance_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/workflows/{workflow_id}/instances/{instance_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/workflows/{workflow_id}/instances/{instance_id}"
+        }
+      },
+      {
+        "operationId": "ListPersonalAccessTokens",
+        "summary": "Get all access tokens",
+        "slug": "get-all-access-tokens",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/personal_access_tokens",
+          "us3": "https://api.us3.datadoghq.com/api/v2/personal_access_tokens",
+          "us5": "https://api.us5.datadoghq.com/api/v2/personal_access_tokens",
+          "eu": "https://api.datadoghq.eu/api/v2/personal_access_tokens",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/personal_access_tokens",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/personal_access_tokens",
+          "gov": "https://api.ddog-gov.com/api/v2/personal_access_tokens"
+        }
+      },
+      {
+        "operationId": "ListServiceDependencies",
+        "summary": "Get all APM service dependencies",
+        "slug": "get-all-apm-service-dependencies",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/service_dependencies",
+          "us3": "https://api.us3.datadoghq.com/api/v1/service_dependencies",
+          "us5": "https://api.us5.datadoghq.com/api/v1/service_dependencies",
+          "eu": "https://api.datadoghq.eu/api/v1/service_dependencies",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/service_dependencies",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/service_dependencies",
+          "gov": "https://api.ddog-gov.com/api/v1/service_dependencies"
+        }
+      },
+      {
+        "operationId": "ListHostTags",
+        "summary": "Get All Host Tags",
+        "slug": "get-all-host-tags",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/tags/hosts",
+          "us3": "https://api.us3.datadoghq.com/api/v1/tags/hosts",
+          "us5": "https://api.us5.datadoghq.com/api/v1/tags/hosts",
+          "eu": "https://api.datadoghq.eu/api/v1/tags/hosts",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/tags/hosts",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/tags/hosts",
+          "gov": "https://api.ddog-gov.com/api/v1/tags/hosts"
+        }
+      },
+      {
+        "operationId": "ListCloudWorkloadSecurityAgentRules",
+        "summary": "Get all Workload Protection agent rules (US1-FED)",
+        "slug": "get-all-workload-protection-agent-rules-us1-fed",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/security_monitoring/cloud_workload_security/agent_rules",
+          "us3": "https://api.us3.datadoghq.com/api/v2/security_monitoring/cloud_workload_security/agent_rules",
+          "us5": "https://api.us5.datadoghq.com/api/v2/security_monitoring/cloud_workload_security/agent_rules",
+          "eu": "https://api.datadoghq.eu/api/v2/security_monitoring/cloud_workload_security/agent_rules",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/security_monitoring/cloud_workload_security/agent_rules",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/security_monitoring/cloud_workload_security/agent_rules",
+          "gov": "https://api.ddog-gov.com/api/v2/security_monitoring/cloud_workload_security/agent_rules"
+        }
+      },
+      {
+        "operationId": "GetOwnershipInference",
+        "summary": "Get an ownership inference by owner type",
+        "slug": "get-an-ownership-inference-by-owner-type",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}",
+          "eu": "https://api.datadoghq.eu/api/v2/csm/ownership/{resource_id}/{owner_type}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}",
+          "gov": "https://api.ddog-gov.com/api/v2/csm/ownership/{resource_id}/{owner_type}"
+        }
+      },
+      {
+        "operationId": "CreateStaticAnalysisAst",
+        "summary": "Get AST for source code",
+        "slug": "get-ast-for-source-code",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/static-analysis/static-analysis-server/get-ast",
+          "us3": "https://api.us3.datadoghq.com/api/v2/static-analysis/static-analysis-server/get-ast",
+          "us5": "https://api.us5.datadoghq.com/api/v2/static-analysis/static-analysis-server/get-ast",
+          "eu": "https://api.datadoghq.eu/api/v2/static-analysis/static-analysis-server/get-ast",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/static-analysis/static-analysis-server/get-ast",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/static-analysis/static-analysis-server/get-ast",
+          "gov": "https://api.ddog-gov.com/api/v2/static-analysis/static-analysis-server/get-ast"
+        }
+      },
+      {
+        "operationId": "GetUsageSummaryAvailableFields",
+        "summary": "Get available fields for usage summary",
+        "slug": "get-available-fields-for-usage-summary",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/usage/summary/available_fields",
+          "us3": "https://api.us3.datadoghq.com/api/v2/usage/summary/available_fields",
+          "us5": "https://api.us5.datadoghq.com/api/v2/usage/summary/available_fields",
+          "eu": "https://api.datadoghq.eu/api/v2/usage/summary/available_fields",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/usage/summary/available_fields",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/usage/summary/available_fields",
+          "gov": "https://api.ddog-gov.com/api/v2/usage/summary/available_fields"
+        }
+      },
+      {
+        "operationId": "GetRowsByID",
+        "summary": "Get rows by id",
+        "slug": "get-rows-by-id",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "us3": "https://api.us3.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "us5": "https://api.us5.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "eu": "https://api.datadoghq.eu/api/v2/reference-tables/tables/{id}/rows",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "gov": "https://api.ddog-gov.com/api/v2/reference-tables/tables/{id}/rows"
+        }
+      },
+      {
+        "operationId": "GetServiceList",
+        "summary": "Get service list",
+        "slug": "get-service-list",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/apm/services",
+          "us3": "https://api.us3.datadoghq.com/api/v2/apm/services",
+          "us5": "https://api.us5.datadoghq.com/api/v2/apm/services",
+          "eu": "https://api.datadoghq.eu/api/v2/apm/services",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/apm/services",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/apm/services",
+          "gov": "https://api.ddog-gov.com/api/v2/apm/services"
+        }
+      },
+      {
+        "operationId": "GetSLOReport",
+        "summary": "Get SLO report",
+        "slug": "get-slo-report",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/slo/report/{report_id}/download",
+          "us3": "https://api.us3.datadoghq.com/api/v2/slo/report/{report_id}/download",
+          "us5": "https://api.us5.datadoghq.com/api/v2/slo/report/{report_id}/download",
+          "eu": "https://api.datadoghq.eu/api/v2/slo/report/{report_id}/download",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/slo/report/{report_id}/download",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/slo/report/{report_id}/download",
+          "gov": "https://api.ddog-gov.com/api/v2/slo/report/{report_id}/download"
+        }
+      },
+      {
+        "operationId": "GetSyntheticsDefaultLocations",
+        "summary": "Get the default locations",
+        "slug": "get-the-default-locations",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/synthetics/settings/default_locations",
+          "us3": "https://api.us3.datadoghq.com/api/v1/synthetics/settings/default_locations",
+          "us5": "https://api.us5.datadoghq.com/api/v1/synthetics/settings/default_locations",
+          "eu": "https://api.datadoghq.eu/api/v1/synthetics/settings/default_locations",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/synthetics/settings/default_locations",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/synthetics/settings/default_locations",
+          "gov": "https://api.ddog-gov.com/api/v1/synthetics/settings/default_locations"
+        }
+      },
+      {
+        "operationId": "GetOwnershipEvidence",
+        "summary": "Get the evidence for an ownership inference",
+        "slug": "get-the-evidence-for-an-ownership-inference",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence",
+          "us3": "https://api.us3.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence",
+          "us5": "https://api.us5.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence",
+          "eu": "https://api.datadoghq.eu/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence",
+          "gov": "https://api.ddog-gov.com/api/v2/csm/ownership/{resource_id}/{owner_type}/evidence"
+        }
+      },
+      {
+        "operationId": "ListDevices",
+        "summary": "Get the list of devices",
+        "slug": "get-the-list-of-devices",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/ndm/devices",
+          "us3": "https://api.us3.datadoghq.com/api/v2/ndm/devices",
+          "us5": "https://api.us5.datadoghq.com/api/v2/ndm/devices",
+          "eu": "https://api.datadoghq.eu/api/v2/ndm/devices",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/ndm/devices",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/ndm/devices",
+          "gov": "https://api.ddog-gov.com/api/v2/ndm/devices"
+        }
+      },
+      {
+        "operationId": "GetInterfaces",
+        "summary": "Get the list of interfaces of the device",
+        "slug": "get-the-list-of-interfaces-of-the-device",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/ndm/interfaces",
+          "us3": "https://api.us3.datadoghq.com/api/v2/ndm/interfaces",
+          "us5": "https://api.us5.datadoghq.com/api/v2/ndm/interfaces",
+          "eu": "https://api.datadoghq.eu/api/v2/ndm/interfaces",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/ndm/interfaces",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/ndm/interfaces",
+          "gov": "https://api.ddog-gov.com/api/v2/ndm/interfaces"
+        }
+      },
+      {
+        "operationId": "GetUsageAttributionTypes",
+        "summary": "Get usage attribution types",
+        "slug": "get-usage-attribution-types",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/usage/usage-attribution-types",
+          "us3": "https://api.us3.datadoghq.com/api/v2/usage/usage-attribution-types",
+          "us5": "https://api.us5.datadoghq.com/api/v2/usage/usage-attribution-types",
+          "eu": "https://api.datadoghq.eu/api/v2/usage/usage-attribution-types",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/usage/usage-attribution-types",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/usage/usage-attribution-types",
+          "gov": "https://api.ddog-gov.com/api/v2/usage/usage-attribution-types"
+        }
+      },
+      {
+        "operationId": "AddSTIXThreatIntel",
+        "summary": "Ingest STIX threat intelligence",
+        "slug": "ingest-stix-threat-intelligence",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/security/threat-intel/stix",
+          "us3": "https://api.us3.datadoghq.com/api/v2/security/threat-intel/stix",
+          "us5": "https://api.us5.datadoghq.com/api/v2/security/threat-intel/stix",
+          "eu": "https://api.datadoghq.eu/api/v2/security/threat-intel/stix",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/security/threat-intel/stix",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/security/threat-intel/stix",
+          "gov": "https://api.ddog-gov.com/api/v2/security/threat-intel/stix"
+        }
+      },
+      {
+        "operationId": "ListLLMObsDatasetRecords",
+        "summary": "List Agent Observability dataset records",
+        "slug": "list-agent-observability-dataset-records",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records",
+          "us3": "https://api.us3.datadoghq.com/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records",
+          "us5": "https://api.us5.datadoghq.com/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records",
+          "eu": "https://api.datadoghq.eu/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records",
+          "gov": "https://api.ddog-gov.com/api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records"
+        }
+      },
+      {
+        "operationId": "ListApmRetentionFilters",
+        "summary": "List all APM retention filters",
+        "slug": "list-all-apm-retention-filters",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/apm/config/retention-filters",
+          "us3": "https://api.us3.datadoghq.com/api/v2/apm/config/retention-filters",
+          "us5": "https://api.us5.datadoghq.com/api/v2/apm/config/retention-filters",
+          "eu": "https://api.datadoghq.eu/api/v2/apm/config/retention-filters",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/apm/config/retention-filters",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/apm/config/retention-filters",
+          "gov": "https://api.ddog-gov.com/api/v2/apm/config/retention-filters"
+        }
+      },
+      {
+        "operationId": "ListVolumesByMetricName",
+        "summary": "List distinct metric volumes by metric name",
+        "slug": "list-distinct-metric-volumes-by-metric-name",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/metrics/{metric_name}/volumes",
+          "us3": "https://api.us3.datadoghq.com/api/v2/metrics/{metric_name}/volumes",
+          "us5": "https://api.us5.datadoghq.com/api/v2/metrics/{metric_name}/volumes",
+          "eu": "https://api.datadoghq.eu/api/v2/metrics/{metric_name}/volumes",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/metrics/{metric_name}/volumes",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/metrics/{metric_name}/volumes",
+          "gov": "https://api.ddog-gov.com/api/v2/metrics/{metric_name}/volumes"
+        }
+      },
+      {
+        "operationId": "GetIPRanges",
+        "summary": "List IP Ranges",
+        "slug": "list-ip-ranges",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://ip-ranges.datadoghq.com/",
+          "us3": "https://ip-ranges.us3.datadoghq.com/",
+          "us5": "https://ip-ranges.us5.datadoghq.com/",
+          "eu": "https://ip-ranges.datadoghq.eu/",
+          "ap1": "https://ip-ranges.ap1.datadoghq.com/",
+          "ap2": "https://ip-ranges.ap2.datadoghq.com/",
+          "uk1": "https://ip-ranges.uk1.datadoghq.com/",
+          "gov": "https://ip-ranges.ddog-gov.com/",
+          "gov2": "https://ip-ranges.us2.ddog-gov.com/"
+        }
+      },
+      {
+        "operationId": "ListJiraIssueTemplates",
+        "summary": "List Jira issue templates",
+        "slug": "list-jira-issue-templates",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/integration/jira/issue-templates",
+          "us3": "https://api.us3.datadoghq.com/api/v2/integration/jira/issue-templates",
+          "us5": "https://api.us5.datadoghq.com/api/v2/integration/jira/issue-templates",
+          "eu": "https://api.datadoghq.eu/api/v2/integration/jira/issue-templates",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/jira/issue-templates",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/jira/issue-templates",
+          "gov": "https://api.ddog-gov.com/api/v2/integration/jira/issue-templates"
+        }
+      },
+      {
+        "operationId": "ListOrgGroupPolicies",
+        "summary": "List org group policies",
+        "slug": "list-org-group-policies",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/org_group_policies",
+          "us3": "https://api.us3.datadoghq.com/api/v2/org_group_policies",
+          "us5": "https://api.us5.datadoghq.com/api/v2/org_group_policies",
+          "eu": "https://api.datadoghq.eu/api/v2/org_group_policies",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/org_group_policies",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/org_group_policies",
+          "gov": "https://api.ddog-gov.com/api/v2/org_group_policies"
+        }
+      },
+      {
+        "operationId": "ListRumReplayPlaylistSessions",
+        "summary": "List RUM replay playlist sessions",
+        "slug": "list-rum-replay-playlist-sessions",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}/sessions",
+          "us3": "https://api.us3.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}/sessions",
+          "us5": "https://api.us5.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}/sessions",
+          "eu": "https://api.datadoghq.eu/api/v2/rum/replay/playlists/{playlist_id}/sessions",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}/sessions",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/rum/replay/playlists/{playlist_id}/sessions",
+          "gov": "https://api.ddog-gov.com/api/v2/rum/replay/playlists/{playlist_id}/sessions"
+        }
+      },
+      {
+        "operationId": "ListScannedAssetsMetadata",
+        "summary": "List scanned assets metadata",
+        "slug": "list-scanned-assets-metadata",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/security/scanned-assets-metadata",
+          "us3": "https://api.us3.datadoghq.com/api/v2/security/scanned-assets-metadata",
+          "us5": "https://api.us5.datadoghq.com/api/v2/security/scanned-assets-metadata",
+          "eu": "https://api.datadoghq.eu/api/v2/security/scanned-assets-metadata",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/security/scanned-assets-metadata",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/security/scanned-assets-metadata",
+          "gov": "https://api.ddog-gov.com/api/v2/security/scanned-assets-metadata"
+        }
+      },
+      {
+        "operationId": "ListServiceNowTemplates",
+        "summary": "List ServiceNow templates",
+        "slug": "list-servicenow-templates",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/integration/servicenow/handles",
+          "us3": "https://api.us3.datadoghq.com/api/v2/integration/servicenow/handles",
+          "us5": "https://api.us5.datadoghq.com/api/v2/integration/servicenow/handles",
+          "eu": "https://api.datadoghq.eu/api/v2/integration/servicenow/handles",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/servicenow/handles",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/servicenow/handles",
+          "gov": "https://api.ddog-gov.com/api/v2/integration/servicenow/handles"
+        }
+      },
+      {
+        "operationId": "QueryUsers",
+        "summary": "Query users",
+        "slug": "query-users",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/product-analytics/users/query",
+          "us3": "https://api.us3.datadoghq.com/api/v2/product-analytics/users/query",
+          "us5": "https://api.us5.datadoghq.com/api/v2/product-analytics/users/query",
+          "eu": "https://api.datadoghq.eu/api/v2/product-analytics/users/query",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/product-analytics/users/query",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/product-analytics/users/query",
+          "gov": "https://api.ddog-gov.com/api/v2/product-analytics/users/query"
+        }
+      },
+      {
+        "operationId": "ReorderApmRetentionFilters",
+        "summary": "Re-order retention filters",
+        "slug": "re-order-retention-filters",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "PUT",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/apm/config/retention-filters-execution-order",
+          "us3": "https://api.us3.datadoghq.com/api/v2/apm/config/retention-filters-execution-order",
+          "us5": "https://api.us5.datadoghq.com/api/v2/apm/config/retention-filters-execution-order",
+          "eu": "https://api.datadoghq.eu/api/v2/apm/config/retention-filters-execution-order",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/apm/config/retention-filters-execution-order",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/apm/config/retention-filters-execution-order",
+          "gov": "https://api.ddog-gov.com/api/v2/apm/config/retention-filters-execution-order"
+        }
+      },
+      {
+        "operationId": "ResolveOnCallPage",
+        "summary": "Resolve On-Call Page",
+        "slug": "resolve-on-call-page",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "us3": "https://teal.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "us5": "https://coral.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "eu": "https://beige.oncall.datadoghq.eu/api/v2/on-call/pages/{page_id}/resolve",
+          "ap1": "https://saffron.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "ap2": "https://lava.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "uk1": "https://scarlet.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "gov": "https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve",
+          "gov2": "https://navy.oncall.datadoghq.com/api/v2/on-call/pages/{page_id}/resolve"
+        }
+      },
+      {
+        "operationId": "GetSCAScan",
+        "summary": "Retrieve a dependency scan result",
+        "slug": "retrieve-a-dependency-scan-result",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/static-analysis-sca/dependencies/scan/{job_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/static-analysis-sca/dependencies/scan/{job_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/static-analysis-sca/dependencies/scan/{job_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/static-analysis-sca/dependencies/scan/{job_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/static-analysis-sca/dependencies/scan/{job_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/static-analysis-sca/dependencies/scan/{job_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/static-analysis-sca/dependencies/scan/{job_id}"
+        }
+      },
+      {
+        "operationId": "RevokePersonalAccessToken",
+        "summary": "Revoke a personal access token",
+        "slug": "revoke-a-personal-access-token",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "DELETE",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/personal_access_tokens/{token_id}",
+          "us3": "https://api.us3.datadoghq.com/api/v2/personal_access_tokens/{token_id}",
+          "us5": "https://api.us5.datadoghq.com/api/v2/personal_access_tokens/{token_id}",
+          "eu": "https://api.datadoghq.eu/api/v2/personal_access_tokens/{token_id}",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/personal_access_tokens/{token_id}",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/personal_access_tokens/{token_id}",
+          "gov": "https://api.ddog-gov.com/api/v2/personal_access_tokens/{token_id}"
+        }
+      },
+      {
+        "operationId": "SetOnDemandConcurrencyCap",
+        "summary": "Save new value for on-demand concurrency cap",
+        "slug": "save-new-value-for-on-demand-concurrency-cap",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/synthetics/settings/on_demand_concurrency_cap",
+          "us3": "https://api.us3.datadoghq.com/api/v2/synthetics/settings/on_demand_concurrency_cap",
+          "us5": "https://api.us5.datadoghq.com/api/v2/synthetics/settings/on_demand_concurrency_cap",
+          "eu": "https://api.datadoghq.eu/api/v2/synthetics/settings/on_demand_concurrency_cap",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/synthetics/settings/on_demand_concurrency_cap",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/synthetics/settings/on_demand_concurrency_cap",
+          "gov": "https://api.ddog-gov.com/api/v2/synthetics/settings/on_demand_concurrency_cap"
+        }
+      },
+      {
+        "operationId": "SearchSecurityFindings",
+        "summary": "Search security findings",
+        "slug": "search-security-findings",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/security/findings/search",
+          "us3": "https://api.us3.datadoghq.com/api/v2/security/findings/search",
+          "us5": "https://api.us5.datadoghq.com/api/v2/security/findings/search",
+          "eu": "https://api.datadoghq.eu/api/v2/security/findings/search",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/security/findings/search",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/security/findings/search",
+          "gov": "https://api.ddog-gov.com/api/v2/security/findings/search"
+        }
+      },
+      {
+        "operationId": "SearchSuites",
+        "summary": "Search test suites",
+        "slug": "search-test-suites",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "GET",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/synthetics/suites/search",
+          "us3": "https://api.us3.datadoghq.com/api/v2/synthetics/suites/search",
+          "us5": "https://api.us5.datadoghq.com/api/v2/synthetics/suites/search",
+          "eu": "https://api.datadoghq.eu/api/v2/synthetics/suites/search",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/synthetics/suites/search",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/synthetics/suites/search",
+          "gov": "https://api.ddog-gov.com/api/v2/synthetics/suites/search"
+        }
+      },
+      {
+        "operationId": "SubmitLog",
+        "summary": "Send logs",
+        "slug": "send-logs",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/logs",
+          "us3": "https://api.us3.datadoghq.com/api/v2/logs",
+          "us5": "https://api.us5.datadoghq.com/api/v2/logs",
+          "eu": "https://api.datadoghq.eu/api/v2/logs",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/logs",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/logs",
+          "gov": "https://api.ddog-gov.com/api/v2/logs"
+        }
+      },
+      {
+        "operationId": "SubmitServiceCheck",
+        "summary": "Submit a Service Check",
+        "slug": "submit-a-service-check",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/check_run",
+          "us3": "https://api.us3.datadoghq.com/api/v1/check_run",
+          "us5": "https://api.us5.datadoghq.com/api/v1/check_run",
+          "eu": "https://api.datadoghq.eu/api/v1/check_run",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/check_run",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/check_run",
+          "gov": "https://api.ddog-gov.com/api/v1/check_run"
+        }
+      },
+      {
+        "operationId": "SubmitDistributionPoints",
+        "summary": "Submit distribution points",
+        "slug": "submit-distribution-points",
+        "menuOrder": 999,
+        "versions": [
+          "v1"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v1/distribution_points",
+          "us3": "https://api.us3.datadoghq.com/api/v1/distribution_points",
+          "us5": "https://api.us5.datadoghq.com/api/v1/distribution_points",
+          "eu": "https://api.datadoghq.eu/api/v1/distribution_points",
+          "ap1": "https://api.ap1.datadoghq.com/api/v1/distribution_points",
+          "ap2": "https://api.ap2.datadoghq.com/api/v1/distribution_points",
+          "gov": "https://api.ddog-gov.com/api/v1/distribution_points"
+        }
+      },
+      {
+        "operationId": "UploadIdPMetadata",
+        "summary": "Upload IdP metadata",
+        "slug": "upload-idp-metadata",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/saml_configurations/idp_metadata",
+          "us3": "https://api.us3.datadoghq.com/api/v2/saml_configurations/idp_metadata",
+          "us5": "https://api.us5.datadoghq.com/api/v2/saml_configurations/idp_metadata",
+          "eu": "https://api.datadoghq.eu/api/v2/saml_configurations/idp_metadata",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/saml_configurations/idp_metadata",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/saml_configurations/idp_metadata",
+          "gov": "https://api.ddog-gov.com/api/v2/saml_configurations/idp_metadata"
+        }
+      },
+      {
+        "operationId": "UploadSourceMap",
+        "summary": "Upload source maps",
+        "slug": "upload-source-maps",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/srcmap",
+          "us3": "https://api.us3.datadoghq.com/api/v2/srcmap",
+          "us5": "https://api.us5.datadoghq.com/api/v2/srcmap",
+          "eu": "https://api.datadoghq.eu/api/v2/srcmap",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/srcmap",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/srcmap",
+          "gov": "https://api.ddog-gov.com/api/v2/srcmap"
+        }
+      },
+      {
+        "operationId": "UpsertRows",
+        "summary": "Upsert rows",
+        "slug": "upsert-rows",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "us3": "https://api.us3.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "us5": "https://api.us5.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "eu": "https://api.datadoghq.eu/api/v2/reference-tables/tables/{id}/rows",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/reference-tables/tables/{id}/rows",
+          "gov": "https://api.ddog-gov.com/api/v2/reference-tables/tables/{id}/rows"
+        }
+      },
+      {
+        "operationId": "ValidateCsvBudget",
+        "summary": "Validate CSV budget",
+        "slug": "validate-csv-budget",
+        "menuOrder": 999,
+        "versions": [
+          "v2"
+        ],
+        "method": "POST",
+        "deprecated": false,
+        "unstable": false,
+        "regionUrls": {
+          "us": "https://api.datadoghq.com/api/v2/cost/budget/csv/validate",
+          "us3": "https://api.us3.datadoghq.com/api/v2/cost/budget/csv/validate",
+          "us5": "https://api.us5.datadoghq.com/api/v2/cost/budget/csv/validate",
+          "eu": "https://api.datadoghq.eu/api/v2/cost/budget/csv/validate",
+          "ap1": "https://api.ap1.datadoghq.com/api/v2/cost/budget/csv/validate",
+          "ap2": "https://api.ap2.datadoghq.com/api/v2/cost/budget/csv/validate",
+          "gov": "https://api.ddog-gov.com/api/v2/cost/budget/csv/validate"
+        }
+      }
+    ]
+  },
+  {
     "name": "Screenboards",
     "slug": "screenboards",
     "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.",

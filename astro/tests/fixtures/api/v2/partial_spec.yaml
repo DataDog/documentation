@@ -1493,6 +1493,62 @@ components:
         - MODIFIED_AT_DESCENDING
         - NAME_ASCENDING
         - NAME_DESCENDING
+    AstNode:
+      description: A node in the abstract syntax tree of the parsed source code.
+      properties:
+        ast_type:
+          description: The tree-sitter node type of this AST node.
+          example: module
+          type: string
+        children:
+          description: The child nodes of this AST node, or null for a leaf node.
+          items:
+            $ref: '#/components/schemas/AstNode'
+          nullable: true
+          type: array
+        end:
+          description: A position in source code, identified by line and column numbers.
+          properties:
+            col:
+              description: The column number in the source file (1-based).
+              example: 5
+              format: int64
+              type: integer
+            line:
+              description: The line number in the source file (1-based).
+              example: 10
+              format: int64
+              type: integer
+          required:
+            - line
+            - col
+          type: object
+        field_name:
+          description: The name of the field this node occupies within its parent node, when the parent addresses it by name.
+          type: string
+        start:
+          description: A position in source code, identified by line and column numbers.
+          properties:
+            col:
+              description: The column number in the source file (1-based).
+              example: 5
+              format: int64
+              type: integer
+            line:
+              description: The line number in the source file (1-based).
+              example: 10
+              format: int64
+              type: integer
+          required:
+            - line
+            - col
+          type: object
+      required:
+        - ast_type
+        - start
+        - end
+        - children
+      type: object
     AWSAccountConfigID:
       description: |-
         Unique Datadog ID of the AWS Account Integration Config.
@@ -2571,6 +2627,18 @@ components:
       description: Objects related to an attachment.
       oneOf:
         - $ref: "#/components/schemas/IncidentUserData"
+    CasePriority:
+      default: NOT_DEFINED
+      description: Work item priority
+      enum:
+        - NOT_DEFINED
+        - P1
+        - P2
+        - P3
+        - P4
+        - P5
+      example: NOT_DEFINED
+      type: string
     CaseSortableField:
       description: Case field that can be sorted on
       enum:
@@ -7022,6 +7090,16 @@ components:
         - id
         - type
       type: object
+    OrgGroupPolicyFilterPolicyTypeValue:
+      description: The type of the policy to filter by. `org_config` indicates a policy backed by an organization configuration setting. `role` indicates a policy backed by a Datadog custom role.
+      enum:
+        - org_config
+        - role
+      example: org_config
+      type: string
+      x-enum-varnames:
+        - ORG_CONFIG
+        - ROLE
     OrganizationsType:
       default: orgs
       description: Organizations resource type.
@@ -12005,6 +12083,2734 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview. If you have any feedback,
         contact [Datadog support](https://docs.datadoghq.com/help/).
+  # Rendering Shapes: live operations, trimmed to the part their rendering
+  # class shows. tests/fixtures/api-shapes/shapeCases.ts names each one's class.
+  /api/v2/apm/config/retention-filters:
+    get:
+      description: Get the list of APM retention filters.
+      operationId: ListApmRetentionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: An ordered list of retention filters.
+                properties:
+                  data:
+                    description: A list of retention filters objects.
+                    items:
+                      description: The definition of the retention filter.
+                      properties:
+                        attributes:
+                          description: The attributes of the retention filter.
+                          properties:
+                            filter:
+                              description: The spans filter used to index spans.
+                              properties:
+                                query:
+                                  description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+                                  example: '@http.status_code:200 service:my-service'
+                                  type: string
+                              type: object
+                          type: object
+                      required:
+                        - attributes
+                      type: object
+                    type: array
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: List all APM retention filters
+      tags:
+        - Rendering Shapes
+  /api/v2/apm/config/retention-filters-execution-order:
+    put:
+      description: Re-order the execution order of retention filters.
+      operationId: ReorderApmRetentionFilters
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - id: 7RBOb7dLSYWI01yc3pIH8w
+                      type: apm_retention_filter
+            schema:
+              description: A list of retention filters to reorder.
+              properties:
+                data:
+                  description: A list of retention filters objects.
+                  items:
+                    description: The retention filter object .
+                    properties:
+                      id:
+                        description: The ID of the retention filter.
+                        example: 7RBOb7dLSYWI01yc3pIH8w
+                        type: string
+                    required:
+                      - id
+                    type: object
+                  type: array
+              required:
+                - data
+              type: object
+        description: The list of retention filters in the new order.
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Re-order retention filters
+      tags:
+        - Rendering Shapes
+  /api/v2/apm/config/retention-filters/{filter_id}:
+    get:
+      description: Get an APM retention filter.
+      operationId: GetApmRetentionFilter
+      parameters:
+        - description: The ID of the retention filter.
+          in: path
+          name: filter_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The retention filters definition.
+                properties:
+                  data:
+                    description: The definition of the retention filter.
+                    properties:
+                      attributes:
+                        description: The attributes of the retention filter.
+                        properties:
+                          created_at:
+                            description: The creation timestamp of the retention filter.
+                            format: int64
+                            type: integer
+                          created_by:
+                            description: The creator of the retention filter.
+                            type: string
+                          enabled:
+                            description: The status of the retention filter (Enabled/Disabled).
+                            example: true
+                            type: boolean
+                          rate:
+                            description: |-
+                              Sample rate to apply to spans going through this retention filter.
+                              A value of 1.0 keeps all spans matching the query.
+                            example: 1
+                            format: double
+                            type: number
+                        type: object
+                    required:
+                      - attributes
+                    type: object
+                type: object
+          description: OK
+      summary: Get a given APM retention filter
+      tags:
+        - Rendering Shapes
+  /api/v2/apm/services:
+    get:
+      operationId: GetServiceList
+      parameters:
+        - description: Filter services by environment. Can be set to `*` to return all services across all environments.
+          in: query
+          name: filter[env]
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+      summary: Get service list
+      tags:
+        - Rendering Shapes
+  /api/v2/cases/types/{case_type_id}:
+    delete:
+      description: Delete a work item type
+      operationId: DeleteCaseType
+      parameters:
+        - description: The UUID of the work item type.
+          example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de505
+          in: path
+          name: case_type_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a case type
+      tags:
+        - Rendering Shapes
+      x-displayName: Delete a work item type
+  /api/v2/catalog/entity:
+    post:
+      description: Create or update entities in Software Catalog.
+      operationId: UpsertCatalogEntity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Create or update entity request.
+              oneOf:
+                - description: Entity schema v3.
+                  oneOf:
+                    - additionalProperties: false
+                      description: Schema for API entities.
+                      properties:
+                        kind:
+                          description: The definition of Entity V3 API Kind object.
+                          enum:
+                            - api
+                          example: api
+                          type: string
+                        spec:
+                          additionalProperties: false
+                          description: The definition of Entity V3 API Spec object.
+                          properties:
+                            interface:
+                              additionalProperties: false
+                              description: The API definition.
+                              oneOf:
+                                - additionalProperties: false
+                                  description: The definition of `EntityV3APISpecInterfaceFileRef` object.
+                                  properties:
+                                    fileRef:
+                                      description: The reference to the API definition file.
+                                      type: string
+                                  type: object
+                                - additionalProperties: false
+                                  description: The definition of `EntityV3APISpecInterfaceDefinition` object.
+                                  properties:
+                                    definition:
+                                      description: The API definition.
+                                      type: object
+                                  type: object
+                          type: object
+                      required:
+                        - kind
+                      type: object
+                - description: Entity definition in raw JSON or YAML representation.
+                  example: |-
+                    apiVersion: v3
+                    kind: service
+                    metadata:
+                      name: myservice
+                  type: string
+        description: Entity YAML or JSON.
+        required: true
+      responses:
+        "202":
+          description: ACCEPTED
+      summary: Create or update entities
+      tags:
+        - Rendering Shapes
+  /api/v2/catalog/kind:
+    post:
+      description: Create or update kinds in Software Catalog.
+      operationId: UpsertCatalogKind
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Create or update kind request.
+              oneOf:
+                - description: Schema for kind.
+                  properties:
+                    description:
+                      description: Short description of the kind.
+                      type: string
+                    displayName:
+                      description: The display name of the kind. Automatically generated if not provided.
+                      type: string
+                    kind:
+                      description: The name of the kind to create or update. This must be in kebab-case format.
+                      example: my-job
+                      type: string
+                  required:
+                    - kind
+                  type: object
+                - description: Kind definition in raw JSON or YAML representation.
+                  example: |-
+                    kind: service
+                    displayName: Service
+                    description: A service entity in the catalog.
+                  type: string
+        description: Kind YAML or JSON.
+        required: true
+      responses:
+        "202":
+          description: ACCEPTED
+      summary: Create or update kinds
+      tags:
+        - Rendering Shapes
+  /api/v2/cost/budget/csv/validate:
+    post:
+      operationId: ValidateCsvBudget
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response containing validation errors.
+                example:
+                  errors:
+                    - meta:
+                        field: region
+                        id: datadog-agent-source
+                        message: Field 'region' is required
+                      title: Field 'region' is required
+                properties:
+                  errors:
+                    description: The `ValidationResponse` `errors`.
+                    items:
+                      description: Represents a single validation error, including a human-readable title and metadata.
+                      properties:
+                        meta:
+                          description: Describes additional metadata for validation errors, including field names and error messages.
+                          properties:
+                            field:
+                              description: The field name that caused the error.
+                              example: region
+                              type: string
+                            id:
+                              description: The ID of the component in which the error occurred.
+                              example: datadog-agent-source
+                              type: string
+                            message:
+                              description: The detailed error message.
+                              example: Field 'region' is required
+                              type: string
+                          required:
+                            - message
+                          type: object
+                        title:
+                          description: A short, human-readable summary of the error.
+                          example: Field 'region' is required
+                          type: string
+                      required:
+                        - title
+                        - meta
+                      type: object
+                    type: array
+                type: object
+          description: OK
+      summary: Validate CSV budget
+      security: []
+      tags:
+        - Rendering Shapes
+  /api/v2/csm/ownership/{resource_id}/{owner_type}:
+    get:
+      description: |-
+        Get the current ownership inference for a resource for a specific owner type.
+  
+        This endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.
+      operationId: GetOwnershipInference
+      parameters:
+        - description: The identifier of the resource to retrieve the ownership inference for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+        - description: The owner type of the inference to retrieve.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: '#/components/schemas/OwnershipOwnerType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: The response returned when retrieving a single ownership inference for an owner type.
+                properties:
+                  data:
+                    description: The data wrapper for a single ownership inference response.
+                    properties:
+                      attributes:
+                        description: The attributes of a single ownership inference.
+                        properties:
+                          primary_contact_ref:
+                            description: The primary contact reference for the inferred owner, formatted as `ref:handle/<owner_handle>`.
+                            example: ref:handle/team-a
+                            nullable: true
+                            type: string
+                        type: object
+                    required:
+                      - attributes
+                    type: object
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: Get an ownership inference by owner type
+      tags:
+        - Rendering Shapes
+  /api/v2/csm/ownership/{resource_id}/{owner_type}/evidence:
+    get:
+      description: Get the evidence versions backing the current ownership inference for a resource and owner type.
+      operationId: GetOwnershipEvidence
+      parameters:
+        - description: The identifier of the resource to retrieve evidence for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+        - description: The owner type of the inference to retrieve evidence for.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            description: The owner type for an ownership inference.
+            enum:
+              - user
+              - team
+              - service
+              - unknown
+            example: team
+            type: string
+        - description: A previously returned weak `ETag` value. When supplied and the evidence has not changed, the endpoint returns `304 Not Modified`.
+          in: header
+          name: If-None-Match
+          required: false
+          schema:
+            example: W/"f2e126916327bda8"
+            type: string
+      responses:
+        "200":
+          description: OK
+      summary: Get the evidence for an ownership inference
+      tags:
+        - Rendering Shapes
+  /api/v2/downtime/{downtime_id}:
+    get:
+      description: Get downtime detail by `downtime_id`.
+      operationId: GetDowntime
+      parameters:
+        - description: ID of the downtime to fetch.
+          in: path
+          name: downtime_id
+          required: true
+          schema:
+            example: 00000000-0000-1234-0000-000000000000
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: |-
+                  Downtiming gives you greater control over monitor notifications by
+                  allowing you to globally exclude scopes from alerting.
+                  Downtime settings, which can be scheduled with start and end times,
+                  prevent all alerting related to specified Datadog tags.
+                properties:
+                  data:
+                    description: Downtime data.
+                    properties:
+                      attributes:
+                        description: Downtime details.
+                        properties:
+                          schedule:
+                            description: |-
+                              The schedule that defines when the monitor starts, stops, and recurs. There are two types of schedules:
+                              one-time and recurring. Recurring schedules may have up to five RRULE-based recurrences. If no schedules are
+                              provided, the downtime will begin immediately and never end.
+                            oneOf:
+                              - description: A recurring downtime schedule definition.
+                                properties:
+                                  recurrences:
+                                    description: A list of downtime recurrences.
+                                    items:
+                                      description: An RRULE-based recurring downtime.
+                                      properties:
+                                        rrule:
+                                          description: |-
+                                            The `RRULE` standard for defining recurring events.
+                                            For example, to have a recurring event on the first day of each month, set the type to `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY` to `1`.
+                                            Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545) are supported.
+  
+                                            **Note**: Attributes specifying the duration in `RRULE` are not supported (for example, `DTSTART`, `DTEND`, `DURATION`).
+                                            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api).
+                                          example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+                                          type: string
+                                      type: object
+                                    maxItems: 5
+                                    minItems: 1
+                                    type: array
+                                required:
+                                  - recurrences
+                                type: object
+                              - description: A one-time downtime definition.
+                                properties: {}
+                                type: object
+                        type: object
+                    type: object
+                type: object
+          description: OK
+      summary: Get a downtime
+      tags:
+        - Rendering Shapes
+  /api/v2/fleet/schedules/{id}:
+    get:
+      description: Retrieve detailed information about a specific schedule by its unique identifier.
+      operationId: GetFleetScheduleV2
+      parameters:
+        - description: The unique identifier of the schedule to retrieve.
+          example: abc-def-ghi-123
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Response containing a single fleet schedule.
+                properties:
+                  data:
+                    description: A fleet upgrade schedule resource in the v2 API response.
+                    properties:
+                      attributes:
+                        description: Attributes of a fleet schedule in the v2 API response.
+                        properties:
+                          status:
+                            description: |-
+                              The status of the schedule.
+                              - `active`: The schedule is active and will create deployments according to its recurrence rule.
+                              - `inactive`: The schedule is inactive and will not create any deployments.
+                            enum:
+                              - active
+                              - inactive
+                            example: active
+                            type: string
+                        type: object
+                    required:
+                      - attributes
+                    type: object
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: Get a schedule by ID
+      tags:
+        - Rendering Shapes
+  /api/v2/integration/gcp/sts_delegate:
+    post:
+      description: Create a Datadog GCP principal.
+      operationId: MakeGCPSTSDelegate
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value: {}
+            schema:
+              example: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Your delegate service account response data.
+                properties:
+                  data:
+                    description: Datadog principal service account info.
+                    properties:
+                      attributes:
+                        description: Your delegate account attributes.
+                        properties:
+                          delegate_account_email:
+                            description: Your organization's Datadog principal email address.
+                            example: ddgci-1a19n28hb1a812221893@datadog-gci-sts-us5-prod.iam.gserviceaccount.com
+                            type: string
+                        type: object
+                      id:
+                        description: The ID of the delegate service account.
+                        example: ddgci-1a19n28hb1a812221893@datadog-gci-sts-us5-prod.iam.gserviceaccount.com
+                        type: string
+                      type:
+                        default: gcp_sts_delegate
+                        description: The type of account.
+                        enum:
+                          - gcp_sts_delegate
+                        example: gcp_sts_delegate
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      summary: Create a Datadog GCP principal
+      tags:
+        - Rendering Shapes
+  /api/v2/integration/jira/issue-templates:
+    get:
+      description: Get all Jira issue templates for the organization.
+      operationId: ListJiraIssueTemplates
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response containing Jira issue templates
+                properties:
+                  data:
+                    description: Array of Jira issue template data objects
+                    items:
+                      description: Data object for a Jira issue template
+                      properties:
+                        id:
+                          description: Unique identifier for the Jira issue template
+                          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+                          format: uuid
+                          type: string
+                        relationships:
+                          description: Relationships of a Jira issue template
+                          properties:
+                            jira-account:
+                              description: Relationship to a Jira account
+                              properties:
+                                data:
+                                  description: Data object for a Jira account
+                                  properties:
+                                    attributes:
+                                      description: Attributes of a Jira account
+                                      properties:
+                                        consumer_key:
+                                          description: The consumer key for the Jira account
+                                          example: consumer-key-1
+                                          type: string
+                                        instance_url:
+                                          description: The URL of the Jira instance
+                                          example: https://example.atlassian.net
+                                          type: string
+                                        last_webhook_timestamp:
+                                          description: Timestamp of the last webhook received
+                                          example: '2024-01-15T10:30:00Z'
+                                          format: date-time
+                                          type: string
+                                      required:
+                                        - consumer_key
+                                        - instance_url
+                                      type: object
+                                    id:
+                                      description: Unique identifier for the Jira account
+                                      example: account-1
+                                      type: string
+                                    type:
+                                      description: Type identifier for Jira account resources
+                                      enum:
+                                        - jira-account
+                                      example: jira-account
+                                      type: string
+                                  required:
+                                    - id
+                                    - type
+                                    - attributes
+                                  type: object
+                              required:
+                                - data
+                              type: object
+                          required:
+                            - jira-account
+                          type: object
+                      required:
+                        - id
+                      type: object
+                    type: array
+                    example:
+                      - attributes:
+                          fields:
+                            description:
+                              payload: Test Description
+                              type: json
+                          issue_type_id: '10001'
+                          name: Bug Report Template
+                          project_id: PROJECT-1
+                        id: 65b3341b-0680-47f9-a6d4-134db45c603e
+                        type: jira-issue-template
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: List Jira issue templates
+      tags:
+        - Rendering Shapes
+  /api/v2/integration/jira/issue-templates/{issue_template_id}:
+    delete:
+      description: Delete a Jira issue template by ID.
+      operationId: DeleteJiraIssueTemplate
+      parameters:
+        - description: The ID of the Jira issue template to delete
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          in: path
+          name: issue_template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Delete Jira issue template
+      tags:
+        - Rendering Shapes
+      x-unstable: |-
+        **Note**: This endpoint is in public beta and it's subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}:
+    delete:
+      description: Delete a single Salesforce incident template from your organization.
+      operationId: DeleteIncidentTemplate
+      parameters:
+        - description: The ID of the Salesforce incident template.
+          in: path
+          name: incident_template_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: OK
+      summary: Delete a Salesforce incident template
+      tags:
+        - Rendering Shapes
+      deprecated: true
+  /api/v2/integration/servicenow/handles:
+    get:
+      description: Get all ServiceNow templates for the organization.
+      operationId: ListServiceNowTemplates
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response containing ServiceNow templates
+                properties:
+                  data:
+                    description: Array of ServiceNow template data objects
+                    items:
+                      description: Data object for a ServiceNow template
+                      properties:
+                        attributes:
+                          description: Attributes of a ServiceNow template
+                          properties:
+                            fields_mapping:
+                              additionalProperties:
+                                type: string
+                              description: Custom field mappings for the template
+                              example:
+                                category: software
+                                priority: '1'
+                              type: object
+                            handle_name:
+                              description: The handle name of the template
+                              example: incident-template
+                              type: string
+                            instance_id:
+                              description: The ID of the ServiceNow instance
+                              example: 65b3341b-0680-47f9-a6d4-134db45c603e
+                              format: uuid
+                              type: string
+                          required:
+                            - instance_id
+                            - handle_name
+                          type: object
+                        id:
+                          description: Unique identifier for the ServiceNow template
+                          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+                          format: uuid
+                          type: string
+                        type:
+                          description: Type identifier for ServiceNow template resources
+                          enum:
+                            - servicenow_templates
+                          example: servicenow_templates
+                          type: string
+                      required:
+                        - id
+                        - type
+                        - attributes
+                      type: object
+                    type: array
+                    example:
+                      - attributes:
+                          handle_name: incident-template
+                          instance_id: 65b3341b-0680-47f9-a6d4-134db45c603e
+                          servicenow_tablename: incident
+                        id: 65b3341b-0680-47f9-a6d4-134db45c603e
+                        type: servicenow_templates
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: List ServiceNow templates
+      tags:
+        - Rendering Shapes
+  /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records:
+    get:
+      description: List all records in an Agent Observability dataset, sorted by creation date, newest first.
+      operationId: ListLLMObsDatasetRecords
+      parameters:
+        - description: The ID of the Agent Observability project.
+          example: a33671aa-24fd-4dcd-9b33-a8ec7dde7751
+          in: path
+          name: project_id
+          required: true
+          schema:
+            type: string
+        - description: The ID of the Agent Observability dataset.
+          example: 9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d
+          in: path
+          name: dataset_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response containing a paginated list of Agent Observability dataset records.
+                properties:
+                  data:
+                    description: List of dataset records.
+                    items:
+                      description: A single Agent Observability dataset record.
+                      properties:
+                        id:
+                          description: Unique identifier of the record.
+                          example: rec-7c3f5a1b-9e2d-4f8a-b1c6-3d7e9f0a2b4c
+                          type: string
+                        input:
+                          description: Represents any valid JSON value.
+                          nullable: true
+                          oneOf:
+                            - description: A scalar value represented as a string.
+                              type: string
+                            - description: A scalar numeric value.
+                              format: double
+                              type: number
+                            - additionalProperties: {}
+                              description: An arbitrary object value with additional properties.
+                              type: object
+                            - description: An array of arbitrary values.
+                              items:
+                                description: A single item in an array of arbitrary values, which can be a string, number, object, or boolean.
+                                oneOf:
+                                  - description: A scalar value represented as a string.
+                                    type: string
+                                  - description: A scalar numeric value.
+                                    format: double
+                                    type: number
+                                  - additionalProperties: {}
+                                    description: An arbitrary object value with additional properties.
+                                    type: object
+                                  - description: A scalar boolean value.
+                                    type: boolean
+                              type: array
+                            - description: A scalar boolean value.
+                              type: boolean
+                          type: object
+                      required:
+                        - id
+                        - input
+                      type: object
+                    type: array
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: List Agent Observability dataset records
+      tags:
+        - Rendering Shapes
+  /api/v2/logs:
+    post:
+      description: Send your logs to your Datadog platform over HTTP.
+      operationId: SubmitLog
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+                  service: payment
+              multi-json-messages:
+                description: Pass multiple log objects at once.
+                summary: Multi JSON Messages
+                value:
+                  - message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                    service: payment
+                  - message: 2019-11-19T14:37:58,995 INFO [process.name][20081] World
+                    service: payment
+              simple-json-message:
+                description: Log attributes can be passed as `key:value` pairs in valid JSON messages.
+                summary: Simple JSON Message
+                value:
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+                  service: payment
+            schema:
+              description: Structured log message.
+              items:
+                description: Logs that are sent over HTTP.
+                properties:
+                  message:
+                    description: The message of your log.
+                    example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+                    type: string
+                  service:
+                    description: The name of the application or service generating the log events.
+                    example: payment
+                    type: string
+                required:
+                  - message
+                type: object
+              type: array
+          application/logplex-1:
+            examples:
+              simple-logplex-message:
+                description: Submit log string.
+                summary: Simple Logplex Message
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+            schema:
+              type: string
+          text/plain:
+            examples:
+              simple-raw-message:
+                description: Submit log string.
+                summary: Simple Raw Message
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+            schema:
+              type: string
+        description: Log to send (JSON format).
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Request accepted for processing (always 202 empty JSON).
+      summary: Send logs
+      tags:
+        - Rendering Shapes
+  /api/v2/logs/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate events into buckets and compute metrics and timeseries.
+      operationId: AggregateLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: The object sent with the request to retrieve a list of logs from your organization.
+              properties:
+                filter:
+                  description: The search and filter query settings
+                  properties:
+                    query:
+                      default: '*'
+                      description: The search query - following the log search syntax.
+                      example: service:web-api AND @http.status_code:[200 TO 299]
+                      type: string
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The response object for the logs aggregate API endpoint
+                properties:
+                  data:
+                    description: The query results
+                    properties:
+                      buckets:
+                        description: The list of matching buckets, one item per bucket
+                        items:
+                          description: A bucket values
+                          properties:
+                            by:
+                              additionalProperties:
+                                description: The values for each group by
+                              description: The key, value pairs for each group by
+                              example:
+                                '@state': success
+                                '@version': abc
+                              type: object
+                          type: object
+                        type: array
+                    type: object
+                type: object
+          description: OK
+      summary: Aggregate events
+      tags:
+        - Rendering Shapes
+  /api/v2/logs/config/custom-destinations/{custom_destination_id}:
+    get:
+      description: Get a specific custom destination in your organization.
+      operationId: GetLogsCustomDestination
+      parameters:
+        - description: The ID of the custom destination.
+          in: path
+          name: custom_destination_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The custom destination.
+                properties:
+                  data:
+                    description: The definition of a custom destination.
+                    properties:
+                      attributes:
+                        description: The attributes associated with the custom destination.
+                        properties:
+                          name:
+                            description: The custom destination name.
+                            example: Nginx logs
+                            type: string
+                          stream_name:
+                            description: Azure stream name.
+                            example: Custom-MyTable
+                            type: string
+                            writeOnly: true
+                        type: object
+                      id:
+                        description: The custom destination ID.
+                        example: be5d7a69-d0c8-4d4d-8ee8-bba292d98139
+                        readOnly: true
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      summary: Get a custom destination
+      tags:
+        - Rendering Shapes
+  /api/v2/logs/config/restriction_queries/{restriction_query_id}:
+    get:
+      description: Get a restriction query in the organization specified by the restriction query's `restriction_query_id`.
+      operationId: GetRestrictionQuery
+      parameters:
+        - description: The ID of the restriction query.
+          in: path
+          name: restriction_query_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response containing information about a single restriction query.
+                properties:
+                  data:
+                    description: Restriction query object returned by the API.
+                    properties:
+                      id:
+                        description: ID of the restriction query.
+                        example: 79a0e60a-644a-11ea-ad29-43329f7f58b5
+                        type: string
+                    type: object
+                  included:
+                    description: Array of objects related to the restriction query.
+                    items:
+                      description: An object related to a restriction query.
+                      oneOf:
+                        - description: Partial role object.
+                          properties:
+                            attributes:
+                              description: Attributes of the role for a restriction query.
+                              properties:
+                                name:
+                                  description: The role name.
+                                  example: Datadog Admin Role
+                                  type: string
+                              type: object
+                            id:
+                              description: ID of the role.
+                              example: <ROLE_ID>
+                              type: string
+                            type:
+                              default: roles
+                              description: Roles type.
+                              enum:
+                                - roles
+                              example: roles
+                              type: string
+                          required:
+                            - type
+                            - id
+                            - attributes
+                          type: object
+                    type: array
+                type: object
+          description: OK
+      summary: Get a restriction query
+      tags:
+        - Rendering Shapes
+  /api/v2/metrics/{metric_name}/volumes:
+    get:
+      description: |-
+        View hourly average cardinality for the given metric name over the look back period.
+        For Metric Name Pricing customers, view total point volume for the given metric name
+        over the look back period.
+      operationId: ListVolumesByMetricName
+      parameters:
+        - description: The name of the metric.
+          example: dist.http.endpoint.request
+          in: path
+          name: metric_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response object which includes a single metric's volume.
+                properties:
+                  data:
+                    description: Possible response objects for a metric's volume.
+                    oneOf:
+                      - description: Object for a single metric's distinct volume.
+                        properties:
+                          attributes:
+                            description: Object containing the definition of a metric's distinct volume.
+                            properties:
+                              distinct_volume:
+                                description: Distinct volume for the given metric.
+                                example: 10
+                                format: int64
+                                type: integer
+                            type: object
+                          id:
+                            description: The metric name for this resource.
+                            example: test.metric.latency
+                            type: string
+                          type:
+                            default: distinct_metric_volumes
+                            description: The metric distinct volume type.
+                            enum:
+                              - distinct_metric_volumes
+                            example: distinct_metric_volumes
+                            type: string
+                        type: object
+                      - description: Object for a single metric's ingested and indexed volume.
+                        properties:
+                          attributes:
+                            description: Object containing the definition of a metric's ingested and indexed volume.
+                            properties:
+                              indexed_volume:
+                                description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour.
+                                example: 10
+                                format: int64
+                                type: integer
+                              ingested_volume:
+                                description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour.
+                                example: 20
+                                format: int64
+                                type: integer
+                            type: object
+                          id:
+                            description: The metric name for this resource.
+                            example: test.metric.latency
+                            type: string
+                          type:
+                            default: metric_volumes
+                            description: The metric ingested and indexed volume type.
+                            enum:
+                              - metric_volumes
+                            example: metric_volumes
+                            type: string
+                        type: object
+                readOnly: true
+                type: object
+          description: Success
+      summary: List distinct metric volumes by metric name
+      tags:
+        - Rendering Shapes
+  /api/v2/ndm/devices:
+    get:
+      description: Get the list of devices.
+      operationId: ListDevices
+      parameters:
+        - description: The field to sort devices by. Defaults to `name`. Prefix the field with `-` to sort in descending order, for example, `-name`.
+          example: status
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: name
+            type: string
+        - description: Filter devices by tag.
+          example: status:ok
+          in: query
+          name: filter[tag]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+      summary: Get the list of devices
+      tags:
+        - Rendering Shapes
+  /api/v2/ndm/interfaces:
+    get:
+      description: Get the list of interfaces of the device.
+      operationId: GetInterfaces
+      parameters:
+        - description: The ID of the device to get interfaces from.
+          example: example:1.2.3.4
+          in: query
+          name: device_id
+          required: true
+          schema:
+            type: string
+        - description: Whether to get the IP addresses of the interfaces.
+          example: true
+          in: query
+          name: get_ip_addresses
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+      summary: Get the list of interfaces of the device
+      tags:
+        - Rendering Shapes
+  /api/v2/obs-pipelines/pipelines/{pipeline_id}:
+    get:
+      description: Get a specific pipeline by its ID.
+      operationId: GetPipeline
+      parameters:
+        - description: The ID of the pipeline to retrieve.
+          in: path
+          name: pipeline_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Top-level schema representing a pipeline.
+                properties:
+                  data:
+                    description: Contains the pipeline’s ID, type, and configuration attributes.
+                    properties:
+                      attributes:
+                        description: Defines the pipeline’s name and its components (sources, processors, and destinations).
+                        properties:
+                          config:
+                            description: Specifies the pipeline's configuration, including its sources, processors, and destinations.
+                            properties:
+                              processor_groups:
+                                description: A list of processor groups that transform or enrich log data.
+                                example:
+                                  - enabled: true
+                                    id: my-processor-group
+                                    include: service:my-service
+                                    inputs:
+                                      - datadog-agent-source
+                                    processors:
+                                      - enabled: true
+                                        id: filter-processor
+                                        include: status:error
+                                        type: filter
+                                      - enabled: true
+                                        field: message
+                                        id: json-processor
+                                        include: '*'
+                                        type: parse_json
+                                items:
+                                  description: A group of processors.
+                                  properties:
+                                    processors:
+                                      description: Processors applied sequentially within this group. Events flow through each processor in order.
+                                      example:
+                                        - enabled: true
+                                          fields:
+                                            - name: env
+                                              value: prod
+                                          id: add-fields-processor
+                                          include: '*'
+                                          type: add_fields
+                                        - enabled: true
+                                          id: filter-processor
+                                          include: status:error
+                                          type: filter
+                                      items:
+                                        description: A processor for the pipeline.
+                                        oneOf:
+                                          - description: |-
+                                              The `ocsf_mapper` processor transforms logs into the OCSF schema using a predefined mapping configuration.
+                                              **Supported pipeline types:** logs
+                                            properties:
+                                              mappings:
+                                                description: A list of mapping rules to convert events to the OCSF format.
+                                                items:
+                                                  description: Defines how specific events are transformed to OCSF using a mapping configuration.
+                                                  properties:
+                                                    mapping:
+                                                      description: Defines a single mapping rule for transforming logs into the OCSF schema.
+                                                      example: CloudTrail Account Change
+                                                      oneOf:
+                                                        - description: Predefined library mappings for common log formats.
+                                                          enum:
+                                                            - CloudTrail Account Change
+                                                            - GCP Cloud Audit CreateBucket
+                                                            - GCP Cloud Audit CreateSink
+                                                            - GCP Cloud Audit SetIamPolicy
+                                                            - GCP Cloud Audit UpdateSink
+                                                            - Github Audit Log API Activity
+                                                            - Google Workspace Admin Audit addPrivilege
+                                                            - Microsoft 365 Defender Incident
+                                                            - Microsoft 365 Defender UserLoggedIn
+                                                            - Okta System Log Authentication
+                                                            - Palo Alto Networks Firewall Traffic
+                                                          example: CloudTrail Account Change
+                                                          type: string
+                                                        - description: Custom OCSF mapping configuration for transforming logs.
+                                                          properties:
+                                                            mapping:
+                                                              description: A list of field mapping rules for transforming log fields to OCSF schema fields.
+                                                              items:
+                                                                description: Defines a single field mapping rule for transforming a source field to an OCSF destination field.
+                                                                properties:
+                                                                  lookup:
+                                                                    description: Lookup table configuration for mapping source values to destination values.
+                                                                    properties:
+                                                                      default:
+                                                                        description: The default value to use if no lookup match is found.
+                                                                        example: unknown
+                                                                      table:
+                                                                        description: A list of lookup table entries for value transformation.
+                                                                        items:
+                                                                          description: A single entry in a lookup table for value transformation.
+                                                                          properties:
+                                                                            contains:
+                                                                              description: The substring to match in the source value.
+                                                                              example: Desktop
+                                                                              type: string
+                                                                            equals:
+                                                                              description: The exact value to match in the source.
+                                                                              example: desktop
+                                                                            equals_source:
+                                                                              description: The source field to match against.
+                                                                              example: device_type
+                                                                              type: string
+                                                                            matches:
+                                                                              description: A regex pattern to match in the source value.
+                                                                              example: ^Desktop.*
+                                                                              type: string
+                                                                            not_matches:
+                                                                              description: A regex pattern that must not match the source value.
+                                                                              example: ^Mobile.*
+                                                                              type: string
+                                                                            value:
+                                                                              description: The value to use when a match is found.
+                                                                              example: desktop
+                                                                          type: object
+                                                                        type: array
+                                                                    type: object
+                                                                type: object
+                                                              type: array
+                                                          required:
+                                                            - mapping
+                                                          type: object
+                                                  required:
+                                                    - mapping
+                                                  type: object
+                                                type: array
+                                            required:
+                                              - mappings
+                                            type: object
+                                      type: array
+                                  required:
+                                    - processors
+                                  type: object
+                                type: array
+                            type: object
+                        required:
+                          - config
+                        type: object
+                    required:
+                      - attributes
+                    type: object
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: Get a specific pipeline
+      tags:
+        - Rendering Shapes
+  /api/v2/on-call/pages/{page_id}/resolve:
+    post:
+      description: Resolves an On-Call Page.
+      operationId: ResolveOnCallPage
+      parameters:
+        - description: The page ID.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+            format: uuid
+            type: string
+      responses:
+        '202':
+          description: Accepted.
+      summary: Resolve On-Call Page
+      tags:
+        - Rendering Shapes
+      servers:
+        - url: https://{site}
+          variables:
+            site:
+              default: navy.oncall.datadoghq.com
+              description: The globally available endpoint for On-Call.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+        - url: '{protocol}://{name}'
+          variables:
+            name:
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+            protocol:
+              default: https
+              description: The protocol for accessing the API.
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
+            subdomain:
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+  /api/v2/org_group_policies:
+    get:
+      description: List policies for an organization group. Requires a filter on org group ID.
+      operationId: ListOrgGroupPolicies
+      parameters:
+        - description: Filter policies by org group ID.
+          in: query
+          name: filter[org_group_id]
+          required: true
+          schema:
+            example: a1b2c3d4-e5f6-7890-abcd-ef0123456789
+            format: uuid
+            type: string
+        - description: Filter policies by policy type. Supported values are `org_config` and `role`.
+          in: query
+          name: filter[policy_type]
+          required: false
+          schema:
+            $ref: "#/components/schemas/OrgGroupPolicyFilterPolicyTypeValue"
+            x-enum-varnames:
+              - ORG_CONFIG
+              - ROLE
+      responses:
+        "200":
+          description: OK
+      summary: List org group policies
+      tags:
+        - Rendering Shapes
+  /api/v2/personal_access_tokens:
+    get:
+      description: List all access tokens for the organization.
+      operationId: ListPersonalAccessTokens
+      parameters:
+        - description: Number of items to return per page. The maximum allowed value is 100.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 10
+            example: 10
+            format: int64
+            type: integer
+        - description: Filter access tokens by the specified string.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Filter access tokens by the owner's ID. Supports multiple values.
+          in: query
+          name: filter[owned_by]
+          required: false
+          schema:
+            items:
+              example: 00000000-0000-1234-0000-000000000000
+              type: string
+            type: array
+        - description: When true, only return access tokens that have been detected as leaked. Has no effect when false.
+          in: query
+          name: filter[leaked]
+          required: false
+          schema:
+            example: true
+            type: boolean
+      responses:
+        "200":
+          description: OK
+      summary: Get all access tokens
+      tags:
+        - Rendering Shapes
+  /api/v2/personal_access_tokens/{token_id}:
+    delete:
+      description: Revoke a specific personal access token.
+      operationId: RevokePersonalAccessToken
+      parameters:
+        - description: The ID of the access token.
+          in: path
+          name: token_id
+          required: true
+          schema:
+            example: 00000000-0000-1234-0000-000000000000
+            type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Revoke a personal access token
+      tags:
+        - Rendering Shapes
+      x-permission:
+        operator: OR
+        permissions:
+          - user_app_keys
+          - org_app_keys_write
+  /api/v2/product-analytics/users/query:
+    post:
+      description: Query users with flexible filtering by user properties, with optional wildcard search
+      operationId: QueryUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Request body for querying users with optional filtering, column selection, and sorting.
+              properties:
+                data:
+                  description: The data object containing the resource type and attributes for querying users.
+                  properties:
+                    type:
+                      default: query_users_request
+                      description: Query users request resource type.
+                      enum:
+                        - query_users_request
+                      example: query_users_request
+                      type: string
+                  required:
+                    - type
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response containing the query results with matched records and total count.
+                properties:
+                  data:
+                    description: The data object containing the resource type and attributes of the query response.
+                    properties:
+                      attributes:
+                        description: Attributes of the query response, containing the matched records and total count.
+                        properties:
+                          hits:
+                            description: The list of matching records returned by the query, each as a map of attribute names to values.
+                            items:
+                              additionalProperties: {}
+                              description: A single matched record represented as a map of attribute names to their values.
+                            type: array
+                        type: object
+                    type: object
+                type: object
+          description: Successful response with user data
+      summary: Query users
+      tags:
+        - Rendering Shapes
+  /api/v2/reference-tables/tables/{id}/rows:
+    get:
+      description: Get reference table rows by their primary key values.
+      operationId: GetRowsByID
+      parameters:
+        - description: Unique identifier of the reference table to get rows from
+          example: table-123
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: List of row IDs (primary key values) to retrieve from the reference table.
+          example:
+            - row1
+            - row2
+          explode: true
+          in: query
+          name: row_id
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+      responses:
+        "200":
+          description: OK
+      summary: Get rows by id
+      tags:
+        - Rendering Shapes
+    post:
+      description: Create or update rows in a Reference Table by their primary key values. If a row with the specified primary key exists, it is updated; otherwise, a new row is created.
+      operationId: UpsertRows
+      parameters:
+        - description: Unique identifier of the reference table to upsert rows into
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: The request body for creating or updating multiple rows into a reference table.
+              properties:
+                data:
+                  description: List of row resources to create or update in the reference table. The request payload can be up to 1 MiB.
+                  items:
+                    description: Row resource containing a single row identifier and its column values.
+                    properties:
+                      attributes:
+                        description: Attributes containing row data values for row creation or update operations.
+                        example:
+                          values: {}
+                        properties:
+                          values:
+                            additionalProperties:
+                              description: Types allowed for Reference Table row values.
+                              oneOf:
+                                - example: row_name
+                                  type: string
+                                - example: 25
+                                  format: int32
+                                  maximum: 2147483647
+                                  type: integer
+                            description: Key-value pairs representing row data, where keys are schema field names and values match the corresponding column types.
+                            type: object
+                        required:
+                          - values
+                        type: object
+                      id:
+                        description: The primary key value that uniquely identifies the row to create or update.
+                        example: primary_key_value
+                        type: string
+                      type:
+                        default: row
+                        description: Row resource type.
+                        enum:
+                          - row
+                        example: row
+                        type: string
+                    required:
+                      - type
+                      - id
+                    type: object
+                  maxItems: 20971
+                  type: array
+              required:
+                - data
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Rows created or updated successfully
+      summary: Upsert rows
+      tags:
+        - Rendering Shapes
+  /api/v2/remote_config/products/cws/policy/download:
+    get:
+      description: |-
+        The download endpoint generates a Workload Protection policy file from your currently active
+        Workload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to
+        your agents to update the policy running in your environment.
+
+        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
+      operationId: DownloadCSMThreatsPolicy
+      responses:
+        "200":
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+          description: OK
+      summary: Download the Workload Protection policy
+      tags:
+        - Rendering Shapes
+  /api/v2/remote_config/products/cws/policy/{policy_id}:
+    delete:
+      description: Delete a specific Workload Protection policy.
+      operationId: DeleteCSMThreatsAgentPolicy
+      parameters:
+        - description: The ID of the Agent policy
+          example: 6517fcc1-cec7-4394-a655-8d6e9d085255
+          in: path
+          name: policy_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: OK
+        "204":
+          description: OK
+      summary: Delete a Workload Protection policy
+      tags:
+        - Rendering Shapes
+  /api/v2/rum/applications/{id}:
+    delete:
+      description: Delete an existing RUM application in your organization.
+      operationId: DeleteRUMApplication
+      parameters:
+        - description: RUM application ID.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a RUM application
+      tags:
+        - Rendering Shapes
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+  /api/v2/rum/config/metrics/{metric_id}:
+    delete:
+      description: Delete a specific RUM-based metric from your organization.
+      operationId: DeleteRumMetric
+      parameters:
+        - description: The name of the RUM-based metric.
+          in: path
+          name: metric_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a RUM-based metric
+      tags:
+        - Rendering Shapes
+  /api/v2/rum/config/retention-quota/{scope_type}/{scope_id}:
+    delete:
+      description: Delete the RUM retention quota configuration for a given scope.
+      operationId: DeleteRumQuotaConfig
+      parameters:
+        - description: |-
+            The type of scope the retention quota configuration applies to.
+            `application` is the only supported scope type.
+          in: path
+          name: scope_type
+          required: true
+          schema:
+            default: application
+            description: |-
+              The type of scope the retention quota configuration applies to.
+              `application` is the only supported scope type.
+            enum:
+              - application
+            example: application
+            type: string
+        - description: |-
+            The identifier of the scope the retention quota configuration applies to.
+            For the `application` scope, this is the RUM application ID.
+          in: path
+          name: scope_id
+          required: true
+          schema:
+            example: cd73a516-a481-4af5-8352-9b577465c77b
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Delete a RUM retention quota configuration
+      tags:
+        - Rendering Shapes
+  /api/v2/rum/replay/playlists/{playlist_id}:
+    delete:
+      description: Delete a playlist.
+      operationId: DeleteRumReplayPlaylist
+      parameters:
+        - description: Unique identifier of the playlist.
+          in: path
+          name: playlist_id
+          required: true
+          schema:
+            example: 1234567
+            format: int64
+            type: integer
+      responses:
+        "204":
+          description: No Content
+      summary: Delete RUM replay playlist
+      tags:
+        - Rendering Shapes
+  /api/v2/rum/replay/playlists/{playlist_id}/sessions:
+    get:
+      description: List sessions in a playlist.
+      operationId: ListRumReplayPlaylistSessions
+      parameters:
+        - description: Unique identifier of the playlist.
+          in: path
+          name: playlist_id
+          required: true
+          schema:
+            example: 1234567
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: A list of RUM replay sessions belonging to a playlist.
+                properties:
+                  data:
+                    description: Array of playlist session data objects.
+                    items:
+                      description: Data object representing a session within a playlist, including its identifier, type, and attributes.
+                      properties:
+                        attributes:
+                          description: Attributes of a session within a playlist, including the session event data and its replay track.
+                          properties:
+                            session_event:
+                              additionalProperties: {}
+                              description: Raw event data associated with the replay session.
+                              type: object
+                          type: object
+                        type:
+                          default: rum_replay_session
+                          description: Rum replay session resource type.
+                          enum:
+                            - rum_replay_session
+                          example: rum_replay_session
+                          type: string
+                      required:
+                        - type
+                      type: object
+                    type: array
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: List RUM replay playlist sessions
+      tags:
+        - Rendering Shapes
+  /api/v2/saml_configurations/idp_metadata:
+    post:
+      description: Endpoint for uploading IdP metadata for SAML setup.
+      operationId: UploadIdPMetadata
+      requestBody:
+        content:
+          multipart/form-data:
+            examples:
+              default:
+                value: {}
+            schema:
+              description: The form data submitted to upload IdP metadata
+              properties:
+                idp_file:
+                  description: The IdP metadata XML file
+                  format: binary
+                  type: string
+                  x-mimetype: application/xml
+              type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Upload IdP metadata
+      tags:
+        - Rendering Shapes
+  /api/v2/scim/Users/{user_uuid}:
+    delete:
+      description: Delete the group with the given `user_uuid`.
+      operationId: DeleteSCIMUser
+      parameters:
+        - description: None
+          in: path
+          name: user_uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Delete user
+      tags:
+        - Rendering Shapes
+      x-permission:
+        operator: AND
+        permissions:
+          - user_access_invite
+          - user_access_manage
+      security:
+        - bearerAuth: []
+  /api/v2/security/findings/cases:
+    post:
+      description: |-
+        Create cases for security findings.
+        You can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.
+      operationId: CreateCases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: List of requests to create cases for security findings.
+              properties:
+                data:
+                  description: Array of case creation request data objects.
+                  items:
+                    description: Data of the case to create.
+                    properties:
+                      attributes:
+                        description: Attributes of the case to create.
+                        properties:
+                          priority:
+                            $ref: '#/components/schemas/CasePriority'
+                            description: Priority of the case. If not provided, the priority will be automatically set to "NOT_DEFINED".
+                            example: P4
+                        type: object
+                      type:
+                        default: cases
+                        description: Cases resource type.
+                        enum:
+                          - cases
+                        example: cases
+                        type: string
+                    required:
+                      - type
+                    type: object
+                  type: array
+              required:
+                - data
+              type: object
+        required: true
+      responses:
+        "201":
+          description: Created
+      summary: Create cases for security findings
+      tags:
+        - Rendering Shapes
+  /api/v2/security/findings/search:
+    post:
+      description: |-
+        Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
+  
+        ### Query Syntax
+  
+        The API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.
+  
+        Example: `@severity:(critical OR high) @status:open team:platform`
+      operationId: SearchSecurityFindings
+      responses:
+        '200':
+          description: OK
+      summary: Search security findings
+      tags:
+        - Rendering Shapes
+  /api/v2/security/scanned-assets-metadata:
+    get:
+      description: |-
+        Get a list of security scanned assets metadata for an organization.
+  
+        ### Pagination
+  
+        For the "List Vulnerabilities" endpoint, see the [Pagination section](#pagination).
+  
+        ### Filtering
+  
+        For the "List Vulnerabilities" endpoint, see the [Filtering section](#filtering).
+  
+        ### Metadata
+  
+         For the "List Vulnerabilities" endpoint, see the [Metadata section](#metadata).
+  
+        ### Related endpoints
+  
+        This endpoint returns additional metadata for cloud resources that is not available from the standard resource endpoints. To access a richer dataset, call this endpoint together with the relevant resource endpoint(s) and merge (join) their results using the resource identifier.
+  
+        **Hosts**
+  
+        To enrich host data, join the response from the [Hosts](https://docs.datadoghq.com/api/latest/hosts/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:
+  
+        | ENDPOINT | JOIN KEY | TYPE |
+        | --- | --- | --- |
+        | [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.host_name | string |
+        | /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |
+  
+        **Host Images**
+  
+        To enrich host image data, join the response from the [Hosts](https://docs.datadoghq.com/api/latest/hosts/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:
+  
+        | ENDPOINT | JOIN KEY | TYPE |
+        | --- | --- | --- |
+        | [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.tags_by_source["Amazon Web Services"]["image"] | string |
+        | /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |
+  
+        **Container Images**
+  
+        To enrich container image data, join the response from the [Container Images](https://docs.datadoghq.com/api/latest/container-images/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:
+  
+        | ENDPOINT | JOIN KEY | TYPE |
+        | --- | --- | --- |
+        | [/api/v2/container_images](https://docs.datadoghq.com/api/latest/container-images/) | `data.attributes.name`@`data.attributes.repo_digest` | string |
+        | /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |
+      operationId: ListScannedAssetsMetadata
+      responses:
+        '200':
+          description: OK
+      summary: List scanned assets metadata
+      tags:
+        - Rendering Shapes
+  /api/v2/security/threat-intel/stix:
+    post:
+      description: Ingest a STIX 2.1 bundle containing threat intelligence indicators.
+      operationId: AddSTIXThreatIntel
+      parameters:
+        - description: Vendor identifier for the feed. The value must not exceed 10 characters. Datadog normalizes the accepted value to lowercase, converts non-alphanumeric characters to underscores, and trims leading and trailing underscores.
+          example: acme
+          in: header
+          name: ti_vendor
+          required: true
+          schema:
+            maxLength: 10
+            minLength: 1
+            type: string
+        - description: Content encoding for the request body. Use gzip for a compressed STIX bundle.
+          in: header
+          name: Content-Encoding
+          required: false
+          schema:
+            description: The content encoding applied to the request body.
+            enum:
+              - gzip
+            example: gzip
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  id: bundle--11111111-1111-4111-8111-111111111111
+                  type: bundle
+            schema:
+              description: A STIX 2.1 bundle containing threat intelligence indicator objects.
+              properties:
+                id:
+                  description: The STIX bundle identifier.
+                  example: bundle--11111111-1111-4111-8111-111111111111
+                  type: string
+                type:
+                  description: The STIX object type for a bundle.
+                  enum:
+                    - bundle
+                  example: bundle
+                  type: string
+              required:
+                - type
+                - id
+              type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Ingest STIX threat intelligence
+      tags:
+        - Rendering Shapes
+  /api/v2/security_monitoring/cloud_workload_security/agent_rules:
+    get:
+      description: |-
+        Get the list of agent rules.
+        **Note**: This endpoint should only be used for the Government (US1-FED) site.
+      operationId: ListCloudWorkloadSecurityAgentRules
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response object that includes a list of Agent rule
+                properties:
+                  data:
+                    description: A list of Agent rules objects
+                    items:
+                      description: Object for a single Agent rule
+                      properties:
+                        attributes:
+                          description: A Cloud Workload Security Agent rule returned by the API
+                          properties:
+                            actions:
+                              description: The array of actions the rule can perform if triggered
+                              items:
+                                description: The action the rule can perform if triggered
+                                properties:
+                                  set:
+                                    description: The set action applied on the scope matching the rule
+                                    properties:
+                                      name:
+                                        description: The name of the set action
+                                        type: string
+                                      value:
+                                        description: The value of the set action
+                                        oneOf:
+                                          - type: string
+                                          - format: int32
+                                            maximum: 2147483647
+                                            type: integer
+                                          - type: boolean
+                                    type: object
+                                type: object
+                              nullable: true
+                              type: array
+                          type: object
+                      type: object
+                    type: array
+                type: object
+          description: OK
+      summary: Get all Workload Protection agent rules (US1-FED)
+      tags:
+        - Rendering Shapes
+  /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key owned by this service account.
+      operationId: DeleteServiceAccountApplicationKey
+      parameters:
+        - description: The ID of the service account.
+          in: path
+          name: service_account_id
+          required: true
+          schema:
+            example: 00000000-0000-1234-0000-000000000000
+            type: string
+        - description: The ID of the application key.
+          in: path
+          name: app_key_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Delete an application key for this service account
+      tags:
+        - Rendering Shapes
+  /api/v2/slo/report/{report_id}/download:
+    get:
+      description: Download an SLO report. This can only be performed after the report job has completed.
+      operationId: GetSLOReport
+      parameters:
+        - description: The ID of the report job.
+          in: path
+          name: report_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            text/csv:
+              examples:
+                default:
+                  value: |-
+                    slo_name,slo_id,sli,error_budget_remaining
+                    My SLO,abc-123,99.95,99.5
+              schema:
+                type: string
+          description: OK
+      summary: Get SLO report
+      tags:
+        - Rendering Shapes
+  /api/v2/srcmap:
+    post:
+      description: |-
+        Upload source maps, symbol files, and mapping files to Datadog for error deobfuscation.
+        This endpoint enables you to upload various types of debug symbols for RUM Error Tracking,
+        allowing Datadog to display readable stack traces instead of minified or obfuscated code.
+
+        **Request format:**
+
+        Each request is a `multipart/form-data` upload containing two parts:
+
+        1. `event` — a JSON-encoded string with the upload metadata (type, service, version, etc.)
+        2. One or more binary file fields (for example, `source_map`, `symbols_archive`)
+
+        **Supported upload types** (set via `event.type`):
+        - `js_sourcemap`: JavaScript source maps for browser applications
+        - `react_native_sourcemap`: React Native source maps for mobile applications
+        - `jvm_mapping_file`: ProGuard/R8 mapping files for Android crash deobfuscation
+        - `ios_symbols`: dSYM files for iOS crash symbolication
+        - `flutter_symbol_file`: Flutter symbol files
+        - `ndk_symbol_file`: Android NDK symbol files for native crashes
+        - `il2cpp_mapping_file`: IL2CPP mapping files for Unity
+        - `elf_symbol_file`: ELF symbol files for Linux/Unix
+        - `pe_symbol_file`: PE/PDB symbol files for Windows
+        - `repository`: Repository metadata for source code linking
+
+        **Limits:**
+        - Maximum file size: 500 MB
+
+        **Note:** For most use cases, Datadog recommends using the
+        [Datadog CLI (datadog-ci)](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)
+        which provides a simplified interface for uploading source maps.
+      operationId: UploadSourceMap
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              event:
+                contentType: application/json
+            examples:
+              default:
+                summary: JavaScript Source Map Upload
+                value:
+                  event:
+                    minified_url: https://example.com/static/js/main.min.js
+                    service: my-web-app
+                    type: js_sourcemap
+                    version: 1.2.3
+                  minified_file: main.min.js
+                  source_map: main.min.js.map
+            schema:
+              description: Multipart form data for uploading JavaScript source maps for browser RUM applications.
+              properties:
+                event:
+                  description: Metadata for a JavaScript source map upload, sent as a JSON-encoded `event` field.
+                  properties:
+                    minified_url:
+                      description: URL of the minified JavaScript file (1-2048 characters).
+                      example: https://example.com/static/js/main.min.js
+                      type: string
+                    service:
+                      description: Service name (1-200 characters).
+                      example: my-web-app
+                      type: string
+                    type:
+                      description: Must be `js_sourcemap`.
+                      example: js_sourcemap
+                      type: string
+                    version:
+                      description: Version of the service (1-200 characters).
+                      example: 1.2.3
+                      type: string
+                  required:
+                    - type
+                    - service
+                    - version
+                    - minified_url
+                  type: object
+                minified_file:
+                  description: The minified JavaScript file.
+                  example: main.min.js
+                  format: binary
+                  type: string
+                source_map:
+                  description: The source map file.
+                  example: main.min.js.map
+                  format: binary
+                  type: string
+              required:
+                - event
+                - source_map
+                - minified_file
+              type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Upload source maps
+      tags:
+        - Rendering Shapes
+  /api/v2/static-analysis-sca/dependencies/scan/{job_id}:
+    get:
+      operationId: GetSCAScan
+      parameters:
+        - description: The job identifier returned when the scan was submitted.
+          in: path
+          name: job_id
+          required: true
+          schema:
+            example: 0190a3d4-1234-7000-8000-000000000000
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: |-
+                  The raw scan result document produced by the SCA processor.
+                  The contents reflect the vulnerabilities and metadata produced for the libraries
+                  submitted in the original scan request.
+                oneOf:
+                  - additionalProperties: {}
+                    description: An arbitrary object value with additional properties.
+                    type: object
+          description: OK
+      summary: Retrieve a dependency scan result
+      tags:
+        - Rendering Shapes
+  /api/v2/static-analysis/static-analysis-server/get-ast:
+    post:
+      description: Parse source code into an abstract syntax tree (AST) for the specified language.
+      operationId: CreateStaticAnalysisAst
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: The request payload for parsing source code into an abstract syntax tree.
+              properties:
+                data:
+                  description: The primary data object in the get-AST request.
+                  properties:
+                    attributes:
+                      description: The attributes of the get-AST request, containing the source code to parse.
+                      properties:
+                        code:
+                          description: The base64-encoded source code to parse into an abstract syntax tree.
+                          example: aW1wb3J0IHN5cw==
+                          type: string
+                      required:
+                        - code
+                      type: object
+                    type:
+                      default: get_ast_request
+                      description: Get AST request resource type.
+                      enum:
+                        - get_ast_request
+                      example: get_ast_request
+                      type: string
+                  required:
+                    - type
+                    - attributes
+                  type: object
+              required:
+                - data
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The response payload containing the parsed abstract syntax tree.
+                properties:
+                  data:
+                    description: The primary data object in the get-AST response.
+                    properties:
+                      attributes:
+                        description: The attributes of the get-AST response, containing the parsed abstract syntax tree.
+                        properties:
+                          result:
+                            $ref: '#/components/schemas/AstNode'
+                            description: The root node of the parsed abstract syntax tree, or null when the source code could not be parsed.
+                            nullable: true
+                        required:
+                          - result
+                        type: object
+                    required:
+                      - attributes
+                    type: object
+                required:
+                  - data
+                type: object
+          description: OK
+      summary: Get AST for source code
+      tags:
+        - Rendering Shapes
+  /api/v2/statuspages/{page_id}:
+    delete:
+      description: Deletes a status page by its ID.
+      operationId: DeleteStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+      responses:
+        '204':
+          description: No Content
+      summary: Delete status page
+      tags:
+        - Rendering Shapes
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+  /api/v2/synthetics/settings/on_demand_concurrency_cap:
+    post:
+      description: Save new value for on-demand concurrency cap.
+      operationId: SetOnDemandConcurrencyCap
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  on_demand_concurrency_cap: 20
+            schema:
+              description: On-demand concurrency cap attributes.
+              properties:
+                on_demand_concurrency_cap:
+                  description: Value of the on-demand concurrency cap.
+                  format: double
+                  type: number
+              type: object
+        description: .
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Save new value for on-demand concurrency cap
+      tags:
+        - Rendering Shapes
+      x-codegen-request-body-name: body
+  /api/v2/synthetics/suites/search:
+    get:
+      description: Search for test suites.
+      operationId: SearchSuites
+      parameters:
+        - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: name,asc
+            type: string
+        - description: If true, return only facets instead of full test details.
+          in: query
+          name: facets_only
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: The offset from which to start returning results.
+          in: query
+          name: start
+          required: false
+          schema:
+            default: 0
+            format: int64
+            type: integer
+      responses:
+        "200":
+          description: OK
+      summary: Search test suites
+      tags:
+        - Rendering Shapes
+  /api/v2/usage/summary/available_fields:
+    get:
+      description: |-
+        List the field names returned by `GET /api/v1/usage/summary` at each of its
+        three response levels. Each list contains every key the data endpoint
+        emits—both typed fields declared in the OpenAPI spec and untyped keys
+        exposed through `additionalProperties` (the latter used for billing
+        dimensions and usage types added after the v1 schema freeze).
+  
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+  
+        Go example:
+  
+        ```go
+        fields, _, err := api.GetUsageSummaryAvailableFields(ctx)
+        attr := fields.Data.GetAttributes()
+  
+        // resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)
+        // Layer 1: UsageSummaryResponse
+        for _, key := range attr.GetResponseFields() {
+            if val, ok := resp.AdditionalProperties[key]; ok {
+                fmt.Println(key, val.(json.Number))
+            }
+        }
+        // Layer 2: UsageSummaryDate (per month)
+        for _, date := range resp.GetUsage() {
+            for _, key := range attr.GetDateFields() {
+                if val, ok := date.AdditionalProperties[key]; ok {
+                    fmt.Println(key, val.(json.Number))
+                }
+            }
+            // Layer 3: UsageSummaryDateOrg (per org per month)
+            for _, org := range date.GetOrgs() {
+                for _, key := range attr.GetDateOrgFields() {
+                    if val, ok := org.AdditionalProperties[key]; ok {
+                        fmt.Println(key, val.(json.Number))
+                    }
+                }
+            }
+        }
+        ```
+      operationId: GetUsageSummaryAvailableFields
+      responses:
+        '200':
+          description: OK.
+      summary: Get available fields for usage summary
+      tags:
+        - Rendering Shapes
+  /api/v2/usage/usage-attribution-types:
+    get:
+      description: Get usage attribution types.
+      operationId: GetUsageAttributionTypes
+      responses:
+        "200":
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                description: Usage attribution types response.
+                properties:
+                  data:
+                    description: Usage attribution types data.
+                    properties:
+                      attributes:
+                        description: List of usage attribution types.
+                        properties:
+                          values:
+                            description: List of usage attribution types.
+                            items:
+                              description: A given usage type in a list.
+                              example: infra_host
+                              type: string
+                            type: array
+                        type: object
+                      id:
+                        description: Unique ID of the response.
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      summary: Get usage attribution types
+      tags:
+        - Rendering Shapes
+  /api/v2/workflows:
+    post:
+      description: Create a new workflow, returning the workflow ID.
+      operationId: CreateWorkflow
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: Example Workflow
+                      webhookSecret: my-secret
+                    type: workflows
+            schema:
+              description: A request object for creating a new workflow.
+              properties:
+                data:
+                  description: Data related to the workflow.
+                  properties:
+                    attributes:
+                      description: The definition of `WorkflowDataAttributes` object.
+                      properties:
+                        createdAt:
+                          description: When the workflow was created.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Name of the workflow.
+                          example: ""
+                          type: string
+                        webhookSecret:
+                          description: If a Webhook trigger is defined on this workflow, a webhookSecret is required and should be provided here.
+                          type: string
+                          writeOnly: true
+                      required:
+                        - name
+                      type: object
+                    id:
+                      description: The workflow identifier
+                      readOnly: true
+                      type: string
+                    type:
+                      default: workflows
+                      description: The definition of `WorkflowDataType` object.
+                      enum:
+                        - workflows
+                      example: workflows
+                      type: string
+                  required:
+                    - type
+                    - attributes
+                  type: object
+              required:
+                - data
+              type: object
+        required: true
+      responses:
+        "201":
+          description: Successfully created a workflow.
+      summary: Create a Workflow
+      tags:
+        - Rendering Shapes
+  /api/v2/workflows/{workflow_id}:
+    delete:
+      description: Delete a workflow by ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
+      operationId: DeleteWorkflow
+      parameters:
+        - description: The ID of the workflow.
+          in: path
+          name: workflow_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successfully deleted a workflow.
+      summary: Delete an existing Workflow
+      tags:
+        - Rendering Shapes
+  /api/v2/workflows/{workflow_id}/instances/{instance_id}:
+    get:
+      description: Get a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
+      operationId: GetWorkflowInstance
+      parameters:
+        - description: The ID of the workflow.
+          in: path
+          name: workflow_id
+          required: true
+          schema:
+            type: string
+        - description: The ID of the workflow instance.
+          in: path
+          name: instance_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                description: The state of the given workflow instance.
+                properties:
+                  data:
+                    additionalProperties: {}
+                    description: The data of the instance response.
+                    properties:
+                      attributes:
+                        additionalProperties: {}
+                        description: The attributes of the instance response data.
+                        properties:
+                          id:
+                            description: The id of the instance.
+                            type: string
+                        type: object
+                    type: object
+                type: object
+          description: OK
+      summary: Get a workflow instance
+      tags:
+        - Rendering Shapes
 security:
   - apiKeyAuth: []
     appKeyAuth: []
@@ -12068,4 +14874,8 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/monitors/create/types/
     name: Monitors
+  - description: >-
+      Trimmed live operations for the spec-shape snapshot tests. Each one shows
+      one rendering class.
+    name: Rendering Shapes
 x-group-parameters: true

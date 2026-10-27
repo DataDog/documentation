@@ -197,7 +197,7 @@ const hasOverview =
 
       {/* Arguments */}
       {hasParams && (
-        <div class={cl("api-endpoint__section")}>
+        <div class={cl("api-endpoint__section")} data-api-section="arguments">
           <h3>{translate("arguments")}</h3>
           {ep.pathParams && ep.pathParams.length > 0 && (
             <ApiSchemaTable
@@ -222,7 +222,7 @@ const hasOverview =
 
       {/* Request */}
       {ep.requestBody && (
-        <div class={cl("api-endpoint__section")}>
+        <div class={cl("api-endpoint__section")} data-api-section="request">
           <h3>{translate("request")}</h3>
           <h4 class={cl("api-endpoint__body-label")}>
             Body Data{ep.requestBody.required && " (required)"}

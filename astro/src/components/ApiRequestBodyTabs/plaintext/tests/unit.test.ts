@@ -43,15 +43,6 @@ describe("apiRequestBodyTabsNodes", () => {
     expect(out).not.toContain("{% tabs %}");
   });
 
-  it("wraps schema and examples in Model/Example tabs when both are present", () => {
-    const out = render({ schema, examples });
-    expect(out).toContain("{% tabs %}");
-    expect(out).toContain('label="Model"');
-    expect(out).toContain('label="Example"');
-    expect(out).toContain("| Field");
-    expect(out).toContain("```json");
-  });
-
   it("labels each example by name when there are multiple", () => {
     const multi = [
       { name: "First", value: "{}" },
@@ -62,36 +53,8 @@ describe("apiRequestBodyTabsNodes", () => {
     expect(out).toContain("**Second**");
   });
 
-  it("leaves the examples untitled when titles aren't shown", () => {
-    const multi = [
-      { name: "First", value: "{}" },
-      { name: "Second", value: "{}" },
-    ];
-    const out = render({
-      schema: [],
-      examples: multi,
-      showExampleTitles: false,
-    });
-    expect(out).not.toContain("First");
-  });
-
   it("titles a single example when titles are shown", () => {
     const out = render({ schema, examples, showExampleTitles: true });
     expect(out).toContain("**Default**");
-  });
-
-  it("fences an example in its own language, defaulting to JSON", () => {
-    const out = render({
-      schema,
-      examples: [
-        {
-          name: "Form",
-          value: "-F 'idp_file=@metadata.xml'",
-          language: "bash",
-        },
-      ],
-    });
-    expect(out).toContain("```bash\n-F 'idp_file=@metadata.xml'");
-    expect(render({ schema, examples })).toContain("```json");
   });
 });

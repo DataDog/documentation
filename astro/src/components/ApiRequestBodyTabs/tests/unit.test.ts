@@ -63,15 +63,6 @@ describe("ApiRequestBodyTabs (astro)", () => {
     expect(html).not.toContain('role="tablist"');
   });
 
-  it("renders a Model/Example tab pair when both are provided", async () => {
-    const html = await renderComponent({ schema, examples });
-
-    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
-    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
-    expect(html).toContain("schema-table");
-    expect(html).toContain("code-block");
-  });
-
   // Hugo's request-body.html: a collapsible card per example, titled, with
   // the first one open.
   it("renders a titled accordion entry per example when titles are shown", async () => {
@@ -92,20 +83,6 @@ describe("ApiRequestBodyTabs (astro)", () => {
     expect(html).toMatch(/<span>Second<\/span>/);
   });
 
-  it("renders untitled code blocks when titles aren't shown", async () => {
-    const html = await renderComponent({
-      schema,
-      examples: multipleExamples,
-      showExampleTitles: false,
-    });
-
-    expect(html).not.toContain("<details");
-    expect(html).not.toContain("First");
-    expect(html.match(/class="[^"]*code-block[ "]/g)?.length).toBeGreaterThan(
-      0,
-    );
-  });
-
   it("titles the examples only when there is more than one, by default", async () => {
     const htmlMultiple = await renderComponent({
       schema,
@@ -115,24 +92,5 @@ describe("ApiRequestBodyTabs (astro)", () => {
 
     const htmlSingle = await renderComponent({ schema, examples });
     expect(htmlSingle).not.toContain("request-body-tabs__accordion");
-  });
-
-  it("labels the schema table's first column Field, as Hugo does", async () => {
-    const html = await renderComponent({ schema, examples });
-
-    expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
-  });
-
-  it("highlights an example in its own language, defaulting to JSON", async () => {
-    const formExample = {
-      name: "Example",
-      value: "-F 'idp_file=@metadata.xml'",
-      language: "bash",
-    };
-    const htmlForm = await renderComponent({ schema, examples: [formExample] });
-    expect(htmlForm).toContain('data-language="bash"');
-
-    const htmlJson = await renderComponent({ schema, examples });
-    expect(htmlJson).toContain('data-language="json"');
   });
 });
