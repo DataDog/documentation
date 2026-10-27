@@ -72,18 +72,11 @@ process.env.PUBLIC_CI_ENV = process.env.CI_ENVIRONMENT_NAME ?? "";
 // identically to the deploy path prefix and canonical URLs. Preview builds
 // already throw when CI_COMMIT_REF_NAME is unset (siteUrl.ts:44-49).
 process.env.PUBLIC_CI_COMMIT_REF_NAME = branchRef() ?? "";
-// The deploy's short SHA, used as RUM's `version`.
-//
-// TODO: confirm `CI_COMMIT_SHORT_SHA` reaches the Astro CI job (owned by
-// DataDog/documentation-ci). Empty means RUM events carry no `version` tag
-// *and* uploaded sourcemaps match nothing — see
-// `src/integrations/sourcemapManifest.ts`.
+// The deploy's short SHA, used as RUM's `version` and as the sourcemap release
+// version (see `src/integrations/sourcemapManifest.ts`), so the two must agree.
 process.env.PUBLIC_CI_COMMIT_SHORT_SHA = process.env.CI_COMMIT_SHORT_SHA ?? "";
-// Routes telemetry to the internal intake instead of the public one.
-//
-// TODO: whether CI exposes `IA_SUBDOMAIN` to the Astro job is owned by
-// DataDog/documentation-ci — it is a custom variable, unlike the two above.
-// Empty degrades gracefully to the public intake.
+// Routes telemetry to the internal intake instead of the public one. Empty
+// degrades gracefully to the public intake.
 process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? "";
 
 // CI builds (`yarn build:preview` / `yarn build:live`) set CI_ENVIRONMENT_NAME;

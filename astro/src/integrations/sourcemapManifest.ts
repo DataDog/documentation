@@ -68,16 +68,9 @@ export function buildSourcemapManifest({
  * distribution, or credential, and describes only the shape of the build
  * output.
  *
- * TODO: nothing consumes this manifest yet. `documentation-ci` needs a
- * post-deploy job for the Astro app, running:
- *   ./node_modules/.bin/datadog-ci sourcemaps upload <uploadDir> \
- *     --service <service> \
- *     --minified-path-prefix <minifiedPathPrefix> \
- *     --release-version <releaseVersion>
- * with DATADOG_API_KEY from `get_secret 'dd-api-key'` and allow_failure: true.
- * Until then, RUM error stack traces for Astro stay minified. The job needs no
- * post-processing of `.map` filenames — Vite emits `foo.[hash].js.map`
- * alongside `foo.[hash].js` already.
+ * The Astro CI job in `documentation-ci` reads this manifest and passes its
+ * fields to `datadog-ci sourcemaps upload`, so renaming a field breaks the
+ * upload.
  *
  * Imports must stay alias-free (relative + npm only): this code runs in Node
  * during build orchestration, outside Vite's module graph, so `@lib` aliases do
