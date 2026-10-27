@@ -912,7 +912,18 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 ## Kubernetes on Talos Linux {#TalosLinux}
 
-Helm is the recommended installation method for Talos Linux. Use Helm by setting the flag `providers.talos.enabled` to `true`.
+Both the Datadog Operator and Helm support Talos Linux.
+
+The Datadog Operator detects Talos automatically from the node's OS image and configures control plane monitoring for you, which requires Datadog Operator version 1.32.0 or later. On earlier versions, use Helm.
+
+With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
+
+Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
+
+```shell
+kubectl label --overwrite ns <namespace> \
+  pod-security.kubernetes.io/enforce=privileged
+```
 
 ### API server
 
@@ -921,6 +932,39 @@ The API server integration is automatically configured. The Datadog Agent discov
 ### Etcd
 
 By providing read access to the etcd certificates located on the host, the Datadog Agent check can communicate with etcd and start collecting etcd metrics.
+
+On Talos, those certificates exist only on control-plane nodes, so the Agent must tolerate the control-plane taint for the etcd check to run anywhere.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Control plane monitoring is enabled by default. Adding the toleration below is the only change needed: the Operator creates the etcd check configuration and mounts the host certificates for you.
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
+      # Required for the etcd check only. Without it, the API server,
+      # Controller Manager, and Scheduler checks still run as cluster checks.
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -966,11 +1010,24 @@ providers:
     enabled: true
 {{< /code-block >}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Controller Manager and Scheduler
 
 #### Secure ports
 
 Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+The Operator configures the API server, Controller Manager, and Scheduler checks as cluster checks, which run regardless of where the Agent is scheduled. No extra configuration is required beyond the manifest in the [Etcd](#etcd) section above; the toleration there applies to the etcd check only.
+
+Both components still need `bind-address` set to `0.0.0.0`, as described in the notes below.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -1024,9 +1081,12 @@ providers:
     enabled: true
 {{< /code-block >}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 **Notes:**
 
-- The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
+- The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates. The Operator sets this for you.
 - When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Apply the patch below to control-plane nodes at cluster generation; or, for running Talos nodes, run `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
 
 {{< code-block lang="yaml" filename="controlplane-datadog-monitoring-patch.yaml" >}}

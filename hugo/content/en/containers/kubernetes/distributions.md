@@ -37,6 +37,7 @@ These configurations can then be customized to add any Datadog feature.
 * [Google Kubernetes Engine (GKE)](#GKE)
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
+* [Talos Linux](#Talos)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
 * [VMware vSphere Kubernetes Service (VKS)](#VKS)
 * [VMware vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
@@ -674,6 +675,72 @@ agents:
 
 {{< /tabs >}}
 
+## Talos Linux {#Talos}
+
+Talos Linux is an immutable OS with no shell and no host user database, and it mounts tracefs at `/sys/kernel/tracing` rather than nesting it under `/sys/kernel/debug`. The Agent needs Talos-specific configuration to account for this.
+
+The Datadog Operator detects Talos automatically from the node's OS image and applies that configuration, which requires Datadog Operator version 1.31.0 or later. With Helm, set `providers.talos.enabled` to `true`.
+
+Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
+
+```shell
+kubectl label --overwrite ns <namespace> \
+  pod-security.kubernetes.io/enforce=privileged
+```
+
+**Note**: If the DaemonSet was rejected before the label was applied, its controller backs off and does not retry for several minutes. Run `kubectl rollout restart ds <DAEMONSET_NAME> -n <namespace>` to apply the change immediately.
+
+eBPF-based features, including Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP queue length, and Workload Protection, read tracefs from the host. Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.259.0 or later mount it at the location Talos uses. On earlier versions, the Agent reports as healthy while these probes fail to attach; check `agent status` to confirm they are running.
+
+For Control Plane metrics, see [Kubernetes on Talos Linux][14].
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+    kubelet:
+      # Talos uses self-signed Kubelet certificates
+      tlsVerify: false
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  clusterName: <CLUSTER_NAME>
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Talos uses self-signed Kubelet certificates
+    tlsVerify: false
+providers:
+  talos:
+    enabled: true
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Oracle Container Engine for Kubernetes (OKE) {#OKE}
 
 No specific configuration is required.
@@ -836,3 +903,4 @@ agents:
 [11]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes
 [12]: https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port
 [13]: https://learn.microsoft.com/en-us/azure/aks/certificate-rotation#kubelet-serving-certificate-rotation
+[14]: /containers/kubernetes/control_plane/#TalosLinux
