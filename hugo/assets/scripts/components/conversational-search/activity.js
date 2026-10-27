@@ -3,12 +3,15 @@
  *
  * The chat endpoint streams `thinking` events while it researches an answer:
  *   "Searching documentation..."                     -> a documentation search started
- *   "Reviewing relevant pages" + `retrieved_pages`   -> results for the oldest pending search
+ *   "Reviewing relevant pages" + `retrieved_pages`   -> results for the running search
  *   "Reviewing relevant pages" without pages         -> the assistant opened a page to read it
  *   "Generating answer..."                           -> research is over, the answer is being written
  *
  * `reduceActivity` turns those events into a timeline state. It has no DOM dependency so it
  * can be unit-tested. `ActivityTimeline` renders that state inside an assistant message.
+ *
+ * The timeline shows what was found, never the search terms: those are short English keywords
+ * written for the search index, not for the reader. Searches that run in parallel share a step.
  */
 
 const DOCS_ORIGIN = 'https://docs.datadoghq.com';
@@ -98,31 +101,52 @@ function startWriting(state, now) {
     return { ...addStep(endResearch(settled, now), { kind: 'write' }), phase: 'writing' };
 }
 
-const cleanQuery = (query) => (typeof query === 'string' ? query.trim() : '');
+const pageKey = (page) => page.url || page.title;
 
-function applyResults(state, pages, rawQuery) {
-    const steps = [...state.steps];
-    const query = cleanQuery(rawQuery);
-    // Parallel searches finish in any order; results that name their query go to that search.
-    let index = query ? steps.findIndex((step) => isPendingSearch(step) && step.query === query) : -1;
-    if (index === -1) index = steps.findIndex(isPendingSearch);
-    const normalized = normalizePages(pages);
-    const next = { ...state, pages: mergePages(state.pages, normalized) };
-    if (index === -1) {
-        // Results without a visible search (older backends): show them as a completed search.
-        const withSearch = addStep(
-            { ...next, steps: settleForNewStep(next.steps), searches: next.searches + 1 },
-            { kind: 'search', query }
-        );
-        const last = withSearch.steps.length - 1;
-        withSearch.steps[last] = { ...withSearch.steps[last], status: 'done', resolved: true, pages: normalized };
-        return { ...withSearch, phase: 'researching' };
+function startSearch(state) {
+    const searches = state.searches + 1;
+    const running = state.steps.findIndex(isPendingSearch);
+    if (running !== -1) {
+        // Started while another search is still running: the reader sees one search step.
+        const steps = [...state.steps];
+        steps[running] = { ...steps[running], pending: steps[running].pending + 1 };
+        return { ...state, steps, searches, phase: 'researching' };
     }
-    steps[index] = { ...steps[index], status: 'done', resolved: true, pages: normalized };
-    return { ...next, steps, phase: 'researching' };
+    const followUp = state.steps.some((step) => step.kind === 'search');
+    const next = { ...state, steps: settleForNewStep(state.steps), searches };
+    return { ...addStep(next, { kind: 'search', pending: 1, followUp }), phase: 'researching' };
 }
 
-const pageKey = (page) => page.url || page.title;
+function applyResults(state, pages) {
+    const normalized = normalizePages(pages);
+    // A step lists only the pages earlier searches didn't find.
+    const known = new Set(state.pages.map(pageKey));
+    const fresh = normalized.filter((p) => !known.has(pageKey(p)));
+    const next = { ...state, pages: mergePages(state.pages, normalized) };
+    const index = state.steps.findIndex(isPendingSearch);
+    if (index === -1) {
+        // Results without a visible search (older backends): show them as a completed search.
+        const followUp = state.steps.some((step) => step.kind === 'search');
+        const withSearch = addStep(
+            { ...next, steps: settleForNewStep(next.steps), searches: next.searches + 1 },
+            { kind: 'search', pending: 0, followUp }
+        );
+        const last = withSearch.steps.length - 1;
+        withSearch.steps[last] = { ...withSearch.steps[last], status: 'done', resolved: true, pages: fresh };
+        return { ...withSearch, phase: 'researching' };
+    }
+    const steps = [...state.steps];
+    const step = steps[index];
+    const pending = step.pending - 1;
+    steps[index] = {
+        ...step,
+        pending,
+        resolved: pending <= 0,
+        status: pending <= 0 ? 'done' : step.status,
+        pages: mergePages(step.pages, fresh)
+    };
+    return { ...next, steps, phase: 'researching' };
+}
 
 function applyRead(state, page) {
     const last = state.steps[state.steps.length - 1];
@@ -143,7 +167,7 @@ function applyRead(state, page) {
 
 /**
  * Pure reducer. Actions:
- *   { type: 'thinking', content, retrieved_pages?, query?, page? }
+ *   { type: 'thinking', content, retrieved_pages?, page? }   (a `query` field is ignored)
  *   { type: 'answer' }   first answer token
  *   { type: 'done' } | { type: 'error' } | { type: 'stopped' }
  */
@@ -151,14 +175,10 @@ export function reduceActivity(state, action, now = Date.now()) {
     switch (action.type) {
         case 'thinking': {
             const stage = SERVER_STAGES[action.content];
-            if (stage === 'search') {
-                const query = cleanQuery(action.query);
-                const next = { ...state, steps: settleForNewStep(state.steps), searches: state.searches + 1 };
-                return { ...addStep(next, { kind: 'search', query }), phase: 'researching' };
-            }
+            if (stage === 'search') return startSearch(state);
             if (stage === 'review') {
                 return Array.isArray(action.retrieved_pages)
-                    ? applyResults(state, action.retrieved_pages, action.query)
+                    ? applyResults(state, action.retrieved_pages)
                     : applyRead(state, action.page);
             }
             if (stage === 'write') return startWriting(state, now);
@@ -192,10 +212,8 @@ const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 function describeInterruptedStep(step) {
     const failed = step.status === 'failed';
     switch (step.kind) {
-        case 'search': {
-            const search = step.query ? `Search for “${step.query}”` : 'Search';
-            return `${search} ${failed ? "didn't finish" : 'stopped'}`;
-        }
+        case 'search':
+            return failed ? "Search didn't finish" : 'Search stopped';
         case 'read':
             return failed ? "Reading didn't finish" : 'Reading stopped';
         case 'write':
@@ -216,10 +234,15 @@ export function describeStep(step) {
         case 'understand':
             return active ? 'Understanding your question' : 'Understood your question';
         case 'search': {
-            if (active) return step.query ? `Searching for “${step.query}”` : 'Searching the docs';
-            if (!step.resolved) return step.query ? `Searched for “${step.query}”` : 'Searched the docs';
-            const found = step.pages.length ? `Found ${plural(step.pages.length, 'page', 'pages')}` : 'No matching pages';
-            return step.query ? `${found} for “${step.query}”` : found;
+            const found = step.pages.length;
+            if (step.followUp) {
+                if (active) return 'Searching for more details';
+                if (!step.resolved) return 'Searched for more details';
+                return found ? `Found ${plural(found, 'more page', 'more pages')}` : 'No new pages';
+            }
+            if (active) return 'Searching the docs';
+            if (!step.resolved) return 'Searched the docs';
+            return found ? `Found ${plural(found, 'page', 'pages')}` : 'No matching pages';
         }
         case 'read':
             return active
@@ -239,7 +262,9 @@ export function researchSeconds(state, now = Date.now()) {
 
 export function summarizeActivity(state) {
     const parts = [];
-    if (state.searches) parts.push(plural(state.searches, 'search', 'searches'));
+    // Count search steps, not backend calls: parallel searches show as one step.
+    const searches = state.steps.filter((step) => step.kind === 'search').length;
+    if (searches) parts.push(plural(searches, 'search', 'searches'));
     if (state.reads) parts.push(`${plural(state.reads, 'page', 'pages')} read`);
     else if (state.pages.length) parts.push(`${plural(state.pages.length, 'page', 'pages')} found`);
     return parts.join(' · ');

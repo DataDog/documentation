@@ -45,6 +45,8 @@ describe('reduceActivity', () => {
             'https://docs.datadoghq.com/b/'
         ]);
         expect(state.steps[1].count).toBe(3);
+        expect(describeStep(state.steps[2])).toBe('Found 1 more page');
+        expect(state.steps[2].pages.map((p) => p.url)).toEqual(['https://docs.datadoghq.com/c/']);
         expect(state.searches).toBe(2);
         expect(state.reads).toBe(3);
         expect(state.pages).toHaveLength(3);
@@ -89,34 +91,54 @@ describe('reduceActivity', () => {
         expect(describeStep(state.steps[2])).toBe('Writing the answer');
     });
 
-    it('matches results to the search that names their query', () => {
-        const state = run([
+    it('shows parallel searches as one step, without their queries', () => {
+        let state = run([
             [thinking(SEARCHING, { query: 'log pipelines' }), 100],
             [thinking(SEARCHING, { query: 'log indexes' }), 120],
-            [thinking(REVIEWING, { query: 'log indexes', retrieved_pages: [page('indexes')] }), 900],
-            [thinking(REVIEWING, { query: 'log pipelines', retrieved_pages: [page('pipelines')] }), 950]
+            [thinking(REVIEWING, { query: 'log indexes', retrieved_pages: [page('indexes'), page('shared')] }), 900]
         ]);
+        expect(state.steps).toHaveLength(1);
+        expect(describeStep(state.steps[0])).toBe('Searching the docs');
 
-        expect(state.steps.map(describeStep)).toEqual(['Found 1 page for “log pipelines”', 'Found 1 page for “log indexes”']);
-        expect(state.steps[0].pages[0].title).toBe('Page pipelines');
-        expect(state.steps[1].pages[0].title).toBe('Page indexes');
+        state = reduceActivity(
+            state,
+            thinking(REVIEWING, { query: 'log pipelines', retrieved_pages: [page('pipelines'), page('shared')] }),
+            950
+        );
+        expect(describeStep(state.steps[0])).toBe('Found 3 pages');
+        expect(state.steps[0].pages.map((p) => p.title)).toEqual(['Page indexes', 'Page shared', 'Page pipelines']);
+        expect(state.searches).toBe(2);
+        expect(summarizeActivity(state)).toBe('1 search · 3 pages found');
     });
 
-    it('matches results to parallel searches in order', () => {
+    it('keeps a search that runs alongside a read in the same step', () => {
         const state = run([
-            [thinking(SEARCHING, { query: 'log pipelines' }), 100],
-            [thinking(SEARCHING, { query: 'log indexes' }), 120],
-            [thinking(REVIEWING, { retrieved_pages: [page('pipelines')] }), 900],
-            [thinking(REVIEWING), 950],
-            [thinking(REVIEWING, { retrieved_pages: [page('indexes'), page('exclusion')] }), 1000]
+            [thinking(SEARCHING), 100],
+            [thinking(REVIEWING), 120],
+            [thinking(SEARCHING), 140],
+            [thinking(REVIEWING, { retrieved_pages: [page('a')] }), 900],
+            [thinking(REVIEWING, { retrieved_pages: [page('b')] }), 950]
         ]);
 
-        const [first, second, read] = state.steps;
-        expect(first.pages.map((p) => p.title)).toEqual(['Page pipelines']);
-        expect(second.pages.map((p) => p.title)).toEqual(['Page indexes', 'Page exclusion']);
-        expect(describeStep(second)).toBe('Found 2 pages for “log indexes”');
-        expect(read.kind).toBe('read');
-        expect(second.status).toBe('done');
+        expect(state.steps.map((s) => s.kind)).toEqual(['search', 'read']);
+        expect(describeStep(state.steps[0])).toBe('Found 2 pages');
+    });
+
+    it('labels a later search by the pages it adds', () => {
+        const later = run([
+            [thinking(SEARCHING), 100],
+            [thinking(REVIEWING, { retrieved_pages: [page('a'), page('b')] }), 200],
+            [thinking(REVIEWING, { page: page('a') }), 300],
+            [thinking(SEARCHING), 400]
+        ]);
+        expect(describeStep(later.steps[2])).toBe('Searching for more details');
+
+        const found = reduceActivity(later, thinking(REVIEWING, { retrieved_pages: [page('b'), page('c')] }), 500);
+        expect(describeStep(found.steps[2])).toBe('Found 1 more page');
+        expect(found.steps[2].pages.map((p) => p.title)).toEqual(['Page c']);
+
+        const none = reduceActivity(later, thinking(REVIEWING, { retrieved_pages: [page('a')] }), 500);
+        expect(describeStep(none.steps[2])).toBe('No new pages');
     });
 
     it('names opened pages and counts each page once', () => {
@@ -129,7 +151,7 @@ describe('reduceActivity', () => {
             [opened('b'), 500]
         ]);
 
-        expect(describeStep(state.steps[0])).toBe('Found 2 pages for “log pipelines”');
+        expect(describeStep(state.steps[0])).toBe('Found 2 pages');
         expect(state.steps[1].pages.map((p) => p.title)).toEqual(['Page a', 'Page b']);
         expect(describeStep(state.steps[1])).toBe('Reading 2 pages');
         expect(state.reads).toBe(2);
@@ -176,9 +198,9 @@ describe('reduceActivity', () => {
         // The read finished when the next search started; only the search was cut short.
         const searching = [...research, [thinking(SEARCHING, { query: 'log indexes' }), 400]];
         expect(labels([...searching, [{ type: 'error' }, 500]]))
-            .toEqual(['Found 1 page', 'Read 1 page', "Search for “log indexes” didn't finish"]);
+            .toEqual(['Found 1 page', 'Read 1 page', "Search didn't finish"]);
         expect(labels([...searching, [{ type: 'stopped' }, 500]]))
-            .toEqual(['Found 1 page', 'Read 1 page', 'Search for “log indexes” stopped']);
+            .toEqual(['Found 1 page', 'Read 1 page', 'Search stopped']);
 
         const writing = run([[thinking(GENERATING), 100], [{ type: 'error' }, 200]]);
         expect(describeStep(writing.steps[0])).toBe('Answer interrupted');
@@ -280,8 +302,26 @@ describe('ActivityTimeline', () => {
         });
 
         expect(heard).toEqual([
-            'Thinking', 'Searching the docs', 'Reading a page', 'Searching the docs', 'Writing the answer', 'Answer ready'
+            'Thinking', 'Searching the docs', 'Reading a page', 'Searching for more details', 'Writing the answer',
+            'Answer ready'
         ]);
+        timeline.destroy();
+    });
+
+    it('never shows search queries, even when a search is cut short', () => {
+        const timeline = new ActivityTimeline();
+        document.body.appendChild(timeline.root);
+        const query = 'trace-agent port 8126 configuration';
+        [
+            thinking(SEARCHING, { query }),
+            thinking(REVIEWING, { query, retrieved_pages: [page('a')] }),
+            thinking(SEARCHING, { query }),
+            { type: 'error' }
+        ].forEach((action) => {
+            timeline.dispatch(action);
+            expect(timeline.root.textContent).not.toContain('8126');
+        });
+        expect(timeline.list.textContent).toContain("Search didn't finish");
         timeline.destroy();
     });
 
