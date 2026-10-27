@@ -12,8 +12,8 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Continuous tracing with GPU Monitoring is in Early Access Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
+Continuous tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
