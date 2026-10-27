@@ -2,6 +2,18 @@
 title: AIX
 description: "Install and manage the Datadog Agent on IBM AIX systems."
 further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: "Collect your logs"
+- link: "/infrastructure/process/"
+  tag: "Documentation"
+  text: "Collect your processes"
+- link: "/tracing/"
+  tag: "Documentation"
+  text: "Collect your traces"
+- link: "/extend/dogstatsd/"
+  tag: "Documentation"
+  text: "Send custom metrics with DogStatsD"
 - link: "/agent/architecture/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
@@ -14,12 +26,14 @@ algolia:
   tags: ['uninstall', 'uninstalling']
 ---
 
-This page covers Agent 7 on AIX. For AIX versions earlier than 7.2 TL5, see the [Datadog UNIX Agent][12].
+This page covers Agent 7 on AIX. For AIX versions earlier than 7.2 TL5, see the legacy [Datadog UNIX Agent][12].
 
 ## Overview
 The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-Agent 7.85.0 and later support AIX 7.2 TL5 and later. See [Supported Platforms][5] for details.
+**Note**: JMX-based integrations, container and Kubernetes checks, eBPF-based checks, Cloud Network Monitoring, remote configuration updates, and remote Agent updates are not supported on AIX.
+
+See [Supported Platforms][5] for the complete list of supported AIX versions.
 
 This page walks you through installing, operating, and removing the Datadog Agent on AIX.
 
@@ -75,38 +89,7 @@ Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
 - `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs
 - `conf.yaml.example`: A sample illustrating supported keys and defaults
 
-
-## Available integrations
-
-Out of the box integrations
-: `cpu`
-: `disk`
-: `io`
-: `load`
-: `memory`
-: `network`
-: `ntp`
-: `oracle`
-: `snmp`
-: `uptime`
-
-Additional integrations
-: `apache`
-: `dns_check`
-: `http_check`
-: `ibm_ace`
-: `ibm_db2`
-: `ibm_i`
-: `ibm_mq`
-: `ibm_was` (WebSphere Application Server)
-: `lparstats`
-: `openmetrics`
-: `process`
-: `tcp_check`
-
-
-**Note:** Metric coverage on AIX can differ from the Linux, Windows, and macOS integrations.
-
+To request support for an integration on AIX, open a feature request with [Datadog Support][13].
 
 ## Monitor Agent uptime
 
@@ -134,3 +117,4 @@ Uninstalling the Agent removes the Agent services and the boot entry.
 [9]: /agent/configuration/proxy/
 [10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_aix.yaml.example
 [12]: /agent/guide/install-unix-agent-aix/
+[13]: /help/

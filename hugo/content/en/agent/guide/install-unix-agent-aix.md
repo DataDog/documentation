@@ -15,7 +15,7 @@ algolia:
   tags: ['uninstall', 'uninstalling']
 ---
 
-This page covers the Datadog UNIX Agent. For AIX 7.2 TL5 and later, use [Agent 7 on AIX][12].
+This page covers the legacy Datadog UNIX Agent. Datadog recommends installing or upgrading to [Agent 7 on AIX][12] for the latest features. Agent 7 supports AIX 7.2 TL5 and later.
 
 ## Overview
 The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.

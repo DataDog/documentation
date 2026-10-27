@@ -338,7 +338,10 @@ Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
 ## Agent 7
 
-Agent 7.85.0 and later support [AIX][1] 7.2 TL5 and later.
+Agent 7.85.0 and later support the following [AIX][1] versions:
+
+- 7.2 TL5 and later
+- 7.3 TL1 and later
 
 ## Datadog UNIX Agent
 
