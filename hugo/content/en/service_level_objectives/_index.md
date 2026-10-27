@@ -352,7 +352,7 @@ A query cannot be empty or consist only of `*`.
 
 The [{{< ui >}}Corrections{{< /ui >}} tab][31] on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. From this page, you can create, edit, and delete corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. 
 
-{{< img src="service_level_objectives/slo-corrections-tab.png" alt="The Corrections tab on the SLOs page." style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-tab.png" alt="The Corrections tab of the SLO manage page, listing corrections with their scope, duration, schedule, and creator, with facets on the left for filtering." style="width:80%;">}}
 
 #### Create corrections from monitor downtimes
 
@@ -366,7 +366,7 @@ To create a correction from a downtime, you need the `slos_corrections` permissi
 
 **Note**: The card does not appear when you edit an existing downtime.
 
-{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="The Schedule Downtime UI with matching SLOs highlighted." style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="The Schedule Downtime page scoped by monitor tags. A highlighted card in the lower right reads 'We found 5 SLOs with this scope' and includes a Preview SLO Correction link." style="width:80%;">}}
 
 #### Access in the UI
 
@@ -383,7 +383,7 @@ To create a status correction in the UI:
 5. Optionally, add notes under {{< ui >}}Add any notes{{< /ui >}}.
 6. Click {{< ui >}}Apply{{< /ui >}}.
 
-{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="A blank form for a new SLO correction." style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="The New SLO Correction form, with By Tags and One-Time selected, showing fields for a tag query, category, time window, and notes." style="width:80%;">}}
 
 **Note**: After you create a correction, you cannot change its scope or switch it between one-time and recurring.
 
