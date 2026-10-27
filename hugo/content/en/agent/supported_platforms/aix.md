@@ -57,9 +57,9 @@ To install the Agent on AIX, follow the [in-app instructions in Fleet Automation
 
 {{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
 
-### Installation log files
+### Installation logs
 
-You can find the Agent installation log in the `dd-aix-install.log` file. To disable this logging, remove the `-e dd-aix-install.log` parameter in the installation command.
+If the installation fails, the install script prints the `installp` log. The install script does not keep an installation log file.
 
 ## Commands
 
