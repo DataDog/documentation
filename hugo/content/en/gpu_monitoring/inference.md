@@ -13,7 +13,7 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-tracing/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
 Optimizing inference workloads with Continuous Tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
