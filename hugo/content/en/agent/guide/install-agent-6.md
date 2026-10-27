@@ -618,7 +618,7 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
 {{% /tab %}}
 
 {{% tab "AIX" %}}
-**Note**: This tab covers the legacy Datadog UNIX Agent. For the AIX versions that Agent 7 supports, see [Agent 7 on AIX][103].
+**Note**: This tab covers the legacy Datadog UNIX Agent. Datadog recommends installing or upgrading to [Agent 7 on AIX][103] for the latest features and ongoing support. See [Supported Platforms][104] for the AIX versions that Agent 7 supports.
 
 ### One-step install
 
@@ -680,6 +680,7 @@ For more information, see [Datadog UNIX Agent for AIX][101].
 [101]: /agent/guide/install-unix-agent-aix/#installation
 [102]: https://github.com/DataDog/datadog-unix-agent/releases
 [103]: /agent/supported_platforms/aix/
+[104]: /agent/supported_platforms/?tab=aix
 {{% /tab %}}
 
 {{< /tabs >}}

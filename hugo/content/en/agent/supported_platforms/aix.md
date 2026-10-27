@@ -32,9 +32,9 @@ algolia:
 This page covers Agent 7 on AIX. For AIX versions that Agent 7 does not support, see the legacy [Datadog UNIX Agent][12].
 
 ## Overview
-The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
+The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that run on-prem.
 
-**Note**: The following are not supported on AIX:
+**Note**: Agent 7 on AIX does not support the following:
 - JMX-based integrations
 - Container and Kubernetes checks
 - eBPF-based checks
@@ -67,6 +67,7 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 |--------------------------|-----------------------------|
 | Start Agent              | `startsrc -g datadog-agent` |
 | Stop Agent               | `stopsrc -g datadog-agent`  |
+| Restart Agent            | `stopsrc -g datadog-agent`, then `startsrc -g datadog-agent` |
 | Status of Agent services | `lssrc -g datadog-agent`    |
 | Agent status page        | `datadog-agent status`      |
 | Send flare               | `datadog-agent flare`       |

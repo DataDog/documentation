@@ -515,7 +515,7 @@ sudo userdel dd-agent \
 {{% /tab %}}
 
 {{% tab "AIX" %}}
-**Note**: This tab covers the legacy Datadog UNIX Agent. For the AIX versions that Agent 7 supports, see [Agent 7 on AIX][3].
+**Note**: This tab covers the legacy Datadog UNIX Agent. Datadog recommends installing or upgrading to [Agent 7 on AIX][3] for the latest features and ongoing support. See [Supported Platforms][4] for the AIX versions that Agent 7 supports.
 
 ### One-step install
 
@@ -578,6 +578,7 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 [1]: /agent/guide/install-unix-agent-aix/#installation
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 [3]: /agent/supported_platforms/aix/
+[4]: /agent/supported_platforms/?tab=aix
 {{% /tab %}}
 
 {{< /tabs >}}
