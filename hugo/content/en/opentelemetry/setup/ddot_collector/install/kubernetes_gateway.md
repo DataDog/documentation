@@ -1,5 +1,5 @@
 ---
-title: Set Up OTel in the Agent as a Gateway on Kubernetes
+title: Set Up the Collector in the Datadog Agent as a Gateway on Kubernetes
 code_lang: kubernetes_gateway
 type: multi-code-lang
 code_lang_weight: 2
@@ -25,7 +25,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This guide assumes you are familiar with deploying OTel in the Agent as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Set Up OTel in the Agent as a Kubernetes DaemonSet</a>.
+This guide assumes you are familiar with deploying the Collector in the Agent, the OpenTelemetry Collector that runs inside the Datadog Agent, as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Set Up the Collector in the Datadog Agent as a Kubernetes DaemonSet</a>.
 </div>
 
 ## Overview

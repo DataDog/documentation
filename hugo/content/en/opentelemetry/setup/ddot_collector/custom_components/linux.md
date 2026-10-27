@@ -6,7 +6,7 @@ code_lang_weight: 2
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/linux"
   tag: "Documentation"
-  text: "Set Up OTel in the Agent on Linux"
+  text: "Set Up the Collector in the Datadog Agent on Linux"
 ---
 
 This guide explains how to build a DDOT Collector OCI package with additional OpenTelemetry components not included in the default DDOT Collector, for use on Linux bare-metal hosts. To see a list of components already included in the DDOT Collector by default, see [Included components][1].

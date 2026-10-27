@@ -1,5 +1,5 @@
 ---
-title: Set Up OTel in the Agent on EKS Fargate
+title: Set Up the Collector in the Datadog Agent on EKS Fargate
 code_lang: eks_fargate
 type: multi-code-lang
 code_lang_weight: 7
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to deploy the Datadog Agent with OTel in the Agent on Amazon EKS Fargate. OTel in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because EKS Fargate does not support DaemonSets, the Datadog Agent runs as a sidecar container in each application pod.
+Follow this guide to deploy the Collector in the Agent on Amazon EKS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because EKS Fargate does not support DaemonSets, the Datadog Agent runs as a sidecar container in each application pod.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.

@@ -1,5 +1,5 @@
 ---
-title: Set Up OTel in the Agent on Windows
+title: Set Up the Collector in the Datadog Agent on Windows
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 5
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Agent with OTel in the Agent on Windows-based bare-metal hosts and virtual machines. OTel in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
+Follow this guide to set up the Collector in the Agent on Windows-based bare-metal hosts and virtual machines. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Requirements
 

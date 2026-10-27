@@ -60,7 +60,7 @@ To get started, see [Datadog OTLP intake endpoint][4].
 
 ## Datadog Agent
 
-The Datadog Agent can receive OTLP from your applications ([OTLP Ingest in the Agent][8]). It can also run an OpenTelemetry Collector inside the Agent ([OTel in the Agent][9]). The Agent adds Datadog features that need it, such as integrations and Live Containers.
+The Datadog Agent can receive OTLP from your applications ([OTLP Ingest in the Agent][8]). It can also run an OpenTelemetry Collector inside the Agent ([Collector in the Agent][9]). The Agent adds Datadog features that need it, such as integrations and Live Containers.
 
 **Choose the Datadog Agent if** you already run the Agent and want to add OpenTelemetry data to it.
 
