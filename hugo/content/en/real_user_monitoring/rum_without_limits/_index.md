@@ -5,21 +5,24 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
     tag: Documentation
     text: Retain Data with Retention Filters
-  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
-    tag: Guide
-    text: Retention Filter Best Practices
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
   - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
     tag: Documentation
     text: Control Costs with Retention Quotas
-  - link: 'https://www.datadoghq.com/blog/rum-without-limits/'
-    tag: Blog
-    text: 'Introducing RUM without Limits™: Capture everything, keep what matters'
+  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
+    tag: Guide
+    text: Retention Filter Best Practices
   - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
     tag: 'Learning Center'
     text: 'Interactive Lab: RUM Retention Filters'
+  - link: 'https://www.datadoghq.com/blog/rum-without-limits/'
+    tag: Blog
+    text: 'Introducing RUM without Limits™: Capture everything, keep what matters'
+  - link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+    tag: "Blog"
+    text: "Build better SLOs with RUM and synthetic SLIs"
 ---
 
 <div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>

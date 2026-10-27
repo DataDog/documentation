@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-budget-forecasting/"
   tag: "Blog"
   text: "Project and manage cloud spend with Datadog budget forecasting"
+- link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+  tag: "Blog"
+  text: "Monitor Oracle AI Database across clouds with Datadog"
 ---
 
 ## Overview

@@ -6,6 +6,12 @@ aliases:
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: "https://learn.datadoghq.com/courses/getting-started-with-notebooks"
+  tag: "Learning Center"
+  text: "Getting Started with Notebooks"
+- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
+  tag: "Learning Center"
+  text: "Using Datadog Notebooks for Centralized Reporting"
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
   text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
@@ -24,12 +30,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
   tag: "Blog"
   text: "How we've created a successful FinOps practice at Datadog"
-- link: "https://learn.datadoghq.com/courses/getting-started-with-notebooks"
-  tag: "Learning Center"
-  text: "Getting Started with Notebooks"
-- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
-  tag: "Learning Center"
-  text: "Using Datadog Notebooks for Centralized Reporting"
+- link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+  tag: "Blog"
+  text: "Monitor Oracle AI Database across clouds with Datadog"
 
 ---
 

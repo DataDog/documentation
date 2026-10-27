@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/engineering/bits-ai-eval-platform/"
     tag: "Blog"
     text: "How we built a real-world evaluation platform for autonomous SRE agents at scale"
+  - link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+    tag: "Blog"
+    text: "Build better SLOs with RUM and synthetic SLIs"
 cascade:
     site_support_id: bits_investigation
 ---

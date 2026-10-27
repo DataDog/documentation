@@ -5,12 +5,15 @@ aliases:
 - /monitors/service_level_objectives/burn_rate/
 - /service_management/service_level_objectives/burn_rate/
 further_reading:
-- link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
-  tag: "Blog"
-  text: "Burn rate is a better error rate"
 - link: "https://learn.datadoghq.com/courses/understanding-slos"
   tag: "Learning Center"
   text: "Understanding Service Level Objectives (SLOs)"
+- link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
+  tag: "Blog"
+  text: "Burn rate is a better error rate"
+- link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+  tag: "Blog"
+  text: "Build better SLOs with RUM and synthetic SLIs"
 
 ---
 {{< jqmath-vanilla >}}

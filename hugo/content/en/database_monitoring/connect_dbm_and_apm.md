@@ -6,6 +6,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
     tag: 'Blog'
     text: 'Correlate DBM and APM telemetry to understand end-to-end query performance'
+  - link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+    tag: "Blog"
+    text: "Monitor Oracle AI Database across clouds with Datadog"
 ---
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.

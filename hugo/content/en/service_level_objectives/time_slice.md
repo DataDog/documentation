@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
   tag: "Blog"
   text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+  tag: "Blog"
+  text: "Build better SLOs with RUM and synthetic SLIs"
 ---
 
 {{< jqmath-vanilla >}}
