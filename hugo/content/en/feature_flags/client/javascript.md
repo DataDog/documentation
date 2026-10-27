@@ -87,8 +87,7 @@ const provider = new DatadogProvider({
 
 ### Load a subset of flags
 
-<!-- TODO: version. Replace X.Y.Z with the first @datadog/openfeature-browser release that includes flagSelection. -->
-In `@datadog/openfeature-browser` X.Y.Z and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Selecting a subset reduces the size of the flag configuration the SDK downloads and caches, which helps when an environment contains flags for many applications. Pass `flagSelection` to the provider when you create it; the selection is fixed for the provider's lifetime, so to load a different set of flags, create a new provider.
+In `@datadog/openfeature-browser` 2.2.0 and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Selecting a subset reduces the size of the flag configuration the SDK downloads and caches, which helps when an environment contains flags for many applications. Pass `flagSelection` to the provider when you create it; the selection is fixed for the provider's lifetime, so to load a different set of flags, create a new provider.
 
 `flagSelection` accepts two optional lists:
 
@@ -135,6 +134,8 @@ Datadog can also ignore a selection and return the full flag configuration. In t
 | `invalid_key_pattern` | A key pattern is longer than 200 bytes. |
 | `malformed_selection` | The selection could not be parsed. |
 | `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
+
+If flag selection is not enabled for your organization, Datadog returns the full flag configuration without the `DD-Flag-Selection-Ignored` header, and the SDK does not log an error.
 
 If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][7] for the header your proxy must pass through.
 
