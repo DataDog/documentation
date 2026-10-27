@@ -37,7 +37,7 @@ The following library versions are supported:
 | Python   | ASGI                          | `>=2.0`   |
 | Java     | `javax.websocket`             | `>=1.0`   |
 | Java     | `jakarta.websocket`           | `>=2.0`   |
-| Java     | `org.eclipse.jetty.websocket` | `>=12`    |
+| Java     | `org.eclipse.jetty.websocket` | `12.0.x`  |
 | PHP      | `ratchet/pawl`                | `>=0.4`   |
 | PHP      | `cboden/ratchet`              | `>=0.4`   |
 
