@@ -4,13 +4,11 @@
  * These are publishable credentials: a RUM application ID and a `pub`-prefixed
  * client token are designed to ship in a browser bundle.
  *
- * ⚠️ Upstream is `hugo/assets/scripts/config/config-docs.js`, copied here
+ * HUGO_DUPLICATE: copied from `hugo/assets/scripts/config/config-docs.js`,
  * because that CommonJS config cannot be imported into a client bundle. The
  * values must agree, since both sites report into the same RUM application and
  * are separated only by the `stack` global context property. `telemetry.test.ts`
  * reads the upstream file and fails on drift.
- *
- * TODO: this file becomes the sole owner once `config-docs.js` is deleted.
  */
 import type { SiteEnv } from "@lib/site/siteEnv";
 

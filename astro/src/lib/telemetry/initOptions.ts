@@ -20,7 +20,7 @@ export const TELEMETRY_SERVICE = "docs";
 /**
  * The value of the `stack` global context property.
  *
- * TODO: keep this until the Hugo site is gone. Both sites report into one RUM
+ * Keep this until the Hugo site is gone. Both sites report into one RUM
  * application, so this property is the only thing separating their data: Astro
  * is `@context.stack:astro`, Hugo is `-@context.stack:astro`. Removable once
  * every session is Astro.

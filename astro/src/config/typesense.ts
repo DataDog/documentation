@@ -1,7 +1,8 @@
 /**
- * Typesense connection details, mirrored from Hugo's
- * `assets/scripts/config/config-docs.js`. The Astro site reads from the same
- * cluster so docs/api/partners search results stay in sync with the Hugo site.
+ * Typesense connection details. The Astro site reads from the same cluster as
+ * Hugo, so docs/api/partners search results stay in sync with the Hugo site.
+ *
+ * HUGO_DUPLICATE: copied from `hugo/assets/scripts/config/config-docs.js`.
  * `typesense.test.ts` reads the upstream file and fails on drift.
  *
  * The public_key here is read-only and safe to ship to the browser.
