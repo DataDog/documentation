@@ -63,7 +63,7 @@ Datadog maps the `service.name`, `deployment.environment.name`, and `service.ver
 
 Datadog recommends one of two setups. Both use OpenTelemetry instrumentation and send OTLP, the OpenTelemetry Protocol.
 
-{{< img src="/opentelemetry/setup/otel-golden-paths.png" alt="Two recommended setups send OpenTelemetry data to Datadog. In DDOT, the DDOT SDK sends OTLP to the DDOT Collector, which sends it to Datadog with the Datadog Exporter. An optional Datadog Agent handles Agent-dependent features. In upstream OpenTelemetry, the OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector, which sends OTLP over HTTP to Datadog. The optional Full-Host Profiler works with either setup." caption="These are the two recommended combinations. You can also use each SDK and Collector on its own." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-golden-paths.png" alt="Two recommended setups send OpenTelemetry data to Datadog. In DDOT, the DDOT SDK sends OTLP to the DDOT Collector, which sends it to Datadog with the Datadog Exporter. An optional Datadog Agent handles Agent-dependent features. In upstream OpenTelemetry, the OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector, which sends OTLP over HTTP to Datadog. The optional Full-Host Profiler works with either setup." caption="These are the two recommended combinations. You can also pair a DDOT SDK with an upstream Collector, or an OpenTelemetry SDK with the DDOT Collector." style="width:100%;" >}}
 
 ### DDOT
 
