@@ -226,7 +226,7 @@ Then check for your data in Datadog. It can take up to five minutes to appear. R
 
 - **Services**: In the [Software Catalog][11], set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. Its service page shows requests, errors, and latency.
 - **Traces**: In the [Trace Explorer][12], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>` and open a trace to see its spans.
-- **Logs**: In the [Log Explorer][13], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. The DDOT SDK sends logs written with a logging library it supports. If your Collector collects container logs, it also sends your application's output.
+- **Logs**: In the [Log Explorer][13], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. This search finds the logs that the DDOT SDK sends over OTLP. Which logs the SDK sends depends on your language and logging library. **[Placeholder: the logging libraries the DDOT SDK sends logs from, for each language]** If your Collector also reads container log files, those logs have the `service` and `env` tags only if your Collector adds them. To find them on Kubernetes, search for `kube_namespace:<NAMESPACE>`, where `<NAMESPACE>` is your application's namespace.
 
 ## Add the Datadog Agent (optional)
 
