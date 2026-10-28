@@ -1,6 +1,6 @@
 ---
 title: Data Observability Monitor
-description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses."
+description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses, and failed or long-running data jobs."
 further_reading:
   - link: "/data_observability/"
     tag: "Documentation"
@@ -8,6 +8,9 @@ further_reading:
   - link: "/data_observability/quality_monitoring/"
     tag: "Documentation"
     text: "Quality Monitoring"
+  - link: "/data_observability/jobs_monitoring/"
+    tag: "Documentation"
+    text: "Jobs Monitoring"
   - link: "/monitors/notify/"
     tag: "Documentation"
     text: "Configure your monitor notifications"
@@ -350,57 +353,61 @@ Changes are detected when Datadog next collects schema metadata from your wareho
 
 ## Job monitors
 
-A job monitor evaluates every run of the jobs you select and alerts when a run fails or takes too long. Job monitors require [Jobs Monitoring][14] to be set up for at least one supported technology.
+A job monitor evaluates every run of the jobs you select, and alerts when a run fails or takes too long. Job monitors require [Jobs Monitoring][14] to be set up for at least one supported technology.
 
 Job monitors support two checks:
 
 | Check | Alerts when |
 |---|---|
-| [Job failure](#job-failure) | A job reaches a number of consecutive failed runs. |
+| [Job failure](#job-failure) | Consecutive runs of a job fail. |
 | [Job duration](#job-duration) | A run takes longer than a fixed threshold, or longer than is normal for that job. |
 
-You can add both checks to the same monitor definition. Datadog then creates two monitors that share the same job selection and notification settings: one for failures and one for duration.
+You can add both checks in one monitor definition. Datadog then creates two monitors, one for failures and one for duration, that share the same jobs and notification settings.
 
 ### Create a job monitor
 
 1. Navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][15] and select {{< ui >}}Jobs{{< /ui >}}.
 2. Under {{< ui >}}Select jobs{{< /ui >}}, choose the jobs to monitor:
-    - In {{< ui >}}Technology{{< /ui >}}, select the kind of job: an Airflow DAG or task, an AWS Glue job, an Azure Data Factory pipeline, a Databricks job, a dbt job, model, or test, or a Spark batch job. Where available, jobs that send [custom OpenLineage events][16] are also listed. You cannot change the technology after the monitor is created.
+    - In {{< ui >}}Technology{{< /ui >}}, select the kind of job. You cannot change the technology after you create the monitor.
     - In {{< ui >}}Filter by{{< /ui >}}, search for jobs by name, or filter with `key:value` attributes to match a set of jobs.
-    - Optionally, under {{< ui >}}Filter runs{{< /ui >}} (where available), limit the monitor to runs with specific tags, for example `env:prod`.
-3. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job failure{{< /ui >}}, {{< ui >}}Job duration{{< /ui >}}, or both, and configure each check as described in the sections below.
-4. Under {{< ui >}}Notify & schedule{{< /ui >}}, enter a monitor name and a message. Job failure alerts already include the job name, failure count, error, and links to the job and the failed run, so use the message for routing, `@-mentions`, and team context.
-5. Under {{< ui >}}Permissions{{< /ui >}}, optionally restrict who can edit the monitor, then review and create it.
+3. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job failure{{< /ui >}}, {{< ui >}}Job duration{{< /ui >}}, or both. Configure each check as described in [Job failure](#job-failure) and [Job duration](#job-duration).
+4. Under {{< ui >}}Notify & schedule{{< /ui >}}, enter a monitor name and a message. Job failure alerts already include the job name, the failure count, the error, and links to the job and the failed run. Use the message for routing, `@-mentions`, and team context.
+5. Under {{< ui >}}Permissions{{< /ui >}}, optionally restrict who can edit the monitor. Then review the monitor and create it.
 
-Every job monitor is grouped by the attributes that identify a job in the selected technology, so each job alerts separately. You can add more {{< ui >}}Group by{{< /ui >}} tags, but you cannot remove the required ones:
+Each check is grouped by the attributes that identify a job in the selected technology, so each job alerts separately. You can add {{< ui >}}Group by{{< /ui >}} tags, but you cannot remove the required ones:
 
-| Technology | Required group by |
-|---|---|
-| Airflow DAG | `name`, `env` |
-| Airflow task | `name`, `dag_name` |
-| AWS Glue job | `name` |
-| Azure Data Factory pipeline | `name` |
-| Databricks job | `name`, `workspace_name` |
-| dbt job, model, or test | `name`, `project`, `env` |
-| Spark batch job | `name` |
-| Custom OpenLineage job | `name`, `operation_name` |
+| Technology | Job types | Required group by |
+|---|---|---|
+| Airflow | DAG | `name`, `env` |
+| Airflow | Task | `name`, `dag_name` |
+| AWS Glue | Job | `name` |
+| Azure Data Factory | Pipeline | `name` |
+| Databricks | Job | `name`, `workspace_name` |
+| dbt | Job, Model, Test | `name`, `project`, `env` |
+| Spark | Batch Job | `name` |
+| [Custom OpenLineage][16] | Each job that sends custom OpenLineage events | `name`, `operation_name` |
 
 ### Job failure
 
-The {{< ui >}}Job failure{{< /ui >}} check alerts when a job reaches a number of consecutive failed runs. Set {{< ui >}}Trigger when{{< /ui >}} to the number of consecutive failed runs that triggers an alert, and optionally a lower {{< ui >}}Warn when{{< /ui >}} value. The monitor recovers when a later run succeeds.
+The {{< ui >}}Job failure{{< /ui >}} check alerts when consecutive runs of a job fail.
+
+1. Set {{< ui >}}Trigger when{{< /ui >}} to how many consecutive failed runs trigger an alert. For example, enter `2` to alert after two failed runs in a row.
+2. Optionally, set {{< ui >}}Warn when{{< /ui >}} to a lower count.
+
+The monitor recovers automatically when a later run succeeds.
 
 ### Job duration
 
-The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. It evaluates runs that are still in progress, so for most technologies an alert fires as soon as a running job crosses the limit, before the run finishes. Use it to catch a pipeline that is stuck or running late while there is still time to act, even when the run eventually succeeds.
+The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. It evaluates runs that are still in progress, so an alert can fire before the run finishes. Use it to catch a pipeline that is stuck or running late while there is still time to act, even if the run eventually succeeds.
 
 Choose a {{< ui >}}Detection method{{< /ui >}}:
 
 {{< tabs >}}
 {{% tab "Anomalies" %}}
 
-{{< ui >}}Anomalies{{< /ui >}} is the default. The monitor learns how long each job normally takes from its recent successful runs, and alerts when a run takes unusually long for that job. There is no threshold to set, which makes this method a good fit for a monitor that covers many jobs with different normal run times.
+{{< ui >}}Anomalies{{< /ui >}} is the default. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
 
-- The baseline is learned from runs with a successful status. To include failed runs in the baseline, group by `status` or filter runs by `status`.
+- The baseline is learned from successful runs. To include failed runs in the baseline, add `status` to the group by.
 - A job needs a history of completed runs before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
 - To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
 
@@ -409,22 +416,22 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 
 {{< ui >}}Thresholds{{< /ui >}} alerts when a run crosses a fixed duration.
 
-1. Set {{< ui >}}Alert threshold{{< /ui >}}: {{< ui >}}Trigger when a run exceeds{{< /ui >}} a duration, in minutes or hours.
+1. Under {{< ui >}}Alert threshold{{< /ui >}}, set {{< ui >}}Trigger when a run exceeds{{< /ui >}} to a duration in minutes or hours.
 2. Optionally, set {{< ui >}}Warning threshold{{< /ui >}} to a shorter duration. The warning threshold must be less than the alert threshold.
 
-One threshold applies to every job the monitor matches. If the selected jobs have very different normal run times, create separate monitors or use {{< ui >}}Anomalies{{< /ui >}}.
+One threshold applies to every job that the monitor matches. If the selected jobs have different typical run times, create a monitor for each group of similar jobs, or use {{< ui >}}Anomalies{{< /ui >}}.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-The preview graph shows the durations of recent completed runs for the selected jobs, so you can see how a threshold compares to them before you save the monitor.
+The preview graph shows the durations of recent completed runs for the selected jobs. Use it to compare a threshold against real run times before you save the monitor.
 
 #### How job duration is evaluated
 
-- **Runs in progress**: While a job is running, Datadog receives updates about how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound for {{< ui >}}Anomalies{{< /ui >}}. When an alert fires on a run that is still going, the monitor's status page shows how long the current run has been running and the threshold it passed.
+- **Runs in progress**: While a job runs, Datadog receives updates on how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound when you use {{< ui >}}Anomalies{{< /ui >}}. When an alert fires on a run that is still going, the monitor's status page shows how long the current run has been running.
 - **Completed runs**: When a run finishes, its final duration replaces the in-progress value. The monitor evaluates runs from the past 10 days.
-- **Recovery**: The monitor recovers when a later run completes within the threshold or the learned bound.
-- **dbt Cloud**: dbt Cloud reports a run to Datadog only after the run finishes. For dbt Cloud jobs, models, and tests, a job duration monitor evaluates each run when it completes, not while it is running. dbt Core jobs that send OpenLineage events are evaluated while they run.
+- **Recovery**: The monitor recovers when a later run finishes within the threshold or the learned bound.
+- **dbt Cloud**: dbt Cloud reports a run to Datadog only after the run finishes. For dbt Cloud jobs, models, and tests, the monitor evaluates each run when it completes, not while it runs. dbt Core jobs that send OpenLineage events are evaluated while they run.
 
 ## Example monitors
 
