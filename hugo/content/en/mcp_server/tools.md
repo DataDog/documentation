@@ -1715,7 +1715,7 @@ Determines whether a training job's step counter is still advancing, judged agai
 ### `gpu_monitoring_analyze_host_health`
 *Toolset: **gpu-monitoring***\
 *Permissions Required: `Timeseries`*\
-Identifies which hosts of a workload are running out of a host-level resource or losing time to contention: disk space, memory, OOM kills, pressure on memory, I/O, and CPU, inode and file handle exhaustion, swap activity, and clock skew. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`.
+Identifies which hosts of a workload are running out of a host-level resource or losing time to contention: disk space, memory, OOM kills, memory/IO/CPU pressure, inode and file handle exhaustion, swap activity, and clock skew. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`.
 
 - Are any hosts in this training job running out of disk or memory?
 - Did any of this job's hosts hit OOM kills overnight?
