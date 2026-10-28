@@ -210,7 +210,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. インストールを検証する {#4-verify-the-installation}
 
-[Kubernetes エクスプローラー][9]を開いて、OpenTelemetry クラスター名でフィルタリングします。すべてのコア Kubernetes リソースセクションと、**[Custom Resources] (カスタムリソース) > [CRD]** の両方にデータが取り込まれます。**[Custom Resources] > [Resources] (リソース)** セクションは、このセットアップではサポートされていません。
+[Kubernetes エクスプローラー][9]を開いて、OpenTelemetry クラスター名でフィルタリングします。すべてのコア Kubernetes リソースセクションと、**[Custom Resources] (カスタムリソース) > [CRD]** の両方にデータが取り込まれます。**Custom Resurces > Resources** にもデータを挿入するには、[カスタムリソースの収集][17]を参照してください。
 
 #### 5. Kubernetes エクスプローラーでログ、メトリクス、トレースを関連付ける (オプション) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
@@ -277,17 +277,16 @@ service:
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
 [15]: /ja/account_management/api-app-keys/#api-keys
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
+[17]: /ja/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube スタック" %}}
 
 Datadog Agent の代わりに `opentelemetry-kube-stack` Helm チャートを使用して、Kubernetes エクスプローラーにデータを取り込むことができます。
 
-<div class="alert alert-info">このタブに示す参照構成では、Datadog エクスポーターを使用しています。新規デプロイメントの場合は、「<strong>OpenTelemetry Collector</strong>」タブを使用して、OTLP HTTP 経由で Kubernetes リソースデータを Datadog に直接送信してください。</div>
+[`opentelemetry-kube-stack`][1] Helm チャートは、OpenTelemetry Operator をインストールし、`OpenTelemetryCollector` CR (カスタムリソース) としてコレクターを管理します。Datadog には、次の 2 つのコレクターを構成するリファレンスの [`values-otlp-http.yaml`][2] が用意されています。
 
-[`opentelemetry-kube-stack`][1] Helm チャートは、OpenTelemetry Operator をインストールし、`OpenTelemetryCollector` CR (カスタムリソース) としてコレクターを管理します。Datadog には、次の 2 つのコレクターを構成するリファレンスの [`values.yaml`][2] が用意されています。
-
-- **`cluster`** (デプロイメント): kube-state-metrics をスクレイピングし、Kubernetes オブジェクトを監視し、`orchestrator_explorer` を有効にして Kubernetes エクスプローラーにデータを取り込みます。
+- **`cluster`** (Deployment): kube-state-metrics をスクレイピングし、`k8s_objects` レシーバーを使用して Kubernetes オブジェクトを監視します。監視したオブジェクトは OTLP HTTP 経由で Datadog に送信され、Kubernetes Explorer に反映されます。
 - **`daemon`**(DaemonSet): ホストおよび kubelet メトリクスを収集し、アプリケーションテレメトリーデータ用の OTLP エンドポイントを公開します。
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">この機能は {{< region-param key="dd_site_name" >}}では使用できません。</div>{{< /site-region >}}
@@ -309,7 +308,7 @@ Datadog Agent の代わりに `opentelemetry-kube-stack` Helm チャートを使
 
 #### クイックスタート (対話形式のインストーラー) {#quickstart-interactive-installer}
 
-[`opentelemetry-examples`][6] リポジトリには、以下のすべての手順を処理する対話形式のインストーラーが用意されています。`guides/kubernetes/configuration/opentelemetry-kube-stack/` から、以下を実行します。
+[`opentelemetry-examples`][6] リポジトリには、インストール全体を処理する対話形式のインストーラーが用意されています。`guides/kubernetes/configuration/opentelemetry-kube-stack/` から、以下を実行します。
 
 ```sh
 ./install
@@ -319,84 +318,22 @@ Datadog Agent の代わりに `opentelemetry-kube-stack` Helm チャートを使
 
 #### 値ファイルを使用したインストール {#install-with-values-files}
 
-上記の対話形式のインストーラーを使用しなかった場合は、以下の手順に従って手動でインストールします。
-
-##### 1. cert-manager をインストールする (まだインストールされていない場合) {#1-install-cert-manager-if-not-already-present}
-
-```sh
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager --create-namespace \
-  --set crds.enabled=true
-```
-
-##### 2. Datadog シークレットを作成する {#2-create-the-datadog-secret}
-
-[Datadog サイト][7] に `DD_SITE` を設定します (デフォルトは `datadoghq.com` です)。
-
-```sh
-export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-export DD_SITE="datadoghq.com"  # for example us3.datadoghq.com, datadoghq.eu
-
-kubectl create namespace opentelemetry-operator-system \
-  --dry-run=client -o yaml | kubectl apply -f -
-
-kubectl create secret generic datadog-secret \
-  --namespace opentelemetry-operator-system \
-  --from-literal="api-key=$DD_API_KEY" \
-  --from-literal="dd-site=$DD_SITE" \
-  --dry-run=client -o yaml | kubectl apply -f -
-```
-
-##### 3. デプロイメントオーバーレイを作成する {#3-create-a-deployment-overlay}
-
-リファレンスの `values.yaml` を基に作成します。デプロイメント固有の設定 (クラスタープラットフォーム、環境、クラスター名) はオーバーレイファイルに含まれています。`guides/kubernetes/configuration/opentelemetry-kube-stack/` から、ご使用のプラットフォームに合う例をコピーします。
-
-```sh
-mkdir -p deployment
-
-# EKS, GKE, or AKS (resource detector auto-populates k8s.cluster.name):
-cp examples/eks-deployment/values.yaml deployment/values.yaml
-cp examples/gcp-deployment/values.yaml deployment/values.yaml
-cp examples/aks-deployment/values.yaml deployment/values.yaml
-
-# Other platforms (set the cluster name manually):
-cp examples/manually-set-k8s-cluster-name/values.yaml deployment/values.yaml
-```
-
-EKS/GKE/AKS 以外のプラットフォームでは、`deployment/values.yaml` を編集し、`my_k8s_cluster` と `production` をご使用のクラスター名とデプロイメント環境に置き換えてください。
-
-##### 4. リファレンスコレクターをデプロイする {#4-deploy-the-reference-collectors}
-
-ベースとなる `values.yaml` とオーバーレイの両方を使用してチャートをインストールまたはアップグレードします。
-
-```sh
-helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-helm repo update
-
-helm upgrade --install opentelemetry-kube-stack \
-  open-telemetry/opentelemetry-kube-stack \
-  --namespace opentelemetry-operator-system \
-  --values ./values.yaml \
-  --values ./deployment/values.yaml
-```
-
-どちらのコレクターもデフォルトで、CPU `500m`、メモリ `1Gi` の制限と、CPU `200m`、メモリ `500Mi` のリクエストに設定されます。より大規模なクラスターでは拡張してください。
+対話形式のインストーラーを使用せずに手動でインストールするには、`opentelemetry-examples` リポジトリの [values ファイルを使用したインストール][10]の手順に従ってください。
 
 #### インストールを検証する {#verify-the-installation}
 
-[Kubernetes エクスプローラー][8]を開いて、ご使用のクラスター名でフィルタリングします。すべてのコア Kubernetes リソースセクションと、**[Custom Resources] (カスタムリソース) > [CRD]** の両方にデータが取り込まれます。**[Custom Resources] > [Resources] (リソース)** セクションは、このセットアップではサポートされていません。
+[Kubernetes エクスプローラー][8]を開いて、ご使用のクラスター名でフィルタリングします。すべてのコア Kubernetes リソースセクションと、**[Custom Resources] (カスタムリソース) > [CRD]** の両方にデータが取り込まれます。**Custom Resurces > Resources** にもデータを挿入するには、[カスタムリソースの収集][9]を参照してください。
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
-[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
+[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values-otlp-http.yaml
 [3]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.1
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack
 [7]: /ja/getting_started/site/
 [8]: https://app.datadoghq.com/orchestration/overview
+[9]: /ja/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
+[10]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#install-with-values-files
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -491,7 +428,7 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 
 **これらのビューのフィルタリング方法の詳細については、「[クエリフィルターの詳細](#query-filter-details)」を参照してください。**
 
-{{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="オーケストレータエクスプローラーが開き、[Workloads] (ワークロード) > [Replica Sets] (レプリカセット) が[Summary] (サマリー) モードで表示されます。" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="オーケストレータエクスプローラーが開き、[Workloads] (ワークロード) > [Replica Sets] (レプリカセット) が [Summary] (サマリー) モードで表示されます。" style="width:80%;">}}
 
 #### 機能およびファセットごとにグループ化する {#group-by-functionality-and-facets}
 
@@ -571,12 +508,12 @@ _[Resource Utilization] (リソース使用率) ページについては、「[�
 
 | 種類 | 例 |
 |---|---|
-| **タグ**: [リソースを収集するエージェント][7]によってリソースに付与されます。Datadog が Kubernetes リソースに対して生成する追加のタグもあります。 | `datacenter:staging`、`tag#datacenter:staging`<br>_ (`tag#` はオプションです)_ |
+| **タグ**: [リソースを収集するエージェント][7]によってリソースに付与されます。Datadog が Kubernetes リソースに対して生成する追加のタグもあります。| `datacenter:staging`、`tag#datacenter:staging`<br>_ (`tag#` はオプションです)_ |
 | **ラベル**: [リソースのメタデータ][8]から抽出されます。これらは通常、クラスターを整理したり、セレクターを使用して特定のリソースをターゲットにしたりするために使用されます。| `label#chart_version:2.1.0` |
 | **アノテーション**: [リソースのメタデータ][9]から抽出されます。これらは通常、クラスター管理の補助ツールとして使用されます。| `annotation#checksum/configmap:a1bc23d4` |
 | **メトリクス**: ワークロードリソース (Pod、デプロイメントなど) に追加されます。使用率に基づいてリソースを検索できます。サポートされているメトリクスを確認するには、「[リソース使用率フィルター](#resource-utilization-filters)」を参照してください。| `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **文字列一致**: 一部の特定のリソース属性でサポートされています。以下を参照してください。<br>_注: 文字列一致ではキーと値の形式は使用されず、一致させる属性を指定することはできません。_ | `"10.132.6.23"`(IP)、<br>`"9cb4b43f-8dc1-4a0e"` (UID)、<br>`web-api-3` (名前) |
-| **フィールド**: [リソースのメタデータ][10]またはカスタムリソースのインデックス付きフィールドから抽出されます。 | `field#metadata.creationTimestamp:>=4wk`、`field#metadata.deletionTimestamp:<=1hr`、`field#status.currentReplicas:3`、`field#status.conditions.Active.status:True` |
+| **フィールド**: [リソースのメタデータ][10]またはカスタムリソースのインデックス付きフィールドから抽出されます。| `field#metadata.creationTimestamp:>=4wk`、`field#metadata.deletionTimestamp:<=1hr`、`field#status.currentReplicas:3`、`field#status.conditions.Active.status:True` |
 
 >  ***注**: 同じキーと値のペアがタグとラベル (またはアノテーション) の両方として見つかる場合があります。これはクラスターの構成方法によって異なります。*
 
@@ -605,9 +542,9 @@ _[Resource Utilization] (リソース使用率) ページについては、「[�
 
 | 演算子 | 説明 | 例 |
 |---|---|---|
-| `AND` | **積**: 両方の条件を含むイベントが選択されます (何も追加しなければ、AND がデフォルトで採用されます)。 | `a AND b`   |
+| `AND` | **積**: 両方の条件を含むイベントが選択されます (何も追加しなければ、AND がデフォルトで採用されます)。| `a AND b`   |
 | `OR` | **和**: : いずれかの条件を含むイベントが選択されます。                                             | `a OR b`   |
-| `NOT` / `-` | **除外**: 以下の条件はイベントに含まれません (個々の生テキスト検索に適用されます)。 | `a AND NOT b` または <br>`a AND -b` |
+| `NOT` / `-` | **除外**: 以下の条件はイベントに含まれません (個々の生テキスト検索に適用されます)。| `a AND NOT b` または <br>`a AND -b` |
 |  `( )` | **グループ化:** 条件を論理的にグループ化する方法を指定します。| `a AND (b OR c)` または <br>`(a AND b) or c` |
 
 ##### `OR` 値の省略形 {#or-value-shorthand}
