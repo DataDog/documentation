@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Install OpenTelemetry on a test Kubernetes cluster with an installer script. In about 10 minutes, your application's services, traces, and logs appear in Datadog, along with your cluster's hosts and metrics.
+Install OpenTelemetry on a Kubernetes cluster with an installer script. In about 10 minutes, your application's services, traces, and logs appear in Datadog, along with your cluster's hosts and metrics.
 
-Not using Kubernetes? See [Send OpenTelemetry Data to Datadog][3].
+Try this on a test cluster. For production, install with Helm and your own configuration: see [Install the DDOT Collector on Kubernetes][19] or [Set up the OpenTelemetry Collector][17]. Not using Kubernetes? See [Send OpenTelemetry Data to Datadog][3].
 
 Choose a path. Steps that differ by path have an **Upstream** tab and a **DDOT** tab.
 
@@ -28,7 +28,7 @@ Choose a path. Steps that differ by path have an **Upstream** tab and a **DDOT**
 
 ## Prerequisites
 
-- A test Kubernetes cluster that no other workloads depend on. The [uninstall script](#uninstall) removes cert-manager and other shared components.
+- A test Kubernetes cluster.
 - `kubectl` access with cluster-admin permissions.
 - [Helm][4] 3 or later, and `git`.
 - A [Datadog API key][5].
