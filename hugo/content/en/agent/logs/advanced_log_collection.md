@@ -24,7 +24,7 @@ further_reading:
   tag: Glossary
   text: 'Glossary entry for "tail"'
 algolia:
-  tags: ['advanced log filter']
+  tags: ['advanced log filter', 'log rotation', 'file fingerprinting', 'duplicate logs', 'unreliable mount', 'azure files']
 ---
 
 After you set up [log collection][1], you can customize your collection configuration:
@@ -39,6 +39,8 @@ After you set up [log collection][1], you can customize your collection configur
 - [Tail directories using wildcards](#tail-directories-using-wildcards)
   - [Prioritize tailed files by modification time](#prioritize-tailed-files-by-modification-time)
 - [Log file encodings](#log-file-encodings)
+- [Detect log rotation with file fingerprinting](#detect-log-rotation-with-file-fingerprinting)
+  - [Collect logs from SMB/CIFS and Azure Files mounts](#collect-logs-from-smbcifs-and-azure-files-mounts)
 - [Global processing rules](#global-processing-rules)
 - [Further Reading](#further-reading)
 
@@ -672,6 +674,144 @@ logs:
 
 **Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
 
+## Detect log rotation with file fingerprinting
+
+By default, the Agent detects that a log file was rotated or truncated from file metadata: the file's inode (Linux and macOS) and its size. On Windows and on network filesystems such as NFS, SMB/CIFS, and Azure Files, that metadata can be stale or reused. The Agent can then miss a rotation, detect a rotation that did not happen, or read the same lines twice, so you see **duplicate or missing logs**.
+
+File fingerprinting makes the Agent identify a file by its content instead. The Agent computes a checksum of the first lines or bytes of each tailed file on every file scan. If the checksum changes, the Agent treats the file as rotated: it finishes reading the old file and reads the new file from the beginning.
+
+Fingerprinting is disabled by default. Enable it if you see duplicate or missing logs around rotation, especially on Windows or network filesystems.
+
+**Requirements**:
+- File fingerprinting requires Agent version 7.72.0 or later.
+- The fingerprint configuration appears in the Agent status output starting with Agent version 7.74.0.
+- Agent status messages for files that cannot be fingerprinted require Agent version 7.84.0 or later. Datadog recommends 7.84.0 or later.
+
+### Enable file fingerprinting
+
+Enable fingerprinting for all file log sources in the Agent's [main configuration file][5], or for a single source in its integration configuration. A per-source `fingerprint_config` replaces the global configuration for that source.
+
+{{< tabs >}}
+{{% tab "All file sources" %}}
+
+In `datadog.yaml`:
+
+```yaml
+logs_config:
+  fingerprint_config:
+    fingerprint_strategy: line_checksum
+    count: 1
+```
+
+Or with environment variables:
+
+```shell
+DD_LOGS_CONFIG_FINGERPRINT_CONFIG_FINGERPRINT_STRATEGY=line_checksum
+DD_LOGS_CONFIG_FINGERPRINT_CONFIG_COUNT=1
+```
+
+{{% /tab %}}
+{{% tab "One file source" %}}
+
+In the source's `conf.yaml`:
+
+```yaml
+logs:
+  - type: file
+    path: /var/log/myapp/*.log
+    service: myapp
+    source: myapp
+    fingerprint_config:
+      fingerprint_strategy: line_checksum
+      count: 1
+      max_bytes: 100000
+```
+
+A per-source `fingerprint_config` does not inherit any values from the global configuration. Set `count` and, for `line_checksum`, `max_bytes`. If a required value is missing, the Agent rejects the source and reports `Invalid logs configuration` in the Agent log and status.
+
+To turn fingerprinting off for one source when it is enabled globally, set `fingerprint_strategy: disabled` in that source.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+[Restart the Agent][9] to apply the configuration.
+
+### Choose a strategy
+
+| Strategy | What the Agent hashes | Use it when |
+|---|---|---|
+| `line_checksum` | `count` complete lines, after skipping `count_to_skip` lines, reading at most `max_bytes` bytes. | Your logs are line-delimited text. This is the recommended strategy. |
+| `byte_checksum` | Exactly `count` bytes, after skipping `count_to_skip` bytes. | Line boundaries are unreliable, or the first line can be very large. |
+| `disabled` | Nothing. The Agent uses file metadata. | Default. |
+
+The fingerprint must be **the same for the whole life of a file and different between consecutive files**. If every file starts with the same header, such as a CSV header or a banner line, skip it with `count_to_skip`. Otherwise the new file has the same fingerprint as the old one and the Agent does not detect the rotation:
+
+```yaml
+fingerprint_config:
+  fingerprint_strategy: line_checksum
+  count: 1
+  count_to_skip: 2   # skip a two-line header
+  max_bytes: 100000
+```
+
+| Parameter | Default | Description |
+|---|---|---|
+| `fingerprint_strategy` | `disabled` | `line_checksum`, `byte_checksum`, or `disabled`. |
+| `count` | `1` line or `1024` bytes in the global configuration. No default in a per-source configuration. | Number of lines or bytes to hash. Must be greater than 0. |
+| `count_to_skip` | `0` | Number of lines or bytes to skip before hashing. |
+| `max_bytes` | `100000` | Maximum bytes read for a `line_checksum` fingerprint. Must cover the skipped and hashed lines. Ignored by `byte_checksum`. |
+
+<div class="alert alert-warning">The Agent does not start tailing a file until the file contains at least <code>count_to_skip</code> + <code>count</code> lines or bytes. Empty files and files that stay smaller than that are not collected until they grow. Keep <code>count</code> and <code>count_to_skip</code> small, or disable fingerprinting for sources whose files are often smaller than the fingerprint.</div>
+
+### Verify file fingerprinting
+
+Run the [Agent status command][6]. In the **Logs Agent** section, each file tailer lists a **Fingerprint Config** entry with the active `Strategy`, `Count`, `CountToSkip`, and, for `line_checksum`, `MaxBytes`. `Source: per-source` means the source's own configuration applies.
+
+If a file matches a source but is not tailed because of its fingerprint, the source shows a message next to `N files tailed out of M files matching`:
+
+- `Not tailing <PATH>: too short to fingerprint (needs <N> lines)`: the file is smaller than the fingerprint. It is collected from the beginning once it grows. If this persists, lower `count` or `count_to_skip`.
+- `Not tailing <PATH>: its fingerprint could not be computed (<ERROR>)`: the Agent could not read the start of the file, for example because of permissions or a filesystem error.
+
+The Agent log also contains a warning, `Unable to tail <PATH>`, the first time a file is skipped, and `Now tailing <PATH>` when collection starts.
+
+### Collect logs from SMB/CIFS and Azure Files mounts
+
+On Linux, the kernel SMB/CIFS client can serve cached content for a file after it has been rotated on the server. On these mounts, fingerprinting alone can read the old file's first line, miss the rotation, and re-read old lines. For log files on SMB/CIFS mounts, including Azure Files, enable the unreliable mount profile.
+
+This feature requires Agent version 7.84.4 or later.
+
+In `datadog.yaml`:
+
+```yaml
+logs_config:
+  unreliable_mount:
+    enabled: true
+```
+
+Or with an environment variable:
+
+```shell
+DD_LOGS_CONFIG_UNRELIABLE_MOUNT_ENABLED=true
+```
+
+Restart the Agent after changing this setting. The profile applies to all file log sources on the Agent and changes the following:
+
+- **Fingerprint reads bypass the cache (Linux only)**: the Agent reads each fingerprint directly from the server (`O_DIRECT`). Normal log reads still use the cache. On other platforms, fingerprint reads are unchanged.
+- **Smaller default fingerprint**: if `logs_config.fingerprint_config.fingerprint_strategy` is not set, the Agent uses `line_checksum` with `count: 1`, and `max_bytes` defaults to `4096`. Settings you configure explicitly, including `disabled`, are kept.
+- **One reader per path after a rotation**: after a rotation, the Agent finishes reading the rotated file before it opens the new file at the same path. The rotated file is closed after 30 seconds without new data, or after `rotation_drain_timeout` seconds (default `60`), whichever comes first. Then the new file is read from the beginning.
+
+For best results on SMB/CIFS mounts:
+
+- **Use a wildcard in `path`**, even for a single file. For example, use `/mnt/share/logs/*.log`, or `/mnt/share/logs/[a]pp.log` to match only `app.log`. Avoid patterns such as `app.log*` that also match rotated files.
+- **Mount the share with the `cache=none` option**, if your workload allows it. Mount options apply to new mounts only. On Kubernetes, add it to the `mountOptions` of the StorageClass or PersistentVolume, then recreate the pods that use the volume.
+- **Make sure the Agent user can read the log files.** The profile's direct fingerprint reads do not use system-probe privileged log access (`privileged_logs.enabled` in `system-probe.yaml`). Files that the Agent can read only through system-probe are not collected.
+
+**Limitations**:
+- Each rotation pauses collection of the new file for at least 30 seconds. If a file is rotated again before the Agent finishes reading the previous file, the Agent does not read it.
+- Direct fingerprint reads fetch up to the full `max_bytes` window from the server on every file scan. To reduce I/O, increase `logs_config.file_scan_period` (default `1` second).
+- If a direct read fails, the Agent does not retry it through the cache. A new file is not tailed until a read succeeds, and the message `its fingerprint could not be computed` appears in the Agent status. A file that is already being tailed keeps being collected.
+- If logs written before a rotation are lost, the Agent log contains `bytes remaining unread for file`. If this message names the rotation close timeout, increase `logs_config.unreliable_mount.rotation_drain_timeout`.
+
 ## Global processing rules
 
 For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable. The `exclude_truncated` rule is available starting with Agent v7.69.
@@ -768,3 +908,4 @@ Integration-specific rules completely override global rules for the particular i
 [6]: /agent/configuration/agent-commands/#agent-information
 [7]: /agent/logs/auto_multiline_detection
 [8]: /agent/logs/auto_multiline_detection_legacy
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
