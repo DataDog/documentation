@@ -9,7 +9,7 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with DDOT Collector"
 ---
 
-This guide explains how to build a DDOT Collector image with additional OpenTelemetry components not included in the default DDOT Collector. To see a list of components already included in the DDOT Collector by default, see [Included components][1].
+This guide explains how to build a Datadog Agent image with OpenTelemetry components that the Collector in the Agent doesn't include by default. To see the components it includes, see [Included components][1].
 
 ## Prerequisites
 
