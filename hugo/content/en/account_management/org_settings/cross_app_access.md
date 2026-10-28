@@ -68,7 +68,7 @@ Enable Cross-App Access in Datadog before you configure the issuer. Datadog reje
 
 Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}}][2].
 
-{{< img src="account_management/cross_app_access/cross-app-access-settings.png" alt="Cross-App Access settings page showing the enablement status, Trusted issuers list, Org UUID, and Registered client IDs table." style="width:100%;">}}
+{{< img src="account_management/cross_app_access/cross-app-access-settings.png" alt="Cross-App Access settings page showing the enablement status, Issuer URLs list, Org UUID, and Supported agents table." style="width:100%;">}}
 
 ### Enable Cross-App Access
 
