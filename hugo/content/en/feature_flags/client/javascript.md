@@ -135,13 +135,11 @@ Datadog can also ignore a selection and return the full flag configuration. In t
 | `malformed_selection` | The selection could not be parsed. |
 | `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
 
-If Datadog does not apply the selection, it can return the full flag configuration without the `DD-Flag-Selection-Ignored` header; the SDK does not log an error in that case.
-
 If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][7] for the header your proxy must pass through.
 
 #### Evaluate flags outside the selection
 
-When Datadog applies the selection, flags outside it are not loaded. Evaluating one of these flags returns the default value you supply, with the error code `FLAG_NOT_FOUND`:
+Flags outside the selection are not loaded. Evaluating one of these flags returns the default value you supply, with the error code `FLAG_NOT_FOUND`:
 
 {{< code-block lang="javascript" >}}
 const client = OpenFeature.getClient();
