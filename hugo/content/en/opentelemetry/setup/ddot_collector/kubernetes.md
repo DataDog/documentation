@@ -52,8 +52,8 @@ The commands in this guide use your current namespace. Run every step in the sam
 
 Choose one of these installation methods:
 
-- [OpenTelemetry Operator][55]: A [Kubernetes-native][56] approach that automatically reconciles and maintains your OTel Collector setup.
-- [Helm chart][4]: A straightforward way to deploy OTel Collectors.
+- [OpenTelemetry Operator][55]: Manages the Collector as a Kubernetes resource and keeps it running as you declared it. Use this method if you plan to use DDOT SDKs, which the Operator injects into your pods.
+- [Helm chart][4]: Installs the Collector from a values file, without the Operator.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -126,7 +126,7 @@ helm repo update
 
 ### Configure the OTel Collector
 
-The DDOT Collector needs a host name for each node. Set it with the `DD_HOSTNAME` environment variable, as `<NODE_NAME>-<CLUSTER_NAME>`. Without `DD_HOSTNAME`, the Collector pod exits with `unable to reliably determine the host name`. This applies to every cluster, including clusters on a cloud provider.
+The DDOT Collector needs a hostname for each node. Set it with the `DD_HOSTNAME` environment variable, as `<NODE_NAME>-<CLUSTER_NAME>`. In DDOT Collector versions before 7.85.0, the Collector pod exits with `unable to reliably determine the host name` if `DD_HOSTNAME` isn't set. This applies to every cluster, including clusters on a cloud provider.
 
 The example configurations on this page set `DD_HOSTNAME` from a `NODE_NAME` variable:
 
@@ -255,7 +255,7 @@ spec:
 
 3. (Optional) Collect host and kubelet metrics, and add a health check:
 
-<div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+<div class="alert alert-warning">Host and kubelet metrics send more data to Datadog and can add to your bill. See the <a href="https://www.datadoghq.com/pricing/">pricing page</a>.</div>
 
 {{< code-block lang="yaml" filename="node-collector.yaml" collapsible="true" >}}
 spec:
@@ -301,7 +301,7 @@ spec:
 
 4. (Optional) Collect container logs from the node's file system:
 
-<div class="alert alert-warning">Enabling log collection may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+<div class="alert alert-warning">Container logs send more data to Datadog and can add to your bill. See the <a href="https://www.datadoghq.com/pricing/">pricing page</a>.</div>
 
 The `filelog` receiver reads container logs from the node. Because the Operator does not mount host paths automatically, add the log directories as read-only volumes:
 
@@ -532,7 +532,7 @@ ports:
 <div class="alert alert-info">For FED, set <code>tag: {{< version key="agent_version" >}}-fips</code> to use the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
 {{% /site-region %}}
 
-<div class="alert alert-info">The Collector Helm chart publishes the OTLP ports on each node by default (<code>hostPort: 4317</code> for gRPC and <code>hostPort: 4318</code> for HTTP), so application pods can reach the Collector instance running on the same node. See <a href="#configure-the-application">Configure the application</a>.</div>
+<div class="alert alert-info">The Collector Helm chart publishes the OTLP ports on each node by default (<code>hostPort: 4317</code> for gRPC and <code>hostPort: 4318</code> for HTTP), so application pods can reach the Collector instance running on the same node. See <a href="#instrument-your-application">Instrument your application</a>.</div>
 
 3. Configure the Datadog exporter and API key secret:
 
@@ -571,7 +571,9 @@ extraEnvs:
 
 Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
 
-4. Enable presets:
+4. (Optional) Collect host metrics, kubelet metrics, and container logs with the chart's presets:
+
+<div class="alert alert-warning">Host metrics, kubelet metrics, and container logs send more data to Datadog and can add to your bill. See the <a href="https://www.datadoghq.com/pricing/">pricing page</a>.</div>
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
 presets:
@@ -799,36 +801,17 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send your telemetry to Datadog
+## Instrument your application
 
-Complete these steps:
+Instrument your application with the DDOT SDK or an OpenTelemetry SDK. Either one sends OTLP to the Collector on the application's node, which publishes the OTLP ports on the node.
 
-1. [Instrument your application](#instrument-the-application)
-2. [Configure the application](#configure-the-application)
-3. [Correlate observability data](#correlate-observability-data)
-4. [Run your application](#run-the-application)
+### DDOT SDK
 
-### Instrument the application
+Follow [Use DDOT SDKs][66]. The OpenTelemetry Operator injects the SDK and sets the endpoint, so the DDOT SDK needs the Operator installation method. Then continue to [Verify the setup](#verify-the-setup).
 
-Instrument your application with an [OpenTelemetry SDK][12]. The SDK exports your application's telemetry over OTLP. [Configure the application](#configure-the-application) points that export at the Collector.
+### OpenTelemetry SDK
 
-{{% collapse-content title="Example application instrumented with the OpenTelemetry API" level="p" %}}
-As an example, you can use the [Calendar sample application][9] that's already instrumented for you. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
-   {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="false" >}}
-@WithSpan(kind = SpanKind.CLIENT)
-public String getDate() {
-    Span span = Span.current();
-    span.setAttribute("peer.service", "random-date-service");
-    ...
-}
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-### Configure the application
-
-Your application container must send data to the DDOT Collector running on the same node. Because the Collector publishes the OTLP ports on the node with `hostPort`, the application can reach the local Collector through the node's IP address (`status.hostIP`).
-
-If `OTEL_EXPORTER_OTLP_ENDPOINT` isn't already set, add these variables to your application container's `env` list:
+Instrument your application with an [OpenTelemetry SDK][12]. If `OTEL_EXPORTER_OTLP_ENDPOINT` isn't already set, add these variables to your application container's `env` list. They send OTLP over HTTP to the Collector on the node, and set the `service`, `env`, and `version` tags on your data:
 
 {{< code-block lang="yaml" filename="deployment.yaml" collapsible="true" >}}
 env:
@@ -837,41 +820,18 @@ env:
       fieldRef:
         fieldPath: status.hostIP
   - name: OTEL_EXPORTER_OTLP_ENDPOINT
-    value: 'http://$(HOST_IP):4317'
+    value: 'http://$(HOST_IP):4318'
   - name: OTEL_EXPORTER_OTLP_PROTOCOL
-    value: 'grpc'
+    value: 'http/protobuf'
+  - name: OTEL_SERVICE_NAME
+    value: '<SERVICE>'
+  - name: OTEL_RESOURCE_ATTRIBUTES
+    value: 'service.version=<VERSION>,deployment.environment.name=<ENV>'
 {{< /code-block >}}
 
-To send OTLP over HTTP instead, use port `4318` and set `OTEL_EXPORTER_OTLP_PROTOCOL` to `http/protobuf`.
+Replace `<SERVICE>`, `<VERSION>`, and `<ENV>` with your service name, version, and environment. To send OTLP over gRPC instead, use port `4317` and set `OTEL_EXPORTER_OTLP_PROTOCOL` to `grpc`. Redeploy your application to apply the changes.
 
-### Correlate observability data
-
-[Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
-
-In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from containers.
-
-Add the following environment variables to your application's deployment manifest:
-
-{{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: <SERVICE>
-spec:
-  template:
-    spec:
-      containers:
-      - name: <SERVICE>
-        env:
-          - name: OTEL_SERVICE_NAME
-            value: "<SERVICE>"
-          - name: OTEL_RESOURCE_ATTRIBUTES
-            value: "service.version=<VERSION>,deployment.environment.name=<ENV>"
-{{< /code-block >}}
-
-### Run the application
-
-Redeploy your application to apply the changes made in the deployment manifest. After the updated configuration is active, Unified Service Tagging is fully enabled for your metrics, traces, and logs.
+For how Datadog uses these tags, see [Unified service tagging][14].
 
 ## Verify the setup
 
@@ -881,11 +841,12 @@ After your application sends telemetry, check for it in Datadog. Data can take u
 
 | Check | Where to look | What you see |
 |---|---|---|
-| Services | [Catalog][58]: set the environment to `<ENV>` and search for `<SERVICE>`. | The service page, with requests, errors, and latency. |
+| Services | [Software Catalog][58]: set the environment to `<ENV>` and search for `<SERVICE>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][59]: search for `service:<SERVICE> env:<ENV>`. | Your service's traces. |
 | Hosts | [Host List][60] | Each node, as `<NODE_NAME>-<CLUSTER_NAME>`. With `DD_HOSTNAME` set as in the example configuration and no Datadog Agent on the node, each node appears one time. |
 | Metrics | [Metrics Explorer][61]: graph `avg:k8s.pod.cpu.usage{kube_cluster_name:<CLUSTER_NAME>}`. | If you turned on kubelet metrics (the `kubelet_stats` receiver or the `kubeletMetrics` preset): pod CPU usage for your cluster. |
-| Logs | [Log Explorer][62]: search for `service:<SERVICE> env:<ENV>`. | If your application sends logs over OTLP, or you turned on container log collection (the `filelog` receiver or the `logsCollection` preset): your service's logs. |
+| Logs from your application | [Log Explorer][62]: search for `service:<SERVICE> env:<ENV>`. | If your application sends logs over OTLP: your service's logs. |
+| Container logs | [Log Explorer][62]: search for `kube_namespace:<NAMESPACE>`, where `<NAMESPACE>` is your application's namespace. | If you turned on container log collection (the `filelog` receiver or the `logsCollection` preset): the logs of the containers in that namespace. With the example configurations, these logs don't have the `service` and `env` tags. |
 
 ## Troubleshooting
 
@@ -978,6 +939,12 @@ kubectl delete secret datadog-secret
 
 If you also installed the Datadog Agent, remove the `DatadogAgent` resource and the Datadog Operator separately.
 
+## Next steps
+
+- Instrument more applications with DDOT SDKs: [Use DDOT SDKs][66].
+- Check how Datadog names your nodes and tags your data: [Hostnames and Tagging][67].
+- See which Datadog features each setup supports: [Feature Compatibility][68].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -987,17 +954,17 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://opentelemetry.io/docs/platforms/kubernetes/helm/collector/
 [5]: https://kubernetes.io/docs/tasks/tools/#kubectl
-[9]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
-[10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
 [12]: /opentelemetry/instrument/otel_sdks/
 [14]: /getting_started/tagging/unified_service_tagging
 [52]: /getting_started/site/
 [54]: https://helm.sh
 [55]: https://opentelemetry.io/docs/platforms/kubernetes/operator/
-[56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: /getting_started/containers/datadog_operator/
 [58]: https://app.datadoghq.com/software
 [59]: https://app.datadoghq.com/apm/traces
 [60]: https://app.datadoghq.com/infrastructure
 [61]: https://app.datadoghq.com/metric/explorer
 [62]: https://app.datadoghq.com/logs
+[66]: /opentelemetry/instrument/dd_sdks/
+[67]: /opentelemetry/config/hostname_tagging/
+[68]: /opentelemetry/compatibility/
