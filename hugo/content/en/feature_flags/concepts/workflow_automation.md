@@ -28,8 +28,8 @@ An **action** is a step the workflow performs. Feature flag actions can retrieve
 
 Where you create a workflow depends on what should trigger it:
 
-- **Feature flag events**: Navigate to **Feature Flags > Settings > Automations** to configure events, filters, and workflow steps.
-- **Other events**, such as monitor alerts: Create a workflow in [Workflow Automation][2] and add a feature flag action.
+- **Feature flag triggers**: Navigate to **Feature Flags > Settings > Automations** to configure events, filters, and workflow steps.
+- **Other triggers**: Create a workflow in [Workflow Automation][2] and add a feature flag action.
 
 Configure the workflow's execution identity with the permissions required by its actions. See [Workflow identity][3] and [Feature Flags permissions][4].
 
@@ -52,7 +52,7 @@ Feature flag triggers start workflows when the following events occur:
 1. Select **All flags** or **Specific flags**, and optionally select **Environments**, where these filters are available.
 1. Select **Choose an action** to configure workflow steps, or **Clone existing workflow** to copy an existing workflow's configuration.
 1. Complete the action inputs and click **Create**.
-1. Enable the automation when it is ready to run.
+1. Enable the automation when you are ready for it to run.
 
 {{< img src="/feature_flags/workflow_automation_trigger.png" alt="Feature flag automation with a rollout-paused trigger, flag and environment filters, and a Slack notification action" style="width:100%;" >}}
 
