@@ -7,6 +7,12 @@ describe("LEGACY_REDIRECTS", () => {
     const froms = LEGACY_REDIRECTS.map((r) => r.from);
     expect(new Set(froms).size).toBe(froms.length);
   });
+
+  // `/api/` is a real page (`[...lang]/api/index.astro`), not a redirect stub,
+  // so Hugo-to-Astro view transitions survive the jump to the API root.
+  it("leaves the bare /api/ root to its own page", () => {
+    expect(LEGACY_REDIRECTS.map((r) => r.from)).not.toContain("/api/");
+  });
 });
 
 describe("legacyRedirectStaticPaths", () => {
@@ -29,20 +35,19 @@ describe("legacyRedirectStaticPaths", () => {
   });
 
   // The route lives at `[...lang]/api/[...legacyPath]`, so the param carries
-  // only what follows `/api` — and nothing at all for the bare `/api/` root,
-  // whose empty spread renders as `/api/` itself.
+  // only what follows `/api`.
   it("strips the /api prefix off the legacyPath param", () => {
     const english = legacyRedirectStaticPaths().filter(
       (entry) => entry.params.lang === undefined,
     );
     const paths = english.map((entry) => entry.params.legacyPath);
 
-    expect(paths).toContain(undefined);
     expect(paths).toContain("screenboards");
     expect(paths).toContain("latest/downtimes/s");
-    // Only the `/api/` root is param-less; the rest must be bare relative
-    // paths, with no leading slash, no `api` segment, and no trailing slash.
-    for (const path of paths.filter((candidate) => candidate !== undefined)) {
+    // Every param is a bare relative path, with no leading slash, no `api`
+    // segment, and no trailing slash.
+    for (const path of paths) {
+      expect(path).toBeDefined();
       expect(path).not.toMatch(/^\/|^api\b|\/$/);
     }
   });

@@ -16,6 +16,7 @@ import Hotjar from "@components/Hotjar/Hotjar.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
 import AgentHint from "@components/AgentHint/AgentHint.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
+import { rewrittenAddressPath } from "@lib/site/rewrittenAddress";
 import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
   TWITTER_HANDLE,
@@ -90,6 +91,12 @@ const markdownUrl = markdownHref && `${siteOrigin}${markdownHref}`;
 // itself does not read it (it resolves the environment at build time), but the
 // planned shared Ask AI package expects the attribute to be present.
 const env = resolveSiteEnv();
+// Set when this page was served through `Astro.rewrite()` (such as `/api/`),
+// so the address bar can show the canonical URL. See `rewrittenAddressPath`.
+const addressBarPath = rewrittenAddressPath(
+  Astro.originPathname,
+  Astro.url.pathname,
+);
 
 // Resolve any relative hreflang hrefs against the site origin.
 const hreflangResolved = hreflang?.map((h) => ({
@@ -126,6 +133,14 @@ const activeRegionSelectors = allowedRegions
     <meta name="description" content={description} />
     <meta name="theme-color" content={THEME_COLOR} />
     <link rel="canonical" href={canonical} />
+    {
+      addressBarPath && (
+        <script is:inline define:vars={{ addressBarPath }}>
+          history.replaceState( history.state, "", addressBarPath +
+          location.search + location.hash, );
+        </script>
+      )
+    }
     {enableViewTransitions && <ClientRouter />}
 
     {/* Schema.org */}
