@@ -63,7 +63,7 @@ Add `infraattributes` to each pipeline's `processors` list if it isn't there alr
 
 This applies to the DDOT Collector on Kubernetes when it runs without the Datadog Agent.
 
-On nodes without cloud provider metadata, such as k3s, kind, or bare metal, the Collector can't detect a hostname, and its pod exits with `unable to reliably determine the host name`. To fix this, set the `DD_HOSTNAME` environment variable to `<NODE_NAME>-<CLUSTER_NAME>`. Datadog uses the same name for the node's Kubernetes metrics, so each node appears as one host. For the configuration, see [Install the DDOT Collector on Kubernetes][25].
+With `datadog/ddot-collector:7.83.1`, the Collector can't detect a hostname on its own, and its pod exits with `unable to reliably determine the host name`. This happens on every cluster, including clusters on a cloud provider. To fix this, set the `DD_HOSTNAME` environment variable to `<NODE_NAME>-<CLUSTER_NAME>`. Datadog uses the same name for the node's Kubernetes metrics, so each node appears as one host. For the configuration, see [Install the DDOT Collector on Kubernetes][25].
 
 #### Fargate sidecar deployments
 
