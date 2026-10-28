@@ -8,6 +8,9 @@ further_reading:
 - link: "/gpu_monitoring/tracing"
   tag: "Documentation"
   text: "Continuous Tracing with GPU Monitoring"
+- link: "/integrations/slurm/"
+  tag: "Documentation"
+  text: "Slurm integration"
 - link: "/gpu_monitoring"
   tag: "Documentation"
   text: "Learn more about what GPU Monitoring offers"
@@ -30,11 +33,15 @@ With the Training page, you get:
 
 ## Setup
 
+Select the tab that matches your environment:
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
 ### Prerequisites
 
 To begin monitoring your training workloads, you must first meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- You are running the Datadog Cluster Agent version 7.80 or later.
 - You are running CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
 
 ### 0. Enable GPU Monitoring
@@ -131,9 +138,87 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and traces are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
+[1]: /gpu_monitoring/setup
+[2]: /containers/kubernetes/tag/?tab=datadogoperator#tag-extraction
+
+{{% /tab %}}
+{{% tab "Slurm" %}}
+
+### Prerequisites
+
+To begin monitoring your Slurm training jobs, you must first meet the following criteria:
+- You have [GPU Monitoring enabled][1].
+- You are running CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+
+### 0. Enable GPU Monitoring
+
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
+
+### 1. Install the Agent with Single Step Instrumentation
+
+On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled for the host and the Datadog C SDK:
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> \
+DD_SITE="<DATADOG_SITE>" \
+DD_APM_INSTRUMENTATION_ENABLED=host \
+DD_APM_INSTRUMENTATION_LIBRARIES=c:0 \
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+```
+
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][3] and `<DATADOG_SITE>` with your [Datadog site][4].
+
+### 2. Enable the Slurm integration
+
+Set up the [Slurm integration][5] to collect metrics about your Slurm cluster, partitions, nodes, and jobs.
+
+### 3. Configure your batch script
+
+Add the following environment variables to your `sbatch` script:
+
+```shell
+export DD_SERVICE=${DD_SERVICE:-slurm-training}
+export DD_ENV=${DD_ENV:-dev}
+export DD_INJECT_NATIVE=always
+export DD_TRACE_HOOK_MODULES=gpu
+```
+
+`DD_SERVICE` and `DD_ENV` default to `slurm-training` and `dev`. To use different values, set these variables before you submit the job, or change the defaults in the script.
+
+For example:
+
+```shell
+#!/bin/bash
+#SBATCH --job-name=training
+#SBATCH --nodes=2
+#SBATCH --gpus-per-node=8
+
+export DD_SERVICE=${DD_SERVICE:-slurm-training}
+export DD_ENV=${DD_ENV:-dev}
+export DD_INJECT_NATIVE=always
+export DD_TRACE_HOOK_MODULES=gpu
+
+srun python train.py
+```
+
+### 4. Verify setup
+
+Submit the job with `sbatch`, then query [APM Trace Explorer][6] with the service and environment you configured:
+
+```
+service:slurm-training env:dev
+```
+
+[1]: /gpu_monitoring/setup
+[2]: /tracing/trace_collection/single-step-apm/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+[5]: /integrations/slurm/
+[6]: /tracing/trace_explorer/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /gpu_monitoring/setup
-[2]: /containers/kubernetes/tag/?tab=datadogoperator#tag-extraction
