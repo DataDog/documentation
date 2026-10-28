@@ -29,12 +29,12 @@ further_reading:
 
 Looking for the DDOT Collector that runs inside the Datadog Agent? See [Collector in the Agent][69].
 
-The DDOT Collector is an OpenTelemetry Collector that Datadog builds. Deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent.
+The Datadog OpenTelemetry (DDOT) Collector is an OpenTelemetry Collector that Datadog builds. Deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent.
 
 - **Components**: A [curated set of OpenTelemetry components](#included-components) and [custom Datadog components](#custom-datadog-components).
 - **Data it receives**: OTLP from applications instrumented with the OpenTelemetry SDK or the [DDOT SDK][67].
 - **Pipelines**: Standard OpenTelemetry Collector configuration. You can route telemetry to Datadog and to other destinations.
-- **Support**: Datadog Support helps with Datadog-supported components. See [Support levels][57].
+- **Support**: Datadog Support troubleshoots the components that [Support levels][57] lists as Datadog-supported.
 - **Platforms**: These docs cover the DDOT Collector on Kubernetes. On other platforms, use the [upstream OpenTelemetry Collector][68] or the [Collector in the Agent][64], the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Get started
@@ -152,11 +152,11 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 {{% collapse-content title="Datadog components" level="p" %}}
 
-- [Infrastructure Attribute Processor][50]: An OpenTelemetry processor component that automatically assigns [Kubernetes tags][53] to OTLP telemetry (metrics, traces, and logs) emitted by a pod or an individual container within a pod. This component enables [unified service tagging][54] and telemetry correlation for monitoring Kubernetes environments.
+- [Infrastructure Attribute Processor][50]: An OpenTelemetry processor component that assigns [Kubernetes tags][53] to OTLP telemetry (metrics, traces, and logs) from a pod or a container in a pod. Datadog uses these tags to correlate your telemetry with your Kubernetes infrastructure. For how `service`, `env`, and `version` are set, see [unified service tagging][54].
 
 - [Converter][51]: An OpenTelemetry converter component that enhances user-provided configurations. It offers an API to return both the original and enhanced configurations, automatically checking for known misconfigurations to reduce errors.
 
-- [DD Flare Extension][52]: An OpenTelemetry extension component for generating Agent Flare, which contains diagnostic information from both the DDOT Collector and the Agent for troubleshooting purposes.
+- [DD Flare Extension][52]: An OpenTelemetry extension component that adds the Collector's diagnostic information to an Agent flare, for troubleshooting. It works only with the Collector in the Agent.
 
 {{% /collapse-content %}}
 

@@ -873,7 +873,7 @@ For the complete configuration files for each environment, see the [`opentelemet
 
 ### 3. Configure your application
 
-Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
+Configure your OpenTelemetry-instrumented application to send data to the Collector. If your application isn't instrumented yet, see [Instrument Your Applications][502]. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -1016,3 +1016,4 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [12]: /opentelemetry/setup/ddot_collector/
 [13]: /opentelemetry/integrations/kubernetes_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
+[502]: /opentelemetry/instrument/

@@ -762,11 +762,6 @@ menu:
       identifier: otel-setup-ddot-kubernetes
       parent: otel-setup-ddot
       weight: 4011
-    - name: Add the Datadog Agent (optional)
-      url: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
-      identifier: otel-setup-ddot-add-agent
-      parent: otel-setup-ddot
-      weight: 4012
     - name: Upstream OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
