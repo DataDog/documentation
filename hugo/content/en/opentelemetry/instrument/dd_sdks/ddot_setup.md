@@ -238,7 +238,7 @@ kubectl delete -n <NAMESPACE> -f ddot-sdks.yaml
 [1]: https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/
 [2]: #known-limits
 [3]: /opentelemetry/instrument/dd_sdks/api_support/
-[4]: /opentelemetry/getting_started/?tab=ddot
+[4]: /opentelemetry/getting_started/kubernetes/?tab=ddot
 [5]: #verify
 [6]: /opentelemetry/setup/ddot_collector/kubernetes/
 [7]: /opentelemetry/setup/collector_exporter/
