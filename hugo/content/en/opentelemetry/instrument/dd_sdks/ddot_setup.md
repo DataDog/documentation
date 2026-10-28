@@ -171,14 +171,10 @@ The DDOT SDK keeps sending your telemetry as OTLP to your Collector.
 
 ## Known limits
 
-- **Go**: Go has no image for the Operator to inject. Instrument your Go application at build time with [Orchestrion][12], then set the OpenTelemetry mode variables. Use the annotation `instrumentation.opentelemetry.io/inject-sdk` instead of `inject-<LANGUAGE>`. It sets the variables from `ddot-sdks.yaml` and doesn't inject an SDK. Also add `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` to the `env` list, with the `/v1/traces` path, for example `http://$(OTEL_NODE_IP):4318/v1/traces`.
-- **Node.js and the OpenTelemetry API**: In Node.js, spans that your code creates with the OpenTelemetry API reach Datadog only after your application registers Datadog's tracer provider. Without it, those spans are dropped. For the registration code, see [OpenTelemetry API Support for Node.js][17]. **[Placeholder: how to register the provider when the Operator injects the DDOT SDK]**
-- **Code that sets up the OpenTelemetry SDK**: The DDOT SDK supports the OpenTelemetry API, not OpenTelemetry SDK components such as span processors and exporters. If your application configures the OpenTelemetry SDK in code, **[Placeholder: what to change, for each language]**.
-- **Direct OTLP ingest**: **[Placeholder: whether the DDOT SDK can send to the Datadog OTLP intake without a Collector]**
-- **Hosts**: **[Placeholder: whether DDOT SDKs run on hosts, and the minimum version for each language]**
-- **Other languages**: DDOT SDKs aren't available for languages other than Java, Python, Node.js, .NET, and Go.
-
-**[Placeholder: other known limits]**
+- **Languages**: DDOT SDKs are available for Java, Python, Node.js, .NET, and Go.
+- **Go**: The Operator doesn't inject a DDOT SDK into Go applications. **[Placeholder: Go setup steps]**
+- **Node.js and the OpenTelemetry API**: In Node.js, Datadog drops spans that your code creates with the OpenTelemetry API unless your application registers Datadog's tracer provider. For the registration code, see [OpenTelemetry API Support for Node.js][17]. **[Placeholder: how to register the provider when the Operator injects the DDOT SDK]**
+- **OpenTelemetry SDK components**: The DDOT SDK supports the OpenTelemetry API, not OpenTelemetry SDK components such as span processors and exporters. **[Placeholder: confirm, and what to change if your application sets up the OpenTelemetry SDK in code]**
 
 ## Troubleshooting
 
@@ -245,7 +241,6 @@ kubectl delete -n <NAMESPACE> -f ddot-sdks.yaml
 [9]: https://app.datadoghq.com/apm/traces
 [10]: https://app.datadoghq.com/logs
 [11]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
-[12]: /tracing/trace_collection/dd_libraries/go/
 [13]: /opentelemetry/compatibility/
 [14]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [15]: /opentelemetry/config/environment_variable_support/
