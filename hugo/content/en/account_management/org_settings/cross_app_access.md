@@ -34,14 +34,14 @@ Setup moves values in both directions between Datadog and the issuer. Confirm th
 | Datadog organization UUID           | Datadog to Okta   | Datadog application, {{< ui >}}Machine assignments{{< /ui >}} tab > {{< ui >}}Audience/tenant ID{{< /ui >}} |
 | Agent client ID                     | Datadog to Okta   | AI Agent, {{< ui >}}Resource connections{{< /ui >}} > {{< ui >}}Client ID at resource{{< /ui >}} |
 | Datadog resource URL and issuer URL | Datadog to Okta   | Datadog application, {{< ui >}}Machine assignments{{< /ui >}} tab > {{< ui >}}Resource URL{{< /ui >}} and {{< ui >}}Issuer URL{{< /ui >}} |
-| Okta issuer URL                     | Okta to Datadog   | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Trusted issuers{{< /ui >}} |
+| Okta issuer URL                     | Okta to Datadog   | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
 
 ### Claude issuer
 
 | Value                     | Direction           | Where you enter it |
 | ------------------------- | ------------------- | ------------------ |
 | Datadog organization UUID | Datadog to Claude   | Datadog connector, {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude-issued{{< /ui >}} > {{< ui >}}Tenant ID{{< /ui >}} |
-| Claude issuer URL         | Claude to Datadog   | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Trusted issuers{{< /ui >}} |
+| Claude issuer URL         | Claude to Datadog   | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
 
 ## Prerequisites
 
@@ -76,7 +76,7 @@ Click {{< ui >}}Enable{{< /ui >}}. This applies to your whole organization. Clic
 
 ### Add trusted issuers
 
-Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Trusted issuers{{< /ui >}} list. Add one entry for each issuer you use.
+Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Issuer URLs{{< /ui >}} list. Add one entry for each issuer you use.
 
 | Issuer | Issuer URL to enter |
 | ------ | ------------------- |
@@ -90,7 +90,7 @@ Every issuer URL must use `https` and must not contain a port, query, or fragmen
 
 ### Remove trusted issuers
 
-To stop trusting an issuer, remove it from the {{< ui >}}Trusted issuers{{< /ui >}} list. After removal, Datadog stops accepting tokens from the issuer.
+To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. After removal, Datadog stops accepting tokens from the issuer.
 
 ### Copy your organization UUID
 
@@ -98,11 +98,11 @@ Copy the value in the {{< ui >}}Org UUID{{< /ui >}} field. The issuer sends this
 
 ### Copy the agent client ID
 
-The {{< ui >}}Registered client IDs{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. If you use the Okta issuer, copy the client ID for the agent you are setting up. The Claude issuer does not need it.
+The {{< ui >}}Supported agents{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. If you use the Okta issuer, copy the client ID for the agent you are setting up. The Claude issuer does not need it.
 
 Datadog adds agents to this table as it supports them, so check the table rather than reusing a client ID from another source.
 
-Click {{< ui >}}Manage app{{< /ui >}} on a row to open the scope settings for that agent. See [Control scopes in Datadog](#control-scopes-in-datadog).
+Click {{< ui >}}Manage App{{< /ui >}} on a row to open the scope settings for that agent. See [Control scopes in Datadog](#control-scopes-in-datadog).
 
 ## Finish the setup for the Claude issuer
 
@@ -112,7 +112,7 @@ If you use the Claude issuer, complete the following steps in Claude as an admin
 2. On the {{< ui >}}Configuration{{< /ui >}} tab, click {{< ui >}}Set up{{< /ui >}} next to {{< ui >}}Managed authorization{{< /ui >}}.
 3. In the {{< ui >}}Connect{{< /ui >}} step, under {{< ui >}}Identity source{{< /ui >}}, select {{< ui >}}Claude-issued{{< /ui >}}.
 4. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter the Datadog organization UUID you [copied from Datadog](#copy-your-organization-uuid). Claude does not need the agent client ID or the Datadog resource and issuer URLs.
-5. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Trusted issuers{{< /ui >}} list in Datadog. See [Add trusted issuers](#add-trusted-issuers).
+5. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Issuer URLs{{< /ui >}} list in Datadog. See [Add trusted issuers](#add-trusted-issuers).
 6. Click {{< ui >}}Run test{{< /ui >}} and confirm that every step passes.
 7. In the {{< ui >}}Roles{{< /ui >}} step, select who receives the Datadog connector. To pilot with one team, select only that team's custom role and leave the built-in roles cleared.
 8. In the {{< ui >}}Scopes{{< /ui >}} step, select the Datadog scopes Claude can request. See [Control scopes in Datadog](#control-scopes-in-datadog).
@@ -165,7 +165,7 @@ On the Claude AI Agent, add the Claude SAML application as a delegated caller, t
 
    | Okta field                | Value                                                                                                |
    | ------------------------- | ---------------------------------------------------------------------------------------------------- |
-   | {{< ui >}}Client ID at resource{{< /ui >}} | The Claude client ID you copied from [{{< ui >}}Registered client IDs{{< /ui >}}](#copy-the-agent-client-id)          |
+   | {{< ui >}}Client ID at resource{{< /ui >}} | The Claude client ID you copied from [{{< ui >}}Supported agents{{< /ui >}}](#copy-the-agent-client-id)          |
    | {{< ui >}}Scope Condition{{< /ui >}}       | {{< ui >}}Allow all{{< /ui >}}, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
 4. Activate the agent from the {{< ui >}}Actions{{< /ui >}} menu.
@@ -190,7 +190,7 @@ If you use the Claude issuer, the scopes you select in Claude's {{< ui >}}Scopes
 
 To set the scopes Claude is allowed in Datadog:
 
-1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Mobile and Third-Party Access{{< /ui >}}][6]. You can also click {{< ui >}}Manage app{{< /ui >}} next to Claude in the {{< ui >}}Registered client IDs{{< /ui >}} table on the Cross-App Access page.
+1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Mobile and Third-Party Access{{< /ui >}}][6]. You can also click {{< ui >}}Manage App{{< /ui >}} next to Claude in the {{< ui >}}Supported agents{{< /ui >}} table on the Cross-App Access page.
 2. Select the Claude application, then select the {{< ui >}}Scopes{{< /ui >}} tab.
 3. Use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control what Claude reaches.
 4. Click {{< ui >}}Enable{{< /ui >}} to save.
