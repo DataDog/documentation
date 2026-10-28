@@ -135,7 +135,7 @@ Datadog can also ignore a selection and return the full flag configuration. In t
 | `malformed_selection` | The selection could not be parsed. |
 | `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
 
-If flag selection is not enabled for your organization, Datadog returns the full flag configuration without the `DD-Flag-Selection-Ignored` header, and the SDK does not log an error.
+If Datadog does not apply the selection, it can return the full flag configuration without the `DD-Flag-Selection-Ignored` header; the SDK does not log an error in that case.
 
 If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][7] for the header your proxy must pass through.
 
