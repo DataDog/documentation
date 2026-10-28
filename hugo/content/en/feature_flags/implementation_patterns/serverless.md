@@ -75,7 +75,7 @@ Note the following behavior:
 - Experiment exposure events are emitted only for flags associated with an experiment.
 - Java, Python, and Ruby aggregate EVP flag evaluation events and send them by default. Ruby requires a compatible local telemetry relay for both event types and does not support direct fallback.
 - .NET 3.54.0 sends experiment exposures through the configured Agent transport. It does not provide direct EVP fallback or aggregated EVP flag evaluation events. Without a compatible relay, exposures are not delivered.
-- To disable only the EVP flag evaluation event path, set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`.
+- To disable only the EVP flag evaluation event path, set `DD_FEATURE_FLAGS_EVALUATION_COUNTS_ENABLED=false` before initializing the SDK. The legacy `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` name remains a compatibility alias. If both are set, the new name takes precedence. For SDK versions that do not support the new name, use the legacy name.
 
 The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure the OTLP endpoint for this metric. For no-Agent serverless environments, configure the serverless telemetry path for your platform before you enable this metric. See [Set Up Server-Side Flag Evaluation Metrics][10].
 
@@ -94,7 +94,7 @@ The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal.
 1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
 2. Evaluate a flag associated with an experiment, then confirm that the experiment receives an exposure event.
 3. When you use a local relay, check the application and `serverless-init` logs for connection errors to port 8126.
-4. For Java, Python, and Ruby, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
+4. For Java, Python, and Ruby, confirm that neither `DD_FEATURE_FLAGS_EVALUATION_COUNTS_ENABLED` nor its legacy alias `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` disables collection when you need EVP flag evaluation events.
 5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with [Set Up Server-Side Flag Evaluation Metrics][10].
 
 ## Agent-backed Remote Configuration
