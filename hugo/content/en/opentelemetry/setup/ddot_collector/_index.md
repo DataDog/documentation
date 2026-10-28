@@ -31,18 +31,14 @@ The DDOT Collector is an OpenTelemetry Collector that Datadog builds. Deploy it 
 
 - **Components**: A [curated set of OpenTelemetry components](#included-components) and [custom Datadog components](#custom-datadog-components).
 - **Data it receives**: OTLP from applications instrumented with the OpenTelemetry SDK or the [DDOT SDK][67].
+- **Pipelines**: Standard OpenTelemetry Collector configuration. You can route telemetry to Datadog and to other destinations.
+- **Support**: Datadog Support helps with Datadog-supported components. See [Support levels][57].
 - **Platforms**: These docs cover the DDOT Collector on Kubernetes. On other platforms, use the [upstream OpenTelemetry Collector][68] or the [Collector in the Agent][64], the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Get started
 
 - [Install the DDOT Collector on Kubernetes][65]: Deploy the Collector with the OpenTelemetry Operator or Helm chart, and check that your data arrives.
 - [Add the Datadog Agent (optional)][66]: Add the Agent for Datadog features that need it.
-
-## Key benefits
-
-- **OpenTelemetry tooling**: Deploy with the OpenTelemetry Operator or Helm chart, and configure it with standard OpenTelemetry Collector configuration.
-- **Flexible pipelines**: Process your telemetry and route it to Datadog and other destinations.
-- **Support**: Get help from Datadog Support with Datadog-supported components. See [Support levels][57].
 
 ## Included components
 
@@ -156,7 +152,7 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 - [Infrastructure Attribute Processor][50]: An OpenTelemetry processor component that automatically assigns [Kubernetes tags][53] to OTLP telemetry (metrics, traces, and logs) emitted by a pod or an individual container within a pod. This component enables [unified service tagging][54] and telemetry correlation for monitoring Kubernetes environments.
 
-- [Converter][51]: An OpenTelemetry converter component that enhances user-provided configurations. It offers an API to return both the original and enhanced configurations, automatically checking for known misconfigurations to reduce errors. This ensures seamless integration of existing OpenTelemetry Collector configurations with the Agent.
+- [Converter][51]: An OpenTelemetry converter component that enhances user-provided configurations. It offers an API to return both the original and enhanced configurations, automatically checking for known misconfigurations to reduce errors.
 
 - [DD Flare Extension][52]: An OpenTelemetry extension component for generating Agent Flare, which contains diagnostic information from both the DDOT Collector and the Agent for troubleshooting purposes.
 
