@@ -146,14 +146,6 @@ The sum of `Usage Value` across all rows matches the Infra Hosts or APM Hosts to
 
 **Note**: The Resource Drilldown table in the UI shows only four columns: `Resource Name`, `Resource Type`, `Usage Value`, and `Organization` (equivalent to `Org Name` in the CSV).
 
-## Revert to the previous layout
-
-If your organization is on the new {{< ui >}}Bill Overview{{< /ui >}} and you prefer the previous layout, click {{< ui >}}Disable Preview{{< /ui >}} in the page header. This toggle is available to all organizations and persists for your session.
-
-{{< img src="account_management/plan_and_usage/toggle-back-header.png" alt="Bill Overview page header showing the Disable Preview button" >}}
-
-To return to {{< ui >}}Bill Overview{{< /ui >}}, click {{< ui >}}Enable Preview{{< /ui >}} in the header.
-
 ## Permissions
 
 The following permissions are required to access each section of Bill Overview:
@@ -162,10 +154,16 @@ The following permissions are required to access each section of Bill Overview:
 |---|---|
 | Bill Overview (cost data) | `BILLING_READ` |
 | Usage Tab | `USAGE_READ` |
-| Plan Details | `BILLING_READ` |
-| Billing History | `BILLING_READ` |
+| Plan Details | `BILLING_READ` + `CONTRACT_READ` |
+| Billing History | `BILLING_READ` + `CONTRACT_READ` |
 | Usage Attribution | `USAGE_READ` + Enterprise or Pro plan |
 | Sub-org cost trends | Parent org must have `suborg_cost_trends` enabled |
+
+### Contract information
+
+`CONTRACT_READ` was introduced in October 2026 and was granted automatically to every role that held `BILLING_READ` at that time.  Users with the Datadog Admin role have `CONTRACT_READ` by default. Contract information includes all information on the Plan and Billing History pages, along with drawdown totals on the Bill Overview page.
+
+To restrict who can see contract information, remove `CONTRACT_READ` from the roles that should not have it and leave `BILLING_READ` in place. Those users retain access to cost and usage data and lose access to {{< ui >}}Plan Details{{< /ui >}} and {{< ui >}}Billing History{{< /ui >}}.
 
 For information on managing permissions, see [Role Based Access Control][3].
 
