@@ -30,6 +30,8 @@ This guide assumes you know how to deploy the Collector in the Agent, the OpenTe
 
 ## Overview
 
+This page was previously titled "Install the DDOT Collector as a Gateway on Kubernetes."
+
 The OpenTelemetry Collector can be deployed in multiple ways. The *daemonset* pattern is a common deployment where a Collector instance runs on every Kubernetes node alongside the core Datadog Agent.
 
 {{< img src="opentelemetry/embedded_collector/ddot_daemonset.png" alt="Architecture diagram of the OpenTelemetry Collector daemonset pattern. A Kubernetes cluster contains three nodes. On each node, an application instrumented with OpenTelemetry sends OTLP data to a local Agent DaemonSet. The Agent DaemonSet then forwards this data directly to the Datadog backend." style="width:100%;" >}}
@@ -64,7 +66,7 @@ Before you begin, ensure you have the following:
 
 This guide shows how to configure the DDOT Collector gateway using either the Datadog Operator or Helm chart.
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
 
 Choose one of the following installation methods:
 

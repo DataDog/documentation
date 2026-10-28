@@ -6,7 +6,7 @@ further_reading:
       text: 'Using Datadog SDKs with OpenTelemetry'
       tag: 'Documentation'
     - link: '/opentelemetry/setup/ddot_collector/'
-      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT)'
+      text: 'DDOT Collector'
       tag: 'Documentation'
     - link: '/tracing/'
       text: 'Datadog APM'
