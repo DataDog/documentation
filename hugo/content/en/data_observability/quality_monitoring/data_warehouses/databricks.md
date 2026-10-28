@@ -30,7 +30,7 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
 1. Complete the installation instructions in the [Databricks integration documentation][2] using Datadog's integration tile. Take note of the service principal's application ID and save it somewhere safe, because it will be referenced later.
 
-   **Note**: Workspace Admin permissions are not required for Quality Monitoring.
+   **Note**: Workspace Admin permissions are not required for Quality Monitoring. Each Databricks workspace supports one service principal for Data Observability, so you can't assign separate service principals to different monitor types in the same workspace.
 
 2. When configuring the integration, turn on the {{< ui >}}Data Observability{{< /ui >}} toggle.
 3. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
@@ -105,38 +105,28 @@ To create the group and add the service principal:
 
 For more details, see the Databricks documentation on [managing account-level groups][8].
 
-## FAQs
+## Control data access
 
-### Does Datadog extract row-level data from your tables?
+Quality Monitoring sends aggregate metric values to Datadog, not row-level data. Custom SQL monitors are the exception and need careful configuration. For details, see [Data sent to Datadog][9].
 
-No. Quality Monitoring runs aggregate queries in your SQL warehouse, such as `COUNT(*)`, `MAX(<timestamp_column>)`, null counts, and distinct counts. Only the resulting metric values are sent to Datadog.
-
-[Custom SQL monitors][10] are the exception. Because you write the query, you decide what it returns. A Custom SQL query must return a value aliased as `dd_value`, and Datadog stores that value. Queries that do not match this format, such as `SELECT *`, fail validation and are not stored.
-
-If a Custom SQL query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column. Each group is evaluated as a separate series. For example, the following query stores each distinct `region` value alongside its count:
-
-```sql
-SELECT region, COUNT(*) AS dd_value
-FROM <catalog_name>.<schema_name>.orders
-WHERE status = 'FAILED'
-GROUP BY region
-```
-
-If you group by a column that contains sensitive data, such as `email` or `user_id`, those values are sent to Datadog. To avoid this, group only by non-sensitive columns, or apply a column mask so the service principal reads masked values.
-
-### How do you limit what the service principal can read?
+### Limit what the service principal can read
 
 - **Scope the grants**: Use the {{< ui >}}Specific tables{{< /ui >}} option in [Step 2](#step-2---grant-access), or grant access to a dedicated schema only.
-- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][9] to sensitive columns for the Datadog service principal. Freshness and row count checks do not read column values, so they are unaffected. Column-level metrics on masked columns reflect the masked values, not the originals.
+- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][10] to sensitive columns for the Datadog service principal. Freshness and row count checks don't read column values, so masking doesn't affect them. Column-level metrics on masked columns reflect the masked values, not the originals.
 - **Configure only the monitors you need**: Datadog runs column-level queries and Custom SQL queries only for the monitors you configure.
 
-### How do you audit the queries Datadog runs?
+### Audit queries run by Datadog
 
-Every query that the service principal runs is recorded in `system.query.history`. Filter on `executed_by` equal to the service principal's application ID to review them.
+Databricks records every query that the service principal runs in the [query history system table][4] (`system.query.history`). To review them, filter on `executed_by` equal to the service principal's application ID:
 
-### Can a workspace use more than one service principal?
+```sql
+SELECT start_time, statement_text
+FROM system.query.history
+WHERE executed_by = '<application_id>'
+ORDER BY start_time DESC
+```
 
-No. Each Databricks workspace supports one service principal for Data Observability, so you cannot assign separate service principals to different monitor types in the same workspace.
+To see query text in `statement_text`, you must be an account admin or a member of the `databricks_pii_access` group. Otherwise, the column returns `<Redacted>`. For details, see [Step 3](#step-3---grant-access-to-query-text).
 
 ## Next steps
 
@@ -156,5 +146,5 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 [6]: https://docs.databricks.com/api/workspace/queries/list
 [7]: https://docs.databricks.com/aws/en/compute/serverless/
 [8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
-[9]: https://docs.databricks.com/aws/en/tables/row-and-column-filters
-[10]: /monitors/types/data_observability/#select-your-metric-type
+[9]: /data_observability/quality_monitoring/#data-sent-to-datadog
+[10]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks
