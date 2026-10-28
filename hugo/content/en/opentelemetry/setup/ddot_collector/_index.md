@@ -27,11 +27,11 @@ further_reading:
 
 ## Overview
 
-The DDOT Collector is an OpenTelemetry Collector that Datadog builds. It includes a [curated set of OpenTelemetry components](#included-components) and [custom Datadog components](#custom-datadog-components). You deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent.
+The DDOT Collector is an OpenTelemetry Collector that Datadog builds. Deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent.
 
-The DDOT Collector receives OTLP from applications instrumented with the OpenTelemetry SDK or the [DDOT SDK][67].
-
-These docs cover the DDOT Collector on Kubernetes. On other platforms, use the [upstream OpenTelemetry Collector][68] or the [Collector in the Agent][64]. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
+- **Components**: A [curated set of OpenTelemetry components](#included-components) and [custom Datadog components](#custom-datadog-components).
+- **Data it receives**: OTLP from applications instrumented with the OpenTelemetry SDK or the [DDOT SDK][67].
+- **Platforms**: These docs cover the DDOT Collector on Kubernetes. On other platforms, use the [upstream OpenTelemetry Collector][68] or the [Collector in the Agent][64], the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Get started
 

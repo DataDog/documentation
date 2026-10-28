@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Datadog accepts OpenTelemetry traces, metrics, and logs over OTLP. You can send them through a Collector, straight from your applications, or through the Datadog Agent. Each option works with any OpenTelemetry SDK, and only the last one needs the Datadog Agent.
+Choose how to send your OpenTelemetry traces, metrics, and logs to Datadog over OTLP: through a Collector, straight from your applications, or through the Datadog Agent. Each option works with any OpenTelemetry SDK. Only the Datadog Agent option needs the Agent.
 
 To try OpenTelemetry on a test cluster first, see [Getting Started][1].
 
@@ -36,7 +36,7 @@ To try OpenTelemetry on a test cluster first, see [Getting Started][1].
 
 ## DDOT Collector
 
-The DDOT Collector is an OpenTelemetry Collector that Datadog builds. You deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent. You can [add the Datadog Agent][6] later for features that need it.
+The DDOT Collector is an OpenTelemetry Collector that Datadog builds. Deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. The DDOT Collector sends your telemetry to Datadog without the Datadog Agent. You can [add the Datadog Agent][6] later for features that need it.
 
 **Choose the DDOT Collector if** you want a Collector that Datadog builds, and you run Kubernetes.
 
@@ -54,7 +54,7 @@ To get started, see [Set up the OpenTelemetry Collector][3].
 
 Your applications' OpenTelemetry SDKs send OTLP straight to the Datadog intake, with nothing to deploy. Without a Collector or the Agent, you don't get their metadata enrichment, processing, or centralized sampling.
 
-**Choose direct OTLP ingest if** you can't run a Collector, for example on serverless functions or managed platforms.
+**Choose direct OTLP ingest if** you can't run a Collector, such as on serverless functions or managed platforms.
 
 To get started, see [Datadog OTLP intake endpoint][4].
 

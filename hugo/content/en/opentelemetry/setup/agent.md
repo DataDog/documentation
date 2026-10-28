@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-If you run the Datadog Agent, you can send your OpenTelemetry data through it. The Agent adds Datadog features that need it, such as [{{< translate key="integration_count" >}}+ Datadog integrations][1], [Live Container Monitoring][3], [Cloud Network Monitoring][7], and [Universal Service Monitoring][5].
+Send your OpenTelemetry data through the Datadog Agent. The Agent adds Datadog features that need it, such as [{{< translate key="integration_count" >}}+ Datadog integrations][1], [Live Container Monitoring][3], [Cloud Network Monitoring][7], and [Universal Service Monitoring][5].
 
 The Agent handles OpenTelemetry data in two ways:
 
@@ -29,7 +29,7 @@ To send OpenTelemetry data without the Agent, see [Send OpenTelemetry Data to Da
 
 ## OTLP Ingest in the Agent
 
-With OTLP Ingest in the Agent, applications instrumented with OpenTelemetry SDKs send telemetry to the Datadog Agent over OTLP.
+Your applications, instrumented with OpenTelemetry SDKs, send telemetry to the Datadog Agent over OTLP.
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="OpenTelemetry data flowing through the Datadog Agent" style="width:100%;" >}}
 
@@ -44,7 +44,7 @@ With OTLP Ingest in the Agent, applications instrumented with OpenTelemetry SDKs
 
 ## Collector in the Agent
 
-The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. You configure it with standard OpenTelemetry Collector configuration.
+The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Configure it with standard OpenTelemetry Collector configuration.
 
 {{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
 Remote Configuration for the Collector in the Agent is <strong>in Preview</strong>. Use this form to request access.
