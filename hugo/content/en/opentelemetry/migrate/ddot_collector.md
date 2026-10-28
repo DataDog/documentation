@@ -253,7 +253,7 @@ datadog:
 
 ## Configure your application
 
-To send telemetry from your existing application to the Datadog Agent instead of the upstream Collector, set the correct OTLP endpoint hostname. The Datadog Agent with the DDOT Collector runs as a DaemonSet, so your application needs to target the current host.
+To send telemetry from your existing application to the Datadog Agent instead of the upstream Collector, set the correct OTLP endpoint hostname. The Datadog Agent runs as a DaemonSet, so your application needs to target the current host.
 
 1. Go to your application's Deployment manifest file (`deployment.yaml`).
 1. Add following environment variables to configure the OTLP endpoint:
