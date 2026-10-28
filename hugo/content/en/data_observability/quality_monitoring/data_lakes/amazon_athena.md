@@ -74,7 +74,7 @@ Attach the following policy to the Datadog IAM role configured for your AWS inte
    Datadog does not check workgroup names with AWS during setup, so make sure each name matches an existing workgroup.
 7. Repeat steps 5 and 6 for each additional region.
 
-   {{< img src="data_observability/amazon_athena/query-history-configuration.png" alt="Amazon Athena configuration with query history enabled, a region selected, and the required IAM permissions" style="width:100%;" >}}
+   {{< img src="data_observability/amazon_athena/query-history-configuration.png" alt="Amazon Athena configuration with query history enabled, a region selected, and the required IAM permissions." style="width:100%;" >}}
 
 8. Click {{< ui >}}Add Account{{< /ui >}}.
 
