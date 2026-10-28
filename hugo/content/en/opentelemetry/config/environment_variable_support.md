@@ -31,7 +31,7 @@ further_reading:
 
 Datadog SDKs implement the OpenTelemetry APIs for traces, metrics, and logs. This allows you to use standard OpenTelemetry environment variables to configure your application while receiving additional Datadog telemetry with minimal changes to your existing configuration.
 
-This page describes the environment variables Datadog supports for OpenTelemetry interoperability.
+This page describes the environment variables Datadog supports for OpenTelemetry interoperability. They apply to Datadog SDKs in both setups. The OTLP exporter variables set where the SDK sends OTLP: to your Collector with [DDOT setup][18], or to the Datadog Agent for OpenTelemetry metrics and logs in setups that use the Agent.
 
 The precedence rules on this page describe how *Datadog SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
 
@@ -313,3 +313,4 @@ A comma-separated list of paths to extension jar files, or folders containing ja
 [15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
 [16]: /opentelemetry/guide/otlp_delta_temporality/
 [17]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+[18]: /opentelemetry/instrument/dd_sdks/ddot_setup/
