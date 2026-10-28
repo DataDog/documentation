@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Redaction
+title: Redact Sensitive Data
 further_reading:
 - link: /security/ai_guard/setup/
   tag: Documentation

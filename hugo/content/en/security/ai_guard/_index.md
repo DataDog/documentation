@@ -112,7 +112,7 @@ AI Guard detects these attack categories:
 - Indirect prompt injection
 - Jailbreak
 
-The list of attack categories expands as AI Guard adds detections. For the current list with a description of each category, open the AI Guard {{< ui >}}Policies{{< /ui >}} page in Datadog and click {{< ui >}}What does AI Guard detect?{{< /ui >}}
+The list of attack categories expands as AI Guard adds detections. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} page.
 
 ## Integration methods
 

@@ -1,5 +1,5 @@
 ---
-title: AI Guard Security Signals
+title: Triage and Investigate AI Guard Signals
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation

@@ -8824,16 +8824,21 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
-    - name: Policies
+    - name: Manage Policies
       url: /security/ai_guard/policies/
       identifier: ai_guard_policies
       parent: ai_guard
       weight: 3
-    - name: Security Signals
+    - name: Redact Sensitive Data
+      url: /security/ai_guard/setup/sensitive_data_redaction/
+      identifier: ai_guard_sensitive_data_redaction
+      parent: ai_guard
+      weight: 4
+    - name: Triage and Investigate Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 4
+      weight: 5
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
