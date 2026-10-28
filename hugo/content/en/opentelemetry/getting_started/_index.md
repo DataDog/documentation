@@ -22,18 +22,19 @@ further_reading:
 
 ## Overview
 
-Datadog accepts OpenTelemetry traces, metrics, and logs from the OpenTelemetry Collector, from the Datadog Agent, or straight from your applications. Find where you're starting from, then follow the page for your setup.
+Find where you're starting from in the following table, then follow the page for your setup. Datadog accepts OpenTelemetry traces, metrics, and logs from the OpenTelemetry Collector, from the Datadog Agent, or straight from your applications.
 
 ## Where are you starting from?
 
 | You... | Start here |
 |---|---|
-| Are new to OpenTelemetry and have a Kubernetes cluster | [Quickstart: OpenTelemetry on Kubernetes][1]: install OpenTelemetry with an installer script, instrument your application, and see your data in Datadog. |
+| Are new to OpenTelemetry and have a Kubernetes cluster | [Quickstart: OpenTelemetry on Kubernetes][1]: install OpenTelemetry with a script, instrument your application, and see your data in Datadog. |
 | Already use OpenTelemetry SDKs or an OpenTelemetry Collector | [Set Up the OpenTelemetry Collector][2]: send your Collector's data to Datadog over OTLP. |
-| Can't run a Collector, for example on serverless or managed platforms | [Datadog OTLP Intake Endpoint][3]: send data from your applications straight to Datadog. |
-| Already use the Datadog Agent or Datadog SDKs | [OTLP Ingestion by the Datadog Agent][4] to send OpenTelemetry data through your Agent, or [Using Datadog SDKs with OpenTelemetry][5] to instrument with a Datadog SDK. |
+| Can't run a Collector, such as on serverless or managed platforms | [Datadog OTLP Intake Endpoint][3]: send data from your applications straight to Datadog. |
+| Already use the Datadog Agent or Datadog SDKs | [OTLP Ingest in the Agent][4]: send OpenTelemetry data through your Agent.<br>[Using Datadog SDKs with OpenTelemetry][5]: instrument with a Datadog SDK. |
 
-To install for production with your own Helm values, see [Send OpenTelemetry Data to Datadog][6]. To instrument your code, see [Instrument Your Applications][7].
+- To install for production with your own Helm values, see [Send OpenTelemetry Data to Datadog][6].
+- To instrument your code, see [Instrument Your Applications][7].
 
 ## More tutorials
 
