@@ -15,8 +15,8 @@ A holdout sets aside a share of eligible subjects.
 
 These subjects are assigned at random to two groups:
 
-- **Status quo** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
-- **All shipped** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
+- **status-quo** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
+- **all-shipped** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
 
 Holdouts measure the value of the product you ship. Both groups stay on control while covered experiments run, so rejected variants cannot distort the comparison. The result measures the combined impact of changes that remain in the product and continue to affect existing and future users.
 
@@ -24,7 +24,7 @@ The following sections describe holdouts with Datadog Feature Flags. Use a consi
 
 ## Holdout phases
 
-The `all shipped` group, or `winners-only` group, receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
+The all-shipped group receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
 
 Measuring the entire period as one result would mix time spent with some changes and time spent with the full combination. Holdouts separate these periods so you can monitor early results, then measure the complete treatment.
 
@@ -36,7 +36,7 @@ During inclusion, preliminary results give the team an early directional read wi
 
 ### Experiment inclusion phase
 
-During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts. Both holdout groups receive an experiment's control experience while it runs. After a non-control variant rolls out, the `all shipped` group receives that change.
+During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts. Both holdout groups receive an experiment's control experience while it runs. After a non-control variant rolls out, the all-shipped group receives that change.
 
 The inclusion dates also determine which experiments can join a global holdout. Eligible experiments must start during this period and after the holdout is created. These rules do not require every rollout to finish by the inclusion end date. The interval before analysis starts allows time for the remaining rollouts to complete.
 
@@ -44,7 +44,7 @@ A preliminary analysis runs during the inclusion phase. It gives an early direct
 
 ### Analysis phase
 
-The analysis phase starts at or after inclusion phase ends. During the analysis phase, the `all shipped` group should have received all shipped changes. The `status quo` group continues to receive the original experiences. Each subject still sees only the components they use and for which they meet the targeting rules.
+The analysis phase starts at or after inclusion phase ends. During the analysis phase, the all-shipped group should have received all shipped changes. The status-quo group continues to receive the original experiences. Each subject still sees only the components they use and for which they meet the targeting rules.
 
 The primary analysis uses metric data from the analysis phase to measure the combined effect of the shipped changes.
 
@@ -56,7 +56,7 @@ For example, a 10% holdout assigns about 5% of eligible subjects to each group. 
 
 A subject keeps the same group across included experiments. Each experiment's targeting and traffic rules still apply.
 
-Both groups receive control until the experiment's rollout completes. Selecting a winner alone does not change the experience. After a change's rollout completes, only the All shipped group receives it. If control wins, both groups keep control.
+Both groups receive control until the experiment's rollout completes. Selecting a winner alone does not change the experience. After a change's rollout completes, only the all-shipped group receives it. If control wins, both groups keep control.
 
 ## Holdout types
 
@@ -109,7 +109,7 @@ An **exposure record** identifies the experience served to a subject. If the hol
 1. Check whether the experiment belongs to a holdout before [starting it][4]. Start experiments for a global holdout during its inclusion period.
 1. Review each experiment's results and select a winner.
 1. Complete the winner's rollout.
-1. Keep the flags and exposure logging active through the analysis end. The status quo group must keep receiving control.
+1. Keep the flags and exposure logging active through the analysis end. The status-quo group must keep receiving control.
 
 After inclusion ends, you cannot change the included experiments. The holdout continues serving both groups through the analysis period. You also cannot remove a selective experiment after recording its decision.
 
@@ -117,7 +117,7 @@ After inclusion ends, you cannot change the included experiments. The holdout co
 
 As a general principle, count exposure when treatment and control can first give a subject different experiences. Counting subjects before that point includes people whose outcomes the change could not yet affect. This can dilute the measured effect and make a difference harder to detect.
 
-For a holdout, this point is the subject's first interaction with a component tied to a concluded experiment that shipped a non-control variant. Record this exposure for both groups. The All shipped group receives the change, while the Status quo group receives control. A subject does not need to encounter every covered change to enter the analysis.
+For a holdout, this point is the subject's first interaction with a component tied to a concluded experiment that shipped a non-control variant. Record this exposure for both groups. The all-shipped group receives the change, while the status-quo group receives control. A subject does not need to encounter every covered change to enter the analysis.
 
 For example, a subject can open checkout while a covered checkout experiment is still running. Both holdout groups receive the old checkout, so that exposure does not qualify for the primary analysis. After the new checkout rolls out, the subject's next checkout exposure qualifies. The holdout groups can receive different experiences.
 
@@ -148,7 +148,7 @@ Using the first qualifying exposure also gives CUPED the correct point from whic
 
 Use the primary analysis to assess the combined changes during the analysis phase. Preliminary results provide an early directional read and help identify problems during inclusion. They include time before the full treatment is available, so they should not be interpreted as the impact of the complete set of shipped changes.
 
-The scorecard compares All shipped with Status quo. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
+The scorecard compares all-shipped with status-quo. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
 If primary results are empty, check that:
 

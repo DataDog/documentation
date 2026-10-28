@@ -86,7 +86,7 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 
 ## Holdout results
 
-Conceptually, a [holdout][10] is a controlled experiment. The treatment is a combination of shipped changes from covered experiments. The scorecard compares the All shipped treatment group with the Status quo control group. All shipped receives each selected change after its rollout completes. Before then, both groups receive control.
+Conceptually, a [holdout][10] is a controlled experiment. The treatment is a combination of shipped changes from covered experiments. The scorecard compares the all-shipped treatment group with the status-quo control group. The all-shipped group receives each selected change after its rollout completes. Before then, both groups receive control.
 
 The [inclusion phase][12] gives teams time to run experiments and roll out changes. Preliminary results provide an early directional read. They include data from a period when the holdout treatment is still changing and not all changes have shipped. The primary analysis measures metric data from the later analysis phase, when the full treatment should be available. Subjects should enter the primary analysis at their first [qualifying exposure][13] after a non-control variant ships.
 
