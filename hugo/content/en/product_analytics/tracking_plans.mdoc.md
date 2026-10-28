@@ -37,9 +37,11 @@ Agentic Tracking Plans consumes [AI Credits][4].
 Setting up tracking is often slow for both product managers and engineers. Product managers can't see what's already tracked, and engineers get requests without enough context. As a result, features ship without the data to evaluate them. Use Agentic Tracking Plans to:
 
 - **Plan tracking before a launch (recommended)**: Set up tracking before a feature ships so you have complete data from the first day instead of finding gaps after launch.
+- **Get started with Product Analytics**: If your team is setting up Product Analytics for the first time, get a purpose-built set of events and a dashboard that answers your key product questions from the first day.
 - **Fill tracking gaps for an existing feature**: When existing data can't answer your questions, or the feature was never tracked, start from your questions. Bits AI identifies the events and properties that are missing.
 - **Request tracking without waiting on a ticket**: Product managers can see which events already exist and define new ones without filing a ticket and waiting for engineering time.
 - **Give engineers a clear, reviewable request**: Engineers get a specific pull request or ticket that explains which properties matter and why.
+- **Reference events when you build charts**: A tracking plan documents the events and properties for a feature, so you can use it as a reference the next time you build a chart.
 
 ## Key concepts
 
@@ -62,7 +64,7 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 
 {% stepper %}
 {% step title="Start a new tracking plan" %}
-1. In Datadog, go to {% ui %}Product Analytics > Data > Tracking Plans{% /ui %}.
+1. In Datadog, go to [{% ui %}Product Analytics > Data > Tracking Plans{% /ui %}][6].
 2. Click {% ui %}Create Tracking Plan{% /ui %} and enter a name.
 {% /step %}
 {% step title="Provide context about your feature" %}
@@ -78,7 +80,7 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 
 3. (Optional) Link the feature flag that controls the feature. The flag helps Bits AI find the relevant code faster and suggest more accurate tracking events. Click {% ui %}Add a flag{% /ui %}, then select a [Datadog feature flag][5] or a warehouse feature flag. If your flag is not listed, enter the flag name and select {% ui %}Manually Add Key{% /ui %}.
 
-4. (Optional) Link the repository that contains your RUM instrumentation. Bits AI reads your code to understand how the feature works, which improves the quality of the suggested events and properties. Bits AI can identify existing events without this step, but linking the repository produces a more accurate tracking plan.
+4. (Optional, recommended) Link the repository that contains your RUM instrumentation. Bits AI can identify existing events without this step, but reading your code lets it understand how the feature works and tailor the suggested events and properties to your feature's logic. Linking the repository significantly improves the quality of your tracking plan.
 
 5. Click {% ui %}Continue{% /ui %}.
 {% /step %}
@@ -107,7 +109,7 @@ Review the plan before you instrument anything:
 - Check that no proposed property collects personal data or other data you should not collect.
 - Edit names, descriptions, and properties directly in the table, or ask Bits AI in chat to make changes. You can keep using chat after the plan is generated to ask questions and fix problems.
 {% /step %}
-{% step title="Save and instrument" %}
+{% step title="Save, instrument, and verify" %}
 Click {% ui %}Save{% /ui %} to store your latest edits. Then choose how to add the missing events and properties.
 
 **Note**: If your team has policies about AI-authored code changes, agree with your engineers on how Bits Code pull requests are reviewed before you choose {% ui %}Instrument with Bits Code{% /ui %}.
@@ -117,8 +119,7 @@ Click {% ui %}Save{% /ui %} to store your latest edits. Then choose how to add t
 | Instrument with Bits Code | Bits Code writes the instrumentation in your repository and opens a pull request for your team to review. It does not merge anything. | You have Bits Code enabled and your team is comfortable reviewing AI-authored pull requests. |
 | Share with engineering | Share the link to the tracking plan, or create a Jira ticket that carries all of the context, so an engineer can pick it up. | You want engineers to own the implementation, or you do not have Bits Code. |
 | Copy the instrumentation prompt | Copy a ready-made prompt into your own coding agent or IDE assistant. | Your team already uses a coding agent, or you cannot grant Datadog write access to your repository. |
-{% /step %}
-{% step title="Review, merge, and verify" %}
+
 After the instrumentation code is ready, deploy it and confirm that Product Analytics receives the new events:
 
 1. Your engineers review the pull request, request changes if needed, and merge and deploy it.
@@ -141,3 +142,4 @@ Agentic Tracking Plans uses Bits AI. Generating questions and tracking plans con
 [3]: /product_analytics/troubleshooting/
 [4]: /account_management/billing/ai_credits/
 [5]: /feature_flags/
+[6]: https://app.datadoghq.com/product-analytics/tracking-plans
