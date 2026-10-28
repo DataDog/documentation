@@ -154,11 +154,18 @@
   padding: 0;
 }
 
-.schema-table__required {
+.schema-table__required,
+.schema-table__deprecated {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   font-style: italic;
   color: var(--color-text);
+  /* The name group breaks anywhere, so keep the label on one line. */
+  white-space: nowrap;
+}
+
+.schema-table__deprecated {
+  color: var(--color-red);
 }
 
 .schema-table__type {
@@ -177,7 +184,6 @@
 .schema-table__deprecated-label {
   color: var(--color-red);
   font-size: var(--font-size-xs);
-  margin-right: var(--space-xs);
 }
 
 .schema-table__default {
