@@ -25,7 +25,7 @@ Datadog's access management system uses role-based access control, enabling you 
 
 For Datadog Security products, [granular access control][3] is available for [detection rules](#restrict-access-to-detection-rules), [suppressions](#restrict-access-to-suppression-rules), and [dynamic severity rules](#restrict-access-to-dynamic-severity-rules), allowing you to restrict access by teams, roles, or service accounts.
 
-Access to the security data itself is managed separately, with [Data Access Control](#restrict-access-to-security-data).
+To restrict access to the security data itself, use [Data Access Control](#restrict-access-to-security-data).
 
 ## Permissions
 
@@ -61,7 +61,7 @@ Ownership-based access control is in Preview and available upon request.
 
 Ownership-based access control restricts access to security findings based on team membership and requires less configuration than Restricted Datasets. Each user sees findings owned by the [teams][6] they belong to, without requiring a separate dataset for each group of findings.
 
-It is available for **Security Findings**, which covers Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Ownership is determined by the team tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
+Ownership-based access control is available for Security Findings, which covers Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Datadog determines ownership from the team tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
 
 [1]: /account_management/rbac/#role-based-access-control
 [2]: /account_management/rbac/permissions/#cloud-security-platform
