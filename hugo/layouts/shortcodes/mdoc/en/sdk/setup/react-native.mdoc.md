@@ -88,7 +88,7 @@ const config = new DatadogProviderConfiguration(
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
             // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-            // the APM view. Default is 20%).
+            // the APM view. Default is 100%).
             // You need to specify the hosts of your backends to enable tracing with these backends
             resourceTraceSampleRate: 80,
             firstPartyHosts: [
@@ -161,7 +161,7 @@ const config = new DatadogProviderConfiguration(
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
             // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-            // the APM view. Default is 20%).
+            // the APM view. Default is 100%).
             // You need to specify the hosts of your backends to enable tracing with these backends
             resourceTraceSampleRate: 80,
             firstPartyHosts: [
@@ -234,7 +234,7 @@ const config = new DatadogProviderConfiguration(
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
             // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-            // the APM view. Default is 20%).
+            // the APM view. Default is 100%).
             // You need to specify the hosts of your backends to enable tracing with these backends
             resourceTraceSampleRate: 80,
             firstPartyHosts: [
@@ -307,7 +307,7 @@ const config = new DatadogProviderConfiguration(
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
             // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-            // the APM view. Default is 20%).
+            // the APM view. Default is 100%).
             // You need to specify the hosts of your backends to enable tracing with these backends
             resourceTraceSampleRate: 80,
             firstPartyHosts: [
@@ -380,7 +380,7 @@ const config = new DatadogProviderConfiguration(
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
             // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-            // the APM view. Default is 20%).
+            // the APM view. Default is 100%).
             // You need to specify the hosts of your backends to enable tracing with these backends
             resourceTraceSampleRate: 80,
             firstPartyHosts: [
@@ -453,7 +453,7 @@ const config = new DatadogProviderConfiguration(
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
             // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-            // the APM view. Default is 20%).
+            // the APM view. Default is 100%).
             // You need to specify the hosts of your backends to enable tracing with these backends
             resourceTraceSampleRate: 80,
             firstPartyHosts: [
@@ -501,7 +501,13 @@ The `trackingConsent` setting can be one of the following values:
 2. `.GRANTED`: The React Native SDK starts collecting the data and sends it to Datadog.
 3. `.NOTGRANTED`: The React Native SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
 
-To change the tracking consent value after the React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The React Native SDK changes its behavior according to the new value.
+To change the tracking consent value after the React Native SDK is initialized, call `DdSdkReactNative.setTrackingConsent`. The React Native SDK changes its behavior according to the new value.
+
+```javascript
+import { DdSdkReactNative, TrackingConsent } from '@datadog/mobile-react-native';
+
+DdSdkReactNative.setTrackingConsent(TrackingConsent.GRANTED);
+```
 
 For example, if the current tracking consent is `.PENDING`:
 

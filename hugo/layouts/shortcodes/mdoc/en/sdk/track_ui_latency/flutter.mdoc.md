@@ -1,12 +1,29 @@
+## Time to network settled
+
+Time to Network Settled (TNS) is calculated automatically. It measures the time between the start of a view and the completion of all resources that started within 0.1 seconds of the view's start.
+
+To customize the threshold, set `initialResourceThreshold` (in seconds) in your `DatadogRumConfiguration`:
+
+```dart
+final rumConfiguration = DatadogRumConfiguration(
+  applicationId: '<APPLICATION_ID>',
+  initialResourceThreshold: 0.5, // Set threshold to 0.5s
+);
+```
+
+## Interaction to next view
+
+Interaction to Next View (INV) is calculated automatically, starting with Flutter SDK version 2.11.0. It uses the last tap or swipe action in the previous view that occurred within 3 seconds before the current view starts.
+
 ## View loading time
 
 To notify the SDK that your view finished loading, call `addViewLoadingTime` on `DatadogSdk.instance.rum` when your view is fully loaded and ready to display:
 
 ```dart
-DatadogSdk.instance.rum?.addViewLoadingTime(override);
+DatadogSdk.instance.rum?.addViewLoadingTime();
 ```
 
-Use `override` to replace the previously calculated loading time for the current view. This API is experimental and might change.
+To replace the previously calculated loading time for the current view, pass `override: true`. This API is experimental and might change.
 
 ## Custom timings
 
@@ -19,8 +36,6 @@ void _onHeroImageLoaded() {
 ```
 
 To [create a measure](/real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures) from a custom timing in the RUM Explorer, use the `@view.custom_timings.<timing_name>` attribute.
-
-Time to Network Settled and Interaction to Next View aren't available for the Flutter SDK yet.
 
 ## Mobile vitals
 

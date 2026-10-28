@@ -38,7 +38,7 @@ By enriching your RUM data with feature flag data, you can:
 - Correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster
 - Simplify data collection and analysis and focus on troubleshooting
 
-Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, and React Native SDK. You can create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own [custom feature flag management solution](#custom-feature-flag-management).
+Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, React Native, Kotlin Multiplatform, and Unity SDKs. You can create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own [custom feature flag management solution](#custom-feature-flag-management).
 
 Select your SDK for platform-specific instructions.
 
@@ -71,7 +71,7 @@ Select your SDK for platform-specific instructions.
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-{% partial file="sdk/track_feature_flags/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_feature_flags/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
 <!-- C++ -->
@@ -86,7 +86,7 @@ Select your SDK for platform-specific instructions.
 
 <!-- Unity -->
 {% if equals($platform, "unity") %}
-{% partial file="sdk/track_feature_flags/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_feature_flags/unity.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

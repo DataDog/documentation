@@ -1,3 +1,12 @@
+{{- $hasPlatformFilter := false -}}
+{{- with .Page -}}
+    {{- /* Compiled Cdocs pages keep only title and aliases in front matter, so also check for the rendered SDK
+         selector, or an include-markdown wrapper around a Cdocs page. An unused platform parameter is ignored. */ -}}
+    {{- if or (strings.Contains .RawContent `data-filter-id="platform"`) (strings.Contains .RawContent "include-markdown") -}}{{- $hasPlatformFilter = true -}}{{- end -}}
+    {{- range .Params.content_filters -}}
+        {{- if eq (index . "trait_id") "platform" -}}{{- $hasPlatformFilter = true -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,7 +16,31 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <script>
             const redirect_url = '{{ .Permalink | absURL }}'
-            window.location = `${ redirect_url }${ window.location.search }${ window.location.hash }`
+            const params = new URLSearchParams(window.location.search)
+            {{- if $hasPlatformFilter }}
+            // The target page has an SDK selector. Keep the SDK from the old URL (for example
+            // /real_user_monitoring/android/...) so readers don't land on the default SDK.
+            if (!params.has('platform')) {
+                const sdkBySegment = {
+                    'browser': 'browser',
+                    'android': 'android', 'android_tv': 'android', 'androidtv': 'android',
+                    'ios': 'ios', 'tvos': 'ios',
+                    'flutter': 'flutter',
+                    'react_native': 'react_native', 'reactnative': 'react_native', 'react-native': 'react_native', 'expo': 'react_native',
+                    'kotlin_multiplatform': 'kotlin_multiplatform', 'kotlin-multiplatform': 'kotlin_multiplatform',
+                    'cpp': 'cpp',
+                    'roku': 'roku',
+                    'unity': 'unity',
+                    'maui': 'maui'
+                }
+                const segment = window.location.pathname.toLowerCase().split('/').find((s) => sdkBySegment[s])
+                if (segment) {
+                    params.set('platform', sdkBySegment[segment])
+                }
+            }
+            {{- end }}
+            const query = params.toString()
+            window.location = `${ redirect_url }${ query ? `?${ query }` : '' }${ window.location.hash }`
         </script>
         <meta http-equiv="refresh" content="10; url={{ .Permalink | absURL }}" />
     </head>

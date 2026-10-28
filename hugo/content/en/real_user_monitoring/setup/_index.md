@@ -76,11 +76,11 @@ The following table shows which RUM capabilities are supported on each platform:
 | Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | Stop sessions (kiosk monitoring) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
 | Track events in web views |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  |  |
-| Monitor platform-specific vitals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
 | Global context and attribute tracking in logs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} | {{< X >}} |  |
 | Client-side tracing |  | {{< X >}} | {{< X >}} |  |  |  |  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | **Flutter** Session Replay is in Preview. |
-| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | {{< X >}} | Only partially supported for **mobile** and **Roku** applications. |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} | Only partially supported for **mobile** applications. |
 
 ## Supported endpoints for SDK domains
 

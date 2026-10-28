@@ -4,27 +4,38 @@
 
 1. Set up [RUM React Native Monitoring][1].
 
-2. Set the `firstPartyHosts` initialization parameter to define the list of internal, first-party origins called by your React Native application:
+2. In `rumConfiguration`, set `firstPartyHosts` to define the list of internal, first-party origins called by your React Native application. Each entry sets the host to match and the tracing header types to inject:
     ```javascript
     const config = new DatadogProviderConfiguration(
-        // ...
+        '<CLIENT_TOKEN>',
+        '<ENVIRONMENT_NAME>',
+        TrackingConsent.GRANTED,
+        {
+            rumConfiguration: {
+                applicationId: '<APPLICATION_ID>',
+                firstPartyHosts: [
+                    { match: 'example.com', propagatorTypes: [PropagatorType.DATADOG] },
+                    { match: 'api.yourdomain.com', propagatorTypes: [PropagatorType.DATADOG] }
+                ]
+            }
+        }
     );
-    config.firstPartyHosts = ["example.com", "api.yourdomain.com"];
     ```
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
+3. _(Optional)_ In `rumConfiguration`, set `resourceTraceSampleRate` to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
      To keep 20% of backend traces:
     ```javascript
-    const config = new DatadogProviderConfiguration(
-        // ...
-    );
-    config.resourceTracingSamplingRate = 20;
+    rumConfiguration: {
+        applicationId: '<APPLICATION_ID>',
+        firstPartyHosts: [/* ... */],
+        resourceTraceSampleRate: 20
+    }
     ```
 
-    **Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+    **Note**: `resourceTraceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 ### Verifying setup
 
@@ -39,16 +50,16 @@
 
 2. Configure the RUM SDK with the list of internal, first-party origins and the tracing header type to use as follows:
     ```javascript
-    const config = new DatadogProviderConfiguration(
-        // ...
-    );
-    config.firstPartyHosts = [{
-        match: "example.com",
-        propagatorTypes: [
-            PropagatorType.TRACECONTEXT,
-            PropagatorType.DATADOG
-        ]
-    }];
+    rumConfiguration: {
+        applicationId: '<APPLICATION_ID>',
+        firstPartyHosts: [{
+            match: 'example.com',
+            propagatorTypes: [
+                PropagatorType.TRACECONTEXT,
+                PropagatorType.DATADOG
+            ]
+        }]
+    }
     ```
 
     `PropagatorType` is an enum representing the following tracing header types:

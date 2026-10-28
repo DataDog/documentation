@@ -39,19 +39,19 @@ Select your SDK for platform-specific setup instructions.
 <!-- React Native -->
 
 {% if equals($platform, "react_native") %}
-{% partial file="sdk/track_app_startups/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/react_native.mdoc.md" /%}
 {% /if %}
 
 <!-- Kotlin Multiplatform -->
 
 {% if equals($platform, "kotlin_multiplatform") %}
-{% partial file="sdk/track_app_startups/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
 <!-- C / C++ -->
 
 {% if equals($platform, "cpp") %}
-{% partial file="sdk/track_app_startups/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/cpp.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

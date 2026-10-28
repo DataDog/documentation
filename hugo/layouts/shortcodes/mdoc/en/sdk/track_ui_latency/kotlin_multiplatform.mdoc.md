@@ -1,3 +1,16 @@
+## View loading time
+
+To notify the SDK that your view finished loading, call `addViewLoadingTime` through `GlobalRumMonitor.get()` when your view is fully loaded and displayed:
+
+```kotlin
+@OptIn(ExperimentalRumApi::class)
+fun onViewLoaded() {
+    GlobalRumMonitor.get().addViewLoadingTime(overwrite = false)
+}
+```
+
+Set `overwrite` to `true` to replace the previously calculated loading time for the current view. Call this method only once per view. This API is marked `@ExperimentalRumApi` and might change.
+
 ## Custom timings
 
 To measure how long a specific part of your app takes, such as a hero image appearing, use `addTiming`:
@@ -30,6 +43,19 @@ val rumConfig = RumConfiguration.Builder(applicationId)
   .build()
 ```
 
-View loading time, Time to Network Settled, Interaction to Next View, and mobile vitals aren't available for the Kotlin Multiplatform SDK yet.
+## Mobile vitals
+
+The underlying Android and iOS SDKs collect mobile vitals, such as refresh rate, CPU usage, and memory usage. For the vitals collected on each platform, see mobile vitals for [Android](/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals) and [iOS](/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals).
+
+To change how often mobile vitals are collected, use `setVitalsUpdateFrequency`:
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+  // …
+  .setVitalsUpdateFrequency(VitalsUpdateFrequency.AVERAGE)
+  .build()
+```
+
+Available values are `FREQUENT`, `AVERAGE`, `RARE`, and `NEVER`.
 
 [1]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures

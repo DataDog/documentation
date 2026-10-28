@@ -207,7 +207,7 @@ Connecting RUM and traces may significantly increase the APM-ingested volumes. U
 | --- | ------- |
 | Browser, Android, Kotlin Multiplatform | `traceSampleRate` |
 | iOS | `sampleRate` |
-| React Native | `resourceTracingSamplingRate` |
+| React Native | `resourceTraceSampleRate` |
 | Unity | {% ui %}Tracing Sampling Rate{% /ui %} |
 
 Configuring cross-product retention filters may also increase the APM-indexed volumes. Use the retention rate of the cross-product retention filters to control the share of the backend traces to index.

@@ -72,7 +72,7 @@ Select your SDK for platform-specific setup instructions.
 <!-- C / C++ -->
 
 {% if equals($platform, "cpp") %}
-{% partial file="sdk/track_ui_latency/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_ui_latency/cpp.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->
