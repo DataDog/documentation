@@ -107,7 +107,7 @@ For more details, see the Databricks documentation on [managing account-level gr
 
 ## Control data access
 
-Quality Monitoring sends aggregate metric values to Datadog, not row-level data. Custom SQL monitors are the exception: Datadog stores the `dd_value` result and the value of each grouped column. For details, see [Data sent to Datadog][9].
+Quality Monitoring sends aggregate metric values to Datadog, not row-level data. Custom SQL monitors are the exception and need careful configuration. For details, see [Data sent to Datadog][9].
 
 ### Limit what the service principal can read
 
