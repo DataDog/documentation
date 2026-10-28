@@ -362,7 +362,7 @@ When you schedule a new [monitor downtime][30] by monitor tags, Datadog checks f
 
 1. On the card, click {{< ui >}}Preview SLO Correction{{< /ui >}}. The correction form opens with {{< ui >}}By Tags{{< /ui >}} selected, the downtime's monitor tags as the query, and the downtime's schedule and message filled in.
 2. Review the query and the SLOs that match it, select a {{< ui >}}Category{{< /ui >}}, and click {{< ui >}}Apply{{< /ui >}}.
-3. Save the downtime. Datadog creates the SLO correction when you save the downtime.
+3. Save the downtime. Datadog creates the SLO correction.
 
 **Note**: The card does not appear when you edit an existing downtime.
 
