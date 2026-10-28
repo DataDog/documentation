@@ -2,7 +2,7 @@
 title: Use DDOT SDKs
 description: Instrument Java, Python, Node.js, and .NET applications on Kubernetes with DDOT SDKs, which the OpenTelemetry Operator injects into your pods.
 further_reading:
-    - link: '/opentelemetry/setup/ddot_collector/kubernetes/'
+    - link: '/opentelemetry/setup/ddot_collector/install/kubernetes_standalone/'
       text: 'Install the DDOT Collector on Kubernetes'
       tag: 'Documentation'
     - link: '/opentelemetry/compatibility/'
@@ -164,7 +164,7 @@ The DDOT SDK sends your telemetry to your Collector without the Datadog Agent. S
 
 To use those features:
 
-1. Install the Agent. See [Add the Datadog Agent (optional)][11] on the DDOT Collector page.
+1. Install the Agent. See the Datadog Agent section of [Install the DDOT Collector on Kubernetes][11].
 2. Point the DDOT SDK at the Agent: **[Placeholder: the `DD_AGENT_HOST` value and the Agent settings the DDOT SDK needs]**. Add the variables to the `env` list in `ddot-sdks.yaml`, apply the file, and restart your Deployment.
 
 The DDOT SDK keeps sending your telemetry as OTLP to your Collector.
@@ -205,7 +205,7 @@ The SDK sends to the Datadog Agent instead of your Collector
   Check that `OTEL_TRACES_EXPORTER` is `otlp`. In Java, also check that `DD_TRACE_OTEL_ENABLED` is `true`. Without it, the Java SDK ignores the `OTEL_*` variables. In .NET, check that `OTEL_EXPORTER_OTLP_PROTOCOL` is `http/protobuf` or `http/json`. With any other value, the .NET SDK sends traces to the Agent. The .NET setting `DD_OPENTELEMETRY_ENABLED` doesn't turn on OpenTelemetry mode.
 
 No data in Datadog
-: Check that your Collector is running and exporting without errors. See the Troubleshooting section of [Install the DDOT Collector on Kubernetes][6].
+: Check that your Collector is running and exporting without errors. See [OpenTelemetry Troubleshooting][18].
 
 ## Remove the DDOT SDK
 
@@ -239,15 +239,16 @@ kubectl delete -n <NAMESPACE> -f ddot-sdks.yaml
 [3]: /opentelemetry/instrument/dd_sdks/api_support/
 [4]: /opentelemetry/getting_started/kubernetes/?tab=ddot
 [5]: #verify
-[6]: /opentelemetry/setup/ddot_collector/kubernetes/
+[6]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
 [7]: /opentelemetry/setup/collector_exporter/
 [8]: https://app.datadoghq.com/software
 [9]: https://app.datadoghq.com/apm/traces
 [10]: https://app.datadoghq.com/logs
-[11]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+[11]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
 [12]: /tracing/trace_collection/dd_libraries/go/
 [13]: /opentelemetry/compatibility/
 [14]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [15]: /opentelemetry/config/environment_variable_support/
 [16]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
 [17]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces
+[18]: /opentelemetry/troubleshooting/
