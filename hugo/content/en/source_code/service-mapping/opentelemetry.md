@@ -78,7 +78,7 @@ If your SDK supports declarative configuration but you configure it with environ
 
 1. Check that your SDK supports declarative configuration in the [OpenTelemetry compliance matrix][7]. Support is experimental in some SDKs.
 1. Follow the OpenTelemetry [migration instructions][8]. The migration configuration file maps the environment variables you already use to the configuration file format.
-1. [Add the Git information to your configuration file](#add-the-git-information-to-your-configuration-file-recommended).
+1. Add the Git information to your [configuration file](#add-the-git-information-to-your-configuration-file-recommended).
 
 ### If you can't use a configuration file
 

@@ -24,9 +24,9 @@ You can associate your APM [spans][3] with Git data to link a running applicatio
 
 ## Embed Git information in your build artifacts
 
-You can embed a repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add tags to your APM service telemetry.
+You can embed a repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add tags to your APM service telemetry. For [OpenTelemetry SDKs][5], set Git information as resource attributes.
 
-Select one of the following languages that support embedding Git information:
+Select one of the following SDK options that support embedding Git information:
 
 {{< card-grid >}}
   {{< image-card href="/source_code/service-mapping/dotnet/" src="integrations_logos/dotnet-core.png" alt=".NET" tooltip=".NET" >}}
@@ -39,6 +39,10 @@ Select one of the following languages that support embedding Git information:
   {{< image-card href="/source_code/service-mapping/opentelemetry/" src="integrations_logos/otel.png" alt="OpenTelemetry" tooltip="OpenTelemetry SDKs" >}}
   {{< image-card href="/source_code/service-mapping/other/" title="Other Languages" tooltip="Other Languages" >}}
 {{< /card-grid >}}
+
+### Embed Git information with OpenTelemetry SDKs
+
+If you instrument your services with an OpenTelemetry SDK instead of a Datadog SDK, the steps are the same for every language. Set the Git information as the `vcs.repository.url.full` and `vcs.ref.head.revision` OpenTelemetry resource attributes. For instructions, see [Embed Git Information with OpenTelemetry SDKs][5].
 
 ## Build inside a Docker container
 
