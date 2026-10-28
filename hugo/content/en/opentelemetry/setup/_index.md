@@ -63,11 +63,11 @@ To get started, see [Send OpenTelemetry data through the Datadog Agent][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/getting_started/kubernetes/
-[2]: /opentelemetry/setup/ddot_collector/kubernetes/
+[2]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
 [3]: /opentelemetry/setup/collector_exporter/
 [4]: /opentelemetry/setup/otlp_ingest/
 [5]: /opentelemetry/setup/agent/
-[6]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+[6]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
 [7]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [8]: /opentelemetry/setup/otlp_ingest_in_the_agent/
 [9]: /opentelemetry/setup/ddot_collector/install/

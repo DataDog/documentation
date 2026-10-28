@@ -89,7 +89,7 @@ Replace the placeholders:
 | `DD_API_KEY` | Your Datadog API key. |
 | `DD_SITE` | The domain of your [Datadog site][6]. For {{< region-param key=dd_datacenter code="true" >}}, it's {{< region-param key="dd_site" code="true" >}}. |
 | `K8S_CLUSTER_TYPE` | `eks`, `gcp`, `aks`, or `other`. For `eks`, `gcp`, and `aks`, the Collectors detect the cluster name, so you can leave out `K8S_CLUSTER_NAME`. |
-| `K8S_CLUSTER_NAME` | Set it when `K8S_CLUSTER_TYPE` is `other`. A name for your cluster, in lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer and, with `other`, in each node's hostname. |
+| `K8S_CLUSTER_NAME` | Set it when `K8S_CLUSTER_TYPE` is `other`. A name for your cluster, in lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer. |
 | `DEPLOYMENT_ENVIRONMENT_NAME` | The `env` tag for all your data, such as `staging`, in lowercase letters, numbers, and hyphens. If you leave it out, the installer uses `production`. |
 
 ## 3. Run the installer
@@ -130,7 +130,7 @@ Data appears within a few minutes. `<SERVICE_NAME>` is your Deployment's name, u
 | Services | [Software Catalog][9]: set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][10]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Traces you can open to see their spans. |
 | Logs | [Log Explorer][15]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Your application's logs. |
-| Hosts | [Host List][11] | Your nodes. With `K8S_CLUSTER_TYPE=other`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`. For other cluster types, see [Hostnames and Tagging][23]. |
+| Hosts | [Host List][11] | Your nodes. For how Datadog names them, see [Hostnames and Tagging][23]. |
 | Kubernetes | [Kubernetes Explorer][13]: filter by your cluster name. | Your pods, Deployments, and nodes. |
 | Metrics | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `kube_cluster_name:<CLUSTER_NAME>` on the DDOT path, or `k8s.cluster.name:<CLUSTER_NAME>` on the Upstream path. | Node CPU usage for your cluster. |
 
@@ -207,7 +207,7 @@ The installer applies your file on top of its own values files. For what you can
 [16]: /opentelemetry/troubleshooting/
 [17]: /opentelemetry/setup/collector_exporter/
 [18]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
-[19]: /opentelemetry/setup/ddot_collector/kubernetes/
+[19]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
 [20]: /opentelemetry/setup/collector_exporter/?tab=kubernetes
 [21]: /opentelemetry/setup/otlp_ingest/
 [22]: /opentelemetry/setup/agent/
