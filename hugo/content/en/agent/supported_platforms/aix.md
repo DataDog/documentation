@@ -53,7 +53,7 @@ See [Supported Platforms][5] for the complete list of supported AIX versions.
 
 To install the Agent on AIX, follow the [in-app instructions in Fleet Automation][6], and run the generated script on your hosts.
 
-{{< img src="/agent/basic_agent_usage/aix_img2_july_25.png" alt="The Datadog Agent installation step for AIX hosts." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/aix_agent7_install.png" alt="In-app installation steps for the Datadog Agent on an AIX host." style="width:90%;">}}
 
 ## Commands
 
