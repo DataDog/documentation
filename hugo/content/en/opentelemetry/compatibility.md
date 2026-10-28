@@ -113,6 +113,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
   - **Exception**: Support for some languages, such as Python, requires both the Datadog SDK and the OpenTelemetry SDK to be installed.
   - Always follow the specific [language-specific instrumentation documentation][8] to ensure you are using the correct and supported setup.
 - **Avoid Agent and separate Collector on same host**: Do not run the Datadog Agent and a separate OpenTelemetry Collector on the same host, as this may cause issues. However, you can run Agents and Collectors on different hosts within the same fleet.
+  - **Exception**: You can run the Datadog Agent on the same nodes as the DDOT Collector. See [Add the Datadog Agent][47].
 
 ## Further reading
 
@@ -164,3 +165,4 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [44]: /opentelemetry/guide/instrument_unsupported_runtimes
 [45]: https://opentelemetry.io/community/
 [46]: /containers/
+[47]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional

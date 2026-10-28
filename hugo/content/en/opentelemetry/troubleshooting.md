@@ -18,6 +18,8 @@ When using OpenTelemetry with Datadog, you might encounter various hostname-rela
 
 **Cause**: This is typically the result of missing `k8s.node.name` (and optionally `k8s.cluster.name`) tags.
 
+When telemetry has both `k8s.node.name` and `k8s.cluster.name`, Datadog names the host `<NODE_NAME>-<CLUSTER_NAME>`. That's expected, not an error.
+
 **Resolution**:
 
 1. Configure the `k8s.pod.ip` attribute for your application deployment: 

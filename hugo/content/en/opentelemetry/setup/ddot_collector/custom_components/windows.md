@@ -6,7 +6,7 @@ code_lang_weight: 3
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/windows"
   tag: "Documentation"
-  text: "Install the DDOT Collector on Windows"
+  text: "Set Up the Collector in the Datadog Agent on Windows"
 ---
 
 This guide explains how to build a DDOT Collector OCI package with additional OpenTelemetry components not included in the default DDOT Collector, for use on Windows bare-metal hosts. To see a list of components already included in the DDOT Collector by default, see [Included components][1].

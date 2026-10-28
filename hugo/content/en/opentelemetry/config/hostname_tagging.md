@@ -47,7 +47,7 @@ The rest of the configuration depends on whether the DDOT Collector runs on a ho
 
 #### Host-based deployments
 
-This applies to the DDOT Collector as a [Kubernetes DaemonSet][9] and on [Linux][14] and [Windows][15] hosts.
+This applies when the DDOT Collector runs inside the Datadog Agent: as a [Kubernetes DaemonSet][9] and on [Linux][14] and [Windows][15] hosts.
 
 Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent hostname. A single node then appears as two hosts. To use the Agent hostname instead, enable `allow_hostname_override`:
 
@@ -58,6 +58,12 @@ processors:
 ```
 
 Add `infraattributes` to each pipeline's `processors` list if it isn't there already. DDOT automatically adds its own copy to pipelines that don't list the processor, and that copy uses the default settings.
+
+#### Kubernetes deployments without the Datadog Agent
+
+This applies to the DDOT Collector on Kubernetes when it runs without the Datadog Agent.
+
+On nodes without cloud provider metadata, such as k3s, kind, or bare metal, the Collector can't detect a hostname. Its pod exits with `unable to reliably determine the host name`. Set the `DD_HOSTNAME` environment variable to `<NODE_NAME>-<CLUSTER_NAME>`. Datadog uses the same name for the node's Kubernetes metrics, so each node appears as one host. For the configuration, see [Install the DDOT Collector on Kubernetes][25].
 
 #### Fargate sidecar deployments
 
@@ -76,7 +82,7 @@ Run one Collector on each host or Kubernetes node, and send telemetry to the Col
 
 - **Hosts and VMs**: The `resource_detection` processor with the `system` detector. On a cloud provider, add its detector.
 - **Docker**: The Collector cannot detect the host from inside its container. Set `host.name` in the Collector's `OTEL_RESOURCE_ATTRIBUTES` environment variable.
-- **Kubernetes**: The `k8s_attributes` and `resource_detection` processors. On non-cloud Kubernetes, set `k8s.node.name` in the Collector's `OTEL_RESOURCE_ATTRIBUTES` environment variable. On cloud Kubernetes, use the detector for your cloud provider instead of the environment variable.
+- **Kubernetes**: The `k8s_attributes` and `resource_detection` processors. On non-cloud Kubernetes, set `k8s.node.name` in the Collector's `OTEL_RESOURCE_ATTRIBUTES` environment variable. On cloud Kubernetes, use the detector for your cloud provider instead of the environment variable. If the telemetry also has `k8s.cluster.name`, Datadog names the host `<NODE_NAME>-<CLUSTER_NAME>`.
 
 To add host detection to a Collector configuration that doesn't include it, see [Configure hostname processors in the Collector](#collector-configuration).
 
@@ -206,7 +212,7 @@ processors:
 
 These examples use the [OpenTelemetry Collector Helm chart][101].
 
-Add the following to `values.yaml`. The service account and cluster role give the `k8s_attributes` processor read access to pod metadata. On non-cloud Kubernetes, `OTEL_RESOURCE_ATTRIBUTES` sets the node name as the host. The Helm chart sets `OTEL_K8S_NODE_NAME`.
+Add the following to `values.yaml`. The service account and cluster role give the `k8s_attributes` processor read access to pod metadata. On non-cloud Kubernetes, `OTEL_RESOURCE_ATTRIBUTES` sets the node name, which Datadog uses for the host. If the telemetry also has `k8s.cluster.name`, the host is `<NODE_NAME>-<CLUSTER_NAME>`. The Helm chart sets `OTEL_K8S_NODE_NAME`.
 
 ```yaml
 extraEnvs:
@@ -615,3 +621,4 @@ processors:
 [21]: /opentelemetry/setup/collector_exporter/
 [22]: /opentelemetry/setup/otlp_ingest/
 [24]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[25]: /opentelemetry/setup/ddot_collector/kubernetes/

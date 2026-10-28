@@ -697,6 +697,11 @@ menu:
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
+    - name: Quickstart on Kubernetes
+      url: /opentelemetry/getting_started/kubernetes/
+      parent: otel_guides_getting_started
+      weight: 100
+      identifier: otel_guides_getting_started_kubernetes
     - name: Datadog Example Application
       url: /opentelemetry/getting_started/datadog_example
       parent: otel_guides_getting_started
@@ -752,27 +757,22 @@ menu:
       url: /opentelemetry/setup/
       parent: opentelemetry_top_level
       weight: 4
-    - name: DDOT Collector (Recommended)
+    - name: DDOT Collector
       url: /opentelemetry/setup/ddot_collector
       identifier: otel-setup-ddot
       parent: otel_collect
       weight: 401
-    - name: Install the DDOT Collector
-      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
-      identifier: otel-setup-ddot-install
+    - name: Install on Kubernetes
+      url: /opentelemetry/setup/ddot_collector/kubernetes/
+      identifier: otel-setup-ddot-kubernetes
       parent: otel-setup-ddot
       weight: 4011
-    - name: Use Custom OTel Components
-      url: /opentelemetry/setup/ddot_collector/custom_components
-      identifier: otel-setup-ddot-custom
+    - name: Add the Datadog Agent (optional)
+      url: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+      identifier: otel-setup-ddot-add-agent
       parent: otel-setup-ddot
       weight: 4012
-    - name: Migrate to the DDOT Collector
-      url: /opentelemetry/migrate/ddot_collector
-      identifier: otel-setup-ddot-migrate
-      parent: otel-setup-ddot
-      weight: 4013
-    - name: OpenTelemetry Collector
+    - name: Upstream OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
       parent: otel_collect
@@ -797,16 +797,16 @@ menu:
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
       weight: 40215
-    - name: OTLP Ingest in the Agent
-      url: /opentelemetry/setup/otlp_ingest_in_the_agent
-      identifier: otel-setup-otlp-ingest
-      parent: otel_collect
-      weight: 403
+    - name: Datadog Exporter
+      url: /opentelemetry/setup/collector_exporter/datadog_exporter/
+      identifier: otel-setup-datadog-exporter
+      parent: otel-setup-collector-exporter
+      weight: 40216
     - name: Direct OTLP Ingest
       url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
-      weight: 404
+      weight: 403
     - name: Traces Endpoint
       url: /opentelemetry/setup/otlp_ingest/traces
       parent: otel-setup-intake-endpoint
@@ -832,6 +832,31 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40234
       identifier: otel_setup_serverless
+    - name: Datadog Agent
+      url: /opentelemetry/setup/agent/
+      identifier: otel-setup-agent
+      parent: otel_collect
+      weight: 404
+    - name: OTLP Ingest in the Agent
+      url: /opentelemetry/setup/otlp_ingest_in_the_agent
+      identifier: otel-setup-otlp-ingest
+      parent: otel-setup-agent
+      weight: 4041
+    - name: Collector in the Agent
+      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
+      identifier: otel-setup-ddot-install
+      parent: otel-setup-agent
+      weight: 4042
+    - name: Use Custom OTel Components
+      url: /opentelemetry/setup/ddot_collector/custom_components
+      identifier: otel-setup-ddot-custom
+      parent: otel-setup-agent
+      weight: 4043
+    - name: Migrate to the Collector in the Agent
+      url: /opentelemetry/migrate/ddot_collector
+      identifier: otel-setup-ddot-migrate
+      parent: otel-setup-agent
+      weight: 4044
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -997,11 +1022,6 @@ menu:
       parent: otel_guides
       weight: 1001
       identifier: otel_guides_otlp_delta_temporality
-    - name: Visualize Histograms as Heatmaps
-      url: /opentelemetry/guide/otlp_histogram_heatmaps
-      parent: otel_guides
-      weight: 1002
-      identifier: otel_guides_otlp_histogram_heatmaps
     - name: Instrument Unsupported Runtimes
       url: /opentelemetry/guide/instrument_unsupported_runtimes
       parent: otel_guides
@@ -1027,7 +1047,7 @@ menu:
       parent: otel_guides_migration
       weight: 10033
       identifier: otel_guides_migration_operation_names
-    - name: Agent with DDOT Collector
+    - name: Migrate to the Collector in the Agent
       url: /opentelemetry/migrate/ddot_collector/
       parent: otel_guides_migration
       weight: 10034
