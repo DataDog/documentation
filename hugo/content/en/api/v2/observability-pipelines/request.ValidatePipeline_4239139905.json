@@ -1,0 +1,56 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "pipeline_type": "metrics",
+        "destinations": [
+          {
+            "id": "datadog-metrics-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_metrics"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "*",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "enrichment-table-processor",
+                "include": "*",
+                "type": "enrichment_table",
+                "reference_table": {
+                  "table_id": "metric-enrichment",
+                  "key": {
+                    "source": {
+                      "type": "metric_name"
+                    }
+                  },
+                  "columns": [
+                    "environment",
+                    "team"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Metrics Pipeline with Enrichment Table Reference Table"
+    },
+    "type": "pipelines"
+  }
+}

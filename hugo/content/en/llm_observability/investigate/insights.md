@@ -1,0 +1,78 @@
+---
+title: Insights
+description: Agent Observability Insights identifies recurring cost and reliability problems in existing traces and recommends fixes.
+further_reading:
+- link: "/llm_observability/investigate/cost/"
+  tag: "Documentation"
+  text: "Monitor LLM costs"
+- link: "/llm_observability/investigate/evaluations/"
+  tag: "Documentation"
+  text: "Evaluate your LLM applications"
+- link: "/llm_observability/build_with_ai/mcp_server/"
+  tag: "Documentation"
+  text: "Connect AI agents to Agent Observability"
+---
+
+## Overview
+
+Agent Observability Insights automatically analyzes the traces Agent Observability receives from your application to find recurring cost and reliability problems. Use Insights to prioritize what to fix without reviewing traces one at a time.
+
+Each insight includes:
+
+- A root cause that describes the recurring behavior
+- An impact assessment based on affected calls or sessions
+- Trace and span evidence that supports the finding
+- A recommended fix and a way to validate it
+
+<div class="alert alert-info">Insights require no additional configuration. Datadog analyzes traces that your application already sent to Agent Observability.</div>
+
+## How Insights works
+
+Datadog analyzes recent traces across multiple calls or sessions to identify recurring cost and reliability problems. It checks for expected behavior, such as successful retries or long responses required by the task.
+
+Datadog groups findings with the same root cause into one insight. Later analyses update the Insight and automatically resolve it when the problem no longer appears. If the problem returns, Datadog surfaces it again.
+
+### Insight types
+
+| Category | Insight type | What it identifies |
+|---|---|---|
+| Cost | Inefficient prompt caching | Reusable prompt content that misses the provider cache and increases input token cost. |
+| Cost | Large tool results | Tool results that add unnecessary content to later model requests and increase token use or context pressure. |
+| Cost | Verbose model output | Model responses or reasoning that use more output tokens than the task requires. |
+| Reliability | Tool call retry loops | Repeated calls to the same tool that use nearly identical arguments and do not make progress. |
+| Reliability | Prompt rule violations | Agent behavior that breaks an explicit rule in a prompt, skill, or tool description. |
+
+## Understand impact and evidence
+
+Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem.
+
+Open the linked traces and spans to compare the evidence with the stated root cause. The investigation trail shows the steps and supporting evidence that produced the finding.
+
+## Review and act on insights
+
+1. In Datadog, go to [**AI Observability > Agent Observability > Insights**][1].
+2. Use the overview and filters to prioritize insights by application, type, severity, status, or impact.
+3. Open an insight to review the finding.
+4. Apply and validate the recommended fix. You can use **Fix with Bits** or an MCP-compatible coding agent. With Work Management read and write access, you can also create or link a Jira ticket or Linear issue.
+5. Set the status to **For Review**, **In Progress**, **Completed**, or **Ignored** to record your decision. Datadog sets the status to **Automatically Resolved** when later analysis no longer finds the problem.
+
+Insights appear on an application's overview page. Cost Insights also appear on the **Cost** page next to the related spend.
+
+## Use Insights with a coding agent
+
+Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent can retrieve an insight's root cause, evidence, recommended fix, and validation guidance to implement and test a change.
+
+### Automate insight reviews and fixes
+
+Set up a recurring workflow in your coding agent to review and fix insights. For example:
+
+```text
+Use Datadog MCP to list Agent Observability insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity. For each Insight, review the evidence, implement and validate the recommended fix, and update the insight status based on the result.
+```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/llm/insights
+[2]: /llm_observability/build_with_ai/mcp_server/

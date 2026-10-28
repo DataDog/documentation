@@ -46,11 +46,19 @@ Credentials and account authentication that you set up in the following Datadog 
 
 Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
+For the GitHub integration, you can use credentials from the integration tile or authenticate with an installation of your own GitHub App. To use your own app, set up a [GitHub App connection][16].
+
 If the integration you need to set up is not listed above, set up connection credentials.
 
 ## Connection credentials
 
-Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
+Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate:
+
+- A [generic action][8]
+- Actions as your own [GitHub App](#github-app-connection)
+- Any action for which the integration tile does not offer authentication
+
+For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -92,7 +100,7 @@ Alternatively, add a connection from a workflow or app page:
 1. Navigate to the [Workflow Automation list][1].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential. The right side panel populates with the action details.
-1. Under the {{< ui >}}Configure{{< /ui >}} tab, look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}+{{< /ui >}} icon.
+1. Under the {{< ui >}}Configure{{< /ui >}} tab, look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}\+{{< /ui >}} icon.
 1. In the {{< ui >}}New Connection{{< /ui >}} dialog box, name the connection and enter the required authentication details.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
@@ -104,7 +112,7 @@ Alternatively, add a connection from a workflow or app page:
 1. Select the app containing the action you need to add a credential to. The app canvas appears.
 1. Click {{< ui >}}Edit{{< /ui >}} in the upper right.
 1. Under {{< ui >}}Data{{< /ui >}} on the left-hand side, click the action to which you need to add a credential. The left side panel populates with the action details.
-1. Look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}+{{< /ui >}} icon.
+1. Look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}\+{{< /ui >}} icon.
 1. In the {{< ui >}}New Connection{{< /ui >}} dialog box, name the connection and enter the required authentication details.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
@@ -139,6 +147,10 @@ To learn how to restrict connection use, see Access and Authentication for [Work
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see the [HTTP action][10].
 
+## GitHub App connection
+
+To authenticate actions as an installation of your own GitHub App, use the GitHub App credential type for a GitHub connection. For setup instructions, see [GitHub App][16].
+
 ## Connection identifier tags
 
 You can add identifier tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
@@ -169,7 +181,7 @@ To create a connection group:
 
 1. Navigate to the [connections list][3].
 1. On the left, click {{< ui >}}Groups{{< /ui >}}.
-1. Click {{< ui >}}+ New Group{{< /ui >}}, then select an integration.
+1. Click {{< ui >}}\+ New Group{{< /ui >}}, then select an integration.
 1. Enter a group name, then enter a set of up to three {{< ui >}}Identifier Tags{{< /ui >}} that the connections you want to include in your group all have.
 1. Under {{< ui >}}Confirm Group{{< /ui >}}, use the checkboxes to select the specific members of your group.
 1. Click {{< ui >}}Next, Confirm Access{{< /ui >}}, then choose your desired access level for the group.
@@ -221,3 +233,4 @@ To delete a connection group:
 [13]: /getting_started/tagging/
 [14]: https://app.datadoghq.com/app-builder/
 [15]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-connection
+[16]: /actions/connections/github_app/

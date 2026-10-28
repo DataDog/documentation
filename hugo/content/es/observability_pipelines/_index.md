@@ -1,23 +1,23 @@
 ---
-description: Aprenda cómo Observability Pipelines le permite recopilar, procesar y
-  enrutar registros, métricas y trazas dentro de su propia infraestructura hacia destinos
+description: Descubra cómo Observability Pipelines le permite recopilar, procesar
+  y enrutar registros y métricas dentro de su propia infraestructura hacia destinos
   como Datadog, Amazon S3, Splunk y Microsoft Sentinel.
 disable_toc: false
 further_reading:
 - link: /observability_pipelines/configuration/explore_templates/
-  tag: Documentación
+  tag: documentación
   text: Configure Pipelines
 - link: /observability_pipelines/configuration/set_up_pipelines/
-  tag: Documentación
+  tag: documentación
   text: Explore casos de uso y plantillas
 - link: /observability_pipelines/configuration/install_the_worker/
-  tag: Documentación
+  tag: documentación
   text: Instale el Observability Pipelines Worker
 - link: /agent/configuration/dual-shipping/#yaml-configuration
-  tag: Documentación
+  tag: documentación
   text: Envío dual con Observability Pipelines
 - link: /observability_pipelines/guide/strategies_for_reducing_log_volume/
-  tag: Documentación
+  tag: documentación
   text: Estrategias para reducir el volumen de registros
 - link: https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines
   tag: Centro de aprendizaje
@@ -31,59 +31,59 @@ further_reading:
   text: Envíe datos de OTel desde aplicaciones de IA a ClickHouse y Datadog usando
     Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/
-  tag: Blog
+  tag: blog
   text: Redacte datos confidenciales de sus registros de forma local usando Observability
     Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/
-  tag: Blog
+  tag: blog
   text: Envío dual de registros con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/
-  tag: Blog
+  tag: blog
   text: Controle sus volúmenes de registros con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-archiving/
-  tag: Blog
+  tag: blog
   text: Archive sus registros con Observability Pipelines para una migración sencilla
     y asequible a Datadog
 - link: https://www.datadoghq.com/blog/observability-pipelines/
-  tag: Blog
+  tag: blog
   text: Agregue, procese y enrute registros fácilmente con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-stream-logs-in-ocsf-format/
-  tag: Blog
+  tag: blog
   text: Transmita registros en formato OCSF a sus proveedores de seguridad o lagos
     de datos preferidos con Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-route-logs-microsoft-sentinel/
-  tag: Blog
+  tag: blog
   text: Simplifique su migración de SIEM a Microsoft Sentinel con Datadog Observability
     Pipelines
 - link: https://www.datadoghq.com/blog/sled-observability-pipelines/
-  tag: Blog
+  tag: blog
   text: Cómo las organizaciones estatales, locales y educativas pueden gestionar registros
     de manera flexible y eficiente usando Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/optimize-high-volume-logs/
-  tag: Blog
+  tag: blog
   text: Cómo optimizar datos de registro de alto volumen sin comprometer la visibilidad
 - link: https://www.datadoghq.com/blog/archive-search/
-  tag: Blog
+  tag: blog
   text: Busque en sus registros históricos de manera más eficiente con Datadog Archive
     Search
 - link: https://www.datadoghq.com/blog/introducing-datadog-cloudprem/
-  tag: Blog
+  tag: blog
   text: Almacene y busque registros a escala de petabytes en su propia infraestructura
     con Datadog BYOC Logs
 - link: https://www.datadoghq.com/blog/manage-high-volume-logs-with-observability-pipeline-packs/
-  tag: Blog
+  tag: blog
   text: Controle los costos de registros en cualquier SIEM o lago de datos utilizando
     Packs con Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-otel-cost-control/
-  tag: Blog
+  tag: blog
   text: Utilice OpenTelemetry con Observability Pipelines para la recopilación de
     registros y el control de costos neutrales respecto al proveedor
 - link: https://www.datadoghq.com/blog/observability-pipelines-mssp
-  tag: Blog
+  tag: blog
   text: Simplifique la recopilación y agregación de registros para MSSP con Datadog
     Observability Pipelines
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
-  tag: Blog
+  tag: blog
   text: Administre el volumen de métricas y las etiquetas en su entorno con Observability
     Pipelines
 title: Observability Pipelines
@@ -92,7 +92,7 @@ title: Observability Pipelines
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="Un gráfico que muestra datos siendo agregados desde una variedad de fuentes, procesados y enriquecidos por el Observability Pipelines Worker en su propio entorno, y luego siendo dirigidos a los destinos de seguridad, análisis y almacenamiento de su elección" style="width:100%;" >}}
 
-Datadog Observability Pipelines le permite recopilar y procesar {{< tooltip text="logs, metrics, and traces" tooltip="Comuníquese con su gerente de cuenta para analizar los casos de uso y los precios." >}} dentro de su propia infraestructura, y luego dirija los datos a diferentes destinos. Le brinda control sobre sus datos de observabilidad antes de que salgan de su entorno.
+Datadog Observability Pipelines le permite recopilar y procesar registros y métricas dentro de su propia infraestructura, y luego enrutar los datos a diferentes destinos. Le brinda control sobre sus datos de observabilidad antes de que salgan de su entorno.
 
 Con plantillas listas para usar, puede crear canalizaciones que redacten datos confidenciales, enriquezcan datos, filtren eventos ruidosos y dirijan datos a destinos como Datadog, herramientas SIEM o almacenamiento en la nube.
 
@@ -136,7 +136,7 @@ Observability Pipelines incluye plantillas predefinidas para flujos de trabajo c
 ### Plantillas {#templates}
 
 {{< tabs >}}
-{{% tab "Logs" %}}
+{{% tab "Registros" %}}
 
 | Plantilla | Descripción |
 |----------|-------------|
@@ -154,13 +154,6 @@ Observability Pipelines incluye plantillas predefinidas para flujos de trabajo c
 | Plantilla | Descripción |
 |----------|-------------|
 | Gobernanza de etiquetas de métricas | Administre la calidad y el volumen de sus métricas conservando solo las que necesita, estandarizando el etiquetado de métricas y eliminando etiquetas no deseadas para evitar una alta cardinalidad. |
-
-{{% /tab %}}
-{{% tab "Trazas" %}}
-
-| Plantilla | Descripción |
-|----------|-------------|
-| Muestreo de trazas | Ingeste, procese y enrute trazas para controlar los costos mientras conserva las trazas que necesita para la resolución de problemas y el análisis. |
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -2,6 +2,9 @@
 description: CloudFormation을 사용하여 Amazon Web Services 계정을 Datadog에 통합합니다. IAM 역할을
   설정하고, 서비스 통합을 활성화하고, 로그 포워딩을 구성하세요.
 further_reading:
+- link: https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/
+  tag: 아키텍처 센터
+  text: 100개 이상의 AWS 계정을 Datadog과 통합하기 위한 가이드
 - link: https://www.datadoghq.com/blog/aws-monitoring/
   tag: 블로그
   text: AWS 모니터링을 위한 핵심 메트릭
@@ -29,6 +32,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: 블로그
   text: Datadog으로 Graviton3 기반 EC2 인스턴스 모니터링
+- link: https://learn.datadoghq.com/courses/getting-started-with-the-datadog-aws-integration
+  tag: 학습 센터
+  text: Datadog AWS 통합 시작 안내
 title: AWS로 시작
 ---
 ## 개요 {#overview}
@@ -39,7 +45,7 @@ title: AWS로 시작
 
 시작하기 전에 [AWS][7] 계정이 있는지 확인하시기 바랍니다. CloudFormation 템플릿은 IAM 역할과 관련 정책을 생성하여 Datadog의 AWS 계정이 귀하의 AWS 계정에 대한 API 호출을 수행하여 데이터를 수집하고 전송할 수 있도록 합니다. AWS 사용자가 템플릿을 실행하려면 다음 IAM 권한을 보유해야 합니다.
 
-{{% collapse-content title="필수 IAM 권한" level="h4" expanded=false id="iam-permissions" %}}
+{{% collapse-content title="필수 IAM 권한" level="h3" expanded=false id="iam-permissions" %}}
 - cloudformation:CreateStack
 - cloudformation:CreateUploadBucket
 - cloudformation:DeleteStack
@@ -138,6 +144,23 @@ Datadog은 통합이 활성화되기 전의 과거 메트릭 데이터를 다시
 사용 가능한 하위 통합의 전체 목록은 [통합 페이지][13]를 참조하세요. 이러한 통합 중 많은 부분은 Datadog이 AWS 계정에서 들어오는 데이터를 인식할 때 기본적으로 설치됩니다.
 
 [AWS 통합 페이지][8]의 {{< ui >}}Metric Collection{{< /ui >}} 탭을 사용하여 Datadog 통합이 메트릭을 수집하는 서비스를 구성하세요.
+
+### 메트릭 이름으로 메트릭 필터링 {#filter-metrics-by-metric-name}
+
+[AWS 통합 페이지][8]의 {{< ui >}}Metric Collection{{< /ui >}} 탭을 사용하여 네임스페이스별로 CloudWatch 메트릭을 필터링하십시오. CloudWatch 메트릭 수집 표에서 네임스페이스를 확장하고 **포함** 또는 **제외** 필터를 선택하십시오:
+
+- **포함**: 해당 네임스페이스에 대해 구성된 패턴과 일치하는 Datadog 메트릭 이름만 수집하십시오.
+- **제외**: 구성된 패턴과 일치하는 메트릭을 제외하고 해당 네임스페이스의 모든 Datadog 메트릭 이름을 수집하십시오.
+
+각 네임스페이스는 한 번에 하나의 필터 모드만 사용할 수 있습니다. 필터 패턴은 소문자, 숫자, `.`, `_` 및 `*`를 지원합니다. 예를 들어, `aws.ec2.network_*`은(는) EC2 네트워크 메트릭과 일치합니다. 변경 사항을 저장하기 전에 표에서 각 패턴과 일치하는 메트릭 수를 미리 볼 수 있습니다.
+
+메트릭 이름 필터는 네임스페이스별로 적용되며, 해당 네임스페이스의 메트릭 수집이 활성화된 후에 평가됩니다.
+
+<div class="alert alert-info">
+메트릭 이름 필터는 다음을 제거할 수 없습니다. <code>aws.ec2.cpuutilization</code> 또는 <code>aws.lambda.invocations</code>. Datadog은 항상 이러한 필수 메트릭을 수집합니다.
+</div>
+
+프로그래밍 방식으로 메트릭 이름 필터를 관리하려면 [API를 사용하여 AWS 메트릭 이름 필터 구성][61]을 참조하십시오.
 
 ### 리전 추가 {#add-regions}
 
@@ -294,3 +317,4 @@ AWS Lambda 함수를 Datadog으로 모니터링하려면 [Serverless][42]를 참
 [58]: /ko/integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
 [60]: /ko/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[61]: /ko/integrations/guide/aws-metric-name-filters/

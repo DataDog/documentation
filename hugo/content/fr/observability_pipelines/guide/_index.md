@@ -9,6 +9,7 @@ title: Guides sur Observability Pipelines
     {{< nextlink href="observability_pipelines/guide/strategies_for_reducing_log_volume" >}}Stratégies pour réduire le volume de logs{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/environment_variables" >}}Variables d'environnement pour les sources, les processeurs et les destinations{{< /nextlink >}}
     {{< nextlink href="/byoc-logs/guides/send_otel_logs_observability_pipelines" >}}Envoyer des logs OpenTelemetry vers BYOC Logs avec Observability Pipelines{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/guide/manage_pipelines_with_terraform_and_api" >}}Gérez les Observability Pipelines avec l’API ou Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guides de mise à niveau du Worker" >}}

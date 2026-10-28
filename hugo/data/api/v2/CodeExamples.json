@@ -264,6 +264,18 @@
       "description": "Edit an AuthN Mapping returns \"OK\" response"
     }
   ],
+  "SubmitCILog": [
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_4195490686",
+      "description": "Send batched CI job logs returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_1818302850",
+      "description": "Send one CI job log returns \"Request accepted for processing\" response"
+    }
+  ],
   "AggregateCIAppPipelineEvents": [
     {
       "group": "ci_visibility_pipelines",
@@ -357,7 +369,7 @@
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Workload Protection policy returns \"OK\" response"
+      "description": "Create a Workload Protection policy returns \"Created\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -594,27 +606,6 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
-  "ListDORADeployments": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1654201709",
-      "description": "Get a list of deployment events returns deployments with date-time timestamps"
-    }
-  ],
-  "CreateDORADeployment": [
-    {
-      "group": "dora_metrics",
-      "suffix": "",
-      "description": "Send a deployment event returns \"OK\" response"
-    }
-  ],
-  "CreateDORAIncident": [
-    {
-      "group": "dora_metrics",
-      "suffix": "_1101664022",
-      "description": "Send a failure event returns \"OK\" response"
-    }
-  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -667,6 +658,27 @@
       "description": "Edit a dataset returns \"OK\" response"
     }
   ],
+  "ListDORADeployments": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
+  "CreateDORADeployment": [
+    {
+      "group": "delivery_performance",
+      "suffix": "",
+      "description": "Send a deployment event returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "delivery_performance",
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
+    }
+  ],
   "CreateDeploymentGate": [
     {
       "group": "deployment_gates",
@@ -679,6 +691,16 @@
       "group": "deployment_gates",
       "suffix": "",
       "description": "Create deployment rule returns \"OK\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_2423265690",
+      "description": "Create monitor deployment rule with monitor IDs returns \"OK\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_4286388136",
+      "description": "Create monitor deployment rule with query returns \"OK\" response"
     }
   ],
   "TriggerDeploymentGatesEvaluation": [
@@ -782,6 +804,111 @@
       "description": "Update an execution policy returns \"OK\" response"
     }
   ],
+  "CancelExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
+    }
+  ],
+  "CreateExperimentMetricGroup": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment metric group returns \"Created\" response"
+    }
+  ],
+  "CreateExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment protocol returns \"Created\" response"
+    }
+  ],
+  "CreateExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment returns \"Created\" response"
+    }
+  ],
+  "CreateMetricCollection": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create metric collection returns \"Created\" response"
+    }
+  ],
+  "CreateMetric": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create metric returns \"Created\" response"
+    }
+  ],
+  "CreateSubjectType": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create subject type returns \"Created\" response"
+    }
+  ],
+  "PatchExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Patch experiment returns \"OK\" response"
+    }
+  ],
+  "PatchSubjectType": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Patch subject type returns \"OK\" response"
+    }
+  ],
+  "ReplaceExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
+  "UpdateExperimentAnalysisPlanAttributes": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment analysis plan attributes returns \"OK\" response"
+    }
+  ],
+  "UpdateExperimentMetricGroup": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "PatchExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment protocol returns \"OK\" response"
+    }
+  ],
+  "UpdateMetricCollection": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update metric collection returns \"OK\" response"
+    }
+  ],
+  "UpdateMetric": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update metric returns \"OK\" response"
+    }
+  ],
   "CreateFastlyAccount": [
     {
       "group": "fastly_integration",
@@ -801,11 +928,6 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create a feature flag returns \"Created\" response"
-    },
-    {
-      "group": "feature_flags",
-      "suffix": "_2426084719",
-      "description": "Create a feature flag with notification rule targets returns \"Created\" response"
     }
   ],
   "CreateAllocationsForFeatureFlagInEnvironment": [
@@ -820,6 +942,53 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create an environment returns \"Created\" response"
+    }
+  ],
+  "UpdateSavedFilterAttributes": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3817543566",
+      "description": "Patch a saved filter accepts the current timestamp for metadata"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2658080376",
+      "description": "Patch a saved filter accepts the current timestamp for rules"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_4162852827",
+      "description": "Patch a saved filter clears the description with an empty string"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_3212710506",
+      "description": "Patch a saved filter preserves a null description"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_1937053112",
+      "description": "Patch a saved filter replaces rules and preserves metadata"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_727520235",
+      "description": "Patch a saved filter replaces the rules of a saved list"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Patch a saved filter returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_1194333410",
+      "description": "Patch a saved filter updates metadata and rules together"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_281483245",
+      "description": "Patch a saved filter updates only the description of a saved list"
     }
   ],
   "UpdateFeatureFlag": [
@@ -908,6 +1077,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_2882283621",
+      "description": "Create a new entry for your service account with org folder resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_130557025",
       "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
     },
@@ -932,6 +1106,11 @@
       "group": "gcp_integration",
       "suffix": "_3205636354",
       "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4285997499",
+      "description": "Update STS Service Account returns \"OK\" response with org folder resource collection enabled"
     }
   ],
   "CreateOrganizationHandle": [
@@ -1151,6 +1330,11 @@
       "group": "logs",
       "suffix": "_3138392594",
       "description": "Search logs returns \"OK\" response with pagination"
+    },
+    {
+      "group": "logs",
+      "suffix": "_2789021011",
+      "description": "Search logs with a page limit above 1000 returns \"OK\" response"
     }
   ],
   "SubmitLog": [
@@ -1161,8 +1345,18 @@
     },
     {
       "group": "logs",
+      "suffix": "_1695361854",
+      "description": "Send deflate logs with explicit compression returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_3804768803",
+      "description": "Send gzip logs with explicit compression returns \"Request accepted for processing (always 202 empty JSON).\" response"
     },
     {
       "group": "logs",
@@ -1287,6 +1481,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Configure tags for multiple metrics returns \"Accepted\" response"
+    }
+  ],
+  "CreateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a derived metric returns \"Created\" response"
     }
   ],
   "CreateTagConfiguration": [
@@ -1531,6 +1732,13 @@
       "description": "Timeseries cross product query with spans data source returns \"OK\" response"
     }
   ],
+  "UpdateDerivedMetric": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a derived metric returns \"OK\" response"
+    }
+  ],
   "UpdateTagConfiguration": [
     {
       "group": "metrics",
@@ -1579,6 +1787,11 @@
     }
   ],
   "CreateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "_1934105875",
+      "description": "Create a downtime duration monitor configuration policy returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "",
@@ -1705,6 +1918,16 @@
   "ValidatePipeline": [
     {
       "group": "observability_pipelines",
+      "suffix": "_1795564228",
+      "description": "Validate a metrics pipeline with enrichment table processor file lookup returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_4239139905",
+      "description": "Validate a metrics pipeline with enrichment table processor reference table returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_884022323",
       "description": "Validate a metrics pipeline with opentelemetry source returns \"OK\" response"
     },
@@ -1770,6 +1993,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3116312807",
+      "description": "Validate an observability pipeline with Splunk TCP source max_connection_duration_secs returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_99164570",
       "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
     },
@@ -1800,6 +2028,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3666485614",
+      "description": "Validate an observability pipeline with spike protection processor returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3654691150",
+      "description": "Validate an observability pipeline with spike protection processor threshold overrides returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_337125830",
       "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
@@ -1825,11 +2063,23 @@
       "description": "Create On-Call escalation policy returns \"Created\" response"
     }
   ],
+  "CreateScheduleOverrides": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call schedule overrides returns \"Created\" response"
+    }
+  ],
   "CreateOnCallSchedule": [
     {
       "group": "on-call",
       "suffix": "",
       "description": "Create On-Call schedule returns \"Created\" response"
+    },
+    {
+      "group": "on-call",
+      "suffix": "_2169247120",
+      "description": "Create additive On-Call schedule returns \"Created\" response"
     }
   ],
   "CreateUserNotificationChannel": [
@@ -1934,12 +2184,17 @@
     {
       "group": "rum",
       "suffix": "",
-      "description": "Create a new RUM application returns \"OK\" response"
+      "description": "Create a new RUM application returns \"Created\" response"
     },
     {
       "group": "rum",
-      "suffix": "_1946294560",
-      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
+      "suffix": "_4210432830",
+      "description": "Create a new RUM application with Product Scales returns \"Created\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_3241419056",
+      "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -2078,6 +2333,25 @@
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
+  "CreateSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Add resources to a batch migration returns \"Created\" response"
+    }
+  ],
+  "UpdateFindingsSeverity": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_412359663",
+      "description": "Apply a severity override to security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1312693410",
+      "description": "Clear the severity override of security findings returns \"Accepted\" response"
+    }
+  ],
   "AttachJiraIssue": [
     {
       "group": "security_monitoring",
@@ -2154,6 +2428,13 @@
       "description": "Create Jira issues for security findings returns \"Created\" response"
     }
   ],
+  "CreateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a batch migration returns \"Created\" response"
+    }
+  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -2199,11 +2480,6 @@
       "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "_914562040",
-      "description": "Create a detection rule with type 'signal_correlation' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -2296,6 +2572,13 @@
       "description": "Create a ticket creation rule returns \"Successfully created the ticket creation rule\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create an inbox rule returns \"Successfully created the inbox rule\" response"
+    }
+  ],
   "CreateCases": [
     {
       "group": "security_monitoring",
@@ -2320,6 +2603,13 @@
       "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
+  "DeleteSecurityMonitoringBatchMigrationResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Delete resources from a batch migration returns \"No Content\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
@@ -2335,6 +2625,11 @@
     }
   ],
   "SearchSecurityMonitoringSignals": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a list of security signals returns \"OK\" response"
+    },
     {
       "group": "security_monitoring",
       "suffix": "_1309350146",
@@ -2386,6 +2681,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Reorder due date rules returns \"Successfully reordered the due date rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationInboxRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder inbox rules returns \"Successfully reordered the inbox rules\" response"
     }
   ],
   "ReorderSecurityFindingsAutomationMuteRules": [
@@ -2440,6 +2742,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Test a rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigrationResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration resource returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringBatchMigration": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a batch migration returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -2508,6 +2824,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a ticket creation rule returns \"Successfully updated the ticket creation rule\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update an inbox rule returns \"Successfully updated the inbox rule\" response"
     }
   ],
   "UpdateResourceEvaluationFilters": [
@@ -2848,7 +3171,7 @@
     {
       "group": "teams",
       "suffix": "",
-      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
+      "description": "Link teams with external teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [

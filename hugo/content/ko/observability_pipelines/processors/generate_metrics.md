@@ -1,4 +1,6 @@
 ---
+description: 쿼리와 일치하는 로그에서 카운트, 게이지 또는 분포 메트릭을 생성하기 위해 Generate Metrics 프로세서를 사용하는
+  방법을 알아보십시오.
 disable_toc: false
 products:
 - icon: logs

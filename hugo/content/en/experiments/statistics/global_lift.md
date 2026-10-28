@@ -6,15 +6,18 @@ aliases:
   - /experiments/global_lift
   - /experiments/global_lift/
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
-  tag: "Blog"
-  text: "Make data-driven design decisions with Product Analytics"
 - link: "/experiments/reading_results/"
   tag: "Documentation"
   text: "Reading Experiment Results"
 - link: "/experiments/defining_metrics/"
   tag: "Documentation"
   text: "Create Experiment Metrics"
+- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
+  tag: "Blog"
+  text: "Make data-driven design decisions with Product Analytics"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
 ---
 
 ## Overview

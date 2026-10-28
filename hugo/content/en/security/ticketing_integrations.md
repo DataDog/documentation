@@ -24,7 +24,7 @@ further_reading:
     text: "Assignee Management"
   - link: "/incident_response/work_management/"
     tag: "Documentation"
-    text: "Case Management"
+    text: "Work Management"
   - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
     tag: "API"
     text: "Ticketing integration API"
@@ -37,16 +37,16 @@ aliases:
 
 {{< product-availability >}}
 
-You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2], [ServiceNow][21], and [Linear][23]. For details, see [Case Management integration with third-party ticketing tools][3].
+You can use [Datadog Work Management][1] to manage tickets in third-party tools like [Jira][2], [ServiceNow][21], and [Linear][23]. For details, see [Work Management integration with third-party ticketing tools][3].
 
-This page discusses using Datadog Security with Datadog Case Management for ticketing management.
+This page discusses using Datadog Security with Datadog Work Management for ticketing management.
 
 To assign a Datadog user to a finding without creating a ticket, see [Assignee Management][30].
 
 
-## Case management and security products
+## Work Management and security products
 
-Case Management is supported for all security products that use signals or findings:
+Work Management is supported for all security products that use signals or findings:
 
 - Code Security (in [Findings][5])
 - Cloud Security (in [Findings][11])
@@ -96,22 +96,22 @@ The following steps set up bidirectional syncing with Jira and verify that setup
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog Jira integration][2].
-   2. A [webhook for the Jira integration][8]. Configuring a webhook enables cases created in Case Management to automatically create issues in Jira and keep both resources synced.
-   3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
+   2. A [webhook for the Jira integration][8]. Configuring a webhook enables cases created in Work Management to automatically create issues in Jira and keep both resources synced.
+   3. A [new Work Management project][9]. A project is a container object that holds a set of cases.
    4. The [Jira integration is configured within the project][3].
-      1. Enable the {{< ui >}}Sync data between Case Management and Jira{{< /ui >}} option.
+      1. Enable the {{< ui >}}Sync data between Work Management and Jira{{< /ui >}} option.
       2. In {{< ui >}}Title{{< /ui >}}, select {{< ui >}}Two-way sync{{< /ui >}}.
       3. Complete the remaining settings, and then click {{< ui >}}Save changes{{< /ui >}}.
-2. Verify that bidirectional Case Management integration with Jira is working:
+2. Verify that bidirectional Work Management integration with Jira is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}Jira{{< /ui >}}. The button opens a {{< ui >}}Jira Ticket{{< /ui >}} modal.
-   3. Verify that the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
+   3. Verify that the {{< ui >}}Work Management  ↔ Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
 
 {{< img src="security/jira_modal-1.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
-You are ready to start creating bidirectional Case Management tickets.
+You are ready to start creating bidirectional Work Management tickets.
 
-If you do not see the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section, verify that you have completed the prerequisites.
+If you do not see the {{< ui >}}Work Management  ↔ Jira Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
 [2]: /integrations/jira/
 [3]: /incident_response/work_management/notifications_integrations/#third-party-tickets
@@ -127,20 +127,20 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog ServiceNow integration][21].
-      1. Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}ServiceNow{{< /ui >}} > {{< ui >}}Case Management{{< /ui >}}.
+      1. Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}ServiceNow{{< /ui >}} > {{< ui >}}Work Management{{< /ui >}}.
       2. Choose `Datadog Cases ITSM` as the case table for bidirectional sync. 
-   2. A [Case Management project][9] to link to your assignment group. A project is a container object that holds a set of cases linked to your ServiceNow table. If there is no linked project, Datadog creates a project when you create a ticket.
+   2. A [Work Management project][9] to link to your assignment group. A project is a container object that holds a set of cases linked to your ServiceNow table. If there is no linked project, Datadog creates a project when you create a ticket.
    3. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
-2. Verify that bidirectional Case Management integration with ServiceNow is working:
+2. Verify that bidirectional Work Management integration with ServiceNow is working:
    1. Open [any product supporting bidirectional ticket syncing][20].     
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}ServiceNow{{< /ui >}}. The button opens a {{< ui >}}ServiceNow Ticket{{< /ui >}} modal.
    3. Verify that the bidirectional sync is enabled for the configured {{< ui >}}Instance{{< /ui >}} and {{< ui >}}Assignment Group{{< /ui >}}.
 
 {{< img src="security/servicenow_modal.png" alt="Modal used to create a ServiceNow ticket for a Security finding, with two-way sync and statuses mapping enabled." responsive="true" style="width:50%;">}}
 
-You are ready to start creating bidirectional Case Management tickets.
+You are ready to start creating bidirectional Work Management tickets.
 
-If you do not see the {{< ui >}}Case Management ↔ ServiceNow Integration{{< /ui >}} section, verify that you have completed the prerequisites.
+If you do not see the {{< ui >}}Work Management ↔ ServiceNow Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
 [3]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/work_management/projects/
@@ -159,22 +159,22 @@ The following steps set up bidirectional syncing with Linear and verify that set
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog Linear integration][23].
-   2. A [webhook for the Linear integration][24]. Configuring a webhook keeps cases created in Case Management and their Linear issues synced.
-   3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
+   2. A [webhook for the Linear integration][24]. Configuring a webhook keeps cases created in Work Management and their Linear issues synced.
+   3. A [new Work Management project][9]. A project is a container object that holds a set of cases.
    4. The [Linear integration is configured within the project][3].
       1. Enable Linear for the project, and then select a Linear account and team for issue creation.
       2. For each field you want to keep synced, select {{< ui >}}Two-way sync{{< /ui >}}.
       3. Complete the remaining settings, and then save your changes.
-2. Verify that bidirectional Case Management integration with Linear is working:
+2. Verify that bidirectional Work Management integration with Linear is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}Linear{{< /ui >}}. The button opens a {{< ui >}}Linear Issue{{< /ui >}} modal.
-   3. Verify that the {{< ui >}}Case Management ↔ Linear Integration{{< /ui >}} section exists and bidirectional sync is enabled.
+   3. Verify that the {{< ui >}}Work Management ↔ Linear Integration{{< /ui >}} section exists and bidirectional sync is enabled.
 
 {{< img src="security/linear_modal.png" alt="Modal used to create a Linear issue for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
-You are ready to start creating bidirectional Case Management tickets.
+You are ready to start creating bidirectional Work Management tickets.
 
-If you do not see the {{< ui >}}Case Management ↔ Linear Integration{{< /ui >}} section, verify that you have completed the prerequisites.
+If you do not see the {{< ui >}}Work Management ↔ Linear Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
@@ -204,7 +204,7 @@ The following steps create a bidirectional ticket for a Security finding.
    3. {{< ui >}}Jira work type{{< /ui >}}:** select the Jira work type to create.
    4. {{< ui >}}Assignee and Priority{{< /ui >}}:** optionally select the assigned user and priority.
 3. To add more fields to the Jira ticket Datadog creates, use {{< ui >}}Add Optional Field{{< /ui >}} to add the fields.
-4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Case Management Project linked and the bidirectional sync settings per field.
+4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Work Management Project linked and the bidirectional sync settings per field.
 5. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**:
@@ -219,7 +219,7 @@ The following steps create a bidirectional ticket for a Security finding.
 3. If you are creating a ticket for multiple findings, choose a creation mode:
    - {{< ui >}}Single Ticket{{< /ui >}}:** creates a single aggregated ticket linked to all selected findings.
    - {{< ui >}}Multiple Tickets{{< /ui >}}:** creates an individual ticket for each selected finding.
-4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Case Management Project linked and the bidirectional sync settings per field.
+4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Work Management Project linked and the bidirectional sync settings per field.
 5. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**:
@@ -237,7 +237,7 @@ The following steps create a bidirectional ticket for a Security finding.
    1. {{< ui >}}Linear account{{< /ui >}}:** select the Linear account where you want the issue created.
    2. {{< ui >}}Linear team{{< /ui >}}:** select the Linear team to create the issue in.
 3. Optionally set a Linear project, labels, assignee, and priority.
-4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Case Management Project linked and the bidirectional sync settings per field.
+4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Work Management Project linked and the bidirectional sync settings per field.
 5. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**:
@@ -245,9 +245,9 @@ The following steps create a bidirectional ticket for a Security finding.
 - To use an existing issue, provide the Linear issue URL.
 {{% /collapse-content %}}
 
-### Manage bidirectional Case Management tickets
+### Manage bidirectional Work Management tickets
 
-**Note**: For help resolving bidirectional sync issues, see [Case Management troubleshooting][24].
+**Note**: For help resolving bidirectional sync issues, see [Work Management troubleshooting][24].
 
 {{< tabs >}}
 
@@ -267,7 +267,7 @@ Details such as assignee and status are provided along with a timeline of the Ji
 
 Closed Jira tickets are green.
 
-In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Work Management][1].
 
 [1]: /incident_response/work_management/
 {{% /tab %}}
@@ -282,7 +282,7 @@ Hover over the ServiceNow ticket to see its details, including status and a time
 
 {{< img src="security/bidir-servicenow-existing-hover.png" alt="Tooltip over a ServiceNow ticket pill showing the incident number, status, and a timeline of changes synced between ServiceNow and Datadog." responsive="true" style="width:100%;">}}
 
-In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Work Management][1].
 
 [1]: /incident_response/case_management/
 {{% /tab %}}
@@ -300,7 +300,7 @@ Hover over the Linear issue to see its details, including status, assignee, and 
 
 {{< img src="security/bidir-linear-existing-hover.png" alt="Tooltip over a Linear issue pill showing issue status, assignee, and a timeline of changes synced between Linear and Datadog." responsive="true" style="width:100%;">}}
 
-In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Work Management][1].
 
 [1]: /incident_response/work_management/
 {{% /tab %}}
@@ -316,9 +316,9 @@ Detaching a ticket from a Security finding does not delete it.
 If there are no open findings left attached to a ticket (because they are all detached or resolved or muted), it is automatically closed.
 Similarly, if at least one open finding is attached to a closed ticket (because it was attached or detected again or unmuted), it is automatically reopened.
 
-### Bidirectional Case Management facets
+### Bidirectional Work Management facets
 
-There are several case management facets under {{< ui >}}Triage{{< /ui >}}, including:
+There are several Work Management facets under {{< ui >}}Triage{{< /ui >}}, including:
 
 - Case Key
 - Jira Key

@@ -25,7 +25,18 @@ Antes de configurar el destino, necesita implementar un clúster de BYOC Logs. A
 
 Configure el destino de BYOC Logs cuando [configure un pipeline][4]. Puede configurar una canalización en la [interfaz de usuario][1], utilizando la [API][5] o con [Terraform][6]. Los pasos de esta sección se configuran en la interfaz de usuario.
 
-### Almacenamiento en búfer opcional {#optional-buffering}
+### Configuración opcional {#optional-settings}
+
+#### Habilitar TLS {#enable-tls}
+
+<div class="alert alert-danger">Para la administración de secretos: solo ingrese los identificadores de la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
+
+{{% observability_pipelines/tls_settings %}}
+- (Opcional) Ingrese el nombre del servidor para la verificación del certificado TLS.
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+#### Almacenamiento en búfer {#buffering}
 
 Después de seleccionar el destino de BYOC Logs en la interfaz de usuario del pipeline, puede configurar el almacenamiento en búfer.
 
@@ -46,6 +57,8 @@ Después de seleccionar el destino de BYOC Logs en la interfaz de usuario del pi
 		- Defina la URL del clúster, como `http://byoc-logs.acme.internal:7280`. **Nota**: La URL debe incluir el puerto.
 		- El Worker añade `/api/v2/logs` y `/api/v1/validate` a la URL del punto de conexión, por lo que estos puntos de conexión deben estar permitidos si utiliza reglas de reenvío o de firewall.
 	- El identificador predeterminado es `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+- Identificador de frase de contraseña TLS de BYOC Logs (cuando TLS está habilitado):
+	- El identificador predeterminado es `DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}
 
@@ -57,6 +70,8 @@ Después de seleccionar el destino de BYOC Logs en la interfaz de usuario del pi
 	- Observability Pipelines envía logs al punto de conexión de ingesta de BYOC Logs. Defina la URL del clúster, como `http://byoc-logs.acme.internal:7280`. **Nota**: La URL debe incluir el puerto.
 	- El Worker añade `/api/v2/logs` y `/api/v1/validate` a la URL del punto de conexión, por lo que estos puntos de conexión deben estar permitidos si utiliza reglas de reenvío o de firewall.
   - Almacenado como la variable de entorno: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+- Frase de contraseña TLS de BYOC Logs (cuando TLS está habilitado)
+  - Almacenado como la variable de entorno: `DD_OP_DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -1,13 +1,13 @@
 ---
 aliases:
 - /fr/account_management/audit_logs/
-description: Surveillez l'activité des utilisateurs Datadog, les requêtes API et les
-  modifications de ressources avec une journalisation d'audit complète pour la conformité,
+description: Surveillez l'activité des utilisateurs, les requêtes API et les changements
+  de ressources Datadog grâce à une journalisation d'audit complète pour la conformité,
   la sécurité et la gouvernance.
 further_reading:
 - link: /account_management/audit_trail/events/
   tag: Documentation
-  text: En savoir plus sur les événements du journal d'audit
+  text: En savoir plus sur les événements Audit Trail
 - link: /account_management/org_settings/
   tag: Documentation
   text: En savoir plus sur les paramètres d'organisation
@@ -17,218 +17,235 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
   text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
-    vos équipes avec le journal d'audit Datadog
+    vos équipes avec Datadog Audit Trail
 - link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: Blog
-  text: Surveiller des ressources et configurations essentielles Datadog grâce au
-    journal d'audit
+  text: Surveiller des ressources et configurations essentielles Datadog avec Audit
+    Trail
+- link: /account_management/delete_data/
+  tag: Documentation
+  text: Supprimez les données de Datadog
 title: Datadog Audit Trail
 ---
+## Présentation {#overview}
 
-## Présentation
+En tant qu'administrateur ou membre de l'équipe de sécurité, vous pouvez utiliser [Datadog Audit Trail][1] pour voir qui utilise Datadog au sein de votre organisation et le contexte dans lequel ils utilisent Datadog. En tant qu'individu, vous pouvez également voir un flux de vos propres actions.
 
-Le [journal d'audit Datadog][1] permet aux administrateurs ou aux membres des équipes de sécurité de visualiser les utilisateurs de leur organisation qui utilisent Datadog, ainsi que le contexte associé à cette utilisation. Les utilisateurs ne disposant pas de tels rôles peuvent également consulter le flux de leurs propres actions.
+Il existe deux types d'événements qui peuvent se produire au sein d'une piste d'audit : **événements de requête**, qui traduisent toutes les requêtes effectuées vers l'API de Datadog en enregistrements clients, ou **événements spécifiques au produit**.
 
-Deux types d'événements sont enregistrés dans un journal d'audit : les **événements de requête**, qui convertissent toutes les requêtes transmises à l'API Datadog en données client, et les **événements propres aux produits**.
-
-Par exemple, vous pouvez surveiller les **événements de requête** afin de consulter les appels d'API qui ont entraîné les événements en question. Un administrateur d'entreprise ou de facturation peut également étudier les événements du journal d'audit pour surveiller les événements utilisateur qui modifient le statut de l'infrastructure.
+Par exemple, suivez les **événements de requête** afin de voir quels appels API ont conduit à l'événement. Ou, si vous êtes un administrateur d'entreprise ou de facturation, utilisez les événements de piste d'audit pour suivre les événements utilisateur qui modifient l'état de votre infrastructure.
 
 Dans ce contexte, les événements d'audit vous aident à consulter des événements spécifiques à un produit. Vous pouvez par exemple découvrir :
 
-  -  À quel moment un utilisateur a changé la rétention d'un index, si jamais le volume de logs a évolué (entraînant ainsi une modification de vos coûts mensuels)
+  -  Quand quelqu'un a modifié la rétention d'un index parce que le volume de logs a changé et que, par conséquent, la facture mensuelle a changé.
 
-  - Les utilisateurs qui ont modifié des processeurs ou des pipelines, ainsi que la date de ces modifications, si jamais un dashboard ou un monitor ne fonctionne plus et doit être réparé
+  - Qui a modifié les processeurs ou les pipelines, et quand ils ont été modifiés, car un dashboard ou un monitor est désormais dysfonctionnel et doit être réparé.
 
-  - Les utilisateurs qui ont modifié un filtre d'exclusion, si jamais votre volume d'indexation a augmenté ou diminué et que vous ne trouvez pas vos logs ou que vos coûts ont augmenté
+  - Qui a modifié un filtre d'exclusion parce que le volume d'indexation a augmenté ou diminué et que les logs sont introuvables ou que votre facture a augmenté.
 
-Pour les administrateurs de sécurité ou les équipes InfoSec, les événements de journal d'audit simplifient l'exécution des checks de conformité et permettent de conserver un historique à des fins d'audit. Ce dernier détaille les actions effectuées sur les ressources Datadog, la date de ces actions et la personne à leur origine. Par exemple, vous pouvez consigner un événement dans un journal d'audit :
+Pour les administrateurs de sécurité ou les équipes InfoSec, les événements de piste d'audit facilitent les contrôles de conformité et le maintien de pistes d'audit sur qui a fait quoi, et quand, pour vos ressources Datadog. Par exemple, maintenir une piste d'audit :
 
-- chaque fois qu'un utilisateur met à jour ou supprime des dashboards importants, des monitors essentiels ou d'autres ressources Datadog ;
+- Chaque fois qu'une personne met à jour ou supprime un dashboard critique, un monitor ou une autre ressource Datadog.
 
-- pour les connexions utilisateur, les modifications de compte ou de rôle dans votre organisation.
+- Pour les connexions des utilisateurs, les changements de compte ou de rôle dans votre organisation.
 
 Vous pouvez également analyser les événements Audit Trail avec [Cloud SIEM][15] pour détecter les menaces et générer des signaux de sécurité. Consultez [Débuter avec Cloud SIEM][16] pour plus d'informations.
 
-**Remarque** : les outils et politiques de Datadog sont conformes au standard PCI v4.0. Pour plus d'informations, consultez [Conformité PCI DSS][2].
+**Remarque** : Les outils et politiques de Datadog sont conformes à la norme PCI v4.0. Pour plus d'informations, consultez [PCI DSS Compliance][2].
 
-## Configuration
+## Configuration {#setup}
 
-Activez Datadog Audit Trail en accédant aux [paramètres de votre organisation][3] et en sélectionnant *Audit Trail Settings* sous *COMPLIANCE*. Cliquez sur le bouton **Enable**.
+Pour activer Datadog Audit Trail, accédez à vos [Organization Settings][3] et sélectionnez {{< ui >}}Audit Trail Settings{{< /ui >}} sous {{< ui >}}COMPLIANCE{{< /ui >}}. Cliquez sur le bouton {{< ui >}}Enable{{< /ui >}}.
 
-{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="La page Audit Trail Settings indiquant que le journal d'audit est désactivé" style="width:85%;">}}
+{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="La page des paramètres Audit Trail indiquant qu'il est désactivé" style="width:85%;">}}
 
-Pour vérifier l'identité de la personne qui a activé le journal d'audit :
-1. Accédez à l'[Events Explorer][4].
-2. Saisissez `Datadog Audit Trail was enabled by` dans la barre de recherche. Vous devrez peut-être élargir l'intervalle pour inclure l'événement en question.
-3. Le dernier événement dont le titre est « A user enabled Datadog Audit Trail » indique l'identité de la dernière personne a avoir activé le journal d'audit.
+Pour vérifier l'identité de la personne qui a activé Audit Trail :
+1. Accédez à [Events Explorer][4].
+2. Saisissez `Datadog Audit Trail was enabled by` dans la barre de recherche. Vous devrez peut-être sélectionner une plage horaire plus large pour capturer l'événement.
+3. L'événement le plus récent intitulé « A user enabled Datadog Audit Trail » indique qui a activé Audit Trail en dernier.
 
-## Configuration
-
-
-### Autorisations
-Seuls les utilisateurs disposant de l'autorisation `Audit Trail Write` peuvent activer ou désactiver Audit Trail. De plus, les utilisateurs doivent disposer de l'autorisation `Audit Trail Read` pour afficher les événements d'audit avec l'Audit Explorer.
-
-### Archivage
-
-Vous n'êtes pas obligé de configurer l'archivage de votre journal d'audit. Cette fonctionnalité vous permet d'écrire vos logs sur Amazon S3, Google Cloud Storage ou Stockage Azure. Votre système SIEM peut également lire les événements à partir de ces solutions. Une fois vos paramètres d'archivage créés ou modifiés, il est parfois nécessaire d'attendre quelques minutes avant la prochaine tentative d'importation des archives. Les événements sont importés vers l'archive toutes les 15 minutes. Par conséquent, attendez 15 minutes avant de vérifier que les archives sont bien importées vers votre compartiment de stockage depuis votre compte Datadog.
-
-Pour activer l'archivage d'Audit Trail, accédez aux [paramètres de votre organisation][3] et sélectionnez *Audit Trail Settings* sous *Compliance*. Faites défiler vers le bas jusqu'à atteindre la section Archiving, puis cliquez sur le bouton Store Events pour activer le stockage des événements.
-
-### Rétention
-
-La fonctionnalité de conservation des événements est optionnelle dans Audit Trail. Dans la section **Retention Period**, cliquez sur **hange retention period** pour sélectionner une durée de conservation adaptée à votre cas d'utilisation.
-
-Lorsque Audit Trail est activé, la période de conservation par défaut d'un événement d'audit est de 90 jours. Définissez la période de conservation sur : 3, 7, 15, 30 ou 90 jours.
-
-Lorsque Audit Trail est désactivé, la période de conservation est réinitialisée à la valeur par défaut de 7 jours.
-
-{{< img src="account_management/audit_logs/retention_period.png" alt="Configuration de la rétention pour le journal d'audit dans Datadog" style="width:80%;">}}
-
-## Explorer les événements d'audit
-
-Pour explorer un événement d'audit, accédez à la section [Audit Trail][1], qui est également disponible depuis vos [paramètres d'organisation][3] dans Datadog.
-
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Paramètres Audit Trail dans le menu Organization Settings" style="width:30%;">}}
-
-Les événements d'Audit Trail fonctionnent de la même manière que les logs du [Log Explorer][5] :
-
-- Vous pouvez filtrer vos événements de journal d'audit en fonction de noms d'événement (Dashboards, Monitors, Authentication, etc.), d'attributs d'authentification (acteur, ID de clé d'API, e-mail d'utilisateur, etc.), de `Status` (`Error`, `Warn`, `Info`), de méthode (`POST`, `GET`, `DELETE`) et d'autres facettes.
-
-- Pour étudier des événements de journal d'audit connexes, sélectionnez un événement et accédez à l'onglet des attributs d'événement. Choisissez un attribut spécifique, comme `http.method`, `usr.email` ou encore `client.ip`, afin d'appliquer un filtre basé sur cet attribut ou d'exclure ce filtre de votre recherche.
-
-{{< img src="account_management/audit_logs/attributes.png" alt="Section Audit Trail dans le menu Organization Settings" style="width:50%;">}}
+## Configuration {#configuration}
 
 
-### Vues enregistrées
+### Autorisations{#permissions}
+Seuls les utilisateurs disposant de l'autorisation `Audit Trail Write` peuvent activer ou désactiver Audit Trail. De plus, les utilisateurs ont besoin de l'autorisation `Audit Trail Read` pour afficher les événements d'audit à l'aide d'Audit Explorer.
 
-Afin de résoudre efficacement vos problèmes, vous devez disposer du contexte approprié. Ce dernier vous permet d'explorer vos données, d'accéder aux options de visualisation pour afficher des informations intéressantes et d'utiliser des facettes pertinentes qui facilitent l'analyse. La résolution de problèmes dépend du contexte. Les vues enregistrées permettent à tous les membres de votre équipe de passer facilement d'un contexte à un autre. Vous pouvez accéder aux vues enregistrées dans le coin supérieur gauche de l'explorateur de journal d'audit.
+### Archivage {#archiving}
+
+L'archivage est une fonctionnalité optionnelle pour Audit Trail. Vous pouvez utiliser l'archivage pour écrire vers Amazon S3, Google Cloud Storage ou Azure Storage et permettre à votre système SIEM d'y lire les événements. Après avoir créé ou mis à jour vos configurations d'archivage, il peut s'écouler plusieurs minutes avant que le prochain téléversement d'archive ne soit tenté. Les événements sont téléversés vers l'archive toutes les 15 minutes ; vérifiez donc votre compartiment de stockage dans 15 minutes pour vous assurer que les archives sont correctement téléversées depuis votre compte Datadog.
+
+Pour activer l'archivage pour Audit Trail, accédez à vos [Organization Settings][3] et sélectionnez {{< ui >}}Audit Trail Settings{{< /ui >}} sous {{< ui >}}Compliance{{< /ui >}}. Faites défiler jusqu'à Archiving et cliquez sur le bouton {{< ui >}}Store Events{{< /ui >}} pour activer.
+
+### Retention {#retention}
+
+La conservation des événements est une fonctionnalité optionnelle pour Audit Trail. Dans la section {{< ui >}}Retention Period{{< /ui >}}, cliquez sur {{< ui >}}Change retention period{{< /ui >}} pour sélectionner une durée de conservation adaptée à votre cas d'utilisation.
+
+Lorsque Audit Trail est activé, la période de conservation par défaut pour un événement Audit Trail est de 90 jours. Vous pouvez définir la période de conservation sur : 3, 7, 15, 30 ou 90 jours.
+
+Lorsque Audit Trail est désactivé, la période de conservation est réinitialisée à la valeur par défaut de 7 jours.
+
+{{< img src="account_management/audit_logs/retention_period.png" alt="Configuration de la conservation Audit Trail dans Datadog" style="width:80%;">}}
+
+## Explorer les événements d'audit {#explore-audit-events}
+
+Pour explorer un événement d'audit, accédez à la section [Audit Trail][1], également accessible depuis vos [Organization Settings][3] dans Datadog.
+
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Paramètres de l'Audit Trail dans le menu Organization Settings" style="width:30%;">}}
+
+Les événements de l'Audit Trail ont la même fonctionnalité que les logs dans le [Log Explorer][5] :
+
+- Filtrez pour inspecter les événements de l'audit trail par noms d'événement (Dashboards, Monitors, Authentification, et plus), attributs d'authentification (Acteur, ID de clé d'API, e-mail de l'utilisateur, et plus), `Status` (`Error`, `Warn`, `Info`), méthode (`POST`, `GET`, `DELETE`), et d'autres facettes.
+
+- Inspectez les événements d'audit trail associés en sélectionnant un événement et en accédant à l'onglet des attributs d'événement. Sélectionnez un attribut spécifique pour filtrer ou exclure de votre recherche, tel que `http.method`, `usr.email`, `client.ip` et plus encore.
+
+{{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail dans le menu Paramètres de l'organisation" style="width:50%;">}}
+
+
+### Requêtes en langage naturel {#natural-language-queries}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">
+Cette fonctionnalité n'est pas prise en charge pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
+
+Utilisez les requêtes en langage naturel (NLQ) pour décrire ce que vous recherchez en anglais simple. Datadog traduit automatiquement votre requête en une requête d'audit trail structurée, ce qui facilite l'exploration des événements d'audit sans avoir à écrire de syntaxe complexe.
+
+Le système traduit les entrées en langage naturel en requêtes Datadog et comprend le contexte tel que les utilisateurs, les actions, les ressources et les plages temporelles. Il détecte également automatiquement les champs pertinents, par exemple : « Qui a modifié le dashboard de paiement la semaine dernière » ou « Afficher tous les changements de rôle au cours des 24 dernières heures. »
+
+{{< img src="account_management/audit_logs/audit_trail_nlq_light.mp4" alt="Requête en langage naturel dans l'Audit Trail montrant comment rechercher des événements d'audit à l'aide d'expressions en anglais courant." video=true >}}
+
+### Vues enregistrées {#saved-views}
+
+Un dépannage efficace nécessite que vos données soient dans le périmètre approprié pour permettre l'exploration, que vous ayez accès à des options de visualisation pour faire ressortir des informations significatives, et que des facettes pertinentes soient répertoriées pour permettre l'analyse. Le dépannage est contextuel, et Saved Views permet à vous et à vos collaborateurs de passer plus facilement d'un contexte de dépannage à un autre. Vous pouvez accéder à Saved Views dans le coin supérieur gauche de l'Audit Trail Explorer.
 
 En dehors de votre vue enregistrée par défaut, toutes les vues enregistrées sont partagées avec toute votre organisation :
 
-* Les **vues enregistrées des intégrations** sont fournies par défaut avec le journal d'audit. Elles peuvent uniquement être consultées et sont identifiées par le logo Datadog.
-* Les **vues enregistrées personnalisées** sont créées par les utilisateurs. Elles peuvent être modifiées par n'importe quel utilisateur de votre organisation (à l'exception des [utilisateurs en lecture seule][6]) et sont identifiées par l'avatar de l'utilisateur qui les a créées. Cliquez sur le bouton **Save** pour créer une vue enregistrée personnalisée à partir du contenu actuel de votre explorateur.
+* {{< ui >}}Integration saved views{{< /ui >}} sont fournis prêts à l'emploi avec Audit Trail. Ces vues sont en lecture seule et identifiées par le logo Datadog.
+* {{< ui >}}Custom saved views{{< /ui >}} sont créées par les utilisateurs. Elles sont modifiables par tout utilisateur de votre organisation (à l'exception des [utilisateurs en lecture seule][6]), et identifiées par l'avatar de l'utilisateur qui les a créées. Cliquez sur le bouton {{< ui >}}Save{{< /ui >}} pour créer une nouvelle vue enregistrée personnalisée à partir du contenu actuel de votre Explorer.
 
 Vous pouvez exécuter les actions suivantes à tout moment depuis l'entrée de la vue enregistrée dans le volet des vues :
 
-* **Charger** ou **recharger** une vue enregistrée.
-* **Mettre à jour** une vue enregistrée avec la configuration de la vue actuelle.
-* **Renommer** ou **supprimer** une vue enregistrée.
-* **Partager** une vue enregistrée à l'aide d'un lien simplifié.
-* **Ajouter une étoile** à une vue enregistrée pour qu'elle fasse partie de vos favoris. Les vues enregistrées favorites s'affichent en haut de votre liste de vues enregistrées et sont directement accessibles à partir du menu de navigation.
+* {{< ui >}}Load{{< /ui >}} ou {{< ui >}}reload{{< /ui >}} une vue enregistrée.
+* {{< ui >}}Update{{< /ui >}} une vue enregistrée avec la configuration de la vue actuelle.
+* {{< ui >}}Rename{{< /ui >}} ou {{< ui >}}delete{{< /ui >}} une vue enregistrée.
+* {{< ui >}}Share{{< /ui >}} une vue enregistrée via un lien court.
+* {{< ui >}}Star{{< /ui >}} (ajouter aux favoris) une vue enregistrée afin qu'elle apparaisse en haut de votre liste de vues enregistrées et soit accessible directement depuis le menu de navigation.
 
-**Remarque** : les actions de mise à jour, de renommage et de suppression sont désactivées pour les vues enregistrées des intégrations et les [utilisateurs en lecture seule][6].
+**Remarque :** Les actions de mise à jour, de renommage et de suppression sont désactivées pour les vues enregistrées d'intégration et pour les [utilisateurs en lecture seule][6].
 
 
-### Vue par défaut
+### Vue par défaut {#default-view}
 
 {{< img src="logs/explorer/saved_views/default.png" alt="Vue par défaut" style="width:50%;" >}}
 
-Grâce à la fonctionnalité de vue par défaut, vous pouvez définir un ensemble de requêtes ou filtres par défaut à toujours afficher lorsque vous ouvrez l'explorateur du journal d'audit pour la première fois. Pour revenir à la vue par défaut, ouvrez le volet Views et cliquez sur le bouton d'actualisation.
+La fonctionnalité de vue par défaut vous permet de définir un ensemble de requêtes ou de filtres par défaut que vous voyez toujours lorsque vous ouvrez l'Audit Trail Explorer. Vous pouvez revenir à votre vue par défaut en ouvrant le panneau Vues et en cliquant sur le bouton de rechargement.
 
-La vue actuelle de l'explorateur de journal d'audit constitue votre vue enregistrée par défaut. Vous êtes la seule personne à pouvoir consulter cette vue. Les modifications que vous apportez aux paramètres ne sont pas partagées avec le reste de votre organisation. Vous pouvez remplacer **temporairement** votre vue enregistrée par défaut en effectuant une action dans l'interface ou en ouvrant des liens vers l'explorateur de journal d'audit comportant des paramètres différents.
+Votre vue actuelle de l'Audit Trail Explorer est votre vue enregistrée par défaut. Cette configuration n'est accessible et visible que par vous, et la mise à jour de cette configuration n'a aucun impact sur votre organisation. Vous pouvez **temporairement** remplacer votre vue enregistrée par défaut en effectuant n'importe quelle action dans l'interface utilisateur ou en ouvrant des liens vers l'Audit Trail Explorer qui intègrent une configuration différente.
 
 Vous pouvez exécuter les actions suivantes à tout moment depuis l'entrée de la vue par défaut dans le volet des vues :
 
-* **Recharger** votre vue par défaut en cliquant sur l'entrée.
-* **Mettre à jour** votre vue par défaut avec les paramètres actuels.
-* **Rétablir** votre vue par défaut sur les valeurs par défaut de Datadog, afin de repartir de zéro.
+* {{< ui >}}Reload{{< /ui >}} votre vue par défaut en cliquant sur l'entrée.
+* {{< ui >}}Update{{< /ui >}} votre vue par défaut avec les paramètres actuels.
+* {{< ui >}}Reset{{< /ui >}} votre vue par défaut aux paramètres par défaut de Datadog pour un nouveau redémarrage.
 
-### Événements notables
+### Événements notables {#notable-events}
 
-Les événements notables désignent un sous-ensemble d'événements d'audit identifiés par Datadog qui reflètent des modifications de configuration potentiellement importantes susceptibles d'augmenter vos coûts ou de remettre en cause votre sécurité. Les administrateurs d'organisation peuvent ainsi se focaliser sur les événements les plus importants, sans avoir à étudier tous les autres événements générés ni leurs propriétés respectives.
+Les événements notables sont un sous-ensemble d'événements d'audit qui indiquent des changements de configuration critiques potentiels pouvant avoir un impact sur la facturation ou des implications en matière de sécurité, tels qu'identifiés par Datadog . Cela permet aux administrateurs d'organisation de se concentrer sur les événements les plus importants parmi les nombreux événements générés, sans avoir à connaître tous les événements disponibles et leurs propriétés .
 
-{{< img src="account_management/audit_logs/notable_events.png" alt="Le volet des facettes d'événement d'audit ; les événements notables sont sélectionnés" style="width:30%;">}}
+{{< img src="account_management/audit_logs/notable_events.png" alt="Le panneau des facettes des événements d'audit affichant les événements notables sélectionnés" style="width:30%;">}}
 
-Les événements renvoyés par les requêtes suivantes sont considérés comme notables.
+Les événements renvoyés par les requêtes suivantes sont considérés comme notables. Vous pouvez également récupérer tous les événements notables en utilisant la requête `is_notable_event:true`.
 
-| Description de l'audit d'événement                                          | Requête dans l'explorateur de journal d'audit                           |
+| Description de l'événement d'audit                                          | Requête dans l'Audit Explorer                           |
 | ------------------------------------------------------------------- | --------------------------------------------------|
-| Modifications apportées aux métriques basées sur des logs | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
-| Modifications apportées aux filtres d'exclusion d'index Log Management | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
-| Modifications apportées aux index Log Management | `@evt.name:"Log Management" @asset.type:index` |
-| Modifications apportées aux filtres de rétention APM | `@evt.name:APM @asset.type:retention_filter` |
-| Modifications apportées aux métriques custom APM | `@evt.name:APM @asset.type:custom_metrics` |
-| Modifications apportées aux tags des métriques | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
-| Créations et suppressions d'applications RUM | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
-| Modifications apportées aux groupes d'analyse du scanner de données sensibles  | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
-| Créations et suppressions de tests Synthetic | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Modifications des métriques basées sur les logs | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
+| Modifications des filtres d'exclusion d'index de Log Management | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
+| Modifications des index de Log Management | `@evt.name:"Log Management" @asset.type:index` |
+| Modifications des filtres de rétention APM | `@evt.name:APM @asset.type:retention_filter` |
+| Modifications des métriques personnalisées APM | `@evt.name:APM @asset.type:custom_metrics` |
+| Modifications des tags de métriques | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
+| Créations et suppressions d'applications RUM | `@evt.name:"Real User Monitoring" @asset.type:rum_application @action:(created OR deleted)` |
+| Modifications des groupes d'analyse du Sensitive Data Scanner | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Création ou suppression de tests Synthetic | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Activation, désactivation et modification de Product Analytics pour les applications | `@evt.name:"Product Analytics" @asset.type:product_analytics @action:(enabled OR disabled OR modified)` |
 
-### Onglet Inspect Changes (Diff)
+### Afficher l'activité complète d'un utilisateur, y compris les actions déléguées à un agent {#view-a-users-full-activity-including-agent-delegated-actions}
 
-L'onglet Inspect Changes (Diff) du volet de détails des événements d'audit vous permet de comparer une nouvelle configuration à la configuration précédente. Il indique les changements apportés aux configurations des dashboards, notebooks et monitors, qui sont représentés par des objets JSON.
+Lorsqu'un agent IA Datadog agit au nom d'un utilisateur, les informations de l'agent remplissent `@usr.*` pour cet événement, tandis que les informations de l'utilisateur d'origine remplissent `@delegator.*` à la place. La recherche uniquement sur `@usr.id:<USER_ID>` renvoie les actions qu'un utilisateur a effectuées directement, et n'inclut pas les actions qu'un agent IA Datadog a effectuées en son nom.
 
-{{< img src="account_management/audit_logs/inspect_changes.png" alt="Le volet latéral des événements d'audit, avec les modifications apportées à la configuration des monitors composite. Le texte surligné en vert correspond au contenu modifié, tandis que le texte surligné en rouge correspond au contenu supprimé." style="width:70%;">}}
+| Description de l'événement d'audit                                                                        | Requête dans l'Audit Explorer                                     |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Actions effectuées directement par un utilisateur                                                                    | `@usr.id:<USER_ID>`                                           |
+| Toutes les actions attribuées à un utilisateur, y compris les actions effectuées par un agent IA Datadog en son nom     | `(@usr.id:<USER_ID> OR @delegator.id:<USER_ID>)`               |
 
-## Filtrer les événements d'audit en fonction des tables de référence
+Consultez [Suivre l'utilisation des agents dans votre organisation][18] pour plus d'informations sur le filtrage et l'affichage des événements d'audit générés par des agents.
 
-<div class="alert alert-danger">Les tables de référence contenant plus de 1 000 000 de lignes ne peuvent pas être utilisées pour filtrer les événements. Consultez <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Ajouter des métadonnées personnalisées avec les tables de référence</a> pour plus d'informations sur la création et la gestion des tables de référence.</div>
+### Inspecter les modifications (Diff) {#inspect-changes-diff}
 
-Les tables de référence permettent de combiner des métadonnées avec des événements d'audit, fournissant davantage d'informations pour analyser le comportement des utilisateurs Datadog. Ajoutez un filtre de requête basé sur une table de référence pour effectuer des requêtes de recherche. Pour plus d'informations sur l'activation et la gestion de cette fonctionnalité, consultez le guide sur les [tables de référence][2].
+L'onglet Inspecter les modifications (Diff) dans le panneau des détails de l'événement d'audit compare les modifications de configuration apportées à ce qui était défini précédemment. Il affiche les modifications apportées aux configurations des dashboards, des notebooks et des monitors, qui sont représentées sous forme d'objets JSON.
 
-Pour appliquer un filtre de requête avec les tables de référence, cliquez sur le bouton `+ Add` à côté de l'éditeur de requête et sélectionnez **Join with Reference Table**. Dans l'exemple suivant, le filtre de requête de table de référence est utilisé pour rechercher des dashboards modifiés par des utilisateurs accédant à Datadog depuis des adresses IP non autorisées :
+{{< img src="account_management/audit_logs/inspect_changes.png" alt="Le panneau latéral de l'événement d'audit montrant les modifications apportées à une configuration de monitor composite, où le texte surligné en vert correspond à ce qui a été modifié et le texte surligné en rouge à ce qui a été supprimé." style="width:70%;">}}
 
-{{< img src="account_management/audit_logs/reference_tables.png" alt="L'explorateur Datadog Audit Trail avec les options de recherche des tables de référence mises en évidence" border="true" popup="true" style="width:100%;" >}}
+## Filtrer les événements d'audit en fonction des tables de référence {#filter-audit-events-based-on-reference-tables}
 
-### Audit des clés d'API
+<div class="alert alert-danger">Les tables de référence contenant plus de 1 000 000 de lignes ne peuvent pas être utilisées pour filtrer les événements. Consultez <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Ajouter des métadonnées personnalisées avec des tables de référence</a> pour plus d'informations sur la création et la gestion des tables de référence. </div>
 
-Les utilisateurs de Log Management peuvent auditer l'utilisation des clés d'API avec Audit Trail. Pour l'audit des clés d'API, les logs possèdent un tag `datadog.api_key_uuid` qui contient l'UUID de la clé d'API utilisée pour collecter ces logs. Utilisez ces informations pour déterminer :
-- Comment les clés d'API sont utilisées dans l'ensemble de votre organisation et des sources de données de télémétrie.
+Les tables de référence vous permettent de combiner des métadonnées avec des événements d'audit, fournissant ainsi plus d'informations pour enquêter sur le comportement des utilisateurs Datadog. Ajoutez un filtre de requête basé sur une Reference Table pour effectuer des requêtes de recherche. Pour plus d'informations sur l'activation et la gestion de cette fonctionnalité, consultez le guide [Tables de référence][2].
+
+Pour appliquer un filtre de requête avec des tables de référence, cliquez sur le bouton {{< ui >}}\+ Add{{< /ui >}} à côté de l'éditeur de requête et sélectionnez {{< ui >}}Join with Reference Table{{< /ui >}}. Dans l'exemple suivant, le filtre de requête de Reference Table est utilisé pour rechercher les dashboards modifiés par des utilisateurs accédant à Datadog depuis des adresses IP non autorisées :
+
+{{< img src="account_management/audit_logs/reference_tables.png" alt="Le Datadog Audit Trail Explorer avec les options de recherche par Reference Table mises en surbrillance" border="true" popup="true" style="width:100%;" >}}
+
+### Audit de clé d'API {#api-key-auditing}
+
+Les utilisateurs de la gestion des logs peuvent auditer l'utilisation des clés d'API avec Audit Trail. Pour l'audit des clés d'API, les logs ont un tag `datadog.api_key_uuid` qui contient l'UUID de la clé d'API utilisée pour collecter ces logs. Utilisez ces informations pour déterminer :
+- Comment les clés d'API sont utilisées dans votre organisation et vos sources de télémétrie.
 - Rotation et gestion des clés d'API.
 
-## Créer un monitor
+## Créer un monitor {#create-a-monitor}
 
-Pour créer un monitor afin de surveiller un type d'événement de journal d'audit ou des attributs de journal spécifique, consultez la documentation relative aux [monitors d'Audit Trail][7]. Vous pouvez par exemple créer un monitor qui se déclenche lorsqu'un certain utilisateur se connecte, ou encore lorsqu'un dashboard est supprimé.
+Pour créer un monitor sur un type d'événement Audit Trail ou par des attributs Audit Trail spécifiques, consultez la [documentation du monitor Audit Trail][7]. Par exemple, définissez un monitor qui se déclenche lorsqu'un utilisateur spécifique se connecte, ou définissez un monitor pour chaque suppression de dashboard.
 
-## Créer un dashboard ou un graphique
+## Créer un dashboard ou un graphique {#create-a-dashboard-or-a-graph}
 
-Créez des dashboards pour apporter de nouveaux éléments de contexte visuels à vos événements de journal d'audit. Pour créer un dashboard d'audit, procédez comme suit :
+Donnez plus de contexte visuel à vos événements de piste d'audit avec des dashboards. Pour créer un dashboard d'audit :
 
-1. Créez un [dashboard][8] dans Datadog.
-2. Sélectionnez une visualisation. Vous pouvez représenter les événements d'audit sous la forme de [top lists][9], de [séries temporelles][10] et de [listes][11].
-3. [Représentez vos données][12] : sous l'onglet Edit, sélectionnez la source de données *Audit Events*, puis créez une requête. Les événements d'audit sont filtrés par nombre et peuvent être regroupés en fonction de plusieurs facettes. Sélectionnez une facette ainsi qu'une limite.
-{{< img src="account_management/audit_logs/audit_graphing.png" alt="Définir la source de données Audit Trail pour représenter vos données" style="width:100%;">}}
-4. Définissez vos préférences d'affichage et attribuez un titre à votre graphique. Cliquez sur le bouton *Save* pour créer le dashboard.
+1. Créez un [nouveau dashboard][8] dans Datadog.
+2. Sélectionnez votre visualisation. Vous pouvez visualiser les événements d'audit sous forme de [top lists][9], de [séries temporelles][10] et de [listes][11].
+3. [Représentez graphiquement vos données][12] : En mode édition, sélectionnez *Événements d'audit* comme source de données, et créez une requête. Les événements d'audit sont filtrés par nombre et peuvent être regroupés par différentes facettes. Sélectionnez une facette et une limite.
+{{< img src="account_management/audit_logs/audit_graphing.png" alt="Définissez Audit Trail comme source de données pour représenter graphiquement vos données" style="width:100%;">}}
+4. Définissez vos préférences d'affichage et donnez un titre à votre graphique. Cliquez sur le bouton *Enregistrer* pour créer le dashboard.
 
-## Créer un rapport planifié
+## Envoyer un rapport planifié {#send-out-a-scheduled-report}
 
-Avec la fonctionnalité de journal d'audit Datadog, vous pouvez planifier l'envoi régulier d'e-mails contenant des vues d'analyse d'audit. Ces rapports facilitent la surveillance continue de l'utilisation de la plateforme Datadog. Par exemple, vous pouvez choisir de recevoir un rapport hebdomadaire portant sur le nombre de connexions d'utilisateurs Datadog uniques par pays. Cette requête vous permet de surveiller les activités de connexion anormales ou de recevoir automatiquement des statistiques d'utilisation. 
+Vous pouvez enregistrer votre requête Audit Trail en tant que dashboard et envoyer un rapport planifié. Ces rapports peuvent être utiles pour une surveillance régulière de l'utilisation de la plateforme Datadog. Par exemple, vous pouvez envoyer un e-mail hebdomadaire du nombre de connexions d'utilisateurs Datadog uniques par pays. Cette requête vous permet de surveiller une activité de connexion anormale ou de recevoir des informations automatisées sur l'utilisation.
 
-Pour exporter une requête d'analyse d'audit sous la forme d'un rapport, créez une série temporelle, une top list ou une requête de table, puis cliquez sur **More...** > **Export as scheduled report** pour commencer l'exportation de cette requête et l'envoi de rapports planifiés.
+Pour créer un rapport planifié :
 
-**Remarque** : la vue **List** ne propose pas l'option d'exporter vers un rapport planifié.
+1. Accédez à [Audit Trail][1], saisissez votre requête pour filtrer vos événements d'audit.
+1. Cliquez sur {{< ui >}}More{{< /ui >}} et sélectionnez {{< ui >}}Save to dashboard{{< /ui >}}.
+    - Vous pouvez soit enregistrer sur un dashboard existant, soit créer un nouveau dashboard.
+1. Sur votre dashboard, cliquez sur {{< ui >}}Share{{< /ui >}} et sélectionnez {{< ui >}}Schedule report{{< /ui >}}.
+1. Suivez les instructions dans [Planifier un rapport][17] pour configurer votre rapport.
 
-{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Option « Export as scheduled report » du menu déroulant More…" style="width:90%;" >}}
+## Télécharger les événements d'audit au format CSV {#download-audit-events-as-csv}
 
-1. Attribuez un nom au dashboard, qui est créé à l'aide du widget de requête. Un dashboard est créé pour chaque rapport planifié. Vous pouvez faire référence à ces dashboards, puis les modifier plus tard si vous avez besoin de changer le contenu du rapport ou son calendrier de publication. 
-2. Pour planifier l'envoi des courriels contenant le rapport, personnalisez la fréquence du rapport et la période.
-3. Ajoutez les destinataires de votre choix.
-4. Ajoutez, si vous le souhaitez, un message personnalisé supplémentaire à inclure dans l'e-mail du rapport.
-5. Cliquez sur **Create Dashboard and Schedule Report**.
+Datadog Audit Trail vous permet de télécharger localement jusqu'à 100 000 événements d'audit sous forme de fichier CSV. Ces événements peuvent ensuite être analysés localement, téléchargés vers un autre outil pour une analyse plus approfondie, ou partagés avec les membres appropriés de l'équipe dans le cadre d'un exercice de sécurité et de conformité.
 
-{{< img src="account_management/audit_logs/export_workflow.png" alt="Exporter une vue d'analyse d'audit au sein d'un e-mail planifié" style="width:80%;" >}}
+Pour exporter des événements d'audit au format CSV :
+1. Exécutez la requête de recherche appropriée qui capture les événements qui vous intéressent
+2. Ajoutez les champs d'événement en tant que colonnes dans la vue que vous souhaitez inclure dans le CSV
+3. Cliquez sur {{< ui >}}Download as CSV{{< /ui >}}
+4. Sélectionnez le nombre d'événements à exporter et exportez au format CSV
 
-## Télécharger les événements d'audit au format CSV
+## Dashboard prêt à l'emploi {#out-of-the-box-dashboard}
 
-Datadog Audit Trail permet de télécharger jusqu'à 100 000 événements d'audit sous forme de fichier CSV en local. Ces événements peuvent ensuite être analysés localement, chargés dans un autre outil pour une analyse approfondie ou partagés avec les membres appropriés de l'équipe dans le cadre d'un exercice de sécurité et de conformité.
+Datadog Audit Trail est fourni avec un [dashboard prêt à l'emploi][13] qui affiche divers événements d'audit, tels que les modifications de la rétention d'index, les modifications du pipeline de logs, les modifications de dashboard, et plus encore. Clonez ce dashboard pour personnaliser les requêtes et les visualisations selon vos besoins d'audit.
 
-Pour exporter les événements d'audit au format CSV :
-1. Lancez la requête de recherche appropriée pour connaître les événements qui vous intéressent.
-2. Ajoutez des champs d'événements en tant que colonnes dans la vue que vous souhaitez inclure dans le fichier CSV.
-3. Cliquez sur Download as CSV
-4. Sélectionnez le nombre d'événements à exporter et exportez-les au format CSV
+{{< img src="account_management/audit_logs/audit_dashboard.png" alt="Dashboard Audit Trail" style="width:100%;">}}
 
-## Dashboard prêt à l'emploi
-
-Datadog Audit Trail comprend un [dashboard prêt à l'emploi][13] qui représente divers événements d'audit, notamment les modifications de la rétention des index, les changements apportés aux pipelines de log, les modifications de dashboard, etc. Dupliquez ce dashboard pour personnaliser les requêtes et visualisations en fonction de vos besoins d'audit.
-
-{{< img src="account_management/audit_logs/audit_dashboard.png" alt="Dashboard du journal d'audit" style="width:100%;">}}
-
-## Contrôler les commandes du terminal avec CoTerm
-
-[CoTerm][14] permet d'enregistrer les sessions de terminal pour les analyser dans Datadog. Utilisez CoTerm pour auditer les modifications sensibles du système effectuées via les terminaux. Vous pouvez ensuite consulter ces commandes et leur sortie sous forme de logs et d'événements dans Datadog.
-
-
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -245,6 +262,7 @@ Datadog Audit Trail comprend un [dashboard prêt à l'emploi][13] qui représen
 [11]: /fr/dashboards/widgets/list/
 [12]: /fr/dashboards/querying/#define-the-metric/
 [13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
-[14]: /fr/coterm
 [15]: /fr/security/cloud_siem/
 [16]: /fr/getting_started/cloud_siem/
+[17]: /fr/dashboards/sharing/scheduled_reports/#schedule-a-report
+[18]: /fr/account_management/audit_trail/guides/track_agentic_usage_in_your_organization/

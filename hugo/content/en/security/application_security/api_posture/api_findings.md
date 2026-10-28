@@ -3,12 +3,6 @@ title: API Findings
 description: Triage detected API risks across definitions, gateways, and live traffic.
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 The [API Findings][1] explorer provides a central triage view of the API risks detected across your definitions, gateways, and live traffic. Default rules detect common vulnerabilities and misconfigurations. You can also add [custom rules][2] for specific use cases.
 
 **API Findings** columns:
@@ -40,7 +34,7 @@ Click a finding to view its details and perform a workflow such as Validate > In
 
 Datadog API Posture uses [Bits Code][3] to generate code fixes for vulnerabilities.
 
-1. In Datadog, navigate to [**Security** > **App & API Protection** > **Findings**][1].
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App & API Protection{{< /ui >}} > {{< ui >}}Findings{{< /ui >}}][1].
 2. Select a finding to open a side panel with details about the finding and the affected endpoint.
 3. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
 

@@ -23,6 +23,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
       tag: "Blog"
       text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
+    - link: '/account_management/delete_data/'
+      tag: 'Documentation'
+      text: 'Delete data from Datadog'
 algolia:
   tags: ["rbac"]
 ---

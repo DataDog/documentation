@@ -2,13 +2,13 @@
 title: Run a Script with the Private Action Runner
 description: Use the private action runner to run predefined scripts in your private network, including the configuration required for ownerless, Execution-Policy-authorized runners.
 further_reading:
-- link: "actions/private_actions/set_up_agent_based"
+- link: "/actions/private_actions/set_up_agent_based"
   tag: "Documentation"
   text: "Set up a private action runner in the Datadog Agent"
-- link: "actions/private_actions/execution_policies"
+- link: "/actions/private_actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
-- link: "actions/private_actions/reference"
+- link: "/actions/private_actions/reference"
   tag: "Documentation"
   text: "Reference"
 ---

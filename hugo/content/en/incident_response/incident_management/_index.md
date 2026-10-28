@@ -5,12 +5,12 @@ aliases:
 - /monitors/incident_management/
 - /service_management/incident_management/
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
-    tag: "Release Notes"
-    text: "Check out the latest Incident Management releases! (App login required)."
   - link: "dashboards/querying/#incident-management-analytics"
     tag: "Documentation"
     text: "Incident Management Analytics"
+  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+    tag: "Learning Center"
+    text: "Getting Started with Incident Management"
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to improve your Incident Management'
@@ -35,9 +35,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
     tag: "Blog"
     text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
-  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
-    tag: "Learning Center"
-    text: "Getting Started with Incident Management"
+  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Incident Management releases! (App login required)."
 
 ---
 
@@ -123,7 +123,6 @@ Incident Management integrates with third-party applications, including:
 
 - [Atlassian Statuspage][25] to create and update Statuspage incidents.
 - [Confluence][22] to generate incident [postmortems][34].
-- [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Microsoft Teams][23] to create channels and video meetings for incidents.
 - [PagerDuty][12] and [OpsGenie][13] to page your on-call engineers and auto-resolve pages upon incident resolution.
@@ -155,7 +154,6 @@ Incident Management integrates with third-party applications, including:
 [18]: /integrations/statuspage/
 [19]: /integrations/servicenow/
 [20]: /incident_response/incident_management/investigate/describe
-[21]: /coterm
 [22]: /integrations/confluence/
 [23]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [24]: /integrations/zoom-incident-management/

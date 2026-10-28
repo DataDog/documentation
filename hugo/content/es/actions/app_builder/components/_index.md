@@ -19,12 +19,6 @@ further_reading:
   text: Cree aplicaciones de autoservicio con App Builder para Third-Party Integrations
 title: Componentes
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder está en versión preliminar en el sitio de Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Descripción general {#overview}
 Esta página proporciona una lista de componentes de interfaz de usuario que puede utilizar al crear aplicaciones en App Builder.
 
@@ -967,7 +961,7 @@ Los componentes de pestañas tienen las siguientes propiedades.
 
 #### Pestañas {#tabs}
 
-Una lista de vistas de pestañas. Utilice el ({{< ui >}}+{{< /ui >}}) para agregar vistas adicionales.
+Una lista de vistas de pestañas. Utilice el ({{< ui >}}\+{{< /ui >}}) para agregar vistas adicionales.
 
 
 #### Estilo {#style-1}

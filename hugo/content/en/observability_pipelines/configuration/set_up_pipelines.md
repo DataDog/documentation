@@ -27,7 +27,7 @@ further_reading:
 <div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
 
 In Observability Pipelines, a pipeline is a sequential path with three types of components:
-- [Source][1]: Receives data from your data source (for example, the Datadog Agent).
+- [Sources][1]: Receive data from your data sources (for example, the Datadog Agent).
 - [Processors][2]: Enrich and transform your data.
 - [Destinations][3]: Where your processed data is sent.
 
@@ -50,28 +50,26 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
-1. Select and set up a [log source][3].
+1. Select and set up your [log sources][3].
 1. Select and set up [destinations][5] for your processed logs.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
 
-#### Add or remove components
-
-##### Add another processor group
+#### Add another processor group
 
 {{< img src="observability_pipelines/setup/another_processor_group.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
 
-##### Add another set of processors and destinations
+#### Add another set of processors and destinations
 
 {{< img src="observability_pipelines/setup/another_set_processor_destination.png" alt="The Pipelines page showing two processor groups sending logs to two different destinations" style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
 
-##### Add another destination to a processor group
+#### Add another destination to a processor group
 
 {{< img src="observability_pipelines/setup/another_destination.png" alt="The Pipelines page showing one processor group sending logs to two different destinations" style="width:100%;" >}}
 
@@ -99,9 +97,21 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 #### Add another processor group
 
-{{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
+{{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending metrics to the same destination" style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
+
+#### Add another set of processors and destinations
+
+{{< img src="observability_pipelines/setup/another_set_processor_destination_metrics.png" alt="The Pipelines page showing two processor groups sending metrics to two different destinations" style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
+
+#### Add another destination to a processor group
+
+{{< img src="observability_pipelines/setup/another_destination_metrics.png" alt="The Pipelines page showing one processor group sending metrics to two different destinations" style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_destination %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
@@ -173,7 +183,7 @@ To delete a pipeline in the UI:
 
 - A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
 - For log pipelines:
-  - You can add a total of three destinations for a log pipeline.
+  - You can add a total of 20 destinations for a log pipeline.
 
 ## Further Reading
 

@@ -25,7 +25,7 @@ further_reading:
   text: Datadog에서 성공적인 FinOps 사례를 구축한 방법
 - link: https://www.datadoghq.com/blog/cloud-cost-recommendations/
   tag: 블로그
-  text: Cloud Cost Recommendations을 통해 AWS, Azure 및 Google Cloud 전반의 클라우드 낭비 제거
+  text: Cloud Cost Recommendations을 통해 AWS, Azure 및 Google Cloud 전반의 클라우드 낭비를 제거합니다.
 multifiltersearch:
   data:
   - category: Configure
@@ -291,7 +291,8 @@ multifiltersearch:
     resource_type: RDS Instance
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: 지난 2주 동안 프로비저닝된 IOPS의 80% 미만만 사용한 RDS 인스턴스.
+    recommendation_description: 지난 2주 동안 프로비저닝된 IOPS의 80% 미만만 사용한 RDS 인스턴스. 프로비저닝된
+      IOPS를 별도로 설정할 수 없는 Amazon Aurora 인스턴스에는 적용되지 않습니다.
     recommendation_prerequisites: ''
     recommendation_type: Downsize RDS Instance Provisioned IOPS
     resource_type: RDS Instance
@@ -424,7 +425,7 @@ multifiltersearch:
     resource_type: AKS Cluster
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: Azure Advisor가 삭제를 권장하는 배포된 앱이 없는 App Service 플랜입니다.
+    recommendation_description: Azure Advisor가 삭제를 권장하는 배포된 앱이 없는 앱 서비스 플랜입니다.
     recommendation_prerequisites: ''
     recommendation_type: Delete Unused App Service Plan
     resource_type: App Service Plan
@@ -437,13 +438,13 @@ multifiltersearch:
     resource_type: Managed Disk Snapshot
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: 필요 이상으로 최소 복제본 수가 높은 Container App.
+    recommendation_description: 필요 이상으로 최소 복제본 수가 높은 컨테이너 앱.
     recommendation_prerequisites: ''
     recommendation_type: Downsize Container App
     resource_type: Container App
   - category: Terminate
     cloud_provider: Azure
-    recommendation_description: 구성된 조회 기간 동안 요청이 없는 Azure Container App입니다.
+    recommendation_description: 구성된 조회 기간 동안 요청이 없는 Azure 컨테이너 앱입니다.
     recommendation_prerequisites: ''
     recommendation_type: Scale to Zero Azure Container App Replicas
     resource_type: Container App
@@ -453,6 +454,13 @@ multifiltersearch:
     recommendation_prerequisites: ''
     recommendation_type: Delete Container Registry
     resource_type: Container Registry
+  - category: Configure
+    cloud_provider: Azure
+    recommendation_description: 프롬프트 캐싱을 사용 중이지만 목표 적중률에 미치지 못하는 Azure Foundry 계정을
+      식별하고, 캐시 구성을 개선하여 입력 토큰 비용을 절감하도록 권장합니다.
+    recommendation_prerequisites: ''
+    recommendation_type: Optimize Prompt Caching
+    resource_type: Foundry Account
   - category: Terminate
     cloud_provider: Azure
     recommendation_description: 클러스터가 최소 60일 동안 중지된 경우 사용되지 않는 것으로 간주되어 중지됩니다. 비용
@@ -535,7 +543,7 @@ multifiltersearch:
   - category: Terminate
     cloud_provider: Azure
     recommendation_description: 사용자 CPU 사용률이 5% 미만이고 사용 가능한 메모리가 90%를 초과하는 VM 인스턴스.
-      Datadog Agent가 없는 경우 이 권장 사항은 Azure Monitor CPU 메트릭을 사용하여 생성됩니다.
+      Datadog Agent가 없는 경우 이 권장 사항은 Azure 모니터링 CPU 메트릭을 사용하여 생성됩니다.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Delete Azure VM Instance
     resource_type: VM Instance
@@ -714,19 +722,19 @@ multifiltersearch:
     resource_type: Kubernetes Cluster
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: 컨테이너가 요청된 CPU 또는 메모리의 일부만 사용하고 있습니다.
+    recommendation_description: Containers가 요청된 CPU 또는 메모리의 일부만 사용하고 있습니다.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: 컨테이너가 요청된 CPU 또는 메모리의 일부만 사용하고 있습니다.
+    recommendation_description: Containers가 요청된 CPU 또는 메모리의 일부만 사용하고 있습니다.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: GCP
-    recommendation_description: 컨테이너가 요청된 CPU 또는 메모리의 일부만 사용하고 있습니다.
+    recommendation_description: Containers가 요청된 CPU 또는 메모리의 일부만 사용하고 있습니다.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
@@ -775,7 +783,7 @@ title: Cloud Cost Recommendations
 
 이 페이지에 표시되는 관측 가능성 메트릭 또는 비용 데이터와 함께 각 권장 사항 유형의 상세 로직을 확인할 수 있습니다.
 
-권장 사항은 [Tag Pipelines][11]를 지원하므로 조직의 표준화된 태그를 사용하여 권장 사항을 필터링, 그룹화 및 분석할 수 있습니다. Tag Pipelines에 구성된 모든 태그 규칙은 권장 사항에 자동 적용되며 [정규화됩니다][12].
+권장 사항은 [태그 Pipelines][11]를 지원하므로 조직의 표준화된 태그를 사용하여 권장 사항을 필터링, 그룹화 및 분석할 수 있습니다. 태그 Pipelines에 구성된 모든 태그 규칙은 권장 사항에 자동 적용되며 [정규화됩니다][12].
 
 Datadog MCP Server의 [`cost_recommendations`][17] 도구를 사용하여 AI 에이전트에서 권장 사항을 쿼리할 수도 있습니다.
 
@@ -799,8 +807,8 @@ Cloud Cost 권장 사항을 받기 위해 필요한 요구 사항은 다음과 �
 - [AWS 통합 및 리소스 수집][3](AWS 권장 사항용)
 - [Azure 통합 및 리소스 수집][8](Azure 권장 사항용)
 - [GCP 통합 및 리소스 수집][10](GCP 권장 사항용)
-- [OpenAI 통합][18] (OpenAI 권장 사항용)
-- [Anthropic 통합][19] (Anthropic 권장 사항용)
+- [OpenAI 통합][18](OpenAI 권장 사항용)
+- [Anthropic 통합][19](Anthropic 권장 사항용)
 - [Datadog Agent 통합][5](축소 권장 사항용)
 
 ## 설정 {#setup}
@@ -819,7 +827,7 @@ Cloud Cost 권장 사항을 받기 위해 필요한 요구 사항은 다음과 �
 
 ## 위험 및 작업 강도 {#risk-and-level-of-effort}
 
-각 권장 사항에는 먼저 수행할 권장 사항의 우선순위를 정하는 데 도움이 되도록 **위험** 점수와 **작업 강도** 점수가 포함되어 있습니다. 두 점수 모두 {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, {{< ui >}}High{{< /ui >}} 척도를 사용합니다. 점수는 {{< ui >}}Active Recommendations{{< /ui >}} 표와 각 권장 사항 측면 패널의 {{< ui >}}Risk{{< /ui >}} 및 {{< ui >}}Effort{{< /ui >}} 열로 표시됩니다.
+권장 사항에는 먼저 수행할 권장 사항의 우선순위를 정하는 데 도움이 되도록 **위험** 점수와 **작업 강도** 점수가 포함되어 있습니다. 두 점수 모두 {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, {{< ui >}}High{{< /ui >}} 척도를 사용합니다. 점수는 {{< ui >}}Active Recommendations{{< /ui >}} 표와 각 권장 사항 측면 패널의 {{< ui >}}Risk{{< /ui >}} 및 {{< ui >}}Effort{{< /ui >}} 열로 표시됩니다.
 
 | 위험 | 설명 |
 |--------|-------------|

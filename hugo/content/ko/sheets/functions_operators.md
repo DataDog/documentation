@@ -339,4 +339,4 @@ Sheets의 함수와 연산자를 사용하여 데이터를 분석하고 변환�
 `TYPE(value)`
 : 값의 데이터 유형을 숫자로 반환합니다(1 = 숫자, 2 = 텍스트, 4 = 논리값, 16 = 오류). <br>**예시**: `TYPE(123) => 1` <br>**사용 가능**: Sheet
 
-[1]: /ko/sheets/#sheet-preview
+[1]: /ko/sheets/#sheet

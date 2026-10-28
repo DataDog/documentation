@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
+- link: "https://www.datadoghq.com/architecture/monitoring-kubernetes-with-datadog-distribution/"
+  tag: "Architecture Center"
+  text: "Monitoring Kubernetes with Datadog Distribution of the OpenTelemetry (DDOT) Collector"
 
 ---
 

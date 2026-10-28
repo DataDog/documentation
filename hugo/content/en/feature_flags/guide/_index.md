@@ -19,4 +19,6 @@ cascade:
     {{< nextlink href="/feature_flags/guide/migrate_from_statsig" >}}Migrate Your Feature Flags from Statsig{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/headless_cms" >}}Integrate Feature Flags with a Headless CMS{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/estimating_and_managing_costs" >}}Estimate and Manage Feature Flags Costs{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/proxy_sdk_traffic" >}}Proxy Feature Flag SDK Traffic{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/proxy_server_setup" >}}Set Up a Proxy Server for Feature Flag SDK Traffic{{< /nextlink >}}
 {{< /whatsnext >}}

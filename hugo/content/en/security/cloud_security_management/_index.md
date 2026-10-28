@@ -54,6 +54,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-oci"
     tag: "Blog"
     text: "Protect your OCI resources with Datadog Cloud Security"
+  - link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
+    tag: "Blog"
+    text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -113,7 +116,7 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 ## Explore and remediate issues
 
-For an overview of your Cloud Security and App and API Protection findings, sorted by importance, use the [Security Inbox][14].
+For an overview of your security findings, sorted by importance, across Cloud Security, Code Security, App and API Protection, and Workload Protection, use the [Security Inbox][14].
 
 To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
@@ -121,7 +124,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 
 ## Investigate resources
 
-- Use the [Security Graph][17] to model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources. You can write queries to search for specific relationships between resources, such as publicly accessible EC2 instances that can access S3 buckets containing sensitive data, so you can proactively mitigate those infrastructure risks.
+- Use the [Security Graph][17] to investigate supported attack-path findings. Open a finding's **Context Graph** to visualize the resources and relationships involved in the detected risk.
   {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 - Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
   {{< site-region region="gov,gov2" >}}

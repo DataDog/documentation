@@ -1,6 +1,7 @@
 ---
 title: Bits Agent Builder
 description: Build and deploy custom AI agents that automate operational tasks using Datadog's tools and integrations.
+site_support_id: bits_agent_builder
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
@@ -20,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-agent-builder/"
   tag: "Blog"
   text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
+- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
+  tag: "Blog"
+  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 ---
 
 ## Overview
