@@ -12,12 +12,12 @@ further_reading:
   text: "Set Up the Collector in the Datadog Agent"
 ---
 
-If you already use an upstream OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can move your pipeline to the Collector in the Agent. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. It gives you Agent features, such as integrations and Live Containers, alongside your OpenTelemetry pipeline. To keep the Agent out of your pipeline, use the [DDOT Collector][12] instead.
+Move your pipeline from an upstream OpenTelemetry (OTel) Collector to the Collector in the Agent, the OpenTelemetry Collector that runs inside the Datadog Agent. The Collector in the Agent gives you Agent features, such as integrations and Live Containers, alongside your OpenTelemetry pipeline. To keep the Agent out of your pipeline, use the [DDOT Collector][12] instead.
 
 To migrate, set up the Collector in the Agent and configure your applications to send their telemetry to it.
 
 <div class="alert alert-info">
-The Collector in the Agent supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>). The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a> deployment is available in Preview. If you have an existing gateway architecture, migrate DaemonSet collectors to the Collector in the Agent by following the instructions in this guide. Then migrate your gateway layer by following <a href="https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_gateway/?code-lang=kubernetes_gateway">Set Up the Collector in the Datadog Agent as a Gateway on Kubernetes</a>.
+The Collector in the Agent supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>). The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a> deployment is available in Preview. If you have a gateway architecture, first migrate your DaemonSet Collectors with this guide. Then migrate your gateway layer with <a href="https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_gateway/?code-lang=kubernetes_gateway">Set Up the Collector in the Datadog Agent as a Gateway on Kubernetes</a>.
 </div>
 
 ## Prerequisites

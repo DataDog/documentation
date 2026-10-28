@@ -19,15 +19,13 @@ Installing the standalone DDOT Collector with OpenTelemetry tooling is in Previe
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector on Kubernetes without the Datadog Agent. You can use the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart.
+Deploy the DDOT Collector on Kubernetes without the Datadog Agent, using the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node and sends your application's telemetry to Datadog.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> The <code>datadog/ddot-collector</code> image includes a fixed set of components. For the list, see <a href="/opentelemetry/setup/ddot_collector/#opentelemetry-collector-components">OpenTelemetry Collector components</a>. To add components, <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> builds a custom Datadog Agent image. That image is for the Collector in the Agent, the OpenTelemetry Collector that runs inside the Datadog Agent. It isn't for the standalone DDOT Collector on this page.
 </div>
 
 ## Requirements
-
-To complete this guide, you need the following:
 
 **Datadog account**:
 1. [Create a Datadog account][1] if you don't have one.
@@ -50,9 +48,9 @@ Install and set up the following on your machine:
 
 The commands in this guide use your current namespace. Run every step in the same namespace.
 
-### Select installation method
+### Choose an installation method
 
-Choose one of the following installation methods:
+Choose one of these installation methods:
 
 - [OpenTelemetry Operator][55]: A [Kubernetes-native][56] approach that automatically reconciles and maintains your OTel Collector setup.
 - [Helm chart][4]: A straightforward way to deploy OTel Collectors.
@@ -104,7 +102,7 @@ kubectl rollout status deployment/opentelemetry-operator --timeout=5m
 {{% tab "Helm" %}}
 ### Add the OpenTelemetry Helm repository
 
-To add the OpenTelemetry repository to your Helm repositories:
+Add the OpenTelemetry Helm repository:
 
 ```shell
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
@@ -114,7 +112,7 @@ helm repo update
 {{% /tab %}}
 {{< /tabs >}}
 
-### Set up Datadog API key
+### Store your Datadog API key
 
 1. Get the Datadog [API key][2].
 1. Confirm the **DATADOG SITE** selected on the right (Current value: **{{< region-param key="dd_site_name" >}}**) corresponds to your [Datadog site][52].
@@ -124,13 +122,13 @@ helm repo update
      --from-literal api-key=<DD_API_KEY>        \
      --from-literal site={{< region-param key="dd_site" >}}
    ```
-   Replace `<DD_API_KEY>` with your actual Datadog API key.
+   Replace `<DD_API_KEY>` with your Datadog API key.
 
 ### Configure the OTel Collector
 
 The DDOT Collector needs a host name for each node. Set it with the `DD_HOSTNAME` environment variable, as `<NODE_NAME>-<CLUSTER_NAME>`. Without `DD_HOSTNAME`, the Collector pod exits with `unable to reliably determine the host name`. This applies to every cluster, including clusters on a cloud provider.
 
-The example configurations below set `DD_HOSTNAME` from a `NODE_NAME` variable:
+The example configurations on this page set `DD_HOSTNAME` from a `NODE_NAME` variable:
 
 ```yaml
 - name: NODE_NAME
@@ -806,7 +804,7 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 
 ## Send your telemetry to Datadog
 
-To send your telemetry data to Datadog:
+Complete these steps:
 
 1. [Instrument your application](#instrument-the-application)
 2. [Configure the application](#configure-the-application)
@@ -884,11 +882,13 @@ If the Collector pods aren't running, see [Troubleshooting](#troubleshooting).
 
 After your application sends telemetry, check for it in Datadog. Data can take up to five minutes to appear. Replace `<SERVICE>`, `<ENV>`, and `<CLUSTER_NAME>` with the values from your configuration.
 
-- **Services**: In the [Catalog][58], set the environment to `<ENV>` and search for `<SERVICE>`. Its service page shows requests, errors, and latency.
-- **Traces**: In the [Trace Explorer][59], search for `service:<SERVICE> env:<ENV>`.
-- **Hosts**: In the [Host List][60], each node appears as `<NODE_NAME>-<CLUSTER_NAME>`. With `DD_HOSTNAME` set as in the example configuration and no Datadog Agent on the node, each node appears once.
-- **Metrics**: If your configuration collects kubelet metrics, as the example configuration does, graph `avg:k8s.pod.cpu.usage{kube_cluster_name:<CLUSTER_NAME>}` in the [Metrics Explorer][61].
-- **Logs**: In the [Log Explorer][62], search for `service:<SERVICE> env:<ENV>`.
+| Check | Where to look | What you see |
+|---|---|---|
+| Services | [Catalog][58]: set the environment to `<ENV>` and search for `<SERVICE>`. | The service page, with requests, errors, and latency. |
+| Traces | [Trace Explorer][59]: search for `service:<SERVICE> env:<ENV>`. | Your service's traces. |
+| Hosts | [Host List][60] | Each node, as `<NODE_NAME>-<CLUSTER_NAME>`. With `DD_HOSTNAME` set as in the example configuration and no Datadog Agent on the node, each node appears one time. |
+| Metrics | [Metrics Explorer][61]: if your configuration collects kubelet metrics, as the example configuration does, graph `avg:k8s.pod.cpu.usage{kube_cluster_name:<CLUSTER_NAME>}`. | Pod CPU usage for your cluster. |
+| Logs | [Log Explorer][62]: search for `service:<SERVICE> env:<ENV>`. | Your service's logs. |
 
 ## Troubleshooting
 
@@ -925,7 +925,7 @@ The DDOT Collector already collects some of the data the Agent can collect, and 
 - **OTLP ports**: Don't turn on OTLP ingestion in the Agent, or the Collector in the Agent, on host ports `4317` or `4318`. The DDOT Collector uses those host ports on every node. Kubernetes can't schedule two pods that use the same host port on one node, so the Agent pod stays `Pending`.
 - **Cluster name**: Set `spec.global.clusterName` to the same `<CLUSTER_NAME>` you use for the Collector. When a cluster name is set, the Agent reports `<NODE_NAME>-<CLUSTER_NAME>` as a host alias for the node. That's the same host name the Collector uses.
 
-By default, the Datadog Operator Helm chart watches `DatadogAgent` resources only in the namespace where the Operator is installed (`watchNamespaces: []`). You can create the `DatadogAgent` resource in a different namespace, for example to keep it separate from the `OpenTelemetryCollector` resource. If you do, set `watchNamespaces` to list both namespaces. The list replaces the default, so include the Operator's own namespace:
+By default, the Datadog Operator Helm chart watches `DatadogAgent` resources only in the namespace where the Operator is installed (`watchNamespaces: []`). You can create the `DatadogAgent` resource in a different namespace, such as to keep it separate from the `OpenTelemetryCollector` resource. If you do, set `watchNamespaces` to list both namespaces. The list replaces the default, so include the Operator's own namespace:
 
 ```shell
 helm upgrade datadog-operator datadog/datadog-operator \
