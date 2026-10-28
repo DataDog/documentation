@@ -34,7 +34,7 @@ This page covers Agent 7 on AIX. For AIX versions that Agent 7 does not support,
 ## Overview
 The Datadog Agent brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that run on-prem.
 
-**Note**: Agent 7 on AIX does not yet support the following:
+**Note**: Agent 7 on AIX does not support the following:
 - JMX-based integrations
 - Cloud Network Monitoring
 - Remote Agent configuration and upgrades with Fleet Automation
@@ -47,7 +47,7 @@ See [Supported Platforms][5] for the complete list of supported AIX versions.
 - Root privileges (or sudo) on each host
 - Outbound HTTPS (443) to `.datadoghq.com`
 - `curl` or `wget`, and `ksh` (shipped on AIX by default)
-- Verify your host is running a [Supported AIX version][5]
+- Verify your host is running a [supported AIX version][5]
 
 ### Install the Agent
 

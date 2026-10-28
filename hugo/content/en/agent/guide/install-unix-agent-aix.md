@@ -20,7 +20,7 @@ This page covers the legacy Datadog UNIX Agent. Datadog recommends installing or
 ## Overview
 The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
+The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products, such as APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management, are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
 
 This page walks you through installing, operating, and removing the Datadog UNIX Agent on AIX.
 
@@ -30,7 +30,7 @@ This page walks you through installing, operating, and removing the Datadog UNIX
 - Root privileges (or sudo) on each host
 - Outbound HTTPS (443) to `.datadoghq.com`
 - curl or ksh (shipped on AIX by default)
-- Verify your host is running a [Supported AIX version][5]
+- Verify your host is running a [supported AIX version][5]
 
 ### Install the Agent
 
@@ -79,7 +79,7 @@ Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
 
 ## Available integrations
 
-Out of the box integrations
+Out-of-the-box integrations
 : `cpu`
 : `filesystem`
 : `iostat`
@@ -110,7 +110,7 @@ To remove an installed Agent, run the following `installp` command:
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
-**Note:** Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
+**Note:** Agent uninstallation logs can be found in the `dd-aix-uninstall.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
 
 ## Further Reading
 
