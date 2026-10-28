@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41085
+    operations:
+      - CreateMonitorNotificationRule
+      - DeleteMonitorNotificationRule
+      - UpdateMonitorNotificationRule
+    title: Add monitor notification rules write permission definition

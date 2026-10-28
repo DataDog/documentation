@@ -1,3 +1,3 @@
 ---
-title: Agent Observability実験のイベントを一覧表示する
+title: Agent Observability 実験のイベントの一覧表示
 ---

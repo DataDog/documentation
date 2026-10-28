@@ -1,0 +1,10 @@
+entries:
+  - change_type: added
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41012
+    operations:
+      - CancelArchiveSearch
+      - ListArchiveSearches
+      - RehydrateArchiveSearch
+    title: Add List, Cancel and Rehydrate Archive Search endpoints to the public
+      API
