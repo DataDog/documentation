@@ -5,10 +5,11 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-After you [install the Datadog SDK][1], some SDKs need an extra step to enable the RUM module and start sending data. Select your SDK for platform-specific instructions.
+After you [install the Datadog SDK][1], some SDKs need an extra step to enable the RUM module and start sending data.
 
 [1]: /real_user_monitoring/setup/install/
 
@@ -164,7 +165,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 
 ## Configure what RUM collects
 
-After you enable RUM, use the following pages to configure what the SDK collects:
+After you enable RUM, the SDK collects some data automatically. Some features need an extra step to turn on, and others are optional. Use the following pages to review the defaults and configure what the SDK collects:
 
 - [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/): Configure the session sample rate and retrieve session IDs.
 - [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/): Stop data collection and clear data stored on the device.

@@ -90,8 +90,7 @@ further_reading:
   tag: "Documentation"
   text: "Monitor hybrid React Native applications"
 ---
-
-Select your SDK for platform-specific data collection details.
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 <!-- Browser -->
 

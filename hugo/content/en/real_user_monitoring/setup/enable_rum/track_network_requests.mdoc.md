@@ -5,10 +5,11 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-RUM can automatically track network requests as resources, and you can also track custom resources manually from your own code. Select your SDK for platform-specific setup instructions.
+RUM can automatically track network requests as resources, and you can also track custom resources manually from your own code.
 
 <!-- Browser -->
 

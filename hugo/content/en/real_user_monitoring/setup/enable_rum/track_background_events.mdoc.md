@@ -13,12 +13,11 @@ further_reading:
   tag: 'Documentation'
   text: 'RUM data collected'
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
 Background events are events that occur while your application is in the background and no view is active, such as crashes and network requests. Enable background event tracking to collect these events in RUM.
-
-Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 

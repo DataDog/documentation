@@ -5,10 +5,11 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-RUM Actions represent the interactions your users have with your application, such as taps, clicks, and scrolls. Most SDKs track common interactions automatically, and all SDKs support manually tracking custom actions. Select your SDK for platform-specific setup instructions.
+RUM Actions represent the interactions your users have with your application, such as taps, clicks, and scrolls. Most SDKs track common interactions automatically, and all SDKs support manually tracking custom actions.
 
 <!-- Browser -->
 

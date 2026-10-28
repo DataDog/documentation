@@ -5,12 +5,11 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
 RUM measures how fast your mobile app becomes usable after launch. Time to initial display (TTID) is collected automatically, and time to full display (TTFD) is reported manually from your own code. With RUM without Limits, TTID and TTFD each get their own [out-of-the-box metrics](/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/), computed over all ingested sessions regardless of retention.
-
-Select your SDK for platform-specific setup instructions.
 
 <!-- Browser -->
 

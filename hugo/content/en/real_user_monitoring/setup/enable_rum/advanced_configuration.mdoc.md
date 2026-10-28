@@ -54,10 +54,11 @@ aliases:
   - /real_user_monitoring/unity/otel_support
 
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-The following configuration options go beyond initial setup. Select your SDK for platform-specific advanced configuration.
+The following configuration options go beyond initial setup.
 
 <!-- Browser -->
 

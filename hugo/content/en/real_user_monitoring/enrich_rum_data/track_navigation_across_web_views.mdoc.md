@@ -54,6 +54,7 @@ further_reading:
   tag: "Blog"
   text: "Monitor your hybrid mobile applications with Datadog"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 

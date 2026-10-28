@@ -28,10 +28,11 @@ aliases:
   - /real_user_monitoring/frustration_signals
   - /real_user_monitoring/browser/frustration_signals/
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-Frustration signals help you identify points of user friction, such as rage clicks, dead clicks, and error taps, by surfacing moments when users exhibit frustration. Select your SDK for platform-specific setup instructions.
+Frustration signals help you identify points of user friction, such as rage clicks, dead clicks, and error taps, by surfacing moments when users exhibit frustration.
 
 <!-- Browser -->
 

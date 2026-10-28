@@ -39,10 +39,11 @@ aliases:
 - /real_user_monitoring/error_tracking/mobile/unity/
 - /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/unity/
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-RUM automatically captures crashes, unhandled exceptions, and other errors. You can also report errors manually from your own error-handling code. Select your SDK for platform-specific setup instructions.
+RUM automatically captures crashes, unhandled exceptions, and other errors. You can also report errors manually from your own error-handling code.
 
 <!-- Browser -->
 

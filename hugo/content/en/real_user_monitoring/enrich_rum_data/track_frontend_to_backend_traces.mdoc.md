@@ -17,6 +17,7 @@ further_reading:
   tag: "Blog"
   text: "Unify APM and RUM data for full-stack visibility"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
@@ -33,8 +34,6 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 - Your HTTP servers use [a library that supports distributed tracing](#supported-libraries).
 - You have configured your allowed tracing URLs or first-party hosts, depending on your SDK. See the setup instructions for your platform below.
 - You have a corresponding trace for requests to your allowed tracing URLs or first-party hosts.
-
-Select your SDK for platform-specific instructions on connecting frontend RUM data to backend APM traces.
 
 <!-- Browser -->
 
@@ -215,7 +214,6 @@ Configuring cross-product retention filters may also increase the APM-indexed vo
 ## Next step
 
 Continue to [Collect Frontend Profiles](/real_user_monitoring/enrich_rum_data/collect_frontend_profiles/).
-
 
 [1]: /tracing
 [2]: https://app.datadoghq.com/rum/explorer

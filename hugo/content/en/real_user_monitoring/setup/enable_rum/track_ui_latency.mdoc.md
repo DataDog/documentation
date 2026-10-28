@@ -24,14 +24,13 @@ aliases:
   - /real_user_monitoring/application_monitoring/unity/mobile_vitals/
   - /real_user_monitoring/application_monitoring/maui/mobile_vitals/
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
 RUM measures how fast your UI responds, from page and view loading to user interactions. Metrics include Core Web Vitals, view loading time, Time to Network Settled, and Interaction to Next View.
 
 With RUM without Limits, some of these measurements also get [out-of-the-box metrics](/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/) computed over all ingested sessions. The available metrics depend on the SDK.
-
-Select your SDK for platform-specific setup instructions.
 
 <!-- Browser -->
 

@@ -58,6 +58,7 @@ further_reading:
   tag: "Blog"
   text: "Get better RUM data with our custom React components"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
@@ -65,8 +66,6 @@ Extend the Datadog SDK with additional plugins and integrations:
 
 - **Build plugins** (Browser): Integrate with your JavaScript bundler to automate common RUM tasks during your build process, such as source map uploads.
 - **Integrated libraries** (mobile): Integrate the SDK with third-party libraries, such as networking and image-loading libraries, to collect more RUM data.
-
-Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 

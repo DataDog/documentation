@@ -5,10 +5,11 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
-RUM organizes each session into views, which represent distinct screens or states in your application. Most SDKs track views automatically, and some also support manually starting and stopping views for finer control. Select your SDK for platform-specific setup instructions.
+RUM organizes each session into views, which represent distinct screens or states in your application. Most SDKs track views automatically, and some also support manually starting and stopping views for finer control.
 
 <!-- Browser -->
 

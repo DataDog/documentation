@@ -23,6 +23,7 @@ further_reading:
   tag: "Documentation"
   text: "Create and manage feature flags in Datadog"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
@@ -39,8 +40,6 @@ By enriching your RUM data with feature flag data, you can:
 - Simplify data collection and analysis and focus on troubleshooting
 
 Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, React Native, Kotlin Multiplatform, and Unity SDKs. You can create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own [custom feature flag management solution](#custom-feature-flag-management).
-
-Select your SDK for platform-specific instructions.
 
 ## Set up RUM monitoring
 

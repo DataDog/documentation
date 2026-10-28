@@ -5,6 +5,7 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
@@ -13,8 +14,6 @@ Add user and account information to your RUM sessions to:
 - Follow the activity of a given user
 - Know which users and accounts are the most impacted by errors
 - Monitor performance for your most important users and accounts
-
-Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}

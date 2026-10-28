@@ -9,12 +9,11 @@ further_reading:
   tag: "Documentation"
   text: "Modify or drop RUM events client-side"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
 The SDK stores events locally and only uploads them when intake conditions are met. Use the following APIs to stop data collection, clear unsent data, and control which internal data the SDK exposes. To ask for user consent before collecting data, configure tracking consent when you [install the SDK](/real_user_monitoring/setup/install/).
-
-Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 

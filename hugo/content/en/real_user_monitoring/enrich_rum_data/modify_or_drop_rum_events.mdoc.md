@@ -16,14 +16,13 @@ further_reading:
   tag: "Documentation"
   text: "Explore your views within Datadog"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
 The RUM SDKs let you modify attributes of RUM events, or drop events entirely, before they're sent to Datadog. These changes happen client-side, in your application.
 
 To control which sessions Datadog retains server-side, use [retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/). To redact sensitive data server-side, use [Sensitive Data Scanner](/security/sensitive_data_scanner/).
-
-Select your SDK for platform-specific instructions on modifying or dropping RUM events before they're sent to Datadog.
 
 <!-- Browser -->
 

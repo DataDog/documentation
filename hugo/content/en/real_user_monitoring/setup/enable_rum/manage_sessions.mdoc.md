@@ -5,14 +5,13 @@ content_filters:
     option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
+This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 ## Overview
 
 Configure how the SDK samples RUM sessions and how to retrieve the current session ID.
 
 The session sample rate is a client-side, head-based control: sessions that aren't sampled are never sent to Datadog. Datadog recommends keeping the session sample rate at 100% and using [retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control the volume of sessions that Datadog retains. With a 100% sample rate, [out-of-the-box metrics](/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/) are computed over all of your sessions.
-
-Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
