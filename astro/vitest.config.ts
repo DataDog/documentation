@@ -11,8 +11,12 @@ import { defineConfig } from "vitest/config";
 // Run a single project:
 //   vitest run --config vitest.unit.config.ts
 //   vitest run --config vitest.integration.config.ts
+//
+// globalSetup syncs the content collections before either project runs. It
+// lives here, not in the project files, so it runs once rather than twice.
 export default defineConfig({
   test: {
+    globalSetup: ["./tests/vitestGlobalSetup.ts"],
     projects: ["./vitest.unit.config.ts", "./vitest.integration.config.ts"],
   },
 });
