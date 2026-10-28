@@ -32,6 +32,8 @@ github "DataDog/dd-sdk-ios"
 
 In Xcode, link the following frameworks:
 ```
+DatadogInternal.xcframework
+DatadogCore.xcframework
 DatadogWebViewTracking.xcframework
 ```
 {% /collapse-content %}
@@ -54,7 +56,7 @@ To disable Web View Tracking:
 WebViewTracking.disable(webView: webView)
 ```
 
-`hosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
+`hosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Wildcard patterns require SDK version 3.13.0 or later. Invalid entries are dropped with a warning.
 
 [1]: /real_user_monitoring/setup/install/?platform=ios
 [2]: https://docs.datadoghq.com/logs/log_collection/ios

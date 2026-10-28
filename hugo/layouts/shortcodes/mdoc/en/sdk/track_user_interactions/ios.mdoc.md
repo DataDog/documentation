@@ -4,6 +4,8 @@
 
 To automatically track user tap actions with UIKit, set the `uiKitActionsPredicate` option when enabling RUM.
 
+Since SDK version 3.8.0, the UIKit predicate also tracks scroll and swipe actions. To turn this off, set `featureFlags: [.trackScrollAndSwipeActions: false]`. Scroll and swipe tracking isn't available on tvOS.
+
 ### SwiftUI
 
 To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
@@ -26,7 +28,7 @@ let predicate = DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: fals
 
 // Use your own predicate
 class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
-    func rumAction(for componentName: String) -> RUMAction? {
+    func rumAction(with componentName: String) -> RUMAction? {
         // Custom logic to filter or rename actions
         return RUMAction(name: componentName)
     }
@@ -41,15 +43,11 @@ class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
 DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:NO];
 
 // Use your own predicate
-@protocol DDSwiftUIRUMActionsPredicate <NSObject>
-- (DDRUMAction * _Nullable)rumActionFor:(NSString * _Nonnull)componentName;
-@end
-
 @interface CustomSwiftUIActionsPredicate : NSObject <DDSwiftUIRUMActionsPredicate>
 @end
 
 @implementation CustomSwiftUIActionsPredicate
-- (DDRUMAction * _Nullable)rumActionFor:(NSString * _Nonnull)componentName {
+- (DDRUMAction * _Nullable)rumActionWith:(NSString * _Nonnull)componentName {
     // Custom logic to filter or rename actions
     return [[DDRUMAction alloc] initWithName:componentName attributes:@{}];
 }
@@ -66,7 +64,7 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 | **Component**    | **iOS 18 reported name**                          | **iOS 17 reported name**             |
 |------------------|---------------------------------------------------|--------------------------------------|
 | Button           | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
-| NavigationLink   | NavigationLink                                    | SwiftUI_Unidentified_Element         |
+| NavigationLink   | SwiftUI_NavigationLink                            | SwiftUI_Unidentified_Element         |
 | Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
 | Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
 
@@ -115,7 +113,7 @@ For more details and available options, see [`RUMMonitorProtocol` in GitHub][1].
 
 ### Instrument SwiftUI tap actions
 
-You can also instrument tap actions of `SwiftUI` applications manually. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
+You can also instrument tap actions of `SwiftUI` applications manually. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. `.trackRUMTapAction(name:)` isn't available on tvOS.
 
 {% alert level="warning" %}
 Using `.trackRUMTapAction(name:)` for `SwiftUI` controls inside a `List` can break its default gestures. For example, it may disable the `Button` action or break `NavigationLink`. To track taps in a `List` element, use the `addAction(type:name:)` API described above instead.

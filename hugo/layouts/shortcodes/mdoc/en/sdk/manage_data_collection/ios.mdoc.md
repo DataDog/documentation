@@ -14,7 +14,7 @@ Datadog.clearAllData()
 
 ### Stop data collection
 
-You can use the `Datadog.stopInstance()` API to stop a named SDK instance (or the default instance if the name is `nil`) from collecting and uploading data further.
+You can use the `Datadog.stopInstance()` API to stop an SDK instance from collecting and uploading data further. Pass an instance name to stop a named instance, or omit it to stop the default instance. In Objective-C, pass `nil` to stop the default instance.
 
 ```swift
 import DatadogCore

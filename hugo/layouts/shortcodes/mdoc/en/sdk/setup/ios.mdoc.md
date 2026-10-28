@@ -10,7 +10,7 @@ The iOS SDK supports the Apple ecosystem, including iOS, iPadOS, tvOS, watchOS, 
 ## Prerequisites
 
 Before you begin, you need:
-- Xcode 12.0 or later
+- Xcode 26 or later
 - A supported Apple platform deployment target (see [Supported versions](#supported-versions) for minimum OS versions per platform)
 - A Datadog account with RUM or Error Tracking enabled
 
@@ -36,7 +36,7 @@ Add the iOS SDK to your project using your preferred package manager. Datadog re
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.17.0"))
 ```
 
 In your project, link the following libraries:
@@ -49,7 +49,7 @@ DatadogRUM
 {% /tab %}
 {% tab label="CocoaPods" %}
 
-You can use [CocoaPods][6] to install `dd-sdk-ios`:
+You can use [CocoaPods][20] to install `dd-sdk-ios`:
 
 ```
 pod 'DatadogCore'
@@ -60,7 +60,7 @@ pod 'DatadogRUM'
 {% /tab %}
 {% tab label="Carthage" %}
 
-You can use [Carthage][7] to install `dd-sdk-ios`:
+You can use [Carthage][21] to install `dd-sdk-ios`:
 
 ```
 github "DataDog/dd-sdk-ios"
@@ -101,8 +101,6 @@ Initializing here allows the SDK to correctly capture all measurements, includin
 Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
 {% /alert %}
 
-For more information, see [Using Tags][8].
-
 To manage supported SDK settings from Datadog without deploying a new version of your application, set the optional `remoteConfiguration` parameter to your remote configuration ID. For more information, see [Remote Configuration][9].
 
 Use a client token to help protect your data. Using only [Datadog API keys][6] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code. For more information about setting up a client token, see the [Client token documentation][7].
@@ -135,6 +133,7 @@ Datadog.initialize(
 // Initialize Datadog SDK with your configuration
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";  // Your app's service name
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];  // GDPR compliance setting
@@ -171,6 +170,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite eu1];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -208,6 +208,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite us3];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -245,6 +246,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite us5];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -282,6 +284,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite us1_fed];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -319,6 +322,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite us2_fed];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -356,6 +360,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite ap1];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -393,6 +398,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite ap2];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -430,6 +436,7 @@ Datadog.initialize(
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
+[configuration setRemoteConfiguration:[[DDRemoteConfiguration alloc] initWithId:@"<remote configuration id>"]];  // Optional
 configuration.site = [DDSite uk1];
 
 [DDDatadog initializeWithConfiguration:configuration
@@ -440,7 +447,7 @@ configuration.site = [DDSite uk1];
 {% /tabs %}
 {% /site-region %}
 
-The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. For other [initialization parameters][10], see Advanced Configuration.
+The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. For other initialization parameters, see [Advanced Configuration][10].
 
 You can adjust the session sample rate with the `sessionSampleRate` parameter, but Datadog recommends using [retention filters][18] to control retained volume. For details, see [Manage Sessions][19].
 
@@ -487,14 +494,14 @@ The RUM iOS SDK supports the following platforms and versions:
 
 | Platform | Supported | Version | Notes |
 |--------|-------------|---------|-------|
-| iOS | {% x/ %} | 12+ | |
-| iPadOS | {% x/ %} | 12+ | |
-| tvOS | {% x/ %} | 12+ | |
+| iOS | {% x/ %} | 15+ | |
+| iPadOS | {% x/ %} | 15+ | |
+| tvOS | {% x/ %} | 15+ | |
 | visionOS | {% x/ %} | 1.0+ | |
-| watchOS | {% x/ %} | 7.0+ | |
-| macOS (Designed for iPad) | {% x/ %} | 11+ | |
+| watchOS | {% x/ %} | 9+ | |
+| macOS (Designed for iPad) | {% x/ %} | 15+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
-| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
+| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogSessionReplay`, which heavily depends on `UIKit`, does not build on macOS. |
 | Linux | | n/a | |
 
 ### Module support by platform
@@ -527,7 +534,7 @@ The iOS SDK supports the following dependency managers:
 
 | Language | Version |
 |----------|---------|
-| UIKit | 5.* |
+| Swift | 6 |
 | Objective-C | 2.0 |
 
 ### UI framework instrumentation
@@ -550,9 +557,10 @@ The iOS SDK supports the following dependency managers:
 
 ### Dependencies
 
-The Datadog RUM SDK depends on the following third-party library:
+The Datadog iOS SDK depends on the following third-party libraries:
 
-- [KSCrash][17] 2.5.0
+- [KSCrash][17] 2.5.1, used by `DatadogCrashReporting`
+- [opentelemetry-swift-core][22] 2.5.0, used by `DatadogTrace`
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/
@@ -561,7 +569,6 @@ The Datadog RUM SDK depends on the following third-party library:
 [5]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [6]: /account_management/api-app-keys/#api-keys
 [7]: /account_management/api-app-keys/#client-tokens
-[8]: /getting_started/tagging/using_tags/#rum--session-replay
 [9]: /real_user_monitoring/remote_configuration/
 [10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#initialization-parameters
 [11]: https://developer.apple.com/xcode/
@@ -573,3 +580,6 @@ The Datadog RUM SDK depends on the following third-party library:
 [17]: https://github.com/kstenerud/KSCrash
 [18]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
 [19]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
+[20]: https://cocoapods.org/
+[21]: https://github.com/Carthage/Carthage
+[22]: https://github.com/open-telemetry/opentelemetry-swift-core

@@ -37,7 +37,7 @@ You can adjust the session sample rate, but Datadog recommends using [retention 
 
 Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
 
-You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+You can access the RUM session ID at runtime without waiting for the `RUM.Configuration.onSessionStart` callback:
 
 ```swift
 RUMMonitor.shared().currentSessionID(completion: { sessionId in

@@ -45,15 +45,15 @@ The following device-related attributes are attached automatically to all events
 | Attribute name                       | Type   | Description                                                                                              |
 |--------------------------------------|--------|----------------------------------------------------------------------------------------------------------|
 | `device.architecture`                | string | The CPU architecture of the device that is reporting the error.                                          |
-| `device.batteryLevel`                | number | The current battery level of the device (0.0 to 1.0).                                                    |
+| `device.battery_level`                | number | The current battery level of the device (0.0 to 1.0).                                                    |
 | `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                          |
-| `device.brightnessLevel`             | number | The current screen brightness level (0.0 to 1.0).                                                        |
+| `device.brightness_level`             | number | The current screen brightness level (0.0 to 1.0).                                                        |
 | `device.locale`                      | string | The user's locale as a language tag combining language and region (for example, 'en-US').                        |
 | `device.locales`                     | array (string) | Ordered list of the user's preferred system languages as IETF language tags.                     |
 | `device.model`                       | string | The device model as reported by the device (System User-Agent).                                          |
 | `device.name`                        | string | The device name as reported by the device (System User-Agent).                                           |
-| `device.powerSavingMode`             | Boolean | Whether the device is in power saving mode.                                                             |
-| `device.timeZone`                    | string | The device's current time zone identifier.                                                               |
+| `device.power_saving_mode`             | Boolean | Whether the device is in power saving mode.                                                             |
+| `device.time_zone`                    | string | The device's current time zone identifier.                                                               |
 | `device.type`                        | string | The device type as reported by the device (System User-Agent).                                           |
 
 ### Connectivity
@@ -62,7 +62,7 @@ The following network-related attributes are attached automatically to Resource 
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
-| `connectivity.status`                | string | Status of device network reachability (`connected`, `not connected`, `maybe`).                           |
+| `connectivity.status`                | string | Status of device network reachability (`connected`, `not_connected`, `maybe`).                           |
 | `connectivity.interfaces`            | string | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`). |
 | `connectivity.cellular.technology`   | string | The type of radio technology used for cellular connection.                                              |
 | `connectivity.cellular.carrier_name` | string | The name of the SIM carrier.                                                                              |
@@ -138,7 +138,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.error.count`    | number      | Count of all errors collected for this view.                                 |
 | `view.is_active`      | Boolean     | Indicates whether the view corresponding to this event is considered active. |
 | `view.id`      | string | Unique ID of the initial view corresponding to the event.  |
-| `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(override:) call. |
+| `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(overwrite:) call. |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
 | `view.memory_average` | number (bytes) | Exact arithmetic mean of successful whole-process memory samples collected while this view is on screen. |
@@ -155,7 +155,7 @@ The iOS SDK reads the `phys_footprint` value from the process's `task_vm_info` s
 
 Each view tracks the exact running mean and maximum of successful samples. Calculations reset when the view starts, so they reflect only the samples collected during that view, not a rolling average carried over from previous views.
 
-By default, the SDK samples memory every 500 ms (`.average`). Use [`vitalsUpdateFrequency`][7] to change the frequency (`.frequent` for every 100 ms or `.rare` for every 1 s) or disable vitals collection by setting it to `nil`. If the SDK cannot read `task_vm_info`, it skips that sample without reporting an error.
+By default, the SDK samples memory every 500 ms (`.average`). Use [`vitalsUpdateFrequency`][8] to change the frequency (`.frequent` for every 100 ms or `.rare` for every 1 s) or disable vitals collection by setting it to `nil`. If the SDK cannot read `task_vm_info`, it skips that sample without reporting an error.
 
 ### View accessibility attributes
 
@@ -181,7 +181,7 @@ The following attributes are collected for each view after collection is enabled
 | `view.accessibility.increase_contrast_enabled` | Boolean | Whether the system-wide increase contrast setting is enabled. |
 | `view.accessibility.assistive_switch_enabled` | Boolean | Whether Switch Control is active. |
 | `view.accessibility.assistive_touch_enabled` | Boolean | Whether AssistiveTouch is active. |
-| `view.accessibility.is_video_autoplay_enabled` | Boolean | Whether video autoplay is enabled. |
+| `view.accessibility.video_autoplay_enabled` | Boolean | Whether video autoplay is enabled. |
 | `view.accessibility.closed_captioning_enabled` | Boolean | Whether closed captioning is enabled for media playback. |
 | `view.accessibility.mono_audio_enabled` | Boolean | Whether mono audio is enabled. |
 | `view.accessibility.shake_to_undo_enabled` | Boolean | Whether the Shake to Undo gesture is enabled. |
@@ -226,7 +226,7 @@ Frontend errors are collected with Real User Monitoring (RUM). The error message
 | `error.message`  | string | A concise, human-readable, one-line message explaining the event.                |
 | `error.stack`    | string | The stack trace or complementary information about the error.                    |
 | `error.issue_id` | string | The stack trace or complementary information about the error. |
-| `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR`, `App Hang`, `Exception`, `Watchdog Termination`, `Memory Warning` or `Network`. |
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `App Hang`, `Exception`, `Watchdog Termination`, `Memory Warning` or `Network`. |
 | `error.file` | string | File where the issue found by Error Tracking occurred. |
 | `error.is_crash` | Boolean | Indicates whether the error caused the application to crash. |
 | `freeze.duration` | int64 | Duration of the main thread freeze (in nanoseconds). This is only supported for App Hangs. |
@@ -268,3 +268,4 @@ Before data is uploaded to Datadog, it is stored in cleartext in the cache direc
 [5]: /data_security/real_user_monitoring/#ip-address
 [6]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [7]: /getting_started/tagging/unified_service_tagging/
+[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#rum-configuration

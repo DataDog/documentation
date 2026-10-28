@@ -28,7 +28,7 @@ let session = URLSession(
 
 ```objective-c
 DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
-[DDURLSessionInstrumentation enableWithConfiguration:config];
+[DDURLSessionInstrumentation enableDurationBreakdownWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                       delegate:[[<YourSessionDelegate> alloc] init]
@@ -43,7 +43,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
 - In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints. See below for full details.
 - To exclude URLs from tracking, use `disallowList` (see [Exclude URLs from RUM Resource tracking](#exclude-urls-from-rum-resource-tracking)). To modify or drop resource events with custom logic, use `resourceEventMapper` (see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=ios)).
-- When a resource is served from the device's local cache, it is reported with `resource.local_cache_hit: true` (see [Resource attributes](/real_user_monitoring/setup/data_collected/?platform=ios#resource-attributes)). This signal is available only in registered-delegate instrumentation mode, not when using automatic instrumentation with completion-handler swizzling.
+- When a resource is served from the device's local cache, it is reported with `resource.delivery_type: "cache"` (SDK version 3.18.0 and later; earlier versions report `resource.local_cache_hit: true`) (see [Resource attributes](/real_user_monitoring/setup/data_collected/?platform=ios#resource-attributes)). This signal is available only in registered-delegate instrumentation mode, not when using automatic instrumentation with completion-handler swizzling.
 
 {% alert level="info" %}
 Be mindful of delegate retention.
@@ -52,9 +52,9 @@ While Datadog instrumentation does not create memory leaks directly, it relies o
 To avoid memory leaks, make sure to invalidate any `URLSession` instances you no longer need.
 {% /alert %}
 
-If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
+If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enableDurationBreakdown(with:)` for each delegate type.
 
-Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
+Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. By default, 100% of traces are sampled.
 
 Each entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
@@ -78,7 +78,7 @@ RUM.enable(
   )
 )
 
-URLSessionInstrumentation.enable(
+URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(
         delegateClass: <YourSessionDelegate>.self
     )
@@ -100,7 +100,7 @@ This tracks all requests sent with the instrumented `session`. Requests matching
 
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
-[urlSessionTracking setFirstPartyHostsTracing:[DDRUMFirstPartyHostsTracing alloc] initWithHosts:@[@"example.com"] sampleRate:20];
+[urlSessionTracking setFirstPartyHostsTracing:[[DDRUMFirstPartyHostsTracing alloc] initWithHosts:@[@"example.com"] sampleRate:20]];
 [configuration setURLSessionTracking:urlSessionTracking];
 
 [DDRUM enableWith:configuration];
@@ -249,7 +249,7 @@ Set up network instrumentation for Apollo's built-in URLSessionClient:
 ```swift
 import Apollo
 
-URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.self))
+URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: URLSessionClient.self))
 ```
 
 Add the Datadog interceptor to your Apollo Client setup:
@@ -286,7 +286,7 @@ let customSession = DatadogApolloURLSession(
 )
 
 // Enable Datadog instrumentation for the delegate
-URLSessionInstrumentation.enable(
+URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(delegateClass: DatadogApolloDelegate.self)
 )
 
@@ -372,6 +372,7 @@ rum.stopResource(
 
 [[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
                                           response:response
+                                              size:nil
                                         attributes:@{}];
 ```
 

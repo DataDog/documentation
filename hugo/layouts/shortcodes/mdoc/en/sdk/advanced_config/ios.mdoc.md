@@ -34,7 +34,7 @@ You can use the following properties in `Datadog.Configuration` when creating th
 : A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
 
 `remoteConfiguration`
-: (Optional) The remote configuration ID to use for managing supported SDK settings from Datadog. For more information, see [Remote Configuration][10].
+: (Optional) A remote configuration with an `id` and an optional `customURL`, used to manage supported SDK settings from Datadog. Available from SDK version 3.17.0. For more information, see [Remote Configuration][10].
 
 `serverDateProvider`
 : A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][8]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
@@ -70,6 +70,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `errorEventMapper`
 : The data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or Drop RUM Events][3].
 
+`featureFlags`
+: Turns specific SDK behaviors on or off. For example, `[.trackScrollAndSwipeActions: false]` turns off scroll and swipe action tracking.
+
 `longTaskEventMapper`
 : The data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or Drop RUM Events][3].
 
@@ -91,8 +94,14 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `sessionSampleRate`
 : The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`. For more information, see [Manage Sessions][9].
 
+`swiftUIActionsPredicate`
+: Enables tracking SwiftUI interactions as RUM actions. You can use the default implementation by setting `DefaultSwiftUIRUMActionsPredicate` or implement [your own `SwiftUIRUMActionsPredicate`][4] customized for your app.
+
+`swiftUIViewsPredicate`
+: Enables tracking SwiftUI views as RUM views. You can use the default implementation by setting `DefaultSwiftUIRUMViewsPredicate` or implement [your own `SwiftUIRUMViewsPredicate`][5] customized for your app.
+
 `telemetrySampleRate`
-: The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
+: The sampling rate for the SDK's internal telemetry, which Datadog uses to monitor the SDK. This must be a value between `0` and `100`. By default, this is set to `20`.
 
 `trackAnonymousUser`
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID is attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
@@ -106,6 +115,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `trackMemoryWarnings`
 : Determines whether automatic tracking of memory warnings is enabled. By default, this is set to `true`.
 
+`trackSlowFrames`
+: Determines whether the SDK tracks slow frames for views.
+
 `trackWatchdogTerminations`
 : Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
 
@@ -116,7 +128,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`][5] customized for your app.
 
 `urlSessionTracking`
-: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached. The `disallowList` parameter defines [URL patterns to exclude from tracking][6].
+: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached. The `disallowList` parameter defines [URL patterns to exclude from tracking][6]. The `trackResourceHeaders` parameter configures which HTTP headers are captured for resources.
 
 `viewEventMapper`
 : The data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or Drop RUM Events][3].

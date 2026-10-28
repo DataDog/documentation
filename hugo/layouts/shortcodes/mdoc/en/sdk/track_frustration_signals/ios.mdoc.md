@@ -1,4 +1,4 @@
-The Mobile RUM SDK automatically detects frustration signals with no additional configuration required.
+The iOS SDK detects frustration signals from tracked actions. To collect them, enable action tracking with `uiKitActionsPredicate`, `swiftUIActionsPredicate`, or manual actions, and keep `trackFrustrations` enabled (it's `true` by default).
 
 ## Error taps
 

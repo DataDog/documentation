@@ -19,7 +19,7 @@ The following table shows the results.
 |-------------------|---------------------------------|-------------|
 | Peak CPU Usage    | 44%                             | 40%         |
 | Peak Memory Usage | 72.4 MB                         | 67.96 MB    |
-| App startup time  | 0.894 ms                        | 0.649 ms    |
+| App startup time  | No significant impact           | No significant impact |
 | Bundle size       | 23.6 MB                         | 22.2 MB     |
 | Network usage     | 21.88 KB sent, 1.68 KB received | n/a         |
 

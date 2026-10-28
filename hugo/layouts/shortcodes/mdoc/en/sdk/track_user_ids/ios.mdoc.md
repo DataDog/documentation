@@ -25,7 +25,7 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 {% tab label="Objective-C" %}
 
 ```objective-c
-[DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
+[DDDatadog setUserInfoWithUserId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
 ```
 
 {% /tab %}
@@ -129,5 +129,5 @@ Datadog.clearAccountInfo()
 {% /tabs %}
 
 {% alert level="info" %}
-Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session with `RUMMonitor.stopSession()` or the view with `stopView(viewController:attributes:)` before clearing.
+Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session with `RUMMonitor.shared().stopSession()` or the view with `stopView(viewController:attributes:)` before clearing.
 {% /alert %}

@@ -4,6 +4,9 @@
 
 To report fatal crashes, add the Crash Reporting module and enable it after initializing the SDK:
 
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 import DatadogCrashReporting
@@ -13,7 +16,25 @@ Datadog.initialize(...)
 CrashReporting.enable()
 ```
 
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+@import DatadogCrashReporting;
+
+[DDDatadog initializeWithConfiguration:configuration trackingConsent:trackingConsent];
+
+[DDCrashReporter enable];
+```
+
+{% /tab %}
+{% /tabs %}
+
 To also report **App Hangs** (the app becomes unresponsive for too long), enable Crash Reporting and set an `appHangThreshold`, in seconds:
+
+{% tabs %}
+{% tab label="Swift" %}
 
 ```swift
 RUM.enable(
@@ -24,7 +45,22 @@ RUM.enable(
 )
 ```
 
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<application id>"];
+configuration.appHangThreshold = 0.25;
+[DDRUM enableWith:configuration];
+```
+
+{% /tab %}
+{% /tabs %}
+
 To also report **Watchdog Terminations** (the OS kills the app for being unresponsive or using excessive resources), enable Crash Reporting and set `trackWatchdogTerminations`:
+
+{% tabs %}
+{% tab label="Swift" %}
 
 ```swift
 RUM.enable(
@@ -35,9 +71,23 @@ RUM.enable(
 )
 ```
 
-### Report errors from logs and traces
+{% /tab %}
+{% tab label="Objective-C" %}
 
-All "error" and "critical" logs sent with `Logger` are automatically reported as RUM errors and linked to the current RUM view:
+```objective-c
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<application id>"];
+configuration.trackWatchdogTerminations = YES;
+[DDRUM enableWith:configuration];
+```
+
+{% /tab %}
+{% /tabs %}
+
+**Note**: App hangs and watchdog terminations are only monitored in the main app, not in app extensions or widgets.
+
+### Report errors from logs
+
+"Error" and "critical" logs sent with `Logger` are automatically reported as RUM errors and linked to the current RUM view. This requires the Logs feature to be enabled, and only applies to logs that are actually sent, so logs dropped by `remoteSampleRate` or `remoteLogThreshold` aren't reported:
 
 {% tabs %}
 {% tab label="Swift" %}
@@ -57,36 +107,9 @@ logger.critical("message")
 ```objective-c
 @import DatadogLogs;
 
-DDLogger *logger = [DDLogger create];
+DDLogger *logger = [DDLogger createWith:[DDLoggerConfiguration new]];
 [logger error:@"message"];
 [logger critical:@"message"];
-```
-
-{% /tab %}
-{% /tabs %}
-
-Similarly, all finished spans marked as error are reported as RUM errors:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogTrace
-
-let span = Tracer.shared().startSpan(operationName: "operation")
-// ... capture the `error`
-span.setError(error)
-span.finish()
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-// ... capture the `error`
-id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
-[span setError:error];
-[span finish];
 ```
 
 {% /tab %}

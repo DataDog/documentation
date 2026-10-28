@@ -38,26 +38,28 @@ For more control over which interactions count as the "last interaction," implem
 
 ## View loading time
 
-To notify the SDK that your view finished loading, call `addViewLoadingTime(override:)` through `RUMMonitor.shared()` when your view is fully loaded and displayed:
+To notify the SDK that your view finished loading, call `addViewLoadingTime(overwrite:)` through `RUMMonitor.shared()` when your view is fully loaded and displayed:
 
 {% tabs %}
 {% tab label="Swift" %}
 
 ```swift
-RUMMonitor.shared().addViewLoadingTime(override: false)
+@_spi(Experimental) import DatadogRUM
+
+RUMMonitor.shared().addViewLoadingTime(overwrite: false)
 ```
 
 {% /tab %}
 {% tab label="Objective-C" %}
 
 ```objectivec
-[[DDRUMMonitor shared] addViewLoadingTimeWithOverride:false];
+[[DDRUMMonitor shared] addViewLoadingTimeWithOverwrite:false];
 ```
 
 {% /tab %}
 {% /tabs %}
 
-Use `override` to replace the previously calculated loading time for the current view. This API is experimental and might change.
+Use `overwrite` to replace the previously calculated loading time for the current view. This API is experimental and might change. In Swift, it requires the `@_spi(Experimental) import DatadogRUM` import.
 
 ## Custom timings
 
@@ -90,7 +92,7 @@ All view timings are measured relative to the view's start. The exact moment a v
 
 When using the default `TimeBasedTNSResourcePredicate` and `TimeBasedINVActionPredicate`, TNS and INV timings may be missing in specific cases:
 
-- `@view.interaction_to_next_view_time` (INV) is not set for the first view of a session if no tap, click, or swipe actions were tracked in the previous view, or if the interval between the last such action and the start of the current view exceeds 3 seconds.
+- `@view.interaction_to_next_view_time` (INV) is not set for a view if no tap, click, or swipe actions were tracked in the previous view, or if the interval between the last such action and the start of the current view exceeds 3 seconds.
 - `@view.network_settled_time` (TNS) is unavailable if no resources were tracked during the view, or if none started within the initial 100ms of the view.
 
 To maximize the accuracy of TNS and INV, consider adjusting time thresholds in the default predicates to align with your app's behavior, or implement custom predicates tailored to your needs.

@@ -18,7 +18,7 @@ import DatadogRUM
 
 URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: Alamofire.SessionDelegate.self))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Track Network Requests][4].
 
 ## Apollo GraphQL
 
@@ -34,7 +34,7 @@ import DatadogRUM
 URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
 
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Track Network Requests][4].
 
 For more advanced Apollo integration using the Datadog Apollo interceptor, see the [Datadog Apollo interceptor package][7] and [Apollo instrumentation][8].
 
@@ -51,7 +51,7 @@ import DatadogRUM
 
 URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: SDWebImageDownloader.self as! URLSessionDataDelegate.Type))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Track Network Requests][4].
 
 ## OpenAPI Generator
 
@@ -92,7 +92,7 @@ bufferedClient = Client(
     transport: transport
 )
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Track Network Requests][4].
 
 [1]: https://github.com/Alamofire/Alamofire
 [2]: /real_user_monitoring/setup/install/?platform=ios

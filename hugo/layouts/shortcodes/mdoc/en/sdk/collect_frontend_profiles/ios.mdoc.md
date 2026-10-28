@@ -21,9 +21,11 @@ To start collecting data, set up [Mobile RUM for iOS][3].
 Initialize the RUM SDK and configure the `applicationLaunchSampleRate` and `continuousSampleRate` parameters, which are independent of each other:
 
 - `applicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 5 means profiling runs on 5 out of 100 launches).
-- `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations][4] are profiled (for example, 5 means that 5 out of 100 sessions will have their time to full display, application hangs, and long tasks profiled).
+- `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations][7] are profiled (for example, 5 means that 5 out of 100 sessions will have their time to full display, application hangs, and long tasks profiled).
 
 Both sample rates are applied on top of the [RUM session sampling rate][4].
+
+Application launch profiling applies from the next launch after you call `Profiling.enable`. The SDK stores the sample rate and reads it before `main` runs.
 
 {% alert level="danger" %}
 If no value is specified, the default for both `applicationLaunchSampleRate` and `continuousSampleRate` is 5%.
@@ -66,7 +68,7 @@ You can use the `@profiling.has_profile`attribute in the Sessions Explorer to fi
 
 #### During the time to initial display and time to full display
 
-iOS application launch profiling data is attached to the [time to initial display][5] and [time to full display][5] vital events in a RUM session. You can access profiles for the time to initial display and time to full display from the session side panel, view side panel, or directly from the vital side panels.
+iOS application launch profiling data (sampled by `applicationLaunchSampleRate`) is attached to the [time to initial display][5] vital event and stops at the time to initial display. The [time to full display][5] is profiled only in sessions sampled by `continuousSampleRate`. You can access profiles for the time to initial display and time to full display from the session side panel, view side panel, or directly from the vital side panels.
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttfd.png" alt="iOS profiling data in a time to full display vital event." style="width:90%;" /%}
 
@@ -94,6 +96,7 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 
 [1]: https://developer.apple.com/documentation/kernel/mach
 [3]: /real_user_monitoring/application_monitoring/ios
-[4]: /real_user_monitoring/setup/install/?platform=ios
+[4]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
 [5]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 [6]: /real_user_monitoring/setup/data_collected/?platform=ios#error-attributes
+[7]: /real_user_monitoring/track_critical_operations/

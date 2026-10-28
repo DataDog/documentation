@@ -43,8 +43,8 @@ In iOS SDK versions 3.5.0+, the time to initial display (TTID) and time to full 
 | Time to full display | The time it takes for an app to become interactive for the user. | The time it takes to display the first frame of the app's UI, as well as the content that loads asynchronously after the initial frame is displayed. |
 
 Each time to initial display and time to full display is categorized by launch type:
-- [Cold start][1]: Occurs when the system must fully initialize a new application process because no prior state or memory image can be reused. This includes launches after a first install, device reboot, application updates, or when the system has removed the application from memory. 
-- [Warm start][1]: Occurs when the application process is relaunched, but the system can reuse some resources that were cached in memory. Warm starts typically occur in scenarios such as a user manually force-quitting the application, iOS terminating the application in the background due to memory or resource pressure, or an application crash.
+- [Cold start][1]: The SDK reports a cold start only after a fresh install (no state from a previous launch), an application version change, a device reboot, or when more than a week has passed since the last launch.
+- [Warm start][1]: The SDK reports every other launch as a warm start. This includes launches after a user force-quits the application, after iOS terminates the application in the background due to memory or resource pressure, or after an application crash.
 
 Either cold or warm starts can be [prewarmed][2], which is an iOS-specific optimization starting from iOS 15. In this scenario, the system proactively prepares the app process in the background to improve future launch times. Pre-warming typically occurs when:
 - The device has recently rebooted.
@@ -55,13 +55,15 @@ Either cold or warm starts can be [prewarmed][2], which is an iOS-specific optim
 ### Measuring the time to initial display
 The iOS SDK automatically measures the time to initial display. The time to initial display can be optionally profiled using the iOS Mobile Profiler.
 
+The SDK drops the time to initial display if the first frame is rendered more than 60 seconds after launch, and doesn't collect it for background launches.
+
 ### Measuring the time to full display
 
 For setup steps, see [Track application startups][3].
 
 Every application behaves differently, so the iOS SDK does not automatically detect when to measure time to full display. As a result, the SDK needs to be notified when the application reaches the fully drawn state.
 
-The time to full display is manually defined using the `Monitor.reportAppFullyDisplayed()` API in the iOS SDK based on the application’s specific definition of “fully drawn.” 
+The time to full display is manually defined using the `RUMMonitor.shared().reportAppFullyDisplayed()` API in the iOS SDK based on the application’s specific definition of “fully drawn.” Only the first call counts, and the SDK ignores calls made more than 90 seconds after launch.
 
 <div class="alert alert-danger">
   If the time to full display is not defined, the iOS SDK only collects the time to initial display. 

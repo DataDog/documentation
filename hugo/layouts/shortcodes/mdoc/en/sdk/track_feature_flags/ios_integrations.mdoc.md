@@ -17,8 +17,8 @@ For more information about initializing Amplitude's SDK, see Amplitude's [iOS SD
   }
 
   // In initialization:
-  ExperimentConfig config = ExperimentConfigBuilder()
-    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
+  let config = ExperimentConfigBuilder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider())
     .build()
 ```
 
@@ -31,7 +31,7 @@ When initializing the ConfigCat Swift iOS SDK, subscribe to the `flagEvaluated` 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
     options.hooks.addOnFlagEvaluated { details in
-        RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: details.key, variation: details.value)
+        RUMMonitor.shared().addFeatureFlagEvaluation(name: details.key, value: details.value)
     }
   }
 ```
@@ -45,7 +45,7 @@ Before you initialize a custom feature flag integration, make sure you've [set u
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```swift
-   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
+   RUMMonitor.shared().addFeatureFlagEvaluation(name: key, value: value)
    ```
 
 ### DevCycle integration
@@ -64,7 +64,7 @@ For more information about initializing Eppo's SDK, see [Eppo's iOS SDK document
 
 ```swift
 func IAssignmentLogger(assignment: Assignment) {
-  RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
+  RUMMonitor.shared().addFeatureFlagEvaluation(name: assignment.featureFlag, value: assignment.variation)
 }
 
 let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmentLogger)

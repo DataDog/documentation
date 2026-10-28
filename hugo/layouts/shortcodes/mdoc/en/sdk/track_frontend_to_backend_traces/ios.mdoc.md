@@ -23,8 +23,6 @@
 
    By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-   Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
-
 3. _(Optional)_ For detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your `SessionDelegate` type:
     ```swift
     URLSessionInstrumentation.enableDurationBreakdown(

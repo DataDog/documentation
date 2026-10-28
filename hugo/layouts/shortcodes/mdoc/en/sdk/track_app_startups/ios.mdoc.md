@@ -2,6 +2,8 @@
 
 The iOS SDK automatically creates an `ApplicationLaunch` view during initialization and measures the time to initial display (TTID) for it. No setup is required for TTID.
 
+The SDK drops TTID if the first frame is rendered more than 60 seconds after launch, and doesn't collect TTID for background launches.
+
 ## Manual tracking
 
 Every app defines "fully drawn" differently, so the SDK doesn't automatically measure the time to full display (TTFD). Call `RUMMonitor.shared().reportAppFullyDisplayed()` when your app reaches that state:
@@ -29,7 +31,7 @@ class HomeViewController: UIViewController {
 }
 ```
 
-Send the signal only after the UI has been updated with the received content or the error has been handled. If time to full display isn't defined, the SDK only collects TTID.
+Send the signal only after the UI has been updated with the received content or the error has been handled. Only the first call counts, and the SDK ignores calls made more than 90 seconds after launch. If time to full display isn't defined, the SDK only collects TTID.
 
 For TTID/TTFD definitions, cold/warm start and prewarming categorization, vital events, and metrics, see [Apple Platform Application Launch Monitoring][1].
 

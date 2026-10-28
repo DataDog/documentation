@@ -18,11 +18,10 @@ public protocol UIKitRUMViewsPredicate {
 {% /tab %}
 {% tab label="Objective-C" %}
 
-```swift
-@objc
-public protocol DDUIKitRUMViewsPredicate: AnyObject {
-    func rumView(for viewController: UIViewController) -> DDRUMView?
-}
+```objective-c
+@protocol DDUIKitRUMViewsPredicate <NSObject>
+- (DDRUMView * _Nullable)rumViewFor:(UIViewController * _Nonnull)viewController;
+@end
 ```
 
 {% /tab %}
@@ -222,18 +221,16 @@ override func viewDidDisappear(_ animated: Bool) {
 @import DatadogRUM;
 // in your `UIViewController`:
 
-DDRUMMonitor *rum = [DDRUMMonitor shared];
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    [rum startViewWithViewController:self name:nil attributes:nil];
+    [[DDRUMMonitor shared] startViewWithViewController:self name:nil attributes:@{}];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
-    [rum stopViewWithViewController:self attributes:nil];
+    [[DDRUMMonitor shared] stopViewWithViewController:self attributes:@{}];
 }
 ```
 
