@@ -132,43 +132,37 @@ Example request:
 
 ## Query feature flag change events
 
-Feature flag changes are indexed as Change Tracking events, so you can query them from the [Events Explorer][9], the [Events API][3], or the Change Tracking timeline search bar.
+Feature flag changes are indexed as Change Tracking events. To find them, enter one of the following queries in the [Events Explorer][9]:
 
-### Events Explorer
+| Changes to find | Query |
+|-----------------|-------|
+| All feature flag changes | `source:change_tracking @changed_resource.type:feature_flag` |
+| Changes to one flag | `source:change_tracking feature_flag_key:<FLAG_KEY>` |
+| Changes in one environment, such as `production` | `source:change_tracking @changed_resource.type:feature_flag environment:<ENV>` |
+| Changes by one author | `source:change_tracking @changed_resource.type:feature_flag @change_metadata.author.name:<EMAIL>` |
+| Changes linked to one service | `source:change_tracking @changed_resource.type:feature_flag @impacted_resources.name:<SERVICE>` |
 
-In the [Events Explorer][9], filter to feature flag changes with the following query:
+**Notes**:
 
-```
-category:change @changed_resource.type:feature_flag
-```
+- Filter with `@changed_resource.type:feature_flag` rather than `@evt.type:feature_flag`.
+- `@changed_resource.type:feature_flag` also matches flag changes from other providers, such as LaunchDarkly.
+- Datadog Feature Flags change events use the `environment` tag, not `env`, so an `env` template variable does not filter them.
+- The same queries work with the [Search events][10] endpoint of the Events API.
 
-To narrow results to a specific service, add `@impacted_resources.name:<SERVICE_NAME>`. For example:
+## Overlay feature flag changes on a graph
 
-```
-category:change @changed_resource.type:feature_flag @impacted_resources.name:payments_api
-```
+To show flag changes on a specific timeseries graph, add an [event overlay][11]:
 
-### Events API
+1. Edit the timeseries widget.
+1. Under {{< ui >}}Event Overlays{{< /ui >}}, click {{< ui >}}Add Event Overlay{{< /ui >}}.
+1. Enter an event query, for example:
+   - `source:change_tracking feature_flag_key:<FLAG_KEY>` for changes to one flag
+   - `source:change_tracking @changed_resource.type:feature_flag environment:production` for all flag changes in production
+1. Save the widget. Flag changes appear as markers on the graph.
 
-Use the [Search Events API][3] with the same filter query to retrieve feature flag change events programmatically:
+To see all changes for a service across a dashboard, click {{< ui >}}Show Overlays{{< /ui >}} and select the service, as described in [Change Overlays][12]. Feature flag changes appear when they're linked to that service. They also appear automatically on [monitor status pages][13] and [service pages][14] for linked services.
 
-```
-category:change @changed_resource.type:feature_flag @impacted_resources.name:payments_api
-```
-
-### Change Tracking timeline
-
-Feature flag changes also appear alongside other change types in the Change Tracking timeline on the [monitor status page][10], [service page][11], and [dashboards][12]. Use the timeline's search bar to filter to a specific service.
-
-## View feature flag changes as overlays
-
-Feature flag changes are a type of Change Tracking event, so they appear automatically anywhere Change Tracking overlays are supported:
-
-- **Dashboards**: Click {{< ui >}}Show Overlays{{< /ui >}} on a dashboard with timeseries widgets to plot flag changes alongside your metrics and correlate them with performance issues. See [Change Overlays][13].
-- **Monitor status pages**: Flag changes tied to a monitor's service, including RUM and APM monitors, appear in the change timeline at the top of the [monitor status page][10], so you can correlate an alert with a recent flag change.
-- **Service pages**: Flag changes appear in the {{< ui >}}Recent Changes{{< /ui >}} section of the {{< ui >}}Service Summary{{< /ui >}} on the [service page][11], alongside deployments and other change types.
-
-For flag changes to appear on these pages, tag the change event's `impacted_resources` with the affected service, as described in [Track feature flags](#track-feature-flags). For the monitor status page, the monitor's query, group, or `service` tag must also match that service.
+To link flag changes to a service, see [Track feature flags](#track-feature-flags). For the monitor status page, the monitor's query, group, or `service` tag must also match that service.
 
 ## Automatically detect affected services
 
@@ -260,7 +254,8 @@ To toggle feature flags on or off from inside Datadog:
 [7]: https://app.datadoghq.com/software
 [8]: /feature_flags/
 [9]: /events/explorer/
-[10]: /monitors/status/
-[11]: /tracing/services/service_page/
-[12]: /dashboards/
-[13]: /dashboards/change_overlays/
+[10]: /api/latest/events/#search-events
+[11]: /dashboards/widgets/timeseries/#event-overlay
+[12]: /dashboards/change_overlays/
+[13]: /monitors/status/
+[14]: /tracing/services/service_page/
