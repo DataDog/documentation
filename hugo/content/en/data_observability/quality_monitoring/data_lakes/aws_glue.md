@@ -204,7 +204,7 @@ aws lakeformation grant-permissions \
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
-5. (Optional) To calculate metrics that require querying table data, [enable Athena queries](#query-tables-with-amazon-athena).
+5. (Optional) To calculate metrics that require querying table data, [enable Athena queries](#enable-athena-queries).
 6. Click {{< ui >}}Add Account{{< /ui >}}.
 
 ## Query tables with Amazon Athena
