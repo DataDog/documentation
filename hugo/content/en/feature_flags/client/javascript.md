@@ -120,10 +120,12 @@ const provider = new DatadogProvider({
 
 Before sending the selection, the SDK trims leading and trailing whitespace from each value, removes empty values and duplicates, and sorts each list. After this processing, the selection must meet these limits:
 
-- Each list (`tags` and `keyPatterns`) contains at most 31 values.
-- Each tag and each key pattern is at most 200 bytes when encoded as UTF-8.
+- `tags` contains at most 31 values.
+- `keyPatterns` contains at most 31 values.
+- Each tag is at most 200 bytes (UTF-8).
+- Each key pattern is at most 200 bytes (UTF-8).
 
-If the selection is malformed or exceeds a limit, the SDK does not send it, logs an error to the browser console, and loads the full flag configuration.
+If the flag selection is malformed or exceeds a limit, the SDK does not send it in the flag configuration request, logs an error to the browser console, and loads the full flag configuration.
 
 Datadog can also ignore a selection and return the full flag configuration. In that case, the response includes a `DD-Flag-Selection-Ignored` header with one of the following reasons, and the SDK logs an error to the browser console:
 
