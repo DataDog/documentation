@@ -868,6 +868,40 @@ components:
       schema:
         format: uuid
         type: string
+    IncidentResponderIncludeQueryParameter:
+      description: Comma-separated related resource types to include. Supported values are `users` and `role_assignments`.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        example:
+          - users
+          - role_assignments
+        items:
+          $ref: "#/components/schemas/IncidentResponderRelatedObject"
+        type: array
+      style: form
+    IncidentResponderPageLimitParameter:
+      description: Maximum number of responders to return per page.
+      in: query
+      name: page[limit]
+      required: false
+      schema:
+        default: 25
+        example: 25
+        format: int64
+        maximum: 1000
+        type: integer
+    IncidentResponderPageOffsetParameter:
+      description: The offset of the first responder to return.
+      in: query
+      name: page[offset]
+      required: false
+      schema:
+        example: 0
+        format: int64
+        type: integer
     IncidentRuleIDPathParameter:
       description: The UUID of the incident rule.
       in: path
@@ -11004,6 +11038,68 @@ components:
         - type
         - attributes
       type: object
+    ArchiveSearchListResponse:
+      description: Response containing multiple Archive Searches.
+      properties:
+        data:
+          description: Array of Archive Searches.
+          items:
+            $ref: "#/components/schemas/ArchiveSearchResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/ArchiveSearchListResponseMeta"
+      required:
+        - data
+      type: object
+    ArchiveSearchListResponseMeta:
+      description: Metadata of the Archive Searches response.
+      properties:
+        truncated:
+          description: Whether more Archive Searches exist beyond the ones returned.
+          example: false
+          type: boolean
+      type: object
+    ArchiveSearchRehydrateRequest:
+      description: Request to rehydrate an Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchRehydrateRequestData"
+      required:
+        - data
+      type: object
+    ArchiveSearchRehydrateRequestAttributes:
+      description: Attributes accepted when rehydrating an Archive Search.
+      properties:
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchRehydrateRequestRehydration"
+      required:
+        - rehydration
+      type: object
+    ArchiveSearchRehydrateRequestData:
+      description: Archive Search object to rehydrate.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchRehydrateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ArchiveSearchRehydrateRequestRehydration:
+      description: Rehydration settings to apply.
+      properties:
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+      type: object
     ArchiveSearchRehydration:
       description: |-
         Rehydration settings of the Archive Search. Absent when the search only scans the archive
@@ -17065,6 +17161,30 @@ components:
       required:
         - data
       type: object
+    CaseInvestigationNotebookCreateData:
+      description: Case investigation notebook creation data.
+      properties:
+        type:
+          $ref: "#/components/schemas/CaseInvestigationNotebookResourceType"
+      required:
+        - type
+      type: object
+    CaseInvestigationNotebookCreateRequest:
+      description: Case investigation notebook creation request.
+      properties:
+        data:
+          $ref: "#/components/schemas/CaseInvestigationNotebookCreateData"
+      required:
+        - data
+      type: object
+    CaseInvestigationNotebookResourceType:
+      description: Case investigation notebook resource type.
+      enum:
+        - notebook
+      example: notebook
+      type: string
+      x-enum-varnames:
+        - NOTEBOOK
     CaseLink:
       description: "A directional link representing a relationship between two entities. At least one entity must be a work item."
       properties:
@@ -21541,13 +21661,6 @@ components:
         - description: "If this is a string, it must be a valid JavaScript expression that evaluates to a boolean."
           example: "${true}"
           type: string
-    ComponentRecommendation:
-      description: Resource recommendation for a single Spark component (driver or executor). Contains estimation data used to patch Spark job specs.
-      properties:
-        estimation:
-          $ref: "#/components/schemas/Estimation"
-      required: [estimation]
-      type: object
     ComponentType:
       description: The UI component type.
       enum:
@@ -24302,23 +24415,6 @@ components:
       type: string
       x-enum-varnames:
         - CI_APP_COVERAGE_SUMMARY
-    Cpu:
-      description: CPU usage statistics derived from historical Spark job metrics. Provides multiple estimates so users can choose between conservative and cost-saving risk profiles.
-      properties:
-        max:
-          description: Maximum CPU usage observed for the job, expressed in millicores. This represents the upper bound of usage.
-          format: int64
-          type: integer
-        p75:
-          description: 75th percentile of CPU usage (millicores). Represents a cost-saving configuration while covering most workloads.
-          format: int64
-          type: integer
-        p95:
-          description: 95th percentile of CPU usage (millicores). Balances performance and cost, providing a safer margin than p75.
-          format: int64
-          type: integer
-      type: object
-      x-model-simple-name: SpaCpu
     CreateActionConnectionRequest:
       description: Request used to create an action connection.
       properties:
@@ -41139,28 +41235,6 @@ components:
       type: string
       x-enum-varnames:
         - ESCALATION_POLICY_STEPS
-    Estimation:
-      description: Recommended resource values for a Spark driver or executor, derived from recent real usage metrics. Used by SPA to propose more efficient pod sizing.
-      properties:
-        cpu:
-          $ref: "#/components/schemas/Cpu"
-        ephemeral_storage:
-          description: Recommended ephemeral storage allocation (in MiB). Derived from job temporary storage patterns.
-          format: int64
-          type: integer
-        heap:
-          description: Recommended JVM heap size (in MiB).
-          format: int64
-          type: integer
-        memory:
-          description: Recommended total memory allocation (in MiB). Includes both heap and overhead.
-          format: int64
-          type: integer
-        overhead:
-          description: Recommended JVM overhead (in MiB). Computed as total memory - heap.
-          format: int64
-          type: integer
-      type: object
     Event:
       additionalProperties: {}
       description: The metadata associated with a request.
@@ -63447,6 +63521,20 @@ components:
         - type
         - attributes
       type: object
+    IncidentResponderIncludedItem:
+      description: A user or role assignment related to an incident responder.
+      oneOf:
+        - $ref: "#/components/schemas/IncidentUserData"
+        - $ref: "#/components/schemas/IncidentRoleAssignmentDataResponse"
+    IncidentResponderRelatedObject:
+      description: Object related to an incident responder.
+      enum:
+        - users
+        - role_assignments
+      type: string
+      x-enum-varnames:
+        - USERS
+        - ROLE_ASSIGNMENTS
     IncidentResponderRelationships:
       description: Relationships for an incident responder.
       properties:
@@ -63546,6 +63634,53 @@ components:
         - id
         - type
       type: object
+    IncidentRespondersPagination:
+      description: Offset-based pagination for incident responders.
+      properties:
+        first_offset:
+          description: The offset of the first page.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: The offset of the last page, if available.
+          example: 25
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: The maximum number of elements returned per page.
+          example: 25
+          format: int64
+          type: integer
+        next_offset:
+          description: The offset of the next page, if available.
+          example: 25
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: The index of the first element in the current page.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: The offset of the previous page, if available.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: The total number of elements, when available.
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        type:
+          description: The pagination type.
+          example: offset_limit
+          type: string
+      type: object
     IncidentRespondersResponse:
       description: Response with a list of incident responders.
       properties:
@@ -63557,11 +63692,37 @@ components:
         included:
           description: Included related resources.
           items:
-            $ref: "#/components/schemas/IncidentUserData"
+            $ref: "#/components/schemas/IncidentResponderIncludedItem"
           readOnly: true
           type: array
+        links:
+          additionalProperties:
+            type: string
+          description: Links to pages of incident responders.
+          type: object
+        meta:
+          $ref: "#/components/schemas/IncidentRespondersResponseMeta"
       required:
         - data
+      type: object
+    IncidentRespondersResponseMeta:
+      description: Pagination metadata for the responder list.
+      properties:
+        page:
+          $ref: "#/components/schemas/IncidentRespondersResponseMetaPage"
+        pagination:
+          $ref: "#/components/schemas/IncidentRespondersPagination"
+      type: object
+    IncidentRespondersResponseMetaPage:
+      description: Total count for the responder list.
+      properties:
+        total_filtered_count:
+          description: Total number of responders matching the query, before pagination.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - total_filtered_count
       type: object
     IncidentRespondersType:
       description: The incident responders type.
@@ -63789,6 +63950,8 @@ components:
           $ref: "#/components/schemas/RelationshipToUser"
         impacts:
           $ref: "#/components/schemas/RelationshipToIncidentImpacts"
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
         integrations:
           $ref: "#/components/schemas/RelationshipToIncidentIntegrationMetadatas"
         last_modified_by_user:
@@ -63798,6 +63961,128 @@ components:
         user_defined_fields:
           $ref: "#/components/schemas/RelationshipToIncidentUserDefinedFields"
       type: object
+    IncidentRoleAssignmentDataAttributesResponse:
+      description: Attributes of an incident role assignment.
+      properties:
+        created:
+          description: Timestamp when the role assignment was created.
+          example: "2024-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        deleted:
+          description: Timestamp when the role assignment was deleted, or the zero timestamp if it has not been deleted.
+          example: "0001-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        modified:
+          description: Timestamp when the role assignment was last modified.
+          example: "2024-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        responder_type:
+          description: The type of the responder.
+          example: user
+          type: string
+        role:
+          description: The name of the assigned role.
+          example: commander
+          type: string
+      required:
+        - role
+        - responder_type
+        - created
+        - modified
+      type: object
+    IncidentRoleAssignmentDataResponse:
+      description: Role assignment data in a response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentRoleAssignmentDataAttributesResponse"
+        id:
+          description: The role assignment identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/IncidentRoleAssignmentRelationshipsResponse"
+        type:
+          $ref: "#/components/schemas/IncidentRoleAssignmentType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IncidentRoleAssignmentRelationshipsResponse:
+      description: Relationships of a role assignment.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/IncidentRoleAssignmentResponderRelationship"
+        last_modified_by_user:
+          $ref: "#/components/schemas/IncidentRoleAssignmentResponderRelationship"
+        reserved_role:
+          $ref: "#/components/schemas/IncidentRoleAssignmentRoleRelationship"
+        responder:
+          $ref: "#/components/schemas/IncidentRoleAssignmentResponderRelationship"
+        user_defined_role:
+          $ref: "#/components/schemas/IncidentRoleAssignmentRoleRelationship"
+      required:
+        - responder
+      type: object
+    IncidentRoleAssignmentResponderRelationship:
+      description: Relationship to a responder.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentRoleAssignmentResponderRelationshipData"
+      required:
+        - data
+      type: object
+    IncidentRoleAssignmentResponderRelationshipData:
+      description: Responder relationship data.
+      properties:
+        id:
+          description: The responder identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          description: The responder resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    IncidentRoleAssignmentRoleRelationship:
+      description: Relationship to a role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentRoleAssignmentRoleRelationshipData"
+      type: object
+    IncidentRoleAssignmentRoleRelationshipData:
+      description: Role relationship data.
+      nullable: true
+      properties:
+        id:
+          description: The role identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          description: The role resource type.
+          example: incident_reserved_roles
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    IncidentRoleAssignmentType:
+      description: Incident role assignment resource type.
+      enum:
+        - incident_role_assignments
+      example: incident_role_assignments
+      type: string
+      x-enum-varnames:
+        - INCIDENT_ROLE_ASSIGNMENTS
     IncidentRuleCondition:
       description: A condition for an incident rule.
       properties:
@@ -84493,30 +84778,6 @@ components:
       type: string
       x-enum-varnames:
         - GET_NODE_TYPES_RESPONSE
-    NotebookCreateData:
-      description: Notebook creation data
-      properties:
-        type:
-          $ref: "#/components/schemas/NotebookResourceType"
-      required:
-        - type
-      type: object
-    NotebookCreateRequest:
-      description: Notebook creation request
-      properties:
-        data:
-          $ref: "#/components/schemas/NotebookCreateData"
-      required:
-        - data
-      type: object
-    NotebookResourceType:
-      description: Notebook resource type
-      enum:
-        - notebook
-      example: notebook
-      type: string
-      x-enum-varnames:
-        - NOTEBOOK
     NotebookTriggerWrapper:
       description: "Schema for a Notebook-based trigger."
       properties:
@@ -86316,6 +86577,8 @@ components:
             Defaults to `DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT` (prefixed with `DD_OP_` at runtime).
           example: AZURE_DATA_EXPLORER_INGESTION_ENDPOINT
           type: string
+        ingestion_mode:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationIngestionMode"
         inputs:
           description: A list of component IDs whose output is used as the `input` for this component.
           example: ["filter-processor"]
@@ -86507,22 +86770,35 @@ components:
           description: Maximum batch size in bytes.
           example: 2000000
           format: int64
-          maximum: 4000000
-          minimum: 1
           type: integer
         max_events:
           description: Maximum number of events per batch before it is flushed.
           example: 1000
           format: int64
-          minimum: 1
           type: integer
         timeout_secs:
           description: Maximum number of seconds to wait before flushing a partial batch.
           example: 1
           format: int64
-          minimum: 1
           type: integer
       type: object
+    ObservabilityPipelineAzureDataExplorerDestinationIngestionMode:
+      default: streaming
+      description: |-
+        The ingestion method used to send data to Azure Data Explorer.
+
+        - `streaming`: Sends events directly to the table using streaming ingestion.
+        - `queue`: Sends events through queued (batched) ingestion.
+
+        Defaults to `streaming`.
+      enum:
+        - streaming
+        - queue
+      example: queue
+      type: string
+      x-enum-varnames:
+        - STREAMING
+        - QUEUE
     ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType:
       description: The type of the user-assigned managed identity ID.
       enum:
@@ -88273,7 +88549,6 @@ components:
           example: true
           type: boolean
         enabled_metric_aggregation:
-          default: true
           description: >-
             [Recommended] Indicates whether generated metrics are automatically aggregated and enriched with the `worker_uuid` tag before being sent to the metric destination.
           example: true
@@ -103267,6 +103542,15 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        apm_rum_flat_sampling_replay_enabled:
+          description: Indicates if flat sampling of Session Replay for APM-correlated RUM sessions is enabled.
+          example: false
+          type: boolean
+        apm_rum_flat_sampling_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for APM-correlated RUM sessions when flat sampling is enabled.
+          example: 0
+          format: double
+          type: number
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -103284,6 +103568,27 @@ components:
           description: Handle of the creator user.
           example: john.doe
           type: string
+        disabled_at:
+          description: Timestamp in ms of the date the RUM application was disabled. Only present if the application was disabled.
+          example: 1659479836169
+          format: int64
+          type: integer
+        disabled_by_handle:
+          description: Handle of the user who disabled the RUM application. Only present if the application was disabled.
+          example: jane.doe
+          type: string
+        error_tracking_exclusion_filter_enabled:
+          description: Indicates if Error Tracking exclusion filters are enabled for the application.
+          example: false
+          type: boolean
+        external_feeds:
+          description: Non-native ingestion paths the RUM application sends its data through. `otel` means the application sends RUM data through OpenTelemetry instead of the Datadog RUM SDK.
+          example:
+            - otel
+          items:
+            description: External feed name.
+            type: string
+          type: array
         hash:
           description: Hash of the RUM application. Optional.
           type: string
@@ -103295,9 +103600,23 @@ components:
           description: Name of the RUM application.
           example: my_rum_application
           type: string
+        ootb_metrics_installed:
+          description: Indicates if the out-of-the-box RUM metrics are installed for the application.
+          example: true
+          type: boolean
         org_id:
           description: Org ID of the RUM application.
           example: 999
+          format: int32
+          maximum: 2147483647
+          type: integer
+        product_analytics_preview_disabled:
+          description: Indicates that the Product Analytics preview is disabled for the application. Only present (and `true`) when the Product Analytics retention state is not preview.
+          example: true
+          type: boolean
+        product_analytics_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for Product Analytics sessions.
+          example: 0
           format: int32
           maximum: 2147483647
           type: integer
@@ -103307,6 +103626,18 @@ components:
           description: ID of the RUM SDK remote configuration for the application, if one exists.
           example: abc12345-1234-5678-abcd-ef1234567890
           type: string
+        short_name:
+          description: Short name of the RUM application.
+          example: my_rum_application
+          type: string
+        tags:
+          description: List of tags associated with the RUM application.
+          example:
+            - "team:rum"
+          items:
+            description: Tag associated with the RUM application.
+            type: string
+          type: array
         type:
           description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
           example: browser
@@ -103403,6 +103734,21 @@ components:
     RUMApplicationListAttributes:
       description: RUM application list attributes.
       properties:
+        api_key_id:
+          description: ID of the API key associated with the application.
+          example: 123456789
+          format: int32
+          maximum: 2147483647
+          type: integer
+        apm_rum_flat_sampling_replay_enabled:
+          description: Indicates if flat sampling of Session Replay for APM-correlated RUM sessions is enabled.
+          example: false
+          type: boolean
+        apm_rum_flat_sampling_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for APM-correlated RUM sessions when flat sampling is enabled.
+          example: 0
+          format: double
+          type: number
         application_id:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
@@ -103416,6 +103762,27 @@ components:
           description: Handle of the creator user.
           example: john.doe
           type: string
+        disabled_at:
+          description: Timestamp in ms of the date the RUM application was disabled. Only present if the application was disabled.
+          example: 1659479836169
+          format: int64
+          type: integer
+        disabled_by_handle:
+          description: Handle of the user who disabled the RUM application. Only present if the application was disabled.
+          example: jane.doe
+          type: string
+        error_tracking_exclusion_filter_enabled:
+          description: Indicates if Error Tracking exclusion filters are enabled for the application.
+          example: false
+          type: boolean
+        external_feeds:
+          description: Non-native ingestion paths the RUM application sends its data through. `otel` means the application sends RUM data through OpenTelemetry instead of the Datadog RUM SDK.
+          example:
+            - otel
+          items:
+            description: External feed name.
+            type: string
+          type: array
         hash:
           description: Hash of the RUM application. Optional.
           type: string
@@ -103427,14 +103794,44 @@ components:
           description: Name of the RUM application.
           example: my_rum_application
           type: string
+        ootb_metrics_installed:
+          description: Indicates if the out-of-the-box RUM metrics are installed for the application.
+          example: true
+          type: boolean
         org_id:
           description: Org ID of the RUM application.
           example: 999
           format: int32
           maximum: 2147483647
           type: integer
+        product_analytics_preview_disabled:
+          description: Indicates that the Product Analytics preview is disabled for the application. Only present (and `true`) when the Product Analytics retention state is not preview.
+          example: true
+          type: boolean
+        product_analytics_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for Product Analytics sessions.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
         product_scales:
           $ref: "#/components/schemas/RUMProductScales"
+        remote_config_id:
+          description: ID of the RUM SDK remote configuration for the application, if one exists.
+          example: abc12345-1234-5678-abcd-ef1234567890
+          type: string
+        short_name:
+          description: Short name of the RUM application.
+          example: my_rum_application
+          type: string
+        tags:
+          description: List of tags associated with the RUM application.
+          example:
+            - "team:rum"
+          items:
+            description: Tag associated with the RUM application.
+            type: string
+          type: array
         type:
           description: Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`.
           example: browser
@@ -103539,15 +103936,20 @@ components:
             $ref: "#/components/schemas/RUMApplicationList"
           type: array
       type: object
+    RUMBucketGroupByValue:
+      description: The value of a group-by facet for this bucket. A string for string facets, a number for numeric facets and histograms.
+      oneOf:
+        - type: string
+        - format: double
+          type: number
     RUMBucketResponse:
       description: Bucket values.
       properties:
         by:
           additionalProperties:
-            description: The values for each group-by.
-            type: string
+            $ref: "#/components/schemas/RUMBucketGroupByValue"
           description: The key-value pairs for each group-by.
-          example: {"@session.type": "user", "@type": "view"}
+          example: {"@session.type": "user", "@view.time_spent": 1000000000}
           type: object
         computes:
           additionalProperties:
@@ -104704,96 +105106,6 @@ components:
       required:
         - data
       type: object
-    RecommendationAttributes:
-      description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
-      properties:
-        confidence_level:
-          description: The confidence level of the recommendation, expressed as a value between 0.0 (low confidence) and 1.0 (high confidence).
-          format: double
-          type: number
-        driver:
-          $ref: "#/components/schemas/ComponentRecommendation"
-        executor:
-          $ref: "#/components/schemas/ComponentRecommendation"
-        matched_params:
-          description: |-
-            Only returned by the v2 endpoint. The job parameters whose values the recommendation was matched on, as `parameter=value` pairs joined by `|`.
-            An empty string means the service-wide (coarse) recommendation was used.
-          example: "detailed_metrics=false|Region=US1"
-          type: string
-      required: [driver, executor]
-      type: object
-    RecommendationData:
-      description: JSON:API resource object for SPA Recommendation. Includes type, optional ID, and resource attributes with structured recommendations.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RecommendationAttributes"
-        id:
-          description: Resource identifier for the recommendation. Optional in responses.
-          type: string
-        type:
-          $ref: "#/components/schemas/RecommendationType"
-      required: [type, attributes]
-      type: object
-    RecommendationDocument:
-      description: JSON:API document containing a single Recommendation resource. Returned by SPA when the Spark Gateway requests recommendations.
-      properties:
-        data:
-          $ref: "#/components/schemas/RecommendationData"
-      required: [data]
-      type: object
-    RecommendationType:
-      default: recommendation
-      description: JSON:API resource type for Spark Pod Autosizing recommendations. Identifies the Recommendation resource returned by SPA.
-      enum:
-        - recommendation
-      example: recommendation
-      type: string
-      x-enum-varnames:
-        - RECOMMENDATION
-    RecommendationV2RequestAttributes:
-      description: |-
-        Attributes for requesting SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a pre-computed shard.
-      properties:
-        arguments:
-          description: |-
-            Raw, unfiltered Spark job arguments as submitted (for example, `--org_id=2`).
-            SPA determines which arguments are relevant for the given service.
-          example:
-            - ""
-          items:
-            type: string
-          type: array
-      required: [arguments]
-      type: object
-    RecommendationV2RequestBody:
-      description: |-
-        Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a pre-computed shard.
-      properties:
-        data:
-          $ref: "#/components/schemas/RecommendationV2RequestData"
-      required: [data]
-      type: object
-    RecommendationV2RequestData:
-      description: JSON:API resource object for the SPA v2 recommendation request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RecommendationV2RequestAttributes"
-        type:
-          $ref: "#/components/schemas/RecommendationV2RequestType"
-      required: [type, attributes]
-      type: object
-    RecommendationV2RequestType:
-      default: recommendation_v2_request
-      description: JSON:API resource type for the SPA v2 recommendation request.
-      enum:
-        - recommendation_v2_request
-      example: recommendation_v2_request
-      type: string
-      x-enum-varnames:
-        - RECOMMENDATION_V2_REQUEST
     RecommendationsFilterRequest:
       description: JSON:API request body for filtering cost recommendations.
       example:
@@ -133536,6 +133848,35 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionUpdateAttributes:
+      description: Attributes for updating a tag indexing rule exemption.
+      properties:
+        reason:
+          description: The updated reason the metric is exempt from tag indexing rules.
+          example: This metric must remain exempt because of its query requirements.
+          type: string
+      required:
+        - reason
+      type: object
+    TagIndexingRuleExemptionUpdateData:
+      description: Data object for updating a tag indexing rule exemption.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionType"
+      required:
+        - type
+        - attributes
+      type: object
+    TagIndexingRuleExemptionUpdateRequest:
+      description: Request body for updating a tag indexing rule exemption.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateData"
+      required:
+        - data
+      type: object
     TagIndexingRuleExemptionVolumeStatus:
       description: |-
         Indicates whether `estimated_change_in_volume` is available and, if not, why. `ok` indicates a fresh estimate.
@@ -140632,6 +140973,19 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
+        tags:
+          description: |-
+            Tags associated with the feature flag. This field replaces the full set of
+            existing tags; omit it to leave tags unchanged, or pass an empty array to
+            clear all tags. The owning team is set by including a tag of the form
+            `team:<team-handle>` in this array.
+          example: ["team:feature-flagging"]
+          items:
+            description: A tag associated with the feature flag.
+            maxLength: 200
+            type: string
+          maxItems: 100
+          type: array
       type: object
     UpdateFeatureFlagData:
       description: Data for updating a feature flag.
@@ -155355,8 +155709,8 @@ paths:
                   data:
                     type: notebook
             schema:
-              $ref: "#/components/schemas/NotebookCreateRequest"
-        description: Notebook creation request
+              $ref: "#/components/schemas/CaseInvestigationNotebookCreateRequest"
+        description: Case investigation notebook creation request.
         required: true
       responses:
         "204":
@@ -178266,6 +178620,11 @@ paths:
       description: |-
         Updates an existing feature flag's metadata such as
          name and description. Does not modify targeting rules or allocations.
+
+        To change the owning team, update `tags` and include a tag of the form
+        `team:<team-handle>` in the array. `tags` is a full replacement of the
+        existing tag set (including any `team:` tag), so include every tag you
+        want to keep, not just the ones you're adding.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -178280,6 +178639,7 @@ paths:
                       description: Updated description for the feature flag
                       enabled: true
                       name: Updated Feature Flag XYZ789
+                      tags: ["team:feature-flagging"]
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
@@ -188039,6 +188399,9 @@ paths:
       operationId: ListIncidentResponders
       parameters:
         - $ref: "#/components/parameters/IncidentIDPathParameter"
+        - $ref: "#/components/parameters/IncidentResponderIncludeQueryParameter"
+        - $ref: "#/components/parameters/IncidentResponderPageLimitParameter"
+        - $ref: "#/components/parameters/IncidentResponderPageOffsetParameter"
       responses:
         "200":
           content:
@@ -201949,6 +202312,61 @@ paths:
         permissions:
           - logs_read_data
   /api/v2/logs/archive_searches:
+    get:
+      description: |-
+        List the organization's Archive Searches that haven't expired, up to 5,000. When more
+        exist, `meta.truncated` is `true`.
+      operationId: ListArchiveSearches
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          archive_id: mhmyYmyLTOaFYKvhNadu1w
+                          bytes_scanned: 0
+                          created_at: "2026-01-02T12:00:00Z"
+                          description: Investigating the checkout latency spike.
+                          events_scanned: 0
+                          expected_duration: 120
+                          from: "2026-01-01T00:00:00Z"
+                          name: checkout-latency-investigation
+                          query: service:checkout status:error
+                          status: RUNNING
+                          to: "2026-01-02T00:00:00Z"
+                        id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                        type: archive_search
+                    meta:
+                      truncated: false
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchListResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List Archive Searches
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Start a search over the logs stored in an archive.
@@ -202097,6 +202515,170 @@ paths:
         operator: OR
         permissions:
           - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Turn a plain Archive Search into a Search & Rehydration by indexing the matched logs into a
+        retained historical view. Rehydration is the only thing this endpoint can change, and it only
+        applies to a search that has already finished scanning.
+      operationId: RehydrateArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveSearchRehydrateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 402764439
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 1500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        rehydration:
+                          max_rehydrated_events: 100000
+                          retention_days: 15
+                          tier: standard
+                        status: RUNNING
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Precondition Failed
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Rehydrate an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/logs/archive_searches/{archive_search_id}/cancel:
+    post:
+      description: |-
+        Cancel a running Archive Search. Cancelling an Archive Search that has already finished is a
+        no-op: it returns the resource unchanged instead of returning an error.
+      operationId: CancelArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 102400
+                        completed_at: "2026-01-02T12:05:00Z"
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        status: CANCELLED
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Cancel an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+          - logs_write_archive_search
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -206038,7 +206620,7 @@ paths:
       summary: Delete a tag indexing rule exemption
       tags:
         - Metrics
-      x-menu-order: 26
+      x-menu-order: 35
       "x-permission":
         operator: OR
         permissions:
@@ -206186,6 +206768,89 @@ paths:
         - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 25
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and
+        `created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has
+        only a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateTagIndexingRuleExemption
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      reason: This metric must remain exempt because of its query requirements.
+                    type: tag_indexing_rule_exemptions
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume:
+                        kind: exemption
+                        missing_indexed_tags: []
+                        reason: This metric must remain exempt because of its query requirements.
+                        volume_status: unavailable
+                      id: dd.test.metric
+                      type: tag_indexing_rule_exemptions
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a tag indexing rule exemption
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
@@ -207684,6 +208349,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
   /api/v2/monitor/notification_rule/{rule_id}:
     delete:
       description: Deletes a monitor notification rule by `rule_id`.
@@ -207720,6 +208386,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
     get:
       description: Returns a monitor notification rule by `rule_id`.
       operationId: GetMonitorNotificationRule
@@ -207868,6 +208535,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
   /api/v2/monitor/policy:
     get:
       description: Get all monitor configuration policies.
@@ -220384,6 +221052,10 @@ paths:
       tags:
         - Rum Replay Heatmaps
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     post:
       description: Create a heatmap snapshot.
       operationId: CreateReplayHeatmapSnapshot
@@ -222589,6 +223261,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     post:
       description: |-
         Create a RUM retention filter for a RUM application.
@@ -222694,6 +223370,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     post:
       description: |-
         Create an exclusion filter for a RUM application.
@@ -222814,6 +223494,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update an exclusion filter for a RUM application.
@@ -222937,6 +223621,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
   /api/v2/rum/applications/{app_id}/retention_filters/permanent/{permanent_rf_id}:
     get:
       description: Get a permanent RUM retention filter for a RUM application by its identifier.
@@ -222975,6 +223663,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.
@@ -223093,6 +223785,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update a RUM retention filter for a RUM application.
@@ -223173,7 +223869,11 @@ paths:
         "204":
           description: No Content
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM application
@@ -223217,7 +223917,11 @@ paths:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: OK
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM application
@@ -223280,7 +223984,11 @@ paths:
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "422":
           content:
             application/json:
@@ -223332,6 +224040,10 @@ paths:
       tags:
         - RUM Config
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -223485,6 +224197,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     post:
       description: |-
         Create a metric based on your organization's RUM data.
@@ -223615,6 +224331,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     patch:
       description: |-
         Update a specific RUM-based metric from your organization.
@@ -223921,6 +224641,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224138,6 +224862,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224184,6 +224912,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224509,6 +225241,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
   /api/v2/rum/operations/search:
     get:
       description: |-
@@ -224634,6 +225370,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
   /api/v2/rum/operations/strong_links:
     get:
       description: |-
@@ -224711,6 +225451,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     post:
       description: |-
         Create a link between a RUM operation and a journey, confirming that the journey
@@ -224972,6 +225716,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     put:
       description: |-
         Update an existing RUM operation. Fields omitted from the request body keep their existing value,
@@ -225332,6 +226080,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     post:
       description: Create a playlist.
       operationId: CreateRumReplayPlaylist
@@ -225440,6 +226192,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     put:
       description: Update a playlist.
       operationId: UpdateRumReplayPlaylist
@@ -225583,6 +226339,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/playlists/{playlist_id}/sessions/{session_id}:
     delete:
       description: Remove a session from a playlist.
@@ -225746,6 +226506,10 @@ paths:
       tags:
         - Rum Replay Sessions
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/sessions/{session_id}/watchers:
     get:
       description: List session watchers.
@@ -225799,6 +226563,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/sessions/{session_id}/watches:
     delete:
       description: Delete session watch history.
@@ -225953,6 +226721,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/saml_configurations:
     get:
       description: Get the list of SAML configurations for the current organization. An organization has at most one SAML configuration.
@@ -244045,188 +244817,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/spa/recommendations-v2/{service}:
-    post:
-      description: |-
-        This endpoint is experimental and restricted to Datadog internal use only.
-        Retrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides
-        a service name and the job's raw arguments. SPA determines which arguments are relevant
-        for the service and returns structured recommendations for driver and executor resources.
-      operationId: GetSPARecommendationsV2
-      parameters:
-        - description: The service name for a Spark job
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RecommendationV2RequestBody"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                    matched_params: "detailed_metrics=false"
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA recommendations v2
-      tags:
-        - Spa
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
-  /api/v2/spa/recommendations/{service}:
-    get:
-      description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.
-      operationId: GetSPARecommendations
-      parameters:
-        - description: The recommendation service should not use its metrics cache.
-          in: query
-          name: bypass_cache
-          schema:
-            type: string
-        - description: The service name for a spark job.
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA Recommendations
-      tags:
-        - Spa
-      x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
-  /api/v2/spa/recommendations/{service}/{shard}:
-    get:
-      description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.
-      operationId: GetSPARecommendationsWithShard
-      parameters:
-        - description: The shard tag for a spark job, which differentiates jobs within the same service that have different resource needs
-          in: path
-          name: shard
-          required: true
-          schema:
-            type: string
-        - description: The service name for a spark job
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-        - description: The recommendation service should not use its metrics cache.
-          in: query
-          name: bypass_cache
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA Recommendations with a shard parameter
-      tags:
-        - Spa
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
   /api/v2/spans/analytics/aggregate:
     post:
       description: |-
@@ -255049,7 +255639,7 @@ paths:
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
             - service
-            - resource_name
+            - resource
           in: query
           name: include_fields
           required: false
@@ -259252,8 +259842,6 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
     name: Software Catalog
-  - description: SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations.
-    name: Spa
   - description: |-
       Search and aggregate your spans from your Datadog platform over HTTP.
     name: Spans

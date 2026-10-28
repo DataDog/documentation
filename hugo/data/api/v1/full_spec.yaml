@@ -29821,6 +29821,7 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitor_notification_rules_write: Create, edit, and delete monitor notification rules.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_draft_write: Create, edit, and delete draft monitors. Does not allow editing live monitors or publishing drafts to production.
             monitors_read: View monitors.
