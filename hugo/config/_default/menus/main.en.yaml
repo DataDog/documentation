@@ -717,16 +717,16 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: Using OTel SDK
+    - name: OpenTelemetry SDK
       url: opentelemetry/instrument/otel_sdks/
       identifier: otel_sdks
       parent: otel-instrumentation
-      weight: 301
-    - name: Using Datadog SDK
+      weight: 302
+    - name: DDOT SDK
       url: /opentelemetry/instrument/dd_sdks
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
-      weight: 302
+      weight: 301
     - name: OTLP Export
       url: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
       identifier: otel-otlp-export-dd-sdk
