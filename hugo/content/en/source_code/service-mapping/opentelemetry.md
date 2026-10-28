@@ -134,8 +134,8 @@ This option requires a shell in your image. Images without a shell, such as dist
 **Note**: If your Kubernetes pod spec sets `command`, it replaces the image's `ENTRYPOINT`. In that case, add `/otel-env.sh` as the first element of `command`.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Set resource attributes with OpenTelemetry Operator annotations" level="h4" %}}
-Use this option if you instrument your Kubernetes workloads with the [OpenTelemetry Operator][3] and your deployment tooling knows the commit SHA at deploy time.
+{{% collapse-content title="Set resource attributes with OpenTelemetry Kubernetes pod annotations" level="h4" %}}
+Use this option if you instrument Kubernetes workloads with the [OpenTelemetry Operator][3], or if you use the OpenTelemetry Collector’s [K8s Attributes processor][9] with `otel_annotations: true`, and your deployment tooling can provide the commit SHA at deployment time.
 
 Add the following [annotations][4] to your pod template:
 
@@ -169,3 +169,4 @@ Replace `<git-provider.example/me/my-repo>` with your repository URL, and have y
 [6]: https://opentelemetry.io/docs/languages/sdk-configuration/declarative-configuration/
 [7]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/spec-compliance-matrix.md#declarative-configuration
 [8]: https://opentelemetry.io/docs/languages/sdk-configuration/declarative-configuration/#migration-configuration
+[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
