@@ -53,6 +53,14 @@ The Android SDK automatically measures the TTID. The TTID can be optionally prof
 ### Measuring the time to full display
 The time to full display is manually defined using the `GlobalRumMonitor.get().reportAppFullyDisplayed()` API in the Android SDK based on the application’s specific definition of “fully drawn.” 
 
+Call this API when the app is ready for the user to interact with it. The SDK handles the call as follows:
+
+- TTFD measures the elapsed time from the most recent detected app launch in the RUM session to the call. The starting point is process start for a cold start, or `Activity.onCreate` for a warm start.
+- The SDK processes only the first call per RUM session and reports at most one TTFD event. It ignores later calls, even if the first call does not produce a TTFD event.
+- If TTFD exceeds 90 seconds, the SDK drops the value instead of capping it at 90 seconds. No TTFD event is reported.
+- For the session's first measured launch, a call after launch detection but before TTID is computed makes TTFD equal to TTID. The SDK reports TTFD when TTID becomes available. This fallback does not apply if the SDK has already measured TTID for an earlier launch in the same session.
+- If you call the API before the SDK detects an app launch, the SDK logs an error and does not report TTFD. Later calls in the same session are still ignored.
+
 Below is an example where time to full display is determined when home activity is fully loaded.
 
 {{< tabs >}}
