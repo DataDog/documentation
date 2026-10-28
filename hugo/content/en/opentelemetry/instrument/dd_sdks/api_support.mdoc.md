@@ -683,7 +683,7 @@ histogram.record(duration, Attributes.builder().put("method", "GET").put("status
 
 ### Shut down metrics in short-lived processes
 
-With metrics enabled, request a final export before the process exits. Stop recording metrics before shutdown. These examples use provider life cycle methods in addition to the OpenTelemetry Metrics API.
+With metrics enabled, request a final export before the process exits. Stop recording metrics before shutdown. These operations are provided by the SDK.
 
 {% if equals($prog_lang, "node_js") %}
 Requires `dd-trace` 5.127.0 or later on the 5.x release line, or 6.16.0 or later. Wait for the callback before exiting; it receives `null` on success or an error on failure.
@@ -704,6 +704,10 @@ import type { opentelemetry as DatadogOpenTelemetry } from 'dd-trace';
 
 const meterProvider = metrics.getMeterProvider() as ReturnType<typeof metrics.getMeterProvider> &
   DatadogOpenTelemetry.MeterProvider;
+
+meterProvider.shutdown((error) => {
+  if (error) console.error('Failed to shut down metrics', error);
+});
 ```
 
 The Datadog provider has no separate force-flush method.
