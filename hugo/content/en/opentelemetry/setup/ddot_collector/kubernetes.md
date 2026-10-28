@@ -7,9 +7,9 @@ description: Deploy the DDOT Collector on Kubernetes with the OpenTelemetry Oper
 # type: multi-code-lang
 # code_lang_weight: 3
 further_reading:
-- link: "/opentelemetry/setup/ddot_collector/custom_components"
+- link: "/opentelemetry/setup/ddot_collector/#opentelemetry-collector-components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components in DDOT"
+  text: "OpenTelemetry Collector components included in DDOT"
 ---
 
 
@@ -22,7 +22,7 @@ Installing the standalone DDOT Collector with OpenTelemetry tooling is in Previe
 Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector on Kubernetes without the Datadog Agent. You can use the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart.
 
 <div class="alert alert-info">
-  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend DDOT's capabilities. For a list of components included by default, see <a href="/opentelemetry/setup/ddot_collector/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
+  <strong>Need additional OpenTelemetry components?</strong> The <code>datadog/ddot-collector</code> image includes a fixed set of components. For the list, see <a href="/opentelemetry/setup/ddot_collector/#opentelemetry-collector-components">OpenTelemetry Collector components</a>. To add components, <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> builds a custom Datadog Agent image. That image is for the Collector in the Agent, the OpenTelemetry Collector that runs inside the Datadog Agent. It isn't for the standalone DDOT Collector on this page.
 </div>
 
 ## Requirements
@@ -128,12 +128,9 @@ helm repo update
 
 ### Configure the OTel Collector
 
-On nodes without cloud provider metadata, such as k3s, kind, or bare metal, the Collector can't detect a hostname. Its pod exits with `unable to reliably determine the host name`. On those clusters, add these environment variables before you deploy:
+The DDOT Collector needs a host name for each node. Set it with the `DD_HOSTNAME` environment variable, as `<NODE_NAME>-<CLUSTER_NAME>`. Without `DD_HOSTNAME`, the Collector pod exits with `unable to reliably determine the host name`. This applies to every cluster, including clusters on a cloud provider.
 
-- **Operator**: the `env` list in `node-collector.yaml`.
-- **Helm**: the `extraEnvs` list in `node-collector-values.yaml`.
-
-Put `NODE_NAME` above `DD_HOSTNAME`. The example configurations below include both as comments to uncomment. Replace `<CLUSTER_NAME>` with the cluster name you use for `K8S_CLUSTER_NAME` in the same file:
+The example configurations below set `DD_HOSTNAME` from a `NODE_NAME` variable:
 
 ```yaml
 - name: NODE_NAME
@@ -144,7 +141,9 @@ Put `NODE_NAME` above `DD_HOSTNAME`. The example configurations below include bo
   value: $(NODE_NAME)-<CLUSTER_NAME>
 ```
 
-These variables set the hostname to `<NODE_NAME>-<CLUSTER_NAME>`. Datadog uses the same name for the node's Kubernetes metrics, so each node appears as one host. This assumes your configuration adds `k8s.cluster.name`, as the `resource/add-cluster-name` processor in the example configuration does. If it doesn't, set `DD_HOSTNAME` to `$(NODE_NAME)`. If the Collector is already running, add the variables and deploy the configuration again.
+`NODE_NAME` reads the node name from the pod spec. Keep it above `DD_HOSTNAME` in the list, because Kubernetes expands `$(NODE_NAME)` only from variables defined earlier. Replace `<CLUSTER_NAME>` with the cluster name you use for `K8S_CLUSTER_NAME` in the same file.
+
+Datadog uses the `<NODE_NAME>-<CLUSTER_NAME>` name for the node's Kubernetes metrics too. If no Datadog Agent runs on the node, each node appears as one host. This assumes your configuration adds `k8s.cluster.name`, as the `resource/add-cluster-name` processor in the example configuration does. If it doesn't, set `DD_HOSTNAME` to `$(NODE_NAME)`.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -188,9 +187,15 @@ spec:
       value: datadog,pprof,zpages,prometheus,infraattributes
     - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: DD_HOSTNAME
+      value: $(NODE_NAME)-<CLUSTER_NAME>
 {{< /code-block >}}
 
-Replace `<CLUSTER_NAME>` with a name for your cluster.
+Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
 
 2. Add an OTLP receiver and the Datadog exporter for all desired signals. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node:
 
@@ -465,13 +470,12 @@ spec:
       value: datadog,pprof,zpages,prometheus,infraattributes
     - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
-    # On nodes without cloud provider metadata (k3s, kind, bare metal), uncomment:
-    # - name: NODE_NAME
-    #   valueFrom:
-    #     fieldRef:
-    #       fieldPath: spec.nodeName
-    # - name: DD_HOSTNAME
-    #   value: $(NODE_NAME)-<CLUSTER_NAME>
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: DD_HOSTNAME
+      value: $(NODE_NAME)-<CLUSTER_NAME>
     - name: K8S_POD_IP
       valueFrom:
         fieldRef:
@@ -495,7 +499,7 @@ spec:
       readOnly: true
 {{< /code-block >}}
 
-Replace `<CLUSTER_NAME>` with a name for your cluster.
+Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
 
 {{% /collapse-content %}}
 
@@ -562,9 +566,15 @@ extraEnvs:
     value: datadog,pprof,zpages,prometheus,infraattributes
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
+  - name: NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: DD_HOSTNAME
+    value: $(NODE_NAME)-<CLUSTER_NAME>
 {{< /code-block >}}
 
-Replace `<CLUSTER_NAME>` with a name for your cluster.
+Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
 
 4. Enable presets:
 
@@ -736,13 +746,12 @@ extraEnvs:
     value: datadog,pprof,zpages,prometheus,infraattributes
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
-  # On nodes without cloud provider metadata (k3s, kind, bare metal), uncomment:
-  # - name: NODE_NAME
-  #   valueFrom:
-  #     fieldRef:
-  #       fieldPath: spec.nodeName
-  # - name: DD_HOSTNAME
-  #   value: $(NODE_NAME)-<CLUSTER_NAME>
+  - name: NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: DD_HOSTNAME
+    value: $(NODE_NAME)-<CLUSTER_NAME>
 ports:
   jaeger-compact:
     enabled: false
@@ -875,9 +884,9 @@ If the Collector pods aren't running, see [Troubleshooting](#troubleshooting).
 
 After your application sends telemetry, check for it in Datadog. Data can take up to five minutes to appear. Replace `<SERVICE>`, `<ENV>`, and `<CLUSTER_NAME>` with the values from your configuration.
 
-- **Services**: In the [Software Catalog][58], set the environment to `<ENV>` and search for `<SERVICE>`. Its service page shows requests, errors, and latency.
+- **Services**: In the [Catalog][58], set the environment to `<ENV>` and search for `<SERVICE>`. Its service page shows requests, errors, and latency.
 - **Traces**: In the [Trace Explorer][59], search for `service:<SERVICE> env:<ENV>`.
-- **Hosts**: In the [Host List][60], each node appears once. If you set `DD_HOSTNAME`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`.
+- **Hosts**: In the [Host List][60], each node appears as `<NODE_NAME>-<CLUSTER_NAME>`. With `DD_HOSTNAME` set as in the example configuration and no Datadog Agent on the node, each node appears once.
 - **Metrics**: If your configuration collects kubelet metrics, as the example configuration does, graph `avg:k8s.pod.cpu.usage{kube_cluster_name:<CLUSTER_NAME>}` in the [Metrics Explorer][61].
 - **Logs**: In the [Log Explorer][62], search for `service:<SERVICE> env:<ENV>`.
 
@@ -903,20 +912,29 @@ No data in Datadog
 : Search the Collector's logs for export errors. A `403` means the API key or the site is wrong. Replace `<DAEMONSET_NAME>` with `node-collector-collector` for the Operator, or `node-collector-opentelemetry-collector-agent` for Helm:
 
   ```shell
-  kubectl logs daemonset/<DAEMONSET_NAME> | grep -i "exporting failed"
+  kubectl logs daemonset/<DAEMONSET_NAME> | grep -iE "403|forbidden|exporting failed"
   ```
 
 ## Add the Datadog Agent (optional)
 
 Some Datadog features need the Datadog Agent alongside the DDOT Collector. To add the Agent, install it separately with the [Datadog Operator][57].
 
-By default, the Datadog Operator Helm chart watches <code>DatadogAgent</code> resources only in the namespace where the Operator is installed (<code>watchNamespaces: []</code>). If the <code>DatadogAgent</code> resource is in a different namespace than the Operator, for example, to keep it separate from the <code>OpenTelemetryCollector</code> resource's namespace, set <code>watchNamespaces</code> to include the namespace where the <code>DatadogAgent</code> resource is created:
-<pre><code>helm upgrade datadog-operator datadog/datadog-operator \
-  -n &lt;OPERATOR_NAMESPACE&gt; \
+The DDOT Collector already collects some of the data the Agent can collect, and it uses host ports on every node. Before you deploy the Agent, check these settings in the `DatadogAgent` resource:
+
+- **Container logs**: If the Collector collects container logs, as the example configurations do, leave container log collection off in the Agent. If both collect them, Datadog receives each container log twice, and you pay for both copies. To collect container logs with the Agent instead, remove the `filelog` receiver (Operator) or turn off the `logsCollection` preset (Helm).
+- **OTLP ports**: Don't turn on OTLP ingestion in the Agent, or the Collector in the Agent, on host ports `4317` or `4318`. The DDOT Collector uses those host ports on every node. Kubernetes can't schedule two pods that use the same host port on one node, so the Agent pod stays `Pending`.
+- **Cluster name**: Set `spec.global.clusterName` to the same `<CLUSTER_NAME>` you use for the Collector. When a cluster name is set, the Agent reports `<NODE_NAME>-<CLUSTER_NAME>` as a host alias for the node. That's the same host name the Collector uses.
+
+By default, the Datadog Operator Helm chart watches `DatadogAgent` resources only in the namespace where the Operator is installed (`watchNamespaces: []`). You can create the `DatadogAgent` resource in a different namespace, for example to keep it separate from the `OpenTelemetryCollector` resource. If you do, set `watchNamespaces` to list both namespaces. The list replaces the default, so include the Operator's own namespace:
+
+```shell
+helm upgrade datadog-operator datadog/datadog-operator \
+  -n <OPERATOR_NAMESPACE> \
   --reuse-values \
-  --set 'watchNamespaces[0]=&lt;DATADOG_AGENT_NAMESPACE&gt;'
-</code></pre>
-If the Operator doesn't watch the namespace where the <code>DatadogAgent</code> resource is created, the resource silently fails to reconcile, with no error, no Kubernetes event, and no status update to indicate the problem.
+  --set 'watchNamespaces={<OPERATOR_NAMESPACE>,<DATADOG_AGENT_NAMESPACE>}'
+```
+
+If the Operator doesn't watch the namespace where the `DatadogAgent` resource is created, the resource silently fails to reconcile, with no error, no Kubernetes event, and no status update to indicate the problem.
 
 ## Uninstall
 
@@ -925,6 +943,8 @@ Remove the Collector and the components you installed for it:
 {{< tabs >}}
 {{% tab "Operator" %}}
 
+<div class="alert alert-warning">Uninstalling the Operator also deletes its custom resource definitions. That removes every <code>OpenTelemetryCollector</code> and <code>Instrumentation</code> resource in the cluster, not only the ones from this guide. If other teams use the Operator in this cluster, check with them before you uninstall it.</div>
+
 Delete the `OpenTelemetryCollector` resource, then uninstall the Operator:
 
 ```shell
@@ -932,8 +952,6 @@ kubectl delete -f node-collector.yaml
 helm uninstall opentelemetry-operator
 kubectl delete secret opentelemetry-operator-controller-manager-service-cert
 ```
-
-<div class="alert alert-warning">Uninstalling the Operator also deletes its custom resource definitions. That removes every <code>OpenTelemetryCollector</code> and <code>Instrumentation</code> resource in the cluster, not only the ones from this guide.</div>
 
 If you installed cert-manager for this guide and nothing else in your cluster uses it, uninstall it too. The cert-manager custom resource definitions and the `cert-manager` namespace remain. To remove them, see the [cert-manager uninstall guide][65].
 
