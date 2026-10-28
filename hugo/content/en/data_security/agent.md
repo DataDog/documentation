@@ -264,7 +264,7 @@ agent diagnose show-metadata agent-telemetry
 | instrumentation_controller.resources        | Number of `DatadogInstrumentation` resources tracked by the controller                                                 |
 | instrumentation_controller.reconciliations  | Number of `DatadogInstrumentation` section reconciliation attempts, tagged by section and status                       |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
-| metadata_streaming.history_resyncs          | Total number of resyncs the Cluster Agent has made because an agent fell behind the retained version history |
+| metadata_streaming.history_resyncs          | Total number of resyncs the Cluster Agent has made because an Agent fell behind the retained version history |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
