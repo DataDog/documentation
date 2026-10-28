@@ -1,5 +1,4 @@
-// Agent activity: a quiet outlined box while Docs AI reviews the documentation, collapsed into a
-// one-line summary once the answer starts. A small spinner while it works is the only motion.
+// Ask AI research timeline: an outlined box that collapses into a pill once the answer starts.
 $conv-activity-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 $conv-error-text: #8a2a2a;
 $conv-error-border: #f3c4c4;
@@ -12,7 +11,6 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     gap: 10px;
 }
 
-// One outlined box holds the header and the steps; collapsed, it is just the header pill.
 .conv-search-activity {
     display: flex;
     flex-direction: column;
@@ -162,7 +160,7 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     font-variant-numeric: tabular-nums;
 }
 
-// The summary gives way first on narrow panels; phones skip it, the steps hold the same detail.
+// The summary truncates first on narrow panels and is hidden on phones.
 .conv-search-activity-meta {
     flex-shrink: 1;
     min-width: 0;
@@ -264,7 +262,7 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     }
 }
 
-// Checked pages follow their step label as plain links: "Checked 2 pages · Log Archives · ..."
+// Checked pages follow their step label as plain links.
 .conv-search-activity-pages {
     display: inline;
 }

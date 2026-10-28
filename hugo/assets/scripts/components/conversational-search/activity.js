@@ -1,18 +1,5 @@
-/**
- * Agent activity timeline for Docs AI answers.
- *
- * The chat endpoint streams `thinking` events while it researches an answer:
- *   "Searching documentation..."                     -> a documentation search started
- *   "Reviewing relevant pages" + `retrieved_pages`   -> results for the running search
- *   "Reviewing relevant pages" without pages         -> the assistant opened a page to read it
- *   "Generating answer..."                           -> research is over, the answer is being written
- *
- * `reduceActivity` turns those events into a timeline state. It has no DOM dependency so it
- * can be unit-tested. `ActivityTimeline` renders that state inside an assistant message.
- *
- * The timeline shows what was found, never the search terms: those are short English keywords
- * written for the search index, not for the reader. Searches that run in parallel share a step.
- */
+// Turns the chat API's streamed `thinking` events into the research timeline above an answer.
+// Search queries are never shown, and parallel searches share one step.
 
 const DOCS_ORIGIN = 'https://docs.datadoghq.com';
 const MAX_VISIBLE_PAGES = 4;
@@ -76,8 +63,7 @@ function settle(steps, status = 'done', keep = () => false) {
     return steps.map((step) => (step.status === 'active' && !keep(step) ? { ...step, status } : step));
 }
 
-// A new step settles the previous ones, except searches whose results are still on the way
-// (the assistant can run several searches in parallel).
+// A new step settles the previous ones, except searches still waiting for results.
 function settleForNewStep(steps) {
     return settle(steps, 'done', isPendingSearch);
 }
@@ -108,7 +94,6 @@ function startSearch(state) {
     const searches = state.searches + 1;
     const running = state.steps.findIndex(isPendingSearch);
     if (running !== -1) {
-        // Started while another search is still running: the reader sees one search step.
         const steps = [...state.steps];
         steps[running] = { ...steps[running], pending: steps[running].pending + 1 };
         return { ...state, steps, searches, phase: 'researching' };
@@ -126,7 +111,7 @@ function applyResults(state, pages) {
     const next = { ...state, pages: mergePages(state.pages, normalized) };
     const index = state.steps.findIndex(isPendingSearch);
     if (index === -1) {
-        // Results without a visible search (older backends): show them as a completed search.
+        // Older backends send results without a search event.
         const followUp = state.steps.some((step) => step.kind === 'search');
         const withSearch = addStep(
             { ...next, steps: settleForNewStep(next.steps), searches: next.searches + 1 },
@@ -166,12 +151,7 @@ function applyRead(state, page) {
     return addStep({ ...next, steps: settleForNewStep(next.steps) }, { kind: 'read', count: 1, pages: opened });
 }
 
-/**
- * Pure reducer. Actions:
- *   { type: 'thinking', content, retrieved_pages?, page? }   (a `query` field is ignored)
- *   { type: 'answer' }   first answer token
- *   { type: 'done' } | { type: 'error' } | { type: 'stopped' }
- */
+// Actions: thinking { content, retrieved_pages?, page? }, answer (first token), done, error, stopped.
 export function reduceActivity(state, action, now = Date.now()) {
     switch (action.type) {
         case 'thinking': {
@@ -265,7 +245,6 @@ export function researchSeconds(state, now = Date.now()) {
 
 export function summarizeActivity(state) {
     const parts = [];
-    // Count search steps, not backend calls: parallel searches show as one step.
     const searches = state.steps.filter((step) => step.kind === 'search').length;
     if (searches) parts.push(plural(searches, 'search', 'searches'));
     if (state.reads) parts.push(`${plural(state.reads, 'page', 'pages')} checked`);
@@ -286,7 +265,6 @@ export function describeHeadline(state, now = Date.now()) {
             return researched ? `Reviewed the documentation \u00b7 ${seconds}s` : `Answered in ${seconds}s`;
         }
         default: {
-            // The steps below say what is happening; the header stays steady while research runs.
             if (state.steps.some((step) => step.kind === 'search' || step.kind === 'read')) {
                 return 'Reviewing the documentation';
             }
@@ -434,8 +412,7 @@ export class ActivityTimeline {
         }
     }
 
-    // Screen readers hear each research step once and when the answer is ready. Errors are
-    // announced by the error message itself (role="alert").
+    // Each step is announced once; errors announce themselves through role="alert".
     announcement(headline) {
         switch (this.state.phase) {
             case 'writing':
@@ -475,7 +452,6 @@ export class ActivityTimeline {
         const text = describeStep(step);
         if (label.textContent !== text) label.textContent = text;
 
-        // Only the pages the assistant checked are listed; search steps just count what they found.
         if (step.kind !== 'read') return;
         const body = node.querySelector('.conv-search-activity-step-body');
         const rendered = node.dataset.pages ? Number(node.dataset.pages) : 0;
