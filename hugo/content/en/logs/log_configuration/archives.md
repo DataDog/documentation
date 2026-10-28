@@ -242,7 +242,7 @@ For archives with a maximum scan size defined, all users need to estimate the sc
 
 **Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
 
-For both attribute types, enter tags and [reserved attributes][19] such as `env`, `service`, or `trace_id` without the `@` prefix. For all other attributes, prefix them with `@`.
+For both attribute types, enter tags and [reserved attributes][19] such as `env`, `service`, or `trace_id` without the `@` prefix. Prefix all other attributes with `@`.
 
 #### Archive Partition Attribute {#archive-partition-attribute}
 
