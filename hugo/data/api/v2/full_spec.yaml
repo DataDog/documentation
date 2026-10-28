@@ -2060,6 +2060,15 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringRuleProposalID:
+      description: The ID of the rule proposal, returned by the start a rule proposal endpoint.
+      in: path
+      name: proposal_id
+      required: true
+      schema:
+        example: c968cf83-56c2-4d54-a993-6c86dfb83527
+        format: uuid
+        type: string
     SecurityMonitoringRuleVersion:
       description: The historical version number of the rule.
       in: path
@@ -2507,6 +2516,30 @@ components:
             $ref: "#/components/schemas/JSONAPIErrorResponse"
       description: Not Found
     SecurityMonitoringBatchMigrationUnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Unauthorized
+    SecurityMonitoringRuleProposalBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    SecurityMonitoringRuleProposalForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Forbidden
+    SecurityMonitoringRuleProposalNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
+    SecurityMonitoringRuleProposalUnauthorizedResponse:
       content:
         application/json:
           schema:
@@ -118907,6 +118940,177 @@ components:
         thirdPartyRuleOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleThirdPartyOptions"
       type: object
+    SecurityMonitoringRuleProposalError:
+      description: The reason no rule could be generated. Only present when the status is `failed`.
+      properties:
+        kind:
+          description: |-
+            The kind of failure.
+            - `translation_error`: no rule could be generated from the input. Reword the input
+              or add details, then start a new rule proposal.
+            - `internal_error`: the proposal failed because of an internal error. Start a new
+              rule proposal to try again.
+          example: translation_error
+          type: string
+        message:
+          description: A human-readable explanation of why no rule could be generated, when available.
+          example: No log source matches the described activity.
+          type: string
+        type:
+          description: The type of failure within its kind, such as `NoRuleProduced`.
+          example: NoRuleProduced
+          type: string
+      required:
+        - kind
+      type: object
+    SecurityMonitoringRuleProposalInputType:
+      description: |-
+        The type of input to generate the proposed rule from: `natural_language` for a
+        plain-English description of the behavior to detect, `spl` for a Splunk SPL search or
+        saved search definition, or `kql` for a Microsoft KQL query. SPL inputs must be
+        self-contained, with search macros expanded.
+      enum:
+        - natural_language
+        - spl
+        - kql
+      example: natural_language
+      type: string
+      x-enum-varnames:
+        - NATURAL_LANGUAGE
+        - SPL
+        - KQL
+    SecurityMonitoringRuleProposalResponse:
+      description: Response containing a rule proposal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalResponseData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringRuleProposalResponseAttributes:
+      description: Attributes of the rule proposal.
+      properties:
+        error:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalError"
+        rule:
+          additionalProperties: {}
+          description: |-
+            The proposed Cloud SIEM detection rule in the same format as the create a detection
+            rule endpoint. It is not saved in Cloud SIEM. Only present when the status is
+            `completed`. Review the rule, then create it with the [create a
+            detection rule](https://docs.datadoghq.com/api/latest/security-monitoring/#create-a-detection-rule)
+            endpoint.
+          type: object
+        status:
+          description: |-
+            The status of the rule proposal. `pending` and `in_progress` mean the proposed rule is
+            still being generated. Poll the endpoint again later. `completed` and `failed` are final:
+            `completed` proposals contain the proposed rule in `rule`, and `failed` proposals
+            contain the reason in `error`.
+          example: completed
+          type: string
+      required:
+        - status
+      type: object
+    SecurityMonitoringRuleProposalResponseData:
+      description: Data of the rule proposal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalResponseAttributes"
+        id:
+          description: The ID of the rule proposal.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringRuleProposalStartRequest:
+      description: Request to start a rule proposal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartRequestData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringRuleProposalStartRequestAttributes:
+      description: Attributes of the rule proposal to start.
+      properties:
+        input:
+          description: |-
+            The natural-language description or rule to generate the proposed rule from, in the
+            format given by `inputType`.
+          example: Detect repeated failed Okta logins followed by a successful login from the same IP.
+          maxLength: 65536
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalInputType"
+      required:
+        - inputType
+        - input
+      type: object
+    SecurityMonitoringRuleProposalStartRequestData:
+      description: Data of the rule proposal to start.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartRequestAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringRuleProposalStartResponse:
+      description: Response to a started rule proposal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartResponseData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringRuleProposalStartResponseAttributes:
+      description: Attributes of the started rule proposal.
+      properties:
+        status:
+          description: |-
+            The status of the rule proposal, one of `pending`, `in_progress`, `completed`, or
+            `failed`. For a newly started rule proposal, the status is `pending`.
+          example: pending
+          type: string
+      required:
+        - status
+      type: object
+    SecurityMonitoringRuleProposalStartResponseData:
+      description: Data of the started rule proposal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartResponseAttributes"
+        id:
+          description: |-
+            The ID of the rule proposal. Use it as `proposal_id` to check the proposal status and get the proposed rule.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringRuleProposalType:
+      default: rule_proposals
+      description: The rule proposal resource type. The value is always `rule_proposals`.
+      enum:
+        - rule_proposals
+      example: rule_proposals
+      type: string
+      x-enum-varnames:
+        - RULE_PROPOSALS
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       oneOf:
@@ -140973,19 +141177,6 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
-        tags:
-          description: |-
-            Tags associated with the feature flag. This field replaces the full set of
-            existing tags; omit it to leave tags unchanged, or pass an empty array to
-            clear all tags. The owning team is set by including a tag of the form
-            `team:<team-handle>` in this array.
-          example: ["team:feature-flagging"]
-          items:
-            description: A tag associated with the feature flag.
-            maxLength: 200
-            type: string
-          maxItems: 100
-          type: array
       type: object
     UpdateFeatureFlagData:
       description: Data for updating a feature flag.
@@ -178620,11 +178811,6 @@ paths:
       description: |-
         Updates an existing feature flag's metadata such as
          name and description. Does not modify targeting rules or allocations.
-
-        To change the owning team, update `tags` and include a tag of the form
-        `team:<team-handle>` in the array. `tags` is a full replacement of the
-        existing tag set (including any `team:` tag), so include every tag you
-        want to keep, not just the ones you're adding.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -178639,7 +178825,6 @@ paths:
                       description: Updated description for the feature flag
                       enabled: true
                       name: Updated Feature Flag XYZ789
-                      tags: ["team:feature-flagging"]
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
@@ -205081,7 +205266,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2026-11-01"
+      x-sunset: "2027-01-01"
     post:
       deprecated: true
       description: |-
@@ -205166,7 +205351,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2026-11-01"
+      x-sunset: "2027-01-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
@@ -235370,6 +235555,7 @@ paths:
         rule. To load more rules, add them with the add resources endpoint before starting the
         batch migration. A batch migration can hold up to 1000 resources. The response does not
         include the created resources: list the resources of the batch migration to retrieve them.
+        Alternatively, use the start-a-rule-proposal endpoint to get a single proposed rule.
       operationId: CreateSecurityMonitoringBatchMigration
       requestBody:
         content:
@@ -239559,6 +239745,161 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_read
+  /api/v2/security_monitoring/rules/proposals:
+    post:
+      description: |-
+        Start generating a proposed Cloud SIEM detection rule from a natural-language
+        description, or from an SPL or KQL rule. The proposal is based on your organization's
+        log sources, log fields, and existing detection rules. When logs from the matching
+        source are available, the proposed query is tested against your recent logs.
+
+        The proposed rule is generated asynchronously. This endpoint returns a proposal `id`
+        with the status `pending`. To get the proposed rule, pass this `id` to the get-a-rule-proposal
+        endpoint and poll the endpoint until the status is `completed` or `failed`. A proposal
+        usually takes a few minutes, and up to 10 minutes.
+
+        This endpoint does not create or modify any detection rules in Cloud SIEM. To translate
+        many rules at once, use batch migrations instead.
+      operationId: StartSecurityMonitoringRuleProposal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        status: pending
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: rule_proposals
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartResponse"
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Start a rule proposal
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 188
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/rules/proposals/{proposal_id}:
+    get:
+      description: |-
+        Get the status of a rule proposal started with the start-a-rule-proposal endpoint.
+        While the status is `pending` or `in_progress`, the proposed rule is still being
+        generated. Poll this endpoint again later. If the status is `completed`, the response's `rule` field contains
+        the proposed Cloud SIEM detection rule. If the status is `failed`, the response's `error` field contains
+        the reason a rule could not be generated.
+
+        This endpoint does not create or modify any detection rules in Cloud SIEM. To create the
+        proposed rule, use the create-a-detection-rule endpoint.
+      operationId: GetSecurityMonitoringRuleProposal
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringRuleProposalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        rule:
+                          cases:
+                            - condition: failed_login > 5 && successful_login > 0
+                              name: Successful login after repeated failures
+                              status: medium
+                          isEnabled: false
+                          message: Repeated failed Okta logins were followed by a successful login from the same IP.
+                          name: Successful Okta login after repeated failures
+                          options:
+                            detectionMethod: threshold
+                            evaluationWindow: 900
+                            keepAlive: 3600
+                            maxSignalDuration: 86400
+                          queries:
+                            - aggregation: count
+                              groupByFields:
+                                - "@network.client.ip"
+                              name: failed_login
+                              query: source:okta @evt.name:user.session.start @evt.outcome:FAILURE
+                            - aggregation: count
+                              groupByFields:
+                                - "@network.client.ip"
+                              name: successful_login
+                              query: source:okta @evt.name:user.session.start @evt.outcome:SUCCESS
+                          tags:
+                            - source:okta
+                          type: log_detection
+                        status: completed
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: rule_proposals
+                failed:
+                  value:
+                    data:
+                      attributes:
+                        error:
+                          kind: translation_error
+                          message: No log source matches the described activity.
+                          type: NoRuleProduced
+                        status: failed
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: rule_proposals
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringRuleProposalResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+      summary: Get a rule proposal
+      tags:
+        - Security Monitoring
+      x-menu-order: 189
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
   /api/v2/security_monitoring/rules/test:
     post:
       description: |-

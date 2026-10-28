@@ -2730,6 +2730,13 @@
       "description": "Search security findings returns \"OK\" response with pagination"
     }
   ],
+  "StartSecurityMonitoringRuleProposal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Start a rule proposal returns \"Accepted\" response"
+    }
+  ],
   "SendSecurityMonitoringNotificationPreview": [
     {
       "group": "security_monitoring",
