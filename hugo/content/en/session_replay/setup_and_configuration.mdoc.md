@@ -42,4 +42,10 @@ further_reading:
     text: Web View Tracking
 ---
 
+## Overview
+
+Session Replay captures and visually replays your users' web browsing or mobile app experiences, so you can see what users did alongside RUM performance and error data. Session Replay is built into the Datadog SDKs. After you set up RUM, enable it in your SDK configuration.
+
+This page explains how to enable Session Replay for each SDK and configure what it records. To learn how the recorder works and what you can do with replays, see the [Session Replay overview](/session_replay/).
+
 {% partial file="real_user_monitoring/session_replay/setup_and_configuration.mdoc.md" /%}

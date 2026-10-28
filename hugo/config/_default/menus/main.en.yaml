@@ -9651,7 +9651,7 @@ menu:
       identifier: rum_setup_enable_advanced_configuration
       weight: 111
     - name: Collect Session Replays
-      url: session_replay/
+      url: session_replay/setup_and_configuration/
       parent: rum_setup
       identifier: rum_setup_session_replays
       weight: 204
