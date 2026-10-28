@@ -66,7 +66,7 @@ After you save an instrumentation rule, Datadog evaluates the query you defined 
 2. When an instance has no IAM instance profile, Datadog creates one so Systems Manager can reach it. When an instance already has one, Datadog adds the SSM policy and the scoped secret-read policy to the existing role.
 3. Datadog checks whether an Agent is already present. When an Agent is present that Datadog did not install, Datadog stops and leaves the instance alone.
 4. Datadog calls `ssm:SendCommand`, one instance at a time, running the `datadog-ec2-instrumenter` document.
-5. On the instance, the document fetches the API key from Secrets Manager using the instance's own IAM role. It then runs Datadog's standard Agent installer (`install_script_agent7.sh` on Linux, or the standard MSI on Windows) with log collection and APM host instrumentation enabled.
+5. On the instance, the document fetches the API key from Secrets Manager using the instance's own IAM role. For the policies that must allow this request, see [Secrets Manager access from EC2 instances][8]. It then runs Datadog's standard Agent installer (`install_script_agent7.sh` on Linux, or the standard MSI on Windows) with log collection and APM host instrumentation enabled.
 
 Datadog does not reboot or restart your instances. The only service Datadog touches is the Datadog Agent itself, which is started on install and stopped on uninstall. Your applications and other services are untouched.
 
@@ -216,3 +216,4 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 [5]: https://docs.datadoghq.com/account_management/workload_identity_federation/
 [6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-between-the-aws-integration-and-remote-instrumentation
 [7]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-how-your-rule-matches-resources
+[8]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#secrets-manager-access-from-ec2-instances

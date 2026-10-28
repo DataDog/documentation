@@ -93,6 +93,36 @@ For all workloads, confirm the following:
 
 - **SSM Agent**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
 - **Supported platforms**: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
+- **Access to AWS Secrets Manager**: Each instance fetches its Datadog API key from Secrets Manager in its own region, using the instance's own IAM role. The instance must be able to reach the Secrets Manager endpoint, and no policy in your account can deny the request. See [Secrets Manager access from EC2 instances](#secrets-manager-access-from-ec2-instances).
+
+#### Secrets Manager access from EC2 instances
+
+During installation, the instance calls `secretsmanager:GetSecretValue` on its own secret, `/datadog/ec2-instrumenter/<ACCOUNT_ID>/<INSTANCE_ID>`. Datadog adds the inline policy `datadog-ec2-instrumenter-secrets` to the instance's IAM role to allow this call:
+
+```json
+{
+  "Effect": "Allow",
+  "Action": "secretsmanager:GetSecretValue",
+  "Resource": "arn:aws:secretsmanager:*:<ACCOUNT_ID>:secret:/datadog/ec2-instrumenter/*"
+}
+```
+
+The installation fails with an `AccessDeniedException` if another policy that applies to the request doesn't allow it. Confirm the following:
+
+- **Permissions boundary**: If the instance's role has a permissions boundary, the boundary must allow `secretsmanager:GetSecretValue` on the same resource.
+- **Organization policies and explicit denies**: No service control policy (SCP), resource control policy (RCP), or other policy can deny the action on the resource.
+- **VPC endpoint policy**: If the instance reaches Secrets Manager through an interface VPC endpoint with an endpoint policy, that policy must allow the same action on the same resource. For example:
+
+  ```json
+  {
+    "Effect": "Allow",
+    "Principal": "*",
+    "Action": "secretsmanager:GetSecretValue",
+    "Resource": "arn:aws:secretsmanager:*:<ACCOUNT_ID>:secret:/datadog/ec2-instrumenter/*"
+  }
+  ```
+
+If the instance has no route to the internet, create an interface VPC endpoint for Secrets Manager (`com.amazonaws.<REGION>.secretsmanager`) with private DNS enabled, so the instance reaches it at the standard regional endpoint. See [Using an AWS Secrets Manager VPC endpoint][19] in the AWS documentation.
 
 ### AWS Lambda functions
 
@@ -271,6 +301,10 @@ Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which D
 
 If instrumentation can't complete because of missing permissions, Datadog shows a notification linking to the CloudFormation resource that needs the new permission. Update your existing stack to grant the [required permissions](#required-aws-permissions). You don't need to create a new stack.
 
+### An EC2 installation fails with AccessDeniedException from Secrets Manager
+
+The instance couldn't read its API key secret. Datadog grants the instance's role read access to the secret, so another policy is denying the request, such as a VPC endpoint policy for Secrets Manager, a permissions boundary on the role, or an SCP. For what each of these must allow, see [Secrets Manager access from EC2 instances](#secrets-manager-access-from-ec2-instances).
+
 ### A Lambda function is skipped as already instrumented
 
 Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. Skipping these functions prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it. Datadog then instruments the function automatically.
@@ -311,3 +345,4 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [16]: https://docs.datadoghq.com/account_management/workload_identity_federation/
 [17]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#what-datadog-changes-on-a-function
 [18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
+[19]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
