@@ -22,7 +22,7 @@ Use [Workflow Automation][1] with Feature Flags to automate flag changes and res
 
 A **trigger** determines when a workflow starts. Feature flag triggers respond to events such as a flag being enabled, a rollout being paused, or an approval being requested.
 
-An **action** is a step the workflow performs. Feature flag actions can retrieve flag details or update flag configuration. For example, a workflow can start when a monitor alerts and disable a flag in the affected environment.
+An **action** is a step the workflow performs. Feature flag actions can retrieve flag details or update flag configuration. For example, when a monitor alerts, a workflow can disable a flag in the affected environment.
 
 ## Set up a workflow
 
@@ -89,7 +89,7 @@ Use a monitor to automatically disable a flag when a service metric crosses a th
 1. Add a **Monitor** trigger and keep **Automatic triggering** enabled.
 1. Add the **Disable feature flag** action and connect it to the trigger.
 1. Select the **Feature flag** and **Environment**.
-1. [Test the workflow][5] with a flag in a test environment and verify the result in **Run History**. Testing executes the disable action.
+1. Testing executes the disable action. [Test the workflow][5] with a flag in a test environment, then verify the result in **Run History**.
 1. Configure the intended flag and environment, save the workflow, and click **Publish**.
 1. Edit the monitor. Under **Configure notifications & automations**, click **+ Add Workflow** and select the workflow.
 1. Place the generated workflow mention inside an alert condition, then save the monitor:
@@ -100,7 +100,7 @@ Use a monitor to automatically disable a flag when a service metric crosses a th
    {{/is_alert}}
    ```
 
-Replace `@workflow-<WORKFLOW_HANDLE>` with the workflow's generated mention. See [Monitor triggers][6] for configuration details.
+See [Monitor triggers][6] for configuration details.
 
 {{< img src="/feature_flags/workflow_automation_monitor_rollback.png" alt="Monitor-triggered workflow with a Disable feature flag action configured for New Checkout Flow in prod, followed by a Slack notification" style="width:100%;" >}}
 
