@@ -3,7 +3,7 @@ title: Using Datadog SDKs with OpenTelemetry
 description: Export telemetry in OTLP format from Datadog SDKs, or use the OpenTelemetry API with Datadog SDKs to keep vendor-neutral instrumentation.
 further_reading:
     - link: '/opentelemetry/setup/ddot_collector/'
-      text: 'DDOT Collector'
+      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT)'
       tag: 'Documentation'
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
