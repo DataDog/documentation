@@ -356,13 +356,13 @@ The [{{< ui >}}Corrections{{< /ui >}} tab][31] on the [SLO manage page][2] lists
 
 #### Create corrections from monitor downtimes
 
+To create a correction from a downtime, you need the `slos_corrections` permission.
+
 When you schedule a new [monitor downtime][30] by monitor tags, Datadog checks for SLOs that have the same tags. If any SLOs match, the downtime editor displays a card with the number of matching SLOs. To create a correction for the same time window:
 
 1. On the card, click {{< ui >}}Preview SLO Correction{{< /ui >}}. The correction form opens with {{< ui >}}By Tags{{< /ui >}} selected, the downtime's monitor tags as the query, and the downtime's schedule and message filled in.
 2. Review the query and the SLOs that match it, select a {{< ui >}}Category{{< /ui >}}, and click {{< ui >}}Apply{{< /ui >}}.
 3. Save the downtime. Datadog creates the SLO correction when you save the downtime.
-
-To create a correction from a downtime, you need the `slos_corrections` permission.
 
 **Note**: The card does not appear when you edit an existing downtime.
 
