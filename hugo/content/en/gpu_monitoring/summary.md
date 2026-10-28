@@ -62,6 +62,10 @@ You can also use {{< ui >}}Group by{{< /ui >}} to group by tags such as cluster,
 
 ## Fleet Health
 
+The Fleet Health section allows you to spot hardware health issues across your entire fleet at a glance. You can group by cluster, rack, NVLink domain, or provider to see a health topology visualization grouped by that tag over the selected time frame. For example, if you group by rack, each tile represents a rack and each square in the tile represents a host in that rack. Click any host to view its related GPU devices.
+
+The visualization is colored by XID error severity (red: critical XID, orange: non-critical XID, green: healthy), so you can spot whether hardware issues are isolated to a particular group. Hover over a host to see the exact XID error code.
+
 {{< img src="gpu_monitoring/fleet-health.png" alt="Fleet Health page grouped by cluster, showing a tile per cluster with a square for each host colored by GPU health: green for no XID errors, orange for non-critical XIDs, and red for critical XIDs. Each tile lists its host and GPU counts." style="width:90%;" >}}
 
 ## Cost & Utilization
